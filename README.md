@@ -15,7 +15,7 @@ Can be used in any 3D games, apps and visualization tools or as a regular part o
 
 This wiki uses the [Markdown](http://daringfireball.net/projects/markdown/) syntax.
 
-# Building
+# Building with cmake
 
 ```
 git clone https://github.com/filipwasil/fillwave.git
@@ -35,6 +35,15 @@ cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON
 
 ```
 cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=ON -DBUILD_DEB=OFF -DBUILD_LIB=ON -DBUILD_DEV=OFF -DVERSION_MAJOR=2 -DVERSION_MINOR=0 -DVERSION_PATCH=0 -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
+
+```
+
+## Windows
+
+```
+set PATH%PATH%;C:\MinGW\bin
+cmake ../fillwave -G "Eclipse CDT4 - MinGW Makefiles" -DASSIMP_BUILD_TESTS=OFF -DGLFW_BUILD_TESTS=OFF -DASSIMP_BUILD_ASSIMP_TOOLS=OFF -DGLFW_BUILD_EXAMPLES=OFF -DGLFW_BUILD_DOCS=OFF
+mingw32-make -j4
 
 ```
 
