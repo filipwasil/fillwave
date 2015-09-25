@@ -1,0 +1,2 @@
+example command:
+javah -o ../../fillwave/src-java/FillwaveJNI.h -classpath $HOME/Tools/android-sdk-linux/platforms/android-18/android.jar:$PWD/../bin/classes com.fillwave.Fillwave

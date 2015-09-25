@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module Model-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="76" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="0" />
+<lines_of_code value="6" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="12.667" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="21" level="0" />
+<weighted_methods_per_class_visibility value="1" level="0" />
+<depth_of_inheritance_tree value="3" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="18" level="0" />
+<IF4 value="289" level="1" />
+<IF4_per_member_function value="********" level="2" />
+<IF4_visible value="256" level="2" />
+<IF4_visible_per_member_function value="********" level="2" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/actions/TimedBoneUpdateCallback.h" line="34" />
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="37" />
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="52" />
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>Model(...)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="74" />
+</extent>
+<lines_of_code value="7" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>Model(Engine *,pProgram,Shape &amp;,pTexture,pTexture,pTexture,const Material &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="55" />
+</extent>
+<lines_of_code value="7" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>Model(Engine *,pProgram,const string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="63" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>Model(Engine *,pProgram,const string &amp;,const string &amp;,const string &amp;,const string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="67" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>draw(Camera &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="86" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawDR(Camera &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="88" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>evaluateAnimations()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="120" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getActiveAnimations()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="95" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initAnimations(const fScene *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="118" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initShadowing(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="116" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initUniformsCache()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="114" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>loadMesh(const fMesh *,const Material &amp;,pTextureRegion,pTextureRegion,pTextureRegion,Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="147" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>loadNodeTransformations(fNode *,Entity *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="123" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>loadNodes(fNode *,const fScene *,Engine *,Entity *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="125" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>loadNodes(fNode *,const fScene *,Engine *,Entity *,const string &amp;,const string &amp;,const string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="130" />
+</extent>
+<lines_of_code value="7" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>loadNodes(fNode *,const fScene *,Engine *,Entity *,pTexture,pTexture,pTexture,const Material &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="138" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>log()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="97" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>performAnimation(GLfloat)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="91" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>reload()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="84" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setActiveAnimation(GLint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="93" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~Model()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="82" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>Model</name>
+<client_module>
+<name>TimedBoneUpdateCallback</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/actions/TimedBoneUpdateCallback.h" line="48" />
+</extent>
+<extent>
+<description>has by reference</description>
+<source_reference file="../inc/fillwave/actions/TimedBoneUpdateCallback.h" line="59" />
+</extent>
+</client_module>
+<supplier_module>
+<name>BoneManager</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>has by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="100" />
+</extent>
+<name>Camera</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="86" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="88" />
+</extent>
+<name>Engine</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="55" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="63" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="67" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="116" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="127" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="132" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="140" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="152" />
+</extent>
+<name>Entity</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="123" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="128" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="133" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="141" />
+</extent>
+<name>GLfloat</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="91" />
+</extent>
+<name>GLint</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="93" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="105" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="110" />
+</extent>
+<name>Material</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="61" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="145" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="148" />
+</extent>
+<name>Programmable</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="52" />
+</extent>
+<name>Shape</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="57" />
+</extent>
+<name>TimedBoneUpdateCallback</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>has by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="112" />
+</extent>
+<name>fMesh</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="147" />
+</extent>
+<name>fNode</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="123" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="125" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="130" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="138" />
+</extent>
+<name>fScene</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="118" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="126" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="131" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="139" />
+</extent>
+<name>pProgram</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="56" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="64" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="68" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="102" />
+</extent>
+<name>pTexture</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="58" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="59" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="60" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="142" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="143" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="144" />
+</extent>
+<name>pTextureRegion</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="149" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="150" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="151" />
+</extent>
+<name>string</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="65" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="69" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="70" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="71" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="72" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="134" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="135" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="136" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

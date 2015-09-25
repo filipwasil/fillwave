@@ -1,0 +1,105 @@
+\hypertarget{classfillwave_1_1effects_1_1Painter}{}\section{fillwave\+:\+:effects\+:\+:Painter Class Reference}
+\label{classfillwave_1_1effects_1_1Painter}\index{fillwave\+::effects\+::\+Painter@{fillwave\+::effects\+::\+Painter}}
+
+
+\hyperlink{classfillwave_1_1effects_1_1Effect}{Effect} to draw a mesh with single color.  
+
+
+
+
+{\ttfamily \#include $<$Painter.\+h$>$}
+
+Inheritance diagram for fillwave\+:\+:effects\+:\+:Painter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classfillwave_1_1effects_1_1Painter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classfillwave_1_1effects_1_1Painter_a1cecc1b13856e85707042c08c3be55a6}{}{\bfseries Painter} (glm\+::vec4 color)\label{classfillwave_1_1effects_1_1Painter_a1cecc1b13856e85707042c08c3be55a6}
+
+\item 
+\hypertarget{classfillwave_1_1effects_1_1Painter_ad95c1adcbb62029665a26badc5f07b79}{}void {\bfseries set\+Color} (glm\+::vec4 color)\label{classfillwave_1_1effects_1_1Painter_ad95c1adcbb62029665a26badc5f07b79}
+
+\item 
+void \hyperlink{classfillwave_1_1effects_1_1Painter_a20bc2a09533498222c132e799c2c6080}{pre\+Draw\+Action} (\hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program)
+\begin{DoxyCompactList}\small\item\em virtual\+: defines action to be done just before the draw. \end{DoxyCompactList}\item 
+void \hyperlink{classfillwave_1_1effects_1_1Painter_a90b22772f264da46b7a2905b25025161}{post\+Draw\+Action} (\hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program)
+\begin{DoxyCompactList}\small\item\em virtual\+: defines action to be done just after the draw. \end{DoxyCompactList}\item 
+void \hyperlink{classfillwave_1_1effects_1_1Painter_a3180272825b161c45a5090e0b40f2797}{stop\+Action} (\hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program)
+\begin{DoxyCompactList}\small\item\em virtual\+: defines action to be done when the effect is stopped. \end{DoxyCompactList}\item 
+void \hyperlink{classfillwave_1_1effects_1_1Painter_a100a3bbf344ba7fef60ad9bbcb5fb93c}{start\+Action} (\hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program)
+\begin{DoxyCompactList}\small\item\em virtual\+: defines action to be done when the effect is started. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classfillwave_1_1effects_1_1Effect}{Effect} to draw a mesh with single color. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classfillwave_1_1effects_1_1Painter_a90b22772f264da46b7a2905b25025161}{}\index{fillwave\+::effects\+::\+Painter@{fillwave\+::effects\+::\+Painter}!post\+Draw\+Action@{post\+Draw\+Action}}
+\index{post\+Draw\+Action@{post\+Draw\+Action}!fillwave\+::effects\+::\+Painter@{fillwave\+::effects\+::\+Painter}}
+\subsubsection[{post\+Draw\+Action}]{\setlength{\rightskip}{0pt plus 5cm}void fillwave\+::effects\+::\+Painter\+::post\+Draw\+Action (
+\begin{DoxyParamCaption}
+\item[{{\bf core\+::\+Program} $\ast$}]{program}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classfillwave_1_1effects_1_1Painter_a90b22772f264da46b7a2905b25025161}
+
+
+virtual\+: defines action to be done just after the draw. 
+
+post\+Draw\+Action 
+
+Implements \hyperlink{classfillwave_1_1effects_1_1Effect_ae01123633990402e11226c4d9a2dce1b}{fillwave\+::effects\+::\+Effect}.
+
+\hypertarget{classfillwave_1_1effects_1_1Painter_a20bc2a09533498222c132e799c2c6080}{}\index{fillwave\+::effects\+::\+Painter@{fillwave\+::effects\+::\+Painter}!pre\+Draw\+Action@{pre\+Draw\+Action}}
+\index{pre\+Draw\+Action@{pre\+Draw\+Action}!fillwave\+::effects\+::\+Painter@{fillwave\+::effects\+::\+Painter}}
+\subsubsection[{pre\+Draw\+Action}]{\setlength{\rightskip}{0pt plus 5cm}void fillwave\+::effects\+::\+Painter\+::pre\+Draw\+Action (
+\begin{DoxyParamCaption}
+\item[{{\bf core\+::\+Program} $\ast$}]{program}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classfillwave_1_1effects_1_1Painter_a20bc2a09533498222c132e799c2c6080}
+
+
+virtual\+: defines action to be done just before the draw. 
+
+pre\+Draw\+Action 
+
+Implements \hyperlink{classfillwave_1_1effects_1_1Effect_a99c243cb10f504bfc6193e5e81926920}{fillwave\+::effects\+::\+Effect}.
+
+\hypertarget{classfillwave_1_1effects_1_1Painter_a100a3bbf344ba7fef60ad9bbcb5fb93c}{}\index{fillwave\+::effects\+::\+Painter@{fillwave\+::effects\+::\+Painter}!start\+Action@{start\+Action}}
+\index{start\+Action@{start\+Action}!fillwave\+::effects\+::\+Painter@{fillwave\+::effects\+::\+Painter}}
+\subsubsection[{start\+Action}]{\setlength{\rightskip}{0pt plus 5cm}void fillwave\+::effects\+::\+Painter\+::start\+Action (
+\begin{DoxyParamCaption}
+\item[{{\bf core\+::\+Program} $\ast$}]{program}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classfillwave_1_1effects_1_1Painter_a100a3bbf344ba7fef60ad9bbcb5fb93c}
+
+
+virtual\+: defines action to be done when the effect is started. 
+
+start\+Action 
+
+Implements \hyperlink{classfillwave_1_1effects_1_1Effect_af0a4aa202fa7201cd19cedf71f6c682a}{fillwave\+::effects\+::\+Effect}.
+
+\hypertarget{classfillwave_1_1effects_1_1Painter_a3180272825b161c45a5090e0b40f2797}{}\index{fillwave\+::effects\+::\+Painter@{fillwave\+::effects\+::\+Painter}!stop\+Action@{stop\+Action}}
+\index{stop\+Action@{stop\+Action}!fillwave\+::effects\+::\+Painter@{fillwave\+::effects\+::\+Painter}}
+\subsubsection[{stop\+Action}]{\setlength{\rightskip}{0pt plus 5cm}void fillwave\+::effects\+::\+Painter\+::stop\+Action (
+\begin{DoxyParamCaption}
+\item[{{\bf core\+::\+Program} $\ast$}]{program}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classfillwave_1_1effects_1_1Painter_a3180272825b161c45a5090e0b40f2797}
+
+
+virtual\+: defines action to be done when the effect is stopped. 
+
+stop\+Action 
+
+Implements \hyperlink{classfillwave_1_1effects_1_1Effect_aed8c053b5798cbbc6668117989d18ead}{fillwave\+::effects\+::\+Effect}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/effects/Painter.\+h\end{DoxyCompactItemize}

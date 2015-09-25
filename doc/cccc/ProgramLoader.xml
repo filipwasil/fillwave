@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module ProgramLoader-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="42" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="0" />
+<lines_of_code value="3" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="14.000" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="36" level="0" />
+<weighted_methods_per_class_visibility value="16" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="4" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+<description>definition</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="40" />
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>ProgramLoader()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="42" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getAmbientOcclusionColor(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="84" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getAmbientOcclusionGeometry(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="82" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getCursor(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="78" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDRAmbient(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="80" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDRDepthless(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="96" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDRDirectionalLights(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="98" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDRPointLights(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="102" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDRSpotLights(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="100" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDebugger(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="54" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDefault(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="92" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDefaultBones(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="94" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDefaultBonesDR(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="114" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDefaultBonesFR(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="116" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDefaultDR(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="110" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDefaultFR(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="112" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getOcclusionOptimizedQuery(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="90" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getOcclusionPureQuery(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="86" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getOcclusionQuery(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="88" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getParticleCPU(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="68" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getParticleCPUNoDepthText(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="70" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getParticleGPU(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="66" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getParticleGPUEmiter(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="64" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getQuad(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="72" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getQuadCustomFragmentShader(Engine *,const string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="74" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getQuadCustomFragmentShaderStartup(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="76" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getShadow(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="46" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getShadowColorCoded(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="48" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getShadowColorCodedWithAnimation(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="52" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getShadowWithAnimation(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="50" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getSkybox(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="56" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getSkyboxDR(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="58" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getText(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="60" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getTextBold(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="62" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initDefaultUniforms(Program *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="104" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~ProgramLoader()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="44" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>ProgramLoader</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>Engine</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="46" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="48" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="50" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="52" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="54" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="56" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="58" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="60" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="62" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="64" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="66" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="68" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="70" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="72" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="74" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="76" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="78" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="80" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="82" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="84" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="86" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="88" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="90" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="92" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="94" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="96" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="98" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="100" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="102" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="110" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="112" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="114" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="116" />
+</extent>
+<name>GLuint</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="106" />
+</extent>
+<name>Program</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="104" />
+</extent>
+<name>string</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/loaders/ProgramLoader.h" line="74" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

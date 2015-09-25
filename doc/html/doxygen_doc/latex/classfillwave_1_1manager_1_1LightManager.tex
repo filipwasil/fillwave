@@ -1,0 +1,106 @@
+\hypertarget{classfillwave_1_1manager_1_1LightManager}{}\section{fillwave\+:\+:manager\+:\+:Light\+Manager Class Reference}
+\label{classfillwave_1_1manager_1_1LightManager}\index{fillwave\+::manager\+::\+Light\+Manager@{fillwave\+::manager\+::\+Light\+Manager}}
+
+
+Manager to handle Light objects.  
+
+
+
+
+{\ttfamily \#include $<$Light\+Manager.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a4b7977b87006efcdf07618de5acad752}{}{\bfseries Light\+Manager} (G\+Lsizei screen\+Width, G\+Lsizei screen\+Height)\label{classfillwave_1_1manager_1_1LightManager_a4b7977b87006efcdf07618de5acad752}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a2283c6285ffa221a603ee05ec22347c5}{}G\+Lboolean {\bfseries is\+Lights\+Refresh} ()\label{classfillwave_1_1manager_1_1LightManager_a2283c6285ffa221a603ee05ec22347c5}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a391b17400c552e9efb93a2a2a935c758}{}void {\bfseries reset\+Lights\+Refresh} ()\label{classfillwave_1_1manager_1_1LightManager_a391b17400c552e9efb93a2a2a935c758}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a96c90203d0cfc1582ee6c56397ac3c8a}{}{\footnotesize template$<$class T $>$ }\\G\+Lboolean {\bfseries is\+Refresh\+Light} (std\+::vector$<$ T $>$ \&data)\label{classfillwave_1_1manager_1_1LightManager_a96c90203d0cfc1582ee6c56397ac3c8a}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a6a4ac44033da265c712b33d35e3e30c9}{}{\footnotesize template$<$class T $>$ }\\void {\bfseries reset\+Refresh\+Light} (std\+::vector$<$ T $>$ \&data)\label{classfillwave_1_1manager_1_1LightManager_a6a4ac44033da265c712b33d35e3e30c9}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a10802189a60a56d7da8ab19218455ade}{}p\+Light\+Spot {\bfseries add\+Light\+Spot} (p\+Texture2\+D\+Renderable shadow\+Texture, glm\+::vec3 position, glm\+::quat rotation, glm\+::vec4 color, p\+Entity entity=p\+Entity())\label{classfillwave_1_1manager_1_1LightManager_a10802189a60a56d7da8ab19218455ade}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a65b9b3710d15f835347558ec1d0c68c6}{}p\+Light\+Point {\bfseries add\+Light\+Point} (p\+Texture3\+D\+Renderable shadow\+Texture, glm\+::vec3 position, glm\+::vec4 intensity, p\+Entity entity)\label{classfillwave_1_1manager_1_1LightManager_a65b9b3710d15f835347558ec1d0c68c6}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_abd846f37d19c66fcccb8c3fef76e5a06}{}p\+Light\+Directional {\bfseries add\+Light\+Directional} (p\+Texture2\+D\+Renderable shadow\+Texture, glm\+::vec3 position, glm\+::quat rotation, glm\+::vec4 color, p\+Entity entity=p\+Entity())\label{classfillwave_1_1manager_1_1LightManager_abd846f37d19c66fcccb8c3fef76e5a06}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_afe5d317d70f4bd4e7fd31a4d68b69166}{}void {\bfseries remove\+Light} (p\+Light\+Spot light)\label{classfillwave_1_1manager_1_1LightManager_afe5d317d70f4bd4e7fd31a4d68b69166}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_aae119dab78760bb24ed56eb084108b16}{}void {\bfseries remove\+Light} (p\+Light\+Directional light)\label{classfillwave_1_1manager_1_1LightManager_aae119dab78760bb24ed56eb084108b16}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_aab8ddf66550290c5b0ac36d81625d9bf}{}void {\bfseries remove\+Light} (p\+Light\+Point light)\label{classfillwave_1_1manager_1_1LightManager_aab8ddf66550290c5b0ac36d81625d9bf}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a5a09a81db30f69598dce305c3e4d3d11}{}void {\bfseries remove\+Lights} ()\label{classfillwave_1_1manager_1_1LightManager_a5a09a81db30f69598dce305c3e4d3d11}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_ac58329c748b34a65aef056a279a6e1ab}{}G\+Lint {\bfseries get\+Lights\+Spot\+How\+Many} ()\label{classfillwave_1_1manager_1_1LightManager_ac58329c748b34a65aef056a279a6e1ab}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a9b7eaa47f2ba87c99e43dd061ded957c}{}G\+Lint {\bfseries get\+Lights\+Directional\+How\+Many} ()\label{classfillwave_1_1manager_1_1LightManager_a9b7eaa47f2ba87c99e43dd061ded957c}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_ac870410261af76810b8008da28c17cd4}{}G\+Lint {\bfseries get\+Lights\+Point\+How\+Many} ()\label{classfillwave_1_1manager_1_1LightManager_ac870410261af76810b8008da28c17cd4}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a71ba67dac4b0e50d1e0170245a556c8a}{}void {\bfseries update\+Light\+Entities} ()\label{classfillwave_1_1manager_1_1LightManager_a71ba67dac4b0e50d1e0170245a556c8a}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a6400031ac36e11f63bc889391370f677}{}void {\bfseries push\+Light\+Uniforms\+D\+R} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&c, \hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program)\label{classfillwave_1_1manager_1_1LightManager_a6400031ac36e11f63bc889391370f677}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a4660bf4b9375e971a8b5fef9c0f222d3}{}void {\bfseries push\+Light\+Uniforms} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&c, \hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program)\label{classfillwave_1_1manager_1_1LightManager_a4660bf4b9375e971a8b5fef9c0f222d3}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a38547c86c5c918f4f14e2f95ae4c65b7}{}void {\bfseries push\+Light\+Uniform\+Buffers} (\hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program)\label{classfillwave_1_1manager_1_1LightManager_a38547c86c5c918f4f14e2f95ae4c65b7}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a12236bb6d0781301f3c5987dade6995c}{}void {\bfseries update\+Deferred\+Buffer\+Spot} (G\+Luint light\+I\+D, \hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program, G\+Lint current\+Shadow\+Unit)\label{classfillwave_1_1manager_1_1LightManager_a12236bb6d0781301f3c5987dade6995c}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a4caeaf8a6af34c192201c17342ca4159}{}void {\bfseries update\+Deferred\+Buffer\+Directional} (G\+Luint light\+I\+D, \hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program, G\+Lint current\+Shadow\+Unit)\label{classfillwave_1_1manager_1_1LightManager_a4caeaf8a6af34c192201c17342ca4159}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_ac1a3eaacb3933a6373b9774a05f5fd61}{}void {\bfseries update\+Deferred\+Buffer\+Point} (G\+Luint light\+I\+D, \hyperlink{classfillwave_1_1core_1_1Program}{core\+::\+Program} $\ast$program, G\+Lint current\+Shadow\+Unit)\label{classfillwave_1_1manager_1_1LightManager_ac1a3eaacb3933a6373b9774a05f5fd61}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a10eecb05b4cb11f0698abbe8e4c606d2}{}p\+Light\+Spot {\bfseries get\+Light\+Spot} (G\+Lint i)\label{classfillwave_1_1manager_1_1LightManager_a10eecb05b4cb11f0698abbe8e4c606d2}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a6ce352a65f9dd327e026b875786e3789}{}p\+Light\+Point {\bfseries get\+Light\+Point} (G\+Lint i)\label{classfillwave_1_1manager_1_1LightManager_a6ce352a65f9dd327e026b875786e3789}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a4c76231b20a196bc20f0ed6fe4625a85}{}p\+Light\+Directional {\bfseries get\+Light\+Directional} (G\+Lint i)\label{classfillwave_1_1manager_1_1LightManager_a4c76231b20a196bc20f0ed6fe4625a85}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a49d6b5f3a34e867a3452960b43ecac1e}{}G\+Lint {\bfseries obtain\+Texture\+Unit} ()\label{classfillwave_1_1manager_1_1LightManager_a49d6b5f3a34e867a3452960b43ecac1e}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a91946491b51f766a7cd4da73f06eccd3}{}void {\bfseries free\+Texture\+Unit} (G\+Lint id)\label{classfillwave_1_1manager_1_1LightManager_a91946491b51f766a7cd4da73f06eccd3}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1LightManager_a77fd3a3574765c47fda19c8c4b92f14a}{}void {\bfseries bind\+Shadowmaps} ()\label{classfillwave_1_1manager_1_1LightManager_a77fd3a3574765c47fda19c8c4b92f14a}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manager to handle Light objects. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/management/Light\+Manager.\+h\end{DoxyCompactItemize}

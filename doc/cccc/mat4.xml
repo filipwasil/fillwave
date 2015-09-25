@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module mat4-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="0" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="0" />
+<lines_of_code value="0" level="0" />
+<lines_of_code_per_member_function value="********" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="0" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="7" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>mat4</name>
+<client_module>
+<name>AssimpNode</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/BoneManager.h" line="54" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/BoneManager.h" line="60" />
+</extent>
+<name>Bone</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/animation/Bone.h" line="57" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/animation/Bone.h" line="58" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/animation/Bone.h" line="64" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/animation/Bone.h" line="65" />
+</extent>
+<name>BoneManager</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/BoneManager.h" line="104" />
+</extent>
+<name>Camera</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/space/Camera.h" line="130" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/space/Camera.h" line="131" />
+</extent>
+<name>Entity</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Entity.h" line="94" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Entity.h" line="104" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Entity.h" line="128" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Entity.h" line="129" />
+</extent>
+<name>Mesh</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Mesh.h" line="125" />
+</extent>
+<name>Moveable</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="81" />
+</extent>
+</client_module>
+<supplier_module>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

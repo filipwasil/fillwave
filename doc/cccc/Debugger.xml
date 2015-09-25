@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module Debugger-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="199" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="15" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="24" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="8.292" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.625" level="0" />
+<weighted_methods_per_class_unity value="15" level="0" />
+<weighted_methods_per_class_visibility value="4" level="0" />
+<depth_of_inheritance_tree value="1" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="10" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+<description>definition</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="61" />
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="9" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>Debugger(Engine *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="63" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getState()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="108" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="67" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initBuffers()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="259" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="93" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initPipeline()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="265" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="95" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initUniformsCache()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="269" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="101" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initVAO()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="275" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="99" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initVBO()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="287" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="97" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>renderDepthOrthographic(GLint)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="140" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="71" />
+</extent>
+<lines_of_code value="26" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="26.000" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>renderDepthPerspective(GLint)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="178" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="70" />
+</extent>
+<lines_of_code value="26" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="26.000" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>renderFromCamera(Camera &amp;,GLint)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="116" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="69" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>renderGeometryBuffer(GLuint,GLuint,GLuint,FramebufferGeometry *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="216" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="73" />
+</extent>
+<lines_of_code value="37" level="1" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="13" level="0" />
+<lines_of_code_per_line_of_comment value="2.846" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>renderPickingMap()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="129" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="72" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setMiniwindowSize(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="112" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="77" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setState(eDebuggerState)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="73" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="66" />
+</extent>
+<lines_of_code value="35" level="1" />
+<McCabes_cyclomatic_complexity value="11" level="1" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="******" level="2" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+</member_function>
+<member_function>
+<name>~Debugger()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="69" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="64" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>Debugger</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>Camera</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../src/extras/Debugger.cpp" line="116" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="69" />
+</extent>
+<name>Engine</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="63" />
+</extent>
+<extent>
+<description>has by reference</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="82" />
+</extent>
+<name>FramebufferGeometry</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../src/extras/Debugger.cpp" line="219" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="76" />
+</extent>
+<name>GLfloat</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/extras/Debugger.cpp" line="112" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="77" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="86" />
+</extent>
+<name>GLint</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/extras/Debugger.cpp" line="116" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/extras/Debugger.cpp" line="140" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/extras/Debugger.cpp" line="178" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="69" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="70" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="71" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="89" />
+</extent>
+<name>GLuint</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/extras/Debugger.cpp" line="216" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/extras/Debugger.cpp" line="217" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/extras/Debugger.cpp" line="218" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="73" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="74" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="75" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="87" />
+</extent>
+<name>Reloadable</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="61" />
+</extent>
+<name>eDebuggerState</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/extras/Debugger.cpp" line="73" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="66" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="80" />
+</extent>
+<name>pProgram</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="81" />
+</extent>
+<name>pVertexBufferDebug</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="84" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

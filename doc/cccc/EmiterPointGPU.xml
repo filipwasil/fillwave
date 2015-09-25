@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module EmiterPointGPU-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="65" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="0" />
+<lines_of_code value="5" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="13.000" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="11" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="3" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="14" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+<description>definition</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="44" />
+<lines_of_code value="39" level="1" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="5" level="0" />
+<lines_of_code_per_line_of_comment value="7.800" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>EmiterPointGPU(Engine *,GLfloat,GLuint,vec4,vec3,vec3,vec3,vec3,vec3,GLfloat,GLfloat,pTexture,GLenum,GLenum,GLboolean,GLfloat)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="46" />
+</extent>
+<lines_of_code value="16" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>coreDraw()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="118" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>draw(Camera &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="65" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initBuffers()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="108" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initPipeline()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="110" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initUniformsCache()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="116" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initVAO()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="114" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initVBO()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="112" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>sort(vec3)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="120" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>update(GLfloat)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="67" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~EmiterPointGPU()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="63" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>EmiterPointGPU</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>Camera</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="65" />
+</extent>
+<name>EmiterPoint</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="44" />
+</extent>
+<name>Engine</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="46" />
+</extent>
+<name>GLboolean</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="60" />
+</extent>
+<name>GLenum</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="58" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="59" />
+</extent>
+<name>GLfloat</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="47" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="55" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="56" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="61" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="67" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="71" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="79" />
+</extent>
+<name>GLint</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="70" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="85" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="98" />
+</extent>
+<name>GLuint</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="48" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="72" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="81" />
+</extent>
+<name>pProgram</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="80" />
+</extent>
+<name>pTexture</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="57" />
+</extent>
+<name>pVertexBufferParticlesGPU</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="83" />
+</extent>
+<name>puFence</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="82" />
+</extent>
+<name>vec3</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="50" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="51" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="52" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="53" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="54" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="73" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="74" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="75" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="76" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="77" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="78" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="120" />
+</extent>
+<name>vec4</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="49" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

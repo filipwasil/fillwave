@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module TextureManager-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="61" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="3" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="20.333" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="19" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="7" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+<description>definition</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="126" />
+<lines_of_code value="23" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="7.667" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>TextureManager(const string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="128" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>add(const string &amp;,const string &amp;,const string &amp;,const string &amp;,const string &amp;,const string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="184" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>add(string,GLuint,eFlip)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="180" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>addDynamic(const string &amp;,pProgram,ivec2)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="191" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>check(...)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="160" />
+</extent>
+<lines_of_code value="2" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>get(...)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="131" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>get(const string &amp;,const string &amp;,const string &amp;,const string &amp;,const string &amp;,const string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="135" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getColor2D(GLuint,GLuint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="146" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDeferredColor(GLuint,GLuint,GLuint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="148" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDeferredColorScreen(GLuint,GLuint,GLuint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="150" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDeferredDepth(GLuint,GLuint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="152" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDeferredStencilDepth(GLuint,GLuint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="154" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDynamic(const string &amp;,pProgram,ivec2)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="156" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getShadow2D(GLuint,GLuint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="142" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getShadow3D(GLuint,GLuint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="144" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>reload()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="163" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>resize(GLuint,GLuint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="166" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>resizeTextures(GLuint,GLuint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="165" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~TextureManager()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="129" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>TextureManager</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>GLuint</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="142" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="142" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="144" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="144" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="146" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="146" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="148" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="148" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="148" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="150" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="150" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="150" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="152" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="152" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="154" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="154" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="165" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="165" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="166" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="166" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="181" />
+</extent>
+<name>eFlip</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="182" />
+</extent>
+<name>ivec2</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="158" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="193" />
+</extent>
+<name>pProgram</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="157" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="192" />
+</extent>
+<name>puTextureLoader</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="178" />
+</extent>
+<name>string</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="128" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="135" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="136" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="137" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="138" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="139" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="140" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="156" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="177" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="180" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="184" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="185" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="186" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="187" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="188" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="189" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="191" />
+</extent>
+<name>vector</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="169" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="170" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="171" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="172" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="173" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="174" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="175" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/management/TextureManager.h" line="176" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

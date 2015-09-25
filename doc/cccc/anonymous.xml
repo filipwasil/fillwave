@@ -1,0 +1,1510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module anonymous-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="8115" level="2" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="835" level="1" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="2005" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="4.047" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.416" level="0" />
+<weighted_methods_per_class_unity value="94" level="0" />
+<weighted_methods_per_class_visibility value="4" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="0" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>BackEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="275" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="98" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>BackEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="290" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="100" />
+</extent>
+<lines_of_code value="14" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>BackEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="281" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="99" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>BounceEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="304" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="103" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>BounceEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="329" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="105" />
+</extent>
+<lines_of_code value="12" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>BounceEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="309" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="104" />
+</extent>
+<lines_of_code value="20" level="0" />
+<McCabes_cyclomatic_complexity value="7" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="******" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+</member_function>
+<member_function>
+<name>CircularEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="192" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="83" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>CircularEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="206" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="85" />
+</extent>
+<lines_of_code value="12" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>CircularEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="198" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="84" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>Create3DNoiseTexture(int,float)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/NoiseTexture3DArray.cpp" line="186" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/NoiseTexture3DArray.h" line="37" />
+</extent>
+<lines_of_code value="64" level="1" />
+<McCabes_cyclomatic_complexity value="9" level="0" />
+<lines_of_comment value="34" level="0" />
+<lines_of_code_per_line_of_comment value="1.882" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.265" level="0" />
+</member_function>
+<member_function>
+<name>CubicEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="87" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="63" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>CubicEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="102" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="65" />
+</extent>
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>CubicEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="93" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="64" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>ElasticEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="248" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="93" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>ElasticEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="262" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="95" />
+</extent>
+<lines_of_code value="12" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>ElasticEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="254" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="94" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>ExponentialEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="219" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="88" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>ExponentialEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="233" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="90" />
+</extent>
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="6" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="2.000" level="0" />
+</member_function>
+<member_function>
+<name>ExponentialEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="225" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="89" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>FLOGINIT(...)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/animation/Animation.cpp" line="34" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/animation/Bone.cpp" line="39" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/animation/Channel.cpp" line="39" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/effects/Effect.cpp" line="39" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/effects/Fog.cpp" line="37" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Debugger.cpp" line="49" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Log.cpp" line="10" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/string.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/loaders/AndroidLoader.cpp" line="16" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/loaders/FileLoader.cpp" line="38" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/loaders/FontLoader.cpp" line="37" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/loaders/ProgramLoader.cpp" line="43" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/loaders/TestLoader.cpp" line="36" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../src/loaders/TextureLoader.cpp" line="52" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/management/BoneManager.cpp" line="41" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/management/BufferManager.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/management/LightManager.cpp" line="38" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/management/ProgramManager.cpp" line="38" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/management/ResourceManager.cpp" line="29" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/management/SamplerManager.cpp" line="38" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/management/ShaderManager.cpp" line="37" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/management/TextureManager.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/BuilderModel.cpp" line="39" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/BuilderModelExternalMaps.cpp" line="35" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/BuilderModelManual.cpp" line="35" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Entity.cpp" line="39" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../src/models/Mesh.cpp" line="42" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Model.cpp" line="45" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Programmable.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Reloadable.cpp" line="11" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Scene.cpp" line="38" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Skybox.cpp" line="38" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Text.cpp" line="41" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/EmiterPoint.cpp" line="35" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/EmiterPointCPU.cpp" line="39" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/EmiterPointGPU.cpp" line="42" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/Impostor.cpp" line="39" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/space/Camera.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/space/CameraOrthographic.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/space/Light.cpp" line="37" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/space/LightDirectional.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/space/LightPoint.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/space/LightSpot.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/terrain/MeshTerrain.cpp" line="39" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/terrain/Terrain.cpp" line="36" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/terrain/TerrainConstructor.cpp" line="11" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/terrain/VoxelChunk.cpp" line="37" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/Fillwave.cpp" line="54" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../src/Fillwave.cpp" line="54" />
+</extent>
+<lines_of_code value="7558" level="2" />
+<McCabes_cyclomatic_complexity value="740" level="2" />
+<lines_of_comment value="1802" level="0" />
+<lines_of_code_per_line_of_comment value="4.194" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.411" level="0" />
+</member_function>
+<member_function>
+<name>LinearInterpolation(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="54" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="55" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="42" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>QuadraticEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="60" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="58" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>QuadraticEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="74" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="60" />
+</extent>
+<lines_of_code value="12" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>QuadraticEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="66" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="59" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>QuarticEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="116" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="68" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>QuarticEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="131" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="70" />
+</extent>
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>QuarticEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="122" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="69" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>QuinticEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="145" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="73" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>QuinticEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="160" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="75" />
+</extent>
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>QuinticEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="151" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="74" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>ReadFile(string)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/FileLoader.h" line="63" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>ReadFile(string,string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/FileLoader.h" line="62" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>SineEaseIn(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="174" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="78" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>SineEaseInOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="186" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="80" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>SineEaseOut(AHFloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/common/Easing.cpp" line="180" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/common/Easing.h" line="79" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>WriteFile(const char *,string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/FileLoader.h" line="61" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>addLightDirectional(...)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="86" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>addLightPoint(pTexture3DRenderable,vec3,vec4,pEntity)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="81" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>addLightSpot(...)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="75" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>androidExtract(const string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/AndroidLoader.h" line="48" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>androidExtractAll()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/AndroidLoader.h" line="50" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>androidExtracted(const char *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/AndroidLoader.h" line="47" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>androidGetPath(const char *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/AndroidLoader.h" line="49" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>androidRead(const char *,char **,int *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/AndroidLoader.h" line="45" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>androidReadToString(const char *,string &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/AndroidLoader.h" line="46" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>androidSetActivity(ANativeActivity *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/loaders/AndroidLoader.h" line="42" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>assimpToGlmMat4(aiMatrix4x4)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Conversion.cpp" line="37" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Conversion.h" line="39" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>assimpToGlmQuat(aiQuaternion)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Conversion.cpp" line="55" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Conversion.h" line="41" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>assimpToGlmVec3(aiVector3D)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Conversion.cpp" line="47" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Conversion.h" line="40" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>assimpToGlmVec4(aiColor4D)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/Conversion.cpp" line="64" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Conversion.h" line="42" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>bindShadowmaps()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="118" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildCursor(Engine *,pTexture)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/particles/Cursor.h" line="67" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildEntity()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Entity.h" line="151" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildModel(...)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="157" />
+</extent>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="176" />
+</extent>
+<lines_of_code value="18" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildModel(Engine *,pProgram,const string &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="186" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildModel(Engine *,pProgram,const string &amp;,const string &amp;,const string &amp;,const string &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="167" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildSceneOrthographic(...)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/SceneOrthographic.h" line="80" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildScenePerspective(...)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/ScenePerspective.h" line="80" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildSkybox(Engine *,pTexture3D)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Skybox.h" line="85" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildTerrainVoxel(Engine *,pProgram,const string &amp;,VoxelConstructor *,GLint)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/terrain/Terrain.h" line="64" />
+</extent>
+<lines_of_code value="25" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="******" level="2" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>freeTextureUnit(GLint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="116" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getLightDirectional(GLint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="113" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getLightPoint(GLint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="112" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getLightSpot(GLint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="111" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getLightsDirectionalHowMany()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="98" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getLightsPointHowMany()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="99" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getLightsSpotHowMany()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="97" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getLogPath()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Log.h" line="43" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getNotIndexableName(string,int)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/string.h" line="41" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getStructField(string,int)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/string.h" line="40" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getStructField(string,string,int)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/string.h" line="39" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>glattice3D(int,int,int,float,float,float)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/NoiseTexture3DArray.cpp" line="127" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="6" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>glesInitExtensions()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/OpenGL.cpp" line="35" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/OpenGL.h" line="49" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="55" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initNoiseTable()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/NoiseTexture3DArray.cpp" line="77" />
+</extent>
+<lines_of_code value="31" level="1" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="7" level="0" />
+<lines_of_code_per_line_of_comment value="4.429" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>isFileValid()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Log.h" line="45" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>noise3D(float *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/extras/NoiseTexture3DArray.cpp" line="145" />
+</extent>
+<lines_of_code value="34" level="1" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="5" level="0" />
+<lines_of_code_per_line_of_comment value="6.800" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>obtainTextureUnit()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="115" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>pushLightUniformBuffers(Program *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="105" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>pushLightUniforms(Camera &amp;,Program *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="104" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>pushLightUniformsDR(Camera &amp;,Program *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="103" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>removeLight(pLightDirectional)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="93" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>removeLight(pLightPoint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="94" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>removeLight(pLightSpot)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="92" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>removeLights()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="95" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>resetRefreshLight(vector &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="69" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setFileInvalid()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Log.h" line="46" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setLogPath(string)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/Log.h" line="44" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>split(const string &amp;,char)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/string.h" line="37" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>split(const string &amp;,char,vector &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/extras/string.h" line="38" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>to_string(T)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/extras/string.h" line="44" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>updateDeferredBufferDirectional(GLuint,Program *,GLint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="108" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>updateDeferredBufferPoint(GLuint,Program *,GLint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="109" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>updateDeferredBufferSpot(GLuint,Program *,GLint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="107" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>updateLightEntities()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/management/LightManager.h" line="101" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>anonymous</name>
+<client_module>
+</client_module>
+<supplier_module>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

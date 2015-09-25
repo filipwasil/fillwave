@@ -1,0 +1,3158 @@
+%PDF-1.5
+1 0 obj
+<</Type /Pages
+/Kids [3 0 R 5 0 R]
+/Count 2>>
+endobj
+3 0 obj
+<</Type /Page
+/Parent 1 0 R
+/MediaBox [0 0 595.28 841.89]
+/Resources 2 0 R
+/Annots [<</Type /Annot /Subtype /Link /Rect [513.0747637795276 616.2014173228346 541.0827637795276 628.2014173228346] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/create_pool_worker_threads.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 505.6502362204724 541.0827637795276 517.6502362204724] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/copy_function.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 434.784094488189 541.0827637795276 446.78409448818894] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/copy_function.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 363.9179527559055 541.0827637795276 375.91795275590545] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/change_callee.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 278.8785826771653 541.0827637795276 290.8785826771653] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/copy_function.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 208.01244094488183 541.0827637795276 220.01244094488183] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/change_callee.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 122.97307086614165 541.0827637795276 134.97307086614165] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/copy_function.html)>>>>]
+/Rotate 0
+/Contents 4 0 R>>
+endobj
+4 0 obj
+<</Length 8021>>
+stream
+BT /F1 9.00 Tf ET
+/GS0 gs
+1.000 0.000 0.000 1.000 0.000 0.000 cm
+q 73.70 0 0 14.17 28.35 799.37 cm
+/I1 Do Q
+BT /F1 8.00 Tf ET
+BT 239.18 804.05 Td (fillwave_build - Refactoring steps) Tj ET
+BT 506.29 804.05 Td (Tue May 5 2015) Tj ET
+BT /F1 12.00 Tf ET
+0 Tr
+/GS1 gs
+0 Tw 0 Tc 100 Tz 0 TL 
+BT /F2 16.00 Tf ET
+q 0 0 0 rg BT 31.19 740.71 Td (fillwave_build - Refactoring steps) Tj ET Q
+BT /F2 14.00 Tf ET
+q 0 0 0 rg BT 31.19 681.78 Td (1    Worker-thread pooling) Tj ET Q
+BT /F1 12.00 Tf ET
+q 0 0 0 rg BT 31.19 648.37 Td (1.1    Create a worker-thread pool.) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS2 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 643.46 56.69 -14.17 re b
+/GS3 gs
+1 1 1 RG
+/GS4 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 643.46 425.20 -14.17 re b
+/GS5 gs
+1 1 1 RG
+/GS6 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 643.46 56.69 -14.17 re b
+/GS7 gs
+1 1 1 RG
+/GS8 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 629.29 56.69 -28.35 re S
+/GS9 gs
+q 0 0 0 rg BT 31.19 618.60 Td (1.1.1) Tj ET Q
+1 1 1 RG
+/GS10 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 629.29 425.20 -28.35 re S
+/GS11 gs
+q 0 0 0 rg BT 87.88 618.60 Td (Issue a call to vftasks_create_pool to ensure the availability of a pool of 1) Tj ET Q
+q 0 0 0 rg BT 87.88 604.43 Td (worker thread.) Tj ET Q
+1 1 1 RG
+/GS12 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 629.29 56.69 -28.35 re S
+/GS13 gs
+q 0 0 0 rg BT 513.07 618.60 Td (  \(?\)  ) Tj ET Q
+BT /F2 14.00 Tf ET
+q 0 0 0 rg BT 31.19 571.23 Td (2    Data partitioning - Parallel_10619 \(TextureLoader::load\)) Tj ET Q
+BT /F1 12.00 Tf ET
+q 0 0 0 rg BT 31.19 537.81 Td (2.1    Isolate Task_10620 \(TextureLoader::load\).) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS14 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 532.91 56.69 -14.17 re b
+/GS15 gs
+1 1 1 RG
+/GS16 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 532.91 425.20 -14.17 re b
+/GS17 gs
+1 1 1 RG
+/GS18 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 532.91 56.69 -14.17 re b
+/GS19 gs
+1 1 1 RG
+/GS20 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 518.74 56.69 -56.69 re S
+/GS21 gs
+q 0 0 0 rg BT 31.19 508.05 Td (2.1.1) Tj ET Q
+1 1 1 RG
+/GS22 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 518.74 425.20 -56.69 re S
+/GS23 gs
+q 0 0 0 rg BT 87.88 508.05 Td (Copy the function fillwave::loader::TextureLoader::load at) Tj ET Q
+q 0 0 0 rg BT 87.88 493.88 Td (/home/filip/Projects/fillwave/src/loaders/TextureLoader.cpp:62-178 into a newly) Tj ET Q
+q 0 0 0 rg BT 87.88 479.70 Td (defined function that we will refer to as) Tj ET Q
+q 0 0 0 rg BT 87.88 465.53 Td (copy_of_fillwave::loader::TextureLoader::load_3426.) Tj ET Q
+1 1 1 RG
+/GS24 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 518.74 56.69 -56.69 re S
+/GS25 gs
+q 0 0 0 rg BT 513.07 508.05 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS26 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 462.04 56.69 -14.17 re b
+/GS27 gs
+1 1 1 RG
+/GS28 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 462.04 425.20 -14.17 re b
+/GS29 gs
+1 1 1 RG
+/GS30 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 462.04 56.69 -14.17 re b
+/GS31 gs
+1 1 1 RG
+/GS32 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 447.87 56.69 -56.69 re S
+/GS33 gs
+q 0 0 0 rg BT 31.19 437.18 Td (2.1.2) Tj ET Q
+1 1 1 RG
+/GS34 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 447.87 425.20 -56.69 re S
+/GS35 gs
+q 0 0 0 rg BT 87.88 437.18 Td (Copy the function fillwave::manager::TextureManager::add at) Tj ET Q
+q 0 0 0 rg BT 87.88 423.01 Td (/home/filip/Projects/fillwave/src/management/TextureManager.cpp:49-77 into a) Tj ET Q
+q 0 0 0 rg BT 87.88 408.84 Td (newly defined function that we will refer to as) Tj ET Q
+q 0 0 0 rg BT 87.88 394.66 Td (copy_of_fillwave::manager::TextureManager::add_3426.) Tj ET Q
+1 1 1 RG
+/GS36 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 447.87 56.69 -56.69 re S
+/GS37 gs
+q 0 0 0 rg BT 513.07 437.18 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS38 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 391.18 56.69 -14.17 re b
+/GS39 gs
+1 1 1 RG
+/GS40 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 391.18 425.20 -14.17 re b
+/GS41 gs
+1 1 1 RG
+/GS42 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 391.18 56.69 -14.17 re b
+/GS43 gs
+1 1 1 RG
+/GS44 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 377.00 56.69 -70.87 re S
+/GS45 gs
+q 0 0 0 rg BT 31.19 366.32 Td (2.1.3) Tj ET Q
+1 1 1 RG
+/GS46 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 377.00 425.20 -70.87 re S
+/GS47 gs
+q 0 0 0 rg BT 87.88 366.32 Td (Change the callee of the function call which you copied from) Tj ET Q
+q 0 0 0 rg BT 87.88 352.14 Td (/home/filip/Projects/fillwave/src/management/TextureManager.cpp:62 into) Tj ET Q
+q 0 0 0 rg BT 87.88 337.97 Td (copy_of_fillwave::manager::TextureManager::add_3426 from) Tj ET Q
+q 0 0 0 rg BT 87.88 323.80 Td (fillwave::loader::TextureLoader::load to) Tj ET Q
+q 0 0 0 rg BT 87.88 309.63 Td (copy_of_fillwave::loader::TextureLoader::load_3426.) Tj ET Q
+1 1 1 RG
+/GS48 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 377.00 56.69 -70.87 re S
+/GS49 gs
+q 0 0 0 rg BT 513.07 366.32 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS50 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 306.14 56.69 -14.17 re b
+/GS51 gs
+1 1 1 RG
+/GS52 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 306.14 425.20 -14.17 re b
+/GS53 gs
+1 1 1 RG
+/GS54 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 306.14 56.69 -14.17 re b
+/GS55 gs
+1 1 1 RG
+/GS56 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 291.97 56.69 -56.69 re S
+/GS57 gs
+q 0 0 0 rg BT 31.19 281.28 Td (2.1.4) Tj ET Q
+1 1 1 RG
+/GS58 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 291.97 425.20 -56.69 re S
+/GS59 gs
+q 0 0 0 rg BT 87.88 281.28 Td (Copy the function fillwave::manager::TextureManager::get at) Tj ET Q
+q 0 0 0 rg BT 87.88 267.11 Td (/home/filip/Projects/fillwave/src/management/TextureManager.cpp:211-223) Tj ET Q
+q 0 0 0 rg BT 87.88 252.93 Td (into a newly defined function that we will refer to as) Tj ET Q
+q 0 0 0 rg BT 87.88 238.76 Td (copy_of_fillwave::manager::TextureManager::get_3426.) Tj ET Q
+1 1 1 RG
+/GS60 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 291.97 56.69 -56.69 re S
+/GS61 gs
+q 0 0 0 rg BT 513.07 281.28 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS62 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 235.27 56.69 -14.17 re b
+/GS63 gs
+1 1 1 RG
+/GS64 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 235.27 425.20 -14.17 re b
+/GS65 gs
+1 1 1 RG
+/GS66 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 235.27 56.69 -14.17 re b
+/GS67 gs
+1 1 1 RG
+/GS68 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 221.10 56.69 -70.87 re S
+/GS69 gs
+q 0 0 0 rg BT 31.19 210.41 Td (2.1.5) Tj ET Q
+1 1 1 RG
+/GS70 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 221.10 425.20 -70.87 re S
+/GS71 gs
+q 0 0 0 rg BT 87.88 210.41 Td (Change the callee of the function call which you copied from) Tj ET Q
+q 0 0 0 rg BT 87.88 196.24 Td (/home/filip/Projects/fillwave/src/management/TextureManager.cpp:215 into) Tj ET Q
+q 0 0 0 rg BT 87.88 182.07 Td (copy_of_fillwave::manager::TextureManager::get_3426 from) Tj ET Q
+q 0 0 0 rg BT 87.88 167.89 Td (fillwave::manager::TextureManager::add to) Tj ET Q
+q 0 0 0 rg BT 87.88 153.72 Td (copy_of_fillwave::manager::TextureManager::add_3426.) Tj ET Q
+1 1 1 RG
+/GS72 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 221.10 56.69 -70.87 re S
+/GS73 gs
+q 0 0 0 rg BT 513.07 210.41 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS74 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 150.23 56.69 -14.17 re b
+/GS75 gs
+1 1 1 RG
+/GS76 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 150.23 425.20 -14.17 re b
+/GS77 gs
+1 1 1 RG
+/GS78 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 150.23 56.69 -14.17 re b
+/GS79 gs
+1 1 1 RG
+/GS80 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 136.06 56.69 -42.52 re S
+/GS81 gs
+q 0 0 0 rg BT 31.19 125.37 Td (2.1.6) Tj ET Q
+1 1 1 RG
+/GS82 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 136.06 425.20 -42.52 re S
+/GS83 gs
+q 0 0 0 rg BT 87.88 125.37 Td (Copy the function fillwave::Engine::storeTexture at) Tj ET Q
+q 0 0 0 rg BT 87.88 111.20 Td (/home/filip/Projects/fillwave/src/Fillwave.cpp:458-460 into a newly defined) Tj ET Q
+q 0 0 0 rg BT 87.88 97.03 Td (function that we will refer to as copy_of_fillwave::Engine::storeTexture_3426.) Tj ET Q
+1 1 1 RG
+/GS84 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 136.06 56.69 -42.52 re S
+/GS85 gs
+q 0 0 0 rg BT 513.07 125.37 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS86 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 93.54 56.69 -14.17 re b
+/GS87 gs
+1 1 1 RG
+/GS88 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 93.54 425.20 -14.17 re b
+/GS89 gs
+1 1 1 RG
+/GS90 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 93.54 56.69 -14.17 re b
+/GS91 gs
+endstream
+endobj
+5 0 obj
+<</Type /Page
+/Parent 1 0 R
+/MediaBox [0 0 595.28 841.89]
+/Resources 2 0 R
+/Annots [<</Type /Annot /Subtype /Link /Rect [513.0747637795276 729.587244094488 541.0827637795276 741.5872440944881] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/change_callee.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 644.547874015748 541.0827637795276 656.5478740157479] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/change_callee.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 536.8313385826771 541.0827637795276 548.8313385826771] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/extract_function.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 465.9651968503937 541.0827637795276 477.9651968503937] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/abstract_over_start_value.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 423.4455118110236 541.0827637795276 435.4455118110236] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/abstract_over_stride.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 346.9100787401574 541.0827637795276 358.9100787401574] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/apply_round_robin_partitioning.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 242.0281889763779 541.0827637795276 254.0281889763779] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/genericalize_function_signature.html)>>>><</Type /Annot /Subtype /Link /Rect [513.0747637795276 199.50850393700782 541.0827637795276 211.50850393700782] /Border [0 0 0] /H /I /A <</S /URI /URI (http://www.vectorfabrics.com/docs/pareon/current/partitioning/refactoring/distribute_function_calls_over_worker_threads.html)>>>>]
+/Rotate 0
+/Contents 6 0 R>>
+endobj
+6 0 obj
+<</Length 8668>>
+stream
+1 1 1 RG
+/GS92 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+1 1 1 rg
+0 Tr
+/GS93 gs
+0 Tw 0 Tc 100 Tz 0 TL 
+BT /F1 12.00 Tf ET
+/GS94 gs
+1.000 0.000 0.000 1.000 0.000 0.000 cm
+q 73.70 0 0 14.17 28.35 799.37 cm
+/I2 Do Q
+BT /F1 8.00 Tf ET
+q 0 0 0 rg BT 239.18 804.05 Td (fillwave_build - Refactoring steps) Tj ET Q
+q 0 0 0 rg BT 506.29 804.05 Td (Tue May 5 2015) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS95 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 756.85 56.69 -14.17 re b
+/GS96 gs
+1 1 1 RG
+/GS97 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 756.85 425.20 -14.17 re b
+/GS98 gs
+1 1 1 RG
+/GS99 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 756.85 56.69 -14.17 re b
+/GS100 gs
+1 1 1 RG
+/GS101 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 742.67 56.69 -70.87 re S
+/GS102 gs
+q 0 0 0 rg BT 31.19 731.99 Td (2.1.7) Tj ET Q
+1 1 1 RG
+/GS103 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 742.67 425.20 -70.87 re S
+/GS104 gs
+q 0 0 0 rg BT 87.88 731.99 Td (Change the callee of the function call which you copied from) Tj ET Q
+q 0 0 0 rg BT 87.88 717.81 Td (/home/filip/Projects/fillwave/src/Fillwave.cpp:459 into) Tj ET Q
+q 0 0 0 rg BT 87.88 703.64 Td (copy_of_fillwave::Engine::storeTexture_3426 from) Tj ET Q
+q 0 0 0 rg BT 87.88 689.47 Td (fillwave::manager::TextureManager::get to) Tj ET Q
+q 0 0 0 rg BT 87.88 675.29 Td (copy_of_fillwave::manager::TextureManager::get_3426.) Tj ET Q
+1 1 1 RG
+/GS105 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 742.67 56.69 -70.87 re S
+/GS106 gs
+q 0 0 0 rg BT 513.07 731.99 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS107 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 671.81 56.69 -14.17 re b
+/GS108 gs
+1 1 1 RG
+/GS109 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 671.81 425.20 -14.17 re b
+/GS110 gs
+1 1 1 RG
+/GS111 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 671.81 56.69 -14.17 re b
+/GS112 gs
+1 1 1 RG
+/GS113 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 657.63 56.69 -42.52 re S
+/GS114 gs
+q 0 0 0 rg BT 31.19 646.95 Td (2.1.8) Tj ET Q
+1 1 1 RG
+/GS115 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 657.63 425.20 -42.52 re S
+/GS116 gs
+q 0 0 0 rg BT 87.88 646.95 Td (Change the callee of the function call at) Tj ET Q
+q 0 0 0 rg BT 87.88 632.77 Td (/home/filip/Projects/fillwave/test/src/test.cpp:71 from) Tj ET Q
+q 0 0 0 rg BT 87.88 618.60 Td (fillwave::Engine::storeTexture to copy_of_fillwave::Engine::storeTexture_3426.) Tj ET Q
+1 1 1 RG
+/GS117 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 657.63 56.69 -42.52 re S
+/GS118 gs
+q 0 0 0 rg BT 513.07 646.95 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+q 0 0 0 rg BT 31.19 586.00 Td (2.2    Outline the loop associated with Task_10620 \(TextureLoader::load\) into a function) Tj ET Q
+q 0 0 0 rg BT 31.19 569.00 Td (task_10620.) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS119 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 564.09 56.69 -14.17 re b
+/GS120 gs
+1 1 1 RG
+/GS121 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 564.09 425.20 -14.17 re b
+/GS122 gs
+1 1 1 RG
+/GS123 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 564.09 56.69 -14.17 re b
+/GS124 gs
+1 1 1 RG
+/GS125 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 549.92 56.69 -56.69 re S
+/GS126 gs
+q 0 0 0 rg BT 31.19 539.23 Td (2.2.1) Tj ET Q
+1 1 1 RG
+/GS127 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 549.92 425.20 -56.69 re S
+/GS128 gs
+q 0 0 0 rg BT 87.88 539.23 Td (Extract from the code which you copied from) Tj ET Q
+q 0 0 0 rg BT 87.88 525.06 Td (/home/filip/Projects/fillwave/src/loaders/TextureLoader.cpp:126-131 into) Tj ET Q
+q 0 0 0 rg BT 87.88 510.88 Td (copy_of_fillwave::loader::TextureLoader::load_3426 a newly defined function) Tj ET Q
+q 0 0 0 rg BT 87.88 496.71 Td (that we will refer to as task_10620.) Tj ET Q
+1 1 1 RG
+/GS129 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 549.92 56.69 -56.69 re S
+/GS130 gs
+q 0 0 0 rg BT 513.07 539.23 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS131 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 493.23 56.69 -14.17 re b
+/GS132 gs
+1 1 1 RG
+/GS133 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 493.23 425.20 -14.17 re b
+/GS134 gs
+1 1 1 RG
+/GS135 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 493.23 56.69 -14.17 re b
+/GS136 gs
+1 1 1 RG
+/GS137 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 479.05 56.69 -28.35 re S
+/GS138 gs
+q 0 0 0 rg BT 31.19 468.37 Td (2.2.2) Tj ET Q
+1 1 1 RG
+/GS139 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 479.05 425.20 -28.35 re S
+/GS140 gs
+q 0 0 0 rg BT 87.88 468.37 Td (Parameterize the function task_10620 with the start value of induction variable) Tj ET Q
+q 0 0 0 rg BT 87.88 454.19 Td ('row' that gave rise to loop-carried data dependency 3426.196 .) Tj ET Q
+1 1 1 RG
+/GS141 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 479.05 56.69 -28.35 re S
+/GS142 gs
+q 0 0 0 rg BT 513.07 468.37 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS143 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 450.71 56.69 -14.17 re b
+/GS144 gs
+1 1 1 RG
+/GS145 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 450.71 425.20 -14.17 re b
+/GS146 gs
+1 1 1 RG
+/GS147 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 450.71 56.69 -14.17 re b
+/GS148 gs
+1 1 1 RG
+/GS149 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 436.53 56.69 -28.35 re S
+/GS150 gs
+q 0 0 0 rg BT 31.19 425.85 Td (2.2.3) Tj ET Q
+1 1 1 RG
+/GS151 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 436.53 425.20 -28.35 re S
+/GS152 gs
+q 0 0 0 rg BT 87.88 425.85 Td (Parameterize the function task_10620 with the stride of the induction variable) Tj ET Q
+q 0 0 0 rg BT 87.88 411.67 Td ('row' that gave rise to loop-carried data dependency 3426.196 .) Tj ET Q
+1 1 1 RG
+/GS153 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 436.53 56.69 -28.35 re S
+/GS154 gs
+q 0 0 0 rg BT 513.07 425.85 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+q 0 0 0 rg BT 31.19 379.07 Td (2.3    Split the call to task_10620 in copy_of_fillwave::loader::TextureLoader::load_3426.) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS155 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 374.17 56.69 -14.17 re b
+/GS156 gs
+1 1 1 RG
+/GS157 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 374.17 425.20 -14.17 re b
+/GS158 gs
+1 1 1 RG
+/GS159 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 374.17 56.69 -14.17 re b
+/GS160 gs
+1 1 1 RG
+/GS161 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 360.00 56.69 -56.69 re S
+/GS162 gs
+q 0 0 0 rg BT 31.19 349.31 Td (2.3.1) Tj ET Q
+1 1 1 RG
+/GS163 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 360.00 425.20 -56.69 re S
+/GS164 gs
+q 0 0 0 rg BT 87.88 349.31 Td (Replace the one call from copy_of_fillwave::loader::TextureLoader::load_3426) Tj ET Q
+q 0 0 0 rg BT 87.88 335.14 Td (to task_10620 with 2 new calls to task_10620. Choose the start and stride) Tj ET Q
+q 0 0 0 rg BT 87.88 320.96 Td (arguments of the new calls so that they establish a round-robin partitioning of) Tj ET Q
+q 0 0 0 rg BT 87.88 306.79 Td (the orginal iteration space.) Tj ET Q
+1 1 1 RG
+/GS165 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 360.00 56.69 -56.69 re S
+/GS166 gs
+q 0 0 0 rg BT 513.07 349.31 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+q 0 0 0 rg BT 31.19 274.19 Td (2.4    Parallelize the calls to task_10620 in copy_of_fillwave::loader::TextureLoader::load_3426.) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS167 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 269.29 56.69 -14.17 re b
+/GS168 gs
+1 1 1 RG
+/GS169 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 269.29 425.20 -14.17 re b
+/GS170 gs
+1 1 1 RG
+/GS171 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 269.29 56.69 -14.17 re b
+/GS172 gs
+1 1 1 RG
+/GS173 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 255.11 56.69 -28.35 re S
+/GS174 gs
+q 0 0 0 rg BT 31.19 244.43 Td (2.4.1) Tj ET Q
+1 1 1 RG
+/GS175 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 255.11 425.20 -28.35 re S
+/GS176 gs
+q 0 0 0 rg BT 87.88 244.43 Td (Change the definition of the function task_10620 into a void function taking a) Tj ET Q
+q 0 0 0 rg BT 87.88 230.25 Td (single argument of type void*. Adapt all calls to task_10620 accordingly.) Tj ET Q
+1 1 1 RG
+/GS177 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 255.11 56.69 -28.35 re S
+/GS178 gs
+q 0 0 0 rg BT 513.07 244.43 Td (  \(?\)  ) Tj ET Q
+BT /F1 12.00 Tf ET
+1 1 1 rg
+1 1 1 RG
+/GS179 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 226.77 56.69 -14.17 re b
+/GS180 gs
+1 1 1 RG
+/GS181 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 226.77 425.20 -14.17 re b
+/GS182 gs
+1 1 1 RG
+/GS183 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 226.77 56.69 -14.17 re b
+/GS184 gs
+1 1 1 RG
+/GS185 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+28.35 212.60 56.69 -70.87 re S
+/GS186 gs
+q 0 0 0 rg BT 31.19 201.91 Td (2.4.2) Tj ET Q
+1 1 1 RG
+/GS187 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+85.04 212.60 425.20 -70.87 re S
+/GS188 gs
+q 0 0 0 rg BT 87.88 201.91 Td (Issue calls to vftasks_submit and vftasks_get to distribute one of the calls from) Tj ET Q
+q 0 0 0 rg BT 87.88 187.74 Td (copy_of_fillwave::loader::TextureLoader::load_3426 to task_10620 over a) Tj ET Q
+q 0 0 0 rg BT 87.88 173.56 Td (worker thread and have the other call to task_10620 execute concurrently on) Tj ET Q
+q 0 0 0 rg BT 87.88 159.39 Td (the calling thread. Take into account that there are no nested partitions that will) Tj ET Q
+q 0 0 0 rg BT 87.88 145.22 Td (require any additional worker threads.) Tj ET Q
+1 1 1 RG
+/GS189 gs
+0.00 w
+0 i 
+[] 0 d
+3 M
+510.24 212.60 56.69 -70.87 re S
+/GS190 gs
+q 0 0 0 rg BT 513.07 201.91 Td (  \(?\)  ) Tj ET Q
+endstream
+endobj
+7 0 obj
+<</Type /OCG /Name (print)
+/Usage <</Print <</PrintState /ON>> /View <</ViewState /OFF>>>>>>
+endobj
+8 0 obj
+<</Type /OCG /Name (view)
+/Usage <</Print <</PrintState /OFF>> /View <</ViewState /ON>>>>>>
+endobj
+9 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 9
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+10 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 10
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+11 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 11
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+12 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 12
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+13 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 13
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+14 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 14
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+15 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 15
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+16 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 16
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+17 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 17
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+18 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 18
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+19 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 19
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+20 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 20
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+21 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 21
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+22 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 22
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+23 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 23
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+24 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 24
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+25 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 25
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+26 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 26
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+27 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 27
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+28 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 28
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+29 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 29
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+30 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 30
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+31 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 31
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+32 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 32
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+33 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 33
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+34 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 34
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+35 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 35
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+36 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 36
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+37 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 37
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+38 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 38
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+39 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 39
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+40 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 40
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+41 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 41
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+42 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 42
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+43 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 43
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+44 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 44
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+45 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 45
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+46 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 46
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+47 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 47
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+48 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 48
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+49 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 49
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+50 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 50
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+51 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 51
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+52 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 52
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+53 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 53
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+54 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 54
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+55 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 55
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+56 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 56
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+57 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 57
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+58 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 58
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+59 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 59
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+60 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 60
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+61 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 61
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+62 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 62
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+63 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 63
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+64 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 64
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+65 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 65
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+66 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 66
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+67 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 67
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+68 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 68
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+69 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 69
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+70 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 70
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+71 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 71
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+72 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 72
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+73 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 73
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+74 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 74
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+75 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 75
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+76 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 76
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+77 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 77
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+78 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 78
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+79 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 79
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+80 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 80
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+81 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 81
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+82 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 82
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+83 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 83
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+84 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 84
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+85 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 85
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+86 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 86
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+87 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 87
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+88 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 88
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+89 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 89
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+90 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 90
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+91 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 91
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+92 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 92
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+93 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 93
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+94 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 94
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+95 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 95
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+96 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 96
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+97 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 97
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+98 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 98
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+99 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 99
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+100 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 100
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+101 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 101
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+102 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 102
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+103 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 103
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+104 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 104
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+105 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 105
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+106 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 106
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+107 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 107
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+108 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 108
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+109 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 109
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+110 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 110
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+111 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 111
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+112 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 112
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+113 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 113
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+114 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 114
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+115 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 115
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+116 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 116
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+117 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 117
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+118 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 118
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+119 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 119
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+120 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 120
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+121 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 121
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+122 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 122
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+123 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 123
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+124 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 124
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+125 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 125
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+126 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 126
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+127 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 127
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+128 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 128
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+129 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 129
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+130 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 130
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+131 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 131
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+132 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 132
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+133 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 133
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+134 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 134
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+135 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 135
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+136 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 136
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+137 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 137
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+138 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 138
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+139 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 139
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+140 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 140
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+141 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 141
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+142 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 142
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+143 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 143
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+144 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 144
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+145 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 145
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+146 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 146
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+147 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 147
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+148 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 148
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+149 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 149
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+150 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 150
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+151 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 151
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+152 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 152
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+153 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 153
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+154 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 154
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+155 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 155
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+156 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 156
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+157 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 157
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+158 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 158
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+159 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 159
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+160 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 160
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+161 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 161
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+162 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 162
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+163 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 163
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+164 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 164
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+165 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 165
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+166 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 166
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+167 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 167
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+168 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 168
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+169 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 169
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+170 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 170
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+171 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 171
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+172 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 172
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+173 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 173
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+174 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 174
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+175 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 175
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+176 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 176
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+177 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 177
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+178 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 178
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+179 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 179
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+180 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 180
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+181 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 181
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+182 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 182
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+183 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 183
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+184 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 184
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+185 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 185
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+186 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 186
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+187 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 187
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+188 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 188
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+189 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 189
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+190 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 190
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+191 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 191
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+192 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 192
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+193 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 193
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+194 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 194
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+195 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 195
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+196 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 196
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+197 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 197
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+198 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 198
+/CA 0
+/SA true
+/ca 0
+>>
+endobj
+199 0 obj
+<</Type /ExtGState
+/BM /Normal
+/n 199
+/CA 1
+/SA true
+/ca 1
+>>
+endobj
+200 0 obj
+<</Type /Font
+/BaseFont /Helvetica
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+201 0 obj
+<</Type /Font
+/BaseFont /Helvetica-Bold
+/Subtype /Type1
+/Encoding /WinAnsiEncoding
+>>
+endobj
+202 0 obj
+<</Type /XObject
+/Subtype /Image
+/Width 106
+/Height 21
+/ColorSpace /DeviceRGB
+/BitsPerComponent 8
+/Filter /FlateDecode
+/DecodeParms <</Predictor 15 /Colors 3 /BitsPerComponent 8 /Columns 106>>
+/Length 1143>>
+stream
+x⁄ÌòMHTQ«ùà,‘òI§§Ç—ETP3BãZîZ≠™Ö-Àq¥«v≠‘ï´≠EÖ⁄ÆMZã6}å‘“1(˙†H24q‘ a˙Mˇ∫‹ﬁs∆7Qª˜rÓ}Áû{ŒÔûsÓsŸl∂$œÛ4=]V∫vou®ƒÚ<Å|¯ºûÏy¸!~pÁ—’>©"â]Ÿ∫µ»_æ/˚ã¿gÿuã2ºx/ÂÙäœf˜l2≥π|˝Êäı>AO¯lvwûO<|ÛQΩèø´ˆ¡ûûûπππ˙˙˙ÜÜÕçççE"ë¶¶¶ˇ√»»à⁄>ÿOWWö…d≤∞5‹fy0,üõ]Õ¶Ú©œﬂîw´lmmÌÔÔè≈b}}}ö©©©Iß”ôÙÄhkkãF£ﬁÒ¡E[ˇ|°P®££#èÅœÕ˘r”>ÿô -Lê  »°ÕŒŒ2¯z<…ú7Å âp≈¯‡Û¬≈£Z—≈k≥´≠¨8q#i3z7≥‡ ∏gK∞˚xù√P&ì·‹FGG…jπΩΩù≤dæË0C>
+(e200¿_ÜâDôd|äìòQH•Rÿ$)‘†áb˚$¨Éá«+Y&+1naGûê_X@Åy˘œ.¡∏9?Â5÷ÿn||ùÊÊfå0$L÷Óø˙`ÿ›MΩmÿ±ı”‚≤M”A∞∂≤úô5%ŸÃ◊•Ëˆ*õ ¶Ò∏≥≥∑$´râöÏá 4ºEáUÃ„áó‰ØföÖºÖöbñA%)÷ò¡¯∞&F< ‚A≤6ÎÍÍXÖX‡jÄcæ±±S∏*F(¥¥¥∞÷‡cwåp<8¿Fÿƒ=f4wê«Ø?2§ÁÆ7¨K∂üÃG·÷ÈÉ©˜”çâ€ô≈ÔŸ´Á›ı+:äPÖLV≤ôz"
+ÏÕI¬é”Îã◊§3 ,óqeÅ‘Lü%~(õv	 …∫R‘Ö	 dçÒñ¨	ÇÒ∞¿Ó⁄⁄ÓÔ¯,†øîüåOÒiBﬁÖ++2ãK≠7⁄U¬$Zzfæ:XNŒ˝&v}géƒÏ^±~Ÿû≥UÂ≤£“•‡ns6>≥P›Ÿ:Z§ª©)π¢?ü≠&ÉXsÃÇﬁ:T"ïÏøÆé–Ök"íc¸õ†jvJM|öΩtà˘ÿŸı´‡Uh∫CLˆô˙¢¶xU ˚ÃÂcgIüUÒÈSÑP@≠pˆπÒ±#ª;≤œ@ƒyÊ⁄àı?}5¡pÂF±ãÌﬂ’v8Ròù©_…ÊŒ% ılÚQMD¡¿ŒÙ>}‚’°fGÓﬁG:#ØäO]e¨±ªn	’8fu®vÔs„√2
+⁄‘Ï‘OW¿óè ¯º≥≥øWÃùkrûΩÂÑúÎﬁﬁ^"T¶0èL‰®ôÂÊÓs‹ºÖÒŸvÿ—ò<ƒ 3bÍ^n…mAYØo€‹gâ£xÛÃeágv˛ˇºn(Mœ,)„≥+‚õ`t[ïœÆËﬂ˚A⁄üœÓo~m6„á#âSá|R≈·À}Xæû‡CœœªœÂ{
+endstream
+endobj
+203 0 obj
+<</Type /XObject
+/Subtype /Image
+/Width 106
+/Height 21
+/ColorSpace /DeviceRGB
+/BitsPerComponent 8
+/Filter /FlateDecode
+/DecodeParms <</Predictor 15 /Colors 3 /BitsPerComponent 8 /Columns 106>>
+/Length 1143>>
+stream
+x⁄ÌòMHTQ«ùà,‘òI§§Ç—ETP3BãZîZ≠™Ö-Àq¥«v≠‘ï´≠EÖ⁄ÆMZã6}å‘“1(˙†H24q‘ a˙Mˇ∫‹ﬁs∆7Qª˜rÓ}Áû{ŒÔûsÓsŸl∂$œÛ4=]V∫vou®ƒÚ<Å|¯ºûÏy¸!~pÁ—’>©"â]Ÿ∫µ»_æ/˚ã¿gÿuã2ºx/ÂÙäœf˜l2≥π|˝Êäı>AO¯lvwûO<|ÛQΩèø´ˆ¡ûûûπππ˙˙˙ÜÜÕçççE"ë¶¶¶ˇ√»»à⁄>ÿOWWö…d≤∞5‹fy0,üõ]Õ¶Ú©œﬂîw´lmmÌÔÔè≈b}}}ö©©©Iß”ôÙÄhkkãF£ﬁÒ¡E[ˇ|°P®££#èÅœÕ˘r”>ÿô -Lê  »°ÕŒŒ2¯z<…ú7Å âp≈¯‡Û¬≈£Z—≈k≥´≠¨8q#i3z7≥‡ ∏gK∞˚xù√P&ì·‹FGG…jπΩΩù≤dæË0C>
+(e200¿_ÜâDôd|äìòQH•Rÿ$)‘†áb˚$¨Éá«+Y&+1naGûê_X@Åy˘œ.¡∏9?Â5÷ÿn||ùÊÊfå0$L÷Óø˙`ÿ›MΩmÿ±ı”‚≤M”A∞∂≤úô5%ŸÃ◊•Ëˆ*õ ¶Ò∏≥≥∑$´râöÏá 4ºEáUÃ„áó‰ØföÖºÖöbñA%)÷ò¡¯∞&F< ‚A≤6ÎÍÍXÖX‡jÄcæ±±S∏*F(¥¥¥∞÷‡cwåp<8¿Fÿƒ=f4wê«Ø?2§ÁÆ7¨K∂üÃG·÷ÈÉ©˜”çâ€ô≈ÔŸ´Á›ı+:äPÖLV≤ôz"
+ÏÕI¬é”Îã◊§3 ,óqeÅ‘Lü%~(õv	 …∫R‘Ö	 dçÒñ¨	ÇÒ∞¿Ó⁄⁄ÓÔ¯,†øîüåOÒiBﬁÖ++2ãK≠7⁄U¬$Zzfæ:XNŒ˝&v}géƒÏ^±~Ÿû≥UÂ≤£“•‡ns6>≥P›Ÿ:Z§ª©)π¢?ü≠&ÉXsÃÇﬁ:T"ïÏøÆé–Ök"íc¸õ†jvJM|öΩtà˘ÿŸı´‡Uh∫CLˆô˙¢¶xU ˚ÃÂcgIüUÒÈSÑP@≠pˆπÒ±#ª;≤œ@ƒyÊ⁄àı?}5¡pÂF±ãÌﬂ’v8Ròù©_…ÊŒ% ılÚQMD¡¿ŒÙ>}‚’°fGÓﬁG:#ØäO]e¨±ªn	’8fu®vÔs„√2
+⁄‘Ï‘OW¿óè ¯º≥≥øWÃùkrûΩÂÑúÎﬁﬁ^"T¶0èL‰®ôÂÊÓs‹ºÖÒŸvÿ—ò<ƒ 3bÍ^n…mAYØo€‹gâ£xÛÃeágv˛ˇºn(Mœ,)„≥+‚õ`t[ïœÆËﬂ˚A⁄üœÓo~m6„á#âSá|R≈·À}Xæû‡CœœªœÂ{
+endstream
+endobj
+2 0 obj
+<<
+/ProcSet [/PDF /Text /ImageB /ImageC /ImageI]
+/Font <<
+/F1 200 0 R
+/F2 201 0 R
+>>
+/XObject <<
+/I1 202 0 R
+/I2 203 0 R
+>>
+/ExtGState <<
+/GS0 9 0 R
+/GS1 10 0 R
+/GS2 11 0 R
+/GS3 12 0 R
+/GS4 13 0 R
+/GS5 14 0 R
+/GS6 15 0 R
+/GS7 16 0 R
+/GS8 17 0 R
+/GS9 18 0 R
+/GS10 19 0 R
+/GS11 20 0 R
+/GS12 21 0 R
+/GS13 22 0 R
+/GS14 23 0 R
+/GS15 24 0 R
+/GS16 25 0 R
+/GS17 26 0 R
+/GS18 27 0 R
+/GS19 28 0 R
+/GS20 29 0 R
+/GS21 30 0 R
+/GS22 31 0 R
+/GS23 32 0 R
+/GS24 33 0 R
+/GS25 34 0 R
+/GS26 35 0 R
+/GS27 36 0 R
+/GS28 37 0 R
+/GS29 38 0 R
+/GS30 39 0 R
+/GS31 40 0 R
+/GS32 41 0 R
+/GS33 42 0 R
+/GS34 43 0 R
+/GS35 44 0 R
+/GS36 45 0 R
+/GS37 46 0 R
+/GS38 47 0 R
+/GS39 48 0 R
+/GS40 49 0 R
+/GS41 50 0 R
+/GS42 51 0 R
+/GS43 52 0 R
+/GS44 53 0 R
+/GS45 54 0 R
+/GS46 55 0 R
+/GS47 56 0 R
+/GS48 57 0 R
+/GS49 58 0 R
+/GS50 59 0 R
+/GS51 60 0 R
+/GS52 61 0 R
+/GS53 62 0 R
+/GS54 63 0 R
+/GS55 64 0 R
+/GS56 65 0 R
+/GS57 66 0 R
+/GS58 67 0 R
+/GS59 68 0 R
+/GS60 69 0 R
+/GS61 70 0 R
+/GS62 71 0 R
+/GS63 72 0 R
+/GS64 73 0 R
+/GS65 74 0 R
+/GS66 75 0 R
+/GS67 76 0 R
+/GS68 77 0 R
+/GS69 78 0 R
+/GS70 79 0 R
+/GS71 80 0 R
+/GS72 81 0 R
+/GS73 82 0 R
+/GS74 83 0 R
+/GS75 84 0 R
+/GS76 85 0 R
+/GS77 86 0 R
+/GS78 87 0 R
+/GS79 88 0 R
+/GS80 89 0 R
+/GS81 90 0 R
+/GS82 91 0 R
+/GS83 92 0 R
+/GS84 93 0 R
+/GS85 94 0 R
+/GS86 95 0 R
+/GS87 96 0 R
+/GS88 97 0 R
+/GS89 98 0 R
+/GS90 99 0 R
+/GS91 100 0 R
+/GS92 101 0 R
+/GS93 102 0 R
+/GS94 103 0 R
+/GS95 104 0 R
+/GS96 105 0 R
+/GS97 106 0 R
+/GS98 107 0 R
+/GS99 108 0 R
+/GS100 109 0 R
+/GS101 110 0 R
+/GS102 111 0 R
+/GS103 112 0 R
+/GS104 113 0 R
+/GS105 114 0 R
+/GS106 115 0 R
+/GS107 116 0 R
+/GS108 117 0 R
+/GS109 118 0 R
+/GS110 119 0 R
+/GS111 120 0 R
+/GS112 121 0 R
+/GS113 122 0 R
+/GS114 123 0 R
+/GS115 124 0 R
+/GS116 125 0 R
+/GS117 126 0 R
+/GS118 127 0 R
+/GS119 128 0 R
+/GS120 129 0 R
+/GS121 130 0 R
+/GS122 131 0 R
+/GS123 132 0 R
+/GS124 133 0 R
+/GS125 134 0 R
+/GS126 135 0 R
+/GS127 136 0 R
+/GS128 137 0 R
+/GS129 138 0 R
+/GS130 139 0 R
+/GS131 140 0 R
+/GS132 141 0 R
+/GS133 142 0 R
+/GS134 143 0 R
+/GS135 144 0 R
+/GS136 145 0 R
+/GS137 146 0 R
+/GS138 147 0 R
+/GS139 148 0 R
+/GS140 149 0 R
+/GS141 150 0 R
+/GS142 151 0 R
+/GS143 152 0 R
+/GS144 153 0 R
+/GS145 154 0 R
+/GS146 155 0 R
+/GS147 156 0 R
+/GS148 157 0 R
+/GS149 158 0 R
+/GS150 159 0 R
+/GS151 160 0 R
+/GS152 161 0 R
+/GS153 162 0 R
+/GS154 163 0 R
+/GS155 164 0 R
+/GS156 165 0 R
+/GS157 166 0 R
+/GS158 167 0 R
+/GS159 168 0 R
+/GS160 169 0 R
+/GS161 170 0 R
+/GS162 171 0 R
+/GS163 172 0 R
+/GS164 173 0 R
+/GS165 174 0 R
+/GS166 175 0 R
+/GS167 176 0 R
+/GS168 177 0 R
+/GS169 178 0 R
+/GS170 179 0 R
+/GS171 180 0 R
+/GS172 181 0 R
+/GS173 182 0 R
+/GS174 183 0 R
+/GS175 184 0 R
+/GS176 185 0 R
+/GS177 186 0 R
+/GS178 187 0 R
+/GS179 188 0 R
+/GS180 189 0 R
+/GS181 190 0 R
+/GS182 191 0 R
+/GS183 192 0 R
+/GS184 193 0 R
+/GS185 194 0 R
+/GS186 195 0 R
+/GS187 196 0 R
+/GS188 197 0 R
+/GS189 198 0 R
+/GS190 199 0 R
+>>
+/ColorSpace <<
+>>
+/Properties <</OC1 7 0 R /OC2 8 0 R>>
+>>
+endobj
+204 0 obj
+<<
+/Producer (AlivePDF 0.1.5 RC)
+/CreationDate (D:20150551413)
+>>
+endobj
+205 0 obj
+<<
+/Type /Catalog
+/Pages 1 0 R
+/OpenAction [3 0 R /Fit]
+/PageLayout /SinglePage
+/PageMode /UseNone
+/OCProperties <</OCGs [7 0 R 8 0 R] /D <</ON [7 0 R] /OFF [8 0 R] /AS [<</Event /Print /OCGs [7 0 R 8 0 R] /Category [/Print]>> <</Event /View /OCGs [7 0 R 8 0 R] /Category [/View]>>]>>>>
+>>
+endobj
+xref
+0 206
+0000000000 65535 f 
+0000000009 00000 n 
+0000039035 00000 n 
+0000000070 00000 n 
+0000001953 00000 n 
+0000010023 00000 n 
+0000012225 00000 n 
+0000020942 00000 n 
+0000021050 00000 n 
+0000021157 00000 n 
+0000021232 00000 n 
+0000021309 00000 n 
+0000021386 00000 n 
+0000021463 00000 n 
+0000021540 00000 n 
+0000021617 00000 n 
+0000021694 00000 n 
+0000021771 00000 n 
+0000021848 00000 n 
+0000021925 00000 n 
+0000022002 00000 n 
+0000022079 00000 n 
+0000022156 00000 n 
+0000022233 00000 n 
+0000022310 00000 n 
+0000022387 00000 n 
+0000022464 00000 n 
+0000022541 00000 n 
+0000022618 00000 n 
+0000022695 00000 n 
+0000022772 00000 n 
+0000022849 00000 n 
+0000022926 00000 n 
+0000023003 00000 n 
+0000023080 00000 n 
+0000023157 00000 n 
+0000023234 00000 n 
+0000023311 00000 n 
+0000023388 00000 n 
+0000023465 00000 n 
+0000023542 00000 n 
+0000023619 00000 n 
+0000023696 00000 n 
+0000023773 00000 n 
+0000023850 00000 n 
+0000023927 00000 n 
+0000024004 00000 n 
+0000024081 00000 n 
+0000024158 00000 n 
+0000024235 00000 n 
+0000024312 00000 n 
+0000024389 00000 n 
+0000024466 00000 n 
+0000024543 00000 n 
+0000024620 00000 n 
+0000024697 00000 n 
+0000024774 00000 n 
+0000024851 00000 n 
+0000024928 00000 n 
+0000025005 00000 n 
+0000025082 00000 n 
+0000025159 00000 n 
+0000025236 00000 n 
+0000025313 00000 n 
+0000025390 00000 n 
+0000025467 00000 n 
+0000025544 00000 n 
+0000025621 00000 n 
+0000025698 00000 n 
+0000025775 00000 n 
+0000025852 00000 n 
+0000025929 00000 n 
+0000026006 00000 n 
+0000026083 00000 n 
+0000026160 00000 n 
+0000026237 00000 n 
+0000026314 00000 n 
+0000026391 00000 n 
+0000026468 00000 n 
+0000026545 00000 n 
+0000026622 00000 n 
+0000026699 00000 n 
+0000026776 00000 n 
+0000026853 00000 n 
+0000026930 00000 n 
+0000027007 00000 n 
+0000027084 00000 n 
+0000027161 00000 n 
+0000027238 00000 n 
+0000027315 00000 n 
+0000027392 00000 n 
+0000027469 00000 n 
+0000027546 00000 n 
+0000027623 00000 n 
+0000027700 00000 n 
+0000027777 00000 n 
+0000027854 00000 n 
+0000027931 00000 n 
+0000028008 00000 n 
+0000028085 00000 n 
+0000028162 00000 n 
+0000028241 00000 n 
+0000028320 00000 n 
+0000028399 00000 n 
+0000028478 00000 n 
+0000028557 00000 n 
+0000028636 00000 n 
+0000028715 00000 n 
+0000028794 00000 n 
+0000028873 00000 n 
+0000028952 00000 n 
+0000029031 00000 n 
+0000029110 00000 n 
+0000029189 00000 n 
+0000029268 00000 n 
+0000029347 00000 n 
+0000029426 00000 n 
+0000029505 00000 n 
+0000029584 00000 n 
+0000029663 00000 n 
+0000029742 00000 n 
+0000029821 00000 n 
+0000029900 00000 n 
+0000029979 00000 n 
+0000030058 00000 n 
+0000030137 00000 n 
+0000030216 00000 n 
+0000030295 00000 n 
+0000030374 00000 n 
+0000030453 00000 n 
+0000030532 00000 n 
+0000030611 00000 n 
+0000030690 00000 n 
+0000030769 00000 n 
+0000030848 00000 n 
+0000030927 00000 n 
+0000031006 00000 n 
+0000031085 00000 n 
+0000031164 00000 n 
+0000031243 00000 n 
+0000031322 00000 n 
+0000031401 00000 n 
+0000031480 00000 n 
+0000031559 00000 n 
+0000031638 00000 n 
+0000031717 00000 n 
+0000031796 00000 n 
+0000031875 00000 n 
+0000031954 00000 n 
+0000032033 00000 n 
+0000032112 00000 n 
+0000032191 00000 n 
+0000032270 00000 n 
+0000032349 00000 n 
+0000032428 00000 n 
+0000032507 00000 n 
+0000032586 00000 n 
+0000032665 00000 n 
+0000032744 00000 n 
+0000032823 00000 n 
+0000032902 00000 n 
+0000032981 00000 n 
+0000033060 00000 n 
+0000033139 00000 n 
+0000033218 00000 n 
+0000033297 00000 n 
+0000033376 00000 n 
+0000033455 00000 n 
+0000033534 00000 n 
+0000033613 00000 n 
+0000033692 00000 n 
+0000033771 00000 n 
+0000033850 00000 n 
+0000033929 00000 n 
+0000034008 00000 n 
+0000034087 00000 n 
+0000034166 00000 n 
+0000034245 00000 n 
+0000034324 00000 n 
+0000034403 00000 n 
+0000034482 00000 n 
+0000034561 00000 n 
+0000034640 00000 n 
+0000034719 00000 n 
+0000034798 00000 n 
+0000034877 00000 n 
+0000034956 00000 n 
+0000035035 00000 n 
+0000035114 00000 n 
+0000035193 00000 n 
+0000035272 00000 n 
+0000035351 00000 n 
+0000035430 00000 n 
+0000035509 00000 n 
+0000035588 00000 n 
+0000035667 00000 n 
+0000035746 00000 n 
+0000035825 00000 n 
+0000035904 00000 n 
+0000035983 00000 n 
+0000036062 00000 n 
+0000036160 00000 n 
+0000036263 00000 n 
+0000037649 00000 n 
+0000041913 00000 n 
+0000041996 00000 n 
+trailer
+<<
+/Size 206
+/Root 205 0 R
+/Info 204 0 R
+>>
+startxref
+42303
+%%EOF
