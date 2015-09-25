@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module BuilderEmiter-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="155" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="17" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="3" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="51.667" level="2" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="5.667" level="1" />
+<weighted_methods_per_class_unity value="19" level="0" />
+<weighted_methods_per_class_visibility value="4" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="8" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+<description>definition</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="42" />
+<lines_of_code value="20" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="6.667" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>BuilderEmiter(Engine *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="15" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="44" />
+</extent>
+<lines_of_code value="19" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildEmiterCPU()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="57" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="80" />
+</extent>
+<lines_of_code value="19" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>buildEmiterGPU()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="38" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="78" />
+</extent>
+<lines_of_code value="19" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setAcceleration(vec3)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="91" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="54" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setAlphaCutOff(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="141" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="76" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setBlendingDestination(GLenum)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="136" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="72" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setBlendingSource(GLenum)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="131" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="70" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setColor(vec4)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="86" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="52" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setDepthTesting(GLboolean)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="146" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="74" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setEmitingSourceRate(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="76" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="48" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setHowMany(GLuint)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="81" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="50" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setLifetime(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="121" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="66" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setRobustnessPosition(vec3)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="111" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="62" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setRobustnessVelocity(vec3)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="101" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="58" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setStartPosition(vec3)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="106" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="60" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setStartSize(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="116" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="64" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setStartVelocity(vec3)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="96" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="56" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setTexture(pTexture)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="126" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="68" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~BuilderEmiter()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="34" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="46" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>BuilderEmiter</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>Engine</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="15" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="44" />
+</extent>
+<extent>
+<description>has by reference</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="83" />
+</extent>
+<name>GLboolean</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="146" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="74" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="97" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="98" />
+</extent>
+<name>GLenum</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="131" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="136" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="70" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="72" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="95" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="96" />
+</extent>
+<name>GLfloat</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="76" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="116" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="121" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="141" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="48" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="64" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="66" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="76" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="84" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="92" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="93" />
+</extent>
+<name>GLuint</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="81" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="50" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="85" />
+</extent>
+<name>pTexture</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="126" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="68" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="94" />
+</extent>
+<name>vec3</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="91" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="96" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="101" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="106" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="111" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="54" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="56" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="58" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="60" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="62" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="87" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="88" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="89" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="90" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="91" />
+</extent>
+<name>vec4</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="86" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="52" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="86" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

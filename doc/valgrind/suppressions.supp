@@ -1,0 +1,81 @@
+{
+   <glfwInit>
+   Memcheck:Cond
+   fun:strlen
+   fun:strdup
+   obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.0
+   obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.0
+   fun:glfwInit
+   fun:_ZN8fillwave6Engine10initWindowEiPKPc
+   fun:_ZN8fillwave6EngineC1EiiPKPc
+   fun:main
+}
+{
+   <NVidia driver>
+   Memcheck:Cond
+   obj:/usr/lib/nvidia-304/libnvidia-glcore.so.304.117
+   obj:*
+   fun:_ZNSt8_Rb_treeISsSt4pairIKSsSt10shared_ptrIN8fillwave4core7UniformEEESt10_Select1stIS7_ESt4lessISsESaIS7_EE4findERS1_
+   obj:*
+   obj:*
+}
+{
+   glcore-nvidia>
+   Memcheck:Cond
+   obj:/usr/lib/nvidia-304/libnvidia-glcore.so.304.117
+   obj:*
+   fun:_dl_runtime_resolve
+   fun:_ZN8fillwave4core7Uniform4pushEN3glm6detail5tvec2IfLNS2_9precisionE0EEE
+   obj:*
+   obj:/usr/lib/nvidia-304/libGL.so.304.117
+   obj:/usr/lib/libfillwave.so
+   obj:*
+   obj:*
+   fun:_ZN8fillwave4core7Program11uniformPushESsN3glm6detail5tvec2IfLNS2_9precisionE0EEE
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   obj:/usr/lib/nvidia-304/libnvidia-glcore.so.304.117
+   obj:*
+   fun:_dl_runtime_resolve
+   fun:_ZN8fillwave4core7Uniform4pushEN3glm6detail5tvec2IfLNS2_9precisionE0EEE
+   obj:*
+   obj:/usr/lib/nvidia-304/libGL.so.304.117
+   obj:/home/filip/Projects/fillwave_build/libfillwave.so
+   obj:*
+   obj:*
+   fun:_ZN8fillwave4core7Program11uniformPushESsN3glm6detail5tvec2IfLNS2_9precisionE0EEE
+   obj:*
+   obj:*
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   obj:/usr/lib/nvidia-304/libnvidia-glcore.so.304.117
+   obj:*
+   obj:*
+   obj:*
+   fun:_ZNSt3mapISsSt10shared_ptrIN8fillwave4core7UniformEESt4lessISsESaISt4pairIKSsS4_EEEixERS8_
+   obj:*
+   obj:*
+   obj:*
+   obj:*
+   obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.0
+   obj:*
+   obj:*
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   obj:/usr/lib/nvidia-304/libnvidia-glcore.so.304.117
+   obj:*
+   obj:*
+   obj:*
+   fun:_ZNSt3mapISsSt10shared_ptrIN8fillwave4core7UniformEESt4lessISsESaISt4pairIKSsS4_EEEixERS8_
+   obj:*
+   obj:*
+   obj:*
+   obj:*
+   obj:/usr/lib/x86_64-linux-gnu/libglfw.so.3.0
+}

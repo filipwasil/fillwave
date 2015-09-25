@@ -1,0 +1,67 @@
+\hypertarget{classfillwave_1_1manager_1_1TextureManager}{}\section{fillwave\+:\+:manager\+:\+:Texture\+Manager Class Reference}
+\label{classfillwave_1_1manager_1_1TextureManager}\index{fillwave\+::manager\+::\+Texture\+Manager@{fillwave\+::manager\+::\+Texture\+Manager}}
+
+
+Manager to handle Texture\+Object1\+D, \hyperlink{classfillwave_1_1manager_1_1TextureObject2D}{Texture\+Object2\+D} and \hyperlink{classfillwave_1_1manager_1_1TextureObject3D}{Texture\+Object3\+D} objects.  
+
+
+
+
+{\ttfamily \#include $<$Texture\+Manager.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a78507f2a56fb12e6731214b4188e0f46}{}{\bfseries Texture\+Manager} (const std\+::string \&root\+Path)\label{classfillwave_1_1manager_1_1TextureManager_a78507f2a56fb12e6731214b4188e0f46}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a8813baa38a348446170d75bb7701a562}{}p\+Texture {\bfseries get} (std\+::string texture\+Path, G\+Luint map\+Type=F\+I\+L\+L\+W\+A\+V\+E\+\_\+\+T\+E\+X\+T\+U\+R\+E\+\_\+\+T\+Y\+P\+E\+\_\+\+N\+O\+N\+E, loader\+::e\+Flip flip=loader\+::e\+Flip\+::\+F\+I\+L\+L\+W\+A\+V\+E\+\_\+\+T\+E\+X\+T\+U\+R\+E\+\_\+\+F\+L\+I\+P\+\_\+\+V\+E\+R\+T\+I\+C\+A\+L)\label{classfillwave_1_1manager_1_1TextureManager_a8813baa38a348446170d75bb7701a562}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a9976210f8b5ee16462f1b858b3936296}{}p\+Texture3\+D {\bfseries get} (const std\+::string \&pos\+X, const std\+::string \&neg\+X, const std\+::string \&pos\+Y, const std\+::string \&neg\+Y, const std\+::string \&pos\+Z, const std\+::string \&neg\+Z)\label{classfillwave_1_1manager_1_1TextureManager_a9976210f8b5ee16462f1b858b3936296}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_aefa1fff947dcf90934855dd2dd1daa41}{}p\+Texture2\+D\+Renderable {\bfseries get\+Shadow2\+D} (G\+Luint width, G\+Luint height)\label{classfillwave_1_1manager_1_1TextureManager_aefa1fff947dcf90934855dd2dd1daa41}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_acebae6c67d9ed5d26b0326a14cc536ea}{}p\+Texture3\+D\+Renderable {\bfseries get\+Shadow3\+D} (G\+Luint width, G\+Luint height)\label{classfillwave_1_1manager_1_1TextureManager_acebae6c67d9ed5d26b0326a14cc536ea}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a310720a772e2c3d2bd1d6afe1252e820}{}p\+Texture2\+D\+Renderable {\bfseries get\+Color2\+D} (G\+Luint width, G\+Luint height)\label{classfillwave_1_1manager_1_1TextureManager_a310720a772e2c3d2bd1d6afe1252e820}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_ae977db54b989232c0c11c9e990a7b2cc}{}p\+Texture2\+D {\bfseries get\+Deferred\+Color} (G\+Luint width, G\+Luint height, G\+Luint size=1)\label{classfillwave_1_1manager_1_1TextureManager_ae977db54b989232c0c11c9e990a7b2cc}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a70b8f4eea4d9581b729fe719ba0eb051}{}p\+Texture2\+D {\bfseries get\+Deferred\+Color\+Screen} (G\+Luint width, G\+Luint height, G\+Luint size=1)\label{classfillwave_1_1manager_1_1TextureManager_a70b8f4eea4d9581b729fe719ba0eb051}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a6268124bb3f4c9e2d36a1a9d67fe6a0b}{}p\+Texture2\+D {\bfseries get\+Deferred\+Depth} (G\+Luint width, G\+Luint height)\label{classfillwave_1_1manager_1_1TextureManager_a6268124bb3f4c9e2d36a1a9d67fe6a0b}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a015dc2fd80bb933d0edd820bab853d06}{}p\+Texture2\+D {\bfseries get\+Deferred\+Stencil\+Depth} (G\+Luint width, G\+Luint height)\label{classfillwave_1_1manager_1_1TextureManager_a015dc2fd80bb933d0edd820bab853d06}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a9e4a6ecb64d5f9dd28414e9c8fe62d06}{}p\+Texture2\+D\+Renderable\+Dynamic {\bfseries get\+Dynamic} (const std\+::string \&fragment\+Shader\+Path, p\+Program program, glm\+::ivec2 screen\+Size)\label{classfillwave_1_1manager_1_1TextureManager_a9e4a6ecb64d5f9dd28414e9c8fe62d06}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a29f3d2bc108af5de03d3c74e23fab814}{}G\+Lboolean {\bfseries check} (std\+::string texture\+Path, G\+Luint map\+Type=F\+I\+L\+L\+W\+A\+V\+E\+\_\+\+T\+E\+X\+T\+U\+R\+E\+\_\+\+T\+Y\+P\+E\+\_\+\+N\+O\+N\+E)\label{classfillwave_1_1manager_1_1TextureManager_a29f3d2bc108af5de03d3c74e23fab814}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a26599576d6340b67b57e580d96d4ad2c}{}void {\bfseries reload} ()\label{classfillwave_1_1manager_1_1TextureManager_a26599576d6340b67b57e580d96d4ad2c}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a33918d6cd7e4b8d7bf152c5ae46aede5}{}void {\bfseries resize\+Textures} (G\+Luint width, G\+Luint height)\label{classfillwave_1_1manager_1_1TextureManager_a33918d6cd7e4b8d7bf152c5ae46aede5}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1TextureManager_a34a7683620dc1d60fdd8a5523d28447d}{}void {\bfseries resize} (G\+Luint width, G\+Luint height)\label{classfillwave_1_1manager_1_1TextureManager_a34a7683620dc1d60fdd8a5523d28447d}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manager to handle Texture\+Object1\+D, \hyperlink{classfillwave_1_1manager_1_1TextureObject2D}{Texture\+Object2\+D} and \hyperlink{classfillwave_1_1manager_1_1TextureObject3D}{Texture\+Object3\+D} objects. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/management/Texture\+Manager.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,97 @@
+\hypertarget{classfillwave_1_1manager_1_1BoneManager}{}\section{fillwave\+:\+:manager\+:\+:Bone\+Manager Class Reference}
+\label{classfillwave_1_1manager_1_1BoneManager}\index{fillwave\+::manager\+::\+Bone\+Manager@{fillwave\+::manager\+::\+Bone\+Manager}}
+
+
+Manager to handle Bone objects in animation.  
+
+
+
+
+{\ttfamily \#include $<$Bone\+Manager.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a4fbbe2058b0864ed9e4ad2ba5b5b56a8}{}{\bfseries Bone\+Manager} (const ai\+Scene $\ast$shape)\label{classfillwave_1_1manager_1_1BoneManager_a4fbbe2058b0864ed9e4ad2ba5b5b56a8}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a621ed692c7111e2b9dd7c137808f065c}{}void {\bfseries add} (ai\+Bone $\ast$bone)\label{classfillwave_1_1manager_1_1BoneManager_a621ed692c7111e2b9dd7c137808f065c}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_af6b833b4345494c0b6ca349fa1c9c304}{}void {\bfseries add} (p\+Bone bone)\label{classfillwave_1_1manager_1_1BoneManager_af6b833b4345494c0b6ca349fa1c9c304}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a360b85b94d75c652da509e30fd69b3ef}{}void {\bfseries add} (\hyperlink{classfillwave_1_1animation_1_1Animation}{animation\+::\+Animation} $\ast$animation)\label{classfillwave_1_1manager_1_1BoneManager_a360b85b94d75c652da509e30fd69b3ef}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a9504984fc6f049e6a58f6aaa7c9ce58a}{}p\+Bone {\bfseries get} (G\+Lint id)\label{classfillwave_1_1manager_1_1BoneManager_a9504984fc6f049e6a58f6aaa7c9ce58a}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a7f9edb10a7d59f3053a6bdead8141901}{}p\+Bone {\bfseries get} (std\+::string name)\label{classfillwave_1_1manager_1_1BoneManager_a7f9edb10a7d59f3053a6bdead8141901}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a0af9b6724cf868a8883030255e465740}{}G\+Lint {\bfseries get\+Id} (std\+::string name)\label{classfillwave_1_1manager_1_1BoneManager_a0af9b6724cf868a8883030255e465740}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_afb838c3fa7d4ffe685ccd04811796888}{}G\+Lint {\bfseries get\+Elements} ()\label{classfillwave_1_1manager_1_1BoneManager_afb838c3fa7d4ffe685ccd04811796888}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a6b76448aecc4ba7e114e2f2e5ed62812}{}\hyperlink{classfillwave_1_1animation_1_1Animation}{animation\+::\+Animation} $\ast$ {\bfseries get\+Animation} (G\+Lint i)\label{classfillwave_1_1manager_1_1BoneManager_a6b76448aecc4ba7e114e2f2e5ed62812}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a47ccfb449d9674c3120ea4d2f0ba62c3}{}G\+Lint {\bfseries get\+Animations} ()\label{classfillwave_1_1manager_1_1BoneManager_a47ccfb449d9674c3120ea4d2f0ba62c3}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a911019fc466242c6bf5185910497a47d}{}void {\bfseries log} ()\label{classfillwave_1_1manager_1_1BoneManager_a911019fc466242c6bf5185910497a47d}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a83befeb9bce1d44f127cced68a16a45d}{}\hyperlink{classfillwave_1_1animation_1_1Channel}{animation\+::\+Channel} $\ast$ {\bfseries find\+Channel} (\hyperlink{classfillwave_1_1animation_1_1Animation}{animation\+::\+Animation} $\ast$animation, const std\+::string \&node\+Name)\label{classfillwave_1_1manager_1_1BoneManager_a83befeb9bce1d44f127cced68a16a45d}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_af4c63e5f585324f3804fea03e1adf194}{}glm\+::vec3 {\bfseries get\+Current\+Translation} (float time\+Elapsed\+\_\+s, \hyperlink{classfillwave_1_1animation_1_1Channel}{animation\+::\+Channel} $\ast$channel)\label{classfillwave_1_1manager_1_1BoneManager_af4c63e5f585324f3804fea03e1adf194}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_ad38cd9c6232b4b1f2ad4c5e59aa9acce}{}glm\+::quat {\bfseries get\+Current\+Rotation} (float time\+Elapsed\+\_\+s, \hyperlink{classfillwave_1_1animation_1_1Channel}{animation\+::\+Channel} $\ast$channel)\label{classfillwave_1_1manager_1_1BoneManager_ad38cd9c6232b4b1f2ad4c5e59aa9acce}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a907e6274ff0053ef23a982de3a6c4908}{}glm\+::vec3 {\bfseries get\+Current\+Scale} (float time\+Elapsed\+\_\+s, \hyperlink{classfillwave_1_1animation_1_1Channel}{animation\+::\+Channel} $\ast$channel)\label{classfillwave_1_1manager_1_1BoneManager_a907e6274ff0053ef23a982de3a6c4908}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a361968dddf129b4863ce085a9626e69b}{}G\+Luint {\bfseries get\+Translation\+Step} (float time\+Elapsed\+\_\+s, \hyperlink{classfillwave_1_1animation_1_1Channel}{animation\+::\+Channel} $\ast$channel)\label{classfillwave_1_1manager_1_1BoneManager_a361968dddf129b4863ce085a9626e69b}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_ab508fc08681246625ca9ecc00c9041b1}{}G\+Luint {\bfseries get\+Rotation\+Step} (float time\+Elapsed\+\_\+s, \hyperlink{classfillwave_1_1animation_1_1Channel}{animation\+::\+Channel} $\ast$channel)\label{classfillwave_1_1manager_1_1BoneManager_ab508fc08681246625ca9ecc00c9041b1}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a4d4672ca0adb833a6a020cfac655cf62}{}G\+Luint {\bfseries get\+Scale\+Step} (float time\+Elapsed\+\_\+s, \hyperlink{classfillwave_1_1animation_1_1Channel}{animation\+::\+Channel} $\ast$channel)\label{classfillwave_1_1manager_1_1BoneManager_a4d4672ca0adb833a6a020cfac655cf62}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_ae6e8ddff146f626909b8777c70229d27}{}glm\+::fquat {\bfseries lerp} (const glm\+::fquat \&v0, const glm\+::fquat \&v1, float alpha)\label{classfillwave_1_1manager_1_1BoneManager_ae6e8ddff146f626909b8777c70229d27}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a6286be8c76b9244ad1edfd866fb31c5f}{}\hyperlink{classfillwave_1_1manager_1_1AssimpNode}{Assimp\+Node} $\ast$ {\bfseries init\+Node} (ai\+Node $\ast$node)\label{classfillwave_1_1manager_1_1BoneManager_a6286be8c76b9244ad1edfd866fb31c5f}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a09eff893aab25b8407251429768363c9}{}void {\bfseries update\+Bones\+Buffer} ()\label{classfillwave_1_1manager_1_1BoneManager_a09eff893aab25b8407251429768363c9}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a996a798fc2e1f7e6b6eb18ebfdde6195}{}void {\bfseries update\+Bones\+Uniform} (G\+Lint uniform\+Location\+Bones)\label{classfillwave_1_1manager_1_1BoneManager_a996a798fc2e1f7e6b6eb18ebfdde6195}
+
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_a55f6856fa921771978b7f8c4001eeba3}{}void {\bfseries update\+Transformations} (G\+Lint active\+Animation, float time\+Elapsed\+\_\+s)\label{classfillwave_1_1manager_1_1BoneManager_a55f6856fa921771978b7f8c4001eeba3}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classfillwave_1_1manager_1_1BoneManager_ae65b2366dd24b824412abadde8c80571}{}std\+::vector$<$ \hyperlink{classfillwave_1_1animation_1_1Animation}{animation\+::\+Animation} $\ast$ $>$ {\bfseries m\+Animations}\label{classfillwave_1_1manager_1_1BoneManager_ae65b2366dd24b824412abadde8c80571}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manager to handle Bone objects in animation. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/management/Bone\+Manager.\+h\end{DoxyCompactItemize}

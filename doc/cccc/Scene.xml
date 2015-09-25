@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module Scene-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="34" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="0" />
+<lines_of_code value="6" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="5.667" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="23" level="0" />
+<weighted_methods_per_class_visibility value="4" level="0" />
+<depth_of_inheritance_tree value="2" level="0" />
+<number_of_children value="2" level="0" />
+<coupling_between_objects value="12" level="0" />
+<IF4 value="400" level="1" />
+<IF4_per_member_function value="********" level="2" />
+<IF4_visible value="324" level="2" />
+<IF4_visible_per_member_function value="********" level="2" />
+<IF4_concrete value="324" level="2" />
+<IF4_concrete_per_member_function value="********" level="2" />
+</module_summary>
+<module_detail>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="46" />
+<lines_of_code value="11" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="6" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>Scene()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="48" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>draw()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="62" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawAOC()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="68" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawAOG()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="66" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawCursor()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="80" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawDR()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="64" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawDepthInt()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="70" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawFromCustomCamera(Camera &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="82" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawOcclusion()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="76" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawPicking()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="72" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>drawSkybox()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="74" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getAmbient()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="56" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getCamera()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="78" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getCursor()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="60" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveCursor(vec2)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="84" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>onHide()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="92" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>onShow()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="90" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>pick(ivec4)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="88" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>registerPickable(pEntity)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="86" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setAmbient(vec3)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="58" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setCursor(pCursor)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="52" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setSkybox(pSkybox)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="54" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~Scene()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="50" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>Scene</name>
+<client_module>
+<name>SceneOrthographic</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/models/SceneOrthographic.h" line="45" />
+</extent>
+<name>ScenePerspective</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/models/ScenePerspective.h" line="45" />
+</extent>
+</client_module>
+<supplier_module>
+<name>Camera</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="82" />
+</extent>
+<name>Entity</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="46" />
+</extent>
+<name>GLint</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="102" />
+</extent>
+<name>ivec4</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="88" />
+</extent>
+<name>map</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="97" />
+</extent>
+<name>pCursor</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="52" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="95" />
+</extent>
+<name>pEntity</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="86" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="98" />
+</extent>
+<name>pSkybox</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="54" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="96" />
+</extent>
+<name>vec2</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="84" />
+</extent>
+<name>vec3</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="58" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Scene.h" line="99" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

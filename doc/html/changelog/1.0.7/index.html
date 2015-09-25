@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Fillwave - ... is where the linux gaming starts (Beta)
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/lanyon.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/icon_152.png">
+  <link rel="shortcut icon" href="/public/icon_32.ico">
+  
+  <meta name="description" content="Free C++11 OpenGL graphics Engine">
+  <meta name="keywords" content="Graphics,Engine,OpenGL,Ubuntu,Linux">
+  <meta name="author" content="Filip Wasil">
+</head>
+
+
+  <body>
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>A reserved <a href="http://www.opengl.org/" target="_blank">OpenGl</a> modern linux C++11 graphics engine. Designed and written by Filip Wasil. Currently projec is in Beta revision. Any feedback will be appreciated. All debs and packages are built for amd64.</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="/doxygen_doc/html/">Documentation</a>
+    <a class="sidebar-nav-item" href="/downloads/Fillwave.pdf">Quick start quide</a>
+	<a class="sidebar-nav-item" href="/LICENSE.txt">License</a>
+	<a class="sidebar-nav-item" href="https://bitbucket.org/filipwasil/fillwave/issues?status=new&status=open">Issue tracker</a>
+    <a class="sidebar-nav-item" href="/feed.xml" title="Subscribe RSS" target="_blank"><img src="../../../../web/rss-black.png" alt="Filip's rss" class="thumb_pic" /></a>
+    
+    <span class="sidebar-nav-item">Currently v1.0.7</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>
+      © 2014. All rights reserved.
+    </p>
+  </div>
+</div>
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="http://filipwasil.bitbucket.org/" title="Home">Fillwave</a>
+            <small> ... is where the gaming for linux starts </small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="posts">
+  
+  <div class="post">
+   <h1 class="post-title">
+        Fillwave Revision 1.0.7 
+   </h1>
+
+   <span class="post-date">27 January 2014</span>
+   <h2 class="post-title">
+        Review 1.0.7
+   </h2>
+   <ul>
+   <li>Material introduced.</li>
+   <li>New function in model: "getAnimations" which returns number of animations available.</li>
+   <li>Each mesh has its ow ambient.</li>
+   <li>Quick start guide was updated.</li>
+   <li>New conversion in mesh loader.</li>
+   <li>Refactoring in Mesh.</li>
+   <li>Naming conventions for shaders modified to be compliant with Khronos reference compiler.</li>
+   </ul>
+
+<hr>
+
+
+  </div>
+  
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script>
+      (function(document) {
+        var toggle = document.querySelector('.sidebar-toggle');
+        var sidebar = document.querySelector('#sidebar');
+        var checkbox = document.querySelector('#sidebar-checkbox');
+
+        document.addEventListener('click', function(e) {
+          var target = e.target;
+
+          if(!checkbox.checked ||
+             sidebar.contains(target) ||
+             (target === checkbox || target === toggle)) return;
+
+          checkbox.checked = false;
+        }, false);
+      })(document);
+    </script>
+   
+  </body>
+</html>

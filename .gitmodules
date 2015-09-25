@@ -1,0 +1,18 @@
+[submodule "ext/stb"]
+	path = ext/stb
+	url = https://github.com/nothings/stb.git
+[submodule "ext/glew"]
+	path = ext/glew
+	url = https://github.com/hrehfeld/glew-cmake.git
+[submodule "ext/glm"]
+	path = ext/glm
+	url = https://github.com/g-truc/glm.git
+[submodule "ext/glfw"]
+	path = ext/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "ext/tinyobjloader"]
+	path = ext/tinyobjloader
+	url = https://github.com/syoyo/tinyobjloader.git
+[submodule "ext/assimp"]
+	path = ext/assimp
+	url = https://github.com/assimp/assimp.git

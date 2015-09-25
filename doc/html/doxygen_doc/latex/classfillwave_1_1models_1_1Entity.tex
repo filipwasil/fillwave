@@ -1,0 +1,175 @@
+\hypertarget{classfillwave_1_1models_1_1Entity}{}\section{fillwave\+:\+:models\+:\+:Entity Class Reference}
+\label{classfillwave_1_1models_1_1Entity}\index{fillwave\+::models\+::\+Entity@{fillwave\+::models\+::\+Entity}}
+
+
+Base for all \hyperlink{classfillwave_1_1models_1_1Scene}{Scene} nodes.  
+
+
+
+
+{\ttfamily \#include $<$Entity.\+h$>$}
+
+Inheritance diagram for fillwave\+:\+:models\+:\+:Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=11.000000cm]{classfillwave_1_1models_1_1Entity}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a9503db95e919c8c0da4bf0a0d2317dde}{}{\bfseries Entity} (glm\+::mat4 model=glm\+::mat4(1.\+0), glm\+::vec3 translation=glm\+::vec3(0.\+0), glm\+::quat orientation=glm\+::quat(1.\+0, 0.\+0, 0.\+0, 0.\+0))\label{classfillwave_1_1models_1_1Entity_a9503db95e919c8c0da4bf0a0d2317dde}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a377e85bb6666e808004471721232b7e4}{}void {\bfseries attach} (p\+Entity child)\label{classfillwave_1_1models_1_1Entity_a377e85bb6666e808004471721232b7e4}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a8f3d3d1291491ae61930e7159634ccb0}{}void {\bfseries detach} (p\+Entity child)\label{classfillwave_1_1models_1_1Entity_a8f3d3d1291491ae61930e7159634ccb0}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ad63db6ab433c1bfba2ec8222a15dd956}{}void {\bfseries on\+Detached} ()\label{classfillwave_1_1models_1_1Entity_ad63db6ab433c1bfba2ec8222a15dd956}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_af4a59792cf177d095aef718881ede8aa}{}void {\bfseries on\+Attached} (\hyperlink{classfillwave_1_1models_1_1Entity}{Entity} $\ast$parent)\label{classfillwave_1_1models_1_1Entity_af4a59792cf177d095aef718881ede8aa}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ab9892968cd70d1abfb8d36660a71865a}{}virtual void {\bfseries draw} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&camera)\label{classfillwave_1_1models_1_1Entity_ab9892968cd70d1abfb8d36660a71865a}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a37b5d9b3aaa361aaf99c4649023314f7}{}virtual void {\bfseries draw\+D\+R} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&camera)\label{classfillwave_1_1models_1_1Entity_a37b5d9b3aaa361aaf99c4649023314f7}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ad49b41494b75d856d60dafcce88737ec}{}virtual void {\bfseries draw\+Depth} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&camera)\label{classfillwave_1_1models_1_1Entity_ad49b41494b75d856d60dafcce88737ec}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a583178291e394e22ba0e5f0c04229f30}{}virtual void {\bfseries draw\+Depth\+Color} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&camera, glm\+::vec3 \&position)\label{classfillwave_1_1models_1_1Entity_a583178291e394e22ba0e5f0c04229f30}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a29287c866cb76e14f64ae2b5e2aabf28}{}virtual void {\bfseries draw\+A\+O\+G} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&camera)\label{classfillwave_1_1models_1_1Entity_a29287c866cb76e14f64ae2b5e2aabf28}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ac350b688827706bd41598911d2658ddf}{}virtual void {\bfseries draw\+A\+O\+C} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&camera)\label{classfillwave_1_1models_1_1Entity_ac350b688827706bd41598911d2658ddf}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a226154ecde4890558d7153f8e71e00a3}{}virtual void {\bfseries draw\+Occlusion\+Box} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&camera)\label{classfillwave_1_1models_1_1Entity_a226154ecde4890558d7153f8e71e00a3}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_af5de8adfe4da7787823c18a80d20d6a9}{}G\+Lboolean {\bfseries is\+P\+S\+C} ()\label{classfillwave_1_1models_1_1Entity_af5de8adfe4da7787823c18a80d20d6a9}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ae54bed7959446c88541b0aa3e4956fe8}{}G\+Lboolean {\bfseries is\+P\+S\+R} ()\label{classfillwave_1_1models_1_1Entity_ae54bed7959446c88541b0aa3e4956fe8}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a1b0402696711a20db58c65cfe6f5b23f}{}void {\bfseries handle\+Hierarchy\+Event} (\hyperlink{classfillwave_1_1actions_1_1EventType}{actions\+::\+Event\+Type} $\ast$event)\label{classfillwave_1_1models_1_1Entity_a1b0402696711a20db58c65cfe6f5b23f}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ada0f6dd45517daf49c0a83b4b844b70c}{}void {\bfseries handle\+Private\+Event} (\hyperlink{classfillwave_1_1actions_1_1EventType}{actions\+::\+Event\+Type} $\ast$event)\label{classfillwave_1_1models_1_1Entity_ada0f6dd45517daf49c0a83b4b844b70c}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a0b4448ce50783fe805c1c2d53e02d8de}{}glm\+::mat4 {\bfseries get\+Transformation} ()\label{classfillwave_1_1models_1_1Entity_a0b4448ce50783fe805c1c2d53e02d8de}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ab3b721b4d7e31c4427e875be54138fc0}{}void {\bfseries set\+Transformation} (glm\+::mat4 model\+Matrix)\label{classfillwave_1_1models_1_1Entity_ab3b721b4d7e31c4427e875be54138fc0}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a63d67b1d8a5d5c232c1a40db39d263e7}{}void {\bfseries attach\+Hierarchy\+Callback} (\hyperlink{classfillwave_1_1actions_1_1ItemCallback}{actions\+::\+Item\+Callback} $\ast$callback)\label{classfillwave_1_1models_1_1Entity_a63d67b1d8a5d5c232c1a40db39d263e7}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a2f09305545cb13a242df3a2de32798d8}{}void {\bfseries attach\+Private\+Callback} (\hyperlink{classfillwave_1_1actions_1_1ItemCallback}{actions\+::\+Item\+Callback} $\ast$callback)\label{classfillwave_1_1models_1_1Entity_a2f09305545cb13a242df3a2de32798d8}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a880349eb2ec5124b57ef779a572748a7}{}void {\bfseries detach\+Hierarchy\+Callback} (\hyperlink{classfillwave_1_1actions_1_1ItemCallback}{actions\+::\+Item\+Callback} $\ast$callback)\label{classfillwave_1_1models_1_1Entity_a880349eb2ec5124b57ef779a572748a7}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a3ce284d090d050331889fd46af82152e}{}void {\bfseries detach\+Private\+Callback} (\hyperlink{classfillwave_1_1actions_1_1ItemCallback}{actions\+::\+Item\+Callback} $\ast$callback)\label{classfillwave_1_1models_1_1Entity_a3ce284d090d050331889fd46af82152e}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_aef0790065a393c9cece4a6ab3f997ce9}{}void {\bfseries update\+Matrix\+Tree} ()\label{classfillwave_1_1models_1_1Entity_aef0790065a393c9cece4a6ab3f997ce9}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ae3ecab5cfb2400faa1cb76de8e252d4d}{}void {\bfseries update\+Parent\+Matrix} (glm\+::mat4 \&parent)\label{classfillwave_1_1models_1_1Entity_ae3ecab5cfb2400faa1cb76de8e252d4d}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a19a6bc95be9e7fdb697762295b621f5a}{}void {\bfseries update\+Parent\+Rotation} (glm\+::quat \&rotation)\label{classfillwave_1_1models_1_1Entity_a19a6bc95be9e7fdb697762295b621f5a}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a4ba3e493ac6cdea186887121f934516c}{}glm\+::mat4 {\bfseries get\+Parent\+Matrix} ()\label{classfillwave_1_1models_1_1Entity_a4ba3e493ac6cdea186887121f934516c}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a93a01975a6bddd1d551d8f27e09d887d}{}glm\+::quat {\bfseries get\+Parent\+Rotation} ()\label{classfillwave_1_1models_1_1Entity_a93a01975a6bddd1d551d8f27e09d887d}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_af5aee0aab5f39f36c13964acc449ecac}{}void {\bfseries pick} (glm\+::vec3 color)\label{classfillwave_1_1models_1_1Entity_af5aee0aab5f39f36c13964acc449ecac}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a03671255f61af07591bdd4cb6245bb18}{}void {\bfseries unpick} ()\label{classfillwave_1_1models_1_1Entity_a03671255f61af07591bdd4cb6245bb18}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a4983228d7de32c49f0625ebe7deef4bb}{}G\+Lboolean {\bfseries is\+Pickable} ()\label{classfillwave_1_1models_1_1Entity_a4983228d7de32c49f0625ebe7deef4bb}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a82afce21fa642d38fb236cc2630b9925}{}glm\+::vec3 {\bfseries get\+Pickable\+Color} ()\label{classfillwave_1_1models_1_1Entity_a82afce21fa642d38fb236cc2630b9925}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ad982b344b6dda2451856c6c228540b09}{}virtual void {\bfseries on\+Picked} ()\label{classfillwave_1_1models_1_1Entity_ad982b344b6dda2451856c6c228540b09}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_acf69269a84cbd349a5ae02e969791bc4}{}virtual void {\bfseries on\+Unpicked} ()\label{classfillwave_1_1models_1_1Entity_acf69269a84cbd349a5ae02e969791bc4}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_aed04b4ea3b5336635456a1fe2ec43692}{}virtual void {\bfseries draw\+Picking} (\hyperlink{classfillwave_1_1space_1_1Camera}{space\+::\+Camera} \&camera)\label{classfillwave_1_1models_1_1Entity_aed04b4ea3b5336635456a1fe2ec43692}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a81b24880a8c14d33ef8be8fa39a6adfd}{}void {\bfseries set\+External\+Refresh} (G\+Lboolean state)\label{classfillwave_1_1models_1_1Entity_a81b24880a8c14d33ef8be8fa39a6adfd}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a96e05e30df7fc44d2da57c97659926a5}{}G\+Lboolean {\bfseries is\+External\+Refresh} ()\label{classfillwave_1_1models_1_1Entity_a96e05e30df7fc44d2da57c97659926a5}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a0f551d5bf0b35552c81f2e336d615779}{}void {\bfseries set\+External\+Refresh} ()\label{classfillwave_1_1models_1_1Entity_a0f551d5bf0b35552c81f2e336d615779}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a712b5db092813f297fe5a4d73394db02}{}virtual void {\bfseries log} ()\label{classfillwave_1_1models_1_1Entity_a712b5db092813f297fe5a4d73394db02}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ae4417f42009ce2d77bac972510f4ddc9}{}glm\+::quat {\bfseries m\+Parent\+Rotation}\label{classfillwave_1_1models_1_1Entity_ae4417f42009ce2d77bac972510f4ddc9}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a5bed161efeaa6c9ba49e8c24659a61d9}{}glm\+::mat4 {\bfseries m\+Parent\+Matrix}\label{classfillwave_1_1models_1_1Entity_a5bed161efeaa6c9ba49e8c24659a61d9}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a80a2e5b0bc1695a8075b4a0e216835f5}{}glm\+::mat4 {\bfseries m\+Transformation}\label{classfillwave_1_1models_1_1Entity_a80a2e5b0bc1695a8075b4a0e216835f5}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a0490ceec51cf87359298fcb77c836baf}{}G\+Lboolean {\bfseries m\+Parent\+Refresh}\label{classfillwave_1_1models_1_1Entity_a0490ceec51cf87359298fcb77c836baf}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_af7f12c3d43c8defc4cd737387117cc89}{}std\+::vector$<$ p\+Entity $>$ {\bfseries m\+Children}\label{classfillwave_1_1models_1_1Entity_af7f12c3d43c8defc4cd737387117cc89}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a9a0eceac5f40cc6f462ab7651cd725b4}{}G\+Lboolean {\bfseries m\+Children\+Propagate\+Event}\label{classfillwave_1_1models_1_1Entity_a9a0eceac5f40cc6f462ab7651cd725b4}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_ae4f7b1d6eef02eee01addc85be9a6411}{}std\+::vector$<$ \hyperlink{classfillwave_1_1actions_1_1ItemCallback}{actions\+::\+Item\+Callback} $\ast$ $>$ {\bfseries m\+Callbacks\+Hierarchy}\label{classfillwave_1_1models_1_1Entity_ae4f7b1d6eef02eee01addc85be9a6411}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_abd1895e1cfe2ba0349c8023e2970dc8d}{}std\+::vector$<$ \hyperlink{classfillwave_1_1actions_1_1ItemCallback}{actions\+::\+Item\+Callback} $\ast$ $>$ {\bfseries m\+Callbacks\+Private}\label{classfillwave_1_1models_1_1Entity_abd1895e1cfe2ba0349c8023e2970dc8d}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a774a4749e0f234ce0c6d064b48500530}{}G\+Lboolean {\bfseries m\+P\+S\+C}\label{classfillwave_1_1models_1_1Entity_a774a4749e0f234ce0c6d064b48500530}
+
+\item 
+\hypertarget{classfillwave_1_1models_1_1Entity_a52025db4b7358d48995069c91ccd31a0}{}G\+Lboolean {\bfseries m\+P\+S\+R}\label{classfillwave_1_1models_1_1Entity_a52025db4b7358d48995069c91ccd31a0}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base for all \hyperlink{classfillwave_1_1models_1_1Scene}{Scene} nodes. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/models/Entity.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module GLfloat-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="0" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="0" />
+<lines_of_code value="0" level="0" />
+<lines_of_code_per_member_function value="********" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="0" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="26" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>GLfloat</name>
+<client_module>
+<name>BoostColor</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/effects/BoostColor.cpp" line="38" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/effects/BoostColor.h" line="49" />
+</extent>
+<name>BuilderEmiter</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="76" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="116" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="121" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/particles/BuilderEmiter.cpp" line="141" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="48" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="64" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="66" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="76" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="84" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="92" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/BuilderEmiter.h" line="93" />
+</extent>
+<name>CameraOrthographic</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraOrthographic.h" line="58" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraOrthographic.h" line="59" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraOrthographic.h" line="60" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraOrthographic.h" line="61" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraOrthographic.h" line="62" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraOrthographic.h" line="63" />
+</extent>
+<name>CameraPerspective</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/space/CameraPerspective.cpp" line="22" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/space/CameraPerspective.cpp" line="23" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/space/CameraPerspective.cpp" line="24" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/space/CameraPerspective.cpp" line="25" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/space/CameraPerspective.h" line="41" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraPerspective.h" line="51" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraPerspective.h" line="52" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraPerspective.h" line="53" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraPerspective.h" line="54" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraPerspective.h" line="66" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraPerspective.h" line="68" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraPerspective.h" line="70" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/space/CameraPerspective.h" line="72" />
+</extent>
+<name>Cursor</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/Cursor.h" line="54" />
+</extent>
+<name>Debugger</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/extras/Debugger.cpp" line="112" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="77" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/extras/Debugger.h" line="86" />
+</extent>
+<name>EmiterPoint</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPoint.h" line="53" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPoint.h" line="54" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPoint.h" line="60" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPoint.h" line="64" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPoint.h" line="71" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPoint.h" line="72" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPoint.h" line="73" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPoint.h" line="78" />
+</extent>
+<name>EmiterPointCPU</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointCPU.h" line="64" />
+</extent>
+<name>EmiterPointGPU</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="47" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="55" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="56" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="61" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="67" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="71" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/EmiterPointGPU.h" line="79" />
+</extent>
+<name>Engine</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/Fillwave.h" line="132" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/Fillwave.h" line="133" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/Fillwave.h" line="134" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/Fillwave.h" line="136" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/Fillwave.h" line="139" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/Fillwave.h" line="140" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/Fillwave.h" line="141" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/Fillwave.h" line="332" />
+</extent>
+<name>FPSCallback</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/actions/FPSCallback.h" line="52" />
+</extent>
+<name>Fog</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/effects/Fog.h" line="44" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/effects/Fog.h" line="45" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/effects/Fog.h" line="53" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/effects/Fog.h" line="54" />
+</extent>
+<name>Impostor</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/particles/Impostor.h" line="56" />
+</extent>
+<name>MeshTerrain</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/MeshTerrain.h" line="62" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/MeshTerrain.h" line="63" />
+</extent>
+<name>Model</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Model.h" line="91" />
+</extent>
+<name>Moveable</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="59" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="64" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="69" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="79" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="84" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="89" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="104" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="114" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="119" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="124" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="138" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="159" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="47" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="48" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="49" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="51" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="52" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="53" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="57" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="59" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="60" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="61" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="65" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="66" />
+</extent>
+<name>Terrain</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/terrain/Terrain.h" line="45" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/Terrain.h" line="55" />
+</extent>
+<name>TerrainConstructor</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/terrain/TerrainConstructor.h" line="43" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/terrain/TerrainConstructor.h" line="43" />
+</extent>
+<name>Text</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Text.h" line="74" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Text.h" line="75" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Text.h" line="75" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Text.h" line="93" />
+</extent>
+<name>TimedCallback</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/actions/TimedCallback.h" line="108" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/actions/TimedCallback.h" line="110" />
+</extent>
+<name>TimedColorCallback</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/actions/TimedColorCallback.h" line="47" />
+</extent>
+<name>TimedEmiterUpdateCallback</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/actions/TimedEmiterUpdateCallback.h" line="37" />
+</extent>
+<name>TimedRotateCallback</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/actions/TimedRotateCallback.h" line="70" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/actions/TimedRotateCallback.h" line="71" />
+</extent>
+<name>TimedScaleCallback</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/actions/TimedScaleCallback.h" line="45" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/actions/TimedScaleCallback.h" line="46" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/actions/TimedScaleCallback.h" line="46" />
+</extent>
+<name>VoxelChunk</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="67" />
+</extent>
+<name>VoxelConstructor</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelConstructor.h" line="44" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelConstructor.h" line="44" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelConstructor.h" line="44" />
+</extent>
+</client_module>
+<supplier_module>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

@@ -1,0 +1,9 @@
+Assimp
+https://github.com/assimp/assimp
+
+LodePNG (PicoPNG is a subproject)
+http://www.dsource.org/projects/scrapple/wiki/LodePngLibrary
+
+GLSLlang
+https://cvs.khronos.org/svn/repos/ogl/trunk/ecosystem/public/sdk/tools/glslang/
+http://www.khronos.org/opengles/sdk/tools/Reference-Compiler/

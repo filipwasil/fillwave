@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module VoxelChunk-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="34" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="0" />
+<lines_of_code value="3" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="11.333" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="14" level="0" />
+<weighted_methods_per_class_visibility value="5" level="0" />
+<depth_of_inheritance_tree value="2" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="11" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+<description>definition</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="45" />
+<lines_of_code value="15" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>VoxelChunk(...)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="47" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>coreDraw()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="83" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>draw(Camera &amp;)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="62" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getSize()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="64" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initBuffers()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="85" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initPipeline()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="87" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initUniformsCache()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="93" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initVAO()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="91" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>initVBO()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="89" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>onDraw()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="81" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>reloadVBO()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="58" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>reloadVoxels(VoxelConstructor *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="60" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setType(GLint)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="56" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~VoxelChunk()</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="54" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>VoxelChunk</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>Camera</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="62" />
+</extent>
+<name>Entity</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="45" />
+</extent>
+<name>GLfloat</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="67" />
+</extent>
+<name>GLint</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="56" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="70" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="77" />
+</extent>
+<name>LightManager</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>has by reference</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="75" />
+</extent>
+<name>Reloadable</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="45" />
+</extent>
+<name>Voxel</name>
+<visible>false</visible>
+<concrete>false</concrete>
+<extent>
+<description>has by reference</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="71" />
+</extent>
+<name>VoxelConstructor</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="60" />
+</extent>
+<name>pProgram</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="74" />
+</extent>
+<name>pTexture</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="72" />
+</extent>
+<name>pVertexBufferBasic</name>
+<visible>false</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/terrain/VoxelChunk.h" line="73" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

@@ -1,0 +1,720 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module Moveable-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="154" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="4" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="38.500" level="2" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="29" level="0" />
+<weighted_methods_per_class_visibility value="2" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="3" level="0" />
+<coupling_between_objects value="9" level="0" />
+<IF4 value="324" level="1" />
+<IF4_per_member_function value="********" level="2" />
+<IF4_visible value="324" level="2" />
+<IF4_visible_per_member_function value="********" level="2" />
+<IF4_concrete value="324" level="2" />
+<IF4_concrete_per_member_function value="********" level="2" />
+</module_summary>
+<module_detail>
+<description>definition</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="40" />
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>Moveable(...)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="42" />
+</extent>
+<lines_of_code value="2" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>Moveable(vec3,quat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="38" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getRotation()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="129" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="70" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getScale()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="100" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="62" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getTranslation()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="50" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="55" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>isRefresh()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="179" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="74" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveBy(vec3)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="74" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="50" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveByX(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="79" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="51" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveByY(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="84" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="52" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveByZ(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="89" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="53" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveInDirection(vec3)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="94" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="54" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveTo(vec3)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="54" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="46" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveToX(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="59" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="47" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveToY(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="64" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="48" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>moveToZ(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="69" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="49" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>resetRefresh()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="183" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="75" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>rotateBy(const vec3 &amp;,GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="159" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="66" />
+</extent>
+<lines_of_code value="11" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>rotateByX(float)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="144" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="67" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>rotateByY(float)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="149" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="68" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>rotateByZ(float)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="154" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="69" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>rotateTo(const vec3 &amp;,GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="138" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="65" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>rotateTo(quat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="133" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="64" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>scaleTo(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="104" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="57" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>scaleTo(vec3)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="109" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="58" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>scaleToX(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="114" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="59" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>scaleToY(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="119" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="60" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>scaleToZ(GLfloat)</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="124" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="61" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>updateMatrixCache()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="173" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="72" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~Moveable()</name>
+<extent>
+<description>definition</description>
+<source_reference file="../src/models/Moveable.cpp" line="46" />
+</extent>
+<extent>
+<description>declaration</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="44" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>Moveable</name>
+<client_module>
+<name>Camera</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/space/Camera.h" line="40" />
+</extent>
+<name>Entity</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/models/Entity.h" line="49" />
+</extent>
+<name>Light</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>inheritance</description>
+<source_reference file="../inc/fillwave/space/Light.h" line="64" />
+</extent>
+</client_module>
+<supplier_module>
+<name>GLboolean</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="84" />
+</extent>
+<name>GLfloat</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="59" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="64" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="69" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="79" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="84" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="89" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="104" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="114" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="119" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="124" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="138" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="159" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="47" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="48" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="49" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="51" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="52" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="53" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="57" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="59" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="60" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="61" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="65" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="66" />
+</extent>
+<name>fvec3</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="78" />
+</extent>
+<name>mat4</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="81" />
+</extent>
+<name>quat</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="38" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="133" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="64" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="79" />
+</extent>
+<name>vec3</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="38" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="54" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="74" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="94" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../src/models/Moveable.cpp" line="109" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../src/models/Moveable.cpp" line="138" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../src/models/Moveable.cpp" line="159" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="46" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="50" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="54" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="58" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="65" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="66" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="../inc/fillwave/models/Moveable.h" line="80" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>
