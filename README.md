@@ -5,7 +5,7 @@
 
 [Fillwave] is a modern, native and totally free rendering engine writen in c++11 .
 
-Can be used in any 3D games, apps and visualization tools or as a regular part of Your game engine.
+Can be used in any 3D games, apps and visualization tools or as a regular part of your game engine.
 
 - Multiplatform (Linux, Windows, Android)
 - Native Android apps (JNI, or C++).
