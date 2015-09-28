@@ -33,6 +33,10 @@
 
 #include <memory>
 
+#if __APPLE__
+#include <stdlib.h>
+#endif
+
 namespace fillwave {
 namespace core {
 

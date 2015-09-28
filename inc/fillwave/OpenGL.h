@@ -30,7 +30,7 @@
 #include <fillwave/Config.h>
 
 #if defined(__APPLE__)
-   #include <GL/Glew.h>
+   #include <GL/glew.h>
 #elif defined(_WIN32) || defined(_WIN64)
     //#define GLEW_STATIC
     //#define GLEW_BUILD

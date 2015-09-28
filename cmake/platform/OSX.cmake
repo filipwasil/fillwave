@@ -6,18 +6,25 @@ if (NOT DEFINED CMAKE_MACOSX_RPATH)
   set(CMAKE_MACOSX_RPATH 0)
 endif()
 
+ADD_DEFINITIONS("-fopenmp")
+FIND_PACKAGE(OpenMP)
+IF(OPENMP_FOUND)
+set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+ENDIF(OPENMP_FOUND)
+
 set(FILLWAVE_PATH_EXT_INCLUDE "inc")
 set(FILLWAVE_PATH_INCLUDE "inc")
 set(FILLWAVE_EXT_GLM_INCLUDES ext/glm)
 set(FILLWAVE_EXT_INCLUDES ext)
-set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator)
-set(FILLWAVE_EXT_STB_INCLUDES ext/stb)
+set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES "ext/fontgenerator")
+set(FILLWAVE_EXT_STB_INCLUDES "${CMAKE_SOURCE_DIR}/ext/stb")
 set(FILLWAVE_EXT_ASSIMP_INCLUDES ext/assimp/include)
-SET(FILLWAVE_EXT_FREETYPE2_INCLUDES "ext/freetype2/include" )
-SET(FILLWAVE_EXT_GLEW_INCLUDES "ext/glew/include" )
+#set(FILLWAVE_EXT_FREETYPE2_INCLUDES "ext/freetype2/include" )
+set(FILLWAVE_EXT_GLEW_INCLUDES "ext/glew/include" )
 
 add_subdirectory(ext/assimp)
-add_subdirectory(ext/glew)
+#add_subdirectory(ext/glew)
 add_subdirectory(ext/freetype2)
 add_subdirectory(ext/glfw)
 add_subdirectory(ext)
@@ -43,63 +50,9 @@ set(FILLWAVE_EXT_STB_INCLUDES ext/stb)
 set(FILLWAVE_PATH_INCLUDE "inc")
 set(FILLWAVE_PATH_SOURCE "src")
 
-set(FILLWAVE_PATH_SOURCE_ENGINE_CALLBACKS "actions/engine_callbacks")
-set(FILLWAVE_PATH_SOURCE_ITEM_CALLBACKS "actions/item_callbacks")
-set(FILLWAVE_PATH_SOURCE_EVENTS "actions/events")
-set(FILLWAVE_PATH_SOURCE_CORE "core")
-set(FILLWAVE_PATH_SOURCE_EXTRAS "extras")
-set(FILLWAVE_PATH_SOURCE_LOADERS "loaders")
-set(FILLWAVE_PATH_SOURCE_MANAGEMENT "management")
-set(FILLWAVE_PATH_SOURCE_MODELS "models")
-set(FILLWAVE_PATH_SOURCE_PARTICLES "particles")
-set(FILLWAVE_PATH_SOURCE_SPACE "space")
-set(FILLWAVE_PATH_SOURCE_OPERATIONS "operations")
-set(FILLWAVE_PATH_SOURCE_ANIMATION "animation")
-set(FILLWAVE_PATH_SOURCE_EFFECTS "effects")
-set(FILLWAVE_PATH_SOURCE_COMMON "common")
-set(FILLWAVE_PATH_SOURCE_TERRAIN "terrain")
-
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_ENGINE_CALLBACKS} GL_ENGINE_CALLBACKS_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_ITEM_CALLBACKS} GL_ITEM_CALLBACKS_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_EVENTS} GL_EVENTS_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_CORE} GL_CORE_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_EXTRAS} GL_EXTRAS_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_LOADERS} GL_LOADERS_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_MANAGEMENT} GL_MANAGEMENT_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_MODELS} GL_MODELS_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_PARTICLES} GL_PARTICLES_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_SPACE} GL_SPACE_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_OPERATIONS} GL_OPERATIONS_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_ANIMATION} GL_ANIMATION_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_EFFECTS} GL_EFFECTS_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_COMMON} GL_COMMON_SOURCES)
-aux_source_directory(${FILLWAVE_PATH_SOURCE}/${FILLWAVE_PATH_SOURCE_TERRAIN} GL_TERRAIN_SOURCES)
-
-set(FILLWAVE_PATH_SOURCE_EXT_FONT_METADATA_DENERATOR "ext/fontGenerator/src/generator_main.cpp.c")
-
-set (FILLWAVE_SOURCES 
-     ${FILLWAVE_PATH_SOURCE}/Fillwave.cpp
-     ${GL_ENGINE_CALLBACKS_SOURCES}
-     ${GL_ITEM_CALLBACKS_SOURCES}
-     ${GL_EVENTS_SOURCES}
-     ${GL_CORE_SOURCES}
-     ${GL_EXTRAS_SOURCES}
-     ${GL_LOADERS_SOURCES}
-     ${GL_MANAGEMENT_SOURCES}
-     ${GL_MODELS_SOURCES}
-     ${GL_SPACE_SOURCES}
-     ${GL_OPERATIONS_SOURCES}
-     ${GL_PICOPNG_SOURCES}
-     ${GL_ANIMATION_SOURCES}
-     ${GL_EFFECTS_SOURCES}
-     ${GL_FONTGENERATOR_SOURCES}
-     ${GL_PARTICLES_SOURCES}
-     ${GL_COMMON_SOURCES}
-     ${GL_TERRAIN_SOURCES}
-     )
-
 include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_INCLUDES}
+                    ${FILLWAVE_EXT_ASSIMP_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_EXT_STB_INCLUDES}
                     /usr/include/freetype2) #uglt freetype2 needs /usr/local/include/freetype2/ft2build.h
@@ -107,10 +60,9 @@ include_directories(${FILLWAVE_PATH_INCLUDE}
 # -----------------------------------------------
 # shared library to build
 # -----------------------------------------------
-if(BUILD_LIB)
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
-   add_library(fillwave SHARED ${FILLWAVE_SOURCES})
-endif(BUILD_LIB)
+IF(BUILD_LIB)
+ADD_LIBRARY(fillwave SHARED ${FILLWAVE_SOURCES})
+ENDIF(BUILD_LIB)
 
 # -----------------------------------------------
 # installation info
@@ -131,9 +83,16 @@ if (BUILD_LIB)
    endif(BUILD_RPM)
 endif (BUILD_LIB)
 
+set(CMAKE_PREFIX_PATH "/usr/local")
+set(CMAKE_LIBRARY_PATH "/usr/local/lib/")
+
 # -----------------------------------------------
 # Link libraries
 # -----------------------------------------------
+find_package(GLEW REQUIRED)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${GLEW_INCLUDE_DIRS}")
+link_libraries(${GLEW_LIBRARIES})
+
 if(BUILD_LIB)
    add_dependencies(fillwave assimp)
    target_link_libraries(fillwave assimp)
@@ -141,14 +100,15 @@ if(BUILD_LIB)
    target_link_libraries(fillwave fontgenerator)
    add_dependencies(fillwave freetype)
    target_link_libraries(fillwave freetype)
-   if(BUILD_PACK)
-      add_dependencies(fillwave GLEW)
-      target_link_libraries(fillwave GLEW)
-   else(BUILD_PACK)
-      add_dependencies(fillwave glew)
-      target_link_libraries(fillwave glew)
-   endif(BUILD_PACK)
+
+find_library(GLEW_LIBRARY NAMES GLEW glew32 glew glew32s PATH_SUFFIXES lib64)
+
+#add_dependencies(fillwave ${GLEW_LIBRARY})
+   target_link_libraries(fillwave ${GLEW_LIBRARY})
+
 endif(BUILD_LIB)
+
+
 
 # cpack stuff
 SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Filip Wasil <fillwave@gmail.com>")

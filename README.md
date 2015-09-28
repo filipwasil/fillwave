@@ -7,7 +7,7 @@
 
 Can be used in any 3D games, apps and visualization tools or as a regular part of your game engine.
 
-- Multiplatform (Linux, Windows, Android)
+- Multiplatform (Linux, Windows, Android, OSX)
 - Native Android apps (JNI, or C++).
 - Using the greatest open source libraries (Ex. glm for math and assimp for assets)
 - OpenGL ES 3.0 and OpenGL 3.3+ support with programmable pipeline
@@ -28,12 +28,16 @@ mkdir ../fillwave_build && cd ../fillwave_build
 ## Debian/Ubuntu
 
 ```
+sudo apt-get install libglm-dev libglew1.10 libglew-dev libassimp3 libassimp-dev libfreetype6 xorg-dev 
+
 cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=OFF -DBUILD_DEB=ON -DBUILD_LIB=OFF -DBUILD_DEV=ON -DVERSION_MAJOR=2 -DVERSION_MINOR=0 -DVERSION_PATCH=0 -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 ```
 
 ## Fedora/RedHat
 
 ```
+sudo yum install glm-devel.x86_64 glm.x86_64 assimp.x86_64 assimp-devel.x86_64 glew.x86_64 glew-devel.x86_64 freetype-devel.x86_64 freetype.x86_64
+
 cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=ON -DBUILD_DEB=OFF -DBUILD_LIB=ON -DBUILD_DEV=OFF -DVERSION_MAJOR=2 -DVERSION_MINOR=0 -DVERSION_PATCH=0 -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 
 ```
@@ -61,10 +65,24 @@ Wiki pages are normal files, with the .md extension. You can edit them locally, 
 ## QT framework
 to be continued ...
 
-## iOS
-to be continued ...
-
 ## OSX
+```
+# if homebrew is not there
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+# if other stuff is not there
+brew install cmake gcc g++ glew glm freetype
+
+# if omp.h is missing build gcc compiler wihout multilib support
+brew reinstall gcc --without-multilib
+
+# we are fine now. go.
+
+cmake ../fillwave -G"Xcode" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_LIB=ON -DBUILD_DEV=ON -DVERSION_MAJOR=1 -DVERSION_MINOR=0 -DVERSION_PATCH=0 -D_ECLIPSE_VERSION="4.4" -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=OFF -DASSIMP_BUILD_TESTS=OFF -DASSIMP_BUILD_ASSIMP_TOOLS=OFF && cpack
+
+```
+
+## iOS
 to be continued ...
 
 ## WebGL
