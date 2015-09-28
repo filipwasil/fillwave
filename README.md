@@ -9,7 +9,7 @@ Can be used in any 3D games, apps and visualization tools or as a regular part o
 
 - Multiplatform (Linux, Windows, Android)
 - Native Android apps (JNI, or C++).
-- Using greates open sourcen libraries (Ex. glm for math and assimp for assets)
+- Using the greatest open source libraries (Ex. glm for math and assimp for assets)
 - OpenGL ES 3.0 and OpenGL 3.3+ support with programmable pipeline
 - Engine can be fully open source and free under BSD license
 
