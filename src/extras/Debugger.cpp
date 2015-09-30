@@ -217,7 +217,7 @@ void Debugger::renderGeometryBuffer(GLuint width,
    	                  GLuint height,
                       GLuint attachments,
                       core::FramebufferGeometry* buffer) {
-   GLuint mDebugAttachmentScreens[4][4] = {
+   GLuint debugAttachmentScreens[4][4] = {
       {0,0,width/2,height/2},          // position
       {0,height/2,width/2,height},     // color
       {width/2,height/2,width,height}, // normal
@@ -226,10 +226,10 @@ void Debugger::renderGeometryBuffer(GLuint width,
 
    /* Move to right up corner*/
    for (int i=0; i<4; i++) {
-      mDebugAttachmentScreens[i][0] = (mDebugAttachmentScreens[i][0] + width)/2;
-      mDebugAttachmentScreens[i][1] = (mDebugAttachmentScreens[i][1] + height)/2;
-      mDebugAttachmentScreens[i][2] = (mDebugAttachmentScreens[i][2] + width)/2;
-      mDebugAttachmentScreens[i][3] = (mDebugAttachmentScreens[i][3] + height)/2;
+      debugAttachmentScreens[i][0] = (debugAttachmentScreens[i][0] + width)/2;
+      debugAttachmentScreens[i][1] = (debugAttachmentScreens[i][1] + height)/2;
+      debugAttachmentScreens[i][2] = (debugAttachmentScreens[i][2] + width)/2;
+      debugAttachmentScreens[i][3] = (debugAttachmentScreens[i][3] + height)/2;
    }
 
    core::Framebuffer::bindScreenFramebufferForWriting();
@@ -240,10 +240,10 @@ void Debugger::renderGeometryBuffer(GLuint width,
                    0,
                    width,
                    height,
-                   mDebugAttachmentScreens[i][0],
-                   mDebugAttachmentScreens[i][1],
-                   mDebugAttachmentScreens[i][2],
-                   mDebugAttachmentScreens[i][3],
+                   debugAttachmentScreens[i][0],
+                   debugAttachmentScreens[i][1],
+                   debugAttachmentScreens[i][2],
+                   debugAttachmentScreens[i][3],
                    GL_COLOR_BUFFER_BIT,
                    GL_LINEAR); /* ... to finally copy it into main framebuffer */
    }
