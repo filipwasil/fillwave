@@ -1683,6 +1683,7 @@ pShader Engine::storeShaderTesselationEvaluation(const std::string& shaderPath, 
 }
 
 inline void Engine::initExtensions( void ) {
+#ifdef GLEW_OK
    GLenum GlewInitResult;
    glewExperimental = GL_TRUE;
    GlewInitResult = glewInit();
@@ -1693,6 +1694,7 @@ inline void Engine::initExtensions( void ) {
    } else {
       FLOG_DEBUG("OpenGL Version: %s", glGetString(GL_VERSION));
    }
+#endif
 }
 
 inline void Engine::initGeometryShading() {

@@ -131,8 +131,6 @@ std::string Shader::getTypeString() {
          return "GL_TESS_CONTROL_SHADER";
       case GL_TESS_EVALUATION_SHADER:
          return "GL_TESS_EVALUATION_SHADER";
-      case GL_COMPUTE_SHADER:
-         return "GL_COMPUTE_SHADER";
 #endif
       default:
          FLOG_FATAL("Shader type not recognized: %d", mType);

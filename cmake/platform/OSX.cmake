@@ -13,6 +13,8 @@ set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
 ENDIF(OPENMP_FOUND)
 
+SET(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
+
 set(FILLWAVE_PATH_EXT_INCLUDE "inc")
 set(FILLWAVE_PATH_INCLUDE "inc")
 set(FILLWAVE_EXT_GLM_INCLUDES ext/glm)
@@ -24,7 +26,6 @@ set(FILLWAVE_EXT_ASSIMP_INCLUDES ext/assimp/include)
 set(FILLWAVE_EXT_GLEW_INCLUDES "ext/glew/include" )
 
 add_subdirectory(ext/assimp)
-#add_subdirectory(ext/glew)
 add_subdirectory(ext/freetype2)
 add_subdirectory(ext/glfw)
 add_subdirectory(ext)
@@ -94,6 +95,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I${GLEW_INCLUDE_DIRS}")
 link_libraries(${GLEW_LIBRARIES})
 
 if(BUILD_LIB)
+
    add_dependencies(fillwave assimp)
    target_link_libraries(fillwave assimp)
    add_dependencies(fillwave fontgenerator)
@@ -101,10 +103,9 @@ if(BUILD_LIB)
    add_dependencies(fillwave freetype)
    target_link_libraries(fillwave freetype)
 
-find_library(GLEW_LIBRARY NAMES GLEW glew32 glew glew32s PATH_SUFFIXES lib64)
-
-#add_dependencies(fillwave ${GLEW_LIBRARY})
-   target_link_libraries(fillwave ${GLEW_LIBRARY})
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIR})
+target_link_libraries(fillwave ${OPENGL_LIBRARIES})
 
 endif(BUILD_LIB)
 
