@@ -41,6 +41,13 @@ if(ANDROID)
    include_directories("${CMAKE_SOURCE_DIR}/ext/glfw/include")
 endif(ANDROID)
 
+if(APPLE)
+   include_directories("${CMAKE_SOURCE_DIR}/ext/glm")
+   include_directories("${CMAKE_SOURCE_DIR}/ext/assimp/include")
+   include_directories("${CMAKE_SOURCE_DIR}/ext/fontgenerator")
+   include_directories("${CMAKE_SOURCE_DIR}/ext/glfw/include")
+endif(APPLE)
+
 # -----------------------------------------------
 # WINDOWS
 # -----------------------------------------------
@@ -65,3 +72,6 @@ if(UNIX AND NOT ANDROID)
    target_link_libraries(${PROGRAM}  pthread glfw fillwave)
    COPY_RESOURCES(${PROGRAM})
 endif(UNIX AND NOT ANDROID)
+
+add_dependencies(${PROGRAM} pthread glfw fillwave)
+target_link_libraries(${PROGRAM}  pthread glfw fillwave)
