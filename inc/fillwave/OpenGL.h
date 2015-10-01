@@ -30,12 +30,13 @@
 #include <fillwave/Config.h>
 
 #if defined(__APPLE__)
-   #include <GL/Glew.h>
+   #include <OpenGL/gl3.h>
 #elif defined(_WIN32) || defined(_WIN64)
     //#define GLEW_STATIC
     //#define GLEW_BUILD
     #include <GL/glew.h>
     //#include <GL/Regal.h>
+    //#include <OpenGL/gl3.h>.
 #else
    #if (__ANDROID__)
       #define GL_GLEXT_PROTOTYPES

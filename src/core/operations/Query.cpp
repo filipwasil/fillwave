@@ -115,7 +115,6 @@ void Query<target>::log() {
 }
 
 template class Query<GL_ANY_SAMPLES_PASSED>;
-template class Query<GL_ANY_SAMPLES_PASSED_CONSERVATIVE>;
 template class Query<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN>;
 #ifdef __ANDROID__
 #else

@@ -61,7 +61,7 @@ EmiterPoint::EmiterPoint(Engine* engine,
 
    #ifndef __ANDROID__
    glEnable(GL_PROGRAM_POINT_SIZE);
-   glEnable(GL_POINT_SPRITE);
+   //glEnable(GL_POINT_SPRITE); always on since OpenGL 3.2
    #endif
 }
 

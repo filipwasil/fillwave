@@ -13,3 +13,6 @@
 [submodule "ext/tinyobjloader"]
 	path = ext/tinyobjloader
 	url = https://github.com/syoyo/tinyobjloader.git
+[submodule "ext/assimp"]
+	path = ext/assimp
+	url = https://github.com/assimp/assimp.git

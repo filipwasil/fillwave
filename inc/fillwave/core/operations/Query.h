@@ -64,7 +64,7 @@ public:
 };
 
 typedef Query<GL_ANY_SAMPLES_PASSED> QueryIfAnySamplesPassed;
-typedef Query<GL_ANY_SAMPLES_PASSED_CONSERVATIVE> QueryIfAnySamplesPassedQuick;
+
 typedef Query<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN> QueryHowManyTransformFeedbackPrimitivesWritten;
 
 #ifdef __ANDROID__
