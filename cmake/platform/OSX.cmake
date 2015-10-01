@@ -27,10 +27,13 @@ set(FILLWAVE_EXT_GLEW_INCLUDES "ext/glew/include" )
 
 add_subdirectory(ext/assimp)
 add_subdirectory(ext/freetype2)
+
+SET(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS} "-std=c++11 -stdlib=libc++")
+
 add_subdirectory(ext/glfw)
 add_subdirectory(ext)
 if (BUILD_DEV)
-add_subdirectory(test)
+#add_subdirectory(test)
 endif(BUILD_DEV)
 
 if(BUILD_DEV)
