@@ -27,7 +27,11 @@
  *
  */
 
-//#include <omp.h>
+#ifdef __APPLE__
+#else
+#include <omp.h>
+#endif
+
 #include <chrono>
 #include <thread>
 
