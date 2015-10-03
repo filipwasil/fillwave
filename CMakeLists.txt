@@ -21,7 +21,11 @@ option(NDEBUG "Build with debug logs" OFF)
 IF(${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 ELSEIF(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -g -rdynamic")
+    IF(WIN32)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+    ELSE(WIN32)
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    ENDIF(WIN32)
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra -Wundef -Wpedantic")
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wconversion -Wctor-dtor-privacy -Wdisabled-optimization  -Wpedantic -Wcast-align -Wcast-qual")
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdouble-promotion -Wfloat-equal -Wformat=2 -Winit-self")
@@ -32,10 +36,6 @@ ELSEIF(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
 #    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wvector-operation-performance -Wzero-as-null-pointer-constant")
 # Build options
 ENDIF()
-
-IF(NDEBUG)
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -rdynamic")
-ENDIF(NDEBUG)
 
 # -----------------------------------------------
 # Directories
