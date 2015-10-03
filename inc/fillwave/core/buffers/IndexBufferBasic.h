@@ -46,7 +46,6 @@ public:
    IndexBufferBasic(const fMesh* shape,
                     GLuint dataStoreModification = GL_STATIC_DRAW);
 
-   // this constructor causes segfault
    template <class T>
    IndexBufferBasic(models::Shape<T>& shape,
                     GLuint dataStoreModification = GL_STATIC_DRAW)

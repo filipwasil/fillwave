@@ -45,11 +45,6 @@
 #include <math.h>
 #include <fillwave/common/Easing.h>
 
-#if defined(_WIN32) || defined(_WIN64)
-#define M_PI_2 3.14
-#define M_PI 3.14
-#endif
-
 // Modeled after the line y = x
 AHFloat LinearInterpolation(AHFloat p)
 {

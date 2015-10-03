@@ -6,7 +6,7 @@ cmake_minimum_required(VERSION 2.8.8)
 
 #PROJECT(testGameExample C CXX)
 
-set(PROJECT_VERSION 1.9.9)
+set(PROJECT_VERSION 1.0.0)
 
 aux_source_directory (CallbacksGLFW/ SOURCE_CALLBACKS_GLFW)
 aux_source_directory (TerrainConstructors/ SOURCE_CONSTRUCTORS)
@@ -41,6 +41,10 @@ if(ANDROID)
    include_directories("${CMAKE_SOURCE_DIR}/ext/glfw/include")
 endif(ANDROID)
 
+# -----------------------------------------------
+# APPLE
+# -----------------------------------------------
+
 if(APPLE)
    include_directories("${CMAKE_SOURCE_DIR}/ext/glm")
    include_directories("${CMAKE_SOURCE_DIR}/ext/assimp/include")
@@ -58,7 +62,7 @@ if(WIN32)
    include_directories("${CMAKE_SOURCE_DIR}/ext/assimp/include")
    include_directories("${CMAKE_SOURCE_DIR}/ext/fontgenerator")
    include_directories("${CMAKE_SOURCE_DIR}/ext/glfw/include")
-   add_dependencies(${PROGRAM} glfw fillwave)
+   #add_dependencies(${PROGRAM} glfw fillwave)
    target_link_libraries(${PROGRAM}  glfw fillwave)
    INSTALL(TARGETS ${PROGRAM} DESTINATION bin COMPONENT fillwave)
 endif(WIN32)

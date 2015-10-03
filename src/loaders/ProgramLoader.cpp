@@ -1418,7 +1418,7 @@ pProgram ProgramLoader::getAmbientOcclusionColor(Engine* engine) {
 
    glm::vec3 vectors[FILLWAVE_RANDOM_VECTOR_SIZE];
 
-   for (uint i = 0 ; i < FILLWAVE_RANDOM_VECTOR_SIZE ; i++ ) {
+   for (GLuint i = 0 ; i < FILLWAVE_RANDOM_VECTOR_SIZE ; i++ ) {
        float scale = (float)i / (float)(FILLWAVE_RANDOM_VECTOR_SIZE);
        glm::vec3 v;
        v.x = 2.0f * (float)rand()/RAND_MAX - 1.0f;

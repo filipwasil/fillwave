@@ -33,7 +33,7 @@
 
 #include <memory>
 
-#if __APPLE__
+#if __APPLE__ or _WIN32
 #include <stdlib.h>
 #endif
 

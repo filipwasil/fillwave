@@ -1,5 +1,10 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 
+# -----------------------------------------------
+# Workarounds
+# -----------------------------------------------
+
+ADD_DEFINITIONS(-DASSIMP_BUILD_NO_IFC_IMPORTER )
 
 # -----------------------------------------------
 # Options
