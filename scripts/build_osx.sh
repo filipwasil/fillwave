@@ -7,11 +7,11 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 brew uninstall libfillwave libfillwave-dev
 
 # Prepare build directories
-mkdir ../../fillwave_build
-rm -rf ../../fillwave_build/*
+mkdir ../../fillwave_osx_build
+rm -rf ../../fillwave_osx_build/*
 
 # Enter build directory
-cd ../../fillwave_build
+cd ../../fillwave_osx_build
 
 # Install other stuff
 brew install cmake gcc g++ glm freetype
