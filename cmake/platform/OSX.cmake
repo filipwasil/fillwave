@@ -8,9 +8,6 @@ if (NOT DEFINED CMAKE_MACOSX_RPATH)
   set(CMAKE_MACOSX_RPATH 0)
 endif()
 
-set(CMAKE_PREFIX_PATH "/usr/local")
-set(CMAKE_LIBRARY_PATH "/usr/local/lib/")
-
 SET(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
 
 set(FILLWAVE_PATH_EXT_INCLUDE "inc")
@@ -20,7 +17,6 @@ set(FILLWAVE_EXT_INCLUDES ext)
 set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES "ext/fontgenerator")
 set(FILLWAVE_EXT_STB_INCLUDES "${CMAKE_SOURCE_DIR}/ext/stb")
 set(FILLWAVE_EXT_ASSIMP_INCLUDES ext/assimp/include)
-set(FILLWAVE_EXT_GLEW_INCLUDES "ext/glew/include" )
 
 add_subdirectory(ext/assimp)
 add_subdirectory(ext/freetype2)
@@ -28,7 +24,7 @@ add_subdirectory(ext/freetype2)
 add_subdirectory(ext/glfw)
 add_subdirectory(ext)
 if (BUILD_DEV)
-add_subdirectory(test)
+   add_subdirectory(test)
 endif(BUILD_DEV)
 
 if(BUILD_DEV)
@@ -53,7 +49,8 @@ include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_ASSIMP_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_EXT_STB_INCLUDES}
-                    /usr/include/freetype2)
+                    /usr/include/freetype2
+                    /usr/local/include)
 
 # -----------------------------------------------
 # Targets
