@@ -8,6 +8,9 @@ if (NOT DEFINED CMAKE_MACOSX_RPATH)
   set(CMAKE_MACOSX_RPATH 0)
 endif()
 
+set(CMAKE_PREFIX_PATH "/usr/local")
+set(CMAKE_LIBRARY_PATH "/usr/local/lib/")
+
 SET(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
 
 set(FILLWAVE_PATH_EXT_INCLUDE "inc")
@@ -30,12 +33,12 @@ endif(BUILD_DEV)
 
 if(BUILD_DEV)
    message("Building development package")
-   PROJECT(libfillwave-dev C CXX)
+   project(libfillwave-dev C CXX)
 endif(BUILD_DEV)
 
 if(BUILD_LIB)
    message("Building binary package")
-   PROJECT(libfillwave C CXX)
+   project(libfillwave C CXX)
 endif(BUILD_LIB)
 
 set(FILLWAVE_EXT_INCLUDES ext)
