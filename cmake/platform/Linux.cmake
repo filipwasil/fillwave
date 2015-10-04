@@ -1,6 +1,10 @@
+CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
+
 # -----------------------------------------------
+# Found by cmake macro
+# -----------------------------------------------
+
 # OpenMP
-# -----------------------------------------------
 
 ADD_DEFINITIONS("-fopenmp")
 FIND_PACKAGE(OpenMP)
@@ -23,7 +27,6 @@ IF(BUILD_LIB)
    PROJECT(libfillwave C CXX)
 ENDIF(BUILD_LIB)
 
-SET(PROJECT_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 SET(FILLWAVE_EXT_INCLUDES ext)
 SET(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator)
 SET(FILLWAVE_EXT_STB_INCLUDES ext/stb)
@@ -48,7 +51,7 @@ INCLUDE_DIRECTORIES(${FILLWAVE_PATH_INCLUDE}
                     /usr/include/freetype2) #uglt freetype2 needs /usr/local/include/freetype2/ft2build.h
 
 # -----------------------------------------------
-# Target
+# Targets
 # -----------------------------------------------
 
 IF(BUILD_LIB)
@@ -88,6 +91,19 @@ ADD_SUBDIRECTORY(ext)
 IF(BUILD_DEV)
    ADD_SUBDIRECTORY(test)
 ENDIF(BUILD_DEV)
+
+# -----------------------------------------------
+# Compiler options
+# -----------------------------------------------
+
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra -Wundef -Wpedantic")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wconversion -Wctor-dtor-privacy -Wdisabled-optimization  -Wpedantic -Wcast-align -Wcast-qual")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdouble-promotion -Wfloat-equal -Wformat=2 -Winit-self")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Winvalid-pch -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wredundant-decls")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wstrict-overflow=5 -Wtrampolines  -Wunsafe-loop-optimizations")
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wvector-operation-performance -Wzero-as-null-pointer-constant")
 
 # -----------------------------------------------
 # Linker

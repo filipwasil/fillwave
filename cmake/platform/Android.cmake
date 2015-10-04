@@ -5,11 +5,12 @@ cmake_minimum_required(VERSION 2.8.8)
 # -----------------------------------------------
 
 PROJECT(libfillwave C CXX)
-set(PROJECT_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 # -----------------------------------------------
-# Compiler
+# Found by cmake macro
 # -----------------------------------------------
+
+# OpenMP
 
 ADD_DEFINITIONS("-fopenmp")
 FIND_PACKAGE(OpenMP)
@@ -74,15 +75,9 @@ INCLUDE_DIRECTORIES(${GLES30_PROCESS_INCLUDES}
 # Linker
 # -----------------------------------------------
 
-IF(BUILD_LIB)
-   add_library(fillwave SHARED ${FILLWAVE_SOURCES})
-   add_library(fillwaveStatic STATIC ${FILLWAVE_SOURCES})
-   set_target_properties(fillwaveStatic PROPERTIES OUTPUT_NAME fillwave)
-ENDIF(BUILD_LIB)
-
-# -----------------------------------------------
-# Linker
-# -----------------------------------------------
+add_library(fillwave SHARED ${FILLWAVE_SOURCES})
+add_library(fillwaveStatic STATIC ${FILLWAVE_SOURCES})
+set_target_properties(fillwaveStatic PROPERTIES OUTPUT_NAME fillwave)
 
 add_subdirectory(test_android)
 
@@ -105,11 +100,10 @@ SET(CPACK_PACKAGE_VERSION_PATCH           "${VERSION_PATCH}")
 
 SET(CPACK_GENERATOR "TGZ")
 
-      SET(CPACK_PACKAGE_NAME "libfillwave")
-      set(CPACK_PACKAGE_DESCRIPTION "Fillwave graphics engine library package")
-      set(CPACK_PACKAGE_HOMEPAGE "filipwasil.bitbucket.org")
-      set(CPACK_DEBIAN_PACKAGE_DEBUG ON)
-      set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fillwave graphics engine - easy, fast, reliable:
+SET(CPACK_PACKAGE_NAME "libfillwave")
+set(CPACK_PACKAGE_DESCRIPTION "Fillwave graphics engine library package")
+set(CPACK_PACKAGE_HOMEPAGE "filipwasil.bitbucket.org")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fillwave graphics engine - easy, fast, reliable:
  Fillwave graphics engine provides easy to use C++11 compliant API for:
   - graphics oriented applications
   - games
@@ -119,16 +113,16 @@ SET(CPACK_GENERATOR "TGZ")
  .
  filipwasil.bitbucket.org")
 
-set(CPACK_PACKAGE_DESCRIPTION "Fillwave is a free OpenGL 3.3+ graphics engine for Linux and OSX.")
+set(CPACK_PACKAGE_DESCRIPTION "Fillwave is a free OpenGL 3.3+ graphics engine for Linux, Windows, Android and OSX.")
 
-INSTALL(DIRECTORY ext/glm DESTINATION include/glm COMPONENT fillwave-dev)
-INSTALL(DIRECTORY inc/fillwave DESTINATION include COMPONENT fillwave-dev)
-INSTALL(DIRECTORY ext/glm/glm DESTINATION include/glm COMPONENT fillwave-dev)
-INSTALL(FILES ${FILLWAVE_EXT_STB_INCLUDES}/stb_image.h DESTINATION include)
-INSTALL(FILES ${FILLWAVE_EXT_STB_INCLUDES}/stb_image_write.h DESTINATION include)
-INSTALL(FILES ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}/fontGenerator.h DESTINATION include)
+install(DIRECTORY ext/glm DESTINATION include/glm COMPONENT fillwave-dev)
+install(DIRECTORY inc/fillwave DESTINATION include COMPONENT fillwave-dev)
+install(DIRECTORY ext/glm/glm DESTINATION include/glm COMPONENT fillwave-dev)
+install(FILES ${FILLWAVE_EXT_STB_INCLUDES}/stb_image.h DESTINATION include)
+install(FILES ${FILLWAVE_EXT_STB_INCLUDES}/stb_image_write.h DESTINATION include)
+install(FILES ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}/fontGenerator.h DESTINATION include)
 
-INSTALL(TARGETS fillwave DESTINATION lib COMPONENT fillwave)
-INSTALL(TARGETS fillwaveStatic DESTINATION lib COMPONENT fillwaveStatic)
+install(TARGETS fillwave DESTINATION lib COMPONENT fillwave)
+install(TARGETS fillwaveStatic DESTINATION lib COMPONENT fillwaveStatic)
 
 INCLUDE(CPack)

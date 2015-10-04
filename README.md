@@ -2,7 +2,6 @@
 
 [Fillwave]: http://filipwasil.bitbucket.org/
 
-
 [Fillwave] is a modern, native and totally free rendering engine writen in c++11 .
 
 Can be used in any 3D games, apps and visualization tools or as a regular part of your game engine.
@@ -30,7 +29,7 @@ mkdir ../fillwave_build && cd ../fillwave_build
 ```
 sudo apt-get install libglm-dev libglew1.10 libglew-dev libassimp3 libassimp-dev libfreetype6 xorg-dev 
 
-cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=OFF -DBUILD_DEB=ON -DBUILD_LIB=OFF -DBUILD_DEV=ON -DVERSION_MAJOR=2 -DVERSION_MINOR=0 -DVERSION_PATCH=0 -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
+cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=OFF -DBUILD_DEB=ON -DBUILD_LIB=OFF -DBUILD_DEV=ON -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 ```
 
 ## Fedora/RedHat
@@ -38,7 +37,7 @@ cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON
 ```
 sudo yum install glm-devel.x86_64 glm.x86_64 assimp.x86_64 assimp-devel.x86_64 glew.x86_64 glew-devel.x86_64 freetype-devel.x86_64 freetype.x86_64
 
-cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=ON -DBUILD_DEB=OFF -DBUILD_LIB=ON -DBUILD_DEV=OFF -DVERSION_MAJOR=2 -DVERSION_MINOR=0 -DVERSION_PATCH=0 -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
+cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=ON -DBUILD_DEB=OFF -DBUILD_LIB=ON -DBUILD_DEV=OFF -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 
 ```
 
@@ -56,7 +55,7 @@ mingw32-make -j4
 API > 18 support (openGLES 3.0) needed and android NDK path specified (Ex. ~/Tools/android-ndk-r10e)
 
 ```
-cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DASSIMP_BUILD_TESTS=OFF -DASSIMP_BUILD_ASSIMP_TOOLS=OFF -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_LIB=ON -DBUILD_DEV=ON -DVERSION_MAJOR=2 -DVERSION_MINOR=0 -DVERSION_PATCH=0 -D_ECLIPSE_VERSION="4.4" -DCMAKE_TOOLCHAIN_FILE=../fillwave/cmake/android.toolchain.cmake -DANDROID_NDK=~/Tools/android-ndk-r10e -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI="armeabi-v7a with NEON" -DANDROID_NATIVE_API_LEVEL=18 && make -j4 && cpack
+cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DASSIMP_BUILD_TESTS=OFF -DASSIMP_BUILD_ASSIMP_TOOLS=OFF -DNDEBUG=OFF -D_ECLIPSE_VERSION="4.4" -DCMAKE_TOOLCHAIN_FILE=../fillwave/cmake/android.toolchain.cmake -DANDROID_NDK=~/Tools/android-ndk-r10e -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI="armeabi-v7a with NEON" -DANDROID_NATIVE_API_LEVEL=18 && make -j4 && cpack
 
 ```
 
@@ -78,7 +77,7 @@ brew reinstall gcc --without-multilib
 
 # we are fine now. go.
 
-cmake ../fillwave -G"Xcode" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_LIB=ON -DBUILD_DEV=ON -DVERSION_MAJOR=1 -DVERSION_MINOR=0 -DVERSION_PATCH=0 -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DASSIMP_BUILD_TESTS=OFF -DASSIMP_BUILD_ASSIMP_TOOLS=OFF && cpack
+cmake ../fillwave -G"Xcode" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_LIB=ON -DBUILD_DEV=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON -DASSIMP_BUILD_TESTS=OFF -DASSIMP_BUILD_ASSIMP_TOOLS=OFF && cpack
 
 ```
 

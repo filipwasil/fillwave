@@ -1,6 +1,15 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 
 # -----------------------------------------------
+# Version
+# -----------------------------------------------
+
+SET(VERSION_MAJOR 2)
+SET(VERSION_MINOR 0)
+SET(VERSION_PATCH 0)
+SET(PROJECT_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
+
+# -----------------------------------------------
 # Workarounds
 # -----------------------------------------------
 
@@ -20,7 +29,7 @@ option(FILLWAVE_COMPILATION_PC_GLES "Use GLES stub for PC" OFF)
 option(NDEBUG "Build with debug logs" OFF)
 
 # -----------------------------------------------
-# Compiler
+# Compiler options
 # -----------------------------------------------
 
 IF(${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
@@ -31,15 +40,6 @@ ELSEIF(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
     ELSE(WIN32)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
     ENDIF(WIN32)
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra -Wundef -Wpedantic")
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wconversion -Wctor-dtor-privacy -Wdisabled-optimization  -Wpedantic -Wcast-align -Wcast-qual")
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wdouble-promotion -Wfloat-equal -Wformat=2 -Winit-self")
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Winvalid-pch -Wlogical-op -Wmissing-declarations -Wmissing-include-dirs")
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnoexcept -Wold-style-cast -Woverloaded-virtual -Wredundant-decls")
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshadow -Wsign-conversion -Wsign-promo -Wstrict-null-sentinel")
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wstrict-overflow=5 -Wtrampolines  -Wunsafe-loop-optimizations")
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wvector-operation-performance -Wzero-as-null-pointer-constant")
-# Build options
 ENDIF()
 
 # -----------------------------------------------
@@ -137,7 +137,7 @@ SET(FILLWAVE_SOURCES
 # -----------------------------------------------
 
 IF(UNIX AND NOT ANDROID AND NOT APPLE)
-   include(cmake/platform/Unix.cmake)
+   include(cmake/platform/Linux.cmake)
 ENDIF(UNIX AND NOT ANDROID AND NOT APPLE)
 
 IF(ANDROID)
