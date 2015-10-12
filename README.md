@@ -18,7 +18,10 @@ This wiki uses the [Markdown](http://daringfireball.net/projects/markdown/) synt
 
 ```
 git clone https://github.com/filipwasil/fillwave.git
-cd fillwave/scripts
+cd fillwave
+git submodule init
+git submodule update
+cd scripts
 ```
 
 ## Debian/Ubuntu/Fedora/RedHat
