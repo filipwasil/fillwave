@@ -15,9 +15,7 @@ namespace fillwave {
 namespace actions {
 
 /*! \class TimedEmiterUpdateCallback
- *
  * \brief TimedCallback to update time in emiters.
- *
  */
 
 class TimedEmiterUpdateCallback: public TimedCallback {
@@ -27,7 +25,7 @@ public:
 			GLfloat timeToFinish,
 			eEasing easing = eEasing::None);
 
-	virtual ~TimedEmiterUpdateCallback();
+	virtual ~TimedEmiterUpdateCallback() = default;
 
 	void performTime(TimeEventData& data);
 

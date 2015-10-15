@@ -8,25 +8,6 @@
 #ifndef TIMEDSCALECALLBACK_H_
 #define TIMEDSCALECALLBACK_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/actions/TimedCallback.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/Math.h>
@@ -35,9 +16,7 @@ namespace fillwave {
 namespace actions {
 
 /*! \class TimedScaleCallback
- *
  * \brief TimedCallback to scale the Entity to certain size in certain time.
- *
  */
 
 class TimedScaleCallback: public TimedCallback {
@@ -52,7 +31,8 @@ public:
 			GLfloat normalizedScale,
 			GLfloat lifetime,
 			eEasing easing);
-	virtual ~TimedScaleCallback();
+
+	virtual ~TimedScaleCallback() = default;
 
 	/*
 	 * perform

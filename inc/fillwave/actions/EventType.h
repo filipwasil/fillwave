@@ -8,25 +8,6 @@
 #ifndef EVENTTYPE_H_
 #define EVENTTYPE_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 namespace fillwave {
 
 enum class eEventType {
@@ -60,21 +41,22 @@ enum class eEventType {
 namespace actions {
 
 /*! \class EventType
- *
  * \brief Base class for all events.
- *
  * This class needs only the event type (literally - an enumerator)
  * to initialize. Event type defines by which callback the event will be handled.
- *
  */
 
 class EventType {
 public:
-	EventType(eEventType type);
-	virtual ~EventType();
+	EventType(eEventType type)
+			: mType(type) {
+	}
+	virtual ~EventType() = default;
+
 	eEventType getType() {
 		return mType;
 	}
+
 private:
 	eEventType mType;
 };

@@ -2,7 +2,7 @@
  * CameraNull.cpp
  *
  *  Created on: 26 May 2015
- *      Author: Filip Wail
+ *      Author: Filip Wasil
  */
 
 #include <fillwave/space/CameraNull.h>

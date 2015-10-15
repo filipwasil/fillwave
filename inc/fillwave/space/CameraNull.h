@@ -2,7 +2,7 @@
  * CameraNull.h
  *
  *  Created on: 26 May 2015
- *      Author: wasilfil
+ *      Author: Filip Wasil
  */
 
 #ifndef CAMERANULL_H_
