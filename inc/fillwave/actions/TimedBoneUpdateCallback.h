@@ -25,7 +25,7 @@ namespace actions {
 class TimedBoneUpdateCallback: public TimedCallback {
 public:
 	TimedBoneUpdateCallback(models::Model* model);
-	virtual ~TimedBoneUpdateCallback();
+	virtual ~TimedBoneUpdateCallback() = default;
 
 	/*	perform
 	 * \brief Performs ItemCallback action

@@ -5,31 +5,6 @@
  *      Author: filip
  */
 
-/*************************************************************************
- *
- * Copyright (C) [2012] - [2015] Filip Wasil
- *  All Rights Reserved.
- *
- * Filip Wasil CONFIDENTIAL
- * __________________
- *
- *
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and his suppliers and may be covered by Polish and Foreign
- * Patents, patents in process, and are protected by trade secret
- * or copyright law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * To use the code, you must contact the author directly and ask permission.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/core/pipeline/Uniform.h>
 #include <fillwave/extras/Log.h>
 #include <string>
@@ -46,15 +21,11 @@ Uniform::Uniform(std::string name, GLuint type, GLsizei size, GLint location)
 	}
 }
 
-Uniform::~Uniform() {
-
-}
-
 const GLboolean Uniform::isName(std::string& name) const {
 	return mName == name;
 }
 
-GLint Uniform::getLocation() {
+GLint Uniform::getLocation() const {
 	return mLocation;
 }
 
@@ -214,7 +185,7 @@ void Uniform::setName(std::string name) {
 	mName = name;
 }
 
-GLuint Uniform::getType() {
+GLuint Uniform::getType() const {
 	return mType;
 }
 
@@ -222,7 +193,7 @@ void Uniform::setType(GLuint type) {
 	mType = type;
 }
 
-GLsizei Uniform::getSize() {
+GLsizei Uniform::getSize() const {
 	return mSize;
 }
 
@@ -238,7 +209,7 @@ void Uniform::setData(UniformData data) {
 	mData = data;
 }
 
-void Uniform::log() {
+void Uniform::log() const {
 	FLOG_INFO("Name: %s", mName.c_str());
 	FLOG_INFO("Location: %d", mLocation);
 	FLOG_INFO("Type: %d", mType);

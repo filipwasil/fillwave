@@ -40,10 +40,6 @@ VertexBufferParticles::VertexBufferParticles(
 	mSize = mTotalElements * sizeof(VertexParticle);
 }
 
-VertexBufferParticles::~VertexBufferParticles() {
-
-}
-
 void VertexBufferParticles::log() {
 	for (auto it : mDataVertices) {
 		FLOG_ERROR("Vertex written: %f %f %f %f", it.velocity[0], it.velocity[1],

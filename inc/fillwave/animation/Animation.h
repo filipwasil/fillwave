@@ -8,25 +8,6 @@
 #ifndef ANIMATION_H_
 #define ANIMATION_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/Assets.h>
 
 #include <vector>
@@ -45,9 +26,7 @@ public:
 	Animation(fAnimation* assimpAnimation);
 	virtual ~Animation();
 
-	/*
-	 * getTicksPerSec
-	 *
+	/* getTicksPerSec
 	 * \brief returns an animation parameter:
 	 */
 
@@ -55,9 +34,7 @@ public:
 		return mTicksPerSec;
 	}
 
-	/*
-	 * getDuration
-	 *
+	/* getDuration
 	 * \brief returns an animation parameter
 	 */
 
@@ -65,9 +42,7 @@ public:
 		return mDuration;
 	}
 
-	/*
-	 * getChannel
-	 *
+	/* getChannel
 	 * \brief returns particular animation channel
 	 */
 
@@ -75,9 +50,7 @@ public:
 		return mChannels[i];
 	}
 
-	/*
-	 * getHowManyChannels
-	 *
+	/* getHowManyChannels
 	 * \brief returns how many animation channels are hidden in animation
 	 */
 

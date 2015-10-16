@@ -40,10 +40,6 @@ FramebufferGeometry::FramebufferGeometry(
 	reload();
 }
 
-FramebufferGeometry::~FramebufferGeometry() {
-
-}
-
 void FramebufferGeometry::resize(GLuint width, GLuint height) {
 	for (GLint i = 0; i < mColorBufferSize; i++) {
 		mDeferredColors->mFile->mHeader.mWidth = width;

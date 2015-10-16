@@ -8,25 +8,6 @@
 #ifndef BONE_H_
 #define BONE_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/models/Entity.h>
 #include <fillwave/Assets.h>
 
@@ -47,13 +28,15 @@ namespace animation {
 class Bone: public models::Entity {
 public:
 	Bone(fBone* assimpBone);
-	virtual ~Bone();
-	void setName(std::string name);
-	std::string getName();
+	virtual ~Bone() = default;
+
 	void childrenUpdate();
 
-	glm::mat4 getOffsetMatrix();
-	glm::mat4 getGlobalOffsetMatrix();
+	std::string getName() const;
+	glm::mat4 getOffsetMatrix() const;
+	glm::mat4 getGlobalOffsetMatrix() const;
+
+	void setName(std::string name);
 	void setOffsetMatrix(glm::mat4 m);
 	void setGlobalOffsetMatrix(glm::mat4 m);
 

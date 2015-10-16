@@ -5,31 +5,6 @@
  *      Author: Filip Wasil
  */
 
-/*************************************************************************
- *
- * Copyright (C) 2014 Filip Wasil
- *
- * Filip Wasil CONFIDENTIAL
- * __________________
- *
- *  [2012] - [2014] Filip Wasil
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and his suppliers and may be covered by Polish and Foreign
- * Patents, patents in process, and are protected by trade secret
- * or copyright law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * To use the code, you must contact the author directly and ask permission.
- *
- * filip.wasil@gmail.com
- *
- */
-
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/pipeline/Attribute.h>
 
@@ -71,7 +46,7 @@ void Program::detach(pShader shader) {
 	}
 }
 
-GLuint Program::getHandle() {
+GLuint Program::getHandle() const {
 	return mHandle;
 }
 
@@ -108,7 +83,7 @@ void Program::disusePrograms() {
 	FLOG_CHECK("disuse programs");
 }
 
-void Program::use() {
+void Program::use() const {
 	glUseProgram(mHandle);
 	FLOG_CHECK("use");
 }
@@ -294,7 +269,7 @@ void Program::uniformBlockPush(std::string name, GLfloat* data) {
 	FLOG_ERROR("Uniform buffer %s not found", name.c_str());
 }
 
-void Program::log() {
+void Program::log() const {
 	GLint infologLength = 0;
 	GLint value;
 	glGetProgramiv(mHandle, GL_INFO_LOG_LENGTH, &value);

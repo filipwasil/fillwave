@@ -8,25 +8,6 @@
 #ifndef GLPROGRAM_H_
 #define GLPROGRAM_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/core/pipeline/Uniform.h>
 
 #include <fillwave/core/pipeline/Shader.h>
@@ -44,7 +25,6 @@ namespace core {
 
 /*! \class Program
  * \brief Single GLSL program object.
- *
  */
 
 class Program {
@@ -62,7 +42,7 @@ public:
 
 	void detach(pShader shader);
 
-	void use();
+	void use() const;
 
 	static void disusePrograms();
 
@@ -87,13 +67,13 @@ public:
 
 	void getUniformBlock(std::string name, GLuint bindingPoint);
 
-	GLuint getHandle();
+	GLuint getHandle() const;
 
 	void uniformBlockPush(std::string name, GLfloat* data);
 
 	void reload();
 
-	void log();
+	void log() const;
 
 private:
 	GLuint mHandle;

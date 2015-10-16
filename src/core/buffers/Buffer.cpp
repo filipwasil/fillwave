@@ -70,29 +70,29 @@ void Buffer::resetReady() {
 	mRefresh = GL_FALSE;
 }
 
-GLuint Buffer::getElements() {
+GLuint Buffer::getElements() const {
 	return mTotalElements;
 }
 
-GLuint Buffer::getSize() {
+GLuint Buffer::getSize() const {
 	return mSize;
 }
 
-GLvoid* Buffer::getData() {
+GLvoid* Buffer::getData() const {
 	return mData;
 }
 
-void Buffer::unmap() {
+void Buffer::unmap() const {
 	glUnmapBuffer(mTarget);
 	FLOG_CHECK("Could not unmap the buffer object");
 }
 
-void Buffer::bind(GLuint id) {
+void Buffer::bind(GLuint id) const {
 	glBindBuffer(mTarget, mHandles[id]);
 	FLOG_CHECK("Could not bind the buffer object");
 }
 
-void Buffer::bindBase(GLuint id) {
+void Buffer::bindBase(GLuint id) const {
 	glBindBufferBase(mTarget, mIndex, mHandles[id]);
 	FLOG_CHECK("Bind the uniform buffer object");
 }
@@ -102,12 +102,12 @@ void Buffer::unbind() {
 	FLOG_CHECK("Could not unbind the buffer object");
 }
 
-void Buffer::bind(GLuint externalTarget, GLuint id) {
+void Buffer::bind(GLuint externalTarget, GLuint id) const {
 	glBindBuffer(externalTarget, mHandles[id]);
 	FLOG_CHECK("Could not bind the buffer object");
 }
 
-void Buffer::bindBase(GLuint externalTarget, GLuint id) {
+void Buffer::bindBase(GLuint externalTarget, GLuint id) const {
 	glBindBufferBase(externalTarget, mIndex, mHandles[id]);
 	FLOG_CHECK("Bind the uniform buffer object");
 }
@@ -145,7 +145,7 @@ void Buffer::reload() {
 /* Feature not available in OpenGL ES  <= 3.0 */
 #ifdef __ANDROID__
 #else
-GLvoid* Buffer::map(GLenum access) {
+GLvoid* Buffer::map(GLenum access) const {
 	GLvoid* ptr = glMapBuffer(mTarget, access);
 	FLOG_CHECK("Could not map the buffer object");
 	return ptr;

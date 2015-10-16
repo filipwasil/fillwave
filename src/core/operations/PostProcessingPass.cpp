@@ -19,15 +19,11 @@ PostProcessingPass::PostProcessingPass(
 		: Finishable(lifetime), mFrame(frame), mProgram(program) {
 }
 
-PostProcessingPass::~PostProcessingPass() {
-
-}
-
-pTexture2DRenderableDynamic PostProcessingPass::getFrame() {
+pTexture2DRenderableDynamic PostProcessingPass::getFrame() const {
 	return mFrame;
 }
 
-pProgram PostProcessingPass::getProgram() {
+pProgram PostProcessingPass::getProgram() const {
 	return mProgram;
 }
 

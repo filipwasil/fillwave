@@ -8,25 +8,6 @@
 #ifndef UNIFORM_H_
 #define UNIFORM_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/OpenGL.h>
 
 #include <fillwave/Math.h>
@@ -72,15 +53,15 @@ class Uniform {
 public:
 	Uniform(std::string name, GLuint type, GLsizei size, GLint location);
 
-	virtual ~Uniform();
+	virtual ~Uniform() = default;
 
 	const GLboolean isName(std::string& name) const;
 
-	GLuint getType();
+	GLuint getType() const;
 
-	GLsizei getSize();
+	GLsizei getSize() const;
 
-	GLint getLocation();
+	GLint getLocation() const;
 
 	void setName(std::string name);
 	void setType(GLuint size);
@@ -117,7 +98,7 @@ public:
 	static void push(GLint location, glm::vec3 data);
 	static void push(GLint location, glm::vec4 data);
 
-	void log();
+	void log() const;
 
 private:
 	std::string mName;

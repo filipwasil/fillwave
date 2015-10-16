@@ -24,7 +24,7 @@ namespace actions {
 class FPSCallback: public EngineCallback {
 public:
 	FPSCallback(pText text);
-	virtual ~FPSCallback();
+	virtual ~FPSCallback() = default;
 	void perform(Engine* engine, EventType* event);
 
 private:

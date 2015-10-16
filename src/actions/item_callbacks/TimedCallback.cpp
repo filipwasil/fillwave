@@ -24,7 +24,7 @@ void TimedCallback::perform(EventType* event) {
 }
 
 void TimedCallback::performTime(TimeEventData& data) {
-	;
+	// empty pass
 }
 
 GLfloat TimedCallback::ease(GLfloat progress) {

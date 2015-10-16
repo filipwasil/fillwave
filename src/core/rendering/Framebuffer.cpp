@@ -5,31 +5,6 @@
  *      Author: Filip Wasil
  */
 
-/*************************************************************************
- *
- * Copyright (C) 2014 Filip Wasil
- *
- * Filip Wasil CONFIDENTIAL
- * __________________
- *
- *  [2012] - [2014] Filip Wasil
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and his suppliers and may be covered by Polish and Foreign
- * Patents, patents in process, and are protected by trade secret
- * or copyright law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * To use the code, you must contact the author directly and ask permission.
- *
- * filip.wasil@gmail.com
- *
- */
-
 #include <fillwave/core/rendering/Framebuffer.h>
 #include <fillwave/extras/Log.h>
 
@@ -47,17 +22,17 @@ Framebuffer::~Framebuffer() {
 	glDeleteFramebuffers(mHowMany, mHandles);
 }
 
-void Framebuffer::bind(GLuint id) {
+void Framebuffer::bind(GLuint id) const {
 	glBindFramebuffer(GL_FRAMEBUFFER, mHandles[id]);
 	FLOG_CHECK("glBindFramebuffer GL_FRAMEBUFFER");
 }
 
-void Framebuffer::bindForWriting(GLuint id) {
+void Framebuffer::bindForWriting(GLuint id) const {
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mHandles[id]);
 	FLOG_CHECK("glBindFramebuffer GL_DRAW_FRAMEBUFFER");
 }
 
-void Framebuffer::bindForReading(GLuint id) {
+void Framebuffer::bindForReading(GLuint id) const {
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, mHandles[id]);
 	FLOG_CHECK("glBindFramebuffer GL_READ_FRAMEBUFFER");
 }

@@ -39,7 +39,7 @@ namespace common {
 class Finishable {
 public:
 	Finishable(float timeToFinish);
-	virtual ~Finishable();
+	virtual ~Finishable() = default;
 	/*
 	 * checkTime
 	 * \brief checks if the lifetime time elapsed
@@ -50,7 +50,7 @@ public:
 	 * getPercentageDone
 	 * \brief returns the time progress in percentages
 	 */
-	float getPercentageDone();
+	float getPercentageDone() const;
 
 	/*
 	 * finish
@@ -68,7 +68,7 @@ public:
 	 * finish
 	 * \brief Returns state of the object
 	 */
-	bool isFinished();
+	bool isFinished() const;
 
 protected:
 	float mPercentageDone;

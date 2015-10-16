@@ -31,7 +31,7 @@ public:
 			pTexture2DRenderable texture2D,
 			pProgram program);
 
-	virtual ~Texture3DRenderableDynamic();
+	virtual ~Texture3DRenderableDynamic() = default;
 
 private:
 	pProgram mProgram;

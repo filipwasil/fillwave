@@ -29,7 +29,7 @@ public:
 			Texture2DFile& fileNegZ,
 			pTexture2DRenderable texture,
 			ParameterList& parameters);
-	virtual ~Texture3DRenderable();
+	virtual ~Texture3DRenderable() = default;
 	void resize(GLint width, GLint height);
 	void bindForWriting();
 	void bindForRendering();

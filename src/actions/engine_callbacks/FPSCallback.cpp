@@ -19,10 +19,6 @@ FPSCallback::FPSCallback(pText text)
 
 }
 
-FPSCallback::~FPSCallback() {
-
-}
-
 void FPSCallback::perform(Engine* engine, EventType* event) { //xxx make this more generic
 	TimeEventData e = TimeEvent::getData(event);
 	if (mTimePassed < 1.0) {

@@ -30,7 +30,7 @@ public:
 			GLuint colorBuffers,
 			GLuint depthBuffers);
 
-	virtual ~FramebufferGeometry();
+	virtual ~FramebufferGeometry() = default;
 
 	void bindAttachments();
 
