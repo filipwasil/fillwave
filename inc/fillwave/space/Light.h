@@ -8,25 +8,6 @@
 #ifndef LIGHT_H_
 #define LIGHT_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/core/rendering/Texture2DRenderable.h>
 #include <fillwave/models/Entity.h>
 
@@ -64,7 +45,7 @@ struct LightAttenuationData {
 class Light: public models::Moveable {
 public:
 	Light(glm::vec3 position, glm::vec4 intensity, pEntity entity = pEntity());
-	virtual ~Light();
+	virtual ~Light() = default;
 
 	void updateEntity();
 

@@ -17,12 +17,8 @@ CameraNull::CameraNull() {
 	mRefreshView = GL_FALSE;
 }
 
-CameraNull::~CameraNull() {
-
-}
-
 void CameraNull::updateProjection() {
-
+	//nothing to be done here
 }
 
 GLfloat CameraNull::getProjectionNearPlane() {

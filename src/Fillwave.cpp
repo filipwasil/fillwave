@@ -5,30 +5,6 @@
  *      Author: Filip Wasil
  */
 
-/*************************************************************************
- *
- * Copyright (C) 2014 Filip Wasil
- *
- * Filip Wasil CONFIDENTIAL
- * __________________
- *
- *  [2012] - [2015] Filip Wasil
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and his suppliers and may be covered by Polish and Foreign
- * or copyright law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * To use the code, you must contact the author directly and ask permission.
- *
- * filip.wasil@gmail.com
- *
- */
-
 /* Plarform specific */
 #include <fillwave/loaders/AndroidLoader.h>
 
@@ -41,9 +17,6 @@
 /* Fillwave */
 
 #include <fillwave/Fillwave.h>
-
-/* Models */
-#include <fillwave/models/shapes/BoxOcclusion.h>
 
 /* Assets */
 #include <fillwave/Assets.h>
@@ -1051,35 +1024,35 @@ void Engine::setFocusCursorPosition(pEntity entity) {
 }
 
 /* Inputs - getFocus */
-pEntity Engine::getFocusKey() {
+pEntity Engine::getFocusKey() const{
 	return mFocusKey;
 }
 
-pEntity Engine::getFocusMouseButton() {
+pEntity Engine::getFocusMouseButton() const{
 	return mFocusMouseButton;
 }
 
-pEntity Engine::getFocusScroll() {
+pEntity Engine::getFocusScroll() const{
 	return mFocusScroll;
 }
 
-pEntity Engine::getFocusChar() {
+pEntity Engine::getFocusChar() const{
 	return mFocusChar;
 }
 
-pEntity Engine::getFocusCharMods() {
+pEntity Engine::getFocusCharMods() const{
 	return mFocusCharMods;
 }
 
-pEntity Engine::getFocusCursorEnter() {
+pEntity Engine::getFocusCursorEnter() const{
 	return mFocusCursorEnter;
 }
 
-pEntity Engine::getFocusCursorPosition() {
+pEntity Engine::getFocusCursorPosition() const{
 	return mFocusCursorPosition;
 }
 
-pEntity Engine::getFocusTouchScreen() {
+pEntity Engine::getFocusTouchScreen() const{
 	return mFocusTouchScreen;
 }
 
@@ -1168,7 +1141,7 @@ void Engine::clearLights() {
 	mLightManager->removeLights();
 }
 
-glm::ivec2 Engine::getScreenSize() {
+glm::ivec2 Engine::getScreenSize() const{
 	return glm::ivec2(mWindowWidth, mWindowHeight);
 }
 
@@ -1248,7 +1221,7 @@ GLuint Engine::getFramesPassed() {
 	return result;
 }
 
-GLfloat Engine::getStartupAnimationTime() {
+GLfloat Engine::getStartupAnimationTime() const{
 	return mStartupTimeLimit;
 }
 
@@ -1266,11 +1239,11 @@ void Engine::setCurrentScene(pScene scene) {
 	}
 }
 
-pScene Engine::getCurrentScene() {
+pScene Engine::getCurrentScene() const{
 	return mScene;
 }
 
-manager::LightManager* Engine::getLightManager() {
+manager::LightManager* Engine::getLightManager() const{
 	return mLightManager.get();
 }
 
@@ -1750,7 +1723,7 @@ const fScene* Engine::getModelFromFile(std::string path) {
 #endif
 }
 
-GLboolean Engine::isDR() {
+GLboolean Engine::isDR() const{
 	return mIsDR;
 }
 

@@ -21,7 +21,7 @@ class CameraNull: public Camera {
 public:
 	CameraNull();
 
-	virtual ~CameraNull();
+	virtual ~CameraNull() = default;
 
 	void updateProjection();
 

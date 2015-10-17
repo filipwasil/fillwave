@@ -8,25 +8,6 @@
 #ifndef FILLWAVE_H_
 #define FILLWAVE_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 /* core */
 #include <fillwave/core/rendering/FramebufferGeometry.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
@@ -44,6 +25,8 @@
 #include <fillwave/models/ScenePerspective.h>
 #include <fillwave/models/Text.h>
 #include <fillwave/models/Skybox.h>
+#include <fillwave/models/shapes/BoxOcclusion.h>
+#include <fillwave/models/shapes/Box.h>
 
 /* space */
 #include <fillwave/space/LightPoint.h>
@@ -146,24 +129,22 @@ public:
 	/* Assets */
 	puPhysicsMeshBuffer getPhysicalMeshBuffer(const std::string& shapePath);
 
-	manager::LightManager* getLightManager();
+	manager::LightManager* getLightManager() const;
 
 	/* Scene */
 	void setCurrentScene(pScene scene);
 
-	pScene getCurrentScene();
+	pScene getCurrentScene() const;
 
 	/* Time */
 	GLuint getFramesPassed();
 
-	GLfloat getStartupAnimationTime();
+	GLfloat getStartupAnimationTime() const;
 
 	/* Store shaders */
-//   pShader  storeShaderCompute(const std::string& shaderPath);
 	pShader storeShaderFragment(const std::string& shaderPath);
 	pShader storeShaderVertex(const std::string& shaderPath);
 
-//   pShader  storeShaderCompute(const std::string& shaderPath, std::string& shaderSource);
 	pShader storeShaderFragment(
 			const std::string& shaderPath,
 			const std::string& shaderSource);
@@ -251,7 +232,7 @@ public:
 	void pick(GLuint x, GLuint y);
 
 	/* Screen */
-	glm::ivec2 getScreenSize();
+	glm::ivec2 getScreenSize() const;
 
 	/* Log */
 	void log();
@@ -281,14 +262,14 @@ public:
 	void setFocusCursorPosition(pEntity entity);
 
 	/* Inputs - getFocus */
-	pEntity getFocusKey();
-	pEntity getFocusMouseButton();
-	pEntity getFocusScroll();
-	pEntity getFocusChar();
-	pEntity getFocusCharMods();
-	pEntity getFocusCursorEnter();
-	pEntity getFocusCursorPosition();
-	pEntity getFocusTouchScreen();
+	pEntity getFocusKey() const;
+	pEntity getFocusMouseButton() const;
+	pEntity getFocusScroll() const;
+	pEntity getFocusChar() const;
+	pEntity getFocusCharMods() const;
+	pEntity getFocusCursorEnter() const;
+	pEntity getFocusCursorPosition() const;
+	pEntity getFocusTouchScreen() const;
 
 	/* Inputs - insert */
 	void insertResizeScreen(GLuint width, GLuint height);
@@ -339,7 +320,7 @@ public:
 	/* Asset loader */
 	const fScene* getModelFromFile(std::string path);
 
-	GLboolean isDR();
+	GLboolean isDR() const;
 private:
 	/* Asset loader */
 #ifdef FILLWAVE_COMPILATION_TINY_ASSET_LOADER

@@ -8,25 +8,6 @@
 #ifndef BONEMANAGER_H_
 #define BONEMANAGER_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/animation/Bone.h>
 #include <fillwave/core/pipeline/Program.h>
 
@@ -77,34 +58,32 @@ public:
 	void add(animation::Animation* animation);
 	pBone get(GLint id);
 	pBone get(std::string name);
-	GLint getId(std::string name);
-	GLint getElements() {
-		return mElements;
-	}
-	animation::Animation* getAnimation(GLint i);
-	GLint getAnimations();
+	GLint getId(std::string name) const;
+	GLint getElements() const;
+	animation::Animation* getAnimation(GLint i) const;
+	GLint getAnimations() const;
 	std::vector<animation::Animation*> mAnimations;
 	void log();
 
 	animation::Channel* findChannel(
 			animation::Animation* animation,
-			const std::string& nodeName);
+			const std::string& nodeName) const;
 
 	glm::vec3 getCurrentTranslation(
 			float timeElapsed_s,
-			animation::Channel* channel);
+			animation::Channel* channel) const;
 	glm::quat getCurrentRotation(
 			float timeElapsed_s,
-			animation::Channel* channel);
-	glm::vec3 getCurrentScale(float timeElapsed_s, animation::Channel* channel);
+			animation::Channel* channel) const;
+	glm::vec3 getCurrentScale(float timeElapsed_s, animation::Channel* channel) const;
 
-	GLuint getTranslationStep(float timeElapsed_s, animation::Channel* channel);
-	GLuint getRotationStep(float timeElapsed_s, animation::Channel* channel);
-	GLuint getScaleStep(float timeElapsed_s, animation::Channel* channel);
+	GLuint getTranslationStep(float timeElapsed_s, animation::Channel* channel) const;
+	GLuint getRotationStep(float timeElapsed_s, animation::Channel* channel) const;
+	GLuint getScaleStep(float timeElapsed_s, animation::Channel* channel) const;
 
-	glm::fquat lerp(const glm::fquat &v0, const glm::fquat &v1, float alpha);
+	glm::fquat lerp(const glm::fquat &v0, const glm::fquat &v1, float alpha) const;
 
-	AssimpNode* initNode(aiNode* node);
+	AssimpNode* initNode(aiNode* node) ;
 	void updateBonesBuffer();
 	void updateBonesUniform(GLint uniformLocationBones);
 	void updateTransformations(GLint activeAnimation, float timeElapsed_s);

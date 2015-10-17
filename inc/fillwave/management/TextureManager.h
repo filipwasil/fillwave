@@ -8,25 +8,6 @@
 #ifndef TEXTUREMANAGER_H_
 #define TEXTUREMANAGER_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/core/texturing/Texture1D.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
 #include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
@@ -126,7 +107,7 @@ typedef std::unique_ptr<TextureObject3DDynamic> puTextureObject3DDynamic;
 class TextureManager {
 public:
 	TextureManager(const std::string& rootPath);
-	virtual ~TextureManager();
+	virtual ~TextureManager() = default;
 
 	void checkExtensions();
 

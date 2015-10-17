@@ -14,10 +14,6 @@ Texture1D::Texture1D(ParameterList& parameters) {
 
 }
 
-Texture1D::~Texture1D() {
-
-}
-
 void Texture1D::log() {
 
 }

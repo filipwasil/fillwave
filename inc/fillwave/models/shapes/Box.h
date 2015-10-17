@@ -8,26 +8,6 @@
 #ifndef BOX_H_
 #define BOX_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
-#include <fillwave/models/shapes/Shape.h>
 #include <fillwave/models/shapes/Quad.h>
 
 namespace fillwave {
@@ -35,9 +15,65 @@ namespace models {
 
 class Box: public Shape<core::VertexBasic> {
 public:
-	Box(GLfloat quadSize = 1.0f);
+	Box(GLfloat quadSize = 1.0f)
+			: mSize(quadSize), mQuad(quadSize) {
+		std::vector<core::VertexBasic> quadVertices = mQuad.getVertices();
+		std::vector<glm::vec3> vertVertices;
 
-	virtual ~Box();
+		mVertices.resize(36);
+
+		/* Back */
+		for (int i = 0; i < 6; i++) {
+			vertVertices.push_back(
+					glm::vec3(quadVertices[i].mPosition[0],
+							quadVertices[i].mPosition[1], quadVertices[i].mPosition[2] +=
+									mSize));
+		}
+
+		/* Down */
+		for (GLuint i = 0; i < 6; i++) {
+			glm::vec3 vec(glm::rotateX(vertVertices[i], glm::radians(90.0f)));
+			vertVertices.push_back(vec);
+		}
+
+		/* Back */
+		for (GLuint i = 0; i < 6; i++) {
+			glm::vec3 vec(glm::rotateX(vertVertices[i], glm::radians(180.0f)));
+			vertVertices.push_back(vec);
+		}
+
+		/* Up */
+		for (GLuint i = 0; i < 6; i++) {
+			glm::vec3 vec(glm::rotateX(vertVertices[i], glm::radians(270.0f)));
+			vertVertices.push_back(vec);
+		}
+
+		/* Right */
+		for (GLuint i = 0; i < 6; i++) {
+			glm::vec3 vec = glm::rotateZ(
+					glm::rotateX(vertVertices[i], glm::radians(90.0f)),
+					glm::radians(90.0f));
+			vertVertices.push_back(vec);
+		}
+
+		for (GLuint i = 0; i < 6; i++) {
+			glm::vec3 vec = glm::rotateZ(
+					glm::rotateX(vertVertices[i], glm::radians(90.0f)),
+					glm::radians(-90.0f));
+			vertVertices.push_back(vec);
+		}
+
+		/* Vertices and Indices */
+		for (GLuint i = 0; i < vertVertices.size(); i++) {
+			mVertices[i].mPosition[0] = vertVertices[i].x;
+			mVertices[i].mPosition[1] = vertVertices[i].y;
+			mVertices[i].mPosition[2] = vertVertices[i].z;
+			mVertices[i].mPosition[3] = 1.0f;
+			mIndices.push_back(i);
+		}
+	}
+
+	virtual ~Box() = default;
 
 	void generateVertices();
 

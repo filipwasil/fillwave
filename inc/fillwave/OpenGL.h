@@ -8,36 +8,13 @@
 #ifndef GLCORE_H_
 #define GLCORE_H_
 
-/*************************************************************************
- *
- * Copyright (C) 2015 Filip Wasil
- *
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and may be covered by Polish and foreign patents, patents
- * in process, and are protected by trade secret or copyright
- * law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/Config.h>
 
 #if defined(__APPLE__)
 #include <OpenGL/gl3.h>
 #elif defined(_WIN32) || defined(_WIN64)
-//#define GLEW_STATIC
-//#define GLEW_BUILD
 #include <GL/glew.h>
-//#include <GL/Regal.h>
-//#include <OpenGL/gl3.h>.
-#else
+#else /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
 #if (__ANDROID__)
 #define GL_GLEXT_PROTOTYPES
 #include <GLES3/gl3.h>
@@ -48,15 +25,15 @@
 #define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
 
 void glesInitExtensions();
-#else
+#else /* __ANDROID__ */
 #ifdef FILLWAVE_COMPILATION_PC_GLES
 #include <GLES3/gl3.h>
 #include <GLES3/gl3ext.h>
-#else
+#else /* FILLWAVE_COMPILATION_PC_GLES */
 #include <GL/glew.h>
-#endif
-#endif
-#endif
+#endif /* FILLWAVE_COMPILATION_PC_GLES */
+#endif /* __ANDROID__ */
+#endif /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
 
 #if defined(GL_TEXTURE31)
 #define MAX_TEXTURE_UNITS 32
@@ -69,10 +46,6 @@ void glesInitExtensions();
 #else
 #define MAX_TEXTURE_UNITS 1
 #endif
-
-//#define FILLWAVE_DIFFUSE_UNIT MAX_TEXTURE_UNITS - 1
-//#define FILLWAVE_NORMAL_UNIT MAX_TEXTURE_UNITS - 2
-//#define FILLWAVE_SPECULAR_UNIT MAX_TEXTURE_UNITS - 3
 
 #define FILLWAVE_POSITION_ATTACHMENT 0
 #define FILLWAVE_DIFFUSE_ATTACHMENT 1

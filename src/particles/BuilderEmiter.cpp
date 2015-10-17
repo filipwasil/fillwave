@@ -32,10 +32,6 @@ BuilderEmiter::BuilderEmiter(Engine* engine)
 				mAlphaCutOff(0.0) {
 }
 
-BuilderEmiter::~BuilderEmiter() {
-
-}
-
 pEmiterPoint BuilderEmiter::buildEmiterGPU() {
 	return pEmiterPoint(
 			new particles::EmiterPointGPU(mEngine, mEmitingSourceRate, mHowMany,

@@ -5,31 +5,6 @@
  *      Author: filip
  */
 
-/*************************************************************************
- *
- * Copyright (C) 2014 Filip Wasil
- *
- * Filip Wasil CONFIDENTIAL
- * __________________
- *
- *  [2012] - [2014] Filip Wasil
- *  All Rights Reserved.
- *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and his suppliers and may be covered by Polish and Foreign
- * Patents, patents in process, and are protected by trade secret
- * or copyright law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
- *
- * To use the code, you must contact the author directly and ask permission.
- *
- * fillwave@gmail.com
- *
- */
-
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/extras/Log.h>
 
@@ -98,10 +73,6 @@ LightPoint::LightPoint(
 															glm::vec3(0.0, 0.0, 1.0)))),
 							glm::radians(90.0), 1.0, //1440.0/900.0,
 							0.1, 1000.0));
-}
-
-LightPoint::~LightPoint() {
-	mFaceCameras.clear();
 }
 
 void LightPoint::setEntity(pEntity entity) {

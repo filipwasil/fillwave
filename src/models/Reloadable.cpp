@@ -23,10 +23,6 @@ Reloadable::Reloadable(Engine* engine)
 	mSampler->setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 }
 
-Reloadable::~Reloadable() {
-
-}
-
 void Reloadable::reload() {
 	initBuffers();
 	initPipeline();

@@ -16,10 +16,6 @@ SceneOrthographic::SceneOrthographic(pCameraOrthographic camera)
 
 }
 
-SceneOrthographic::~SceneOrthographic() {
-
-}
-
 void SceneOrthographic::draw() {
 	/* Parent-children transformations */
 	updateMatrixTree();

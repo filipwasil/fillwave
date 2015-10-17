@@ -16,10 +16,6 @@ ScenePerspective::ScenePerspective(pCameraPerspective camera)
 
 }
 
-ScenePerspective::~ScenePerspective() {
-
-}
-
 void ScenePerspective::draw() {
 	/* Parent-children transformations */
 	updateMatrixTree();

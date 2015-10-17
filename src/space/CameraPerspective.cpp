@@ -35,10 +35,6 @@ CameraPerspective::CameraPerspective(
 	updateProjection();
 }
 
-CameraPerspective::~CameraPerspective() {
-
-}
-
 void CameraPerspective::updateProjection() {
 	mProjectionMatrix = glm::perspective(mProjectionFovy, mProjectionAspectRatio,
 			mProjectionNearPlane, mProjectionFarPlane);
