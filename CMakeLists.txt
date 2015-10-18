@@ -20,8 +20,8 @@ ADD_DEFINITIONS(-DASSIMP_BUILD_NO_IFC_IMPORTER )
 # -----------------------------------------------
 
 option(BUILD_DEV "Build development package" OFF)
-option(BUILD_LIB "Build main fillwave package" OFF)
-option(BUILD_PACK "Build with external dependencies" OFF)
+option(BUILD_LIB "Build main fillwave package" ON)
+option(BUILD_PACK "Build with external dependencies" ON)
 option(BUILD_DEB "Build deb packages" OFF)
 option(BUILD_RPM "Build rpm packages" OFF)
 option(FILLWAVE_COMPILATION_STARTUP_ANIMATION "Run startup animation before any other action" OFF)
