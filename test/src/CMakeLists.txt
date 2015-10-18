@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 2.8.8)
 
+CMAKE_POLICY(SET CMP0048 OLD) #Project version cmake policy
+CMAKE_POLICY(SET CMP0046 OLD) #Project dependency cmake policy
+
 # -----------------------------------------------
 # Source files
 # -----------------------------------------------
@@ -62,7 +65,6 @@ if(WIN32)
    include_directories("${CMAKE_SOURCE_DIR}/ext/assimp/include")
    include_directories("${CMAKE_SOURCE_DIR}/ext/fontgenerator")
    include_directories("${CMAKE_SOURCE_DIR}/ext/glfw/include")
-   #add_dependencies(${PROGRAM} glfw fillwave)
    target_link_libraries(${PROGRAM}  glfw fillwave)
    INSTALL(TARGETS ${PROGRAM} DESTINATION bin COMPONENT fillwave)
 endif(WIN32)
@@ -76,6 +78,3 @@ if(UNIX AND NOT ANDROID)
    target_link_libraries(${PROGRAM}  pthread glfw fillwave)
    COPY_RESOURCES(${PROGRAM})
 endif(UNIX AND NOT ANDROID)
-
-add_dependencies(${PROGRAM} pthread glfw fillwave)
-target_link_libraries(${PROGRAM}  pthread glfw fillwave)

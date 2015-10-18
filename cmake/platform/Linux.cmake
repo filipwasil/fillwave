@@ -1,5 +1,8 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 
+CMAKE_POLICY(SET CMP0048 OLD) #Project version cmake policy
+CMAKE_POLICY(SET CMP0046 OLD) #Project dependency cmake policy
+
 # -----------------------------------------------
 # Found by cmake macro
 # -----------------------------------------------
@@ -88,9 +91,6 @@ ELSE(FILLWAVE_COMPILATION_TINY_ASSET_LOADER)
 ENDIF(FILLWAVE_COMPILATION_TINY_ASSET_LOADER)
 
 ADD_SUBDIRECTORY(ext)
-IF(BUILD_DEV)
-   ADD_SUBDIRECTORY(test)
-ENDIF(BUILD_DEV)
 
 # -----------------------------------------------
 # Compiler options
@@ -110,7 +110,6 @@ ENDIF(BUILD_DEV)
 # -----------------------------------------------
 
 if(BUILD_LIB)
-   ADD_DEPENDENCIES(fillwave ${FILLWAVE_EXT_ASSET_LOADER} fontgenerator freetype)
    TARGET_LINK_LIBRARIES(fillwave ${FILLWAVE_EXT_ASSET_LOADER} fontgenerator freetype)
 
    if(BUILD_PACK)
@@ -121,6 +120,10 @@ if(BUILD_LIB)
       TARGET_LINK_LIBRARIES(fillwave glew)
    endif(BUILD_PACK)
 endif(BUILD_LIB)
+
+IF(BUILD_DEV)
+   ADD_SUBDIRECTORY(test)
+ENDIF(BUILD_DEV)
 
 # -----------------------------------------------
 # Installation

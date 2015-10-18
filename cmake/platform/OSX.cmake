@@ -1,5 +1,8 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 
+CMAKE_POLICY(SET CMP0048 OLD) #Project version cmake policy
+CMAKE_POLICY(SET CMP0046 OLD) #Project dependency cmake policy
+
 # -----------------------------------------------
 # Workarounds
 # -----------------------------------------------

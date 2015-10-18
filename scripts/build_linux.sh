@@ -16,7 +16,7 @@ else
 fi
 rm -rf ../../fillwave_build/*
 
-# Enter library build directory
+# Remove external libraries content - we will build using system libraries
 # rm -rf ../ext/glew/*
 # rm -rf ../ext/assimp/*
 # rm -rf ../ext/glm/*
@@ -26,12 +26,13 @@ cd ../../fillwave_build
 
 # Build library DEB
 cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=OFF -DBUILD_DEB=ON -DBUILD_LIB=ON -DBUILD_DEV=OFF  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
+sudo dpkg -i ./libfillwave-*-Linux.deb
 
 # Build dev DEB
 cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=OFF -DBUILD_DEB=ON -DBUILD_LIB=OFF -DBUILD_DEV=ON  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 
 # Install DEBs
-sudo dpkg -i ./libfillwave-*-Linux.deb
+sudo dpkg -i ./libfillwave-dev-*-Linux.deb
 
 # Build library RPM
 cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DBUILD_PACK=ON -DBUILD_RPM=ON -DBUILD_DEB=OFF -DBUILD_LIB=ON -DBUILD_DEV=OFF  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack

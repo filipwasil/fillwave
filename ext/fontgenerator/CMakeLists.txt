@@ -12,7 +12,6 @@ INCLUDE_DIRECTORIES (../../ext/freetype2/include)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 ADD_LIBRARY(fontgenerator STATIC ${FONTGENERATOR_SOURCES})
 
-add_dependencies(fontgenerator freetype)
 target_link_libraries(fontgenerator freetype)
 
 if(WIN32)
