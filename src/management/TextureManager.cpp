@@ -38,6 +38,8 @@ inline void TextureManager::checkExtensions() {
 			}
 		};
 
+#if defined(__APPLE__)
+#else
 		if (find_extension("GL_EXT_texture_compression_latc")) {
 			mSupportedCompresssionTypes.push_back(
 					GL_COMPRESSED_LUMINANCE_LATC1_EXT);
@@ -65,6 +67,8 @@ inline void TextureManager::checkExtensions() {
 					GL_COMPRESSED_RGBA_S3TC_DXT5_EXT);
 		}
 	}
+#endif
+
 #endif
 }
 
