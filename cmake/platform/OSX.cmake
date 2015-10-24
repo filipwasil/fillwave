@@ -40,9 +40,10 @@ if(BUILD_LIB)
    project(libfillwave C CXX)
 endif(BUILD_LIB)
 
-set(FILLWAVE_EXT_INCLUDES ext)
-set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator)
-set(FILLWAVE_EXT_STB_INCLUDES ext/stb)
+set(FILLWAVE_EXT_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/ext)
+set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/ext/fontgenerator)
+set(FILLWAVE_EXT_GLM_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/ext/glm)
+set(FILLWAVE_EXT_STB_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/ext/stb)
 
 set(FILLWAVE_PATH_INCLUDE "inc")
 set(FILLWAVE_PATH_SOURCE "src")
@@ -52,6 +53,7 @@ include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_ASSIMP_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_EXT_STB_INCLUDES}
+                    ${FILLWAVE_EXT_GLM_INCLUDES}
                     /usr/include/freetype2
                     /usr/local/include)
 
