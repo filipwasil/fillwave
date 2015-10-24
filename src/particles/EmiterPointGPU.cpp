@@ -202,7 +202,7 @@ void EmiterPointGPU::update(GLfloat timeElapsedSec) {
 	mTimeDeltaEmiter = timeElapsedSec;
 }
 
-inline void EmiterPointGPU::initBuffers() {
+void EmiterPointGPU::initBuffers() {
 	if (mIBO) {
 		mIBO->reload();
 	}
@@ -211,7 +211,7 @@ inline void EmiterPointGPU::initBuffers() {
 	}
 }
 
-inline void EmiterPointGPU::initPipeline() {
+void EmiterPointGPU::initPipeline() {
 	const char *feedbackVaryingsGPUEmiter[6] = {
 			"tfPosition",
 			"tfVelocity",
@@ -233,7 +233,7 @@ inline void EmiterPointGPU::initPipeline() {
 	core::Program::disusePrograms();
 }
 
-inline void EmiterPointGPU::initUniformsCache() {
+void EmiterPointGPU::initUniformsCache() {
 	/* Emiter program */
 	mULCTimeEmiter = mProgramEmiter->getUniformLocation("uTime");
 	mULCModelMatrixEmiter = mProgramEmiter->getUniformLocation("uModelMatrix");
@@ -266,7 +266,7 @@ inline void EmiterPointGPU::initUniformsCache() {
 	mULCAlphaCutOff = mProgram->getUniformLocation("uAlphaCutOff");
 }
 
-inline void EmiterPointGPU::initVAO() {
+void EmiterPointGPU::initVAO() {
 	mSampler->bind();
 	mVAO->bind();
 
@@ -283,7 +283,7 @@ inline void EmiterPointGPU::initVAO() {
 	mVAO->unbind();
 }
 
-inline void EmiterPointGPU::initVBO() {
+void EmiterPointGPU::initVBO() {
 	for (int i = 0; i < mPingPongBuffers; i++) {
 		mVBOGPU[i]->getAttributes(mProgram->getHandle());
 		mVBOGPU[i]->attributesBind(mProgram);

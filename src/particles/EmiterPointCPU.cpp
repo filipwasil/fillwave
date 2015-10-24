@@ -155,7 +155,7 @@ inline void EmiterPointCPU::coreDraw() {
 	mVAO->unbind();
 }
 
-inline void EmiterPointCPU::initBuffers() {
+void EmiterPointCPU::initBuffers() {
 	if (mIBO) {
 		mIBO->reload();
 	}
@@ -164,13 +164,13 @@ inline void EmiterPointCPU::initBuffers() {
 	}
 }
 
-inline void EmiterPointCPU::initPipeline() {
+void EmiterPointCPU::initPipeline() {
 	mProgram->use();
 	mProgram->uniformPush("uTextureUnit", FILLWAVE_DIFFUSE_UNIT);
 	core::Program::disusePrograms();
 }
 
-inline void EmiterPointCPU::initUniformsCache() {
+void EmiterPointCPU::initUniformsCache() {
 	mULCTimeElapsed = mProgram->getUniformLocation("uTimeElapsed");
 	mULCModelMatrix = mProgram->getUniformLocation("uModelMatrix");
 	mULCViewProjectionMatrix = mProgram->getUniformLocation(
@@ -185,7 +185,7 @@ inline void EmiterPointCPU::initUniformsCache() {
 	mULCTextureUnit = mProgram->getUniformLocation("uTextureUnit");
 }
 
-inline void EmiterPointCPU::initVAO() {
+void EmiterPointCPU::initVAO() {
 	mSampler->bind();
 	mVAO->bind();
 	mVBO->bind();
@@ -198,7 +198,7 @@ inline void EmiterPointCPU::initVAO() {
 	mVAO->unbind();
 }
 
-inline void EmiterPointCPU::initVBO() {
+void EmiterPointCPU::initVBO() {
 	mVBO->getAttributes(mProgram->getHandle());
 	mVBO->attributesBind(mProgram);
 }
