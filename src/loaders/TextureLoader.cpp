@@ -361,6 +361,8 @@ inline GLenum TextureLoader::getComporession(eCompression compression) {
 		case eCompression::generic_srgba:
 			return GL_COMPRESSED_SRGB_ALPHA;
 			break;
+#if defined(__APPLE__)
+#else
 		case eCompression::latc_luminance:
 			return GL_COMPRESSED_LUMINANCE_LATC1_EXT;
 			break;
@@ -397,6 +399,7 @@ inline GLenum TextureLoader::getComporession(eCompression compression) {
 		case eCompression::s3tc_dxt5_rgba:
 			return GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
 			break;
+#endif
 		default:
 			break;
 	}
