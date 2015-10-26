@@ -24,7 +24,6 @@ EmiterPoint::EmiterPoint(
 		GLboolean depthTesting,
 		GLfloat alphaCutOff)
 		:
-				Entity(),
 				Reloadable(engine),
 				mStartSize(size),
 				mLifetime(lifetime),

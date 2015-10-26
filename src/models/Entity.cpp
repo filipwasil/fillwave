@@ -16,7 +16,7 @@ FLOGINIT("Entity", FERROR | FFATAL)
 namespace fillwave {
 namespace models {
 
-Entity::Entity(glm::mat4 model, glm::vec3 translation, glm::quat rotation)
+Entity::Entity(glm::vec3 translation, glm::quat rotation)
 		:
 				Moveable(translation, rotation),
 				mChildrenPropagateEvent(GL_TRUE),

@@ -28,7 +28,6 @@ namespace models {
 class Entity: public Moveable {
 public:
 	Entity(
-			glm::mat4 model = glm::mat4(1.0),
 			glm::vec3 translation = glm::vec3(0.0),
 			glm::quat orientation = glm::quat(1.0, 0.0, 0.0, 0.0));
 

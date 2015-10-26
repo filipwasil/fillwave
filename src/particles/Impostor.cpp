@@ -23,7 +23,6 @@ Impostor::Impostor(
 		GLenum blendingSource,
 		GLenum blendingDestination)
 		:
-				models::Entity(glm::mat4(1.0)),
 				Finishable(lifetime),
 				mSize(size),
 				mTexture(texture),

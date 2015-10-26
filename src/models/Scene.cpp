@@ -16,7 +16,6 @@ namespace models {
 
 Scene::Scene()
 		:
-				Entity(glm::mat4(1.0)),
 				mCursor(pCursor()),
 				mSkybox(pSkybox()),
 				mLastPicked(pEntity()),

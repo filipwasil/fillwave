@@ -41,7 +41,6 @@ Mesh::Mesh(
 		manager::BoneManager* boneManager,
 		GLenum drawType)
 		:
-				Entity(),
 				Reloadable(engine),
 				mMaterial(material),
 				mDiffuseMap(diffuseMap),
