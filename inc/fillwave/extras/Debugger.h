@@ -15,6 +15,10 @@ namespace space {
 class Camera;
 }
 
+namespace core {
+class FramebufferGeometry;
+}
+
 enum class eDebuggerState {
 	lightsSpot,
 	lightsSpotColor,

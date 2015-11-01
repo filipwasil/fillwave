@@ -8,11 +8,6 @@
 #ifndef FILLWAVE_H_
 #define FILLWAVE_H_
 
-/* core */
-#include <fillwave/core/rendering/FramebufferGeometry.h>
-#include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
-#include <fillwave/core/buffers/PixelBuffer.h>
-
 /* effects */
 #include <fillwave/effects/Fog.h>
 #include <fillwave/effects/BoostColor.h>
@@ -66,28 +61,11 @@
 #include <fillwave/terrain/Terrain.h>
 #include <fillwave/terrain/MeshTerrain.h>
 
-/* Loaders */
-#include <fillwave/loaders/FileLoader.h>
-#include <fillwave/loaders/ProgramLoader.h>
-
 /* Extras */
 #include <fillwave/extras/Debugger.h>
 
-/* Operations */
-#include <fillwave/core/operations/PostProcessingPass.h>
-
 /* Common */
 #include <fillwave/common/PhysicsMeshBuffer.h>
-
-/* Management */
-#include <fillwave/management/ProgramManager.h>
-#include <fillwave/management/TextureManager.h>
-#include <fillwave/management/ShaderManager.h>
-#include <fillwave/management/LightManager.h>
-#include <fillwave/management/SamplerManager.h>
-#include <fillwave/management/BufferManager.h>
-
-struct ANativeActivity;
 
 namespace fillwave {
 
@@ -128,17 +106,16 @@ public:
 
 	/* Assets */
 	puPhysicsMeshBuffer getPhysicalMeshBuffer(const std::string& shapePath);
-
 	manager::LightManager* getLightManager() const;
+
+	const fScene* getModelFromFile(std::string path); /* xxx remove */
 
 	/* Scene */
 	void setCurrentScene(pScene scene);
-
 	pScene getCurrentScene() const;
 
 	/* Time */
 	GLuint getFramesPassed();
-
 	GLfloat getStartupAnimationTime() const;
 
 	/* Store shaders */
@@ -151,6 +128,23 @@ public:
 	pShader storeShaderVertex(
 			const std::string& shaderPath,
 			const std::string& shaderSource);
+
+#ifdef __ANDROID__
+#else
+	pShader storeShaderGeometry(const std::string& shaderPath);
+	pShader storeShaderTesselationControl(const std::string& shaderPath);
+	pShader storeShaderTesselationEvaluation(const std::string& shaderPath);
+
+	pShader storeShaderGeometry(
+			const std::string& shaderPath,
+			const std::string& shaderSource);
+	pShader storeShaderTesselationControl(
+			const std::string& shaderPath,
+			const std::string& shaderSource);
+	pShader storeShaderTesselationEvaluation(
+			const std::string& shaderPath,
+			const std::string& shaderSource);
+#endif
 
 	pProgram storeProgram(
 			const std::string& name,
@@ -201,34 +195,20 @@ public:
 			glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
 			eTextEffect effect = eTextEffect::none);
 
-#ifdef __ANDROID__
-#else
-	pShader storeShaderGeometry(const std::string& shaderPath);
-	pShader storeShaderTesselationControl(const std::string& shaderPath);
-	pShader storeShaderTesselationEvaluation(const std::string& shaderPath);
-
-	pShader storeShaderGeometry(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-	pShader storeShaderTesselationControl(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-	pShader storeShaderTesselationEvaluation(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-#endif
-
+	/* Store sampler */
 	pSampler storeSO(GLint textureUnit);
 
+	/* Store vertex array objects */
 	pVertexArray storeVAO(models::Reloadable* user = nullptr);
 
+	/* Clear */
 	void clearText(pText text);
 	void clearLight(pLightSpot light);
 	void clearLight(pLightDirectional);
 	void clearLight(pLightPoint light);
 	void clearLights();
 
-	/* Picking */
+	/* Pick */
 	void pick(GLuint x, GLuint y);
 
 	/* Screen */
@@ -244,9 +224,6 @@ public:
 			GLint* sizeInBytes,
 			GLuint format = GL_RGBA,
 			GLint bytesPerPixel = 4);
-
-	/* File system */
-	std::string getExecutablePath();
 
 	/* Post processing */
 	void addPostProcess(const std::string& fragmentShaderPath, GLfloat lifeTime =
@@ -317,232 +294,10 @@ public:
 
 	void reload();
 
-	/* Asset loader */
-	const fScene* getModelFromFile(std::string path);
-
 	GLboolean isDR() const;
 private:
-	/* Asset loader */
-#ifdef FILLWAVE_COMPILATION_TINY_ASSET_LOADER
-#else
-	Assimp::Importer mImporter;
-#endif
-
-	static const GLuint mDeferredColorAttachments = 4;
-	static const GLuint mDeferredDepthAttachments = 1;
-
-	/* Screen */
-	GLuint mWindowWidth = 1920;
-	GLuint mWindowHeight = 1200;
-
-	/* Startup */
-	GLfloat mStartupTime;
-	pTexture mStartupTexture;
-	const GLfloat mStartupTimeLimit = 8.0f;
-	puPostProcessingPass mPostProcessingPassStartup;
-
-	/* Techniques */
-	GLboolean mIsDR; /* Deferred rendering */
-	GLboolean mIsAO; /* Ambient occlusion */
-	GLboolean mISOQ; /* Occlusion query */
-
-	/* Scene */
-	pScene mScene;
-
-	glm::vec3 mBackgroundColor;
-
-	/* Loaders */
-	loader::FontLoader mFontLoader;
-	loader::FileLoader mFileLoader;
-	loader::ProgramLoader mProgramLoader;
-
-	/* Picking */
-	pTexture2DRenderable mPickingRenderableTexture;
-	puPixelBuffer mPickingPixelBuffer;
-
-	/* Resources */
-	puProgramManager mProgramManager;
-	puTextureManager mTextureManager;
-	puShaderManager mShaderManager;
-	puLightManager mLightManager;
-	puSamplerManager mSamplerManager;
-	puBufferManager mBufferManager;
-	std::vector<pText> mTextManager;
-	std::vector<pFont> mFontManager;
-	std::vector<common::PostProcessingPass> mPostProcessingPasses;
-	std::vector<pTexture2DRenderableDynamic> mTexturesDynamic;
-	pProgram mProgramTextureLookup;
-
-	/* Fences and barriers */
-	puFence mFence;
-
-	/* DR - Deferred rendering */
-	puFramebufferGeometry mGBuffer;
-
-	/* DLC - Uniform location cache */
-	pProgram mProgramDRSpotLight, mProgramDRDirecionalLight,
-			mProgramDRPointLight, mProgramDRDepthless, mProgramDRAmbient;
-
-	GLint mULCCameraPositionSpot, mULCAmbientIntensitySpot, mULCScreenSizeSpot,
-			mULCShadowUnitSpot, mULCIsAOSpot;
-
-	GLint mULCCameraPositionDirectional, mULCAmbientIntensityDirectional,
-			mULCScreenSizeDirectional, mULCShadowUnitDirectional,
-			mULCIsAODirectional;
-
-	GLint mULCCameraPositionPoint, mULCAmbientIntensityPoint, mULCMVPPoint,
-			mULCScreenSizePoint, mULCShadowUnitPoint, mULCIsAOPoint;
-
-	GLint mULCDRDepthlesDiffuseTexel, mULCDRDepthlessPositionTexel,
-			mULCDRScreenSize, uULCDRAScreenSize, uULCDRADiffuseAttachment,
-			uULCDRAAmbientGlobal;
-
-	puMesh mDeferredPointLight;
-
-	/* AO */
-	pProgram mProgramAOGeometry;
-	pProgram mProgramAOColor;
-
-	pTexture2DRenderable mAOGeometryBuffer;
-	pTexture2DRenderable mAOColorBuffer;
-
-	/* OQ */
-	pProgram mProgramOcclusionBox;
-	puVertexBufferPosition mVBOOcclusion;
-	pVertexArray mVAOOcclusion;
-
-	/* Inputs - focus */
-	pEntity mFocusKey;
-	pEntity mFocusMouseButton;
-	pEntity mFocusScroll;
-	pEntity mFocusChar;
-	pEntity mFocusCharMods;
-	pEntity mFocusCursorEnter;
-	pEntity mFocusCursorPosition;
-	pEntity mFocusTouchScreen;
-
-	/* Inputs - callbacks */
-	std::vector<actions::EngineCallback*> mTimeCallbacks;
-	std::vector<actions::EngineCallback*> mKeyCallbacks;
-	std::vector<actions::EngineCallback*> mMouseButtonCallbacks;
-	std::vector<actions::EngineCallback*> mScrollCallbacks;
-	std::vector<actions::EngineCallback*> mCharCallbacks;
-	std::vector<actions::EngineCallback*> mCharModsCallbacks;
-	std::vector<actions::EngineCallback*> mCursorEnterCallbacks;
-	std::vector<actions::EngineCallback*> mCursorPositionCallbacks;
-	std::vector<actions::EngineCallback*> mTouchScreenCallbacks;
-
-	/* Extras */
-	puDebugger mDebugger;
-	GLfloat mTimeFactor;
-	GLuint mFrameCounter;
-	pText mFPSText;
-	actions::FPSCallback* mTextFPSCallback;
-
-	/* Callbacks */
-	void runCallbacks(
-			std::vector<actions::EngineCallback*>& callbacks,
-			actions::EventType* event);
-	void clearCallbacks(std::vector<actions::EngineCallback*>& callbacks);
-	void unregisterCallback(
-			std::vector<actions::EngineCallback*>& callbacks,
-			actions::EngineCallback* callback);
-
-	/* Evaluation */
-	void evaluateShadowMaps();
-
-	void evaluateDebugger();
-
-	void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
-
-	void evaluateTime(GLfloat timeExpiredInSeconds);
-
-	void evaluateStartupAnimation(GLfloat time);
-
-	/* Draw passes */
-
-	void drawClear();
-
-	void drawScene(GLfloat time);
-
-	void drawSceneStartup();
-
-	void drawSceneCore();
-
-	void drawSceneCoreFR();
-
-	void drawSceneCoreDR();
-
-	void drawText();
-
-	void drawGeometryPass();
-
-	void drawOcclusionPass();
-
-	void drawDepthlessPass();
-
-	void drawAmbientPass();
-
-	void drawAOPass();
-
-	void drawColorPass();
-
-	void drawLightsSpotPass(GLint& textureUnit);
-
-	void drawLightsDirectionalPass(GLint& textureUnit);
-
-	void drawLightsPointPass(GLint& textureUnit);
-
-	void drawColorPassBegin();
-
-	void drawColorPassEnd();
-
-	/* Store */
-
-	pShader storeShader(const std::string& shaderPath, const GLuint& shaderType);
-
-	pShader storeShader(
-			const std::string& shaderName,
-			const GLuint& shaderType,
-			const std::string& shaderSource);
-
-	/* Picking */
-
-	glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
-
-	/* Initiatization */
-	void init();
-
-	void initExtensions();
-
-	void initContext();
-
-	void initPickingBuffer();
-
-	void initPipelines();
-
-	void initManagement();
-
-	void initDeferredShading();
-
-	void initAmbientOcclusion();
-
-	void initGeometryBuffer();
-
-	void initExtras();
-
-	void initOcclusionTest();
-
-	void initUniformsCache();
-
-	void initStartup();
-
-	void initGeometryShading();
-
-	/* Reload */
-	void reloadPickingBuffer();
-
-	void reloadGeometryBuffer();
+	struct EngineImpl;
+	std::unique_ptr<EngineImpl> mImpl;
 };
 } /* fillwave */
 

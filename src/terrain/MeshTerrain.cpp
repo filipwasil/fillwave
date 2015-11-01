@@ -6,10 +6,9 @@
  */
 
 #include <fillwave/terrain/MeshTerrain.h>
-
 #include <fillwave/extras/Log.h>
-
 #include <fillwave/Fillwave.h>
+#include <fillwave/loaders/ProgramLoader.h>
 
 FLOGINIT("MeshTerrain", FERROR | FFATAL)
 
