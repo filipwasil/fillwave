@@ -20,7 +20,7 @@ build:
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
     steps:
-        - validate-wercker-box
+        #- validate-wercker-box
         # Execute a custom script step.
         - script:
             name: build
