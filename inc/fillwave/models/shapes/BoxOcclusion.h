@@ -26,8 +26,8 @@ public:
 		for (int i = 0; i < 6; i++) {
 			vertVertices.push_back(
 					glm::vec3(quadVertices[i].mPosition[0],
-							quadVertices[i].mPosition[1], quadVertices[i].mPosition[2] +=
-									mSize));
+							quadVertices[i].mPosition[1],
+							quadVertices[i].mPosition[2] += mSize));
 		}
 
 		/* Down */

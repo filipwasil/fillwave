@@ -139,7 +139,7 @@ pBone BoneManager::get(std::string name) {
 	return pBone();
 }
 
-GLint BoneManager::getId(std::string name) const{
+GLint BoneManager::getId(std::string name) const {
 	for (auto it = mBones.begin(); it != mBones.end(); ++it) {
 		if ((*it).second->getName() == name) {
 			return (*it).first;
@@ -148,11 +148,11 @@ GLint BoneManager::getId(std::string name) const{
 	return -1;
 }
 
-animation::Animation* BoneManager::getAnimation(GLint i) const{
+animation::Animation* BoneManager::getAnimation(GLint i) const {
 	return (i != FILLWAVE_DO_NOT_ANIMATE ? mAnimations[i] : 0);
 }
 
-GLint BoneManager::getAnimations() const{
+GLint BoneManager::getAnimations() const {
 	return mAnimations.size();
 }
 
@@ -193,9 +193,9 @@ void BoneManager::updateBonesBuffer() {
 	}
 }
 
-void BoneManager::updateBonesUniform(GLint uniformLocationBones){
+void BoneManager::updateBonesUniform(GLint uniformLocationBones) {
 	core::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(),
-			FILLWAVE_MAX_BONES);
+	FILLWAVE_MAX_BONES);
 	core::Program::disusePrograms();
 }
 
@@ -205,7 +205,7 @@ void BoneManager::log() {
 
 animation::Channel* BoneManager::findChannel(
 		animation::Animation* animation,
-		const std::string& nodeName) const{
+		const std::string& nodeName) const {
 	for (int i = 0; i < animation->getHowManyChannels(); i++) {
 		animation::Channel* channel = animation->getChannel(i);
 
@@ -218,7 +218,7 @@ animation::Channel* BoneManager::findChannel(
 
 glm::vec3 BoneManager::getCurrentTranslation(
 		float timeElapsed_s,
-		animation::Channel* channel) const{
+		animation::Channel* channel) const {
 	if (channel->mKeysTranslation.size() == 1) {
 		return channel->mKeysTranslation[0].mValue;
 	}
@@ -239,7 +239,7 @@ glm::vec3 BoneManager::getCurrentTranslation(
 
 glm::vec3 BoneManager::getCurrentScale(
 		float timeElapsed_s,
-		animation::Channel* channel) const{
+		animation::Channel* channel) const {
 	if (channel->mKeysScaling.size() == 1) {
 		return channel->mKeysScaling[0].mValue;
 	}
@@ -260,7 +260,7 @@ glm::vec3 BoneManager::getCurrentScale(
 
 glm::quat BoneManager::getCurrentRotation(
 		float timeElapsed_s,
-		animation::Channel* channel) const{
+		animation::Channel* channel) const {
 	if (channel->mKeysRotation.size() == 1) {
 		return channel->mKeysRotation[0].mValue;
 	}
@@ -281,7 +281,7 @@ glm::quat BoneManager::getCurrentRotation(
 glm::fquat BoneManager::lerp(
 		const glm::fquat &v0,
 		const glm::fquat &v1,
-		float alpha) const{
+		float alpha) const {
 	glm::vec4 start = glm::vec4(v0.x, v0.y, v0.z, v0.w);
 	glm::vec4 end = glm::vec4(v1.x, v1.y, v1.z, v1.w);
 	glm::vec4 interp = glm::mix(start, end, alpha);
@@ -291,7 +291,7 @@ glm::fquat BoneManager::lerp(
 
 GLuint BoneManager::getTranslationStep(
 		float timeElapsed_s,
-		animation::Channel* channel) const{
+		animation::Channel* channel) const {
 	for (GLuint i = 0; i < channel->mKeysTranslation.size() - 1; i++) {
 		if (timeElapsed_s < (float) channel->mKeysTranslation[i + 1].mTime) {
 			return i;
@@ -305,7 +305,7 @@ GLuint BoneManager::getTranslationStep(
 
 GLuint BoneManager::getRotationStep(
 		float timeElapsed_s,
-		animation::Channel* channel) const{
+		animation::Channel* channel) const {
 	assert(channel->mKeysRotation.size() > 0);
 	for (GLuint i = 0; i < channel->mKeysRotation.size() - 1; i++) {
 		if (timeElapsed_s < (float) channel->mKeysRotation[i + 1].mTime) {
@@ -320,7 +320,7 @@ GLuint BoneManager::getRotationStep(
 
 GLuint BoneManager::getScaleStep(
 		float timeElapsed_s,
-		animation::Channel* channel) const{
+		animation::Channel* channel) const {
 	assert(channel->mKeysScaling.size() > 0);
 	for (GLuint i = 0; i < channel->mKeysScaling.size() - 1; i++) {
 		if (timeElapsed_s < (float) channel->mKeysScaling[i + 1].mTime) {
@@ -330,7 +330,7 @@ GLuint BoneManager::getScaleStep(
 	return 0;
 }
 
-GLint BoneManager::getElements() const{
+GLint BoneManager::getElements() const {
 	return mElements;
 }
 

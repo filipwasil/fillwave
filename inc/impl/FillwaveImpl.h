@@ -508,55 +508,55 @@ inline void Engine::EngineImpl::initUniforms() {
 
 	mProgramDRDirecionalLight->use();
 	mProgramDRDirecionalLight->uniformPush("uWorldPositionAttachment",
-			FILLWAVE_POSITION_ATTACHMENT);
+	FILLWAVE_POSITION_ATTACHMENT);
 	mProgramDRDirecionalLight->uniformPush("uDiffuseTexelAttachment",
-			FILLWAVE_DIFFUSE_ATTACHMENT);
+	FILLWAVE_DIFFUSE_ATTACHMENT);
 	mProgramDRDirecionalLight->uniformPush("uNormalAttachment",
-			FILLWAVE_NORMAL_ATTACHMENT);
+	FILLWAVE_NORMAL_ATTACHMENT);
 	mProgramDRDirecionalLight->uniformPush("uSpecularTexelAttachment",
-			FILLWAVE_SPECULAR_ATTACHMENT);
+	FILLWAVE_SPECULAR_ATTACHMENT);
 	mProgramDRDirecionalLight->uniformPush("uScreenSize", screenSize);
 	mProgramDRDirecionalLight->uniformPush("uAOMap", FILLWAVE_AO_UNIT);
 
 	mProgramDRSpotLight->use();
 	mProgramDRSpotLight->uniformPush("uWorldPositionAttachment",
-			FILLWAVE_POSITION_ATTACHMENT);
+	FILLWAVE_POSITION_ATTACHMENT);
 	mProgramDRSpotLight->uniformPush("uDiffuseTexelAttachment",
-			FILLWAVE_DIFFUSE_ATTACHMENT);
+	FILLWAVE_DIFFUSE_ATTACHMENT);
 	mProgramDRSpotLight->uniformPush("uNormalAttachment",
-			FILLWAVE_NORMAL_ATTACHMENT);
+	FILLWAVE_NORMAL_ATTACHMENT);
 	mProgramDRSpotLight->uniformPush("uSpecularTexelAttachment",
-			FILLWAVE_SPECULAR_ATTACHMENT);
+	FILLWAVE_SPECULAR_ATTACHMENT);
 	mProgramDRSpotLight->uniformPush("uScreenSize", screenSize);
 	mProgramDRSpotLight->uniformPush("uAOMap", FILLWAVE_AO_UNIT);
 
 	mProgramDRPointLight->use();
 	mProgramDRPointLight->uniformPush("uWorldPositionAttachment",
-			FILLWAVE_POSITION_ATTACHMENT);
+	FILLWAVE_POSITION_ATTACHMENT);
 	mProgramDRPointLight->uniformPush("uDiffuseTexelAttachment",
-			FILLWAVE_DIFFUSE_ATTACHMENT);
+	FILLWAVE_DIFFUSE_ATTACHMENT);
 	mProgramDRPointLight->uniformPush("uNormalAttachment",
-			FILLWAVE_NORMAL_ATTACHMENT);
+	FILLWAVE_NORMAL_ATTACHMENT);
 	mProgramDRPointLight->uniformPush("uSpecularTexelAttachment",
-			FILLWAVE_SPECULAR_ATTACHMENT);
+	FILLWAVE_SPECULAR_ATTACHMENT);
 	mProgramDRPointLight->uniformPush("uScreenSize", screenSize);
 	mProgramDRPointLight->uniformPush("uAOMap", FILLWAVE_AO_UNIT);
 
 	mProgramDRDepthless->use();
 	mProgramDRDepthless->uniformPush("uWorldPositionAttachment",
-			FILLWAVE_POSITION_ATTACHMENT);
+	FILLWAVE_POSITION_ATTACHMENT);
 	mProgramDRDepthless->uniformPush("uDiffuseTexelAttachment",
-			FILLWAVE_DIFFUSE_ATTACHMENT);
+	FILLWAVE_DIFFUSE_ATTACHMENT);
 	mProgramDRDepthless->uniformPush("uScreenSize", screenSize);
 
 	mProgramDRAmbient->use();
 	mProgramDRAmbient->uniformPush("uDiffuseTexelAttachment",
-			FILLWAVE_DIFFUSE_ATTACHMENT);
+	FILLWAVE_DIFFUSE_ATTACHMENT);
 	mProgramDRAmbient->uniformPush("uScreenSize", screenSize);
 
 	mProgramTextureLookup->use();
 	mProgramTextureLookup->uniformPush("uPostProcessingSampler",
-			FILLWAVE_DIFFUSE_UNIT);
+	FILLWAVE_DIFFUSE_UNIT);
 	core::Program::disusePrograms();
 }
 
@@ -678,11 +678,14 @@ inline void Engine::EngineImpl::initStartup(Engine* engine) {
 
 	FLOG_DEBUG("Post processing startup pass added");
 
-	mStartupTexture = mTextureManager->get("logo.png", FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
+	mStartupTexture = mTextureManager->get("logo.png",
+			FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
 	if (not mStartupTexture) {
-		mStartupTexture = mTextureManager->get("textures/logo.png", FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
+		mStartupTexture = mTextureManager->get("textures/logo.png",
+				FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
 		if (not mStartupTexture) {
-			mStartupTexture = mTextureManager->get("64_64_64.color", FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
+			mStartupTexture = mTextureManager->get("64_64_64.color",
+					FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
 			FLOG_ERROR("Fillwave startup logo could not be executed");
 		}
 	}
@@ -862,7 +865,7 @@ void Engine::EngineImpl::drawTexture(core::Texture* t, core::Program* p) {
 void Engine::EngineImpl::drawTexture(core::Texture* t) {
 	mProgramTextureLookup->use();
 	mProgramTextureLookup->uniformPush("uPostProcessingSampler",
-			FILLWAVE_DIFFUSE_UNIT);
+	FILLWAVE_DIFFUSE_UNIT);
 	t->bind(FILLWAVE_DIFFUSE_UNIT);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	t->unbind();
@@ -1224,7 +1227,8 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 	core::Framebuffer::bindScreenFramebuffer();
 }
 
-inline void Engine::EngineImpl::evaluateDynamicTextures(GLfloat timeExpiredInSeconds) {
+inline void Engine::EngineImpl::evaluateDynamicTextures(
+		GLfloat timeExpiredInSeconds) {
 	for (auto& it : mTexturesDynamic) {
 		it->bindForWriting();
 		it->draw(timeExpiredInSeconds);
@@ -1385,7 +1389,10 @@ pVertexArray Engine::EngineImpl::storeVAO(models::Reloadable* user) {
 	return mBufferManager->getVAO(user);
 }
 
-glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y) {
+glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(
+		GLubyte* data,
+		GLuint x,
+		GLuint y) {
 	y = mWindowHeight - y;
 	GLuint id, r, g, b, a;
 

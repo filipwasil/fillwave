@@ -136,8 +136,7 @@ const std::string gGLVSBonesTransformation =
 #else
 #error "Too many bone dependencies"
 #endif
-;
-const std::string gGLVSAttributesPosition =
+;const std::string gGLVSAttributesPosition =
 		"layout(location = 0) in vec4 aPosition;                        \n";
 
 const std::string gGLVSAttributesQuad =
@@ -1441,7 +1440,7 @@ pProgram ProgramLoader::getAmbientOcclusionColor(Engine* engine) {
 	}
 
 	p->uniformPush("uRandomVectors[0]", &vectors[0],
-			FILLWAVE_RANDOM_VECTOR_SIZE);
+	FILLWAVE_RANDOM_VECTOR_SIZE);
 
 	p->disusePrograms();
 

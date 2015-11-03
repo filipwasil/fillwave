@@ -17,7 +17,7 @@ namespace manager {
 LightManager::LightManager(GLsizei screenWidth, GLsizei screenHeight)
 		: mShadowWidth(screenWidth), mShadowHeight(screenHeight) {
 	mLightBufferData.resize(
-			FILLWAVE_MAX_SPOT_LIGHTS + FILLWAVE_MAX_DIRECTIONAL_LIGHTS);
+	FILLWAVE_MAX_SPOT_LIGHTS + FILLWAVE_MAX_DIRECTIONAL_LIGHTS);
 }
 
 pLightSpot LightManager::addLightSpot(
@@ -249,7 +249,7 @@ void LightManager::pushLightUniforms(space::Camera& c, core::Program* program) {
 				strings::getStructField("uPointLights", "intensity", i),
 				mPointLights[i]->getIntensity());
 		program->uniformPush(strings::getNotIndexableName("uPointShadowMap", i),
-				FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
+		FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
 		UBOIterator++;
 	}
 

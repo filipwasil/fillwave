@@ -33,15 +33,15 @@ Material::Material(const aiMaterial* material) {
 	}
 }
 
-glm::vec4 Material::getAmbient() const{
+glm::vec4 Material::getAmbient() const {
 	return mAmbient;
 }
 
-glm::vec4 Material::getDiffuse() const{
+glm::vec4 Material::getDiffuse() const {
 	return mDiffuse;
 }
 
-glm::vec4 Material::getSpecular() const{
+glm::vec4 Material::getSpecular() const {
 	return mSpecular;
 }
 

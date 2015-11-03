@@ -22,7 +22,8 @@ namespace models {
 class Sphere: public Shape<core::VertexBasic> {
 
 public:
-	Sphere(GLfloat radius,
+	Sphere(
+			GLfloat radius,
 			GLuint rings = 10,
 			GLuint sectors = 10,
 			glm::vec3 color = glm::vec3(0.0)) {

@@ -8,7 +8,6 @@
 #ifndef IMPOSTOR_H_
 #define IMPOSTOR_H_
 
-
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/texturing/Sampler.h>
 #include <fillwave/core/pipeline/Program.h>

@@ -58,7 +58,6 @@ void Engine::configureTime(GLfloat timeFactor) {
 	mImpl->mTimeFactor = timeFactor;
 }
 
-
 void Engine::draw(GLfloat time) {
 	mImpl->draw(time);
 }
@@ -85,8 +84,8 @@ pLightSpot Engine::storeLightSpot(
 		glm::vec4 color,
 		pEntity entity) {
 	return mImpl->mLightManager->addLightSpot(
-			mImpl->mTextureManager->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight), position,
-			rotation, color, entity);
+			mImpl->mTextureManager->getShadow2D(mImpl->mWindowWidth,
+					mImpl->mWindowHeight), position, rotation, color, entity);
 }
 
 pLightPoint Engine::storeLightPoint(
@@ -94,8 +93,8 @@ pLightPoint Engine::storeLightPoint(
 		glm::vec4 color,
 		pEntity entity) {
 	return mImpl->mLightManager->addLightPoint(
-			mImpl->mTextureManager->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight), position,
-			color, entity);
+			mImpl->mTextureManager->getShadow3D(mImpl->mWindowWidth,
+					mImpl->mWindowHeight), position, color, entity);
 }
 
 pLightDirectional Engine::storeLightDirectional(
@@ -104,8 +103,8 @@ pLightDirectional Engine::storeLightDirectional(
 		glm::vec4 color,
 		pEntity entity) {
 	return mImpl->mLightManager->addLightDirectional(
-			mImpl->mTextureManager->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight), position,
-			rotation, color, entity);
+			mImpl->mTextureManager->getShadow2D(mImpl->mWindowWidth,
+					mImpl->mWindowHeight), position, rotation, color, entity);
 }
 
 pShader Engine::storeShaderFragment(const std::string& shaderPath) {
@@ -115,7 +114,8 @@ pShader Engine::storeShaderFragment(const std::string& shaderPath) {
 pShader Engine::storeShaderFragment(
 		const std::string& shaderPath,
 		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath, GL_FRAGMENT_SHADER, shaderSource);
+	return mImpl->mShaderManager->add(shaderPath, GL_FRAGMENT_SHADER,
+			shaderSource);
 }
 
 pShader Engine::storeShaderVertex(const std::string& shaderPath) {
@@ -147,8 +147,8 @@ pTexture2DRenderableDynamic Engine::storeTextureDynamic(
 	const std::string path = fragmentShaderPath;
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(this,
 			fragmentShaderPath);
-	pTexture2DRenderableDynamic t = mImpl->mTextureManager->getDynamic(path, program,
-			glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));
+	pTexture2DRenderableDynamic t = mImpl->mTextureManager->getDynamic(path,
+			program, glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));
 	mImpl->mTexturesDynamic.push_back(t);
 	return t;
 }
@@ -373,35 +373,35 @@ void Engine::setFocusCursorPosition(pEntity entity) {
 }
 
 /* Inputs - getFocus */
-pEntity Engine::getFocusKey() const{
+pEntity Engine::getFocusKey() const {
 	return mImpl->mFocusKey;
 }
 
-pEntity Engine::getFocusMouseButton() const{
+pEntity Engine::getFocusMouseButton() const {
 	return mImpl->mFocusMouseButton;
 }
 
-pEntity Engine::getFocusScroll() const{
+pEntity Engine::getFocusScroll() const {
 	return mImpl->mFocusScroll;
 }
 
-pEntity Engine::getFocusChar() const{
+pEntity Engine::getFocusChar() const {
 	return mImpl->mFocusChar;
 }
 
-pEntity Engine::getFocusCharMods() const{
+pEntity Engine::getFocusCharMods() const {
 	return mImpl->mFocusCharMods;
 }
 
-pEntity Engine::getFocusCursorEnter() const{
+pEntity Engine::getFocusCursorEnter() const {
 	return mImpl->mFocusCursorEnter;
 }
 
-pEntity Engine::getFocusCursorPosition() const{
+pEntity Engine::getFocusCursorPosition() const {
 	return mImpl->mFocusCursorPosition;
 }
 
-pEntity Engine::getFocusTouchScreen() const{
+pEntity Engine::getFocusTouchScreen() const {
 	return mImpl->mFocusTouchScreen;
 }
 
@@ -419,7 +419,7 @@ pText Engine::storeText(
 	}
 
 	pTexture t = mImpl->mTextureManager->get(fontName + ".png",
-			FILLWAVE_TEXTURE_TYPE_NONE, eCompression::none, eFlip::vertical);
+	FILLWAVE_TEXTURE_TYPE_NONE, eCompression::none, eFlip::vertical);
 
 	Font* font = nullptr;
 	for (auto& it : mImpl->mFontManager) {
@@ -490,7 +490,7 @@ void Engine::clearLights() {
 	mImpl->mLightManager->removeLights();
 }
 
-glm::ivec2 Engine::getScreenSize() const{
+glm::ivec2 Engine::getScreenSize() const {
 	return glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight);
 }
 
@@ -508,7 +508,7 @@ GLuint Engine::getFramesPassed() {
 	return result;
 }
 
-GLfloat Engine::getStartupAnimationTime() const{
+GLfloat Engine::getStartupAnimationTime() const {
 	return mImpl->mStartupTimeLimit;
 }
 
@@ -522,11 +522,11 @@ void Engine::setCurrentScene(pScene scene) {
 	}
 }
 
-pScene Engine::getCurrentScene() const{
+pScene Engine::getCurrentScene() const {
 	return mImpl->mScene;
 }
 
-manager::LightManager* Engine::getLightManager() const{
+manager::LightManager* Engine::getLightManager() const {
 	return mImpl->mLightManager.get();
 }
 
@@ -565,9 +565,11 @@ void Engine::addPostProcess(
 		GLfloat lifeTime) {
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(this,
 			fragmentShaderPath);
-	common::PostProcessingPass pass(program, mImpl->mWindowWidth, mImpl->mWindowHeight,
+	common::PostProcessingPass pass(program, mImpl->mWindowWidth,
+			mImpl->mWindowHeight,
 			mImpl->mTextureManager->getDynamic(fragmentShaderPath, program,
-					glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)), lifeTime);
+					glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)),
+			lifeTime);
 	mImpl->mPostProcessingPasses.push_back(pass);
 	FLOG_DEBUG("Post processing pass added: %s", fragmentShaderPath.c_str());
 }
@@ -621,8 +623,8 @@ void Engine::pick(GLuint x, GLuint y) {
 
 	mImpl->mPickingPixelBuffer->bind();
 
-	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE,
-			0);
+	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
+			GL_UNSIGNED_BYTE, 0);
 
 	FLOG_CHECK("glReadPixels failed");
 #ifdef __ANDROID__
@@ -644,8 +646,8 @@ void Engine::captureFramebufferToFile(const std::string& name) {
 	mImpl->drawClear();
 	mImpl->mScene->draw();
 	mImpl->mPickingPixelBuffer->bind();
-	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE,
-			0);
+	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
+			GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
 #ifdef __ANDROID__
 	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
@@ -681,12 +683,13 @@ void Engine::captureFramebufferToBuffer(
 	mImpl->drawClear();
 	mImpl->mScene->draw();
 	mImpl->mPickingPixelBuffer->bind();
-	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, format, GL_UNSIGNED_BYTE, 0);
+	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, format,
+			GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
 #ifdef __ANDROID__
 	buffer = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
-	buffer = (GLubyte*)mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
+	buffer = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
 #endif
 	*sizeInBytes = mImpl->mWindowWidth * mImpl->mWindowHeight * bytesPerPixel;
 	buffer[*sizeInBytes] = '\0';
@@ -697,13 +700,14 @@ const fScene* Engine::getModelFromFile(std::string path) {
 #ifdef FILLWAVE_COMPILATION_TINY_ASSET_LOADER
 	return nullptr;
 #else
-	return mImpl->mImporter.ReadFile((mImpl->mFileLoader.getRootPath() + path).c_str(),
+	return mImpl->mImporter.ReadFile(
+			(mImpl->mFileLoader.getRootPath() + path).c_str(),
 			aiProcess_Triangulate | aiProcess_SortByPType
 					| aiProcess_CalcTangentSpace);
 #endif
 }
 
-GLboolean Engine::isDR() const{
+GLboolean Engine::isDR() const {
 	return mImpl->mIsDR;
 }
 
@@ -716,7 +720,8 @@ pShader Engine::storeShaderGeometry(const std::string& shaderPath) {
 pShader Engine::storeShaderGeometry(
 		const std::string& shaderPath,
 		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath, GL_GEOMETRY_SHADER, shaderSource);
+	return mImpl->mShaderManager->add(shaderPath, GL_GEOMETRY_SHADER,
+			shaderSource);
 }
 
 pShader Engine::storeShaderTesselationControl(const std::string& shaderPath) {
@@ -726,7 +731,8 @@ pShader Engine::storeShaderTesselationControl(const std::string& shaderPath) {
 pShader Engine::storeShaderTesselationControl(
 		const std::string& shaderPath,
 		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath, GL_TESS_CONTROL_SHADER, shaderSource);
+	return mImpl->mShaderManager->add(shaderPath, GL_TESS_CONTROL_SHADER,
+			shaderSource);
 }
 
 pShader Engine::storeShaderTesselationEvaluation(

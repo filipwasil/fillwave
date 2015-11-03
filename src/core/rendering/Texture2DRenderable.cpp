@@ -5,7 +5,6 @@
  *      Author: Filip Wasil
  */
 
-
 #include <fillwave/core/rendering/Texture2DRenderable.h>
 #include <fillwave/extras/Log.h>
 
@@ -67,8 +66,8 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
 			glDrawBuffer(GL_NONE);
 			glReadBuffer(GL_NONE); //xxx this does not have to be here
 #else
-			glDrawBuffers(1,&none);
-			glReadBuffer(GL_NONE); //xxx this does not have to be here
+					glDrawBuffers(1,&none);
+					glReadBuffer(GL_NONE); //xxx this does not have to be here
 #endif
 			FLOG_CHECK("Setting depth framebuffer failed");
 			Framebuffer::bindScreenFramebuffer();

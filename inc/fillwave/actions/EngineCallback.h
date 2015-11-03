@@ -28,9 +28,9 @@ public:
 
 	virtual ~EngineCallback() = default;
 
-/*	perform
- * \brief virtual: Performs EngineCallback action
- */
+	/*	perform
+	 * \brief virtual: Performs EngineCallback action
+	 */
 
 	virtual void perform(Engine* engine, EventType* eventType) = 0;
 };

@@ -5,7 +5,6 @@
  *      Author: filip
  */
 
-
 #include <fillwave/core/buffers/IndexBufferBasic.h>
 #include <fillwave/extras/Log.h>
 

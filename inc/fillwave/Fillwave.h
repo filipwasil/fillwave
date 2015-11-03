@@ -153,7 +153,7 @@ public:
 
 	/* Store textures */
 	pTexture storeTexture(const std::string& texturePath, const GLuint& mapType =
-			FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression compression =
+	FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression compression =
 			loader::eCompression::none);
 
 	pTexture2DRenderableDynamic storeTextureDynamic(
@@ -227,7 +227,7 @@ public:
 
 	/* Post processing */
 	void addPostProcess(const std::string& fragmentShaderPath, GLfloat lifeTime =
-			FILLWAVE_ENDLESS);
+	FILLWAVE_ENDLESS);
 
 	/* Inputs - setFocus */
 	void setFocusKey(pEntity entity);

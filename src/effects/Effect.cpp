@@ -16,6 +16,5 @@ FLOGINIT("Effect", FERROR | FFATAL)
 namespace fillwave {
 namespace effects {
 
-
 } /* effects */
 } /* fillwave */

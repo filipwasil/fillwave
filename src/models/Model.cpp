@@ -218,15 +218,12 @@ inline void Model::loadNodes(
 						nullptr) == AI_SUCCESS) ? specularMapPathAssimp.data : "";
 
 		pMesh mesh = loadMesh(aMesh, Material(aMaterial),
-				buildTextureRegion(
-						engine->storeTexture(diffuseMapPath.c_str(),
-								FILLWAVE_TEXTURE_TYPE_DIFFUSE)),
-				buildTextureRegion(
-						engine->storeTexture(normalMapPath.c_str(),
-								FILLWAVE_TEXTURE_TYPE_NORMALS)),
-				buildTextureRegion(
-						engine->storeTexture(specularMapPath.c_str(),
-								FILLWAVE_TEXTURE_TYPE_SPECULAR)), engine);
+				buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str(),
+				FILLWAVE_TEXTURE_TYPE_DIFFUSE)),
+				buildTextureRegion(engine->storeTexture(normalMapPath.c_str(),
+				FILLWAVE_TEXTURE_TYPE_NORMALS)),
+				buildTextureRegion(engine->storeTexture(specularMapPath.c_str(),
+				FILLWAVE_TEXTURE_TYPE_SPECULAR)), engine);
 		entity->attach(mesh);
 	}
 

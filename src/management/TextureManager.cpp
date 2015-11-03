@@ -42,31 +42,31 @@ inline void TextureManager::checkExtensions() {
 #else
 		if (find_extension("GL_EXT_texture_compression_latc")) {
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_LUMINANCE_LATC1_EXT);
+			GL_COMPRESSED_LUMINANCE_LATC1_EXT);
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT);
+			GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT);
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT);
+			GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT);
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_EXT);
+			GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_EXT);
 		} else if (find_extension("GL_EXT_texture_compression_rgtc")) {
 			mSupportedCompresssionTypes.push_back(GL_COMPRESSED_RED_RGTC1_EXT);
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_SIGNED_RED_RGTC1_EXT);
+			GL_COMPRESSED_SIGNED_RED_RGTC1_EXT);
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_RED_GREEN_RGTC2_EXT);
+			GL_COMPRESSED_RED_GREEN_RGTC2_EXT);
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT);
+			GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT);
 		} else if (find_extension("GL_EXT_texture_compression_s3tc")) {
 			mSupportedCompresssionTypes.push_back(GL_COMPRESSED_RGB_S3TC_DXT1_EXT);
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_RGBA_S3TC_DXT1_EXT);
+			GL_COMPRESSED_RGBA_S3TC_DXT1_EXT);
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_RGBA_S3TC_DXT3_EXT);
+			GL_COMPRESSED_RGBA_S3TC_DXT3_EXT);
 			mSupportedCompresssionTypes.push_back(
-					GL_COMPRESSED_RGBA_S3TC_DXT5_EXT);
+			GL_COMPRESSED_RGBA_S3TC_DXT5_EXT);
 		}
-	#endif
+#endif
 	}
 
 #endif
@@ -116,7 +116,8 @@ void TextureManager::addDynamic(
 
 	TextureObject2DDynamic* textureDynamic = new TextureObject2DDynamic();
 	textureDynamic->mFilePath = fragmentShaderPath;
-	FLOG_DEBUG("Texture %s will be added to manager", fragmentShaderPath.c_str());
+	FLOG_DEBUG("Texture %s will be added to manager",
+			fragmentShaderPath.c_str());
 
 	core::Texture2DFile* file = mLoader->loadEmpty(screenSize);
 

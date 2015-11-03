@@ -8,7 +8,6 @@
 #ifndef SHAPE_H_
 #define SHAPE_H_
 
-
 #include <fillwave/OpenGL.h>
 #include <fillwave/Math.h>
 #include <vector>

@@ -111,10 +111,12 @@ public:
 
 	void checkExtensions();
 
-	pTexture get(std::string texturePath, GLuint mapType =
-			FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression =
-			loader::eCompression::none, loader::eFlip flip =
-			loader::eFlip::vertical);
+	pTexture get(
+			std::string texturePath,
+			GLuint mapType =
+			FILLWAVE_TEXTURE_TYPE_NONE,
+			loader::eCompression = loader::eCompression::none,
+			loader::eFlip flip = loader::eFlip::vertical);
 
 	pTexture3D get(
 			const std::string& posX,
@@ -145,7 +147,7 @@ public:
 			glm::ivec2 screenSize);
 
 	GLboolean check(std::string texturePath, GLuint mapType =
-			FILLWAVE_TEXTURE_TYPE_NONE);
+	FILLWAVE_TEXTURE_TYPE_NONE);
 
 	void reload();
 

@@ -30,7 +30,7 @@ typedef GLubyte* Texture2DFileData;
 class Texture2DFileConfig {
 public:
 	Texture2DFileConfig(GLint level = 0, GLint border = 0, GLboolean mipmaps =
-			GL_FALSE, GLboolean compression = GL_FALSE);
+	GL_FALSE, GLboolean compression = GL_FALSE);
 	GLint mMipmapsLevel;
 	GLboolean mMipmaps;
 	GLint mBorder;

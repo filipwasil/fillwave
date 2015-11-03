@@ -40,7 +40,7 @@ public:
 	}
 
 	VertexBuffer(std::vector<T>& vertices, GLuint dataStoreModification =
-			GL_STATIC_DRAW)
+	GL_STATIC_DRAW)
 			: Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 		mDataVertices = vertices;
 		mTotalElements = mDataVertices.size();
@@ -49,7 +49,7 @@ public:
 	}
 
 	VertexBuffer(models::Shape<T>& shape, GLuint dataStoreModification =
-			GL_STATIC_DRAW)
+	GL_STATIC_DRAW)
 			: Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 		mDataVertices = shape.getVertices();
 		mSize = mTotalElements * sizeof(T);

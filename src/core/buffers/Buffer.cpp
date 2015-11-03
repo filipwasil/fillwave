@@ -5,7 +5,6 @@
  * Author: Filip Wasil
  */
 
-
 #include <fillwave/extras/Log.h>
 #include <fillwave/core/buffers/Buffer.h>
 #include <fillwave/core/pipeline/Attribute.h>

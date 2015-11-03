@@ -22,14 +22,14 @@ namespace core {
 class IndexBufferBasic: public IndexBuffer {
 public:
 	IndexBufferBasic(std::vector<GLuint>& data, GLuint dataStoreModification =
-			GL_STATIC_DRAW);
+	GL_STATIC_DRAW);
 
 	IndexBufferBasic(const fMesh* shape, GLuint dataStoreModification =
-			GL_STATIC_DRAW);
+	GL_STATIC_DRAW);
 
 	template<class T>
 	IndexBufferBasic(models::Shape<T>& shape, GLuint dataStoreModification =
-			GL_STATIC_DRAW)
+	GL_STATIC_DRAW)
 			: IndexBuffer(shape.getIndicesSize(), dataStoreModification) {
 		mDataIndices = shape.getIndices();
 		mData = mDataIndices.data();

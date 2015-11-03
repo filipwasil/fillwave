@@ -66,7 +66,6 @@ std::string getNotIndexableName(std::string structName, int index) {
 	return structName + strIndex;
 }
 
-
 std::string getFilePathOnly(const char* path) {
 	if (std::string(path).find(FILLWAVE_OS_SEPRATOR) != std::string::npos) {
 		return std::string(path).substr(0,

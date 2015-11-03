@@ -75,15 +75,24 @@ public:
 	glm::quat getCurrentRotation(
 			float timeElapsed_s,
 			animation::Channel* channel) const;
-	glm::vec3 getCurrentScale(float timeElapsed_s, animation::Channel* channel) const;
+	glm::vec3 getCurrentScale(
+			float timeElapsed_s,
+			animation::Channel* channel) const;
 
-	GLuint getTranslationStep(float timeElapsed_s, animation::Channel* channel) const;
-	GLuint getRotationStep(float timeElapsed_s, animation::Channel* channel) const;
+	GLuint getTranslationStep(
+			float timeElapsed_s,
+			animation::Channel* channel) const;
+	GLuint getRotationStep(
+			float timeElapsed_s,
+			animation::Channel* channel) const;
 	GLuint getScaleStep(float timeElapsed_s, animation::Channel* channel) const;
 
-	glm::fquat lerp(const glm::fquat &v0, const glm::fquat &v1, float alpha) const;
+	glm::fquat lerp(
+			const glm::fquat &v0,
+			const glm::fquat &v1,
+			float alpha) const;
 
-	AssimpNode* initNode(aiNode* node) ;
+	AssimpNode* initNode(aiNode* node);
 	void updateBonesBuffer();
 	void updateBonesUniform(GLint uniformLocationBones);
 	void updateTransformations(GLint activeAnimation, float timeElapsed_s);
