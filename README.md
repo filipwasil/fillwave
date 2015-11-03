@@ -4,6 +4,9 @@
 
 ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)
 
+[![Join the chat at https://gitter.im/filipwasil/fillwave](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/filipwasil/fillwave?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+
 [Fillwave] is a modern, native and totally free rendering engine writen in c++11 .
 
 Can be used in any 3D games, apps and visualization tools or as a regular part of your game engine.
