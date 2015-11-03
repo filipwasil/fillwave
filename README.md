@@ -2,10 +2,11 @@
 
 [Fillwave]: http://filipwasil.bitbucket.org/
 
-![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)
-
 [![Join the chat at https://gitter.im/filipwasil/fillwave](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/filipwasil/fillwave?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)
+
+[![wercker status](https://app.wercker.com/status/176e362189e969142c07469b492ef216/m "wercker status")](https://app.wercker.com/project/bykey/176e362189e969142c07469b492ef216)
 
 [Fillwave] is a modern, native and totally free rendering engine writen in c++11 .
 
