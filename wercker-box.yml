@@ -1,0 +1,36 @@
+name: gcc-cpp
+version: 0.0.1
+inherits: wercker/default@0.0.1
+type: service
+platform: ubuntu@12.04
+description: Wercker box for using GCC C++
+keywords:
+    - gcc
+    - c++
+    - autotools
+packages:
+    - make@3.81
+    - gcc@4.6.3
+    - binutils@2.22
+    - automake@1.11.3
+    - autoconf@2.68
+    - libtool@2.4.2
+script: |
+    echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main universe" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+    echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+    echo "deb-src http://cz.archive.ubuntu.com/ubuntu trusty main " | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+    sudo apt-get update
+    sudo apt-get install g++ libglew1.10 libglew-dev libassimp3 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev -y
+    git clone https://github.com/Kitware/CMake.git
+    cd CMake
+    chmod +x ./bootstrap
+    ./bootstrap && make && sudo make install
+    sudo apt-get update -y
+    sudo apt-get install make -y
+    sudo apt-get install binutils -y
+    sudo apt-get install g++ -y
+    sudo apt-get install libtool -y
+    g++ --version
+    make --version
+    cmake --version    
+    libtool --version
