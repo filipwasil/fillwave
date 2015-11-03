@@ -1,5 +1,7 @@
 # Fillwave graphics engine
 
+[![Join the chat at https://gitter.im/filipwasil/fillwave](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/filipwasil/fillwave?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [Fillwave]: http://filipwasil.bitbucket.org/
 
 ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)
