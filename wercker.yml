@@ -34,7 +34,7 @@ build:
                 cd CMake
                 chmod +x ./bootstrap
                 ./bootstrap && make && sudo make install
-                cd ...
+                cd ..
                 git clone https://github.com/filipwasil/fillwave.git
                 cd fillwave
                 git submodule init
