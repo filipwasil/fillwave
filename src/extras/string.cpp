@@ -7,6 +7,7 @@
 
 #include <fillwave/extras/Log.h>
 #include <fillwave/extras/string.h>
+#include <fillwave/loaders/FileLoader.h>
 
 FLOGINIT("String", FERROR | FFATAL)
 
@@ -63,6 +64,26 @@ std::string getNotIndexableName(std::string structName, int index) {
 	strIndex = out.str();
 	out.clear();
 	return structName + strIndex;
+}
+
+
+std::string getFilePathOnly(const char* path) {
+	if (std::string(path).find(FILLWAVE_OS_SEPRATOR) != std::string::npos) {
+		return std::string(path).substr(0,
+				std::string(path).find_last_of(FILLWAVE_OS_SEPRATOR));
+	} else {
+		return FILLWAVE_OS_CURRENTDIR;
+	}
+}
+
+std::string getFileNameOnly(const char* path) {
+	if (std::string(path).find(FILLWAVE_OS_SEPRATOR) != std::string::npos) {
+		return std::string(path).substr(
+				std::string(path).find_last_of(FILLWAVE_OS_SEPRATOR) + 1,
+				std::string(path).size());
+	} else {
+		return std::string(path);
+	}
 }
 
 }

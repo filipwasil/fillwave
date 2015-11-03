@@ -33,6 +33,12 @@ std::string to_string(T value) {
 	os << value;
 	return os.str();
 }
+
+
+std::string getFilePathOnly(const char* path);
+
+std::string getFileNameOnly(const char* path);
+
 }
 }
 #endif /* STRING_H_ */
