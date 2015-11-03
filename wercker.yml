@@ -2,7 +2,7 @@
 # Docker Hub https://registry.hub.docker.com/_/debian/
 # Read more about containers on our dev center
 # http://devcenter.wercker.com/docs/containers/index.html
-box: debian
+box: ubuntu
 # You can also use services such as databases. Read more on our dev center:
 # http://devcenter.wercker.com/docs/services/index.html
 # services:
@@ -20,27 +20,26 @@ build:
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
     steps:
+        #- validate-wercker-box
         # Execute a custom script step.
         - script:
             name: build
             code: |
-                  lsb_release -a
-                  g++ --version
-                  echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main universe" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
-                  echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
-                  echo "deb-src http://cz.archive.ubuntu.com/ubuntu trusty main " | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
-                  sudo apt-get update
-                  sudo apt-get install g++ libglew1.10 libglew-dev libassimp3 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev
-                  git clone https://github.com/Kitware/CMake.git
-                  cd CMake
-                  chmod +x ./bootstrap
-                  ./bootstrap && make && sudo make install
-                  cd ..
-                  git clone https://github.com/filipwasil/fillwave.git
-                  cd fillwave
-                  git submodule init
-                  git submodule update
-                  mkdir ../build
-                  cd ../build
-                  cmake ../fillwave
-                  make -j4
+                echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main universe" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+                echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+                echo "deb-src http://cz.archive.ubuntu.com/ubuntu trusty main " | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+                sudo apt-get update
+                sudo apt-get install git make g++ libglew1.10 libglew-dev libassimp3 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev -y
+                git clone https://github.com/Kitware/CMake.git
+                cd CMake
+                chmod +x ./bootstrap
+                ./bootstrap && make && sudo make install
+                cd ..
+                git clone https://github.com/filipwasil/fillwave.git
+                cd fillwave
+                git submodule init
+                git submodule update
+                mkdir ../build
+                cd ../build
+                cmake ../fillwave
+                make -j4
