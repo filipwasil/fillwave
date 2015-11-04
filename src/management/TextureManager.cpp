@@ -38,7 +38,7 @@ inline void TextureManager::checkExtensions() {
 			}
 		};
 
-#if defined(__APPLE__)
+#if defined(__APPLE__) || defined (__ANDROID__)
 #else
 		if (find_extension("GL_EXT_texture_compression_latc")) {
 			mSupportedCompresssionTypes.push_back(
@@ -350,9 +350,8 @@ pTexture2DRenderable TextureManager::getShadow2D(GLuint width, GLuint height) {
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
 #endif
 
-	object->mTexture = pTexture2DRenderable(
-			new core::Texture2DRenderable(GL_DEPTH_ATTACHMENT,
-					puTexture2DFile(file), parameters));
+	object->mTexture = pTexture2DRenderable(new core::Texture2DRenderable(
+	GL_DEPTH_ATTACHMENT, puTexture2DFile(file), parameters));
 
 	mTextureObjects2DRenderable.push_back(puTextureObject2DRenderable(object));
 
@@ -405,9 +404,8 @@ pTexture3DRenderable TextureManager::getShadow3D(GLuint width, GLuint height) {
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
 
-	pTexture2DRenderable t = pTexture2DRenderable(
-			new core::Texture2DRenderable(GL_DEPTH_ATTACHMENT,
-					puTexture2DFile(file2D), parameters2D));
+	pTexture2DRenderable t = pTexture2DRenderable(new core::Texture2DRenderable(
+	GL_DEPTH_ATTACHMENT, puTexture2DFile(file2D), parameters2D));
 
 	object->mTexture = pTexture3DRenderable(
 			new core::Texture3DRenderable(*(file[0]), *(file[1]), *(file[2]),

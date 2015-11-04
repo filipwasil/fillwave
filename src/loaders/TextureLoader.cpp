@@ -342,8 +342,14 @@ inline GLint TextureLoader::getBytesPerPixel(GLenum format) {
 }
 
 inline GLenum TextureLoader::getComporession(eCompression compression) {
+#if defined (__ANDROID__)
+	(void)compression;
+#else
 	switch (compression) {
 		case eCompression::none:
+			return GL_NONE;
+			break;
+		case eCompression::generic_r:
 			return GL_COMPRESSED_RED;
 			break;
 		case eCompression::generic_rg:
@@ -399,10 +405,11 @@ inline GLenum TextureLoader::getComporession(eCompression compression) {
 		case eCompression::s3tc_dxt5_rgba:
 			return GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
 			break;
-#endif
+#endif /* __APPLE__ */
 		default:
 			break;
 	}
+#endif /* __ANDROID__ */
 	return GL_NONE;
 }
 
