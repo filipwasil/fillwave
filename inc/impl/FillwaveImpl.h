@@ -8,6 +8,9 @@
 #ifndef FILLWAVE_INC_FILLWAVEIMPL_H_
 #define FILLWAVE_INC_FILLWAVEIMPL_H_
 
+/* Plarform specific */
+#include <fillwave/loaders/AndroidLoader.h>
+
 /* core */
 #include <fillwave/core/rendering/FramebufferGeometry.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
@@ -54,7 +57,6 @@
 
 /* Loaders */
 #include <fillwave/loaders/FileLoader.h>
-#include <fillwave/loaders/ProgramLoader.h>
 
 /* Extras */
 #include <fillwave/extras/Debugger.h>
@@ -78,6 +80,8 @@ FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 struct ANativeActivity;
 class Engine;
 
+using namespace fillwave::loader;
+
 namespace fillwave {
 
 struct Engine::EngineImpl {
@@ -93,6 +97,8 @@ struct Engine::EngineImpl {
 #endif
 
 	~EngineImpl();
+
+	Engine* mEngine;
 
 	/* Asset loader */
 #ifdef FILLWAVE_COMPILATION_TINY_ASSET_LOADER
@@ -235,9 +241,13 @@ struct Engine::EngineImpl {
 
 	void draw(GLfloat time);
 
+#ifdef __ANDROID__
+
+#else
 	void drawLines(GLfloat time);
 
 	void drawPoints(GLfloat time);
+#endif
 
 	void drawTexture(core::Texture* t, core::Program* p);
 
@@ -295,7 +305,7 @@ struct Engine::EngineImpl {
 	glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
 
 	/* Initiatization */
-	void init(Engine* engine);
+	void init();
 
 	void initExtensions();
 
@@ -303,25 +313,25 @@ struct Engine::EngineImpl {
 
 	void initPickingBuffer();
 
-	void initPipelines(Engine* engine);
+	void initPipelines();
 
 	void initUniforms();
 
 	void initManagement();
 
-	void initDeferredShading(Engine* engine);
+	void initDeferredShading();
 
 	void initAmbientOcclusion();
 
 	void initGeometryBuffer();
 
-	void initExtras(Engine* engine);
+	void initExtras();
 
 	void initOcclusionTest();
 
 	void initUniformsCache();
 
-	void initStartup(Engine* engine);
+	void initStartup();
 
 	void initGeometryShading();
 
@@ -346,7 +356,8 @@ struct Engine::EngineImpl {
 #ifdef __ANDROID__
 
 Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
-:mFrameCounter(0),
+:mEngine(engine),
+mFrameCounter(0),
 mTimeFactor(1.0),
 mBackgroundColor(0.1,0.1,0.1),
 mFileLoader(rootPath),
@@ -354,14 +365,15 @@ mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
 mISOQ(GL_FALSE) {
-	init(engine);
+	init();
 }
 
 Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
-:mFrameCounter(0),
+:mEngine(engine),
+mFrameCounter(0),
 mTimeFactor(1.0),
 mBackgroundColor(0.1,0.1,0.1),
-mFileLoadivity->internalDataPath),
+mFileLoader(activity->internalDataPath),
 mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
@@ -374,18 +386,17 @@ mISOQ(GL_FALSE) {
 #else
 Engine::EngineImpl::EngineImpl(Engine* engine, GLint argc, GLchar* const argv[])
 		:
+				mEngine(engine),
 				mFrameCounter(0),
 				mTimeFactor(1.0),
 				mBackgroundColor(0.1, 0.1, 0.1),
-				mFileLoader(
-						(std::string(argv[0]).substr(0,
-								std::string(argv[0]).find_last_of(FILLWAVE_OS_SEPRATOR)))),
+				mFileLoader(strings::getFilePathOnly(argv[0])),
 				mStartupTime(0.0f),
 				mIsDR(GL_FALSE),
 				mIsAO(GL_FALSE),
 				mISOQ(GL_TRUE) {
 #endif
-	init(engine);
+	init();
 }
 
 Engine::EngineImpl::~EngineImpl() {
@@ -398,14 +409,14 @@ Engine::EngineImpl::~EngineImpl() {
 	}
 }
 
-inline void Engine::EngineImpl::init(Engine* engine) {
+inline void Engine::EngineImpl::init() {
 	initExtensions();
 
 	initContext();
 
 	initManagement();
 
-	initPipelines(engine);
+	initPipelines();
 
 	initUniforms();
 
@@ -415,11 +426,11 @@ inline void Engine::EngineImpl::init(Engine* engine) {
 
 	initGeometryBuffer();
 
-	initDeferredShading(engine);
+	initDeferredShading();
 
 	initAmbientOcclusion();
 
-	initExtras(engine);
+	initExtras();
 
 	initUniformsCache();
 
@@ -434,6 +445,14 @@ inline void Engine::EngineImpl::init(Engine* engine) {
 #endif
 //   mFence = puFence(new core::Fence());
 }
+
+#ifdef __ANDROID__
+
+inline void Engine::EngineImpl::initExtensions() {
+	glesInitExtensions();
+}
+
+#else
 
 inline void Engine::EngineImpl::initExtensions(void) {
 #ifdef GLEW_OK
@@ -457,13 +476,6 @@ inline void Engine::EngineImpl::initGeometryShading() {
 	glPatchParameteri(GL_PATCH_VERTICES, 3);
 }
 
-#ifndef __ANDROID__
-
-#else
-inline void Engine::initExtensions() {
-	glesInitExtensions();
-}
-
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
@@ -483,23 +495,23 @@ inline void Engine::EngineImpl::initManagement() {
 	mBufferManager = puBufferManager(new manager::BufferManager());
 }
 
-inline void Engine::EngineImpl::initPipelines(Engine* engine) {
+inline void Engine::EngineImpl::initPipelines() {
 	/* DR */
-	mProgramDRDirecionalLight = mProgramLoader.getDRDirectionalLights(engine);
-	mProgramDRSpotLight = mProgramLoader.getDRSpotLights(engine);
-	mProgramDRPointLight = mProgramLoader.getDRPointLights(engine);
-	mProgramDRDepthless = mProgramLoader.getDRDepthless(engine);
-	mProgramDRAmbient = mProgramLoader.getDRAmbient(engine);
+	mProgramDRDirecionalLight = mProgramLoader.getDRDirectionalLights(mEngine);
+	mProgramDRSpotLight = mProgramLoader.getDRSpotLights(mEngine);
+	mProgramDRPointLight = mProgramLoader.getDRPointLights(mEngine);
+	mProgramDRDepthless = mProgramLoader.getDRDepthless(mEngine);
+	mProgramDRAmbient = mProgramLoader.getDRAmbient(mEngine);
 
 	/* OT */
-	mProgramOcclusionBox = mProgramLoader.getOcclusionOptimizedQuery(engine);
+	mProgramOcclusionBox = mProgramLoader.getOcclusionOptimizedQuery(mEngine);
 
 	/* AO */
-	mProgramAOGeometry = mProgramLoader.getAmbientOcclusionGeometry(engine);
-	mProgramAOColor = mProgramLoader.getAmbientOcclusionColor(engine);
+	mProgramAOGeometry = mProgramLoader.getAmbientOcclusionGeometry(mEngine);
+	mProgramAOColor = mProgramLoader.getAmbientOcclusionColor(mEngine);
 
 	/* T */
-	mProgramTextureLookup = mProgramLoader.getQuad(engine);
+	mProgramTextureLookup = mProgramLoader.getQuad(mEngine);
 }
 
 inline void Engine::EngineImpl::initUniforms() {
@@ -582,7 +594,7 @@ inline void Engine::EngineImpl::initOcclusionTest() {
 	mVAOOcclusion->unbind();
 }
 
-inline void Engine::EngineImpl::initDeferredShading(Engine* engine) {
+inline void Engine::EngineImpl::initDeferredShading() {
 
 	models::Material material;
 
@@ -591,7 +603,7 @@ inline void Engine::EngineImpl::initDeferredShading(Engine* engine) {
 	std::vector<GLuint> indices = sphere.getIndices();
 
 	mDeferredPointLight = puMesh(
-			new models::Mesh(engine, material, buildTextureRegion(pTexture()),
+			new models::Mesh(mEngine, material, buildTextureRegion(pTexture()),
 					buildTextureRegion(pTexture()), buildTextureRegion(pTexture()),
 					mProgramDRPointLight, pProgram(), pProgram(),
 					mProgramOcclusionBox, pProgram(), pProgram(),
@@ -659,9 +671,10 @@ inline void Engine::EngineImpl::initUniformsCache() {
 	uULCDRAAmbientGlobal = mProgramDRAmbient->getUniformLocation("uAmbient");
 }
 
-inline void Engine::EngineImpl::initStartup(Engine* engine) {
+inline void Engine::EngineImpl::initStartup() {
 
-	pProgram program = mProgramLoader.getQuadCustomFragmentShaderStartup(engine);
+	pProgram program = mProgramLoader.getQuadCustomFragmentShaderStartup(
+			mEngine);
 
 	program->use();
 	program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
@@ -679,13 +692,13 @@ inline void Engine::EngineImpl::initStartup(Engine* engine) {
 	FLOG_DEBUG("Post processing startup pass added");
 
 	mStartupTexture = mTextureManager->get("logo.png",
-			FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
+	FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
 	if (not mStartupTexture) {
 		mStartupTexture = mTextureManager->get("textures/logo.png",
-				FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
+		FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
 		if (not mStartupTexture) {
 			mStartupTexture = mTextureManager->get("64_64_64.color",
-					FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
+			FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
 			FLOG_ERROR("Fillwave startup logo could not be executed");
 		}
 	}
@@ -696,12 +709,12 @@ inline void Engine::EngineImpl::initPickingBuffer() {
 	reloadPickingBuffer();
 }
 
-inline void Engine::EngineImpl::initExtras(Engine* engine) {
+inline void Engine::EngineImpl::initExtras() {
 	/* FPS counter */
 	mTextFPSCallback = NULL;
 
 	/* Debugger */
-	mDebugger = puDebugger(new Debugger(engine));
+	mDebugger = puDebugger(new Debugger(mEngine));
 }
 
 void Engine::EngineImpl::reload() {
@@ -732,8 +745,9 @@ inline void Engine::EngineImpl::reloadPickingBuffer() {
 	mPickingPixelBuffer->bind();
 	mPickingPixelBuffer->setReady();
 	mPickingPixelBuffer->send();
-	glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE,
-			0);
+	glReadPixels(0, 0, mWindowWidth, mWindowHeight,
+	GL_RGBA,
+	GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("glReadPixels");
 	mPickingPixelBuffer->unbind();
 }
@@ -1151,7 +1165,9 @@ inline void Engine::EngineImpl::drawLightsPointPass(GLint& textureUnit) {
 inline void Engine::EngineImpl::drawColorPassEnd() {
 	mGBuffer->setAttachmentSummaryForReading();
 	glBlitFramebuffer(0, 0, mWindowWidth, mWindowHeight, 0, 0, mWindowWidth,
-			mWindowHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+			mWindowHeight,
+			GL_COLOR_BUFFER_BIT,
+			GL_LINEAR);
 }
 
 inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
@@ -1316,6 +1332,14 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 		case eDebuggerState::off:
 		default:
 			break;
+	}
+}
+
+void Engine::EngineImpl::runCallbacks(
+		std::vector<actions::EngineCallback*>& callbacks,
+		actions::EventType* event) {
+	for (auto callback : callbacks) {
+		callback->perform(mEngine, event);
 	}
 }
 

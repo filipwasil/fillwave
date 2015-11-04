@@ -57,8 +57,9 @@ void Skybox::draw(space::Camera& camera) {
 	glFrontFace(GL_CW);
 	if (mIBO) {
 		/* Perform index drawing */
-		glDrawElements(GL_TRIANGLES, mIBO->getElements(), GL_UNSIGNED_INT,
-				(GLvoid*) 0);
+		glDrawElements(
+		GL_TRIANGLES, mIBO->getElements(),
+		GL_UNSIGNED_INT, (GLvoid*) 0);
 	} else {
 		/* Perform array drawing */
 		glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
@@ -89,8 +90,9 @@ void Skybox::drawDR(space::Camera& camera) {
 	glFrontFace(GL_CW);
 	if (mIBO) {
 		/* Perform index drawing */
-		glDrawElements(GL_TRIANGLES, mIBO->getElements(), GL_UNSIGNED_INT,
-				(GLvoid*) 0);
+		glDrawElements(
+		GL_TRIANGLES, mIBO->getElements(),
+		GL_UNSIGNED_INT, (GLvoid*) 0);
 	} else {
 		/* Perform array drawing */
 		glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());

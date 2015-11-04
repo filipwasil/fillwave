@@ -64,8 +64,15 @@
 /* Extras */
 #include <fillwave/extras/Debugger.h>
 
+/* Loaders */
+#include <fillwave/loaders/ProgramLoader.h>
+
 /* Common */
 #include <fillwave/common/PhysicsMeshBuffer.h>
+
+#ifdef __ANDROID__
+struct ANativeActivity;
+#endif
 
 namespace fillwave {
 

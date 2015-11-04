@@ -114,19 +114,22 @@ void FramebufferGeometry::reload() {
 
 	for (GLuint i = 0; i < mColorBufferSize; i++) {
 		mDeferredColors->bind(i, i);
-		attachTexture2DDraw(GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D,
-				mDeferredColors->getHandle(i));
+		attachTexture2DDraw(
+		GL_COLOR_ATTACHMENT0 + i,
+		GL_TEXTURE_2D, mDeferredColors->getHandle(i));
 	}
 
 	FLOG_CHECK("attachTexture2DDraw color failed");
 
 	mSummary->bind(mColorBufferSize);
-	attachTexture2DDraw(GL_COLOR_ATTACHMENT0 + mColorBufferSize, GL_TEXTURE_2D,
-			mSummary->getHandle());
+	attachTexture2DDraw(
+	GL_COLOR_ATTACHMENT0 + mColorBufferSize,
+	GL_TEXTURE_2D, mSummary->getHandle());
 
 	mStencilDepth->bind();
-	attachTexture2DDraw(GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D,
-			mStencilDepth->getHandle());
+	attachTexture2DDraw(
+	GL_DEPTH_STENCIL_ATTACHMENT,
+	GL_TEXTURE_2D, mStencilDepth->getHandle());
 
 	for (GLuint i = 0; i < mColorBufferSize + 1; i++) {
 		mColorBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);

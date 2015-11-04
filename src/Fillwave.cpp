@@ -6,8 +6,7 @@
  */
 
 /* Plarform specific */
-#include <fillwave/loaders/AndroidLoader.h>
-
+//#include <fillwave/loaders/AndroidLoader.h>
 /* Debug */
 #include <fillwave/extras/Log.h>
 
@@ -26,8 +25,6 @@
 
 /* Implementation */
 #include  <impl/FillwaveImpl.h>
-
-using namespace fillwave::loader;
 
 namespace fillwave {
 
@@ -62,6 +59,9 @@ void Engine::draw(GLfloat time) {
 	mImpl->draw(time);
 }
 
+#ifdef __ANDROID__
+
+#else
 void Engine::drawLines(GLfloat time) {
 	mImpl->drawLines(time);
 }
@@ -69,6 +69,7 @@ void Engine::drawLines(GLfloat time) {
 void Engine::drawPoints(GLfloat time) {
 	mImpl->drawPoints(time);
 }
+#endif
 
 void Engine::drawTexture(core::Texture* t, core::Program* p) {
 	mImpl->drawTexture(t, p);
@@ -114,8 +115,8 @@ pShader Engine::storeShaderFragment(const std::string& shaderPath) {
 pShader Engine::storeShaderFragment(
 		const std::string& shaderPath,
 		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath, GL_FRAGMENT_SHADER,
-			shaderSource);
+	return mImpl->mShaderManager->add(shaderPath,
+	GL_FRAGMENT_SHADER, shaderSource);
 }
 
 pShader Engine::storeShaderVertex(const std::string& shaderPath) {
@@ -624,7 +625,7 @@ void Engine::pick(GLuint x, GLuint y) {
 	mImpl->mPickingPixelBuffer->bind();
 
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
-			GL_UNSIGNED_BYTE, 0);
+	GL_UNSIGNED_BYTE, 0);
 
 	FLOG_CHECK("glReadPixels failed");
 #ifdef __ANDROID__
@@ -647,7 +648,7 @@ void Engine::captureFramebufferToFile(const std::string& name) {
 	mImpl->mScene->draw();
 	mImpl->mPickingPixelBuffer->bind();
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
-			GL_UNSIGNED_BYTE, 0);
+	GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
 #ifdef __ANDROID__
 	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
@@ -684,7 +685,7 @@ void Engine::captureFramebufferToBuffer(
 	mImpl->mScene->draw();
 	mImpl->mPickingPixelBuffer->bind();
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, format,
-			GL_UNSIGNED_BYTE, 0);
+	GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
 #ifdef __ANDROID__
 	buffer = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
@@ -720,8 +721,8 @@ pShader Engine::storeShaderGeometry(const std::string& shaderPath) {
 pShader Engine::storeShaderGeometry(
 		const std::string& shaderPath,
 		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath, GL_GEOMETRY_SHADER,
-			shaderSource);
+	return mImpl->mShaderManager->add(shaderPath,
+	GL_GEOMETRY_SHADER, shaderSource);
 }
 
 pShader Engine::storeShaderTesselationControl(const std::string& shaderPath) {
@@ -731,8 +732,8 @@ pShader Engine::storeShaderTesselationControl(const std::string& shaderPath) {
 pShader Engine::storeShaderTesselationControl(
 		const std::string& shaderPath,
 		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath, GL_TESS_CONTROL_SHADER,
-			shaderSource);
+	return mImpl->mShaderManager->add(shaderPath,
+	GL_TESS_CONTROL_SHADER, shaderSource);
 }
 
 pShader Engine::storeShaderTesselationEvaluation(
@@ -743,8 +744,8 @@ pShader Engine::storeShaderTesselationEvaluation(
 pShader Engine::storeShaderTesselationEvaluation(
 		const std::string& shaderPath,
 		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath, GL_TESS_EVALUATION_SHADER,
-			shaderSource);
+	return mImpl->mShaderManager->add(shaderPath,
+	GL_TESS_EVALUATION_SHADER, shaderSource);
 }
 
 #endif

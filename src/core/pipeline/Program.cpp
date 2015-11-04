@@ -243,8 +243,8 @@ void Program::getUniformBlock(std::string name, GLuint bindingPoint) {
 		char nameFromProgram[100];
 		glGetActiveUniformBlockName(mHandle, GLuint(i),
 				sizeof(nameFromProgram) - 1, &name_len, nameFromProgram);
-		glGetActiveUniformBlockiv(mHandle, GLuint(i), GL_UNIFORM_BLOCK_DATA_SIZE,
-				&uniformBlockSize);
+		glGetActiveUniformBlockiv(mHandle, GLuint(i),
+		GL_UNIFORM_BLOCK_DATA_SIZE, &uniformBlockSize);
 		nameFromProgram[name_len] = 0;
 		if (std::string(nameFromProgram) == name) {
 			FLOG_DEBUG("Uniform block name=%s, index=%d, size=%d ",
@@ -254,7 +254,8 @@ void Program::getUniformBlock(std::string name, GLuint bindingPoint) {
 			mUnifromBuffers.push_back(
 					puUniformBuffer(
 							new UniformBuffer(std::string(name), blockIndex,
-									uniformBlockSize, bindingPoint, GL_DYNAMIC_DRAW)));
+									uniformBlockSize, bindingPoint,
+									GL_DYNAMIC_DRAW)));
 		}
 	}
 }

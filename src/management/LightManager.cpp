@@ -371,8 +371,8 @@ void LightManager::updateDeferredBufferPoint(
 }
 
 void LightManager::pushLightUniformBuffers(core::Program* program) {
-	program->uniformBlockPush(FILLWAVE_LIGHTS_BINDING_POINT_NAME,
-			(GLfloat*) mLightBufferData.data());
+	program->uniformBlockPush(
+	FILLWAVE_LIGHTS_BINDING_POINT_NAME, (GLfloat*) mLightBufferData.data());
 }
 
 void LightManager::bindShadowmaps() {

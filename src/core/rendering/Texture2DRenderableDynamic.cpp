@@ -17,8 +17,8 @@ Texture2DRenderableDynamic::Texture2DRenderableDynamic(
 		ParameterList& parameters,
 		pProgram program)
 		:
-				Texture2DRenderable(GL_COLOR_ATTACHMENT0, std::move(file),
-						parameters),
+				Texture2DRenderable(
+				GL_COLOR_ATTACHMENT0, std::move(file), parameters),
 				mProgram(program),
 				mTimePassed(0.0f) {
 	initUniformsCache();

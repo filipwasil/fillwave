@@ -470,9 +470,11 @@ GLuint Create3DNoiseTexture(int textureSize, float frequency) {
 
 	glGenTextures(1, &textureId);
 	glBindTexture( GL_TEXTURE_3D, textureId);
-	glTexImage3D( GL_TEXTURE_3D, 0, GL_R8, textureSize, textureSize, textureSize,
-			0,
-			GL_RED, GL_UNSIGNED_BYTE, uploadBuf);
+	glTexImage3D(
+	GL_TEXTURE_3D, 0,
+	GL_R8, textureSize, textureSize, textureSize, 0,
+	GL_RED,
+	GL_UNSIGNED_BYTE, uploadBuf);
 
 	glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri( GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

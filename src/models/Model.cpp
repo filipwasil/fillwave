@@ -201,21 +201,22 @@ inline void Model::loadNodes(
 		std::string diffuseMapPath, normalMapPath, specularMapPath;
 
 		diffuseMapPath =
-				(aMaterial->GetTexture(FILLWAVE_TEXTURE_TYPE_DIFFUSE, 0,
-						&diffuseMapPathAssimp, nullptr, nullptr, nullptr, nullptr,
-						nullptr) == AI_SUCCESS) ?
+				(aMaterial->GetTexture(
+				FILLWAVE_TEXTURE_TYPE_DIFFUSE, 0, &diffuseMapPathAssimp, nullptr,
+						nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
 						diffuseMapPathAssimp.data : "255_255_255.color";
 
 		normalMapPath =
-				(aMaterial->GetTexture(FILLWAVE_TEXTURE_TYPE_NORMALS, 0,
-						&normalMapPathAssimp, nullptr, nullptr, nullptr, nullptr,
-						nullptr) == AI_SUCCESS) ?
+				(aMaterial->GetTexture(
+				FILLWAVE_TEXTURE_TYPE_NORMALS, 0, &normalMapPathAssimp, nullptr,
+						nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
 						normalMapPathAssimp.data : "128_128_255.color";
 
 		specularMapPath =
-				(aMaterial->GetTexture(FILLWAVE_TEXTURE_TYPE_SPECULAR, 0,
-						&specularMapPathAssimp, nullptr, nullptr, nullptr, nullptr,
-						nullptr) == AI_SUCCESS) ? specularMapPathAssimp.data : "";
+				(aMaterial->GetTexture(
+				FILLWAVE_TEXTURE_TYPE_SPECULAR, 0, &specularMapPathAssimp, nullptr,
+						nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
+						specularMapPathAssimp.data : "";
 
 		pMesh mesh = loadMesh(aMesh, Material(aMaterial),
 				buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str(),

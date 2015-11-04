@@ -49,8 +49,8 @@ void Framebuffer::attachTexture2DDraw(
 		GLenum attachment,
 		GLenum target,
 		GLuint textureHandle) {
-	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, attachment, target,
-			textureHandle, 0);
+	glFramebufferTexture2D(
+	GL_DRAW_FRAMEBUFFER, attachment, target, textureHandle, 0);
 	FLOG_CHECK(
 			"attachTexture2DDraw failed. attachment: 0x%x, target: 0x%x, handle: 0x%x",
 			attachment, target, textureHandle);
