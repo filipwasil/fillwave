@@ -45,7 +45,7 @@ void setFileInvalid();
 /* Define this macro in your source file to provide access to Crater log macros */
 
 #define FLOGINIT_DEFAULT()\
-   static const std::string _tag_ = crater::extra::getFileNameOnly(__FILE__);     \
+   static const std::string _tag_ = fillwave::strings::getFileNameOnly(__FILE__);     \
    static const char _mask_ = FBIT_MAX;
 
 #define FLOGINIT_MASK(mask)\
@@ -84,12 +84,12 @@ void setFileInvalid();
 
 #else /* __ANDROID__ */
 
-#define FLOG_BASE(type, flag, ...)																			   \
+#define FLOG_BASE(type, flag, ...)																		   \
 	do{																												\
       if ( FIF(flag) ) {																						\
 			FILE *unique_niosfoinfsd;																			\
-			if (isFileValid()) {																					\
-				unique_niosfoinfsd = fopen( getLogPath().c_str(), "a" );								\
+			if (fillwave::isFileValid()) {																   \
+				unique_niosfoinfsd = fopen( fillwave::getLogPath().c_str(), "a" );			   \
 				if (!unique_niosfoinfsd) {                                   						\
 					break;																							\
 				}																										\
@@ -99,7 +99,7 @@ void setFileInvalid();
 			fprintf(unique_niosfoinfsd,"[%s] <%s:%d>",FTO_STRING(type),::_tag_.c_str(),__LINE__); 	\
 			(void)fprintf(unique_niosfoinfsd,__VA_ARGS__);												\
 			fprintf(unique_niosfoinfsd,"\n");																\
-			if (isFileValid()) {																					\
+			if (fillwave::isFileValid()) {																   \
 				fclose(unique_niosfoinfsd);																	\
 			}																											\
       }																												\
@@ -108,12 +108,12 @@ void setFileInvalid();
 #define FLOG_CHECK(...)\
       do { GLenum error = glGetError();                                               \
          if ( error != GL_NO_ERROR) {                                                 \
-            fprintf(stdout,"[%s 0x%04x] ","CORE ERROR:",error);            \
+            fprintf(stdout,"[%s 0x%04x] ","CORE ERROR:",error);                       \
             if (error == 0x0506) { /*Framebuffer error*/                              \
                GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);              \
-               fprintf(stdout,"%s[%s 0x%04x] ","\e[35m","FRAMEBUFFER_STATUS:",status);\
+               fprintf(stdout,"[%s 0x%04x] ","FRAMEBUFFER_STATUS:",status);           \
             }                                                                         \
-            fprintf(stdout,"<%s:%d> ",::_tag_.c_str(),__LINE__);                              \
+            fprintf(stdout,"<%s:%d> ",::_tag_.c_str(),__LINE__);                      \
             (void)fprintf(stdout,__VA_ARGS__);                                        \
             fprintf(stdout,"\n");                                                     \
             abort();                                                                  \
