@@ -1,0 +1,32 @@
+@startuml
+
+actor App
+
+App -> Engine: build
+App -> Scene: build and attach to Engine
+App -> Camera: build and set to Scene
+App -> Model: build and attach to Scene
+
+Model -> Meshes: build and attach to Model
+
+App -> Effects: build and attach to Model
+
+App -> Callbacks: build and attach to Model
+
+App -> Engine: draw
+
+Engine -> Scene: draw start
+
+Model -> Model: draw start
+Effects -> Effects: run predraw actions
+Model -> Meshes: draw
+Effects -> Effects: run postdraw actions
+Model -> Model: draw end
+
+Engine -> Scene: run callbacks
+Scene -> Model: run callbacks
+Model -> Callbacks: run
+
+Engine -> Scene: draw end
+
+@enduml

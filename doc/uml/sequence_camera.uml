@@ -1,0 +1,25 @@
+@startuml
+
+actor App
+
+App -> Engine: build
+
+App -> Scene: build
+App -> Scene: attach to Engine
+
+App -> Camera: build
+App -> Camera: attach to Scene
+App -> Camera: move, rotate or scale
+
+App -> Scene: draw
+Camera -> Camera: update Transformation matrix
+
+App -> Camera: change projection parameters
+App -> Scene: draw
+Camera -> Camera: update Projection matrix
+
+App -> Camera: change view parameters
+App -> Scene: draw
+Camera -> Camera: update View matrix
+
+@enduml
