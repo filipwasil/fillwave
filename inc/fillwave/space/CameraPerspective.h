@@ -35,41 +35,15 @@ public:
 
 	virtual ~CameraPerspective() = default;
 
-	GLfloat getProjectionFovy() {
-		return mProjectionFovy;
-	}
+	GLfloat getProjectionFovy();
+	GLfloat getProjectionAspectRatio();
+	GLfloat getProjectionNearPlane();
+	GLfloat getProjectionFarPlane();
 
-	GLfloat getProjectionAspectRatio() {
-		return mProjectionAspectRatio;
-	}
-
-	GLfloat getProjectionNearPlane() {
-		return mProjectionNearPlane;
-	}
-
-	GLfloat getProjectionFarPlane() {
-		return mProjectionFarPlane;
-	}
-
-	void setProjectionFovy(GLfloat fovy) {
-		mProjectionFovy = fovy;
-		mRefreshProjection = GL_TRUE;
-	}
-
-	void setProjectionAspectRatio(GLfloat aspect) {
-		mProjectionAspectRatio = aspect;
-		mRefreshProjection = GL_TRUE;
-	}
-
-	void setProjectionNearPlane(GLfloat nearPlane) {
-		mProjectionNearPlane = nearPlane;
-		mRefreshProjection = GL_TRUE;
-	}
-
-	void setProjectionFarPlane(GLfloat farPlane) {
-		mProjectionFarPlane = farPlane;
-		mRefreshProjection = GL_TRUE;
-	}
+	void setProjectionFovy(GLfloat fovy);
+	void setProjectionAspectRatio(GLfloat aspect);
+	void setProjectionNearPlane(GLfloat nearPlane);
+	void setProjectionFarPlane(GLfloat farPlane);
 
 	void updateProjection();
 };

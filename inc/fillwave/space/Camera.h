@@ -26,85 +26,16 @@ public:
 
 	virtual ~Camera() = default;
 
-	/*
-	 * update
-	 *
-	 * \brief update projection and camera matrices according to other camera data.
-	 *
-	 */
-
 	void update();
-
-	/*
-	 * updateView
-	 *
-	 * \brief update view matrix according to other camera data.
-	 *
-	 */
-
 	void updateView();
-
-	/*
-	 * updateProjection
-	 *
-	 * \brief update projection matrix according to other camera data.
-	 *
-	 */
-
 	virtual void updateProjection() = 0;
-
-	/*
-	 * getEye
-	 *
-	 * \brief get the camera 4x4 matrix
-	 *
-	 */
 
 	glm::mat4 getEye();
 
-	/*
-	 * getProjectionNearPlane
-	 *
-	 * \brief get the projection near plane distance
-	 *
-	 */
-
 	virtual GLfloat getProjectionNearPlane() = 0;
-
-	/*
-	 * getProjectionFarPlane
-	 *
-	 * \brief get the projection far plane distance
-	 *
-	 */
-
 	virtual GLfloat getProjectionFarPlane() = 0;
-
-	/*
-	 * getProjection
-	 *
-	 * \brief get the projection 4x4 matrix
-	 *
-	 */
-
 	glm::mat4 getProjection();
-
-	/*
-	 * getViewProjection
-	 *
-	 * \brief get the projection 4x4 matrix multipied by view 4x4 matrix
-	 *
-	 */
-
 	glm::mat4 getViewProjection();
-
-	/*
-	 * log
-	 *
-	 * \brief log
-	 *
-	 */
-
 	void log();
 
 protected:

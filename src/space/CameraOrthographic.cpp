@@ -8,8 +8,6 @@
 #include <fillwave/space/CameraOrthographic.h>
 #include <fillwave/extras/Log.h>
 
-FLOGINIT("CameraOrthographic", FERROR | FFATAL)
-
 namespace fillwave {
 namespace space {
 
@@ -56,23 +54,9 @@ void CameraOrthographic::updateProjection() {
 	mRefreshProjection = GL_FALSE;
 }
 
-/*
- * getProjectionNearPlane
- *
- * \brief get the projection near plane distance
- *
- */
-
 GLfloat CameraOrthographic::getProjectionNearPlane() {
 	return mCullingBox.mProjectionNear;
 }
-
-/*
- * getProjectionFarPlane
- *
- * \brief get the projection far plane distance
- *
- */
 
 GLfloat CameraOrthographic::getProjectionFarPlane() {
 	return mCullingBox.mProjectionFar;

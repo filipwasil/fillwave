@@ -29,7 +29,6 @@ struct CullingBox {
 class CameraOrthographic: public Camera {
 public:
 	CameraOrthographic();
-
 	CameraOrthographic(
 			glm::vec3 position,
 			glm::quat rotation,
@@ -42,22 +41,7 @@ public:
 	virtual ~CameraOrthographic() = default;
 
 	void updateProjection();
-	/*
-	 * getProjectionNearPlane
-	 *
-	 * \brief get the projection near plane distance
-	 *
-	 */
-
 	GLfloat getProjectionNearPlane();
-
-	/*
-	 * getProjectionFarPlane
-	 *
-	 * \brief get the projection far plane distance
-	 *
-	 */
-
 	GLfloat getProjectionFarPlane();
 
 private:
