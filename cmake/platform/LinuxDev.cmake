@@ -20,10 +20,8 @@ ENDIF(OPENMP_FOUND)
 # Package type
 # -----------------------------------------------
 
-MESSAGE("Building binary package")
-PROJECT(libfillwave C CXX)
-
-SET(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator)
+message("Building development package")
+project(libfillwave-dev C CXX)
 
 # -----------------------------------------------
 # Asset loader
@@ -37,21 +35,13 @@ INCLUDE_DIRECTORIES(${FILLWAVE_PATH_INCLUDE}
                     /usr/include/freetype2) #uglt freetype2 needs /usr/local/include/freetype2/ft2build.h
 
 # -----------------------------------------------
-# Targets
-# -----------------------------------------------
-
-add_library(fillwave SHARED ${FILLWAVE_SOURCES})
-
-# -----------------------------------------------
 # Installation
 # -----------------------------------------------
 
-if(FILLWAVE_BUILD_RPM)
-    install(TARGETS fillwave DESTINATION usr/lib64 COMPONENT fillwave)
-else(FILLWAVE_BUILD_RPM)
-    install(TARGETS fillwave DESTINATION usr/lib COMPONENT fillwave)
-endif(FILLWAVE_BUILD_RPM)
-   
+install(DIRECTORY inc/fillwave DESTINATION /usr/include COMPONENT fillwave-dev)
+install(FILES ${FILLWAVE_TEXTURE_LOADER_HEADERS} DESTINATION usr/include)
+install(FILES ${FILLWAVE_EXT_FONTGENERATOR_HEADERS} DESTINATION usr/include)
+
 # -----------------------------------------------
 # Subprojects
 # -----------------------------------------------
@@ -59,35 +49,14 @@ endif(FILLWAVE_BUILD_RPM)
 ADD_SUBDIRECTORY(ext)
 
 # -----------------------------------------------
-# Linker
+# Installation
 # -----------------------------------------------
 
-   TARGET_LINK_LIBRARIES(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator freetype)
+set(CPACK_DEBIAN_PACKAGE_NAME "libfillwave-dev")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fillwave graphics engine - development package")
 
-   if(FILLWAVE_BUILD_PACK)
-      ADD_DEPENDENCIES(fillwave GLEW)
-      TARGET_LINK_LIBRARIES(fillwave GLEW)
-   else()
-      ADD_DEPENDENCIES(fillwave glew)
-      TARGET_LINK_LIBRARIES(fillwave glew)
-   endif()
-
-# -----------------------------------------------
-# Test app
-# -----------------------------------------------
-
-ADD_SUBDIRECTORY(test)
-
-# -----------------------------------------------
-# Packaging
-# -----------------------------------------------
-
-set(CPACK_DEBIAN_PACKAGE_NAME "libfillwave")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fillwave graphics engine - library package")
 if (FILLWAVE_BUILD_PACK)
-#set(CPACK_DEBIAN_PACKAGE_DEPENDS "libglm-dev (>= 0.9.5.1-1), libglew1.10 (>= 1.10.0-3), libglew-dev (>= 1.10.0-3), libassimp3, libassimp-dev (>= 3.0~dfsg-2), libfreetype6 (>= 2.5.2)")
-#set(CPACK_RPM_PACKAGE_REQUIRES "freetype, assimp")
-#set (CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-endif()
+set (CPACK_DEBIAN_PACKAGE_DEPENDS "libfillwave (>= ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})")
+endif (FILLWAVE_BUILD_PACK)
 
 INCLUDE(CPack)

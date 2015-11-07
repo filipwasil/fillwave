@@ -13,7 +13,6 @@ endif()
 
 add_subdirectory(ext/assimp)
 add_subdirectory(ext/freetype2)
-add_subdirectory(ext/glfw)
 add_subdirectory(ext)
 
 if (FILLWAVE_BUILD_DEV)
@@ -72,12 +71,6 @@ endif()
 # Found by cmake macro
 # -----------------------------------------------
 
-# OpenGL
-
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
-target_link_libraries(fillwave ${OPENGL_LIBRARIES})
-
 # OpenMP
 
 add_definitions("-fopenmp")
@@ -101,5 +94,13 @@ endif()
 
 set(CMAKE_PREFIX_PATH "/usr/local")
 set(CMAKE_LIBRARY_PATH "/usr/local/lib/")
+
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "Filip Wasil <fillwave@gmail.com>")
+SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/doc/LICENSE.txt")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/doc/Description.txt")
+set(CPACK_PACKAGE_VERSION                 "${PROJECT_VERSION}" )
+set(CPACK_PACKAGE_VERSION_MAJOR           "${VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR           "${VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH           "${VERSION_PATCH}")
 
 include(CPack)
