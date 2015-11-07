@@ -19,28 +19,26 @@ ADD_DEFINITIONS(-DASSIMP_BUILD_NO_IFC_IMPORTER )
 # Options
 # -----------------------------------------------
 
-option(BUILD_DEV "Build development package" OFF)
-option(BUILD_LIB "Build main fillwave package" ON)
-option(BUILD_PACK "Build with external dependencies" ON)
-option(BUILD_DEB "Build deb packages" OFF)
-option(BUILD_RPM "Build rpm packages" OFF)
+option(FILLWAVE_BUILD_DEV "Build development package" OFF)
+option(FILLWAVE_BUILD_LIB "Build main fillwave package" ON)
+option(FILLWAVE_BUILD_DEB "Build deb packages" OFF)
+option(FILLWAVE_BUILD_RPM "Build rpm packages" OFF)
+option(FILLWAVE_BUILD_TGZ "Build tgz packages" OFF)
+option(FILLWAVE_BUILD_PACK "Build all external packages" OFF)
 option(FILLWAVE_COMPILATION_STARTUP_ANIMATION "Run startup animation before any other action" OFF)
 option(FILLWAVE_COMPILATION_PC_GLES "Use GLES stub for PC" OFF)
 option(NDEBUG "Build with debug logs" OFF)
+
+option(FILLWAVE_MODEL_LOADER_ASSIMP "use Assimp" ON)
+option(FILLWAVE_MODEL_LOADER_TINYOBJLOADER "use Tinyobjloader" OFF)
+option(FILLWAVE_TEXTURE_LOADER_STB "use STB texture loader" ON)
+option(FILLWAVE_SUPPRESS_WARNINGS "Suppress warnings during compilation" ON)
 
 # -----------------------------------------------
 # Compiler options
 # -----------------------------------------------
 
-IF(${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-ELSEIF(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-    IF(WIN32)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
-    ELSE(WIN32)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-    ENDIF(WIN32)
-ENDIF()
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler.cmake")
 
 # -----------------------------------------------
 # Directories
@@ -127,20 +125,40 @@ SET(FILLWAVE_SOURCES
      )
 
 # -----------------------------------------------
+# External libraries
+# -----------------------------------------------
+
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/external.cmake")
+
+# -----------------------------------------------
+# Packaging
+# -----------------------------------------------
+
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/package.cmake")
+
+# -----------------------------------------------
 # Platform
 # -----------------------------------------------
 
 IF(UNIX AND NOT ANDROID AND NOT APPLE)
-   include(cmake/platform/Linux.cmake)
+    if (FILLWAVE_BUILD_DEV)
+        include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/LinuxDev.cmake)
+    else()
+        include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Linux.cmake)
+    endif()
 ENDIF(UNIX AND NOT ANDROID AND NOT APPLE)
 
 IF(ANDROID)
-   include(cmake/platform/Android.cmake)
+   include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Android.cmake)
 ENDIF(ANDROID)
 
-IF(APPLE AND NOT IOS)
-   include(cmake/platform/OSX.cmake)
-ENDIF(APPLE AND NOT IOS)
+IF(APPLE)
+    if(IOS)
+        include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/IOS.cmake)
+    else()
+        include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/OSX.cmake)
+    endif()
+ENDIF(APPLE)
 
 IF(WIN32)
    include("cmake/platform/Windows.cmake")
