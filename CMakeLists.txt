@@ -138,9 +138,9 @@ IF(ANDROID)
    include(cmake/platform/Android.cmake)
 ENDIF(ANDROID)
 
-IF(APPLE)
+IF(APPLE AND NOT IOS)
    include(cmake/platform/OSX.cmake)
-ENDIF(APPLE)
+ENDIF(APPLE AND NOT IOS)
 
 IF(WIN32)
    include("cmake/platform/Windows.cmake")
