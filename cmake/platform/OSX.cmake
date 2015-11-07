@@ -11,17 +11,8 @@ if (NOT DEFINED CMAKE_MACOSX_RPATH)
   set(CMAKE_MACOSX_RPATH 0)
 endif()
 
-set(FILLWAVE_PATH_EXT_INCLUDE "inc")
-set(FILLWAVE_PATH_INCLUDE "inc")
-set(FILLWAVE_EXT_GLM_INCLUDES ext/glm)
-set(FILLWAVE_EXT_INCLUDES ext)
-set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES "ext/fontgenerator")
-set(FILLWAVE_EXT_STB_INCLUDES "${CMAKE_SOURCE_DIR}/ext/stb")
-set(FILLWAVE_EXT_ASSIMP_INCLUDES ext/assimp/include)
-
 add_subdirectory(ext/assimp)
 add_subdirectory(ext/freetype2)
-
 add_subdirectory(ext/glfw)
 add_subdirectory(ext)
 
@@ -47,9 +38,9 @@ set(FILLWAVE_PATH_SOURCE "src")
 
 include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_INCLUDES}
-                    ${FILLWAVE_EXT_ASSIMP_INCLUDES}
+                    ${FILLWAVE_MODEL_LOADER_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
-                    ${FILLWAVE_EXT_STB_INCLUDES}
+                    ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
                     ${FILLWAVE_EXT_GLM_INCLUDES}
                     /usr/include/freetype2
                     /usr/local/include)
@@ -60,7 +51,7 @@ include_directories(${FILLWAVE_PATH_INCLUDE}
 
 if(FILLWAVE_BUILD_DEV)
 else()
-add_library(fillwave SHARED ${FILLWAVE_SOURCES})
+   add_library(fillwave SHARED ${FILLWAVE_SOURCES})
 endif()
 
 # -----------------------------------------------
@@ -89,25 +80,24 @@ target_link_libraries(fillwave ${OPENGL_LIBRARIES})
 
 # OpenMP
 
-ADD_DEFINITIONS("-fopenmp")
-FIND_PACKAGE(OpenMP)
-IF(OPENMP_FOUND)
+add_definitions("-fopenmp")
+find_package(OpenMP)
+if(OPENMP_FOUND)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-ENDIF(OPENMP_FOUND)
+endif(OPENMP_FOUND)
 
 # -----------------------------------------------
 # Installation
 # -----------------------------------------------
 
 if(FILLWAVE_BUILD_DEV)
-   INSTALL(DIRECTORY inc/fillwave DESTINATION /usr/include COMPONENT fillwave-dev)
-   INSTALL(FILES ${FILLWAVE_EXT_STB_INCLUDES}/stb_image.h DESTINATION usr/include)
-   INSTALL(FILES ${FILLWAVE_EXT_STB_INCLUDES}/stb_image_write.h DESTINATION usr/include)
-   INSTALL(FILES ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}/fontGenerator.h DESTINATION usr/include)
+   install(DIRECTORY inc/fillwave DESTINATION /usr/include COMPONENT fillwave-dev)
+   install(FILES ${FILLWAVE_TEXTURE_LOADER_HEADERS} DESTINATION usr/include)
+   install(FILES ${FILLWAVE_EXT_FONTGENERATOR_HEADERS} DESTINATION usr/include)
 else()
-   INSTALL(TARGETS fillwave DESTINATION usr/lib COMPONENT fillwave)
-ENDIF()
+   install(TARGETS fillwave DESTINATION usr/lib COMPONENT fillwave)
+endif()
 
 set(CMAKE_PREFIX_PATH "/usr/local")
 set(CMAKE_LIBRARY_PATH "/usr/local/lib/")
@@ -120,4 +110,4 @@ set(CPACK_PACKAGE_VERSION_MAJOR           "${VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR           "${VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH           "${VERSION_PATCH}")
 
-INCLUDE(CPack)
+include(CPack)

@@ -39,7 +39,7 @@ INCLUDE_DIRECTORIES(${FILLWAVE_PATH_INCLUDE}
 # -----------------------------------------------
 
 install(DIRECTORY inc/fillwave DESTINATION /usr/include COMPONENT fillwave-dev)
-install(FILES ${FILLWAVE_TEXTURE_LOADER_INCLUDES}/stb_image.h ${FILLWAVE_TEXTURE_LOADER_INCLUDES}/stb_image_write.h DESTINATION usr/include)
+install(FILES ${FILLWAVE_TEXTURE_LOADER_HEADERS} DESTINATION usr/include)
 install(FILES ${FILLWAVE_EXT_FONTGENERATOR_HEADERS} DESTINATION usr/include)
 
 # -----------------------------------------------

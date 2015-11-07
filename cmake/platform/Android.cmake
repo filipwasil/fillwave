@@ -81,9 +81,8 @@ target_link_libraries(fillwaveStatic fontgenerator ${FILLWAVE_MODEL_LOADER} log 
 install(DIRECTORY ext/glm DESTINATION include/glm COMPONENT fillwave-dev)
 install(DIRECTORY inc/fillwave DESTINATION include COMPONENT fillwave-dev)
 install(DIRECTORY ext/glm/glm DESTINATION include/glm COMPONENT fillwave-dev)
-install(FILES ${FILLWAVE_EXT_STB_INCLUDES}/stb_image.h DESTINATION include)
-install(FILES ${FILLWAVE_EXT_STB_INCLUDES}/stb_image_write.h DESTINATION include)
-install(FILES ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}/fontGenerator.h DESTINATION include)
+install(FILES ${FILLWAVE_TEXTURE_LOADER_HEADERS} DESTINATION usr/include)
+install(FILES ${FILLWAVE_EXT_FONTGENERATOR_HEADERS} DESTINATION usr/include)
 
 install(TARGETS fillwave DESTINATION lib COMPONENT fillwave)
 install(TARGETS fillwaveStatic DESTINATION lib COMPONENT fillwaveStatic)
