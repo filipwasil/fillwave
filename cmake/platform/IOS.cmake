@@ -13,7 +13,6 @@ endif()
 
 add_subdirectory(ext/assimp)
 add_subdirectory(ext/freetype2)
-add_subdirectory(ext/glfw)
 add_subdirectory(ext)
 
 if (FILLWAVE_BUILD_DEV)
@@ -71,12 +70,6 @@ endif()
 # -----------------------------------------------
 # Found by cmake macro
 # -----------------------------------------------
-
-# OpenGL
-
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
-target_link_libraries(fillwave ${OPENGL_LIBRARIES})
 
 # OpenMP
 
