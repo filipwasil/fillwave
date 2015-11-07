@@ -16,3 +16,9 @@
 [submodule "ext/assimp"]
 	path = ext/assimp
 	url = https://github.com/assimp/assimp.git
+[submodule "ext/android-cmake"]
+	path = ext/android-cmake
+	url = https://github.com/taka-no-me/android-cmake.git
+[submodule "ext/ios-cmake"]
+	path = ext/ios-cmake
+	url = https://github.com/filipwasil/ios-cmake.git
