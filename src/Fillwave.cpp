@@ -30,19 +30,16 @@ namespace fillwave {
 
 #ifdef __ANDROID__
 
-Engine::Engine(std::string rootPath)
-: mImpl(new EngineImpl(this, rootPath)) {
-	mImpl->init();
+Engine::Engine(std::string rootPath) {
+	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, rootPath));
 }
 
-Engine::Engine(ANativeActivity* activity)
-: mImpl(new EngineImpl(this, activity)) {
-	mImpl->init();
+Engine::Engine(ANativeActivity* activity) {
+	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, activity));
 }
 #else
-Engine::Engine(GLint argc, GLchar* const argv[])
-		: mImpl(new EngineImpl(this, argc, argv)) {
-	mImpl->init();
+Engine::Engine(GLint argc, GLchar* const argv[]) {
+	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, argc, argv));
 }
 #endif
 

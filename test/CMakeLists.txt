@@ -23,7 +23,7 @@ include ("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Resources.cmake")
 # Include directories
 # -----------------------------------------------
 
-set(PROJECT_INCLUDES "${PROJECT_SOURCE_DIR}/inc")
+set(PROJECT_INCLUDES "${CMAKE_CURRENT_SOURCE_DIR}/inc")
 
 # -----------------------------------------------
 # Add sub-directories to be included

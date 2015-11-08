@@ -365,7 +365,7 @@ mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
 mISOQ(GL_FALSE) {
-
+	init();
 }
 
 Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
@@ -396,6 +396,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint argc, GLchar* const argv[])
 				mIsAO(GL_FALSE),
 				mISOQ(GL_TRUE) {
 #endif
+	init();
 }
 
 Engine::EngineImpl::~EngineImpl() {

@@ -27,6 +27,7 @@ set(SOURCE_FILES test.cpp
 set(PROGRAM testApp)
 add_executable(${PROGRAM} ${SOURCE_FILES})
 
+include_directories(${PROJECT_INCLUDES})
 include_directories(${FILLWAVE_PATH_EXT_INCLUDE})
 include_directories(${FILLWAVE_PATH_INCLUDE})
 include_directories(${CMAKE_SOURCE_DIR}/inc)
