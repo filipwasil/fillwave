@@ -1,5 +1,5 @@
 macro(COPY_ASSETS target)
-set(ASSETS_DIRECTORY "${CMAKE_SOURCE_DIR}/examples/assets/")
+set(ASSETS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/examples/assets/")
 
 add_custom_target(
         assets_${target}

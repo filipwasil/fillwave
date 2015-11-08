@@ -27,7 +27,7 @@ project(libfillwave-dev C CXX)
 # Asset loader
 # -----------------------------------------------
 
-INCLUDE_DIRECTORIES(${FILLWAVE_PATH_INCLUDE}
+include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
@@ -55,8 +55,8 @@ ADD_SUBDIRECTORY(ext)
 set(CPACK_DEBIAN_PACKAGE_NAME "libfillwave-dev")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fillwave graphics engine - development package")
 
-if (FILLWAVE_BUILD_PACK)
-set (CPACK_DEBIAN_PACKAGE_DEPENDS "libfillwave (>= ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})")
-endif (FILLWAVE_BUILD_PACK)
+if(FILLWAVE_BUILD_PACK)
+    set (CPACK_DEBIAN_PACKAGE_DEPENDS "libfillwave (>= ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})")
+endif()
 
-INCLUDE(CPack)
+include(CPack)
