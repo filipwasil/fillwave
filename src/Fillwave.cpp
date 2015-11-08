@@ -32,16 +32,17 @@ namespace fillwave {
 
 Engine::Engine(std::string rootPath)
 : mImpl(new EngineImpl(this, rootPath)) {
-
+	mImpl->init();
 }
 
 Engine::Engine(ANativeActivity* activity)
 : mImpl(new EngineImpl(this, activity)) {
-
+	mImpl->init();
 }
 #else
 Engine::Engine(GLint argc, GLchar* const argv[])
 		: mImpl(new EngineImpl(this, argc, argv)) {
+	mImpl->init();
 }
 #endif
 
