@@ -25,11 +25,13 @@ build:
         - script:
             name: build
             code: |
+                echo "deb http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+                echo "deb-src http://ppa.launchpad.net/keithw/glfw3/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
                 echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main universe" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
                 echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
                 echo "deb-src http://cz.archive.ubuntu.com/ubuntu trusty main " | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
                 sudo apt-get update
-                sudo apt-get install git make g++ libglew1.10 libglew-dev libassimp3 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev -y
+                sudo apt-get install git wget make g++ libglfw3 libglfw3-dev libglew1.10 libglew-dev libassimp3 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev -y --force-yes
                 git clone https://github.com/Kitware/CMake.git
                 cd CMake
                 chmod +x ./bootstrap
@@ -41,5 +43,14 @@ build:
                 git submodule update
                 mkdir ../build
                 cd ../build
-                cmake ../fillwave
+                cmake ../fillwave -DNDEBUG=OFF -DFILLWAVE_BUILD_PACK=ON -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=OFF
                 make -j4
+                mkdir ../build_android
+                cd ..
+                wget http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin
+                chmod +x android-ndk-r10e-linux-x86_64.bin
+                ./android-ndk-r10e-linux-x86_64.bin > log.txt
+                cd build_android
+                cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DASSIMP_BUILD_TESTS=OFF -DASSIMP_BUILD_ASSIMP_TOOLS=OFF -DNDEBUG=OFF -D_ECLIPSE_VERSION="4.4" -DCMAKE_TOOLCHAIN_FILE=../fillwave/ext/android-cmake/android.toolchain.cmake -DANDROID_NDK=../android-ndk-r10e -DCMAKE_BUILD_TYPE=Release -DANDROID_ABI="armeabi-v7a with NEON" -DANDROID_NATIVE_API_LEVEL=18
+                make -j4
+                
