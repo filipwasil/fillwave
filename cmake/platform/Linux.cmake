@@ -9,27 +9,27 @@ CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 
 # OpenMP
 
-ADD_DEFINITIONS("-fopenmp")
-FIND_PACKAGE(OpenMP)
-IF(OPENMP_FOUND)
+add_definitions("-fopenmp")
+find_package(OpenMP)
+if(OPENMP_FOUND)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-ENDIF(OPENMP_FOUND)
+endif(OPENMP_FOUND)
 
 # -----------------------------------------------
 # Package type
 # -----------------------------------------------
 
-MESSAGE("Building binary package")
-PROJECT(libfillwave C CXX)
+message("Building binary package")
+project(libfillwave C CXX)
 
-SET(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator)
+set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator)
 
 # -----------------------------------------------
 # Asset loader
 # -----------------------------------------------
 
-INCLUDE_DIRECTORIES(${FILLWAVE_PATH_INCLUDE}
+include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
@@ -56,27 +56,28 @@ endif(FILLWAVE_BUILD_RPM)
 # Subprojects
 # -----------------------------------------------
 
-ADD_SUBDIRECTORY(ext)
+add_subdirectory(ext)
 
 # -----------------------------------------------
 # Linker
 # -----------------------------------------------
 
-   TARGET_LINK_LIBRARIES(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator freetype)
+target_link_libraries(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator freetype)
 
-   if(FILLWAVE_BUILD_PACK)
-      ADD_DEPENDENCIES(fillwave GLEW)
-      TARGET_LINK_LIBRARIES(fillwave GLEW)
-   else()
-      ADD_DEPENDENCIES(fillwave glew)
-      TARGET_LINK_LIBRARIES(fillwave glew)
-   endif()
+if(FILLWAVE_BUILD_PACK)
+    add_dependencies(fillwave GLEW)
+    target_link_libraries(fillwave GLEW)
+else()
+    add_subdirectory(${FILLWAVE_EXT_GLEW_PATH})
+    add_dependencies(fillwave glew)
+    target_link_libraries(fillwave glew)
+endif()
 
 # -----------------------------------------------
 # Test app
 # -----------------------------------------------
 
-ADD_SUBDIRECTORY(test)
+add_subdirectory(test)
 
 # -----------------------------------------------
 # Packaging
@@ -90,4 +91,4 @@ if (FILLWAVE_BUILD_PACK)
 #set (CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 endif()
 
-INCLUDE(CPack)
+include(CPack)
