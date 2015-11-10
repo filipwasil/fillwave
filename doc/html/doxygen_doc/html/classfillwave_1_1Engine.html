@@ -24,7 +24,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Fillwave
-   &#160;<span id="projectnumber">2.0.0</span>
+   &#160;<span id="projectnumber">2.1.3</span>
    </div>
    <div id="projectbrief">Modern OpenGL C++11 graphics engine</div>
   </td>
@@ -90,6 +90,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="classfillwave_1_1Engine-members.html">List of all members</a> &#124;
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a>  </div>
   <div class="headertitle">
 <div class="title">fillwave::Engine Class Reference</div>  </div>
@@ -101,6 +102,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><code>#include &lt;<a class="el" href="Fillwave_8h_source.html">Fillwave.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfillwave_1_1Engine_1_1EngineImpl.html">EngineImpl</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6348c216dda393c0ec969a1871f286b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6348c216dda393c0ec969a1871f286b0"></a>
@@ -139,21 +145,24 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>drawTexture</b> (<a c
 <tr class="memitem:a16884ac1bd9a55ee11cb915bc7ac1bad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a16884ac1bd9a55ee11cb915bc7ac1bad"></a>
 puPhysicsMeshBuffer&#160;</td><td class="memItemRight" valign="bottom"><b>getPhysicalMeshBuffer</b> (const std::string &amp;shapePath)</td></tr>
 <tr class="separator:a16884ac1bd9a55ee11cb915bc7ac1bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e1c27b9f9ba2dd7b8607be61ca12a45"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1e1c27b9f9ba2dd7b8607be61ca12a45"></a>
-<a class="el" href="classfillwave_1_1manager_1_1LightManager.html">manager::LightManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getLightManager</b> ()</td></tr>
-<tr class="separator:a1e1c27b9f9ba2dd7b8607be61ca12a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee372063724f3029b0f41ec4b826106e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aee372063724f3029b0f41ec4b826106e"></a>
+<a class="el" href="classfillwave_1_1manager_1_1LightManager.html">manager::LightManager</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getLightManager</b> () const </td></tr>
+<tr class="separator:aee372063724f3029b0f41ec4b826106e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29a0fe99323dc6150ad3cddfb49e752f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29a0fe99323dc6150ad3cddfb49e752f"></a>
+const fScene *&#160;</td><td class="memItemRight" valign="bottom"><b>getModelFromFile</b> (std::string path)</td></tr>
+<tr class="separator:a29a0fe99323dc6150ad3cddfb49e752f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7001ee49ec51a6a47fdd3b9fa0619df"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa7001ee49ec51a6a47fdd3b9fa0619df"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCurrentScene</b> (pScene scene)</td></tr>
 <tr class="separator:aa7001ee49ec51a6a47fdd3b9fa0619df"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5c793f2bcee964fe0f9ad1aa1857189"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa5c793f2bcee964fe0f9ad1aa1857189"></a>
-pScene&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentScene</b> ()</td></tr>
-<tr class="separator:aa5c793f2bcee964fe0f9ad1aa1857189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8f9cf557a945bec3447af175888b256"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8f9cf557a945bec3447af175888b256"></a>
+pScene&#160;</td><td class="memItemRight" valign="bottom"><b>getCurrentScene</b> () const </td></tr>
+<tr class="separator:aa8f9cf557a945bec3447af175888b256"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a019edbfa9aa9dcae5775e909df489248"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a019edbfa9aa9dcae5775e909df489248"></a>
 GLuint&#160;</td><td class="memItemRight" valign="bottom"><b>getFramesPassed</b> ()</td></tr>
 <tr class="separator:a019edbfa9aa9dcae5775e909df489248"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8c86cffe83dcb264741a21269b9f5f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8c86cffe83dcb264741a21269b9f5f0"></a>
-GLfloat&#160;</td><td class="memItemRight" valign="bottom"><b>getStartupAnimationTime</b> ()</td></tr>
-<tr class="separator:ad8c86cffe83dcb264741a21269b9f5f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb3c6c716c79148844d95de53dd76977"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acb3c6c716c79148844d95de53dd76977"></a>
+GLfloat&#160;</td><td class="memItemRight" valign="bottom"><b>getStartupAnimationTime</b> () const </td></tr>
+<tr class="separator:acb3c6c716c79148844d95de53dd76977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ba05b3ad8f87b5a91dffe0abfefc586"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ba05b3ad8f87b5a91dffe0abfefc586"></a>
 pShader&#160;</td><td class="memItemRight" valign="bottom"><b>storeShaderFragment</b> (const std::string &amp;shaderPath)</td></tr>
 <tr class="separator:a5ba05b3ad8f87b5a91dffe0abfefc586"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -166,30 +175,6 @@ pShader&#160;</td><td class="memItemRight" valign="bottom"><b>storeShaderFragmen
 <tr class="memitem:a63be33b71b6541023cc986e12a20835a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a63be33b71b6541023cc986e12a20835a"></a>
 pShader&#160;</td><td class="memItemRight" valign="bottom"><b>storeShaderVertex</b> (const std::string &amp;shaderPath, const std::string &amp;shaderSource)</td></tr>
 <tr class="separator:a63be33b71b6541023cc986e12a20835a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8cbc06ff1f9bba8e3cef59a3c876126"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8cbc06ff1f9bba8e3cef59a3c876126"></a>
-pProgram&#160;</td><td class="memItemRight" valign="bottom"><b>storeProgram</b> (const std::string &amp;name, const std::vector&lt; pShader &gt; &amp;shaders, GLboolean skipLinking=GL_FALSE)</td></tr>
-<tr class="separator:ad8cbc06ff1f9bba8e3cef59a3c876126"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6523d9365737f629897b1762eae50018"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6523d9365737f629897b1762eae50018"></a>
-pTexture&#160;</td><td class="memItemRight" valign="bottom"><b>storeTexture</b> (const std::string &amp;texturePath, const GLuint &amp;mapType=FILLWAVE_TEXTURE_TYPE_NONE)</td></tr>
-<tr class="separator:a6523d9365737f629897b1762eae50018"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8defb3db1fc8882f967c012a79afeff0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8defb3db1fc8882f967c012a79afeff0"></a>
-pTexture2DRenderableDynamic&#160;</td><td class="memItemRight" valign="bottom"><b>storeTextureDynamic</b> (const std::string &amp;fragmentShaderPath)</td></tr>
-<tr class="separator:a8defb3db1fc8882f967c012a79afeff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3c3207e65c948a73ddb07021687c4a35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c3207e65c948a73ddb07021687c4a35"></a>
-pTexture3D&#160;</td><td class="memItemRight" valign="bottom"><b>storeTexture3D</b> (const std::string &amp;posX, const std::string &amp;negX, const std::string &amp;posY, const std::string &amp;negY, const std::string &amp;posZ, const std::string &amp;negZ)</td></tr>
-<tr class="separator:a3c3207e65c948a73ddb07021687c4a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acef6ad430f102bca3d6975c4a2c3f17a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acef6ad430f102bca3d6975c4a2c3f17a"></a>
-pLightSpot&#160;</td><td class="memItemRight" valign="bottom"><b>storeLightSpot</b> (glm::vec3 position, glm::quat rotation, glm::vec4 color, pEntity entity=pEntity())</td></tr>
-<tr class="separator:acef6ad430f102bca3d6975c4a2c3f17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46cb84111218f318dbc2f1143f4ee277"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46cb84111218f318dbc2f1143f4ee277"></a>
-pLightPoint&#160;</td><td class="memItemRight" valign="bottom"><b>storeLightPoint</b> (glm::vec3 position, glm::vec4 color, pEntity entity=pEntity())</td></tr>
-<tr class="separator:a46cb84111218f318dbc2f1143f4ee277"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b70a285ba9d5e912d71e1ba504b2880"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b70a285ba9d5e912d71e1ba504b2880"></a>
-pLightDirectional&#160;</td><td class="memItemRight" valign="bottom"><b>storeLightDirectional</b> (glm::vec3 position, glm::quat rotation, glm::vec4 color, pEntity entity=pEntity())</td></tr>
-<tr class="separator:a3b70a285ba9d5e912d71e1ba504b2880"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96be4bcbb09810e004ca585fde819b68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96be4bcbb09810e004ca585fde819b68"></a>
-pText&#160;</td><td class="memItemRight" valign="bottom"><b>storeText</b> (std::string content, std::string fontName, GLfloat startingPositionX, GLfloat startingPositionY, GLfloat scale=1.0, glm::vec4 color=glm::vec4(1.0, 1.0, 1.0, 1.0), eTextEffect effect=eTextEffect::none)</td></tr>
-<tr class="separator:a96be4bcbb09810e004ca585fde819b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0597b16a02320880925f66a85dddd154"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0597b16a02320880925f66a85dddd154"></a>
 pShader&#160;</td><td class="memItemRight" valign="bottom"><b>storeShaderGeometry</b> (const std::string &amp;shaderPath)</td></tr>
 <tr class="separator:a0597b16a02320880925f66a85dddd154"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -208,6 +193,30 @@ pShader&#160;</td><td class="memItemRight" valign="bottom"><b>storeShaderTessela
 <tr class="memitem:af226a5bf69d8380adb04d3e53ee41689"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af226a5bf69d8380adb04d3e53ee41689"></a>
 pShader&#160;</td><td class="memItemRight" valign="bottom"><b>storeShaderTesselationEvaluation</b> (const std::string &amp;shaderPath, const std::string &amp;shaderSource)</td></tr>
 <tr class="separator:af226a5bf69d8380adb04d3e53ee41689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8cbc06ff1f9bba8e3cef59a3c876126"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8cbc06ff1f9bba8e3cef59a3c876126"></a>
+pProgram&#160;</td><td class="memItemRight" valign="bottom"><b>storeProgram</b> (const std::string &amp;name, const std::vector&lt; pShader &gt; &amp;shaders, GLboolean skipLinking=GL_FALSE)</td></tr>
+<tr class="separator:ad8cbc06ff1f9bba8e3cef59a3c876126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4bde7a3e530211b7aa9ed273e055ff9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4bde7a3e530211b7aa9ed273e055ff9"></a>
+pTexture&#160;</td><td class="memItemRight" valign="bottom"><b>storeTexture</b> (const std::string &amp;texturePath, const GLuint &amp;mapType=FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression compression=loader::eCompression::none)</td></tr>
+<tr class="separator:ad4bde7a3e530211b7aa9ed273e055ff9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8defb3db1fc8882f967c012a79afeff0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8defb3db1fc8882f967c012a79afeff0"></a>
+pTexture2DRenderableDynamic&#160;</td><td class="memItemRight" valign="bottom"><b>storeTextureDynamic</b> (const std::string &amp;fragmentShaderPath)</td></tr>
+<tr class="separator:a8defb3db1fc8882f967c012a79afeff0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c3207e65c948a73ddb07021687c4a35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3c3207e65c948a73ddb07021687c4a35"></a>
+pTexture3D&#160;</td><td class="memItemRight" valign="bottom"><b>storeTexture3D</b> (const std::string &amp;posX, const std::string &amp;negX, const std::string &amp;posY, const std::string &amp;negY, const std::string &amp;posZ, const std::string &amp;negZ)</td></tr>
+<tr class="separator:a3c3207e65c948a73ddb07021687c4a35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acef6ad430f102bca3d6975c4a2c3f17a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acef6ad430f102bca3d6975c4a2c3f17a"></a>
+pLightSpot&#160;</td><td class="memItemRight" valign="bottom"><b>storeLightSpot</b> (glm::vec3 position, glm::quat rotation, glm::vec4 color, pEntity entity=pEntity())</td></tr>
+<tr class="separator:acef6ad430f102bca3d6975c4a2c3f17a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46cb84111218f318dbc2f1143f4ee277"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a46cb84111218f318dbc2f1143f4ee277"></a>
+pLightPoint&#160;</td><td class="memItemRight" valign="bottom"><b>storeLightPoint</b> (glm::vec3 position, glm::vec4 color, pEntity entity=pEntity())</td></tr>
+<tr class="separator:a46cb84111218f318dbc2f1143f4ee277"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b70a285ba9d5e912d71e1ba504b2880"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3b70a285ba9d5e912d71e1ba504b2880"></a>
+pLightDirectional&#160;</td><td class="memItemRight" valign="bottom"><b>storeLightDirectional</b> (glm::vec3 position, glm::quat rotation, glm::vec4 color, pEntity entity=pEntity())</td></tr>
+<tr class="separator:a3b70a285ba9d5e912d71e1ba504b2880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96be4bcbb09810e004ca585fde819b68"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96be4bcbb09810e004ca585fde819b68"></a>
+pText&#160;</td><td class="memItemRight" valign="bottom"><b>storeText</b> (std::string content, std::string fontName, GLfloat startingPositionX, GLfloat startingPositionY, GLfloat scale=1.0, glm::vec4 color=glm::vec4(1.0, 1.0, 1.0, 1.0), eTextEffect effect=eTextEffect::none)</td></tr>
+<tr class="separator:a96be4bcbb09810e004ca585fde819b68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3619e901e208d1c61ebced3b18997e3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3619e901e208d1c61ebced3b18997e3"></a>
 pSampler&#160;</td><td class="memItemRight" valign="bottom"><b>storeSO</b> (GLint textureUnit)</td></tr>
 <tr class="separator:ae3619e901e208d1c61ebced3b18997e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -232,9 +241,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clearLights</b> ()</t
 <tr class="memitem:a6433c8aa182194e019b5a8003a541ad8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6433c8aa182194e019b5a8003a541ad8"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>pick</b> (GLuint x, GLuint y)</td></tr>
 <tr class="separator:a6433c8aa182194e019b5a8003a541ad8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a274fbb9bafca3ddb3bc023d502832a56"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a274fbb9bafca3ddb3bc023d502832a56"></a>
-glm::ivec2&#160;</td><td class="memItemRight" valign="bottom"><b>getScreenSize</b> ()</td></tr>
-<tr class="separator:a274fbb9bafca3ddb3bc023d502832a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a511f8d92f5109c50c6b1bac4ebdc4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa8a511f8d92f5109c50c6b1bac4ebdc4"></a>
+glm::ivec2&#160;</td><td class="memItemRight" valign="bottom"><b>getScreenSize</b> () const </td></tr>
+<tr class="separator:aa8a511f8d92f5109c50c6b1bac4ebdc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a622e9159a52582ac0fadd7be6ad2d31a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a622e9159a52582ac0fadd7be6ad2d31a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>log</b> ()</td></tr>
 <tr class="separator:a622e9159a52582ac0fadd7be6ad2d31a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -244,9 +253,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>captureFramebufferToF
 <tr class="memitem:a0d0b79df4b9f1589c526cdb7fbc0a968"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0d0b79df4b9f1589c526cdb7fbc0a968"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>captureFramebufferToBuffer</b> (GLubyte *buffer, GLint *sizeInBytes, GLuint format=GL_RGBA, GLint bytesPerPixel=4)</td></tr>
 <tr class="separator:a0d0b79df4b9f1589c526cdb7fbc0a968"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac50d81326985c03d55b71964d12e7688"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac50d81326985c03d55b71964d12e7688"></a>
-std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getExecutablePath</b> ()</td></tr>
-<tr class="separator:ac50d81326985c03d55b71964d12e7688"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73dd41624a311f1242ccddc4584f0ae2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73dd41624a311f1242ccddc4584f0ae2"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addPostProcess</b> (const std::string &amp;fragmentShaderPath, GLfloat lifeTime=FILLWAVE_ENDLESS)</td></tr>
 <tr class="separator:a73dd41624a311f1242ccddc4584f0ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -271,30 +277,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>setFocusCursorEnter</
 <tr class="memitem:a9b81fd9dea4b2d0cb16dcfe1c5ba2705"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b81fd9dea4b2d0cb16dcfe1c5ba2705"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setFocusCursorPosition</b> (pEntity entity)</td></tr>
 <tr class="separator:a9b81fd9dea4b2d0cb16dcfe1c5ba2705"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1669958a98cc9cb4f0bec033284a81dd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1669958a98cc9cb4f0bec033284a81dd"></a>
-pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusKey</b> ()</td></tr>
-<tr class="separator:a1669958a98cc9cb4f0bec033284a81dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefde4bc713b408d61506022aeade536b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aefde4bc713b408d61506022aeade536b"></a>
-pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusMouseButton</b> ()</td></tr>
-<tr class="separator:aefde4bc713b408d61506022aeade536b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f0ba798e60d2d07143ee193097d3a2a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6f0ba798e60d2d07143ee193097d3a2a"></a>
-pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusScroll</b> ()</td></tr>
-<tr class="separator:a6f0ba798e60d2d07143ee193097d3a2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a197ec75cd04d2f5f439151d050dcabfb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a197ec75cd04d2f5f439151d050dcabfb"></a>
-pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusChar</b> ()</td></tr>
-<tr class="separator:a197ec75cd04d2f5f439151d050dcabfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3dc35ddb09c7244edca4b68a09a417e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad3dc35ddb09c7244edca4b68a09a417e"></a>
-pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusCharMods</b> ()</td></tr>
-<tr class="separator:ad3dc35ddb09c7244edca4b68a09a417e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3695c0daae1ac6728b59f3fd9ea8717b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3695c0daae1ac6728b59f3fd9ea8717b"></a>
-pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusCursorEnter</b> ()</td></tr>
-<tr class="separator:a3695c0daae1ac6728b59f3fd9ea8717b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e03137a6810f968be5884cf8af99090"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7e03137a6810f968be5884cf8af99090"></a>
-pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusCursorPosition</b> ()</td></tr>
-<tr class="separator:a7e03137a6810f968be5884cf8af99090"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaffd805632dff9153fa76391987e902d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaffd805632dff9153fa76391987e902d"></a>
-pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusTouchScreen</b> ()</td></tr>
-<tr class="separator:aaffd805632dff9153fa76391987e902d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cdeeb61f95f2ea2c8d0748c44602a4f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cdeeb61f95f2ea2c8d0748c44602a4f"></a>
+pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusKey</b> () const </td></tr>
+<tr class="separator:a6cdeeb61f95f2ea2c8d0748c44602a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab198e289259c69e826d61c3e58511ce1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab198e289259c69e826d61c3e58511ce1"></a>
+pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusMouseButton</b> () const </td></tr>
+<tr class="separator:ab198e289259c69e826d61c3e58511ce1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a971c8773f4fb5065cb4acca6bc6d586e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a971c8773f4fb5065cb4acca6bc6d586e"></a>
+pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusScroll</b> () const </td></tr>
+<tr class="separator:a971c8773f4fb5065cb4acca6bc6d586e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02a4a3c0e5d46bdabfdb7dc6887143cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02a4a3c0e5d46bdabfdb7dc6887143cb"></a>
+pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusChar</b> () const </td></tr>
+<tr class="separator:a02a4a3c0e5d46bdabfdb7dc6887143cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a328004b38586dbd571230b666098e701"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a328004b38586dbd571230b666098e701"></a>
+pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusCharMods</b> () const </td></tr>
+<tr class="separator:a328004b38586dbd571230b666098e701"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42fb9efb98c8c4be2cca3de94bd86a3e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42fb9efb98c8c4be2cca3de94bd86a3e"></a>
+pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusCursorEnter</b> () const </td></tr>
+<tr class="separator:a42fb9efb98c8c4be2cca3de94bd86a3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb0369bdcbfe6e6dad399c1978f86d87"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="adb0369bdcbfe6e6dad399c1978f86d87"></a>
+pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusCursorPosition</b> () const </td></tr>
+<tr class="separator:adb0369bdcbfe6e6dad399c1978f86d87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a333f8f38b26b8b7720b720fc9cedf24e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a333f8f38b26b8b7720b720fc9cedf24e"></a>
+pEntity&#160;</td><td class="memItemRight" valign="bottom"><b>getFocusTouchScreen</b> () const </td></tr>
+<tr class="separator:a333f8f38b26b8b7720b720fc9cedf24e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5a508e59472b0653897b4c69ec09a63"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab5a508e59472b0653897b4c69ec09a63"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>insertResizeScreen</b> (GLuint width, GLuint height)</td></tr>
 <tr class="separator:ab5a508e59472b0653897b4c69ec09a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -406,12 +412,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>clearTouchScreenCallb
 <tr class="memitem:ac1f51045c9dd664740800ada09656c36"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac1f51045c9dd664740800ada09656c36"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reload</b> ()</td></tr>
 <tr class="separator:ac1f51045c9dd664740800ada09656c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29a0fe99323dc6150ad3cddfb49e752f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a29a0fe99323dc6150ad3cddfb49e752f"></a>
-const fScene *&#160;</td><td class="memItemRight" valign="bottom"><b>getModelFromFile</b> (std::string path)</td></tr>
-<tr class="separator:a29a0fe99323dc6150ad3cddfb49e752f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3626604d8a6f5b0f7dbfffab5617c8ab"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3626604d8a6f5b0f7dbfffab5617c8ab"></a>
-GLboolean&#160;</td><td class="memItemRight" valign="bottom"><b>isDR</b> ()</td></tr>
-<tr class="separator:a3626604d8a6f5b0f7dbfffab5617c8ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9694aceb9fefec4ebdaec8428c59b5ad"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9694aceb9fefec4ebdaec8428c59b5ad"></a>
+GLboolean&#160;</td><td class="memItemRight" valign="bottom"><b>isDR</b> () const </td></tr>
+<tr class="separator:a9694aceb9fefec4ebdaec8428c59b5ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Fillwave engine. </p>
@@ -421,7 +424,7 @@ GLboolean&#160;</td><td class="memItemRight" valign="bottom"><b>isDR</b> ()</td>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 25 2015 18:41:32 for Fillwave by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 11 2015 00:11:36 for Fillwave by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>

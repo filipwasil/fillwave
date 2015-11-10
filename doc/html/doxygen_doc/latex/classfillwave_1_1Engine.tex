@@ -9,6 +9,11 @@ Fillwave engine.
 
 {\ttfamily \#include $<$Fillwave.\+h$>$}
 
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structfillwave_1_1Engine_1_1EngineImpl}{Engine\+Impl}
+\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -48,19 +53,22 @@ Fillwave engine.
 \hypertarget{classfillwave_1_1Engine_a16884ac1bd9a55ee11cb915bc7ac1bad}{}pu\+Physics\+Mesh\+Buffer {\bfseries get\+Physical\+Mesh\+Buffer} (const std\+::string \&shape\+Path)\label{classfillwave_1_1Engine_a16884ac1bd9a55ee11cb915bc7ac1bad}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_a1e1c27b9f9ba2dd7b8607be61ca12a45}{}\hyperlink{classfillwave_1_1manager_1_1LightManager}{manager\+::\+Light\+Manager} $\ast$ {\bfseries get\+Light\+Manager} ()\label{classfillwave_1_1Engine_a1e1c27b9f9ba2dd7b8607be61ca12a45}
+\hypertarget{classfillwave_1_1Engine_aee372063724f3029b0f41ec4b826106e}{}\hyperlink{classfillwave_1_1manager_1_1LightManager}{manager\+::\+Light\+Manager} $\ast$ {\bfseries get\+Light\+Manager} () const \label{classfillwave_1_1Engine_aee372063724f3029b0f41ec4b826106e}
+
+\item 
+\hypertarget{classfillwave_1_1Engine_a29a0fe99323dc6150ad3cddfb49e752f}{}const f\+Scene $\ast$ {\bfseries get\+Model\+From\+File} (std\+::string path)\label{classfillwave_1_1Engine_a29a0fe99323dc6150ad3cddfb49e752f}
 
 \item 
 \hypertarget{classfillwave_1_1Engine_aa7001ee49ec51a6a47fdd3b9fa0619df}{}void {\bfseries set\+Current\+Scene} (p\+Scene scene)\label{classfillwave_1_1Engine_aa7001ee49ec51a6a47fdd3b9fa0619df}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_aa5c793f2bcee964fe0f9ad1aa1857189}{}p\+Scene {\bfseries get\+Current\+Scene} ()\label{classfillwave_1_1Engine_aa5c793f2bcee964fe0f9ad1aa1857189}
+\hypertarget{classfillwave_1_1Engine_aa8f9cf557a945bec3447af175888b256}{}p\+Scene {\bfseries get\+Current\+Scene} () const \label{classfillwave_1_1Engine_aa8f9cf557a945bec3447af175888b256}
 
 \item 
 \hypertarget{classfillwave_1_1Engine_a019edbfa9aa9dcae5775e909df489248}{}G\+Luint {\bfseries get\+Frames\+Passed} ()\label{classfillwave_1_1Engine_a019edbfa9aa9dcae5775e909df489248}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_ad8c86cffe83dcb264741a21269b9f5f0}{}G\+Lfloat {\bfseries get\+Startup\+Animation\+Time} ()\label{classfillwave_1_1Engine_ad8c86cffe83dcb264741a21269b9f5f0}
+\hypertarget{classfillwave_1_1Engine_acb3c6c716c79148844d95de53dd76977}{}G\+Lfloat {\bfseries get\+Startup\+Animation\+Time} () const \label{classfillwave_1_1Engine_acb3c6c716c79148844d95de53dd76977}
 
 \item 
 \hypertarget{classfillwave_1_1Engine_a5ba05b3ad8f87b5a91dffe0abfefc586}{}p\+Shader {\bfseries store\+Shader\+Fragment} (const std\+::string \&shader\+Path)\label{classfillwave_1_1Engine_a5ba05b3ad8f87b5a91dffe0abfefc586}
@@ -73,30 +81,6 @@ Fillwave engine.
 
 \item 
 \hypertarget{classfillwave_1_1Engine_a63be33b71b6541023cc986e12a20835a}{}p\+Shader {\bfseries store\+Shader\+Vertex} (const std\+::string \&shader\+Path, const std\+::string \&shader\+Source)\label{classfillwave_1_1Engine_a63be33b71b6541023cc986e12a20835a}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_ad8cbc06ff1f9bba8e3cef59a3c876126}{}p\+Program {\bfseries store\+Program} (const std\+::string \&name, const std\+::vector$<$ p\+Shader $>$ \&shaders, G\+Lboolean skip\+Linking=G\+L\+\_\+\+F\+A\+L\+S\+E)\label{classfillwave_1_1Engine_ad8cbc06ff1f9bba8e3cef59a3c876126}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_a6523d9365737f629897b1762eae50018}{}p\+Texture {\bfseries store\+Texture} (const std\+::string \&texture\+Path, const G\+Luint \&map\+Type=F\+I\+L\+L\+W\+A\+V\+E\+\_\+\+T\+E\+X\+T\+U\+R\+E\+\_\+\+T\+Y\+P\+E\+\_\+\+N\+O\+N\+E)\label{classfillwave_1_1Engine_a6523d9365737f629897b1762eae50018}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_a8defb3db1fc8882f967c012a79afeff0}{}p\+Texture2\+D\+Renderable\+Dynamic {\bfseries store\+Texture\+Dynamic} (const std\+::string \&fragment\+Shader\+Path)\label{classfillwave_1_1Engine_a8defb3db1fc8882f967c012a79afeff0}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_a3c3207e65c948a73ddb07021687c4a35}{}p\+Texture3\+D {\bfseries store\+Texture3\+D} (const std\+::string \&pos\+X, const std\+::string \&neg\+X, const std\+::string \&pos\+Y, const std\+::string \&neg\+Y, const std\+::string \&pos\+Z, const std\+::string \&neg\+Z)\label{classfillwave_1_1Engine_a3c3207e65c948a73ddb07021687c4a35}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_acef6ad430f102bca3d6975c4a2c3f17a}{}p\+Light\+Spot {\bfseries store\+Light\+Spot} (glm\+::vec3 position, glm\+::quat rotation, glm\+::vec4 color, p\+Entity entity=p\+Entity())\label{classfillwave_1_1Engine_acef6ad430f102bca3d6975c4a2c3f17a}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_a46cb84111218f318dbc2f1143f4ee277}{}p\+Light\+Point {\bfseries store\+Light\+Point} (glm\+::vec3 position, glm\+::vec4 color, p\+Entity entity=p\+Entity())\label{classfillwave_1_1Engine_a46cb84111218f318dbc2f1143f4ee277}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_a3b70a285ba9d5e912d71e1ba504b2880}{}p\+Light\+Directional {\bfseries store\+Light\+Directional} (glm\+::vec3 position, glm\+::quat rotation, glm\+::vec4 color, p\+Entity entity=p\+Entity())\label{classfillwave_1_1Engine_a3b70a285ba9d5e912d71e1ba504b2880}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_a96be4bcbb09810e004ca585fde819b68}{}p\+Text {\bfseries store\+Text} (std\+::string content, std\+::string font\+Name, G\+Lfloat starting\+Position\+X, G\+Lfloat starting\+Position\+Y, G\+Lfloat scale=1.\+0, glm\+::vec4 color=glm\+::vec4(1.\+0, 1.\+0, 1.\+0, 1.\+0), e\+Text\+Effect effect=e\+Text\+Effect\+::none)\label{classfillwave_1_1Engine_a96be4bcbb09810e004ca585fde819b68}
 
 \item 
 \hypertarget{classfillwave_1_1Engine_a0597b16a02320880925f66a85dddd154}{}p\+Shader {\bfseries store\+Shader\+Geometry} (const std\+::string \&shader\+Path)\label{classfillwave_1_1Engine_a0597b16a02320880925f66a85dddd154}
@@ -115,6 +99,30 @@ Fillwave engine.
 
 \item 
 \hypertarget{classfillwave_1_1Engine_af226a5bf69d8380adb04d3e53ee41689}{}p\+Shader {\bfseries store\+Shader\+Tesselation\+Evaluation} (const std\+::string \&shader\+Path, const std\+::string \&shader\+Source)\label{classfillwave_1_1Engine_af226a5bf69d8380adb04d3e53ee41689}
+
+\item 
+\hypertarget{classfillwave_1_1Engine_ad8cbc06ff1f9bba8e3cef59a3c876126}{}p\+Program {\bfseries store\+Program} (const std\+::string \&name, const std\+::vector$<$ p\+Shader $>$ \&shaders, G\+Lboolean skip\+Linking=G\+L\+\_\+\+F\+A\+L\+S\+E)\label{classfillwave_1_1Engine_ad8cbc06ff1f9bba8e3cef59a3c876126}
+
+\item 
+\hypertarget{classfillwave_1_1Engine_ad4bde7a3e530211b7aa9ed273e055ff9}{}p\+Texture {\bfseries store\+Texture} (const std\+::string \&texture\+Path, const G\+Luint \&map\+Type=F\+I\+L\+L\+W\+A\+V\+E\+\_\+\+T\+E\+X\+T\+U\+R\+E\+\_\+\+T\+Y\+P\+E\+\_\+\+N\+O\+N\+E, loader\+::e\+Compression compression=loader\+::e\+Compression\+::none)\label{classfillwave_1_1Engine_ad4bde7a3e530211b7aa9ed273e055ff9}
+
+\item 
+\hypertarget{classfillwave_1_1Engine_a8defb3db1fc8882f967c012a79afeff0}{}p\+Texture2\+D\+Renderable\+Dynamic {\bfseries store\+Texture\+Dynamic} (const std\+::string \&fragment\+Shader\+Path)\label{classfillwave_1_1Engine_a8defb3db1fc8882f967c012a79afeff0}
+
+\item 
+\hypertarget{classfillwave_1_1Engine_a3c3207e65c948a73ddb07021687c4a35}{}p\+Texture3\+D {\bfseries store\+Texture3\+D} (const std\+::string \&pos\+X, const std\+::string \&neg\+X, const std\+::string \&pos\+Y, const std\+::string \&neg\+Y, const std\+::string \&pos\+Z, const std\+::string \&neg\+Z)\label{classfillwave_1_1Engine_a3c3207e65c948a73ddb07021687c4a35}
+
+\item 
+\hypertarget{classfillwave_1_1Engine_acef6ad430f102bca3d6975c4a2c3f17a}{}p\+Light\+Spot {\bfseries store\+Light\+Spot} (glm\+::vec3 position, glm\+::quat rotation, glm\+::vec4 color, p\+Entity entity=p\+Entity())\label{classfillwave_1_1Engine_acef6ad430f102bca3d6975c4a2c3f17a}
+
+\item 
+\hypertarget{classfillwave_1_1Engine_a46cb84111218f318dbc2f1143f4ee277}{}p\+Light\+Point {\bfseries store\+Light\+Point} (glm\+::vec3 position, glm\+::vec4 color, p\+Entity entity=p\+Entity())\label{classfillwave_1_1Engine_a46cb84111218f318dbc2f1143f4ee277}
+
+\item 
+\hypertarget{classfillwave_1_1Engine_a3b70a285ba9d5e912d71e1ba504b2880}{}p\+Light\+Directional {\bfseries store\+Light\+Directional} (glm\+::vec3 position, glm\+::quat rotation, glm\+::vec4 color, p\+Entity entity=p\+Entity())\label{classfillwave_1_1Engine_a3b70a285ba9d5e912d71e1ba504b2880}
+
+\item 
+\hypertarget{classfillwave_1_1Engine_a96be4bcbb09810e004ca585fde819b68}{}p\+Text {\bfseries store\+Text} (std\+::string content, std\+::string font\+Name, G\+Lfloat starting\+Position\+X, G\+Lfloat starting\+Position\+Y, G\+Lfloat scale=1.\+0, glm\+::vec4 color=glm\+::vec4(1.\+0, 1.\+0, 1.\+0, 1.\+0), e\+Text\+Effect effect=e\+Text\+Effect\+::none)\label{classfillwave_1_1Engine_a96be4bcbb09810e004ca585fde819b68}
 
 \item 
 \hypertarget{classfillwave_1_1Engine_ae3619e901e208d1c61ebced3b18997e3}{}p\+Sampler {\bfseries store\+S\+O} (G\+Lint texture\+Unit)\label{classfillwave_1_1Engine_ae3619e901e208d1c61ebced3b18997e3}
@@ -141,7 +149,7 @@ Fillwave engine.
 \hypertarget{classfillwave_1_1Engine_a6433c8aa182194e019b5a8003a541ad8}{}void {\bfseries pick} (G\+Luint x, G\+Luint y)\label{classfillwave_1_1Engine_a6433c8aa182194e019b5a8003a541ad8}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_a274fbb9bafca3ddb3bc023d502832a56}{}glm\+::ivec2 {\bfseries get\+Screen\+Size} ()\label{classfillwave_1_1Engine_a274fbb9bafca3ddb3bc023d502832a56}
+\hypertarget{classfillwave_1_1Engine_aa8a511f8d92f5109c50c6b1bac4ebdc4}{}glm\+::ivec2 {\bfseries get\+Screen\+Size} () const \label{classfillwave_1_1Engine_aa8a511f8d92f5109c50c6b1bac4ebdc4}
 
 \item 
 \hypertarget{classfillwave_1_1Engine_a622e9159a52582ac0fadd7be6ad2d31a}{}void {\bfseries log} ()\label{classfillwave_1_1Engine_a622e9159a52582ac0fadd7be6ad2d31a}
@@ -151,9 +159,6 @@ Fillwave engine.
 
 \item 
 \hypertarget{classfillwave_1_1Engine_a0d0b79df4b9f1589c526cdb7fbc0a968}{}void {\bfseries capture\+Framebuffer\+To\+Buffer} (G\+Lubyte $\ast$buffer, G\+Lint $\ast$size\+In\+Bytes, G\+Luint format=G\+L\+\_\+\+R\+G\+B\+A, G\+Lint bytes\+Per\+Pixel=4)\label{classfillwave_1_1Engine_a0d0b79df4b9f1589c526cdb7fbc0a968}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_ac50d81326985c03d55b71964d12e7688}{}std\+::string {\bfseries get\+Executable\+Path} ()\label{classfillwave_1_1Engine_ac50d81326985c03d55b71964d12e7688}
 
 \item 
 \hypertarget{classfillwave_1_1Engine_a73dd41624a311f1242ccddc4584f0ae2}{}void {\bfseries add\+Post\+Process} (const std\+::string \&fragment\+Shader\+Path, G\+Lfloat life\+Time=F\+I\+L\+L\+W\+A\+V\+E\+\_\+\+E\+N\+D\+L\+E\+S\+S)\label{classfillwave_1_1Engine_a73dd41624a311f1242ccddc4584f0ae2}
@@ -180,28 +185,28 @@ Fillwave engine.
 \hypertarget{classfillwave_1_1Engine_a9b81fd9dea4b2d0cb16dcfe1c5ba2705}{}void {\bfseries set\+Focus\+Cursor\+Position} (p\+Entity entity)\label{classfillwave_1_1Engine_a9b81fd9dea4b2d0cb16dcfe1c5ba2705}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_a1669958a98cc9cb4f0bec033284a81dd}{}p\+Entity {\bfseries get\+Focus\+Key} ()\label{classfillwave_1_1Engine_a1669958a98cc9cb4f0bec033284a81dd}
+\hypertarget{classfillwave_1_1Engine_a6cdeeb61f95f2ea2c8d0748c44602a4f}{}p\+Entity {\bfseries get\+Focus\+Key} () const \label{classfillwave_1_1Engine_a6cdeeb61f95f2ea2c8d0748c44602a4f}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_aefde4bc713b408d61506022aeade536b}{}p\+Entity {\bfseries get\+Focus\+Mouse\+Button} ()\label{classfillwave_1_1Engine_aefde4bc713b408d61506022aeade536b}
+\hypertarget{classfillwave_1_1Engine_ab198e289259c69e826d61c3e58511ce1}{}p\+Entity {\bfseries get\+Focus\+Mouse\+Button} () const \label{classfillwave_1_1Engine_ab198e289259c69e826d61c3e58511ce1}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_a6f0ba798e60d2d07143ee193097d3a2a}{}p\+Entity {\bfseries get\+Focus\+Scroll} ()\label{classfillwave_1_1Engine_a6f0ba798e60d2d07143ee193097d3a2a}
+\hypertarget{classfillwave_1_1Engine_a971c8773f4fb5065cb4acca6bc6d586e}{}p\+Entity {\bfseries get\+Focus\+Scroll} () const \label{classfillwave_1_1Engine_a971c8773f4fb5065cb4acca6bc6d586e}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_a197ec75cd04d2f5f439151d050dcabfb}{}p\+Entity {\bfseries get\+Focus\+Char} ()\label{classfillwave_1_1Engine_a197ec75cd04d2f5f439151d050dcabfb}
+\hypertarget{classfillwave_1_1Engine_a02a4a3c0e5d46bdabfdb7dc6887143cb}{}p\+Entity {\bfseries get\+Focus\+Char} () const \label{classfillwave_1_1Engine_a02a4a3c0e5d46bdabfdb7dc6887143cb}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_ad3dc35ddb09c7244edca4b68a09a417e}{}p\+Entity {\bfseries get\+Focus\+Char\+Mods} ()\label{classfillwave_1_1Engine_ad3dc35ddb09c7244edca4b68a09a417e}
+\hypertarget{classfillwave_1_1Engine_a328004b38586dbd571230b666098e701}{}p\+Entity {\bfseries get\+Focus\+Char\+Mods} () const \label{classfillwave_1_1Engine_a328004b38586dbd571230b666098e701}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_a3695c0daae1ac6728b59f3fd9ea8717b}{}p\+Entity {\bfseries get\+Focus\+Cursor\+Enter} ()\label{classfillwave_1_1Engine_a3695c0daae1ac6728b59f3fd9ea8717b}
+\hypertarget{classfillwave_1_1Engine_a42fb9efb98c8c4be2cca3de94bd86a3e}{}p\+Entity {\bfseries get\+Focus\+Cursor\+Enter} () const \label{classfillwave_1_1Engine_a42fb9efb98c8c4be2cca3de94bd86a3e}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_a7e03137a6810f968be5884cf8af99090}{}p\+Entity {\bfseries get\+Focus\+Cursor\+Position} ()\label{classfillwave_1_1Engine_a7e03137a6810f968be5884cf8af99090}
+\hypertarget{classfillwave_1_1Engine_adb0369bdcbfe6e6dad399c1978f86d87}{}p\+Entity {\bfseries get\+Focus\+Cursor\+Position} () const \label{classfillwave_1_1Engine_adb0369bdcbfe6e6dad399c1978f86d87}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_aaffd805632dff9153fa76391987e902d}{}p\+Entity {\bfseries get\+Focus\+Touch\+Screen} ()\label{classfillwave_1_1Engine_aaffd805632dff9153fa76391987e902d}
+\hypertarget{classfillwave_1_1Engine_a333f8f38b26b8b7720b720fc9cedf24e}{}p\+Entity {\bfseries get\+Focus\+Touch\+Screen} () const \label{classfillwave_1_1Engine_a333f8f38b26b8b7720b720fc9cedf24e}
 
 \item 
 \hypertarget{classfillwave_1_1Engine_ab5a508e59472b0653897b4c69ec09a63}{}void {\bfseries insert\+Resize\+Screen} (G\+Luint width, G\+Luint height)\label{classfillwave_1_1Engine_ab5a508e59472b0653897b4c69ec09a63}
@@ -315,10 +320,7 @@ Fillwave engine.
 \hypertarget{classfillwave_1_1Engine_ac1f51045c9dd664740800ada09656c36}{}void {\bfseries reload} ()\label{classfillwave_1_1Engine_ac1f51045c9dd664740800ada09656c36}
 
 \item 
-\hypertarget{classfillwave_1_1Engine_a29a0fe99323dc6150ad3cddfb49e752f}{}const f\+Scene $\ast$ {\bfseries get\+Model\+From\+File} (std\+::string path)\label{classfillwave_1_1Engine_a29a0fe99323dc6150ad3cddfb49e752f}
-
-\item 
-\hypertarget{classfillwave_1_1Engine_a3626604d8a6f5b0f7dbfffab5617c8ab}{}G\+Lboolean {\bfseries is\+D\+R} ()\label{classfillwave_1_1Engine_a3626604d8a6f5b0f7dbfffab5617c8ab}
+\hypertarget{classfillwave_1_1Engine_a9694aceb9fefec4ebdaec8428c59b5ad}{}G\+Lboolean {\bfseries is\+D\+R} () const \label{classfillwave_1_1Engine_a9694aceb9fefec4ebdaec8428c59b5ad}
 
 \end{DoxyCompactItemize}
 

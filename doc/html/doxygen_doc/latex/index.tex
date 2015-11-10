@@ -6,103 +6,7 @@
 \item Android with Open\+G\+L 3.\+0+, G\+L\+S\+L E\+S 300+ support. (A\+P\+I $>$ 18, Rev. $>$ 4.\+3)
 \end{DoxyItemize}
 
-\subsection*{{\bfseries Ubuntu (Debian)\+:}}
-
-\subsubsection*{1. Install all dependencies\+:}
-
-
-\begin{DoxyPre}
-{\ttfamily 
-sudo apt-get install libfreetype6 libfreetype6-dev libassimp3 libassimp-dev libglm-dev libglm libx11-dev libglu-dev
-}
-\end{DoxyPre}
-
-
-\subsubsection*{2.\+a) Install from the package directly ...}
-
-
-\begin{DoxyItemize}
-\item \href{http://filipwasil.bitbucket.org/downloads/libfillwave-1.9.7-Linux.deb}{\tt http\+://filipwasil.\+bitbucket.\+org/downloads/libfillwave-\/1.\+9.\+7-\/\+Linux.\+deb}
-\item \href{http://filipwasil.bitbucket.org/downloads/libfillwave-dev-1.9.7-Linux.deb}{\tt http\+://filipwasil.\+bitbucket.\+org/downloads/libfillwave-\/dev-\/1.\+9.\+7-\/\+Linux.\+deb}
-\end{DoxyItemize}
-
-\subsubsection*{2.\+b) ... or add fillwave to software sources\+:}
-
-
-\begin{DoxyPre}
-{\ttfamily 
-deb \href{http://filipwasil.bitbucket.org/downloads}{\tt http://filipwasil.bitbucket.org/downloads} ./
-#deb-src \href{http://filipwasil.bitbucket.org/downloads}{\tt http://filipwasil.bitbucket.org/downloads} ./
-}
-\end{DoxyPre}
-
-
-\subsubsection*{3. Update and install\+:}
-
-
-\begin{DoxyPre}{\ttfamily sudo apt-get update
-}\end{DoxyPre}
-  
-\begin{DoxyPre}{\ttfamily sudo apt-get install sudo apt-get install libfillwave libfillwave-dev fillwave-examples
-}\end{DoxyPre}
- 
-
-\subsection*{{\bfseries Fedora (Red hat)\+:}}
-
-\subsubsection*{1. Install all dependencies\+:}
-
-
-\begin{DoxyPre}
-{\ttfamily 
-sudo yum install glm-devel.x86\_64 glm.x86\_64 assimp.x86\_64 assimp-devel.x86\_64 glew.x86\_64 glew-devel.x86\_64 freetype-devel.x86\_64 freetype.x86\_64
-}
-\end{DoxyPre}
-
-
-\subsubsection*{2. Copy \href{downloads/fillwave.repo}{\tt fillwave.\+repo} file in Your {\bfseries /etc/yum.repos.\+d/}, update and install.}
-
-
-\begin{DoxyPre}{\ttfamily sudo yum update
-}\end{DoxyPre}
-  
-\begin{DoxyPre}{\ttfamily sudo yum install sudo apt-get install libfillwave libfillwave-dev fillwave-examples
-}\end{DoxyPre}
- 
-
-\subsection*{{\bfseries G\+L\+F\+W3 for context creation on P\+C}}
-
-The easiest way to start playing with Fillwave engine on P\+C is to create context with G\+L\+F\+W3 and use examples provided. G\+L\+F\+W3 is in default repositries under \href{http://www.ubuntu.com/}{\tt Ubuntu} 14.\+10+. In case of older system just add following lines to /etc/apt/sources.list\+:
-
- 
-\begin{DoxyPre}
-{\ttfamily 
-deb \href{http://ppa.launchpad.net/keithw/glfw3/ubuntu}{\tt http://ppa.launchpad.net/keithw/glfw3/ubuntu} trusty main
-deb-src \href{http://ppa.launchpad.net/keithw/glfw3/ubuntu}{\tt http://ppa.launchpad.net/keithw/glfw3/ubuntu} trusty main
-}
-\end{DoxyPre}
- \subsubsection*{{\bfseries G\+L\+F\+W3 installation}}
-
-  
-\begin{DoxyPre}
-{\ttfamily 
-sudo apt-get install libglfw3
-}
-\end{DoxyPre}
-
-
-
-
-\subsection*{{\bfseries Android}}
-
- 
-
- You can develop Android with pure native activity, or regular activity with J\+N\+I wrapper.
-
-
-
-\subsubsection*{{\bfseries Java Activity with J\+N\+I}}
-
-
+\subsubsection*{{\bfseries Java Activity with J\+N\+I (to be updated)}}
 
 
 \begin{DoxyItemize}
@@ -110,9 +14,7 @@ sudo apt-get install libglfw3
 \item \href{https://github.com/filipwasil/fillwave-android-activity.git}{\tt https\+://github.\+com/filipwasil/fillwave-\/android-\/activity.\+git}
 \end{DoxyItemize}
 
-\subsubsection*{{\bfseries Native Activity}}
-
-
+\subsubsection*{{\bfseries Native Activity (to be updated)}}
 
 
 \begin{DoxyItemize}
@@ -120,8 +22,6 @@ sudo apt-get install libglfw3
 \end{DoxyItemize}
 
 \subsubsection*{{\bfseries Libraries used}}
-
-
 
 
 \begin{DoxyItemize}

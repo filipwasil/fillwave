@@ -2,7 +2,6 @@ var searchData=
 [
   ['terrain',['Terrain',['../classfillwave_1_1terrain_1_1Terrain.html',1,'fillwave::terrain']]],
   ['terrainconstructor',['TerrainConstructor',['../classfillwave_1_1terrain_1_1TerrainConstructor.html',1,'fillwave::terrain']]],
-  ['testloader',['TestLoader',['../classfillwave_1_1loader_1_1TestLoader.html',1,'fillwave::loader']]],
   ['text',['Text',['../classfillwave_1_1models_1_1Text.html',1,'fillwave::models']]],
   ['texture',['Texture',['../classfillwave_1_1core_1_1Texture.html',1,'fillwave::core']]],
   ['texture1d',['Texture1D',['../classfillwave_1_1core_1_1Texture1D.html',1,'fillwave::core']]],

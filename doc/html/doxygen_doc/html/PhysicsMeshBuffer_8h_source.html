@@ -24,7 +24,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Fillwave
-   &#160;<span id="projectnumber">2.0.0</span>
+   &#160;<span id="projectnumber">2.1.3</span>
    </div>
    <div id="projectbrief">Modern OpenGL C++11 graphics engine</div>
   </td>
@@ -99,45 +99,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef INC_FILLWAVE_COMMON_PHYSICSMESHBUFFER_H_</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define INC_FILLWAVE_COMMON_PHYSICSMESHBUFFER_H_</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">/*************************************************************************</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"> * Copyright (C) 2015 Filip Wasil</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment"> *  All Rights Reserved.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment"> * NOTICE:  All information contained herein is, and remains</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment"> * the property of Filip Wasil. The intellectual and technical</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment"> * concepts contained herein are proprietary to Filip Wasil</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment"> * and may be covered by Polish and foreign patents, patents</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment"> * in process, and are protected by trade secret or copyright</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment"> * law. Dissemination of this information or reproduction</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment"> * of this material is strictly forbidden unless prior written</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment"> * permission is obtained from Filip Wasil.</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment"> * fillwave@gmail.com</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment"> *</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment"> */</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacefillwave.html">fillwave</a> {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structfillwave_1_1PhysicsMeshBuffer.html">   37</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structfillwave_1_1PhysicsMeshBuffer.html">PhysicsMeshBuffer</a> {</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;   GLint mNumFaces;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;   std::vector&lt;glm::vec3&gt; mVertices;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;   std::vector&lt;GLint&gt; mIndices;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} <span class="comment">/* fillwave */</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">typedef</span> std::unique_ptr&lt;fillwave::PhysicsMeshBuffer&gt; puPhysicsMeshBuffer;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INC_FILLWAVE_COMMON_PHYSICSMESHBUFFER_H_ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="namespacefillwave_html"><div class="ttname"><a href="namespacefillwave.html">fillwave</a></div><div class="ttdef"><b>Definition:</b> Callback.h:32</div></div>
-<div class="ttc" id="structfillwave_1_1PhysicsMeshBuffer_html"><div class="ttname"><a href="structfillwave_1_1PhysicsMeshBuffer.html">fillwave::PhysicsMeshBuffer</a></div><div class="ttdoc">Physical mesh data. </div><div class="ttdef"><b>Definition:</b> PhysicsMeshBuffer.h:37</div></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacefillwave.html">fillwave</a> {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="structfillwave_1_1PhysicsMeshBuffer.html">   19</a></span>&#160;<span class="keyword">struct </span><a class="code" href="structfillwave_1_1PhysicsMeshBuffer.html">PhysicsMeshBuffer</a> {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;   GLint mNumFaces;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;   std::vector&lt;glm::vec3&gt; mVertices;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;   std::vector&lt;GLint&gt; mIndices;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;};</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;} <span class="comment">/* fillwave */</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">typedef</span> std::unique_ptr&lt;fillwave::PhysicsMeshBuffer&gt; puPhysicsMeshBuffer;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* INC_FILLWAVE_COMMON_PHYSICSMESHBUFFER_H_ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="namespacefillwave_html"><div class="ttname"><a href="namespacefillwave.html">fillwave</a></div><div class="ttdef"><b>Definition:</b> Callback.h:13</div></div>
+<div class="ttc" id="structfillwave_1_1PhysicsMeshBuffer_html"><div class="ttname"><a href="structfillwave_1_1PhysicsMeshBuffer.html">fillwave::PhysicsMeshBuffer</a></div><div class="ttdoc">Physical mesh data. </div><div class="ttdef"><b>Definition:</b> PhysicsMeshBuffer.h:19</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Sep 25 2015 18:41:31 for Fillwave by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Nov 11 2015 00:11:36 for Fillwave by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.9.1
 </small></address>
