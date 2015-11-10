@@ -1,0 +1,19 @@
+configuration:
+  - Debug
+  - Release
+
+environment:
+  matrix:
+  #- BUILD: msvc
+  #- BUILD: msvc
+  #  PLATFORM: x64
+  - BUILD: mingw
+
+before_build:
+  # Workaround for CMake not wanting sh.exe on PATH for MinGW.
+  - git submodule init
+  - git submodule update
+  - set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
+
+build_script:
+  - python appveyor.cmake.py
