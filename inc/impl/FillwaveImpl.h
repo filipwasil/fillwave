@@ -113,26 +113,14 @@ struct Engine::EngineImpl {
 	GLuint mWindowWidth = 1920;
 	GLuint mWindowHeight = 1200;
 
-	/* Startup */
-	GLfloat mStartupTime;
-	pTexture mStartupTexture;
-	const GLfloat mStartupTimeLimit = 8.0f;
-	puPostProcessingPass mPostProcessingPassStartup;
-
-	/* Techniques */
-	GLboolean mIsDR; /* Deferred rendering */
-	GLboolean mIsAO; /* Ambient occlusion */
-	GLboolean mISOQ; /* Occlusion query */
-
-	/* Scene */
-	pScene mScene;
-
-	glm::vec3 mBackgroundColor;
-
 	/* Loaders */
 	loader::FontLoader mFontLoader;
 	loader::FileLoader mFileLoader;
 	loader::ProgramLoader mProgramLoader;
+
+	/* Scene */
+	pScene mScene;
+	glm::vec3 mBackgroundColor;
 
 	/* Picking */
 	pTexture2DRenderable mPickingRenderableTexture;
@@ -212,10 +200,21 @@ struct Engine::EngineImpl {
 
 	/* Extras */
 	puDebugger mDebugger;
-	GLfloat mTimeFactor;
 	GLuint mFrameCounter;
+	GLfloat mTimeFactor;
 	pText mFPSText;
 	actions::FPSCallback* mTextFPSCallback;
+
+	/* Startup */
+	GLfloat mStartupTime;
+	pTexture mStartupTexture;
+	const GLfloat mStartupTimeLimit = 8.0f;
+	puPostProcessingPass mPostProcessingPassStartup;
+
+	/* Options */
+	GLboolean mIsDR; /* Deferred rendering */
+	GLboolean mIsAO; /* Ambient occlusion */
+	GLboolean mISOQ; /* Occlusion query */
 
 	/* Callbacks */
 	void runCallbacks(
@@ -357,10 +356,10 @@ struct Engine::EngineImpl {
 
 Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
 :mEngine(engine),
+mFileLoader(rootPath),
+mBackgroundColor(0.1,0.1,0.1),
 mFrameCounter(0),
 mTimeFactor(1.0),
-mBackgroundColor(0.1,0.1,0.1),
-mFileLoader(rootPath),
 mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
@@ -370,10 +369,10 @@ mISOQ(GL_FALSE) {
 
 Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
 :mEngine(engine),
+mFileLoader(activity->internalDataPath),
+mBackgroundColor(0.1,0.1,0.1),
 mFrameCounter(0),
 mTimeFactor(1.0),
-mBackgroundColor(0.1,0.1,0.1),
-mFileLoader(activity->internalDataPath),
 mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
@@ -384,13 +383,13 @@ mISOQ(GL_FALSE) {
 	androidExtractAll();
 
 #else
-Engine::EngineImpl::EngineImpl(Engine* engine, GLint argc, GLchar* const argv[])
+Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 		:
 				mEngine(engine),
+				mFileLoader(strings::getFilePathOnly(argv[0])),
+				mBackgroundColor(0.1,0.1,0.1),
 				mFrameCounter(0),
 				mTimeFactor(1.0),
-				mBackgroundColor(0.1, 0.1, 0.1),
-				mFileLoader(strings::getFilePathOnly(argv[0])),
 				mStartupTime(0.0f),
 				mIsDR(GL_FALSE),
 				mIsAO(GL_FALSE),
@@ -622,7 +621,7 @@ inline void Engine::EngineImpl::initGeometryBuffer() {
 	GLint maxAttach = 0, maxDrawBuf = 0;
 	glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxAttach);
 	glGetIntegerv(GL_MAX_DRAW_BUFFERS, &maxDrawBuf);
-	if (glm::max(maxAttach, maxDrawBuf) > mDeferredColorAttachments) {
+	if (glm::max(maxAttach, maxDrawBuf) > static_cast<GLint>(mDeferredColorAttachments)) {
 //	   mIsDR = GL_TRUE;
 		mGBuffer = puFramebufferGeometry(
 				new core::FramebufferGeometry(mTextureManager.get(), mWindowWidth,
@@ -902,7 +901,6 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 		auto _end = mPostProcessingPasses.end();
 
 		core::Texture2DRenderableDynamic* textureNext;
-		core::Program* programNext;
 
 		core::Texture2DRenderableDynamic* textureCurrent =
 				(*_begin).getFrame().get();
@@ -922,7 +920,6 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 			if (next != _end) {
 
 				textureNext = (*next).getFrame().get();
-				programNext = (*next).getProgram().get();
 				textureCurrent = (*it).getFrame().get();
 				programCurrent = (*it).getProgram().get();
 

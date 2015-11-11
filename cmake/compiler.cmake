@@ -48,7 +48,7 @@ if(NOT FILLWAVE_SUPPRESS_WARNINGS)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-packed")                        # todo assimp
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-reserved-id-macro")             # todo assimp
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-switch-enum")                   # todo assimp
-        
+                
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
 
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
@@ -87,6 +87,9 @@ if(NOT FILLWAVE_SUPPRESS_WARNINGS)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-include-dirs")           # general
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-cast-qual")                      # stb
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-declarations")           # stb
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")               # build Functions
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")            # we do want to hide them in some cases
+        
     endif()
     
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-undef")                   # todo CallbackLoop.cpp

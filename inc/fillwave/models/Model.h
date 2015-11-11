@@ -173,7 +173,7 @@ static pModel buildModel(
 		models::Material material = models::Material()) {
 	return pModel(
 			new models::Model(engine, program, shapePath, diffuseMap, normalMap,
-					specularMap));
+					specularMap, material));
 }
 
 static pModel buildModel(

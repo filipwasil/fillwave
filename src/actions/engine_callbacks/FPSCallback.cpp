@@ -15,16 +15,16 @@ namespace fillwave {
 namespace actions {
 
 FPSCallback::FPSCallback(pText text)
-		: EngineCallback(eEventType::time), mTimePassed(0.0), mText(text) {
+		: EngineCallback(eEventType::time), mText(text), mTimePassed(0.0) {
 
 }
 
-void FPSCallback::perform(Engine* engine, EventType* event) { //xxx make this more generic
+void FPSCallback::perform(Engine* engine, EventType* event) {
 	TimeEventData e = TimeEvent::getData(event);
-	if (mTimePassed < 1.0) {
+	if (mTimePassed < 1.0f) {
 		mTimePassed += e.mTimePassed;
 	} else {
-		mTimePassed -= 1.0;
+		mTimePassed -= 1.0f;
 		mText->editString(
 				std::string("FPS ")
 						+ strings::to_string<GLuint>(engine->getFramesPassed()));

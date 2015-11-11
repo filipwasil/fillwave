@@ -20,8 +20,9 @@ VertexBufferFloat::VertexBufferFloat(
 }
 
 void VertexBufferFloat::log() {
+	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
 	for (auto it : mDataVertices) {
-		FLOG_INFO("Vertex written: %f", it);
+		FLOG_INFO("Vertex written: %f", d(it));
 	}
 }
 

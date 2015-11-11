@@ -27,8 +27,8 @@ public:
 			GLuint rings = 10,
 			GLuint sectors = 10,
 			glm::vec3 color = glm::vec3(0.0)) {
-		float const R = 1. / (float) (rings - 1);
-		float const S = 1. / (float) (sectors - 1);
+		float const R = 1.f / (float) (rings - 1);
+		float const S = 1.f / (float) (sectors - 1);
 		float r, s;
 
 		mVertices.resize(rings * sectors);
@@ -37,9 +37,9 @@ public:
 
 		for (r = 0; r < rings; r++) {
 			for (s = 0; s < sectors; s++) {
-				float const y = sin(-M_PI_2 + M_PI * r * R);
-				float const x = cos(2 * M_PI * s * S) * sin( M_PI * r * R);
-				float const z = sin(2 * M_PI * s * S) * sin( M_PI * r * R);
+				float const y = sin(-F_PI_2 + F_PI * r * R);
+				float const x = cos(2 * F_PI * s * S) * sin( F_PI * r * R);
+				float const z = sin(2 * F_PI * s * S) * sin( F_PI * r * R);
 
 				(*vb).mTextureUV[0] = s * S;
 				(*vb).mTextureUV[1] = r * R;

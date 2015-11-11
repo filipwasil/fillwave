@@ -23,8 +23,8 @@ void TimedCallback::perform(EventType* event) {
 	checkTime(e.mTimePassed);
 }
 
-void TimedCallback::performTime(TimeEventData& data) {
-	// empty pass
+void TimedCallback::performTime(TimeEventData&) {
+	// just wait
 }
 
 GLfloat TimedCallback::ease(GLfloat progress) {

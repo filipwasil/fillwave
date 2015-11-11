@@ -23,7 +23,7 @@ TimedMoveCallback::TimedMoveCallback(
 }
 
 void TimedMoveCallback::performTime(TimeEventData& data) {
-	if (getPercentageDone() == 0.0) {
+	if (getPercentageDone() == 0.0f) {
 		mStartPosition = mEntity->getTranslation();
 	}
 	mTimePassed += data.mTimePassed;

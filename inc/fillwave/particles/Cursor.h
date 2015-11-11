@@ -26,7 +26,7 @@ public:
 
 	void move(glm::vec2 position);
 
-	void draw();
+	void draw(space::Camera&);
 
 private:
 	GLfloat mScreenFactor;

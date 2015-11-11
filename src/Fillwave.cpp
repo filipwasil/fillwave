@@ -444,7 +444,7 @@ pText Engine::storeText(
 			getline(myfile, line);
 			myfile >> iASCII >> fXMin >> fWidth >> fYMin >> fHeight >> fYOffset;
 			newFont->mWidths[iASCII] = fWidth;
-			newFont->mOffsets[iASCII] = 1.0 - fHeight - fYOffset;
+			newFont->mOffsets[iASCII] = 1.0f - fHeight - fYOffset;
 			if (control++ > 512) { //xxx limit
 				FLOG_ERROR("Metadata can not be read for file %s.",
 						(fontName + ".meta").c_str());

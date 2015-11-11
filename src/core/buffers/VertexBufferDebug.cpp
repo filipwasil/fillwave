@@ -10,7 +10,7 @@
 namespace fillwave {
 namespace core {
 
-VertexBufferDebug::VertexBufferDebug(GLfloat scale) {
+VertexBufferDebug::VertexBufferDebug(GLfloat) {
 
 	GLfloat debugWindow2DPositions[] = {
 			-1.0,

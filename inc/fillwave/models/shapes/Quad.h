@@ -54,7 +54,7 @@ public:
 				0.0,
 				-1.0 }, { 1.0, 0.0, 0.0 }, { 0.0, 0.0 }, { 0 }, { 0.0 } }, };
 
-		for (int i = 0; i < mVertices.size(); i++) {
+		for (size_t i = 0; i < mVertices.size(); i++) {
 			mVertices[i] = position[i];
 			mIndices.push_back(i);
 		}

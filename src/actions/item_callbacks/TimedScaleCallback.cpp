@@ -36,7 +36,7 @@ TimedScaleCallback::TimedScaleCallback(
 }
 
 void TimedScaleCallback::performTime(TimeEventData& data) {
-	if (getPercentageDone() == 0.0) {
+	if (getPercentageDone() == 0.0f) {
 		mStartScale = mEntity->getScale();
 	}
 	mTimePassed += data.mTimePassed;
