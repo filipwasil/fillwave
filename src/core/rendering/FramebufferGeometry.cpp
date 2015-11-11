@@ -27,7 +27,7 @@ FramebufferGeometry::FramebufferGeometry(
 				Framebuffer(1),
 				mColorBufferSize(colorBuffers),
 				mSummaryBufferSize(1),
-				mDepthStencilBufferSize(1),
+				mDepthStencilBufferSize(depthBuffers),
 				mSummaryBuffer(GL_COLOR_ATTACHMENT0 + colorBuffers),
 				mNone(GL_NONE) {
 
@@ -112,7 +112,7 @@ void FramebufferGeometry::reload() {
 
 	bindForWriting();
 
-	for (GLuint i = 0; i < mColorBufferSize; i++) {
+	for (GLint i = 0; i < mColorBufferSize; i++) {
 		mDeferredColors->bind(i, i);
 		attachTexture2DDraw(
 		GL_COLOR_ATTACHMENT0 + i,
@@ -131,7 +131,7 @@ void FramebufferGeometry::reload() {
 	GL_DEPTH_STENCIL_ATTACHMENT,
 	GL_TEXTURE_2D, mStencilDepth->getHandle());
 
-	for (GLuint i = 0; i < mColorBufferSize + 1; i++) {
+	for (GLint i = 0; i < mColorBufferSize + 1; i++) {
 		mColorBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
 	}
 

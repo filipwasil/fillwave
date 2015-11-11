@@ -46,8 +46,6 @@ void Texture2DRenderable::bindForReading() {
 }
 
 void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
-	GLenum none = GL_NONE;
-
 	switch (attachment) {
 		case GL_DEPTH_STENCIL_ATTACHMENT:
 			bind();

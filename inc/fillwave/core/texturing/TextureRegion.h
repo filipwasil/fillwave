@@ -36,8 +36,8 @@ public:
 
 private:
 	GLfloat mU1;
-	GLfloat mU2;
 	GLfloat mV1;
+	GLfloat mU2;
 	GLfloat mV2;
 	pTexture mTexture;
 };

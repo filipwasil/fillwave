@@ -102,13 +102,9 @@ public:
 
 private:
 	std::string mName;
-
-	GLint mLocation;
-
 	GLenum mType;
-
 	GLsizei mSize;
-
+	GLint mLocation;
 	UniformData mData;
 };
 
