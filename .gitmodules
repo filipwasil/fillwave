@@ -1,6 +1,6 @@
 [submodule "ext/stb"]
 	path = ext/stb
-	url = https://github.com/nothings/stb.git
+	url = https://github.com/filipwasil/stb.git
 [submodule "ext/glew"]
 	path = ext/glew
 	url = https://github.com/hrehfeld/glew-cmake.git
