@@ -43,7 +43,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 			"in vec3 vCameraPosition;\n\n";
 
 	std::string outputs;
-	for (GLint i = 0; i < mRendertargets; i++) {
+	for (GLuint i = 0; i < mRendertargets; i++) {
 
 		outputs += "out vec4 fColor" + strings::to_string(i) + ";\n";
 
@@ -513,7 +513,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 
 	std::string end = "";
 
-	for (GLint i = 0; i < mRendertargets; i++) {
+	for (GLuint i = 0; i < mRendertargets; i++) {
 		end += "fColor" + strings::to_string(i) + " = color;\n";
 	}
 

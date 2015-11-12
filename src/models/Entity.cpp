@@ -21,10 +21,10 @@ Entity::Entity(glm::vec3 translation, glm::quat rotation)
 				Moveable(translation, rotation),
 				mChildrenPropagateEvent(GL_TRUE),
 				mParentRefresh(GL_TRUE),
-				mRefreshExternal(GL_TRUE),
-				mPickable(GL_FALSE),
 				mPSC(GL_TRUE),
-				mPSR(GL_TRUE) {
+				mPSR(GL_TRUE),
+				mRefreshExternal(GL_TRUE),
+				mPickable(GL_FALSE) {
 
 }
 
@@ -47,7 +47,7 @@ void Entity::detach(pEntity child) {
 	mChildren.erase(it, _end);
 }
 
-void Entity::onAttached(Entity* parent) {
+void Entity::onAttached(Entity*) {
 	FLOG_DEBUG("Attached enity");
 }
 

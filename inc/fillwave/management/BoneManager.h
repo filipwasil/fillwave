@@ -29,10 +29,10 @@ class BoneManager;
 
 class AssimpNode {
 public:
-	std::string mName;
+	glm::mat4 mTransformation;
 	std::vector<AssimpNode*> mChildren;
 	pBone mBone;
-	glm::mat4 mTransformation;
+	std::string mName;
 
 	AssimpNode(aiNode* node);
 
@@ -98,8 +98,8 @@ public:
 	void updateTransformations(GLint activeAnimation, float timeElapsed_s);
 
 private:
-	float mTimeSinceStartSeconds;
 	GLint mElements;
+	float mTimeSinceStartSeconds;
 	AssimpNode* mRootAnimationNode;
 	glm::mat4 mSceneInverseMatrix;
 	std::map<GLint, pBone> mBones;

@@ -12,8 +12,6 @@ namespace common {
 
 PostProcessingPass::PostProcessingPass(
 		pProgram program,
-		GLuint width,
-		GLuint height,
 		pTexture2DRenderableDynamic frame,
 		GLfloat lifetime)
 		: Finishable(lifetime), mFrame(frame), mProgram(program) {

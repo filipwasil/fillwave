@@ -23,8 +23,6 @@ class PostProcessingPass: public Finishable {
 public:
 	PostProcessingPass(
 			pProgram p,
-			GLuint width,
-			GLuint height,
 			pTexture2DRenderableDynamic t,
 			GLfloat lifetime);
 

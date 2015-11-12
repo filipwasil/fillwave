@@ -83,7 +83,6 @@ core::Texture2DFile* TextureLoader::load(
 				getBytesPerPixel(format));
 		if (content == NULL) { //xxx NULL, not nullptr because the stb library uses NULL
 			FILE *f = fopen(filePath.c_str(), "rb");
-			unsigned char *result;
 			if (!f) {
 				FLOG_ERROR("Texture %s not found", filePath.c_str());
 			} else {

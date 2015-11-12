@@ -683,7 +683,7 @@ inline void Engine::EngineImpl::initStartup() {
 	core::Program::disusePrograms();
 
 	mPostProcessingPassStartup = puPostProcessingPass(
-			new common::PostProcessingPass(program, mWindowWidth, mWindowHeight,
+			new common::PostProcessingPass(program,
 					mTextureManager->getDynamic("fillwave_quad_startup.frag",
 							program, glm::ivec2(mWindowWidth, mWindowHeight)),
 					mStartupTimeLimit));

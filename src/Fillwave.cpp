@@ -564,8 +564,7 @@ void Engine::addPostProcess(
 		GLfloat lifeTime) {
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(this,
 			fragmentShaderPath);
-	common::PostProcessingPass pass(program, mImpl->mWindowWidth,
-			mImpl->mWindowHeight,
+	common::PostProcessingPass pass(program,
 			mImpl->mTextureManager->getDynamic(fragmentShaderPath, program,
 					glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)),
 			lifeTime);

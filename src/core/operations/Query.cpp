@@ -80,7 +80,7 @@ void Query<target>::reload() {
 
 template<GLenum target>
 void Query<target>::log() {
-	for (GLuint id = 0; id < mHowMany; id++) {
+	for (GLsizei id = 0; id < mHowMany; id++) {
 		if (glIsQuery(mHandles[id])) {
 			FLOG_INFO("Query %d exists", mHandles[id]);
 		} else {

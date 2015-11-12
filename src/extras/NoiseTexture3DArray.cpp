@@ -315,7 +315,7 @@ static unsigned char permTable[256] = {
 void initNoiseTable() {
 	int i;
 	float a;
-	float x, y, z, r, theta;
+	float x, y, z, r/*, theta*/;
 	float gradients[256 * 3];
 	unsigned int *p, *psrc;
 
@@ -332,7 +332,7 @@ void initNoiseTable() {
 		r = sqrtf(1.0f - z * z); // r is radius of circle
 
 		a = (random() % 32768) / 32768.0f;
-		theta = (2.0f * (float) M_PI * a);
+		/*theta = (2.0f * (float) M_PI * a);*/
 		x = (r * cosf(a));
 		y = (r * sinf(a));
 

@@ -25,8 +25,8 @@
 #endif
 
 namespace fillwave {
-static const GLfloat F_PI = static_cast<GLfloat>(M_PI);
-static const GLfloat F_PI_2 = static_cast<GLfloat>(M_PI_2);
+static const float F_PI = static_cast<float>(M_PI);
+static const float F_PI_2 = static_cast<float>(M_PI_2);
 } /* fillwave */
 
 #endif /* MATH_H_ */

@@ -106,9 +106,9 @@ protected:
 	glm::mat4 mParentMatrix;
 	glm::mat4 mTransformation;
 
+	GLboolean mChildrenPropagateEvent;
 	GLboolean mParentRefresh;
 	std::vector<pEntity> mChildren;
-	GLboolean mChildrenPropagateEvent;
 	std::vector<actions::ItemCallback*> mCallbacksHierarchy;
 	std::vector<actions::ItemCallback*> mCallbacksPrivate;
 
