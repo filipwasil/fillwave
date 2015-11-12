@@ -76,6 +76,6 @@ Android script is currently designed to work only with Linux. It assumes that An
 
 ###Linux and Android ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)
 
-###Windows [![Build status](https://ci.appveyor.com/api/projects/status/w5xqq2tntoo9td6k?svg=true)](https://ci.appveyor.com/project/filipwasil/fillwave)
+###Windows [![Build status](https://ci.appveyor.com/api/projects/status/w5xqq2tntoo9td6k/branch/master?svg=true)](https://ci.appveyor.com/project/filipwasil/fillwave)
 
 [![wercker status](https://app.wercker.com/status/176e362189e969142c07469b492ef216/m "wercker status")](https://app.wercker.com/project/bykey/176e362189e969142c07469b492ef216)
