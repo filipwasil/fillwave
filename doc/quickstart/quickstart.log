@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2015.7.11)  11 SEP 2015 21:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.10.23)  13 NOV 2015 00:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **quickstart.tex
 (./quickstart.tex
-LaTeX2e <2014/05/01>
+LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 4 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
@@ -24,14 +24,14 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \bibindent=\dimen102
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/04/25 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2014/05/08 v1.15 key=value parser (DPC)
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks14
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
@@ -39,7 +39,7 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: pdftex.def on input line 94.
 
 (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
@@ -96,23 +96,23 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 \lst@maxwidth=\dimen111
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 \c@lstnumber=\count108
 \lst@skipnumbers=\count109
 \lst@framebox=\box29
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-File: listings.cfg 2014/09/06 1.5e listings configuration
+File: listings.cfg 2015/06/04 1.6 listings configuration
 ))
-Package: listings 2014/09/06 1.5e (Carsten Heinz)
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
 
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2014/04/23 v1.1a Standard LaTeX Color (DPC)
+Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
 
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
-Package color Info: Driver file: pdftex.def on input line 137.
+Package color Info: Driver file: pdftex.def on input line 142.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/pxfonts/pxfonts.sty
 Package: pxfonts 2008/01/22 v1.1.1
@@ -191,27 +191,22 @@ LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `bold'
 LaTeX Info: Redefining \not on input line 997.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
-Package: csquotes 2011/10/22 v5.1d context-sensitive quotations
+Package: csquotes 2015/07/18 v5.1f context-sensitive quotations (JAW)
 
 (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2011/01/03 v2.1 e-TeX tools for LaTeX
-
-(/usr/share/texlive/texmf-dist/tex/latex/etex-pkg/etex.sty
-Package: etex 1998/03/26 v2.0 eTeX basic definition package (PEB)
-\et@xins=\count110
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count110
 )
-\etb@tempcnta=\count111
-)
-\csq@reset=\count112
-\csq@gtype=\count113
-\csq@glevel=\count114
-\csq@qlevel=\count115
-\csq@maxlvl=\count116
-\csq@tshold=\count117
+\csq@reset=\count111
+\csq@gtype=\count112
+\csq@glevel=\count113
+\csq@qlevel=\count114
+\csq@maxlvl=\count115
+\csq@tshold=\count116
 \csq@ltx@everypar=\toks16
 
 (/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
-File: csquotes.def 2011/10/22 v5.1d csquotes generic definitions
+File: csquotes.def 2015/07/18 v5.1f csquotes generic definitions (JAW)
 )
 Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
 Package csquotes Info: ... configuration file loaded successfully.
@@ -276,13 +271,13 @@ Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
 \@linkdim=\dimen112
-\Hy@linkcounter=\count118
-\Hy@pagecounter=\count119
+\Hy@linkcounter=\count117
+\Hy@pagecounter=\count118
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 )
-\Hy@SavedSpaceFactor=\count120
+\Hy@SavedSpaceFactor=\count119
 
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -295,10 +290,10 @@ Package hyperref Info: Plain pages OFF on input line 4458.
 Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4688.
-\c@Hy@tempcnt=\count121
+\c@Hy@tempcnt=\count120
 LaTeX Info: Redefining \url on input line 5041.
 \XeTeXLinkMargin=\dimen113
-\Fld@menulength=\count122
+\Fld@menulength=\count121
 \Field@Width=\dimen114
 \Fld@charsize=\dimen115
 Package hyperref Info: Hyper figures OFF on input line 6295.
@@ -310,17 +305,17 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6320.
 Package hyperref Info: PDF/A mode OFF on input line 6325.
 LaTeX Info: Redefining \ref on input line 6365.
 LaTeX Info: Redefining \pageref on input line 6369.
-\Hy@abspage=\count123
-\c@Item=\count124
-\c@Hfootnote=\count125
+\Hy@abspage=\count122
+\c@Item=\count123
+\c@Hfootnote=\count124
 )
 
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
-\Fld@listcount=\count126
-\c@bookmark@seq@number=\count127
+\Fld@listcount=\count125
+\c@bookmark@seq@number=\count126
 
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
@@ -336,13 +331,13 @@ Package hyperref Warning: Option `bookmarks' has already been used,
 (hyperref)                setting the option has no effect on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2014/09/06 1.5e listings language file
+File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2014/09/06 1.5e listings language file
+File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
@@ -392,16 +387,16 @@ File: ot1pxr.fd 2000/12/14 v1.0
 )
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count128
+\scratchcounter=\count127
 \scratchdimen=\dimen116
 \scratchbox=\box30
-\nofMPsegments=\count129
-\nofMParguments=\count130
+\nofMPsegments=\count128
+\nofMParguments=\count129
 \everyMPshowfont=\toks17
-\MPscratchCnt=\count131
+\MPscratchCnt=\count130
 \MPscratchDim=\dimen117
-\MPnumerator=\count132
-\makeMPintoPDFobject=\count133
+\MPnumerator=\count131
+\makeMPintoPDFobject=\count132
 \everyMPtoPDFconversion=\toks18
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -418,7 +413,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\c@lstlisting=\count134
+\c@lstlisting=\count133
 \AtBeginShipoutBox=\box31
 Package hyperref Info: Link coloring ON on input line 50.
 
@@ -428,7 +423,7 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count135
+\c@section@level=\count134
 )
 LaTeX Info: Redefining \ref on input line 50.
 LaTeX Info: Redefining \pageref on input line 50.
@@ -507,27 +502,24 @@ Package pdftex.def Info: ../../../fillwave-examples/screens/particles_b.png use
 d on input line 519.
 (pdftex.def)             Requested size: 245.71475pt x 153.57172pt.
  [15 <../../../fillwave-examples/screens/particles.png> <../../../fillwave-exam
-ples/screens/particles_b.png>] [16] [17]
-Missing character: There is no â in font txtt!
-Missing character: There is no € in font txtt!
- [18] [19]
-Underfull \hbox (badness 10000) in paragraph at lines 651--653
+ples/screens/particles_b.png>] [16] [17] [18] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 653--655
 
  []
 
 [20] [21] <easing.png, id=757, 552.0625pt x 395.4775pt>
 File: easing.png Graphic file (type png)
  <use easing.png>
-Package pdftex.def Info: easing.png used on input line 742.
+Package pdftex.def Info: easing.png used on input line 744.
 (pdftex.def)             Requested size: 331.24005pt x 237.28833pt.
 
 [22 <./easing.png>] [23] [24] [25]
-Overfull \hbox (84.49796pt too wide) in paragraph at lines 901--903
+Overfull \hbox (84.49796pt too wide) in paragraph at lines 903--905
 [][][][][][][][][] 
  []
 
 
-Overfull \hbox (10.99817pt too wide) in paragraph at lines 901--903
+Overfull \hbox (10.99817pt too wide) in paragraph at lines 903--905
 [][][][][][] 
  []
 
@@ -542,60 +534,60 @@ Overfull \hbox (31.49802pt too wide) in paragraph at lines 37--39
  []
 
 ) [27]
-Underfull \hbox (badness 10000) in paragraph at lines 930--974
+Underfull \hbox (badness 10000) in paragraph at lines 932--976
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 930--974
+Underfull \hbox (badness 10000) in paragraph at lines 932--976
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 930--974
+Underfull \hbox (badness 10000) in paragraph at lines 932--976
 
  []
 
 [28]
-Overfull \hbox (121.1991pt too wide) in paragraph at lines 982--983
+Overfull \hbox (121.1991pt too wide) in paragraph at lines 984--985
 [][][][][][][][][][][]  
  []
 
 [29] [30]
-Overfull \hbox (146.39905pt too wide) in paragraph at lines 1038--1040
+Overfull \hbox (146.39905pt too wide) in paragraph at lines 1040--1042
 [][][][][][][][]  
  []
 
 
-Overfull \hbox (146.39905pt too wide) in paragraph at lines 1050--1052
+Overfull \hbox (146.39905pt too wide) in paragraph at lines 1052--1054
 [][][][][][][][]  
  []
 
 [31] [32] [33] [34]
-Overfull \hbox (158.99902pt too wide) in paragraph at lines 1138--1139
+Overfull \hbox (158.99902pt too wide) in paragraph at lines 1140--1141
 [][][][][][][][]  
  []
 
 [35]
 No file quickstart.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1177.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1179.
 [36]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1177.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1179.
  (./quickstart.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1177.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1177.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1179.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1179.
 
 Package rerunfilecheck Info: File `quickstart.out' has not changed.
 (rerunfilecheck)             Checksum: C2523B90DA5EACA08A57195771D3E0C8;2452.
  ) 
 Here is how much of TeX's memory you used:
- 10161 strings out of 494977
- 148655 string characters out of 6180183
- 294173 words of memory out of 5000000
- 12386 multiletter control sequences out of 15000+600000
+ 10111 strings out of 494957
+ 148137 string characters out of 6180027
+ 293873 words of memory out of 5000000
+ 12360 multiletter control sequences out of 15000+600000
  35514 words of font info for 106 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 33i,7n,58p,837b,1752s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 33i,7n,58p,837b,1753s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/pxfonts/pxsy.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/public/pxfonts/rpxb.pfb></usr/share/texlive/texmf-dist/fonts/type1
@@ -604,7 +596,7 @@ onts/rpxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txbtt.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on quickstart.pdf (36 pages, 965558 bytes).
+Output written on quickstart.pdf (36 pages, 965320 bytes).
 PDF statistics:
  1388 PDF objects out of 1440 (max. 8388607)
  1322 compressed objects within 14 object streams

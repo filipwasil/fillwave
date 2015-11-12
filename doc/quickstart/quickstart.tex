@@ -91,7 +91,7 @@ using namespace fillwave;
 
 int main(int argc, char* argv[]) {
    /* Create OpenGL context */
-   Engine* engine = new Engine(argc, argv);
+   Engine* fillwave = new Engine(argc, argv);
    /* Create scene */
    /* enter rendering loop */
    delete engine;
@@ -405,7 +405,7 @@ pModel m = builder1.build();
 /* Second method */
 BuilderModelExternalMaps builder1(engine);
 
-pModel = builder1.setModelPath(modelPath).
+pModel m = builder1.setModelPath(modelPath).
                   setProgram(program).
                   setdiffusePath(diffuseMap).
                   setNormalMapPath(normalsMap).
@@ -432,7 +432,7 @@ pModel m = builder2.build();
 
 BuilderModelManual builder2 (engine);
 
-pModel = builder2.setModelPath(modelPath).
+pModel m = builder2.setModelPath(modelPath).
                   setProgram(program).
                   setDiffuseMapTexture(diffuseMap).
                   setNormalMapTexture(normalsMap).
@@ -604,11 +604,13 @@ pText text = engine->storeText( "Hello Fillwave",/* content */
 \end{itemize}
 \indent To print a debug info in a certain source file You should define a module name and debug flags with macro \textbf{FLOGINIT}. Examples below:
 \begin{lstlisting}
-/* Make all the messages printed */
-FLOGINIT("My module", FERROR | FFATAL | FDEBUG | FDEBUG | FUSER)
 
-/* Make only FLOG_FATAL and FLOG_ERROR messages printed */
-FLOGINIT("My module", FERROR | FFATAL )\documentclass[10pt]{•}
+#define FLOGINIT_DEFAULT()
+#define FLOGINIT_NONE()
+#define FLOGINIT_MASK(FERROR | FFATAL | FDEBUG | FDEBUG | FUSER)
+#define FLOGINIT("My module", FERROR | FFATAL | FDEBUG | FDEBUG | FUSER)
+
+
 \end{lstlisting}
 
 
