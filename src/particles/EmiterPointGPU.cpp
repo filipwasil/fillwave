@@ -26,7 +26,7 @@ EmiterPointGPU::EmiterPointGPU(
 		glm::vec4 color,
 		glm::vec3 acceleration,
 		glm::vec3 startVelocity,
-		glm::vec3 robustnessVelocity,
+		glm::vec3 /*robustnessVelocity*/, // xxx this is not used for now
 		glm::vec3 startPosition,
 		glm::vec3 robustnessPosition,
 		GLfloat startSize,

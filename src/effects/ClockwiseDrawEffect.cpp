@@ -10,19 +10,19 @@
 namespace fillwave {
 namespace effects {
 
-void ClockwiseDrawEffect::preDrawAction(core::Program* program) {
+void ClockwiseDrawEffect::preDrawAction(core::Program*) {
 	glFrontFace(GL_CW);
 }
 
-void ClockwiseDrawEffect::postDrawAction(core::Program* program) {
+void ClockwiseDrawEffect::postDrawAction(core::Program*) {
 	glFrontFace(GL_CCW);
 }
 
-void ClockwiseDrawEffect::stopAction(core::Program* program) {
+void ClockwiseDrawEffect::stopAction(core::Program*) {
 
 }
 
-void ClockwiseDrawEffect::startAction(core::Program* program) {
+void ClockwiseDrawEffect::startAction(core::Program*) {
 
 }
 

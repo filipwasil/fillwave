@@ -50,8 +50,9 @@ public:
 
 private:
 	static const GLint mPingPongBuffers = 2;
-	GLfloat mEmmisingSourceRate;
+	GLuint mSrcIndex;
 	GLuint mNoiseTextureHandle;
+	GLfloat mEmmisingSourceRate;
 	glm::vec3 mAcceleration;
 	glm::vec3 mStartVelocity;
 	glm::vec3 mRobustnessVelocity;
@@ -60,8 +61,8 @@ private:
 	glm::vec3 mCameraPosition;
 	GLfloat mTimeDeltaEmiter;
 	pProgram mProgramEmiter;
-	GLuint mSrcIndex;
 	puFence mFence;
+
 	pVertexBufferParticlesGPU mVBOGPU[mPingPongBuffers];
 
 	GLint mULCTimeEmiter, mULCEmissionRateEmiter, mULCModelMatrixEmiter,

@@ -42,8 +42,8 @@ protected:
 	glm::mat4 mCameraMatrix;
 	glm::mat4 mProjectionMatrix;
 
-	GLboolean mRefreshProjection;
 	GLboolean mRefreshView;
+	GLboolean mRefreshProjection;
 };
 } /* space */
 typedef std::shared_ptr<space::Camera> pCamera;

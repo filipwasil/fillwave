@@ -49,8 +49,8 @@ public:
 	void log();
 
 private:
-	pCameraOrthographic mShadowCamera;
 	pTexture2DRenderable mShadowTexture;
+	pCameraOrthographic mShadowCamera;
 };
 
 } /* space */

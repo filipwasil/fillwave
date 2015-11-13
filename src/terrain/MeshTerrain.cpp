@@ -19,7 +19,7 @@ MeshTerrain::MeshTerrain(
 		Engine* engine,
 		pProgram program,
 		terrain::TerrainConstructor* constructor,
-		const models::Material& material,
+		const models::Material& /*material*/, //xxx to be used
 		const std::string& diffuseMapPath,
 		const std::string& normalMapPath,
 		const std::string& specularMapPath,
@@ -41,14 +41,14 @@ MeshTerrain::MeshTerrain(
 	pTexture specularMap = engine->storeTexture(specularMapPath.c_str(),
 			aiTextureType_SPECULAR);
 
-	int index, pointsWidth, pointsWidthNext, offset, quadID = 0;
+	int pointsWidth, pointsWidthNext, offset;
 
 	std::vector<GLuint> indices;
 
 	indices.reserve(density * density);
 
-	for (int z = 0; z < density; z++) {
-		for (int x = 0; x < density; x++) {
+	for (GLuint z = 0; z < density; z++) {
+		for (GLuint x = 0; x < density; x++) {
 			pointsWidth = density + 1;
 			pointsWidthNext = density + 2;
 			offset = x + z * pointsWidth;

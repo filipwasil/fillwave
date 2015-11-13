@@ -20,7 +20,7 @@ Animation::Animation(fAnimation* assimpAnimation) {
 	mDuration = assimpAnimation->mDuration;
 	mTicksPerSec = assimpAnimation->mTicksPerSecond;
 	mChannels.reserve(assimpAnimation->mNumChannels);
-	for (int i = 0; i < assimpAnimation->mNumChannels; i++) {
+	for (unsigned int i = 0; i < assimpAnimation->mNumChannels; i++) {
 		mChannels.push_back(new Channel(assimpAnimation->mChannels[i]));
 	}
 }

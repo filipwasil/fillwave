@@ -51,9 +51,9 @@ protected:
 private:
 	GLint mSize;
 	Voxel*** mVoxels;
+	pProgram mProgram;
 	pTexture mTexture;
 	pVertexBufferBasic mVBO;
-	pProgram mProgram;
 	manager::LightManager* mLightManager;
 
 	GLint mUniformLocationCacheModelMatrix, mUniformLocationCacheCameraPosition,

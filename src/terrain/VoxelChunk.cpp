@@ -467,7 +467,7 @@ void VoxelChunk::draw(space::Camera& camera) {
 	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,
 			camera.getViewProjection());
 
-	mLightManager->pushLightUniforms(camera, mProgram.get());
+	mLightManager->pushLightUniforms(mProgram.get());
 
 	mLightManager->bindShadowmaps();
 

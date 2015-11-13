@@ -55,10 +55,11 @@ void Camera::update() {
 }
 
 void Camera::log() {
-	FLOG_INFO("Position: %f %f %f", mTranslation[0], mTranslation[1],
-			mTranslation[2]);
-	FLOG_INFO("Camera rotation: %f %f %f %f ", mRotation[0], mRotation[1],
-			mRotation[2], mRotation[4]);
+	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
+	FLOG_INFO("Position: %f %f %f", d(mTranslation[0]), d(mTranslation[1]),
+			d(mTranslation[2]));
+	FLOG_INFO("Camera rotation: %f %f %f %f ", d(mRotation[0]), d(mRotation[1]),
+			d(mRotation[2]), d(mRotation[4]));
 }
 
 glm::mat4 Camera::getEye() {

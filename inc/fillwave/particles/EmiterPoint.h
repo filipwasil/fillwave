@@ -50,19 +50,16 @@ public:
 	void setBlendingFunction(GLenum sourceFactor, GLenum destinationFactor);
 
 protected:
-	GLfloat mLifetime;
 	GLfloat mStartSize;
+	GLfloat mLifetime;
+	pTexture mTexture;
+	glm::vec4 mColor;
 	GLfloat mHowMany;
 	GLboolean mDepthTesting;
-
-	glm::vec4 mColor;
-	common::Blending mBlending;
 	GLfloat mAlphaCutOff;
-
+	common::Blending mBlending;
 	pProgram mProgram;
 	pIndexBufferParticles mIBO;
-	pTexture mTexture;
-
 };
 
 } /* particles */

@@ -21,8 +21,8 @@ namespace space {
 
 class LightSpot: public Light {
 protected:
-	pCameraPerspective mShadowCamera;
 	pTexture2DRenderable mShadowTexture;
+	pCameraPerspective mShadowCamera;
 
 public:
 	LightSpot(

@@ -37,7 +37,6 @@ Text::Text(
 				mViewportHeight(engine->getScreenSize()[1]),
 				mStartingX(startingPositionX),
 				mStartingY(startingPositionY),
-				mVBO(pVertexBufferText()),
 				mScale(scale),
 				mFont(font),
 				mColor(color),
@@ -154,18 +153,18 @@ void Text::createVBO() {
 		points_tmp.push_back(y_pos);
 
 		texcoords_tmp.push_back(s);
-		texcoords_tmp.push_back(1.0 - t + 1.0 / mFont->mAtlasRows);
+		texcoords_tmp.push_back(1.0f - t + 1.0f / mFont->mAtlasRows);
 		texcoords_tmp.push_back(s);
-		texcoords_tmp.push_back(1.0 - t);
-		texcoords_tmp.push_back(s + 1.0 / mFont->mAtlasColumns);
-		texcoords_tmp.push_back(1.0 - t);
+		texcoords_tmp.push_back(1.0f - t);
+		texcoords_tmp.push_back(s + 1.0f / mFont->mAtlasColumns);
+		texcoords_tmp.push_back(1.0f - t);
 
-		texcoords_tmp.push_back(s + 1.0 / mFont->mAtlasColumns);
-		texcoords_tmp.push_back(1.0 - t);
-		texcoords_tmp.push_back(s + 1.0 / mFont->mAtlasColumns);
-		texcoords_tmp.push_back(1.0 - t + 1.0 / mFont->mAtlasRows);
+		texcoords_tmp.push_back(s + 1.0f / mFont->mAtlasColumns);
+		texcoords_tmp.push_back(1.0f - t);
+		texcoords_tmp.push_back(s + 1.0f / mFont->mAtlasColumns);
+		texcoords_tmp.push_back(1.0f - t + 1.0f / mFont->mAtlasRows);
 		texcoords_tmp.push_back(s);
-		texcoords_tmp.push_back(1.0 - t + 1.0 / mFont->mAtlasRows);
+		texcoords_tmp.push_back(1.0f - t + 1.0f / mFont->mAtlasRows);
 	}
 
 	mStartingX = tmpStartingX;

@@ -85,7 +85,7 @@ void Mesh::draw(space::Camera& camera) {
 		core::Uniform::push(mULCCameraPosition, camera.getTranslation());
 		core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
-		mLightManager->pushLightUniforms(camera, mProgram.get());
+		mLightManager->pushLightUniforms(mProgram.get());
 
 		coreDraw();
 	}
@@ -108,13 +108,13 @@ void Mesh::drawDR(space::Camera& camera) {
 
 //      mLightManager->pushLightUniformsShadowMaps(mProgram.get());
 
-		mLightManager->pushLightUniformsDR(camera, mProgram.get());
+		mLightManager->pushLightUniformsDR();
 
 		coreDraw();
 	}
 }
 
-void Mesh::drawFast(space::Camera& camera) {
+void Mesh::drawFast(space::Camera&) {
 	updateMatrixTree();
 	mProgram->use();
 	coreDraw();
@@ -217,7 +217,7 @@ void Mesh::drawDepth(space::Camera& camera) {
 	}
 }
 
-void Mesh::drawDepthColor(space::Camera& camera, glm::vec3& position) {
+void Mesh::drawDepthColor(space::Camera& camera, glm::vec3& /*xxx double check position*/) {
 	if (isPSC()) {
 		mProgramShadowColor->use();
 

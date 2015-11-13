@@ -52,10 +52,10 @@ public:
 	bool isFinished() const;
 
 protected:
-	float mPercentageDone;
+	bool mFinished;
 	float mTimeToFinish;
 	float mTimePassed;
-	bool mFinished;
+	float mPercentageDone;
 };
 
 } /* common */

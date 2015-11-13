@@ -24,7 +24,6 @@ namespace particles {
 
 /*! \class Impostor
  * \brief Drawable Entity built by fragment shader. Time limited.
- *
  */
 
 class Impostor: public models::Entity, public common::Finishable {

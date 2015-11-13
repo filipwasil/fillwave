@@ -88,7 +88,6 @@ void Scene::registerPickable(pEntity entity) {
 
 void Scene::pick(glm::ivec4 color) {
 	GLint name = color.r + color.g + color.b;
-	auto it = mPickingTable.find(name);
 	if (mPickingTable[name]) {
 		mPickingTable[name]->onPicked();
 		if (mLastPicked) {

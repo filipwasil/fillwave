@@ -33,7 +33,7 @@ void Cursor::move(glm::vec2 position) {
 	core::Program::disusePrograms();
 }
 
-void Cursor::draw(space::Camera&) {
+void Cursor::draw() {
 	mProgram->use();
 
 	core::Uniform::push(mULCScreenFactor, mScreenFactor);

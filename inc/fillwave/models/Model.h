@@ -87,9 +87,9 @@ protected:
 			mUniformLocationCacheBonesShadowColor;
 private:
 	/* Animation */
-	GLint mActiveAnimation;
-
 	actions::TimedBoneUpdateCallback* mAnimationCallback;
+
+	GLint mActiveAnimation;
 
 	void initUniformsCache();
 
