@@ -46,6 +46,7 @@ void Texture2DRenderable::bindForReading() {
 }
 
 void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
+	GLenum none = GL_NONE;
 	switch (attachment) {
 		case GL_DEPTH_STENCIL_ATTACHMENT:
 			bind();
@@ -61,11 +62,11 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
 			mFramebuffer->attachTexture2D(
 			GL_DEPTH_ATTACHMENT, target, getHandle());
 #ifndef __ANDROID__
-			glDrawBuffer(GL_NONE);
-			glReadBuffer(GL_NONE); //xxx this does not have to be here
+			glDrawBuffer(none);
+			glReadBuffer(none); //xxx this does not have to be here
 #else
-					glDrawBuffers(1,&none);
-					glReadBuffer(GL_NONE); //xxx this does not have to be here
+			glDrawBuffers(1,&none);
+			glReadBuffer(none); //xxx this does not have to be here
 #endif
 			FLOG_CHECK("Setting depth framebuffer failed");
 			Framebuffer::bindScreenFramebuffer();
