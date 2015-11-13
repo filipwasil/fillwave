@@ -27,8 +27,6 @@ public:
    GradientBall(Engine* engine,
                 pProgram program,
                 GLfloat lifetime = 1.0,
-                glm::vec4 position = glm::vec4(),
-                glm::vec4 color = glm::vec4(),
                 GLfloat size = 1.0,
                 pTexture texture = pTexture());
    virtual ~GradientBall();

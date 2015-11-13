@@ -66,7 +66,6 @@ void MoveCameraCallback::perform (Engine* engine, EventType* event) {
    if (event->getType() == eEventType::key) {
       KeyboardEventData e = KeyboardEvent::getData(event);
       pCamera camera = engine->getCurrentScene()->getCamera();
-      glm::vec3 t = camera->getTranslation();
       switch (e.key) {
          case GLFW_KEY_W:
             camera->moveInDirection(glm::vec3(0.0, 0.0, -mSpeed));
@@ -99,15 +98,16 @@ void MoveCameraCallback::perform (Engine* engine, EventType* event) {
       return;
    } else if (event->getType() == eEventType::cursorPosition) {
       static bool init = false;
-static int  a = 0;
+      static int  a = 0;
+		auto d = [](double value){return static_cast<float>(value);};
       CursorPositionEventData e = CursorPositionEvent::getData(event);
       pCamera camera = engine->getCurrentScene()->getCamera();
       glm::ivec2 screenSize = engine->getScreenSize();
       double dx = e.xPosition - screenSize[0]/2;
       double dy = screenSize[1]/2 - e.yPosition;
       if (init) { /* debounce */
-         camera->rotateBy(glm::vec3(0.0,1.0,0.0), -mSpeed*glm::radians(dx));
-         camera->rotateBy(glm::vec3(1.0,0.0,0.0), mSpeed*glm::radians(dy));
+         camera->rotateBy(glm::vec3(0.0f,1.0f,0.0f), -mSpeed*d(glm::radians(dx)));
+         camera->rotateBy(glm::vec3(1.0f,0.0f,0.0f), mSpeed*d(glm::radians(dy)));
          camera->update();
       } else {
          init = true;

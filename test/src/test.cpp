@@ -35,7 +35,8 @@ map<string, pProgram> gPrograms;
    void junk() {
      int i;
      i=pthread_getconcurrency();
-   };
+     (void)i;
+   }
 #elif _WIN32
     // windows code goes here
 #endif

@@ -13,8 +13,6 @@ namespace particles {
 GradientBall::GradientBall(Engine* engine,
                            pProgram program,
                            GLfloat lifetime,
-                           glm::vec4 position,
-                           glm::vec4 color,
                            GLfloat size,
                            pTexture texture):Impostor(engine,
                                                       lifetime,
