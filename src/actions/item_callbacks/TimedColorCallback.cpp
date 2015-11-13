@@ -28,7 +28,7 @@ TimedColorCallback::TimedColorCallback(
 
 void TimedColorCallback::perform(EventType* event) {
 	TimeEventData myData = TimeEvent::getData(event);
-	if (getPercentageDone() == 0.0) {
+	if (getPercentageDone() == 0.0f) {
 		mPainter->setColor(mStartColor);
 	}
 	mTimePassed += myData.mTimePassed;

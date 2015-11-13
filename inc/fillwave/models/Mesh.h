@@ -78,17 +78,18 @@ public:
 	void log();
 
 protected:
-	pProgram mProgram, mProgramDR, mProgramShadow, mProgramShadowColor,
-			mProgramOQ, mProgramAOGeometry, mProgramAOColor;
+	Material mMaterial;
 
 	pTextureRegion mDiffuseMap;
 	pTextureRegion mNormalMap;
 	pTextureRegion mSpecularMap;
 
-	Material mMaterial;
+	pProgram mProgram, mProgramDR, mProgramShadow, mProgramShadowColor,
+			mProgramOQ, mProgramAOGeometry, mProgramAOColor;
 
-	/* Draw */
-	GLenum mDrawType;
+	/* Buffers */
+	pIndexBufferBasic mIBO;
+	pVertexBufferBasic mVBO;
 
 	/* Light */
 	manager::LightManager* mLightManager;
@@ -96,14 +97,11 @@ protected:
 	/* Animations */
 	manager::BoneManager* mBoneManager;
 
-	/* Buffers */
-	pVertexBufferBasic mVBO;
-
-	glm::mat4 mOcclusionMatrix;
-
-	pIndexBufferBasic mIBO;
+	/* Draw */
+	GLenum mDrawType;
 
 	/* Occlusion cut off */
+	glm::mat4 mOcclusionMatrix;
 	core::QueryIfAnySamplesPassed mOcclusionQuery;
 //   puFence mFence;
 

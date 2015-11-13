@@ -16,12 +16,12 @@ namespace core {
 
 Uniform::Uniform(std::string name, GLuint type, GLsizei size, GLint location)
 		: mName(name), mType(type), mSize(size), mLocation(location) {
-	if (mType < GL_FLOAT_VEC2 && mType > GL_SAMPLER_CUBE) {
+	if (mType < GL_FLOAT_VEC2 || mType > GL_SAMPLER_CUBE) {
 		throw std::exception();
 	}
 }
 
-const GLboolean Uniform::isName(std::string& name) const {
+GLboolean Uniform::isName(std::string& name) const {
 	return mName == name;
 }
 

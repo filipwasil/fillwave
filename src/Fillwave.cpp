@@ -444,7 +444,7 @@ pText Engine::storeText(
 			getline(myfile, line);
 			myfile >> iASCII >> fXMin >> fWidth >> fYMin >> fHeight >> fYOffset;
 			newFont->mWidths[iASCII] = fWidth;
-			newFont->mOffsets[iASCII] = 1.0 - fHeight - fYOffset;
+			newFont->mOffsets[iASCII] = 1.0f - fHeight - fYOffset;
 			if (control++ > 512) { //xxx limit
 				FLOG_ERROR("Metadata can not be read for file %s.",
 						(fontName + ".meta").c_str());
@@ -564,8 +564,7 @@ void Engine::addPostProcess(
 		GLfloat lifeTime) {
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(this,
 			fragmentShaderPath);
-	common::PostProcessingPass pass(program, mImpl->mWindowWidth,
-			mImpl->mWindowHeight,
+	common::PostProcessingPass pass(program,
 			mImpl->mTextureManager->getDynamic(fragmentShaderPath, program,
 					glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)),
 			lifeTime);

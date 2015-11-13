@@ -60,22 +60,19 @@ private:
 
 	std::string mText;
 
-	glm::vec4 mColor;
-
 	common::Blending mBlending;
-
-	eTextEffect mEffect;
 
 	std::map<std::string, pTextureRegion> mCharacters;
 
-	GLint mViewportWidth, mViewportHeight;
-
-	GLfloat mStartingX, mStartingY, mScale;
+	pTexture mTexture;
 
 	pProgram mProgram;
-	pTexture mTexture;
+	GLint mViewportWidth, mViewportHeight;
 	pVertexBufferText mVBO;
+	GLfloat mStartingX, mStartingY, mScale;
 	Font* mFont;
+	glm::vec4 mColor;
+	eTextEffect mEffect;
 
 	GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
 

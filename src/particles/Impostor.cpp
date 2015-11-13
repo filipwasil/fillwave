@@ -24,9 +24,9 @@ Impostor::Impostor(
 		GLenum blendingDestination)
 		:
 				Finishable(lifetime),
-				mSize(size),
 				mTexture(texture),
-				mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)) {
+				mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)),
+				mSize(size) {
 	mBlending.mSource = blendingSource;
 	mBlending.mDestination = blendingDestination;
 }
@@ -43,7 +43,7 @@ void Impostor::coreDraw() {
 	core::Texture2D::unbind2DTextures();
 }
 
-void Impostor::draw(space::Camera& camera) {
+void Impostor::draw(space::Camera&) { //xxx consider deleting this
 
 }
 

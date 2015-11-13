@@ -26,8 +26,8 @@ public:
 	void setType(GLint type);
 
 private:
-	GLboolean mActive;
 	GLint mType;
+	GLboolean mActive;
 };
 
 } /* models */

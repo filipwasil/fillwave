@@ -81,11 +81,8 @@ private:
 	std::vector<Uniform> mUniforms;
 
 	std::vector<puUniformBuffer> mUnifromBuffers;
-
-	std::vector<pShader> mShaders;
-
 	GLboolean mDelayedLinking;
-
+	std::vector<pShader> mShaders;
 	void getUniforms();
 };
 

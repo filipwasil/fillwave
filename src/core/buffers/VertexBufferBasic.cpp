@@ -28,6 +28,9 @@ VertexBufferBasic::VertexBufferBasic(
 	mDataVertices.resize(mTotalElements);
 
 	int threadID, numberOfThreads, chunkSize = 64;
+	(void)threadID;
+	(void)numberOfThreads;
+	(void)chunkSize;
 	{
 #pragma omp parallel for schedule(guided) num_threads(2) if (mTotalElements > 1000)
 		for (GLuint i = 0; i < mTotalElements; i++) {
@@ -92,7 +95,7 @@ VertexBufferBasic::VertexBufferBasic(
 	if (boneManager) {
 		std::vector<int> boneIdForEachVertex;
 		boneIdForEachVertex.reserve(mDataVertices.size());
-		for (int z = 0; z < mDataVertices.size(); z++) {
+		for (size_t z = 0; z < mDataVertices.size(); z++) {
 			boneIdForEachVertex[z] = 0;
 		}
 		/* Bones */
@@ -151,14 +154,14 @@ VertexBufferBasic::VertexBufferBasic(
 	std::vector<glm::vec3> normals;
 	std::vector<glm::vec3> tangents;
 
-	for (int i = 0; i < mDataVertices.size(); i++) {
+	for (size_t i = 0; i < mDataVertices.size(); i++) {
 		normals.push_back(glm::vec3(0.0));
 		tangents.push_back(glm::vec3(0.0));
 	}
 
 	int j, z;
 
-	for (int i = 0; i < indices.size(); i += 3) {
+	for (size_t i = 0; i < indices.size(); i += 3) {
 
 		/* Normals */
 
@@ -203,7 +206,7 @@ VertexBufferBasic::VertexBufferBasic(
 		tangents[indices[z]] += tangent;
 	}
 
-	for (int i = 0; i < indices.size(); i++) {
+	for (size_t i = 0; i < indices.size(); i++) {
 		glm::vec3 vector3_n = glm::normalize(normals[indices[i]]);
 		glm::vec3 vector3_t = glm::normalize(tangents[indices[i]]);
 		mDataVertices[indices[i]].mNormal[0] = vector3_n.x;
@@ -265,11 +268,11 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
 
 void VertexBufferBasic::log() {
 	for (auto it : mDataVertices) {
-		FLOG_INFO("Vertex UV: %f %f", it.mTextureUV[0], it.mTextureUV[1]);
-		FLOG_INFO("Vertex normal: %f %f %f", it.mNormal[0], it.mNormal[1],
-				it.mNormal[2]);
-		FLOG_INFO("Vertex position: %f %f %f", it.mPosition[0], it.mPosition[1],
-				it.mPosition[2]);
+		FLOG_INFO("Vertex UV: %f %f", static_cast<double>(it.mTextureUV[0]), static_cast<double>(it.mTextureUV[1]));
+		FLOG_INFO("Vertex normal: %f %f %f", static_cast<double>(it.mNormal[0]), static_cast<double>(it.mNormal[1]),
+				static_cast<double>(it.mNormal[2]));
+		FLOG_INFO("Vertex position: %f %f %f", static_cast<double>(it.mPosition[0]), static_cast<double>(it.mPosition[1]),
+				static_cast<double>(it.mPosition[2]));
 	}
 }
 

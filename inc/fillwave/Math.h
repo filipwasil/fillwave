@@ -24,4 +24,9 @@
 #define M_PI_2         3.14159265358979323846 * 0.5
 #endif
 
+namespace fillwave {
+static const float F_PI = static_cast<float>(M_PI);
+static const float F_PI_2 = static_cast<float>(M_PI_2);
+} /* fillwave */
+
 #endif /* MATH_H_ */

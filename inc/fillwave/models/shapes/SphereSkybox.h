@@ -23,9 +23,9 @@ namespace models {
 class SphereSkybox: public Shape<core::VertexPosition> {
 public:
 	SphereSkybox(GLfloat radius, GLuint rings, GLuint sectors) {
-		float const R = 1. / (float) (rings - 1);
-		float const S = 1. / (float) (sectors - 1);
-		int r, s;
+		float const R = 1.f / (float) (rings - 1);
+		float const S = 1.f / (float) (sectors - 1);
+		GLuint r, s;
 
 		mVertices.resize(rings * sectors);
 
@@ -33,9 +33,9 @@ public:
 
 		for (r = 0; r < rings; r++) {
 			for (s = 0; s < sectors; s++) {
-				float const y = sin(-M_PI_2 + M_PI * r * R);
-				float const x = cos(2 * M_PI * s * S) * sin( M_PI * r * R);
-				float const z = sin(2 * M_PI * s * S) * sin( M_PI * r * R);
+				float const y = sin(-F_PI_2 + F_PI * r * R);
+				float const x = cos(2 * F_PI * s * S) * sin( F_PI * r * R);
+				float const z = sin(2 * F_PI * s * S) * sin( F_PI * r * R);
 
 				(*vb).mPosition[0] = x * radius * mScale;
 				(*vb).mPosition[1] = y * radius * mScale;

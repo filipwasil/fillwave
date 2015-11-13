@@ -1557,7 +1557,6 @@ pProgram ProgramLoader::getDefaultBones(Engine* engine) {
 
 void ProgramLoader::initDefaultUniforms(core::Program* program) {
 	GLint location[10];
-	GLint tmp;
 
 	location[0] = glGetUniformLocation(program->getHandle(),
 			"uLightAmbientIntensity");

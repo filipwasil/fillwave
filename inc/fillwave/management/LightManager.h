@@ -17,11 +17,9 @@ class Engine;
 namespace manager {
 
 /*! \class LightManager
- *
  * \brief Manager to handle Light objects.
- *
  */
-//#define MAX_TEXTURE_UNITS 32
+
 #define FILLWAVE_MAX_SPOT_LIGHTS 4
 #define FILLWAVE_MAX_POINT_LIGHTS 4
 #define FILLWAVE_MAX_DIRECTIONAL_LIGHTS 4
@@ -82,8 +80,8 @@ public:
 
 	void updateLightEntities();
 
-	void pushLightUniformsDR(space::Camera& c, core::Program* program);
-	void pushLightUniforms(space::Camera& c, core::Program* program);
+	void pushLightUniformsDR();
+	void pushLightUniforms(core::Program* program);
 	void pushLightUniformBuffers(core::Program* program);
 
 	void updateDeferredBufferSpot(

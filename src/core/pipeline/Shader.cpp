@@ -72,16 +72,16 @@ void Shader::log() {
 	} else {
 		glGetProgramiv(mHandle, GL_INFO_LOG_LENGTH, &maxLength);
 	}
-	char infoLog[maxLength];
+	std::vector<char> infoLog(maxLength);
 
 	if (glIsShader(mHandle)) {
-		glGetShaderInfoLog(mHandle, maxLength, &infologLength, infoLog);
+		glGetShaderInfoLog(mHandle, maxLength, &infologLength, infoLog.data());
 	} else {
-		glGetProgramInfoLog(mHandle, maxLength, &infologLength, infoLog);
+		glGetProgramInfoLog(mHandle, maxLength, &infologLength, infoLog.data());
 	}
 
 	if (infologLength > 0) {
-		FLOG_INFO("%s\n", infoLog);
+		FLOG_INFO("%s\n", infoLog.data());
 	}
 	FLOG_INFO("%s\n", mSource.c_str());
 }

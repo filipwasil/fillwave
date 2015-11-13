@@ -29,8 +29,8 @@ public:
 	void use(GLuint programHandle, GLuint id = 0) const;
 
 private:
-	GLuint mTarget;
 	GLbitfield mStage;
+	GLuint mTarget;
 };
 
 } /* core */

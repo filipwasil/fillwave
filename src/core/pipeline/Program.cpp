@@ -238,18 +238,17 @@ void Program::getUniformBlock(std::string name, GLuint bindingPoint) {
 	GLint uniformBlockSize = 0;
 	glGetProgramiv(mHandle, GL_ACTIVE_UNIFORM_BLOCKS, &howMany);
 	for (GLint i = 0; i < howMany; ++i) {
-		GLint name_len = -1, num = -1;
-		GLenum type = GL_ZERO;
-		char nameFromProgram[100];
+		GLint name_len = -1;
+		std::vector<char> nameFromProgram(100);
 		glGetActiveUniformBlockName(mHandle, GLuint(i),
-				sizeof(nameFromProgram) - 1, &name_len, nameFromProgram);
+				sizeof(nameFromProgram) - 1, &name_len, nameFromProgram.data());
 		glGetActiveUniformBlockiv(mHandle, GLuint(i),
 		GL_UNIFORM_BLOCK_DATA_SIZE, &uniformBlockSize);
 		nameFromProgram[name_len] = 0;
-		if (std::string(nameFromProgram) == name) {
+		if (std::string(nameFromProgram.data()) == name) {
 			FLOG_DEBUG("Uniform block name=%s, index=%d, size=%d ",
 					std::string(name).c_str(), GLuint(i), uniformBlockSize);
-			GLuint blockIndex = glGetUniformBlockIndex(mHandle, nameFromProgram);
+			GLuint blockIndex = glGetUniformBlockIndex(mHandle, nameFromProgram.data());
 			glUniformBlockBinding(mHandle, blockIndex, bindingPoint);
 			mUnifromBuffers.push_back(
 					puUniformBuffer(
@@ -274,15 +273,15 @@ void Program::log() const {
 	GLint infologLength = 0;
 	GLint value;
 	glGetProgramiv(mHandle, GL_INFO_LOG_LENGTH, &value);
-	GLchar infoLog[value];
+	std::vector<GLchar> infoLog(value);
 	FLOG_INFO("Shaders\n %lu", mShaders.size());
 	if (glIsProgram(mHandle)) {
 		FLOG_INFO("Program handle %d is valid", mHandle);
 	} else {
 		FLOG_INFO("Program handle %d is not valid", mHandle);
 	}
-	glGetProgramInfoLog(mHandle, value, &infologLength, infoLog);
-	FLOG_INFO("INFOR LOG: %s", infoLog);
+	glGetProgramInfoLog(mHandle, value, &infologLength, infoLog.data());
+	FLOG_INFO("INFOR LOG: %s", infoLog.data());
 	glGetProgramiv(mHandle, GL_INFO_LOG_LENGTH, &value);
 	FLOG_INFO("GL_INFO_LOG_LENGTH: %d", value);
 	glGetProgramiv(mHandle, GL_VALIDATE_STATUS, &value);

@@ -77,7 +77,6 @@ public:
 			name[name_len] = 0;
 			GLuint location = glGetAttribLocation(programHandle, name);
 			GLuint size = 0;
-			unsigned long long pointer = 0;
 			switch (type) {
 				case GL_UNSIGNED_INT:
 				case GL_FLOAT:
@@ -159,11 +158,11 @@ public:
 
 	virtual void log() = 0;
 
-private:
-	std::vector<Attribute> mAttributes;
-
 protected:
 	std::vector<T> mDataVertices;
+
+private:
+	std::vector<Attribute> mAttributes;
 };
 
 } /* core */

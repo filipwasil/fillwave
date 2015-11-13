@@ -55,7 +55,7 @@ public:
 
 	virtual ~Uniform() = default;
 
-	const GLboolean isName(std::string& name) const;
+	GLboolean isName(std::string& name) const;
 
 	GLuint getType() const;
 
@@ -102,13 +102,9 @@ public:
 
 private:
 	std::string mName;
-
-	GLint mLocation;
-
 	GLenum mType;
-
 	GLsizei mSize;
-
+	GLint mLocation;
 	UniformData mData;
 };
 

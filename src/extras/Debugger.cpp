@@ -88,7 +88,7 @@ void Debugger::setMiniwindowSize(GLfloat size) {
 
 void Debugger::renderFromCamera(space::Camera& c, GLint id) {
 	glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
-			mEngine->getScreenSize()[1] * (1.0 - mMiniwindowSize),
+			mEngine->getScreenSize()[1] * (1.0f - mMiniwindowSize),
 			mEngine->getScreenSize()[0] * mMiniwindowSize,
 			mEngine->getScreenSize()[1] * mMiniwindowSize);
 
@@ -100,7 +100,7 @@ void Debugger::renderFromCamera(space::Camera& c, GLint id) {
 }
 
 void Debugger::renderPickingMap() {
-	glViewport(mEngine->getScreenSize()[0] * (1.0 - mMiniwindowSize), 0,
+	glViewport(mEngine->getScreenSize()[0] * (1.0f - mMiniwindowSize), 0,
 			mEngine->getScreenSize()[0] * mMiniwindowSize,
 			mEngine->getScreenSize()[1] * mMiniwindowSize);
 
@@ -206,7 +206,7 @@ void Debugger::renderGeometryBuffer(
 	}
 
 	core::Framebuffer::bindScreenFramebufferForWriting();
-	for (GLint i = 0; i < attachments; i++) {
+	for (GLuint i = 0; i < attachments; i++) {
 		buffer->bindForReading(); /* We will bind GBuffer for reading ...*/
 		buffer->setReadColorAttachment(i); /* ... and take color attachment color i 0 (out location 0 from fragment shader) ... */
 		glBlitFramebuffer(0, 0, width, height, debugAttachmentScreens[i][0],

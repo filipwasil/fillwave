@@ -41,12 +41,12 @@ private:
 	void sendData(Texture3DFile* file, Texture2DFileData customData = nullptr);
 
 public:
-	puTexture3DFile mFront; /* Positive Z*/
-	puTexture3DFile mBack; /* Negative Z*/
-	puTexture3DFile mCeil; /* Positive Y*/
-	puTexture3DFile mFloor; /* Negative Y*/
 	puTexture3DFile mRight; /* Positive X*/
 	puTexture3DFile mLeft; /* Negative X*/
+	puTexture3DFile mCeil; /* Positive Y*/
+	puTexture3DFile mFloor; /* Negative Y*/
+	puTexture3DFile mFront; /* Positive Z*/
+	puTexture3DFile mBack; /* Negative Z*/
 
 	Texture3D(
 			Texture2DFile& fileRight,

@@ -33,8 +33,8 @@ public:
 	GL_FALSE, GLboolean compression = GL_FALSE);
 	GLint mMipmapsLevel;
 	GLboolean mMipmaps;
-	GLint mBorder;
 	GLboolean mCompression;
+	GLint mBorder;
 	GLsizei mCompressionSize;
 };
 
@@ -50,11 +50,11 @@ public:
 			GLint type = GL_UNSIGNED_BYTE,
 			GLsizei width = 0,
 			GLsizei height = 0);
-	GLenum mFormat;
 	GLint mInternalFormat;
-	GLsizei mWidth;
 	GLsizei mHeight;
+	GLsizei mWidth;
 	GLenum mType;
+	GLenum mFormat;
 };
 
 /*! \enum eMemoryAllocation

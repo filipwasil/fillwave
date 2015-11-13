@@ -16,7 +16,7 @@ TimedEmiterUpdateCallback::TimedEmiterUpdateCallback(
 		pEmiterPoint emiter,
 		GLfloat timeToFinish,
 		eEasing easing)
-		: TimedCallback(timeToFinish, easing), mTimePassed(0.0), mEmiter(emiter) {
+		: TimedCallback(timeToFinish, easing), mEmiter(emiter), mTimePassed(0.0) {
 
 }
 

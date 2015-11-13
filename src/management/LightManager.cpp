@@ -170,7 +170,7 @@ pLightDirectional LightManager::getLightDirectional(GLint i) {
 	return mDirectionalLights[i];
 }
 
-void LightManager::pushLightUniforms(space::Camera& c, core::Program* program) {
+void LightManager::pushLightUniforms(core::Program* program) {
 
 	/* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT*/
 
@@ -183,7 +183,7 @@ void LightManager::pushLightUniforms(space::Camera& c, core::Program* program) {
 
 	/* Spot lights */
 
-	for (int i = 0; i < mSpotLights.size(); i++) {
+	for (size_t i = 0; i < mSpotLights.size(); i++) {
 
 		space::CameraPerspective camera =
 				*(mSpotLights[i]->getShadowCamera().get());
@@ -212,7 +212,7 @@ void LightManager::pushLightUniforms(space::Camera& c, core::Program* program) {
 
 	/* Directional lights */
 
-	for (int i = 0; i < mDirectionalLights.size(); i++) {
+	for (size_t i = 0; i < mDirectionalLights.size(); i++) {
 		space::CameraOrthographic camera =
 				*(mDirectionalLights[i]->getShadowCamera().get());
 
@@ -240,8 +240,8 @@ void LightManager::pushLightUniforms(space::Camera& c, core::Program* program) {
 
 	/* Point lights */
 
-	for (int i = 0; i < mPointLights.size(); i++) {
-		space::LightPoint* l = mPointLights[i].get();
+	for (size_t i = 0; i < mPointLights.size(); i++) {
+		/*space::LightPoint* l = mPointLights[i].get();*/
 		program->uniformPush(
 				strings::getStructField("uPointLights", "position", i),
 				glm::vec4(mPointLights[i]->getTranslation(), 1.0));
@@ -259,16 +259,14 @@ void LightManager::pushLightUniforms(space::Camera& c, core::Program* program) {
 	}
 }
 
-void LightManager::pushLightUniformsDR(
-		space::Camera& c,
-		core::Program* program) {
+void LightManager::pushLightUniformsDR() {
 
 	/* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT*/
 
 	GLint UBOIterator = 0;
 
 	/* Spot lights */
-	for (int i = 0; i < mSpotLights.size(); i++) {
+	for (size_t i = 0; i < mSpotLights.size(); i++) {
 
 		space::CameraPerspective camera =
 				*(mSpotLights[i]->getShadowCamera().get());
@@ -292,7 +290,7 @@ void LightManager::pushLightUniformsDR(
 	}
 
 	/* Directional lights */
-	for (int i = 0; i < mDirectionalLights.size(); i++) {
+	for (size_t i = 0; i < mDirectionalLights.size(); i++) {
 		space::CameraOrthographic camera =
 				*(mDirectionalLights[i]->getShadowCamera().get());
 
@@ -341,7 +339,7 @@ void LightManager::updateDeferredBufferSpot(
 void LightManager::updateDeferredBufferDirectional(
 		GLuint lightID,
 		core::Program* program,
-		GLint currentShadowUnit) {
+		GLint /*currentShadowUnit*/) {
 	program->use();
 	glm::vec4 translation = glm::vec4(
 			mDirectionalLights[lightID]->getTranslation(), 1.0);
@@ -357,7 +355,7 @@ void LightManager::updateDeferredBufferDirectional(
 void LightManager::updateDeferredBufferPoint(
 		GLuint lightID,
 		core::Program* program,
-		GLint currentShadowUnit) {
+		GLint /*currentShadowUnit*/) {
 	program->use();
 
 	program->uniformPush("uLight.base.color",
@@ -377,13 +375,13 @@ void LightManager::pushLightUniformBuffers(core::Program* program) {
 
 void LightManager::bindShadowmaps() {
 	GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
-	for (GLint i = 0; i < mSpotLights.size(); i++) {
+	for (size_t i = 0; i < mSpotLights.size(); i++) {
 		mSpotLights[i]->getShadowTexture()->bind(currentTextureUnit++);
 	}
-	for (GLint i = 0; i < mDirectionalLights.size(); i++) {
+	for (size_t i = 0; i < mDirectionalLights.size(); i++) {
 		mDirectionalLights[i]->getShadowTexture()->bind(currentTextureUnit++);
 	}
-	for (GLint i = 0; i < mPointLights.size(); i++) {
+	for (size_t i = 0; i < mPointLights.size(); i++) {
 		mPointLights[i]->getShadowTexture()->bind(currentTextureUnit++);
 	}
 }

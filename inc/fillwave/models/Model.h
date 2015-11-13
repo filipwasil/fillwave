@@ -87,9 +87,9 @@ protected:
 			mUniformLocationCacheBonesShadowColor;
 private:
 	/* Animation */
-	GLint mActiveAnimation;
-
 	actions::TimedBoneUpdateCallback* mAnimationCallback;
+
+	GLint mActiveAnimation;
 
 	void initUniformsCache();
 
@@ -173,7 +173,7 @@ static pModel buildModel(
 		models::Material material = models::Material()) {
 	return pModel(
 			new models::Model(engine, program, shapePath, diffuseMap, normalMap,
-					specularMap));
+					specularMap, material));
 }
 
 static pModel buildModel(

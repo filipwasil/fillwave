@@ -34,7 +34,7 @@ void Terrain::drawVoxels(space::Camera& camera) {
 			- glm::vec3(mVoxelChunks[cenralChunkIndex]->getTranslation());
 
 	GLfloat singleChunkWidth = FILLWAVE_VOXEL_CHUNK_SIZE * mGap * mRadius;
-	GLfloat maximumDistance = singleChunkWidth * 0.5;
+	GLfloat maximumDistance = singleChunkWidth * 0.5f;
 
 	if (glm::abs(distanceToCamera.x) > maximumDistance) { //OK
 		if (distanceToCamera.x > 0.0f) {

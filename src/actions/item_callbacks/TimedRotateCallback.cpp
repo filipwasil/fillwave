@@ -24,16 +24,16 @@ TimedRotateCallback::TimedRotateCallback(
 		eEasing easing)
 		:
 				TimedCallback(lifeTime, easing),
+				mEntity(entity),
 				mStartRotation(glm::quat()),
-				mStartAngle(0.0),
+				mStartAngle(0.0f),
 				mEndAngle(angle),
-				mAxis(axis),
-				mEntity(entity) {
+				mAxis(axis) {
 
 }
 
 void TimedRotateCallback::performTime(TimeEventData& data) {
-	if (getPercentageDone() == 0.0) {
+	if (getPercentageDone() == 0.0f) {
 		mStartRotation = mEntity->getRotation();
 	}
 	mTimePassed += data.mTimePassed;

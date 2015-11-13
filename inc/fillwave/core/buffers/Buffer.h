@@ -71,10 +71,10 @@ public:
 #endif
 
 protected:
-	GLuint mIndex;
+	GLboolean mRefresh;
 	GLuint mTarget;
 	GLuint mDataStoreType;
-	GLboolean mRefresh;
+	GLuint mIndex;
 	GLvoid* mData;
 	GLuint mSize;
 	GLuint mTotalElements;

@@ -18,11 +18,6 @@ Light::Light(glm::vec3 position, glm::vec4 intensity, pEntity entity)
 
 }
 
-void Light::log() {
-	FLOG_INFO("Light mIntensity: R:%f G:%f B:%f A:%f", mIntensity.x,
-			mIntensity.y, mIntensity.z, mIntensity.w);
-}
-
 void Light::updateEntity() {
 	if (mEntity) {
 		if (mEntity->isExternalRefresh()) {
@@ -62,6 +57,12 @@ void Light::setEntity(pEntity entity) {
 
 pEntity Light::getEntity() {
 	return mEntity;
+}
+
+void Light::log() {
+	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
+	FLOG_INFO("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x),
+			d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
 }
 
 } /* space */

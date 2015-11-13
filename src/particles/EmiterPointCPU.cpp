@@ -18,7 +18,7 @@ namespace particles {
 
 EmiterPointCPU::EmiterPointCPU(
 		Engine* engine,
-		GLfloat emitingSourceRate,
+		GLfloat /*emitingSourceRate*/, //xxx not used for now
 		GLuint howMany,
 		glm::vec4 color,
 		glm::vec3 acceleration,
@@ -57,7 +57,7 @@ EmiterPointCPU::EmiterPointCPU(
 	velocities.reserve(3 * howMany);
 	cameraDistanceTF.reserve(howMany);
 
-	for (GLint i = 0; i < howMany; i++) {
+	for (GLuint i = 0; i < howMany; i++) {
 
 		times.push_back(time);
 		time += 1.0f / lifetime;

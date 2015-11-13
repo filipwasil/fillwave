@@ -39,13 +39,13 @@ public:
 	void log();
 
 private:
+	GLsizei mStride;
 	std::string mName;
 	GLuint mIndex;
 	GLint mSize;
-	GLenum mType;
-	std::size_t mTypeSize;
 	GLboolean mNormalized;
-	GLsizei mStride;
+	std::size_t mTypeSize;
+	GLenum mType;
 	GLvoid* mPointer;
 };
 

@@ -36,8 +36,8 @@ Model::Model(
 		const Material& material)
 		:
 				Programmable(program),
-				mAnimationCallback(nullptr),
 				mBoneManager(nullptr),
+				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	initShadowing(engine);
@@ -64,8 +64,8 @@ Model::Model(
 Model::Model(Engine* engine, pProgram program, const std::string& shapePath)
 		:
 				Programmable(program),
-				mAnimationCallback(nullptr),
 				mBoneManager(nullptr),
+				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -89,8 +89,8 @@ Model::Model(
 		const std::string& specularMapPath)
 		:
 				Programmable(program),
-				mAnimationCallback(nullptr),
 				mBoneManager(nullptr),
+				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -115,8 +115,8 @@ Model::Model(
 		const Material& material)
 		:
 				Programmable(program),
-				mAnimationCallback(nullptr),
 				mBoneManager(nullptr),
+				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	const aiScene* scene = engine->getModelFromFile(shapePath);

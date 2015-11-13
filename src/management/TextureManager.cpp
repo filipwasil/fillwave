@@ -358,7 +358,7 @@ pTexture2DRenderable TextureManager::getShadow2D(GLuint width, GLuint height) {
 	return object->mTexture;
 }
 
-pTexture3DRenderable TextureManager::getShadow3D(GLuint width, GLuint height) {
+pTexture3DRenderable TextureManager::getShadow3D(GLuint /*width*/, GLuint /*height*/) {
 	core::Texture2DFile* file[6];
 
 	TextureObject3DRenderable* object = new TextureObject3DRenderable();
@@ -370,8 +370,8 @@ pTexture3DRenderable TextureManager::getShadow3D(GLuint width, GLuint height) {
 
 		file[i]->mConfig.mMipmapsLevel = 0;
 		file[i]->mConfig.mBorder = 0;
-		file[i]->mHeader.mWidth = 512;
-		file[i]->mHeader.mHeight = 512;
+		file[i]->mHeader.mWidth = 512; // /*width ?*/
+		file[i]->mHeader.mHeight = 512; // /*height ?*/
 		file[i]->mHeader.mType = GL_FLOAT;
 		file[i]->mData = nullptr;
 		file[i]->mConfig.mMipmaps = GL_FALSE;

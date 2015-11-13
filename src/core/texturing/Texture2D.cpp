@@ -62,7 +62,7 @@ void Texture2D::unbind2DTextures() {
 void Texture2D::reload() {
 	FLOG_DEBUG("Reload");
 	Texture::reload();
-	for (GLuint i = 0; i < mHowMany; i++) {
+	for (GLsizei i = 0; i < mHowMany; i++) {
 		bind(i);
 		setParameters(mParameters);
 		sendData();
