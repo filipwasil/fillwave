@@ -364,7 +364,7 @@ mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
 mISOQ(GL_FALSE) {
-	init();
+//	init();
 }
 
 Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
@@ -395,20 +395,20 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 				mIsAO(GL_FALSE),
 				mISOQ(GL_TRUE) {
 #endif
-	init();
+//	init();
 }
 
 Engine::EngineImpl::~EngineImpl() {
+	if (mScene) {
+		mScene.reset();
+	}
 	mTextManager.clear();
 	mFontManager.clear();
 	mPostProcessingPasses.clear();
 	mTexturesDynamic.clear();
-	if (mScene) {
-		mScene.reset();
-	}
 }
 
-inline void Engine::EngineImpl::init() {
+void Engine::EngineImpl::init() {
 	initExtensions();
 
 	initContext();

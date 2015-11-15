@@ -40,6 +40,10 @@ Engine::Engine(ANativeActivity* activity) {
 #else
 Engine::Engine(GLint argc, GLchar* const argv[]) {
 	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, argc, argv));
+	/* This init has to be outside of the constructor,
+	 * because it needs mImpl to be created fully before Initialization.
+	 * mImpl uses Engine functions */
+	mImpl->init();
 }
 #endif
 
