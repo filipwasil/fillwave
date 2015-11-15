@@ -29,7 +29,7 @@ Entity::Entity(glm::vec3 translation, glm::quat rotation)
 }
 
 Entity::~Entity() {
-	detachChildren();
+//	detachChildren();
 	FLOG_DEBUG("Entity destroyed");
 }
 
@@ -168,11 +168,7 @@ glm::quat Entity::getParentRotation() {
 void Entity::updateParentMatrix(glm::mat4& parent) {
 	mParentMatrix = parent;
 	mTransformation = mParentMatrix * mModelMatrixCache;
-	for (auto& it : mChildren) {
-		it->updateParentMatrix(mTransformation);
-	}
-//   std::for_each(mChildren.begin(), mChildren.end(), [localTransformation](pEntity e){ e->updateParentMatrix(mTransformation); });
-	mParentRefresh = GL_FALSE;
+	mParentRefresh = GL_TRUE;
 	mRefreshExternal = GL_TRUE;
 }
 
