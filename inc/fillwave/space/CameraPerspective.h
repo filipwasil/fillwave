@@ -28,10 +28,10 @@ public:
 	CameraPerspective(
 			glm::vec3 position,
 			glm::quat rotation,
-			GLfloat fovy = 90,
-			GLfloat aspectRatio = 1,
-			GLfloat nearPlane = 0.01,
-			GLfloat farPlane = 100.0);
+			GLfloat fovy = glm::radians(90.0f),
+			GLfloat aspectRatio = 1.0f,
+			GLfloat nearPlane = 0.01f,
+			GLfloat farPlane = 100.0f);
 
 	virtual ~CameraPerspective() = default;
 

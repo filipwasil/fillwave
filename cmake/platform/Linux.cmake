@@ -47,9 +47,9 @@ add_library(fillwave SHARED ${FILLWAVE_SOURCES})
 # -----------------------------------------------
 
 if(FILLWAVE_BUILD_RPM)
-    install(TARGETS fillwave DESTINATION usr/lib64 COMPONENT fillwave)
+    install(TARGETS fillwave DESTINATION lib64 COMPONENT fillwave)
 else(FILLWAVE_BUILD_RPM)
-    install(TARGETS fillwave DESTINATION usr/lib COMPONENT fillwave)
+    install(TARGETS fillwave DESTINATION lib COMPONENT fillwave)
 endif(FILLWAVE_BUILD_RPM)
    
 # -----------------------------------------------
