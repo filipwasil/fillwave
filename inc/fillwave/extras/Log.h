@@ -40,7 +40,7 @@ void setFileInvalid();
 #define FUSER FBIT(4)
 #define FWARNING FBIT(5)
 
-#define FBIT_MAX (FFLAG_E | FFLAG_I | FFLAG_D | FFLAG_F | FFLAG_U | FFLAG_W)
+#define FBIT_MAX (FERROR | FINFO | FDEBUG | FFATAL | FUSER | FWARNING)
 
 /* Define this macro in your source file to provide access to Crater log macros */
 
@@ -71,9 +71,9 @@ void setFileInvalid();
 #define FLOG_ERROR(...) do { if ( FIF(FERROR) ) (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), __VA_ARGS__);} while(0)
 
 #define FLOG_CHECK(...)\
-      do { GLenum error = glGetError();\
-         if ( error != GL_NO_ERROR) {\
-            (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "CORE ERROR:", error);\
+      do { GLenum error_unique_niosfoinfsd = glGetError();\
+         if ( error_unique_niosfoinfsd != GL_NO_ERROR) {\
+            (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "CORE ERROR:", error_unique_niosfoinfsd);\
             (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), __VA_ARGS__);\
             if (error == 0x0506) { /*Framebuffer error*/ \
               GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);\
@@ -106,10 +106,10 @@ void setFileInvalid();
 	} while(0)
 
 #define FLOG_CHECK(...)\
-      do { GLenum error = glGetError();                                               \
-         if ( error != GL_NO_ERROR) {                                                 \
-            fprintf(stdout,"[%s 0x%04x] ","CORE ERROR:",error);                       \
-            if (error == 0x0506) { /*Framebuffer error*/                              \
+      do { GLenum error_unique_niosfoinfsd = glGetError();                                               \
+         if ( error_unique_niosfoinfsd != GL_NO_ERROR) {                                                 \
+            fprintf(stdout,"[%s 0x%04x] ","CORE ERROR:",error_unique_niosfoinfsd);                       \
+            if (error_unique_niosfoinfsd == 0x0506) { /*Framebuffer error*/                              \
                GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);              \
                fprintf(stdout,"[%s 0x%04x] ","FRAMEBUFFER_STATUS:",status);           \
             }                                                                         \
