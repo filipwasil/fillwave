@@ -75,7 +75,7 @@ void setFileInvalid();
          if ( error_unique_niosfoinfsd != GL_NO_ERROR) {\
             (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "CORE ERROR:", error_unique_niosfoinfsd);\
             (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), __VA_ARGS__);\
-            if (error == 0x0506) { /*Framebuffer error*/ \
+            if (error_unique_niosfoinfsd == 0x0506) { /*Framebuffer error*/ \
               GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);\
               (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "FRAMEBUFFER_STATUS:", status);\
             }\
