@@ -21,8 +21,6 @@ namespace models {
  *
  */
 
-//#define MAXIMUM_PICKABLE_SLOTS 768
-//#define MAXIMUM_TRIALS_TO_PICK_COLOR 2000
 class Scene: public Entity {
 public:
 	Scene();
