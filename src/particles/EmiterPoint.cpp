@@ -35,9 +35,11 @@ EmiterPoint::EmiterPoint(
 	mBlending.mSource = blendingSource;
 	mBlending.mDestination = blendingDestination;
 
-#ifndef __ANDROID__
+#ifdef __ANDROID__
+#else
 	glEnable(GL_PROGRAM_POINT_SIZE);
-	//glEnable(GL_POINT_SPRITE); always on since OpenGL 3.2
+	// glEnable(GL_POINT_SPRITE) always on since OpenGL 3.2 ... but not at all drivers ://////
+	glEnable(GL_POINT_SPRITE);
 #endif
 }
 

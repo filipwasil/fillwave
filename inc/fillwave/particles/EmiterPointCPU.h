@@ -39,7 +39,7 @@ public:
 			GLenum blendingSource = GL_SRC_ALPHA,
 			GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA,
 			GLboolean depthTesting = GL_TRUE,
-			GLfloat alphaCutOffLevel = 0.0);
+			GLfloat alphaCutOffLevel = 0.0f);
 
 	virtual ~EmiterPointCPU() = default;
 

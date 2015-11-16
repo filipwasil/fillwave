@@ -40,7 +40,7 @@ public:
 			GLenum blendingSource,
 			GLenum blendingDestination,
 			GLboolean depthTesting,
-			GLfloat alphaCutOffLevel = 0.0);
+			GLfloat alphaCutOffLevel = 0.0f);
 
 	virtual ~EmiterPointGPU() = default;
 
