@@ -34,7 +34,8 @@ option(FILLWAVE_MODEL_LOADER_TINYOBJLOADER "use Tinyobjloader" OFF)
 option(FILLWAVE_TEXTURE_LOADER_STB "use STB texture loader" ON)
 option(FILLWAVE_SUPPRESS_WARNINGS "Suppress warnings during compilation" ON)
 
-option(FILLWAVE_BUILD_TEST_ANDROID_NATIVE_APP "Build android native test app" OFF)
+option(FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP "Build android native test app" OFF)
+option(FILLWAVE_BUILD_ANDROID_JNI_LIB "Build android jni library" OFF)
 
 # -----------------------------------------------
 # Compiler options
