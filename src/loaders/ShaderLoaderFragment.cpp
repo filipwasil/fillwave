@@ -385,7 +385,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 			"         specular = pow(specular, texelSpecular.r);\n"
 
 			"         diffuseSum += (shadowFactor * intensity * diffuse);\n"
-			"         specularSum += (shadowFactor * intensity * specular);\n"
+			"         specularSum += (shadowFactor * shadowFactor * shadowFactor * intensity * specular);\n"
 			"      }\n"
 
 #ifdef __ANDROID__
