@@ -457,7 +457,11 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #ifdef GLEW_OK
 	GLenum GlewInitResult;
 	glewExperimental = GL_TRUE;
+
 	GlewInitResult = glewInit();
+	if (GL_NO_ERROR != glGetError()){
+		FLOG_ERROR("glewInit returned INVALID_ENUM ... It may happen");
+	}
 
 	if (GLEW_OK != GlewInitResult) {
 		FLOG_ERROR("GLEW init failed. Error: %d", GlewInitResult);
@@ -465,6 +469,7 @@ inline void Engine::EngineImpl::initExtensions(void) {
 	} else {
 		FLOG_DEBUG("OpenGL Version: %s", glGetString(GL_VERSION));
 	}
+
 #endif
 }
 
