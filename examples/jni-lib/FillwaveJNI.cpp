@@ -1,4 +1,4 @@
-#include "FillwaveJNI.h"
+#include "../jni-lib/FillwaveJNI.h"
 
 using namespace fillwave;
 
