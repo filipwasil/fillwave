@@ -72,7 +72,7 @@ if(FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP)
 endif()
 
 if(FILLWAVE_BUILD_ANDROID_JNI_LIB)
-    add_subdirectory(stubs/jni-lib)
+    add_subdirectory(examples/jni-lib)
 endif()
 
 # -----------------------------------------------
