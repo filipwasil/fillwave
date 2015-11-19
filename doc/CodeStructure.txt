@@ -1,23 +1,7 @@
---------------- MAIN -------------------------------------------------------------
 src - source files
 inc - header files
-ext - subprojects
+ext - external subprojects
+examples - Example projects
+scripts - Usable scripts
 cmake - cmake macros
 cmake/platform - cmake macros specific for each OS 
-----------------------------------------------------------------------------------
-
---------------- HELPERS ----------------------------------------------------------
-src-java - java JNI class header used by javah to generate JNI c++ header.
-----------------------------------------------------------------------------------
-
---------------- TESTS ------------------------------------------------------------
-test - Linux test project
-test_android - Android native activity test project
-----------------------------------------------------------------------------------
-
---------------- EXTRAS -----------------------------------------------------------
-ide - configuration files for speicfic ide's
-scripts - usable scripts
-install - files used for fillwave installation process or package creation.
-legacy - files which are not used, not needed, but i keep them just in case.
-----------------------------------------------------------------------------------

@@ -68,11 +68,11 @@ target_link_libraries(fillwave log android GLESv3 fontgenerator ${FILLWAVE_MODEL
 target_link_libraries(fillwaveStatic fontgenerator ${FILLWAVE_MODEL_LOADER} log android GLESv3 ${OPENGL_LIBRARIES})
 
 if(FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP)
-    add_subdirectory(test_android)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/android)
 endif()
 
 if(FILLWAVE_BUILD_ANDROID_JNI_LIB)
-    add_subdirectory(examples/jni-lib)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/jni-lib)
 endif()
 
 # -----------------------------------------------
