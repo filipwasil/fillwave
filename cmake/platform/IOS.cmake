@@ -16,7 +16,7 @@ add_subdirectory(ext/freetype2)
 add_subdirectory(ext)
 
 if (FILLWAVE_BUILD_DEV)
-   add_subdirectory(test)
+
 endif()
 
 if(FILLWAVE_BUILD_DEV)

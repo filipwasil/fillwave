@@ -17,7 +17,7 @@ add_subdirectory(ext/glfw)
 add_subdirectory(ext)
 
 if (FILLWAVE_BUILD_DEV)
-   add_subdirectory(test)
+   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/linux/test)
 endif()
 
 if(FILLWAVE_BUILD_DEV)

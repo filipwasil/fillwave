@@ -77,7 +77,7 @@ endif()
 # Test app
 # -----------------------------------------------
 
-add_subdirectory(test)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/linux)
 
 # -----------------------------------------------
 # Packaging
