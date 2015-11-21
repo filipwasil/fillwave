@@ -78,6 +78,10 @@ endif()
 # -----------------------------------------------
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/linux)
+option(ENABLE_QT_EXAMPLES "enable qt example" OFF)
+if(ENABLE_QT_EXAMPLES)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/qt)
+endif()
 
 # -----------------------------------------------
 # Packaging
