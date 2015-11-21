@@ -6,7 +6,7 @@ CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 
 SET(VERSION_MAJOR 2)
 SET(VERSION_MINOR 1)
-SET(VERSION_PATCH 3)
+SET(VERSION_PATCH 4)
 SET(PROJECT_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 # -----------------------------------------------
@@ -16,32 +16,16 @@ SET(PROJECT_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 ADD_DEFINITIONS(-DASSIMP_BUILD_NO_IFC_IMPORTER )
 
 # -----------------------------------------------
-# Options
+# Project options
 # -----------------------------------------------
 
-option(FILLWAVE_BUILD_DEV "Build development package" OFF)
-option(FILLWAVE_BUILD_LIB "Build main fillwave package" ON)
-option(FILLWAVE_BUILD_DEB "Build deb packages" OFF)
-option(FILLWAVE_BUILD_RPM "Build rpm packages" OFF)
-option(FILLWAVE_BUILD_TGZ "Build tgz packages" OFF)
-option(FILLWAVE_BUILD_PACK "Do not build external packages when not needed (Linux builds)" ON)
-option(FILLWAVE_COMPILATION_STARTUP_ANIMATION "Run startup animation before any other action" OFF)
-option(FILLWAVE_COMPILATION_PC_GLES "Use GLES stub for PC" OFF)
-option(NDEBUG "Build with debug logs" OFF)
-
-option(FILLWAVE_MODEL_LOADER_ASSIMP "use Assimp" ON)
-option(FILLWAVE_MODEL_LOADER_TINYOBJLOADER "use Tinyobjloader" OFF)
-option(FILLWAVE_TEXTURE_LOADER_STB "use STB texture loader" ON)
-option(FILLWAVE_SUPPRESS_WARNINGS "Suppress warnings during compilation" ON)
-
-option(FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP "Build android native test app" OFF)
-option(FILLWAVE_BUILD_ANDROID_JNI_LIB "Build android jni library" OFF)
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake)
 
 # -----------------------------------------------
 # Compiler options
 # -----------------------------------------------
 
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler.cmake")
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler.cmake)
 
 # -----------------------------------------------
 # Directories
@@ -131,13 +115,13 @@ SET(FILLWAVE_SOURCES
 # External libraries
 # -----------------------------------------------
 
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/external.cmake")
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/external.cmake)
 
 # -----------------------------------------------
 # Packaging
 # -----------------------------------------------
 
-include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/package.cmake")
+include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/package.cmake)
 
 # -----------------------------------------------
 # Platform
@@ -164,7 +148,7 @@ IF(APPLE)
 ENDIF(APPLE)
 
 IF(WIN32)
-   include("cmake/platform/Windows.cmake")
+   include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Windows.cmake)
 ENDIF(WIN32)
 
 CONFIGURE_FILE(

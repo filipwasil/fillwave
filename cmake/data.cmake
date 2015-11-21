@@ -1,3 +1,4 @@
+
 macro(COPY_ASSETS target)
 set(ASSETS_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/examples/assets/")
 
