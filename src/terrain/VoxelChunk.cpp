@@ -461,7 +461,7 @@ void VoxelChunk::draw(space::Camera& camera) {
 
 	mProgram->use();
 
-	core::Uniform::push(mUniformLocationCacheModelMatrix, mTransformation);
+	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
 	core::Uniform::push(mUniformLocationCacheCameraPosition,
 			camera.getTranslation());
 	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,

@@ -45,7 +45,7 @@ public:
 	template<class T>
 	void resetRefreshLight(std::vector<T>& data) {
 		for (auto it : data) {
-			it->resetRefresh();
+			it->setRefresh(GL_FALSE);
 		}
 	}
 

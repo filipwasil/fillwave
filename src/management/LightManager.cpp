@@ -119,15 +119,15 @@ void LightManager::removeLights() {
 
 void LightManager::updateLightEntities() {
 	for (auto& it : mSpotLights) {
-		it->updateEntity();
+		it->updateFromFollowed();
 		it->updateShadowCamera();
 	}
 	for (auto& it : mDirectionalLights) {
-		it->updateEntity();
+		it->updateFromFollowed();
 		it->updateShadowCamera();
 	}
 	for (auto& it : mPointLights) {
-		it->updateEntity();
+		it->updateFromFollowed();
 		it->updateShadowCamera();
 	}
 }

@@ -15,7 +15,8 @@ Moveable::Moveable(glm::vec3 translation, glm::quat rotation)
 				mTranslation(translation),
 				mRotation(rotation),
 				mScale(1.0),
-				mRefresh(GL_TRUE) {
+				mRefresh(GL_TRUE),
+				mRefreshExternal(GL_TRUE) {
 
 }
 
@@ -143,7 +144,7 @@ void Moveable::rotateBy(const glm::vec3 &axis, GLfloat angle) {
 }
 
 void Moveable::updateMatrixCache() {
-	mModelMatrixCache = glm::translate(glm::mat4(1.0), mTranslation)
+	mMMC = glm::translate(glm::mat4(1.0), mTranslation)
 			* glm::mat4_cast(mRotation) * glm::scale(glm::mat4(1.0), mScale);
 }
 
@@ -151,8 +152,24 @@ GLboolean Moveable::isRefresh() {
 	return mRefresh;
 }
 
-void Moveable::resetRefresh() {
-	mRefresh = GL_FALSE;
+void Moveable::setRefresh(GLboolean state) {
+	mRefresh = state;
+}
+
+GLboolean Moveable::isRefreshExternal() {
+	return mRefreshExternal;
+}
+
+void Moveable::setRefreshExternal(GLboolean state) {
+	mRefreshExternal = state;
+}
+
+glm::mat4 Moveable::getParentMMC() {
+	return mParentMMC;
+}
+
+glm::quat Moveable::getParentRotation() {
+	return mParentRotation;
 }
 
 } /* models */

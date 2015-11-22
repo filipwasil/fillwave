@@ -39,20 +39,11 @@ public:
 
 	void updateShadowCamera();
 
-	void setEntity(pEntity entity);
-
-	/*! getEntity
-	 * \brief get the entity assigned to this light
-	 */
-
-	pEntity getEntity();
-
 protected:
 	pTexture3DRenderable mShadowTexture;
 	std::map<GLenum, pCameraPerspective> mFaceCameras;
 
 private:
-	pEntity mEntity;
 	models::Sphere mSphere;
 };
 

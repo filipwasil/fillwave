@@ -54,16 +54,31 @@ public:
 	void updateMatrixCache();
 
 	GLboolean isRefresh();
-	void resetRefresh();
+	void setRefresh(GLboolean state);
+
+	/* External  */
+	GLboolean isRefreshExternal();
+	void setRefreshExternal(GLboolean state);
+
+	/* Parent */
+	glm::mat4 getParentMMC();
+	glm::quat getParentRotation();
 
 protected:
 	glm::fvec3 mTranslation;
 	glm::quat mRotation;
 	glm::vec3 mScale;
-	glm::mat4 mModelMatrixCache;
+
+	/* Parent */
+	glm::quat mParentRotation;
+
+	/* MMC - Model Matrix Cache */
+	glm::mat4 mMMC;
+	glm::mat4 mParentMMC;
 
 	/* Refresh should be always set by us, but reset by the others */
 	GLboolean mRefresh;
+	GLboolean mRefreshExternal;
 };
 
 } /* models */

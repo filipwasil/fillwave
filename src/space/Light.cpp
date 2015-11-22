@@ -13,21 +13,21 @@ FLOGINIT("Light", FERROR | FFATAL)
 namespace fillwave {
 namespace space {
 
-Light::Light(glm::vec3 position, glm::vec4 intensity, pEntity entity)
-		: Moveable(position), mEntity(entity), mIntensity(intensity) {
+Light::Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed)
+		: Moveable(position), mFollowed(followed), mIntensity(intensity) {
 
 }
 
-void Light::updateEntity() {
-	if (mEntity) {
-		if (mEntity->isExternalRefresh()) {
+void Light::updateFromFollowed() {
+	if (mFollowed) {
+		if (mFollowed->isRefresh()) {
 			mTranslation = glm::vec3(
-					mEntity->getParentMatrix()
-							* glm::vec4(mEntity->getTranslation(), 1.0));
+					mFollowed->getParentMMC()
+							* glm::vec4(mFollowed->getTranslation(), 1.0));
 			mRotation = glm::normalize(
-					mEntity->getParentRotation() * mEntity->getRotation());
+					mFollowed->getParentRotation() * mFollowed->getRotation());
 			mRefresh = GL_TRUE;
-			mEntity->setExternalRefresh(GL_FALSE);
+			mFollowed->setRefreshExternal(GL_FALSE);
 		}
 	}
 }
@@ -47,16 +47,6 @@ void Light::setIntensity(glm::vec4 intensity) {
 
 glm::vec4 Light::getIntensity() {
 	return mIntensity;
-}
-
-void Light::setEntity(pEntity entity) {
-	mRefresh = GL_TRUE;
-	entity->setExternalRefresh(GL_TRUE);
-	mEntity = entity;
-}
-
-pEntity Light::getEntity() {
-	return mEntity;
 }
 
 void Light::log() {

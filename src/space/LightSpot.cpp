@@ -74,7 +74,7 @@ void LightSpot::log() {
 			d(mTranslation.y), d(mTranslation.z));
 	FLOG_INFO("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x),
 			d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
-	mEntity->log();
+	Light::log();
 }
 
 } /* space */

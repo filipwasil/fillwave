@@ -46,7 +46,7 @@ void Skybox::draw(space::Camera& camera) {
 	mProgram->use();
 
 	core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-	core::Uniform::push(mULCModelMatrixPosition, mTransformation);
+	core::Uniform::push(mULCModelMatrixPosition, mPhysicsMMC);
 	core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 	core::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
 
@@ -79,7 +79,7 @@ void Skybox::drawDR(space::Camera& camera) {
 	mProgramDR->use();
 
 	core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-	core::Uniform::push(mULCModelMatrixPosition, mTransformation);
+	core::Uniform::push(mULCModelMatrixPosition, mPhysicsMMC);
 	core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 	core::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
 
