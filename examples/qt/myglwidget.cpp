@@ -52,7 +52,7 @@ void MyGLWidget::initializeGL()
     auto camera = make_shared<CameraPerspective>(glm::vec3(0.0,0.0,6.0), glm::quat());
     auto scene = buildScenePerspective(camera);
     mEngine->setCurrentScene(scene);
-    mEngine->storeText("Fillwave big text example", "FreeSans", -0.95f, 0.2f, 200.0f);
+    mEngine->storeText("Fillwave QT widget example", "FreeSans", -0.95f, 0.2f, 50.0f);
 }
 
 void MyGLWidget::paintGL()

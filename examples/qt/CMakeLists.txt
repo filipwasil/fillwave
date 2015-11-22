@@ -1,4 +1,4 @@
-project(qt_opengl_example)
+project(fillwave_qt_example)
 cmake_minimum_required(VERSION 2.8.11)
 
 set(CMAKE_AUTOMOC ON)
