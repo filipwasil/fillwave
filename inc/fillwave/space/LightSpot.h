@@ -30,7 +30,7 @@ public:
 			glm::vec3 position,
 			glm::quat rotation,
 			glm::vec4 intensity,
-			pEntity entity = pEntity());
+			pMoveable followed = pMoveable());
 
 	virtual ~LightSpot() = default;
 

@@ -8,11 +8,10 @@
 #ifndef TIMEDCALLBACK_H_
 #define TIMEDCALLBACK_H_
 
-#include <fillwave/common/Finishable.h>
+#include <fillwave/OpenGL.h>
 #include <fillwave/actions/ItemCallback.h>
 #include <fillwave/actions/TimeEvent.h>
-#include <fillwave/actions/Callback.h>
-#include <fillwave/models/Entity.h>
+#include <fillwave/models/Moveable.h>
 
 namespace fillwave {
 

@@ -17,7 +17,7 @@ TimedMoveCallback::TimedMoveCallback(
 		glm::vec3 endPosition,
 		GLfloat lifeTime,
 		eEasing easing)
-		: TimedCallback(lifeTime, easing), mStartPosition(glm::vec3(0.0)), /*to avoid warning*/
+		: TimedCallback(lifeTime, easing), mStartPosition(glm::vec3(0.0)),
 		mEndPosition(endPosition), mMoveable(moveable) {
 
 }

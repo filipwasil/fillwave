@@ -15,10 +15,10 @@ namespace actions {
 
 class TimedMoveCallbackCustom: public fillwave::actions::TimedMoveCallback {
 public:
-   TimedMoveCallbackCustom(pEntity entity,
+   TimedMoveCallbackCustom(pMoveable moveable,
                            glm::vec3 endPosition,
                            GLfloat lifeTime);
-   virtual ~TimedMoveCallbackCustom();
+   virtual ~TimedMoveCallbackCustom() = default;
    GLfloat easeCustom(GLfloat progress);
 };
 

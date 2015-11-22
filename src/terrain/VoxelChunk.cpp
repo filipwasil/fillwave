@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/terrain/VoxelChunk.h>
-
+#include <fillwave/management/LightManager.h>
 #include <fillwave/Fillwave.h>
 
 FLOGINIT("VoxelChunk", FERROR | FFATAL)

@@ -29,7 +29,7 @@ public:
 			pTexture3DRenderable shadowTexture,
 			glm::vec3 position,
 			glm::vec4 intensity,
-			pEntity entity = pEntity());
+			pMoveable followed = pMoveable());
 
 	virtual ~LightPoint() = default;
 

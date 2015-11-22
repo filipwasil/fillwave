@@ -18,9 +18,9 @@ LightDirectional::LightDirectional(
 		glm::vec3 position,
 		glm::quat rotation,
 		glm::vec4 intensity,
-		pEntity entity)
+		pMoveable followed)
 		:
-				Light(position, intensity, entity),
+				Light(position, intensity, followed),
 				mShadowTexture(shadowTexture),
 				mShadowCamera(
 						pCameraOrthographic(

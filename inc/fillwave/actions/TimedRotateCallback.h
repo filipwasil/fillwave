@@ -9,7 +9,6 @@
 #define ROTATECALLBACK_H_
 
 #include <fillwave/actions/TimedCallback.h>
-#include <fillwave/models/Entity.h>
 
 namespace fillwave {
 namespace actions {

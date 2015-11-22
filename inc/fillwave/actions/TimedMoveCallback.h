@@ -9,7 +9,6 @@
 #define TIMEDMOVECALLBACK_H_
 
 #include <fillwave/actions/TimedCallback.h>
-#include <fillwave/models/Entity.h>
 #include <fillwave/Math.h>
 
 namespace fillwave {

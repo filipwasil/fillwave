@@ -9,7 +9,7 @@
 #define LIGHT_H_
 
 #include <fillwave/core/rendering/Texture2DRenderable.h>
-#include <fillwave/models/Entity.h>
+#include <fillwave/models/Moveable.h>
 
 namespace fillwave {
 namespace space {

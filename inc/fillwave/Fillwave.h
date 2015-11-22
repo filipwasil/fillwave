@@ -8,6 +8,28 @@
 #ifndef FILLWAVE_H_
 #define FILLWAVE_H_
 
+
+/* Callbacks */
+#include <fillwave/actions/TimedMoveCallback.h>
+#include <fillwave/actions/TimedRotateCallback.h>
+#include <fillwave/actions/TimedScaleCallback.h>
+#include <fillwave/actions/FPSCallback.h>
+#include <fillwave/actions/TimedEmiterUpdateCallback.h>
+#include <fillwave/actions/LoopCallback.h>
+#include <fillwave/actions/SequenceCallback.h>
+
+/* Events */
+#include <fillwave/actions/TimeEvent.h>
+#include <fillwave/actions/TouchEvent.h>
+#include <fillwave/actions/ScrollEvent.h>
+#include <fillwave/actions/CursorEnterEvent.h>
+#include <fillwave/actions/CursorPositionEvent.h>
+#include <fillwave/actions/CharacterEvent.h>
+#include <fillwave/actions/CharacterModsEvent.h>
+#include <fillwave/actions/CursorPositionEvent.h>
+#include <fillwave/actions/MouseButtonEvent.h>
+#include <fillwave/actions/KeyboardEvent.h>
+
 /* effects */
 #include <fillwave/effects/Fog.h>
 #include <fillwave/effects/BoostColor.h>
@@ -27,30 +49,6 @@
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
 #include <fillwave/space/LightDirectional.h>
-
-/* Events */
-#include <fillwave/actions/ItemCallback.h>
-#include <fillwave/actions/TimeEvent.h>
-#include <fillwave/actions/TouchEvent.h>
-#include <fillwave/actions/ScrollEvent.h>
-#include <fillwave/actions/CursorEnterEvent.h>
-#include <fillwave/actions/CursorPositionEvent.h>
-#include <fillwave/actions/CharacterEvent.h>
-#include <fillwave/actions/CharacterModsEvent.h>
-#include <fillwave/actions/CursorPositionEvent.h>
-#include <fillwave/actions/MouseButtonEvent.h>
-#include <fillwave/actions/KeyboardEvent.h>
-
-/* Callbacks */
-#include <fillwave/actions/FPSCallback.h>
-#include <fillwave/actions/EngineCallback.h>
-#include <fillwave/actions/TimedMoveCallback.h>
-#include <fillwave/actions/TimedRotateCallback.h>
-#include <fillwave/actions/TimedScaleCallback.h>
-#include <fillwave/actions/TimedCallback.h>
-#include <fillwave/actions/TimedEmiterUpdateCallback.h>
-#include <fillwave/actions/LoopCallback.h>
-#include <fillwave/actions/SequenceCallback.h>
 
 /* Particles */
 #include <fillwave/particles/Impostor.h>

@@ -17,9 +17,9 @@ LightPoint::LightPoint(
 		pTexture3DRenderable shadowTexture,
 		glm::vec3 position,
 		glm::vec4 intensity,
-		pEntity entity)
+		pMoveable followed)
 		:
-				Light(position, intensity, entity),
+				Light(position, intensity, followed),
 				mShadowTexture(shadowTexture),
 				mSphere(1.0, 10, 10) {
 	mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_X] = pCameraPerspective(
