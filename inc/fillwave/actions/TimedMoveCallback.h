@@ -22,23 +22,19 @@ namespace actions {
 class TimedMoveCallback: public TimedCallback {
 public:
 	TimedMoveCallback(
-			pEntity entity,
+			pMoveable moveable,
 			glm::vec3 endPosition,
 			GLfloat lifeTime,
 			eEasing easing = eEasing::None);
 
 	virtual ~TimedMoveCallback() = default;
 
-	/*	perform
-	 * \brief Performs ItemCallback action
-	 */
-
 	void performTime(TimeEventData& data);
 
 protected:
 	glm::vec3 mStartPosition;
 	glm::vec3 mEndPosition;
-	pEntity mEntity;
+	pMoveable mMoveable;
 };
 
 } /* actions */

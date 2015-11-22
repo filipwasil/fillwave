@@ -22,31 +22,24 @@ namespace actions {
 class TimedScaleCallback: public TimedCallback {
 public:
 	TimedScaleCallback(
-			pEntity entity,
+			pMoveable moveable,
 			glm::vec3 normalizedScaleVec,
 			GLfloat lifetime,
 			eEasing easing);
 	TimedScaleCallback(
-			pEntity entity,
+			pMoveable moveable,
 			GLfloat normalizedScale,
 			GLfloat lifetime,
 			eEasing easing);
 
 	virtual ~TimedScaleCallback() = default;
 
-	/*
-	 * perform
-	 *
-	 * \brief scales the entity with specified size gradient in specified time
-	 *
-	 */
-
 	void performTime(TimeEventData& data);
 
 protected:
 	glm::vec3 mStartScale;
 	glm::vec3 mEndScale;
-	pEntity mEntity;
+	pMoveable mMoveable;
 };
 
 } /* actions */

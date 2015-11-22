@@ -21,7 +21,7 @@ namespace actions {
 class TimedRotateCallback: public TimedCallback {
 public:
 	TimedRotateCallback(
-			pEntity entity,
+			pMoveable moveable,
 			glm::vec3 axis,
 			GLfloat angle,
 			GLfloat lifeTime,
@@ -29,14 +29,10 @@ public:
 
 	virtual ~TimedRotateCallback() = default;
 
-	/*	perform
-	 * \brief Performs ItemCallback action
-	 */
-
 	void performTime(TimeEventData& data);
 
 protected:
-	pEntity mEntity;
+	pMoveable mMoveable;
 
 private:
 	glm::quat mStartRotation;

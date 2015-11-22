@@ -10,6 +10,7 @@
 
 #include <fillwave/OpenGL.h>
 #include <fillwave/Math.h>
+#include <memory>
 
 namespace fillwave {
 namespace models {
@@ -66,6 +67,7 @@ protected:
 };
 
 } /* models */
+typedef std::shared_ptr<models::Moveable> pMoveable;
 } /* fillwave */
 
 #endif /* MOVEABLE_H_ */
