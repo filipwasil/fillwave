@@ -18,4 +18,4 @@ option(FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP "Build android native test app" OF
 option(FILLWAVE_BUILD_ANDROID_JNI_LIB "Build android jni library" OFF)
 
 option(FILLWAVE_BUILD_QT_EXAMPLES "Build qt example" OFF)
-option(FILLWAVE_BUILD_SDL2_EXAMPLES "Build qt example" ON)
+option(FILLWAVE_BUILD_SDL2_EXAMPLES "Build qt example" OFF)
