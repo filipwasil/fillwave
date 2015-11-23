@@ -17,6 +17,7 @@ option(FILLWAVE_SUPPRESS_WARNINGS "Suppress warnings during compilation" ON)
 option(FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP "Build android native test app" OFF)
 option(FILLWAVE_BUILD_ANDROID_JNI_LIB "Build android jni library" OFF)
 
-option(FILLWAVE_BUILD_LINUX_EXAMPLES "Build linux example" ON)
+option(FILLWAVE_BUILD_LINUX_EXAMPLES "Build linux example" OFF)
+option(FILLWAVE_BUILD_FREEGLUT_EXAMPLES "Build linux example" OFF)
 option(FILLWAVE_BUILD_QT_EXAMPLES "Build qt example" OFF)
 option(FILLWAVE_BUILD_SDL2_EXAMPLES "Build sdl2 example" OFF)

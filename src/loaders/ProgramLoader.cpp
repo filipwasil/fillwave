@@ -780,7 +780,7 @@ std::string vsDRLightDirectional = gGLVersion + gGLVSAttributesPosition +
 		"}\n";
 
 std::string fsDRLightDirectional =
-		gGLVersion + gGLLightDefinitions
+		gGLVersion + gGLFragmentPrecision + gGLLightDefinitions
 				+
 
 				"uniform int uIsAO;\n"
@@ -865,7 +865,7 @@ std::string fsDRLightDirectional =
 std::string vsDRLightPoint = gGLVersion + gGLVSAttributes + vsSimpleVertexPass;
 
 std::string fsDRLightPoint =
-		gGLVersion + gGLLightDefinitions
+		gGLVersion + gGLFragmentPrecision + gGLLightDefinitions
 				+
 
 				"uniform int uIsAO;\n"
@@ -955,7 +955,7 @@ std::string fsDRLightPoint =
 				"}\n";
 
 std::string fsDRLightSpot =
-		gGLVersion + gGLLightDefinitions
+		gGLVersion + gGLFragmentPrecision + gGLLightDefinitions
 				+
 
 				"uniform sampler2D uShadowMap;\n"

@@ -1,20 +1,9 @@
 #!/bin/sh
 
 sudo apt-get remove libfillwave* -y
-sudo apt-get remove fillwave-examples -y
 
-# Prepare build directories
-# ../../fillwave_build
-# ../../fillwave-examples_build
-
-rm -rf ../../fillwave_build/*
-rm -rf ../../fillwave-examples_build/*
-if [ $? -eq 0 ]; then
-    echo build directory cleared
-else
-    mkdir ../../fillwave_build
-fi
-rm -rf ../../fillwave_build/*
+mkdir ../../fillwave_gles_build
+rm -rf ../../fillwave_gles_build/*
 
 # Remove external libraries content - we will build using system libraries
 # rm -rf ../ext/glew/*
@@ -22,14 +11,14 @@ rm -rf ../../fillwave_build/*
 # rm -rf ../ext/glm/*
 # rm -rf ../ext/glfw/*
 
-cd ../../fillwave_build
+cd ../../fillwave_gles_build
 
 # Build library DEB
-cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DFILLWAVE_BUILD_LINUX_EXAMPLES=OFF -DFILLWAVE_COMPILATION_PC_GLES=ON -DFILLWAVE_SUPPRESS_WARNINGS=OFF -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=OFF  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
+cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DFILLWAVE_BUILD_FREEGLUT_EXAMPLES=ON -DFILLWAVE_COMPILATION_PC_GLES=ON -DFILLWAVE_SUPPRESS_WARNINGS=OFF -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=OFF  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 sudo dpkg -i ./libfillwave-*-Linux.deb
 
 # Build dev DEB
-cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DFILLWAVE_BUILD_LINUX_EXAMPLES=OFF -DFILLWAVE_COMPILATION_PC_GLES=ON -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=ON  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
+cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DFILLWAVE_COMPILATION_PC_GLES=ON -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=ON  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 
 # Install DEBs
 sudo dpkg -i ./libfillwave-dev-*-Linux.deb
@@ -41,7 +30,7 @@ cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DFILLWAVE_BUIL
 cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DFILLWAVE_BUILD_LINUX_EXAMPLES=OFF -DFILLWAVE_COMPILATION_PC_GLES=ON -DFILLWAVE_BUILD_RPM=ON -DFILLWAVE_BUILD_DEB=OFF -DFILLWAVE_BUILD_DEV=ON  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 
 # Enter library build directory
-cd ../fillwave_build
+cd ../fillwave_gles_build
 
 # Clear temporary cpack archives
 rm -rf ./_CPack_Packages/*
