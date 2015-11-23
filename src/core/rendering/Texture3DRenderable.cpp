@@ -77,11 +77,11 @@ void Texture3DRenderable::setAttachment(GLenum attachment) {
 void Texture3DRenderable::setAttachmentFace(GLenum face, GLenum attachment) {
 	mShadowTexture->attachTexture2DDraw(attachment, face, getHandle());
 	FLOG_CHECK("Setting Face framebuffer failed");
-#ifndef __ANDROID__
-	glDrawBuffer(attachment);
-#else
+#ifdef FILLWAVE_GLES_3_0
 	GLenum target = attachment;
 	glDrawBuffers(1,&target);
+#else
+	glDrawBuffer(attachment);
 #endif
 }
 

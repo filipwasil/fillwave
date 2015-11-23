@@ -29,7 +29,7 @@ void TimedCallback::performTime(TimeEventData&) {
 
 GLfloat TimedCallback::ease(GLfloat progress) {
 	switch (mEasing) {
-		case eEasing::eLinear:
+		case eEasing::eNone:
 			return progress;
 
 		case eEasing::eSineIn:

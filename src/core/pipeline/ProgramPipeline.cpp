@@ -5,10 +5,11 @@
  *      Author: filip
  */
 
-#ifndef __ANDROID__
-
 #include <fillwave/core/pipeline/ProgramPipeline.h>
 #include <fillwave/extras/Log.h>
+
+#ifdef FILLWAVE_GLES_3_0
+#else
 
 namespace fillwave {
 namespace core {
@@ -33,4 +34,4 @@ void ProgramPipeline::use(GLuint programHandle, GLuint id) const {
 } /* core */
 } /* fillwave  */
 
-#endif /* __ANDROID__ */
+#endif /* FILLWAVE_GLES_3_0 */

@@ -1,0 +1,7 @@
+http://freeglut.sourceforge.net/docs/gles.php
+
+apt-get install libgles1-mesa-dev libgles2-mesa-dev
+mkdir freeglut_gles/ && cd freeglut_gles/
+cmake ../freeglut-3.0.0 -DCMAKE_BUILD_TYPE=Debug -DFREEGLUT_GLES=ON -DFREEGLUT_BUILD_DEMOS=NO
+make
+make install

@@ -20,6 +20,8 @@
 #include <fillwave/OpenGL.h>
 #include <memory>
 
+namespace fillwave {
+
 struct Font {
    std::string mName;
    GLfloat mOffsets[256];
@@ -30,6 +32,9 @@ struct Font {
 
 typedef std::shared_ptr<Font> pFont;
 typedef std::unique_ptr<Font> puFont;
+
+}
+
 
 int generateFontMetadata (const char* ttfFilePath,
                           const char* outputPNG,

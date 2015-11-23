@@ -76,7 +76,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 			"LightPoint uSpotLights[MAX_SPOT_LIGHTS + MAX_DIRECTIONAL_LIGHTS];\n"
 			"};\n\n";
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	std::string lightSamplerUniforms =
 
 	"uniform lowp sampler2DShadow uShadowMap0;\n"
@@ -130,7 +130,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 
 	std::string functions =
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 
 			"float clamp_to_border_factor (vec2 coords, bool clamp_to_border) {\n"
 			"   bvec2 out1 = greaterThan (coords, vec2 (1,1));\n"
@@ -222,7 +222,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 					"   vec4 diffuseSum;\n"
 					"   vec4 colorDiffuse;\n"
 					"   vec3 toLightDirection;\n"
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 			"   vec4 texelDiffuse = uLightDiffuseIntensity * texture(uDiffuseTextureUnit, vTextureCoordinate);\n"
 			"   vec3 texelNormal = texture(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
 			"   vec4 texelSpecular = uLightSpecularIntensity * texture(uSpecularTextureUnit, vTextureCoordinate) * 255.0;\n"
@@ -275,7 +275,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 			"      shadowFactor = 0.0;\n\n"
 			"      /* ---------- SPOT LIGHTS ----------*/\n"
 			"      for (int i = 0; i < realNumberOfSpotLights; i++) {\n"
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 			"         switch (i) {\n"
 			"            case 0:\n"
 			"               toLightDirection = uSpotLights[0].position.xyz - vVertexWorldSpace.xyz;\n"
@@ -388,7 +388,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 			"         specularSum += (shadowFactor * shadowFactor * shadowFactor * intensity * specular);\n"
 			"      }\n"
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 			"      /* POINT LIGHTS - concept\n"
 			"      1) Right vector to read a cubemap is vWorldVertexPosition.xyz - uLightPosition\n"
 			"      2) Shader factory is necessary here.\n"

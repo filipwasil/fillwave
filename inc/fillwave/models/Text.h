@@ -23,7 +23,7 @@ namespace fillwave {
 class Engine;
 
 enum class eTextEffect {
-	none, bold
+	eNone, eBold
 };
 
 namespace models {

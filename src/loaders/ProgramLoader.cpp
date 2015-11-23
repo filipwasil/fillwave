@@ -24,7 +24,7 @@ namespace loader {
 
 /* Headers */
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 const std::string gGLVersion = "#version 300 es\n";
 const std::string gGLFragmentPrecision = "precision lowp float;\n";
 const std::string gGLVertexPrecision = "precision mediump float;\n";
@@ -715,7 +715,7 @@ const std::string fsDR =
 						"uniform sampler2D uSpecularTextureUnit;\n"
 
 						"void main() {\n"
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 				"   vec3 texelNormal = texture(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
 #else
 				"   vec3 texelNormal = texture2D(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
@@ -741,7 +741,7 @@ const std::string fsDR =
 
 				"   fWorldPosition = vVertexWorldSpace.xyz;\n"
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 				"   fDiffuseTexel = texture(uDiffuseTextureUnit, vTextureCoordinate).xyz + vColor.xyz;\n"
 				"   fSpecularTexel = texture(uSpecularTextureUnit, vTextureCoordinate).rrr * 255.0;\n"
 #else
@@ -846,7 +846,7 @@ std::string fsDRLightDirectional =
 
 						"void main() {\n"
 						"    vec2 TexCoord = CalcTexCoord();\n"
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 				"   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
 				"   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
 				"   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
@@ -938,7 +938,7 @@ std::string fsDRLightPoint =
 
 						"void main() {\n"
 						"    vec2 TexCoord = CalcTexCoord();\n"
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 				"   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
 				"   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
 				"   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
@@ -1048,7 +1048,7 @@ std::string fsDRLightSpot =
 
 						"void main() {\n"
 						"    vec2 TexCoord = CalcTexCoord();\n"
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 				"   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
 				"   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
 				"   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
@@ -1074,7 +1074,7 @@ std::string fsDRDepthless = gGLVersion
 				"out vec4 fColor;\n"
 				"void main() {\n"
 				"   vec2 TexCoord = CalcTexCoord();\n"
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 		"   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
 		"   vec3 code = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
 #else
@@ -1099,7 +1099,7 @@ std::string fsDRAmbient = gGLVersion
 				"uniform vec3 uAmbient;"
 				"void main() {\n"
 				"   vec2 TexCoord = CalcTexCoord();\n"
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 		"   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
 #else
 		"   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
@@ -1126,7 +1126,7 @@ const std::string fsAOColor =
 						"uniform vec3 uRandomVectors[FILLWAVE_RANDOM_VECTORS_SIZE];\n"
 
 						"void main() {\n"
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 				"   vec3 texelPosition = texture(uPositionMap, vTextureCoordinate).xyz;\n"
 #else
 				"   vec3 texelPosition = texture2D(uPositionMap, vTextureCoordinate).xyz;\n"
@@ -1141,7 +1141,7 @@ const std::string fsAOColor =
 				"      offset.xy /= offset.w;\n"
 				"      offset.xy = offset.xy * 0.5 + vec2(0.5);\n"
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 				"      float sampleDepth = texture(uPositionMap, offset.xy).b;\n"
 #else
 				"      float sampleDepth = texture2D(uPositionMap, offset.xy).b;\n"
@@ -1174,7 +1174,7 @@ const std::string fsStartup =
 
 						"   vec2 coordinates = vec2((vPosition.x*(uScreenFactor) + 1.0) /2.0, (vPosition.y*(uScreenFactor)+1.0)/2.0);\n"
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 				"   vec4 texel = texture(uPostProcessingSampler, coordinates);\n"
 #else
 				"   vec4 texel = texture2D(uPostProcessingSampler, coordinates);\n"
@@ -1447,7 +1447,7 @@ pProgram ProgramLoader::getAmbientOcclusionColor(Engine* engine) {
 }
 
 inline pProgram ProgramLoader::getDefaultDR(Engine* engine) {
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGLES,
 			eShaderLoaderPrecision::defaultp,
 			eShaderLoaderPrecision::lowp);
@@ -1463,7 +1463,7 @@ inline pProgram ProgramLoader::getDefaultDR(Engine* engine) {
 }
 
 inline pProgram ProgramLoader::getDefaultFR(Engine* engine) {
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::OpenGLES,
 			eShaderLoaderPrecision::defaultp,
 			eShaderLoaderPrecision::defaultp);
@@ -1498,7 +1498,7 @@ pProgram ProgramLoader::getDefault(Engine* engine) {
 }
 
 pProgram ProgramLoader::getDefaultBonesDR(Engine* engine) {
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGLES,
 			eShaderLoaderPrecision::defaultp,
 			eShaderLoaderPrecision::defaultp,
@@ -1517,7 +1517,7 @@ pProgram ProgramLoader::getDefaultBonesDR(Engine* engine) {
 }
 
 pProgram ProgramLoader::getDefaultBonesFR(Engine* engine) {
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::OpenGLES,
 			eShaderLoaderPrecision::defaultp,
 			eShaderLoaderPrecision::defaultp);

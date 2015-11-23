@@ -19,7 +19,7 @@ namespace actions {
 
 struct ScrollEventData {
 	double mOffsetX, mOffsetY;
-	const eEventType type = eEventType::scroll;
+	const eEventType type = eEventType::eScroll;
 };
 
 /*! \struct ScrollEvent

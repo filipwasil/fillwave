@@ -65,8 +65,9 @@ public:
 
 	void reload();
 
-	/* Feature not available in OpenGL ES  <= 3.0 */
-#ifndef __ANDROID__
+	/* Feature not available in OpenGL ES  < 3.1 */
+#ifdef FILLWAVE_GLES_3_0
+#else
 	GLvoid* map(GLenum access) const;
 #endif
 

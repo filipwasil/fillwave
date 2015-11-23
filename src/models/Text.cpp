@@ -179,10 +179,10 @@ inline void Text::createProgram() {
 	loader::ProgramLoader loader;
 
 	switch (mEffect) {
-		case eTextEffect::none:
+		case eTextEffect::eNone:
 			mProgram = loader.getText(mEngine);
 			return;
-		case eTextEffect::bold:
+		case eTextEffect::eBold:
 			mProgram = loader.getTextBold(mEngine);
 			return;
 	}

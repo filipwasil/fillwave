@@ -9,7 +9,7 @@
 #include <fillwave/extras/Log.h>
 #include <memory>
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 
 FLOGINIT("ConditionalRender", FERROR | FFATAL)

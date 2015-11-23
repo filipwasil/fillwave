@@ -134,7 +134,7 @@ public:
 			const std::string& shaderPath,
 			const std::string& shaderSource);
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 	pShader storeShaderGeometry(const std::string& shaderPath);
 	pShader storeShaderTesselationControl(const std::string& shaderPath);

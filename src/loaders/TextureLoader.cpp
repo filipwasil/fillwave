@@ -103,7 +103,7 @@ core::Texture2DFile* TextureLoader::load(
 			file->mConfig.mMipmaps = GL_TRUE;
 			file->mConfig.mMipmapsLevel = 0;
 
-			if (compression == eCompression::fwNone) {
+			if (compression == eCompression::eNone) {
 				file->mConfig.mCompression = GL_FALSE;
 				file->mHeader.mInternalFormat = format;
 			} else {
@@ -341,7 +341,7 @@ inline GLint TextureLoader::getBytesPerPixel(GLenum format) {
 }
 
 inline GLenum TextureLoader::getComporession(eCompression compression) {
-#if defined (__ANDROID__)
+#ifdef FILLWAVE_GLES_3_0
 	(void)compression;
 #else
 	switch (compression) {
@@ -383,7 +383,7 @@ inline GLenum TextureLoader::getComporession(eCompression compression) {
 		case eCompression::eRgtc1_r:
 			return GL_COMPRESSED_RED_RGTC1_EXT;
 			break;
-		case eCompression::rgtc1_r_signed:
+		case eCompression::eRgtc1_r_signed:
 			return GL_COMPRESSED_SIGNED_RED_RGTC1_EXT;
 			break;
 		case eCompression::eRgtc1_rg:
@@ -408,7 +408,7 @@ inline GLenum TextureLoader::getComporession(eCompression compression) {
 		default:
 			break;
 	}
-#endif /* __ANDROID__ */
+#endif /* FILLWAVE_GLES_3_0 */
 	return GL_NONE;
 }
 

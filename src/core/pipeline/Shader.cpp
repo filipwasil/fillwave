@@ -99,7 +99,7 @@ std::string Shader::getTypeString() {
 			return "GL_FRAGMENT_SHADER";
 		case GL_VERTEX_SHADER:
 			return "GL_VERTEX_SHADER";
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 		case GL_GEOMETRY_SHADER:
 			return "GL_GEOMETRY_SHADER";

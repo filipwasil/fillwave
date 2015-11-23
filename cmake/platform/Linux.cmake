@@ -14,7 +14,9 @@ find_package(OpenMP)
 if(OPENMP_FOUND)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-endif(OPENMP_FOUND)
+endif()
+
+# Freeglut
 
 # -----------------------------------------------
 # Package type
@@ -77,7 +79,23 @@ endif()
 # Test app
 # -----------------------------------------------
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/linux)
+if(FILLWAVE_COMPILATION_PC_GLES)
+	include(FindPkgConfig)
+	pkg_check_modules(freeglut REQUIRED freeglut-gles>=3.0.0)
+	if(freeglut_FOUND)
+		include_directories(${freeglut_STATIC_INCLUDE_DIRS})
+		link_directories(${freeglut_STATIC_LIBRARY_DIRS})
+		#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${freeglut_STATIC_CFLAGS_OTHER}")
+		add_definitions(${freeglut_STATIC_CFLAGS_OTHER})
+	endif()
+	if(FILLWAVE_BUILD_LINUX_EXAMPLES)
+		add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/freeglut-gles)
+	endif()
+else()
+	if(FILLWAVE_BUILD_LINUX_EXAMPLES)
+		add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/linux)
+	endif()
+endif()
 
 if(FILLWAVE_BUILD_QT_EXAMPLES)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/qt)

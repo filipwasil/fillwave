@@ -57,8 +57,7 @@ Mesh::Mesh(
 				mLightManager(lightManager),
 				mBoneManager(boneManager),
 				mDrawType(drawType)
-#ifdef __ANDROID__
-
+#ifdef FILLWAVE_GLES_3_0
 #else
 						,
 				mConditionalRendering(GL_QUERY_WAIT)
@@ -129,7 +128,7 @@ inline void Mesh::coreDraw() {
 
 	//xxx blinking scene
 	//xxx (OpenGL 3.3+)consider using conditional rendering this way:
-	//#ifdef __ANDROID__
+	//#ifdef FILLWAVE_GLES_3_0
 	//#else
 	//   mConditionalRendering.begin(mOcclusionQuery.getID());
 	onDraw();

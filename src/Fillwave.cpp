@@ -61,8 +61,7 @@ void Engine::draw(GLfloat time) {
 	mImpl->draw(time);
 }
 
-#ifdef __ANDROID__
-
+#ifdef FILLWAVE_GLES_3_0
 #else
 void Engine::drawLines(GLfloat time) {
 	mImpl->drawLines(time);
@@ -629,7 +628,7 @@ void Engine::pick(GLuint x, GLuint y) {
 	GL_UNSIGNED_BYTE, 0);
 
 	FLOG_CHECK("glReadPixels failed");
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
 	GLubyte* data = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -651,7 +650,7 @@ void Engine::captureFramebufferToFile(const std::string& name) {
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
 	GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
 	GLubyte* data = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -688,7 +687,7 @@ void Engine::captureFramebufferToBuffer(
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, format,
 	GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	buffer = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
 	buffer = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -713,7 +712,8 @@ GLboolean Engine::isDR() const {
 	return mImpl->mIsDR;
 }
 
-#ifndef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
+#else
 
 pShader Engine::storeShaderGeometry(const std::string& shaderPath) {
 	return mImpl->mShaderManager->add(shaderPath, GL_GEOMETRY_SHADER);

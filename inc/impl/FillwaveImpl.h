@@ -240,8 +240,7 @@ struct Engine::EngineImpl {
 
 	void draw(GLfloat time);
 
-#ifdef __ANDROID__
-
+#ifdef FILLWAVE_GLES_3_0
 #else
 	void drawLines(GLfloat time);
 
@@ -433,8 +432,7 @@ void Engine::EngineImpl::init() {
 
 	initUniformsCache();
 
-#ifdef __ANDROID__
-
+#ifdef FILLWAVE_GLES_3_0
 #else
 	initGeometryShading();
 #endif
@@ -445,7 +443,7 @@ void Engine::EngineImpl::init() {
 //   mFence = puFence(new core::Fence());
 }
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 
 inline void Engine::EngineImpl::initExtensions() {
 	glesInitExtensions();
@@ -798,7 +796,7 @@ void Engine::EngineImpl::draw(GLfloat time) {
 	}
 }
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 void Engine::EngineImpl::drawLines(GLfloat time) {
 

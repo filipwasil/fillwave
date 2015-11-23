@@ -16,6 +16,7 @@
 #include <GL/glew.h>
 #else /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
 #if (__ANDROID__)
+#define FILLWAVE_GLES_3_0
 #define GL_GLEXT_PROTOTYPES
 #include <GLES3/gl3.h>
 #include <GLES3/gl3ext.h>
@@ -27,8 +28,8 @@
 void glesInitExtensions();
 #else /* __ANDROID__ */
 #ifdef FILLWAVE_COMPILATION_PC_GLES
-#include <GLES3/gl3.h>
-#include <GLES3/gl3ext.h>
+#define FILLWAVE_GLES_3_0
+#include <GL/freeglut.h>
 #else /* FILLWAVE_COMPILATION_PC_GLES */
 #include <GL/glew.h>
 #endif /* FILLWAVE_COMPILATION_PC_GLES */
