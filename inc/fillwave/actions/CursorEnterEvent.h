@@ -19,7 +19,7 @@ namespace actions {
 
 struct CursorEnterEventData {
 	int direction;
-	const eEventType type = eEventType::cursorEnter;
+	const eEventType type = eEventType::eCursorEnter;
 };
 
 /*! \struct CursorEnterEvent

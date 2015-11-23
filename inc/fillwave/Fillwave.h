@@ -159,7 +159,7 @@ public:
 	/* Store textures */
 	pTexture storeTexture(const std::string& texturePath, const GLuint& mapType =
 	FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression compression =
-			loader::eCompression::none);
+			loader::eCompression::eNone);
 
 	pTexture2DRenderableDynamic storeTextureDynamic(
 			const std::string& fragmentShaderPath);
@@ -198,7 +198,7 @@ public:
 			GLfloat startingPositionY,
 			GLfloat scale = 1.0,
 			glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
-			eTextEffect effect = eTextEffect::none);
+			eTextEffect effect = eTextEffect::eNone);
 
 	/* Store sampler */
 	pSampler storeSO(GLint textureUnit);

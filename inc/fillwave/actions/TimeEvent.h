@@ -19,7 +19,7 @@ namespace actions {
 
 struct TimeEventData {
 	float mTimePassed;
-	const eEventType type = eEventType::time;
+	const eEventType type = eEventType::eTime;
 };
 
 /*! \class TimeEvent

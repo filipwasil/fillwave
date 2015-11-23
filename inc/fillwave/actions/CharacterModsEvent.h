@@ -20,7 +20,7 @@ namespace actions {
 struct CharacterModsEventData {
 	unsigned int character;
 	int modsifierKeys;
-	const eEventType type = eEventType::characterMods;
+	const eEventType type = eEventType::eCharacterMods;
 };
 
 /*! \struct CharacterModsEvent

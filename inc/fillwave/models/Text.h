@@ -43,7 +43,7 @@ public:
 			GLfloat scale,
 			Font* font,
 			glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
-			eTextEffect effect = eTextEffect::none);
+			eTextEffect effect = eTextEffect::eNone);
 
 	virtual ~Text() = default;
 

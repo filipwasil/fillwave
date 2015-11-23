@@ -24,7 +24,7 @@ public:
 			pMoveable moveable,
 			glm::vec3 endPosition,
 			GLfloat lifeTime,
-			eEasing easing = eEasing::None);
+			eEasing easing = eEasing::eNone);
 
 	virtual ~TimedMoveCallback() = default;
 

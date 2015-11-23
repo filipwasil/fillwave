@@ -62,7 +62,7 @@ public:
  */
 
 enum class eMemoryAllocation {
-	C, CPP, None
+	eMallock, eNew, eNone
 };
 
 /*! \class Texture2DFile
@@ -74,17 +74,17 @@ public:
 	Texture2DFileHeader mHeader;
 	Texture2DFileConfig mConfig;
 	Texture2DFileData mData;
-	eMemoryAllocation mAllocation = eMemoryAllocation::None;
+	eMemoryAllocation mAllocation = eMemoryAllocation::eNone;
 	virtual ~Texture2DFile() {
 		switch (mAllocation) {
-			case eMemoryAllocation::C:
+			case eMemoryAllocation::eMallock:
 				free(mData);
 				break;
-			case eMemoryAllocation::CPP:
+			case eMemoryAllocation::eNew:
 				delete mData;
 				mData = nullptr;
 				break;
-			case eMemoryAllocation::None:
+			case eMemoryAllocation::eNone:
 				break;
 		}
 	}

@@ -19,7 +19,7 @@ namespace actions {
 
 struct CharacterEventData {
 	unsigned int character;
-	const eEventType type = eEventType::character;
+	const eEventType type = eEventType::eCharacter;
 };
 
 /*! \struct CharacterEvent

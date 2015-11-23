@@ -14,7 +14,7 @@ namespace fillwave {
 namespace actions {
 
 TimedCallback::TimedCallback(GLfloat timeToFinish, eEasing easing)
-		: ItemCallback(eEventType::time, timeToFinish), mEasing(easing) {
+		: ItemCallback(eEventType::eTime, timeToFinish), mEasing(easing) {
 }
 
 void TimedCallback::perform(EventType* event) {
@@ -29,80 +29,80 @@ void TimedCallback::performTime(TimeEventData&) {
 
 GLfloat TimedCallback::ease(GLfloat progress) {
 	switch (mEasing) {
-		case eEasing::None:
+		case eEasing::eLinear:
 			return progress;
 
-		case eEasing::SineIn:
+		case eEasing::eSineIn:
 			return SineEaseIn(progress);
-		case eEasing::SineOut:
+		case eEasing::eSineOut:
 			return SineEaseOut(progress);
-		case eEasing::SineInOut:
+		case eEasing::eSineInOut:
 			return SineEaseInOut(progress);
 
-		case eEasing::QuadIn:
+		case eEasing::eQuadIn:
 			return QuadraticEaseIn(progress);
-		case eEasing::QuadOut:
+		case eEasing::eQuadOut:
 			return QuadraticEaseOut(progress);
-		case eEasing::QuadInOut:
+		case eEasing::eQuadInOut:
 			return QuadraticEaseInOut(progress);
 
-		case eEasing::CubicIn:
+		case eEasing::eCubicIn:
 			return CubicEaseIn(progress);
-		case eEasing::CubicOut:
+		case eEasing::eCubicOut:
 			return CubicEaseOut(progress);
-		case eEasing::CubicInOut:
+		case eEasing::eCubicInOut:
 			return CubicEaseInOut(progress);
 
-		case eEasing::QuartIn:
+		case eEasing::eQuartIn:
 			return QuarticEaseIn(progress);
-		case eEasing::QuartOut:
+		case eEasing::eQuartOut:
 			return QuarticEaseOut(progress);
-		case eEasing::QuartInOut:
+		case eEasing::eQuartInOut:
 			return QuarticEaseInOut(progress);
 
-		case eEasing::QuintIn:
+		case eEasing::eQuintIn:
 			return QuinticEaseIn(progress);
-		case eEasing::QuintOut:
+		case eEasing::eQuintOut:
 			return QuinticEaseOut(progress);
-		case eEasing::QuintInOut:
+		case eEasing::eQuintInOut:
 			return QuinticEaseInOut(progress);
 
-		case eEasing::ExpoIn:
+		case eEasing::eExpoIn:
 			return ExponentialEaseIn(progress);
-		case eEasing::ExpoOut:
+		case eEasing::eExpoOut:
 			return ExponentialEaseOut(progress);
-		case eEasing::ExpoInOut:
+		case eEasing::eExpoInOut:
 			return ExponentialEaseInOut(progress);
 
-		case eEasing::CircIn:
+		case eEasing::eCircIn:
 			return CircularEaseIn(progress);
-		case eEasing::CircOut:
+		case eEasing::eCircOut:
 			return CircularEaseOut(progress);
-		case eEasing::CircInOut:
+		case eEasing::eCircInOut:
 			return CircularEaseInOut(progress);
 
-		case eEasing::BackIn:
+		case eEasing::eBackIn:
 			return BackEaseIn(progress);
-		case eEasing::BackOut:
+		case eEasing::eBackOut:
 			return BackEaseOut(progress);
-		case eEasing::BackInOut:
+		case eEasing::eBackInOut:
 			return BackEaseInOut(progress);
 
-		case eEasing::ElasticIn:
+		case eEasing::eElasticIn:
 			return ElasticEaseIn(progress);
-		case eEasing::Elastic:
+		case eEasing::eElastic:
 			return ElasticEaseOut(progress);
-		case eEasing::ElasticInOut:
+		case eEasing::eElasticInOut:
 			return ElasticEaseInOut(progress);
 
-		case eEasing::BounceIn:
+		case eEasing::eBounceIn:
 			return BounceEaseIn(progress);
-		case eEasing::Bounce:
+		case eEasing::eBounce:
 			return BounceEaseOut(progress);
-		case eEasing::BounceInOut:
+		case eEasing::eBounceInOut:
 			return BounceEaseInOut(progress);
 
-		case eEasing::Custom:
+		case eEasing::eCustom:
 			return easeCustom(progress);
 		default:
 			return progress;

@@ -422,7 +422,7 @@ pText Engine::storeText(
 	}
 
 	pTexture t = mImpl->mTextureManager->get(fontName + ".png",
-	FILLWAVE_TEXTURE_TYPE_NONE, eCompression::none, eFlip::vertical);
+	FILLWAVE_TEXTURE_TYPE_NONE, eCompression::eNone, eFlip::eVertical);
 
 	Font* font = nullptr;
 	for (auto& it : mImpl->mFontManager) {

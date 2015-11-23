@@ -76,10 +76,10 @@ public:
 	virtual ~TextureLoader() = default;
 	core::Texture2DFile* load(
 			const std::string& filePath,
-			eFlip flip = eFlip::none,
+			eFlip flip = eFlip::eNone,
 			GLenum format = GL_RGBA,
 			std::string rootPath = "",
-			eCompression compression = eCompression::none);
+			eCompression compression = eCompression::eNone);
 
 	core::Texture2DFile* loadEmpty(
 			glm::ivec2 screenSize,
