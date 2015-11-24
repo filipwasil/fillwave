@@ -1,17 +1,22 @@
 //============================================================================
-// Name        : example_particles.cpp
+// Name        : example_normals_and_specular_map.cpp
 // Author      : Filip Wasil
 // Version     :
 // Copyright   : none
-// Description : Fillwave engine example particles
+// Description : Fillwave normals and specular map example
 //============================================================================
 
+#include <example.h>
+
+/* Audio */
+//#include <portaudio.h>
+
+/* Graphics */
+#include <CallbacksGLFW/MoveCameraCallback.h>
+#include <CallbacksGLFW/AnimationKeyboardCallback.h>
+#include <CallbacksGLFW/TimeStopCallback.h>
+#include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
-#include "../../linux/inc/CallbacksGLFW/AnimationKeyboardCallback.h"
-#include "../../linux/inc/CallbacksGLFW/MoveCameraCallback.h"
-#include "../../linux/inc/CallbacksGLFW/TimeStopCallback.h"
-#include "../../linux/inc/ContextGLFW.h"
-#include "../../linux/inc/example.h"
 
 /* Physics */
 //#include <bullet>
@@ -20,19 +25,12 @@ using namespace fillwave;
 using namespace std;
 
 Engine* gEngine;
-pScenePerspective gScene;
-pCameraPerspective gCamera;
-pTexture gTexture;
 
-#ifdef __linux__
-   void junk() {
-     int i;
-     i=pthread_getconcurrency();
-     (void)i;
-   }
-#elif _WIN32
-    // windows code goes here
-#endif
+pScenePerspective gScene;
+pSkybox gSkybox;
+pCameraPerspective gCamera;
+pEntity gEntityLight;
+pProgram gProgram;
 
 int main(int argc, char* argv[]) {
    ContextGLFW mContext;
@@ -53,14 +51,37 @@ void init() {
    gScene = buildScenePerspective();
 
    /* Camera */
-   gCamera = pCameraPerspective ( new space::CameraPerspective(glm::vec3(0.0,0.0,6.0),
+   gCamera = pCameraPerspective ( new space::CameraPerspective(glm::vec3(0.0,2.0,10.0),
                                                     glm::quat(),
                                                     glm::radians(90.0),
                                                     1.0,
                                                     0.1,
                                                     1000.0));
-   /* Textures */
-   gTexture = gEngine->storeTexture("textures/particle.png");
+
+   /* Programs */
+   loader::ProgramLoader loader;
+   gProgram = loader.getDefault(gEngine);
+
+   /* Texture */
+   pTexture3D textureCubemap = gEngine->storeTexture3D("textures/skybox/hourglass/hourglass_right.jpg",
+                                                      "textures/skybox/hourglass/hourglass_left.jpg",
+                                                      "textures/skybox/hourglass/hourglass_top.jpg",
+                                                      "",
+                                                      "textures/skybox/hourglass/hourglass_front.jpg",
+                                                      "textures/skybox/hourglass/hourglass_back.jpg");
+   /* Skybox */
+   gSkybox = buildSkybox(gEngine,
+                         textureCubemap);
+
+   /* Entities */
+   gEntityLight = buildEntity();
+
+   /* Lights */
+   pLightSpot l = gEngine->storeLightSpot(glm::vec3 (0.0,1.0,0.0),
+                                          glm::quat(),
+                                          glm::vec4 (1.0,1.0,1.0,0.0),
+                                          gEntityLight);
+   gEntityLight->rotateByX(glm::radians(-90.0));
 
    /* Engine callbacks */
    gEngine->registerKeyCallback(new actions::TimeStopCallback());
@@ -69,75 +90,37 @@ void init() {
 }
 
 void perform() {
-   /* Set current scene */
+   /* Set scene */
    gEngine->setCurrentScene(gScene);
 
-   /* Attach camera to scene */
+   /* Attach entities and entity to the scene */
+   gScene->attach(gEntityLight);
    gScene->setCamera(gCamera);
+   gScene->setSkybox(gSkybox);
 
-   /* Attach emiters to entities */
+   gEntityLight->attach(buildModel(gEngine,
+                                   gProgram,
+                                   "meshes/sphere.obj",
+                                   "255_255_255.color"));
 
-   pEmiterPoint water = pEmiterPoint (new::particles::EmiterPointCPU(gEngine,
-         0.3,
-         60000.0,
-         glm::vec4(0.1,0.1,1.0,1.0),
-         glm::vec3(0.0,0.0,0.0),
-         glm::vec3(0.0,0.0,0.0),
-         glm::vec3(0.9,0.9,0.9),
-         glm::vec3(0.0,0.0,0.0),
-         glm::vec3(0.0,0.0,0.0),
-         10.0,
-         10.0,
-         gTexture,
-         GL_SRC_ALPHA,
-         GL_ONE,
-         GL_FALSE));
-   water->moveBy(glm::vec3(0.0,-1.0,-1.0));
+   pModel wall = buildModel(gEngine,
+                            gProgram,
+                            "meshes/floor.obj",
+                            "textures/wall/stonetiles.png", /* diffuse map */
+                            "textures/wall/stonetiles_n.png", /* normals map */
+                            "textures/wall/stonetiles_s.png");/* specular map */
 
-   pEmiterPoint sand = pEmiterPoint (new::particles::EmiterPointCPU(gEngine,
-         0.3,
-         60000.0,
-         glm::vec4(1.0,1.0,0.0,1.0),
-         glm::vec3(0.0,2.0,0.0),
-         glm::vec3(0.0,0.0,0.0),
-         glm::vec3(0.9,0.9,0.9),
-         glm::vec3(0.0,0.0,0.0),
-         glm::vec3(0.0,0.0,0.0),
-         10.0,
-         10.0,
-         gTexture,
-         GL_SRC_ALPHA,
-         GL_ONE,
-         GL_FALSE));
+   gScene->attach(wall);
+   wall->moveInDirection(glm::vec3(0.0,-2.0,0.0));
+   wall->scaleTo(1.0);
 
-   pEmiterPoint snow = pEmiterPoint(new::particles::EmiterPointGPU(gEngine,
-                 0.3,
-                 600.0,
-                 glm::vec4(1.0,1.0,1.0,1.0),
-                 glm::vec3(0.0,1.0,0.0),
-                 glm::vec3(0.0,0.0,0.0),
-                 glm::vec3(0.9,0.9,0.9),
-                 glm::vec3(0.0,0.0,0.0),
-                 glm::vec3(0.6,0.6,0.6),
-                 1.0,
-                 1.0,
-                 gTexture,
-                 GL_SRC_ALPHA,
-                 GL_ONE,
-                 GL_FALSE));
-
-   gScene->attach(sand);
-   gScene->attach(water);
-   gScene->attach(snow);
-
-   /* For time updates */
-   snow->attachHierarchyCallback(new actions::TimedEmiterUpdateCallback(snow, FILLWAVE_ENDLESS));
-   water->attachHierarchyCallback(new actions::TimedEmiterUpdateCallback(water, FILLWAVE_ENDLESS));
-   sand->attachHierarchyCallback(new actions::TimedEmiterUpdateCallback(sand, FILLWAVE_ENDLESS));
+   gEntityLight->attachHierarchyCallback(new actions::TimedMoveCallback(gEntityLight, glm::vec3(4.0,0.0,0.0), 50.0));
+   gEntityLight->scaleTo(0.02);
+   gEntityLight->moveBy(glm::vec3(-2.0,4.0,0.0));
 }
 
 void showDescription() {
-   pText hint0 = gEngine->storeText("Fillwave example particles", "fonts/Titania", -0.95, 0.80, 100.0);
+   pText hint0 = gEngine->storeText("Fillwave example normal mapping", "fonts/Titania", -0.95, 0.80, 100.0);
    pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", -0.95, -0.40, 70.0);
    pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", -0.95, -0.50, 70.0);
    pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", -0.95, -0.60, 70.0);

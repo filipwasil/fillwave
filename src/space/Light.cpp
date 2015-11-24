@@ -20,7 +20,7 @@ Light::Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed)
 
 void Light::updateFromFollowed() {
 	if (mFollowed) {
-		if (mFollowed->isRefresh()) {
+		if (mFollowed->isRefreshExternal()) {
 			mTranslation = glm::vec3(
 					mFollowed->getParentMMC()
 							* glm::vec4(mFollowed->getTranslation(), 1.0));
