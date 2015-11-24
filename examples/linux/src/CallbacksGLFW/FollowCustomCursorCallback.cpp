@@ -10,7 +10,7 @@
 namespace fillwave {
 namespace actions {
 
-FollowCustomCursorCallback::FollowCustomCursorCallback():EngineCallback(eEventType::cursorPosition) {
+FollowCustomCursorCallback::FollowCustomCursorCallback():EngineCallback(eEventType::eCursorPosition) {
 
 }
 

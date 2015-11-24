@@ -73,16 +73,21 @@ void Mesh::draw(space::Camera& camera) {
 	/* Parent-children transformations */
 	updateMatrixTree();
 
-	if (mBoneManager || mOcclusionQuery.getResultAsync(1)) {
-
+#ifdef FILLWAVE_GLES_3_0
+#else
+	if (mBoneManager || mOcclusionQuery.getResultAsync(1))
+#endif
+	{
 		mProgram->use();
 
 		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
 		core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
 		core::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-		core::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
+		core::Uniform::push(mULCLightSpecularIntensity,
+				mMaterial.getSpecular());
 		core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-		core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+		core::Uniform::push(mULCViewProjectionMatrix,
+				camera.getViewProjection());
 
 		mLightManager->pushLightUniforms(mProgram.get());
 

@@ -1266,7 +1266,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 	GLint mCurentTextureUnit = 0;
 	GLint id = 0;
 	switch (mDebugger->getState()) {
-		case eDebuggerState::lightsSpot:
+		case eDebuggerState::eLightsSpot:
 			mCurentTextureUnit = 0;
 			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
 				space::CameraPerspective cameraP =
@@ -1288,7 +1288,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
 			}
 			break;
-		case eDebuggerState::lightsSpotDepth:
+		case eDebuggerState::eLightsSpotDepth:
 			mCurentTextureUnit = 0;
 			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
 				mDebugger->renderDepthPerspective(mCurentTextureUnit++);
@@ -1298,7 +1298,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
 			}
 			break;
-		case eDebuggerState::lightsSpotColor:
+		case eDebuggerState::eLightsSpotColor:
 			mCurentTextureUnit = 0;
 			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
 				space::CameraPerspective cameraP =
@@ -1312,11 +1312,11 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 				mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
 			}
 			break;
-		case eDebuggerState::lightsPoint:
+		case eDebuggerState::eLightsPoint:
 			break;
-		case eDebuggerState::lightsPointDepth: // only light 0
+		case eDebuggerState::eLightsPointDepth: // only light 0
 			break;
-		case eDebuggerState::lightsPointColor:
+		case eDebuggerState::eLightsPointColor:
 			for (GLint j = 0; j < mLightManager->getLightsPointHowMany(); j++) {
 				for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 						i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
@@ -1326,10 +1326,10 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 				}
 			}
 			break;
-		case eDebuggerState::pickingMap:
+		case eDebuggerState::ePickingMap:
 			mDebugger->renderPickingMap();
 			break;
-		case eDebuggerState::off:
+		case eDebuggerState::eOff:
 		default:
 			break;
 	}

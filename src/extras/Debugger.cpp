@@ -27,7 +27,7 @@ FLOGINIT("Debugger", FERROR | FFATAL | FINFO)
 Debugger::Debugger(Engine* engine)
 		:
 				Reloadable(engine),
-				mState(eDebuggerState::off),
+				mState(eDebuggerState::eOff),
 				mEngine(engine),
 				mVBO(pVertexBufferDebug(new core::VertexBufferDebug(1.0))),
 				mMiniwindowSize(1.0 / 6.0),
@@ -44,31 +44,31 @@ Debugger::Debugger(Engine* engine)
 }
 
 void Debugger::setState(eDebuggerState state) {
-	if (state == eDebuggerState::toggleState) {
+	if (state == eDebuggerState::eToggleState) {
 		switch (mState) {
-			case eDebuggerState::lightsSpot:
-				mState = eDebuggerState::lightsSpotDepth;
+			case eDebuggerState::eLightsSpot:
+				mState = eDebuggerState::eLightsSpotDepth;
 				break;
-			case eDebuggerState::lightsSpotDepth:
-				mState = eDebuggerState::lightsSpotColor;
+			case eDebuggerState::eLightsSpotDepth:
+				mState = eDebuggerState::eLightsSpotColor;
 				break;
-			case eDebuggerState::lightsSpotColor:
-				mState = eDebuggerState::lightsPoint;
+			case eDebuggerState::eLightsSpotColor:
+				mState = eDebuggerState::eLightsPoint;
 				break;
-			case eDebuggerState::lightsPoint:
-				mState = eDebuggerState::lightsPointDepth;
+			case eDebuggerState::eLightsPoint:
+				mState = eDebuggerState::eLightsPointDepth;
 				break;
-			case eDebuggerState::lightsPointDepth:
-				mState = eDebuggerState::lightsPointColor;
+			case eDebuggerState::eLightsPointDepth:
+				mState = eDebuggerState::eLightsPointColor;
 				break;
-			case eDebuggerState::lightsPointColor:
-				mState = eDebuggerState::pickingMap;
+			case eDebuggerState::eLightsPointColor:
+				mState = eDebuggerState::ePickingMap;
 				break;
-			case eDebuggerState::pickingMap:
-				mState = eDebuggerState::off;
+			case eDebuggerState::ePickingMap:
+				mState = eDebuggerState::eOff;
 				break;
-			case eDebuggerState::off:
-				mState = eDebuggerState::lightsSpot;
+			case eDebuggerState::eOff:
+				mState = eDebuggerState::eLightsSpot;
 				break;
 			default:
 				break;

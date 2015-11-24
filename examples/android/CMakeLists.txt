@@ -39,6 +39,6 @@ add_library(fillwave-example SHARED
 #            src/example_dynamic_texture.cpp
             )
 
-add_dependencies(fillwave-example fillwaveStatic log android EGL  OpenSLES)
-target_link_libraries(fillwave-example fillwaveStatic log android EGL  OpenSLES)
+add_dependencies(fillwave-example fillwaveStatic log android EGL  OpenSLES assimp)
+target_link_libraries(fillwave-example fillwaveStatic log android EGL  OpenSLES assimp)
 

@@ -56,10 +56,13 @@ void Shader::compile() {
 		}
 		glDeleteShader(mHandle);
 		mHandle = 0;
-		FLOG_FATAL(
-				"Shader can not bee compiled\n--------------------------------------------------\n"
-						"%s \n--------------------------------------------------\n",
-				mSource.c_str());
+		FLOG_FATAL("Shader can not bee compiled");
+		std::istringstream lines(mSource);
+		std::string line;
+		int i = 0;
+		while(std::getline(lines, line)) {
+			FLOG_ERROR("[%d] %s",i++,line.c_str());
+		}
 	}
 }
 

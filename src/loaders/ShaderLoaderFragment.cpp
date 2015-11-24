@@ -30,7 +30,7 @@ ShaderLoaderFragment::ShaderLoaderFragment(
 const std::string ShaderLoaderFragment::getSource() const {
 
 	std::string version = (
-			mVersion == eShaderLoaderOpenGLVersion::OpenGL ?
+			mVersion == eShaderLoaderOpenGLVersion::eOpenGL ?
 					"#version 330 core\n" : "#version 300 es\nprecision lowp float;");
 
 	std::string inputs =

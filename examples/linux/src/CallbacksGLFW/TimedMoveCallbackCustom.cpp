@@ -16,7 +16,7 @@ TimedMoveCallbackCustom::TimedMoveCallbackCustom(
 		pMoveable moveable,
 		glm::vec3 endPosition,
 		GLfloat lifeTime)
-		: TimedMoveCallback(moveable, endPosition, lifeTime, eEasing::Custom) {
+		: TimedMoveCallback(moveable, endPosition, lifeTime, eEasing::eCustom) {
 
 }
 

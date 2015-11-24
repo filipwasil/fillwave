@@ -26,7 +26,7 @@ const std::string ShaderLoaderVertex::getSource() const {
 
 	std::string version =
 
-	(mVersion == eShaderLoaderOpenGLVersion::OpenGL ?
+	(mVersion == eShaderLoaderOpenGLVersion::eOpenGL ?
 			"#version 330 core\n" : "#version 300 es\n\n");
 
 	std::string attributes =

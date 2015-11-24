@@ -18,7 +18,7 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 if (FILLWAVE_COMPILATION_PC_GLES)
     set(FILLWAVE_FREEGLUT freeglut-gles)
 else()
-    set(FILLWAVE_FREEGLUT freeglut-gles)
+    set(FILLWAVE_FREEGLUT freeglut)
 endif()
 
 target_link_libraries(${PROJECT_NAME}

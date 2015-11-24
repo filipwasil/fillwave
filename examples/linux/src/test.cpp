@@ -64,8 +64,8 @@ void init() {
 
    /* Engine callbacks */
    gEngine->registerKeyCallback(new actions::TimeStopCallback());
-   gEngine->registerKeyCallback(new actions::MoveCameraCallback(eEventType::key, 0.1));
-   gEngine->registerCursorPositionCallback(new actions::MoveCameraCallback(eEventType::cursorPosition, 0.1, ContextGLFW::mWindow));
+   gEngine->registerKeyCallback(new actions::MoveCameraCallback(eEventType::eKey, 0.1));
+   gEngine->registerCursorPositionCallback(new actions::MoveCameraCallback(eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
 }
 
 void perform() {

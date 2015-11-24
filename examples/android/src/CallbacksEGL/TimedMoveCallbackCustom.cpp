@@ -12,9 +12,9 @@
 namespace fillwave {
 namespace actions {
 
-TimedMoveCallbackCustom::TimedMoveCallbackCustom(pEntity entity,
+TimedMoveCallbackCustom::TimedMoveCallbackCustom(pMoveable moveable,
                                                  glm::vec3 endPosition,
-                                                 GLfloat lifeTime):TimedMoveCallback(entity, endPosition,lifeTime, eEasing::Custom) {
+                                                 GLfloat lifeTime):TimedMoveCallback(moveable, endPosition,lifeTime, eEasing::eCustom) {
 
 }
 

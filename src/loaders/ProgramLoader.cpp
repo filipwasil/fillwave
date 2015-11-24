@@ -1035,7 +1035,7 @@ std::string fsDRLightSpot =
 
 						"   Attenuation = max(1.0, Attenuation);\n"
 
-						"   Attenuation = Attenuation * 1.0 / calculateSpotShadowPCF(uLight.mvp * vec4(WorldPos, 1.0), uShadowMap);\n"
+						"   Attenuation = (Attenuation * 1.0) / (calculateSpotShadowPCF(uLight.mvp * vec4(WorldPos, 1.0), uShadowMap));\n"
 
 						"   return CalcLightInternal(uLight.base,\n"
 						"                            uLight.position-WorldPos,\n"
@@ -1082,7 +1082,7 @@ std::string fsDRDepthless = gGLVersion
 		"   float code = texture2D(uWorldPositionAttachment, TexCoord).z;\n"
 #endif
 		//fsSkyboxDR
-		"   if(code == " + gGLCodeZeroDepth + ") {\n"
+		"   if(code == vec3(1.0,1.0," + gGLCodeZeroDepth + ")) {\n"
 				"      fColor = vec4(Color, 1.0);\n"
 				"   } else {\n"
 				"      fColor = vec4(0.0, 0.0, 0.0, 0.0);\n"
@@ -1448,12 +1448,12 @@ pProgram ProgramLoader::getAmbientOcclusionColor(Engine* engine) {
 
 inline pProgram ProgramLoader::getDefaultDR(Engine* engine) {
 #ifdef FILLWAVE_GLES_3_0
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGLES,
-			eShaderLoaderPrecision::defaultp,
-			eShaderLoaderPrecision::lowp);
+	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGLES,
+			eShaderLoaderPrecision::eDefaultp,
+			eShaderLoaderPrecision::eLowp);
 #else
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGL,
-			eShaderLoaderPrecision::defaultp, eShaderLoaderPrecision::defaultp);
+	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGL,
+			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp);
 #endif
 
 	return engine->storeProgram("dr_g",
@@ -1464,19 +1464,19 @@ inline pProgram ProgramLoader::getDefaultDR(Engine* engine) {
 
 inline pProgram ProgramLoader::getDefaultFR(Engine* engine) {
 #ifdef FILLWAVE_GLES_3_0
-	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::OpenGLES,
-			eShaderLoaderPrecision::defaultp,
-			eShaderLoaderPrecision::defaultp);
+	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::eOpenGLES,
+			eShaderLoaderPrecision::eDefaultp,
+			eShaderLoaderPrecision::eDefaultp);
 
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGLES,
-			eShaderLoaderPrecision::defaultp,
-			eShaderLoaderPrecision::lowp);
+	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGLES,
+			eShaderLoaderPrecision::eDefaultp,
+			eShaderLoaderPrecision::eLowp);
 #else
-	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::OpenGL,
-			eShaderLoaderPrecision::defaultp, eShaderLoaderPrecision::defaultp);
+	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::eOpenGL,
+			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp);
 
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGL,
-			eShaderLoaderPrecision::defaultp, eShaderLoaderPrecision::defaultp);
+	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGL,
+			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp);
 #endif
 
 	return engine->storeProgram("default",
@@ -1499,14 +1499,14 @@ pProgram ProgramLoader::getDefault(Engine* engine) {
 
 pProgram ProgramLoader::getDefaultBonesDR(Engine* engine) {
 #ifdef FILLWAVE_GLES_3_0
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGLES,
-			eShaderLoaderPrecision::defaultp,
-			eShaderLoaderPrecision::defaultp,
+	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGLES,
+			eShaderLoaderPrecision::eDefaultp,
+			eShaderLoaderPrecision::eDefaultp,
 			true);
 
 #else
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGL,
-			eShaderLoaderPrecision::defaultp, eShaderLoaderPrecision::defaultp,
+	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGL,
+			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp,
 			true);
 #endif
 
@@ -1518,21 +1518,21 @@ pProgram ProgramLoader::getDefaultBonesDR(Engine* engine) {
 
 pProgram ProgramLoader::getDefaultBonesFR(Engine* engine) {
 #ifdef FILLWAVE_GLES_3_0
-	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::OpenGLES,
-			eShaderLoaderPrecision::defaultp,
-			eShaderLoaderPrecision::defaultp);
+	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::eOpenGLES,
+			eShaderLoaderPrecision::eDefaultp,
+			eShaderLoaderPrecision::eDefaultp);
 
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGLES,
-			eShaderLoaderPrecision::defaultp,
-			eShaderLoaderPrecision::defaultp,
+	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGLES,
+			eShaderLoaderPrecision::eDefaultp,
+			eShaderLoaderPrecision::eDefaultp,
 			true);
 
 #else
-	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::OpenGL,
-			eShaderLoaderPrecision::defaultp, eShaderLoaderPrecision::defaultp);
+	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::eOpenGL,
+			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp);
 
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::OpenGL,
-			eShaderLoaderPrecision::defaultp, eShaderLoaderPrecision::defaultp,
+	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGL,
+			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp,
 			true);
 #endif
 

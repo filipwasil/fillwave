@@ -19,7 +19,7 @@ namespace actions {
 
 
 CameraFPPCallback::CameraFPPCallback(glm::vec3 relativePosition,
-                                     glm::vec3 relativeLookAtPoint):EngineCallback(eEventType::key),
+                                     glm::vec3 relativeLookAtPoint):EngineCallback(eEventType::eKey),
                                            mRelativePosition(relativePosition.x,
                                                              relativePosition.y,
                                                              relativePosition.z,
