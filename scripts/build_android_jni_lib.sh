@@ -19,3 +19,5 @@ cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DASSIMP_BUILD_TESTS=OFF -DF
 
 # Crate TGZ package
 cpack
+
+cd -

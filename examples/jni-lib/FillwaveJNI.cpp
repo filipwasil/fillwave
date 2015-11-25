@@ -38,28 +38,28 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_configureDebugger
 
 	switch (configuration) {
 		case 0:
-		ptr->configureDebugger(eDebuggerState::off);
+		ptr->configureDebugger(eDebuggerState::eOff);
 		break;
 		case 1:
-		ptr->configureDebugger(eDebuggerState::lightsPointDepth);
+		ptr->configureDebugger(eDebuggerState::eLightsPointDepth);
 		break;
 		case 2:
-		ptr->configureDebugger(eDebuggerState::lightsSpot);
+		ptr->configureDebugger(eDebuggerState::eLightsSpot);
 		break;
 		case 3:
-		ptr->configureDebugger(eDebuggerState::lightsSpotColor);
+		ptr->configureDebugger(eDebuggerState::eLightsSpotColor);
 		break;
 		case 4:
-		ptr->configureDebugger(eDebuggerState::lightsSpotDepth);
+		ptr->configureDebugger(eDebuggerState::eLightsSpotDepth);
 		break;
 		case 5:
-		ptr->configureDebugger(eDebuggerState::lightsPoint);
+		ptr->configureDebugger(eDebuggerState::eLightsPoint);
 		break;
 		case 6:
-		ptr->configureDebugger(eDebuggerState::pickingMap);
+		ptr->configureDebugger(eDebuggerState::ePickingMap);
 		break;
 		default:
-		ptr->configureDebugger(eDebuggerState::toggleState);
+		ptr->configureDebugger(eDebuggerState::eToggleState);
 		break;
 	}
 }
@@ -1420,7 +1420,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_buildTestScene
 
 	Engine* e = reinterpret_cast<Engine*>(engine);
 	loader::ProgramLoader loader;
-	pModel m = pModel ( new models::Model(e, loader.getDefaultBones(e), "beast.dae"));
+	pModel m = pModel ( new models::Model(e, loader.getDefaultBones(e), "animations/beast/beast.dae"));
 
 	/* Scene */
 	pScenePerspective s = buildScenePerspective();
@@ -1433,7 +1433,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_buildTestScene
 					0.1,
 					1000.0));
 	/* Textures */
-	pTexture t = e->storeTexture("particle.png");
+	pTexture t = e->storeTexture("textures/particle.png");
 
 	/* Attach camera to scene */
 	s->setCamera(c);

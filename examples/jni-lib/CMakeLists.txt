@@ -11,4 +11,4 @@ add_library(fillwaveJNI SHARED
             FillwaveJNI.cpp
             )
 
-target_link_libraries(fillwaveJNI log android EGL fillwave)
+target_link_libraries(fillwaveJNI log android EGL fillwave assimp)

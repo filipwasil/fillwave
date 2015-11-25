@@ -86,8 +86,8 @@ public class FillwaveView extends GLSurfaceView {
 
         public void onSurfaceCreated(GL10 unused, EGLConfig config) {
         	mFillwave = new Fillwave();
-        	mEngine = mFillwave.newEngine(mRootPath);
-        	mFillwave.configureFPSCounter(mEngine, "bridgenorth", -0.95f, -0.8f, 100.0f);
+        	mEngine = mFillwave.createEngine(mRootPath);
+        	mFillwave.configureFPSCounter(mEngine, "fonts/bridgenorth", -0.95f, -0.8f, 100.0f);
         	mFillwave.buildTestScene(mEngine);
         }
     }
