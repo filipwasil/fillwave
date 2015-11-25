@@ -15,7 +15,7 @@ namespace fillwave {
 namespace actions {
 
 FPSCallback::FPSCallback(pText text)
-		: EngineCallback(eEventType::time), mText(text), mTimePassed(0.0) {
+		: EngineCallback(eEventType::eTime), mText(text), mTimePassed(0.0) {
 
 }
 

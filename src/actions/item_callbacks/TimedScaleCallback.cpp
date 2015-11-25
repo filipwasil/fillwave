@@ -12,35 +12,35 @@ namespace fillwave {
 namespace actions {
 
 TimedScaleCallback::TimedScaleCallback(
-		pEntity entity,
+		pMoveable moveable,
 		glm::vec3 normalizedScaleVec,
 		GLfloat lifetime,
 		eEasing easing)
 		:
 				TimedCallback(lifetime, easing),
 				mEndScale(normalizedScaleVec),
-				mEntity(entity) {
+				mMoveable(moveable) {
 
 }
 
 TimedScaleCallback::TimedScaleCallback(
-		pEntity entity,
+		pMoveable moveable,
 		GLfloat normalizedScale,
 		GLfloat lifetime,
 		eEasing easing)
 		:
 				TimedCallback(lifetime, easing),
 				mEndScale(normalizedScale, normalizedScale, normalizedScale),
-				mEntity(entity) {
+				mMoveable(moveable) {
 
 }
 
 void TimedScaleCallback::performTime(TimeEventData& data) {
 	if (getPercentageDone() == 0.0f) {
-		mStartScale = mEntity->getScale();
+		mStartScale = mMoveable->getScale();
 	}
 	mTimePassed += data.mTimePassed;
-	mEntity->scaleTo(
+	mMoveable->scaleTo(
 			mStartScale + ease(getPercentageDone()) * (mEndScale - mStartScale));
 }
 

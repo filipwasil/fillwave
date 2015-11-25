@@ -13,21 +13,21 @@ namespace fillwave {
 namespace actions {
 
 TimedMoveCallback::TimedMoveCallback(
-		pEntity entity,
+		pMoveable moveable,
 		glm::vec3 endPosition,
 		GLfloat lifeTime,
 		eEasing easing)
-		: TimedCallback(lifeTime, easing), mStartPosition(glm::vec3(0.0)), /*to avoid warning*/
-		mEndPosition(endPosition), mEntity(entity) {
+		: TimedCallback(lifeTime, easing), mStartPosition(glm::vec3(0.0)),
+		mEndPosition(endPosition), mMoveable(moveable) {
 
 }
 
 void TimedMoveCallback::performTime(TimeEventData& data) {
 	if (getPercentageDone() == 0.0f) {
-		mStartPosition = mEntity->getTranslation();
+		mStartPosition = mMoveable->getTranslation();
 	}
 	mTimePassed += data.mTimePassed;
-	mEntity->moveTo(mStartPosition + ease(getPercentageDone()) * mEndPosition);
+	mMoveable->moveTo(mStartPosition + ease(getPercentageDone()) * mEndPosition);
 }
 
 } /* actions */

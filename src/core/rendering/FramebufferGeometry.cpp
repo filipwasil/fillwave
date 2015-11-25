@@ -74,10 +74,10 @@ void FramebufferGeometry::bindAttachments() {
 void FramebufferGeometry::setAttachments() {
 	//startFrame
 	bindForWriting();
-#ifndef __ANDROID__
-	glDrawBuffer(mSummaryBuffer);
-#else
+#ifdef FILLWAVE_GLES_3_0
 	glDrawBuffers(1,&mSummaryBuffer);
+#else
+	glDrawBuffer(mSummaryBuffer);
 #endif
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -86,10 +86,10 @@ void FramebufferGeometry::setAttachments() {
 }
 
 void FramebufferGeometry::setAttachmentStencilDepth() {
-#ifndef __ANDROID__
-	glDrawBuffer(GL_NONE);
-#else
+#ifdef FILLWAVE_GLES_3_0
 	glDrawBuffers(1,&mNone);
+#else
+	glDrawBuffer(GL_NONE);
 #endif
 }
 
@@ -100,10 +100,10 @@ void FramebufferGeometry::setAttachmentSummaryForReading() {
 }
 
 void FramebufferGeometry::setAttachmentSummaryForWriting() {
-#ifndef __ANDROID__
-	glDrawBuffer(mSummaryBuffer);
-#else
+#ifdef FILLWAVE_GLES_3_0
 	glDrawBuffers(1,&mSummaryBuffer);
+#else
+	glDrawBuffer(mSummaryBuffer);
 #endif
 }
 

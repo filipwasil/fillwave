@@ -13,9 +13,9 @@
 namespace fillwave {
 namespace actions {
 
-class TimedMoveCallbackCustom: public fillwave::actions::TimedMoveCallback {
+class TimedMoveCallbackCustom: public TimedMoveCallback {
 public:
-   TimedMoveCallbackCustom(pEntity entity,
+   TimedMoveCallbackCustom(pMoveable moveable,
                            glm::vec3 endPosition,
                            GLfloat lifeTime);
    virtual ~TimedMoveCallbackCustom();

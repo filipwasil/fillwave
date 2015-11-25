@@ -8,6 +8,28 @@
 #ifndef FILLWAVE_H_
 #define FILLWAVE_H_
 
+
+/* Callbacks */
+#include <fillwave/actions/TimedMoveCallback.h>
+#include <fillwave/actions/TimedRotateCallback.h>
+#include <fillwave/actions/TimedScaleCallback.h>
+#include <fillwave/actions/FPSCallback.h>
+#include <fillwave/actions/TimedEmiterUpdateCallback.h>
+#include <fillwave/actions/LoopCallback.h>
+#include <fillwave/actions/SequenceCallback.h>
+
+/* Events */
+#include <fillwave/actions/TimeEvent.h>
+#include <fillwave/actions/TouchEvent.h>
+#include <fillwave/actions/ScrollEvent.h>
+#include <fillwave/actions/CursorEnterEvent.h>
+#include <fillwave/actions/CursorPositionEvent.h>
+#include <fillwave/actions/CharacterEvent.h>
+#include <fillwave/actions/CharacterModsEvent.h>
+#include <fillwave/actions/CursorPositionEvent.h>
+#include <fillwave/actions/MouseButtonEvent.h>
+#include <fillwave/actions/KeyboardEvent.h>
+
 /* effects */
 #include <fillwave/effects/Fog.h>
 #include <fillwave/effects/BoostColor.h>
@@ -27,30 +49,6 @@
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
 #include <fillwave/space/LightDirectional.h>
-
-/* Events */
-#include <fillwave/actions/ItemCallback.h>
-#include <fillwave/actions/TimeEvent.h>
-#include <fillwave/actions/TouchEvent.h>
-#include <fillwave/actions/ScrollEvent.h>
-#include <fillwave/actions/CursorEnterEvent.h>
-#include <fillwave/actions/CursorPositionEvent.h>
-#include <fillwave/actions/CharacterEvent.h>
-#include <fillwave/actions/CharacterModsEvent.h>
-#include <fillwave/actions/CursorPositionEvent.h>
-#include <fillwave/actions/MouseButtonEvent.h>
-#include <fillwave/actions/KeyboardEvent.h>
-
-/* Callbacks */
-#include <fillwave/actions/FPSCallback.h>
-#include <fillwave/actions/EngineCallback.h>
-#include <fillwave/actions/TimedMoveCallback.h>
-#include <fillwave/actions/TimedRotateCallback.h>
-#include <fillwave/actions/TimedScaleCallback.h>
-#include <fillwave/actions/TimedCallback.h>
-#include <fillwave/actions/TimedEmiterUpdateCallback.h>
-#include <fillwave/actions/LoopCallback.h>
-#include <fillwave/actions/SequenceCallback.h>
 
 /* Particles */
 #include <fillwave/particles/Impostor.h>
@@ -136,7 +134,7 @@ public:
 			const std::string& shaderPath,
 			const std::string& shaderSource);
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 	pShader storeShaderGeometry(const std::string& shaderPath);
 	pShader storeShaderTesselationControl(const std::string& shaderPath);
@@ -161,7 +159,7 @@ public:
 	/* Store textures */
 	pTexture storeTexture(const std::string& texturePath, const GLuint& mapType =
 	FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression compression =
-			loader::eCompression::none);
+			loader::eCompression::eNone);
 
 	pTexture2DRenderableDynamic storeTextureDynamic(
 			const std::string& fragmentShaderPath);
@@ -200,7 +198,7 @@ public:
 			GLfloat startingPositionY,
 			GLfloat scale = 1.0,
 			glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
-			eTextEffect effect = eTextEffect::none);
+			eTextEffect effect = eTextEffect::eNone);
 
 	/* Store sampler */
 	pSampler storeSO(GLint textureUnit);

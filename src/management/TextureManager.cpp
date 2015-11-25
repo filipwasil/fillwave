@@ -21,7 +21,7 @@ TextureManager::TextureManager(const std::string& rootPath)
 }
 
 inline void TextureManager::checkExtensions() {
-#if __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 	int NumberOfExtensions;
 	glGetIntegerv(GL_NUM_EXTENSIONS, &NumberOfExtensions);
@@ -173,17 +173,17 @@ void TextureManager::add(
 
 	FLOG_DEBUG("Texture %s will be added to manager", name.c_str());
 
-	core::Texture2DFile* filePosX = mLoader->load(posX, eFlip::none,
+	core::Texture2DFile* filePosX = mLoader->load(posX, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* fileNegX = mLoader->load(negX, eFlip::none,
+	core::Texture2DFile* fileNegX = mLoader->load(negX, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* filePosY = mLoader->load(posY, eFlip::none,
+	core::Texture2DFile* filePosY = mLoader->load(posY, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* fileNegY = mLoader->load(negY, eFlip::none,
+	core::Texture2DFile* fileNegY = mLoader->load(negY, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* filePosZ = mLoader->load(posZ, eFlip::none,
+	core::Texture2DFile* filePosZ = mLoader->load(posZ, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* fileNegZ = mLoader->load(negZ, eFlip::none,
+	core::Texture2DFile* fileNegZ = mLoader->load(negZ, eFlip::eNone,
 	GL_RGBA, mRootPath);
 
 	if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {
@@ -334,7 +334,7 @@ pTexture2DRenderable TextureManager::getShadow2D(GLuint width, GLuint height) {
 	file->mConfig.mMipmaps = GL_FALSE;
 	file->mConfig.mCompression = GL_FALSE;
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	file->mHeader.mType = GL_UNSIGNED_INT;
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
@@ -428,7 +428,7 @@ pTexture2DRenderable TextureManager::getColor2D(GLuint width, GLuint height) {
 	file->mConfig.mBorder = 0;
 	file->mHeader.mWidth = width;
 	file->mHeader.mHeight = height;
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	file->mHeader.mType = GL_UNSIGNED_BYTE;
 #else
 	file->mHeader.mType = GL_FLOAT;
@@ -466,7 +466,7 @@ pTexture2D TextureManager::getDeferredColor(
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	colorTextureHeader.mFormat = GL_RGBA;
 	colorTextureHeader.mInternalFormat = GL_RGBA;
 	colorTextureHeader.mType = GL_UNSIGNED_BYTE;
@@ -505,7 +505,7 @@ pTexture2D TextureManager::getDeferredColorScreen(
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	colorTextureHeader.mFormat = GL_RGB;
 	colorTextureHeader.mInternalFormat = GL_RGBA;
 	colorTextureHeader.mType = GL_UNSIGNED_BYTE;
@@ -545,7 +545,7 @@ pTexture2D TextureManager::getDeferredDepth(GLuint width, GLuint height) {
 	depthTextureHeader.mWidth = width;
 	depthTextureHeader.mHeight = height;
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	depthTextureHeader.mType = GL_UNSIGNED_INT;
 #else
 	depthTextureHeader.mType = GL_FLOAT;

@@ -106,7 +106,7 @@ void EmiterPointGPU::draw(space::Camera& camera) {
 	mProgramEmiter->use();
 
 	core::Uniform::push(mULCTimeEmiter, mTimeDeltaEmiter);
-	core::Uniform::push(mULCModelMatrixEmiter, mTransformation);
+	core::Uniform::push(mULCModelMatrixEmiter, mPhysicsMMC);
 	core::Uniform::push(mULCCameraPositionEmiter, mCameraPosition);
 	core::Uniform::push(mULCHowManyEmiter, mHowMany);
 	core::Uniform::push(mULCEmissionRateEmiter, mEmmisingSourceRate);
@@ -152,7 +152,7 @@ void EmiterPointGPU::draw(space::Camera& camera) {
 
 	mProgram->use();
 
-	core::Uniform::push(mULCModelMatrix, mTransformation);
+	core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
 	core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 	core::Uniform::push(mULCCameraPosition, mCameraPosition);
 	core::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);

@@ -13,7 +13,7 @@
 namespace fillwave {
 namespace actions {
 
-CameraMotionCallback::CameraMotionCallback():EngineCallback(eEventType::time),
+CameraMotionCallback::CameraMotionCallback():EngineCallback(eEventType::eTime),
                                              mTimePassed(0.0) {
 
 }

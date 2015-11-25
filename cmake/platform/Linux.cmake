@@ -14,7 +14,9 @@ find_package(OpenMP)
 if(OPENMP_FOUND)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-endif(OPENMP_FOUND)
+endif()
+
+# Freeglut
 
 # -----------------------------------------------
 # Package type
@@ -64,20 +66,28 @@ add_subdirectory(ext)
 
 target_link_libraries(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator freetype)
 
-if(FILLWAVE_BUILD_PACK)
-    add_dependencies(fillwave GLEW)
-    target_link_libraries(fillwave GLEW)
+if(FILLWAVE_COMPILATION_PC_GLES)
 else()
-    add_subdirectory(${FILLWAVE_EXT_GLEW_PATH})
-    add_dependencies(fillwave glew)
-    target_link_libraries(fillwave glew)
+    if(FILLWAVE_BUILD_PACK)
+        add_dependencies(fillwave GLEW)
+        target_link_libraries(fillwave GLEW)
+    else()
+        add_subdirectory(${FILLWAVE_EXT_GLEW_PATH})
+        add_dependencies(fillwave glew)
+        target_link_libraries(fillwave glew)
+    endif()
 endif()
-
 # -----------------------------------------------
 # Test app
 # -----------------------------------------------
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/linux)
+if(FILLWAVE_BUILD_FREEGLUT_EXAMPLES)
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/freeglut)
+endif()
+
+if(FILLWAVE_BUILD_LINUX_EXAMPLES)
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/linux)
+endif()
 
 if(FILLWAVE_BUILD_QT_EXAMPLES)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/qt)

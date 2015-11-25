@@ -8,38 +8,37 @@
 #ifndef TIMEDCALLBACK_H_
 #define TIMEDCALLBACK_H_
 
-#include <fillwave/common/Finishable.h>
+#include <fillwave/OpenGL.h>
 #include <fillwave/actions/ItemCallback.h>
 #include <fillwave/actions/TimeEvent.h>
-#include <fillwave/actions/Callback.h>
-#include <fillwave/models/Entity.h>
+#include <fillwave/models/Moveable.h>
 
 namespace fillwave {
 
-enum class eEasing {
-	None,
+enum class eEasing : unsigned int {
+	eNone,
 
-	SineIn, SineOut, SineInOut,
+	eSineIn, eSineOut, eSineInOut,
 
-	QuadIn, QuadOut, QuadInOut,
+	eQuadIn, eQuadOut, eQuadInOut,
 
-	CubicIn, CubicOut, CubicInOut,
+	eCubicIn, eCubicOut, eCubicInOut,
 
-	QuartIn, QuartOut, QuartInOut,
+	eQuartIn, eQuartOut, eQuartInOut,
 
-	QuintIn, QuintOut, QuintInOut,
+	eQuintIn, eQuintOut, eQuintInOut,
 
-	ExpoIn, ExpoOut, ExpoInOut,
+	eExpoIn, eExpoOut, eExpoInOut,
 
-	CircIn, CircOut, CircInOut,
+	eCircIn, eCircOut, eCircInOut,
 
-	BackIn, BackOut, BackInOut,
+	eBackIn, eBackOut, eBackInOut,
 
-	ElasticIn, Elastic, ElasticInOut,
+	eElasticIn, eElastic, eElasticInOut,
 
-	BounceIn, Bounce, BounceInOut,
+	eBounceIn, eBounce, eBounceInOut,
 
-	Custom
+	eCustom
 };
 
 namespace actions {
@@ -52,7 +51,7 @@ namespace actions {
 
 class TimedCallback: public ItemCallback {
 public:
-	TimedCallback(GLfloat timeToFinish, eEasing easing = eEasing::None);
+	TimedCallback(GLfloat timeToFinish, eEasing easing = eEasing::eNone);
 
 	virtual ~TimedCallback() = default;
 

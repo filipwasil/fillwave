@@ -14,11 +14,11 @@ namespace fillwave {
 namespace loader {
 
 enum class eShaderLoaderOpenGLVersion {
-	OpenGL, OpenGLES
+	eOpenGL, eOpenGLES
 };
 
 enum class eShaderLoaderPrecision {
-	defaultp, highp, mediump, lowp
+	eDefaultp, eHighp, eMediump, eLowp
 };
 
 /*! \class ShaderLoader

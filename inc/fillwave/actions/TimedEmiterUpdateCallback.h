@@ -23,7 +23,7 @@ public:
 	TimedEmiterUpdateCallback(
 			pEmiterPoint emiter,
 			GLfloat timeToFinish,
-			eEasing easing = eEasing::None);
+			eEasing easing = eEasing::eNone);
 
 	virtual ~TimedEmiterUpdateCallback() = default;
 

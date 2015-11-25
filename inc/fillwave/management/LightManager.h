@@ -45,7 +45,7 @@ public:
 	template<class T>
 	void resetRefreshLight(std::vector<T>& data) {
 		for (auto it : data) {
-			it->resetRefresh();
+			it->setRefresh(GL_FALSE);
 		}
 	}
 
@@ -54,20 +54,20 @@ public:
 			glm::vec3 position,
 			glm::quat rotation,
 			glm::vec4 color,
-			pEntity entity = pEntity());
+			pMoveable followed = pMoveable());
 
 	pLightPoint addLightPoint(
 			pTexture3DRenderable shadowTexture,
 			glm::vec3 position,
 			glm::vec4 intensity,
-			pEntity entity);
+			pMoveable followed = pMoveable());
 
 	pLightDirectional addLightDirectional(
 			pTexture2DRenderable shadowTexture,
 			glm::vec3 position,
 			glm::quat rotation,
 			glm::vec4 color,
-			pEntity entity = pEntity());
+			pMoveable followed = pMoveable());
 
 	void removeLight(pLightSpot light);
 	void removeLight(pLightDirectional light);

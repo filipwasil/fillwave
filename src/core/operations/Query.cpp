@@ -91,7 +91,8 @@ void Query<target>::log() {
 
 template class Query<GL_ANY_SAMPLES_PASSED> ;
 template class Query<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN> ;
-#ifdef __ANDROID__
+
+#ifdef FILLWAVE_GLES_3_0
 #else
 template class Query<GL_SAMPLES_PASSED> ;
 template class Query<GL_PRIMITIVES_GENERATED> ;

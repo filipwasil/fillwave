@@ -29,7 +29,7 @@ public:
 			pTexture3DRenderable shadowTexture,
 			glm::vec3 position,
 			glm::vec4 intensity,
-			pEntity entity = pEntity());
+			pMoveable followed = pMoveable());
 
 	virtual ~LightPoint() = default;
 
@@ -39,20 +39,11 @@ public:
 
 	void updateShadowCamera();
 
-	void setEntity(pEntity entity);
-
-	/*! getEntity
-	 * \brief get the entity assigned to this light
-	 */
-
-	pEntity getEntity();
-
 protected:
 	pTexture3DRenderable mShadowTexture;
 	std::map<GLenum, pCameraPerspective> mFaceCameras;
 
 private:
-	pEntity mEntity;
 	models::Sphere mSphere;
 };
 

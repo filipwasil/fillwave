@@ -20,7 +20,7 @@ namespace actions {
 struct CursorPositionEventData {
 	double xPosition;
 	double yPosition;
-	const eEventType type = eEventType::cursorPosition;
+	const eEventType type = eEventType::eCursorPosition;
 };
 
 /*! \struct CursorPositionEvent

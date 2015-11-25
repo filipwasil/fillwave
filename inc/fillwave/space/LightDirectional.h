@@ -37,7 +37,7 @@ public:
 			glm::vec3 position,
 			glm::quat rotation,
 			glm::vec4 intensity,
-			pEntity entity);
+			pMoveable followed);
 	virtual ~LightDirectional() = default;
 
 	pTexture2DRenderable getShadowTexture();

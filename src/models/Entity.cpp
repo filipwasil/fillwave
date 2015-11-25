@@ -23,7 +23,6 @@ Entity::Entity(glm::vec3 translation, glm::quat rotation)
 				mParentRefresh(GL_TRUE),
 				mPSC(GL_TRUE),
 				mPSR(GL_TRUE),
-				mRefreshExternal(GL_TRUE),
 				mPickable(GL_FALSE) {
 
 }
@@ -123,9 +122,9 @@ void Entity::updateMatrixTree() {
 	}
 
 	if (mParentRefresh) {
-		mTransformation = mParentMatrix * mModelMatrixCache;
+		mPhysicsMMC = mParentMMC * mMMC;
 		for (auto& it : mChildren) {
-			it->updateParentMatrix(mTransformation);
+			it->updateParentMatrix(mPhysicsMMC);
 		}
 		mRefreshExternal = GL_TRUE;
 		mParentRefresh = GL_FALSE;
@@ -145,29 +144,21 @@ void Entity::handlePrivateEvent(actions::EventType* event) {
 }
 
 void Entity::setTransformation(glm::mat4 modelMatrix) {
-	mModelMatrixCache = modelMatrix;
-	mTransformation = mParentMatrix * mModelMatrixCache;
+	mMMC = modelMatrix;
+	mPhysicsMMC = mParentMMC * mMMC;
 	for (auto& it : mChildren) {
-		it->updateParentMatrix(mTransformation);
+		it->updateParentMatrix(mPhysicsMMC);
 	}
 	mRefreshExternal = GL_TRUE;
 }
 
-glm::mat4 Entity::getTransformation() {
-	return mTransformation;
-}
-
-glm::mat4 Entity::getParentMatrix() {
-	return mParentMatrix;
-}
-
-glm::quat Entity::getParentRotation() {
-	return mParentRotation;
+glm::mat4 Entity::getPhysicsMMC() {
+	return mPhysicsMMC;
 }
 
 void Entity::updateParentMatrix(glm::mat4& parent) {
-	mParentMatrix = parent;
-	mTransformation = mParentMatrix * mModelMatrixCache;
+	mParentMMC = parent;
+	mPhysicsMMC = mParentMMC * mMMC;
 	mParentRefresh = GL_TRUE;
 	mRefreshExternal = GL_TRUE;
 }
@@ -212,14 +203,6 @@ void Entity::unpick() {
 
 GLboolean Entity::isPickable() {
 	return mPickable;
-}
-
-GLboolean Entity::isExternalRefresh() {
-	return mRefreshExternal;
-}
-
-void Entity::setExternalRefresh(GLboolean state) {
-	mRefreshExternal = state;
 }
 
 GLboolean Entity::isPSC() {

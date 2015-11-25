@@ -54,7 +54,7 @@ MoveCameraCallback::MoveCameraCallback(eEventType eventType,
     * cursor should not be visible
     *
     * */
-   if (eventType == eEventType::cursorPosition && window) {
+   if (eventType == eEventType::eCursorPosition && window) {
       glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
    }
 }
@@ -64,7 +64,7 @@ MoveCameraCallback::~MoveCameraCallback() {
 }
 
 void MoveCameraCallback::perform (Engine* engine, EventType* event) {
-   if (event->getType() == eEventType::key) {
+   if (event->getType() == eEventType::eKey) {
       KeyboardEventData e = KeyboardEvent::getData(event);
       pCamera camera = engine->getCurrentScene()->getCamera();
       switch (e.key) {
@@ -76,11 +76,11 @@ void MoveCameraCallback::perform (Engine* engine, EventType* event) {
             break;
          case GLFW_KEY_D:
             if (e.action == GLFW_RELEASE) {
-               engine->configureDebugger(eDebuggerState::toggleState);
+               engine->configureDebugger(eDebuggerState::eToggleState);
             }
             break;
       }
-   } else if (event->getType() == eEventType::mouseButton) {
+   } else if (event->getType() == eEventType::eMouseButton) {
       MouseButtonEventData e = MouseButtonEvent::getData(event);
       if (e.mButton == GLFW_MOUSE_BUTTON_LEFT) {
       }
@@ -88,7 +88,7 @@ void MoveCameraCallback::perform (Engine* engine, EventType* event) {
       }
       if (e.mButton == GLFW_MOUSE_BUTTON_RIGHT) {
       }
-   } else if (event->getType() == eEventType::scroll) {
+   } else if (event->getType() == eEventType::eScroll) {
       ScrollEventData e = ScrollEvent::getData(event);
       if (e.mOffsetY < 0.0) { // scroll down
          engine->getCurrentScene()->getCamera()->moveBy(glm::vec3(0.0, 0.0, mSpeed));
@@ -97,7 +97,7 @@ void MoveCameraCallback::perform (Engine* engine, EventType* event) {
          engine->getCurrentScene()->getCamera()->moveBy(glm::vec3(0.0, 0.0, -mSpeed));
       }
       return;
-   } else if (event->getType() == eEventType::cursorPosition) {
+   } else if (event->getType() == eEventType::eCursorPosition) {
       static bool init = false;
       static int  a = 0;
 		auto d = [](double value){return static_cast<float>(value);};

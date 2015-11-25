@@ -25,17 +25,12 @@ public:
 			: mEventSupportedType(eventType) {
 
 	}
-	;
 
-	virtual ~Callback() {
-
-	}
-	;
+	virtual ~Callback() = default;
 
 	eEventType getSupportedEventType() {
 		return mEventSupportedType;
 	}
-	;
 
 private:
 	eEventType mEventSupportedType;

@@ -9,7 +9,7 @@
 #define LIGHT_H_
 
 #include <fillwave/core/rendering/Texture2DRenderable.h>
-#include <fillwave/models/Entity.h>
+#include <fillwave/models/Moveable.h>
 
 namespace fillwave {
 namespace space {
@@ -44,69 +44,21 @@ struct LightAttenuationData {
 
 class Light: public models::Moveable {
 public:
-	Light(glm::vec3 position, glm::vec4 intensity, pEntity entity = pEntity());
+	Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed = pMoveable());
 	virtual ~Light() = default;
 
-	void updateEntity();
-
-	/* getAttenuation
-	 *
-	 * \brief set the light attenuation.
-	 *
-	 */
+	void updateFromFollowed();
 
 	void setAttenuation(LightAttenuationData& attenuation);
 
-	/* setAttenuation
-	 *
-	 * \brief get the light attenuation.
-	 *
-	 */
-
 	LightAttenuationData getAttenuation();
 
-	/* setIntensity
-	 *
-	 * \brief set the light intensity 4x float (R,G,B,A)
-	 *
-	 */
-
 	void setIntensity(glm::vec4 intensity);
-
-	/* getIntensity
-	 *
-	 * \brief get the light intensity 4x float (R,G,B,A)
-	 *
-	 */
-
 	glm::vec4 getIntensity();
-
-	/* setEntity
-	 *
-	 * \brief set the entity assigned to this light
-	 *
-	 */
-
-	void setEntity(pEntity entity);
-
-	/* getEntity
-	 *
-	 * \brief returns the entity assigned to this light
-	 *
-	 */
-
-	pEntity getEntity();
-
-	/*
-	 * log
-	 *
-	 * \brief log
-	 */
-
 	void log();
 
 protected:
-	pEntity mEntity;
+	pMoveable mFollowed;
 	glm::vec4 mIntensity;
 	LightAttenuationData mAttenuation;
 };

@@ -56,10 +56,13 @@ void Shader::compile() {
 		}
 		glDeleteShader(mHandle);
 		mHandle = 0;
-		FLOG_FATAL(
-				"Shader can not bee compiled\n--------------------------------------------------\n"
-						"%s \n--------------------------------------------------\n",
-				mSource.c_str());
+		FLOG_FATAL("Shader can not bee compiled");
+		std::istringstream lines(mSource);
+		std::string line;
+		int i = 0;
+		while(std::getline(lines, line)) {
+			FLOG_ERROR("[%d] %s",i++,line.c_str());
+		}
 	}
 }
 
@@ -99,7 +102,7 @@ std::string Shader::getTypeString() {
 			return "GL_FRAGMENT_SHADER";
 		case GL_VERTEX_SHADER:
 			return "GL_VERTEX_SHADER";
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 		case GL_GEOMETRY_SHADER:
 			return "GL_GEOMETRY_SHADER";

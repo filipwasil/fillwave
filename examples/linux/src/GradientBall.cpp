@@ -27,7 +27,7 @@ GradientBall::~GradientBall() {
 
 void GradientBall::draw(space::Camera& camera) {
    mProgram->use();
-   mProgram->uniformPush("uModelMatrix", mParentMatrix* mModelMatrixCache);
+   mProgram->uniformPush("uModelMatrix", mParentMMC* mMMC);
    mProgram->uniformPush("uSize", mSize);
    mProgram->uniformPush("uTextureUnit", FILLWAVE_DIFFUSE_UNIT);
    mProgram->uniformPush("uViewProjectionMatrix", camera.getViewProjection());

@@ -84,19 +84,16 @@ public:
 				case GL_BOOL:
 					size = 1;
 					break;
-				case GL_UNSIGNED_INT_VEC2:
 				case GL_FLOAT_VEC2:
 				case GL_INT_VEC2:
 				case GL_BOOL_VEC2:
 					size = 2;
 					break;
-				case GL_UNSIGNED_INT_VEC3:
 				case GL_FLOAT_VEC3:
 				case GL_INT_VEC3:
 				case GL_BOOL_VEC3:
 					size = 3;
 					break;
-				case GL_UNSIGNED_INT_VEC4:
 				case GL_FLOAT_VEC4:
 				case GL_INT_VEC4:
 				case GL_BOOL_VEC4:
@@ -109,6 +106,18 @@ public:
 				case GL_FLOAT_MAT4:
 					size = 16;
 					break;
+//#ifdef FILLWAVE_GLES_3_0
+//#else
+				case GL_UNSIGNED_INT_VEC3:
+					size = 3;
+					break;
+				case GL_UNSIGNED_INT_VEC2:
+					size = 2;
+					break;
+				case GL_UNSIGNED_INT_VEC4:
+					size = 4;
+					break;
+//#endif
 				default:
 					std::cout << "Not supported type of attribute" << std::endl;
 					size = 0;

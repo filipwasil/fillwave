@@ -12,6 +12,7 @@
 #include <fillwave/models/Skybox.h>
 #include <fillwave/particles/Cursor.h>
 #include <fillwave/terrain/Terrain.h>
+#include <map>
 
 namespace fillwave {
 namespace models {

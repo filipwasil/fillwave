@@ -58,7 +58,6 @@ public:
 
 	/* Flags */
 	GLboolean isPSC();
-
 	GLboolean isPSR();
 
 	/* Callbacks */
@@ -66,7 +65,7 @@ public:
 	void handlePrivateEvent(actions::EventType* event);
 
 	/* Model */
-	glm::mat4 getTransformation();
+	glm::mat4 getPhysicsMMC();
 
 	/* Physics */
 	void setTransformation(glm::mat4 modelMatrix);
@@ -81,8 +80,6 @@ public:
 	void updateMatrixTree();
 	void updateParentMatrix(glm::mat4& parent);
 	void updateParentRotation(glm::quat& rotation);
-	glm::mat4 getParentMatrix();
-	glm::quat getParentRotation();
 
 	/* Picking */
 	void pick(glm::vec3 color);
@@ -93,18 +90,12 @@ public:
 	virtual void onUnpicked();
 	virtual void drawPicking(space::Camera& camera);
 
-	/* External refresh */
-	void setExternalRefresh(GLboolean state);
-	GLboolean isExternalRefresh();
-	void setExternalRefresh();
-
 	/* Log */
 	virtual void log();
 
 protected:
-	glm::quat mParentRotation;
-	glm::mat4 mParentMatrix;
-	glm::mat4 mTransformation;
+	/* MMC - Model Matrix Cache */
+	glm::mat4 mPhysicsMMC;
 
 	GLboolean mChildrenPropagateEvent;
 	GLboolean mParentRefresh;
@@ -116,7 +107,6 @@ protected:
 	GLboolean mPSR;
 
 private:
-	GLboolean mRefreshExternal;
 	GLboolean mPickable;
 	glm::vec3 mPickColor;
 

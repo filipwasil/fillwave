@@ -19,7 +19,7 @@ namespace actions {
 
 
 CameraFPPCallback::CameraFPPCallback(glm::vec3 relativePosition,
-                                     glm::vec3 relativeLookAtPoint):EngineCallback(eEventType::key),
+                                     glm::vec3 relativeLookAtPoint):EngineCallback(eEventType::eKey),
                                            mRelativePosition(relativePosition.x,
                                                              relativePosition.y,
                                                              relativePosition.z,
@@ -54,7 +54,7 @@ void CameraFPPCallback::perform (Engine* engine, EventType* event) {
             break;
       }
       engine->getFocusKey()->updateMatrixTree();
-      glm::mat4 m = engine->getFocusKey()->getTransformation();
+      glm::mat4 m = engine->getFocusKey()->getPhysicsMMC();
       camera->moveTo(glm::vec3(m*mRelativePosition));
 //      camera->setEyeLookAt(glm::vec3(m*mRelativeLookAtPoint));
       camera->update();

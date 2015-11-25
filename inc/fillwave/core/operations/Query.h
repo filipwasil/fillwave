@@ -48,7 +48,7 @@ typedef Query<GL_ANY_SAMPLES_PASSED> QueryIfAnySamplesPassed;
 
 typedef Query<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN> QueryHowManyTransformFeedbackPrimitivesWritten;
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 
 typedef Query<GL_SAMPLES_PASSED> QueryHowManySamplesPassed;

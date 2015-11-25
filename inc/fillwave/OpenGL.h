@@ -15,7 +15,11 @@
 #elif defined(_WIN32) || defined(_WIN64)
 #include <GL/glew.h>
 #else /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
-#if (__ANDROID__)
+
+void glesInitExtensions();
+
+#if defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES)
+#define FILLWAVE_GLES_3_0
 #define GL_GLEXT_PROTOTYPES
 #include <GLES3/gl3.h>
 #include <GLES3/gl3ext.h>
@@ -24,15 +28,10 @@
 #define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE
 #define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
 
-void glesInitExtensions();
-#else /* __ANDROID__ */
-#ifdef FILLWAVE_COMPILATION_PC_GLES
-#include <GLES3/gl3.h>
-#include <GLES3/gl3ext.h>
-#else /* FILLWAVE_COMPILATION_PC_GLES */
+#else /* defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES) */
 #include <GL/glew.h>
-#endif /* FILLWAVE_COMPILATION_PC_GLES */
-#endif /* __ANDROID__ */
+#endif /* defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES) */
+
 #endif /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
 
 #if defined(GL_TEXTURE31)

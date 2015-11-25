@@ -141,8 +141,8 @@ void Buffer::reload() {
 	FLOG_CHECK("reload");
 }
 
-/* Feature not available in OpenGL ES  <= 3.0 */
-#ifdef __ANDROID__
+/* Feature not available in OpenGL ES  < 3.1 */
+#ifdef FILLWAVE_GLES_3_0
 #else
 GLvoid* Buffer::map(GLenum access) const {
 	GLvoid* ptr = glMapBuffer(mTarget, access);

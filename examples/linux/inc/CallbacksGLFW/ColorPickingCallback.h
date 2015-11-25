@@ -52,7 +52,7 @@ private:
    pEntity mCurrentlyPicked;
 public:
    ColorPickingCallback();
-   virtual ~ColorPickingCallback();
+   virtual ~ColorPickingCallback() = default;
    void perform (Engine* engine, EventType* eventType);
    };
 

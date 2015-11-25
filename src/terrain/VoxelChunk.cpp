@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/terrain/VoxelChunk.h>
-
+#include <fillwave/management/LightManager.h>
 #include <fillwave/Fillwave.h>
 
 FLOGINIT("VoxelChunk", FERROR | FFATAL)
@@ -461,7 +461,7 @@ void VoxelChunk::draw(space::Camera& camera) {
 
 	mProgram->use();
 
-	core::Uniform::push(mUniformLocationCacheModelMatrix, mTransformation);
+	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
 	core::Uniform::push(mUniformLocationCacheCameraPosition,
 			camera.getTranslation());
 	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,

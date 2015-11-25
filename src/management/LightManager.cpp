@@ -25,12 +25,12 @@ pLightSpot LightManager::addLightSpot(
 		glm::vec3 position,
 		glm::quat rotation,
 		glm::vec4 color,
-		pEntity entity) {
+		pMoveable followed) {
 	pLightSpot light;
 	if (mSpotLights.size() < FILLWAVE_MAX_SPOT_LIGHTS) {
 		light = pLightSpot(
 				new space::LightSpot(shadowTexture, position, rotation, color,
-						entity));
+						followed));
 
 		FLOG_DEBUG("Added spot light ID : %lu", mSpotLights.size());
 
@@ -47,12 +47,12 @@ pLightPoint LightManager::addLightPoint(
 		pTexture3DRenderable shadowTexture,
 		glm::vec3 position,
 		glm::vec4 intensity,
-		pEntity entity) {
+		pMoveable followed) {
 	pLightPoint light;
 	FLOG_DEBUG("Going to add point light ID : %lu", mPointLights.size());
 	if (mPointLights.size() < FILLWAVE_MAX_SPOT_LIGHTS) {
 		light = pLightPoint(
-				new space::LightPoint(shadowTexture, position, intensity, entity));
+				new space::LightPoint(shadowTexture, position, intensity, followed));
 		FLOG_DEBUG("Added point light ID : %lu", mPointLights.size());
 		mPointLights.push_back(light);
 	} else {
@@ -68,14 +68,14 @@ pLightDirectional LightManager::addLightDirectional(
 		glm::vec3 position,
 		glm::quat rotation,
 		glm::vec4 color,
-		pEntity entity) {
+		pMoveable followed) {
 	pLightDirectional light = pLightDirectional();
 	FLOG_DEBUG("Going to add directional light ID : %lu",
 			mDirectionalLights.size());
 	if (mDirectionalLights.size() < FILLWAVE_MAX_DIRECTIONAL_LIGHTS) {
 		light = pLightDirectional(
 				new space::LightDirectional(shadowTexture, position, rotation,
-						color, entity));
+						color, followed));
 		FLOG_DEBUG("Added directional light ID : %lu", mDirectionalLights.size());
 		mDirectionalLights.push_back(light);
 	} else {
@@ -119,15 +119,15 @@ void LightManager::removeLights() {
 
 void LightManager::updateLightEntities() {
 	for (auto& it : mSpotLights) {
-		it->updateEntity();
+		it->updateFromFollowed();
 		it->updateShadowCamera();
 	}
 	for (auto& it : mDirectionalLights) {
-		it->updateEntity();
+		it->updateFromFollowed();
 		it->updateShadowCamera();
 	}
 	for (auto& it : mPointLights) {
-		it->updateEntity();
+		it->updateFromFollowed();
 		it->updateShadowCamera();
 	}
 }

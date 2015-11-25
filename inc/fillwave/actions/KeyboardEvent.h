@@ -19,7 +19,7 @@ namespace actions {
 
 struct KeyboardEventData {
 	int key, scanCode, action, mode;
-	const eEventType type = eEventType::key;
+	const eEventType type = eEventType::eKey;
 };
 
 /*! \struct KeyboardEvent

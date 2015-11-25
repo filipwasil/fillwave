@@ -57,8 +57,7 @@ Mesh::Mesh(
 				mLightManager(lightManager),
 				mBoneManager(boneManager),
 				mDrawType(drawType)
-#ifdef __ANDROID__
-
+#ifdef FILLWAVE_GLES_3_0
 #else
 						,
 				mConditionalRendering(GL_QUERY_WAIT)
@@ -74,16 +73,21 @@ void Mesh::draw(space::Camera& camera) {
 	/* Parent-children transformations */
 	updateMatrixTree();
 
-	if (mBoneManager || mOcclusionQuery.getResultAsync(1)) {
-
+#ifdef FILLWAVE_GLES_3_0
+#else
+	if (mBoneManager || mOcclusionQuery.getResultAsync(1))
+#endif
+	{
 		mProgram->use();
 
-		core::Uniform::push(mULCModelMatrix, mTransformation);
+		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
 		core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
 		core::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-		core::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
+		core::Uniform::push(mULCLightSpecularIntensity,
+				mMaterial.getSpecular());
 		core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-		core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+		core::Uniform::push(mULCViewProjectionMatrix,
+				camera.getViewProjection());
 
 		mLightManager->pushLightUniforms(mProgram.get());
 
@@ -98,7 +102,7 @@ void Mesh::drawDR(space::Camera& camera) {
 
 		mProgram->use();
 
-		core::Uniform::push(mULCModelMatrix, mTransformation);
+		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
 		core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
 		//   core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
@@ -129,7 +133,7 @@ inline void Mesh::coreDraw() {
 
 	//xxx blinking scene
 	//xxx (OpenGL 3.3+)consider using conditional rendering this way:
-	//#ifdef __ANDROID__
+	//#ifdef FILLWAVE_GLES_3_0
 	//#else
 	//   mConditionalRendering.begin(mOcclusionQuery.getID());
 	onDraw();
@@ -162,7 +166,7 @@ void Mesh::drawPicking(space::Camera& camera) {
 	if (isPickable()) {
 		mProgram->use();
 
-		core::Uniform::push(mULCModelMatrix, mTransformation);
+		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
 
 		core::Uniform::push(mULCCameraPosition, camera.getTranslation());
 		core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
@@ -187,7 +191,7 @@ void Mesh::drawOcclusionBox(space::Camera& camera) {
 	mProgramOQ->use();
 
 	core::Uniform::push(mULCMVPOcclusion,
-			camera.getViewProjection() * mTransformation * mOcclusionMatrix);
+			camera.getViewProjection() * mPhysicsMMC * mOcclusionMatrix);
 
 	mOcclusionQuery.begin();
 
@@ -205,7 +209,7 @@ void Mesh::drawDepth(space::Camera& camera) {
 		mProgramShadow->use();
 
 		core::Uniform::push(mULCMVPShadow,
-				camera.getViewProjection() * mTransformation);
+				camera.getViewProjection() * mPhysicsMMC);
 
 		mVAO->bind();
 
@@ -222,8 +226,8 @@ void Mesh::drawDepthColor(space::Camera& camera, glm::vec3& /*xxx double check p
 		mProgramShadowColor->use();
 
 		core::Uniform::push(mULCMVPShadowColor,
-				camera.getViewProjection() * mTransformation);
-		core::Uniform::push(mULCModelMatrixShadowColor, mTransformation);
+				camera.getViewProjection() * mPhysicsMMC);
+		core::Uniform::push(mULCModelMatrixShadowColor, mPhysicsMMC);
 
 		mVAO->bind();
 
@@ -241,9 +245,9 @@ void Mesh::drawAOG(space::Camera& camera) {
 	mProgramAOGeometry->use();
 
 	core::Uniform::push(mULCMVPAmbientOcclusion,
-			camera.getViewProjection() * mTransformation);
+			camera.getViewProjection() * mPhysicsMMC);
 	core::Uniform::push(mULCPositionAmbientOcclusion,
-			camera.getEye() * mTransformation);
+			camera.getEye() * mPhysicsMMC);
 
 	mVAO->bind();
 
@@ -258,7 +262,7 @@ void Mesh::drawAOC(space::Camera& camera) {
 //      core::Uniform::push(mULCTextureMap, FILLWAVE_DIFFUSE_ATTACHMENT);
 	core::Uniform::push(mULCSampleRadius, FILLWAVE_AO_SAMPLE_RADIUS);
 	core::Uniform::push(mULCProjectionMatrix, camera.getProjection());
-//      core::Uniform::push(mULCRandomVectors, camera.getEye() * mTransformation);
+//      core::Uniform::push(mULCRandomVectors, camera.getEye() * mPhysicsMMC);
 
 	mVAO->bind();
 

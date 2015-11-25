@@ -39,13 +39,13 @@ namespace terrain {
  * \brief Implements VoxelConstructor and QuadConstructor to build an example terrain.
  */
 
-class MountainConstructor: public VoxelConstructor{
+class MountainConstructor: public VoxelConstructor {
 public:
-   MountainConstructor();
-   virtual ~MountainConstructor();
-   GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y);
-   GLfloat calculateHeight(GLfloat x, GLfloat z);
-   };
+	MountainConstructor();
+	virtual ~MountainConstructor();
+	GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y);
+	GLfloat calculateHeight(GLfloat x, GLfloat z);
+};
 
 } /* terrain */
 } /* fillwave */

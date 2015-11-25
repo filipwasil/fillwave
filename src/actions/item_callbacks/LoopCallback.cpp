@@ -12,7 +12,7 @@ namespace actions {
 
 LoopCallback::LoopCallback(ItemCallback* callback, int numberOfExecutions)
 		:
-				ItemCallback(eEventType::time),
+				ItemCallback(eEventType::eTime),
 				mItemCallback(callback),
 				mLoopsLeft(numberOfExecutions) {
 }

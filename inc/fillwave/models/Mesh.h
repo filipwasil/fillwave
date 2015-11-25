@@ -105,7 +105,7 @@ protected:
 	core::QueryIfAnySamplesPassed mOcclusionQuery;
 //   puFence mFence;
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 //   core::QueryTimeElapsed mTimeQuery;
 	core::ConditionalRender mConditionalRendering;

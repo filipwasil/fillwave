@@ -112,7 +112,7 @@ void EmiterPointCPU::draw(space::Camera& camera) {
 
 	mProgram->use();
 
-	core::Uniform::push(mULCModelMatrix, mTransformation);
+	core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
 	core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 	core::Uniform::push(mULCCameraPosition, mCameraPosition);
 	core::Uniform::push(mULCPointSize, mStartSize);

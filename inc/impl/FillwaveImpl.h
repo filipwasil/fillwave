@@ -240,8 +240,7 @@ struct Engine::EngineImpl {
 
 	void draw(GLfloat time);
 
-#ifdef __ANDROID__
-
+#ifdef FILLWAVE_GLES_3_0
 #else
 	void drawLines(GLfloat time);
 
@@ -433,8 +432,7 @@ void Engine::EngineImpl::init() {
 
 	initUniformsCache();
 
-#ifdef __ANDROID__
-
+#ifdef FILLWAVE_GLES_3_0
 #else
 	initGeometryShading();
 #endif
@@ -445,7 +443,7 @@ void Engine::EngineImpl::init() {
 //   mFence = puFence(new core::Fence());
 }
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 
 inline void Engine::EngineImpl::initExtensions() {
 	glesInitExtensions();
@@ -696,13 +694,13 @@ inline void Engine::EngineImpl::initStartup() {
 	FLOG_DEBUG("Post processing startup pass added");
 
 	mStartupTexture = mTextureManager->get("logo.png",
-	FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
+	FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::eNone);
 	if (not mStartupTexture) {
 		mStartupTexture = mTextureManager->get("textures/logo.png",
-		FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
+		FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::eNone);
 		if (not mStartupTexture) {
 			mStartupTexture = mTextureManager->get("64_64_64.color",
-			FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::none);
+			FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::eNone);
 			FLOG_ERROR("Fillwave startup logo could not be executed");
 		}
 	}
@@ -798,7 +796,7 @@ void Engine::EngineImpl::draw(GLfloat time) {
 	}
 }
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 void Engine::EngineImpl::drawLines(GLfloat time) {
 
@@ -1268,7 +1266,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 	GLint mCurentTextureUnit = 0;
 	GLint id = 0;
 	switch (mDebugger->getState()) {
-		case eDebuggerState::lightsSpot:
+		case eDebuggerState::eLightsSpot:
 			mCurentTextureUnit = 0;
 			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
 				space::CameraPerspective cameraP =
@@ -1290,7 +1288,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
 			}
 			break;
-		case eDebuggerState::lightsSpotDepth:
+		case eDebuggerState::eLightsSpotDepth:
 			mCurentTextureUnit = 0;
 			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
 				mDebugger->renderDepthPerspective(mCurentTextureUnit++);
@@ -1300,7 +1298,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
 			}
 			break;
-		case eDebuggerState::lightsSpotColor:
+		case eDebuggerState::eLightsSpotColor:
 			mCurentTextureUnit = 0;
 			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
 				space::CameraPerspective cameraP =
@@ -1314,11 +1312,11 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 				mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
 			}
 			break;
-		case eDebuggerState::lightsPoint:
+		case eDebuggerState::eLightsPoint:
 			break;
-		case eDebuggerState::lightsPointDepth: // only light 0
+		case eDebuggerState::eLightsPointDepth: // only light 0
 			break;
-		case eDebuggerState::lightsPointColor:
+		case eDebuggerState::eLightsPointColor:
 			for (GLint j = 0; j < mLightManager->getLightsPointHowMany(); j++) {
 				for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 						i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
@@ -1328,10 +1326,10 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 				}
 			}
 			break;
-		case eDebuggerState::pickingMap:
+		case eDebuggerState::ePickingMap:
 			mDebugger->renderPickingMap();
 			break;
-		case eDebuggerState::off:
+		case eDebuggerState::eOff:
 		default:
 			break;
 	}

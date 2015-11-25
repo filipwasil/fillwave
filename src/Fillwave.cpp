@@ -32,10 +32,18 @@ namespace fillwave {
 
 Engine::Engine(std::string rootPath) {
 	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, rootPath));
+	/* This init has to be outside of the constructor,
+	 * because it needs mImpl to be created fully before Initialization.
+	 * mImpl uses Engine functions */
+	mImpl->init();
 }
 
 Engine::Engine(ANativeActivity* activity) {
 	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, activity));
+	/* This init has to be outside of the constructor,
+	 * because it needs mImpl to be created fully before Initialization.
+	 * mImpl uses Engine functions */
+	mImpl->init();
 }
 #else
 Engine::Engine(GLint argc, GLchar* const argv[]) {
@@ -61,8 +69,7 @@ void Engine::draw(GLfloat time) {
 	mImpl->draw(time);
 }
 
-#ifdef __ANDROID__
-
+#ifdef FILLWAVE_GLES_3_0
 #else
 void Engine::drawLines(GLfloat time) {
 	mImpl->drawLines(time);
@@ -422,7 +429,7 @@ pText Engine::storeText(
 	}
 
 	pTexture t = mImpl->mTextureManager->get(fontName + ".png",
-	FILLWAVE_TEXTURE_TYPE_NONE, eCompression::none, eFlip::vertical);
+	FILLWAVE_TEXTURE_TYPE_NONE, eCompression::eNone, eFlip::eVertical);
 
 	Font* font = nullptr;
 	for (auto& it : mImpl->mFontManager) {
@@ -629,7 +636,7 @@ void Engine::pick(GLuint x, GLuint y) {
 	GL_UNSIGNED_BYTE, 0);
 
 	FLOG_CHECK("glReadPixels failed");
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
 	GLubyte* data = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -651,7 +658,7 @@ void Engine::captureFramebufferToFile(const std::string& name) {
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
 	GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
 	GLubyte* data = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -688,7 +695,7 @@ void Engine::captureFramebufferToBuffer(
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, format,
 	GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 	buffer = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
 	buffer = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -713,7 +720,8 @@ GLboolean Engine::isDR() const {
 	return mImpl->mIsDR;
 }
 
-#ifndef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
+#else
 
 pShader Engine::storeShaderGeometry(const std::string& shaderPath) {
 	return mImpl->mShaderManager->add(shaderPath, GL_GEOMETRY_SHADER);

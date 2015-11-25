@@ -115,8 +115,8 @@ public:
 			std::string texturePath,
 			GLuint mapType =
 			FILLWAVE_TEXTURE_TYPE_NONE,
-			loader::eCompression = loader::eCompression::none,
-			loader::eFlip flip = loader::eFlip::vertical);
+			loader::eCompression = loader::eCompression::eNone,
+			loader::eFlip flip = loader::eFlip::eVertical);
 
 	pTexture3D get(
 			const std::string& posX,

@@ -10,7 +10,7 @@
 
 #include <fillwave/core/GLObject.h>
 
-#ifdef __ANDROID__
+#ifdef FILLWAVE_GLES_3_0
 #else
 
 namespace fillwave {
@@ -38,4 +38,4 @@ private:
 
 #endif /* PROGRAMPIPELINE_H_ */
 
-#endif /* __ANDROID__ */
+#endif /* FILLWAVE_GLES_3_0 */

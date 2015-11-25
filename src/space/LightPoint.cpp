@@ -17,11 +17,10 @@ LightPoint::LightPoint(
 		pTexture3DRenderable shadowTexture,
 		glm::vec3 position,
 		glm::vec4 intensity,
-		pEntity entity)
+		pMoveable followed)
 		:
-				Light(position, intensity, entity),
+				Light(position, intensity, followed),
 				mShadowTexture(shadowTexture),
-				mEntity(entity),
 				mSphere(1.0, 10, 10) {
 	mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_X] = pCameraPerspective(
 			new CameraPerspective(position,
@@ -75,21 +74,8 @@ LightPoint::LightPoint(
 							0.1, 1000.0));
 }
 
-void LightPoint::setEntity(pEntity entity) {
-	mEntity = entity;
-}
-
 pTexture3DRenderable LightPoint::getShadowTexture() {
 	return mShadowTexture;
-}
-
-/*
- * getEntity
- * \brief get the entity assigned to this light
- */
-
-pEntity LightPoint::getEntity() {
-	return mEntity;
 }
 
 pCameraPerspective LightPoint::getShadowCamera(GLenum id) { //xxx this should be a unique pointer
@@ -103,8 +89,8 @@ pCameraPerspective LightPoint::getShadowCamera(GLenum id) { //xxx this should be
 }
 
 void LightPoint::updateShadowCamera() {
-	if (mEntity) {
-		mTranslation = mEntity->getTranslation();
+	if (mFollowed) {
+		mTranslation = mFollowed->getTranslation();
 	}
 	for (auto it : mFaceCameras) {
 		if (it.second->getTranslation() != mTranslation) {

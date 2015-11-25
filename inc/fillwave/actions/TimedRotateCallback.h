@@ -9,7 +9,6 @@
 #define ROTATECALLBACK_H_
 
 #include <fillwave/actions/TimedCallback.h>
-#include <fillwave/models/Entity.h>
 
 namespace fillwave {
 namespace actions {
@@ -21,22 +20,18 @@ namespace actions {
 class TimedRotateCallback: public TimedCallback {
 public:
 	TimedRotateCallback(
-			pEntity entity,
+			pMoveable moveable,
 			glm::vec3 axis,
 			GLfloat angle,
 			GLfloat lifeTime,
-			eEasing easing = eEasing::None);
+			eEasing easing = eEasing::eNone);
 
 	virtual ~TimedRotateCallback() = default;
-
-	/*	perform
-	 * \brief Performs ItemCallback action
-	 */
 
 	void performTime(TimeEventData& data);
 
 protected:
-	pEntity mEntity;
+	pMoveable mMoveable;
 
 private:
 	glm::quat mStartRotation;

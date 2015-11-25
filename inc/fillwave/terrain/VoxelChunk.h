@@ -12,11 +12,16 @@
 #include <fillwave/terrain/VoxelConstructor.h>
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/core/texturing/Texture.h>
-#include <fillwave/management/LightManager.h>
 #include <fillwave/models/Reloadable.h>
+#include <fillwave/models/Entity.h>
 
 namespace fillwave {
 class Engine;
+
+namespace manager {
+class LightManager;
+}
+
 namespace terrain {
 
 /*! \class VoxelChunk

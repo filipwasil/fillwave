@@ -18,9 +18,9 @@ LightSpot::LightSpot(
 		glm::vec3 position,
 		glm::quat rotation,
 		glm::vec4 intensity,
-		pEntity entity)
+		pMoveable followed)
 		:
-				Light(position, intensity, entity),
+				Light(position, intensity, followed),
 				mShadowTexture(shadowTexture),
 				mShadowCamera(
 						pCameraPerspective(
@@ -74,7 +74,7 @@ void LightSpot::log() {
 			d(mTranslation.y), d(mTranslation.z));
 	FLOG_INFO("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x),
 			d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
-	mEntity->log();
+	Light::log();
 }
 
 } /* space */

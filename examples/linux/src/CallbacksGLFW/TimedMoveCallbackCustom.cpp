@@ -6,20 +6,17 @@
  */
 
 #include "../../../linux/inc/CallbacksGLFW/TimedMoveCallbackCustom.h"
-
 #include <fillwave/common/Easing.h>
 
 namespace fillwave {
 namespace actions {
 
 
-TimedMoveCallbackCustom::TimedMoveCallbackCustom(pEntity entity,
-                                                 glm::vec3 endPosition,
-                                                 GLfloat lifeTime):TimedMoveCallback(entity, endPosition,lifeTime, eEasing::Custom) {
-
-}
-
-TimedMoveCallbackCustom::~TimedMoveCallbackCustom() {
+TimedMoveCallbackCustom::TimedMoveCallbackCustom(
+		pMoveable moveable,
+		glm::vec3 endPosition,
+		GLfloat lifeTime)
+		: TimedMoveCallback(moveable, endPosition, lifeTime, eEasing::eCustom) {
 
 }
 

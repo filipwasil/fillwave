@@ -17,14 +17,14 @@ namespace fillwave {
 namespace actions {
 
 TimedRotateCallback::TimedRotateCallback(
-		pEntity entity,
+		pMoveable moveable,
 		glm::vec3 axis,
 		GLfloat angle,
 		GLfloat lifeTime,
 		eEasing easing)
 		:
 				TimedCallback(lifeTime, easing),
-				mEntity(entity),
+				mMoveable(moveable),
 				mStartRotation(glm::quat()),
 				mStartAngle(0.0f),
 				mEndAngle(angle),
@@ -34,11 +34,11 @@ TimedRotateCallback::TimedRotateCallback(
 
 void TimedRotateCallback::performTime(TimeEventData& data) {
 	if (getPercentageDone() == 0.0f) {
-		mStartRotation = mEntity->getRotation();
+		mStartRotation = mMoveable->getRotation();
 	}
 	mTimePassed += data.mTimePassed;
-	mEntity->rotateTo(mStartRotation);
-	mEntity->rotateBy(mAxis,
+	mMoveable->rotateTo(mStartRotation);
+	mMoveable->rotateBy(mAxis,
 			mStartAngle + ease(getPercentageDone()) * mEndAngle);
 }
 

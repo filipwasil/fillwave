@@ -13,7 +13,7 @@ namespace actions {
 
 SequenceCallback::SequenceCallback()
 		:
-				ItemCallback(eEventType::time),
+				ItemCallback(eEventType::eTime),
 				mCallbackIterator(this->begin()),
 				mReloaditerator(true) {
 }

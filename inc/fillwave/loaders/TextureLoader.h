@@ -16,7 +16,7 @@ namespace fillwave {
 namespace loader {
 
 enum class eFlip {
-	none, horizontal, vertical, horizontal_vertical,
+	eNone, eHorizontal, eVertical, eHorizontal_vertical,
 };
 
 // generic formats
@@ -44,25 +44,25 @@ enum class eFlip {
 //GL_COMPRESSED_RGBA_S3TC_DXT5_EXT
 
 enum class eCompression {
-	none,
-	generic_r,
-	generic_rg,
-	generic_rgb,
-	generic_rgba,
-	generic_srgb,
-	generic_srgba,
-	latc_luminance,
-	latc_luminance_signed,
-	latc_luminance_alpha,
-	latc_luminance_alpha_signed,
-	rgtc1_r,
-	rgtc1_r_signed,
-	rgtc1_rg,
-	rgtc1_rg_signed,
-	s3tc_dxt1_rgb,
-	s3tc_dxt1_rgba,
-	s3tc_dxt3_rgba,
-	s3tc_dxt5_rgba,
+	eNone,
+	eGeneric_r,
+	eGeneric_rg,
+	eGeneric_rgb,
+	eGeneric_rgba,
+	eGeneric_srgb,
+	eGeneric_srgba,
+	eLatc_luminance,
+	eLatc_luminance_signed,
+	eLatc_luminance_alpha,
+	eLatc_luminance_alpha_signed,
+	eRgtc1_r,
+	eRgtc1_r_signed,
+	eRgtc1_rg,
+	eRgtc1_rg_signed,
+	eS3tc_dxt1_rgb,
+	eS3tc_dxt1_rgba,
+	eS3tc_dxt3_rgba,
+	eS3tc_dxt5_rgba,
 };
 
 /*! \class TextureLoader
@@ -76,10 +76,10 @@ public:
 	virtual ~TextureLoader() = default;
 	core::Texture2DFile* load(
 			const std::string& filePath,
-			eFlip flip = eFlip::none,
+			eFlip flip = eFlip::eNone,
 			GLenum format = GL_RGBA,
 			std::string rootPath = "",
-			eCompression compression = eCompression::none);
+			eCompression compression = eCompression::eNone);
 
 	core::Texture2DFile* loadEmpty(
 			glm::ivec2 screenSize,
