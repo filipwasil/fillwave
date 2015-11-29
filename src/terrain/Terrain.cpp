@@ -22,9 +22,6 @@ void Terrain::draw(space::Camera& camera) {
 }
 
 void Terrain::drawVoxels(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
-
 	/* check if there are any children too far away from the camera */
 	glm::vec3 distanceToCamera;
 	GLfloat direction = 0.0f;

@@ -96,9 +96,6 @@ EmiterPointGPU::EmiterPointGPU(
 }
 
 void EmiterPointGPU::draw(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
-
 	/* Save camera position for optimization purposes. */
 	mCameraPosition = camera.getTranslation();
 

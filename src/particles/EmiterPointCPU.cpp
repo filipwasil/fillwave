@@ -105,9 +105,6 @@ void EmiterPointCPU::update(GLfloat timeElapsedSec) {
 }
 
 void EmiterPointCPU::draw(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
-
 	mCameraPosition = camera.getTranslation();
 
 	mProgram->use();

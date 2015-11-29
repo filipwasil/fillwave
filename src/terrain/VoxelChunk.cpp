@@ -456,9 +456,6 @@ void VoxelChunk::reloadVoxels(VoxelConstructor* constructor) {
 }
 
 void VoxelChunk::draw(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
-
 	mProgram->use();
 
 	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);

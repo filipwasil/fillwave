@@ -793,6 +793,7 @@ void Engine::EngineImpl::draw(GLfloat time) {
 		drawText();
 		evaluateDebugger();
 		mScene->drawCursor();
+		mScene->updateMatrixTree();
 	}
 }
 
@@ -827,6 +828,7 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
 		drawText();
 		evaluateDebugger();
 		mScene->drawCursor();
+		mScene->updateMatrixTree();
 	}
 }
 
@@ -859,6 +861,7 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
 		drawText();
 		evaluateDebugger();
 		mScene->drawCursor();
+		mScene->updateMatrixTree();
 	}
 }
 #endif

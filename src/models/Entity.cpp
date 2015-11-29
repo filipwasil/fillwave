@@ -55,16 +55,12 @@ void Entity::onDetached() {
 }
 
 void Entity::draw(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
 	for (auto& it : mChildren) {
 		it->draw(camera);
 	}
 }
 
 void Entity::drawDR(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
 	for (auto& it : mChildren) {
 		it->drawDR(camera);
 	}
@@ -128,6 +124,10 @@ void Entity::updateMatrixTree() {
 		}
 		mRefreshExternal = GL_TRUE;
 		mParentRefresh = GL_FALSE;
+	}
+
+	for (auto& it : mChildren) {
+		it->updateMatrixTree();
 	}
 }
 

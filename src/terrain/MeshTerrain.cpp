@@ -93,7 +93,6 @@ MeshTerrain::MeshTerrain(
 }
 
 void MeshTerrain::draw(space::Camera& camera) {
-	updateMatrixTree();
 	distanceCheck(camera);
 	drawWithEffects(camera);
 }

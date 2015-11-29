@@ -70,9 +70,6 @@ Mesh::Mesh(
 }
 
 void Mesh::draw(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
-
 #ifdef FILLWAVE_GLES_3_0
 #else
 	if (mBoneManager || mOcclusionQuery.getResultAsync(1))
@@ -96,8 +93,6 @@ void Mesh::draw(space::Camera& camera) {
 }
 
 void Mesh::drawDR(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
 	if (mBoneManager || mOcclusionQuery.getResultAsync(1)) {
 
 		mProgram->use();
@@ -119,7 +114,6 @@ void Mesh::drawDR(space::Camera& camera) {
 }
 
 void Mesh::drawFast(space::Camera&) {
-	updateMatrixTree();
 	mProgram->use();
 	coreDraw();
 }
@@ -240,8 +234,6 @@ void Mesh::drawDepthColor(space::Camera& camera, glm::vec3& /*xxx double check p
 }
 
 void Mesh::drawAOG(space::Camera& camera) {
-	/* Parent-children transformations */
-//      updateMatrixTree();
 	mProgramAOGeometry->use();
 
 	core::Uniform::push(mULCMVPAmbientOcclusion,

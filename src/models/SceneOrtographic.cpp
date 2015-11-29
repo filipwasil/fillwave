@@ -17,8 +17,6 @@ SceneOrthographic::SceneOrthographic(pCameraOrthographic camera)
 }
 
 void SceneOrthographic::draw() {
-	/* Parent-children transformations */
-	updateMatrixTree();
 	mCamera->update();
 	space::CameraOrthographic c = *(mCamera.get());
 	for (auto& it : mChildren) {
@@ -30,8 +28,6 @@ void SceneOrthographic::drawDR() {
 	if (mSkybox) {
 		mSkybox->drawDR(*(mCamera.get()));
 	}
-	/* Parent-children transformations */
-	updateMatrixTree();
 	mCamera->update();
 	for (auto& it : mChildren) {
 		it->drawDR(*(mCamera.get()));
@@ -39,8 +35,6 @@ void SceneOrthographic::drawDR() {
 }
 
 void SceneOrthographic::draw(space::CameraOrthographic& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
 	for (auto& it : mChildren) {
 		it->draw(camera);
 	}
@@ -50,8 +44,6 @@ void SceneOrthographic::drawDR(space::CameraOrthographic& camera) {
 	if (mSkybox) {
 		mSkybox->drawDR(camera);
 	}
-	/* Parent-children transformations */
-	updateMatrixTree();
 	for (auto& it : mChildren) {
 		it->draw(camera);
 	}

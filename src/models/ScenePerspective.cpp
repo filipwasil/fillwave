@@ -17,8 +17,6 @@ ScenePerspective::ScenePerspective(pCameraPerspective camera)
 }
 
 void ScenePerspective::draw() {
-	/* Parent-children transformations */
-	updateMatrixTree();
 	mCamera->update();
 	space::CameraPerspective c = *(mCamera.get());
 	for (auto it : mChildren) {
@@ -27,8 +25,6 @@ void ScenePerspective::draw() {
 }
 
 void ScenePerspective::draw(space::CameraPerspective& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
 	for (auto it : mChildren) {
 		it->draw(camera);
 	}
@@ -38,8 +34,6 @@ void ScenePerspective::drawDR() {
 	if (mSkybox) {
 		mSkybox->drawDR(*(mCamera.get()));
 	}
-	/* Parent-children transformations */
-	updateMatrixTree();
 	mCamera->update();
 	for (auto& it : mChildren) {
 		it->drawDR(*(mCamera.get()));
@@ -50,8 +44,6 @@ void ScenePerspective::drawDR(space::CameraPerspective& camera) {
 	if (mSkybox) {
 		mSkybox->drawDR(camera);
 	}
-	/* Parent-children transformations */
-	updateMatrixTree();
 	for (auto& it : mChildren) {
 		it->drawDR(camera);
 	}

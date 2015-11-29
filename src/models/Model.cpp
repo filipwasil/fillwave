@@ -324,13 +324,11 @@ GLint Model::getActiveAnimations() {
 }
 
 void Model::draw(space::Camera& camera) {
-	updateMatrixTree();
 	evaluateAnimations();
 	drawWithEffects(camera);
 }
 
 void Model::drawDR(space::Camera& camera) {
-	updateMatrixTree();
 	evaluateAnimations();
 	drawWithEffectsDR(camera);
 }

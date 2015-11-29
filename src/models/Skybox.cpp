@@ -40,9 +40,6 @@ Skybox::Skybox(Engine* engine, pTexture3D texture)
 }
 
 void Skybox::draw(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
-
 	mProgram->use();
 
 	core::Uniform::push(mULCCameraPosition, camera.getTranslation());
@@ -73,9 +70,6 @@ void Skybox::draw(space::Camera& camera) {
 }
 
 void Skybox::drawDR(space::Camera& camera) {
-	/* Parent-children transformations */
-	updateMatrixTree();
-
 	mProgramDR->use();
 
 	core::Uniform::push(mULCCameraPosition, camera.getTranslation());
