@@ -27,7 +27,7 @@ void FPSCallback::perform(Engine* engine, EventType* event) {
 		mTimePassed -= 1.0f;
 		mText->editString(
 				std::string("FPS ")
-						+ strings::to_string<GLuint>(engine->getFramesPassed()));
+						+ common::to_string<GLuint>(engine->getFramesPassed()));
 	}
 }
 

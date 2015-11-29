@@ -205,7 +205,7 @@ void LightManager::pushLightUniforms(core::Program* program) {
 		}
 
 		program->uniformPush(
-				strings::getNotIndexableName("uShadowMap", UBOIterator),
+				common::getNotIndexableName("uShadowMap", UBOIterator),
 				FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
 		UBOIterator++;
 	}
@@ -233,7 +233,7 @@ void LightManager::pushLightUniforms(core::Program* program) {
 		}
 
 		program->uniformPush(
-				strings::getNotIndexableName("uShadowMap", UBOIterator),
+				common::getNotIndexableName("uShadowMap", UBOIterator),
 				FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
 		UBOIterator++;
 	}
@@ -243,12 +243,12 @@ void LightManager::pushLightUniforms(core::Program* program) {
 	for (size_t i = 0; i < mPointLights.size(); i++) {
 		/*space::LightPoint* l = mPointLights[i].get();*/
 		program->uniformPush(
-				strings::getStructField("uPointLights", "position", i),
+				common::getStructField("uPointLights", "position", i),
 				glm::vec4(mPointLights[i]->getTranslation(), 1.0));
 		program->uniformPush(
-				strings::getStructField("uPointLights", "intensity", i),
+				common::getStructField("uPointLights", "intensity", i),
 				mPointLights[i]->getIntensity());
-		program->uniformPush(strings::getNotIndexableName("uPointShadowMap", i),
+		program->uniformPush(common::getNotIndexableName("uPointShadowMap", i),
 		FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
 		UBOIterator++;
 	}

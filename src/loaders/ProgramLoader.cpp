@@ -10,7 +10,7 @@
 #include <fillwave/loaders/ShaderLoaderVertex.h>
 #include <fillwave/management/LightManager.h>
 
-#include <fillwave/extras/string.h>
+#include <fillwave/common/string.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/Profiler.h>
 #include <fillwave/Assets.h>
@@ -42,7 +42,7 @@ const std::string gGLAmbient = "10001.0";
 /* Attributes */
 
 const std::string gGLBones = "uniform mat4 uBones["
-		+ strings::to_string(FILLWAVE_MAX_BONES) + "];\n";
+		+ common::to_string(FILLWAVE_MAX_BONES) + "];\n";
 
 const std::string gGLVSAttributes =
 		"layout(location = 0) in vec4 aPosition;                        \n"

@@ -10,7 +10,7 @@
 
 #include <fillwave/loaders/ProgramLoader.h>
 
-#include <fillwave/extras/string.h>
+#include <fillwave/common/string.h>
 
 #include <fillwave/Profiler.h>
 

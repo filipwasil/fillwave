@@ -385,7 +385,7 @@ mISOQ(GL_FALSE) {
 Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 		:
 				mEngine(engine),
-				mFileLoader(strings::getFilePathOnly(argv[0])),
+				mFileLoader(common::getFilePathOnly(argv[0])),
 				mBackgroundColor(0.1,0.1,0.1),
 				mFrameCounter(0),
 				mTimeFactor(1.0),

@@ -5,7 +5,7 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/extras/string.h>
+#include <fillwave/common/string.h>
 #include <fillwave/loaders/ShaderLoaderFragment.h>
 
 namespace fillwave {
@@ -45,7 +45,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 	std::string outputs;
 	for (GLuint i = 0; i < mRendertargets; i++) {
 
-		outputs += "out vec4 fColor" + strings::to_string(i) + ";\n";
+		outputs += "out vec4 fColor" + common::to_string(i) + ";\n";
 
 	}
 	outputs += "\n";
@@ -514,10 +514,10 @@ const std::string ShaderLoaderFragment::getSource() const {
 	std::string end = "";
 
 	for (GLuint i = 0; i < mRendertargets; i++) {
-		end += "fColor" + strings::to_string(i) + " = color;\n";
+		end += "fColor" + common::to_string(i) + " = color;\n";
 	}
 
-//   end += "fColor" + strings::to_string(0) + " = color* 0.001 + texture(uPointShadowMap0, toLightDirection).xyzr;\n";
+//   end += "fColor" + common::to_string(0) + " = color* 0.001 + texture(uPointShadowMap0, toLightDirection).xyzr;\n";
 	end += "\n}\n";
 
 	return version + inputs + outputs + lightsMaximum + lightStructDefinition

@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string>
-#include <fillwave/extras/string.h>
+#include <fillwave/common/string.h>
 
 #ifdef __ANDROID__
 #include <android/log.h>
@@ -45,7 +45,7 @@ void setFileInvalid();
 /* Define this macro in your source file to provide access to Crater log macros */
 
 #define FLOGINIT_DEFAULT()\
-   static const std::string _tag_ = fillwave::strings::getFileNameOnly(__FILE__);     \
+   static const std::string _tag_ = fillwave::common::getFileNameOnly(__FILE__);     \
    static const char _mask_ = FBIT_MAX;
 
 #define FLOGINIT_MASK(mask)\

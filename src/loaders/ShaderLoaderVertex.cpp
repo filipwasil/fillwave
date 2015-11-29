@@ -8,7 +8,7 @@
 #include <fillwave/loaders/ShaderLoaderVertex.h>
 #include <fillwave/Profiler.h>
 #include <fillwave/Assets.h>
-#include <fillwave/extras/string.h>
+#include <fillwave/common/string.h>
 
 namespace fillwave {
 namespace loader {
@@ -94,7 +94,7 @@ const std::string ShaderLoaderVertex::getSource() const {
 
 	"uniform float uTime;\n"
 
-			"uniform mat4 uBones[" + strings::to_string(FILLWAVE_MAX_BONES)
+			"uniform mat4 uBones[" + common::to_string(FILLWAVE_MAX_BONES)
 			+ "];\n";
 
 	std::string mainStart =

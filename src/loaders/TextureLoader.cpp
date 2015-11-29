@@ -8,7 +8,8 @@
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/loaders/FileLoader.h>
 
-#include <fillwave/extras/string.h>
+#include <fillwave/common/string.h>
+
 #include <fillwave/extras/Log.h>
 
 #include <fillwave/Profiler.h>
@@ -51,7 +52,7 @@ core::Texture2DFile* TextureLoader::load(
 		FLOG_DEBUG("Color texture %s generation and loading ...",
 				filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posCheckboard);
-		std::vector<std::string> tokens = strings::split(sub, '_');
+		std::vector<std::string> tokens = common::split(sub, '_');
 		if (tokens.size() >= 3) {
 			r = atoi(tokens[0].c_str());
 			g = atoi(tokens[1].c_str());
@@ -66,7 +67,7 @@ core::Texture2DFile* TextureLoader::load(
 		FLOG_DEBUG("Checkboard texture %s generation and loading ...",
 				filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posCheckboard);
-		std::vector<std::string> tokens = strings::split(sub, '_');
+		std::vector<std::string> tokens = common::split(sub, '_');
 		if (tokens.size() >= 3) {
 			r = atoi(tokens[0].c_str());
 			g = atoi(tokens[1].c_str());
