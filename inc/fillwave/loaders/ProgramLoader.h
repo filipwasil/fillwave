@@ -9,6 +9,7 @@
 #define SRC_LOADERS_PROGRAMLOADER_H_
 
 #include <fillwave/core/pipeline/Program.h>
+#include <fillwave/loaders/ShaderLoader.h>
 
 namespace fillwave {
 class Engine;
@@ -18,7 +19,7 @@ namespace loader {
  * \brief Loads programs.
  */
 
-class ProgramLoader {
+class ProgramLoader : public ShaderLoader {
 public:
 	ProgramLoader() = default;
 

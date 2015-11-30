@@ -19,11 +19,7 @@ namespace loader {
 
 class ShaderLoaderVertex: public ShaderLoader {
 public:
-	ShaderLoaderVertex(
-			eShaderLoaderOpenGLVersion version,
-			eShaderLoaderPrecision precisionInt,
-			eShaderLoaderPrecision precisionFloat,
-			bool animated = false);
+	ShaderLoaderVertex(bool animated = false);
 
 	virtual ~ShaderLoaderVertex() = default;
 

@@ -11,13 +11,8 @@
 namespace fillwave {
 namespace loader {
 
-ShaderLoaderFragment::ShaderLoaderFragment(
-		eShaderLoaderOpenGLVersion version,
-		eShaderLoaderPrecision precisionInt,
-		eShaderLoaderPrecision precisionFloat,
-		GLuint renderTargets)
+ShaderLoaderFragment::ShaderLoaderFragment(GLuint renderTargets)
 		:
-				ShaderLoader(version, precisionInt, precisionFloat),
 				mFog(GL_FALSE),
 				mColor(GL_FALSE),
 				mColorBoost(GL_FALSE),
@@ -28,10 +23,6 @@ ShaderLoaderFragment::ShaderLoaderFragment(
 }
 
 const std::string ShaderLoaderFragment::getSource() const {
-
-	std::string version = (
-			mVersion == eShaderLoaderOpenGLVersion::eOpenGL ?
-					"#version 330 core\n" : "#version 300 es\nprecision lowp float;");
 
 	std::string inputs =
 
@@ -520,7 +511,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 //   end += "fColor" + common::to_string(0) + " = color* 0.001 + texture(uPointShadowMap0, toLightDirection).xyzr;\n";
 	end += "\n}\n";
 
-	return version + inputs + outputs + lightsMaximum + lightStructDefinition
+	return mGLVersion + mGLFragmentPrecision + inputs + outputs + lightsMaximum + lightStructDefinition
 			+ lightUniforms + lightSamplerUniforms + effectsUniforms + textures
 			+ functions + main + end;
 }

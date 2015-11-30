@@ -20,11 +20,7 @@ namespace loader {
 
 class ShaderLoaderFragment: public ShaderLoader {
 public:
-	ShaderLoaderFragment(
-			eShaderLoaderOpenGLVersion version,
-			eShaderLoaderPrecision precisionInt,
-			eShaderLoaderPrecision precisionFloat,
-			GLuint renderTargets = 1);
+	ShaderLoaderFragment(GLuint renderTargets = 1);
 
 	virtual ~ShaderLoaderFragment() = default;
 

@@ -1458,14 +1458,8 @@ pProgram ProgramLoader::getAmbientOcclusionColor(Engine* engine) {
 }
 
 inline pProgram ProgramLoader::getDefaultDR(Engine* engine) {
-#ifdef FILLWAVE_GLES_3_0
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGLES,
-			eShaderLoaderPrecision::eDefaultp,
-			eShaderLoaderPrecision::eLowp);
-#else
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGL,
-			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp);
-#endif
+
+	ShaderLoaderVertex loaderVertex;
 
 	return engine->storeProgram("dr_g",
 			engine->storeShaderFragment("fillwave_dr_g.frag", fsDR)
@@ -1474,21 +1468,8 @@ inline pProgram ProgramLoader::getDefaultDR(Engine* engine) {
 }
 
 inline pProgram ProgramLoader::getDefaultFR(Engine* engine) {
-#ifdef FILLWAVE_GLES_3_0
-	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::eOpenGLES,
-			eShaderLoaderPrecision::eDefaultp,
-			eShaderLoaderPrecision::eDefaultp);
-
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGLES,
-			eShaderLoaderPrecision::eDefaultp,
-			eShaderLoaderPrecision::eLowp);
-#else
-	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::eOpenGL,
-			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp);
-
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGL,
-			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp);
-#endif
+	ShaderLoaderFragment loaderFragment;
+	ShaderLoaderVertex loaderVertex;
 
 	return engine->storeProgram("default",
 			engine->storeShaderFragment("fillwave_default.frag",
@@ -1509,17 +1490,8 @@ pProgram ProgramLoader::getDefault(Engine* engine) {
 }
 
 pProgram ProgramLoader::getDefaultBonesDR(Engine* engine) {
-#ifdef FILLWAVE_GLES_3_0
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGLES,
-			eShaderLoaderPrecision::eDefaultp,
-			eShaderLoaderPrecision::eDefaultp,
-			true);
 
-#else
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGL,
-			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp,
-			true);
-#endif
+	ShaderLoaderVertex loaderVertex(true);
 
 	return engine->storeProgram("default_animated",
 			engine->storeShaderFragment("fillwave_default_animated.frag", fsDR)
@@ -1528,24 +1500,9 @@ pProgram ProgramLoader::getDefaultBonesDR(Engine* engine) {
 }
 
 pProgram ProgramLoader::getDefaultBonesFR(Engine* engine) {
-#ifdef FILLWAVE_GLES_3_0
-	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::eOpenGLES,
-			eShaderLoaderPrecision::eDefaultp,
-			eShaderLoaderPrecision::eDefaultp);
 
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGLES,
-			eShaderLoaderPrecision::eDefaultp,
-			eShaderLoaderPrecision::eDefaultp,
-			true);
-
-#else
-	ShaderLoaderFragment loaderFragment(eShaderLoaderOpenGLVersion::eOpenGL,
-			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp);
-
-	ShaderLoaderVertex loaderVertex(eShaderLoaderOpenGLVersion::eOpenGL,
-			eShaderLoaderPrecision::eDefaultp, eShaderLoaderPrecision::eDefaultp,
-			true);
-#endif
+	ShaderLoaderFragment loaderFragment;
+	ShaderLoaderVertex loaderVertex(true);
 
 	return engine->storeProgram("default_animated_dr",
 			engine->storeShaderFragment("fillwave_default.frag",

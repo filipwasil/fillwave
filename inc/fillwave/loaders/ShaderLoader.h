@@ -13,23 +13,22 @@
 namespace fillwave {
 namespace loader {
 
-enum class eShaderLoaderOpenGLVersion {
-	eOpenGL, eOpenGLES
-};
-
-enum class eShaderLoaderPrecision {
-	eDefaultp, eHighp, eMediump, eLowp
-};
-
 /*! \class ShaderLoader
  * \brief Loads shader sources.
  */
 
 class ShaderLoader {
 protected:
-	eShaderLoaderOpenGLVersion mVersion;
-	eShaderLoaderPrecision mPrecisionFloat;
-	eShaderLoaderPrecision mPrecisionInt;
+#if defined(FILLWAVE_GLES_3_0)
+	const std::string mGLVersion = "#version 300 es\n";
+	const std::string mGLFragmentPrecision = "precision lowp float;\n";
+	const std::string mGLVertexPrecision = "precision mediump float;\n";
+
+#else /* defined(FILLWAVE_GLES_3_0) */
+	const std::string mGLVersion = "#version 330 core\n";
+	const std::string mGLFragmentPrecision = "\n";
+	const std::string mGLVertexPrecision = "\n";
+#endif /* defined(FILLWAVE_GLES_3_0) */
 
 #if defined(FILLWAVE_GLES_2_0)
 	const std::string mGLVaryingIn = "varying";
@@ -40,18 +39,8 @@ protected:
 #endif /* defined(FILLWAVE_GLES_2_0) */
 
 public:
-	ShaderLoader(
-			eShaderLoaderOpenGLVersion version,
-			eShaderLoaderPrecision precisionInt,
-			eShaderLoaderPrecision precisionFloat)
-			:
-					mVersion(version),
-					mPrecisionFloat(precisionFloat),
-					mPrecisionInt(precisionInt) {
-
-	}
+	ShaderLoader() = default;
 	virtual ~ShaderLoader() = default;
-	virtual const std::string getSource() const = 0;
 };
 
 } /* loader */

@@ -13,21 +13,12 @@
 namespace fillwave {
 namespace loader {
 
-ShaderLoaderVertex::ShaderLoaderVertex(
-		eShaderLoaderOpenGLVersion version,
-		eShaderLoaderPrecision precisionInt,
-		eShaderLoaderPrecision precisionFloat,
-		bool animated)
-		: ShaderLoader(version, precisionInt, precisionFloat), mAnimated(animated) {
+ShaderLoaderVertex::ShaderLoaderVertex(bool animated)
+		: mAnimated(animated) {
 
 }
 
 const std::string ShaderLoaderVertex::getSource() const {
-
-	std::string version =
-
-	(mVersion == eShaderLoaderOpenGLVersion::eOpenGL ?
-			"#version 330 core\n" : "#version 300 es\n\n");
 
 	std::string attributes =
 			"layout(location = 0) " + mGLVaryingIn + " vec4 aPosition;                        \n"
@@ -185,7 +176,7 @@ const std::string ShaderLoaderVertex::getSource() const {
 		main = mainStart + mainComputations + mainEnd;
 	}
 
-	return version + attributes + outputs + uniforms + main;
+	return mGLVersion + mGLVertexPrecision +  attributes + outputs + uniforms + main;
 }
 
 } /* loader */
