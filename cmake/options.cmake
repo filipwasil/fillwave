@@ -7,6 +7,7 @@ option(FILLWAVE_BUILD_TGZ "Build tgz packages" OFF)
 option(FILLWAVE_BUILD_PACK "Do not build external packages when not needed (Linux builds)" ON)
 option(FILLWAVE_COMPILATION_STARTUP_ANIMATION "Run startup animation before any other action" OFF)
 option(FILLWAVE_COMPILATION_PC_GLES "Use GLES stub for PC" OFF)
+option(FILLWAVE_COMPILATION_GLES_2_0 "Support old devices with gles 2.0 support" OFF)
 option(NDEBUG "Build with debug logs" OFF)
 
 option(FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)

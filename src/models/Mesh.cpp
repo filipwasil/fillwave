@@ -93,8 +93,11 @@ void Mesh::draw(space::Camera& camera) {
 }
 
 void Mesh::drawDR(space::Camera& camera) {
-	if (mBoneManager || mOcclusionQuery.getResultAsync(1)) {
-
+#ifdef FILLWAVE_GLES_3_0
+#else
+	if (mBoneManager || mOcclusionQuery.getResultAsync(1))
+#endif
+	{
 		mProgram->use();
 
 		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);

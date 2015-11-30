@@ -35,17 +35,17 @@ const std::string ShaderLoaderFragment::getSource() const {
 
 	std::string inputs =
 
-	"in vec4 vColor;\n"
-			"in vec2 vTextureCoordinate;\n"
-			"in vec3 vVertexNormal;\n"
-			"in vec3 vVertexNormalTangent;\n"
-			"in vec4 vVertexWorldSpace;\n"
-			"in vec3 vCameraPosition;\n\n";
+	"" + mGLVaryingIn + " vec4 vColor;\n"
+			"" + mGLVaryingIn + " vec2 vTextureCoordinate;\n"
+			"" + mGLVaryingIn + " vec3 vVertexNormal;\n"
+			"" + mGLVaryingIn + " vec3 vVertexNormalTangent;\n"
+			"" + mGLVaryingIn + " vec4 vVertexWorldSpace;\n"
+			"" + mGLVaryingIn + " vec3 vCameraPosition;\n\n";
 
 	std::string outputs;
 	for (GLuint i = 0; i < mRendertargets; i++) {
 
-		outputs += "out vec4 fColor" + common::to_string(i) + ";\n";
+		outputs += "" + mGLVaryingOut + " vec4 fColor" + common::to_string(i) + ";\n";
 
 	}
 	outputs += "\n";

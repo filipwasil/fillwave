@@ -24,15 +24,24 @@ namespace loader {
 
 /* Headers */
 
-#ifdef FILLWAVE_GLES_3_0
+#if defined(FILLWAVE_GLES_3_0)
 const std::string gGLVersion = "#version 300 es\n";
 const std::string gGLFragmentPrecision = "precision lowp float;\n";
 const std::string gGLVertexPrecision = "precision mediump float;\n";
-#else
+
+#else /* defined(FILLWAVE_GLES_3_0) */
 const std::string gGLVersion = "#version 330 core\n";
 const std::string gGLFragmentPrecision = "\n";
 const std::string gGLVertexPrecision = "\n";
-#endif
+#endif /* defined(FILLWAVE_GLES_3_0) */
+
+#if defined(FILLWAVE_GLES_2_0)
+const std::string gGLVaryingIn = "varying";
+const std::string gGLVaryingOut = "varying";
+#else /* defined(FILLWAVE_GLES_2_0) */
+const std::string gGLVaryingIn = "in";
+const std::string gGLVaryingOut = "out";
+#endif /* defined(FILLWAVE_GLES_2_0) */
 
 /* Special values coded in Shaders to enable Deferred rendering */
 
@@ -45,43 +54,43 @@ const std::string gGLBones = "uniform mat4 uBones["
 		+ common::to_string(FILLWAVE_MAX_BONES) + "];\n";
 
 const std::string gGLVSAttributes =
-		"layout(location = 0) in vec4 aPosition;                        \n"
-				"layout(location = 1) in vec4 aColor;                           \n"
-				"layout(location = 2) in vec3 aNormal;                          \n"
-				"layout(location = 3) in vec3 aNormalTangent;                   \n"
-				"layout(location = 4) in vec2 aTextureCoordinate;               \n"
+		"layout(location = 0) " + gGLVaryingIn + " vec4 aPosition;                        \n"
+				"layout(location = 1) " + gGLVaryingIn + " vec4 aColor;                           \n"
+				"layout(location = 2) " + gGLVaryingIn + " vec3 aNormal;                          \n"
+				"layout(location = 3) " + gGLVaryingIn + " vec3 aNormalTangent;                   \n"
+				"layout(location = 4) " + gGLVaryingIn + " vec2 aTextureCoordinate;               \n"
 #if FILLWAVE_MAX_BONES_DEPENDENCIES == 8
-		"layout(location = 5) in ivec4 aBoneID;                         \n"
-		"layout(location = 6) in ivec4 aBoneID2;                        \n"
-		"layout(location = 7) in vec4 aWeight;                          \n"
-		"layout(location = 8) in vec4 aWeight2;                         \n";
+		"layout(location = 5) " + gGLVaryingIn + " ivec4 aBoneID;                         \n"
+		"layout(location = 6) " + gGLVaryingIn + " ivec4 aBoneID2;                        \n"
+		"layout(location = 7) " + gGLVaryingIn + " vec4 aWeight;                          \n"
+		"layout(location = 8) " + gGLVaryingIn + " vec4 aWeight2;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 7
-		"layout(location = 5) in ivec4 aBoneID;                         \n"
-		"layout(location = 6) in ivec3 aBoneID2;                        \n"
-		"layout(location = 7) in vec4 aWeight;                          \n"
-		"layout(location = 8) in vec3 aWeight2;                         \n";
+		"layout(location = 5) " + gGLVaryingIn + " ivec4 aBoneID;                         \n"
+		"layout(location = 6) " + gGLVaryingIn + " ivec3 aBoneID2;                        \n"
+		"layout(location = 7) " + gGLVaryingIn + " vec4 aWeight;                          \n"
+		"layout(location = 8) " + gGLVaryingIn + " vec3 aWeight2;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 6
-		"layout(location = 5) in ivec4 aBoneID;                         \n"
-		"layout(location = 6) in ivec2 aBoneID2;                        \n"
-		"layout(location = 7) in vec4 aWeight;                          \n"
-		"layout(location = 8) in vec2 aWeight2;                         \n";
+		"layout(location = 5) " + gGLVaryingIn + " ivec4 aBoneID;                         \n"
+		"layout(location = 6) " + gGLVaryingIn + " ivec2 aBoneID2;                        \n"
+		"layout(location = 7) " + gGLVaryingIn + " vec4 aWeight;                          \n"
+		"layout(location = 8) " + gGLVaryingIn + " vec2 aWeight2;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 5
-		"layout(location = 5) in ivec4 aBoneID;                         \n"
-		"layout(location = 6) in int aBoneID2;                          \n"
-		"layout(location = 7) in vec4 aWeight;                          \n"
-		"layout(location = 8) in float aWeight2;                        \n";
+		"layout(location = 5) " + gGLVaryingIn + " ivec4 aBoneID;                         \n"
+		"layout(location = 6) " + gGLVaryingIn + " int aBoneID2;                          \n"
+		"layout(location = 7) " + gGLVaryingIn + " vec4 aWeight;                          \n"
+		"layout(location = 8) " + gGLVaryingIn + " float aWeight2;                        \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 4
-		"layout(location = 5) in ivec4 aBoneID;                         \n"
-		"layout(location = 6) in vec4 aWeight;                          \n";
+		"layout(location = 5) " + gGLVaryingIn + " ivec4 aBoneID;                         \n"
+		"layout(location = 6) " + gGLVaryingIn + " vec4 aWeight;                          \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 3
-"layout(location = 5) in ivec3 aBoneID;                         \n"
-"layout(location = 6) in vec3 aWeight;                          \n";
+"layout(location = 5) " + gGLVaryingIn + " ivec3 aBoneID;                         \n"
+"layout(location = 6) " + gGLVaryingIn + " vec3 aWeight;                          \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 2
-"layout(location = 5) in ivec2 aBoneID;                         \n"
-"layout(location = 6) in vec2 aWeight;                          \n";
+"layout(location = 5) " + gGLVaryingIn + " ivec2 aBoneID;                         \n"
+"layout(location = 6) " + gGLVaryingIn + " vec2 aWeight;                          \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 1
-"layout(location = 5) in int aBoneID;                           \n"
-"layout(location = 6) in float aWeight;                         \n";
+"layout(location = 5) " + gGLVaryingIn + " int aBoneID;                           \n"
+"layout(location = 6) " + gGLVaryingIn + " float aWeight;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 0
 #else
 #error "Too many bone dependencies"
@@ -137,30 +146,30 @@ const std::string gGLVSBonesTransformation =
 #error "Too many bone dependencies"
 #endif
 ;const std::string gGLVSAttributesPosition =
-		"layout(location = 0) in vec4 aPosition;                        \n";
+		"layout(location = 0) " + gGLVaryingIn + " vec4 aPosition;                        \n";
 
 const std::string gGLVSAttributesQuad =
-		"layout (location = 0) in vec2 aPosition;\n"
-				"layout (location = 1) in vec2 aTextureCoordinate;              \n";
+		"layout (location = 0) " + gGLVaryingIn + " vec2 aPosition;\n"
+				"layout (location = 1) " + gGLVaryingIn + " vec2 aTextureCoordinate;              \n";
 
 const std::string gGLVSAttributesEmiterCPU =
-		"layout (location = 0) in vec3 aVelocity;\n"
-				"layout (location = 1) in vec3 aStartPosition;\n"
-				"layout (location = 2) in float aStartTime;\n";
+		"layout (location = 0) " + gGLVaryingIn + " vec3 aVelocity;\n"
+				"layout (location = 1) " + gGLVaryingIn + " vec3 aStartPosition;\n"
+				"layout (location = 2) " + gGLVaryingIn + " float aStartTime;\n";
 
 const std::string gGLVSAttributesEmiter =
-		"layout(location = 0) in vec3 aPosition;                             \n"
-				"layout(location = 1) in vec3 aVelocity;                             \n"
-				"layout(location = 2) in float aSize;                                \n"
-				"layout(location = 3) in float aCurtime;                             \n"
-				"layout(location = 4) in float aLifetime;                            \n"
-				"layout(location = 5) in float aCameraDistance;                      \n";
+		"layout(location = 0) " + gGLVaryingIn + " vec3 aPosition;                             \n"
+				"layout(location = 1) " + gGLVaryingIn + " vec3 aVelocity;                             \n"
+				"layout(location = 2) " + gGLVaryingIn + " float aSize;                                \n"
+				"layout(location = 3) " + gGLVaryingIn + " float aCurtime;                             \n"
+				"layout(location = 4) " + gGLVaryingIn + " float aLifetime;                            \n"
+				"layout(location = 5) " + gGLVaryingIn + " float aCameraDistance;                      \n";
 
 const std::string gGLVSAttributesAO =
-		"layout(location = 0) in vec4 aPosition;\n"
-				"layout(location = 1) in vec4 aColor;\n"
-				"layout(location = 2) in vec3 aNormal;\n"
-				"layout(location = 3) in vec3 aNormalTangent;\n";
+		"layout(location = 0) " + gGLVaryingIn + " vec4 aPosition;\n"
+				"layout(location = 1) " + gGLVaryingIn + " vec4 aColor;\n"
+				"layout(location = 2) " + gGLVaryingIn + " vec3 aNormal;\n"
+				"layout(location = 3) " + gGLVaryingIn + " vec3 aNormalTangent;\n";
 
 /* Lights */
 
@@ -279,10 +288,10 @@ const std::string fsSkybox = gGLVersion + gGLFragmentPrecision
 
 const std::string fsSkyboxDR = gGLVersion + gGLFragmentPrecision +
 
-"layout (location = 0) out vec3 fWorldPosition;\n"
-		"layout (location = 1) out vec3 fDiffuseTexel;\n"
-		"layout (location = 2) out vec3 fNormal;\n"
-		"layout (location = 3) out vec3 fSpecularTexel;\n"
+"layout (location = 0) " + gGLVaryingOut + " vec3 fWorldPosition;\n"
+		"layout (location = 1) " + gGLVaryingOut + " vec3 fDiffuseTexel;\n"
+		"layout (location = 2) " + gGLVaryingOut + " vec3 fNormal;\n"
+		"layout (location = 3) " + gGLVaryingOut + " vec3 fSpecularTexel;\n"
 
 		"uniform samplerCube uTextureUnit;\n"
 
@@ -310,10 +319,10 @@ const std::string vsSkybox =
 
 const std::string fsDRAmbientG = gGLVersion + gGLFragmentPrecision +
 
-"layout (location = 0) out vec3 fWorldPosition;\n"
-		"layout (location = 1) out vec3 fDiffuseTexel;\n"
-		"layout (location = 2) out vec3 fNormal;\n"
-		"layout (location = 3) out vec3 fSpecularTexel;\n"
+"layout (location = 0) " + gGLVaryingOut + " vec3 fWorldPosition;\n"
+		"layout (location = 1) " + gGLVaryingOut + " vec3 fDiffuseTexel;\n"
+		"layout (location = 2) " + gGLVaryingOut + " vec3 fNormal;\n"
+		"layout (location = 3) " + gGLVaryingOut + " vec3 fSpecularTexel;\n"
 
 		"uniform sampler2D uTextureUnit;\n"
 
@@ -683,7 +692,7 @@ const std::string vsOcclusion = gGLVersion + gGLVSAttributes
 		+ vsSimpleVertexPass;
 
 const std::string fsAOGeometry = gGLVersion + "in vec3 vMVPosition;\n"
-		"layout (location = 0) out vec3 fMVPosition;\n"
+		"layout (location = 0) " + gGLVaryingOut + " vec3 fMVPosition;\n"
 		"void main() {\n"
 		"   fMVPosition = vMVPosition;\n"
 		"}\n";
@@ -705,10 +714,10 @@ const std::string fsDR =
 						"in vec3 vVertexNormalTangent;\n"
 						"in vec2 vTextureCoordinate;\n"
 
-						"layout (location = 0) out vec3 fWorldPosition;\n"
-						"layout (location = 1) out vec3 fDiffuseTexel;\n"
-						"layout (location = 2) out vec3 fNormal;\n"
-						"layout (location = 3) out vec3 fSpecularTexel;\n"
+						"layout (location = 0) " + gGLVaryingOut + " vec3 fWorldPosition;\n"
+						"layout (location = 1) " + gGLVaryingOut + " vec3 fDiffuseTexel;\n"
+						"layout (location = 2) " + gGLVaryingOut + " vec3 fNormal;\n"
+						"layout (location = 3) " + gGLVaryingOut + " vec3 fSpecularTexel;\n"
 
 						"uniform sampler2D uDiffuseTextureUnit;\n"
 						"uniform sampler2D uNormalTextureUnit;\n"
@@ -1035,7 +1044,9 @@ std::string fsDRLightSpot =
 
 						"   Attenuation = max(1.0, Attenuation);\n"
 
-						"   Attenuation = (Attenuation * 1.0) / (calculateSpotShadowPCF(uLight.mvp * vec4(WorldPos, 1.0), uShadowMap));\n"
+						"   float tmp = (Attenuation * 1.0) / (calculateSpotShadowPCF(uLight.mvp * vec4(WorldPos, 1.0), uShadowMap));\n"
+
+						"   Attenuation = tmp;\n"
 
 						"   return CalcLightInternal(uLight.base,\n"
 						"                            uLight.position-WorldPos,\n"

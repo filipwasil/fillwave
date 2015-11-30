@@ -30,43 +30,43 @@ const std::string ShaderLoaderVertex::getSource() const {
 			"#version 330 core\n" : "#version 300 es\n\n");
 
 	std::string attributes =
-			"layout(location = 0) in vec4 aPosition;                        \n"
-					"layout(location = 1) in vec4 aColor;                           \n"
-					"layout(location = 2) in vec3 aNormal;                          \n"
-					"layout(location = 3) in vec3 aNormalTangent;                   \n"
-					"layout(location = 4) in vec2 aTextureCoordinate;               \n"
+			"layout(location = 0) " + mGLVaryingIn + " vec4 aPosition;                        \n"
+					"layout(location = 1) " + mGLVaryingIn + " vec4 aColor;                           \n"
+					"layout(location = 2) " + mGLVaryingIn + " vec3 aNormal;                          \n"
+					"layout(location = 3) " + mGLVaryingIn + " vec3 aNormalTangent;                   \n"
+					"layout(location = 4) " + mGLVaryingIn + " vec2 aTextureCoordinate;               \n"
 #if FILLWAVE_MAX_BONES_DEPENDENCIES == 8
-			"layout(location = 5) in ivec4 aBoneID;                         \n"
-			"layout(location = 6) in ivec4 aBoneID2;                        \n"
-			"layout(location = 7) in vec4 aWeight;                          \n"
-			"layout(location = 8) in vec4 aWeight2;                         \n";
+			"layout(location = 5) " + mGLVaryingIn + " ivec4 aBoneID;                         \n"
+			"layout(location = 6) " + mGLVaryingIn + " ivec4 aBoneID2;                        \n"
+			"layout(location = 7) " + mGLVaryingIn + " vec4 aWeight;                          \n"
+			"layout(location = 8) " + mGLVaryingIn + " vec4 aWeight2;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 7
-			"layout(location = 5) in ivec4 aBoneID;                         \n"
-			"layout(location = 6) in ivec3 aBoneID2;                        \n"
-			"layout(location = 7) in vec4 aWeight;                          \n"
-			"layout(location = 8) in vec3 aWeight2;                         \n";
+			"layout(location = 5) " + mGLVaryingIn + " ivec4 aBoneID;                         \n"
+			"layout(location = 6) " + mGLVaryingIn + " ivec3 aBoneID2;                        \n"
+			"layout(location = 7) " + mGLVaryingIn + " vec4 aWeight;                          \n"
+			"layout(location = 8) " + mGLVaryingIn + " vec3 aWeight2;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 6
-			"layout(location = 5) in ivec4 aBoneID;                         \n"
-			"layout(location = 6) in ivec2 aBoneID2;                        \n"
-			"layout(location = 7) in vec4 aWeight;                          \n"
-			"layout(location = 8) in vec2 aWeight2;                         \n";
+			"layout(location = 5) " + mGLVaryingIn + " ivec4 aBoneID;                         \n"
+			"layout(location = 6) " + mGLVaryingIn + " ivec2 aBoneID2;                        \n"
+			"layout(location = 7) " + mGLVaryingIn + " vec4 aWeight;                          \n"
+			"layout(location = 8) " + mGLVaryingIn + " vec2 aWeight2;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 5
-			"layout(location = 5) in ivec4 aBoneID;                         \n"
-			"layout(location = 6) in int aBoneID2;                          \n"
-			"layout(location = 7) in vec4 aWeight;                          \n"
-			"layout(location = 8) in float aWeight2;                        \n";
+			"layout(location = 5) " + mGLVaryingIn + " ivec4 aBoneID;                         \n"
+			"layout(location = 6) " + mGLVaryingIn + " int aBoneID2;                          \n"
+			"layout(location = 7) " + mGLVaryingIn + " vec4 aWeight;                          \n"
+			"layout(location = 8) " + mGLVaryingIn + " float aWeight2;                        \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 4
-			"layout(location = 5) in ivec4 aBoneID;                         \n"
-			"layout(location = 6) in vec4 aWeight;                          \n";
+			"layout(location = 5) " + mGLVaryingIn + " ivec4 aBoneID;                         \n"
+			"layout(location = 6) " + mGLVaryingIn + " vec4 aWeight;                          \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 3
-	"layout(location = 5) in ivec3 aBoneID;                         \n"
-	"layout(location = 6) in vec3 aWeight;                          \n";
+	"layout(location = 5) " + mGLVaryingIn + " ivec3 aBoneID;                         \n"
+	"layout(location = 6) " + mGLVaryingIn + " vec3 aWeight;                          \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 2
-	"layout(location = 5) in ivec2 aBoneID;                         \n"
-	"layout(location = 6) in vec2 aWeight;                          \n";
+	"layout(location = 5) " + mGLVaryingIn + " ivec2 aBoneID;                         \n"
+	"layout(location = 6) " + mGLVaryingIn + " vec2 aWeight;                          \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 1
-	"layout(location = 5) in int aBoneID;                           \n"
-	"layout(location = 6) in float aWeight;                         \n";
+	"layout(location = 5) " + mGLVaryingIn + " int aBoneID;                           \n"
+	"layout(location = 6) " + mGLVaryingIn + " float aWeight;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 0
 #else
 #error "Too many bone dependencies"
@@ -74,12 +74,12 @@ const std::string ShaderLoaderVertex::getSource() const {
 
 	std::string outputs =
 
-	"out vec4 vColor;\n"
-			"out vec2 vTextureCoordinate;\n"
-			"out vec3 vVertexNormal; // N\n"
-			"out vec3 vVertexNormalTangent;\n"
-			"out vec4 vVertexWorldSpace;\n"
-			"out vec3 vCameraPosition;\n\n";
+	"" + mGLVaryingOut + " vec4 vColor;\n"
+			"" + mGLVaryingOut + " vec2 vTextureCoordinate;\n"
+			"" + mGLVaryingOut + " vec3 vVertexNormal; // N\n"
+			"" + mGLVaryingOut + " vec3 vVertexNormalTangent;\n"
+			"" + mGLVaryingOut + " vec4 vVertexWorldSpace;\n"
+			"" + mGLVaryingOut + " vec3 vCameraPosition;\n\n";
 
 	std::string uniforms =
 
