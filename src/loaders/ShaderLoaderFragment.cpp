@@ -504,11 +504,14 @@ const std::string ShaderLoaderFragment::getSource() const {
 
 	std::string end = "";
 
+#if defined(FILLWAVE_GLES_2_0)
+	end += "gl_FragColor = color;\n";
+#else
+	/* Many render targets for DR */
 	for (GLuint i = 0; i < mRendertargets; i++) {
 		end += "fColor" + common::to_string(i) + " = color;\n";
 	}
-
-//   end += "fColor" + common::to_string(0) + " = color* 0.001 + texture(uPointShadowMap0, toLightDirection).xyzr;\n";
+#endif
 	end += "\n}\n";
 
 	return mGLVersion + mGLFragmentPrecision + inputs + outputs + lightsMaximum + lightStructDefinition

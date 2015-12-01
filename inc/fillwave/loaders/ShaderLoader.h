@@ -33,9 +33,11 @@ protected:
 #if defined(FILLWAVE_GLES_2_0)
 	const std::string mGLVaryingIn = "varying";
 	const std::string mGLVaryingOut = "varying";
+
 #else /* defined(FILLWAVE_GLES_2_0) */
 	const std::string mGLVaryingIn = "in";
 	const std::string mGLVaryingOut = "out";
+
 #endif /* defined(FILLWAVE_GLES_2_0) */
 
 public:
