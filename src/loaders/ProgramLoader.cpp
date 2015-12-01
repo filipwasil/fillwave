@@ -28,12 +28,15 @@ namespace loader {
 const std::string gGLVersion = "#version 300 es\n";
 const std::string gGLFragmentPrecision = "precision lowp float;\n";
 const std::string gGLVertexPrecision = "precision mediump float;\n";
-
-#else /* defined(FILLWAVE_GLES_3_0) */
+#elif defined(FILLWAVE_GLES_2_0)
+const std::string gGLVersion = "#version 200 es\n";
+const std::string gGLFragmentPrecision = "precision lowp float;\n";
+const std::string gGLVertexPrecision = "precision mediump float;\n";
+#else /* defined(FILLWAVE_GLES_3_0) || defined(FILLWAVE_GLES_2_0) */
 const std::string gGLVersion = "#version 330 core\n";
 const std::string gGLFragmentPrecision = "\n";
 const std::string gGLVertexPrecision = "\n";
-#endif /* defined(FILLWAVE_GLES_3_0) */
+#endif /* defined(FILLWAVE_GLES_3_0) || defined(FILLWAVE_GLES_2_0) */
 
 #if defined(FILLWAVE_GLES_2_0)
 const std::string gGLVaryingIn = "varying";
@@ -269,7 +272,7 @@ const std::string fsShadowColorCoded = gGLVersion + gGLFragmentPrecision
 				"uniform vec3 uLightPosition;\n" + gGLColorOutDefinition
 		+ "void main() {\n"
 				"   float color = length(vWorldSpacePosition - uLightPosition);\n"
-				"   fColor = vec4(color, color, color, 1.0);\n"
+				"   " + gGLColorOutAssingment + " = vec4(color, color, color, 1.0);\n"
 				"}\n";
 /* xxx double check this case "out float fColor;\n" */
 
@@ -286,7 +289,7 @@ const std::string fsDebugger =
 						"void main () {\n"
 						"  vec4 depth = texture (uTextureUnit, vTextureCoordinate);\n"
 						"  float depthLin = linearizeDepth(depth.z);\n"
-						"  fColor = vec4(depthLin, depthLin, depthLin,1.0);\n"
+						"  " + gGLColorOutAssingment + " = vec4(depthLin, depthLin, depthLin,1.0);\n"
 						"}\n";
 
 const std::string vsDebugger = gGLVersion + gGLVertexPrecision
@@ -300,7 +303,7 @@ const std::string fsSkybox = gGLVersion + gGLFragmentPrecision
 		+ "in vec3 vTextureCoordinate;\n"
 				"uniform samplerCube uTextureUnit;\n" + gGLColorOutDefinition
 		+ "void main() {\n"
-				"   fColor = texture(uTextureUnit, vTextureCoordinate);\n"
+				"   " + gGLColorOutAssingment + " = texture(uTextureUnit, vTextureCoordinate);\n"
 				"}\n";
 
 const std::string fsSkyboxDR = gGLVersion + gGLFragmentPrecision +
@@ -360,11 +363,11 @@ const std::string fsText =
 						"uniform vec4 uColour;\n" + gGLColorOutDefinition
 				+ "void main (){\n"
 						"  float pixelSize = 0.001;\n"
-						"  fColor = vec4(0.0);\n"
+						"  vec4 color = vec4(0.0);\n"
 						"  for (float i=-1.0;i<=1.0;i++)\n"
 						"     for (float j=-1.0;j<=1.0;j++)\n"
-						"        fColor += texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour;\n"
-						"  fColor = fColor * 0.11;\n"
+						"        color += texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour;\n"
+						"  " + gGLColorOutAssingment + " = color * 0.11;\n"
 						"}\n"
 						"\n";
 
@@ -376,10 +379,11 @@ const std::string fsTextBold =
 						"uniform vec4 uColour;\n" + gGLColorOutDefinition
 				+ "void main (){\n"
 						"  float pixelSize = 0.001;\n"
-						"  fColor = vec4(0.0);\n"
+						"  vec4 color = vec4(0.0);\n"
 						"  for (float i=-1.0;i<=1.0;i++)\n"
 						"     for (float j=-1.0;j<=1.0;j++)\n"
-						"        fColor = max(texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour, fColor);\n"
+						"        color = max(texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour, color);\n"
+						"" + gGLColorOutAssingment + " = color;\n"
 						"}\n"
 						"\n";
 
@@ -467,25 +471,26 @@ const std::string fsParticlesGPU = gGLVersion + gGLFragmentPrecision + //xxx low
 				"uniform sampler2D uTextureUnit;                       \n"
 				" + gGLColorOutAssingment + "
 				"uniform float uAlphaCutOff;                           \n"
+		 + gGLColorOutDefinition +
 				"void main() {                                         \n"
 				"   vec4 texel = texture2D( uTextureUnit, gl_PointCoord ); \n"
-				"   fColor = texel * uColor;                        \n"
-				"   if(length(fColor) < uAlphaCutOff) {                \n"
+				"   " + gGLColorOutAssingment + " = texel * uColor;                        \n"
+				"   if(length(texel * uColor) < uAlphaCutOff) {                \n"
 				"      discard;                                        \n"
 				"   }                                                  \n"
 				"}                                                     \n";
 
 const std::string fsParticlesCPU = gGLVersion + gGLFragmentPrecision + //xxx low precision
 		"in float vOpacity;                                           \n"
-				" + gGLColorOutAssingment + "
+				"" + gGLColorOutDefinition + ""
 				"uniform sampler2D uTextureUnit;                              \n"
 				"uniform float uAlphaCutOff;                                  \n"
 				"uniform vec4 uColor;                                         \n"
 				"void main () {                                               \n"
 				"   vec4 texel = texture (uTextureUnit, gl_PointCoord);       \n"
-				"   fColor = texel * uColor;                                   \n"
-				"   fColor.a = fColor.a * vOpacity;                           \n"
-				"   if(fColor.a < uAlphaCutOff ) { \n"
+				"   vec4 color = texel * uColor;\n"
+				"   " + gGLColorOutAssingment + " = vec4 (color.xyz, color.a * vOpacity);            \n"
+				"   if(color.a < uAlphaCutOff ) { \n"
 				"      discard;\n"
 				"   }\n"
 				"}\n";
