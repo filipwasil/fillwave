@@ -39,21 +39,13 @@ public:
 	void onDetached();
 	void onAttached(Entity* parent);
 
-	/* Draws */
-
 	/* Drawing */
 	virtual void draw(space::Camera& camera);
-
 	virtual void drawDR(space::Camera& camera);
-
 	virtual void drawDepth(space::Camera& camera);
-
 	virtual void drawDepthColor(space::Camera& camera, glm::vec3& position);
-
 	virtual void drawAOG(space::Camera& camera);
-
 	virtual void drawAOC(space::Camera& camera);
-
 	virtual void drawOcclusionBox(space::Camera& camera);
 
 	/* Flags */

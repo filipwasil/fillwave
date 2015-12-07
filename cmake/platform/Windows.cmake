@@ -38,14 +38,6 @@ ADD_LIBRARY(fillwave SHARED ${FILLWAVE_SOURCES})
 # Linker
 # -----------------------------------------------
 
-if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
-    set( FILLWAVE_GLEW_BUILD glew32 )
-elseif( CMAKE_SIZEOF_VOID_P EQUAL 8 )
-    set( FILLWAVE_GLEW_BUILD glew64 )
-else()
-    message( FATAL_ERROR "Data width could not be determined!" )
-endif()
-
 ADD_DEPENDENCIES(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator ${FILLWAVE_GLEW_BUILD})
 TARGET_LINK_LIBRARIES(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator ${FILLWAVE_GLEW_BUILD})
  

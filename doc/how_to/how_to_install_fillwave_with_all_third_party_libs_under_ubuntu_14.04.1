@@ -1,0 +1,12 @@
+# to run example glfw3 is needed.
+# To build it You must have these packages installed
+sudo apt-get install libxrandr-dev libxinerama-dev libxcursor-dev
+
+git clone https://github.com/filipwasil/fillwave.git
+cd fillwave
+git submodule init && git submodule update
+cd scripts
+
+./build_linux_ext.sh # will build glew, glfw, freetype, glm and assimp
+
+./build_linux.sh # will build only fillwave (glew, glfw, freetype, assimp and glm libraries must be present in the system)

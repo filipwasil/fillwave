@@ -60,7 +60,7 @@ endif(APPLE)
 # WINDOWS
 # -----------------------------------------------
 
-if(WIN32)
+if(WIN32 OR FILLWAVE_BUILD_PACK)
    include_directories("${CMAKE_SOURCE_DIR}/ext/glm")
    include_directories("${CMAKE_SOURCE_DIR}/ext/glew/include")
    include_directories("${CMAKE_SOURCE_DIR}/ext/assimp/include")
@@ -68,7 +68,7 @@ if(WIN32)
    include_directories("${CMAKE_SOURCE_DIR}/ext/glfw/include")
    target_link_libraries(${PROGRAM}  glfw fillwave)
    INSTALL(TARGETS ${PROGRAM} DESTINATION bin COMPONENT fillwave)
-endif(WIN32)
+endif(WIN32 OR FILLWAVE_BUILD_PACK)
 
 # -----------------------------------------------
 # LINUX

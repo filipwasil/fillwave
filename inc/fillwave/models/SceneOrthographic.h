@@ -34,23 +34,14 @@ public:
 	pCamera getCamera();
 
 	void draw();
-
 	void drawDR();
-
 	void draw(space::CameraOrthographic& camera);
-
 	void drawDR(space::CameraOrthographic& camera);
-
 	void drawPicking();
-
 	void drawSkybox();
-
 	void drawDepthInt();
-
 	void drawAOG();
-
 	void drawAOC();
-
 	void drawOcclusion();
 
 private:

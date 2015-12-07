@@ -28,7 +28,7 @@ project(libfillwave C CXX)
 set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator)
 
 # -----------------------------------------------
-# Asset loader
+# Includes
 # -----------------------------------------------
 
 include_directories(${FILLWAVE_PATH_INCLUDE}
@@ -37,6 +37,10 @@ include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
                     ${FILLWAVE_MODEL_LOADER_INCLUDES}
                     /usr/include/freetype2) #uglt freetype2 needs /usr/local/include/freetype2/ft2build.h
+
+if(FILLWAVE_BUILD_PACK)
+	include_directories(${FILLWAVE_EXT_GLM_INCLUDES})
+endif()
 
 # -----------------------------------------------
 # Targets
@@ -60,23 +64,32 @@ endif(FILLWAVE_BUILD_RPM)
 
 add_subdirectory(ext)
 
+if(FILLWAVE_BUILD_PACK)
+	add_subdirectory(ext/glew)
+	add_subdirectory(ext/assimp)
+	add_subdirectory(ext/freetype2)
+	add_subdirectory(ext/glfw) # needs randr libraries
+endif()
+
 # -----------------------------------------------
 # Linker
 # -----------------------------------------------
 
-target_link_libraries(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator freetype)
-
 if(FILLWAVE_COMPILATION_PC_GLES)
 else()
     if(FILLWAVE_BUILD_PACK)
-        add_dependencies(fillwave GLEW)
-        target_link_libraries(fillwave GLEW)
+        add_dependencies(fillwave ${FILLWAVE_GLEW_BUILD})
+        target_link_libraries(fillwave ${FILLWAVE_GLEW_BUILD})
+		include_directories(${FILLWAVE_EXT_GLEW_INCLUDES})
     else()
         add_subdirectory(${FILLWAVE_EXT_GLEW_PATH})
         add_dependencies(fillwave glew)
         target_link_libraries(fillwave glew)
     endif()
 endif()
+
+target_link_libraries(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator freetype)
+
 # -----------------------------------------------
 # Test app
 # -----------------------------------------------

@@ -39,19 +39,12 @@ public:
 	pCursor getCursor();
 
 	virtual void draw() = 0;
-
 	virtual void drawDR() = 0;
-
 	virtual void drawAOG() = 0;
-
 	virtual void drawAOC() = 0;
-
 	virtual void drawDepthInt() = 0;
-
 	virtual void drawPicking() = 0;
-
 	virtual void drawSkybox() = 0;
-
 	virtual void drawOcclusion() = 0;
 
 	virtual pCamera getCamera() = 0;
