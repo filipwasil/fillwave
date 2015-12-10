@@ -16,7 +16,7 @@ TimedColorCallback::TimedColorCallback(
 		pModel model,
 		glm::vec4 endColor,
 		GLfloat lifeTime,
-		eEasing easing)
+		EasingFunction easing)
 		:
 				TimedCallback(lifeTime, easing),
 				mStartColor(glm::vec4(0.0)),

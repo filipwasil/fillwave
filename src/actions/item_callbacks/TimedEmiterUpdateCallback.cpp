@@ -15,7 +15,7 @@ namespace actions {
 TimedEmiterUpdateCallback::TimedEmiterUpdateCallback(
 		pEmiterPoint emiter,
 		GLfloat timeToFinish,
-		eEasing easing)
+		EasingFunction easing)
 		: TimedCallback(timeToFinish, easing), mEmiter(emiter), mTimePassed(0.0) {
 
 }

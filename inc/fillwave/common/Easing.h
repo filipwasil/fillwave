@@ -14,6 +14,7 @@
 #define EASING_H_
 
 #include <fillwave/OpenGL.h>
+#include <functional>
 
 #if defined(__LP64__) && !defined(AH_EASING_USE_DBL_PRECIS)
 #define AH_EASING_USE_DBL_PRECIS
@@ -30,7 +31,8 @@ typedef GLfloat AHFloat;
  #endif
  */
 
-typedef AHFloat (*AHEasingFunction)(AHFloat);
+//typedef AHFloat (*AHEasingFunction)(AHFloat);
+typedef std::function<AHFloat(AHFloat)> EasingFunction;
 
 // Linear interpolation (no easing)
 AHFloat LinearInterpolation(AHFloat p);

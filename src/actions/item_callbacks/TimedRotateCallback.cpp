@@ -21,7 +21,7 @@ TimedRotateCallback::TimedRotateCallback(
 		glm::vec3 axis,
 		GLfloat angle,
 		GLfloat lifeTime,
-		eEasing easing)
+		EasingFunction easing)
 		:
 				TimedCallback(lifeTime, easing),
 				mMoveable(moveable),

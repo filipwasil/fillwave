@@ -15,7 +15,7 @@ TimedScaleCallback::TimedScaleCallback(
 		pMoveable moveable,
 		glm::vec3 normalizedScaleVec,
 		GLfloat lifetime,
-		eEasing easing)
+		EasingFunction easing)
 		:
 				TimedCallback(lifetime, easing),
 				mEndScale(normalizedScaleVec),
@@ -27,7 +27,7 @@ TimedScaleCallback::TimedScaleCallback(
 		pMoveable moveable,
 		GLfloat normalizedScale,
 		GLfloat lifetime,
-		eEasing easing)
+		EasingFunction easing)
 		:
 				TimedCallback(lifetime, easing),
 				mEndScale(normalizedScale, normalizedScale, normalizedScale),

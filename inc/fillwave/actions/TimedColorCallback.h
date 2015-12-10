@@ -25,7 +25,7 @@ public:
 			pModel model,
 			glm::vec4 endColor,
 			GLfloat lifeTime,
-			eEasing easing);
+			EasingFunction easing);
 
 	virtual ~TimedColorCallback() = default;
 

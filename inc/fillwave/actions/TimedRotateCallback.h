@@ -24,7 +24,7 @@ public:
 			glm::vec3 axis,
 			GLfloat angle,
 			GLfloat lifeTime,
-			eEasing easing = eEasing::eNone);
+			EasingFunction easing = LinearInterpolation);
 
 	virtual ~TimedRotateCallback() = default;
 

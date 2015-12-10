@@ -12,35 +12,9 @@
 #include <fillwave/actions/ItemCallback.h>
 #include <fillwave/actions/TimeEvent.h>
 #include <fillwave/models/Moveable.h>
+#include <fillwave/common/Easing.h>
 
 namespace fillwave {
-
-enum class eEasing : unsigned int {
-	eNone,
-
-	eSineIn, eSineOut, eSineInOut,
-
-	eQuadIn, eQuadOut, eQuadInOut,
-
-	eCubicIn, eCubicOut, eCubicInOut,
-
-	eQuartIn, eQuartOut, eQuartInOut,
-
-	eQuintIn, eQuintOut, eQuintInOut,
-
-	eExpoIn, eExpoOut, eExpoInOut,
-
-	eCircIn, eCircOut, eCircInOut,
-
-	eBackIn, eBackOut, eBackInOut,
-
-	eElasticIn, eElastic, eElasticInOut,
-
-	eBounceIn, eBounce, eBounceInOut,
-
-	eCustom
-};
-
 namespace actions {
 
 /*! \class TimedCallback
@@ -51,7 +25,7 @@ namespace actions {
 
 class TimedCallback: public ItemCallback {
 public:
-	TimedCallback(GLfloat timeToFinish, eEasing easing = eEasing::eNone);
+	TimedCallback(GLfloat timeToFinish, EasingFunction funcion = LinearInterpolation);
 
 	virtual ~TimedCallback() = default;
 
@@ -63,12 +37,10 @@ public:
 
 	virtual void performTime(TimeEventData& e);
 
-	virtual GLfloat easeCustom(GLfloat progress);
-
 	GLfloat ease(GLfloat progress);
 
 private:
-	eEasing mEasing;
+	EasingFunction mEasing;
 };
 
 } /* actions */
