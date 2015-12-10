@@ -543,7 +543,7 @@ const std::string vsQuad = gGLVersion + gGLVertexPrecision
 				"}\n";
 
 const std::string fsQuad =
-		gGLVersion + gGLVertexPrecision
+		gGLVersion + gGLFragmentPrecision
 				+ "in vec2 vPosition;\n"
 						"out vec4 fColour;\n"
 						"uniform sampler2D uPostProcessingSampler;\n"
@@ -713,7 +713,7 @@ const std::string vsOcclusionOptimized = gGLVersion + gGLVSAttributesPosition
 const std::string vsOcclusion = gGLVersion + gGLVSAttributes
 		+ vsSimpleVertexPass;
 
-const std::string fsAOGeometry = gGLVersion + "in vec3 vMVPosition;\n"
+const std::string fsAOGeometry = gGLVersion + gGLFragmentPrecision + "in vec3 vMVPosition;\n"
 		"layout (location = 0) " + gGLVaryingOut + " vec3 fMVPosition;\n"
 		"void main() {\n"
 		"   fMVPosition = vMVPosition;\n"
@@ -957,13 +957,13 @@ std::string fsDRLightPoint =
 
 						"   vec4 Color = CalcLightInternal(uLight.base, LightDirection, WorldPos, Normal, specularTexel);\n"
 
-						"   float Attenuation =  uLight.attenuation.constant +\n"
+						"   float attenuation =  uLight.attenuation.constant +\n"
 						"                        uLight.attenuation.linear * Distance +\n"
 						"                        uLight.attenuation.exp * Distance * Distance;\n"
 
-						"   Attenuation = max(1.0, Attenuation);\n"
+						"   attenuation = max(1.0, attenuation);\n"
 
-						"   return Color / Attenuation;\n"
+						"   return Color / attenuation;\n"
 						"}\n"
 
 				+ gGLColorOutDefinition
@@ -1062,21 +1062,17 @@ std::string fsDRLightSpot =
 						"vec4 CalcSpotLight(vec3 WorldPos, vec3 Normal, float speculatTexel) {\n"
 
 						"   float Distance = length(uLight.position-WorldPos);\n"
-						"   float Attenuation =  uLight.attenuation.constant +\n"
+						"   float attenuation =  uLight.attenuation.constant +\n"
 						"                        uLight.attenuation.linear * Distance +\n"
 						"                        uLight.attenuation.exp * Distance * Distance;\n"
 
-						"   Attenuation = max(1.0, Attenuation);\n"
-
-						"   float tmp = (Attenuation * 1.0) / (calculateSpotShadowPCF(uLight.mvp * vec4(WorldPos, 1.0), uShadowMap));\n"
-
-						"   Attenuation = tmp;\n"
+						"   attenuation = max(1.0, attenuation) / (calculateSpotShadowPCF(uLight.mvp * vec4(WorldPos, 1.0), uShadowMap));\n"
 
 						"   return CalcLightInternal(uLight.base,\n"
 						"                            uLight.position-WorldPos,\n"
 						"                            WorldPos,\n"
 						"                            Normal,\n"
-						"                            speculatTexel) / Attenuation;\n"
+						"                            speculatTexel) / attenuation;\n"
 						"}\n"
 
 				+ gGLColorOutDefinition
@@ -1100,7 +1096,7 @@ std::string fsDRLightSpot =
 				"   fColor = vec4(Color, 1.0) * CalcSpotLight(WorldPos, Normal, specularTexel);\n"
 				"}\n";
 
-std::string fsDRDepthless = gGLVersion
+std::string fsDRDepthless = gGLVersion + gGLFragmentPrecision +
 		+ "uniform sampler2D uDiffuseTexelAttachment;\n"
 				"uniform sampler2D uWorldPositionAttachment;\n"
 				"uniform vec2 uScreenSize;\n"
@@ -1123,7 +1119,7 @@ std::string fsDRDepthless = gGLVersion
 				"   }\n"
 				"}\n";
 
-std::string fsDRAmbient = gGLVersion
+std::string fsDRAmbient = gGLVersion + gGLFragmentPrecision +
 		+ "uniform sampler2D uDiffuseTexelAttachment;\n"
 				"uniform vec2 uScreenSize;\n"
 				"vec2 CalcTexCoord() {\n"
@@ -1147,7 +1143,7 @@ const std::string vsAOColor = gGLVersion + gGLVSAttributesPosition
 				"}\n";
 
 const std::string fsAOColor =
-		gGLVersion + "in vec2 vTextureCoordinate;\n"
+		gGLVersion  + gGLFragmentPrecision + "in vec2 vTextureCoordinate;\n"
 				"uniform sampler2D uPositionMap;\n"
 				"uniform float uSampleRadius;\n"
 				"uniform mat4 uP;\n" + gGLColorOutDefinition
@@ -1188,7 +1184,7 @@ const std::string fsAOColor =
 				"}";
 
 const std::string fsStartup =
-		gGLVersion
+		gGLVersion + gGLFragmentPrecision
 				+ "#define MAX_ITER 3\n"
 
 						"in vec2 vPosition;\n"
