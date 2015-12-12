@@ -72,7 +72,14 @@ void Texture2D::reload() {
 }
 
 void Texture2D::log() {
-
+	FLOG_DEBUG("mTarget: 0x%x", mTarget);
+	FLOG_DEBUG("mFile->mConfig.mMipmapsLevel: %d", mFile->mConfig.mMipmapsLevel);
+	FLOG_DEBUG("mFile->mHeader.mInternalFormat: 0x%x", mFile->mHeader.mInternalFormat);
+	FLOG_DEBUG("mFile->mHeader.mWidth: %d", mFile->mHeader.mWidth);
+	FLOG_DEBUG("mFile->mHeader.mHeight: %d", mFile->mHeader.mHeight);
+	FLOG_DEBUG("mFile->mConfig.mBorder: %d", mFile->mConfig.mBorder);
+	FLOG_DEBUG("mFile->mConfig.mType: 0x%x", mFile->mHeader.mType);
+	FLOG_DEBUG("mFile->mHeader.mFormat: 0x%x", mFile->mHeader.mFormat);
 }
 
 } /* core */

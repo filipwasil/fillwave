@@ -408,34 +408,25 @@ Engine::EngineImpl::~EngineImpl() {
 }
 
 void Engine::EngineImpl::init() {
+
 	initExtensions();
-
 	initContext();
-
 	initManagement();
-
 	initPipelines();
-
 	initUniforms();
-
 	initPickingBuffer();
-
 	initOcclusionTest();
 
-	initGeometryBuffer();
-
-	initDeferredShading();
-
-	initAmbientOcclusion();
-
-	initExtras();
-
-	initUniformsCache();
-
-#ifdef FILLWAVE_GLES_3_0
+#if defined(FILLWAVE_GLES_3_0) || defined(FILLWAVE_GLES_2_0)
 #else
+	initGeometryBuffer();
+	initDeferredShading();
+	initAmbientOcclusion();
 	initGeometryShading();
 #endif
+
+	initExtras();
+	initUniformsCache();
 
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
 	initStartup(engine);
@@ -624,8 +615,8 @@ inline void Engine::EngineImpl::initGeometryBuffer() {
 	GLint maxAttach = 0, maxDrawBuf = 0;
 	glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxAttach);
 	glGetIntegerv(GL_MAX_DRAW_BUFFERS, &maxDrawBuf);
+
 	if (glm::max(maxAttach, maxDrawBuf) > static_cast<GLint>(mDeferredColorAttachments)) {
-//	   mIsDR = GL_TRUE;
 		mGBuffer = puFramebufferGeometry(
 				new core::FramebufferGeometry(mTextureManager.get(), mWindowWidth,
 						mWindowHeight, mDeferredColorAttachments,

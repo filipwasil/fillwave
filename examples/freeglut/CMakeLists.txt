@@ -25,3 +25,10 @@ target_link_libraries(${PROJECT_NAME}
     ${FILLWAVE_FREEGLUT}
     fillwave)
 
+message ("Copying data ${CMAKE_CURRENT_SOURCE_DIR}/../linux/data to ${CMAKE_CURRENT_BINARY_DIR}")
+add_custom_target(
+        resources_${PROJECT_NAME}
+        COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/../linux/data/*  ${CMAKE_CURRENT_BINARY_DIR}/
+)
+add_dependencies(${PROJECT_NAME} resources_${PROJECT_NAME})
+

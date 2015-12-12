@@ -23,12 +23,12 @@ public:
 			pMoveable moveable,
 			glm::vec3 normalizedScaleVec,
 			GLfloat lifetime,
-			EasingFunction easing);
+			EasingFunction easing = LinearInterpolation);
 	TimedScaleCallback(
 			pMoveable moveable,
 			GLfloat normalizedScale,
 			GLfloat lifetime,
-			EasingFunction easing);
+			EasingFunction easing = LinearInterpolation);
 
 	virtual ~TimedScaleCallback() = default;
 
