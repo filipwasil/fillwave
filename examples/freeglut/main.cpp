@@ -15,19 +15,24 @@ FLOGINIT_DEFAULT()
 Engine* engine;
 
 void disp(void) {
-	float timePassed = 1.0f / 60.0f;
-	engine->draw(timePassed);
-	glutSwapBuffers();
+
 }
 
 void timer(int) {
 
-	float timePassed = 1.0f / 60.0f;
-	engine->draw(timePassed);
+	static int timeSinceStart = glutGet(GLUT_ELAPSED_TIME);
+	int timeSinceStartNew = glutGet(GLUT_ELAPSED_TIME);
+	timeSinceStart = timeSinceStartNew - timeSinceStart;
+	engine->draw(static_cast<float>(timeSinceStartNew - timeSinceStart) * 0.00001f);
 	glutSwapBuffers();
 
 	glutTimerFunc(1.0f / 60.0f, timer, 1);
 }
+
+void resize(int width, int height) {
+	engine->insertResizeScreen(width, height);
+}
+
 
 int main(int argc, char *argv[]) {
 
@@ -44,8 +49,10 @@ int main(int argc, char *argv[]) {
 	glutInitWindowSize(960, 560);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow(argv[0]);
+// apparentyly this function does not work in my version of freeglut
 	glutDisplayFunc(disp);
 	glutTimerFunc(100, timer, 1);
+	glutReshapeFunc(resize);
 
 	engine = new Engine(argc, argv);
 	auto camera =
@@ -90,17 +97,17 @@ int main(int argc, char *argv[]) {
 
 		/* create callbacks loop */
 		TimedScaleCallback* scaleUp = new TimedScaleCallback(gSpheres[i],
-				0.1 * 2.0, 2.0f + i * 0.5);
+				0.1f * 2.0f, 2.0f + i * 0.5f);
 		TimedScaleCallback* scaleDown = new TimedScaleCallback(gSpheres[i],
-				0.1 * 1.0, 2.0f + i * 0.5);
+				0.1 * 1.0, 2.0f + i * 0.5f);
 		TimedRotateCallback* rotateLeft = new TimedRotateCallback(gSpheres[i],
-				glm::vec3(0.0, 1.0, 0.0), glm::radians(90.0f), 2.0f + i * 0.5);
+				glm::vec3(0.0, 1.0, 0.0), glm::radians(90.0f), 2.0f + i * 0.5f);
 		TimedRotateCallback* rotateRight = new TimedRotateCallback(gSpheres[i],
-				glm::vec3(0.0, 1.0, 0.0), glm::radians(90.0f), 2.0f + i * 0.5);
+				glm::vec3(0.0, 1.0, 0.0), glm::radians(90.0f), 2.0f + i * 0.5f);
 		TimedMoveCallback* moveUp = new TimedMoveCallback(gSpheres[i],
-				glm::vec3(0.0, 1.0, 0.0), 2.0f + i * 0.5);
+				glm::vec3(0.0, 1.0, 0.0), 2.0f + i * 0.5f);
 		TimedMoveCallback* moveDown = new TimedMoveCallback(gSpheres[i],
-				glm::vec3(0.0, -1.0, 0.0), 2.0f + i * 0.5);
+				glm::vec3(0.0, -1.0, 0.0), 2.0f + i * 0.5f);
 
 		SequenceCallback* sequence = new SequenceCallback();
 		sequence->push_back(scaleUp);
@@ -112,9 +119,9 @@ int main(int argc, char *argv[]) {
 
 		if (i == SPHERES / 2) {
 			TimedMoveCallback* moveBack = new TimedMoveCallback(gSpheres[i],
-					glm::vec3(1.0, -1.0, 0.0), 2.0f + i * 0.5);
+					glm::vec3(1.0, -1.0, 0.0), 2.0f + i * 0.5f);
 			TimedMoveCallback* moveFront = new TimedMoveCallback(gSpheres[i],
-					glm::vec3(1.0, -1.0, 0.0), 2.0f + i * 0.5);
+					glm::vec3(1.0, -1.0, 0.0), 2.0f + i * 0.5f);
 			sequence->push_back(moveBack);
 			sequence->push_back(moveFront);
 		}

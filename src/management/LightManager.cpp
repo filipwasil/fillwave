@@ -176,8 +176,14 @@ void LightManager::pushLightUniforms(core::Program* program) {
 
 	program->uniformPush("uNumberOfSpotLights",
 			static_cast<GLint>(mSpotLights.size() + mDirectionalLights.size()));
+
+#if defined(FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS) && defined(FILLWAVE_COMPILATION_PC_GLES)
+	/* Mesa shader compiler optimizes out "uNumberOfPointLights" but it should not */
+	/* This causes a false positive error indication here */
+#else
 	program->uniformPush("uNumberOfPointLights",
 			static_cast<GLint>(mPointLights.size()));
+#endif /* defined(FILLWAVE_THIRD_PARTY_WORKAROUNDS) && defined(FILLWAVE_COMPILATION_PC_GLES) */
 
 	GLint UBOIterator = 0;
 
