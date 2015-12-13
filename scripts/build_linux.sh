@@ -51,3 +51,5 @@ dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
 
 # Build RED HAT remote repository configuration
 createrepo .
+
+cd ..
