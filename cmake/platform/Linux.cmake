@@ -65,10 +65,10 @@ endif(FILLWAVE_BUILD_RPM)
 add_subdirectory(ext)
 
 if(FILLWAVE_BUILD_PACK)
-	add_subdirectory(ext/glew)
-	add_subdirectory(ext/assimp)
-	add_subdirectory(ext/freetype2)
-	add_subdirectory(ext/glfw) # needs randr libraries
+	add_subdirectory(${FILLWAVE_EXT_GLEW_PATH})
+	add_subdirectory(${FILLWAVE_MODEL_LOADER_PATH})
+	add_subdirectory(${FILLWAVE_EXT_FREETYPE2_PATH})
+	add_subdirectory(${FILLWAVE_EXT_GLFW_PATH}) # needs randr libraries
 endif()
 
 # -----------------------------------------------
@@ -82,8 +82,8 @@ else()
         target_link_libraries(fillwave ${FILLWAVE_GLEW_BUILD})
 		include_directories(${FILLWAVE_EXT_GLEW_INCLUDES})
     else()
-        add_dependencies(fillwave glew)
-        target_link_libraries(fillwave glew)
+        add_dependencies(fillwave GLEW)
+        target_link_libraries(fillwave GLEW)
     endif()
 endif()
 
