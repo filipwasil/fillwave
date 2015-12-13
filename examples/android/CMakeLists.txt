@@ -27,7 +27,6 @@ add_library(fillwave-example SHARED
             src/ContextEGL/native_app_glue.cpp
             src/ContextEGL/egl_helper.cpp
             src/ContextOpenSL/native_audio.cpp
-            src/CallbacksEGL/TimedMoveCallbackCustom.cpp
             src/TerrainConstructors/PerlinConstructor.cpp
             src/PickableModel.cpp
 #           src/example_callbacks.cpp

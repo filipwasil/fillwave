@@ -31,7 +31,7 @@ private:
    Engine* mEngine;
    };
 
-} /* particles */
+} /* actions */
 } /* fillwave */
 
 #endif /* FOLLOWCUSTOMCURSORCALLBACK_H_ */

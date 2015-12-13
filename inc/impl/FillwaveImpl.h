@@ -333,7 +333,7 @@ Engine* mEngine;
 
 #ifdef __ANDROID__
 
-Engine::EngineImpl::EngineImpl(std::string rootPath)
+Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
 :mEngine(engine),
 mFileLoader(rootPath),
 mBackgroundColor(0.1,0.1,0.1),
@@ -346,7 +346,7 @@ mISOQ(GL_FALSE) {
 //	init();
 }
 
-Engine::EngineImpl::EngineImpl(ANativeActivity* activity)
+Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
 :mEngine(engine),
 mFileLoader(activity->internalDataPath),
 mBackgroundColor(0.1,0.1,0.1),
@@ -1462,6 +1462,10 @@ glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(
 }
 
 /* Engine callbacks - clear */
+
+inline void Engine::EngineImpl::clearCallbacks() {
+	mCallbacks.clear();
+}
 
 inline void Engine::EngineImpl::clearCallbacks(
 		eEventType eventType) {

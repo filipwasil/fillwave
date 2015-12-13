@@ -195,6 +195,10 @@ void Engine::clearCallbacks(eEventType eventType) {
 	mImpl->clearCallbacks(eventType);
 }
 
+void Engine::clearCallbacks() {
+	mImpl->clearCallbacks();
+}
+
 /* Callbacks registeration */
 
 void Engine::registerCallback(actions::Callback* callback) {

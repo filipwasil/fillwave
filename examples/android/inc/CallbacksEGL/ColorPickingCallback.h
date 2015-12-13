@@ -36,19 +36,16 @@
 #include "../../../android/inc/CallbacksEGL/ColorPickingCallback.h"
 
 #include <fillwave/Fillwave.h>
-#include <fillwave/actions/EngineCallback.h>
+#include <fillwave/actions/Callback.h>
 
 namespace fillwave {
 namespace actions {
 
-class ColorPickingCallback: public EngineCallback {
-
+class ColorPickingCallback: public Callback {
 public:
-   ColorPickingCallback();
-
-   ~ColorPickingCallback();
-
-   void perform (Engine* engine, EventType* event);
+   ColorPickingCallback(Engine* engine);
+   ~ColorPickingCallback() = default;
+   void perform (EventType& event);
 };
 
 } /* actions */

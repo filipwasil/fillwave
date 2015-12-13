@@ -207,7 +207,7 @@ static int32_t engine_handle_input(struct android_app* app,
                  actions::TouchEvent event(data);
                  engine->fillwave->insertResizeScreen(engine->eglInfo.width,
                                                       engine->eglInfo.height);
-                 engine->fillwave->insertInputTouchScreen(event);
+                 engine->fillwave->insertInput(event);
                } else {
                   FLOG_ERROR("Null scene pointer");
               }

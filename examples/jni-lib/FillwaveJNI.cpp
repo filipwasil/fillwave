@@ -1047,7 +1047,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputTouchScreen
 	data.xPos = x;
 	data.yPos = y;
 	actions::TouchEvent event(data);
-	ptr->insertInputTouchScreen(event);
+	ptr->insertInput(event);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1059,9 +1059,9 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerTimeCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
 
-	ptr->registerTimeCallback(ptrC);
+	ptr->registerCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1073,9 +1073,9 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerKeyCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
 
-	ptr->registerKeyCallback(ptrC);
+	ptr->registerCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1087,9 +1087,9 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerMouseButtonCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
 
-	ptr->registerMouseButtonCallback(ptrC);
+	ptr->registerCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1101,9 +1101,9 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerScrollCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
 
-	ptr->registerScrollCallback(ptrC);
+	ptr->registerCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1115,9 +1115,9 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCharCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
 
-	ptr->registerCharCallback(ptrC);
+	ptr->registerCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1129,9 +1129,9 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCharModsCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
 
-	ptr->registerCharModsCallback(ptrC);
+	ptr->registerCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1143,9 +1143,9 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCursorEnterCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
 
-	ptr->registerCursorEnterCallback(ptrC);
+	ptr->registerCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1157,9 +1157,9 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCursorPositionCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
 
-	ptr->registerCursorPositionCallback(ptrC);
+	ptr->registerCallback(ptrC);
 }
 
 /*
@@ -1167,247 +1167,40 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCursorPositionCallback
  * Method:    registerTouchScreenCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerTouchScreenCallback
+JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCallback
 (JNIEnv *, jobject, jlong engine, jlong callback) {
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
 
-	ptr->registerTouchScreenCallback(ptrC);
+	ptr->registerCallback(ptrC);
 }
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    unregisterTimeCallback
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterTimeCallback
-(JNIEnv *, jobject, jlong engine, jlong callback) {
 
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
-
-	ptr->unregisterTimeCallback(ptrC);
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    unregisterKeyCallback
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterKeyCallback
-(JNIEnv *, jobject, jlong engine, jlong callback) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
-
-	ptr->unregisterKeyCallback(ptrC);
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    unregisterMouseButtonCallback
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterMouseButtonCallback
-(JNIEnv *, jobject, jlong engine, jlong callback) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
-
-	ptr->unregisterMouseButtonCallback(ptrC);
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    unregisterScrollCallback
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterScrollCallback
-(JNIEnv *, jobject, jlong engine, jlong callback) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
-
-	ptr->unregisterScrollCallback(ptrC);
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    unregisterCharCallback
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCharCallback
-(JNIEnv *, jobject, jlong engine, jlong callback) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
-
-	ptr->unregisterCharCallback(ptrC);
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    unregisterCharModsCallback
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCharModsCallback
-(JNIEnv *, jobject, jlong engine, jlong callback) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
-
-	ptr->unregisterCharModsCallback(ptrC);
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    unregisterCursorEnterCallback
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCursorEnterCallback
-(JNIEnv *, jobject, jlong engine, jlong callback) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
-
-	ptr->unregisterCursorEnterCallback(ptrC);
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    unregisterCursorPositionCallback
- * Signature: (JJ)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCursorPositionCallback
-(JNIEnv *, jobject, jlong engine, jlong callback) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
-
-	ptr->unregisterTouchScreenCallback(ptrC);
-}
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterTouchScreenCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterTouchScreenCallback
+JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCallback
 (JNIEnv *, jobject, jlong engine, jlong callback) {
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
-	actions::EngineCallback* ptrC = reinterpret_cast<actions::EngineCallback*>(callback);
-
-	ptr->unregisterTouchScreenCallback(ptrC);
+	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	ptr->unregisterCallback(ptrC);
 }
+
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearTimeCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearTimeCallbacks
+JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearCallbacks
 (JNIEnv *, jobject, jlong engine) {
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	ptr->clearTimeCallbacks();
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    clearKeyCallbacks
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearKeyCallbacks
-(JNIEnv *, jobject, jlong engine) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	ptr->clearKeyCallbacks();
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    clearMouseButtonCallbacks
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearMouseButtonCallbacks
-(JNIEnv *, jobject, jlong engine) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	ptr->clearMouseButtonCallbacks();
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    clearScrollCallbacks
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearScrollCallbacks
-(JNIEnv *, jobject, jlong engine) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	ptr->clearScrollCallbacks();
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    clearCharCallbacks
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearCharCallbacks
-(JNIEnv *, jobject, jlong engine) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	ptr->clearCharCallbacks();
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    clearCharModsCallbacks
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearCharModsCallbacks
-(JNIEnv *, jobject, jlong engine) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	ptr->clearCharModsCallbacks();
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    clearCursorEnterCallbacks
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearCursorEnterCallbacks
-(JNIEnv *, jobject, jlong engine) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	ptr->clearCursorEnterCallbacks();
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    clearCursorPositionCallbacks
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearCursorPositionCallbacks
-(JNIEnv *, jobject, jlong engine) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	ptr->clearCursorPositionCallbacks();
-}
-/*
- * Class:     com_fillwave_Fillwave
- * Method:    clearTouchScreenCallbacks
- * Signature: (J)V
- */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearTouchScreenCallbacks
-(JNIEnv *, jobject, jlong engine) {
-
-	Engine* ptr = reinterpret_cast<Engine*>(engine);
-
-	ptr->clearTouchScreenCallbacks();
+	eEventType type = eEventType::eTime; /* example */
+	ptr->clearCallbacks();
 }
 
 /*

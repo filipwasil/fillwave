@@ -252,6 +252,7 @@ public:
 	/* Inputs - clear */
 	void clearCallback(actions::Callback* callback);
 	void clearCallbacks(eEventType eventType);
+	void clearCallbacks();
 
 	void reload();
 
