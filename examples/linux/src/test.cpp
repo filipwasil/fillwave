@@ -84,9 +84,9 @@ void init() {
    gEntityLight->rotateByX(glm::radians(-90.0));
 
    /* Engine callbacks */
-   gEngine->registerKeyCallback(new actions::TimeStopCallback());
-   gEngine->registerKeyCallback(new actions::MoveCameraCallback(eEventType::eKey, 0.1));
-   gEngine->registerCursorPositionCallback(new actions::MoveCameraCallback(eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
+   gEngine->registerCallback(new actions::TimeStopCallback(gEngine));
+   gEngine->registerCallback(new actions::MoveCameraCallback(gEngine, eEventType::eKey, 0.1));
+   gEngine->registerCallback(new actions::MoveCameraCallback(gEngine, eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
 }
 
 void perform() {

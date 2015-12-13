@@ -33,7 +33,7 @@
 #ifndef MOVECAMERACALLBACK_H_
 #define MOVECAMERACALLBACK_H_
 
-#include <fillwave/actions/EngineCallback.h>
+#include <fillwave/actions/Callback.h>
 #include <fillwave/actions/Event.h>
 
 class GLFWwindow;
@@ -47,21 +47,24 @@ namespace actions {
  *
  */
 
-class MoveCameraCallback: public EngineCallback {
+class MoveCameraCallback: public Callback {
 private:
    float mSpeed;
    GLFWwindow* mWindow;
+   Engine* mEngine;
 public:
-   MoveCameraCallback(eEventType eventType,
-                      float speed = 1.0,
-                      GLFWwindow* window = nullptr);
+	MoveCameraCallback(
+			Engine* engine,
+			eEventType eventType,
+			float speed = 1.0,
+			GLFWwindow* window = nullptr);
    virtual ~MoveCameraCallback();
 
    /* perform
     * \brief Performs EngineCallback action
     */
 
-   virtual void perform (Engine* engine, EventType* event);
+   virtual void perform (EventType& event);
 };
 
 } /* actions */

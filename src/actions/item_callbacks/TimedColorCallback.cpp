@@ -26,7 +26,7 @@ TimedColorCallback::TimedColorCallback(
 	mModel->addEffect(mPainter);
 }
 
-void TimedColorCallback::perform(EventType* event) {
+void TimedColorCallback::perform(EventType& event) {
 	TimeEventData myData = TimeEvent::getData(event);
 	if (getPercentageDone() == 0.0f) {
 		mPainter->setColor(mStartColor);

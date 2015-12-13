@@ -92,29 +92,23 @@ pLightSpot Engine::storeLightSpot(
 		glm::vec3 position,
 		glm::quat rotation,
 		glm::vec4 color,
-		pEntity entity) {
-	return mImpl->mLightManager->addLightSpot(
-			mImpl->mTextureManager->getShadow2D(mImpl->mWindowWidth,
-					mImpl->mWindowHeight), position, rotation, color, entity);
+		pMoveable followed) {
+	return mImpl->storeLightSpot(position, rotation, color, followed);
 }
 
 pLightPoint Engine::storeLightPoint(
 		glm::vec3 position,
 		glm::vec4 color,
-		pEntity entity) {
-	return mImpl->mLightManager->addLightPoint(
-			mImpl->mTextureManager->getShadow3D(mImpl->mWindowWidth,
-					mImpl->mWindowHeight), position, color, entity);
+		pMoveable followed) {
+	return mImpl->storeLightPoint(position, color, followed);
 }
 
 pLightDirectional Engine::storeLightDirectional(
 		glm::vec3 position,
 		glm::quat rotation,
 		glm::vec4 color,
-		pEntity entity) {
-	return mImpl->mLightManager->addLightDirectional(
-			mImpl->mTextureManager->getShadow2D(mImpl->mWindowWidth,
-					mImpl->mWindowHeight), position, rotation, color, entity);
+		pMoveable followed) {
+	return mImpl->storeLightDirectional(position, rotation, color, followed);
 }
 
 pShader Engine::storeShaderFragment(const std::string& shaderPath) {
@@ -183,236 +177,45 @@ pVertexArray Engine::storeVAO(models::Reloadable* user) {
 
 /* Inputs - insert */
 
-void Engine::insertInputKey(fillwave::actions::KeyboardEvent& event) {
-	if (getFocusKey()) {
-		getFocusKey()->handlePrivateEvent(&event);
+void Engine::insertInput(actions::EventType& event) {
+	pEntity moveable = getFocus(event.getType());
+	if (moveable) {
+		moveable->handlePrivateEvent(event);
 	}
-	mImpl->runCallbacks(mImpl->mKeyCallbacks, &event);
-}
-
-void Engine::insertInputMouseButton(actions::MouseButtonEvent& event) {
-	if (getFocusMouseButton()) {
-		getFocusMouseButton()->handlePrivateEvent(&event);
-	}
-	mImpl->runCallbacks(mImpl->mMouseButtonCallbacks, &event);
-}
-
-void Engine::insertInputScroll(actions::ScrollEvent& event) {
-	if (getFocusScroll()) {
-		getFocusScroll()->handlePrivateEvent(&event);
-	}
-	mImpl->runCallbacks(mImpl->mScrollCallbacks, &event);
-}
-
-void Engine::insertInputCharacter(actions::CharacterEvent& event) {
-	if (getFocusChar()) {
-		getFocusChar()->handlePrivateEvent(&event);
-	}
-	mImpl->runCallbacks(mImpl->mCharCallbacks, &event);
-}
-
-void Engine::insertInputCharacterMods(actions::CharacterModsEvent& event) {
-	if (getFocusCharMods()) {
-		getFocusCharMods()->handlePrivateEvent(&event);
-	}
-	mImpl->runCallbacks(mImpl->mCharModsCallbacks, &event);
-}
-
-void Engine::insertInputCursorEnter(actions::CursorEnterEvent& event) {
-	if (getFocusCursorEnter()) {
-		getFocusCursorEnter()->handlePrivateEvent(&event);
-	}
-	mImpl->runCallbacks(mImpl->mCursorEnterCallbacks, &event);
-}
-
-void Engine::insertInputCursorPosition(actions::CursorPositionEvent& event) {
-	if (getFocusCursorPosition()) {
-		getFocusCursorPosition()->handlePrivateEvent(&event);
-	}
-	mImpl->runCallbacks(mImpl->mCursorPositionCallbacks, &event);
-}
-
-void Engine::insertInputTouchScreen(actions::TouchEvent& event) {
-	if (getFocusTouchScreen()) {
-		getFocusTouchScreen()->handlePrivateEvent(&event);
-	}
-	mImpl->runCallbacks(mImpl->mTouchScreenCallbacks, &event);
+	mImpl->runCallbacks(event);
 }
 
 /* Engine callbacks - clear */
 
-void Engine::clearTimeCallbacks() {
-	mImpl->clearCallbacks(mImpl->mTimeCallbacks);
+void Engine::clearCallback(actions::Callback* callback) {
+	mImpl->clearCallback(callback);
 }
 
-void Engine::clearKeyCallbacks() {
-	mImpl->clearCallbacks(mImpl->mKeyCallbacks);
+void Engine::clearCallbacks(eEventType eventType) {
+	mImpl->clearCallbacks(eventType);
 }
 
-void Engine::clearMouseButtonCallbacks() {
-	mImpl->clearCallbacks(mImpl->mMouseButtonCallbacks);
+/* Callbacks registeration */
+
+void Engine::registerCallback(actions::Callback* callback) {
+	mImpl->registerCallback(callback);
 }
 
-void Engine::clearScrollCallbacks() {
-	mImpl->clearCallbacks(mImpl->mScrollCallbacks);
+void Engine::unregisterCallback(actions::Callback* callback) {
+	mImpl->unregisterCallback(callback);
 }
 
-void Engine::clearCharCallbacks() {
-	mImpl->clearCallbacks(mImpl->mCharCallbacks);
+/* Focus set */
+void Engine::setFocus(eEventType eventType, pEntity entity) {
+	mImpl->mFocus[eventType] = entity;
 }
 
-void Engine::clearCharModsCallbacks() {
-	mImpl->clearCallbacks(mImpl->mCharCallbacks);
+pEntity Engine::getFocus(eEventType eventType) const {
+	return mImpl->mFocus[eventType];
 }
 
-void Engine::clearCursorEnterCallbacks() {
-	mImpl->clearCallbacks(mImpl->mCursorEnterCallbacks);
-}
-
-void Engine::clearCursorPositionCallbacks() {
-	mImpl->clearCallbacks(mImpl->mCursorPositionCallbacks);
-}
-
-void Engine::clearTouchScreenCallbacks() {
-	mImpl->clearCallbacks(mImpl->mTouchScreenCallbacks);
-}
-
-/* Engine callbacks - register */
-
-void Engine::registerTimeCallback(actions::EngineCallback* callback) {
-	mImpl->mTimeCallbacks.push_back(callback);
-}
-
-void Engine::registerKeyCallback(actions::EngineCallback* callback) {
-	mImpl->mKeyCallbacks.push_back(callback);
-}
-
-void Engine::registerMouseButtonCallback(actions::EngineCallback* callback) {
-	mImpl->mMouseButtonCallbacks.push_back(callback);
-}
-
-void Engine::registerScrollCallback(actions::EngineCallback* callback) {
-	mImpl->mScrollCallbacks.push_back(callback);
-}
-
-void Engine::registerCharCallback(actions::EngineCallback* callback) {
-	mImpl->mCharCallbacks.push_back(callback);
-}
-
-void Engine::registerCharModsCallback(actions::EngineCallback* callback) {
-	mImpl->mCharModsCallbacks.push_back(callback);
-}
-
-void Engine::registerCursorEnterCallback(actions::EngineCallback* callback) {
-	mImpl->mCursorEnterCallbacks.push_back(callback);
-}
-
-void Engine::registerCursorPositionCallback(actions::EngineCallback* callback) {
-	mImpl->mCursorPositionCallbacks.push_back(callback);
-}
-
-void Engine::registerTouchScreenCallback(actions::EngineCallback* callback) {
-	mImpl->mTouchScreenCallbacks.push_back(callback);
-}
-
-/* Engine callbacks - unregister */
-void Engine::unregisterTimeCallback(actions::EngineCallback* callback) {
-	mImpl->unregisterCallback(mImpl->mTimeCallbacks, callback);
-}
-
-void Engine::unregisterKeyCallback(actions::EngineCallback* callback) {
-	mImpl->unregisterCallback(mImpl->mKeyCallbacks, callback);
-}
-
-void Engine::unregisterMouseButtonCallback(actions::EngineCallback* callback) {
-	mImpl->unregisterCallback(mImpl->mMouseButtonCallbacks, callback);
-}
-
-void Engine::unregisterScrollCallback(actions::EngineCallback* callback) {
-	mImpl->unregisterCallback(mImpl->mScrollCallbacks, callback);
-}
-
-void Engine::unregisterCharCallback(actions::EngineCallback* callback) {
-	mImpl->unregisterCallback(mImpl->mCharCallbacks, callback);
-}
-
-void Engine::unregisterCharModsCallback(actions::EngineCallback* callback) {
-	mImpl->unregisterCallback(mImpl->mCharModsCallbacks, callback);
-}
-
-void Engine::unregisterCursorEnterCallback(actions::EngineCallback* callback) {
-	mImpl->unregisterCallback(mImpl->mCursorEnterCallbacks, callback);
-}
-
-void Engine::unregisterCursorPositionCallback(
-		actions::EngineCallback* callback) {
-	mImpl->unregisterCallback(mImpl->mCursorPositionCallbacks, callback);
-}
-
-void Engine::unregisterTouchScreenCallback(actions::EngineCallback* callback) {
-	mImpl->unregisterCallback(mImpl->mTouchScreenCallbacks, callback);
-}
-
-/* Inputs - setFocus */
-void Engine::setFocusKey(pEntity entity) {
-	mImpl->mFocusKey = entity;
-}
-
-void Engine::setFocusMouseButton(pEntity entity) {
-	mImpl->mFocusMouseButton = entity;
-}
-
-void Engine::setFocusScroll(pEntity entity) {
-	mImpl->mFocusScroll = entity;
-}
-
-void Engine::setFocusChar(pEntity entity) {
-	mImpl->mFocusChar = entity;
-}
-
-void Engine::setFocusCharMods(pEntity entity) {
-	mImpl->mFocusCharMods = entity;
-}
-
-void Engine::setFocusCursorEnter(pEntity entity) {
-	mImpl->mFocusCursorEnter = entity;
-}
-
-void Engine::setFocusCursorPosition(pEntity entity) {
-	mImpl->mFocusCursorPosition = entity;
-}
-
-/* Inputs - getFocus */
-pEntity Engine::getFocusKey() const {
-	return mImpl->mFocusKey;
-}
-
-pEntity Engine::getFocusMouseButton() const {
-	return mImpl->mFocusMouseButton;
-}
-
-pEntity Engine::getFocusScroll() const {
-	return mImpl->mFocusScroll;
-}
-
-pEntity Engine::getFocusChar() const {
-	return mImpl->mFocusChar;
-}
-
-pEntity Engine::getFocusCharMods() const {
-	return mImpl->mFocusCharMods;
-}
-
-pEntity Engine::getFocusCursorEnter() const {
-	return mImpl->mFocusCursorEnter;
-}
-
-pEntity Engine::getFocusCursorPosition() const {
-	return mImpl->mFocusCursorPosition;
-}
-
-pEntity Engine::getFocusTouchScreen() const {
-	return mImpl->mFocusTouchScreen;
+void Engine::clearFocus(eEventType eventType) {
+	mImpl->mFocus[eventType] = pEntity();
 }
 
 pText Engine::storeText(
@@ -592,11 +395,11 @@ void Engine::configureFPSCounter(
 		mImpl->mFPSText = storeText("", fontName, xPosition, yPosition, size);
 
 		/* Provide callback to refresh the FPS value */
-		mImpl->mTextFPSCallback = new actions::FPSCallback(mImpl->mFPSText);
-		registerTimeCallback(mImpl->mTextFPSCallback);
+		mImpl->mTextFPSCallback = new actions::FPSCallback(this, mImpl->mFPSText);
+		registerCallback(mImpl->mTextFPSCallback);
 	} else {
 		mImpl->mFPSText.reset();
-		unregisterTimeCallback(mImpl->mTextFPSCallback);
+		unregisterCallback(mImpl->mTextFPSCallback);
 	}
 }
 

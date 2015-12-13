@@ -9,6 +9,7 @@
 #define FILLWAVE_INC_FILLWAVEIMPL_H_
 
 /* Plarform specific */
+#include <fillwave/actions/Callback.h>
 #include <fillwave/loaders/AndroidLoader.h>
 
 /* core */
@@ -32,7 +33,6 @@
 #include <fillwave/space/LightDirectional.h>
 
 /* Events */
-#include <fillwave/actions/ItemCallback.h>
 #include <fillwave/actions/TimeEvent.h>
 #include <fillwave/actions/TouchEvent.h>
 #include <fillwave/actions/ScrollEvent.h>
@@ -46,7 +46,6 @@
 
 /* Callbacks */
 #include <fillwave/actions/FPSCallback.h>
-#include <fillwave/actions/EngineCallback.h>
 #include <fillwave/actions/TimedMoveCallback.h>
 #include <fillwave/actions/TimedRotateCallback.h>
 #include <fillwave/actions/TimedScaleCallback.h>
@@ -98,7 +97,7 @@ struct Engine::EngineImpl {
 
 	~EngineImpl();
 
-	Engine* mEngine;
+Engine* mEngine;
 
 	/* Asset loader */
 #ifdef FILLWAVE_COMPILATION_TINY_ASSET_LOADER
@@ -178,25 +177,10 @@ struct Engine::EngineImpl {
 	pVertexArray mVAOOcclusion;
 
 	/* Inputs - focus */
-	pEntity mFocusKey;
-	pEntity mFocusMouseButton;
-	pEntity mFocusScroll;
-	pEntity mFocusChar;
-	pEntity mFocusCharMods;
-	pEntity mFocusCursorEnter;
-	pEntity mFocusCursorPosition;
-	pEntity mFocusTouchScreen;
+	std::map<eEventType, pEntity> mFocus;
 
 	/* Inputs - callbacks */
-	std::vector<actions::EngineCallback*> mTimeCallbacks;
-	std::vector<actions::EngineCallback*> mKeyCallbacks;
-	std::vector<actions::EngineCallback*> mMouseButtonCallbacks;
-	std::vector<actions::EngineCallback*> mScrollCallbacks;
-	std::vector<actions::EngineCallback*> mCharCallbacks;
-	std::vector<actions::EngineCallback*> mCharModsCallbacks;
-	std::vector<actions::EngineCallback*> mCursorEnterCallbacks;
-	std::vector<actions::EngineCallback*> mCursorPositionCallbacks;
-	std::vector<actions::EngineCallback*> mTouchScreenCallbacks;
+	std::map<eEventType, std::vector<puCallback> > mCallbacks;
 
 	/* Extras */
 	puDebugger mDebugger;
@@ -217,13 +201,15 @@ struct Engine::EngineImpl {
 	GLboolean mISOQ; /* Occlusion query */
 
 	/* Callbacks */
-	void runCallbacks(
-			std::vector<actions::EngineCallback*>& callbacks,
-			actions::EventType* event);
-	void clearCallbacks(std::vector<actions::EngineCallback*>& callbacks);
+	void runCallbacks();
+	void runCallbacks(actions::EventType& eventType);
+	void clearCallbacks();
+	void clearCallbacks(eEventType eventType);
+	void clearCallback(actions::Callback* callback);
+	void registerCallback(
+			actions::Callback* callback);
 	void unregisterCallback(
-			std::vector<actions::EngineCallback*>& callbacks,
-			actions::EngineCallback* callback);
+			actions::Callback* callback);
 
 	/* Evaluation */
 	void evaluateShadowMaps();
@@ -248,96 +234,90 @@ struct Engine::EngineImpl {
 #endif
 
 	void drawTexture(core::Texture* t, core::Program* p);
-
 	void drawTexture(core::Texture* t);
 
 	/* Draw passes */
 
 	void drawClear();
-
 	void drawScene(GLfloat time);
-
 	void drawSceneStartup();
-
 	void drawSceneCore();
-
 	void drawSceneCoreFR();
-
 	void drawSceneCoreDR();
-
 	void drawText();
-
 	void drawGeometryPass();
-
 	void drawOcclusionPass();
-
 	void drawDepthlessPass();
-
 	void drawAmbientPass();
-
 	void drawAOPass();
-
 	void drawColorPass();
-
 	void drawLightsSpotPass(GLint& textureUnit);
-
 	void drawLightsDirectionalPass(GLint& textureUnit);
-
 	void drawLightsPointPass(GLint& textureUnit);
-
 	void drawColorPassBegin();
-
 	void drawColorPassEnd();
 
 	/* Store */
 
 	pShader storeShader(const std::string& shaderPath, const GLuint& shaderType);
-
 	pShader storeShader(
 			const std::string& shaderName,
 			const GLuint& shaderType,
 			const std::string& shaderSource);
 
+	pShader storeShaderFragment(const std::string& shaderPath);
+
+	pShader storeShaderFragment(
+			const std::string& shaderPath,
+			const std::string& shaderSource);
+
+	pShader storeShaderVertex(const std::string& shaderPath);
+	pShader storeShaderVertex(
+			const std::string& shaderPath,
+			const std::string& shaderSource);
+
+	pLightSpot storeLightSpot(
+			glm::vec3& position,
+			glm::quat& rotation,
+			glm::vec4& color,
+			pMoveable& followed);
+
+	pLightPoint storeLightPoint(
+			glm::vec3& position,
+			glm::vec4& color,
+			pMoveable& followed);
+
+	pLightDirectional storeLightDirectional(
+			glm::vec3& position,
+			glm::quat& rotation,
+			glm::vec4& color,
+			pMoveable& followed);
 	/* Picking */
 
 	glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
 
 	/* Initiatization */
+
 	void init();
-
 	void initExtensions();
-
 	void initContext();
-
 	void initPickingBuffer();
-
 	void initPipelines();
-
 	void initUniforms();
-
 	void initManagement();
-
 	void initDeferredShading();
-
 	void initAmbientOcclusion();
-
 	void initGeometryBuffer();
-
 	void initExtras();
-
 	void initOcclusionTest();
-
 	void initUniformsCache();
-
 	void initStartup();
-
 	void initGeometryShading();
 
 	/* Reload */
+
 	void reload();
-
 	void reloadPickingBuffer();
-
 	void reloadGeometryBuffer();
 
 	/* Insert */
@@ -353,7 +333,7 @@ struct Engine::EngineImpl {
 
 #ifdef __ANDROID__
 
-Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
+Engine::EngineImpl::EngineImpl(std::string rootPath)
 :mEngine(engine),
 mFileLoader(rootPath),
 mBackgroundColor(0.1,0.1,0.1),
@@ -366,7 +346,7 @@ mISOQ(GL_FALSE) {
 //	init();
 }
 
-Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
+Engine::EngineImpl::EngineImpl(ANativeActivity* activity)
 :mEngine(engine),
 mFileLoader(activity->internalDataPath),
 mBackgroundColor(0.1,0.1,0.1),
@@ -383,8 +363,7 @@ mISOQ(GL_FALSE) {
 
 #else
 Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
-		:
-				mEngine(engine),
+		:mEngine(engine),
 				mFileLoader(common::getFilePathOnly(argv[0])),
 				mBackgroundColor(0.1,0.1,0.1),
 				mFrameCounter(0),
@@ -1251,8 +1230,8 @@ inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
 		actions::TimeEventData data;
 		data.mTimePassed = timeExpiredInSeconds;
 		actions::TimeEvent timeEvent(data);
-		runCallbacks(mTimeCallbacks, &timeEvent);
-		mScene->handleHierarchyEvent(&timeEvent);
+		runCallbacks(timeEvent);
+		mScene->handleHierarchyEvent(timeEvent);
 	}
 }
 
@@ -1330,10 +1309,11 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 }
 
 void Engine::EngineImpl::runCallbacks(
-		std::vector<actions::EngineCallback*>& callbacks,
-		actions::EventType* event) {
-	for (auto callback : callbacks) {
-		callback->perform(mEngine, event);
+		actions::EventType& event) {
+	if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
+		for (auto& callback : mCallbacks[event.getType()]) {
+			callback->perform(event);
+		}
 	}
 }
 
@@ -1373,17 +1353,24 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 	core::Program::disusePrograms();
 }
 
-/* Engine callbacks - unregister */
+/* Callbacks */
+
+void Engine::EngineImpl::registerCallback(
+		actions::Callback* callback) {
+	mCallbacks[callback->getEventType()].push_back(puCallback(callback));
+}
 
 void Engine::EngineImpl::unregisterCallback(
-		std::vector<actions::EngineCallback*>& callbacks,
-		actions::EngineCallback* callback) {
-	auto _compare_function =
-			[callback](const actions::EngineCallback* e) -> bool {bool found = (e == callback); if (found) delete callback; return found;};
-	auto _begin = callbacks.begin();
-	auto _end = callbacks.end();
-	auto it = std::remove_if(_begin, _end, _compare_function);
-	callbacks.erase(it, _end);
+		actions::Callback* callback) {
+	if (mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
+		std::vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
+		auto _compare_function =
+				[callback](const puCallback& c) -> bool {bool found = (c.get() == callback); return found;};
+		auto _begin = callbacks->begin();
+		auto _end = callbacks->end();
+		auto it = std::remove_if(_begin, _end, _compare_function);
+		callbacks->erase(it, _end);
+	}
 }
 
 inline pShader Engine::EngineImpl::storeShader(
@@ -1399,12 +1386,62 @@ inline pShader Engine::EngineImpl::storeShader(
 	return mShaderManager->add(shaderName, shaderType, shaderSource);
 }
 
+pShader Engine::EngineImpl::storeShaderFragment(const std::string& shaderPath) {
+	return mShaderManager->add(shaderPath, GL_FRAGMENT_SHADER);
+}
+
+pShader Engine::EngineImpl::storeShaderFragment(
+		const std::string& shaderPath,
+		const std::string& shaderSource) {
+	return mShaderManager->add(shaderPath,
+	GL_FRAGMENT_SHADER, shaderSource);
+}
+
+pShader Engine::EngineImpl::storeShaderVertex(const std::string& shaderPath) {
+	return mShaderManager->add(shaderPath, GL_VERTEX_SHADER);
+}
+
+pShader Engine::EngineImpl::storeShaderVertex(
+		const std::string& shaderPath,
+		const std::string& shaderSource) {
+	return mShaderManager->add(shaderPath, GL_VERTEX_SHADER, shaderSource);
+}
+
 pSampler Engine::EngineImpl::storeSO(GLint textureUnit) {
 	return mSamplerManager->get(textureUnit);
 }
 
 pVertexArray Engine::EngineImpl::storeVAO(models::Reloadable* user) {
 	return mBufferManager->getVAO(user);
+}
+
+pLightSpot Engine::EngineImpl::storeLightSpot(
+		glm::vec3& position,
+		glm::quat& rotation,
+		glm::vec4& color,
+		pMoveable& followed) {
+	return mLightManager->addLightSpot(
+			mTextureManager->getShadow2D(mWindowWidth,
+					mWindowHeight), position, rotation, color, followed);
+}
+
+pLightPoint Engine::EngineImpl::storeLightPoint(
+		glm::vec3& position,
+		glm::vec4& color,
+		pMoveable& followed) {
+	return mLightManager->addLightPoint(
+			mTextureManager->getShadow3D(mWindowWidth,
+					mWindowHeight), position, color, followed);
+}
+
+pLightDirectional Engine::EngineImpl::storeLightDirectional(
+		glm::vec3& position,
+		glm::quat& rotation,
+		glm::vec4& color,
+		pMoveable& followed) {
+	return mLightManager->addLightDirectional(
+			mTextureManager->getShadow2D(mWindowWidth,
+					mWindowHeight), position, rotation, color, followed);
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(
@@ -1427,10 +1464,26 @@ glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(
 /* Engine callbacks - clear */
 
 inline void Engine::EngineImpl::clearCallbacks(
-		std::vector<actions::EngineCallback*>& callbacks) {
-	std::for_each(callbacks.begin(), callbacks.end(),
-			[](actions::EngineCallback* e) {delete e;});
-	callbacks.clear();
+		eEventType eventType) {
+	if (mCallbacks.find(eventType) != mCallbacks.end()) {
+		mCallbacks[eventType].clear();
+	}
+}
+
+void Engine::EngineImpl::clearCallback(actions::Callback* callback) {
+	eEventType e = callback->getEventType();
+	std::vector<puCallback>* callbacks = &mCallbacks[e];
+	callbacks->erase(
+       std::remove_if( // Selectively remove elements in the second vector...
+      		 callbacks->begin(),
+				 callbacks->end(),
+           [&] (puCallback const& p)
+           {   // This predicate checks whether the element is contained
+               // in the second vector of pointers to be removed...
+               return callback == p.get();
+           }),
+			  callbacks->end()
+       );
 }
 
 } /* fillwave */

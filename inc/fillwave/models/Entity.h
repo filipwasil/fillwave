@@ -8,8 +8,8 @@
 #ifndef ENTITY_H_
 #define ENTITY_H_
 
+#include <fillwave/actions/Callback.h>
 #include <fillwave/space/Camera.h>
-#include <fillwave/actions/ItemCallback.h>
 #include <vector>
 
 namespace fillwave {
@@ -53,8 +53,8 @@ public:
 	GLboolean isPSR();
 
 	/* Callbacks */
-	void handleHierarchyEvent(actions::EventType* event);
-	void handlePrivateEvent(actions::EventType* event);
+	void handleHierarchyEvent(actions::EventType& event);
+	void handlePrivateEvent(actions::EventType& event);
 
 	/* Model */
 	glm::mat4 getPhysicsMMC();
@@ -63,10 +63,10 @@ public:
 	void setTransformation(glm::mat4 modelMatrix);
 
 	/* Callbacks */
-	void attachHierarchyCallback(actions::ItemCallback* callback);
-	void attachPrivateCallback(actions::ItemCallback* callback);
-	void detachHierarchyCallback(actions::ItemCallback* callback);
-	void detachPrivateCallback(actions::ItemCallback* callback);
+	void attachHierarchyCallback(actions::Callback* callback);
+	void attachPrivateCallback(actions::Callback* callback);
+	void detachHierarchyCallback(actions::Callback* callback);
+	void detachPrivateCallback(actions::Callback* callback);
 
 	/* Parent */
 	void updateMatrixTree();
@@ -92,8 +92,8 @@ protected:
 	GLboolean mChildrenPropagateEvent;
 	GLboolean mParentRefresh;
 	std::vector<pEntity> mChildren;
-	std::vector<actions::ItemCallback*> mCallbacksHierarchy;
-	std::vector<actions::ItemCallback*> mCallbacksPrivate;
+	std::vector<actions::Callback*> mCallbacksHierarchy;
+	std::vector<actions::Callback*> mCallbacksPrivate;
 
 	GLboolean mPSC;
 	GLboolean mPSR;
@@ -104,12 +104,12 @@ private:
 
 	void detachChildren();
 	void handleEvent(
-			std::vector<actions::ItemCallback*>& callbacks,
-			actions::EventType* event);
-	void eraseFinishedCallbacks(std::vector<actions::ItemCallback*>& callbacks);
+			std::vector<actions::Callback*>& callbacks,
+			actions::EventType& event);
+	void eraseFinishedCallbacks(std::vector<actions::Callback*>& callbacks);
 	void detachCallback(
-			std::vector<actions::ItemCallback*>& callbacks,
-			actions::ItemCallback* callback);
+			std::vector<actions::Callback*>& callbacks,
+			actions::Callback* callback);
 };
 } /* models */
 static pEntity buildEntity() {

@@ -8,8 +8,8 @@
 #ifndef TIMEDCALLBACK_H_
 #define TIMEDCALLBACK_H_
 
+#include <fillwave/actions/Callback.h>
 #include <fillwave/OpenGL.h>
-#include <fillwave/actions/ItemCallback.h>
 #include <fillwave/actions/TimeEvent.h>
 #include <fillwave/models/Moveable.h>
 #include <fillwave/common/Easing.h>
@@ -23,7 +23,7 @@ namespace actions {
  *
  */
 
-class TimedCallback: public ItemCallback {
+class TimedCallback: public Callback {
 public:
 	TimedCallback(GLfloat timeToFinish, EasingFunction funcion = LinearInterpolation);
 
@@ -33,7 +33,7 @@ public:
 	 * \brief Performs ItemCallback action.
 	 */
 
-	void perform(EventType* eventType);
+	void perform(EventType& eventType);
 
 	virtual void performTime(TimeEventData& e);
 

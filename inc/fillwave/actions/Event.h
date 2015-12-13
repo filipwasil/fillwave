@@ -28,8 +28,8 @@ public:
 	}
 	virtual ~Event() = default;
 
-	static T getData(EventType* eventType) {
-		Event<T>* e = dynamic_cast<Event<T>*>(eventType);
+	static T getData(EventType& eventType) {
+		Event<T>* e = dynamic_cast<Event<T>*>(&eventType);
 		return e->mData;
 	}
 

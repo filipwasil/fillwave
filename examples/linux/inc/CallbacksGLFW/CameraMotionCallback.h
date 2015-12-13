@@ -8,7 +8,7 @@
 #ifndef CAMERAMOTIONCALLBACK_H_
 #define CAMERAMOTIONCALLBACK_H_
 
-#include <fillwave/actions/EngineCallback.h>
+#include <fillwave/actions/Callback.h>
 #include <fillwave/Math.h>
 
 namespace fillwave {
@@ -19,15 +19,16 @@ namespace actions {
  * \brief EngineCallback to move the camera in circle road around point (0.0,0.0,0.0).
  */
 
-class CameraMotionCallback: public EngineCallback {
+class CameraMotionCallback: public Callback {
+public:
+   CameraMotionCallback(Engine* engine);
+   virtual ~CameraMotionCallback() = default;
+   void perform (EventType& event);
+   glm::vec3 calculateNewPosition(float time);
 private:
    float mTimePassed;
-public:
-   CameraMotionCallback();
-   virtual ~CameraMotionCallback();
-   void perform (Engine* engine, EventType* event);
-   glm::vec3 calculateNewPosition(float time);
-   };
+   Engine* mEngine;
+};
 
 } /* actions */
 } /* fillwave */

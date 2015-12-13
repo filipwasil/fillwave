@@ -8,8 +8,8 @@
 #ifndef SEQUENCECALLBACK_H_
 #define SEQUENCECALLBACK_H_
 
-#include <fillwave/actions/ItemCallback.h>
 #include <fillwave/actions/TimeEvent.h>
+#include <fillwave/actions/Callback.h>
 #include <fillwave/actions/Callback.h>
 
 #include <vector>
@@ -21,7 +21,7 @@ namespace actions {
  * \brief ItemCallback to execute an ordered vector of callbacks.
  */
 
-class SequenceCallback: public ItemCallback, public std::vector<ItemCallback*> {
+class SequenceCallback: public Callback, public std::vector<Callback*> {
 public:
 	SequenceCallback();
 	virtual ~SequenceCallback();
@@ -30,10 +30,10 @@ public:
 	 * \brief Performs ItemCallback action
 	 */
 
-	void perform(EventType* eventType);
+	void perform(EventType& eventType);
 
 protected:
-	std::vector<ItemCallback*>::iterator mCallbackIterator;
+	std::vector<Callback*>::iterator mCallbackIterator;
 	bool mReloaditerator;
 };
 

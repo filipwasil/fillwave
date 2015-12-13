@@ -10,19 +10,19 @@
 namespace fillwave {
 namespace actions {
 
-LoopCallback::LoopCallback(ItemCallback* callback, int numberOfExecutions)
+LoopCallback::LoopCallback(Callback* callback, int numberOfExecutions)
 		:
-				ItemCallback(eEventType::eTime),
-				mItemCallback(callback),
+				Callback(eEventType::eTime),
+				mCallback(callback),
 				mLoopsLeft(numberOfExecutions) {
 }
 
-void LoopCallback::perform(EventType* event) {
-	mItemCallback->perform(event);
+void LoopCallback::perform(EventType& event) {
+	mCallback->perform(event);
 	if (mLoopsLeft != ENDLESS_LOOP) {
-		if (mItemCallback->isFinished()) {
+		if (mCallback->isFinished()) {
 			if (--mLoopsLeft) {
-				mItemCallback->reset();
+				mCallback->reset();
 			} else {
 				finish();
 			}

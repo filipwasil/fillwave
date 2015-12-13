@@ -10,19 +10,15 @@
 namespace fillwave {
 namespace actions {
 
-FollowCustomCursorCallback::FollowCustomCursorCallback():EngineCallback(eEventType::eCursorPosition) {
+FollowCustomCursorCallback::FollowCustomCursorCallback(Engine* engine):Callback(eEventType::eCursorPosition), mEngine(engine) {
 
 }
 
-FollowCustomCursorCallback::~FollowCustomCursorCallback() {
-
-}
-
-void FollowCustomCursorCallback::perform (Engine* engine, EventType* event) {
+void FollowCustomCursorCallback::perform (EventType& event) {
    CursorPositionEventData e = CursorPositionEvent::getData(event);
-   engine->getCurrentScene()->moveCursor(glm::vec2((e.xPosition/engine->getScreenSize()[0])*2.0 - 1.0,
-                                                  -(e.yPosition/engine->getScreenSize()[1])*2.0 + 1.0));
+   mEngine->getCurrentScene()->moveCursor(glm::vec2((e.xPosition/mEngine->getScreenSize()[0])*2.0 - 1.0,
+                                                  -(e.yPosition/mEngine->getScreenSize()[1])*2.0 + 1.0));
 }
 
-} /* particles */
+} /* actions */
 } /* fillwave */

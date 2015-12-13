@@ -8,7 +8,7 @@
 #ifndef FPSCALLBACK_H_
 #define FPSCALLBACK_H_
 
-#include <fillwave/actions/EngineCallback.h>
+#include <fillwave/actions/Callback.h>
 #include <fillwave/actions/TimeEvent.h>
 #include <fillwave/actions/Callback.h>
 #include <fillwave/models/Text.h>
@@ -21,15 +21,16 @@ namespace actions {
  * \brief ItemCallback to display and refresh FPS as a renderable text.
  */
 
-class FPSCallback: public EngineCallback {
+class FPSCallback: public Callback {
 public:
-	FPSCallback(pText text);
+	FPSCallback(Engine* engine, pText text);
 	virtual ~FPSCallback() = default;
-	void perform(Engine* engine, EventType* event);
+	void perform(EventType& event);
 
 private:
 	pText mText;
 	GLfloat mTimePassed;
+	Engine* mEngine;
 };
 
 } /* actions */

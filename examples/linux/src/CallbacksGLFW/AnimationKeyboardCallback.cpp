@@ -36,17 +36,20 @@
 namespace fillwave {
 namespace actions {
 
-AnimationKeyboardCallback::AnimationKeyboardCallback(eEventType EventType):EngineCallback(EventType){
+AnimationKeyboardCallback::AnimationKeyboardCallback(
+		pEntity entity,
+		eEventType EventType)
+		: Callback(EventType),
+		  mEntity(entity) {
 }
 
 AnimationKeyboardCallback::~AnimationKeyboardCallback() {
 }
 
-void AnimationKeyboardCallback::perform (Engine* engine, EventType* event) {
+void AnimationKeyboardCallback::perform(EventType& event) {
    KeyboardEventData e = KeyboardEvent::getData(event);
-   pEntity entity = engine->getFocusKey();
-   if (entity) {
-      models::Model* model = (models::Model*)entity.get();
+   if (mEntity) {
+      models::Model* model = dynamic_cast<models::Model*>(mEntity.get());
       switch (e.key) {
          case GLFW_KEY_Q:
             model->setActiveAnimation(FILLWAVE_DO_NOT_ANIMATE);

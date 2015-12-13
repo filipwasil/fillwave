@@ -131,15 +131,14 @@ void Entity::updateMatrixTree() {
 	}
 }
 
-void Entity::handleHierarchyEvent(actions::EventType* event) {
+void Entity::handleHierarchyEvent(actions::EventType& event) {
 	handleEvent(mCallbacksHierarchy, event);
-	if (mChildrenPropagateEvent) {
-		std::for_each(mChildren.begin(), mChildren.end(),
-				[event](pEntity e) {e->handleHierarchyEvent(event);});
+	for (auto it : mChildren) {
+		it->handleHierarchyEvent(event);
 	}
 }
 
-void Entity::handlePrivateEvent(actions::EventType* event) {
+void Entity::handlePrivateEvent(actions::EventType& event) {
 	handleEvent(mCallbacksPrivate, event);
 }
 
@@ -172,19 +171,19 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	mRefreshExternal = GL_TRUE;
 }
 
-void Entity::attachHierarchyCallback(actions::ItemCallback* callback) {
+void Entity::attachHierarchyCallback(actions::Callback* callback) {
 	mCallbacksHierarchy.push_back(callback);
 }
 
-void Entity::attachPrivateCallback(actions::ItemCallback* callback) {
+void Entity::attachPrivateCallback(actions::Callback* callback) {
 	mCallbacksPrivate.push_back(callback);
 }
 
-void Entity::detachHierarchyCallback(actions::ItemCallback* callback) {
+void Entity::detachHierarchyCallback(actions::Callback* callback) {
 	detachCallback(mCallbacksHierarchy, callback);
 }
 
-void Entity::detachPrivateCallback(actions::ItemCallback* callback) {
+void Entity::detachPrivateCallback(actions::Callback* callback) {
 	detachCallback(mCallbacksPrivate, callback);
 }
 
@@ -233,12 +232,12 @@ inline void Entity::detachChildren() {
 			[_this](pEntity e) {_this->detach(e);});
 }
 
-inline void Entity::handleEvent(
-		std::vector<actions::ItemCallback*>& callbacks,
-		actions::EventType* event) {
+inline void Entity::handleEvent( /* xxx refactor */
+		std::vector<actions::Callback*>& callbacks,
+		actions::EventType& event) {
 	for (auto it : callbacks) {
 		if (it->isEnabled()) {
-			if (it->getSupportedEventType() == event->getType()) {
+			if (it->getEventType() == event.getType()) {
 				it->perform(event);
 			}
 		}
@@ -247,9 +246,9 @@ inline void Entity::handleEvent(
 }
 
 inline void Entity::eraseFinishedCallbacks(
-		std::vector<actions::ItemCallback*>& callbacks) {
+		std::vector<actions::Callback*>& callbacks) {
 	auto _find_finished_function =
-			[](actions::ItemCallback* m) -> bool {bool finished = m->isFinished(); if (finished) delete m; return finished;};
+			[](actions::Callback* m) -> bool {bool finished = m->isFinished(); if (finished) delete m; return finished;};
 	auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _find_finished_function);
@@ -257,10 +256,10 @@ inline void Entity::eraseFinishedCallbacks(
 }
 
 inline void Entity::detachCallback(
-		std::vector<actions::ItemCallback*>& callbacks,
-		actions::ItemCallback* callback) {
+		std::vector<actions::Callback*>& callbacks,
+		actions::Callback* callback) {
 	auto _compare_function =
-			[callback](const actions::ItemCallback* m) -> bool {bool found = (m == callback); if (found) delete m; return found;};
+			[callback](const actions::Callback* m) -> bool {bool found = (m == callback); if (found) delete m; return found;};
 	auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _compare_function);

@@ -5,15 +5,15 @@
  *      Author: Filip Wasil
  */
 
+#include <fillwave/actions/Callback.h>
 #include <fillwave/actions/SequenceCallback.h>
-#include <fillwave/actions/ItemCallback.h>
 
 namespace fillwave {
 namespace actions {
 
 SequenceCallback::SequenceCallback()
 		:
-				ItemCallback(eEventType::eTime),
+				Callback(eEventType::eTime),
 				mCallbackIterator(this->begin()),
 				mReloaditerator(true) {
 }
@@ -24,7 +24,7 @@ SequenceCallback::~SequenceCallback() {
 	}
 }
 
-void SequenceCallback::perform(EventType* event) {
+void SequenceCallback::perform(EventType& event) {
 	if (mReloaditerator) {
 		mCallbackIterator = this->begin();
 		mReloaditerator = false;

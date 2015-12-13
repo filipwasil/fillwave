@@ -13,18 +13,14 @@
 namespace fillwave {
 namespace actions {
 
-CameraMotionCallback::CameraMotionCallback():EngineCallback(eEventType::eTime),
-                                             mTimePassed(0.0) {
+CameraMotionCallback::CameraMotionCallback(Engine* engine)
+		: Callback(eEventType::eTime), mTimePassed(0.0), mEngine(engine) {
 
 }
 
-CameraMotionCallback::~CameraMotionCallback() {
-
-}
-
-void CameraMotionCallback::perform (Engine* engine, EventType* event) {
+void CameraMotionCallback::perform (EventType& event) {
    mTimePassed += TimeEvent::getData(event).mTimePassed;
-   engine->getCurrentScene()->getCamera()->moveTo(calculateNewPosition(mTimePassed));
+   mEngine->getCurrentScene()->getCamera()->moveTo(calculateNewPosition(mTimePassed));
 }
 
 glm::vec3 CameraMotionCallback::calculateNewPosition(float time) {

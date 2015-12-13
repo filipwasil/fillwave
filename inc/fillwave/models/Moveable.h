@@ -83,6 +83,7 @@ protected:
 
 } /* models */
 typedef std::shared_ptr<models::Moveable> pMoveable;
+typedef std::weak_ptr<models::Moveable> pwMoveable;
 } /* fillwave */
 
 #endif /* MOVEABLE_H_ */

@@ -8,20 +8,21 @@
 #ifndef INC_FILLWAVE_TIMESTOPCALLBACK_H_
 #define INC_FILLWAVE_TIMESTOPCALLBACK_H_
 
-#include <fillwave/actions/EngineCallback.h>
+#include <fillwave/actions/Callback.h>
 #include <fillwave/actions/Event.h>
 
 namespace fillwave {
 class Engine;
 namespace actions {
 
-class TimeStopCallback: public EngineCallback {
+class TimeStopCallback: public Callback {
+public:
+   TimeStopCallback(Engine* engine);
+   virtual ~TimeStopCallback();
+   void perform(EventType& event);
 private:
    bool mTimeOn;
-public:
-   TimeStopCallback();
-   virtual ~TimeStopCallback();
-   void perform(Engine* engine, EventType* event);
+   Engine* mEngine;
 };
 
 } /* actions */

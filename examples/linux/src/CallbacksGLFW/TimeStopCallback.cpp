@@ -15,7 +15,8 @@ FLOGINIT("TimeStopCallback", FERROR | FFATAL)
 namespace fillwave {
 namespace actions {
 
-TimeStopCallback::TimeStopCallback():EngineCallback(eEventType::eKey), mTimeOn(GL_TRUE) {
+TimeStopCallback::TimeStopCallback(Engine* engine)
+		: Callback(eEventType::eKey), mTimeOn(GL_TRUE), mEngine(engine) {
 
 }
 
@@ -23,17 +24,17 @@ TimeStopCallback::~TimeStopCallback() {
 
 }
 
-void TimeStopCallback::perform(Engine* engine, EventType* event) {
+void TimeStopCallback::perform(EventType& event) {
    KeyboardEventData data = KeyboardEvent::getData(event);
    /* You can handle Your callback directly here ... */
    if (data.key == GLFW_KEY_T &&
          data.action == GLFW_PRESS) {
       if (mTimeOn) {
          mTimeOn = false;
-         engine->configureTime(0.0);
+         mEngine->configureTime(0.0);
       } else {
          mTimeOn = true;
-         engine->configureTime(1.0);
+         mEngine->configureTime(1.0);
       }
    }
 }

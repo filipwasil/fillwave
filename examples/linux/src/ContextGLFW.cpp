@@ -147,7 +147,7 @@ void ContextGLFW::keyboardCallback(GLFWwindow* /*window*/,
    data.mode = mods;
    data.scanCode = scancode;
    fillwave::actions::KeyboardEvent event(data);
-   mGraphicsEngine->insertInputKey(event);
+   mGraphicsEngine->insertInput(event);
 }
 
 void ContextGLFW::mouseButtonCallback(GLFWwindow* /*window*/,
@@ -161,7 +161,7 @@ void ContextGLFW::mouseButtonCallback(GLFWwindow* /*window*/,
    data.mButton = button;
    data.mMods = mods;
    fillwave::actions::MouseButtonEvent event(data);
-   mGraphicsEngine->insertInputMouseButton(event);
+   mGraphicsEngine->insertInput(event);
 }
 
 void ContextGLFW::scrollCallback(GLFWwindow* /*window*/,
@@ -171,7 +171,7 @@ void ContextGLFW::scrollCallback(GLFWwindow* /*window*/,
    d.mOffsetX = xoffset;
    d.mOffsetY = yoffset;
    fillwave::actions::ScrollEvent event(d);
-   mGraphicsEngine->insertInputScroll(event);
+   mGraphicsEngine->insertInput(event);
 }
 
 void ContextGLFW::characterCallback(GLFWwindow* /*window*/,
@@ -179,7 +179,7 @@ void ContextGLFW::characterCallback(GLFWwindow* /*window*/,
    fillwave::actions::CharacterEventData d;
    d.character = ascii;
    fillwave::actions::CharacterEvent event(d);
-   mGraphicsEngine->insertInputCharacter(event);
+   mGraphicsEngine->insertInput(event);
 }
 
 void ContextGLFW::cursorPositionCallback(GLFWwindow* /*window*/,
@@ -210,7 +210,7 @@ void ContextGLFW::cursorPositionCallback(GLFWwindow* /*window*/,
    mCursorPositionY = ypos;
 
    fillwave::actions::CursorPositionEvent event(d);
-   mGraphicsEngine->insertInputCursorPosition(event);
+   mGraphicsEngine->insertInput(event);
 }
 
 void ContextGLFW::cursorEnterCallback(GLFWwindow* /*window*/,
@@ -218,7 +218,7 @@ void ContextGLFW::cursorEnterCallback(GLFWwindow* /*window*/,
    fillwave::actions::CursorEnterEventData d;
    d.direction = in;
    fillwave::actions::CursorEnterEvent event(d);
-   mGraphicsEngine->insertInputCursorEnter(event);
+   mGraphicsEngine->insertInput(event);
 }
 
 void ContextGLFW::reload() {

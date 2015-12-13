@@ -8,7 +8,7 @@
 #ifndef FOLLOWCUSTOMCURSORCALLBACK_H_
 #define FOLLOWCUSTOMCURSORCALLBACK_H_
 
-#include <fillwave/actions/EngineCallback.h>
+#include <fillwave/actions/Callback.h>
 #include <fillwave/actions/Event.h>
 #include <fillwave/Fillwave.h>
 
@@ -22,11 +22,13 @@ namespace actions {
  *
  */
 
-class FollowCustomCursorCallback: public EngineCallback {
+class FollowCustomCursorCallback: public Callback {
 public:
-   FollowCustomCursorCallback();
-   virtual ~FollowCustomCursorCallback();
-   void perform (Engine* engine, EventType* event);
+   FollowCustomCursorCallback(Engine* engine);
+   virtual ~FollowCustomCursorCallback() = default;
+   void perform (EventType& event);
+private:
+   Engine* mEngine;
    };
 
 } /* particles */

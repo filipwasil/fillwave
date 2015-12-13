@@ -37,7 +37,6 @@
 #include <GLFW/glfw3.h>
 #include <fillwave/actions/TimeEvent.h>
 #include <fillwave/actions/Callback.h>
-#include <fillwave/actions/EngineCallback.h>
 
 namespace fillwave {
 class Engine;
@@ -52,11 +51,13 @@ namespace actions {
  *
  */
 
-class AnimationKeyboardCallback: public EngineCallback{
+class AnimationKeyboardCallback: public Callback{
 public:
-   AnimationKeyboardCallback(eEventType eventType);
+   AnimationKeyboardCallback(pEntity entity, eEventType eventType);
    virtual ~AnimationKeyboardCallback();
-   void perform (Engine* engine, EventType* event);
+   void perform (EventType& event);
+private:
+   pEntity mEntity;
    };
 } /* actions */
 } /* fillwave */

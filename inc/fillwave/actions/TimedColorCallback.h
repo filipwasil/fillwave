@@ -33,7 +33,7 @@ public:
 	 * \brief Performs ItemCallback action
 	 */
 
-	void perform(EventType* eventType);
+	void perform(EventType& eventType);
 
 private:
 	glm::vec4 mStartColor;

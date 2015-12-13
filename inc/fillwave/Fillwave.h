@@ -177,18 +177,18 @@ public:
 			glm::vec3 position,
 			glm::quat rotation,
 			glm::vec4 color,
-			pEntity entity = pEntity());
+			pMoveable followed = pEntity());
 
 	pLightPoint storeLightPoint(
 			glm::vec3 position,
 			glm::vec4 color,
-			pEntity entity = pEntity());
+			pMoveable followed = pEntity());
 
 	pLightDirectional storeLightDirectional(
 			glm::vec3 position,
 			glm::quat rotation,
 			glm::vec4 color,
-			pEntity entity = pEntity());
+			pMoveable followed = pEntity());
 
 	/* Store text */
 	pText storeText(
@@ -234,68 +234,24 @@ public:
 	void addPostProcess(const std::string& fragmentShaderPath, GLfloat lifeTime =
 	FILLWAVE_ENDLESS);
 
-	/* Inputs - setFocus */
-	void setFocusKey(pEntity entity);
-	void setFocusMouseButton(pEntity entity);
-	void setFocusScroll(pEntity entity);
-	void setFocusChar(pEntity entity);
-	void setFocusCharMods(pEntity entity);
-	void setFocusCursorEnter(pEntity entity);
-	void setFocusCursorPosition(pEntity entity);
-
-	/* Inputs - getFocus */
-	pEntity getFocusKey() const;
-	pEntity getFocusMouseButton() const;
-	pEntity getFocusScroll() const;
-	pEntity getFocusChar() const;
-	pEntity getFocusCharMods() const;
-	pEntity getFocusCursorEnter() const;
-	pEntity getFocusCursorPosition() const;
-	pEntity getFocusTouchScreen() const;
+	/* Inputs - focus */
+	void setFocus(eEventType eventType, pEntity entity);
+	pEntity getFocus(eEventType eventType) const;
+	void clearFocus(eEventType eventType);
 
 	/* Inputs - insert */
+	void insertInput(actions::EventType& event);
 	void insertResizeScreen(GLuint width, GLuint height);
-	void insertInputKey(actions::KeyboardEvent& event);
-	void insertInputMouseButton(actions::MouseButtonEvent& event);
-	void insertInputScroll(actions::ScrollEvent & event);
-	void insertInputCharacter(actions::CharacterEvent& event);
-	void insertInputCharacterMods(actions::CharacterModsEvent& event);
-	void insertInputCursorEnter(actions::CursorEnterEvent& event);
-	void insertInputCursorPosition(actions::CursorPositionEvent& event);
-	void insertInputTouchScreen(actions::TouchEvent& event);
 
 	/* Inputs - register */
-	void registerTimeCallback(actions::EngineCallback* callback);
-	void registerKeyCallback(actions::EngineCallback* callback);
-	void registerMouseButtonCallback(actions::EngineCallback* callback);
-	void registerScrollCallback(actions::EngineCallback* callback);
-	void registerCharCallback(actions::EngineCallback* callback);
-	void registerCharModsCallback(actions::EngineCallback* callback);
-	void registerCursorEnterCallback(actions::EngineCallback* callback);
-	void registerCursorPositionCallback(actions::EngineCallback* callback);
-	void registerTouchScreenCallback(actions::EngineCallback* callback);
+	void registerCallback(actions::Callback* callback);
 
 	/* Inputs - unregister */
-	void unregisterTimeCallback(actions::EngineCallback* callback);
-	void unregisterKeyCallback(actions::EngineCallback* callback);
-	void unregisterMouseButtonCallback(actions::EngineCallback* callback);
-	void unregisterScrollCallback(actions::EngineCallback* callback);
-	void unregisterCharCallback(actions::EngineCallback* callback);
-	void unregisterCharModsCallback(actions::EngineCallback* callback);
-	void unregisterCursorEnterCallback(actions::EngineCallback* callback);
-	void unregisterCursorPositionCallback(actions::EngineCallback* callback);
-	void unregisterTouchScreenCallback(actions::EngineCallback* callback);
+	void unregisterCallback(actions::Callback* callback);
 
 	/* Inputs - clear */
-	void clearTimeCallbacks();
-	void clearKeyCallbacks();
-	void clearMouseButtonCallbacks();
-	void clearScrollCallbacks();
-	void clearCharCallbacks();
-	void clearCharModsCallbacks();
-	void clearCursorEnterCallbacks();
-	void clearCursorPositionCallbacks();
-	void clearTouchScreenCallbacks();
+	void clearCallback(actions::Callback* callback);
+	void clearCallbacks(eEventType eventType);
 
 	void reload();
 

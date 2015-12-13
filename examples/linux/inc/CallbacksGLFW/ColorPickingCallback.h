@@ -33,7 +33,7 @@
 #ifndef COLORPICKINGCALLBACK_H_
 #define COLORPICKINGCALLBACK_H_
 
-#include <fillwave/actions/EngineCallback.h>
+#include <fillwave/actions/Callback.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/actions/Event.h>
 
@@ -47,14 +47,15 @@ namespace actions {
  *
  */
 
-class ColorPickingCallback: public EngineCallback {
+class ColorPickingCallback: public Callback {
+public:
+   ColorPickingCallback(Engine* engine);
+   virtual ~ColorPickingCallback() = default;
+   void perform (EventType& eventType);
 private:
    pEntity mCurrentlyPicked;
-public:
-   ColorPickingCallback();
-   virtual ~ColorPickingCallback() = default;
-   void perform (Engine* engine, EventType* eventType);
-   };
+	Engine* mEngine;
+};
 
 } /* actions */
 } /* fillwave */

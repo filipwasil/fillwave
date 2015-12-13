@@ -44,11 +44,13 @@ FLOGINIT("MoveCameraCallback", FERROR | FFATAL)
 namespace fillwave {
 namespace actions {
 
-MoveCameraCallback::MoveCameraCallback(eEventType eventType,
-                                       float speed,
-                                       GLFWwindow* window):EngineCallback(eventType),
-                                                    mSpeed(speed),
-                                                    mWindow(window) {
+MoveCameraCallback::MoveCameraCallback(
+		Engine* engine,
+		eEventType eventType,
+		float speed,
+		GLFWwindow* window)
+		: Callback(eventType), mSpeed(speed), mWindow(window), mEngine(engine) {
+
    /*
     * If we want to rotate the camera using the mouse motion
     * cursor should not be visible
@@ -63,10 +65,10 @@ MoveCameraCallback::~MoveCameraCallback() {
 
 }
 
-void MoveCameraCallback::perform (Engine* engine, EventType* event) {
-   if (event->getType() == eEventType::eKey) {
+void MoveCameraCallback::perform(EventType& event) {
+   if (event.getType() == eEventType::eKey) {
       KeyboardEventData e = KeyboardEvent::getData(event);
-      pCamera camera = engine->getCurrentScene()->getCamera();
+      pCamera camera = mEngine->getCurrentScene()->getCamera();
       switch (e.key) {
          case GLFW_KEY_W:
             camera->moveInDirection(glm::vec3(0.0, 0.0, -mSpeed));
@@ -76,11 +78,11 @@ void MoveCameraCallback::perform (Engine* engine, EventType* event) {
             break;
          case GLFW_KEY_D:
             if (e.action == GLFW_RELEASE) {
-               engine->configureDebugger(eDebuggerState::eToggleState);
+            	mEngine->configureDebugger(eDebuggerState::eToggleState);
             }
             break;
       }
-   } else if (event->getType() == eEventType::eMouseButton) {
+   } else if (event.getType() == eEventType::eMouseButton) {
       MouseButtonEventData e = MouseButtonEvent::getData(event);
       if (e.mButton == GLFW_MOUSE_BUTTON_LEFT) {
       }
@@ -88,22 +90,22 @@ void MoveCameraCallback::perform (Engine* engine, EventType* event) {
       }
       if (e.mButton == GLFW_MOUSE_BUTTON_RIGHT) {
       }
-   } else if (event->getType() == eEventType::eScroll) {
+   } else if (event.getType() == eEventType::eScroll) {
       ScrollEventData e = ScrollEvent::getData(event);
       if (e.mOffsetY < 0.0) { // scroll down
-         engine->getCurrentScene()->getCamera()->moveBy(glm::vec3(0.0, 0.0, mSpeed));
+      	mEngine->getCurrentScene()->getCamera()->moveBy(glm::vec3(0.0, 0.0, mSpeed));
       }
       else if (e.mOffsetY > 0.0) { // scroll up
-         engine->getCurrentScene()->getCamera()->moveBy(glm::vec3(0.0, 0.0, -mSpeed));
+      	mEngine->getCurrentScene()->getCamera()->moveBy(glm::vec3(0.0, 0.0, -mSpeed));
       }
       return;
-   } else if (event->getType() == eEventType::eCursorPosition) {
+   } else if (event.getType() == eEventType::eCursorPosition) {
       static bool init = false;
       static int  a = 0;
 		auto d = [](double value){return static_cast<float>(value);};
       CursorPositionEventData e = CursorPositionEvent::getData(event);
-      pCamera camera = engine->getCurrentScene()->getCamera();
-      glm::ivec2 screenSize = engine->getScreenSize();
+      pCamera camera = mEngine->getCurrentScene()->getCamera();
+      glm::ivec2 screenSize = mEngine->getScreenSize();
       double dx = e.xPosition - screenSize[0]/2;
       double dy = screenSize[1]/2 - e.yPosition;
       if (init) { /* debounce */
@@ -115,7 +117,7 @@ void MoveCameraCallback::perform (Engine* engine, EventType* event) {
       }
       if (mWindow) {
          if (a++>2){
-            glfwSetCursorPos(mWindow, engine->getScreenSize()[0]/2,engine->getScreenSize()[1]/2);
+            glfwSetCursorPos(mWindow, mEngine->getScreenSize()[0]/2,mEngine->getScreenSize()[1]/2);
             a=0;
          }
       }

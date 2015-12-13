@@ -10,8 +10,8 @@
 
 #include <fillwave/common/Finishable.h>
 
-#include <fillwave/actions/ItemCallback.h>
 #include <fillwave/actions/TimeEvent.h>
+#include <fillwave/actions/Callback.h>
 #include <fillwave/actions/Callback.h>
 
 #define ENDLESS_LOOP 0
@@ -23,19 +23,19 @@ namespace actions {
  * \brief ItemCallback to loop other callbacks.
  */
 
-class LoopCallback: public ItemCallback {
+class LoopCallback: public Callback {
 public:
-	LoopCallback(ItemCallback* callback, int numberOfExecutions);
+	LoopCallback(Callback* callback, int numberOfExecutions);
 	virtual ~LoopCallback() = default;
 
 	/*	perform
 	 * \brief Performs ItemCallback action.
 	 */
 
-	void perform(EventType* event);
+	void perform(EventType& event);
 
 protected:
-	ItemCallback* mItemCallback;
+	puCallback mCallback;
 	int mLoopsLeft;
 };
 
