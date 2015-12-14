@@ -27,13 +27,13 @@
 \contentsline {subsection}{\numberline {2.12}Logging}{18}{subsection.2.12}
 \contentsline {subsection}{\numberline {2.13}Event system}{19}{subsection.2.13}
 \contentsline {subsubsection}{\numberline {2.13.1}Focus functions and private callbacks}{20}{subsubsection.2.13.1}
-\contentsline {subsubsection}{\numberline {2.13.2}Register, unregister and clear functions}{21}{subsubsection.2.13.2}
-\contentsline {subsection}{\numberline {2.14}Easing}{22}{subsection.2.14}
-\contentsline {subsection}{\numberline {2.15}Physics}{22}{subsection.2.15}
-\contentsline {subsection}{\numberline {2.16}Extras}{23}{subsection.2.16}
-\contentsline {section}{\numberline {3}Customization}{25}{section.3}
-\contentsline {subsection}{\numberline {3.1}Custom events}{25}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Custom callbacks}{25}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Custom easing}{26}{subsection.3.3}
-\contentsline {section}{\numberline {4}Examples}{27}{section.4}
-\contentsline {section}{\numberline {5}Licenses}{29}{section.5}
+\contentsline {subsubsection}{\numberline {2.13.2}Register, unregister and clear functions}{20}{subsubsection.2.13.2}
+\contentsline {subsection}{\numberline {2.14}Easing}{21}{subsection.2.14}
+\contentsline {subsection}{\numberline {2.15}Physics}{21}{subsection.2.15}
+\contentsline {subsection}{\numberline {2.16}Extras}{22}{subsection.2.16}
+\contentsline {section}{\numberline {3}Customization}{24}{section.3}
+\contentsline {subsection}{\numberline {3.1}Custom events}{24}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Custom callbacks}{24}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Custom easing}{25}{subsection.3.3}
+\contentsline {section}{\numberline {4}Examples}{26}{section.4}
+\contentsline {section}{\numberline {5}Licenses}{28}{section.5}

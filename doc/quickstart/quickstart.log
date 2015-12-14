@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.10.23)  13 NOV 2015 00:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.10.23)  14 DEC 2015 23:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -503,88 +503,78 @@ d on input line 519.
 (pdftex.def)             Requested size: 245.71475pt x 153.57172pt.
  [15 <../../../fillwave-examples/screens/particles.png> <../../../fillwave-exam
 ples/screens/particles_b.png>] [16] [17] [18] [19]
-Underfull \hbox (badness 10000) in paragraph at lines 653--655
+Underfull \hbox (badness 10000) in paragraph at lines 649--651
 
  []
 
-[20] [21] <easing.png, id=757, 552.0625pt x 395.4775pt>
+[20] <easing.png, id=698, 552.0625pt x 395.4775pt>
 File: easing.png Graphic file (type png)
  <use easing.png>
-Package pdftex.def Info: easing.png used on input line 744.
+Package pdftex.def Info: easing.png used on input line 687.
 (pdftex.def)             Requested size: 331.24005pt x 237.28833pt.
-
-[22 <./easing.png>] [23] [24] [25]
-Overfull \hbox (84.49796pt too wide) in paragraph at lines 903--905
+ [21 <./easing.png>] [22] [23] [24]
+Overfull \hbox (84.49796pt too wide) in paragraph at lines 846--848
 [][][][][][][][][] 
  []
 
 
-Overfull \hbox (10.99817pt too wide) in paragraph at lines 903--905
+Overfull \hbox (10.99817pt too wide) in paragraph at lines 846--848
 [][][][][][] 
  []
 
-[26] (../../../fillwave-examples/src/example_simple/example_simple.cpp
-Overfull \hbox (67.49875pt too wide) in paragraph at lines 36--37
-[][][][][][][][][][][][][][][][][]  
- []
-
-
-Overfull \hbox (31.49802pt too wide) in paragraph at lines 37--39
-[][][][][][][][][][][][]  
- []
-
-) [27]
-Underfull \hbox (badness 10000) in paragraph at lines 932--976
+[25] (../../../fillwave-examples/src/example_simple/example_simple.cpp)
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 875--919
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 932--976
+Underfull \hbox (badness 10000) in paragraph at lines 875--919
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 932--976
+Underfull \hbox (badness 10000) in paragraph at lines 875--919
 
  []
 
-[28]
-Overfull \hbox (121.1991pt too wide) in paragraph at lines 984--985
+[27]
+Overfull \hbox (121.1991pt too wide) in paragraph at lines 927--928
 [][][][][][][][][][][]  
  []
 
-[29] [30]
-Overfull \hbox (146.39905pt too wide) in paragraph at lines 1040--1042
+[28] [29]
+Overfull \hbox (146.39905pt too wide) in paragraph at lines 983--985
 [][][][][][][][]  
  []
 
 
-Overfull \hbox (146.39905pt too wide) in paragraph at lines 1052--1054
+Overfull \hbox (146.39905pt too wide) in paragraph at lines 995--997
 [][][][][][][][]  
  []
 
-[31] [32] [33] [34]
-Overfull \hbox (158.99902pt too wide) in paragraph at lines 1140--1141
+[30] [31] [32] [33]
+Overfull \hbox (158.99902pt too wide) in paragraph at lines 1083--1084
 [][][][][][][][]  
  []
 
-[35]
+[34]
 No file quickstart.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1179.
-[36]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1179.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1122.
+[35]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1122.
  (./quickstart.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1179.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1179.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1122.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1122.
 
 Package rerunfilecheck Info: File `quickstart.out' has not changed.
 (rerunfilecheck)             Checksum: C2523B90DA5EACA08A57195771D3E0C8;2452.
  ) 
 Here is how much of TeX's memory you used:
- 10111 strings out of 494957
- 148137 string characters out of 6180027
+ 9974 strings out of 494957
+ 145172 string characters out of 6180027
  293873 words of memory out of 5000000
- 12360 multiletter control sequences out of 15000+600000
+ 12288 multiletter control sequences out of 15000+600000
  35514 words of font info for 106 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  33i,7n,58p,837b,1753s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -596,10 +586,10 @@ onts/rpxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txbtt.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on quickstart.pdf (36 pages, 965320 bytes).
+Output written on quickstart.pdf (35 pages, 962013 bytes).
 PDF statistics:
- 1388 PDF objects out of 1440 (max. 8388607)
- 1322 compressed objects within 14 object streams
- 863 named destinations out of 1000 (max. 500000)
+ 1307 PDF objects out of 1440 (max. 8388607)
+ 1243 compressed objects within 13 object streams
+ 798 named destinations out of 1000 (max. 500000)
  328 words of extra memory for PDF output out of 10000 (max. 10000000)
 

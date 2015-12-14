@@ -104,14 +104,14 @@ int main(int argc, char* argv[]) {
 
 \begin{lstlisting}
 void insertResizeScreen(actions::KeyboardEvent& e);
-void insertInputKey(actions::KeyboardEvent& e);
-void insertInputMouseButton(actions::MouseButtonEvent& e);
-void insertInputScroll(actions::ScrollEvent  & e);
-void insertInputCharacter(actions::CharacterEvent& e);
-void insertInputCharacterMods(actions::CharacterModsEvent& e);
-void insertInputCursorEnter(actions::CursorEnterEvent& e);
-void insertInputCursorPosition(actions::CursorPositionEvent& e);
-void insertInputTouchScreen(actions::TouchEvent& e);
+void insertInput(actions::KeyboardEvent& e);
+void insertInput(actions::MouseButtonEvent& e);
+void insertInput(actions::ScrollEvent  & e);
+void insertInput(actions::CharacterEvent& e);
+void insertInput(actions::CharacterModsEvent& e);
+void insertInput(actions::CursorEnterEvent& e);
+void insertInput(actions::CursorPositionEvent& e);
+void insertInput(actions::TouchEvent& e);
 \end{lstlisting}
 
 \indent \indent Every time when there is an event incoming to you context, (Does not matter if you are using glfw, freegut, QT or other library) and you want Fillwave to handle it you should \textbf{insert} a proper event into the engine. Above there is an example using GLFW. The \textbf{keyboardCallback} function was previously registered as keyboard callback in GLFW.  
@@ -134,7 +134,7 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
    fillwave::actions::KeyboardEvent event(data);
    
    /* insert an event */
-   mGraphicsEngine->insertInputKey(event);
+   mGraphicsEngine->insertInput(event);
 }
 \end{lstlisting}
 \subsection{Naming convention}\label{sec:Naming convention}
@@ -616,68 +616,42 @@ pText text = engine->storeText( "Hello Fillwave",/* content */
 
 \newpage
 \subsection{Event system}\label{sec:Event system}
-\indent \indent Fillwave has its own event system which bases on callbacks, and Events which are consumed by these callbacks. There are two basic types of them:
-\begin{itemize}
-\item Item callbacks
+\indent \indent There are two basic types of callback functions:
 \begin{itemize}
 \item hierarchy callbacks
 \item private callbacks
 \end{itemize}
-\item Engine callbacks
-\end{itemize}
 
-\indent \indent \textbf{Engine callback} is designed to be called in engine context. It can modify the camera, current scene, engine configuration and so on. It is evaluated before every draw as one of the first steps in drawing pipeline. On the other hand, the \textbf{Item callback} sticks to \underline{particular entity}. Difference between the \textbf{hierarchy} and \textbf{private} is that hierarchy callback executes synchronously just before the draw when the scene is drawn. As opposite, the private one is called asynchronously when the particular event is introduced into the engine (Ex. Mouse button click, or Key press). Most commonly used \textbf{ItemCallbacks} are \textbf{TimedCallbacks:}
+\indent \indent \textbf Difference between the \textbf{hierarchy} and \textbf{private} is that hierarchy callback executes synchronously just before the draw when the scene is drawn. As opposite, the private one is called asynchronously when the particular event is introduced into the engine (Ex. Mouse button click, or Key press). Most commonly used \textbf{private callbacks} are \textbf{TimedCallback} classes:
 
 \begin{lstlisting}
 TimedCallback(GLfloat timeToFinish,
-              eEasing easing = eEasing::None);
+              EasingFunction easing = eEasing::None);
 TimedScaleCallback(pEntity entity,
                    glm::vec3 normalizedScaleVec,
                    GLfloat lifetime,
-                   eEasing easing);
+                   EasingFunction easing);
 TimedRotateCallback(pEntity entity,
                     glm::vec3 axis,
                     GLfloat angle,
                     GLfloat lifeTime,
-                    Easing easing);
+                    EasingFunction easing);
 TimedMoveCallback(pEntity entity,
                   glm::vec3 endPosition,
                   GLfloat lifeTime,
-                  eEasing easing);
+                  EasingFunction easing);
 \end{lstlisting}
 
-\indent \indent \textbf{TimedCallback} by itself stands only for a time delay. \textbf{TimedScaleCallback}, \textbf{TimedRotateCallback}, and \textbf{TimedMoveCallback} on the other hand can be used to modify the model scale/position/rotation in time with current easing described by enum \textbf{eEasing}. Default easing for all of the callbacks is \textbf{eEasing::None} which stands for linear interpolation.
+\indent \indent \textbf{TimedCallback} by itself stands only for a time delay. \textbf{TimedScaleCallback}, \textbf{TimedRotateCallback}, and \textbf{TimedMoveCallback} on the other hand can be used to modify the model scale/position/rotation in time with current easing described by std::function \textbf{EasingFunction}. Default easing for all of the callbacks is \textbf{LinearInterpolation}.
 \newpage
 
 \subsubsection{Focus functions and private callbacks}\label{sec:Focus functions and private callbacks}
-\indent \indent Focus functionality and private callbacks were introduced to enable executing particular callbacks in particular entity without iterating over the whole scene tree. To set an entity which will receive a callback from chosen input \textbf{setFocus} functions should be used. \textbf{getFocus} functions are self-explanatory.
+\indent \indent Focus functionality and private callbacks were introduced to enable executing particular callbacks in particular entity without iterating over the whole scene tree. To set an entity which will receive a callback from chosen input \textbf{setFocus} functions should be used.
 \newline
 
 \begin{lstlisting}
 
-void setFocusKey(pEntity entity);
-
-void setFocusMouseButton(pEntity entity);
-
-void setFocusScroll(pEntity entity);
-
-void setFocusChar(pEntity entity);
-
-void setFocusCursorEnter(pEntity entity);
-
-void setFocusCursorPosition(pEntity entity);
-   
-pEntity getFocusKey();
-
-pEntity getFocusMouseButton();
-
-pEntity getFocusScroll();
-
-pEntity getFocusChar();
-
-pEntity getFocusCursorEnter();
-
-pEntity getFocusCursorPosition();
+void setFocus(eEventType eventType, pEntity entity);
 
 \end{lstlisting}
    
@@ -693,51 +667,20 @@ void Entity::detachHierarchyCallback(actions::ItemCallback* c);
 void Entity::detachPrivateCallback(actions::ItemCallback* c);   \end{lstlisting}
 
 \subsubsection{Register, unregister and clear functions}\label{sec:register functions}
-\indent \indent Any callback which is desired to be evaluated in Engine context is called \textbf{EngineCallback}. To register/unregister a engine callback in Fillwave use following functions.
+\indent \indent To register/unregister a callback in Fillwave use following functions:
 
 \begin{lstlisting}
-void registerTimeCallback(actions::EngineCallback* c);
-
-void registerKeyCallback(actions::EngineCallback* c);
-
-void registerMouseButtonCallback(actions::EngineCallback* c);
-
-void registerScrollCallback(actions::EngineCallback* c);
-
-void registerCharCallback(actions::EngineCallback* c);
-
-void registerCursorEnterCallback(actions::EngineCallback* c);
-
-void registerCursorPositionCallback(actions::EngineCallback* c);
-
-void registerCharacterModsCallback(actions::EngineCallback* c);
-
-void registerTouchScreenCallback(actions::EngineCallback* c);
-
-void unregisterTimeCallback(actions::EngineCallback* c);
-
-void unregisterKeyCallback(actions::EngineCallback* c);
-
-void unregisterMouseButtonCallback(actions::EngineCallback* c);
-
-void unregisterScrollCallback(actions::EngineCallback* c);
-
-void unregisterCharCallback(actions::EngineCallback* c);
-
-void unregisterCursorEnterCallback(actions::EngineCallback* c);
-
-void unregisterCursorPositionCallback(actions::EngineCallback*c);
-
-void unregisterCharacterModsCallback(actions::EngineCallback* c);
-
-void unregisterTouchScreenCallback(actions::EngineCallback* c);
+void registerCallback(actions::Callback* c);
+void unregisterCharacterModsCallback(actions::Callback* c);
 \end{lstlisting}
+
+\indent \indent Note, that there is no need to \textbf{delete} any objects. This happens inside the engine.
 
 \newpage
 
 \subsection{Easing}\label{sec:Easing}
 
-\indent \indent Timed Callbacks can be used to modify model transformation (scale, rotation and position) in time with particular easing. You can choose one of following easings define by \textbf{enum class eEasing}:
+\indent \indent Timed Callbacks can be used to modify model transformation (scale, rotation and position) in time with particular easing. You can choose one of following easings define by \textbf{EasingFunction}:
 
 \begin{center}
 
