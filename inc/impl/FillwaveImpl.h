@@ -396,7 +396,7 @@ void Engine::EngineImpl::init() {
 	initPickingBuffer();
 	initOcclusionTest();
 
-#if defined(FILLWAVE_GLES_3_0) || defined(FILLWAVE_GLES_2_0)
+#if defined(FILLWAVE_GLES_3_0)
 #else
 	initGeometryBuffer();
 	initDeferredShading();

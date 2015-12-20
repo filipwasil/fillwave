@@ -28,27 +28,16 @@ namespace loader {
 const std::string gGLVersion = "#version 300 es\n";
 const std::string gGLFragmentPrecision = "precision lowp float;\n";
 const std::string gGLVertexPrecision = "precision mediump float;\n";
-#elif defined(FILLWAVE_GLES_2_0)
-const std::string gGLVersion = "#version 200 es\n";
-const std::string gGLFragmentPrecision = "precision lowp float;\n";
-const std::string gGLVertexPrecision = "precision mediump float;\n";
-#else /* defined(FILLWAVE_GLES_3_0) || defined(FILLWAVE_GLES_2_0) */
+#else /* defined(FILLWAVE_GLES_3_0) */
 const std::string gGLVersion = "#version 330 core\n";
 const std::string gGLFragmentPrecision = "\n";
 const std::string gGLVertexPrecision = "\n";
-#endif /* defined(FILLWAVE_GLES_3_0) || defined(FILLWAVE_GLES_2_0) */
+#endif /* defined(FILLWAVE_GLES_3_0) */
 
-#if defined(FILLWAVE_GLES_2_0)
-const std::string gGLVaryingIn = "varying";
-const std::string gGLVaryingOut = "varying";
-const std::string gGLColorOutDefinition = "\n";
-const std::string gGLColorOutAssingment = "gl_FragColor";
-#else /* defined(FILLWAVE_GLES_2_0) */
 const std::string gGLVaryingIn = "in";
 const std::string gGLVaryingOut = "out";
 const std::string gGLColorOutDefinition = "out vec4 fColor;\n";
 const std::string gGLColorOutAssingment = "fColor";
-#endif /* defined(FILLWAVE_GLES_2_0) */
 
 /* Special values coded in Shaders to enable Deferred rendering */
 
