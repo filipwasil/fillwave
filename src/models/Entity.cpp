@@ -23,12 +23,12 @@ Entity::Entity(glm::vec3 translation, glm::quat rotation)
 				mParentRefresh(GL_TRUE),
 				mPSC(GL_TRUE),
 				mPSR(GL_TRUE),
+				mFlagUpdateRenderPass(GL_TRUE),
 				mPickable(GL_FALSE) {
 
 }
 
 Entity::~Entity() {
-//	detachChildren();
 	FLOG_DEBUG("Entity destroyed");
 }
 
@@ -169,6 +169,10 @@ void Entity::updateParentRotation(glm::quat& parent) {
 		it->updateParentRotation(localRotation);
 	}
 	mRefreshExternal = GL_TRUE;
+}
+
+void Entity::updateRenderpass(std::map<eRenderPass, std::vector<Entity*> >& /*renderpasses*/) {
+	(void)this;
 }
 
 void Entity::attachHierarchyCallback(actions::Callback* callback) {

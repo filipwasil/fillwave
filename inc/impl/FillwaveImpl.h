@@ -764,6 +764,7 @@ void Engine::EngineImpl::draw(GLfloat time) {
 		evaluateDebugger();
 		mScene->drawCursor();
 		mScene->updateMatrixTree();
+		mScene->updateRenderPasses();
 	}
 }
 
@@ -799,6 +800,7 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
 		evaluateDebugger();
 		mScene->drawCursor();
 		mScene->updateMatrixTree();
+		mScene->updateRenderPasses();
 	}
 }
 
@@ -832,6 +834,7 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
 		evaluateDebugger();
 		mScene->drawCursor();
 		mScene->updateMatrixTree();
+		mScene->updateRenderPasses();
 	}
 }
 #endif

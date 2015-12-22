@@ -69,6 +69,8 @@ public:
 
 	void drawDR(space::Camera& camera);
 
+	void updateRenderpass(std::map<eRenderPass, std::vector<Entity*> >& renderpasses);
+
 	/* Animation */
 	void performAnimation(GLfloat timeElapsed_us);
 

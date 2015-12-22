@@ -10,7 +10,9 @@
 
 #include <fillwave/actions/Callback.h>
 #include <fillwave/space/Camera.h>
+#include <fillwave/core/RenderPasses.h>
 #include <vector>
+#include <map>
 
 namespace fillwave {
 
@@ -72,6 +74,7 @@ public:
 	void updateMatrixTree();
 	void updateParentMatrix(glm::mat4& parent);
 	void updateParentRotation(glm::quat& rotation);
+	void updatePasses(std::map<eRenderPass, std::vector<pEntity> >& passes);
 
 	/* Picking */
 	void pick(glm::vec3 color);
@@ -80,6 +83,7 @@ public:
 	glm::vec3 getPickableColor();
 	virtual void onPicked();
 	virtual void onUnpicked();
+	virtual void updateRenderpass(std::map<eRenderPass, std::vector<Entity*> >& renderpasses);
 	virtual void drawPicking(space::Camera& camera);
 
 	/* Log */
@@ -97,6 +101,7 @@ protected:
 
 	GLboolean mPSC;
 	GLboolean mPSR;
+	GLboolean mFlagUpdateRenderPass;
 
 private:
 	GLboolean mPickable;

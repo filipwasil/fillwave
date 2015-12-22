@@ -19,7 +19,6 @@ namespace models {
 
 /*! \class Scene
  * \brief Entity to be a root of Entity tree.
- *
  */
 
 class Scene: public Entity {
@@ -50,22 +49,17 @@ public:
 	virtual pCamera getCamera() = 0;
 
 	void drawCursor();
-
 	void drawFromCustomCamera(space::Camera& c);
 
 	void moveCursor(glm::vec2 position);
 
 	void registerPickable(pEntity entity);
-
 	void pick(glm::ivec4 color);
 
-	virtual void onShow() {
-		(void) this;
-	}
+	void updateRenderPasses();
 
-	virtual void onHide() {
-		(void) this;
-	}
+	virtual void onShow();
+	virtual void onHide();
 
 protected:
 	pCursor mCursor;
@@ -73,6 +67,7 @@ protected:
 	std::map<GLint, pEntity> mPickingTable;
 	pEntity mLastPicked;
 	glm::vec3 mAmbientGlobal;
+	std::map<eRenderPass, std::vector<Entity*> > mRenderPasses;
 
 private:
 	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;

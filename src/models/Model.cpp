@@ -380,5 +380,13 @@ inline void Model::evaluateAnimations() {
 	}
 }
 
+void Model::updateRenderpass(std::map<eRenderPass, std::vector<Entity*> >& renderpasses) {
+	if (mBoneManager) {
+		renderpasses[eRenderPass::eDefaultAnimated].push_back(this);
+	} else {
+		renderpasses[eRenderPass::eDefaultAnimated].push_back(this);
+	}
+}
+
 } /* models */
 } /* fillwave */

@@ -97,5 +97,20 @@ void Scene::pick(glm::ivec4 color) {
 	}
 }
 
+void Scene::updateRenderPasses() {
+	mRenderPasses.clear();
+	for (auto& it : mChildren) {
+		it->updateRenderpass(mRenderPasses);
+	}
+}
+
+void Scene::onShow() {
+
+}
+
+void Scene::onHide() {
+
+}
+
 } /* models */
 } /* fillwave */
