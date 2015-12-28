@@ -198,7 +198,8 @@ Engine* mEngine;
 	/* Options */
 	GLboolean mIsDR; /* Deferred rendering */
 	GLboolean mIsAO; /* Ambient occlusion */
-	GLboolean mISOQ; /* Occlusion query */
+	GLboolean mIsOQ; /* Occlusion query */
+	GLboolean mIsPBRP; /* Program based render passes */
 
 	/* Callbacks */
 	void runCallbacks();
@@ -242,6 +243,7 @@ Engine* mEngine;
 	void drawScene(GLfloat time);
 	void drawSceneStartup();
 	void drawSceneCore();
+	void drawSceneCorePBRP();
 	void drawSceneCoreFR();
 	void drawSceneCoreDR();
 	void drawText();
@@ -342,7 +344,8 @@ mTimeFactor(1.0),
 mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
-mISOQ(GL_FALSE) {
+mIsOQ(GL_FALSE),
+mIsPBRP(GL_FALSE) {
 //	init();
 }
 
@@ -355,7 +358,8 @@ mTimeFactor(1.0),
 mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
-mISOQ(GL_FALSE) {
+mIsOQ(GL_FALSE),
+mIsPBRP(GL_FALSE) {
 
 	androidSetActivity(activity);
 
@@ -371,7 +375,8 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 				mStartupTime(0.0f),
 				mIsDR(GL_FALSE),
 				mIsAO(GL_FALSE),
-				mISOQ(GL_TRUE) {
+				mIsOQ(GL_TRUE),
+				mIsPBRP(GL_FALSE) {
 #endif
 //	init();
 }
@@ -941,13 +946,25 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 inline void Engine::EngineImpl::drawSceneCore() {
 	if (mIsDR) {
 		drawSceneCoreDR();
+	} else if (mIsPBRP) {
+		drawSceneCorePBRP();
 	} else {
 		drawSceneCoreFR();
 	}
 }
 
+inline void Engine::EngineImpl::drawSceneCorePBRP() {
+	if (mIsOQ) {
+		drawOcclusionPass();
+	}
+	drawClear();
+	mScene->drawSkybox();
+	glClear(GL_DEPTH_BUFFER_BIT);
+	mScene->draw();
+}
+
 inline void Engine::EngineImpl::drawSceneCoreFR() {
-	if (mISOQ) {
+	if (mIsOQ) {
 		drawOcclusionPass();
 	}
 	drawClear();
@@ -957,7 +974,7 @@ inline void Engine::EngineImpl::drawSceneCoreFR() {
 }
 
 inline void Engine::EngineImpl::drawSceneCoreDR() {
-	if (mISOQ) {
+	if (mIsOQ) {
 		drawOcclusionPass();
 	}
 	drawClear();

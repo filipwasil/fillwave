@@ -48,7 +48,6 @@ public:
 	virtual ~Text() = default;
 
 	void draw();
-
 	void editAspectRatio(Engine* engine);
 	void editString(std::string text);
 	void editColor(glm::vec4 color);

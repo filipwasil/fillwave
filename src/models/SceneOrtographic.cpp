@@ -24,6 +24,17 @@ void SceneOrthographic::draw() {
 	}
 }
 
+void SceneOrthographic::drawPBRP() {
+	space::CameraOrthographic c = *(mCamera.get());
+	for (auto& program : mRenderPasses) {
+		program.first->use();
+		for (auto& node : program.second) {
+			node->draw(c );
+		}
+		core::Program::disusePrograms();
+	}
+}
+
 void SceneOrthographic::drawDR() {
 	if (mSkybox) {
 		mSkybox->drawDR(*(mCamera.get()));

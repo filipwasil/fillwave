@@ -60,6 +60,12 @@ void Entity::draw(space::Camera& camera) {
 	}
 }
 
+void Entity::drawPBRP(space::Camera& camera) {
+	for (auto& it : mChildren) {
+		it->drawPBRP(camera);
+	}
+}
+
 void Entity::drawDR(space::Camera& camera) {
 	for (auto& it : mChildren) {
 		it->drawDR(camera);
@@ -171,7 +177,7 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	mRefreshExternal = GL_TRUE;
 }
 
-void Entity::updateRenderpass(std::map<eRenderPass, std::vector<Entity*> >& /*renderpasses*/) {
+void Entity::updateRenderpass(std::map<core::Program*, std::vector<Entity*> >& /*renderpasses*/) {
 	(void)this;
 }
 

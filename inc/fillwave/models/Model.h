@@ -66,42 +66,35 @@ public:
 	void reload();
 
 	void draw(space::Camera& camera);
-
+	void drawPBRP(space::Camera& camera);
 	void drawDR(space::Camera& camera);
 
-	void updateRenderpass(std::map<eRenderPass, std::vector<Entity*> >& renderpasses);
+	void updateRenderpass(std::map<core::Program*, std::vector<Entity*> >& renderpasses);
 
 	/* Animation */
 	void performAnimation(GLfloat timeElapsed_us);
-
 	void setActiveAnimation(GLint animationID);
-
 	GLint getActiveAnimations();
 
 	void log();
 
 protected:
 	manager::BoneManager* mBoneManager;
-
 	pProgram mProgramShadow, mProgramShadowColor;
-
 	GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow,
 			mUniformLocationCacheBonesShadowColor;
 private:
 	/* Animation */
 	actions::TimedBoneUpdateCallback* mAnimationCallback;
-
 	GLint mActiveAnimation;
 
+	/* Init */
 	void initUniformsCache();
-
 	void initShadowing(Engine* engine);
-
 	void initAnimations(const fScene* scene);
-
 	void evaluateAnimations();
 
-	/* Mesh tree */
+	/* Tree */
 	void loadNodeTransformations(fNode* node, Entity* entity);
 
 	void loadNodes(

@@ -55,35 +55,25 @@ public:
 
 	virtual ~Mesh() = default;
 
-	virtual void onDraw();
-
 	void draw(space::Camera& camera);
-
+	void drawPBRP(space::Camera& camera);
 	void drawDR(space::Camera& camera);
-
 	void drawFast(space::Camera& camera);
-
 	void drawPicking(space::Camera& camera);
-
 	void drawDepth(space::Camera& camera);
-
 	void drawDepthColor(space::Camera& camera, glm::vec3& position);
-
 	void drawAOG(space::Camera& camera);
-
 	void drawAOC(space::Camera& camera);
-
 	void drawOcclusionBox(space::Camera& camera);
-
 	void log();
+
+	virtual void onDraw();
 
 protected:
 	Material mMaterial;
-
 	pTextureRegion mDiffuseMap;
 	pTextureRegion mNormalMap;
 	pTextureRegion mSpecularMap;
-
 	pProgram mProgram, mProgramDR, mProgramShadow, mProgramShadowColor,
 			mProgramOQ, mProgramAOGeometry, mProgramAOColor;
 
@@ -114,33 +104,21 @@ protected:
 private:
 
 	/* ULC - Uniform location cache */
-
 	GLint mULCModelMatrix, mULCViewProjectionMatrix, mULCLightAmbientIntensity,
 			mULCLightDiffuseIntensity, mULCLightSpecularIntensity,
 			mULCCameraPosition, mULCColorPicking, mULCPainterColor;
-
 	GLint mULCMVPOcclusion;
-
 	GLint mULCMVPShadow;
-
 	GLint mULCMVPShadowColor, mULCModelMatrixShadowColor;
-
 	GLint mULCMVPAmbientOcclusion, mULCPositionAmbientOcclusion;
-
 	GLint mULCSampleRadius, mULCProjectionMatrix;
 
 	void initBuffers();
-
 	void initPipeline();
-
 	void initUniformsCache();
-
 	void initVAO();
-
 	void initVBO();
-
 	void bindTextures();
-
 	void coreDraw();
 };
 

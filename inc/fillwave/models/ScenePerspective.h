@@ -26,31 +26,20 @@ namespace models {
 class ScenePerspective: public Scene {
 public:
 	ScenePerspective(pCameraPerspective camera = pCameraPerspective());
-
 	virtual ~ScenePerspective() = default;
-
 	void setCamera(pCameraPerspective camera);
-
 	pCamera getCamera();
 
 	void draw();
-
+	void drawPBRP();
 	void drawDR();
-
 	void draw(space::CameraPerspective& camera);
-
 	void drawDR(space::CameraPerspective& camera);
-
 	void drawPicking();
-
 	void drawSkybox();
-
 	void drawDepthInt();
-
 	void drawAOG();
-
 	void drawAOC();
-
 	void drawOcclusion();
 
 private:

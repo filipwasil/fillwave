@@ -328,6 +328,13 @@ void Model::draw(space::Camera& camera) {
 	drawWithEffects(camera);
 }
 
+void Model::drawPBRP(space::Camera& camera) {
+	evaluateAnimations();
+	for (auto& it : mChildren) {
+		it->draw(camera);
+	}
+}
+
 void Model::drawDR(space::Camera& camera) {
 	evaluateAnimations();
 	drawWithEffectsDR(camera);
@@ -380,11 +387,13 @@ inline void Model::evaluateAnimations() {
 	}
 }
 
-void Model::updateRenderpass(std::map<eRenderPass, std::vector<Entity*> >& renderpasses) {
-	if (mBoneManager) {
-		renderpasses[eRenderPass::eDefaultAnimated].push_back(this);
+void Model::updateRenderpass(std::map<core::Program*, std::vector<Entity*> >& renderpasses) {
+	if (renderpasses.find(mProgram.get()) != renderpasses.end()) {
+		renderpasses[mProgram.get()].push_back(this);
 	} else {
-		renderpasses[eRenderPass::eDefaultAnimated].push_back(this);
+		std::vector<Entity*> vector; /* xxx some base size maybe ? */
+		vector.push_back(this);
+		renderpasses[mProgram.get()] = vector;
 	}
 }
 

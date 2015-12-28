@@ -10,7 +10,6 @@
 
 #include <fillwave/actions/Callback.h>
 #include <fillwave/space/Camera.h>
-#include <fillwave/core/RenderPasses.h>
 #include <vector>
 #include <map>
 
@@ -19,6 +18,11 @@ namespace fillwave {
 namespace models {
 class Entity;
 }
+
+namespace core {
+class Program;
+}
+
 typedef std::shared_ptr<models::Entity> pEntity;
 
 namespace models {
@@ -40,15 +44,6 @@ public:
 
 	void onDetached();
 	void onAttached(Entity* parent);
-
-	/* Drawing */
-	virtual void draw(space::Camera& camera);
-	virtual void drawDR(space::Camera& camera);
-	virtual void drawDepth(space::Camera& camera);
-	virtual void drawDepthColor(space::Camera& camera, glm::vec3& position);
-	virtual void drawAOG(space::Camera& camera);
-	virtual void drawAOC(space::Camera& camera);
-	virtual void drawOcclusionBox(space::Camera& camera);
 
 	/* Flags */
 	GLboolean isPSC();
@@ -74,17 +69,28 @@ public:
 	void updateMatrixTree();
 	void updateParentMatrix(glm::mat4& parent);
 	void updateParentRotation(glm::quat& rotation);
-	void updatePasses(std::map<eRenderPass, std::vector<pEntity> >& passes);
 
 	/* Picking */
 	void pick(glm::vec3 color);
 	void unpick();
 	GLboolean isPickable();
 	glm::vec3 getPickableColor();
+
+	/* Draw */
+	virtual void draw(space::Camera& camera);
+	virtual void drawPBRP(space::Camera& camera);
+	virtual void drawDR(space::Camera& camera);
+	virtual void drawDepth(space::Camera& camera);
+	virtual void drawDepthColor(space::Camera& camera, glm::vec3& position);
+	virtual void drawAOG(space::Camera& camera);
+	virtual void drawAOC(space::Camera& camera);
+	virtual void drawOcclusionBox(space::Camera& camera);
+
+	/* Pick */
 	virtual void onPicked();
 	virtual void onUnpicked();
-	virtual void updateRenderpass(std::map<eRenderPass, std::vector<Entity*> >& renderpasses);
 	virtual void drawPicking(space::Camera& camera);
+	virtual void updateRenderpass(std::map<core::Program*, std::vector<Entity*> >& renderpasses);
 
 	/* Log */
 	virtual void log();

@@ -28,16 +28,13 @@ public:
 	virtual ~Scene() = default;
 
 	void setCursor(pCursor cursor);
-
 	void setSkybox(pSkybox skybox);
-
 	glm::vec3 getAmbient();
-
 	void setAmbient(glm::vec3 cursor);
-
 	pCursor getCursor();
 
 	virtual void draw() = 0;
+	virtual void drawPBRP() = 0;
 	virtual void drawDR() = 0;
 	virtual void drawAOG() = 0;
 	virtual void drawAOC() = 0;
@@ -67,7 +64,7 @@ protected:
 	std::map<GLint, pEntity> mPickingTable;
 	pEntity mLastPicked;
 	glm::vec3 mAmbientGlobal;
-	std::map<eRenderPass, std::vector<Entity*> > mRenderPasses;
+	std::map<core::Program*, std::vector<Entity*> > mRenderPasses;
 
 private:
 	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;

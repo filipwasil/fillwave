@@ -69,6 +69,25 @@ Mesh::Mesh(
 	initUniformsCache();
 }
 
+void Mesh::drawPBRP(space::Camera& camera) {
+#ifdef FILLWAVE_GLES_3_0
+#else
+	if (mBoneManager || mOcclusionQuery.getResultAsync(1))
+#endif
+	{
+		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+		core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
+		core::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
+		core::Uniform::push(mULCLightSpecularIntensity,
+				mMaterial.getSpecular());
+		core::Uniform::push(mULCCameraPosition, camera.getTranslation());
+		core::Uniform::push(mULCViewProjectionMatrix,
+				camera.getViewProjection());
+
+		coreDraw();
+	}
+}
+
 void Mesh::draw(space::Camera& camera) {
 #ifdef FILLWAVE_GLES_3_0
 #else

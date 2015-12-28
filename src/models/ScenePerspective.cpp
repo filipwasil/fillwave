@@ -19,13 +19,24 @@ ScenePerspective::ScenePerspective(pCameraPerspective camera)
 void ScenePerspective::draw() {
 	mCamera->update();
 	space::CameraPerspective c = *(mCamera.get());
-	for (auto it : mChildren) {
+	for (auto& it : mChildren) {
 		it->draw(c);
 	}
 }
 
+void ScenePerspective::drawPBRP() {
+	space::CameraPerspective c = *(mCamera.get());
+	for (auto& program : mRenderPasses) {
+		program.first->use();
+		for (auto& node : program.second) {
+			node->draw(c );
+		}
+		core::Program::disusePrograms();
+	}
+}
+
 void ScenePerspective::draw(space::CameraPerspective& camera) {
-	for (auto it : mChildren) {
+	for (auto& it : mChildren) {
 		it->draw(camera);
 	}
 }

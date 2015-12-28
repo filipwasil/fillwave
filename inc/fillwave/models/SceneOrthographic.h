@@ -34,6 +34,7 @@ public:
 	pCamera getCamera();
 
 	void draw();
+	void drawPBRP();
 	void drawDR();
 	void draw(space::CameraOrthographic& camera);
 	void drawDR(space::CameraOrthographic& camera);
