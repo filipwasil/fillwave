@@ -27,7 +27,7 @@ void ScenePerspective::draw() {
 void ScenePerspective::drawPBRP() {
 	space::CameraPerspective c = *(mCamera.get());
 	for (auto& program : mRenderPasses) {
-		program.first->use();
+		core::Program::useProgram(program.first);
 		for (auto& node : program.second) {
 			node->draw(c );
 		}

@@ -64,7 +64,7 @@ protected:
 	std::map<GLint, pEntity> mPickingTable;
 	pEntity mLastPicked;
 	glm::vec3 mAmbientGlobal;
-	std::map<core::Program*, std::vector<Entity*> > mRenderPasses;
+	std::map<GLuint, std::vector<Entity*> > mRenderPasses;
 
 private:
 	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;

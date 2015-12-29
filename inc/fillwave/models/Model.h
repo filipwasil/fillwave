@@ -69,7 +69,7 @@ public:
 	void drawPBRP(space::Camera& camera);
 	void drawDR(space::Camera& camera);
 
-	void updateRenderpass(std::map<core::Program*, std::vector<Entity*> >& renderpasses);
+	void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
 
 	/* Animation */
 	void performAnimation(GLfloat timeElapsed_us);

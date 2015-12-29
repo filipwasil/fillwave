@@ -387,13 +387,14 @@ inline void Model::evaluateAnimations() {
 	}
 }
 
-void Model::updateRenderpass(std::map<core::Program*, std::vector<Entity*> >& renderpasses) {
-	if (renderpasses.find(mProgram.get()) != renderpasses.end()) {
-		renderpasses[mProgram.get()].push_back(this);
+void Model::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses) {
+	GLuint handle = mProgram.get()->getHandle();
+	if (renderpasses.find(handle) != renderpasses.end()) {
+		renderpasses[handle].push_back(this);
 	} else {
 		std::vector<Entity*> vector; /* xxx some base size maybe ? */
 		vector.push_back(this);
-		renderpasses[mProgram.get()] = vector;
+		renderpasses[handle] = vector;
 	}
 }
 

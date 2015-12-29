@@ -177,7 +177,7 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	mRefreshExternal = GL_TRUE;
 }
 
-void Entity::updateRenderpass(std::map<core::Program*, std::vector<Entity*> >& /*renderpasses*/) {
+void Entity::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& /*renderpasses*/) {
 	(void)this;
 }
 

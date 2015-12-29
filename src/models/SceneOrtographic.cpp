@@ -27,7 +27,7 @@ void SceneOrthographic::draw() {
 void SceneOrthographic::drawPBRP() {
 	space::CameraOrthographic c = *(mCamera.get());
 	for (auto& program : mRenderPasses) {
-		program.first->use();
+		core::Program::useProgram(program.first);
 		for (auto& node : program.second) {
 			node->draw(c );
 		}

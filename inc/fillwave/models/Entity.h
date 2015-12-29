@@ -90,7 +90,7 @@ public:
 	virtual void onPicked();
 	virtual void onUnpicked();
 	virtual void drawPicking(space::Camera& camera);
-	virtual void updateRenderpass(std::map<core::Program*, std::vector<Entity*> >& renderpasses);
+	virtual void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
 
 	/* Log */
 	virtual void log();

@@ -78,8 +78,13 @@ void Program::link() {
 	disusePrograms();
 }
 
-void Program::disusePrograms() {
+inline void Program::disusePrograms() {
 	glUseProgram(0);
+	FLOG_CHECK("disuse programs");
+}
+
+void Program::useProgram(GLuint handle) {
+	glUseProgram(handle);
 	FLOG_CHECK("disuse programs");
 }
 
