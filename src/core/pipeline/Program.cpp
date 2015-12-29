@@ -78,7 +78,7 @@ void Program::link() {
 	disusePrograms();
 }
 
-inline void Program::disusePrograms() {
+void Program::disusePrograms() {
 	glUseProgram(0);
 	FLOG_CHECK("disuse programs");
 }
