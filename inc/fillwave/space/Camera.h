@@ -8,17 +8,17 @@
 #ifndef CAMERA_H_
 #define CAMERA_H_
 
-#include <fillwave/models/Moveable.h>
+#include <fillwave/models/base/Moveable.h>
 #include <memory>
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 /*! \class Camera
  * \brief Stores camera view parameters.
  */
 
-class Camera: public models::Moveable {
+class Camera: public Moveable {
 public:
 	Camera();
 
@@ -45,9 +45,9 @@ protected:
 	GLboolean mRefreshView;
 	GLboolean mRefreshProjection;
 };
-} /* space */
-typedef std::shared_ptr<space::Camera> pCamera;
-typedef std::weak_ptr<space::Camera> pwCamera;
+} /* framework */
+typedef std::shared_ptr<framework::Camera> pCamera;
+typedef std::weak_ptr<framework::Camera> pwCamera;
 } /* fillwave */
 
 #endif /* CAMERA_H_ */

@@ -11,12 +11,12 @@
 
 #include <fillwave/Fillwave.h>
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Text", FERROR | FFATAL)
 
 namespace fillwave {
-namespace models {
+namespace framework {
 
 Text::Text(
 		std::string& text,
@@ -176,7 +176,7 @@ void Text::createVBO() {
 }
 
 inline void Text::createProgram() {
-	loader::ProgramLoader loader;
+	ProgramLoader loader;
 
 	switch (mEffect) {
 		case eTextEffect::eNone:
@@ -219,5 +219,5 @@ inline void Text::initVBO() {
 	mVBO->attributesBind(mProgram);
 }
 
-} /* models */
+} /* framework */
 } /* fillwave */

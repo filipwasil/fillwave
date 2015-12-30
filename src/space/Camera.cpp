@@ -6,12 +6,12 @@
  */
 
 #include <fillwave/space/Camera.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Camera", FERROR | FFATAL)
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 Camera::Camera(glm::vec3 position, glm::quat rotation)
 		:
@@ -74,5 +74,5 @@ glm::mat4 Camera::getViewProjection() {
 	return mProjectionMatrix * mCameraMatrix;
 }
 
-} /* space */
+} /* framework */
 } /* fillwave */

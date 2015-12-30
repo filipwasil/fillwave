@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/texturing/Sampler.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Sampler", FERROR | FFATAL)
 

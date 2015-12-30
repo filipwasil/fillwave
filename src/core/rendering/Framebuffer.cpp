@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/rendering/Framebuffer.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Framebuffer", FERROR | FFATAL | FDEBUG)
 

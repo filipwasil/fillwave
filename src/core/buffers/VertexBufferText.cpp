@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/buffers/VertexBufferText.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferText", FERROR | FFATAL)
 
@@ -48,5 +48,5 @@ void VertexBufferText::log() {
 	}
 }
 
-} /* models */
+} /* core */
 } /* fillwave */

@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/rendering/TransformFeedback.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("TransformFeedback", FERROR | FFATAL)
 

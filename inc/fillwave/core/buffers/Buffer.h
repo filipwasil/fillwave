@@ -9,7 +9,7 @@
 #define BUFFER_H_
 
 #include <fillwave/core/GLObject.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <memory>
 
 namespace fillwave {

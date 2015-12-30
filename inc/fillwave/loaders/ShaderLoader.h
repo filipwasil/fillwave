@@ -12,7 +12,7 @@
 #include <string>
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 /*! \class ShaderLoader
  * \brief Loads shader sources.
@@ -45,7 +45,7 @@ public:
 	virtual ~ShaderLoader() = default;
 };
 
-} /* loader */
+} /* framework */
 } /* fillwave */
 
 #endif /* SHADERLOADER_H_ */

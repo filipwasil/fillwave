@@ -11,9 +11,9 @@
 FLOGINIT("BufferManager", FERROR | FFATAL)
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 
-pVertexArray BufferManager::getVAO(models::Reloadable* user) {
+pVertexArray BufferManager::getVAO(Reloadable* user) {
 	VAOObject* mVAOObject = new VAOObject();
 	mVAOObject->mVAOUser = user;
 	pVertexArray shared(new core::VertexArray());
@@ -39,5 +39,5 @@ void BufferManager::collectGarbage() {
 	mVAOObjects.erase(it, _end);
 }
 
-} /* manager */
+} /* framework */
 } /* fillwave */

@@ -15,19 +15,19 @@
 #include <fillwave/core/operations/Query.h>
 #include <fillwave/core/operations/ConditionalRender.h>
 #include <fillwave/models/Entity.h>
-#include <fillwave/models/Material.h>
+#include <fillwave/models/base/Material.h>
+#include <fillwave/models/base/Reloadable.h>
 #include <fillwave/core/pipeline/Fence.h>
-#include <fillwave/models/Reloadable.h>
 
 namespace fillwave {
 class Engine;
 
-namespace manager {
-class BoneManager;
+namespace framework {
+class Animator;
 class LightManager;
 }
 
-namespace models {
+namespace framework {
 
 /*! \class Mesh
  * \brief Basic drawable Entity.
@@ -47,24 +47,24 @@ public:
 			pProgram programOcclusion,
 			pProgram programAmbientOcclusionGeometry,
 			pProgram programAmbientOcclusionColor,
-			manager::LightManager* lightManager = nullptr,
+			LightManager* lightManager = nullptr,
 			pVertexBufferBasic vbo = pVertexBufferBasic(),
 			pIndexBufferBasic ibo = pIndexBufferBasic(),
-			manager::BoneManager* boneManager = nullptr,
+			Animator* boneManager = nullptr,
 			GLenum drawType = GL_TRIANGLES);
 
 	virtual ~Mesh() = default;
 
-	void draw(space::Camera& camera);
-	void drawPBRP(space::Camera& camera);
-	void drawDR(space::Camera& camera);
-	void drawFast(space::Camera& camera);
-	void drawPicking(space::Camera& camera);
-	void drawDepth(space::Camera& camera);
-	void drawDepthColor(space::Camera& camera, glm::vec3& position);
-	void drawAOG(space::Camera& camera);
-	void drawAOC(space::Camera& camera);
-	void drawOcclusionBox(space::Camera& camera);
+	void draw(Camera& camera);
+	void drawPBRP(Camera& camera);
+	void drawDR(Camera& camera);
+	void drawFast(Camera& camera);
+	void drawPicking(Camera& camera);
+	void drawDepth(Camera& camera);
+	void drawDepthColor(Camera& camera, glm::vec3& position);
+	void drawAOG(Camera& camera);
+	void drawAOC(Camera& camera);
+	void drawOcclusionBox(Camera& camera);
 	void log();
 
 	virtual void onDraw();
@@ -82,10 +82,10 @@ protected:
 	pVertexBufferBasic mVBO;
 
 	/* Light */
-	manager::LightManager* mLightManager;
+	LightManager* mLightManager;
 
 	/* Animations */
-	manager::BoneManager* mBoneManager;
+	Animator* mAnimator;
 
 	/* Draw */
 	GLenum mDrawType;
@@ -122,9 +122,9 @@ private:
 	void coreDraw();
 };
 
-} /* models */
-typedef std::shared_ptr<models::Mesh> pMesh;
-typedef std::unique_ptr<models::Mesh> puMesh;
+} /* framework */
+typedef std::shared_ptr<framework::Mesh> pMesh;
+typedef std::unique_ptr<framework::Mesh> puMesh;
 } /* fillwave */
 
 #endif /* MODELOBJ_H_ */

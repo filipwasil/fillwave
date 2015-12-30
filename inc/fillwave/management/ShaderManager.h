@@ -8,13 +8,13 @@
 #ifndef SHADERMANAGER_H_
 #define SHADERMANAGER_H_
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fillwave/loaders/FileLoader.h>
 #include <fillwave/core/pipeline/Shader.h>
 
 namespace fillwave {
 class Engine;
-namespace manager {
+namespace framework {
 
 /*! \struct ShaderObject
  * \brief Data structure containing each Shader instance info.
@@ -54,7 +54,7 @@ public:
 	void reload();
 };
 
-} /* manager */
-typedef std::unique_ptr<manager::ShaderManager> puShaderManager;
+} /* framework */
+typedef std::unique_ptr<framework::ShaderManager> puShaderManager;
 } /* fillwave */
 #endif /* SHADERMANAGER_H_ */

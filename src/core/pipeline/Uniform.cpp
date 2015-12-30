@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/pipeline/Uniform.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <string>
 
 FLOGINIT("Uniform", FERROR | FFATAL | FINFO)

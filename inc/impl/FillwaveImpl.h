@@ -9,7 +9,7 @@
 #define FILLWAVE_INC_FILLWAVEIMPL_H_
 
 /* Plarform specific */
-#include <fillwave/actions/Callback.h>
+#include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/loaders/AndroidLoader.h>
 
 /* core */
@@ -18,47 +18,45 @@
 #include <fillwave/core/buffers/PixelBuffer.h>
 
 /* models */
-#include <fillwave/models/BuilderModelManual.h>
-#include <fillwave/models/BuilderModelExternalMaps.h>
-#include <fillwave/models/SceneOrthographic.h>
-#include <fillwave/models/ScenePerspective.h>
+#include <fillwave/models/builders/BuilderModelManual.h>
+#include <fillwave/models/builders/BuilderModelExternalMaps.h>
 #include <fillwave/models/Text.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/models/shapes/BoxOcclusion.h>
 #include <fillwave/models/shapes/Box.h>
 
 /* space */
+#include <fillwave/space/SceneOrthographic.h>
+#include <fillwave/space/ScenePerspective.h>
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
 #include <fillwave/space/LightDirectional.h>
 
-/* Events */
-#include <fillwave/actions/TimeEvent.h>
-#include <fillwave/actions/TouchEvent.h>
-#include <fillwave/actions/ScrollEvent.h>
-#include <fillwave/actions/CursorEnterEvent.h>
-#include <fillwave/actions/CursorPositionEvent.h>
-#include <fillwave/actions/CharacterEvent.h>
-#include <fillwave/actions/CharacterModsEvent.h>
-#include <fillwave/actions/CursorPositionEvent.h>
-#include <fillwave/actions/MouseButtonEvent.h>
-#include <fillwave/actions/KeyboardEvent.h>
-
-/* Callbacks */
-#include <fillwave/actions/FPSCallback.h>
-#include <fillwave/actions/TimedMoveCallback.h>
-#include <fillwave/actions/TimedRotateCallback.h>
-#include <fillwave/actions/TimedScaleCallback.h>
-#include <fillwave/actions/TimedCallback.h>
-#include <fillwave/actions/TimedEmiterUpdateCallback.h>
-#include <fillwave/actions/LoopCallback.h>
-#include <fillwave/actions/SequenceCallback.h>
+/* actions */
+#include <fillwave/actions/events/TimeEvent.h>
+#include <fillwave/actions/events/TouchEvent.h>
+#include <fillwave/actions/events/ScrollEvent.h>
+#include <fillwave/actions/events/CursorEnterEvent.h>
+#include <fillwave/actions/events/CursorPositionEvent.h>
+#include <fillwave/actions/events/CharacterEvent.h>
+#include <fillwave/actions/events/CharacterModsEvent.h>
+#include <fillwave/actions/events/CursorPositionEvent.h>
+#include <fillwave/actions/events/MouseButtonEvent.h>
+#include <fillwave/actions/events/KeyboardEvent.h>
+#include <fillwave/actions/callbacks/FPSCallback.h>
+#include <fillwave/actions/callbacks/TimedMoveCallback.h>
+#include <fillwave/actions/callbacks/TimedRotateCallback.h>
+#include <fillwave/actions/callbacks/TimedScaleCallback.h>
+#include <fillwave/actions/callbacks/TimedCallback.h>
+#include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
+#include <fillwave/actions/callbacks/LoopCallback.h>
+#include <fillwave/actions/callbacks/SequenceCallback.h>
 
 /* Loaders */
 #include <fillwave/loaders/FileLoader.h>
 
 /* Extras */
-#include <fillwave/extras/Debugger.h>
+#include <fillwave/Debugger.h>
 
 /* Operations */
 #include <fillwave/core/operations/PostProcessingPass.h>
@@ -79,7 +77,7 @@ FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 struct ANativeActivity;
 class Engine;
 
-using namespace fillwave::loader;
+using namespace fillwave::framework;
 
 namespace fillwave {
 
@@ -97,7 +95,7 @@ struct Engine::EngineImpl {
 
 	~EngineImpl();
 
-Engine* mEngine;
+	Engine* mEngine;
 
 	/* Asset loader */
 #ifdef FILLWAVE_COMPILATION_TINY_ASSET_LOADER
@@ -113,9 +111,9 @@ Engine* mEngine;
 	GLuint mWindowHeight = 1200;
 
 	/* Loaders */
-	loader::FontLoader mFontLoader;
-	loader::FileLoader mFileLoader;
-	loader::ProgramLoader mProgramLoader;
+	framework::FontLoader mFontLoader;
+	framework::FileLoader mFileLoader;
+	framework::ProgramLoader mProgramLoader;
 
 	/* Scene */
 	pScene mScene;
@@ -134,7 +132,7 @@ Engine* mEngine;
 	puBufferManager mBufferManager;
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
-	std::vector<common::PostProcessingPass> mPostProcessingPasses;
+	std::vector<core::PostProcessingPass> mPostProcessingPasses;
 	std::vector<pTexture2DRenderableDynamic> mTexturesDynamic;
 	pProgram mProgramTextureLookup;
 
@@ -187,7 +185,7 @@ Engine* mEngine;
 	GLuint mFrameCounter;
 	GLfloat mTimeFactor;
 	pText mFPSText;
-	actions::FPSCallback* mTextFPSCallback;
+	framework::FPSCallback* mTextFPSCallback;
 
 	/* Startup */
 	GLfloat mStartupTime;
@@ -203,14 +201,14 @@ Engine* mEngine;
 
 	/* Callbacks */
 	void runCallbacks();
-	void runCallbacks(actions::EventType& eventType);
+	void runCallbacks(framework::EventType& eventType);
 	void clearCallbacks();
 	void clearCallbacks(eEventType eventType);
-	void clearCallback(actions::Callback* callback);
+	void clearCallback(framework::Callback* callback);
 	void registerCallback(
-			actions::Callback* callback);
+			framework::Callback* callback);
 	void unregisterCallback(
-			actions::Callback* callback);
+			framework::Callback* callback);
 
 	/* Evaluation */
 	void evaluateShadowMaps();
@@ -330,7 +328,7 @@ Engine* mEngine;
 
 	pSampler storeSO(GLint textureUnit);
 
-	pVertexArray storeVAO(models::Reloadable* user = nullptr);
+	pVertexArray storeVAO(framework::Reloadable* user = nullptr);
 };
 
 #ifdef __ANDROID__
@@ -368,7 +366,7 @@ mIsPBRP(GL_FALSE) {
 #else
 Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 		:mEngine(engine),
-				mFileLoader(common::getFilePathOnly(argv[0])),
+				mFileLoader(getFilePathOnly(argv[0])),
 				mBackgroundColor(0.1,0.1,0.1),
 				mFrameCounter(0),
 				mTimeFactor(1.0),
@@ -457,19 +455,19 @@ inline void Engine::EngineImpl::initGeometryShading() {
 
 inline void Engine::EngineImpl::initManagement() {
 	mTextureManager = puTextureManager(
-			new manager::TextureManager(mFileLoader.getRootPath()));
+			new framework::TextureManager(mFileLoader.getRootPath()));
 
 	mShaderManager = puShaderManager(
-			new manager::ShaderManager(mFileLoader.getRootPath()));
+			new framework::ShaderManager(mFileLoader.getRootPath()));
 
-	mProgramManager = puProgramManager(new manager::ProgramManager());
+	mProgramManager = puProgramManager(new framework::ProgramManager());
 
 	mLightManager = puLightManager(
-			new manager::LightManager(mWindowWidth, mWindowHeight));
+			new framework::LightManager(mWindowWidth, mWindowHeight));
 
-	mSamplerManager = puSamplerManager(new manager::SamplerManager());
+	mSamplerManager = puSamplerManager(new framework::SamplerManager());
 
-	mBufferManager = puBufferManager(new manager::BufferManager());
+	mBufferManager = puBufferManager(new framework::BufferManager());
 }
 
 inline void Engine::EngineImpl::initPipelines() {
@@ -550,7 +548,7 @@ inline void Engine::EngineImpl::initUniforms() {
 }
 
 inline void Engine::EngineImpl::initOcclusionTest() {
-	std::vector<core::VertexPosition> vec = models::BoxOcclusion().getVertices();
+	std::vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
 
 	mVAOOcclusion = storeVAO();
 
@@ -573,14 +571,14 @@ inline void Engine::EngineImpl::initOcclusionTest() {
 
 inline void Engine::EngineImpl::initDeferredShading() {
 
-	models::Material material;
+	framework::Material material;
 
-	models::Sphere sphere(3.0f, 10.0f, 10.0f);
+	framework::Sphere sphere(3.0f, 10.0f, 10.0f);
 	std::vector<core::VertexBasic> vertices = sphere.getVertices();
 	std::vector<GLuint> indices = sphere.getIndices();
 
 	mDeferredPointLight = puMesh(
-			new models::Mesh(mEngine, material, buildTextureRegion(pTexture()),
+			new framework::Mesh(mEngine, material, buildTextureRegion(pTexture()),
 					buildTextureRegion(pTexture()), buildTextureRegion(pTexture()),
 					mProgramDRPointLight, pProgram(), pProgram(),
 					mProgramOcclusionBox, pProgram(), pProgram(),
@@ -661,7 +659,7 @@ inline void Engine::EngineImpl::initStartup() {
 	core::Program::disusePrograms();
 
 	mPostProcessingPassStartup = puPostProcessingPass(
-			new common::PostProcessingPass(program,
+			new core::PostProcessingPass(program,
 					mTextureManager->getDynamic("fillwave_quad_startup.frag",
 							program, glm::ivec2(mWindowWidth, mWindowHeight)),
 					mStartupTimeLimit));
@@ -669,13 +667,13 @@ inline void Engine::EngineImpl::initStartup() {
 	FLOG_DEBUG("Post processing startup pass added");
 
 	mStartupTexture = mTextureManager->get("logo.png",
-	FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::eNone);
+	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone);
 	if (not mStartupTexture) {
 		mStartupTexture = mTextureManager->get("textures/logo.png",
-		FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::eNone);
+		FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone);
 		if (not mStartupTexture) {
 			mStartupTexture = mTextureManager->get("64_64_64.color",
-			FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression::eNone);
+			FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone);
 			FLOG_ERROR("Fillwave startup logo could not be executed");
 		}
 	}
@@ -691,7 +689,7 @@ inline void Engine::EngineImpl::initExtras() {
 	mTextFPSCallback = NULL;
 
 	/* Debugger */
-	mDebugger = puDebugger(new Debugger(mEngine));
+	mDebugger = puDebugger(new framework::Debugger(mEngine));
 }
 
 void Engine::EngineImpl::reload() {
@@ -880,7 +878,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 
 	if (mPostProcessingPasses.size()) {
 		auto _compare_function =
-				[](common::PostProcessingPass& pass) -> bool {return pass.isFinished();};
+				[](core::PostProcessingPass& pass) -> bool {return pass.isFinished();};
 		auto _begin = mPostProcessingPasses.begin();
 		auto _end = mPostProcessingPasses.end();
 
@@ -960,7 +958,7 @@ inline void Engine::EngineImpl::drawSceneCorePBRP() {
 	drawClear();
 	mScene->drawSkybox();
 	glClear(GL_DEPTH_BUFFER_BIT);
-	mScene->draw();
+	mScene->drawPBRP();
 }
 
 inline void Engine::EngineImpl::drawSceneCoreFR() {
@@ -1113,7 +1111,7 @@ inline void Engine::EngineImpl::drawLightsPointPass(GLint& textureUnit) {
 		glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_DECR_WRAP, GL_KEEP);
 
 		mProgramDRPointLight->use();
-		space::Camera* camera = mScene->getCamera().get();
+		framework::Camera* camera = mScene->getCamera().get();
 		mLightManager->updateDeferredBufferPoint(i, mProgramDRPointLight.get(),
 				textureUnit++);
 
@@ -1193,7 +1191,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 
 	core::Texture2DRenderable* light2DTexture;
 	for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
-		space::CameraPerspective camera =
+		framework::CameraPerspective camera =
 				*(mLightManager->getLightSpot(i)->getShadowCamera().get());
 		light2DTexture = mLightManager->getLightSpot(i)->getShadowTexture().get();
 		light2DTexture->bindForWriting();
@@ -1204,7 +1202,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 	}
 
 	for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany(); i++) {
-		space::CameraOrthographic camera =
+		framework::CameraOrthographic camera =
 				*(mLightManager->getLightDirectional(i)->getShadowCamera().get());
 		light2DTexture =
 				mLightManager->getLightDirectional(i)->getShadowTexture().get();
@@ -1216,7 +1214,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 	}
 
 	for (GLint i = 0; i < mLightManager->getLightsPointHowMany(); i++) {
-		space::LightPoint* lightPoint = mLightManager->getLightPoint(i).get();
+		framework::LightPoint* lightPoint = mLightManager->getLightPoint(i).get();
 		core::Texture3DRenderable* light3DTexture =
 				lightPoint->getShadowTexture().get();
 		glm::vec3 lightPosition(lightPoint->getTranslation());
@@ -1224,7 +1222,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 		light3DTexture->bind(currentTextureUnit);
 		for (GLint j = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 				j <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; j++) {
-			space::CameraPerspective camera =
+			framework::CameraPerspective camera =
 					*(lightPoint->getShadowCamera(j).get());
 			light3DTexture->setAttachmentFace(j, GL_COLOR_ATTACHMENT0);
 			glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -1247,9 +1245,9 @@ inline void Engine::EngineImpl::evaluateDynamicTextures(
 
 inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
 	if (mTimeFactor) {
-		actions::TimeEventData data;
+		framework::TimeEventData data;
 		data.mTimePassed = timeExpiredInSeconds;
-		actions::TimeEvent timeEvent(data);
+		framework::TimeEvent timeEvent(data);
 		runCallbacks(timeEvent);
 		mScene->handleHierarchyEvent(timeEvent);
 	}
@@ -1262,13 +1260,13 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 		case eDebuggerState::eLightsSpot:
 			mCurentTextureUnit = 0;
 			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
-				space::CameraPerspective cameraP =
+				framework::CameraPerspective cameraP =
 						*(mLightManager->getLightSpot(i)->getShadowCamera().get());
 				mDebugger->renderFromCamera(cameraP, mCurentTextureUnit++); //xxx make more flexible
 			}
 			for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany();
 					i++) {
-				space::CameraOrthographic cameraO =
+				framework::CameraOrthographic cameraO =
 						*(mLightManager->getLightDirectional(i)->getShadowCamera().get());
 				mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
 			}
@@ -1294,13 +1292,13 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 		case eDebuggerState::eLightsSpotColor:
 			mCurentTextureUnit = 0;
 			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
-				space::CameraPerspective cameraP =
+				framework::CameraPerspective cameraP =
 						*(mLightManager->getLightSpot(i)->getShadowCamera().get());
 				mDebugger->renderFromCamera(cameraP, mCurentTextureUnit++); //xxx make more flexible
 			}
 			for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany();
 					i++) {
-				space::CameraOrthographic cameraO =
+				framework::CameraOrthographic cameraO =
 						*(mLightManager->getLightDirectional(i)->getShadowCamera().get());
 				mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
 			}
@@ -1313,7 +1311,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 			for (GLint j = 0; j < mLightManager->getLightsPointHowMany(); j++) {
 				for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 						i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
-					space::CameraPerspective cameraPF =
+					framework::CameraPerspective cameraPF =
 							*(mLightManager->getLightPoint(j)->getShadowCamera(i).get());
 					mDebugger->renderFromCamera(cameraPF, id++);
 				}
@@ -1329,7 +1327,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 }
 
 void Engine::EngineImpl::runCallbacks(
-		actions::EventType& event) {
+		framework::EventType& event) {
 	if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
 		for (auto& callback : mCallbacks[event.getType()]) {
 			callback->perform(event);
@@ -1376,12 +1374,12 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 /* Callbacks */
 
 void Engine::EngineImpl::registerCallback(
-		actions::Callback* callback) {
+		framework::Callback* callback) {
 	mCallbacks[callback->getEventType()].push_back(puCallback(callback));
 }
 
 void Engine::EngineImpl::unregisterCallback(
-		actions::Callback* callback) {
+		framework::Callback* callback) {
 	if (mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
 		std::vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
 		auto _compare_function =
@@ -1431,7 +1429,7 @@ pSampler Engine::EngineImpl::storeSO(GLint textureUnit) {
 	return mSamplerManager->get(textureUnit);
 }
 
-pVertexArray Engine::EngineImpl::storeVAO(models::Reloadable* user) {
+pVertexArray Engine::EngineImpl::storeVAO(framework::Reloadable* user) {
 	return mBufferManager->getVAO(user);
 }
 
@@ -1494,7 +1492,7 @@ inline void Engine::EngineImpl::clearCallbacks(
 	}
 }
 
-void Engine::EngineImpl::clearCallback(actions::Callback* callback) {
+void Engine::EngineImpl::clearCallback(framework::Callback* callback) {
 	eEventType e = callback->getEventType();
 	std::vector<puCallback>* callbacks = &mCallbacks[e];
 	callbacks->erase(

@@ -9,10 +9,10 @@
 #define LIGHT_H_
 
 #include <fillwave/core/rendering/Texture2DRenderable.h>
-#include <fillwave/models/Moveable.h>
+#include <fillwave/models/base/Moveable.h>
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 #define MAX_LIGHTS       4
 #define USED_LIGHT_SLOTS 4
@@ -42,7 +42,7 @@ struct LightAttenuationData {
  * \brief Base for all lights.
  */
 
-class Light: public models::Moveable {
+class Light: public Moveable {
 public:
 	Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed = pMoveable());
 	virtual ~Light() = default;
@@ -63,8 +63,8 @@ protected:
 	LightAttenuationData mAttenuation;
 };
 
-} /* space */
-typedef std::shared_ptr<space::Light> pLight;
+} /* framework */
+typedef std::shared_ptr<framework::Light> pLight;
 } /* fillwave */
 
 #endif /* LIGHT_H_ */

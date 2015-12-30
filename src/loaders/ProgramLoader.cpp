@@ -20,7 +20,7 @@ FLOGINIT("ProgramLoader", FERROR | FFATAL)
 #define FILLWAVE_RANDOM_VECTOR_SIZE 64
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 /* Headers */
 
@@ -47,7 +47,7 @@ const std::string gGLAmbient = "10001.0";
 /* Attributes */
 
 const std::string gGLBones = "uniform mat4 uBones["
-		+ common::to_string(FILLWAVE_MAX_BONES) + "];\n";
+		+ to_string(FILLWAVE_MAX_BONES) + "];\n";
 
 const std::string gGLVSAttributes =
 		"layout(location = 0) " + gGLVaryingIn
@@ -1577,5 +1577,5 @@ void ProgramLoader::initDefaultUniforms(core::Program* program) {
 	glGetError();
 }
 
-} /* loader */
+} /* framework */
 } /* fillwave */

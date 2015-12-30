@@ -17,7 +17,7 @@
 #include <fillwave/Assets.h>
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 
 /*! \class TextureObject
  * \brief Template class for all texture objects.
@@ -115,8 +115,8 @@ public:
 			std::string texturePath,
 			GLuint mapType =
 			FILLWAVE_TEXTURE_TYPE_NONE,
-			loader::eCompression = loader::eCompression::eNone,
-			loader::eFlip flip = loader::eFlip::eVertical);
+			eCompression = eCompression::eNone,
+			eFlip flip = eFlip::eVertical);
 
 	pTexture3D get(
 			const std::string& posX,
@@ -170,8 +170,8 @@ private:
 	void add(
 			std::string filePath,
 			GLuint mapType,
-			loader::eCompression compression,
-			loader::eFlip flip);
+			eCompression compression,
+			eFlip flip);
 
 	void add(
 			const std::string& posX,
@@ -202,8 +202,8 @@ private:
 
 };
 
-} /* manager */
-typedef std::unique_ptr<manager::TextureManager> puTextureManager;
+} /* framework */
+typedef std::unique_ptr<framework::TextureManager> puTextureManager;
 } /* fillwave */
 
 #endif /* TEXTUREMANAGER_H_ */

@@ -13,7 +13,7 @@
 FLOGINIT("TimeStopCallback", FERROR | FFATAL)
 
 namespace fillwave {
-namespace actions {
+namespace framework {
 
 TimeStopCallback::TimeStopCallback(Engine* engine)
 		: Callback(eEventType::eKey), mTimeOn(GL_TRUE), mEngine(engine) {
@@ -39,5 +39,5 @@ void TimeStopCallback::perform(EventType& event) {
    }
 }
 
-} /* actions */
+} /* framework */
 } /* fillwave */

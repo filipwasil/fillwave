@@ -10,7 +10,7 @@
 #include <fillwave/core/buffers/VertexBufferDebug.h>
 #include <fillwave/core/rendering/FramebufferGeometry.h>
 
-#include <fillwave/extras/Debugger.h>
+#include <fillwave/Debugger.h>
 
 #include <fillwave/space/Camera.h>
 
@@ -18,11 +18,12 @@
 
 #include <fillwave/loaders/ProgramLoader.h>
 
-#include <fillwave/extras/Log.h>
-
-namespace fillwave {
+#include <fillwave/Log.h>
 
 FLOGINIT("Debugger", FERROR | FFATAL | FINFO)
+
+namespace fillwave {
+namespace framework {
 
 Debugger::Debugger(Engine* engine)
 		:
@@ -33,7 +34,7 @@ Debugger::Debugger(Engine* engine)
 				mMiniwindowSize(1.0 / 6.0),
 				mMiniwindowsOccupied(0) {
 
-	loader::ProgramLoader loader;
+	ProgramLoader loader;
 
 	mProgram = loader.getDebugger(engine);
 
@@ -86,7 +87,7 @@ void Debugger::setMiniwindowSize(GLfloat size) {
 	mMiniwindowSize = size;
 }
 
-void Debugger::renderFromCamera(space::Camera& c, GLint id) {
+void Debugger::renderFromCamera(Camera& c, GLint id) {
 	glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
 			mEngine->getScreenSize()[1] * (1.0f - mMiniwindowSize),
 			mEngine->getScreenSize()[0] * mMiniwindowSize,
@@ -123,7 +124,7 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
 	pLightDirectional light = mEngine->getLightManager()->getLightDirectional(
 			id - mEngine->getLightManager()->getLightsSpotHowMany());
 
-	space::Camera* cam = light->getShadowCamera().get();
+	Camera* cam = light->getShadowCamera().get();
 
 	light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
 
@@ -160,7 +161,7 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
 
 	pLightSpot light = mEngine->getLightManager()->getLightSpot(id);
 
-	space::CameraPerspective cam = *(light->getShadowCamera().get());
+	CameraPerspective cam = *(light->getShadowCamera().get());
 
 	light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
 
@@ -251,5 +252,6 @@ inline void Debugger::initVBO() {
 	mVBO->attributesBind(mProgram);
 }
 
+} /* framework */
 } /* fillwave */
 

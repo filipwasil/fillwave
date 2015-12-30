@@ -6,12 +6,12 @@
  */
 
 #include <fillwave/space/LightPoint.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("LightPoint", FERROR | FFATAL)
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 LightPoint::LightPoint(
 		pTexture3DRenderable shadowTexture,
@@ -100,5 +100,5 @@ void LightPoint::updateShadowCamera() {
 	}
 }
 
-} /* space */
+} /* framework */
 } /* fillwave */

@@ -11,7 +11,7 @@
 FLOGINIT("ShaderManager", FERROR | FFATAL)
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 
 ShaderManager::ShaderManager(const std::string& rootPath)
 		: mRootPath(rootPath) {
@@ -29,7 +29,7 @@ pShader ShaderManager::add(
 	puShaderObject shaderObject = puShaderObject(new ShaderObject());
 	shaderObject->mFilePath = mRootPath + shaderPath;
 	std::string shaderSource = "";
-	loader::ReadFile(shaderObject->mFilePath, shaderSource);
+	ReadFile(shaderObject->mFilePath, shaderSource);
 	const unsigned int type = shaderType;
 	shaderObject->mShader = pShader(new core::Shader(type, shaderSource));
 	mShaderObjects.push_back(std::move(shaderObject));
@@ -75,5 +75,5 @@ void ShaderManager::reload() {
 	FLOG_DEBUG("Shaders reloaded");
 }
 
-} /* manager */
+} /* framework */
 } /* fillwave */

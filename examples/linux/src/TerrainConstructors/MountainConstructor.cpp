@@ -30,12 +30,12 @@
 #include "../../../linux/inc/TerrainConstructors/MountainConstructor.h"
 
 #include <fillwave/Math.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("MountainConstructor", FERROR | FFATAL)
 
 namespace fillwave {
-namespace terrain {
+namespace framework {
 
 MountainConstructor::MountainConstructor() {
 
@@ -61,5 +61,5 @@ inline GLfloat MountainConstructor::calculateHeight(GLfloat x, GLfloat z) {
    return glm::sin(glm::radians(360*x)) * glm::sin(glm::radians(360*z));
 }
 
-} /* terrain */
+} /* framework */
 } /* fillwave */

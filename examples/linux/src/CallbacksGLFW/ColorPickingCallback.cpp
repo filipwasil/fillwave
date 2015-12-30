@@ -38,7 +38,7 @@
 FLOGINIT("ColorPickingCallback", FERROR | FFATAL)
 
 namespace fillwave {
-namespace actions {
+namespace framework {
 
 ColorPickingCallback::ColorPickingCallback(Engine* engine)
 		: Callback(eEventType::eMouseButton), mEngine(engine) {
@@ -52,5 +52,5 @@ void ColorPickingCallback::perform(EventType& event) {
 	}
 }
 
-} /* actions */
+} /* framework */
 } /* fillwave */

@@ -35,12 +35,12 @@
 
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
-#include <fillwave/actions/TimeEvent.h>
-#include <fillwave/actions/Callback.h>
+#include <fillwave/actions/events/TimeEvent.h>
+#include <fillwave/actions/callbacks/Callback.h>
 
 namespace fillwave {
 class Engine;
-namespace actions {
+namespace framework {
 
 /*! \class AnimationKeyboardCallback
  *
@@ -59,7 +59,7 @@ public:
 private:
    pEntity mEntity;
    };
-} /* actions */
+} /* framework */
 } /* fillwave */
 
 #endif /* ANIMATIONKEYBOARDCALLBACK_H_ */

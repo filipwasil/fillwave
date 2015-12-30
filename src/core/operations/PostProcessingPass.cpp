@@ -8,7 +8,7 @@
 #include <fillwave/core/operations/PostProcessingPass.h>
 
 namespace fillwave {
-namespace common {
+namespace core {
 
 PostProcessingPass::PostProcessingPass(
 		pProgram program,
@@ -25,5 +25,5 @@ pProgram PostProcessingPass::getProgram() const {
 	return mProgram;
 }
 
-} /* common */
+} /* core */
 } /* fillwave */

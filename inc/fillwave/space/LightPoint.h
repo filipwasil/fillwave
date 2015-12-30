@@ -17,7 +17,7 @@
 
 namespace fillwave {
 class Engine;
-namespace space {
+namespace framework {
 
 /*! \class LightPoint
  * \brief Not used.
@@ -44,11 +44,11 @@ protected:
 	std::map<GLenum, pCameraPerspective> mFaceCameras;
 
 private:
-	models::Sphere mSphere;
+	Sphere mSphere;
 };
 
-} /* space */
-typedef std::shared_ptr<space::LightPoint> pLightPoint;
+} /* framework */
+typedef std::shared_ptr<framework::LightPoint> pLightPoint;
 } /* fillwave */
 
 #endif /* LIGHTPOINT_H_ */

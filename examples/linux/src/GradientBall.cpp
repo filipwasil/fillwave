@@ -8,7 +8,7 @@
 #include "../../linux/src/GradientBall.h"
 
 namespace fillwave {
-namespace particles {
+namespace framework {
 
 GradientBall::GradientBall(Engine* engine,
                            pProgram program,
@@ -25,7 +25,7 @@ GradientBall::~GradientBall() {
 
 }
 
-void GradientBall::draw(space::Camera& camera) {
+void GradientBall::draw(Camera& camera) {
    mProgram->use();
    mProgram->uniformPush("uModelMatrix", mParentMMC* mMMC);
    mProgram->uniformPush("uSize", mSize);
@@ -34,5 +34,5 @@ void GradientBall::draw(space::Camera& camera) {
    coreDraw();
 }
 
-} /* particles */
+} /* framework */
 } /* fillwave */

@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/texturing/Texture2D.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Texture2D", FERROR | FFATAL | FDEBUG)
 

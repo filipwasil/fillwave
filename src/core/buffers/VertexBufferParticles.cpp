@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/buffers/VertexBufferParticles.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferParticles", FERROR | FFATAL)
 

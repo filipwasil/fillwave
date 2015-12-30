@@ -13,7 +13,7 @@
 #include <fillwave/management/TextureManager.h>
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 /*! \class LightSpot
  * \brief Light implementing directional torch.
@@ -44,8 +44,8 @@ public:
 
 };
 
-} /* space */
-typedef std::shared_ptr<space::LightSpot> pLightSpot;
+} /* framework */
+typedef std::shared_ptr<framework::LightSpot> pLightSpot;
 } /* fillwave */
 
 #endif /* LIGHTSPOT_H_ */

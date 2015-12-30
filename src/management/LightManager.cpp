@@ -6,13 +6,13 @@
  */
 
 #include <fillwave/management/LightManager.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fillwave/Fillwave.h>
 
 FLOGINIT("LightManager", FERROR | FFATAL)
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 
 LightManager::LightManager(GLsizei screenWidth, GLsizei screenHeight)
 		: mShadowWidth(screenWidth), mShadowHeight(screenHeight) {
@@ -29,7 +29,7 @@ pLightSpot LightManager::addLightSpot(
 	pLightSpot light;
 	if (mSpotLights.size() < FILLWAVE_MAX_SPOT_LIGHTS) {
 		light = pLightSpot(
-				new space::LightSpot(shadowTexture, position, rotation, color,
+				new LightSpot(shadowTexture, position, rotation, color,
 						followed));
 
 		FLOG_DEBUG("Added spot light ID : %lu", mSpotLights.size());
@@ -52,7 +52,7 @@ pLightPoint LightManager::addLightPoint(
 	FLOG_DEBUG("Going to add point light ID : %lu", mPointLights.size());
 	if (mPointLights.size() < FILLWAVE_MAX_SPOT_LIGHTS) {
 		light = pLightPoint(
-				new space::LightPoint(shadowTexture, position, intensity, followed));
+				new LightPoint(shadowTexture, position, intensity, followed));
 		FLOG_DEBUG("Added point light ID : %lu", mPointLights.size());
 		mPointLights.push_back(light);
 	} else {
@@ -74,7 +74,7 @@ pLightDirectional LightManager::addLightDirectional(
 			mDirectionalLights.size());
 	if (mDirectionalLights.size() < FILLWAVE_MAX_DIRECTIONAL_LIGHTS) {
 		light = pLightDirectional(
-				new space::LightDirectional(shadowTexture, position, rotation,
+				new LightDirectional(shadowTexture, position, rotation,
 						color, followed));
 		FLOG_DEBUG("Added directional light ID : %lu", mDirectionalLights.size());
 		mDirectionalLights.push_back(light);
@@ -191,7 +191,7 @@ void LightManager::pushLightUniforms(core::Program* program) {
 
 	for (size_t i = 0; i < mSpotLights.size(); i++) {
 
-		space::CameraPerspective camera =
+		CameraPerspective camera =
 				*(mSpotLights[i]->getShadowCamera().get());
 
 		for (GLuint j = 0; j < 3; j++) {
@@ -211,7 +211,7 @@ void LightManager::pushLightUniforms(core::Program* program) {
 		}
 
 		program->uniformPush(
-				common::getNotIndexableName("uShadowMap", UBOIterator),
+				getNotIndexableName("uShadowMap", UBOIterator),
 				FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
 		UBOIterator++;
 	}
@@ -219,7 +219,7 @@ void LightManager::pushLightUniforms(core::Program* program) {
 	/* Directional lights */
 
 	for (size_t i = 0; i < mDirectionalLights.size(); i++) {
-		space::CameraOrthographic camera =
+		CameraOrthographic camera =
 				*(mDirectionalLights[i]->getShadowCamera().get());
 
 		for (GLuint j = 0; j < 3; j++) {
@@ -239,7 +239,7 @@ void LightManager::pushLightUniforms(core::Program* program) {
 		}
 
 		program->uniformPush(
-				common::getNotIndexableName("uShadowMap", UBOIterator),
+				getNotIndexableName("uShadowMap", UBOIterator),
 				FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
 		UBOIterator++;
 	}
@@ -247,14 +247,14 @@ void LightManager::pushLightUniforms(core::Program* program) {
 	/* Point lights */
 
 	for (size_t i = 0; i < mPointLights.size(); i++) {
-		/*space::LightPoint* l = mPointLights[i].get();*/
+		/*LightPoint* l = mPointLights[i].get();*/
 		program->uniformPush(
-				common::getStructField("uPointLights", "position", i),
+				getStructField("uPointLights", "position", i),
 				glm::vec4(mPointLights[i]->getTranslation(), 1.0));
 		program->uniformPush(
-				common::getStructField("uPointLights", "intensity", i),
+				getStructField("uPointLights", "intensity", i),
 				mPointLights[i]->getIntensity());
-		program->uniformPush(common::getNotIndexableName("uPointShadowMap", i),
+		program->uniformPush(getNotIndexableName("uPointShadowMap", i),
 		FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
 		UBOIterator++;
 	}
@@ -274,7 +274,7 @@ void LightManager::pushLightUniformsDR() {
 	/* Spot lights */
 	for (size_t i = 0; i < mSpotLights.size(); i++) {
 
-		space::CameraPerspective camera =
+		CameraPerspective camera =
 				*(mSpotLights[i]->getShadowCamera().get());
 
 		for (GLuint j = 0; j < 3; j++) {
@@ -297,7 +297,7 @@ void LightManager::pushLightUniformsDR() {
 
 	/* Directional lights */
 	for (size_t i = 0; i < mDirectionalLights.size(); i++) {
-		space::CameraOrthographic camera =
+		CameraOrthographic camera =
 				*(mDirectionalLights[i]->getShadowCamera().get());
 
 		for (GLuint j = 0; j < 3; j++) {
@@ -394,7 +394,7 @@ void LightManager::bindShadowmaps() {
 
 GLfloat LightManager::computePointLightBoundingSphere(pLightPoint& light) {
 	glm::vec4 intensity = light->getIntensity();
-	space::LightAttenuationData attenuation = light->getAttenuation();
+	LightAttenuationData attenuation = light->getAttenuation();
 	GLfloat diffuseIntensity = 1.0;
 
 	GLfloat MaxChannel = glm::max(glm::max(intensity.x, intensity.y),
@@ -410,5 +410,5 @@ GLfloat LightManager::computePointLightBoundingSphere(pLightPoint& light) {
 	return ret;
 }
 
-} /* manager */
+} /* framework */
 } /* fillwave */

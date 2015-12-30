@@ -12,7 +12,7 @@
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 
 namespace fillwave {
-namespace models {
+namespace framework {
 
 /*! \class Quad
  * \brief Shape encapsulating vertices and indices for triangle drawn quad.
@@ -62,7 +62,7 @@ public:
 	virtual ~Quad() = default;
 };
 
-} /* models */
+} /* framework */
 } /* fillwave */
 
 #endif /* SRC_MODELS_SHAPES_QUAD_H_ */

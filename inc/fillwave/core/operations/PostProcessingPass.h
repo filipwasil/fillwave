@@ -13,13 +13,13 @@
 #include <fillwave/common/Finishable.h>
 
 namespace fillwave {
-namespace common {
+namespace core {
 
 /*! \class PostProcessingPass
  * \brief Defines one post processing pass.
  */
 
-class PostProcessingPass: public Finishable {
+class PostProcessingPass: public framework::Finishable {
 public:
 	PostProcessingPass(
 			pProgram p,
@@ -38,8 +38,8 @@ private:
 	pProgram mProgram;
 };
 
-} /* common */
-typedef std::unique_ptr<common::PostProcessingPass> puPostProcessingPass;
+} /* core */
+typedef std::unique_ptr<core::PostProcessingPass> puPostProcessingPass;
 } /* fillwave */
 
 #endif /* SRC_OPERATIONS_POSTPROCESSINGPASS_H_ */

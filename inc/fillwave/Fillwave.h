@@ -10,57 +10,56 @@
 
 
 /* Callbacks */
-#include <fillwave/actions/TimedMoveCallback.h>
-#include <fillwave/actions/TimedRotateCallback.h>
-#include <fillwave/actions/TimedScaleCallback.h>
-#include <fillwave/actions/FPSCallback.h>
-#include <fillwave/actions/TimedEmiterUpdateCallback.h>
-#include <fillwave/actions/LoopCallback.h>
-#include <fillwave/actions/SequenceCallback.h>
+#include <fillwave/actions/callbacks/TimedMoveCallback.h>
+#include <fillwave/actions/callbacks/TimedRotateCallback.h>
+#include <fillwave/actions/callbacks/TimedScaleCallback.h>
+#include <fillwave/actions/callbacks/FPSCallback.h>
+#include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
+#include <fillwave/actions/callbacks/LoopCallback.h>
+#include <fillwave/actions/callbacks/SequenceCallback.h>
 
 /* Events */
-#include <fillwave/actions/TimeEvent.h>
-#include <fillwave/actions/TouchEvent.h>
-#include <fillwave/actions/ScrollEvent.h>
-#include <fillwave/actions/CursorEnterEvent.h>
-#include <fillwave/actions/CursorPositionEvent.h>
-#include <fillwave/actions/CharacterEvent.h>
-#include <fillwave/actions/CharacterModsEvent.h>
-#include <fillwave/actions/CursorPositionEvent.h>
-#include <fillwave/actions/MouseButtonEvent.h>
-#include <fillwave/actions/KeyboardEvent.h>
+#include <fillwave/actions/events/TimeEvent.h>
+#include <fillwave/actions/events/TouchEvent.h>
+#include <fillwave/actions/events/ScrollEvent.h>
+#include <fillwave/actions/events/CursorEnterEvent.h>
+#include <fillwave/actions/events/CursorPositionEvent.h>
+#include <fillwave/actions/events/CharacterEvent.h>
+#include <fillwave/actions/events/CharacterModsEvent.h>
+#include <fillwave/actions/events/CursorPositionEvent.h>
+#include <fillwave/actions/events/MouseButtonEvent.h>
+#include <fillwave/actions/events/KeyboardEvent.h>
 
 /* effects */
-#include <fillwave/effects/Fog.h>
-#include <fillwave/effects/BoostColor.h>
-#include <fillwave/effects/TextureOnly.h>
+#include <fillwave/models/effects/Fog.h>
+#include <fillwave/models/effects/BoostColor.h>
+#include <fillwave/models/effects/TextureOnly.h>
 
 /* models */
-#include <fillwave/models/BuilderModelManual.h>
-#include <fillwave/models/BuilderModelExternalMaps.h>
-#include <fillwave/models/SceneOrthographic.h>
-#include <fillwave/models/ScenePerspective.h>
+#include <fillwave/models/builders/BuilderModelManual.h>
+#include <fillwave/models/builders/BuilderModelExternalMaps.h>
 #include <fillwave/models/Text.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/models/shapes/BoxOcclusion.h>
 #include <fillwave/models/shapes/Box.h>
 
 /* space */
+#include <fillwave/space/SceneOrthographic.h>
+#include <fillwave/space/ScenePerspective.h>
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
 #include <fillwave/space/LightDirectional.h>
 
 /* Particles */
-#include <fillwave/particles/Impostor.h>
-#include <fillwave/particles/EmiterPointGPU.h>
-#include <fillwave/particles/EmiterPointCPU.h>
+#include <fillwave/models/Impostor.h>
+#include <fillwave/models/EmiterPointGPU.h>
+#include <fillwave/models/EmiterPointCPU.h>
 
 /* Terrain */
-#include <fillwave/terrain/Terrain.h>
-#include <fillwave/terrain/MeshTerrain.h>
+#include <fillwave/models/Terrain.h>
+#include <fillwave/models/MeshTerrain.h>
 
-/* Extras */
-#include <fillwave/extras/Debugger.h>
+#include <fillwave/Debugger.h>
 
 /* Loaders */
 #include <fillwave/loaders/ProgramLoader.h>
@@ -81,11 +80,8 @@ namespace fillwave {
 class Engine {
 public:
 #ifdef __ANDROID__
-
 	Engine(std::string rootPath);
-
 	Engine(ANativeActivity* activity);
-
 #else
 	Engine(GLint argc, GLchar* const argv[]);
 #endif
@@ -111,7 +107,7 @@ public:
 
 	/* Assets */
 	puPhysicsMeshBuffer getPhysicalMeshBuffer(const std::string& shapePath);
-	manager::LightManager* getLightManager() const;
+	framework::LightManager* getLightManager() const;
 
 	const fScene* getModelFromFile(std::string path); /* xxx remove */
 
@@ -158,8 +154,8 @@ public:
 
 	/* Store textures */
 	pTexture storeTexture(const std::string& texturePath, const GLuint& mapType =
-	FILLWAVE_TEXTURE_TYPE_NONE, loader::eCompression compression =
-			loader::eCompression::eNone);
+	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression compression =
+			framework::eCompression::eNone);
 
 	pTexture2DRenderableDynamic storeTextureDynamic(
 			const std::string& fragmentShaderPath);
@@ -204,7 +200,7 @@ public:
 	pSampler storeSO(GLint textureUnit);
 
 	/* Store vertex array objects */
-	pVertexArray storeVAO(models::Reloadable* user = nullptr);
+	pVertexArray storeVAO(framework::Reloadable* user = nullptr);
 
 	/* Clear */
 	void clearText(pText text);
@@ -239,18 +235,12 @@ public:
 	pEntity getFocus(eEventType eventType) const;
 	void clearFocus(eEventType eventType);
 
-	/* Inputs - insert */
-	void insertInput(actions::EventType& event);
+	/* Inputs */
+	void insertInput(framework::EventType& event);
 	void insertResizeScreen(GLuint width, GLuint height);
-
-	/* Inputs - register */
-	void registerCallback(actions::Callback* callback);
-
-	/* Inputs - unregister */
-	void unregisterCallback(actions::Callback* callback);
-
-	/* Inputs - clear */
-	void clearCallback(actions::Callback* callback);
+	void registerCallback(framework::Callback* callback);
+	void unregisterCallback(framework::Callback* callback);
+	void clearCallback(framework::Callback* callback);
 	void clearCallbacks(eEventType eventType);
 	void clearCallbacks();
 

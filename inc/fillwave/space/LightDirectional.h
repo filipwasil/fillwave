@@ -14,7 +14,7 @@
 
 namespace fillwave {
 class Engine;
-namespace space {
+namespace framework {
 
 /*! \struct LightDirectioData
  * \brief Light UBO data.
@@ -53,8 +53,8 @@ private:
 	pCameraOrthographic mShadowCamera;
 };
 
-} /* space */
-typedef std::shared_ptr<space::LightDirectional> pLightDirectional;
+} /* framework */
+typedef std::shared_ptr<framework::LightDirectional> pLightDirectional;
 } /* fillwave */
 
 #endif /* LIGHTDIRECTIONAL_H_ */

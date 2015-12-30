@@ -13,7 +13,7 @@
 #include <vector>
 
 namespace fillwave {
-namespace models {
+namespace framework {
 
 /*! \class Shape
  * \brief Base class for every shape. Specialized with Vertex data structure.
@@ -52,6 +52,6 @@ protected:
 	std::vector<GLuint> mIndices;
 };
 
-} /* models */
+} /* framework */
 } /* fillwave */
 #endif /* SHAPE_H_ */

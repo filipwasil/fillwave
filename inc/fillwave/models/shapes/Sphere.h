@@ -12,7 +12,7 @@
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 
 namespace fillwave {
-namespace models {
+namespace framework {
 
 /*! \class Sphere
  * \brief Shape<core::VertexBasic> encapsulating vertices and indices for triangle drawn UV sphere.
@@ -81,7 +81,7 @@ public:
 	~Sphere() = default;
 };
 
-} /* models */
+} /* framework */
 } /* fillwave */
 
 #endif /* SPHERE_H_ */

@@ -7,18 +7,18 @@
 
 #include <fillwave/core/rendering/FramebufferGeometry.h>
 #include <fillwave/Fillwave.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("FramebufferGeometry", FERROR | FFATAL)
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 class TextureManager;
 }
 namespace core {
 
 FramebufferGeometry::FramebufferGeometry(
-		manager::TextureManager* manager,
+		framework::TextureManager* manager,
 		GLuint width,
 		GLuint height,
 		GLuint colorBuffers,

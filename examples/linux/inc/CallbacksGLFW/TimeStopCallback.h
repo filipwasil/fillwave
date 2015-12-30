@@ -8,12 +8,12 @@
 #ifndef INC_FILLWAVE_TIMESTOPCALLBACK_H_
 #define INC_FILLWAVE_TIMESTOPCALLBACK_H_
 
-#include <fillwave/actions/Callback.h>
-#include <fillwave/actions/Event.h>
+#include <fillwave/actions/callbacks/Callback.h>
+#include <fillwave/actions/events/Event.h>
 
 namespace fillwave {
 class Engine;
-namespace actions {
+namespace framework {
 
 class TimeStopCallback: public Callback {
 public:
@@ -25,7 +25,7 @@ private:
    Engine* mEngine;
 };
 
-} /* actions */
+} /* framework */
 } /* fillwave */
 
 #endif /* INC_FILLWAVE_TIMESTOPCALLBACK_H_ */

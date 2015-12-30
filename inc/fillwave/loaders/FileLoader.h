@@ -22,9 +22,7 @@
 #endif
 
 namespace fillwave {
-namespace loader {
-
-using namespace std;
+namespace framework {
 
 /*! \class FileLoader
  * \brief Loads files.
@@ -44,9 +42,9 @@ private:
 
 void WriteFile(const char* pFileName, std::string& fileContent);
 void ReadFile(std::string pFileName, std::string& fileContent);
-string ReadFile(string fileName);
+std::string ReadFile(std::string fileName);
 
-} /* std */
+} /* framework */
 } /* fillwave */
 
 #endif /* FILE_H_ */

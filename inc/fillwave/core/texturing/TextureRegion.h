@@ -50,7 +50,8 @@ static pTextureRegion buildTextureRegion(
 		GLfloat u2 = 1.0,
 		GLfloat v2 = 1.0) {
 	return pTextureRegion(new core::TextureRegion(texture, u1, v1, u2, v2));
-} /* core */
+}
+
 } /* fillwave */
 
 #endif /* TEXTUREREGION_H_ */

@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/pipeline/ProgramPipeline.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 #ifdef FILLWAVE_GLES_3_0
 #else

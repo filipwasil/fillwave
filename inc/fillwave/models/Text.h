@@ -15,7 +15,7 @@
 #include <fillwave/common/Blending.h>
 
 #include <fillwave/loaders/FontLoader.h>
-#include <fillwave/models/Reloadable.h>
+#include <fillwave/models/base/Reloadable.h>
 
 #include <map>
 
@@ -26,7 +26,7 @@ enum class eTextEffect {
 	eNone, eBold
 };
 
-namespace models {
+namespace framework {
 
 /*! \class Text
  * \brief 2D Text on the screen.
@@ -59,7 +59,7 @@ private:
 
 	std::string mText;
 
-	common::Blending mBlending;
+	Blending mBlending;
 
 	std::map<std::string, pTextureRegion> mCharacters;
 
@@ -76,25 +76,19 @@ private:
 	GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
 
 	void createProgram();
-
-	void initBuffers();
-
-	void initPipeline();
-
-	void initUniformsCache();
-
 	void createVBO();
-
 	void clearVBO();
 
 	void initVBO();
-
 	void initVAO();
+	void initBuffers();
+	void initPipeline();
+	void initUniformsCache();
 };
 
-} /* models */
-typedef std::shared_ptr<models::Text> pText;
-typedef std::unique_ptr<models::Text> puText;
+} /* framework */
+typedef std::shared_ptr<framework::Text> pText;
+typedef std::unique_ptr<framework::Text> puText;
 } /* fillwave */
 
 #endif /* TEXT_H_ */

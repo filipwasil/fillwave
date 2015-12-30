@@ -11,7 +11,7 @@
 #include <fillwave/loaders/ShaderLoader.h>
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 /*! \class ShaderLoaderVertex
  * \brief ShaderLoader to load vertex shader sources.
@@ -29,7 +29,7 @@ private:
 	bool mAnimated;
 };
 
-} /* loader */
+} /* framework */
 } /* fillwave */
 
 #endif /* SHADERLOADERVERTEX_H_ */

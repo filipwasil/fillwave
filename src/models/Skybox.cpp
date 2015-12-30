@@ -13,17 +13,17 @@
 FLOGINIT("Skybox", FERROR | FFATAL)
 
 namespace fillwave {
-namespace models {
+namespace framework {
 
 Skybox::Skybox(Engine* engine, pTexture3D texture)
 		: Reloadable(engine), mTexture(texture) {
 
-	loader::ProgramLoader loader;
+	ProgramLoader loader;
 
 	mProgram = loader.getSkybox(engine);
 	mProgramDR = loader.getSkyboxDR(engine);
 
-	models::SphereSkybox sphere(1.0, 10, 10);
+	SphereSkybox sphere(1.0, 10, 10);
 
 	std::vector<GLuint> indices = sphere.getIndices();
 	std::vector<core::VertexPosition> vertices = sphere.getVertices();
@@ -39,7 +39,7 @@ Skybox::Skybox(Engine* engine, pTexture3D texture)
 	initUniformsCache();
 }
 
-void Skybox::draw(space::Camera& camera) {
+void Skybox::draw(Camera& camera) {
 	mProgram->use();
 
 	core::Uniform::push(mULCCameraPosition, camera.getTranslation());
@@ -69,7 +69,7 @@ void Skybox::draw(space::Camera& camera) {
 	core::Program::disusePrograms();
 }
 
-void Skybox::drawDR(space::Camera& camera) {
+void Skybox::drawDR(Camera& camera) {
 	mProgramDR->use();
 
 	core::Uniform::push(mULCCameraPosition, camera.getTranslation());
@@ -141,5 +141,5 @@ inline void Skybox::initVBO() {
 	mVBO->attributesBind(mProgram);
 }
 
-} /* core */
+} /* framework */
 } /* fillwave */

@@ -9,7 +9,7 @@
 #define FINISHABLE_H_
 
 namespace fillwave {
-namespace common {
+namespace framework {
 
 #define FILLWAVE_ENDLESS 0
 
@@ -58,7 +58,7 @@ protected:
 	float mPercentageDone;
 };
 
-} /* common */
+} /* framework */
 } /* fillwave */
 
 #endif /* FINISHABLE_H_ */

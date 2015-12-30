@@ -8,7 +8,7 @@
 #include <fillwave/space/CameraPerspective.h>
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 CameraPerspective::CameraPerspective()
 		:
@@ -77,5 +77,5 @@ void CameraPerspective::setProjectionFarPlane(GLfloat farPlane) {
 	mRefreshProjection = GL_TRUE;
 }
 
-} /* space */
+} /* framework */
 } /* fillwave */

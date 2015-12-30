@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/extras/Conversion.h>
+#include <fillwave/models/animations/Conversion.h>
 
 namespace fillwave {
 

@@ -7,11 +7,11 @@
 
 #include "../../../linux/inc/CallbacksGLFW/CameraMotionCallback.h"
 
-#include <fillwave/actions/Event.h>
+#include <fillwave/actions/events/Event.h>
 #include <fillwave/Fillwave.h>
 
 namespace fillwave {
-namespace actions {
+namespace framework {
 
 CameraMotionCallback::CameraMotionCallback(Engine* engine)
 		: Callback(eEventType::eTime), mTimePassed(0.0), mEngine(engine) {
@@ -27,5 +27,5 @@ glm::vec3 CameraMotionCallback::calculateNewPosition(float time) {
    return glm::vec3(15*sin(time), 15.0, 15*cos(time));
 }
 
-} /* actions */
+} /* framework */
 } /* fillwave */

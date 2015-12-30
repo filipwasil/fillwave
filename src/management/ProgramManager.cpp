@@ -6,13 +6,13 @@
  */
 
 #include <fillwave/management/ProgramManager.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fillwave/core/pipeline/Program.h>
 
 FLOGINIT("ProgramManager", FERROR | FFATAL)
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 
 pProgram ProgramManager::add(
 		const std::string& name,
@@ -47,5 +47,5 @@ void ProgramManager::reload() {
 	}
 }
 
-} /* manager */
+} /* framework */
 } /* fillwave */

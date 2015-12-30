@@ -11,7 +11,7 @@
 #include <fillwave/space/Camera.h>
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 /*! \class CullingBox
  * \brief Stores culling box parameters for Orthographic projection.
@@ -49,9 +49,9 @@ private:
 
 };
 
-} /* space */
-typedef std::shared_ptr<space::CameraOrthographic> pCameraOrthographic;
-typedef std::weak_ptr<space::CameraOrthographic> pwCameraOrthographic;
+} /* framework */
+typedef std::shared_ptr<framework::CameraOrthographic> pCameraOrthographic;
+typedef std::weak_ptr<framework::CameraOrthographic> pwCameraOrthographic;
 } /* fillwave */
 
 #endif /* CAMERAOrthographic_H_ */

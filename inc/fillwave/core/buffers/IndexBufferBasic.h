@@ -28,7 +28,7 @@ public:
 	GL_STATIC_DRAW);
 
 	template<class T>
-	IndexBufferBasic(models::Shape<T>& shape, GLuint dataStoreModification =
+	IndexBufferBasic(framework::Shape<T>& shape, GLuint dataStoreModification =
 	GL_STATIC_DRAW)
 			: IndexBuffer(shape.getIndicesSize(), dataStoreModification) {
 		mDataIndices = shape.getIndices();

@@ -13,7 +13,7 @@
 
 namespace fillwave {
 class Engine;
-namespace loader {
+namespace framework {
 
 /*! \class ProgramLoader
  * \brief Loads programs.
@@ -69,7 +69,7 @@ private:
 
 };
 
-} /* core */
+} /* framework */
 } /* fillwave */
 
 #endif /* SRC_LOADERS_PROGRAMLOADER_H_ */

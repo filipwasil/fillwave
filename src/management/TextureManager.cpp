@@ -6,14 +6,12 @@
  */
 
 #include <fillwave/management/TextureManager.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("TextureManager", FERROR | FFATAL | FINFO)
 
-using namespace fillwave::loader;
-
 namespace fillwave {
-namespace manager {
+namespace framework {
 
 TextureManager::TextureManager(const std::string& rootPath)
 		: mRootPath(rootPath) {
@@ -611,5 +609,5 @@ void TextureManager::reload() {
 	reload(mTextureObjects2DDeferred);
 }
 
-} /* manager */
+} /* framework */
 } /* fillwave */

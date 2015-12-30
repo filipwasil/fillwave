@@ -28,7 +28,7 @@ struct VertexPosition {
 class VertexBufferPosition: public VertexBuffer<VertexPosition> {
 public:
 	VertexBufferPosition(
-			models::Shape<VertexPosition>& shape,
+			framework::Shape<VertexPosition>& shape,
 			GLuint dataStoreModification = GL_STATIC_DRAW);
 	VertexBufferPosition(
 			std::vector<VertexPosition>& vertices,

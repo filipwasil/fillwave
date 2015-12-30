@@ -12,7 +12,7 @@
 
 using namespace fillwave;
 
-class PickableModel: public models::Model{
+class PickableModel: public framework::Model{
 private:
    pText mText;
    pEffect mPickedEffect;

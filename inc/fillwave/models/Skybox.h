@@ -12,11 +12,11 @@
 #include <fillwave/core/texturing/Texture3D.h>
 #include <fillwave/core/buffers/IndexBufferBasic.h>
 #include <fillwave/core/buffers/VertexBufferPosition.h>
-#include <fillwave/models/Reloadable.h>
+#include <fillwave/models/base/Reloadable.h>
 
 namespace fillwave {
 class Engine;
-namespace models {
+namespace framework {
 
 /*! \class Skybox
  * \brief Entity which moves with the camera clipping the view space with an image.
@@ -28,9 +28,8 @@ public:
 
 	virtual ~Skybox() = default;
 
-	void draw(space::Camera& camera);
-
-	void drawDR(space::Camera& camera);
+	void draw(Camera& camera);
+	void drawDR(Camera& camera);
 
 protected:
 	pProgram mProgram;
@@ -38,30 +37,23 @@ protected:
 
 private:
 	pTexture3D mTexture;
-
 	pVertexBufferPosition mVBO;
-
 	pIndexBufferBasic mIBO;
-
 	GLint mULCCameraPosition, mULCModelMatrixPosition, mULCViewProjectionMatrix,
 			mULCTextureUnit;
 
 	void initBuffers();
-
 	void initPipeline();
-
 	void initUniformsCache();
-
 	void initVAO();
-
 	void initVBO();
 };
 
-} /* models */
-typedef std::shared_ptr<models::Skybox> pSkybox;
+} /* framework */
+typedef std::shared_ptr<framework::Skybox> pSkybox;
 
 static pSkybox buildSkybox(Engine* engine, pTexture3D texture) {
-	return pSkybox(new models::Skybox(engine, texture));
+	return pSkybox(new framework::Skybox(engine, texture));
 }
 } /* fillwave */
 

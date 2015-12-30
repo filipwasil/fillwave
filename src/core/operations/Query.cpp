@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/operations/Query.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Query", FERROR | FFATAL | FINFO)
 

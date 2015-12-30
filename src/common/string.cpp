@@ -5,14 +5,13 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fillwave/common/string.h>
 #include <fillwave/loaders/FileLoader.h>
 
 FLOGINIT("String", FERROR | FFATAL)
 
 namespace fillwave {
-namespace common {
 
 std::vector<std::string> &split(
 		const std::string &s,
@@ -85,5 +84,4 @@ std::string getFileNameOnly(const char* path) {
 	}
 }
 
-} /* common */
 } /* fillwave */

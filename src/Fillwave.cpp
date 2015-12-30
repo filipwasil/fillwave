@@ -8,7 +8,7 @@
 /* Plarform specific */
 //#include <fillwave/loaders/AndroidLoader.h>
 /* Debug */
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 /* Profiling */
 #include <fillwave/Profiler.h>
@@ -142,7 +142,7 @@ pProgram Engine::storeProgram(
 pTexture Engine::storeTexture(
 		const std::string& texturePath,
 		const GLuint& mapType,
-		loader::eCompression compression) {
+		framework::eCompression compression) {
 	return mImpl->mTextureManager->get(texturePath, mapType, compression);
 }
 
@@ -171,13 +171,13 @@ pSampler Engine::storeSO(GLint textureUnit) {
 	return mImpl->storeSO(textureUnit);
 }
 
-pVertexArray Engine::storeVAO(models::Reloadable* user) {
+pVertexArray Engine::storeVAO(framework::Reloadable* user) {
 	return mImpl->storeVAO(user);
 }
 
 /* Inputs - insert */
 
-void Engine::insertInput(actions::EventType& event) {
+void Engine::insertInput(framework::EventType& event) {
 	pEntity moveable = getFocus(event.getType());
 	if (moveable) {
 		moveable->handlePrivateEvent(event);
@@ -187,7 +187,7 @@ void Engine::insertInput(actions::EventType& event) {
 
 /* Engine callbacks - clear */
 
-void Engine::clearCallback(actions::Callback* callback) {
+void Engine::clearCallback(framework::Callback* callback) {
 	mImpl->clearCallback(callback);
 }
 
@@ -201,11 +201,11 @@ void Engine::clearCallbacks() {
 
 /* Callbacks registeration */
 
-void Engine::registerCallback(actions::Callback* callback) {
+void Engine::registerCallback(framework::Callback* callback) {
 	mImpl->registerCallback(callback);
 }
 
-void Engine::unregisterCallback(actions::Callback* callback) {
+void Engine::unregisterCallback(framework::Callback* callback) {
 	mImpl->unregisterCallback(callback);
 }
 
@@ -236,7 +236,7 @@ pText Engine::storeText(
 	}
 
 	pTexture t = mImpl->mTextureManager->get(fontName + ".png",
-	FILLWAVE_TEXTURE_TYPE_NONE, eCompression::eNone, eFlip::eVertical);
+	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone, framework::eFlip::eVertical);
 
 	Font* font = nullptr;
 	for (auto& it : mImpl->mFontManager) {
@@ -277,7 +277,7 @@ pText Engine::storeText(
 	}
 
 	pText text = pText(
-			new models::Text(content, t, startingPositionX, startingPositionY,
+			new framework::Text(content, t, startingPositionX, startingPositionY,
 					this, scale, font, color, effect));
 	mImpl->mTextManager.push_back(pText(text));
 	return text;
@@ -343,7 +343,7 @@ pScene Engine::getCurrentScene() const {
 	return mImpl->mScene;
 }
 
-manager::LightManager* Engine::getLightManager() const {
+framework::LightManager* Engine::getLightManager() const {
 	return mImpl->mLightManager.get();
 }
 
@@ -382,7 +382,7 @@ void Engine::addPostProcess(
 		GLfloat lifeTime) {
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(this,
 			fragmentShaderPath);
-	common::PostProcessingPass pass(program,
+	core::PostProcessingPass pass(program,
 			mImpl->mTextureManager->getDynamic(fragmentShaderPath, program,
 					glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)),
 			lifeTime);
@@ -399,7 +399,7 @@ void Engine::configureFPSCounter(
 		mImpl->mFPSText = storeText("", fontName, xPosition, yPosition, size);
 
 		/* Provide callback to refresh the FPS value */
-		mImpl->mTextFPSCallback = new actions::FPSCallback(this, mImpl->mFPSText);
+		mImpl->mTextFPSCallback = new framework::FPSCallback(this, mImpl->mFPSText);
 		registerCallback(mImpl->mTextFPSCallback);
 	} else {
 		mImpl->mFPSText.reset();

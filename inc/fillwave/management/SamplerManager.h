@@ -11,10 +11,10 @@
 #include <fillwave/core/texturing/Sampler.h>
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 
 /*! \class SamplerManager
- * \brief Not used.
+ * \brief returns sampler
  */
 
 class SamplerManager {
@@ -29,8 +29,8 @@ private:
 	std::vector<pSampler> mSamplers;
 };
 
-} /* manager */
-typedef std::unique_ptr<manager::SamplerManager> puSamplerManager;
+} /* framework */
+typedef std::unique_ptr<framework::SamplerManager> puSamplerManager;
 } /* fillwave */
 
 #endif /* SAMPLERMANAGER_H_ */

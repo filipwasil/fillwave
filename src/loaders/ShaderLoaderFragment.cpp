@@ -9,7 +9,7 @@
 #include <fillwave/loaders/ShaderLoaderFragment.h>
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 ShaderLoaderFragment::ShaderLoaderFragment(GLuint renderTargets)
 		:
@@ -36,7 +36,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 	std::string outputs;
 	for (GLuint i = 0; i < mRendertargets; i++) {
 
-		outputs += "" + mGLVaryingOut + " vec4 fColor" + common::to_string(i) + ";\n";
+		outputs += "" + mGLVaryingOut + " vec4 fColor" + to_string(i) + ";\n";
 
 	}
 	outputs += "\n";
@@ -506,7 +506,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 
 	/* Many render targets for DR */
 	for (GLuint i = 0; i < mRendertargets; i++) {
-		end += "fColor" + common::to_string(i) + " = color;\n";
+		end += "fColor" + to_string(i) + " = color;\n";
 	}
 
 	end += "\n}\n";
@@ -516,5 +516,5 @@ const std::string ShaderLoaderFragment::getSource() const {
 			+ functions + main + end;
 }
 
-} /* loader */
+} /* framework */
 } /* fillwave */

@@ -8,23 +8,22 @@
 #ifndef MODEL_H_
 #define MODEL_H_
 
-#include <fillwave/models/Programmable.h>
+#include <fillwave/models/base/Programmable.h>
 #include <fillwave/models/Mesh.h>
 #include <fillwave/Assets.h>
 
 namespace fillwave {
-class Engine;
-namespace models {
+namespace framework {
 class Model;
-}
-namespace actions {
-class TimedBoneUpdateCallback;
 }
 }
 
 namespace fillwave {
-typedef std::shared_ptr<models::Model> pModel;
-namespace models {
+class Engine;
+typedef std::shared_ptr<framework::Model> pModel;
+namespace framework {
+
+class TimedBoneUpdateCallback;
 
 /*! \class Model
  * \brief Drawable Mesh set.
@@ -36,7 +35,7 @@ public:
 	Model(
 			Engine* engine,
 			pProgram program,
-			Shape<core::VertexBasic>& shape,
+			framework::Shape<core::VertexBasic>& shape,
 			pTexture diffuseMap,
 			pTexture normalMap,
 			pTexture specularMap,
@@ -65,9 +64,9 @@ public:
 
 	void reload();
 
-	void draw(space::Camera& camera);
-	void drawPBRP(space::Camera& camera);
-	void drawDR(space::Camera& camera);
+	void draw(Camera& camera);
+	void drawPBRP(Camera& camera);
+	void drawDR(Camera& camera);
 
 	void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
 
@@ -79,13 +78,13 @@ public:
 	void log();
 
 protected:
-	manager::BoneManager* mBoneManager;
+	Animator* mAnimator;
 	pProgram mProgramShadow, mProgramShadowColor;
 	GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow,
 			mUniformLocationCacheBonesShadowColor;
 private:
 	/* Animation */
-	actions::TimedBoneUpdateCallback* mAnimationCallback;
+	TimedBoneUpdateCallback* mAnimationCallback;
 	GLint mActiveAnimation;
 
 	/* Init */
@@ -131,18 +130,18 @@ private:
 			Engine* engine);
 };
 
-} /* models */
+} /* framework */
 
 static pModel buildModel(
 		Engine* engine,
 		pProgram program,
-		models::Shape<core::VertexBasic>& shape,
+		framework::Shape<core::VertexBasic>& shape,
 		pTexture diffuseMap = pTexture(),
 		pTexture normalMap = pTexture(),
 		pTexture specularMap = pTexture(),
-		models::Material material = models::Material()) {
+		framework::Material material = framework::Material()) {
 	return pModel(
-			new models::Model(engine, program, shape, diffuseMap, normalMap,
+			new framework::Model(engine, program, shape, diffuseMap, normalMap,
 					specularMap, material));
 }
 
@@ -154,7 +153,7 @@ static pModel buildModel(
 		const std::string& normalMapPath = "",
 		const std::string& specularMapPath = "") {
 	return pModel(
-			new models::Model(engine, program, shapePath, diffuseMapPath,
+			new framework::Model(engine, program, shapePath, diffuseMapPath,
 					normalMapPath, specularMapPath));
 }
 
@@ -165,9 +164,9 @@ static pModel buildModel(
 		pTexture diffuseMap,
 		pTexture normalMap = pTexture(),
 		pTexture specularMap = pTexture(),
-		models::Material material = models::Material()) {
+		framework::Material material = framework::Material()) {
 	return pModel(
-			new models::Model(engine, program, shapePath, diffuseMap, normalMap,
+			new framework::Model(engine, program, shapePath, diffuseMap, normalMap,
 					specularMap, material));
 }
 
@@ -175,7 +174,7 @@ static pModel buildModel(
 		Engine* engine,
 		pProgram program,
 		const std::string& shapePath) {
-	return pModel(new models::Model(engine, program, shapePath));
+	return pModel(new framework::Model(engine, program, shapePath));
 }
 
 } /* fillwave */

@@ -9,11 +9,9 @@
 #define INC_FILLWAVE_COMMON_BLENDING_H_
 
 namespace fillwave {
-namespace common {
 
 /*! \struct Blending
  * \brief Structure defining the blending parameters.
- *
  */
 
 struct Blending {
@@ -21,7 +19,6 @@ struct Blending {
 	GLenum mDestination;
 };
 
-} /* common */
 } /* fillwave */
 
 #endif /* INC_FILLWAVE_COMMON_BLENDING_H_ */

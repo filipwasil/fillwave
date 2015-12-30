@@ -9,7 +9,7 @@
 
 // for native asset manager
 #include <sys/types.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fillwave/loaders/AndroidLoader.h>
 
 FLOGINIT("Android loader", FERROR | FFATAL)

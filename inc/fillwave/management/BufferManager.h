@@ -9,13 +9,13 @@
 #define BUFFERMANAGER_H_
 
 #include <fillwave/core/buffers/Buffer.h>
-#include <fillwave/models/Reloadable.h>
+#include <fillwave/models/base/Reloadable.h>
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 
 struct VAOObject {
-	models::Reloadable* mVAOUser;
+	Reloadable* mVAOUser;
 	pwVertexArray mVAO;
 };
 
@@ -35,14 +35,14 @@ public:
 
 	void reload();
 
-	pVertexArray getVAO(models::Reloadable* renderable);
+	pVertexArray getVAO(Reloadable* renderable);
 
 private:
 	std::vector<puVAOObject> mVAOObjects;
 };
 
-} /* manager */
-typedef std::unique_ptr<manager::BufferManager> puBufferManager;
+} /* framework */
+typedef std::unique_ptr<framework::BufferManager> puBufferManager;
 } /* fillwave */
 
 #endif /* BUFFERMANAGER_H_ */

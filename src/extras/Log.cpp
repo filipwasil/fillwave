@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Log", FERROR | FFATAL)
 

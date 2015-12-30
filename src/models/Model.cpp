@@ -6,25 +6,23 @@
  */
 
 #include <fillwave/Fillwave.h>
-
-#include <fillwave/models/Model.h>
-
-#include <fillwave/actions/TimedBoneUpdateCallback.h>
+#include <fillwave/actions/callbacks/TimedBoneUpdateCallback.h>
 
 #include <fillwave/loaders/ProgramLoader.h>
 
 #include <fillwave/management/TextureManager.h>
-#include <fillwave/management/BoneManager.h>
 
-#include <fillwave/extras/Conversion.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/models/Model.h>
+#include <fillwave/models/animations/Animator.h>
+#include <fillwave/models/animations/Conversion.h>
+#include <fillwave/models/animations/Animation.h>
 
-#include <fillwave/animation/Animation.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Model", FERROR | FFATAL)
 
 namespace fillwave {
-namespace models {
+namespace framework {
 
 Model::Model(
 		Engine* engine,
@@ -36,13 +34,13 @@ Model::Model(
 		const Material& material)
 		:
 				Programmable(program),
-				mBoneManager(nullptr),
+				mAnimator(nullptr),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	initShadowing(engine);
 
-	loader::ProgramLoader loader;
+	ProgramLoader loader;
 
 	std::vector<core::VertexBasic> vertices = shape.getVertices();
 	std::vector<GLuint> indices = shape.getIndices();
@@ -57,14 +55,14 @@ Model::Model(
 					engine->getLightManager(),
 					pVertexBufferBasic(new core::VertexBufferBasic(vertices)),
 					pIndexBufferBasic(new core::IndexBufferBasic(indices)),
-					mBoneManager));
+					mAnimator));
 	attach(ptr);
 }
 
 Model::Model(Engine* engine, pProgram program, const std::string& shapePath)
 		:
 				Programmable(program),
-				mBoneManager(nullptr),
+				mAnimator(nullptr),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -89,7 +87,7 @@ Model::Model(
 		const std::string& specularMapPath)
 		:
 				Programmable(program),
-				mBoneManager(nullptr),
+				mAnimator(nullptr),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -115,7 +113,7 @@ Model::Model(
 		const Material& material)
 		:
 				Programmable(program),
-				mBoneManager(nullptr),
+				mAnimator(nullptr),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -135,8 +133,8 @@ Model::~Model() {
 	if (mAnimationCallback) {
 		delete mAnimationCallback; //xxx this the source of all problems in double free
 	}
-	if (mBoneManager) {
-		delete mBoneManager;
+	if (mAnimator) {
+		delete mAnimator;
 	}
 }
 
@@ -285,7 +283,7 @@ pMesh Model::loadMesh(
 		pTextureRegion specularMap,
 		Engine* engine) {
 
-	loader::ProgramLoader loader;
+	ProgramLoader loader;
 
 	if (shape) {
 		pMesh ptr = pMesh(
@@ -296,9 +294,9 @@ pMesh Model::loadMesh(
 						loader.getAmbientOcclusionColor(engine),
 						engine->getLightManager(),
 						pVertexBufferBasic(
-								new core::VertexBufferBasic(shape, mBoneManager)),
+								new core::VertexBufferBasic(shape, mAnimator)),
 						pIndexBufferBasic(new core::IndexBufferBasic(shape)),
-						mBoneManager));
+						mAnimator));
 		return ptr;
 	} else {
 		return pMesh();
@@ -306,36 +304,36 @@ pMesh Model::loadMesh(
 }
 
 void Model::performAnimation(GLfloat timeElapsed_s) {
-	mBoneManager->updateTransformations(mActiveAnimation, timeElapsed_s);
+	mAnimator->updateTransformations(mActiveAnimation, timeElapsed_s);
 }
 
 void Model::setActiveAnimation(GLint animationID) {
-	if (mBoneManager->getAnimations() > animationID) {
+	if (mAnimator->getAnimations() > animationID) {
 		mActiveAnimation = animationID;
 	} else {
 		FLOG_ERROR("There is no animation for slot: %d", animationID);
 		FLOG_DEBUG("Maximum number of animations: %d",
-				mBoneManager->getAnimations());
+				mAnimator->getAnimations());
 	}
 }
 
 GLint Model::getActiveAnimations() {
-	return mBoneManager->getAnimations();
+	return mAnimator->getAnimations();
 }
 
-void Model::draw(space::Camera& camera) {
+void Model::draw(Camera& camera) {
 	evaluateAnimations();
 	drawWithEffects(camera);
 }
 
-void Model::drawPBRP(space::Camera& camera) {
+void Model::drawPBRP(Camera& camera) {
 	evaluateAnimations();
 	for (auto& it : mChildren) {
 		it->draw(camera);
 	}
 }
 
-void Model::drawDR(space::Camera& camera) {
+void Model::drawDR(Camera& camera) {
 	evaluateAnimations();
 	drawWithEffectsDR(camera);
 }
@@ -345,7 +343,7 @@ void Model::log() {
 }
 
 inline void Model::initUniformsCache() {
-	if (mBoneManager) {
+	if (mAnimator) {
 		mUniformLocationCacheBones = mProgram->getUniformLocation("uBones[0]");
 		mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation(
 				"uBones[0]");
@@ -355,8 +353,8 @@ inline void Model::initUniformsCache() {
 }
 
 inline void Model::initShadowing(Engine* engine) {
-	loader::ProgramLoader loader;
-	if (mBoneManager) {
+	ProgramLoader loader;
+	if (mAnimator) {
 		mProgramShadow = loader.getShadowWithAnimation(engine);
 		mProgramShadowColor = loader.getShadowColorCodedWithAnimation(engine);
 	} else {
@@ -367,23 +365,22 @@ inline void Model::initShadowing(Engine* engine) {
 
 inline void Model::initAnimations(const fScene* scene) {
 	if (scene->HasAnimations()) {
-		mBoneManager = new manager::BoneManager(scene);
+		mAnimator = new Animator(scene);
 		FLOG_DEBUG("attached TimedBoneUpdateCallback to model");
-		mAnimationCallback = new fillwave::actions::TimedBoneUpdateCallback(this);
+		mAnimationCallback = new TimedBoneUpdateCallback(this);
 		this->attachHierarchyCallback(mAnimationCallback);
 	}
 }
 
 inline void Model::evaluateAnimations() {
-	if (mBoneManager) {
-		mBoneManager->updateBonesBuffer();
+	if (mAnimator) {
+		mAnimator->updateBonesBuffer();
 		mProgram->use();
-		mBoneManager->updateBonesUniform(mUniformLocationCacheBones);
+		mAnimator->updateBonesUniform(mUniformLocationCacheBones);
 		mProgramShadow->use();
-		mBoneManager->updateBonesUniform(mUniformLocationCacheBonesShadow);
+		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadow);
 		mProgramShadowColor->use();
-		;
-		mBoneManager->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
+		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
 	}
 }
 
@@ -398,5 +395,5 @@ void Model::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpass
 	}
 }
 
-} /* models */
+} /* framework */
 } /* fillwave */

@@ -8,7 +8,7 @@
 #include "../../../linux/inc/CallbacksGLFW/FollowCustomCursorCallback.h"
 
 namespace fillwave {
-namespace actions {
+namespace framework {
 
 FollowCustomCursorCallback::FollowCustomCursorCallback(Engine* engine)
 		: Callback(eEventType::eCursorPosition), mEngine(engine) {
@@ -21,5 +21,5 @@ void FollowCustomCursorCallback::perform (EventType& event) {
                                                   -(e.yPosition/mEngine->getScreenSize()[1])*2.0 + 1.0));
 }
 
-} /* actions */
+} /* framework */
 } /* fillwave */

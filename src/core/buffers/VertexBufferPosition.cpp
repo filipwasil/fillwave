@@ -13,7 +13,7 @@ namespace fillwave {
 namespace core {
 
 VertexBufferPosition::VertexBufferPosition(
-		models::Shape<VertexPosition>& shape,
+		framework::Shape<VertexPosition>& shape,
 		GLuint dataStoreModification)
 		: VertexBuffer<VertexPosition>(shape, dataStoreModification) {
 

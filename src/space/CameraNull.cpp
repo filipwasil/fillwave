@@ -8,7 +8,7 @@
 #include <fillwave/space/CameraNull.h>
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 CameraNull::CameraNull() {
 	mProjectionMatrix = glm::mat4(1.0);
@@ -29,5 +29,5 @@ GLfloat CameraNull::getProjectionFarPlane() {
 	return 0.0f;
 }
 
-} /* models */
+} /* framework */
 } /* fillwave */

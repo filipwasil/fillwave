@@ -5,17 +5,17 @@
  *      Author: filip
  */
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fillwave/common/string.h>
 #include <fillwave/loaders/FontLoader.h>
 
 FLOGINIT("FontLoader", FERROR | FFATAL)
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 void FontLoader::load(std::string name) {
-	std::vector<std::string> splitted = common::split(name, '/');
+	std::vector<std::string> splitted = split(name, '/');
 	if (splitted.size()) {
 		(*(splitted.end() - 1)).c_str();
 	}
@@ -31,5 +31,5 @@ void FontLoader::load(std::string name) {
 	}
 }
 
-} /* loader */
+} /* framework */
 } /* fillwave */

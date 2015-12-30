@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/rendering/Texture2DRenderable.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Texture2DRenderable", FERROR | FFATAL | FDEBUG)
 

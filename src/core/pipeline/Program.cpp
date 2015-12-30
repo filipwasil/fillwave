@@ -8,7 +8,7 @@
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/pipeline/Attribute.h>
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Program", FERROR | FFATAL | FINFO | FDEBUG)
 

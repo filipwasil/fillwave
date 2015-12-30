@@ -9,13 +9,13 @@
 #define VERTEXBUFFERBASIC_H_
 
 #include <fillwave/core/buffers/VertexBuffer.h>
-#include <fillwave/terrain/TerrainConstructor.h>
+#include <fillwave/models/terrain/TerrainConstructor.h>
 #include <fillwave/Assets.h>
 
 namespace fillwave {
 
-namespace manager {
-class BoneManager;
+namespace framework {
+class Animator;
 }
 
 namespace core {
@@ -48,11 +48,11 @@ struct FaceBasic {
 
 class VertexBufferBasic: public VertexBuffer<VertexBasic> {
 public:
-	VertexBufferBasic(const fMesh* shape, manager::BoneManager* boneManager =
+	VertexBufferBasic(const fMesh* shape, framework::Animator* boneManager =
 			nullptr, GLuint dataStoreModification = GL_STATIC_DRAW);
 
 	VertexBufferBasic(
-			terrain::TerrainConstructor* constructor,
+			framework::TerrainConstructor* constructor,
 			GLint chunkDensity,
 			GLfloat gapSize,
 			std::vector<GLuint>& indices,

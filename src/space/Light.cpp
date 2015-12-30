@@ -6,12 +6,12 @@
  */
 
 #include <fillwave/space/Light.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Light", FERROR | FFATAL)
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 Light::Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed)
 		: Moveable(position), mFollowed(followed), mIntensity(intensity) {
@@ -55,5 +55,5 @@ void Light::log() {
 			d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
 }
 
-} /* space */
+} /* framework */
 } /* fillwave */

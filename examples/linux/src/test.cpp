@@ -1,9 +1,9 @@
 //============================================================================
-// Name        : example_normals_and_specular_map.cpp
+// Name        : Client.cpp
 // Author      : Filip Wasil
 // Version     :
 // Copyright   : none
-// Description : Fillwave normals and specular map example
+// Description : Fillwave engine example full
 //============================================================================
 
 #include <example.h>
@@ -17,20 +17,25 @@
 #include <CallbacksGLFW/TimeStopCallback.h>
 #include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
+#include <TerrainConstructors/MountainConstructor.h>
 
 /* Physics */
 //#include <bullet>
 
 using namespace fillwave;
+using namespace fillwave::framework;
+
 using namespace std;
 
 Engine* gEngine;
 
-pScenePerspective gScene;
-pSkybox gSkybox;
 pCameraPerspective gCamera;
-pEntity gEntityLight;
+pScenePerspective gScene;
+
 pProgram gProgram;
+map<string, pModel> gModels;
+
+FLOGINIT("Test app", FERROR | FFATAL)
 
 int main(int argc, char* argv[]) {
    ContextGLFW mContext;
@@ -51,76 +56,59 @@ void init() {
    gScene = buildScenePerspective();
 
    /* Camera */
-   gCamera = pCameraPerspective ( new space::CameraPerspective(glm::vec3(0.0,2.0,10.0),
+   gCamera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,5.0,0.0),
                                                     glm::quat(),
                                                     glm::radians(90.0),
                                                     1.0,
                                                     0.1,
                                                     1000.0));
 
-   /* Programs */
-   loader::ProgramLoader loader;
+   /* Shaders */
+   ProgramLoader loader;
    gProgram = loader.getDefault(gEngine);
 
-   /* Texture */
-   pTexture3D textureCubemap = gEngine->storeTexture3D("textures/skybox/hourglass/hourglass_right.jpg",
-                                                      "textures/skybox/hourglass/hourglass_left.jpg",
-                                                      "textures/skybox/hourglass/hourglass_top.jpg",
-                                                      "",
-                                                      "textures/skybox/hourglass/hourglass_front.jpg",
-                                                      "textures/skybox/hourglass/hourglass_back.jpg");
-   /* Skybox */
-   gSkybox = buildSkybox(gEngine,
-                         textureCubemap);
+   /* Models */
 
-   /* Entities */
-   gEntityLight = buildEntity();
 
    /* Lights */
-   pLightSpot l = gEngine->storeLightSpot(glm::vec3 (0.0,1.0,0.0),
-                                          glm::quat(),
-                                          glm::vec4 (1.0,1.0,1.0,0.0),
-                                          gEntityLight);
-   gEntityLight->rotateByX(glm::radians(-90.0));
+   pLight  light = gEngine->storeLightSpot(glm::vec3 (1.0,20.0,6.0),
+                           glm::quat (),
+                           glm::vec4 (1.0,1.0,1.0,0.0));
+   light->rotateTo(glm::vec3(1.0,0.0,0.0), glm::radians(-90.0));
 
    /* Engine callbacks */
-   gEngine->registerCallback(new actions::TimeStopCallback(gEngine));
-   gEngine->registerCallback(new actions::MoveCameraCallback(gEngine, eEventType::eKey, 0.1));
-   gEngine->registerCallback(new actions::MoveCameraCallback(gEngine, eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
+   gEngine->registerCallback(new TimeStopCallback(gEngine));
+   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eKey, 0.1));
+   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
 }
 
 void perform() {
-   /* Set scene */
+   gEngine->configureFPSCounter("fonts/Titania",0.7,0.9,100.0);
    gEngine->setCurrentScene(gScene);
 
-   /* Attach entities and entity to the scene */
-   gScene->attach(gEntityLight);
+   pEffect fog(new Fog());
+
    gScene->setCamera(gCamera);
-   gScene->setSkybox(gSkybox);
 
-   gEntityLight->attach(buildModel(gEngine,
-                                   gProgram,
-                                   "meshes/sphere.obj",
-                                   "255_255_255.color"));
+   Material material;
 
-   pModel wall = buildModel(gEngine,
-                            gProgram,
-                            "meshes/floor.obj",
-                            "textures/wall/stonetiles.png", /* diffuse map */
-                            "textures/wall/stonetiles_n.png", /* normals map */
-                            "textures/wall/stonetiles_s.png");/* specular map */
-
-   gScene->attach(wall);
-   wall->moveInDirection(glm::vec3(0.0,-2.0,0.0));
-   wall->scaleTo(1.0);
-
-   gEntityLight->attachHierarchyCallback(new actions::TimedMoveCallback(gEntityLight, glm::vec3(4.0,0.0,0.0), 50.0));
-   gEntityLight->scaleTo(0.02);
-   gEntityLight->moveBy(glm::vec3(-2.0,4.0,0.0));
+   pMeshTerrain terrain = pMeshTerrain ( new MeshTerrain(gEngine,
+                                    gProgram,
+                                    new MountainConstructor(),
+                                    material,
+                                    "textures/test.png",
+                                    "textures/testNormal.png",
+                                    "",
+                                    20,
+                                    16));
+   terrain->scaleTo(2.0);
+   terrain->addEffect(fog);
+   gScene->attach(terrain);
 }
 
 void showDescription() {
-   pText hint0 = gEngine->storeText("Fillwave example normal mapping", "fonts/Titania", -0.95, 0.80, 100.0);
+   /* Description */
+   pText hint0 = gEngine->storeText("Fillwave example terrain", "fonts/Titania", -0.95, 0.80, 100.0);
    pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", -0.95, -0.40, 70.0);
    pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", -0.95, -0.50, 70.0);
    pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", -0.95, -0.60, 70.0);

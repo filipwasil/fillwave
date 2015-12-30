@@ -11,7 +11,7 @@
 #include <fillwave/core/pipeline/Program.h>
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 
 /*! \struct ProgramObject
  * \brief Data structure containing each Program instance info.
@@ -47,8 +47,8 @@ private:
 	std::vector<puProgramObject> mProgramObjects;
 };
 
-} /* manager */
-typedef std::unique_ptr<manager::ProgramManager> puProgramManager;
+} /* framework */
+typedef std::unique_ptr<framework::ProgramManager> puProgramManager;
 } /* fillwave */
 
 #endif /* PROGRAMMANAGER_H_ */
