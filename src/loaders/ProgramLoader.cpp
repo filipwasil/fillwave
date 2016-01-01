@@ -458,7 +458,6 @@ const std::string vsParticlesGPU =
 const std::string fsParticlesGPU = gGLVersion + gGLFragmentPrecision + //xxx low precision
 		"uniform vec4 uColor;                                  \n"
 				"uniform sampler2D uTextureUnit;                       \n"
-				" + gGLColorOutAssingment + "
 				"uniform float uAlphaCutOff;                           \n"
 		 + gGLColorOutDefinition +
 				"void main() {                                         \n"
