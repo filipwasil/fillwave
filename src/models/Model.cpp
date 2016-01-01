@@ -321,19 +321,19 @@ GLint Model::getActiveAnimations() {
 	return mAnimator->getAnimations();
 }
 
-void Model::draw(Camera& camera) {
+void Model::draw(ICamera& camera) {
 	evaluateAnimations();
 	drawWithEffects(camera);
 }
 
-void Model::drawPBRP(Camera& camera) {
+void Model::drawPBRP(ICamera& camera) {
 	evaluateAnimations();
 	for (auto& it : mChildren) {
 		it->draw(camera);
 	}
 }
 
-void Model::drawDR(Camera& camera) {
+void Model::drawDR(ICamera& camera) {
 	evaluateAnimations();
 	drawWithEffectsDR(camera);
 }

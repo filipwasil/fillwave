@@ -18,7 +18,7 @@ Programmable::Programmable(pProgram program)
 
 }
 
-void Programmable::drawWithEffects(Camera& camera) {
+void Programmable::drawWithEffects(ICamera& camera) {
 
 	core::Program* p = mProgram.get();
 
@@ -40,7 +40,7 @@ void Programmable::drawWithEffects(Camera& camera) {
 	core::Program::disusePrograms();
 }
 
-void Programmable::drawWithEffectsDR(Camera& camera) {
+void Programmable::drawWithEffectsDR(ICamera& camera) {
 
 	core::Program* p = mProgram.get();
 

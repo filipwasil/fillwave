@@ -25,7 +25,7 @@ GradientBall::~GradientBall() {
 
 }
 
-void GradientBall::draw(Camera& camera) {
+void GradientBall::draw(ICamera& camera) {
    mProgram->use();
    mProgram->uniformPush("uModelMatrix", mParentMMC* mMMC);
    mProgram->uniformPush("uSize", mSize);

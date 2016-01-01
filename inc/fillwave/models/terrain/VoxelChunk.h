@@ -42,7 +42,7 @@ public:
 
 	void reloadVoxels(VoxelConstructor* constructor);
 
-	void draw(Camera& camera);
+	void draw(ICamera& camera);
 
 	GLint getSize();
 

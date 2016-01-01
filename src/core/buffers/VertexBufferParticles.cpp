@@ -40,7 +40,7 @@ VertexBufferParticles::VertexBufferParticles(
 	mSize = mTotalElements * sizeof(VertexParticle);
 }
 
-void VertexBufferParticles::log() {
+void VertexBufferParticles::log() const {
 	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
 	for (auto it : mDataVertices) {
 		FLOG_ERROR("Vertex written: %f %f %f %f", d(it.velocity[0]), d(it.velocity[1]),

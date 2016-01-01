@@ -12,6 +12,7 @@
 #include <fillwave/models/Skybox.h>
 #include <fillwave/models/Cursor.h>
 #include <fillwave/models/Terrain.h>
+#include <fillwave/models/base/IDrawable.h>
 #include <map>
 
 namespace fillwave {
@@ -21,40 +22,52 @@ namespace framework {
  * \brief Entity to be a root of Entity tree.
  */
 
-class Scene: public Entity {
+class IScene : public TreePtr<pEntity> {
 public:
-	Scene();
+	IScene();
 
-	virtual ~Scene() = default;
+	virtual ~IScene() = default;
 
-	void setCursor(pCursor cursor);
-	void setSkybox(pSkybox skybox);
+	/* Materials */
 	glm::vec3 getAmbient();
 	void setAmbient(glm::vec3 cursor);
-	pCursor getCursor();
 
+	void updateDependencies();
+
+	/* Cursor */
+	void setCursor(pCursor cursor);
+	pCursor getCursor();
+	void drawCursor();
+	void moveCursor(glm::vec2 position);
+
+	/* Skybox */
+	void setSkybox(pSkybox skybox);
+
+	/* Pickable */
+	void registerPickable(pEntity entity);
+	void pick(glm::ivec4 color);
+	void updateRenderPasses();
+
+	/* Events */
+	void onEvent(EventType& event);
+
+	/* Draw methods - base for renderer */
+	virtual void draw(ICamera& c) = 0;
+	virtual void drawDR(ICamera& c) = 0;
 	virtual void draw() = 0;
 	virtual void drawPBRP() = 0;
 	virtual void drawDR() = 0;
 	virtual void drawAOG() = 0;
 	virtual void drawAOC() = 0;
+	virtual void drawDepth(ICamera& camera);
+	virtual void drawDepthColor(ICamera& camera, glm::vec3& position);
 	virtual void drawDepthInt() = 0;
 	virtual void drawPicking() = 0;
 	virtual void drawSkybox() = 0;
 	virtual void drawOcclusion() = 0;
+	virtual pICamera getCamera() = 0;
 
-	virtual pCamera getCamera() = 0;
-
-	void drawCursor();
-	void drawFromCustomCamera(Camera& c);
-
-	void moveCursor(glm::vec2 position);
-
-	void registerPickable(pEntity entity);
-	void pick(glm::ivec4 color);
-
-	void updateRenderPasses();
-
+	/* Optional */
 	virtual void onShow();
 	virtual void onHide();
 
@@ -71,7 +84,8 @@ private:
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Scene> pScene;
+typedef std::shared_ptr<framework::IScene> pIScene;
+typedef std::unique_ptr<framework::IScene> puIScene;
 } /* fillwave */
 
 #endif /* SCENE_H_ */

@@ -45,7 +45,7 @@ public:
 
 	void update(GLfloat timeElapsedSec);
 
-	void draw(Camera& camera);
+	void draw(ICamera& camera);
 
 private:
 	glm::vec3 mAcceleration;

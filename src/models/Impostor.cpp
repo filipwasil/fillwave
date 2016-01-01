@@ -43,7 +43,7 @@ void Impostor::coreDraw() {
 	core::Texture2D::unbind2DTextures();
 }
 
-void Impostor::draw(Camera&) { //xxx consider deleting this
+void Impostor::draw(ICamera&) { //xxx consider deleting this
 
 }
 

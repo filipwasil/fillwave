@@ -31,7 +31,7 @@ class VertexBufferDebug: public VertexBuffer<VertexDebug> {
 public:
 	VertexBufferDebug(GLfloat scale = 1.0);
 	virtual ~VertexBufferDebug() = default;
-	void log();
+	void log() const;
 };
 
 } /* core */

@@ -11,7 +11,7 @@
 #include <fillwave/core/rendering/Texture3DRenderable.h>
 #include <fillwave/space/CameraPerspective.h>
 #include <fillwave/models/shapes/Sphere.h>
-#include <fillwave/space/Light.h>
+#include <fillwave/space/base/ILight.h>
 
 #include <map>
 

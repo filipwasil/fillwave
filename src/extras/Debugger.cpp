@@ -12,7 +12,7 @@
 
 #include <fillwave/Debugger.h>
 
-#include <fillwave/space/Camera.h>
+#include <fillwave/space/base/ICamera.h>
 
 #include <fillwave/management/LightManager.h>
 
@@ -87,7 +87,7 @@ void Debugger::setMiniwindowSize(GLfloat size) {
 	mMiniwindowSize = size;
 }
 
-void Debugger::renderFromCamera(Camera& c, GLint id) {
+void Debugger::renderFromCamera(ICamera& c, GLint id) {
 	glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
 			mEngine->getScreenSize()[1] * (1.0f - mMiniwindowSize),
 			mEngine->getScreenSize()[0] * mMiniwindowSize,
@@ -95,7 +95,7 @@ void Debugger::renderFromCamera(Camera& c, GLint id) {
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-	mEngine->getCurrentScene()->drawFromCustomCamera(c);
+	mEngine->getCurrentScene()->draw(c);
 
 	glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
@@ -124,7 +124,7 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
 	pLightDirectional light = mEngine->getLightManager()->getLightDirectional(
 			id - mEngine->getLightManager()->getLightsSpotHowMany());
 
-	Camera* cam = light->getShadowCamera().get();
+	ICamera* cam = light->getShadowCamera().get();
 
 	light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
 

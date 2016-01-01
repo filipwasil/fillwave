@@ -27,7 +27,7 @@ CameraPerspective::CameraPerspective(
 		GLfloat nearPlane,
 		GLfloat farPlane)
 		:
-				Camera(position, rotation),
+				ICamera(position, rotation),
 				mProjectionFovy(fovy),
 				mProjectionAspectRatio(aspectRatio),
 				mProjectionNearPlane(nearPlane),

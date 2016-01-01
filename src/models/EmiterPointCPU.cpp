@@ -104,7 +104,7 @@ void EmiterPointCPU::update(GLfloat timeElapsedSec) {
 	core::Program::disusePrograms();
 }
 
-void EmiterPointCPU::draw(Camera& camera) {
+void EmiterPointCPU::draw(ICamera& camera) {
 	mCameraPosition = camera.getTranslation();
 
 	mProgram->use();

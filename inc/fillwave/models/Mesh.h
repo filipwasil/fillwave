@@ -55,17 +55,17 @@ public:
 
 	virtual ~Mesh() = default;
 
-	void draw(Camera& camera);
-	void drawPBRP(Camera& camera);
-	void drawDR(Camera& camera);
-	void drawFast(Camera& camera);
-	void drawPicking(Camera& camera);
-	void drawDepth(Camera& camera);
-	void drawDepthColor(Camera& camera, glm::vec3& position);
-	void drawAOG(Camera& camera);
-	void drawAOC(Camera& camera);
-	void drawOcclusionBox(Camera& camera);
-	void log();
+	void draw(ICamera& camera);
+	void drawPBRP(ICamera& camera);
+	void drawDR(ICamera& camera);
+	void drawFast(ICamera& camera);
+	void drawPicking(ICamera& camera);
+	void drawDepth(ICamera& camera);
+	void drawDepthColor(ICamera& camera, glm::vec3& position);
+	void drawAOG(ICamera& camera);
+	void drawAOC(ICamera& camera);
+	void drawOcclusionBox(ICamera& camera);
+	void log() const;
 
 	virtual void onDraw();
 

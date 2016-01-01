@@ -27,7 +27,7 @@ public:
 
 	virtual ~Terrain() = default;
 
-	void draw(Camera& camera);
+	void draw(ICamera& camera);
 
 	void addChunk(pVoxelChunk chunk);
 
@@ -36,7 +36,7 @@ private:
 	GLfloat mGap;
 	std::vector<pVoxelChunk> mVoxelChunks;
 
-	void drawVoxels(Camera& camera);
+	void drawVoxels(ICamera& camera);
 };
 
 } /* framework */

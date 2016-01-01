@@ -266,7 +266,7 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
 	return result * 0.5f;
 }
 
-void VertexBufferBasic::log() {
+void VertexBufferBasic::log() const {
 	for (auto it : mDataVertices) {
 		FLOG_INFO("Vertex UV: %f %f", static_cast<double>(it.mTextureUV[0]), static_cast<double>(it.mTextureUV[1]));
 		FLOG_INFO("Vertex normal: %f %f %f", static_cast<double>(it.mNormal[0]), static_cast<double>(it.mNormal[1]),

@@ -8,7 +8,7 @@
 #ifndef LIGHTSPOT_H_
 #define LIGHTSPOT_H_
 
-#include <fillwave/space/Light.h>
+#include <fillwave/space/base/ILight.h>
 #include <fillwave/space/CameraPerspective.h>
 #include <fillwave/management/TextureManager.h>
 

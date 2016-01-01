@@ -54,7 +54,7 @@ VertexBufferDebug::VertexBufferDebug(GLfloat) {
 	mSize = mTotalElements * sizeof(VertexDebug);
 }
 
-void VertexBufferDebug::log() {
+void VertexBufferDebug::log() const {
 
 }
 

@@ -34,7 +34,7 @@ public:
 			std::vector<VertexPosition>& vertices,
 			GLuint dataStoreModification = GL_STATIC_DRAW);
 	virtual ~VertexBufferPosition() = default;
-	void log();
+	void log() const;
 };
 
 } /* core */

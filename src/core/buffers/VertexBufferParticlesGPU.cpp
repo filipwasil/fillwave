@@ -19,7 +19,7 @@ VertexBufferParticlesGPU::VertexBufferParticlesGPU(
 
 }
 
-void VertexBufferParticlesGPU::log() {
+void VertexBufferParticlesGPU::log() const {
 
 }
 

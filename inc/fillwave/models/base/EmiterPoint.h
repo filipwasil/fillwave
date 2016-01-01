@@ -43,7 +43,7 @@ public:
 
 	virtual void update(GLfloat timeElapsedSec) = 0;
 
-	virtual void draw(Camera& camera) = 0;
+	virtual void draw(ICamera& camera) = 0;
 
 	void setBlendingFunction(GLenum sourceFactor, GLenum destinationFactor);
 

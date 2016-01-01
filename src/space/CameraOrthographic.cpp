@@ -12,7 +12,7 @@ namespace fillwave {
 namespace framework {
 
 CameraOrthographic::CameraOrthographic()
-		: Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::quat()) {
+		: ICamera(glm::vec3(0.0f, 0.0f, 0.0f), glm::quat()) {
 
 	mCullingBox.mProjectionBottom = 10.0f;
 	mCullingBox.mProjectionFar = 10.0f;
@@ -33,7 +33,7 @@ CameraOrthographic::CameraOrthographic(
 		GLfloat top,
 		GLfloat near,
 		GLfloat far)
-		: Camera(position, rotation) {
+		: ICamera(position, rotation) {
 
 	mCullingBox.mProjectionBottom = bottom;
 	mCullingBox.mProjectionFar = far;

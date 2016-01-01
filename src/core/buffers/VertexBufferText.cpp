@@ -38,7 +38,7 @@ VertexBufferText::VertexBufferText(
 	mSize = mTotalElements * sizeof(VertexText);
 }
 
-void VertexBufferText::log() {
+void VertexBufferText::log() const{
 	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
 	for (auto it : mDataVertices) {
 		for (size_t i = 0; i < mDataVertices.size(); i++) {

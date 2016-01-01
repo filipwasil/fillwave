@@ -5,7 +5,7 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/space/Light.h>
+#include <fillwave/space/base/ILight.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Light", FERROR | FFATAL)

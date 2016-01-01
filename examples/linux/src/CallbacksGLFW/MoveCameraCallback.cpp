@@ -68,7 +68,7 @@ MoveCameraCallback::~MoveCameraCallback() {
 void MoveCameraCallback::perform(EventType& event) {
    if (event.getType() == eEventType::eKey) {
       KeyboardEventData e = KeyboardEvent::getData(event);
-      pCamera camera = mEngine->getCurrentScene()->getCamera();
+      pICamera camera = mEngine->getCurrentScene()->getCamera();
       switch (e.key) {
          case GLFW_KEY_W:
             camera->moveInDirection(glm::vec3(0.0, 0.0, -mSpeed));
@@ -104,7 +104,7 @@ void MoveCameraCallback::perform(EventType& event) {
       static int  a = 0;
 		auto d = [](double value){return static_cast<float>(value);};
       CursorPositionEventData e = CursorPositionEvent::getData(event);
-      pCamera camera = mEngine->getCurrentScene()->getCamera();
+      pICamera camera = mEngine->getCurrentScene()->getCamera();
       glm::ivec2 screenSize = mEngine->getScreenSize();
       double dx = e.xPosition - screenSize[0]/2;
       double dy = screenSize[1]/2 - e.yPosition;

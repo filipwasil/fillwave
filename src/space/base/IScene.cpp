@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/space/Scene.h>
+#include <fillwave/space/base/IScene.h>
 
 #include <algorithm>
 
@@ -14,35 +14,31 @@ FLOGINIT("Scene", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Scene::Scene()
-		:
-				mCursor(pCursor()),
-				mSkybox(pSkybox()),
-				mLastPicked(pEntity()),
-				mAmbientGlobal(glm::vec3(1.0)) {
+IScene::IScene()
+		: mAmbientGlobal(glm::vec3(1.0)) {
 }
 
-void Scene::setSkybox(pSkybox skybox) {
+void IScene::setSkybox(pSkybox skybox) {
 	mSkybox = skybox;
 }
 
-pCursor Scene::getCursor() {
+pCursor IScene::getCursor() {
 	return mCursor;
 }
 
-void Scene::setCursor(pCursor cursor) {
+void IScene::setCursor(pCursor cursor) {
 	mCursor = cursor;
 }
 
-glm::vec3 Scene::getAmbient() {
+glm::vec3 IScene::getAmbient() {
 	return mAmbientGlobal;
 }
 
-void Scene::setAmbient(glm::vec3 ambient) {
+void IScene::setAmbient(glm::vec3 ambient) {
 	mAmbientGlobal = ambient;
 }
 
-void Scene::moveCursor(glm::vec2 position) {
+void IScene::moveCursor(glm::vec2 position) {
 	if (mCursor) {
 		mCursor->move(position);
 	} else {
@@ -50,20 +46,37 @@ void Scene::moveCursor(glm::vec2 position) {
 	}
 }
 
-void Scene::drawFromCustomCamera(Camera& c) {
-	/* Parent-children transformations */
+void IScene::updateDependencies() {
+	for (auto& it : mChildren) {
+		it->updateMatrixTree();
+	}
+}
+
+void IScene::draw(ICamera& c) {
 	for (auto& it : mChildren) {
 		it->draw(c);
 	}
 }
 
-void Scene::drawCursor() {
+void IScene::drawCursor() {
 	if (mCursor) {
 		mCursor->draw();
 	}
 }
 
-void Scene::registerPickable(pEntity entity) {
+void IScene::drawDepth(ICamera& camera) {
+	for (auto& it : mChildren) {
+		it->drawDepth(camera);
+	}
+}
+
+void IScene::drawDepthColor(ICamera& camera, glm::vec3& position) {
+	for (auto& it : mChildren) {
+		it->drawDepthColor(camera, position);
+	}
+}
+
+void IScene::registerPickable(pEntity entity) {
 	GLint rand_r, rand_g, rand_b;
 	glm::vec3 color;
 
@@ -86,7 +99,7 @@ void Scene::registerPickable(pEntity entity) {
 	FLOG_ERROR("Failed to register pickable entity");
 }
 
-void Scene::pick(glm::ivec4 color) {
+void IScene::pick(glm::ivec4 color) {
 	GLint name = color.r + color.g + color.b;
 	if (mPickingTable[name]) {
 		mPickingTable[name]->onPicked();
@@ -97,18 +110,24 @@ void Scene::pick(glm::ivec4 color) {
 	}
 }
 
-void Scene::updateRenderPasses() {
+void IScene::updateRenderPasses() {
 	mRenderPasses.clear();
 	for (auto& it : mChildren) {
 		it->updateRenderpass(mRenderPasses);
 	}
 }
 
-void Scene::onShow() {
+void IScene::onEvent(EventType& event) {
+	for (auto& it : mChildren) {
+		it->handleHierarchyEvent(event);
+	}
+}
+
+void IScene::onShow() {
 
 }
 
-void Scene::onHide() {
+void IScene::onHide() {
 
 }
 

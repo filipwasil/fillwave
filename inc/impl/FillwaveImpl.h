@@ -116,7 +116,7 @@ struct Engine::EngineImpl {
 	framework::ProgramLoader mProgramLoader;
 
 	/* Scene */
-	pScene mScene;
+	pIScene mScene;
 	glm::vec3 mBackgroundColor;
 
 	/* Picking */
@@ -212,17 +212,12 @@ struct Engine::EngineImpl {
 
 	/* Evaluation */
 	void evaluateShadowMaps();
-
 	void evaluateDebugger();
-
 	void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
-
 	void evaluateTime(GLfloat timeExpiredInSeconds);
-
 	void evaluateStartupAnimation(GLfloat time);
 
 	/* Draw types */
-
 	void draw(GLfloat time);
 
 #ifdef FILLWAVE_GLES_3_0
@@ -237,14 +232,19 @@ struct Engine::EngineImpl {
 
 	/* Draw passes */
 
+	/* IRenderer */
 	void drawClear();
-	void drawScene(GLfloat time);
-	void drawSceneStartup();
-	void drawSceneCore();
-	void drawSceneCorePBRP();
-	void drawSceneCoreFR();
-	void drawSceneCoreDR();
 	void drawText();
+	void drawSceneStartup();
+
+	void drawScene(GLfloat time);
+	void drawSceneCore();
+
+	/* Renderer FR */
+	void drawSceneCoreFR();
+
+	/* Renderer DR */
+	void drawSceneCoreDR();
 	void drawGeometryPass();
 	void drawOcclusionPass();
 	void drawDepthlessPass();
@@ -256,6 +256,9 @@ struct Engine::EngineImpl {
 	void drawLightsPointPass(GLint& textureUnit);
 	void drawColorPassBegin();
 	void drawColorPassEnd();
+
+	/* Renderer PBRP */
+	void drawSceneCorePBRP();
 
 	/* Store */
 
@@ -766,7 +769,7 @@ void Engine::EngineImpl::draw(GLfloat time) {
 		drawText();
 		evaluateDebugger();
 		mScene->drawCursor();
-		mScene->updateMatrixTree();
+		mScene->updateDependencies();
 		mScene->updateRenderPasses();
 	}
 }
@@ -802,7 +805,7 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
 		drawText();
 		evaluateDebugger();
 		mScene->drawCursor();
-		mScene->updateMatrixTree();
+		mScene->updateDependencies();
 		mScene->updateRenderPasses();
 	}
 }
@@ -836,7 +839,7 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
 		drawText();
 		evaluateDebugger();
 		mScene->drawCursor();
-		mScene->updateMatrixTree();
+		mScene->updateDependencies();
 		mScene->updateRenderPasses();
 	}
 }
@@ -1111,7 +1114,7 @@ inline void Engine::EngineImpl::drawLightsPointPass(GLint& textureUnit) {
 		glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_DECR_WRAP, GL_KEEP);
 
 		mProgramDRPointLight->use();
-		framework::Camera* camera = mScene->getCamera().get();
+		framework::ICamera* camera = mScene->getCamera().get();
 		mLightManager->updateDeferredBufferPoint(i, mProgramDRPointLight.get(),
 				textureUnit++);
 
@@ -1249,7 +1252,7 @@ inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
 		data.mTimePassed = timeExpiredInSeconds;
 		framework::TimeEvent timeEvent(data);
 		runCallbacks(timeEvent);
-		mScene->handleHierarchyEvent(timeEvent);
+		mScene->onEvent(timeEvent);
 	}
 }
 

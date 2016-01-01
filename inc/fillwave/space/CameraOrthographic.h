@@ -8,7 +8,7 @@
 #ifndef CAMERAOrthographic_H_
 #define CAMERAOrthographic_H_
 
-#include <fillwave/space/Camera.h>
+#include <fillwave/space/base/ICamera.h>
 
 namespace fillwave {
 namespace framework {
@@ -26,7 +26,7 @@ struct CullingBox {
  * \brief Camera with Orthographic projection.
  */
 
-class CameraOrthographic: public Camera {
+class CameraOrthographic: public ICamera {
 public:
 	CameraOrthographic();
 	CameraOrthographic(

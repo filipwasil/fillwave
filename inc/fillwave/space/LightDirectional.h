@@ -9,7 +9,7 @@
 #define LIGHTDIRECTIONAL_H_
 
 #include <fillwave/space/CameraOrthographic.h>
-#include <fillwave/space/Light.h>
+#include <fillwave/space/base/ILight.h>
 #include <fillwave/management/TextureManager.h>
 
 namespace fillwave {

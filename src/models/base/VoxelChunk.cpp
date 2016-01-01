@@ -455,7 +455,7 @@ void VoxelChunk::reloadVoxels(VoxelConstructor* constructor) {
 	reloadVBO();
 }
 
-void VoxelChunk::draw(Camera& camera) {
+void VoxelChunk::draw(ICamera& camera) {
 	mProgram->use();
 
 	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);

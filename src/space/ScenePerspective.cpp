@@ -35,7 +35,7 @@ void ScenePerspective::drawPBRP() {
 	}
 }
 
-void ScenePerspective::draw(CameraPerspective& camera) {
+void ScenePerspective::draw(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->draw(camera);
 	}
@@ -51,7 +51,7 @@ void ScenePerspective::drawDR() {
 	}
 }
 
-void ScenePerspective::drawDR(CameraPerspective& camera) {
+void ScenePerspective::drawDR(ICamera& camera) {
 	if (mSkybox) {
 		mSkybox->drawDR(camera);
 	}
@@ -93,18 +93,18 @@ void ScenePerspective::drawAOC() {
 	}
 }
 
-void ScenePerspective::setCamera(pCameraPerspective camera) {
-	mCamera = camera;
-}
-
-pCamera ScenePerspective::getCamera() {
-	return mCamera;
-}
-
 void ScenePerspective::drawOcclusion() {
 	for (auto& it : mChildren) {
 		it->drawOcclusionBox(*(mCamera.get()));
 	}
+}
+
+void ScenePerspective::setCamera(pCameraPerspective camera) {
+	mCamera = camera;
+}
+
+pICamera ScenePerspective::getCamera() {
+	return mCamera;
 }
 
 } /* models */

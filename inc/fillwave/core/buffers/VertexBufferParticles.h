@@ -34,7 +34,7 @@ public:
 			std::vector<GLfloat>& positions,
 			std::vector<GLfloat>& times);
 	virtual ~VertexBufferParticles() = default;
-	void log();
+	void log() const;
 };
 
 } /* core */

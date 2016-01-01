@@ -9,8 +9,10 @@
 #define ENTITY_H_
 
 #include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/space/Camera.h>
-#include <vector>
+#include <fillwave/space/base/ICamera.h>
+#include <fillwave/models/base/IDrawable.h>
+#include <fillwave/models/base/ITreeNode.h>
+#include <fillwave/models/base/TreePtr.h>
 #include <map>
 
 namespace fillwave {
@@ -31,19 +33,12 @@ namespace framework {
  * \brief Base for all Scene nodes.
  */
 
-class Entity: public Moveable {
+class Entity: public Moveable, public IDrawable, public TreePtr<pEntity> {
 public:
 	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
 			glm::quat(1.0, 0.0, 0.0, 0.0));
 
 	virtual ~Entity();
-
-	/* Attach/Detach */
-	void attach(pEntity child);
-	void detach(pEntity child);
-
-	void onDetached();
-	void onAttached(Entity* parent);
 
 	/* Flags */
 	GLboolean isPSC();
@@ -76,16 +71,16 @@ public:
 	GLboolean isPickable();
 	glm::vec3 getPickableColor();
 
-	/* Draw */
-	virtual void draw(Camera& camera);
-	virtual void drawPBRP(Camera& camera);
-	virtual void drawDR(Camera& camera);
-	virtual void drawDepth(Camera& camera);
-	virtual void drawDepthColor(Camera& camera, glm::vec3& position);
-	virtual void drawAOG(Camera& camera);
-	virtual void drawAOC(Camera& camera);
-	virtual void drawOcclusionBox(Camera& camera);
-	virtual void drawPicking(Camera& camera);
+	/* IDrawable interface */
+	virtual void draw(ICamera& camera);
+	virtual void drawPBRP(ICamera& camera);
+	virtual void drawDR(ICamera& camera);
+	virtual void drawDepth(ICamera& camera);
+	virtual void drawDepthColor(ICamera& camera, glm::vec3& position);
+	virtual void drawAOG(ICamera& camera);
+	virtual void drawAOC(ICamera& camera);
+	virtual void drawOcclusionBox(ICamera& camera);
+	virtual void drawPicking(ICamera& camera);
 
 	/* Pick */
 	virtual void onPicked();
@@ -93,7 +88,7 @@ public:
 	virtual void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
 
 	/* Log */
-	virtual void log();
+	virtual void log() const;
 
 protected:
 	/* MMC - Model Matrix Cache */
@@ -101,7 +96,6 @@ protected:
 
 	GLboolean mChildrenPropagateEvent;
 	GLboolean mParentRefresh;
-	std::vector<pEntity> mChildren;
 	std::vector<Callback*> mCallbacksHierarchy;
 	std::vector<Callback*> mCallbacksPrivate;
 
@@ -113,7 +107,6 @@ private:
 	GLboolean mPickable;
 	glm::vec3 mPickColor;
 
-	void detachChildren();
 	void handleEvent(
 			std::vector<Callback*>& callbacks,
 			EventType& event);

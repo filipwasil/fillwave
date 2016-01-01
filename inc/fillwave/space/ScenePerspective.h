@@ -8,14 +8,10 @@
 #ifndef ScenePerspective_H_
 #define ScenePerspective_H_
 
-#include <fillwave/space/Scene.h>
+#include <fillwave/space/base/IScene.h>
 #include <fillwave/space/CameraPerspective.h>
 
 namespace fillwave {
-namespace framework {
-class ScenePerspective;
-}
-typedef std::shared_ptr<framework::ScenePerspective> pScenePerspective;
 namespace framework {
 
 /*! \class ScenePerspective
@@ -23,18 +19,18 @@ namespace framework {
  *
  */
 
-class ScenePerspective: public Scene {
+class ScenePerspective: public IScene {
 public:
 	ScenePerspective(pCameraPerspective camera = pCameraPerspective());
 	virtual ~ScenePerspective() = default;
 	void setCamera(pCameraPerspective camera);
-	pCamera getCamera();
+	pICamera getCamera();
 
 	void draw();
 	void drawPBRP();
 	void drawDR();
-	void draw(CameraPerspective& camera);
-	void drawDR(CameraPerspective& camera);
+	void draw(ICamera& camera);
+	void drawDR(ICamera& camera);
 	void drawPicking();
 	void drawSkybox();
 	void drawDepthInt();
@@ -47,6 +43,9 @@ private:
 };
 
 } /* framework */
+
+typedef std::shared_ptr<framework::ScenePerspective> pScenePerspective;
+
 static pScenePerspective buildScenePerspective(pCameraPerspective camera =
 		pCameraPerspective()) {
 	return pScenePerspective(new framework::ScenePerspective(camera));

@@ -39,7 +39,7 @@ Skybox::Skybox(Engine* engine, pTexture3D texture)
 	initUniformsCache();
 }
 
-void Skybox::draw(Camera& camera) {
+void Skybox::draw(ICamera& camera) {
 	mProgram->use();
 
 	core::Uniform::push(mULCCameraPosition, camera.getTranslation());
@@ -69,7 +69,7 @@ void Skybox::draw(Camera& camera) {
 	core::Program::disusePrograms();
 }
 
-void Skybox::drawDR(Camera& camera) {
+void Skybox::drawDR(ICamera& camera) {
 	mProgramDR->use();
 
 	core::Uniform::push(mULCCameraPosition, camera.getTranslation());

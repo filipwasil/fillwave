@@ -35,13 +35,13 @@ public:
 
 	virtual ~MeshTerrain() = default;
 
-	void draw(Camera& camera);
+	void draw(ICamera& camera);
 
 private:
 	GLfloat mChunkWidth;
 	GLfloat mJumpStep;
 
-	void distanceCheck(Camera& camera);
+	void distanceCheck(ICamera& camera);
 };
 
 } /* framework */

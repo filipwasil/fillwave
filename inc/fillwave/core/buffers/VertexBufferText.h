@@ -33,7 +33,7 @@ public:
 			std::vector<GLfloat> textureCoords,
 			GLuint dataStoreModification = GL_DYNAMIC_DRAW);
 	virtual ~VertexBufferText() = default;
-	void log();
+	void log() const;
 };
 
 } /* core */

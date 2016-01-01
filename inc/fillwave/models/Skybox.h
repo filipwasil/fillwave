@@ -28,8 +28,8 @@ public:
 
 	virtual ~Skybox() = default;
 
-	void draw(Camera& camera);
-	void drawDR(Camera& camera);
+	void draw(ICamera& camera);
+	void drawDR(ICamera& camera);
 
 protected:
 	pProgram mProgram;

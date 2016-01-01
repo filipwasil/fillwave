@@ -18,25 +18,25 @@ namespace framework {
  * \brief Stores camera view parameters.
  */
 
-class Camera: public Moveable {
+class ICamera: public Moveable {
 public:
-	Camera();
+	ICamera();
 
-	Camera(glm::vec3, glm::quat rotation);
+	ICamera(glm::vec3, glm::quat rotation);
 
-	virtual ~Camera() = default;
+	virtual ~ICamera() = default;
 
 	void update();
 	void updateView();
-	virtual void updateProjection() = 0;
 
 	glm::mat4 getEye();
-
-	virtual GLfloat getProjectionNearPlane() = 0;
-	virtual GLfloat getProjectionFarPlane() = 0;
 	glm::mat4 getProjection();
 	glm::mat4 getViewProjection();
-	void log();
+
+	virtual void updateProjection() = 0;
+	virtual GLfloat getProjectionNearPlane() = 0;
+	virtual GLfloat getProjectionFarPlane() = 0;
+	virtual void log() const;
 
 protected:
 	glm::mat4 mCameraMatrix;
@@ -46,8 +46,8 @@ protected:
 	GLboolean mRefreshProjection;
 };
 } /* framework */
-typedef std::shared_ptr<framework::Camera> pCamera;
-typedef std::weak_ptr<framework::Camera> pwCamera;
+typedef std::shared_ptr<framework::ICamera> pICamera;
+typedef std::weak_ptr<framework::ICamera> pwICamera;
 } /* fillwave */
 
 #endif /* CAMERA_H_ */

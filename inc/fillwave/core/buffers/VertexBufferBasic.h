@@ -66,7 +66,7 @@ public:
 
 	glm::vec3 getOcclusionBoxSize();
 
-	void log();
+	void log() const;
 };
 
 } /* core */

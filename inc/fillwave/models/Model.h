@@ -64,9 +64,9 @@ public:
 
 	void reload();
 
-	void draw(Camera& camera);
-	void drawPBRP(Camera& camera);
-	void drawDR(Camera& camera);
+	void draw(ICamera& camera);
+	void drawPBRP(ICamera& camera);
+	void drawDR(ICamera& camera);
 
 	void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
 

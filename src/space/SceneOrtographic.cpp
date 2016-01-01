@@ -45,13 +45,13 @@ void SceneOrthographic::drawDR() {
 	}
 }
 
-void SceneOrthographic::draw(CameraOrthographic& camera) {
+void SceneOrthographic::draw(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->draw(camera);
 	}
 }
 
-void SceneOrthographic::drawDR(CameraOrthographic& camera) {
+void SceneOrthographic::drawDR(ICamera& camera) {
 	if (mSkybox) {
 		mSkybox->drawDR(camera);
 	}
@@ -102,7 +102,7 @@ void SceneOrthographic::setCamera(pCameraOrthographic camera) {
 	mCamera = camera;
 }
 
-pCamera SceneOrthographic::getCamera() {
+pICamera SceneOrthographic::getCamera() {
 	return mCamera;
 }
 

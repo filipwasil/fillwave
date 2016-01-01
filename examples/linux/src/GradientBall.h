@@ -30,7 +30,7 @@ public:
                 GLfloat size = 1.0,
                 pTexture texture = pTexture());
    virtual ~GradientBall();
-   void draw(Camera& camera);
+   void draw(ICamera& camera);
    };
 
 } /* framework */

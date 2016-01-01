@@ -69,7 +69,7 @@ Mesh::Mesh(
 	initUniformsCache();
 }
 
-void Mesh::drawPBRP(Camera& camera) {
+void Mesh::drawPBRP(ICamera& camera) {
 #ifdef FILLWAVE_GLES_3_0
 #else
 	if (mAnimator || mOcclusionQuery.getResultAsync(1))
@@ -88,7 +88,7 @@ void Mesh::drawPBRP(Camera& camera) {
 	}
 }
 
-void Mesh::draw(Camera& camera) {
+void Mesh::draw(ICamera& camera) {
 #ifdef FILLWAVE_GLES_3_0
 #else
 	if (mAnimator || mOcclusionQuery.getResultAsync(1))
@@ -111,7 +111,7 @@ void Mesh::draw(Camera& camera) {
 	}
 }
 
-void Mesh::drawDR(Camera& camera) {
+void Mesh::drawDR(ICamera& camera) {
 #ifdef FILLWAVE_GLES_3_0
 #else
 	if (mAnimator || mOcclusionQuery.getResultAsync(1))
@@ -135,7 +135,7 @@ void Mesh::drawDR(Camera& camera) {
 	}
 }
 
-void Mesh::drawFast(Camera&) {
+void Mesh::drawFast(ICamera&) {
 	mProgram->use();
 	coreDraw();
 }
@@ -178,7 +178,7 @@ inline void Mesh::bindTextures() {
 	}
 }
 
-void Mesh::drawPicking(Camera& camera) {
+void Mesh::drawPicking(ICamera& camera) {
 	if (isPickable()) {
 		mProgram->use();
 
@@ -202,7 +202,7 @@ void Mesh::drawPicking(Camera& camera) {
 	}
 }
 
-void Mesh::drawOcclusionBox(Camera& camera) {
+void Mesh::drawOcclusionBox(ICamera& camera) {
 
 	mProgramOQ->use();
 
@@ -220,7 +220,7 @@ void Mesh::drawOcclusionBox(Camera& camera) {
 	core::Program::disusePrograms();
 }
 
-void Mesh::drawDepth(Camera& camera) {
+void Mesh::drawDepth(ICamera& camera) {
 	if (isPSC()) {
 		mProgramShadow->use();
 
@@ -237,7 +237,7 @@ void Mesh::drawDepth(Camera& camera) {
 	}
 }
 
-void Mesh::drawDepthColor(Camera& camera, glm::vec3& /*xxx double check position*/) {
+void Mesh::drawDepthColor(ICamera& camera, glm::vec3& /*xxx double check position*/) {
 	if (isPSC()) {
 		mProgramShadowColor->use();
 
@@ -255,7 +255,7 @@ void Mesh::drawDepthColor(Camera& camera, glm::vec3& /*xxx double check position
 	}
 }
 
-void Mesh::drawAOG(Camera& camera) {
+void Mesh::drawAOG(ICamera& camera) {
 	mProgramAOGeometry->use();
 
 	core::Uniform::push(mULCMVPAmbientOcclusion,
@@ -270,7 +270,7 @@ void Mesh::drawAOG(Camera& camera) {
 	mVAO->unbind();
 }
 
-void Mesh::drawAOC(Camera& camera) {
+void Mesh::drawAOC(ICamera& camera) {
 	mProgramAOColor->use();
 
 //      core::Uniform::push(mULCTextureMap, FILLWAVE_DIFFUSE_ATTACHMENT);
@@ -386,7 +386,7 @@ inline void Mesh::initVBO() {
 	mOcclusionMatrix = glm::scale(glm::mat4(1.0f), mVBO->getOcclusionBoxSize());
 }
 
-void Mesh::log() {
+void Mesh::log() const {
 	mVBO->log();
 }
 

@@ -92,12 +92,12 @@ MeshTerrain::MeshTerrain(
 	}
 }
 
-void MeshTerrain::draw(Camera& camera) {
+void MeshTerrain::draw(ICamera& camera) {
 	distanceCheck(camera);
 	drawWithEffects(camera);
 }
 
-inline void MeshTerrain::distanceCheck(Camera& camera) {
+inline void MeshTerrain::distanceCheck(ICamera& camera) {
 	/* check if there are any children too far away from the camera */
 	glm::vec3 distanceToCamera;
 	GLfloat direction = 0.0f;

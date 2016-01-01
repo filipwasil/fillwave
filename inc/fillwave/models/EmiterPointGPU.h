@@ -44,7 +44,7 @@ public:
 
 	virtual ~EmiterPointGPU() = default;
 
-	void draw(Camera& camera);
+	void draw(ICamera& camera);
 
 	void update(GLfloat timeElapsedSec);
 

@@ -112,8 +112,8 @@ public:
 	const fScene* getModelFromFile(std::string path); /* xxx remove */
 
 	/* Scene */
-	void setCurrentScene(pScene scene);
-	pScene getCurrentScene() const;
+	void setCurrentScene(pIScene scene);
+	pIScene getCurrentScene() const;
 
 	/* Time */
 	GLuint getFramesPassed();

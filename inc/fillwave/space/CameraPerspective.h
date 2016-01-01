@@ -8,7 +8,7 @@
 #ifndef CAMERAPERSPECTIVE_H_
 #define CAMERAPERSPECTIVE_H_
 
-#include <fillwave/space/Camera.h>
+#include <fillwave/space/base/ICamera.h>
 
 namespace fillwave {
 namespace framework {
@@ -17,7 +17,7 @@ namespace framework {
  * \brief Camera with perspective projection.
  */
 
-class CameraPerspective: public Camera {
+class CameraPerspective: public ICamera {
 private:
 	GLfloat mProjectionFovy, mProjectionAspectRatio, mProjectionNearPlane,
 			mProjectionFarPlane;

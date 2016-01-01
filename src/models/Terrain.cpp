@@ -17,11 +17,11 @@ Terrain::Terrain(GLint radius, GLfloat gap)
 		: mRadius(radius), mGap(gap) {
 }
 
-void Terrain::draw(Camera& camera) {
+void Terrain::draw(ICamera& camera) {
 	drawVoxels(camera);
 }
 
-void Terrain::drawVoxels(Camera& camera) {
+void Terrain::drawVoxels(ICamera& camera) {
 	/* check if there are any children too far away from the camera */
 	glm::vec3 distanceToCamera;
 	GLfloat direction = 0.0f;

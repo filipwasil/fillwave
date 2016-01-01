@@ -165,7 +165,7 @@ public:
 		return mDataVertices.data();
 	}
 
-	virtual void log() = 0;
+	virtual void log() const = 0;
 
 protected:
 	std::vector<T> mDataVertices;

@@ -26,7 +26,7 @@ VertexBufferPosition::VertexBufferPosition(
 
 }
 
-void VertexBufferPosition::log() {
+void VertexBufferPosition::log() const {
 	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
 	for (auto it : mDataVertices) {
 		FLOG_INFO("Vertex written: %f %f %f %f", d(it.mPosition[0]), d(it.mPosition[1]),

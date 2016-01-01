@@ -8,7 +8,7 @@
 #ifndef SCENEOrthographic_H_
 #define SCENEOrthographic_H_
 
-#include <fillwave/space/Scene.h>
+#include <fillwave/space/base/IScene.h>
 #include <fillwave/space/CameraOrthographic.h>
 
 namespace fillwave {
@@ -23,21 +23,20 @@ namespace framework {
  *
  */
 
-class SceneOrthographic: public Scene {
+class SceneOrthographic: public IScene {
 public:
 	SceneOrthographic(pCameraOrthographic camera = pCameraOrthographic());
 
 	virtual ~SceneOrthographic() = default;
 
 	void setCamera(pCameraOrthographic camera);
-
-	pCamera getCamera();
+	pICamera getCamera();
 
 	void draw();
 	void drawPBRP();
 	void drawDR();
-	void draw(CameraOrthographic& camera);
-	void drawDR(CameraOrthographic& camera);
+	void draw(ICamera& camera);
+	void drawDR(ICamera& camera);
 	void drawPicking();
 	void drawSkybox();
 	void drawDepthInt();

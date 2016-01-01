@@ -27,8 +27,8 @@ public:
 	/* Effects */
 	void addEffect(pEffect effect);
 	void removeEffect(pEffect effect);
-	void drawWithEffects(Camera& camera);
-	void drawWithEffectsDR(Camera& camera);
+	void drawWithEffects(ICamera& camera);
+	void drawWithEffectsDR(ICamera& camera);
 
 protected:
 	pProgram mProgram;

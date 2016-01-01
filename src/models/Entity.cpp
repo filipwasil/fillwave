@@ -32,77 +32,55 @@ Entity::~Entity() {
 	FLOG_DEBUG("Entity destroyed");
 }
 
-void Entity::attach(pEntity child) {
-	mChildren.push_back(child);
-	child->onAttached(this);
-}
-
-void Entity::detach(pEntity child) {
-	auto _compare_function =
-			[child](const pEntity e) -> bool {bool found = (e == child); if (found) child->onDetached(); return found;};
-	auto _begin = mChildren.begin();
-	auto _end = mChildren.end();
-	auto it = std::remove_if(_begin, _end, _compare_function);
-	mChildren.erase(it, _end);
-}
-
-void Entity::onAttached(Entity*) {
-	FLOG_DEBUG("Attached enity");
-}
-
-void Entity::onDetached() {
-	FLOG_DEBUG("Detached enity");
-}
-
-void Entity::draw(Camera& camera) {
+void Entity::draw(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->draw(camera);
 	}
 }
 
-void Entity::drawPBRP(Camera& camera) {
+void Entity::drawPBRP(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawPBRP(camera);
 	}
 }
 
-void Entity::drawDR(Camera& camera) {
+void Entity::drawDR(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawDR(camera);
 	}
 }
 
-void Entity::drawPicking(Camera& camera) {
+void Entity::drawPicking(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawPicking(camera);
 	}
 }
 
-void Entity::drawDepth(Camera& camera) {
+void Entity::drawDepth(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawDepth(camera);
 	}
 }
 
-void Entity::drawDepthColor(Camera& camera, glm::vec3& position) {
+void Entity::drawDepthColor(ICamera& camera, glm::vec3& position) {
 	for (auto& it : mChildren) {
 		it->drawDepthColor(camera, position);
 	}
 }
 
-void Entity::drawAOG(Camera& camera) {
+void Entity::drawAOG(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawAOG(camera);
 	}
 }
 
-void Entity::drawAOC(Camera& camera) {
+void Entity::drawAOC(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawAOC(camera);
 	}
 }
 
-void Entity::drawOcclusionBox(Camera& camera) {
+void Entity::drawOcclusionBox(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawOcclusionBox(camera);
 	}
@@ -230,16 +208,8 @@ glm::vec3 Entity::getPickableColor() {
 	return mPickColor;
 }
 
-void Entity::log() {
+void Entity::log() const {
 
-}
-
-/* Private inline */
-
-inline void Entity::detachChildren() {
-	Entity* _this = this;
-	std::for_each(mChildren.begin(), mChildren.end(),
-			[_this](pEntity e) {_this->detach(e);});
 }
 
 inline void Entity::handleEvent( /* xxx refactor */

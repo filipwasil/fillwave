@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/space/Camera.h>
+#include <fillwave/space/base/ICamera.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Camera", FERROR | FFATAL)
@@ -13,7 +13,7 @@ FLOGINIT("Camera", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Camera::Camera(glm::vec3 position, glm::quat rotation)
+ICamera::ICamera(glm::vec3 position, glm::quat rotation)
 		:
 				Moveable(position, rotation),
 				mRefreshView(GL_TRUE),
@@ -21,7 +21,7 @@ Camera::Camera(glm::vec3 position, glm::quat rotation)
 	updateView();
 }
 
-Camera::Camera()
+ICamera::ICamera()
 		:
 				Moveable(glm::vec3(0.0, 0.0, 1.0)),
 				mRefreshView(GL_TRUE),
@@ -29,7 +29,7 @@ Camera::Camera()
 	updateView();
 }
 
-inline void Camera::updateView() {
+inline void ICamera::updateView() {
 	updateMatrixCache();
 
 	mCameraMatrix =
@@ -43,7 +43,7 @@ inline void Camera::updateView() {
 	mRefresh = GL_FALSE;
 }
 
-void Camera::update() {
+void ICamera::update() {
 	if (mRefreshProjection) {
 		FLOG_DEBUG("Camera projection update");
 		updateProjection();
@@ -54,23 +54,23 @@ void Camera::update() {
 	}
 }
 
-void Camera::log() {
-	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
+void ICamera::log() const {
+	auto d = [] (GLfloat f) { return static_cast<double>(f); };
 	FLOG_INFO("Position: %f %f %f", d(mTranslation[0]), d(mTranslation[1]),
 			d(mTranslation[2]));
 	FLOG_INFO("Camera rotation: %f %f %f %f ", d(mRotation[0]), d(mRotation[1]),
 			d(mRotation[2]), d(mRotation[4]));
 }
 
-glm::mat4 Camera::getEye() {
+glm::mat4 ICamera::getEye() {
 	return mCameraMatrix;
 }
 
-glm::mat4 Camera::getProjection() {
+glm::mat4 ICamera::getProjection() {
 	return mProjectionMatrix;
 }
 
-glm::mat4 Camera::getViewProjection() {
+glm::mat4 ICamera::getViewProjection() {
 	return mProjectionMatrix * mCameraMatrix;
 }
 

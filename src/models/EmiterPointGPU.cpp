@@ -95,7 +95,7 @@ EmiterPointGPU::EmiterPointGPU(
 	initUniformsCache();
 }
 
-void EmiterPointGPU::draw(Camera& camera) {
+void EmiterPointGPU::draw(ICamera& camera) {
 	/* Save camera position for optimization purposes. */
 	mCameraPosition = camera.getTranslation();
 

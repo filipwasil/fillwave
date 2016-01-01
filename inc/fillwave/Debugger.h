@@ -50,7 +50,7 @@ public:
 	void setState(eDebuggerState state);
 	eDebuggerState getState();
 
-	void renderFromCamera(Camera& c, GLint id = 0);
+	void renderFromCamera(ICamera& c, GLint id = 0);
 	void renderDepthPerspective(GLint id = 0);
 	void renderDepthOrthographic(GLint id = 0);
 	void renderPickingMap();
