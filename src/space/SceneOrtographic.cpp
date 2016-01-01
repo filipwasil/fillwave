@@ -62,7 +62,7 @@ void SceneOrthographic::drawDR(CameraOrthographic& camera) {
 
 void SceneOrthographic::drawPicking() {
 	CameraOrthographic c = *(mCamera.get());
-	for (auto it : mChildren) {
+	for (auto& it : mChildren) {
 		it->drawPicking(c);
 	}
 }

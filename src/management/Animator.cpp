@@ -54,13 +54,13 @@ void AssimpNode::update(
 		mBone->setGlobalOffsetMatrix(m * mBone->getOffsetMatrix());
 	}
 
-	for (auto it : mChildren) {
+	for (auto& it : mChildren) {
 		it->update(timeElapsed_s, m, boneManager, activeAnimation);
 	}
 }
 
 AssimpNode::~AssimpNode() {
-	for (auto it : mChildren) {
+	for (auto& it : mChildren) {
 		delete it;
 	}
 }

@@ -85,11 +85,11 @@ public:
 	virtual void drawAOG(Camera& camera);
 	virtual void drawAOC(Camera& camera);
 	virtual void drawOcclusionBox(Camera& camera);
+	virtual void drawPicking(Camera& camera);
 
 	/* Pick */
 	virtual void onPicked();
 	virtual void onUnpicked();
-	virtual void drawPicking(Camera& camera);
 	virtual void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
 
 	/* Log */

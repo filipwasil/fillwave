@@ -52,7 +52,7 @@ void Scene::moveCursor(glm::vec2 position) {
 
 void Scene::drawFromCustomCamera(Camera& c) {
 	/* Parent-children transformations */
-	for (auto it : mChildren) {
+	for (auto& it : mChildren) {
 		it->draw(c);
 	}
 }

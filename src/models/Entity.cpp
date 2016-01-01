@@ -139,7 +139,7 @@ void Entity::updateMatrixTree() {
 
 void Entity::handleHierarchyEvent(EventType& event) {
 	handleEvent(mCallbacksHierarchy, event);
-	for (auto it : mChildren) {
+	for (auto& it : mChildren) {
 		it->handleHierarchyEvent(event);
 	}
 }
