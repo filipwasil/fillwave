@@ -66,7 +66,9 @@ public:
 	void setActiveAnimation(GLint animationID);
 	GLint getActiveAnimations();
 
-	void log();
+   void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
+
+	void log() const;
 
 protected:
 	Animator* mAnimator;

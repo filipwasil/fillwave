@@ -327,7 +327,12 @@ void Model::draw(ICamera& camera) {
 }
 
 void Model::drawPBRP(ICamera& camera) {
-	evaluateAnimations();
+	FLOG_ERROR("DEBUG1");
+	if (mAnimator) {
+		/* xxx for PBRP shadows must be updated elsewhere */
+		mAnimator->updateBonesBuffer();
+		mAnimator->updateBonesUniform(mUniformLocationCacheBones);
+	}
 	for (auto& it : mChildren) {
 		it->drawPBRP(camera);
 	}
@@ -338,8 +343,19 @@ void Model::drawDR(ICamera& camera) {
 	drawWithEffectsDR(camera);
 }
 
-void Model::log() {
+void Model::log() const {
 
+}
+
+void Model::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses) {
+	GLuint handle = mProgram.get()->getHandle();
+	if (renderpasses.find(handle) != renderpasses.end()) {
+		renderpasses[handle].push_back(this);
+	} else {
+		std::vector<Entity*> vector; /* xxx some base size maybe ? */
+		vector.push_back(this);
+		renderpasses[handle] = vector;
+	}
 }
 
 inline void Model::initUniformsCache() {
@@ -383,6 +399,5 @@ inline void Model::evaluateAnimations() {
 		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
 	}
 }
-
 } /* framework */
 } /* fillwave */

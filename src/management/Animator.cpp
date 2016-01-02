@@ -194,7 +194,6 @@ void Animator::updateBonesBuffer() {
 void Animator::updateBonesUniform(GLint uniformLocationBones) {
 	core::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(),
 	FILLWAVE_MAX_BONES);
-	core::Program::disusePrograms();
 }
 
 void Animator::log() {

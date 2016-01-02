@@ -1,9 +1,9 @@
 //============================================================================
-// Name        : Client.cpp
+// Name        : example_animation.cpp
 // Author      : Filip Wasil
 // Version     :
 // Copyright   : none
-// Description : Fillwave engine example full
+// Description : Fillwave engine example animation
 //============================================================================
 
 #include <example.h>
@@ -17,7 +17,6 @@
 #include <CallbacksGLFW/TimeStopCallback.h>
 #include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
-#include <TerrainConstructors/MountainConstructor.h>
 
 /* Physics */
 //#include <bullet>
@@ -31,10 +30,7 @@ Engine* gEngine;
 pCameraPerspective gCamera;
 pScenePerspective gScene;
 
-pProgram gProgram;
-map<string, pModel> gModels;
-
-FLOGINIT("Test app", FERROR | FFATAL)
+map<string, pProgram> gPrograms;
 
 int main(int argc, char* argv[]) {
    ContextGLFW mContext;
@@ -51,66 +47,47 @@ int main(int argc, char* argv[]) {
 }
 
 void init() {
-   /* Scene */
+   /* Scenes */
    gScene = buildScenePerspective();
 
-   /* Camera */
-   gCamera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,5.0,0.0),
+   /* Cameras */
+   gCamera = pCameraPerspective (new CameraPerspective(glm::vec3(0.0,0.0,4.0),
                                                     glm::quat(),
                                                     glm::radians(90.0),
                                                     1.0,
                                                     0.1,
                                                     1000.0));
-
-   /* Shaders */
+   /* Programs */
    ProgramLoader loader;
-   gProgram = loader.getDefault(gEngine);
-
-   /* Models */
-
-
-   /* Lights */
-   pLight  light = gEngine->storeLightSpot(glm::vec3 (1.0,20.0,6.0),
-                           glm::quat (),
-                           glm::vec4 (1.0,1.0,1.0,0.0));
-   light->rotateTo(glm::vec3(1.0,0.0,0.0), glm::radians(-90.0));
+   gPrograms.insert(pair<string,pProgram>("default", loader.getDefault(gEngine)));
+   gPrograms.insert(pair<string,pProgram>("defaultAnimation", loader.getDefaultBones(gEngine)));
 
    /* Engine callbacks */
    gEngine->registerCallback(new TimeStopCallback(gEngine));
-   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eKey, 0.1));
-   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
+   gEngine->registerCallback(new MoveCameraCallback(gEngine, eEventType::eKey, 0.1));
+   gEngine->registerCallback(new MoveCameraCallback(gEngine, eEventType::eCursorPosition, 0.05, ContextGLFW::mWindow));
 }
 
 void perform() {
-   gEngine->configureFPSCounter("fonts/Titania",0.7,0.9,100.0);
    gEngine->setCurrentScene(gScene);
-
-   pEffect fog(new Fog());
 
    gScene->setCamera(gCamera);
 
-   Material material;
+   pModel beast = pModel (new Model(gEngine, gPrograms["defaultAnimation"], "animations/beast/beast.dae"));
+   gScene->attach(beast);
 
-   pMeshTerrain terrain = pMeshTerrain ( new MeshTerrain(gEngine,
-                                    gProgram,
-                                    new MountainConstructor(),
-                                    material,
-                                    "textures/test.png",
-                                    "textures/testNormal.png",
-                                    "",
-                                    20,
-                                    16));
-   terrain->scaleTo(2.0);
-   terrain->addEffect(fog);
-   gScene->attach(terrain);
+   gEngine->registerCallback(new AnimationKeyboardCallback(beast, eEventType::eKey));
+   gEngine->setFocus(eEventType::eKey, beast);
+
+   beast->scaleTo(0.5);
 }
 
 void showDescription() {
-   /* Description */
-   pText hint0 = gEngine->storeText("Fillwave example terrain", "fonts/Titania", -0.95, 0.80, 100.0);
-   pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", -0.95, -0.40, 70.0);
-   pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", -0.95, -0.50, 70.0);
-   pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", -0.95, -0.60, 70.0);
+   pText hint0 = gEngine->storeText("Fillwave example animation", "fonts/Titania", -0.95, 0.80, 100.0);
    pText hint1 = gEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", -0.95, -0.70, 70.0);
+   pText hint2 = gEngine->storeText("Use '0' for start Animating", "fonts/Titania", -0.95, -0.60, 70.0);
+   pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", -0.95, -0.50, 70.0);
+   pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", -0.95, -0.40, 70.0);
+   pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", -0.95, -0.30, 70.0);
    pText hint6 = gEngine->storeText("Use 'D' for toggle debugger On/Off", "fonts/Titania", -0.95, -0.80, 70.0);
 }
