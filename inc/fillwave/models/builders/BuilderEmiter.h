@@ -8,7 +8,7 @@
 #ifndef INC_FILLWAVE_PARTICLES_BUILDEREMITER_H_
 #define INC_FILLWAVE_PARTICLES_BUILDEREMITER_H_
 
-#include <fillwave/models/base/EmiterPoint.h>
+#include <fillwave/models/base/IEmiterPoint.h>
 
 namespace fillwave {
 class Engine;
@@ -39,8 +39,8 @@ public:
 	BuilderEmiter& setBlendingDestination(GLenum destinationColor);
 	BuilderEmiter& setDepthTesting(GLboolean depthTesting);
 	BuilderEmiter& setAlphaCutOff(GLfloat cutOffLevel);
-	pEmiterPoint buildEmiterGPU();
-	pEmiterPoint buildEmiterCPU();
+	pIEmiterPoint buildEmiterGPU();
+	pIEmiterPoint buildEmiterCPU();
 
 private:
 	Engine* mEngine;

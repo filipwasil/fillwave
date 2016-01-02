@@ -18,10 +18,20 @@ Terrain::Terrain(GLint radius, GLfloat gap)
 }
 
 void Terrain::draw(ICamera& camera) {
-	drawVoxels(camera);
+	distanceCheck(camera);
+	for (auto& it : mVoxelChunks) {
+		it->draw(camera);
+	}
 }
 
-void Terrain::drawVoxels(ICamera& camera) {
+void Terrain::drawPBRP(ICamera& camera) {
+	distanceCheck(camera);
+	for (auto& it : mVoxelChunks) {
+		it->drawPBRP(camera);
+	}
+}
+
+inline void Terrain::distanceCheck(ICamera& camera) {
 	/* check if there are any children too far away from the camera */
 	glm::vec3 distanceToCamera;
 	GLfloat direction = 0.0f;
@@ -39,7 +49,7 @@ void Terrain::drawVoxels(ICamera& camera) {
 		} else {
 			direction = -1.0;
 		}
-		for (auto it : mVoxelChunks) {
+		for (auto& it : mVoxelChunks) {
 			it->moveBy(glm::vec3(direction * singleChunkWidth, 0.0, 0.0)); //OK
 		}
 	}
@@ -50,13 +60,9 @@ void Terrain::drawVoxels(ICamera& camera) {
 		} else {
 			direction = -1.0;
 		}
-		for (auto it : mVoxelChunks) {
+		for (auto& it : mVoxelChunks) {
 			it->moveBy(glm::vec3(0.0, 0.0, direction * singleChunkWidth)); //OK
 		}
-	}
-
-	for (auto it : mVoxelChunks) {
-		it->draw(camera);
 	}
 }
 

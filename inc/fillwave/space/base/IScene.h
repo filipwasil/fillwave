@@ -33,6 +33,7 @@ public:
 	void setAmbient(glm::vec3 cursor);
 
 	void updateDependencies();
+	void updateRenderPasses();
 
 	/* Cursor */
 	void setCursor(pCursor cursor);
@@ -46,7 +47,6 @@ public:
 	/* Pickable */
 	void registerPickable(pEntity entity);
 	void pick(glm::ivec4 color);
-	void updateRenderPasses();
 
 	/* Events */
 	void onEvent(EventType& event);

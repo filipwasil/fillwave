@@ -8,8 +8,8 @@
 #ifndef EmiterPointStep_H_
 #define EmiterPointStep_H_
 
-#include <fillwave/models/base/EmiterPoint.h>
 #include <fillwave/models/animations/Key.h>
+#include <fillwave/models/base/IEmiterPoint.h>
 
 namespace fillwave {
 class Engine;
@@ -19,7 +19,7 @@ namespace framework {
  * \brief Not used.
  */
 
-class EmiterPointStep: public EmiterPoint {
+class EmiterPointStep: public IEmiterPoint {
 public:
 	EmiterPointStep(
 			Engine* engine,

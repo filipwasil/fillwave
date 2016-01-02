@@ -97,6 +97,14 @@ void MeshTerrain::draw(ICamera& camera) {
 	drawWithEffects(camera);
 }
 
+void MeshTerrain::drawPBRP(ICamera& camera) {
+	distanceCheck(camera);
+	/* Draw */
+	for (auto& it : mChildren) {
+		it->drawPBRP(camera);
+	}
+}
+
 inline void MeshTerrain::distanceCheck(ICamera& camera) {
 	/* check if there are any children too far away from the camera */
 	glm::vec3 distanceToCamera;

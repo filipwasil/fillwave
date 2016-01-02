@@ -1,19 +1,19 @@
 /*
- * EmiterPoint.cpp
+ * IEmiterPoint.cpp
  *
  *  Created on: 16 Jun 2014
  *      Author: Filip Wasil
  */
 
-#include <fillwave/models/base/EmiterPoint.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/models/base/IEmiterPoint.h>
 
 FLOGINIT("Emiter", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {
 
-EmiterPoint::EmiterPoint(
+IEmiterPoint::IEmiterPoint(
 		Engine* engine,
 		GLuint howMany,
 		GLfloat size,
@@ -44,11 +44,22 @@ EmiterPoint::EmiterPoint(
 #endif
 }
 
-void EmiterPoint::setBlendingFunction(
+void IEmiterPoint::setBlendingFunction(
 		GLenum sourceFactor,
 		GLenum destinationFactor) {
 	mBlending.mSource = sourceFactor;
 	mBlending.mDestination = destinationFactor;
+}
+
+void IEmiterPoint::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses) {
+	GLuint handle = mProgram.get()->getHandle();
+	if (renderpasses.find(handle) != renderpasses.end()) {
+		renderpasses[handle].push_back(this);
+	} else {
+		std::vector<Entity*> vector; /* xxx some base size maybe ? */
+		vector.push_back(this);
+		renderpasses[handle] = vector;
+	}
 }
 
 } /* framework */

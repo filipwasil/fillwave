@@ -27,16 +27,17 @@ public:
 
 	virtual ~Terrain() = default;
 
-	void draw(ICamera& camera);
-
 	void addChunk(pVoxelChunk chunk);
+
+	void draw(ICamera& camera);
+	void drawPBRP(ICamera& camera);
+
+	void distanceCheck(ICamera& camera);
 
 private:
 	GLint mRadius;
 	GLfloat mGap;
 	std::vector<pVoxelChunk> mVoxelChunks;
-
-	void drawVoxels(ICamera& camera);
 };
 
 } /* framework */

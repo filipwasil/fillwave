@@ -34,7 +34,7 @@ EmiterPointCPU::EmiterPointCPU(
 		GLboolean depthTesting,
 		GLfloat alphaCutOffLevel)
 		:
-				EmiterPoint(engine, howMany, startSize, lifetime, texture, color,
+				IEmiterPoint(engine, howMany, startSize, lifetime, texture, color,
 						blendingSource, blendingDestination, depthTesting,
 						alphaCutOffLevel),
 				mAcceleration(acceleration),
@@ -122,6 +122,22 @@ void EmiterPointCPU::draw(ICamera& camera) {
 	coreDraw();
 
 	core::Program::disusePrograms();
+}
+
+void EmiterPointCPU::drawPBRP(ICamera& camera) {
+	mCameraPosition = camera.getTranslation();
+
+	core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+	core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+	core::Uniform::push(mULCCameraPosition, mCameraPosition);
+	core::Uniform::push(mULCPointSize, mStartSize);
+	core::Uniform::push(mULCColor, mColor);
+	core::Uniform::push(mULCAcceleration, mAcceleration);
+	core::Uniform::push(mULCLifeTime, mLifetime);
+	core::Uniform::push(mULCAlphaCutOff, mAlphaCutOff);
+//   core::Uniform::push(mULCSourcePosition, mTranslation);
+
+	coreDraw();
 }
 
 inline void EmiterPointCPU::coreDraw() {

@@ -32,8 +32,8 @@ BuilderEmiter::BuilderEmiter(Engine* engine)
 				mAlphaCutOff(0.0) {
 }
 
-pEmiterPoint BuilderEmiter::buildEmiterGPU() {
-	return pEmiterPoint(
+pIEmiterPoint BuilderEmiter::buildEmiterGPU() {
+	return pIEmiterPoint(
 			new EmiterPointGPU(mEngine, mEmitingSourceRate, mHowMany,
 					mColor, mAcceleration, mStartVelocity, mRobustnessVelocity,
 					mStartPosition, mRobustnessPosition, mStartSize, mLifetime,
@@ -41,8 +41,8 @@ pEmiterPoint BuilderEmiter::buildEmiterGPU() {
 					mAlphaCutOff));
 }
 
-pEmiterPoint BuilderEmiter::buildEmiterCPU() {
-	return pEmiterPoint(
+pIEmiterPoint BuilderEmiter::buildEmiterCPU() {
+	return pIEmiterPoint(
 			new EmiterPointCPU(mEngine, mEmitingSourceRate, mHowMany, mColor,
 					mAcceleration, mStartVelocity, mRobustnessVelocity,
 					mStartPosition, mRobustnessPosition, mStartSize, mLifetime,

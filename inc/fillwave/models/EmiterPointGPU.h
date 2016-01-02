@@ -8,9 +8,9 @@
 #ifndef EMITERPOINTGPU_H_
 #define EMITERPOINTGPU_H_
 
-#include <fillwave/models/base/EmiterPoint.h>
 #include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
 #include <fillwave/core/pipeline/Fence.h>
+#include <fillwave/models/base/IEmiterPoint.h>
 
 namespace fillwave {
 class Engine;
@@ -22,7 +22,7 @@ namespace framework {
  * and acceleration defined by the user.
  */
 
-class EmiterPointGPU: public EmiterPoint {
+class EmiterPointGPU: public IEmiterPoint {
 public:
 	EmiterPointGPU(
 			Engine* engine,
@@ -44,9 +44,10 @@ public:
 
 	virtual ~EmiterPointGPU() = default;
 
-	void draw(ICamera& camera);
-
 	void update(GLfloat timeElapsedSec);
+
+	void draw(ICamera& camera);
+	void drawPBRP(ICamera& camera);
 
 private:
 	static const GLint mPingPongBuffers = 2;

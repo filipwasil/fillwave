@@ -37,7 +37,7 @@ EmiterPointGPU::EmiterPointGPU(
 		GLboolean depthTesting,
 		GLfloat alphaCutOffLevel)
 		:
-				EmiterPoint(engine, howMany, startSize, lifetime, texture, color,
+				IEmiterPoint(engine, howMany, startSize, lifetime, texture, color,
 						blendingSource, blendingDestination, depthTesting,
 						alphaCutOffLevel),
 				mSrcIndex(0),
@@ -160,8 +160,11 @@ void EmiterPointGPU::draw(ICamera& camera) {
 	core::Uniform::push(mULCAlphaCutOff, mAlphaCutOff);
 
 	coreDraw();
+}
 
-	core::Program::disusePrograms();
+void EmiterPointGPU::drawPBRP(ICamera& camera) {
+	/* for now PBRP is not supported for GPU particle emiter */
+	draw(camera);
 }
 
 inline void EmiterPointGPU::coreDraw() {

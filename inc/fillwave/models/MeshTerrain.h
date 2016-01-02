@@ -36,6 +36,7 @@ public:
 	virtual ~MeshTerrain() = default;
 
 	void draw(ICamera& camera);
+	void drawPBRP(ICamera& camera);
 
 private:
 	GLfloat mChunkWidth;

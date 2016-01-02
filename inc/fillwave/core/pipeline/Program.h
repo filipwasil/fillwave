@@ -42,6 +42,7 @@ public:
 	void detach(pShader shader);
 
 	void use() const;
+
 	static void useProgram(GLuint handle);
 	static void disusePrograms();
 

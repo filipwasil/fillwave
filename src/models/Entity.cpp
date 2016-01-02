@@ -155,8 +155,10 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	mRefreshExternal = GL_TRUE;
 }
 
-void Entity::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& /*renderpasses*/) {
-	(void)this;
+void Entity::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpass) {
+	for (auto& it : mChildren) {
+		it->updateRenderpass(renderpass);
+	}
 }
 
 void Entity::attachHierarchyCallback(Callback* callback) {

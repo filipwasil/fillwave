@@ -8,9 +8,9 @@
 #ifndef EMITER_POINT_CPU_H_
 #define EMITER_POINT_CPU_H_
 
-#include <fillwave/models/base/EmiterPoint.h>
 #include <fillwave/core/buffers/VertexBufferFloat.h>
 #include <fillwave/core/operations/Query.h>
+#include <fillwave/models/base/IEmiterPoint.h>
 
 namespace fillwave {
 namespace framework {
@@ -21,7 +21,7 @@ namespace framework {
  * and acceleration defined by the user.
  */
 
-class EmiterPointCPU: public EmiterPoint {
+class EmiterPointCPU: public IEmiterPoint {
 public:
 	EmiterPointCPU(
 			Engine* engine,
@@ -46,6 +46,7 @@ public:
 	void update(GLfloat timeElapsedSec);
 
 	void draw(ICamera& camera);
+	void drawPBRP(ICamera& camera);
 
 private:
 	glm::vec3 mAcceleration;

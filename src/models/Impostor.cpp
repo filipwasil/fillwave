@@ -43,9 +43,5 @@ void Impostor::coreDraw() {
 	core::Texture2D::unbind2DTextures();
 }
 
-void Impostor::draw(ICamera&) { //xxx consider deleting this
-
-}
-
 } /* framework */
 } /* fillwave */

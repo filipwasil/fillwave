@@ -25,9 +25,9 @@ namespace framework {
  * \brief Drawable Entity which emits particles.
  */
 
-class EmiterPoint: public Entity, public Reloadable {
+class IEmiterPoint: public Entity, public Reloadable {
 public:
-	EmiterPoint(
+	IEmiterPoint(
 			Engine* engine,
 			GLuint howMany,
 			GLfloat size,
@@ -39,13 +39,13 @@ public:
 			GLboolean depthTesting,
 			GLfloat alphaCutOff);
 
-	virtual ~EmiterPoint() = default;
+	virtual ~IEmiterPoint() = default;
+
+	void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
+	void setBlendingFunction(GLenum sourceFactor, GLenum destinationFactor);
 
 	virtual void update(GLfloat timeElapsedSec) = 0;
-
 	virtual void draw(ICamera& camera) = 0;
-
-	void setBlendingFunction(GLenum sourceFactor, GLenum destinationFactor);
 
 protected:
 	GLfloat mStartSize;
@@ -61,7 +61,7 @@ protected:
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::EmiterPoint> pEmiterPoint;
+typedef std::shared_ptr<framework::IEmiterPoint> pIEmiterPoint;
 } /* fillwave */
 
 #endif /* EMITERPOINT_H_ */

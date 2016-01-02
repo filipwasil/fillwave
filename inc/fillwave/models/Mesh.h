@@ -55,6 +55,8 @@ public:
 
 	virtual ~Mesh() = default;
 
+   void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpass);
+
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 	void drawDR(ICamera& camera);

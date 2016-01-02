@@ -9,11 +9,14 @@
 #define INC_FILLWAVE_MODELS_BASE_IDRAWABLE_H_
 
 #include <memory>
+#include <map>
+#include <vector>
 
 namespace fillwave {
 namespace framework {
 
 class ICamera;
+class Entity;
 
 class IDrawable {
 public:
@@ -28,6 +31,7 @@ public:
 	virtual void drawAOC(ICamera& camera) = 0;
 	virtual void drawOcclusionBox(ICamera& camera) = 0;
 	virtual void drawPicking(ICamera& camera) = 0;
+	virtual void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses) = 0;
 };
 
 } /* namespace framework */

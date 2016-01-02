@@ -13,14 +13,7 @@
 #include <fillwave/Assets.h>
 
 namespace fillwave {
-namespace framework {
-class Model;
-}
-}
-
-namespace fillwave {
 class Engine;
-typedef std::shared_ptr<framework::Model> pModel;
 namespace framework {
 
 class TimedBoneUpdateCallback;
@@ -67,8 +60,6 @@ public:
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 	void drawDR(ICamera& camera);
-
-	void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
 
 	/* Animation */
 	void performAnimation(GLfloat timeElapsed_us);
@@ -131,6 +122,8 @@ private:
 };
 
 } /* framework */
+
+typedef std::shared_ptr<framework::Model> pModel;
 
 static pModel buildModel(
 		Engine* engine,

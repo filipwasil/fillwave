@@ -29,7 +29,7 @@ void SceneOrthographic::drawPBRP() {
 	for (auto& program : mRenderPasses) {
 		core::Program::useProgram(program.first);
 		for (auto& node : program.second) {
-			node->draw(c );
+			node->draw(c);
 		}
 		core::Program::disusePrograms();
 	}

@@ -24,7 +24,6 @@
 
 using namespace fillwave;
 using namespace fillwave::framework;
-
 using namespace std;
 
 Engine* gEngine;

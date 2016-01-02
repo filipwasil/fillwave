@@ -45,7 +45,6 @@ public:
 			GLenum blendingSource = GL_SRC_ALPHA,
 			GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
 	virtual ~Impostor() = default;
-	virtual void draw(ICamera& camera);
 };
 
 } /* framework */

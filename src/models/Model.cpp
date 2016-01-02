@@ -329,7 +329,7 @@ void Model::draw(ICamera& camera) {
 void Model::drawPBRP(ICamera& camera) {
 	evaluateAnimations();
 	for (auto& it : mChildren) {
-		it->draw(camera);
+		it->drawPBRP(camera);
 	}
 }
 
@@ -381,17 +381,6 @@ inline void Model::evaluateAnimations() {
 		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadow);
 		mProgramShadowColor->use();
 		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
-	}
-}
-
-void Model::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses) {
-	GLuint handle = mProgram.get()->getHandle();
-	if (renderpasses.find(handle) != renderpasses.end()) {
-		renderpasses[handle].push_back(this);
-	} else {
-		std::vector<Entity*> vector; /* xxx some base size maybe ? */
-		vector.push_back(this);
-		renderpasses[handle] = vector;
 	}
 }
 

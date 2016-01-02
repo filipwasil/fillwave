@@ -197,7 +197,7 @@ struct Engine::EngineImpl {
 	GLboolean mIsDR; /* Deferred rendering */
 	GLboolean mIsAO; /* Ambient occlusion */
 	GLboolean mIsOQ; /* Occlusion query */
-	GLboolean mIsPBRP; /* Program based render passes */
+	GLboolean mIsPBRP; /* Program based render passes - effects are not handled */
 
 	/* Callbacks */
 	void runCallbacks();
@@ -377,7 +377,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 				mIsDR(GL_FALSE),
 				mIsAO(GL_FALSE),
 				mIsOQ(GL_TRUE),
-				mIsPBRP(GL_FALSE) {
+				mIsPBRP(GL_TRUE) {
 #endif
 //	init();
 }
@@ -770,7 +770,9 @@ void Engine::EngineImpl::draw(GLfloat time) {
 		evaluateDebugger();
 		mScene->drawCursor();
 		mScene->updateDependencies();
-		mScene->updateRenderPasses();
+		if (mIsPBRP) {
+			mScene->updateRenderPasses();
+		}
 	}
 }
 
@@ -806,7 +808,9 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
 		evaluateDebugger();
 		mScene->drawCursor();
 		mScene->updateDependencies();
-		mScene->updateRenderPasses();
+		if (mIsPBRP) {
+			mScene->updateRenderPasses();
+		}
 	}
 }
 
@@ -840,7 +844,9 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
 		evaluateDebugger();
 		mScene->drawCursor();
 		mScene->updateDependencies();
-		mScene->updateRenderPasses();
+		if (mIsPBRP) {
+			mScene->updateRenderPasses();
+		}
 	}
 }
 #endif

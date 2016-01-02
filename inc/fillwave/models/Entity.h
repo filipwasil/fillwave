@@ -13,7 +13,6 @@
 #include <fillwave/models/base/IDrawable.h>
 #include <fillwave/models/base/ITreeNode.h>
 #include <fillwave/models/base/TreePtr.h>
-#include <map>
 
 namespace fillwave {
 
@@ -71,6 +70,9 @@ public:
 	GLboolean isPickable();
 	glm::vec3 getPickableColor();
 
+	virtual void onPicked();
+	virtual void onUnpicked();
+
 	/* IDrawable interface */
 	virtual void draw(ICamera& camera);
 	virtual void drawPBRP(ICamera& camera);
@@ -82,10 +84,8 @@ public:
 	virtual void drawOcclusionBox(ICamera& camera);
 	virtual void drawPicking(ICamera& camera);
 
-	/* Pick */
-	virtual void onPicked();
-	virtual void onUnpicked();
-	virtual void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
+	/* Render passes */
+	virtual void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpass);
 
 	/* Log */
 	virtual void log() const;
