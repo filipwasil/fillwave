@@ -377,7 +377,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 				mIsDR(GL_FALSE),
 				mIsAO(GL_FALSE),
 				mIsOQ(GL_TRUE),
-				mIsPBRP(GL_TRUE) {
+				mIsPBRP(GL_FALSE) {
 #endif
 //	init();
 }

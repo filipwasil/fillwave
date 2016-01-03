@@ -41,7 +41,7 @@ public:
 
 	virtual ~IEmiterPoint() = default;
 
-	void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
+	void updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpasses);
 	void setBlendingFunction(GLenum sourceFactor, GLenum destinationFactor);
 
 	virtual void update(GLfloat timeElapsedSec) = 0;

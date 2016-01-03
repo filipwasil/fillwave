@@ -44,7 +44,7 @@ public:
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 
-   void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
+   void updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpasses);
 
 	GLint getSize();
 

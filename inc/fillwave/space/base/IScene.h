@@ -13,7 +13,7 @@
 #include <fillwave/models/Cursor.h>
 #include <fillwave/models/Terrain.h>
 #include <fillwave/models/base/IDrawable.h>
-#include <map>
+#include <unordered_map>
 
 namespace fillwave {
 namespace framework {
@@ -74,10 +74,10 @@ public:
 protected:
 	pCursor mCursor;
 	pSkybox mSkybox;
-	std::map<GLint, pEntity> mPickingTable;
+	std::unordered_map<GLint, pEntity> mPickingTable;
 	pEntity mLastPicked;
 	glm::vec3 mAmbientGlobal;
-	std::map<GLuint, std::vector<Entity*> > mRenderPasses;
+	std::unordered_map<GLuint, std::vector<Entity*> > mRenderPasses;
 
 private:
 	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;

@@ -347,7 +347,7 @@ void Model::log() const {
 
 }
 
-void Model::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses) {
+void Model::updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpasses) {
 	GLuint handle = mProgram.get()->getHandle();
 	if (renderpasses.find(handle) != renderpasses.end()) {
 		renderpasses[handle].push_back(this);

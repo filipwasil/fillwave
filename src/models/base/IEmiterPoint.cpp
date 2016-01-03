@@ -51,7 +51,7 @@ void IEmiterPoint::setBlendingFunction(
 	mBlending.mDestination = destinationFactor;
 }
 
-void IEmiterPoint::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses) {
+void IEmiterPoint::updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpasses) {
 	GLuint handle = mProgram.get()->getHandle();
 	if (renderpasses.find(handle) != renderpasses.end()) {
 		renderpasses[handle].push_back(this);

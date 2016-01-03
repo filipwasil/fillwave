@@ -85,7 +85,7 @@ public:
 	virtual void drawPicking(ICamera& camera);
 
 	/* Render passes */
-	virtual void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpass);
+	virtual void updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpass);
 
 	/* Log */
 	virtual void log() const;
