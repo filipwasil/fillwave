@@ -7,23 +7,24 @@
 
 #include "../../android/src/PickableModel.h"
 
-#include <fillwave/extras/Log.h>
-#include <fillwave/effects/BoostColor.h>
+#include <fillwave/Log.h>
+#include <fillwave/models/effects/BoostColor.h>
 
 FLOGINIT("name", FERROR | FFATAL)
 
 using namespace fillwave;
+using namespace fillwave::framework;
 
 PickableModel::PickableModel(std::string name,
                              pText text,
                              Engine* engine,
                              pProgram program,
-                             const std::string& shapePath):models::Model(engine,
+                             const std::string& shapePath):Model(engine,
                                                                            program,
                                                                            shapePath),
                                                                      mText(text),
                                                                      mName(name){
-   mPickedEffect = pEffect(new effects::BoostColor(2.0f));
+   mPickedEffect = pEffect(new BoostColor(2.0f));
 }
 
 PickableModel::~PickableModel() {

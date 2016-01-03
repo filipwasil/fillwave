@@ -23,7 +23,7 @@
 
 #include "../../../android/inc/ContextOpenSL/native_audio.h"
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("NaiveAudio", FERROR | FFATAL)
 

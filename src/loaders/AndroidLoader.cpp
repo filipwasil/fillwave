@@ -15,7 +15,7 @@
 FLOGINIT("Android loader", FERROR | FFATAL)
 
 namespace fillwave {
-	namespace loader {
+	namespace framework {
 
 		ANativeActivity* gActivity;
 
@@ -180,7 +180,7 @@ namespace fillwave {
 			}
 		}
 
-	} /* loader */
+	} /* framework */
 } /* fillwave */
 
 #endif /* __ANDROID__ */

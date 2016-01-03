@@ -20,7 +20,7 @@
 #include <pthread.h>
 #include <android/sensor.h>
 #include <fillwave/Fillwave.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fillwave/Profiler.h>
 
 #include <assert.h>
@@ -201,10 +201,10 @@ static int32_t engine_handle_input(struct android_app* app,
               if (engine->fillwave != NULL) {
                  GLfloat x = AMotionEvent_getX(event,0);
                  GLfloat y = AMotionEvent_getY(event,0);
-                 actions::TouchEventData data;
+                 framework::TouchEventData data;
                  data.xPos = x;
                  data.yPos = y;
-                 actions::TouchEvent event(data);
+                 framework::TouchEvent event(data);
                  engine->fillwave->insertResizeScreen(engine->eglInfo.width,
                                                       engine->eglInfo.height);
                  engine->fillwave->insertInput(event);

@@ -30,13 +30,13 @@
 #include "../../../android/inc/TerrainConstructors/PerlinConstructor.h"
 
 #include <fillwave/Math.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <glm/gtc/noise.hpp>
 
 FLOGINIT("PerlinConstructor", FERROR | FFATAL)
 
 namespace fillwave {
-namespace terrain {
+namespace framework {
 
 PerlinConstructor::PerlinConstructor() {
 //	noise::module::Perlin mPerlin;
@@ -61,5 +61,5 @@ inline GLfloat PerlinConstructor::calculateHeight(GLfloat x, GLfloat z) {
    return glm::perlin(glm::vec2(x, z));
 }
 
-} /* terrain */
+} /* framework */
 } /* fillwave */

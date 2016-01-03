@@ -36,10 +36,10 @@
 #include "../../../android/inc/CallbacksEGL/ColorPickingCallback.h"
 
 #include <fillwave/Fillwave.h>
-#include <fillwave/actions/Callback.h>
+#include <fillwave/actions/callbacks/Callback.h>
 
 namespace fillwave {
-namespace actions {
+namespace framework {
 
 class ColorPickingCallback: public Callback {
 public:
@@ -48,7 +48,7 @@ public:
    void perform (EventType& event);
 };
 
-} /* actions */
+} /* framework */
 } /* fillwave */
 
 #endif /* COLORPICKINGCALLBACKMODEL_H_ */

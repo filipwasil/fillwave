@@ -6,17 +6,18 @@
  */
 
 #include <fillwave/Fillwave.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fillwave/models/shapes/Quad.h>
 
 using namespace fillwave;
+using namespace framework;
 
-void perform(fillwave::Engine* engine) {
+void perform(Engine* engine) {
     /* Scene */
     pScenePerspective scene = buildScenePerspective();
 
     /* Camera */
-    pCameraPerspective camera = pCameraPerspective ( new space::CameraPerspective (glm::vec3(0.0,2.0,18.0),
+    pCameraPerspective camera = pCameraPerspective ( new CameraPerspective (glm::vec3(0.0,2.0,18.0),
                                glm::quat(),
                                glm::radians(90.0),
                                1.0,
@@ -24,19 +25,19 @@ void perform(fillwave::Engine* engine) {
                                1000.0));
     const GLuint SPHERES = 5;
     pModel gSpheres[SPHERES];
-    actions::LoopCallback* loop[SPHERES];
+    LoopCallback* loop[SPHERES];
 
     scene->setCamera(camera);
     engine->setCurrentScene(scene);
 
     /* Program */
-    loader::ProgramLoader loader;
+    framework::ProgramLoader loader;
     pProgram program = loader.getDefault(engine);
 //    pProgram program = loader.getDefaultDeferredGeometry(engine);
     pProgram aprogram = loader.getDefaultBones(engine);
 
-    pEffect e = pEffect (new effects::TextureOnly());
-    pEffect f = pEffect (new effects::Fog());
+    pEffect e = pEffect (new TextureOnly());
+    pEffect f = pEffect (new Fog());
 
     pModel cactus1 = buildModel(engine, aprogram, "beast.dae");
     pModel cactus2 = buildModel(engine, aprogram, "beast.dae");
@@ -104,10 +105,10 @@ void perform(fillwave::Engine* engine) {
    wall->moveBy(glm::vec3(0.0,-3.0,0.0));
    scene->attach(wall);
 
-   actions::SequenceCallback* seq = new actions::SequenceCallback();
-   seq->push_back(new actions::TimedMoveCallback(entity1, glm::vec3(16.0,0.0,0.0), 10.0));
-   seq->push_back(new actions::TimedMoveCallback(entity1, glm::vec3(-16.0,0.0,0.0), 10.0));
-   actions::LoopCallback* loo = new actions::LoopCallback(seq, FILLWAVE_ENDLESS);
+   SequenceCallback* seq = new SequenceCallback();
+   seq->push_back(new TimedMoveCallback(entity1, glm::vec3(16.0,0.0,0.0), 10.0));
+   seq->push_back(new TimedMoveCallback(entity1, glm::vec3(-16.0,0.0,0.0), 10.0));
+   LoopCallback* loo = new LoopCallback(seq, FILLWAVE_ENDLESS);
    entity1->attachHierarchyCallback(loo);
 
    entity1->scaleTo(0.02);

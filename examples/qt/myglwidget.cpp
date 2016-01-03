@@ -30,7 +30,7 @@
 #include "myglwidget.hpp"
 
 using namespace fillwave;
-using namespace fillwave::space;
+using namespace fillwave::framework;
 using namespace std;
 
 MyGLWidget::MyGLWidget(int argc, char* argv[], QWidget* parent) :

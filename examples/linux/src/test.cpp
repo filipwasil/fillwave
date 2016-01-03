@@ -1,9 +1,9 @@
 //============================================================================
-// Name        : example_terrain_voxel.cpp
+// Name        : Client.cpp
 // Author      : Filip Wasil
 // Version     :
 // Copyright   : none
-// Description : Fillwave engine example terrain voxel
+// Description : Fillwave engine example full
 //============================================================================
 
 #include <example.h>
@@ -16,8 +16,8 @@
 #include <CallbacksGLFW/AnimationKeyboardCallback.h>
 #include <CallbacksGLFW/TimeStopCallback.h>
 #include <ContextGLFW.h>
-#include <TerrainConstructors/MountainConstructor.h>
 #include <fillwave/Fillwave.h>
+#include <TerrainConstructors/MountainConstructor.h>
 
 /* Physics */
 //#include <bullet>
@@ -28,14 +28,11 @@ using namespace std;
 
 Engine* gEngine;
 
-pScenePerspective gScene;
 pCameraPerspective gCamera;
+pScenePerspective gScene;
 
-pEntity gEntityLight;
-pTerrain gTerrain;
-pSkybox gSkybox;
-
-map<string, pProgram> gPrograms;
+pProgram gProgram;
+map<string, pModel> gModels;
 
 FLOGINIT("Test app", FERROR | FFATAL)
 
@@ -58,66 +55,62 @@ void init() {
    gScene = buildScenePerspective();
 
    /* Camera */
-   gCamera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,1.0,7.0),
+   gCamera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,5.0,0.0),
                                                     glm::quat(),
                                                     glm::radians(90.0),
                                                     1.0,
                                                     0.1,
                                                     1000.0));
 
-   /* Entities */
-   gEntityLight = buildEntity();
-
-   /* Programs */
+   /* Shaders */
    ProgramLoader loader;
-   pProgram program = loader.getDefault(gEngine);
+   gProgram = loader.getDefault(gEngine);
 
    /* Models */
-   gTerrain = buildTerrainVoxel(gEngine,
-                                program,
-                                "textures/test.png",
-                                new MountainConstructor(),
-                                3);
 
-   /* Texture */
-   pTexture3D textureCubemap = gEngine->storeTexture3D("textures/skybox/devilpunch/devpun_right.jpg",
-                                                      "textures/skybox/devilpunch/devpun_left.jpg",
-                                                      "textures/skybox/devilpunch/devpun_top.jpg",
-                                                      "",
-                                                      "textures/skybox/devilpunch/devpun_front.jpg",
-                                                      "textures/skybox/devilpunch/devpun_back.jpg");
 
    /* Lights */
-   gEngine->storeLightSpot(glm::vec3 (0.0,10.0,1.0),
-                           glm::quat(),
-                           glm::vec4 (1.0,0.0,0.0,1.0),
-                           gEntityLight);
-
-   gEntityLight->moveBy(glm::vec3 (0.0,2.0,4.0));
-
-   /* Models */
-   gSkybox = buildSkybox(gEngine,
-                         textureCubemap);
+   pLight  light = gEngine->storeLightSpot(glm::vec3 (1.0,20.0,6.0),
+                           glm::quat (),
+                           glm::vec4 (1.0,1.0,1.0,0.0));
+   light->rotateTo(glm::vec3(1.0,0.0,0.0), glm::radians(-90.0));
 
    /* Engine callbacks */
    gEngine->registerCallback(new TimeStopCallback(gEngine));
    gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eKey, 0.1));
-   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eScroll,0.1));
+   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
 }
 
 void perform() {
+   gEngine->configureFPSCounter("fonts/Titania",0.7,0.9,100.0);
    gEngine->setCurrentScene(gScene);
-   gScene->setSkybox(gSkybox);
-   gScene->attach(gTerrain);
+
+   pEffect fog(new Fog());
+
    gScene->setCamera(gCamera);
+
+   Material material;
+
+   pMeshTerrain terrain = pMeshTerrain ( new MeshTerrain(gEngine,
+                                    gProgram,
+                                    new MountainConstructor(),
+                                    material,
+                                    "textures/test.png",
+                                    "textures/testNormal.png",
+                                    "",
+                                    20,
+                                    16));
+   terrain->scaleTo(2.0);
+   terrain->addEffect(fog);
+   gScene->attach(terrain);
 }
 
 void showDescription() {
-   pText hint0 = gEngine->storeText("Fillwave example terrain voxel", "fonts/Titania", -0.95, 0.80, 100.0);
+   /* Description */
+   pText hint0 = gEngine->storeText("Fillwave example terrain", "fonts/Titania", -0.95, 0.80, 100.0);
    pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", -0.95, -0.40, 70.0);
    pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", -0.95, -0.50, 70.0);
    pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", -0.95, -0.60, 70.0);
    pText hint1 = gEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", -0.95, -0.70, 70.0);
    pText hint6 = gEngine->storeText("Use 'D' for toggle debugger On/Off", "fonts/Titania", -0.95, -0.80, 70.0);
-
 }

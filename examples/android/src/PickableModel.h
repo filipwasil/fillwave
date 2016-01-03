@@ -11,8 +11,9 @@
 #include <fillwave/Fillwave.h>
 
 using namespace fillwave;
+using namespace fillwave::framework;
 
-class PickableModel: public models::Model{
+class PickableModel: public Model{
 private:
    pText mText;
    pEffect mPickedEffect;
