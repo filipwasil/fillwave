@@ -39,10 +39,12 @@ public:
 	void setType(GLint type);
 
 	void reloadVBO();
-
 	void reloadVoxels(VoxelConstructor* constructor);
 
 	void draw(ICamera& camera);
+	void drawPBRP(ICamera& camera);
+
+   void updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses);
 
 	GLint getSize();
 

@@ -25,6 +25,7 @@ void ScenePerspective::draw() {
 }
 
 void ScenePerspective::drawPBRP() {
+	mCamera->update();
 	CameraPerspective c = *(mCamera.get());
 	for (auto& program : mRenderPasses) {
 		core::Program::useProgram(program.first);

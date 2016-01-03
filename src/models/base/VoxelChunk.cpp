@@ -465,7 +465,6 @@ void VoxelChunk::draw(ICamera& camera) {
 			camera.getViewProjection());
 
 	mLightManager->pushLightUniforms(mProgram.get());
-
 	mLightManager->bindShadowmaps();
 
 	mVAO->bind();
@@ -475,6 +474,24 @@ void VoxelChunk::draw(ICamera& camera) {
 	mVAO->unbind();
 
 	core::Program::disusePrograms();
+}
+
+void VoxelChunk::drawPBRP(ICamera& camera) {
+	FLOG_ERROR("DEBUG");
+	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
+	core::Uniform::push(mUniformLocationCacheCameraPosition,
+			camera.getTranslation());
+	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,
+			camera.getViewProjection());
+
+	mLightManager->pushLightUniforms(mProgram.get());
+	mLightManager->bindShadowmaps();
+
+	mVAO->bind();
+
+	coreDraw();
+
+	mVAO->unbind();
 }
 
 GLint VoxelChunk::getSize() {
@@ -530,6 +547,17 @@ inline void VoxelChunk::initVAO() {
 inline void VoxelChunk::initVBO() {
 	mVBO->getAttributes(mProgram->getHandle());
 	mVBO->attributesBind(mProgram);
+}
+
+void VoxelChunk::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses) {
+	GLuint handle = mProgram.get()->getHandle();
+	if (renderpasses.find(handle) != renderpasses.end()) {
+		renderpasses[handle].push_back(this);
+	} else {
+		std::vector<Entity*> vector; /* xxx some base size maybe ? */
+		vector.push_back(this);
+		renderpasses[handle] = vector;
+	}
 }
 
 } /* framework */

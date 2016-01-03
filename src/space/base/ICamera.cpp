@@ -8,7 +8,7 @@
 #include <fillwave/space/base/ICamera.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Camera", FERROR | FFATAL)
+FLOGINIT("Camera", FERROR | FFATAL | FINFO)
 
 namespace fillwave {
 namespace framework {
@@ -58,8 +58,8 @@ void ICamera::log() const {
 	auto d = [] (GLfloat f) { return static_cast<double>(f); };
 	FLOG_INFO("Position: %f %f %f", d(mTranslation[0]), d(mTranslation[1]),
 			d(mTranslation[2]));
-	FLOG_INFO("Camera rotation: %f %f %f %f ", d(mRotation[0]), d(mRotation[1]),
-			d(mRotation[2]), d(mRotation[4]));
+//	FLOG_INFO("Camera rotation: %f %f %f %f ", d(mRotation[0]), d(mRotation[1]),
+//			d(mRotation[2]), d(mRotation[4]));
 }
 
 glm::mat4 ICamera::getEye() {

@@ -13,8 +13,8 @@ FLOGINIT("Terrain", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Terrain::Terrain(GLint radius, GLfloat gap)
-		: mRadius(radius), mGap(gap) {
+Terrain::Terrain(pProgram program, GLint radius, GLfloat gap)
+		: mProgram(program), mRadius(radius), mGap(gap) {
 }
 
 void Terrain::draw(ICamera& camera) {
@@ -68,6 +68,17 @@ inline void Terrain::distanceCheck(ICamera& camera) {
 
 void Terrain::addChunk(pVoxelChunk chunk) {
 	mVoxelChunks.push_back(chunk);
+}
+
+void Terrain::updateRenderpass(std::map<GLuint, std::vector<Entity*> >& renderpasses) {
+	GLuint handle = mProgram.get()->getHandle();
+	if (renderpasses.find(handle) != renderpasses.end()) {
+		renderpasses[handle].push_back(this);
+	} else {
+		std::vector<Entity*> vector; /* xxx some base size maybe ? */
+		vector.push_back(this);
+		renderpasses[handle] = vector;
+	}
 }
 
 } /* models */
