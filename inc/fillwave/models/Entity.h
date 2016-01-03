@@ -85,7 +85,7 @@ public:
 	virtual void drawPicking(ICamera& camera);
 
 	/* Render passes */
-	virtual void updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpass);
+	virtual void updateRenderer(IRenderer& renderer);
 
 	/* Log */
 	virtual void log() const;
@@ -101,7 +101,6 @@ protected:
 
 	GLboolean mPSC;
 	GLboolean mPSR;
-	GLboolean mFlagUpdateRenderPass;
 
 private:
 	GLboolean mPickable;

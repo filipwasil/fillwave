@@ -18,11 +18,15 @@ namespace framework {
 template <class T>
 class TreePtr : public ITreeNode {
 public:
-	TreePtr() = default;
+	TreePtr():mFlagRefresh(true) {
+
+	}
+
 	virtual ~TreePtr() = default;
 
 	void attach(T node) {
 		mChildren.push_back(node);
+		mFlagRefresh = true;
 		node->onAttached(this);
 	}
 
@@ -32,7 +36,10 @@ public:
 		auto _begin = mChildren.begin();
 		auto _end = mChildren.end();
 		auto& it = std::remove_if(_begin, _end, _compare_function);
-		mChildren.erase(it, _end);
+		if (it != _end) {
+			mFlagRefresh = true;
+			mChildren.erase(it, _end);
+		}
 	}
 
 	virtual void onAttached(ITreeNode*) {
@@ -49,8 +56,17 @@ public:
 		mChildren.clear();
 	}
 
+	bool getTreeRefresh() {
+		return mFlagRefresh;
+	}
+
+	void setTreeRefresh(bool value) {
+		mFlagRefresh = value;
+	}
+
 protected:
 	std::vector<T> mChildren;
+	bool mFlagRefresh;
 };
 
 } /* namespace framework */

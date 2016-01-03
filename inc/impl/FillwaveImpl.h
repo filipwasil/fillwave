@@ -771,7 +771,7 @@ void Engine::EngineImpl::draw(GLfloat time) {
 		mScene->drawCursor();
 		mScene->updateDependencies();
 		if (mIsPBRP) {
-			mScene->updateRenderPasses();
+			mScene->updateRenderer();
 		}
 	}
 }
@@ -809,7 +809,7 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
 		mScene->drawCursor();
 		mScene->updateDependencies();
 		if (mIsPBRP) {
-			mScene->updateRenderPasses();
+			mScene->updateRenderer();
 		}
 	}
 }
@@ -845,7 +845,7 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
 		mScene->drawCursor();
 		mScene->updateDependencies();
 		if (mIsPBRP) {
-			mScene->updateRenderPasses();
+			mScene->updateRenderer();
 		}
 	}
 }

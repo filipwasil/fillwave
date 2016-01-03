@@ -386,14 +386,14 @@ inline void Mesh::initVBO() {
 	mOcclusionMatrix = glm::scale(glm::mat4(1.0f), mVBO->getOcclusionBoxSize());
 }
 
-void Mesh::updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpasses) {
+void Mesh::updateRenderer(IRenderer& renderer) {
 	GLuint handle = mProgram.get()->getHandle();
-	if (renderpasses.find(handle) != renderpasses.end()) {
-		renderpasses[handle].push_back(this);
+	if (renderer.find(handle) != renderer.end()) {
+		renderer[handle].push_back(this);
 	} else {
 		std::vector<Entity*> vector; /* xxx some base size maybe ? */
 		vector.push_back(this);
-		renderpasses[handle] = vector;
+		renderer[handle] = vector;
 	}
 }
 

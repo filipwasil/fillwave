@@ -66,7 +66,7 @@ public:
 	void setActiveAnimation(GLint animationID);
 	GLint getActiveAnimations();
 
-   void updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpasses);
+	void updateRenderer(IRenderer& renderer);
 
 	void log() const;
 

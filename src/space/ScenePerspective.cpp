@@ -27,13 +27,13 @@ void ScenePerspective::draw() {
 void ScenePerspective::drawPBRP() {
 	mCamera->update();
 	CameraPerspective c = *(mCamera.get());
-	for (auto& program : mRenderPasses) {
+	for (auto& program : mRenderer) {
 		core::Program::useProgram(program.first);
 		for (auto& node : program.second) {
 			node->draw(c);
 		}
-		core::Program::disusePrograms();
 	}
+	core::Program::disusePrograms();
 }
 
 void ScenePerspective::draw(ICamera& camera) {

@@ -18,6 +18,7 @@
 #include <fillwave/models/base/Material.h>
 #include <fillwave/models/base/Reloadable.h>
 #include <fillwave/core/pipeline/Fence.h>
+#include <fillwave/renderers/IRenderer.h>
 
 namespace fillwave {
 class Engine;
@@ -55,7 +56,7 @@ public:
 
 	virtual ~Mesh() = default;
 
-   void updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpasses);
+	void updateRenderer(IRenderer& renderer);
 
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);

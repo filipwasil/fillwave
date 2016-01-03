@@ -110,10 +110,12 @@ void IScene::pick(glm::ivec4 color) {
 	}
 }
 
-void IScene::updateRenderPasses() {
-	mRenderPasses.clear();
-	for (auto& it : mChildren) {
-		it->updateRenderpass(mRenderPasses);
+void IScene::updateRenderer() {
+	if (mRenderer.getRefresh()) {
+		mRenderer.clear();
+		for (auto& it : mChildren) {
+			it->updateRenderer(mRenderer);
+		}
 	}
 }
 

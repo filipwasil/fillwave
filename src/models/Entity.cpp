@@ -23,7 +23,6 @@ Entity::Entity(glm::vec3 translation, glm::quat rotation)
 				mParentRefresh(GL_TRUE),
 				mPSC(GL_TRUE),
 				mPSR(GL_TRUE),
-				mFlagUpdateRenderPass(GL_TRUE),
 				mPickable(GL_FALSE) {
 
 }
@@ -155,9 +154,13 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	mRefreshExternal = GL_TRUE;
 }
 
-void Entity::updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpass) {
+void Entity::updateRenderer(IRenderer& renderer) {
+	if (getTreeRefresh()) {
+		renderer.setRefresh(true);
+		setTreeRefresh(false);
+	}
 	for (auto& it : mChildren) {
-		it->updateRenderpass(renderpass);
+		it->updateRenderer(renderer);
 	}
 }
 

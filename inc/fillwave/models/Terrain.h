@@ -33,7 +33,7 @@ public:
 	void drawPBRP(ICamera& camera);
 
 	void distanceCheck(ICamera& camera);
-   void updateRenderpass(std::unordered_map<GLuint, std::vector<Entity*> >& renderpasses);
+   void updateRenderer(IRenderer& renderer);
 
 private:
    pProgram mProgram;

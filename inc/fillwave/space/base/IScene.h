@@ -33,7 +33,7 @@ public:
 	void setAmbient(glm::vec3 cursor);
 
 	void updateDependencies();
-	void updateRenderPasses();
+	void updateRenderer();
 
 	/* Cursor */
 	void setCursor(pCursor cursor);
@@ -77,7 +77,7 @@ protected:
 	std::unordered_map<GLint, pEntity> mPickingTable;
 	pEntity mLastPicked;
 	glm::vec3 mAmbientGlobal;
-	std::unordered_map<GLuint, std::vector<Entity*> > mRenderPasses;
+	IRenderer mRenderer;
 
 private:
 	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;
