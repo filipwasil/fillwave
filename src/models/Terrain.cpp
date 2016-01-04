@@ -71,18 +71,7 @@ void Terrain::addChunk(pVoxelChunk chunk) {
 }
 
 void Terrain::updateRenderer(IRenderer& renderer) {
-	if (getTreeRefresh()) {
-		renderer.setRefresh(true);
-		setTreeRefresh(false);
-	}
-	GLuint handle = mProgram.get()->getHandle();
-	if (renderer.find(handle) != renderer.end()) {
-		renderer[handle].push_back(this);
-	} else {
-		std::vector<Entity*> vector; /* xxx some base size maybe ? */
-		vector.push_back(this);
-		renderer[handle] = vector;
-	}
+	renderer.update(mProgram.get()->getHandle(), this);
 }
 
 } /* models */

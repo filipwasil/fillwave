@@ -11,19 +11,26 @@
 #include <fillwave/OpenGL.h>
 #include <unordered_map>
 #include <vector>
+#include <memory>
 
 namespace fillwave {
 namespace framework {
 
+class ICamera;
 class Entity;
 
-class IRenderer : public std::unordered_map<GLuint, std::vector<Entity*>> {
+class IRenderer {
 public:
 	IRenderer():mRefresh(true) {
 
 	}
 
 	virtual ~IRenderer() = default;
+
+	void reset() {
+		mRenderPasses.clear();
+		mRefresh = true;
+	}
 
 	void setRefresh(bool refresh) {
 		mRefresh = refresh;
@@ -33,11 +40,18 @@ public:
 		return mRefresh;
 	}
 
+	virtual void update(GLuint id, Entity* entity) = 0;
+	virtual void draw(ICamera& camera) = 0;
+
+protected:
+	std::unordered_map<GLuint, std::vector<Entity*>> mRenderPasses;
+
 private:
 	bool mRefresh;
 };
 
 } /* namespace framework */
+typedef std::unique_ptr<framework::IRenderer> puIRenderer;
 } /* namespace fillwave */
 
 #endif /* INC_FILLWAVE_CORE_RENDERERS_RENDERER_H_ */

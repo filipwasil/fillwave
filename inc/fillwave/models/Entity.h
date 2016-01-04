@@ -77,6 +77,7 @@ public:
 	virtual void draw(ICamera& camera);
 	virtual void drawPBRP(ICamera& camera);
 	virtual void drawDR(ICamera& camera);
+
 	virtual void drawDepth(ICamera& camera);
 	virtual void drawDepthColor(ICamera& camera, glm::vec3& position);
 	virtual void drawAOG(ICamera& camera);

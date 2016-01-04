@@ -377,7 +377,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 				mIsDR(GL_FALSE),
 				mIsAO(GL_FALSE),
 				mIsOQ(GL_TRUE),
-				mIsPBRP(GL_FALSE) {
+				mIsPBRP(GL_TRUE) {
 #endif
 //	init();
 }
@@ -459,17 +459,12 @@ inline void Engine::EngineImpl::initGeometryShading() {
 inline void Engine::EngineImpl::initManagement() {
 	mTextureManager = puTextureManager(
 			new framework::TextureManager(mFileLoader.getRootPath()));
-
 	mShaderManager = puShaderManager(
 			new framework::ShaderManager(mFileLoader.getRootPath()));
-
 	mProgramManager = puProgramManager(new framework::ProgramManager());
-
 	mLightManager = puLightManager(
 			new framework::LightManager(mWindowWidth, mWindowHeight));
-
 	mSamplerManager = puSamplerManager(new framework::SamplerManager());
-
 	mBufferManager = puBufferManager(new framework::BufferManager());
 }
 
@@ -552,23 +547,14 @@ inline void Engine::EngineImpl::initUniforms() {
 
 inline void Engine::EngineImpl::initOcclusionTest() {
 	std::vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
-
 	mVAOOcclusion = storeVAO();
-
 	mVBOOcclusion = puVertexBufferPosition(new core::VertexBufferPosition(vec));
-
 	mVBOOcclusion->getAttributes(mProgramOcclusionBox->getHandle());
-
 	mVBOOcclusion->attributesBind(mProgramOcclusionBox);
-
 	mVAOOcclusion->bind();
-
 	mVBOOcclusion->bind();
-
 	mVBOOcclusion->attributesSetForVAO();
-
 	mVBOOcclusion->send();
-
 	mVAOOcclusion->unbind();
 }
 

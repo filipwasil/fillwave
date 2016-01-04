@@ -77,7 +77,7 @@ protected:
 	std::unordered_map<GLint, pEntity> mPickingTable;
 	pEntity mLastPicked;
 	glm::vec3 mAmbientGlobal;
-	IRenderer mRenderer;
+	puIRenderer mRenderer;
 
 private:
 	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;

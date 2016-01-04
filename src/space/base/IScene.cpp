@@ -6,6 +6,7 @@
  */
 
 #include <fillwave/space/base/IScene.h>
+#include <fillwave/renderers/RendererPBRP.h>
 
 #include <algorithm>
 
@@ -15,7 +16,8 @@ namespace fillwave {
 namespace framework {
 
 IScene::IScene()
-		: mAmbientGlobal(glm::vec3(1.0)) {
+		: mAmbientGlobal(glm::vec3(1.0)),
+		  mRenderer(new RendererPBRP()) {
 }
 
 void IScene::setSkybox(pSkybox skybox) {
@@ -111,11 +113,12 @@ void IScene::pick(glm::ivec4 color) {
 }
 
 void IScene::updateRenderer() {
-	if (mRenderer.getRefresh()) {
-		mRenderer.clear();
+	if (mRenderer->getRefresh()) {
+		mRenderer->reset();
 		for (auto& it : mChildren) {
-			it->updateRenderer(mRenderer);
+			it->updateRenderer(*(mRenderer.get()));
 		}
+		mRenderer->setRefresh(false);
 	}
 }
 

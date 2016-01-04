@@ -15,8 +15,11 @@ namespace framework {
 
 class RendererPBRP: public IRenderer {
 public:
-	RendererPBRP();
-	virtual ~RendererPBRP();
+	RendererPBRP() = default;
+	virtual ~RendererPBRP() = default;
+
+	void update(GLuint programId, Entity* entity);
+	void draw(ICamera& camera);
 };
 
 } /* namespace framework */

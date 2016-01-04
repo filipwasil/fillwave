@@ -550,14 +550,7 @@ inline void VoxelChunk::initVBO() {
 }
 
 void VoxelChunk::updateRenderer(IRenderer& renderer) {
-	GLuint handle = mProgram.get()->getHandle();
-	if (renderer.find(handle) != renderer.end()) {
-		renderer[handle].push_back(this);
-	} else {
-		std::vector<Entity*> vector; /* xxx some base size maybe ? */
-		vector.push_back(this);
-		renderer[handle] = vector;
-	}
+	renderer.update(mProgram.get()->getHandle(), this);
 }
 
 } /* framework */

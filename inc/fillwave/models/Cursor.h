@@ -30,7 +30,6 @@ public:
 
 private:
 	GLfloat mScreenFactor;
-
 	GLint mULCPosition, mULCScreenFactor, mULCTextureUnit, mULCSize;
 
 	void initUniformsCache();
