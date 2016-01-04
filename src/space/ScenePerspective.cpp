@@ -21,11 +21,6 @@ void ScenePerspective::draw() {
 	mRenderer->draw(*(mCamera.get()));
 }
 
-void ScenePerspective::drawPBRP() {
-	mCamera->update();
-	mRenderer->draw(*(mCamera.get()));
-}
-
 void ScenePerspective::draw(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->draw(camera);
@@ -53,16 +48,13 @@ void ScenePerspective::drawDR(ICamera& camera) {
 
 void ScenePerspective::drawSkybox() {
 	if (mSkybox) {
-		CameraPerspective c = *(mCamera.get());
-		mSkybox->draw(c);
+		mSkybox->draw(*(mCamera.get()));
 	}
 }
 
 void ScenePerspective::drawPicking() {
-	/* Parent-children transformations */
-	CameraPerspective c = *(mCamera.get());
 	for (auto& it : mChildren) {
-		it->drawPicking(c);
+		it->drawPicking(*(mCamera.get()));
 	}
 }
 

@@ -18,13 +18,6 @@ SceneOrthographic::SceneOrthographic(pCameraOrthographic camera)
 
 void SceneOrthographic::draw() {
 	mCamera->update();
-	for (auto& it : mChildren) {
-		it->draw(*(mCamera.get()));
-	}
-}
-
-void SceneOrthographic::drawPBRP() {
-	mCamera->update();
 	mRenderer->draw(*(mCamera.get()));
 }
 
@@ -54,16 +47,14 @@ void SceneOrthographic::drawDR(ICamera& camera) {
 }
 
 void SceneOrthographic::drawPicking() {
-	CameraOrthographic c = *(mCamera.get());
 	for (auto& it : mChildren) {
-		it->drawPicking(c);
+		it->drawPicking(*(mCamera.get()));
 	}
 }
 
 void SceneOrthographic::drawSkybox() {
 	if (mSkybox) {
-		CameraOrthographic c = *(mCamera.get());
-		mSkybox->draw(c);
+		mSkybox->draw(*(mCamera.get()));
 	}
 }
 

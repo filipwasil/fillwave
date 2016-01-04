@@ -27,7 +27,6 @@ public:
 	pICamera getCamera();
 
 	void draw();
-	void drawPBRP();
 	void drawDR();
 	void draw(ICamera& camera);
 	void drawDR(ICamera& camera);
