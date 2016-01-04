@@ -33,7 +33,6 @@ void RendererPBRP::draw(ICamera& camera) {
 	for (auto& program : mRenderPasses) {
 		core::Program::useProgram(program.first);
 		for (auto& node : program.second) {
-			FLOG_ERROR("DEBUG %u", program.first);
 			node->drawPBRP(camera);
 		}
 	}

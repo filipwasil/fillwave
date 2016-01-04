@@ -327,7 +327,6 @@ void Model::draw(ICamera& camera) {
 }
 
 void Model::drawPBRP(ICamera& camera) {
-	FLOG_ERROR("DEBUG1");
 	if (mAnimator) {
 		/* xxx for PBRP shadows must be updated elsewhere */
 		mAnimator->updateBonesBuffer();

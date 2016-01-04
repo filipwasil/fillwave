@@ -84,6 +84,9 @@ void Mesh::drawPBRP(ICamera& camera) {
 		core::Uniform::push(mULCViewProjectionMatrix,
 				camera.getViewProjection());
 
+		/* xxx Can be done once for a program - move to model*/
+		mLightManager->pushLightUniforms(mProgram.get());
+
 		coreDraw();
 	}
 }
@@ -160,8 +163,6 @@ inline void Mesh::coreDraw() {
 	mVAO->unbind();
 
 	core::Texture2D::unbind2DTextures();
-
-	core::Program::disusePrograms();
 }
 
 inline void Mesh::bindTextures() {
