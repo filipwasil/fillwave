@@ -7,6 +7,7 @@
 
 #include <fillwave/space/base/IScene.h>
 #include <fillwave/renderers/RendererPBRP.h>
+#include <fillwave/common/Macros.h>
 
 #include <algorithm>
 
@@ -15,9 +16,13 @@ FLOGINIT("Scene", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-IScene::IScene()
+IScene::IScene(IRenderer* renderer)
 		: mAmbientGlobal(glm::vec3(1.0)),
-		  mRenderer(new RendererPBRP()) {
+		  mRenderer(renderer) {
+}
+
+void IScene::setRenderer(IRenderer* renderer) {
+	mRenderer = std::unique_ptr<IRenderer>(renderer);
 }
 
 void IScene::setSkybox(pSkybox skybox) {

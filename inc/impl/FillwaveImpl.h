@@ -197,7 +197,6 @@ struct Engine::EngineImpl {
 	GLboolean mIsDR; /* Deferred rendering */
 	GLboolean mIsAO; /* Ambient occlusion */
 	GLboolean mIsOQ; /* Occlusion query */
-	GLboolean mIsPBRP; /* Program based render passes - effects are not handled */
 
 	/* Callbacks */
 	void runCallbacks();
@@ -345,8 +344,7 @@ mTimeFactor(1.0),
 mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
-mIsOQ(GL_FALSE),
-mIsPBRP(GL_FALSE) {
+mIsOQ(GL_FALSE) {
 //	init();
 }
 
@@ -359,8 +357,7 @@ mTimeFactor(1.0),
 mStartupTime(0.0f),
 mIsDR(GL_FALSE),
 mIsAO(GL_FALSE),
-mIsOQ(GL_FALSE),
-mIsPBRP(GL_FALSE) {
+mIsOQ(GL_FALSE) {
 
 	androidSetActivity(activity);
 
@@ -376,8 +373,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 				mStartupTime(0.0f),
 				mIsDR(GL_FALSE),
 				mIsAO(GL_FALSE),
-				mIsOQ(GL_TRUE),
-				mIsPBRP(GL_TRUE) {
+				mIsOQ(GL_TRUE) {
 #endif
 //	init();
 }
@@ -756,9 +752,7 @@ void Engine::EngineImpl::draw(GLfloat time) {
 		evaluateDebugger();
 		mScene->drawCursor();
 		mScene->updateDependencies();
-		if (mIsPBRP) {
-			mScene->updateRenderer();
-		}
+		mScene->updateRenderer();
 	}
 }
 
@@ -794,9 +788,7 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
 		evaluateDebugger();
 		mScene->drawCursor();
 		mScene->updateDependencies();
-		if (mIsPBRP) {
-			mScene->updateRenderer();
-		}
+		mScene->updateRenderer();
 	}
 }
 
@@ -830,9 +822,7 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
 		evaluateDebugger();
 		mScene->drawCursor();
 		mScene->updateDependencies();
-		if (mIsPBRP) {
-			mScene->updateRenderer();
-		}
+		mScene->updateRenderer();
 	}
 }
 #endif
@@ -939,21 +929,9 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 inline void Engine::EngineImpl::drawSceneCore() {
 	if (mIsDR) {
 		drawSceneCoreDR();
-	} else if (mIsPBRP) {
-		drawSceneCorePBRP();
 	} else {
 		drawSceneCoreFR();
 	}
-}
-
-inline void Engine::EngineImpl::drawSceneCorePBRP() {
-	if (mIsOQ) {
-		drawOcclusionPass();
-	}
-	drawClear();
-	mScene->drawSkybox();
-	glClear(GL_DEPTH_BUFFER_BIT);
-	mScene->drawPBRP();
 }
 
 inline void Engine::EngineImpl::drawSceneCoreFR() {

@@ -21,18 +21,14 @@ class Entity;
 
 class IRenderer {
 public:
-	IRenderer():mRefresh(true) {
+	IRenderer()
+			: mRefresh(true) {
 
 	}
 
 	virtual ~IRenderer() = default;
 
-	void reset() {
-		mRenderPasses.clear();
-		mRefresh = true;
-	}
-
-	void setRefresh(bool refresh) {
+	void setRefresh(bool refresh = true) {
 		mRefresh = refresh;
 	}
 
@@ -42,9 +38,7 @@ public:
 
 	virtual void update(GLuint id, Entity* entity) = 0;
 	virtual void draw(ICamera& camera) = 0;
-
-protected:
-	std::unordered_map<GLuint, std::vector<Entity*>> mRenderPasses;
+	virtual void reset() = 0;
 
 private:
 	bool mRefresh;

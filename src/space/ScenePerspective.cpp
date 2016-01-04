@@ -18,9 +18,7 @@ ScenePerspective::ScenePerspective(pCameraPerspective camera)
 
 void ScenePerspective::draw() {
 	mCamera->update();
-	for (auto& it : mChildren) {
-		it->draw(*(mCamera.get()));
-	}
+	mRenderer->draw(*(mCamera.get()));
 }
 
 void ScenePerspective::drawPBRP() {

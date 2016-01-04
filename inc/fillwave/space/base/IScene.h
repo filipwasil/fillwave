@@ -13,7 +13,7 @@
 #include <fillwave/models/Cursor.h>
 #include <fillwave/models/Terrain.h>
 #include <fillwave/models/base/IDrawable.h>
-#include <unordered_map>
+#include <fillwave/renderers/RendererFR.h>
 
 namespace fillwave {
 namespace framework {
@@ -24,7 +24,7 @@ namespace framework {
 
 class IScene : public TreePtr<pEntity> {
 public:
-	IScene();
+	IScene(IRenderer* renderer = new RendererFR());
 
 	virtual ~IScene() = default;
 
@@ -43,6 +43,7 @@ public:
 
 	/* Skybox */
 	void setSkybox(pSkybox skybox);
+	void setRenderer(IRenderer* renderer);
 
 	/* Pickable */
 	void registerPickable(pEntity entity);
@@ -55,7 +56,6 @@ public:
 	virtual void draw(ICamera& c) = 0;
 	virtual void drawDR(ICamera& c) = 0;
 	virtual void draw() = 0;
-	virtual void drawPBRP() = 0;
 	virtual void drawDR() = 0;
 	virtual void drawAOG() = 0;
 	virtual void drawAOC() = 0;

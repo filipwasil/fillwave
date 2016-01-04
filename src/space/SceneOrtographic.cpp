@@ -18,9 +18,8 @@ SceneOrthographic::SceneOrthographic(pCameraOrthographic camera)
 
 void SceneOrthographic::draw() {
 	mCamera->update();
-	CameraOrthographic c = *(mCamera.get());
 	for (auto& it : mChildren) {
-		it->draw(c);
+		it->draw(*(mCamera.get()));
 	}
 }
 

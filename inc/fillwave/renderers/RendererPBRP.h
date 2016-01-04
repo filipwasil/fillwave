@@ -20,6 +20,10 @@ public:
 
 	void update(GLuint programId, Entity* entity);
 	void draw(ICamera& camera);
+	void reset();
+
+private:
+	std::unordered_map<GLuint, std::vector<Entity*>> mRenderPasses;
 };
 
 } /* namespace framework */

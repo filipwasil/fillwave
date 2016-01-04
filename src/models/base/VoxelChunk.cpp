@@ -477,7 +477,6 @@ void VoxelChunk::draw(ICamera& camera) {
 }
 
 void VoxelChunk::drawPBRP(ICamera& camera) {
-	FLOG_ERROR("DEBUG");
 	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
 	core::Uniform::push(mUniformLocationCacheCameraPosition,
 			camera.getTranslation());
