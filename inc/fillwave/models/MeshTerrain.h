@@ -38,7 +38,10 @@ public:
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 
+	void updateRenderer(IRenderer& renderer);
+
 private:
+	LightManager* mLightManager;
 	GLfloat mChunkWidth;
 	GLfloat mJumpStep;
 

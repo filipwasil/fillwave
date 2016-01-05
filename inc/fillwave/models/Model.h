@@ -72,6 +72,7 @@ public:
 
 protected:
 	Animator* mAnimator;
+	LightManager* mLightManager;
 	pProgram mProgramShadow, mProgramShadowColor;
 	GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow,
 			mUniformLocationCacheBonesShadowColor;

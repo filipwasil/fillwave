@@ -11,6 +11,7 @@
 #include <fillwave/loaders/ProgramLoader.h>
 
 #include <fillwave/management/TextureManager.h>
+#include <fillwave/management/LightManager.h>
 
 #include <fillwave/models/Model.h>
 #include <fillwave/models/animations/Animator.h>
@@ -35,6 +36,7 @@ Model::Model(
 		:
 				Programmable(program),
 				mAnimator(nullptr),
+				mLightManager(engine->getLightManager()),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -63,6 +65,7 @@ Model::Model(Engine* engine, pProgram program, const std::string& shapePath)
 		:
 				Programmable(program),
 				mAnimator(nullptr),
+				mLightManager(engine->getLightManager()),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -88,6 +91,7 @@ Model::Model(
 		:
 				Programmable(program),
 				mAnimator(nullptr),
+				mLightManager(engine->getLightManager()),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -114,6 +118,7 @@ Model::Model(
 		:
 				Programmable(program),
 				mAnimator(nullptr),
+				mLightManager(engine->getLightManager()),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -332,6 +337,10 @@ void Model::drawPBRP(ICamera& camera) {
 		mAnimator->updateBonesBuffer();
 		mAnimator->updateBonesUniform(mUniformLocationCacheBones);
 	}
+
+	mLightManager->pushLightUniforms(mProgram.get());
+	mLightManager->bindShadowmaps();
+
 	for (auto& it : mChildren) {
 		it->drawPBRP(camera);
 	}
@@ -344,10 +353,6 @@ void Model::drawDR(ICamera& camera) {
 
 void Model::log() const {
 
-}
-
-void Model::updateRenderer(IRenderer& renderer) {
-	renderer.update(mProgram.get()->getHandle(), this);
 }
 
 inline void Model::initUniformsCache() {
@@ -391,5 +396,12 @@ inline void Model::evaluateAnimations() {
 		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
 	}
 }
+
+
+void Model::updateRenderer(IRenderer& renderer) {
+	GLuint id = mProgram.get()->getHandle();
+	renderer.update(&id, this);
+}
+
 } /* framework */
 } /* fillwave */

@@ -22,26 +22,17 @@ class Entity;
 class IRenderer {
 public:
 	IRenderer()
-			: mRefresh(true) {
+			: mFlagReload(true) {
 
 	}
 
 	virtual ~IRenderer() = default;
 
-	void setRefresh(bool refresh = true) {
-		mRefresh = refresh;
-	}
-
-	bool getRefresh() const {
-		return mRefresh;
-	}
-
-	virtual void update(GLuint id, Entity* entity) = 0;
+	virtual void update(GLuint* id, Entity* entity) = 0;
 	virtual void draw(ICamera& camera) = 0;
 	virtual void reset() = 0;
 
-private:
-	bool mRefresh;
+	bool mFlagReload;
 };
 
 } /* namespace framework */

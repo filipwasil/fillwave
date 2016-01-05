@@ -9,6 +9,7 @@
 #include <fillwave/Log.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/loaders/ProgramLoader.h>
+#include <fillwave/management/LightManager.h>
 
 FLOGINIT("MeshTerrain", FERROR | FFATAL)
 
@@ -27,6 +28,7 @@ MeshTerrain::MeshTerrain(
 		GLuint density)
 		:
 				Programmable(program),
+				mLightManager(engine->getLightManager()),
 				mChunkWidth(radius * 0.2 * 16 / density),
 				mJumpStep(density * 0.2 * 16 / density) {
 
@@ -99,10 +101,16 @@ void MeshTerrain::draw(ICamera& camera) {
 
 void MeshTerrain::drawPBRP(ICamera& camera) {
 	distanceCheck(camera);
-	/* Draw */
+	mLightManager->pushLightUniforms(mProgram.get());
+	mLightManager->bindShadowmaps();
 	for (auto& it : mChildren) {
 		it->drawPBRP(camera);
 	}
+}
+
+void MeshTerrain::updateRenderer(IRenderer& renderer) {
+	GLuint id = mProgram.get()->getHandle();
+	renderer.update(&id, this);
 }
 
 inline void MeshTerrain::distanceCheck(ICamera& camera) {

@@ -18,7 +18,7 @@ public:
 	RendererPBRP() = default;
 	virtual ~RendererPBRP() = default;
 
-	void update(GLuint programId, Entity* entity);
+	void update(GLuint* programId, Entity* entity);
 	void draw(ICamera& camera);
 	void reset();
 

@@ -155,9 +155,9 @@ void Entity::updateParentRotation(glm::quat& parent) {
 }
 
 void Entity::updateRenderer(IRenderer& renderer) {
-	if (getTreeRefresh()) {
-		renderer.setRefresh(true);
-		setTreeRefresh(false);
+	if (mFlagAttachedDetached) {
+		renderer.mFlagReload = true;
+		mFlagAttachedDetached = false;
 	}
 	for (auto& it : mChildren) {
 		it->updateRenderer(renderer);

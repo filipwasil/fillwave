@@ -18,7 +18,7 @@ public:
 	RendererFR() = default;
 	virtual ~RendererFR() = default;
 
-	void update(GLuint programId, Entity* entity);
+	void update(GLuint* programId, Entity* entity);
 	void draw(ICamera& camera);
 	void reset();
 private:

@@ -15,17 +15,13 @@ FLOGINIT_DEFAULT()
 namespace fillwave {
 namespace framework {
 
-void RendererPBRP::update(GLuint programId, Entity* entity) {
-	if (entity->getTreeRefresh()) {
-		setRefresh();
-		entity->setTreeRefresh(false);
-	}
-	if (mRenderPasses.find(programId) != mRenderPasses.end()) {
-		mRenderPasses[programId].push_back(entity);
+void RendererPBRP::update(GLuint* programId, Entity* entity) {
+	if (mRenderPasses.find(*programId) != mRenderPasses.end()) {
+		mRenderPasses[*programId].push_back(entity);
 	} else {
 		std::vector<Entity*> vector;
 		vector.push_back(entity);
-		mRenderPasses[programId] = vector;
+		mRenderPasses[*programId] = vector;
 	}
 }
 
@@ -33,6 +29,10 @@ void RendererPBRP::draw(ICamera& camera) {
 	for (auto& program : mRenderPasses) {
 		core::Program::useProgram(program.first);
 		for (auto& node : program.second) {
+			if (node->mFlagAttachedDetached) {
+				mFlagReload = true;
+				node->mFlagAttachedDetached = false;
+			}
 			node->drawPBRP(camera);
 		}
 	}
@@ -42,7 +42,6 @@ void RendererPBRP::reset() {
 	size_t predictedSize = mRenderPasses.size() + 1;
 	mRenderPasses.clear();
 	mRenderPasses.reserve(predictedSize);
-	setRefresh();
 }
 
 } /* namespace framework */

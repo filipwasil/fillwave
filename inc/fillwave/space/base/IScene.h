@@ -24,7 +24,7 @@ namespace framework {
 
 class IScene : public TreePtr<pEntity> {
 public:
-	IScene(IRenderer* renderer = new RendererFR());
+	IScene(IRenderer* renderer = new RendererPBRP());
 
 	virtual ~IScene() = default;
 

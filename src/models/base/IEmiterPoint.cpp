@@ -52,7 +52,8 @@ void IEmiterPoint::setBlendingFunction(
 }
 
 void IEmiterPoint::updateRenderer(IRenderer& renderer) {
-	renderer.update(mProgram.get()->getHandle(), this);
+	GLuint id = mProgram.get()->getHandle();
+	renderer.update(&id, this);
 }
 
 } /* framework */

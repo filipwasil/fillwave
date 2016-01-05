@@ -118,12 +118,12 @@ void IScene::pick(glm::ivec4 color) {
 }
 
 void IScene::updateRenderer() {
-	if (mRenderer->getRefresh()) {
+	if (mRenderer->mFlagReload) {
 		mRenderer->reset();
 		for (auto& it : mChildren) {
 			it->updateRenderer(*(mRenderer.get()));
 		}
-		mRenderer->setRefresh(false);
+		mRenderer->mFlagReload = false;
 	}
 }
 

@@ -84,9 +84,6 @@ void Mesh::drawPBRP(ICamera& camera) {
 		core::Uniform::push(mULCViewProjectionMatrix,
 				camera.getViewProjection());
 
-		/* xxx Can be done once for a program - move to model*/
-		mLightManager->pushLightUniforms(mProgram.get());
-
 		coreDraw();
 	}
 }
@@ -109,6 +106,7 @@ void Mesh::draw(ICamera& camera) {
 				camera.getViewProjection());
 
 		mLightManager->pushLightUniforms(mProgram.get());
+		mLightManager->bindShadowmaps();
 
 		coreDraw();
 	}
@@ -133,6 +131,7 @@ void Mesh::drawDR(ICamera& camera) {
 //      mLightManager->pushLightUniformsShadowMaps(mProgram.get());
 
 		mLightManager->pushLightUniformsDR();
+		mLightManager->bindShadowmaps();
 
 		coreDraw();
 	}
@@ -140,13 +139,13 @@ void Mesh::drawDR(ICamera& camera) {
 
 void Mesh::drawFast(ICamera&) {
 	mProgram->use();
+	mLightManager->bindShadowmaps();
+
 	coreDraw();
 }
 
 inline void Mesh::coreDraw() {
 	mVAO->bind();
-
-	mLightManager->bindShadowmaps();
 
 	bindTextures();
 
@@ -388,7 +387,8 @@ inline void Mesh::initVBO() {
 }
 
 void Mesh::updateRenderer(IRenderer& renderer) {
-	renderer.update(mProgram.get()->getHandle(), this);
+	GLuint id = mProgram.get()->getHandle();
+	renderer.update(&id, this);
 }
 
 void Mesh::log() const {

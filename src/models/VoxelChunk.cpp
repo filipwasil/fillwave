@@ -483,9 +483,6 @@ void VoxelChunk::drawPBRP(ICamera& camera) {
 	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,
 			camera.getViewProjection());
 
-	mLightManager->pushLightUniforms(mProgram.get());
-	mLightManager->bindShadowmaps();
-
 	mVAO->bind();
 
 	coreDraw();
@@ -549,7 +546,8 @@ inline void VoxelChunk::initVBO() {
 }
 
 void VoxelChunk::updateRenderer(IRenderer& renderer) {
-	renderer.update(mProgram.get()->getHandle(), this);
+	GLuint id = mProgram.get()->getHandle();
+	renderer.update(&id, this);
 }
 
 } /* framework */
