@@ -341,9 +341,7 @@ void Model::drawPBRP(ICamera& camera) {
 	mLightManager->pushLightUniforms(mProgram.get());
 	mLightManager->bindShadowmaps();
 
-	for (auto& it : mChildren) {
-		it->drawPBRP(camera);
-	}
+	drawWithEffectsPBRP(camera);
 }
 
 void Model::drawDR(ICamera& camera) {

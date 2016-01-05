@@ -29,6 +29,7 @@ public:
 	void removeEffect(pEffect effect);
 	void drawWithEffects(ICamera& camera);
 	void drawWithEffectsDR(ICamera& camera);
+	void drawWithEffectsPBRP(ICamera& camera);
 
 protected:
 	pProgram mProgram;
