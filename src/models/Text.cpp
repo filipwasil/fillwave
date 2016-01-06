@@ -176,14 +176,14 @@ void Text::createVBO() {
 }
 
 inline void Text::createProgram() {
-	ProgramLoader loader;
+	ProgramLoader loader(mEngine);
 
 	switch (mEffect) {
 		case eTextEffect::eNone:
-			mProgram = loader.getText(mEngine);
+			mProgram = loader.getText();
 			return;
 		case eTextEffect::eBold:
-			mProgram = loader.getTextBold(mEngine);
+			mProgram = loader.getTextBold();
 			return;
 	}
 }

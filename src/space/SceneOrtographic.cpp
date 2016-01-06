@@ -21,58 +21,15 @@ void SceneOrthographic::draw() {
 	mRenderer->draw(*(mCamera.get()));
 }
 
-void SceneOrthographic::drawDR() {
-	if (mSkybox) {
-		mSkybox->drawDR(*(mCamera.get()));
-	}
-	mCamera->update();
-	for (auto& it : mChildren) {
-		it->drawDR(*(mCamera.get()));
-	}
-}
-
-void SceneOrthographic::draw(ICamera& camera) {
-	for (auto& it : mChildren) {
-		it->draw(camera);
-	}
-}
-
-void SceneOrthographic::drawDR(ICamera& camera) {
-	if (mSkybox) {
-		mSkybox->drawDR(camera);
-	}
-	for (auto& it : mChildren) {
-		it->draw(camera);
-	}
-}
-
 void SceneOrthographic::drawPicking() {
 	for (auto& it : mChildren) {
 		it->drawPicking(*(mCamera.get()));
 	}
 }
 
-void SceneOrthographic::drawSkybox() {
-	if (mSkybox) {
-		mSkybox->draw(*(mCamera.get()));
-	}
-}
-
 void SceneOrthographic::drawDepthInt() {
 	for (auto& it : mChildren) {
 		it->drawDepth(*(mCamera.get()));
-	}
-}
-
-void SceneOrthographic::drawAOG() {
-	for (auto& it : mChildren) {
-		it->drawAOG(*(mCamera.get()));
-	}
-}
-
-void SceneOrthographic::drawAOC() {
-	for (auto& it : mChildren) {
-		it->drawAOC(*(mCamera.get()));
 	}
 }
 

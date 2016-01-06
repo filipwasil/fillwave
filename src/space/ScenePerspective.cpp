@@ -21,37 +21,6 @@ void ScenePerspective::draw() {
 	mRenderer->draw(*(mCamera.get()));
 }
 
-void ScenePerspective::draw(ICamera& camera) {
-	for (auto& it : mChildren) {
-		it->draw(camera);
-	}
-}
-
-void ScenePerspective::drawDR() {
-	if (mSkybox) {
-		mSkybox->drawDR(*(mCamera.get()));
-	}
-	mCamera->update();
-	for (auto& it : mChildren) {
-		it->drawDR(*(mCamera.get()));
-	}
-}
-
-void ScenePerspective::drawDR(ICamera& camera) {
-	if (mSkybox) {
-		mSkybox->drawDR(camera);
-	}
-	for (auto& it : mChildren) {
-		it->drawDR(camera);
-	}
-}
-
-void ScenePerspective::drawSkybox() {
-	if (mSkybox) {
-		mSkybox->draw(*(mCamera.get()));
-	}
-}
-
 void ScenePerspective::drawPicking() {
 	for (auto& it : mChildren) {
 		it->drawPicking(*(mCamera.get()));
@@ -61,18 +30,6 @@ void ScenePerspective::drawPicking() {
 void ScenePerspective::drawDepthInt() {
 	for (auto& it : mChildren) {
 		it->drawDepth(*(mCamera.get()));
-	}
-}
-
-void ScenePerspective::drawAOG() {
-	for (auto& it : mChildren) {
-		it->drawAOG(*(mCamera.get()));
-	}
-}
-
-void ScenePerspective::drawAOC() {
-	for (auto& it : mChildren) {
-		it->drawAOC(*(mCamera.get()));
 	}
 }
 

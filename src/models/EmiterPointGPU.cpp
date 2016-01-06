@@ -50,10 +50,10 @@ EmiterPointGPU::EmiterPointGPU(
 				mRobustnessPosition(robustnessPosition),
 				mTimeDeltaEmiter(0.0) {
 
-	ProgramLoader loader;
+	ProgramLoader loader(engine);
 
-	mProgram = loader.getParticleGPU(engine);
-	mProgramEmiter = loader.getParticleGPUEmiter(engine);
+	mProgram = loader.getParticleGPU();
+	mProgramEmiter = loader.getParticleGPUEmiter();
 
 	std::vector<core::VertexParticleGPU> particles;
 	for (int i = 0; i < mHowMany; i++) {

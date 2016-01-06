@@ -18,21 +18,26 @@ namespace framework {
 
 class ICamera;
 class Entity;
+class Skybox;
 
 class IRenderer {
 public:
 	IRenderer()
-			: mFlagReload(true) {
+			: mFlagReload(true),
+			  mSkybox(nullptr) {
 
 	}
 
 	virtual ~IRenderer() = default;
 
+	virtual void onScreenResize(GLuint width, GLuint height) = 0;
 	virtual void update(GLuint* id, Entity* entity) = 0;
 	virtual void draw(ICamera& camera) = 0;
 	virtual void reset() = 0;
 
 	bool mFlagReload;
+	Skybox* mSkybox;
+	GLfloat mAmbientGlobal[3];
 };
 
 } /* namespace framework */

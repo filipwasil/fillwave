@@ -107,8 +107,6 @@ public:
 
 	/* Assets */
 	puPhysicsMeshBuffer getPhysicalMeshBuffer(const std::string& shapePath);
-	framework::LightManager* getLightManager() const;
-
 	const fScene* getModelFromFile(std::string path); /* xxx remove */
 
 	/* Scene */
@@ -246,7 +244,9 @@ public:
 
 	void reload();
 
-	GLboolean isDR() const;
+	framework::LightManager* getLightManager() const;
+	framework::TextureManager* getTextureManager() const;
+
 private:
 	struct EngineImpl;
 	std::unique_ptr<EngineImpl> mImpl;

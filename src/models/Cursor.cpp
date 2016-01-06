@@ -20,9 +20,9 @@ Cursor::Cursor(Engine* engine, pTexture texture)
 						GLfloat(engine->getScreenSize()[0])
 								/ GLfloat(engine->getScreenSize()[1])) {
 
-	ProgramLoader loader;
+	ProgramLoader loader(engine);
 
-	mProgram = loader.getCursor(engine);
+	mProgram = loader.getCursor();
 
 	initUniformsCache();
 }

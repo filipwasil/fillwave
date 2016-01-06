@@ -34,9 +34,9 @@ Debugger::Debugger(Engine* engine)
 				mMiniwindowSize(1.0 / 6.0),
 				mMiniwindowsOccupied(0) {
 
-	ProgramLoader loader;
+	ProgramLoader loader(engine);
 
-	mProgram = loader.getDebugger(engine);
+	mProgram = loader.getDebugger();
 
 	initPipeline();
 	initVBO();

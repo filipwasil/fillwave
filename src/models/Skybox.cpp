@@ -18,10 +18,10 @@ namespace framework {
 Skybox::Skybox(Engine* engine, pTexture3D texture)
 		: Reloadable(engine), mTexture(texture) {
 
-	ProgramLoader loader;
+	ProgramLoader loader(engine);
 
-	mProgram = loader.getSkybox(engine);
-	mProgramDR = loader.getSkyboxDR(engine);
+	mProgram = loader.getSkybox();
+	mProgramDR = loader.getSkyboxDR();
 
 	SphereSkybox sphere(1.0, 10, 10);
 

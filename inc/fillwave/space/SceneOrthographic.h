@@ -33,14 +33,8 @@ public:
 	pICamera getCamera();
 
 	void draw();
-	void drawDR();
-	void draw(ICamera& camera);
-	void drawDR(ICamera& camera);
 	void drawPicking();
-	void drawSkybox();
 	void drawDepthInt();
-	void drawAOG();
-	void drawAOC();
 	void drawOcclusion();
 
 private:

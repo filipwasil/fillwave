@@ -21,52 +21,52 @@ namespace framework {
 
 class ProgramLoader : public ShaderLoader {
 public:
-	ProgramLoader() = default;
+	ProgramLoader(Engine* engine);
 
 	virtual ~ProgramLoader() = default;
 
-	pProgram getShadow(Engine* engine);
-	pProgram getShadowColorCoded(Engine* engine);
-	pProgram getShadowWithAnimation(Engine* engine);
-	pProgram getShadowColorCodedWithAnimation(Engine* engine);
-	pProgram getDebugger(Engine* engine);
-	pProgram getSkybox(Engine* engine);
-	pProgram getSkyboxDR(Engine* engine);
-	pProgram getText(Engine* engine);
-	pProgram getTextBold(Engine* engine);
-	pProgram getParticleGPUEmiter(Engine* engine);
-	pProgram getParticleGPU(Engine* engine);
-	pProgram getParticleCPU(Engine* engine);
-	pProgram getParticleCPUNoDepthText(Engine* engine);
-	pProgram getQuad(Engine* engine);
-	pProgram getQuadCustomFragmentShaderStartup(Engine* engine);
-	pProgram getCursor(Engine* engine);
-	pProgram getDRAmbient(Engine* engine);
-	pProgram getAmbientOcclusionGeometry(Engine* engine);
-	pProgram getAmbientOcclusionColor(Engine* engine);
-	pProgram getOcclusionPureQuery(Engine* engine);
-	pProgram getOcclusionQuery(Engine* engine);
-	pProgram getOcclusionOptimizedQuery(Engine* engine);
-	pProgram getDefault(Engine* engine);
-	pProgram getDefaultBones(Engine* engine);
-	pProgram getDRDepthless(Engine* engine);
-	pProgram getDRDirectionalLights(Engine* engine);
-	pProgram getDRSpotLights(Engine* engine);
-	pProgram getDRPointLights(Engine* engine);
+	pProgram getDefault();
+	pProgram getDefaultBones();
+	pProgram getDefaultDR();
+	pProgram getDefaultFR();
+	pProgram getDefaultBonesDR();
+	pProgram getDefaultBonesFR();
+
+	pProgram getShadow();
+	pProgram getShadowColorCoded();
+	pProgram getShadowWithAnimation();
+	pProgram getShadowColorCodedWithAnimation();
+	pProgram getDebugger();
+	pProgram getSkybox();
+	pProgram getSkyboxDR();
+	pProgram getText();
+	pProgram getTextBold();
+	pProgram getParticleGPUEmiter();
+	pProgram getParticleGPU();
+	pProgram getParticleCPU();
+	pProgram getParticleCPUNoDepthText();
+	pProgram getQuad();
+	pProgram getQuadCustomFragmentShaderStartup();
+	pProgram getCursor();
+	pProgram getDRAmbient();
+	pProgram getAmbientOcclusionGeometry();
+	pProgram getAmbientOcclusionColor();
+	pProgram getOcclusionPureQuery();
+	pProgram getOcclusionQuery();
+	pProgram getOcclusionOptimizedQuery();
+	pProgram getDRDepthless();
+	pProgram getDRDirectionalLights();
+	pProgram getDRSpotLights();
+	pProgram getDRPointLights();
 	pProgram getQuadCustomFragmentShader(
-			Engine* engine,
 			const std::string& shaderPath);
 
 	static void initDefaultUniforms(core::Program* program);
 private:
 
+	Engine* mEngine;
+
 	const char *mFeedbackVaryingsGPUEmiter[6];
-
-	pProgram getDefaultDR(Engine* engine);
-	pProgram getDefaultFR(Engine* engine);
-	pProgram getDefaultBonesDR(Engine* engine);
-	pProgram getDefaultBonesFR(Engine* engine);
-
 };
 
 } /* framework */

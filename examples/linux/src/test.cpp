@@ -63,8 +63,8 @@ void init() {
                                                     1000.0));
 
    /* Shaders */
-   ProgramLoader loader;
-   gProgram = loader.getDefault(gEngine);
+   ProgramLoader loader(gEngine);
+   gProgram = loader.getDefault();
 
    /* Models */
 

@@ -8,6 +8,7 @@
 #include <fillwave/space/base/IScene.h>
 #include <fillwave/renderers/RendererPBRP.h>
 #include <fillwave/common/Macros.h>
+#include <fillwave/actions/events/ResizeScreenEvent.h>
 
 #include <algorithm>
 
@@ -37,10 +38,6 @@ void IScene::setCursor(pCursor cursor) {
 	mCursor = cursor;
 }
 
-glm::vec3 IScene::getAmbient() {
-	return mAmbientGlobal;
-}
-
 void IScene::setAmbient(glm::vec3 ambient) {
 	mAmbientGlobal = ambient;
 }
@@ -59,10 +56,9 @@ void IScene::updateDependencies() {
 	}
 }
 
-void IScene::draw(ICamera& c) {
-	for (auto& it : mChildren) {
-		it->draw(c);
-	}
+void IScene::draw(ICamera& camera) {
+	camera.update();
+	mRenderer->draw(camera);
 }
 
 void IScene::drawCursor() {
@@ -120,6 +116,11 @@ void IScene::pick(glm::ivec4 color) {
 void IScene::updateRenderer() {
 	if (mRenderer->mFlagReload) {
 		mRenderer->reset();
+		if (mSkybox) {
+			mRenderer->mSkybox = mSkybox.get();
+		} else {
+			mRenderer->mSkybox = nullptr;
+		}
 		for (auto& it : mChildren) {
 			it->updateRenderer(*(mRenderer.get()));
 		}
@@ -128,8 +129,13 @@ void IScene::updateRenderer() {
 }
 
 void IScene::onEvent(EventType& event) {
-	for (auto& it : mChildren) {
-		it->handleHierarchyEvent(event);
+	if (event.getType() == eEventType::eResizeScreen) {
+		ResizeScreenEventData e = ResizeScreenEvent::getData(event);
+		mRenderer->onScreenResize(e.width, e.height);
+	} else {
+		for (auto& it : mChildren) {
+			it->handleHierarchyEvent(event);
+		}
 	}
 }
 

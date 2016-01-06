@@ -42,7 +42,7 @@ Model::Model(
 
 	initShadowing(engine);
 
-	ProgramLoader loader;
+	ProgramLoader loader(engine);
 
 	std::vector<core::VertexBasic> vertices = shape.getVertices();
 	std::vector<GLuint> indices = shape.getIndices();
@@ -51,9 +51,9 @@ Model::Model(
 			new Mesh(engine, material, buildTextureRegion(diffuseMap),
 					buildTextureRegion(normalMap), buildTextureRegion(specularMap),
 					program, mProgramShadow, mProgramShadowColor,
-					loader.getOcclusionOptimizedQuery(engine),
-					loader.getAmbientOcclusionGeometry(engine),
-					loader.getAmbientOcclusionColor(engine),
+					loader.getOcclusionOptimizedQuery(),
+					loader.getAmbientOcclusionGeometry(),
+					loader.getAmbientOcclusionColor(),
 					engine->getLightManager(),
 					pVertexBufferBasic(new core::VertexBufferBasic(vertices)),
 					pIndexBufferBasic(new core::IndexBufferBasic(indices)),
@@ -288,15 +288,15 @@ pMesh Model::loadMesh(
 		pTextureRegion specularMap,
 		Engine* engine) {
 
-	ProgramLoader loader;
+	ProgramLoader loader(engine);
 
 	if (shape) {
 		pMesh ptr = pMesh(
 				new Mesh(engine, material, diffuseMap, normalMap, specularMap,
 						mProgram, mProgramShadow, mProgramShadowColor,
-						loader.getOcclusionOptimizedQuery(engine),
-						loader.getAmbientOcclusionGeometry(engine),
-						loader.getAmbientOcclusionColor(engine),
+						loader.getOcclusionOptimizedQuery(),
+						loader.getAmbientOcclusionGeometry(),
+						loader.getAmbientOcclusionColor(),
 						engine->getLightManager(),
 						pVertexBufferBasic(
 								new core::VertexBufferBasic(shape, mAnimator)),
@@ -364,13 +364,13 @@ inline void Model::initUniformsCache() {
 }
 
 inline void Model::initShadowing(Engine* engine) {
-	ProgramLoader loader;
+	ProgramLoader loader(engine);
 	if (mAnimator) {
-		mProgramShadow = loader.getShadowWithAnimation(engine);
-		mProgramShadowColor = loader.getShadowColorCodedWithAnimation(engine);
+		mProgramShadow = loader.getShadowWithAnimation();
+		mProgramShadowColor = loader.getShadowColorCodedWithAnimation();
 	} else {
-		mProgramShadow = loader.getShadow(engine);
-		mProgramShadowColor = loader.getShadowColorCoded(engine);
+		mProgramShadow = loader.getShadow();
+		mProgramShadowColor = loader.getShadowColorCoded();
 	}
 }
 

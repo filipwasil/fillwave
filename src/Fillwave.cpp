@@ -149,7 +149,7 @@ pTexture Engine::storeTexture(
 pTexture2DRenderableDynamic Engine::storeTextureDynamic(
 		const std::string& fragmentShaderPath) {
 	const std::string path = fragmentShaderPath;
-	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(this,
+	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
 			fragmentShaderPath);
 	pTexture2DRenderableDynamic t = mImpl->mTextureManager->getDynamic(path,
 			program, glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));
@@ -347,6 +347,10 @@ framework::LightManager* Engine::getLightManager() const {
 	return mImpl->mLightManager.get();
 }
 
+framework::TextureManager* Engine::getTextureManager() const {
+	return mImpl->mTextureManager.get();
+}
+
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 		const std::string& shapePath) {
 	PhysicsMeshBuffer* buffer = new PhysicsMeshBuffer();
@@ -380,8 +384,7 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 void Engine::addPostProcess(
 		const std::string& fragmentShaderPath,
 		GLfloat lifeTime) {
-	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(this,
-			fragmentShaderPath);
+	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
 	core::PostProcessingPass pass(program,
 			mImpl->mTextureManager->getDynamic(fragmentShaderPath, program,
 					glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)),
@@ -521,10 +524,6 @@ const fScene* Engine::getModelFromFile(std::string path) {
 			aiProcess_Triangulate | aiProcess_SortByPType
 					| aiProcess_CalcTangentSpace);
 #endif
-}
-
-GLboolean Engine::isDR() const {
-	return mImpl->mIsDR;
 }
 
 #ifdef FILLWAVE_GLES_3_0

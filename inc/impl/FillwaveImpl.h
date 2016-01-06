@@ -13,7 +13,6 @@
 #include <fillwave/loaders/AndroidLoader.h>
 
 /* core */
-#include <fillwave/core/rendering/FramebufferGeometry.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
 #include <fillwave/core/buffers/PixelBuffer.h>
 
@@ -43,6 +42,7 @@
 #include <fillwave/actions/events/CursorPositionEvent.h>
 #include <fillwave/actions/events/MouseButtonEvent.h>
 #include <fillwave/actions/events/KeyboardEvent.h>
+#include <fillwave/actions/events/ResizeScreenEvent.h>
 #include <fillwave/actions/callbacks/FPSCallback.h>
 #include <fillwave/actions/callbacks/TimedMoveCallback.h>
 #include <fillwave/actions/callbacks/TimedRotateCallback.h>
@@ -103,9 +103,6 @@ struct Engine::EngineImpl {
 	Assimp::Importer mImporter;
 #endif
 
-	static const GLuint mDeferredColorAttachments = 4;
-	static const GLuint mDeferredDepthAttachments = 1;
-
 	/* Screen */
 	GLuint mWindowWidth = 1920;
 	GLuint mWindowHeight = 1200;
@@ -139,36 +136,6 @@ struct Engine::EngineImpl {
 	/* Fences and barriers */
 	puFence mFence;
 
-	/* DR - Deferred rendering */
-	puFramebufferGeometry mGBuffer;
-
-	/* ULC - Uniform location cache */
-	pProgram mProgramDRSpotLight, mProgramDRDirecionalLight,
-			mProgramDRPointLight, mProgramDRDepthless, mProgramDRAmbient;
-
-	GLint mULCCameraPositionSpot, mULCAmbientIntensitySpot, mULCScreenSizeSpot,
-			mULCShadowUnitSpot, mULCIsAOSpot;
-
-	GLint mULCCameraPositionDirectional, mULCAmbientIntensityDirectional,
-			mULCScreenSizeDirectional, mULCShadowUnitDirectional,
-			mULCIsAODirectional;
-
-	GLint mULCCameraPositionPoint, mULCAmbientIntensityPoint, mULCMVPPoint,
-			mULCScreenSizePoint, mULCShadowUnitPoint, mULCIsAOPoint;
-
-	GLint mULCDRDepthlesDiffuseTexel, mULCDRDepthlessPositionTexel,
-			mULCDRScreenSize, uULCDRAScreenSize, uULCDRADiffuseAttachment,
-			uULCDRAAmbientGlobal;
-
-	puMesh mDeferredPointLight;
-
-	/* AO */
-	pProgram mProgramAOGeometry;
-	pProgram mProgramAOColor;
-
-	pTexture2DRenderable mAOGeometryBuffer;
-	pTexture2DRenderable mAOColorBuffer;
-
 	/* OQ */
 	pProgram mProgramOcclusionBox;
 	puVertexBufferPosition mVBOOcclusion;
@@ -194,8 +161,6 @@ struct Engine::EngineImpl {
 	puPostProcessingPass mPostProcessingPassStartup;
 
 	/* Options */
-	GLboolean mIsDR; /* Deferred rendering */
-	GLboolean mIsAO; /* Ambient occlusion */
 	GLboolean mIsOQ; /* Occlusion query */
 
 	/* Callbacks */
@@ -218,6 +183,7 @@ struct Engine::EngineImpl {
 
 	/* Draw types */
 	void draw(GLfloat time);
+	void drawOcclusionPass();
 
 #ifdef FILLWAVE_GLES_3_0
 #else
@@ -229,8 +195,6 @@ struct Engine::EngineImpl {
 	void drawTexture(core::Texture* t, core::Program* p);
 	void drawTexture(core::Texture* t);
 
-	/* Draw passes */
-
 	/* IRenderer */
 	void drawClear();
 	void drawText();
@@ -238,26 +202,6 @@ struct Engine::EngineImpl {
 
 	void drawScene(GLfloat time);
 	void drawSceneCore();
-
-	/* Renderer FR */
-	void drawSceneCoreFR();
-
-	/* Renderer DR */
-	void drawSceneCoreDR();
-	void drawGeometryPass();
-	void drawOcclusionPass();
-	void drawDepthlessPass();
-	void drawAmbientPass();
-	void drawAOPass();
-	void drawColorPass();
-	void drawLightsSpotPass(GLint& textureUnit);
-	void drawLightsDirectionalPass(GLint& textureUnit);
-	void drawLightsPointPass(GLint& textureUnit);
-	void drawColorPassBegin();
-	void drawColorPassEnd();
-
-	/* Renderer PBRP */
-	void drawSceneCorePBRP();
 
 	/* Store */
 
@@ -307,20 +251,14 @@ struct Engine::EngineImpl {
 	void initPipelines();
 	void initUniforms();
 	void initManagement();
-	void initDeferredShading();
-	void initAmbientOcclusion();
-	void initGeometryBuffer();
 	void initExtras();
 	void initOcclusionTest();
-	void initUniformsCache();
 	void initStartup();
-	void initGeometryShading();
 
 	/* Reload */
 
 	void reload();
 	void reloadPickingBuffer();
-	void reloadGeometryBuffer();
 
 	/* Insert */
 
@@ -338,12 +276,11 @@ struct Engine::EngineImpl {
 Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
 :mEngine(engine),
 mFileLoader(rootPath),
+mProgramLoader(engine),
 mBackgroundColor(0.1,0.1,0.1),
 mFrameCounter(0),
 mTimeFactor(1.0),
 mStartupTime(0.0f),
-mIsDR(GL_FALSE),
-mIsAO(GL_FALSE),
 mIsOQ(GL_FALSE) {
 //	init();
 }
@@ -351,12 +288,11 @@ mIsOQ(GL_FALSE) {
 Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
 :mEngine(engine),
 mFileLoader(activity->internalDataPath),
+mProgramLoader(engine),
 mBackgroundColor(0.1,0.1,0.1),
 mFrameCounter(0),
 mTimeFactor(1.0),
 mStartupTime(0.0f),
-mIsDR(GL_FALSE),
-mIsAO(GL_FALSE),
 mIsOQ(GL_FALSE) {
 
 	androidSetActivity(activity);
@@ -367,12 +303,11 @@ mIsOQ(GL_FALSE) {
 Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 		:mEngine(engine),
 				mFileLoader(getFilePathOnly(argv[0])),
+				mProgramLoader(engine),
 				mBackgroundColor(0.1,0.1,0.1),
 				mFrameCounter(0),
 				mTimeFactor(1.0),
 				mStartupTime(0.0f),
-				mIsDR(GL_FALSE),
-				mIsAO(GL_FALSE),
 				mIsOQ(GL_TRUE) {
 #endif
 //	init();
@@ -397,17 +332,7 @@ void Engine::EngineImpl::init() {
 	initUniforms();
 	initPickingBuffer();
 	initOcclusionTest();
-
-#if defined(FILLWAVE_GLES_3_0)
-#else
-	initGeometryBuffer();
-	initDeferredShading();
-	initAmbientOcclusion();
-	initGeometryShading();
-#endif
-
 	initExtras();
-	initUniformsCache();
 
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
 	initStartup(engine);
@@ -443,13 +368,6 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 }
 
-inline void Engine::EngineImpl::initGeometryShading() {
-	GLint MaxPatchVertices = 0;
-	glGetIntegerv(GL_MAX_PATCH_VERTICES, &MaxPatchVertices);
-	FLOG_DEBUG("Max supported patch vertices %d\n", MaxPatchVertices);
-	glPatchParameteri(GL_PATCH_VERTICES, 3);
-}
-
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
@@ -465,76 +383,14 @@ inline void Engine::EngineImpl::initManagement() {
 }
 
 inline void Engine::EngineImpl::initPipelines() {
-	/* DR */
-	mProgramDRDirecionalLight = mProgramLoader.getDRDirectionalLights(mEngine);
-	mProgramDRSpotLight = mProgramLoader.getDRSpotLights(mEngine);
-	mProgramDRPointLight = mProgramLoader.getDRPointLights(mEngine);
-	mProgramDRDepthless = mProgramLoader.getDRDepthless(mEngine);
-	mProgramDRAmbient = mProgramLoader.getDRAmbient(mEngine);
-
 	/* OT */
-	mProgramOcclusionBox = mProgramLoader.getOcclusionOptimizedQuery(mEngine);
-
-	/* AO */
-	mProgramAOGeometry = mProgramLoader.getAmbientOcclusionGeometry(mEngine);
-	mProgramAOColor = mProgramLoader.getAmbientOcclusionColor(mEngine);
+	mProgramOcclusionBox = mProgramLoader.getOcclusionOptimizedQuery();
 
 	/* T */
-	mProgramTextureLookup = mProgramLoader.getQuad(mEngine);
+	mProgramTextureLookup = mProgramLoader.getQuad();
 }
 
 inline void Engine::EngineImpl::initUniforms() {
-	/* DR */
-	glm::vec2 screenSize(mWindowWidth, mWindowHeight);
-
-	mProgramDRDirecionalLight->use();
-	mProgramDRDirecionalLight->uniformPush("uWorldPositionAttachment",
-	FILLWAVE_POSITION_ATTACHMENT);
-	mProgramDRDirecionalLight->uniformPush("uDiffuseTexelAttachment",
-	FILLWAVE_DIFFUSE_ATTACHMENT);
-	mProgramDRDirecionalLight->uniformPush("uNormalAttachment",
-	FILLWAVE_NORMAL_ATTACHMENT);
-	mProgramDRDirecionalLight->uniformPush("uSpecularTexelAttachment",
-	FILLWAVE_SPECULAR_ATTACHMENT);
-	mProgramDRDirecionalLight->uniformPush("uScreenSize", screenSize);
-	mProgramDRDirecionalLight->uniformPush("uAOMap", FILLWAVE_AO_UNIT);
-
-	mProgramDRSpotLight->use();
-	mProgramDRSpotLight->uniformPush("uWorldPositionAttachment",
-	FILLWAVE_POSITION_ATTACHMENT);
-	mProgramDRSpotLight->uniformPush("uDiffuseTexelAttachment",
-	FILLWAVE_DIFFUSE_ATTACHMENT);
-	mProgramDRSpotLight->uniformPush("uNormalAttachment",
-	FILLWAVE_NORMAL_ATTACHMENT);
-	mProgramDRSpotLight->uniformPush("uSpecularTexelAttachment",
-	FILLWAVE_SPECULAR_ATTACHMENT);
-	mProgramDRSpotLight->uniformPush("uScreenSize", screenSize);
-	mProgramDRSpotLight->uniformPush("uAOMap", FILLWAVE_AO_UNIT);
-
-	mProgramDRPointLight->use();
-	mProgramDRPointLight->uniformPush("uWorldPositionAttachment",
-	FILLWAVE_POSITION_ATTACHMENT);
-	mProgramDRPointLight->uniformPush("uDiffuseTexelAttachment",
-	FILLWAVE_DIFFUSE_ATTACHMENT);
-	mProgramDRPointLight->uniformPush("uNormalAttachment",
-	FILLWAVE_NORMAL_ATTACHMENT);
-	mProgramDRPointLight->uniformPush("uSpecularTexelAttachment",
-	FILLWAVE_SPECULAR_ATTACHMENT);
-	mProgramDRPointLight->uniformPush("uScreenSize", screenSize);
-	mProgramDRPointLight->uniformPush("uAOMap", FILLWAVE_AO_UNIT);
-
-	mProgramDRDepthless->use();
-	mProgramDRDepthless->uniformPush("uWorldPositionAttachment",
-	FILLWAVE_POSITION_ATTACHMENT);
-	mProgramDRDepthless->uniformPush("uDiffuseTexelAttachment",
-	FILLWAVE_DIFFUSE_ATTACHMENT);
-	mProgramDRDepthless->uniformPush("uScreenSize", screenSize);
-
-	mProgramDRAmbient->use();
-	mProgramDRAmbient->uniformPush("uDiffuseTexelAttachment",
-	FILLWAVE_DIFFUSE_ATTACHMENT);
-	mProgramDRAmbient->uniformPush("uScreenSize", screenSize);
-
 	mProgramTextureLookup->use();
 	mProgramTextureLookup->uniformPush("uPostProcessingSampler",
 	FILLWAVE_DIFFUSE_UNIT);
@@ -554,87 +410,9 @@ inline void Engine::EngineImpl::initOcclusionTest() {
 	mVAOOcclusion->unbind();
 }
 
-inline void Engine::EngineImpl::initDeferredShading() {
-
-	framework::Material material;
-
-	framework::Sphere sphere(3.0f, 10.0f, 10.0f);
-	std::vector<core::VertexBasic> vertices = sphere.getVertices();
-	std::vector<GLuint> indices = sphere.getIndices();
-
-	mDeferredPointLight = puMesh(
-			new framework::Mesh(mEngine, material, buildTextureRegion(pTexture()),
-					buildTextureRegion(pTexture()), buildTextureRegion(pTexture()),
-					mProgramDRPointLight, pProgram(), pProgram(),
-					mProgramOcclusionBox, pProgram(), pProgram(),
-					mLightManager.get(),
-					pVertexBufferBasic(new core::VertexBufferBasic(vertices)),
-					pIndexBufferBasic(new core::IndexBufferBasic(indices)),
-					nullptr));
-}
-
-inline void Engine::EngineImpl::initAmbientOcclusion() {
-	mAOGeometryBuffer = mTextureManager->getColor2D(mWindowWidth, mWindowHeight);
-	mAOColorBuffer = mTextureManager->getColor2D(mWindowWidth, mWindowHeight);
-}
-
-inline void Engine::EngineImpl::initGeometryBuffer() {
-	GLint maxAttach = 0, maxDrawBuf = 0;
-	glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxAttach);
-	glGetIntegerv(GL_MAX_DRAW_BUFFERS, &maxDrawBuf);
-
-	if (glm::max(maxAttach, maxDrawBuf) > static_cast<GLint>(mDeferredColorAttachments)) {
-		mGBuffer = puFramebufferGeometry(
-				new core::FramebufferGeometry(mTextureManager.get(), mWindowWidth,
-						mWindowHeight, mDeferredColorAttachments,
-						mDeferredDepthAttachments));
-	}
-}
-
-inline void Engine::EngineImpl::initUniformsCache() {
-	mULCCameraPositionSpot = mProgramDRSpotLight->getUniformLocation(
-			"uCameraPosition");
-	mULCAmbientIntensitySpot = mProgramDRSpotLight->getUniformLocation(
-			"uLight.base.ambientIntensity");
-	mULCScreenSizeSpot = mProgramDRSpotLight->getUniformLocation("uScreenSize");
-	mULCShadowUnitSpot = mProgramDRSpotLight->getUniformLocation("uShadowUnit");
-	mULCIsAOSpot = mProgramDRSpotLight->getUniformLocation("uIsAO");
-
-	mULCCameraPositionDirectional =
-			mProgramDRDirecionalLight->getUniformLocation("uCameraPosition");
-	mULCAmbientIntensityDirectional =
-			mProgramDRDirecionalLight->getUniformLocation("uAmbientIntensity");
-	mULCScreenSizeDirectional = mProgramDRDirecionalLight->getUniformLocation(
-			"uScreenSize");
-	mULCShadowUnitDirectional = mProgramDRDirecionalLight->getUniformLocation(
-			"uShadowUnit");
-	mULCIsAODirectional = mProgramDRDirecionalLight->getUniformLocation("uIsAO");
-
-	mULCCameraPositionPoint = mProgramDRPointLight->getUniformLocation(
-			"uCameraPosition");
-	mULCMVPPoint = mProgramDRPointLight->getUniformLocation("uMVP");
-	mULCScreenSizePoint = mProgramDRPointLight->getUniformLocation(
-			"uScreenSize");
-	mULCShadowUnitPoint = mProgramDRPointLight->getUniformLocation(
-			"uShadowUnit");
-	mULCIsAOPoint = mProgramDRSpotLight->getUniformLocation("uIsAO");
-
-	mULCDRDepthlesDiffuseTexel = mProgramDRDepthless->getUniformLocation(
-			"uDiffuseTexelAttachment");
-	mULCDRDepthlessPositionTexel = mProgramDRDepthless->getUniformLocation(
-			"uWorldPositionAttachment");
-	mULCDRScreenSize = mProgramDRDepthless->getUniformLocation("uScreenSize");
-
-	uULCDRAScreenSize = mProgramDRAmbient->getUniformLocation("uScreenSize");
-	uULCDRADiffuseAttachment = mProgramDRAmbient->getUniformLocation(
-			"uDiffuseTexelAttachment");
-	uULCDRAAmbientGlobal = mProgramDRAmbient->getUniformLocation("uAmbient");
-}
-
 inline void Engine::EngineImpl::initStartup() {
 
-	pProgram program = mProgramLoader.getQuadCustomFragmentShaderStartup(
-			mEngine);
+	pProgram program = mProgramLoader.getQuadCustomFragmentShaderStartup();
 
 	program->use();
 	program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
@@ -690,11 +468,7 @@ void Engine::EngineImpl::reload() {
 	mPickingPixelBuffer->reload();
 	reloadPickingBuffer();
 
-	reloadGeometryBuffer();
-}
-
-inline void Engine::EngineImpl::reloadGeometryBuffer() {
-	mGBuffer->reload();
+//	mScene->resetRenderer(); xxx
 }
 
 inline void Engine::EngineImpl::reloadPickingBuffer() {
@@ -927,43 +701,11 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 }
 
 inline void Engine::EngineImpl::drawSceneCore() {
-	if (mIsDR) {
-		drawSceneCoreDR();
-	} else {
-		drawSceneCoreFR();
-	}
-}
-
-inline void Engine::EngineImpl::drawSceneCoreFR() {
 	if (mIsOQ) {
 		drawOcclusionPass();
 	}
 	drawClear();
-	mScene->drawSkybox();
-	glClear(GL_DEPTH_BUFFER_BIT);
 	mScene->draw();
-}
-
-inline void Engine::EngineImpl::drawSceneCoreDR() {
-	if (mIsOQ) {
-		drawOcclusionPass();
-	}
-	drawClear();
-	mGBuffer->setAttachments(); //bind for geom pass
-	drawGeometryPass();
-	drawAOPass();
-	drawColorPass();
-	mDebugger->renderGeometryBuffer(mWindowWidth, mWindowHeight,
-			mDeferredColorAttachments, mGBuffer.get());
-}
-
-inline void Engine::EngineImpl::drawGeometryPass() {
-	glDepthMask(GL_TRUE);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_BLEND);
-	mScene->drawDR();
-	glDepthMask(GL_FALSE);
 }
 
 inline void Engine::EngineImpl::drawOcclusionPass() {
@@ -980,158 +722,6 @@ inline void Engine::EngineImpl::drawOcclusionPass() {
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
 	mVAOOcclusion->unbind();
-}
-
-inline void Engine::EngineImpl::drawAOPass() {
-	mAOGeometryBuffer->bindForWriting();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	mScene->drawAOG();
-
-	mAOColorBuffer->bindForWriting();
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	mAOGeometryBuffer->bind(FILLWAVE_POSITION_ATTACHMENT);
-	mScene->drawAOC();
-}
-
-inline void Engine::EngineImpl::drawColorPassBegin() {
-	mGBuffer->setAttachments();
-
-	glDisable(GL_DEPTH_TEST);
-	glEnable(GL_BLEND);
-	glBlendEquation(GL_FUNC_ADD);
-	glBlendFunc(GL_ONE, GL_ONE);
-
-	mGBuffer->setAttachmentSummaryForWriting();
-	mGBuffer->bindAttachments();
-}
-
-inline void Engine::EngineImpl::drawColorPass() {
-	drawColorPassBegin();
-
-	drawAmbientPass();
-
-	drawDepthlessPass();
-
-	GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
-
-	mAOColorBuffer->bind(FILLWAVE_AO_UNIT);
-
-	drawLightsSpotPass(currentTextureUnit);
-	drawLightsDirectionalPass(currentTextureUnit);
-	drawLightsPointPass(currentTextureUnit);
-
-	drawColorPassEnd();
-}
-
-inline void Engine::EngineImpl::drawAmbientPass() {
-	mProgramDRAmbient->use();
-	core::Uniform::push(uULCDRAAmbientGlobal, mScene->getAmbient());
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-}
-
-inline void Engine::EngineImpl::drawDepthlessPass() {
-	mProgramDRDepthless->use();
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-}
-
-inline void Engine::EngineImpl::drawLightsSpotPass(GLint& textureUnit) {
-	for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
-
-		mProgramDRSpotLight->use();
-		mLightManager->updateDeferredBufferSpot(i, mProgramDRSpotLight.get(),
-				textureUnit++);
-
-		core::Uniform::push(mULCCameraPositionSpot,
-				mScene->getCamera()->getTranslation());
-		core::Uniform::push(mULCIsAOSpot, mIsAO ? 1 : 0);
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	}
-}
-
-inline void Engine::EngineImpl::drawLightsDirectionalPass(GLint& textureUnit) {
-	for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany(); i++) {
-
-		mProgramDRDirecionalLight->use();
-		mLightManager->updateDeferredBufferDirectional(i,
-				mProgramDRDirecionalLight.get(), textureUnit++);
-
-		core::Uniform::push(mULCCameraPositionDirectional,
-				mScene->getCamera()->getTranslation());
-		core::Uniform::push(mULCIsAODirectional, mIsAO ? 1 : 0);
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	}
-}
-
-inline void Engine::EngineImpl::drawLightsPointPass(GLint& textureUnit) {
-	glEnable(GL_STENCIL_TEST);
-
-	for (GLint i = 0; i < mLightManager->getLightsPointHowMany(); i++) {
-		// DSStencilPass
-
-		mGBuffer->setAttachmentStencilDepth();
-
-		// Disable color/depth write and enable stencil
-		glEnable(GL_DEPTH_TEST);
-		glDisable(GL_CULL_FACE);
-		glClear(GL_STENCIL_BUFFER_BIT);
-		glDisable(GL_BLEND);
-
-		// We need the stencil test to be enabled but we want it
-		// to succeed always. Only the depth test matters.
-		glStencilFunc(GL_ALWAYS, 0, 0);
-
-		glStencilOpSeparate(GL_BACK, GL_KEEP, GL_INCR_WRAP, GL_KEEP);
-		glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_DECR_WRAP, GL_KEEP);
-
-		mProgramDRPointLight->use();
-		framework::ICamera* camera = mScene->getCamera().get();
-		mLightManager->updateDeferredBufferPoint(i, mProgramDRPointLight.get(),
-				textureUnit++);
-
-		core::Uniform::push(mULCCameraPositionPoint, camera->getTranslation());
-		core::Uniform::push(mULCMVPPoint,
-				camera->getViewProjection()
-						* glm::translate(glm::mat4(1.0),
-								mLightManager->getLightPoint(i)->getTranslation()));
-
-		core::Uniform::push(mULCIsAOPoint, mIsAO ? 1 : 0);
-//xxx      if runtime changing is not needed
-//      if (mIsAO) {
-//         core::Uniform::push(mULCIsAOPoint, 1);
-//      }
-
-		mDeferredPointLight->drawFast(*(camera));
-
-		//BindForLightPass
-		mGBuffer->setAttachmentSummaryForWriting();
-		mGBuffer->bindAttachments();
-
-		//draw regular
-		glStencilFunc(GL_NOTEQUAL, 0, 0xFF);
-
-		glDisable(GL_DEPTH_TEST);
-		glEnable(GL_BLEND);
-		glBlendEquation(GL_FUNC_ADD);
-		glBlendFunc(GL_ONE, GL_ONE);
-
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_FRONT);
-
-		mDeferredPointLight->drawFast(*(camera));
-
-		glCullFace(GL_BACK);
-		glDisable(GL_BLEND);
-	}
-
-	glDisable(GL_STENCIL_TEST);
-}
-
-inline void Engine::EngineImpl::drawColorPassEnd() {
-	mGBuffer->setAttachmentSummaryForReading();
-	glBlitFramebuffer(0, 0, mWindowWidth, mWindowHeight, 0, 0, mWindowWidth,
-			mWindowHeight,
-			GL_COLOR_BUFFER_BIT,
-			GL_LINEAR);
 }
 
 inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
@@ -1317,31 +907,13 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 
 	mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
 
-	if (mIsDR) {
-		mGBuffer->resize(mWindowWidth, mWindowHeight);
+	if (mScene) {
+		ResizeScreenEventData d;
+		d.width = width;
+		d.height = height;
+		ResizeScreenEvent e(d);
+		mScene->onEvent(e);
 	}
-
-	mProgramDRSpotLight->use();
-	core::Uniform::push(mULCScreenSizeSpot,
-			glm::vec2(mWindowWidth, mWindowHeight));
-
-	mProgramDRDirecionalLight->use();
-	core::Uniform::push(mULCScreenSizeDirectional,
-			glm::vec2(mWindowWidth, mWindowHeight));
-
-	mProgramDRPointLight->use();
-	core::Uniform::push(mULCScreenSizePoint,
-			glm::vec2(mWindowWidth, mWindowHeight));
-
-	mProgramDRDepthless->use();
-	core::Uniform::push(mULCDRScreenSize,
-			glm::vec2(mWindowWidth, mWindowHeight));
-
-	mProgramDRAmbient->use();
-	core::Uniform::push(uULCDRAScreenSize,
-			glm::vec2(mWindowWidth, mWindowHeight));
-
-	core::Program::disusePrograms();
 }
 
 /* Callbacks */

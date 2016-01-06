@@ -20,6 +20,7 @@ enum class eEventType {
 	eCharacterMods,
 	eTime,
 	eTouch,
+	eResizeScreen,
 	eCustom0,
 	eCustom1,
 	eCustom2,

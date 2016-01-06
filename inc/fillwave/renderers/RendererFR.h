@@ -18,6 +18,7 @@ public:
 	RendererFR() = default;
 	virtual ~RendererFR() = default;
 
+	void onScreenResize(GLuint width, GLuint height);
 	void update(GLuint* programId, Entity* entity);
 	void draw(ICamera& camera);
 	void reset();

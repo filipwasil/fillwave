@@ -28,10 +28,6 @@ public:
 
 	virtual ~IScene() = default;
 
-	/* Materials */
-	glm::vec3 getAmbient();
-	void setAmbient(glm::vec3 cursor);
-
 	void updateDependencies();
 	void updateRenderer();
 
@@ -41,8 +37,9 @@ public:
 	void drawCursor();
 	void moveCursor(glm::vec2 position);
 
-	/* Skybox */
+	/* Scene */
 	void setSkybox(pSkybox skybox);
+	void setAmbient(glm::vec3 cursor);
 	void setRenderer(IRenderer* renderer);
 
 	/* Pickable */
@@ -52,18 +49,14 @@ public:
 	/* Events */
 	void onEvent(EventType& event);
 
-	/* Draw methods - base for renderer */
-	virtual void draw(ICamera& c) = 0;
-	virtual void drawDR(ICamera& c) = 0;
+	void draw(ICamera& c);
+	void drawDepth(ICamera& camera);
+	void drawDepthColor(ICamera& camera, glm::vec3& position);
+
+	/* Interface */
 	virtual void draw() = 0;
-	virtual void drawDR() = 0;
-	virtual void drawAOG() = 0;
-	virtual void drawAOC() = 0;
-	virtual void drawDepth(ICamera& camera);
-	virtual void drawDepthColor(ICamera& camera, glm::vec3& position);
 	virtual void drawDepthInt() = 0;
 	virtual void drawPicking() = 0;
-	virtual void drawSkybox() = 0;
 	virtual void drawOcclusion() = 0;
 	virtual pICamera getCamera() = 0;
 

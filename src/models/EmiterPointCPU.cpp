@@ -41,9 +41,9 @@ EmiterPointCPU::EmiterPointCPU(
 				mStartVelocity(startVelocity),
 				mStartPosition(startPosition) {
 
-	ProgramLoader loader;
+	ProgramLoader loader(engine);
 
-	mProgram = loader.getParticleCPU(engine);
+	mProgram = loader.getParticleCPU();
 
 	/* Fill buffers */
 	GLfloat time = 0.0f; // start time

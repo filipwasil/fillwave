@@ -66,7 +66,7 @@ MeshTerrain::MeshTerrain(
 	GLfloat gapSize = 0.2 * 16 / density;
 	GLint indexTerrainChunk = radius;
 
-	ProgramLoader loader;
+	ProgramLoader loader(engine);
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
@@ -75,11 +75,11 @@ MeshTerrain::MeshTerrain(
 							buildTextureRegion(diffuseMap),
 							buildTextureRegion(normalMap),
 							buildTextureRegion(specularMap), program,
-							loader.getShadow(engine),
-							loader.getShadowColorCoded(engine),
-							loader.getOcclusionOptimizedQuery(engine),
-							loader.getAmbientOcclusionGeometry(engine),
-							loader.getAmbientOcclusionColor(engine),
+							loader.getShadow(),
+							loader.getShadowColorCoded(),
+							loader.getOcclusionOptimizedQuery(),
+							loader.getAmbientOcclusionGeometry(),
+							loader.getAmbientOcclusionColor(),
 							engine->getLightManager(),
 							pVertexBufferBasic(
 									new core::VertexBufferBasic(constructor, density,
