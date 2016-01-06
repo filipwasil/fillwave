@@ -13,6 +13,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class BoxOcclusion
+ * \brief Basic Shape for specific usage, providing each model to participate in OQ algorithm
+ */
+
 class BoxOcclusion: public Shape<core::VertexPosition> {
 public:
 	BoxOcclusion(GLfloat quadSize = 1.0f)

@@ -15,6 +15,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class TreePtr
+ * \brief Basic tree template class. Enables attaching and detaching nodes.
+ */
+
 template <class T>
 class TreePtr : public ITreeNode {
 public:

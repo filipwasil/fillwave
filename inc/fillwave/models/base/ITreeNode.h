@@ -11,6 +11,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class ITreeNode
+ * \brief Basic tree ITreeNode Interface.
+ */
+
 class ITreeNode {
 public:
 	ITreeNode() = default;

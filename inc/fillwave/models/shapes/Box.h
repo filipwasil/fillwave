@@ -13,6 +13,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class Box
+ * \brief Basic Shape for general usage. Indices and vertices provided.
+ */
+
 class Box: public Shape<core::VertexBasic> {
 public:
 	Box(GLfloat quadSize = 1.0f)

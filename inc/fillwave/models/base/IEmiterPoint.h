@@ -21,7 +21,7 @@ namespace fillwave {
 class Engine;
 namespace framework {
 
-/*! \class EmiterPoint
+/*! \class IEmiterPoint
  * \brief Drawable Entity which emits particles.
  */
 

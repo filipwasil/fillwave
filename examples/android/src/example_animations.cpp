@@ -6,16 +6,17 @@
  */
 
 #include <fillwave/Fillwave.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 using namespace fillwave;
+using namespace fillwave::framework;
 
-void perform(fillwave::Engine* engine) {
+void perform(Engine* engine) {
     /* Scene */
     pScene scene = buildScene();
 
     /* Camera */
-    pCameraPerspective camera = pCameraPerspective ( new space::CameraPerspective(glm::vec3(0.0,2.0,18.0),
+    pCameraPerspective camera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,2.0,18.0),
                                                                 glm::quat(),
                                                                 glm::radians(90.0),
                                                                 1.0,
@@ -26,7 +27,7 @@ void perform(fillwave::Engine* engine) {
     engine->setCurrentScene(scene);
 
     /* Program */
-    loader::ProgramLoader loader;
+    ProgramLoader loader(engine);
     pProgram program = loader.getDefault();
     pProgram aprogram = loader.getDefaultBones();
 
@@ -95,17 +96,17 @@ void perform(fillwave::Engine* engine) {
     scene->attach(wall);
     wall->moveInDirection(glm::vec3(0.0,-2.0,0.0));
 
-    actions::SequenceCallback* seq = new actions::SequenceCallback();
-    seq->push_back(new actions::TimedMoveCallback(entity1, glm::vec3(16.0,0.0,0.0), 10.0));
-    seq->push_back(new actions::TimedMoveCallback(entity1, glm::vec3(-16.0,0.0,0.0), 10.0));
-    actions::LoopCallback* loo = new actions::LoopCallback(seq, FILLWAVE_ENDLESS);
+    SequenceCallback* seq = new SequenceCallback();
+    seq->push_back(new TimedMoveCallback(entity1, glm::vec3(16.0,0.0,0.0), 10.0));
+    seq->push_back(new TimedMoveCallback(entity1, glm::vec3(-16.0,0.0,0.0), 10.0));
+    LoopCallback* loo = new LoopCallback(seq, FILLWAVE_ENDLESS);
     entity1->attachHierarchyCallback(loo);
 
     entity1->scaleTo(0.02);
     scene->attach(entity1);
 
 	   pTexture gTexture = engine->storeTexture("fire.png");
-	   pEmiterPointGPU e = pEmiterPointGPU(new::particles::EmiterPointGPU(engine,
+	   pEmiterPointGPU e = pEmiterPointGPU(new EmiterPointGPU(engine,
 	                 0.3,
 	                 2000.0,
 	                 glm::vec4(1.0,1.0,1.0,1.0),
@@ -121,7 +122,7 @@ void perform(fillwave::Engine* engine) {
 	                 GL_ONE,
 	                 GL_FALSE));
 
-	   e->attachHierarchyCallback(new actions::TimedEmiterUpdateCallback(e, FILLWAVE_ENDLESS));
+	   e->attachHierarchyCallback(new TimedEmiterUpdateCallback(e, FILLWAVE_ENDLESS));
 //	   scene->attach(e);
 	    entity1->attach(e);
 

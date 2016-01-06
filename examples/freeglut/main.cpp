@@ -1,13 +1,12 @@
 
 #include <fillwave/Fillwave.h>
-#include <fillwave/extras/Debugger.h>
 #include <GL/freeglut.h>
 #include <memory>
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 using namespace fillwave;
-using namespace fillwave::actions;
+using namespace fillwave::framework;
 using namespace std;
 
 FLOGINIT_DEFAULT()
@@ -56,7 +55,7 @@ int main(int argc, char *argv[]) {
 
 	engine = new Engine(argc, argv);
 	auto camera =
-			make_shared < space::CameraPerspective
+			make_shared < CameraPerspective
 					> (glm::vec3(0.0, 0.0, 6.0), glm::quat(), glm::radians(90.0), 1.0, 0.1, 1000.0);
 	auto scene = buildScenePerspective(camera);
 	engine->setCurrentScene(scene);
@@ -70,8 +69,8 @@ int main(int argc, char *argv[]) {
 	LoopCallback* loop[SPHERES];
 
 	/* Program */
-	loader::ProgramLoader loader;
-	pProgram progDefault = loader.getDefault(engine);
+	ProgramLoader loader(engine);
+	pProgram progDefault = loader.getDefault();
 
 	/* Lights */
 	engine->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(),
@@ -84,7 +83,7 @@ int main(int argc, char *argv[]) {
 
 	scene->attach(wall);
 
-	models::BuilderModelExternalMaps builder(engine, "meshes/sphere.obj",
+	BuilderModelExternalMaps builder(engine, "meshes/sphere.obj",
 			progDefault, "textures/test.png");
 
 	for (GLint i = 0; i < SPHERES; i++) {

@@ -8,18 +8,22 @@
 #ifndef INC_FILLWAVE_RENDERERS_RENDERERDR_H_
 #define INC_FILLWAVE_RENDERERS_RENDERERDR_H_
 
-#if defined(FILLWAVE_GLES_3_0)
-#else
-
 #include <fillwave/renderers/IRenderer.h>
 #include <fillwave/core/rendering/FramebufferGeometry.h>
 #include <fillwave/models/Mesh.h>
 #include <fillwave/Math.h>
 
+#if defined(FILLWAVE_GLES_3_0)
+#else
+
 namespace fillwave {
 namespace framework {
 
 class ProgramLoader;
+
+/*! \class RendererDR
+ * \brief Deferred IRenderer.
+ */
 
 class RendererDR: public IRenderer {
 public:

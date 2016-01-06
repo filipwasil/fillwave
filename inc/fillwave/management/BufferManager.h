@@ -14,6 +14,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class VAOObject
+ * \brief Connects VAO pointer and VAO's user pointer in single class.
+ */
+
 struct VAOObject {
 	Reloadable* mVAOUser;
 	pwVertexArray mVAO;

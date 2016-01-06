@@ -16,8 +16,8 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class ItemCallback
- * \brief Base for item callbacks.
+/*! \class Callback
+ * \brief Base for all callbacks.
  */
 
 class Callback: public Finishable {

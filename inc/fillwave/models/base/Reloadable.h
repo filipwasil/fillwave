@@ -16,7 +16,7 @@ class Engine;
 namespace framework {
 
 /*! \class Reloadable
- * \brief Encapsulates Renderable objects.
+ * \brief Encapsulates reloadable objects.
  */
 
 class Reloadable {

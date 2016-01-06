@@ -13,6 +13,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class RendererPBRP
+ * \brief Program based render pases
+ */
+
 class RendererPBRP: public IRenderer {
 public:
 	RendererPBRP() = default;

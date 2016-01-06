@@ -1213,8 +1213,8 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_buildTestScene
 (JNIEnv *, jobject, jlong engine) {
 
 	Engine* e = reinterpret_cast<Engine*>(engine);
-	ProgramLoader loader;
-	pModel m = pModel ( new Model(e, loader.getDefaultBones(e), "animations/beast/beast.dae"));
+	ProgramLoader loader(e);
+	pModel m = pModel ( new Model(e, loader.getDefaultBones(), "animations/beast/beast.dae"));
 
 	/* Scene */
 	pScenePerspective s = buildScenePerspective();

@@ -13,6 +13,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class RendererFR
+ * \brief Forward IRenderer.
+ */
+
 class RendererFR: public IRenderer {
 public:
 	RendererFR() = default;

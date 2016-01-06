@@ -41,7 +41,7 @@ public:
 			GLint activeAnimation);
 };
 
-/*! \class BoneManager
+/*! \class Animator
  * \brief Manager to handle Bone objects in animation.
  */
 

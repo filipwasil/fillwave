@@ -5,9 +5,6 @@
  *      Author: filip
  */
 
-#if defined(FILLWAVE_GLES_3_0)
-#else
-
 #include <fillwave/renderers/RendererDR.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
@@ -15,6 +12,9 @@
 #include <fillwave/management/LightManager.h>
 
 #include <fillwave/Fillwave.h>
+
+#if defined(FILLWAVE_GLES_3_0)
+#else
 
 FLOGINIT_DEFAULT()
 

@@ -69,7 +69,7 @@ typedef std::unique_ptr<TextureObject2DRenderable> puTextureObject2DRenderable;
 typedef TextureObject2D<pTexture2DRenderableDynamic> TextureObject2DDynamic;
 typedef std::unique_ptr<TextureObject2DDynamic> puTextureObject2DDynamic;
 
-/*! \typedef TextureObject3D
+/*! \class TextureObject3D
  * \brief Data structure containing each Texture3D instance info.
  */
 

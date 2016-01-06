@@ -14,7 +14,7 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class Camera
+/*! \class ICamera
  * \brief Stores camera view parameters.
  */
 

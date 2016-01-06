@@ -20,6 +20,10 @@ class ICamera;
 class Entity;
 class Skybox;
 
+/*! \class IRenderer
+ * \brief Base for all renderers.
+ */
+
 class IRenderer {
 public:
 	IRenderer()
