@@ -36,7 +36,7 @@ public:
 
 	void detach(T node) {
 		auto _compare_function =
-				[node](const T& e) -> bool {bool found = (e == node); if (found) node->onDetached(); return found;};
+				[node](const T& e) -> bool {bool found = (e.get() == node.get()); if (found) node->onDetached(); return found;};
 		auto _begin = mChildren.begin();
 		auto _end = mChildren.end();
 		auto& it = std::remove_if(_begin, _end, _compare_function);
