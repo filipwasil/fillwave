@@ -13,7 +13,7 @@
 #include <fillwave/models/Cursor.h>
 #include <fillwave/models/Terrain.h>
 #include <fillwave/models/base/IDrawable.h>
-#include <fillwave/renderers/RendererFR.h>
+#include <fillwave/renderers/RendererPBRP.h>
 
 namespace fillwave {
 namespace framework {

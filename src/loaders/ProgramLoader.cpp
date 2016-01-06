@@ -1463,37 +1463,47 @@ pProgram ProgramLoader::getDefaultDR() {
 
 	ShaderLoaderVertex loaderVertex;
 
-	return mEngine->storeProgram("dr_g",
+	pProgram p = mEngine->storeProgram("dr_g",
 			mEngine->storeShaderFragment("fillwave_dr_g.frag", fsDR)
 					+ mEngine->storeShaderVertex("fillwave_default.vert",
 							loaderVertex.getSource()));
+
+	initDefaultUniforms(p.get());
+
+	return p;
 }
 
 pProgram ProgramLoader::getDefaultFR() {
 	ShaderLoaderFragment loaderFragment;
 	ShaderLoaderVertex loaderVertex;
 
-	return mEngine->storeProgram("default",
+	pProgram p = mEngine->storeProgram("default",
 			mEngine->storeShaderFragment("fillwave_default.frag",
 					loaderFragment.getSource())
 					+ mEngine->storeShaderVertex("fillwave_default.vert",
 							loaderVertex.getSource()));
+
+	initDefaultUniforms(p.get());
+
+	return p;
 }
 
 pProgram ProgramLoader::getDefault() {
-	pProgram p = getDefaultFR();
-	initDefaultUniforms(p.get());
-	return p;
+	return getDefaultFR();
 }
 
 pProgram ProgramLoader::getDefaultBonesDR() {
 
 	ShaderLoaderVertex loaderVertex(true);
 
-	return mEngine->storeProgram("default_animated",
+	pProgram p = mEngine->storeProgram("default_animated",
 			mEngine->storeShaderFragment("fillwave_default_animated.frag", fsDR)
 					+ mEngine->storeShaderVertex("fillwave_default_animated.vert",
 							loaderVertex.getSource()));
+
+	initDefaultUniforms(p.get());
+
+	return p;
 }
 
 pProgram ProgramLoader::getDefaultBonesFR() {
@@ -1501,17 +1511,19 @@ pProgram ProgramLoader::getDefaultBonesFR() {
 	ShaderLoaderFragment loaderFragment;
 	ShaderLoaderVertex loaderVertex(true);
 
-	return mEngine->storeProgram("default_animated_dr",
+	pProgram p = mEngine->storeProgram("default_animated_dr",
 			mEngine->storeShaderFragment("fillwave_default.frag",
 					loaderFragment.getSource())
 					+ mEngine->storeShaderVertex("fillwave_default_animated.vert",
 							loaderVertex.getSource()));
+
+	initDefaultUniforms(p.get());
+
+	return p;
 }
 
 pProgram ProgramLoader::getDefaultBones() {
-	pProgram p = getDefaultBonesFR();
-	initDefaultUniforms(p.get());
-	return p;
+	return getDefaultBonesFR();
 }
 
 void ProgramLoader::initDefaultUniforms(core::Program* program) {

@@ -32,9 +32,7 @@ FramebufferGeometry::FramebufferGeometry(
 				mNone(GL_NONE) {
 
 	mDeferredColors = manager->getDeferredColor(width, height, mColorBufferSize);
-
 	mStencilDepth = manager->getDeferredStencilDepth(width, height);
-
 	mSummary = manager->getDeferredColorScreen(width, height);
 
 	reload();

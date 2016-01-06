@@ -88,6 +88,9 @@ public:
 	/* Render passes */
 	virtual void updateRenderer(IRenderer& renderer);
 
+	/* Animations */
+	virtual bool isAnimated() const;
+
 	/* Log */
 	virtual void log() const;
 

@@ -45,10 +45,8 @@ void Programmable::drawWithEffectsDR(ICamera& camera) {
 	core::Program* p = mProgram.get();
 
 	/* Effects execution */
-	p->use();
 	std::for_each(mEffects.begin(), mEffects.end(),
 			[p](pEffect e) {e->preDrawAction(p);});
-	core::Program::disusePrograms();
 
 	/* Draw */
 	for (auto& it : mChildren) {
@@ -56,10 +54,8 @@ void Programmable::drawWithEffectsDR(ICamera& camera) {
 	}
 
 	/* Effects pre draw action */
-	p->use();
 	std::for_each(mEffects.begin(), mEffects.end(),
 			[p](pEffect e) {e->postDrawAction(p);});
-	core::Program::disusePrograms();
 }
 
 void Programmable::drawWithEffectsPBRP(ICamera& camera) {

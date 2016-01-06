@@ -18,6 +18,7 @@
 #include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
 #include <TerrainConstructors/MountainConstructor.h>
+#include <fillwave/renderers/RendererDR.h>
 
 /* Physics */
 //#include <bullet>
@@ -64,7 +65,9 @@ void init() {
 
    /* Shaders */
    ProgramLoader loader(gEngine);
-   gProgram = loader.getDefault();
+   gProgram = loader.getDefaultDR();
+
+   gScene->setRenderer(new RendererDR(gEngine, loader));
 
    /* Models */
 
@@ -85,7 +88,7 @@ void perform() {
    gEngine->configureFPSCounter("fonts/Titania",0.7,0.9,100.0);
    gEngine->setCurrentScene(gScene);
 
-   pEffect fog(new Fog());
+//   pEffect fog(new Fog());
 
    gScene->setCamera(gCamera);
 
@@ -101,7 +104,7 @@ void perform() {
                                     20,
                                     16));
    terrain->scaleTo(2.0);
-   terrain->addEffect(fog);
+//   terrain->addEffect(fog);
    gScene->attach(terrain);
 }
 

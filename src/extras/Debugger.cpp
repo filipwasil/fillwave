@@ -185,40 +185,6 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
 	glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
-void Debugger::renderGeometryBuffer(
-		GLuint width,
-		GLuint height,
-		GLuint attachments,
-		core::FramebufferGeometry* buffer) {
-	GLuint debugAttachmentScreens[4][4] = { { 0, 0, width / 2, height / 2 }, // position
-			{ 0, height / 2, width / 2, height },     // color
-			{ width / 2, height / 2, width, height }, // normal
-			{ width / 2, 0, width, height / 2 }       // specular
-	};
-
-	/* Move to right up corner*/
-	for (int i = 0; i < 4; i++) {
-		debugAttachmentScreens[i][0] = (debugAttachmentScreens[i][0] + width) / 2;
-		debugAttachmentScreens[i][1] = (debugAttachmentScreens[i][1] + height)
-				/ 2;
-		debugAttachmentScreens[i][2] = (debugAttachmentScreens[i][2] + width) / 2;
-		debugAttachmentScreens[i][3] = (debugAttachmentScreens[i][3] + height)
-				/ 2;
-	}
-
-	core::Framebuffer::bindScreenFramebufferForWriting();
-	for (GLuint i = 0; i < attachments; i++) {
-		buffer->bindForReading(); /* We will bind GBuffer for reading ...*/
-		buffer->setReadColorAttachment(i); /* ... and take color attachment color i 0 (out location 0 from fragment shader) ... */
-		glBlitFramebuffer(0, 0, width, height, debugAttachmentScreens[i][0],
-				debugAttachmentScreens[i][1], debugAttachmentScreens[i][2],
-				debugAttachmentScreens[i][3],
-				GL_COLOR_BUFFER_BIT,
-				GL_LINEAR); /* ... to finally copy it into main framebuffer */
-	}
-	core::Framebuffer::bindScreenFramebuffer();
-}
-
 inline void Debugger::initBuffers() {
 	if (mVBO) {
 		mVBO->reload();

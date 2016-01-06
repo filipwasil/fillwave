@@ -55,6 +55,8 @@ public:
 
 	virtual ~Model();
 
+	bool isAnimated() const;
+
 	void reload();
 
 	void draw(ICamera& camera);

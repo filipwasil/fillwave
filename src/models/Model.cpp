@@ -383,6 +383,10 @@ inline void Model::initAnimations(const fScene* scene) {
 	}
 }
 
+bool Model::isAnimated() const {
+	return mAnimator ? GL_TRUE : GL_FALSE;
+}
+
 inline void Model::evaluateAnimations() {
 	if (mAnimator) {
 		mAnimator->updateBonesBuffer();
@@ -394,7 +398,6 @@ inline void Model::evaluateAnimations() {
 		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
 	}
 }
-
 
 void Model::updateRenderer(IRenderer& renderer) {
 	GLuint id = mProgram.get()->getHandle();

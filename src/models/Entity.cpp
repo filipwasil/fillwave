@@ -31,6 +31,10 @@ Entity::~Entity() {
 	FLOG_DEBUG("Entity destroyed");
 }
 
+bool Entity::isAnimated() const {
+	return false;
+}
+
 void Entity::draw(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->draw(camera);

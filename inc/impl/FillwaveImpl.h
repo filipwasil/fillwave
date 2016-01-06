@@ -899,6 +899,7 @@ void Engine::EngineImpl::runCallbacks(
 }
 
 void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
+
 	mWindowWidth = width;
 	mWindowHeight = height;
 	glViewport(0, 0, mWindowWidth, mWindowHeight);
