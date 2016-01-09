@@ -1,5 +1,3 @@
-## WARNING: This is a legacy project. Android Activity using JNI stub will be available in original Fillwave repo in couple of days.
-
 # fillwave-android-activity
 
 Example of a Android Activity project using native Fillwave graphics engine.
