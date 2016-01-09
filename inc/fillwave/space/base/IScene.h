@@ -13,7 +13,7 @@
 #include <fillwave/models/Cursor.h>
 #include <fillwave/models/Terrain.h>
 #include <fillwave/models/base/IDrawable.h>
-#include <fillwave/renderers/RendererPBRP.h>
+#include <fillwave/renderers/RendererFR.h>
 
 namespace fillwave {
 namespace framework {
@@ -24,7 +24,7 @@ namespace framework {
 
 class IScene : public TreePtr<pEntity> {
 public:
-	IScene(IRenderer* renderer = new RendererPBRP());
+	IScene(IRenderer* renderer = new RendererFR());
 
 	virtual ~IScene() = default;
 
