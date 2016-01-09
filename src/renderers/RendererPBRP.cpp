@@ -22,9 +22,12 @@ void RendererPBRP::onScreenResize(GLuint /*width*/, GLuint /*height*/) {
 }
 
 void RendererPBRP::update(GLuint* programId, Entity* entity) {
+	static int d =0;
 	if (mRenderPasses.find(*programId) != mRenderPasses.end()) {
+		FLOG_DEBUG("UPDATE PROGRAM VECTOR: %d", d++);
 		mRenderPasses[*programId].push_back(entity);
 	} else {
+		FLOG_DEBUG("UPDATE PROGRAM NEW VECTOR: %d", d++);
 		std::vector<Entity*> vector;
 		vector.push_back(entity);
 		mRenderPasses[*programId] = vector;

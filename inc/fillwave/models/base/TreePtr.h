@@ -60,6 +60,15 @@ public:
 		mChildren.clear();
 	}
 
+	bool isAttachedDetached() {
+		bool result = mFlagAttachedDetached;
+		mFlagAttachedDetached = false;
+		for (auto& it : mChildren) {
+			result = result ? true : it->isAttachedDetached();
+		}
+		return result;
+	}
+
 	bool mFlagAttachedDetached;
 
 protected:

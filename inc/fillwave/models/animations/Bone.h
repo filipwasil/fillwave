@@ -8,7 +8,7 @@
 #ifndef BONE_H_
 #define BONE_H_
 
-#include <fillwave/models/Entity.h>
+#include <fillwave/models/animations/Hinge.h>
 #include <fillwave/Assets.h>
 
 namespace fillwave {
@@ -24,7 +24,7 @@ namespace framework {
  * \brief Entity used by BoneManager to perform animation.
  */
 
-class Bone: public Entity {
+class Bone: public Hinge {
 public:
 	Bone(fBone* assimpBone);
 	virtual ~Bone() = default;

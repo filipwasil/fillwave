@@ -125,6 +125,8 @@ void IScene::updateRenderer() {
 			it->updateRenderer(*(mRenderer.get()));
 		}
 		mRenderer->mFlagReload = false;
+	} else {
+		mRenderer->mFlagReload = isAttachedDetached();
 	}
 }
 

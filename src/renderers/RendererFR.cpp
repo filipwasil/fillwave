@@ -26,10 +26,6 @@ void RendererFR::draw(ICamera& camera) {
 	}
 	glClear(GL_DEPTH_BUFFER_BIT);
 	for (auto& node : mRenderPasses) {
-		if (node->mFlagAttachedDetached) {
-			mFlagReload = true;
-			node->mFlagAttachedDetached = false;
-		}
 		node->draw(camera);
 	}
 }

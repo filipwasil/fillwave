@@ -35,22 +35,16 @@ bool Entity::isAnimated() const {
 	return false;
 }
 
-void Entity::draw(ICamera& camera) {
-	for (auto& it : mChildren) {
-		it->draw(camera);
-	}
+void Entity::draw(ICamera& /*camera*/) {
+
 }
 
-void Entity::drawPBRP(ICamera& camera) {
-	for (auto& it : mChildren) {
-		it->drawPBRP(camera);
-	}
+void Entity::drawPBRP(ICamera& /*camera*/) {
+
 }
 
-void Entity::drawDR(ICamera& camera) {
-	for (auto& it : mChildren) {
-		it->drawDR(camera);
-	}
+void Entity::drawDR(ICamera& /*camera*/) {
+
 }
 
 void Entity::drawPicking(ICamera& camera) {
@@ -158,16 +152,6 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	mRefreshExternal = GL_TRUE;
 }
 
-void Entity::updateRenderer(IRenderer& renderer) {
-	if (mFlagAttachedDetached) {
-		renderer.mFlagReload = true;
-		mFlagAttachedDetached = false;
-	}
-	for (auto& it : mChildren) {
-		it->updateRenderer(renderer);
-	}
-}
-
 void Entity::attachHierarchyCallback(Callback* callback) {
 	mCallbacksHierarchy.push_back(callback);
 }
@@ -254,6 +238,12 @@ inline void Entity::detachCallback(
 	auto it = std::remove_if(_begin, _end, _compare_function);
 	callbacks.erase(it, _end);
 	FLOG_ERROR("Detachment of callback failed");
+}
+
+void Entity::updateRenderer(IRenderer& renderer) {
+	for (auto& it : mChildren) {
+		it->updateRenderer(renderer);
+	}
 }
 
 } /* framework */

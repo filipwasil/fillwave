@@ -179,7 +179,7 @@ inline void Model::loadNodes(
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = buildEntity();
+		pEntity newEntity = buildHinge();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get(),
 				diffuseMapPath, normalMapPath, specularMapPath);
@@ -233,7 +233,7 @@ inline void Model::loadNodes(
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = buildEntity();
+		pEntity newEntity = buildHinge();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get());
 	}

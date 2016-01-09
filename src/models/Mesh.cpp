@@ -386,13 +386,13 @@ inline void Mesh::initVBO() {
 	mOcclusionMatrix = glm::scale(glm::mat4(1.0f), mVBO->getOcclusionBoxSize());
 }
 
+void Mesh::log() const {
+	mVBO->log();
+}
+
 void Mesh::updateRenderer(IRenderer& renderer) {
 	GLuint id = mProgram.get()->getHandle();
 	renderer.update(&id, this);
-}
-
-void Mesh::log() const {
-	mVBO->log();
 }
 
 } /* framework */
