@@ -13,7 +13,7 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class Effect
+/*! \class IEffect
  * \brief Base for effects.
  */
 
