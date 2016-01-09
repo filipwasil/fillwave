@@ -12,10 +12,6 @@
 namespace fillwave {
 namespace framework {
 
-void RendererFR::onScreenResize(GLuint /*width*/, GLuint /*height*/) {
-
-}
-
 void RendererFR::update(GLuint* /*programId*/, Entity* entity) {
 	mRenderPasses.push_back(entity);
 }
@@ -30,7 +26,13 @@ void RendererFR::draw(ICamera& camera) {
 	}
 }
 
-void RendererFR::reset() {
+void RendererFR::reset(GLuint /*width*/, GLuint /*height*/) {
+	mFlagReload = true;
+}
+
+void RendererFR::clear() {
+	mFlagReload = true;
+
 	size_t predictedSize = mRenderPasses.size() + 1;
 	mRenderPasses.clear();
 	mRenderPasses.reserve(predictedSize);

@@ -30,10 +30,10 @@ public:
 	RendererDR(Engine* engine, ProgramLoader& loader);
 	virtual ~RendererDR() = default;
 
-	void onScreenResize(GLuint width, GLuint height);
-	void update(GLuint* programId, Entity* entity);
-	void draw(ICamera& camera);
-	void reset();
+	void update(GLuint* programId, Entity* entity) override;
+	void draw(ICamera& camera) override;
+	void reset(GLuint width, GLuint height) override;
+	void clear() override;
 
 	/* Init */
 	void initGeometryBuffer();

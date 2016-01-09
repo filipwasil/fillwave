@@ -336,6 +336,7 @@ void Engine::setCurrentScene(pIScene scene) {
 		}
 		mImpl->mScene = scene;
 		mImpl->mScene->onShow();
+		mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 	}
 }
 

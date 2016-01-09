@@ -67,10 +67,25 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	initGeometryShading();
 	initUniformsCache();
 
-	onScreenResize(mScreenSize[0], mScreenSize[1]);
+	reset(mScreenSize[0], mScreenSize[1]);
 }
 
-void RendererDR::onScreenResize(GLuint width, GLuint height) {
+void RendererDR::update(GLuint* /*programId*/, Entity* entity) {
+	entity->isAnimated() ? mAnimatedNodes.push_back(entity) : mNodes.push_back(entity);
+}
+
+void RendererDR::draw(ICamera& camera) {
+	mGBuffer->setAttachments(); //bind for geom pass
+	drawGeometryPass(camera);
+//	drawAOPass(camera);
+	drawColorPass(camera);
+	drawDebug();
+}
+
+void RendererDR::reset(GLuint width, GLuint height) {
+
+	mFlagReload = true;
+
 	mScreenSize = glm::vec2(width, height);
 
 	mGBuffer->resize(mScreenSize[0], mScreenSize[1]);
@@ -96,20 +111,17 @@ void RendererDR::onScreenResize(GLuint width, GLuint height) {
 			glm::vec2(mScreenSize[0], mScreenSize[1]));
 }
 
-void RendererDR::update(GLuint* /*programId*/, Entity* entity) {
-	entity->isAnimated() ? mAnimatedNodes.push_back(entity) : mNodes.push_back(entity);
-}
+void RendererDR::clear() {
 
-void RendererDR::draw(ICamera& camera) {
-	mGBuffer->setAttachments(); //bind for geom pass
-	drawGeometryPass(camera);
-//	drawAOPass(camera);
-	drawColorPass(camera);
-	drawDebug();
-}
+	mFlagReload = true;
 
-void RendererDR::reset() {
+	size_t predictedSize = mNodes.size() + 1;
+	mNodes.clear();
+	mNodes.reserve(predictedSize);
 
+	size_t predictedSizeA = mAnimatedNodes.size() + 1;
+	mAnimatedNodes.clear();
+	mAnimatedNodes.reserve(predictedSizeA);
 }
 
 inline void RendererDR::drawGeometryPass(ICamera& camera) {

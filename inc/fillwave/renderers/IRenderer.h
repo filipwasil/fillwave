@@ -34,10 +34,10 @@ public:
 
 	virtual ~IRenderer() = default;
 
-	virtual void onScreenResize(GLuint width, GLuint height) = 0;
 	virtual void update(GLuint* id, Entity* entity) = 0;
 	virtual void draw(ICamera& camera) = 0;
-	virtual void reset() = 0;
+	virtual void reset(GLuint width, GLuint height) = 0;
+	virtual void clear() = 0;
 
 	bool mFlagReload;
 	Skybox* mSkybox;

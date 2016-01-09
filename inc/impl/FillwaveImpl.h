@@ -907,14 +907,6 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 	mTextureManager->resize(mWindowWidth, mWindowHeight);
 
 	mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
-
-	if (mScene) {
-		ResizeScreenEventData d;
-		d.width = width;
-		d.height = height;
-		ResizeScreenEvent e(d);
-		mScene->onEvent(e);
-	}
 }
 
 /* Callbacks */

@@ -116,7 +116,7 @@ void IScene::pick(glm::ivec4 color) {
 void IScene::updateRenderer() {
 	if (mRenderer->mFlagReload) {
 		FLOG_DEBUG("Renderer update");
-		mRenderer->reset();
+		mRenderer->clear();
 		if (mSkybox) {
 			mRenderer->mSkybox = mSkybox.get();
 		} else {
@@ -132,14 +132,15 @@ void IScene::updateRenderer() {
 	}
 }
 
+void IScene::resetRenderer(GLuint screenWidth, GLuint screenHeight) {
+	mRenderer->clear();
+	mRenderer->reset(screenWidth, screenHeight);
+}
+
+
 void IScene::onEvent(EventType& event) {
-	if (event.getType() == eEventType::eResizeScreen) {
-		ResizeScreenEventData e = ResizeScreenEvent::getData(event);
-		mRenderer->onScreenResize(e.width, e.height);
-	} else {
-		for (auto& it : mChildren) {
-			it->handleHierarchyEvent(event);
-		}
+	for (auto& it : mChildren) {
+		it->handleHierarchyEvent(event);
 	}
 }
 

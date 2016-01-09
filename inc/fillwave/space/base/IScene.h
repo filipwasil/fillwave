@@ -30,6 +30,8 @@ public:
 
 	void updateDependencies();
 	void updateRenderer();
+	void setRenderer(IRenderer* renderer);
+	void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
 	/* Cursor */
 	void setCursor(pCursor cursor);
@@ -40,7 +42,6 @@ public:
 	/* Scene */
 	void setSkybox(pSkybox skybox);
 	void setAmbient(glm::vec3 cursor);
-	void setRenderer(IRenderer* renderer);
 
 	/* Pickable */
 	void registerPickable(pEntity entity);

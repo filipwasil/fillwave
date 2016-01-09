@@ -17,10 +17,6 @@ FLOGINIT_DEFAULT()
 namespace fillwave {
 namespace framework {
 
-void RendererPBRP::onScreenResize(GLuint /*width*/, GLuint /*height*/) {
-
-}
-
 void RendererPBRP::update(GLuint* programId, Entity* entity) {
 	if (mRenderPasses.find(*programId) != mRenderPasses.end()) {
 		mRenderPasses[*programId].push_back(entity);
@@ -44,7 +40,13 @@ void RendererPBRP::draw(ICamera& camera) {
 	}
 }
 
-void RendererPBRP::reset() {
+void RendererPBRP::reset(GLuint /*width*/, GLuint /*height*/) {
+	mFlagReload = true;
+}
+
+void RendererPBRP::clear() {
+	mFlagReload= true;
+
 	size_t predictedSize = mRenderPasses.size() + 1;
 	mRenderPasses.clear();
 	mRenderPasses.reserve(predictedSize);
