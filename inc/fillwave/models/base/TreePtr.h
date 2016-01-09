@@ -64,7 +64,7 @@ public:
 		bool result = mFlagAttachedDetached;
 		mFlagAttachedDetached = false;
 		for (auto& it : mChildren) {
-			result = result ? true : it->isAttachedDetached();
+			 result = it->isAttachedDetached() ? true : result;
 		}
 		return result;
 	}

@@ -115,6 +115,7 @@ void IScene::pick(glm::ivec4 color) {
 
 void IScene::updateRenderer() {
 	if (mRenderer->mFlagReload) {
+		FLOG_DEBUG("Renderer update");
 		mRenderer->reset();
 		if (mSkybox) {
 			mRenderer->mSkybox = mSkybox.get();
@@ -126,6 +127,7 @@ void IScene::updateRenderer() {
 		}
 		mRenderer->mFlagReload = false;
 	} else {
+		FLOG_DEBUG("Renderer waiting for update");
 		mRenderer->mFlagReload = isAttachedDetached();
 	}
 }
