@@ -8,10 +8,10 @@
 #ifndef CAMERAOrthographic_H_
 #define CAMERAOrthographic_H_
 
-#include <fillwave/space/Camera.h>
+#include <fillwave/space/base/ICamera.h>
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 /*! \class CullingBox
  * \brief Stores culling box parameters for Orthographic projection.
@@ -26,7 +26,7 @@ struct CullingBox {
  * \brief Camera with Orthographic projection.
  */
 
-class CameraOrthographic: public Camera {
+class CameraOrthographic: public ICamera {
 public:
 	CameraOrthographic();
 	CameraOrthographic(
@@ -49,9 +49,9 @@ private:
 
 };
 
-} /* space */
-typedef std::shared_ptr<space::CameraOrthographic> pCameraOrthographic;
-typedef std::weak_ptr<space::CameraOrthographic> pwCameraOrthographic;
+} /* framework */
+typedef std::shared_ptr<framework::CameraOrthographic> pCameraOrthographic;
+typedef std::weak_ptr<framework::CameraOrthographic> pwCameraOrthographic;
 } /* fillwave */
 
 #endif /* CAMERAOrthographic_H_ */

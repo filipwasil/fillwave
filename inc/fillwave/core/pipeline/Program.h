@@ -39,11 +39,11 @@ public:
 
 	/* Shaders */
 	void attach(pShader shader);
-
 	void detach(pShader shader);
 
 	void use() const;
 
+	static void useProgram(GLuint handle);
 	static void disusePrograms();
 
 	/* Uniforms */
@@ -62,17 +62,12 @@ public:
 	void uniformPush(std::string name, glm::vec4 data);
 
 	/* Uniform blocks */
-
 	GLint getUniformLocation(std::string name);
-
 	void getUniformBlock(std::string name, GLuint bindingPoint);
-
 	GLuint getHandle() const;
-
 	void uniformBlockPush(std::string name, GLfloat* data);
 
 	void reload();
-
 	void log() const;
 
 private:

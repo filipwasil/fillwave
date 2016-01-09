@@ -33,13 +33,13 @@
 #ifndef MOVECAMERACALLBACK_H_
 #define MOVECAMERACALLBACK_H_
 
-#include <fillwave/actions/Callback.h>
-#include <fillwave/actions/Event.h>
+#include <fillwave/actions/callbacks/Callback.h>
+#include <fillwave/actions/events/Event.h>
 
 class GLFWwindow;
 namespace fillwave {
 class Engine;
-namespace actions {
+namespace framework {
 
 /*! \class MoveCameraCallback
  *
@@ -67,7 +67,7 @@ public:
    virtual void perform (EventType& event);
 };
 
-} /* actions */
+} /* framework */
 } /* fillwave */
 
 #endif /* MOVECAMERACALLBACK_H_ */

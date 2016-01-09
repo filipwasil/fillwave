@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/pipeline/Uniform.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <string>
 
 FLOGINIT("Uniform", FERROR | FFATAL | FINFO)
@@ -210,7 +210,7 @@ void Uniform::setData(UniformData data) {
 void Uniform::log() const {
 	FLOG_INFO("Name: %s", mName.c_str());
 	FLOG_INFO("Location: %d", mLocation);
-	FLOG_INFO("Type: %d", mType);
+	FLOG_INFO("Type: 0x%x", mType);
 	FLOG_INFO("Size: %d", mSize);
 }
 

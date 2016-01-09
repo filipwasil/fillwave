@@ -1,13 +1,13 @@
 \contentsline {section}{\numberline {1}Introduction}{3}{section.1}
 \contentsline {subsection}{\numberline {1.1}Features}{3}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Getting started}{4}{subsection.1.2}
-\contentsline {subsection}{\numberline {1.3}Context creation}{4}{subsection.1.3}
-\contentsline {subsection}{\numberline {1.4}Naming convention}{5}{subsection.1.4}
-\contentsline {subsection}{\numberline {1.5}Rendering loop}{5}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.2}Code structure}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Getting started}{4}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Context creation}{5}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Rendering loop}{6}{subsection.1.5}
 \contentsline {section}{\numberline {2}Digging into API}{6}{section.2}
 \contentsline {subsection}{\numberline {2.1}Entity}{6}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Scene}{7}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}Camera}{7}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.3}Camera}{8}{subsection.2.3}
 \contentsline {subsection}{\numberline {2.4}Programs and Shaders}{8}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Store functions}{9}{subsection.2.5}
 \contentsline {subsection}{\numberline {2.6}Model}{10}{subsection.2.6}

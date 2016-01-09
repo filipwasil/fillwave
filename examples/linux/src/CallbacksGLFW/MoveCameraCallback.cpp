@@ -33,16 +33,16 @@
 #include "../../../linux/inc/CallbacksGLFW/MoveCameraCallback.h"
 
 #include <fillwave/Fillwave.h>
-#include <fillwave/actions/KeyboardEvent.h>
-#include <fillwave/actions/MouseButtonEvent.h>
-#include <fillwave/actions/ScrollEvent.h>
+#include <fillwave/actions/events/KeyboardEvent.h>
+#include <fillwave/actions/events/MouseButtonEvent.h>
+#include <fillwave/actions/events/ScrollEvent.h>
 
 #include <GLFW/glfw3.h>
 
 FLOGINIT("MoveCameraCallback", FERROR | FFATAL)
 
 namespace fillwave {
-namespace actions {
+namespace framework {
 
 MoveCameraCallback::MoveCameraCallback(
 		Engine* engine,
@@ -68,7 +68,7 @@ MoveCameraCallback::~MoveCameraCallback() {
 void MoveCameraCallback::perform(EventType& event) {
    if (event.getType() == eEventType::eKey) {
       KeyboardEventData e = KeyboardEvent::getData(event);
-      pCamera camera = mEngine->getCurrentScene()->getCamera();
+      pICamera camera = mEngine->getCurrentScene()->getCamera();
       switch (e.key) {
          case GLFW_KEY_W:
             camera->moveInDirection(glm::vec3(0.0, 0.0, -mSpeed));
@@ -104,7 +104,7 @@ void MoveCameraCallback::perform(EventType& event) {
       static int  a = 0;
 		auto d = [](double value){return static_cast<float>(value);};
       CursorPositionEventData e = CursorPositionEvent::getData(event);
-      pCamera camera = mEngine->getCurrentScene()->getCamera();
+      pICamera camera = mEngine->getCurrentScene()->getCamera();
       glm::ivec2 screenSize = mEngine->getScreenSize();
       double dx = e.xPosition - screenSize[0]/2;
       double dy = screenSize[1]/2 - e.yPosition;
@@ -125,5 +125,5 @@ void MoveCameraCallback::perform(EventType& event) {
 
 }
 
-} /* actions */
+} /* framework */
 } /* fillwave */

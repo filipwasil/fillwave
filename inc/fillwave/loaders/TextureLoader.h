@@ -13,7 +13,7 @@
 #include <iostream>
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 enum class eFlip {
 	eNone, eHorizontal, eVertical, eHorizontal_vertical,
@@ -106,8 +106,8 @@ private:
 	GLenum getComporession(eCompression compression);
 };
 
-} /* loader */
-typedef std::unique_ptr<loader::TextureLoader> puTextureLoader;
+} /* framework */
+typedef std::unique_ptr<framework::TextureLoader> puTextureLoader;
 } /* fillwave */
 
 #endif /* TEXTURELOADER_H_ */

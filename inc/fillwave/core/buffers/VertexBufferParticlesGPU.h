@@ -34,7 +34,7 @@ class VertexBufferParticlesGPU: public VertexBuffer<VertexParticleGPU> {
 public:
 	VertexBufferParticlesGPU(std::vector<VertexParticleGPU>& particles);
 	virtual ~VertexBufferParticlesGPU() = default;
-	void log();
+	void log() const;
 };
 
 } /* core */

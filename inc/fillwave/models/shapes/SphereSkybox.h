@@ -13,7 +13,7 @@
 
 namespace fillwave {
 class Engine;
-namespace models {
+namespace framework {
 
 /*! \class SphereSkybox
  * \brief Shape<core::VertexPosition> encapsulating vertices and indices for triangle drawn UV sphere.
@@ -70,7 +70,7 @@ private:
 	const GLfloat mScale = 100.0;
 };
 
-} /* models */
+} /* framework */
 } /* fillwave */
 
 #endif /* SPHERESKYBOX_H_ */

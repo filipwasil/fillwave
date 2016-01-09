@@ -23,7 +23,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/resource.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("native_app_glue", FERROR | FFATAL)
 

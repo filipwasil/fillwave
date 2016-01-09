@@ -7,7 +7,7 @@
 
 #include <fillwave/core/pipeline/Attribute.h>
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Attribute", FERROR | FFATAL)
 

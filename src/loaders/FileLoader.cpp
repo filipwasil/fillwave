@@ -6,13 +6,13 @@
  */
 
 #include <fillwave/loaders/FileLoader.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fstream>
 
 FLOGINIT("File", FERROR | FFATAL)
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 using namespace std;
 
@@ -63,5 +63,5 @@ void WriteFile(const char* pFileName, string& fileContent) {
 	myfile.close();
 }
 
-} /* loader */
+} /* framework */
 } /* fillwave */

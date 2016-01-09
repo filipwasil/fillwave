@@ -15,19 +15,20 @@
 #include <fillwave/core/operations/Query.h>
 #include <fillwave/core/operations/ConditionalRender.h>
 #include <fillwave/models/Entity.h>
-#include <fillwave/models/Material.h>
+#include <fillwave/models/base/Material.h>
+#include <fillwave/models/base/Reloadable.h>
 #include <fillwave/core/pipeline/Fence.h>
-#include <fillwave/models/Reloadable.h>
+#include <fillwave/renderers/IRenderer.h>
 
 namespace fillwave {
 class Engine;
 
-namespace manager {
-class BoneManager;
+namespace framework {
+class Animator;
 class LightManager;
 }
 
-namespace models {
+namespace framework {
 
 /*! \class Mesh
  * \brief Basic drawable Entity.
@@ -47,43 +48,35 @@ public:
 			pProgram programOcclusion,
 			pProgram programAmbientOcclusionGeometry,
 			pProgram programAmbientOcclusionColor,
-			manager::LightManager* lightManager = nullptr,
+			LightManager* lightManager = nullptr,
 			pVertexBufferBasic vbo = pVertexBufferBasic(),
 			pIndexBufferBasic ibo = pIndexBufferBasic(),
-			manager::BoneManager* boneManager = nullptr,
+			Animator* boneManager = nullptr,
 			GLenum drawType = GL_TRIANGLES);
 
 	virtual ~Mesh() = default;
 
+	void updateRenderer(IRenderer& renderer);
+
+	void draw(ICamera& camera);
+	void drawPBRP(ICamera& camera);
+	void drawDR(ICamera& camera);
+	void drawFast(ICamera& camera);
+	void drawPicking(ICamera& camera);
+	void drawDepth(ICamera& camera);
+	void drawDepthColor(ICamera& camera, glm::vec3& position);
+	void drawAOG(ICamera& camera);
+	void drawAOC(ICamera& camera);
+	void drawOcclusionBox(ICamera& camera);
+	void log() const;
+
 	virtual void onDraw();
-
-	void draw(space::Camera& camera);
-
-	void drawDR(space::Camera& camera);
-
-	void drawFast(space::Camera& camera);
-
-	void drawPicking(space::Camera& camera);
-
-	void drawDepth(space::Camera& camera);
-
-	void drawDepthColor(space::Camera& camera, glm::vec3& position);
-
-	void drawAOG(space::Camera& camera);
-
-	void drawAOC(space::Camera& camera);
-
-	void drawOcclusionBox(space::Camera& camera);
-
-	void log();
 
 protected:
 	Material mMaterial;
-
 	pTextureRegion mDiffuseMap;
 	pTextureRegion mNormalMap;
 	pTextureRegion mSpecularMap;
-
 	pProgram mProgram, mProgramDR, mProgramShadow, mProgramShadowColor,
 			mProgramOQ, mProgramAOGeometry, mProgramAOColor;
 
@@ -92,10 +85,10 @@ protected:
 	pVertexBufferBasic mVBO;
 
 	/* Light */
-	manager::LightManager* mLightManager;
+	LightManager* mLightManager;
 
 	/* Animations */
-	manager::BoneManager* mBoneManager;
+	Animator* mAnimator;
 
 	/* Draw */
 	GLenum mDrawType;
@@ -114,39 +107,27 @@ protected:
 private:
 
 	/* ULC - Uniform location cache */
-
 	GLint mULCModelMatrix, mULCViewProjectionMatrix, mULCLightAmbientIntensity,
 			mULCLightDiffuseIntensity, mULCLightSpecularIntensity,
 			mULCCameraPosition, mULCColorPicking, mULCPainterColor;
-
 	GLint mULCMVPOcclusion;
-
 	GLint mULCMVPShadow;
-
 	GLint mULCMVPShadowColor, mULCModelMatrixShadowColor;
-
 	GLint mULCMVPAmbientOcclusion, mULCPositionAmbientOcclusion;
-
 	GLint mULCSampleRadius, mULCProjectionMatrix;
 
 	void initBuffers();
-
 	void initPipeline();
-
 	void initUniformsCache();
-
 	void initVAO();
-
 	void initVBO();
-
 	void bindTextures();
-
 	void coreDraw();
 };
 
-} /* models */
-typedef std::shared_ptr<models::Mesh> pMesh;
-typedef std::unique_ptr<models::Mesh> puMesh;
+} /* framework */
+typedef std::shared_ptr<framework::Mesh> pMesh;
+typedef std::unique_ptr<framework::Mesh> puMesh;
 } /* fillwave */
 
 #endif /* MODELOBJ_H_ */

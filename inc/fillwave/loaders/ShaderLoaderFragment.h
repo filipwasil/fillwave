@@ -12,7 +12,7 @@
 #include <fillwave/OpenGL.h>
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 /*! \class ShaderLoaderFragment
  * \brief ShaderLoader to load fragment shader sources.
@@ -35,7 +35,7 @@ private:
 	GLuint mRendertargets;
 };
 
-} /* loader */
+} /* framework */
 } /* fillwave */
 
 #endif /* SHADERLOADERFRAGMENT_H_ */

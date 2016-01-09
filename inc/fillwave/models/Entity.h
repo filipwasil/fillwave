@@ -8,53 +8,44 @@
 #ifndef ENTITY_H_
 #define ENTITY_H_
 
-#include <fillwave/actions/Callback.h>
-#include <fillwave/space/Camera.h>
-#include <vector>
+#include <fillwave/actions/callbacks/Callback.h>
+#include <fillwave/space/base/ICamera.h>
+#include <fillwave/models/base/IDrawable.h>
+#include <fillwave/models/base/ITreeNode.h>
+#include <fillwave/models/base/TreePtr.h>
 
 namespace fillwave {
 
-namespace models {
+namespace framework {
 class Entity;
 }
-typedef std::shared_ptr<models::Entity> pEntity;
 
-namespace models {
+namespace core {
+class Program;
+}
+
+typedef std::shared_ptr<framework::Entity> pEntity;
+
+namespace framework {
 
 /*! \class Entity
  * \brief Base for all Scene nodes.
  */
 
-class Entity: public Moveable {
+class Entity: public Moveable, public IDrawable, public TreePtr<pEntity> {
 public:
 	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
 			glm::quat(1.0, 0.0, 0.0, 0.0));
 
 	virtual ~Entity();
 
-	/* Attach/Detach */
-	void attach(pEntity child);
-	void detach(pEntity child);
-
-	void onDetached();
-	void onAttached(Entity* parent);
-
-	/* Drawing */
-	virtual void draw(space::Camera& camera);
-	virtual void drawDR(space::Camera& camera);
-	virtual void drawDepth(space::Camera& camera);
-	virtual void drawDepthColor(space::Camera& camera, glm::vec3& position);
-	virtual void drawAOG(space::Camera& camera);
-	virtual void drawAOC(space::Camera& camera);
-	virtual void drawOcclusionBox(space::Camera& camera);
-
 	/* Flags */
 	GLboolean isPSC();
 	GLboolean isPSR();
 
 	/* Callbacks */
-	void handleHierarchyEvent(actions::EventType& event);
-	void handlePrivateEvent(actions::EventType& event);
+	void handleHierarchyEvent(EventType& event);
+	void handlePrivateEvent(EventType& event);
 
 	/* Model */
 	glm::mat4 getPhysicsMMC();
@@ -63,10 +54,10 @@ public:
 	void setTransformation(glm::mat4 modelMatrix);
 
 	/* Callbacks */
-	void attachHierarchyCallback(actions::Callback* callback);
-	void attachPrivateCallback(actions::Callback* callback);
-	void detachHierarchyCallback(actions::Callback* callback);
-	void detachPrivateCallback(actions::Callback* callback);
+	void attachHierarchyCallback(Callback* callback);
+	void attachPrivateCallback(Callback* callback);
+	void detachHierarchyCallback(Callback* callback);
+	void detachPrivateCallback(Callback* callback);
 
 	/* Parent */
 	void updateMatrixTree();
@@ -78,12 +69,30 @@ public:
 	void unpick();
 	GLboolean isPickable();
 	glm::vec3 getPickableColor();
+
 	virtual void onPicked();
 	virtual void onUnpicked();
-	virtual void drawPicking(space::Camera& camera);
+
+	/* IDrawable interface */
+	virtual void draw(ICamera& camera);
+	virtual void drawPBRP(ICamera& camera);
+	virtual void drawDR(ICamera& camera);
+
+	virtual void drawDepth(ICamera& camera);
+	virtual void drawDepthColor(ICamera& camera, glm::vec3& position);
+	virtual void drawAOG(ICamera& camera);
+	virtual void drawAOC(ICamera& camera);
+	virtual void drawOcclusionBox(ICamera& camera);
+	virtual void drawPicking(ICamera& camera);
+
+	/* Render passes */
+	virtual void updateRenderer(IRenderer& renderer);
+
+	/* Animations */
+	virtual bool isAnimated() const;
 
 	/* Log */
-	virtual void log();
+	virtual void log() const;
 
 protected:
 	/* MMC - Model Matrix Cache */
@@ -91,9 +100,8 @@ protected:
 
 	GLboolean mChildrenPropagateEvent;
 	GLboolean mParentRefresh;
-	std::vector<pEntity> mChildren;
-	std::vector<actions::Callback*> mCallbacksHierarchy;
-	std::vector<actions::Callback*> mCallbacksPrivate;
+	std::vector<Callback*> mCallbacksHierarchy;
+	std::vector<Callback*> mCallbacksPrivate;
 
 	GLboolean mPSC;
 	GLboolean mPSR;
@@ -102,18 +110,17 @@ private:
 	GLboolean mPickable;
 	glm::vec3 mPickColor;
 
-	void detachChildren();
 	void handleEvent(
-			std::vector<actions::Callback*>& callbacks,
-			actions::EventType& event);
-	void eraseFinishedCallbacks(std::vector<actions::Callback*>& callbacks);
+			std::vector<Callback*>& callbacks,
+			EventType& event);
+	void eraseFinishedCallbacks(std::vector<Callback*>& callbacks);
 	void detachCallback(
-			std::vector<actions::Callback*>& callbacks,
-			actions::Callback* callback);
+			std::vector<Callback*>& callbacks,
+			Callback* callback);
 };
-} /* models */
+} /* framework */
 static pEntity buildEntity() {
-	return pEntity(new models::Entity());
+	return std::make_shared<framework::Entity>();
 }
 } /* fillwave */
 

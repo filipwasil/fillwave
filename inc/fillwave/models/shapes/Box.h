@@ -11,7 +11,11 @@
 #include <fillwave/models/shapes/Quad.h>
 
 namespace fillwave {
-namespace models {
+namespace framework {
+
+/*! \class Box
+ * \brief Basic Shape for general usage. Indices and vertices provided.
+ */
 
 class Box: public Shape<core::VertexBasic> {
 public:
@@ -86,6 +90,6 @@ private:
 	Quad mQuad;
 };
 
-} /* models */
+} /* framework */
 } /* fillwave */
 #endif /* BOX_H_ */

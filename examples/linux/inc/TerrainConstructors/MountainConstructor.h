@@ -30,10 +30,10 @@
 #ifndef MOUNTAINCONSTRUCTOR_H_
 #define MOUNTAINCONSTRUCTOR_H_
 
-#include <fillwave/terrain/VoxelConstructor.h>
+#include <fillwave/models/terrain/VoxelConstructor.h>
 
 namespace fillwave {
-namespace terrain {
+namespace framework {
 
 /*! \class MountainConstructor
  * \brief Implements VoxelConstructor and QuadConstructor to build an example terrain.
@@ -47,7 +47,7 @@ public:
 	GLfloat calculateHeight(GLfloat x, GLfloat z);
 };
 
-} /* terrain */
+} /* framework */
 } /* fillwave */
 
 #endif /* MOUNTAINCONSTRUCTOR_H_ */

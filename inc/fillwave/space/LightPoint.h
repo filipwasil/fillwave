@@ -11,13 +11,13 @@
 #include <fillwave/core/rendering/Texture3DRenderable.h>
 #include <fillwave/space/CameraPerspective.h>
 #include <fillwave/models/shapes/Sphere.h>
-#include <fillwave/space/Light.h>
+#include <fillwave/space/base/ILight.h>
 
 #include <map>
 
 namespace fillwave {
 class Engine;
-namespace space {
+namespace framework {
 
 /*! \class LightPoint
  * \brief Not used.
@@ -44,11 +44,11 @@ protected:
 	std::map<GLenum, pCameraPerspective> mFaceCameras;
 
 private:
-	models::Sphere mSphere;
+	Sphere mSphere;
 };
 
-} /* space */
-typedef std::shared_ptr<space::LightPoint> pLightPoint;
+} /* framework */
+typedef std::shared_ptr<framework::LightPoint> pLightPoint;
 } /* fillwave */
 
 #endif /* LIGHTPOINT_H_ */

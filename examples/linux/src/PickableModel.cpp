@@ -7,8 +7,8 @@
 
 #include "../../linux/src/PickableModel.h"
 
-#include <fillwave/extras/Log.h>
-#include <fillwave/effects/BoostColor.h>
+#include <fillwave/Log.h>
+#include <fillwave/models/effects/BoostColor.h>
 
 FLOGINIT("PickableModel", FERROR | FFATAL)
 
@@ -17,13 +17,13 @@ PickableModel::PickableModel(std::string name,
                              Engine* engine,
                              pProgram program,
                              const std::string& shapePath,
-                             const std::string& texturePath):models::Model(engine,
+                             const std::string& texturePath):framework::Model(engine,
                                                                            program,
                                                                            shapePath,
                                                                            texturePath),
                                                                      mText(text),
                                                                      mName(name){
-   mPickedEffect = pEffect(new effects::BoostColor(2.0f));
+   mPickedEffect = std::make_shared<framework::BoostColor>(2.0f);
 }
 
 PickableModel::~PickableModel() {

@@ -13,7 +13,6 @@
 #include <sstream>
 
 namespace fillwave {
-namespace common {
 
 std::vector<std::string> split(const std::string &s, char delim);
 std::vector<std::string> &split(
@@ -35,9 +34,8 @@ std::string to_string(T value) {
 }
 
 std::string getFilePathOnly(const char* path);
-
 std::string getFileNameOnly(const char* path);
 
-}
-}
+} /* fillwave */
+
 #endif /* STRING_H_ */

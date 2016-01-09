@@ -8,16 +8,16 @@
 #ifndef CAMERAPERSPECTIVE_H_
 #define CAMERAPERSPECTIVE_H_
 
-#include <fillwave/space/Camera.h>
+#include <fillwave/space/base/ICamera.h>
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 /*! \class CameraPerspective
  * \brief Camera with perspective projection.
  */
 
-class CameraPerspective: public Camera {
+class CameraPerspective: public ICamera {
 private:
 	GLfloat mProjectionFovy, mProjectionAspectRatio, mProjectionNearPlane,
 			mProjectionFarPlane;
@@ -47,9 +47,9 @@ public:
 
 	void updateProjection();
 };
-} /* space */
-typedef std::shared_ptr<space::CameraPerspective> pCameraPerspective;
-typedef std::weak_ptr<space::CameraPerspective> pwCameraPerspective;
+} /* framework */
+typedef std::shared_ptr<framework::CameraPerspective> pCameraPerspective;
+typedef std::weak_ptr<framework::CameraPerspective> pwCameraPerspective;
 } /* fillwave */
 
 #endif /* CAMERAPERSPECTIVE_H_ */

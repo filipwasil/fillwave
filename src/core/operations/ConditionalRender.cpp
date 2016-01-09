@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/operations/ConditionalRender.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <memory>
 
 #ifdef FILLWAVE_GLES_3_0

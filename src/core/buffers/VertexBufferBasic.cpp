@@ -6,8 +6,8 @@
  */
 
 #include <fillwave/core/buffers/VertexBufferBasic.h>
-#include <fillwave/extras/Log.h>
-#include <fillwave/management/BoneManager.h>
+#include <fillwave/Log.h>
+#include <fillwave/models/animations/Animator.h>
 #include <fillwave/Assets.h>
 
 #include <fillwave/Profiler.h>
@@ -19,7 +19,7 @@ namespace core {
 
 VertexBufferBasic::VertexBufferBasic(
 		const fMesh* shape,
-		manager::BoneManager* boneManager,
+		framework::Animator* animator,
 		GLuint dataStoreModification)
 		: VertexBuffer<VertexBasic>(dataStoreModification) {
 
@@ -92,7 +92,7 @@ VertexBufferBasic::VertexBufferBasic(
 	mData = mDataVertices.data();
 	mSize = mTotalElements * sizeof(VertexBasic);
 
-	if (boneManager) {
+	if (animator) {
 		std::vector<int> boneIdForEachVertex;
 		boneIdForEachVertex.reserve(mDataVertices.size());
 		for (size_t z = 0; z < mDataVertices.size(); z++) {
@@ -105,7 +105,7 @@ VertexBufferBasic::VertexBufferBasic(
 				float Weight = shape->mBones[i]->mWeights[j].mWeight;
 				if (boneIdForEachVertex[VertexID] < FILLWAVE_MAX_BONES_DEPENDENCIES) {
 					mDataVertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] =
-							boneManager->getId(shape->mBones[i]->mName.C_Str());
+							animator->getId(shape->mBones[i]->mName.C_Str());
 					mDataVertices[VertexID].mBoneWeight[boneIdForEachVertex[VertexID]] =
 							Weight;
 					boneIdForEachVertex[VertexID]++;
@@ -119,7 +119,7 @@ VertexBufferBasic::VertexBufferBasic(
 }
 
 VertexBufferBasic::VertexBufferBasic(
-		terrain::TerrainConstructor* constructor,
+		framework::TerrainConstructor* constructor,
 		GLint chunkDensity,
 		GLfloat gapSize,
 		std::vector<GLuint>& indices,
@@ -266,7 +266,7 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
 	return result * 0.5f;
 }
 
-void VertexBufferBasic::log() {
+void VertexBufferBasic::log() const {
 	for (auto it : mDataVertices) {
 		FLOG_INFO("Vertex UV: %f %f", static_cast<double>(it.mTextureUV[0]), static_cast<double>(it.mTextureUV[1]));
 		FLOG_INFO("Vertex normal: %f %f %f", static_cast<double>(it.mNormal[0]), static_cast<double>(it.mNormal[1]),

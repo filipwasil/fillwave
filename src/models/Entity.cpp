@@ -7,14 +7,14 @@
 
 #include <fillwave/models/Entity.h>
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 #include <algorithm>
 
 FLOGINIT("Entity", FERROR | FFATAL)
 
 namespace fillwave {
-namespace models {
+namespace framework {
 
 Entity::Entity(glm::vec3 translation, glm::quat rotation)
 		:
@@ -28,75 +28,56 @@ Entity::Entity(glm::vec3 translation, glm::quat rotation)
 }
 
 Entity::~Entity() {
-//	detachChildren();
 	FLOG_DEBUG("Entity destroyed");
 }
 
-void Entity::attach(pEntity child) {
-	mChildren.push_back(child);
-	child->onAttached(this);
+bool Entity::isAnimated() const {
+	return false;
 }
 
-void Entity::detach(pEntity child) {
-	auto _compare_function =
-			[child](const pEntity e) -> bool {bool found = (e == child); if (found) child->onDetached(); return found;};
-	auto _begin = mChildren.begin();
-	auto _end = mChildren.end();
-	auto it = std::remove_if(_begin, _end, _compare_function);
-	mChildren.erase(it, _end);
+void Entity::draw(ICamera& /*camera*/) {
+
 }
 
-void Entity::onAttached(Entity*) {
-	FLOG_DEBUG("Attached enity");
+void Entity::drawPBRP(ICamera& /*camera*/) {
+
 }
 
-void Entity::onDetached() {
-	FLOG_DEBUG("Detached enity");
+void Entity::drawDR(ICamera& /*camera*/) {
+
 }
 
-void Entity::draw(space::Camera& camera) {
-	for (auto& it : mChildren) {
-		it->draw(camera);
-	}
-}
-
-void Entity::drawDR(space::Camera& camera) {
-	for (auto& it : mChildren) {
-		it->drawDR(camera);
-	}
-}
-
-void Entity::drawPicking(space::Camera& camera) {
+void Entity::drawPicking(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawPicking(camera);
 	}
 }
 
-void Entity::drawDepth(space::Camera& camera) {
+void Entity::drawDepth(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawDepth(camera);
 	}
 }
 
-void Entity::drawDepthColor(space::Camera& camera, glm::vec3& position) {
+void Entity::drawDepthColor(ICamera& camera, glm::vec3& position) {
 	for (auto& it : mChildren) {
 		it->drawDepthColor(camera, position);
 	}
 }
 
-void Entity::drawAOG(space::Camera& camera) {
+void Entity::drawAOG(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawAOG(camera);
 	}
 }
 
-void Entity::drawAOC(space::Camera& camera) {
+void Entity::drawAOC(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawAOC(camera);
 	}
 }
 
-void Entity::drawOcclusionBox(space::Camera& camera) {
+void Entity::drawOcclusionBox(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawOcclusionBox(camera);
 	}
@@ -131,14 +112,14 @@ void Entity::updateMatrixTree() {
 	}
 }
 
-void Entity::handleHierarchyEvent(actions::EventType& event) {
+void Entity::handleHierarchyEvent(EventType& event) {
 	handleEvent(mCallbacksHierarchy, event);
-	for (auto it : mChildren) {
+	for (auto& it : mChildren) {
 		it->handleHierarchyEvent(event);
 	}
 }
 
-void Entity::handlePrivateEvent(actions::EventType& event) {
+void Entity::handlePrivateEvent(EventType& event) {
 	handleEvent(mCallbacksPrivate, event);
 }
 
@@ -171,19 +152,19 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	mRefreshExternal = GL_TRUE;
 }
 
-void Entity::attachHierarchyCallback(actions::Callback* callback) {
+void Entity::attachHierarchyCallback(Callback* callback) {
 	mCallbacksHierarchy.push_back(callback);
 }
 
-void Entity::attachPrivateCallback(actions::Callback* callback) {
+void Entity::attachPrivateCallback(Callback* callback) {
 	mCallbacksPrivate.push_back(callback);
 }
 
-void Entity::detachHierarchyCallback(actions::Callback* callback) {
+void Entity::detachHierarchyCallback(Callback* callback) {
 	detachCallback(mCallbacksHierarchy, callback);
 }
 
-void Entity::detachPrivateCallback(actions::Callback* callback) {
+void Entity::detachPrivateCallback(Callback* callback) {
 	detachCallback(mCallbacksPrivate, callback);
 }
 
@@ -220,21 +201,13 @@ glm::vec3 Entity::getPickableColor() {
 	return mPickColor;
 }
 
-void Entity::log() {
+void Entity::log() const {
 
-}
-
-/* Private inline */
-
-inline void Entity::detachChildren() {
-	Entity* _this = this;
-	std::for_each(mChildren.begin(), mChildren.end(),
-			[_this](pEntity e) {_this->detach(e);});
 }
 
 inline void Entity::handleEvent( /* xxx refactor */
-		std::vector<actions::Callback*>& callbacks,
-		actions::EventType& event) {
+		std::vector<Callback*>& callbacks,
+		EventType& event) {
 	for (auto it : callbacks) {
 		if (it->isEnabled()) {
 			if (it->getEventType() == event.getType()) {
@@ -246,9 +219,9 @@ inline void Entity::handleEvent( /* xxx refactor */
 }
 
 inline void Entity::eraseFinishedCallbacks(
-		std::vector<actions::Callback*>& callbacks) {
+		std::vector<Callback*>& callbacks) {
 	auto _find_finished_function =
-			[](actions::Callback* m) -> bool {bool finished = m->isFinished(); if (finished) delete m; return finished;};
+			[](Callback* m) -> bool {bool finished = m->isFinished(); if (finished) delete m; return finished;};
 	auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _find_finished_function);
@@ -256,10 +229,10 @@ inline void Entity::eraseFinishedCallbacks(
 }
 
 inline void Entity::detachCallback(
-		std::vector<actions::Callback*>& callbacks,
-		actions::Callback* callback) {
+		std::vector<Callback*>& callbacks,
+		Callback* callback) {
 	auto _compare_function =
-			[callback](const actions::Callback* m) -> bool {bool found = (m == callback); if (found) delete m; return found;};
+			[callback](const Callback* m) -> bool {bool found = (m == callback); if (found) delete m; return found;};
 	auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _compare_function);
@@ -267,5 +240,11 @@ inline void Entity::detachCallback(
 	FLOG_ERROR("Detachment of callback failed");
 }
 
-} /* models */
+void Entity::updateRenderer(IRenderer& renderer) {
+	for (auto& it : mChildren) {
+		it->updateRenderer(renderer);
+	}
+}
+
+} /* framework */
 } /* fillwave */

@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/buffers/VertexBufferText.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferText", FERROR | FFATAL)
 
@@ -38,7 +38,7 @@ VertexBufferText::VertexBufferText(
 	mSize = mTotalElements * sizeof(VertexText);
 }
 
-void VertexBufferText::log() {
+void VertexBufferText::log() const{
 	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
 	for (auto it : mDataVertices) {
 		for (size_t i = 0; i < mDataVertices.size(); i++) {
@@ -48,5 +48,5 @@ void VertexBufferText::log() {
 	}
 }
 
-} /* models */
+} /* core */
 } /* fillwave */

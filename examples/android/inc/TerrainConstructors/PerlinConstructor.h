@@ -30,10 +30,10 @@
 #ifndef PerlinConstructor_H_
 #define PerlinConstructor_H_
 
-#include <fillwave/terrain/VoxelConstructor.h>
+#include <fillwave/models/terrain/VoxelConstructor.h>
 
 namespace fillwave {
-namespace terrain {
+namespace framework {
 
 /*! \class PerlinConstructor
  * \brief Implements VoxelConstructor and QuadConstructor to build an example terrain.
@@ -49,7 +49,7 @@ public:
    GLfloat calculateHeight(GLfloat x, GLfloat z);
    };
 
-} /* terrain */
+} /* framework */
 } /* fillwave */
 
 #endif /* PerlinConstructor_H_ */

@@ -8,16 +8,16 @@
 #ifndef CAMERANULL_H_
 #define CAMERANULL_H_
 
-#include <fillwave/space/Camera.h>
+#include <fillwave/space/base/ICamera.h>
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 /*! \class CameraNull
  * \brief Not used. Camera for which both projection and view matrices are always identities.
  */
 
-class CameraNull: public Camera {
+class CameraNull: public ICamera {
 public:
 	CameraNull();
 
@@ -30,6 +30,6 @@ public:
 	GLfloat getProjectionFarPlane();
 };
 
-} /* models */
+} /* framework */
 } /* fillwave */
 #endif /* CAMERANULL_H_ */

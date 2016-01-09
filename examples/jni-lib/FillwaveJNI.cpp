@@ -1,6 +1,7 @@
 #include "../jni-lib/FillwaveJNI.h"
 
 using namespace fillwave;
+using namespace fillwave::framework;
 
 #ifdef __cplusplus
 extern "C" {
@@ -1043,10 +1044,10 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputTouchScreen
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::TouchEventData data;
+	TouchEventData data;
 	data.xPos = x;
 	data.yPos = y;
-	actions::TouchEvent event(data);
+	TouchEvent event(data);
 	ptr->insertInput(event);
 }
 /*
@@ -1059,7 +1060,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerTimeCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 
 	ptr->registerCallback(ptrC);
 }
@@ -1073,7 +1074,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerKeyCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 
 	ptr->registerCallback(ptrC);
 }
@@ -1087,7 +1088,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerMouseButtonCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 
 	ptr->registerCallback(ptrC);
 }
@@ -1101,7 +1102,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerScrollCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 
 	ptr->registerCallback(ptrC);
 }
@@ -1115,7 +1116,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCharCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 
 	ptr->registerCallback(ptrC);
 }
@@ -1129,7 +1130,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCharModsCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 
 	ptr->registerCallback(ptrC);
 }
@@ -1143,7 +1144,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCursorEnterCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 
 	ptr->registerCallback(ptrC);
 }
@@ -1157,7 +1158,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCursorPositionCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 
 	ptr->registerCallback(ptrC);
 }
@@ -1172,7 +1173,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCallback
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
 
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 
 	ptr->registerCallback(ptrC);
 }
@@ -1186,7 +1187,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCallback
 (JNIEnv *, jobject, jlong engine, jlong callback) {
 
 	Engine* ptr = reinterpret_cast<Engine*>(engine);
-	actions::Callback* ptrC = reinterpret_cast<actions::Callback*>(callback);
+	Callback* ptrC = reinterpret_cast<Callback*>(callback);
 	ptr->unregisterCallback(ptrC);
 }
 
@@ -1212,14 +1213,14 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_buildTestScene
 (JNIEnv *, jobject, jlong engine) {
 
 	Engine* e = reinterpret_cast<Engine*>(engine);
-	loader::ProgramLoader loader;
-	pModel m = pModel ( new models::Model(e, loader.getDefaultBones(e), "animations/beast/beast.dae"));
+	ProgramLoader loader(e);
+	pModel m = pModel ( new Model(e, loader.getDefaultBones(), "animations/beast/beast.dae"));
 
 	/* Scene */
 	pScenePerspective s = buildScenePerspective();
 
 	/* Camera */
-	pCameraPerspective c = pCameraPerspective ( new space::CameraPerspective(glm::vec3(0.0,0.0,6.0),
+	pCameraPerspective c = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,0.0,6.0),
 					glm::quat(),
 					glm::radians(90.0),
 					1.0,
@@ -1235,7 +1236,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_buildTestScene
 	e->setCurrentScene(s);
 
 	/* Particle Emiter */
-	pEmiterPoint pe = pEmiterPoint (new::particles::EmiterPointCPU(e,
+	pIEmiterPoint pe = pIEmiterPoint (new::EmiterPointCPU(e,
 					0.3,
 					60000.0,
 					glm::vec4(0.1,0.1,1.0,1.0),
@@ -1253,7 +1254,7 @@ JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_buildTestScene
 
 	s->attach(pe);
 
-	pe->attachHierarchyCallback(new actions::TimedEmiterUpdateCallback(pe, FILLWAVE_ENDLESS));
+	pe->attachHierarchyCallback(new TimedEmiterUpdateCallback(pe, FILLWAVE_ENDLESS));
 }
 
 #ifdef __cplusplus

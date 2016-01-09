@@ -14,7 +14,7 @@
 
 namespace fillwave {
 class Engine;
-namespace manager {
+namespace framework {
 
 /*! \class LightManager
  * \brief Manager to handle Light objects.
@@ -116,7 +116,7 @@ private:
 	std::vector<pLightSpot> mSpotLights;
 	std::vector<pLightDirectional> mDirectionalLights;
 	std::vector<pLightPoint> mPointLights;
-	std::vector<fillwave::space::LighUniformData> mLightBufferData;
+	std::vector<LighUniformData> mLightBufferData;
 
 	GLboolean isRefreshLightSpot();
 	GLboolean isRefreshLightDirectional();
@@ -126,8 +126,8 @@ private:
 
 };
 
-} /* manager */
-typedef std::unique_ptr<manager::LightManager> puLightManager;
+} /* framework */
+typedef std::unique_ptr<framework::LightManager> puLightManager;
 } /* fillwave*/
 
 #endif /* LIGHTMANAGER_H_ */

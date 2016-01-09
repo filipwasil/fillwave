@@ -11,7 +11,7 @@
 #include <fontGenerator.h>
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 /*! \class FontLoader
  * \brief Loads fonts fromttf files.
@@ -24,7 +24,7 @@ public:
 	void load(std::string name);
 };
 
-} /* loader */
+} /* framework */
 } /* fillwave */
 
 #endif /* FONTLOADER_H_ */

@@ -11,7 +11,11 @@
 #include <fillwave/models/shapes/Quad.h>
 
 namespace fillwave {
-namespace models {
+namespace framework {
+
+/*! \class BoxOcclusion
+ * \brief Basic Shape for specific usage, providing each model to participate in OQ algorithm
+ */
 
 class BoxOcclusion: public Shape<core::VertexPosition> {
 public:
@@ -80,7 +84,7 @@ private:
 	Quad mQuad;
 };
 
-} /* models */
+} /* framework */
 } /* fillwave */
 
 #endif /* BOXOCCLUSION_H_ */

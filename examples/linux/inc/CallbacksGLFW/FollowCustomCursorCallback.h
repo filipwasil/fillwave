@@ -8,18 +8,16 @@
 #ifndef FOLLOWCUSTOMCURSORCALLBACK_H_
 #define FOLLOWCUSTOMCURSORCALLBACK_H_
 
-#include <fillwave/actions/Callback.h>
-#include <fillwave/actions/Event.h>
+#include <fillwave/actions/callbacks/Callback.h>
+#include <fillwave/actions/events/Event.h>
 #include <fillwave/Fillwave.h>
 
 namespace fillwave {
-   class Engine;
-namespace actions {
+class Engine;
+namespace framework {
 
 /*! \class FollowCustomCursorCallback
- *
  * \brief EngineCallback to change follow the user created custom cursor.
- *
  */
 
 class FollowCustomCursorCallback: public Callback {
@@ -31,7 +29,7 @@ private:
    Engine* mEngine;
    };
 
-} /* actions */
+} /* framework */
 } /* fillwave */
 
 #endif /* FOLLOWCUSTOMCURSORCALLBACK_H_ */

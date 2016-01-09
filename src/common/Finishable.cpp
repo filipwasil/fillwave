@@ -8,7 +8,7 @@
 #include <fillwave/common/Finishable.h>
 
 namespace fillwave {
-namespace common {
+namespace framework {
 
 Finishable::Finishable(float timeToFinish)
 		:
@@ -43,5 +43,5 @@ bool Finishable::isFinished() const {
 	return mFinished;
 }
 
-} /* common */
+} /* framework */
 } /* fillwave */

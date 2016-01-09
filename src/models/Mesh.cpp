@@ -6,7 +6,7 @@
 #include <fillwave/models/Mesh.h>
 
 #include <fillwave/management/LightManager.h>
-#include <fillwave/management/BoneManager.h>
+#include <fillwave/models/animations/Animator.h>
 
 #include <fillwave/loaders/ProgramLoader.h>
 
@@ -19,7 +19,7 @@ FLOGINIT("Mesh", FERROR | FFATAL | FINFO)
 using namespace std;
 
 namespace fillwave {
-namespace models {
+namespace framework {
 
 const GLint gOQVertices = 36;
 
@@ -35,10 +35,10 @@ Mesh::Mesh(
 		pProgram programOcclusion,
 		pProgram programAmbientOcclusionGeometry,
 		pProgram programAmbientOcclusionColor,
-		manager::LightManager* lightManager,
+		LightManager* lightManager,
 		pVertexBufferBasic vbo,
 		pIndexBufferBasic ibo,
-		manager::BoneManager* boneManager,
+		Animator* boneManager,
 		GLenum drawType)
 		:
 				Reloadable(engine),
@@ -55,7 +55,7 @@ Mesh::Mesh(
 				mIBO(ibo),
 				mVBO(vbo),
 				mLightManager(lightManager),
-				mBoneManager(boneManager),
+				mAnimator(boneManager),
 				mDrawType(drawType)
 #ifdef FILLWAVE_GLES_3_0
 #else
@@ -69,10 +69,29 @@ Mesh::Mesh(
 	initUniformsCache();
 }
 
-void Mesh::draw(space::Camera& camera) {
+void Mesh::drawPBRP(ICamera& camera) {
 #ifdef FILLWAVE_GLES_3_0
 #else
-	if (mBoneManager || mOcclusionQuery.getResultAsync(1))
+	if (mAnimator || mOcclusionQuery.getResultAsync(1))
+#endif
+	{
+		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+		core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
+		core::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
+		core::Uniform::push(mULCLightSpecularIntensity,
+				mMaterial.getSpecular());
+		core::Uniform::push(mULCCameraPosition, camera.getTranslation());
+		core::Uniform::push(mULCViewProjectionMatrix,
+				camera.getViewProjection());
+
+		coreDraw();
+	}
+}
+
+void Mesh::draw(ICamera& camera) {
+#ifdef FILLWAVE_GLES_3_0
+#else
+	if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
 	{
 		mProgram->use();
@@ -87,15 +106,16 @@ void Mesh::draw(space::Camera& camera) {
 				camera.getViewProjection());
 
 		mLightManager->pushLightUniforms(mProgram.get());
+		mLightManager->bindShadowmaps();
 
 		coreDraw();
 	}
 }
 
-void Mesh::drawDR(space::Camera& camera) {
+void Mesh::drawDR(ICamera& camera) {
 #ifdef FILLWAVE_GLES_3_0
 #else
-	if (mBoneManager || mOcclusionQuery.getResultAsync(1))
+	if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
 	{
 		mProgram->use();
@@ -111,20 +131,21 @@ void Mesh::drawDR(space::Camera& camera) {
 //      mLightManager->pushLightUniformsShadowMaps(mProgram.get());
 
 		mLightManager->pushLightUniformsDR();
+		mLightManager->bindShadowmaps();
 
 		coreDraw();
 	}
 }
 
-void Mesh::drawFast(space::Camera&) {
+void Mesh::drawFast(ICamera&) {
 	mProgram->use();
+	mLightManager->bindShadowmaps();
+
 	coreDraw();
 }
 
 inline void Mesh::coreDraw() {
 	mVAO->bind();
-
-	mLightManager->bindShadowmaps();
 
 	bindTextures();
 
@@ -141,8 +162,6 @@ inline void Mesh::coreDraw() {
 	mVAO->unbind();
 
 	core::Texture2D::unbind2DTextures();
-
-	core::Program::disusePrograms();
 }
 
 inline void Mesh::bindTextures() {
@@ -159,7 +178,7 @@ inline void Mesh::bindTextures() {
 	}
 }
 
-void Mesh::drawPicking(space::Camera& camera) {
+void Mesh::drawPicking(ICamera& camera) {
 	if (isPickable()) {
 		mProgram->use();
 
@@ -183,7 +202,7 @@ void Mesh::drawPicking(space::Camera& camera) {
 	}
 }
 
-void Mesh::drawOcclusionBox(space::Camera& camera) {
+void Mesh::drawOcclusionBox(ICamera& camera) {
 
 	mProgramOQ->use();
 
@@ -201,7 +220,7 @@ void Mesh::drawOcclusionBox(space::Camera& camera) {
 	core::Program::disusePrograms();
 }
 
-void Mesh::drawDepth(space::Camera& camera) {
+void Mesh::drawDepth(ICamera& camera) {
 	if (isPSC()) {
 		mProgramShadow->use();
 
@@ -218,7 +237,7 @@ void Mesh::drawDepth(space::Camera& camera) {
 	}
 }
 
-void Mesh::drawDepthColor(space::Camera& camera, glm::vec3& /*xxx double check position*/) {
+void Mesh::drawDepthColor(ICamera& camera, glm::vec3& /*xxx double check position*/) {
 	if (isPSC()) {
 		mProgramShadowColor->use();
 
@@ -236,7 +255,7 @@ void Mesh::drawDepthColor(space::Camera& camera, glm::vec3& /*xxx double check p
 	}
 }
 
-void Mesh::drawAOG(space::Camera& camera) {
+void Mesh::drawAOG(ICamera& camera) {
 	mProgramAOGeometry->use();
 
 	core::Uniform::push(mULCMVPAmbientOcclusion,
@@ -251,7 +270,7 @@ void Mesh::drawAOG(space::Camera& camera) {
 	mVAO->unbind();
 }
 
-void Mesh::drawAOC(space::Camera& camera) {
+void Mesh::drawAOC(ICamera& camera) {
 	mProgramAOColor->use();
 
 //      core::Uniform::push(mULCTextureMap, FILLWAVE_DIFFUSE_ATTACHMENT);
@@ -281,7 +300,7 @@ void Mesh::onDraw() {
 
 inline void Mesh::initPipeline() {
 	if (mProgram) {
-		loader::ProgramLoader::initDefaultUniforms(mProgram.get());
+		ProgramLoader::initDefaultUniforms(mProgram.get());
 	}
 }
 
@@ -367,9 +386,14 @@ inline void Mesh::initVBO() {
 	mOcclusionMatrix = glm::scale(glm::mat4(1.0f), mVBO->getOcclusionBoxSize());
 }
 
-void Mesh::log() {
+void Mesh::log() const {
 	mVBO->log();
 }
 
-} /* models */
+void Mesh::updateRenderer(IRenderer& renderer) {
+	GLuint id = mProgram.get()->getHandle();
+	renderer.update(&id, this);
+}
+
+} /* framework */
 } /* fillwave */

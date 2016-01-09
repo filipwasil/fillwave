@@ -11,7 +11,7 @@
 FLOGINIT("DirectionalLight", FERROR | FFATAL)
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 LightDirectional::LightDirectional(
 		pTexture2DRenderable shadowTexture,
@@ -69,5 +69,5 @@ void LightDirectional::log() {
 			d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
 }
 
-} /* space */
+} /* framework */
 } /* fillwave */

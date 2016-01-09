@@ -9,13 +9,13 @@
 
 // for native asset manager
 #include <sys/types.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 #include <fillwave/loaders/AndroidLoader.h>
 
 FLOGINIT("Android loader", FERROR | FFATAL)
 
 namespace fillwave {
-	namespace loader {
+	namespace framework {
 
 		ANativeActivity* gActivity;
 
@@ -180,7 +180,7 @@ namespace fillwave {
 			}
 		}
 
-	} /* loader */
+	} /* framework */
 } /* fillwave */
 
 #endif /* __ANDROID__ */

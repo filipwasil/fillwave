@@ -7,12 +7,12 @@
 
 #include <fillwave/management/SamplerManager.h>
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("SamplerManager", FERROR | FFATAL)
 
 namespace fillwave {
-namespace manager {
+namespace framework {
 
 pSampler SamplerManager::get(GLint textureUnit) {
 	for (auto& it : mSamplers) {
@@ -29,5 +29,5 @@ void SamplerManager::reload() {
 	}
 }
 
-} /* manager */
+} /* framework */
 } /* fillwave */

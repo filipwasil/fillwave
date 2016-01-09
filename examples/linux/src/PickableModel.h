@@ -12,10 +12,10 @@
 
 using namespace fillwave;
 
-class PickableModel: public models::Model{
+class PickableModel: public framework::Model{
 private:
    pText mText;
-   pEffect mPickedEffect;
+   pIEffect mPickedEffect;
    std::string mName;
 public:
    PickableModel(std::string name,

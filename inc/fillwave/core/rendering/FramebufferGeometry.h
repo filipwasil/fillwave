@@ -24,7 +24,7 @@ namespace core {
 class FramebufferGeometry: public Framebuffer {
 public:
 	FramebufferGeometry(
-			manager::TextureManager* manager,
+			framework::TextureManager* manager,
 			GLuint width,
 			GLuint height,
 			GLuint colorBuffers,

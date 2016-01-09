@@ -11,10 +11,10 @@
 #include <fillwave/OpenGL.h>
 #include <memory>
 
-#include <fillwave/particles/Impostor.h>
+#include <fillwave/models/Impostor.h>
 
 namespace fillwave {
-namespace particles {
+namespace framework {
 
 /*! \class GradientBall
  * \brief Impostor to define a gradient ball.
@@ -30,11 +30,11 @@ public:
                 GLfloat size = 1.0,
                 pTexture texture = pTexture());
    virtual ~GradientBall();
-   void draw(space::Camera& camera);
+   void draw(ICamera& camera);
    };
 
-} /* particles */
-typedef std::shared_ptr<particles::GradientBall> pGradientBall;
+} /* framework */
+typedef std::shared_ptr<framework::GradientBall> pGradientBall;
 } /* fillwave */
 
 #endif /* GRADIENTBALL_H_ */

@@ -6,12 +6,12 @@
  */
 
 #include <fillwave/space/LightSpot.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Spotlight", FERROR | FFATAL)
 
 namespace fillwave {
-namespace space {
+namespace framework {
 
 LightSpot::LightSpot(
 		pTexture2DRenderable shadowTexture,
@@ -77,5 +77,5 @@ void LightSpot::log() {
 	Light::log();
 }
 
-} /* space */
+} /* framework */
 } /* fillwave */

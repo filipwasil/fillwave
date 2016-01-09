@@ -20,17 +20,6 @@ void glesInitExtensions();
 
 #if defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES)
 
-#ifdef FILLWAVE_COMPILATION_GLES_2_0
-#define FILLWAVE_GLES_2_0
-#define GL_GLEXT_PROTOTYPES
-#include <GLES2/gl2.h>
-#include <GLES2/gl2ext.h>
-
-#define glClearDepth glClearDepthf /* xxx doublecheck */
-#define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE /* xxx doublecheck */
-#define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F /* xxx doublecheck */
-
-#else /* FILLWAVE_COMPILATION_GLES_2_0 */
 #define FILLWAVE_GLES_3_0
 #define GL_GLEXT_PROTOTYPES
 #include <GLES3/gl3.h>
@@ -39,7 +28,6 @@ void glesInitExtensions();
 #define glClearDepth glClearDepthf
 #define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE
 #define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
-#endif /* FILLWAVE_COMPILATION_GLES_2_0 */
 
 #else /* defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES) */
 #include <GL/glew.h>

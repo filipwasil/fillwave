@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/core/rendering/Texture3DRenderable.h>
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Texture3DRenderable", FERROR | FFATAL)
 

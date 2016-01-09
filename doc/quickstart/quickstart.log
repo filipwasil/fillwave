@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.10.23)  14 DEC 2015 23:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.12.22)  9 JAN 2016 18:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **quickstart.tex
 (./quickstart.tex
 LaTeX2e <2015/01/01>
-Babel <3.9l> and hyphenation patterns for 4 languages loaded.
+Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
 (/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
@@ -475,108 +475,108 @@ File: omspxr.fd 2000/12/14 v1.0
 LaTeX Font Info:    Font shape `OMS/pxr/m/n' in size <10> not available
 (Font)              Font shape `OMS/pxsy/m/n' tried instead on input line 72.
  [3]
-LaTeX Font Info:    Try loading font information for OT1+pxtt on input line 87.
-
+LaTeX Font Info:    Try loading font information for OT1+pxtt on input line 107
+.
 
 (/usr/share/texlive/texmf-dist/tex/latex/pxfonts/ot1pxtt.fd
 File: ot1pxtt.fd 2000/12/14 v1.0
 )
 LaTeX Font Info:    Font shape `OT1/pxtt/bx/n' in size <10> not available
-(Font)              Font shape `OT1/pxtt/b/n' tried instead on input line 88.
+(Font)              Font shape `OT1/pxtt/b/n' tried instead on input line 108.
  [4] [5] [6]
 [7] [8] [9] [10] [11] [12] [13] [14]
-<../../../fillwave-examples/screens/particles.png, id=601, 1445.4pt x 903.375pt
+<../../../fillwave-examples/screens/particles.png, id=604, 1445.4pt x 903.375pt
 >
 File: ../../../fillwave-examples/screens/particles.png Graphic file (type png)
  <use ../../../fillwave-examples/screens/particles.png>
 Package pdftex.def Info: ../../../fillwave-examples/screens/particles.png used 
-on input line 512.
+on input line 533.
 (pdftex.def)             Requested size: 245.71475pt x 153.57172pt.
 
-<../../../fillwave-examples/screens/particles_b.png, id=603, 1445.4pt x 903.375
+<../../../fillwave-examples/screens/particles_b.png, id=606, 1445.4pt x 903.375
 pt>
 File: ../../../fillwave-examples/screens/particles_b.png Graphic file (type png
 )
  <use ../../../fillwave-examples/screens/particles_b.png>
 Package pdftex.def Info: ../../../fillwave-examples/screens/particles_b.png use
-d on input line 519.
+d on input line 540.
 (pdftex.def)             Requested size: 245.71475pt x 153.57172pt.
  [15 <../../../fillwave-examples/screens/particles.png> <../../../fillwave-exam
 ples/screens/particles_b.png>] [16] [17] [18] [19]
-Underfull \hbox (badness 10000) in paragraph at lines 649--651
+Underfull \hbox (badness 10000) in paragraph at lines 670--672
 
  []
 
 [20] <easing.png, id=698, 552.0625pt x 395.4775pt>
 File: easing.png Graphic file (type png)
  <use easing.png>
-Package pdftex.def Info: easing.png used on input line 687.
+Package pdftex.def Info: easing.png used on input line 706.
 (pdftex.def)             Requested size: 331.24005pt x 237.28833pt.
  [21 <./easing.png>] [22] [23] [24]
-Overfull \hbox (84.49796pt too wide) in paragraph at lines 846--848
+Overfull \hbox (84.49796pt too wide) in paragraph at lines 865--867
 [][][][][][][][][] 
  []
 
 
-Overfull \hbox (10.99817pt too wide) in paragraph at lines 846--848
+Overfull \hbox (10.99817pt too wide) in paragraph at lines 865--867
 [][][][][][] 
  []
 
 [25] (../../../fillwave-examples/src/example_simple/example_simple.cpp)
 [26]
-Underfull \hbox (badness 10000) in paragraph at lines 875--919
+Underfull \hbox (badness 10000) in paragraph at lines 894--938
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 875--919
+Underfull \hbox (badness 10000) in paragraph at lines 894--938
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 875--919
+Underfull \hbox (badness 10000) in paragraph at lines 894--938
 
  []
 
 [27]
-Overfull \hbox (121.1991pt too wide) in paragraph at lines 927--928
+Overfull \hbox (121.1991pt too wide) in paragraph at lines 946--947
 [][][][][][][][][][][]  
  []
 
 [28] [29]
-Overfull \hbox (146.39905pt too wide) in paragraph at lines 983--985
+Overfull \hbox (146.39905pt too wide) in paragraph at lines 1002--1004
 [][][][][][][][]  
  []
 
 
-Overfull \hbox (146.39905pt too wide) in paragraph at lines 995--997
+Overfull \hbox (146.39905pt too wide) in paragraph at lines 1014--1016
 [][][][][][][][]  
  []
 
 [30] [31] [32] [33]
-Overfull \hbox (158.99902pt too wide) in paragraph at lines 1083--1084
+Overfull \hbox (158.99902pt too wide) in paragraph at lines 1102--1103
 [][][][][][][][]  
  []
 
 [34]
 No file quickstart.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1122.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1141.
 [35]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1122.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1141.
  (./quickstart.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1122.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1122.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1141.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1141.
 
 Package rerunfilecheck Info: File `quickstart.out' has not changed.
-(rerunfilecheck)             Checksum: C2523B90DA5EACA08A57195771D3E0C8;2452.
+(rerunfilecheck)             Checksum: B1102FBBD79C01047A44AF2425FB3F30;2449.
  ) 
 Here is how much of TeX's memory you used:
- 9974 strings out of 494957
- 145172 string characters out of 6180027
- 293873 words of memory out of 5000000
- 12288 multiletter control sequences out of 15000+600000
- 35514 words of font info for 106 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
+ 9985 strings out of 493085
+ 145354 string characters out of 6136916
+ 298529 words of memory out of 5000000
+ 12539 multiletter control sequences out of 15000+600000
+ 36810 words of font info for 109 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
  33i,7n,58p,837b,1753s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/pxfonts/pxsy.pfb></usr/share/texlive/texmf-dist
@@ -586,10 +586,10 @@ onts/rpxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txbtt.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on quickstart.pdf (35 pages, 962013 bytes).
+Output written on quickstart.pdf (35 pages, 961957 bytes).
 PDF statistics:
- 1307 PDF objects out of 1440 (max. 8388607)
- 1243 compressed objects within 13 object streams
- 798 named destinations out of 1000 (max. 500000)
+ 1309 PDF objects out of 1440 (max. 8388607)
+ 1245 compressed objects within 13 object streams
+ 799 named destinations out of 1000 (max. 500000)
  328 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -11,7 +11,7 @@
 #include <fillwave/common/string.h>
 
 namespace fillwave {
-namespace loader {
+namespace framework {
 
 ShaderLoaderVertex::ShaderLoaderVertex(bool animated)
 		: mAnimated(animated) {
@@ -85,7 +85,7 @@ const std::string ShaderLoaderVertex::getSource() const {
 
 	"uniform float uTime;\n"
 
-			"uniform mat4 uBones[" + common::to_string(FILLWAVE_MAX_BONES)
+			"uniform mat4 uBones[" + to_string(FILLWAVE_MAX_BONES)
 			+ "];\n";
 
 	std::string mainStart =
@@ -179,5 +179,5 @@ const std::string ShaderLoaderVertex::getSource() const {
 	return mGLVersion + mGLVertexPrecision +  attributes + outputs + uniforms + main;
 }
 
-} /* loader */
+} /* framework */
 } /* fillwave */

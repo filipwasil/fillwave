@@ -8,7 +8,7 @@
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/pipeline/Attribute.h>
 
-#include <fillwave/extras/Log.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Program", FERROR | FFATAL | FINFO | FDEBUG)
 
@@ -80,6 +80,11 @@ void Program::link() {
 
 void Program::disusePrograms() {
 	glUseProgram(0);
+	FLOG_CHECK("disuse programs");
+}
+
+void Program::useProgram(GLuint handle) {
+	glUseProgram(handle);
 	FLOG_CHECK("disuse programs");
 }
 
