@@ -17,7 +17,7 @@ namespace framework {
  * \brief Effect to boost the models color.
  */
 
-class BoostColor: public Effect {
+class BoostColor: public IEffect {
 public:
 	BoostColor(GLfloat boost = 1.0f);
 	virtual ~BoostColor() = default;

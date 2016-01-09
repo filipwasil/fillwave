@@ -17,10 +17,10 @@ namespace framework {
  * \brief Base for effects.
  */
 
-class Effect {
+class IEffect {
 public:
-	Effect() = default;
-	virtual ~Effect() = default;
+	IEffect() = default;
+	virtual ~IEffect() = default;
 
 	/*!
 	 * preDrawAction
@@ -52,8 +52,8 @@ public:
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Effect> pEffect;
-typedef std::unique_ptr<framework::Effect> puEffect;
+typedef std::shared_ptr<framework::IEffect> pIEffect;
+typedef std::unique_ptr<framework::IEffect> puIEffect;
 } /* fillwave */
 
 #endif /* EFFECT_H_ */

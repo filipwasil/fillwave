@@ -56,12 +56,12 @@ void init() {
    gScene = buildScenePerspective();
 
    /* Camera */
-   gCamera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,5.0,0.0),
+   gCamera = std::make_shared<CameraPerspective> (glm::vec3(0.0,5.0,0.0),
                                                     glm::quat(),
                                                     glm::radians(90.0),
                                                     1.0,
                                                     0.1,
-                                                    1000.0));
+                                                    1000.0);
 
    /* Shaders */
    ProgramLoader loader(gEngine);
@@ -89,7 +89,7 @@ void perform() {
    gEngine->configureFPSCounter("fonts/Titania",0.7,0.9,100.0);
    gEngine->setCurrentScene(gScene);
 
-   pEffect fog(new Fog());
+   pIEffect fog(new Fog());
 
    gScene->setCamera(gCamera);
 

@@ -25,8 +25,8 @@ public:
 	virtual ~Programmable() = default;
 
 	/* Effects */
-	void addEffect(pEffect effect);
-	void removeEffect(pEffect effect);
+	void addEffect(pIEffect effect);
+	void removeEffect(pIEffect effect);
 	void drawWithEffects(ICamera& camera);
 	void drawWithEffectsDR(ICamera& camera);
 	void drawWithEffectsPBRP(ICamera& camera);
@@ -34,7 +34,7 @@ public:
 protected:
 	pProgram mProgram;
 
-	std::vector<pEffect> mEffects;
+	std::vector<pIEffect> mEffects;
 };
 
 } /* framework */

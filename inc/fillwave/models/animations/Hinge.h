@@ -13,6 +13,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class Hinge
+ * \brief Entity capable of populating the draw method towards children.
+ */
+
 class Hinge: public Entity {
 public:
 	Hinge() = default;

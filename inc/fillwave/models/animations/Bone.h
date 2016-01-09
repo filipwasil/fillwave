@@ -21,7 +21,7 @@ typedef std::shared_ptr<framework::Bone> pBone;
 namespace framework {
 
 /*! \class Bone
- * \brief Entity used by BoneManager to perform animation.
+ * \brief Hinge used by Animator to populate bone transformations.
  */
 
 class Bone: public Hinge {

@@ -49,8 +49,8 @@
 
 \begin{document}
 
-\title{Fillwave
-OpenGL 3.3+ (OpenGL ES 3.0+) graphics engine for C++ }
+\title{\textbf{Fillwave 4}
+ - new OpenGL 3.3+ (OpenGL ES 3.0+) graphics engine for C++11 }
 \author{Filip Wasil}
 
 \maketitle
@@ -81,6 +81,26 @@ Before you start please ensure your graphics card driver supports at least OpenG
 
 Probably you will ask how is Fillwave better than other, more extended engines out there. The answer generally depends on what is your target. With this engine you can easily build a graphics layer to any game without installing any large IDE or lots of libraries. Fillwave provides an abstraction layer to OpenGL API introducing minimum overhead. It does not rely on the OpenGL context you have, so it can be used with GLFW, Freeglut or even with QT as weel. The android example (Using \textbf{native app glue} and EGL directly) is also available.\newpage
 
+\subsection{Code structure}\label{sec:Code structure}
+\indent Files in this project are organized in simple manner:
+\begin{itemize}
+  \item "inc" - headers
+  \item "src" - sources
+  \item "doc" - documentation
+  \item "ext" - sources of third party libraries (git submodules)
+  \item "cmake" - cmake macros
+  \item "examples" - multiplatform examples
+  \item "scripts" - building scripts
+\end{itemize}
+\indent \indent Engine uses dual namespace design style for modules. Code is splitted into three namespaces: \textbf{fillwave}, \textbf{fillwave:framework}, \textbf{fillwave::core}. Core layer uses directly OpenGL driver API. \textbf{Framework} layer uses the \textbf{core} and by design implements a middleware of this project. The highest layer can be found under \textbf{fillwave} namespace. It is what we call Fillwave API. Naming convention is following:
+\begin{itemize}
+  \item "p" - shared pointer (Ex. pEntity)
+  \item "pu" - unique pointer (Ex. puRenderer)
+  \item "pw" - weak pointer (Ex. pwCameraPerspective)
+  \item "e" - enumeration class (Ex. eDebuggerState)
+  \item "I" - interface (Ex. IDrawable)
+\end{itemize}
+
 \subsection{Getting started}\label{sec:Getting started}
 \indent \indent The basic application skeleton looks like:
 
@@ -90,11 +110,12 @@ Probably you will ask how is Fillwave better than other, more extended engines o
 using namespace fillwave;
 
 int main(int argc, char* argv[]) {
-   /* Create OpenGL context */
+   /* Create OpenGL/OpenGLES context */
    Engine* fillwave = new Engine(argc, argv);
    /* Create scene */
    /* enter rendering loop */
    delete engine;
+   /* Delete OpenGL/OpenGLES context*/
    exit(EXIT_SUCCESS);
 }
 \end{lstlisting}
@@ -103,18 +124,19 @@ int main(int argc, char* argv[]) {
 \indent \indent During the context initialization stage One must provide Fillwave engine a window (surface to draw on) and use \textbf{insert} functions in your context input handlers.
 
 \begin{lstlisting}
-void insertResizeScreen(actions::KeyboardEvent& e);
-void insertInput(actions::KeyboardEvent& e);
-void insertInput(actions::MouseButtonEvent& e);
-void insertInput(actions::ScrollEvent  & e);
-void insertInput(actions::CharacterEvent& e);
-void insertInput(actions::CharacterModsEvent& e);
-void insertInput(actions::CursorEnterEvent& e);
-void insertInput(actions::CursorPositionEvent& e);
-void insertInput(actions::TouchEvent& e);
+void insertResizeScreen(actions::eKeyboardEvent& e);
+void insertInput(actions::eKeyboardEvent& e);
+void insertInput(actions::eMouseButtonEvent& e);
+void insertInput(actions::eScrollEvent  & e);
+void insertInput(actions::eCharacterEvent& e);
+void insertInput(actions::eCharacterModsEvent& e);
+void insertInput(actions::eCursorEnterEvent& e);
+void insertInput(actions::eCursorPositionEvent& e);
+void insertInput(actions::eTouchEvent& e);
+void insertInput(actions::eTouchEvent& e);
 \end{lstlisting}
 
-\indent \indent Every time when there is an event incoming to you context, (Does not matter if you are using glfw, freegut, QT or other library) and you want Fillwave to handle it you should \textbf{insert} a proper event into the engine. Above there is an example using GLFW. The \textbf{keyboardCallback} function was previously registered as keyboard callback in GLFW.  
+\indent \indent Every time when there is an event incoming to you context, (Does not matter if you are using glfw, freegut, QT or other library) and you want Fillwave to handle it you should \textbf{insert} a proper event into the engine using \textbf{insertEvent} function. Above there is an example using GLFW. The \textbf{keyboardCallback} function was previously registered as keyboard callback in GLFW.  
 
 \begin{lstlisting}
 
@@ -137,8 +159,6 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
    mGraphicsEngine->insertInput(event);
 }
 \end{lstlisting}
-\subsection{Naming convention}\label{sec:Naming convention}
-\indent \indent Most of the objects you are going to use will start with \textbf{"p"} prefix which stands for a \textbf{shared pointer} (\textbf{pSceneOrtographic}, \textbf{pScenePerspective}, \textbf{pCameraOrtographic}, \textbf{pCameraPerspective}, \textbf{pEntity}, \textbf{pModel}, \textbf{pLightSpot}, \textbf{pLightDirectional}, \textbf{pText}, \textbf{pTerrain}, \textbf{pMeshTerrain},\textbf{pEmiterPoint}, \textbf{pSkybox}). \textbf{"pw"} prefix stands for \textbf{weak pointers} which are used inside fillwave as a default way of passing \textbf{"p"} objects (shared pointers) throught the scene tree.  \textbf{"e"} prefix is enabled \textbf{class enum} enumerations for ( \textbf{eEventType} and \textbf{eEasing} and others). Fillwave uses dual namespace design style for modules.
 
 \subsection{Rendering loop}\label{sec:Loop}
 
@@ -171,12 +191,12 @@ void ContextGLFW1::render() {
                                    GLuint format,
                                    GLint bytesPerPixel);
 \end{lstlisting}
-\indent \indent If not sure about the format You want, default parameters for \textbf{captureFramebufferToBuffer} are \textbf{GL\_RGBA} with 4 bytes per pixel. This format is also a defult one for \textbf{captureFramebufferToFile}.
+\indent \indent If not sure about the format you want you can just leave the default parameters. \textbf{captureFramebufferToBuffer} will use \textbf{GL\_RGBA} with 4 bytes per pixel. This format is also a default one for \textbf{captureFramebufferToFile}.
 
 \section{Digging into API}
 
 \subsection{Entity}\label{sec:Entity}
-\indent \indent \textbf{pEntity} is a base class for all objects which can exist in Your draw tree. You can attach any other entities to it. You can move, rotate, and scale each of them.
+\indent \indent \textbf{pEntity} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them.
 
 \begin{lstlisting}
 pEntity entity_parent = buildEntity();
@@ -197,34 +217,34 @@ glm::mat4 getTransformation();
 \end{lstlisting}
 
 \subsection{Scene}\label{sec:Scene}
-\indent \indent \textbf{pScenePerspective} (or \textbf{pSceneOrtographic}) by design is considered to be the root node of Your \textbf{pEntity} tree. It stores its own \textbf{pCameraPerspective} (or \textbf{pCameraOrtographic}), \textbf{pSkybox}, \textbf{pTerrain} and \textbf{pCursor}. It also has an \textbf{onHide()} and \textbf{onShow()} virtual functions which will be execuded during scene change. You can chose between \textbf{Ortographic} and/or \textbf{Perspective} camera for each scene (See the next section). To set a camera in the scene use \textbf{setCamera}. To change between cameras use \textbf{setProjectionType} function.
+\indent \indent \textbf{pScenePerspective} (or \textbf{pSceneOrtographic}) by design is considered to be the root node of your \textbf{pEntity} tree. It stores its own \textbf{pCameraPerspective} (or \textbf{pCameraOrtographic}), \textbf{pSkybox} and \textbf{pCursor}. It also has an \textbf{onHide()} and \textbf{onShow()} virtual functions which will be execuded during scene change.
 
 \begin{lstlisting}
-/* Build a default scene */
-pScene scene = buildScene();
+/* Build scene */
+pISceneOrtographic sceneO = buildSceneOrtographic();
+pIScenePerspective speneP = buildScenePerspective();
 
-/* Ortographic camera set */
-scene->setCamera(cameraO);
+/* Build camera */
+pCameraOrtographic cO = std::make_shared<CameraOrtographic>();
+pCameraPerspective cP = std::make_shared<CameraPerspective>();
 
-/* Perspective camera set */
-scene->setCamera(cameraP);
+/* Attach camera */
+sceneO->setCamera(cO);
+speneP->setCamera(cP);
 
-/* Perspective projection is set as default. We can change it */
-gScene->setProjectionType(eProjectionType::Orthographic);
-
-/* Make our scene current one. */
-engine->setCurrentScene(scene);
+/* Attach scene */
+engine->setCurrentScene(sceneP);
 
 \end{lstlisting}
 
 \subsection{Camera}\label{sec:Camera}
 
-\indent \indent There are two camera to chose from in Fillwave: \textbf{CameraPerspective} and \textbf{CameraOrtographic}.Providing empty quaternion results will make the camera look in \textbf{-Z} direction.
+\indent \indent There are two camera to chose from in Fillwave: \textbf{CameraPerspective} and \textbf{CameraOrtographic}.Providing empty quaternion results will make the camera look in \textbf{-Z} direction. Example camera creation is listed below:
 
 \begin{lstlisting}
 /* Camera with perspective projection */
-pCameraPerspective cameraP = pCameraPerspective ( new space::CameraPerspective
-                     glm::vec3(0.0,0.0,6.0), /* position */
+pCameraPerspective cameraP = std::make_shared<CameraPerspective>                
+                    (glm::vec3(0.0,0.0,6.0), /* position */
                      glm::quat(), /* rotation */                
                      glm::vec3(0.0,1.0,0.0), /* head up direction */         
                      glm::radians(90.0), /* field of view angle */        
@@ -235,14 +255,15 @@ pCameraPerspective cameraP = pCameraPerspective ( new space::CameraPerspective
 
 
 /* Camera with ortographic projection */
-gCameraOrthographic cameraO = pCameraOrtographic ( new space::CameraOrtographic(glm::vec3(0.0,0.0,6.0),
+gCameraOrthographic cameraO = std::make_shared<CameraOrtographic> 
+                        (glm::vec3(0.0,0.0,6.0),
                          glm::quat(), /* rotation */                
                          -10.0f, /* x left culling */
                          10.0f, /* x right culling */
                          10.0f, /* y up culling */
                          -10.0f, /* y down culling */
                          0.1f, /* z near culling  */
-                         1000.0f)); /* z far culling */
+                         1000.0f); /* z far culling */
 \end{lstlisting}
 
 \subsection{Programs and Shaders}\label{sec:Programs and Shaders}
@@ -250,13 +271,13 @@ gCameraOrthographic cameraO = pCameraOrtographic ( new space::CameraOrtographic(
 
 \begin{lstlisting}
 /* Create loader module */
-loader::ProgramLoader loader;
+loader::ProgramLoader loader(gEngine);
 
 /* Default program */
-pProgram default = loader.getDefault(gEngine);
+pProgram default = loader.getDefault();
 
 /* Default program with animations support */
-pProgram animation = loader.getDefaultBones(gEngine);
+pProgram animation = loader.getDefaultBones();
 \end{lstlisting}
 
 \newpage
@@ -453,11 +474,11 @@ GLint getAnimations();
 
 \begin{lstlisting}
 
-pEffect fog(new effects::Fog());
-pEffect boost(new effects::BoostColor(10.0));
-pEffect ccw(new effects::ClockwiseDrawEffect());
-pEffect paint(new effects::Painter());
-pEffect textureOnly(new effects::TextureOnly());
+pIEffect fog(new Fog());
+pIEffect boost(new BoostColor(10.0));
+pIEffect ccw(new ClockwiseDrawEffect());
+pIEffect paint(new Painter());
+pIEffect textureOnly(new TextureOnly());
 
 model->addEffect(fog);
    
@@ -658,23 +679,21 @@ void setFocus(eEventType eventType, pEntity entity);
 \indent \indent To attach/detach an item callback to/from an entity:
 
 \begin{lstlisting}
-void Entity::attachHierarchyCallback(actions::ItemCallback* c);
-
-void Entity::attachPrivateCallback(actions::ItemCallback* c);
-
-void Entity::detachHierarchyCallback(actions::ItemCallback* c);
-
-void Entity::detachPrivateCallback(actions::ItemCallback* c);   \end{lstlisting}
+void Entity::attachHierarchyCallback(Callback* c);
+void Entity::attachPrivateCallback(Callback* c);
+void Entity::detachHierarchyCallback(Callback* c);
+void Entity::detachPrivateCallback(Callback* c);
+\end{lstlisting}
 
 \subsubsection{Register, unregister and clear functions}\label{sec:register functions}
 \indent \indent To register/unregister a callback in Fillwave use following functions:
 
 \begin{lstlisting}
-void registerCallback(actions::Callback* c);
-void unregisterCharacterModsCallback(actions::Callback* c);
+void registerCallback(Callback* c);
+void unregisterCharacterModsCallback(Callback* c);
 \end{lstlisting}
 
-\indent \indent Note, that there is no need to \textbf{delete} any objects. This happens inside the engine.
+\indent \indent Note, that there is no need to \textbf{delete} any objects. This happens inside the callbacks.
 
 \newpage
 

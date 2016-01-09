@@ -17,7 +17,7 @@ namespace framework {
  * \brief Effect to color the model with texture only (exclude light effects and shadows).
  */
 
-class TextureOnly: public Effect {
+class TextureOnly: public IEffect {
 public:
 	TextureOnly() = default;
 	virtual ~TextureOnly() = default;

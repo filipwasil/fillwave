@@ -17,7 +17,7 @@ namespace framework {
  * \brief Effect to draw an opposite face of each mesh.
  */
 
-class ClockwiseDrawEffect: public Effect {
+class ClockwiseDrawEffect: public IEffect {
 public:
 	ClockwiseDrawEffect() = default;
 	virtual ~ClockwiseDrawEffect() = default;

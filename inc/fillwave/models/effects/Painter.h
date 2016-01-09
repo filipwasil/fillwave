@@ -17,7 +17,7 @@ namespace framework {
  * \brief Effect to draw a mesh with single color.
  */
 
-class Painter: public Effect {
+class Painter: public IEffect {
 public:
 	Painter(glm::vec4 color);
 	virtual ~Painter() = default;

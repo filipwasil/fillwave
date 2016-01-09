@@ -17,7 +17,7 @@ namespace framework {
  * \brief Effect to create a fog.
  */
 
-class Fog: public Effect {
+class Fog: public IEffect {
 private:
 	glm::vec3 mColour;
 	GLfloat mNearDistance;
