@@ -138,9 +138,8 @@ static pModel buildModel(
 		pTexture normalMap = pTexture(),
 		pTexture specularMap = pTexture(),
 		framework::Material material = framework::Material()) {
-	return pModel(
-			new framework::Model(engine, program, shape, diffuseMap, normalMap,
-					specularMap, material));
+	return std::make_shared<framework::Model>(engine, program, shape, diffuseMap, normalMap,
+					specularMap, material);
 }
 
 static pModel buildModel(
@@ -150,9 +149,8 @@ static pModel buildModel(
 		const std::string& diffuseMapPath,
 		const std::string& normalMapPath = "",
 		const std::string& specularMapPath = "") {
-	return pModel(
-			new framework::Model(engine, program, shapePath, diffuseMapPath,
-					normalMapPath, specularMapPath));
+	return std::make_shared<framework::Model>(engine, program, shapePath, diffuseMapPath,
+					normalMapPath, specularMapPath);
 }
 
 static pModel buildModel(
@@ -163,16 +161,15 @@ static pModel buildModel(
 		pTexture normalMap = pTexture(),
 		pTexture specularMap = pTexture(),
 		framework::Material material = framework::Material()) {
-	return pModel(
-			new framework::Model(engine, program, shapePath, diffuseMap, normalMap,
-					specularMap, material));
+	return std::make_shared<framework::Model>(engine, program, shapePath, diffuseMap, normalMap,
+					specularMap, material);
 }
 
 static pModel buildModel(
 		Engine* engine,
 		pProgram program,
 		const std::string& shapePath) {
-	return pModel(new framework::Model(engine, program, shapePath));
+	return std::make_shared<framework::Model>(engine, program, shapePath);
 }
 
 } /* fillwave */

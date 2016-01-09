@@ -44,7 +44,7 @@ private:
 } /* models */
 static pSceneOrthographic buildSceneOrthographic(pCameraOrthographic camera =
 		pCameraOrthographic()) {
-	return pSceneOrthographic(new framework::SceneOrthographic(camera));
+	return std::make_shared<framework::SceneOrthographic>(camera);
 }
 } /* fillwave */
 #endif /* SCENEOrthographic_H_ */

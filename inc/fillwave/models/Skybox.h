@@ -53,7 +53,7 @@ private:
 typedef std::shared_ptr<framework::Skybox> pSkybox;
 
 static pSkybox buildSkybox(Engine* engine, pTexture3D texture) {
-	return pSkybox(new framework::Skybox(engine, texture));
+	return std::make_shared<framework::Skybox>(engine, texture);
 }
 } /* fillwave */
 

@@ -41,7 +41,7 @@ typedef std::shared_ptr<framework::ScenePerspective> pScenePerspective;
 
 static pScenePerspective buildScenePerspective(pCameraPerspective camera =
 		pCameraPerspective()) {
-	return pScenePerspective(new framework::ScenePerspective(camera));
+	return std::make_shared<framework::ScenePerspective>(camera);
 }
 } /* fillwave */
 #endif /* ScenePerspective_H_ */

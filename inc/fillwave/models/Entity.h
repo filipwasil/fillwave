@@ -120,7 +120,7 @@ private:
 };
 } /* framework */
 static pEntity buildEntity() {
-	return pEntity(new framework::Entity());
+	return std::make_shared<framework::Entity>();
 }
 } /* fillwave */
 
