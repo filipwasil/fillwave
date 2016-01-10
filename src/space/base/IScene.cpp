@@ -1,5 +1,5 @@
 /*
- * Scene.cpp
+ * IScene.cpp
  *
  *  Created on: May 2, 2014
  *      Author: filip
@@ -32,6 +32,10 @@ void IScene::setSkybox(pSkybox skybox) {
 
 pCursor IScene::getCursor() {
 	return mCursor;
+}
+
+void IScene::setHUD(pHUD hud) {
+	mHUD = hud;
 }
 
 void IScene::setCursor(pCursor cursor) {

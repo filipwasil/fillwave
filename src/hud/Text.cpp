@@ -27,7 +27,7 @@ Text::Text(
 		eTextEffect effect)
 		:
 				Reloadable(engine),
-				IHUD(std::make_shared<core::TextureRegion>(texture)),
+				IHUDNode(std::make_shared<core::TextureRegion>(texture)),
 				mEngine(engine),
 				mText(text),
 				mTexture(texture),

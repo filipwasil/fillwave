@@ -13,11 +13,9 @@
 #include <fillwave/core/pipeline/Program.h>
 
 #include <fillwave/common/Blending.h>
-
+#include <fillwave/hud/base/IHUDNode.h>
 #include <fillwave/loaders/FontLoader.h>
 #include <fillwave/models/base/Reloadable.h>
-#include <fillwave/hud/base/IHUD.h>
-
 #include <map>
 
 namespace fillwave {
@@ -33,7 +31,7 @@ namespace framework {
  * \brief 2D Text on the screen.
  */
 
-class Text: public Reloadable, public IHUD {
+class Text: public Reloadable, public IHUDNode {
 public:
 	Text(
 			std::string& text,

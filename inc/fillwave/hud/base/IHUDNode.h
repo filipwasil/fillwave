@@ -1,31 +1,31 @@
 /*
- * IHUD.h
+ * IHUDNode.h
  *
  *  Created on: Jan 10, 2016
  *      Author: filip
  */
 
-#ifndef INC_FILLWAVE_HUD_IHUD_H_
-#define INC_FILLWAVE_HUD_IHUD_H_
+#ifndef INC_FILLWAVE_HUD_IHUD_NODE_H_
+#define INC_FILLWAVE_HUD_IHUD_NODE_H_
 
 #include <fillwave/core/texturing/TextureRegion.h>
 
 namespace fillwave {
 namespace framework {
 
-class IHUD {
+class IHUDNode {
 public:
-	IHUD(pTextureRegion texture)
+	IHUDNode(pTextureRegion texture)
 			: mTexture(texture) {
 
 	}
 
-	IHUD(pTexture2D texture)
+	IHUDNode(pTexture2D texture)
 			: mTexture(std::make_shared<core::TextureRegion>(texture)) {
 
 	}
 
-	virtual ~IHUD() = default;
+	virtual ~IHUDNode() = default;
 
 	virtual void draw() = 0;
 
@@ -34,6 +34,7 @@ protected:
 };
 
 } /* namespace framework */
+typedef std::shared_ptr<framework::IHUDNode> pIHUDNode;
 } /* namespace fillwave */
 
-#endif /* INC_FILLWAVE_HUD_IHUD_H_ */
+#endif /* INC_FILLWAVE_HUD_IHUD_NODE_H_ */

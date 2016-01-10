@@ -24,12 +24,13 @@ public:
 	ScenePerspective(pCameraPerspective camera = pCameraPerspective());
 	virtual ~ScenePerspective() = default;
 	void setCamera(pCameraPerspective camera);
-	pICamera getCamera();
 
-	void draw();
-	void drawPicking();
-	void drawDepthInt();
-	void drawOcclusion();
+	/* Interface IScene */
+	pICamera getCamera() override;
+	void draw() override;
+	void drawPicking() override;
+	void drawDepthInt() override;
+	void drawOcclusion() override;
 
 private:
 	pCameraPerspective mCamera;
