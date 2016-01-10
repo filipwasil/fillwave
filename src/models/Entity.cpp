@@ -22,8 +22,7 @@ Entity::Entity(glm::vec3 translation, glm::quat rotation)
 				mChildrenPropagateEvent(GL_TRUE),
 				mParentRefresh(GL_TRUE),
 				mPSC(GL_TRUE),
-				mPSR(GL_TRUE),
-				mPickable(GL_FALSE) {
+				mPSR(GL_TRUE) {
 
 }
 
@@ -169,20 +168,16 @@ void Entity::detachPrivateCallback(Callback* callback) {
 }
 
 void Entity::pick(glm::vec3 color) {
-	mPickable = GL_TRUE;
+	mFlagPickable = true;
 	mPickColor = color;
 	std::for_each(mChildren.begin(), mChildren.end(),
 			[color](pEntity e) {e->pick(color);});
 }
 
 void Entity::unpick() {
-	mPickable = GL_FALSE;
+	mFlagPickable = false;
 	std::for_each(mChildren.begin(), mChildren.end(),
 			[](pEntity e) {e->unpick();});
-}
-
-GLboolean Entity::isPickable() {
-	return mPickable;
 }
 
 GLboolean Entity::isPSC() {
@@ -196,10 +191,6 @@ GLboolean Entity::isPSR() {
 //void Entity::setPSR(GLboolean value) {
 //   mPSR = value;
 //}
-
-glm::vec3 Entity::getPickableColor() {
-	return mPickColor;
-}
 
 void Entity::log() const {
 

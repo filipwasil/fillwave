@@ -17,8 +17,6 @@
 #include <CallbacksGLFW/TimeStopCallback.h>
 #include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
-#include <TerrainConstructors/MountainConstructor.h>
-#include <fillwave/renderers/RendererDR.h>
 
 /* Physics */
 //#include <bullet>
@@ -29,10 +27,13 @@ using namespace std;
 
 Engine* gEngine;
 
-pCameraPerspective gCamera;
 pScenePerspective gScene;
+pCameraPerspective gCamera;
+
+pEntity gEntityLight;
 
 pProgram gProgram;
+map<string, pTexture> gTextures;
 map<string, pModel> gModels;
 
 FLOGINIT("Test app", FERROR | FFATAL)
@@ -56,62 +57,53 @@ void init() {
    gScene = buildScenePerspective();
 
    /* Camera */
-   gCamera = std::make_shared<CameraPerspective> (glm::vec3(0.0,5.0,0.0),
+   gCamera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,0.0,6.0),
                                                     glm::quat(),
                                                     glm::radians(90.0),
                                                     1.0,
                                                     0.1,
-                                                    1000.0);
+                                                    1000.0));
+   /* Entities */
+   gEntityLight = buildEntity();
 
-   /* Shaders */
+   /* Texture */
+   pTexture2D textureDynamic = gEngine->storeTextureDynamic("shaders/water/water.frag");
+   pTexture2D textureN = gEngine->storeTexture("255_255_255.color");
+   pTexture2D textureS = gEngine->storeTexture("");
+
+   /* Programs */
    ProgramLoader loader(gEngine);
-//   gProgram = loader.getDefaultDR();
    gProgram = loader.getDefault();
 
-//   gScene->setRenderer(new RendererDR(gEngine, loader));
-
    /* Models */
-
+   gModels["sphere"] = buildModel(gEngine, gProgram, "meshes/sphere.obj", textureDynamic);
 
    /* Lights */
-   pLight  light = gEngine->storeLightSpot(glm::vec3 (1.0,20.0,6.0),
+   gEngine->storeLightSpot(glm::vec3 (1.0,1.0,3.0),
                            glm::quat (),
-                           glm::vec4 (1.0,1.0,1.0,0.0));
-   light->rotateTo(glm::vec3(1.0,0.0,0.0), glm::radians(-90.0));
+                           glm::vec4 (1.0,1.0,1.0,0.0),
+                           gEntityLight);
 
+   gEntityLight->moveTo(glm::vec3(0.0,0.0,3.0));
    /* Engine callbacks */
    gEngine->registerCallback(new TimeStopCallback(gEngine));
-   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eKey, 0.1));
-   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
+   gEngine->registerCallback(new MoveCameraCallback(gEngine, eEventType::eKey, 0.1));
+   gEngine->registerCallback(new MoveCameraCallback(gEngine, eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
 }
 
 void perform() {
-   gEngine->configureFPSCounter("fonts/Titania",0.7,0.9,100.0);
    gEngine->setCurrentScene(gScene);
 
-   pIEffect fog(new Fog());
+   gScene->attach(gModels["sphere"]);
 
    gScene->setCamera(gCamera);
 
-   Material material;
-
-   pMeshTerrain terrain = pMeshTerrain ( new MeshTerrain(gEngine,
-                                    gProgram,
-                                    new MountainConstructor(),
-                                    material,
-                                    "textures/test.png",
-                                    "textures/testNormal.png",
-                                    "",
-                                    20,
-                                    16));
-   terrain->scaleTo(2.0);
-   terrain->addEffect(fog);
-   gScene->attach(terrain);
+   gModels["sphere"]->moveBy(glm::vec3(0.0,0.0,-15.0));
 }
 
 void showDescription() {
    /* Description */
-   pText hint0 = gEngine->storeText("Fillwave example terrain", "fonts/Titania", -0.95, 0.80, 100.0);
+   pText hint0 = gEngine->storeText("Fillwave example dynamic texture", "fonts/Titania", -0.95, 0.80, 100.0);
    pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", -0.95, -0.40, 70.0);
    pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", -0.95, -0.50, 70.0);
    pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", -0.95, -0.60, 70.0);

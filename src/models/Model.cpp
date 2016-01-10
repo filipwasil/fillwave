@@ -29,9 +29,9 @@ Model::Model(
 		Engine* engine,
 		pProgram program,
 		Shape<core::VertexBasic>& shape,
-		pTexture diffuseMap,
-		pTexture normalMap,
-		pTexture specularMap,
+		pTexture2D diffuseMap,
+		pTexture2D normalMap,
+		pTexture2D specularMap,
 		const Material& material)
 		:
 				Programmable(program),
@@ -111,9 +111,9 @@ Model::Model(
 		Engine* engine,
 		pProgram program,
 		const std::string& shapePath,
-		pTexture diffuseMap,
-		pTexture normalMap,
-		pTexture specularMap,
+		pTexture2D diffuseMap,
+		pTexture2D normalMap,
+		pTexture2D specularMap,
 		const Material& material)
 		:
 				Programmable(program),
@@ -244,9 +244,9 @@ inline void Model::loadNodes(
 		const aiScene* scene,
 		Engine* engine,
 		Entity* entity,
-		pTexture diffuseMap,
-		pTexture normalMap,
-		pTexture specularMap,
+		pTexture2D diffuseMap,
+		pTexture2D normalMap,
+		pTexture2D specularMap,
 		const Material& material) {
 
 	/* Set this node transformations */

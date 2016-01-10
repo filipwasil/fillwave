@@ -38,7 +38,6 @@
 /* models */
 #include <fillwave/models/builders/BuilderModelManual.h>
 #include <fillwave/models/builders/BuilderModelExternalMaps.h>
-#include <fillwave/models/Text.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/models/shapes/BoxOcclusion.h>
 #include <fillwave/models/shapes/Box.h>
@@ -151,7 +150,7 @@ public:
 			GLboolean skipLinking = GL_FALSE);
 
 	/* Store textures */
-	pTexture storeTexture(const std::string& texturePath, const GLuint& mapType =
+	pTexture2D storeTexture(const std::string& texturePath, const GLuint& mapType =
 	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression compression =
 			framework::eCompression::eNone);
 

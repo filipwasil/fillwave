@@ -9,6 +9,7 @@
 #define ENTITY_H_
 
 #include <fillwave/actions/callbacks/Callback.h>
+#include <fillwave/common/IPickable.h>
 #include <fillwave/space/base/ICamera.h>
 #include <fillwave/models/base/IDrawable.h>
 #include <fillwave/models/base/ITreeNode.h>
@@ -32,7 +33,11 @@ namespace framework {
  * \brief Base for all Scene nodes.
  */
 
-class Entity: public Moveable, public IDrawable, public TreePtr<pEntity> {
+class Entity:
+		public Moveable,
+		public IDrawable,
+		public TreePtr<pEntity>,
+		public IPickable {
 public:
 	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
 			glm::quat(1.0, 0.0, 0.0, 0.0));
@@ -64,19 +69,16 @@ public:
 	void updateParentMatrix(glm::mat4& parent);
 	void updateParentRotation(glm::quat& rotation);
 
-	/* Picking */
-	void pick(glm::vec3 color);
-	void unpick();
-	GLboolean isPickable();
-	glm::vec3 getPickableColor();
+	/* Interface IPickable */
+	void pick(glm::vec3 color) override;
+	void unpick() override;
+	virtual void onPicked() override;
+	virtual void onUnpicked() override;
 
-	virtual void onPicked();
-	virtual void onUnpicked();
-
-	/* IDrawable interface */
-	virtual void draw(ICamera& camera);
-	virtual void drawPBRP(ICamera& camera);
-	virtual void drawDR(ICamera& camera);
+	/* Interface IDrawable */
+	virtual void draw(ICamera& camera) override;
+	virtual void drawPBRP(ICamera& camera) override;
+	virtual void drawDR(ICamera& camera) override;
 
 	virtual void drawDepth(ICamera& camera);
 	virtual void drawDepthColor(ICamera& camera, glm::vec3& position);
@@ -107,8 +109,6 @@ protected:
 	GLboolean mPSR;
 
 private:
-	GLboolean mPickable;
-	glm::vec3 mPickColor;
 
 	void handleEvent(
 			std::vector<Callback*>& callbacks,

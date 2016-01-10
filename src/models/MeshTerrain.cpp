@@ -34,13 +34,13 @@ MeshTerrain::MeshTerrain(
 
 	Material _material;
 
-	pTexture diffuseMap = engine->storeTexture(diffuseMapPath.c_str(),
+	pTexture2D diffuseMap = engine->storeTexture(diffuseMapPath.c_str(),
 			aiTextureType_DIFFUSE);
 
-	pTexture normalMap = engine->storeTexture(normalMapPath.c_str(),
+	pTexture2D normalMap = engine->storeTexture(normalMapPath.c_str(),
 			aiTextureType_NORMALS);
 
-	pTexture specularMap = engine->storeTexture(specularMapPath.c_str(),
+	pTexture2D specularMap = engine->storeTexture(specularMapPath.c_str(),
 			aiTextureType_SPECULAR);
 
 	int pointsWidth, pointsWidthNext, offset;

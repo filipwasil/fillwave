@@ -29,9 +29,9 @@ public:
 			Engine* engine,
 			pProgram program,
 			framework::Shape<core::VertexBasic>& shape,
-			pTexture diffuseMap,
-			pTexture normalMap,
-			pTexture specularMap,
+			pTexture2D diffuseMap,
+			pTexture2D normalMap,
+			pTexture2D specularMap,
 			const Material& material);
 
 	Model(Engine* engine, pProgram program, const std::string& shapePath);
@@ -48,9 +48,9 @@ public:
 			Engine* engine,
 			pProgram program,
 			const std::string& shapePath,
-			pTexture diffuseMap,
-			pTexture normalMap = pTexture(),
-			pTexture specularMap = pTexture(),
+			pTexture2D diffuseMap,
+			pTexture2D normalMap = pTexture2D(),
+			pTexture2D specularMap = pTexture2D(),
 			const Material& material = Material());
 
 	virtual ~Model();
@@ -112,9 +112,9 @@ private:
 			const fScene* scene,
 			Engine* engine,
 			Entity* entity,
-			pTexture diffuseMap,
-			pTexture normalMap,
-			pTexture specularMap,
+			pTexture2D diffuseMap,
+			pTexture2D normalMap,
+			pTexture2D specularMap,
 			const Material& material);
 
 	pMesh loadMesh(
@@ -134,9 +134,9 @@ static pModel buildModel(
 		Engine* engine,
 		pProgram program,
 		framework::Shape<core::VertexBasic>& shape,
-		pTexture diffuseMap = pTexture(),
-		pTexture normalMap = pTexture(),
-		pTexture specularMap = pTexture(),
+		pTexture2D diffuseMap = pTexture2D(),
+		pTexture2D normalMap = pTexture2D(),
+		pTexture2D specularMap = pTexture2D(),
 		framework::Material material = framework::Material()) {
 	return std::make_shared<framework::Model>(engine, program, shape, diffuseMap, normalMap,
 					specularMap, material);
@@ -157,9 +157,9 @@ static pModel buildModel(
 		Engine* engine,
 		pProgram program,
 		const std::string& shapePath,
-		pTexture diffuseMap,
-		pTexture normalMap = pTexture(),
-		pTexture specularMap = pTexture(),
+		pTexture2D diffuseMap,
+		pTexture2D normalMap = pTexture2D(),
+		pTexture2D specularMap = pTexture2D(),
 		framework::Material material = framework::Material()) {
 	return std::make_shared<framework::Model>(engine, program, shapePath, diffuseMap, normalMap,
 					specularMap, material);

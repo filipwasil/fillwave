@@ -19,7 +19,7 @@
 /* models */
 #include <fillwave/models/builders/BuilderModelManual.h>
 #include <fillwave/models/builders/BuilderModelExternalMaps.h>
-#include <fillwave/models/Text.h>
+#include <fillwave/hud/Text.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/models/shapes/BoxOcclusion.h>
 #include <fillwave/models/shapes/Box.h>

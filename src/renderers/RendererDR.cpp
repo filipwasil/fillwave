@@ -54,8 +54,8 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	std::vector<GLuint> indices = sphere.getIndices();
 
 	mDeferredPointLight = puMesh(
-			new Mesh(engine, Material(), buildTextureRegion(pTexture()),
-					buildTextureRegion(pTexture()), buildTextureRegion(pTexture()),
+			new Mesh(engine, Material(), buildTextureRegion(pTexture2D()),
+					buildTextureRegion(pTexture2D()), buildTextureRegion(pTexture2D()),
 					mProgramPointLight, pProgram(), pProgram(), loader.getOcclusionQuery(),
 					pProgram(), pProgram(), mLightManager,
 					pVertexBufferBasic(new core::VertexBufferBasic(vertices)),

@@ -11,7 +11,7 @@ namespace fillwave {
 namespace core {
 
 TextureRegion::TextureRegion(
-		pTexture texture,
+		pTexture2D texture,
 		GLfloat u1,
 		GLfloat v1,
 		GLfloat u2,
@@ -20,7 +20,7 @@ TextureRegion::TextureRegion(
 
 }
 
-pTexture TextureRegion::getTexture() {
+pTexture2D TextureRegion::getTexture() {
 	return mTexture;
 }
 

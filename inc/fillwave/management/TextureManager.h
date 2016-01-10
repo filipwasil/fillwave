@@ -111,7 +111,7 @@ public:
 
 	void checkExtensions();
 
-	pTexture get(
+	pTexture2D get(
 			std::string texturePath,
 			GLuint mapType =
 			FILLWAVE_TEXTURE_TYPE_NONE,

@@ -5,12 +5,9 @@
  *      Author: filip
  */
 
-#include <fillwave/models/Text.h>
-
+#include <fillwave/hud/Text.h>
 #include <fillwave/loaders/ProgramLoader.h>
-
 #include <fillwave/Fillwave.h>
-
 #include <fillwave/Log.h>
 
 FLOGINIT("Text", FERROR | FFATAL)
@@ -20,7 +17,7 @@ namespace framework {
 
 Text::Text(
 		std::string& text,
-		pTexture texture,
+		pTexture2D texture,
 		GLfloat startingPositionX,
 		GLfloat startingPositionY,
 		Engine* engine,
@@ -30,6 +27,7 @@ Text::Text(
 		eTextEffect effect)
 		:
 				Reloadable(engine),
+				IHUD(std::make_shared<core::TextureRegion>(texture)),
 				mEngine(engine),
 				mText(text),
 				mTexture(texture),

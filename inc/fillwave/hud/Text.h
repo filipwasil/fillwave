@@ -16,6 +16,7 @@
 
 #include <fillwave/loaders/FontLoader.h>
 #include <fillwave/models/base/Reloadable.h>
+#include <fillwave/hud/base/IHUD.h>
 
 #include <map>
 
@@ -32,11 +33,11 @@ namespace framework {
  * \brief 2D Text on the screen.
  */
 
-class Text: public Reloadable {
+class Text: public Reloadable, public IHUD {
 public:
 	Text(
 			std::string& text,
-			pTexture texture,
+			pTexture2D texture,
 			GLfloat startingPositionX,
 			GLfloat startingPositionY,
 			Engine* engine,
@@ -47,7 +48,8 @@ public:
 
 	virtual ~Text() = default;
 
-	void draw();
+	void draw() override;
+
 	void editAspectRatio(Engine* engine);
 	void editString(std::string text);
 	void editColor(glm::vec4 color);

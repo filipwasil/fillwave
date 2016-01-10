@@ -10,7 +10,7 @@
 
 #include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/actions/events/TimeEvent.h>
-#include <fillwave/models/Text.h>
+#include <fillwave/hud/Text.h>
 
 namespace fillwave {
 class Engine;

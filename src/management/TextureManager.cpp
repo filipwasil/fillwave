@@ -235,7 +235,7 @@ void TextureManager::add(
 	}
 }
 
-pTexture TextureManager::get(
+pTexture2D TextureManager::get(
 		std::string texturePath,
 		GLuint mapType,
 		eCompression compression,
@@ -249,7 +249,7 @@ pTexture TextureManager::get(
 	}
 	FLOG_ERROR("Texture2D %s not found in manager. Returning empty pointer",
 			filePath.c_str());
-	return pTexture();
+	return pTexture2D();
 }
 
 GLboolean TextureManager::check(std::string texturePath, GLuint mapType) {
