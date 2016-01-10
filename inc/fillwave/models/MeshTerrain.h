@@ -33,6 +33,17 @@ public:
 			GLuint radius,
 			GLuint density = 8);
 
+	MeshTerrain(
+			Engine* engine,
+			pProgram program,
+			TerrainConstructor* constructor,
+			const Material& material,
+			pTexture2D diffuseMapPath,
+			pTexture2D normalMapPath,
+			pTexture2D specularMapPath,
+			GLuint radius,
+			GLuint density = 8);
+
 	virtual ~MeshTerrain() = default;
 
 	void draw(ICamera& camera);
