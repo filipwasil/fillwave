@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.12.22)  9 JAN 2016 18:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2015.12.22)  11 JAN 2016 22:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -571,10 +571,10 @@ Package rerunfilecheck Info: File `quickstart.out' has not changed.
 (rerunfilecheck)             Checksum: B1102FBBD79C01047A44AF2425FB3F30;2449.
  ) 
 Here is how much of TeX's memory you used:
- 9985 strings out of 493085
- 145354 string characters out of 6136916
+ 9987 strings out of 493085
+ 145350 string characters out of 6136916
  298529 words of memory out of 5000000
- 12539 multiletter control sequences out of 15000+600000
+ 12541 multiletter control sequences out of 15000+600000
  36810 words of font info for 109 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  33i,7n,58p,837b,1753s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -586,7 +586,7 @@ onts/rpxr.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txbtt.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/txfonts/txtt.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on quickstart.pdf (35 pages, 961957 bytes).
+Output written on quickstart.pdf (35 pages, 961950 bytes).
 PDF statistics:
  1309 PDF objects out of 1440 (max. 8388607)
  1245 compressed objects within 13 object streams
