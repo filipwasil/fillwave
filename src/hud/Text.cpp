@@ -27,18 +27,15 @@ Text::Text(
 		eTextEffect effect)
 		:
 				Reloadable(engine),
-				IHUDNode(std::make_shared<core::TextureRegion>(texture)),
+				IHUDNode(texture,
+						startingPositionX, startingPositionY, scale),
+						mText(text),
+						mColor(color),
+						mEffect(effect),
+						mFont(font),
 				mEngine(engine),
-				mText(text),
-				mTexture(texture),
 				mViewportWidth(engine->getScreenSize()[0]),
-				mViewportHeight(engine->getScreenSize()[1]),
-				mStartingX(startingPositionX),
-				mStartingY(startingPositionY),
-				mScale(scale),
-				mFont(font),
-				mColor(color),
-				mEffect(effect) {
+				mViewportHeight(engine->getScreenSize()[1]) {
 
 	mBlending.mSource = GL_SRC_ALPHA;
 	mBlending.mDestination = GL_ONE_MINUS_SRC_ALPHA;

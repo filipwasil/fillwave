@@ -10,7 +10,11 @@
 namespace fillwave {
 namespace framework {
 
-Button::Button(pTexture2D texture):IHUDNode(texture) {
+Button::Button(
+		pTexture2D texture,
+		GLfloat xPosition,
+		GLfloat yPosition)
+		: IHUDNode(texture, xPosition, yPosition, 1) {
 
 }
 

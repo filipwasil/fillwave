@@ -15,13 +15,11 @@ namespace framework {
 
 class IHUDNode {
 public:
-	IHUDNode(pTextureRegion texture)
-			: mTexture(texture) {
-
-	}
-
-	IHUDNode(pTexture2D texture)
-			: mTexture(std::make_shared<core::TextureRegion>(texture)) {
+	IHUDNode(pTexture2D texture, GLfloat xStart, GLfloat yStart, GLfloat scale)
+			: mTexture(texture),
+			  mStartingX(xStart),
+			  mStartingY(yStart),
+			  mScale(scale) {
 
 	}
 
@@ -30,7 +28,10 @@ public:
 	virtual void draw() = 0;
 
 protected:
-	pTextureRegion mTexture;
+	pTexture2D mTexture;
+	GLfloat mStartingX;
+	GLfloat mStartingY;
+	GLfloat mScale;
 };
 
 } /* namespace framework */

@@ -55,25 +55,20 @@ public:
 	void editPosition(GLfloat startingX, GLfloat startingY);
 
 private:
-	Engine* mEngine;
-
+	/* Text */
 	std::string mText;
-
-	Blending mBlending;
-
-	std::map<std::string, pTextureRegion> mCharacters;
-
-	pTexture mTexture;
-
-	pProgram mProgram;
-	GLint mViewportWidth, mViewportHeight;
-	pVertexBufferText mVBO;
-	GLfloat mStartingX, mStartingY, mScale;
-	Font* mFont;
 	glm::vec4 mColor;
 	eTextEffect mEffect;
+	Font* mFont;
+	pVertexBufferText mVBO;
+//	std::map<std::string, pTextureRegion> mCharacters; xxx remove ?
 
+	/* IHUD */
+	Engine* mEngine;
+	pProgram mProgram;
 	GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
+	GLint mViewportWidth, mViewportHeight;
+	Blending mBlending;
 
 	void createProgram();
 	void createVBO();

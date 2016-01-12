@@ -16,7 +16,7 @@ namespace framework {
 
 class Button: public IHUDNode, public IPickable {
 public:
-	Button(pTexture2D texture);
+	Button(pTexture2D texture, GLfloat xPosition, GLfloat yPosition);
 	virtual ~Button();
 
 	void draw() override;
