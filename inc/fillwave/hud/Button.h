@@ -12,17 +12,23 @@
 #include <fillwave/common/IPickable.h>
 
 namespace fillwave {
+class Engine;
 namespace framework {
 
 class Button: public IHUDNode, public IPickable {
 public:
-	Button(pTexture2D texture, GLfloat xPosition, GLfloat yPosition);
+	Button(Engine* engine,
+			glm::vec2 position,
+			glm::vec2 scale);
 	virtual ~Button();
 
 	void draw() override;
 
 	virtual void onPicked() override;
 	virtual void onUnpicked() override;
+
+private:
+	pTexture2D mTexture;
 };
 
 } /* namespace framework */

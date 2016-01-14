@@ -642,16 +642,13 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 		auto _end = mPostProcessingPasses.end();
 
 		core::Texture2DRenderableDynamic* textureNext;
-
 		core::Texture2DRenderableDynamic* textureCurrent =
 				(*_begin).getFrame().get();
 
 		core::Program* programCurrent;
 
 		drawClear();
-
 		textureCurrent->bindForWriting();
-
 		drawSceneCore();
 
 		for (auto it = _begin; it != _end; it++) {

@@ -91,8 +91,7 @@ public:
 	void configureFileLogging(std::string fileName = "");
 	void configureFPSCounter(
 			std::string fontName = "",
-			GLfloat xPosition = -0.95,
-			GLfloat yPosition = 0.95,
+			glm::vec2 position = glm::vec2(-0.95, 0.95),
 			GLfloat size = 100.0);
 	void configureBackgroundColor(glm::vec3 color);
 	void configureTime(GLfloat timeFactor);
@@ -154,6 +153,8 @@ public:
 	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression compression =
 			framework::eCompression::eNone);
 
+	pTexture2DRenderable storeTextureRenderable();
+
 	pTexture2DRenderableDynamic storeTextureDynamic(
 			const std::string& fragmentShaderPath);
 
@@ -187,8 +188,7 @@ public:
 	pText storeText(
 			std::string content,
 			std::string fontName,
-			GLfloat startingPositionX,
-			GLfloat startingPositionY,
+			glm::vec2 position,
 			GLfloat scale = 1.0,
 			glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
 			eTextEffect effect = eTextEffect::eNone);

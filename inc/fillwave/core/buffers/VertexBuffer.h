@@ -156,6 +156,10 @@ public:
 				[](Attribute& a) {a.arrayEnable();});
 	}
 
+	void reload() {
+		Buffer::reload();
+	}
+
 	void attributesSetPointer() {
 		std::for_each(mAttributes.begin(), mAttributes.end(),
 				[](Attribute& a) {a.arraySet();});

@@ -36,8 +36,7 @@ public:
 	Text(
 			std::string& text,
 			pTexture2D texture,
-			GLfloat startingPositionX,
-			GLfloat startingPositionY,
+			glm::vec2 position,
 			Engine* engine,
 			GLfloat scale,
 			Font* font,
@@ -52,7 +51,7 @@ public:
 	void editString(std::string text);
 	void editColor(glm::vec4 color);
 	void editSize(GLfloat size);
-	void editPosition(GLfloat startingX, GLfloat startingY);
+	void editPosition(glm::vec2 position);
 
 private:
 	/* Text */
@@ -61,16 +60,16 @@ private:
 	eTextEffect mEffect;
 	Font* mFont;
 	pVertexBufferText mVBO;
+
 //	std::map<std::string, pTextureRegion> mCharacters; xxx remove ?
 
 	/* IHUD */
 	Engine* mEngine;
-	pProgram mProgram;
 	GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
 	GLint mViewportWidth, mViewportHeight;
 	Blending mBlending;
 
-	void createProgram();
+	pProgram createProgram(Engine* engine, eTextEffect effect);
 	void createVBO();
 	void clearVBO();
 

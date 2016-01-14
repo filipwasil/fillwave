@@ -33,17 +33,12 @@ public:
 	virtual ~FramebufferGeometry() = default;
 
 	void bindAttachments();
-
 	void setAttachments();
-
 	void setAttachmentStencilDepth();
-
 	void setAttachmentSummaryForReading();
-
 	void setAttachmentSummaryForWriting();
 
 	void resize(GLuint width, GLuint height);
-
 	void reload();
 
 private:

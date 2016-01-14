@@ -215,7 +215,7 @@ const std::string gGLLightDefinitions = "struct Attenuation {\n"
 		"   vec3 direction;\n"
 		"};\n";
 
-const std::string fsEmpty = gGLVersion + gGLFragmentPrecision + //xxx consider renaming
+const std::string fsEmpty = gGLVersion + gGLFragmentPrecision +
 		"void main() { \n"
 				"}             \n";
 
@@ -343,6 +343,50 @@ const std::string fsDRAmbientG = gGLVersion + gGLFragmentPrecision +
 		"   fNormal = vec3(0.0);\n"
 		"   fSpecularTexel = vec3(0.0);\n"
 		"}\n";
+
+const std::string fsHUD =
+		gGLVersion + gGLFragmentPrecision
+		+
+		"in vec2 vTextureCoordinate;\n"
+		"uniform sampler2D uTextureUnit;\n"
+		+ gGLColorOutDefinition
+		+
+		"void main () {\n"
+				"  float pixelSize = 0.001;\n"
+				"  vec4 color = vec4(0.0);\n"
+				"  for (float i=-1.0;i<=1.0;i++)\n"
+				"     for (float j=-1.0;j<=1.0;j++)\n"
+				"        color += texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour;\n"
+				"  " + gGLColorOutAssingment + " = color * 0.11;\n"
+				"}\n"
+				"\n";
+
+const std::string vsHUD = gGLVersion + gGLVertexPrecision
+		+ "uniform vec2 uPosition;\n"
+		"uniform vec2 uScale;\n"
+		"out vec2 vPosition;\n"
+		"out vec2 vTextureCoordinate;\n"
+				"void main() {\n"
+				"   vec4 vertexPosition;\n"
+				"   switch(gl_VertexID) {\n"
+				"   case 0:\n"
+				"      vertexPosition = vec4(-uScale.x, uScale.y, 0.0, 1.0);\n"
+				"      break;\n"
+				"   case 1:\n"
+				"      vertexPosition = vec4(-uScale.x, -uScale.y, 0.0,1.0);\n"
+				"      break;\n"
+				"   case 2:\n"
+				"      vertexPosition = vec4(uScale.x, uScale.y, 0.0,1.0);\n"
+				"      break;\n"
+				"   case 3:\n"
+				"   default:\n"
+				"      vertexPosition = vec4(uScale.x, -uScale.y, 0.0,1.0);\n"
+				"      break;\n"
+				"   }\n"
+				"   gl_Position = vertexPosition + vec4(uPosition, 0.0 0,0);\n"
+				"   vPosition = vertexPosition.xy;\n"
+				"   vTextureCoordinate = (vertexPosition.xy + vec2(1.0,1.0)) * 0.5;\n"
+				"}\n";
 
 const std::string fsText =
 		gGLVersion + gGLFragmentPrecision
@@ -1343,6 +1387,19 @@ pProgram ProgramLoader::getQuadCustomFragmentShader(
 	return mEngine->storeProgram(shaderPath,
 			mEngine->storeShaderFragment(shaderPath)
 					+ mEngine->storeShaderVertex("fillwave_quad_custom.vert", vsQuad));
+}
+
+pProgram ProgramLoader::getHUD() {
+	return mEngine->storeProgram("hud",
+			mEngine->storeShaderFragment("fillwave_hud.frag", fsHUD)
+					+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
+}
+
+pProgram ProgramLoader::getHUDCustomFragmentShader (
+		const std::string& shaderPath) {
+	return mEngine->storeProgram(shaderPath,
+			mEngine->storeShaderFragment(shaderPath)
+					+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
 }
 
 pProgram ProgramLoader::getQuadCustomFragmentShaderStartup() {

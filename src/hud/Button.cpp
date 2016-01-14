@@ -6,15 +6,18 @@
  */
 
 #include <fillwave/hud/Button.h>
+#include <fillwave/Fillwave.h>
 
 namespace fillwave {
 namespace framework {
 
 Button::Button(
-		pTexture2D texture,
-		GLfloat xPosition,
-		GLfloat yPosition)
-		: IHUDNode(texture, xPosition, yPosition, 1) {
+		Engine* engine,
+		glm::vec2 position,
+		glm::vec2 scale)
+		: IHUDNode(engine->storeTextureRenderable(),
+				ProgramLoader(engine).getHUD(),
+				position, scale) {
 
 }
 
