@@ -33,6 +33,40 @@ void setFileInvalid();
 #define FSTR_HELPER(x)	#x
 #define FTO_STRING(x)	FSTR_HELPER(x)
 
+/*
+__linux__       Defined on Linux
+__sun           Defined on Solaris
+__FreeBSD__     Defined on FreeBSD
+__NetBSD__      Defined on NetBSD
+__OpenBSD__     Defined on OpenBSD
+__APPLE__       Defined on Mac OS X
+__hpux          Defined on HP-UX
+__osf__         Defined on Tru64 UNIX (formerly DEC OSF1)
+__sgi           Defined on Irix
+_AIX            Defined on AIX
+*/
+
+#if defined (__linux__) || defined(__APPLE__)
+	#define FCOLOR_GREEN "31m"
+	#define FCOLOR_BLUE "31m"
+	#define FCOLOR_YELLOW "31m"
+	#define FCOLOR_RED "31m"
+	#define FCOLOR_GREY "31m"
+	#define FOPENCOLOROUTPUT "\033["
+	#define FCLOSECOLOROUTPUT "\033[0m"
+#elif defined(_WIN32)
+	#define FCOLOR_GREEN ""
+	#define FCOLOR_BLUE ""
+	#define FCOLOR_YELLOW ""
+	#define FCOLOR_RED ""
+	#define FCOLOR_GREY ""
+	#define FOPENCOLOROUTPUT ""
+	#define FCLOSECOLOROUTPUT ""
+#else
+
+#endif
+
+
 #define FERROR FBIT(0)
 #define FINFO FBIT(1)
 #define FDEBUG FBIT(2)
@@ -84,7 +118,7 @@ void setFileInvalid();
 
 #else /* __ANDROID__ */
 
-#define FLOG_BASE(type, flag, ...)																		   \
+#define FLOG_BASE(color, type, flag, ...)																		   \
 	do{																												\
       if ( FIF(flag) ) {																						\
 			FILE *unique_niosfoinfsd;																			\
@@ -96,7 +130,7 @@ void setFileInvalid();
 			} else {																									\
 				unique_niosfoinfsd = stdout;																	\
 			}																											\
-			fprintf(unique_niosfoinfsd,"[%s] <%s:%d>",FTO_STRING(type),::_tag_.c_str(),__LINE__); 	\
+			fprintf(unique_niosfoinfsd,"%s%s[%s] <%s:%d>%s", FOPENCOLOROUTPUT, color, FTO_STRING(type),::_tag_.c_str(),__LINE__,FCLOSECOLOROUTPUT); 	\
 			(void)fprintf(unique_niosfoinfsd,__VA_ARGS__);												\
 			fprintf(unique_niosfoinfsd,"\n");																\
 			if (fillwave::isFileValid()) {																   \
@@ -120,12 +154,12 @@ void setFileInvalid();
          }                                                                            \
       }while(0)
 
-#define FLOG_FATAL(...) FLOG_BASE(FILLWAVE_FATAL,  FFATAL, __VA_ARGS__)
-#define FLOG_INFO(...) FLOG_BASE(FILLWAVE_INFO,  FINFO, __VA_ARGS__)
-#define FLOG_DEBUG(...) FLOG_BASE(FILLWAVE_DEBUG,  FDEBUG, __VA_ARGS__)
-#define FLOG_USER(...) FLOG_BASE(FILLWAVE_USER,  FUSER, __VA_ARGS__)
-#define FLOG_ERROR(...) FLOG_BASE(FILLWAVE_ERROR,  FERROR, __VA_ARGS__)
-#define FLOG_WARNING(...) FLOG_BASE(FILLWAVE_WARNING,  FWARNING, __VA_ARGS__)
+#define FLOG_FATAL(...) FLOG_BASE(FCOLOR_GREY, FILLWAVE_FATAL,  FFATAL, __VA_ARGS__)
+#define FLOG_INFO(...) FLOG_BASE(FCOLOR_YELLOW, FILLWAVE_INFO,  FINFO, __VA_ARGS__)
+#define FLOG_DEBUG(...) FLOG_BASE(FCOLOR_GREEN, FILLWAVE_DEBUG,  FDEBUG, __VA_ARGS__)
+#define FLOG_USER(...) FLOG_BASE(FCOLOR_BLUE, FILLWAVE_USER,  FUSER, __VA_ARGS__)
+#define FLOG_ERROR(...) FLOG_BASE(FCOLOR_RED, FILLWAVE_ERROR,  FERROR, __VA_ARGS__)
+#define FLOG_WARNING(...) FLOG_BASE(FCOLOR_YELLOW, FILLWAVE_WARNING,  FWARNING, __VA_ARGS__)
 
 #ifndef NDEBUG
 #endif /* NDEBUG */

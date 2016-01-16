@@ -35,12 +35,8 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 				mProgramAmbient(loader.getDRAmbient()),
 				mProgramAOGeometry(loader.getAmbientOcclusionGeometry()),
 				mProgramAOColor(loader.getAmbientOcclusionColor()),
-				mAOGeometryBuffer(
-						engine->getTextureManager()->getColor2D(mScreenSize[0],
-								mScreenSize[1])),
-				mAOColorBuffer(
-						engine->getTextureManager()->getColor2D(mScreenSize[0],
-								mScreenSize[1])),
+				mAOGeometryBuffer(engine->storeTextureRenderable()),
+				mAOColorBuffer(engine->storeTextureRenderable()),
 				mIsAO(GL_FALSE),
 				mDeferredColorAttachments(5),
 				mDeferredDepthAttachments(1),

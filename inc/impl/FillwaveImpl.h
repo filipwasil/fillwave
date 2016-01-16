@@ -106,6 +106,7 @@ struct Engine::EngineImpl {
 	/* Screen */
 	GLuint mWindowWidth = 1920;
 	GLuint mWindowHeight = 1200;
+	GLfloat mWindowAspectRatio = 1200.0f / 1920.0f;
 
 	/* Loaders */
 	framework::FontLoader mFontLoader;
@@ -183,6 +184,7 @@ struct Engine::EngineImpl {
 
 	/* Draw types */
 	void draw(GLfloat time);
+	void drawFront();
 	void drawOcclusionPass();
 
 #ifdef FILLWAVE_GLES_3_0
@@ -197,7 +199,7 @@ struct Engine::EngineImpl {
 
 	/* IRenderer */
 	void drawClear();
-	void drawText();
+	void drawHUD();
 	void drawSceneStartup();
 
 	void drawScene(GLfloat time);
@@ -416,9 +418,7 @@ inline void Engine::EngineImpl::initStartup() {
 
 	program->use();
 	program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
-	program->uniformPush("uScreenFactor",
-			static_cast<GLfloat>(mWindowWidth)
-					/ static_cast<GLfloat>(mWindowHeight));
+	program->uniformPush("uScreenFactor", mWindowAspectRatio);
 	core::Program::disusePrograms();
 
 	mPostProcessingPassStartup = puPostProcessingPass(
@@ -522,12 +522,16 @@ void Engine::EngineImpl::draw(GLfloat time) {
 		glDepthMask(GL_TRUE);
 		evaluateShadowMaps();
 		drawScene(time);
-		drawText();
-		evaluateDebugger();
-		mScene->drawCursor();
-		mScene->updateDependencies();
-		mScene->updateRenderer();
+		drawFront();
 	}
+}
+
+inline void Engine::EngineImpl::drawFront() {
+	drawHUD();
+	evaluateDebugger();
+	mScene->drawCursor();
+	mScene->updateDependencies();
+	mScene->updateRenderer();
 }
 
 #ifdef FILLWAVE_GLES_3_0
@@ -558,11 +562,7 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		drawScene(time);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		drawText();
-		evaluateDebugger();
-		mScene->drawCursor();
-		mScene->updateDependencies();
-		mScene->updateRenderer();
+		drawFront();
 	}
 }
 
@@ -592,16 +592,15 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
 		drawScene(time);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		drawText();
-		evaluateDebugger();
-		mScene->drawCursor();
-		mScene->updateDependencies();
-		mScene->updateRenderer();
+		drawFront();
 	}
 }
 #endif
 
-inline void Engine::EngineImpl::drawText() {
+inline void Engine::EngineImpl::drawHUD() {
+	if (mScene) {
+		mScene->drawHUD();
+	}
 	for (auto& it : mTextManager) {
 		it->draw();
 	}
@@ -642,16 +641,13 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 		auto _end = mPostProcessingPasses.end();
 
 		core::Texture2DRenderableDynamic* textureNext;
-
 		core::Texture2DRenderableDynamic* textureCurrent =
 				(*_begin).getFrame().get();
 
 		core::Program* programCurrent;
 
 		drawClear();
-
 		textureCurrent->bindForWriting();
-
 		drawSceneCore();
 
 		for (auto it = _begin; it != _end; it++) {
@@ -902,6 +898,9 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 
 	mWindowWidth = width;
 	mWindowHeight = height;
+
+	mWindowAspectRatio = static_cast<GLfloat>(mWindowHeight) / static_cast<GLfloat>(mWindowWidth);
+
 	glViewport(0, 0, mWindowWidth, mWindowHeight);
 
 	mTextureManager->resize(mWindowWidth, mWindowHeight);

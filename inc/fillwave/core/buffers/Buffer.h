@@ -30,40 +30,29 @@ public:
 	virtual ~Buffer();
 
 	void bind(GLuint id = 0) const;
-
 	void bind(GLuint externalTarget, GLuint id) const;
-
 	void bindBase(GLuint id = 0) const;
-
 	void bindBase(GLuint externalTarget, GLuint id) const;
-
 	void unbind();
-
 	void unbindBase(GLuint externalTarget);
 
-	GLvoid* mapRange(GLenum access, GLuint size = 0);
-
 	void unmap() const;
-
 	void send();
 
 	void setTarget(GLuint target);
-
 	void setDrawType(GLuint drawType);
 
 	bool isReady();
-
 	void setReady();
-
 	void resetReady();
 
 	GLuint getElements() const;
-
 	GLuint getSize() const;
-
 	GLvoid* getData() const;
 
 	void reload();
+
+	GLvoid* mapRange(GLenum access, GLuint size = 0);
 
 	/* Feature not available in OpenGL ES  < 3.1 */
 #ifdef FILLWAVE_GLES_3_0

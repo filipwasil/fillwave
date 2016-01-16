@@ -18,8 +18,7 @@ namespace framework {
 Text::Text(
 		std::string& text,
 		pTexture2D texture,
-		GLfloat startingPositionX,
-		GLfloat startingPositionY,
+		glm::vec2 position,
 		Engine* engine,
 		GLfloat scale,
 		Font* font,
@@ -27,23 +26,15 @@ Text::Text(
 		eTextEffect effect)
 		:
 				Reloadable(engine),
-				IHUD(std::make_shared<core::TextureRegion>(texture)),
-				mEngine(engine),
+				IHUDNode(texture, createProgram(engine, effect), position, glm::vec2(scale, scale)),
 				mText(text),
-				mTexture(texture),
-				mViewportWidth(engine->getScreenSize()[0]),
-				mViewportHeight(engine->getScreenSize()[1]),
-				mStartingX(startingPositionX),
-				mStartingY(startingPositionY),
-				mScale(scale),
-				mFont(font),
 				mColor(color),
-				mEffect(effect) {
+				mEffect(effect),
+				mFont(font),
+				mEngine(engine),
+				mViewportWidth(engine->getScreenSize()[0]),
+				mViewportHeight(engine->getScreenSize()[1]) {
 
-	mBlending.mSource = GL_SRC_ALPHA;
-	mBlending.mDestination = GL_ONE_MINUS_SRC_ALPHA;
-
-	createProgram();
 	initPipeline();
 	createVBO();
 	initUniformsCache();
@@ -89,14 +80,13 @@ void Text::editColor(glm::vec4 color) {
 }
 
 void Text::editSize(GLfloat size) { //xxx optimize
-	mScale = size;
+	mScale = glm::vec2(size, size);
 	clearVBO();
 	createVBO();
 }
 
-void Text::editPosition(GLfloat startingX, GLfloat startingY) { //xxx optimize
-	mStartingX = startingX;
-	mStartingY = startingY;
+void Text::editPosition(glm::vec2 position) { //xxx optimize
+	mPosition = position;
 	clearVBO();
 	createVBO();
 }
@@ -117,7 +107,7 @@ void Text::createVBO() {
 	points_tmp.reserve(lenght * 12);
 	texcoords_tmp.reserve(lenght * 12);
 
-	GLfloat tmpStartingX = mStartingX;
+	GLfloat tmpStartingX = mPosition.x;
 
 	for (int i = 0; i < lenght; i++) {
 		int ascii_code = mText[i];
@@ -128,24 +118,24 @@ void Text::createVBO() {
 		GLfloat s = atlas_col * (1.0 / mFont->mAtlasColumns);
 		GLfloat t = (atlas_row + 1) * (1.0 / mFont->mAtlasRows);
 
-		GLfloat x_pos = mStartingX;
-		GLfloat y_pos = mStartingY
-				- mScale / mViewportHeight * mFont->mOffsets[ascii_code];
+		GLfloat x_pos = mPosition.x;
+		GLfloat y_pos = mPosition.y
+				- mScale.x / mViewportHeight * mFont->mOffsets[ascii_code];
 
 		if (i + 1 < lenght) {
-			mStartingX += mFont->mWidths[ascii_code] * mScale / mViewportWidth;
+			mPosition.x += mFont->mWidths[ascii_code] * mScale.x / mViewportWidth;
 		}
 
 		points_tmp.push_back(x_pos);
 		points_tmp.push_back(y_pos);
 		points_tmp.push_back(x_pos);
-		points_tmp.push_back(y_pos - mScale / mViewportHeight);
-		points_tmp.push_back(x_pos + mScale / mViewportWidth);
-		points_tmp.push_back(y_pos - mScale / mViewportHeight);
+		points_tmp.push_back(y_pos - mScale.x / mViewportHeight);
+		points_tmp.push_back(x_pos + mScale.x / mViewportWidth);
+		points_tmp.push_back(y_pos - mScale.x / mViewportHeight);
 
-		points_tmp.push_back(x_pos + mScale / mViewportWidth);
-		points_tmp.push_back(y_pos - mScale / mViewportHeight);
-		points_tmp.push_back(x_pos + mScale / mViewportWidth);
+		points_tmp.push_back(x_pos + mScale.x / mViewportWidth);
+		points_tmp.push_back(y_pos - mScale.x / mViewportHeight);
+		points_tmp.push_back(x_pos + mScale.x / mViewportWidth);
 		points_tmp.push_back(y_pos);
 		points_tmp.push_back(x_pos);
 		points_tmp.push_back(y_pos);
@@ -165,24 +155,20 @@ void Text::createVBO() {
 		texcoords_tmp.push_back(1.0f - t + 1.0f / mFont->mAtlasRows);
 	}
 
-	mStartingX = tmpStartingX;
+	mPosition.x = tmpStartingX;
 
-	mVBO = pVertexBufferText(
-			new core::VertexBufferText(points_tmp, texcoords_tmp)); //xxx todo needs to be stored in kernel
+	mVBO = std::make_shared<core::VertexBufferText>(points_tmp, texcoords_tmp); //xxx todo needs to be stored in kernel
 	initVBO();
 	initVAO();
 }
 
-inline void Text::createProgram() {
-	ProgramLoader loader(mEngine);
-
-	switch (mEffect) {
-		case eTextEffect::eNone:
-			mProgram = loader.getText();
-			return;
+inline pProgram Text::createProgram(Engine* engine, eTextEffect effect) {
+	switch (effect) {
 		case eTextEffect::eBold:
-			mProgram = loader.getTextBold();
-			return;
+			return ProgramLoader(engine).getTextBold();
+		case eTextEffect::eNone:
+		default:
+			return ProgramLoader(engine).getText();
 	}
 }
 

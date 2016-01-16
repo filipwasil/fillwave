@@ -1,5 +1,5 @@
 /*
- * Scene.h
+ * IScene.h
  *
  *  Created on: May 2, 2014
  *      Author: Filip Wasil
@@ -8,6 +8,7 @@
 #ifndef SCENE_H_
 #define SCENE_H_
 
+#include <fillwave/hud/base/HUD.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/models/Cursor.h>
@@ -22,7 +23,7 @@ namespace framework {
  * \brief Entity to be a root of Entity tree.
  */
 
-class IScene : public TreePtr<pEntity> {
+class IScene: public TreePtr<pEntity> {
 public:
 	IScene(IRenderer* renderer = new RendererFR());
 
@@ -34,14 +35,15 @@ public:
 	void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
 	/* Cursor */
-	void setCursor(pCursor cursor);
+	void setCursor(pCursor& cursor);
 	pCursor getCursor();
 	void drawCursor();
 	void moveCursor(glm::vec2 position);
 
 	/* Scene */
-	void setSkybox(pSkybox skybox);
+	void setSkybox(pSkybox& skybox);
 	void setAmbient(glm::vec3 cursor);
+	void setHUD(pHUD& hud);
 
 	/* Pickable */
 	void registerPickable(pEntity entity);
@@ -51,6 +53,7 @@ public:
 	void onEvent(EventType& event);
 
 	void draw(ICamera& c);
+	void drawHUD();
 	void drawDepth(ICamera& camera);
 	void drawDepthColor(ICamera& camera, glm::vec3& position);
 
@@ -72,6 +75,7 @@ protected:
 	pEntity mLastPicked;
 	glm::vec3 mAmbientGlobal;
 	puIRenderer mRenderer;
+	pHUD mHUD;
 
 private:
 	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;

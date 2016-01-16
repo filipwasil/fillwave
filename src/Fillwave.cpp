@@ -32,7 +32,7 @@ namespace fillwave {
 
 Engine::Engine(std::string rootPath) {
 	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, rootPath));
-	/* This init has to be outside of the constructor,
+	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
 	mImpl->init();
@@ -40,7 +40,7 @@ Engine::Engine(std::string rootPath) {
 
 Engine::Engine(ANativeActivity* activity) {
 	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, activity));
-	/* This init has to be outside of the constructor,
+	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
 	mImpl->init();
@@ -48,7 +48,7 @@ Engine::Engine(ANativeActivity* activity) {
 #else
 Engine::Engine(GLint argc, GLchar* const argv[]) {
 	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, argc, argv));
-	/* This init has to be outside of the constructor,
+	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
 	mImpl->init();
@@ -146,6 +146,10 @@ pTexture2D Engine::storeTexture(
 	return mImpl->mTextureManager->get(texturePath, mapType, compression);
 }
 
+pTexture2DRenderable Engine::storeTextureRenderable() {
+	return mImpl->mTextureManager->getColor2D(mImpl->mWindowWidth, mImpl->mWindowHeight);;
+}
+
 pTexture2DRenderableDynamic Engine::storeTextureDynamic(
 		const std::string& fragmentShaderPath) {
 	const std::string path = fragmentShaderPath;
@@ -225,8 +229,7 @@ void Engine::clearFocus(eEventType eventType) {
 pText Engine::storeText(
 		std::string content,
 		std::string fontName,
-		GLfloat startingPositionX,
-		GLfloat startingPositionY,
+		glm::vec2 position,
 		GLfloat scale,
 		glm::vec4 color,
 		eTextEffect effect) {
@@ -277,7 +280,7 @@ pText Engine::storeText(
 	}
 
 	pText text = pText(
-			new framework::Text(content, t, startingPositionX, startingPositionY,
+			new framework::Text(content, t, position,
 					this, scale, font, color, effect));
 	mImpl->mTextManager.push_back(pText(text));
 	return text;
@@ -309,6 +312,10 @@ void Engine::clearLights() {
 
 glm::ivec2 Engine::getScreenSize() const {
 	return glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight);
+}
+
+GLfloat Engine::getScreenAspectRatio() const {
+	return mImpl->mWindowAspectRatio;
 }
 
 void Engine::insertResizeScreen(GLuint width, GLuint height) {
@@ -396,11 +403,10 @@ void Engine::addPostProcess(
 
 void Engine::configureFPSCounter(
 		std::string fontName,
-		GLfloat xPosition,
-		GLfloat yPosition,
+		glm::vec2 position,
 		GLfloat size) {
 	if (fontName.size() > 1) {
-		mImpl->mFPSText = storeText("", fontName, xPosition, yPosition, size);
+		mImpl->mFPSText = storeText("", fontName, position, size);
 
 		/* Provide callback to refresh the FPS value */
 		mImpl->mTextFPSCallback = new framework::FPSCallback(this, mImpl->mFPSText);

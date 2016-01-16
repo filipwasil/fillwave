@@ -24,7 +24,6 @@ public:
 
 	virtual ~Programmable() = default;
 
-	/* Effects */
 	void addEffect(pIEffect effect);
 	void removeEffect(pIEffect effect);
 	void drawWithEffects(ICamera& camera);

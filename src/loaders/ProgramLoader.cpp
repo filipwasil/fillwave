@@ -215,7 +215,7 @@ const std::string gGLLightDefinitions = "struct Attenuation {\n"
 		"   vec3 direction;\n"
 		"};\n";
 
-const std::string fsEmpty = gGLVersion + gGLFragmentPrecision + //xxx consider renaming
+const std::string fsEmpty = gGLVersion + gGLFragmentPrecision +
 		"void main() { \n"
 				"}             \n";
 
@@ -344,11 +344,53 @@ const std::string fsDRAmbientG = gGLVersion + gGLFragmentPrecision +
 		"   fSpecularTexel = vec3(0.0);\n"
 		"}\n";
 
+const std::string fsHUD =
+		gGLVersion + gGLFragmentPrecision
+		+
+		"in vec2 vTextureCoordinate;\n"
+		"in vec2 vScale;\n"
+		"uniform sampler2D uDiffuseTextureUnit;\n"
+		+ gGLColorOutDefinition
+		+
+		"void main () {\n"
+		      + gGLColorOutAssingment + " = texture (uDiffuseTextureUnit, vTextureCoordinate);\n"
+				"}\n"
+				"\n";
+
+const std::string vsHUD = gGLVersion + gGLVertexPrecision
+		+ "uniform vec2 uPosition;\n"
+		"uniform vec2 uScale;\n"
+		"out vec2 vPosition;\n"
+		"out vec2 vTextureCoordinate;\n"
+		"out vec2 vScale;\n"
+				"void main() {\n"
+				"   vec4 vertexPosition;\n"
+				"   switch(gl_VertexID) {\n"
+				"   case 0:\n"
+				"      vertexPosition = vec4(0.0, uScale.y, 0.0, 1.0);\n"
+				"      break;\n"
+				"   case 1:\n"
+				"      vertexPosition = vec4(0.0, 0.0, 0.0,1.0);\n"
+				"      break;\n"
+				"   case 2:\n"
+				"      vertexPosition = vec4(uScale.x, uScale.y, 0.0,1.0);\n"
+				"      break;\n"
+				"   case 3:\n"
+				"   default:\n"
+				"      vertexPosition = vec4(uScale.x, 0.0, 0.0,1.0);\n"
+				"      break;\n"
+				"   }\n"
+				"   gl_Position = vertexPosition + vec4(uPosition, 0.0, 0.0);\n"
+				"   vPosition = vertexPosition.xy + uPosition;\n"
+				"   vTextureCoordinate = sign(vertexPosition.xy);\n"
+				"   vScale = uScale;\n"
+				"}\n";
+
 const std::string fsText =
 		gGLVersion + gGLFragmentPrecision
 				+ //xxx low precision
 				"in vec2 vTextureCoordinate;\n"
-						"uniform sampler2D uTextureUnit;\n"
+				"uniform sampler2D uTextureUnit;\n"
 						"uniform vec4 uColour;\n" + gGLColorOutDefinition
 				+ "void main (){\n"
 						"  float pixelSize = 0.001;\n"
@@ -1343,6 +1385,41 @@ pProgram ProgramLoader::getQuadCustomFragmentShader(
 	return mEngine->storeProgram(shaderPath,
 			mEngine->storeShaderFragment(shaderPath)
 					+ mEngine->storeShaderVertex("fillwave_quad_custom.vert", vsQuad));
+}
+
+pProgram ProgramLoader::getHUD() {
+	pProgram p = mEngine->storeProgram("hud",
+			mEngine->storeShaderFragment("fillwave_hud.frag", fsHUD)
+					+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
+
+	GLint location = glGetUniformLocation(p->getHandle(),
+			"uDiffuseTextureUnit");
+
+	if (location != -1) {
+		p->use();
+		core::Uniform::push(location, FILLWAVE_DIFFUSE_UNIT);
+	}
+
+	glGetError(); /* Suppress error if happened */
+	return p;
+}
+
+pProgram ProgramLoader::getHUDCustomFragmentShader (
+		const std::string& shaderPath) {
+	pProgram p = mEngine->storeProgram(shaderPath,
+			mEngine->storeShaderFragment(shaderPath)
+					+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
+
+	GLint location = glGetUniformLocation(p->getHandle(),
+			"uDiffuseTextureUnit");
+
+	if (location != -1) {
+		p->use();
+		core::Uniform::push(location, FILLWAVE_DIFFUSE_UNIT);
+	}
+
+	glGetError(); /* Suppress error if happened */
+	return p;
 }
 
 pProgram ProgramLoader::getQuadCustomFragmentShaderStartup() {

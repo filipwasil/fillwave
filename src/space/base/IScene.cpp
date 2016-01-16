@@ -1,5 +1,5 @@
 /*
- * Scene.cpp
+ * IScene.cpp
  *
  *  Created on: May 2, 2014
  *      Author: filip
@@ -26,20 +26,24 @@ void IScene::setRenderer(IRenderer* renderer) {
 	mRenderer = std::unique_ptr<IRenderer>(renderer);
 }
 
-void IScene::setSkybox(pSkybox skybox) {
+void IScene::setSkybox(pSkybox& skybox) {
 	mSkybox = skybox;
 }
 
-pCursor IScene::getCursor() {
-	return mCursor;
+void IScene::setHUD(pHUD& hud) {
+	mHUD = hud;
 }
 
-void IScene::setCursor(pCursor cursor) {
+void IScene::setCursor(pCursor& cursor) {
 	mCursor = cursor;
 }
 
 void IScene::setAmbient(glm::vec3 ambient) {
 	mAmbientGlobal = ambient;
+}
+
+pCursor IScene::getCursor() {
+	return mCursor;
 }
 
 void IScene::moveCursor(glm::vec2 position) {
@@ -59,6 +63,12 @@ void IScene::updateDependencies() {
 void IScene::draw(ICamera& camera) {
 	camera.update();
 	mRenderer->draw(camera);
+}
+
+void IScene::drawHUD() {
+	if (mHUD) {
+		mHUD->draw();
+	}
 }
 
 void IScene::drawCursor() {

@@ -35,7 +35,6 @@ private:
 	pProgram mProgram;
 
 	GLfloat mTimePassed;
-
 	GLint mUniformLocationCacheTime;
 	GLint mUniformLocationCachePostprocessingSampler;
 

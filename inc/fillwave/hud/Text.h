@@ -12,12 +12,9 @@
 #include <fillwave/core/buffers/VertexBufferText.h>
 #include <fillwave/core/pipeline/Program.h>
 
-#include <fillwave/common/Blending.h>
-
+#include <fillwave/hud/base/IHUDNode.h>
 #include <fillwave/loaders/FontLoader.h>
 #include <fillwave/models/base/Reloadable.h>
-#include <fillwave/hud/base/IHUD.h>
-
 #include <map>
 
 namespace fillwave {
@@ -33,13 +30,12 @@ namespace framework {
  * \brief 2D Text on the screen.
  */
 
-class Text: public Reloadable, public IHUD {
+class Text: public Reloadable, public IHUDNode {
 public:
 	Text(
 			std::string& text,
 			pTexture2D texture,
-			GLfloat startingPositionX,
-			GLfloat startingPositionY,
+			glm::vec2 position,
 			Engine* engine,
 			GLfloat scale,
 			Font* font,
@@ -54,30 +50,24 @@ public:
 	void editString(std::string text);
 	void editColor(glm::vec4 color);
 	void editSize(GLfloat size);
-	void editPosition(GLfloat startingX, GLfloat startingY);
+	void editPosition(glm::vec2 position);
 
 private:
-	Engine* mEngine;
-
+	/* Text */
 	std::string mText;
-
-	Blending mBlending;
-
-	std::map<std::string, pTextureRegion> mCharacters;
-
-	pTexture mTexture;
-
-	pProgram mProgram;
-	GLint mViewportWidth, mViewportHeight;
-	pVertexBufferText mVBO;
-	GLfloat mStartingX, mStartingY, mScale;
-	Font* mFont;
 	glm::vec4 mColor;
 	eTextEffect mEffect;
+	Font* mFont;
+	pVertexBufferText mVBO;
 
+//	std::map<std::string, pTextureRegion> mCharacters; xxx remove ?
+
+	/* IHUD */
+	Engine* mEngine;
 	GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
+	GLint mViewportWidth, mViewportHeight;
 
-	void createProgram();
+	pProgram createProgram(Engine* engine, eTextEffect effect);
 	void createVBO();
 	void clearVBO();
 

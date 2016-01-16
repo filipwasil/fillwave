@@ -124,16 +124,16 @@ int main(int argc, char* argv[]) {
 \indent \indent During the context initialization stage One must provide Fillwave engine a window (surface to draw on) and use \textbf{insert} functions in your context input handlers.
 
 \begin{lstlisting}
-void insertResizeScreen(actions::eKeyboardEvent& e);
-void insertInput(actions::eKeyboardEvent& e);
-void insertInput(actions::eMouseButtonEvent& e);
-void insertInput(actions::eScrollEvent  & e);
-void insertInput(actions::eCharacterEvent& e);
-void insertInput(actions::eCharacterModsEvent& e);
-void insertInput(actions::eCursorEnterEvent& e);
-void insertInput(actions::eCursorPositionEvent& e);
-void insertInput(actions::eTouchEvent& e);
-void insertInput(actions::eTouchEvent& e);
+void insertResizeScreen(GLuint width, GLuint height);
+void insertInput(KeyboardEvent& e);
+void insertInput(MouseButtonEvent& e);
+void insertInput(ScrollEvent  & e);
+void insertInput(CharacterEvent& e);
+void insertInput(CharacterModsEvent& e);
+void insertInput(CursorEnterEvent& e);
+void insertInput(CursorPositionEvent& e);
+void insertInput(TouchEvent& e);
+void insertInput(TouchEvent& e);
 \end{lstlisting}
 
 \indent \indent Every time when there is an event incoming to you context, (Does not matter if you are using glfw, freegut, QT or other library) and you want Fillwave to handle it you should \textbf{insert} a proper event into the engine using \textbf{insertEvent} function. Above there is an example using GLFW. The \textbf{keyboardCallback} function was previously registered as keyboard callback in GLFW.  
@@ -146,14 +146,14 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
                                    int action,
                                    int mods) {
    /* Create an event data and fill it */
-   fillwave::actions::KeyboardEventData data;
+   fillwave::framework::KeyboardEventData data;
    data.action = action;
    data.key = key;
    data.mode = mods;
    data.scanCode = scancode;
    
    /* Create an event */
-   fillwave::actions::KeyboardEvent event(data);
+   fillwave::framework::KeyboardEvent event(data);
    
    /* insert an event */
    mGraphicsEngine->insertInput(event);
@@ -242,7 +242,7 @@ engine->setCurrentScene(sceneP);
 \indent \indent There are two camera to chose from in Fillwave: \textbf{CameraPerspective} and \textbf{CameraOrtographic}.Providing empty quaternion results will make the camera look in \textbf{-Z} direction. Example camera creation is listed below:
 
 \begin{lstlisting}
-/* Camera with perspective projection */
+/* Perspective and ortographic cameras */
 pCameraPerspective cameraP = std::make_shared<CameraPerspective>                
                     (glm::vec3(0.0,0.0,6.0), /* position */
                      glm::quat(), /* rotation */                
@@ -251,10 +251,6 @@ pCameraPerspective cameraP = std::make_shared<CameraPerspective>
                      screenWidth/screenHeight, /* screen ratio */
                      0.1, /* projection near plane */
                      1000.0); /* projection far plane */
-
-
-
-/* Camera with ortographic projection */
 gCameraOrthographic cameraO = std::make_shared<CameraOrtographic> 
                         (glm::vec3(0.0,0.0,6.0),
                          glm::quat(), /* rotation */                
@@ -266,17 +262,18 @@ gCameraOrthographic cameraO = std::make_shared<CameraOrtographic>
                          1000.0f); /* z far culling */
 \end{lstlisting}
 
+\subsection{Renderers}\label{sec:Renderers}
+
+\indent \indent In current revision (4.0.0) there are two types of renderers - \textbf{Forward renderer} (RendererFR) and Program Based Render Pass renderer (RendererPBRP). Default one is \textbf{RendererFR}. Which one You will use is up to you. There is also third one coming out soon - \textbf{Deferred Renderer} RendererDR. Currenty it is only available for testing purposes. Each scene has its won renderer and can be set using \textbf{voi IScene::setRenderer(IRenderer)} function call;
+
+
 \subsection{Programs and Shaders}\label{sec:Programs and Shaders}
 \indent \indent Default programs can be built using \textbf{ProgramLoader} class using \textbf{getDefault} and \textbf{getDefaultBones} functions. See the example below:
 
 \begin{lstlisting}
-/* Create loader module */
+/* Create loader, and use it to create programs */
 loader::ProgramLoader loader(gEngine);
-
-/* Default program */
 pProgram default = loader.getDefault();
-
-/* Default program with animations support */
 pProgram animation = loader.getDefaultBones();
 \end{lstlisting}
 
@@ -336,15 +333,15 @@ pCursor  storeCursor(pProgram, pTexture, GLfloat);
 
 pModel model = buildModel(engine, program, "model.obj");
 
-pModel model = pModel (new models::Model(engine, program, "model.obj"));
+pModel model = std::make_shared<framework::Model>(engine, program, "model.obj");
 
 /*
  * When the appropriate map paths are available in your
  * file and you want to draw Your custom shape derived 
- * from models::Shape<core::VertexBasic> 
+ * from framework::Shape<core::VertexBasic> 
  */
 
-models::Sphere sphere(1.0,10.0,10.0);
+framework::Sphere sphere(1.0,10.0,10.0);
 
 pModel model = buildModel(engine,
                           program,
@@ -354,13 +351,13 @@ pModel model = buildModel(engine,
                           specularMap,
                           material);
                          
-pModel model = pModel(new Model(engine,
+pModel model = std::make_shared<framework::Model>(engine,
                           program,
                           sphere,
                           diffuseMap,
                           normalMap,
                           specularMap,
-                          material));
+                          material);
         
     
     
@@ -380,7 +377,7 @@ pModel model = buildModel(engine,
                       "relativePathToNormalsMap",
                       "relativePathToSpecularMap");
                       
-pModel model = pModel (new models::Model(engine,
+pModel model = std::make_shared<framework::Model>(engine,
                        program,
                        "model.obj",
                        "relativePathToDiffuseMap",
@@ -399,7 +396,7 @@ pModel model = buildModel(engine,
                       normalMapTexture,
                       specularMapTexture,
                       material);
-pModel model = pModel (new models::Model(engine,
+pModel model = std::make_shared<Model>(engine,
                       program,
                       "model.obj",
                       diffuseMapTexture,
@@ -844,7 +841,7 @@ public:
 namespace fillwave {
 namespace actions {
 
-class TimedMoveCallbackCustom: public fillwave::actions::TimedMoveCallback {
+class TimedMoveCallbackCustom: public fillwave::framework::TimedMoveCallback {
 public:
    TimedMoveCallbackCustom(pEntity entity,
                            glm::vec3 endPosition,

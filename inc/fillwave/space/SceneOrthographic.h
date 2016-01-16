@@ -30,12 +30,13 @@ public:
 	virtual ~SceneOrthographic() = default;
 
 	void setCamera(pCameraOrthographic camera);
-	pICamera getCamera();
 
-	void draw();
-	void drawPicking();
-	void drawDepthInt();
-	void drawOcclusion();
+	/* Interface IScene */
+	pICamera getCamera() override;
+	void draw() override;
+	void drawPicking() override;
+	void drawDepthInt() override;
+	void drawOcclusion() override;
 
 private:
 	pCameraOrthographic mCamera;

@@ -30,31 +30,21 @@ public:
 	void resize(GLint width, GLint height);
 
 	void bindForWriting();
-
 	void bindForRendering();
-
 	void bindForReading();
 
 	void setAttachment(GLenum attachment, GLenum target = GL_TEXTURE_2D);
-
-	void attachTexture2DDraw(
-			GLenum attachment,
-			GLenum target,
-			GLuint textureHandle);
-
+	void attachTexture2DDraw(GLenum attachment, GLenum target, GLuint texHandle);
 	void attachTexture2D(GLenum attachment, GLenum target, GLuint textureHandle);
 
 	void copyTo(Framebuffer* source);
-
 	void copyFrom(Framebuffer* source);
 
 	virtual void reload();
-
 	void log();
 
 private:
 	puFramebuffer mFramebuffer;
-
 	GLenum mAttachment;
 };
 

@@ -31,7 +31,6 @@ public:
 	pProgram getDefaultFR();
 	pProgram getDefaultBonesDR();
 	pProgram getDefaultBonesFR();
-
 	pProgram getShadow();
 	pProgram getShadowColorCoded();
 	pProgram getShadowWithAnimation();
@@ -39,6 +38,7 @@ public:
 	pProgram getDebugger();
 	pProgram getSkybox();
 	pProgram getSkyboxDR();
+	pProgram getHUD();
 	pProgram getText();
 	pProgram getTextBold();
 	pProgram getParticleGPUEmiter();
@@ -59,6 +59,8 @@ public:
 	pProgram getDRSpotLights();
 	pProgram getDRPointLights();
 	pProgram getQuadCustomFragmentShader(
+			const std::string& shaderPath);
+	pProgram getHUDCustomFragmentShader(
 			const std::string& shaderPath);
 
 	static void initDefaultUniforms(core::Program* program);

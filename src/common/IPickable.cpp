@@ -15,9 +15,5 @@ IPickable::IPickable()
 
 }
 
-IPickable::~IPickable() {
-
-}
-
 } /* namespace framework */
 } /* namespace fillwave */
