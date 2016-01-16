@@ -42,6 +42,10 @@
 #include <fillwave/models/shapes/BoxOcclusion.h>
 #include <fillwave/models/shapes/Box.h>
 
+/* HUD */
+#include <fillwave/hud/Button.h>
+#include <fillwave/hud/ProgressBar.h>
+
 /* space */
 #include <fillwave/space/SceneOrthographic.h>
 #include <fillwave/space/ScenePerspective.h>

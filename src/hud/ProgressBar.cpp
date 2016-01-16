@@ -8,16 +8,19 @@
 #include <fillwave/hud/ProgressBar.h>
 #include <fillwave/Fillwave.h>
 
+FLOGINIT_DEFAULT()
+
 namespace fillwave {
 namespace framework {
 
 ProgressBar::ProgressBar(
 		Engine* engine,
+		const pTexture2D& texture,
 		const std::string& shaderPath,
 		glm::vec2 position,
 		glm::vec2 scale)
 		:
-				IHUDNode(engine->storeTextureRenderable(),
+				IHUDNode(texture,
 						ProgramLoader(engine).getHUDCustomFragmentShader(shaderPath),
 						position, scale),
 				mProgress(0.0) {
@@ -26,14 +29,12 @@ ProgressBar::ProgressBar(
 
 void ProgressBar::draw() {
 	mProgram->use();
-	mProgram->uniformPush("uTextureUnit",
-	FILLWAVE_DIFFUSE_UNIT);
-   mProgram->uniformPush("uProgress", mProgress);
-   mProgram->uniformPush("uPosition", mPosition);
-   mProgram->uniformPush("uScale", mScale);
-	mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	mTexture->unbind();
+	mProgram->uniformPush("uProgress", mProgress);
+	IHUDNode::draw();
+}
+
+void ProgressBar::setProgress(GLfloat progress) {
+	mProgress = progress;
 }
 
 } /* namespace framework */

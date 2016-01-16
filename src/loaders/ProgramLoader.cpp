@@ -348,11 +348,12 @@ const std::string fsHUD =
 		gGLVersion + gGLFragmentPrecision
 		+
 		"in vec2 vTextureCoordinate;\n"
-		"uniform sampler2D uTextureUnit;\n"
+		"in vec2 vScale;\n"
+		"uniform sampler2D uDiffuseTextureUnit;\n"
 		+ gGLColorOutDefinition
 		+
 		"void main () {\n"
-		      + gGLColorOutAssingment + " = texture (uTextureUnit, vTextureCoordinate);\n"
+		      + gGLColorOutAssingment + " = texture (uDiffuseTextureUnit, vTextureCoordinate);\n"
 				"}\n"
 				"\n";
 
@@ -361,6 +362,7 @@ const std::string vsHUD = gGLVersion + gGLVertexPrecision
 		"uniform vec2 uScale;\n"
 		"out vec2 vPosition;\n"
 		"out vec2 vTextureCoordinate;\n"
+		"out vec2 vScale;\n"
 				"void main() {\n"
 				"   vec4 vertexPosition;\n"
 				"   switch(gl_VertexID) {\n"
@@ -379,8 +381,9 @@ const std::string vsHUD = gGLVersion + gGLVertexPrecision
 				"      break;\n"
 				"   }\n"
 				"   gl_Position = vertexPosition + vec4(uPosition, 0.0, 0.0);\n"
-				"   vPosition = vertexPosition.xy;\n"
+				"   vPosition = vertexPosition.xy + uPosition;\n"
 				"   vTextureCoordinate = sign(vertexPosition.xy);\n"
+				"   vScale = uScale;\n"
 				"}\n";
 
 const std::string fsText =
@@ -1385,16 +1388,38 @@ pProgram ProgramLoader::getQuadCustomFragmentShader(
 }
 
 pProgram ProgramLoader::getHUD() {
-	return mEngine->storeProgram("hud",
+	pProgram p = mEngine->storeProgram("hud",
 			mEngine->storeShaderFragment("fillwave_hud.frag", fsHUD)
 					+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
+
+	GLint location = glGetUniformLocation(p->getHandle(),
+			"uDiffuseTextureUnit");
+
+	if (location != -1) {
+		p->use();
+		core::Uniform::push(location, FILLWAVE_DIFFUSE_UNIT);
+	}
+
+	glGetError(); /* Suppress error if happened */
+	return p;
 }
 
 pProgram ProgramLoader::getHUDCustomFragmentShader (
 		const std::string& shaderPath) {
-	return mEngine->storeProgram(shaderPath,
+	pProgram p = mEngine->storeProgram(shaderPath,
 			mEngine->storeShaderFragment(shaderPath)
 					+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
+
+	GLint location = glGetUniformLocation(p->getHandle(),
+			"uDiffuseTextureUnit");
+
+	if (location != -1) {
+		p->use();
+		core::Uniform::push(location, FILLWAVE_DIFFUSE_UNIT);
+	}
+
+	glGetError(); /* Suppress error if happened */
+	return p;
 }
 
 pProgram ProgramLoader::getQuadCustomFragmentShaderStartup() {

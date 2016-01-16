@@ -23,6 +23,7 @@ public:
 			glm::vec2 scale);
 	virtual ~Button();
 
+	/* IPickable */
 	virtual void pick(glm::vec3 color) override;
 	virtual void unpick() override;
 	virtual void onPicked() override;

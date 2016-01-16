@@ -44,7 +44,6 @@ public:
 		glBlendFunc(mBlending.mSource, mBlending.mDestination);
 
 		mProgram->use();
-		mProgram->uniformPush("uTextureUnit", FILLWAVE_DIFFUSE_UNIT);
 	   mProgram->uniformPush("uPosition", mPosition);
 	   mProgram->uniformPush("uScale", mScale);
 		mTexture->bind(FILLWAVE_DIFFUSE_UNIT);

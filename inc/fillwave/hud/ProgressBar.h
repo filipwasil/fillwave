@@ -20,6 +20,7 @@ class ProgressBar: public IHUDNode {
 public:
 	ProgressBar(
 			Engine* engine,
+			const pTexture2D& texture,
 			const std::string& shaderPath,
 			glm::vec2 position,
 			glm::vec2 scale);
@@ -34,6 +35,7 @@ private:
 };
 
 } /* namespace framework */
+typedef std::shared_ptr<framework::ProgressBar> pProgressBar;
 } /* namespace fillwave */
 
 #endif /* INC_FILLWAVE_HUD_PROGRESSBAR_H_ */
