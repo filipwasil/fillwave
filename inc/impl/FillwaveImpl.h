@@ -106,6 +106,7 @@ struct Engine::EngineImpl {
 	/* Screen */
 	GLuint mWindowWidth = 1920;
 	GLuint mWindowHeight = 1200;
+	GLfloat mWindowAspectRatio = 1200.0f / 1920.0f;
 
 	/* Loaders */
 	framework::FontLoader mFontLoader;
@@ -417,9 +418,7 @@ inline void Engine::EngineImpl::initStartup() {
 
 	program->use();
 	program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
-	program->uniformPush("uScreenFactor",
-			static_cast<GLfloat>(mWindowWidth)
-					/ static_cast<GLfloat>(mWindowHeight));
+	program->uniformPush("uScreenFactor", mWindowAspectRatio);
 	core::Program::disusePrograms();
 
 	mPostProcessingPassStartup = puPostProcessingPass(
@@ -899,6 +898,9 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 
 	mWindowWidth = width;
 	mWindowHeight = height;
+
+	mWindowAspectRatio = static_cast<GLfloat>(mWindowHeight) / static_cast<GLfloat>(mWindowWidth);
+
 	glViewport(0, 0, mWindowWidth, mWindowHeight);
 
 	mTextureManager->resize(mWindowWidth, mWindowHeight);

@@ -314,6 +314,10 @@ glm::ivec2 Engine::getScreenSize() const {
 	return glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight);
 }
 
+GLfloat Engine::getScreenAspectRatio() const {
+	return mImpl->mWindowAspectRatio;
+}
+
 void Engine::insertResizeScreen(GLuint width, GLuint height) {
 	mImpl->insertResizeScreen(width, height);
 

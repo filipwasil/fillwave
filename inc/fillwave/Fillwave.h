@@ -211,6 +211,7 @@ public:
 
 	/* Screen */
 	glm::ivec2 getScreenSize() const;
+	GLfloat getScreenAspectRatio() const;
 
 	/* Log */
 	void log();
