@@ -31,7 +31,6 @@ public:
 	pProgram getDefaultFR();
 	pProgram getDefaultBonesDR();
 	pProgram getDefaultBonesFR();
-
 	pProgram getShadow();
 	pProgram getShadowColorCoded();
 	pProgram getShadowWithAnimation();

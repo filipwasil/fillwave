@@ -12,11 +12,20 @@
 #include <fillwave/models/base/TreePtr.h>
 
 namespace fillwave {
+class Engine;
+namespace framework {
 
-typedef framework::TreePtr<pIHUDNode> HUD;
-typedef std::shared_ptr<HUD> pHUD;
-typedef std::unique_ptr<HUD> puHUD;
+class HUD: public TreePtr<pIHUDNode> {
+public:
+	HUD() = default;
+	virtual ~HUD() = default;
 
+	virtual void draw();
+};
+
+} /* namespace framework */
+typedef std::shared_ptr<framework::HUD> pHUD;
+typedef std::unique_ptr<framework::HUD> puHUD;
 } /* namespace fillwave */
 
 #endif /* INC_FILLWAVE_HUD_BASE_HUD_H_ */

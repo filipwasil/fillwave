@@ -349,6 +349,7 @@ const std::string fsHUD =
 		+
 		"in vec2 vTextureCoordinate;\n"
 		"uniform sampler2D uTextureUnit;\n"
+		"uniform vec4 uColour;\n"
 		+ gGLColorOutDefinition
 		+
 		"void main () {\n"
@@ -370,29 +371,29 @@ const std::string vsHUD = gGLVersion + gGLVertexPrecision
 				"   vec4 vertexPosition;\n"
 				"   switch(gl_VertexID) {\n"
 				"   case 0:\n"
-				"      vertexPosition = vec4(-uScale.x, uScale.y, 0.0, 1.0);\n"
+				"      vertexPosition = vec4(0.0, uScale.y, 0.0, 1.0);\n"
 				"      break;\n"
 				"   case 1:\n"
-				"      vertexPosition = vec4(-uScale.x, -uScale.y, 0.0,1.0);\n"
+				"      vertexPosition = vec4(0.0, 0.0, 0.0,1.0);\n"
 				"      break;\n"
 				"   case 2:\n"
 				"      vertexPosition = vec4(uScale.x, uScale.y, 0.0,1.0);\n"
 				"      break;\n"
 				"   case 3:\n"
 				"   default:\n"
-				"      vertexPosition = vec4(uScale.x, -uScale.y, 0.0,1.0);\n"
+				"      vertexPosition = vec4(uScale.x, 0.0, 0.0,1.0);\n"
 				"      break;\n"
 				"   }\n"
-				"   gl_Position = vertexPosition + vec4(uPosition, 0.0 0,0);\n"
+				"   gl_Position = vertexPosition + vec4(uPosition, 0.0, 0.0);\n"
 				"   vPosition = vertexPosition.xy;\n"
-				"   vTextureCoordinate = (vertexPosition.xy + vec2(1.0,1.0)) * 0.5;\n"
+				"   vTextureCoordinate = (vertexPosition.xy);\n"
 				"}\n";
 
 const std::string fsText =
 		gGLVersion + gGLFragmentPrecision
 				+ //xxx low precision
 				"in vec2 vTextureCoordinate;\n"
-						"uniform sampler2D uTextureUnit;\n"
+				"uniform sampler2D uTextureUnit;\n"
 						"uniform vec4 uColour;\n" + gGLColorOutDefinition
 				+ "void main (){\n"
 						"  float pixelSize = 0.001;\n"

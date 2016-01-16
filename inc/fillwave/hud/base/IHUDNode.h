@@ -10,6 +10,7 @@
 
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/pipeline/Program.h>
+#include <fillwave/models/base/ITreeNode.h>
 
 namespace fillwave {
 namespace framework {
@@ -17,7 +18,7 @@ namespace framework {
 class IHUDNode {
 public:
 	IHUDNode(
-			pTexture2D texture,
+			const pTexture2D& texture,
 			pProgram program,
 			glm::vec2 position,
 			glm::vec2 scale)
@@ -26,6 +27,14 @@ public:
 	}
 
 	virtual ~IHUDNode() = default;
+
+	void onAttached(ITreeNode* /*node*/) {
+
+	}
+
+	void onDetached() {
+
+	}
 
 	virtual void draw() {
 		mProgram->use();

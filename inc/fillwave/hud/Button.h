@@ -18,12 +18,13 @@ namespace framework {
 class Button: public IHUDNode, public IPickable {
 public:
 	Button(Engine* engine,
+			const pTexture2D& texture,
 			glm::vec2 position,
 			glm::vec2 scale);
 	virtual ~Button();
 
-	void draw() override;
-
+	virtual void pick(glm::vec3 color) override;
+	virtual void unpick() override;
 	virtual void onPicked() override;
 	virtual void onUnpicked() override;
 
@@ -32,6 +33,7 @@ private:
 };
 
 } /* namespace framework */
+typedef std::shared_ptr<framework::Button> pButton;
 } /* namespace fillwave */
 
 #endif /* INC_FILLWAVE_HUD_BUTTON_H_ */

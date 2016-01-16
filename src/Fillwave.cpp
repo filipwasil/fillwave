@@ -32,7 +32,7 @@ namespace fillwave {
 
 Engine::Engine(std::string rootPath) {
 	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, rootPath));
-	/* This init has to be outside of the constructor,
+	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
 	mImpl->init();
@@ -40,7 +40,7 @@ Engine::Engine(std::string rootPath) {
 
 Engine::Engine(ANativeActivity* activity) {
 	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, activity));
-	/* This init has to be outside of the constructor,
+	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
 	mImpl->init();
@@ -48,7 +48,7 @@ Engine::Engine(ANativeActivity* activity) {
 #else
 Engine::Engine(GLint argc, GLchar* const argv[]) {
 	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, argc, argv));
-	/* This init has to be outside of the constructor,
+	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
 	mImpl->init();

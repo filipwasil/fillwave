@@ -16,7 +16,7 @@ namespace framework {
 class IPickable {
 public:
 	IPickable();
-	virtual ~IPickable();
+	virtual ~IPickable() = default;
 
 	bool isPickable() {
 		return mFlagPickable;

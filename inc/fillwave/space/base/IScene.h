@@ -35,15 +35,15 @@ public:
 	void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
 	/* Cursor */
-	void setCursor(pCursor cursor);
+	void setCursor(pCursor& cursor);
 	pCursor getCursor();
 	void drawCursor();
 	void moveCursor(glm::vec2 position);
 
 	/* Scene */
-	void setSkybox(pSkybox skybox);
+	void setSkybox(pSkybox& skybox);
 	void setAmbient(glm::vec3 cursor);
-	void setHUD(pHUD hud);
+	void setHUD(pHUD& hud);
 
 	/* Pickable */
 	void registerPickable(pEntity entity);
@@ -53,6 +53,7 @@ public:
 	void onEvent(EventType& event);
 
 	void draw(ICamera& c);
+	void drawHUD();
 	void drawDepth(ICamera& camera);
 	void drawDepthColor(ICamera& camera, glm::vec3& position);
 

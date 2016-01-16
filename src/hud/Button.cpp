@@ -13,11 +13,13 @@ namespace framework {
 
 Button::Button(
 		Engine* engine,
+		const pTexture2D& texture,
 		glm::vec2 position,
 		glm::vec2 scale)
-		: IHUDNode(engine->storeTextureRenderable(),
+		: IHUDNode(texture,
 				ProgramLoader(engine).getHUD(),
-				position, scale) {
+				position,
+				scale) {
 
 }
 
@@ -25,15 +27,19 @@ Button::~Button() {
 
 }
 
+void Button::pick(glm::vec3 /*color*/) {
+	mFlagPickable = true;
+}
+
+void Button::unpick() {
+	mFlagPickable = false;
+}
+
 void Button::onPicked() {
 
 }
 
 void Button::onUnpicked() {
-
-}
-
-void Button::draw() {
 
 }
 
