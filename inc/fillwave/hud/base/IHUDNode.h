@@ -11,6 +11,7 @@
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/models/base/ITreeNode.h>
+#include <fillwave/common/Blending.h>
 
 namespace fillwave {
 namespace framework {
@@ -22,7 +23,8 @@ public:
 			pProgram program,
 			glm::vec2 position,
 			glm::vec2 scale)
-			: mTexture(texture), mProgram(program), mPosition(position), mScale(scale) {
+			: mTexture(texture), mProgram(program), mPosition(position), mScale(scale),
+			  mBlending( {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA} ) {
 
 	}
 
@@ -37,14 +39,20 @@ public:
 	}
 
 	virtual void draw() {
+		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(mBlending.mSource, mBlending.mDestination);
+
 		mProgram->use();
-		mProgram->uniformPush("uTextureUnit",
-		FILLWAVE_DIFFUSE_UNIT);
+		mProgram->uniformPush("uTextureUnit", FILLWAVE_DIFFUSE_UNIT);
 	   mProgram->uniformPush("uPosition", mPosition);
 	   mProgram->uniformPush("uScale", mScale);
 		mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		mTexture->unbind();
+
+		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_BLEND);
 	}
 
 protected:
@@ -52,6 +60,7 @@ protected:
 	pProgram mProgram;
 	glm::vec2 mPosition;
 	glm::vec2 mScale;
+	Blending mBlending;
 };
 
 } /* namespace framework */

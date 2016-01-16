@@ -12,7 +12,6 @@
 #include <fillwave/core/buffers/VertexBufferText.h>
 #include <fillwave/core/pipeline/Program.h>
 
-#include <fillwave/common/Blending.h>
 #include <fillwave/hud/base/IHUDNode.h>
 #include <fillwave/loaders/FontLoader.h>
 #include <fillwave/models/base/Reloadable.h>
@@ -67,7 +66,6 @@ private:
 	Engine* mEngine;
 	GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
 	GLint mViewportWidth, mViewportHeight;
-	Blending mBlending;
 
 	pProgram createProgram(Engine* engine, eTextEffect effect);
 	void createVBO();

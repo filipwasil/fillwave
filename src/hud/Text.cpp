@@ -35,9 +35,6 @@ Text::Text(
 				mViewportWidth(engine->getScreenSize()[0]),
 				mViewportHeight(engine->getScreenSize()[1]) {
 
-	mBlending.mSource = GL_SRC_ALPHA;
-	mBlending.mDestination = GL_ONE_MINUS_SRC_ALPHA;
-
 	initPipeline();
 	createVBO();
 	initUniformsCache();

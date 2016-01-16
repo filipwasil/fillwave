@@ -349,16 +349,10 @@ const std::string fsHUD =
 		+
 		"in vec2 vTextureCoordinate;\n"
 		"uniform sampler2D uTextureUnit;\n"
-		"uniform vec4 uColour;\n"
 		+ gGLColorOutDefinition
 		+
 		"void main () {\n"
-				"  float pixelSize = 0.001;\n"
-				"  vec4 color = vec4(0.0);\n"
-				"  for (float i=-1.0;i<=1.0;i++)\n"
-				"     for (float j=-1.0;j<=1.0;j++)\n"
-				"        color += texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour;\n"
-				"  " + gGLColorOutAssingment + " = color * 0.11;\n"
+		      + gGLColorOutAssingment + " = texture (uTextureUnit, vTextureCoordinate);\n"
 				"}\n"
 				"\n";
 
@@ -386,7 +380,7 @@ const std::string vsHUD = gGLVersion + gGLVertexPrecision
 				"   }\n"
 				"   gl_Position = vertexPosition + vec4(uPosition, 0.0, 0.0);\n"
 				"   vPosition = vertexPosition.xy;\n"
-				"   vTextureCoordinate = (vertexPosition.xy);\n"
+				"   vTextureCoordinate = sign(vertexPosition.xy);\n"
 				"}\n";
 
 const std::string fsText =

@@ -27,9 +27,6 @@ public:
 	virtual void unpick() override;
 	virtual void onPicked() override;
 	virtual void onUnpicked() override;
-
-private:
-	pTexture2D mTexture;
 };
 
 } /* namespace framework */

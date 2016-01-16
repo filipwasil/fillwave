@@ -66,7 +66,9 @@ void IScene::draw(ICamera& camera) {
 }
 
 void IScene::drawHUD() {
-	mHUD->draw();
+	if (mHUD) {
+		mHUD->draw();
+	}
 }
 
 void IScene::drawCursor() {
