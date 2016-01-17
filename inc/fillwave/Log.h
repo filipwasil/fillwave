@@ -47,11 +47,11 @@ _AIX            Defined on AIX
 */
 
 #if defined (__linux__) || defined(__APPLE__)
-	#define FCOLOR_GREEN "31m"
-	#define FCOLOR_BLUE "31m"
-	#define FCOLOR_YELLOW "31m"
+	#define FCOLOR_GREEN "32m"
+	#define FCOLOR_BLUE "34m"
+	#define FCOLOR_YELLOW "33m"
 	#define FCOLOR_RED "31m"
-	#define FCOLOR_GREY "31m"
+	#define FCOLOR_GREY "35m"
 	#define FOPENCOLOROUTPUT "\033["
 	#define FCLOSECOLOROUTPUT "\033[0m"
 #elif defined(_WIN32)
