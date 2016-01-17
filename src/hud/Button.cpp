@@ -23,10 +23,6 @@ Button::Button(
 
 }
 
-Button::~Button() {
-
-}
-
 void Button::pick(glm::vec3 /*color*/) {
 	mFlagPickable = true;
 }

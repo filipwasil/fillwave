@@ -130,7 +130,7 @@ _AIX            Defined on AIX
 			} else {																									\
 				unique_niosfoinfsd = stdout;																	\
 			}																											\
-			fprintf(unique_niosfoinfsd,"%s%s[%s] <%s:%d>%s", FOPENCOLOROUTPUT, color, FTO_STRING(type),::_tag_.c_str(),__LINE__,FCLOSECOLOROUTPUT); 	\
+			fprintf(unique_niosfoinfsd,"%s%s[%s] <%s:%d> %s", FOPENCOLOROUTPUT, color, FTO_STRING(type),::_tag_.c_str(),__LINE__,FCLOSECOLOROUTPUT); 	\
 			(void)fprintf(unique_niosfoinfsd,__VA_ARGS__);												\
 			fprintf(unique_niosfoinfsd,"\n");																\
 			if (fillwave::isFileValid()) {																   \

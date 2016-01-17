@@ -33,10 +33,7 @@
 #ifndef COLORPICKINGCALLBACK_H_
 #define COLORPICKINGCALLBACK_H_
 
-#include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/actions/events/Event.h>
-
-#include <fillwave/models/Entity.h>
+#include <fillwave/Framework.h>
 
 namespace fillwave {
 class Engine;

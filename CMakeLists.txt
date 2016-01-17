@@ -126,6 +126,14 @@ IF(WIN32)
    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Windows.cmake)
 ENDIF(WIN32)
 
+# -----------------------------------------------
+# Tests
+# -----------------------------------------------
+
+if (FILLWAVE_TESTS)
+   include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/tests.cmake)
+endif()
+
 CONFIGURE_FILE(
 "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.h.in"
 "${CMAKE_CURRENT_SOURCE_DIR}/inc/fillwave/Config.h"

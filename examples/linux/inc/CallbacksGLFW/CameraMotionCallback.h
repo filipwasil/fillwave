@@ -8,7 +8,7 @@
 #ifndef CAMERAMOTIONCALLBACK_H_
 #define CAMERAMOTIONCALLBACK_H_
 
-#include <fillwave/actions/callbacks/Callback.h>
+#include <fillwave/Framework.h>
 #include <fillwave/Math.h>
 
 namespace fillwave {

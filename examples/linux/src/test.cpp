@@ -11,6 +11,7 @@
 
 /* Graphics */
 #include <fillwave/Fillwave.h>
+#include <fillwave/Framework.h>
 
 using namespace fillwave;
 using namespace fillwave::framework;

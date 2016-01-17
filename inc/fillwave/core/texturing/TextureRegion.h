@@ -43,15 +43,12 @@ private:
 };
 
 } /* core */
-static pTextureRegion buildTextureRegion(
+pTextureRegion buildTextureRegion(
 		pTexture2D texture,
 		GLfloat u1 = 0.0,
 		GLfloat v1 = 0.0,
 		GLfloat u2 = 1.0,
-		GLfloat v2 = 1.0) {
-	return pTextureRegion(new core::TextureRegion(texture, u1, v1, u2, v2));
-}
-
+		GLfloat v2 = 1.0);
 } /* fillwave */
 
 #endif /* TEXTUREREGION_H_ */

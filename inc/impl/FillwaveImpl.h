@@ -8,61 +8,11 @@
 #ifndef FILLWAVE_INC_FILLWAVEIMPL_H_
 #define FILLWAVE_INC_FILLWAVEIMPL_H_
 
-/* Plarform specific */
-#include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/loaders/AndroidLoader.h>
-
-/* core */
-#include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
-#include <fillwave/core/buffers/PixelBuffer.h>
-
-/* models */
-#include <fillwave/models/builders/BuilderModelManual.h>
-#include <fillwave/models/builders/BuilderModelExternalMaps.h>
-#include <fillwave/hud/Text.h>
-#include <fillwave/models/Skybox.h>
-#include <fillwave/models/shapes/BoxOcclusion.h>
-#include <fillwave/models/shapes/Box.h>
-
-/* space */
-#include <fillwave/space/SceneOrthographic.h>
-#include <fillwave/space/ScenePerspective.h>
-#include <fillwave/space/LightPoint.h>
-#include <fillwave/space/LightSpot.h>
-#include <fillwave/space/LightDirectional.h>
-
-/* actions */
-#include <fillwave/actions/events/TimeEvent.h>
-#include <fillwave/actions/events/TouchEvent.h>
-#include <fillwave/actions/events/ScrollEvent.h>
-#include <fillwave/actions/events/CursorEnterEvent.h>
-#include <fillwave/actions/events/CursorPositionEvent.h>
-#include <fillwave/actions/events/CharacterEvent.h>
-#include <fillwave/actions/events/CharacterModsEvent.h>
-#include <fillwave/actions/events/CursorPositionEvent.h>
-#include <fillwave/actions/events/MouseButtonEvent.h>
-#include <fillwave/actions/events/KeyboardEvent.h>
-#include <fillwave/actions/events/ResizeScreenEvent.h>
-#include <fillwave/actions/callbacks/FPSCallback.h>
-#include <fillwave/actions/callbacks/TimedMoveCallback.h>
-#include <fillwave/actions/callbacks/TimedRotateCallback.h>
-#include <fillwave/actions/callbacks/TimedScaleCallback.h>
-#include <fillwave/actions/callbacks/TimedCallback.h>
-#include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
-#include <fillwave/actions/callbacks/LoopCallback.h>
-#include <fillwave/actions/callbacks/SequenceCallback.h>
-
-/* Loaders */
-#include <fillwave/loaders/FileLoader.h>
+#include <fillwave/Core.h>
+#include <fillwave/Framework.h>
 
 /* Extras */
 #include <fillwave/Debugger.h>
-
-/* Operations */
-#include <fillwave/core/operations/PostProcessingPass.h>
-
-/* Common */
-#include <fillwave/common/PhysicsMeshBuffer.h>
 
 /* Management */
 #include <fillwave/management/ProgramManager.h>

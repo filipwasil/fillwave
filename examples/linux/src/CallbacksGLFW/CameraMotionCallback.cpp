@@ -6,8 +6,6 @@
  */
 
 #include "../../../linux/inc/CallbacksGLFW/CameraMotionCallback.h"
-
-#include <fillwave/actions/events/Event.h>
 #include <fillwave/Fillwave.h>
 
 namespace fillwave {

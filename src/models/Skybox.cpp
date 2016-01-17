@@ -141,5 +141,9 @@ inline void Skybox::initVBO() {
 	mVBO->attributesBind(mProgram);
 }
 
+pSkybox buildSkybox(Engine* engine, pTexture3D texture) {
+	return std::make_shared<framework::Skybox>(engine, texture);
+}
+
 } /* framework */
 } /* fillwave */

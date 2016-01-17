@@ -35,8 +35,7 @@
 
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
-#include <fillwave/actions/events/TimeEvent.h>
-#include <fillwave/actions/callbacks/Callback.h>
+#include <fillwave/Framework.h>
 
 namespace fillwave {
 class Engine;

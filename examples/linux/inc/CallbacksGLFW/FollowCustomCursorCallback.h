@@ -8,8 +8,7 @@
 #ifndef FOLLOWCUSTOMCURSORCALLBACK_H_
 #define FOLLOWCUSTOMCURSORCALLBACK_H_
 
-#include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/Framework.h>
 #include <fillwave/Fillwave.h>
 
 namespace fillwave {

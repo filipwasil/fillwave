@@ -30,7 +30,7 @@ Debugger::Debugger(Engine* engine)
 				Reloadable(engine),
 				mState(eDebuggerState::eOff),
 				mEngine(engine),
-				mVBO(pVertexBufferDebug(new core::VertexBufferDebug(1.0))),
+				mVBO(std::make_shared<core::VertexBufferDebug>(1.0)),
 				mMiniwindowSize(1.0 / 6.0),
 				mMiniwindowsOccupied(0) {
 

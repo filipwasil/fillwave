@@ -10,6 +10,7 @@
 
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
+#include <fillwave/Framework.h>
 
 namespace fillwave {
 class Engine;

@@ -119,9 +119,7 @@ private:
 			Callback* callback);
 };
 } /* framework */
-static pEntity buildEntity() {
-	return std::make_shared<framework::Entity>();
-}
+pEntity buildEntity();
 } /* fillwave */
 
 #endif /* ENTITY_H_ */

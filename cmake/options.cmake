@@ -11,6 +11,8 @@ option(FILLWAVE_COMPILATION_GLES_2_0 "Support old devices with gles 2.0 support"
 option(FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS "Usable for mesa shader compiler" ON)
 option(NDEBUG "Build with debug logs" OFF)
 
+option(FILLWAVE_TESTS "Build with gtest tests" OFF)
+
 option(FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)
 option(FILLWAVE_MODEL_LOADER_TINYOBJLOADER "Use Tinyobjloader" OFF)
 option(FILLWAVE_TEXTURE_LOADER_STB "Use STB texture loader" ON)
