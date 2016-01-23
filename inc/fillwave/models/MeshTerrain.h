@@ -46,6 +46,8 @@ public:
 
 	virtual ~MeshTerrain() = default;
 
+	void initIBO(std::vector<GLuint>& indices, GLuint density);
+
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 

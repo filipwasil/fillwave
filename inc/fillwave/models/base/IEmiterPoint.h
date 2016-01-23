@@ -14,7 +14,7 @@
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/texturing/Texture.h>
 #include <fillwave/core/rendering/TransformFeedback.h>
-#include <fillwave/common/Blending.h>
+#include <fillwave/core/pipeline/Blending.h>
 #include <fillwave/models/base/IReloadable.h>
 
 namespace fillwave {
@@ -25,7 +25,7 @@ namespace framework {
  * \brief Drawable Entity which emits particles.
  */
 
-class IEmiterPoint: public Entity, public IReloadable {
+class IEmiterPoint: public IReloadable, public Entity {
 public:
 	IEmiterPoint(
 			Engine* engine,

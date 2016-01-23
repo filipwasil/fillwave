@@ -10,6 +10,10 @@
 namespace fillwave {
 namespace framework {
 
+Hinge::Hinge() : Entity (GL_NONE) {
+
+}
+
 void Hinge::draw(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->draw(camera);

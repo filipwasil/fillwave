@@ -156,7 +156,7 @@ inline void EmiterPointCPU::coreDraw() {
 	glBlendFunc(mBlending.mSource, mBlending.mDestination);
 //   glBlendFuncSeparate(GL_ONE, GL_ONE, GL_ONE, GL_ONE);
 //   glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, (GLvoid*) 0);
+	glDrawElements(mRenderMode, mIBO->getElements(), mRenderDataType, (GLvoid*) 0);
 	FLOG_CHECK("Draw elements");
 	glDisable(GL_BLEND);
 	if (not mDepthTesting) {

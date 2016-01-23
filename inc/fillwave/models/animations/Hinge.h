@@ -19,7 +19,7 @@ namespace framework {
 
 class Hinge: public Entity {
 public:
-	Hinge() = default;
+	Hinge();
 	virtual ~Hinge() = default;
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);

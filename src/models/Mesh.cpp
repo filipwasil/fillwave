@@ -21,7 +21,7 @@ using namespace std;
 namespace fillwave {
 namespace framework {
 
-const GLint gOQVertices = 36;
+const GLint gOQVertices = 36; //todo move it from here
 
 Mesh::Mesh(
 		Engine* engine,
@@ -39,8 +39,9 @@ Mesh::Mesh(
 		pVertexBufferBasic vbo,
 		pIndexBufferBasic ibo,
 		Animator* boneManager,
-		GLenum drawType)
+		GLenum renderMode)
 		:
+				Entity(renderMode),
 				IReloadable(engine),
 				mMaterial(material),
 				mDiffuseMap(diffuseMap),
@@ -55,8 +56,7 @@ Mesh::Mesh(
 				mIBO(ibo),
 				mVBO(vbo),
 				mLightManager(lightManager),
-				mAnimator(boneManager),
-				mDrawType(drawType)
+				mAnimator(boneManager)
 #ifdef FILLWAVE_GLES_3_0
 #else
 						,
@@ -288,12 +288,12 @@ void Mesh::drawAOC(ICamera& camera) {
 void Mesh::onDraw() {
 	if (mIBO) {
 		/* Perform index drawing */
-		glDrawElements(mDrawType, mIBO->getElements(),
+		glDrawElements(mRenderMode, mIBO->getElements(),
 		GL_UNSIGNED_INT, (GLvoid*) 0);
 		FLOG_CHECK("glDrawElements failed");
 	} else {
 		/* Perform array drawing */
-		glDrawArrays(mDrawType, 0, mVBO->getElements());
+		glDrawArrays(mRenderMode, 0, mVBO->getElements());
 		FLOG_CHECK("glDrawArrays failed");
 	}
 }

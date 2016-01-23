@@ -33,8 +33,6 @@ MeshTerrain::MeshTerrain(
 				mChunkWidth(radius * 0.2 * 16 / density),
 				mJumpStep(density * 0.2 * 16 / density) {
 
-	Material _material;
-
 	pTexture2D diffuseMap = engine->storeTexture(diffuseMapPath.c_str(),
 			aiTextureType_DIFFUSE);
 
@@ -44,35 +42,18 @@ MeshTerrain::MeshTerrain(
 	pTexture2D specularMap = engine->storeTexture(specularMapPath.c_str(),
 			aiTextureType_SPECULAR);
 
-	int pointsWidth, pointsWidthNext, offset;
-
 	std::vector<GLuint> indices;
 
-	indices.reserve(density * density);
-
-	for (GLuint z = 0; z < density; z++) {
-		for (GLuint x = 0; x < density; x++) {
-			pointsWidth = density + 1;
-			pointsWidthNext = density + 2;
-			offset = x + z * pointsWidth;
-			indices.push_back(0 + offset);
-			indices.push_back(pointsWidth + offset);
-			indices.push_back(pointsWidthNext + offset);
-			indices.push_back(1 + offset);
-			indices.push_back(0 + offset);
-			indices.push_back(pointsWidthNext + offset);
-		}
-	}
+	initIBO(indices, density);
 
 	GLfloat gapSize = 0.2 * 16 / density;
 	GLint indexTerrainChunk = radius;
-
 	ProgramLoader loader(engine);
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			pMesh ptr = pMesh(
-					new Mesh(engine, _material,
+					new Mesh(engine, Material(),
 							buildTextureRegion(diffuseMap),
 							buildTextureRegion(normalMap),
 							buildTextureRegion(specularMap), program,
@@ -112,37 +93,18 @@ MeshTerrain::MeshTerrain(
 				mChunkWidth(radius * 0.2 * 16 / density),
 				mJumpStep(density * 0.2 * 16 / density) {
 
-	Material _material;
-
-	int pointsWidth, pointsWidthNext, offset;
-
 	std::vector<GLuint> indices;
 
-	indices.reserve(density * density);
-
-	for (GLuint z = 0; z < density; z++) {
-		for (GLuint x = 0; x < density; x++) {
-			pointsWidth = density + 1;
-			pointsWidthNext = density + 2;
-			offset = x + z * pointsWidth;
-			indices.push_back(0 + offset);
-			indices.push_back(pointsWidth + offset);
-			indices.push_back(pointsWidthNext + offset);
-			indices.push_back(1 + offset);
-			indices.push_back(0 + offset);
-			indices.push_back(pointsWidthNext + offset);
-		}
-	}
+	initIBO(indices, density);
 
 	GLfloat gapSize = 0.2 * 16 / density;
 	GLint indexTerrainChunk = radius;
-
 	ProgramLoader loader(engine);
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			pMesh ptr = pMesh(
-					new Mesh(engine, _material,
+					new Mesh(engine, Material(),
 							buildTextureRegion(diffuseMap),
 							buildTextureRegion(normalMap),
 							buildTextureRegion(specularMap), program,
@@ -161,6 +123,26 @@ MeshTerrain::MeshTerrain(
 					glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
 							density * gapSize * (GLfloat(z))));
 			attach(ptr);
+		}
+	}
+}
+
+void MeshTerrain::initIBO(std::vector<GLuint>& indices, GLuint density) {
+	int pointsWidth, pointsWidthNext, offset;
+
+	indices.reserve(density * density);
+
+	for (GLuint z = 0; z < density; z++) {
+		for (GLuint x = 0; x < density; x++) {
+			pointsWidth = density + 1;
+			pointsWidthNext = density + 2;
+			offset = x + z * pointsWidth;
+			indices.push_back(0 + offset);
+			indices.push_back(pointsWidth + offset);
+			indices.push_back(pointsWidthNext + offset);
+			indices.push_back(1 + offset);
+			indices.push_back(0 + offset);
+			indices.push_back(pointsWidthNext + offset);
 		}
 	}
 }

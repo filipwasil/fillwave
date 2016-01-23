@@ -52,7 +52,7 @@ public:
 			pVertexBufferBasic vbo = pVertexBufferBasic(),
 			pIndexBufferBasic ibo = pIndexBufferBasic(),
 			Animator* boneManager = nullptr,
-			GLenum drawType = GL_TRIANGLES);
+			GLenum renderMode = GL_TRIANGLES);
 
 	virtual ~Mesh() = default;
 
@@ -77,7 +77,7 @@ protected:
 	pTextureRegion mDiffuseMap;
 	pTextureRegion mNormalMap;
 	pTextureRegion mSpecularMap;
-	pProgram mProgram, mProgramDR, mProgramShadow, mProgramShadowColor,
+	pProgram mProgram, mProgramShadow, mProgramShadowColor,
 			mProgramOQ, mProgramAOGeometry, mProgramAOColor;
 
 	/* Buffers */
@@ -89,9 +89,6 @@ protected:
 
 	/* Animations */
 	Animator* mAnimator;
-
-	/* Draw */
-	GLenum mDrawType;
 
 	/* Occlusion cut off */
 	glm::mat4 mOcclusionMatrix;

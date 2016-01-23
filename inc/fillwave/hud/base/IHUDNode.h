@@ -10,8 +10,9 @@
 
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/pipeline/Program.h>
+#include <fillwave/core/pipeline/Blending.h>
+
 #include <fillwave/models/base/ITreeNode.h>
-#include <fillwave/common/Blending.h>
 
 namespace fillwave {
 namespace framework {

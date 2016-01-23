@@ -26,6 +26,7 @@ IEmiterPoint::IEmiterPoint(
 		GLfloat alphaCutOff)
 		:
 				IReloadable(engine),
+				Entity(GL_POINTS),
 				mStartSize(size),
 				mLifetime(lifetime),
 				mTexture(texture),

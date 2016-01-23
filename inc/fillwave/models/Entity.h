@@ -12,7 +12,7 @@
 #include <fillwave/common/IPickable.h>
 #include <fillwave/space/base/ICamera.h>
 #include <fillwave/models/base/IDrawable.h>
-#include <fillwave/models/base/ITreeNode.h>
+#include <fillwave/models/base/IRenderable.h>
 #include <fillwave/models/base/TreePtr.h>
 
 namespace fillwave {
@@ -34,13 +34,16 @@ namespace framework {
  */
 
 class Entity:
-		public Moveable,
+		public IRenderable,
 		public IDrawable,
-		public TreePtr<pEntity>,
-		public IPickable {
+		public IPickable,
+		public Moveable,
+		public TreePtr<pEntity> {
 public:
 	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
 			glm::quat(1.0, 0.0, 0.0, 0.0));
+
+	Entity(GLenum renderMode);
 
 	virtual ~Entity();
 
@@ -79,7 +82,6 @@ public:
 	virtual void draw(ICamera& camera) override;
 	virtual void drawPBRP(ICamera& camera) override;
 	virtual void drawDR(ICamera& camera) override;
-
 	virtual void drawDepth(ICamera& camera);
 	virtual void drawDepthColor(ICamera& camera, glm::vec3& position);
 	virtual void drawAOG(ICamera& camera);
@@ -87,7 +89,7 @@ public:
 	virtual void drawOcclusionBox(ICamera& camera);
 	virtual void drawPicking(ICamera& camera);
 
-	/* Render passes */
+	/* Interface IRenderable */
 	virtual void updateRenderer(IRenderer& renderer);
 
 	/* Animations */
