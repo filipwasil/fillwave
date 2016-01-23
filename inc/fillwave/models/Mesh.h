@@ -56,7 +56,7 @@ public:
 
 	virtual ~Mesh() = default;
 
-	void updateRenderer(IRenderer& renderer);
+	void updateRenderer(IRenderer& renderer) override;
 
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);

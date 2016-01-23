@@ -33,8 +33,12 @@ void Hinge::drawDR(ICamera& camera) {
 }
 
 void Hinge::updateRenderer(IRenderer& /*renderer*/) {
-	/* Hinge is not renderable */ //xxx add renderable class
+	/* Hinge meant to not be drawn */
 }
+
+//void Hinge::updateRendererData() {
+//	/* Hinge meant to not be drawn */
+//}
 
 } /* namespace framework */
 } /* namespace fillwave */

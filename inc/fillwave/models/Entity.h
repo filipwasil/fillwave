@@ -90,7 +90,7 @@ public:
 	virtual void drawPicking(ICamera& camera);
 
 	/* Interface IRenderable */
-	virtual void updateRenderer(IRenderer& renderer);
+	virtual void updateRenderer(IRenderer& renderer) override;
 
 	/* Animations */
 	virtual bool isAnimated() const;

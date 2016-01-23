@@ -10,14 +10,16 @@
 namespace fillwave {
 namespace framework {
 
-IRenderable::IRenderable(GLenum renderMode)
-:
-		mRenderMode(renderMode),
-		mRenderFirst(0),
-		mRenderCount(0),
-		mRenderDataType(GL_UNSIGNED_INT),
-		mRenderIndicesPointer(reinterpret_cast<GLvoid*>(0)) {
+IRenderable::IRenderable(GLenum renderMode) {
+	mRenderData.mMode = renderMode;
+	mRenderData.mFirst = 0;
+	mRenderData.mCount = 0;
+	mRenderData.mDataType = GL_UNSIGNED_INT;
+	mRenderData.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
+}
 
+RenderData IRenderable::getRenderData() {
+	return mRenderData;
 }
 
 } /* namespace framework */

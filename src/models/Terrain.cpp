@@ -16,6 +16,7 @@ namespace framework {
 
 Terrain::Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap)
 		: mProgram(program), mLightManager(engine->getLightManager()), mRadius(radius), mGap(gap) {
+
 }
 
 void Terrain::draw(ICamera& camera) {

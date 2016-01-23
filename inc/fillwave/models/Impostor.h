@@ -26,7 +26,7 @@ class Impostor: public Entity, public Finishable {
 private:
 	pTexture mTexture;
 	pSampler mSampler;
-	Blending mBlending;
+
 protected:
 	pProgram mProgram;
 	GLfloat mSize;

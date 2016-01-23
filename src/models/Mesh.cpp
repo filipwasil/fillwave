@@ -288,12 +288,12 @@ void Mesh::drawAOC(ICamera& camera) {
 void Mesh::onDraw() {
 	if (mIBO) {
 		/* Perform index drawing */
-		glDrawElements(mRenderMode, mIBO->getElements(),
-		GL_UNSIGNED_INT, (GLvoid*) 0);
+		glDrawElements(mRenderData.mMode, mIBO->getElements(),
+				mRenderData.mDataType, mRenderData.mIndicesPointer);
 		FLOG_CHECK("glDrawElements failed");
 	} else {
 		/* Perform array drawing */
-		glDrawArrays(mRenderMode, 0, mVBO->getElements());
+		glDrawArrays(mRenderData.mMode, mRenderData.mFirst, mVBO->getElements());
 		FLOG_CHECK("glDrawArrays failed");
 	}
 }

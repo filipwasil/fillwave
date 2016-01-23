@@ -9,6 +9,8 @@
 #define INC_FILLWAVE_CORE_RENDERERS_RENDERERPBRP_H_
 
 #include <fillwave/renderers/IRenderer.h>
+#include <unordered_map>
+#include <vector>
 
 namespace fillwave {
 namespace framework {
@@ -28,7 +30,7 @@ public:
 	void clear() override;
 
 private:
-	std::unordered_map<GLuint, std::vector<Entity*>> mRenderPasses;
+	std::unordered_map<GLuint, std::vector<Entity*> > mRenderPasses;
 };
 
 } /* namespace framework */

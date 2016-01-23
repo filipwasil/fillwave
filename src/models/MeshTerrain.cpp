@@ -52,8 +52,7 @@ MeshTerrain::MeshTerrain(
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
-			pMesh ptr = pMesh(
-					new Mesh(engine, Material(),
+			pMesh ptr = std::make_shared<Mesh>(engine, Material(),
 							buildTextureRegion(diffuseMap),
 							buildTextureRegion(normalMap),
 							buildTextureRegion(specularMap), program,
@@ -63,10 +62,9 @@ MeshTerrain::MeshTerrain(
 							loader.getAmbientOcclusionGeometry(),
 							loader.getAmbientOcclusionColor(),
 							engine->getLightManager(),
-							pVertexBufferBasic(
-									new core::VertexBufferBasic(constructor, density,
-											gapSize, indices)),
-							pIndexBufferBasic(new core::IndexBufferBasic(indices))));
+							std::make_shared<core::VertexBufferBasic>(constructor, density,
+											gapSize, indices),
+											std::make_shared<core::IndexBufferBasic>(indices));
 
 			ptr->moveTo(
 					glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
@@ -103,8 +101,7 @@ MeshTerrain::MeshTerrain(
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
-			pMesh ptr = pMesh(
-					new Mesh(engine, Material(),
+			pMesh ptr = std::make_shared<Mesh>(engine, Material(),
 							buildTextureRegion(diffuseMap),
 							buildTextureRegion(normalMap),
 							buildTextureRegion(specularMap), program,
@@ -114,10 +111,9 @@ MeshTerrain::MeshTerrain(
 							loader.getAmbientOcclusionGeometry(),
 							loader.getAmbientOcclusionColor(),
 							engine->getLightManager(),
-							pVertexBufferBasic(
-									new core::VertexBufferBasic(constructor, density,
-											gapSize, indices)),
-							pIndexBufferBasic(new core::IndexBufferBasic(indices))));
+							std::make_shared<core::VertexBufferBasic>(constructor, density,
+											gapSize, indices),
+											std::make_shared<core::IndexBufferBasic>(indices));
 
 			ptr->moveTo(
 					glm::vec3(density * gapSize * (GLfloat(x)), 0.0,

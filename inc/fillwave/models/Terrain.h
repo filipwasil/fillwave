@@ -24,16 +24,20 @@ namespace framework {
 class Terrain: public Entity {
 public:
 	Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap);
-
 	virtual ~Terrain() = default;
 
 	void addChunk(pVoxelChunk chunk);
-
-	void draw(ICamera& camera);
-	void drawPBRP(ICamera& camera);
-
 	void distanceCheck(ICamera& camera);
-   void updateRenderer(IRenderer& renderer);
+
+	/* IDrawable */
+	void draw(ICamera& camera) override;
+	void drawPBRP(ICamera& camera) override;
+
+	/* IRenderable */
+   void updateRenderer(IRenderer& renderer) override;
+
+protected:
+	void updateRendererData();
 
 private:
    pProgram mProgram;

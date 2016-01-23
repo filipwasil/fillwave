@@ -28,7 +28,6 @@ public:
 	virtual void drawAOC(ICamera& camera) = 0;
 	virtual void drawOcclusionBox(ICamera& camera) = 0;
 	virtual void drawPicking(ICamera& camera) = 0;
-	virtual void updateRenderer(IRenderer& renderer) = 0;
 };
 
 } /* namespace framework */

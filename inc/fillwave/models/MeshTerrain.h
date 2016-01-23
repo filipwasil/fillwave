@@ -48,10 +48,12 @@ public:
 
 	void initIBO(std::vector<GLuint>& indices, GLuint density);
 
+	/* IDrawable */
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 
-	void updateRenderer(IRenderer& renderer);
+	/* IRenderable */
+	void updateRenderer(IRenderer& renderer) override;
 
 private:
 	LightManager* mLightManager;

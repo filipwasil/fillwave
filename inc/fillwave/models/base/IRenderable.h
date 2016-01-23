@@ -16,34 +16,25 @@ namespace framework {
 
 class IRenderer;
 
-class IRenderable {
-public:
-	IRenderable(GLenum renderMode);
-	virtual ~IRenderable() = default;
+enum eRenderHandles {
+	eRenderHandleVAO,
+	eRenderHandleIBO,
+	eRenderHandleVBO,
+	eRenderHandleDiffuse,
+	eRenderHandleNormal,
+	eRenderHandleSpecular,
+	eRenderHandlesSize
+};
 
-	enum eRenderHandles {
-		eProgram = 0,
-		eVAO,
-		eIBO,
-		eVBO,
-		eDiffuse,
-		eNormal,
-		eSpecular,
-		eRenderHandlesSize
-	};
+struct RenderData {
+	GLenum mMode;
+	GLsizei mFirst;
+	GLsizei mCount;
+	GLenum mDataType;
+	GLvoid* mIndicesPointer;
+	Blending mBlend;
+	GLuint mHandles[eRenderHandlesSize];
 
-	virtual void updateRenderer(IRenderer& renderer) = 0;
-
-protected:
-	GLenum mRenderMode;
-	GLsizei mRenderFirst;
-	GLsizei mRenderCount;
-	GLenum mRenderDataType;
-	GLvoid* mRenderIndicesPointer;
-	Blending mBlendSource, mBlendDst;
-	GLuint mRenderData[eRenderHandlesSize];
-
-private:
 	struct {
 		GLbyte bVAO :1;
 		GLbyte bIBO :1;
@@ -53,7 +44,21 @@ private:
 		GLbyte bSpecular :1;
 		GLbyte bBlending :1;
 		GLbyte bIsContainer :1;
-	} mDrawStatus;
+	} mStatus;
+};
+
+class IRenderable {
+public:
+	IRenderable(GLenum renderMode);
+	virtual ~IRenderable() = default;
+
+	RenderData getRenderData();
+
+	virtual void updateRenderer(IRenderer& renderer) = 0;
+
+protected:
+//	virtual void updateRendererData() = 0;
+	RenderData mRenderData;
 };
 
 } /* namespace framework */

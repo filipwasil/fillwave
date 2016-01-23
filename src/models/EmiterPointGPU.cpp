@@ -83,11 +83,9 @@ EmiterPointGPU::EmiterPointGPU(
 
 	mNoiseTextureHandle = Create3DNoiseTexture(noiseTextureSize, howMany / 3); //xxx todo store in Manager
 
-	mVBOGPU[0] = pVertexBufferParticlesGPU(
-			new core::VertexBufferParticlesGPU(particles)); //xxx todo store in engine
-	mVBOGPU[1] = pVertexBufferParticlesGPU(
-			new core::VertexBufferParticlesGPU(particles)); //xxx todo store in engine
-	mIBO = pIndexBufferParticles(new core::IndexBufferParticles(mHowMany)); //xxx todo store in engine
+	mVBOGPU[0] = std::make_shared<core::VertexBufferParticlesGPU>(particles); //xxx todo store in engine
+	mVBOGPU[1] = std::make_shared<core::VertexBufferParticlesGPU>(particles); //xxx todo store in engine
+	mIBO = std::make_shared<core::IndexBufferParticles>(mHowMany); //xxx todo store in engine
 
 	initPipeline();
 	initVBO();
@@ -128,7 +126,7 @@ void EmiterPointGPU::draw(ICamera& camera) {
 
 	core::TransformFeedback::begin(GL_POINTS);
 
-	glDrawArrays(mRenderMode, mRenderFirst, mVBOGPU[mSrcIndex]->getElements());
+	glDrawArrays(mRenderData.mMode, mRenderData.mFirst, mVBOGPU[mSrcIndex]->getElements());
 	FLOG_CHECK("Drawn buffer index %d drawing %d ", mSrcIndex,
 			mVBOGPU[mSrcIndex]->getElements());
 
@@ -184,8 +182,8 @@ inline void EmiterPointGPU::coreDraw() {
 	}
 
 	glEnable(GL_BLEND);
-	glBlendFunc(mBlending.mSource, mBlending.mDestination);
-	glDrawElements(mRenderMode, mIBO->getElements(), mRenderDataType, mRenderIndicesPointer);
+	glBlendFunc(mRenderData.mBlend.mSrc, mRenderData.mBlend.mDst);
+	glDrawElements(mRenderData.mMode, mIBO->getElements(), mRenderData.mDataType, mRenderData.mIndicesPointer);
 	FLOG_CHECK("Draw elements");
 
 	if (not mDepthTesting) {

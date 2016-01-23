@@ -27,8 +27,8 @@ Impostor::Impostor(
 				mTexture(texture),
 				mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)),
 				mSize(size) {
-	mBlending.mSource = blendingSource;
-	mBlending.mDestination = blendingDestination;
+	mRenderData.mBlend.mSrc = blendingSource;
+	mRenderData.mBlend.mDst = blendingDestination;
 }
 
 void Impostor::coreDraw() {
@@ -37,7 +37,7 @@ void Impostor::coreDraw() {
 	}
 
 	glEnable(GL_BLEND);
-	glBlendFunc(mBlending.mSource, mBlending.mDestination);
+	glBlendFunc(mRenderData.mBlend.mSrc, mRenderData.mBlend.mDst);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glDisable(GL_BLEND);
 	core::Texture2D::unbind2DTextures();

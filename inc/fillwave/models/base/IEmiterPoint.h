@@ -41,8 +41,8 @@ public:
 
 	virtual ~IEmiterPoint() = default;
 
-	void updateRenderer(IRenderer& renderer);
-	void setBlendingFunction(GLenum sourceFactor, GLenum destinationFactor);
+	void updateRenderer(IRenderer& renderer) override;
+	void setBlending(GLenum sourceFactor, GLenum destinationFactor);
 
 	virtual void update(GLfloat timeElapsedSec) = 0;
 	virtual void draw(ICamera& camera) = 0;
@@ -55,7 +55,6 @@ protected:
 	GLfloat mHowMany;
 	GLboolean mDepthTesting;
 	GLfloat mAlphaCutOff;
-	Blending mBlending;
 	pProgram mProgram;
 	pIndexBufferParticles mIBO;
 };

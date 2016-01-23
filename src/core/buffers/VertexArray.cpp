@@ -40,5 +40,10 @@ void VertexArray::reload() {
 	FLOG_CHECK("reload");
 }
 
+void VertexArray::bindVAO(GLuint handle) {
+	glBindVertexArray(handle);
+	FLOG_CHECK("Could not bind the VAO");
+}
+
 } /* core */
 } /* Fillwave */

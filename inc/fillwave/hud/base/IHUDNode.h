@@ -46,7 +46,7 @@ public:
 	virtual void draw() {
 		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
-		glBlendFunc(mBlending.mSource, mBlending.mDestination);
+		glBlendFunc(mBlending.mSrc, mBlending.mDst);
 
 		mProgram->use();
 	   mProgram->uniformPush("uPosition", mPosition);

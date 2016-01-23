@@ -88,9 +88,8 @@ EmiterPointCPU::EmiterPointCPU(
 	}
 
 	/* Initialize OpenGL stuff */
-	mVBO = pVertexBufferParticles(
-			new core::VertexBufferParticles(velocities, positions, times)); //xxx todo store in engine
-	mIBO = pIndexBufferParticles(new core::IndexBufferParticles(howMany)); //xxx todo store in engine
+	mVBO = std::make_shared<core::VertexBufferParticles>(velocities, positions, times); //xxx todo store in engine
+	mIBO = std::make_shared<core::IndexBufferParticles>(howMany); //xxx todo store in engine
 
 	initPipeline();
 	initVBO();
@@ -153,10 +152,10 @@ inline void EmiterPointCPU::coreDraw() {
 	}
 
 	glEnable(GL_BLEND);
-	glBlendFunc(mBlending.mSource, mBlending.mDestination);
+	glBlendFunc(mRenderData.mBlend.mSrc, mRenderData.mBlend.mDst);
 //   glBlendFuncSeparate(GL_ONE, GL_ONE, GL_ONE, GL_ONE);
 //   glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-	glDrawElements(mRenderMode, mIBO->getElements(), mRenderDataType, (GLvoid*) 0);
+	glDrawElements(mRenderData.mMode, mIBO->getElements(), mRenderData.mDataType, mRenderData.mIndicesPointer);
 	FLOG_CHECK("Draw elements");
 	glDisable(GL_BLEND);
 	if (not mDepthTesting) {

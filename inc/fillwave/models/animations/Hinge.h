@@ -21,10 +21,15 @@ class Hinge: public Entity {
 public:
 	Hinge();
 	virtual ~Hinge() = default;
+
+	/* IDrawable */
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 	void drawDR(ICamera& camera);
-	void updateRenderer(IRenderer& renderer);
+
+	/* IRenderable */
+	void updateRenderer(IRenderer& renderer) override;
+//	void updateRendererData() override;
 };
 
 } /* namespace framework */

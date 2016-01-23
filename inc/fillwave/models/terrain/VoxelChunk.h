@@ -44,7 +44,7 @@ public:
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 
-   void updateRenderer(IRenderer& renderer);
+   void updateRenderer(IRenderer& renderer) override;
 
 	GLint getSize();
 

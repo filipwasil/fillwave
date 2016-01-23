@@ -9,6 +9,7 @@
 #define INC_FILLWAVE_RENDERERS_RENDERERFR_H_
 
 #include <fillwave/renderers/IRenderer.h>
+#include <vector>
 
 namespace fillwave {
 namespace framework {

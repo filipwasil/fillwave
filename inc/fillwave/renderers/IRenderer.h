@@ -10,8 +10,6 @@
 
 #include <fillwave/OpenGL.h>
 #include <fillwave/models/base/IRenderable.h>
-#include <unordered_map>
-#include <vector>
 #include <memory>
 
 namespace fillwave {

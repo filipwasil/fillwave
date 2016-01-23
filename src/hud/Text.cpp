@@ -48,7 +48,7 @@ void Text::draw() {
 
 	glDisable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
-	glBlendFunc(mBlending.mSource, mBlending.mDestination);
+	glBlendFunc(mBlending.mSrc, mBlending.mDst);
 
 	core::Uniform::push(mUniformLocationCacheTextureUnit, FILLWAVE_DIFFUSE_UNIT);
 

@@ -34,8 +34,8 @@ IEmiterPoint::IEmiterPoint(
 				mHowMany(howMany),
 				mDepthTesting(depthTesting),
 				mAlphaCutOff(alphaCutOff) {
-	mBlending.mSource = blendingSource;
-	mBlending.mDestination = blendingDestination;
+	mRenderData.mBlend.mSrc = blendingSource;
+	mRenderData.mBlend.mDst = blendingDestination;
 
 #ifdef FILLWAVE_GLES_3_0
 #else
@@ -45,11 +45,11 @@ IEmiterPoint::IEmiterPoint(
 #endif
 }
 
-void IEmiterPoint::setBlendingFunction(
+void IEmiterPoint::setBlending(
 		GLenum sourceFactor,
 		GLenum destinationFactor) {
-	mBlending.mSource = sourceFactor;
-	mBlending.mDestination = destinationFactor;
+	mRenderData.mBlend.mSrc = sourceFactor;
+	mRenderData.mBlend.mDst = destinationFactor;
 }
 
 void IEmiterPoint::updateRenderer(IRenderer& renderer) {
