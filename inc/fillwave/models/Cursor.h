@@ -38,9 +38,7 @@ private:
 } /* framework */
 typedef std::shared_ptr<framework::Cursor> pCursor;
 
-static pCursor buildCursor(Engine* engine, pTexture texture) {
-	return pCursor(new framework::Cursor(engine, texture));
-}
+pCursor buildCursor(Engine* engine, pTexture texture);
 
 } /* fillwave */
 

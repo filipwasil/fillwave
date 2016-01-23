@@ -33,10 +33,6 @@
 #include "../../../linux/inc/CallbacksGLFW/MoveCameraCallback.h"
 
 #include <fillwave/Fillwave.h>
-#include <fillwave/actions/events/KeyboardEvent.h>
-#include <fillwave/actions/events/MouseButtonEvent.h>
-#include <fillwave/actions/events/ScrollEvent.h>
-
 #include <GLFW/glfw3.h>
 
 FLOGINIT("MoveCameraCallback", FERROR | FFATAL)

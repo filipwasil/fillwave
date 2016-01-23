@@ -48,4 +48,7 @@ pICamera ScenePerspective::getCamera() {
 }
 
 } /* models */
+pScenePerspective buildScenePerspective(pCameraPerspective camera) {
+	return std::make_shared<framework::ScenePerspective>(camera);
+}
 } /* fillwave */

@@ -404,5 +404,47 @@ void Model::updateRenderer(IRenderer& renderer) {
 	renderer.update(&id, this);
 }
 
+pModel buildModel(
+		Engine* engine,
+		pProgram program,
+		framework::Shape<core::VertexBasic>& shape,
+		pTexture2D diffuseMap,
+		pTexture2D normalMap,
+		pTexture2D specularMap,
+		framework::Material material) {
+	return std::make_shared<framework::Model>(engine, program, shape, diffuseMap, normalMap,
+					specularMap, material);
+}
+
 } /* framework */
+pModel buildModel(
+		Engine* engine,
+		pProgram program,
+		const std::string& shapePath,
+		const std::string& diffuseMapPath,
+		const std::string& normalMapPath,
+		const std::string& specularMapPath) {
+	return std::make_shared<framework::Model>(engine, program, shapePath, diffuseMapPath,
+					normalMapPath, specularMapPath);
+}
+
+pModel buildModel(
+		Engine* engine,
+		pProgram program,
+		const std::string& shapePath,
+		pTexture2D diffuseMap,
+		pTexture2D normalMap,
+		pTexture2D specularMap,
+		framework::Material material) {
+	return std::make_shared<framework::Model>(engine, program, shapePath, diffuseMap, normalMap,
+					specularMap, material);
+}
+
+pModel buildModel(
+		Engine* engine,
+		pProgram program,
+		const std::string& shapePath) {
+	return std::make_shared<framework::Model>(engine, program, shapePath);
+}
+
 } /* fillwave */

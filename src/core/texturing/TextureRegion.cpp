@@ -33,4 +33,12 @@ GLfloat TextureRegion::convertV(GLfloat v) {
 }
 
 } /* core */
+pTextureRegion buildTextureRegion(
+		pTexture2D texture,
+		GLfloat u1,
+		GLfloat v1,
+		GLfloat u2,
+		GLfloat v2) {
+	return std::make_shared<core::TextureRegion>(texture, u1, v1, u2, v2);
+}
 } /* fillwave */

@@ -238,4 +238,7 @@ void Entity::updateRenderer(IRenderer& renderer) {
 }
 
 } /* framework */
+pEntity buildEntity() {
+	return std::make_shared<framework::Entity>();
+}
 } /* fillwave */

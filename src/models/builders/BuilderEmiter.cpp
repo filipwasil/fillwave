@@ -6,7 +6,8 @@
  */
 
 #include <fillwave/models/builders/BuilderEmiter.h>
-
+#include <fillwave/models/EmiterPointCPU.h>
+#include <fillwave/models/EmiterPointGPU.h>
 #include <fillwave/Fillwave.h>
 
 namespace fillwave {
@@ -33,21 +34,19 @@ BuilderEmiter::BuilderEmiter(Engine* engine)
 }
 
 pIEmiterPoint BuilderEmiter::buildEmiterGPU() {
-	return pIEmiterPoint(
-			new EmiterPointGPU(mEngine, mEmitingSourceRate, mHowMany,
+	return std::make_shared<EmiterPointGPU>(mEngine, mEmitingSourceRate, mHowMany,
 					mColor, mAcceleration, mStartVelocity, mRobustnessVelocity,
 					mStartPosition, mRobustnessPosition, mStartSize, mLifetime,
 					mTexture, mBlendingSource, mBlendingDestination, mDepthTesting,
-					mAlphaCutOff));
+					mAlphaCutOff);
 }
 
 pIEmiterPoint BuilderEmiter::buildEmiterCPU() {
-	return pIEmiterPoint(
-			new EmiterPointCPU(mEngine, mEmitingSourceRate, mHowMany, mColor,
+	return std::make_shared<EmiterPointCPU>(mEngine, mEmitingSourceRate, mHowMany, mColor,
 					mAcceleration, mStartVelocity, mRobustnessVelocity,
 					mStartPosition, mRobustnessPosition, mStartSize, mLifetime,
 					mTexture, mBlendingSource, mBlendingDestination, mDepthTesting,
-					mAlphaCutOff));
+					mAlphaCutOff);
 }
 
 BuilderEmiter& BuilderEmiter::setEmitingSourceRate(GLfloat emitingSourceRate) {

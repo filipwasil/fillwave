@@ -9,6 +9,7 @@
 #define PICKABLEMODEL_H_
 
 #include <fillwave/Fillwave.h>
+#include <fillwave/Framework.h>
 
 using namespace fillwave;
 

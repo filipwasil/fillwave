@@ -130,47 +130,36 @@ private:
 
 typedef std::shared_ptr<framework::Model> pModel;
 
-static pModel buildModel(
+pModel buildModel(
 		Engine* engine,
 		pProgram program,
 		framework::Shape<core::VertexBasic>& shape,
 		pTexture2D diffuseMap = pTexture2D(),
 		pTexture2D normalMap = pTexture2D(),
 		pTexture2D specularMap = pTexture2D(),
-		framework::Material material = framework::Material()) {
-	return std::make_shared<framework::Model>(engine, program, shape, diffuseMap, normalMap,
-					specularMap, material);
-}
+		framework::Material material = framework::Material());
 
-static pModel buildModel(
+pModel buildModel(
 		Engine* engine,
 		pProgram program,
 		const std::string& shapePath,
 		const std::string& diffuseMapPath,
 		const std::string& normalMapPath = "",
-		const std::string& specularMapPath = "") {
-	return std::make_shared<framework::Model>(engine, program, shapePath, diffuseMapPath,
-					normalMapPath, specularMapPath);
-}
+		const std::string& specularMapPath = "");
 
-static pModel buildModel(
+pModel buildModel(
 		Engine* engine,
 		pProgram program,
 		const std::string& shapePath,
 		pTexture2D diffuseMap,
 		pTexture2D normalMap = pTexture2D(),
 		pTexture2D specularMap = pTexture2D(),
-		framework::Material material = framework::Material()) {
-	return std::make_shared<framework::Model>(engine, program, shapePath, diffuseMap, normalMap,
-					specularMap, material);
-}
+		framework::Material material = framework::Material());
 
-static pModel buildModel(
+pModel buildModel(
 		Engine* engine,
 		pProgram program,
-		const std::string& shapePath) {
-	return std::make_shared<framework::Model>(engine, program, shapePath);
-}
+		const std::string& shapePath);
 
 } /* fillwave */
 

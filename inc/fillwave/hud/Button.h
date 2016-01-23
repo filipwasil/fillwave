@@ -21,7 +21,7 @@ public:
 			const pTexture2D& texture,
 			glm::vec2 position,
 			glm::vec2 scale);
-	virtual ~Button();
+	virtual ~Button() = default;
 
 	/* IPickable */
 	virtual void pick(glm::vec3 color) override;

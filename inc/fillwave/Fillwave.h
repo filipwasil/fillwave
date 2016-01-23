@@ -8,60 +8,14 @@
 #ifndef FILLWAVE_H_
 #define FILLWAVE_H_
 
+#include <fillwave/space/base/IScene.h>
 
-/* Callbacks */
-#include <fillwave/actions/callbacks/TimedMoveCallback.h>
-#include <fillwave/actions/callbacks/TimedRotateCallback.h>
-#include <fillwave/actions/callbacks/TimedScaleCallback.h>
-#include <fillwave/actions/callbacks/FPSCallback.h>
-#include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
-#include <fillwave/actions/callbacks/LoopCallback.h>
-#include <fillwave/actions/callbacks/SequenceCallback.h>
-
-/* Events */
-#include <fillwave/actions/events/TimeEvent.h>
-#include <fillwave/actions/events/TouchEvent.h>
-#include <fillwave/actions/events/ScrollEvent.h>
-#include <fillwave/actions/events/CursorEnterEvent.h>
-#include <fillwave/actions/events/CursorPositionEvent.h>
-#include <fillwave/actions/events/CharacterEvent.h>
-#include <fillwave/actions/events/CharacterModsEvent.h>
-#include <fillwave/actions/events/CursorPositionEvent.h>
-#include <fillwave/actions/events/MouseButtonEvent.h>
-#include <fillwave/actions/events/KeyboardEvent.h>
-
-/* effects */
-#include <fillwave/models/effects/Fog.h>
-#include <fillwave/models/effects/BoostColor.h>
-#include <fillwave/models/effects/TextureOnly.h>
-
-/* models */
-#include <fillwave/models/builders/BuilderModelManual.h>
-#include <fillwave/models/builders/BuilderModelExternalMaps.h>
-#include <fillwave/models/Skybox.h>
-#include <fillwave/models/shapes/BoxOcclusion.h>
-#include <fillwave/models/shapes/Box.h>
-
-/* HUD */
-#include <fillwave/hud/Button.h>
-#include <fillwave/hud/ProgressBar.h>
-
-/* space */
-#include <fillwave/space/SceneOrthographic.h>
-#include <fillwave/space/ScenePerspective.h>
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
 #include <fillwave/space/LightDirectional.h>
+#include <fillwave/hud/Text.h>
 
-/* Particles */
-#include <fillwave/models/Impostor.h>
-#include <fillwave/models/EmiterPointGPU.h>
-#include <fillwave/models/EmiterPointCPU.h>
-
-/* Terrain */
-#include <fillwave/models/Terrain.h>
-#include <fillwave/models/MeshTerrain.h>
-
+/* Debugger */
 #include <fillwave/Debugger.h>
 
 /* Loaders */

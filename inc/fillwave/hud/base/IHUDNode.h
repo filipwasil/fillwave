@@ -23,8 +23,12 @@ public:
 			pProgram program,
 			glm::vec2 position,
 			glm::vec2 scale)
-			: mTexture(texture), mProgram(program), mPosition(position), mScale(scale),
-			  mBlending( {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA} ) {
+			:
+					mTexture(texture),
+					mProgram(program),
+					mPosition(position),
+					mScale(scale),
+					mBlending({GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }) {
 
 	}
 

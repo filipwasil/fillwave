@@ -43,9 +43,7 @@ private:
 };
 
 } /* models */
-static pSceneOrthographic buildSceneOrthographic(pCameraOrthographic camera =
-		pCameraOrthographic()) {
-	return std::make_shared<framework::SceneOrthographic>(camera);
-}
+pSceneOrthographic buildSceneOrthographic(pCameraOrthographic camera =
+		pCameraOrthographic());
 } /* fillwave */
 #endif /* SCENEOrthographic_H_ */
