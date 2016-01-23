@@ -321,7 +321,7 @@ VoxelChunk::VoxelChunk(
 		VoxelConstructor* constructor,
 		GLfloat gap)
 		:
-				Reloadable(engine),
+				IReloadable(engine),
 				mVoxelGap(gap),
 				mSize(size),
 				mProgram(program),

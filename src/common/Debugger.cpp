@@ -27,7 +27,7 @@ namespace framework {
 
 Debugger::Debugger(Engine* engine)
 		:
-				Reloadable(engine),
+				IReloadable(engine),
 				mState(eDebuggerState::eOff),
 				mEngine(engine),
 				mVBO(std::make_shared<core::VertexBufferDebug>(1.0)),

@@ -12,7 +12,7 @@
 #include <fillwave/models/terrain/VoxelConstructor.h>
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/core/texturing/Texture.h>
-#include <fillwave/models/base/Reloadable.h>
+#include <fillwave/models/base/IReloadable.h>
 #include <fillwave/models/Entity.h>
 
 namespace fillwave {
@@ -24,7 +24,7 @@ class LightManager;
  * \brief Block of Voxel objects.
  */
 
-class VoxelChunk: public Entity, public Reloadable {
+class VoxelChunk: public Entity, public IReloadable {
 public:
 	VoxelChunk(
 			pProgram program,

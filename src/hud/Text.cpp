@@ -25,7 +25,7 @@ Text::Text(
 		glm::vec4 color,
 		eTextEffect effect)
 		:
-				Reloadable(engine),
+				IReloadable(engine),
 				IHUDNode(texture, createProgram(engine, effect), position, glm::vec2(scale, scale)),
 				mText(text),
 				mColor(color),

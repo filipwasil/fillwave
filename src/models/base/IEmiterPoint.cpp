@@ -25,7 +25,7 @@ IEmiterPoint::IEmiterPoint(
 		GLboolean depthTesting,
 		GLfloat alphaCutOff)
 		:
-				Reloadable(engine),
+				IReloadable(engine),
 				mStartSize(size),
 				mLifetime(lifetime),
 				mTexture(texture),

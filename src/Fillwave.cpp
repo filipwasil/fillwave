@@ -175,7 +175,7 @@ pSampler Engine::storeSO(GLint textureUnit) {
 	return mImpl->storeSO(textureUnit);
 }
 
-pVertexArray Engine::storeVAO(framework::Reloadable* user) {
+pVertexArray Engine::storeVAO(framework::IReloadable* user) {
 	return mImpl->storeVAO(user);
 }
 

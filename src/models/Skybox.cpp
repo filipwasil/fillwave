@@ -16,7 +16,7 @@ namespace fillwave {
 namespace framework {
 
 Skybox::Skybox(Engine* engine, pTexture3D texture)
-		: Reloadable(engine), mTexture(texture) {
+		: IReloadable(engine), mTexture(texture) {
 
 	ProgramLoader loader(engine);
 

@@ -1,5 +1,5 @@
 /*
- * Renderable.h
+ * IReloadable.h
  *
  *  Created on: May 24, 2015
  *      Author: Filip Wasil
@@ -19,11 +19,11 @@ namespace framework {
  * \brief Encapsulates reloadable objects.
  */
 
-class Reloadable {
+class IReloadable {
 public:
-	Reloadable(Engine* engine);
+	IReloadable(Engine* engine);
 
-	virtual ~Reloadable() = default;
+	virtual ~IReloadable() = default;
 
 	virtual void initBuffers() = 0;
 	virtual void initPipeline() = 0;

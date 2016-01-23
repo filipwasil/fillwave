@@ -155,7 +155,7 @@ public:
 	pSampler storeSO(GLint textureUnit);
 
 	/* Store vertex array objects */
-	pVertexArray storeVAO(framework::Reloadable* user = nullptr);
+	pVertexArray storeVAO(framework::IReloadable* user = nullptr);
 
 	/* Clear */
 	void clearText(pText text);

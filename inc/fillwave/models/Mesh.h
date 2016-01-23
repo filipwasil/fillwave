@@ -16,8 +16,8 @@
 #include <fillwave/core/operations/ConditionalRender.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/base/Material.h>
-#include <fillwave/models/base/Reloadable.h>
 #include <fillwave/core/pipeline/Fence.h>
+#include <fillwave/models/base/IReloadable.h>
 #include <fillwave/renderers/IRenderer.h>
 
 namespace fillwave {
@@ -34,7 +34,7 @@ namespace framework {
  * \brief Basic drawable Entity.
  */
 
-class Mesh: public Entity, public Reloadable {
+class Mesh: public Entity, public IReloadable {
 public:
 	Mesh(
 			Engine* engine,

@@ -41,7 +41,7 @@ Mesh::Mesh(
 		Animator* boneManager,
 		GLenum drawType)
 		:
-				Reloadable(engine),
+				IReloadable(engine),
 				mMaterial(material),
 				mDiffuseMap(diffuseMap),
 				mNormalMap(normalMap),

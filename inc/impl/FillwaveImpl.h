@@ -220,7 +220,7 @@ struct Engine::EngineImpl {
 
 	pSampler storeSO(GLint textureUnit);
 
-	pVertexArray storeVAO(framework::Reloadable* user = nullptr);
+	pVertexArray storeVAO(framework::IReloadable* user = nullptr);
 };
 
 #ifdef __ANDROID__
@@ -916,7 +916,7 @@ pSampler Engine::EngineImpl::storeSO(GLint textureUnit) {
 	return mSamplerManager->get(textureUnit);
 }
 
-pVertexArray Engine::EngineImpl::storeVAO(framework::Reloadable* user) {
+pVertexArray Engine::EngineImpl::storeVAO(framework::IReloadable* user) {
 	return mBufferManager->getVAO(user);
 }
 
