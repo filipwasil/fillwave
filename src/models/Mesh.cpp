@@ -159,7 +159,7 @@ inline void Mesh::coreDraw() {
 	//
 	//#endif
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 
 	core::Texture2D::unbind2DTextures();
 }
@@ -194,7 +194,7 @@ void Mesh::drawPicking(ICamera& camera) {
 
 		onDraw();
 
-		mVAO->unbind();
+		core::VertexArray::unbindVAO();
 
 		core::Uniform::push(mULCColorPicking, false);
 
@@ -231,7 +231,7 @@ void Mesh::drawDepth(ICamera& camera) {
 
 		onDraw();
 
-		mVAO->unbind();
+		core::VertexArray::unbindVAO();
 
 		core::Program::disusePrograms();
 	}
@@ -249,7 +249,7 @@ void Mesh::drawDepthColor(ICamera& camera, glm::vec3& /*xxx double check positio
 
 		onDraw();
 
-		mVAO->unbind();
+		core::VertexArray::unbindVAO();
 
 		core::Program::disusePrograms();
 	}
@@ -267,7 +267,7 @@ void Mesh::drawAOG(ICamera& camera) {
 
 	onDraw();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void Mesh::drawAOC(ICamera& camera) {
@@ -282,7 +282,7 @@ void Mesh::drawAOC(ICamera& camera) {
 
 	onDraw();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void Mesh::onDraw() {
@@ -377,7 +377,7 @@ inline void Mesh::initVAO() {
 		mIBO->send();
 	}
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void Mesh::initVBO() {

@@ -164,7 +164,7 @@ inline void EmiterPointCPU::coreDraw() {
 
 	core::Texture2D::unbind2DTextures();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void EmiterPointCPU::initBuffers() {
@@ -207,7 +207,7 @@ void EmiterPointCPU::initVAO() {
 	mIBO->bind();
 	mIBO->setReady();
 	mIBO->send();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void EmiterPointCPU::initVBO() {

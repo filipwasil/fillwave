@@ -24,11 +24,11 @@ public:
 	virtual ~VertexArray();
 
 	void bind(GLuint id = 0);
-	void unbind();
 	void reload();
-
-	static void bindVAO(GLuint id);
+	static void unbindVAO();
 };
+
+void bindVAO(GLuint handle);
 
 } /* buffer */
 typedef std::shared_ptr<core::VertexArray> pVertexArray;

@@ -58,7 +58,7 @@ void Text::draw() {
 	glDisable(GL_BLEND);
 
 	mTexture->unbind();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 	core::Program::disusePrograms();
 }
 
@@ -195,7 +195,7 @@ inline void Text::initVAO() {
 	mVBO->setReady();
 	mVBO->send();
 	mVBO->attributesSetForVAO();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void Text::initVBO() {

@@ -18,8 +18,6 @@ class IRenderer;
 
 enum eRenderHandles {
 	eRenderHandleVAO,
-	eRenderHandleIBO,
-	eRenderHandleVBO,
 	eRenderHandleDiffuse,
 	eRenderHandleNormal,
 	eRenderHandleSpecular,
@@ -37,8 +35,7 @@ struct RenderData {
 
 	struct {
 		GLbyte bVAO :1;
-		GLbyte bIBO :1;
-		GLbyte bVBO :1;
+		GLbyte bIndexDraw :1;
 		GLbyte bDiffuse :1;
 		GLbyte bNormal :1;
 		GLbyte bSpecular :1;

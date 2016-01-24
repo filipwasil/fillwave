@@ -30,7 +30,7 @@ void VertexArray::bind(GLuint id) {
 	FLOG_CHECK("Could not bind the VAO");
 }
 
-void VertexArray::unbind() {
+void VertexArray::unbindVAO() {
 	glBindVertexArray(0);
 	FLOG_CHECK("ould unbind the VAO");
 }
@@ -40,7 +40,7 @@ void VertexArray::reload() {
 	FLOG_CHECK("reload");
 }
 
-void VertexArray::bindVAO(GLuint handle) {
+void bindVAO(GLuint handle) {
 	glBindVertexArray(handle);
 	FLOG_CHECK("Could not bind the VAO");
 }

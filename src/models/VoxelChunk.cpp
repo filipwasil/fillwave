@@ -471,7 +471,7 @@ void VoxelChunk::draw(ICamera& camera) {
 
 	coreDraw();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 
 	core::Program::disusePrograms();
 }
@@ -487,7 +487,7 @@ void VoxelChunk::drawPBRP(ICamera& camera) {
 
 	coreDraw();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 GLint VoxelChunk::getSize() {
@@ -537,7 +537,7 @@ inline void VoxelChunk::initVAO() {
 	mVBO->setReady();
 	mVBO->send();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void VoxelChunk::initVBO() {

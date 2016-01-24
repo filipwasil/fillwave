@@ -151,5 +151,15 @@ GLvoid* Buffer::map(GLenum access) const {
 }
 #endif
 
+void unbindBuffer(GLuint target) {
+	glBindBuffer(target, 0);
+	FLOG_CHECK("Could not unbind the buffer object");
+}
+
+void bindBuffer(GLuint target, GLuint handle) {
+	glBindBuffer(target, handle);
+	FLOG_CHECK("Could not bind the buffer object");
+}
+
 } /* core */
 } /* fillwave */

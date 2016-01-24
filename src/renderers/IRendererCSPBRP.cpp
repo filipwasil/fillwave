@@ -8,7 +8,7 @@
 #include <fillwave/renderers/IRendererCSPBRP.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
-
+#include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/Log.h>
 
 FLOGINIT_DEFAULT()
@@ -35,26 +35,34 @@ void IRendererCSPBRP::draw(ICamera& camera) {
 	for (auto& program : mRenderPasses) {
 		core::Program::useProgram(program.first);
 		for (auto& container : program.second) {
-//			mLightManager->pushLightUniforms(mProgram.get());
-//			mLightManager->bindShadowmaps();
-			// other stuff
+//			mLightManager->pushLightUniforms(mProgram.get()); todo
+//			mLightManager->bindShadowmaps(); todo
+			// Evaluate animations
+				// other stuff
 			for (auto& drawData : container) {
-//				uniform update
-//				RenderData
-				drawData.mStatus.bVAO ? core::VertexArray::bindVAO(drawData.mHandles[eRenderHandleVAO]) : (void)0;
-//
-//				bindTextures();
-				/* Perform index drawing */
-//				glDrawElements(mRenderMode, mIBO->getElements(),
-//				GL_UNSIGNED_INT, (GLvoid*) 0);
-//				FLOG_CHECK("glDrawElements failed");
-//			} else {
-//				/* Perform array drawing */
-//				glDrawArrays(mRenderMode, 0, mVBO->getElements());
-//				FLOG_CHECK("glDrawArrays failed");
-//				mVAO->unbind();
-//
-//				core::Texture2D::unbind2DTextures();
+//				uniform update todo
+
+				drawData.mStatus.bVAO
+					? core::bindVAO(drawData.mHandles[eRenderHandleVAO]) : (void)0;
+
+				drawData.mStatus.bDiffuse
+					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_DIFFUSE, drawData.mHandles[eRenderHandleDiffuse]) : (void)0;
+
+				drawData.mStatus.bNormal
+					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_NORMALS, drawData.mHandles[eRenderHandleNormal]) : (void)0;
+
+				drawData.mStatus.bSpecular
+					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_SPECULAR, drawData.mHandles[eRenderHandleSpecular]) : (void)0;
+
+				drawData.mStatus.bIndexDraw
+					? glDrawElements(drawData.mMode, drawData.mCount, drawData.mDataType, drawData.mIndicesPointer)
+							: glDrawArrays(drawData.mMode, drawData.mFirst, drawData.mCount);
+
+				FLOG_CHECK("Draw failed");
+
+				drawData.mStatus.bVAO ? core::VertexArray::unbindVAO() : (void)0;
+
+				core::Texture2D::unbind2DTextures();
 			}
 		}
 	}
@@ -66,12 +74,10 @@ void IRendererCSPBRP::reset(GLuint /*width*/, GLuint /*height*/) {
 
 void IRendererCSPBRP::clear() {
 	mFlagReload= true;
-
-	size_t predictedSize = mRenderPasses.size() + 1;
+		size_t predictedSize = mRenderPasses.size() + 1;
 	mRenderPasses.clear();
 	mRenderPasses.reserve(predictedSize);
 }
-
 
 } /* namespace framework */
 } /* namespace fillwave */

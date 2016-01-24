@@ -72,6 +72,9 @@ protected:
 	void setSize(GLuint size);
 };
 
+void unbindBuffer(GLuint target);
+void bindBuffer(GLuint target, GLuint handle);
+
 } /* core */
 typedef std::shared_ptr<core::Buffer> pBuffer;
 typedef std::unique_ptr<core::Buffer> puBuffer;

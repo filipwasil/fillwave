@@ -65,7 +65,7 @@ void Skybox::draw(ICamera& camera) {
 
 	core::Texture2D::unbind2DTextures();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 	core::Program::disusePrograms();
 }
 
@@ -95,7 +95,7 @@ void Skybox::drawDR(ICamera& camera) {
 
 	core::Texture2D::unbind2DTextures();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 	core::Program::disusePrograms();
 }
 
@@ -133,7 +133,7 @@ inline void Skybox::initVAO() {
 		mIBO->setReady();
 		mIBO->send();
 	}
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void Skybox::initVBO() {
