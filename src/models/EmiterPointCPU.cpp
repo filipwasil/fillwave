@@ -152,10 +152,10 @@ inline void EmiterPointCPU::coreDraw() {
 	}
 
 	glEnable(GL_BLEND);
-	glBlendFunc(mRenderData.mBlend.mSrc, mRenderData.mBlend.mDst);
+	glBlendFunc(mBlending.mSrc, mBlending.mDst);
 //   glBlendFuncSeparate(GL_ONE, GL_ONE, GL_ONE, GL_ONE);
 //   glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-	glDrawElements(mRenderData.mMode, mIBO->getElements(), mRenderData.mDataType, mRenderData.mIndicesPointer);
+	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 	FLOG_CHECK("Draw elements");
 	glDisable(GL_BLEND);
 	if (not mDepthTesting) {
@@ -213,6 +213,22 @@ void EmiterPointCPU::initVAO() {
 void EmiterPointCPU::initVBO() {
 	mVBO->getAttributes(mProgram->getHandle());
 	mVBO->attributesBind(mProgram);
+}
+
+bool EmiterPointCPU::getRenderData(RenderData& renderData) {
+	renderData.mBlend = mBlending;
+	renderData.mCount = mIBO->getElements();
+	renderData.mDataType = GL_UNSIGNED_INT;
+	renderData.mFirst = 0;
+	renderData.mHandles[RenderData::eRenderHandleProgram] = mProgram->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleSampler] = mSampler->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleVAO] = mVAO->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleDiffuse] = mTexture->getHandle();
+	renderData.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
+	renderData.mMode = GL_POINTS;
+
+   renderData.mRenderStatus = 0xe4; // 11100100
+	return true;
 }
 
 } /* framework */

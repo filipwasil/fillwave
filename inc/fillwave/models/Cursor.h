@@ -21,11 +21,9 @@ namespace framework {
 class Cursor: public Impostor {
 public:
 	Cursor(Engine* engine, pTexture texture);
-
 	virtual ~Cursor() = default;
 
 	void move(glm::vec2 position);
-
 	void draw();
 
 private:
@@ -33,6 +31,7 @@ private:
 	GLint mULCPosition, mULCScreenFactor, mULCTextureUnit, mULCSize;
 
 	void initUniformsCache();
+	bool getRenderData(RenderData& renderData) override;
 };
 
 } /* framework */

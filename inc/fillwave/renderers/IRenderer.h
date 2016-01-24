@@ -33,7 +33,7 @@ public:
 
 	virtual ~IRenderer() = default;
 
-	virtual void update(GLuint* id, Entity* node) = 0;
+	virtual void update(Entity* node) = 0;
 	virtual void draw(ICamera& camera) = 0;
 	virtual void reset(GLuint width, GLuint height) = 0;
 	virtual void clear() = 0;

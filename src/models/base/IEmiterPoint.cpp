@@ -26,7 +26,7 @@ IEmiterPoint::IEmiterPoint(
 		GLfloat alphaCutOff)
 		:
 				IReloadable(engine),
-				Entity(GL_POINTS),
+				Entity(),
 				mStartSize(size),
 				mLifetime(lifetime),
 				mTexture(texture),
@@ -34,8 +34,8 @@ IEmiterPoint::IEmiterPoint(
 				mHowMany(howMany),
 				mDepthTesting(depthTesting),
 				mAlphaCutOff(alphaCutOff) {
-	mRenderData.mBlend.mSrc = blendingSource;
-	mRenderData.mBlend.mDst = blendingDestination;
+	mBlending.mSrc = blendingSource;
+	mBlending.mDst = blendingDestination;
 
 #ifdef FILLWAVE_GLES_3_0
 #else
@@ -48,8 +48,8 @@ IEmiterPoint::IEmiterPoint(
 void IEmiterPoint::setBlending(
 		GLenum sourceFactor,
 		GLenum destinationFactor) {
-	mRenderData.mBlend.mSrc = sourceFactor;
-	mRenderData.mBlend.mDst = destinationFactor;
+	mBlending.mSrc = sourceFactor;
+	mBlending.mDst = destinationFactor;
 }
 
 void IEmiterPoint::updateRenderer(IRenderer& renderer) {

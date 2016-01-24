@@ -30,6 +30,7 @@ private:
 protected:
 	pProgram mProgram;
 	GLfloat mSize;
+	Blending mBlending;
 
 	void coreDraw();
 

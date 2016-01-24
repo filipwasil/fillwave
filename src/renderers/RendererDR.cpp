@@ -66,7 +66,7 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	reset(mScreenSize[0], mScreenSize[1]);
 }
 
-void RendererDR::update(GLuint* /*programId*/, Entity* entity) {
+void RendererDR::update(Entity* entity) {
 	entity->isAnimated() ? mAnimatedNodes.push_back(entity) : mNodes.push_back(entity);
 }
 

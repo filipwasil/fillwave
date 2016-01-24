@@ -12,7 +12,7 @@
 namespace fillwave {
 namespace framework {
 
-void RendererFR::update(GLuint* /*programId*/, Entity* entity) {
+void RendererFR::update(Entity* entity) {
 	mRenderPasses.push_back(entity);
 }
 

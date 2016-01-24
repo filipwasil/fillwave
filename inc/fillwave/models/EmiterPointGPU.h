@@ -46,8 +46,12 @@ public:
 
 	void update(GLfloat timeElapsedSec);
 
-	void draw(ICamera& camera);
-	void drawPBRP(ICamera& camera);
+	/* IDrawable */
+	void draw(ICamera& camera) override;
+	void drawPBRP(ICamera& camera) override;
+
+	/* IRenderable */
+	bool getRenderData(RenderData& renderData) override;
 
 private:
 	static const GLint mPingPongBuffers = 2;

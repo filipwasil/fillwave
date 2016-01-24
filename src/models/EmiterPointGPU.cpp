@@ -126,7 +126,7 @@ void EmiterPointGPU::draw(ICamera& camera) {
 
 	core::TransformFeedback::begin(GL_POINTS);
 
-	glDrawArrays(mRenderData.mMode, mRenderData.mFirst, mVBOGPU[mSrcIndex]->getElements());
+	glDrawArrays(GL_POINT, 0, mVBOGPU[mSrcIndex]->getElements());
 	FLOG_CHECK("Drawn buffer index %d drawing %d ", mSrcIndex,
 			mVBOGPU[mSrcIndex]->getElements());
 
@@ -182,8 +182,8 @@ inline void EmiterPointGPU::coreDraw() {
 	}
 
 	glEnable(GL_BLEND);
-	glBlendFunc(mRenderData.mBlend.mSrc, mRenderData.mBlend.mDst);
-	glDrawElements(mRenderData.mMode, mIBO->getElements(), mRenderData.mDataType, mRenderData.mIndicesPointer);
+	glBlendFunc(mBlending.mSrc, mBlending.mDst);
+	glDrawElements(GL_POINT, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 	FLOG_CHECK("Draw elements");
 
 	if (not mDepthTesting) {
@@ -286,6 +286,22 @@ void EmiterPointGPU::initVBO() {
 		mVBOGPU[i]->getAttributes(mProgram->getHandle());
 		mVBOGPU[i]->attributesBind(mProgram);
 	}
+}
+
+bool EmiterPointGPU::getRenderData(RenderData& renderData) {
+	renderData.mBlend = mBlending;
+	renderData.mCount = mIBO->getElements();
+	renderData.mDataType = GL_UNSIGNED_INT;
+	renderData.mFirst = 0;
+	renderData.mHandles[RenderData::eRenderHandleProgram] = mProgram->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleSampler] = mSampler->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleVAO] = mVAO->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleDiffuse] = mTexture->getHandle();
+	renderData.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
+	renderData.mMode = GL_POINTS;
+
+   renderData.mRenderStatus = 0xe4; // 11100100
+	return true;
 }
 
 } /* framework */

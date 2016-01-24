@@ -29,7 +29,7 @@ public:
 
 	/* IRenderable */
 	void updateRenderer(IRenderer& renderer) override;
-//	void updateRendererData() override;
+	bool getRenderData(RenderData& renderData) override;
 };
 
 } /* namespace framework */

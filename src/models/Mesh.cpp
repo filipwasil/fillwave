@@ -41,7 +41,6 @@ Mesh::Mesh(
 		Animator* boneManager,
 		GLenum renderMode)
 		:
-				Entity(renderMode),
 				IReloadable(engine),
 				mMaterial(material),
 				mDiffuseMap(diffuseMap),
@@ -53,6 +52,7 @@ Mesh::Mesh(
 				mProgramOQ(programOcclusion),
 				mProgramAOGeometry(programAmbientOcclusionGeometry),
 				mProgramAOColor(programAmbientOcclusionColor),
+				mRenderMode(renderMode),
 				mIBO(ibo),
 				mVBO(vbo),
 				mLightManager(lightManager),
@@ -211,7 +211,7 @@ void Mesh::drawOcclusionBox(ICamera& camera) {
 
 	mOcclusionQuery.begin();
 
-	glDrawArrays(GL_TRIANGLES, 0, gOQVertices);
+	glDrawArrays(mRenderMode, 0, gOQVertices);
 
 	FLOG_CHECK("drawOcclusionBox failed");
 
@@ -288,12 +288,12 @@ void Mesh::drawAOC(ICamera& camera) {
 void Mesh::onDraw() {
 	if (mIBO) {
 		/* Perform index drawing */
-		glDrawElements(mRenderData.mMode, mIBO->getElements(),
-				mRenderData.mDataType, mRenderData.mIndicesPointer);
+		glDrawElements(mRenderMode, mIBO->getElements(),
+				GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 		FLOG_CHECK("glDrawElements failed");
 	} else {
 		/* Perform array drawing */
-		glDrawArrays(mRenderData.mMode, mRenderData.mFirst, mVBO->getElements());
+		glDrawArrays(mRenderMode, 0, mVBO->getElements());
 		FLOG_CHECK("glDrawArrays failed");
 	}
 }
@@ -391,9 +391,25 @@ void Mesh::log() const {
 }
 
 void Mesh::updateRenderer(IRenderer& renderer) {
-	GLuint id = mProgram.get()->getHandle();
-	renderer.update(&id, this);
+	renderer.update(this);
 }
+
+bool Mesh::getRenderData(RenderData& renderData) {
+	renderData.mCount = mIBO->getElements();
+	renderData.mDataType = GL_UNSIGNED_INT;
+	renderData.mFirst = 0;
+	renderData.mHandles[RenderData::eRenderHandleProgram] = mProgram->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleSampler] = mSampler->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleVAO] = mVAO->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleDiffuse] = mDiffuseMap->getTexture()->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleNormal] = mNormalMap->getTexture()->getHandle();
+	renderData.mHandles[RenderData::eRenderHandleSpecular] = mSpecularMap->getTexture()->getHandle();
+	renderData.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
+	renderData.mMode = GL_TRIANGLES;
+   renderData.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, empty
+	return true;
+}
+
 
 } /* framework */
 } /* fillwave */

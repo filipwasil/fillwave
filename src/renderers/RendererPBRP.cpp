@@ -17,7 +17,8 @@ FLOGINIT_DEFAULT()
 namespace fillwave {
 namespace framework {
 
-void RendererPBRP::update(GLuint* programId, Entity* entity) {
+void RendererPBRP::update(Entity* entity) {
+	GLuint programId = entity->getRenderData().mHandles[RenderData::eRenderHandleProgram];
 	if (mRenderPasses.find(*programId) != mRenderPasses.end()) {
 		mRenderPasses[*programId].push_back(entity);
 	} else {

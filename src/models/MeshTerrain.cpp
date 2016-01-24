@@ -158,8 +158,7 @@ void MeshTerrain::drawPBRP(ICamera& camera) {
 }
 
 void MeshTerrain::updateRenderer(IRenderer& renderer) {
-	GLuint id = mProgram.get()->getHandle();
-	renderer.update(&id, this);
+	renderer.update(this);
 }
 
 inline void MeshTerrain::distanceCheck(ICamera& camera) {

@@ -16,7 +16,8 @@ FLOGINIT_DEFAULT()
 namespace fillwave {
 namespace framework {
 
-void IRendererCSPBRP::update(GLuint* programId, Entity* entity) {
+void IRendererCSPBRP::update(Entity* entity) {
+	GLuint programId = entity->getRenderData().mHandles[RenderData::eRenderHandleProgram];
 	std::vector<RenderData> item (1, entity->getRenderData());
 	if (mRenderPasses.find(*programId) != mRenderPasses.end()) {
 		mRenderPasses[*programId].push_back(item);

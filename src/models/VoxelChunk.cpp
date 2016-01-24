@@ -546,8 +546,7 @@ inline void VoxelChunk::initVBO() {
 }
 
 void VoxelChunk::updateRenderer(IRenderer& renderer) {
-	GLuint id = mProgram.get()->getHandle();
-	renderer.update(&id, this);
+	renderer.update(this);
 }
 
 } /* framework */

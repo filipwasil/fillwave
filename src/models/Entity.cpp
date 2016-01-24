@@ -18,19 +18,11 @@ namespace framework {
 
 Entity::Entity(glm::vec3 translation, glm::quat rotation)
 		:
-				IRenderable(GL_NONE),
 				Moveable(translation, rotation),
 				mChildrenPropagateEvent(GL_TRUE),
 				mParentRefresh(GL_TRUE),
 				mPSC(GL_TRUE),
 				mPSR(GL_TRUE) {
-
-}
-
-Entity::Entity(GLenum renderMode)
-		:
-				IRenderable(renderMode),
-				Moveable(glm::vec3(0.0), glm::quat(1.0, 0.0, 0.0, 0.0)) {
 
 }
 
@@ -243,6 +235,10 @@ void Entity::updateRenderer(IRenderer& renderer) {
 	for (auto& it : mChildren) {
 		it->updateRenderer(renderer);
 	}
+}
+
+bool Entity::getRenderData(RenderData& /*renderData*/) {
+	return false;
 }
 
 } /* framework */

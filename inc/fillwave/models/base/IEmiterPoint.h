@@ -57,6 +57,7 @@ protected:
 	GLfloat mAlphaCutOff;
 	pProgram mProgram;
 	pIndexBufferParticles mIBO;
+	Blending mBlending;
 };
 
 } /* framework */

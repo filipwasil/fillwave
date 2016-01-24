@@ -43,8 +43,6 @@ public:
 	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
 			glm::quat(1.0, 0.0, 0.0, 0.0));
 
-	Entity(GLenum renderMode);
-
 	virtual ~Entity();
 
 	/* Flags */
@@ -72,13 +70,13 @@ public:
 	void updateParentMatrix(glm::mat4& parent);
 	void updateParentRotation(glm::quat& rotation);
 
-	/* Interface IPickable */
+	/* IPickable */
 	void pick(glm::vec3 color) override;
 	void unpick() override;
 	virtual void onPicked() override;
 	virtual void onUnpicked() override;
 
-	/* Interface IDrawable */
+	/* IDrawable */
 	virtual void draw(ICamera& camera) override;
 	virtual void drawPBRP(ICamera& camera) override;
 	virtual void drawDR(ICamera& camera) override;
@@ -89,8 +87,9 @@ public:
 	virtual void drawOcclusionBox(ICamera& camera);
 	virtual void drawPicking(ICamera& camera);
 
-	/* Interface IRenderable */
+	/* IRenderable */
 	virtual void updateRenderer(IRenderer& renderer) override;
+	virtual bool getRenderData(RenderData& renderData) override;
 
 	/* Animations */
 	virtual bool isAnimated() const;
@@ -111,7 +110,6 @@ protected:
 	GLboolean mPSR;
 
 private:
-
 	void handleEvent(
 			std::vector<Callback*>& callbacks,
 			EventType& event);

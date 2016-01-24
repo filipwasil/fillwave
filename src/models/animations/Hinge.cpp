@@ -33,12 +33,13 @@ void Hinge::drawDR(ICamera& camera) {
 }
 
 void Hinge::updateRenderer(IRenderer& /*renderer*/) {
-	/* Hinge meant to not be drawn */
+	/* Hinge meant not to be drawn */
 }
 
-//void Hinge::updateRendererData() {
-//	/* Hinge meant to not be drawn */
-//}
+bool Hinge::getRenderData(RenderData& /*renderData*/) {
+	/* Hinge meant not to be drawn */
+	return false;
+}
 
 } /* namespace framework */
 } /* namespace fillwave */

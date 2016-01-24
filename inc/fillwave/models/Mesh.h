@@ -56,8 +56,7 @@ public:
 
 	virtual ~Mesh() = default;
 
-	void updateRenderer(IRenderer& renderer) override;
-
+	/* IDrawable */
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 	void drawDR(ICamera& camera);
@@ -68,6 +67,11 @@ public:
 	void drawAOG(ICamera& camera);
 	void drawAOC(ICamera& camera);
 	void drawOcclusionBox(ICamera& camera);
+
+	/* IRenderable */
+	virtual void updateRenderer(IRenderer& renderer) override;
+	virtual bool getRenderData(RenderData& renderData) override;
+
 	void log() const;
 
 	virtual void onDraw();
@@ -79,6 +83,7 @@ protected:
 	pTextureRegion mSpecularMap;
 	pProgram mProgram, mProgramShadow, mProgramShadowColor,
 			mProgramOQ, mProgramAOGeometry, mProgramAOColor;
+	GLenum mRenderMode;
 
 	/* Buffers */
 	pIndexBufferBasic mIBO;
