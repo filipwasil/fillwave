@@ -394,22 +394,21 @@ void Mesh::updateRenderer(IRenderer& renderer) {
 	renderer.update(this);
 }
 
-bool Mesh::getRenderData(RenderData& renderData) {
-	renderData.mCount = mIBO->getElements();
-	renderData.mDataType = GL_UNSIGNED_INT;
-	renderData.mFirst = 0;
-	renderData.mHandles[RenderData::eRenderHandleProgram] = mProgram->getHandle();
-	renderData.mHandles[RenderData::eRenderHandleSampler] = mSampler->getHandle();
-	renderData.mHandles[RenderData::eRenderHandleVAO] = mVAO->getHandle();
-	renderData.mHandles[RenderData::eRenderHandleDiffuse] = mDiffuseMap->getTexture()->getHandle();
-	renderData.mHandles[RenderData::eRenderHandleNormal] = mNormalMap->getTexture()->getHandle();
-	renderData.mHandles[RenderData::eRenderHandleSpecular] = mSpecularMap->getTexture()->getHandle();
-	renderData.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
-	renderData.mMode = GL_TRIANGLES;
-   renderData.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, empty
+bool Mesh::getRenderItem(RenderItem& item) {
+	item.mCount = mIBO->getElements();
+	item.mDataType = GL_UNSIGNED_INT;
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mDiffuseMap->getTexture()->getHandle();
+	item.mHandles[RenderItem::eRenderHandleNormal] = mNormalMap->getTexture()->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSpecular] = mSpecularMap->getTexture()->getHandle();
+	item.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
+	item.mMode = GL_TRIANGLES;
+   item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, empty
 	return true;
 }
-
 
 } /* framework */
 } /* fillwave */

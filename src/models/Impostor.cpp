@@ -43,24 +43,21 @@ void Impostor::coreDraw() {
 	core::Texture2D::unbind2DTextures();
 }
 
-bool Cursor::getRenderData(RenderData& renderData) {
-	RenderData data;
-	data.mBlend = mBlending;
-	data.mCount = 4;
-	data.mDataType = GL_NONE;
-	data.mFirst = 0;
-	data.mHandles[RenderData::eRenderHandleProgram] = mProgram->getHandle();
-	data.mHandles[RenderData::eRenderHandleSampler] = mSampler->getHandle();
-	data.mHandles[RenderData::eRenderHandleVAO] = 0;
-	data.mHandles[RenderData::eRenderHandleDiffuse] = mTexture->getHandle();
-	data.mHandles[RenderData::eRenderHandleNormal] = 0;
-	data.mHandles[RenderData::eRenderHandleSpecular] = 0;
-	data.mIndicesPointer = 0;
-	data.mMode = GL_TRIANGLE_STRIP;
-   data.mStatus.bBlending = 1;
-
-   data.mStatus = 00100100b; // blending, diffuse
-
+bool Cursor::getRenderItem(RenderItem& item) {
+	item.mBlend = mBlending;
+	item.mCount = 4;
+	item.mDataType = GL_NONE;
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = 0;
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+	item.mHandles[RenderItem::eRenderHandleNormal] = 0;
+	item.mHandles[RenderItem::eRenderHandleSpecular] = 0;
+	item.mIndicesPointer = 0;
+	item.mMode = GL_TRIANGLE_STRIP;
+   item.mStatus.bBlending = 1;
+   item.mRenderStatus = 0x24; // blending, diffuse
 	return true;
 }
 

@@ -10,10 +10,6 @@
 namespace fillwave {
 namespace framework {
 
-Hinge::Hinge() : Entity (GL_NONE) {
-
-}
-
 void Hinge::draw(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->draw(camera);
@@ -36,7 +32,7 @@ void Hinge::updateRenderer(IRenderer& /*renderer*/) {
 	/* Hinge meant not to be drawn */
 }
 
-bool Hinge::getRenderData(RenderData& /*renderData*/) {
+bool Hinge::getRenderItem(RenderItem& /*item*/) {
 	/* Hinge meant not to be drawn */
 	return false;
 }

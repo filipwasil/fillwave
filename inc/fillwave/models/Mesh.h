@@ -70,7 +70,7 @@ public:
 
 	/* IRenderable */
 	virtual void updateRenderer(IRenderer& renderer) override;
-	virtual bool getRenderData(RenderData& renderData) override;
+	virtual bool getRenderItem(RenderItem& item) override;
 
 	void log() const;
 

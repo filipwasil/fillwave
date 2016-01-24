@@ -50,7 +50,7 @@ public:
 	void drawPBRP(ICamera& camera) override;
 
 	/* IRenderable */
-	bool getRenderData(RenderData& renderData) override;
+	bool getRenderItem(RenderItem& item) override;
 
 private:
 	glm::vec3 mAcceleration;

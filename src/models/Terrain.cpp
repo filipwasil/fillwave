@@ -75,8 +75,7 @@ void Terrain::addChunk(pVoxelChunk chunk) {
 }
 
 void Terrain::updateRenderer(IRenderer& renderer) {
-	GLuint id = mProgram.get()->getHandle();
-	renderer.update(&id, this);
+	renderer.update(this);
 }
 
 pTerrain buildTerrainVoxel(

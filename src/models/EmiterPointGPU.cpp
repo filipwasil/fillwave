@@ -288,19 +288,19 @@ void EmiterPointGPU::initVBO() {
 	}
 }
 
-bool EmiterPointGPU::getRenderData(RenderData& renderData) {
-	renderData.mBlend = mBlending;
-	renderData.mCount = mIBO->getElements();
-	renderData.mDataType = GL_UNSIGNED_INT;
-	renderData.mFirst = 0;
-	renderData.mHandles[RenderData::eRenderHandleProgram] = mProgram->getHandle();
-	renderData.mHandles[RenderData::eRenderHandleSampler] = mSampler->getHandle();
-	renderData.mHandles[RenderData::eRenderHandleVAO] = mVAO->getHandle();
-	renderData.mHandles[RenderData::eRenderHandleDiffuse] = mTexture->getHandle();
-	renderData.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
-	renderData.mMode = GL_POINTS;
+bool EmiterPointGPU::getRenderItem(RenderItem& item) {
+	item.mBlend = mBlending;
+	item.mCount = mIBO->getElements();
+	item.mDataType = GL_UNSIGNED_INT;
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+	item.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
+	item.mMode = GL_POINTS;
 
-   renderData.mRenderStatus = 0xe4; // 11100100
+   item.mRenderStatus = 0xe4; // 11100100
 	return true;
 }
 

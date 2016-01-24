@@ -8,7 +8,7 @@
 #ifndef INC_FILLWAVE_MODELS_BASE_IRENDERABLE_H_
 #define INC_FILLWAVE_MODELS_BASE_IRENDERABLE_H_
 
-#include <fillwave/models/base/RenderData.h>
+#include <fillwave/models/base/RenderItem.h>
 
 namespace fillwave {
 namespace framework {
@@ -19,7 +19,7 @@ class IRenderable {
 public:
 	IRenderable() = default;
 	virtual ~IRenderable() = default;
-	virtual bool getRenderData(RenderData& renderData) = 0;
+	virtual bool getRenderItem(RenderItem& item) = 0;
 	virtual void updateRenderer(IRenderer& renderer) = 0;
 };
 

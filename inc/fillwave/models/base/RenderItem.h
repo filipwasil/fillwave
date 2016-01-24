@@ -5,19 +5,19 @@
  *      Author: filip
  */
 
-#ifndef INC_FILLWAVE_MODELS_BASE_RENDERDATA_H_
-#define INC_FILLWAVE_MODELS_BASE_RENDERDATA_H_
+#ifndef INC_FILLWAVE_MODELS_BASE_RENDERITEM_H_
+#define INC_FILLWAVE_MODELS_BASE_RENDERITEM_H_
 
 #include <fillwave/OpenGL.h>
 #include <fillwave/core/pipeline/Blending.h>
 
 namespace fillwave {
 namespace framework {
-/*! \struct eRenderHandles
- * \brief Indices for ren
+/*! \struct RenderItem
+ * \brief Single draw item structure
  */
 
-struct RenderData {
+struct RenderItem {
 	enum eRenderHandles {
 		eRenderHandleProgram,
 		eRenderHandleVAO,
@@ -55,4 +55,4 @@ struct RenderData {
 } /* namespace fillwave */
 
 
-#endif /* INC_FILLWAVE_MODELS_BASE_RENDERDATA_H_ */
+#endif /* INC_FILLWAVE_MODELS_BASE_RENDERITEM_H_ */

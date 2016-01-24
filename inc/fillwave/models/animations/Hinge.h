@@ -19,7 +19,7 @@ namespace framework {
 
 class Hinge: public Entity {
 public:
-	Hinge();
+	Hinge() = default;
 	virtual ~Hinge() = default;
 
 	/* IDrawable */
@@ -29,13 +29,13 @@ public:
 
 	/* IRenderable */
 	void updateRenderer(IRenderer& renderer) override;
-	bool getRenderData(RenderData& renderData) override;
+	bool getRenderItem(RenderItem& item) override;
 };
 
 } /* namespace framework */
 typedef std::shared_ptr<framework::Hinge> pHinge;
 static pHinge buildHinge() {
-	return pHinge(new framework::Hinge());
+	return std::make_shared<framework::Hinge>();
 }
 } /* namespace fillwave */
 

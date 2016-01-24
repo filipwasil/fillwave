@@ -23,17 +23,6 @@ namespace framework {
  */
 
 class Impostor: public Entity, public Finishable {
-private:
-	pTexture mTexture;
-	pSampler mSampler;
-
-protected:
-	pProgram mProgram;
-	GLfloat mSize;
-	Blending mBlending;
-
-	void coreDraw();
-
 public:
 	Impostor(
 			Engine* engine,
@@ -43,6 +32,15 @@ public:
 			GLenum blendingSource = GL_SRC_ALPHA,
 			GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
 	virtual ~Impostor() = default;
+
+protected:
+	pProgram mProgram;
+	pTexture mTexture;
+	pSampler mSampler;
+	GLfloat mSize;
+	Blending mBlending;
+
+	void coreDraw();
 };
 
 } /* framework */

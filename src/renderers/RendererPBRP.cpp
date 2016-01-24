@@ -18,13 +18,15 @@ namespace fillwave {
 namespace framework {
 
 void RendererPBRP::update(Entity* entity) {
-	GLuint programId = entity->getRenderData().mHandles[RenderData::eRenderHandleProgram];
-	if (mRenderPasses.find(*programId) != mRenderPasses.end()) {
-		mRenderPasses[*programId].push_back(entity);
+	RenderItem item;
+	entity->getRenderItem(item);
+	GLuint programId = item.mHandles[RenderItem::eRenderHandleProgram];
+	if (mRenderPasses.find(programId) != mRenderPasses.end()) {
+		mRenderPasses[programId].push_back(entity);
 	} else {
 		std::vector<Entity*> vector;
 		vector.push_back(entity);
-		mRenderPasses[*programId] = vector;
+		mRenderPasses[programId] = vector;
 	}
 }
 

@@ -17,14 +17,16 @@ namespace fillwave {
 namespace framework {
 
 void IRendererCSPBRP::update(Entity* entity) {
-	GLuint programId = entity->getRenderData().mHandles[RenderData::eRenderHandleProgram];
-	std::vector<RenderData> item (1, entity->getRenderData());
-	if (mRenderPasses.find(*programId) != mRenderPasses.end()) {
-		mRenderPasses[*programId].push_back(item);
+	RenderItem item;
+	entity->getRenderItem(item);
+	GLuint programId = item.mHandles[RenderItem::eRenderHandleProgram];
+	std::vector<RenderItem> items (1, item);
+	if (mRenderPasses.find(programId) != mRenderPasses.end()) {
+		mRenderPasses[programId].push_back(items);
 	} else {
-		std::vector<std::vector<RenderData>> container;
-		container.push_back(item);
-		mRenderPasses[*programId] = container;
+		std::vector<std::vector<RenderItem>> container;
+		container.push_back(items);
+		mRenderPasses[programId] = container;
 	}
 }
 
@@ -40,28 +42,29 @@ void IRendererCSPBRP::draw(ICamera& camera) {
 //			mLightManager->bindShadowmaps(); todo
 			// Evaluate animations
 				// other stuff
-			for (auto& drawData : container) {
+			// xxx todo Is Lambda fast enough ?
+			for (auto& renderItem : container) {
 //				uniform update todo
 
-				drawData.mStatus.bVAO
-					? core::bindVAO(drawData.mHandles[eRenderHandleVAO]) : (void)0;
+				renderItem.mStatus.bVAO
+					? core::bindVAO(renderItem.mHandles[RenderItem::eRenderHandleVAO]) : (void)0;
 
-				drawData.mStatus.bDiffuse
-					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_DIFFUSE, drawData.mHandles[eRenderHandleDiffuse]) : (void)0;
+				renderItem.mStatus.bDiffuse
+					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_DIFFUSE, renderItem.mHandles[RenderItem::eRenderHandleDiffuse]) : (void)0;
 
-				drawData.mStatus.bNormal
-					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_NORMALS, drawData.mHandles[eRenderHandleNormal]) : (void)0;
+				renderItem.mStatus.bNormal
+					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_NORMALS, renderItem.mHandles[RenderItem::eRenderHandleNormal]) : (void)0;
 
-				drawData.mStatus.bSpecular
-					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_SPECULAR, drawData.mHandles[eRenderHandleSpecular]) : (void)0;
+				renderItem.mStatus.bSpecular
+					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_SPECULAR, renderItem.mHandles[RenderItem::eRenderHandleSpecular]) : (void)0;
 
-				drawData.mStatus.bIndexDraw
-					? glDrawElements(drawData.mMode, drawData.mCount, drawData.mDataType, drawData.mIndicesPointer)
-							: glDrawArrays(drawData.mMode, drawData.mFirst, drawData.mCount);
+				renderItem.mStatus.bIndexDraw
+					? glDrawElements(renderItem.mMode, renderItem.mCount, renderItem.mDataType, renderItem.mIndicesPointer)
+							: glDrawArrays(renderItem.mMode, renderItem.mFirst, renderItem.mCount);
 
 				FLOG_CHECK("Draw failed");
 
-				drawData.mStatus.bVAO ? core::VertexArray::unbindVAO() : (void)0;
+				renderItem.mStatus.bVAO ? core::VertexArray::unbindVAO() : (void)0;
 
 				core::Texture2D::unbind2DTextures();
 			}

@@ -80,16 +80,16 @@ public:
 	virtual void draw(ICamera& camera) override;
 	virtual void drawPBRP(ICamera& camera) override;
 	virtual void drawDR(ICamera& camera) override;
-	virtual void drawDepth(ICamera& camera);
-	virtual void drawDepthColor(ICamera& camera, glm::vec3& position);
-	virtual void drawAOG(ICamera& camera);
-	virtual void drawAOC(ICamera& camera);
-	virtual void drawOcclusionBox(ICamera& camera);
-	virtual void drawPicking(ICamera& camera);
+	virtual void drawDepth(ICamera& camera) override;
+	virtual void drawDepthColor(ICamera& camera, glm::vec3& position) override;
+	virtual void drawAOG(ICamera& camera) override;
+	virtual void drawAOC(ICamera& camera) override;
+	virtual void drawOcclusionBox(ICamera& camera) override;
+	virtual void drawPicking(ICamera& camera) override;
 
 	/* IRenderable */
 	virtual void updateRenderer(IRenderer& renderer) override;
-	virtual bool getRenderData(RenderData& renderData) override;
+	virtual bool getRenderItem(RenderItem& item) override;
 
 	/* Animations */
 	virtual bool isAnimated() const;

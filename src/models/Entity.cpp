@@ -237,7 +237,7 @@ void Entity::updateRenderer(IRenderer& renderer) {
 	}
 }
 
-bool Entity::getRenderData(RenderData& /*renderData*/) {
+bool Entity::getRenderItem(RenderItem& /*item*/) {
 	return false;
 }
 

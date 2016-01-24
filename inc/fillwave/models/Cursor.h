@@ -31,7 +31,7 @@ private:
 	GLint mULCPosition, mULCScreenFactor, mULCTextureUnit, mULCSize;
 
 	void initUniformsCache();
-	bool getRenderData(RenderData& renderData) override;
+	bool getRenderItem(RenderItem& item) override;
 };
 
 } /* framework */

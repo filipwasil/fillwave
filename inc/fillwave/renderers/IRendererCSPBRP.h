@@ -27,7 +27,7 @@ public:
 	void clear() override;
 
 private:
-	std::unordered_map<GLuint, std::vector<std::vector<RenderData>>> mRenderPasses;
+	std::unordered_map<GLuint, std::vector<std::vector<RenderItem>>> mRenderPasses;
 
 };
 
