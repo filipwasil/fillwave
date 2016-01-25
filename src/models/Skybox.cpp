@@ -149,7 +149,7 @@ bool Skybox::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
 	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();//xxx 3d texture handle
-	item.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
+	item.mIndicesPointer = 0;
 	item.mMode = GL_TRIANGLES;
    item.mRenderStatus = mIBO ? 0xe0 : 0xa0; // vao, ibo, diff, norm, spec, blend, cont, anim
 	return true;

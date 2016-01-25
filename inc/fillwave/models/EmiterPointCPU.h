@@ -43,6 +43,7 @@ public:
 
 	virtual ~EmiterPointCPU() = default;
 
+	/* IEmiterPoint */
 	void update(GLfloat timeElapsedSec);
 
 	/* IDrawable */

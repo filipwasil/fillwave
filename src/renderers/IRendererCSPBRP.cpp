@@ -9,12 +9,17 @@
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/core/texturing/Texture2D.h>
+#include <fillwave/management/LightManager.h>
 #include <fillwave/Log.h>
 
 FLOGINIT_DEFAULT()
 
 namespace fillwave {
 namespace framework {
+
+IRendererCSPBRP::IRendererCSPBRP(LightManager* lightManager) : mLightManager(lightManager) {
+
+}
 
 void IRendererCSPBRP::update(IRenderable* renderable) {
 	RenderItem item;
@@ -37,9 +42,10 @@ void IRendererCSPBRP::draw(ICamera& camera) {
 	glClear(GL_DEPTH_BUFFER_BIT);
 	for (auto& program : mRenderPasses) {
 		core::Program::useProgram(program.first);
+// 	Light manager supports only Fillwave programs
+//		mLightManager->pushLightUniforms(mProgram.get());
+//		mLightManager->bindShadowmaps();
 		for (auto& container : program.second) {
-//			mLightManager->pushLightUniforms(mProgram.get()); todo
-//			mLightManager->bindShadowmaps(); todo
 			// Evaluate animations
 				// other stuff
 			// xxx todo Is Lambda fast enough ?
@@ -59,7 +65,7 @@ void IRendererCSPBRP::draw(ICamera& camera) {
 					? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_SPECULAR, renderItem.mHandles[RenderItem::eRenderHandleSpecular]) : (void)0;
 
 				renderItem.mStatus.bIndexDraw
-					? glDrawElements(renderItem.mMode, renderItem.mCount, renderItem.mDataType, renderItem.mIndicesPointer)
+					? glDrawElements(renderItem.mMode, renderItem.mCount, renderItem.mDataType, reinterpret_cast<GLvoid*>(renderItem.mIndicesPointer))
 							: glDrawArrays(renderItem.mMode, renderItem.mFirst, renderItem.mCount);
 
 				FLOG_CHECK("Draw failed");

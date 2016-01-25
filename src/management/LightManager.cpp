@@ -8,6 +8,7 @@
 #include <fillwave/management/LightManager.h>
 #include <fillwave/Log.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/common/Macros.h>
 
 FLOGINIT("LightManager", FERROR | FFATAL)
 
@@ -86,25 +87,15 @@ pLightDirectional LightManager::addLightDirectional(
 }
 
 void LightManager::removeLight(pLightSpot light) {
-	auto it = std::find(mSpotLights.begin(), mSpotLights.end(), light);
-	if (it != mSpotLights.end()) {
-		mSpotLights.erase(it);
-	}
+	remove(mSpotLights, light);
 }
 
 void LightManager::removeLight(pLightDirectional light) {
-	auto it = std::find(mDirectionalLights.begin(), mDirectionalLights.end(),
-			light);
-	if (it != mDirectionalLights.end()) {
-		mDirectionalLights.erase(it);
-	}
+	remove(mDirectionalLights, light);
 }
 
 void LightManager::removeLight(pLightPoint light) {
-	auto it = std::find(mPointLights.begin(), mPointLights.end(), light);
-	if (it != mPointLights.end()) {
-		mPointLights.erase(it);
-	}
+	remove(mPointLights, light);
 }
 
 void LightManager::removeLights() {
@@ -145,17 +136,18 @@ GLint LightManager::getLightsPointHowMany() {
 }
 
 GLboolean LightManager::isLightsRefresh() {
-	if (isRefreshLight(mSpotLights) || isRefreshLight(mDirectionalLights)
-			|| isRefreshLight(mPointLights)) {
+	if (isMoveablesRefresh(mSpotLights)
+			|| isMoveablesRefresh(mDirectionalLights)
+			|| isMoveablesRefresh(mPointLights)) {
 		return GL_TRUE;
 	}
 	return GL_FALSE;
 }
 
 void LightManager::resetLightsRefresh() {
-	resetRefreshLight(mSpotLights);
-	resetRefreshLight(mDirectionalLights);
-	resetRefreshLight(mPointLights);
+	resetMoveablesRefresh(mSpotLights);
+	resetMoveablesRefresh(mDirectionalLights);
+	resetMoveablesRefresh(mPointLights);
 }
 
 pLightSpot LightManager::getLightSpot(GLint i) {
@@ -376,7 +368,7 @@ void LightManager::updateDeferredBufferPoint(
 
 void LightManager::pushLightUniformBuffers(core::Program* program) {
 	program->uniformBlockPush(
-	FILLWAVE_LIGHTS_BINDING_POINT_NAME, (GLfloat*) mLightBufferData.data());
+	FILLWAVE_LIGHTS_BINDING_POINT_NAME, reinterpret_cast<GLfloat*>(mLightBufferData.data()));
 }
 
 void LightManager::bindShadowmaps() {

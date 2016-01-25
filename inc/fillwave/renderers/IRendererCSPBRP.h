@@ -16,9 +16,11 @@
 namespace fillwave {
 namespace framework {
 
+class LightManager;
+
 class IRendererCSPBRP : public IRenderer {
 public:
-	IRendererCSPBRP() = default;
+	IRendererCSPBRP(LightManager* lightManager);
 	virtual ~IRendererCSPBRP() = default;
 
 	void update(IRenderable* renderable) override;
@@ -28,7 +30,7 @@ public:
 
 private:
 	std::unordered_map<GLuint, std::vector<std::vector<RenderItem>>> mRenderPasses;
-
+	LightManager* mLightManager;
 };
 
 } /* namespace framework */

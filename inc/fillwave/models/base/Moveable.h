@@ -11,6 +11,7 @@
 #include <fillwave/OpenGL.h>
 #include <fillwave/Math.h>
 #include <memory>
+#include <vector>
 
 namespace fillwave {
 namespace framework {
@@ -80,6 +81,26 @@ protected:
 	GLboolean mRefresh;
 	GLboolean mRefreshExternal;
 };
+
+template <class M>
+GLboolean isMoveablesRefresh(std::vector<M>& moveables) {
+	for (auto& it : moveables) {
+		if (it->isRefresh()) {
+			return GL_TRUE;
+		}
+	}
+	return GL_FALSE;
+}
+
+template <class M>
+void resetMoveablesRefresh(std::vector<M>& data) {
+	for (auto& it : data) {
+		it->setRefresh(GL_FALSE);
+	}
+}
+
+GLboolean isMoveablesRefresh(std::vector<std::shared_ptr<Moveable>>& moveables);
+void resetMoveablesRefresh(std::vector<std::shared_ptr<Moveable>>& data);
 
 } /* framework */
 typedef std::shared_ptr<framework::Moveable> pMoveable;

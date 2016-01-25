@@ -404,7 +404,7 @@ bool Mesh::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleDiffuse] = mDiffuseMap->getTexture()->getHandle();
 	item.mHandles[RenderItem::eRenderHandleNormal] = mNormalMap->getTexture()->getHandle();
 	item.mHandles[RenderItem::eRenderHandleSpecular] = mSpecularMap->getTexture()->getHandle();
-	item.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
+	item.mIndicesPointer = 0;
 	item.mMode = GL_TRIANGLES;
    item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, anim
 	return true;

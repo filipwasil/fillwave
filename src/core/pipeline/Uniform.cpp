@@ -28,6 +28,10 @@ GLint Uniform::getLocation() const {
 }
 
 /* TODO make a template here */
+template <class T>
+void pushToProgram(T value);
+
+
 void Uniform::push(GLint value) {
 	glUniform1i(mLocation, value);
 	FLOG_CHECK("Uniform push failed");

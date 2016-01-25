@@ -224,7 +224,7 @@ bool EmiterPointCPU::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
 	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
-	item.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
+	item.mIndicesPointer = 0;
 	item.mMode = GL_POINTS;
 
    item.mRenderStatus = 0xe4; // 11100100

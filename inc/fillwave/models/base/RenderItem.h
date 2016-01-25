@@ -46,7 +46,7 @@ struct RenderItem {
 	GLsizei mFirst;
 	GLsizei mCount;
 	GLenum mDataType;
-	GLvoid* mIndicesPointer;
+	GLint mIndicesPointer;
 	Blending mBlend;
 	GLuint mHandles[eRenderHandlesSize];
 };

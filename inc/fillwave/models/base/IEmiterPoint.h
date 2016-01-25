@@ -41,11 +41,13 @@ public:
 
 	virtual ~IEmiterPoint() = default;
 
-	void updateRenderer(IRenderer& renderer) override;
 	void setBlending(GLenum sourceFactor, GLenum destinationFactor);
 
 	virtual void update(GLfloat timeElapsedSec) = 0;
 	virtual void draw(ICamera& camera) = 0;
+
+	/* IRenderable */
+	void updateRenderer(IRenderer& renderer) override;
 
 protected:
 	GLfloat mStartSize;
