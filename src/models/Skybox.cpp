@@ -155,9 +155,8 @@ bool Skybox::getRenderItem(RenderItem& item) {
 	return true;
 }
 
+} /* framework */
 pSkybox buildSkybox(Engine* engine, pTexture3D texture) {
 	return std::make_shared<framework::Skybox>(engine, texture);
 }
-
-} /* framework */
 } /* fillwave */
