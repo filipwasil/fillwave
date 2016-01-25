@@ -77,7 +77,7 @@ void Programmable::drawWithEffectsPBRP(ICamera& camera) {
 }
 
 void Programmable::addEffect(pIEffect effect) {
-	auto _find_function = [effect](pIEffect m) -> bool {return m == effect;};
+	auto _find_function = [effect](pIEffect& m) -> bool {return m == effect;};
 	auto _begin = mEffects.begin();
 	auto _end = mEffects.end();
 	auto it = std::find_if(_begin, _end, _find_function);
@@ -92,7 +92,7 @@ void Programmable::addEffect(pIEffect effect) {
 }
 
 void Programmable::removeEffect(pIEffect effect) {
-	auto _find_function = [effect](pIEffect m) -> bool {return m == effect;};
+	auto _find_function = [effect](pIEffect& m) -> bool {return m == effect;};
 	auto _begin = mEffects.begin();
 	auto _end = mEffects.end();
 	auto it = std::remove_if(_begin, _end, _find_function);

@@ -17,15 +17,15 @@ FLOGINIT_DEFAULT()
 namespace fillwave {
 namespace framework {
 
-void RendererPBRP::update(Entity* entity) {
+void RendererPBRP::update(IRenderable* renderable) {
 	RenderItem item;
-	entity->getRenderItem(item);
+	renderable->getRenderItem(item);
 	GLuint programId = item.mHandles[RenderItem::eRenderHandleProgram];
 	if (mRenderPasses.find(programId) != mRenderPasses.end()) {
-		mRenderPasses[programId].push_back(entity);
+		mRenderPasses[programId].push_back(renderable);
 	} else {
-		std::vector<Entity*> vector;
-		vector.push_back(entity);
+		std::vector<IRenderable*> vector;
+		vector.push_back(renderable);
 		mRenderPasses[programId] = vector;
 	}
 }

@@ -78,6 +78,12 @@ void Terrain::updateRenderer(IRenderer& renderer) {
 	renderer.update(this);
 }
 
+bool Terrain::getRenderItem(RenderItem& item) {
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+   item.mRenderStatus = 0x02; // vao, ibo, diff, norm, spec, blend, cont, anima
+	return true;
+}
+
 pTerrain buildTerrainVoxel(
 		Engine* engine,
 		pProgram program,

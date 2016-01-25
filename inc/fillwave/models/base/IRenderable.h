@@ -9,13 +9,14 @@
 #define INC_FILLWAVE_MODELS_BASE_IRENDERABLE_H_
 
 #include <fillwave/models/base/RenderItem.h>
+#include <fillwave/models/base/IDrawable.h>
 
 namespace fillwave {
 namespace framework {
 
 class IRenderer;
 
-class IRenderable {
+class IRenderable : public IDrawable {
 public:
 	IRenderable() = default;
 	virtual ~IRenderable() = default;

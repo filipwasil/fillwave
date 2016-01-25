@@ -21,7 +21,7 @@ public:
 	IRendererCSPBRP() = default;
 	virtual ~IRendererCSPBRP() = default;
 
-	void update(Entity* entity) override;
+	void update(IRenderable* renderable) override;
 	void draw(ICamera& camera) override;
 	void reset(GLuint width, GLuint height) override;
 	void clear() override;

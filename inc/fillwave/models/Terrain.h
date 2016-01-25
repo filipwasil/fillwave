@@ -35,6 +35,7 @@ public:
 
 	/* IRenderable */
    void updateRenderer(IRenderer& renderer) override;
+	bool getRenderItem(RenderItem& item) override;
 
 protected:
 	void updateRendererData();

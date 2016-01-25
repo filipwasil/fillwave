@@ -11,7 +11,7 @@
 #include <fillwave/models/terrain/Voxel.h>
 #include <fillwave/models/terrain/VoxelConstructor.h>
 #include <fillwave/core/buffers/VertexBufferBasic.h>
-#include <fillwave/core/texturing/Texture.h>
+#include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/models/base/IReloadable.h>
 #include <fillwave/models/Entity.h>
 
@@ -41,10 +41,13 @@ public:
 	void reloadVBO();
 	void reloadVoxels(VoxelConstructor* constructor);
 
-	void draw(ICamera& camera);
-	void drawPBRP(ICamera& camera);
+	/* IDrawable */
+	void draw(ICamera& camera) override;
+	void drawPBRP(ICamera& camera) override;
 
+	/* IRenderable */
    void updateRenderer(IRenderer& renderer) override;
+   bool getRenderItem(RenderItem& item) override;
 
 	GLint getSize();
 
@@ -55,7 +58,7 @@ private:
 	GLint mSize;
 	Voxel*** mVoxels;
 	pProgram mProgram;
-	pTexture mTexture;
+	pTexture2D mTexture;
 	pVertexBufferBasic mVBO;
 	LightManager* mLightManager;
 

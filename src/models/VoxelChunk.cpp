@@ -431,7 +431,7 @@ void VoxelChunk::reloadVBO() {
 		}
 	}
 
-	mVBO = pVertexBufferBasic(new core::VertexBufferBasic(vertices)); //xxx todo needs to be in manager
+	mVBO = std::make_shared<core::VertexBufferBasic>(vertices); //xxx todo needs to be in manager
 
 	initVBO();
 
@@ -547,6 +547,18 @@ inline void VoxelChunk::initVBO() {
 
 void VoxelChunk::updateRenderer(IRenderer& renderer) {
 	renderer.update(this);
+}
+
+bool VoxelChunk::getRenderItem(RenderItem& item) {
+	item.mCount = mVBO->getElements();
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+	item.mMode = GL_TRIANGLES;
+   item.mRenderStatus = 0xc0; // vao, ibo, diff, norm, spec, blend, cont, anim
+	return true;
 }
 
 } /* framework */

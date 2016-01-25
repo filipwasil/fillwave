@@ -395,7 +395,7 @@ void Mesh::updateRenderer(IRenderer& renderer) {
 }
 
 bool Mesh::getRenderItem(RenderItem& item) {
-	item.mCount = mIBO->getElements();
+	item.mCount = mIBO ? mIBO->getElements() : mVBO->getElements();
 	item.mDataType = GL_UNSIGNED_INT;
 	item.mFirst = 0;
 	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
@@ -406,7 +406,7 @@ bool Mesh::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleSpecular] = mSpecularMap->getTexture()->getHandle();
 	item.mIndicesPointer = reinterpret_cast<GLvoid*>(0);
 	item.mMode = GL_TRIANGLES;
-   item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, empty
+   item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, anim
 	return true;
 }
 

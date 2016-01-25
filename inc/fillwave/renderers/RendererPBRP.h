@@ -24,13 +24,13 @@ public:
 	RendererPBRP() = default;
 	virtual ~RendererPBRP() = default;
 
-	void update(Entity* entity) override;
+	void update(IRenderable* renderable) override;
 	void draw(ICamera& camera) override;
 	void reset(GLuint width, GLuint height) override;
 	void clear() override;
 
 private:
-	std::unordered_map<GLuint, std::vector<Entity*> > mRenderPasses;
+	std::unordered_map<GLuint, std::vector<IRenderable*> > mRenderPasses;
 };
 
 } /* namespace framework */

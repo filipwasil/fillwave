@@ -28,8 +28,12 @@ public:
 
 	virtual ~Skybox() = default;
 
+	/* IDrawable */
 	void draw(ICamera& camera);
 	void drawDR(ICamera& camera);
+
+	/* IRenderable */
+	bool getRenderItem(RenderItem& item);
 
 protected:
 	pProgram mProgram;

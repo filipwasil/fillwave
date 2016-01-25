@@ -8,7 +8,8 @@
 #ifndef INC_FILLWAVE_MODELS_BASE_IDRAWABLE_H_
 #define INC_FILLWAVE_MODELS_BASE_IDRAWABLE_H_
 
-#include <fillwave/renderers/RendererPBRP.h>
+#include <fillwave/Math.h>
+#include <memory>
 
 namespace fillwave {
 namespace framework {

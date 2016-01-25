@@ -38,7 +38,7 @@ struct RenderItem {
 			GLubyte bSpecular :1;
 			GLubyte bBlending :1;
 			GLubyte bIsContainer :1;
-			GLubyte bEmpty :1;
+			GLubyte bIsAnimated :1;
 		} mStatus;
 	};
 

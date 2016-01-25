@@ -15,6 +15,7 @@
 #include <fillwave/models/Terrain.h>
 #include <fillwave/models/base/IDrawable.h>
 #include <fillwave/renderers/RendererFR.h>
+#include <unordered_map>
 
 namespace fillwave {
 namespace framework {

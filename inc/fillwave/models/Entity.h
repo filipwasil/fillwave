@@ -11,7 +11,6 @@
 #include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/common/IPickable.h>
 #include <fillwave/space/base/ICamera.h>
-#include <fillwave/models/base/IDrawable.h>
 #include <fillwave/models/base/IRenderable.h>
 #include <fillwave/models/base/TreePtr.h>
 
@@ -35,7 +34,6 @@ namespace framework {
 
 class Entity:
 		public IRenderable,
-		public IDrawable,
 		public IPickable,
 		public Moveable,
 		public TreePtr<pEntity> {

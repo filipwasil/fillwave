@@ -57,16 +57,15 @@ public:
 	virtual ~Mesh() = default;
 
 	/* IDrawable */
-	void draw(ICamera& camera);
-	void drawPBRP(ICamera& camera);
-	void drawDR(ICamera& camera);
-	void drawFast(ICamera& camera);
-	void drawPicking(ICamera& camera);
-	void drawDepth(ICamera& camera);
-	void drawDepthColor(ICamera& camera, glm::vec3& position);
-	void drawAOG(ICamera& camera);
-	void drawAOC(ICamera& camera);
-	void drawOcclusionBox(ICamera& camera);
+	void draw(ICamera& camera) override;
+	void drawPBRP(ICamera& camera) override;
+	void drawDR(ICamera& camera) override;
+	void drawPicking(ICamera& camera) override;
+	void drawDepth(ICamera& camera) override;
+	void drawDepthColor(ICamera& camera, glm::vec3& position) override;
+	void drawAOG(ICamera& camera) override;
+	void drawAOC(ICamera& camera) override;
+	void drawOcclusionBox(ICamera& camera) override;
 
 	/* IRenderable */
 	virtual void updateRenderer(IRenderer& renderer) override;
@@ -74,6 +73,7 @@ public:
 
 	void log() const;
 
+	void drawFast(ICamera& camera);
 	virtual void onDraw();
 
 protected:
