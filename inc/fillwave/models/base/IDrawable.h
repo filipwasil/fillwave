@@ -16,6 +16,10 @@ namespace framework {
 
 class ICamera;
 
+/*! \class IDrawable
+ * \brief Drawing interface.
+ */
+
 class IDrawable {
 public:
 	IDrawable() = default;

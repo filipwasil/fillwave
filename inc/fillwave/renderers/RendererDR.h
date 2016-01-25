@@ -22,7 +22,7 @@ namespace framework {
 class ProgramLoader;
 
 /*! \class RendererDR
- * \brief Deferred IRenderer.
+ * \brief Deferred IRenderer. Not ready (Rev.4.2.1).
  */
 
 class RendererDR: public IRenderer {

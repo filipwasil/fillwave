@@ -17,6 +17,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class IHUDNode
+ * \brief HUD base element.
+ */
+
 class IHUDNode {
 public:
 	IHUDNode(

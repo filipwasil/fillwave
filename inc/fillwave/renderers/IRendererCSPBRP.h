@@ -18,6 +18,10 @@ namespace framework {
 
 class LightManager;
 
+/*! \class IRendererCSPBRP
+ * \brief Cache Safe Program Based Render Pass IRenderer. Not ready (Rev.4.2.1).
+ */
+
 class IRendererCSPBRP : public IRenderer {
 public:
 	IRendererCSPBRP(LightManager* lightManager);

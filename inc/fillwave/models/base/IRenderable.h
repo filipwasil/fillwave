@@ -16,6 +16,10 @@ namespace framework {
 
 class IRenderer;
 
+/*! \class IRenderable
+ * \brief Encapsulates renderable objects. To be used with IRenderer.
+ */
+
 class IRenderable : public IDrawable {
 public:
 	IRenderable() = default;

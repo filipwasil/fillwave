@@ -15,7 +15,7 @@ namespace fillwave {
 class Engine;
 namespace framework {
 
-/*! \class Reloadable
+/*! \class IReloadable
  * \brief Encapsulates reloadable objects.
  */
 

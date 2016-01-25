@@ -15,6 +15,10 @@ namespace fillwave {
 class Engine;
 namespace framework {
 
+/*! \class HUD
+ * \brief Heads Up Display tree.
+ */
+
 class HUD: public TreePtr<pIHUDNode> {
 public:
 	HUD() = default;

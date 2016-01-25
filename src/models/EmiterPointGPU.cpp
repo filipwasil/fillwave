@@ -126,7 +126,7 @@ void EmiterPointGPU::draw(ICamera& camera) {
 
 	core::TransformFeedback::begin(GL_POINTS);
 
-	glDrawArrays(GL_POINT, 0, mVBOGPU[mSrcIndex]->getElements());
+	glDrawArrays(GL_POINTS, 0, mVBOGPU[mSrcIndex]->getElements());
 	FLOG_CHECK("Drawn buffer index %d drawing %d ", mSrcIndex,
 			mVBOGPU[mSrcIndex]->getElements());
 
@@ -183,7 +183,7 @@ inline void EmiterPointGPU::coreDraw() {
 
 	glEnable(GL_BLEND);
 	glBlendFunc(mBlending.mSrc, mBlending.mDst);
-	glDrawElements(GL_POINT, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
+	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 	FLOG_CHECK("Draw elements");
 
 	if (not mDepthTesting) {
