@@ -264,8 +264,16 @@ gCameraOrthographic cameraO = std::make_shared<CameraOrtographic>
 
 \subsection{Renderers}\label{sec:Renderers}
 
-\indent \indent In current revision (4.0.0) there are two types of renderers - \textbf{Forward renderer} (RendererFR) and Program Based Render Pass renderer (RendererPBRP). Default one is \textbf{RendererFR}. Which one You will use is up to you. There is also third one coming out soon - \textbf{Deferred Renderer} RendererDR. Currenty it is only available for testing purposes. Each scene has its won renderer and can be set using \textbf{voi IScene::setRenderer(IRenderer)} function call;
+\indent \indent In current revision (4.2.1) there are 4 types of renderers:
 
+\begin{itemize}
+\item \textbf{\textcolor{gray}{RendererPBRP}}
+\item \textbf{\textcolor{gray}{RendererFR}}
+\item \textbf{\textcolor{gray}{RendererDR} (still in progress)}
+\item \textbf{\textcolor{gray}{RendererCSPBRP} (still in progress)}
+\end{itemize}
+
+\indent \indent Renderers are \textbf{per Scene} and can be set using \textbf{Scene::setRenderer()} function. Do not hesitate to create your own one. Its easy and fun (Just implement IRenderer Interface).
 
 \subsection{Programs and Shaders}\label{sec:Programs and Shaders}
 \indent \indent Default programs can be built using \textbf{ProgramLoader} class using \textbf{getDefault} and \textbf{getDefaultBones} functions. See the example below:
@@ -277,8 +285,6 @@ pProgram default = loader.getDefault();
 pProgram animation = loader.getDefaultBones();
 \end{lstlisting}
 
-\newpage
-
 \subsection{Store functions}\label{sec:store functions}
 \indent \indent Use \textbf{"store"} functions to create OpenGL objects which will be also stored by internal managers, and which will be internally, reloaded and reused if needed. Use store functions everywhere where possible.
 
@@ -289,16 +295,13 @@ pShader  storeShaderVertex(const std::string& path);
 pShader  storeShaderGeometry(const std::string& path);
 pShader  storeShaderTesselationControl(const std::string& path);
 pShader  storeShaderTesselationEvaluation(const std::string& p);
-
 /* Store the shaders providing the source directly */
-pShader  storeShaderFragment(const std::string& name, std::string& source);
-pShader  storeShaderVertex(const std::string& name, std::string& source);
-pShader  storeShaderGeometry(const std::string& name, std::string& source);
-pShader  storeShaderTesselationControl(const std::string& name, std::string& source);
-pShader  storeShaderTesselationEvaluation(const std::string& name, std::string& source);
-
+pShader  storeShaderFragment(const std::string&, std::string&);
+pShader  storeShaderVertex(const std::string&, std::string&);
+pShader  storeShaderGeometry(const std::string&, std::string&);
+pShader  storeShaderTesselationControl(const std::string&, std::string&);
+pShader  storeShaderTesselationEvaluation(const std::string&, std::string&);
 pProgram storeProgram(const std::string& , std::vector<pShader>);
-
 pTexture storeTexture (const std::string&, const GLuint&);
 pTexture2DRenderableDynamic 
                        storeTextureDynamic (const std::string& fragmentShaderPath);
@@ -308,14 +311,11 @@ pTexture3D storeTexture3D(const std::string& path,
                           const std::string& path,
                           const std::string& path,
                           const std::string& path);
-
 pLightSpot storeLightSpot(glm::vec3, glm::vec4, pEntity);
 pLightPoint storeLightPoint(glm::vec3, glm::vec4, pEntity);
 pLightDirectional storeLightDirectional(glm::vec4, glm::vec3);
-
 pText storeText(std::string,std::string,GLfloat,GLfloat,GLfloat);
-
-pCursor  storeCursor(pProgram, pTexture, GLfloat);
+pCursor  storeCursor(pTexture, GLfloat);
 \end{lstlisting}
 
 \newpage
