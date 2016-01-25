@@ -88,9 +88,8 @@ EmiterPointCPU::EmiterPointCPU(
 	}
 
 	/* Initialize OpenGL stuff */
-	mVBO = pVertexBufferParticles(
-			new core::VertexBufferParticles(velocities, positions, times)); //xxx todo store in engine
-	mIBO = pIndexBufferParticles(new core::IndexBufferParticles(howMany)); //xxx todo store in engine
+	mVBO = std::make_shared<core::VertexBufferParticles>(velocities, positions, times); //xxx todo store in engine
+	mIBO = std::make_shared<core::IndexBufferParticles>(howMany); //xxx todo store in engine
 
 	initPipeline();
 	initVBO();
@@ -153,10 +152,10 @@ inline void EmiterPointCPU::coreDraw() {
 	}
 
 	glEnable(GL_BLEND);
-	glBlendFunc(mBlending.mSource, mBlending.mDestination);
+	glBlendFunc(mBlending.mSrc, mBlending.mDst);
 //   glBlendFuncSeparate(GL_ONE, GL_ONE, GL_ONE, GL_ONE);
 //   glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
-	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, (GLvoid*) 0);
+	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 	FLOG_CHECK("Draw elements");
 	glDisable(GL_BLEND);
 	if (not mDepthTesting) {
@@ -165,7 +164,7 @@ inline void EmiterPointCPU::coreDraw() {
 
 	core::Texture2D::unbind2DTextures();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void EmiterPointCPU::initBuffers() {
@@ -208,12 +207,28 @@ void EmiterPointCPU::initVAO() {
 	mIBO->bind();
 	mIBO->setReady();
 	mIBO->send();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void EmiterPointCPU::initVBO() {
 	mVBO->getAttributes(mProgram->getHandle());
 	mVBO->attributesBind(mProgram);
+}
+
+bool EmiterPointCPU::getRenderItem(RenderItem& item) {
+	item.mBlend = mBlending;
+	item.mCount = mIBO->getElements();
+	item.mDataType = GL_UNSIGNED_INT;
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+	item.mIndicesPointer = 0;
+	item.mMode = GL_POINTS;
+
+   item.mRenderStatus = 0xe4; // 11100100
+	return true;
 }
 
 } /* framework */

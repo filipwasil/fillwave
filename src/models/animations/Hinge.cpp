@@ -29,7 +29,12 @@ void Hinge::drawDR(ICamera& camera) {
 }
 
 void Hinge::updateRenderer(IRenderer& /*renderer*/) {
-	/* Hinge is not renderable */ //xxx add renderable class
+	/* Hinge meant not to be drawn */
+}
+
+bool Hinge::getRenderItem(RenderItem& /*item*/) {
+	/* Hinge meant not to be drawn */
+	return false;
 }
 
 } /* namespace framework */

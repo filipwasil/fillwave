@@ -16,8 +16,8 @@
 #include <fillwave/core/operations/ConditionalRender.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/base/Material.h>
-#include <fillwave/models/base/Reloadable.h>
 #include <fillwave/core/pipeline/Fence.h>
+#include <fillwave/models/base/IReloadable.h>
 #include <fillwave/renderers/IRenderer.h>
 
 namespace fillwave {
@@ -34,7 +34,7 @@ namespace framework {
  * \brief Basic drawable Entity.
  */
 
-class Mesh: public Entity, public Reloadable {
+class Mesh: public Entity, public IReloadable {
 public:
 	Mesh(
 			Engine* engine,
@@ -52,24 +52,28 @@ public:
 			pVertexBufferBasic vbo = pVertexBufferBasic(),
 			pIndexBufferBasic ibo = pIndexBufferBasic(),
 			Animator* boneManager = nullptr,
-			GLenum drawType = GL_TRIANGLES);
+			GLenum renderMode = GL_TRIANGLES);
 
 	virtual ~Mesh() = default;
 
-	void updateRenderer(IRenderer& renderer);
+	/* IDrawable */
+	void draw(ICamera& camera) override;
+	void drawPBRP(ICamera& camera) override;
+	void drawDR(ICamera& camera) override;
+	void drawPicking(ICamera& camera) override;
+	void drawDepth(ICamera& camera) override;
+	void drawDepthColor(ICamera& camera, glm::vec3& position) override;
+	void drawAOG(ICamera& camera) override;
+	void drawAOC(ICamera& camera) override;
+	void drawOcclusionBox(ICamera& camera) override;
 
-	void draw(ICamera& camera);
-	void drawPBRP(ICamera& camera);
-	void drawDR(ICamera& camera);
-	void drawFast(ICamera& camera);
-	void drawPicking(ICamera& camera);
-	void drawDepth(ICamera& camera);
-	void drawDepthColor(ICamera& camera, glm::vec3& position);
-	void drawAOG(ICamera& camera);
-	void drawAOC(ICamera& camera);
-	void drawOcclusionBox(ICamera& camera);
+	/* IRenderable */
+	virtual void updateRenderer(IRenderer& renderer) override;
+	virtual bool getRenderItem(RenderItem& item) override;
+
 	void log() const;
 
+	void drawFast(ICamera& camera);
 	virtual void onDraw();
 
 protected:
@@ -77,8 +81,9 @@ protected:
 	pTextureRegion mDiffuseMap;
 	pTextureRegion mNormalMap;
 	pTextureRegion mSpecularMap;
-	pProgram mProgram, mProgramDR, mProgramShadow, mProgramShadowColor,
+	pProgram mProgram, mProgramShadow, mProgramShadowColor,
 			mProgramOQ, mProgramAOGeometry, mProgramAOColor;
+	GLenum mRenderMode;
 
 	/* Buffers */
 	pIndexBufferBasic mIBO;
@@ -89,9 +94,6 @@ protected:
 
 	/* Animations */
 	Animator* mAnimator;
-
-	/* Draw */
-	GLenum mDrawType;
 
 	/* Occlusion cut off */
 	glm::mat4 mOcclusionMatrix;

@@ -27,8 +27,8 @@ Impostor::Impostor(
 				mTexture(texture),
 				mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)),
 				mSize(size) {
-	mBlending.mSource = blendingSource;
-	mBlending.mDestination = blendingDestination;
+	mBlending.mSrc = blendingSource;
+	mBlending.mDst = blendingDestination;
 }
 
 void Impostor::coreDraw() {
@@ -37,10 +37,28 @@ void Impostor::coreDraw() {
 	}
 
 	glEnable(GL_BLEND);
-	glBlendFunc(mBlending.mSource, mBlending.mDestination);
+	glBlendFunc(mBlending.mSrc, mBlending.mDst);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	glDisable(GL_BLEND);
 	core::Texture2D::unbind2DTextures();
+}
+
+bool Cursor::getRenderItem(RenderItem& item) {
+	item.mBlend = mBlending;
+	item.mCount = 4;
+	item.mDataType = GL_NONE;
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = 0;
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+	item.mHandles[RenderItem::eRenderHandleNormal] = 0;
+	item.mHandles[RenderItem::eRenderHandleSpecular] = 0;
+	item.mIndicesPointer = 0;
+	item.mMode = GL_TRIANGLE_STRIP;
+   item.mStatus.bBlending = 1;
+   item.mRenderStatus = 0x24; // blending, diffuse
+	return true;
 }
 
 } /* framework */

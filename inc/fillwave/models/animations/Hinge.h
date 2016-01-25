@@ -21,16 +21,21 @@ class Hinge: public Entity {
 public:
 	Hinge() = default;
 	virtual ~Hinge() = default;
+
+	/* IDrawable */
 	void draw(ICamera& camera);
 	void drawPBRP(ICamera& camera);
 	void drawDR(ICamera& camera);
-	void updateRenderer(IRenderer& renderer);
+
+	/* IRenderable */
+	void updateRenderer(IRenderer& renderer) override;
+	bool getRenderItem(RenderItem& item) override;
 };
 
 } /* namespace framework */
 typedef std::shared_ptr<framework::Hinge> pHinge;
 static pHinge buildHinge() {
-	return pHinge(new framework::Hinge());
+	return std::make_shared<framework::Hinge>();
 }
 } /* namespace fillwave */
 

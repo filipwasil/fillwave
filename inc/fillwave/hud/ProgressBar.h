@@ -16,6 +16,10 @@ namespace fillwave {
 class Engine;
 namespace framework {
 
+/*! \class ProgressBar
+ * \brief HUD node to indicate progress.
+ */
+
 class ProgressBar: public IHUDNode {
 public:
 	ProgressBar(

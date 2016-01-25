@@ -237,6 +237,10 @@ void Entity::updateRenderer(IRenderer& renderer) {
 	}
 }
 
+bool Entity::getRenderItem(RenderItem& /*item*/) {
+	return false;
+}
+
 } /* framework */
 pEntity buildEntity() {
 	return std::make_shared<framework::Entity>();

@@ -16,6 +16,7 @@ namespace framework {
 
 Terrain::Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap)
 		: mProgram(program), mLightManager(engine->getLightManager()), mRadius(radius), mGap(gap) {
+
 }
 
 void Terrain::draw(ICamera& camera) {
@@ -74,16 +75,22 @@ void Terrain::addChunk(pVoxelChunk chunk) {
 }
 
 void Terrain::updateRenderer(IRenderer& renderer) {
-	GLuint id = mProgram.get()->getHandle();
-	renderer.update(&id, this);
+	renderer.update(this);
 }
 
+bool Terrain::getRenderItem(RenderItem& item) {
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+   item.mRenderStatus = 0x02; // vao, ibo, diff, norm, spec, blend, cont, anima
+	return true;
+}
+
+} /* models */
 pTerrain buildTerrainVoxel(
 		Engine* engine,
 		pProgram program,
 		const std::string& texturePath,
 		framework::VoxelConstructor* constructor,
-		GLint radius = 0) {
+		GLint radius) {
 
 	GLfloat voxelGap = 0.2;
 
@@ -109,6 +116,4 @@ pTerrain buildTerrainVoxel(
 	}
 	return terrain;
 }
-
-} /* models */
 } /* fillwave */

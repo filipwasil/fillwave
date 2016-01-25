@@ -1,19 +1,19 @@
 /*
- * Reloadable.cpp
+ * IReloadable.cpp
  *
  *  Created on: May 24, 2015
  *      Author: Filip Wasil
  */
 
-#include <fillwave/models/base/Reloadable.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/models/base/IReloadable.h>
 
 FLOGINIT("Reloadable", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {
 
-Reloadable::Reloadable(Engine* engine)
+IReloadable::IReloadable(Engine* engine)
 		:
 				mVAO(engine->storeVAO(this)),
 				mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)) {
@@ -23,7 +23,7 @@ Reloadable::Reloadable(Engine* engine)
 	mSampler->setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 }
 
-void Reloadable::reload() {
+void IReloadable::reload() {
 	initBuffers();
 	initPipeline();
 	initVBO();

@@ -97,5 +97,22 @@ void Texture::reload() {
 	FLOG_CHECK("glGenTextures");
 }
 
+void bindTexture(GLuint target, GLuint handle) {
+	glBindTexture(target, handle);
+	FLOG_CHECK("bind (id) texture");
+}
+
+void bindTexture(GLint textureUnit, GLuint target, GLuint handle) {
+	glActiveTexture(GL_TEXTURE0 + textureUnit);
+	glBindTexture(target, handle);
+	FLOG_CHECK("bind (texUnit, id) texture");
+}
+
+void unbindTexture(GLuint target) {
+	glBindTexture(target, 0);
+	FLOG_CHECK("unbind texture");
+}
+
+
 } /* core  */
 } /* fillwave */

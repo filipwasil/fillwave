@@ -400,8 +400,7 @@ inline void Model::evaluateAnimations() {
 }
 
 void Model::updateRenderer(IRenderer& renderer) {
-	GLuint id = mProgram.get()->getHandle();
-	renderer.update(&id, this);
+	renderer.update(this);
 }
 
 pModel buildModel(

@@ -11,8 +11,7 @@
 #include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/common/IPickable.h>
 #include <fillwave/space/base/ICamera.h>
-#include <fillwave/models/base/IDrawable.h>
-#include <fillwave/models/base/ITreeNode.h>
+#include <fillwave/models/base/IRenderable.h>
 #include <fillwave/models/base/TreePtr.h>
 
 namespace fillwave {
@@ -34,10 +33,10 @@ namespace framework {
  */
 
 class Entity:
+		public IRenderable,
+		public IPickable,
 		public Moveable,
-		public IDrawable,
-		public TreePtr<pEntity>,
-		public IPickable {
+		public TreePtr<pEntity> {
 public:
 	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
 			glm::quat(1.0, 0.0, 0.0, 0.0));
@@ -69,26 +68,26 @@ public:
 	void updateParentMatrix(glm::mat4& parent);
 	void updateParentRotation(glm::quat& rotation);
 
-	/* Interface IPickable */
+	/* IPickable */
 	void pick(glm::vec3 color) override;
 	void unpick() override;
 	virtual void onPicked() override;
 	virtual void onUnpicked() override;
 
-	/* Interface IDrawable */
+	/* IDrawable */
 	virtual void draw(ICamera& camera) override;
 	virtual void drawPBRP(ICamera& camera) override;
 	virtual void drawDR(ICamera& camera) override;
+	virtual void drawDepth(ICamera& camera) override;
+	virtual void drawDepthColor(ICamera& camera, glm::vec3& position) override;
+	virtual void drawAOG(ICamera& camera) override;
+	virtual void drawAOC(ICamera& camera) override;
+	virtual void drawOcclusionBox(ICamera& camera) override;
+	virtual void drawPicking(ICamera& camera) override;
 
-	virtual void drawDepth(ICamera& camera);
-	virtual void drawDepthColor(ICamera& camera, glm::vec3& position);
-	virtual void drawAOG(ICamera& camera);
-	virtual void drawAOC(ICamera& camera);
-	virtual void drawOcclusionBox(ICamera& camera);
-	virtual void drawPicking(ICamera& camera);
-
-	/* Render passes */
-	virtual void updateRenderer(IRenderer& renderer);
+	/* IRenderable */
+	virtual void updateRenderer(IRenderer& renderer) override;
+	virtual bool getRenderItem(RenderItem& item) override;
 
 	/* Animations */
 	virtual bool isAnimated() const;
@@ -109,7 +108,6 @@ protected:
 	GLboolean mPSR;
 
 private:
-
 	void handleEvent(
 			std::vector<Callback*>& callbacks,
 			EventType& event);

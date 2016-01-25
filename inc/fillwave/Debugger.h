@@ -42,7 +42,7 @@ class Camera;
  *
  */
 
-class Debugger: public Reloadable {
+class Debugger: public IReloadable {
 public:
 	Debugger(Engine* engine);
 	virtual ~Debugger() = default;

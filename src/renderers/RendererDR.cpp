@@ -12,6 +12,7 @@
 #include <fillwave/management/LightManager.h>
 
 #include <fillwave/Fillwave.h>
+#include <fillwave/common/Macros.h>
 
 #if defined(FILLWAVE_GLES_3_0)
 #else
@@ -49,14 +50,13 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	std::vector<core::VertexBasic> vertices = sphere.getVertices();
 	std::vector<GLuint> indices = sphere.getIndices();
 
-	mDeferredPointLight = puMesh(
-			new Mesh(engine, Material(), buildTextureRegion(pTexture2D()),
+	mDeferredPointLight = make_unique<Mesh>(engine, Material(), buildTextureRegion(pTexture2D()),
 					buildTextureRegion(pTexture2D()), buildTextureRegion(pTexture2D()),
 					mProgramPointLight, pProgram(), pProgram(), loader.getOcclusionQuery(),
 					pProgram(), pProgram(), mLightManager,
-					pVertexBufferBasic(new core::VertexBufferBasic(vertices)),
-					pIndexBufferBasic(new core::IndexBufferBasic(indices)),
-					nullptr));
+					std::make_shared<core::VertexBufferBasic>(vertices),
+					std::make_shared<core::IndexBufferBasic>(indices),
+					nullptr);
 
 	initUniforms();
 	initGeometryBuffer();
@@ -66,8 +66,10 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	reset(mScreenSize[0], mScreenSize[1]);
 }
 
-void RendererDR::update(GLuint* /*programId*/, Entity* entity) {
-	entity->isAnimated() ? mAnimatedNodes.push_back(entity) : mNodes.push_back(entity);
+void RendererDR::update(IRenderable* renderable) {
+	RenderItem item;
+	renderable->getRenderItem(item);
+	item.mStatus.bIsAnimated ? mAnimatedNodes.push_back(renderable) : mNodes.push_back(renderable);
 }
 
 void RendererDR::draw(ICamera& camera) {
@@ -128,19 +130,11 @@ inline void RendererDR::drawGeometryPass(ICamera& camera) {
 
 	mProgramMain->use();
 	for (auto& node : mNodes) {
-		if (node->mFlagAttachedDetached) {
-			mFlagReload = true;
-			node->mFlagAttachedDetached = false;
-		}
 		node->drawDR(camera);
 	}
 
 	mProgramMainAnimated->use();
 	for (auto& node : mAnimatedNodes) {
-		if (node->mFlagAttachedDetached) {
-			mFlagReload = true;
-			node->mFlagAttachedDetached = false;
-		}
 		node->drawDR(camera);
 	}
 

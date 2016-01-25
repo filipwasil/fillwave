@@ -12,8 +12,8 @@
 namespace fillwave {
 namespace framework {
 
-void RendererFR::update(GLuint* /*programId*/, Entity* entity) {
-	mRenderPasses.push_back(entity);
+void RendererFR::update(IRenderable* renderable) {
+	mRenderPasses.push_back(renderable);
 }
 
 void RendererFR::draw(ICamera& camera) {

@@ -25,7 +25,7 @@ Text::Text(
 		glm::vec4 color,
 		eTextEffect effect)
 		:
-				Reloadable(engine),
+				IReloadable(engine),
 				IHUDNode(texture, createProgram(engine, effect), position, glm::vec2(scale, scale)),
 				mText(text),
 				mColor(color),
@@ -48,7 +48,7 @@ void Text::draw() {
 
 	glDisable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
-	glBlendFunc(mBlending.mSource, mBlending.mDestination);
+	glBlendFunc(mBlending.mSrc, mBlending.mDst);
 
 	core::Uniform::push(mUniformLocationCacheTextureUnit, FILLWAVE_DIFFUSE_UNIT);
 
@@ -58,7 +58,7 @@ void Text::draw() {
 	glDisable(GL_BLEND);
 
 	mTexture->unbind();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 	core::Program::disusePrograms();
 }
 
@@ -195,7 +195,7 @@ inline void Text::initVAO() {
 	mVBO->setReady();
 	mVBO->send();
 	mVBO->attributesSetForVAO();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void Text::initVBO() {

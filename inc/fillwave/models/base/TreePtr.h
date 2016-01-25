@@ -19,10 +19,11 @@ namespace framework {
  * \brief Basic tree template class. Enables attaching and detaching nodes.
  */
 
-template <class T>
-class TreePtr : public ITreeNode {
+template<class T>
+class TreePtr: public ITreeNode {
 public:
-	TreePtr():mFlagAttachedDetached(true) {
+	TreePtr()
+			: mFlagAttachedDetached(true) {
 
 	}
 
@@ -64,7 +65,7 @@ public:
 		bool result = mFlagAttachedDetached;
 		mFlagAttachedDetached = false;
 		for (auto& it : mChildren) {
-			 result = it->isAttachedDetached() ? true : result;
+			result = it->isAttachedDetached() ? true : result;
 		}
 		return result;
 	}

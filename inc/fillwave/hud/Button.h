@@ -15,6 +15,10 @@ namespace fillwave {
 class Engine;
 namespace framework {
 
+/*! \class Button
+ * \brief Pickable hud node.
+ */
+
 class Button: public IHUDNode, public IPickable {
 public:
 	Button(Engine* engine,

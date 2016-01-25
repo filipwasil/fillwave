@@ -13,6 +13,10 @@
 namespace fillwave {
 namespace framework {
 
+/*! \class IPickable
+ * \brief Pickable Interface.
+ */
+
 class IPickable {
 public:
 	IPickable();

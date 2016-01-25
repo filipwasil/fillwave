@@ -321,7 +321,7 @@ VoxelChunk::VoxelChunk(
 		VoxelConstructor* constructor,
 		GLfloat gap)
 		:
-				Reloadable(engine),
+				IReloadable(engine),
 				mVoxelGap(gap),
 				mSize(size),
 				mProgram(program),
@@ -431,7 +431,7 @@ void VoxelChunk::reloadVBO() {
 		}
 	}
 
-	mVBO = pVertexBufferBasic(new core::VertexBufferBasic(vertices)); //xxx todo needs to be in manager
+	mVBO = std::make_shared<core::VertexBufferBasic>(vertices); //xxx todo needs to be in manager
 
 	initVBO();
 
@@ -471,7 +471,7 @@ void VoxelChunk::draw(ICamera& camera) {
 
 	coreDraw();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 
 	core::Program::disusePrograms();
 }
@@ -487,7 +487,7 @@ void VoxelChunk::drawPBRP(ICamera& camera) {
 
 	coreDraw();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 GLint VoxelChunk::getSize() {
@@ -537,7 +537,7 @@ inline void VoxelChunk::initVAO() {
 	mVBO->setReady();
 	mVBO->send();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void VoxelChunk::initVBO() {
@@ -546,8 +546,19 @@ inline void VoxelChunk::initVBO() {
 }
 
 void VoxelChunk::updateRenderer(IRenderer& renderer) {
-	GLuint id = mProgram.get()->getHandle();
-	renderer.update(&id, this);
+	renderer.update(this);
+}
+
+bool VoxelChunk::getRenderItem(RenderItem& item) {
+	item.mCount = mVBO->getElements();
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+	item.mMode = GL_TRIANGLES;
+   item.mRenderStatus = 0xc0; // vao, ibo, diff, norm, spec, blend, cont, anim
+	return true;
 }
 
 } /* framework */

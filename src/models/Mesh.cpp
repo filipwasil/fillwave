@@ -21,7 +21,7 @@ using namespace std;
 namespace fillwave {
 namespace framework {
 
-const GLint gOQVertices = 36;
+const GLint gOQVertices = 36; //todo move it from here
 
 Mesh::Mesh(
 		Engine* engine,
@@ -39,9 +39,9 @@ Mesh::Mesh(
 		pVertexBufferBasic vbo,
 		pIndexBufferBasic ibo,
 		Animator* boneManager,
-		GLenum drawType)
+		GLenum renderMode)
 		:
-				Reloadable(engine),
+				IReloadable(engine),
 				mMaterial(material),
 				mDiffuseMap(diffuseMap),
 				mNormalMap(normalMap),
@@ -52,11 +52,11 @@ Mesh::Mesh(
 				mProgramOQ(programOcclusion),
 				mProgramAOGeometry(programAmbientOcclusionGeometry),
 				mProgramAOColor(programAmbientOcclusionColor),
+				mRenderMode(renderMode),
 				mIBO(ibo),
 				mVBO(vbo),
 				mLightManager(lightManager),
-				mAnimator(boneManager),
-				mDrawType(drawType)
+				mAnimator(boneManager)
 #ifdef FILLWAVE_GLES_3_0
 #else
 						,
@@ -159,7 +159,7 @@ inline void Mesh::coreDraw() {
 	//
 	//#endif
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 
 	core::Texture2D::unbind2DTextures();
 }
@@ -194,7 +194,7 @@ void Mesh::drawPicking(ICamera& camera) {
 
 		onDraw();
 
-		mVAO->unbind();
+		core::VertexArray::unbindVAO();
 
 		core::Uniform::push(mULCColorPicking, false);
 
@@ -211,7 +211,7 @@ void Mesh::drawOcclusionBox(ICamera& camera) {
 
 	mOcclusionQuery.begin();
 
-	glDrawArrays(GL_TRIANGLES, 0, gOQVertices);
+	glDrawArrays(mRenderMode, 0, gOQVertices);
 
 	FLOG_CHECK("drawOcclusionBox failed");
 
@@ -231,7 +231,7 @@ void Mesh::drawDepth(ICamera& camera) {
 
 		onDraw();
 
-		mVAO->unbind();
+		core::VertexArray::unbindVAO();
 
 		core::Program::disusePrograms();
 	}
@@ -249,7 +249,7 @@ void Mesh::drawDepthColor(ICamera& camera, glm::vec3& /*xxx double check positio
 
 		onDraw();
 
-		mVAO->unbind();
+		core::VertexArray::unbindVAO();
 
 		core::Program::disusePrograms();
 	}
@@ -267,7 +267,7 @@ void Mesh::drawAOG(ICamera& camera) {
 
 	onDraw();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void Mesh::drawAOC(ICamera& camera) {
@@ -282,18 +282,18 @@ void Mesh::drawAOC(ICamera& camera) {
 
 	onDraw();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void Mesh::onDraw() {
 	if (mIBO) {
 		/* Perform index drawing */
-		glDrawElements(mDrawType, mIBO->getElements(),
-		GL_UNSIGNED_INT, (GLvoid*) 0);
+		glDrawElements(mRenderMode, mIBO->getElements(),
+				GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 		FLOG_CHECK("glDrawElements failed");
 	} else {
 		/* Perform array drawing */
-		glDrawArrays(mDrawType, 0, mVBO->getElements());
+		glDrawArrays(mRenderMode, 0, mVBO->getElements());
 		FLOG_CHECK("glDrawArrays failed");
 	}
 }
@@ -377,7 +377,7 @@ inline void Mesh::initVAO() {
 		mIBO->send();
 	}
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void Mesh::initVBO() {
@@ -391,8 +391,23 @@ void Mesh::log() const {
 }
 
 void Mesh::updateRenderer(IRenderer& renderer) {
-	GLuint id = mProgram.get()->getHandle();
-	renderer.update(&id, this);
+	renderer.update(this);
+}
+
+bool Mesh::getRenderItem(RenderItem& item) {
+	item.mCount = mIBO ? mIBO->getElements() : mVBO->getElements();
+	item.mDataType = GL_UNSIGNED_INT;
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mDiffuseMap->getTexture()->getHandle();
+	item.mHandles[RenderItem::eRenderHandleNormal] = mNormalMap->getTexture()->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSpecular] = mSpecularMap->getTexture()->getHandle();
+	item.mIndicesPointer = 0;
+	item.mMode = GL_TRIANGLES;
+   item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, anim
+	return true;
 }
 
 } /* framework */

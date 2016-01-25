@@ -102,33 +102,30 @@ public:
 	virtual ~Texture();
 
 	virtual void bind(GLuint id = 0);
-
 	virtual void bind(GLint textureUnit, GLuint id = 0);
-
 	virtual void unbind();
 
 	void generateMipMaps();
-
 	void setParameter(GLenum parameter, GLenum value);
-
 	void setParameters(ParameterList paramers);
 
 	GLuint getMapType();
-
 	void setMapType(GLuint mapType);
 
 	virtual GLint getTarget();
-
-	virtual void log() = 0;
-
 	virtual void reload();
 
+	virtual void log() = 0;
 protected:
 	GLenum mTarget;
 
 private:
 	GLuint mMapType;
 };
+
+void bindTexture(GLuint target, GLuint handle);
+void bindTexture(GLint textureUnit, GLuint target, GLuint handle);
+void unbindTexture(GLuint target);
 
 } /* core */
 typedef std::shared_ptr<core::Texture> pTexture;

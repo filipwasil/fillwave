@@ -13,7 +13,7 @@ FLOGINIT("BufferManager", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-pVertexArray BufferManager::getVAO(Reloadable* user) {
+pVertexArray BufferManager::getVAO(IReloadable* user) {
 	VAOObject* mVAOObject = new VAOObject();
 	mVAOObject->mVAOUser = user;
 	pVertexArray shared(new core::VertexArray());

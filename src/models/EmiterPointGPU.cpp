@@ -83,11 +83,9 @@ EmiterPointGPU::EmiterPointGPU(
 
 	mNoiseTextureHandle = Create3DNoiseTexture(noiseTextureSize, howMany / 3); //xxx todo store in Manager
 
-	mVBOGPU[0] = pVertexBufferParticlesGPU(
-			new core::VertexBufferParticlesGPU(particles)); //xxx todo store in engine
-	mVBOGPU[1] = pVertexBufferParticlesGPU(
-			new core::VertexBufferParticlesGPU(particles)); //xxx todo store in engine
-	mIBO = pIndexBufferParticles(new core::IndexBufferParticles(mHowMany)); //xxx todo store in engine
+	mVBOGPU[0] = std::make_shared<core::VertexBufferParticlesGPU>(particles); //xxx todo store in engine
+	mVBOGPU[1] = std::make_shared<core::VertexBufferParticlesGPU>(particles); //xxx todo store in engine
+	mIBO = std::make_shared<core::IndexBufferParticles>(mHowMany); //xxx todo store in engine
 
 	initPipeline();
 	initVBO();
@@ -184,8 +182,8 @@ inline void EmiterPointGPU::coreDraw() {
 	}
 
 	glEnable(GL_BLEND);
-	glBlendFunc(mBlending.mSource, mBlending.mDestination);
-	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, (GLvoid*) 0);
+	glBlendFunc(mBlending.mSrc, mBlending.mDst);
+	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 	FLOG_CHECK("Draw elements");
 
 	if (not mDepthTesting) {
@@ -195,7 +193,7 @@ inline void EmiterPointGPU::coreDraw() {
 	glDisable(GL_BLEND);
 
 	core::Texture2D::unbind2DTextures();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void EmiterPointGPU::update(GLfloat timeElapsedSec) {
@@ -280,7 +278,7 @@ void EmiterPointGPU::initVAO() {
 	mIBO->bind();
 	mIBO->setReady();
 	mIBO->send();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 void EmiterPointGPU::initVBO() {
@@ -288,6 +286,22 @@ void EmiterPointGPU::initVBO() {
 		mVBOGPU[i]->getAttributes(mProgram->getHandle());
 		mVBOGPU[i]->attributesBind(mProgram);
 	}
+}
+
+bool EmiterPointGPU::getRenderItem(RenderItem& item) {
+	item.mBlend = mBlending;
+	item.mCount = mIBO->getElements();
+	item.mDataType = GL_UNSIGNED_INT;
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+	item.mIndicesPointer = 0;
+	item.mMode = GL_POINTS;
+
+   item.mRenderStatus = 0xe4; // 11100100
+	return true;
 }
 
 } /* framework */

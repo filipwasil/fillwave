@@ -16,7 +16,7 @@ namespace fillwave {
 namespace framework {
 
 Skybox::Skybox(Engine* engine, pTexture3D texture)
-		: Reloadable(engine), mTexture(texture) {
+		: IReloadable(engine), mTexture(texture) {
 
 	ProgramLoader loader(engine);
 
@@ -65,7 +65,7 @@ void Skybox::draw(ICamera& camera) {
 
 	core::Texture2D::unbind2DTextures();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 	core::Program::disusePrograms();
 }
 
@@ -95,7 +95,7 @@ void Skybox::drawDR(ICamera& camera) {
 
 	core::Texture2D::unbind2DTextures();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 	core::Program::disusePrograms();
 }
 
@@ -133,7 +133,7 @@ inline void Skybox::initVAO() {
 		mIBO->setReady();
 		mIBO->send();
 	}
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void Skybox::initVBO() {
@@ -141,9 +141,22 @@ inline void Skybox::initVBO() {
 	mVBO->attributesBind(mProgram);
 }
 
-pSkybox buildSkybox(Engine* engine, pTexture3D texture) {
-	return std::make_shared<framework::Skybox>(engine, texture);
+bool Skybox::getRenderItem(RenderItem& item) {
+	item.mCount = mIBO ? mIBO->getElements() : mVBO->getElements();
+	item.mDataType = GL_UNSIGNED_INT;
+	item.mFirst = 0;
+	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();//xxx 3d texture handle
+	item.mIndicesPointer = 0;
+	item.mMode = GL_TRIANGLES;
+   item.mRenderStatus = mIBO ? 0xe0 : 0xa0; // vao, ibo, diff, norm, spec, blend, cont, anim
+	return true;
 }
 
 } /* framework */
+pSkybox buildSkybox(Engine* engine, pTexture3D texture) {
+	return std::make_shared<framework::Skybox>(engine, texture);
+}
 } /* fillwave */

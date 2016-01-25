@@ -10,11 +10,16 @@
 
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/pipeline/Program.h>
+#include <fillwave/core/pipeline/Blending.h>
+
 #include <fillwave/models/base/ITreeNode.h>
-#include <fillwave/common/Blending.h>
 
 namespace fillwave {
 namespace framework {
+
+/*! \class IHUDNode
+ * \brief HUD base element.
+ */
 
 class IHUDNode {
 public:
@@ -45,7 +50,7 @@ public:
 	virtual void draw() {
 		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
-		glBlendFunc(mBlending.mSource, mBlending.mDestination);
+		glBlendFunc(mBlending.mSrc, mBlending.mDst);
 
 		mProgram->use();
 	   mProgram->uniformPush("uPosition", mPosition);

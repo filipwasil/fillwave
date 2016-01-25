@@ -9,7 +9,7 @@
 #define BUFFERMANAGER_H_
 
 #include <fillwave/core/buffers/Buffer.h>
-#include <fillwave/models/base/Reloadable.h>
+#include <fillwave/models/base/IReloadable.h>
 
 namespace fillwave {
 namespace framework {
@@ -19,7 +19,7 @@ namespace framework {
  */
 
 struct VAOObject {
-	Reloadable* mVAOUser;
+	IReloadable* mVAOUser;
 	pwVertexArray mVAO;
 };
 
@@ -39,7 +39,7 @@ public:
 
 	void reload();
 
-	pVertexArray getVAO(Reloadable* renderable);
+	pVertexArray getVAO(IReloadable* renderable);
 
 private:
 	std::vector<puVAOObject> mVAOObjects;

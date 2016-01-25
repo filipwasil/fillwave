@@ -20,9 +20,7 @@ Cursor::Cursor(Engine* engine, pTexture texture)
 						GLfloat(engine->getScreenSize()[0])
 								/ GLfloat(engine->getScreenSize()[1])) {
 
-	ProgramLoader loader(engine);
-
-	mProgram = loader.getCursor();
+	mProgram = ProgramLoader(engine).getCursor();
 
 	initUniformsCache();
 }
@@ -55,9 +53,8 @@ void Cursor::initUniformsCache() {
 	core::Program::disusePrograms();
 }
 
+} /* framework */
 pCursor buildCursor(Engine* engine, pTexture texture) {
 	return std::make_shared<framework::Cursor>(engine, texture);
 }
-
-} /* framework */
 } /* fillwave */

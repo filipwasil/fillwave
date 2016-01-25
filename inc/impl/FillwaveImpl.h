@@ -220,7 +220,7 @@ struct Engine::EngineImpl {
 
 	pSampler storeSO(GLint textureUnit);
 
-	pVertexArray storeVAO(framework::Reloadable* user = nullptr);
+	pVertexArray storeVAO(framework::IReloadable* user = nullptr);
 };
 
 #ifdef __ANDROID__
@@ -359,7 +359,7 @@ inline void Engine::EngineImpl::initOcclusionTest() {
 	mVBOOcclusion->bind();
 	mVBOOcclusion->attributesSetForVAO();
 	mVBOOcclusion->send();
-	mVAOOcclusion->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void Engine::EngineImpl::initStartup() {
@@ -667,7 +667,7 @@ inline void Engine::EngineImpl::drawOcclusionPass() {
 	glDepthMask(GL_TRUE);
 	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
-	mVAOOcclusion->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
@@ -916,7 +916,7 @@ pSampler Engine::EngineImpl::storeSO(GLint textureUnit) {
 	return mSamplerManager->get(textureUnit);
 }
 
-pVertexArray Engine::EngineImpl::storeVAO(framework::Reloadable* user) {
+pVertexArray Engine::EngineImpl::storeVAO(framework::IReloadable* user) {
 	return mBufferManager->getVAO(user);
 }
 

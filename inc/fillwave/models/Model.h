@@ -68,7 +68,7 @@ public:
 	void setActiveAnimation(GLint animationID);
 	GLint getActiveAnimations();
 
-	void updateRenderer(IRenderer& renderer);
+	void updateRenderer(IRenderer& renderer) override;
 
 	void log() const;
 

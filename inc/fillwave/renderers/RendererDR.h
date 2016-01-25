@@ -22,7 +22,7 @@ namespace framework {
 class ProgramLoader;
 
 /*! \class RendererDR
- * \brief Deferred IRenderer.
+ * \brief Deferred IRenderer. Not ready (Rev.4.2.1).
  */
 
 class RendererDR: public IRenderer {
@@ -30,7 +30,7 @@ public:
 	RendererDR(Engine* engine, ProgramLoader& loader);
 	virtual ~RendererDR() = default;
 
-	void update(GLuint* programId, Entity* entity) override;
+	void update(IRenderable* renderable) override;
 	void draw(ICamera& camera) override;
 	void reset(GLuint width, GLuint height) override;
 	void clear() override;
@@ -89,8 +89,8 @@ private:
 
 	puFramebufferGeometry mGBuffer;
 
-	std::vector<Entity*> mNodes; /* true -> animated, false -> not animated */
-	std::vector<Entity*> mAnimatedNodes; /* true -> animated, false -> not animated */
+	std::vector<IRenderable*> mNodes; /* true -> animated, false -> not animated */
+	std::vector<IRenderable*> mAnimatedNodes; /* true -> animated, false -> not animated */
 };
 
 } /* namespace framework */

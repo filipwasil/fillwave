@@ -14,8 +14,8 @@
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/texturing/Texture.h>
 #include <fillwave/core/rendering/TransformFeedback.h>
-#include <fillwave/common/Blending.h>
-#include <fillwave/models/base/Reloadable.h>
+#include <fillwave/core/pipeline/Blending.h>
+#include <fillwave/models/base/IReloadable.h>
 
 namespace fillwave {
 class Engine;
@@ -25,7 +25,7 @@ namespace framework {
  * \brief Drawable Entity which emits particles.
  */
 
-class IEmiterPoint: public Entity, public Reloadable {
+class IEmiterPoint: public IReloadable, public Entity {
 public:
 	IEmiterPoint(
 			Engine* engine,
@@ -41,11 +41,13 @@ public:
 
 	virtual ~IEmiterPoint() = default;
 
-	void updateRenderer(IRenderer& renderer);
-	void setBlendingFunction(GLenum sourceFactor, GLenum destinationFactor);
+	void setBlending(GLenum sourceFactor, GLenum destinationFactor);
 
 	virtual void update(GLfloat timeElapsedSec) = 0;
 	virtual void draw(ICamera& camera) = 0;
+
+	/* IRenderable */
+	void updateRenderer(IRenderer& renderer) override;
 
 protected:
 	GLfloat mStartSize;
@@ -55,9 +57,9 @@ protected:
 	GLfloat mHowMany;
 	GLboolean mDepthTesting;
 	GLfloat mAlphaCutOff;
-	Blending mBlending;
 	pProgram mProgram;
 	pIndexBufferParticles mIBO;
+	Blending mBlending;
 };
 
 } /* framework */

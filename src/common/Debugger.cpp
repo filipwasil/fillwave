@@ -27,7 +27,7 @@ namespace framework {
 
 Debugger::Debugger(Engine* engine)
 		:
-				Reloadable(engine),
+				IReloadable(engine),
 				mState(eDebuggerState::eOff),
 				mEngine(engine),
 				mVBO(std::make_shared<core::VertexBufferDebug>(1.0)),
@@ -142,7 +142,7 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
 	glDisable(GL_BLEND);
 
 	core::Texture2D::unbind2DTextures();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 	core::Program::disusePrograms();
 
 	glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
@@ -179,7 +179,7 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
 	glDisable(GL_BLEND);
 
 	core::Texture2D::unbind2DTextures();
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 	core::Program::disusePrograms();
 
 	glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
@@ -210,7 +210,7 @@ inline void Debugger::initVAO() {
 	mVBO->send();
 	mVBO->attributesSetForVAO();
 
-	mVAO->unbind();
+	core::VertexArray::unbindVAO();
 }
 
 inline void Debugger::initVBO() {

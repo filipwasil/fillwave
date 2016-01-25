@@ -32,23 +32,6 @@ public:
 	GLboolean isLightsRefresh();
 	void resetLightsRefresh();
 
-	template<class T>
-	GLboolean isRefreshLight(std::vector<T>& data) {
-		for (auto it : data) {
-			if (it->isRefresh()) {
-				return GL_TRUE;
-			}
-		}
-		return GL_FALSE;
-	}
-
-	template<class T>
-	void resetRefreshLight(std::vector<T>& data) {
-		for (auto it : data) {
-			it->setRefresh(GL_FALSE);
-		}
-	}
-
 	pLightSpot addLightSpot(
 			pTexture2DRenderable shadowTexture,
 			glm::vec3 position,
@@ -83,6 +66,9 @@ public:
 	void pushLightUniformsDR();
 	void pushLightUniforms(core::Program* program);
 	void pushLightUniformBuffers(core::Program* program);
+
+	void pushLightUniforms(GLuint program);
+	void pushLightUniformBuffers(GLuint program);
 
 	void updateDeferredBufferSpot(
 			GLuint lightID,
@@ -123,7 +109,6 @@ private:
 	GLboolean isRefreshLightPoint();
 
 	GLfloat computePointLightBoundingSphere(pLightPoint& light);
-
 };
 
 } /* framework */

@@ -9,8 +9,7 @@
 #define INC_FILLWAVE_CORE_RENDERERS_RENDERER_H_
 
 #include <fillwave/OpenGL.h>
-#include <unordered_map>
-#include <vector>
+#include <fillwave/models/base/IRenderable.h>
 #include <memory>
 
 namespace fillwave {
@@ -34,7 +33,7 @@ public:
 
 	virtual ~IRenderer() = default;
 
-	virtual void update(GLuint* id, Entity* entity) = 0;
+	virtual void update(IRenderable* renderable) = 0;
 	virtual void draw(ICamera& camera) = 0;
 	virtual void reset(GLuint width, GLuint height) = 0;
 	virtual void clear() = 0;
