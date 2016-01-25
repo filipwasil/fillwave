@@ -84,12 +84,13 @@ bool Terrain::getRenderItem(RenderItem& item) {
 	return true;
 }
 
+} /* models */
 pTerrain buildTerrainVoxel(
 		Engine* engine,
 		pProgram program,
 		const std::string& texturePath,
 		framework::VoxelConstructor* constructor,
-		GLint radius = 0) {
+		GLint radius) {
 
 	GLfloat voxelGap = 0.2;
 
@@ -115,6 +116,4 @@ pTerrain buildTerrainVoxel(
 	}
 	return terrain;
 }
-
-} /* models */
 } /* fillwave */
