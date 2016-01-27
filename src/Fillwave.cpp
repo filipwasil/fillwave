@@ -442,16 +442,11 @@ void Engine::log() {
 
 void Engine::pick(GLuint x, GLuint y) {
 	mImpl->mPickingRenderableTexture->bindForRendering();
-
 	mImpl->drawClear();
-
 	mImpl->mScene->drawPicking();
-
 	mImpl->mPickingPixelBuffer->bind();
-
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
 	GL_UNSIGNED_BYTE, 0);
-
 	FLOG_CHECK("glReadPixels failed");
 #ifdef FILLWAVE_GLES_3_0
 	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);

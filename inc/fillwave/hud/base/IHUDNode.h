@@ -48,17 +48,19 @@ public:
 	}
 
 	virtual void draw() {
+		mProgram->use();
+		mProgram->uniformPush("uPosition", mPosition);
+		mProgram->uniformPush("uScale", mScale);
+		coreDraw();
+	}
+
+	void coreDraw() {
 		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
-		glBlendFunc(mBlending.mSrc, mBlending.mDst);
-
-		mProgram->use();
-	   mProgram->uniformPush("uPosition", mPosition);
-	   mProgram->uniformPush("uScale", mScale);
+		glBlendFunc(mBlending.mSrc, mBlending.mSrc);
 		mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		mTexture->unbind();
-
 		glEnable(GL_DEPTH_TEST);
 		glDisable(GL_BLEND);
 	}

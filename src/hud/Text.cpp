@@ -41,17 +41,15 @@ Text::Text(
 }
 
 void Text::draw() {
-	mVAO->bind();
 	mProgram->use();
+
+	mVAO->bind();
 	mVBO->send();
 	mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
 
 	glDisable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(mBlending.mSrc, mBlending.mDst);
-
-	core::Uniform::push(mUniformLocationCacheTextureUnit, FILLWAVE_DIFFUSE_UNIT);
-
 	glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
 
 	glEnable(GL_DEPTH_TEST);
@@ -59,7 +57,6 @@ void Text::draw() {
 
 	mTexture->unbind();
 	core::VertexArray::unbindVAO();
-	core::Program::disusePrograms();
 }
 
 inline void Text::clearVBO() {
@@ -184,8 +181,6 @@ inline void Text::initPipeline() {
 
 inline void Text::initUniformsCache() {
 	mUniformLocationCacheColor = mProgram->getUniformLocation("uColour");
-	mUniformLocationCacheTextureUnit = mProgram->getUniformLocation(
-			"uTextureUnit");
 }
 
 inline void Text::initVAO() {

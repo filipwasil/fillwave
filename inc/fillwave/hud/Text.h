@@ -60,8 +60,6 @@ private:
 	Font* mFont;
 	pVertexBufferText mVBO;
 
-//	std::map<std::string, pTextureRegion> mCharacters; xxx remove ?
-
 	/* IHUD */
 	Engine* mEngine;
 	GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
