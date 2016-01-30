@@ -21,6 +21,7 @@
 #include <fillwave/management/LightManager.h>
 #include <fillwave/management/SamplerManager.h>
 #include <fillwave/management/BufferManager.h>
+#include <fillwave/common/Macros.h>
 
 FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 
@@ -323,15 +324,12 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
-	mTextureManager = puTextureManager(
-			new framework::TextureManager(mFileLoader.getRootPath()));
-	mShaderManager = puShaderManager(
-			new framework::ShaderManager(mFileLoader.getRootPath()));
-	mProgramManager = puProgramManager(new framework::ProgramManager());
-	mLightManager = puLightManager(
-			new framework::LightManager(mWindowWidth, mWindowHeight));
-	mSamplerManager = puSamplerManager(new framework::SamplerManager());
-	mBufferManager = puBufferManager(new framework::BufferManager());
+	mTextureManager = make_unique<framework::TextureManager>(mFileLoader.getRootPath());
+	mShaderManager = make_unique<framework::ShaderManager>(mFileLoader.getRootPath());
+	mProgramManager = make_unique<framework::ProgramManager>();
+	mLightManager = make_unique<framework::LightManager>();
+	mSamplerManager = make_unique<framework::SamplerManager>();
+	mBufferManager = make_unique<framework::BufferManager>();
 }
 
 inline void Engine::EngineImpl::initPipelines() {

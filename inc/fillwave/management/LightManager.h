@@ -26,11 +26,17 @@ namespace framework {
 
 class LightManager {
 public:
-	LightManager(GLsizei screenWidth, GLsizei screenHeight);
+	LightManager();
 	virtual ~LightManager() = default;
 
 	GLboolean isLightsRefresh();
 	void resetLightsRefresh();
+	void removeLights();
+	void updateLightEntities();
+
+	void pushLightUniformsDR();
+	void pushLightUniforms(core::Program* program);
+	void pushLightUniformBuffers(core::Program* program);
 
 	pLightSpot addLightSpot(
 			pTexture2DRenderable shadowTexture,
@@ -55,21 +61,18 @@ public:
 	void removeLight(pLightSpot light);
 	void removeLight(pLightDirectional light);
 	void removeLight(pLightPoint light);
-	void removeLights();
+
+	pLightSpot getLightSpot(GLint i);
+	pLightPoint getLightPoint(GLint i);
+	pLightDirectional getLightDirectional(GLint i);
 
 	GLint getLightsSpotHowMany();
 	GLint getLightsDirectionalHowMany();
 	GLint getLightsPointHowMany();
 
-	void updateLightEntities();
+	void bindShadowmaps();
 
-	void pushLightUniformsDR();
-	void pushLightUniforms(core::Program* program);
-	void pushLightUniformBuffers(core::Program* program);
-
-	void pushLightUniforms(GLuint program);
-	void pushLightUniformBuffers(GLuint program);
-
+	/* Deferred rendering */
 	void updateDeferredBufferSpot(
 			GLuint lightID,
 			core::Program* program,
@@ -83,21 +86,7 @@ public:
 			core::Program* program,
 			GLint currentShadowUnit);
 
-	pLightSpot getLightSpot(GLint i);
-	pLightPoint getLightPoint(GLint i);
-	pLightDirectional getLightDirectional(GLint i);
-
-	GLint obtainTextureUnit();
-	void freeTextureUnit(GLint id);
-
-	void bindShadowmaps();
-
 private:
-	const glm::mat4 mBiasMatrix = glm::mat4(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0,
-			0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
-
-	GLsizei mShadowWidth;
-	GLsizei mShadowHeight;
 
 	std::vector<pLightSpot> mSpotLights;
 	std::vector<pLightDirectional> mDirectionalLights;

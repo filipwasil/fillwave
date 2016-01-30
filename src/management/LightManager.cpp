@@ -15,8 +15,10 @@ FLOGINIT("LightManager", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-LightManager::LightManager(GLsizei screenWidth, GLsizei screenHeight)
-		: mShadowWidth(screenWidth), mShadowHeight(screenHeight) {
+const glm::mat4 FILLWAVE_UV_BIAS_MATRIX(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0,
+		0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
+
+LightManager::LightManager() {
 	mLightBufferData.resize(
 	FILLWAVE_MAX_SPOT_LIGHTS + FILLWAVE_MAX_DIRECTIONAL_LIGHTS);
 }
@@ -197,7 +199,7 @@ void LightManager::pushLightUniforms(core::Program* program) {
 					mSpotLights[i]->getIntensity())[j];
 		}
 
-		glm::mat4 matrix = mBiasMatrix * camera.getViewProjection();
+		glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection();
 		for (GLuint j = 0; j < 16; j++) {
 			mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr(matrix)[j];
 		}
@@ -225,7 +227,7 @@ void LightManager::pushLightUniforms(core::Program* program) {
 					mDirectionalLights[i]->getIntensity())[j];
 		}
 
-		glm::mat4 matrix = mBiasMatrix * camera.getViewProjection();
+		glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection();
 		for (GLuint j = 0; j < 16; j++) {
 			mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr(matrix)[j];
 		}
@@ -280,7 +282,7 @@ void LightManager::pushLightUniformsDR() {
 					mSpotLights[i]->getIntensity())[j];
 		}
 
-		glm::mat4 matrix = mBiasMatrix * camera.getViewProjection();
+		glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection();
 		for (GLuint j = 0; j < 16; j++) {
 			mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr(matrix)[j];
 		}
@@ -303,7 +305,7 @@ void LightManager::pushLightUniformsDR() {
 					mDirectionalLights[i]->getIntensity())[j];
 		}
 
-		glm::mat4 matrix = mBiasMatrix * camera.getViewProjection();
+		glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection();
 		for (GLuint j = 0; j < 16; j++) {
 			mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr(matrix)[j];
 		}
