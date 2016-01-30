@@ -18,13 +18,28 @@ namespace fillwave {
 namespace framework {
 
 /*! \class PolicyDefault
- * \brief Creation policy which creates an object as regular pointer
+ * \brief Creation policy which creates an object on stack
  */
 template<class T>
 class PolicyDefault {
 public:
 	PolicyDefault() = default;
 	~PolicyDefault() = default;
+
+	template <typename... P>
+	inline T Create(P... parameters) {
+		return T(parameters...);
+	}
+};
+
+/*! \class PolicyDefault
+ * \brief Creation policy which creates an object as regular pointer
+ */
+template<class T>
+class PolicyPointer {
+public:
+	PolicyPointer() = default;
+	~PolicyPointer() = default;
 
 	template <typename... P>
 	inline T* Create(P... parameters) {
