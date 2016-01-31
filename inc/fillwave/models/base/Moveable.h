@@ -83,7 +83,7 @@ protected:
 };
 
 template <class M>
-GLboolean isMoveablesRefresh(std::vector<M>& moveables) {
+GLboolean isMoveablesRefresh(std::vector<M>& moveables) { //xxx to be removed
 	for (auto& it : moveables) {
 		if (it->isRefresh()) {
 			return GL_TRUE;

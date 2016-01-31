@@ -5,13 +5,12 @@
 
 #include <fillwave/models/Mesh.h>
 
-#include <fillwave/management/LightManager.h>
 #include <fillwave/models/animations/Animator.h>
 
 #include <fillwave/loaders/ProgramLoader.h>
 
 #include <fillwave/common/string.h>
-
+#include <fillwave/management/LightSystem.h>
 #include <fillwave/Profiler.h>
 
 FLOGINIT("Mesh", FERROR | FFATAL | FINFO)
@@ -35,7 +34,7 @@ Mesh::Mesh(
 		pProgram programOcclusion,
 		pProgram programAmbientOcclusionGeometry,
 		pProgram programAmbientOcclusionColor,
-		LightManager* lightManager,
+		LightSystem* lights,
 		pVertexBufferBasic vbo,
 		pIndexBufferBasic ibo,
 		Animator* boneManager,
@@ -55,7 +54,7 @@ Mesh::Mesh(
 				mRenderMode(renderMode),
 				mIBO(ibo),
 				mVBO(vbo),
-				mLightManager(lightManager),
+				mLights(lights),
 				mAnimator(boneManager)
 #ifdef FILLWAVE_GLES_3_0
 #else
@@ -105,8 +104,8 @@ void Mesh::draw(ICamera& camera) {
 		core::Uniform::push(mULCViewProjectionMatrix,
 				camera.getViewProjection());
 
-		mLightManager->pushLightUniforms(mProgram.get());
-		mLightManager->bindShadowmaps();
+		mLights->pushLightUniforms(mProgram.get());
+		mLights->bindShadowmaps();
 
 		coreDraw();
 	}
@@ -128,10 +127,10 @@ void Mesh::drawDR(ICamera& camera) {
 		//   core::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
 		//   core::Uniform::push(mULCCameraPosition, camera.getTranslation());
 
-//      mLightManager->pushLightUniformsShadowMaps(mProgram.get());
+//      mLights->pushLightUniformsShadowMaps(mProgram.get());
 
-		mLightManager->pushLightUniformsDR();
-		mLightManager->bindShadowmaps();
+		mLights->pushLightUniformsDR();
+		mLights->bindShadowmaps();
 
 		coreDraw();
 	}
@@ -139,7 +138,7 @@ void Mesh::drawDR(ICamera& camera) {
 
 void Mesh::drawFast(ICamera&) {
 	mProgram->use();
-	mLightManager->bindShadowmaps();
+	mLights->bindShadowmaps();
 
 	coreDraw();
 }

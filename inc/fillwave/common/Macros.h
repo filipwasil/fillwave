@@ -17,11 +17,11 @@ std::unique_ptr<T> make_unique(Args&& ...args) {
 }
 
 template <class T>
-void remove(std::vector<T>& lights, T& light ) {
-	auto it = std::find(lights.begin(), lights.end(),
-			light);
-	if (it != lights.end()) {
-		lights.erase(it);
+void remove(std::vector<T>& vector, T& item ) {
+	auto it = std::find(vector.begin(), vector.end(),
+			item);
+	if (it != vector.end()) {
+		vector.erase(it);
 	}
 }
 

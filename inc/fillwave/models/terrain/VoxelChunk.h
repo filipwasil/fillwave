@@ -18,7 +18,7 @@
 namespace fillwave {
 class Engine;
 namespace framework {
-class LightManager;
+class LightSystem;
 
 /*! \class VoxelChunk
  * \brief Block of Voxel objects.
@@ -60,7 +60,7 @@ private:
 	pProgram mProgram;
 	pTexture2D mTexture;
 	pVertexBufferBasic mVBO;
-	LightManager* mLightManager;
+	LightSystem* mLights;
 
 	GLint mUniformLocationCacheModelMatrix, mUniformLocationCacheCameraPosition,
 			mUniformLocationCacheViewProjectionMatrix;

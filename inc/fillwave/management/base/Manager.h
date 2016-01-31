@@ -5,8 +5,8 @@
  *      Author: filip
  */
 
-#ifndef INC_FILLWAVE_MANAGEMENT_BASE_CONTAINER_H_
-#define INC_FILLWAVE_MANAGEMENT_BASE_CONTAINER_H_
+#ifndef INC_FILLWAVE_MANAGEMENT_BASE_MANAGER_H_
+#define INC_FILLWAVE_MANAGEMENT_BASE_MANAGER_H_
 
 #include <memory>
 #include <vector>
@@ -88,51 +88,33 @@ T FillwaveItemConstruct (P... parameters) {
  * \brief Basic manager
  */
 template <class T, int M, class C, typename... P>
-class Container {
+class Manager : public std::vector<T> {
 public:
 
-	Container() = default;
-	virtual ~Container() = default;
+	Manager() = default;
+	virtual ~Manager() = default;
 
 	T add(P... parameters) {
 		T item;
-		if (mItems.size() < M) {
+		if ((*this).size() < M) {
 			item = FillwaveItemConstruct<T, C, P... >(parameters...);
-			mItems.push_back(item);
+			(*this).push_back(item);
 		} else {
 			item = T();
 		}
 		return item;
 	}
 
-	T get(int i) {
-		if (mItems.size() < M) {
-			return mItems[i];
-		}
-		return T();
-	}
-
-	void clear() {
-		mItems.clear();
-	}
-
-	void remove(T item ) {
-		auto it = std::find(mItems.begin(), mItems.end(),
+	void remove(T item) {
+		auto it = std::find((*this).begin(), (*this).end(),
 				item);
-		if (it != mItems.end()) {
-			mItems.erase(it);
+		if (it != (*this).end()) {
+			(*this).erase(it);
 		}
 	}
-
-	int howMany() {
-		return mItems.size();
-	}
-
-private:
-	std::vector<T> mItems;
 };
 
 } /* namespace framework */
 } /* namespace fillwave */
 
-#endif /* INC_FILLWAVE_MANAGEMENT_BASE_CONTAINER_H_ */
+#endif /* INC_FILLWAVE_MANAGEMENT_BASE_MANAGER_H_ */

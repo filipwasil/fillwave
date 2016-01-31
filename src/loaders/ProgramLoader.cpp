@@ -8,12 +8,11 @@
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/loaders/ShaderLoaderFragment.h>
 #include <fillwave/loaders/ShaderLoaderVertex.h>
-#include <fillwave/management/LightManager.h>
-
 #include <fillwave/common/string.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/Profiler.h>
 #include <fillwave/Assets.h>
+#include <fillwave/management/LightSystem.h>
 
 FLOGINIT("ProgramLoader", FERROR | FFATAL)
 

@@ -18,10 +18,10 @@
 #include <fillwave/management/ProgramManager.h>
 #include <fillwave/management/TextureManager.h>
 #include <fillwave/management/ShaderManager.h>
-#include <fillwave/management/LightManager.h>
 #include <fillwave/management/SamplerManager.h>
 #include <fillwave/management/BufferManager.h>
 #include <fillwave/common/Macros.h>
+#include <fillwave/management/LightSystem.h>
 
 FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 
@@ -76,11 +76,11 @@ struct Engine::EngineImpl {
 	puProgramManager mProgramManager;
 	puTextureManager mTextureManager;
 	puShaderManager mShaderManager;
-	puLightManager mLightManager;
 	puSamplerManager mSamplerManager;
 	puBufferManager mBufferManager;
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
+	puLightSystem mLights;
 	std::vector<core::PostProcessingPass> mPostProcessingPasses;
 	std::vector<pTexture2DRenderableDynamic> mTexturesDynamic;
 	pProgram mProgramTextureLookup;
@@ -327,9 +327,9 @@ inline void Engine::EngineImpl::initManagement() {
 	mTextureManager = make_unique<framework::TextureManager>(mFileLoader.getRootPath());
 	mShaderManager = make_unique<framework::ShaderManager>(mFileLoader.getRootPath());
 	mProgramManager = make_unique<framework::ProgramManager>();
-	mLightManager = make_unique<framework::LightManager>();
 	mSamplerManager = make_unique<framework::SamplerManager>();
 	mBufferManager = make_unique<framework::BufferManager>();
+	mLights = make_unique<framework::LightSystem>();
 }
 
 inline void Engine::EngineImpl::initPipelines() {
@@ -692,15 +692,15 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 
 	glDepthMask(GL_TRUE);
 
-	mLightManager->updateLightEntities();
+	mLights->updateLightEntities();
 
 	GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
 
 	core::Texture2DRenderable* light2DTexture;
-	for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
+	for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
 		framework::CameraPerspective camera =
-				*(mLightManager->getLightSpot(i)->getShadowCamera().get());
-		light2DTexture = mLightManager->getLightSpot(i)->getShadowTexture().get();
+				*(mLights->mLightsSpot[i]->getShadowCamera().get());
+		light2DTexture = mLights->mLightsSpot[i]->getShadowTexture().get();
 		light2DTexture->bindForWriting();
 		light2DTexture->bind(currentTextureUnit++);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -708,11 +708,11 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 		mScene->drawDepth(camera);
 	}
 
-	for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany(); i++) {
+	for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
 		framework::CameraOrthographic camera =
-				*(mLightManager->getLightDirectional(i)->getShadowCamera().get());
+				*(mLights->mLightsDirectional[i]->getShadowCamera().get());
 		light2DTexture =
-				mLightManager->getLightDirectional(i)->getShadowTexture().get();
+				mLights->mLightsDirectional[i]->getShadowTexture().get();
 		light2DTexture->bindForWriting();
 		light2DTexture->bind(currentTextureUnit++);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -720,8 +720,8 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 		mScene->drawDepth(camera);
 	}
 
-	for (GLint i = 0; i < mLightManager->getLightsPointHowMany(); i++) {
-		framework::LightPoint* lightPoint = mLightManager->getLightPoint(i).get();
+	for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
+		framework::LightPoint* lightPoint = mLights->mLightsPoint[i].get();
 		core::Texture3DRenderable* light3DTexture =
 				lightPoint->getShadowTexture().get();
 		glm::vec3 lightPosition(lightPoint->getTranslation());
@@ -766,47 +766,47 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 	switch (mDebugger->getState()) {
 		case eDebuggerState::eLightsSpot:
 			mCurentTextureUnit = 0;
-			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
+			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
 				framework::CameraPerspective cameraP =
-						*(mLightManager->getLightSpot(i)->getShadowCamera().get());
+						*(mLights->mLightsSpot[i]->getShadowCamera().get());
 				mDebugger->renderFromCamera(cameraP, mCurentTextureUnit++); //xxx make more flexible
 			}
-			for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany();
+			for (size_t i = 0; i < mLights->mLightsDirectional.size();
 					i++) {
 				framework::CameraOrthographic cameraO =
-						*(mLightManager->getLightDirectional(i)->getShadowCamera().get());
+						*(mLights->mLightsDirectional[i]->getShadowCamera().get());
 				mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
 			}
 			mCurentTextureUnit = 0;
-			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
+			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
 				mDebugger->renderDepthPerspective(mCurentTextureUnit++);
 			}
-			for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany();
+			for (size_t i = 0; i < mLights->mLightsDirectional.size();
 					i++) {
 				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
 			}
 			break;
 		case eDebuggerState::eLightsSpotDepth:
 			mCurentTextureUnit = 0;
-			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
+			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
 				mDebugger->renderDepthPerspective(mCurentTextureUnit++);
 			}
-			for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany();
+			for (size_t i = 0; i < mLights->mLightsDirectional.size();
 					i++) {
 				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
 			}
 			break;
 		case eDebuggerState::eLightsSpotColor:
 			mCurentTextureUnit = 0;
-			for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
+			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
 				framework::CameraPerspective cameraP =
-						*(mLightManager->getLightSpot(i)->getShadowCamera().get());
+						*(mLights->mLightsSpot[i]->getShadowCamera().get());
 				mDebugger->renderFromCamera(cameraP, mCurentTextureUnit++); //xxx make more flexible
 			}
-			for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany();
+			for (size_t i = 0; i < mLights->mLightsDirectional.size();
 					i++) {
 				framework::CameraOrthographic cameraO =
-						*(mLightManager->getLightDirectional(i)->getShadowCamera().get());
+						*(mLights->mLightsDirectional[i]->getShadowCamera().get());
 				mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
 			}
 			break;
@@ -815,11 +815,11 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 		case eDebuggerState::eLightsPointDepth: // only light 0
 			break;
 		case eDebuggerState::eLightsPointColor:
-			for (GLint j = 0; j < mLightManager->getLightsPointHowMany(); j++) {
+			for (size_t j = 0; j < mLights->mLightsPoint.size(); j++) {
 				for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 						i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
 					framework::CameraPerspective cameraPF =
-							*(mLightManager->getLightPoint(j)->getShadowCamera(i).get());
+							*(mLights->mLightsPoint[j]->getShadowCamera(i).get());
 					mDebugger->renderFromCamera(cameraPF, id++);
 				}
 			}
@@ -923,7 +923,17 @@ pLightSpot Engine::EngineImpl::storeLightSpot(
 		glm::quat& rotation,
 		glm::vec4& color,
 		pMoveable& followed) {
-	return mLightManager->addLightSpot(
+	return mLights->mLightsSpot.add(
+			mTextureManager->getShadow2D(mWindowWidth,
+					mWindowHeight), position, rotation, color, followed);
+}
+
+pLightDirectional Engine::EngineImpl::storeLightDirectional(
+		glm::vec3& position,
+		glm::quat& rotation,
+		glm::vec4& color,
+		pMoveable& followed) {
+	return mLights->mLightsDirectional.add(
 			mTextureManager->getShadow2D(mWindowWidth,
 					mWindowHeight), position, rotation, color, followed);
 }
@@ -932,19 +942,9 @@ pLightPoint Engine::EngineImpl::storeLightPoint(
 		glm::vec3& position,
 		glm::vec4& color,
 		pMoveable& followed) {
-	return mLightManager->addLightPoint(
+	return mLights->mLightsPoint.add(
 			mTextureManager->getShadow3D(mWindowWidth,
 					mWindowHeight), position, color, followed);
-}
-
-pLightDirectional Engine::EngineImpl::storeLightDirectional(
-		glm::vec3& position,
-		glm::quat& rotation,
-		glm::vec4& color,
-		pMoveable& followed) {
-	return mLightManager->addLightDirectional(
-			mTextureManager->getShadow2D(mWindowWidth,
-					mWindowHeight), position, rotation, color, followed);
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(

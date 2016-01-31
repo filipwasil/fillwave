@@ -9,10 +9,9 @@
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/loaders/ProgramLoader.h>
-#include <fillwave/management/LightManager.h>
-
 #include <fillwave/Fillwave.h>
 #include <fillwave/common/Macros.h>
+#include <fillwave/management/LightSystem.h>
 
 #if defined(FILLWAVE_GLES_3_0)
 #else
@@ -25,7 +24,7 @@ namespace framework {
 RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 		:
 				mScreenSize(engine->getScreenSize()),
-				mLightManager(engine->getLightManager()),
+				mLights(engine->getLightSystem()),
 				mTextureManager(engine->getTextureManager()),
 				mProgramMain(loader.getDefaultDR()),
 				mProgramMainAnimated(loader.getDefaultBonesDR()),
@@ -53,7 +52,7 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	mDeferredPointLight = make_unique<Mesh>(engine, Material(), buildTextureRegion(pTexture2D()),
 					buildTextureRegion(pTexture2D()), buildTextureRegion(pTexture2D()),
 					mProgramPointLight, pProgram(), pProgram(), loader.getOcclusionQuery(),
-					pProgram(), pProgram(), mLightManager,
+					pProgram(), pProgram(), mLights,
 					std::make_shared<core::VertexBufferBasic>(vertices),
 					std::make_shared<core::IndexBufferBasic>(indices),
 					nullptr);
@@ -206,10 +205,10 @@ inline void RendererDR::drawDepthlessPass() {
 }
 
 inline void RendererDR::drawLightsSpotPass(ICamera& camera, GLint& textureUnit) {
-	for (GLint i = 0; i < mLightManager->getLightsSpotHowMany(); i++) {
+	for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
 
 		mProgramSpotLight->use();
-		mLightManager->updateDeferredBufferSpot(i, mProgramSpotLight.get(),
+		mLights->updateDeferredBufferSpot(i, mProgramSpotLight.get(),
 				textureUnit++);
 
 		core::Uniform::push(mULCCameraPositionSpot,
@@ -222,10 +221,10 @@ inline void RendererDR::drawLightsSpotPass(ICamera& camera, GLint& textureUnit) 
 inline void RendererDR::drawLightsDirectionalPass(
 		ICamera& camera,
 		GLint& textureUnit) {
-	for (GLint i = 0; i < mLightManager->getLightsDirectionalHowMany(); i++) {
+	for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
 
 		mProgramDirecionalLight->use();
-		mLightManager->updateDeferredBufferDirectional(i,
+		mLights->updateDeferredBufferDirectional(i,
 				mProgramDirecionalLight.get(), textureUnit++);
 
 		core::Uniform::push(mULCCameraPositionDirectional,
@@ -238,7 +237,7 @@ inline void RendererDR::drawLightsDirectionalPass(
 inline void RendererDR::drawLightsPointPass(ICamera& camera, GLint& textureUnit) {
 	glEnable(GL_STENCIL_TEST);
 
-	for (GLint i = 0; i < mLightManager->getLightsPointHowMany(); i++) {
+	for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
 		// DSStencilPass
 
 		mGBuffer->setAttachmentStencilDepth();
@@ -257,14 +256,14 @@ inline void RendererDR::drawLightsPointPass(ICamera& camera, GLint& textureUnit)
 		glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_DECR_WRAP, GL_KEEP);
 
 		mProgramPointLight->use();
-		mLightManager->updateDeferredBufferPoint(i, mProgramPointLight.get(),
+		mLights->updateDeferredBufferPoint(i, mProgramPointLight.get(),
 				textureUnit++);
 
 		core::Uniform::push(mULCCameraPositionPoint, camera.getTranslation());
 		core::Uniform::push(mULCMVPPoint,
 				camera.getViewProjection()
 						* glm::translate(glm::mat4(1.0),
-								mLightManager->getLightPoint(i)->getTranslation()));
+								mLights->mLightsPoint[i]->getTranslation()));
 
 		core::Uniform::push(mULCIsAOPoint, mIsAO ? 1 : 0);
 //xxx      if runtime changing is not needed

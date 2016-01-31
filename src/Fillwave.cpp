@@ -295,19 +295,19 @@ void Engine::clearText(pText text) {
 }
 
 void Engine::clearLight(pLightSpot light) {
-	mImpl->mLightManager->removeLight(light);
+	mImpl->mLights->mLightsSpot.remove(light);
 }
 
 void Engine::clearLight(pLightDirectional light) {
-	mImpl->mLightManager->removeLight(light);
+	mImpl->mLights->mLightsDirectional.remove(light);
 }
 
 void Engine::clearLight(pLightPoint light) {
-	mImpl->mLightManager->removeLight(light);
+	mImpl->mLights->mLightsPoint.remove(light);
 }
 
 void Engine::clearLights() {
-	mImpl->mLightManager->removeLights();
+	mImpl->mLights->clear();
 }
 
 glm::ivec2 Engine::getScreenSize() const {
@@ -351,8 +351,8 @@ pIScene Engine::getCurrentScene() const {
 	return mImpl->mScene;
 }
 
-framework::LightManager* Engine::getLightManager() const {
-	return mImpl->mLightManager.get();
+framework::LightSystem* Engine::getLightSystem() const {
+	return mImpl->mLights.get();
 }
 
 framework::TextureManager* Engine::getTextureManager() const {

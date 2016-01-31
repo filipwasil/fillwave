@@ -8,6 +8,7 @@
 #ifndef LIGHTMANAGER_H_
 #define LIGHTMANAGER_H_
 
+#include <fillwave/management/base/Manager.h>
 #include <fillwave/space/LightDirectional.h>
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
@@ -16,20 +17,35 @@ namespace fillwave {
 class Engine;
 namespace framework {
 
-/*! \class LightManager
- * \brief Manager to handle Light objects.
- */
-
 #define FILLWAVE_MAX_SPOT_LIGHTS 4
 #define FILLWAVE_MAX_POINT_LIGHTS 4
 #define FILLWAVE_MAX_DIRECTIONAL_LIGHTS 4
 
-class LightManager {
-public:
-	LightManager();
-	virtual ~LightManager() = default;
+typedef Manager<pLightSpot, FILLWAVE_MAX_SPOT_LIGHTS, PolicyShared<LightSpot>,
+		pTexture2DRenderable, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerSpotLights;
+typedef std::unique_ptr<ManagerSpotLights> puManagerSpotLights;
 
-	GLboolean isLightsRefresh();
+typedef Manager<pLightDirectional, FILLWAVE_MAX_DIRECTIONAL_LIGHTS, PolicyShared<LightDirectional>,
+		pTexture2DRenderable, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerDirectionalLights;
+typedef std::unique_ptr<ManagerDirectionalLights> puManagerDirectionalLights;
+
+typedef Manager<pLightPoint, FILLWAVE_MAX_POINT_LIGHTS, PolicyShared<LightPoint>,
+		pTexture3DRenderable, glm::vec3, glm::vec4, pMoveable> ManagerPointLights;
+typedef std::unique_ptr<ManagerPointLights> puManagerPointLights;
+
+/*! \class LightManager
+ * \brief Manager to handle Light objects.
+ */
+class LightSystem {
+public:
+	LightSystem();
+	virtual ~LightSystem() = default;
+
+	ManagerSpotLights mLightsSpot;
+	ManagerDirectionalLights mLightsDirectional;
+	ManagerPointLights mLightsPoint;
+
+	bool isLightsRefresh();
 	void resetLightsRefresh();
 	void removeLights();
 	void updateLightEntities();
@@ -38,38 +54,7 @@ public:
 	void pushLightUniforms(core::Program* program);
 	void pushLightUniformBuffers(core::Program* program);
 
-	pLightSpot addLightSpot(
-			pTexture2DRenderable shadowTexture,
-			glm::vec3 position,
-			glm::quat rotation,
-			glm::vec4 color,
-			pMoveable followed = pMoveable());
-
-	pLightPoint addLightPoint(
-			pTexture3DRenderable shadowTexture,
-			glm::vec3 position,
-			glm::vec4 intensity,
-			pMoveable followed = pMoveable());
-
-	pLightDirectional addLightDirectional(
-			pTexture2DRenderable shadowTexture,
-			glm::vec3 position,
-			glm::quat rotation,
-			glm::vec4 color,
-			pMoveable followed = pMoveable());
-
-	void removeLight(pLightSpot light);
-	void removeLight(pLightDirectional light);
-	void removeLight(pLightPoint light);
-
-	pLightSpot getLightSpot(GLint i);
-	pLightPoint getLightPoint(GLint i);
-	pLightDirectional getLightDirectional(GLint i);
-
-	GLint getLightsSpotHowMany();
-	GLint getLightsDirectionalHowMany();
-	GLint getLightsPointHowMany();
-
+	void clear();
 	void bindShadowmaps();
 
 	/* Deferred rendering */
@@ -87,10 +72,6 @@ public:
 			GLint currentShadowUnit);
 
 private:
-
-	std::vector<pLightSpot> mSpotLights;
-	std::vector<pLightDirectional> mDirectionalLights;
-	std::vector<pLightPoint> mPointLights;
 	std::vector<LighUniformData> mLightBufferData;
 
 	GLboolean isRefreshLightSpot();
@@ -101,7 +82,7 @@ private:
 };
 
 } /* framework */
-typedef std::unique_ptr<framework::LightManager> puLightManager;
+typedef std::unique_ptr<framework::LightSystem> puLightSystem;
 } /* fillwave*/
 
 #endif /* LIGHTMANAGER_H_ */

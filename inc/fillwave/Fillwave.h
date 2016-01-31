@@ -202,7 +202,7 @@ public:
 
 	void reload();
 
-	framework::LightManager* getLightManager() const;
+	framework::LightSystem* getLightSystem() const;
 	framework::TextureManager* getTextureManager() const;
 
 private:

@@ -9,7 +9,7 @@
 #include <fillwave/Log.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/loaders/ProgramLoader.h>
-#include <fillwave/management/LightManager.h>
+#include <fillwave/management/LightSystem.h>
 
 FLOGINIT("MeshTerrain", FERROR | FFATAL)
 
@@ -29,7 +29,7 @@ MeshTerrain::MeshTerrain(
 		GLuint density)
 		:
 				Programmable(program),
-				mLightManager(engine->getLightManager()),
+				mLights(engine->getLightSystem()),
 				mChunkWidth(radius * 0.2 * 16 / density),
 				mJumpStep(density * 0.2 * 16 / density) {
 
@@ -61,7 +61,7 @@ MeshTerrain::MeshTerrain(
 							loader.getOcclusionOptimizedQuery(),
 							loader.getAmbientOcclusionGeometry(),
 							loader.getAmbientOcclusionColor(),
-							engine->getLightManager(),
+							engine->getLightSystem(),
 							std::make_shared<core::VertexBufferBasic>(constructor, density,
 											gapSize, indices),
 											std::make_shared<core::IndexBufferBasic>(indices));
@@ -87,7 +87,7 @@ MeshTerrain::MeshTerrain(
 		GLuint density)
 		:
 				Programmable(program),
-				mLightManager(engine->getLightManager()),
+				mLights(engine->getLightSystem()),
 				mChunkWidth(radius * 0.2 * 16 / density),
 				mJumpStep(density * 0.2 * 16 / density) {
 
@@ -110,7 +110,7 @@ MeshTerrain::MeshTerrain(
 							loader.getOcclusionOptimizedQuery(),
 							loader.getAmbientOcclusionGeometry(),
 							loader.getAmbientOcclusionColor(),
-							engine->getLightManager(),
+							engine->getLightSystem(),
 							std::make_shared<core::VertexBufferBasic>(constructor, density,
 											gapSize, indices),
 											std::make_shared<core::IndexBufferBasic>(indices));
@@ -150,8 +150,8 @@ void MeshTerrain::draw(ICamera& camera) {
 
 void MeshTerrain::drawPBRP(ICamera& camera) {
 	distanceCheck(camera);
-	mLightManager->pushLightUniforms(mProgram.get());
-	mLightManager->bindShadowmaps();
+	mLights->pushLightUniforms(mProgram.get());
+	mLights->bindShadowmaps();
 	for (auto& it : mChildren) {
 		it->drawPBRP(camera);
 	}
