@@ -8,13 +8,6 @@
 #ifndef TESTS_MOCKS_IRENDERER_CPP_
 #define TESTS_MOCKS_IRENDERER_CPP_
 
-/*
- * Button.cpp
- *
- *  Created on: Jan 21, 2016
- *      Author: filip
- */
-
 #pragma once
 
 #include <fillwave/renderers/IRenderer.h>
