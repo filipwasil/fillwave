@@ -75,7 +75,7 @@ void LightSystem::pushLightUniforms(core::Program* program) {
 	/* This causes a false positive error indication here */
 #else
 	program->uniformPush("uNumberOfPointLights",
-			static_cast<GLint>(mLightsSpot.size()));
+			static_cast<GLint>(mLightsPoint.size()));
 #endif /* defined(FILLWAVE_THIRD_PARTY_WORKAROUNDS) && defined(FILLWAVE_COMPILATION_PC_GLES) */
 
 	GLint UBOIterator = 0;

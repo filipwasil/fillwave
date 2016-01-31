@@ -31,7 +31,7 @@ namespace fillwave {
 #ifdef __ANDROID__
 
 Engine::Engine(std::string rootPath) {
-	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, rootPath));
+	mImpl = make_unique<EngineImpl>(this, rootPath);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
@@ -39,7 +39,7 @@ Engine::Engine(std::string rootPath) {
 }
 
 Engine::Engine(ANativeActivity* activity) {
-	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, activity));
+	mImpl = make_unique<EngineImpl>(this, activity);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
@@ -47,7 +47,7 @@ Engine::Engine(ANativeActivity* activity) {
 }
 #else
 Engine::Engine(GLint argc, GLchar* const argv[]) {
-	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, argc, argv));
+	mImpl = make_unique<EngineImpl>(this, argc, argv);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */

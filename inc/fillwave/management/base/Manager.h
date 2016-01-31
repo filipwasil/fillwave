@@ -80,7 +80,7 @@ public:
  * \brief Helper function to enable creation by policies
  */
 template <class T, class C, typename... P>
-T FillwaveItemConstruct (P... parameters) {
+inline T FillwaveItemConstruct (P... parameters) {
 	return C().Create(parameters...);
 }
 

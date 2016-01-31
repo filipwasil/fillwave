@@ -176,6 +176,7 @@ inline void Text::initBuffers() {
 inline void Text::initPipeline() {
 	mProgram->use();
 	mProgram->uniformPush("uColour", mColor);
+	mProgram->uniformPush("uTextureUnit", FILLWAVE_DIFFUSE_UNIT);
 	core::Program::disusePrograms();
 }
 

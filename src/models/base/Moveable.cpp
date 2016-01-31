@@ -15,8 +15,8 @@ Moveable::Moveable(glm::vec3 translation, glm::quat rotation)
 				mTranslation(translation),
 				mRotation(rotation),
 				mScale(1.0),
-				mRefresh(GL_TRUE),
-				mRefreshExternal(GL_TRUE) {
+				mRefresh(true),
+				mRefreshExternal(true) {
 
 }
 
@@ -26,48 +26,48 @@ glm::vec3 Moveable::getTranslation() {
 
 void Moveable::moveTo(glm::vec3 coordinates) {
 	mTranslation = coordinates;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::moveToX(GLfloat distance) {
 	mTranslation.x = distance;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::moveToY(GLfloat distance) {
 	mTranslation.y = distance;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::moveToZ(GLfloat distance) {
 	mTranslation.z = distance;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::moveBy(glm::vec3 coordinates) {
 	mTranslation += coordinates;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::moveByX(GLfloat distance) {
 	mTranslation.x += distance;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::moveByY(GLfloat distance) {
 	mTranslation.y += distance;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::moveByZ(GLfloat distance) {
 	mTranslation.z += distance;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::moveInDirection(glm::vec3 direction) {
 	mTranslation += glm::vec3(
 			glm::mat4_cast(mRotation) * glm::vec4(direction, 1.0));
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 glm::vec3 Moveable::getScale() {
@@ -76,27 +76,27 @@ glm::vec3 Moveable::getScale() {
 
 void Moveable::scaleTo(GLfloat scale) {
 	mScale = glm::vec3(scale, scale, scale);
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::scaleTo(glm::vec3 scale) {
 	mScale = scale;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::scaleToX(GLfloat scale) {
 	mScale = glm::vec3(scale, mScale.y, mScale.z);
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::scaleToY(GLfloat scale) {
 	mScale = glm::vec3(mScale.x, scale, mScale.z);
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::scaleToZ(GLfloat scale) {
 	mScale = glm::vec3(scale, mScale.y, mScale.z);
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 glm::quat Moveable::getRotation() {
@@ -105,28 +105,28 @@ glm::quat Moveable::getRotation() {
 
 void Moveable::rotateTo(glm::quat rotation) {
 	mRotation = rotation;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::rotateTo(const glm::vec3 &axis, GLfloat angle) {
 	glm::quat rotation = glm::angleAxis(angle, glm::normalize(axis));
 	mRotation = rotation;
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::rotateByX(float angle) {
 	rotateBy(glm::vec3(1.0, 0.0, 0.0), angle);
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::rotateByY(float angle) {
 	rotateBy(glm::vec3(0.0, 1.0, 0.0), angle);
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::rotateByZ(float angle) {
 	rotateBy(glm::vec3(0.0, 0.0, 1.0), angle);
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::rotateBy(const glm::vec3 &axis, GLfloat angle) {
@@ -140,7 +140,7 @@ void Moveable::rotateBy(const glm::vec3 &axis, GLfloat angle) {
 
 	mRotation = offset * mRotation;
 	mRotation = glm::normalize(mRotation);
-	mRefresh = GL_TRUE;
+	mRefresh = true;
 }
 
 void Moveable::updateMatrixCache() {
@@ -148,19 +148,19 @@ void Moveable::updateMatrixCache() {
 			* glm::mat4_cast(mRotation) * glm::scale(glm::mat4(1.0), mScale);
 }
 
-GLboolean Moveable::isRefresh() {
+bool Moveable::isRefresh() {
 	return mRefresh;
 }
 
-void Moveable::setRefresh(GLboolean state) {
+void Moveable::setRefresh(bool state) {
 	mRefresh = state;
 }
 
-GLboolean Moveable::isRefreshExternal() {
+bool Moveable::isRefreshExternal() {
 	return mRefreshExternal;
 }
 
-void Moveable::setRefreshExternal(GLboolean state) {
+void Moveable::setRefreshExternal(bool state) {
 	mRefreshExternal = state;
 }
 
