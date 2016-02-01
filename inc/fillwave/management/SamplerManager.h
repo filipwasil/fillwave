@@ -13,24 +13,29 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class SamplerManager
- * \brief returns sampler
+/**
+ * Data structure containing each Sampler instance info.
  */
+struct SamplerObject {
+	SamplerObject(GLint unit)
+			: mTextureUnit(unit),
+			  mContent(std::make_shared<core::Sampler>(unit)) {
 
-class SamplerManager {
-public:
-	SamplerManager() = default;
-	virtual ~SamplerManager() = default;
+	}
 
-	pSampler get(GLint textureUnit);
+	~SamplerObject() = default;
 
-	void reload();
-private:
-	std::vector<pSampler> mSamplers;
+	GLint mTextureUnit;
+	pSampler mContent;
 };
 
+/**
+ * Sampler manager
+ */
+typedef ManagerNested<std::unique_ptr<SamplerObject>, pSampler, GLint, UINT_MAX, PolicyUnique<SamplerObject>,
+		GLint> ManagerSamplers;
+
 } /* framework */
-typedef std::unique_ptr<framework::SamplerManager> puSamplerManager;
 } /* fillwave */
 
 #endif /* SAMPLERMANAGER_H_ */

@@ -76,7 +76,7 @@ struct Engine::EngineImpl {
 	ManagerPrograms mPrograms;
 	puTextureManager mTextureManager;
 	puShaderManager mShaderManager;
-	puSamplerManager mSamplerManager;
+	ManagerSamplers mSamplers;
 	puBufferManager mBufferManager;
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
@@ -326,7 +326,6 @@ inline void Engine::EngineImpl::initExtensions(void) {
 inline void Engine::EngineImpl::initManagement() {
 	mTextureManager = make_unique<framework::TextureManager>(mFileLoader.getRootPath());
 	mShaderManager = make_unique<framework::ShaderManager>(mFileLoader.getRootPath());
-	mSamplerManager = make_unique<framework::SamplerManager>();
 	mBufferManager = make_unique<framework::BufferManager>();
 	mLights = make_unique<framework::LightSystem>();
 }
@@ -413,7 +412,11 @@ void Engine::EngineImpl::reload() {
 	}
 
 	mTextureManager->reload();
-	mSamplerManager->reload();
+
+	for (auto& it : mSamplers) {
+		it.second->mContent->reload();
+	}
+
 	mBufferManager->reload();
 
 	mPickingPixelBuffer->reload();
@@ -914,7 +917,7 @@ pShader Engine::EngineImpl::storeShaderVertex(
 }
 
 pSampler Engine::EngineImpl::storeSO(GLint textureUnit) {
-	return mSamplerManager->get(textureUnit);
+	return mSamplers.add(textureUnit, textureUnit);
 }
 
 pVertexArray Engine::EngineImpl::storeVAO(framework::IReloadable* user) {
