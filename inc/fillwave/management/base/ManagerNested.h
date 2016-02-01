@@ -8,7 +8,7 @@
 #ifndef INC_FILLWAVE_MANAGEMENT_BASE_MANAGERNESTED_H_
 #define INC_FILLWAVE_MANAGEMENT_BASE_MANAGERNESTED_H_
 
-#include <map>
+#include <unordered_map>
 #include <fillwave/management/base/Manager.h>
 
 namespace fillwave {
@@ -26,7 +26,7 @@ namespace framework {
  * \param K - Key class
  */
 template <class T, class R, class K, size_t M, class C, typename... P>
-class ManagerNested : public std::map<K, T> {
+class ManagerNested : public std::unordered_map<K, T> {
 public:
 
 	ManagerNested() = default;
