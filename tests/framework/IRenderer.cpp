@@ -7,6 +7,7 @@
 
 #include <fillwave/Log.h>
 #include "../mocks/IRenderer.h"
+#include "../mocks/IRenderable.h"
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
@@ -16,5 +17,6 @@ using namespace fillwave;
 using namespace fillwave::framework;
 
 TEST (IRenderer, adding) {
-//	MockIRenderer renderer();
+	MockIRenderer renderer();
+	MockIRenderable renderable();
 }
