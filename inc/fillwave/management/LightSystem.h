@@ -23,18 +23,15 @@ namespace framework {
 
 typedef Manager<pLightSpot, FILLWAVE_MAX_SPOT_LIGHTS, PolicyShared<LightSpot>,
 		pTexture2DRenderable, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerSpotLights;
-typedef std::unique_ptr<ManagerSpotLights> puManagerSpotLights;
 
 typedef Manager<pLightDirectional, FILLWAVE_MAX_DIRECTIONAL_LIGHTS, PolicyShared<LightDirectional>,
 		pTexture2DRenderable, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerDirectionalLights;
-typedef std::unique_ptr<ManagerDirectionalLights> puManagerDirectionalLights;
 
 typedef Manager<pLightPoint, FILLWAVE_MAX_POINT_LIGHTS, PolicyShared<LightPoint>,
 		pTexture3DRenderable, glm::vec3, glm::vec4, pMoveable> ManagerPointLights;
-typedef std::unique_ptr<ManagerPointLights> puManagerPointLights;
 
-/*! \class LightManager
- * \brief Manager to handle Light objects.
+/**
+ * \brief Lights system knows about all light related stuff.
  */
 class LightSystem {
 public:

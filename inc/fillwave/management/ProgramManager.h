@@ -9,46 +9,34 @@
 #define PROGRAMMANAGER_H_
 
 #include <fillwave/core/pipeline/Program.h>
+#include <fillwave/management/base/ManagerNested.h>
 
 namespace fillwave {
 namespace framework {
 
-/*! \struct ProgramObject
- * \brief Data structure containing each Program instance info.
+/**
+ * Data structure containing each Program instance info.
  */
-
 struct ProgramObject {
+	ProgramObject(const std::string& name, const std::vector<pShader>& shaders, GLboolean skipLinking)
+			: mName(name),
+			  mContent(std::make_shared<core::Program>(shaders, skipLinking)) {
+
+	}
+
+	~ProgramObject() = default;
+
 	std::string mName;
-	pProgram mProgram;
+	pProgram mContent;
 };
 
-typedef std::unique_ptr<ProgramObject> puProgramObject;
-
-/*! \class ProgramManager
- * \brief Manager to handle ProgramObjects objects.
+/**
+ * Program manager
  */
-
-class ProgramManager {
-public:
-	ProgramManager() = default;
-
-	virtual ~ProgramManager() = default;
-
-	pProgram add(
-			const std::string& name,
-			const std::vector<pShader>& shaders,
-			GLboolean skipLinking);
-
-	pProgram get(const std::string& name);
-
-	void reload();
-
-private:
-	std::vector<puProgramObject> mProgramObjects;
-};
+typedef ManagerNested<std::unique_ptr<ProgramObject>, pProgram, std::string, UINT_MAX, PolicyUnique<ProgramObject>,
+		const std::string&, const std::vector<pShader>&, GLboolean> ManagerPrograms;
 
 } /* framework */
-typedef std::unique_ptr<framework::ProgramManager> puProgramManager;
 } /* fillwave */
 
 #endif /* PROGRAMMANAGER_H_ */

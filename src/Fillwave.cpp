@@ -136,7 +136,7 @@ pProgram Engine::storeProgram(
 		const std::string& name,
 		const std::vector<pShader>& shaders,
 		GLboolean skipLinking) {
-	return mImpl->mProgramManager->add(name, shaders, skipLinking);
+	return mImpl->mPrograms.add(name, name, shaders, skipLinking);
 }
 
 pTexture2D Engine::storeTexture(

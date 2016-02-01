@@ -16,20 +16,18 @@ namespace fillwave {
 class Engine;
 namespace framework {
 
-/*! \struct LightDirectioData
+/**
  * \brief Light UBO data.
  */
-
 struct LightDirectioData {
 	GLfloat position[4];
 	GLfloat intensity[4];
 	GLfloat mvp[16];
 };
 
-/*! \class LightDirectional
+/**
  * \brief Light with Orthographic projection.
  */
-
 class LightDirectional: public Light {
 public:
 	LightDirectional(
@@ -41,7 +39,6 @@ public:
 	virtual ~LightDirectional() = default;
 
 	pTexture2DRenderable getShadowTexture();
-
 	pCameraOrthographic getShadowCamera();
 
 	void updateShadowCamera();

@@ -217,7 +217,6 @@ void LightSystem::updateDeferredBufferSpot(
 		core::Program* program,
 		GLint currentShadowUnit) {
 	program->use();
-	glm::vec3 translation = mLightsSpot[lightID]->getTranslation();
 
 	program->uniformPush("uLight.base.color",
 			mLightsSpot[lightID]->getIntensity().xyz());
@@ -226,7 +225,7 @@ void LightSystem::updateDeferredBufferSpot(
 	program->uniformPush("uLight.attenuation.constant", 0.1f);
 	program->uniformPush("uLight.attenuation.linear", 0.4f);
 	program->uniformPush("uLight.attenuation.exp", 0.1f);
-	program->uniformPush("uLight.position", translation);
+	program->uniformPush("uLight.position", mLightsSpot[lightID]->getTranslation());
 	program->uniformPush("uLight.mvp",
 			glm::make_mat4(
 					mLightBufferData[currentShadowUnit - FILLWAVE_SHADOW_FIRST_UNIT].mvp));
@@ -240,14 +239,12 @@ void LightSystem::updateDeferredBufferDirectional(
 		core::Program* program,
 		GLint /*currentShadowUnit*/) {
 	program->use();
-	glm::vec4 translation = glm::vec4(
-			mLightsDirectional[lightID]->getTranslation(), 1.0);
 
 	program->uniformPush("uLight.base.color",
 			mLightsDirectional[lightID]->getIntensity().xyz());
 	program->uniformPush("uLight.base.ambientIntensity", 0.15f);
 	program->uniformPush("uLight.base.diffuseIntensity", 0.85f);
-	program->uniformPush("uLight.direction", -translation.xyz());
+	program->uniformPush("uLight.direction", -mLightsDirectional[lightID]->getTranslation());
 	program->uniformPush("uSpecularPower", 255.0f);
 }
 
@@ -286,21 +283,20 @@ void LightSystem::bindShadowmaps() {
 }
 
 GLfloat LightSystem::computePointLightBoundingSphere(pLightPoint& light) {
-	glm::vec4 intensity = light->getIntensity();
-	LightAttenuationData attenuation = light->getAttenuation();
-	GLfloat diffuseIntensity = 1.0;
+	const glm::vec4 intensity = light->getIntensity();
+	const LightAttenuationData attenuation = light->getAttenuation();
+	const GLfloat diffuseIntensity = 1.0;
 
 	GLfloat MaxChannel = glm::max(glm::max(intensity.x, intensity.y),
 			intensity.z);
 
-	GLfloat ret = (-attenuation.mLinear
+	return (-attenuation.mLinear
 			+ glm::sqrt(
 					attenuation.mLinear * attenuation.mLinear
 							- 4 * attenuation.mExp
 									* (attenuation.mExp
 											- 256.0f * MaxChannel * diffuseIntensity))) / 2
 			* attenuation.mExp;
-	return ret;
 }
 
 } /* framework */

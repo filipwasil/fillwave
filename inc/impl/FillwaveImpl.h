@@ -73,7 +73,7 @@ struct Engine::EngineImpl {
 	puPixelBuffer mPickingPixelBuffer;
 
 	/* Resources */
-	puProgramManager mProgramManager;
+	ManagerPrograms mPrograms;
 	puTextureManager mTextureManager;
 	puShaderManager mShaderManager;
 	puSamplerManager mSamplerManager;
@@ -326,7 +326,6 @@ inline void Engine::EngineImpl::initExtensions(void) {
 inline void Engine::EngineImpl::initManagement() {
 	mTextureManager = make_unique<framework::TextureManager>(mFileLoader.getRootPath());
 	mShaderManager = make_unique<framework::ShaderManager>(mFileLoader.getRootPath());
-	mProgramManager = make_unique<framework::ProgramManager>();
 	mSamplerManager = make_unique<framework::SamplerManager>();
 	mBufferManager = make_unique<framework::BufferManager>();
 	mLights = make_unique<framework::LightSystem>();
@@ -408,7 +407,11 @@ void Engine::EngineImpl::reload() {
 	initContext();
 
 	mShaderManager->reload();
-	mProgramManager->reload();
+
+	for (auto& it : mPrograms) {
+		it.second->mContent->reload();
+	}
+
 	mTextureManager->reload();
 	mSamplerManager->reload();
 	mBufferManager->reload();

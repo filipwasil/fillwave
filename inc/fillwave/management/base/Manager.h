@@ -17,36 +17,6 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class PolicyDefault
- * \brief Creation policy which creates an object on stack
- */
-template<class T>
-class PolicyDefault {
-public:
-	PolicyDefault() = default;
-	~PolicyDefault() = default;
-
-	template <typename... P>
-	inline T Create(P... parameters) {
-		return T(parameters...);
-	}
-};
-
-/*! \class PolicyDefault
- * \brief Creation policy which creates an object as regular pointer
- */
-template<class T>
-class PolicyPointer {
-public:
-	PolicyPointer() = default;
-	~PolicyPointer() = default;
-
-	template <typename... P>
-	inline T* Create(P... parameters) {
-		return new T(parameters...);
-	}
-};
-
 /*! \class PolicyShared
  * \brief Creation policy which creates an object as shared pointer
  */
@@ -65,12 +35,13 @@ public:
 /*! \class PolicyUnique
  * \brief Creation policy which creates an object as unique pointer
  */
-template<class T, typename... P>
+template<class T>
 class PolicyUnique {
 public:
 	PolicyUnique() = default;
 	~PolicyUnique() = default;
 
+	template <typename... P>
 	inline std::unique_ptr<T> Create(P... parameters) {
 		return make_unique<T>(parameters...);
 	}
@@ -87,7 +58,7 @@ inline T FillwaveItemConstruct (P... parameters) {
 /*! \class Main Fillwave
  * \brief Basic manager
  */
-template <class T, int M, class C, typename... P>
+template <class T, size_t M, class C, typename... P>
 class Manager : public std::vector<T> {
 public:
 
@@ -95,22 +66,28 @@ public:
 	virtual ~Manager() = default;
 
 	T add(P... parameters) {
-		T item;
-		if ((*this).size() < M) {
-			item = FillwaveItemConstruct<T, C, P... >(parameters...);
-			(*this).push_back(item);
-		} else {
-			item = T();
+		if ((*this).size() >= M) {
+			return T();
 		}
-		return item;
+		(*this).push_back(FillwaveItemConstruct<T, C, P... >(parameters...));
+		return (*this).back();
 	}
 
-	void remove(T item) {
+	void remove(T& item) {
 		auto it = std::find((*this).begin(), (*this).end(),
 				item);
 		if (it != (*this).end()) {
 			(*this).erase(it);
 		}
+	}
+
+	bool isNew(T& item) {
+		for(auto& it : (*this)) {
+			if (it == item) {
+				return false;
+			}
+		}
+		return true;
 	}
 };
 
