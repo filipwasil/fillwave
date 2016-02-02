@@ -1,82 +1,116 @@
 //============================================================================
-// Name        : example_text.cpp
+// Name        : Client.cpp
 // Author      : Filip Wasil
 // Version     :
 // Copyright   : none
-// Description : Fillwave engine example text
+// Description : Fillwave engine example full
 //============================================================================
 
-#include <ContextGLFW.h>
 #include <example.h>
 
+/* Audio */
+//#include <portaudio.h>
+
 /* Graphics */
+#include <CallbacksGLFW/MoveCameraCallback.h>
+#include <CallbacksGLFW/AnimationKeyboardCallback.h>
+#include <CallbacksGLFW/TimeStopCallback.h>
+#include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
-#include <fillwave/Framework.h>
+#include <TerrainConstructors/MountainConstructor.h>
+
+/* Physics */
+//#include <bullet>
 
 using namespace fillwave;
 using namespace fillwave::framework;
 using namespace std;
-using namespace glm;
+
+Engine* gEngine;
 
 pCameraPerspective gCamera;
 pScenePerspective gScene;
 
+pProgram gProgram;
+map<string, pModel> gModels;
+
+FLOGINIT("Test app", FERROR | FFATAL)
+
 int main(int argc, char* argv[]) {
    ContextGLFW mContext;
    ContextGLFW::mGraphicsEngine = new Engine(argc, argv);
+   gEngine = ContextGLFW::mGraphicsEngine;
    ContextGLFW::mGraphicsEngine->insertResizeScreen(mContext.getScreenWidth(),
                                                    mContext.getScreenHeight());
+   init();
    perform();
+   showDescription();
    mContext.render();
-   delete ContextGLFW::mGraphicsEngine;
+   delete gEngine;
    exit(EXIT_SUCCESS);
 }
 
-void perform() {
+void init() {
    /* Scene */
    gScene = buildScenePerspective();
 
    /* Camera */
-   gCamera = make_shared<CameraPerspective>();
+   gCamera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,5.0,0.0),
+                                                    glm::quat(),
+                                                    glm::radians(90.0),
+                                                    1.0,
+                                                    0.1,
+                                                    1000.0));
 
-   /* Create scene */
+   /* Shaders */
+   ProgramLoader loader(gEngine);
+   gProgram = loader.getDefault();
+
+   /* Models */
+
+
+   /* Lights */
+   pLight  light = gEngine->storeLightSpot(glm::vec3 (1.0,20.0,6.0),
+                           glm::quat (),
+                           glm::vec4 (1.0,1.0,1.0,0.0));
+   light->rotateTo(glm::vec3(1.0,0.0,0.0), glm::radians(-90.0));
+
+   /* Engine callbacks */
+   gEngine->registerCallback(new TimeStopCallback(gEngine));
+   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eKey, 0.1));
+   gEngine->registerCallback(new MoveCameraCallback(gEngine,eEventType::eCursorPosition, 0.1, ContextGLFW::mWindow));
+}
+
+void perform() {
+   gEngine->configureFPSCounter("fonts/Titania",  glm::vec2(0.7,0.9), 100.0);
+   gEngine->setCurrentScene(gScene);
+
+   pIEffect fog(new Fog());
+
    gScene->setCamera(gCamera);
 
-   /* Attach camera to scene*/
-	ContextGLFW::mGraphicsEngine->setCurrentScene(gScene);
+   Material material;
 
-	pHUD hud = make_shared<HUD>();
+   pMeshTerrain terrain = std::make_shared<MeshTerrain>(gEngine,
+                                    gProgram,
+                                    new MountainConstructor(),
+                                    material,
+                                    "textures/test.png",
+                                    "textures/testNormal.png",
+                                    "",
+                                    20,
+                                    16);
+   terrain->scaleTo(2.0);
+   terrain->addEffect(fog);
+   gScene->attach(terrain);
+}
 
-	hud->attach(
-			make_shared < Button
-					> (ContextGLFW::mGraphicsEngine, ContextGLFW::mGraphicsEngine->storeTexture(
-							"buttons/start-1.png"), vec2(-0.95, 0.9), vec2(0.1)));
-
-	hud->attach(
-			make_shared < Button
-					> (ContextGLFW::mGraphicsEngine, ContextGLFW::mGraphicsEngine->storeTexture(
-							"buttons/player-1.png"), vec2(-0.95, 0.80), vec2(0.1)));
-
-	hud->attach(
-			make_shared < Button
-					> (ContextGLFW::mGraphicsEngine, ContextGLFW::mGraphicsEngine->storeTexture(
-							"buttons/help-1.png"), vec2(-0.95, 0.70), vec2(0.1)));
-
-	hud->attach(
-			make_shared < Button
-					> (ContextGLFW::mGraphicsEngine, ContextGLFW::mGraphicsEngine->storeTexture(
-							"buttons/exit-1.png"), vec2(-0.95, 0.60), vec2(0.1)));
-
-	pProgressBar bar = make_shared < ProgressBar
-						> (ContextGLFW::mGraphicsEngine, ContextGLFW::mGraphicsEngine->storeTexture(
-								"128_128_64.color"), "shaders/progress_bar/progress.frag", vec2(-0.75, -.45), vec2(1.5, 0.1));
-
-	bar->setProgress(0.33);
-
-	hud->attach(bar);
-
-	gScene->setHUD(hud);
-
-	pText t1 = ContextGLFW::mGraphicsEngine->storeText("Fillwave Buttons",
-			"fonts/bridgenorth", vec2(-0.95, -0.8), 100.0);
+void showDescription() {
+   /* Description */
+   pText hint0 = gEngine->storeText("Fillwave example terrain", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
+   pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
+   pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
+   pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
+   pText hint1 = gEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
+   pText hint6 = gEngine->storeText("Use 'D' for toggle debugger On/Off", "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
 }

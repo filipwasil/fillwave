@@ -9,32 +9,21 @@
 #define PROGRAMMANAGER_H_
 
 #include <fillwave/core/pipeline/Program.h>
-#include <fillwave/management/base/ManagerNested.h>
+#include <fillwave/management/base/ManagerComposite.h>
 
 namespace fillwave {
 namespace framework {
 
 /**
- * Data structure containing each Program instance info.
+ * Data structure containing each Sampler instance info.
  */
-struct ProgramObject {
-	ProgramObject(const std::string& name, const std::vector<pShader>& shaders, GLboolean skipLinking)
-			: mName(name),
-			  mContent(std::make_shared<core::Program>(shaders, skipLinking)) {
-
-	}
-
-	~ProgramObject() = default;
-
-	std::string mName;
-	pProgram mContent;
-};
+typedef Composition<pProgram, PolicyShared<core::Program>, const std::vector<pShader>&, GLboolean> ProgramObject;
 
 /**
  * Program manager
  */
-typedef ManagerNested<std::unique_ptr<ProgramObject>, pProgram, std::string, UINT_MAX, PolicyUnique<ProgramObject>,
-		const std::string&, const std::vector<pShader>&, GLboolean> ManagerPrograms;
+typedef ManagerComposite<std::unique_ptr<ProgramObject>, pProgram, std::string, UINT_MAX, PolicyUnique<ProgramObject>,
+		const std::vector<pShader>&, GLboolean> ManagerPrograms;
 
 } /* framework */
 } /* fillwave */

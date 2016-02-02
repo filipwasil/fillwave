@@ -11,9 +11,8 @@
 #include <fillwave/core/texturing/Texture1D.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
 #include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
-
 #include <fillwave/loaders/TextureLoader.h>
-
+#include <fillwave/management/base/ManagerComposite.h>
 #include <fillwave/Assets.h>
 
 namespace fillwave {
@@ -29,76 +28,38 @@ public:
 	T mTexture;
 };
 
-/*! \typedef TextureObject1D
- * \brief Data structure containing each Texture1D instance info.
- */
+typedef Composition<pTexture1D, PolicyShared<core::Texture1D>,
+            core::ParameterList&> TextureObject1D;
 
-typedef TextureObject<pTexture1D> TextureObject1D;
-typedef std::unique_ptr<TextureObject1D> puTextureObject1D;
+typedef Composition<pTexture2D, PolicyShared<core::Texture2D>,
+				core::Texture2DFile*, core::ParameterList&, GLuint> TextureObject2DDeferred;
 
-/*! \typedef TextureObject2DDeferred
- * \brief Data structure containing each Texture2D instance info for deferred rendering.
- */
+typedef Composition<pTexture2D, PolicyShared<core::Texture2D>,
+            core::Texture2DFile*, core::ParameterList&, GLuint> TextureObject2D;
 
-typedef TextureObject<pTexture2D> TextureObject2DDeferred;
-typedef std::unique_ptr<TextureObject2DDeferred> puTextureObject2DDeferred;
+typedef Composition<pTexture2D, PolicyShared<core::Texture2D>,
+            core::Texture2DFile*, core::ParameterList&, GLuint> TextureObject2DStatic;
 
-/*! \class TextureObject2D
- * \brief Data structure containing each Texture2D instance info.
- */
+typedef Composition<pTexture2DRenderableDynamic, PolicyShared<core::Texture2DRenderableDynamic>,
+            core::Texture2DFile*, core::ParameterList&, pProgram> TextureObject2DDynamic;
 
-template<class T>
-class TextureObject2D: public TextureObject<T> {
-public:
-	std::string mFilePath;
-};
-typedef TextureObject2D<pTexture2D> TextureObject2DStatic;
-typedef std::unique_ptr<TextureObject2DStatic> puTextureObject2D;
+typedef Composition<pTexture2DRenderable, PolicyShared<core::Texture2DRenderable>,
+            GLenum, core::Texture2DFile*, core::ParameterList&> TextureObject2DRenderable;
 
-/*! \typedef TextureObject2DRenderable
- * \brief Data structure containing each Texture2DRenderable instance info.
- */
+typedef Composition<pTexture3D, PolicyShared<core::Texture3D>,
+            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+            core::ParameterList&> TextureObject3D;
 
-typedef TextureObject<pTexture2DRenderable> TextureObject2DRenderable;
-typedef std::unique_ptr<TextureObject2DRenderable> puTextureObject2DRenderable;
+typedef Composition<pTexture3DRenderable, PolicyShared<core::Texture3DRenderable>,
+            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+            pTexture2DRenderable, core::ParameterList&> TextureObject3DRenderable;
 
-/*! \typedef TextureObject2DDynamic
- * \brief Data structure containing each TextureObject2DDynamic instance info.
- */
-
-typedef TextureObject2D<pTexture2DRenderableDynamic> TextureObject2DDynamic;
-typedef std::unique_ptr<TextureObject2DDynamic> puTextureObject2DDynamic;
-
-/*! \class TextureObject3D
- * \brief Data structure containing each Texture3D instance info.
- */
-
-template<class T>
-class TextureObject3D: public TextureObject<T> {
-public:
-	std::string mFilePathPosX;
-	std::string mFilePathNegX;
-	std::string mFilePathPosY;
-	std::string mFilePathNegY;
-	std::string mFilePathPosZ;
-	std::string mFilePathNegZ;
-};
-typedef TextureObject3D<pTexture3D> TextureObject3DStatic;
-typedef std::unique_ptr<TextureObject3DStatic> puTextureObject3D;
-
-/*! \typedef TextureObject3DRenderable
- * \brief Data structure containing each Texture2DRenderable instance info.
- */
-
-typedef TextureObject<pTexture3DRenderable> TextureObject3DRenderable;
-typedef std::unique_ptr<TextureObject3DRenderable> puTextureObject3DRenderable;
-
-/*! \typedef TextureObject3DDynamic
- * \brief Data structure containing each Texture3DRenderableDynamic instance info.
- */
-
-typedef TextureObject3D<pTexture3DRenderableDynamic> TextureObject3DDynamic;
-typedef std::unique_ptr<TextureObject3DDynamic> puTextureObject3DDynamic;
+typedef Composition<pTexture3DRenderableDynamic, PolicyShared<core::Texture3DRenderableDynamic>,
+            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+            core::ParameterList&, pTexture2DRenderable, pProgram> TextureObject3DDynamic;
 
 /*! \class TextureManager
  * \brief Manager to handle TextureObject1D, TextureObject2D and TextureObject3D objects.
@@ -127,27 +88,16 @@ public:
 			const std::string& negZ);
 
 	pTexture2DRenderable getShadow2D(GLuint width, GLuint height);
-
 	pTexture3DRenderable getShadow3D(GLuint width, GLuint height);
-
 	pTexture2DRenderable getColor2D(GLuint width, GLuint height);
-
 	pTexture2D getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
-
-	pTexture2D getDeferredColorScreen(GLuint width, GLuint height, GLuint size =
-			1);
-
+	pTexture2D getDeferredColorScreen(GLuint width, GLuint height, GLuint size =1);
 	pTexture2D getDeferredDepth(GLuint width, GLuint height);
-
 	pTexture2D getDeferredStencilDepth(GLuint width, GLuint height);
-
 	pTexture2DRenderableDynamic getDynamic(
 			const std::string& fragmentShaderPath,
 			pProgram program,
 			glm::ivec2 screenSize);
-
-	GLboolean check(std::string texturePath, GLuint mapType =
-	FILLWAVE_TEXTURE_TYPE_NONE);
 
 	void reload();
 
@@ -155,14 +105,37 @@ public:
 	void resize(GLuint width, GLuint height);
 
 private:
-	std::vector<puTextureObject1D> mTextureObjects1D;
-	std::vector<puTextureObject2D> mTextureObjects2D;
-	std::vector<puTextureObject2DDynamic> mTextureObjects2DDynamic;
-	std::vector<puTextureObject2DRenderable> mTextureObjects2DRenderable;
-	std::vector<puTextureObject3D> mTextureObjects3D;
-	std::vector<puTextureObject3DDynamic> mTextureObjects3DDynamic;
-	std::vector<puTextureObject3DRenderable> mTextureObjects3DRenderable;
-	std::vector<puTextureObject2DDeferred> mTextureObjects2DDeferred;
+
+	ManagerComposite<std::unique_ptr<TextureObject1D>, pTexture1D, std::string, UINT_MAX, PolicyUnique<TextureObject1D>,
+	    core::ParameterList&> mTextures1D;
+
+    ManagerComposite<std::unique_ptr<TextureObject2DStatic>, pTexture2D, std::string, UINT_MAX, PolicyUnique<TextureObject2DStatic>,
+	 	 core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
+
+    ManagerComposite<std::unique_ptr<TextureObject2DDeferred>, pTexture2D, std::string, UINT_MAX, PolicyUnique<TextureObject2DDeferred>,
+	 	 core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2DDeferred;
+
+    ManagerComposite<std::unique_ptr<TextureObject2DDynamic>, pTexture2DRenderableDynamic, std::string, UINT_MAX, PolicyUnique<TextureObject2DDynamic>,
+	 	 core::Texture2DFile*, core::ParameterList&, pProgram> mTextures2DDynamic;
+
+    ManagerComposite<std::unique_ptr<TextureObject2DRenderable>, pTexture2DRenderable, std::string, UINT_MAX, PolicyUnique<TextureObject2DRenderable>,
+        GLenum, core::Texture2DFile*, core::ParameterList&> mTextures2DRenderable;
+
+    ManagerComposite<std::unique_ptr<TextureObject3D>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3D>,
+        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+        core::ParameterList&> mTextures3D;
+
+    ManagerComposite<std::unique_ptr<TextureObject3DDynamic>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3DDynamic>,
+        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+        core::ParameterList&, pTexture2DRenderable, pProgram> mTextures3DDynamic;
+
+    ManagerComposite<std::unique_ptr<TextureObject3DRenderable>, pTexture3DRenderable, std::string, UINT_MAX, PolicyUnique<TextureObject3DRenderable>,
+        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+        pTexture2DRenderable, core::ParameterList&> mTextures3DRenderable;
+
 	std::vector<GLenum> mSupportedCompresssionTypes;
 	std::string mRootPath;
 	puTextureLoader mLoader;
@@ -189,14 +162,14 @@ private:
 	template<class T>
 	inline void reload(std::vector<T>& textures) {
 		for (auto& it : textures) {
-			it->mTexture->reload();
+			it->mComponent->reload();
 		}
 	}
 
 	template<class T>
 	inline void resize(std::vector<T>& textures, GLuint width, GLuint height) {
 		for (auto& it : textures) {
-			it->mTexture->resize(width, height);
+			it->mComponent->resize(width, height);
 		}
 	}
 

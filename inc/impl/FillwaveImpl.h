@@ -408,13 +408,13 @@ void Engine::EngineImpl::reload() {
 	mShaderManager->reload();
 
 	for (auto& it : mPrograms) {
-		it.second->mContent->reload();
+		it.second->mComponent->reload();
 	}
 
 	mTextureManager->reload();
 
 	for (auto& it : mSamplers) {
-		it.second->mContent->reload();
+		it.second->mComponent->reload();
 	}
 
 	mBufferManager->reload();

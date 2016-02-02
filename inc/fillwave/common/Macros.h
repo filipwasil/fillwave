@@ -8,6 +8,8 @@
 #ifndef MACROS_H_
 #define MACROS_H_
 
+#include <algorithm>
+
 namespace fillwave {
 namespace framework {
 

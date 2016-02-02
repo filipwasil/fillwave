@@ -21,7 +21,7 @@ namespace core {
 class Texture2DRenderableDynamic: public Texture2DRenderable {
 public:
 	Texture2DRenderableDynamic(
-			puTexture2DFile file,
+			Texture2DFile* file,
 			ParameterList& parameters,
 			pProgram program);
 

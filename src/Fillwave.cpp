@@ -136,7 +136,7 @@ pProgram Engine::storeProgram(
 		const std::string& name,
 		const std::vector<pShader>& shaders,
 		GLboolean skipLinking) {
-	return mImpl->mPrograms.add(name, name, shaders, skipLinking);
+	return mImpl->mPrograms.add(name, shaders, skipLinking);
 }
 
 pTexture2D Engine::storeTexture(
@@ -234,7 +234,7 @@ pText Engine::storeText(
 		glm::vec4 color,
 		eTextEffect effect) {
 	/* Check for the font texture */
-	if (not mImpl->mTextureManager->check(fontName + ".png")) {
+	if (not mImpl->mTextureManager->get(fontName + ".png")) {
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
 	}
 
@@ -279,9 +279,8 @@ pText Engine::storeText(
 		font = newFont;
 	}
 
-	pText text = pText(
-			new framework::Text(content, t, position,
-					this, scale, font, color, effect));
+	pText text = std::make_shared<framework::Text>(content, t, position,
+					this, scale, font, color, effect);
 	mImpl->mTextManager.push_back(pText(text));
 	return text;
 }

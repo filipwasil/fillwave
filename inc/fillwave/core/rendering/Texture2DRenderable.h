@@ -22,7 +22,7 @@ class Texture2DRenderable: public Texture2D {
 public:
 	Texture2DRenderable(
 			GLenum attachment,
-			puTexture2DFile file,
+			Texture2DFile* file,
 			ParameterList& parameters);
 
 	virtual ~Texture2DRenderable() = default;
