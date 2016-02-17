@@ -459,20 +459,20 @@ pTexture2D TextureSystem::getDeferredStencilDepth(
 	return mTextures2DDeferred.add(key, file, parameters, 1);
 }
 
-void TextureSystem::resize(GLuint /*width*/, GLuint /*height*/) {
-//	resize(mTexture2DDynamic, width, height); xxx
-//	resize(mTexture2DRenderable, width, height); xxx
+void TextureSystem::resize(GLuint width, GLuint height) {
+	resize(mTextures2DDynamic, width, height);
+	resize(mTextures2DRenderable, width, height);
 }
 
 void TextureSystem::reload() {
-//	reload(mTextureObjects1D);
-//	reload(mTextureObjects2D); xxx
-//	reload(mTextureObjects2DDynamic);
-//	reload(mTextureObjects2DRenderable);
-//	reload(mTextureObjects3D);
-//	reload(mTextureObjects3DRenderable);
-//	reload(mTextureObjects3DDynamic);
-//	reload(mTextureObjects2DDeferred);
+	reload(mTextures1D);
+	reload(mTextures2D);
+	reload(mTextures2DDynamic);
+	reload(mTextures2DRenderable);
+	reload(mTextures3D);
+	reload(mTextures3DRenderable);
+	reload(mTextures3DDynamic);
+	reload(mTextures2DDeferred);
 }
 
 } /* framework */

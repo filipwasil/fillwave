@@ -101,26 +101,26 @@ public:
 private:
 
 	ManagerComposite<std::unique_ptr<TextureObject1D>, pTexture1D, std::string, UINT_MAX, PolicyUnique<TextureObject1D>,
-	    core::ParameterList&> mTextures1D;
+		core::ParameterList&> mTextures1D;
 
-    ManagerComposite<std::unique_ptr<TextureObject2DStatic>, pTexture2D, std::string, UINT_MAX, PolicyUnique<TextureObject2DStatic>,
-	 	 core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
+   ManagerComposite<std::unique_ptr<TextureObject2DStatic>, pTexture2D, std::string, UINT_MAX, PolicyUnique<TextureObject2DStatic>,
+		core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
 
-    ManagerComposite<std::unique_ptr<TextureObject2DDeferred>, pTexture2D, std::string, UINT_MAX, PolicyUnique<TextureObject2DDeferred>,
-	 	 core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2DDeferred;
+   ManagerComposite<std::unique_ptr<TextureObject2DDeferred>, pTexture2D, std::string, UINT_MAX, PolicyUnique<TextureObject2DDeferred>,
+		core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2DDeferred;
 
-    ManagerComposite<std::unique_ptr<TextureObject2DDynamic>, pTexture2DRenderableDynamic, std::string, UINT_MAX, PolicyUnique<TextureObject2DDynamic>,
-	 	 core::Texture2DFile*, core::ParameterList&, pProgram> mTextures2DDynamic;
+   ManagerComposite<std::unique_ptr<TextureObject2DDynamic>, pTexture2DRenderableDynamic, std::string, UINT_MAX, PolicyUnique<TextureObject2DDynamic>,
+		core::Texture2DFile*, core::ParameterList&, pProgram> mTextures2DDynamic;
 
-    ManagerComposite<std::unique_ptr<TextureObject2DRenderable>, pTexture2DRenderable, std::string, UINT_MAX, PolicyUnique<TextureObject2DRenderable>,
-        GLenum, core::Texture2DFile*, core::ParameterList&> mTextures2DRenderable;
+   ManagerComposite<std::unique_ptr<TextureObject2DRenderable>, pTexture2DRenderable, std::string, UINT_MAX, PolicyUnique<TextureObject2DRenderable>,
+		GLenum, core::Texture2DFile*, core::ParameterList&> mTextures2DRenderable;
 
-    ManagerComposite<std::unique_ptr<TextureObject3D>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3D>,
+   ManagerComposite<std::unique_ptr<TextureObject3D>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3D>,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::ParameterList&> mTextures3D;
 
-    ManagerComposite<std::unique_ptr<TextureObject3DDynamic>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3DDynamic>,
+   ManagerComposite<std::unique_ptr<TextureObject3DDynamic>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3DDynamic>,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::ParameterList&, pTexture2DRenderable, pProgram> mTextures3DDynamic;
@@ -154,16 +154,16 @@ private:
 			glm::ivec2 screenSize);
 
 	template<class T>
-	inline void reload(std::vector<T>& textures) {
+	inline void reload(T& textures) {
 		for (auto& it : textures) {
-			it->mComponent->reload();
+			it.second->mComponent->reload();
 		}
 	}
 
 	template<class T>
-	inline void resize(std::vector<T>& textures, GLuint width, GLuint height) {
+	inline void resize(T& textures, GLuint width, GLuint height) {
 		for (auto& it : textures) {
-			it->mComponent->resize(width, height);
+			it.second->mComponent->resize(width, height);
 		}
 	}
 };
