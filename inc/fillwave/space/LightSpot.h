@@ -8,9 +8,9 @@
 #ifndef LIGHTSPOT_H_
 #define LIGHTSPOT_H_
 
+#include <fillwave/management/TextureSystem.h>
 #include <fillwave/space/base/ILight.h>
 #include <fillwave/space/CameraPerspective.h>
-#include <fillwave/management/TextureManager.h>
 
 namespace fillwave {
 namespace framework {

@@ -10,7 +10,6 @@
 
 #include <fillwave/loaders/ProgramLoader.h>
 
-#include <fillwave/management/TextureManager.h>
 #include <fillwave/models/Model.h>
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/models/animations/Conversion.h>
@@ -18,6 +17,7 @@
 
 #include <fillwave/Log.h>
 #include <fillwave/management/LightSystem.h>
+#include <fillwave/management/TextureSystem.h>
 
 FLOGINIT("Model", FERROR | FFATAL)
 

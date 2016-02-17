@@ -18,7 +18,7 @@ class TextureManager;
 namespace core {
 
 FramebufferGeometry::FramebufferGeometry(
-		framework::TextureManager* manager,
+		framework::TextureSystem* textures,
 		GLuint width,
 		GLuint height,
 		GLuint colorBuffers,
@@ -31,9 +31,9 @@ FramebufferGeometry::FramebufferGeometry(
 				mSummaryBuffer(GL_COLOR_ATTACHMENT0 + colorBuffers),
 				mNone(GL_NONE) {
 
-	mDeferredColors = manager->getDeferredColor(width, height, mColorBufferSize);
-	mStencilDepth = manager->getDeferredStencilDepth(width, height);
-	mSummary = manager->getDeferredColorScreen(width, height);
+	mDeferredColors = textures->getDeferredColor(width, height, mColorBufferSize);
+	mStencilDepth = textures->getDeferredStencilDepth(width, height);
+	mSummary = textures->getDeferredColorScreen(width, height);
 
 	reload();
 }

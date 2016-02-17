@@ -1,12 +1,12 @@
 /*
- * TextureManager.h
+ * TextureSystem.h
  *
  *  Created on: 15 Apr 2014
  *      Author: Filip Wasil
  */
 
-#ifndef TEXTUREMANAGER_H_
-#define TEXTUREMANAGER_H_
+#ifndef TEXTURESYSTEM_H_
+#define TEXTURESYSTEM_H_
 
 #include <fillwave/core/texturing/Texture1D.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
@@ -18,15 +18,9 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class TextureObject
+/** TextureObject
  * \brief Template class for all texture objects.
  */
-
-template<class T>
-class TextureObject {
-public:
-	T mTexture;
-};
 
 typedef Composition<pTexture1D, PolicyShared<core::Texture1D>,
             core::ParameterList&> TextureObject1D;
@@ -47,28 +41,28 @@ typedef Composition<pTexture2DRenderable, PolicyShared<core::Texture2DRenderable
             GLenum, core::Texture2DFile*, core::ParameterList&> TextureObject2DRenderable;
 
 typedef Composition<pTexture3D, PolicyShared<core::Texture3D>,
-            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
-            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+            core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+            core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
             core::ParameterList&> TextureObject3D;
 
 typedef Composition<pTexture3DRenderable, PolicyShared<core::Texture3DRenderable>,
-            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
-            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+				core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+            core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
             pTexture2DRenderable, core::ParameterList&> TextureObject3DRenderable;
 
 typedef Composition<pTexture3DRenderableDynamic, PolicyShared<core::Texture3DRenderableDynamic>,
-            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
-            core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+            core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+            core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
             core::ParameterList&, pTexture2DRenderable, pProgram> TextureObject3DDynamic;
 
 /*! \class TextureManager
  * \brief Manager to handle TextureObject1D, TextureObject2D and TextureObject3D objects.
  */
 
-class TextureManager {
+class TextureSystem {
 public:
-	TextureManager(const std::string& rootPath);
-	virtual ~TextureManager() = default;
+	TextureSystem(const std::string& rootPath);
+	virtual ~TextureSystem() = default;
 
 	void checkExtensions();
 
@@ -122,18 +116,18 @@ private:
         GLenum, core::Texture2DFile*, core::ParameterList&> mTextures2DRenderable;
 
     ManagerComposite<std::unique_ptr<TextureObject3D>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3D>,
-        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
-        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+        core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+        core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::ParameterList&> mTextures3D;
 
     ManagerComposite<std::unique_ptr<TextureObject3DDynamic>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3DDynamic>,
-        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
-        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+        core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+        core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::ParameterList&, pTexture2DRenderable, pProgram> mTextures3DDynamic;
 
     ManagerComposite<std::unique_ptr<TextureObject3DRenderable>, pTexture3DRenderable, std::string, UINT_MAX, PolicyUnique<TextureObject3DRenderable>,
-        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
-        core::Texture2DFile&, core::Texture2DFile&, core::Texture2DFile&,
+        core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+        core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         pTexture2DRenderable, core::ParameterList&> mTextures3DRenderable;
 
 	std::vector<GLenum> mSupportedCompresssionTypes;
@@ -172,11 +166,10 @@ private:
 			it->mComponent->resize(width, height);
 		}
 	}
-
 };
 
 } /* framework */
-typedef std::unique_ptr<framework::TextureManager> puTextureManager;
+typedef std::unique_ptr<framework::TextureSystem> puTextureSystem;
 } /* fillwave */
 
 #endif /* TEXTUREMANAGER_H_ */

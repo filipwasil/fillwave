@@ -25,7 +25,7 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 		:
 				mScreenSize(engine->getScreenSize()),
 				mLights(engine->getLightSystem()),
-				mTextureManager(engine->getTextureManager()),
+				mTextures(engine->getTextureSystem()),
 				mProgramMain(loader.getDefaultDR()),
 				mProgramMainAnimated(loader.getDefaultBonesDR()),
 				mProgramDirecionalLight(loader.getDRDirectionalLights()),
@@ -41,7 +41,7 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 				mDeferredColorAttachments(5),
 				mDeferredDepthAttachments(1),
 				mGBuffer(
-						new core::FramebufferGeometry(mTextureManager, mScreenSize[0],
+						make_unique<core::FramebufferGeometry>(mTextures, mScreenSize[0],
 								mScreenSize[1], mDeferredColorAttachments,
 								mDeferredDepthAttachments)) {
 

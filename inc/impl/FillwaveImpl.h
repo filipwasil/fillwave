@@ -16,12 +16,12 @@
 
 /* Management */
 #include <fillwave/management/ProgramManager.h>
-#include <fillwave/management/TextureManager.h>
 #include <fillwave/management/ShaderManager.h>
 #include <fillwave/management/SamplerManager.h>
 #include <fillwave/management/BufferManager.h>
 #include <fillwave/common/Macros.h>
 #include <fillwave/management/LightSystem.h>
+#include <fillwave/management/TextureSystem.h>
 
 FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 
@@ -74,7 +74,7 @@ struct Engine::EngineImpl {
 
 	/* Resources */
 	ManagerPrograms mPrograms;
-	puTextureManager mTextureManager;
+	puTextureSystem mTextures;
 	puShaderManager mShaderManager;
 	ManagerSamplers mSamplers;
 	puBufferManager mBufferManager;
@@ -324,7 +324,7 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
-	mTextureManager = make_unique<framework::TextureManager>(mFileLoader.getRootPath());
+	mTextures = make_unique<framework::TextureSystem>(mFileLoader.getRootPath());
 	mShaderManager = make_unique<framework::ShaderManager>(mFileLoader.getRootPath());
 	mBufferManager = make_unique<framework::BufferManager>();
 	mLights = make_unique<framework::LightSystem>();
@@ -367,21 +367,20 @@ inline void Engine::EngineImpl::initStartup() {
 	program->uniformPush("uScreenFactor", mWindowAspectRatio);
 	core::Program::disusePrograms();
 
-	mPostProcessingPassStartup = puPostProcessingPass(
-			new core::PostProcessingPass(program,
-					mTextureManager->getDynamic("fillwave_quad_startup.frag",
+	mPostProcessingPassStartup = make_unique<core::PostProcessingPass>(program,
+					mTextures->getDynamic("fillwave_quad_startup.frag",
 							program, glm::ivec2(mWindowWidth, mWindowHeight)),
-					mStartupTimeLimit));
+					mStartupTimeLimit);
 
 	FLOG_DEBUG("Post processing startup pass added");
 
-	mStartupTexture = mTextureManager->get("logo.png",
+	mStartupTexture = mTextures->get("logo.png",
 	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone);
 	if (not mStartupTexture) {
-		mStartupTexture = mTextureManager->get("textures/logo.png",
+		mStartupTexture = mTextures->get("textures/logo.png",
 		FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone);
 		if (not mStartupTexture) {
-			mStartupTexture = mTextureManager->get("64_64_64.color",
+			mStartupTexture = mTextures->get("64_64_64.color",
 			FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone);
 			FLOG_ERROR("Fillwave startup logo could not be executed");
 		}
@@ -411,7 +410,7 @@ void Engine::EngineImpl::reload() {
 		it.second->mComponent->reload();
 	}
 
-	mTextureManager->reload();
+	mTextures->reload();
 
 	for (auto& it : mSamplers) {
 		it.second->mComponent->reload();
@@ -426,7 +425,7 @@ void Engine::EngineImpl::reload() {
 }
 
 inline void Engine::EngineImpl::reloadPickingBuffer() {
-	mPickingRenderableTexture = mTextureManager->getColor2D(mWindowWidth,
+	mPickingRenderableTexture = mTextures->getColor2D(mWindowWidth,
 			mWindowHeight);
 
 	mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
@@ -857,7 +856,7 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 
 	glViewport(0, 0, mWindowWidth, mWindowHeight);
 
-	mTextureManager->resize(mWindowWidth, mWindowHeight);
+	mTextures->resize(mWindowWidth, mWindowHeight);
 
 	mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
 }
@@ -930,7 +929,7 @@ pLightSpot Engine::EngineImpl::storeLightSpot(
 		glm::vec4& color,
 		pMoveable& followed) {
 	return mLights->mLightsSpot.add(
-			mTextureManager->getShadow2D(mWindowWidth,
+			mTextures->getShadow2D(mWindowWidth,
 					mWindowHeight), position, rotation, color, followed);
 }
 
@@ -940,7 +939,7 @@ pLightDirectional Engine::EngineImpl::storeLightDirectional(
 		glm::vec4& color,
 		pMoveable& followed) {
 	return mLights->mLightsDirectional.add(
-			mTextureManager->getShadow2D(mWindowWidth,
+			mTextures->getShadow2D(mWindowWidth,
 					mWindowHeight), position, rotation, color, followed);
 }
 
@@ -949,7 +948,7 @@ pLightPoint Engine::EngineImpl::storeLightPoint(
 		glm::vec4& color,
 		pMoveable& followed) {
 	return mLights->mLightsPoint.add(
-			mTextureManager->getShadow3D(mWindowWidth,
+			mTextures->getShadow3D(mWindowWidth,
 					mWindowHeight), position, color, followed);
 }
 

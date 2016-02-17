@@ -143,11 +143,11 @@ pTexture2D Engine::storeTexture(
 		const std::string& texturePath,
 		const GLuint& mapType,
 		framework::eCompression compression) {
-	return mImpl->mTextureManager->get(texturePath, mapType, compression);
+	return mImpl->mTextures->get(texturePath, mapType, compression);
 }
 
 pTexture2DRenderable Engine::storeTextureRenderable() {
-	return mImpl->mTextureManager->getColor2D(mImpl->mWindowWidth, mImpl->mWindowHeight);;
+	return mImpl->mTextures->getColor2D(mImpl->mWindowWidth, mImpl->mWindowHeight);;
 }
 
 pTexture2DRenderableDynamic Engine::storeTextureDynamic(
@@ -155,7 +155,7 @@ pTexture2DRenderableDynamic Engine::storeTextureDynamic(
 	const std::string path = fragmentShaderPath;
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
 			fragmentShaderPath);
-	pTexture2DRenderableDynamic t = mImpl->mTextureManager->getDynamic(path,
+	pTexture2DRenderableDynamic t = mImpl->mTextures->getDynamic(path,
 			program, glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));
 	mImpl->mTexturesDynamic.push_back(t);
 	return t;
@@ -168,7 +168,7 @@ pTexture3D Engine::storeTexture3D(
 		const std::string& negY,
 		const std::string& posZ,
 		const std::string& negZ) {
-	return mImpl->mTextureManager->get(posX, negX, posY, negY, posZ, negZ);
+	return mImpl->mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
 
 pSampler Engine::storeSO(GLint textureUnit) {
@@ -234,11 +234,11 @@ pText Engine::storeText(
 		glm::vec4 color,
 		eTextEffect effect) {
 	/* Check for the font texture */
-	if (not mImpl->mTextureManager->get(fontName + ".png")) {
+	if (not mImpl->mTextures->get(fontName + ".png")) {
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
 	}
 
-	pTexture2D t = mImpl->mTextureManager->get(fontName + ".png",
+	pTexture2D t = mImpl->mTextures->get(fontName + ".png",
 	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone, framework::eFlip::eVertical);
 
 	Font* font = nullptr;
@@ -354,8 +354,8 @@ framework::LightSystem* Engine::getLightSystem() const {
 	return mImpl->mLights.get();
 }
 
-framework::TextureManager* Engine::getTextureManager() const {
-	return mImpl->mTextureManager.get();
+framework::TextureSystem* Engine::getTextureSystem() const {
+	return mImpl->mTextures.get();
 }
 
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
@@ -393,7 +393,7 @@ void Engine::addPostProcess(
 		GLfloat lifeTime) {
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
 	core::PostProcessingPass pass(program,
-			mImpl->mTextureManager->getDynamic(fragmentShaderPath, program,
+			mImpl->mTextures->getDynamic(fragmentShaderPath, program,
 					glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)),
 			lifeTime);
 	mImpl->mPostProcessingPasses.push_back(pass);

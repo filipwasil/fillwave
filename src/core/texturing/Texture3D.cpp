@@ -15,12 +15,12 @@ namespace fillwave {
 namespace core {
 
 Texture3D::Texture3D(
-		Texture2DFile& fileRight,
-		Texture2DFile& fileLeft,
-		Texture2DFile& fileCeil,
-		Texture2DFile& fileFloor,
-		Texture2DFile& fileFront,
-		Texture2DFile& fileBack,
+		Texture2DFile* fileRight,
+		Texture2DFile* fileLeft,
+		Texture2DFile* fileCeil,
+		Texture2DFile* fileFloor,
+		Texture2DFile* fileFront,
+		Texture2DFile* fileBack,
 		ParameterList& parameters)
 		:
 				Texture(GL_TEXTURE_CUBE_MAP),

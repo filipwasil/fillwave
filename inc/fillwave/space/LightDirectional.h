@@ -8,9 +8,9 @@
 #ifndef LIGHTDIRECTIONAL_H_
 #define LIGHTDIRECTIONAL_H_
 
+#include <fillwave/management/TextureSystem.h>
 #include <fillwave/space/CameraOrthographic.h>
 #include <fillwave/space/base/ILight.h>
-#include <fillwave/management/TextureManager.h>
 
 namespace fillwave {
 class Engine;

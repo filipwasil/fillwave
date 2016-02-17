@@ -203,7 +203,7 @@ public:
 	void reload();
 
 	framework::LightSystem* getLightSystem() const;
-	framework::TextureManager* getTextureManager() const;
+	framework::TextureSystem* getTextureSystem() const;
 
 private:
 	struct EngineImpl;

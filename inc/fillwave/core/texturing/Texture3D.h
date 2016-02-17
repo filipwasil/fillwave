@@ -21,11 +21,11 @@ class Texture3DFile: public Texture2DFile {
 public:
 	GLenum mCubeTarget;
 
-	Texture3DFile(Texture2DFile& file, GLenum target)
+	Texture3DFile(Texture2DFile* file, GLenum target)
 			: mCubeTarget(target) {
-		mHeader = file.mHeader;
-		mConfig = file.mConfig;
-		mData = file.mData;
+		mHeader = file->mHeader;
+		mConfig = file->mConfig;
+		mData = file->mData;
 	}
 };
 
@@ -49,12 +49,12 @@ public:
 	puTexture3DFile mBack; /* Negative Z*/
 
 	Texture3D(
-			Texture2DFile& fileRight,
-			Texture2DFile& fileLeft,
-			Texture2DFile& fileCeil,
-			Texture2DFile& fileFloor,
-			Texture2DFile& fileFront,
-			Texture2DFile& fileBack,
+			Texture2DFile* fileRight,
+			Texture2DFile* fileLeft,
+			Texture2DFile* fileCeil,
+			Texture2DFile* fileFloor,
+			Texture2DFile* fileFront,
+			Texture2DFile* fileBack,
 			ParameterList& parameters);
 
 	virtual ~Texture3D() = default;

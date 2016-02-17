@@ -11,7 +11,7 @@
 #include <fillwave/core/rendering/Framebuffer.h>
 #include <fillwave/core/texturing/Parameter.h>
 #include <fillwave/core/texturing/Texture2D.h>
-#include <fillwave/management/TextureManager.h>
+#include <fillwave/management/TextureSystem.h>
 
 namespace fillwave {
 class Engine;
@@ -24,7 +24,7 @@ namespace core {
 class FramebufferGeometry: public Framebuffer {
 public:
 	FramebufferGeometry(
-			framework::TextureManager* manager,
+			framework::TextureSystem* textures,
 			GLuint width,
 			GLuint height,
 			GLuint colorBuffers,
