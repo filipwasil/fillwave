@@ -192,8 +192,17 @@ pTexture2D TextureSystem::get(
 		eCompression compression,
 		eFlip flip) {
 	std::string filePath = mRootPath + texturePath;
+	if (mTextures2D.find(filePath) != mTextures2D.end()) {
+		return mTextures2D[filePath]->mComponent;
+	}
+
 	add(filePath, mapType, compression, flip);
-	return mTextures2D[filePath]->mComponent;
+
+	if (mTextures2D.find(filePath) != mTextures2D.end()) {
+		return mTextures2D[filePath]->mComponent;
+	}
+
+	return pTexture2D();
 }
 
 pTexture2DRenderableDynamic TextureSystem::getDynamic(

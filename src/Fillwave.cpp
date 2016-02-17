@@ -237,7 +237,6 @@ pText Engine::storeText(
 	if (not mImpl->mTextures->get(fontName + ".png")) {
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
 	}
-
 	pTexture2D t = mImpl->mTextures->get(fontName + ".png",
 	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone, framework::eFlip::eVertical);
 
