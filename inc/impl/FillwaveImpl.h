@@ -397,7 +397,7 @@ inline void Engine::EngineImpl::initExtras() {
 	mTextFPSCallback = NULL;
 
 	/* Debugger */
-	mDebugger = puDebugger(new framework::Debugger(mEngine));
+	mDebugger = make_unique<framework::Debugger>(mEngine);
 }
 
 void Engine::EngineImpl::reload() {

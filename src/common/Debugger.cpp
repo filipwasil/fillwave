@@ -167,7 +167,7 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	core::Uniform::push(mULCTextureUnit, id);
+	core::Uniform::push(mULCTextureUnit, FILLWAVE_SHADOW_FIRST_UNIT + id);
 	core::Uniform::push(mULCNearPlane, cam.getProjectionNearPlane());
 	core::Uniform::push(mULCFarPlane, cam.getProjectionFarPlane());
 
