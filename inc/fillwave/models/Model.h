@@ -15,7 +15,6 @@
 namespace fillwave {
 class Engine;
 namespace framework {
-
 class TimedBoneUpdateCallback;
 
 /*! \class Model
@@ -74,7 +73,7 @@ public:
 
 protected:
 	Animator* mAnimator;
-	LightManager* mLightManager;
+	LightSystem* mLights;
 	pProgram mProgramShadow, mProgramShadowColor;
 	GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow,
 			mUniformLocationCacheBonesShadowColor;

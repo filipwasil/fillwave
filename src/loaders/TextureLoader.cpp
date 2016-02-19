@@ -110,7 +110,7 @@ core::Texture2DFile* TextureLoader::load(
 			} else {
 				file->mConfig.mCompression = GL_TRUE;
 				file->mHeader.mInternalFormat = getComporession(compression);
-				file->mConfig.mCompressionSize = 0; //xxx stb will not give us texture size
+				file->mConfig.mCompressionSize = 0;
 				FLOG_FATAL("Texture compression feature not ready");
 			}
 
@@ -123,7 +123,7 @@ core::Texture2DFile* TextureLoader::load(
 			FLOG_DEBUG("Flipping Texture %s ...", filePath.c_str());
 			switch (flip) {
 				case eFlip::eVertical:
-#pragma omp parallel for schedule(guided) num_threads(4)
+#pragma omp parallel for schedule(guided) num_threads(2)
 					for (int row = 0; row < h / 2; row++) {
 						for (int column = 0; column < w; column++) {
 							int pixelOffset1 = row * w * n + column * n;
@@ -143,7 +143,7 @@ core::Texture2DFile* TextureLoader::load(
 					break;
 
 				case eFlip::eHorizontal_vertical:
-#pragma omp parallel for schedule(guided) num_threads(4)
+#pragma omp parallel for schedule(guided) num_threads(2)
 					for (int row = 0; row < h; row++) {
 						for (int column = 0; column < w / 2; column++) {
 							int pixelOffset1 = row * w * n + column * n;
@@ -163,7 +163,7 @@ core::Texture2DFile* TextureLoader::load(
 					break;
 
 				case eFlip::eHorizontal:
-#pragma omp parallel for schedule(guided) num_threads(4)
+#pragma omp parallel for schedule(guided) num_threads(2)
 					for (int row = 0; row < h; row++) {
 						for (int column = 0; column < w / 2; column++) {
 							int pixelOffset1 = row * w * n + column * n;
@@ -180,7 +180,7 @@ core::Texture2DFile* TextureLoader::load(
 							}
 						}
 					}
-#pragma omp parallel for schedule(guided) num_threads(4)
+#pragma omp parallel for schedule(guided) num_threads(2)
 					for (int row = 0; row < h / 2; row++) {
 						for (int column = 0; column < w; column++) {
 							int pixelOffset1 = row * w * n + column * n;

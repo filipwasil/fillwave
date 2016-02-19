@@ -14,11 +14,10 @@
 
 #include <fillwave/space/base/ICamera.h>
 
-#include <fillwave/management/LightManager.h>
-
 #include <fillwave/loaders/ProgramLoader.h>
 
 #include <fillwave/Log.h>
+#include <fillwave/management/LightSystem.h>
 
 FLOGINIT("Debugger", FERROR | FFATAL | FINFO)
 
@@ -121,8 +120,7 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
 
 	mVAO->bind();
 
-	pLightDirectional light = mEngine->getLightManager()->getLightDirectional(
-			id - mEngine->getLightManager()->getLightsSpotHowMany());
+	LightDirectional* light = mEngine->getLightSystem()->mLightsDirectional[id].get();
 
 	ICamera* cam = light->getShadowCamera().get();
 
@@ -159,7 +157,7 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
 
 	mVAO->bind();
 
-	pLightSpot light = mEngine->getLightManager()->getLightSpot(id);
+	LightSpot* light = mEngine->getLightSystem()->mLightsSpot[id].get();
 
 	CameraPerspective cam = *(light->getShadowCamera().get());
 
@@ -169,7 +167,7 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	core::Uniform::push(mULCTextureUnit, id);
+	core::Uniform::push(mULCTextureUnit, FILLWAVE_SHADOW_FIRST_UNIT + id);
 	core::Uniform::push(mULCNearPlane, cam.getProjectionNearPlane());
 	core::Uniform::push(mULCFarPlane, cam.getProjectionFarPlane());
 

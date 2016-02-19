@@ -25,7 +25,7 @@ class Engine;
 
 namespace framework {
 class Animator;
-class LightManager;
+class LightSystem;
 }
 
 namespace framework {
@@ -48,7 +48,7 @@ public:
 			pProgram programOcclusion,
 			pProgram programAmbientOcclusionGeometry,
 			pProgram programAmbientOcclusionColor,
-			LightManager* lightManager = nullptr,
+			LightSystem* lights = nullptr,
 			pVertexBufferBasic vbo = pVertexBufferBasic(),
 			pIndexBufferBasic ibo = pIndexBufferBasic(),
 			Animator* boneManager = nullptr,
@@ -90,7 +90,7 @@ protected:
 	pVertexBufferBasic mVBO;
 
 	/* Light */
-	LightManager* mLightManager;
+	LightSystem* mLights;
 
 	/* Animations */
 	Animator* mAnimator;

@@ -10,15 +10,14 @@
 
 #include <fillwave/loaders/ProgramLoader.h>
 
-#include <fillwave/management/TextureManager.h>
-#include <fillwave/management/LightManager.h>
-
 #include <fillwave/models/Model.h>
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/models/animations/Conversion.h>
 #include <fillwave/models/animations/Animation.h>
 
 #include <fillwave/Log.h>
+#include <fillwave/management/LightSystem.h>
+#include <fillwave/management/TextureSystem.h>
 
 FLOGINIT("Model", FERROR | FFATAL)
 
@@ -36,7 +35,7 @@ Model::Model(
 		:
 				Programmable(program),
 				mAnimator(nullptr),
-				mLightManager(engine->getLightManager()),
+				mLights(engine->getLightSystem()),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -54,7 +53,7 @@ Model::Model(
 					loader.getOcclusionOptimizedQuery(),
 					loader.getAmbientOcclusionGeometry(),
 					loader.getAmbientOcclusionColor(),
-					engine->getLightManager(),
+					engine->getLightSystem(),
 					pVertexBufferBasic(new core::VertexBufferBasic(vertices)),
 					pIndexBufferBasic(new core::IndexBufferBasic(indices)),
 					mAnimator));
@@ -65,7 +64,7 @@ Model::Model(Engine* engine, pProgram program, const std::string& shapePath)
 		:
 				Programmable(program),
 				mAnimator(nullptr),
-				mLightManager(engine->getLightManager()),
+				mLights(engine->getLightSystem()),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -91,7 +90,7 @@ Model::Model(
 		:
 				Programmable(program),
 				mAnimator(nullptr),
-				mLightManager(engine->getLightManager()),
+				mLights(engine->getLightSystem()),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -118,7 +117,7 @@ Model::Model(
 		:
 				Programmable(program),
 				mAnimator(nullptr),
-				mLightManager(engine->getLightManager()),
+				mLights(engine->getLightSystem()),
 				mAnimationCallback(nullptr),
 				mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -291,17 +290,15 @@ pMesh Model::loadMesh(
 	ProgramLoader loader(engine);
 
 	if (shape) {
-		pMesh ptr = pMesh(
-				new Mesh(engine, material, diffuseMap, normalMap, specularMap,
+		pMesh ptr = std::make_shared<Mesh>(engine, material, diffuseMap, normalMap, specularMap,
 						mProgram, mProgramShadow, mProgramShadowColor,
 						loader.getOcclusionOptimizedQuery(),
 						loader.getAmbientOcclusionGeometry(),
 						loader.getAmbientOcclusionColor(),
-						engine->getLightManager(),
-						pVertexBufferBasic(
-								new core::VertexBufferBasic(shape, mAnimator)),
-						pIndexBufferBasic(new core::IndexBufferBasic(shape)),
-						mAnimator));
+						engine->getLightSystem(),
+						std::make_shared<core::VertexBufferBasic>(shape, mAnimator),
+						std::make_shared<core::IndexBufferBasic>(shape),
+						mAnimator);
 		return ptr;
 	} else {
 		return pMesh();
@@ -338,8 +335,8 @@ void Model::drawPBRP(ICamera& camera) {
 		mAnimator->updateBonesUniform(mUniformLocationCacheBones);
 	}
 
-	mLightManager->pushLightUniforms(mProgram.get());
-	mLightManager->bindShadowmaps();
+	mLights->pushLightUniforms(mProgram.get());
+	mLights->bindShadowmaps();
 
 	drawWithEffectsPBRP(camera);
 }

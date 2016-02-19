@@ -31,7 +31,7 @@ namespace fillwave {
 #ifdef __ANDROID__
 
 Engine::Engine(std::string rootPath) {
-	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, rootPath));
+	mImpl = make_unique<EngineImpl>(this, rootPath);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
@@ -39,7 +39,7 @@ Engine::Engine(std::string rootPath) {
 }
 
 Engine::Engine(ANativeActivity* activity) {
-	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, activity));
+	mImpl = make_unique<EngineImpl>(this, activity);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
@@ -47,7 +47,7 @@ Engine::Engine(ANativeActivity* activity) {
 }
 #else
 Engine::Engine(GLint argc, GLchar* const argv[]) {
-	mImpl = std::unique_ptr<EngineImpl>(new EngineImpl(this, argc, argv));
+	mImpl = make_unique<EngineImpl>(this, argc, argv);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
@@ -136,18 +136,18 @@ pProgram Engine::storeProgram(
 		const std::string& name,
 		const std::vector<pShader>& shaders,
 		GLboolean skipLinking) {
-	return mImpl->mProgramManager->add(name, shaders, skipLinking);
+	return mImpl->mPrograms.add(name, shaders, skipLinking);
 }
 
 pTexture2D Engine::storeTexture(
 		const std::string& texturePath,
 		const GLuint& mapType,
 		framework::eCompression compression) {
-	return mImpl->mTextureManager->get(texturePath, mapType, compression);
+	return mImpl->mTextures->get(texturePath, mapType, compression);
 }
 
 pTexture2DRenderable Engine::storeTextureRenderable() {
-	return mImpl->mTextureManager->getColor2D(mImpl->mWindowWidth, mImpl->mWindowHeight);;
+	return mImpl->mTextures->getColor2D(mImpl->mWindowWidth, mImpl->mWindowHeight);;
 }
 
 pTexture2DRenderableDynamic Engine::storeTextureDynamic(
@@ -155,7 +155,7 @@ pTexture2DRenderableDynamic Engine::storeTextureDynamic(
 	const std::string path = fragmentShaderPath;
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
 			fragmentShaderPath);
-	pTexture2DRenderableDynamic t = mImpl->mTextureManager->getDynamic(path,
+	pTexture2DRenderableDynamic t = mImpl->mTextures->getDynamic(path,
 			program, glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));
 	mImpl->mTexturesDynamic.push_back(t);
 	return t;
@@ -168,7 +168,7 @@ pTexture3D Engine::storeTexture3D(
 		const std::string& negY,
 		const std::string& posZ,
 		const std::string& negZ) {
-	return mImpl->mTextureManager->get(posX, negX, posY, negY, posZ, negZ);
+	return mImpl->mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
 
 pSampler Engine::storeSO(GLint textureUnit) {
@@ -234,11 +234,10 @@ pText Engine::storeText(
 		glm::vec4 color,
 		eTextEffect effect) {
 	/* Check for the font texture */
-	if (not mImpl->mTextureManager->check(fontName + ".png")) {
+	if (not mImpl->mTextures->get(fontName + ".png")) {
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
 	}
-
-	pTexture2D t = mImpl->mTextureManager->get(fontName + ".png",
+	pTexture2D t = mImpl->mTextures->get(fontName + ".png",
 	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone, framework::eFlip::eVertical);
 
 	Font* font = nullptr;
@@ -279,9 +278,8 @@ pText Engine::storeText(
 		font = newFont;
 	}
 
-	pText text = pText(
-			new framework::Text(content, t, position,
-					this, scale, font, color, effect));
+	pText text = std::make_shared<framework::Text>(content, t, position,
+					this, scale, font, color, effect);
 	mImpl->mTextManager.push_back(pText(text));
 	return text;
 }
@@ -295,19 +293,19 @@ void Engine::clearText(pText text) {
 }
 
 void Engine::clearLight(pLightSpot light) {
-	mImpl->mLightManager->removeLight(light);
+	mImpl->mLights->mLightsSpot.remove(light);
 }
 
 void Engine::clearLight(pLightDirectional light) {
-	mImpl->mLightManager->removeLight(light);
+	mImpl->mLights->mLightsDirectional.remove(light);
 }
 
 void Engine::clearLight(pLightPoint light) {
-	mImpl->mLightManager->removeLight(light);
+	mImpl->mLights->mLightsPoint.remove(light);
 }
 
 void Engine::clearLights() {
-	mImpl->mLightManager->removeLights();
+	mImpl->mLights->clear();
 }
 
 glm::ivec2 Engine::getScreenSize() const {
@@ -351,12 +349,12 @@ pIScene Engine::getCurrentScene() const {
 	return mImpl->mScene;
 }
 
-framework::LightManager* Engine::getLightManager() const {
-	return mImpl->mLightManager.get();
+framework::LightSystem* Engine::getLightSystem() const {
+	return mImpl->mLights.get();
 }
 
-framework::TextureManager* Engine::getTextureManager() const {
-	return mImpl->mTextureManager.get();
+framework::TextureSystem* Engine::getTextureSystem() const {
+	return mImpl->mTextures.get();
 }
 
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
@@ -394,7 +392,7 @@ void Engine::addPostProcess(
 		GLfloat lifeTime) {
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
 	core::PostProcessingPass pass(program,
-			mImpl->mTextureManager->getDynamic(fragmentShaderPath, program,
+			mImpl->mTextures->getDynamic(fragmentShaderPath, program,
 					glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)),
 			lifeTime);
 	mImpl->mPostProcessingPasses.push_back(pass);

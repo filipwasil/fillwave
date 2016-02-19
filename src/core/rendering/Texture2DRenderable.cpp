@@ -15,10 +15,10 @@ namespace core {
 
 Texture2DRenderable::Texture2DRenderable(
 		GLenum attachment,
-		puTexture2DFile file,
+		Texture2DFile* file,
 		ParameterList& parameters)
 		:
-				Texture2D(std::move(file), parameters),
+				Texture2D(file, parameters),
 				mFramebuffer(puFramebuffer(new Framebuffer())),
 				mAttachment(attachment) {
 	setAttachment(attachment);

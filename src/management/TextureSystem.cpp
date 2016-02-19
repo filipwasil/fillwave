@@ -5,20 +5,20 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/management/TextureManager.h>
 #include <fillwave/Log.h>
+#include <fillwave/management/TextureSystem.h>
 
-FLOGINIT("TextureManager", FERROR | FFATAL | FINFO)
+FLOGINIT("TextureManager", FERROR | FFATAL | FINFO | FDEBUG)
 
 namespace fillwave {
 namespace framework {
 
-TextureManager::TextureManager(const std::string& rootPath)
+TextureSystem::TextureSystem(const std::string& rootPath)
 		: mRootPath(rootPath) {
 	checkExtensions();
 }
 
-inline void TextureManager::checkExtensions() {
+inline void TextureSystem::checkExtensions() {
 #ifdef FILLWAVE_GLES_3_0
 #else
 	int NumberOfExtensions;
@@ -70,52 +70,29 @@ inline void TextureManager::checkExtensions() {
 #endif
 }
 
-void TextureManager::add(
+void TextureSystem::add(
 		std::string filePath,
 		GLuint mapType,
 		eCompression compression,
 		eFlip flip) {
-	FLOG_DEBUG("Texture to be added: %s", filePath.c_str());
-	for (auto& it : mTextureObjects2D) {
-		if (it->mFilePath == filePath && it->mTexture->getMapType() == mapType) {
-			FLOG_DEBUG("Texture %s already in manager", filePath.c_str());
-			return;
-		}
-	}
-	TextureObject2DStatic* texture = new TextureObject2DStatic();
-	texture->mFilePath = filePath;
+
 	core::Texture2DFile* file = mLoader->load(filePath, flip,
 	GL_RGBA, mRootPath, compression);
 
 	if (file) {
-		core::ParameterList parameters;
 		FLOG_DEBUG("Texture %s added to manager", filePath.c_str());
-		texture->mTexture = pTexture2D(
-				new core::Texture2D(puTexture2DFile(file), parameters));
-		texture->mTexture->setMapType(mapType);
-		mTextureObjects2D.push_back(puTextureObject2D(texture));
+		core::ParameterList parameters;
+		pTexture2D t = mTextures2D.add(filePath, file, parameters, 1);
+		t->setMapType(mapType);
 	} else {
 		FLOG_DEBUG("Texture %s not found", filePath.c_str());
 	}
 }
 
-void TextureManager::addDynamic(
+void TextureSystem::addDynamic(
 		const std::string& fragmentShaderPath,
 		pProgram program,
 		glm::ivec2 screenSize) {
-	FLOG_DEBUG("Dynamic texture to be added: %s", fragmentShaderPath.c_str());
-	for (auto& it : mTextureObjects2DDynamic) {
-		if (it->mFilePath == fragmentShaderPath) {
-			FLOG_DEBUG("Dynamic texture %s already in manager",
-					fragmentShaderPath.c_str());
-			return;
-		}
-	}
-
-	TextureObject2DDynamic* textureDynamic = new TextureObject2DDynamic();
-	textureDynamic->mFilePath = fragmentShaderPath;
-	FLOG_DEBUG("Texture %s will be added to manager",
-			fragmentShaderPath.c_str());
 
 	core::Texture2DFile* file = mLoader->loadEmpty(screenSize);
 
@@ -125,14 +102,10 @@ void TextureManager::addDynamic(
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
-	textureDynamic->mTexture = pTexture2DRenderableDynamic(
-			new core::Texture2DRenderableDynamic(puTexture2DFile(file), parameters,
-					program));
-
-	mTextureObjects2DDynamic.push_back(puTextureObject2DDynamic(textureDynamic));
+	mTextures2DDynamic.add(fragmentShaderPath, file, parameters, program);
 }
 
-void TextureManager::add(
+void TextureSystem::add(
 		const std::string& posX,
 		const std::string& negX,
 		const std::string& posY,
@@ -144,30 +117,12 @@ void TextureManager::add(
 
 	FLOG_DEBUG("Texture to be added: %s", name.c_str());
 
-	for (auto& it : mTextureObjects3D) {
-		if (it->mFilePathPosX == posX && it->mFilePathNegX == negX
-				&& it->mFilePathPosY == posY && it->mFilePathNegY == negY
-				&& it->mFilePathPosZ == posZ && it->mFilePathNegZ == negZ) {
-			FLOG_DEBUG("Texture %s already in manager", name.c_str());
-			return;
-		}
-	}
-
-	TextureObject3DStatic* cubeObject = new TextureObject3DStatic();
-
 	core::ParameterList parameters;
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-
-	cubeObject->mFilePathPosX = posX;
-	cubeObject->mFilePathNegX = negX;
-	cubeObject->mFilePathPosY = posY;
-	cubeObject->mFilePathNegY = negY;
-	cubeObject->mFilePathPosZ = posZ;
-	cubeObject->mFilePathNegZ = negZ;
 
 	FLOG_DEBUG("Texture %s will be added to manager", name.c_str());
 
@@ -186,13 +141,9 @@ void TextureManager::add(
 
 	if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {
 		FLOG_DEBUG("Texture %s added to manager", name.c_str());
-		cubeObject->mTexture = pTexture3D(
-				new core::Texture3D((*filePosX), (*fileNegX), (*filePosY),
-						(*fileNegY), (*filePosZ), (*fileNegZ), parameters));
 
-		puTextureObject3D ptr = puTextureObject3D(cubeObject);
-
-		mTextureObjects3D.push_back(std::move(ptr));
+		mTextures3D.add(name, filePosX, fileNegX, filePosY, fileNegY, filePosZ,
+				fileNegZ, parameters);
 
 		delete filePosX;
 		delete fileNegX;
@@ -235,57 +186,43 @@ void TextureManager::add(
 	}
 }
 
-pTexture2D TextureManager::get(
+pTexture2D TextureSystem::get(
 		std::string texturePath,
 		GLuint mapType,
 		eCompression compression,
 		eFlip flip) {
 	std::string filePath = mRootPath + texturePath;
-	add(filePath, mapType, compression, flip);
-	for (auto& it : mTextureObjects2D) {
-		if (it->mFilePath == filePath && it->mTexture->getMapType() == mapType) {
-			return it->mTexture;
-		}
+	if (mTextures2D.find(filePath) != mTextures2D.end()) {
+		return mTextures2D[filePath]->mComponent;
 	}
-	FLOG_ERROR("Texture2D %s not found in manager. Returning empty pointer",
-			filePath.c_str());
+
+	add(filePath, mapType, compression, flip);
+
+	if (mTextures2D.find(filePath) != mTextures2D.end()) {
+		return mTextures2D[filePath]->mComponent;
+	}
+
 	return pTexture2D();
 }
 
-GLboolean TextureManager::check(std::string texturePath, GLuint mapType) {
-	std::string filePath = mRootPath + texturePath;
-	for (auto& it : mTextureObjects2D) {
-		if (it->mFilePath == filePath && it->mTexture->getMapType() == mapType) {
-			return GL_TRUE;
-		}
-	}
-	return GL_FALSE;
-}
-
-pTexture2DRenderableDynamic TextureManager::getDynamic(
+pTexture2DRenderableDynamic TextureSystem::getDynamic(
 		const std::string& fragmentShaderPath,
 		pProgram program,
 		glm::ivec2 screenSize) {
 	std::string filePath = mRootPath + fragmentShaderPath;
 	addDynamic(filePath, program, screenSize);
-	for (auto& it : mTextureObjects2DDynamic) {
-		if (it->mFilePath == filePath) {
-			return it->mTexture;
-		}
-	}
-	FLOG_ERROR(
-			"pTexture2DRenderableDynamic %s not found in manager. Returning empty pointer",
-			filePath.c_str());
-	return pTexture2DRenderableDynamic();
+	return mTextures2DDynamic[filePath]->mComponent;
 }
 
-pTexture3D TextureManager::get(
+pTexture3D TextureSystem::get(
 		const std::string& posX,
 		const std::string& negX,
 		const std::string& posY,
 		const std::string& negY,
 		const std::string& posZ,
 		const std::string& negZ) {
+
+    core::ParameterList parameters;
 
 	std::string filePathPosX = mRootPath + posX;
 	std::string filePathNegX = mRootPath + negX;
@@ -294,30 +231,14 @@ pTexture3D TextureManager::get(
 	std::string filePathPosZ = mRootPath + posZ;
 	std::string filePathNegZ = mRootPath + negZ;
 
-	add(filePathPosX, filePathNegX, filePathPosY, filePathNegY, filePathPosZ,
-			filePathNegZ);
+   add(filePathPosX, filePathNegX, filePathPosY, filePathNegY, filePathPosZ, filePathNegZ);
 
-	std::string name = posX + negX + posY + negY + posZ + negZ;
+   const std::string key = filePathPosX + filePathNegX + filePathPosY + filePathNegY + filePathPosZ + filePathNegZ;
 
-	for (auto& it : mTextureObjects3D) {
-		if (it->mFilePathPosX == filePathPosX && it->mFilePathNegX == filePathNegX
-				&& it->mFilePathPosY == filePathPosY
-				&& it->mFilePathNegY == filePathNegY
-				&& it->mFilePathPosZ == filePathPosZ
-				&& it->mFilePathNegZ == filePathNegZ) {
-			FLOG_DEBUG("Texture %s already in manager", name.c_str());
-			return it->mTexture;
-		}
-	}
-	FLOG_ERROR("Texture3D %s not found in manager. Returning empty pointer",
-			(filePathPosX + filePathNegX + filePathPosY + filePathNegY
-					+ filePathPosZ + filePathNegZ).c_str());
-	return pTexture3D();
+	return mTextures3D[key]->mComponent;
 }
 
-pTexture2DRenderable TextureManager::getShadow2D(GLuint width, GLuint height) {
-
-	TextureObject2DRenderable* object = new TextureObject2DRenderable();
+pTexture2DRenderable TextureSystem::getShadow2D(GLuint width, GLuint height) {
 
 	core::Texture2DFile* file = new core::Texture2DFile();
 	core::ParameterList parameters;
@@ -348,24 +269,17 @@ pTexture2DRenderable TextureManager::getShadow2D(GLuint width, GLuint height) {
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
 #endif
 
-	object->mTexture = pTexture2DRenderable(new core::Texture2DRenderable(
-	GL_DEPTH_ATTACHMENT, puTexture2DFile(file), parameters));
-
-	mTextureObjects2DRenderable.push_back(puTextureObject2DRenderable(object));
-
-	return object->mTexture;
+	const std::string key = "_fw_" + mTextures2DRenderable.size();
+	return mTextures2DRenderable.add(key, GL_DEPTH_ATTACHMENT, file, parameters);
 }
 
-pTexture3DRenderable TextureManager::getShadow3D(GLuint /*width*/, GLuint /*height*/) {
+pTexture3DRenderable TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*height*/) {
+
 	core::Texture2DFile* file[6];
-
-	TextureObject3DRenderable* object = new TextureObject3DRenderable();
-
 	for (GLint i = 0; i < 6; i++) {
 		file[i] = new core::Texture2DFile();
 		file[i]->mHeader.mFormat = GL_RED;
 		file[i]->mHeader.mInternalFormat = GL_R32F;
-
 		file[i]->mConfig.mMipmapsLevel = 0;
 		file[i]->mConfig.mBorder = 0;
 		file[i]->mHeader.mWidth = 512; // /*width ?*/
@@ -379,7 +293,6 @@ pTexture3DRenderable TextureManager::getShadow3D(GLuint /*width*/, GLuint /*heig
 	core::Texture2DFile* file2D = new core::Texture2DFile();
 	file2D->mHeader.mFormat = GL_DEPTH_COMPONENT;
 	file2D->mHeader.mInternalFormat = GL_DEPTH_COMPONENT32;
-
 	file2D->mConfig.mMipmapsLevel = 0;
 	file2D->mConfig.mBorder = 0;
 	file2D->mHeader.mWidth = 512;
@@ -402,24 +315,17 @@ pTexture3DRenderable TextureManager::getShadow3D(GLuint /*width*/, GLuint /*heig
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
 
-	pTexture2DRenderable t = pTexture2DRenderable(new core::Texture2DRenderable(
-	GL_DEPTH_ATTACHMENT, puTexture2DFile(file2D), parameters2D));
+	pTexture2DRenderable t = std::make_shared<core::Texture2DRenderable>(
+	        GL_DEPTH_ATTACHMENT, file2D, parameters2D);
 
-	object->mTexture = pTexture3DRenderable(
-			new core::Texture3DRenderable(*(file[0]), *(file[1]), *(file[2]),
-					*(file[3]), *(file[4]), *(file[5]), t, parameters3D));
-
-	mTextureObjects3DRenderable.push_back(puTextureObject3DRenderable(object));
-
-	return object->mTexture;
+	const std::string key = "_fw_" + mTextures3DRenderable.size();
+	return mTextures3DRenderable.add(key, file[0], file[1], file[2],
+            file[3], file[4], file[5], t, parameters3D);
 }
 
-pTexture2DRenderable TextureManager::getColor2D(GLuint width, GLuint height) {
-
-	TextureObject2DRenderable* object = new TextureObject2DRenderable();
+pTexture2DRenderable TextureSystem::getColor2D(GLuint width, GLuint height) {
 
 	core::Texture2DFile* file = new core::Texture2DFile();
-
 	file->mHeader.mFormat = GL_RGBA;
 	file->mHeader.mInternalFormat = GL_RGBA;
 	file->mConfig.mMipmapsLevel = 0;
@@ -441,29 +347,20 @@ pTexture2DRenderable TextureManager::getColor2D(GLuint width, GLuint height) {
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
-	object->mTexture = pTexture2DRenderable(new core::Texture2DRenderable(
-	GL_COLOR_ATTACHMENT0, puTexture2DFile(file), parameters));
-
-	mTextureObjects2DRenderable.push_back(puTextureObject2DRenderable(object));
-
-	return object->mTexture;
+	const std::string key = "_fw_" + mTextures2DRenderable.size();
+	return mTextures2DRenderable.add(key, GL_COLOR_ATTACHMENT0, file, parameters);
 }
 
-pTexture2D TextureManager::getDeferredColor(
+pTexture2D TextureSystem::getDeferredColor(
 		GLuint width,
 		GLuint height,
 		GLuint size) {
-
-	TextureObject2DDeferred* object = new TextureObject2DDeferred();
-
-	core::Texture2DFile* file = new core::Texture2DFile();
-
-	core::Texture2DFileHeader colorTextureHeader;
 
 	core::ParameterList parameters;
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
+    core::Texture2DFileHeader colorTextureHeader;
 #ifdef FILLWAVE_GLES_3_0
 	colorTextureHeader.mFormat = GL_RGBA;
 	colorTextureHeader.mInternalFormat = GL_RGBA;
@@ -476,33 +373,25 @@ pTexture2D TextureManager::getDeferredColor(
 	colorTextureHeader.mWidth = width;
 	colorTextureHeader.mHeight = height;
 
+	core::Texture2DFile* file = new core::Texture2DFile();
 	file->mConfig = core::Texture2DFileConfig();
 	file->mHeader = colorTextureHeader;
 	file->mData = nullptr;
 
-	object->mTexture = pTexture2D(
-			new core::Texture2D(puTexture2DFile(file), parameters, size));
-
-	mTextureObjects2DDeferred.push_back(puTextureObject2DDeferred(object));
-
-	return object->mTexture;
+	const std::string key = "_fw_" + mTextures2DDeferred.size();
+	return mTextures2DDeferred.add(key, file, parameters, size);
 }
 
-pTexture2D TextureManager::getDeferredColorScreen(
+pTexture2D TextureSystem::getDeferredColorScreen(
 		GLuint width,
 		GLuint height,
 		GLuint size) {
-
-	TextureObject2DDeferred* object = new TextureObject2DDeferred();
-
-	core::Texture2DFile* file = new core::Texture2DFile();
-
-	core::Texture2DFileHeader colorTextureHeader;
 
 	core::ParameterList parameters;
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
+	core::Texture2DFileHeader colorTextureHeader;
 #ifdef FILLWAVE_GLES_3_0
 	colorTextureHeader.mFormat = GL_RGB;
 	colorTextureHeader.mInternalFormat = GL_RGBA;
@@ -515,98 +404,75 @@ pTexture2D TextureManager::getDeferredColorScreen(
 	colorTextureHeader.mWidth = width;
 	colorTextureHeader.mHeight = height;
 
+    core::Texture2DFile* file = new core::Texture2DFile();
 	file->mConfig = core::Texture2DFileConfig();
 	file->mHeader = colorTextureHeader;
 	file->mData = nullptr;
 
-	object->mTexture = pTexture2D(
-			new core::Texture2D(puTexture2DFile(file), parameters, size));
-
-	mTextureObjects2DDeferred.push_back(puTextureObject2DDeferred(object));
-
-	return object->mTexture;
+	const std::string key = "_fw_" + mTextures2DDeferred.size();
+	return mTextures2DDeferred.add(key, file, parameters, size);
 }
 
-pTexture2D TextureManager::getDeferredDepth(GLuint width, GLuint height) {
-
-	TextureObject2DDeferred* object = new TextureObject2DDeferred();
-
-	core::Texture2DFileHeader depthTextureHeader;
-
-	core::Texture2DFile* file = new core::Texture2DFile();
+pTexture2D TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
 
 	core::ParameterList parameters;
 
+	core::Texture2DFileHeader depthTextureHeader;
 	depthTextureHeader.mFormat = GL_DEPTH_COMPONENT;
 	depthTextureHeader.mInternalFormat = GL_DEPTH_COMPONENT;
-
 	depthTextureHeader.mWidth = width;
 	depthTextureHeader.mHeight = height;
-
 #ifdef FILLWAVE_GLES_3_0
 	depthTextureHeader.mType = GL_UNSIGNED_INT;
 #else
 	depthTextureHeader.mType = GL_FLOAT;
 #endif
 
+	core::Texture2DFile* file = new core::Texture2DFile();
 	file->mConfig = core::Texture2DFileConfig();
 	file->mHeader = depthTextureHeader;
 	file->mData = nullptr;
 
-	object->mTexture = pTexture2D(
-			new core::Texture2D(puTexture2DFile(file), parameters));
-
-	mTextureObjects2DDeferred.push_back(puTextureObject2DDeferred(object));
-
-	return object->mTexture;
+	const std::string key = "_fw_" + mTextures2DDeferred.size();
+	return mTextures2DDeferred.add(key, file, parameters, 1);
 }
 
-pTexture2D TextureManager::getDeferredStencilDepth(
+pTexture2D TextureSystem::getDeferredStencilDepth(
 		GLuint width,
 		GLuint height) {
 
-	TextureObject2DDeferred* object = new TextureObject2DDeferred();
-
-	core::Texture2DFileHeader stencilTextureHeader;
-
-	core::Texture2DFile* file = new core::Texture2DFile();
-
 	core::ParameterList parameters;
 
+   core::Texture2DFileHeader stencilTextureHeader;
 	stencilTextureHeader.mFormat = GL_DEPTH_STENCIL;
 	stencilTextureHeader.mInternalFormat = GL_DEPTH32F_STENCIL8;
-
 	stencilTextureHeader.mWidth = width;
 	stencilTextureHeader.mHeight = height;
-
 	stencilTextureHeader.mType = GL_FLOAT_32_UNSIGNED_INT_24_8_REV;
 
+   core::Texture2DFile* file = new core::Texture2DFile();
 	file->mConfig = core::Texture2DFileConfig();
 	file->mHeader = stencilTextureHeader;
 	file->mData = nullptr;
 
-	object->mTexture = pTexture2D(
-			new core::Texture2D(puTexture2DFile(file), parameters));
-
-	mTextureObjects2DDeferred.push_back(puTextureObject2DDeferred(object));
-
-	return object->mTexture;
+	const std::string key = "_fw_" + mTextures2DDeferred.size();
+	return mTextures2DDeferred.add(key, file, parameters, 1);
 }
 
-void TextureManager::resize(GLuint width, GLuint height) {
-	resize(mTextureObjects2DDynamic, width, height);
-	resize(mTextureObjects2DRenderable, width, height);
+void TextureSystem::resize(GLuint width, GLuint height) {
+	resize(mTextures2DDynamic, width, height);
+	resize(mTextures2DRenderable, width, height);
 }
 
-void TextureManager::reload() {
-	reload(mTextureObjects1D);
-	reload(mTextureObjects2D);
-	reload(mTextureObjects2DDynamic);
-	reload(mTextureObjects2DRenderable);
-	reload(mTextureObjects3D);
-	reload(mTextureObjects3DRenderable);
-	reload(mTextureObjects3DDynamic);
-	reload(mTextureObjects2DDeferred);
+void TextureSystem::reload() {
+	reload(mTextures1D);
+	reload(mTextures2D);
+	reload(mTextures2DDynamic);
+	reload(mTextures2DRenderable);
+	reload(mTextures3D);
+	reload(mTextures3DRenderable);
+	reload(mTextures3DDynamic);
+	reload(mTextures2DDeferred);
 }
 
 } /* framework */

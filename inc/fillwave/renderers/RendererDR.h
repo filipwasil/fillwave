@@ -58,8 +58,8 @@ public:
 private:
 	glm::vec2 mScreenSize;
 
-	LightManager* mLightManager;
-	TextureManager* mTextureManager;
+	LightSystem* mLights;
+	TextureSystem* mTextures;
 
 	pProgram mProgramMain, mProgramMainAnimated, mProgramDirecionalLight, mProgramSpotLight,
 			mProgramPointLight, mProgramDepthless, mProgramAmbient,

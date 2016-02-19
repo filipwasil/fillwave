@@ -20,7 +20,7 @@ namespace core {
 class Texture2D: public Texture {
 public:
 	Texture2D(
-			puTexture2DFile file,
+			Texture2DFile* file,
 			ParameterList& parameters,
 			GLuint howMany = 1);
 

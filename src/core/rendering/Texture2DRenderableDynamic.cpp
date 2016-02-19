@@ -13,12 +13,12 @@ namespace fillwave {
 namespace core {
 
 Texture2DRenderableDynamic::Texture2DRenderableDynamic(
-		puTexture2DFile file,
+		Texture2DFile* file,
 		ParameterList& parameters,
 		pProgram program)
 		:
 				Texture2DRenderable(
-				GL_COLOR_ATTACHMENT0, std::move(file), parameters),
+				GL_COLOR_ATTACHMENT0, file, parameters),
 				mProgram(program),
 				mTimePassed(0.0f) {
 	initUniformsCache();

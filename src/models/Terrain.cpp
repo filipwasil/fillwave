@@ -6,8 +6,8 @@
  */
 
 #include <fillwave/models/Terrain.h>
-#include <fillwave/management/LightManager.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/management/LightSystem.h>
 
 FLOGINIT("Terrain", FERROR | FFATAL)
 
@@ -15,7 +15,7 @@ namespace fillwave {
 namespace framework {
 
 Terrain::Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap)
-		: mProgram(program), mLightManager(engine->getLightManager()), mRadius(radius), mGap(gap) {
+		: mProgram(program), mLights(engine->getLightSystem()), mRadius(radius), mGap(gap) {
 
 }
 
@@ -28,8 +28,8 @@ void Terrain::draw(ICamera& camera) {
 
 void Terrain::drawPBRP(ICamera& camera) {
 	distanceCheck(camera);
-	mLightManager->pushLightUniforms(mProgram.get());
-	mLightManager->bindShadowmaps();
+	mLights->pushLightUniforms(mProgram.get());
+	mLights->bindShadowmaps();
 	for (auto& it : mVoxelChunks) {
 		it->drawPBRP(camera);
 	}

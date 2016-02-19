@@ -21,12 +21,12 @@ namespace core {
 class Texture3DRenderable: public Texture3D {
 public:
 	Texture3DRenderable(
-			Texture2DFile& filePosX,
-			Texture2DFile& fileNegX,
-			Texture2DFile& filePosY,
-			Texture2DFile& fileNegY,
-			Texture2DFile& filePosZ,
-			Texture2DFile& fileNegZ,
+			Texture2DFile* filePosX,
+			Texture2DFile* fileNegX,
+			Texture2DFile* filePosY,
+			Texture2DFile* fileNegY,
+			Texture2DFile* filePosZ,
+			Texture2DFile* fileNegZ,
 			pTexture2DRenderable texture,
 			ParameterList& parameters);
 	virtual ~Texture3DRenderable() = default;

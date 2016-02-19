@@ -6,6 +6,7 @@
  */
 
 #include <fillwave/core/texturing/Texture3D.h>
+#include <fillwave/common/Macros.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Texture3D", FERROR | FFATAL)
@@ -14,27 +15,27 @@ namespace fillwave {
 namespace core {
 
 Texture3D::Texture3D(
-		Texture2DFile& fileRight,
-		Texture2DFile& fileLeft,
-		Texture2DFile& fileCeil,
-		Texture2DFile& fileFloor,
-		Texture2DFile& fileFront,
-		Texture2DFile& fileBack,
+		Texture2DFile* fileRight,
+		Texture2DFile* fileLeft,
+		Texture2DFile* fileCeil,
+		Texture2DFile* fileFloor,
+		Texture2DFile* fileFront,
+		Texture2DFile* fileBack,
 		ParameterList& parameters)
 		:
 				Texture(GL_TEXTURE_CUBE_MAP),
-				mRight(puTexture3DFile(new Texture3DFile(fileRight,
-				GL_TEXTURE_CUBE_MAP_POSITIVE_X))),
-				mLeft(puTexture3DFile(new Texture3DFile(fileLeft,
-				GL_TEXTURE_CUBE_MAP_NEGATIVE_X))),
-				mCeil(puTexture3DFile(new Texture3DFile(fileCeil,
-				GL_TEXTURE_CUBE_MAP_POSITIVE_Y))),
-				mFloor(puTexture3DFile(new Texture3DFile(fileFloor,
-				GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))),
-				mFront(puTexture3DFile(new Texture3DFile(fileFront,
-				GL_TEXTURE_CUBE_MAP_POSITIVE_Z))),
-				mBack(puTexture3DFile(new Texture3DFile(fileBack,
-				GL_TEXTURE_CUBE_MAP_NEGATIVE_Z))) {
+				mRight(framework::make_unique<Texture3DFile>(fileRight,
+				GL_TEXTURE_CUBE_MAP_POSITIVE_X)),
+				mLeft(framework::make_unique<Texture3DFile>(fileLeft,
+				GL_TEXTURE_CUBE_MAP_NEGATIVE_X)),
+				mCeil(framework::make_unique<Texture3DFile>(fileCeil,
+				GL_TEXTURE_CUBE_MAP_POSITIVE_Y)),
+				mFloor(framework::make_unique<Texture3DFile>(fileFloor,
+				GL_TEXTURE_CUBE_MAP_NEGATIVE_Y)),
+				mFront(framework::make_unique<Texture3DFile>(fileFront,
+				GL_TEXTURE_CUBE_MAP_POSITIVE_Z)),
+				mBack(framework::make_unique<Texture3DFile>(fileBack,
+				GL_TEXTURE_CUBE_MAP_NEGATIVE_Z)) {
 	bind();
 	setParameters(parameters);
 	sendData();

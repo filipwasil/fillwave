@@ -202,8 +202,8 @@ public:
 
 	void reload();
 
-	framework::LightManager* getLightManager() const;
-	framework::TextureManager* getTextureManager() const;
+	framework::LightSystem* getLightSystem() const;
+	framework::TextureSystem* getTextureSystem() const;
 
 private:
 	struct EngineImpl;

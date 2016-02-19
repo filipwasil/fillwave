@@ -9,46 +9,23 @@
 #define PROGRAMMANAGER_H_
 
 #include <fillwave/core/pipeline/Program.h>
+#include <fillwave/management/base/ManagerComposite.h>
 
 namespace fillwave {
 namespace framework {
 
-/*! \struct ProgramObject
- * \brief Data structure containing each Program instance info.
+/**
+ * Data structure containing each Sampler instance info.
  */
+typedef Composition<pProgram, PolicyShared<core::Program>, const std::vector<pShader>&, GLboolean> ProgramObject;
 
-struct ProgramObject {
-	std::string mName;
-	pProgram mProgram;
-};
-
-typedef std::unique_ptr<ProgramObject> puProgramObject;
-
-/*! \class ProgramManager
- * \brief Manager to handle ProgramObjects objects.
+/**
+ * Program manager
  */
-
-class ProgramManager {
-public:
-	ProgramManager() = default;
-
-	virtual ~ProgramManager() = default;
-
-	pProgram add(
-			const std::string& name,
-			const std::vector<pShader>& shaders,
-			GLboolean skipLinking);
-
-	pProgram get(const std::string& name);
-
-	void reload();
-
-private:
-	std::vector<puProgramObject> mProgramObjects;
-};
+typedef ManagerComposite<std::unique_ptr<ProgramObject>, pProgram, std::string, UINT_MAX, PolicyUnique<ProgramObject>,
+		const std::vector<pShader>&, GLboolean> ManagerPrograms;
 
 } /* framework */
-typedef std::unique_ptr<framework::ProgramManager> puProgramManager;
 } /* fillwave */
 
 #endif /* PROGRAMMANAGER_H_ */

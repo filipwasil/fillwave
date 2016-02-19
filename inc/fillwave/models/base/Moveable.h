@@ -54,12 +54,12 @@ public:
 
 	void updateMatrixCache();
 
-	GLboolean isRefresh();
-	void setRefresh(GLboolean state);
+	bool isRefresh();
+	void setRefresh(bool state);
 
 	/* External  */
-	GLboolean isRefreshExternal();
-	void setRefreshExternal(GLboolean state);
+	bool isRefreshExternal();
+	void setRefreshExternal(bool state);
 
 	/* Parent */
 	glm::mat4 getParentMMC();
@@ -83,19 +83,19 @@ protected:
 };
 
 template <class M>
-GLboolean isMoveablesRefresh(std::vector<M>& moveables) {
+bool isMoveablesRefresh(std::vector<M>& moveables) { //xxx to be removed
 	for (auto& it : moveables) {
 		if (it->isRefresh()) {
-			return GL_TRUE;
+			return true;
 		}
 	}
-	return GL_FALSE;
+	return false;
 }
 
 template <class M>
 void resetMoveablesRefresh(std::vector<M>& data) {
 	for (auto& it : data) {
-		it->setRefresh(GL_FALSE);
+		it->setRefresh(false);
 	}
 }
 

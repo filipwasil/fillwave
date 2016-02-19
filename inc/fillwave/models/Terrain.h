@@ -42,7 +42,7 @@ protected:
 
 private:
    pProgram mProgram;
-   LightManager* mLightManager;
+   LightSystem* mLights;
 	GLint mRadius;
 	GLfloat mGap;
 	std::vector<pVoxelChunk> mVoxelChunks;

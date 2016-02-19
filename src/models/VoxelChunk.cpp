@@ -6,8 +6,8 @@
  */
 
 #include <fillwave/models/terrain/VoxelChunk.h>
-#include <fillwave/management/LightManager.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/management/LightSystem.h>
 
 FLOGINIT("VoxelChunk", FERROR | FFATAL)
 
@@ -328,7 +328,7 @@ VoxelChunk::VoxelChunk(
 				mTexture(
 						engine->storeTexture(texturePath.c_str(),
 								aiTextureType_DIFFUSE)),
-				mLightManager(engine->getLightManager()) {
+				mLights(engine->getLightSystem()) {
 
 	mVoxels = new Voxel**[mSize];
 	std::vector<core::VertexBasic> vertices;
@@ -464,8 +464,8 @@ void VoxelChunk::draw(ICamera& camera) {
 	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,
 			camera.getViewProjection());
 
-	mLightManager->pushLightUniforms(mProgram.get());
-	mLightManager->bindShadowmaps();
+	mLights->pushLightUniforms(mProgram.get());
+	mLights->bindShadowmaps();
 
 	mVAO->bind();
 

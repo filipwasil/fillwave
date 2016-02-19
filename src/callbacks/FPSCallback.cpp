@@ -9,7 +9,7 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("FPSCallback", FERROR | FFATAL)
+FLOGINIT("FPSCallback", FERROR | FFATAL | FUSER)
 
 namespace fillwave {
 namespace framework {

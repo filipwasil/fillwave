@@ -14,12 +14,12 @@ namespace fillwave {
 namespace core {
 
 Texture2D::Texture2D(
-		puTexture2DFile file,
+		Texture2DFile* file,
 		ParameterList& parameters,
 		GLuint howMany)
 		:
 				Texture(GL_TEXTURE_2D, howMany),
-				mFile(std::move(file)),
+				mFile(puTexture2DFile(file)),
 				mParameters(parameters) {
 	reload();
 }
