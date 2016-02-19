@@ -5,8 +5,8 @@ CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 # -----------------------------------------------
 
 SET(VERSION_MAJOR 4)
-SET(VERSION_MINOR 2)
-SET(VERSION_PATCH 1)
+SET(VERSION_MINOR 9)
+SET(VERSION_PATCH 0)
 SET(PROJECT_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 # -----------------------------------------------
