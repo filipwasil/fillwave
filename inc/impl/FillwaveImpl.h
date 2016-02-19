@@ -703,26 +703,22 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 
 	core::Texture2DRenderable* light2DTexture;
 	for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-		framework::CameraPerspective camera =
-				*(mLights->mLightsSpot[i]->getShadowCamera().get());
 		light2DTexture = mLights->mLightsSpot[i]->getShadowTexture().get();
 		light2DTexture->bindForWriting();
 		light2DTexture->bind(currentTextureUnit++);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		mScene->drawDepth(camera);
+		mScene->drawDepth(*(mLights->mLightsSpot[i]->getShadowCamera().get()));
 	}
 
 	for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
-		framework::CameraOrthographic camera =
-				*(mLights->mLightsDirectional[i]->getShadowCamera().get());
 		light2DTexture =
 				mLights->mLightsDirectional[i]->getShadowTexture().get();
 		light2DTexture->bindForWriting();
 		light2DTexture->bind(currentTextureUnit++);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		mScene->drawDepth(camera);
+		mScene->drawDepth(*(mLights->mLightsDirectional[i]->getShadowCamera().get()));
 	}
 
 	for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
@@ -734,12 +730,10 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 		light3DTexture->bind(currentTextureUnit);
 		for (GLint j = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 				j <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; j++) {
-			framework::CameraPerspective camera =
-					*(lightPoint->getShadowCamera(j).get());
 			light3DTexture->setAttachmentFace(j, GL_COLOR_ATTACHMENT0);
 			glClearColor(0.0, 0.0, 0.0, 1.0);
 			glClear(GL_DEPTH_BUFFER_BIT);
-			mScene->drawDepthColor(camera, lightPosition);
+			mScene->drawDepthColor(*(lightPoint->getShadowCamera(j).get()), lightPosition);
 		}
 		currentTextureUnit++;
 	}

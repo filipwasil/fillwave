@@ -269,7 +269,7 @@ pTexture2DRenderable TextureSystem::getShadow2D(GLuint width, GLuint height) {
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
 #endif
 
-	const std::string key = "fillwave_shadowing_2DR_texture_" + mTextures2DDeferred.size();
+	const std::string key = "_fw_" + mTextures2DRenderable.size();
 	return mTextures2DRenderable.add(key, GL_DEPTH_ATTACHMENT, file, parameters);
 }
 
@@ -318,7 +318,7 @@ pTexture3DRenderable TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*heigh
 	pTexture2DRenderable t = std::make_shared<core::Texture2DRenderable>(
 	        GL_DEPTH_ATTACHMENT, file2D, parameters2D);
 
-	const std::string key = "fillwave_shadowing_3DR_texture_" + mTextures2DDeferred.size();
+	const std::string key = "_fw_" + mTextures3DRenderable.size();
 	return mTextures3DRenderable.add(key, file[0], file[1], file[2],
             file[3], file[4], file[5], t, parameters3D);
 }
@@ -347,7 +347,7 @@ pTexture2DRenderable TextureSystem::getColor2D(GLuint width, GLuint height) {
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
-	const std::string key = "fillwave_color_2DR_texture_" + mTextures2DDeferred.size();
+	const std::string key = "_fw_" + mTextures2DRenderable.size();
 	return mTextures2DRenderable.add(key, GL_COLOR_ATTACHMENT0, file, parameters);
 }
 
@@ -378,7 +378,7 @@ pTexture2D TextureSystem::getDeferredColor(
 	file->mHeader = colorTextureHeader;
 	file->mData = nullptr;
 
-	const std::string key = "fillwave_deferred_2D_texture_" + mTextures2DDeferred.size();
+	const std::string key = "_fw_" + mTextures2DDeferred.size();
 	return mTextures2DDeferred.add(key, file, parameters, size);
 }
 
@@ -409,7 +409,7 @@ pTexture2D TextureSystem::getDeferredColorScreen(
 	file->mHeader = colorTextureHeader;
 	file->mData = nullptr;
 
-	const std::string key = "fillwave_deferred_texture_" + mTextures2DDeferred.size();
+	const std::string key = "_fw_" + mTextures2DDeferred.size();
 	return mTextures2DDeferred.add(key, file, parameters, size);
 }
 
@@ -433,7 +433,7 @@ pTexture2D TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
 	file->mHeader = depthTextureHeader;
 	file->mData = nullptr;
 
-	const std::string key = "fillwave_deferred_texture_" + mTextures2DDeferred.size();
+	const std::string key = "_fw_" + mTextures2DDeferred.size();
 	return mTextures2DDeferred.add(key, file, parameters, 1);
 }
 
@@ -455,7 +455,7 @@ pTexture2D TextureSystem::getDeferredStencilDepth(
 	file->mHeader = stencilTextureHeader;
 	file->mData = nullptr;
 
-	const std::string key = "fillwave_deferred_texture_" + mTextures2DDeferred.size();
+	const std::string key = "_fw_" + mTextures2DDeferred.size();
 	return mTextures2DDeferred.add(key, file, parameters, 1);
 }
 

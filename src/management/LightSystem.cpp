@@ -81,7 +81,6 @@ void LightSystem::pushLightUniforms(core::Program* program) {
 	GLint UBOIterator = 0;
 
 	/* Spot lights */
-
 	for (size_t i = 0; i < mLightsSpot.size(); i++) {
 		LightSpot* lightS = mLightsSpot[i].get();
 		CameraPerspective camera =
@@ -110,7 +109,6 @@ void LightSystem::pushLightUniforms(core::Program* program) {
 	}
 
 	/* Directional lights */
-
 	for (size_t i = 0; i < mLightsDirectional.size(); i++) {
 		CameraOrthographic camera =
 				*(mLightsDirectional[i]->getShadowCamera().get());
@@ -138,7 +136,6 @@ void LightSystem::pushLightUniforms(core::Program* program) {
 	}
 
 	/* Point lights */
-
 	for (size_t i = 0; i < mLightsPoint.size(); i++) {
 		/*LightPoint* l = mPointLights[i].get();*/
 		program->uniformPush(

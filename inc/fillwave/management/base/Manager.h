@@ -89,6 +89,12 @@ public:
 		}
 		return true;
 	}
+
+	void log() {
+		for(auto& it : (*this)) {
+			it->log();
+		}
+	}
 };
 
 } /* namespace framework */
