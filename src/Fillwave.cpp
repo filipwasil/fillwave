@@ -93,14 +93,18 @@ pLightSpot Engine::storeLightSpot(
 		glm::quat rotation,
 		glm::vec4 color,
 		pMoveable followed) {
-	return mImpl->storeLightSpot(position, rotation, color, followed);
+	return mImpl->mLights->mLightsSpot.add(
+			mImpl->mTextures->getShadow2D(mImpl->mWindowWidth,
+						mImpl->mWindowHeight), position, rotation, color, followed);
 }
 
 pLightPoint Engine::storeLightPoint(
 		glm::vec3 position,
 		glm::vec4 color,
 		pMoveable followed) {
-	return mImpl->storeLightPoint(position, color, followed);
+	return mImpl->mLights->mLightsPoint.add(
+			mImpl->mTextures->getShadow3D(mImpl->mWindowWidth,
+					mImpl->mWindowHeight), position, color, followed);
 }
 
 pLightDirectional Engine::storeLightDirectional(
@@ -108,7 +112,9 @@ pLightDirectional Engine::storeLightDirectional(
 		glm::quat rotation,
 		glm::vec4 color,
 		pMoveable followed) {
-	return mImpl->storeLightDirectional(position, rotation, color, followed);
+	return mImpl->mLights->mLightsDirectional.add(
+			mImpl->mTextures->getShadow2D(mImpl->mWindowWidth,
+					mImpl->mWindowHeight), position, rotation, color, followed);
 }
 
 pShader Engine::storeShaderFragment(const std::string& shaderPath) {
@@ -172,18 +178,17 @@ pTexture3D Engine::storeTexture3D(
 }
 
 pSampler Engine::storeSO(GLint textureUnit) {
-	return mImpl->storeSO(textureUnit);
+	return mImpl->mSamplers.add(textureUnit, textureUnit);
 }
 
 pVertexArray Engine::storeVAO(framework::IReloadable* user) {
-	return mImpl->storeVAO(user);
+	return mImpl->mBufferManager->getVAO(user); // todo (Why ptr ?)
 }
 
 /* Inputs - insert */
 
 void Engine::insertInput(framework::EventType& event) {
-	pEntity moveable = getFocus(event.getType());
-	if (moveable) {
+	if (pEntity moveable = getFocus(event.getType())) {
 		moveable->handlePrivateEvent(event);
 	}
 	mImpl->runCallbacks(event);

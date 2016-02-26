@@ -153,47 +153,10 @@ struct Engine::EngineImpl final {
 	void drawScene(GLfloat time);
 	void drawSceneCore();
 
-	/* Store */
-
-	pShader storeShader(const std::string& shaderPath, const GLuint& shaderType);
-	pShader storeShader(
-			const std::string& shaderName,
-			const GLuint& shaderType,
-			const std::string& shaderSource);
-
-	pShader storeShaderFragment(const std::string& shaderPath);
-
-	pShader storeShaderFragment(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-
-	pShader storeShaderVertex(const std::string& shaderPath);
-	pShader storeShaderVertex(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-
-	pLightSpot storeLightSpot(
-			glm::vec3& position,
-			glm::quat& rotation,
-			glm::vec4& color,
-			pMoveable& followed);
-
-	pLightPoint storeLightPoint(
-			glm::vec3& position,
-			glm::vec4& color,
-			pMoveable& followed);
-
-	pLightDirectional storeLightDirectional(
-			glm::vec3& position,
-			glm::quat& rotation,
-			glm::vec4& color,
-			pMoveable& followed);
 	/* Picking */
-
 	glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
 
 	/* Initiatization */
-
 	void init();
 	void initExtensions();
 	void initContext();
@@ -206,19 +169,11 @@ struct Engine::EngineImpl final {
 	void initStartup();
 
 	/* Reload */
-
 	void reload();
 	void reloadPickingBuffer();
 
 	/* Insert */
-
 	void insertResizeScreen(GLuint width, GLuint height);
-
-	/* Store */
-
-	pSampler storeSO(GLint textureUnit);
-
-	pVertexArray storeVAO(framework::IReloadable* user = nullptr);
 };
 
 #ifdef __ANDROID__
@@ -344,7 +299,7 @@ inline void Engine::EngineImpl::initUniforms() {
 
 inline void Engine::EngineImpl::initOcclusionTest() {
 	std::vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
-	mVAOOcclusion = storeVAO();
+	mVAOOcclusion = mBufferManager->getVAO(nullptr);
 	mVBOOcclusion = puVertexBufferPosition(new core::VertexBufferPosition(vec));
 	mVBOOcclusion->getAttributes(mProgramOcclusionBox->getHandle());
 	mVBOOcclusion->attributesBind(mProgramOcclusionBox);
@@ -842,13 +797,11 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 
 	mWindowWidth = width;
 	mWindowHeight = height;
-
 	mWindowAspectRatio = static_cast<GLfloat>(mWindowHeight) / static_cast<GLfloat>(mWindowWidth);
 
 	glViewport(0, 0, mWindowWidth, mWindowHeight);
 
 	mTextures->resize(mWindowWidth, mWindowHeight);
-
 	mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
 }
 
@@ -870,77 +823,6 @@ void Engine::EngineImpl::unregisterCallback(
 		auto it = std::remove_if(_begin, _end, _compare_function);
 		callbacks->erase(it, _end);
 	}
-}
-
-inline pShader Engine::EngineImpl::storeShader(
-		const std::string& shaderPath,
-		const GLuint& shaderType) {
-	return mShaderManager->add(shaderPath, shaderType);
-}
-
-inline pShader Engine::EngineImpl::storeShader(
-		const std::string& shaderName,
-		const GLuint& shaderType,
-		const std::string& shaderSource) {
-	return mShaderManager->add(shaderName, shaderType, shaderSource);
-}
-
-pShader Engine::EngineImpl::storeShaderFragment(const std::string& shaderPath) {
-	return mShaderManager->add(shaderPath, GL_FRAGMENT_SHADER);
-}
-
-pShader Engine::EngineImpl::storeShaderFragment(
-		const std::string& shaderPath,
-		const std::string& shaderSource) {
-	return mShaderManager->add(shaderPath,
-	GL_FRAGMENT_SHADER, shaderSource);
-}
-
-pShader Engine::EngineImpl::storeShaderVertex(const std::string& shaderPath) {
-	return mShaderManager->add(shaderPath, GL_VERTEX_SHADER);
-}
-
-pShader Engine::EngineImpl::storeShaderVertex(
-		const std::string& shaderPath,
-		const std::string& shaderSource) {
-	return mShaderManager->add(shaderPath, GL_VERTEX_SHADER, shaderSource);
-}
-
-pSampler Engine::EngineImpl::storeSO(GLint textureUnit) {
-	return mSamplers.add(textureUnit, textureUnit);
-}
-
-pVertexArray Engine::EngineImpl::storeVAO(framework::IReloadable* user) {
-	return mBufferManager->getVAO(user);
-}
-
-pLightSpot Engine::EngineImpl::storeLightSpot(
-		glm::vec3& position,
-		glm::quat& rotation,
-		glm::vec4& color,
-		pMoveable& followed) {
-	return mLights->mLightsSpot.add(
-			mTextures->getShadow2D(mWindowWidth,
-					mWindowHeight), position, rotation, color, followed);
-}
-
-pLightDirectional Engine::EngineImpl::storeLightDirectional(
-		glm::vec3& position,
-		glm::quat& rotation,
-		glm::vec4& color,
-		pMoveable& followed) {
-	return mLights->mLightsDirectional.add(
-			mTextures->getShadow2D(mWindowWidth,
-					mWindowHeight), position, rotation, color, followed);
-}
-
-pLightPoint Engine::EngineImpl::storeLightPoint(
-		glm::vec3& position,
-		glm::vec4& color,
-		pMoveable& followed) {
-	return mLights->mLightsPoint.add(
-			mTextures->getShadow3D(mWindowWidth,
-					mWindowHeight), position, color, followed);
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(
