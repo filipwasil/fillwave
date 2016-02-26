@@ -32,14 +32,11 @@ using namespace fillwave::framework;
 
 namespace fillwave {
 
-struct Engine::EngineImpl {
+struct Engine::EngineImpl final {
 
 #ifdef __ANDROID__
-
 	EngineImpl(Engine* engine, std::string rootPath);
-
 	EngineImpl(Engine* engine, ANativeActivity* activity);
-
 #else
 	EngineImpl(Engine* engine, GLint argc, GLchar* const argv[]);
 #endif

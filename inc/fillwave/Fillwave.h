@@ -34,7 +34,7 @@ namespace fillwave {
  * \brief Fillwave engine.
  */
 
-class Engine {
+class Engine final {
 public:
 #ifdef __ANDROID__
 	Engine(std::string rootPath);
