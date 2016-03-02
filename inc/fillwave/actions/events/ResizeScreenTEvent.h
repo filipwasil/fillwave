@@ -5,10 +5,10 @@
  *      Author: filip
  */
 
-#ifndef INC_FILLWAVE_ACTIONS_EVENTS_RESIZESCREENEVENT_H_
-#define INC_FILLWAVE_ACTIONS_EVENTS_RESIZESCREENEVENT_H_
+#ifndef INC_FILLWAVE_ACTIONS_EVENTS_RESIZESCREENTEVENT_H_
+#define INC_FILLWAVE_ACTIONS_EVENTS_RESIZESCREENTEVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -27,10 +27,10 @@ struct ResizeScreenEventData {
  * \brief Event introduced when the window is resized.
  */
 
-class ResizeScreenEvent: public Event<ResizeScreenEventData> {
+class ResizeScreenEvent: public TEvent<ResizeScreenEventData> {
 public:
 	ResizeScreenEvent(ResizeScreenEventData& data)
-			: Event<ResizeScreenEventData>(data) {
+			: TEvent(data) {
 
 	}
 	virtual ~ResizeScreenEvent() = default;
@@ -39,4 +39,4 @@ public:
 } /* namespace framework */
 } /* namespace fillwave */
 
-#endif /* INC_FILLWAVE_ACTIONS_EVENTS_RESIZESCREENEVENT_H_ */
+#endif /* INC_FILLWAVE_ACTIONS_EVENTS_RESIZESCREENTEVENT_H_ */

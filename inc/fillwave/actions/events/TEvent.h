@@ -20,21 +20,21 @@ namespace framework {
  */
 
 template<class T>
-class Event: public EventType {
+class TEvent: public EventType {
 public:
-	Event(T data)
+	TEvent(T data)
 			: EventType(data.type), mData(data) {
 
 	}
-	virtual ~Event() = default;
+	virtual ~TEvent() = default;
 
 	static T getData(EventType& eventType) {
-		Event<T>* e = static_cast<Event<T>*>(&eventType);
+		TEvent<T>* e = static_cast<TEvent<T>*>(&eventType);
 		return e->mData;
 	}
 
-	static Event<T>* getEvent(EventType* eventType) {
-		Event<T>* e = static_cast<Event<T>*>(eventType);
+	static TEvent<T>* getEvent(EventType* eventType) {
+		TEvent<T>* e = static_cast<TEvent<T>*>(eventType);
 		return e;
 	}
 

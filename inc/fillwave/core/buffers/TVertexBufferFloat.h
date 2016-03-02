@@ -8,7 +8,7 @@
 #ifndef SRC_CORE_BUFFERS_VERTEXBUFFERFLOAT_H_
 #define SRC_CORE_BUFFERS_VERTEXBUFFERFLOAT_H_
 
-#include <fillwave/core/buffers/VertexBuffer.h>
+#include <fillwave/core/buffers/TVertexBuffer.h>
 
 namespace fillwave {
 namespace core {
@@ -17,7 +17,7 @@ namespace core {
  * \brief Vertex buffer specialized with GLfloat data structure.
  */
 
-class VertexBufferFloat: public VertexBuffer<GLfloat> {
+class VertexBufferFloat: public TVertexBuffer<GLfloat> {
 public:
 	VertexBufferFloat(
 			std::vector<GLfloat>& values,

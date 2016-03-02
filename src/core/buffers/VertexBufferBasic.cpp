@@ -5,10 +5,10 @@
  *      Author: filip
  */
 
-#include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/Log.h>
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/Assets.h>
+#include <fillwave/core/buffers/TVertexBufferBasic.h>
 
 #include <fillwave/Profiler.h>
 
@@ -21,7 +21,7 @@ VertexBufferBasic::VertexBufferBasic(
 		const fMesh* shape,
 		framework::Animator* animator,
 		GLuint dataStoreModification)
-		: VertexBuffer<VertexBasic>(dataStoreModification) {
+		: TVertexBuffer<VertexBasic>(dataStoreModification) {
 
 	mTotalElements = shape->mNumVertices;
 
@@ -124,7 +124,7 @@ VertexBufferBasic::VertexBufferBasic(
 		GLfloat gapSize,
 		std::vector<GLuint>& indices,
 		GLuint dataStoreModification)
-		: VertexBuffer<VertexBasic>(dataStoreModification) {
+		: TVertexBuffer<VertexBasic>(dataStoreModification) {
 
 	core::VertexBasic vertex;
 
@@ -225,7 +225,7 @@ VertexBufferBasic::VertexBufferBasic(
 VertexBufferBasic::VertexBufferBasic(
 		std::vector<core::VertexBasic>& vertices,
 		GLuint dataStoreModification)
-		: VertexBuffer<VertexBasic>(vertices, dataStoreModification) {
+		: TVertexBuffer<VertexBasic>(vertices, dataStoreModification) {
 
 }
 

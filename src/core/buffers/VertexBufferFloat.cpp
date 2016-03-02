@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/core/buffers/VertexBufferFloat.h>
+#include <fillwave/core/buffers/TVertexBufferFloat.h>
 
 FLOGINIT("VertexBufferFloat", FERROR | FFATAL)
 
@@ -15,7 +15,7 @@ namespace core {
 VertexBufferFloat::VertexBufferFloat(
 		std::vector<GLfloat>& values,
 		GLuint dataStoreModification)
-		: VertexBuffer<GLfloat>(values, dataStoreModification) {
+		: TVertexBuffer<GLfloat>(values, dataStoreModification) {
 
 }
 

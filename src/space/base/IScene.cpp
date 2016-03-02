@@ -5,11 +5,10 @@
  *      Author: filip
  */
 
+#include <fillwave/actions/events/ResizeScreenTEvent.h>
 #include <fillwave/space/base/IScene.h>
 #include <fillwave/renderers/RendererPBRP.h>
 #include <fillwave/common/Macros.h>
-#include <fillwave/actions/events/ResizeScreenEvent.h>
-
 #include <algorithm>
 
 FLOGINIT("Scene", FERROR | FFATAL)

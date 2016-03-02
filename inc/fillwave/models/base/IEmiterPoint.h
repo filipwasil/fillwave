@@ -9,8 +9,8 @@
 #define EMITERPOINT_H_
 
 #include <fillwave/models/Entity.h>
-#include <fillwave/core/buffers/VertexBufferParticles.h>
 #include <fillwave/core/buffers/IndexBufferParticles.h>
+#include <fillwave/core/buffers/TVertexBufferParticles.h>
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/texturing/Texture.h>
 #include <fillwave/core/rendering/TransformFeedback.h>

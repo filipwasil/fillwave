@@ -24,7 +24,7 @@ class Attribute;
  */
 
 template<class T>
-class VertexBuffer: public Buffer {
+class TVertexBuffer: public Buffer {
 public:
 	/* Notice
 	 * In this constructor one should initialize:
@@ -35,11 +35,11 @@ public:
 	 *  mSize = mTotalElements*sizeof(<T>);
 	 */
 
-	VertexBuffer(GLuint dataStoreModification = GL_STATIC_DRAW)
+	TVertexBuffer(GLuint dataStoreModification = GL_STATIC_DRAW)
 			: Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 	}
 
-	VertexBuffer(std::vector<T>& vertices, GLuint dataStoreModification =
+	TVertexBuffer(std::vector<T>& vertices, GLuint dataStoreModification =
 	GL_STATIC_DRAW)
 			: Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 		mDataVertices = vertices;
@@ -48,7 +48,7 @@ public:
 		mSize = mTotalElements * sizeof(T);
 	}
 
-	VertexBuffer(framework::Shape<T>& shape, GLuint dataStoreModification =
+	TVertexBuffer(framework::Shape<T>& shape, GLuint dataStoreModification =
 	GL_STATIC_DRAW)
 			: Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 		mDataVertices = shape.getVertices();
@@ -56,7 +56,7 @@ public:
 		mData = mDataVertices.data();
 	}
 
-	~VertexBuffer() = default;
+	~TVertexBuffer() = default;
 
 	void load(T element) {
 		mDataVertices.push_back(element);

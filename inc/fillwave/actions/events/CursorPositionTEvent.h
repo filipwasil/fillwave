@@ -8,7 +8,7 @@
 #ifndef CURSORPOSITIONEVENT_H_
 #define CURSORPOSITIONEVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -27,10 +27,10 @@ struct CursorPositionEventData {
  * \brief Event introduced when cursor position was changed.
  */
 
-class CursorPositionEvent: public Event<CursorPositionEventData> {
+class CursorPositionEvent: public TEvent<CursorPositionEventData> {
 public:
 	CursorPositionEvent(CursorPositionEventData& data)
-			: Event<CursorPositionEventData>(data) {
+			: TEvent<CursorPositionEventData>(data) {
 
 	}
 	virtual ~CursorPositionEvent() = default;

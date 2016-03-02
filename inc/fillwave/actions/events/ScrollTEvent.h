@@ -8,7 +8,7 @@
 #ifndef SCROLLEVENT_H_
 #define SCROLLEVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -26,10 +26,10 @@ struct ScrollEventData {
  * \brief Event introduced together with scrolling action.
  */
 
-class ScrollEvent: public Event<ScrollEventData> {
+class ScrollEvent: public TEvent<ScrollEventData> {
 public:
 	ScrollEvent(ScrollEventData data)
-			: Event(data) {
+			: TEvent(data) {
 
 	}
 	virtual ~ScrollEvent() = default;

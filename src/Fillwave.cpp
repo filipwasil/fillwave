@@ -186,7 +186,6 @@ pVertexArray Engine::storeVAO(framework::IReloadable* user) {
 }
 
 /* Inputs - insert */
-
 void Engine::insertInput(framework::EventType& event) {
 	if (pEntity moveable = getFocus(event.getType())) {
 		moveable->handlePrivateEvent(event);
@@ -195,7 +194,6 @@ void Engine::insertInput(framework::EventType& event) {
 }
 
 /* Engine callbacks - clear */
-
 void Engine::clearCallback(framework::Callback* callback) {
 	mImpl->clearCallback(callback);
 }
@@ -209,7 +207,6 @@ void Engine::clearCallbacks() {
 }
 
 /* Callbacks registeration */
-
 void Engine::registerCallback(framework::Callback* callback) {
 	mImpl->registerCallback(callback);
 }

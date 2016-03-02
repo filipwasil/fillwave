@@ -16,12 +16,12 @@ namespace framework {
 /**
  * Data structure containing each Sampler instance info.
  */
-typedef Composition<pSampler, PolicyShared<core::Sampler>, GLint> SamplerObject;
+typedef Composition<pSampler, TPolicyShared<core::Sampler>, GLint> SamplerObject;
 
 /**
  * Sampler manager
  */
-typedef ManagerComposite<std::unique_ptr<SamplerObject>, pSampler, GLint, UINT_MAX, PolicyUnique<SamplerObject>,
+typedef ManagerComposite<std::unique_ptr<SamplerObject>, pSampler, GLint, UINT_MAX, TPolicyUnique<SamplerObject>,
 		GLint> ManagerSamplers;
 
 } /* framework */

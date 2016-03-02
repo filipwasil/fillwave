@@ -5,9 +5,9 @@
  *      Author: filip
  */
 
+#include <fillwave/core/buffers/TVertexBufferDebug.h>
 #include <fillwave/Fillwave.h>
 
-#include <fillwave/core/buffers/VertexBufferDebug.h>
 #include <fillwave/core/rendering/FramebufferGeometry.h>
 
 #include <fillwave/Debugger.h>

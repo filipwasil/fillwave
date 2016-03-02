@@ -8,7 +8,7 @@
 #ifndef CURSORENTEREVENT_H_
 #define CURSORENTEREVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -26,10 +26,10 @@ struct CursorEnterEventData {
  * \brief Event introduced when cursor enters the window.
  */
 
-class CursorEnterEvent: public Event<CursorEnterEventData> {
+class CursorEnterEvent: public TEvent<CursorEnterEventData> {
 public:
 	CursorEnterEvent(CursorEnterEventData& data)
-			: Event<CursorEnterEventData>(data) {
+			: TEvent(data) {
 
 	}
 

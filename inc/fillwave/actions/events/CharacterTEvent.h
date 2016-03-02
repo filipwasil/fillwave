@@ -8,7 +8,7 @@
 #ifndef CHARACTEREVENT_H_
 #define CHARACTEREVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -26,10 +26,10 @@ struct CharacterEventData {
  * \brief Event introduced when the key is pressed.
  */
 
-class CharacterEvent: public Event<CharacterEventData> {
+class CharacterEvent: public TEvent<CharacterEventData> {
 public:
 	CharacterEvent(CharacterEventData& data)
-			: Event<CharacterEventData>(data) {
+			: TEvent(data) {
 
 	}
 	virtual ~CharacterEvent() = default;

@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/core/operations/Query.h>
+#include <fillwave/core/operations/TQuery.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Query", FERROR | FFATAL | FINFO)
@@ -14,37 +14,37 @@ namespace fillwave {
 namespace core {
 
 template<GLenum target>
-Query<target>::Query(GLsizei howMany)
+TQuery<target>::TQuery(GLsizei howMany)
 		: GLObject(howMany) {
 	glGenQueries(mHowMany, mHandles);
 	FLOG_CHECK("Could not create query");
 }
 
 template<GLenum target>
-Query<target>::~Query() {
+TQuery<target>::~TQuery() {
 	glDeleteQueries(mHowMany, mHandles);
 	FLOG_CHECK("Could not delete query");
 }
 
 template<GLenum target>
-GLuint Query<target>::getID(GLuint id) const {
+GLuint TQuery<target>::getID(GLuint id) const {
 	return mHandles[id];
 }
 
 template<GLenum target>
-void Query<target>::begin(GLuint id) {
+void TQuery<target>::begin(GLuint id) {
 	glBeginQuery(mTarget, mHandles[id]);
 	FLOG_CHECK("Could not begin query");
 }
 
 template<GLenum target>
-void Query<target>::end() {
+void TQuery<target>::end() {
 	glEndQuery(mTarget);
 	FLOG_CHECK("Could not end query");
 }
 
 template<GLenum target>
-GLuint Query<target>::getResultAsync(GLuint resultIfNotAvailable, GLuint id) {
+GLuint TQuery<target>::getResultAsync(GLuint resultIfNotAvailable, GLuint id) {
 	GLuint result;
 	glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT_AVAILABLE, &result);
 	FLOG_CHECK("Could not get querry result state");
@@ -58,7 +58,7 @@ GLuint Query<target>::getResultAsync(GLuint resultIfNotAvailable, GLuint id) {
 }
 
 template<GLenum target>
-GLuint Query<target>::getResultSync(GLuint id) {
+GLuint TQuery<target>::getResultSync(GLuint id) {
 	GLuint result;
 	glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT, &result);
 	FLOG_CHECK("Could not get querry sync result");
@@ -66,20 +66,20 @@ GLuint Query<target>::getResultSync(GLuint id) {
 }
 
 template<GLenum target>
-GLboolean Query<target>::getResultAvailable(GLuint id) {
+GLboolean TQuery<target>::getResultAvailable(GLuint id) {
 	GLuint result;
 	glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT_AVAILABLE, &result);
 	return result ? GL_TRUE : GL_FALSE;
 }
 
 template<GLenum target>
-void Query<target>::reload() {
+void TQuery<target>::reload() {
 	glGenQueries(mHowMany, mHandles);
 	FLOG_CHECK("reload");
 }
 
 template<GLenum target>
-void Query<target>::log() {
+void TQuery<target>::log() {
 	for (GLsizei id = 0; id < mHowMany; id++) {
 		if (glIsQuery(mHandles[id])) {
 			FLOG_INFO("Query %d exists", mHandles[id]);
@@ -89,14 +89,14 @@ void Query<target>::log() {
 	}
 }
 
-template class Query<GL_ANY_SAMPLES_PASSED> ;
-template class Query<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN> ;
+template class TQuery<GL_ANY_SAMPLES_PASSED> ;
+template class TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN> ;
 
 #ifdef FILLWAVE_GLES_3_0
 #else
-template class Query<GL_SAMPLES_PASSED> ;
-template class Query<GL_PRIMITIVES_GENERATED> ;
-template class Query<GL_TIME_ELAPSED> ;
+template class TQuery<GL_SAMPLES_PASSED> ;
+template class TQuery<GL_PRIMITIVES_GENERATED> ;
+template class TQuery<GL_TIME_ELAPSED> ;
 #endif
 
 } /* core */

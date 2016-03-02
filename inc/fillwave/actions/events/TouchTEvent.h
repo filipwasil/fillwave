@@ -8,7 +8,7 @@
 #ifndef TOUCHEVENT_H_
 #define TOUCHEVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -28,10 +28,10 @@ struct TouchEventData {
  * \brief Event introduced when the screen is pressed.
  */
 
-class TouchEvent: public Event<TouchEventData> {
+class TouchEvent: public TEvent<TouchEventData> {
 public:
 	TouchEvent(TouchEventData& data)
-			: Event<TouchEventData>(data) {
+			: TEvent(data) {
 
 	}
 	virtual ~TouchEvent() = default;

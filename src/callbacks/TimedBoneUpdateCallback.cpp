@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/actions/callbacks/TimedBoneUpdateCallback.h>
-#include <fillwave/actions/events/TimeEvent.h>
+#include <fillwave/actions/events/TimeTEvent.h>
 #include <fillwave/models/Model.h>
 #include <fillwave/Log.h>
 

@@ -9,7 +9,7 @@
 #define FPSCALLBACK_H_
 
 #include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/actions/events/TimeEvent.h>
+#include <fillwave/actions/events/TimeTEvent.h>
 #include <fillwave/hud/Text.h>
 
 namespace fillwave {

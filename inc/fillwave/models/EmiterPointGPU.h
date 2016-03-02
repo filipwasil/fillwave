@@ -8,7 +8,7 @@
 #ifndef EMITERPOINTGPU_H_
 #define EMITERPOINTGPU_H_
 
-#include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
+#include <fillwave/core/buffers/TVertexBufferParticlesGPU.h>
 #include <fillwave/core/pipeline/Fence.h>
 #include <fillwave/models/base/IEmiterPoint.h>
 

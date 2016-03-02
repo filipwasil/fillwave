@@ -8,7 +8,7 @@
 #ifndef VERTEXBUFFERDEBUG_H_
 #define VERTEXBUFFERDEBUG_H_
 
-#include <fillwave/core/buffers/VertexBuffer.h>
+#include <fillwave/core/buffers/TVertexBuffer.h>
 
 namespace fillwave {
 namespace core {
@@ -26,7 +26,7 @@ struct VertexDebug {
  * \brief Vertex buffer specialized with VertexDebug data structure.
  */
 
-class VertexBufferDebug: public VertexBuffer<VertexDebug> {
+class VertexBufferDebug: public TVertexBuffer<VertexDebug> {
 
 public:
 	VertexBufferDebug(GLfloat scale = 1.0);

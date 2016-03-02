@@ -27,6 +27,11 @@ void remove(std::vector<T>& vector, T& item ) {
 	}
 }
 
+/*
+template<typename T>
+  using shared_ptr_unsynchronized = std::__shared_ptr<T, __gnu_cxx::_S_single>;
+*/
+
 } /* namespace framework */
 } /* namespace fillwave */
 

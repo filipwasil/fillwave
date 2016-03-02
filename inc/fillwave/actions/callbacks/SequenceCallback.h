@@ -8,9 +8,9 @@
 #ifndef SEQUENCECALLBACK_H_
 #define SEQUENCECALLBACK_H_
 
-#include <fillwave/actions/events/TimeEvent.h>
 #include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/actions/callbacks/Callback.h>
+#include <fillwave/actions/events/TimeTEvent.h>
 
 #include <vector>
 

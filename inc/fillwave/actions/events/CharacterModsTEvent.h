@@ -8,7 +8,7 @@
 #ifndef CHARACTERMODSEVENT_H_
 #define CHARACTERMODSEVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -27,10 +27,10 @@ struct CharacterModsEventData {
  * \brief Event introduced when the key is pressed.
  */
 
-class CharacterModsEvent: public Event<CharacterModsEventData> {
+class CharacterModsEvent: public TEvent<CharacterModsEventData> {
 public:
 	CharacterModsEvent(CharacterModsEventData& data)
-			: Event<CharacterModsEventData>(data) {
+			: TEvent<CharacterModsEventData>(data) {
 
 	}
 	virtual ~CharacterModsEvent() = default;

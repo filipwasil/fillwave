@@ -8,7 +8,7 @@
 #ifndef TIMEEVENT_H_
 #define TIMEEVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -26,10 +26,10 @@ struct TimeEventData {
  * \brief Event introduced with every single draw loop passed.
  */
 
-class TimeEvent: public Event<TimeEventData> {
+class TimeEvent: public TEvent<TimeEventData> {
 public:
 	TimeEvent(TimeEventData data)
-			: Event(data) {
+			: TEvent(data) {
 
 	}
 	virtual ~TimeEvent() = default;

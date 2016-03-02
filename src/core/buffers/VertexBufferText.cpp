@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/core/buffers/VertexBufferText.h>
+#include <fillwave/core/buffers/TVertexBufferText.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferText", FERROR | FFATAL)
@@ -17,7 +17,7 @@ VertexBufferText::VertexBufferText(
 		std::vector<GLfloat> positions,
 		std::vector<GLfloat> textureCoords,
 		GLuint dataStoreModification)
-		: VertexBuffer(dataStoreModification) {
+		: TVertexBuffer(dataStoreModification) {
 	size_t size = positions.size();
 	if (size == textureCoords.size()) {
 		mDataVertices.reserve(size / 2);

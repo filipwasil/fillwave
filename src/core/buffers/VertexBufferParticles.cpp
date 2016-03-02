@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/core/buffers/VertexBufferParticles.h>
+#include <fillwave/core/buffers/TVertexBufferParticles.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferParticles", FERROR | FFATAL)

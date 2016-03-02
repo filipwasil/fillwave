@@ -8,7 +8,7 @@
 #ifndef VERTEXBUFFERTEXT_H_
 #define VERTEXBUFFERTEXT_H_
 
-#include <fillwave/core/buffers/VertexBuffer.h>
+#include <fillwave/core/buffers/TVertexBuffer.h>
 
 namespace fillwave {
 namespace core {
@@ -26,7 +26,7 @@ struct VertexText {
  * \brief Vertex buffer specialized with VertexText data structure.
  */
 
-class VertexBufferText: public VertexBuffer<VertexText> {
+class VertexBufferText: public TVertexBuffer<VertexText> {
 public:
 	VertexBufferText(
 			std::vector<GLfloat> data,

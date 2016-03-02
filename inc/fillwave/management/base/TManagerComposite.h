@@ -5,11 +5,11 @@
  *      Author: filip
  */
 
-#ifndef INC_FILLWAVE_MANAGEMENT_BASE_MANAGERCOMPOSITE_H_
-#define INC_FILLWAVE_MANAGEMENT_BASE_MANAGERCOMPOSITE_H_
+#ifndef INC_FILLWAVE_MANAGEMENT_BASE_TMANAGERCOMPOSITE_H_
+#define INC_FILLWAVE_MANAGEMENT_BASE_TMANAGERCOMPOSITE_H_
 
+#include <fillwave/management/base/TManager.h>
 #include <unordered_map>
-#include <fillwave/management/base/Manager.h>
 
 namespace fillwave {
 namespace framework {
@@ -74,4 +74,4 @@ public:
 } /* namespace framework */
 } /* namespace fillwave */
 
-#endif /* INC_FILLWAVE_MANAGEMENT_BASE_MANAGERCOMPOSITE_H_ */
+#endif /* INC_FILLWAVE_MANAGEMENT_BASE_TMANAGERCOMPOSITE_H_ */

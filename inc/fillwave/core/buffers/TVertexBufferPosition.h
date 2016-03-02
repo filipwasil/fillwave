@@ -8,7 +8,7 @@
 #ifndef VertexBufferPosition_H_
 #define VertexBufferPosition_H_
 
-#include <fillwave/core/buffers/VertexBuffer.h>
+#include <fillwave/core/buffers/TVertexBuffer.h>
 
 namespace fillwave {
 namespace core {
@@ -25,7 +25,7 @@ struct VertexPosition {
  * \brief Not used. Vertex buffer specialized with VertexPosition data structure.
  */
 
-class VertexBufferPosition: public VertexBuffer<VertexPosition> {
+class VertexBufferPosition: public TVertexBuffer<VertexPosition> {
 public:
 	VertexBufferPosition(
 			framework::Shape<VertexPosition>& shape,

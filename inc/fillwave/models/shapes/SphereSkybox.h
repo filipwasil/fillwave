@@ -8,7 +8,7 @@
 #ifndef SPHERESKYBOX_H_
 #define SPHERESKYBOX_H_
 
-#include <fillwave/core/buffers/VertexBufferPosition.h>
+#include <fillwave/core/buffers/TVertexBufferPosition.h>
 #include <fillwave/models/shapes/Shape.h>
 
 namespace fillwave {

@@ -12,8 +12,8 @@
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
 #include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
 #include <fillwave/loaders/TextureLoader.h>
-#include <fillwave/management/base/ManagerComposite.h>
 #include <fillwave/Assets.h>
+#include <fillwave/management/base/TManagerComposite.h>
 
 namespace fillwave {
 namespace framework {
@@ -22,35 +22,35 @@ namespace framework {
  * \brief Template class for all texture objects.
  */
 
-typedef Composition<pTexture1D, PolicyShared<core::Texture1D>,
+typedef Composition<pTexture1D, TPolicyShared<core::Texture1D>,
             core::ParameterList&> TextureObject1D;
 
-typedef Composition<pTexture2D, PolicyShared<core::Texture2D>,
+typedef Composition<pTexture2D, TPolicyShared<core::Texture2D>,
 				core::Texture2DFile*, core::ParameterList&, GLuint> TextureObject2DDeferred;
 
-typedef Composition<pTexture2D, PolicyShared<core::Texture2D>,
+typedef Composition<pTexture2D, TPolicyShared<core::Texture2D>,
             core::Texture2DFile*, core::ParameterList&, GLuint> TextureObject2D;
 
-typedef Composition<pTexture2D, PolicyShared<core::Texture2D>,
+typedef Composition<pTexture2D, TPolicyShared<core::Texture2D>,
             core::Texture2DFile*, core::ParameterList&, GLuint> TextureObject2DStatic;
 
-typedef Composition<pTexture2DRenderableDynamic, PolicyShared<core::Texture2DRenderableDynamic>,
+typedef Composition<pTexture2DRenderableDynamic, TPolicyShared<core::Texture2DRenderableDynamic>,
             core::Texture2DFile*, core::ParameterList&, pProgram> TextureObject2DDynamic;
 
-typedef Composition<pTexture2DRenderable, PolicyShared<core::Texture2DRenderable>,
+typedef Composition<pTexture2DRenderable, TPolicyShared<core::Texture2DRenderable>,
             GLenum, core::Texture2DFile*, core::ParameterList&> TextureObject2DRenderable;
 
-typedef Composition<pTexture3D, PolicyShared<core::Texture3D>,
+typedef Composition<pTexture3D, TPolicyShared<core::Texture3D>,
             core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
             core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
             core::ParameterList&> TextureObject3D;
 
-typedef Composition<pTexture3DRenderable, PolicyShared<core::Texture3DRenderable>,
+typedef Composition<pTexture3DRenderable, TPolicyShared<core::Texture3DRenderable>,
 				core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
             core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
             pTexture2DRenderable, core::ParameterList&> TextureObject3DRenderable;
 
-typedef Composition<pTexture3DRenderableDynamic, PolicyShared<core::Texture3DRenderableDynamic>,
+typedef Composition<pTexture3DRenderableDynamic, TPolicyShared<core::Texture3DRenderableDynamic>,
             core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
             core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
             core::ParameterList&, pTexture2DRenderable, pProgram> TextureObject3DDynamic;
@@ -100,32 +100,32 @@ public:
 
 private:
 
-	ManagerComposite<std::unique_ptr<TextureObject1D>, pTexture1D, std::string, UINT_MAX, PolicyUnique<TextureObject1D>,
+	ManagerComposite<std::unique_ptr<TextureObject1D>, pTexture1D, std::string, UINT_MAX, TPolicyUnique<TextureObject1D>,
 		core::ParameterList&> mTextures1D;
 
-   ManagerComposite<std::unique_ptr<TextureObject2DStatic>, pTexture2D, std::string, UINT_MAX, PolicyUnique<TextureObject2DStatic>,
+   ManagerComposite<std::unique_ptr<TextureObject2DStatic>, pTexture2D, std::string, UINT_MAX, TPolicyUnique<TextureObject2DStatic>,
 		core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
 
-   ManagerComposite<std::unique_ptr<TextureObject2DDeferred>, pTexture2D, std::string, UINT_MAX, PolicyUnique<TextureObject2DDeferred>,
+   ManagerComposite<std::unique_ptr<TextureObject2DDeferred>, pTexture2D, std::string, UINT_MAX, TPolicyUnique<TextureObject2DDeferred>,
 		core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2DDeferred;
 
-   ManagerComposite<std::unique_ptr<TextureObject2DDynamic>, pTexture2DRenderableDynamic, std::string, UINT_MAX, PolicyUnique<TextureObject2DDynamic>,
+   ManagerComposite<std::unique_ptr<TextureObject2DDynamic>, pTexture2DRenderableDynamic, std::string, UINT_MAX, TPolicyUnique<TextureObject2DDynamic>,
 		core::Texture2DFile*, core::ParameterList&, pProgram> mTextures2DDynamic;
 
-   ManagerComposite<std::unique_ptr<TextureObject2DRenderable>, pTexture2DRenderable, std::string, UINT_MAX, PolicyUnique<TextureObject2DRenderable>,
+   ManagerComposite<std::unique_ptr<TextureObject2DRenderable>, pTexture2DRenderable, std::string, UINT_MAX, TPolicyUnique<TextureObject2DRenderable>,
 		GLenum, core::Texture2DFile*, core::ParameterList&> mTextures2DRenderable;
 
-   ManagerComposite<std::unique_ptr<TextureObject3D>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3D>,
+   ManagerComposite<std::unique_ptr<TextureObject3D>, pTexture3D, std::string, UINT_MAX, TPolicyUnique<TextureObject3D>,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::ParameterList&> mTextures3D;
 
-   ManagerComposite<std::unique_ptr<TextureObject3DDynamic>, pTexture3D, std::string, UINT_MAX, PolicyUnique<TextureObject3DDynamic>,
+   ManagerComposite<std::unique_ptr<TextureObject3DDynamic>, pTexture3D, std::string, UINT_MAX, TPolicyUnique<TextureObject3DDynamic>,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::ParameterList&, pTexture2DRenderable, pProgram> mTextures3DDynamic;
 
-    ManagerComposite<std::unique_ptr<TextureObject3DRenderable>, pTexture3DRenderable, std::string, UINT_MAX, PolicyUnique<TextureObject3DRenderable>,
+    ManagerComposite<std::unique_ptr<TextureObject3DRenderable>, pTexture3DRenderable, std::string, UINT_MAX, TPolicyUnique<TextureObject3DRenderable>,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
         pTexture2DRenderable, core::ParameterList&> mTextures3DRenderable;

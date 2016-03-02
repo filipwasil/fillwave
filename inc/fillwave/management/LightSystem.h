@@ -8,7 +8,7 @@
 #ifndef LIGHTMANAGER_H_
 #define LIGHTMANAGER_H_
 
-#include <fillwave/management/base/Manager.h>
+#include <fillwave/management/base/TManager.h>
 #include <fillwave/space/LightDirectional.h>
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
@@ -21,13 +21,13 @@ namespace framework {
 #define FILLWAVE_MAX_POINT_LIGHTS 4
 #define FILLWAVE_MAX_DIRECTIONAL_LIGHTS 4
 
-typedef Manager<pLightSpot, FILLWAVE_MAX_SPOT_LIGHTS, PolicyShared<LightSpot>,
+typedef TManager<pLightSpot, FILLWAVE_MAX_SPOT_LIGHTS, TPolicyShared<LightSpot>,
 		pTexture2DRenderable, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerSpotLights;
 
-typedef Manager<pLightDirectional, FILLWAVE_MAX_DIRECTIONAL_LIGHTS, PolicyShared<LightDirectional>,
+typedef TManager<pLightDirectional, FILLWAVE_MAX_DIRECTIONAL_LIGHTS, TPolicyShared<LightDirectional>,
 		pTexture2DRenderable, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerDirectionalLights;
 
-typedef Manager<pLightPoint, FILLWAVE_MAX_POINT_LIGHTS, PolicyShared<LightPoint>,
+typedef TManager<pLightPoint, FILLWAVE_MAX_POINT_LIGHTS, TPolicyShared<LightPoint>,
 		pTexture3DRenderable, glm::vec3, glm::vec4, pMoveable> ManagerPointLights;
 
 /**

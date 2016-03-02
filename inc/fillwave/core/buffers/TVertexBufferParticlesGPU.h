@@ -8,7 +8,7 @@
 #ifndef VertexBufferParticlesGPU_H_
 #define VertexBufferParticlesGPU_H_
 
-#include <fillwave/core/buffers/VertexBuffer.h>
+#include <fillwave/core/buffers/TVertexBuffer.h>
 
 namespace fillwave {
 namespace core {
@@ -30,7 +30,7 @@ struct VertexParticleGPU {
  * \brief Vertex buffer specialized with VertexParticleGPU data structure.
  */
 
-class VertexBufferParticlesGPU: public VertexBuffer<VertexParticleGPU> {
+class VertexBufferParticlesGPU: public TVertexBuffer<VertexParticleGPU> {
 public:
 	VertexBufferParticlesGPU(std::vector<VertexParticleGPU>& particles);
 	virtual ~VertexBufferParticlesGPU() = default;

@@ -8,7 +8,7 @@
 #ifndef MOUSEBUTTONEVENT_H_
 #define MOUSEBUTTONEVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -29,10 +29,10 @@ struct MouseButtonEventData {
  * \brief Event introduced when something happens with the mouse buttons.
  */
 
-class MouseButtonEvent: public Event<MouseButtonEventData> {
+class MouseButtonEvent: public TEvent<MouseButtonEventData> {
 public:
 	MouseButtonEvent(MouseButtonEventData data)
-			: Event(data) {
+			: TEvent(data) {
 
 	}
 	virtual ~MouseButtonEvent() = default;

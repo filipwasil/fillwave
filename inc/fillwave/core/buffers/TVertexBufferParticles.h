@@ -8,7 +8,7 @@
 #ifndef VERTEXBUFFERPARTICLES_H_
 #define VERTEXBUFFERPARTICLES_H_
 
-#include <fillwave/core/buffers/VertexBuffer.h>
+#include <fillwave/core/buffers/TVertexBuffer.h>
 
 namespace fillwave {
 namespace core {
@@ -27,7 +27,7 @@ struct VertexParticle {
  * \brief Vertex buffer specialized with VertexParticle data structure.
  */
 
-class VertexBufferParticles: public VertexBuffer<VertexParticle> {
+class VertexBufferParticles: public TVertexBuffer<VertexParticle> {
 public:
 	VertexBufferParticles(
 			std::vector<GLfloat>& velocities,

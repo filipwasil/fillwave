@@ -11,7 +11,7 @@
 #include <fillwave/models/Entity.h>
 #include <fillwave/core/texturing/Texture3D.h>
 #include <fillwave/core/buffers/IndexBufferBasic.h>
-#include <fillwave/core/buffers/VertexBufferPosition.h>
+#include <fillwave/core/buffers/TVertexBufferPosition.h>
 #include <fillwave/models/base/IReloadable.h>
 
 namespace fillwave {

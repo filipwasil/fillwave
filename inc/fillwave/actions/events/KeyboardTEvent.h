@@ -8,7 +8,7 @@
 #ifndef KEYBOARDEVENT_H_
 #define KEYBOARDEVENT_H_
 
-#include <fillwave/actions/events/Event.h>
+#include <fillwave/actions/events/TEvent.h>
 
 namespace fillwave {
 namespace framework {
@@ -26,10 +26,10 @@ struct KeyboardEventData {
  * \brief Event introduced when something happens with the key.
  */
 
-class KeyboardEvent: public Event<KeyboardEventData> {
+class KeyboardEvent: public TEvent<KeyboardEventData> {
 public:
 	KeyboardEvent(KeyboardEventData data)
-			: Event(data) {
+			: TEvent(data) {
 
 	}
 	virtual ~KeyboardEvent() = default;

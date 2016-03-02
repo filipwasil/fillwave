@@ -5,7 +5,7 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
+#include <fillwave/core/buffers/TVertexBufferParticlesGPU.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferParticlesGPU", FERROR | FFATAL)
@@ -15,7 +15,7 @@ namespace core {
 
 VertexBufferParticlesGPU::VertexBufferParticlesGPU(
 		std::vector<VertexParticleGPU>& particles)
-		: VertexBuffer<VertexParticleGPU>(particles, GL_DYNAMIC_COPY) {
+		: TVertexBuffer(particles, GL_DYNAMIC_COPY) {
 
 }
 

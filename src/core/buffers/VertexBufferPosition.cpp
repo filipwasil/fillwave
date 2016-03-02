@@ -5,7 +5,7 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/core/buffers/VertexBufferPosition.h>
+#include <fillwave/core/buffers/TVertexBufferPosition.h>
 
 FLOGINIT("VertexBufferPosition", FERROR | FFATAL)
 
@@ -15,14 +15,14 @@ namespace core {
 VertexBufferPosition::VertexBufferPosition(
 		framework::Shape<VertexPosition>& shape,
 		GLuint dataStoreModification)
-		: VertexBuffer<VertexPosition>(shape, dataStoreModification) {
+		: TVertexBuffer(shape, dataStoreModification) {
 
 }
 
 VertexBufferPosition::VertexBufferPosition(
 		std::vector<VertexPosition>& vertices,
 		GLuint dataStoreModification)
-		: VertexBuffer<VertexPosition>(vertices, dataStoreModification) {
+		: TVertexBuffer(vertices, dataStoreModification) {
 
 }
 

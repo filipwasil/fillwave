@@ -5,8 +5,8 @@
  *      Author: filip
  */
 
-#ifndef INC_FILLWAVE_MANAGEMENT_BASE_MANAGER_H_
-#define INC_FILLWAVE_MANAGEMENT_BASE_MANAGER_H_
+#ifndef INC_FILLWAVE_MANAGEMENT_BASE_TMANAGER_H_
+#define INC_FILLWAVE_MANAGEMENT_BASE_TMANAGER_H_
 
 #include <memory>
 #include <vector>
@@ -21,10 +21,10 @@ namespace framework {
  * \brief Creation policy which creates an object as shared pointer
  */
 template<class T>
-class PolicyShared {
+class TPolicyShared {
 public:
-	PolicyShared() = default;
-	~PolicyShared() = default;
+	TPolicyShared() = default;
+	~TPolicyShared() = default;
 
 	template <typename... P>
 	inline std::shared_ptr<T> Create(P... parameters) {
@@ -36,10 +36,10 @@ public:
  * \brief Creation policy which creates an object as unique pointer
  */
 template<class T>
-class PolicyUnique {
+class TPolicyUnique {
 public:
-	PolicyUnique() = default;
-	~PolicyUnique() = default;
+	TPolicyUnique() = default;
+	~TPolicyUnique() = default;
 
 	template <typename... P>
 	inline std::unique_ptr<T> Create(P... parameters) {
@@ -59,11 +59,11 @@ inline T FillwaveItemConstruct (P... parameters) {
  * \brief Basic manager
  */
 template <class T, size_t M, class C, typename... P>
-class Manager : public std::vector<T> {
+class TManager : public std::vector<T> {
 public:
 
-	Manager() = default;
-	virtual ~Manager() = default;
+	TManager() = default;
+	virtual ~TManager() = default;
 
 	T add(P... parameters) {
 		if ((*this).size() >= M) {
@@ -100,4 +100,4 @@ public:
 } /* namespace framework */
 } /* namespace fillwave */
 
-#endif /* INC_FILLWAVE_MANAGEMENT_BASE_MANAGER_H_ */
+#endif /* INC_FILLWAVE_MANAGEMENT_BASE_TMANAGER_H_ */

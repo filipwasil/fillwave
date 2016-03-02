@@ -9,18 +9,6 @@
 #define INC_FILLWAVE_FRAMEWORK_H_
 
 /* Events */
-#include <fillwave/actions/events/TimeEvent.h>
-#include <fillwave/actions/events/TouchEvent.h>
-#include <fillwave/actions/events/ScrollEvent.h>
-#include <fillwave/actions/events/CursorEnterEvent.h>
-#include <fillwave/actions/events/CursorPositionEvent.h>
-#include <fillwave/actions/events/CharacterEvent.h>
-#include <fillwave/actions/events/CharacterModsEvent.h>
-#include <fillwave/actions/events/CursorPositionEvent.h>
-#include <fillwave/actions/events/MouseButtonEvent.h>
-#include <fillwave/actions/events/KeyboardEvent.h>
-
-/* Callbacks */
 #include <fillwave/actions/callbacks/FPSCallback.h>
 #include <fillwave/actions/callbacks/TimedMoveCallback.h>
 #include <fillwave/actions/callbacks/TimedRotateCallback.h>
@@ -29,6 +17,16 @@
 #include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
 #include <fillwave/actions/callbacks/LoopCallback.h>
 #include <fillwave/actions/callbacks/SequenceCallback.h>
+#include <fillwave/actions/events/CharacterModsTEvent.h>
+#include <fillwave/actions/events/CharacterTEvent.h>
+#include <fillwave/actions/events/CursorEnterTEvent.h>
+#include <fillwave/actions/events/CursorPositionTEvent.h>
+#include <fillwave/actions/events/CursorPositionTEvent.h>
+#include <fillwave/actions/events/KeyboardTEvent.h>
+#include <fillwave/actions/events/MouseButtonTEvent.h>
+#include <fillwave/actions/events/ScrollTEvent.h>
+#include <fillwave/actions/events/TimeTEvent.h>
+#include <fillwave/actions/events/TouchTEvent.h>
 
 /* Space */
 #include <fillwave/space/SceneOrthographic.h>

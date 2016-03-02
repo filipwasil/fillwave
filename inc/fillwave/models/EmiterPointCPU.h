@@ -8,8 +8,8 @@
 #ifndef EMITER_POINT_CPU_H_
 #define EMITER_POINT_CPU_H_
 
-#include <fillwave/core/buffers/VertexBufferFloat.h>
-#include <fillwave/core/operations/Query.h>
+#include <fillwave/core/buffers/TVertexBufferFloat.h>
+#include <fillwave/core/operations/TQuery.h>
 #include <fillwave/models/base/IEmiterPoint.h>
 
 namespace fillwave {

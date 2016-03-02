@@ -8,8 +8,8 @@
 #ifndef SPHERE_H_
 #define SPHERE_H_
 
+#include <fillwave/core/buffers/TVertexBufferBasic.h>
 #include <fillwave/models/shapes/Shape.h>
-#include <fillwave/core/buffers/VertexBufferBasic.h>
 
 namespace fillwave {
 namespace framework {

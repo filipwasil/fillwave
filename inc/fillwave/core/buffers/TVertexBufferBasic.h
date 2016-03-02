@@ -8,9 +8,9 @@
 #ifndef VERTEXBUFFERBASIC_H_
 #define VERTEXBUFFERBASIC_H_
 
-#include <fillwave/core/buffers/VertexBuffer.h>
 #include <fillwave/models/terrain/TerrainConstructor.h>
 #include <fillwave/Assets.h>
+#include <fillwave/core/buffers/TVertexBuffer.h>
 
 namespace fillwave {
 
@@ -46,7 +46,7 @@ struct FaceBasic {
  * \brief Vertex buffer specialized with VertexBasic data structure.
  */
 
-class VertexBufferBasic: public VertexBuffer<VertexBasic> {
+class VertexBufferBasic: public TVertexBuffer<VertexBasic> {
 public:
 	VertexBufferBasic(const fMesh* shape, framework::Animator* boneManager =
 			nullptr, GLuint dataStoreModification = GL_STATIC_DRAW);

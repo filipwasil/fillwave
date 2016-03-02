@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/actions/callbacks/TimedColorCallback.h>
-#include <fillwave/actions/events/TimeEvent.h>
+#include <fillwave/actions/events/TimeTEvent.h>
 #include <fillwave/Log.h>
 
 namespace fillwave {
