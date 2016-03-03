@@ -18,7 +18,7 @@
 
 FLOGINIT_DEFAULT()
 
-namespacefillwave {
+namespace fillwave {
 	namespace framework {
 
 		RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)

@@ -14,7 +14,7 @@
 
 FLOGINIT_DEFAULT()
 
-namespacefillwave {
+namespace fillwave {
 	namespace framework {
 
 		void RendererPBRP::update(IRenderable* renderable) {

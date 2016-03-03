@@ -10,7 +10,7 @@
 
 FLOGINIT_DEFAULT()
 
-namespacefillwave {
+namespace fillwave {
 	namespace framework {
 
 		ProgressBar::ProgressBar(
