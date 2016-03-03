@@ -14,7 +14,7 @@
 
 FLOGINIT_DEFAULT()
 
-namespacefillwave {
+namespace fillwave {
 	namespace framework {
 
 		IRendererCSPBRP::IRendererCSPBRP(LightManager* lightManager) : mLightManager(lightManager) {
