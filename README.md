@@ -72,6 +72,10 @@ Android script is currently designed to work only with Linux. It assumes that An
 ./build_osx.sh
 ```
 
+## Developers
+
+https://github.com/filipwasil/fillwave/wiki/Workflow
+
 --------------------------------------
 
 ###Linux and Android ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)
