@@ -31,8 +31,8 @@ struct MouseButtonEventData {
 
 class MouseButtonEvent: public TEvent<MouseButtonEventData> {
 public:
-	MouseButtonEvent(MouseButtonEventData data)
-			: TEvent(data) {
+	MouseButtonEvent(MouseButtonEventData data) :
+			TEvent(data) {
 
 	}
 	virtual ~MouseButtonEvent() = default;

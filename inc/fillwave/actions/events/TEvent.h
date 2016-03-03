@@ -19,11 +19,11 @@ namespace framework {
  * of event You want to be carried.
  */
 
-template<class T>
+template <class T>
 class TEvent: public EventType {
 public:
-	TEvent(T data)
-			: EventType(data.type), mData(data) {
+	TEvent(T data) :
+			EventType(data.type), mData(data) {
 
 	}
 	virtual ~TEvent() = default;

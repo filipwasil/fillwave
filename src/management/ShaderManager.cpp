@@ -13,8 +13,8 @@ FLOGINIT("ShaderManager", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-ShaderManager::ShaderManager(const std::string& rootPath)
-		: mRootPath(rootPath) {
+ShaderManager::ShaderManager(const std::string& rootPath) :
+		mRootPath(rootPath) {
 
 }
 
@@ -59,12 +59,12 @@ pShader ShaderManager::get(std::string path) {
 	for (auto& it : mShaderObjects) {
 		if (it->mFilePath == (mRootPath + path)) {
 			FLOG_DEBUG("Shader %s was found in manager. Returning shader pointer",
-					it->mFilePath.c_str());
+				it->mFilePath.c_str());
 			return it->mShader;
 		}
 	}
 	FLOG_ERROR("Shader %s not found in manager. Returning empty pointer",
-			path.c_str());
+		path.c_str());
 	return pShader();
 }
 

@@ -17,13 +17,15 @@ namespace framework {
 /**
  * Data structure containing each Sampler instance info.
  */
-typedef Composition<pProgram, TPolicyShared<core::Program>, const std::vector<pShader>&, GLboolean> ProgramObject;
+typedef Composition<pProgram, TPolicyShared<core::Program>,
+		const std::vector<pShader>&, GLboolean> ProgramObject;
 
 /**
  * Program manager
  */
-typedef ManagerComposite<std::unique_ptr<ProgramObject>, pProgram, std::string, UINT_MAX, TPolicyUnique<ProgramObject>,
-		const std::vector<pShader>&, GLboolean> ManagerPrograms;
+typedef ManagerComposite<std::unique_ptr<ProgramObject>, pProgram, std::string,
+		UINT_MAX, TPolicyUnique<ProgramObject>, const std::vector<pShader>&,
+		GLboolean> ManagerPrograms;
 
 } /* framework */
 } /* fillwave */

@@ -13,8 +13,8 @@ FLOGINIT("TextureManager", FERROR | FFATAL | FINFO | FDEBUG)
 namespace fillwave {
 namespace framework {
 
-TextureSystem::TextureSystem(const std::string& rootPath)
-		: mRootPath(rootPath) {
+TextureSystem::TextureSystem(const std::string& rootPath) :
+		mRootPath(rootPath) {
 	checkExtensions();
 }
 
@@ -143,7 +143,7 @@ void TextureSystem::add(
 		FLOG_DEBUG("Texture %s added to manager", name.c_str());
 
 		mTextures3D.add(name, filePosX, fileNegX, filePosY, fileNegY, filePosZ,
-				fileNegZ, parameters);
+			fileNegZ, parameters);
 
 		delete filePosX;
 		delete fileNegX;
@@ -222,7 +222,7 @@ pTexture3D TextureSystem::get(
 		const std::string& posZ,
 		const std::string& negZ) {
 
-    core::ParameterList parameters;
+	core::ParameterList parameters;
 
 	std::string filePathPosX = mRootPath + posX;
 	std::string filePathNegX = mRootPath + negX;
@@ -231,9 +231,11 @@ pTexture3D TextureSystem::get(
 	std::string filePathPosZ = mRootPath + posZ;
 	std::string filePathNegZ = mRootPath + negZ;
 
-   add(filePathPosX, filePathNegX, filePathPosY, filePathNegY, filePathPosZ, filePathNegZ);
+	add(filePathPosX, filePathNegX, filePathPosY, filePathNegY, filePathPosZ,
+		filePathNegZ);
 
-   const std::string key = filePathPosX + filePathNegX + filePathPosY + filePathNegY + filePathPosZ + filePathNegZ;
+	const std::string key = filePathPosX + filePathNegX + filePathPosY
+			+ filePathNegY + filePathPosZ + filePathNegZ;
 
 	return mTextures3D[key]->mComponent;
 }
@@ -273,7 +275,9 @@ pTexture2DRenderable TextureSystem::getShadow2D(GLuint width, GLuint height) {
 	return mTextures2DRenderable.add(key, GL_DEPTH_ATTACHMENT, file, parameters);
 }
 
-pTexture3DRenderable TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*height*/) {
+pTexture3DRenderable TextureSystem::getShadow3D(
+		GLuint /*width*/,
+		GLuint /*height*/) {
 
 	core::Texture2DFile* file[6];
 	for (GLint i = 0; i < 6; i++) {
@@ -315,12 +319,12 @@ pTexture3DRenderable TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*heigh
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
 
-	pTexture2DRenderable t = std::make_shared<core::Texture2DRenderable>(
-	        GL_DEPTH_ATTACHMENT, file2D, parameters2D);
+	pTexture2DRenderable t = std::make_shared < core::Texture2DRenderable > (
+	GL_DEPTH_ATTACHMENT, file2D, parameters2D);
 
 	const std::string key = "_fw_" + mTextures3DRenderable.size();
-	return mTextures3DRenderable.add(key, file[0], file[1], file[2],
-            file[3], file[4], file[5], t, parameters3D);
+	return mTextures3DRenderable.add(key, file[0], file[1], file[2], file[3],
+		file[4], file[5], t, parameters3D);
 }
 
 pTexture2DRenderable TextureSystem::getColor2D(GLuint width, GLuint height) {
@@ -360,7 +364,7 @@ pTexture2D TextureSystem::getDeferredColor(
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
-    core::Texture2DFileHeader colorTextureHeader;
+	core::Texture2DFileHeader colorTextureHeader;
 #ifdef FILLWAVE_GLES_3_0
 	colorTextureHeader.mFormat = GL_RGBA;
 	colorTextureHeader.mInternalFormat = GL_RGBA;
@@ -404,7 +408,7 @@ pTexture2D TextureSystem::getDeferredColorScreen(
 	colorTextureHeader.mWidth = width;
 	colorTextureHeader.mHeight = height;
 
-    core::Texture2DFile* file = new core::Texture2DFile();
+	core::Texture2DFile* file = new core::Texture2DFile();
 	file->mConfig = core::Texture2DFileConfig();
 	file->mHeader = colorTextureHeader;
 	file->mData = nullptr;
@@ -437,20 +441,18 @@ pTexture2D TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
 	return mTextures2DDeferred.add(key, file, parameters, 1);
 }
 
-pTexture2D TextureSystem::getDeferredStencilDepth(
-		GLuint width,
-		GLuint height) {
+pTexture2D TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
 
 	core::ParameterList parameters;
 
-   core::Texture2DFileHeader stencilTextureHeader;
+	core::Texture2DFileHeader stencilTextureHeader;
 	stencilTextureHeader.mFormat = GL_DEPTH_STENCIL;
 	stencilTextureHeader.mInternalFormat = GL_DEPTH32F_STENCIL8;
 	stencilTextureHeader.mWidth = width;
 	stencilTextureHeader.mHeight = height;
 	stencilTextureHeader.mType = GL_FLOAT_32_UNSIGNED_INT_24_8_REV;
 
-   core::Texture2DFile* file = new core::Texture2DFile();
+	core::Texture2DFile* file = new core::Texture2DFile();
 	file->mConfig = core::Texture2DFileConfig();
 	file->mHeader = stencilTextureHeader;
 	file->mData = nullptr;

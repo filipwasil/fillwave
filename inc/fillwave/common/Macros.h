@@ -13,24 +13,23 @@
 namespace fillwave {
 namespace framework {
 
-template<typename T, typename ...Args>
+template <typename T, typename ...Args>
 std::unique_ptr<T> make_unique(Args&& ...args) {
-	return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+	return std::unique_ptr < T > (new T(std::forward<Args>(args)...));
 }
 
 template <class T>
-void remove(std::vector<T>& vector, T& item ) {
-	auto it = std::find(vector.begin(), vector.end(),
-			item);
+void remove(std::vector<T>& vector, T& item) {
+	auto it = std::find(vector.begin(), vector.end(), item);
 	if (it != vector.end()) {
 		vector.erase(it);
 	}
 }
 
 /*
-template<typename T>
-  using shared_ptr_unsynchronized = std::__shared_ptr<T, __gnu_cxx::_S_single>;
-*/
+ template<typename T>
+ using shared_ptr_unsynchronized = std::__shared_ptr<T, __gnu_cxx::_S_single>;
+ */
 
 } /* namespace framework */
 } /* namespace fillwave */

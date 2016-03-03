@@ -15,11 +15,9 @@ Button::Button(
 		Engine* engine,
 		const pTexture2D& texture,
 		glm::vec2 position,
-		glm::vec2 scale)
-		: IHUDNode(texture,
-				ProgramLoader(engine).getHUD(),
-				position,
-				glm::vec2(scale.x , scale.y * engine->getScreenAspectRatio())) {
+		glm::vec2 scale) :
+			IHUDNode(texture, ProgramLoader(engine).getHUD(), position,
+				glm::vec2(scale.x, scale.y * engine->getScreenAspectRatio())) {
 
 }
 

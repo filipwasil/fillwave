@@ -26,7 +26,7 @@ std::string getStructField(
 std::string getStructField(std::string structName, int index);
 std::string getNotIndexableName(std::string structName, int index);
 
-template<typename T>
+template <typename T>
 std::string to_string(T value) {
 	std::ostringstream os;
 	os << value;

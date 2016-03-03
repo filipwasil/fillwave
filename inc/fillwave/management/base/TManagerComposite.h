@@ -23,12 +23,12 @@ namespace framework {
  *
  * \param P - Parameters to T's class constructor
  */
-template<class T, class C, typename ... P>
+template <class T, class C, typename ... P>
 struct Composition {
-    Composition(P ... parameters) :
-            mComponent(C().Create(parameters...)) {
-    }
-    T mComponent;
+	Composition(P ... parameters) :
+			mComponent(C().Create(parameters...)) {
+	}
+	T mComponent;
 };
 
 /**
@@ -42,14 +42,14 @@ struct Composition {
  *
  * \param K - Key class
  */
-template <class T, class R, class K, size_t M, class C, typename... P>
-class ManagerComposite : public std::unordered_map<K, T> {
+template <class T, class R, class K, size_t M, class C, typename ... P>
+class ManagerComposite: public std::unordered_map<K, T> {
 public:
 
-    ManagerComposite() = default;
+	ManagerComposite() = default;
 	virtual ~ManagerComposite() = default;
 
-	R add(const K& key, P... parameters) {
+	R add(const K& key, P ... parameters) {
 		if ((*this).find(key) != (*this).end()) {
 			return (*this)[key]->mComponent;
 		}
@@ -58,13 +58,12 @@ public:
 			return R();
 		}
 
-		(*this)[key] = FillwaveItemConstruct<T, C, P... >(parameters...);
+		(*this)[key] = FillwaveItemConstruct<T, C, P...>(parameters...);
 		return (*this)[key]->mComponent;
 	}
 
 	void remove(T& item) {
-		auto it = std::find((*this).begin(), (*this).end(),
-				item);
+		auto it = std::find((*this).begin(), (*this).end(), item);
 		if (it != (*this).end()) {
 			(*this).erase(it);
 		}

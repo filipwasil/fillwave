@@ -24,14 +24,13 @@ FLOGINIT("Debugger", FERROR | FFATAL | FINFO)
 namespace fillwave {
 namespace framework {
 
-Debugger::Debugger(Engine* engine)
-		:
-				IReloadable(engine),
-				mState(eDebuggerState::eOff),
-				mEngine(engine),
-				mVBO(std::make_shared<core::VertexBufferDebug>(1.0)),
-				mMiniwindowSize(1.0 / 6.0),
-				mMiniwindowsOccupied(0) {
+Debugger::Debugger(Engine* engine) :
+			IReloadable(engine),
+			mState(eDebuggerState::eOff),
+			mEngine(engine),
+			mVBO(std::make_shared < core::VertexBufferDebug > (1.0)),
+			mMiniwindowSize(1.0 / 6.0),
+			mMiniwindowsOccupied(0) {
 
 	ProgramLoader loader(engine);
 
@@ -88,9 +87,9 @@ void Debugger::setMiniwindowSize(GLfloat size) {
 
 void Debugger::renderFromCamera(ICamera& c, GLint id) {
 	glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
-			mEngine->getScreenSize()[1] * (1.0f - mMiniwindowSize),
-			mEngine->getScreenSize()[0] * mMiniwindowSize,
-			mEngine->getScreenSize()[1] * mMiniwindowSize);
+		mEngine->getScreenSize()[1] * (1.0f - mMiniwindowSize),
+		mEngine->getScreenSize()[0] * mMiniwindowSize,
+		mEngine->getScreenSize()[1] * mMiniwindowSize);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -101,8 +100,8 @@ void Debugger::renderFromCamera(ICamera& c, GLint id) {
 
 void Debugger::renderPickingMap() {
 	glViewport(mEngine->getScreenSize()[0] * (1.0f - mMiniwindowSize), 0,
-			mEngine->getScreenSize()[0] * mMiniwindowSize,
-			mEngine->getScreenSize()[1] * mMiniwindowSize);
+		mEngine->getScreenSize()[0] * mMiniwindowSize,
+		mEngine->getScreenSize()[1] * mMiniwindowSize);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 	mEngine->getCurrentScene()->drawPicking();
@@ -111,8 +110,8 @@ void Debugger::renderPickingMap() {
 
 void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
 	glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize, 0,
-			mEngine->getScreenSize()[0] * mMiniwindowSize,
-			mEngine->getScreenSize()[1] * mMiniwindowSize);
+		mEngine->getScreenSize()[0] * mMiniwindowSize,
+		mEngine->getScreenSize()[1] * mMiniwindowSize);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -120,7 +119,8 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
 
 	mVAO->bind();
 
-	LightDirectional* light = mEngine->getLightSystem()->mLightsDirectional[id].get();
+	LightDirectional* light =
+			mEngine->getLightSystem()->mLightsDirectional[id].get();
 
 	ICamera* cam = light->getShadowCamera().get();
 
@@ -148,8 +148,8 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
 
 void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
 	glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize, 0,
-			mEngine->getScreenSize()[0] * mMiniwindowSize,
-			mEngine->getScreenSize()[1] * mMiniwindowSize);
+		mEngine->getScreenSize()[0] * mMiniwindowSize,
+		mEngine->getScreenSize()[1] * mMiniwindowSize);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 

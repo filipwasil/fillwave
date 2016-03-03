@@ -22,8 +22,8 @@ namespace framework {
 
 class Callback: public Finishable {
 public:
-	Callback(eEventType eventType, float timeToFinish = FILLWAVE_ENDLESS)
-			: Finishable(timeToFinish), mEnabled(true), mEventType(eventType) {
+	Callback(eEventType eventType, float timeToFinish = FILLWAVE_ENDLESS) :
+			Finishable(timeToFinish), mEnabled(true), mEventType(eventType) {
 	}
 
 	virtual void perform(EventType& event) = 0;

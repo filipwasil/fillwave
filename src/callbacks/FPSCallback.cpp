@@ -14,12 +14,11 @@ FLOGINIT("FPSCallback", FERROR | FFATAL | FUSER)
 namespace fillwave {
 namespace framework {
 
-FPSCallback::FPSCallback(Engine* engine, pText text)
-		:
-				Callback(eEventType::eTime),
-				mText(text),
-				mTimePassed(0.0),
-				mEngine(engine) {
+FPSCallback::FPSCallback(Engine* engine, pText text) :
+			Callback(eEventType::eTime),
+			mText(text),
+			mTimePassed(0.0),
+			mEngine(engine) {
 
 }
 
@@ -30,8 +29,7 @@ void FPSCallback::perform(EventType& event) {
 	} else {
 		mTimePassed -= 1.0f;
 		mText->editString(
-				std::string("FPS ")
-						+ to_string<GLuint>(mEngine->getFramesPassed()));
+			std::string("FPS ") + to_string<GLuint>(mEngine->getFramesPassed()));
 	}
 }
 

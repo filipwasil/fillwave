@@ -29,8 +29,8 @@ struct CharacterModsEventData {
 
 class CharacterModsEvent: public TEvent<CharacterModsEventData> {
 public:
-	CharacterModsEvent(CharacterModsEventData& data)
-			: TEvent<CharacterModsEventData>(data) {
+	CharacterModsEvent(CharacterModsEventData& data) :
+			TEvent<CharacterModsEventData>(data) {
 
 	}
 	virtual ~CharacterModsEvent() = default;

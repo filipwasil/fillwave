@@ -10,11 +10,10 @@
 namespace fillwave {
 namespace framework {
 
-LoopCallback::LoopCallback(Callback* callback, int numberOfExecutions)
-		:
-				Callback(eEventType::eTime),
-				mCallback(callback),
-				mLoopsLeft(numberOfExecutions) {
+LoopCallback::LoopCallback(Callback* callback, int numberOfExecutions) :
+			Callback(eEventType::eTime),
+			mCallback(callback),
+			mLoopsLeft(numberOfExecutions) {
 }
 
 void LoopCallback::perform(EventType& event) {

@@ -16,8 +16,8 @@ namespace framework {
 
 using namespace std;
 
-FileLoader::FileLoader(const string& rootPath)
-		: mRootPath(rootPath) {
+FileLoader::FileLoader(const string& rootPath) :
+		mRootPath(rootPath) {
 
 }
 

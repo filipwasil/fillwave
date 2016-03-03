@@ -29,8 +29,8 @@ struct ResizeScreenEventData {
 
 class ResizeScreenEvent: public TEvent<ResizeScreenEventData> {
 public:
-	ResizeScreenEvent(ResizeScreenEventData& data)
-			: TEvent(data) {
+	ResizeScreenEvent(ResizeScreenEventData& data) :
+			TEvent(data) {
 
 	}
 	virtual ~ResizeScreenEvent() = default;

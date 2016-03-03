@@ -25,7 +25,8 @@ namespace framework {
 
 class TimedCallback: public Callback {
 public:
-	TimedCallback(GLfloat timeToFinish, EasingFunction funcion = LinearInterpolation);
+	TimedCallback(GLfloat timeToFinish, EasingFunction funcion =
+			LinearInterpolation);
 
 	virtual ~TimedCallback() = default;
 

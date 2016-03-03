@@ -18,7 +18,7 @@
 #include <string>
 
 namespace fillwave {
-namespace framework {
+	namespace framework {
 
 		void androidSetActivity(ANativeActivity* activity);
 
@@ -30,7 +30,7 @@ namespace framework {
 		std::string androidGetPath( const char* pFile );
 		bool androidExtractAll();
 
-} /* framework */
+	} /* framework */
 } /* fillwave */
 
 #endif /* ANDROIDLOADER_H_ */
