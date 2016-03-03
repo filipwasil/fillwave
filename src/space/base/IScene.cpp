@@ -16,13 +16,12 @@ FLOGINIT("Scene", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-IScene::IScene(IRenderer* renderer)
-		: mAmbientGlobal(glm::vec3(1.0)),
-		  mRenderer(renderer) {
+IScene::IScene(IRenderer* renderer) :
+		mAmbientGlobal(glm::vec3(1.0)), mRenderer(renderer) {
 }
 
 void IScene::setRenderer(IRenderer* renderer) {
-	mRenderer = std::unique_ptr<IRenderer>(renderer);
+	mRenderer = std::unique_ptr < IRenderer > (renderer);
 }
 
 void IScene::setSkybox(pSkybox& skybox) {
@@ -145,7 +144,6 @@ void IScene::resetRenderer(GLuint screenWidth, GLuint screenHeight) {
 	mRenderer->clear();
 	mRenderer->reset(screenWidth, screenHeight);
 }
-
 
 void IScene::onEvent(EventType& event) {
 	for (auto& it : mChildren) {
