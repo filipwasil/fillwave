@@ -17,7 +17,7 @@ namespace core {
  * \brief GLObject to ask OpenGL questions.
  */
 
-template<GLenum target>
+template <GLenum target>
 class TQuery: public GLObject {
 private:
 	GLenum mTarget = target;

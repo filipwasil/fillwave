@@ -33,10 +33,8 @@ namespace framework {
  */
 
 class Entity:
-		public IRenderable,
-		public IPickable,
-		public Moveable,
-		public TreePtr<pEntity> {
+	public IRenderable, public IPickable, public Moveable,
+	public TreePtr<pEntity> {
 public:
 	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
 			glm::quat(1.0, 0.0, 0.0, 0.0));
@@ -108,13 +106,9 @@ protected:
 	GLboolean mPSR;
 
 private:
-	void handleEvent(
-			std::vector<Callback*>& callbacks,
-			EventType& event);
+	void handleEvent(std::vector<Callback*>& callbacks, EventType& event);
 	void eraseFinishedCallbacks(std::vector<Callback*>& callbacks);
-	void detachCallback(
-			std::vector<Callback*>& callbacks,
-			Callback* callback);
+	void detachCallback(std::vector<Callback*>& callbacks, Callback* callback);
 };
 } /* framework */
 pEntity buildEntity();

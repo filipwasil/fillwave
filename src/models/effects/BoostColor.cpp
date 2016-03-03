@@ -10,8 +10,8 @@
 namespace fillwave {
 namespace framework {
 
-BoostColor::BoostColor(GLfloat boost)
-		: mBoost(boost) {
+BoostColor::BoostColor(GLfloat boost) :
+		mBoost(boost) {
 
 }
 

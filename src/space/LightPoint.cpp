@@ -17,61 +17,58 @@ LightPoint::LightPoint(
 		pTexture3DRenderable shadowTexture,
 		glm::vec3 position,
 		glm::vec4 intensity,
-		pMoveable followed)
-		:
-				Light(position, intensity, followed),
-				mShadowTexture(shadowTexture),
-				mSphere(1.0, 10, 10) {
+		pMoveable followed) :
+			Light(position, intensity, followed),
+			mShadowTexture(shadowTexture),
+			mSphere(1.0, 10, 10) {
 	mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_X] = pCameraPerspective(
-			new CameraPerspective(position,
+		new CameraPerspective(position,
+			glm::normalize(
+				glm::angleAxis(glm::radians(90.0f),
+					glm::normalize(glm::vec3(0.0, 1.0, 0.0)))
+						* glm::angleAxis(glm::radians(180.0f),
+							glm::normalize(glm::vec3(1.0, 0.0, 0.0)))),
+			glm::radians(90.0), 1.0, //1440.0/900.0,
+			0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_X] =
+			pCameraPerspective(
+				new CameraPerspective(position,
 					glm::normalize(
-							glm::angleAxis(glm::radians(90.0f),
-									glm::normalize(glm::vec3(0.0, 1.0, 0.0)))
-									* glm::angleAxis(glm::radians(180.0f),
-											glm::normalize(glm::vec3(1.0, 0.0, 0.0)))),
+						glm::angleAxis(glm::radians(-90.0f),
+							glm::normalize(glm::vec3(0.0, 1.0, 0.0)))
+								* glm::angleAxis(glm::radians(180.0f),
+									glm::normalize(glm::vec3(1.0, 0.0, 0.0)))),
 					glm::radians(90.0), 1.0, //1440.0/900.0,
-					0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_X] =
+					0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_Y] =
 			pCameraPerspective(
-					new CameraPerspective(position,
-							glm::normalize(
-									glm::angleAxis(glm::radians(-90.0f),
-											glm::normalize(glm::vec3(0.0, 1.0, 0.0)))
-											* glm::angleAxis(glm::radians(180.0f),
-													glm::normalize(
-															glm::vec3(1.0, 0.0, 0.0)))),
-							glm::radians(90.0), 1.0, //1440.0/900.0,
-							0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_Y] =
+				new CameraPerspective(position,
+					glm::normalize(
+						glm::angleAxis(glm::radians(90.0f),
+							glm::normalize(glm::vec3(1.0, 0.0, 0.0)))),
+					glm::radians(90.0), 1.0, //1440.0/900.0,
+					0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_Y] =
 			pCameraPerspective(
-					new CameraPerspective(position,
-							glm::normalize(
-									glm::angleAxis(glm::radians(90.0f),
-											glm::normalize(glm::vec3(1.0, 0.0, 0.0)))),
-							glm::radians(90.0), 1.0, //1440.0/900.0,
-							0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_Y] =
+				new CameraPerspective(position,
+					glm::normalize(
+						glm::angleAxis(glm::radians(-90.0f),
+							glm::normalize(glm::vec3(1.0, 0.0, 0.0)))),
+					glm::radians(90.0), 1.0, //1440.0/900.0,
+					0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_Z] =
 			pCameraPerspective(
-					new CameraPerspective(position,
-							glm::normalize(
-									glm::angleAxis(glm::radians(-90.0f),
-											glm::normalize(glm::vec3(1.0, 0.0, 0.0)))),
-							glm::radians(90.0), 1.0, //1440.0/900.0,
-							0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_Z] =
+				new CameraPerspective(position,
+					glm::normalize(
+						glm::angleAxis(glm::radians(180.0f),
+							glm::normalize(glm::vec3(0.0, 0.0, 1.0)))),
+					glm::radians(90.0), 1.0, //1440.0/900.0,
+					0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_Z] =
 			pCameraPerspective(
-					new CameraPerspective(position,
-							glm::normalize(
-									glm::angleAxis(glm::radians(180.0f),
-											glm::normalize(glm::vec3(0.0, 0.0, 1.0)))),
-							glm::radians(90.0), 1.0, //1440.0/900.0,
-							0.1, 1000.0)), mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_Z] =
-			pCameraPerspective(
-					new CameraPerspective(position,
-							glm::normalize(
-									glm::angleAxis(glm::radians(180.0f),
-											glm::normalize(glm::vec3(0.0, 1.0, 0.0)))
-											* glm::angleAxis(glm::radians(180.0f),
-													glm::normalize(
-															glm::vec3(0.0, 0.0, 1.0)))),
-							glm::radians(90.0), 1.0, //1440.0/900.0,
-							0.1, 1000.0));
+				new CameraPerspective(position,
+					glm::normalize(
+						glm::angleAxis(glm::radians(180.0f),
+							glm::normalize(glm::vec3(0.0, 1.0, 0.0)))
+								* glm::angleAxis(glm::radians(180.0f),
+									glm::normalize(glm::vec3(0.0, 0.0, 1.0)))),
+					glm::radians(90.0), 1.0, //1440.0/900.0,
+					0.1, 1000.0));
 }
 
 pTexture3DRenderable LightPoint::getShadowTexture() {
@@ -83,7 +80,7 @@ pCameraPerspective LightPoint::getShadowCamera(GLenum id) { //xxx this should be
 		return mFaceCameras[id];
 	} else {
 		FLOG_FATAL(
-				"Can not get shadow camera. This should never happen. Good bye ...");
+			"Can not get shadow camera. This should never happen. Good bye ...");
 		return pCameraPerspective();
 	}
 }

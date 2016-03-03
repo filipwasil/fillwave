@@ -14,8 +14,8 @@ FLOGINIT("VertexArray", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
-VertexArray::VertexArray(GLuint howMany)
-		: GLObject(howMany) {
+VertexArray::VertexArray(GLuint howMany) :
+		GLObject(howMany) {
 	glGenVertexArrays(mHowMany, mHandles);
 	FLOG_CHECK("Could not generate the VAO");
 }

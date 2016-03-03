@@ -19,7 +19,7 @@ namespace framework {
  * \brief Loads programs.
  */
 
-class ProgramLoader : public ShaderLoader {
+class ProgramLoader: public ShaderLoader {
 public:
 	ProgramLoader(Engine* engine);
 
@@ -58,10 +58,8 @@ public:
 	pProgram getDRDirectionalLights();
 	pProgram getDRSpotLights();
 	pProgram getDRPointLights();
-	pProgram getQuadCustomFragmentShader(
-			const std::string& shaderPath);
-	pProgram getHUDCustomFragmentShader(
-			const std::string& shaderPath);
+	pProgram getQuadCustomFragmentShader(const std::string& shaderPath);
+	pProgram getHUDCustomFragmentShader(const std::string& shaderPath);
 
 	static void initDefaultUniforms(core::Program* program);
 private:

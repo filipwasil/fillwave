@@ -23,17 +23,17 @@ Text::Text(
 		GLfloat scale,
 		Font* font,
 		glm::vec4 color,
-		eTextEffect effect)
-		:
-				IReloadable(engine),
-				IHUDNode(texture, createProgram(engine, effect), position, glm::vec2(scale, scale)),
-				mText(text),
-				mColor(color),
-				mEffect(effect),
-				mFont(font),
-				mEngine(engine),
-				mViewportWidth(engine->getScreenSize()[0]),
-				mViewportHeight(engine->getScreenSize()[1]) {
+		eTextEffect effect) :
+			IReloadable(engine),
+			IHUDNode(texture, createProgram(engine, effect), position,
+				glm::vec2(scale, scale)),
+			mText(text),
+			mColor(color),
+			mEffect(effect),
+			mFont(font),
+			mEngine(engine),
+			mViewportWidth(engine->getScreenSize()[0]),
+			mViewportHeight(engine->getScreenSize()[1]) {
 
 	initPipeline();
 	createVBO();
@@ -154,7 +154,8 @@ void Text::createVBO() {
 
 	mPosition.x = tmpStartingX;
 
-	mVBO = std::make_shared<core::VertexBufferText>(points_tmp, texcoords_tmp); //xxx todo needs to be stored in kernel
+	mVBO = std::make_shared < core::VertexBufferText
+			> (points_tmp, texcoords_tmp); //xxx todo needs to be stored in kernel
 	initVBO();
 	initVAO();
 }

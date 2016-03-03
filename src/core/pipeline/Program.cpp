@@ -17,8 +17,8 @@ using namespace std;
 namespace fillwave {
 namespace core {
 
-Program::Program(const std::vector<pShader>& shaders, GLboolean skipLinking)
-		: mDelayedLinking(skipLinking), mShaders(shaders) {
+Program::Program(const std::vector<pShader>& shaders, GLboolean skipLinking) :
+		mDelayedLinking(skipLinking), mShaders(shaders) {
 	reload();
 }
 
@@ -35,7 +35,7 @@ void Program::attach(pShader shader) {
 	if (mHandle) {
 		glAttachShader(mHandle, shader->getHandle());
 		FLOG_CHECK("attach shader %d to program %d", shader->getHandle(),
-				mHandle);
+			mHandle);
 	}
 }
 
@@ -121,7 +121,7 @@ void Program::uniformPush(string name, GLfloat data) {
 		}
 	}
 	FLOG_ERROR("Can not find \"float %s\" uniform name in program",
-			name.c_str());
+		name.c_str());
 }
 
 void Program::uniformPush(string name, GLfloat* data, GLint count) {
@@ -132,7 +132,7 @@ void Program::uniformPush(string name, GLfloat* data, GLint count) {
 		}
 	}
 	FLOG_ERROR("Can not find \"float %s\" uniform name in program",
-			name.c_str());
+		name.c_str());
 }
 
 void Program::uniformPush(string name, glm::mat3 data) {
@@ -173,7 +173,7 @@ void Program::uniformPush(string name, glm::vec2 data) {
 		}
 	}
 	FLOG_ERROR("Can not find \"glm::vec2 %s\" uniform name in program",
-			name.c_str());
+		name.c_str());
 }
 
 void Program::uniformPush(string name, glm::vec3 data) {
@@ -184,7 +184,7 @@ void Program::uniformPush(string name, glm::vec3 data) {
 		}
 	}
 	FLOG_ERROR("Can not find \"glm::vec3 %s\" uniform name in program",
-			name.c_str());
+		name.c_str());
 }
 
 void Program::uniformPush(string name, glm::vec3* data, GLuint size) {
@@ -195,7 +195,7 @@ void Program::uniformPush(string name, glm::vec3* data, GLuint size) {
 		}
 	}
 	FLOG_ERROR("Can not find %d \"vec3 %s\" uniforms name in program", size,
-			name.c_str());
+		name.c_str());
 }
 
 void Program::uniformPush(string name, glm::vec4 data) {
@@ -206,7 +206,7 @@ void Program::uniformPush(string name, glm::vec4 data) {
 		}
 	}
 	FLOG_ERROR("Can not find \"glm::vec4 %s\" uniform name in program",
-			name.c_str());
+		name.c_str());
 }
 
 inline void Program::getUniforms() {
@@ -218,11 +218,11 @@ inline void Program::getUniforms() {
 			GLenum type = GL_ZERO;
 			char name[100];
 			glGetActiveUniform(mHandle, GLuint(i), sizeof(name) - 1, &name_len,
-					&num, &type, name);
+				&num, &type, name);
 			name[name_len] = 0;
 			GLint location = glGetUniformLocation(mHandle, name);
 			FLOG_DEBUG("Uniform name=%s, location=%d, type=%d, num=%d", name,
-					location, type, num);
+				location, type, num);
 			mUniforms.push_back(Uniform(name, type, num, location));
 		}
 	}
@@ -246,20 +246,21 @@ void Program::getUniformBlock(std::string name, GLuint bindingPoint) {
 		GLint name_len = -1;
 		std::vector<char> nameFromProgram(100);
 		glGetActiveUniformBlockName(mHandle, GLuint(i),
-				sizeof(nameFromProgram) - 1, &name_len, nameFromProgram.data());
+			sizeof(nameFromProgram) - 1, &name_len, nameFromProgram.data());
 		glGetActiveUniformBlockiv(mHandle, GLuint(i),
 		GL_UNIFORM_BLOCK_DATA_SIZE, &uniformBlockSize);
 		nameFromProgram[name_len] = 0;
 		if (std::string(nameFromProgram.data()) == name) {
 			FLOG_DEBUG("Uniform block name=%s, index=%d, size=%d ",
-					std::string(name).c_str(), GLuint(i), uniformBlockSize);
-			GLuint blockIndex = glGetUniformBlockIndex(mHandle, nameFromProgram.data());
+				std::string(name).c_str(), GLuint(i), uniformBlockSize);
+			GLuint blockIndex = glGetUniformBlockIndex(mHandle,
+				nameFromProgram.data());
 			glUniformBlockBinding(mHandle, blockIndex, bindingPoint);
 			mUnifromBuffers.push_back(
-					puUniformBuffer(
-							new UniformBuffer(std::string(name), blockIndex,
-									uniformBlockSize, bindingPoint,
-									GL_DYNAMIC_DRAW)));
+				puUniformBuffer(
+					new UniformBuffer(std::string(name), blockIndex,
+						uniformBlockSize, bindingPoint,
+						GL_DYNAMIC_DRAW)));
 		}
 	}
 }
@@ -318,7 +319,7 @@ void Program::reload() {
 	for (auto it : mShaders) {
 		attach(it);
 		FLOG_CHECK("Failed to attach shader of type %s",
-				it->getTypeString().c_str());
+			it->getTypeString().c_str());
 	}
 	if (!mDelayedLinking) {
 		link();

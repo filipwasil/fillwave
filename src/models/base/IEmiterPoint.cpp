@@ -23,17 +23,16 @@ IEmiterPoint::IEmiterPoint(
 		GLenum blendingSource,
 		GLenum blendingDestination,
 		GLboolean depthTesting,
-		GLfloat alphaCutOff)
-		:
-				IReloadable(engine),
-				Entity(),
-				mStartSize(size),
-				mLifetime(lifetime),
-				mTexture(texture),
-				mColor(color),
-				mHowMany(howMany),
-				mDepthTesting(depthTesting),
-				mAlphaCutOff(alphaCutOff) {
+		GLfloat alphaCutOff) :
+			IReloadable(engine),
+			Entity(),
+			mStartSize(size),
+			mLifetime(lifetime),
+			mTexture(texture),
+			mColor(color),
+			mHowMany(howMany),
+			mDepthTesting(depthTesting),
+			mAlphaCutOff(alphaCutOff) {
 	mBlending.mSrc = blendingSource;
 	mBlending.mDst = blendingDestination;
 
@@ -45,9 +44,7 @@ IEmiterPoint::IEmiterPoint(
 #endif
 }
 
-void IEmiterPoint::setBlending(
-		GLenum sourceFactor,
-		GLenum destinationFactor) {
+void IEmiterPoint::setBlending(GLenum sourceFactor, GLenum destinationFactor) {
 	mBlending.mSrc = sourceFactor;
 	mBlending.mDst = destinationFactor;
 }

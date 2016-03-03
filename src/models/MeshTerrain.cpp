@@ -26,21 +26,20 @@ MeshTerrain::MeshTerrain(
 		const std::string& normalMapPath,
 		const std::string& specularMapPath,
 		GLuint radius,
-		GLuint density)
-		:
-				Programmable(program),
-				mLights(engine->getLightSystem()),
-				mChunkWidth(radius * 0.2 * 16 / density),
-				mJumpStep(density * 0.2 * 16 / density) {
+		GLuint density) :
+			Programmable(program),
+			mLights(engine->getLightSystem()),
+			mChunkWidth(radius * 0.2 * 16 / density),
+			mJumpStep(density * 0.2 * 16 / density) {
 
 	pTexture2D diffuseMap = engine->storeTexture(diffuseMapPath.c_str(),
-			aiTextureType_DIFFUSE);
+		aiTextureType_DIFFUSE);
 
 	pTexture2D normalMap = engine->storeTexture(normalMapPath.c_str(),
-			aiTextureType_NORMALS);
+		aiTextureType_NORMALS);
 
 	pTexture2D specularMap = engine->storeTexture(specularMapPath.c_str(),
-			aiTextureType_SPECULAR);
+		aiTextureType_SPECULAR);
 
 	std::vector<GLuint> indices;
 
@@ -52,23 +51,17 @@ MeshTerrain::MeshTerrain(
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
-			pMesh ptr = std::make_shared<Mesh>(engine, Material(),
-							buildTextureRegion(diffuseMap),
-							buildTextureRegion(normalMap),
-							buildTextureRegion(specularMap), program,
-							loader.getShadow(),
-							loader.getShadowColorCoded(),
-							loader.getOcclusionOptimizedQuery(),
-							loader.getAmbientOcclusionGeometry(),
-							loader.getAmbientOcclusionColor(),
-							engine->getLightSystem(),
-							std::make_shared<core::VertexBufferBasic>(constructor, density,
-											gapSize, indices),
-											std::make_shared<core::IndexBufferBasic>(indices));
+			pMesh ptr =
+					std::make_shared < Mesh
+							> (engine, Material(), buildTextureRegion(diffuseMap), buildTextureRegion(
+								normalMap), buildTextureRegion(specularMap), program, loader.getShadow(), loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(), loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(), engine->getLightSystem(), std::make_shared
+									< core::VertexBufferBasic
+									> (constructor, density, gapSize, indices), std::make_shared
+									< core::IndexBufferBasic > (indices));
 
 			ptr->moveTo(
-					glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
-							density * gapSize * (GLfloat(z))));
+				glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
+					density * gapSize * (GLfloat(z))));
 			attach(ptr);
 		}
 	}
@@ -84,12 +77,11 @@ MeshTerrain::MeshTerrain(
 		pTexture2D normalMap,
 		pTexture2D specularMap,
 		GLuint radius,
-		GLuint density)
-		:
-				Programmable(program),
-				mLights(engine->getLightSystem()),
-				mChunkWidth(radius * 0.2 * 16 / density),
-				mJumpStep(density * 0.2 * 16 / density) {
+		GLuint density) :
+			Programmable(program),
+			mLights(engine->getLightSystem()),
+			mChunkWidth(radius * 0.2 * 16 / density),
+			mJumpStep(density * 0.2 * 16 / density) {
 
 	std::vector<GLuint> indices;
 
@@ -101,23 +93,17 @@ MeshTerrain::MeshTerrain(
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
-			pMesh ptr = std::make_shared<Mesh>(engine, Material(),
-							buildTextureRegion(diffuseMap),
-							buildTextureRegion(normalMap),
-							buildTextureRegion(specularMap), program,
-							loader.getShadow(),
-							loader.getShadowColorCoded(),
-							loader.getOcclusionOptimizedQuery(),
-							loader.getAmbientOcclusionGeometry(),
-							loader.getAmbientOcclusionColor(),
-							engine->getLightSystem(),
-							std::make_shared<core::VertexBufferBasic>(constructor, density,
-											gapSize, indices),
-											std::make_shared<core::IndexBufferBasic>(indices));
+			pMesh ptr =
+					std::make_shared < Mesh
+							> (engine, Material(), buildTextureRegion(diffuseMap), buildTextureRegion(
+								normalMap), buildTextureRegion(specularMap), program, loader.getShadow(), loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(), loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(), engine->getLightSystem(), std::make_shared
+									< core::VertexBufferBasic
+									> (constructor, density, gapSize, indices), std::make_shared
+									< core::IndexBufferBasic > (indices));
 
 			ptr->moveTo(
-					glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
-							density * gapSize * (GLfloat(z))));
+				glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
+					density * gapSize * (GLfloat(z))));
 			attach(ptr);
 		}
 	}

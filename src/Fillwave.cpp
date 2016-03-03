@@ -94,8 +94,8 @@ pLightSpot Engine::storeLightSpot(
 		glm::vec4 color,
 		pMoveable followed) {
 	return mImpl->mLights->mLightsSpot.add(
-			mImpl->mTextures->getShadow2D(mImpl->mWindowWidth,
-						mImpl->mWindowHeight), position, rotation, color, followed);
+		mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
+		position, rotation, color, followed);
 }
 
 pLightPoint Engine::storeLightPoint(
@@ -103,8 +103,8 @@ pLightPoint Engine::storeLightPoint(
 		glm::vec4 color,
 		pMoveable followed) {
 	return mImpl->mLights->mLightsPoint.add(
-			mImpl->mTextures->getShadow3D(mImpl->mWindowWidth,
-					mImpl->mWindowHeight), position, color, followed);
+		mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight),
+		position, color, followed);
 }
 
 pLightDirectional Engine::storeLightDirectional(
@@ -113,8 +113,8 @@ pLightDirectional Engine::storeLightDirectional(
 		glm::vec4 color,
 		pMoveable followed) {
 	return mImpl->mLights->mLightsDirectional.add(
-			mImpl->mTextures->getShadow2D(mImpl->mWindowWidth,
-					mImpl->mWindowHeight), position, rotation, color, followed);
+		mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
+		position, rotation, color, followed);
 }
 
 pShader Engine::storeShaderFragment(const std::string& shaderPath) {
@@ -153,16 +153,17 @@ pTexture2D Engine::storeTexture(
 }
 
 pTexture2DRenderable Engine::storeTextureRenderable() {
-	return mImpl->mTextures->getColor2D(mImpl->mWindowWidth, mImpl->mWindowHeight);;
+	return mImpl->mTextures->getColor2D(mImpl->mWindowWidth,
+		mImpl->mWindowHeight);
 }
 
 pTexture2DRenderableDynamic Engine::storeTextureDynamic(
 		const std::string& fragmentShaderPath) {
 	const std::string path = fragmentShaderPath;
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
-			fragmentShaderPath);
-	pTexture2DRenderableDynamic t = mImpl->mTextures->getDynamic(path,
-			program, glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));
+		fragmentShaderPath);
+	pTexture2DRenderableDynamic t = mImpl->mTextures->getDynamic(path, program,
+		glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));
 	mImpl->mTexturesDynamic.push_back(t);
 	return t;
 }
@@ -240,7 +241,8 @@ pText Engine::storeText(
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
 	}
 	pTexture2D t = mImpl->mTextures->get(fontName + ".png",
-	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone, framework::eFlip::eVertical);
+	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone,
+		framework::eFlip::eVertical);
 
 	Font* font = nullptr;
 	for (auto& it : mImpl->mFontManager) {
@@ -253,7 +255,7 @@ pText Engine::storeText(
 		std::ifstream myfile(mImpl->mFileLoader.getRootPath(fontName + ".meta"));
 		if (!myfile.is_open()) {
 			FLOG_ERROR("No text added. Could not write to metadata file: %s",
-					(fontName + ".meta").c_str());
+				(fontName + ".meta").c_str());
 			return pText();
 		}
 		std::string line;
@@ -269,7 +271,7 @@ pText Engine::storeText(
 			newFont->mOffsets[iASCII] = 1.0f - fHeight - fYOffset;
 			if (control++ > 512) { //xxx limit
 				FLOG_ERROR("Metadata can not be read for file %s.",
-						(fontName + ".meta").c_str());
+					(fontName + ".meta").c_str());
 				myfile.close();
 				delete newFont;
 				return pText();
@@ -280,8 +282,8 @@ pText Engine::storeText(
 		font = newFont;
 	}
 
-	pText text = std::make_shared<framework::Text>(content, t, position,
-					this, scale, font, color, effect);
+	pText text = std::make_shared < framework::Text
+			> (content, t, position, this, scale, font, color, effect);
 	mImpl->mTextManager.push_back(pText(text));
 	return text;
 }
@@ -363,10 +365,10 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 		const std::string& shapePath) {
 	PhysicsMeshBuffer* buffer = new PhysicsMeshBuffer();
 	const fScene* scene = mImpl->mImporter.ReadFile(
-			(mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
-			FILLWAVE_PROCESS_TRIANGULATE |
-			FILLWAVE_PROCESS_SORT_BY_P_TYPE |
-			FILLWAVE_PROCESS_CALC_TANGENT_SPACE);
+		(mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
+		FILLWAVE_PROCESS_TRIANGULATE |
+		FILLWAVE_PROCESS_SORT_BY_P_TYPE |
+		FILLWAVE_PROCESS_CALC_TANGENT_SPACE);
 	if (scene) {
 		for (GLuint i = 0; i < scene->mNumMeshes; i++) {
 			const fMesh* shape = scene->mMeshes[i];
@@ -380,7 +382,7 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 			}
 			for (GLuint z = 0; z < shape->mNumVertices; z++) {
 				glm::vec3 vertex(shape->mVertices[z].x, shape->mVertices[z].y,
-						shape->mVertices[z].z);
+					shape->mVertices[z].z);
 				buffer->mVertices.push_back(vertex);
 			}
 			break;      //for now fillwave supports only one mesh here;
@@ -392,11 +394,11 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 void Engine::addPostProcess(
 		const std::string& fragmentShaderPath,
 		GLfloat lifeTime) {
-	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
+	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
+		fragmentShaderPath);
 	core::PostProcessingPass pass(program,
-			mImpl->mTextures->getDynamic(fragmentShaderPath, program,
-					glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)),
-			lifeTime);
+		mImpl->mTextures->getDynamic(fragmentShaderPath, program,
+			glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)), lifeTime);
 	mImpl->mPostProcessingPasses.push_back(pass);
 	FLOG_DEBUG("Post processing pass added: %s", fragmentShaderPath.c_str());
 }
@@ -409,7 +411,8 @@ void Engine::configureFPSCounter(
 		mImpl->mFPSText = storeText("", fontName, position, size);
 
 		/* Provide callback to refresh the FPS value */
-		mImpl->mTextFPSCallback = new framework::FPSCallback(this, mImpl->mFPSText);
+		mImpl->mTextFPSCallback = new framework::FPSCallback(this,
+			mImpl->mFPSText);
 		registerCallback(mImpl->mTextFPSCallback);
 	} else {
 		mImpl->mFPSText.reset();
@@ -420,7 +423,7 @@ void Engine::configureFPSCounter(
 void Engine::configureFileLogging(std::string fileName) {
 	if (fileName.size() > 1) {
 		FLOG_INFO("File %s will be cleaned and used for logging.",
-				fileName.c_str());
+			fileName.c_str());
 		setLogPath(fileName);
 	} else {
 		setFileInvalid();
@@ -522,9 +525,9 @@ const fScene* Engine::getModelFromFile(std::string path) {
 	return nullptr;
 #else
 	return mImpl->mImporter.ReadFile(
-			(mImpl->mFileLoader.getRootPath() + path).c_str(),
-			aiProcess_Triangulate | aiProcess_SortByPType
-					| aiProcess_CalcTangentSpace);
+		(mImpl->mFileLoader.getRootPath() + path).c_str(),
+		aiProcess_Triangulate | aiProcess_SortByPType
+				| aiProcess_CalcTangentSpace);
 #endif
 }
 

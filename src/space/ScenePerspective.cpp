@@ -11,8 +11,8 @@
 namespace fillwave {
 namespace framework {
 
-ScenePerspective::ScenePerspective(pCameraPerspective camera)
-		: mCamera(camera) {
+ScenePerspective::ScenePerspective(pCameraPerspective camera) :
+		mCamera(camera) {
 
 }
 
@@ -49,6 +49,6 @@ pICamera ScenePerspective::getCamera() {
 
 } /* models */
 pScenePerspective buildScenePerspective(pCameraPerspective camera) {
-	return std::make_shared<framework::ScenePerspective>(camera);
+	return std::make_shared < framework::ScenePerspective > (camera);
 }
 } /* fillwave */

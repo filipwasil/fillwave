@@ -13,8 +13,8 @@ FLOGINIT("TransformFeedback", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
-TransformFeedback::TransformFeedback(GLsizei howMany)
-		: GLObject(howMany), mTarget(GL_TRANSFORM_FEEDBACK) {
+TransformFeedback::TransformFeedback(GLsizei howMany) :
+		GLObject(howMany), mTarget(GL_TRANSFORM_FEEDBACK) {
 	glGenTransformFeedbacks(mHowMany, mHandles);
 }
 
@@ -31,10 +31,10 @@ void TransformFeedback::begin(GLenum primitiveMode) {
 			&& primitiveMode != GL_TRIANGLES
 #ifdef FILLWAVE_GLES_3_0
 #else
-	&& primitiveMode != GL_TRIANGLES_ADJACENCY
-	&& primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY
-	&& primitiveMode != GL_LINES_ADJACENCY
-	&& primitiveMode != GL_LINE_STRIP_ADJACENCY
+			&& primitiveMode != GL_TRIANGLES_ADJACENCY
+			&& primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY
+			&& primitiveMode != GL_LINES_ADJACENCY
+			&& primitiveMode != GL_LINE_STRIP_ADJACENCY
 #endif
 	)
 		FLOG_ERROR("not valid primitive type");

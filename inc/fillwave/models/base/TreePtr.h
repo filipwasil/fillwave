@@ -19,11 +19,11 @@ namespace framework {
  * \brief Basic tree template class. Enables attaching and detaching nodes.
  */
 
-template<class T>
+template <class T>
 class TreePtr: public ITreeNode {
 public:
-	TreePtr()
-			: mFlagAttachedDetached(true) {
+	TreePtr() :
+			mFlagAttachedDetached(true) {
 
 	}
 
@@ -57,7 +57,7 @@ public:
 
 	void detachChildren() {
 		std::for_each(mChildren.begin(), mChildren.end(),
-				[](T& e) {e->onDetached();});
+			[](T& e) {e->onDetached();});
 		mChildren.clear();
 	}
 

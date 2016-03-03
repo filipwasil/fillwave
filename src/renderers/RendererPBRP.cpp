@@ -14,46 +14,46 @@
 
 FLOGINIT_DEFAULT()
 
-namespace fillwave {
-namespace framework {
+namespacefillwave {
+	namespace framework {
 
-void RendererPBRP::update(IRenderable* renderable) {
-	RenderItem item;
-	renderable->getRenderItem(item);
-	GLuint programId = item.mHandles[RenderItem::eRenderHandleProgram];
-	if (mRenderPasses.find(programId) != mRenderPasses.end()) {
-		mRenderPasses[programId].push_back(renderable);
-	} else {
-		std::vector<IRenderable*> vector;
-		vector.push_back(renderable);
-		mRenderPasses[programId] = vector;
-	}
-}
-
-void RendererPBRP::draw(ICamera& camera) {
-	if (mSkybox) {
-		mSkybox->draw(camera);
-	}
-	glClear(GL_DEPTH_BUFFER_BIT);
-	for (auto& program : mRenderPasses) {
-		core::Program::useProgram(program.first);
-		for (auto& node : program.second) {
-			node->drawPBRP(camera);
+		void RendererPBRP::update(IRenderable* renderable) {
+			RenderItem item;
+			renderable->getRenderItem(item);
+			GLuint programId = item.mHandles[RenderItem::eRenderHandleProgram];
+			if (mRenderPasses.find(programId) != mRenderPasses.end()) {
+				mRenderPasses[programId].push_back(renderable);
+			} else {
+				std::vector<IRenderable*> vector;
+				vector.push_back(renderable);
+				mRenderPasses[programId] = vector;
+			}
 		}
-	}
-}
 
-void RendererPBRP::reset(GLuint /*width*/, GLuint /*height*/) {
-	mFlagReload = true;
-}
+		void RendererPBRP::draw(ICamera& camera) {
+			if (mSkybox) {
+				mSkybox->draw(camera);
+			}
+			glClear(GL_DEPTH_BUFFER_BIT);
+			for (auto& program : mRenderPasses) {
+				core::Program::useProgram(program.first);
+				for (auto& node : program.second) {
+					node->drawPBRP(camera);
+				}
+			}
+		}
 
-void RendererPBRP::clear() {
-	mFlagReload= true;
+		void RendererPBRP::reset(GLuint /*width*/, GLuint /*height*/) {
+			mFlagReload = true;
+		}
 
-	size_t predictedSize = mRenderPasses.size() + 1;
-	mRenderPasses.clear();
-	mRenderPasses.reserve(predictedSize);
-}
+		void RendererPBRP::clear() {
+			mFlagReload= true;
 
-} /* namespace framework */
+			size_t predictedSize = mRenderPasses.size() + 1;
+			mRenderPasses.clear();
+			mRenderPasses.reserve(predictedSize);
+		}
+
+	} /* namespace framework */
 } /* namespace fillwave */

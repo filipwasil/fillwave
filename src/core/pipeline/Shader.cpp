@@ -17,8 +17,8 @@ using namespace std;
 namespace fillwave {
 namespace core {
 
-Shader::Shader(GLuint shaderType, const std::string& shaderSource)
-		: mType(shaderType), mSource(shaderSource) {
+Shader::Shader(GLuint shaderType, const std::string& shaderSource) :
+		mType(shaderType), mSource(shaderSource) {
 	reload();
 }
 
@@ -60,8 +60,8 @@ void Shader::compile() {
 		std::istringstream lines(mSource);
 		std::string line;
 		int i = 0;
-		while(std::getline(lines, line)) {
-			FLOG_ERROR("[%d] %s",i++,line.c_str());
+		while (std::getline(lines, line)) {
+			FLOG_ERROR("[%d] %s", i++, line.c_str());
 		}
 	}
 }

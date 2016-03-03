@@ -16,13 +16,12 @@ FLOGINIT("Entity", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Entity::Entity(glm::vec3 translation, glm::quat rotation)
-		:
-				Moveable(translation, rotation),
-				mChildrenPropagateEvent(GL_TRUE),
-				mParentRefresh(GL_TRUE),
-				mPSC(GL_TRUE),
-				mPSR(GL_TRUE) {
+Entity::Entity(glm::vec3 translation, glm::quat rotation) :
+			Moveable(translation, rotation),
+			mChildrenPropagateEvent(GL_TRUE),
+			mParentRefresh(GL_TRUE),
+			mPSC(GL_TRUE),
+			mPSR(GL_TRUE) {
 
 }
 
@@ -171,13 +170,13 @@ void Entity::pick(glm::vec3 color) {
 	mFlagPickable = true;
 	mPickColor = color;
 	std::for_each(mChildren.begin(), mChildren.end(),
-			[color](pEntity e) {e->pick(color);});
+		[color](pEntity e) {e->pick(color);});
 }
 
 void Entity::unpick() {
 	mFlagPickable = false;
 	std::for_each(mChildren.begin(), mChildren.end(),
-			[](pEntity e) {e->unpick();});
+		[](pEntity e) {e->unpick();});
 }
 
 GLboolean Entity::isPSC() {
@@ -197,8 +196,7 @@ void Entity::log() const {
 }
 
 inline void Entity::handleEvent( /* xxx refactor */
-		std::vector<Callback*>& callbacks,
-		EventType& event) {
+std::vector<Callback*>& callbacks, EventType& event) {
 	for (auto it : callbacks) {
 		if (it->isEnabled()) {
 			if (it->getEventType() == event.getType()) {
@@ -209,8 +207,7 @@ inline void Entity::handleEvent( /* xxx refactor */
 	eraseFinishedCallbacks(callbacks);
 }
 
-inline void Entity::eraseFinishedCallbacks(
-		std::vector<Callback*>& callbacks) {
+inline void Entity::eraseFinishedCallbacks(std::vector<Callback*>& callbacks) {
 	auto _find_finished_function =
 			[](Callback* m) -> bool {bool finished = m->isFinished(); if (finished) delete m; return finished;};
 	auto _begin = callbacks.begin();

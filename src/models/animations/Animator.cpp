@@ -16,10 +16,9 @@ FLOGINIT("Animator", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-AssimpNode::AssimpNode(aiNode* node)
-		:
-				mTransformation(assimpToGlmMat4(node->mTransformation)),
-				mName(node->mName.C_Str()) {
+AssimpNode::AssimpNode(aiNode* node) :
+			mTransformation(assimpToGlmMat4(node->mTransformation)),
+			mName(node->mName.C_Str()) {
 
 }
 
@@ -38,11 +37,11 @@ void AssimpNode::update(
 		glm::mat4 scale = glm::scale(glm::mat4(1.0), scaling);
 
 		glm::quat rotation = boneManager->getCurrentRotation(timeElapsed_s,
-				channel);
+			channel);
 		glm::mat4 rotate = glm::mat4_cast(rotation);
 
 		glm::vec3 translation = boneManager->getCurrentTranslation(timeElapsed_s,
-				channel);
+			channel);
 		glm::mat4 translate = glm::translate(glm::mat4(1.0), translation);
 
 		transformation = translate * rotate * scale;
@@ -65,8 +64,8 @@ AssimpNode::~AssimpNode() {
 	}
 }
 
-Animator::Animator(const aiScene* scene)
-		: mElements(0), mTimeSinceStartSeconds(0.0) {
+Animator::Animator(const aiScene* scene) :
+		mElements(0), mTimeSinceStartSeconds(0.0) {
 	mAnimationsBufferData.reserve(FILLWAVE_MAX_BONES);
 
 	GLuint numBones = 0;
@@ -80,8 +79,8 @@ Animator::Animator(const aiScene* scene)
 
 	if (numBones > FILLWAVE_MAX_BONES) {
 		FLOG_FATAL(
-				"Crater can handle maximum %d bones. The model contains %d bones.",
-				FILLWAVE_MAX_BONES, numBones);
+			"Crater can handle maximum %d bones. The model contains %d bones.",
+			FILLWAVE_MAX_BONES, numBones);
 	}
 
 	for (GLuint k = 0; k < scene->mNumAnimations; k++) {
@@ -92,7 +91,7 @@ Animator::Animator(const aiScene* scene)
 
 	/* Init node tree after bones are added */
 	mSceneInverseMatrix = glm::inverse(
-			assimpToGlmMat4(scene->mRootNode->mTransformation));
+		assimpToGlmMat4(scene->mRootNode->mTransformation));
 	mRootAnimationNode = initNode(scene->mRootNode);
 }
 
@@ -104,7 +103,7 @@ void Animator::add(pBone bone) {
 	for (auto it = mBones.begin(); it != mBones.end(); ++it) {
 		if ((*it).second == bone) {
 			FLOG_DEBUG("Bone %s already added to manager",
-					(*it).second->getName().c_str());
+				(*it).second->getName().c_str());
 			return;
 		}
 	}
@@ -169,9 +168,9 @@ void Animator::updateTransformations(
 						mAnimations[activeAnimation]->getTicksPerSec() : 25.0f);
 		float TimeInTicks = mTimeSinceStartSeconds * TicksPerSecond;
 		float AnimationTime = fmod(TimeInTicks,
-				(float) mAnimations[activeAnimation]->getDuration());
+			(float) mAnimations[activeAnimation]->getDuration());
 		mRootAnimationNode->update(AnimationTime, glm::mat4(1.0), this,
-				activeAnimation);
+			activeAnimation);
 	}
 }
 
@@ -300,9 +299,7 @@ GLuint Animator::getTranslationStep(
 	return 0;
 }
 
-GLuint Animator::getRotationStep(
-		float timeElapsed_s,
-		Channel* channel) const {
+GLuint Animator::getRotationStep(float timeElapsed_s, Channel* channel) const {
 	assert(channel->mKeysRotation.size() > 0);
 	for (GLuint i = 0; i < channel->mKeysRotation.size() - 1; i++) {
 		if (timeElapsed_s < (float) channel->mKeysRotation[i + 1].mTime) {
@@ -315,9 +312,7 @@ GLuint Animator::getRotationStep(
 	return 0;
 }
 
-GLuint Animator::getScaleStep(
-		float timeElapsed_s,
-		Channel* channel) const {
+GLuint Animator::getScaleStep(float timeElapsed_s, Channel* channel) const {
 	assert(channel->mKeysScaling.size() > 0);
 	for (GLuint i = 0; i < channel->mKeysScaling.size() - 1; i++) {
 		if (timeElapsed_s < (float) channel->mKeysScaling[i + 1].mTime) {

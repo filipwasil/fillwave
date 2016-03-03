@@ -14,13 +14,13 @@ namespace core {
 
 VertexBufferFloat::VertexBufferFloat(
 		std::vector<GLfloat>& values,
-		GLuint dataStoreModification)
-		: TVertexBuffer<GLfloat>(values, dataStoreModification) {
+		GLuint dataStoreModification) :
+		TVertexBuffer<GLfloat>(values, dataStoreModification) {
 
 }
 
 void VertexBufferFloat::log() {
-	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
+	auto d = [] (GLfloat& f) {return static_cast<double>(f);};
 	for (auto it : mDataVertices) {
 		FLOG_INFO("Vertex written: %f", d(it));
 	}

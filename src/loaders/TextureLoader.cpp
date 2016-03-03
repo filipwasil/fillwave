@@ -45,12 +45,12 @@ core::Texture2DFile* TextureLoader::load(
 	uint8_t r = 0, g = 0, b = 0;
 	if (filePath == rootPath) {
 		FLOG_DEBUG("Empty texture %s generation and loading ...",
-				filePath.c_str());
+			filePath.c_str());
 		core::Texture2DFile* file = loadVirtualFileColor(512, 512, 0, 0, 0);
 		return file;
 	} else if (posColor != std::string::npos) {
 		FLOG_DEBUG("Color texture %s generation and loading ...",
-				filePath.c_str());
+			filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posCheckboard);
 		std::vector<std::string> tokens = split(sub, '_');
 		if (tokens.size() >= 3) {
@@ -65,7 +65,7 @@ core::Texture2DFile* TextureLoader::load(
 		return file;
 	} else if (posCheckboard != std::string::npos) {
 		FLOG_DEBUG("Checkboard texture %s generation and loading ...",
-				filePath.c_str());
+			filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posCheckboard);
 		std::vector<std::string> tokens = split(sub, '_');
 		if (tokens.size() >= 3) {
@@ -81,7 +81,7 @@ core::Texture2DFile* TextureLoader::load(
 	} else {
 		GLint w, h, n;
 		GLubyte *content = stbi_load(filePath.c_str(), &w, &h, &n,
-				getBytesPerPixel(format));
+			getBytesPerPixel(format));
 		if (content == NULL) { //xxx NULL, not nullptr because the stb library uses NULL
 			FILE *f = fopen(filePath.c_str(), "rb");
 			if (!f) {
@@ -93,7 +93,7 @@ core::Texture2DFile* TextureLoader::load(
 			return nullptr;
 		} else {
 			FLOG_DEBUG("Image %s size %dx%d pixel %d bytes per pixel",
-					filePath.c_str(), w, h, n);
+				filePath.c_str(), w, h, n);
 			core::Texture2DFile* file = new core::Texture2DFile();
 
 			file->mHeader.mFormat = format;

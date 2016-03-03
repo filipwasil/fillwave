@@ -86,7 +86,7 @@ typedef std::weak_ptr<core::Program> pwProgram;
 static pProgram buildProgram(
 		const std::vector<pShader>& shaders,
 		GLboolean skipLinking = GL_FALSE) {
-	return std::make_shared<core::Program>(shaders, skipLinking);
+	return std::make_shared < core::Program > (shaders, skipLinking);
 }
 } /* fillwave */
 

@@ -21,7 +21,8 @@ namespace framework {
 
 class Button: public IHUDNode, public IPickable {
 public:
-	Button(Engine* engine,
+	Button(
+			Engine* engine,
 			const pTexture2D& texture,
 			glm::vec2 position,
 			glm::vec2 scale);

@@ -26,8 +26,12 @@ namespace core {
 
 class TextureRegion {
 public:
-	TextureRegion(pTexture2D texture, GLfloat u1 = 0, GLfloat v1 = 0, GLfloat u2 =
-			1, GLfloat v2 = 1);
+	TextureRegion(
+			pTexture2D texture,
+			GLfloat u1 = 0,
+			GLfloat v1 = 0,
+			GLfloat u2 = 1,
+			GLfloat v2 = 1);
 
 	virtual ~TextureRegion() = default;
 	pTexture2D getTexture();

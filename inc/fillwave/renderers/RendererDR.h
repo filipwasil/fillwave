@@ -61,9 +61,9 @@ private:
 	LightSystem* mLights;
 	TextureSystem* mTextures;
 
-	pProgram mProgramMain, mProgramMainAnimated, mProgramDirecionalLight, mProgramSpotLight,
-			mProgramPointLight, mProgramDepthless, mProgramAmbient,
-			mProgramAOGeometry, mProgramAOColor;
+	pProgram mProgramMain, mProgramMainAnimated, mProgramDirecionalLight,
+			mProgramSpotLight, mProgramPointLight, mProgramDepthless,
+			mProgramAmbient, mProgramAOGeometry, mProgramAOColor;
 
 	pTexture2DRenderable mAOGeometryBuffer;
 	pTexture2DRenderable mAOColorBuffer;
@@ -71,12 +71,14 @@ private:
 	puMesh mDeferredPointLight;
 
 	GLint mULCDRDepthlesDiffuseTexel, mULCDRDepthlessPositionTexel,
-			mULCDRScreenSize, mULCDRAScreenSize, mULCDRADiffuseAttachment, mULCAmbient;
+			mULCDRScreenSize, mULCDRAScreenSize, mULCDRADiffuseAttachment,
+			mULCAmbient;
 
 	GLint mULCCameraPositionDirectional, mULCAmbientIntensityDirectional,
 			mULCScreenSizeDirectional, mULCShadowUnitDirectional,
-			mULCIsAODirectional, mULCCameraPositionPoint, mULCAmbientIntensityPoint, mULCMVPPoint,
-			mULCScreenSizePoint, mULCShadowUnitPoint, mULCIsAOPoint;
+			mULCIsAODirectional, mULCCameraPositionPoint,
+			mULCAmbientIntensityPoint, mULCMVPPoint, mULCScreenSizePoint,
+			mULCShadowUnitPoint, mULCIsAOPoint;
 
 	/* ULC - Uniform location cache */
 	GLint mULCCameraPositionSpot, mULCAmbientIntensitySpot, mULCScreenSizeSpot,

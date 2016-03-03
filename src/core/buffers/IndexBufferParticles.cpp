@@ -10,8 +10,8 @@
 namespace fillwave {
 namespace core {
 
-IndexBufferParticles::IndexBufferParticles(GLuint elements)
-		: IndexBuffer(elements, GL_STATIC_DRAW) {
+IndexBufferParticles::IndexBufferParticles(GLuint elements) :
+		IndexBuffer(elements, GL_STATIC_DRAW) {
 	for (GLuint i = 0; i < elements; i++) {
 		mDataIndices.push_back(i);
 	}

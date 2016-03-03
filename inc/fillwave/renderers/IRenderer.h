@@ -25,9 +25,8 @@ class Skybox;
 
 class IRenderer {
 public:
-	IRenderer()
-			: mFlagReload(true),
-			  mSkybox(nullptr) {
+	IRenderer() :
+			mFlagReload(true), mSkybox(nullptr) {
 
 	}
 

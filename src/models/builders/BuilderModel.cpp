@@ -19,8 +19,8 @@ namespace framework {
 BuilderModel::BuilderModel(
 		Engine* engine,
 		std::string modelPath,
-		pProgram program)
-		: mEngine(engine), mProgram(program), mShapePath(modelPath) {
+		pProgram program) :
+		mEngine(engine), mProgram(program), mShapePath(modelPath) {
 }
 
 pModel BuilderModel::build() {

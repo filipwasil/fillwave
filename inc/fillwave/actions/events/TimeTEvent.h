@@ -28,8 +28,8 @@ struct TimeEventData {
 
 class TimeEvent: public TEvent<TimeEventData> {
 public:
-	TimeEvent(TimeEventData data)
-			: TEvent(data) {
+	TimeEvent(TimeEventData data) :
+			TEvent(data) {
 
 	}
 	virtual ~TimeEvent() = default;

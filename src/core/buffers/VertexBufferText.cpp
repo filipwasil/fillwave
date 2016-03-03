@@ -16,8 +16,8 @@ namespace core {
 VertexBufferText::VertexBufferText(
 		std::vector<GLfloat> positions,
 		std::vector<GLfloat> textureCoords,
-		GLuint dataStoreModification)
-		: TVertexBuffer(dataStoreModification) {
+		GLuint dataStoreModification) :
+		TVertexBuffer(dataStoreModification) {
 	size_t size = positions.size();
 	if (size == textureCoords.size()) {
 		mDataVertices.reserve(size / 2);
@@ -38,12 +38,12 @@ VertexBufferText::VertexBufferText(
 	mSize = mTotalElements * sizeof(VertexText);
 }
 
-void VertexBufferText::log() const{
-	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
+void VertexBufferText::log() const {
+	auto d = [] (GLfloat& f) {return static_cast<double>(f);};
 	for (auto it : mDataVertices) {
 		for (size_t i = 0; i < mDataVertices.size(); i++) {
 			FLOG_ERROR("Vertex written: %f %f %f %f", d(it.position[0]),
-					d(it.position[1]), d(it.uv[0]), d(it.uv[1]));
+				d(it.position[1]), d(it.uv[0]), d(it.uv[1]));
 		}
 	}
 }

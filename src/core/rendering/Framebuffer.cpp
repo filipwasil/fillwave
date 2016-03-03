@@ -13,8 +13,8 @@ FLOGINIT("Framebuffer", FERROR | FFATAL | FDEBUG)
 namespace fillwave {
 namespace core {
 
-Framebuffer::Framebuffer(GLsizei howMany)
-		: GLObject(howMany) {
+Framebuffer::Framebuffer(GLsizei howMany) :
+		GLObject(howMany) {
 	reload();
 }
 
@@ -52,8 +52,8 @@ void Framebuffer::attachTexture2DDraw(
 	glFramebufferTexture2D(
 	GL_DRAW_FRAMEBUFFER, attachment, target, textureHandle, 0);
 	FLOG_CHECK(
-			"attachTexture2DDraw failed. attachment: 0x%x, target: 0x%x, handle: 0x%x",
-			attachment, target, textureHandle);
+		"attachTexture2DDraw failed. attachment: 0x%x, target: 0x%x, handle: 0x%x",
+		attachment, target, textureHandle);
 }
 
 void Framebuffer::setReadColorAttachment(GLuint attachmentColor) {

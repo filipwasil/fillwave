@@ -13,8 +13,8 @@ FLOGINIT("Light", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Light::Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed)
-		: Moveable(position), mFollowed(followed), mIntensity(intensity) {
+Light::Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed) :
+		Moveable(position), mFollowed(followed), mIntensity(intensity) {
 
 }
 
@@ -22,10 +22,10 @@ void Light::updateFromFollowed() {
 	if (mFollowed) {
 		if (mFollowed->isRefreshExternal()) {
 			mTranslation = glm::vec3(
-					mFollowed->getParentMMC()
-							* glm::vec4(mFollowed->getTranslation(), 1.0));
+				mFollowed->getParentMMC()
+						* glm::vec4(mFollowed->getTranslation(), 1.0));
 			mRotation = glm::normalize(
-					mFollowed->getParentRotation() * mFollowed->getRotation());
+				mFollowed->getParentRotation() * mFollowed->getRotation());
 			mRefresh = GL_TRUE;
 			mFollowed->setRefreshExternal(GL_FALSE);
 		}
@@ -50,9 +50,9 @@ glm::vec4 Light::getIntensity() {
 }
 
 void Light::log() {
-	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
+	auto d = [] (GLfloat& f) {return static_cast<double>(f);};
 	FLOG_INFO("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x),
-			d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
+		d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
 }
 
 } /* framework */

@@ -11,8 +11,8 @@
 namespace fillwave {
 namespace framework {
 
-SceneOrthographic::SceneOrthographic(pCameraOrthographic camera)
-		: mCamera(camera) {
+SceneOrthographic::SceneOrthographic(pCameraOrthographic camera) :
+		mCamera(camera) {
 
 }
 
@@ -49,6 +49,6 @@ pICamera SceneOrthographic::getCamera() {
 
 } /* framework */
 pSceneOrthographic buildSceneOrthographic(pCameraOrthographic camera) {
-	return std::make_shared<framework::SceneOrthographic>(camera);
+	return std::make_shared < framework::SceneOrthographic > (camera);
 }
 } /* fillwave */

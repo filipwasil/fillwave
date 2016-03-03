@@ -22,7 +22,7 @@ class LightManager;
  * \brief Cache Safe Program Based Render Pass IRenderer. Not ready (Rev.4.2.1).
  */
 
-class IRendererCSPBRP : public IRenderer {
+class IRendererCSPBRP: public IRenderer {
 public:
 	IRendererCSPBRP(LightManager* lightManager);
 	virtual ~IRendererCSPBRP() = default;
@@ -33,11 +33,12 @@ public:
 	void clear() override;
 
 private:
-	std::unordered_map<GLuint, std::vector<std::vector<RenderItem>>> mRenderPasses;
+	std::unordered_map<GLuint, std::vector<std::vector<RenderItem>>>mRenderPasses;
 	LightManager* mLightManager;
 };
 
-} /* namespace framework */
+}
+/* namespace framework */
 } /* namespace fillwave */
 
 #endif /* INC_FILLWAVE_RENDERERS_IRENDERERCSPBRP_H_ */

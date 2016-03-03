@@ -65,22 +65,12 @@ public:
 			Animation* animation,
 			const std::string& nodeName) const;
 
-	glm::vec3 getCurrentTranslation(
-			float timeElapsed_s,
-			Channel* channel) const;
-	glm::quat getCurrentRotation(
-			float timeElapsed_s,
-			Channel* channel) const;
-	glm::vec3 getCurrentScale(
-			float timeElapsed_s,
-			Channel* channel) const;
+	glm::vec3 getCurrentTranslation(float timeElapsed_s, Channel* channel) const;
+	glm::quat getCurrentRotation(float timeElapsed_s, Channel* channel) const;
+	glm::vec3 getCurrentScale(float timeElapsed_s, Channel* channel) const;
 
-	GLuint getTranslationStep(
-			float timeElapsed_s,
-			Channel* channel) const;
-	GLuint getRotationStep(
-			float timeElapsed_s,
-			Channel* channel) const;
+	GLuint getTranslationStep(float timeElapsed_s, Channel* channel) const;
+	GLuint getRotationStep(float timeElapsed_s, Channel* channel) const;
 	GLuint getScaleStep(float timeElapsed_s, Channel* channel) const;
 
 	glm::fquat lerp(

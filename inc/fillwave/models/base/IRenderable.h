@@ -20,7 +20,7 @@ class IRenderer;
  * \brief Encapsulates renderable objects. To be used with IRenderer.
  */
 
-class IRenderable : public IDrawable {
+class IRenderable: public IDrawable {
 public:
 	IRenderable() = default;
 	virtual ~IRenderable() = default;

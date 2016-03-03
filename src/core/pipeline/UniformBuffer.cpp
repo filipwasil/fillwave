@@ -18,11 +18,10 @@ UniformBuffer::UniformBuffer(
 		GLuint index,
 		GLuint uniformBlockSize,
 		GLuint bindingPoint,
-		GLuint dataStoreModification)
-		:
-				Buffer(GL_UNIFORM_BUFFER, dataStoreModification, index),
-				mName(name),
-				mBindingPoint(bindingPoint) {
+		GLuint dataStoreModification) :
+			Buffer(GL_UNIFORM_BUFFER, dataStoreModification, index),
+			mName(name),
+			mBindingPoint(bindingPoint) {
 	bind();
 	bindBase();
 	unbind();

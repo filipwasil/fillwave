@@ -38,8 +38,8 @@ public:
 		for (r = 0; r < rings; r++) {
 			for (s = 0; s < sectors; s++) {
 				float const y = sin(-F_PI_2 + F_PI * r * R);
-				float const x = cos(2 * F_PI * s * S) * sin( F_PI * r * R);
-				float const z = sin(2 * F_PI * s * S) * sin( F_PI * r * R);
+				float const x = cos(2 * F_PI * s * S) * sin(F_PI * r * R);
+				float const z = sin(2 * F_PI * s * S) * sin(F_PI * r * R);
 
 				(*vb).mTextureUV[0] = s * S;
 				(*vb).mTextureUV[1] = r * R;

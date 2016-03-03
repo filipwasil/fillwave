@@ -11,14 +11,13 @@
 namespace fillwave {
 namespace framework {
 
-ShaderLoaderFragment::ShaderLoaderFragment(GLuint renderTargets)
-		:
-				mFog(GL_FALSE),
-				mColor(GL_FALSE),
-				mColorBoost(GL_FALSE),
-				mTextureOnly(GL_FALSE),
-				mPointLights(GL_TRUE),
-				mRendertargets(renderTargets) {
+ShaderLoaderFragment::ShaderLoaderFragment(GLuint renderTargets) :
+			mFog(GL_FALSE),
+			mColor(GL_FALSE),
+			mColorBoost(GL_FALSE),
+			mTextureOnly(GL_FALSE),
+			mPointLights(GL_TRUE),
+			mRendertargets(renderTargets) {
 
 }
 
@@ -511,9 +510,9 @@ const std::string ShaderLoaderFragment::getSource() const {
 
 	end += "\n}\n";
 
-	return mGLVersion + mGLFragmentPrecision + inputs + outputs + lightsMaximum + lightStructDefinition
-			+ lightUniforms + lightSamplerUniforms + effectsUniforms + textures
-			+ functions + main + end;
+	return mGLVersion + mGLFragmentPrecision + inputs + outputs + lightsMaximum
+			+ lightStructDefinition + lightUniforms + lightSamplerUniforms
+			+ effectsUniforms + textures + functions + main + end;
 }
 
 } /* framework */

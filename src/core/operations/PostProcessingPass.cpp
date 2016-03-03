@@ -13,8 +13,8 @@ namespace core {
 PostProcessingPass::PostProcessingPass(
 		pProgram program,
 		pTexture2DRenderableDynamic frame,
-		GLfloat lifetime)
-		: Finishable(lifetime), mFrame(frame), mProgram(program) {
+		GLfloat lifetime) :
+		Finishable(lifetime), mFrame(frame), mProgram(program) {
 }
 
 pTexture2DRenderableDynamic PostProcessingPass::getFrame() const {

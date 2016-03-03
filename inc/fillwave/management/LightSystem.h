@@ -24,11 +24,13 @@ namespace framework {
 typedef TManager<pLightSpot, FILLWAVE_MAX_SPOT_LIGHTS, TPolicyShared<LightSpot>,
 		pTexture2DRenderable, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerSpotLights;
 
-typedef TManager<pLightDirectional, FILLWAVE_MAX_DIRECTIONAL_LIGHTS, TPolicyShared<LightDirectional>,
-		pTexture2DRenderable, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerDirectionalLights;
+typedef TManager<pLightDirectional, FILLWAVE_MAX_DIRECTIONAL_LIGHTS,
+		TPolicyShared<LightDirectional>, pTexture2DRenderable, glm::vec3,
+		glm::quat, glm::vec4, pMoveable> ManagerDirectionalLights;
 
-typedef TManager<pLightPoint, FILLWAVE_MAX_POINT_LIGHTS, TPolicyShared<LightPoint>,
-		pTexture3DRenderable, glm::vec3, glm::vec4, pMoveable> ManagerPointLights;
+typedef TManager<pLightPoint, FILLWAVE_MAX_POINT_LIGHTS,
+		TPolicyShared<LightPoint>, pTexture3DRenderable, glm::vec3, glm::vec4,
+		pMoveable> ManagerPointLights;
 
 /**
  * \brief Lights system knows about all light related stuff.

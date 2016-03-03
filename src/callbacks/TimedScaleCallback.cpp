@@ -15,11 +15,10 @@ TimedScaleCallback::TimedScaleCallback(
 		pMoveable moveable,
 		glm::vec3 normalizedScaleVec,
 		GLfloat lifetime,
-		EasingFunction easing)
-		:
-				TimedCallback(lifetime, easing),
-				mEndScale(normalizedScaleVec),
-				mMoveable(moveable) {
+		EasingFunction easing) :
+			TimedCallback(lifetime, easing),
+			mEndScale(normalizedScaleVec),
+			mMoveable(moveable) {
 
 }
 
@@ -27,11 +26,10 @@ TimedScaleCallback::TimedScaleCallback(
 		pMoveable moveable,
 		GLfloat normalizedScale,
 		GLfloat lifetime,
-		EasingFunction easing)
-		:
-				TimedCallback(lifetime, easing),
-				mEndScale(normalizedScale, normalizedScale, normalizedScale),
-				mMoveable(moveable) {
+		EasingFunction easing) :
+			TimedCallback(lifetime, easing),
+			mEndScale(normalizedScale, normalizedScale, normalizedScale),
+			mMoveable(moveable) {
 
 }
 
@@ -41,7 +39,7 @@ void TimedScaleCallback::performTime(TimeEventData& data) {
 	}
 	mTimePassed += data.mTimePassed;
 	mMoveable->scaleTo(
-			mStartScale + ease(getPercentageDone()) * (mEndScale - mStartScale));
+		mStartScale + ease(getPercentageDone()) * (mEndScale - mStartScale));
 }
 
 } /* framework */

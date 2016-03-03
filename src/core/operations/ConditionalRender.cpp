@@ -17,8 +17,8 @@ FLOGINIT("ConditionalRender", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
-ConditionalRender::ConditionalRender(GLenum mode)
-		: mMode(mode) {
+ConditionalRender::ConditionalRender(GLenum mode) :
+		mMode(mode) {
 
 }
 

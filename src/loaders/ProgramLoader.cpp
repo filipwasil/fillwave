@@ -214,8 +214,8 @@ const std::string gGLLightDefinitions = "struct Attenuation {\n"
 		"   vec3 direction;\n"
 		"};\n";
 
-const std::string fsEmpty = gGLVersion + gGLFragmentPrecision +
-		"void main() { \n"
+const std::string fsEmpty = gGLVersion + gGLFragmentPrecision
+		+ "void main() { \n"
 				"}             \n";
 
 const std::string vsShadow = gGLVersion + gGLVSAttributesPosition
@@ -260,7 +260,8 @@ const std::string fsShadowColorCoded = gGLVersion + gGLFragmentPrecision
 				"uniform vec3 uLightPosition;\n" + gGLColorOutDefinition
 		+ "void main() {\n"
 				"   float color = length(vWorldSpacePosition - uLightPosition);\n"
-				"   " + gGLColorOutAssingment + " = vec4(color, color, color, 1.0);\n"
+				"   " + gGLColorOutAssingment
+		+ " = vec4(color, color, color, 1.0);\n"
 				"}\n";
 /* xxx double check this case "out float fColor;\n" */
 
@@ -277,7 +278,8 @@ const std::string fsDebugger =
 						"void main () {\n"
 						"  vec4 depth = texture (uTextureUnit, vTextureCoordinate);\n"
 						"  float depthLin = linearizeDepth(depth.z);\n"
-						"  " + gGLColorOutAssingment + " = vec4(depthLin, depthLin, depthLin,1.0);\n"
+						"  " + gGLColorOutAssingment
+				+ " = vec4(depthLin, depthLin, depthLin,1.0);\n"
 						"}\n";
 
 const std::string vsDebugger = gGLVersion + gGLVertexPrecision
@@ -291,7 +293,8 @@ const std::string fsSkybox = gGLVersion + gGLFragmentPrecision
 		+ "in vec3 vTextureCoordinate;\n"
 				"uniform samplerCube uTextureUnit;\n" + gGLColorOutDefinition
 		+ "void main() {\n"
-				"   " + gGLColorOutAssingment + " = texture(uTextureUnit, vTextureCoordinate);\n"
+				"   " + gGLColorOutAssingment
+		+ " = texture(uTextureUnit, vTextureCoordinate);\n"
 				"}\n";
 
 const std::string fsSkyboxDR = gGLVersion + gGLFragmentPrecision +
@@ -343,25 +346,21 @@ const std::string fsDRAmbientG = gGLVersion + gGLFragmentPrecision +
 		"   fSpecularTexel = vec3(0.0);\n"
 		"}\n";
 
-const std::string fsHUD =
-		gGLVersion + gGLFragmentPrecision
-		+
-		"in vec2 vTextureCoordinate;\n"
-		"in vec2 vScale;\n"
-		"uniform sampler2D uDiffuseTextureUnit;\n"
-		+ gGLColorOutDefinition
-		+
-		"void main () {\n"
-		      + gGLColorOutAssingment + " = texture (uDiffuseTextureUnit, vTextureCoordinate);\n"
+const std::string fsHUD = gGLVersion + gGLFragmentPrecision
+		+ "in vec2 vTextureCoordinate;\n"
+				"in vec2 vScale;\n"
+				"uniform sampler2D uDiffuseTextureUnit;\n" + gGLColorOutDefinition
+		+ "void main () {\n" + gGLColorOutAssingment
+		+ " = texture (uDiffuseTextureUnit, vTextureCoordinate);\n"
 				"}\n"
 				"\n";
 
 const std::string vsHUD = gGLVersion + gGLVertexPrecision
 		+ "uniform vec2 uPosition;\n"
-		"uniform vec2 uScale;\n"
-		"out vec2 vPosition;\n"
-		"out vec2 vTextureCoordinate;\n"
-		"out vec2 vScale;\n"
+				"uniform vec2 uScale;\n"
+				"out vec2 vPosition;\n"
+				"out vec2 vTextureCoordinate;\n"
+				"out vec2 vScale;\n"
 				"void main() {\n"
 				"   vec4 vertexPosition;\n"
 				"   switch(gl_VertexID) {\n"
@@ -389,7 +388,7 @@ const std::string fsText =
 		gGLVersion + gGLFragmentPrecision
 				+ //xxx low precision
 				"in vec2 vTextureCoordinate;\n"
-				"uniform sampler2D uTextureUnit;\n"
+						"uniform sampler2D uTextureUnit;\n"
 						"uniform vec4 uColour;\n" + gGLColorOutDefinition
 				+ "void main (){\n"
 						"  float pixelSize = 0.001;\n"
@@ -496,20 +495,23 @@ const std::string vsParticlesGPU =
 						"  }                                                                  \n"
 						"}";
 
-const std::string fsParticlesGPU = gGLVersion + gGLFragmentPrecision + //xxx low precision
+const std::string fsParticlesGPU = gGLVersion + gGLFragmentPrecision
+		+ //xxx low precision
 		"uniform vec4 uColor;                                  \n"
 				"uniform sampler2D uTextureUnit;                       \n"
 				"uniform float uAlphaCutOff;                           \n"
-		 + gGLColorOutDefinition +
-				"void main() {                                         \n"
+		+ gGLColorOutDefinition
+		+ "void main() {                                         \n"
 				"   vec4 texel = texture2D( uTextureUnit, gl_PointCoord ); \n"
-				"   " + gGLColorOutAssingment + " = texel * uColor;                        \n"
+				"   " + gGLColorOutAssingment
+		+ " = texel * uColor;                        \n"
 				"   if(length(texel * uColor) < uAlphaCutOff) {                \n"
 				"      discard;                                        \n"
 				"   }                                                  \n"
 				"}                                                     \n";
 
-const std::string fsParticlesCPU = gGLVersion + gGLFragmentPrecision + //xxx low precision
+const std::string fsParticlesCPU = gGLVersion + gGLFragmentPrecision
+		+ //xxx low precision
 		"in float vOpacity;                                           \n"
 				"" + gGLColorOutDefinition + ""
 				"uniform sampler2D uTextureUnit;                              \n"
@@ -518,7 +520,8 @@ const std::string fsParticlesCPU = gGLVersion + gGLFragmentPrecision + //xxx low
 				"void main () {                                               \n"
 				"   vec4 texel = texture (uTextureUnit, gl_PointCoord);       \n"
 				"   vec4 color = texel * uColor;\n"
-				"   " + gGLColorOutAssingment + " = vec4 (color.xyz, color.a * vOpacity);            \n"
+				"   " + gGLColorOutAssingment
+		+ " = vec4 (color.xyz, color.a * vOpacity);            \n"
 				"   if(color.a < uAlphaCutOff ) { \n"
 				"      discard;\n"
 				"   }\n"
@@ -742,11 +745,12 @@ const std::string vsOcclusionOptimized = gGLVersion + gGLVSAttributesPosition
 const std::string vsOcclusion = gGLVersion + gGLVSAttributes
 		+ vsSimpleVertexPass;
 
-const std::string fsAOGeometry = gGLVersion + gGLFragmentPrecision + "in vec3 vMVPosition;\n"
-		"layout (location = 0) " + gGLVaryingOut + " vec3 fMVPosition;\n"
-		"void main() {\n"
-		"   fMVPosition = vMVPosition;\n"
-		"}\n";
+const std::string fsAOGeometry = gGLVersion + gGLFragmentPrecision
+		+ "in vec3 vMVPosition;\n"
+				"layout (location = 0) " + gGLVaryingOut + " vec3 fMVPosition;\n"
+				"void main() {\n"
+				"   fMVPosition = vMVPosition;\n"
+				"}\n";
 
 const std::string vsAOGeometry = gGLVersion + gGLVSAttributesAO
 		+ "uniform mat4 uMVP;\n"
@@ -1125,8 +1129,8 @@ std::string fsDRLightSpot =
 				"   fColor = vec4(Color, 1.0) * CalcSpotLight(WorldPos, Normal, specularTexel);\n"
 				"}\n";
 
-std::string fsDRDepthless = gGLVersion + gGLFragmentPrecision +
-		+ "uniform sampler2D uDiffuseTexelAttachment;\n"
+std::string fsDRDepthless = gGLVersion + gGLFragmentPrecision
+		+ +"uniform sampler2D uDiffuseTexelAttachment;\n"
 				"uniform sampler2D uWorldPositionAttachment;\n"
 				"uniform vec2 uScreenSize;\n"
 				"vec2 CalcTexCoord() {\n"
@@ -1148,8 +1152,8 @@ std::string fsDRDepthless = gGLVersion + gGLFragmentPrecision +
 				"   }\n"
 				"}\n";
 
-std::string fsDRAmbient = gGLVersion + gGLFragmentPrecision +
-		+ "uniform sampler2D uDiffuseTexelAttachment;\n"
+std::string fsDRAmbient = gGLVersion + gGLFragmentPrecision
+		+ +"uniform sampler2D uDiffuseTexelAttachment;\n"
 				"uniform vec2 uScreenSize;\n"
 				"vec2 CalcTexCoord() {\n"
 				"    return gl_FragCoord.xy / uScreenSize;\n"
@@ -1172,7 +1176,7 @@ const std::string vsAOColor = gGLVersion + gGLVSAttributesPosition
 				"}\n";
 
 const std::string fsAOColor =
-		gGLVersion  + gGLFragmentPrecision + "in vec2 vTextureCoordinate;\n"
+		gGLVersion + gGLFragmentPrecision + "in vec2 vTextureCoordinate;\n"
 				"uniform sampler2D uPositionMap;\n"
 				"uniform float uSampleRadius;\n"
 				"uniform mat4 uP;\n" + gGLColorOutDefinition
@@ -1282,117 +1286,113 @@ const std::string fsStartup =
 
 pProgram ProgramLoader::getShadow() {
 	return mEngine->storeProgram("shadow_mapping",
-			mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
-					+ mEngine->storeShaderVertex("fillwave_internal_shadowing.vert",
-							vsShadow));
+		mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
+				+ mEngine->storeShaderVertex("fillwave_internal_shadowing.vert",
+					vsShadow));
 }
 
 pProgram ProgramLoader::getShadowColorCoded() {
 	return mEngine->storeProgram("shadow_mapping_color",
-			mEngine->storeShaderFragment("fillwave_internal_shadowing_color.frag",
-					fsShadowColorCoded)
-					+ mEngine->storeShaderVertex(
-							"fillwave_internal_shadowing_color.vert",
-							vsShadowColorCoded));
+		mEngine->storeShaderFragment("fillwave_internal_shadowing_color.frag",
+			fsShadowColorCoded)
+				+ mEngine->storeShaderVertex(
+					"fillwave_internal_shadowing_color.vert", vsShadowColorCoded));
 }
 
 pProgram ProgramLoader::getShadowWithAnimation() {
 	return mEngine->storeProgram("shadow_mapping_animated",
-			mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
-					+ mEngine->storeShaderVertex("fillwave_internal_shadowing.vert",
-							vsShadowAnimated));
+		mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
+				+ mEngine->storeShaderVertex("fillwave_internal_shadowing.vert",
+					vsShadowAnimated));
 }
 
 pProgram ProgramLoader::getShadowColorCodedWithAnimation() {
 	return mEngine->storeProgram("shadow_mapping_animated_color",
-			mEngine->storeShaderFragment("fillwave_internal_shadowing.frag",
-					fsShadowColorCoded)
-					+ mEngine->storeShaderVertex("fillwave_internal_shadowing.vert",
-							vsShadowColorCodedAnimated));
+		mEngine->storeShaderFragment("fillwave_internal_shadowing.frag",
+			fsShadowColorCoded)
+				+ mEngine->storeShaderVertex("fillwave_internal_shadowing.vert",
+					vsShadowColorCodedAnimated));
 }
 
 pProgram ProgramLoader::getDebugger() {
 	return mEngine->storeProgram("debugger",
-			mEngine->storeShaderFragment("fillwave_ifillwave__debugger.frag",
-					fsDebugger)
-					+ mEngine->storeShaderVertex("fillwave_internal_debugger.vert",
-							vsDebugger));
+		mEngine->storeShaderFragment("fillwave_ifillwave__debugger.frag",
+			fsDebugger)
+				+ mEngine->storeShaderVertex("fillwave_internal_debugger.vert",
+					vsDebugger));
 }
 
 pProgram ProgramLoader::getSkybox() {
 	return mEngine->storeProgram("internal_skybox",
-			mEngine->storeShaderFragment("fillwave_internal_skybox.frag", fsSkybox)
-					+ mEngine->storeShaderVertex("fillwave_internal_skybox.vert",
-							vsSkybox));
+		mEngine->storeShaderFragment("fillwave_internal_skybox.frag", fsSkybox)
+				+ mEngine->storeShaderVertex("fillwave_internal_skybox.vert",
+					vsSkybox));
 }
 
 pProgram ProgramLoader::getSkyboxDR() {
 	return mEngine->storeProgram("internal_skybox_dr",
-			mEngine->storeShaderFragment("fillwave_internal_skybox_dr.frag",
-					fsSkyboxDR)
-					+ mEngine->storeShaderVertex("fillwave_internal_skybox.vert",
-							vsSkybox));
+		mEngine->storeShaderFragment("fillwave_internal_skybox_dr.frag",
+			fsSkyboxDR)
+				+ mEngine->storeShaderVertex("fillwave_internal_skybox.vert",
+					vsSkybox));
 }
 
 pProgram ProgramLoader::getText() {
 	return mEngine->storeProgram("text",
-			mEngine->storeShaderFragment("fillwave_internal_text.frag", fsText)
-					+ mEngine->storeShaderVertex("fillwave_internal_text.vert",
-							vsText));
+		mEngine->storeShaderFragment("fillwave_internal_text.frag", fsText)
+				+ mEngine->storeShaderVertex("fillwave_internal_text.vert", vsText));
 }
 
 pProgram ProgramLoader::getTextBold() {
 	return mEngine->storeProgram("text_bold",
-			mEngine->storeShaderFragment("fillwave_internal_text_bold.frag",
-					fsTextBold)
-					+ mEngine->storeShaderVertex("fillwave_internal_text.vert",
-							vsText));
+		mEngine->storeShaderFragment("fillwave_internal_text_bold.frag",
+			fsTextBold)
+				+ mEngine->storeShaderVertex("fillwave_internal_text.vert", vsText));
 }
 
 pProgram ProgramLoader::getParticleGPUEmiter() {
 	return mEngine->storeProgram("particles_gpu_emiter",
-			mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
-					+ mEngine->storeShaderVertex("fillwave_particles_gpu_emiter.vert",
-							vsGPUEmiter),
-			GL_TRUE);
+		mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
+				+ mEngine->storeShaderVertex("fillwave_particles_gpu_emiter.vert",
+					vsGPUEmiter),
+		GL_TRUE);
 }
 
 pProgram ProgramLoader::getParticleGPU() {
 	return mEngine->storeProgram("particles_gpu_program",
-			mEngine->storeShaderFragment("fillwave_particles_gpu.frag",
-					fsParticlesGPU)
-					+ mEngine->storeShaderVertex("fillwave_particles_gpu.vert",
-							vsParticlesGPU));
+		mEngine->storeShaderFragment("fillwave_particles_gpu.frag",
+			fsParticlesGPU)
+				+ mEngine->storeShaderVertex("fillwave_particles_gpu.vert",
+					vsParticlesGPU));
 }
 
 pProgram ProgramLoader::getParticleCPU() {
 	return mEngine->storeProgram("particles_cpu_program",
-			mEngine->storeShaderFragment("fillwave_particles_cpu.frag",
-					fsParticlesCPU)
-					+ mEngine->storeShaderVertex("fillwave_particles_cpu.vert",
-							vsParticlesCPU));
+		mEngine->storeShaderFragment("fillwave_particles_cpu.frag",
+			fsParticlesCPU)
+				+ mEngine->storeShaderVertex("fillwave_particles_cpu.vert",
+					vsParticlesCPU));
 }
 
 pProgram ProgramLoader::getQuad() {
 	return mEngine->storeProgram("quad",
-			mEngine->storeShaderFragment("fillwave_quad.frag", fsQuad)
-					+ mEngine->storeShaderVertex("fillwave_quad.vert", vsQuad));
+		mEngine->storeShaderFragment("fillwave_quad.frag", fsQuad)
+				+ mEngine->storeShaderVertex("fillwave_quad.vert", vsQuad));
 }
 
 pProgram ProgramLoader::getQuadCustomFragmentShader(
 		const std::string& shaderPath) {
 	return mEngine->storeProgram(shaderPath,
-			mEngine->storeShaderFragment(shaderPath)
-					+ mEngine->storeShaderVertex("fillwave_quad_custom.vert", vsQuad));
+		mEngine->storeShaderFragment(shaderPath)
+				+ mEngine->storeShaderVertex("fillwave_quad_custom.vert", vsQuad));
 }
 
 pProgram ProgramLoader::getHUD() {
 	pProgram p = mEngine->storeProgram("hud",
-			mEngine->storeShaderFragment("fillwave_hud.frag", fsHUD)
-					+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
+		mEngine->storeShaderFragment("fillwave_hud.frag", fsHUD)
+				+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
 
-	GLint location = glGetUniformLocation(p->getHandle(),
-			"uDiffuseTextureUnit");
+	GLint location = glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit");
 
 	if (location != -1) {
 		p->use();
@@ -1403,14 +1403,13 @@ pProgram ProgramLoader::getHUD() {
 	return p;
 }
 
-pProgram ProgramLoader::getHUDCustomFragmentShader (
+pProgram ProgramLoader::getHUDCustomFragmentShader(
 		const std::string& shaderPath) {
 	pProgram p = mEngine->storeProgram(shaderPath,
-			mEngine->storeShaderFragment(shaderPath)
-					+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
+		mEngine->storeShaderFragment(shaderPath)
+				+ mEngine->storeShaderVertex("fillwave_hud.vert", vsHUD));
 
-	GLint location = glGetUniformLocation(p->getHandle(),
-			"uDiffuseTextureUnit");
+	GLint location = glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit");
 
 	if (location != -1) {
 		p->use();
@@ -1423,88 +1422,87 @@ pProgram ProgramLoader::getHUDCustomFragmentShader (
 
 pProgram ProgramLoader::getQuadCustomFragmentShaderStartup() {
 	return mEngine->storeProgram("startup",
-			mEngine->storeShaderFragment("fillwave_quad_startup.frag", fsStartup)
-					+ mEngine->storeShaderVertex("fillwave_quad_custom.vert", vsQuad));
+		mEngine->storeShaderFragment("fillwave_quad_startup.frag", fsStartup)
+				+ mEngine->storeShaderVertex("fillwave_quad_custom.vert", vsQuad));
 }
 
 pProgram ProgramLoader::getCursor() {
 	return mEngine->storeProgram("cursor",
-			mEngine->storeShaderFragment("fillwave_cursor.frag", fsCursor)
-					+ mEngine->storeShaderVertex("fillwave_cursor.vert", vsCursor));
+		mEngine->storeShaderFragment("fillwave_cursor.frag", fsCursor)
+				+ mEngine->storeShaderVertex("fillwave_cursor.vert", vsCursor));
 }
 
 pProgram ProgramLoader::getAmbientOcclusionGeometry() {
 	return mEngine->storeProgram("ambient_occlusion_geometry",
-			mEngine->storeShaderFragment("fillwave_ambient_occlusion_geometry.frag",
-					fsAOGeometry)
-					+ mEngine->storeShaderVertex(
-							"fillwave_ambient_occlusion_geometry.vert", vsAOGeometry));
+		mEngine->storeShaderFragment("fillwave_ambient_occlusion_geometry.frag",
+			fsAOGeometry)
+				+ mEngine->storeShaderVertex(
+					"fillwave_ambient_occlusion_geometry.vert", vsAOGeometry));
 }
 
 pProgram ProgramLoader::getDRAmbient() {
 	return mEngine->storeProgram("ambient_dr",
-			mEngine->storeShaderFragment("fillwave_ambient_dr.frag", fsDRAmbient)
-					+ mEngine->storeShaderVertex("fillwave_dr_shader_quad.vert",
-							vsDRShaderQuad));
+		mEngine->storeShaderFragment("fillwave_ambient_dr.frag", fsDRAmbient)
+				+ mEngine->storeShaderVertex("fillwave_dr_shader_quad.vert",
+					vsDRShaderQuad));
 }
 
 pProgram ProgramLoader::getOcclusionQuery() {
 	return mEngine->storeProgram("occlusion",
-			mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
-					+ mEngine->storeShaderVertex("fillwave_occlusion.vert",
-							vsOcclusion));
+		mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
+				+ mEngine->storeShaderVertex("fillwave_occlusion.vert",
+					vsOcclusion));
 }
 
 pProgram ProgramLoader::getOcclusionOptimizedQuery() {
 	return mEngine->storeProgram("occlusion_optimized",
-			mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
-					+ mEngine->storeShaderVertex("fillwave_occlusion.vert",
-							vsOcclusionOptimized));
+		mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
+				+ mEngine->storeShaderVertex("fillwave_occlusion.vert",
+					vsOcclusionOptimized));
 }
 
 pProgram ProgramLoader::getOcclusionPureQuery() {
 	return mEngine->storeProgram("occlusion_pure",
-			mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
-					+ mEngine->storeShaderVertex("fillwave_occlusion_pure.vert",
-							vsCube));
+		mEngine->storeShaderFragment("fillwave_empty.frag", fsEmpty)
+				+ mEngine->storeShaderVertex("fillwave_occlusion_pure.vert",
+					vsCube));
 }
 
 pProgram ProgramLoader::getDRDepthless() {
 	return mEngine->storeProgram("dr_depthless",
-			mEngine->storeShaderFragment("fillwave_dr_depthless.frag",
-					fsDRDepthless)
-					+ mEngine->storeShaderVertex("fillwave_dr_shader_quad.vert",
-							vsDRShaderQuad));
+		mEngine->storeShaderFragment("fillwave_dr_depthless.frag", fsDRDepthless)
+				+ mEngine->storeShaderVertex("fillwave_dr_shader_quad.vert",
+					vsDRShaderQuad));
 }
 
 pProgram ProgramLoader::getDRDirectionalLights() {
 	return mEngine->storeProgram("dr_directional",
-			mEngine->storeShaderFragment("fillwave_dr_directional.frag",
-					fsDRLightDirectional)
-					+ mEngine->storeShaderVertex("fillwave_dr_shader_quad.vert",
-							vsDRShaderQuad));
+		mEngine->storeShaderFragment("fillwave_dr_directional.frag",
+			fsDRLightDirectional)
+				+ mEngine->storeShaderVertex("fillwave_dr_shader_quad.vert",
+					vsDRShaderQuad));
 }
 
 pProgram ProgramLoader::getDRSpotLights() {
 	return mEngine->storeProgram("ds_spot",
-			mEngine->storeShaderFragment("fillwave_ds_spot.frag", fsDRLightSpot)
-					+ mEngine->storeShaderVertex("fillwave_dr_shader_quad.vert",
-							vsDRShaderQuad));
+		mEngine->storeShaderFragment("fillwave_ds_spot.frag", fsDRLightSpot)
+				+ mEngine->storeShaderVertex("fillwave_dr_shader_quad.vert",
+					vsDRShaderQuad));
 }
 
 pProgram ProgramLoader::getDRPointLights() {
 	return mEngine->storeProgram("ds_point",
-			mEngine->storeShaderFragment("fillwave_ds_point.frag", fsDRLightPoint)
-					+ mEngine->storeShaderVertex("fillwave_ds_point.vert",
-							vsDRLightPoint));
+		mEngine->storeShaderFragment("fillwave_ds_point.frag", fsDRLightPoint)
+				+ mEngine->storeShaderVertex("fillwave_ds_point.vert",
+					vsDRLightPoint));
 }
 
 pProgram ProgramLoader::getAmbientOcclusionColor() {
 	pProgram p = mEngine->storeProgram("ambient_occlusion_color",
-			mEngine->storeShaderFragment("fillwave_ambient_occlusion_color.frag",
-					fsAOColor)
-					+ mEngine->storeShaderVertex(
-							"fillwave_ambient_occlusion_color.vert", vsAOColor));
+		mEngine->storeShaderFragment("fillwave_ambient_occlusion_color.frag",
+			fsAOColor)
+				+ mEngine->storeShaderVertex(
+					"fillwave_ambient_occlusion_color.vert", vsAOColor));
 
 //   p->log();
 //   abort();
@@ -1540,9 +1538,9 @@ pProgram ProgramLoader::getDefaultDR() {
 	ShaderLoaderVertex loaderVertex;
 
 	pProgram p = mEngine->storeProgram("dr_g",
-			mEngine->storeShaderFragment("fillwave_dr_g.frag", fsDR)
-					+ mEngine->storeShaderVertex("fillwave_default.vert",
-							loaderVertex.getSource()));
+		mEngine->storeShaderFragment("fillwave_dr_g.frag", fsDR)
+				+ mEngine->storeShaderVertex("fillwave_default.vert",
+					loaderVertex.getSource()));
 
 	initDefaultUniforms(p.get());
 
@@ -1554,10 +1552,10 @@ pProgram ProgramLoader::getDefaultFR() {
 	ShaderLoaderVertex loaderVertex;
 
 	pProgram p = mEngine->storeProgram("default",
-			mEngine->storeShaderFragment("fillwave_default.frag",
-					loaderFragment.getSource())
-					+ mEngine->storeShaderVertex("fillwave_default.vert",
-							loaderVertex.getSource()));
+		mEngine->storeShaderFragment("fillwave_default.frag",
+			loaderFragment.getSource())
+				+ mEngine->storeShaderVertex("fillwave_default.vert",
+					loaderVertex.getSource()));
 
 	initDefaultUniforms(p.get());
 
@@ -1573,9 +1571,9 @@ pProgram ProgramLoader::getDefaultBonesDR() {
 	ShaderLoaderVertex loaderVertex(true);
 
 	pProgram p = mEngine->storeProgram("default_animated",
-			mEngine->storeShaderFragment("fillwave_default_animated.frag", fsDR)
-					+ mEngine->storeShaderVertex("fillwave_default_animated.vert",
-							loaderVertex.getSource()));
+		mEngine->storeShaderFragment("fillwave_default_animated.frag", fsDR)
+				+ mEngine->storeShaderVertex("fillwave_default_animated.vert",
+					loaderVertex.getSource()));
 
 	initDefaultUniforms(p.get());
 
@@ -1588,10 +1586,10 @@ pProgram ProgramLoader::getDefaultBonesFR() {
 	ShaderLoaderVertex loaderVertex(true);
 
 	pProgram p = mEngine->storeProgram("default_animated_dr",
-			mEngine->storeShaderFragment("fillwave_default.frag",
-					loaderFragment.getSource())
-					+ mEngine->storeShaderVertex("fillwave_default_animated.vert",
-							loaderVertex.getSource()));
+		mEngine->storeShaderFragment("fillwave_default.frag",
+			loaderFragment.getSource())
+				+ mEngine->storeShaderVertex("fillwave_default_animated.vert",
+					loaderVertex.getSource()));
 
 	initDefaultUniforms(p.get());
 
@@ -1606,23 +1604,23 @@ void ProgramLoader::initDefaultUniforms(core::Program* program) {
 	GLint location[10];
 
 	location[0] = glGetUniformLocation(program->getHandle(),
-			"uLightAmbientIntensity");
+		"uLightAmbientIntensity");
 	location[1] = glGetUniformLocation(program->getHandle(),
-			"uNumberOfPointLights");
+		"uNumberOfPointLights");
 	location[2] = glGetUniformLocation(program->getHandle(),
-			"uNumberOfSpotLights");
+		"uNumberOfSpotLights");
 	location[3] = glGetUniformLocation(program->getHandle(), "uFogEffect");
 	location[4] = glGetUniformLocation(program->getHandle(), "uPainterEffect");
 	location[5] = glGetUniformLocation(program->getHandle(),
-			"uTextureOnlyEffect");
+		"uTextureOnlyEffect");
 	location[6] = glGetUniformLocation(program->getHandle(),
-			"uBoostColorEffect");
+		"uBoostColorEffect");
 	location[7] = glGetUniformLocation(program->getHandle(),
-			"uDiffuseTextureUnit");
+		"uDiffuseTextureUnit");
 	location[8] = glGetUniformLocation(program->getHandle(),
-			"uNormalTextureUnit");
+		"uNormalTextureUnit");
 	location[9] = glGetUniformLocation(program->getHandle(),
-			"uSpecularTextureUnit");
+		"uSpecularTextureUnit");
 
 	program->use();
 
@@ -1653,8 +1651,8 @@ void ProgramLoader::initDefaultUniforms(core::Program* program) {
 	glGetError();
 }
 
-ProgramLoader::ProgramLoader(Engine* engine)
-		: mEngine(engine) {
+ProgramLoader::ProgramLoader(Engine* engine) :
+		mEngine(engine) {
 
 }
 

@@ -15,13 +15,13 @@ namespace framework {
  * \brief Base for all animation keys.
  */
 
-template<class T>
+template <class T>
 class Key {
 public:
 	float mTime;
 	T mValue;
-	Key(float timeStamp, T value)
-			: mTime(timeStamp), mValue(value) {
+	Key(float timeStamp, T value) :
+			mTime(timeStamp), mValue(value) {
 	}
 	virtual ~Key() = default;
 };

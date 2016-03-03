@@ -21,14 +21,14 @@ Texture3DRenderable::Texture3DRenderable(
 		Texture2DFile* filePosZ,
 		Texture2DFile* fileNegZ,
 		pTexture2DRenderable texture,
-		ParameterList& parameters)
-		: Texture3D(filePosX, //right
-				fileNegX, //left
-				filePosY, //ceil
-				fileNegY, //floor
-				filePosZ, //front
-				fileNegZ, //back
-				parameters), mShadowTexture(texture) {
+		ParameterList& parameters) :
+		Texture3D(filePosX, //right
+			fileNegX, //left
+			filePosY, //ceil
+			fileNegY, //floor
+			filePosZ, //front
+			fileNegZ, //back
+			parameters), mShadowTexture(texture) {
 
 }
 
