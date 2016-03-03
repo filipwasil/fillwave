@@ -27,10 +27,10 @@ public:
 	IndexBufferBasic(const fMesh* shape, GLuint dataStoreModification =
 	GL_STATIC_DRAW);
 
-	template<class T>
+	template <class T>
 	IndexBufferBasic(framework::Shape<T>& shape, GLuint dataStoreModification =
-	GL_STATIC_DRAW)
-			: IndexBuffer(shape.getIndicesSize(), dataStoreModification) {
+	GL_STATIC_DRAW) :
+			IndexBuffer(shape.getIndicesSize(), dataStoreModification) {
 		mDataIndices = shape.getIndices();
 		mData = mDataIndices.data();
 	}

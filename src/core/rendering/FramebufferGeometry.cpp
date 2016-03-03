@@ -22,16 +22,16 @@ FramebufferGeometry::FramebufferGeometry(
 		GLuint width,
 		GLuint height,
 		GLuint colorBuffers,
-		GLuint depthBuffers)
-		:
-				Framebuffer(1),
-				mColorBufferSize(colorBuffers),
-				mSummaryBufferSize(1),
-				mDepthStencilBufferSize(depthBuffers),
-				mSummaryBuffer(GL_COLOR_ATTACHMENT0 + colorBuffers),
-				mNone(GL_NONE) {
+		GLuint depthBuffers) :
+			Framebuffer(1),
+			mColorBufferSize(colorBuffers),
+			mSummaryBufferSize(1),
+			mDepthStencilBufferSize(depthBuffers),
+			mSummaryBuffer(GL_COLOR_ATTACHMENT0 + colorBuffers),
+			mNone(GL_NONE) {
 
-	mDeferredColors = textures->getDeferredColor(width, height, mColorBufferSize);
+	mDeferredColors = textures->getDeferredColor(width, height,
+		mColorBufferSize);
 	mStencilDepth = textures->getDeferredStencilDepth(width, height);
 	mSummary = textures->getDeferredColorScreen(width, height);
 

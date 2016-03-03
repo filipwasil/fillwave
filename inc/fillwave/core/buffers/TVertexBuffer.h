@@ -23,7 +23,7 @@ class Attribute;
  * \brief Template for all vertex buffers.
  */
 
-template<class T>
+template <class T>
 class TVertexBuffer: public Buffer {
 public:
 	/* Notice
@@ -35,13 +35,13 @@ public:
 	 *  mSize = mTotalElements*sizeof(<T>);
 	 */
 
-	TVertexBuffer(GLuint dataStoreModification = GL_STATIC_DRAW)
-			: Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
+	TVertexBuffer(GLuint dataStoreModification = GL_STATIC_DRAW) :
+			Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 	}
 
 	TVertexBuffer(std::vector<T>& vertices, GLuint dataStoreModification =
-	GL_STATIC_DRAW)
-			: Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
+	GL_STATIC_DRAW) :
+			Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 		mDataVertices = vertices;
 		mTotalElements = mDataVertices.size();
 		mData = mDataVertices.data();
@@ -49,8 +49,8 @@ public:
 	}
 
 	TVertexBuffer(framework::Shape<T>& shape, GLuint dataStoreModification =
-	GL_STATIC_DRAW)
-			: Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
+	GL_STATIC_DRAW) :
+			Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 		mDataVertices = shape.getVertices();
 		mSize = mTotalElements * sizeof(T);
 		mData = mDataVertices.data();
@@ -73,7 +73,7 @@ public:
 			GLenum type = GL_ZERO;
 			char name[200];
 			glGetActiveAttrib(programHandle, GLuint(i), sizeof(name) - 1,
-					&name_len, &num, &type, name);
+				&name_len, &num, &type, name);
 			name[name_len] = 0;
 			GLuint location = glGetAttribLocation(programHandle, name);
 			GLuint size = 0;
@@ -141,19 +141,19 @@ public:
 	void attributesBind(pProgram program) {
 		GLuint programHandle = program->getHandle();
 		std::for_each(mAttributes.begin(), mAttributes.end(),
-				[programHandle](Attribute& a) {a.bindLocation(programHandle);});
+			[programHandle](Attribute& a) {a.bindLocation(programHandle);});
 	}
 
 	void attributesSetForVAO() {
 		std::for_each(mAttributes.begin(), mAttributes.end(),
-				[](Attribute& a) {a.arrayEnable();});
+			[](Attribute& a) {a.arrayEnable();});
 		std::for_each(mAttributes.begin(), mAttributes.end(),
-				[](Attribute& a) {a.arraySet();});
+			[](Attribute& a) {a.arraySet();});
 	}
 
 	void attributesEnable() {
 		std::for_each(mAttributes.begin(), mAttributes.end(),
-				[](Attribute& a) {a.arrayEnable();});
+			[](Attribute& a) {a.arrayEnable();});
 	}
 
 	void reload() {
@@ -162,7 +162,7 @@ public:
 
 	void attributesSetPointer() {
 		std::for_each(mAttributes.begin(), mAttributes.end(),
-				[](Attribute& a) {a.arraySet();});
+			[](Attribute& a) {a.arraySet();});
 	}
 
 	T* getDataInternal() {

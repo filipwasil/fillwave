@@ -16,11 +16,10 @@ namespace core {
 Texture2D::Texture2D(
 		Texture2DFile* file,
 		ParameterList& parameters,
-		GLuint howMany)
-		:
-				Texture(GL_TEXTURE_2D, howMany),
-				mFile(puTexture2DFile(file)),
-				mParameters(parameters) {
+		GLuint howMany) :
+			Texture(GL_TEXTURE_2D, howMany),
+			mFile(puTexture2DFile(file)),
+			mParameters(parameters) {
 	reload();
 }
 
@@ -30,15 +29,14 @@ void Texture2D::sendData(Texture2DFileData data) {
 	}
 	if (mFile->mConfig.mCompression) {
 		glCompressedTexImage2D(mTarget, mFile->mConfig.mMipmapsLevel,
-				mFile->mHeader.mInternalFormat, mFile->mHeader.mWidth,
-				mFile->mHeader.mHeight, mFile->mConfig.mBorder,
-				mFile->mConfig.mCompressionSize, (GLubyte*) mFile->mData);
+			mFile->mHeader.mInternalFormat, mFile->mHeader.mWidth,
+			mFile->mHeader.mHeight, mFile->mConfig.mBorder,
+			mFile->mConfig.mCompressionSize, (GLubyte*) mFile->mData);
 	} else {
 		glTexImage2D(mTarget, mFile->mConfig.mMipmapsLevel,
-				mFile->mHeader.mInternalFormat, mFile->mHeader.mWidth,
-				mFile->mHeader.mHeight, mFile->mConfig.mBorder,
-				mFile->mHeader.mFormat, mFile->mHeader.mType,
-				(GLubyte*) mFile->mData);
+			mFile->mHeader.mInternalFormat, mFile->mHeader.mWidth,
+			mFile->mHeader.mHeight, mFile->mConfig.mBorder, mFile->mHeader.mFormat,
+			mFile->mHeader.mType, (GLubyte*) mFile->mData);
 	}
 	FLOG_CHECK("send data");
 }
@@ -74,7 +72,8 @@ void Texture2D::reload() {
 void Texture2D::log() {
 	FLOG_DEBUG("mTarget: 0x%x", mTarget);
 	FLOG_DEBUG("mFile->mConfig.mMipmapsLevel: %d", mFile->mConfig.mMipmapsLevel);
-	FLOG_DEBUG("mFile->mHeader.mInternalFormat: 0x%x", mFile->mHeader.mInternalFormat);
+	FLOG_DEBUG("mFile->mHeader.mInternalFormat: 0x%x",
+		mFile->mHeader.mInternalFormat);
 	FLOG_DEBUG("mFile->mHeader.mWidth: %d", mFile->mHeader.mWidth);
 	FLOG_DEBUG("mFile->mHeader.mHeight: %d", mFile->mHeader.mHeight);
 	FLOG_DEBUG("mFile->mConfig.mBorder: %d", mFile->mConfig.mBorder);

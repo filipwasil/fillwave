@@ -10,8 +10,8 @@
 namespace fillwave {
 namespace core {
 
-Fence::Fence(GLenum target)
-		: mHandle(glFenceSync(target, 0)) {
+Fence::Fence(GLenum target) :
+		mHandle(glFenceSync(target, 0)) {
 
 }
 

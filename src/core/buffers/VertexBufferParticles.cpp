@@ -41,10 +41,10 @@ VertexBufferParticles::VertexBufferParticles(
 }
 
 void VertexBufferParticles::log() const {
-	auto d = [] (GLfloat& f) { return static_cast<double>(f); };
+	auto d = [] (GLfloat& f) {return static_cast<double>(f);};
 	for (auto it : mDataVertices) {
-		FLOG_ERROR("Vertex written: %f %f %f %f", d(it.velocity[0]), d(it.velocity[1]),
-				d(it.velocity[2]), d(it.startTime));
+		FLOG_ERROR("Vertex written: %f %f %f %f", d(it.velocity[0]),
+			d(it.velocity[1]), d(it.velocity[2]), d(it.startTime));
 	}
 }
 

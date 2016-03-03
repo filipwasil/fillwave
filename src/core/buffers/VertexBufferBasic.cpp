@@ -20,17 +20,17 @@ namespace core {
 VertexBufferBasic::VertexBufferBasic(
 		const fMesh* shape,
 		framework::Animator* animator,
-		GLuint dataStoreModification)
-		: TVertexBuffer<VertexBasic>(dataStoreModification) {
+		GLuint dataStoreModification) :
+		TVertexBuffer<VertexBasic>(dataStoreModification) {
 
 	mTotalElements = shape->mNumVertices;
 
 	mDataVertices.resize(mTotalElements);
 
 	int threadID, numberOfThreads, chunkSize = 64;
-	(void)threadID;
-	(void)numberOfThreads;
-	(void)chunkSize;
+	(void) threadID;
+	(void) numberOfThreads;
+	(void) chunkSize;
 	{
 #pragma omp parallel for schedule(guided) num_threads(2) if (mTotalElements > 1000)
 		for (GLuint i = 0; i < mTotalElements; i++) {
@@ -111,7 +111,7 @@ VertexBufferBasic::VertexBufferBasic(
 					boneIdForEachVertex[VertexID]++;
 				} else {
 					FLOG_FATAL("Crater can handle maximum %d bone dependencies.",
-							FILLWAVE_MAX_BONES_DEPENDENCIES);
+						FILLWAVE_MAX_BONES_DEPENDENCIES);
 				}
 			}
 		}
@@ -123,8 +123,8 @@ VertexBufferBasic::VertexBufferBasic(
 		GLint chunkDensity,
 		GLfloat gapSize,
 		std::vector<GLuint>& indices,
-		GLuint dataStoreModification)
-		: TVertexBuffer<VertexBasic>(dataStoreModification) {
+		GLuint dataStoreModification) :
+		TVertexBuffer<VertexBasic>(dataStoreModification) {
 
 	core::VertexBasic vertex;
 
@@ -145,7 +145,7 @@ VertexBufferBasic::VertexBufferBasic(
 			vertex.mTextureUV[1] = z / chunkDensity;
 
 			vertex.mPosition[1] = constructor->calculateHeight(
-					vertex.mTextureUV[0], vertex.mTextureUV[1]); // calculate height 0.0f;
+				vertex.mTextureUV[0], vertex.mTextureUV[1]); // calculate height 0.0f;
 
 			mDataVertices.push_back(vertex);
 		}
@@ -169,14 +169,14 @@ VertexBufferBasic::VertexBufferBasic(
 		z = i + 2;
 
 		glm::vec3 v0(mDataVertices[indices[i]].mPosition[0],
-				mDataVertices[indices[i]].mPosition[1],
-				mDataVertices[indices[i]].mPosition[2]);
+			mDataVertices[indices[i]].mPosition[1],
+			mDataVertices[indices[i]].mPosition[2]);
 		glm::vec3 v1(mDataVertices[indices[j]].mPosition[0],
-				mDataVertices[indices[j]].mPosition[1],
-				mDataVertices[indices[j]].mPosition[2]);
+			mDataVertices[indices[j]].mPosition[1],
+			mDataVertices[indices[j]].mPosition[2]);
 		glm::vec3 v2(mDataVertices[indices[z]].mPosition[0],
-				mDataVertices[indices[z]].mPosition[1],
-				mDataVertices[indices[z]].mPosition[2]);
+			mDataVertices[indices[z]].mPosition[1],
+			mDataVertices[indices[z]].mPosition[2]);
 
 		glm::vec3 normal = glm::normalize(glm::cross(v1 - v0, v2 - v0));
 
@@ -193,10 +193,10 @@ VertexBufferBasic::VertexBufferBasic(
 		}
 
 		glm::vec2 deltaUV1(
-				mDataVertices[indices[j]].mTextureUV[0]
-						- mDataVertices[indices[i]].mTextureUV[0],
-				mDataVertices[indices[j]].mTextureUV[1]
-						- mDataVertices[indices[i]].mTextureUV[1]);
+			mDataVertices[indices[j]].mTextureUV[0]
+					- mDataVertices[indices[i]].mTextureUV[0],
+			mDataVertices[indices[j]].mTextureUV[1]
+					- mDataVertices[indices[i]].mTextureUV[1]);
 
 		glm::vec3 tangent = deltaPosition / (deltaUV1.s != 0 ? deltaUV1.s : 1.0f); //xxx check if 0.0f  stackOverflow 17000255
 		tangent = glm::normalize(tangent - glm::dot(normal, tangent) * normal);
@@ -224,8 +224,8 @@ VertexBufferBasic::VertexBufferBasic(
 
 VertexBufferBasic::VertexBufferBasic(
 		std::vector<core::VertexBasic>& vertices,
-		GLuint dataStoreModification)
-		: TVertexBuffer<VertexBasic>(vertices, dataStoreModification) {
+		GLuint dataStoreModification) :
+		TVertexBuffer<VertexBasic>(vertices, dataStoreModification) {
 
 }
 
@@ -268,11 +268,15 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
 
 void VertexBufferBasic::log() const {
 	for (auto it : mDataVertices) {
-		FLOG_INFO("Vertex UV: %f %f", static_cast<double>(it.mTextureUV[0]), static_cast<double>(it.mTextureUV[1]));
-		FLOG_INFO("Vertex normal: %f %f %f", static_cast<double>(it.mNormal[0]), static_cast<double>(it.mNormal[1]),
-				static_cast<double>(it.mNormal[2]));
-		FLOG_INFO("Vertex position: %f %f %f", static_cast<double>(it.mPosition[0]), static_cast<double>(it.mPosition[1]),
-				static_cast<double>(it.mPosition[2]));
+		FLOG_INFO("Vertex UV: %f %f", static_cast<double>(it.mTextureUV[0]),
+			static_cast<double>(it.mTextureUV[1]));
+		FLOG_INFO("Vertex normal: %f %f %f", static_cast<double>(it.mNormal[0]),
+			static_cast<double>(it.mNormal[1]),
+			static_cast<double>(it.mNormal[2]));
+		FLOG_INFO("Vertex position: %f %f %f",
+			static_cast<double>(it.mPosition[0]),
+			static_cast<double>(it.mPosition[1]),
+			static_cast<double>(it.mPosition[2]));
 	}
 }
 

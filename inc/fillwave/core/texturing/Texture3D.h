@@ -21,8 +21,8 @@ class Texture3DFile: public Texture2DFile {
 public:
 	GLenum mCubeTarget;
 
-	Texture3DFile(Texture2DFile* file, GLenum target)
-			: mCubeTarget(target) {
+	Texture3DFile(Texture2DFile* file, GLenum target) :
+			mCubeTarget(target) {
 		mHeader = file->mHeader;
 		mConfig = file->mConfig;
 		mData = file->mData;

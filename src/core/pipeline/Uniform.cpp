@@ -14,8 +14,8 @@ FLOGINIT("Uniform", FERROR | FFATAL | FINFO)
 namespace fillwave {
 namespace core {
 
-Uniform::Uniform(std::string name, GLuint type, GLsizei size, GLint location)
-		: mName(name), mType(type), mSize(size), mLocation(location) {
+Uniform::Uniform(std::string name, GLuint type, GLsizei size, GLint location) :
+		mName(name), mType(type), mSize(size), mLocation(location) {
 	/* xxx validate parameters */
 }
 
@@ -30,7 +30,6 @@ GLint Uniform::getLocation() const {
 /* TODO make a template here */
 template <class T>
 void pushToProgram(T value);
-
 
 void Uniform::push(GLint value) {
 	glUniform1i(mLocation, value);

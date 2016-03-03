@@ -20,15 +20,14 @@ Attribute::Attribute(
 		GLint size,
 		GLsizei stride,
 		GLenum type,
-		GLboolean normalized)
-		:
-				mStride(stride),
-				mName(name),
-				mIndex(index),
-				mSize(size),
-				mNormalized(normalized),
-				mType(type),
-				mPointer((GLvoid*) 0) {
+		GLboolean normalized) :
+			mStride(stride),
+			mName(name),
+			mIndex(index),
+			mSize(size),
+			mNormalized(normalized),
+			mType(type),
+			mPointer((GLvoid*) 0) {
 
 	switch (mType) {
 		case GL_UNSIGNED_INT:
@@ -85,7 +84,7 @@ void Attribute::arrayEnable() {
 void Attribute::arraySet() {
 	glVertexAttribPointer(mIndex, mSize,
 //                          mType,
-			GL_FLOAT, mNormalized, mStride, mPointer);
+		GL_FLOAT, mNormalized, mStride, mPointer);
 	FLOG_CHECK("VertexAttribPointer");
 }
 

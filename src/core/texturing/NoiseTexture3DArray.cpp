@@ -419,9 +419,9 @@ float noise3D(float *f) {
 GLuint Create3DNoiseTexture(int textureSize, float frequency) {
 	GLuint textureId;
 	GLfloat *texBuf = (GLfloat *) malloc(
-			sizeof(GLfloat) * textureSize * textureSize * textureSize);
+		sizeof(GLfloat) * textureSize * textureSize * textureSize);
 	GLubyte *uploadBuf = (GLubyte *) malloc(
-			sizeof(GLubyte) * textureSize * textureSize * textureSize);
+		sizeof(GLubyte) * textureSize * textureSize * textureSize);
 	int x, y, z;
 	int index = 0;
 	float min = 1000;

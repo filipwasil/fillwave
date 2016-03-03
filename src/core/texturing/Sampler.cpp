@@ -13,8 +13,8 @@ FLOGINIT("Sampler", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
-Sampler::Sampler(GLint textureUnit, GLuint howMany)
-		: GLObject(howMany), mTextureUnit(textureUnit) {
+Sampler::Sampler(GLint textureUnit, GLuint howMany) :
+		GLObject(howMany), mTextureUnit(textureUnit) {
 	glGenSamplers(mHowMany, mHandles);
 	FLOG_CHECK("ERROR: Could not generate sampler -> ID");
 }

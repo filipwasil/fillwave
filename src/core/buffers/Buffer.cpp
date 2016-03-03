@@ -16,8 +16,8 @@ using namespace std;
 namespace fillwave {
 namespace core {
 
-Buffer::Buffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany)
-		: GLObject(howMany), mRefresh(GL_TRUE), mIndex(index) {
+Buffer::Buffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany) :
+		GLObject(howMany), mRefresh(GL_TRUE), mIndex(index) {
 	setTarget(target);
 	setDrawType(drawType);
 	reload();

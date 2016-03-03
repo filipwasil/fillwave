@@ -16,11 +16,10 @@ namespace core {
 Texture2DRenderable::Texture2DRenderable(
 		GLenum attachment,
 		Texture2DFile* file,
-		ParameterList& parameters)
-		:
-				Texture2D(file, parameters),
-				mFramebuffer(puFramebuffer(new Framebuffer())),
-				mAttachment(attachment) {
+		ParameterList& parameters) :
+			Texture2D(file, parameters),
+			mFramebuffer(puFramebuffer(new Framebuffer())),
+			mAttachment(attachment) {
 	setAttachment(attachment);
 }
 
@@ -102,9 +101,9 @@ void Texture2DRenderable::copyTo(Framebuffer* source) {
 	mFramebuffer->bindForReading(); /* We will bind framebufferuffer for reading ...*/
 	mFramebuffer->setReadColorAttachment(0); /* .. and take color attachment color 0 ... */
 	glBlitFramebuffer(0, 0, mFile->mHeader.mWidth, mFile->mHeader.mHeight, 0, 0,
-			mFile->mHeader.mWidth, mFile->mHeader.mHeight,
-			GL_COLOR_BUFFER_BIT,
-			GL_LINEAR); /* ... to finally copy it into main framebuffer */
+		mFile->mHeader.mWidth, mFile->mHeader.mHeight,
+		GL_COLOR_BUFFER_BIT,
+		GL_LINEAR); /* ... to finally copy it into main framebuffer */
 }
 
 void Texture2DRenderable::copyFrom(Framebuffer* source) {
@@ -112,9 +111,9 @@ void Texture2DRenderable::copyFrom(Framebuffer* source) {
 	source->bindForReading();
 	source->setReadColorAttachment(0);
 	glBlitFramebuffer(0, 0, mFile->mHeader.mWidth, mFile->mHeader.mHeight, 0, 0,
-			mFile->mHeader.mWidth, mFile->mHeader.mHeight,
-			GL_COLOR_BUFFER_BIT,
-			GL_LINEAR); /* ... to finally copy it into main framebuffer */
+		mFile->mHeader.mWidth, mFile->mHeader.mHeight,
+		GL_COLOR_BUFFER_BIT,
+		GL_LINEAR); /* ... to finally copy it into main framebuffer */
 }
 
 void Texture2DRenderable::log() {

@@ -13,37 +13,37 @@ FLOGINIT("Query", FERROR | FFATAL | FINFO)
 namespace fillwave {
 namespace core {
 
-template<GLenum target>
-TQuery<target>::TQuery(GLsizei howMany)
-		: GLObject(howMany) {
+template <GLenum target>
+TQuery<target>::TQuery(GLsizei howMany) :
+		GLObject(howMany) {
 	glGenQueries(mHowMany, mHandles);
 	FLOG_CHECK("Could not create query");
 }
 
-template<GLenum target>
+template <GLenum target>
 TQuery<target>::~TQuery() {
 	glDeleteQueries(mHowMany, mHandles);
 	FLOG_CHECK("Could not delete query");
 }
 
-template<GLenum target>
+template <GLenum target>
 GLuint TQuery<target>::getID(GLuint id) const {
 	return mHandles[id];
 }
 
-template<GLenum target>
+template <GLenum target>
 void TQuery<target>::begin(GLuint id) {
 	glBeginQuery(mTarget, mHandles[id]);
 	FLOG_CHECK("Could not begin query");
 }
 
-template<GLenum target>
+template <GLenum target>
 void TQuery<target>::end() {
 	glEndQuery(mTarget);
 	FLOG_CHECK("Could not end query");
 }
 
-template<GLenum target>
+template <GLenum target>
 GLuint TQuery<target>::getResultAsync(GLuint resultIfNotAvailable, GLuint id) {
 	GLuint result;
 	glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT_AVAILABLE, &result);
@@ -57,7 +57,7 @@ GLuint TQuery<target>::getResultAsync(GLuint resultIfNotAvailable, GLuint id) {
 	}
 }
 
-template<GLenum target>
+template <GLenum target>
 GLuint TQuery<target>::getResultSync(GLuint id) {
 	GLuint result;
 	glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT, &result);
@@ -65,20 +65,20 @@ GLuint TQuery<target>::getResultSync(GLuint id) {
 	return result;
 }
 
-template<GLenum target>
+template <GLenum target>
 GLboolean TQuery<target>::getResultAvailable(GLuint id) {
 	GLuint result;
 	glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT_AVAILABLE, &result);
 	return result ? GL_TRUE : GL_FALSE;
 }
 
-template<GLenum target>
+template <GLenum target>
 void TQuery<target>::reload() {
 	glGenQueries(mHowMany, mHandles);
 	FLOG_CHECK("reload");
 }
 
-template<GLenum target>
+template <GLenum target>
 void TQuery<target>::log() {
 	for (GLsizei id = 0; id < mHowMany; id++) {
 		if (glIsQuery(mHandles[id])) {
