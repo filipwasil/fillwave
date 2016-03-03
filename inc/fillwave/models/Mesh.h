@@ -81,8 +81,8 @@ protected:
 	pTextureRegion mDiffuseMap;
 	pTextureRegion mNormalMap;
 	pTextureRegion mSpecularMap;
-	pProgram mProgram, mProgramShadow, mProgramShadowColor,
-			mProgramOQ, mProgramAOGeometry, mProgramAOColor;
+	pProgram mProgram, mProgramShadow, mProgramShadowColor, mProgramOQ,
+			mProgramAOGeometry, mProgramAOColor;
 	GLenum mRenderMode;
 
 	/* Buffers */

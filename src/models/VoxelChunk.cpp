@@ -319,16 +319,14 @@ VoxelChunk::VoxelChunk(
 		const std::string& texturePath,
 		GLint size,
 		VoxelConstructor* constructor,
-		GLfloat gap)
-		:
-				IReloadable(engine),
-				mVoxelGap(gap),
-				mSize(size),
-				mProgram(program),
-				mTexture(
-						engine->storeTexture(texturePath.c_str(),
-								aiTextureType_DIFFUSE)),
-				mLights(engine->getLightSystem()) {
+		GLfloat gap) :
+			IReloadable(engine),
+			mVoxelGap(gap),
+			mSize(size),
+			mProgram(program),
+			mTexture(
+				engine->storeTexture(texturePath.c_str(), aiTextureType_DIFFUSE)),
+			mLights(engine->getLightSystem()) {
 
 	mVoxels = new Voxel**[mSize];
 	std::vector<core::VertexBasic> vertices;
@@ -341,9 +339,9 @@ VoxelChunk::VoxelChunk(
 				GLboolean active =
 						constructor ?
 								constructor->calculateActiveVoxel(
-										(GLfloat) x / (GLfloat) ((mSize - 1)),
-										(GLfloat) z / (GLfloat) ((mSize - 1)),
-										(GLfloat) y / (GLfloat) ((mSize - 1))) :
+									(GLfloat) x / (GLfloat) ((mSize - 1)),
+									(GLfloat) z / (GLfloat) ((mSize - 1)),
+									(GLfloat) y / (GLfloat) ((mSize - 1))) :
 								GL_TRUE;
 				mVoxels[x][z][y].setActive(active);
 				if (mVoxels[x][z][y].isActive()) {
@@ -431,7 +429,7 @@ void VoxelChunk::reloadVBO() {
 		}
 	}
 
-	mVBO = std::make_shared<core::VertexBufferBasic>(vertices); //xxx todo needs to be in manager
+	mVBO = std::make_shared < core::VertexBufferBasic > (vertices); //xxx todo needs to be in manager
 
 	initVBO();
 
@@ -445,10 +443,9 @@ void VoxelChunk::reloadVoxels(VoxelConstructor* constructor) {
 		for (GLint z = 0; z < mSize; z++) {
 			for (GLint y = 0; y < mSize; y++) {
 				mVoxels[x][z][y].setActive(
-						constructor->calculateActiveVoxel(
-								(GLfloat) x / (GLfloat) mSize,
-								(GLfloat) z / (GLfloat) mSize,
-								(GLfloat) y / (GLfloat) mSize));
+					constructor->calculateActiveVoxel((GLfloat) x / (GLfloat) mSize,
+						(GLfloat) z / (GLfloat) mSize,
+						(GLfloat) y / (GLfloat) mSize));
 			}
 		}
 	}
@@ -460,9 +457,9 @@ void VoxelChunk::draw(ICamera& camera) {
 
 	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
 	core::Uniform::push(mUniformLocationCacheCameraPosition,
-			camera.getTranslation());
+		camera.getTranslation());
 	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,
-			camera.getViewProjection());
+		camera.getViewProjection());
 
 	mLights->pushLightUniforms(mProgram.get());
 	mLights->bindShadowmaps();
@@ -479,9 +476,9 @@ void VoxelChunk::draw(ICamera& camera) {
 void VoxelChunk::drawPBRP(ICamera& camera) {
 	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
 	core::Uniform::push(mUniformLocationCacheCameraPosition,
-			camera.getTranslation());
+		camera.getTranslation());
 	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,
-			camera.getViewProjection());
+		camera.getViewProjection());
 
 	mVAO->bind();
 
@@ -521,11 +518,11 @@ inline void VoxelChunk::initPipeline() {
 
 inline void VoxelChunk::initUniformsCache() {
 	mUniformLocationCacheModelMatrix = mProgram->getUniformLocation(
-			"uModelMatrix");
+		"uModelMatrix");
 	mUniformLocationCacheCameraPosition = mProgram->getUniformLocation(
-			"uCameraPosition");
+		"uCameraPosition");
 	mUniformLocationCacheViewProjectionMatrix = mProgram->getUniformLocation(
-			"uViewProjectionMatrix");
+		"uViewProjectionMatrix");
 }
 
 inline void VoxelChunk::initVAO() {
@@ -557,7 +554,7 @@ bool VoxelChunk::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
 	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
 	item.mMode = GL_TRIANGLES;
-   item.mRenderStatus = 0xc0; // vao, ibo, diff, norm, spec, blend, cont, anim
+	item.mRenderStatus = 0xc0; // vao, ibo, diff, norm, spec, blend, cont, anim
 	return true;
 }
 

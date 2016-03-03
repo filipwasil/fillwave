@@ -18,12 +18,11 @@ BuilderModelExternalMaps::BuilderModelExternalMaps(
 		pProgram program,
 		std::string diffusePath,
 		std::string normalPath,
-		std::string specularPath)
-		:
-				BuilderModel(engine, modelPath, program),
-				mDiffuseMapPath(diffusePath),
-				mNormalMapPath(normalPath),
-				mSpecularMapPath(specularPath) {
+		std::string specularPath) :
+			BuilderModel(engine, modelPath, program),
+			mDiffuseMapPath(diffusePath),
+			mNormalMapPath(normalPath),
+			mSpecularMapPath(specularPath) {
 
 }
 
@@ -44,7 +43,7 @@ BuilderModel& BuilderModelExternalMaps::setSpecularMapPath(std::string& path) {
 
 pModel BuilderModelExternalMaps::build() {
 	return buildModel(mEngine, mProgram, mShapePath, mDiffuseMapPath,
-			mNormalMapPath, mSpecularMapPath);
+		mNormalMapPath, mSpecularMapPath);
 }
 
 } /* framework */

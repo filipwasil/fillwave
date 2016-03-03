@@ -11,8 +11,8 @@
 namespace fillwave {
 namespace framework {
 
-Voxel::Voxel()
-		: mType(0), mActive(GL_TRUE) {
+Voxel::Voxel() :
+		mType(0), mActive(GL_TRUE) {
 }
 
 GLboolean Voxel::isActive() {

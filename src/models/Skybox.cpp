@@ -15,8 +15,8 @@ FLOGINIT("Skybox", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Skybox::Skybox(Engine* engine, pTexture3D texture)
-		: IReloadable(engine), mTexture(texture) {
+Skybox::Skybox(Engine* engine, pTexture3D texture) :
+		IReloadable(engine), mTexture(texture) {
 
 	ProgramLoader loader(engine);
 
@@ -116,7 +116,7 @@ inline void Skybox::initUniformsCache() {
 	mULCCameraPosition = mProgram->getUniformLocation("uCameraPosition");
 	mULCModelMatrixPosition = mProgram->getUniformLocation("uModelMatrix");
 	mULCViewProjectionMatrix = mProgram->getUniformLocation(
-			"uViewProjectionMatrix");
+		"uViewProjectionMatrix");
 	mULCTextureUnit = mProgram->getUniformLocation("uTextureUnit");
 }
 
@@ -148,15 +148,15 @@ bool Skybox::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
 	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();//xxx 3d texture handle
+	item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle(); //xxx 3d texture handle
 	item.mIndicesPointer = 0;
 	item.mMode = GL_TRIANGLES;
-   item.mRenderStatus = mIBO ? 0xe0 : 0xa0; // vao, ibo, diff, norm, spec, blend, cont, anim
+	item.mRenderStatus = mIBO ? 0xe0 : 0xa0; // vao, ibo, diff, norm, spec, blend, cont, anim
 	return true;
 }
 
 } /* framework */
 pSkybox buildSkybox(Engine* engine, pTexture3D texture) {
-	return std::make_shared<framework::Skybox>(engine, texture);
+	return std::make_shared < framework::Skybox > (engine, texture);
 }
 } /* fillwave */

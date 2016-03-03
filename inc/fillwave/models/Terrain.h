@@ -34,15 +34,15 @@ public:
 	void drawPBRP(ICamera& camera) override;
 
 	/* IRenderable */
-   void updateRenderer(IRenderer& renderer) override;
+	void updateRenderer(IRenderer& renderer) override;
 	bool getRenderItem(RenderItem& item) override;
 
 protected:
 	void updateRendererData();
 
 private:
-   pProgram mProgram;
-   LightSystem* mLights;
+	pProgram mProgram;
+	LightSystem* mLights;
 	GLint mRadius;
 	GLfloat mGap;
 	std::vector<pVoxelChunk> mVoxelChunks;

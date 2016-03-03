@@ -10,13 +10,12 @@
 namespace fillwave {
 namespace framework {
 
-Moveable::Moveable(glm::vec3 translation, glm::quat rotation)
-		:
-				mTranslation(translation),
-				mRotation(rotation),
-				mScale(1.0),
-				mRefresh(true),
-				mRefreshExternal(true) {
+Moveable::Moveable(glm::vec3 translation, glm::quat rotation) :
+			mTranslation(translation),
+			mRotation(rotation),
+			mScale(1.0),
+			mRefresh(true),
+			mRefreshExternal(true) {
 
 }
 
@@ -66,7 +65,7 @@ void Moveable::moveByZ(GLfloat distance) {
 
 void Moveable::moveInDirection(glm::vec3 direction) {
 	mTranslation += glm::vec3(
-			glm::mat4_cast(mRotation) * glm::vec4(direction, 1.0));
+		glm::mat4_cast(mRotation) * glm::vec4(direction, 1.0));
 	mRefresh = true;
 }
 

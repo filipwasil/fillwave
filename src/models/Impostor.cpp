@@ -21,12 +21,11 @@ Impostor::Impostor(
 		GLfloat size,
 		pTexture texture,
 		GLenum blendingSource,
-		GLenum blendingDestination)
-		:
-				Finishable(lifetime),
-				mTexture(texture),
-				mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)),
-				mSize(size) {
+		GLenum blendingDestination) :
+			Finishable(lifetime),
+			mTexture(texture),
+			mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)),
+			mSize(size) {
 	mBlending.mSrc = blendingSource;
 	mBlending.mDst = blendingDestination;
 }
@@ -56,8 +55,8 @@ bool Cursor::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleSpecular] = 0;
 	item.mIndicesPointer = 0;
 	item.mMode = GL_TRIANGLE_STRIP;
-   item.mStatus.bBlending = 1;
-   item.mRenderStatus = 0x24; // blending, diffuse
+	item.mStatus.bBlending = 1;
+	item.mRenderStatus = 0x24; // blending, diffuse
 	return true;
 }
 

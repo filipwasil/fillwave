@@ -46,8 +46,8 @@ public:
 	void drawPBRP(ICamera& camera) override;
 
 	/* IRenderable */
-   void updateRenderer(IRenderer& renderer) override;
-   bool getRenderItem(RenderItem& item) override;
+	void updateRenderer(IRenderer& renderer) override;
+	bool getRenderItem(RenderItem& item) override;
 
 	GLint getSize();
 

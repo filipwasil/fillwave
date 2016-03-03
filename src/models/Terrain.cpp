@@ -14,8 +14,11 @@ FLOGINIT("Terrain", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Terrain::Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap)
-		: mProgram(program), mLights(engine->getLightSystem()), mRadius(radius), mGap(gap) {
+Terrain::Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap) :
+			mProgram(program),
+			mLights(engine->getLightSystem()),
+			mRadius(radius),
+			mGap(gap) {
 
 }
 
@@ -80,7 +83,7 @@ void Terrain::updateRenderer(IRenderer& renderer) {
 
 bool Terrain::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
-   item.mRenderStatus = 0x02; // vao, ibo, diff, norm, spec, blend, cont, anima
+	item.mRenderStatus = 0x02; // vao, ibo, diff, norm, spec, blend, cont, anima
 	return true;
 }
 
@@ -94,22 +97,21 @@ pTerrain buildTerrainVoxel(
 
 	GLfloat voxelGap = 0.2;
 
-	pTerrain terrain = std::make_shared<framework::Terrain>(engine, program, radius, voxelGap);
+	pTerrain terrain = std::make_shared < framework::Terrain
+			> (engine, program, radius, voxelGap);
 
 	for (GLint i = 0; i <= radius; i++) {
 		for (GLint x = 0; x < 1 + 2 * i; x++) {
 			for (GLint z = 0; z < 1 + 2 * i; z++) {
 				pVoxelChunk chunk = pVoxelChunk(
-						new framework::VoxelChunk(program, engine, texturePath,
-						FILLWAVE_VOXEL_CHUNK_SIZE, constructor, voxelGap));
+					new framework::VoxelChunk(program, engine, texturePath,
+					FILLWAVE_VOXEL_CHUNK_SIZE, constructor, voxelGap));
 				chunk->moveTo(
-						glm::vec3(
-								FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * x
-										- FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius),
-								0.0,
-								FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * z
-										- FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap
-												* (radius)));
+					glm::vec3(
+						FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * x
+								- FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius), 0.0,
+						FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * z
+								- FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius)));
 				terrain->addChunk(chunk);
 			}
 		}

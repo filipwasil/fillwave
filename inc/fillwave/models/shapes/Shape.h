@@ -20,7 +20,7 @@ namespace framework {
  *
  */
 
-template<class T>
+template <class T>
 class Shape {
 public:
 	Shape() {

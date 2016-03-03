@@ -19,16 +19,16 @@ namespace framework {
 
 struct RenderItem {
 	enum eRenderHandles {
-		eRenderHandleProgram,
-		eRenderHandleVAO,
-		eRenderHandleDiffuse,
-		eRenderHandleNormal,
-		eRenderHandleSpecular,
-		eRenderHandleSampler,
-		eRenderHandlesSize
+			eRenderHandleProgram,
+			eRenderHandleVAO,
+			eRenderHandleDiffuse,
+			eRenderHandleNormal,
+			eRenderHandleSpecular,
+			eRenderHandleSampler,
+			eRenderHandlesSize
 	};
 
-	union  {
+	union {
 		GLubyte mRenderStatus;
 		struct {
 			GLubyte bVAO :1;
@@ -53,6 +53,5 @@ struct RenderItem {
 
 } /* namespace framework */
 } /* namespace fillwave */
-
 
 #endif /* INC_FILLWAVE_MODELS_BASE_RENDERITEM_H_ */

@@ -23,22 +23,23 @@ BuilderModelManual::BuilderModelManual(
 		pTexture2D diffuseMap,
 		pTexture2D normalMap,
 		pTexture2D specularMap,
-		Material material)
-		:
-				BuilderModel(engine, modelPath, program),
-				mDiffuseMap(diffuseMap),
-				mNormalMap(normalMap),
-				mSpecularMap(specularMap),
-				mMaterial(material) {
+		Material material) :
+			BuilderModel(engine, modelPath, program),
+			mDiffuseMap(diffuseMap),
+			mNormalMap(normalMap),
+			mSpecularMap(specularMap),
+			mMaterial(material) {
 
 }
 
-BuilderModelManual& BuilderModelManual::setDiffuseMapTexture(pTexture2D texture) {
+BuilderModelManual& BuilderModelManual::setDiffuseMapTexture(
+		pTexture2D texture) {
 	mDiffuseMap = texture;
 	return (*this);
 }
 
-BuilderModelManual& BuilderModelManual::setNormalMapTexture(pTexture2D texture) {
+BuilderModelManual& BuilderModelManual::setNormalMapTexture(
+		pTexture2D texture) {
 	mNormalMap = texture;
 	return (*this);
 }
@@ -56,7 +57,7 @@ BuilderModelManual& BuilderModelManual::setMaterial(Material material) {
 
 pModel BuilderModelManual::build() {
 	return buildModel(mEngine, mProgram, mShapePath, mDiffuseMap, mNormalMap,
-			mSpecularMap, mMaterial);
+		mSpecularMap, mMaterial);
 }
 
 } /* framework */

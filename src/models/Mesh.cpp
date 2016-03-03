@@ -38,28 +38,27 @@ Mesh::Mesh(
 		pVertexBufferBasic vbo,
 		pIndexBufferBasic ibo,
 		Animator* boneManager,
-		GLenum renderMode)
-		:
-				IReloadable(engine),
-				mMaterial(material),
-				mDiffuseMap(diffuseMap),
-				mNormalMap(normalMap),
-				mSpecularMap(specularMap),
-				mProgram(program),
-				mProgramShadow(programShadow),
-				mProgramShadowColor(programShadowColor),
-				mProgramOQ(programOcclusion),
-				mProgramAOGeometry(programAmbientOcclusionGeometry),
-				mProgramAOColor(programAmbientOcclusionColor),
-				mRenderMode(renderMode),
-				mIBO(ibo),
-				mVBO(vbo),
-				mLights(lights),
-				mAnimator(boneManager)
+		GLenum renderMode) :
+			IReloadable(engine),
+			mMaterial(material),
+			mDiffuseMap(diffuseMap),
+			mNormalMap(normalMap),
+			mSpecularMap(specularMap),
+			mProgram(program),
+			mProgramShadow(programShadow),
+			mProgramShadowColor(programShadowColor),
+			mProgramOQ(programOcclusion),
+			mProgramAOGeometry(programAmbientOcclusionGeometry),
+			mProgramAOColor(programAmbientOcclusionColor),
+			mRenderMode(renderMode),
+			mIBO(ibo),
+			mVBO(vbo),
+			mLights(lights),
+			mAnimator(boneManager)
 #ifdef FILLWAVE_GLES_3_0
 #else
-						,
-				mConditionalRendering(GL_QUERY_WAIT)
+				,
+			mConditionalRendering(GL_QUERY_WAIT)
 #endif
 {
 	initPipeline();
@@ -73,15 +72,13 @@ void Mesh::drawPBRP(ICamera& camera) {
 #else
 	if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
-	{
+		{
 		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
 		core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
 		core::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-		core::Uniform::push(mULCLightSpecularIntensity,
-				mMaterial.getSpecular());
+		core::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
 		core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-		core::Uniform::push(mULCViewProjectionMatrix,
-				camera.getViewProjection());
+		core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
 		coreDraw();
 	}
@@ -92,17 +89,15 @@ void Mesh::draw(ICamera& camera) {
 #else
 	if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
-	{
+		{
 		mProgram->use();
 
 		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
 		core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
 		core::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-		core::Uniform::push(mULCLightSpecularIntensity,
-				mMaterial.getSpecular());
+		core::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
 		core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-		core::Uniform::push(mULCViewProjectionMatrix,
-				camera.getViewProjection());
+		core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
 		mLights->pushLightUniforms(mProgram.get());
 		mLights->bindShadowmaps();
@@ -116,7 +111,7 @@ void Mesh::drawDR(ICamera& camera) {
 #else
 	if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
-	{
+		{
 		mProgram->use();
 
 		core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
@@ -206,7 +201,7 @@ void Mesh::drawOcclusionBox(ICamera& camera) {
 	mProgramOQ->use();
 
 	core::Uniform::push(mULCMVPOcclusion,
-			camera.getViewProjection() * mPhysicsMMC * mOcclusionMatrix);
+		camera.getViewProjection() * mPhysicsMMC * mOcclusionMatrix);
 
 	mOcclusionQuery.begin();
 
@@ -224,7 +219,7 @@ void Mesh::drawDepth(ICamera& camera) {
 		mProgramShadow->use();
 
 		core::Uniform::push(mULCMVPShadow,
-				camera.getViewProjection() * mPhysicsMMC);
+			camera.getViewProjection() * mPhysicsMMC);
 
 		mVAO->bind();
 
@@ -236,12 +231,14 @@ void Mesh::drawDepth(ICamera& camera) {
 	}
 }
 
-void Mesh::drawDepthColor(ICamera& camera, glm::vec3& /*xxx double check position*/) {
+void Mesh::drawDepthColor(
+		ICamera& camera,
+		glm::vec3& /*xxx double check position*/) {
 	if (isPSC()) {
 		mProgramShadowColor->use();
 
 		core::Uniform::push(mULCMVPShadowColor,
-				camera.getViewProjection() * mPhysicsMMC);
+			camera.getViewProjection() * mPhysicsMMC);
 		core::Uniform::push(mULCModelMatrixShadowColor, mPhysicsMMC);
 
 		mVAO->bind();
@@ -258,9 +255,9 @@ void Mesh::drawAOG(ICamera& camera) {
 	mProgramAOGeometry->use();
 
 	core::Uniform::push(mULCMVPAmbientOcclusion,
-			camera.getViewProjection() * mPhysicsMMC);
+		camera.getViewProjection() * mPhysicsMMC);
 	core::Uniform::push(mULCPositionAmbientOcclusion,
-			camera.getEye() * mPhysicsMMC);
+		camera.getEye() * mPhysicsMMC);
 
 	mVAO->bind();
 
@@ -288,7 +285,7 @@ void Mesh::onDraw() {
 	if (mIBO) {
 		/* Perform index drawing */
 		glDrawElements(mRenderMode, mIBO->getElements(),
-				GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
+		GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
 		FLOG_CHECK("glDrawElements failed");
 	} else {
 		/* Perform array drawing */
@@ -308,14 +305,14 @@ inline void Mesh::initUniformsCache() {
 	if (mProgram) {
 		mULCModelMatrix = mProgram->getUniformLocation("uModelMatrix");
 		mULCLightAmbientIntensity = mProgram->getUniformLocation(
-				"uLightAmbientIntensity");
+			"uLightAmbientIntensity");
 		mULCLightDiffuseIntensity = mProgram->getUniformLocation(
-				"uLightDiffuseIntensity");
+			"uLightDiffuseIntensity");
 		mULCLightSpecularIntensity = mProgram->getUniformLocation(
-				"uLightSpecularIntensity");
+			"uLightSpecularIntensity");
 		mULCCameraPosition = mProgram->getUniformLocation("uCameraPosition");
 		mULCViewProjectionMatrix = mProgram->getUniformLocation(
-				"uViewProjectionMatrix");
+			"uViewProjectionMatrix");
 		mULCColorPicking = mProgram->getUniformLocation("uColorPicking");
 		mULCPainterColor = mProgram->getUniformLocation("uPainterColor");
 	}
@@ -333,14 +330,14 @@ inline void Mesh::initUniformsCache() {
 	if (mProgramShadowColor) {
 		mULCMVPShadowColor = mProgramShadowColor->getUniformLocation("uMVP");
 		mULCModelMatrixShadowColor = mProgramShadowColor->getUniformLocation(
-				"uModelMatrix");
+			"uModelMatrix");
 	}
 
 	/* AmbientOcclusion programs */
 	if (mProgramAOGeometry) {
 		mULCMVPAmbientOcclusion = mProgramAOGeometry->getUniformLocation("uMVP");
 		mULCPositionAmbientOcclusion = mProgramAOGeometry->getUniformLocation(
-				"uMVPosition");
+			"uMVPosition");
 	}
 
 	if (mProgramAOColor) {
@@ -400,12 +397,15 @@ bool Mesh::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
 	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-	item.mHandles[RenderItem::eRenderHandleDiffuse] = mDiffuseMap->getTexture()->getHandle();
-	item.mHandles[RenderItem::eRenderHandleNormal] = mNormalMap->getTexture()->getHandle();
-	item.mHandles[RenderItem::eRenderHandleSpecular] = mSpecularMap->getTexture()->getHandle();
+	item.mHandles[RenderItem::eRenderHandleDiffuse] =
+			mDiffuseMap->getTexture()->getHandle();
+	item.mHandles[RenderItem::eRenderHandleNormal] =
+			mNormalMap->getTexture()->getHandle();
+	item.mHandles[RenderItem::eRenderHandleSpecular] =
+			mSpecularMap->getTexture()->getHandle();
 	item.mIndicesPointer = 0;
 	item.mMode = GL_TRIANGLES;
-   item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, anim
+	item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, anim
 	return true;
 }
 

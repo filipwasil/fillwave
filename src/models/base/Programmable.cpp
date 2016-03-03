@@ -13,8 +13,8 @@ FLOGINIT("Programmable", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Programmable::Programmable(pProgram program)
-		: mProgram(program) {
+Programmable::Programmable(pProgram program) :
+		mProgram(program) {
 
 }
 
@@ -25,7 +25,7 @@ void Programmable::drawWithEffects(ICamera& camera) {
 	/* Effects execution */
 	p->use();
 	std::for_each(mEffects.begin(), mEffects.end(),
-			[p](pIEffect e) {e->preDrawAction(p);});
+		[p](pIEffect e) {e->preDrawAction(p);});
 	core::Program::disusePrograms();
 
 	/* Draw */
@@ -36,7 +36,7 @@ void Programmable::drawWithEffects(ICamera& camera) {
 	/* Effects pre draw action */
 	p->use();
 	std::for_each(mEffects.begin(), mEffects.end(),
-			[p](pIEffect e) {e->postDrawAction(p);});
+		[p](pIEffect e) {e->postDrawAction(p);});
 	core::Program::disusePrograms();
 }
 
@@ -46,7 +46,7 @@ void Programmable::drawWithEffectsDR(ICamera& camera) {
 
 	/* Effects execution */
 	std::for_each(mEffects.begin(), mEffects.end(),
-			[p](pIEffect e) {e->preDrawAction(p);});
+		[p](pIEffect e) {e->preDrawAction(p);});
 
 	/* Draw */
 	for (auto& it : mChildren) {
@@ -55,7 +55,7 @@ void Programmable::drawWithEffectsDR(ICamera& camera) {
 
 	/* Effects pre draw action */
 	std::for_each(mEffects.begin(), mEffects.end(),
-			[p](pIEffect e) {e->postDrawAction(p);});
+		[p](pIEffect e) {e->postDrawAction(p);});
 }
 
 void Programmable::drawWithEffectsPBRP(ICamera& camera) {
@@ -64,7 +64,7 @@ void Programmable::drawWithEffectsPBRP(ICamera& camera) {
 
 	/* Effects execution */
 	std::for_each(mEffects.begin(), mEffects.end(),
-			[p](pIEffect e) {e->preDrawAction(p);});
+		[p](pIEffect e) {e->preDrawAction(p);});
 
 	/* Draw */
 	for (auto& it : mChildren) {
@@ -73,7 +73,7 @@ void Programmable::drawWithEffectsPBRP(ICamera& camera) {
 
 	/* Effects pre draw action */
 	std::for_each(mEffects.begin(), mEffects.end(),
-			[p](pIEffect e) {e->postDrawAction(p);});
+		[p](pIEffect e) {e->postDrawAction(p);});
 }
 
 void Programmable::addEffect(pIEffect effect) {
