@@ -6,6 +6,7 @@
  */
 
 #include <fillwave/hud/Button.h>
+#include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/Fillwave.h>
 
 namespace fillwave {

@@ -5,8 +5,6 @@
  *      Author: Filip Wasil
  */
 
-/* Plarform specific */
-//#include <fillwave/loaders/AndroidLoader.h>
 /* Debug */
 #include <fillwave/Log.h>
 

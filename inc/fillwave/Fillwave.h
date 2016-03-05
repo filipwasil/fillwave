@@ -18,9 +18,6 @@
 /* Debugger */
 #include <fillwave/Debugger.h>
 
-/* Loaders */
-#include <fillwave/loaders/ProgramLoader.h>
-
 /* Common */
 #include <fillwave/common/PhysicsMeshBuffer.h>
 
