@@ -79,8 +79,6 @@ Android script is currently designed to work only with Linux. It assumes that An
 * Review: https://review.gerrithub.io/#/admin/projects/filipwasil/fillwave
 * Agile: https://zube.io/boards/43120442
 
-https://zube.io/boards/43120442
-
 --------------------------------------
 
 ###Linux and Android ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)
