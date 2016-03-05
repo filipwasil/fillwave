@@ -18,10 +18,6 @@
 namespace fillwave {
 namespace framework {
 
-/** TextureObject
- * \brief Template class for all texture objects.
- */
-
 typedef Composition<pTexture1D, TPolicyShared<core::Texture1D>,
 		core::ParameterList&> TextureObject1D;
 
@@ -59,7 +55,7 @@ typedef Composition<pTexture3DRenderableDynamic,
 		core::Texture2DFile*, core::Texture2DFile*, core::ParameterList&,
 		pTexture2DRenderable, pProgram> TextureObject3DDynamic;
 
-/*! \class TextureManager
+/*! \class TextureSystem
  * \brief Manager to handle TextureObject1D, TextureObject2D and TextureObject3D objects.
  */
 

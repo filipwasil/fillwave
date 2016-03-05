@@ -19,7 +19,7 @@ namespace core {
 
 class Attribute;
 
-/*! \class VertexBuffer
+/*! \class TVertexBuffer
  * \brief Template for all vertex buffers.
  */
 

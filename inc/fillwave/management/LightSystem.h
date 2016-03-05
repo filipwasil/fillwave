@@ -33,7 +33,7 @@ typedef TManager<pLightPoint, FILLWAVE_MAX_POINT_LIGHTS,
 		pMoveable> ManagerPointLights;
 
 /**
- * \brief Lights system knows about all light related stuff.
+ * \brief Light system knows about all light related stuff.
  */
 class LightSystem {
 public:

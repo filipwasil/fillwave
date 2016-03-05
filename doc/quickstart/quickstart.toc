@@ -18,14 +18,13 @@
 \contentsline {subsection}{\numberline {2.8}Particles}{13}{subsection.2.8}
 \contentsline {subsection}{\numberline {2.9}Skybox}{16}{subsection.2.9}
 \contentsline {subsection}{\numberline {2.10}Terrain}{16}{subsection.2.10}
-\contentsline {subsubsection}{\numberline {2.10.1}Voxel terrain}{16}{subsubsection.2.10.1}
-\contentsline {subsubsection}{\numberline {2.10.2}Mesh terrain}{17}{subsubsection.2.10.2}
+\contentsline {subsubsection}{\numberline {2.10.1}Mesh terrain}{16}{subsubsection.2.10.1}
 \contentsline {subsection}{\numberline {2.11}Text}{17}{subsection.2.11}
 \contentsline {subsection}{\numberline {2.12}Light}{17}{subsection.2.12}
 \contentsline {subsubsection}{\numberline {2.12.1}Spot light}{17}{subsubsection.2.12.1}
 \contentsline {subsubsection}{\numberline {2.12.2}Directional light}{17}{subsubsection.2.12.2}
-\contentsline {subsubsection}{\numberline {2.12.3}Point light}{18}{subsubsection.2.12.3}
-\contentsline {subsection}{\numberline {2.13}Logging}{18}{subsection.2.13}
+\contentsline {subsubsection}{\numberline {2.12.3}Point light}{17}{subsubsection.2.12.3}
+\contentsline {subsection}{\numberline {2.13}Logging}{17}{subsection.2.13}
 \contentsline {subsection}{\numberline {2.14}Event system}{19}{subsection.2.14}
 \contentsline {subsubsection}{\numberline {2.14.1}Focus functions and private callbacks}{20}{subsubsection.2.14.1}
 \contentsline {subsubsection}{\numberline {2.14.2}Register, unregister and clear functions}{20}{subsubsection.2.14.2}
@@ -33,8 +32,9 @@
 \contentsline {subsection}{\numberline {2.16}Physics}{21}{subsection.2.16}
 \contentsline {subsection}{\numberline {2.17}Extras}{22}{subsection.2.17}
 \contentsline {section}{\numberline {3}Customization}{24}{section.3}
-\contentsline {subsection}{\numberline {3.1}Custom events}{24}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Custom callbacks}{24}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Custom easing}{25}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.1}Events}{24}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Callbacks}{24}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Easing}{25}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Renderers}{26}{subsection.3.4}
 \contentsline {section}{\numberline {4}Examples}{26}{section.4}
-\contentsline {section}{\numberline {5}Licenses}{28}{section.5}
+\contentsline {section}{\numberline {5}Licenses}{29}{section.5}

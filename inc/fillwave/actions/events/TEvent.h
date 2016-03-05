@@ -13,7 +13,7 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class Event
+/*! \class TEvent
  * \brief Template for all events.
  * This class needs to be specialized by the certain type
  * of event You want to be carried.

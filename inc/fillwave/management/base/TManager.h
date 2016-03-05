@@ -17,7 +17,7 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class PolicyShared
+/*! \class TPolicyShared
  * \brief Creation policy which creates an object as shared pointer
  */
 template <class T>
@@ -32,7 +32,7 @@ public:
 	}
 };
 
-/*! \class PolicyUnique
+/*! \class TPolicyUnique
  * \brief Creation policy which creates an object as unique pointer
  */
 template <class T>
@@ -55,7 +55,7 @@ inline T FillwaveItemConstruct(P ... parameters) {
 	return C().Create(parameters...);
 }
 
-/*! \class Main Fillwave
+/*! \class TManager
  * \brief Basic manager
  */
 template <class T, size_t M, class C, typename ... P>

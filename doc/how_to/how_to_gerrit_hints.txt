@@ -1,0 +1,8 @@
+Pushing CHANGES to BRANCH:
+git push ssh://filipwasil@review.gerrithub.io:29418/filipwasil/fillwave CHANGES:refs/for/BRANCH
+
+Admin only:
+git push ssh://filipwasil@review.gerrithub.io:29418/filipwasil/fillwave CHANGES:refs/for/dev_master
+git checkout master
+git merge dev_master
+git push ssh://filipwasil@review.gerrithub.io:29418/filipwasil/fillwave master:master

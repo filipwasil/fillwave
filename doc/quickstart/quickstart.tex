@@ -559,7 +559,7 @@ scene->setSkybox(skybox);
 \end{lstlisting}
 
 \subsection{Terrain}\label{sec:Terrain}
-\indent \indent Terrain in Fillwave can be generated using a voxel or quad chunks. These two methods provides complete mechanism for terrain generation.
+\indent \indent Terrain in Fillwave can be generated using a quad chunks. This method provides mechanism for terrain generation.
 
 
 \begin{lstlisting}
@@ -574,8 +574,7 @@ pTerrain terrain = buildTerrainVoxel(engine,
 gScene->attach(terrain);
 \end{lstlisting}
 
-\subsubsection{Voxel terrain}\label{sec:Voxel terrain}
-\indent \indent To create a voxel terrain You should implement a derivative \textbf{VoxelConstructor} class, and implement a \textbf{calculateActive} method. The method will take coordinates of a Voxel in VoxelChunk and decide if it should be Active or not. Active Voxels will be drawn. More information can be found in \textbf{example\_terrain\_voxel} and \textbf{example\_terrain\_quad} examples.
+\indent You may have noticed that some code mensions also a \textbf{voxel terrain} feature. This is an old legacy feature and it will be replaced by more generic solution. Stay tuned.
 
 \subsubsection{Mesh terrain}\label{sec:MeshTerrain}
 \indent \indent To create a terrain Mesh you should create a class derived from \textbf{TerrainConstructor} class, and implement a \textbf{calculateHeight} method. The method should take x and z coordinates in the range of (-1,1) in and return Y position.
@@ -797,7 +796,7 @@ void Engine::configureDebugger(eDebuggerState state);
 
 \section{Customization}
 
-\subsection{Custom events}\label{sec:Custom events}
+\subsection{Events}\label{sec:Custom events}
 \begin{lstlisting}
 
 namespace fillwave {
@@ -815,7 +814,7 @@ public:
 } /* actions */
 } /* fillwave */
 \end{lstlisting}
-\subsection{Custom callbacks}\label{sec:Custom callbacks}
+\subsection{Callbacks}\label{sec:Custom callbacks}
 \begin{lstlisting}
 namespace fillwave {
 namespace actions {
@@ -835,7 +834,7 @@ public:
 } /* actions */
 } /* fillwave */
 \end{lstlisting}
-\subsection{Custom easing}\label{sec:Custom easing}
+\subsection{Easing}\label{sec:Custom easing}
 \textbf{TimedMoveCallbackCustom.h}
 \begin{lstlisting}
 namespace fillwave {
@@ -877,6 +876,40 @@ GLfloat TimedMoveCallbackCustom::easeCustom(GLfloat progress) {
 \end{lstlisting}
 %\subsection{Custom buffers}\label{sec:Custom buffers}
 %\lstinputlisting[firstline=33,lastline=70]%{../../../fillwave/inc/fillwave/core/VertexBufferTerrain.h}
+
+\subsection{Renderers}\label{sec:Custom renderers}
+\indent By implementation of custom renderer class, one can simply manage the rendering approach of Fillwave engine. This is the most powerfull feature, because it provides a lot of flexibility. The simplest renderer example RendererFR. The most complex one we have here is RendererDR. 
+
+\begin{lstlisting}
+/*! \class CustomRenderer
+ * \brief Base for all renderers.
+ */
+
+class CustomRenderer {
+public:
+	CustomRenderer();
+	virtual ~CustomRenderer();
+
+	/* Add renderable item to your container */
+	void update(IRenderable* renderable) override;
+	
+	/* Iterate over your container passing and perform the draw on each of them */
+	void draw(ICamera& camera) override;
+	
+	/* Reset the renderers state */
+	void reset(GLuint width, GLuint height) override;
+	
+	/* Clear the container */
+	void clear() override;
+private:
+	/* Container which will keep your renderable elements */
+	std::vector<IRenderable*> mContainer;
+};
+
+} /* namespace framework */
+} /* namespace fillwave */
+
+\end{lstlisting}
 
 \section{Examples}
 

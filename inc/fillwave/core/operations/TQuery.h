@@ -13,7 +13,7 @@
 namespace fillwave {
 namespace core {
 
-/*! \class Query
+/*! \class TQuery
  * \brief GLObject to ask OpenGL questions.
  */
 
