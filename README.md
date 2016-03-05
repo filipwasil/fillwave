@@ -74,8 +74,11 @@ Android script is currently designed to work only with Linux. It assumes that An
 
 ## Developers
 
-https://github.com/filipwasil/fillwave/wiki/Workflow
-https://review.gerrithub.io/#/admin/projects/filipwasil/fillwave
+* Workflow: https://github.com/filipwasil/fillwave/wiki/Workflow
+* Coding standards: https://github.com/filipwasil/fillwave/tree/master/doc/coding_standards/ide
+* Review: https://review.gerrithub.io/#/admin/projects/filipwasil/fillwave
+* Agile: https://zube.io/boards/43120442
+
 https://zube.io/boards/43120442
 
 --------------------------------------
