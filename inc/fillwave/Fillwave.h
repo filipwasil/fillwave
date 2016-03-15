@@ -70,33 +70,20 @@ public:
 	GLuint getFramesPassed();
 	GLfloat getStartupAnimationTime() const;
 
-	/* Store shaders */
-	pShader storeShaderFragment(const std::string& shaderPath);
-	pShader storeShaderVertex(const std::string& shaderPath);
+	/**
+	 * Store shaders.
+	 *
+	 * T can be:
+	 *
+	 * GL_VERTEX_SHADER
+	 * GL_TESS_CONTROL_SHADER
+	 * GL_TESS_EVALUATION_SHADER
+	 * GL_GEOMETRY_SHADER
+	 * GL_FRAGMENT_SHADER
+	 */
 
-	pShader storeShaderFragment(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-	pShader storeShaderVertex(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-
-#ifdef FILLWAVE_GLES_3_0
-#else
-	pShader storeShaderGeometry(const std::string& shaderPath);
-	pShader storeShaderTesselationControl(const std::string& shaderPath);
-	pShader storeShaderTesselationEvaluation(const std::string& shaderPath);
-
-	pShader storeShaderGeometry(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-	pShader storeShaderTesselationControl(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-	pShader storeShaderTesselationEvaluation(
-			const std::string& shaderPath,
-			const std::string& shaderSource);
-#endif
+	template <GLuint T> pShader storeShader(const std::string& shaderPath);
+	template <GLuint T> pShader storeShader(const std::string& shaderPath, const std::string& shaderSource);
 
 	pProgram storeProgram(
 			const std::string& name,

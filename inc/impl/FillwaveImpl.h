@@ -19,9 +19,11 @@
 #include <fillwave/management/ShaderManager.h>
 #include <fillwave/management/SamplerManager.h>
 #include <fillwave/management/BufferManager.h>
-#include <fillwave/common/Macros.h>
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/management/TextureSystem.h>
+
+#include <fillwave/common/Macros.h>
+#include <fillwave/loaders/FileLoader.h>
 
 FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 
@@ -70,14 +72,14 @@ struct Engine::EngineImpl final {
 	puPixelBuffer mPickingPixelBuffer;
 
 	/* Resources */
+	ManagerShaders mShaders;
 	ManagerPrograms mPrograms;
-	puTextureSystem mTextures;
-	puShaderManager mShaderManager;
 	ManagerSamplers mSamplers;
-	puBufferManager mBufferManager;
+	BufferManager mBuffers;
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
 	puLightSystem mLights;
+	puTextureSystem mTextures;
 	std::vector<core::PostProcessingPass> mPostProcessingPasses;
 	std::vector<pTexture2DRenderableDynamic> mTexturesDynamic;
 	pProgram mProgramTextureLookup;
@@ -210,6 +212,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 				mFileLoader(getFilePathOnly(argv[0])),
 				mProgramLoader(engine),
 				mBackgroundColor(0.1,0.1,0.1),
+				mShaders(),
 				mFrameCounter(0),
 				mTimeFactor(1.0),
 				mStartupTime(0.0f),
@@ -277,8 +280,6 @@ inline void Engine::EngineImpl::initExtensions(void) {
 
 inline void Engine::EngineImpl::initManagement() {
 	mTextures = make_unique<framework::TextureSystem>(mFileLoader.getRootPath());
-	mShaderManager = make_unique<framework::ShaderManager>(mFileLoader.getRootPath());
-	mBufferManager = make_unique<framework::BufferManager>();
 	mLights = make_unique<framework::LightSystem>();
 }
 
@@ -299,7 +300,7 @@ inline void Engine::EngineImpl::initUniforms() {
 
 inline void Engine::EngineImpl::initOcclusionTest() {
 	std::vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
-	mVAOOcclusion = mBufferManager->getVAO(nullptr);
+	mVAOOcclusion = mBuffers.getVAO(nullptr);
 	mVBOOcclusion = puVertexBufferPosition(new core::VertexBufferPosition(vec));
 	mVBOOcclusion->getAttributes(mProgramOcclusionBox->getHandle());
 	mVBOOcclusion->attributesBind(mProgramOcclusionBox);
@@ -356,7 +357,9 @@ void Engine::EngineImpl::reload() {
 
 	initContext();
 
-	mShaderManager->reload();
+	for (auto& it : mShaders) {
+		it.second->mComponent->reload();
+	}
 
 	for (auto& it : mPrograms) {
 		it.second->mComponent->reload();
@@ -368,7 +371,7 @@ void Engine::EngineImpl::reload() {
 		it.second->mComponent->reload();
 	}
 
-	mBufferManager->reload();
+	mBuffers.reload();
 
 	mPickingPixelBuffer->reload();
 	reloadPickingBuffer();

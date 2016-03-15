@@ -8,53 +8,23 @@
 #ifndef SHADERMANAGER_H_
 #define SHADERMANAGER_H_
 
-#include <fillwave/Log.h>
-#include <fillwave/loaders/FileLoader.h>
 #include <fillwave/core/pipeline/Shader.h>
+#include <fillwave/management/base/TManagerComposite.h>
 
 namespace fillwave {
-class Engine;
 namespace framework {
 
-/*! \struct ShaderObject
- * \brief Data structure containing each Shader instance info.
+/**
+ * Data structure containing each Shader instance info.
  */
+typedef Composition<pShader, TPolicyShared<core::Shader>, GLuint, const std::string&> ShaderObject;
 
-struct ShaderObject {
-	std::string mFilePath;
-	pShader mShader;
-
-	void reload(Engine* engine);
-};
-
-typedef std::unique_ptr<ShaderObject> puShaderObject;
-
-/*! \class ShaderManager
- *
- * \brief Manager to handle ShaderObject objects.
- *
+/**
+ * Shader manager
  */
-
-class ShaderManager {
-private:
-	std::string mRootPath;
-public:
-	ShaderManager(const std::string& rootPath);
-	virtual ~ShaderManager() = default;
-
-	pShader add(const std::string& shaderPath, const unsigned int shaderType);
-	pShader add(
-			const std::string& shaderName,
-			const int shaderType,
-			const std::string& shaderSource);
-	pShader get(std::string path);
-
-	std::vector<puShaderObject> mShaderObjects;
-
-	void reload();
-};
+typedef ManagerComposite<std::unique_ptr<ShaderObject>, pShader, std::string,
+		UINT_MAX, TPolicyUnique<ShaderObject>, GLuint, const std::string&> ManagerShaders;
 
 } /* framework */
-typedef std::unique_ptr<framework::ShaderManager> puShaderManager;
 } /* fillwave */
 #endif /* SHADERMANAGER_H_ */

@@ -26,19 +26,15 @@ struct VAOObject {
 typedef std::shared_ptr<VAOObject> puVAOObject;
 
 /*! \class BufferManager
- * \brief Not used.
+ * \brief Used to reload VAOs and buffers.
  */
 
 class BufferManager {
 public:
 	BufferManager() = default;
-
 	virtual ~BufferManager() = default;
-
 	void collectGarbage();
-
 	void reload();
-
 	pVertexArray getVAO(IReloadable* renderable);
 
 private:
@@ -46,7 +42,6 @@ private:
 };
 
 } /* framework */
-typedef std::unique_ptr<framework::BufferManager> puBufferManager;
 } /* fillwave */
 
 #endif /* BUFFERMANAGER_H_ */

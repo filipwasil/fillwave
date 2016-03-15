@@ -115,27 +115,6 @@ pLightDirectional Engine::storeLightDirectional(
 		position, rotation, color, followed);
 }
 
-pShader Engine::storeShaderFragment(const std::string& shaderPath) {
-	return mImpl->mShaderManager->add(shaderPath, GL_FRAGMENT_SHADER);
-}
-
-pShader Engine::storeShaderFragment(
-		const std::string& shaderPath,
-		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath,
-	GL_FRAGMENT_SHADER, shaderSource);
-}
-
-pShader Engine::storeShaderVertex(const std::string& shaderPath) {
-	return mImpl->mShaderManager->add(shaderPath, GL_VERTEX_SHADER);
-}
-
-pShader Engine::storeShaderVertex(
-		const std::string& shaderPath,
-		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath, GL_VERTEX_SHADER, shaderSource);
-}
-
 pProgram Engine::storeProgram(
 		const std::string& name,
 		const std::vector<pShader>& shaders,
@@ -181,7 +160,7 @@ pSampler Engine::storeSO(GLint textureUnit) {
 }
 
 pVertexArray Engine::storeVAO(framework::IReloadable* user) {
-	return mImpl->mBufferManager->getVAO(user); // todo (Why ptr ?)
+	return mImpl->mBuffers.getVAO(user);
 }
 
 /* Inputs - insert */
@@ -529,43 +508,34 @@ const fScene* Engine::getModelFromFile(std::string path) {
 #endif
 }
 
+template <GLuint T>
+pShader Engine::storeShader(const std::string& shaderPath) {
+	std::string shaderSource = "";
+	const std::string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
+	ReadFile(fullPath, shaderSource);
+	return mImpl->mShaders.add(fullPath, T, shaderSource);
+}
+
+template <GLuint T>
+pShader Engine::storeShader(
+		const std::string& shaderPath,
+		const std::string& shaderSource) {
+	const std::string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
+	return mImpl->mShaders.add(fullPath, T, shaderSource);
+}
+
+template pShader Engine::storeShader<GL_VERTEX_SHADER>(const std::string&);
+template pShader Engine::storeShader<GL_FRAGMENT_SHADER>(const std::string&);
+template pShader Engine::storeShader<GL_VERTEX_SHADER>(const std::string&, const std::string&);
+template pShader Engine::storeShader<GL_FRAGMENT_SHADER>(const std::string&, const std::string&);
 #ifdef FILLWAVE_GLES_3_0
 #else
-
-pShader Engine::storeShaderGeometry(const std::string& shaderPath) {
-	return mImpl->mShaderManager->add(shaderPath, GL_GEOMETRY_SHADER);
-}
-
-pShader Engine::storeShaderGeometry(
-		const std::string& shaderPath,
-		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath,
-	GL_GEOMETRY_SHADER, shaderSource);
-}
-
-pShader Engine::storeShaderTesselationControl(const std::string& shaderPath) {
-	return mImpl->mShaderManager->add(shaderPath, GL_TESS_CONTROL_SHADER);
-}
-
-pShader Engine::storeShaderTesselationControl(
-		const std::string& shaderPath,
-		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath,
-	GL_TESS_CONTROL_SHADER, shaderSource);
-}
-
-pShader Engine::storeShaderTesselationEvaluation(
-		const std::string& shaderPath) {
-	return mImpl->mShaderManager->add(shaderPath, GL_TESS_EVALUATION_SHADER);
-}
-
-pShader Engine::storeShaderTesselationEvaluation(
-		const std::string& shaderPath,
-		const std::string& shaderSource) {
-	return mImpl->mShaderManager->add(shaderPath,
-	GL_TESS_EVALUATION_SHADER, shaderSource);
-}
-
+template pShader Engine::storeShader<GL_TESS_CONTROL_SHADER>(const std::string&);
+template pShader Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const std::string&);
+template pShader Engine::storeShader<GL_GEOMETRY_SHADER>(const std::string&);
+template pShader Engine::storeShader<GL_TESS_CONTROL_SHADER>(const std::string&, const std::string&);
+template pShader Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const std::string&, const std::string&);
+template pShader Engine::storeShader<GL_GEOMETRY_SHADER>(const std::string&, const std::string&);
 #endif
 
 void Engine::configureDebugger(eDebuggerState state) {
