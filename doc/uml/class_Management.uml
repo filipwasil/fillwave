@@ -1,0 +1,15 @@
+@startuml
+
+Engine *-- EngineImpl
+EngineImpl *-- ManagerShaders
+EngineImpl *-- ManagerPrograms
+EngineImpl *-- ManagerSamplers
+EngineImpl *-- BufferManager
+EngineImpl *-- vectorpText
+EngineImpl *-- vectorpFont
+EngineImpl *-- puLightSystem
+EngineImpl *-- puTextureSystem
+EngineImpl *-- vectorPostProcessingPass
+EngineImpl *-- vectorpTexture2DRenderableDynamic
+
+@enduml
