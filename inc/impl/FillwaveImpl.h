@@ -81,7 +81,6 @@ struct Engine::EngineImpl final {
 	puLightSystem mLights;
 	puTextureSystem mTextures;
 	std::vector<core::PostProcessingPass> mPostProcessingPasses;
-	std::vector<pTexture2DRenderableDynamic> mTexturesDynamic;
 	pProgram mProgramTextureLookup;
 
 	/* Fences and barriers */
@@ -228,7 +227,6 @@ Engine::EngineImpl::~EngineImpl() {
 	mTextManager.clear();
 	mFontManager.clear();
 	mPostProcessingPasses.clear();
-	mTexturesDynamic.clear();
 }
 
 void Engine::EngineImpl::init() {
@@ -424,7 +422,7 @@ void Engine::EngineImpl::draw(GLfloat time) {
 		glClearDepth(1.0f);
 
 		/* Calculate dynamic textures */
-		evaluateDynamicTextures(time);
+		mTextures->evaluateDynamicTextures(time);
 
 		/* Lights evaluation */
 		glDepthMask(GL_TRUE);
@@ -462,7 +460,7 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
 	glClearDepth(1.0f);
 
 	/* Calculate dynamic textures */
-	evaluateDynamicTextures(time);
+	mTextures->evaluateDynamicTextures(time);
 
 	/* Lights evaluation */
 	if (mScene) {
@@ -492,7 +490,7 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
 	glClearDepth(1.0f);
 
 	/* Calculate dynamic textures */
-	evaluateDynamicTextures(time);
+	mTextures->evaluateDynamicTextures(time);
 
 	/* Lights evaluation */
 	if (mScene) {
@@ -691,15 +689,6 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 			mScene->drawDepthColor(*(lightPoint->getShadowCamera(j).get()), lightPosition);
 		}
 		currentTextureUnit++;
-	}
-	core::Framebuffer::bindScreenFramebuffer();
-}
-
-inline void Engine::EngineImpl::evaluateDynamicTextures(
-		GLfloat timeExpiredInSeconds) {
-	for (auto& it : mTexturesDynamic) {
-		it->bindForWriting();
-		it->draw(timeExpiredInSeconds);
 	}
 	core::Framebuffer::bindScreenFramebuffer();
 }

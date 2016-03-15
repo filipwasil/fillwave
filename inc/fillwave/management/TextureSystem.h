@@ -93,6 +93,7 @@ public:
 
 	void reload();
 
+	void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
 	void resizeTextures(GLuint width, GLuint height);
 	void resize(GLuint width, GLuint height);
 

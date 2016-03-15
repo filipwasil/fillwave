@@ -466,6 +466,15 @@ void TextureSystem::resize(GLuint width, GLuint height) {
 	resize(mTextures2DRenderable, width, height);
 }
 
+void TextureSystem::evaluateDynamicTextures(
+		GLfloat timeExpiredInSeconds) {
+	for (auto& it : mTextures2DDynamic) {
+		it.second->mComponent->bindForWriting();
+		it.second->mComponent->draw(timeExpiredInSeconds);
+	}
+	core::Framebuffer::bindScreenFramebuffer();
+}
+
 void TextureSystem::reload() {
 	reload(mTextures1D);
 	reload(mTextures2D);

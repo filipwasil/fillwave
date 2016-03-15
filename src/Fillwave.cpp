@@ -141,7 +141,6 @@ pTexture2DRenderableDynamic Engine::storeTextureDynamic(
 		fragmentShaderPath);
 	pTexture2DRenderableDynamic t = mImpl->mTextures->getDynamic(path, program,
 		glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));
-	mImpl->mTexturesDynamic.push_back(t);
 	return t;
 }
 
