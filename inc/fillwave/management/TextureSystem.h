@@ -139,7 +139,7 @@ private:
 
 	std::vector<GLenum> mSupportedCompresssionTypes;
 	std::string mRootPath;
-	puTextureLoader mLoader;
+	TextureLoader mLoader;
 
 	void add(
 			std::string filePath,

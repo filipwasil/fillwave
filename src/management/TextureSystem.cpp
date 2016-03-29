@@ -75,7 +75,7 @@ void TextureSystem::add(
 		eCompression compression,
 		eFlip flip) {
 
-	core::Texture2DFile* file = mLoader->load(filePath, flip,
+	core::Texture2DFile* file = mLoader.load(filePath, flip,
 	GL_RGBA, mRootPath, compression);
 
 	if (file) {
@@ -92,7 +92,7 @@ void TextureSystem::addDynamic(
 		pProgram program,
 		glm::ivec2 screenSize) {
 
-	core::Texture2DFile* file = mLoader->loadEmpty(screenSize);
+	core::Texture2DFile* file = mLoader.loadEmpty(screenSize);
 
 	core::ParameterList parameters;
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
@@ -124,17 +124,17 @@ void TextureSystem::add(
 
 	FLOG_DEBUG("Texture %s will be added to manager", name.c_str());
 
-	core::Texture2DFile* filePosX = mLoader->load(posX, eFlip::eNone,
+	core::Texture2DFile* filePosX = mLoader.load(posX, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* fileNegX = mLoader->load(negX, eFlip::eNone,
+	core::Texture2DFile* fileNegX = mLoader.load(negX, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* filePosY = mLoader->load(posY, eFlip::eNone,
+	core::Texture2DFile* filePosY = mLoader.load(posY, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* fileNegY = mLoader->load(negY, eFlip::eNone,
+	core::Texture2DFile* fileNegY = mLoader.load(negY, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* filePosZ = mLoader->load(posZ, eFlip::eNone,
+	core::Texture2DFile* filePosZ = mLoader.load(posZ, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* fileNegZ = mLoader->load(negZ, eFlip::eNone,
+	core::Texture2DFile* fileNegZ = mLoader.load(negZ, eFlip::eNone,
 	GL_RGBA, mRootPath);
 
 	if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {

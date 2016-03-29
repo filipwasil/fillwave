@@ -107,7 +107,6 @@ private:
 };
 
 } /* framework */
-typedef std::unique_ptr<framework::TextureLoader> puTextureLoader;
 } /* fillwave */
 
 #endif /* TEXTURELOADER_H_ */
