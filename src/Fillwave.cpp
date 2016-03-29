@@ -124,9 +124,8 @@ pProgram Engine::storeProgram(
 
 pTexture2D Engine::storeTexture(
 		const std::string& texturePath,
-		const GLuint& mapType,
 		framework::eCompression compression) {
-	return mImpl->mTextures->get(texturePath, mapType, compression);
+	return mImpl->mTextures->get(texturePath, compression);
 }
 
 pTexture2DRenderable Engine::storeTextureRenderable() {
@@ -217,8 +216,7 @@ pText Engine::storeText(
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
 	}
 	pTexture2D t = mImpl->mTextures->get(fontName + ".png",
-	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone,
-		framework::eFlip::eVertical);
+		framework::eCompression::eNone, framework::eFlip::eVertical);
 
 	Font* font = nullptr;
 	for (auto& it : mImpl->mFontManager) {

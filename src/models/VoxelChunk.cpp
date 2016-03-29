@@ -325,7 +325,7 @@ VoxelChunk::VoxelChunk(
 			mSize(size),
 			mProgram(program),
 			mTexture(
-				engine->storeTexture(texturePath.c_str(), aiTextureType_DIFFUSE)),
+				engine->storeTexture(texturePath.c_str())),
 			mLights(engine->getLightSystem()) {
 
 	mVoxels = new Voxel**[mSize];

@@ -325,14 +325,11 @@ inline void Engine::EngineImpl::initStartup() {
 
 	FLOG_DEBUG("Post processing startup pass added");
 
-	mStartupTexture = mTextures->get("logo.png",
-	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone);
+	mStartupTexture = mTextures->get("logo.png", framework::eCompression::eNone);
 	if (not mStartupTexture) {
-		mStartupTexture = mTextures->get("textures/logo.png",
-		FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone);
+		mStartupTexture = mTextures->get("textures/logo.png", framework::eCompression::eNone);
 		if (not mStartupTexture) {
-			mStartupTexture = mTextures->get("64_64_64.color",
-			FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression::eNone);
+			mStartupTexture = mTextures->get("64_64_64.color", framework::eCompression::eNone);
 			FLOG_ERROR("Fillwave startup logo could not be executed");
 		}
 	}

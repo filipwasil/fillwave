@@ -66,8 +66,7 @@ public:
 
 	void checkExtensions();
 
-	pTexture2D get(std::string texturePath, GLuint mapType =
-	FILLWAVE_TEXTURE_TYPE_NONE, eCompression = eCompression::eNone, eFlip flip =
+	pTexture2D get(std::string texturePath, eCompression = eCompression::eNone, eFlip flip =
 			eFlip::eVertical);
 
 	pTexture3D get(
@@ -144,7 +143,6 @@ private:
 
 	void add(
 			std::string filePath,
-			GLuint mapType,
 			eCompression compression,
 			eFlip flip);
 

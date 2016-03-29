@@ -50,12 +50,11 @@ typedef aiMaterial fMaterial;
 typedef aiNode fNode;
 typedef aiMesh fMesh;
 
-/* Constants */
+/* Assimp Constants */
 #define FILLWAVE_TEXTURE_TYPE_NONE aiTextureType_NONE
 #define FILLWAVE_TEXTURE_TYPE_DIFFUSE aiTextureType_DIFFUSE
 #define FILLWAVE_TEXTURE_TYPE_NORMALS aiTextureType_NORMALS
 #define FILLWAVE_TEXTURE_TYPE_SPECULAR aiTextureType_SPECULAR
-
 #define FILLWAVE_PROCESS_TRIANGULATE aiProcess_Triangulate
 #define FILLWAVE_PROCESS_SORT_BY_P_TYPE aiProcess_SortByPType
 #define FILLWAVE_PROCESS_CALC_TANGENT_SPACE aiProcess_CalcTangentSpace

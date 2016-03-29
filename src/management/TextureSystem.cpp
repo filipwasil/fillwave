@@ -72,7 +72,6 @@ inline void TextureSystem::checkExtensions() {
 
 void TextureSystem::add(
 		std::string filePath,
-		GLuint mapType,
 		eCompression compression,
 		eFlip flip) {
 
@@ -83,7 +82,6 @@ void TextureSystem::add(
 		FLOG_DEBUG("Texture %s added to manager", filePath.c_str());
 		core::ParameterList parameters;
 		pTexture2D t = mTextures2D.add(filePath, file, parameters, 1);
-		t->setMapType(mapType);
 	} else {
 		FLOG_DEBUG("Texture %s not found", filePath.c_str());
 	}
@@ -188,7 +186,6 @@ void TextureSystem::add(
 
 pTexture2D TextureSystem::get(
 		std::string texturePath,
-		GLuint mapType,
 		eCompression compression,
 		eFlip flip) {
 	std::string filePath = mRootPath + texturePath;
@@ -196,7 +193,7 @@ pTexture2D TextureSystem::get(
 		return mTextures2D[filePath]->mComponent;
 	}
 
-	add(filePath, mapType, compression, flip);
+	add(filePath, compression, flip);
 
 	if (mTextures2D.find(filePath) != mTextures2D.end()) {
 		return mTextures2D[filePath]->mComponent;

@@ -41,21 +41,13 @@ Texture2DFileHeader::Texture2DFileHeader(
 }
 
 Texture::Texture(GLenum textureTarget, GLsizei howMany) :
-		GLObject(howMany), mTarget(textureTarget), mMapType(0) { //xxx why this has to be in generic texture class
+		GLObject(howMany), mTarget(textureTarget) {
 	reload();
 }
 
 Texture::~Texture() {
 	glDeleteTextures(mHowMany, mHandles);
 	FLOG_CHECK("Could not delete texture");
-}
-
-GLuint Texture::getMapType() {
-	return mMapType;
-}
-
-void Texture::setMapType(GLuint mapType) {
-	mMapType = mapType;
 }
 
 GLint Texture::getTarget() {

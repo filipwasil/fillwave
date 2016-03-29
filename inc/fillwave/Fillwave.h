@@ -91,8 +91,7 @@ public:
 			GLboolean skipLinking = GL_FALSE);
 
 	/* Store textures */
-	pTexture2D storeTexture(const std::string& texturePath, const GLuint& mapType =
-	FILLWAVE_TEXTURE_TYPE_NONE, framework::eCompression compression =
+	pTexture2D storeTexture(const std::string& texturePath, framework::eCompression compression =
 			framework::eCompression::eNone);
 
 	pTexture2DRenderable storeTextureRenderable();

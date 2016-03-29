@@ -32,14 +32,9 @@ MeshTerrain::MeshTerrain(
 			mChunkWidth(radius * 0.2 * 16 / density),
 			mJumpStep(density * 0.2 * 16 / density) {
 
-	pTexture2D diffuseMap = engine->storeTexture(diffuseMapPath.c_str(),
-		aiTextureType_DIFFUSE);
-
-	pTexture2D normalMap = engine->storeTexture(normalMapPath.c_str(),
-		aiTextureType_NORMALS);
-
-	pTexture2D specularMap = engine->storeTexture(specularMapPath.c_str(),
-		aiTextureType_SPECULAR);
+	pTexture2D diffuseMap = engine->storeTexture(diffuseMapPath.c_str());
+	pTexture2D normalMap = engine->storeTexture(normalMapPath.c_str());
+	pTexture2D specularMap = engine->storeTexture(specularMapPath.c_str());
 
 	std::vector<GLuint> indices;
 

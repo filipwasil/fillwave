@@ -109,18 +109,12 @@ public:
 	void setParameter(GLenum parameter, GLenum value);
 	void setParameters(ParameterList paramers);
 
-	GLuint getMapType();
-	void setMapType(GLuint mapType);
-
 	virtual GLint getTarget();
 	virtual void reload();
 
 	virtual void log() = 0;
 protected:
 	GLenum mTarget;
-
-private:
-	GLuint mMapType;
 };
 
 void bindTexture(GLuint target, GLuint handle);

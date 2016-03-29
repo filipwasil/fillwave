@@ -157,16 +157,12 @@ inline void Model::loadNodes(
 		const fMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
 		const fMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
 
-		pMesh mesh = loadMesh(aMesh, Material(aMaterial),
-			buildTextureRegion(
-				engine->storeTexture(diffuseMapPath.c_str(),
-					aiTextureType_DIFFUSE)),
-			buildTextureRegion(
-				engine->storeTexture(normalMapPath.c_str(), aiTextureType_NORMALS)),
-			buildTextureRegion(
-				engine->storeTexture(specularMapPath.c_str(),
-					aiTextureType_SPECULAR)), engine);
-		entity->attach(mesh);
+		entity->attach(
+			loadMesh(aMesh, Material(aMaterial),
+				buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str())),
+				buildTextureRegion(engine->storeTexture(normalMapPath.c_str())),
+				buildTextureRegion(engine->storeTexture(specularMapPath.c_str())),
+				engine));
 	}
 
 	/* Evaluate children */
@@ -213,14 +209,12 @@ inline void Model::loadNodes(
 					nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
 						specularMapPathAssimp.data : "";
 
-		pMesh mesh = loadMesh(aMesh, Material(aMaterial),
-			buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str(),
-			FILLWAVE_TEXTURE_TYPE_DIFFUSE)),
-			buildTextureRegion(engine->storeTexture(normalMapPath.c_str(),
-			FILLWAVE_TEXTURE_TYPE_NORMALS)),
-			buildTextureRegion(engine->storeTexture(specularMapPath.c_str(),
-			FILLWAVE_TEXTURE_TYPE_SPECULAR)), engine);
-		entity->attach(mesh);
+		entity->attach(
+			loadMesh(aMesh, Material(aMaterial),
+				buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str())),
+				buildTextureRegion(engine->storeTexture(normalMapPath.c_str())),
+				buildTextureRegion(engine->storeTexture(specularMapPath.c_str())),
+				engine));
 	}
 
 	/* Evaluate children */
