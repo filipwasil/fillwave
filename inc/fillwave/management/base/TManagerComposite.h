@@ -40,6 +40,8 @@ struct Composition {
  *
  * \param M - Maximum items
  *
+ * \param C - Creation policy
+ *
  * \param K - Key class
  */
 template <class T, class R, class K, size_t M, class C, typename ... P>
