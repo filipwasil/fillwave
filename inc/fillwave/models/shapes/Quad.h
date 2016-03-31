@@ -8,7 +8,7 @@
 #ifndef SRC_MODELS_SHAPES_QUAD_H_
 #define SRC_MODELS_SHAPES_QUAD_H_
 
-#include <fillwave/core/buffers/TVertexBufferBasic.h>
+#include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/models/shapes/Shape.h>
 
 namespace fillwave {

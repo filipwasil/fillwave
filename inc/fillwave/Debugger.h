@@ -8,7 +8,7 @@
 #ifndef DEBUGGER_H_
 #define DEBUGGER_H_
 
-#include <fillwave/core/buffers/TVertexBufferDebug.h>
+#include <fillwave/core/buffers/VertexBufferDebug.h>
 
 namespace fillwave {
 namespace core {

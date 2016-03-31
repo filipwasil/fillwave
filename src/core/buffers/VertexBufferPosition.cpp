@@ -5,7 +5,7 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/core/buffers/TVertexBufferPosition.h>
+#include <fillwave/core/buffers/VertexBufferPosition.h>
 
 FLOGINIT("VertexBufferPosition", FERROR | FFATAL)
 

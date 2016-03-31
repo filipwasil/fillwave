@@ -13,10 +13,9 @@
 namespace fillwave {
 namespace core {
 
-/*! \class VertexBufferPosition
+/*! \class VertexBufferFloat
  * \brief Vertex buffer specialized with GLfloat data structure.
  */
-
 class VertexBufferFloat: public TVertexBuffer<GLfloat> {
 public:
 	VertexBufferFloat(

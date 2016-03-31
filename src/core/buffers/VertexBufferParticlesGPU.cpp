@@ -5,7 +5,7 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/core/buffers/TVertexBufferParticlesGPU.h>
+#include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferParticlesGPU", FERROR | FFATAL)

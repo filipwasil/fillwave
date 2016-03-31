@@ -8,7 +8,7 @@
 #ifndef VOXELCHUNK_H_
 #define VOXELCHUNK_H_
 
-#include <fillwave/core/buffers/TVertexBufferBasic.h>
+#include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/models/terrain/Voxel.h>
 #include <fillwave/models/terrain/VoxelConstructor.h>
 #include <fillwave/core/texturing/Texture2D.h>

@@ -8,8 +8,7 @@
 #include <fillwave/Log.h>
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/Assets.h>
-#include <fillwave/core/buffers/TVertexBufferBasic.h>
-
+#include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/Profiler.h>
 
 FLOGINIT("VertexBufferBasic", FERROR | FFATAL)

@@ -11,7 +11,7 @@
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/texturing/TextureRegion.h>
 #include <fillwave/core/buffers/IndexBufferBasic.h>
-#include <fillwave/core/buffers/TVertexBufferBasic.h>
+#include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/core/operations/ConditionalRender.h>
 #include <fillwave/core/operations/TQuery.h>
 #include <fillwave/models/Entity.h>

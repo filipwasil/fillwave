@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/core/buffers/TVertexBufferText.h>
+#include <fillwave/core/buffers/VertexBufferText.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferText", FERROR | FFATAL)

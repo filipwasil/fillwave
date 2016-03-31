@@ -80,7 +80,7 @@ core::Texture2DFile* TextureLoader::load(
 		core::Texture2DFile* file = loadVirtualFileCheckboard(512, 512, r, g, b);
 		return file;
 	} else if (posDDS != std::string::npos) {
-		FLOG_ERROR("Compressed Textures %s not supported yet");
+		FLOG_ERROR("Compressed Texture %s not supported yet", filePath.c_str());
 		return nullptr;
 	} else {
 		GLint w, h, n;

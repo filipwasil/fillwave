@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/core/buffers/TVertexBufferDebug.h>
+#include <fillwave/core/buffers/VertexBufferDebug.h>
 
 namespace fillwave {
 namespace core {

@@ -5,7 +5,7 @@
  *      Author: filip
  */
 
-#include <fillwave/core/buffers/TVertexBufferFloat.h>
+#include <fillwave/core/buffers/VertexBufferFloat.h>
 
 FLOGINIT("VertexBufferFloat", FERROR | FFATAL)
 
