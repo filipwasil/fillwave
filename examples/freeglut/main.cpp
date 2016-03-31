@@ -1,5 +1,6 @@
 
 #include <fillwave/Fillwave.h>
+#include <fillwave/Framework.h>
 #include <GL/freeglut.h>
 #include <memory>
 
@@ -14,15 +15,17 @@ FLOGINIT_DEFAULT()
 Engine* engine;
 
 void disp(void) {
-
+	FLOG_ERROR("display");
 }
 
 void timer(int) {
+	static int Old = glutGet(GLUT_ELAPSED_TIME);
+	int New = glutGet(GLUT_ELAPSED_TIME);
+	int delta = New - Old;
+	Old = New;
 
-	static int timeSinceStart = glutGet(GLUT_ELAPSED_TIME);
-	int timeSinceStartNew = glutGet(GLUT_ELAPSED_TIME);
-	timeSinceStart = timeSinceStartNew - timeSinceStart;
-	engine->draw(static_cast<float>(timeSinceStartNew - timeSinceStart) * 0.00001f);
+	engine->draw(static_cast<float>(delta) * 0.001f);
+
 	glutSwapBuffers();
 
 	glutTimerFunc(1.0f / 60.0f, timer, 1);
@@ -59,8 +62,7 @@ int main(int argc, char *argv[]) {
 					> (glm::vec3(0.0, 0.0, 6.0), glm::quat(), glm::radians(90.0), 1.0, 0.1, 1000.0);
 	auto scene = buildScenePerspective(camera);
 	engine->setCurrentScene(scene);
-	engine->storeText("Fillwave freeglut example", "FreeSans", -0.95f, 0.2f,
-			100.0f);
+	engine->storeText("Fillwave freeglut example", "FreeSans", glm::vec2(-0.95f, 0.2f), 100.0f);
 
 	//engine->configureDebugger(eDebuggerState::eLightsSpot);
 
@@ -69,17 +71,15 @@ int main(int argc, char *argv[]) {
 	LoopCallback* loop[SPHERES];
 
 	/* Program */
-	ProgramLoader loader(engine);
-	pProgram progDefault = loader.getDefault();
+	pProgram progDefault = ProgramLoader(engine).getDefault();
 
 	/* Lights */
 	engine->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(),
 			glm::vec4(0.0, 1.0, 0.0, 0.0));
 
 	/* Models */
-
-	pModel wall = buildModel(engine, progDefault, "meshes/floor.obj",
-			"textures/test.png", "textures/test.png", "textures/test.png");
+	pTexture2D t = engine->storeTexture("textures/multicolor.dds", eCompression::eS3tc_dxt5_rgba);
+	pModel wall = buildModel(engine, progDefault, "meshes/floor.obj", t);
 
 	scene->attach(wall);
 
