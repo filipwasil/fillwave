@@ -42,6 +42,7 @@ core::Texture2DFile* TextureLoader::load(
 	FLOG_DEBUG("Texture %s loading ...", filePath.c_str());
 	size_t posCheckboard = filePath.find(".checkboard");
 	size_t posColor = filePath.find(".color");
+	size_t posDDS = filePath.find(".dds");
 	uint8_t r = 0, g = 0, b = 0;
 	if (filePath == rootPath) {
 		FLOG_DEBUG("Empty texture %s generation and loading ...",
@@ -51,7 +52,7 @@ core::Texture2DFile* TextureLoader::load(
 	} else if (posColor != std::string::npos) {
 		FLOG_DEBUG("Color texture %s generation and loading ...",
 			filePath.c_str());
-		std::string sub = filePath.substr(rootPath.size(), posCheckboard);
+		std::string sub = filePath.substr(rootPath.size(), posColor);
 		std::vector<std::string> tokens = split(sub, '_');
 		if (tokens.size() >= 3) {
 			r = atoi(tokens[0].c_str());
@@ -78,6 +79,9 @@ core::Texture2DFile* TextureLoader::load(
 		}
 		core::Texture2DFile* file = loadVirtualFileCheckboard(512, 512, r, g, b);
 		return file;
+	} else if (posDDS != std::string::npos) {
+		FLOG_ERROR("Compressed Textures %s not supported yet");
+		return nullptr;
 	} else {
 		GLint w, h, n;
 		GLubyte *content = stbi_load(filePath.c_str(), &w, &h, &n,
