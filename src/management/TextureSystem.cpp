@@ -8,7 +8,7 @@
 #include <fillwave/Log.h>
 #include <fillwave/management/TextureSystem.h>
 
-FLOGINIT("TextureManager", FERROR | FFATAL | FINFO | FDEBUG)
+FLOGINIT("TextureSystem", FERROR | FFATAL | FINFO | FDEBUG)
 
 namespace fillwave {
 namespace framework {
