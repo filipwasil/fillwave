@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da9b358b_a6a1d0ab",
+        "filename": "inc/fillwave/management/base/TManagerStack.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2016-03-31T08:57:39Z",
+      "side": 1,
+      "message": "empty line ?",
+      "revId": "0b27e6fe14e04ce8384a51de9379c30fcfb05387",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da9b358b_a6baf0df",
+        "filename": "inc/fillwave/management/base/TManagerStack.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2016-03-31T08:57:39Z",
+      "side": 1,
+      "message": "This is not needed",
+      "revId": "0b27e6fe14e04ce8384a51de9379c30fcfb05387",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
