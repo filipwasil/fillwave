@@ -27,7 +27,7 @@ public:
 	~TPolicyShared() = default;
 
 	template <typename ... P>
-	inline std::shared_ptr<T> Create(P ... parameters) {
+	inline std::shared_ptr<T> create(P ... parameters) {
 		return std::make_shared<T>(parameters...);
 	}
 };
@@ -42,7 +42,7 @@ public:
 	~TPolicyUnique() = default;
 
 	template <typename ... P>
-	inline std::unique_ptr<T> Create(P ... parameters) {
+	inline std::unique_ptr<T> create(P ... parameters) {
 		return make_unique<T>(parameters...);
 	}
 };
@@ -52,7 +52,7 @@ public:
  */
 template <class T, class C, typename ... P>
 inline T FillwaveItemConstruct(P ... parameters) {
-	return C().Create(parameters...);
+	return C().create(parameters...);
 }
 
 /*! \class TManager

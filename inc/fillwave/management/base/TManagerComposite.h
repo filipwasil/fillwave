@@ -26,7 +26,7 @@ namespace framework {
 template <class T, class C, typename ... P>
 struct Composition {
 	Composition(P ... parameters) :
-			mComponent(C().Create(parameters...)) {
+			mComponent(C().create(parameters...)) {
 	}
 	T mComponent;
 };
