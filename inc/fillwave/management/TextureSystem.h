@@ -106,7 +106,7 @@ private:
 			core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
 
 	ManagerComposite<std::unique_ptr<TextureObject2DDeferred>, pTexture2D,
-			std::string, UINT_MAX, TPolicyUnique<TextureObject2DDeferred>,
+			size_t, UINT_MAX, TPolicyUnique<TextureObject2DDeferred>,
 			core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2DDeferred;
 
 	ManagerComposite<std::unique_ptr<TextureObject2DDynamic>,
@@ -115,7 +115,7 @@ private:
 			core::ParameterList&, pProgram> mTextures2DDynamic;
 
 	ManagerComposite<std::unique_ptr<TextureObject2DRenderable>,
-			pTexture2DRenderable, std::string, UINT_MAX,
+			pTexture2DRenderable, size_t, UINT_MAX,
 			TPolicyUnique<TextureObject2DRenderable>, GLenum, core::Texture2DFile*,
 			core::ParameterList&> mTextures2DRenderable;
 
@@ -131,7 +131,7 @@ private:
 			core::ParameterList&, pTexture2DRenderable, pProgram> mTextures3DDynamic;
 
 	ManagerComposite<std::unique_ptr<TextureObject3DRenderable>,
-			pTexture3DRenderable, std::string, UINT_MAX,
+			pTexture3DRenderable, size_t, UINT_MAX,
 			TPolicyUnique<TextureObject3DRenderable>, core::Texture2DFile*,
 			core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 			core::Texture2DFile*, core::Texture2DFile*, pTexture2DRenderable,
