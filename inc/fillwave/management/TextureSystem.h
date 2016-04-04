@@ -25,9 +25,6 @@ typedef Composition<pTexture2D, TPolicyShared<core::Texture2D>,
 		core::Texture2DFile*, core::ParameterList&, GLuint> TextureObject2DDeferred;
 
 typedef Composition<pTexture2D, TPolicyShared<core::Texture2D>,
-		core::Texture2DFile*, core::ParameterList&, GLuint> TextureObject2D;
-
-typedef Composition<pTexture2D, TPolicyShared<core::Texture2D>,
 		core::Texture2DFile*, core::ParameterList&, GLuint> TextureObject2DStatic;
 
 typedef Composition<pTexture2DRenderableDynamic,
