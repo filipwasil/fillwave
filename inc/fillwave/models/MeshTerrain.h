@@ -38,9 +38,9 @@ public:
 			pProgram program,
 			TerrainConstructor* constructor,
 			const Material& material,
-			pTexture2D diffuseMapPath,
-			pTexture2D normalMapPath,
-			pTexture2D specularMapPath,
+			core::Texture2D* diffuseMapPath,
+			core::Texture2D* normalMapPath,
+			core::Texture2D* specularMapPath,
 			GLuint radius,
 			GLuint density = 8);
 

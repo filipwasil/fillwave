@@ -27,14 +27,14 @@ namespace core {
 class TextureRegion {
 public:
 	TextureRegion(
-			pTexture2D texture,
+			core::Texture2D* texture,
 			GLfloat u1 = 0,
 			GLfloat v1 = 0,
 			GLfloat u2 = 1,
 			GLfloat v2 = 1);
 
 	virtual ~TextureRegion() = default;
-	pTexture2D getTexture();
+	core::Texture2D* getTexture();
 	GLfloat convertU(GLfloat u);
 	GLfloat convertV(GLfloat v);
 
@@ -43,12 +43,12 @@ private:
 	GLfloat mV1;
 	GLfloat mU2;
 	GLfloat mV2;
-	pTexture2D mTexture;
+	core::Texture2D* mTexture;
 };
 
 } /* core */
 pTextureRegion buildTextureRegion(
-		pTexture2D texture,
+		core::Texture2D* texture = nullptr,
 		GLfloat u1 = 0.0,
 		GLfloat v1 = 0.0,
 		GLfloat u2 = 1.0,

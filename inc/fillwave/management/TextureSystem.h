@@ -14,9 +14,12 @@
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/Assets.h>
 #include <fillwave/management/base/TManagerComposite.h>
+#include <fillwave/management/base/TManagerSmart.h>
 
 namespace fillwave {
 namespace framework {
+
+static constexpr size_t FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER = 50;
 
 typedef Composition<pTexture1D, TPolicyShared<core::Texture1D>,
 		core::ParameterList&> TextureObject1D;
@@ -63,7 +66,7 @@ public:
 
 	void checkExtensions();
 
-	pTexture2D get(std::string texturePath, eCompression = eCompression::eNone, eFlip flip =
+	core::Texture2D* get(std::string texturePath, eCompression = eCompression::eNone, eFlip flip =
 			eFlip::eVertical);
 
 	pTexture3D get(
@@ -98,9 +101,8 @@ private:
 	ManagerComposite<std::unique_ptr<TextureObject1D>, pTexture1D, std::string,
 			UINT_MAX, TPolicyUnique<TextureObject1D>, core::ParameterList&> mTextures1D;
 
-	ManagerComposite<std::unique_ptr<TextureObject2DStatic>, pTexture2D,
-			std::string, UINT_MAX, TPolicyUnique<TextureObject2DStatic>,
-			core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
+	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture2D,
+			std::string, core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
 
 	ManagerComposite<std::unique_ptr<TextureObject2DDeferred>, pTexture2D,
 			size_t, UINT_MAX, TPolicyUnique<TextureObject2DDeferred>,
@@ -139,11 +141,6 @@ private:
 	TextureLoader mLoader;
 
 	void add(
-			std::string filePath,
-			eCompression compression,
-			eFlip flip);
-
-	void add(
 			const std::string& posX,
 			const std::string& negX,
 			const std::string& posY,
@@ -160,6 +157,13 @@ private:
 	inline void reload(T& textures) {
 		for (auto& it : textures) {
 			it.second->mComponent->reload();
+		}
+	}
+
+	template <class T>
+	inline void reloadSmart(T& textures) {
+		for (auto& it : textures) {
+			it.second->reload();
 		}
 	}
 

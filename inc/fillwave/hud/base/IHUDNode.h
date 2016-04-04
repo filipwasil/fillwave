@@ -24,7 +24,7 @@ namespace framework {
 class IHUDNode {
 public:
 	IHUDNode(
-			const pTexture2D& texture,
+			core::Texture2D* texture,
 			pProgram program,
 			glm::vec2 position,
 			glm::vec2 scale) :
@@ -65,7 +65,7 @@ public:
 	}
 
 protected:
-	pTexture2D mTexture;
+	core::Texture2D* mTexture;
 	pProgram mProgram;
 	glm::vec2 mPosition;
 	glm::vec2 mScale;

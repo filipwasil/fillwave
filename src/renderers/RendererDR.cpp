@@ -49,8 +49,8 @@ namespace fillwave {
 			std::vector<core::VertexBasic> vertices = sphere.getVertices();
 			std::vector<GLuint> indices = sphere.getIndices();
 
-			mDeferredPointLight = make_unique<Mesh>(engine, Material(), buildTextureRegion(pTexture2D()),
-					buildTextureRegion(pTexture2D()), buildTextureRegion(pTexture2D()),
+			mDeferredPointLight = make_unique<Mesh>(engine, Material(), buildTextureRegion(),
+					buildTextureRegion(), buildTextureRegion(),
 					mProgramPointLight, pProgram(), pProgram(), loader.getOcclusionQuery(),
 					pProgram(), pProgram(), mLights,
 					std::make_shared<core::VertexBufferBasic>(vertices),

@@ -70,23 +70,6 @@ inline void TextureSystem::checkExtensions() {
 #endif
 }
 
-void TextureSystem::add(
-		std::string filePath,
-		eCompression compression,
-		eFlip flip) {
-
-	core::Texture2DFile* file = mLoader.load(filePath, flip,
-	GL_RGBA, mRootPath, compression);
-
-	if (file) {
-		FLOG_DEBUG("Texture %s added to manager", filePath.c_str());
-		core::ParameterList parameters;
-		pTexture2D t = mTextures2D.add(filePath, file, parameters, 1);
-	} else {
-		FLOG_DEBUG("Texture %s not found", filePath.c_str());
-	}
-}
-
 void TextureSystem::addDynamic(
 		const std::string& fragmentShaderPath,
 		pProgram program,
@@ -184,22 +167,26 @@ void TextureSystem::add(
 	}
 }
 
-pTexture2D TextureSystem::get(
+core::Texture2D* TextureSystem::get(
 		std::string texturePath,
 		eCompression compression,
 		eFlip flip) {
 	std::string filePath = mRootPath + texturePath;
 	if (mTextures2D.find(filePath) != mTextures2D.end()) {
-		return mTextures2D[filePath]->mComponent;
+		return mTextures2D[filePath].get();
 	}
 
-	add(filePath, compression, flip);
+	core::Texture2DFile* file = mLoader.load(filePath, flip,
+	GL_RGBA, mRootPath, compression);
 
-	if (mTextures2D.find(filePath) != mTextures2D.end()) {
-		return mTextures2D[filePath]->mComponent;
+	if (file) {
+		FLOG_DEBUG("Texture %s added to manager", filePath.c_str());
+		core::ParameterList parameters;
+		return mTextures2D.store(filePath, file, parameters, 1);
+	} else {
+		FLOG_DEBUG("Texture %s not found", filePath.c_str());
+		return nullptr;
 	}
-
-	return pTexture2D();
 }
 
 pTexture2DRenderableDynamic TextureSystem::getDynamic(
@@ -467,7 +454,7 @@ void TextureSystem::evaluateDynamicTextures(
 
 void TextureSystem::reload() {
 	reload(mTextures1D);
-	reload(mTextures2D);
+	reloadSmart(mTextures2D);
 	reload(mTextures2DDynamic);
 	reload(mTextures2DRenderable);
 	reload(mTextures3D);

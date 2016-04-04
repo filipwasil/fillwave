@@ -11,7 +11,7 @@ namespace fillwave {
 namespace core {
 
 TextureRegion::TextureRegion(
-		pTexture2D texture,
+		core::Texture2D* texture,
 		GLfloat u1,
 		GLfloat v1,
 		GLfloat u2,
@@ -20,7 +20,7 @@ TextureRegion::TextureRegion(
 
 }
 
-pTexture2D TextureRegion::getTexture() {
+core::Texture2D* TextureRegion::getTexture() {
 	return mTexture;
 }
 
@@ -34,7 +34,7 @@ GLfloat TextureRegion::convertV(GLfloat v) {
 
 } /* core */
 pTextureRegion buildTextureRegion(
-		pTexture2D texture,
+		core::Texture2D* texture,
 		GLfloat u1,
 		GLfloat v1,
 		GLfloat u2,

@@ -106,7 +106,7 @@ struct Engine::EngineImpl final {
 
 	/* Startup */
 	GLfloat mStartupTime;
-	pTexture mStartupTexture;
+	core::Texture* mStartupTexture;
 	const GLfloat mStartupTimeLimit = 8.0f;
 	puPostProcessingPass mPostProcessingPassStartup;
 
@@ -632,7 +632,7 @@ inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
 
 	tex->bindForWriting();
 
-	drawTexture(mStartupTexture.get());
+	drawTexture(mStartupTexture);
 
 	core::Framebuffer::bindScreenFramebuffer();
 

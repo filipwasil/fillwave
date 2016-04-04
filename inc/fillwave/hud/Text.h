@@ -34,7 +34,7 @@ class Text: public IReloadable, public IHUDNode {
 public:
 	Text(
 			std::string& text,
-			pTexture2D texture,
+			core::Texture2D* texture,
 			glm::vec2 position,
 			Engine* engine,
 			GLfloat scale,

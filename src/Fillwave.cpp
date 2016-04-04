@@ -122,7 +122,7 @@ pProgram Engine::storeProgram(
 	return mImpl->mPrograms.add(name, shaders, skipLinking);
 }
 
-pTexture2D Engine::storeTexture(
+core::Texture2D* Engine::storeTexture(
 		const std::string& texturePath,
 		framework::eCompression compression) {
 	return mImpl->mTextures->get(texturePath, compression);
@@ -215,7 +215,7 @@ pText Engine::storeText(
 	if (not mImpl->mTextures->get(fontName + ".png")) {
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
 	}
-	pTexture2D t = mImpl->mTextures->get(fontName + ".png",
+	core::Texture2D* t = mImpl->mTextures->get(fontName + ".png",
 		framework::eCompression::eNone, framework::eFlip::eVertical);
 
 	Font* font = nullptr;

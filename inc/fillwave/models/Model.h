@@ -28,9 +28,9 @@ public:
 			Engine* engine,
 			pProgram program,
 			framework::Shape<core::VertexBasic>& shape,
-			pTexture2D diffuseMap,
-			pTexture2D normalMap,
-			pTexture2D specularMap,
+			core::Texture2D* diffuseMap,
+			core::Texture2D* normalMap,
+			core::Texture2D* specularMap,
 			const Material& material);
 
 	Model(Engine* engine, pProgram program, const std::string& shapePath);
@@ -47,9 +47,9 @@ public:
 			Engine* engine,
 			pProgram program,
 			const std::string& shapePath,
-			pTexture2D diffuseMap,
-			pTexture2D normalMap = pTexture2D(),
-			pTexture2D specularMap = pTexture2D(),
+			core::Texture2D* diffuseMap,
+			core::Texture2D* normalMap = nullptr,
+			core::Texture2D* specularMap = nullptr,
 			const Material& material = Material());
 
 	virtual ~Model();
@@ -111,9 +111,9 @@ private:
 			const fScene* scene,
 			Engine* engine,
 			Entity* entity,
-			pTexture2D diffuseMap,
-			pTexture2D normalMap,
-			pTexture2D specularMap,
+			core::Texture2D* diffuseMap,
+			core::Texture2D* normalMap,
+			core::Texture2D* specularMap,
 			const Material& material);
 
 	pMesh loadMesh(
@@ -133,9 +133,9 @@ pModel buildModel(
 		Engine* engine,
 		pProgram program,
 		framework::Shape<core::VertexBasic>& shape,
-		pTexture2D diffuseMap = pTexture2D(),
-		pTexture2D normalMap = pTexture2D(),
-		pTexture2D specularMap = pTexture2D(),
+		core::Texture2D* diffuseMap = nullptr,
+		core::Texture2D* normalMap = nullptr,
+		core::Texture2D* specularMap = nullptr,
 		framework::Material material = framework::Material());
 
 pModel buildModel(
@@ -150,9 +150,9 @@ pModel buildModel(
 		Engine* engine,
 		pProgram program,
 		const std::string& shapePath,
-		pTexture2D diffuseMap,
-		pTexture2D normalMap = pTexture2D(),
-		pTexture2D specularMap = pTexture2D(),
+		core::Texture2D* diffuseMap,
+		core::Texture2D* normalMap = nullptr,
+		core::Texture2D* specularMap = nullptr,
 		framework::Material material = framework::Material());
 
 pModel buildModel(

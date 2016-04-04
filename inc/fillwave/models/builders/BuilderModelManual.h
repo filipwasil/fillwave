@@ -23,23 +23,23 @@ public:
 			Engine* engine,
 			std::string modelPath = "",
 			pProgram program = pProgram(),
-			pTexture2D diffuseMap = pTexture2D(),
-			pTexture2D normalMap = pTexture2D(),
-			pTexture2D specularMap = pTexture2D(),
+			core::Texture2D* diffuseMap = nullptr,
+			core::Texture2D* normalMap = nullptr,
+			core::Texture2D* specularMap = nullptr,
 			Material material = Material());
 
 	virtual ~BuilderModelManual() = default;
 
-	BuilderModelManual& setDiffuseMapTexture(pTexture2D texture);
-	BuilderModelManual& setNormalMapTexture(pTexture2D texture);
-	BuilderModelManual& setSpecularMapTexture(pTexture2D texture);
+	BuilderModelManual& setDiffuseMapTexture(core::Texture2D* texture);
+	BuilderModelManual& setNormalMapTexture(core::Texture2D* texture);
+	BuilderModelManual& setSpecularMapTexture(core::Texture2D* texture);
 	BuilderModelManual& setMaterial(Material material);
 	pModel build();
 
 private:
-	pTexture2D mDiffuseMap;
-	pTexture2D mNormalMap;
-	pTexture2D mSpecularMap;
+	core::Texture2D* mDiffuseMap;
+	core::Texture2D* mNormalMap;
+	core::Texture2D* mSpecularMap;
 	Material mMaterial;
 };
 

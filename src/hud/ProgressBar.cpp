@@ -16,7 +16,7 @@ namespace fillwave {
 
 		ProgressBar::ProgressBar(
 				Engine* engine,
-				const pTexture2D& texture,
+				core::Texture2D* texture,
 				const std::string& shaderPath,
 				glm::vec2 position,
 				glm::vec2 scale)

@@ -91,7 +91,7 @@ public:
 			GLboolean skipLinking = GL_FALSE);
 
 	/* Store textures */
-	pTexture2D storeTexture(
+	core::Texture2D* storeTexture(
 			const std::string& texturePath,
 			framework::eCompression compression = framework::eCompression::eNone);
 

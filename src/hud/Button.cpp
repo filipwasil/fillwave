@@ -14,7 +14,7 @@ namespace framework {
 
 Button::Button(
 		Engine* engine,
-		const pTexture2D& texture,
+		core::Texture2D* texture,
 		glm::vec2 position,
 		glm::vec2 scale) :
 			IHUDNode(texture, ProgramLoader(engine).getHUD(), position,

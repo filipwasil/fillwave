@@ -20,9 +20,9 @@ BuilderModelManual::BuilderModelManual(
 		Engine* engine,
 		std::string modelPath,
 		pProgram program,
-		pTexture2D diffuseMap,
-		pTexture2D normalMap,
-		pTexture2D specularMap,
+		core::Texture2D* diffuseMap,
+		core::Texture2D* normalMap,
+		core::Texture2D* specularMap,
 		Material material) :
 			BuilderModel(engine, modelPath, program),
 			mDiffuseMap(diffuseMap),
@@ -33,19 +33,19 @@ BuilderModelManual::BuilderModelManual(
 }
 
 BuilderModelManual& BuilderModelManual::setDiffuseMapTexture(
-		pTexture2D texture) {
+		core::Texture2D* texture) {
 	mDiffuseMap = texture;
 	return (*this);
 }
 
 BuilderModelManual& BuilderModelManual::setNormalMapTexture(
-		pTexture2D texture) {
+		core::Texture2D* texture) {
 	mNormalMap = texture;
 	return (*this);
 }
 
 BuilderModelManual& BuilderModelManual::setSpecularMapTexture(
-		pTexture2D texture) {
+		core::Texture2D* texture) {
 	mSpecularMap = texture;
 	return (*this);
 }
