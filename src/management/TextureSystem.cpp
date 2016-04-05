@@ -70,22 +70,6 @@ inline void TextureSystem::checkExtensions() {
 #endif
 }
 
-void TextureSystem::addDynamic(
-		const std::string& fragmentShaderPath,
-		pProgram program,
-		glm::ivec2 screenSize) {
-
-	core::Texture2DFile* file = mLoader.loadEmpty(screenSize);
-
-	core::ParameterList parameters;
-	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-
-	mTextures2DDynamic.add(fragmentShaderPath, file, parameters, program);
-}
-
 void TextureSystem::add(
 		const std::string& posX,
 		const std::string& negX,
@@ -176,10 +160,8 @@ core::Texture2D* TextureSystem::get(
 		return mTextures2D[filePath].get();
 	}
 
-	core::Texture2DFile* file = mLoader.load(filePath, flip,
-	GL_RGBA, mRootPath, compression);
-
-	if (file) {
+	if (core::Texture2DFile* file =
+			mLoader.load(filePath, flip, GL_RGBA, mRootPath, compression)) {
 		FLOG_DEBUG("Texture %s added to manager", filePath.c_str());
 		core::ParameterList parameters;
 		return mTextures2D.store(filePath, file, parameters, 1);
@@ -189,13 +171,21 @@ core::Texture2D* TextureSystem::get(
 	}
 }
 
-pTexture2DRenderableDynamic TextureSystem::getDynamic(
+core::Texture2DRenderableDynamic* TextureSystem::getDynamic(
 		const std::string& fragmentShaderPath,
 		pProgram program,
 		glm::ivec2 screenSize) {
 	std::string filePath = mRootPath + fragmentShaderPath;
-	addDynamic(filePath, program, screenSize);
-	return mTextures2DDynamic[filePath]->mComponent;
+
+	core::Texture2DFile* file = mLoader.loadEmpty(screenSize);
+
+	core::ParameterList parameters;
+	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+
+	return mTextures2DDynamic.store(fragmentShaderPath, file, parameters, program);
 }
 
 pTexture3D TextureSystem::get(
@@ -224,7 +214,7 @@ pTexture3D TextureSystem::get(
 	return mTextures3D[key]->mComponent;
 }
 
-pTexture2DRenderable TextureSystem::getShadow2D(GLuint width, GLuint height) {
+core::Texture2DRenderable* TextureSystem::getShadow2D(GLuint width, GLuint height) {
 
 	core::Texture2DFile* file = new core::Texture2DFile();
 	core::ParameterList parameters;
@@ -255,10 +245,10 @@ pTexture2DRenderable TextureSystem::getShadow2D(GLuint width, GLuint height) {
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
 #endif
 
-	return mTextures2DRenderable.add(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file, parameters);
+	return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file, parameters);
 }
 
-pTexture3DRenderable TextureSystem::getShadow3D(
+core::Texture3DRenderable* TextureSystem::getShadow3D(
 		GLuint /*width*/,
 		GLuint /*height*/) {
 
@@ -302,14 +292,13 @@ pTexture3DRenderable TextureSystem::getShadow3D(
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
 
-	pTexture2DRenderable t = std::make_shared < core::Texture2DRenderable > (
-	GL_DEPTH_ATTACHMENT, file2D, parameters2D);
+	core::Texture2DRenderable* t = mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file2D, parameters2D);
 
-	return mTextures3DRenderable.add(mTextures3DRenderable.size(), file[0], file[1], file[2], file[3],
+	return mTextures3DRenderable.store(mTextures3DRenderable.size(), file[0], file[1], file[2], file[3],
 		file[4], file[5], t, parameters3D);
 }
 
-pTexture2DRenderable TextureSystem::getColor2D(GLuint width, GLuint height) {
+core::Texture2DRenderable* TextureSystem::getColor2D(GLuint width, GLuint height) {
 
 	core::Texture2DFile* file = new core::Texture2DFile();
 	file->mHeader.mFormat = GL_RGBA;
@@ -333,10 +322,10 @@ pTexture2DRenderable TextureSystem::getColor2D(GLuint width, GLuint height) {
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
-	return mTextures2DRenderable.add(mTextures2DRenderable.size(), GL_COLOR_ATTACHMENT0, file, parameters);
+	return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_COLOR_ATTACHMENT0, file, parameters);
 }
 
-pTexture2D TextureSystem::getDeferredColor(
+core::Texture2D* TextureSystem::getDeferredColor(
 		GLuint width,
 		GLuint height,
 		GLuint size) {
@@ -363,10 +352,10 @@ pTexture2D TextureSystem::getDeferredColor(
 	file->mHeader = colorTextureHeader;
 	file->mData = nullptr;
 
-	return mTextures2DDeferred.add(mTextures2DDeferred.size(), file, parameters, size);
+	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, size);
 }
 
-pTexture2D TextureSystem::getDeferredColorScreen(
+core::Texture2D* TextureSystem::getDeferredColorScreen(
 		GLuint width,
 		GLuint height,
 		GLuint size) {
@@ -393,10 +382,10 @@ pTexture2D TextureSystem::getDeferredColorScreen(
 	file->mHeader = colorTextureHeader;
 	file->mData = nullptr;
 
-	return mTextures2DDeferred.add(mTextures2DDeferred.size(), file, parameters, size);
+	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, size);
 }
 
-pTexture2D TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
+core::Texture2D* TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
 
 	core::ParameterList parameters;
 
@@ -416,10 +405,10 @@ pTexture2D TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
 	file->mHeader = depthTextureHeader;
 	file->mData = nullptr;
 
-	return mTextures2DDeferred.add(mTextures2DDeferred.size(), file, parameters, 1);
+	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, 1);
 }
 
-pTexture2D TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
+core::Texture2D* TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
 
 	core::ParameterList parameters;
 
@@ -435,7 +424,7 @@ pTexture2D TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
 	file->mHeader = stencilTextureHeader;
 	file->mData = nullptr;
 
-	return mTextures2DDeferred.add(mTextures2DDeferred.size(), file, parameters, 1);
+	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, 1);
 }
 
 void TextureSystem::resize(GLuint width, GLuint height) {
@@ -446,15 +435,15 @@ void TextureSystem::resize(GLuint width, GLuint height) {
 void TextureSystem::evaluateDynamicTextures(
 		GLfloat timeExpiredInSeconds) {
 	for (auto& it : mTextures2DDynamic) {
-		it.second->mComponent->bindForWriting();
-		it.second->mComponent->draw(timeExpiredInSeconds);
+		it.second->bindForWriting();
+		it.second->draw(timeExpiredInSeconds);
 	}
 	core::Framebuffer::bindScreenFramebuffer();
 }
 
 void TextureSystem::reload() {
 	reload(mTextures1D);
-	reloadSmart(mTextures2D);
+	reload(mTextures2D);
 	reload(mTextures2DDynamic);
 	reload(mTextures2DRenderable);
 	reload(mTextures3D);

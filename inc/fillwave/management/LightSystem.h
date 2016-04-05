@@ -17,19 +17,17 @@ namespace fillwave {
 class Engine;
 namespace framework {
 
-#define FILLWAVE_MAX_SPOT_LIGHTS 4
-#define FILLWAVE_MAX_POINT_LIGHTS 4
-#define FILLWAVE_MAX_DIRECTIONAL_LIGHTS 4
+static constexpr size_t FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER = 4;
 
-typedef TManager<pLightSpot, FILLWAVE_MAX_SPOT_LIGHTS, TPolicyShared<LightSpot>,
-		pTexture2DRenderable, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerSpotLights;
+typedef TManager<pLightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, TPolicyShared<LightSpot>,
+		core::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerSpotLights;
 
-typedef TManager<pLightDirectional, FILLWAVE_MAX_DIRECTIONAL_LIGHTS,
-		TPolicyShared<LightDirectional>, pTexture2DRenderable, glm::vec3,
+typedef TManager<pLightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
+		TPolicyShared<LightDirectional>, core::Texture2DRenderable*, glm::vec3,
 		glm::quat, glm::vec4, pMoveable> ManagerDirectionalLights;
 
-typedef TManager<pLightPoint, FILLWAVE_MAX_POINT_LIGHTS,
-		TPolicyShared<LightPoint>, pTexture3DRenderable, glm::vec3, glm::vec4,
+typedef TManager<pLightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
+		TPolicyShared<LightPoint>, core::Texture3DRenderable*, glm::vec3, glm::vec4,
 		pMoveable> ManagerPointLights;
 
 /**

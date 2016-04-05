@@ -24,7 +24,7 @@ namespace framework {
 
 class Skybox: public Entity, public IReloadable {
 public:
-	Skybox(Engine* engine, pTexture3D texture);
+	Skybox(Engine* engine, core::Texture3D* texture);
 
 	virtual ~Skybox() = default;
 
@@ -40,7 +40,7 @@ protected:
 	pProgram mProgramDR;
 
 private:
-	pTexture3D mTexture;
+	core::Texture3D* mTexture;
 	pVertexBufferPosition mVBO;
 	pIndexBufferBasic mIBO;
 	GLint mULCCameraPosition, mULCModelMatrixPosition, mULCViewProjectionMatrix,
@@ -55,7 +55,7 @@ private:
 
 } /* framework */
 typedef std::shared_ptr<framework::Skybox> pSkybox;
-pSkybox buildSkybox(Engine* engine, pTexture3D texture);
+pSkybox buildSkybox(Engine* engine, core::Texture3D* texture);
 } /* fillwave */
 
 #endif /* SKYBOX_H_ */

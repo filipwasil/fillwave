@@ -133,14 +133,13 @@ pTexture2DRenderable Engine::storeTextureRenderable() {
 		mImpl->mWindowHeight);
 }
 
-pTexture2DRenderableDynamic Engine::storeTextureDynamic(
+core::Texture2DRenderableDynamic* Engine::storeTextureDynamic(
 		const std::string& fragmentShaderPath) {
 	const std::string path = fragmentShaderPath;
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
 		fragmentShaderPath);
-	pTexture2DRenderableDynamic t = mImpl->mTextures->getDynamic(path, program,
-		glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));
-	return t;
+	return mImpl->mTextures->getDynamic(path, program,
+		glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));;
 }
 
 pTexture3D Engine::storeTexture3D(

@@ -97,7 +97,7 @@ public:
 
 	pTexture2DRenderable storeTextureRenderable();
 
-	pTexture2DRenderableDynamic storeTextureDynamic(
+	core::Texture2DRenderableDynamic* storeTextureDynamic(
 			const std::string& fragmentShaderPath);
 
 	pTexture3D storeTexture3D(

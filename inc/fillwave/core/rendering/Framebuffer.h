@@ -54,7 +54,6 @@ public:
 } /* core */
 typedef std::shared_ptr<core::Framebuffer> pFramebuffer;
 typedef std::unique_ptr<core::Framebuffer> puFramebuffer;
-
 } /* fillwave */
 
 #endif /* FRAMEBUFFER_H_ */

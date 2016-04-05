@@ -15,7 +15,7 @@ FLOGINIT("Skybox", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Skybox::Skybox(Engine* engine, pTexture3D texture) :
+Skybox::Skybox(Engine* engine, core::Texture3D* texture) :
 		IReloadable(engine), mTexture(texture) {
 
 	ProgramLoader loader(engine);
@@ -30,8 +30,8 @@ Skybox::Skybox(Engine* engine, pTexture3D texture) :
 
 	FLOG_DEBUG("Initializing skybox buffer");
 
-	mIBO = pIndexBufferBasic(new core::IndexBufferBasic(indices));
-	mVBO = pVertexBufferPosition(new core::VertexBufferPosition(vertices));
+	mIBO = make_shared<core::IndexBufferBasic>(indices);
+	mVBO = make_shared<core::VertexBufferPosition>(vertices);
 
 	initPipeline();
 	initVBO();
@@ -156,7 +156,7 @@ bool Skybox::getRenderItem(RenderItem& item) {
 }
 
 } /* framework */
-pSkybox buildSkybox(Engine* engine, pTexture3D texture) {
+pSkybox buildSkybox(Engine* engine, core::Texture3D* texture) {
 	return std::make_shared < framework::Skybox > (engine, texture);
 }
 } /* fillwave */

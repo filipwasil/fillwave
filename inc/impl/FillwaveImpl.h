@@ -68,7 +68,7 @@ struct Engine::EngineImpl final {
 	glm::vec3 mBackgroundColor;
 
 	/* Picking */
-	pTexture2DRenderable mPickingRenderableTexture;
+	core::Texture2DRenderable* mPickingRenderableTexture;
 	puPixelBuffer mPickingPixelBuffer;
 
 	/* Resources */
@@ -544,8 +544,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 		auto _end = mPostProcessingPasses.end();
 
 		core::Texture2DRenderableDynamic* textureNext;
-		core::Texture2DRenderableDynamic* textureCurrent =
-				(*_begin).getFrame().get();
+		core::Texture2DRenderableDynamic* textureCurrent = (*_begin).getFrame();
 
 		core::Program* programCurrent;
 
@@ -559,8 +558,8 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 
 			if (next != _end) {
 
-				textureNext = (*next).getFrame().get();
-				textureCurrent = (*it).getFrame().get();
+				textureNext = (*next).getFrame();
+				textureCurrent = (*it).getFrame();
 				programCurrent = (*it).getProgram().get();
 
 				textureNext->bindForWriting();
@@ -580,7 +579,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 				// render to current bound framebuffer using textureCurrent as a texture to post process
 				textureCurrent->draw(time);
 
-				textureCurrent = (*it).getFrame().get();
+				textureCurrent = (*it).getFrame();
 				programCurrent = (*it).getProgram().get();
 
 				// render to current bound framebuffer using textureCurrent as a texture to post process
@@ -627,18 +626,17 @@ inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
 
 	drawClear();
 
-	core::Texture2DRenderableDynamic* tex =
-			mPostProcessingPassStartup->getFrame().get();
+	core::Texture2DRenderableDynamic* t = mPostProcessingPassStartup->getFrame();
 
-	tex->bindForWriting();
+	t->bindForWriting();
 
 	drawTexture(mStartupTexture);
 
 	core::Framebuffer::bindScreenFramebuffer();
 
-	tex->draw(time);
+	t->draw(time);
 
-	drawTexture(tex, mPostProcessingPassStartup->getProgram().get());
+	drawTexture(t, mPostProcessingPassStartup->getProgram().get());
 
 	mPostProcessingPassStartup->checkTime(time);
 }

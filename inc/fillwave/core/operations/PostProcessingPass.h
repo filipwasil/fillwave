@@ -23,18 +23,17 @@ class PostProcessingPass: public framework::Finishable {
 public:
 	PostProcessingPass(
 			pProgram p,
-			pTexture2DRenderableDynamic t,
+			core::Texture2DRenderableDynamic* t,
 			GLfloat lifetime);
 
 	virtual ~PostProcessingPass() = default;
 
-	pTexture2DRenderableDynamic getFrame() const;
+	core::Texture2DRenderableDynamic* getFrame() const;
 
 	pProgram getProgram() const;
 
 private:
-	pTexture2DRenderableDynamic mFrame;
-
+	core::Texture2DRenderableDynamic* mFrame;
 	pProgram mProgram;
 };
 
