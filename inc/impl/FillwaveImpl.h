@@ -651,7 +651,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 
 	core::Texture2DRenderable* light2DTexture;
 	for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-		light2DTexture = mLights->mLightsSpot[i]->getShadowTexture().get();
+		light2DTexture = mLights->mLightsSpot[i]->getShadowTexture();
 		light2DTexture->bindForWriting();
 		light2DTexture->bind(currentTextureUnit++);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -661,7 +661,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 
 	for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
 		light2DTexture =
-				mLights->mLightsDirectional[i]->getShadowTexture().get();
+				mLights->mLightsDirectional[i]->getShadowTexture();
 		light2DTexture->bindForWriting();
 		light2DTexture->bind(currentTextureUnit++);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -672,7 +672,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 	for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
 		framework::LightPoint* lightPoint = mLights->mLightsPoint[i].get();
 		core::Texture3DRenderable* light3DTexture =
-				lightPoint->getShadowTexture().get();
+				lightPoint->getShadowTexture();
 		glm::vec3 lightPosition(lightPoint->getTranslation());
 		light3DTexture->bindForWriting();
 		light3DTexture->bind(currentTextureUnit);

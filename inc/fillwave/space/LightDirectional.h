@@ -31,14 +31,14 @@ struct LightDirectioData {
 class LightDirectional: public Light {
 public:
 	LightDirectional(
-			pTexture2DRenderable shadowTexture,
+			core::Texture2DRenderable* shadowTexture,
 			glm::vec3 position,
 			glm::quat rotation,
 			glm::vec4 intensity,
 			pMoveable followed);
 	virtual ~LightDirectional() = default;
 
-	pTexture2DRenderable getShadowTexture();
+	core::Texture2DRenderable* getShadowTexture();
 	pCameraOrthographic getShadowCamera();
 
 	void updateShadowCamera();
@@ -46,7 +46,7 @@ public:
 	void log();
 
 private:
-	pTexture2DRenderable mShadowTexture;
+	core::Texture2DRenderable* mShadowTexture;
 	pCameraOrthographic mShadowCamera;
 };
 

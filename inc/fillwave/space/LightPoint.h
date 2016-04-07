@@ -26,21 +26,21 @@ namespace framework {
 class LightPoint: public Light {
 public:
 	LightPoint(
-			pTexture3DRenderable shadowTexture,
+			core::Texture3DRenderable* shadowTexture,
 			glm::vec3 position,
 			glm::vec4 intensity,
 			pMoveable followed = pMoveable());
 
 	virtual ~LightPoint() = default;
 
-	pTexture3DRenderable getShadowTexture();
+	core::Texture3DRenderable* getShadowTexture();
 
 	pCameraPerspective getShadowCamera(GLenum id);
 
 	void updateShadowCamera();
 
 protected:
-	pTexture3DRenderable mShadowTexture;
+	core::Texture3DRenderable* mShadowTexture;
 	std::map<GLenum, pCameraPerspective> mFaceCameras;
 
 private:

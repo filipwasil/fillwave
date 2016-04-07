@@ -14,7 +14,7 @@ namespace fillwave {
 namespace framework {
 
 LightDirectional::LightDirectional(
-		pTexture2DRenderable shadowTexture,
+		core::Texture2DRenderable* shadowTexture,
 		glm::vec3 position,
 		glm::quat rotation,
 		glm::vec4 intensity,
@@ -22,16 +22,15 @@ LightDirectional::LightDirectional(
 			Light(position, intensity, followed),
 			mShadowTexture(shadowTexture),
 			mShadowCamera(
-				pCameraOrthographic(
-					new CameraOrthographic(position, rotation, -10.0f, 10.0f, 10.0f,
-						-10.0f, 0.1f, 1000.0f))) {
+				std::make_shared < CameraOrthographic
+						> (position, rotation, -10.0f, 10.0f, 10.0f, -10.0f, 0.1f, 1000.0f)) {
 }
 
 pCameraOrthographic LightDirectional::getShadowCamera() {
 	return mShadowCamera;
 }
 
-pTexture2DRenderable LightDirectional::getShadowTexture() {
+core::Texture2DRenderable* LightDirectional::getShadowTexture() {
 	return mShadowTexture;
 }
 

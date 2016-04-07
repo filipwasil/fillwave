@@ -27,7 +27,7 @@ public:
 			Texture2DFile* fileNegY,
 			Texture2DFile* filePosZ,
 			Texture2DFile* fileNegZ,
-			pTexture2DRenderable texture,
+			core::Texture2DRenderable* texture,
 			ParameterList& parameters);
 	virtual ~Texture3DRenderable() = default;
 	void resize(GLint width, GLint height);
@@ -38,7 +38,7 @@ public:
 	void log();
 
 protected:
-	pTexture2DRenderable mShadowTexture;
+	core::Texture2DRenderable* mShadowTexture;
 };
 
 } /* core */

@@ -128,7 +128,7 @@ core::Texture2D* Engine::storeTexture(
 	return mImpl->mTextures->get(texturePath, compression);
 }
 
-pTexture2DRenderable Engine::storeTextureRenderable() {
+core::Texture2DRenderable* Engine::storeTextureRenderable() {
 	return mImpl->mTextures->getColor2D(mImpl->mWindowWidth,
 		mImpl->mWindowHeight);
 }
@@ -142,7 +142,7 @@ core::Texture2DRenderableDynamic* Engine::storeTextureDynamic(
 		glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));;
 }
 
-pTexture3D Engine::storeTexture3D(
+core::Texture3D* Engine::storeTexture3D(
 		const std::string& posX,
 		const std::string& negX,
 		const std::string& posY,

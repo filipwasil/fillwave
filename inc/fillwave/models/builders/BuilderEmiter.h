@@ -34,7 +34,7 @@ public:
 	BuilderEmiter& setRobustnessPosition(glm::vec3 robustnessPosition);
 	BuilderEmiter& setStartSize(GLfloat size);
 	BuilderEmiter& setLifetime(GLfloat lifetime);
-	BuilderEmiter& setTexture(pTexture texture);
+	BuilderEmiter& setTexture(core::Texture* texture);
 	BuilderEmiter& setBlendingSource(GLenum sourceColor);
 	BuilderEmiter& setBlendingDestination(GLenum destinationColor);
 	BuilderEmiter& setDepthTesting(GLboolean depthTesting);
@@ -54,7 +54,7 @@ private:
 	glm::vec3 mRobustnessPosition;
 	GLfloat mStartSize;
 	GLfloat mLifetime;
-	pTexture mTexture;
+	core::Texture* mTexture;
 	GLenum mBlendingSource;
 	GLenum mBlendingDestination;
 	GLboolean mDepthTesting;

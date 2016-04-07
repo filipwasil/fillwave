@@ -18,7 +18,7 @@ IEmiterPoint::IEmiterPoint(
 		GLuint howMany,
 		GLfloat size,
 		GLfloat lifetime,
-		pTexture texture,
+		core::Texture* texture,
 		glm::vec4 color,
 		GLenum blendingSource,
 		GLenum blendingDestination,

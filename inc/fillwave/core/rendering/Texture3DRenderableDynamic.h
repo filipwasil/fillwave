@@ -28,7 +28,7 @@ public:
 			Texture2DFile* filePosZ,
 			Texture2DFile* fileNegZ,
 			ParameterList& parameters,
-			pTexture2DRenderable texture2D,
+			core::Texture2DRenderable* texture2D,
 			pProgram program);
 
 	virtual ~Texture3DRenderableDynamic() = default;

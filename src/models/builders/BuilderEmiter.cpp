@@ -94,7 +94,7 @@ BuilderEmiter& BuilderEmiter::setLifetime(GLfloat lifetime) {
 	return *this;
 }
 
-BuilderEmiter& BuilderEmiter::setTexture(pTexture texture) {
+BuilderEmiter& BuilderEmiter::setTexture(core::Texture* texture) {
 	mTexture = texture;
 	return *this;
 }

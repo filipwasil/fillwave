@@ -30,8 +30,8 @@ Skybox::Skybox(Engine* engine, core::Texture3D* texture) :
 
 	FLOG_DEBUG("Initializing skybox buffer");
 
-	mIBO = make_shared<core::IndexBufferBasic>(indices);
-	mVBO = make_shared<core::VertexBufferPosition>(vertices);
+	mIBO = std::make_shared<core::IndexBufferBasic>(indices);
+	mVBO = std::make_shared<core::VertexBufferPosition>(vertices);
 
 	initPipeline();
 	initVBO();

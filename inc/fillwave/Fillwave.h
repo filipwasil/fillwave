@@ -95,12 +95,12 @@ public:
 			const std::string& texturePath,
 			framework::eCompression compression = framework::eCompression::eNone);
 
-	pTexture2DRenderable storeTextureRenderable();
+	core::Texture2DRenderable* storeTextureRenderable();
 
 	core::Texture2DRenderableDynamic* storeTextureDynamic(
 			const std::string& fragmentShaderPath);
 
-	pTexture3D storeTexture3D(
+	core::Texture3D* storeTexture3D(
 			const std::string& posX,
 			const std::string& negX,
 			const std::string& posY,

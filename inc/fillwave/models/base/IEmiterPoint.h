@@ -32,7 +32,7 @@ public:
 			GLuint howMany,
 			GLfloat size,
 			GLfloat lifetime,
-			pTexture texture,
+			core::Texture* texture,
 			glm::vec4 color,
 			GLenum blendingSource,
 			GLenum blendingDestination,
@@ -52,7 +52,7 @@ public:
 protected:
 	GLfloat mStartSize;
 	GLfloat mLifetime;
-	pTexture mTexture;
+	core::Texture* mTexture;
 	glm::vec4 mColor;
 	GLfloat mHowMany;
 	GLboolean mDepthTesting;

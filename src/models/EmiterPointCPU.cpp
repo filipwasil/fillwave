@@ -26,7 +26,7 @@ EmiterPointCPU::EmiterPointCPU(Engine* engine, GLfloat /*emitingSourceRate*/, //
 		glm::vec3 robustnessPosition,
 		GLfloat startSize,
 		GLfloat lifetime,
-		pTexture texture,
+		core::Texture* texture,
 		GLenum blendingSource,
 		GLenum blendingDestination,
 		GLboolean depthTesting,

@@ -35,7 +35,7 @@ public:
 	core::Texture2D* get(std::string texturePath, eCompression = eCompression::eNone, eFlip flip =
 			eFlip::eVertical);
 
-	pTexture3D get(
+	core::Texture3D* get(
 			const std::string& posX,
 			const std::string& negX,
 			const std::string& posY,
@@ -84,13 +84,13 @@ private:
 			core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 			core::Texture2DFile*, core::ParameterList&> mTextures3D;
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture3D,
+	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture3DRenderableDynamic,
 			std::string, core::Texture2DFile*, core::Texture2DFile*,
 			core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 			core::Texture2DFile*, core::ParameterList&, core::Texture2DRenderable*,
 			pProgram> mTextures3DDynamic;
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture3D, size_t,
+	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture3DRenderable, size_t,
 			core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 			core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 			core::Texture2DRenderable*, core::ParameterList&> mTextures3DRenderable;
@@ -98,14 +98,6 @@ private:
 	std::vector<GLenum> mSupportedCompresssionTypes;
 	std::string mRootPath;
 	TextureLoader mLoader;
-
-	void add(
-			const std::string& posX,
-			const std::string& negX,
-			const std::string& posY,
-			const std::string& negY,
-			const std::string& posZ,
-			const std::string& negZ);
 
 	template <class T>
 	inline void reload(T& textures) {

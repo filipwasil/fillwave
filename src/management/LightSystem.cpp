@@ -20,7 +20,7 @@ const glm::mat4 FILLWAVE_UV_BIAS_MATRIX(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0,
 
 LightSystem::LightSystem() {
 	mLightBufferData.resize(
-	FILLWAVE_MAX_SPOT_LIGHTS + FILLWAVE_MAX_DIRECTIONAL_LIGHTS);
+	FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER + FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER);
 }
 
 void LightSystem::clear() {

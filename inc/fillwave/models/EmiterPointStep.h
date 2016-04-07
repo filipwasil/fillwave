@@ -26,7 +26,7 @@ public:
 			GLint howMany,
 			GLenum blendingSource,
 			GLenum blendingDestination,
-			pTexture texture);
+			core::Texture* texture);
 
 	virtual ~EmiterPointStep() = default;
 };

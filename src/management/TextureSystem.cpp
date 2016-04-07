@@ -70,7 +70,45 @@ inline void TextureSystem::checkExtensions() {
 #endif
 }
 
-void TextureSystem::add(
+core::Texture2D* TextureSystem::get(
+		std::string texturePath,
+		eCompression compression,
+		eFlip flip) {
+	std::string filePath = mRootPath + texturePath;
+	if (mTextures2D.find(filePath) != mTextures2D.end()) {
+		return mTextures2D[filePath].get();
+	}
+
+	if (core::Texture2DFile* file = mLoader.load(filePath, flip, GL_RGBA,
+		mRootPath, compression)) {
+		FLOG_DEBUG("Texture %s added to manager", filePath.c_str());
+		core::ParameterList parameters;
+		return mTextures2D.store(filePath, file, parameters, 1);
+	} else {
+		FLOG_DEBUG("Texture %s not found", filePath.c_str());
+		return nullptr;
+	}
+}
+
+core::Texture2DRenderableDynamic* TextureSystem::getDynamic(
+		const std::string& fragmentShaderPath,
+		pProgram program,
+		glm::ivec2 screenSize) {
+	std::string filePath = mRootPath + fragmentShaderPath;
+
+	core::Texture2DFile* file = mLoader.loadEmpty(screenSize);
+
+	core::ParameterList parameters;
+	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+
+	return mTextures2DDynamic.store(fragmentShaderPath, file, parameters,
+		program);
+}
+
+core::Texture3D* TextureSystem::get(
 		const std::string& posX,
 		const std::string& negX,
 		const std::string& posY,
@@ -78,7 +116,15 @@ void TextureSystem::add(
 		const std::string& posZ,
 		const std::string& negZ) {
 
-	std::string name = posX + negX + posY + negY + posZ + negZ;
+	std::string filePathPosX = mRootPath + posX;
+	std::string filePathNegX = mRootPath + negX;
+	std::string filePathPosY = mRootPath + posY;
+	std::string filePathNegY = mRootPath + negY;
+	std::string filePathPosZ = mRootPath + posZ;
+	std::string filePathNegZ = mRootPath + negZ;
+
+	const std::string name = filePathPosX + filePathNegX + filePathPosY + filePathNegY
+			+ filePathPosZ + filePathNegZ;
 
 	FLOG_DEBUG("Texture to be added: %s", name.c_str());
 
@@ -91,23 +137,23 @@ void TextureSystem::add(
 
 	FLOG_DEBUG("Texture %s will be added to manager", name.c_str());
 
-	core::Texture2DFile* filePosX = mLoader.load(posX, eFlip::eNone,
+	core::Texture2DFile* filePosX = mLoader.load(filePathPosX, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* fileNegX = mLoader.load(negX, eFlip::eNone,
+	core::Texture2DFile* fileNegX = mLoader.load(filePathNegX, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* filePosY = mLoader.load(posY, eFlip::eNone,
+	core::Texture2DFile* filePosY = mLoader.load(filePathPosY, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* fileNegY = mLoader.load(negY, eFlip::eNone,
+	core::Texture2DFile* fileNegY = mLoader.load(filePathNegY, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* filePosZ = mLoader.load(posZ, eFlip::eNone,
+	core::Texture2DFile* filePosZ = mLoader.load(filePathPosZ, eFlip::eNone,
 	GL_RGBA, mRootPath);
-	core::Texture2DFile* fileNegZ = mLoader.load(negZ, eFlip::eNone,
+	core::Texture2DFile* fileNegZ = mLoader.load(filePathNegZ, eFlip::eNone,
 	GL_RGBA, mRootPath);
 
 	if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {
 		FLOG_DEBUG("Texture %s added to manager", name.c_str());
 
-		mTextures3D.add(name, filePosX, fileNegX, filePosY, fileNegY, filePosZ,
+		core::Texture3D* t = mTextures3D.store(name, filePosX, fileNegX, filePosY, fileNegY, filePosZ,
 			fileNegZ, parameters);
 
 		delete filePosX;
@@ -117,6 +163,7 @@ void TextureSystem::add(
 		delete filePosZ;
 		delete fileNegZ;
 
+		return t;
 	} else {
 		if (!filePosX) {
 			FLOG_DEBUG("3D Texture positive x %s not found", posX.c_str());
@@ -148,73 +195,14 @@ void TextureSystem::add(
 		} else {
 			delete fileNegZ;
 		}
-	}
-}
-
-core::Texture2D* TextureSystem::get(
-		std::string texturePath,
-		eCompression compression,
-		eFlip flip) {
-	std::string filePath = mRootPath + texturePath;
-	if (mTextures2D.find(filePath) != mTextures2D.end()) {
-		return mTextures2D[filePath].get();
-	}
-
-	if (core::Texture2DFile* file =
-			mLoader.load(filePath, flip, GL_RGBA, mRootPath, compression)) {
-		FLOG_DEBUG("Texture %s added to manager", filePath.c_str());
-		core::ParameterList parameters;
-		return mTextures2D.store(filePath, file, parameters, 1);
-	} else {
-		FLOG_DEBUG("Texture %s not found", filePath.c_str());
+		FLOG_ERROR("Texture 3D %s not added to manager", name.c_str());
 		return nullptr;
 	}
 }
 
-core::Texture2DRenderableDynamic* TextureSystem::getDynamic(
-		const std::string& fragmentShaderPath,
-		pProgram program,
-		glm::ivec2 screenSize) {
-	std::string filePath = mRootPath + fragmentShaderPath;
-
-	core::Texture2DFile* file = mLoader.loadEmpty(screenSize);
-
-	core::ParameterList parameters;
-	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-	parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-
-	return mTextures2DDynamic.store(fragmentShaderPath, file, parameters, program);
-}
-
-pTexture3D TextureSystem::get(
-		const std::string& posX,
-		const std::string& negX,
-		const std::string& posY,
-		const std::string& negY,
-		const std::string& posZ,
-		const std::string& negZ) {
-
-	core::ParameterList parameters;
-
-	std::string filePathPosX = mRootPath + posX;
-	std::string filePathNegX = mRootPath + negX;
-	std::string filePathPosY = mRootPath + posY;
-	std::string filePathNegY = mRootPath + negY;
-	std::string filePathPosZ = mRootPath + posZ;
-	std::string filePathNegZ = mRootPath + negZ;
-
-	add(filePathPosX, filePathNegX, filePathPosY, filePathNegY, filePathPosZ,
-		filePathNegZ);
-
-	const std::string key = filePathPosX + filePathNegX + filePathPosY
-			+ filePathNegY + filePathPosZ + filePathNegZ;
-
-	return mTextures3D[key]->mComponent;
-}
-
-core::Texture2DRenderable* TextureSystem::getShadow2D(GLuint width, GLuint height) {
+core::Texture2DRenderable* TextureSystem::getShadow2D(
+		GLuint width,
+		GLuint height) {
 
 	core::Texture2DFile* file = new core::Texture2DFile();
 	core::ParameterList parameters;
@@ -245,7 +233,8 @@ core::Texture2DRenderable* TextureSystem::getShadow2D(GLuint width, GLuint heigh
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
 #endif
 
-	return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file, parameters);
+	return mTextures2DRenderable.store(mTextures2DRenderable.size(),
+		GL_DEPTH_ATTACHMENT, file, parameters);
 }
 
 core::Texture3DRenderable* TextureSystem::getShadow3D(
@@ -292,13 +281,16 @@ core::Texture3DRenderable* TextureSystem::getShadow3D(
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 	parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
 
-	core::Texture2DRenderable* t = mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file2D, parameters2D);
+	core::Texture2DRenderable* t = mTextures2DRenderable.store(
+		mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file2D, parameters2D);
 
-	return mTextures3DRenderable.store(mTextures3DRenderable.size(), file[0], file[1], file[2], file[3],
-		file[4], file[5], t, parameters3D);
+	return mTextures3DRenderable.store(mTextures3DRenderable.size(), file[0],
+		file[1], file[2], file[3], file[4], file[5], t, parameters3D);
 }
 
-core::Texture2DRenderable* TextureSystem::getColor2D(GLuint width, GLuint height) {
+core::Texture2DRenderable* TextureSystem::getColor2D(
+		GLuint width,
+		GLuint height) {
 
 	core::Texture2DFile* file = new core::Texture2DFile();
 	file->mHeader.mFormat = GL_RGBA;
@@ -322,7 +314,8 @@ core::Texture2DRenderable* TextureSystem::getColor2D(GLuint width, GLuint height
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
-	return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_COLOR_ATTACHMENT0, file, parameters);
+	return mTextures2DRenderable.store(mTextures2DRenderable.size(),
+		GL_COLOR_ATTACHMENT0, file, parameters);
 }
 
 core::Texture2D* TextureSystem::getDeferredColor(
@@ -352,7 +345,8 @@ core::Texture2D* TextureSystem::getDeferredColor(
 	file->mHeader = colorTextureHeader;
 	file->mData = nullptr;
 
-	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, size);
+	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file,
+		parameters, size);
 }
 
 core::Texture2D* TextureSystem::getDeferredColorScreen(
@@ -382,7 +376,8 @@ core::Texture2D* TextureSystem::getDeferredColorScreen(
 	file->mHeader = colorTextureHeader;
 	file->mData = nullptr;
 
-	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, size);
+	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file,
+		parameters, size);
 }
 
 core::Texture2D* TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
@@ -405,10 +400,13 @@ core::Texture2D* TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
 	file->mHeader = depthTextureHeader;
 	file->mData = nullptr;
 
-	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, 1);
+	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file,
+		parameters, 1);
 }
 
-core::Texture2D* TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
+core::Texture2D* TextureSystem::getDeferredStencilDepth(
+		GLuint width,
+		GLuint height) {
 
 	core::ParameterList parameters;
 
@@ -424,7 +422,8 @@ core::Texture2D* TextureSystem::getDeferredStencilDepth(GLuint width, GLuint hei
 	file->mHeader = stencilTextureHeader;
 	file->mData = nullptr;
 
-	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, 1);
+	return mTextures2DDeferred.store(mTextures2DDeferred.size(), file,
+		parameters, 1);
 }
 
 void TextureSystem::resize(GLuint width, GLuint height) {
@@ -432,8 +431,7 @@ void TextureSystem::resize(GLuint width, GLuint height) {
 	resize(mTextures2DRenderable, width, height);
 }
 
-void TextureSystem::evaluateDynamicTextures(
-		GLfloat timeExpiredInSeconds) {
+void TextureSystem::evaluateDynamicTextures(GLfloat timeExpiredInSeconds) {
 	for (auto& it : mTextures2DDynamic) {
 		it.second->bindForWriting();
 		it.second->draw(timeExpiredInSeconds);

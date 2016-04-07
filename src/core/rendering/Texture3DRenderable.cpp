@@ -20,7 +20,7 @@ Texture3DRenderable::Texture3DRenderable(
 		Texture2DFile* fileNegY,
 		Texture2DFile* filePosZ,
 		Texture2DFile* fileNegZ,
-		pTexture2DRenderable texture,
+		core::Texture2DRenderable* texture,
 		ParameterList& parameters) :
 		Texture3D(filePosX, //right
 			fileNegX, //left
