@@ -1,0 +1,6 @@
+--mode=c
+--pad-oper
+--indent=tab
+--indent=force-tab
+--style=google
+--max-code-length=80
