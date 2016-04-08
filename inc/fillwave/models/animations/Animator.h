@@ -24,7 +24,7 @@ class Animator;
  */
 
 class AssimpNode {
-public:
+  public:
 	glm::mat4 mTransformation;
 	std::vector<AssimpNode*> mChildren;
 	pBone mBone;
@@ -35,10 +35,10 @@ public:
 	virtual ~AssimpNode();
 
 	void update(
-			float time,
-			glm::mat4 parent,
-			Animator* boneManager,
-			GLint activeAnimation);
+	    float time,
+	    glm::mat4 parent,
+	    Animator* boneManager,
+	    GLint activeAnimation);
 };
 
 /*! \class Animator
@@ -46,7 +46,7 @@ public:
  */
 
 class Animator {
-public:
+  public:
 	Animator(const aiScene* shape);
 	virtual ~Animator();
 	void add(aiBone* bone);
@@ -62,8 +62,8 @@ public:
 	void log();
 
 	Channel* findChannel(
-			Animation* animation,
-			const std::string& nodeName) const;
+	    Animation* animation,
+	    const std::string& nodeName) const;
 
 	glm::vec3 getCurrentTranslation(float timeElapsed_s, Channel* channel) const;
 	glm::quat getCurrentRotation(float timeElapsed_s, Channel* channel) const;
@@ -74,16 +74,16 @@ public:
 	GLuint getScaleStep(float timeElapsed_s, Channel* channel) const;
 
 	glm::fquat lerp(
-			const glm::fquat &v0,
-			const glm::fquat &v1,
-			float alpha) const;
+	    const glm::fquat &v0,
+	    const glm::fquat &v1,
+	    float alpha) const;
 
 	AssimpNode* initNode(aiNode* node);
 	void updateBonesBuffer();
 	void updateBonesUniform(GLint uniformLocationBones);
 	void updateTransformations(GLint activeAnimation, float timeElapsed_s);
 
-private:
+  private:
 	GLint mElements;
 	float mTimeSinceStartSeconds;
 	AssimpNode* mRootAnimationNode;

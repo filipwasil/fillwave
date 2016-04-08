@@ -20,12 +20,12 @@ namespace framework {
  */
 
 class Button: public IHUDNode, public IPickable {
-public:
+  public:
 	Button(
-			Engine* engine,
-			core::Texture2D* texture,
-			glm::vec2 position,
-			glm::vec2 scale);
+	    Engine* engine,
+	    core::Texture2D* texture,
+	    glm::vec2 position,
+	    glm::vec2 scale);
 	virtual ~Button() = default;
 
 	/* IPickable */

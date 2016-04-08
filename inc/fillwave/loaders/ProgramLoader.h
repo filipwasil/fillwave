@@ -20,7 +20,7 @@ namespace framework {
  */
 
 class ProgramLoader: public ShaderLoader {
-public:
+  public:
 	ProgramLoader(Engine* engine);
 
 	virtual ~ProgramLoader() = default;
@@ -62,7 +62,7 @@ public:
 	pProgram getHUDCustomFragmentShader(const std::string& shaderPath);
 
 	static void initDefaultUniforms(core::Program* program);
-private:
+  private:
 
 	Engine* mEngine;
 

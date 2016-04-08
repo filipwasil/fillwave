@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class TerrainConstructor {
-public:
+  public:
 	TerrainConstructor() = default;
 	virtual ~TerrainConstructor() = default;
 	virtual GLfloat calculateHeight(GLfloat x, GLfloat z) = 0;

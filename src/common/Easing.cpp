@@ -117,7 +117,7 @@ AHFloat QuinticEaseInOut(AHFloat p) {
 // Modeled after quarter-cycle of sine wave
 AHFloat SineEaseIn(AHFloat p) {
 	return static_cast<AHFloat>(sinf((p - 1.0f) * static_cast<AHFloat>(M_PI_2)))
-			+ 1.0f;
+	       + 1.0f;
 }
 
 // Modeled after quarter-cycle of sine wave (different phase)
@@ -178,13 +178,13 @@ AHFloat ExponentialEaseInOut(AHFloat p) {
 // Modeled after the damped sine wave y = sin(13pi/2*x)*pow(2, 10 * (x - 1))
 AHFloat ElasticEaseIn(AHFloat p) {
 	return sinf(13.0f * static_cast<AHFloat>(M_PI_2) * p)
-			* powf(2.0f, 10.0f * (p - 1.0f));
+	       * powf(2.0f, 10.0f * (p - 1.0f));
 }
 
 // Modeled after the damped sine wave y = sin(-13pi/2*(x + 1))*pow(2, -10x) + 1
 AHFloat ElasticEaseOut(AHFloat p) {
 	return sinf(-13.0f * static_cast<AHFloat>(M_PI_2) * (p + 1))
-			* powf(2.0f, -10.0f * p) + 1.0f;
+	       * powf(2.0f, -10.0f * p) + 1.0f;
 }
 
 // Modeled after the piecewise exponentially-damped sine wave:
@@ -193,13 +193,13 @@ AHFloat ElasticEaseOut(AHFloat p) {
 AHFloat ElasticEaseInOut(AHFloat p) {
 	if (p < 0.5f) {
 		return 0.5f * sinf(13.0f * static_cast<AHFloat>(M_PI_2) * (2.0f * p))
-				* powf(2.0f, 10.0f * ((2.0f * p) - 1.0f));
+		       * powf(2.0f, 10.0f * ((2.0f * p) - 1.0f));
 	} else {
 		return 0.5f
-				* (sinf(
-					-13.0f * static_cast<AHFloat>(M_PI_2)
-							* ((2.0f * p - 1.0f) + 1.0f))
-						* powf(2.0f, -10.0f * (2.0f * p - 1.0f)) + 2.0f);
+		       * (sinf(
+		              -13.0f * static_cast<AHFloat>(M_PI_2)
+		              * ((2.0f * p - 1.0f) + 1.0f))
+		          * powf(2.0f, -10.0f * (2.0f * p - 1.0f)) + 2.0f);
 	}
 }
 
@@ -224,8 +224,8 @@ AHFloat BackEaseInOut(AHFloat p) {
 	} else {
 		AHFloat f = (1.0f - (2.0f * p - 1.0f));
 		return 0.5f
-				* (1.0f - (f * f * f - f * sinf(f * static_cast<AHFloat>(M_PI))))
-				+ 0.5f;
+		       * (1.0f - (f * f * f - f * sinf(f * static_cast<AHFloat>(M_PI))))
+		       + 0.5f;
 	}
 }
 
@@ -240,7 +240,7 @@ AHFloat BounceEaseOut(AHFloat p) {
 		return (363.0f / 40.0f * p * p) - (99.0f / 10.0f * p) + 17 / 5.0f;
 	} else if (p < 9.0f / 10.0f) {
 		return (4356.0f / 361.0f * p * p) - (35442.0f / 1805.0f * p)
-				+ 16061.0f / 1805.0f;
+		       + 16061.0f / 1805.0f;
 	} else {
 		return (54.0f / 5.0f * p * p) - (513.0f / 25.0f * p) + 268.0f / 25.0f;
 	}

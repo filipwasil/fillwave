@@ -21,12 +21,12 @@ namespace framework {
  */
 
 class FPSCallback: public Callback {
-public:
+  public:
 	FPSCallback(Engine* engine, pText text);
 	virtual ~FPSCallback() = default;
 	void perform(EventType& event);
 
-private:
+  private:
 	pText mText;
 	GLfloat mTimePassed;
 	Engine* mEngine;

@@ -25,12 +25,12 @@ namespace fillwave {
 namespace framework {
 
 Debugger::Debugger(Engine* engine) :
-			IReloadable(engine),
-			mState(eDebuggerState::eOff),
-			mEngine(engine),
-			mVBO(std::make_shared < core::VertexBufferDebug > (1.0)),
-			mMiniwindowSize(1.0 / 6.0),
-			mMiniwindowsOccupied(0) {
+	IReloadable(engine),
+	mState(eDebuggerState::eOff),
+	mEngine(engine),
+	mVBO(std::make_shared < core::VertexBufferDebug > (1.0)),
+	mMiniwindowSize(1.0 / 6.0),
+	mMiniwindowsOccupied(0) {
 
 	ProgramLoader loader(engine);
 
@@ -45,32 +45,32 @@ Debugger::Debugger(Engine* engine) :
 void Debugger::setState(eDebuggerState state) {
 	if (state == eDebuggerState::eToggleState) {
 		switch (mState) {
-			case eDebuggerState::eLightsSpot:
-				mState = eDebuggerState::eLightsSpotDepth;
-				break;
-			case eDebuggerState::eLightsSpotDepth:
-				mState = eDebuggerState::eLightsSpotColor;
-				break;
-			case eDebuggerState::eLightsSpotColor:
-				mState = eDebuggerState::eLightsPoint;
-				break;
-			case eDebuggerState::eLightsPoint:
-				mState = eDebuggerState::eLightsPointDepth;
-				break;
-			case eDebuggerState::eLightsPointDepth:
-				mState = eDebuggerState::eLightsPointColor;
-				break;
-			case eDebuggerState::eLightsPointColor:
-				mState = eDebuggerState::ePickingMap;
-				break;
-			case eDebuggerState::ePickingMap:
-				mState = eDebuggerState::eOff;
-				break;
-			case eDebuggerState::eOff:
-				mState = eDebuggerState::eLightsSpot;
-				break;
-			default:
-				break;
+		case eDebuggerState::eLightsSpot:
+			mState = eDebuggerState::eLightsSpotDepth;
+			break;
+		case eDebuggerState::eLightsSpotDepth:
+			mState = eDebuggerState::eLightsSpotColor;
+			break;
+		case eDebuggerState::eLightsSpotColor:
+			mState = eDebuggerState::eLightsPoint;
+			break;
+		case eDebuggerState::eLightsPoint:
+			mState = eDebuggerState::eLightsPointDepth;
+			break;
+		case eDebuggerState::eLightsPointDepth:
+			mState = eDebuggerState::eLightsPointColor;
+			break;
+		case eDebuggerState::eLightsPointColor:
+			mState = eDebuggerState::ePickingMap;
+			break;
+		case eDebuggerState::ePickingMap:
+			mState = eDebuggerState::eOff;
+			break;
+		case eDebuggerState::eOff:
+			mState = eDebuggerState::eLightsSpot;
+			break;
+		default:
+			break;
 		}
 	} else {
 		mState = state;
@@ -87,9 +87,9 @@ void Debugger::setMiniwindowSize(GLfloat size) {
 
 void Debugger::renderFromCamera(ICamera& c, GLint id) {
 	glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
-		mEngine->getScreenSize()[1] * (1.0f - mMiniwindowSize),
-		mEngine->getScreenSize()[0] * mMiniwindowSize,
-		mEngine->getScreenSize()[1] * mMiniwindowSize);
+	           mEngine->getScreenSize()[1] * (1.0f - mMiniwindowSize),
+	           mEngine->getScreenSize()[0] * mMiniwindowSize,
+	           mEngine->getScreenSize()[1] * mMiniwindowSize);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -100,18 +100,19 @@ void Debugger::renderFromCamera(ICamera& c, GLint id) {
 
 void Debugger::renderPickingMap() {
 	glViewport(mEngine->getScreenSize()[0] * (1.0f - mMiniwindowSize), 0,
-		mEngine->getScreenSize()[0] * mMiniwindowSize,
-		mEngine->getScreenSize()[1] * mMiniwindowSize);
+	           mEngine->getScreenSize()[0] * mMiniwindowSize,
+	           mEngine->getScreenSize()[1] * mMiniwindowSize);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 	mEngine->getCurrentScene()->drawPicking();
 	glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
-void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
+void Debugger::renderDepthOrthographic(GLint
+                                       id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
 	glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize, 0,
-		mEngine->getScreenSize()[0] * mMiniwindowSize,
-		mEngine->getScreenSize()[1] * mMiniwindowSize);
+	           mEngine->getScreenSize()[0] * mMiniwindowSize,
+	           mEngine->getScreenSize()[1] * mMiniwindowSize);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -120,7 +121,7 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
 	mVAO->bind();
 
 	LightDirectional* light =
-			mEngine->getLightSystem()->mLightsDirectional[id].get();
+	    mEngine->getLightSystem()->mLightsDirectional[id].get();
 
 	ICamera* cam = light->getShadowCamera().get();
 
@@ -146,10 +147,11 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
 	glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
-void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
+void Debugger::renderDepthPerspective(GLint
+                                      id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
 	glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize, 0,
-		mEngine->getScreenSize()[0] * mMiniwindowSize,
-		mEngine->getScreenSize()[1] * mMiniwindowSize);
+	           mEngine->getScreenSize()[0] * mMiniwindowSize,
+	           mEngine->getScreenSize()[1] * mMiniwindowSize);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 

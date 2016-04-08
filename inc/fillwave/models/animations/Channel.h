@@ -24,7 +24,7 @@ namespace framework {
  */
 
 class Channel {
-public:
+  public:
 	std::string mAffectedNodeName;
 
 	std::vector<Key<glm::vec3> > mKeysTranslation;

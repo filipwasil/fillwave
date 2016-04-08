@@ -27,9 +27,9 @@ struct ScrollEventData {
  */
 
 class ScrollEvent: public TEvent<ScrollEventData> {
-public:
+  public:
 	ScrollEvent(ScrollEventData data) :
-			TEvent(data) {
+		TEvent(data) {
 
 	}
 	virtual ~ScrollEvent() = default;

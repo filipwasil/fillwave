@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class ClockwiseDrawEffect: public IEffect {
-public:
+  public:
 	ClockwiseDrawEffect() = default;
 	virtual ~ClockwiseDrawEffect() = default;
 

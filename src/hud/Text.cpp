@@ -16,24 +16,24 @@ namespace fillwave {
 namespace framework {
 
 Text::Text(
-		std::string& text,
-		core::Texture2D* texture,
-		glm::vec2 position,
-		Engine* engine,
-		GLfloat scale,
-		Font* font,
-		glm::vec4 color,
-		eTextEffect effect) :
-			IReloadable(engine),
-			IHUDNode(texture, createProgram(engine, effect), position,
-				glm::vec2(scale, scale)),
-			mText(text),
-			mColor(color),
-			mEffect(effect),
-			mFont(font),
-			mEngine(engine),
-			mViewportWidth(engine->getScreenSize()[0]),
-			mViewportHeight(engine->getScreenSize()[1]) {
+    std::string& text,
+    core::Texture2D* texture,
+    glm::vec2 position,
+    Engine* engine,
+    GLfloat scale,
+    Font* font,
+    glm::vec4 color,
+    eTextEffect effect) :
+	IReloadable(engine),
+	IHUDNode(texture, createProgram(engine, effect), position,
+	         glm::vec2(scale, scale)),
+	mText(text),
+	mColor(color),
+	mEffect(effect),
+	mFont(font),
+	mEngine(engine),
+	mViewportWidth(engine->getScreenSize()[0]),
+	mViewportHeight(engine->getScreenSize()[1]) {
 
 	initPipeline();
 	createVBO();
@@ -117,7 +117,7 @@ void Text::createVBO() {
 
 		GLfloat x_pos = mPosition.x;
 		GLfloat y_pos = mPosition.y
-				- mScale.x / mViewportHeight * mFont->mOffsets[ascii_code];
+		                - mScale.x / mViewportHeight * mFont->mOffsets[ascii_code];
 
 		if (i + 1 < lenght) {
 			mPosition.x += mFont->mWidths[ascii_code] * mScale.x / mViewportWidth;
@@ -155,18 +155,18 @@ void Text::createVBO() {
 	mPosition.x = tmpStartingX;
 
 	mVBO = std::make_shared < core::VertexBufferText
-			> (points_tmp, texcoords_tmp); //xxx todo needs to be stored in kernel
+	       > (points_tmp, texcoords_tmp); //xxx todo needs to be stored in kernel
 	initVBO();
 	initVAO();
 }
 
 inline pProgram Text::createProgram(Engine* engine, eTextEffect effect) {
 	switch (effect) {
-		case eTextEffect::eBold:
-			return ProgramLoader(engine).getTextBold();
-		case eTextEffect::eNone:
-		default:
-			return ProgramLoader(engine).getText();
+	case eTextEffect::eBold:
+		return ProgramLoader(engine).getTextBold();
+	case eTextEffect::eNone:
+	default:
+		return ProgramLoader(engine).getText();
 	}
 }
 

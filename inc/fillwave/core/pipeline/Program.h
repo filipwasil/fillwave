@@ -26,10 +26,10 @@ namespace core {
  */
 
 class Program {
-public:
+  public:
 	Program(
-			const std::vector<pShader>& shaders,
-			GLboolean skipLinking = GL_FALSE);
+	    const std::vector<pShader>& shaders,
+	    GLboolean skipLinking = GL_FALSE);
 
 	virtual ~Program();
 
@@ -68,7 +68,7 @@ public:
 	void reload();
 	void log() const;
 
-private:
+  private:
 	GLuint mHandle;
 
 	std::vector<Uniform> mUniforms;
@@ -84,8 +84,8 @@ typedef std::shared_ptr<core::Program> pProgram;
 typedef std::weak_ptr<core::Program> pwProgram;
 
 static pProgram buildProgram(
-		const std::vector<pShader>& shaders,
-		GLboolean skipLinking = GL_FALSE) {
+    const std::vector<pShader>& shaders,
+    GLboolean skipLinking = GL_FALSE) {
 	return std::make_shared < core::Program > (shaders, skipLinking);
 }
 } /* fillwave */

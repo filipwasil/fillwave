@@ -19,11 +19,11 @@ namespace core {
  */
 
 class Texture2DRenderable: public Texture2D {
-public:
+  public:
 	Texture2DRenderable(
-			GLenum attachment,
-			Texture2DFile* file,
-			ParameterList& parameters);
+	    GLenum attachment,
+	    Texture2DFile* file,
+	    ParameterList& parameters);
 
 	virtual ~Texture2DRenderable() = default;
 
@@ -43,7 +43,7 @@ public:
 	virtual void reload();
 	void log();
 
-private:
+  private:
 	puFramebuffer mFramebuffer;
 	GLenum mAttachment;
 };

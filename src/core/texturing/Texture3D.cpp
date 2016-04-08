@@ -15,26 +15,26 @@ namespace fillwave {
 namespace core {
 
 Texture3D::Texture3D(
-		Texture2DFile* fileRight,
-		Texture2DFile* fileLeft,
-		Texture2DFile* fileCeil,
-		Texture2DFile* fileFloor,
-		Texture2DFile* fileFront,
-		Texture2DFile* fileBack,
-		ParameterList& parameters) :
-			Texture(GL_TEXTURE_CUBE_MAP),
-			mRight(framework::make_unique<Texture3DFile>(fileRight,
-			GL_TEXTURE_CUBE_MAP_POSITIVE_X)),
-			mLeft(framework::make_unique<Texture3DFile>(fileLeft,
-			GL_TEXTURE_CUBE_MAP_NEGATIVE_X)),
-			mCeil(framework::make_unique<Texture3DFile>(fileCeil,
-			GL_TEXTURE_CUBE_MAP_POSITIVE_Y)),
-			mFloor(framework::make_unique<Texture3DFile>(fileFloor,
-			GL_TEXTURE_CUBE_MAP_NEGATIVE_Y)),
-			mFront(framework::make_unique<Texture3DFile>(fileFront,
-			GL_TEXTURE_CUBE_MAP_POSITIVE_Z)),
-			mBack(framework::make_unique<Texture3DFile>(fileBack,
-			GL_TEXTURE_CUBE_MAP_NEGATIVE_Z)) {
+    Texture2DFile* fileRight,
+    Texture2DFile* fileLeft,
+    Texture2DFile* fileCeil,
+    Texture2DFile* fileFloor,
+    Texture2DFile* fileFront,
+    Texture2DFile* fileBack,
+    ParameterList& parameters) :
+	Texture(GL_TEXTURE_CUBE_MAP),
+	mRight(framework::make_unique<Texture3DFile>(fileRight,
+	        GL_TEXTURE_CUBE_MAP_POSITIVE_X)),
+	mLeft(framework::make_unique<Texture3DFile>(fileLeft,
+	        GL_TEXTURE_CUBE_MAP_NEGATIVE_X)),
+	mCeil(framework::make_unique<Texture3DFile>(fileCeil,
+	        GL_TEXTURE_CUBE_MAP_POSITIVE_Y)),
+	mFloor(framework::make_unique<Texture3DFile>(fileFloor,
+	        GL_TEXTURE_CUBE_MAP_NEGATIVE_Y)),
+	mFront(framework::make_unique<Texture3DFile>(fileFront,
+	        GL_TEXTURE_CUBE_MAP_POSITIVE_Z)),
+	mBack(framework::make_unique<Texture3DFile>(fileBack,
+	        GL_TEXTURE_CUBE_MAP_NEGATIVE_Z)) {
 	bind();
 	setParameters(parameters);
 	sendData();
@@ -42,8 +42,8 @@ Texture3D::Texture3D(
 }
 
 inline void Texture3D::sendData(
-		Texture3DFile* file,
-		Texture2DFileData customData) {
+    Texture3DFile* file,
+    Texture2DFileData customData) {
 
 	if (customData) {
 		file->mData = customData;
@@ -52,16 +52,16 @@ inline void Texture3D::sendData(
 	FLOG_DEBUG("file->mCubeTarget 0x%x", file->mCubeTarget);
 	FLOG_DEBUG("file->mConfig.mMipmapsLevel %d", file->mConfig.mMipmapsLevel);
 	FLOG_DEBUG("file->mHeader.mInternalFormat 0x%x",
-		file->mHeader.mInternalFormat);
+	           file->mHeader.mInternalFormat);
 	FLOG_DEBUG("file->mHeader.mWidth %d", file->mHeader.mWidth);
 	FLOG_DEBUG("file->mHeader.mHeight %d", file->mHeader.mHeight);
 	FLOG_DEBUG("file->mConfig.mBorder %d", file->mConfig.mBorder);
 	FLOG_DEBUG("file->mHeader.mFormat 0x%x", file->mHeader.mFormat);
 	FLOG_DEBUG("file->mHeader.mType 0x%x", file->mHeader.mType);
 	glTexImage2D(file->mCubeTarget, file->mConfig.mMipmapsLevel,
-		file->mHeader.mInternalFormat, file->mHeader.mWidth,
-		file->mHeader.mHeight, file->mConfig.mBorder, file->mHeader.mFormat,
-		file->mHeader.mType, (GLubyte*) file->mData);
+	             file->mHeader.mInternalFormat, file->mHeader.mWidth,
+	             file->mHeader.mHeight, file->mConfig.mBorder, file->mHeader.mFormat,
+	             file->mHeader.mType, (GLubyte*) file->mData);
 	FLOG_CHECK("send data");
 }
 
@@ -88,12 +88,12 @@ void Texture3D::log() {
 }
 
 void Texture3D::sendData(
-		Texture2DFileData xp,
-		Texture2DFileData xn,
-		Texture2DFileData yp,
-		Texture2DFileData yn,
-		Texture2DFileData zp,
-		Texture2DFileData zn) {
+    Texture2DFileData xp,
+    Texture2DFileData xn,
+    Texture2DFileData yp,
+    Texture2DFileData yn,
+    Texture2DFileData zp,
+    Texture2DFileData zn) {
 
 	sendData(mRight.get(), xp);
 	sendData(mLeft.get(), xn);

@@ -17,10 +17,10 @@ namespace fillwave {
 namespace framework {
 
 BuilderModel::BuilderModel(
-		Engine* engine,
-		std::string modelPath,
-		pProgram program) :
-		mEngine(engine), mProgram(program), mShapePath(modelPath) {
+    Engine* engine,
+    std::string modelPath,
+    pProgram program) :
+	mEngine(engine), mProgram(program), mShapePath(modelPath) {
 }
 
 pModel BuilderModel::build() {

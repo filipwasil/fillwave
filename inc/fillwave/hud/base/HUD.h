@@ -20,7 +20,7 @@ namespace framework {
  */
 
 class HUD: public TreePtr<pIHUDNode> {
-public:
+  public:
 	HUD() = default;
 	virtual ~HUD() = default;
 

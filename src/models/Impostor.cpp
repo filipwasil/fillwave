@@ -16,16 +16,16 @@ namespace fillwave {
 namespace framework {
 
 Impostor::Impostor(
-		Engine* engine,
-		GLfloat lifetime,
-		GLfloat size,
-		pTexture texture,
-		GLenum blendingSource,
-		GLenum blendingDestination) :
-			Finishable(lifetime),
-			mTexture(texture),
-			mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)),
-			mSize(size) {
+    Engine* engine,
+    GLfloat lifetime,
+    GLfloat size,
+    pTexture texture,
+    GLenum blendingSource,
+    GLenum blendingDestination) :
+	Finishable(lifetime),
+	mTexture(texture),
+	mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)),
+	mSize(size) {
 	mBlending.mSrc = blendingSource;
 	mBlending.mDst = blendingDestination;
 }

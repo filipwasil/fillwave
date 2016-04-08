@@ -27,9 +27,9 @@ struct CursorEnterEventData {
  */
 
 class CursorEnterEvent: public TEvent<CursorEnterEventData> {
-public:
+  public:
 	CursorEnterEvent(CursorEnterEventData& data) :
-			TEvent(data) {
+		TEvent(data) {
 
 	}
 

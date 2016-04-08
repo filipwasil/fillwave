@@ -35,9 +35,9 @@ namespace framework {
 class Entity:
 	public IRenderable, public IPickable, public Moveable,
 	public TreePtr<pEntity> {
-public:
+  public:
 	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
-			glm::quat(1.0, 0.0, 0.0, 0.0));
+	           glm::quat(1.0, 0.0, 0.0, 0.0));
 
 	virtual ~Entity();
 
@@ -93,7 +93,7 @@ public:
 	/* Log */
 	virtual void log() const;
 
-protected:
+  protected:
 	/* MMC - Model Matrix Cache */
 	glm::mat4 mPhysicsMMC;
 
@@ -105,7 +105,7 @@ protected:
 	GLboolean mPSC;
 	GLboolean mPSR;
 
-private:
+  private:
 	void handleEvent(std::vector<Callback*>& callbacks, EventType& event);
 	void eraseFinishedCallbacks(std::vector<Callback*>& callbacks);
 	void detachCallback(std::vector<Callback*>& callbacks, Callback* callback);

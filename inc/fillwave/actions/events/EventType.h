@@ -11,32 +11,32 @@
 namespace fillwave {
 
 enum class eEventType {
-		eMouseButton,
-		eCursorPosition,
-		eCursorEnter,
-		eScroll,
-		eKey,
-		eCharacter,
-		eCharacterMods,
-		eTime,
-		eTouch,
-		eResizeScreen,
-		eCustom0,
-		eCustom1,
-		eCustom2,
-		eCustom3,
-		eCustom4,
-		eCustom5,
-		eCustom6,
-		eCustom7,
-		eCustom8,
-		eCustom9,
-		eCustom10,
-		eCustom11,
-		eCustom12,
-		eCustom13,
-		eCustom14,
-		eCustom15
+    eMouseButton,
+    eCursorPosition,
+    eCursorEnter,
+    eScroll,
+    eKey,
+    eCharacter,
+    eCharacterMods,
+    eTime,
+    eTouch,
+    eResizeScreen,
+    eCustom0,
+    eCustom1,
+    eCustom2,
+    eCustom3,
+    eCustom4,
+    eCustom5,
+    eCustom6,
+    eCustom7,
+    eCustom8,
+    eCustom9,
+    eCustom10,
+    eCustom11,
+    eCustom12,
+    eCustom13,
+    eCustom14,
+    eCustom15
 };
 
 namespace framework {
@@ -48,9 +48,9 @@ namespace framework {
  */
 
 class EventType {
-public:
+  public:
 	EventType(eEventType type) :
-			mType(type) {
+		mType(type) {
 	}
 	virtual ~EventType() = default;
 
@@ -58,7 +58,7 @@ public:
 		return mType;
 	}
 
-private:
+  private:
 	eEventType mType;
 };
 

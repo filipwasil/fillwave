@@ -28,7 +28,7 @@ struct VertexDebug {
 
 class VertexBufferDebug: public TVertexBuffer<VertexDebug> {
 
-public:
+  public:
 	VertexBufferDebug(GLfloat scale = 1.0);
 	virtual ~VertexBufferDebug() = default;
 	void log() const;

@@ -29,13 +29,13 @@ struct LightDirectioData {
  * \brief Light with Orthographic projection.
  */
 class LightDirectional: public Light {
-public:
+  public:
 	LightDirectional(
-			core::Texture2DRenderable* shadowTexture,
-			glm::vec3 position,
-			glm::quat rotation,
-			glm::vec4 intensity,
-			pMoveable followed);
+	    core::Texture2DRenderable* shadowTexture,
+	    glm::vec3 position,
+	    glm::quat rotation,
+	    glm::vec4 intensity,
+	    pMoveable followed);
 	virtual ~LightDirectional() = default;
 
 	core::Texture2DRenderable* getShadowTexture();
@@ -45,7 +45,7 @@ public:
 
 	void log();
 
-private:
+  private:
 	core::Texture2DRenderable* mShadowTexture;
 	pCameraOrthographic mShadowCamera;
 };

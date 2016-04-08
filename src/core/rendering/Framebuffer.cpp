@@ -14,7 +14,7 @@ namespace fillwave {
 namespace core {
 
 Framebuffer::Framebuffer(GLsizei howMany) :
-		GLObject(howMany) {
+	GLObject(howMany) {
 	reload();
 }
 
@@ -38,22 +38,22 @@ void Framebuffer::bindForReading(GLuint id) const {
 }
 
 void Framebuffer::attachTexture2D(
-		GLenum attachment,
-		GLenum target,
-		GLuint textureHandle) {
+    GLenum attachment,
+    GLenum target,
+    GLuint textureHandle) {
 	glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, target, textureHandle, 0);
 	FLOG_CHECK("Attach texture to framebuffer failed");
 }
 
 void Framebuffer::attachTexture2DDraw(
-		GLenum attachment,
-		GLenum target,
-		GLuint textureHandle) {
+    GLenum attachment,
+    GLenum target,
+    GLuint textureHandle) {
 	glFramebufferTexture2D(
-	GL_DRAW_FRAMEBUFFER, attachment, target, textureHandle, 0);
+	    GL_DRAW_FRAMEBUFFER, attachment, target, textureHandle, 0);
 	FLOG_CHECK(
-		"attachTexture2DDraw failed. attachment: 0x%x, target: 0x%x, handle: 0x%x",
-		attachment, target, textureHandle);
+	    "attachTexture2DDraw failed. attachment: 0x%x, target: 0x%x, handle: 0x%x",
+	    attachment, target, textureHandle);
 }
 
 void Framebuffer::setReadColorAttachment(GLuint attachmentColor) {

@@ -18,6 +18,7 @@
 #include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
 #include <TerrainConstructors/MountainConstructor.h>
+#include <fillwave/management/base/TManagerSmart.h>
 
 /* Physics */
 //#include <bullet>

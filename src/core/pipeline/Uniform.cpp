@@ -15,7 +15,7 @@ namespace fillwave {
 namespace core {
 
 Uniform::Uniform(std::string name, GLuint type, GLsizei size, GLint location) :
-		mName(name), mType(type), mSize(size), mLocation(location) {
+	mName(name), mType(type), mSize(size), mLocation(location) {
 	/* xxx validate parameters */
 }
 
@@ -177,7 +177,7 @@ void Uniform::push(GLint location, glm::mat4* data, GLuint size) {
 		FLOG_ERROR("No int uniform under location %d", location);
 	} else {
 		glUniformMatrix4fv(location, size,
-		GL_FALSE, reinterpret_cast<GLfloat*>(data));
+		                   GL_FALSE, reinterpret_cast<GLfloat*>(data));
 		FLOG_CHECK("Uniform var mat4 push failed");
 	}
 }

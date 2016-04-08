@@ -11,7 +11,7 @@ namespace fillwave {
 namespace framework {
 
 IPickable::IPickable() :
-		mFlagPickable(false) {
+	mFlagPickable(false) {
 
 }
 

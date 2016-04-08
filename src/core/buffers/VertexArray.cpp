@@ -15,7 +15,7 @@ namespace fillwave {
 namespace core {
 
 VertexArray::VertexArray(GLuint howMany) :
-		GLObject(howMany) {
+	GLObject(howMany) {
 	glGenVertexArrays(mHowMany, mHandles);
 	FLOG_CHECK("Could not generate the VAO");
 }

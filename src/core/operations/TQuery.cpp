@@ -15,7 +15,7 @@ namespace core {
 
 template <GLenum target>
 TQuery<target>::TQuery(GLsizei howMany) :
-		GLObject(howMany) {
+	GLObject(howMany) {
 	glGenQueries(mHowMany, mHandles);
 	FLOG_CHECK("Could not create query");
 }

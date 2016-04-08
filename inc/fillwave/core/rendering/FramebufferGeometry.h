@@ -22,13 +22,13 @@ namespace core {
  */
 
 class FramebufferGeometry: public Framebuffer {
-public:
+  public:
 	FramebufferGeometry(
-			framework::TextureSystem* textures,
-			GLuint width,
-			GLuint height,
-			GLuint colorBuffers,
-			GLuint depthBuffers);
+	    framework::TextureSystem* textures,
+	    GLuint width,
+	    GLuint height,
+	    GLuint colorBuffers,
+	    GLuint depthBuffers);
 
 	virtual ~FramebufferGeometry() = default;
 
@@ -41,7 +41,7 @@ public:
 	void resize(GLuint width, GLuint height);
 	void reload();
 
-private:
+  private:
 
 	std::vector<GLenum> mColorBuffers;
 

@@ -21,9 +21,9 @@ namespace framework {
 
 template <class T>
 class TEvent: public EventType {
-public:
+  public:
 	TEvent(T data) :
-			EventType(data.type), mData(data) {
+		EventType(data.type), mData(data) {
 
 	}
 	virtual ~TEvent() = default;
@@ -38,7 +38,7 @@ public:
 		return e;
 	}
 
-private:
+  private:
 	T mData;
 };
 

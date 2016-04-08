@@ -17,7 +17,7 @@ namespace fillwave {
 namespace core {
 
 Buffer::Buffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany) :
-		GLObject(howMany), mRefresh(GL_TRUE), mIndex(index) {
+	GLObject(howMany), mRefresh(GL_TRUE), mIndex(index) {
 	setTarget(target);
 	setDrawType(drawType);
 	reload();
@@ -36,9 +36,9 @@ void Buffer::setSize(GLuint size) {
 
 void Buffer::setTarget(GLuint target) {
 	if (target == GL_ARRAY_BUFFER_BINDING || target == GL_ARRAY_BUFFER
-			|| target == GL_ELEMENT_ARRAY_BUFFER || target == GL_UNIFORM_BUFFER
-			|| target == GL_ELEMENT_ARRAY_BUFFER_BINDING
-			|| target == GL_PIXEL_PACK_BUFFER) {
+	        || target == GL_ELEMENT_ARRAY_BUFFER || target == GL_UNIFORM_BUFFER
+	        || target == GL_ELEMENT_ARRAY_BUFFER_BINDING
+	        || target == GL_PIXEL_PACK_BUFFER) {
 		mTarget = target;
 	} else {
 		FLOG_ERROR("Invalid target %d", mTarget);
@@ -47,10 +47,10 @@ void Buffer::setTarget(GLuint target) {
 
 void Buffer::setDrawType(GLuint dataStoreType) {
 	if (dataStoreType == GL_STREAM_DRAW || dataStoreType == GL_STREAM_READ
-			|| dataStoreType == GL_STREAM_COPY || dataStoreType == GL_STATIC_DRAW
-			|| dataStoreType == GL_STATIC_READ || dataStoreType == GL_STATIC_COPY
-			|| dataStoreType == GL_DYNAMIC_DRAW || dataStoreType == GL_DYNAMIC_READ
-			|| dataStoreType == GL_DYNAMIC_COPY) {
+	        || dataStoreType == GL_STREAM_COPY || dataStoreType == GL_STATIC_DRAW
+	        || dataStoreType == GL_STATIC_READ || dataStoreType == GL_STATIC_COPY
+	        || dataStoreType == GL_DYNAMIC_DRAW || dataStoreType == GL_DYNAMIC_READ
+	        || dataStoreType == GL_DYNAMIC_COPY) {
 		mDataStoreType = dataStoreType;
 	} else {
 		FLOG_ERROR("Invalid data store type %d", mTarget);

@@ -19,11 +19,11 @@ namespace core {
  */
 
 class Texture2DRenderableDynamic: public Texture2DRenderable {
-public:
+  public:
 	Texture2DRenderableDynamic(
-			Texture2DFile* file,
-			ParameterList& parameters,
-			pProgram program);
+	    Texture2DFile* file,
+	    ParameterList& parameters,
+	    pProgram program);
 
 	virtual ~Texture2DRenderableDynamic() = default;
 
@@ -31,7 +31,7 @@ public:
 
 	void reload();
 
-private:
+  private:
 	pProgram mProgram;
 
 	GLfloat mTimePassed;
@@ -42,7 +42,8 @@ private:
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture2DRenderableDynamic> pTexture2DRenderableDynamic;
+typedef std::shared_ptr<core::Texture2DRenderableDynamic>
+pTexture2DRenderableDynamic;
 } /* fillwave */
 
 #endif /* TEXTURE2DRENDERABLEDYNAMIC_H_ */

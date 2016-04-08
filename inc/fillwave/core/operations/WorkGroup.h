@@ -17,7 +17,7 @@ namespace core {
  */
 
 class WorkGroup {
-public:
+  public:
 	WorkGroup() = default;
 	virtual ~WorkGroup() = default;
 };

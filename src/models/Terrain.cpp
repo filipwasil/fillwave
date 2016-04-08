@@ -15,10 +15,10 @@ namespace fillwave {
 namespace framework {
 
 Terrain::Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap) :
-			mProgram(program),
-			mLights(engine->getLightSystem()),
-			mRadius(radius),
-			mGap(gap) {
+	mProgram(program),
+	mLights(engine->getLightSystem()),
+	mRadius(radius),
+	mGap(gap) {
 
 }
 
@@ -45,7 +45,7 @@ inline void Terrain::distanceCheck(ICamera& camera) {
 
 	GLint cenralChunkIndex = ((mRadius * 2 + 1) * (mRadius * 2 + 1) - 1) / 2;
 	distanceToCamera = camera.getTranslation()
-			- glm::vec3(mVoxelChunks[cenralChunkIndex]->getTranslation());
+	                   - glm::vec3(mVoxelChunks[cenralChunkIndex]->getTranslation());
 
 	GLfloat singleChunkWidth = FILLWAVE_VOXEL_CHUNK_SIZE * mGap * mRadius;
 	GLfloat maximumDistance = singleChunkWidth * 0.5f;
@@ -89,29 +89,29 @@ bool Terrain::getRenderItem(RenderItem& item) {
 
 } /* models */
 pTerrain buildTerrainVoxel(
-		Engine* engine,
-		pProgram program,
-		const std::string& texturePath,
-		framework::VoxelConstructor* constructor,
-		GLint radius) {
+    Engine* engine,
+    pProgram program,
+    const std::string& texturePath,
+    framework::VoxelConstructor* constructor,
+    GLint radius) {
 
 	GLfloat voxelGap = 0.2;
 
 	pTerrain terrain = std::make_shared < framework::Terrain
-			> (engine, program, radius, voxelGap);
+	                   > (engine, program, radius, voxelGap);
 
 	for (GLint i = 0; i <= radius; i++) {
 		for (GLint x = 0; x < 1 + 2 * i; x++) {
 			for (GLint z = 0; z < 1 + 2 * i; z++) {
 				pVoxelChunk chunk = pVoxelChunk(
-					new framework::VoxelChunk(program, engine, texturePath,
-					FILLWAVE_VOXEL_CHUNK_SIZE, constructor, voxelGap));
+				                        new framework::VoxelChunk(program, engine, texturePath,
+				                                FILLWAVE_VOXEL_CHUNK_SIZE, constructor, voxelGap));
 				chunk->moveTo(
-					glm::vec3(
-						FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * x
-								- FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius), 0.0,
-						FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * z
-								- FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius)));
+				    glm::vec3(
+				        FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * x
+				        - FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius), 0.0,
+				        FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * z
+				        - FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius)));
 				terrain->addChunk(chunk);
 			}
 		}

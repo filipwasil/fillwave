@@ -25,18 +25,18 @@ namespace fillwave {
 namespace framework {
 
 Model::Model(
-		Engine* engine,
-		pProgram program,
-		Shape<core::VertexBasic>& shape,
-		core::Texture2D* diffuseMap,
-		core::Texture2D* normalMap,
-		core::Texture2D* specularMap,
-		const Material& material) :
-			Programmable(program),
-			mAnimator(nullptr),
-			mLights(engine->getLightSystem()),
-			mAnimationCallback(nullptr),
-			mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+    Engine* engine,
+    pProgram program,
+    Shape<core::VertexBasic>& shape,
+    core::Texture2D* diffuseMap,
+    core::Texture2D* normalMap,
+    core::Texture2D* specularMap,
+    const Material& material) :
+	Programmable(program),
+	mAnimator(nullptr),
+	mLights(engine->getLightSystem()),
+	mAnimationCallback(nullptr),
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	initShadowing(engine);
 
@@ -46,23 +46,23 @@ Model::Model(
 	std::vector<GLuint> indices = shape.getIndices();
 
 	pMesh ptr = pMesh(
-		new Mesh(engine, material, buildTextureRegion(diffuseMap),
-			buildTextureRegion(normalMap), buildTextureRegion(specularMap),
-			program, mProgramShadow, mProgramShadowColor,
-			loader.getOcclusionOptimizedQuery(),
-			loader.getAmbientOcclusionGeometry(),
-			loader.getAmbientOcclusionColor(), engine->getLightSystem(),
-			pVertexBufferBasic(new core::VertexBufferBasic(vertices)),
-			pIndexBufferBasic(new core::IndexBufferBasic(indices)), mAnimator));
+	                new Mesh(engine, material, buildTextureRegion(diffuseMap),
+	                         buildTextureRegion(normalMap), buildTextureRegion(specularMap),
+	                         program, mProgramShadow, mProgramShadowColor,
+	                         loader.getOcclusionOptimizedQuery(),
+	                         loader.getAmbientOcclusionGeometry(),
+	                         loader.getAmbientOcclusionColor(), engine->getLightSystem(),
+	                         pVertexBufferBasic(new core::VertexBufferBasic(vertices)),
+	                         pIndexBufferBasic(new core::IndexBufferBasic(indices)), mAnimator));
 	attach(ptr);
 }
 
 Model::Model(Engine* engine, pProgram program, const std::string& shapePath) :
-			Programmable(program),
-			mAnimator(nullptr),
-			mLights(engine->getLightSystem()),
-			mAnimationCallback(nullptr),
-			mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+	Programmable(program),
+	mAnimator(nullptr),
+	mLights(engine->getLightSystem()),
+	mAnimationCallback(nullptr),
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	const aiScene* scene = engine->getModelFromFile(shapePath);
 
@@ -77,17 +77,17 @@ Model::Model(Engine* engine, pProgram program, const std::string& shapePath) :
 }
 
 Model::Model(
-		Engine* engine,
-		pProgram program,
-		const std::string& shapePath,
-		const std::string& diffuseMapPath,
-		const std::string& normalMapPath,
-		const std::string& specularMapPath) :
-			Programmable(program),
-			mAnimator(nullptr),
-			mLights(engine->getLightSystem()),
-			mAnimationCallback(nullptr),
-			mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+    Engine* engine,
+    pProgram program,
+    const std::string& shapePath,
+    const std::string& diffuseMapPath,
+    const std::string& normalMapPath,
+    const std::string& specularMapPath) :
+	Programmable(program),
+	mAnimator(nullptr),
+	mLights(engine->getLightSystem()),
+	mAnimationCallback(nullptr),
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	const aiScene* scene = engine->getModelFromFile(shapePath);
 	if (scene) {
@@ -95,25 +95,25 @@ Model::Model(
 		initShadowing(engine); //xxx must be after initAnimations
 		initUniformsCache();
 		loadNodes(scene->mRootNode, scene, engine, this, diffuseMapPath,
-			normalMapPath, specularMapPath);
+		          normalMapPath, specularMapPath);
 	} else {
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
 }
 
 Model::Model(
-		Engine* engine,
-		pProgram program,
-		const std::string& shapePath,
-		core::Texture2D* diffuseMap,
-		core::Texture2D* normalMap,
-		core::Texture2D* specularMap,
-		const Material& material) :
-			Programmable(program),
-			mAnimator(nullptr),
-			mLights(engine->getLightSystem()),
-			mAnimationCallback(nullptr),
-			mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+    Engine* engine,
+    pProgram program,
+    const std::string& shapePath,
+    core::Texture2D* diffuseMap,
+    core::Texture2D* normalMap,
+    core::Texture2D* specularMap,
+    const Material& material) :
+	Programmable(program),
+	mAnimator(nullptr),
+	mLights(engine->getLightSystem()),
+	mAnimationCallback(nullptr),
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	const aiScene* scene = engine->getModelFromFile(shapePath);
 	if (scene) {
@@ -121,7 +121,7 @@ Model::Model(
 		initShadowing(engine);
 		initUniformsCache();
 		loadNodes(scene->mRootNode, scene, engine, this, diffuseMap, normalMap,
-			specularMap, material);
+		          specularMap, material);
 	} else {
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
@@ -141,13 +141,13 @@ void Model::reload() {
 }
 
 inline void Model::loadNodes(
-		fNode* node,
-		const fScene* scene,
-		Engine* engine,
-		Entity* entity,
-		const std::string& diffuseMapPath,
-		const std::string& normalMapPath,
-		const std::string& specularMapPath) {
+    fNode* node,
+    const fScene* scene,
+    Engine* engine,
+    Entity* entity,
+    const std::string& diffuseMapPath,
+    const std::string& normalMapPath,
+    const std::string& specularMapPath) {
 
 	/* Set this node transformations */
 
@@ -158,11 +158,11 @@ inline void Model::loadNodes(
 		const fMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
 
 		entity->attach(
-			loadMesh(aMesh, Material(aMaterial),
-				buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str())),
-				buildTextureRegion(engine->storeTexture(normalMapPath.c_str())),
-				buildTextureRegion(engine->storeTexture(specularMapPath.c_str())),
-				engine));
+		    loadMesh(aMesh, Material(aMaterial),
+		             buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str())),
+		             buildTextureRegion(engine->storeTexture(normalMapPath.c_str())),
+		             buildTextureRegion(engine->storeTexture(specularMapPath.c_str())),
+		             engine));
 	}
 
 	/* Evaluate children */
@@ -170,15 +170,15 @@ inline void Model::loadNodes(
 		pEntity newEntity = buildHinge();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get(),
-			diffuseMapPath, normalMapPath, specularMapPath);
+		          diffuseMapPath, normalMapPath, specularMapPath);
 	}
 }
 
 inline void Model::loadNodes(
-		aiNode* node,
-		const aiScene* scene,
-		Engine* engine,
-		Entity* entity) {
+    aiNode* node,
+    const aiScene* scene,
+    Engine* engine,
+    Entity* entity) {
 
 	/* Set this node transformations */
 
@@ -192,29 +192,29 @@ inline void Model::loadNodes(
 		std::string diffuseMapPath, normalMapPath, specularMapPath;
 
 		diffuseMapPath =
-				(aMaterial->GetTexture(
-				FILLWAVE_TEXTURE_TYPE_DIFFUSE, 0, &diffuseMapPathAssimp, nullptr,
-					nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
-						diffuseMapPathAssimp.data : "255_255_255.color";
+		    (aMaterial->GetTexture(
+		         FILLWAVE_TEXTURE_TYPE_DIFFUSE, 0, &diffuseMapPathAssimp, nullptr,
+		         nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
+		    diffuseMapPathAssimp.data : "255_255_255.color";
 
 		normalMapPath =
-				(aMaterial->GetTexture(
-				FILLWAVE_TEXTURE_TYPE_NORMALS, 0, &normalMapPathAssimp, nullptr,
-					nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
-						normalMapPathAssimp.data : "128_128_255.color";
+		    (aMaterial->GetTexture(
+		         FILLWAVE_TEXTURE_TYPE_NORMALS, 0, &normalMapPathAssimp, nullptr,
+		         nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
+		    normalMapPathAssimp.data : "128_128_255.color";
 
 		specularMapPath =
-				(aMaterial->GetTexture(
-				FILLWAVE_TEXTURE_TYPE_SPECULAR, 0, &specularMapPathAssimp, nullptr,
-					nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
-						specularMapPathAssimp.data : "";
+		    (aMaterial->GetTexture(
+		         FILLWAVE_TEXTURE_TYPE_SPECULAR, 0, &specularMapPathAssimp, nullptr,
+		         nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
+		    specularMapPathAssimp.data : "";
 
 		entity->attach(
-			loadMesh(aMesh, Material(aMaterial),
-				buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str())),
-				buildTextureRegion(engine->storeTexture(normalMapPath.c_str())),
-				buildTextureRegion(engine->storeTexture(specularMapPath.c_str())),
-				engine));
+		    loadMesh(aMesh, Material(aMaterial),
+		             buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str())),
+		             buildTextureRegion(engine->storeTexture(normalMapPath.c_str())),
+		             buildTextureRegion(engine->storeTexture(specularMapPath.c_str())),
+		             engine));
 	}
 
 	/* Evaluate children */
@@ -226,14 +226,14 @@ inline void Model::loadNodes(
 }
 
 inline void Model::loadNodes(
-		aiNode* node,
-		const aiScene* scene,
-		Engine* engine,
-		Entity* entity,
-		core::Texture2D* diffuseMap,
-		core::Texture2D* normalMap,
-		core::Texture2D* specularMap,
-		const Material& material) {
+    aiNode* node,
+    const aiScene* scene,
+    Engine* engine,
+    Entity* entity,
+    core::Texture2D* diffuseMap,
+    core::Texture2D* normalMap,
+    core::Texture2D* specularMap,
+    const Material& material) {
 
 	/* Set this node transformations */
 
@@ -242,8 +242,8 @@ inline void Model::loadNodes(
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
 		const fMesh* aMesh = scene->mMeshes[i];
 		pMesh mesh = loadMesh(aMesh, material, buildTextureRegion(diffuseMap),
-			buildTextureRegion(normalMap), buildTextureRegion(specularMap),
-			engine);
+		                      buildTextureRegion(normalMap), buildTextureRegion(specularMap),
+		                      engine);
 		entity->attach(mesh);
 	}
 
@@ -252,7 +252,7 @@ inline void Model::loadNodes(
 		pEntity newEntity = buildHinge();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMap,
-			normalMap, specularMap, material);
+		          normalMap, specularMap, material);
 	}
 }
 
@@ -267,21 +267,24 @@ inline void Model::loadNodeTransformations(aiNode* node, Entity* entity) {
 }
 
 pMesh Model::loadMesh(
-		const fMesh* shape,
-		const Material& material,
-		pTextureRegion diffuseMap,
-		pTextureRegion normalMap,
-		pTextureRegion specularMap,
-		Engine* engine) {
+    const fMesh* shape,
+    const Material& material,
+    pTextureRegion diffuseMap,
+    pTextureRegion normalMap,
+    pTextureRegion specularMap,
+    Engine* engine) {
 
 	ProgramLoader loader(engine);
 
 	if (shape) {
 		pMesh ptr =
-				std::make_shared < Mesh
-						> (engine, material, diffuseMap, normalMap, specularMap, mProgram, mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(), loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(), engine->getLightSystem(), std::make_shared
-								< core::VertexBufferBasic > (shape, mAnimator), std::make_shared
-								< core::IndexBufferBasic > (shape), mAnimator);
+		    std::make_shared < Mesh
+		    > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
+		       mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
+		       loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
+		       engine->getLightSystem(), std::make_shared
+		       < core::VertexBufferBasic > (shape, mAnimator), std::make_shared
+		       < core::IndexBufferBasic > (shape), mAnimator);
 		return ptr;
 	} else {
 		return pMesh();
@@ -298,7 +301,7 @@ void Model::setActiveAnimation(GLint animationID) {
 	} else {
 		FLOG_ERROR("There is no animation for slot: %d", animationID);
 		FLOG_DEBUG("Maximum number of animations: %d",
-			mAnimator->getAnimations());
+		           mAnimator->getAnimations());
 	}
 }
 
@@ -337,9 +340,9 @@ inline void Model::initUniformsCache() {
 	if (mAnimator) {
 		mUniformLocationCacheBones = mProgram->getUniformLocation("uBones[0]");
 		mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation(
-			"uBones[0]");
+		                                       "uBones[0]");
 		mUniformLocationCacheBonesShadowColor =
-				mProgramShadowColor->getUniformLocation("uBones[0]");
+		    mProgramShadowColor->getUniformLocation("uBones[0]");
 	}
 }
 
@@ -384,45 +387,45 @@ void Model::updateRenderer(IRenderer& renderer) {
 }
 
 pModel buildModel(
-		Engine* engine,
-		pProgram program,
-		framework::Shape<core::VertexBasic>& shape,
-		core::Texture2D* diffuseMap,
-		core::Texture2D* normalMap,
-		core::Texture2D* specularMap,
-		framework::Material material) {
+    Engine* engine,
+    pProgram program,
+    framework::Shape<core::VertexBasic>& shape,
+    core::Texture2D* diffuseMap,
+    core::Texture2D* normalMap,
+    core::Texture2D* specularMap,
+    framework::Material material) {
 	return std::make_shared < framework::Model
-			> (engine, program, shape, diffuseMap, normalMap, specularMap, material);
+	       > (engine, program, shape, diffuseMap, normalMap, specularMap, material);
 }
 
 } /* framework */
 pModel buildModel(
-		Engine* engine,
-		pProgram program,
-		const std::string& shapePath,
-		const std::string& diffuseMapPath,
-		const std::string& normalMapPath,
-		const std::string& specularMapPath) {
+    Engine* engine,
+    pProgram program,
+    const std::string& shapePath,
+    const std::string& diffuseMapPath,
+    const std::string& normalMapPath,
+    const std::string& specularMapPath) {
 	return std::make_shared < framework::Model
-			> (engine, program, shapePath, diffuseMapPath, normalMapPath, specularMapPath);
+	       > (engine, program, shapePath, diffuseMapPath, normalMapPath, specularMapPath);
 }
 
 pModel buildModel(
-		Engine* engine,
-		pProgram program,
-		const std::string& shapePath,
-		core::Texture2D* diffuseMap,
-		core::Texture2D* normalMap,
-		core::Texture2D* specularMap,
-		framework::Material material) {
+    Engine* engine,
+    pProgram program,
+    const std::string& shapePath,
+    core::Texture2D* diffuseMap,
+    core::Texture2D* normalMap,
+    core::Texture2D* specularMap,
+    framework::Material material) {
 	return std::make_shared < framework::Model
-			> (engine, program, shapePath, diffuseMap, normalMap, specularMap, material);
+	       > (engine, program, shapePath, diffuseMap, normalMap, specularMap, material);
 }
 
 pModel buildModel(
-		Engine* engine,
-		pProgram program,
-		const std::string& shapePath) {
+    Engine* engine,
+    pProgram program,
+    const std::string& shapePath) {
 	return std::make_shared < framework::Model > (engine, program, shapePath);
 }
 

@@ -22,7 +22,7 @@ namespace framework {
  */
 
 class Terrain: public Entity {
-public:
+  public:
 	Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap);
 	virtual ~Terrain() = default;
 
@@ -37,10 +37,10 @@ public:
 	void updateRenderer(IRenderer& renderer) override;
 	bool getRenderItem(RenderItem& item) override;
 
-protected:
+  protected:
 	void updateRendererData();
 
-private:
+  private:
 	pProgram mProgram;
 	LightSystem* mLights;
 	GLint mRadius;
@@ -52,11 +52,11 @@ private:
 typedef std::shared_ptr<framework::Terrain> pTerrain;
 
 pTerrain buildTerrainVoxel(
-		Engine* engine,
-		pProgram program,
-		const std::string& texturePath,
-		framework::VoxelConstructor* constructor,
-		GLint radius = 0);
+    Engine* engine,
+    pProgram program,
+    const std::string& texturePath,
+    framework::VoxelConstructor* constructor,
+    GLint radius = 0);
 
 } /* fillwave*/
 

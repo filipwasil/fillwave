@@ -25,7 +25,7 @@ namespace core {
  */
 
 class PixelBuffer: public Buffer {
-public:
+  public:
 	PixelBuffer(GLuint dataStoreType);
 	virtual ~PixelBuffer() = default;
 	void setScreenSize(GLuint width, GLuint height, GLuint bytesPerPixel);

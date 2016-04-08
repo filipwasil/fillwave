@@ -23,7 +23,7 @@ namespace framework {
  */
 
 class Skybox: public Entity, public IReloadable {
-public:
+  public:
 	Skybox(Engine* engine, core::Texture3D* texture);
 
 	virtual ~Skybox() = default;
@@ -35,16 +35,16 @@ public:
 	/* IRenderable */
 	bool getRenderItem(RenderItem& item);
 
-protected:
+  protected:
 	pProgram mProgram;
 	pProgram mProgramDR;
 
-private:
+  private:
 	core::Texture3D* mTexture;
 	pVertexBufferPosition mVBO;
 	pIndexBufferBasic mIBO;
 	GLint mULCCameraPosition, mULCModelMatrixPosition, mULCViewProjectionMatrix,
-			mULCTextureUnit;
+	      mULCTextureUnit;
 
 	void initBuffers();
 	void initPipeline();

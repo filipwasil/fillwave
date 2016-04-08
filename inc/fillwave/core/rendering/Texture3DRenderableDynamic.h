@@ -19,27 +19,28 @@ namespace core {
  */
 
 class Texture3DRenderableDynamic: public Texture3DRenderable {
-public:
+  public:
 	Texture3DRenderableDynamic(
-			Texture2DFile* filePosX,
-			Texture2DFile* fileNegX,
-			Texture2DFile* filePosY,
-			Texture2DFile* fileNegY,
-			Texture2DFile* filePosZ,
-			Texture2DFile* fileNegZ,
-			ParameterList& parameters,
-			core::Texture2DRenderable* texture2D,
-			pProgram program);
+	    Texture2DFile* filePosX,
+	    Texture2DFile* fileNegX,
+	    Texture2DFile* filePosY,
+	    Texture2DFile* fileNegY,
+	    Texture2DFile* filePosZ,
+	    Texture2DFile* fileNegZ,
+	    ParameterList& parameters,
+	    core::Texture2DRenderable* texture2D,
+	    pProgram program);
 
 	virtual ~Texture3DRenderableDynamic() = default;
 
-private:
+  private:
 	pProgram mProgram;
 	GLfloat mTimePassed;
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture3DRenderableDynamic> pTexture3DRenderableDynamic;
+typedef std::shared_ptr<core::Texture3DRenderableDynamic>
+pTexture3DRenderableDynamic;
 } /* fillwave */
 
 #endif /* TEXTURE3DRENDERABLEDYNAMIC_H_ */

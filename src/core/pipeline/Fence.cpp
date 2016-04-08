@@ -11,7 +11,7 @@ namespace fillwave {
 namespace core {
 
 Fence::Fence(GLenum target) :
-		mHandle(glFenceSync(target, 0)) {
+	mHandle(glFenceSync(target, 0)) {
 
 }
 

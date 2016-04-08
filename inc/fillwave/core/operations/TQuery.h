@@ -19,10 +19,10 @@ namespace core {
 
 template <GLenum target>
 class TQuery: public GLObject {
-private:
+  private:
 	GLenum mTarget = target;
 
-public:
+  public:
 	TQuery(GLsizei howMany = 1);
 
 	virtual ~TQuery();
@@ -46,13 +46,15 @@ public:
 
 typedef TQuery<GL_ANY_SAMPLES_PASSED> QueryIfAnySamplesPassed;
 
-typedef TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN> QueryHowManyTransformFeedbackPrimitivesWritten;
+typedef TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN>
+QueryHowManyTransformFeedbackPrimitivesWritten;
 
 #ifdef FILLWAVE_GLES_3_0
 #else
 
 typedef TQuery<GL_SAMPLES_PASSED> QueryHowManySamplesPassed;
-typedef TQuery<GL_PRIMITIVES_GENERATED> QueryHowManyPrimitivesGeneratedByGeometryShader;
+typedef TQuery<GL_PRIMITIVES_GENERATED>
+QueryHowManyPrimitivesGeneratedByGeometryShader;
 typedef TQuery<GL_TIME_ELAPSED> QueryTimeElapsed;
 
 #endif

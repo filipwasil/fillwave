@@ -18,14 +18,14 @@ namespace framework {
  */
 
 class Voxel {
-public:
+  public:
 	Voxel();
 	~Voxel() = default;
 	GLboolean isActive();
 	void setActive(GLboolean active);
 	void setType(GLint type);
 
-private:
+  private:
 	GLint mType;
 	GLboolean mActive;
 };

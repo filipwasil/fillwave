@@ -21,9 +21,9 @@ namespace framework {
 
 template <class T>
 class TreePtr: public ITreeNode {
-public:
+  public:
 	TreePtr() :
-			mFlagAttachedDetached(true) {
+		mFlagAttachedDetached(true) {
 
 	}
 
@@ -37,8 +37,8 @@ public:
 
 	void detach(T node) {
 		auto _compare_function =
-				[node](const T& e) -> bool {bool found = (e == node); if (found) node->onDetached(); return found;};
-		auto _begin = mChildren.begin();
+		    [node](const T & e) -> bool {bool found = (e == node); if (found) node->onDetached(); return found;};
+	auto _begin = mChildren.begin();
 		auto _end = mChildren.end();
 		auto it = std::remove_if(_begin, _end, _compare_function);
 		if (it != _end) {
@@ -57,7 +57,9 @@ public:
 
 	void detachChildren() {
 		std::for_each(mChildren.begin(), mChildren.end(),
-			[](T& e) {e->onDetached();});
+		[](T & e) {
+			e->onDetached();
+		});
 		mChildren.clear();
 	}
 
@@ -72,7 +74,7 @@ public:
 
 	bool mFlagAttachedDetached;
 
-protected:
+  protected:
 	std::vector<T> mChildren;
 };
 

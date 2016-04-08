@@ -29,9 +29,9 @@ struct TouchEventData {
  */
 
 class TouchEvent: public TEvent<TouchEventData> {
-public:
+  public:
 	TouchEvent(TouchEventData& data) :
-			TEvent(data) {
+		TEvent(data) {
 
 	}
 	virtual ~TouchEvent() = default;

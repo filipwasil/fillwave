@@ -26,13 +26,13 @@ struct VertexPosition {
  */
 
 class VertexBufferPosition: public TVertexBuffer<VertexPosition> {
-public:
+  public:
 	VertexBufferPosition(
-			framework::Shape<VertexPosition>& shape,
-			GLuint dataStoreModification = GL_STATIC_DRAW);
+	    framework::Shape<VertexPosition>& shape,
+	    GLuint dataStoreModification = GL_STATIC_DRAW);
 	VertexBufferPosition(
-			std::vector<VertexPosition>& vertices,
-			GLuint dataStoreModification = GL_STATIC_DRAW);
+	    std::vector<VertexPosition>& vertices,
+	    GLuint dataStoreModification = GL_STATIC_DRAW);
 	virtual ~VertexBufferPosition() = default;
 	void log() const;
 };

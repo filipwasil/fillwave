@@ -26,18 +26,18 @@ namespace framework {
  */
 
 class IEmiterPoint: public IReloadable, public Entity {
-public:
+  public:
 	IEmiterPoint(
-			Engine* engine,
-			GLuint howMany,
-			GLfloat size,
-			GLfloat lifetime,
-			core::Texture* texture,
-			glm::vec4 color,
-			GLenum blendingSource,
-			GLenum blendingDestination,
-			GLboolean depthTesting,
-			GLfloat alphaCutOff);
+	    Engine* engine,
+	    GLuint howMany,
+	    GLfloat size,
+	    GLfloat lifetime,
+	    core::Texture* texture,
+	    glm::vec4 color,
+	    GLenum blendingSource,
+	    GLenum blendingDestination,
+	    GLboolean depthTesting,
+	    GLfloat alphaCutOff);
 
 	virtual ~IEmiterPoint() = default;
 
@@ -49,7 +49,7 @@ public:
 	/* IRenderable */
 	void updateRenderer(IRenderer& renderer) override;
 
-protected:
+  protected:
 	GLfloat mStartSize;
 	GLfloat mLifetime;
 	core::Texture* mTexture;

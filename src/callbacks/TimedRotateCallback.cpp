@@ -16,17 +16,17 @@ namespace fillwave {
 namespace framework {
 
 TimedRotateCallback::TimedRotateCallback(
-		pMoveable moveable,
-		glm::vec3 axis,
-		GLfloat angle,
-		GLfloat lifeTime,
-		EasingFunction easing) :
-			TimedCallback(lifeTime, easing),
-			mMoveable(moveable),
-			mStartRotation(glm::quat()),
-			mStartAngle(0.0f),
-			mEndAngle(angle),
-			mAxis(axis) {
+    pMoveable moveable,
+    glm::vec3 axis,
+    GLfloat angle,
+    GLfloat lifeTime,
+    EasingFunction easing) :
+	TimedCallback(lifeTime, easing),
+	mMoveable(moveable),
+	mStartRotation(glm::quat()),
+	mStartAngle(0.0f),
+	mEndAngle(angle),
+	mAxis(axis) {
 
 }
 
@@ -37,7 +37,7 @@ void TimedRotateCallback::performTime(TimeEventData& data) {
 	mTimePassed += data.mTimePassed;
 	mMoveable->rotateTo(mStartRotation);
 	mMoveable->rotateBy(mAxis,
-		mStartAngle + ease(getPercentageDone()) * mEndAngle);
+	                    mStartAngle + ease(getPercentageDone()) * mEndAngle);
 }
 
 } /* framework */

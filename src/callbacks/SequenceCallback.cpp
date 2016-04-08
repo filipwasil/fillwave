@@ -12,9 +12,9 @@ namespace fillwave {
 namespace framework {
 
 SequenceCallback::SequenceCallback() :
-			Callback(eEventType::eTime),
-			mCallbackIterator(this->begin()),
-			mReloaditerator(true) {
+	Callback(eEventType::eTime),
+	mCallbackIterator(this->begin()),
+	mReloaditerator(true) {
 }
 
 SequenceCallback::~SequenceCallback() {

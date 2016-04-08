@@ -18,22 +18,22 @@ namespace framework {
  */
 
 class TimedRotateCallback: public TimedCallback {
-public:
+  public:
 	TimedRotateCallback(
-			pMoveable moveable,
-			glm::vec3 axis,
-			GLfloat angle,
-			GLfloat lifeTime,
-			EasingFunction easing = LinearInterpolation);
+	    pMoveable moveable,
+	    glm::vec3 axis,
+	    GLfloat angle,
+	    GLfloat lifeTime,
+	    EasingFunction easing = LinearInterpolation);
 
 	virtual ~TimedRotateCallback() = default;
 
 	void performTime(TimeEventData& data);
 
-protected:
+  protected:
 	pMoveable mMoveable;
 
-private:
+  private:
 	glm::quat mStartRotation;
 	GLfloat mStartAngle;
 	GLfloat mEndAngle;

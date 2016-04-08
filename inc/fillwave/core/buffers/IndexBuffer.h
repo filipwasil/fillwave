@@ -18,11 +18,11 @@ namespace core {
  */
 
 class IndexBuffer: public Buffer {
-public:
+  public:
 	IndexBuffer(GLuint elements, GLuint dataStoreModification);
 	virtual ~IndexBuffer() = default;
 
-protected:
+  protected:
 	std::vector<GLuint> mDataIndices;
 };
 

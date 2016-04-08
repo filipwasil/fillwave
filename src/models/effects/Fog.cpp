@@ -15,7 +15,7 @@ namespace fillwave {
 namespace framework {
 
 Fog::Fog(glm::vec3 colour, GLfloat near, GLfloat far) :
-		mColour(colour), mNearDistance(near), mFarDistance(far) {
+	mColour(colour), mNearDistance(near), mFarDistance(far) {
 }
 
 void Fog::preDrawAction(core::Program* program) {

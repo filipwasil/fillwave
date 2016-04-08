@@ -27,11 +27,11 @@ struct VertexText {
  */
 
 class VertexBufferText: public TVertexBuffer<VertexText> {
-public:
+  public:
 	VertexBufferText(
-			std::vector<GLfloat> data,
-			std::vector<GLfloat> textureCoords,
-			GLuint dataStoreModification = GL_DYNAMIC_DRAW);
+	    std::vector<GLfloat> data,
+	    std::vector<GLfloat> textureCoords,
+	    GLuint dataStoreModification = GL_DYNAMIC_DRAW);
 	virtual ~VertexBufferText() = default;
 	void log() const;
 };

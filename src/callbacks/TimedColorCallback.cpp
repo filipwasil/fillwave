@@ -13,14 +13,14 @@ namespace fillwave {
 namespace framework {
 
 TimedColorCallback::TimedColorCallback(
-		pModel model,
-		glm::vec4 endColor,
-		GLfloat lifeTime,
-		EasingFunction easing) :
-			TimedCallback(lifeTime, easing),
-			mStartColor(glm::vec4(0.0)),
-			mEndColor(endColor),
-			mModel(model) {
+    pModel model,
+    glm::vec4 endColor,
+    GLfloat lifeTime,
+    EasingFunction easing) :
+	TimedCallback(lifeTime, easing),
+	mStartColor(glm::vec4(0.0)),
+	mEndColor(endColor),
+	mModel(model) {
 	mPainter = pPainter(new Painter(mStartColor));
 	mModel->addEffect(mPainter);
 }

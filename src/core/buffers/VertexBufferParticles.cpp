@@ -14,9 +14,9 @@ namespace fillwave {
 namespace core {
 
 VertexBufferParticles::VertexBufferParticles(
-		std::vector<GLfloat>& velocities,
-		std::vector<GLfloat>& positions,
-		std::vector<GLfloat>& times) {
+    std::vector<GLfloat>& velocities,
+    std::vector<GLfloat>& positions,
+    std::vector<GLfloat>& times) {
 	size_t size = times.size();
 	if (size == velocities.size() / 3) {
 		mDataVertices.reserve(size);
@@ -41,10 +41,12 @@ VertexBufferParticles::VertexBufferParticles(
 }
 
 void VertexBufferParticles::log() const {
-	auto d = [] (GLfloat& f) {return static_cast<double>(f);};
+	auto d = [] (GLfloat & f) {
+		return static_cast<double>(f);
+	};
 	for (auto it : mDataVertices) {
 		FLOG_ERROR("Vertex written: %f %f %f %f", d(it.velocity[0]),
-			d(it.velocity[1]), d(it.velocity[2]), d(it.startTime));
+		           d(it.velocity[1]), d(it.velocity[2]), d(it.startTime));
 	}
 }
 

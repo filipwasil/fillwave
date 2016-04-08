@@ -12,7 +12,7 @@ namespace fillwave {
 namespace framework {
 
 ScenePerspective::ScenePerspective(pCameraPerspective camera) :
-		mCamera(camera) {
+	mCamera(camera) {
 
 }
 

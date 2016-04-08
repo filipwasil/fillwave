@@ -18,19 +18,19 @@
 #include <string>
 
 namespace fillwave {
-	namespace framework {
+namespace framework {
 
-		void androidSetActivity(ANativeActivity* activity);
+void androidSetActivity(ANativeActivity* activity);
 
 // Read the contents of the give file return the content and the file size
-		void androidRead( const char* FileName, char** Content, unsigned int* Size );
-		void androidReadToString( const char* pFileName, std::string& fileContent );
-		bool androidExtracted( const char* pFile );
-		bool androidExtract( const std::string& name );
-		std::string androidGetPath( const char* pFile );
-		bool androidExtractAll();
+void androidRead( const char* FileName, char** Content, unsigned int* Size );
+void androidReadToString( const char* pFileName, std::string& fileContent );
+bool androidExtracted( const char* pFile );
+bool androidExtract( const std::string& name );
+std::string androidGetPath( const char* pFile );
+bool androidExtractAll();
 
-	} /* framework */
+} /* framework */
 } /* fillwave */
 
 #endif /* ANDROIDLOADER_H_ */

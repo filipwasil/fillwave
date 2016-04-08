@@ -20,7 +20,7 @@ namespace framework {
  */
 
 class ScenePerspective: public IScene {
-public:
+  public:
 	ScenePerspective(pCameraPerspective camera = pCameraPerspective());
 	virtual ~ScenePerspective() = default;
 	void setCamera(pCameraPerspective camera);
@@ -32,7 +32,7 @@ public:
 	void drawDepthInt() override;
 	void drawOcclusion() override;
 
-private:
+  private:
 	pCameraPerspective mCamera;
 };
 
@@ -41,6 +41,6 @@ private:
 typedef std::shared_ptr<framework::ScenePerspective> pScenePerspective;
 
 pScenePerspective buildScenePerspective(pCameraPerspective camera =
-		pCameraPerspective());
+        pCameraPerspective());
 } /* fillwave */
 #endif /* ScenePerspective_H_ */

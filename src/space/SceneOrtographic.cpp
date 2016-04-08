@@ -12,7 +12,7 @@ namespace fillwave {
 namespace framework {
 
 SceneOrthographic::SceneOrthographic(pCameraOrthographic camera) :
-		mCamera(camera) {
+	mCamera(camera) {
 
 }
 

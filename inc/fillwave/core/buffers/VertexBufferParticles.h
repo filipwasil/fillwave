@@ -28,11 +28,11 @@ struct VertexParticle {
  */
 
 class VertexBufferParticles: public TVertexBuffer<VertexParticle> {
-public:
+  public:
 	VertexBufferParticles(
-			std::vector<GLfloat>& velocities,
-			std::vector<GLfloat>& positions,
-			std::vector<GLfloat>& times);
+	    std::vector<GLfloat>& velocities,
+	    std::vector<GLfloat>& positions,
+	    std::vector<GLfloat>& times);
 	virtual ~VertexBufferParticles() = default;
 	void log() const;
 };

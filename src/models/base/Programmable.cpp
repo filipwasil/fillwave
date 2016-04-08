@@ -14,7 +14,7 @@ namespace fillwave {
 namespace framework {
 
 Programmable::Programmable(pProgram program) :
-		mProgram(program) {
+	mProgram(program) {
 
 }
 
@@ -25,7 +25,9 @@ void Programmable::drawWithEffects(ICamera& camera) {
 	/* Effects execution */
 	p->use();
 	std::for_each(mEffects.begin(), mEffects.end(),
-		[p](pIEffect e) {e->preDrawAction(p);});
+	[p](pIEffect e) {
+		e->preDrawAction(p);
+	});
 	core::Program::disusePrograms();
 
 	/* Draw */
@@ -36,7 +38,9 @@ void Programmable::drawWithEffects(ICamera& camera) {
 	/* Effects pre draw action */
 	p->use();
 	std::for_each(mEffects.begin(), mEffects.end(),
-		[p](pIEffect e) {e->postDrawAction(p);});
+	[p](pIEffect e) {
+		e->postDrawAction(p);
+	});
 	core::Program::disusePrograms();
 }
 
@@ -46,7 +50,9 @@ void Programmable::drawWithEffectsDR(ICamera& camera) {
 
 	/* Effects execution */
 	std::for_each(mEffects.begin(), mEffects.end(),
-		[p](pIEffect e) {e->preDrawAction(p);});
+	[p](pIEffect e) {
+		e->preDrawAction(p);
+	});
 
 	/* Draw */
 	for (auto& it : mChildren) {
@@ -55,7 +61,9 @@ void Programmable::drawWithEffectsDR(ICamera& camera) {
 
 	/* Effects pre draw action */
 	std::for_each(mEffects.begin(), mEffects.end(),
-		[p](pIEffect e) {e->postDrawAction(p);});
+	[p](pIEffect e) {
+		e->postDrawAction(p);
+	});
 }
 
 void Programmable::drawWithEffectsPBRP(ICamera& camera) {
@@ -64,7 +72,9 @@ void Programmable::drawWithEffectsPBRP(ICamera& camera) {
 
 	/* Effects execution */
 	std::for_each(mEffects.begin(), mEffects.end(),
-		[p](pIEffect e) {e->preDrawAction(p);});
+	[p](pIEffect e) {
+		e->preDrawAction(p);
+	});
 
 	/* Draw */
 	for (auto& it : mChildren) {
@@ -73,11 +83,13 @@ void Programmable::drawWithEffectsPBRP(ICamera& camera) {
 
 	/* Effects pre draw action */
 	std::for_each(mEffects.begin(), mEffects.end(),
-		[p](pIEffect e) {e->postDrawAction(p);});
+	[p](pIEffect e) {
+		e->postDrawAction(p);
+	});
 }
 
 void Programmable::addEffect(pIEffect effect) {
-	auto _find_function = [effect](pIEffect& m) -> bool {return m == effect;};
+	auto _find_function = [effect](pIEffect & m) -> bool {return m == effect;};
 	auto _begin = mEffects.begin();
 	auto _end = mEffects.end();
 	auto it = std::find_if(_begin, _end, _find_function);
@@ -92,7 +104,7 @@ void Programmable::addEffect(pIEffect effect) {
 }
 
 void Programmable::removeEffect(pIEffect effect) {
-	auto _find_function = [effect](pIEffect& m) -> bool {return m == effect;};
+	auto _find_function = [effect](pIEffect & m) -> bool {return m == effect;};
 	auto _begin = mEffects.begin();
 	auto _end = mEffects.end();
 	auto it = std::remove_if(_begin, _end, _find_function);

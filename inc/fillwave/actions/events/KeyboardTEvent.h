@@ -27,9 +27,9 @@ struct KeyboardEventData {
  */
 
 class KeyboardEvent: public TEvent<KeyboardEventData> {
-public:
+  public:
 	KeyboardEvent(KeyboardEventData data) :
-			TEvent(data) {
+		TEvent(data) {
 
 	}
 	virtual ~KeyboardEvent() = default;

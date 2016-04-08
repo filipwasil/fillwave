@@ -20,13 +20,13 @@ namespace framework {
  */
 
 class EmiterPointStep: public IEmiterPoint {
-public:
+  public:
 	EmiterPointStep(
-			Engine* engine,
-			GLint howMany,
-			GLenum blendingSource,
-			GLenum blendingDestination,
-			core::Texture* texture);
+	    Engine* engine,
+	    GLint howMany,
+	    GLenum blendingSource,
+	    GLenum blendingDestination,
+	    core::Texture* texture);
 
 	virtual ~EmiterPointStep() = default;
 };
