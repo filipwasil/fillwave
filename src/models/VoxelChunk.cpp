@@ -15,318 +15,321 @@ namespace fillwave {
 namespace framework {
 
 const GLfloat voxelPositions[] = {
-		0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000,
-		-0.100000,
-		-0.100000,
-		0.100000,
-		-0.100000 };
+	0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000,
+	-0.100000,
+	-0.100000,
+	0.100000,
+	-0.100000
+};
 
 const GLfloat voxelNormals[] = { 0.0, -1.0, 0.0, //-y
-		0.0,
-		-1.0,
-		0.0,
-		0.0,
-		-1.0,
-		0.0,
-		0.0,
-		1.0,
-		0.0, //+y
-		0.0,
-		1.0,
-		0.0,
-		0.0,
-		1.0,
-		0.0,
-		1.0,
-		0.0,
-		0.0, //+x
-		1.0,
-		0.0,
-		0.0,
-		1.0,
-		0.0,
-		0.0,
-		0.0,
-		0.0,
-		1.0, //+z
-		0.0,
-		0.0,
-		1.0,
-		0.0,
-		0.0,
-		1.0,
-		-1.0,
-		0.0,
-		0.0, //-x
-		-1.0,
-		0.0,
-		0.0,
-		-1.0,
-		0.0,
-		0.0,
-		0.0,
-		0.0,
-		-1.0, //-z
-		0.0,
-		0.0,
-		-1.0,
-		0.0,
-		0.0,
-		-1.0,
-		0.0,
-		-1.0,
-		0.0, //-y
-		0.0,
-		-1.0,
-		0.0,
-		0.0,
-		-1.0,
-		0.0,
-		0.0,
-		1.0,
-		0.0, //+y
-		0.0,
-		1.0,
-		0.0,
-		0.0,
-		1.0,
-		0.0,
-		1.0,
-		0.0,
-		0.0, //+x
-		1.0,
-		0.0,
-		0.0,
-		1.0,
-		0.0,
-		0.0,
-		0.0,
-		0.0,
-		1.0, //+z
-		0.0,
-		0.0,
-		1.0,
-		0.0,
-		0.0,
-		1.0,
-		-1.0,
-		0.0,
-		0.0, //-x
-		-1.0,
-		0.0,
-		0.0,
-		-1.0,
-		0.0,
-		0.0,
-		0.0,
-		0.0,
-		-1.0, //-z
-		0.0,
-		0.0,
-		-1.0,
-		0.0,
-		0.0,
-		-1.0 };
+                                 0.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 0.0, //+y
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 0.0, //+x
+                                 1.0,
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 1.0, //+z
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0, //-x
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 -1.0, //-z
+                                 0.0,
+                                 0.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 -1.0,
+                                 0.0,
+                                 -1.0,
+                                 0.0, //-y
+                                 0.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 0.0, //+y
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 0.0, //+x
+                                 1.0,
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 1.0, //+z
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 0.0,
+                                 0.0,
+                                 1.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0, //-x
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 0.0,
+                                 -1.0, //-z
+                                 0.0,
+                                 0.0,
+                                 -1.0,
+                                 0.0,
+                                 0.0,
+                                 -1.0
+                               };
 
 const GLfloat voxelUV[] = {
-		0.333333,
-		0.666667,
-		0.333333,
-		1.000000,
-		0.000000,
-		1.000000,
-		0.666667,
-		0.666667,
+	0.333333,
+	0.666667,
+	0.333333,
+	1.000000,
+	0.000000,
+	1.000000,
+	0.666667,
+	0.666667,
 
-		0.333333,
-		0.666667,
-		0.333333,
-		0.333333,
-		0.666667,
-		0.333333,
-		0.333333,
-		0.333333,
+	0.333333,
+	0.666667,
+	0.333333,
+	0.333333,
+	0.666667,
+	0.333333,
+	0.333333,
+	0.333333,
 
-		0.333333,
-		0.000000,
-		0.000000,
-		0.333333,
-		0.000000,
-		0.000000,
-		0.333333,
-		0.000000,
+	0.333333,
+	0.000000,
+	0.000000,
+	0.333333,
+	0.000000,
+	0.000000,
+	0.333333,
+	0.000000,
 
-		0.666667,
-		0.333333,
-		0.666667,
-		0.000000,
-		1.000000,
-		0.000000,
-		0.333333,
-		0.333333,
+	0.666667,
+	0.333333,
+	0.666667,
+	0.000000,
+	1.000000,
+	0.000000,
+	0.333333,
+	0.333333,
 
-		0.333333,
-		0.666667,
-		0.000000,
-		0.666667,
-		0.000000,
-		0.666667,
-		0.333333,
-		0.666667,
+	0.333333,
+	0.666667,
+	0.000000,
+	0.666667,
+	0.000000,
+	0.666667,
+	0.333333,
+	0.666667,
 
-		0.000000,
-		1.000000,
-		0.666667,
-		0.333333,
-		0.666667,
-		0.666667,
-		0.333333,
-		0.333333,
+	0.000000,
+	1.000000,
+	0.666667,
+	0.333333,
+	0.666667,
+	0.666667,
+	0.333333,
+	0.333333,
 
-		0.666667,
-		0.000000,
-		0.666667,
-		0.333333,
-		0.333333,
-		0.000000,
-		0.333333,
-		0.333333,
+	0.666667,
+	0.000000,
+	0.666667,
+	0.333333,
+	0.333333,
+	0.000000,
+	0.333333,
+	0.333333,
 
-		0.000000,
-		0.333333,
-		0.333333,
-		0.000000,
-		1.000000,
-		0.333333,
-		0.666667,
-		0.333333,
+	0.000000,
+	0.333333,
+	0.333333,
+	0.000000,
+	1.000000,
+	0.333333,
+	0.666667,
+	0.333333,
 
-		1.000000,
-		0.000000,
-		0.000000,
-		0.333333,
-		0.333333,
-		0.333333,
-		0.000000,
-		0.666667 };
+	1.000000,
+	0.000000,
+	0.000000,
+	0.333333,
+	0.333333,
+	0.333333,
+	0.000000,
+	0.666667
+};
 
 VoxelChunk::VoxelChunk(
-		pProgram program,
-		Engine* engine,
-		const std::string& texturePath,
-		GLint size,
-		VoxelConstructor* constructor,
-		GLfloat gap) :
-			IReloadable(engine),
-			mVoxelGap(gap),
-			mSize(size),
-			mProgram(program),
-			mTexture(
-				engine->storeTexture(texturePath.c_str())),
-			mLights(engine->getLightSystem()) {
+    pProgram program,
+    Engine* engine,
+    const std::string& texturePath,
+    GLint size,
+    VoxelConstructor* constructor,
+    GLfloat gap) :
+	IReloadable(engine),
+	mVoxelGap(gap),
+	mSize(size),
+	mProgram(program),
+	mTexture(
+	    engine->storeTexture(texturePath.c_str())),
+	mLights(engine->getLightSystem()) {
 
 	mVoxels = new Voxel**[mSize];
 	std::vector<core::VertexBasic> vertices;
@@ -337,25 +340,25 @@ VoxelChunk::VoxelChunk(
 			mVoxels[x][z] = new Voxel[mSize];
 			for (GLint y = 0; y < mSize; y++) {
 				GLboolean active =
-						constructor ?
-								constructor->calculateActiveVoxel(
-									(GLfloat) x / (GLfloat) ((mSize - 1)),
-									(GLfloat) z / (GLfloat) ((mSize - 1)),
-									(GLfloat) y / (GLfloat) ((mSize - 1))) :
-								GL_TRUE;
+				    constructor ?
+				    constructor->calculateActiveVoxel(
+				        (GLfloat) x / (GLfloat) ((mSize - 1)),
+				        (GLfloat) z / (GLfloat) ((mSize - 1)),
+				        (GLfloat) y / (GLfloat) ((mSize - 1))) :
+				    GL_TRUE;
 				mVoxels[x][z][y].setActive(active);
 				if (mVoxels[x][z][y].isActive()) {
 					core::VertexBasic v;
 					for (GLint i = 0; i < 36; i++) {
 						v.mPosition[0] = voxelPositions[3 * i]
-								+ mVoxelGap * (GLfloat) x
-								- (GLfloat) mVoxelGap * (mSize - 1) / 2.0f;
+						                 + mVoxelGap * (GLfloat) x
+						                 - (GLfloat) mVoxelGap * (mSize - 1) / 2.0f;
 						v.mPosition[1] = voxelPositions[3 * i + 1]
-								+ mVoxelGap * (GLfloat) y
-								- (GLfloat) mVoxelGap * (mSize - 1) / 2.0f;
+						                 + mVoxelGap * (GLfloat) y
+						                 - (GLfloat) mVoxelGap * (mSize - 1) / 2.0f;
 						v.mPosition[2] = voxelPositions[3 * i + 2]
-								+ mVoxelGap * (GLfloat) z
-								- (GLfloat) mVoxelGap * (mSize - 1) / 2.0f;
+						                 + mVoxelGap * (GLfloat) z
+						                 - (GLfloat) mVoxelGap * (mSize - 1) / 2.0f;
 						v.mPosition[3] = 1.0;
 						v.mNormal[0] = voxelNormals[3 * i];
 						v.mNormal[1] = voxelNormals[3 * i + 1];
@@ -408,14 +411,14 @@ void VoxelChunk::reloadVBO() {
 					core::VertexBasic v;
 					for (GLint i = 0; i < 36; i++) {
 						v.mPosition[0] = voxelPositions[3 * i]
-								+ mVoxelGap * (GLfloat) x
-								- (GLfloat) (mSize - 1) / 2.0f;
+						                 + mVoxelGap * (GLfloat) x
+						                 - (GLfloat) (mSize - 1) / 2.0f;
 						v.mPosition[1] = voxelPositions[3 * i + 1]
-								+ mVoxelGap * (GLfloat) y
-								- (GLfloat) (mSize - 1) / 2.0f;
+						                 + mVoxelGap * (GLfloat) y
+						                 - (GLfloat) (mSize - 1) / 2.0f;
 						v.mPosition[2] = voxelPositions[3 * i + 2]
-								+ mVoxelGap * (GLfloat) z
-								- (GLfloat) (mSize - 1) / 2.0f;
+						                 + mVoxelGap * (GLfloat) z
+						                 - (GLfloat) (mSize - 1) / 2.0f;
 						v.mPosition[3] = 1.0;
 						v.mNormal[0] = voxelNormals[3 * i];
 						v.mNormal[1] = voxelNormals[3 * i + 1];
@@ -429,7 +432,8 @@ void VoxelChunk::reloadVBO() {
 		}
 	}
 
-	mVBO = std::make_shared < core::VertexBufferBasic > (vertices); //xxx todo needs to be in manager
+	mVBO = std::make_shared < core::VertexBufferBasic >
+	       (vertices); //xxx todo needs to be in manager
 
 	initVBO();
 
@@ -443,9 +447,9 @@ void VoxelChunk::reloadVoxels(VoxelConstructor* constructor) {
 		for (GLint z = 0; z < mSize; z++) {
 			for (GLint y = 0; y < mSize; y++) {
 				mVoxels[x][z][y].setActive(
-					constructor->calculateActiveVoxel((GLfloat) x / (GLfloat) mSize,
-						(GLfloat) z / (GLfloat) mSize,
-						(GLfloat) y / (GLfloat) mSize));
+				    constructor->calculateActiveVoxel((GLfloat) x / (GLfloat) mSize,
+				                                      (GLfloat) z / (GLfloat) mSize,
+				                                      (GLfloat) y / (GLfloat) mSize));
 			}
 		}
 	}
@@ -457,9 +461,9 @@ void VoxelChunk::draw(ICamera& camera) {
 
 	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
 	core::Uniform::push(mUniformLocationCacheCameraPosition,
-		camera.getTranslation());
+	                    camera.getTranslation());
 	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,
-		camera.getViewProjection());
+	                    camera.getViewProjection());
 
 	mLights->pushLightUniforms(mProgram.get());
 	mLights->bindShadowmaps();
@@ -476,9 +480,9 @@ void VoxelChunk::draw(ICamera& camera) {
 void VoxelChunk::drawPBRP(ICamera& camera) {
 	core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
 	core::Uniform::push(mUniformLocationCacheCameraPosition,
-		camera.getTranslation());
+	                    camera.getTranslation());
 	core::Uniform::push(mUniformLocationCacheViewProjectionMatrix,
-		camera.getViewProjection());
+	                    camera.getViewProjection());
 
 	mVAO->bind();
 
@@ -518,11 +522,11 @@ inline void VoxelChunk::initPipeline() {
 
 inline void VoxelChunk::initUniformsCache() {
 	mUniformLocationCacheModelMatrix = mProgram->getUniformLocation(
-		"uModelMatrix");
+	                                       "uModelMatrix");
 	mUniformLocationCacheCameraPosition = mProgram->getUniformLocation(
-		"uCameraPosition");
+	        "uCameraPosition");
 	mUniformLocationCacheViewProjectionMatrix = mProgram->getUniformLocation(
-		"uViewProjectionMatrix");
+	            "uViewProjectionMatrix");
 }
 
 inline void VoxelChunk::initVAO() {

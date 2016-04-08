@@ -20,21 +20,22 @@ namespace framework {
 static constexpr size_t FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER = 4;
 
 typedef TManager<pLightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, TPolicyShared<LightSpot>,
-		core::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, pMoveable> ManagerSpotLights;
+        core::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, pMoveable>
+        ManagerSpotLights;
 
 typedef TManager<pLightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
-		TPolicyShared<LightDirectional>, core::Texture2DRenderable*, glm::vec3,
-		glm::quat, glm::vec4, pMoveable> ManagerDirectionalLights;
+        TPolicyShared<LightDirectional>, core::Texture2DRenderable*, glm::vec3,
+        glm::quat, glm::vec4, pMoveable> ManagerDirectionalLights;
 
 typedef TManager<pLightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
-		TPolicyShared<LightPoint>, core::Texture3DRenderable*, glm::vec3, glm::vec4,
-		pMoveable> ManagerPointLights;
+        TPolicyShared<LightPoint>, core::Texture3DRenderable*, glm::vec3, glm::vec4,
+        pMoveable> ManagerPointLights;
 
 /**
  * \brief Light system knows about all light related stuff.
  */
 class LightSystem {
-public:
+  public:
 	LightSystem();
 	virtual ~LightSystem() = default;
 
@@ -56,19 +57,19 @@ public:
 
 	/* Deferred rendering */
 	void updateDeferredBufferSpot(
-			GLuint lightID,
-			core::Program* program,
-			GLint currentShadowUnit);
+	    GLuint lightID,
+	    core::Program* program,
+	    GLint currentShadowUnit);
 	void updateDeferredBufferDirectional(
-			GLuint lightID,
-			core::Program* program,
-			GLint currentShadowUnit);
+	    GLuint lightID,
+	    core::Program* program,
+	    GLint currentShadowUnit);
 	void updateDeferredBufferPoint(
-			GLuint lightID,
-			core::Program* program,
-			GLint currentShadowUnit);
+	    GLuint lightID,
+	    core::Program* program,
+	    GLint currentShadowUnit);
 
-private:
+  private:
 	std::vector<LighUniformData> mLightBufferData;
 
 	GLboolean isRefreshLightSpot();

@@ -19,26 +19,26 @@ namespace framework {
 
 struct RenderItem {
 	enum eRenderHandles {
-			eRenderHandleProgram,
-			eRenderHandleVAO,
-			eRenderHandleDiffuse,
-			eRenderHandleNormal,
-			eRenderHandleSpecular,
-			eRenderHandleSampler,
-			eRenderHandlesSize
+		eRenderHandleProgram,
+		eRenderHandleVAO,
+		eRenderHandleDiffuse,
+		eRenderHandleNormal,
+		eRenderHandleSpecular,
+		eRenderHandleSampler,
+		eRenderHandlesSize
 	};
 
 	union {
 		GLubyte mRenderStatus;
 		struct {
-			GLubyte bVAO :1;
-			GLubyte bIndexDraw :1;
-			GLubyte bDiffuse :1;
-			GLubyte bNormal :1;
-			GLubyte bSpecular :1;
-			GLubyte bBlending :1;
-			GLubyte bIsContainer :1;
-			GLubyte bIsAnimated :1;
+			GLubyte bVAO : 1;
+			GLubyte bIndexDraw : 1;
+			GLubyte bDiffuse : 1;
+			GLubyte bNormal : 1;
+			GLubyte bSpecular : 1;
+			GLubyte bBlending : 1;
+			GLubyte bIsContainer : 1;
+			GLubyte bIsAnimated : 1;
 		} mStatus;
 	};
 

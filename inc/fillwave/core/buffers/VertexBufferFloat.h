@@ -17,10 +17,10 @@ namespace core {
  * \brief Vertex buffer specialized with GLfloat data structure.
  */
 class VertexBufferFloat: public TVertexBuffer<GLfloat> {
-public:
+  public:
 	VertexBufferFloat(
-			std::vector<GLfloat>& values,
-			GLuint dataStoreModification = GL_STATIC_DRAW);
+	    std::vector<GLfloat>& values,
+	    GLuint dataStoreModification = GL_STATIC_DRAW);
 	virtual ~VertexBufferFloat() = default;
 	void log();
 };

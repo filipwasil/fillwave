@@ -23,9 +23,9 @@ void FontLoader::load(std::string name) {
 	std::string metaPath = name + ".meta";
 	/* We can use any fo we like */
 	if (generateFontMetadata((name + ".ttf").c_str(), pngPath.c_str(),
-		metaPath.c_str())) {
+	                         metaPath.c_str())) {
 		std::string ttfPath = "/usr/share/fonts/truetype/freefont/"
-				+ (*(splitted.end() - 1)) + ".ttf";
+		                      + (*(splitted.end() - 1)) + ".ttf";
 		/* Well, if we do not have it, we look in /usr/share/fonts/truetype/freefont/*/
 		generateFontMetadata(ttfPath.c_str(), pngPath.c_str(), metaPath.c_str());
 	}

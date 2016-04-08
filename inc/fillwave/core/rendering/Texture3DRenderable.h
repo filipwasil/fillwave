@@ -19,16 +19,16 @@ namespace core {
  */
 
 class Texture3DRenderable: public Texture3D {
-public:
+  public:
 	Texture3DRenderable(
-			Texture2DFile* filePosX,
-			Texture2DFile* fileNegX,
-			Texture2DFile* filePosY,
-			Texture2DFile* fileNegY,
-			Texture2DFile* filePosZ,
-			Texture2DFile* fileNegZ,
-			core::Texture2DRenderable* texture,
-			ParameterList& parameters);
+	    Texture2DFile* filePosX,
+	    Texture2DFile* fileNegX,
+	    Texture2DFile* filePosY,
+	    Texture2DFile* fileNegY,
+	    Texture2DFile* filePosZ,
+	    Texture2DFile* fileNegZ,
+	    core::Texture2DRenderable* texture,
+	    ParameterList& parameters);
 	virtual ~Texture3DRenderable() = default;
 	void resize(GLint width, GLint height);
 	void bindForWriting();
@@ -37,7 +37,7 @@ public:
 	void setAttachmentFace(GLenum face, GLenum attachment);
 	void log();
 
-protected:
+  protected:
 	core::Texture2DRenderable* mShadowTexture;
 };
 

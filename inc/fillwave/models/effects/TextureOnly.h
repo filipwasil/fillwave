@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class TextureOnly: public IEffect {
-public:
+  public:
 	TextureOnly() = default;
 	virtual ~TextureOnly() = default;
 	void preDrawAction(core::Program* program);

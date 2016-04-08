@@ -13,16 +13,16 @@ namespace fillwave {
 namespace framework {
 
 BuilderModelExternalMaps::BuilderModelExternalMaps(
-		Engine* engine,
-		std::string modelPath,
-		pProgram program,
-		std::string diffusePath,
-		std::string normalPath,
-		std::string specularPath) :
-			BuilderModel(engine, modelPath, program),
-			mDiffuseMapPath(diffusePath),
-			mNormalMapPath(normalPath),
-			mSpecularMapPath(specularPath) {
+    Engine* engine,
+    std::string modelPath,
+    pProgram program,
+    std::string diffusePath,
+    std::string normalPath,
+    std::string specularPath) :
+	BuilderModel(engine, modelPath, program),
+	mDiffuseMapPath(diffusePath),
+	mNormalMapPath(normalPath),
+	mSpecularMapPath(specularPath) {
 
 }
 
@@ -43,7 +43,7 @@ BuilderModel& BuilderModelExternalMaps::setSpecularMapPath(std::string& path) {
 
 pModel BuilderModelExternalMaps::build() {
 	return buildModel(mEngine, mProgram, mShapePath, mDiffuseMapPath,
-		mNormalMapPath, mSpecularMapPath);
+	                  mNormalMapPath, mSpecularMapPath);
 }
 
 } /* framework */

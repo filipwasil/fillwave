@@ -31,14 +31,15 @@ struct VertexParticleGPU {
  */
 
 class VertexBufferParticlesGPU: public TVertexBuffer<VertexParticleGPU> {
-public:
+  public:
 	VertexBufferParticlesGPU(std::vector<VertexParticleGPU>& particles);
 	virtual ~VertexBufferParticlesGPU() = default;
 	void log() const;
 };
 
 } /* core */
-typedef std::shared_ptr<core::VertexBufferParticlesGPU> pVertexBufferParticlesGPU;
+typedef std::shared_ptr<core::VertexBufferParticlesGPU>
+pVertexBufferParticlesGPU;
 } /* fillwave */
 
 #endif /* VertexBufferParticlesGPU_H_ */

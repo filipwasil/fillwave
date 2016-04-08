@@ -22,35 +22,35 @@ class TimedBoneUpdateCallback;
  */
 
 class Model: public Programmable {
-public:
+  public:
 
 	Model(
-			Engine* engine,
-			pProgram program,
-			framework::Shape<core::VertexBasic>& shape,
-			core::Texture2D* diffuseMap,
-			core::Texture2D* normalMap,
-			core::Texture2D* specularMap,
-			const Material& material);
+	    Engine* engine,
+	    pProgram program,
+	    framework::Shape<core::VertexBasic>& shape,
+	    core::Texture2D* diffuseMap,
+	    core::Texture2D* normalMap,
+	    core::Texture2D* specularMap,
+	    const Material& material);
 
 	Model(Engine* engine, pProgram program, const std::string& shapePath);
 
 	Model(
-			Engine* engine,
-			pProgram program,
-			const std::string& shapePath,
-			const std::string& diffuseMapPath,
-			const std::string& normalMapPath = "",
-			const std::string& specularMapPath = "");
+	    Engine* engine,
+	    pProgram program,
+	    const std::string& shapePath,
+	    const std::string& diffuseMapPath,
+	    const std::string& normalMapPath = "",
+	    const std::string& specularMapPath = "");
 
 	Model(
-			Engine* engine,
-			pProgram program,
-			const std::string& shapePath,
-			core::Texture2D* diffuseMap,
-			core::Texture2D* normalMap = nullptr,
-			core::Texture2D* specularMap = nullptr,
-			const Material& material = Material());
+	    Engine* engine,
+	    pProgram program,
+	    const std::string& shapePath,
+	    core::Texture2D* diffuseMap,
+	    core::Texture2D* normalMap = nullptr,
+	    core::Texture2D* specularMap = nullptr,
+	    const Material& material = Material());
 
 	virtual ~Model();
 
@@ -71,13 +71,13 @@ public:
 
 	void log() const;
 
-protected:
+  protected:
 	Animator* mAnimator;
 	LightSystem* mLights;
 	pProgram mProgramShadow, mProgramShadowColor;
 	GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow,
-			mUniformLocationCacheBonesShadowColor;
-private:
+	      mUniformLocationCacheBonesShadowColor;
+  private:
 	/* Animation */
 	TimedBoneUpdateCallback* mAnimationCallback;
 	GLint mActiveAnimation;
@@ -92,37 +92,37 @@ private:
 	void loadNodeTransformations(fNode* node, Entity* entity);
 
 	void loadNodes(
-			fNode* node,
-			const fScene* scene,
-			Engine* engine,
-			Entity* entity);
+	    fNode* node,
+	    const fScene* scene,
+	    Engine* engine,
+	    Entity* entity);
 
 	void loadNodes(
-			fNode* node,
-			const fScene* scene,
-			Engine* engine,
-			Entity* entity,
-			const std::string& diffuseMapPath,
-			const std::string& normalMapPath,
-			const std::string& specularMapPath);
+	    fNode* node,
+	    const fScene* scene,
+	    Engine* engine,
+	    Entity* entity,
+	    const std::string& diffuseMapPath,
+	    const std::string& normalMapPath,
+	    const std::string& specularMapPath);
 
 	void loadNodes(
-			fNode* node,
-			const fScene* scene,
-			Engine* engine,
-			Entity* entity,
-			core::Texture2D* diffuseMap,
-			core::Texture2D* normalMap,
-			core::Texture2D* specularMap,
-			const Material& material);
+	    fNode* node,
+	    const fScene* scene,
+	    Engine* engine,
+	    Entity* entity,
+	    core::Texture2D* diffuseMap,
+	    core::Texture2D* normalMap,
+	    core::Texture2D* specularMap,
+	    const Material& material);
 
 	pMesh loadMesh(
-			const fMesh* shape,
-			const Material& material,
-			pTextureRegion diffuseMap,
-			pTextureRegion normalMap,
-			pTextureRegion specularMap,
-			Engine* engine);
+	    const fMesh* shape,
+	    const Material& material,
+	    pTextureRegion diffuseMap,
+	    pTextureRegion normalMap,
+	    pTextureRegion specularMap,
+	    Engine* engine);
 };
 
 } /* framework */
@@ -130,35 +130,35 @@ private:
 typedef std::shared_ptr<framework::Model> pModel;
 
 pModel buildModel(
-		Engine* engine,
-		pProgram program,
-		framework::Shape<core::VertexBasic>& shape,
-		core::Texture2D* diffuseMap = nullptr,
-		core::Texture2D* normalMap = nullptr,
-		core::Texture2D* specularMap = nullptr,
-		framework::Material material = framework::Material());
+    Engine* engine,
+    pProgram program,
+    framework::Shape<core::VertexBasic>& shape,
+    core::Texture2D* diffuseMap = nullptr,
+    core::Texture2D* normalMap = nullptr,
+    core::Texture2D* specularMap = nullptr,
+    framework::Material material = framework::Material());
 
 pModel buildModel(
-		Engine* engine,
-		pProgram program,
-		const std::string& shapePath,
-		const std::string& diffuseMapPath,
-		const std::string& normalMapPath = "",
-		const std::string& specularMapPath = "");
+    Engine* engine,
+    pProgram program,
+    const std::string& shapePath,
+    const std::string& diffuseMapPath,
+    const std::string& normalMapPath = "",
+    const std::string& specularMapPath = "");
 
 pModel buildModel(
-		Engine* engine,
-		pProgram program,
-		const std::string& shapePath,
-		core::Texture2D* diffuseMap,
-		core::Texture2D* normalMap = nullptr,
-		core::Texture2D* specularMap = nullptr,
-		framework::Material material = framework::Material());
+    Engine* engine,
+    pProgram program,
+    const std::string& shapePath,
+    core::Texture2D* diffuseMap,
+    core::Texture2D* normalMap = nullptr,
+    core::Texture2D* specularMap = nullptr,
+    framework::Material material = framework::Material());
 
 pModel buildModel(
-		Engine* engine,
-		pProgram program,
-		const std::string& shapePath);
+    Engine* engine,
+    pProgram program,
+    const std::string& shapePath);
 
 } /* fillwave */
 

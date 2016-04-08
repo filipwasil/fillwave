@@ -28,9 +28,9 @@ typedef GLubyte* Texture2DFileData;
  */
 
 class Texture2DFileConfig {
-public:
+  public:
 	Texture2DFileConfig(GLint level = 0, GLint border = 0, GLboolean mipmaps =
-	GL_FALSE, GLboolean compression = GL_FALSE);
+	                        GL_FALSE, GLboolean compression = GL_FALSE);
 	GLint mMipmapsLevel;
 	GLboolean mMipmaps;
 	GLboolean mCompression;
@@ -43,13 +43,13 @@ public:
  */
 
 class Texture2DFileHeader {
-public:
+  public:
 	Texture2DFileHeader(
-			GLint internalFormat = GL_RGBA,
-			GLint format = GL_RGBA,
-			GLint type = GL_UNSIGNED_BYTE,
-			GLsizei width = 0,
-			GLsizei height = 0);
+	    GLint internalFormat = GL_RGBA,
+	    GLint format = GL_RGBA,
+	    GLint type = GL_UNSIGNED_BYTE,
+	    GLsizei width = 0,
+	    GLsizei height = 0);
 	GLint mInternalFormat;
 	GLsizei mHeight;
 	GLsizei mWidth;
@@ -62,7 +62,7 @@ public:
  */
 
 enum class eMemoryAllocation {
-	eMallock, eNew, eNone
+    eMallock, eNew, eNone
 };
 
 /*! \class Texture2DFile
@@ -70,22 +70,22 @@ enum class eMemoryAllocation {
  */
 
 class Texture2DFile {
-public:
+  public:
 	Texture2DFileHeader mHeader;
 	Texture2DFileConfig mConfig;
 	Texture2DFileData mData;
 	eMemoryAllocation mAllocation = eMemoryAllocation::eNone;
 	virtual ~Texture2DFile() {
 		switch (mAllocation) {
-			case eMemoryAllocation::eMallock:
-				free(mData);
-				break;
-			case eMemoryAllocation::eNew:
-				delete mData;
-				mData = nullptr;
-				break;
-			case eMemoryAllocation::eNone:
-				break;
+		case eMemoryAllocation::eMallock:
+			free(mData);
+			break;
+		case eMemoryAllocation::eNew:
+			delete mData;
+			mData = nullptr;
+			break;
+		case eMemoryAllocation::eNone:
+			break;
 		}
 	}
 };
@@ -96,7 +96,7 @@ public:
 
 //class
 class Texture: public GLObject {
-public:
+  public:
 	Texture(GLenum textureTarget = GL_TEXTURE_2D, GLsizei howMany = 1);
 
 	virtual ~Texture();
@@ -113,7 +113,7 @@ public:
 	virtual void reload();
 
 	virtual void log() = 0;
-protected:
+  protected:
 	GLenum mTarget;
 };
 

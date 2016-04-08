@@ -21,7 +21,7 @@ namespace fillwave {
 class Engine;
 
 enum class eTextEffect {
-	eNone, eBold
+    eNone, eBold
 };
 
 namespace framework {
@@ -31,16 +31,16 @@ namespace framework {
  */
 
 class Text: public IReloadable, public IHUDNode {
-public:
+  public:
 	Text(
-			std::string& text,
-			core::Texture2D* texture,
-			glm::vec2 position,
-			Engine* engine,
-			GLfloat scale,
-			Font* font,
-			glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
-			eTextEffect effect = eTextEffect::eNone);
+	    std::string& text,
+	    core::Texture2D* texture,
+	    glm::vec2 position,
+	    Engine* engine,
+	    GLfloat scale,
+	    Font* font,
+	    glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
+	    eTextEffect effect = eTextEffect::eNone);
 
 	virtual ~Text() = default;
 
@@ -52,7 +52,7 @@ public:
 	void editSize(GLfloat size);
 	void editPosition(glm::vec2 position);
 
-private:
+  private:
 	/* Text */
 	std::string mText;
 	glm::vec4 mColor;

@@ -17,16 +17,16 @@ namespace fillwave {
 namespace framework {
 
 AssimpNode::AssimpNode(aiNode* node) :
-			mTransformation(assimpToGlmMat4(node->mTransformation)),
-			mName(node->mName.C_Str()) {
+	mTransformation(assimpToGlmMat4(node->mTransformation)),
+	mName(node->mName.C_Str()) {
 
 }
 
 void AssimpNode::update(
-		float timeElapsed_s,
-		glm::mat4 parent,
-		Animator* boneManager,
-		GLint activeAnimation) {
+    float timeElapsed_s,
+    glm::mat4 parent,
+    Animator* boneManager,
+    GLint activeAnimation) {
 	std::string nodeName(mName);
 	Animation* a = boneManager->getAnimation(activeAnimation);
 	glm::mat4 transformation = mTransformation;
@@ -37,11 +37,11 @@ void AssimpNode::update(
 		glm::mat4 scale = glm::scale(glm::mat4(1.0), scaling);
 
 		glm::quat rotation = boneManager->getCurrentRotation(timeElapsed_s,
-			channel);
+		                     channel);
 		glm::mat4 rotate = glm::mat4_cast(rotation);
 
 		glm::vec3 translation = boneManager->getCurrentTranslation(timeElapsed_s,
-			channel);
+		                        channel);
 		glm::mat4 translate = glm::translate(glm::mat4(1.0), translation);
 
 		transformation = translate * rotate * scale;
@@ -65,7 +65,7 @@ AssimpNode::~AssimpNode() {
 }
 
 Animator::Animator(const aiScene* scene) :
-		mElements(0), mTimeSinceStartSeconds(0.0) {
+	mElements(0), mTimeSinceStartSeconds(0.0) {
 	mAnimationsBufferData.reserve(FILLWAVE_MAX_BONES);
 
 	GLuint numBones = 0;
@@ -79,8 +79,8 @@ Animator::Animator(const aiScene* scene) :
 
 	if (numBones > FILLWAVE_MAX_BONES) {
 		FLOG_FATAL(
-			"Crater can handle maximum %d bones. The model contains %d bones.",
-			FILLWAVE_MAX_BONES, numBones);
+		    "Crater can handle maximum %d bones. The model contains %d bones.",
+		    FILLWAVE_MAX_BONES, numBones);
 	}
 
 	for (GLuint k = 0; k < scene->mNumAnimations; k++) {
@@ -91,7 +91,7 @@ Animator::Animator(const aiScene* scene) :
 
 	/* Init node tree after bones are added */
 	mSceneInverseMatrix = glm::inverse(
-		assimpToGlmMat4(scene->mRootNode->mTransformation));
+	                          assimpToGlmMat4(scene->mRootNode->mTransformation));
 	mRootAnimationNode = initNode(scene->mRootNode);
 }
 
@@ -103,7 +103,7 @@ void Animator::add(pBone bone) {
 	for (auto it = mBones.begin(); it != mBones.end(); ++it) {
 		if ((*it).second == bone) {
 			FLOG_DEBUG("Bone %s already added to manager",
-				(*it).second->getName().c_str());
+			           (*it).second->getName().c_str());
 			return;
 		}
 	}
@@ -154,8 +154,8 @@ GLint Animator::getAnimations() const {
 }
 
 void Animator::updateTransformations(
-		GLint activeAnimation,
-		float timeElapsed_s) {
+    GLint activeAnimation,
+    float timeElapsed_s) {
 
 	if (activeAnimation == FILLWAVE_DO_NOT_ANIMATE) {
 		mTimeSinceStartSeconds = 0;
@@ -164,13 +164,13 @@ void Animator::updateTransformations(
 		//FLOG_INFO("Update full transformation with time: %f", timeElapsed_s);
 		mTimeSinceStartSeconds += timeElapsed_s;
 		float TicksPerSecond = (float) (
-				mAnimations[activeAnimation]->getTicksPerSec() != 0 ?
-						mAnimations[activeAnimation]->getTicksPerSec() : 25.0f);
+		                           mAnimations[activeAnimation]->getTicksPerSec() != 0 ?
+		                           mAnimations[activeAnimation]->getTicksPerSec() : 25.0f);
 		float TimeInTicks = mTimeSinceStartSeconds * TicksPerSecond;
 		float AnimationTime = fmod(TimeInTicks,
-			(float) mAnimations[activeAnimation]->getDuration());
+		                           (float) mAnimations[activeAnimation]->getDuration());
 		mRootAnimationNode->update(AnimationTime, glm::mat4(1.0), this,
-			activeAnimation);
+		                           activeAnimation);
 	}
 }
 
@@ -192,7 +192,7 @@ void Animator::updateBonesBuffer() {
 
 void Animator::updateBonesUniform(GLint uniformLocationBones) {
 	core::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(),
-	FILLWAVE_MAX_BONES);
+	                    FILLWAVE_MAX_BONES);
 }
 
 void Animator::log() {
@@ -200,8 +200,8 @@ void Animator::log() {
 }
 
 Channel* Animator::findChannel(
-		Animation* animation,
-		const std::string& nodeName) const {
+    Animation* animation,
+    const std::string& nodeName) const {
 	for (int i = 0; i < animation->getHowManyChannels(); i++) {
 		Channel* channel = animation->getChannel(i);
 
@@ -213,8 +213,8 @@ Channel* Animator::findChannel(
 }
 
 glm::vec3 Animator::getCurrentTranslation(
-		float timeElapsed_s,
-		Channel* channel) const {
+    float timeElapsed_s,
+    Channel* channel) const {
 	if (channel->mKeysTranslation.size() == 1) {
 		return channel->mKeysTranslation[0].mValue;
 	}
@@ -223,9 +223,9 @@ glm::vec3 Animator::getCurrentTranslation(
 	GLuint NextPositionIndex = (PositionIndex + 1);
 	assert(NextPositionIndex < channel->mKeysTranslation.size());
 	float DeltaTime = (float) (channel->mKeysTranslation[NextPositionIndex].mTime
-			- channel->mKeysTranslation[PositionIndex].mTime);
+	                           - channel->mKeysTranslation[PositionIndex].mTime);
 	float alpha = (timeElapsed_s
-			- (float) channel->mKeysTranslation[PositionIndex].mTime) / DeltaTime;
+	               - (float) channel->mKeysTranslation[PositionIndex].mTime) / DeltaTime;
 	assert(alpha >= 0.0f && alpha <= 1.0f);
 	const glm::vec3& Start = channel->mKeysTranslation[PositionIndex].mValue;
 	const glm::vec3& End = channel->mKeysTranslation[NextPositionIndex].mValue;
@@ -234,8 +234,8 @@ glm::vec3 Animator::getCurrentTranslation(
 }
 
 glm::vec3 Animator::getCurrentScale(
-		float timeElapsed_s,
-		Channel* channel) const {
+    float timeElapsed_s,
+    Channel* channel) const {
 	if (channel->mKeysScaling.size() == 1) {
 		return channel->mKeysScaling[0].mValue;
 	}
@@ -244,9 +244,9 @@ glm::vec3 Animator::getCurrentScale(
 	GLuint NextScalingIndex = (ScalingIndex + 1);
 	assert(NextScalingIndex < channel->mKeysScaling.size());
 	float DeltaTime = (float) (channel->mKeysScaling[NextScalingIndex].mTime
-			- channel->mKeysScaling[ScalingIndex].mTime);
+	                           - channel->mKeysScaling[ScalingIndex].mTime);
 	float alpha = (timeElapsed_s
-			- (float) channel->mKeysScaling[ScalingIndex].mTime) / DeltaTime;
+	               - (float) channel->mKeysScaling[ScalingIndex].mTime) / DeltaTime;
 	assert(alpha >= 0.0f && alpha <= 1.0f);
 	glm::vec3 Start = channel->mKeysScaling[ScalingIndex].mValue;
 	glm::vec3 End = channel->mKeysScaling[NextScalingIndex].mValue;
@@ -255,8 +255,8 @@ glm::vec3 Animator::getCurrentScale(
 }
 
 glm::quat Animator::getCurrentRotation(
-		float timeElapsed_s,
-		Channel* channel) const {
+    float timeElapsed_s,
+    Channel* channel) const {
 	if (channel->mKeysRotation.size() == 1) {
 		return channel->mKeysRotation[0].mValue;
 	}
@@ -265,9 +265,9 @@ glm::quat Animator::getCurrentRotation(
 	GLuint NextRotationIndex = (RotationIndex + 1);
 	assert(NextRotationIndex < channel->mKeysRotation.size());
 	float DeltaTime = (float) (channel->mKeysRotation[NextRotationIndex].mTime
-			- channel->mKeysRotation[RotationIndex].mTime);
+	                           - channel->mKeysRotation[RotationIndex].mTime);
 	float alpha = (timeElapsed_s
-			- (float) channel->mKeysRotation[RotationIndex].mTime) / DeltaTime;
+	               - (float) channel->mKeysRotation[RotationIndex].mTime) / DeltaTime;
 	assert(alpha >= 0.0f && alpha <= 1.0f);
 	glm::quat startRotation = channel->mKeysRotation[RotationIndex].mValue;
 	glm::quat endRotation = channel->mKeysRotation[NextRotationIndex].mValue;
@@ -275,9 +275,9 @@ glm::quat Animator::getCurrentRotation(
 }
 
 glm::fquat Animator::lerp(
-		const glm::fquat &v0,
-		const glm::fquat &v1,
-		float alpha) const {
+    const glm::fquat &v0,
+    const glm::fquat &v1,
+    float alpha) const {
 	glm::vec4 start = glm::vec4(v0.x, v0.y, v0.z, v0.w);
 	glm::vec4 end = glm::vec4(v1.x, v1.y, v1.z, v1.w);
 	glm::vec4 interp = glm::mix(start, end, alpha);
@@ -286,8 +286,8 @@ glm::fquat Animator::lerp(
 }
 
 GLuint Animator::getTranslationStep(
-		float timeElapsed_s,
-		Channel* channel) const {
+    float timeElapsed_s,
+    Channel* channel) const {
 	for (GLuint i = 0; i < channel->mKeysTranslation.size() - 1; i++) {
 		if (timeElapsed_s < (float) channel->mKeysTranslation[i + 1].mTime) {
 			return i;

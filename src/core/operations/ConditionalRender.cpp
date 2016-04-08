@@ -18,7 +18,7 @@ namespace fillwave {
 namespace core {
 
 ConditionalRender::ConditionalRender(GLenum mode) :
-		mMode(mode) {
+	mMode(mode) {
 
 }
 

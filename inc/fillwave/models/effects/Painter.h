@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class Painter: public IEffect {
-public:
+  public:
 	Painter(glm::vec4 color);
 	virtual ~Painter() = default;
 	void setColor(glm::vec4 color);
@@ -27,7 +27,7 @@ public:
 	void stopAction(core::Program* program);
 	void startAction(core::Program* program);
 
-private:
+  private:
 	glm::vec4 mColor;
 };
 

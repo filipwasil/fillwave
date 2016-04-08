@@ -18,9 +18,9 @@ namespace framework {
  */
 
 class Box: public Shape<core::VertexBasic> {
-public:
+  public:
 	Box(GLfloat quadSize = 1.0f) :
-			mSize(quadSize), mQuad(quadSize) {
+		mSize(quadSize), mQuad(quadSize) {
 		std::vector<core::VertexBasic> quadVertices = mQuad.getVertices();
 		std::vector<glm::vec3> vertVertices;
 
@@ -29,9 +29,9 @@ public:
 		/* Back */
 		for (int i = 0; i < 6; i++) {
 			vertVertices.push_back(
-				glm::vec3(quadVertices[i].mPosition[0],
-					quadVertices[i].mPosition[1], quadVertices[i].mPosition[2] +=
-							mSize));
+			    glm::vec3(quadVertices[i].mPosition[0],
+			              quadVertices[i].mPosition[1], quadVertices[i].mPosition[2] +=
+			                  mSize));
 		}
 
 		/* Down */
@@ -55,15 +55,15 @@ public:
 		/* Right */
 		for (GLuint i = 0; i < 6; i++) {
 			glm::vec3 vec = glm::rotateZ(
-				glm::rotateX(vertVertices[i], glm::radians(90.0f)),
-				glm::radians(90.0f));
+			                    glm::rotateX(vertVertices[i], glm::radians(90.0f)),
+			                    glm::radians(90.0f));
 			vertVertices.push_back(vec);
 		}
 
 		for (GLuint i = 0; i < 6; i++) {
 			glm::vec3 vec = glm::rotateZ(
-				glm::rotateX(vertVertices[i], glm::radians(90.0f)),
-				glm::radians(-90.0f));
+			                    glm::rotateX(vertVertices[i], glm::radians(90.0f)),
+			                    glm::radians(-90.0f));
 			vertVertices.push_back(vec);
 		}
 
@@ -85,7 +85,7 @@ public:
 
 	void generateIndices();
 
-private:
+  private:
 	GLfloat mSize;
 	Quad mQuad;
 };

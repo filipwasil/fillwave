@@ -22,17 +22,17 @@ namespace framework {
  */
 
 class IHUDNode {
-public:
+  public:
 	IHUDNode(
-			core::Texture2D* texture,
-			pProgram program,
-			glm::vec2 position,
-			glm::vec2 scale) :
-				mTexture(texture),
-				mProgram(program),
-				mPosition(position),
-				mScale(scale),
-				mBlending( { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }) {
+	    core::Texture2D* texture,
+	    pProgram program,
+	    glm::vec2 position,
+	    glm::vec2 scale) :
+		mTexture(texture),
+		mProgram(program),
+		mPosition(position),
+		mScale(scale),
+		mBlending( { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }) {
 
 	}
 
@@ -64,7 +64,7 @@ public:
 		glDisable(GL_BLEND);
 	}
 
-protected:
+  protected:
 	core::Texture2D* mTexture;
 	pProgram mProgram;
 	glm::vec2 mPosition;

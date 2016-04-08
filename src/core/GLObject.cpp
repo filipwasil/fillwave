@@ -11,7 +11,7 @@ namespace fillwave {
 namespace core {
 
 GLObject::GLObject(GLsizei howMany) :
-		mHowMany(howMany), mHandles(new GLuint[howMany]) {
+	mHowMany(howMany), mHandles(new GLuint[howMany]) {
 
 }
 

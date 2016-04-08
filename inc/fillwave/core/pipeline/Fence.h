@@ -20,14 +20,14 @@ namespace core {
  */
 
 class Fence {
-public:
+  public:
 	Fence(GLenum target = GL_SYNC_GPU_COMMANDS_COMPLETE);
 
 	virtual ~Fence();
 
 	void wait(unsigned long long timeoutSpecifier = GL_TIMEOUT_IGNORED) const;
 
-private:
+  private:
 	GLsync mHandle;
 };
 

@@ -21,7 +21,7 @@ namespace core {
  */
 
 class ConditionalRender {
-public:
+  public:
 
 	/*!
 	 * \brief Specifies the conditional rendering pass mode.
@@ -41,7 +41,7 @@ public:
 
 	void end() const;
 
-private:
+  private:
 	GLenum mMode;
 };
 

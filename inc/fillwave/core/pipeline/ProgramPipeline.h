@@ -22,13 +22,13 @@ namespace core {
  */
 
 class ProgramPipeline: public GLObject {
-public:
+  public:
 	ProgramPipeline(GLbitfield stage, GLsizei howMany = 1);
 	virtual ~ProgramPipeline();
 	void bind(GLuint id = 0) const;
 	void use(GLuint programHandle, GLuint id = 0) const;
 
-private:
+  private:
 	GLbitfield mStage;
 	GLuint mTarget;
 };

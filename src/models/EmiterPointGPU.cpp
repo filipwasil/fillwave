@@ -20,34 +20,34 @@ namespace fillwave {
 namespace framework {
 
 EmiterPointGPU::EmiterPointGPU(
-		Engine* engine,
-		GLfloat emitingSourceRate,
-		GLuint howMany,
-		glm::vec4 color,
-		glm::vec3 acceleration,
-		glm::vec3 startVelocity,
-		glm::vec3 /*robustnessVelocity*/, // xxx this is not used for now
-		glm::vec3 startPosition,
-		glm::vec3 robustnessPosition,
-		GLfloat startSize,
-		GLfloat lifetime,
-		core::Texture* texture,
-		GLenum blendingSource,
-		GLenum blendingDestination,
-		GLboolean depthTesting,
-		GLfloat alphaCutOffLevel) :
-			IEmiterPoint(engine, howMany, startSize, lifetime, texture, color,
-				blendingSource, blendingDestination, depthTesting,
-				alphaCutOffLevel),
-			mSrcIndex(0),
-			mNoiseTextureHandle(0),
-			mEmmisingSourceRate(emitingSourceRate),
-			mAcceleration(acceleration),
-			mStartVelocity(startVelocity),
-			mRobustnessVelocity(robustnessPosition),
-			mStartPosition(startPosition),
-			mRobustnessPosition(robustnessPosition),
-			mTimeDeltaEmiter(0.0) {
+    Engine* engine,
+    GLfloat emitingSourceRate,
+    GLuint howMany,
+    glm::vec4 color,
+    glm::vec3 acceleration,
+    glm::vec3 startVelocity,
+    glm::vec3 /*robustnessVelocity*/, // xxx this is not used for now
+    glm::vec3 startPosition,
+    glm::vec3 robustnessPosition,
+    GLfloat startSize,
+    GLfloat lifetime,
+    core::Texture* texture,
+    GLenum blendingSource,
+    GLenum blendingDestination,
+    GLboolean depthTesting,
+    GLfloat alphaCutOffLevel) :
+	IEmiterPoint(engine, howMany, startSize, lifetime, texture, color,
+	             blendingSource, blendingDestination, depthTesting,
+	             alphaCutOffLevel),
+	mSrcIndex(0),
+	mNoiseTextureHandle(0),
+	mEmmisingSourceRate(emitingSourceRate),
+	mAcceleration(acceleration),
+	mStartVelocity(startVelocity),
+	mRobustnessVelocity(robustnessPosition),
+	mStartPosition(startPosition),
+	mRobustnessPosition(robustnessPosition),
+	mTimeDeltaEmiter(0.0) {
 
 	ProgramLoader loader(engine);
 
@@ -80,11 +80,15 @@ EmiterPointGPU::EmiterPointGPU(
 		noiseTextureSize = 256;
 	}
 
-	mNoiseTextureHandle = Create3DNoiseTexture(noiseTextureSize, howMany / 3); //xxx todo store in Manager
+	mNoiseTextureHandle = Create3DNoiseTexture(noiseTextureSize,
+	                      howMany / 3); //xxx todo store in Manager
 
-	mVBOGPU[0] = std::make_shared < core::VertexBufferParticlesGPU > (particles); //xxx todo store in engine
-	mVBOGPU[1] = std::make_shared < core::VertexBufferParticlesGPU > (particles); //xxx todo store in engine
-	mIBO = std::make_shared < core::IndexBufferParticles > (mHowMany); //xxx todo store in engine
+	mVBOGPU[0] = std::make_shared < core::VertexBufferParticlesGPU >
+	             (particles); //xxx todo store in engine
+	mVBOGPU[1] = std::make_shared < core::VertexBufferParticlesGPU >
+	             (particles); //xxx todo store in engine
+	mIBO = std::make_shared < core::IndexBufferParticles >
+	       (mHowMany); //xxx todo store in engine
 
 	initPipeline();
 	initVBO();
@@ -127,7 +131,7 @@ void EmiterPointGPU::draw(ICamera& camera) {
 
 	glDrawArrays(GL_POINTS, 0, mVBOGPU[mSrcIndex]->getElements());
 	FLOG_CHECK("Drawn buffer index %d drawing %d ", mSrcIndex,
-		mVBOGPU[mSrcIndex]->getElements());
+	           mVBOGPU[mSrcIndex]->getElements());
 
 	core::TransformFeedback::end();
 
@@ -183,7 +187,7 @@ inline void EmiterPointGPU::coreDraw() {
 	glEnable(GL_BLEND);
 	glBlendFunc(mBlending.mSrc, mBlending.mDst);
 	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT,
-		reinterpret_cast<GLvoid*>(0));
+	               reinterpret_cast<GLvoid*>(0));
 	FLOG_CHECK("Draw elements");
 
 	if (not mDepthTesting) {
@@ -211,18 +215,19 @@ void EmiterPointGPU::initBuffers() {
 
 void EmiterPointGPU::initPipeline() {
 	const char *feedbackVaryingsGPUEmiter[6] = {
-			"tfPosition",
-			"tfVelocity",
-			"tfSize",
-			"tfCurtime",
-			"tfLifetime",
-			"tfCameraDistance" };
+		"tfPosition",
+		"tfVelocity",
+		"tfSize",
+		"tfCurtime",
+		"tfLifetime",
+		"tfCameraDistance"
+	};
 
 	/* GL_INTERLEAVED_ATTRIBS - Common VBO for all attributes */
 	/* GL_SEPARATE_ATTRIBS - Common VBO for all attrobutes */
 	glTransformFeedbackVaryings(mProgramEmiter->getHandle(), 6,
-		feedbackVaryingsGPUEmiter,
-		GL_INTERLEAVED_ATTRIBS);
+	                            feedbackVaryingsGPUEmiter,
+	                            GL_INTERLEAVED_ATTRIBS);
 	mProgramEmiter->link();
 
 	mProgramEmiter->use();
@@ -236,25 +241,25 @@ void EmiterPointGPU::initUniformsCache() {
 	mULCTimeEmiter = mProgramEmiter->getUniformLocation("uTime");
 	mULCModelMatrixEmiter = mProgramEmiter->getUniformLocation("uModelMatrix");
 	mULCCameraPositionEmiter = mProgramEmiter->getUniformLocation(
-		"uCameraPosition");
+	                               "uCameraPosition");
 	mULCHowManyEmiter = mProgramEmiter->getUniformLocation("uHowMany");
 	mULCEmissionRateEmiter = mProgramEmiter->getUniformLocation("uEmissionRate");
 	mULCAccelerationEmiter = mProgramEmiter->getUniformLocation("uAcceleration");
 	mULCStartVelocityEmiter = mProgramEmiter->getUniformLocation(
-		"uStartVelocity");
+	                              "uStartVelocity");
 	mULCStartPositionEmiter = mProgramEmiter->getUniformLocation(
-		"uStartPosition");
+	                              "uStartPosition");
 	mULCLifeTimeEmiter = mProgramEmiter->getUniformLocation("uLifeTime");
 	mULCRobustnessVelocityEmiter = mProgramEmiter->getUniformLocation(
-		"uRobustnessVelocity");
+	                                   "uRobustnessVelocity");
 	mULCRobustnessPositionEmiter = mProgramEmiter->getUniformLocation(
-		"uRobustnessPosition");
+	                                   "uRobustnessPosition");
 	mULCNoiseSamplerEmiter = mProgramEmiter->getUniformLocation("uNoiseSampler");
 
 	/* Regular program */
 	mULCModelMatrix = mProgram->getUniformLocation("uModelMatrix");
 	mULCViewProjectionMatrix = mProgram->getUniformLocation(
-		"uViewProjectionMatrix");
+	                               "uViewProjectionMatrix");
 	mULCCameraPosition = mProgram->getUniformLocation("uCameraPosition");
 	mULCTextureUnit = mProgram->getUniformLocation("uTextureUnit");
 	mULCTime = mProgram->getUniformLocation("uTime");

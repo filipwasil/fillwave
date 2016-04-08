@@ -20,7 +20,7 @@ class Model;
  */
 
 class TimedBoneUpdateCallback: public TimedCallback {
-public:
+  public:
 	TimedBoneUpdateCallback(Model* model);
 	virtual ~TimedBoneUpdateCallback() = default;
 
@@ -29,7 +29,7 @@ public:
 	 */
 	void performTime(TimeEventData& data);
 
-protected:
+  protected:
 	Model* mModel;
 };
 

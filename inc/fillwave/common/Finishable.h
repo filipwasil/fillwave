@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class Finishable {
-public:
+  public:
 	Finishable(float timeToFinish);
 	virtual ~Finishable() = default;
 	/*
@@ -51,7 +51,7 @@ public:
 	 */
 	bool isFinished() const;
 
-protected:
+  protected:
 	bool mFinished;
 	float mTimeToFinish;
 	float mTimePassed;

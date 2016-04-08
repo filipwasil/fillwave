@@ -19,7 +19,7 @@ namespace framework {
  */
 
 class RendererFR: public IRenderer {
-public:
+  public:
 	RendererFR() = default;
 	virtual ~RendererFR() = default;
 
@@ -27,7 +27,7 @@ public:
 	void draw(ICamera& camera) override;
 	void reset(GLuint width, GLuint height) override;
 	void clear() override;
-private:
+  private:
 	std::vector<IRenderable*> mRenderPasses;
 };
 

@@ -19,14 +19,14 @@ namespace framework {
  */
 
 class Cursor: public Impostor {
-public:
+  public:
 	Cursor(Engine* engine, pTexture texture);
 	virtual ~Cursor() = default;
 
 	void move(glm::vec2 position);
 	void draw();
 
-private:
+  private:
 	GLfloat mScreenFactor;
 	GLint mULCPosition, mULCScreenFactor, mULCTextureUnit, mULCSize;
 

@@ -15,7 +15,7 @@ namespace fillwave {
 namespace core {
 
 ProgramPipeline::ProgramPipeline(GLbitfield stage, GLsizei howMany) :
-		GLObject(howMany), mStage(stage), mTarget(GL_TRANSFORM_FEEDBACK) {
+	GLObject(howMany), mStage(stage), mTarget(GL_TRANSFORM_FEEDBACK) {
 	glGenProgramPipelines(mHowMany, mHandles);
 }
 

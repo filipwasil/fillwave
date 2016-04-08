@@ -87,68 +87,68 @@ void Engine::drawTexture(core::Texture* t) {
 }
 
 pLightSpot Engine::storeLightSpot(
-		glm::vec3 position,
-		glm::quat rotation,
-		glm::vec4 color,
-		pMoveable followed) {
+    glm::vec3 position,
+    glm::quat rotation,
+    glm::vec4 color,
+    pMoveable followed) {
 	return mImpl->mLights->mLightsSpot.add(
-		mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
-		position, rotation, color, followed);
+	           mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
+	           position, rotation, color, followed);
 }
 
 pLightPoint Engine::storeLightPoint(
-		glm::vec3 position,
-		glm::vec4 color,
-		pMoveable followed) {
+    glm::vec3 position,
+    glm::vec4 color,
+    pMoveable followed) {
 	return mImpl->mLights->mLightsPoint.add(
-		mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight),
-		position, color, followed);
+	           mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight),
+	           position, color, followed);
 }
 
 pLightDirectional Engine::storeLightDirectional(
-		glm::vec3 position,
-		glm::quat rotation,
-		glm::vec4 color,
-		pMoveable followed) {
+    glm::vec3 position,
+    glm::quat rotation,
+    glm::vec4 color,
+    pMoveable followed) {
 	return mImpl->mLights->mLightsDirectional.add(
-		mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
-		position, rotation, color, followed);
+	           mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
+	           position, rotation, color, followed);
 }
 
 pProgram Engine::storeProgram(
-		const std::string& name,
-		const std::vector<pShader>& shaders,
-		GLboolean skipLinking) {
+    const std::string& name,
+    const std::vector<pShader>& shaders,
+    GLboolean skipLinking) {
 	return mImpl->mPrograms.add(name, shaders, skipLinking);
 }
 
 core::Texture2D* Engine::storeTexture(
-		const std::string& texturePath,
-		framework::eCompression compression) {
+    const std::string& texturePath,
+    framework::eCompression compression) {
 	return mImpl->mTextures->get(texturePath, compression);
 }
 
 core::Texture2DRenderable* Engine::storeTextureRenderable() {
 	return mImpl->mTextures->getColor2D(mImpl->mWindowWidth,
-		mImpl->mWindowHeight);
+	                                    mImpl->mWindowHeight);
 }
 
 core::Texture2DRenderableDynamic* Engine::storeTextureDynamic(
-		const std::string& fragmentShaderPath) {
+    const std::string& fragmentShaderPath) {
 	const std::string path = fragmentShaderPath;
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
-		fragmentShaderPath);
+	                       fragmentShaderPath);
 	return mImpl->mTextures->getDynamic(path, program,
-		glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));;
+	                                    glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));;
 }
 
 core::Texture3D* Engine::storeTexture3D(
-		const std::string& posX,
-		const std::string& negX,
-		const std::string& posY,
-		const std::string& negY,
-		const std::string& posZ,
-		const std::string& negZ) {
+    const std::string& posX,
+    const std::string& negX,
+    const std::string& posY,
+    const std::string& negY,
+    const std::string& posZ,
+    const std::string& negZ) {
 	return mImpl->mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
 
@@ -204,18 +204,18 @@ void Engine::clearFocus(eEventType eventType) {
 }
 
 pText Engine::storeText(
-		std::string content,
-		std::string fontName,
-		glm::vec2 position,
-		GLfloat scale,
-		glm::vec4 color,
-		eTextEffect effect) {
+    std::string content,
+    std::string fontName,
+    glm::vec2 position,
+    GLfloat scale,
+    glm::vec4 color,
+    eTextEffect effect) {
 	/* Check for the font texture */
 	if (not mImpl->mTextures->get(fontName + ".png")) {
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
 	}
 	core::Texture2D* t = mImpl->mTextures->get(fontName + ".png",
-		framework::eCompression::eNone, framework::eFlip::eVertical);
+	                     framework::eCompression::eNone, framework::eFlip::eVertical);
 
 	Font* font = nullptr;
 	for (auto& it : mImpl->mFontManager) {
@@ -228,7 +228,7 @@ pText Engine::storeText(
 		std::ifstream myfile(mImpl->mFileLoader.getRootPath(fontName + ".meta"));
 		if (!myfile.is_open()) {
 			FLOG_ERROR("No text added. Could not write to metadata file: %s",
-				(fontName + ".meta").c_str());
+			           (fontName + ".meta").c_str());
 			return pText();
 		}
 		std::string line;
@@ -244,7 +244,7 @@ pText Engine::storeText(
 			newFont->mOffsets[iASCII] = 1.0f - fHeight - fYOffset;
 			if (control++ > 512) { //xxx limit
 				FLOG_ERROR("Metadata can not be read for file %s.",
-					(fontName + ".meta").c_str());
+				           (fontName + ".meta").c_str());
 				myfile.close();
 				delete newFont;
 				return pText();
@@ -256,7 +256,7 @@ pText Engine::storeText(
 	}
 
 	pText text = std::make_shared < framework::Text
-			> (content, t, position, this, scale, font, color, effect);
+	             > (content, t, position, this, scale, font, color, effect);
 	mImpl->mTextManager.push_back(pText(text));
 	return text;
 }
@@ -335,13 +335,13 @@ framework::TextureSystem* Engine::getTextureSystem() const {
 }
 
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
-		const std::string& shapePath) {
+    const std::string& shapePath) {
 	PhysicsMeshBuffer* buffer = new PhysicsMeshBuffer();
 	const fScene* scene = mImpl->mImporter.ReadFile(
-		(mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
-		FILLWAVE_PROCESS_TRIANGULATE |
-		FILLWAVE_PROCESS_SORT_BY_P_TYPE |
-		FILLWAVE_PROCESS_CALC_TANGENT_SPACE);
+	                          (mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
+	                          FILLWAVE_PROCESS_TRIANGULATE |
+	                          FILLWAVE_PROCESS_SORT_BY_P_TYPE |
+	                          FILLWAVE_PROCESS_CALC_TANGENT_SPACE);
 	if (scene) {
 		for (GLuint i = 0; i < scene->mNumMeshes; i++) {
 			const fMesh* shape = scene->mMeshes[i];
@@ -355,7 +355,7 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 			}
 			for (GLuint z = 0; z < shape->mNumVertices; z++) {
 				glm::vec3 vertex(shape->mVertices[z].x, shape->mVertices[z].y,
-					shape->mVertices[z].z);
+				                 shape->mVertices[z].z);
 				buffer->mVertices.push_back(vertex);
 			}
 			break;      //for now fillwave supports only one mesh here;
@@ -365,27 +365,27 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 }
 
 void Engine::addPostProcess(
-		const std::string& fragmentShaderPath,
-		GLfloat lifeTime) {
+    const std::string& fragmentShaderPath,
+    GLfloat lifeTime) {
 	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
-		fragmentShaderPath);
+	                       fragmentShaderPath);
 	core::PostProcessingPass pass(program,
-		mImpl->mTextures->getDynamic(fragmentShaderPath, program,
-			glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)), lifeTime);
+	                              mImpl->mTextures->getDynamic(fragmentShaderPath, program,
+	                                      glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)), lifeTime);
 	mImpl->mPostProcessingPasses.push_back(pass);
 	FLOG_DEBUG("Post processing pass added: %s", fragmentShaderPath.c_str());
 }
 
 void Engine::configureFPSCounter(
-		std::string fontName,
-		glm::vec2 position,
-		GLfloat size) {
+    std::string fontName,
+    glm::vec2 position,
+    GLfloat size) {
 	if (fontName.size() > 1) {
 		mImpl->mFPSText = storeText("", fontName, position, size);
 
 		/* Provide callback to refresh the FPS value */
 		mImpl->mTextFPSCallback = new framework::FPSCallback(this,
-			mImpl->mFPSText);
+		        mImpl->mFPSText);
 		registerCallback(mImpl->mTextFPSCallback);
 	} else {
 		mImpl->mFPSText.reset();
@@ -396,7 +396,7 @@ void Engine::configureFPSCounter(
 void Engine::configureFileLogging(std::string fileName) {
 	if (fileName.size() > 1) {
 		FLOG_INFO("File %s will be cleaned and used for logging.",
-			fileName.c_str());
+		          fileName.c_str());
 		setLogPath(fileName);
 	} else {
 		setFileInvalid();
@@ -422,7 +422,7 @@ void Engine::pick(GLuint x, GLuint y) {
 	mImpl->mScene->drawPicking();
 	mImpl->mPickingPixelBuffer->bind();
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
-	GL_UNSIGNED_BYTE, 0);
+	             GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("glReadPixels failed");
 #ifdef FILLWAVE_GLES_3_0
 	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
@@ -444,7 +444,7 @@ void Engine::captureFramebufferToFile(const std::string& name) {
 	mImpl->mScene->draw();
 	mImpl->mPickingPixelBuffer->bind();
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
-	GL_UNSIGNED_BYTE, 0);
+	             GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
 #ifdef FILLWAVE_GLES_3_0
 	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
@@ -472,16 +472,16 @@ void Engine::captureFramebufferToFile(const std::string& name) {
 }
 
 void Engine::captureFramebufferToBuffer(
-		GLubyte* buffer,
-		GLint* sizeInBytes,
-		GLuint format,
-		GLint bytesPerPixel) {
+    GLubyte* buffer,
+    GLint* sizeInBytes,
+    GLuint format,
+    GLint bytesPerPixel) {
 	mImpl->mPickingRenderableTexture->bindForRendering();
 	mImpl->drawClear();
 	mImpl->mScene->draw();
 	mImpl->mPickingPixelBuffer->bind();
 	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, format,
-	GL_UNSIGNED_BYTE, 0);
+	             GL_UNSIGNED_BYTE, 0);
 	FLOG_CHECK("reading pixel buffer failed");
 #ifdef FILLWAVE_GLES_3_0
 	buffer = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
@@ -498,9 +498,9 @@ const fScene* Engine::getModelFromFile(std::string path) {
 	return nullptr;
 #else
 	return mImpl->mImporter.ReadFile(
-		(mImpl->mFileLoader.getRootPath() + path).c_str(),
-		aiProcess_Triangulate | aiProcess_SortByPType
-				| aiProcess_CalcTangentSpace);
+	           (mImpl->mFileLoader.getRootPath() + path).c_str(),
+	           aiProcess_Triangulate | aiProcess_SortByPType
+	           | aiProcess_CalcTangentSpace);
 #endif
 }
 
@@ -514,24 +514,31 @@ pShader Engine::storeShader(const std::string& shaderPath) {
 
 template <GLuint T>
 pShader Engine::storeShader(
-		const std::string& shaderPath,
-		const std::string& shaderSource) {
+    const std::string& shaderPath,
+    const std::string& shaderSource) {
 	const std::string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
 	return mImpl->mShaders.add(fullPath, T, shaderSource);
 }
 
 template pShader Engine::storeShader<GL_VERTEX_SHADER>(const std::string&);
 template pShader Engine::storeShader<GL_FRAGMENT_SHADER>(const std::string&);
-template pShader Engine::storeShader<GL_VERTEX_SHADER>(const std::string&, const std::string&);
-template pShader Engine::storeShader<GL_FRAGMENT_SHADER>(const std::string&, const std::string&);
+template pShader Engine::storeShader<GL_VERTEX_SHADER>(const std::string&,
+        const std::string&);
+template pShader Engine::storeShader<GL_FRAGMENT_SHADER>(const std::string&,
+        const std::string&);
 #ifdef FILLWAVE_GLES_3_0
 #else
-template pShader Engine::storeShader<GL_TESS_CONTROL_SHADER>(const std::string&);
-template pShader Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const std::string&);
+template pShader Engine::storeShader<GL_TESS_CONTROL_SHADER>
+(const std::string&);
+template pShader Engine::storeShader<GL_TESS_EVALUATION_SHADER>
+(const std::string&);
 template pShader Engine::storeShader<GL_GEOMETRY_SHADER>(const std::string&);
-template pShader Engine::storeShader<GL_TESS_CONTROL_SHADER>(const std::string&, const std::string&);
-template pShader Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const std::string&, const std::string&);
-template pShader Engine::storeShader<GL_GEOMETRY_SHADER>(const std::string&, const std::string&);
+template pShader Engine::storeShader<GL_TESS_CONTROL_SHADER>(const std::string&,
+        const std::string&);
+template pShader Engine::storeShader<GL_TESS_EVALUATION_SHADER>
+(const std::string&, const std::string&);
+template pShader Engine::storeShader<GL_GEOMETRY_SHADER>(const std::string&,
+        const std::string&);
 #endif
 
 void Engine::configureDebugger(eDebuggerState state) {

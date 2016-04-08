@@ -24,7 +24,7 @@ namespace framework {
  */
 
 class SceneOrthographic: public IScene {
-public:
+  public:
 	SceneOrthographic(pCameraOrthographic camera = pCameraOrthographic());
 
 	virtual ~SceneOrthographic() = default;
@@ -38,12 +38,12 @@ public:
 	void drawDepthInt() override;
 	void drawOcclusion() override;
 
-private:
+  private:
 	pCameraOrthographic mCamera;
 };
 
 } /* models */
 pSceneOrthographic buildSceneOrthographic(pCameraOrthographic camera =
-		pCameraOrthographic());
+            pCameraOrthographic());
 } /* fillwave */
 #endif /* SCENEOrthographic_H_ */

@@ -23,17 +23,17 @@ namespace framework {
  */
 
 class Impostor: public Entity, public Finishable {
-public:
+  public:
 	Impostor(
-			Engine* engine,
-			GLfloat lifetime,
-			GLfloat size,
-			pTexture texture = pTexture(),
-			GLenum blendingSource = GL_SRC_ALPHA,
-			GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
+	    Engine* engine,
+	    GLfloat lifetime,
+	    GLfloat size,
+	    pTexture texture = pTexture(),
+	    GLenum blendingSource = GL_SRC_ALPHA,
+	    GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
 	virtual ~Impostor() = default;
 
-protected:
+  protected:
 	pProgram mProgram;
 	pTexture mTexture;
 	pSampler mSampler;

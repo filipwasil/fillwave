@@ -26,7 +26,7 @@ class ProgramLoader;
  */
 
 class RendererDR: public IRenderer {
-public:
+  public:
 	RendererDR(Engine* engine, ProgramLoader& loader);
 	virtual ~RendererDR() = default;
 
@@ -55,15 +55,15 @@ public:
 	void drawColorPassEnd();
 	void drawDebug();
 
-private:
+  private:
 	glm::vec2 mScreenSize;
 
 	LightSystem* mLights;
 	TextureSystem* mTextures;
 
 	pProgram mProgramMain, mProgramMainAnimated, mProgramDirecionalLight,
-			mProgramSpotLight, mProgramPointLight, mProgramDepthless,
-			mProgramAmbient, mProgramAOGeometry, mProgramAOColor;
+	         mProgramSpotLight, mProgramPointLight, mProgramDepthless,
+	         mProgramAmbient, mProgramAOGeometry, mProgramAOColor;
 
 	pTexture2DRenderable mAOGeometryBuffer;
 	pTexture2DRenderable mAOColorBuffer;
@@ -71,18 +71,18 @@ private:
 	puMesh mDeferredPointLight;
 
 	GLint mULCDRDepthlesDiffuseTexel, mULCDRDepthlessPositionTexel,
-			mULCDRScreenSize, mULCDRAScreenSize, mULCDRADiffuseAttachment,
-			mULCAmbient;
+	      mULCDRScreenSize, mULCDRAScreenSize, mULCDRADiffuseAttachment,
+	      mULCAmbient;
 
 	GLint mULCCameraPositionDirectional, mULCAmbientIntensityDirectional,
-			mULCScreenSizeDirectional, mULCShadowUnitDirectional,
-			mULCIsAODirectional, mULCCameraPositionPoint,
-			mULCAmbientIntensityPoint, mULCMVPPoint, mULCScreenSizePoint,
-			mULCShadowUnitPoint, mULCIsAOPoint;
+	      mULCScreenSizeDirectional, mULCShadowUnitDirectional,
+	      mULCIsAODirectional, mULCCameraPositionPoint,
+	      mULCAmbientIntensityPoint, mULCMVPPoint, mULCScreenSizePoint,
+	      mULCShadowUnitPoint, mULCIsAOPoint;
 
 	/* ULC - Uniform location cache */
 	GLint mULCCameraPositionSpot, mULCAmbientIntensitySpot, mULCScreenSizeSpot,
-			mULCShadowUnitSpot, mULCIsAOSpot;
+	      mULCShadowUnitSpot, mULCIsAOSpot;
 
 	GLboolean mIsAO;
 
@@ -92,7 +92,8 @@ private:
 	puFramebufferGeometry mGBuffer;
 
 	std::vector<IRenderable*> mNodes; /* true -> animated, false -> not animated */
-	std::vector<IRenderable*> mAnimatedNodes; /* true -> animated, false -> not animated */
+	std::vector<IRenderable*>
+	mAnimatedNodes; /* true -> animated, false -> not animated */
 };
 
 } /* namespace framework */

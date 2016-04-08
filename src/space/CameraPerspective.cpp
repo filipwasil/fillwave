@@ -11,31 +11,31 @@ namespace fillwave {
 namespace framework {
 
 CameraPerspective::CameraPerspective() :
-			mProjectionFovy(glm::radians(90.0)),
-			mProjectionAspectRatio(1.0),
-			mProjectionNearPlane(0.01),
-			mProjectionFarPlane(100.0) {
+	mProjectionFovy(glm::radians(90.0)),
+	mProjectionAspectRatio(1.0),
+	mProjectionNearPlane(0.01),
+	mProjectionFarPlane(100.0) {
 	updateProjection();
 }
 
 CameraPerspective::CameraPerspective(
-		glm::vec3 position,
-		glm::quat rotation,
-		GLfloat fovy,
-		GLfloat aspectRatio,
-		GLfloat nearPlane,
-		GLfloat farPlane) :
-			ICamera(position, rotation),
-			mProjectionFovy(fovy),
-			mProjectionAspectRatio(aspectRatio),
-			mProjectionNearPlane(nearPlane),
-			mProjectionFarPlane(farPlane) {
+    glm::vec3 position,
+    glm::quat rotation,
+    GLfloat fovy,
+    GLfloat aspectRatio,
+    GLfloat nearPlane,
+    GLfloat farPlane) :
+	ICamera(position, rotation),
+	mProjectionFovy(fovy),
+	mProjectionAspectRatio(aspectRatio),
+	mProjectionNearPlane(nearPlane),
+	mProjectionFarPlane(farPlane) {
 	updateProjection();
 }
 
 void CameraPerspective::updateProjection() {
 	mProjectionMatrix = glm::perspective(mProjectionFovy, mProjectionAspectRatio,
-		mProjectionNearPlane, mProjectionFarPlane);
+	                                     mProjectionNearPlane, mProjectionFarPlane);
 	mRefreshProjection = GL_FALSE;
 }
 

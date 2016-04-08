@@ -21,20 +21,20 @@ namespace framework {
  */
 
 class ProgressBar: public IHUDNode {
-public:
+  public:
 	ProgressBar(
-			Engine* engine,
-			core::Texture2D* texture,
-			const std::string& shaderPath,
-			glm::vec2 position,
-			glm::vec2 scale);
+	    Engine* engine,
+	    core::Texture2D* texture,
+	    const std::string& shaderPath,
+	    glm::vec2 position,
+	    glm::vec2 scale);
 	virtual ~ProgressBar() = default;
 
 	void setProgress(GLfloat progress);
 
 	void draw() override;
 
-private:
+  private:
 	GLfloat mProgress;
 };
 

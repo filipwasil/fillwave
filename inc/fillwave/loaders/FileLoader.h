@@ -29,14 +29,14 @@ namespace framework {
  */
 
 class FileLoader {
-public:
+  public:
 	FileLoader(const std::string& rootPath);
 
 	~FileLoader() = default;
 
 	std::string getRootPath(std::string filePath = "");
 
-private:
+  private:
 	std::string mRootPath;
 };
 

@@ -19,7 +19,7 @@ namespace core {
  */
 
 class IndexBufferParticles: public IndexBuffer {
-public:
+  public:
 	IndexBufferParticles(GLuint elements);
 	virtual ~IndexBufferParticles() = default;
 	GLuint* getDataInternal();

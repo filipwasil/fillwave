@@ -14,14 +14,14 @@ namespace fillwave {
 namespace core {
 
 UniformBuffer::UniformBuffer(
-		std::string name,
-		GLuint index,
-		GLuint uniformBlockSize,
-		GLuint bindingPoint,
-		GLuint dataStoreModification) :
-			Buffer(GL_UNIFORM_BUFFER, dataStoreModification, index),
-			mName(name),
-			mBindingPoint(bindingPoint) {
+    std::string name,
+    GLuint index,
+    GLuint uniformBlockSize,
+    GLuint bindingPoint,
+    GLuint dataStoreModification) :
+	Buffer(GL_UNIFORM_BUFFER, dataStoreModification, index),
+	mName(name),
+	mBindingPoint(bindingPoint) {
 	bind();
 	bindBase();
 	unbind();

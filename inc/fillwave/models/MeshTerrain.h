@@ -21,28 +21,28 @@ namespace framework {
  */
 
 class MeshTerrain: public Programmable {
-public:
+  public:
 	MeshTerrain(
-			Engine* engine,
-			pProgram program,
-			TerrainConstructor* constructor,
-			const Material& material,
-			const std::string& diffuseMapPath,
-			const std::string& normalMapPath,
-			const std::string& specularMapPath,
-			GLuint radius,
-			GLuint density = 8);
+	    Engine* engine,
+	    pProgram program,
+	    TerrainConstructor* constructor,
+	    const Material& material,
+	    const std::string& diffuseMapPath,
+	    const std::string& normalMapPath,
+	    const std::string& specularMapPath,
+	    GLuint radius,
+	    GLuint density = 8);
 
 	MeshTerrain(
-			Engine* engine,
-			pProgram program,
-			TerrainConstructor* constructor,
-			const Material& material,
-			core::Texture2D* diffuseMapPath,
-			core::Texture2D* normalMapPath,
-			core::Texture2D* specularMapPath,
-			GLuint radius,
-			GLuint density = 8);
+	    Engine* engine,
+	    pProgram program,
+	    TerrainConstructor* constructor,
+	    const Material& material,
+	    core::Texture2D* diffuseMapPath,
+	    core::Texture2D* normalMapPath,
+	    core::Texture2D* specularMapPath,
+	    GLuint radius,
+	    GLuint density = 8);
 
 	virtual ~MeshTerrain() = default;
 
@@ -55,7 +55,7 @@ public:
 	/* IRenderable */
 	void updateRenderer(IRenderer& renderer) override;
 
-private:
+  private:
 	LightSystem* mLights;
 	GLfloat mChunkWidth;
 	GLfloat mJumpStep;

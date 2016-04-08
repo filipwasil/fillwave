@@ -21,9 +21,9 @@ namespace framework {
  */
 
 class Moveable {
-public:
+  public:
 	Moveable(glm::vec3 translation = glm::vec3(0.0), glm::quat rotation =
-			glm::quat(1.0, 0.0, 0.0, 0.0));
+	             glm::quat(1.0, 0.0, 0.0, 0.0));
 	virtual ~Moveable() = default;
 
 	void moveTo(glm::vec3 coordinates);
@@ -65,7 +65,7 @@ public:
 	glm::mat4 getParentMMC();
 	glm::quat getParentRotation();
 
-protected:
+  protected:
 	glm::fvec3 mTranslation;
 	glm::quat mRotation;
 	glm::vec3 mScale;

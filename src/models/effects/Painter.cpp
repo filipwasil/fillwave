@@ -11,7 +11,7 @@ namespace fillwave {
 namespace framework {
 
 Painter::Painter(glm::vec4 color) :
-		mColor(color) {
+	mColor(color) {
 
 }
 

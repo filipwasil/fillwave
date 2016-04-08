@@ -16,27 +16,28 @@ FLOGINIT("EmiterPointCPU", FERROR | FFATAL | FINFO)
 namespace fillwave {
 namespace framework {
 
-EmiterPointCPU::EmiterPointCPU(Engine* engine, GLfloat /*emitingSourceRate*/, //xxx not used for now
-		GLuint howMany,
-		glm::vec4 color,
-		glm::vec3 acceleration,
-		glm::vec3 startVelocity,
-		glm::vec3 robustnessVelocity,
-		glm::vec3 startPosition,
-		glm::vec3 robustnessPosition,
-		GLfloat startSize,
-		GLfloat lifetime,
-		core::Texture* texture,
-		GLenum blendingSource,
-		GLenum blendingDestination,
-		GLboolean depthTesting,
-		GLfloat alphaCutOffLevel) :
-			IEmiterPoint(engine, howMany, startSize, lifetime, texture, color,
-				blendingSource, blendingDestination, depthTesting,
-				alphaCutOffLevel),
-			mAcceleration(acceleration),
-			mStartVelocity(startVelocity),
-			mStartPosition(startPosition) {
+EmiterPointCPU::EmiterPointCPU(Engine* engine,
+                               GLfloat /*emitingSourceRate*/, //xxx not used for now
+                               GLuint howMany,
+                               glm::vec4 color,
+                               glm::vec3 acceleration,
+                               glm::vec3 startVelocity,
+                               glm::vec3 robustnessVelocity,
+                               glm::vec3 startPosition,
+                               glm::vec3 robustnessPosition,
+                               GLfloat startSize,
+                               GLfloat lifetime,
+                               core::Texture* texture,
+                               GLenum blendingSource,
+                               GLenum blendingDestination,
+                               GLboolean depthTesting,
+                               GLfloat alphaCutOffLevel) :
+	IEmiterPoint(engine, howMany, startSize, lifetime, texture, color,
+	             blendingSource, blendingDestination, depthTesting,
+	             alphaCutOffLevel),
+	mAcceleration(acceleration),
+	mStartVelocity(startVelocity),
+	mStartPosition(startPosition) {
 
 	ProgramLoader loader(engine);
 
@@ -61,22 +62,22 @@ EmiterPointCPU::EmiterPointCPU(Engine* engine, GLfloat /*emitingSourceRate*/, //
 
 		/* particles velocity */
 		GLfloat x = (((GLfloat) rand() / (GLfloat) RAND_MAX))
-				* robustnessVelocity.x * 1.0f - robustnessVelocity.x * 0.5f;
+		            * robustnessVelocity.x * 1.0f - robustnessVelocity.x * 0.5f;
 		GLfloat y = (((GLfloat) rand() / (GLfloat) RAND_MAX))
-				* robustnessVelocity.y * 1.0f - robustnessVelocity.y * 0.5f;
+		            * robustnessVelocity.y * 1.0f - robustnessVelocity.y * 0.5f;
 		GLfloat z = (((GLfloat) rand() / (GLfloat) RAND_MAX))
-				* robustnessVelocity.z * 1.0f - robustnessVelocity.z * 0.5f;
+		            * robustnessVelocity.z * 1.0f - robustnessVelocity.z * 0.5f;
 		velocities.push_back(x);
 		velocities.push_back(y);
 		velocities.push_back(z);
 
 		/* emiter surface shape */
 		x = ((GLfloat) rand() / (GLfloat) RAND_MAX) * robustnessPosition.x * 1.0f
-				- robustnessPosition.x * 0.5f;
+		    - robustnessPosition.x * 0.5f;
 		y = ((GLfloat) rand() / (GLfloat) RAND_MAX) * robustnessPosition.y * 1.0f
-				- robustnessPosition.y * 0.5f;
+		    - robustnessPosition.y * 0.5f;
 		z = ((GLfloat) rand() / (GLfloat) RAND_MAX) * robustnessPosition.z * 1.0f
-				- robustnessPosition.z * 0.5f;
+		    - robustnessPosition.z * 0.5f;
 		positions.push_back(x);
 		positions.push_back(y);
 		positions.push_back(z);
@@ -86,8 +87,9 @@ EmiterPointCPU::EmiterPointCPU(Engine* engine, GLfloat /*emitingSourceRate*/, //
 
 	/* Initialize OpenGL stuff */
 	mVBO = std::make_shared < core::VertexBufferParticles
-			> (velocities, positions, times); //xxx todo store in engine
-	mIBO = std::make_shared < core::IndexBufferParticles > (howMany); //xxx todo store in engine
+	       > (velocities, positions, times); //xxx todo store in engine
+	mIBO = std::make_shared < core::IndexBufferParticles >
+	       (howMany); //xxx todo store in engine
 
 	initPipeline();
 	initVBO();
@@ -154,7 +156,7 @@ inline void EmiterPointCPU::coreDraw() {
 //   glBlendFuncSeparate(GL_ONE, GL_ONE, GL_ONE, GL_ONE);
 //   glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT,
-		reinterpret_cast<GLvoid*>(0));
+	               reinterpret_cast<GLvoid*>(0));
 	FLOG_CHECK("Draw elements");
 	glDisable(GL_BLEND);
 	if (not mDepthTesting) {
@@ -185,7 +187,7 @@ void EmiterPointCPU::initUniformsCache() {
 	mULCTimeElapsed = mProgram->getUniformLocation("uTimeElapsed");
 	mULCModelMatrix = mProgram->getUniformLocation("uModelMatrix");
 	mULCViewProjectionMatrix = mProgram->getUniformLocation(
-		"uViewProjectionMatrix");
+	                               "uViewProjectionMatrix");
 	mULCCameraPosition = mProgram->getUniformLocation("uCameraPosition");
 	mULCPointSize = mProgram->getUniformLocation("uPointSize");
 	mULCColor = mProgram->getUniformLocation("uColor");

@@ -14,21 +14,21 @@ namespace fillwave {
 namespace core {
 
 Texture3DRenderable::Texture3DRenderable(
-		Texture2DFile* filePosX,
-		Texture2DFile* fileNegX,
-		Texture2DFile* filePosY,
-		Texture2DFile* fileNegY,
-		Texture2DFile* filePosZ,
-		Texture2DFile* fileNegZ,
-		core::Texture2DRenderable* texture,
-		ParameterList& parameters) :
-		Texture3D(filePosX, //right
-			fileNegX, //left
-			filePosY, //ceil
-			fileNegY, //floor
-			filePosZ, //front
-			fileNegZ, //back
-			parameters), mShadowTexture(texture) {
+    Texture2DFile* filePosX,
+    Texture2DFile* fileNegX,
+    Texture2DFile* filePosY,
+    Texture2DFile* fileNegY,
+    Texture2DFile* filePosZ,
+    Texture2DFile* fileNegZ,
+    core::Texture2DRenderable* texture,
+    ParameterList& parameters) :
+	Texture3D(filePosX, //right
+	          fileNegX, //left
+	          filePosY, //ceil
+	          fileNegY, //floor
+	          filePosZ, //front
+	          fileNegZ, //back
+	          parameters), mShadowTexture(texture) {
 
 }
 
@@ -79,7 +79,7 @@ void Texture3DRenderable::setAttachmentFace(GLenum face, GLenum attachment) {
 	FLOG_CHECK("Setting Face framebuffer failed");
 #ifdef FILLWAVE_GLES_3_0
 	GLenum target = attachment;
-	glDrawBuffers(1,&target);
+	glDrawBuffers(1, &target);
 #else
 	glDrawBuffer(attachment);
 #endif

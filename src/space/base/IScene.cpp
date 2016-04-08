@@ -17,7 +17,7 @@ namespace fillwave {
 namespace framework {
 
 IScene::IScene(IRenderer* renderer) :
-		mAmbientGlobal(glm::vec3(1.0)), mRenderer(renderer) {
+	mAmbientGlobal(glm::vec3(1.0)), mRenderer(renderer) {
 }
 
 void IScene::setRenderer(IRenderer* renderer) {

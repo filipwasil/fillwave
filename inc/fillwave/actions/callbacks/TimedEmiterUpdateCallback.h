@@ -19,20 +19,20 @@ namespace framework {
  */
 
 class TimedEmiterUpdateCallback: public TimedCallback {
-public:
+  public:
 	TimedEmiterUpdateCallback(
-			pIEmiterPoint emiter,
-			GLfloat timeToFinish,
-			EasingFunction easing = LinearInterpolation);
+	    pIEmiterPoint emiter,
+	    GLfloat timeToFinish,
+	    EasingFunction easing = LinearInterpolation);
 
 	virtual ~TimedEmiterUpdateCallback() = default;
 
 	void performTime(TimeEventData& data);
 
-protected:
+  protected:
 	pIEmiterPoint mEmiter;
 
-private:
+  private:
 	GLfloat mTimePassed;
 };
 

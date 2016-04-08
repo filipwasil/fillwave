@@ -25,14 +25,14 @@ class LightSystem;
  */
 
 class VoxelChunk: public Entity, public IReloadable {
-public:
+  public:
 	VoxelChunk(
-			pProgram program,
-			Engine* engine,
-			const std::string& texturePath,
-			GLint size,
-			VoxelConstructor* constructor = nullptr,
-			GLfloat gap = 0.2);
+	    pProgram program,
+	    Engine* engine,
+	    const std::string& texturePath,
+	    GLint size,
+	    VoxelConstructor* constructor = nullptr,
+	    GLfloat gap = 0.2);
 
 	~VoxelChunk();
 
@@ -51,10 +51,10 @@ public:
 
 	GLint getSize();
 
-protected:
+  protected:
 	const GLfloat mVoxelGap;
 
-private:
+  private:
 	GLint mSize;
 	Voxel*** mVoxels;
 	pProgram mProgram;
@@ -63,7 +63,7 @@ private:
 	LightSystem* mLights;
 
 	GLint mUniformLocationCacheModelMatrix, mUniformLocationCacheCameraPosition,
-			mUniformLocationCacheViewProjectionMatrix;
+	      mUniformLocationCacheViewProjectionMatrix;
 
 	void onDraw();
 	void coreDraw();

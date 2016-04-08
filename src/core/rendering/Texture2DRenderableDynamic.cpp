@@ -13,13 +13,13 @@ namespace fillwave {
 namespace core {
 
 Texture2DRenderableDynamic::Texture2DRenderableDynamic(
-		Texture2DFile* file,
-		ParameterList& parameters,
-		pProgram program) :
-			Texture2DRenderable(
-			GL_COLOR_ATTACHMENT0, file, parameters),
-			mProgram(program),
-			mTimePassed(0.0f) {
+    Texture2DFile* file,
+    ParameterList& parameters,
+    pProgram program) :
+	Texture2DRenderable(
+	    GL_COLOR_ATTACHMENT0, file, parameters),
+	mProgram(program),
+	mTimePassed(0.0f) {
 	initUniformsCache();
 }
 
@@ -38,7 +38,7 @@ void Texture2DRenderableDynamic::draw(GLfloat timePassed) {
 void Texture2DRenderableDynamic::initUniformsCache() {
 	mUniformLocationCacheTime = mProgram->getUniformLocation("uTime");
 	mUniformLocationCachePostprocessingSampler = mProgram->getUniformLocation(
-		"uPostProcessingSampler");
+	            "uPostProcessingSampler");
 }
 
 void Texture2DRenderableDynamic::reload() {

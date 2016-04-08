@@ -20,12 +20,12 @@ namespace core {
  */
 
 class Buffer: public GLObject {
-public:
+  public:
 	Buffer(
-			GLuint target,
-			GLuint drawType = GL_STATIC_DRAW,
-			GLuint index = 0,
-			GLsizei howMany = 1);
+	    GLuint target,
+	    GLuint drawType = GL_STATIC_DRAW,
+	    GLuint index = 0,
+	    GLsizei howMany = 1);
 
 	virtual ~Buffer();
 
@@ -60,7 +60,7 @@ public:
 	GLvoid* map(GLenum access) const;
 #endif
 
-protected:
+  protected:
 	GLboolean mRefresh;
 	GLuint mTarget;
 	GLuint mDataStoreType;
