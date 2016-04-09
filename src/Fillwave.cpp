@@ -152,8 +152,8 @@ core::Texture3D* Engine::storeTexture3D(
 	return mImpl->mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
 
-pSampler Engine::storeSO(GLint textureUnit) {
-	return mImpl->mSamplers.add(textureUnit, textureUnit);
+core::Sampler* Engine::storeSO(GLint textureUnit) {
+	return mImpl->mSamplers.store(textureUnit, textureUnit);
 }
 
 pVertexArray Engine::storeVAO(framework::IReloadable* user) {

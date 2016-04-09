@@ -137,7 +137,7 @@ class Engine final {
 	   eTextEffect effect = eTextEffect::eNone);
 
 	/* Store sampler */
-	pSampler storeSO(GLint textureUnit);
+	core::Sampler* storeSO(GLint textureUnit);
 
 	/* Store vertex array objects */
 	pVertexArray storeVAO(framework::IReloadable* user = nullptr);

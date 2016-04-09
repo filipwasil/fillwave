@@ -13,7 +13,6 @@
 #include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/Assets.h>
-#include <fillwave/management/base/TManagerComposite.h>
 #include <fillwave/management/base/TManagerSmart.h>
 
 namespace fillwave {

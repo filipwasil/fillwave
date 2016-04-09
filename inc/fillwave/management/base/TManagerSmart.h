@@ -9,6 +9,7 @@
 #define INC_FILLWAVE_MANAGEMENT_BASE_TMANAGERSMART_H_
 
 #include <unordered_map>
+#include <fillwave/common/Macros.h>
 
 namespace fillwave {
 namespace framework {

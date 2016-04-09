@@ -36,7 +36,7 @@ class Impostor: public Entity, public Finishable {
  protected:
 	core::Program* mProgram;
 	core::Texture* mTexture;
-	pSampler mSampler;
+	core::Sampler* mSampler;
 	GLfloat mSize;
 	Blending mBlending;
 

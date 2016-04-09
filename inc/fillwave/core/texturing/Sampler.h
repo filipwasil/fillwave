@@ -44,8 +44,6 @@ class Sampler: public GLObject {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Sampler> pSampler;
-typedef std::unique_ptr<core::Sampler> puSampler;
 } /* fillwave */
 
 #endif /* SAMPLER_H_ */

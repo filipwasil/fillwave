@@ -35,7 +35,7 @@ class IReloadable {
 
  protected:
 	pVertexArray mVAO;
-	pSampler mSampler;
+	core::Sampler* mSampler;
 };
 
 } /* framework */

@@ -365,7 +365,7 @@ void Engine::EngineImpl::reload() {
 	mTextures->reload();
 
 	for (auto& it : mSamplers) {
-		it.second->mComponent->reload();
+		it.second->reload();
 	}
 
 	mBuffers.reload();
