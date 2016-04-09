@@ -14,7 +14,7 @@ namespace fillwave {
 namespace framework {
 
 typedef TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Sampler,
-		GLint, GLint> ManagerSamplers;
+        GLint, GLint> ManagerSamplers;
 
 } /* framework */
 } /* fillwave */
