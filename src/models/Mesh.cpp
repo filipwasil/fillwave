@@ -3,13 +3,13 @@
  *
  */
 
+#include <fillwave/common/Strings.h>
 #include <fillwave/models/Mesh.h>
 
 #include <fillwave/models/animations/Animator.h>
 
 #include <fillwave/loaders/ProgramLoader.h>
 
-#include <fillwave/common/string.h>
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Profiler.h>
 

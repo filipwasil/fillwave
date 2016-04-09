@@ -8,7 +8,7 @@
 #include <fillwave/loaders/ShaderLoaderVertex.h>
 #include <fillwave/Profiler.h>
 #include <fillwave/Assets.h>
-#include <fillwave/common/string.h>
+#include <fillwave/common/Strings.h>
 
 namespace fillwave {
 namespace framework {

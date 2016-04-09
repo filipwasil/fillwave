@@ -11,16 +11,16 @@
 namespace fillwave {
 namespace framework {
 
-#define FILLWAVE_ENDLESS 0
+constexpr float FILLWAVE_ENDLESS = 0.0f;
 
 /*! \class Finishable
  * \brief Base for every finishable callback.
  */
-
 class Finishable {
  public:
 	Finishable(float timeToFinish);
 	virtual ~Finishable() = default;
+
 	/*
 	 * checkTime
 	 * \brief checks if the lifetime time elapsed

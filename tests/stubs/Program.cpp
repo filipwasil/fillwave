@@ -26,11 +26,11 @@ Program::~Program() {
 	}
 }
 
-void Program::attach(pShader /*shader*/) {
+void Program::attach(core::Shader* /*shader*/) {
 
 }
 
-void Program::detach(pShader /*shader*/) {
+void Program::detach(core::Shader* /*shader*/) {
 
 }
 

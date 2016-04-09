@@ -7,6 +7,7 @@
 
 #include <fillwave/loaders/FileLoader.h>
 #include <fillwave/Log.h>
+
 #include <fstream>
 
 FLOGINIT("File", FERROR | FFATAL)

@@ -14,8 +14,6 @@
 #include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/actions/events/TEvent.h>
 
-#define ENDLESS_LOOP 0
-
 namespace fillwave {
 namespace framework {
 

@@ -5,8 +5,8 @@
  *      Author: filip
  */
 
+#include <fillwave/common/Strings.h>
 #include <fillwave/Log.h>
-#include <fillwave/common/string.h>
 #include <fillwave/loaders/FontLoader.h>
 
 FLOGINIT("FontLoader", FERROR | FFATAL)

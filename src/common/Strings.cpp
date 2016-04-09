@@ -5,9 +5,9 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/Log.h>
-#include <fillwave/common/string.h>
+#include <fillwave/common/Strings.h>
 #include <fillwave/loaders/FileLoader.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("String", FERROR | FFATAL)
 

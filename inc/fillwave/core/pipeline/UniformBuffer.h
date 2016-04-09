@@ -10,10 +10,6 @@
 
 #include <fillwave/core/buffers/Buffer.h>
 
-#define FILLWAVE_LIGHTS_BINDING_POINT 0
-
-#define FILLWAVE_LIGHTS_BINDING_POINT_NAME "uSpotLightsUBO"
-
 namespace fillwave {
 namespace core {
 

@@ -18,7 +18,7 @@ LoopCallback::LoopCallback(Callback* callback, int numberOfExecutions) :
 
 void LoopCallback::perform(EventType& event) {
 	mCallback->perform(event);
-	if (mLoopsLeft != ENDLESS_LOOP) {
+	if (mLoopsLeft != FILLWAVE_ENDLESS) {
 		if (mCallback->isFinished()) {
 			if (--mLoopsLeft) {
 				mCallback->reset();

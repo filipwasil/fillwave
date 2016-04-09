@@ -8,21 +8,20 @@
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/loaders/ShaderLoaderFragment.h>
 #include <fillwave/loaders/ShaderLoaderVertex.h>
-#include <fillwave/common/string.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/Profiler.h>
 #include <fillwave/Assets.h>
+#include <fillwave/common/Strings.h>
 #include <fillwave/management/LightSystem.h>
 
 FLOGINIT("ProgramLoader", FERROR | FFATAL)
 
-#define FILLWAVE_RANDOM_VECTOR_SIZE 64
-
 namespace fillwave {
 namespace framework {
 
-/* Headers */
+constexpr GLuint FILLWAVE_RANDOM_VECTOR_SIZE = 64;
 
+/* Headers */
 #if defined(FILLWAVE_GLES_3_0)
 const std::string gGLVersion = "#version 300 es\n";
 const std::string gGLFragmentPrecision = "precision lowp float;\n";

@@ -5,10 +5,11 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/Log.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/common/Macros.h>
 #include <fillwave/management/LightSystem.h>
+
+#include <fillwave/Log.h>
 
 FLOGINIT("LightSystem", FERROR | FFATAL)
 

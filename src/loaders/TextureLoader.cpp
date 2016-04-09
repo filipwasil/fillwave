@@ -8,13 +8,12 @@
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/loaders/FileLoader.h>
 
-#include <fillwave/common/string.h>
-
 #include <fillwave/Log.h>
 
 #include <fillwave/Profiler.h>
 
 #include <fillwave/Assets.h>
+#include <fillwave/common/Strings.h>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>

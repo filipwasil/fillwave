@@ -16,6 +16,8 @@
 #include <iostream>
 #include <string>
 
+#define FILLWAVE_LIGHTS_BINDING_POINT_NAME "uSpotLightsUBO"
+
 class Attribute;
 
 namespace fillwave {
@@ -24,7 +26,6 @@ namespace core {
 /*! \class Program
  * \brief Single GLSL program object.
  */
-
 class Program {
  public:
 	Program(const std::vector<core::Shader*>& shaders,

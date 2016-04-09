@@ -15,8 +15,6 @@
 #include <string>
 #include <memory>
 
-#define FILLWAVE_UNIFORM_NOT_FOUND -1
-
 namespace fillwave {
 namespace core {
 

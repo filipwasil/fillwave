@@ -9,11 +9,11 @@
 #define LOG_H_
 
 /* Exceptions */
+#include <fillwave/common/Strings.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string>
-#include <fillwave/common/string.h>
 
 #ifdef __ANDROID__
 #include <android/log.h>

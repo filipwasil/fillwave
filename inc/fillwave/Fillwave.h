@@ -169,7 +169,7 @@ class Engine final {
 
 	/* Post processing */
 	void addPostProcess(const std::string& fragmentShaderPath, GLfloat lifeTime =
-	                       FILLWAVE_ENDLESS);
+	                       framework::FILLWAVE_ENDLESS);
 
 	/* Inputs - focus */
 	void setFocus(eEventType eventType, pEntity entity);

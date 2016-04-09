@@ -16,7 +16,6 @@ namespace core {
 /*! \class GLObject
  * \brief Base class for all OpenGL objects not related to pipeline.
  */
-
 class GLObject {
  public:
 	GLObject(GLsizei howMany);

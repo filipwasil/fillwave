@@ -5,7 +5,7 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/common/string.h>
+#include <fillwave/common/Strings.h>
 #include <fillwave/loaders/ShaderLoaderFragment.h>
 
 namespace fillwave {

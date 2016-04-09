@@ -6,7 +6,6 @@
  */
 
 #include <fillwave/common/Finishable.h>
-
 namespace fillwave {
 namespace framework {
 

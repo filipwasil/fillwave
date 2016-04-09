@@ -9,7 +9,6 @@
 #define  CALLBACK_H_
 
 #include <fillwave/common/Finishable.h>
-#include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/actions/events/TEvent.h>
 #include <memory>
 
@@ -19,7 +18,6 @@ namespace framework {
 /*! \class Callback
  * \brief Base for all callbacks.
  */
-
 class Callback: public Finishable {
  public:
 	Callback(eEventType eventType, float timeToFinish = FILLWAVE_ENDLESS) :
