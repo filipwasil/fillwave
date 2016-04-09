@@ -140,7 +140,7 @@ class Engine final {
 	core::Sampler* storeSO(GLint textureUnit);
 
 	/* Store vertex array objects */
-	pVertexArray storeVAO(framework::IReloadable* user = nullptr);
+	core::VertexArray* storeVAO(framework::IReloadable* user = nullptr);
 
 	/* Clear */
 	void clearText(pText text);

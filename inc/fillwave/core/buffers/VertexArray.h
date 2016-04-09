@@ -31,8 +31,6 @@ class VertexArray: public GLObject {
 void bindVAO(GLuint handle);
 
 } /* buffer */
-typedef std::shared_ptr<core::VertexArray> pVertexArray;
-typedef std::weak_ptr<core::VertexArray> pwVertexArray;
 } /* fillwave */
 
 #endif /* ARRAY_H_ */

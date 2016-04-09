@@ -75,7 +75,7 @@ struct Engine::EngineImpl final {
 	ManagerShaders mShaders;
 	ManagerPrograms mPrograms;
 	ManagerSamplers mSamplers;
-	BufferManager mBuffers;
+	ManagerBuffers mBuffers;
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
 	puLightSystem mLights;
@@ -89,7 +89,7 @@ struct Engine::EngineImpl final {
 	/* OQ */
 	core::Program* mProgramOcclusionBox;
 	puVertexBufferPosition mVBOOcclusion;
-	pVertexArray mVAOOcclusion;
+	core::VertexArray* mVAOOcclusion;
 
 	/* Inputs - focus */
 	std::map<eEventType, pEntity> mFocus;
@@ -298,8 +298,8 @@ inline void Engine::EngineImpl::initUniforms() {
 
 inline void Engine::EngineImpl::initOcclusionTest() {
 	std::vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
-	mVAOOcclusion = mBuffers.getVAO(nullptr);
-	mVBOOcclusion = puVertexBufferPosition(new core::VertexBufferPosition(vec));
+	mVAOOcclusion = mBuffers.store(nullptr);
+	mVBOOcclusion = make_unique<core::VertexBufferPosition>(vec);
 	mVBOOcclusion->getAttributes(mProgramOcclusionBox->getHandle());
 	mVBOOcclusion->attributesBind(mProgramOcclusionBox);
 	mVAOOcclusion->bind();
@@ -368,7 +368,9 @@ void Engine::EngineImpl::reload() {
 		it.second->reload();
 	}
 
-	mBuffers.reload();
+	for (auto& it : mBuffers) {
+		it.second->reload();
+	}
 
 	mPickingPixelBuffer->reload();
 	reloadPickingBuffer();

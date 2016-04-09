@@ -156,8 +156,8 @@ core::Sampler* Engine::storeSO(GLint textureUnit) {
 	return mImpl->mSamplers.store(textureUnit, textureUnit);
 }
 
-pVertexArray Engine::storeVAO(framework::IReloadable* user) {
-	return mImpl->mBuffers.getVAO(user);
+core::VertexArray* Engine::storeVAO(framework::IReloadable* user) {
+	return mImpl->mBuffers.store(user);
 }
 
 /* Inputs - insert */

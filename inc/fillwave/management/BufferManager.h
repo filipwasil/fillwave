@@ -14,32 +14,11 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class VAOObject
+/*! \class ManagerBuffers
  * \brief Connects VAO pointer and VAO's user pointer in single class.
  */
-
-struct VAOObject {
-	IReloadable* mVAOUser;
-	pwVertexArray mVAO;
-};
-
-typedef std::shared_ptr<VAOObject> puVAOObject;
-
-/*! \class BufferManager
- * \brief Used to reload VAOs and buffers.
- */
-
-class BufferManager {
- public:
-	BufferManager() = default;
-	virtual ~BufferManager() = default;
-	void collectGarbage();
-	void reload();
-	pVertexArray getVAO(IReloadable* renderable);
-
- private:
-	std::vector<puVAOObject> mVAOObjects;
-};
+typedef TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::VertexArray,
+		IReloadable*> ManagerBuffers;
 
 } /* framework */
 } /* fillwave */

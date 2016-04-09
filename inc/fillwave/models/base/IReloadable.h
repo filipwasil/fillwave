@@ -34,7 +34,7 @@ class IReloadable {
 	void reload();
 
  protected:
-	pVertexArray mVAO;
+	core::VertexArray* mVAO;
 	core::Sampler* mSampler;
 };
 
