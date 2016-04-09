@@ -14,7 +14,7 @@
 namespace fillwave {
 namespace framework {
 
-typedef TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Program,
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Program,
         std::string, const std::vector<core::Shader*>&,
         GLboolean> ManagerPrograms;
 

@@ -17,7 +17,7 @@ namespace framework {
 /*! \class ManagerBuffers
  * \brief Connects VAO pointer and VAO's user pointer in single class.
  */
-typedef TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::VertexArray,
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexArray,
 		IReloadable*> ManagerBuffers;
 
 } /* framework */

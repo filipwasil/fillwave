@@ -18,8 +18,6 @@
 namespace fillwave {
 namespace framework {
 
-static constexpr size_t FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER = 50;
-
 /*! \class TextureSystem
  * \brief Manager to handle TextureObject1D, TextureObject2D and TextureObject3D objects.
  */
@@ -65,35 +63,35 @@ class TextureSystem {
 
  private:
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture1D,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture1D,
 	              size_t, core::ParameterList&> mTextures1D;
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture2D,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2D,
 	              std::string, core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture2D,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2D,
 	              size_t, core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2DDeferred;
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture2DRenderableDynamic,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2DRenderableDynamic,
 	              std::string, core::Texture2DFile*, core::ParameterList&, core::Program*>
 	              mTextures2DDynamic;
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture2DRenderable,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2DRenderable,
 	              size_t, GLenum, core::Texture2DFile*, core::ParameterList&>
 	              mTextures2DRenderable;
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture3D,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3D,
 	              std::string, core::Texture2DFile*, core::Texture2DFile*,
 	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 	              core::Texture2DFile*, core::ParameterList&> mTextures3D;
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture3DRenderableDynamic,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3DRenderableDynamic,
 	              std::string, core::Texture2DFile*, core::Texture2DFile*,
 	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 	              core::Texture2DFile*, core::ParameterList&, core::Texture2DRenderable*,
 	              core::Program*> mTextures3DDynamic;
 
-	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture3DRenderable, size_t,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3DRenderable, size_t,
 	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 	              core::Texture2DRenderable*, core::ParameterList&> mTextures3DRenderable;
