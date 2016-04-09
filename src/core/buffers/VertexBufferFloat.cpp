@@ -13,8 +13,8 @@ namespace fillwave {
 namespace core {
 
 VertexBufferFloat::VertexBufferFloat(
-    std::vector<GLfloat>& values,
-    GLuint dataStoreModification) :
+   std::vector<GLfloat>& values,
+   GLuint dataStoreModification) :
 	TVertexBuffer<GLfloat>(values, dataStoreModification) {
 
 }

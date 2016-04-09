@@ -22,7 +22,7 @@ class Channel;
  */
 
 class Animation {
-  public:
+ public:
 	Animation(fAnimation* assimpAnimation);
 	virtual ~Animation();
 
@@ -58,7 +58,7 @@ class Animation {
 		return mChannels.size();
 	}
 
-  private:
+ private:
 	std::string mName;
 	float mDuration;
 	float mTicksPerSec;

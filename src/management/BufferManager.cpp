@@ -32,10 +32,12 @@ void BufferManager::reload() {
 
 void BufferManager::collectGarbage() {
 	auto _find_useless_VAOObjects =
-	[](puVAOObject arrayObject) -> bool {bool result = true; if(arrayObject->mVAO.lock()) {
+	   [](puVAOObject arrayObject) -> bool {bool result = true;
+	if(arrayObject->mVAO.lock()) {
 	result = false;
-} return result;
-                                        };
+}
+return result;
+                                       };
 auto _begin = mVAOObjects.begin();
 	auto _end = mVAOObjects.end();
 	auto it = std::remove_if(_begin, _end, _find_useless_VAOObjects);

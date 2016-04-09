@@ -20,12 +20,12 @@ namespace framework {
  */
 
 class TimedColorCallback: public TimedCallback {
-  public:
+ public:
 	TimedColorCallback(
-	    pModel model,
-	    glm::vec4 endColor,
-	    GLfloat lifeTime,
-	    EasingFunction easing);
+	   pModel model,
+	   glm::vec4 endColor,
+	   GLfloat lifeTime,
+	   EasingFunction easing);
 
 	virtual ~TimedColorCallback() = default;
 
@@ -35,7 +35,7 @@ class TimedColorCallback: public TimedCallback {
 
 	void perform(EventType& eventType);
 
-  private:
+ private:
 	glm::vec4 mStartColor;
 	glm::vec4 mEndColor;
 	pModel mModel;

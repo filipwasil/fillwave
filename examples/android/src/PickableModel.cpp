@@ -18,7 +18,7 @@ using namespace fillwave::framework;
 PickableModel::PickableModel(std::string name,
                              pText text,
                              Engine* engine,
-                             pProgram program,
+                             core::Program* program,
                              const std::string& shapePath):Model(engine,
                                                                            program,
                                                                            shapePath),

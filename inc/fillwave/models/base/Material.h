@@ -19,7 +19,7 @@ namespace framework {
  */
 
 class Material {
-  public:
+ public:
 	Material();
 	Material(const fMaterial* material);
 	virtual ~Material() = default;
@@ -27,7 +27,7 @@ class Material {
 	glm::vec4 getDiffuse() const;
 	glm::vec4 getSpecular() const;
 
-  private:
+ private:
 	glm::vec4 mAmbient;
 	glm::vec4 mDiffuse;
 	glm::vec4 mSpecular;

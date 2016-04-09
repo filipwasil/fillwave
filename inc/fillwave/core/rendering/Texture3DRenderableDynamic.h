@@ -19,22 +19,22 @@ namespace core {
  */
 
 class Texture3DRenderableDynamic: public Texture3DRenderable {
-  public:
+ public:
 	Texture3DRenderableDynamic(
-	    Texture2DFile* filePosX,
-	    Texture2DFile* fileNegX,
-	    Texture2DFile* filePosY,
-	    Texture2DFile* fileNegY,
-	    Texture2DFile* filePosZ,
-	    Texture2DFile* fileNegZ,
-	    ParameterList& parameters,
-	    core::Texture2DRenderable* texture2D,
-	    pProgram program);
+	   Texture2DFile* filePosX,
+	   Texture2DFile* fileNegX,
+	   Texture2DFile* filePosY,
+	   Texture2DFile* fileNegY,
+	   Texture2DFile* filePosZ,
+	   Texture2DFile* fileNegZ,
+	   ParameterList& parameters,
+	   core::Texture2DRenderable* texture2D,
+	   core::Program* program);
 
 	virtual ~Texture3DRenderableDynamic() = default;
 
-  private:
-	pProgram mProgram;
+ private:
+	core::Program* mProgram;
 	GLfloat mTimePassed;
 };
 

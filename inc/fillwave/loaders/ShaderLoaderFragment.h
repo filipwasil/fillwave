@@ -19,14 +19,14 @@ namespace framework {
  */
 
 class ShaderLoaderFragment: public ShaderLoader {
-  public:
+ public:
 	ShaderLoaderFragment(GLuint renderTargets = 1);
 
 	virtual ~ShaderLoaderFragment() = default;
 
 	const std::string getSource() const;
 
-  private:
+ private:
 	GLboolean mFog;
 	GLboolean mColor;
 	GLboolean mColorBoost;

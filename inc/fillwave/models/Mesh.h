@@ -35,24 +35,24 @@ namespace framework {
  */
 
 class Mesh: public Entity, public IReloadable {
-  public:
+ public:
 	Mesh(
-	    Engine* engine,
-	    const Material& material,
-	    pTextureRegion diffuseMap,
-	    pTextureRegion normalMap,
-	    pTextureRegion specularMap,
-	    pProgram program,
-	    pProgram ProgramShadow,
-	    pProgram programShadowColor,
-	    pProgram programOcclusion,
-	    pProgram programAmbientOcclusionGeometry,
-	    pProgram programAmbientOcclusionColor,
-	    LightSystem* lights = nullptr,
-	    pVertexBufferBasic vbo = pVertexBufferBasic(),
-	    pIndexBufferBasic ibo = pIndexBufferBasic(),
-	    Animator* boneManager = nullptr,
-	    GLenum renderMode = GL_TRIANGLES);
+	   Engine* engine,
+	   const Material& material,
+	   pTextureRegion diffuseMap,
+	   pTextureRegion normalMap,
+	   pTextureRegion specularMap,
+	   core::Program* program,
+	   core::Program* ProgramShadow,
+	   core::Program* programShadowColor,
+	   core::Program* programOcclusion,
+	   core::Program* programAmbientOcclusionGeometry,
+	   core::Program* programAmbientOcclusionColor,
+	   LightSystem* lights = nullptr,
+	   pVertexBufferBasic vbo = pVertexBufferBasic(),
+	   pIndexBufferBasic ibo = pIndexBufferBasic(),
+	   Animator* boneManager = nullptr,
+	   GLenum renderMode = GL_TRIANGLES);
 
 	virtual ~Mesh() = default;
 
@@ -76,13 +76,13 @@ class Mesh: public Entity, public IReloadable {
 	void drawFast(ICamera& camera);
 	virtual void onDraw();
 
-  protected:
+ protected:
 	Material mMaterial;
 	pTextureRegion mDiffuseMap;
 	pTextureRegion mNormalMap;
 	pTextureRegion mSpecularMap;
-	pProgram mProgram, mProgramShadow, mProgramShadowColor, mProgramOQ,
-	         mProgramAOGeometry, mProgramAOColor;
+	core::Program *mProgram, *mProgramShadow, *mProgramShadowColor, *mProgramOQ,
+	     *mProgramAOGeometry, *mProgramAOColor;
 	GLenum mRenderMode;
 
 	/* Buffers */
@@ -106,7 +106,7 @@ class Mesh: public Entity, public IReloadable {
 	core::ConditionalRender mConditionalRendering;
 #endif
 
-  private:
+ private:
 
 	/* ULC - Uniform location cache */
 	GLint mULCModelMatrix, mULCViewProjectionMatrix, mULCLightAmbientIntensity,

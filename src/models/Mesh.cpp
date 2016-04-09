@@ -23,22 +23,22 @@ namespace framework {
 const GLint gOQVertices = 36; //todo move it from here
 
 Mesh::Mesh(
-    Engine* engine,
-    const Material& material,
-    pTextureRegion diffuseMap,
-    pTextureRegion normalMap,
-    pTextureRegion specularMap,
-    pProgram program,
-    pProgram programShadow,
-    pProgram programShadowColor,
-    pProgram programOcclusion,
-    pProgram programAmbientOcclusionGeometry,
-    pProgram programAmbientOcclusionColor,
-    LightSystem* lights,
-    pVertexBufferBasic vbo,
-    pIndexBufferBasic ibo,
-    Animator* boneManager,
-    GLenum renderMode) :
+   Engine* engine,
+   const Material& material,
+   pTextureRegion diffuseMap,
+   pTextureRegion normalMap,
+   pTextureRegion specularMap,
+   core::Program* program,
+   core::Program* programShadow,
+   core::Program* programShadowColor,
+   core::Program* programOcclusion,
+   core::Program* programAmbientOcclusionGeometry,
+   core::Program* programAmbientOcclusionColor,
+   LightSystem* lights,
+   pVertexBufferBasic vbo,
+   pIndexBufferBasic ibo,
+   Animator* boneManager,
+   GLenum renderMode) :
 	IReloadable(engine),
 	mMaterial(material),
 	mDiffuseMap(diffuseMap),
@@ -99,7 +99,7 @@ void Mesh::draw(ICamera& camera) {
 		core::Uniform::push(mULCCameraPosition, camera.getTranslation());
 		core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
-		mLights->pushLightUniforms(mProgram.get());
+		mLights->pushLightUniforms(mProgram);
 		mLights->bindShadowmaps();
 
 		coreDraw();
@@ -161,17 +161,17 @@ inline void Mesh::coreDraw() {
 inline void Mesh::bindTextures() {
 	if (mDiffuseMap->getTexture()) {
 		mDiffuseMap->getTexture()->bind(
-		    FILLWAVE_DIFFUSE_UNIT); //xxx texture region coordinates are not used
+		   FILLWAVE_DIFFUSE_UNIT); //xxx texture region coordinates are not used
 	}
 
 	if (mNormalMap->getTexture()) {
 		mNormalMap->getTexture()->bind(
-		    FILLWAVE_NORMAL_UNIT); //xxx texture region coordinates are not used
+		   FILLWAVE_NORMAL_UNIT); //xxx texture region coordinates are not used
 	}
 
 	if (mSpecularMap->getTexture()) {
 		mSpecularMap->getTexture()->bind(
-		    FILLWAVE_SPECULAR_UNIT); //xxx texture region coordinates are not used
+		   FILLWAVE_SPECULAR_UNIT); //xxx texture region coordinates are not used
 	}
 }
 
@@ -235,8 +235,8 @@ void Mesh::drawDepth(ICamera& camera) {
 }
 
 void Mesh::drawDepthColor(
-    ICamera& camera,
-    glm::vec3& /*xxx double check position*/) {
+   ICamera& camera,
+   glm::vec3& /*xxx double check position*/) {
 	if (isPSC()) {
 		mProgramShadowColor->use();
 
@@ -299,7 +299,7 @@ void Mesh::onDraw() {
 
 inline void Mesh::initPipeline() {
 	if (mProgram) {
-		ProgramLoader::initDefaultUniforms(mProgram.get());
+		ProgramLoader::initDefaultUniforms(mProgram);
 	}
 }
 
@@ -308,14 +308,14 @@ inline void Mesh::initUniformsCache() {
 	if (mProgram) {
 		mULCModelMatrix = mProgram->getUniformLocation("uModelMatrix");
 		mULCLightAmbientIntensity = mProgram->getUniformLocation(
-		                                "uLightAmbientIntensity");
+		                               "uLightAmbientIntensity");
 		mULCLightDiffuseIntensity = mProgram->getUniformLocation(
-		                                "uLightDiffuseIntensity");
+		                               "uLightDiffuseIntensity");
 		mULCLightSpecularIntensity = mProgram->getUniformLocation(
-		                                 "uLightSpecularIntensity");
+		                                "uLightSpecularIntensity");
 		mULCCameraPosition = mProgram->getUniformLocation("uCameraPosition");
 		mULCViewProjectionMatrix = mProgram->getUniformLocation(
-		                               "uViewProjectionMatrix");
+		                              "uViewProjectionMatrix");
 		mULCColorPicking = mProgram->getUniformLocation("uColorPicking");
 		mULCPainterColor = mProgram->getUniformLocation("uPainterColor");
 	}
@@ -333,14 +333,14 @@ inline void Mesh::initUniformsCache() {
 	if (mProgramShadowColor) {
 		mULCMVPShadowColor = mProgramShadowColor->getUniformLocation("uMVP");
 		mULCModelMatrixShadowColor = mProgramShadowColor->getUniformLocation(
-		                                 "uModelMatrix");
+		                                "uModelMatrix");
 	}
 
 	/* AmbientOcclusion programs */
 	if (mProgramAOGeometry) {
 		mULCMVPAmbientOcclusion = mProgramAOGeometry->getUniformLocation("uMVP");
 		mULCPositionAmbientOcclusion = mProgramAOGeometry->getUniformLocation(
-		                                   "uMVPosition");
+		                                  "uMVPosition");
 	}
 
 	if (mProgramAOColor) {
@@ -401,11 +401,11 @@ bool Mesh::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
 	item.mHandles[RenderItem::eRenderHandleDiffuse] =
-	    mDiffuseMap->getTexture()->getHandle();
+	   mDiffuseMap->getTexture()->getHandle();
 	item.mHandles[RenderItem::eRenderHandleNormal] =
-	    mNormalMap->getTexture()->getHandle();
+	   mNormalMap->getTexture()->getHandle();
 	item.mHandles[RenderItem::eRenderHandleSpecular] =
-	    mSpecularMap->getTexture()->getHandle();
+	   mSpecularMap->getTexture()->getHandle();
 	item.mIndicesPointer = 0;
 	item.mMode = GL_TRIANGLES;
 	item.mRenderStatus = mIBO ? 0xf8 :

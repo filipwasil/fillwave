@@ -32,7 +32,7 @@ Engine* gEngine;
 pCameraPerspective gCamera;
 pScenePerspective gScene;
 
-pProgram gProgram;
+core::Program* gProgram;
 map<string, pModel> gModels;
 
 FLOGINIT("Test app", FERROR | FFATAL)

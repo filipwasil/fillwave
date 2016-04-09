@@ -50,7 +50,7 @@ typedef union UniformData {
  */
 
 class Uniform {
-  public:
+ public:
 	Uniform(std::string name, GLuint type, GLsizei size, GLint location);
 
 	virtual ~Uniform() = default;
@@ -100,7 +100,7 @@ class Uniform {
 
 	void log() const;
 
-  private:
+ private:
 	std::string mName;
 	GLenum mType;
 	GLsizei mSize;

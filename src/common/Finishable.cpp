@@ -28,8 +28,8 @@ void Finishable::checkTime(float timePassed) {
 
 float Finishable::getPercentageDone() const {
 	return
-	    mTimePassed / mTimeToFinish >= 1.0f ?
-	    1.0f : mTimePassed / mTimeToFinish;
+	   mTimePassed / mTimeToFinish >= 1.0f ?
+	   1.0f : mTimePassed / mTimeToFinish;
 }
 
 void Finishable::finish() {

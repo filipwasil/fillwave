@@ -22,10 +22,10 @@ void Light::updateFromFollowed() {
 	if (mFollowed) {
 		if (mFollowed->isRefreshExternal()) {
 			mTranslation = glm::vec3(
-			                   mFollowed->getParentMMC()
-			                   * glm::vec4(mFollowed->getTranslation(), 1.0));
+			                  mFollowed->getParentMMC()
+			                  * glm::vec4(mFollowed->getTranslation(), 1.0));
 			mRotation = glm::normalize(
-			                mFollowed->getParentRotation() * mFollowed->getRotation());
+			               mFollowed->getParentRotation() * mFollowed->getRotation());
 			mRefresh = GL_TRUE;
 			mFollowed->setRefreshExternal(GL_FALSE);
 		}

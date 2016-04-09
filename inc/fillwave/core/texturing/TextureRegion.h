@@ -25,20 +25,20 @@ namespace core {
  */
 
 class TextureRegion {
-  public:
+ public:
 	TextureRegion(
-	    core::Texture2D* texture,
-	    GLfloat u1 = 0,
-	    GLfloat v1 = 0,
-	    GLfloat u2 = 1,
-	    GLfloat v2 = 1);
+	   core::Texture2D* texture,
+	   GLfloat u1 = 0,
+	   GLfloat v1 = 0,
+	   GLfloat u2 = 1,
+	   GLfloat v2 = 1);
 
 	virtual ~TextureRegion() = default;
 	core::Texture2D* getTexture();
 	GLfloat convertU(GLfloat u);
 	GLfloat convertV(GLfloat v);
 
-  private:
+ private:
 	GLfloat mU1;
 	GLfloat mV1;
 	GLfloat mU2;
@@ -48,11 +48,11 @@ class TextureRegion {
 
 } /* core */
 pTextureRegion buildTextureRegion(
-    core::Texture2D* texture = nullptr,
-    GLfloat u1 = 0.0,
-    GLfloat v1 = 0.0,
-    GLfloat u2 = 1.0,
-    GLfloat v2 = 1.0);
+   core::Texture2D* texture = nullptr,
+   GLfloat u1 = 0.0,
+   GLfloat v1 = 0.0,
+   GLfloat u2 = 1.0,
+   GLfloat v2 = 1.0);
 } /* fillwave */
 
 #endif /* TEXTUREREGION_H_ */

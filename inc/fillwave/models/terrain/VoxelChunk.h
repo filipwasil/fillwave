@@ -25,14 +25,14 @@ class LightSystem;
  */
 
 class VoxelChunk: public Entity, public IReloadable {
-  public:
+ public:
 	VoxelChunk(
-	    pProgram program,
-	    Engine* engine,
-	    const std::string& texturePath,
-	    GLint size,
-	    VoxelConstructor* constructor = nullptr,
-	    GLfloat gap = 0.2);
+	   core::Program* program,
+	   Engine* engine,
+	   const std::string& texturePath,
+	   GLint size,
+	   VoxelConstructor* constructor = nullptr,
+	   GLfloat gap = 0.2);
 
 	~VoxelChunk();
 
@@ -51,13 +51,13 @@ class VoxelChunk: public Entity, public IReloadable {
 
 	GLint getSize();
 
-  protected:
+ protected:
 	const GLfloat mVoxelGap;
 
-  private:
+ private:
 	GLint mSize;
 	Voxel*** mVoxels;
-	pProgram mProgram;
+	core::Program* mProgram;
 	pTexture2D mTexture;
 	pVertexBufferBasic mVBO;
 	LightSystem* mLights;

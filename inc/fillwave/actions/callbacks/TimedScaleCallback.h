@@ -19,23 +19,23 @@ namespace framework {
  */
 
 class TimedScaleCallback: public TimedCallback {
-  public:
+ public:
 	TimedScaleCallback(
-	    pMoveable moveable,
-	    glm::vec3 normalizedScaleVec,
-	    GLfloat lifetime,
-	    EasingFunction easing = LinearInterpolation);
+	   pMoveable moveable,
+	   glm::vec3 normalizedScaleVec,
+	   GLfloat lifetime,
+	   EasingFunction easing = LinearInterpolation);
 	TimedScaleCallback(
-	    pMoveable moveable,
-	    GLfloat normalizedScale,
-	    GLfloat lifetime,
-	    EasingFunction easing = LinearInterpolation);
+	   pMoveable moveable,
+	   GLfloat normalizedScale,
+	   GLfloat lifetime,
+	   EasingFunction easing = LinearInterpolation);
 
 	virtual ~TimedScaleCallback() = default;
 
 	void performTime(TimeEventData& data);
 
-  protected:
+ protected:
 	glm::vec3 mStartScale;
 	glm::vec3 mEndScale;
 	pMoveable mMoveable;

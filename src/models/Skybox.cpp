@@ -50,14 +50,14 @@ void Skybox::draw(ICamera& camera) {
 	mVAO->bind();
 
 	mTexture->bind(
-	    FILLWAVE_DIFFUSE_UNIT); //xxx texture region coordinates are not used
+	   FILLWAVE_DIFFUSE_UNIT); //xxx texture region coordinates are not used
 
 	glFrontFace(GL_CW);
 	if (mIBO) {
 		/* Perform index drawing */
 		glDrawElements(
-		    GL_TRIANGLES, mIBO->getElements(),
-		    GL_UNSIGNED_INT, (GLvoid*) 0);
+		   GL_TRIANGLES, mIBO->getElements(),
+		   GL_UNSIGNED_INT, (GLvoid*) 0);
 	} else {
 		/* Perform array drawing */
 		glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
@@ -81,14 +81,14 @@ void Skybox::drawDR(ICamera& camera) {
 	mVAO->bind();
 
 	mTexture->bind(
-	    FILLWAVE_DIFFUSE_UNIT); //xxx texture region coordinates are not used
+	   FILLWAVE_DIFFUSE_UNIT); //xxx texture region coordinates are not used
 
 	glFrontFace(GL_CW);
 	if (mIBO) {
 		/* Perform index drawing */
 		glDrawElements(
-		    GL_TRIANGLES, mIBO->getElements(),
-		    GL_UNSIGNED_INT, (GLvoid*) 0);
+		   GL_TRIANGLES, mIBO->getElements(),
+		   GL_UNSIGNED_INT, (GLvoid*) 0);
 	} else {
 		/* Perform array drawing */
 		glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
@@ -118,7 +118,7 @@ inline void Skybox::initUniformsCache() {
 	mULCCameraPosition = mProgram->getUniformLocation("uCameraPosition");
 	mULCModelMatrixPosition = mProgram->getUniformLocation("uModelMatrix");
 	mULCViewProjectionMatrix = mProgram->getUniformLocation(
-	                               "uViewProjectionMatrix");
+	                              "uViewProjectionMatrix");
 	mULCTextureUnit = mProgram->getUniformLocation("uTextureUnit");
 }
 
@@ -151,7 +151,7 @@ bool Skybox::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
 	item.mHandles[RenderItem::eRenderHandleDiffuse] =
-	    mTexture->getHandle(); //xxx 3d texture handle
+	   mTexture->getHandle(); //xxx 3d texture handle
 	item.mIndicesPointer = 0;
 	item.mMode = GL_TRIANGLES;
 	item.mRenderStatus = mIBO ? 0xe0 :

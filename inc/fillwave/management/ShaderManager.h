@@ -9,23 +9,13 @@
 #define SHADERMANAGER_H_
 
 #include <fillwave/core/pipeline/Shader.h>
-#include <fillwave/management/base/TManagerComposite.h>
+#include <fillwave/management/base/TManagerSmart.h>
 
 namespace fillwave {
 namespace framework {
 
-/**
- * Data structure containing each Shader instance info.
- */
-typedef Composition<pShader, TPolicyShared<core::Shader>, GLuint, const std::string&>
-ShaderObject;
-
-/**
- * Shader manager
- */
-typedef ManagerComposite<std::unique_ptr<ShaderObject>, pShader, std::string,
-        UINT_MAX, TPolicyUnique<ShaderObject>, GLuint, const std::string&>
-        ManagerShaders;
+typedef TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Shader,
+        std::string, GLuint, const std::string&> ManagerShaders;
 
 } /* framework */
 } /* fillwave */

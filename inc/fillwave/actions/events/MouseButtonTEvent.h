@@ -30,7 +30,7 @@ struct MouseButtonEventData {
  */
 
 class MouseButtonEvent: public TEvent<MouseButtonEventData> {
-  public:
+ public:
 	MouseButtonEvent(MouseButtonEventData data) :
 		TEvent(data) {
 

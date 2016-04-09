@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class FontLoader {
-  public:
+ public:
 	FontLoader() = default;
 	virtual ~FontLoader() = default;
 	void load(std::string name);

@@ -28,13 +28,13 @@ void TransformFeedback::bind(GLuint id) const {
 
 void TransformFeedback::begin(GLenum primitiveMode) {
 	if (primitiveMode != GL_POINTS && primitiveMode != GL_LINES
-	        && primitiveMode != GL_TRIANGLES
+	      && primitiveMode != GL_TRIANGLES
 #ifdef FILLWAVE_GLES_3_0
 #else
-	        && primitiveMode != GL_TRIANGLES_ADJACENCY
-	        && primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY
-	        && primitiveMode != GL_LINES_ADJACENCY
-	        && primitiveMode != GL_LINE_STRIP_ADJACENCY
+	      && primitiveMode != GL_TRIANGLES_ADJACENCY
+	      && primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY
+	      && primitiveMode != GL_LINES_ADJACENCY
+	      && primitiveMode != GL_LINE_STRIP_ADJACENCY
 #endif
 	   )
 		FLOG_ERROR("not valid primitive type");

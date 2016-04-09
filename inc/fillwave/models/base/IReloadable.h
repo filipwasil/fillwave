@@ -20,7 +20,7 @@ namespace framework {
  */
 
 class IReloadable {
-  public:
+ public:
 	IReloadable(Engine* engine);
 
 	virtual ~IReloadable() = default;
@@ -33,7 +33,7 @@ class IReloadable {
 
 	void reload();
 
-  protected:
+ protected:
 	pVertexArray mVAO;
 	pSampler mSampler;
 };

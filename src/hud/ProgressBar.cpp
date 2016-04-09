@@ -15,11 +15,11 @@ namespace fillwave {
 namespace framework {
 
 ProgressBar::ProgressBar(
-    Engine* engine,
-    core::Texture2D* texture,
-    const std::string& shaderPath,
-    glm::vec2 position,
-    glm::vec2 scale)
+   Engine* engine,
+   core::Texture2D* texture,
+   const std::string& shaderPath,
+   glm::vec2 position,
+   glm::vec2 scale)
 	:
 	IHUDNode(texture,
 	         ProgramLoader(engine).getHUDCustomFragmentShader(shaderPath),

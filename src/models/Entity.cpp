@@ -200,7 +200,7 @@ void Entity::log() const {
 }
 
 inline void Entity::handleEvent( /* xxx refactor */
-    std::vector<Callback*>& callbacks, EventType& event) {
+   std::vector<Callback*>& callbacks, EventType& event) {
 	for (auto it : callbacks) {
 		if (it->isEnabled()) {
 			if (it->getEventType() == event.getType()) {
@@ -213,7 +213,7 @@ inline void Entity::handleEvent( /* xxx refactor */
 
 inline void Entity::eraseFinishedCallbacks(std::vector<Callback*>& callbacks) {
 	auto _find_finished_function =
-	    [](Callback * m) -> bool {bool finished = m->isFinished(); if (finished) delete m; return finished;};
+	   [](Callback * m) -> bool {bool finished = m->isFinished(); if (finished) delete m; return finished;};
 auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _find_finished_function);
@@ -221,10 +221,10 @@ auto _begin = callbacks.begin();
 }
 
 inline void Entity::detachCallback(
-    std::vector<Callback*>& callbacks,
-    Callback* callback) {
+   std::vector<Callback*>& callbacks,
+   Callback* callback) {
 	auto _compare_function =
-	    [callback](const Callback * m) -> bool {bool found = (m == callback); if (found) delete m; return found;};
+	   [callback](const Callback * m) -> bool {bool found = (m == callback); if (found) delete m; return found;};
 auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _compare_function);

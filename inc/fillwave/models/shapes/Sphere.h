@@ -21,12 +21,12 @@ namespace framework {
 
 class Sphere: public Shape<core::VertexBasic> {
 
-  public:
+ public:
 	Sphere(
-	    GLfloat radius,
-	    GLuint rings = 10,
-	    GLuint sectors = 10,
-	    glm::vec3 color = glm::vec3(0.0)) {
+	   GLfloat radius,
+	   GLuint rings = 10,
+	   GLuint sectors = 10,
+	   glm::vec3 color = glm::vec3(0.0)) {
 		float const R = 1.f / (float) (rings - 1);
 		float const S = 1.f / (float) (sectors - 1);
 		float r, s;

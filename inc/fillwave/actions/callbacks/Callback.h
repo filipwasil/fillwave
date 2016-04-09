@@ -21,7 +21,7 @@ namespace framework {
  */
 
 class Callback: public Finishable {
-  public:
+ public:
 	Callback(eEventType eventType, float timeToFinish = FILLWAVE_ENDLESS) :
 		Finishable(timeToFinish), mEnabled(true), mEventType(eventType) {
 	}
@@ -46,7 +46,7 @@ class Callback: public Finishable {
 		return mEventType;
 	}
 
-  protected:
+ protected:
 	bool mEnabled;
 	eEventType mEventType;
 };

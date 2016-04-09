@@ -20,7 +20,7 @@ namespace framework {
  */
 
 class RendererPBRP: public IRenderer {
-  public:
+ public:
 	RendererPBRP() = default;
 	virtual ~RendererPBRP() = default;
 
@@ -29,7 +29,7 @@ class RendererPBRP: public IRenderer {
 	void reset(GLuint width, GLuint height) override;
 	void clear() override;
 
-  private:
+ private:
 	std::unordered_map<GLuint, std::vector<IRenderable*> > mRenderPasses;
 };
 

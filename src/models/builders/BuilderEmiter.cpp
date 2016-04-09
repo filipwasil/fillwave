@@ -72,7 +72,7 @@ BuilderEmiter& BuilderEmiter::setStartVelocity(glm::vec3 startVelocity) {
 }
 
 BuilderEmiter& BuilderEmiter::setRobustnessVelocity(
-    glm::vec3 robustnessVelocity) {
+   glm::vec3 robustnessVelocity) {
 	mRobustnessVelocity = robustnessVelocity;
 	return *this;
 }
@@ -83,7 +83,7 @@ BuilderEmiter& BuilderEmiter::setStartPosition(glm::vec3 startPosition) {
 }
 
 BuilderEmiter& BuilderEmiter::setRobustnessPosition(
-    glm::vec3 robustnessPosition) {
+   glm::vec3 robustnessPosition) {
 	mRobustnessPosition = robustnessPosition;
 	return *this;
 }

@@ -87,44 +87,44 @@ void Engine::drawTexture(core::Texture* t) {
 }
 
 pLightSpot Engine::storeLightSpot(
-    glm::vec3 position,
-    glm::quat rotation,
-    glm::vec4 color,
-    pMoveable followed) {
+   glm::vec3 position,
+   glm::quat rotation,
+   glm::vec4 color,
+   pMoveable followed) {
 	return mImpl->mLights->mLightsSpot.add(
-	           mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
-	           position, rotation, color, followed);
+	          mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
+	          position, rotation, color, followed);
 }
 
 pLightPoint Engine::storeLightPoint(
-    glm::vec3 position,
-    glm::vec4 color,
-    pMoveable followed) {
+   glm::vec3 position,
+   glm::vec4 color,
+   pMoveable followed) {
 	return mImpl->mLights->mLightsPoint.add(
-	           mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight),
-	           position, color, followed);
+	          mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight),
+	          position, color, followed);
 }
 
 pLightDirectional Engine::storeLightDirectional(
-    glm::vec3 position,
-    glm::quat rotation,
-    glm::vec4 color,
-    pMoveable followed) {
+   glm::vec3 position,
+   glm::quat rotation,
+   glm::vec4 color,
+   pMoveable followed) {
 	return mImpl->mLights->mLightsDirectional.add(
-	           mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
-	           position, rotation, color, followed);
+	          mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
+	          position, rotation, color, followed);
 }
 
-pProgram Engine::storeProgram(
-    const std::string& name,
-    const std::vector<pShader>& shaders,
-    GLboolean skipLinking) {
-	return mImpl->mPrograms.add(name, shaders, skipLinking);
+core::Program* Engine::storeProgram(
+   const std::string& name,
+   const std::vector<core::Shader*>& shaders,
+   GLboolean skipLinking) {
+	return mImpl->mPrograms.store(name, shaders, skipLinking);
 }
 
 core::Texture2D* Engine::storeTexture(
-    const std::string& texturePath,
-    framework::eCompression compression) {
+   const std::string& texturePath,
+   framework::eCompression compression) {
 	return mImpl->mTextures->get(texturePath, compression);
 }
 
@@ -134,21 +134,21 @@ core::Texture2DRenderable* Engine::storeTextureRenderable() {
 }
 
 core::Texture2DRenderableDynamic* Engine::storeTextureDynamic(
-    const std::string& fragmentShaderPath) {
+   const std::string& fragmentShaderPath) {
 	const std::string path = fragmentShaderPath;
-	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
-	                       fragmentShaderPath);
+	core::Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
+	                            fragmentShaderPath);
 	return mImpl->mTextures->getDynamic(path, program,
 	                                    glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));;
 }
 
 core::Texture3D* Engine::storeTexture3D(
-    const std::string& posX,
-    const std::string& negX,
-    const std::string& posY,
-    const std::string& negY,
-    const std::string& posZ,
-    const std::string& negZ) {
+   const std::string& posX,
+   const std::string& negX,
+   const std::string& posY,
+   const std::string& negY,
+   const std::string& posZ,
+   const std::string& negZ) {
 	return mImpl->mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
 
@@ -204,12 +204,12 @@ void Engine::clearFocus(eEventType eventType) {
 }
 
 pText Engine::storeText(
-    std::string content,
-    std::string fontName,
-    glm::vec2 position,
-    GLfloat scale,
-    glm::vec4 color,
-    eTextEffect effect) {
+   std::string content,
+   std::string fontName,
+   glm::vec2 position,
+   GLfloat scale,
+   glm::vec4 color,
+   eTextEffect effect) {
 	/* Check for the font texture */
 	if (not mImpl->mTextures->get(fontName + ".png")) {
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
@@ -335,13 +335,13 @@ framework::TextureSystem* Engine::getTextureSystem() const {
 }
 
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
-    const std::string& shapePath) {
+   const std::string& shapePath) {
 	PhysicsMeshBuffer* buffer = new PhysicsMeshBuffer();
 	const fScene* scene = mImpl->mImporter.ReadFile(
-	                          (mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
-	                          FILLWAVE_PROCESS_TRIANGULATE |
-	                          FILLWAVE_PROCESS_SORT_BY_P_TYPE |
-	                          FILLWAVE_PROCESS_CALC_TANGENT_SPACE);
+	                         (mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
+	                         FILLWAVE_PROCESS_TRIANGULATE |
+	                         FILLWAVE_PROCESS_SORT_BY_P_TYPE |
+	                         FILLWAVE_PROCESS_CALC_TANGENT_SPACE);
 	if (scene) {
 		for (GLuint i = 0; i < scene->mNumMeshes; i++) {
 			const fMesh* shape = scene->mMeshes[i];
@@ -365,27 +365,27 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 }
 
 void Engine::addPostProcess(
-    const std::string& fragmentShaderPath,
-    GLfloat lifeTime) {
-	pProgram program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
-	                       fragmentShaderPath);
+   const std::string& fragmentShaderPath,
+   GLfloat lifeTime) {
+	core::Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
+	                            fragmentShaderPath);
 	core::PostProcessingPass pass(program,
 	                              mImpl->mTextures->getDynamic(fragmentShaderPath, program,
-	                                      glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)), lifeTime);
+	                                    glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)), lifeTime);
 	mImpl->mPostProcessingPasses.push_back(pass);
 	FLOG_DEBUG("Post processing pass added: %s", fragmentShaderPath.c_str());
 }
 
 void Engine::configureFPSCounter(
-    std::string fontName,
-    glm::vec2 position,
-    GLfloat size) {
+   std::string fontName,
+   glm::vec2 position,
+   GLfloat size) {
 	if (fontName.size() > 1) {
 		mImpl->mFPSText = storeText("", fontName, position, size);
 
 		/* Provide callback to refresh the FPS value */
 		mImpl->mTextFPSCallback = new framework::FPSCallback(this,
-		        mImpl->mFPSText);
+		      mImpl->mFPSText);
 		registerCallback(mImpl->mTextFPSCallback);
 	} else {
 		mImpl->mFPSText.reset();
@@ -472,10 +472,10 @@ void Engine::captureFramebufferToFile(const std::string& name) {
 }
 
 void Engine::captureFramebufferToBuffer(
-    GLubyte* buffer,
-    GLint* sizeInBytes,
-    GLuint format,
-    GLint bytesPerPixel) {
+   GLubyte* buffer,
+   GLint* sizeInBytes,
+   GLuint format,
+   GLint bytesPerPixel) {
 	mImpl->mPickingRenderableTexture->bindForRendering();
 	mImpl->drawClear();
 	mImpl->mScene->draw();
@@ -498,47 +498,53 @@ const fScene* Engine::getModelFromFile(std::string path) {
 	return nullptr;
 #else
 	return mImpl->mImporter.ReadFile(
-	           (mImpl->mFileLoader.getRootPath() + path).c_str(),
-	           aiProcess_Triangulate | aiProcess_SortByPType
-	           | aiProcess_CalcTangentSpace);
+	          (mImpl->mFileLoader.getRootPath() + path).c_str(),
+	          aiProcess_Triangulate | aiProcess_SortByPType
+	          | aiProcess_CalcTangentSpace);
 #endif
 }
 
 template <GLuint T>
-pShader Engine::storeShader(const std::string& shaderPath) {
+core::Shader* Engine::storeShader(const std::string& shaderPath) {
 	std::string shaderSource = "";
 	const std::string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
 	ReadFile(fullPath, shaderSource);
-	return mImpl->mShaders.add(fullPath, T, shaderSource);
+	return mImpl->mShaders.store(fullPath, T, shaderSource);
 }
 
 template <GLuint T>
-pShader Engine::storeShader(
-    const std::string& shaderPath,
-    const std::string& shaderSource) {
+core::Shader* Engine::storeShader(
+   const std::string& shaderPath,
+   const std::string& shaderSource) {
 	const std::string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
-	return mImpl->mShaders.add(fullPath, T, shaderSource);
+	return mImpl->mShaders.store(fullPath, T, shaderSource);
 }
 
-template pShader Engine::storeShader<GL_VERTEX_SHADER>(const std::string&);
-template pShader Engine::storeShader<GL_FRAGMENT_SHADER>(const std::string&);
-template pShader Engine::storeShader<GL_VERTEX_SHADER>(const std::string&,
-        const std::string&);
-template pShader Engine::storeShader<GL_FRAGMENT_SHADER>(const std::string&,
-        const std::string&);
+template core::Shader* Engine::storeShader<GL_VERTEX_SHADER>
+(const std::string&);
+template core::Shader* Engine::storeShader<GL_FRAGMENT_SHADER>
+(const std::string&);
+template core::Shader* Engine::storeShader<GL_VERTEX_SHADER>(const std::string&,
+      const std::string&);
+template core::Shader* Engine::storeShader<GL_FRAGMENT_SHADER>
+(const std::string&,
+ const std::string&);
 #ifdef FILLWAVE_GLES_3_0
 #else
-template pShader Engine::storeShader<GL_TESS_CONTROL_SHADER>
+template core::Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>
 (const std::string&);
-template pShader Engine::storeShader<GL_TESS_EVALUATION_SHADER>
+template core::Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>
 (const std::string&);
-template pShader Engine::storeShader<GL_GEOMETRY_SHADER>(const std::string&);
-template pShader Engine::storeShader<GL_TESS_CONTROL_SHADER>(const std::string&,
-        const std::string&);
-template pShader Engine::storeShader<GL_TESS_EVALUATION_SHADER>
+template core::Shader* Engine::storeShader<GL_GEOMETRY_SHADER>
+(const std::string&);
+template core::Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>
+(const std::string&,
+ const std::string&);
+template core::Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>
 (const std::string&, const std::string&);
-template pShader Engine::storeShader<GL_GEOMETRY_SHADER>(const std::string&,
-        const std::string&);
+template core::Shader* Engine::storeShader<GL_GEOMETRY_SHADER>
+(const std::string&,
+ const std::string&);
 #endif
 
 void Engine::configureDebugger(eDebuggerState state) {

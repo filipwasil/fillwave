@@ -20,17 +20,17 @@ namespace framework {
  */
 
 class LightSpot: public Light {
-  protected:
+ protected:
 	core::Texture2DRenderable* mShadowTexture;
 	pCameraPerspective mShadowCamera;
 
-  public:
+ public:
 	LightSpot(
-	    core::Texture2DRenderable* shadowTexture,
-	    glm::vec3 position,
-	    glm::quat rotation,
-	    glm::vec4 intensity,
-	    pMoveable followed = pMoveable());
+	   core::Texture2DRenderable* shadowTexture,
+	   glm::vec3 position,
+	   glm::quat rotation,
+	   glm::vec4 intensity,
+	   pMoveable followed = pMoveable());
 
 	virtual ~LightSpot() = default;
 

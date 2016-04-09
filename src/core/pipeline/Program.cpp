@@ -17,7 +17,8 @@ using namespace std;
 namespace fillwave {
 namespace core {
 
-Program::Program(const std::vector<pShader>& shaders, GLboolean skipLinking) :
+Program::Program(const std::vector<core::Shader*>& shaders,
+                 GLboolean skipLinking) :
 	mDelayedLinking(skipLinking), mShaders(shaders) {
 	reload();
 }
@@ -31,7 +32,7 @@ Program::~Program() {
 	FLOG_CHECK("Delete program");
 }
 
-void Program::attach(pShader shader) {
+void Program::attach(core::Shader* shader) {
 	if (mHandle) {
 		glAttachShader(mHandle, shader->getHandle());
 		FLOG_CHECK("attach shader %d to program %d", shader->getHandle(),
@@ -39,7 +40,7 @@ void Program::attach(pShader shader) {
 	}
 }
 
-void Program::detach(pShader shader) {
+void Program::detach(core::Shader* shader) {
 	if (mHandle) {
 		glDetachShader(mHandle, shader->getHandle());
 		FLOG_CHECK("detach shader");
@@ -61,8 +62,7 @@ void Program::link() {
 		glGetProgramiv(mHandle, GL_INFO_LOG_LENGTH, &infoLogLength);
 
 		if (infoLogLength) {
-			GLchar* pInfoLog = new GLchar[infoLogLength];
-			if (pInfoLog) {
+			if (GLchar* pInfoLog = new GLchar[infoLogLength]) {
 				glGetProgramInfoLog(mHandle, infoLogLength, nullptr, pInfoLog);
 				FLOG_FATAL("linking : %s", pInfoLog);
 				delete pInfoLog;
@@ -257,10 +257,10 @@ void Program::getUniformBlock(std::string name, GLuint bindingPoint) {
 			                    nameFromProgram.data());
 			glUniformBlockBinding(mHandle, blockIndex, bindingPoint);
 			mUnifromBuffers.push_back(
-			    puUniformBuffer(
-			        new UniformBuffer(std::string(name), blockIndex,
-			                          uniformBlockSize, bindingPoint,
-			                          GL_DYNAMIC_DRAW)));
+			   puUniformBuffer(
+			      new UniformBuffer(std::string(name), blockIndex,
+			                        uniformBlockSize, bindingPoint,
+			                        GL_DYNAMIC_DRAW)));
 		}
 	}
 }

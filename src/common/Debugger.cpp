@@ -45,32 +45,32 @@ Debugger::Debugger(Engine* engine) :
 void Debugger::setState(eDebuggerState state) {
 	if (state == eDebuggerState::eToggleState) {
 		switch (mState) {
-		case eDebuggerState::eLightsSpot:
-			mState = eDebuggerState::eLightsSpotDepth;
-			break;
-		case eDebuggerState::eLightsSpotDepth:
-			mState = eDebuggerState::eLightsSpotColor;
-			break;
-		case eDebuggerState::eLightsSpotColor:
-			mState = eDebuggerState::eLightsPoint;
-			break;
-		case eDebuggerState::eLightsPoint:
-			mState = eDebuggerState::eLightsPointDepth;
-			break;
-		case eDebuggerState::eLightsPointDepth:
-			mState = eDebuggerState::eLightsPointColor;
-			break;
-		case eDebuggerState::eLightsPointColor:
-			mState = eDebuggerState::ePickingMap;
-			break;
-		case eDebuggerState::ePickingMap:
-			mState = eDebuggerState::eOff;
-			break;
-		case eDebuggerState::eOff:
-			mState = eDebuggerState::eLightsSpot;
-			break;
-		default:
-			break;
+			case eDebuggerState::eLightsSpot:
+				mState = eDebuggerState::eLightsSpotDepth;
+				break;
+			case eDebuggerState::eLightsSpotDepth:
+				mState = eDebuggerState::eLightsSpotColor;
+				break;
+			case eDebuggerState::eLightsSpotColor:
+				mState = eDebuggerState::eLightsPoint;
+				break;
+			case eDebuggerState::eLightsPoint:
+				mState = eDebuggerState::eLightsPointDepth;
+				break;
+			case eDebuggerState::eLightsPointDepth:
+				mState = eDebuggerState::eLightsPointColor;
+				break;
+			case eDebuggerState::eLightsPointColor:
+				mState = eDebuggerState::ePickingMap;
+				break;
+			case eDebuggerState::ePickingMap:
+				mState = eDebuggerState::eOff;
+				break;
+			case eDebuggerState::eOff:
+				mState = eDebuggerState::eLightsSpot;
+				break;
+			default:
+				break;
 		}
 	} else {
 		mState = state;
@@ -121,7 +121,7 @@ void Debugger::renderDepthOrthographic(GLint
 	mVAO->bind();
 
 	LightDirectional* light =
-	    mEngine->getLightSystem()->mLightsDirectional[id].get();
+	   mEngine->getLightSystem()->mLightsDirectional[id].get();
 
 	ICamera* cam = light->getShadowCamera().get();
 

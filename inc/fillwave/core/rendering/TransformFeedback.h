@@ -20,7 +20,7 @@ namespace core {
  */
 
 class TransformFeedback: public GLObject {
-  public:
+ public:
 	TransformFeedback(GLsizei howMany = 1);
 
 	virtual ~TransformFeedback();
@@ -35,7 +35,7 @@ class TransformFeedback: public GLObject {
 
 	static void resume();
 
-  private:
+ private:
 	GLuint mTarget;
 };
 

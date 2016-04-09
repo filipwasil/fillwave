@@ -15,7 +15,7 @@ FLOGINIT("PickableModel", FERROR | FFATAL)
 PickableModel::PickableModel(std::string name,
                              pText text,
                              Engine* engine,
-                             pProgram program,
+                             core::Program* program,
                              const std::string& shapePath,
                              const std::string& texturePath):framework::Model(engine,
                                                                            program,

@@ -18,16 +18,16 @@ namespace framework {
  */
 
 class CameraPerspective: public ICamera {
-  private:
+ private:
 	GLfloat mProjectionFovy, mProjectionAspectRatio, mProjectionNearPlane,
 	        mProjectionFarPlane;
 
-  public:
+ public:
 	CameraPerspective();
 
 	CameraPerspective(glm::vec3 position, glm::quat rotation, GLfloat fovy =
-	                      glm::radians(90.0f), GLfloat aspectRatio = 1.0f, GLfloat nearPlane =
-	                      0.01f, GLfloat farPlane = 100.0f);
+	                     glm::radians(90.0f), GLfloat aspectRatio = 1.0f, GLfloat nearPlane =
+	                     0.01f, GLfloat farPlane = 100.0f);
 
 	virtual ~CameraPerspective() = default;
 

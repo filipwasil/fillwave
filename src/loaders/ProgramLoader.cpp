@@ -49,72 +49,72 @@ const std::string gGLBones = "uniform mat4 uBones["
                              + to_string(FILLWAVE_MAX_BONES) + "];\n";
 
 const std::string gGLVSAttributes =
-    "layout(location = 0) " + gGLVaryingIn
-    + " vec4 aPosition;                        \n"
-    "layout(location = 1) " + gGLVaryingIn
-    + " vec4 aColor;                           \n"
-    "layout(location = 2) " + gGLVaryingIn
-    + " vec3 aNormal;                          \n"
-    "layout(location = 3) " + gGLVaryingIn
-    + " vec3 aNormalTangent;                   \n"
-    "layout(location = 4) " + gGLVaryingIn
-    + " vec2 aTextureCoordinate;               \n"
+   "layout(location = 0) " + gGLVaryingIn
+   + " vec4 aPosition;                        \n"
+   "layout(location = 1) " + gGLVaryingIn
+   + " vec4 aColor;                           \n"
+   "layout(location = 2) " + gGLVaryingIn
+   + " vec3 aNormal;                          \n"
+   "layout(location = 3) " + gGLVaryingIn
+   + " vec3 aNormalTangent;                   \n"
+   "layout(location = 4) " + gGLVaryingIn
+   + " vec2 aTextureCoordinate;               \n"
 #if FILLWAVE_MAX_BONES_DEPENDENCIES == 8
-    "layout(location = 5) " + gGLVaryingIn +
-    " ivec4 aBoneID;                         \n"
-    "layout(location = 6) " + gGLVaryingIn +
-    " ivec4 aBoneID2;                        \n"
-    "layout(location = 7) " + gGLVaryingIn +
-    " vec4 aWeight;                          \n"
-    "layout(location = 8) " + gGLVaryingIn +
-    " vec4 aWeight2;                         \n";
+   "layout(location = 5) " + gGLVaryingIn +
+   " ivec4 aBoneID;                         \n"
+   "layout(location = 6) " + gGLVaryingIn +
+   " ivec4 aBoneID2;                        \n"
+   "layout(location = 7) " + gGLVaryingIn +
+   " vec4 aWeight;                          \n"
+   "layout(location = 8) " + gGLVaryingIn +
+   " vec4 aWeight2;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 7
-    "layout(location = 5) " + gGLVaryingIn +
-    " ivec4 aBoneID;                         \n"
-    "layout(location = 6) " + gGLVaryingIn +
-    " ivec3 aBoneID2;                        \n"
-    "layout(location = 7) " + gGLVaryingIn +
-    " vec4 aWeight;                          \n"
-    "layout(location = 8) " + gGLVaryingIn +
-    " vec3 aWeight2;                         \n";
+   "layout(location = 5) " + gGLVaryingIn +
+   " ivec4 aBoneID;                         \n"
+   "layout(location = 6) " + gGLVaryingIn +
+   " ivec3 aBoneID2;                        \n"
+   "layout(location = 7) " + gGLVaryingIn +
+   " vec4 aWeight;                          \n"
+   "layout(location = 8) " + gGLVaryingIn +
+   " vec3 aWeight2;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 6
-    "layout(location = 5) " + gGLVaryingIn +
-    " ivec4 aBoneID;                         \n"
-    "layout(location = 6) " + gGLVaryingIn +
-    " ivec2 aBoneID2;                        \n"
-    "layout(location = 7) " + gGLVaryingIn +
-    " vec4 aWeight;                          \n"
-    "layout(location = 8) " + gGLVaryingIn +
-    " vec2 aWeight2;                         \n";
+   "layout(location = 5) " + gGLVaryingIn +
+   " ivec4 aBoneID;                         \n"
+   "layout(location = 6) " + gGLVaryingIn +
+   " ivec2 aBoneID2;                        \n"
+   "layout(location = 7) " + gGLVaryingIn +
+   " vec4 aWeight;                          \n"
+   "layout(location = 8) " + gGLVaryingIn +
+   " vec2 aWeight2;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 5
-    "layout(location = 5) " + gGLVaryingIn +
-    " ivec4 aBoneID;                         \n"
-    "layout(location = 6) " + gGLVaryingIn +
-    " int aBoneID2;                          \n"
-    "layout(location = 7) " + gGLVaryingIn +
-    " vec4 aWeight;                          \n"
-    "layout(location = 8) " + gGLVaryingIn +
-    " float aWeight2;                        \n";
+   "layout(location = 5) " + gGLVaryingIn +
+   " ivec4 aBoneID;                         \n"
+   "layout(location = 6) " + gGLVaryingIn +
+   " int aBoneID2;                          \n"
+   "layout(location = 7) " + gGLVaryingIn +
+   " vec4 aWeight;                          \n"
+   "layout(location = 8) " + gGLVaryingIn +
+   " float aWeight2;                        \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 4
-    "layout(location = 5) " + gGLVaryingIn
-    + " ivec4 aBoneID;                         \n"
-    "layout(location = 6) " + gGLVaryingIn
-    + " vec4 aWeight;                          \n";
+   "layout(location = 5) " + gGLVaryingIn
+   + " ivec4 aBoneID;                         \n"
+   "layout(location = 6) " + gGLVaryingIn
+   + " vec4 aWeight;                          \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 3
-    "layout(location = 5) " + gGLVaryingIn +
-    " ivec3 aBoneID;                         \n"
-    "layout(location = 6) " + gGLVaryingIn +
-    " vec3 aWeight;                          \n";
+   "layout(location = 5) " + gGLVaryingIn +
+   " ivec3 aBoneID;                         \n"
+   "layout(location = 6) " + gGLVaryingIn +
+   " vec3 aWeight;                          \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 2
-    "layout(location = 5) " + gGLVaryingIn +
-    " ivec2 aBoneID;                         \n"
-    "layout(location = 6) " + gGLVaryingIn +
-    " vec2 aWeight;                          \n";
+   "layout(location = 5) " + gGLVaryingIn +
+   " ivec2 aBoneID;                         \n"
+   "layout(location = 6) " + gGLVaryingIn +
+   " vec2 aWeight;                          \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 1
-    "layout(location = 5) " + gGLVaryingIn +
-    " int aBoneID;                           \n"
-    "layout(location = 6) " + gGLVaryingIn +
-    " float aWeight;                         \n";
+   "layout(location = 5) " + gGLVaryingIn +
+   " int aBoneID;                           \n"
+   "layout(location = 6) " + gGLVaryingIn +
+   " float aWeight;                         \n";
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 0
 #else
 #error "Too many bone dependencies"
@@ -122,56 +122,56 @@ const std::string gGLVSAttributes =
 
 const std::string gGLVSBonesTransformation =
 #if FILLWAVE_MAX_BONES_DEPENDENCIES == 8
-    "      uBones[aBoneID.x] * aWeight.x +                          \n"
-    "      uBones[aBoneID.y] * aWeight.y +                          \n"
-    "      uBones[aBoneID.z] * aWeight.z +                          \n"
-    "      uBones[aBoneID.w] * aWeight.w +                          \n"
-    "      uBones[aBoneID2.x] * aWeight2.x +                        \n"
-    "      uBones[aBoneID2.y] * aWeight2.y +                        \n"
-    "      uBones[aBoneID2.z] * aWeight2.z +                        \n"
-    "      uBones[aBoneID2.w] * aWeight2.w                          \n"
+   "      uBones[aBoneID.x] * aWeight.x +                          \n"
+   "      uBones[aBoneID.y] * aWeight.y +                          \n"
+   "      uBones[aBoneID.z] * aWeight.z +                          \n"
+   "      uBones[aBoneID.w] * aWeight.w +                          \n"
+   "      uBones[aBoneID2.x] * aWeight2.x +                        \n"
+   "      uBones[aBoneID2.y] * aWeight2.y +                        \n"
+   "      uBones[aBoneID2.z] * aWeight2.z +                        \n"
+   "      uBones[aBoneID2.w] * aWeight2.w                          \n"
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 7
-    "      uBones[aBoneID.x] * aWeight.x +                          \n"
-    "      uBones[aBoneID.y] * aWeight.y +                          \n"
-    "      uBones[aBoneID.z] * aWeight.z +                          \n"
-    "      uBones[aBoneID.w] * aWeight.w +                          \n"
-    "      uBones[aBoneID2.x] * aWeight2.x +                        \n"
-    "      uBones[aBoneID2.y] * aWeight2.y +                        \n"
-    "      uBones[aBoneID2.z] * aWeight2.z                          \n"
+   "      uBones[aBoneID.x] * aWeight.x +                          \n"
+   "      uBones[aBoneID.y] * aWeight.y +                          \n"
+   "      uBones[aBoneID.z] * aWeight.z +                          \n"
+   "      uBones[aBoneID.w] * aWeight.w +                          \n"
+   "      uBones[aBoneID2.x] * aWeight2.x +                        \n"
+   "      uBones[aBoneID2.y] * aWeight2.y +                        \n"
+   "      uBones[aBoneID2.z] * aWeight2.z                          \n"
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 6
-    "      uBones[aBoneID.x] * aWeight.x +                          \n"
-    "      uBones[aBoneID.y] * aWeight.y +                          \n"
-    "      uBones[aBoneID.z] * aWeight.z +                          \n"
-    "      uBones[aBoneID.w] * aWeight.w +                          \n"
-    "      uBones[aBoneID2.x] * aWeight2.x +                        \n"
-    "      uBones[aBoneID2.y] * aWeight2.y                          \n"
+   "      uBones[aBoneID.x] * aWeight.x +                          \n"
+   "      uBones[aBoneID.y] * aWeight.y +                          \n"
+   "      uBones[aBoneID.z] * aWeight.z +                          \n"
+   "      uBones[aBoneID.w] * aWeight.w +                          \n"
+   "      uBones[aBoneID2.x] * aWeight2.x +                        \n"
+   "      uBones[aBoneID2.y] * aWeight2.y                          \n"
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 5
-    "      uBones[aBoneID.x] * aWeight.x +                          \n"
-    "      uBones[aBoneID.y] * aWeight.y +                          \n"
-    "      uBones[aBoneID.z] * aWeight.z +                          \n"
-    "      uBones[aBoneID.w] * aWeight.w +                          \n"
-    "      uBones[aBoneID2.x] * aWeight2.x                          \n"
+   "      uBones[aBoneID.x] * aWeight.x +                          \n"
+   "      uBones[aBoneID.y] * aWeight.y +                          \n"
+   "      uBones[aBoneID.z] * aWeight.z +                          \n"
+   "      uBones[aBoneID.w] * aWeight.w +                          \n"
+   "      uBones[aBoneID2.x] * aWeight2.x                          \n"
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 4
-    "      uBones[aBoneID.x] * aWeight.x +                          \n"
-    "      uBones[aBoneID.y] * aWeight.y +                          \n"
-    "      uBones[aBoneID.z] * aWeight.z +                          \n"
-    "      uBones[aBoneID.w] * aWeight.w                            \n"
+   "      uBones[aBoneID.x] * aWeight.x +                          \n"
+   "      uBones[aBoneID.y] * aWeight.y +                          \n"
+   "      uBones[aBoneID.z] * aWeight.z +                          \n"
+   "      uBones[aBoneID.w] * aWeight.w                            \n"
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 3
-    "      uBones[aBoneID.x] * aWeight.x +                          \n"
-    "      uBones[aBoneID.y] * aWeight.y +                          \n"
-    "      uBones[aBoneID.z] * aWeight.z                            \n"
+   "      uBones[aBoneID.x] * aWeight.x +                          \n"
+   "      uBones[aBoneID.y] * aWeight.y +                          \n"
+   "      uBones[aBoneID.z] * aWeight.z                            \n"
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 2
-    "      uBones[aBoneID.x] * aWeight.x +                          \n"
-    "      uBones[aBoneID.y] * aWeight.y                            \n"
+   "      uBones[aBoneID.x] * aWeight.x +                          \n"
+   "      uBones[aBoneID.y] * aWeight.y                            \n"
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 1
-    "      uBones[aBoneID.x] * aWeight.x                            \n"
+   "      uBones[aBoneID.x] * aWeight.x                            \n"
 #elif FILLWAVE_MAX_BONES_DEPENDENCIES == 0
 #else
 #error "Too many bone dependencies"
 #endif
-    ;
+   ;
 const std::string gGLVSAttributesPosition = "layout(location = 0) "
-        + gGLVaryingIn + " vec4 aPosition;                        \n";
+      + gGLVaryingIn + " vec4 aPosition;                        \n";
 
 const std::string gGLVSAttributesQuad = "layout (location = 0) " + gGLVaryingIn
                                         + " vec2 aPosition;\n"
@@ -179,22 +179,22 @@ const std::string gGLVSAttributesQuad = "layout (location = 0) " + gGLVaryingIn
                                         + " vec2 aTextureCoordinate;              \n";
 
 const std::string gGLVSAttributesEmiterCPU = "layout (location = 0) "
-        + gGLVaryingIn + " vec3 aVelocity;\n"
-        "layout (location = 1) " + gGLVaryingIn + " vec3 aStartPosition;\n"
-        "layout (location = 2) " + gGLVaryingIn + " float aStartTime;\n";
+      + gGLVaryingIn + " vec3 aVelocity;\n"
+      "layout (location = 1) " + gGLVaryingIn + " vec3 aStartPosition;\n"
+      "layout (location = 2) " + gGLVaryingIn + " float aStartTime;\n";
 
 const std::string gGLVSAttributesEmiter = "layout(location = 0) " + gGLVaryingIn
-        + " vec3 aPosition;                             \n"
-        "layout(location = 1) " + gGLVaryingIn
-        + " vec3 aVelocity;                             \n"
-        "layout(location = 2) " + gGLVaryingIn
-        + " float aSize;                                \n"
-        "layout(location = 3) " + gGLVaryingIn
-        + " float aCurtime;                             \n"
-        "layout(location = 4) " + gGLVaryingIn
-        + " float aLifetime;                            \n"
-        "layout(location = 5) " + gGLVaryingIn
-        + " float aCameraDistance;                      \n";
+      + " vec3 aPosition;                             \n"
+      "layout(location = 1) " + gGLVaryingIn
+      + " vec3 aVelocity;                             \n"
+      "layout(location = 2) " + gGLVaryingIn
+      + " float aSize;                                \n"
+      "layout(location = 3) " + gGLVaryingIn
+      + " float aCurtime;                             \n"
+      "layout(location = 4) " + gGLVaryingIn
+      + " float aLifetime;                            \n"
+      "layout(location = 5) " + gGLVaryingIn
+      + " float aCameraDistance;                      \n";
 
 const std::string gGLVSAttributesAO = "layout(location = 0) " + gGLVaryingIn
                                       + " vec4 aPosition;\n"
@@ -267,16 +267,16 @@ const std::string vsShadowColorCoded = gGLVersion + gGLVSAttributes
                                        "}\n";
 
 const std::string vsShadowColorCodedAnimated =
-    gGLVersion + gGLVSAttributes + gGLBones
-    + "uniform mat4 uMVP;                              \n"
-    "uniform mat4 uModelMatrix;                      \n"
-    "out vec3 vWorldSpacePosition;                   \n"
-    "void main() {\n"
-    "   mat4 transformation = " + gGLVSBonesTransformation
-    + "           ;\n"
-    "   gl_Position = uMVP * transformation * aPosition;\n"
-    "   vWorldSpacePosition = (uModelMatrix * transformation * aPosition).xyz;\n"
-    "}\n";
+   gGLVersion + gGLVSAttributes + gGLBones
+   + "uniform mat4 uMVP;                              \n"
+   "uniform mat4 uModelMatrix;                      \n"
+   "out vec3 vWorldSpacePosition;                   \n"
+   "void main() {\n"
+   "   mat4 transformation = " + gGLVSBonesTransformation
+   + "           ;\n"
+   "   gl_Position = uMVP * transformation * aPosition;\n"
+   "   vWorldSpacePosition = (uModelMatrix * transformation * aPosition).xyz;\n"
+   "}\n";
 
 const std::string fsShadowColorCoded = gGLVersion + gGLFragmentPrecision
                                        + "in vec3 vWorldSpacePosition;\n"
@@ -289,21 +289,21 @@ const std::string fsShadowColorCoded = gGLVersion + gGLFragmentPrecision
 /* xxx double check this case "out float fColor;\n" */
 
 const std::string fsDebugger =
-    gGLVersion + gGLFragmentPrecision
-    + //xxx low precision
-    "in vec2 vTextureCoordinate;\n"
-    "uniform sampler2D uTextureUnit;\n"
-    "uniform float uNearplane;\n"
-    "uniform float uFarPlane;\n" + gGLColorOutDefinition
-    + "float linearizeDepth(float depth) {\n"
-    "   return (2.0 * uNearplane) / (uFarPlane + uNearplane - depth * (uFarPlane - uNearplane));\n"
-    "}\n"
-    "void main () {\n"
-    "  vec4 depth = texture (uTextureUnit, vTextureCoordinate);\n"
-    "  float depthLin = linearizeDepth(depth.z);\n"
-    "  " + gGLColorOutAssingment
-    + " = vec4(depthLin, depthLin, depthLin,1.0);\n"
-    "}\n";
+   gGLVersion + gGLFragmentPrecision
+   + //xxx low precision
+   "in vec2 vTextureCoordinate;\n"
+   "uniform sampler2D uTextureUnit;\n"
+   "uniform float uNearplane;\n"
+   "uniform float uFarPlane;\n" + gGLColorOutDefinition
+   + "float linearizeDepth(float depth) {\n"
+   "   return (2.0 * uNearplane) / (uFarPlane + uNearplane - depth * (uFarPlane - uNearplane));\n"
+   "}\n"
+   "void main () {\n"
+   "  vec4 depth = texture (uTextureUnit, vTextureCoordinate);\n"
+   "  float depthLin = linearizeDepth(depth.z);\n"
+   "  " + gGLColorOutAssingment
+   + " = vec4(depthLin, depthLin, depthLin,1.0);\n"
+   "}\n";
 
 const std::string vsDebugger = gGLVersion + gGLVertexPrecision
                                + gGLVSAttributesQuad + "out vec2 vTextureCoordinate;\n"
@@ -339,17 +339,17 @@ const std::string fsSkyboxDR = gGLVersion + gGLFragmentPrecision +
                                "}\n";
 
 const std::string vsSkybox =
-    gGLVersion + gGLVertexPrecision + gGLVSAttributesPosition
-    + "uniform mat4 uModelMatrix;\n"
-    "uniform mat4 uViewProjectionMatrix;\n"
-    "uniform vec3 uCameraPosition;\n"
-    "out vec3 vTextureCoordinate;\n"
-    "void main() {\n"
-    "   vec4 position = uViewProjectionMatrix *\n"
-    "                   vec4((uModelMatrix * aPosition).xyz + uCameraPosition, aPosition.a);\n"
-    "   gl_Position = position;\n"
-    "   vTextureCoordinate = aPosition.xyz;\n"
-    "}\n";
+   gGLVersion + gGLVertexPrecision + gGLVSAttributesPosition
+   + "uniform mat4 uModelMatrix;\n"
+   "uniform mat4 uViewProjectionMatrix;\n"
+   "uniform vec3 uCameraPosition;\n"
+   "out vec3 vTextureCoordinate;\n"
+   "void main() {\n"
+   "   vec4 position = uViewProjectionMatrix *\n"
+   "                   vec4((uModelMatrix * aPosition).xyz + uCameraPosition, aPosition.a);\n"
+   "   gl_Position = position;\n"
+   "   vTextureCoordinate = aPosition.xyz;\n"
+   "}\n";
 
 const std::string fsDRAmbientG = gGLVersion + gGLFragmentPrecision +
 
@@ -408,36 +408,36 @@ const std::string vsHUD = gGLVersion + gGLVertexPrecision
                           "}\n";
 
 const std::string fsText =
-    gGLVersion + gGLFragmentPrecision
-    + //xxx low precision
-    "in vec2 vTextureCoordinate;\n"
-    "uniform sampler2D uTextureUnit;\n"
-    "uniform vec4 uColour;\n" + gGLColorOutDefinition
-    + "void main (){\n"
-    "  float pixelSize = 0.001;\n"
-    "  vec4 color = vec4(0.0);\n"
-    "  for (float i=-1.0;i<=1.0;i++)\n"
-    "     for (float j=-1.0;j<=1.0;j++)\n"
-    "        color += texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour;\n"
-    "  " + gGLColorOutAssingment + " = color * 0.11;\n"
-    "}\n"
-    "\n";
+   gGLVersion + gGLFragmentPrecision
+   + //xxx low precision
+   "in vec2 vTextureCoordinate;\n"
+   "uniform sampler2D uTextureUnit;\n"
+   "uniform vec4 uColour;\n" + gGLColorOutDefinition
+   + "void main (){\n"
+   "  float pixelSize = 0.001;\n"
+   "  vec4 color = vec4(0.0);\n"
+   "  for (float i=-1.0;i<=1.0;i++)\n"
+   "     for (float j=-1.0;j<=1.0;j++)\n"
+   "        color += texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour;\n"
+   "  " + gGLColorOutAssingment + " = color * 0.11;\n"
+   "}\n"
+   "\n";
 
 const std::string fsTextBold =
-    gGLVersion + gGLFragmentPrecision
-    + //xxx low precision
-    "in vec2 vTextureCoordinate;\n"
-    "uniform sampler2D uTextureUnit;\n"
-    "uniform vec4 uColour;\n" + gGLColorOutDefinition
-    + "void main (){\n"
-    "  float pixelSize = 0.001;\n"
-    "  vec4 color = vec4(0.0);\n"
-    "  for (float i=-1.0;i<=1.0;i++)\n"
-    "     for (float j=-1.0;j<=1.0;j++)\n"
-    "        color = max(texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour, color);\n"
-    "" + gGLColorOutAssingment + " = color;\n"
-    "}\n"
-    "\n";
+   gGLVersion + gGLFragmentPrecision
+   + //xxx low precision
+   "in vec2 vTextureCoordinate;\n"
+   "uniform sampler2D uTextureUnit;\n"
+   "uniform vec4 uColour;\n" + gGLColorOutDefinition
+   + "void main (){\n"
+   "  float pixelSize = 0.001;\n"
+   "  vec4 color = vec4(0.0);\n"
+   "  for (float i=-1.0;i<=1.0;i++)\n"
+   "     for (float j=-1.0;j<=1.0;j++)\n"
+   "        color = max(texture (uTextureUnit, vTextureCoordinate + pixelSize*vec2(i,j)) * uColour, color);\n"
+   "" + gGLColorOutAssingment + " = color;\n"
+   "}\n"
+   "\n";
 
 const std::string vsText = gGLVersion + gGLVertexPrecision + gGLVSAttributesQuad
                            + "out vec2 vTextureCoordinate;\n"
@@ -448,75 +448,75 @@ const std::string vsText = gGLVersion + gGLVertexPrecision + gGLVSAttributesQuad
                            "\n";
 
 const std::string vsGPUEmiter =
-    gGLVersion + gGLVSAttributesEmiter
-    + "uniform float uHowMany, uTime, uLifeTime, uEmissionRate;            \n"
-    "uniform mediump sampler3D uNoiseSampler;                            \n"
-    "uniform mat4 uModelMatrix;                                          \n"
-    "uniform vec3 uCameraPosition, uAcceleration;                        \n"
-    "uniform vec3 uStartVelocity, uStartPosition;                        \n"
-    "uniform vec3 uRobustnessVelocity, uRobustnessPosition;              \n"
-    "out vec3 tfPosition;                                                \n"
-    "out vec3 tfVelocity;                                                \n"
-    "out float tfSize;                                                   \n"
-    "out float tfCurtime;                                                \n"
-    "out float tfLifetime;                                               \n"
-    "out float tfCameraDistance;                                         \n"
-    "float randomValue( inout float seed ) {                             \n"
-    "   float vertexId = float( gl_VertexID ) / uHowMany;  \n"
-    "   vec3 texCoord = vec3( uTime, vertexId, seed );                   \n"
-    "   seed += 0.1;                                                     \n"
-    "   return texture( uNoiseSampler, texCoord ).r;\n"
-    "}                                                                   \n"
-    "void main() {                                                       \n"
-    "  float seed = uTime;                                               \n"
-    "  float lifetime = aCurtime - uTime;                                \n"
-    "  if( lifetime <= 0.0 && randomValue(seed) < uEmissionRate ) {      \n"
-    "     tfPosition = vec3( (randomValue(seed) - 0.45) * uRobustnessPosition.x + uStartPosition.x,"
-    "                        (randomValue(seed) - 0.45) * uRobustnessPosition.y + uStartPosition.y,"
-    "                        (randomValue(seed) - 0.45) * uRobustnessPosition.z + uStartPosition.z) ; \n"
-    "     tfVelocity = vec3( (randomValue(seed) - 0.45) * uRobustnessVelocity.x + uStartVelocity.x,"
-    "                        (randomValue(seed) - 0.45) * uRobustnessVelocity.y + uStartVelocity.y,"
-    "                        (randomValue(seed) - 0.45) * uRobustnessVelocity.z + uStartVelocity.z) ; \n"
-    "     tfSize = randomValue(seed) * 20.0 + 60.0;                      \n"
-    "     tfCurtime = uTime;                                             \n"
-    "     tfLifetime = uLifeTime;                                              \n"
-    "  } else {                                                          \n"
-    "     tfPosition = aPosition;                                        \n"
-    "     tfVelocity = aVelocity;                                        \n"
-    "     tfSize = aSize;                                                \n"
-    "     tfCurtime = aCurtime;                                          \n"
-    "     tfLifetime = aLifetime;                                        \n"
-    "  }                                                                 \n"
-    "  vec3 velocity = aVelocity + lifetime * uAcceleration;            \n"
-    "  vec3 position = aPosition + lifetime * velocity;                 \n"
-    "  vec4 positionInWorldSpace = uModelMatrix * vec4 (position, 1.0);  \n"
-    "  tfCameraDistance = length(uCameraPosition - positionInWorldSpace.xyz);\n"
-    "  gl_Position = vec4( tfPosition, 1.0 );                            \n"
-    "}                                                                   \n";
+   gGLVersion + gGLVSAttributesEmiter
+   + "uniform float uHowMany, uTime, uLifeTime, uEmissionRate;            \n"
+   "uniform mediump sampler3D uNoiseSampler;                            \n"
+   "uniform mat4 uModelMatrix;                                          \n"
+   "uniform vec3 uCameraPosition, uAcceleration;                        \n"
+   "uniform vec3 uStartVelocity, uStartPosition;                        \n"
+   "uniform vec3 uRobustnessVelocity, uRobustnessPosition;              \n"
+   "out vec3 tfPosition;                                                \n"
+   "out vec3 tfVelocity;                                                \n"
+   "out float tfSize;                                                   \n"
+   "out float tfCurtime;                                                \n"
+   "out float tfLifetime;                                               \n"
+   "out float tfCameraDistance;                                         \n"
+   "float randomValue( inout float seed ) {                             \n"
+   "   float vertexId = float( gl_VertexID ) / uHowMany;  \n"
+   "   vec3 texCoord = vec3( uTime, vertexId, seed );                   \n"
+   "   seed += 0.1;                                                     \n"
+   "   return texture( uNoiseSampler, texCoord ).r;\n"
+   "}                                                                   \n"
+   "void main() {                                                       \n"
+   "  float seed = uTime;                                               \n"
+   "  float lifetime = aCurtime - uTime;                                \n"
+   "  if( lifetime <= 0.0 && randomValue(seed) < uEmissionRate ) {      \n"
+   "     tfPosition = vec3( (randomValue(seed) - 0.45) * uRobustnessPosition.x + uStartPosition.x,"
+   "                        (randomValue(seed) - 0.45) * uRobustnessPosition.y + uStartPosition.y,"
+   "                        (randomValue(seed) - 0.45) * uRobustnessPosition.z + uStartPosition.z) ; \n"
+   "     tfVelocity = vec3( (randomValue(seed) - 0.45) * uRobustnessVelocity.x + uStartVelocity.x,"
+   "                        (randomValue(seed) - 0.45) * uRobustnessVelocity.y + uStartVelocity.y,"
+   "                        (randomValue(seed) - 0.45) * uRobustnessVelocity.z + uStartVelocity.z) ; \n"
+   "     tfSize = randomValue(seed) * 20.0 + 60.0;                      \n"
+   "     tfCurtime = uTime;                                             \n"
+   "     tfLifetime = uLifeTime;                                              \n"
+   "  } else {                                                          \n"
+   "     tfPosition = aPosition;                                        \n"
+   "     tfVelocity = aVelocity;                                        \n"
+   "     tfSize = aSize;                                                \n"
+   "     tfCurtime = aCurtime;                                          \n"
+   "     tfLifetime = aLifetime;                                        \n"
+   "  }                                                                 \n"
+   "  vec3 velocity = aVelocity + lifetime * uAcceleration;            \n"
+   "  vec3 position = aPosition + lifetime * velocity;                 \n"
+   "  vec4 positionInWorldSpace = uModelMatrix * vec4 (position, 1.0);  \n"
+   "  tfCameraDistance = length(uCameraPosition - positionInWorldSpace.xyz);\n"
+   "  gl_Position = vec4( tfPosition, 1.0 );                            \n"
+   "}                                                                   \n";
 
 const std::string vsParticlesGPU =
-    gGLVersion + gGLVSAttributesEmiter
-    +
+   gGLVersion + gGLVSAttributesEmiter
+   +
 
-    "uniform mat4 uModelMatrix, uViewProjectionMatrix;                    \n"
-    "uniform vec3 uCameraPosition;                                        \n"
-    "uniform float uTime, uStartSize;                                     \n"
-    "uniform vec3 uAcceleration;                                          \n"
-    "                                                                     \n"
-    "void main() {                                                        \n"
-    "  float deltaTime = uTime - aCurtime;                                \n"
-    "  if ( deltaTime <= aLifetime ) {                                    \n"
-    "    vec3 velocity = aVelocity + deltaTime * uAcceleration;           \n"
-    "    vec3 position = aPosition + deltaTime * velocity;                \n"
-    "    vec4 positionInWorldSpace = uModelMatrix * vec4 (position, 1.0); \n"
-    "    gl_Position = uViewProjectionMatrix * positionInWorldSpace;//gl_Position.z=1.0-vertexId;\n"
-    "    gl_PointSize = uStartSize * aSize * ( 1.0 - deltaTime / aLifetime ) * inversesqrt(length(positionInWorldSpace.xyz - uCameraPosition ));        \n"
-    "  }                                                                  \n"
-    "  else {                                                             \n"
-    "     gl_Position = vec4( -1000, -1000, 0, 0 );                       \n"
-    "     gl_PointSize = 0.0;                                             \n"
-    "  }                                                                  \n"
-    "}";
+   "uniform mat4 uModelMatrix, uViewProjectionMatrix;                    \n"
+   "uniform vec3 uCameraPosition;                                        \n"
+   "uniform float uTime, uStartSize;                                     \n"
+   "uniform vec3 uAcceleration;                                          \n"
+   "                                                                     \n"
+   "void main() {                                                        \n"
+   "  float deltaTime = uTime - aCurtime;                                \n"
+   "  if ( deltaTime <= aLifetime ) {                                    \n"
+   "    vec3 velocity = aVelocity + deltaTime * uAcceleration;           \n"
+   "    vec3 position = aPosition + deltaTime * velocity;                \n"
+   "    vec4 positionInWorldSpace = uModelMatrix * vec4 (position, 1.0); \n"
+   "    gl_Position = uViewProjectionMatrix * positionInWorldSpace;//gl_Position.z=1.0-vertexId;\n"
+   "    gl_PointSize = uStartSize * aSize * ( 1.0 - deltaTime / aLifetime ) * inversesqrt(length(positionInWorldSpace.xyz - uCameraPosition ));        \n"
+   "  }                                                                  \n"
+   "  else {                                                             \n"
+   "     gl_Position = vec4( -1000, -1000, 0, 0 );                       \n"
+   "     gl_PointSize = 0.0;                                             \n"
+   "  }                                                                  \n"
+   "}";
 
 const std::string fsParticlesGPU = gGLVersion + gGLFragmentPrecision
                                    + //xxx low precision
@@ -551,28 +551,28 @@ const std::string fsParticlesCPU = gGLVersion + gGLFragmentPrecision
                                    "}\n";
 
 const std::string vsParticlesCPU =
-    gGLVersion + gGLVertexPrecision + gGLVSAttributesEmiterCPU
-    + "uniform mat4 uModelMatrix, uViewProjectionMatrix;\n"
-    "uniform vec3 uPosition; //  position in world space\n"
-    "uniform float uTimeElapsed;   // time in seconds\n"
-    "uniform float uPointSize;   // time in seconds\n"
-    "uniform float uLifeTime;   // time in seconds\n"
-    "uniform vec3 uAcceleration;   // 2nd time integral\n"
-    "uniform vec3 uCameraPosition; // 2nd time integral\n"
-    "out float vOpacity;\n"
-    "void main() {\n"
-    "   float time = mod ( uTimeElapsed - aStartTime, uLifeTime );\n"
-    "   vOpacity = 0.0;\n"
-    "   vec3 p = uPosition;\n"
-    "   // acceleration\n"
-    "   //position\n"
-    "   p += aStartPosition + aVelocity * time + 0.5 * uAcceleration * time * time;\n"
-    "   // Fade to invisible after uLifeTime seconds\n"
-    "   vOpacity = 1.0 - (time / uLifeTime);\n"
-    "   vec4 positionInWorldSpace = uModelMatrix * vec4 (p, 1.0);\n"
-    "   gl_Position = uViewProjectionMatrix * positionInWorldSpace;\n"
-    "   gl_PointSize = uPointSize * inversesqrt(length(positionInWorldSpace.xyz - uCameraPosition )); // size in pixels\n"
-    "}\n";
+   gGLVersion + gGLVertexPrecision + gGLVSAttributesEmiterCPU
+   + "uniform mat4 uModelMatrix, uViewProjectionMatrix;\n"
+   "uniform vec3 uPosition; //  position in world space\n"
+   "uniform float uTimeElapsed;   // time in seconds\n"
+   "uniform float uPointSize;   // time in seconds\n"
+   "uniform float uLifeTime;   // time in seconds\n"
+   "uniform vec3 uAcceleration;   // 2nd time integral\n"
+   "uniform vec3 uCameraPosition; // 2nd time integral\n"
+   "out float vOpacity;\n"
+   "void main() {\n"
+   "   float time = mod ( uTimeElapsed - aStartTime, uLifeTime );\n"
+   "   vOpacity = 0.0;\n"
+   "   vec3 p = uPosition;\n"
+   "   // acceleration\n"
+   "   //position\n"
+   "   p += aStartPosition + aVelocity * time + 0.5 * uAcceleration * time * time;\n"
+   "   // Fade to invisible after uLifeTime seconds\n"
+   "   vOpacity = 1.0 - (time / uLifeTime);\n"
+   "   vec4 positionInWorldSpace = uModelMatrix * vec4 (p, 1.0);\n"
+   "   gl_Position = uViewProjectionMatrix * positionInWorldSpace;\n"
+   "   gl_PointSize = uPointSize * inversesqrt(length(positionInWorldSpace.xyz - uCameraPosition )); // size in pixels\n"
+   "}\n";
 
 const std::string vsQuad = gGLVersion + gGLVertexPrecision
                            + "out vec2 vPosition;\n"
@@ -598,47 +598,47 @@ const std::string vsQuad = gGLVersion + gGLVertexPrecision
                            "}\n";
 
 const std::string fsQuad =
-    gGLVersion + gGLFragmentPrecision
-    + "in vec2 vPosition;\n"
-    "out vec4 fColour;\n"
-    "uniform sampler2D uPostProcessingSampler;\n"
-    "void main () {\n"
-    "   //vec4 fColour = texture (uPostProcessingSampler, vec2((vPosition.x+1.0)/2.0, (vPosition.y+1.0)/2.0) );\n"
-    "   fColour = texture (uPostProcessingSampler, vec2((vPosition.x+1.0)/2.0, (vPosition.y+1.0)/2.0) );\n"
-    "}";
+   gGLVersion + gGLFragmentPrecision
+   + "in vec2 vPosition;\n"
+   "out vec4 fColour;\n"
+   "uniform sampler2D uPostProcessingSampler;\n"
+   "void main () {\n"
+   "   //vec4 fColour = texture (uPostProcessingSampler, vec2((vPosition.x+1.0)/2.0, (vPosition.y+1.0)/2.0) );\n"
+   "   fColour = texture (uPostProcessingSampler, vec2((vPosition.x+1.0)/2.0, (vPosition.y+1.0)/2.0) );\n"
+   "}";
 
 const std::string fsCursor =
-    gGLVersion + gGLFragmentPrecision
-    + "in vec2 vVertexOffset;\n"
-    "out vec4 fColour;\n"
-    "uniform sampler2D uTextureUnit;\n"
-    "void main () {\n"
-    "   fColour = texture (uTextureUnit, vec2((vVertexOffset.x+1.0)/2.0, (vVertexOffset.y+1.0)/2.0));\n"
-    "}\n";
+   gGLVersion + gGLFragmentPrecision
+   + "in vec2 vVertexOffset;\n"
+   "out vec4 fColour;\n"
+   "uniform sampler2D uTextureUnit;\n"
+   "void main () {\n"
+   "   fColour = texture (uTextureUnit, vec2((vVertexOffset.x+1.0)/2.0, (vVertexOffset.y+1.0)/2.0));\n"
+   "}\n";
 
 const std::string vsCursor =
-    gGLVersion + gGLVertexPrecision
-    + "uniform float uSize = 0.1;\n"
-    "uniform float uScreenFactor = 1.0;\n"
-    "uniform vec2 uPosition = vec2(0.0,0.0);\n"
-    "out vec2 vVertexOffset;\n"
-    "void main() {\n"
-    "   switch(gl_VertexID) {\n"
-    "      case 0:\n"
-    "         vVertexOffset = vec2(-1.0, 1.0);\n"
-    "         break;\n"
-    "      case 1:\n"
-    "         vVertexOffset = vec2(-1.0, -1.0);\n"
-    "         break;\n"
-    "      case 2:\n"
-    "         vVertexOffset = vec2(1.0, 1.0);\n"
-    "         break;\n"
-    "      case 3:\n"
-    "         vVertexOffset = vec2(1.0, -1.0);\n"
-    "      break;\n"
-    "   }\n"
-    "   gl_Position = vec4(uPosition.x + uSize * vVertexOffset.x, uPosition.y + uSize * vVertexOffset.y * uScreenFactor, 0.0, 1.0);\n"
-    "}\n";
+   gGLVersion + gGLVertexPrecision
+   + "uniform float uSize = 0.1;\n"
+   "uniform float uScreenFactor = 1.0;\n"
+   "uniform vec2 uPosition = vec2(0.0,0.0);\n"
+   "out vec2 vVertexOffset;\n"
+   "void main() {\n"
+   "   switch(gl_VertexID) {\n"
+   "      case 0:\n"
+   "         vVertexOffset = vec2(-1.0, 1.0);\n"
+   "         break;\n"
+   "      case 1:\n"
+   "         vVertexOffset = vec2(-1.0, -1.0);\n"
+   "         break;\n"
+   "      case 2:\n"
+   "         vVertexOffset = vec2(1.0, 1.0);\n"
+   "         break;\n"
+   "      case 3:\n"
+   "         vVertexOffset = vec2(1.0, -1.0);\n"
+   "      break;\n"
+   "   }\n"
+   "   gl_Position = vec4(uPosition.x + uSize * vVertexOffset.x, uPosition.y + uSize * vVertexOffset.y * uScreenFactor, 0.0, 1.0);\n"
+   "}\n";
 
 const std::string vsCube = gGLVersion + "uniform mat4 uMVP;\n"
                            "void main() {\n"
@@ -763,7 +763,7 @@ const std::string vsSimpleVertexPass = "uniform mat4 uMVP;\n"
                                        "}\n";
 
 const std::string vsOcclusionOptimized = gGLVersion + gGLVSAttributesPosition
-        + vsSimpleVertexPass; //xxx rename ?
+      + vsSimpleVertexPass; //xxx rename ?
 
 const std::string vsOcclusion = gGLVersion + gGLVSAttributes
                                 + vsSimpleVertexPass;
@@ -785,58 +785,58 @@ const std::string vsAOGeometry = gGLVersion + gGLVSAttributesAO
                                  "}\n";
 
 const std::string fsDR =
-    gGLVersion + "in vec4 vVertexWorldSpace;\n"
-    "in vec4 vColor;\n"
-    "in vec3 vVertexNormal;\n"
-    "in vec3 vVertexNormalTangent;\n"
-    "in vec2 vTextureCoordinate;\n"
+   gGLVersion + "in vec4 vVertexWorldSpace;\n"
+   "in vec4 vColor;\n"
+   "in vec3 vVertexNormal;\n"
+   "in vec3 vVertexNormalTangent;\n"
+   "in vec2 vTextureCoordinate;\n"
 
-    "layout (location = 0) " + gGLVaryingOut + " vec3 fWorldPosition;\n"
-    "layout (location = 1) " + gGLVaryingOut + " vec3 fDiffuseTexel;\n"
-    "layout (location = 2) " + gGLVaryingOut + " vec3 fNormal;\n"
-    "layout (location = 3) " + gGLVaryingOut
-    + " vec3 fSpecularTexel;\n"
+   "layout (location = 0) " + gGLVaryingOut + " vec3 fWorldPosition;\n"
+   "layout (location = 1) " + gGLVaryingOut + " vec3 fDiffuseTexel;\n"
+   "layout (location = 2) " + gGLVaryingOut + " vec3 fNormal;\n"
+   "layout (location = 3) " + gGLVaryingOut
+   + " vec3 fSpecularTexel;\n"
 
-    "uniform sampler2D uDiffuseTextureUnit;\n"
-    "uniform sampler2D uNormalTextureUnit;\n"
-    "uniform sampler2D uSpecularTextureUnit;\n"
+   "uniform sampler2D uDiffuseTextureUnit;\n"
+   "uniform sampler2D uNormalTextureUnit;\n"
+   "uniform sampler2D uSpecularTextureUnit;\n"
 
-    "void main() {\n"
+   "void main() {\n"
 #ifdef FILLWAVE_GLES_3_0
-    "   vec3 texelNormal = texture(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
+   "   vec3 texelNormal = texture(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
 #else
-    "   vec3 texelNormal = texture2D(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
+   "   vec3 texelNormal = texture2D(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
 #endif
 
-    "   vec3 Normal = normalize(vVertexNormal);\n"
-    "   vec3 Tangent = normalize(vVertexNormalTangent);\n"
+   "   vec3 Normal = normalize(vVertexNormal);\n"
+   "   vec3 Tangent = normalize(vVertexNormalTangent);\n"
 
-    "   Tangent = normalize(Tangent - dot(Tangent, Normal) * Normal);\n"
-    "   vec3 Bitangent = cross(Tangent, Normal);\n"
+   "   Tangent = normalize(Tangent - dot(Tangent, Normal) * Normal);\n"
+   "   vec3 Bitangent = cross(Tangent, Normal);\n"
 
-    "   vec3 vertexNormal;\n"
+   "   vec3 vertexNormal;\n"
 
-    "   /* Check if we use normal matrix or not */\n"
-    "   if (length(texelNormal.xyz) == 0.0) {\n"
-    "      vertexNormal = normalize (Normal);\n"
-    "   } else {\n"
-    "      texelNormal = 2.0 * texelNormal - vec3(1.0, 1.0, 1.0);\n"
-    "      mat3 TBN = ( mat3(Tangent, Bitangent, Normal) );\n"
-    "      vertexNormal = TBN * texelNormal;\n"
-    "      vertexNormal = normalize(vertexNormal);\n"
-    "   }\n"
+   "   /* Check if we use normal matrix or not */\n"
+   "   if (length(texelNormal.xyz) == 0.0) {\n"
+   "      vertexNormal = normalize (Normal);\n"
+   "   } else {\n"
+   "      texelNormal = 2.0 * texelNormal - vec3(1.0, 1.0, 1.0);\n"
+   "      mat3 TBN = ( mat3(Tangent, Bitangent, Normal) );\n"
+   "      vertexNormal = TBN * texelNormal;\n"
+   "      vertexNormal = normalize(vertexNormal);\n"
+   "   }\n"
 
-    "   fWorldPosition = vVertexWorldSpace.xyz;\n"
+   "   fWorldPosition = vVertexWorldSpace.xyz;\n"
 
 #ifdef FILLWAVE_GLES_3_0
-    "   fDiffuseTexel = texture(uDiffuseTextureUnit, vTextureCoordinate).xyz + vColor.xyz;\n"
-    "   fSpecularTexel = texture(uSpecularTextureUnit, vTextureCoordinate).rrr * 255.0;\n"
+   "   fDiffuseTexel = texture(uDiffuseTextureUnit, vTextureCoordinate).xyz + vColor.xyz;\n"
+   "   fSpecularTexel = texture(uSpecularTextureUnit, vTextureCoordinate).rrr * 255.0;\n"
 #else
-    "   fDiffuseTexel = texture2D(uDiffuseTextureUnit, vTextureCoordinate).xyz + vColor.xyz;\n"
-    "   fSpecularTexel = texture2D(uSpecularTextureUnit, vTextureCoordinate).rrr * 255.0;\n"
+   "   fDiffuseTexel = texture2D(uDiffuseTextureUnit, vTextureCoordinate).xyz + vColor.xyz;\n"
+   "   fSpecularTexel = texture2D(uSpecularTextureUnit, vTextureCoordinate).rrr * 255.0;\n"
 #endif
-    "   fNormal = vertexNormal;\n"
-    "}\n\n";
+   "   fNormal = vertexNormal;\n"
+   "}\n\n";
 
 std::string vsDRShaderQuad = gGLVersion + "void main() {\n"
                              "   vec4 vertexPosition;\n"
@@ -867,290 +867,290 @@ std::string vsDRLightDirectional = gGLVersion + gGLVSAttributesPosition +
                                    "}\n";
 
 std::string fsDRLightDirectional =
-    gGLVersion + gGLFragmentPrecision + gGLLightDefinitions
-    +
+   gGLVersion + gGLFragmentPrecision + gGLLightDefinitions
+   +
 
-    "uniform int uIsAO;\n"
-    "uniform sampler2D uAOMap;\n"
+   "uniform int uIsAO;\n"
+   "uniform sampler2D uAOMap;\n"
 
-    "uniform sampler2D uShadowMap;\n"
-    "uniform sampler2D uWorldPositionAttachment;\n"
-    "uniform sampler2D uDiffuseTexelAttachment;\n"
-    "uniform sampler2D uNormalAttachment;\n"
-    "uniform sampler2D uSpecularTexelAttachment;\n"
+   "uniform sampler2D uShadowMap;\n"
+   "uniform sampler2D uWorldPositionAttachment;\n"
+   "uniform sampler2D uDiffuseTexelAttachment;\n"
+   "uniform sampler2D uNormalAttachment;\n"
+   "uniform sampler2D uSpecularTexelAttachment;\n"
 
-    "uniform LightDirectional uLight;\n"
-    "uniform vec3 uCameraPosition;\n"
-    "uniform float uSpecularPower;\n"
-    "uniform vec2 uScreenSize;\n"
+   "uniform LightDirectional uLight;\n"
+   "uniform vec3 uCameraPosition;\n"
+   "uniform float uSpecularPower;\n"
+   "uniform vec2 uScreenSize;\n"
 
-    "vec2 CalcTexCoord() {\n"
-    "   return gl_FragCoord.xy / uScreenSize;\n"
-    "}\n"
+   "vec2 CalcTexCoord() {\n"
+   "   return gl_FragCoord.xy / uScreenSize;\n"
+   "}\n"
 
-    "vec4 CalcLightInternal(Light light,\n"
-    "   vec3 lightDirection,\n"
-    "   vec3 WorldPos,\n"
-    "   vec3 Normal,\n"
-    "   float specularTexel) {\n"
+   "vec4 CalcLightInternal(Light light,\n"
+   "   vec3 lightDirection,\n"
+   "   vec3 WorldPos,\n"
+   "   vec3 Normal,\n"
+   "   float specularTexel) {\n"
 
-    "   vec4 AmbientColor = vec4(light.color, 1.0) * light.ambientIntensity;\n"
+   "   vec4 AmbientColor = vec4(light.color, 1.0) * light.ambientIntensity;\n"
 
-    "   if (uIsAO != 0) {\n"
-    "      AmbientColor *= texture(uAOMap, CalcTexCoord()).r;\n"
-    "   }\n"
+   "   if (uIsAO != 0) {\n"
+   "      AmbientColor *= texture(uAOMap, CalcTexCoord()).r;\n"
+   "   }\n"
 
-    "   float DiffuseFactor = dot(Normal, -lightDirection);\n"
+   "   float DiffuseFactor = dot(Normal, -lightDirection);\n"
 
-    "   vec4 DiffuseColor  = vec4(0, 0, 0, 0);\n"
-    "   vec4 SpecularColor = vec4(0, 0, 0, 0);\n"
+   "   vec4 DiffuseColor  = vec4(0, 0, 0, 0);\n"
+   "   vec4 SpecularColor = vec4(0, 0, 0, 0);\n"
 
-    "   if (DiffuseFactor > 0.0) {\n"
-    "      DiffuseColor = vec4(light.color, 1.0) * light.diffuseIntensity * DiffuseFactor;\n"
+   "   if (DiffuseFactor > 0.0) {\n"
+   "      DiffuseColor = vec4(light.color, 1.0) * light.diffuseIntensity * DiffuseFactor;\n"
 
-    "      vec3 VertexToEye = normalize(uCameraPosition - WorldPos);\n"
-    "      vec3 LightReflect = normalize(reflect(lightDirection, Normal));\n"
-    "      float SpecularFactor = dot(VertexToEye, LightReflect);\n"
-    "      SpecularFactor = pow(SpecularFactor, uSpecularPower);\n"
-    "      if (SpecularFactor > 0.0) {\n"
-    "          SpecularColor = vec4(light.color, 1.0) * specularTexel * SpecularFactor;\n"
-    "      }\n"
-    "   }\n"
+   "      vec3 VertexToEye = normalize(uCameraPosition - WorldPos);\n"
+   "      vec3 LightReflect = normalize(reflect(lightDirection, Normal));\n"
+   "      float SpecularFactor = dot(VertexToEye, LightReflect);\n"
+   "      SpecularFactor = pow(SpecularFactor, uSpecularPower);\n"
+   "      if (SpecularFactor > 0.0) {\n"
+   "          SpecularColor = vec4(light.color, 1.0) * specularTexel * SpecularFactor;\n"
+   "      }\n"
+   "   }\n"
 
-    "   return (AmbientColor + DiffuseColor + SpecularColor);\n"
-    "}\n"
+   "   return (AmbientColor + DiffuseColor + SpecularColor);\n"
+   "}\n"
 
-    "   vec4 CalcDirectionalLight(vec3 WorldPos, vec3 Normal, float speculatTexel) {\n"
+   "   vec4 CalcDirectionalLight(vec3 WorldPos, vec3 Normal, float speculatTexel) {\n"
 
-    "   return CalcLightInternal(uLight.base,\n"
-    "                             uLight.direction,\n"
-    "                             WorldPos,\n"
-    "                             Normal,\n"
-    "                             speculatTexel);\n"
-    "}\n"
+   "   return CalcLightInternal(uLight.base,\n"
+   "                             uLight.direction,\n"
+   "                             WorldPos,\n"
+   "                             Normal,\n"
+   "                             speculatTexel);\n"
+   "}\n"
 
-    + gGLColorOutDefinition
-    +
+   + gGLColorOutDefinition
+   +
 
-    "void main() {\n"
-    "    vec2 TexCoord = CalcTexCoord();\n"
+   "void main() {\n"
+   "    vec2 TexCoord = CalcTexCoord();\n"
 #ifdef FILLWAVE_GLES_3_0
-    "   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
-    "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-    "   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
-    "   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
+   "   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
+   "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+   "   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
+   "   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
 #else
-    "   vec3 WorldPos = texture2D(uWorldPositionAttachment, TexCoord).xyz;\n"
-    "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-    "   vec3 Normal = texture2D(uNormalAttachment, TexCoord).xyz;\n"
-    "   float specularTexel = texture2D(uSpecularTexelAttachment, TexCoord).x;\n"
+   "   vec3 WorldPos = texture2D(uWorldPositionAttachment, TexCoord).xyz;\n"
+   "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+   "   vec3 Normal = texture2D(uNormalAttachment, TexCoord).xyz;\n"
+   "   float specularTexel = texture2D(uSpecularTexelAttachment, TexCoord).x;\n"
 #endif
-    "   Normal = normalize(Normal);\n"
+   "   Normal = normalize(Normal);\n"
 
-    "   fColor = vec4(Color, 1.0) * CalcDirectionalLight(WorldPos, Normal, specularTexel);\n"
-    "}\n";
+   "   fColor = vec4(Color, 1.0) * CalcDirectionalLight(WorldPos, Normal, specularTexel);\n"
+   "}\n";
 
 std::string vsDRLightPoint = gGLVersion + gGLVSAttributes + vsSimpleVertexPass;
 
 std::string fsDRLightPoint =
-    gGLVersion + gGLFragmentPrecision + gGLLightDefinitions
-    +
+   gGLVersion + gGLFragmentPrecision + gGLLightDefinitions
+   +
 
-    "uniform int uIsAO;\n"
-    "uniform sampler2D uAOMap;\n"
+   "uniform int uIsAO;\n"
+   "uniform sampler2D uAOMap;\n"
 
-    "uniform sampler2D uShadowMap;\n"
-    "uniform sampler2D uWorldPositionAttachment;\n"
-    "uniform sampler2D uDiffuseTexelAttachment;\n"
-    "uniform sampler2D uNormalAttachment;\n"
-    "uniform sampler2D uSpecularTexelAttachment;\n"
+   "uniform sampler2D uShadowMap;\n"
+   "uniform sampler2D uWorldPositionAttachment;\n"
+   "uniform sampler2D uDiffuseTexelAttachment;\n"
+   "uniform sampler2D uNormalAttachment;\n"
+   "uniform sampler2D uSpecularTexelAttachment;\n"
 
-    "uniform LightPoint uLight;\n"
-    "uniform vec3 uCameraPosition;\n"
-    "uniform float uSpecularPower;\n"
-    "uniform vec2 uScreenSize;\n"
+   "uniform LightPoint uLight;\n"
+   "uniform vec3 uCameraPosition;\n"
+   "uniform float uSpecularPower;\n"
+   "uniform vec2 uScreenSize;\n"
 
-    "vec2 CalcTexCoord() {\n"
-    "   return gl_FragCoord.xy / uScreenSize;\n"
-    "}\n"
+   "vec2 CalcTexCoord() {\n"
+   "   return gl_FragCoord.xy / uScreenSize;\n"
+   "}\n"
 
-    "vec4 CalcLightInternal(Light light,\n"
-    "                       vec3 lightDirection,\n"
-    "                       vec3 WorldPos,\n"
-    "                       vec3 Normal,\n"
-    "                       float specularTexel) {\n"
+   "vec4 CalcLightInternal(Light light,\n"
+   "                       vec3 lightDirection,\n"
+   "                       vec3 WorldPos,\n"
+   "                       vec3 Normal,\n"
+   "                       float specularTexel) {\n"
 
-    "   vec4 AmbientColor = vec4(light.color, 1.0) * light.ambientIntensity;\n"
+   "   vec4 AmbientColor = vec4(light.color, 1.0) * light.ambientIntensity;\n"
 
-    "   if (uIsAO != 0) {\n"
-    "      AmbientColor *= texture(uAOMap, CalcTexCoord()).r;\n"
-    "   }\n"
+   "   if (uIsAO != 0) {\n"
+   "      AmbientColor *= texture(uAOMap, CalcTexCoord()).r;\n"
+   "   }\n"
 
-    "   float DiffuseFactor = dot(Normal, -lightDirection);\n"
+   "   float DiffuseFactor = dot(Normal, -lightDirection);\n"
 
-    "   vec4 DiffuseColor  = vec4(0, 0, 0, 0);\n"
-    "   vec4 SpecularColor = vec4(0, 0, 0, 0);\n"
+   "   vec4 DiffuseColor  = vec4(0, 0, 0, 0);\n"
+   "   vec4 SpecularColor = vec4(0, 0, 0, 0);\n"
 
-    "   if (DiffuseFactor > 0.0) {\n"
-    "       DiffuseColor = vec4(light.color, 1.0) * light.diffuseIntensity * DiffuseFactor;\n"
+   "   if (DiffuseFactor > 0.0) {\n"
+   "       DiffuseColor = vec4(light.color, 1.0) * light.diffuseIntensity * DiffuseFactor;\n"
 
-    "        vec3 VertexToEye = normalize(uCameraPosition - WorldPos);\n"
-    "        vec3 LightReflect = normalize(reflect(lightDirection, Normal));\n"
-    "        float SpecularFactor = dot(VertexToEye, LightReflect);\n"
-    "        SpecularFactor = pow(SpecularFactor, uSpecularPower);\n"
-    "        if (SpecularFactor > 0.0) {\n"
-    "            SpecularColor = vec4(light.color, 1.0) * specularTexel * SpecularFactor;\n"
-    "        }\n"
-    "    }\n"
+   "        vec3 VertexToEye = normalize(uCameraPosition - WorldPos);\n"
+   "        vec3 LightReflect = normalize(reflect(lightDirection, Normal));\n"
+   "        float SpecularFactor = dot(VertexToEye, LightReflect);\n"
+   "        SpecularFactor = pow(SpecularFactor, uSpecularPower);\n"
+   "        if (SpecularFactor > 0.0) {\n"
+   "            SpecularColor = vec4(light.color, 1.0) * specularTexel * SpecularFactor;\n"
+   "        }\n"
+   "    }\n"
 
-    "    return (AmbientColor + DiffuseColor + SpecularColor);\n"
-    "}\n"
+   "    return (AmbientColor + DiffuseColor + SpecularColor);\n"
+   "}\n"
 
-    "vec4 CalcPointLight(vec3 WorldPos, vec3 Normal, float specularTexel) {\n"
-    "   vec3 LightDirection = uLight.position-WorldPos;\n"
-    "   float Distance = length(LightDirection);\n"
-    "   LightDirection = normalize(LightDirection);\n"
+   "vec4 CalcPointLight(vec3 WorldPos, vec3 Normal, float specularTexel) {\n"
+   "   vec3 LightDirection = uLight.position-WorldPos;\n"
+   "   float Distance = length(LightDirection);\n"
+   "   LightDirection = normalize(LightDirection);\n"
 
-    "   vec4 Color = CalcLightInternal(uLight.base, LightDirection, WorldPos, Normal, specularTexel);\n"
+   "   vec4 Color = CalcLightInternal(uLight.base, LightDirection, WorldPos, Normal, specularTexel);\n"
 
-    "   float attenuation =  uLight.attenuation.constant +\n"
-    "                        uLight.attenuation.linear * Distance +\n"
-    "                        uLight.attenuation.exp * Distance * Distance;\n"
+   "   float attenuation =  uLight.attenuation.constant +\n"
+   "                        uLight.attenuation.linear * Distance +\n"
+   "                        uLight.attenuation.exp * Distance * Distance;\n"
 
-    "   attenuation = max(1.0, attenuation);\n"
+   "   attenuation = max(1.0, attenuation);\n"
 
-    "   return Color / attenuation;\n"
-    "}\n"
+   "   return Color / attenuation;\n"
+   "}\n"
 
-    + gGLColorOutDefinition
-    +
+   + gGLColorOutDefinition
+   +
 
-    "void main() {\n"
-    "    vec2 TexCoord = CalcTexCoord();\n"
+   "void main() {\n"
+   "    vec2 TexCoord = CalcTexCoord();\n"
 #ifdef FILLWAVE_GLES_3_0
-    "   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
-    "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-    "   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
-    "   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
+   "   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
+   "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+   "   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
+   "   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
 #else
-    "   vec3 WorldPos = texture2D(uWorldPositionAttachment, TexCoord).xyz;\n"
-    "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-    "   vec3 Normal = texture2D(uNormalAttachment, TexCoord).xyz;\n"
-    "   float specularTexel = texture2D(uSpecularTexelAttachment, TexCoord).x;\n"
+   "   vec3 WorldPos = texture2D(uWorldPositionAttachment, TexCoord).xyz;\n"
+   "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+   "   vec3 Normal = texture2D(uNormalAttachment, TexCoord).xyz;\n"
+   "   float specularTexel = texture2D(uSpecularTexelAttachment, TexCoord).x;\n"
 #endif
-    "   Normal = normalize(Normal);\n"
+   "   Normal = normalize(Normal);\n"
 
-    "   fColor = vec4(Color, 1.0) * CalcPointLight(WorldPos, Normal, specularTexel);\n"
-    "}\n";
+   "   fColor = vec4(Color, 1.0) * CalcPointLight(WorldPos, Normal, specularTexel);\n"
+   "}\n";
 
 std::string fsDRLightSpot =
-    gGLVersion + gGLFragmentPrecision + gGLLightDefinitions
-    +
+   gGLVersion + gGLFragmentPrecision + gGLLightDefinitions
+   +
 
-    "uniform sampler2D uShadowMap;\n"
+   "uniform sampler2D uShadowMap;\n"
 
-    "uniform int uIsAO;\n"
-    "uniform sampler2D uAOMap;\n"
+   "uniform int uIsAO;\n"
+   "uniform sampler2D uAOMap;\n"
 
-    "uniform sampler2D uWorldPositionAttachment;\n"
-    "uniform sampler2D uDiffuseTexelAttachment;\n"
-    "uniform sampler2D uNormalAttachment;\n"
-    "uniform sampler2D uSpecularTexelAttachment;\n"
+   "uniform sampler2D uWorldPositionAttachment;\n"
+   "uniform sampler2D uDiffuseTexelAttachment;\n"
+   "uniform sampler2D uNormalAttachment;\n"
+   "uniform sampler2D uSpecularTexelAttachment;\n"
 
-    "uniform LightSpot uLight;\n"
-    "uniform vec3 uCameraPosition;\n"
-    "uniform float uSpecularPower;\n"
-    "uniform vec2 uScreenSize;\n"
+   "uniform LightSpot uLight;\n"
+   "uniform vec3 uCameraPosition;\n"
+   "uniform float uSpecularPower;\n"
+   "uniform vec2 uScreenSize;\n"
 
-    "vec2 CalcTexCoord() {\n"
-    "   return gl_FragCoord.xy / uScreenSize;\n"
-    "}\n"
+   "vec2 CalcTexCoord() {\n"
+   "   return gl_FragCoord.xy / uScreenSize;\n"
+   "}\n"
 
-    "float calculateSpotShadowPCF(vec4 spotlightPosition, sampler2D spotShadowMap) {\n"
-    "   vec3 shadowMapUV = spotlightPosition.xyz / spotlightPosition.w;\n"
-    "   float nearestPixel = 0.005;\n"
-    "   float x,y,shadowMapDepth,sum=0.0;\n"
-    "   for (x=-1.0;x<=1.0;x+=1.0) {\n"
-    "     for (y=-1.0;y<=1.0;y+=1.0) {\n"
-    "        shadowMapDepth=texture(spotShadowMap, vec2(shadowMapUV.x + x*nearestPixel, shadowMapUV.y + y*nearestPixel)).x;\n"
-    "        if ( ( shadowMapDepth < shadowMapUV.z - 0.001 )  || shadowMapUV.z <= 0.001 )\n"
-    "           sum += 0.1;\n"
-    "        else\n"
-    "           sum += 1.0;\n"
-    "     }\n"
-    "   }\n"
-    "   return sum*0.11;\n"
-    "}\n"
+   "float calculateSpotShadowPCF(vec4 spotlightPosition, sampler2D spotShadowMap) {\n"
+   "   vec3 shadowMapUV = spotlightPosition.xyz / spotlightPosition.w;\n"
+   "   float nearestPixel = 0.005;\n"
+   "   float x,y,shadowMapDepth,sum=0.0;\n"
+   "   for (x=-1.0;x<=1.0;x+=1.0) {\n"
+   "     for (y=-1.0;y<=1.0;y+=1.0) {\n"
+   "        shadowMapDepth=texture(spotShadowMap, vec2(shadowMapUV.x + x*nearestPixel, shadowMapUV.y + y*nearestPixel)).x;\n"
+   "        if ( ( shadowMapDepth < shadowMapUV.z - 0.001 )  || shadowMapUV.z <= 0.001 )\n"
+   "           sum += 0.1;\n"
+   "        else\n"
+   "           sum += 1.0;\n"
+   "     }\n"
+   "   }\n"
+   "   return sum*0.11;\n"
+   "}\n"
 
-    "vec4 CalcLightInternal(Light light,\n"
-    "                      vec3 lightDirection,\n"
-    "                      vec3 WorldPos,\n"
-    "                      vec3 Normal,\n"
-    "                      float specularTexel) {\n"
+   "vec4 CalcLightInternal(Light light,\n"
+   "                      vec3 lightDirection,\n"
+   "                      vec3 WorldPos,\n"
+   "                      vec3 Normal,\n"
+   "                      float specularTexel) {\n"
 
-    "   vec4 AmbientColor = vec4(light.color, 1.0) * light.ambientIntensity;\n"
+   "   vec4 AmbientColor = vec4(light.color, 1.0) * light.ambientIntensity;\n"
 
-    "   if (uIsAO != 0) {\n"
-    "      AmbientColor *= texture(uAOMap, CalcTexCoord()).r;\n"
-    "   }\n"
+   "   if (uIsAO != 0) {\n"
+   "      AmbientColor *= texture(uAOMap, CalcTexCoord()).r;\n"
+   "   }\n"
 
-    "   float DiffuseFactor = dot(Normal, lightDirection);\n"
+   "   float DiffuseFactor = dot(Normal, lightDirection);\n"
 
-    "   vec4 DiffuseColor  = vec4(0, 0, 0, 0);\n"
-    "   vec4 SpecularColor = vec4(0, 0, 0, 0);\n"
+   "   vec4 DiffuseColor  = vec4(0, 0, 0, 0);\n"
+   "   vec4 SpecularColor = vec4(0, 0, 0, 0);\n"
 
-    "   if (DiffuseFactor > 0.0) {\n"
-    "     DiffuseColor = vec4(light.color, 1.0) * light.diffuseIntensity * DiffuseFactor;\n"
+   "   if (DiffuseFactor > 0.0) {\n"
+   "     DiffuseColor = vec4(light.color, 1.0) * light.diffuseIntensity * DiffuseFactor;\n"
 
-    "     vec3 VertexToEye = normalize(uCameraPosition - WorldPos);\n"
-    "     vec3 LightReflect = normalize(reflect(lightDirection, Normal));\n"
-    "     float SpecularFactor = dot(VertexToEye, LightReflect);\n"
-    "     SpecularFactor = pow(SpecularFactor, uSpecularPower);\n"
-    "     if (SpecularFactor > 0.0) {\n"
-    "        SpecularColor = vec4(light.color * specularTexel * SpecularFactor, 1.0);\n"
-    "     }\n"
+   "     vec3 VertexToEye = normalize(uCameraPosition - WorldPos);\n"
+   "     vec3 LightReflect = normalize(reflect(lightDirection, Normal));\n"
+   "     float SpecularFactor = dot(VertexToEye, LightReflect);\n"
+   "     SpecularFactor = pow(SpecularFactor, uSpecularPower);\n"
+   "     if (SpecularFactor > 0.0) {\n"
+   "        SpecularColor = vec4(light.color * specularTexel * SpecularFactor, 1.0);\n"
+   "     }\n"
 
-    "   }\n"
+   "   }\n"
 
-    "   return (AmbientColor + DiffuseColor + SpecularColor);\n"
-    "}\n"
+   "   return (AmbientColor + DiffuseColor + SpecularColor);\n"
+   "}\n"
 
-    "vec4 CalcSpotLight(vec3 WorldPos, vec3 Normal, float speculatTexel) {\n"
+   "vec4 CalcSpotLight(vec3 WorldPos, vec3 Normal, float speculatTexel) {\n"
 
-    "   float Distance = length(uLight.position-WorldPos);\n"
-    "   float attenuation =  uLight.attenuation.constant +\n"
-    "                        uLight.attenuation.linear * Distance +\n"
-    "                        uLight.attenuation.exp * Distance * Distance;\n"
+   "   float Distance = length(uLight.position-WorldPos);\n"
+   "   float attenuation =  uLight.attenuation.constant +\n"
+   "                        uLight.attenuation.linear * Distance +\n"
+   "                        uLight.attenuation.exp * Distance * Distance;\n"
 
-    "   attenuation = max(1.0, attenuation) / (calculateSpotShadowPCF(uLight.mvp * vec4(WorldPos, 1.0), uShadowMap));\n"
+   "   attenuation = max(1.0, attenuation) / (calculateSpotShadowPCF(uLight.mvp * vec4(WorldPos, 1.0), uShadowMap));\n"
 
-    "   return CalcLightInternal(uLight.base,\n"
-    "                            uLight.position-WorldPos,\n"
-    "                            WorldPos,\n"
-    "                            Normal,\n"
-    "                            speculatTexel) / attenuation;\n"
-    "}\n"
+   "   return CalcLightInternal(uLight.base,\n"
+   "                            uLight.position-WorldPos,\n"
+   "                            WorldPos,\n"
+   "                            Normal,\n"
+   "                            speculatTexel) / attenuation;\n"
+   "}\n"
 
-    + gGLColorOutDefinition
-    +
+   + gGLColorOutDefinition
+   +
 
-    "void main() {\n"
-    "    vec2 TexCoord = CalcTexCoord();\n"
+   "void main() {\n"
+   "    vec2 TexCoord = CalcTexCoord();\n"
 #ifdef FILLWAVE_GLES_3_0
-    "   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
-    "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-    "   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
-    "   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
+   "   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
+   "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+   "   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
+   "   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
 #else
-    "   vec3 WorldPos = texture2D(uWorldPositionAttachment, TexCoord).xyz;\n"
-    "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-    "   vec3 Normal = texture2D(uNormalAttachment, TexCoord).xyz;\n"
-    "   float specularTexel = texture2D(uSpecularTexelAttachment, TexCoord).x;\n"
+   "   vec3 WorldPos = texture2D(uWorldPositionAttachment, TexCoord).xyz;\n"
+   "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+   "   vec3 Normal = texture2D(uNormalAttachment, TexCoord).xyz;\n"
+   "   float specularTexel = texture2D(uSpecularTexelAttachment, TexCoord).x;\n"
 #endif
-    "   Normal = normalize(Normal);\n"
+   "   Normal = normalize(Normal);\n"
 
-    "   fColor = vec4(Color, 1.0) * CalcSpotLight(WorldPos, Normal, specularTexel);\n"
-    "}\n";
+   "   fColor = vec4(Color, 1.0) * CalcSpotLight(WorldPos, Normal, specularTexel);\n"
+   "}\n";
 
 std::string fsDRDepthless = gGLVersion + gGLFragmentPrecision
                             + +"uniform sampler2D uDiffuseTexelAttachment;\n"
@@ -1199,228 +1199,243 @@ const std::string vsAOColor = gGLVersion + gGLVSAttributesPosition
                               "}\n";
 
 const std::string fsAOColor =
-    gGLVersion + gGLFragmentPrecision + "in vec2 vTextureCoordinate;\n"
-    "uniform sampler2D uPositionMap;\n"
-    "uniform float uSampleRadius;\n"
-    "uniform mat4 uP;\n" + gGLColorOutDefinition
-    + "const int FILLWAVE_RANDOM_VECTORS_SIZE = 64;\n"
+   gGLVersion + gGLFragmentPrecision + "in vec2 vTextureCoordinate;\n"
+   "uniform sampler2D uPositionMap;\n"
+   "uniform float uSampleRadius;\n"
+   "uniform mat4 uP;\n" + gGLColorOutDefinition
+   + "const int FILLWAVE_RANDOM_VECTORS_SIZE = 64;\n"
 
-    "uniform vec3 uRandomVectors[FILLWAVE_RANDOM_VECTORS_SIZE];\n"
+   "uniform vec3 uRandomVectors[FILLWAVE_RANDOM_VECTORS_SIZE];\n"
 
-    "void main() {\n"
+   "void main() {\n"
 #ifdef FILLWAVE_GLES_3_0
-    "   vec3 texelPosition = texture(uPositionMap, vTextureCoordinate).xyz;\n"
+   "   vec3 texelPosition = texture(uPositionMap, vTextureCoordinate).xyz;\n"
 #else
-    "   vec3 texelPosition = texture2D(uPositionMap, vTextureCoordinate).xyz;\n"
+   "   vec3 texelPosition = texture2D(uPositionMap, vTextureCoordinate).xyz;\n"
 #endif
 
-    "   float AO = 0.0;\n"
+   "   float AO = 0.0;\n"
 
-    "   for (int i = 0 ; i < FILLWAVE_RANDOM_VECTORS_SIZE ; i++) {\n"
-    "      vec3 samplePos = texelPosition + uRandomVectors[i];\n"
-    "      vec4 offset = vec4(samplePos, 1.0);\n"
-    "      offset = uP * offset;\n"
-    "      offset.xy /= offset.w;\n"
-    "      offset.xy = offset.xy * 0.5 + vec2(0.5);\n"
+   "   for (int i = 0 ; i < FILLWAVE_RANDOM_VECTORS_SIZE ; i++) {\n"
+   "      vec3 samplePos = texelPosition + uRandomVectors[i];\n"
+   "      vec4 offset = vec4(samplePos, 1.0);\n"
+   "      offset = uP * offset;\n"
+   "      offset.xy /= offset.w;\n"
+   "      offset.xy = offset.xy * 0.5 + vec2(0.5);\n"
 
 #ifdef FILLWAVE_GLES_3_0
-    "      float sampleDepth = texture(uPositionMap, offset.xy).b;\n"
+   "      float sampleDepth = texture(uPositionMap, offset.xy).b;\n"
 #else
-    "      float sampleDepth = texture2D(uPositionMap, offset.xy).b;\n"
+   "      float sampleDepth = texture2D(uPositionMap, offset.xy).b;\n"
 #endif
 
-    "      if (abs(texelPosition.z - sampleDepth) < uSampleRadius) {\n"
-    "         AO += step(sampleDepth,samplePos.z);\n"
-    "      }\n"
-    "   }\n"
+   "      if (abs(texelPosition.z - sampleDepth) < uSampleRadius) {\n"
+   "         AO += step(sampleDepth,samplePos.z);\n"
+   "      }\n"
+   "   }\n"
 
-    "   AO = 1.0 - AO/64.0;\n"
+   "   AO = 1.0 - AO/64.0;\n"
 
-    "   fColor = vec4(pow(AO, 2.0));\n"
-    "}";
+   "   fColor = vec4(pow(AO, 2.0));\n"
+   "}";
 
 const std::string fsStartup =
-    gGLVersion + gGLFragmentPrecision
-    + "#define MAX_ITER 3\n"
+   gGLVersion + gGLFragmentPrecision
+   + "#define MAX_ITER 3\n"
 
-    "in vec2 vPosition;\n"
-    "out vec4 fColour;\n"
+   "in vec2 vPosition;\n"
+   "out vec4 fColour;\n"
 
-    "uniform float uTime;\n"
+   "uniform float uTime;\n"
 
-    "uniform float uScreenFactor;\n"
+   "uniform float uScreenFactor;\n"
 
-    "uniform sampler2D uPostProcessingSampler;\n"
+   "uniform sampler2D uPostProcessingSampler;\n"
 
-    "void main( void ) {\n"
+   "void main( void ) {\n"
 
-    "   vec2 coordinates = vec2((vPosition.x*(uScreenFactor) + 1.0) /2.0, (vPosition.y*(uScreenFactor)+1.0)/2.0);\n"
+   "   vec2 coordinates = vec2((vPosition.x*(uScreenFactor) + 1.0) /2.0, (vPosition.y*(uScreenFactor)+1.0)/2.0);\n"
 
 #ifdef FILLWAVE_GLES_3_0
-    "   vec4 texel = texture(uPostProcessingSampler, coordinates);\n"
+   "   vec4 texel = texture(uPostProcessingSampler, coordinates);\n"
 #else
-    "   vec4 texel = texture2D(uPostProcessingSampler, coordinates);\n"
+   "   vec4 texel = texture2D(uPostProcessingSampler, coordinates);\n"
 #endif
 
-    /* Blur */
+   /* Blur */
 
-    "   float blurFactor = clamp ( 0.01f * (8.0 - 2.0 * uTime)*0.2, 0.0 , 100.0);\n"
+   "   float blurFactor = clamp ( 0.01f * (8.0 - 2.0 * uTime)*0.2, 0.0 , 100.0);\n"
 
-    "   for(float i = -1.0; i<=1.0 ; i++) {\n"
-    "      for(float j = -1.0; j<=1.0 ; j++) {\n"
-    "         vec2 newCoords = vec2(coordinates.x + blurFactor * i, coordinates.y + blurFactor * j);\n"
-    "         texel += texture (uPostProcessingSampler, newCoords)*0.11;\n"
-    "      }\n"
-    "   }\n"
+   "   for(float i = -1.0; i<=1.0 ; i++) {\n"
+   "      for(float j = -1.0; j<=1.0 ; j++) {\n"
+   "         vec2 newCoords = vec2(coordinates.x + blurFactor * i, coordinates.y + blurFactor * j);\n"
+   "         texel += texture (uPostProcessingSampler, newCoords)*0.11;\n"
+   "      }\n"
+   "   }\n"
 
-    "vec2 p =  gl_FragCoord.xy * 8.0 / vec2(1900.0,1900.0) - vec2(20.0);\n"
-    "vec2 i = p;\n"
-    "float c = 1.0;\n"
-    "float inten = .05;\n"
+   "vec2 p =  gl_FragCoord.xy * 8.0 / vec2(1900.0,1900.0) - vec2(20.0);\n"
+   "vec2 i = p;\n"
+   "float c = 1.0;\n"
+   "float inten = .05;\n"
 
-    "for (int n = 0; n < MAX_ITER; n++) {\n"
-    "      float t = uTime * (1.0 - (3.0 / float(n+1)));\n"
+   "for (int n = 0; n < MAX_ITER; n++) {\n"
+   "      float t = uTime * (1.0 - (3.0 / float(n+1)));\n"
 
-    "      i = p + vec2(cos(t - i.x) + sin(t + i.y),\n"
-    "             sin(t - i.y) + cos(t + i.x));\n"
+   "      i = p + vec2(cos(t - i.x) + sin(t + i.y),\n"
+   "             sin(t - i.y) + cos(t + i.x));\n"
 
-    "      c += 1.0/length(vec2(p.x / (sin(i.x+t)/inten),\n"
-    "                   p.y / (cos(i.y+t)/inten)));\n"
-    "}\n"
+   "      c += 1.0/length(vec2(p.x / (sin(i.x+t)/inten),\n"
+   "                   p.y / (cos(i.y+t)/inten)));\n"
+   "}\n"
 
-    "c /= float(MAX_ITER);\n"
-    "c = 1.5 - sqrt(c);\n"
+   "c /= float(MAX_ITER);\n"
+   "c = 1.5 - sqrt(c);\n"
 
-    "vec4 texColor = vec4(0.0, 0.0117647, 0.01568627, 1.0);\n"
+   "vec4 texColor = vec4(0.0, 0.0117647, 0.01568627, 1.0);\n"
 
-    "texColor.rgb *= pow((1.0 / (1.0 - (c + 0.0))), 3.0);\n"
+   "texColor.rgb *= pow((1.0 / (1.0 - (c + 0.0))), 3.0);\n"
 
-    "   vec3 colorBase = vec3(texColor.xyz*(clamp((8.0 - 0.5 * uTime) * 0.25, 0.0, 2.0) )) + texel.xyz;\n"
+   "   vec3 colorBase = vec3(texColor.xyz*(clamp((8.0 - 0.5 * uTime) * 0.25, 0.0, 2.0) )) + texel.xyz;\n"
 
-    "   fColour = vec4( (1.0-length(vPosition*0.5)) * colorBase * clamp(uTime * 0.25, 0.0, 2.0), 1.0);\n"
-    "   if (uTime > 6.0 ) {\n"
-    "      fColour = vec4( fColour.xyz * (8.0 - 2.0*(uTime - 4.0)) * 0.25 , 1.0);\n"
-    "   }\n"
+   "   fColour = vec4( (1.0-length(vPosition*0.5)) * colorBase * clamp(uTime * 0.25, 0.0, 2.0), 1.0);\n"
+   "   if (uTime > 6.0 ) {\n"
+   "      fColour = vec4( fColour.xyz * (8.0 - 2.0*(uTime - 4.0)) * 0.25 , 1.0);\n"
+   "   }\n"
 
-    /*  Fade with time */
-    "   fColour.xyz = fColour.xyz * (1.0 - length(vPosition.xy));\n"
+   /*  Fade with time */
+   "   fColour.xyz = fColour.xyz * (1.0 - length(vPosition.xy));\n"
 
-    "}\n";
+   "}\n";
 
-pProgram ProgramLoader::getShadow() {
-	return mEngine->storeProgram("shadow_mapping",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_internal_shadowing.vert", vsShadow));
+core::Program* ProgramLoader::getShadow() {
+	return mEngine->storeProgram("shadow_mapping", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_internal_shadowing.vert", vsShadow)
+	});
 }
 
-pProgram ProgramLoader::getShadowColorCoded() {
-	return mEngine->storeProgram("shadow_mapping_color",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>(
-	                                 "fillwave_internal_shadowing_color.frag", fsShadowColorCoded)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_internal_shadowing_color.vert", vsShadowColorCoded));
+core::Program* ProgramLoader::getShadowColorCoded() {
+	return mEngine->storeProgram("shadow_mapping_color", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>(
+		   "fillwave_internal_shadowing_color.frag", fsShadowColorCoded),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_internal_shadowing_color.vert", vsShadowColorCoded)
+	});
 }
 
-pProgram ProgramLoader::getShadowWithAnimation() {
-	return mEngine->storeProgram("shadow_mapping_animated",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_internal_shadowing.vert", vsShadowAnimated));
+core::Program* ProgramLoader::getShadowWithAnimation() {
+	return mEngine->storeProgram("shadow_mapping_animated", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_internal_shadowing.vert", vsShadowAnimated)
+	});
 }
 
-pProgram ProgramLoader::getShadowColorCodedWithAnimation() {
-	return mEngine->storeProgram("shadow_mapping_animated_color",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>(
-	                                 "fillwave_internal_shadowing.frag", fsShadowColorCoded)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_internal_shadowing.vert", vsShadowColorCodedAnimated));
+core::Program* ProgramLoader::getShadowColorCodedWithAnimation() {
+	return mEngine->storeProgram("shadow_mapping_animated_color", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>(
+		   "fillwave_internal_shadowing.frag", fsShadowColorCoded),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_internal_shadowing.vert", vsShadowColorCodedAnimated)
+	});
 }
 
-pProgram ProgramLoader::getDebugger() {
-	return mEngine->storeProgram("debugger",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>(
-	                                 "fillwave_ifillwave__debugger.frag", fsDebugger)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_internal_debugger.vert", vsDebugger));
+core::Program* ProgramLoader::getDebugger() {
+	return mEngine->storeProgram("debugger", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>(
+		   "fillwave_ifillwave__debugger.frag", fsDebugger),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_internal_debugger.vert", vsDebugger)
+	});
 }
 
-pProgram ProgramLoader::getSkybox() {
-	return mEngine->storeProgram("internal_skybox",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_skybox.frag",
-	                                     fsSkybox)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_internal_skybox.vert", vsSkybox));
+core::Program* ProgramLoader::getSkybox() {
+	return mEngine->storeProgram("internal_skybox", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_skybox.frag",
+		fsSkybox),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_internal_skybox.vert", vsSkybox)
+	});
 }
 
-pProgram ProgramLoader::getSkyboxDR() {
-	return mEngine->storeProgram("internal_skybox_dr",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>(
-	                                 "fillwave_internal_skybox_dr.frag", fsSkyboxDR)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_internal_skybox.vert", vsSkybox));
+core::Program* ProgramLoader::getSkyboxDR() {
+	return mEngine->storeProgram("internal_skybox_dr", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>(
+		   "fillwave_internal_skybox_dr.frag", fsSkyboxDR),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_internal_skybox.vert", vsSkybox)
+	});
 }
 
-pProgram ProgramLoader::getText() {
-	return mEngine->storeProgram("text",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_text.frag",
-	                                     fsText)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_internal_text.vert", vsText));
+core::Program* ProgramLoader::getText() {
+	return mEngine->storeProgram("text", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_text.frag",
+		fsText),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_internal_text.vert", vsText)
+	});
 }
 
-pProgram ProgramLoader::getTextBold() {
-	return mEngine->storeProgram("text_bold",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>(
-	                                 "fillwave_internal_text_bold.frag", fsTextBold)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_internal_text.vert", vsText));
+core::Program* ProgramLoader::getTextBold() {
+	return mEngine->storeProgram("text_bold", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>(
+		   "fillwave_internal_text_bold.frag", fsTextBold),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_internal_text.vert", vsText)
+	});
 }
 
-pProgram ProgramLoader::getParticleGPUEmiter() {
-	return mEngine->storeProgram("particles_gpu_emiter",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_particles_gpu_emiter.vert", vsGPUEmiter),
-	                             GL_TRUE);
+core::Program* ProgramLoader::getParticleGPUEmiter() {
+	return mEngine->storeProgram("particles_gpu_emiter", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_particles_gpu_emiter.vert", vsGPUEmiter)
+	},
+	GL_TRUE);
 }
 
-pProgram ProgramLoader::getParticleGPU() {
-	return mEngine->storeProgram("particles_gpu_program",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_gpu.frag",
-	                                     fsParticlesGPU)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_particles_gpu.vert", vsParticlesGPU));
+core::Program* ProgramLoader::getParticleGPU() {
+	return mEngine->storeProgram("particles_gpu_program", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_gpu.frag",
+		fsParticlesGPU),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_particles_gpu.vert", vsParticlesGPU)
+	});
 }
 
-pProgram ProgramLoader::getParticleCPU() {
-	return mEngine->storeProgram("particles_cpu_program",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_cpu.frag",
-	                                     fsParticlesCPU)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_particles_cpu.vert", vsParticlesCPU));
+core::Program* ProgramLoader::getParticleCPU() {
+	return mEngine->storeProgram("particles_cpu_program", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_cpu.frag",
+		fsParticlesCPU),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_particles_cpu.vert", vsParticlesCPU)
+	});
 }
 
-pProgram ProgramLoader::getQuad() {
-	return mEngine->storeProgram("quad",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_quad.frag", fsQuad)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_quad.vert",
-	                                     vsQuad));
+core::Program* ProgramLoader::getQuad() {
+	return mEngine->storeProgram("quad", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_quad.frag", fsQuad),
+		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_quad.vert",
+		vsQuad)
+	});
 }
 
-pProgram ProgramLoader::getQuadCustomFragmentShader(
-    const std::string& shaderPath) {
-	return mEngine->storeProgram(shaderPath,
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>(shaderPath)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_quad_custom.vert", vsQuad));
+core::Program* ProgramLoader::getQuadCustomFragmentShader(
+   const std::string & shaderPath) {
+	return mEngine->storeProgram(shaderPath, {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>(shaderPath),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_quad_custom.vert", vsQuad)
+	});
 }
 
-pProgram ProgramLoader::getHUD() {
-	pProgram p = mEngine->storeProgram("hud",
-	                                   mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_hud.frag", fsHUD)
-	                                   + mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_hud.vert",
-	                                           vsHUD));
+core::Program* ProgramLoader::getHUD() {
+	core::Program* p = mEngine->storeProgram("hud", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_hud.frag", fsHUD),
+		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_hud.vert",
+		vsHUD)
+	});
 
 	GLint location = glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit");
 
@@ -1433,12 +1448,13 @@ pProgram ProgramLoader::getHUD() {
 	return p;
 }
 
-pProgram ProgramLoader::getHUDCustomFragmentShader(
-    const std::string& shaderPath) {
-	pProgram p = mEngine->storeProgram(shaderPath,
-	                                   mEngine->storeShader<GL_FRAGMENT_SHADER>(shaderPath)
-	                                   + mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_hud.vert",
-	                                           vsHUD));
+core::Program* ProgramLoader::getHUDCustomFragmentShader(
+   const std::string & shaderPath) {
+	core::Program* p = mEngine->storeProgram(shaderPath, {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>(shaderPath),
+		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_hud.vert",
+		vsHUD)
+	});
 
 	GLint location = glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit");
 
@@ -1451,99 +1467,108 @@ pProgram ProgramLoader::getHUDCustomFragmentShader(
 	return p;
 }
 
-pProgram ProgramLoader::getQuadCustomFragmentShaderStartup() {
-	return mEngine->storeProgram("startup",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_quad_startup.frag",
-	                                     fsStartup)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_quad_custom.vert", vsQuad));
+core::Program* ProgramLoader::getQuadCustomFragmentShaderStartup() {
+	return mEngine->storeProgram("startup", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_quad_startup.frag",
+		fsStartup),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_quad_custom.vert", vsQuad)
+	});
 }
 
-pProgram ProgramLoader::getCursor() {
-	return mEngine->storeProgram("cursor",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_cursor.frag", fsCursor)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_cursor.vert",
-	                                     vsCursor));
+core::Program* ProgramLoader::getCursor() {
+	return mEngine->storeProgram("cursor", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_cursor.frag", fsCursor),
+		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_cursor.vert",
+		vsCursor)
+	});
 }
 
-pProgram ProgramLoader::getAmbientOcclusionGeometry() {
-	return mEngine->storeProgram("ambient_occlusion_geometry",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>(
-	                                 "fillwave_ambient_occlusion_geometry.frag", fsAOGeometry)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_ambient_occlusion_geometry.vert", vsAOGeometry));
+core::Program* ProgramLoader::getAmbientOcclusionGeometry() {
+	return mEngine->storeProgram("ambient_occlusion_geometry", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>(
+		   "fillwave_ambient_occlusion_geometry.frag", fsAOGeometry),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_ambient_occlusion_geometry.vert", vsAOGeometry)
+	});
 }
 
-pProgram ProgramLoader::getDRAmbient() {
-	return mEngine->storeProgram("ambient_dr",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ambient_dr.frag",
-	                                     fsDRAmbient)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_dr_shader_quad.vert", vsDRShaderQuad));
+core::Program* ProgramLoader::getDRAmbient() {
+	return mEngine->storeProgram("ambient_dr", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ambient_dr.frag",
+		fsDRAmbient),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+	});
 }
 
-pProgram ProgramLoader::getOcclusionQuery() {
-	return mEngine->storeProgram("occlusion",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion.vert",
-	                                     vsOcclusion));
+core::Program* ProgramLoader::getOcclusionQuery() {
+	return mEngine->storeProgram("occlusion", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion.vert",
+		vsOcclusion)
+	});
 }
 
-pProgram ProgramLoader::getOcclusionOptimizedQuery() {
-	return mEngine->storeProgram("occlusion_optimized",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion.vert",
-	                                     vsOcclusionOptimized));
+core::Program* ProgramLoader::getOcclusionOptimizedQuery() {
+	return mEngine->storeProgram("occlusion_optimized", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion.vert",
+		vsOcclusionOptimized)
+	});
 }
 
-pProgram ProgramLoader::getOcclusionPureQuery() {
-	return mEngine->storeProgram("occlusion_pure",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_occlusion_pure.vert", vsCube));
+core::Program* ProgramLoader::getOcclusionPureQuery() {
+	return mEngine->storeProgram("occlusion_pure", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_occlusion_pure.vert", vsCube)
+	});
 }
 
-pProgram ProgramLoader::getDRDepthless() {
-	return mEngine->storeProgram("dr_depthless",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_depthless.frag",
-	                                     fsDRDepthless)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_dr_shader_quad.vert", vsDRShaderQuad));
+core::Program* ProgramLoader::getDRDepthless() {
+	return mEngine->storeProgram("dr_depthless", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_depthless.frag",
+		fsDRDepthless),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+	});
 }
 
-pProgram ProgramLoader::getDRDirectionalLights() {
-	return mEngine->storeProgram("dr_directional",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_directional.frag",
-	                                     fsDRLightDirectional)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_dr_shader_quad.vert", vsDRShaderQuad));
+core::Program* ProgramLoader::getDRDirectionalLights() {
+	return mEngine->storeProgram("dr_directional", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_directional.frag",
+		fsDRLightDirectional),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+	});
 }
 
-pProgram ProgramLoader::getDRSpotLights() {
-	return mEngine->storeProgram("ds_spot",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_spot.frag",
-	                                     fsDRLightSpot)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                 "fillwave_dr_shader_quad.vert", vsDRShaderQuad));
+core::Program* ProgramLoader::getDRSpotLights() {
+	return mEngine->storeProgram("ds_spot", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_spot.frag",
+		fsDRLightSpot),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+	});
 }
 
-pProgram ProgramLoader::getDRPointLights() {
-	return mEngine->storeProgram("ds_point",
-	                             mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_point.frag",
-	                                     fsDRLightPoint)
-	                             + mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_ds_point.vert",
-	                                     vsDRLightPoint));
+core::Program* ProgramLoader::getDRPointLights() {
+	return mEngine->storeProgram("ds_point", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_point.frag",
+		fsDRLightPoint),
+		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_ds_point.vert",
+		vsDRLightPoint)
+	});
 }
 
-pProgram ProgramLoader::getAmbientOcclusionColor() {
-	pProgram p = mEngine->storeProgram("ambient_occlusion_color",
-	                                   mEngine->storeShader<GL_FRAGMENT_SHADER>(
-	                                       "fillwave_ambient_occlusion_color.frag", fsAOColor)
-	                                   + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                       "fillwave_ambient_occlusion_color.vert", vsAOColor));
-
-//   p->log();
-//   abort();
+core::Program* ProgramLoader::getAmbientOcclusionColor() {
+	core::Program* p = mEngine->storeProgram("ambient_occlusion_color", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>(
+		   "fillwave_ambient_occlusion_color.frag", fsAOColor),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_ambient_occlusion_color.vert", vsAOColor)
+	});
 	p->use();
 
 	p->uniformPush("uPositionMap", FILLWAVE_DIFFUSE_ATTACHMENT);
@@ -1571,75 +1596,79 @@ pProgram ProgramLoader::getAmbientOcclusionColor() {
 	return p;
 }
 
-pProgram ProgramLoader::getDefaultDR() {
+core::Program* ProgramLoader::getDefaultDR() {
 
 	ShaderLoaderVertex loaderVertex;
 
-	pProgram p = mEngine->storeProgram("dr_g",
-	                                   mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_g.frag", fsDR)
-	                                   + mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert",
-	                                           loaderVertex.getSource()));
+	core::Program* p = mEngine->storeProgram("dr_g", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_g.frag", fsDR),
+		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert",
+		loaderVertex.getSource())
+	});
 
-	initDefaultUniforms(p.get());
+	initDefaultUniforms(p);
 
 	return p;
 }
 
-pProgram ProgramLoader::getDefaultFR() {
+core::Program* ProgramLoader::getDefaultFR() {
 	ShaderLoaderFragment loaderFragment;
 	ShaderLoaderVertex loaderVertex;
 
-	pProgram p = mEngine->storeProgram("default",
-	                                   mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag",
-	                                           loaderFragment.getSource())
-	                                   + mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert",
-	                                           loaderVertex.getSource()));
+	core::Program* p = mEngine->storeProgram("default", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag",
+		loaderFragment.getSource()),
+		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert",
+		loaderVertex.getSource())
+	});
 
-	initDefaultUniforms(p.get());
+	initDefaultUniforms(p);
 
 	return p;
 }
 
-pProgram ProgramLoader::getDefault() {
+core::Program* ProgramLoader::getDefault() {
 	return getDefaultFR();
 }
 
-pProgram ProgramLoader::getDefaultBonesDR() {
+core::Program* ProgramLoader::getDefaultBonesDR() {
 
 	ShaderLoaderVertex loaderVertex(true);
 
-	pProgram p = mEngine->storeProgram("default_animated",
-	                                   mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default_animated.frag",
-	                                           fsDR)
-	                                   + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                       "fillwave_default_animated.vert", loaderVertex.getSource()));
+	core::Program* p = mEngine->storeProgram("default_animated", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default_animated.frag",
+		fsDR),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_default_animated.vert", loaderVertex.getSource())
+	});
 
-	initDefaultUniforms(p.get());
+	initDefaultUniforms(p);
 
 	return p;
 }
 
-pProgram ProgramLoader::getDefaultBonesFR() {
+core::Program* ProgramLoader::getDefaultBonesFR() {
 
 	ShaderLoaderFragment loaderFragment;
 	ShaderLoaderVertex loaderVertex(true);
 
-	pProgram p = mEngine->storeProgram("default_animated_dr",
-	                                   mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag",
-	                                           loaderFragment.getSource())
-	                                   + mEngine->storeShader<GL_VERTEX_SHADER>(
-	                                       "fillwave_default_animated.vert", loaderVertex.getSource()));
+	core::Program* p = mEngine->storeProgram("default_animated_dr", {
+		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag",
+		loaderFragment.getSource()),
+		mEngine->storeShader<GL_VERTEX_SHADER>(
+		   "fillwave_default_animated.vert", loaderVertex.getSource())
+	});
 
-	initDefaultUniforms(p.get());
+	initDefaultUniforms(p);
 
 	return p;
 }
 
-pProgram ProgramLoader::getDefaultBones() {
+core::Program* ProgramLoader::getDefaultBones() {
 	return getDefaultBonesFR();
 }
 
-void ProgramLoader::initDefaultUniforms(core::Program* program) {
+void ProgramLoader::initDefaultUniforms(core::Program * program) {
 	GLint location[10];
 
 	location[0] = glGetUniformLocation(program->getHandle(),
@@ -1690,7 +1719,7 @@ void ProgramLoader::initDefaultUniforms(core::Program* program) {
 	glGetError();
 }
 
-ProgramLoader::ProgramLoader(Engine* engine) :
+ProgramLoader::ProgramLoader(Engine * engine) :
 	mEngine(engine) {
 
 }

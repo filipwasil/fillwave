@@ -23,7 +23,7 @@ class LightManager;
  */
 
 class IRendererCSPBRP: public IRenderer {
-  public:
+ public:
 	IRendererCSPBRP(LightManager* lightManager);
 	virtual ~IRendererCSPBRP() = default;
 
@@ -32,7 +32,7 @@ class IRendererCSPBRP: public IRenderer {
 	void reset(GLuint width, GLuint height) override;
 	void clear() override;
 
-  private:
+ private:
 	std::unordered_map<GLuint, std::vector<std::vector<RenderItem>>>mRenderPasses;
 	LightManager* mLightManager;
 };

@@ -19,14 +19,14 @@ namespace framework {
  */
 
 class Cursor: public Impostor {
-  public:
-	Cursor(Engine* engine, pTexture texture);
+ public:
+	Cursor(Engine* engine, core::Texture* texture);
 	virtual ~Cursor() = default;
 
 	void move(glm::vec2 position);
 	void draw();
 
-  private:
+ private:
 	GLfloat mScreenFactor;
 	GLint mULCPosition, mULCScreenFactor, mULCTextureUnit, mULCSize;
 
@@ -37,7 +37,7 @@ class Cursor: public Impostor {
 } /* framework */
 typedef std::shared_ptr<framework::Cursor> pCursor;
 
-pCursor buildCursor(Engine* engine, pTexture texture);
+pCursor buildCursor(Engine* engine, core::Texture* texture);
 
 } /* fillwave */
 

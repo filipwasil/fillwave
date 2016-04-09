@@ -19,7 +19,7 @@ namespace framework {
  */
 
 class Quad: public Shape<core::VertexBasic> {
-  public:
+ public:
 	Quad(GLfloat size = 1.0f) {
 
 		mVertices.resize(6);

@@ -17,9 +17,9 @@ namespace fillwave {
 namespace core {
 
 VertexBufferBasic::VertexBufferBasic(
-    const fMesh* shape,
-    framework::Animator* animator,
-    GLuint dataStoreModification) :
+   const fMesh* shape,
+   framework::Animator* animator,
+   GLuint dataStoreModification) :
 	TVertexBuffer<VertexBasic>(dataStoreModification) {
 
 	mTotalElements = shape->mNumVertices;
@@ -104,9 +104,9 @@ VertexBufferBasic::VertexBufferBasic(
 				float Weight = shape->mBones[i]->mWeights[j].mWeight;
 				if (boneIdForEachVertex[VertexID] < FILLWAVE_MAX_BONES_DEPENDENCIES) {
 					mDataVertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] =
-					    animator->getId(shape->mBones[i]->mName.C_Str());
+					   animator->getId(shape->mBones[i]->mName.C_Str());
 					mDataVertices[VertexID].mBoneWeight[boneIdForEachVertex[VertexID]] =
-					    Weight;
+					   Weight;
 					boneIdForEachVertex[VertexID]++;
 				} else {
 					FLOG_FATAL("Crater can handle maximum %d bone dependencies.",
@@ -118,11 +118,11 @@ VertexBufferBasic::VertexBufferBasic(
 }
 
 VertexBufferBasic::VertexBufferBasic(
-    framework::TerrainConstructor* constructor,
-    GLint chunkDensity,
-    GLfloat gapSize,
-    std::vector<GLuint>& indices,
-    GLuint dataStoreModification) :
+   framework::TerrainConstructor* constructor,
+   GLint chunkDensity,
+   GLfloat gapSize,
+   std::vector<GLuint>& indices,
+   GLuint dataStoreModification) :
 	TVertexBuffer<VertexBasic>(dataStoreModification) {
 
 	core::VertexBasic vertex;
@@ -144,7 +144,7 @@ VertexBufferBasic::VertexBufferBasic(
 			vertex.mTextureUV[1] = z / chunkDensity;
 
 			vertex.mPosition[1] = constructor->calculateHeight(
-			                          vertex.mTextureUV[0], vertex.mTextureUV[1]); // calculate height 0.0f;
+			                         vertex.mTextureUV[0], vertex.mTextureUV[1]); // calculate height 0.0f;
 
 			mDataVertices.push_back(vertex);
 		}
@@ -192,10 +192,10 @@ VertexBufferBasic::VertexBufferBasic(
 		}
 
 		glm::vec2 deltaUV1(
-		    mDataVertices[indices[j]].mTextureUV[0]
-		    - mDataVertices[indices[i]].mTextureUV[0],
-		    mDataVertices[indices[j]].mTextureUV[1]
-		    - mDataVertices[indices[i]].mTextureUV[1]);
+		   mDataVertices[indices[j]].mTextureUV[0]
+		   - mDataVertices[indices[i]].mTextureUV[0],
+		   mDataVertices[indices[j]].mTextureUV[1]
+		   - mDataVertices[indices[i]].mTextureUV[1]);
 
 		glm::vec3 tangent = deltaPosition / (deltaUV1.s != 0 ? deltaUV1.s :
 		                                     1.0f); //xxx check if 0.0f  stackOverflow 17000255
@@ -223,8 +223,8 @@ VertexBufferBasic::VertexBufferBasic(
 }
 
 VertexBufferBasic::VertexBufferBasic(
-    std::vector<core::VertexBasic>& vertices,
-    GLuint dataStoreModification) :
+   std::vector<core::VertexBasic>& vertices,
+   GLuint dataStoreModification) :
 	TVertexBuffer<VertexBasic>(vertices, dataStoreModification) {
 
 }

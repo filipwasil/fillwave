@@ -25,7 +25,7 @@ namespace framework {
  */
 
 class Bone: public Hinge {
-  public:
+ public:
 	Bone(fBone* assimpBone);
 	virtual ~Bone() = default;
 
@@ -41,7 +41,7 @@ class Bone: public Hinge {
 
 	void log();
 
-  private:
+ private:
 	std::string mName;
 	glm::mat4 mOffsetMatrix;
 	glm::mat4 mGlobalOffsetMatrix;

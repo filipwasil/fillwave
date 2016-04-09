@@ -23,10 +23,10 @@ AssimpNode::AssimpNode(aiNode* node) :
 }
 
 void AssimpNode::update(
-    float timeElapsed_s,
-    glm::mat4 parent,
-    Animator* boneManager,
-    GLint activeAnimation) {
+   float timeElapsed_s,
+   glm::mat4 parent,
+   Animator* boneManager,
+   GLint activeAnimation) {
 	std::string nodeName(mName);
 	Animation* a = boneManager->getAnimation(activeAnimation);
 	glm::mat4 transformation = mTransformation;
@@ -79,8 +79,8 @@ Animator::Animator(const aiScene* scene) :
 
 	if (numBones > FILLWAVE_MAX_BONES) {
 		FLOG_FATAL(
-		    "Crater can handle maximum %d bones. The model contains %d bones.",
-		    FILLWAVE_MAX_BONES, numBones);
+		   "Crater can handle maximum %d bones. The model contains %d bones.",
+		   FILLWAVE_MAX_BONES, numBones);
 	}
 
 	for (GLuint k = 0; k < scene->mNumAnimations; k++) {
@@ -91,7 +91,7 @@ Animator::Animator(const aiScene* scene) :
 
 	/* Init node tree after bones are added */
 	mSceneInverseMatrix = glm::inverse(
-	                          assimpToGlmMat4(scene->mRootNode->mTransformation));
+	                         assimpToGlmMat4(scene->mRootNode->mTransformation));
 	mRootAnimationNode = initNode(scene->mRootNode);
 }
 
@@ -154,8 +154,8 @@ GLint Animator::getAnimations() const {
 }
 
 void Animator::updateTransformations(
-    GLint activeAnimation,
-    float timeElapsed_s) {
+   GLint activeAnimation,
+   float timeElapsed_s) {
 
 	if (activeAnimation == FILLWAVE_DO_NOT_ANIMATE) {
 		mTimeSinceStartSeconds = 0;
@@ -164,8 +164,8 @@ void Animator::updateTransformations(
 		//FLOG_INFO("Update full transformation with time: %f", timeElapsed_s);
 		mTimeSinceStartSeconds += timeElapsed_s;
 		float TicksPerSecond = (float) (
-		                           mAnimations[activeAnimation]->getTicksPerSec() != 0 ?
-		                           mAnimations[activeAnimation]->getTicksPerSec() : 25.0f);
+		                          mAnimations[activeAnimation]->getTicksPerSec() != 0 ?
+		                          mAnimations[activeAnimation]->getTicksPerSec() : 25.0f);
 		float TimeInTicks = mTimeSinceStartSeconds * TicksPerSecond;
 		float AnimationTime = fmod(TimeInTicks,
 		                           (float) mAnimations[activeAnimation]->getDuration());
@@ -200,8 +200,8 @@ void Animator::log() {
 }
 
 Channel* Animator::findChannel(
-    Animation* animation,
-    const std::string& nodeName) const {
+   Animation* animation,
+   const std::string& nodeName) const {
 	for (int i = 0; i < animation->getHowManyChannels(); i++) {
 		Channel* channel = animation->getChannel(i);
 
@@ -213,8 +213,8 @@ Channel* Animator::findChannel(
 }
 
 glm::vec3 Animator::getCurrentTranslation(
-    float timeElapsed_s,
-    Channel* channel) const {
+   float timeElapsed_s,
+   Channel* channel) const {
 	if (channel->mKeysTranslation.size() == 1) {
 		return channel->mKeysTranslation[0].mValue;
 	}
@@ -234,8 +234,8 @@ glm::vec3 Animator::getCurrentTranslation(
 }
 
 glm::vec3 Animator::getCurrentScale(
-    float timeElapsed_s,
-    Channel* channel) const {
+   float timeElapsed_s,
+   Channel* channel) const {
 	if (channel->mKeysScaling.size() == 1) {
 		return channel->mKeysScaling[0].mValue;
 	}
@@ -255,8 +255,8 @@ glm::vec3 Animator::getCurrentScale(
 }
 
 glm::quat Animator::getCurrentRotation(
-    float timeElapsed_s,
-    Channel* channel) const {
+   float timeElapsed_s,
+   Channel* channel) const {
 	if (channel->mKeysRotation.size() == 1) {
 		return channel->mKeysRotation[0].mValue;
 	}
@@ -275,9 +275,9 @@ glm::quat Animator::getCurrentRotation(
 }
 
 glm::fquat Animator::lerp(
-    const glm::fquat &v0,
-    const glm::fquat &v1,
-    float alpha) const {
+   const glm::fquat &v0,
+   const glm::fquat &v1,
+   float alpha) const {
 	glm::vec4 start = glm::vec4(v0.x, v0.y, v0.z, v0.w);
 	glm::vec4 end = glm::vec4(v1.x, v1.y, v1.z, v1.w);
 	glm::vec4 interp = glm::mix(start, end, alpha);
@@ -286,8 +286,8 @@ glm::fquat Animator::lerp(
 }
 
 GLuint Animator::getTranslationStep(
-    float timeElapsed_s,
-    Channel* channel) const {
+   float timeElapsed_s,
+   Channel* channel) const {
 	for (GLuint i = 0; i < channel->mKeysTranslation.size() - 1; i++) {
 		if (timeElapsed_s < (float) channel->mKeysTranslation[i + 1].mTime) {
 			return i;

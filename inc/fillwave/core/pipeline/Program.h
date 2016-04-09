@@ -26,18 +26,17 @@ namespace core {
  */
 
 class Program {
-  public:
-	Program(
-	    const std::vector<pShader>& shaders,
-	    GLboolean skipLinking = GL_FALSE);
+ public:
+	Program(const std::vector<core::Shader*>& shaders,
+	        GLboolean skipLinking = GL_FALSE);
 
 	virtual ~Program();
 
 	void link();
 
 	/* Shaders */
-	void attach(pShader shader);
-	void detach(pShader shader);
+	void attach(core::Shader* shader);
+	void detach(core::Shader* shader);
 
 	void use() const;
 
@@ -68,25 +67,20 @@ class Program {
 	void reload();
 	void log() const;
 
-  private:
+ private:
 	GLuint mHandle;
-
 	std::vector<Uniform> mUniforms;
-
 	std::vector<puUniformBuffer> mUnifromBuffers;
 	GLboolean mDelayedLinking;
-	std::vector<pShader> mShaders;
+	std::vector<core::Shader*> mShaders;
 	void getUniforms();
 };
 
 } /* core */
-typedef std::shared_ptr<core::Program> pProgram;
-typedef std::weak_ptr<core::Program> pwProgram;
-
-static pProgram buildProgram(
-    const std::vector<pShader>& shaders,
-    GLboolean skipLinking = GL_FALSE) {
-	return std::make_shared < core::Program > (shaders, skipLinking);
+static core::Program* buildProgram( //xxx this should not be public
+   const std::vector<core::Shader*>& shaders,
+   GLboolean skipLinking = GL_FALSE) {
+	return new core::Program(shaders, skipLinking);
 }
 } /* fillwave */
 

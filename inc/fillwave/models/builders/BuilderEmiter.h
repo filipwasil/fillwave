@@ -19,7 +19,7 @@ namespace framework {
  */
 
 class BuilderEmiter {
-  public:
+ public:
 	BuilderEmiter(Engine* engine);
 
 	virtual ~BuilderEmiter() = default;
@@ -42,7 +42,7 @@ class BuilderEmiter {
 	pIEmiterPoint buildEmiterGPU();
 	pIEmiterPoint buildEmiterCPU();
 
-  private:
+ private:
 	Engine* mEngine;
 	GLfloat mEmitingSourceRate;
 	GLuint mHowMany;

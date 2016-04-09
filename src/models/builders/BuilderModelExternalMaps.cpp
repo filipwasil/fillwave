@@ -13,12 +13,12 @@ namespace fillwave {
 namespace framework {
 
 BuilderModelExternalMaps::BuilderModelExternalMaps(
-    Engine* engine,
-    std::string modelPath,
-    pProgram program,
-    std::string diffusePath,
-    std::string normalPath,
-    std::string specularPath) :
+   Engine* engine,
+   std::string modelPath,
+   core::Program* program,
+   std::string diffusePath,
+   std::string normalPath,
+   std::string specularPath) :
 	BuilderModel(engine, modelPath, program),
 	mDiffuseMapPath(diffusePath),
 	mNormalMapPath(normalPath),

@@ -18,15 +18,15 @@ namespace framework {
  */
 
 class BuilderModelManual: public BuilderModel {
-  public:
+ public:
 	BuilderModelManual(
-	    Engine* engine,
-	    std::string modelPath = "",
-	    pProgram program = pProgram(),
-	    core::Texture2D* diffuseMap = nullptr,
-	    core::Texture2D* normalMap = nullptr,
-	    core::Texture2D* specularMap = nullptr,
-	    Material material = Material());
+	   Engine* engine,
+	   std::string modelPath = "",
+	   core::Program* program = nullptr,
+	   core::Texture2D* diffuseMap = nullptr,
+	   core::Texture2D* normalMap = nullptr,
+	   core::Texture2D* specularMap = nullptr,
+	   Material material = Material());
 
 	virtual ~BuilderModelManual() = default;
 
@@ -36,7 +36,7 @@ class BuilderModelManual: public BuilderModel {
 	BuilderModelManual& setMaterial(Material material);
 	pModel build();
 
-  private:
+ private:
 	core::Texture2D* mDiffuseMap;
 	core::Texture2D* mNormalMap;
 	core::Texture2D* mSpecularMap;

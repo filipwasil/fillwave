@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class IEffect {
-  public:
+ public:
 	IEffect() = default;
 	virtual ~IEffect() = default;
 

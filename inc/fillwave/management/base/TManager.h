@@ -22,7 +22,7 @@ namespace framework {
  */
 template <class T>
 class TPolicyShared {
-  public:
+ public:
 	TPolicyShared() = default;
 	~TPolicyShared() = default;
 
@@ -37,7 +37,7 @@ class TPolicyShared {
  */
 template <class T>
 class TPolicyUnique {
-  public:
+ public:
 	TPolicyUnique() = default;
 	~TPolicyUnique() = default;
 
@@ -60,7 +60,7 @@ inline T FillwaveItemConstruct(P ... parameters) {
  */
 template <class T, size_t M, class C, typename ... P>
 class TManager: public std::vector<T> {
-  public:
+ public:
 
 	TManager() = default;
 	virtual ~TManager() = default;

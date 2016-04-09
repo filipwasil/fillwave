@@ -22,7 +22,7 @@ public:
    PickableModel(std::string name,
                  pText text,
                  Engine* engine,
-                 pProgram program,
+                 core::Program* program,
                  const std::string& shapePath);
    virtual ~PickableModel();
    void onPicked();

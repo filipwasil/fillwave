@@ -13,11 +13,11 @@ namespace fillwave {
 namespace framework {
 
 EmiterPointStep::EmiterPointStep(
-    Engine* engine,
-    GLint howMany,
-    GLenum blendingSource,
-    GLenum blendingDestination,
-    core::Texture* texture) :
+   Engine* engine,
+   GLint howMany,
+   GLenum blendingSource,
+   GLenum blendingDestination,
+   core::Texture* texture) :
 	IEmiterPoint(engine, howMany, 100, //size
 	             1, //lifetime
 	             texture, glm::vec4(1.0, 1.0, 1.0, 0.0), // color

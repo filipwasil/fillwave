@@ -21,7 +21,7 @@ namespace framework {
  */
 
 class SphereSkybox: public Shape<core::VertexPosition> {
-  public:
+ public:
 	SphereSkybox(GLfloat radius, GLuint rings, GLuint sectors) {
 		float const R = 1.f / (float) (rings - 1);
 		float const S = 1.f / (float) (sectors - 1);
@@ -66,7 +66,7 @@ class SphereSkybox: public Shape<core::VertexPosition> {
 
 	virtual ~SphereSkybox() = default;
 
-  private:
+ private:
 	const GLfloat mScale = 100.0;
 };
 

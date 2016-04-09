@@ -14,16 +14,16 @@ namespace fillwave {
 namespace framework {
 
 IEmiterPoint::IEmiterPoint(
-    Engine* engine,
-    GLuint howMany,
-    GLfloat size,
-    GLfloat lifetime,
-    core::Texture* texture,
-    glm::vec4 color,
-    GLenum blendingSource,
-    GLenum blendingDestination,
-    GLboolean depthTesting,
-    GLfloat alphaCutOff) :
+   Engine* engine,
+   GLuint howMany,
+   GLfloat size,
+   GLfloat lifetime,
+   core::Texture* texture,
+   glm::vec4 color,
+   GLenum blendingSource,
+   GLenum blendingDestination,
+   GLboolean depthTesting,
+   GLfloat alphaCutOff) :
 	IReloadable(engine),
 	Entity(),
 	mStartSize(size),

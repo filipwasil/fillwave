@@ -14,9 +14,9 @@ namespace fillwave {
 namespace core {
 
 VertexBufferText::VertexBufferText(
-    std::vector<GLfloat> positions,
-    std::vector<GLfloat> textureCoords,
-    GLuint dataStoreModification) :
+   std::vector<GLfloat> positions,
+   std::vector<GLfloat> textureCoords,
+   GLuint dataStoreModification) :
 	TVertexBuffer(dataStoreModification) {
 	size_t size = positions.size();
 	if (size == textureCoords.size()) {

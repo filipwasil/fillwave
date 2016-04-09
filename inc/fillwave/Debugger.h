@@ -16,15 +16,15 @@ class FramebufferGeometry;
 }
 
 enum class eDebuggerState {
-    eLightsSpot,
-    eLightsSpotColor,
-    eLightsSpotDepth,
-    eLightsPoint,
-    eLightsPointDepth,
-    eLightsPointColor,
-    ePickingMap,
-    eOff,
-    eToggleState
+   eLightsSpot,
+   eLightsSpotColor,
+   eLightsSpotDepth,
+   eLightsPoint,
+   eLightsPointDepth,
+   eLightsPointColor,
+   ePickingMap,
+   eOff,
+   eToggleState
 };
 
 class Engine;
@@ -43,7 +43,7 @@ class Camera;
  */
 
 class Debugger: public IReloadable {
-  public:
+ public:
 	Debugger(Engine* engine);
 	virtual ~Debugger() = default;
 
@@ -55,15 +55,15 @@ class Debugger: public IReloadable {
 	void renderDepthOrthographic(GLint id = 0);
 	void renderPickingMap();
 	void renderGeometryBuffer(
-	    GLuint width,
-	    GLuint height,
-	    GLuint attachments,
-	    core::FramebufferGeometry* buffer);
+	   GLuint width,
+	   GLuint height,
+	   GLuint attachments,
+	   core::FramebufferGeometry* buffer);
 	void setMiniwindowSize(GLfloat size);
 
-  private:
+ private:
 	eDebuggerState mState;
-	pProgram mProgram;
+	core::Program* mProgram;
 	Engine* mEngine;
 
 	pVertexBufferDebug mVBO;

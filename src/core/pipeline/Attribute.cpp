@@ -15,12 +15,12 @@ namespace fillwave {
 namespace core {
 
 Attribute::Attribute(
-    std::string name,
-    GLuint index,
-    GLint size,
-    GLsizei stride,
-    GLenum type,
-    GLboolean normalized) :
+   std::string name,
+   GLuint index,
+   GLint size,
+   GLsizei stride,
+   GLenum type,
+   GLboolean normalized) :
 	mStride(stride),
 	mName(name),
 	mIndex(index),
@@ -30,39 +30,39 @@ Attribute::Attribute(
 	mPointer((GLvoid*) 0) {
 
 	switch (mType) {
-	case GL_UNSIGNED_INT:
-	case GL_UNSIGNED_INT_VEC2:
-	case GL_UNSIGNED_INT_VEC3:
-	case GL_UNSIGNED_INT_VEC4:
-		//mType = GL_UNSIGNED_SHORT;
-		mTypeSize = sizeof(GLuint);
-		break;
-	case GL_FLOAT:
-	case GL_FLOAT_VEC2:
-	case GL_FLOAT_VEC3:
-	case GL_FLOAT_VEC4:
-	case GL_FLOAT_MAT2:
-	case GL_FLOAT_MAT3:
-	case GL_FLOAT_MAT4:
-		mTypeSize = sizeof(GLfloat);
-		break;
-	case GL_INT:
-	case GL_INT_VEC2:
-	case GL_INT_VEC3:
-	case GL_INT_VEC4:
-		//mType = GL_SHORT;
-		mTypeSize = sizeof(GLint);
-		break;
-	case GL_BOOL:
-	case GL_BOOL_VEC2:
-	case GL_BOOL_VEC3:
-	case GL_BOOL_VEC4:
-		mTypeSize = sizeof(GLboolean);
-		break;
-	default:
-		std::cout << "Not supported type of attribute" << std::endl;
-		mTypeSize = sizeof(float);
-		break;
+		case GL_UNSIGNED_INT:
+		case GL_UNSIGNED_INT_VEC2:
+		case GL_UNSIGNED_INT_VEC3:
+		case GL_UNSIGNED_INT_VEC4:
+			//mType = GL_UNSIGNED_SHORT;
+			mTypeSize = sizeof(GLuint);
+			break;
+		case GL_FLOAT:
+		case GL_FLOAT_VEC2:
+		case GL_FLOAT_VEC3:
+		case GL_FLOAT_VEC4:
+		case GL_FLOAT_MAT2:
+		case GL_FLOAT_MAT3:
+		case GL_FLOAT_MAT4:
+			mTypeSize = sizeof(GLfloat);
+			break;
+		case GL_INT:
+		case GL_INT_VEC2:
+		case GL_INT_VEC3:
+		case GL_INT_VEC4:
+			//mType = GL_SHORT;
+			mTypeSize = sizeof(GLint);
+			break;
+		case GL_BOOL:
+		case GL_BOOL_VEC2:
+		case GL_BOOL_VEC3:
+		case GL_BOOL_VEC4:
+			mTypeSize = sizeof(GLboolean);
+			break;
+		default:
+			std::cout << "Not supported type of attribute" << std::endl;
+			mTypeSize = sizeof(float);
+			break;
 	}
 }
 

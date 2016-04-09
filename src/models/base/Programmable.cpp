@@ -13,14 +13,14 @@ FLOGINIT("Programmable", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Programmable::Programmable(pProgram program) :
+Programmable::Programmable(core::Program* program) :
 	mProgram(program) {
 
 }
 
 void Programmable::drawWithEffects(ICamera& camera) {
 
-	core::Program* p = mProgram.get();
+	core::Program* p = mProgram;
 
 	/* Effects execution */
 	p->use();
@@ -46,7 +46,7 @@ void Programmable::drawWithEffects(ICamera& camera) {
 
 void Programmable::drawWithEffectsDR(ICamera& camera) {
 
-	core::Program* p = mProgram.get();
+	core::Program* p = mProgram;
 
 	/* Effects execution */
 	std::for_each(mEffects.begin(), mEffects.end(),
@@ -68,7 +68,7 @@ void Programmable::drawWithEffectsDR(ICamera& camera) {
 
 void Programmable::drawWithEffectsPBRP(ICamera& camera) {
 
-	core::Program* p = mProgram.get();
+	core::Program* p = mProgram;
 
 	/* Effects execution */
 	std::for_each(mEffects.begin(), mEffects.end(),
@@ -99,7 +99,7 @@ void Programmable::addEffect(pIEffect effect) {
 	}
 	mEffects.push_back(effect);
 	mProgram->use();
-	effect->startAction(mProgram.get());
+	effect->startAction(mProgram);
 	core::Program::disusePrograms();
 }
 
@@ -112,7 +112,7 @@ void Programmable::removeEffect(pIEffect effect) {
 	if (it != _end) {
 		/* Start stop action */
 		mProgram->use();
-		effect->stopAction(mProgram.get());
+		effect->stopAction(mProgram);
 		core::Program::disusePrograms();
 	}
 }

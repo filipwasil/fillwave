@@ -9,22 +9,13 @@
 #define PROGRAMMANAGER_H_
 
 #include <fillwave/core/pipeline/Program.h>
-#include <fillwave/management/base/TManagerComposite.h>
+#include <fillwave/management/base/TManagerSmart.h>
 
 namespace fillwave {
 namespace framework {
 
-/**
- * Data structure containing each Sampler instance info.
- */
-typedef Composition<pProgram, TPolicyShared<core::Program>,
-        const std::vector<pShader>&, GLboolean> ProgramObject;
-
-/**
- * Program manager
- */
-typedef ManagerComposite<std::unique_ptr<ProgramObject>, pProgram, std::string,
-        UINT_MAX, TPolicyUnique<ProgramObject>, const std::vector<pShader>&,
+typedef TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Program,
+        std::string, const std::vector<core::Shader*>&,
         GLboolean> ManagerPrograms;
 
 } /* framework */

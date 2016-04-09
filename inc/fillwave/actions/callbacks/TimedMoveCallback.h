@@ -20,18 +20,18 @@ namespace framework {
  */
 
 class TimedMoveCallback: public TimedCallback {
-  public:
+ public:
 	TimedMoveCallback(
-	    pMoveable moveable,
-	    glm::vec3 endPosition,
-	    GLfloat lifeTime,
-	    EasingFunction easing = LinearInterpolation);
+	   pMoveable moveable,
+	   glm::vec3 endPosition,
+	   GLfloat lifeTime,
+	   EasingFunction easing = LinearInterpolation);
 
 	virtual ~TimedMoveCallback() = default;
 
 	void performTime(TimeEventData& data);
 
-  protected:
+ protected:
 	glm::vec3 mStartPosition;
 	glm::vec3 mEndPosition;
 	pMoveable mMoveable;

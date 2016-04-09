@@ -20,21 +20,21 @@ namespace core {
  */
 
 class PostProcessingPass: public framework::Finishable {
-  public:
+ public:
 	PostProcessingPass(
-	    pProgram p,
-	    core::Texture2DRenderableDynamic* t,
-	    GLfloat lifetime);
+	   core::Program* p,
+	   core::Texture2DRenderableDynamic* t,
+	   GLfloat lifetime);
 
 	virtual ~PostProcessingPass() = default;
 
 	core::Texture2DRenderableDynamic* getFrame() const;
 
-	pProgram getProgram() const;
+	core::Program* getProgram() const;
 
-  private:
+ private:
 	core::Texture2DRenderableDynamic* mFrame;
-	pProgram mProgram;
+	core::Program* mProgram;
 };
 
 } /* core */

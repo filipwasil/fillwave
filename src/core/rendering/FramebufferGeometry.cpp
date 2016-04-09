@@ -18,11 +18,11 @@ class TextureManager;
 namespace core {
 
 FramebufferGeometry::FramebufferGeometry(
-    framework::TextureSystem* textures,
-    GLuint width,
-    GLuint height,
-    GLuint colorBuffers,
-    GLuint depthBuffers) :
+   framework::TextureSystem* textures,
+   GLuint width,
+   GLuint height,
+   GLuint colorBuffers,
+   GLuint depthBuffers) :
 	Framebuffer(1),
 	mColorBufferSize(colorBuffers),
 	mSummaryBufferSize(1),
@@ -113,21 +113,21 @@ void FramebufferGeometry::reload() {
 	for (GLint i = 0; i < mColorBufferSize; i++) {
 		mDeferredColors->bind(i, i);
 		attachTexture2DDraw(
-		    GL_COLOR_ATTACHMENT0 + i,
-		    GL_TEXTURE_2D, mDeferredColors->getHandle(i));
+		   GL_COLOR_ATTACHMENT0 + i,
+		   GL_TEXTURE_2D, mDeferredColors->getHandle(i));
 	}
 
 	FLOG_CHECK("attachTexture2DDraw color failed");
 
 	mSummary->bind(mColorBufferSize);
 	attachTexture2DDraw(
-	    GL_COLOR_ATTACHMENT0 + mColorBufferSize,
-	    GL_TEXTURE_2D, mSummary->getHandle());
+	   GL_COLOR_ATTACHMENT0 + mColorBufferSize,
+	   GL_TEXTURE_2D, mSummary->getHandle());
 
 	mStencilDepth->bind();
 	attachTexture2DDraw(
-	    GL_DEPTH_STENCIL_ATTACHMENT,
-	    GL_TEXTURE_2D, mStencilDepth->getHandle());
+	   GL_DEPTH_STENCIL_ATTACHMENT,
+	   GL_TEXTURE_2D, mStencilDepth->getHandle());
 
 	for (GLint i = 0; i < mColorBufferSize + 1; i++) {
 		mColorBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);

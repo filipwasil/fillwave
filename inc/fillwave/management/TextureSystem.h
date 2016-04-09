@@ -26,7 +26,7 @@ static constexpr size_t FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER = 50;
  */
 
 class TextureSystem {
-  public:
+ public:
 	TextureSystem(const std::string& rootPath);
 	virtual ~TextureSystem() = default;
 
@@ -34,15 +34,15 @@ class TextureSystem {
 
 	core::Texture2D* get(std::string texturePath,
 	                     eCompression = eCompression::eNone, eFlip flip =
-	                         eFlip::eVertical);
+	                        eFlip::eVertical);
 
 	core::Texture3D* get(
-	    const std::string& posX,
-	    const std::string& negX,
-	    const std::string& posY,
-	    const std::string& negY,
-	    const std::string& posZ,
-	    const std::string& negZ);
+	   const std::string& posX,
+	   const std::string& negX,
+	   const std::string& posY,
+	   const std::string& negY,
+	   const std::string& posZ,
+	   const std::string& negZ);
 
 	core::Texture2DRenderable* getShadow2D(GLuint width, GLuint height);
 	core::Texture3DRenderable* getShadow3D(GLuint width, GLuint height);
@@ -50,13 +50,13 @@ class TextureSystem {
 	core::Texture2D* getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
 	core::Texture2D* getDeferredColorScreen(GLuint width, GLuint height,
 	                                        GLuint size =
-	                                                1);
+	                                              1);
 	core::Texture2D* getDeferredDepth(GLuint width, GLuint height);
 	core::Texture2D* getDeferredStencilDepth(GLuint width, GLuint height);
 	core::Texture2DRenderableDynamic* getDynamic(
-	    const std::string& fragmentShaderPath,
-	    pProgram program,
-	    glm::ivec2 screenSize);
+	   const std::string& fragmentShaderPath,
+	   core::Program* program,
+	   glm::ivec2 screenSize);
 
 	void reload();
 
@@ -64,7 +64,7 @@ class TextureSystem {
 	void resizeTextures(GLuint width, GLuint height);
 	void resize(GLuint width, GLuint height);
 
-  private:
+ private:
 
 	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture1D,
 	              size_t, core::ParameterList&> mTextures1D;
@@ -76,7 +76,7 @@ class TextureSystem {
 	              size_t, core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2DDeferred;
 
 	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture2DRenderableDynamic,
-	              std::string, core::Texture2DFile*, core::ParameterList&, pProgram>
+	              std::string, core::Texture2DFile*, core::ParameterList&, core::Program*>
 	              mTextures2DDynamic;
 
 	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture2DRenderable,
@@ -92,7 +92,7 @@ class TextureSystem {
 	              std::string, core::Texture2DFile*, core::Texture2DFile*,
 	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
 	              core::Texture2DFile*, core::ParameterList&, core::Texture2DRenderable*,
-	              pProgram> mTextures3DDynamic;
+	              core::Program*> mTextures3DDynamic;
 
 	TManagerSmart<FILLWAVE_MAXIMUM_TEXTURES_IN_MANAGER, core::Texture3DRenderable, size_t,
 	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,

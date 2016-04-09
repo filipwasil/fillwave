@@ -17,7 +17,7 @@ namespace framework {
 
 template <class T>
 class Key {
-  public:
+ public:
 	float mTime;
 	T mValue;
 	Key(float timeStamp, T value) :

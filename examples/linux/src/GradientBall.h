@@ -22,13 +22,13 @@ namespace framework {
 
 class GradientBall: public Impostor {
 private:
-   pProgram mProgram;
+   core::Program* mProgram;
 public:
    GradientBall(Engine* engine,
-                pProgram program,
+                core::Program* program,
                 GLfloat lifetime = 1.0,
                 GLfloat size = 1.0,
-                pTexture texture = pTexture());
+                core::Texture* texture = nullptr);
    virtual ~GradientBall();
    void draw(ICamera& camera);
    };

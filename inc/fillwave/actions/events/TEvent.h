@@ -21,7 +21,7 @@ namespace framework {
 
 template <class T>
 class TEvent: public EventType {
-  public:
+ public:
 	TEvent(T data) :
 		EventType(data.type), mData(data) {
 
@@ -38,7 +38,7 @@ class TEvent: public EventType {
 		return e;
 	}
 
-  private:
+ private:
 	T mData;
 };
 

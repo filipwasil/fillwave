@@ -35,7 +35,7 @@ typedef TManager<pLightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
  * \brief Light system knows about all light related stuff.
  */
 class LightSystem {
-  public:
+ public:
 	LightSystem();
 	virtual ~LightSystem() = default;
 
@@ -57,19 +57,19 @@ class LightSystem {
 
 	/* Deferred rendering */
 	void updateDeferredBufferSpot(
-	    GLuint lightID,
-	    core::Program* program,
-	    GLint currentShadowUnit);
+	   GLuint lightID,
+	   core::Program* program,
+	   GLint currentShadowUnit);
 	void updateDeferredBufferDirectional(
-	    GLuint lightID,
-	    core::Program* program,
-	    GLint currentShadowUnit);
+	   GLuint lightID,
+	   core::Program* program,
+	   GLint currentShadowUnit);
 	void updateDeferredBufferPoint(
-	    GLuint lightID,
-	    core::Program* program,
-	    GLint currentShadowUnit);
+	   GLuint lightID,
+	   core::Program* program,
+	   GLint currentShadowUnit);
 
-  private:
+ private:
 	std::vector<LighUniformData> mLightBufferData;
 
 	GLboolean isRefreshLightSpot();

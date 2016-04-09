@@ -28,7 +28,7 @@ struct CursorPositionEventData {
  */
 
 class CursorPositionEvent: public TEvent<CursorPositionEventData> {
-  public:
+ public:
 	CursorPositionEvent(CursorPositionEventData& data) :
 		TEvent<CursorPositionEventData>(data) {
 

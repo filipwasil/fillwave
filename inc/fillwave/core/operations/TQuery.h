@@ -19,10 +19,10 @@ namespace core {
 
 template <GLenum target>
 class TQuery: public GLObject {
-  private:
+ private:
 	GLenum mTarget = target;
 
-  public:
+ public:
 	TQuery(GLsizei howMany = 1);
 
 	virtual ~TQuery();

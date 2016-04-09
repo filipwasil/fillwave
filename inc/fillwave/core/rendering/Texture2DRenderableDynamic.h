@@ -19,11 +19,11 @@ namespace core {
  */
 
 class Texture2DRenderableDynamic: public Texture2DRenderable {
-  public:
+ public:
 	Texture2DRenderableDynamic(
-	    Texture2DFile* file,
-	    ParameterList& parameters,
-	    pProgram program);
+	   Texture2DFile* file,
+	   ParameterList& parameters,
+	   core::Program* program);
 
 	virtual ~Texture2DRenderableDynamic() = default;
 
@@ -31,8 +31,8 @@ class Texture2DRenderableDynamic: public Texture2DRenderable {
 
 	void reload();
 
-  private:
-	pProgram mProgram;
+ private:
+	core::Program* mProgram;
 
 	GLfloat mTimePassed;
 	GLint mUniformLocationCacheTime;

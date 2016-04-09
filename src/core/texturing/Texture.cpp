@@ -14,10 +14,10 @@ namespace fillwave {
 namespace core {
 
 Texture2DFileConfig::Texture2DFileConfig(
-    GLint level,
-    GLint border,
-    GLboolean mipmaps,
-    GLboolean compression) :
+   GLint level,
+   GLint border,
+   GLboolean mipmaps,
+   GLboolean compression) :
 	mMipmapsLevel(level),
 	mMipmaps(mipmaps),
 	mCompression(compression),
@@ -27,11 +27,11 @@ Texture2DFileConfig::Texture2DFileConfig(
 }
 
 Texture2DFileHeader::Texture2DFileHeader(
-    GLint internalFormat,
-    GLint format,
-    GLint type,
-    GLsizei width,
-    GLsizei height) :
+   GLint internalFormat,
+   GLint format,
+   GLint type,
+   GLsizei width,
+   GLsizei height) :
 	mInternalFormat(internalFormat),
 	mHeight(height),
 	mWidth(width),

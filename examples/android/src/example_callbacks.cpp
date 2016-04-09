@@ -33,7 +33,7 @@ void perform(fillwave::Engine* engine) {
 
    /* Program */
    loader::ProgramLoader loader;
-   pProgram progDefault = loader.getDefault(engine);
+   core::Program* progDefault = loader.getDefault(engine);
 
 
    /* Lights */

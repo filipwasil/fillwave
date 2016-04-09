@@ -22,7 +22,7 @@ namespace framework {
  */
 
 class SequenceCallback: public Callback, public std::vector<Callback*> {
-  public:
+ public:
 	SequenceCallback();
 	virtual ~SequenceCallback();
 
@@ -32,7 +32,7 @@ class SequenceCallback: public Callback, public std::vector<Callback*> {
 
 	void perform(EventType& eventType);
 
-  protected:
+ protected:
 	std::vector<Callback*>::iterator mCallbackIterator;
 	bool mReloaditerator;
 };

@@ -30,7 +30,7 @@ namespace core {
  */
 
 class Shader {
-  public:
+ public:
 	Shader(GLuint shaderType, const std::string& shaderSource);
 
 	virtual ~Shader();
@@ -57,7 +57,7 @@ class Shader {
 
 	void reload();
 
-  private:
+ private:
 	GLuint mHandle;
 
 	GLuint mType;
@@ -66,14 +66,10 @@ class Shader {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Shader> pShader;
 } /* fillwave */
 
-std::vector<fillwave::pShader> operator+(
-    fillwave::pShader shader1,
-    fillwave::pShader shader2);
-std::vector<fillwave::pShader> operator+(
-    std::vector<fillwave::pShader> shaders,
-    fillwave::pShader shader2);
+std::vector<fillwave::core::Shader*> operator+(
+   std::vector<fillwave::core::Shader*> shaders,
+   fillwave::core::Shader* shader2);
 
 #endif /* SHADER_H_ */

@@ -25,7 +25,7 @@ namespace framework {
  */
 
 class IScene: public TreePtr<pEntity> {
-  public:
+ public:
 	IScene(IRenderer* renderer = new RendererFR());
 
 	virtual ~IScene() = default;
@@ -69,7 +69,7 @@ class IScene: public TreePtr<pEntity> {
 	virtual void onShow();
 	virtual void onHide();
 
-  protected:
+ protected:
 	pCursor mCursor;
 	pSkybox mSkybox;
 	std::unordered_map<GLint, pEntity> mPickingTable;
@@ -78,7 +78,7 @@ class IScene: public TreePtr<pEntity> {
 	puIRenderer mRenderer;
 	pHUD mHUD;
 
-  private:
+ private:
 	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;
 };
 

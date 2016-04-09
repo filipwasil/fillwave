@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class Hinge: public Entity {
-  public:
+ public:
 	Hinge() = default;
 	virtual ~Hinge() = default;
 

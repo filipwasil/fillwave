@@ -65,7 +65,7 @@ void Moveable::moveByZ(GLfloat distance) {
 
 void Moveable::moveInDirection(glm::vec3 direction) {
 	mTranslation += glm::vec3(
-	                    glm::mat4_cast(mRotation) * glm::vec4(direction, 1.0));
+	                   glm::mat4_cast(mRotation) * glm::vec4(direction, 1.0));
 	mRefresh = true;
 }
 

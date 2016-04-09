@@ -163,7 +163,7 @@ bool androidExtract( const std::string& name ) {
 
 std::string androidGetPath(const char* pFile) {
 	return std::string(std::string(gActivity->internalDataPath) + "/" + std::string(
-	                       pFile));
+	                      pFile));
 }
 
 bool androidExtracted(const char* pFile) {

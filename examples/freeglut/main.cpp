@@ -71,14 +71,14 @@ int main(int argc, char *argv[]) {
 	LoopCallback* loop[SPHERES];
 
 	/* Program */
-	pProgram progDefault = ProgramLoader(engine).getDefault();
+	core::Program* progDefault = ProgramLoader(engine).getDefault();
 
 	/* Lights */
 	engine->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(),
 			glm::vec4(0.0, 1.0, 0.0, 0.0));
 
 	/* Models */
-	pTexture2D t = engine->storeTexture("textures/multicolor.dds", eCompression::eS3tc_dxt5_rgba);
+	core::Texture2D* t = engine->storeTexture("textures/multicolor.dds", eCompression::eS3tc_dxt5_rgba);
 	pModel wall = buildModel(engine, progDefault, "meshes/floor.obj", t);
 
 	scene->attach(wall);

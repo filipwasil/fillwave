@@ -22,13 +22,13 @@ namespace core {
  */
 
 class UniformBuffer: public Buffer {
-  public:
+ public:
 	UniformBuffer(
-	    std::string name,
-	    GLuint index,
-	    GLuint uniformBlockSize,
-	    GLuint bindingPoint,
-	    GLuint dataStoreModification = GL_STATIC_DRAW);
+	   std::string name,
+	   GLuint index,
+	   GLuint uniformBlockSize,
+	   GLuint bindingPoint,
+	   GLuint dataStoreModification = GL_STATIC_DRAW);
 
 	virtual ~UniformBuffer();
 
@@ -38,7 +38,7 @@ class UniformBuffer: public Buffer {
 
 	void push(GLfloat* data);
 
-  private:
+ private:
 	std::string mName;
 	GLuint mBindingPoint;
 };

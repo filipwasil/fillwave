@@ -18,12 +18,12 @@ namespace framework {
  */
 
 class Fog: public IEffect {
-  private:
+ private:
 	glm::vec3 mColour;
 	GLfloat mNearDistance;
 	GLfloat mFarDistance;
 
-  public:
+ public:
 	glm::vec3 getColour() {
 		return mColour;
 	}
@@ -47,9 +47,9 @@ class Fog: public IEffect {
 	}
 
 	Fog(
-	    glm::vec3 colour = glm::vec3(0.1, 0.1, 0.1),
-	    GLfloat near = 0.1,
-	    GLfloat far = 20.0f);
+	   glm::vec3 colour = glm::vec3(0.1, 0.1, 0.1),
+	   GLfloat near = 0.1,
+	   GLfloat far = 20.0f);
 
 	virtual ~Fog() = default;
 

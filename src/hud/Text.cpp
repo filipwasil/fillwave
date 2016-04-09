@@ -16,14 +16,14 @@ namespace fillwave {
 namespace framework {
 
 Text::Text(
-    std::string& text,
-    core::Texture2D* texture,
-    glm::vec2 position,
-    Engine* engine,
-    GLfloat scale,
-    Font* font,
-    glm::vec4 color,
-    eTextEffect effect) :
+   std::string& text,
+   core::Texture2D* texture,
+   glm::vec2 position,
+   Engine* engine,
+   GLfloat scale,
+   Font* font,
+   glm::vec4 color,
+   eTextEffect effect) :
 	IReloadable(engine),
 	IHUDNode(texture, createProgram(engine, effect), position,
 	         glm::vec2(scale, scale)),
@@ -160,13 +160,13 @@ void Text::createVBO() {
 	initVAO();
 }
 
-inline pProgram Text::createProgram(Engine* engine, eTextEffect effect) {
+inline core::Program* Text::createProgram(Engine* engine, eTextEffect effect) {
 	switch (effect) {
-	case eTextEffect::eBold:
-		return ProgramLoader(engine).getTextBold();
-	case eTextEffect::eNone:
-	default:
-		return ProgramLoader(engine).getText();
+		case eTextEffect::eBold:
+			return ProgramLoader(engine).getTextBold();
+		case eTextEffect::eNone:
+		default:
+			return ProgramLoader(engine).getText();
 	}
 }
 

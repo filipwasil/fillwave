@@ -30,8 +30,8 @@ void perform(fillwave::Engine* engine) {
 
     /* Program */
     loader::ProgramLoader loader;
-    pProgram program = loader.getDefault();
-    pProgram aprogram = loader.getDefaultBones();
+    core::Program* program = loader.getDefault();
+    core::Program* aprogram = loader.getDefaultBones();
 
     pModel beast_animated = buildModel(engine, aprogram, "beast.dae");
     pModel beast_animated1 = buildModel(engine, aprogram, "beast.dae");

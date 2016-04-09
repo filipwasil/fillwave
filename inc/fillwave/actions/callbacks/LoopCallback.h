@@ -24,7 +24,7 @@ namespace framework {
  */
 
 class LoopCallback: public Callback {
-  public:
+ public:
 	LoopCallback(Callback* callback, int numberOfExecutions);
 	virtual ~LoopCallback() = default;
 
@@ -34,7 +34,7 @@ class LoopCallback: public Callback {
 
 	void perform(EventType& event);
 
-  protected:
+ protected:
 	puCallback mCallback;
 	int mLoopsLeft;
 };

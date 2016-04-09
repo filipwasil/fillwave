@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class BoostColor: public IEffect {
-  public:
+ public:
 	BoostColor(GLfloat boost = 1.0f);
 	virtual ~BoostColor() = default;
 	void preDrawAction(core::Program* program);
@@ -26,7 +26,7 @@ class BoostColor: public IEffect {
 	void stopAction(core::Program* program);
 	void startAction(core::Program* program);
 
-  private:
+ private:
 	GLfloat mBoost;
 };
 

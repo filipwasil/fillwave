@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class IPickable {
-  public:
+ public:
 	IPickable();
 	virtual ~IPickable() = default;
 
@@ -35,7 +35,7 @@ class IPickable {
 	virtual void onPicked() = 0;
 	virtual void onUnpicked() = 0;
 
-  protected:
+ protected:
 	bool mFlagPickable;
 	glm::vec3 mPickColor;
 };

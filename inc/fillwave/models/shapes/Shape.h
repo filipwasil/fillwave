@@ -22,7 +22,7 @@ namespace framework {
 
 template <class T>
 class Shape {
-  public:
+ public:
 	Shape() {
 
 	}
@@ -47,7 +47,7 @@ class Shape {
 		return mIndices.size();
 	}
 
-  protected:
+ protected:
 	std::vector<T> mVertices;
 	std::vector<GLuint> mIndices;
 };

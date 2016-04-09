@@ -19,12 +19,12 @@ CameraPerspective::CameraPerspective() :
 }
 
 CameraPerspective::CameraPerspective(
-    glm::vec3 position,
-    glm::quat rotation,
-    GLfloat fovy,
-    GLfloat aspectRatio,
-    GLfloat nearPlane,
-    GLfloat farPlane) :
+   glm::vec3 position,
+   glm::quat rotation,
+   GLfloat fovy,
+   GLfloat aspectRatio,
+   GLfloat nearPlane,
+   GLfloat farPlane) :
 	ICamera(position, rotation),
 	mProjectionFovy(fovy),
 	mProjectionAspectRatio(aspectRatio),

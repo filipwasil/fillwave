@@ -20,7 +20,7 @@ namespace core {
  */
 
 class Framebuffer: public GLObject {
-  public:
+ public:
 	Framebuffer(GLsizei howMany = 1);
 
 	virtual ~Framebuffer();
@@ -30,9 +30,9 @@ class Framebuffer: public GLObject {
 	void attachTexture2D(GLenum attachment, GLenum target, GLuint textureHandle);
 
 	void attachTexture2DDraw(
-	    GLenum attachment,
-	    GLenum target,
-	    GLuint textureHandle);
+	   GLenum attachment,
+	   GLenum target,
+	   GLuint textureHandle);
 
 	void bindForWriting(GLuint id = 0) const;
 

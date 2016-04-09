@@ -19,7 +19,7 @@ namespace framework {
  */
 
 class ICamera: public Moveable {
-  public:
+ public:
 	ICamera();
 
 	ICamera(glm::vec3, glm::quat rotation);
@@ -38,7 +38,7 @@ class ICamera: public Moveable {
 	virtual GLfloat getProjectionFarPlane() = 0;
 	virtual void log() const;
 
-  protected:
+ protected:
 	glm::mat4 mCameraMatrix;
 	glm::mat4 mProjectionMatrix;
 

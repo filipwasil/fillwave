@@ -29,8 +29,8 @@ void perform(fillwave::Engine* engine) {
 
     /* Program */
     loader::ProgramLoader loader;
-    pProgram program = loader.getDefault(engine);
-    pProgram aprogram = loader.getDefaultBones(engine);
+    core::Program* program = loader.getDefault(engine);
+    core::Program* aprogram = loader.getDefaultBones(engine);
 
     pShader vertex = engine->storeShaderVertex("default.vert");
 

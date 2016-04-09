@@ -19,7 +19,7 @@ namespace framework {
  */
 
 class ShaderLoader {
-  protected:
+ protected:
 #if defined(FILLWAVE_GLES_3_0)
 	const std::string mGLVersion = "#version 300 es\n";
 	const std::string mGLFragmentPrecision = "precision lowp float;\n";
@@ -40,7 +40,7 @@ class ShaderLoader {
 
 #endif /* defined(FILLWAVE_GLES_2_0) */
 
-  public:
+ public:
 	ShaderLoader() = default;
 	virtual ~ShaderLoader() = default;
 };

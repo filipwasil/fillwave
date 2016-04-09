@@ -17,9 +17,9 @@ namespace fillwave {
 namespace framework {
 
 BuilderModel::BuilderModel(
-    Engine* engine,
-    std::string modelPath,
-    pProgram program) :
+   Engine* engine,
+   std::string modelPath,
+   core::Program* program) :
 	mEngine(engine), mProgram(program), mShapePath(modelPath) {
 }
 
@@ -32,7 +32,7 @@ BuilderModel& BuilderModel::setModelPath(std::string& path) {
 	return *this;
 }
 
-BuilderModel& BuilderModel::setProgram(pProgram program) {
+BuilderModel& BuilderModel::setProgram(core::Program* program) {
 	mProgram = program;
 	return *this;
 }

@@ -14,14 +14,14 @@ namespace fillwave {
 namespace core {
 
 Texture3DRenderable::Texture3DRenderable(
-    Texture2DFile* filePosX,
-    Texture2DFile* fileNegX,
-    Texture2DFile* filePosY,
-    Texture2DFile* fileNegY,
-    Texture2DFile* filePosZ,
-    Texture2DFile* fileNegZ,
-    core::Texture2DRenderable* texture,
-    ParameterList& parameters) :
+   Texture2DFile* filePosX,
+   Texture2DFile* fileNegX,
+   Texture2DFile* filePosY,
+   Texture2DFile* fileNegY,
+   Texture2DFile* filePosZ,
+   Texture2DFile* fileNegZ,
+   core::Texture2DRenderable* texture,
+   ParameterList& parameters) :
 	Texture3D(filePosX, //right
 	          fileNegX, //left
 	          filePosY, //ceil

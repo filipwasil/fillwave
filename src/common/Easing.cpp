@@ -197,8 +197,8 @@ AHFloat ElasticEaseInOut(AHFloat p) {
 	} else {
 		return 0.5f
 		       * (sinf(
-		              -13.0f * static_cast<AHFloat>(M_PI_2)
-		              * ((2.0f * p - 1.0f) + 1.0f))
+		             -13.0f * static_cast<AHFloat>(M_PI_2)
+		             * ((2.0f * p - 1.0f) + 1.0f))
 		          * powf(2.0f, -10.0f * (2.0f * p - 1.0f)) + 2.0f);
 	}
 }

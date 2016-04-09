@@ -13,10 +13,10 @@ namespace fillwave {
 namespace framework {
 
 Button::Button(
-    Engine* engine,
-    core::Texture2D* texture,
-    glm::vec2 position,
-    glm::vec2 scale) :
+   Engine* engine,
+   core::Texture2D* texture,
+   glm::vec2 position,
+   glm::vec2 scale) :
 	IHUDNode(texture, ProgramLoader(engine).getHUD(), position,
 	         glm::vec2(scale.x, scale.y * engine->getScreenAspectRatio())) {
 

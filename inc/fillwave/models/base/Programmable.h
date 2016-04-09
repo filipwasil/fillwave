@@ -19,8 +19,8 @@ namespace framework {
  */
 
 class Programmable: public Entity {
-  public:
-	Programmable(pProgram program);
+ public:
+	Programmable(core::Program* program);
 
 	virtual ~Programmable() = default;
 
@@ -30,8 +30,8 @@ class Programmable: public Entity {
 	void drawWithEffectsDR(ICamera& camera);
 	void drawWithEffectsPBRP(ICamera& camera);
 
-  protected:
-	pProgram mProgram;
+ protected:
+	core::Program* mProgram;
 
 	std::vector<pIEffect> mEffects;
 };

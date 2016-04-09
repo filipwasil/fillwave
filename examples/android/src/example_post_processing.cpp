@@ -34,7 +34,7 @@ void perform(fillwave::Engine* engine) {
 	   pShader vertex = engine->storeShaderVertex("default.vert");
 
 	   /* Programs */
-	   pProgram gProgram = buildProgram(vertex + fragment);
+	   core::Program* gProgram = buildProgram(vertex + fragment);
 
 	   /* Models */
 	   pModel sphere = buildModel(engine, gProgram, "sphere.obj", textureDynamic);

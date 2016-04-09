@@ -43,9 +43,9 @@ struct LightAttenuationData {
  */
 
 class Light: public Moveable {
-  public:
+ public:
 	Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed =
-	          pMoveable());
+	         pMoveable());
 	virtual ~Light() = default;
 
 	void updateFromFollowed();
@@ -58,7 +58,7 @@ class Light: public Moveable {
 	glm::vec4 getIntensity();
 	void log();
 
-  protected:
+ protected:
 	pMoveable mFollowed;
 	glm::vec4 mIntensity;
 	LightAttenuationData mAttenuation;

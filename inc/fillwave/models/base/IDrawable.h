@@ -21,7 +21,7 @@ class ICamera;
  */
 
 class IDrawable {
-  public:
+ public:
 	IDrawable() = default;
 	virtual ~IDrawable() = default;
 	virtual void draw(ICamera& camera) = 0;

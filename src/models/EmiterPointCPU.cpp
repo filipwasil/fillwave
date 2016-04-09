@@ -187,7 +187,7 @@ void EmiterPointCPU::initUniformsCache() {
 	mULCTimeElapsed = mProgram->getUniformLocation("uTimeElapsed");
 	mULCModelMatrix = mProgram->getUniformLocation("uModelMatrix");
 	mULCViewProjectionMatrix = mProgram->getUniformLocation(
-	                               "uViewProjectionMatrix");
+	                              "uViewProjectionMatrix");
 	mULCCameraPosition = mProgram->getUniformLocation("uCameraPosition");
 	mULCPointSize = mProgram->getUniformLocation("uPointSize");
 	mULCColor = mProgram->getUniformLocation("uColor");

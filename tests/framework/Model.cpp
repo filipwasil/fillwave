@@ -11,18 +11,18 @@ using namespace fillwave;
 
 pModel buildModel(
 		Engine* engine,
-		pProgram program,
+		core::Program* program,
 		framework::Shape<core::VertexBasic>& shape,
-		pTexture2D diffuseMap,
-		pTexture2D normalMap ,
-		pTexture2D specularMap,
+		core::Texture2D* diffuseMap,
+		core::Texture2D* normalMap ,
+		core::Texture2D* specularMap,
 		framework::Material material) {
 
 }
 
 pModel buildModel(
 		Engine* engine,
-		pProgram program,
+		core::Program* program,
 		const std::string& shapePath,
 		const std::string& diffuseMapPath,
 		const std::string& normalMapPath,
@@ -32,18 +32,18 @@ pModel buildModel(
 
 pModel buildModel(
 		Engine* engine,
-		pProgram program,
+		core::Program* program,
 		const std::string& shapePath,
-		pTexture2D diffuseMap,
-		pTexture2D normalMap,
-		pTexture2D specularMap,
+		core::Texture2D* diffuseMap,
+		core::Texture2D* normalMap,
+		core::Texture2D* specularMap,
 		framework::Material material) {
 
 }
 
 pModel buildModel(
 		Engine* engine,
-		pProgram program,
+		core::Program* program,
 		const std::string& shapePath) {
 
 }

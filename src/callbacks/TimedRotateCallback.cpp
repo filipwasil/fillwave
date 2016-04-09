@@ -16,11 +16,11 @@ namespace fillwave {
 namespace framework {
 
 TimedRotateCallback::TimedRotateCallback(
-    pMoveable moveable,
-    glm::vec3 axis,
-    GLfloat angle,
-    GLfloat lifeTime,
-    EasingFunction easing) :
+   pMoveable moveable,
+   glm::vec3 axis,
+   GLfloat angle,
+   GLfloat lifeTime,
+   EasingFunction easing) :
 	TimedCallback(lifeTime, easing),
 	mMoveable(moveable),
 	mStartRotation(glm::quat()),

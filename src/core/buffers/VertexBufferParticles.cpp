@@ -14,9 +14,9 @@ namespace fillwave {
 namespace core {
 
 VertexBufferParticles::VertexBufferParticles(
-    std::vector<GLfloat>& velocities,
-    std::vector<GLfloat>& positions,
-    std::vector<GLfloat>& times) {
+   std::vector<GLfloat>& velocities,
+   std::vector<GLfloat>& positions,
+   std::vector<GLfloat>& times) {
 	size_t size = times.size();
 	if (size == velocities.size() / 3) {
 		mDataVertices.reserve(size);

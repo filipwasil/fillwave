@@ -18,14 +18,14 @@ namespace core {
  */
 
 class Attribute {
-  public:
+ public:
 	Attribute(
-	    std::string name,
-	    GLuint index,
-	    GLint size,
-	    GLsizei stride,
-	    GLenum type,
-	    GLboolean normalized = GL_FALSE);
+	   std::string name,
+	   GLuint index,
+	   GLint size,
+	   GLsizei stride,
+	   GLenum type,
+	   GLboolean normalized = GL_FALSE);
 	virtual ~Attribute() = default;
 	void bindLocation(GLint programHandle);
 	void arrayDisable();
@@ -38,7 +38,7 @@ class Attribute {
 	std::string getName();
 	void log();
 
-  private:
+ private:
 	GLsizei mStride;
 	std::string mName;
 	GLuint mIndex;

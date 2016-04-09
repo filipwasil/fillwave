@@ -81,13 +81,13 @@ struct Engine::EngineImpl final {
 	puLightSystem mLights;
 	puTextureSystem mTextures;
 	std::vector<core::PostProcessingPass> mPostProcessingPasses;
-	pProgram mProgramTextureLookup;
+	core::Program* mProgramTextureLookup;
 
 	/* Fences and barriers */
 	puFence mFence;
 
 	/* OQ */
-	pProgram mProgramOcclusionBox;
+	core::Program* mProgramOcclusionBox;
 	puVertexBufferPosition mVBOOcclusion;
 	pVertexArray mVAOOcclusion;
 
@@ -120,9 +120,9 @@ struct Engine::EngineImpl final {
 	void clearCallbacks(eEventType eventType);
 	void clearCallback(framework::Callback* callback);
 	void registerCallback(
-	    framework::Callback* callback);
+	   framework::Callback* callback);
 	void unregisterCallback(
-	    framework::Callback* callback);
+	   framework::Callback* callback);
 
 	/* Evaluation */
 	void evaluateShadowMaps();
@@ -311,7 +311,7 @@ inline void Engine::EngineImpl::initOcclusionTest() {
 
 inline void Engine::EngineImpl::initStartup() {
 
-	pProgram program = mProgramLoader.getQuadCustomFragmentShaderStartup();
+	core::Program* program = mProgramLoader.getQuadCustomFragmentShaderStartup();
 
 	program->use();
 	program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
@@ -320,7 +320,7 @@ inline void Engine::EngineImpl::initStartup() {
 
 	mPostProcessingPassStartup = make_unique<core::PostProcessingPass>(program,
 	                             mTextures->getDynamic("fillwave_quad_startup.frag",
-	                                     program, glm::ivec2(mWindowWidth, mWindowHeight)),
+	                                   program, glm::ivec2(mWindowWidth, mWindowHeight)),
 	                             mStartupTimeLimit);
 
 	FLOG_DEBUG("Post processing startup pass added");
@@ -355,11 +355,11 @@ void Engine::EngineImpl::reload() {
 	initContext();
 
 	for (auto& it : mShaders) {
-		it.second->mComponent->reload();
+		it.second->reload();
 	}
 
 	for (auto& it : mPrograms) {
-		it.second->mComponent->reload();
+		it.second->reload();
 	}
 
 	mTextures->reload();
@@ -541,7 +541,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 
 	if (mPostProcessingPasses.size()) {
 		auto _compare_function =
-		    [](core::PostProcessingPass & pass) -> bool {return pass.isFinished();};
+		   [](core::PostProcessingPass & pass) -> bool {return pass.isFinished();};
 		auto _begin = mPostProcessingPasses.begin();
 		auto _end = mPostProcessingPasses.end();
 
@@ -562,7 +562,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 
 				textureNext = (*next).getFrame();
 				textureCurrent = (*it).getFrame();
-				programCurrent = (*it).getProgram().get();
+				programCurrent = (*it).getProgram();
 
 				textureNext->bindForWriting();
 
@@ -582,7 +582,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 				textureCurrent->draw(time);
 
 				textureCurrent = (*it).getFrame();
-				programCurrent = (*it).getProgram().get();
+				programCurrent = (*it).getProgram();
 
 				// render to current bound framebuffer using textureCurrent as a texture to post process
 				drawTexture(textureCurrent, programCurrent);
@@ -638,7 +638,7 @@ inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
 
 	t->draw(time);
 
-	drawTexture(t, mPostProcessingPassStartup->getProgram().get());
+	drawTexture(t, mPostProcessingPassStartup->getProgram());
 
 	mPostProcessingPassStartup->checkTime(time);
 }
@@ -663,7 +663,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 
 	for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
 		light2DTexture =
-		    mLights->mLightsDirectional[i]->getShadowTexture();
+		   mLights->mLightsDirectional[i]->getShadowTexture();
 		light2DTexture->bindForWriting();
 		light2DTexture->bind(currentTextureUnit++);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -674,12 +674,12 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 	for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
 		framework::LightPoint* lightPoint = mLights->mLightsPoint[i].get();
 		core::Texture3DRenderable* light3DTexture =
-		    lightPoint->getShadowTexture();
+		   lightPoint->getShadowTexture();
 		glm::vec3 lightPosition(lightPoint->getTranslation());
 		light3DTexture->bindForWriting();
 		light3DTexture->bind(currentTextureUnit);
 		for (GLint j = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-		        j <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; j++) {
+		      j <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; j++) {
 			light3DTexture->setAttachmentFace(j, GL_COLOR_ATTACHMENT0);
 			glClearColor(0.0, 0.0, 0.0, 1.0);
 			glClear(GL_DEPTH_BUFFER_BIT);
@@ -704,81 +704,81 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 	GLint mCurentTextureUnit = 0;
 	GLint id = 0;
 	switch (mDebugger->getState()) {
-	case eDebuggerState::eLightsSpot:
-		mCurentTextureUnit = 0;
-		for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-			framework::CameraPerspective cameraP =
-			    *(mLights->mLightsSpot[i]->getShadowCamera().get());
-			mDebugger->renderFromCamera(cameraP,
-			                            mCurentTextureUnit++); //xxx make more flexible
-		}
-		for (size_t i = 0; i < mLights->mLightsDirectional.size();
-		        i++) {
-			framework::CameraOrthographic cameraO =
-			    *(mLights->mLightsDirectional[i]->getShadowCamera().get());
-			mDebugger->renderFromCamera(cameraO,
-			                            mCurentTextureUnit++); //xxx make more flexible
-		}
-		mCurentTextureUnit = 0;
-		for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-			mDebugger->renderDepthPerspective(mCurentTextureUnit++);
-		}
-		for (size_t i = 0; i < mLights->mLightsDirectional.size();
-		        i++) {
-			mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
-		}
-		break;
-	case eDebuggerState::eLightsSpotDepth:
-		mCurentTextureUnit = 0;
-		for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-			mDebugger->renderDepthPerspective(mCurentTextureUnit++);
-		}
-		for (size_t i = 0; i < mLights->mLightsDirectional.size();
-		        i++) {
-			mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
-		}
-		break;
-	case eDebuggerState::eLightsSpotColor:
-		mCurentTextureUnit = 0;
-		for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-			framework::CameraPerspective cameraP =
-			    *(mLights->mLightsSpot[i]->getShadowCamera().get());
-			mDebugger->renderFromCamera(cameraP,
-			                            mCurentTextureUnit++); //xxx make more flexible
-		}
-		for (size_t i = 0; i < mLights->mLightsDirectional.size();
-		        i++) {
-			framework::CameraOrthographic cameraO =
-			    *(mLights->mLightsDirectional[i]->getShadowCamera().get());
-			mDebugger->renderFromCamera(cameraO,
-			                            mCurentTextureUnit++); //xxx make more flexible
-		}
-		break;
-	case eDebuggerState::eLightsPoint:
-		break;
-	case eDebuggerState::eLightsPointDepth: // only light 0
-		break;
-	case eDebuggerState::eLightsPointColor:
-		for (size_t j = 0; j < mLights->mLightsPoint.size(); j++) {
-			for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-			        i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
-				framework::CameraPerspective cameraPF =
-				    *(mLights->mLightsPoint[j]->getShadowCamera(i).get());
-				mDebugger->renderFromCamera(cameraPF, id++);
+		case eDebuggerState::eLightsSpot:
+			mCurentTextureUnit = 0;
+			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
+				framework::CameraPerspective cameraP =
+				   *(mLights->mLightsSpot[i]->getShadowCamera().get());
+				mDebugger->renderFromCamera(cameraP,
+				                            mCurentTextureUnit++); //xxx make more flexible
 			}
-		}
-		break;
-	case eDebuggerState::ePickingMap:
-		mDebugger->renderPickingMap();
-		break;
-	case eDebuggerState::eOff:
-	default:
-		break;
+			for (size_t i = 0; i < mLights->mLightsDirectional.size();
+			      i++) {
+				framework::CameraOrthographic cameraO =
+				   *(mLights->mLightsDirectional[i]->getShadowCamera().get());
+				mDebugger->renderFromCamera(cameraO,
+				                            mCurentTextureUnit++); //xxx make more flexible
+			}
+			mCurentTextureUnit = 0;
+			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
+				mDebugger->renderDepthPerspective(mCurentTextureUnit++);
+			}
+			for (size_t i = 0; i < mLights->mLightsDirectional.size();
+			      i++) {
+				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
+			}
+			break;
+		case eDebuggerState::eLightsSpotDepth:
+			mCurentTextureUnit = 0;
+			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
+				mDebugger->renderDepthPerspective(mCurentTextureUnit++);
+			}
+			for (size_t i = 0; i < mLights->mLightsDirectional.size();
+			      i++) {
+				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
+			}
+			break;
+		case eDebuggerState::eLightsSpotColor:
+			mCurentTextureUnit = 0;
+			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
+				framework::CameraPerspective cameraP =
+				   *(mLights->mLightsSpot[i]->getShadowCamera().get());
+				mDebugger->renderFromCamera(cameraP,
+				                            mCurentTextureUnit++); //xxx make more flexible
+			}
+			for (size_t i = 0; i < mLights->mLightsDirectional.size();
+			      i++) {
+				framework::CameraOrthographic cameraO =
+				   *(mLights->mLightsDirectional[i]->getShadowCamera().get());
+				mDebugger->renderFromCamera(cameraO,
+				                            mCurentTextureUnit++); //xxx make more flexible
+			}
+			break;
+		case eDebuggerState::eLightsPoint:
+			break;
+		case eDebuggerState::eLightsPointDepth: // only light 0
+			break;
+		case eDebuggerState::eLightsPointColor:
+			for (size_t j = 0; j < mLights->mLightsPoint.size(); j++) {
+				for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
+				      i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
+					framework::CameraPerspective cameraPF =
+					   *(mLights->mLightsPoint[j]->getShadowCamera(i).get());
+					mDebugger->renderFromCamera(cameraPF, id++);
+				}
+			}
+			break;
+		case eDebuggerState::ePickingMap:
+			mDebugger->renderPickingMap();
+			break;
+		case eDebuggerState::eOff:
+		default:
+			break;
 	}
 }
 
 void Engine::EngineImpl::runCallbacks(
-    framework::EventType& event) {
+   framework::EventType& event) {
 	if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
 		for (auto& callback : mCallbacks[event.getType()]) {
 			callback->perform(event);
@@ -802,16 +802,16 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 /* Callbacks */
 
 void Engine::EngineImpl::registerCallback(
-    framework::Callback* callback) {
+   framework::Callback* callback) {
 	mCallbacks[callback->getEventType()].push_back(puCallback(callback));
 }
 
 void Engine::EngineImpl::unregisterCallback(
-    framework::Callback* callback) {
+   framework::Callback* callback) {
 	if (mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
 		std::vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
 		auto _compare_function =
-		    [callback](const puCallback & c) -> bool {bool found = (c.get() == callback); return found;};
+		   [callback](const puCallback & c) -> bool {bool found = (c.get() == callback); return found;};
 		auto _begin = callbacks->begin();
 		auto _end = callbacks->end();
 		auto it = std::remove_if(_begin, _end, _compare_function);
@@ -820,9 +820,9 @@ void Engine::EngineImpl::unregisterCallback(
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(
-    GLubyte* data,
-    GLuint x,
-    GLuint y) {
+   GLubyte* data,
+   GLuint x,
+   GLuint y) {
 	y = mWindowHeight - y;
 	GLuint id, r, g, b, a;
 
@@ -843,7 +843,7 @@ inline void Engine::EngineImpl::clearCallbacks() {
 }
 
 inline void Engine::EngineImpl::clearCallbacks(
-    eEventType eventType) {
+   eEventType eventType) {
 	if (mCallbacks.find(eventType) != mCallbacks.end()) {
 		mCallbacks[eventType].clear();
 	}
@@ -853,9 +853,9 @@ void Engine::EngineImpl::clearCallback(framework::Callback* callback) {
 	eEventType e = callback->getEventType();
 	std::vector<puCallback>* callbacks = &mCallbacks[e];
 	callbacks->erase(
-	    std::remove_if( // Selectively remove elements in the second vector...
-	        callbacks->begin(),
-	        callbacks->end(),
+	   std::remove_if( // Selectively remove elements in the second vector...
+	      callbacks->begin(),
+	      callbacks->end(),
 	[&] (puCallback const & p) {
 		// This predicate checks whether the element is contained
 		// in the second vector of pointers to be removed...

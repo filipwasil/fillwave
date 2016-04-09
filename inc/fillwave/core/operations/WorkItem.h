@@ -17,7 +17,7 @@ namespace core {
  */
 
 class WorkItem {
-  public:
+ public:
 	WorkItem() = default;
 	virtual ~WorkItem() = default;
 };

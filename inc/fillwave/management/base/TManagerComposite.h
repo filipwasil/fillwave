@@ -46,7 +46,7 @@ struct Composition {
  */
 template <class T, class R, class K, size_t M, class C, typename ... P>
 class ManagerComposite: public std::unordered_map<K, T> {
-  public:
+ public:
 
 	ManagerComposite() = default;
 	virtual ~ManagerComposite() = default;

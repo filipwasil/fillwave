@@ -16,9 +16,9 @@ PixelBuffer::PixelBuffer(GLuint dataStoreType) :
 }
 
 void PixelBuffer::setScreenSize(
-    GLuint width,
-    GLuint height,
-    GLuint bytesPerPixel) {
+   GLuint width,
+   GLuint height,
+   GLuint bytesPerPixel) {
 	mSize = bytesPerPixel * width * height;
 }
 

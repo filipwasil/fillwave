@@ -15,18 +15,15 @@ using namespace std;
 namespace fillwave {
 namespace core {
 
-Program::Program(const std::vector<pShader>& shaders, GLboolean skipLinking)
+Program::Program(const std::vector<core::Shader*>& shaders, GLboolean skipLinking)
 		: mDelayedLinking(skipLinking), mShaders(shaders) {
 	reload();
 }
 
 Program::~Program() {
-//	FLOG_DEBUG("Delete program");
 	for (auto& it : mShaders) {
 		detach(it);
 	}
-//	glDeleteProgram(mHandle);
-//	FLOG_CHECK("Delete program");
 }
 
 void Program::attach(pShader /*shader*/) {

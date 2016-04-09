@@ -27,24 +27,24 @@ struct CullingBox {
  */
 
 class CameraOrthographic: public ICamera {
-  public:
+ public:
 	CameraOrthographic();
 	CameraOrthographic(
-	    glm::vec3 position,
-	    glm::quat rotation,
-	    GLfloat left,
-	    GLfloat right,
-	    GLfloat bottom,
-	    GLfloat top,
-	    GLfloat near,
-	    GLfloat far);
+	   glm::vec3 position,
+	   glm::quat rotation,
+	   GLfloat left,
+	   GLfloat right,
+	   GLfloat bottom,
+	   GLfloat top,
+	   GLfloat near,
+	   GLfloat far);
 	virtual ~CameraOrthographic() = default;
 
 	void updateProjection();
 	GLfloat getProjectionNearPlane();
 	GLfloat getProjectionFarPlane();
 
-  private:
+ private:
 	CullingBox mCullingBox;
 
 };

@@ -98,40 +98,31 @@ void Shader::reload() {
 
 std::string Shader::getTypeString() {
 	switch (mType) {
-	case GL_FRAGMENT_SHADER:
-		return "GL_FRAGMENT_SHADER";
-	case GL_VERTEX_SHADER:
-		return "GL_VERTEX_SHADER";
+		case GL_FRAGMENT_SHADER:
+			return "GL_FRAGMENT_SHADER";
+		case GL_VERTEX_SHADER:
+			return "GL_VERTEX_SHADER";
 #ifdef FILLWAVE_GLES_3_0
 #else
-	case GL_GEOMETRY_SHADER:
-		return "GL_GEOMETRY_SHADER";
-	case GL_TESS_CONTROL_SHADER:
-		return "GL_TESS_CONTROL_SHADER";
-	case GL_TESS_EVALUATION_SHADER:
-		return "GL_TESS_EVALUATION_SHADER";
+		case GL_GEOMETRY_SHADER:
+			return "GL_GEOMETRY_SHADER";
+		case GL_TESS_CONTROL_SHADER:
+			return "GL_TESS_CONTROL_SHADER";
+		case GL_TESS_EVALUATION_SHADER:
+			return "GL_TESS_EVALUATION_SHADER";
 #endif
-	default:
-		FLOG_FATAL("Shader type not recognized: %d", mType);
-		return "";
+		default:
+			FLOG_FATAL("Shader type not recognized: %d", mType);
+			return "";
 	}
 }
 
 } /* core */
 } /* fillwave */
 
-std::vector<fillwave::pShader> operator+(
-    fillwave::pShader shader1,
-    fillwave::pShader shader2) {
-	std::vector<fillwave::pShader> shaders;
-	shaders.push_back(shader1);
-	shaders.push_back(shader2);
-	return shaders;
-}
-
-std::vector<fillwave::pShader> operator+(
-    std::vector<fillwave::pShader> shaders,
-    fillwave::pShader shader) {
+std::vector<fillwave::core::Shader*> operator+(
+   std::vector<fillwave::core::Shader*> shaders,
+   fillwave::core::Shader* shader) {
 	shaders.push_back(shader);
 	return shaders;
 }

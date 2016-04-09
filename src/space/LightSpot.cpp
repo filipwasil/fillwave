@@ -14,17 +14,17 @@ namespace fillwave {
 namespace framework {
 
 LightSpot::LightSpot(
-    core::Texture2DRenderable* shadowTexture,
-    glm::vec3 position,
-    glm::quat rotation,
-    glm::vec4 intensity,
-    pMoveable followed) :
+   core::Texture2DRenderable* shadowTexture,
+   glm::vec3 position,
+   glm::quat rotation,
+   glm::vec4 intensity,
+   pMoveable followed) :
 	Light(position, intensity, followed),
 	mShadowTexture(shadowTexture),
 	mShadowCamera(
-	    std::make_shared < CameraPerspective
-	    > (position, rotation, glm::radians(90.0f), 1.0f, //xxx fix
-	       0.1f, 1000.0f)) {
+	   std::make_shared < CameraPerspective
+	   > (position, rotation, glm::radians(90.0f), 1.0f, //xxx fix
+	      0.1f, 1000.0f)) {
 }
 
 core::Texture2DRenderable* LightSpot::getShadowTexture() {

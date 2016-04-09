@@ -22,8 +22,8 @@ namespace framework {
  */
 
 class Terrain: public Entity {
-  public:
-	Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap);
+ public:
+	Terrain(Engine* engine, core::Program* program, GLint radius, GLfloat gap);
 	virtual ~Terrain() = default;
 
 	void addChunk(pVoxelChunk chunk);
@@ -37,11 +37,11 @@ class Terrain: public Entity {
 	void updateRenderer(IRenderer& renderer) override;
 	bool getRenderItem(RenderItem& item) override;
 
-  protected:
+ protected:
 	void updateRendererData();
 
-  private:
-	pProgram mProgram;
+ private:
+	core::Program* mProgram;
 	LightSystem* mLights;
 	GLint mRadius;
 	GLfloat mGap;
@@ -52,11 +52,11 @@ class Terrain: public Entity {
 typedef std::shared_ptr<framework::Terrain> pTerrain;
 
 pTerrain buildTerrainVoxel(
-    Engine* engine,
-    pProgram program,
-    const std::string& texturePath,
-    framework::VoxelConstructor* constructor,
-    GLint radius = 0);
+   Engine* engine,
+   core::Program* program,
+   const std::string& texturePath,
+   framework::VoxelConstructor* constructor,
+   GLint radius = 0);
 
 } /* fillwave*/
 

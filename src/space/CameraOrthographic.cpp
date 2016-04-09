@@ -25,14 +25,14 @@ CameraOrthographic::CameraOrthographic() :
 }
 
 CameraOrthographic::CameraOrthographic(
-    glm::vec3 position,
-    glm::quat rotation,
-    GLfloat left,
-    GLfloat right,
-    GLfloat bottom,
-    GLfloat top,
-    GLfloat near,
-    GLfloat far) :
+   glm::vec3 position,
+   glm::quat rotation,
+   GLfloat left,
+   GLfloat right,
+   GLfloat bottom,
+   GLfloat top,
+   GLfloat near,
+   GLfloat far) :
 	ICamera(position, rotation) {
 
 	mCullingBox.mProjectionBottom = bottom;

@@ -11,10 +11,10 @@ namespace fillwave {
 namespace framework {
 
 GradientBall::GradientBall(Engine* engine,
-                           pProgram program,
+                           core::Program* program,
                            GLfloat lifetime,
                            GLfloat size,
-                           pTexture texture):Impostor(engine,
+                           core::Texture* texture):Impostor(engine,
                                                       lifetime,
                                                       size,
                                                       texture),

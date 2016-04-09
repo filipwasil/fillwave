@@ -18,14 +18,14 @@ namespace framework {
  */
 
 class BuilderModelExternalMaps: public BuilderModel {
-  public:
+ public:
 	BuilderModelExternalMaps(
-	    Engine* engine,
-	    std::string modelPath = "",
-	    pProgram program = pProgram(),
-	    std::string diffusePath = "",
-	    std::string normalPath = "",
-	    std::string specularPath = "");
+	   Engine* engine,
+	   std::string modelPath = "",
+	   core::Program* program = nullptr,
+	   std::string diffusePath = "",
+	   std::string normalPath = "",
+	   std::string specularPath = "");
 	virtual ~BuilderModelExternalMaps() = default;
 
 	BuilderModel& setdiffusePath(std::string& path);
@@ -33,7 +33,7 @@ class BuilderModelExternalMaps: public BuilderModel {
 	BuilderModel& setSpecularMapPath(std::string& path);
 	pModel build();
 
-  private:
+ private:
 	std::string mDiffuseMapPath;
 	std::string mNormalMapPath;
 	std::string mSpecularMapPath;

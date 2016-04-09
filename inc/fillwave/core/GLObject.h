@@ -18,7 +18,7 @@ namespace core {
  */
 
 class GLObject {
-  public:
+ public:
 	GLObject(GLsizei howMany);
 
 	virtual ~GLObject();
@@ -27,7 +27,7 @@ class GLObject {
 
 	virtual void reload() = 0;
 
-  protected:
+ protected:
 	GLsizei mHowMany;
 	GLuint* mHandles;
 };

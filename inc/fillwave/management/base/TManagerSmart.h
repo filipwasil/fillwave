@@ -26,7 +26,7 @@ namespace framework {
  */
 template <size_t M, class T, class K, typename ... P>
 class TManagerSmart: public std::unordered_map<K, std::unique_ptr<T>> {
-  public:
+ public:
 	TManagerSmart() = default;
 	virtual ~TManagerSmart() = default;
 

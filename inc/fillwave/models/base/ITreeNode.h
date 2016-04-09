@@ -16,7 +16,7 @@ namespace framework {
  */
 
 class ITreeNode {
-  public:
+ public:
 	ITreeNode() = default;
 	virtual ~ITreeNode() = default;
 	virtual void onAttached(ITreeNode* parent) = 0;

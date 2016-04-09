@@ -18,7 +18,7 @@ namespace framework {
  */
 
 class CameraNull: public ICamera {
-  public:
+ public:
 	CameraNull();
 
 	virtual ~CameraNull() = default;

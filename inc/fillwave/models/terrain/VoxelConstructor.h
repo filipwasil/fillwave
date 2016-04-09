@@ -19,7 +19,7 @@ namespace framework {
  */
 
 class VoxelConstructor: public TerrainConstructor {
-  public:
+ public:
 	VoxelConstructor() = default;
 	virtual ~VoxelConstructor() = default;
 	virtual GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y) = 0;

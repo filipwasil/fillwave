@@ -26,7 +26,7 @@ namespace framework {
  */
 template <class T, class K, size_t M, typename ... P>
 class TManagerStack: public std::unordered_map<K, T> {
-  public:
+ public:
 	TManagerStack() = default;
 	virtual ~TManagerStack() = default;
 

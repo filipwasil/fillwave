@@ -18,7 +18,7 @@ namespace fillwave {
 namespace framework {
 
 IRendererCSPBRP::IRendererCSPBRP(LightManager* lightManager) : mLightManager(
-	    lightManager) {
+	   lightManager) {
 
 }
 

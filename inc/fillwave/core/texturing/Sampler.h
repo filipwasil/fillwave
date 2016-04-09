@@ -20,7 +20,7 @@ namespace core {
  */
 
 class Sampler: public GLObject {
-  public:
+ public:
 	Sampler(GLint textureUnit, GLuint howMany = 1);
 
 	virtual ~Sampler();
@@ -39,7 +39,7 @@ class Sampler: public GLObject {
 
 	GLint getTextureUnit();
 
-  private:
+ private:
 	GLint mTextureUnit;
 };
 

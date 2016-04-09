@@ -19,7 +19,7 @@ namespace core {
  */
 
 class VertexArray: public GLObject {
-  public:
+ public:
 	VertexArray(GLuint howMany = 1);
 	virtual ~VertexArray();
 

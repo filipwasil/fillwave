@@ -1,5 +1,7 @@
 --mode=c
 --pad-oper
---indent=tab
+--indent=tab=3
+--indent-switches
+--indent-classes
 --style=google
 --max-code-length=80

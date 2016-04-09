@@ -18,7 +18,7 @@ namespace core {
  */
 
 class Texture3DFile: public Texture2DFile {
-  public:
+ public:
 	GLenum mCubeTarget;
 
 	Texture3DFile(Texture2DFile* file, GLenum target) :
@@ -37,10 +37,10 @@ typedef std::unique_ptr<core::Texture3DFile> puTexture3DFile;
  */
 
 class Texture3D: public Texture {
-  private:
+ private:
 	void sendData(Texture3DFile* file, Texture2DFileData customData = nullptr);
 
-  public:
+ public:
 	puTexture3DFile mRight; /* Positive X*/
 	puTexture3DFile mLeft; /* Negative X*/
 	puTexture3DFile mCeil; /* Positive Y*/
@@ -49,13 +49,13 @@ class Texture3D: public Texture {
 	puTexture3DFile mBack; /* Negative Z*/
 
 	Texture3D(
-	    Texture2DFile* fileRight,
-	    Texture2DFile* fileLeft,
-	    Texture2DFile* fileCeil,
-	    Texture2DFile* fileFloor,
-	    Texture2DFile* fileFront,
-	    Texture2DFile* fileBack,
-	    ParameterList& parameters);
+	   Texture2DFile* fileRight,
+	   Texture2DFile* fileLeft,
+	   Texture2DFile* fileCeil,
+	   Texture2DFile* fileFloor,
+	   Texture2DFile* fileFront,
+	   Texture2DFile* fileBack,
+	   ParameterList& parameters);
 
 	virtual ~Texture3D() = default;
 
@@ -68,12 +68,12 @@ class Texture3D: public Texture {
 	static void unbindCubemapTextures();
 
 	void sendData(
-	    Texture2DFileData xp,
-	    Texture2DFileData xn,
-	    Texture2DFileData yp,
-	    Texture2DFileData yn,
-	    Texture2DFileData zp,
-	    Texture2DFileData zn);
+	   Texture2DFileData xp,
+	   Texture2DFileData xn,
+	   Texture2DFileData yp,
+	   Texture2DFileData yn,
+	   Texture2DFileData zp,
+	   Texture2DFileData zn);
 };
 
 } /* core */

@@ -37,9 +37,9 @@ Channel::Channel(fNodeAnim* assimpChannel) {
 	}
 
 	FLOG_DEBUG(
-	    " Added an animation channel \n name: %s \n keys S: %lu keys R: %lu keys P: %lu",
-	    mAffectedNodeName.c_str(), mKeysScaling.size(), mKeysRotation.size(),
-	    mKeysTranslation.size());
+	   " Added an animation channel \n name: %s \n keys S: %lu keys R: %lu keys P: %lu",
+	   mAffectedNodeName.c_str(), mKeysScaling.size(), mKeysRotation.size(),
+	   mKeysTranslation.size());
 }
 
 } /* framework */

@@ -18,14 +18,14 @@ namespace framework {
  */
 
 class ShaderLoaderVertex: public ShaderLoader {
-  public:
+ public:
 	ShaderLoaderVertex(bool animated = false);
 
 	virtual ~ShaderLoaderVertex() = default;
 
 	const std::string getSource() const;
 
-  private:
+ private:
 	bool mAnimated;
 };
 

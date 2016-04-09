@@ -47,20 +47,20 @@ struct FaceBasic {
  */
 
 class VertexBufferBasic: public TVertexBuffer<VertexBasic> {
-  public:
+ public:
 	VertexBufferBasic(const fMesh* shape, framework::Animator* boneManager =
-	                      nullptr, GLuint dataStoreModification = GL_STATIC_DRAW);
+	                     nullptr, GLuint dataStoreModification = GL_STATIC_DRAW);
 
 	VertexBufferBasic(
-	    framework::TerrainConstructor* constructor,
-	    GLint chunkDensity,
-	    GLfloat gapSize,
-	    std::vector<GLuint>& indices,
-	    GLuint dataStoreModification = GL_STATIC_DRAW);
+	   framework::TerrainConstructor* constructor,
+	   GLint chunkDensity,
+	   GLfloat gapSize,
+	   std::vector<GLuint>& indices,
+	   GLuint dataStoreModification = GL_STATIC_DRAW);
 
 	VertexBufferBasic(
-	    std::vector<core::VertexBasic>& vertices,
-	    GLuint dataStoreModification = GL_STATIC_DRAW);
+	   std::vector<core::VertexBasic>& vertices,
+	   GLuint dataStoreModification = GL_STATIC_DRAW);
 
 	~VertexBufferBasic() = default;
 

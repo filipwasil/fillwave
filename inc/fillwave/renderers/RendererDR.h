@@ -26,7 +26,7 @@ class ProgramLoader;
  */
 
 class RendererDR: public IRenderer {
-  public:
+ public:
 	RendererDR(Engine* engine, ProgramLoader& loader);
 	virtual ~RendererDR() = default;
 
@@ -55,15 +55,15 @@ class RendererDR: public IRenderer {
 	void drawColorPassEnd();
 	void drawDebug();
 
-  private:
+ private:
 	glm::vec2 mScreenSize;
 
 	LightSystem* mLights;
 	TextureSystem* mTextures;
 
-	pProgram mProgramMain, mProgramMainAnimated, mProgramDirecionalLight,
-	         mProgramSpotLight, mProgramPointLight, mProgramDepthless,
-	         mProgramAmbient, mProgramAOGeometry, mProgramAOColor;
+	core::Program *mProgramMain, *mProgramMainAnimated, *mProgramDirecionalLight,
+	     *mProgramSpotLight, *mProgramPointLight, *mProgramDepthless,
+	     *mProgramAmbient, *mProgramAOGeometry, *mProgramAOColor;
 
 	pTexture2DRenderable mAOGeometryBuffer;
 	pTexture2DRenderable mAOColorBuffer;

@@ -14,7 +14,8 @@ FLOGINIT("Terrain", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Terrain::Terrain(Engine* engine, pProgram program, GLint radius, GLfloat gap) :
+Terrain::Terrain(Engine* engine, core::Program* program, GLint radius,
+                 GLfloat gap) :
 	mProgram(program),
 	mLights(engine->getLightSystem()),
 	mRadius(radius),
@@ -31,7 +32,7 @@ void Terrain::draw(ICamera& camera) {
 
 void Terrain::drawPBRP(ICamera& camera) {
 	distanceCheck(camera);
-	mLights->pushLightUniforms(mProgram.get());
+	mLights->pushLightUniforms(mProgram);
 	mLights->bindShadowmaps();
 	for (auto& it : mVoxelChunks) {
 		it->drawPBRP(camera);
@@ -89,11 +90,11 @@ bool Terrain::getRenderItem(RenderItem& item) {
 
 } /* models */
 pTerrain buildTerrainVoxel(
-    Engine* engine,
-    pProgram program,
-    const std::string& texturePath,
-    framework::VoxelConstructor* constructor,
-    GLint radius) {
+   Engine* engine,
+   core::Program* program,
+   const std::string& texturePath,
+   framework::VoxelConstructor* constructor,
+   GLint radius) {
 
 	GLfloat voxelGap = 0.2;
 
@@ -104,14 +105,14 @@ pTerrain buildTerrainVoxel(
 		for (GLint x = 0; x < 1 + 2 * i; x++) {
 			for (GLint z = 0; z < 1 + 2 * i; z++) {
 				pVoxelChunk chunk = pVoxelChunk(
-				                        new framework::VoxelChunk(program, engine, texturePath,
-				                                FILLWAVE_VOXEL_CHUNK_SIZE, constructor, voxelGap));
+				                       new framework::VoxelChunk(program, engine, texturePath,
+				                             FILLWAVE_VOXEL_CHUNK_SIZE, constructor, voxelGap));
 				chunk->moveTo(
-				    glm::vec3(
-				        FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * x
-				        - FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius), 0.0,
-				        FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * z
-				        - FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius)));
+				   glm::vec3(
+				      FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * x
+				      - FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius), 0.0,
+				      FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * z
+				      - FILLWAVE_VOXEL_CHUNK_SIZE * voxelGap * (radius)));
 				terrain->addChunk(chunk);
 			}
 		}

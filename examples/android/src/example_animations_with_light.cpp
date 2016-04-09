@@ -32,9 +32,9 @@ void perform(Engine* engine) {
 
     /* Program */
     framework::ProgramLoader loader(engine);
-    pProgram program = loader.getDefault();
-//    pProgram program = loader.getDefaultDeferredGeometry(engine);
-    pProgram aprogram = loader.getDefaultBones();
+    core::Program* program = loader.getDefault();
+//    core::Program* program = loader.getDefaultDeferredGeometry(engine);
+    core::Program* aprogram = loader.getDefaultBones();
 
     pEffect e = pEffect (new TextureOnly());
     pEffect f = pEffect (new Fog());

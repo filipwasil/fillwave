@@ -13,15 +13,15 @@ namespace fillwave {
 namespace core {
 
 VertexBufferPosition::VertexBufferPosition(
-    framework::Shape<VertexPosition>& shape,
-    GLuint dataStoreModification) :
+   framework::Shape<VertexPosition>& shape,
+   GLuint dataStoreModification) :
 	TVertexBuffer(shape, dataStoreModification) {
 
 }
 
 VertexBufferPosition::VertexBufferPosition(
-    std::vector<VertexPosition>& vertices,
-    GLuint dataStoreModification) :
+   std::vector<VertexPosition>& vertices,
+   GLuint dataStoreModification) :
 	TVertexBuffer(vertices, dataStoreModification) {
 
 }

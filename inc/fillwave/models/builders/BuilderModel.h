@@ -19,19 +19,19 @@ namespace framework {
  */
 
 class BuilderModel {
-  public:
-	BuilderModel(Engine* engine, std::string modelPath, pProgram program);
+ public:
+	BuilderModel(Engine* engine, std::string modelPath, core::Program* program);
 
 	virtual ~BuilderModel() = default;
 
 	virtual pModel build();
 
 	BuilderModel& setModelPath(std::string& path);
-	BuilderModel& setProgram(pProgram program);
+	BuilderModel& setProgram(core::Program* program);
 
-  protected:
+ protected:
 	Engine* mEngine;
-	pProgram mProgram;
+	core::Program* mProgram;
 	std::string mShapePath;
 };
 

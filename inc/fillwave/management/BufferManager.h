@@ -30,14 +30,14 @@ typedef std::shared_ptr<VAOObject> puVAOObject;
  */
 
 class BufferManager {
-  public:
+ public:
 	BufferManager() = default;
 	virtual ~BufferManager() = default;
 	void collectGarbage();
 	void reload();
 	pVertexArray getVAO(IReloadable* renderable);
 
-  private:
+ private:
 	std::vector<puVAOObject> mVAOObjects;
 };
 

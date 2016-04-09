@@ -23,24 +23,24 @@ namespace framework {
  */
 
 class EmiterPointGPU: public IEmiterPoint {
-  public:
+ public:
 	EmiterPointGPU(
-	    Engine* engine,
-	    GLfloat emitingSourceRate,
-	    GLuint howMany,
-	    glm::vec4 color,
-	    glm::vec3 acceleration,
-	    glm::vec3 startVelocity,
-	    glm::vec3 robustnessVelocity,
-	    glm::vec3 startPosition,
-	    glm::vec3 robustnessPosition,
-	    GLfloat startSize,
-	    GLfloat lifetime,
-	    core::Texture* texture,
-	    GLenum blendingSource,
-	    GLenum blendingDestination,
-	    GLboolean depthTesting,
-	    GLfloat alphaCutOffLevel = 0.0f);
+	   Engine* engine,
+	   GLfloat emitingSourceRate,
+	   GLuint howMany,
+	   glm::vec4 color,
+	   glm::vec3 acceleration,
+	   glm::vec3 startVelocity,
+	   glm::vec3 robustnessVelocity,
+	   glm::vec3 startPosition,
+	   glm::vec3 robustnessPosition,
+	   GLfloat startSize,
+	   GLfloat lifetime,
+	   core::Texture* texture,
+	   GLenum blendingSource,
+	   GLenum blendingDestination,
+	   GLboolean depthTesting,
+	   GLfloat alphaCutOffLevel = 0.0f);
 
 	virtual ~EmiterPointGPU() = default;
 
@@ -54,7 +54,7 @@ class EmiterPointGPU: public IEmiterPoint {
 	/* IRenderable */
 	bool getRenderItem(RenderItem& item) override;
 
-  private:
+ private:
 	static const GLint mPingPongBuffers = 2;
 	GLuint mSrcIndex;
 	GLuint mNoiseTextureHandle;
@@ -66,7 +66,7 @@ class EmiterPointGPU: public IEmiterPoint {
 	glm::vec3 mRobustnessPosition;
 	glm::vec3 mCameraPosition;
 	GLfloat mTimeDeltaEmiter;
-	pProgram mProgramEmiter;
+	core::Program* mProgramEmiter;
 	puFence mFence;
 
 	pVertexBufferParticlesGPU mVBOGPU[mPingPongBuffers];

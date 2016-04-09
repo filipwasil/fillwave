@@ -18,7 +18,7 @@ namespace core {
  */
 
 class Texture1D: public Texture {
-  public:
+ public:
 	Texture1D(ParameterList& parameters);
 	virtual ~Texture1D() = default;
 	void log();

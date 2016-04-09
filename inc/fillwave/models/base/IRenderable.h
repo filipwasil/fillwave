@@ -21,7 +21,7 @@ class IRenderer;
  */
 
 class IRenderable: public IDrawable {
-  public:
+ public:
 	IRenderable() = default;
 	virtual ~IRenderable() = default;
 	virtual bool getRenderItem(RenderItem& item) = 0;

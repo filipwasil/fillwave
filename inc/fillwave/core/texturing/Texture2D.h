@@ -18,11 +18,11 @@ namespace core {
  */
 
 class Texture2D: public Texture {
-  public:
+ public:
 	Texture2D(
-	    Texture2DFile* file,
-	    ParameterList& parameters,
-	    GLuint howMany = 1);
+	   Texture2DFile* file,
+	   ParameterList& parameters,
+	   GLuint howMany = 1);
 
 	virtual ~Texture2D() = default;
 
@@ -40,7 +40,7 @@ class Texture2D: public Texture {
 
 	puTexture2DFile mFile;
 
-  protected:
+ protected:
 	ParameterList mParameters;
 };
 

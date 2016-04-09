@@ -18,15 +18,15 @@ namespace framework {
 
 //xxx code duplication in constructors. fix
 MeshTerrain::MeshTerrain(
-    Engine* engine,
-    pProgram program,
-    TerrainConstructor* constructor,
-    const Material& /*material*/, //xxx to be used
-    const std::string& diffuseMapPath,
-    const std::string& normalMapPath,
-    const std::string& specularMapPath,
-    GLuint radius,
-    GLuint density) :
+   Engine* engine,
+   core::Program* program,
+   TerrainConstructor* constructor,
+   const Material& /*material*/, //xxx to be used
+   const std::string& diffuseMapPath,
+   const std::string& normalMapPath,
+   const std::string& specularMapPath,
+   GLuint radius,
+   GLuint density) :
 	Programmable(program),
 	mLights(engine->getLightSystem()),
 	mChunkWidth(radius * 0.2 * 16 / density),
@@ -47,19 +47,19 @@ MeshTerrain::MeshTerrain(
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			pMesh ptr =
-			    std::make_shared < Mesh
-			    > (engine, Material(), buildTextureRegion(diffuseMap), buildTextureRegion(
-			           normalMap), buildTextureRegion(specularMap), program, loader.getShadow(),
-			       loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
-			       loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-			       engine->getLightSystem(), std::make_shared
-			       < core::VertexBufferBasic
-			       > (constructor, density, gapSize, indices), std::make_shared
-			       < core::IndexBufferBasic > (indices));
+			   std::make_shared < Mesh
+			   > (engine, Material(), buildTextureRegion(diffuseMap), buildTextureRegion(
+			         normalMap), buildTextureRegion(specularMap), program, loader.getShadow(),
+			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
+			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
+			      engine->getLightSystem(), std::make_shared
+			      < core::VertexBufferBasic
+			      > (constructor, density, gapSize, indices), std::make_shared
+			      < core::IndexBufferBasic > (indices));
 
 			ptr->moveTo(
-			    glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
-			              density * gapSize * (GLfloat(z))));
+			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
+			             density * gapSize * (GLfloat(z))));
 			attach(ptr);
 		}
 	}
@@ -67,15 +67,15 @@ MeshTerrain::MeshTerrain(
 
 //xxx code duplication in constructors. fix
 MeshTerrain::MeshTerrain(
-    Engine* engine,
-    pProgram program,
-    TerrainConstructor* constructor,
-    const Material& /*material*/, //xxx to be used
-    core::Texture2D* diffuseMap,
-    core::Texture2D* normalMap,
-    core::Texture2D* specularMap,
-    GLuint radius,
-    GLuint density) :
+   Engine* engine,
+   core::Program* program,
+   TerrainConstructor* constructor,
+   const Material& /*material*/, //xxx to be used
+   core::Texture2D* diffuseMap,
+   core::Texture2D* normalMap,
+   core::Texture2D* specularMap,
+   GLuint radius,
+   GLuint density) :
 	Programmable(program),
 	mLights(engine->getLightSystem()),
 	mChunkWidth(radius * 0.2 * 16 / density),
@@ -92,19 +92,19 @@ MeshTerrain::MeshTerrain(
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			pMesh ptr =
-			    std::make_shared < Mesh
-			    > (engine, Material(), buildTextureRegion(diffuseMap), buildTextureRegion(
-			           normalMap), buildTextureRegion(specularMap), program, loader.getShadow(),
-			       loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
-			       loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-			       engine->getLightSystem(), std::make_shared
-			       < core::VertexBufferBasic
-			       > (constructor, density, gapSize, indices), std::make_shared
-			       < core::IndexBufferBasic > (indices));
+			   std::make_shared < Mesh
+			   > (engine, Material(), buildTextureRegion(diffuseMap), buildTextureRegion(
+			         normalMap), buildTextureRegion(specularMap), program, loader.getShadow(),
+			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
+			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
+			      engine->getLightSystem(), std::make_shared
+			      < core::VertexBufferBasic
+			      > (constructor, density, gapSize, indices), std::make_shared
+			      < core::IndexBufferBasic > (indices));
 
 			ptr->moveTo(
-			    glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
-			              density * gapSize * (GLfloat(z))));
+			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
+			             density * gapSize * (GLfloat(z))));
 			attach(ptr);
 		}
 	}
@@ -137,7 +137,7 @@ void MeshTerrain::draw(ICamera& camera) {
 
 void MeshTerrain::drawPBRP(ICamera& camera) {
 	distanceCheck(camera);
-	mLights->pushLightUniforms(mProgram.get());
+	mLights->pushLightUniforms(mProgram);
 	mLights->bindShadowmaps();
 	for (auto& it : mChildren) {
 		it->drawPBRP(camera);

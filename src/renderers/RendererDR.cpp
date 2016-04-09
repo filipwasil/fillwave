@@ -41,9 +41,9 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	mDeferredColorAttachments(5),
 	mDeferredDepthAttachments(1),
 	mGBuffer(
-	    make_unique<core::FramebufferGeometry>(mTextures, mScreenSize[0],
-	            mScreenSize[1], mDeferredColorAttachments,
-	            mDeferredDepthAttachments)) {
+	   make_unique<core::FramebufferGeometry>(mTextures, mScreenSize[0],
+	         mScreenSize[1], mDeferredColorAttachments,
+	         mDeferredDepthAttachments)) {
 
 	framework::Sphere sphere(3.0f, 10.0f,
 	                         10.0f); // xxx hardcoded values fix ! todo !
@@ -53,8 +53,8 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	mDeferredPointLight = make_unique<Mesh>(engine, Material(),
 	                                        buildTextureRegion(),
 	                                        buildTextureRegion(), buildTextureRegion(),
-	                                        mProgramPointLight, pProgram(), pProgram(), loader.getOcclusionQuery(),
-	                                        pProgram(), pProgram(), mLights,
+	                                        mProgramPointLight, nullptr, nullptr, loader.getOcclusionQuery(),
+	                                        nullptr, nullptr, mLights,
 	                                        std::make_shared<core::VertexBufferBasic>(vertices),
 	                                        std::make_shared<core::IndexBufferBasic>(indices),
 	                                        nullptr);
@@ -208,11 +208,11 @@ inline void RendererDR::drawDepthlessPass() {
 }
 
 inline void RendererDR::drawLightsSpotPass(ICamera& camera,
-        GLint& textureUnit) {
+      GLint& textureUnit) {
 	for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
 
 		mProgramSpotLight->use();
-		mLights->updateDeferredBufferSpot(i, mProgramSpotLight.get(),
+		mLights->updateDeferredBufferSpot(i, mProgramSpotLight,
 		                                  textureUnit++);
 
 		core::Uniform::push(mULCCameraPositionSpot,
@@ -223,13 +223,13 @@ inline void RendererDR::drawLightsSpotPass(ICamera& camera,
 }
 
 inline void RendererDR::drawLightsDirectionalPass(
-    ICamera& camera,
-    GLint& textureUnit) {
+   ICamera& camera,
+   GLint& textureUnit) {
 	for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
 
 		mProgramDirecionalLight->use();
 		mLights->updateDeferredBufferDirectional(i,
-		        mProgramDirecionalLight.get(), textureUnit++);
+		      mProgramDirecionalLight, textureUnit++);
 
 		core::Uniform::push(mULCCameraPositionDirectional,
 		                    camera.getTranslation());
@@ -239,7 +239,7 @@ inline void RendererDR::drawLightsDirectionalPass(
 }
 
 inline void RendererDR::drawLightsPointPass(ICamera& camera,
-        GLint& textureUnit) {
+      GLint& textureUnit) {
 	glEnable(GL_STENCIL_TEST);
 
 	for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
@@ -261,7 +261,7 @@ inline void RendererDR::drawLightsPointPass(ICamera& camera,
 		glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_DECR_WRAP, GL_KEEP);
 
 		mProgramPointLight->use();
-		mLights->updateDeferredBufferPoint(i, mProgramPointLight.get(),
+		mLights->updateDeferredBufferPoint(i, mProgramPointLight,
 		                                   textureUnit++);
 
 		core::Uniform::push(mULCCameraPositionPoint, camera.getTranslation());
@@ -362,44 +362,44 @@ inline void RendererDR::initUniforms() {
 
 inline void RendererDR::initUniformsCache() {
 	mULCAmbient = mProgramSpotLight->getUniformLocation(
-	                  "uAmbient");
+	                 "uAmbient");
 
 	mULCCameraPositionSpot = mProgramSpotLight->getUniformLocation(
-	                             "uCameraPosition");
+	                            "uCameraPosition");
 	mULCAmbientIntensitySpot = mProgramSpotLight->getUniformLocation(
-	                               "uLight.base.ambientIntensity");
+	                              "uLight.base.ambientIntensity");
 	mULCScreenSizeSpot = mProgramSpotLight->getUniformLocation("uScreenSize");
 	mULCShadowUnitSpot = mProgramSpotLight->getUniformLocation("uShadowUnit");
 	mULCIsAOSpot = mProgramSpotLight->getUniformLocation("uIsAO");
 
 	mULCCameraPositionDirectional =
-	    mProgramDirecionalLight->getUniformLocation("uCameraPosition");
+	   mProgramDirecionalLight->getUniformLocation("uCameraPosition");
 	mULCAmbientIntensityDirectional =
-	    mProgramDirecionalLight->getUniformLocation("uAmbientIntensity");
+	   mProgramDirecionalLight->getUniformLocation("uAmbientIntensity");
 	mULCScreenSizeDirectional = mProgramDirecionalLight->getUniformLocation(
-	                                "uScreenSize");
+	                               "uScreenSize");
 	mULCShadowUnitDirectional = mProgramDirecionalLight->getUniformLocation(
-	                                "uShadowUnit");
+	                               "uShadowUnit");
 	mULCIsAODirectional = mProgramDirecionalLight->getUniformLocation("uIsAO");
 
 	mULCCameraPositionPoint = mProgramPointLight->getUniformLocation(
-	                              "uCameraPosition");
+	                             "uCameraPosition");
 	mULCMVPPoint = mProgramPointLight->getUniformLocation("uMVP");
 	mULCScreenSizePoint = mProgramPointLight->getUniformLocation(
-	                          "uScreenSize");
+	                         "uScreenSize");
 	mULCShadowUnitPoint = mProgramPointLight->getUniformLocation(
-	                          "uShadowUnit");
+	                         "uShadowUnit");
 	mULCIsAOPoint = mProgramSpotLight->getUniformLocation("uIsAO");
 
 	mULCDRDepthlesDiffuseTexel = mProgramDepthless->getUniformLocation(
-	                                 "uDiffuseTexelAttachment");
+	                                "uDiffuseTexelAttachment");
 	mULCDRDepthlessPositionTexel = mProgramDepthless->getUniformLocation(
-	                                   "uWorldPositionAttachment");
+	                                  "uWorldPositionAttachment");
 	mULCDRScreenSize = mProgramDepthless->getUniformLocation("uScreenSize");
 
 	mULCDRAScreenSize = mProgramAmbient->getUniformLocation("uScreenSize");
 	mULCDRADiffuseAttachment = mProgramAmbient->getUniformLocation(
-	                               "uDiffuseTexelAttachment");
+	                              "uDiffuseTexelAttachment");
 }
 
 inline void RendererDR::initGeometryBuffer() {
@@ -408,7 +408,7 @@ inline void RendererDR::initGeometryBuffer() {
 	glGetIntegerv(GL_MAX_DRAW_BUFFERS, &maxDrawBuf);
 
 	if (glm::max(maxAttach, maxDrawBuf) > static_cast<GLint>
-	        (mDeferredColorAttachments)) {
+	      (mDeferredColorAttachments)) {
 		//xxx todo remove this function
 	}
 }
@@ -443,7 +443,7 @@ inline void RendererDR::drawDebug() {
 	for (GLuint i = 0; i < mDeferredColorAttachments; i++) {
 		mGBuffer->bindForReading(); /* We will bind GBuffer for reading ...*/
 		mGBuffer->setReadColorAttachment(
-		    i); /* ... and take color attachment color i 0 (out location 0 from fragment shader) ... */
+		   i); /* ... and take color attachment color i 0 (out location 0 from fragment shader) ... */
 		glBlitFramebuffer(0, 0, w, h, debugAttachmentScreens[i][0],
 		                  debugAttachmentScreens[i][1], debugAttachmentScreens[i][2],
 		                  debugAttachmentScreens[i][3],

@@ -14,8 +14,8 @@ namespace fillwave {
 namespace core {
 
 IndexBufferBasic::IndexBufferBasic(
-    std::vector<GLuint>& data,
-    GLuint dataStoreModification) :
+   std::vector<GLuint>& data,
+   GLuint dataStoreModification) :
 	IndexBuffer(data.size(), dataStoreModification) {
 	mDataIndices = data;
 	mSize = mTotalElements * sizeof(GLuint);
@@ -23,8 +23,8 @@ IndexBufferBasic::IndexBufferBasic(
 }
 
 IndexBufferBasic::IndexBufferBasic(
-    const fMesh* shape,
-    GLuint dataStoreModification) :
+   const fMesh* shape,
+   GLuint dataStoreModification) :
 	IndexBuffer(shape->mNumFaces * 3, dataStoreModification) {
 //   #pragma omp parallel for schedule(guided) num_threads(2) if (shape->mNumFaces > 1000) disaster
 	for (GLuint i = 0; i < shape->mNumFaces; i++) {
