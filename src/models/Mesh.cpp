@@ -37,7 +37,7 @@ Mesh::Mesh(
    LightSystem* lights,
    pVertexBufferBasic vbo,
    pIndexBufferBasic ibo,
-   Animator* boneManager,
+   Animator* animator,
    GLenum renderMode) :
 	IReloadable(engine),
 	mMaterial(material),
@@ -54,7 +54,7 @@ Mesh::Mesh(
 	mIBO(ibo),
 	mVBO(vbo),
 	mLights(lights),
-	mAnimator(boneManager)
+	mAnimator(animator)
 #ifdef FILLWAVE_GLES_3_0
 #else
 	,

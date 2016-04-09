@@ -51,7 +51,7 @@ class Mesh: public Entity, public IReloadable {
 	   LightSystem* lights = nullptr,
 	   pVertexBufferBasic vbo = pVertexBufferBasic(),
 	   pIndexBufferBasic ibo = pIndexBufferBasic(),
-	   Animator* boneManager = nullptr,
+	   Animator* animator = nullptr,
 	   GLenum renderMode = GL_TRIANGLES);
 
 	virtual ~Mesh() = default;
