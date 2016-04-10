@@ -28,3 +28,6 @@
 [submodule "ext/glmock"]
 	path = ext/glmock
 	url = https://github.com/filipwasil/glmock.git
+[submodule "ext/gli"]
+	path = ext/gli
+	url = https://github.com/g-truc/gli.git
