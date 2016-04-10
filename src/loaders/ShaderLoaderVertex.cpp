@@ -10,6 +10,10 @@
 #include <fillwave/Assets.h>
 #include <fillwave/common/Strings.h>
 
+#ifndef FILLWAVE_MAX_BONES_DEPENDENCIES
+#error "Max bone dependencies for animations not defined"
+#endif
+
 namespace fillwave {
 namespace framework {
 

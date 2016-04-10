@@ -51,6 +51,7 @@ INCLUDE_DIRECTORIES(${GLES30_PROCESS_INCLUDES}
                     ${FILLWAVE_EXT_GLM_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_TEXTURE_WRITER_INCLUDES}
+                    ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
                     ${FILLWAVE_MODEL_LOADER_INCLUDES})
 
 # -----------------------------------------------

@@ -14,8 +14,7 @@ option(NDEBUG "Build with debug logs" OFF)
 option(FILLWAVE_TESTS "Build with gtest tests" OFF)
 
 option(FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)
-option(FILLWAVE_MODEL_LOADER_TINYOBJLOADER "Use Tinyobjloader" OFF)
-option(FILLWAVE_TEXTURE_LOADER_GLI "Use GLI texture loader" ON)
+option(FILLWAVE_TEXTURE_LOADER_GLI "Use GLI texture loader" OFF)
 option(FILLWAVE_SUPPRESS_WARNINGS "Suppress warnings during compilation" ON)
 
 option(FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP "Build android native test app" OFF)

@@ -41,6 +41,7 @@ include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_MODEL_LOADER_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_TEXTURE_WRITER_INCLUDES}
+                    ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
                     ${FILLWAVE_EXT_GLM_INCLUDES}
                     /usr/include/freetype2
                     /usr/local/include)
