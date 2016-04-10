@@ -26,7 +26,6 @@ typedef GLubyte* Texture2DFileData;
 /*! \class Texture2DFileConfig
  * \brief Stores the single file configuration info.
  */
-
 class Texture2DFileConfig {
  public:
 	Texture2DFileConfig(GLint level = 0, GLint border = 0, GLboolean mipmaps =
@@ -41,7 +40,6 @@ class Texture2DFileConfig {
 /*! \class Texture2DFileHeader
  * \brief Stores the single file header info.
  */
-
 class Texture2DFileHeader {
  public:
 	Texture2DFileHeader(
