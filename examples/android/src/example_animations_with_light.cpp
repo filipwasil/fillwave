@@ -8,9 +8,10 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/Log.h>
 #include <fillwave/models/shapes/Quad.h>
+#include <fillwave/Framework.h>
 
 using namespace fillwave;
-using namespace framework;
+using namespace fillwave::framework;
 
 void perform(Engine* engine) {
     /* Scene */
@@ -36,8 +37,8 @@ void perform(Engine* engine) {
 //    core::Program* program = loader.getDefaultDeferredGeometry(engine);
     core::Program* aprogram = loader.getDefaultBones();
 
-    pEffect e = pEffect (new TextureOnly());
-    pEffect f = pEffect (new Fog());
+    pIEffect e = std::make_shared<TextureOnly> ();
+    pIEffect f = std::make_shared<Fog> ();
 
     pModel cactus1 = buildModel(engine, aprogram, "beast.dae");
     pModel cactus2 = buildModel(engine, aprogram, "beast.dae");
@@ -65,7 +66,7 @@ void perform(Engine* engine) {
     cactus3->addEffect(f);
 
     /* Skybox */
-    pTexture3D textureCubemap = engine->storeTexture3D("emerald_right.jpg",
+    core::Texture3D* textureCubemap = engine->storeTexture3D("emerald_right.jpg",
                                                        "emerald_left.jpg",
                                                        "emerald_top.jpg",
                                                        "",
@@ -77,7 +78,7 @@ void perform(Engine* engine) {
     scene->setSkybox(skybox);
 
     /* Text */
-    pText text = engine->storeText("Fillwave example", "bridgenorth", -0.95, 0.95, 100.0);
+    pText text = engine->storeText("Fillwave example", "bridgenorth", glm::vec2(-0.95, 0.95), 100.0);
 
     /* Specular and normal mapping*/
     pEntity entity1 = buildEntity();
@@ -114,5 +115,5 @@ void perform(Engine* engine) {
    entity1->scaleTo(0.02);
    scene->attach(entity1);
 
-   engine->configureFPSCounter("bridgenorth",0.6,0.9,70.0);
+   engine->configureFPSCounter("bridgenorth", glm::vec2(0.6,0.9),70.0);
 }

@@ -9,6 +9,7 @@
 #define PICKABLEMODEL_H_
 
 #include <fillwave/Fillwave.h>
+#include <fillwave/Framework.h>
 
 using namespace fillwave;
 using namespace fillwave::framework;
@@ -16,7 +17,7 @@ using namespace fillwave::framework;
 class PickableModel: public Model{
 private:
    pText mText;
-   pEffect mPickedEffect;
+   pIEffect mPickedEffect;
    std::string mName;
 public:
    PickableModel(std::string name,

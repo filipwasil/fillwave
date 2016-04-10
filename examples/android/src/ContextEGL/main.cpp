@@ -20,6 +20,7 @@
 #include <pthread.h>
 #include <android/sensor.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/Framework.h>
 #include <fillwave/Log.h>
 #include <fillwave/Profiler.h>
 

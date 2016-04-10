@@ -24,7 +24,7 @@ PickableModel::PickableModel(std::string name,
                                                                            shapePath),
                                                                      mText(text),
                                                                      mName(name){
-   mPickedEffect = pEffect(new BoostColor(2.0f));
+   mPickedEffect = pIEffect(new BoostColor(2.0f));
 }
 
 PickableModel::~PickableModel() {
