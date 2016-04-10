@@ -24,9 +24,6 @@ class IndexBufferBasic: public IndexBuffer {
 	IndexBufferBasic(std::vector<GLuint>& data, GLuint dataStoreModification =
 	                    GL_STATIC_DRAW);
 
-	IndexBufferBasic(const fMesh* shape, GLuint dataStoreModification =
-	                    GL_STATIC_DRAW);
-
 	template <class T>
 	IndexBufferBasic(framework::Shape<T>& shape, GLuint dataStoreModification =
 	                    GL_STATIC_DRAW) :
@@ -38,6 +35,12 @@ class IndexBufferBasic: public IndexBuffer {
 	virtual ~IndexBufferBasic() = default;
 
 	void loadElement(GLuint element);
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	IndexBufferBasic(const aiMesh* shape, GLuint dataStoreModification =
+	                    GL_STATIC_DRAW);
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
 };
 
 } /* core */

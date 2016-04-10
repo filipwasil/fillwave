@@ -13,6 +13,8 @@
 #include <fillwave/Math.h>
 #include <fillwave/Assets.h>
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+
 #include <vector>
 #include <string>
 
@@ -22,7 +24,6 @@ namespace framework {
 /*! \class Channel
  * \brief wrapper to assimp aiNodeAnim*
  */
-
 class Channel {
  public:
 	std::string mAffectedNodeName;
@@ -31,11 +32,13 @@ class Channel {
 	std::vector<Key<glm::quat> > mKeysRotation;
 	std::vector<Key<glm::vec3> > mKeysScaling;
 
-	Channel(fNodeAnim* assimpChannel);
+	Channel(aiNodeAnim* assimpChannel);
 	virtual ~Channel() = default;
 };
 
 } /* framework */
 } /* fillwave */
+
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 #endif /* CHANNEL_H_ */

@@ -48,8 +48,10 @@ struct FaceBasic {
 
 class VertexBufferBasic: public TVertexBuffer<VertexBasic> {
  public:
-	VertexBufferBasic(const fMesh* shape, framework::Animator* boneManager =
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	VertexBufferBasic(const aiMesh* shape, framework::Animator* animator =
 	                     nullptr, GLuint dataStoreModification = GL_STATIC_DRAW);
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 	VertexBufferBasic(
 	   framework::TerrainConstructor* constructor,

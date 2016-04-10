@@ -11,12 +11,14 @@
 #include <fillwave/Log.h>
 #include <fillwave/models/animations/Conversion.h>
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+
 FLOGINIT("Bone", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {
 
-Bone::Bone(fBone* assimpBone) {
+Bone::Bone(aiBone* assimpBone) {
 	mName = assimpBone->mName.C_Str();
 	mOffsetMatrix = assimpToGlmMat4(assimpBone->mOffsetMatrix);
 	mGlobalOffsetMatrix = glm::mat4(1.0);
@@ -46,6 +48,8 @@ void Bone::setGlobalOffsetMatrix(glm::mat4 m) {
 void Bone::log() {
 	FLOG_INFO("Name: %s", (mName.c_str()));
 }
+
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 } /* framwework */
 } /* fillwave */

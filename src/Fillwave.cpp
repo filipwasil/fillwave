@@ -337,14 +337,16 @@ framework::TextureSystem* Engine::getTextureSystem() const {
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
    const std::string& shapePath) {
 	PhysicsMeshBuffer* buffer = new PhysicsMeshBuffer();
-	const fScene* scene = mImpl->mImporter.ReadFile(
-	                         (mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
-	                         FILLWAVE_PROCESS_TRIANGULATE |
-	                         FILLWAVE_PROCESS_SORT_BY_P_TYPE |
-	                         FILLWAVE_PROCESS_CALC_TANGENT_SPACE);
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	const aiScene* scene = mImpl->mImporter.ReadFile(
+	                          (mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
+	                          aiProcess_Triangulate |
+	                          aiProcess_SortByPType |
+	                          aiProcess_CalcTangentSpace);
 	if (scene) {
 		for (GLuint i = 0; i < scene->mNumMeshes; i++) {
-			const fMesh* shape = scene->mMeshes[i];
+			const aiMesh* shape = scene->mMeshes[i];
 			buffer->mNumFaces = shape->mNumFaces;
 			buffer->mVertices.reserve(shape->mNumVertices);
 			buffer->mIndices.reserve(shape->mNumFaces * 3);
@@ -361,6 +363,8 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 			break;      //for now fillwave supports only one mesh here;
 		}
 	}
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
 	return puPhysicsMeshBuffer(buffer);
 }
 
@@ -492,17 +496,15 @@ void Engine::captureFramebufferToBuffer(
 	buffer[*sizeInBytes] = '\0';
 }
 
-const fScene* Engine::getModelFromFile(std::string path) {
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+const aiScene* Engine::getModelFromFile(std::string path) {
 	FLOG_DEBUG("Reading model %s", path.c_str());
-#ifdef FILLWAVE_COMPILATION_TINY_ASSET_LOADER
-	return nullptr;
-#else
 	return mImpl->mImporter.ReadFile(
 	          (mImpl->mFileLoader.getRootPath() + path).c_str(),
 	          aiProcess_Triangulate | aiProcess_SortByPType
 	          | aiProcess_CalcTangentSpace);
-#endif
 }
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 template <GLuint T>
 core::Shader* Engine::storeShader(const std::string& shaderPath) {

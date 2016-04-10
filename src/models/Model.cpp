@@ -139,9 +139,19 @@ void Model::reload() {
 
 }
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+inline void Model::initAnimations(const aiScene* scene) {
+	if (scene->HasAnimations()) {
+		mAnimator = new Animator(scene);
+		FLOG_DEBUG("attached TimedBoneUpdateCallback to model");
+		mAnimationCallback = new TimedBoneUpdateCallback(this);
+		this->attachHierarchyCallback(mAnimationCallback);
+	}
+}
+
 inline void Model::loadNodes(
-   fNode* node,
-   const fScene* scene,
+   aiNode* node,
+   const aiScene* scene,
    Engine* engine,
    Entity* entity,
    const std::string& diffuseMapPath,
@@ -153,8 +163,8 @@ inline void Model::loadNodes(
 	loadNodeTransformations(node, entity);
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
-		const fMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
-		const fMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
+		const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
+		const aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
 
 		entity->attach(
 		   loadMesh(aMesh, Material(aMaterial),
@@ -184,27 +194,27 @@ inline void Model::loadNodes(
 	loadNodeTransformations(node, entity);
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
-		const fMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
-		const fMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
+		const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
+		const aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
 
-		fString diffuseMapPathAssimp, normalMapPathAssimp, specularMapPathAssimp;
+		aiString diffuseMapPathAssimp, normalMapPathAssimp, specularMapPathAssimp;
 		std::string diffuseMapPath, normalMapPath, specularMapPath;
 
 		diffuseMapPath =
 		   (aMaterial->GetTexture(
-		       FILLWAVE_TEXTURE_TYPE_DIFFUSE, 0, &diffuseMapPathAssimp, nullptr,
+		       aiTextureType_DIFFUSE, 0, &diffuseMapPathAssimp, nullptr,
 		       nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
 		   diffuseMapPathAssimp.data : "255_255_255.color";
 
 		normalMapPath =
 		   (aMaterial->GetTexture(
-		       FILLWAVE_TEXTURE_TYPE_NORMALS, 0, &normalMapPathAssimp, nullptr,
+		       aiTextureType_NORMALS, 0, &normalMapPathAssimp, nullptr,
 		       nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
 		   normalMapPathAssimp.data : "128_128_255.color";
 
 		specularMapPath =
 		   (aMaterial->GetTexture(
-		       FILLWAVE_TEXTURE_TYPE_SPECULAR, 0, &specularMapPathAssimp, nullptr,
+		       aiTextureType_SPECULAR, 0, &specularMapPathAssimp, nullptr,
 		       nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
 		   specularMapPathAssimp.data : "";
 
@@ -239,7 +249,7 @@ inline void Model::loadNodes(
 	loadNodeTransformations(node, entity);
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
-		const fMesh* aMesh = scene->mMeshes[i];
+		const aiMesh* aMesh = scene->mMeshes[i];
 		pMesh mesh = loadMesh(aMesh, material, buildTextureRegion(diffuseMap),
 		                      buildTextureRegion(normalMap), buildTextureRegion(specularMap),
 		                      engine);
@@ -266,7 +276,7 @@ inline void Model::loadNodeTransformations(aiNode* node, Entity* entity) {
 }
 
 pMesh Model::loadMesh(
-   const fMesh* shape,
+   const aiMesh* shape,
    const Material& material,
    pTextureRegion diffuseMap,
    pTextureRegion normalMap,
@@ -286,6 +296,7 @@ pMesh Model::loadMesh(
 	          < core::VertexBufferBasic > (shape, mAnimator), std::make_shared
 	          < core::IndexBufferBasic > (shape), mAnimator);
 }
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 void Model::performAnimation(GLfloat timeElapsed_s) {
 	mAnimator->updateTransformations(mActiveAnimation, timeElapsed_s);
@@ -350,15 +361,6 @@ inline void Model::initShadowing(Engine* engine) {
 	} else {
 		mProgramShadow = loader.getShadow();
 		mProgramShadowColor = loader.getShadowColorCoded();
-	}
-}
-
-inline void Model::initAnimations(const fScene* scene) {
-	if (scene->HasAnimations()) {
-		mAnimator = new Animator(scene);
-		FLOG_DEBUG("attached TimedBoneUpdateCallback to model");
-		mAnimationCallback = new TimedBoneUpdateCallback(this);
-		this->attachHierarchyCallback(mAnimationCallback);
 	}
 }
 

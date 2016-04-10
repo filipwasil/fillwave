@@ -24,7 +24,7 @@ INCLUDE_DIRECTORIES(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_FREETYPE2_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_EXT_GLEW_INCLUDES}
-                    ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
+                    ${FILLWAVE_TEXTURE_WRITER_INCLUDES}
                     ${FILLWAVE_PATH_SOURCE_PARTICLES}
                     )
 

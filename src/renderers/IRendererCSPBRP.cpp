@@ -53,21 +53,27 @@ void IRendererCSPBRP::draw(ICamera& camera) {
 			for (auto& renderItem : container) {
 //				uniform update todo
 
-				renderItem.mStatus.bVAO
-				? core::bindVAO(renderItem.mHandles[RenderItem::eRenderHandleVAO]) : (void)0;
+				if (renderItem.mStatus.bVAO) {
+					core::bindVAO(renderItem.mHandles[RenderItem::eRenderHandleVAO]);
+				}
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+				if (renderItem.mStatus.bDiffuse) {
+					core::bindTexture(GL_TEXTURE_2D, aiTextureType_DIFFUSE,
+					                  renderItem.mHandles[RenderItem::eRenderHandleDiffuse]);
+				}
 
-				renderItem.mStatus.bDiffuse
-				? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_DIFFUSE,
-				                    renderItem.mHandles[RenderItem::eRenderHandleDiffuse]) : (void)0;
+				if (renderItem.mStatus.bNormal) {
+					core::bindTexture(GL_TEXTURE_2D, aiTextureType_NORMALS,
+					                  renderItem.mHandles[RenderItem::eRenderHandleNormal]);
+				}
 
-				renderItem.mStatus.bNormal
-				? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_NORMALS,
-				                    renderItem.mHandles[RenderItem::eRenderHandleNormal]) : (void)0;
+				if (renderItem.mStatus.bSpecular) {
+					core::bindTexture(GL_TEXTURE_2D, aiTextureType_SPECULAR,
+					                  renderItem.mHandles[RenderItem::eRenderHandleSpecular]);
+				}
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-				renderItem.mStatus.bSpecular
-				? core::bindTexture(GL_TEXTURE_2D, FILLWAVE_TEXTURE_TYPE_SPECULAR,
-				                    renderItem.mHandles[RenderItem::eRenderHandleSpecular]) : (void)0;
-
+				// xxx Only assimp handled
 				renderItem.mStatus.bIndexDraw
 				? glDrawElements(renderItem.mMode, renderItem.mCount, renderItem.mDataType,
 				                 reinterpret_cast<GLvoid*>(renderItem.mIndicesPointer))

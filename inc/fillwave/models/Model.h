@@ -85,21 +85,22 @@ class Model: public Programmable {
 	/* Init */
 	void initUniformsCache();
 	void initShadowing(Engine* engine);
-	void initAnimations(const fScene* scene);
 	void evaluateAnimations();
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	void initAnimations(const aiScene* scene);
 	/* Tree */
-	void loadNodeTransformations(fNode* node, Entity* entity);
+	void loadNodeTransformations(aiNode* node, Entity* entity);
 
 	void loadNodes(
-	   fNode* node,
-	   const fScene* scene,
+	   aiNode* node,
+	   const aiScene* scene,
 	   Engine* engine,
 	   Entity* entity);
 
 	void loadNodes(
-	   fNode* node,
-	   const fScene* scene,
+	   aiNode* node,
+	   const aiScene* scene,
 	   Engine* engine,
 	   Entity* entity,
 	   const std::string& diffuseMapPath,
@@ -107,8 +108,8 @@ class Model: public Programmable {
 	   const std::string& specularMapPath);
 
 	void loadNodes(
-	   fNode* node,
-	   const fScene* scene,
+	   aiNode* node,
+	   const aiScene* scene,
 	   Engine* engine,
 	   Entity* entity,
 	   core::Texture2D* diffuseMap,
@@ -117,12 +118,14 @@ class Model: public Programmable {
 	   const Material& material);
 
 	pMesh loadMesh(
-	   const fMesh* shape,
+	   const aiMesh* shape,
 	   const Material& material,
 	   pTextureRegion diffuseMap,
 	   pTextureRegion normalMap,
 	   pTextureRegion specularMap,
 	   Engine* engine);
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
 };
 
 } /* framework */

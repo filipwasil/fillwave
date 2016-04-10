@@ -94,7 +94,6 @@ public class Fillwave {
    public native void drawTexture(long engine, long t, long p);
 
           /* Assets */
-//   const aiScene* getModelFromFile(String path);
    public native PhysicsMeshBuffer getPhysicalMeshBuffer(long engine, String shapePath);
    public native long getLightManager(long engine);
 

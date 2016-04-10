@@ -17,6 +17,7 @@ Material::Material() {
 	mSpecular = glm::vec4(1.0);
 }
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 Material::Material(const aiMaterial* material) {
 	aiColor4D color;
 	if (AI_SUCCESS
@@ -32,6 +33,7 @@ Material::Material(const aiMaterial* material) {
 		mSpecular = assimpToGlmVec4(color);
 	}
 }
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 glm::vec4 Material::getAmbient() const {
 	return mAmbient;

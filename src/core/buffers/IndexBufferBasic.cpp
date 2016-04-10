@@ -22,8 +22,16 @@ IndexBufferBasic::IndexBufferBasic(
 	mData = mDataIndices.data();
 }
 
+void IndexBufferBasic::loadElement(GLuint element) {
+	mDataIndices.push_back(element);
+	mTotalElements++;
+	mSize = mTotalElements * sizeof(GLuint);
+	mData = mDataIndices.data();
+}
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 IndexBufferBasic::IndexBufferBasic(
-   const fMesh* shape,
+   const aiMesh* shape,
    GLuint dataStoreModification) :
 	IndexBuffer(shape->mNumFaces * 3, dataStoreModification) {
 //   #pragma omp parallel for schedule(guided) num_threads(2) if (shape->mNumFaces > 1000) disaster
@@ -34,13 +42,7 @@ IndexBufferBasic::IndexBufferBasic(
 	}
 	mData = mDataIndices.data();
 }
-
-void IndexBufferBasic::loadElement(GLuint element) {
-	mDataIndices.push_back(element);
-	mTotalElements++;
-	mSize = mTotalElements * sizeof(GLuint);
-	mData = mDataIndices.data();
-}
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 } /* core */
 } /* fillwave */

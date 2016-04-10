@@ -40,9 +40,10 @@ class TManagerSmart: public std::unordered_map<K, std::unique_ptr<T>> {
 
 		if ((*this).size() >= M) {
 			/* There is no smarter solution needed */
-			const char error[] = "\033[35m[FATAL MANAGER OVERFLOW. FILLWAVE_MANAGEMENT_MAX_ITEMS too low.] \033[0m\n";
+			const char error[] =
+			   "\033[35m[FATAL MANAGER OVERFLOW. FILLWAVE_MANAGEMENT_MAX_ITEMS too low.] \033[0m\n";
 #ifdef __ANDROID__
-			(void)__android_log_print(ANDROID_LOG_ERROR, error,"");
+			(void)__android_log_print(ANDROID_LOG_ERROR, error, "");
 #else
 			printf(error);
 #endif

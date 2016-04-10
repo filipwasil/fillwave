@@ -16,8 +16,9 @@ FLOGINIT("VertexBufferBasic", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 VertexBufferBasic::VertexBufferBasic(
-   const fMesh* shape,
+   const aiMesh* shape,
    framework::Animator* animator,
    GLuint dataStoreModification) :
 	TVertexBuffer<VertexBasic>(dataStoreModification) {
@@ -116,6 +117,7 @@ VertexBufferBasic::VertexBufferBasic(
 		}
 	}
 }
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 VertexBufferBasic::VertexBufferBasic(
    framework::TerrainConstructor* constructor,

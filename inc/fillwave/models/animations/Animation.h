@@ -13,6 +13,8 @@
 #include <vector>
 #include <string>
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+
 namespace fillwave {
 namespace framework {
 class Channel;
@@ -23,7 +25,7 @@ class Channel;
 
 class Animation {
  public:
-	Animation(fAnimation* assimpAnimation);
+	Animation(aiAnimation* assimpAnimation);
 	virtual ~Animation();
 
 	/* getTicksPerSec
@@ -68,5 +70,7 @@ class Animation {
 
 } /* framework */
 } /* fillwave */
+
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 #endif /* ANIMATION_H_ */

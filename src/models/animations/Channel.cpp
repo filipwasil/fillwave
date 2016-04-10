@@ -15,7 +15,7 @@ FLOGINIT("Channel", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Channel::Channel(fNodeAnim* assimpChannel) {
+Channel::Channel(aiNodeAnim* assimpChannel) {
 	mAffectedNodeName = assimpChannel->mNodeName.C_Str();
 
 	for (unsigned int i = 0; i < assimpChannel->mNumPositionKeys; i++) {

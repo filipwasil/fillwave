@@ -10,12 +10,14 @@
 #include <fillwave/Log.h>
 #include <fillwave/Assets.h>
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+
 FLOGINIT("Animation", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {
 
-Animation::Animation(fAnimation* assimpAnimation) {
+Animation::Animation(aiAnimation* assimpAnimation) {
 	mName = assimpAnimation->mName.C_Str();
 	mDuration = assimpAnimation->mDuration;
 	mTicksPerSec = assimpAnimation->mTicksPerSecond;
@@ -31,6 +33,8 @@ Animation::~Animation() {
 	}
 	mChannels.clear();
 }
+
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 } /* framework */
 } /* fillwave */

@@ -11,6 +11,8 @@
 #include <fillwave/models/animations/Hinge.h>
 #include <fillwave/Assets.h>
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+
 namespace fillwave {
 namespace framework {
 class Bone;
@@ -26,7 +28,7 @@ namespace framework {
 
 class Bone: public Hinge {
  public:
-	Bone(fBone* assimpBone);
+	Bone(aiBone* assimpBone);
 	virtual ~Bone() = default;
 
 	void childrenUpdate();
@@ -49,5 +51,7 @@ class Bone: public Hinge {
 
 } /* framework */
 } /* fillwave */
+
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 #endif /* BONE_H_ */

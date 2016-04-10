@@ -60,7 +60,10 @@ class Engine final {
 
 	/* Assets */
 	puPhysicsMeshBuffer getPhysicalMeshBuffer(const std::string& shapePath);
-	const fScene* getModelFromFile(std::string path); /* xxx remove */
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	const aiScene* getModelFromFile(std::string path); /* xxx remove */
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 	/* Scene */
 	void setCurrentScene(pIScene scene);
