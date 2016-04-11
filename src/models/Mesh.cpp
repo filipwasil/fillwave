@@ -25,9 +25,9 @@ const GLint gOQVertices = 36; //todo move it from here
 Mesh::Mesh(
    Engine* engine,
    const Material& material,
-   pTextureRegion diffuseMap,
-   pTextureRegion normalMap,
-   pTextureRegion specularMap,
+   core::Texture2D* diffuseMap,
+   core::Texture2D* normalMap,
+   core::Texture2D* specularMap,
    core::Program* program,
    core::Program* programShadow,
    core::Program* programShadowColor,
@@ -38,8 +38,9 @@ Mesh::Mesh(
    pVertexBufferBasic vbo,
    pIndexBufferBasic ibo,
    Animator* animator,
-   GLenum renderMode) :
-	IReloadable(engine),
+   GLenum renderMode,
+   core::VertexArray* vao) :
+	IReloadable(engine, vao),
 	mMaterial(material),
 	mDiffuseMap(diffuseMap),
 	mNormalMap(normalMap),
@@ -159,18 +160,18 @@ inline void Mesh::coreDraw() {
 }
 
 inline void Mesh::bindTextures() {
-	if (mDiffuseMap->getTexture()) {
-		mDiffuseMap->getTexture()->bind(
+	if (mDiffuseMap) {
+		mDiffuseMap->bind(
 		   FILLWAVE_DIFFUSE_UNIT); //xxx texture region coordinates are not used
 	}
 
-	if (mNormalMap->getTexture()) {
-		mNormalMap->getTexture()->bind(
+	if (mNormalMap) {
+		mNormalMap->bind(
 		   FILLWAVE_NORMAL_UNIT); //xxx texture region coordinates are not used
 	}
 
-	if (mSpecularMap->getTexture()) {
-		mSpecularMap->getTexture()->bind(
+	if (mSpecularMap) {
+		mSpecularMap->bind(
 		   FILLWAVE_SPECULAR_UNIT); //xxx texture region coordinates are not used
 	}
 }
@@ -401,11 +402,11 @@ bool Mesh::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
 	item.mHandles[RenderItem::eRenderHandleDiffuse] =
-	   mDiffuseMap->getTexture()->getHandle();
+	   mDiffuseMap->getHandle();
 	item.mHandles[RenderItem::eRenderHandleNormal] =
-	   mNormalMap->getTexture()->getHandle();
+	   mNormalMap->getHandle();
 	item.mHandles[RenderItem::eRenderHandleSpecular] =
-	   mSpecularMap->getTexture()->getHandle();
+	   mSpecularMap->getHandle();
 	item.mIndicesPointer = 0;
 	item.mMode = GL_TRIANGLES;
 	item.mRenderStatus = mIBO ? 0xf8 :

@@ -9,7 +9,6 @@
 #define MESH_H_
 
 #include <fillwave/core/texturing/Texture2D.h>
-#include <fillwave/core/texturing/TextureRegion.h>
 #include <fillwave/core/buffers/IndexBufferBasic.h>
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/core/operations/ConditionalRender.h>
@@ -39,9 +38,9 @@ class Mesh: public Entity, public IReloadable {
 	Mesh(
 	   Engine* engine,
 	   const Material& material,
-	   pTextureRegion diffuseMap,
-	   pTextureRegion normalMap,
-	   pTextureRegion specularMap,
+	   core::Texture2D* diffuseMap,
+	   core::Texture2D* normalMap,
+	   core::Texture2D* specularMap,
 	   core::Program* program,
 	   core::Program* ProgramShadow,
 	   core::Program* programShadowColor,
@@ -52,7 +51,8 @@ class Mesh: public Entity, public IReloadable {
 	   pVertexBufferBasic vbo = pVertexBufferBasic(),
 	   pIndexBufferBasic ibo = pIndexBufferBasic(),
 	   Animator* animator = nullptr,
-	   GLenum renderMode = GL_TRIANGLES);
+	   GLenum renderMode = GL_TRIANGLES,
+	   core::VertexArray* = nullptr);
 
 	virtual ~Mesh() = default;
 
@@ -78,9 +78,7 @@ class Mesh: public Entity, public IReloadable {
 
  protected:
 	Material mMaterial;
-	pTextureRegion mDiffuseMap;
-	pTextureRegion mNormalMap;
-	pTextureRegion mSpecularMap;
+	core::Texture2D *mDiffuseMap, *mNormalMap, *mSpecularMap;
 	core::Program *mProgram, *mProgramShadow, *mProgramShadowColor, *mProgramOQ,
 	     *mProgramAOGeometry, *mProgramAOColor;
 	GLenum mRenderMode;

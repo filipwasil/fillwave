@@ -21,9 +21,11 @@ namespace framework {
 
 class IReloadable {
  public:
-	IReloadable(Engine* engine);
+	IReloadable(Engine* engine, core::VertexArray* = nullptr);
 
 	virtual ~IReloadable() = default;
+
+	core::VertexArray* getVAO();
 
 	virtual void initBuffers() = 0;
 	virtual void initPipeline() = 0;

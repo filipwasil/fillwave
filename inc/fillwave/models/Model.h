@@ -120,9 +120,9 @@ class Model: public Programmable {
 	pMesh loadMesh(
 	   const aiMesh* shape,
 	   const Material& material,
-	   pTextureRegion diffuseMap,
-	   pTextureRegion normalMap,
-	   pTextureRegion specularMap,
+	   core::Texture2D* diffuseMap,
+	   core::Texture2D* normalMap,
+	   core::Texture2D* specularMap,
 	   Engine* engine);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 

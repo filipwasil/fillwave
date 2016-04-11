@@ -61,7 +61,7 @@ constexpr GLint FILLWAVE_AO_UNIT = 9;
 constexpr GLint FILLWAVE_SHADOW_FIRST_UNIT = 10;
 
 /* Uniforms */
-constexpr size_t FILLWAVE_LIGHTS_BINDING_POINT = 0;
+constexpr unsigned int FILLWAVE_LIGHTS_BINDING_POINT = 0;
 constexpr int FILLWAVE_UNIFORM_NOT_FOUND = -1;
 
 #endif /* GLCORE_H_ */

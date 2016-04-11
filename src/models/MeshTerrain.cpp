@@ -44,18 +44,30 @@ MeshTerrain::MeshTerrain(
 	GLint indexTerrainChunk = radius;
 	ProgramLoader loader(engine);
 
+	core::VertexArray* vao = nullptr;
+	Material m;
+
+	/* What happens here is that we have many buffers, but only one VAO.
+	 * Result is that VAO from only one buffer is being used
+	 * VBO and IBO are not shared and created independently for all
+	 * chunks. This is very slow and resource consuming. TODO xxx */
+
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			pMesh ptr =
 			   std::make_shared < Mesh
-			   > (engine, Material(), buildTextureRegion(diffuseMap), buildTextureRegion(
-			         normalMap), buildTextureRegion(specularMap), program, loader.getShadow(),
+			   > (engine, m, diffuseMap, normalMap, specularMap, program, loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-			      engine->getLightSystem(), std::make_shared
-			      < core::VertexBufferBasic
-			      > (constructor, density, gapSize, indices), std::make_shared
-			      < core::IndexBufferBasic > (indices));
+			      engine->getLightSystem(),
+			      std::make_shared < core::VertexBufferBasic >
+			        (constructor, density, gapSize, indices),
+			      std::make_shared < core::IndexBufferBasic > (indices),
+			        nullptr, GL_TRIANGLES, vao);
+
+			if (vao == nullptr) {
+			    vao = ptr->getVAO();
+			}
 
 			ptr->moveTo(
 			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
@@ -89,18 +101,25 @@ MeshTerrain::MeshTerrain(
 	GLint indexTerrainChunk = radius;
 	ProgramLoader loader(engine);
 
+    core::VertexArray* vao = nullptr;
+    Material m;
+
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			pMesh ptr =
 			   std::make_shared < Mesh
-			   > (engine, Material(), buildTextureRegion(diffuseMap), buildTextureRegion(
-			         normalMap), buildTextureRegion(specularMap), program, loader.getShadow(),
+			   > (engine, m, diffuseMap,
+			         normalMap, specularMap, program, loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
 			      engine->getLightSystem(), std::make_shared
 			      < core::VertexBufferBasic
 			      > (constructor, density, gapSize, indices), std::make_shared
-			      < core::IndexBufferBasic > (indices));
+			      < core::IndexBufferBasic > (indices), nullptr, GL_TRIANGLES, vao);
+
+            if (vao == nullptr) {
+                vao = ptr->getVAO();
+            }
 
 			ptr->moveTo(
 			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,

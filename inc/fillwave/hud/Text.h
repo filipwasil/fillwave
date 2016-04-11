@@ -9,7 +9,6 @@
 #define TEXT_H_
 
 #include <fillwave/core/buffers/VertexBufferText.h>
-#include <fillwave/core/texturing/TextureRegion.h>
 #include <fillwave/core/pipeline/Program.h>
 
 #include <fillwave/hud/base/IHUDNode.h>

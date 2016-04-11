@@ -13,8 +13,8 @@ FLOGINIT("Reloadable", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-IReloadable::IReloadable(Engine* engine) :
-	mVAO(engine->storeVAO(this)),
+IReloadable::IReloadable(Engine* engine, core::VertexArray* vao) :
+	mVAO(vao ? vao : engine->storeVAO(this)),
 	mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)) {
 	mSampler->bind();
 	mSampler->setParameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -28,6 +28,10 @@ void IReloadable::reload() {
 	initVBO();
 	initVAO();
 	initUniformsCache();
+}
+
+core::VertexArray* IReloadable::getVAO() {
+    return mVAO;
 }
 
 } /* framework */

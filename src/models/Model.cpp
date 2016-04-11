@@ -45,8 +45,8 @@ Model::Model(
 	std::vector<core::VertexBasic> vertices = shape.getVertices();
 	std::vector<GLuint> indices = shape.getIndices();
 
-	attach(std::make_shared<Mesh>(engine, material, buildTextureRegion(diffuseMap),
-	                              buildTextureRegion(normalMap), buildTextureRegion(specularMap),
+	attach(std::make_shared<Mesh>(engine, material, diffuseMap,
+	                              normalMap, specularMap,
 	                              program, mProgramShadow, mProgramShadowColor,
 	                              loader.getOcclusionOptimizedQuery(),
 	                              loader.getAmbientOcclusionGeometry(),
@@ -168,9 +168,9 @@ inline void Model::loadNodes(
 
 		entity->attach(
 		   loadMesh(aMesh, Material(aMaterial),
-		            buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str())),
-		            buildTextureRegion(engine->storeTexture(normalMapPath.c_str())),
-		            buildTextureRegion(engine->storeTexture(specularMapPath.c_str())),
+		            engine->storeTexture(diffuseMapPath.c_str()),
+		            engine->storeTexture(normalMapPath.c_str()),
+		            engine->storeTexture(specularMapPath.c_str()),
 		            engine));
 	}
 
@@ -220,9 +220,9 @@ inline void Model::loadNodes(
 
 		entity->attach(
 		   loadMesh(aMesh, Material(aMaterial),
-		            buildTextureRegion(engine->storeTexture(diffuseMapPath.c_str())),
-		            buildTextureRegion(engine->storeTexture(normalMapPath.c_str())),
-		            buildTextureRegion(engine->storeTexture(specularMapPath.c_str())),
+		            engine->storeTexture(diffuseMapPath.c_str()),
+		            engine->storeTexture(normalMapPath.c_str()),
+		            engine->storeTexture(specularMapPath.c_str()),
 		            engine));
 	}
 
@@ -250,8 +250,8 @@ inline void Model::loadNodes(
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
 		const aiMesh* aMesh = scene->mMeshes[i];
-		pMesh mesh = loadMesh(aMesh, material, buildTextureRegion(diffuseMap),
-		                      buildTextureRegion(normalMap), buildTextureRegion(specularMap),
+		pMesh mesh = loadMesh(aMesh, material, diffuseMap,
+		                      normalMap, specularMap,
 		                      engine);
 		entity->attach(mesh);
 	}
@@ -278,9 +278,9 @@ inline void Model::loadNodeTransformations(aiNode* node, Entity* entity) {
 pMesh Model::loadMesh(
    const aiMesh* shape,
    const Material& material,
-   pTextureRegion diffuseMap,
-   pTextureRegion normalMap,
-   pTextureRegion specularMap,
+   core::Texture2D* diffuseMap,
+   core::Texture2D* normalMap,
+   core::Texture2D* specularMap,
    Engine* engine) {
 
 	if (!shape) {
