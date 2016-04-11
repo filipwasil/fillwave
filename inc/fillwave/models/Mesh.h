@@ -48,8 +48,8 @@ class Mesh: public Entity, public IReloadable {
 	   core::Program* programAmbientOcclusionGeometry,
 	   core::Program* programAmbientOcclusionColor,
 	   LightSystem* lights = nullptr,
-	   pVertexBufferBasic vbo = pVertexBufferBasic(),
-	   pIndexBufferBasic ibo = pIndexBufferBasic(),
+	   core::VertexBufferBasic* vbo = nullptr,
+	   core::IndexBufferBasic* ibo = nullptr,
 	   Animator* animator = nullptr,
 	   GLenum renderMode = GL_TRIANGLES,
 	   core::VertexArray* = nullptr);
@@ -84,8 +84,8 @@ class Mesh: public Entity, public IReloadable {
 	GLenum mRenderMode;
 
 	/* Buffers */
-	pIndexBufferBasic mIBO;
-	pVertexBufferBasic mVBO;
+	core::IndexBufferBasic* mIBO;
+	core::VertexBufferBasic* mVBO;
 
 	/* Light */
 	LightSystem* mLights;

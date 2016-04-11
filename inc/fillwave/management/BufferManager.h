@@ -20,6 +20,13 @@ namespace framework {
 typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexArray,
         IReloadable*> ManagerBuffers;
 
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferBasic,
+        core::VertexArray*, framework::TerrainConstructor*, GLint, GLfloat,
+        std::vector<GLuint>&> ManagerVertices;
+
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::IndexBufferBasic,
+        core::VertexArray*, std::vector<GLuint>&> ManagerIndices;
+
 } /* framework */
 } /* fillwave */
 

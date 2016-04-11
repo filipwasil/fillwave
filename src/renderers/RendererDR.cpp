@@ -51,12 +51,12 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	std::vector<GLuint> indices = sphere.getIndices();
 
 	mDeferredPointLight = make_unique<Mesh>(engine, Material(),
-	                                        buildTextureRegion(),
-	                                        buildTextureRegion(), buildTextureRegion(),
+	                                        nullptr,
+	                                        nullptr, nullptr,
 	                                        mProgramPointLight, nullptr, nullptr, loader.getOcclusionQuery(),
 	                                        nullptr, nullptr, mLights,
-	                                        std::make_shared<core::VertexBufferBasic>(vertices),
-	                                        std::make_shared<core::IndexBufferBasic>(indices),
+	                                        new core::VertexBufferBasic(vertices),
+	                                        new core::IndexBufferBasic(indices),
 	                                        nullptr);
 
 	initUniforms();

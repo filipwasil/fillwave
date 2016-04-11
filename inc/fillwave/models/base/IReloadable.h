@@ -25,8 +25,6 @@ class IReloadable {
 
 	virtual ~IReloadable() = default;
 
-	core::VertexArray* getVAO();
-
 	virtual void initBuffers() = 0;
 	virtual void initPipeline() = 0;
 	virtual void initUniformsCache() = 0;

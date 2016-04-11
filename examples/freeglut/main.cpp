@@ -3,6 +3,7 @@
 #include <fillwave/Framework.h>
 #include <GL/freeglut.h>
 #include <memory>
+#include "MountainConstructor.h"
 
 #include <fillwave/Log.h>
 
@@ -12,7 +13,72 @@ using namespace std;
 
 FLOGINIT_DEFAULT()
 
-Engine* engine;
+Engine* gEngine;
+
+pCameraPerspective gCamera;
+pScenePerspective gScene;
+
+core::Program* gProgram;
+map<string, pModel> gModels;
+
+void init() {
+   /* Scene */
+   gScene = buildScenePerspective();
+
+   /* Camera */
+   gCamera = std::make_shared<CameraPerspective>(glm::vec3(0.0,5.0,0.0),
+                                                    glm::quat(),
+                                                    glm::radians(90.0),
+                                                    1.0,
+                                                    0.1,
+                                                    1000.0);
+
+   /* Shaders */
+   gProgram = ProgramLoader(gEngine).getDefault();
+
+   /* Models */
+
+
+   /* Lights */
+   pLight  light = gEngine->storeLightSpot(glm::vec3 (1.0,20.0,6.0),
+                           glm::quat (),
+                           glm::vec4 (1.0,1.0,1.0,0.0));
+   light->rotateTo(glm::vec3(1.0,0.0,0.0), glm::radians(-90.0));
+}
+
+void perform() {
+   gEngine->configureFPSCounter("fonts/Titania",  glm::vec2(0.7,0.9), 100.0);
+   gEngine->setCurrentScene(gScene);
+
+   pIEffect fog(new Fog());
+
+   gScene->setCamera(gCamera);
+
+   Material material;
+
+   pMeshTerrain terrain = std::make_shared<MeshTerrain>(gEngine,
+                                    gProgram,
+                                    new MountainConstructor(),
+                                    material,
+                                    "textures/test.png",
+                                    "textures/testNormal.png",
+                                    "",
+                                    20,
+                                    16);
+   terrain->scaleTo(2.0);
+   terrain->addEffect(fog);
+   gScene->attach(terrain);
+}
+
+void showDescription() {
+   /* Description */
+   pText hint0 = gEngine->storeText("Fillwave example terrain", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
+   pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
+   pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
+   pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
+   pText hint1 = gEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
+   pText hint6 = gEngine->storeText("Use 'D' for toggle debugger On/Off", "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
+}
 
 void disp(void) {
 	FLOG_ERROR("display");
@@ -24,7 +90,7 @@ void timer(int) {
 	int delta = New - Old;
 	Old = New;
 
-	engine->draw(static_cast<float>(delta) * 0.001f);
+	gEngine->draw(static_cast<float>(delta) * 0.001f);
 
 	glutSwapBuffers();
 
@@ -32,7 +98,7 @@ void timer(int) {
 }
 
 void resize(int width, int height) {
-	engine->insertResizeScreen(width, height);
+	gEngine->insertResizeScreen(width, height);
 }
 
 
@@ -56,89 +122,15 @@ int main(int argc, char *argv[]) {
 	glutTimerFunc(100, timer, 1);
 	glutReshapeFunc(resize);
 
-	engine = new Engine(argc, argv);
-	auto camera =
-			make_shared < CameraPerspective
-					> (glm::vec3(0.0, 0.0, 6.0), glm::quat(), glm::radians(90.0), 1.0, 0.1, 1000.0);
-	auto scene = buildScenePerspective(camera);
-	engine->setCurrentScene(scene);
-	engine->storeText("Fillwave freeglut example", "FreeSans", glm::vec2(-0.95f, 0.2f), 100.0f);
+	gEngine = new Engine(argc, argv);
 
-	//engine->configureDebugger(eDebuggerState::eLightsSpot);
-
-	const GLint SPHERES = 5;
-	pModel gSpheres[SPHERES];
-	LoopCallback* loop[SPHERES];
-
-	/* Program */
-	core::Program* progDefault = ProgramLoader(engine).getDefault();
-
-	/* Lights */
-	engine->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(),
-			glm::vec4(0.0, 1.0, 0.0, 0.0));
-
-	/* Models */
-	core::Texture2D* t = engine->storeTexture("textures/multicolor.dds", eCompression::eS3tc_dxt5_rgba);
-	pModel wall = buildModel(engine, progDefault, "meshes/floor.obj", t);
-
-	scene->attach(wall);
-
-	BuilderModelExternalMaps builder(engine, "meshes/sphere.obj",
-			progDefault, "textures/test.png");
-
-	for (GLint i = 0; i < SPHERES; i++) {
-		/* build */
-		gSpheres[i] = builder.build(); //buildModel(engine, progDefault, "meshes/sphere.obj", "textures/test.png");
-
-		/* move */
-		gSpheres[i]->scaleTo(0.1);
-		gSpheres[i]->moveByX(-4 + 2 * i);
-
-		/* create callbacks loop */
-		TimedScaleCallback* scaleUp = new TimedScaleCallback(gSpheres[i],
-				0.1f * 2.0f, 2.0f + i * 0.5f);
-		TimedScaleCallback* scaleDown = new TimedScaleCallback(gSpheres[i],
-				0.1 * 1.0, 2.0f + i * 0.5f);
-		TimedRotateCallback* rotateLeft = new TimedRotateCallback(gSpheres[i],
-				glm::vec3(0.0, 1.0, 0.0), glm::radians(90.0f), 2.0f + i * 0.5f);
-		TimedRotateCallback* rotateRight = new TimedRotateCallback(gSpheres[i],
-				glm::vec3(0.0, 1.0, 0.0), glm::radians(90.0f), 2.0f + i * 0.5f);
-		TimedMoveCallback* moveUp = new TimedMoveCallback(gSpheres[i],
-				glm::vec3(0.0, 1.0, 0.0), 2.0f + i * 0.5f);
-		TimedMoveCallback* moveDown = new TimedMoveCallback(gSpheres[i],
-				glm::vec3(0.0, -1.0, 0.0), 2.0f + i * 0.5f);
-
-		SequenceCallback* sequence = new SequenceCallback();
-		sequence->push_back(scaleUp);
-		sequence->push_back(scaleDown);
-		sequence->push_back(rotateLeft);
-		sequence->push_back(rotateRight);
-		sequence->push_back(moveUp);
-		sequence->push_back(moveDown);
-
-		if (i == SPHERES / 2) {
-			TimedMoveCallback* moveBack = new TimedMoveCallback(gSpheres[i],
-					glm::vec3(1.0, -1.0, 0.0), 2.0f + i * 0.5f);
-			TimedMoveCallback* moveFront = new TimedMoveCallback(gSpheres[i],
-					glm::vec3(1.0, -1.0, 0.0), 2.0f + i * 0.5f);
-			sequence->push_back(moveBack);
-			sequence->push_back(moveFront);
-		}
-
-		loop[i] = new LoopCallback(sequence, FILLWAVE_ENDLESS);
-
-		gSpheres[i]->attachHierarchyCallback(loop[i]);
-
-		scene->attach(gSpheres[i]);
-	}
-
-	wall->rotateByX(glm::radians(90.0));
-	wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
-	wall->scaleTo(3.0);
+	init();
+	perform();
+	showDescription();
 
 	glutMainLoop();
 
-	delete engine;
+	delete gEngine;
 
 	return 0;
 }

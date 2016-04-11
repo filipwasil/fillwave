@@ -30,9 +30,5 @@ void IReloadable::reload() {
 	initUniformsCache();
 }
 
-core::VertexArray* IReloadable::getVAO() {
-    return mVAO;
-}
-
 } /* framework */
 } /* fillwave */

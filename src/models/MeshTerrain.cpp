@@ -32,10 +32,6 @@ MeshTerrain::MeshTerrain(
 	mChunkWidth(radius * 0.2 * 16 / density),
 	mJumpStep(density * 0.2 * 16 / density) {
 
-	core::Texture2D* diffuseMap = engine->storeTexture(diffuseMapPath.c_str());
-	core::Texture2D* normalMap = engine->storeTexture(normalMapPath.c_str());
-	core::Texture2D* specularMap = engine->storeTexture(specularMapPath.c_str());
-
 	std::vector<GLuint> indices;
 
 	initIBO(indices, density);
@@ -45,6 +41,9 @@ MeshTerrain::MeshTerrain(
 	ProgramLoader loader(engine);
 
 	core::VertexArray* vao = nullptr;
+    core::VertexBufferBasic* vbo = new core::VertexBufferBasic (constructor, density, gapSize, indices);
+    core::IndexBufferBasic* ibo = new core::IndexBufferBasic (indices);
+
 	Material m;
 
 	/* What happens here is that we have many buffers, but only one VAO.
@@ -56,23 +55,28 @@ MeshTerrain::MeshTerrain(
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			pMesh ptr =
 			   std::make_shared < Mesh
-			   > (engine, m, diffuseMap, normalMap, specularMap, program, loader.getShadow(),
+			   > (engine, m,
+			           engine->storeTexture(diffuseMapPath.c_str()),
+			           engine->storeTexture(normalMapPath.c_str()),
+			           engine->storeTexture(specularMapPath.c_str()),
+			           program,
+			           loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
 			      engine->getLightSystem(),
-			      std::make_shared < core::VertexBufferBasic >
-			        (constructor, density, gapSize, indices),
-			      std::make_shared < core::IndexBufferBasic > (indices),
-			        nullptr, GL_TRIANGLES, vao);
+			      vbo,
+			      ibo, nullptr, GL_TRIANGLES, vao);
 
 			if (vao == nullptr) {
-			    vao = ptr->getVAO();
+			    vao = engine->storeVAO(ptr.get());
 			}
 
 			ptr->moveTo(
 			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
 			             density * gapSize * (GLfloat(z))));
 			attach(ptr);
+			static int i = 0;
+			FLOG_ERROR("DEBUG model %d", i++);
 		}
 	}
 }
@@ -102,6 +106,7 @@ MeshTerrain::MeshTerrain(
 	ProgramLoader loader(engine);
 
     core::VertexArray* vao = nullptr;
+
     Material m;
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
@@ -112,13 +117,13 @@ MeshTerrain::MeshTerrain(
 			         normalMap, specularMap, program, loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-			      engine->getLightSystem(), std::make_shared
-			      < core::VertexBufferBasic
-			      > (constructor, density, gapSize, indices), std::make_shared
-			      < core::IndexBufferBasic > (indices), nullptr, GL_TRIANGLES, vao);
+			      engine->getLightSystem(), new core::VertexBufferBasic
+			      (constructor, density, gapSize, indices), new core::IndexBufferBasic (indices), nullptr, GL_TRIANGLES, vao);
+//		    core::VertexBufferBasic* vbo = nullptr;
+//		    core::IndexBufferBasic* ibo = nullptr;
 
             if (vao == nullptr) {
-                vao = ptr->getVAO();
+                vao = engine->storeVAO(ptr.get());
             }
 
 			ptr->moveTo(

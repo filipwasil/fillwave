@@ -12,6 +12,7 @@
 
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Profiler.h>
+#include <fillwave/Fillwave.h>
 
 FLOGINIT("Mesh", FERROR | FFATAL | FINFO)
 
@@ -35,8 +36,8 @@ Mesh::Mesh(
    core::Program* programAmbientOcclusionGeometry,
    core::Program* programAmbientOcclusionColor,
    LightSystem* lights,
-   pVertexBufferBasic vbo,
-   pIndexBufferBasic ibo,
+   core::VertexBufferBasic* vbo,
+   core::IndexBufferBasic* ibo,
    Animator* animator,
    GLenum renderMode,
    core::VertexArray* vao) :
@@ -52,8 +53,8 @@ Mesh::Mesh(
 	mProgramAOGeometry(programAmbientOcclusionGeometry),
 	mProgramAOColor(programAmbientOcclusionColor),
 	mRenderMode(renderMode),
-	mIBO(ibo),
-	mVBO(vbo),
+	mIBO(engine->storeIBO(mVAO, ibo)),
+	mVBO(engine->storeVBO(mVAO, vbo)),
 	mLights(lights),
 	mAnimator(animator)
 #ifdef FILLWAVE_GLES_3_0

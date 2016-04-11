@@ -117,18 +117,18 @@ class Engine final {
 	   glm::vec3 position,
 	   glm::quat rotation,
 	   glm::vec4 color,
-	   pMoveable followed = pEntity());
+	   pMoveable followed = pMoveable());
 
 	pLightPoint storeLightPoint(
 	   glm::vec3 position,
 	   glm::vec4 color,
-	   pMoveable followed = pEntity());
+	   pMoveable followed = pMoveable());
 
 	pLightDirectional storeLightDirectional(
 	   glm::vec3 position,
 	   glm::quat rotation,
 	   glm::vec4 color,
-	   pMoveable followed = pEntity());
+	   pMoveable followed = pMoveable());
 
 	/* Store text */
 	pText storeText(
@@ -144,6 +144,13 @@ class Engine final {
 
 	/* Store vertex array objects */
 	core::VertexArray* storeVAO(framework::IReloadable* user = nullptr);
+    core::VertexBufferBasic* storeVBO(core::VertexArray* vao, framework::TerrainConstructor* constructor,
+            GLint density,
+            GLfloat gap,
+            std::vector<GLuint>& indices);
+    core::VertexBufferBasic* storeVBO(core::VertexArray* vao, core::VertexBufferBasic* buffer);
+    core::IndexBufferBasic* storeIBO(core::VertexArray* vao, std::vector<GLuint>& data);
+    core::IndexBufferBasic* storeIBO(core::VertexArray* vao, core::IndexBufferBasic*buffer);
 
 	/* Clear */
 	void clearText(pText text);

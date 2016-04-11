@@ -76,6 +76,8 @@ struct Engine::EngineImpl final {
 	ManagerPrograms mPrograms;
 	ManagerSamplers mSamplers;
 	ManagerBuffers mBuffers;
+	ManagerVertices mVertices;
+	ManagerIndices mIndices;
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
 	puLightSystem mLights;

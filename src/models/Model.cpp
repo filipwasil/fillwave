@@ -51,8 +51,8 @@ Model::Model(
 	                              loader.getOcclusionOptimizedQuery(),
 	                              loader.getAmbientOcclusionGeometry(),
 	                              loader.getAmbientOcclusionColor(), engine->getLightSystem(),
-	                              std::make_shared<core::VertexBufferBasic>(vertices),
-	                              std::make_shared<core::IndexBufferBasic>(indices), mAnimator));
+	                              new core::VertexBufferBasic (vertices),
+	                              new core::IndexBufferBasic (indices), mAnimator));
 }
 
 Model::Model(Engine* engine, core::Program* program,
@@ -292,9 +292,8 @@ pMesh Model::loadMesh(
 	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-	          engine->getLightSystem(), std::make_shared
-	          < core::VertexBufferBasic > (shape, mAnimator), std::make_shared
-	          < core::IndexBufferBasic > (shape), mAnimator);
+	          engine->getLightSystem(), new core::VertexBufferBasic (shape, mAnimator),
+	          new core::IndexBufferBasic (shape), mAnimator);
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
