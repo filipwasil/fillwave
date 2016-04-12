@@ -104,6 +104,8 @@ MeshTerrain::MeshTerrain(
 	ProgramLoader loader(engine);
 
     core::VertexArray* vao = nullptr;
+    core::VertexBufferBasic* vbo = new core::VertexBufferBasic (constructor, density, gapSize, indices);
+    core::IndexBufferBasic* ibo = new core::IndexBufferBasic (indices);
 
     Material m;
 
@@ -115,10 +117,7 @@ MeshTerrain::MeshTerrain(
 			         normalMap, specularMap, program, loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-			      engine->getLightSystem(), new core::VertexBufferBasic
-			      (constructor, density, gapSize, indices), new core::IndexBufferBasic (indices), nullptr, GL_TRIANGLES, vao);
-//		    core::VertexBufferBasic* vbo = nullptr;
-//		    core::IndexBufferBasic* ibo = nullptr;
+			      engine->getLightSystem(), vbo, ibo, nullptr, GL_TRIANGLES, vao);
 
             if (vao == nullptr) {
                 vao = engine->storeVAO(ptr.get());
