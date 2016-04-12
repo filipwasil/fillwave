@@ -17,7 +17,7 @@ namespace fillwave {
 namespace core {
 
 Buffer::Buffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany) :
-	GLObject(howMany), mRefresh(GL_TRUE), mIndex(index) {
+	GLObject(howMany), mLoaded(GL_FALSE), mIndex(index) {
 	setTarget(target);
 	setDrawType(drawType);
 	reload();
@@ -57,16 +57,12 @@ void Buffer::setDrawType(GLuint dataStoreType) {
 	}
 }
 
-bool Buffer::isReady() {
-	return mRefresh;
+bool Buffer::isLoaded() {
+	return mLoaded;
 }
 
-void Buffer::setReady() {
-	mRefresh = GL_TRUE;
-}
-
-void Buffer::resetReady() {
-	mRefresh = GL_FALSE;
+void Buffer::setLoaded(GLboolean loaded) {
+    mLoaded = loaded;
 }
 
 GLuint Buffer::getElements() const {
@@ -117,9 +113,9 @@ void Buffer::unbindBase(GLuint externalTarget) {
 }
 
 void Buffer::send() {
-	if (mRefresh) {
+	if (!mLoaded) {
 		glBufferData(mTarget, mSize, mData, mDataStoreType);
-		mRefresh = GL_FALSE;
+		mLoaded = GL_TRUE;
 		FLOG_CHECK("Could not send the data");
 	}
 }

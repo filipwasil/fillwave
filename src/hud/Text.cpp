@@ -189,15 +189,14 @@ inline void Text::initVAO() {
 	mSampler->bind();
 	mVAO->bind();
 	mVBO->bind();
-	mVBO->setReady();
+	mVBO->setLoaded(GL_FALSE);
 	mVBO->send();
 	mVBO->attributesSetForVAO();
 	core::VertexArray::unbindVAO();
 }
 
 inline void Text::initVBO() {
-	mVBO->getAttributes(mProgram->getHandle());
-	mVBO->attributesBind(mProgram);
+    mVBO->initAttributes(mProgram->getHandle());
 }
 
 } /* framework */

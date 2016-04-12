@@ -75,8 +75,6 @@ MeshTerrain::MeshTerrain(
 			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
 			             density * gapSize * (GLfloat(z))));
 			attach(ptr);
-			static int i = 0;
-			FLOG_ERROR("DEBUG model %d", i++);
 		}
 	}
 }

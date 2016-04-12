@@ -42,9 +42,8 @@ class Buffer: public GLObject {
 	void setTarget(GLuint target);
 	void setDrawType(GLuint drawType);
 
-	bool isReady();
-	void setReady();
-	void resetReady();
+	bool isLoaded();
+	void setLoaded(GLboolean loaded);
 
 	GLuint getElements() const;
 	GLuint getSize() const;
@@ -61,7 +60,7 @@ class Buffer: public GLObject {
 #endif
 
  protected:
-	GLboolean mRefresh;
+	GLboolean mLoaded;
 	GLuint mTarget;
 	GLuint mDataStoreType;
 	GLuint mIndex;

@@ -369,12 +369,12 @@ inline void Mesh::initVAO() {
 
 	mVBO->bind();
 	mVBO->attributesSetForVAO();
-	mVBO->setReady();
+	mVBO->setLoaded(GL_FALSE);
 	mVBO->send();
 
 	if (mIBO) {
 		mIBO->bind();
-		mIBO->setReady();
+		mIBO->setLoaded(GL_FALSE);
 		mIBO->send();
 	}
 
@@ -382,8 +382,7 @@ inline void Mesh::initVAO() {
 }
 
 inline void Mesh::initVBO() {
-	mVBO->getAttributes(mProgram->getHandle());
-	mVBO->attributesBind(mProgram);
+    mVBO->initAttributes(mProgram->getHandle());
 	mOcclusionMatrix = glm::scale(glm::mat4(1.0f), mVBO->getOcclusionBoxSize());
 }
 

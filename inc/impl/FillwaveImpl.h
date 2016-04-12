@@ -302,8 +302,7 @@ inline void Engine::EngineImpl::initOcclusionTest() {
 	std::vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
 	mVAOOcclusion = mBuffers.store(nullptr);
 	mVBOOcclusion = make_unique<core::VertexBufferPosition>(vec);
-	mVBOOcclusion->getAttributes(mProgramOcclusionBox->getHandle());
-	mVBOOcclusion->attributesBind(mProgramOcclusionBox);
+	mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
 	mVAOOcclusion->bind();
 	mVBOOcclusion->bind();
 	mVBOOcclusion->attributesSetForVAO();
@@ -386,7 +385,7 @@ inline void Engine::EngineImpl::reloadPickingBuffer() {
 
 	mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
 	mPickingPixelBuffer->bind();
-	mPickingPixelBuffer->setReady();
+	mPickingPixelBuffer->setLoaded(GL_FALSE);
 	mPickingPixelBuffer->send();
 	glReadPixels(0, 0, mWindowWidth, mWindowHeight,
 	             GL_RGBA,

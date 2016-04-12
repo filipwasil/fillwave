@@ -41,7 +41,7 @@ void UniformBuffer::push(GLfloat* data) {
 	bind();
 	mData = data;
 	send();
-	mRefresh = GL_TRUE; //xxx always refresh
+	mLoaded = GL_FALSE; //xxx always load to GPU
 	unbind();
 }
 

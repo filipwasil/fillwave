@@ -535,15 +535,14 @@ inline void VoxelChunk::initVAO() {
 
 	mVBO->bind();
 	mVBO->attributesSetForVAO();
-	mVBO->setReady();
+	mVBO->setLoaded(GL_FALSE);
 	mVBO->send();
 
 	core::VertexArray::unbindVAO();
 }
 
 inline void VoxelChunk::initVBO() {
-	mVBO->getAttributes(mProgram->getHandle());
-	mVBO->attributesBind(mProgram);
+    mVBO->initAttributes(mProgram->getHandle());
 }
 
 void VoxelChunk::updateRenderer(IRenderer& renderer) {
