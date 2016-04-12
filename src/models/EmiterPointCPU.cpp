@@ -202,18 +202,17 @@ void EmiterPointCPU::initVAO() {
 	mSampler->bind();
 	mVAO->bind();
 	mVBO->bind();
-	mVBO->setReady();
+	mVBO->setLoaded(GL_FALSE);
 	mVBO->send();
 	mVBO->attributesSetForVAO();
 	mIBO->bind();
-	mIBO->setReady();
+	mIBO->setLoaded(GL_FALSE);
 	mIBO->send();
 	core::VertexArray::unbindVAO();
 }
 
 void EmiterPointCPU::initVBO() {
-	mVBO->getAttributes(mProgram->getHandle());
-	mVBO->attributesBind(mProgram);
+    mVBO->initAttributes(mProgram->getHandle());
 }
 
 bool EmiterPointCPU::getRenderItem(RenderItem& item) {

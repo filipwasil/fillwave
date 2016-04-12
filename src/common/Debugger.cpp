@@ -206,7 +206,7 @@ inline void Debugger::initVAO() {
 	mVAO->bind();
 
 	mVBO->bind();
-	mVBO->setReady();
+	mVBO->setLoaded(GL_FALSE);
 	mVBO->send();
 	mVBO->attributesSetForVAO();
 
@@ -214,8 +214,7 @@ inline void Debugger::initVAO() {
 }
 
 inline void Debugger::initVBO() {
-	mVBO->getAttributes(mProgram->getHandle());
-	mVBO->attributesBind(mProgram);
+    mVBO->initAttributes(mProgram->getHandle());
 }
 
 } /* framework */

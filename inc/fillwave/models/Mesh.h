@@ -32,7 +32,6 @@ namespace framework {
 /*! \class Mesh
  * \brief Basic drawable Entity.
  */
-
 class Mesh: public Entity, public IReloadable {
  public:
 	Mesh(

@@ -275,21 +275,20 @@ void EmiterPointGPU::initVAO() {
 
 	for (int i = 0; i < mPingPongBuffers; i++) {
 		mVBOGPU[i]->bind();
-		mVBOGPU[i]->setReady();
+		mVBOGPU[i]->setLoaded(GL_FALSE);
 		mVBOGPU[i]->send();
 		mVBOGPU[i]->attributesSetForVAO();
 	}
 
 	mIBO->bind();
-	mIBO->setReady();
+	mIBO->setLoaded(GL_FALSE);
 	mIBO->send();
 	core::VertexArray::unbindVAO();
 }
 
 void EmiterPointGPU::initVBO() {
 	for (int i = 0; i < mPingPongBuffers; i++) {
-		mVBOGPU[i]->getAttributes(mProgram->getHandle());
-		mVBOGPU[i]->attributesBind(mProgram);
+		mVBOGPU[i]->initAttributes(mProgram->getHandle());
 	}
 }
 
