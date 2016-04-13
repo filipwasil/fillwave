@@ -57,7 +57,7 @@ class Text: public IReloadable, public IHUDNode {
 	glm::vec4 mColor;
 	eTextEffect mEffect;
 	Font* mFont;
-	pVertexBufferText mVBO;
+	core::VertexBufferText* mVBO;
 
 	/* IHUD */
 	Engine* mEngine;

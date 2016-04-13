@@ -29,15 +29,14 @@ struct VertexText {
 class VertexBufferText: public TVertexBuffer<VertexText> {
  public:
 	VertexBufferText(
-	   std::vector<GLfloat> data,
-	   std::vector<GLfloat> textureCoords,
+	   const std::vector<GLfloat>& data,
+	   const std::vector<GLfloat>& textureCoords,
 	   GLuint dataStoreModification = GL_DYNAMIC_DRAW);
 	virtual ~VertexBufferText() = default;
 	void log() const;
 };
 
 } /* core */
-typedef std::shared_ptr<core::VertexBufferText> pVertexBufferText;
 } /* fillwave */
 
 #endif /* VERTEXBUFFERTEXT_H_ */

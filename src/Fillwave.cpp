@@ -561,5 +561,20 @@ core::IndexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, std:
     return mImpl->mIndices.store(vao, data);
 }
 
+core::VertexBufferText* Engine::storeBufferInternal(core::VertexArray* vao, const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords) {
+   return mImpl->mVerticesText.store(vao, data, textureCoords);
+}
+
+void Engine::removeBufferIndex(core::VertexArray* vao) {
+	mImpl->mIndices.erase(vao);
+}
+
+void Engine::removeBufferBasic(core::VertexArray* vao) {
+	mImpl->mVertices.erase(vao);
+}
+void Engine::removeBufferText(core::VertexArray* vao) {
+	mImpl->mVerticesText.erase(vao);
+}
+
 }
 /* fillwave */

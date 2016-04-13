@@ -60,7 +60,7 @@ void Text::draw() {
 }
 
 inline void Text::clearVBO() {
-	mVBO.reset();
+	mEngine->removeBufferText(mVAO);
 }
 
 void Text::editString(std::string text) {
@@ -154,8 +154,9 @@ void Text::createVBO() {
 
 	mPosition.x = tmpStartingX;
 
-	mVBO = std::make_shared < core::VertexBufferText
-	       > (points_tmp, texcoords_tmp); //xxx todo needs to be stored in kernel
+
+	mVBO = mEngine->storeBuffer<core::VertexBufferText>(mVAO, points_tmp, texcoords_tmp);
+
 	initVBO();
 	initVAO();
 }

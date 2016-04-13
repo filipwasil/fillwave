@@ -77,6 +77,7 @@ struct Engine::EngineImpl final {
 	ManagerSamplers mSamplers;
 	ManagerBuffers mBuffers;
 	ManagerVertices mVertices;
+	ManagerVerticesText mVerticesText;
 	ManagerIndices mIndices;
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
@@ -177,7 +178,6 @@ struct Engine::EngineImpl final {
 
 	/* Insert */
 	void insertResizeScreen(GLuint width, GLuint height);
-
 };
 
 #ifdef __ANDROID__

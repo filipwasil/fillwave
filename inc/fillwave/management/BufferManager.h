@@ -27,6 +27,9 @@ typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferBasic,
 typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::IndexBufferBasic,
         core::VertexArray*, std::vector<GLuint>&> ManagerIndices;
 
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferText,
+		core::VertexArray*, const std::vector<GLfloat>&, const std::vector<GLfloat>&> ManagerVerticesText;
+
 } /* framework */
 } /* fillwave */
 

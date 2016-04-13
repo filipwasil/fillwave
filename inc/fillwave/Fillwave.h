@@ -150,6 +150,12 @@ class Engine final {
 		return storeBufferInternal(vao, p...);
 	}
 
+	/* Buffering */
+	void removeBuffer(core::VertexArray* vao); // xxx any idea of generic class ?
+	void removeBufferIndex(core::VertexArray* vao);
+	void removeBufferBasic(core::VertexArray* vao);
+	void removeBufferText(core::VertexArray* vao);
+
 	/* Clear */
 	void clearText(pText text);
 	void clearLight(pLightSpot light);
@@ -203,6 +209,12 @@ class Engine final {
 	std::unique_ptr<EngineImpl> mImpl;
 	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, framework::TerrainConstructor* constructor, GLint density, GLfloat gap, std::vector<GLuint>& indices);
 	core::IndexBufferBasic* storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data);
+	core::VertexBufferText* storeBufferInternal(core::VertexArray* vao, const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords);
+
+//	void storeBufferInternal(core::VertexArray* vao);
+//	void storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data);
+//	void storeBufferInternal(core::VertexArray* vao, const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords);
+
 };
 } /* fillwave */
 
