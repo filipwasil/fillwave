@@ -40,16 +40,11 @@ MeshTerrain::MeshTerrain(
 	GLint indexTerrainChunk = radius;
 	ProgramLoader loader(engine);
 
-	core::VertexArray* vao = nullptr;
-    core::VertexBufferBasic* vbo = new core::VertexBufferBasic (constructor, density, gapSize, indices);
-    core::IndexBufferBasic* ibo = new core::IndexBufferBasic (indices);
+	core::VertexArray* vao = new core::VertexArray();
+	core::VertexBufferBasic* vbo = engine->storeBuffer<core::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
+	core::IndexBufferBasic* ibo = engine->storeBuffer<core::IndexBufferBasic>(vao, indices);
 
 	Material m;
-
-	/* What happens here is that we have many buffers, but only one VAO.
-	 * Result is that VAO from only one buffer is being used
-	 * VBO and IBO are not shared and created independently for all
-	 * chunks. This is very slow and resource consuming. TODO xxx */
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
@@ -66,10 +61,6 @@ MeshTerrain::MeshTerrain(
 			      engine->getLightSystem(),
 			      vbo,
 			      ibo, nullptr, GL_TRIANGLES, vao);
-
-			if (vao == nullptr) {
-			    vao = engine->storeVAO(ptr.get());
-			}
 
 			ptr->moveTo(
 			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
@@ -103,9 +94,9 @@ MeshTerrain::MeshTerrain(
 	GLint indexTerrainChunk = radius;
 	ProgramLoader loader(engine);
 
-    core::VertexArray* vao = nullptr;
-    core::VertexBufferBasic* vbo = new core::VertexBufferBasic (constructor, density, gapSize, indices);
-    core::IndexBufferBasic* ibo = new core::IndexBufferBasic (indices);
+    core::VertexArray* vao = new core::VertexArray();
+    core::VertexBufferBasic* vbo = engine->storeBuffer<core::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
+    core::IndexBufferBasic* ibo = engine->storeBuffer<core::IndexBufferBasic>(vao, indices);
 
     Material m;
 
@@ -118,10 +109,6 @@ MeshTerrain::MeshTerrain(
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
 			      engine->getLightSystem(), vbo, ibo, nullptr, GL_TRIANGLES, vao);
-
-            if (vao == nullptr) {
-                vao = engine->storeVAO(ptr.get());
-            }
 
 			ptr->moveTo(
 			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,

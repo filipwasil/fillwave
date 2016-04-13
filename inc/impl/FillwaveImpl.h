@@ -177,6 +177,7 @@ struct Engine::EngineImpl final {
 
 	/* Insert */
 	void insertResizeScreen(GLuint width, GLuint height);
+
 };
 
 #ifdef __ANDROID__

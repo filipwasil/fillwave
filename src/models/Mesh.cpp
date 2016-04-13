@@ -53,8 +53,8 @@ Mesh::Mesh(
 	mProgramAOGeometry(programAmbientOcclusionGeometry),
 	mProgramAOColor(programAmbientOcclusionColor),
 	mRenderMode(renderMode),
-	mIBO(engine->storeIBO(mVAO, ibo)),
-	mVBO(engine->storeVBO(mVAO, vbo)),
+	mIBO(ibo),
+	mVBO(vbo),
 	mLights(lights),
 	mAnimator(animator)
 #ifdef FILLWAVE_GLES_3_0

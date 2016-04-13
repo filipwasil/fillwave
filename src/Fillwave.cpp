@@ -160,25 +160,6 @@ core::VertexArray* Engine::storeVAO(framework::IReloadable* user) {
 	return mImpl->mBuffers.store(user);
 }
 
-core::VertexBufferBasic* Engine::storeVBO(core::VertexArray* vao, framework::TerrainConstructor* constructor,
-        GLint density,
-        GLfloat gap,
-        std::vector<GLuint>& indices) {
-    return mImpl->mVertices.store(vao, constructor, density, gap, indices);
-}
-
-core::VertexBufferBasic* Engine::storeVBO(core::VertexArray* vao, core::VertexBufferBasic* buffer) {
-    return mImpl->mVertices.store(buffer, vao);
-}
-
-core::IndexBufferBasic* Engine::storeIBO(core::VertexArray* vao, std::vector<GLuint>& data) {
-    return mImpl->mIndices.store(vao, data);
-}
-
-core::IndexBufferBasic* Engine::storeIBO(core::VertexArray* vao, core::IndexBufferBasic*buffer) {
-    return mImpl->mIndices.store(buffer, vao);
-}
-
 /* Inputs - insert */
 void Engine::insertInput(framework::EventType& event) {
 	if (pEntity moveable = getFocus(event.getType())) {
@@ -570,6 +551,14 @@ template core::Shader* Engine::storeShader<GL_GEOMETRY_SHADER>
 
 void Engine::configureDebugger(eDebuggerState state) {
 	mImpl->mDebugger->setState(state);
+}
+
+core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, framework::TerrainConstructor* constructor, GLint density, GLfloat gap, std::vector<GLuint>& indices) {
+    return mImpl->mVertices.store(vao, constructor, density, gap, indices);
+}
+
+core::IndexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data) {
+    return mImpl->mIndices.store(vao, data);
 }
 
 }

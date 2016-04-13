@@ -144,13 +144,11 @@ class Engine final {
 
 	/* Store vertex array objects */
 	core::VertexArray* storeVAO(framework::IReloadable* user = nullptr);
-    core::VertexBufferBasic* storeVBO(core::VertexArray* vao, framework::TerrainConstructor* constructor,
-            GLint density,
-            GLfloat gap,
-            std::vector<GLuint>& indices);
-    core::VertexBufferBasic* storeVBO(core::VertexArray* vao, core::VertexBufferBasic* buffer);
-    core::IndexBufferBasic* storeIBO(core::VertexArray* vao, std::vector<GLuint>& data);
-    core::IndexBufferBasic* storeIBO(core::VertexArray* vao, core::IndexBufferBasic*buffer);
+
+	template<class T, typename ...S>
+	T* storeBuffer(core::VertexArray* vao, S ... p) {
+		return storeBufferInternal(vao, p...);
+	}
 
 	/* Clear */
 	void clearText(pText text);
@@ -203,6 +201,8 @@ class Engine final {
  private:
 	struct EngineImpl;
 	std::unique_ptr<EngineImpl> mImpl;
+	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, framework::TerrainConstructor* constructor, GLint density, GLfloat gap, std::vector<GLuint>& indices);
+	core::IndexBufferBasic* storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data);
 };
 } /* fillwave */
 
