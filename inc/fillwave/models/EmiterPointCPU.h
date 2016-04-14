@@ -60,7 +60,7 @@ class EmiterPointCPU: public IEmiterPoint {
 	glm::vec3 mCameraPosition;
 
 	/* ULC - Uniform location cache */
-	pVertexBufferParticles mVBO;
+	core::VertexBufferParticles* mVBO;
 	GLint mULCModelMatrix, mULCTextureUnit, mULCViewProjectionMatrix,
 	      mULCCameraPosition, mULCPointSize, mULCColor, mULCAcceleration,
 	      mULCLifeTime, mULCAlphaCutOff, mULCSourcePosition, mULCTimeElapsed;

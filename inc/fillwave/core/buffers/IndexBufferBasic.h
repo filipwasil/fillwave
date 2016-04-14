@@ -44,7 +44,6 @@ class IndexBufferBasic: public IndexBuffer {
 };
 
 } /* core */
-typedef std::shared_ptr<core::IndexBufferBasic> pIndexBufferBasic;
 } /* fillwave */
 
 #endif /* INDEXBUFFERBASIC_H_ */

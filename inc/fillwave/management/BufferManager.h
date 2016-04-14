@@ -30,6 +30,27 @@ typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::IndexBufferBasic,
 typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferText,
 		core::VertexArray*, const std::vector<GLfloat>&, const std::vector<GLfloat>&> ManagerVerticesText;
 
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::IndexBufferParticles,
+        core::VertexArray*, GLuint> ManagerIndicesParticles;
+
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferParticlesGPU,
+        core::VertexArray*, std::vector<core::VertexParticleGPU>&> ManagerVerticesParticlesGPU;
+
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferParticles,
+        core::VertexArray*, std::vector<GLfloat>&, std::vector<GLfloat>&, std::vector<GLfloat>&> ManagerVerticesParticles;
+
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferDebug,
+        core::VertexArray*, GLfloat> ManagerVerticesDebugger;
+
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferDebug,
+        core::VertexArray*, GLfloat> ManagerVerticesDebugger;
+
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferFloat,
+        core::VertexArray*, std::vector<core::VertexFloat>&> ManagerVerticesFloat;
+
+typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferPosition,
+        core::VertexArray*, std::vector<core::VertexPosition>&> ManagerVerticesPosition;
+
 } /* framework */
 } /* fillwave */
 

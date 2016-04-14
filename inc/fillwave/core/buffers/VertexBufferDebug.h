@@ -35,7 +35,6 @@ class VertexBufferDebug: public TVertexBuffer<VertexDebug> {
 };
 
 } /* core */
-typedef std::shared_ptr<core::VertexBufferDebug> pVertexBufferDebug;
 } /* fillwave */
 
 #endif /* VERTEXBUFFERDEBUG_H_ */

@@ -557,12 +557,40 @@ core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, fra
     return mImpl->mVertices.store(vao, constructor, density, gap, indices);
 }
 
+core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexBasic>& data) {
+    core::VertexBufferBasic* newData = new core::VertexBufferBasic(data);
+    return mImpl->mVertices.store(newData, vao);
+}
 core::IndexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data) {
     return mImpl->mIndices.store(vao, data);
 }
 
 core::VertexBufferText* Engine::storeBufferInternal(core::VertexArray* vao, const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords) {
    return mImpl->mVerticesText.store(vao, data, textureCoords);
+}
+
+core::IndexBufferParticles* Engine::storeBufferInternal(core::VertexArray* vao, GLuint elements) {
+    return mImpl->mIndicesParticles.store(vao, elements);
+}
+
+core::VertexBufferParticlesGPU* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexParticleGPU>& particles) {
+    return mImpl->mVerticesParticlesGPU.store(vao, particles);
+}
+
+core::VertexBufferParticles* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<GLfloat>& velocities, std::vector<GLfloat>& positions, std::vector<GLfloat>& times) {
+    return mImpl->mVerticesParticles.store(vao, velocities, positions, times);
+}
+
+core::VertexBufferDebug* Engine::storeBufferInternal(core::VertexArray* vao, GLfloat scale) {
+    return mImpl->mVerticesDebugger.store(vao, scale);
+}
+
+core::VertexBufferFloat* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexFloat>& data) {
+    return mImpl->mVerticesFloat.store(vao, data);
+}
+
+core::VertexBufferPosition* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexPosition>& data) {
+    return mImpl->mVerticesPosition.store(vao, data);
 }
 
 void Engine::removeBufferIndex(core::VertexArray* vao) {

@@ -85,6 +85,7 @@ class Uniform {
 	/* Fast push with O(1) */
 
 	static void push(GLint location, GLint data);
+	static void push(GLint location, GLuint data);
 	static void push(GLint location, GLint* data, GLint count);
 	static void push(GLint location, GLfloat data);
 	static void push(GLint location, GLfloat* data, GLint count);

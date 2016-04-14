@@ -41,8 +41,8 @@ class Skybox: public Entity, public IReloadable {
 
  private:
 	core::Texture3D* mTexture;
-	pVertexBufferPosition mVBO;
-	pIndexBufferBasic mIBO;
+	core::VertexBufferPosition* mVBO;
+	core::IndexBufferBasic* mIBO;
 	GLint mULCCameraPosition, mULCModelMatrixPosition, mULCViewProjectionMatrix,
 	      mULCTextureUnit;
 

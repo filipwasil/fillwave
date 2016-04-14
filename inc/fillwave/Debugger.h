@@ -66,7 +66,7 @@ class Debugger: public IReloadable {
 	core::Program* mProgram;
 	Engine* mEngine;
 
-	pVertexBufferDebug mVBO;
+	core::VertexBufferDebug* mVBO;
 
 	GLfloat mMiniwindowSize;
 	GLuint mMiniwindowsOccupied;

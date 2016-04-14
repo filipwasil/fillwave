@@ -91,6 +91,10 @@ void Uniform::push(GLint location, GLint data) {
 	}
 }
 
+void Uniform::push(GLint location, GLuint data) {
+    push(location, static_cast<GLint>(data));
+}
+
 void Uniform::push(GLint location, GLint* data, GLint count) {
 	if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
 		FLOG_ERROR("No int uniform under location %d", location);

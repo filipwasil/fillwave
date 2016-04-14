@@ -69,7 +69,7 @@ class EmiterPointGPU: public IEmiterPoint {
 	core::Program* mProgramEmiter;
 	puFence mFence;
 
-	pVertexBufferParticlesGPU mVBOGPU[mPingPongBuffers];
+	core::VertexBufferParticlesGPU* mVBOGPU[mPingPongBuffers];
 
 	GLint mULCTimeEmiter, mULCEmissionRateEmiter, mULCModelMatrixEmiter,
 	      mULCCameraPositionEmiter, mULCHowManyEmiter, mULCAccelerationEmiter,

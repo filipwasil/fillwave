@@ -55,7 +55,7 @@ EmiterPointGPU::EmiterPointGPU(
 	mProgramEmiter = loader.getParticleGPUEmiter();
 
 	std::vector<core::VertexParticleGPU> particles;
-	for (int i = 0; i < mHowMany; i++) {
+	for (GLuint i = 0; i < mHowMany; i++) {
 		core::VertexParticleGPU particle;
 		particle.position[0] = 0.0f;
 		particle.position[1] = 0.0f;
@@ -83,12 +83,9 @@ EmiterPointGPU::EmiterPointGPU(
 	mNoiseTextureHandle = Create3DNoiseTexture(noiseTextureSize,
 	                      howMany / 3); //xxx todo store in Manager
 
-	mVBOGPU[0] = std::make_shared < core::VertexBufferParticlesGPU >
-	             (particles); //xxx todo store in engine
-	mVBOGPU[1] = std::make_shared < core::VertexBufferParticlesGPU >
-	             (particles); //xxx todo store in engine
-	mIBO = std::make_shared < core::IndexBufferParticles >
-	       (mHowMany); //xxx todo store in engine
+	mVBOGPU[0] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO, particles); //xxx todo store in engine
+	mVBOGPU[1] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO, particles); //xxx todo store in engine
+	mIBO = engine->storeBuffer<core::IndexBufferParticles>(mVAO, mHowMany); //xxx todo store in engine
 
 	initPipeline();
 	initVBO();

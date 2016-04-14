@@ -39,7 +39,7 @@ class TVertexBuffer: public Buffer {
 		Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 	}
 
-	TVertexBuffer(std::vector<T>& vertices, GLuint dataStoreModification =
+	TVertexBuffer(const std::vector<T>& vertices, GLuint dataStoreModification =
 	                 GL_STATIC_DRAW) :
 		Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
 		mDataVertices = vertices;

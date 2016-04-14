@@ -52,14 +52,15 @@ class VoxelChunk: public Entity, public IReloadable {
 	GLint getSize();
 
  protected:
+    Engine* mEngine;
 	const GLfloat mVoxelGap;
 
  private:
 	GLint mSize;
 	Voxel*** mVoxels;
 	core::Program* mProgram;
-	pTexture2D mTexture;
-	pVertexBufferBasic mVBO;
+	core::Texture2D* mTexture;
+	core::VertexBufferBasic* mVBO;
 	LightSystem* mLights;
 
 	GLint mUniformLocationCacheModelMatrix, mUniformLocationCacheCameraPosition,

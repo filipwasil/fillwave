@@ -38,8 +38,6 @@ class VertexBufferParticlesGPU: public TVertexBuffer<VertexParticleGPU> {
 };
 
 } /* core */
-typedef std::shared_ptr<core::VertexBufferParticlesGPU>
-pVertexBufferParticlesGPU;
 } /* fillwave */
 
 #endif /* VertexBufferParticlesGPU_H_ */

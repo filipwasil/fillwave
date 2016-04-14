@@ -13,20 +13,23 @@
 namespace fillwave {
 namespace core {
 
+struct VertexFloat {
+    GLfloat mData;
+};
+
 /*! \class VertexBufferFloat
  * \brief Vertex buffer specialized with GLfloat data structure.
  */
-class VertexBufferFloat: public TVertexBuffer<GLfloat> {
+class VertexBufferFloat: public TVertexBuffer<VertexFloat> {
  public:
 	VertexBufferFloat(
-	   std::vector<GLfloat>& values,
+	   std::vector<VertexFloat>& values,
 	   GLuint dataStoreModification = GL_STATIC_DRAW);
 	virtual ~VertexBufferFloat() = default;
-	void log();
+	void log() const;
 };
 
 } /* core */
-typedef std::shared_ptr<core::VertexBufferFloat> pVertexBufferFloat;
 } /* fillwave */
 
 #endif /* SRC_CORE_BUFFERS_VERTEXBUFFERFLOAT_H_ */

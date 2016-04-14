@@ -38,8 +38,6 @@ class VertexBufferPosition: public TVertexBuffer<VertexPosition> {
 };
 
 } /* core */
-typedef std::shared_ptr<core::VertexBufferPosition> pVertexBufferPosition;
-typedef std::unique_ptr<core::VertexBufferPosition> puVertexBufferPosition;
 } /* fillwave*/
 
 #endif /* VertexBufferPosition_H_ */

@@ -38,7 +38,6 @@ class VertexBufferParticles: public TVertexBuffer<VertexParticle> {
 };
 
 } /* core */
-typedef std::shared_ptr<core::VertexBufferParticles> pVertexBufferParticles;
 } /* fillwave */
 
 #endif /* VERTEXBUFFERPARTICLES_H_ */

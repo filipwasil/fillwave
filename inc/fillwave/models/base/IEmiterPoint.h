@@ -54,11 +54,11 @@ class IEmiterPoint: public IReloadable, public Entity {
 	GLfloat mLifetime;
 	core::Texture* mTexture;
 	glm::vec4 mColor;
-	GLfloat mHowMany;
+	GLuint mHowMany;
 	GLboolean mDepthTesting;
 	GLfloat mAlphaCutOff;
 	core::Program* mProgram;
-	pIndexBufferParticles mIBO;
+	core::IndexBufferParticles* mIBO;
 	Blending mBlending;
 };
 

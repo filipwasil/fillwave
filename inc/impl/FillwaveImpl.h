@@ -78,7 +78,14 @@ struct Engine::EngineImpl final {
 	ManagerBuffers mBuffers;
 	ManagerVertices mVertices;
 	ManagerVerticesText mVerticesText;
+	ManagerVerticesParticles mVerticesParticles;
+    ManagerVerticesParticlesGPU mVerticesParticlesGPU;
+    ManagerVerticesDebugger mVerticesDebugger;
 	ManagerIndices mIndices;
+	ManagerIndicesParticles mIndicesParticles;
+	ManagerVerticesFloat mVerticesFloat;
+	ManagerVerticesPosition mVerticesPosition;
+
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
 	puLightSystem mLights;
@@ -91,7 +98,7 @@ struct Engine::EngineImpl final {
 
 	/* OQ */
 	core::Program* mProgramOcclusionBox;
-	puVertexBufferPosition mVBOOcclusion;
+	core::VertexBufferPosition* mVBOOcclusion;
 	core::VertexArray* mVAOOcclusion;
 
 	/* Inputs - focus */
@@ -301,8 +308,8 @@ inline void Engine::EngineImpl::initUniforms() {
 
 inline void Engine::EngineImpl::initOcclusionTest() {
 	std::vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
-	mVAOOcclusion = mBuffers.store(nullptr);
-	mVBOOcclusion = make_unique<core::VertexBufferPosition>(vec);
+	mVAOOcclusion = new core::VertexArray();
+	mVBOOcclusion = mVerticesPosition.store(mVAOOcclusion, vec);
 	mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
 	mVAOOcclusion->bind();
 	mVBOOcclusion->bind();

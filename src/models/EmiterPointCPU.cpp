@@ -86,10 +86,8 @@ EmiterPointCPU::EmiterPointCPU(Engine* engine,
 	}
 
 	/* Initialize OpenGL stuff */
-	mVBO = std::make_shared < core::VertexBufferParticles
-	       > (velocities, positions, times); //xxx todo store in engine
-	mIBO = std::make_shared < core::IndexBufferParticles >
-	       (howMany); //xxx todo store in engine
+	mVBO = engine->storeBuffer<core::VertexBufferParticles>(mVAO, velocities, positions, times);
+    mIBO = engine->storeBuffer<core::IndexBufferParticles>(mVAO, howMany);
 
 	initPipeline();
 	initVBO();

@@ -324,6 +324,7 @@ VoxelChunk::VoxelChunk(
    VoxelConstructor* constructor,
    GLfloat gap) :
 	IReloadable(engine),
+    mEngine(engine),
 	mVoxelGap(gap),
 	mSize(size),
 	mProgram(program),
@@ -371,7 +372,7 @@ VoxelChunk::VoxelChunk(
 			}
 		}
 	}
-	mVBO = pVertexBufferBasic(new core::VertexBufferBasic(vertices));
+	mVBO = engine->storeBuffer<core::VertexBufferBasic>(mVAO, vertices);
 
 	initPipeline();
 	initVBO();
@@ -432,8 +433,7 @@ void VoxelChunk::reloadVBO() {
 		}
 	}
 
-	mVBO = std::make_shared < core::VertexBufferBasic >
-	       (vertices); //xxx todo needs to be in manager
+	mVBO = mEngine->storeBuffer<core::VertexBufferBasic>(mVAO, vertices);
 
 	initVBO();
 

@@ -26,7 +26,6 @@ class IndexBufferParticles: public IndexBuffer {
 };
 
 } /* core */
-typedef std::shared_ptr<core::IndexBufferParticles> pIndexBufferParticles;
 } /* fillwave */
 
 #endif /* INDEXBUFFERPARTICLES_H_ */

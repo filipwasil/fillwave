@@ -13,15 +13,15 @@ namespace fillwave {
 namespace core {
 
 VertexBufferFloat::VertexBufferFloat(
-   std::vector<GLfloat>& values,
+   std::vector<VertexFloat>& values,
    GLuint dataStoreModification) :
-	TVertexBuffer<GLfloat>(values, dataStoreModification) {
+	TVertexBuffer<VertexFloat>(values, dataStoreModification) {
 
 }
 
-void VertexBufferFloat::log() {
-	auto d = [] (GLfloat & f) {
-		return static_cast<double>(f);
+void VertexBufferFloat::log() const {
+	auto d = [] (core::VertexFloat & f) {
+		return static_cast<double>(f.mData);
 	};
 	for (auto it : mDataVertices) {
 		FLOG_INFO("Vertex written: %f", d(it));

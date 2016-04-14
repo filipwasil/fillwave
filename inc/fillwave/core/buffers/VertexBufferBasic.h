@@ -72,7 +72,6 @@ class VertexBufferBasic: public TVertexBuffer<VertexBasic> {
 };
 
 } /* core */
-typedef std::shared_ptr<core::VertexBufferBasic> pVertexBufferBasic;
 } /* fillwave */
 
 #endif /* VERTEXBUFFERBASIC_H_ */
