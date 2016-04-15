@@ -11,6 +11,8 @@
 
 #include <fillwave/core/buffers/IndexBuffer.h>
 
+FLOGINIT("IndexBuffer", FERROR | FFATAL)
+
 namespace fillwave {
 namespace core {
 
@@ -44,6 +46,10 @@ IndexBuffer::IndexBuffer(
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 GLuint* IndexBuffer::getDataInternal() {
+	if (mDataIndices.empty()) {
+		FLOG_ERROR("Not cpu data in this buffer");
+		return nullptr;
+	}
 	return mDataIndices.data();
 }
 
@@ -62,6 +68,14 @@ void IndexBuffer::loadElement(GLuint element) {
 	mTotalElements++;
 	mSize = mTotalElements * sizeof(GLuint);
 	mData = mDataIndices.data();
+}
+
+void IndexBuffer::emptyCPU() {
+	mDataIndices.clear();
+}
+
+void IndexBuffer::emptyGPU() {
+	FLOG_ERROR("Not gpu data clear is possible in this buffer");
 }
 
 } /* core */

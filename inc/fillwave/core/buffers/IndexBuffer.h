@@ -32,6 +32,9 @@ class IndexBuffer: public IBuffer {
 	GLuint* getDataInternal();
 	void loadElement(GLuint element);
 
+ 	void emptyCPU() override;
+ 	void emptyGPU() override;
+
  protected:
 	std::vector<GLuint> mDataIndices;
 };

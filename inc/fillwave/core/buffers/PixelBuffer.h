@@ -29,6 +29,8 @@ class PixelBuffer: public IBuffer {
 	PixelBuffer(GLuint dataStoreType);
 	virtual ~PixelBuffer() = default;
 	void setScreenSize(GLuint width, GLuint height, GLuint bytesPerPixel);
+	void emptyCPU() override;
+	void emptyGPU() override;
 };
 
 } /* core */

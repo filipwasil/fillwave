@@ -49,5 +49,13 @@ std::string UniformBuffer::getName() {
 	return mName;
 }
 
+void UniformBuffer::emptyCPU() {
+	FLOG_ERROR("Not cpu data clear is possible in this buffer");
+}
+
+void UniformBuffer::emptyGPU() {
+	FLOG_ERROR("Not gpu data clear is possible in this buffer");
+}
+
 } /* core */
 } /* fillwave */

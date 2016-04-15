@@ -102,6 +102,10 @@ class TVertexBuffer: public IBuffer {
 	}
 
 	T* getDataInternal() {
+		if (mDataVertices.empty()) {
+			std::cout << "Not cpu data in this buffer" << std::endl;
+			return nullptr;
+		}
 		return mDataVertices.data();
 	}
 
@@ -189,6 +193,14 @@ class TVertexBuffer: public IBuffer {
             a.bindLocation(programHandle);
         });
     }
+
+ 	void emptyCPU() override {
+ 		mDataVertices.clear();
+ 	}
+
+ 	void emptyGPU() override {
+ 		std::cout << "Not gpu data clear is possible in this buffer" << std::endl;
+ 	}
 
  private:
 	std::vector<Attribute> mAttributes;
