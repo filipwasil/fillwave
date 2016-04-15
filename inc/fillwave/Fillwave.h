@@ -222,7 +222,7 @@ class Engine final {
 	struct EngineImpl;
 	std::unique_ptr<EngineImpl> mImpl;
 	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, framework::TerrainConstructor* constructor, GLint density, GLfloat gap, std::vector<GLuint>& indices);
-    core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexBasic>& data);
+	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexBasic>& data);
 	core::IndexBufferBasic* storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data);
 	core::VertexBufferText* storeBufferInternal(core::VertexArray* vao, const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords);
 	core::IndexBufferParticles* storeBufferInternal(core::VertexArray* vao, GLuint elements);
@@ -231,6 +231,10 @@ class Engine final {
 	core::VertexBufferDebug* storeBufferInternal(core::VertexArray* vao, GLfloat scale);
 	core::VertexBufferFloat* storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexFloat>& data);
 	core::VertexBufferPosition* storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexPosition>& data);
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	core::IndexBufferBasic* storeBufferInternal(core::VertexArray* vao, const aiMesh* shape);
+	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, const aiMesh* shape, framework::Animator* animator);
+#endif
 };
 
 } /* fillwave */

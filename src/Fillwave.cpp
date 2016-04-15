@@ -605,5 +605,16 @@ void Engine::removeBufferText(core::VertexArray* vao) {
 	mImpl->mBuffers.mVerticesText.erase(vao);
 }
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+core::IndexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, const aiMesh* shape) {
+   core::IndexBufferBasic* newData = new core::IndexBufferBasic(shape);
+   return mImpl->mBuffers.mIndices.store(newData, vao);
+}
+core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, const aiMesh* shape, framework::Animator* animator) {
+   core::VertexBufferBasic* newData = new core::VertexBufferBasic(shape, animator);
+   return mImpl->mBuffers.mVertices.store(newData, vao);
+}
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
 }
 /* fillwave */
