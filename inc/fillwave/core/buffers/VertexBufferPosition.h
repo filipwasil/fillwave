@@ -31,7 +31,7 @@ class VertexBufferPosition: public TVertexBuffer<VertexPosition> {
 	   framework::Shape<VertexPosition>& shape,
 	   GLuint dataStoreModification = GL_STATIC_DRAW);
 	VertexBufferPosition(
-	   std::vector<VertexPosition>& vertices,
+	   const std::vector<VertexPosition>& vertices,
 	   GLuint dataStoreModification = GL_STATIC_DRAW);
 	virtual ~VertexBufferPosition() = default;
 	void log() const;

@@ -20,7 +20,7 @@ VertexBufferPosition::VertexBufferPosition(
 }
 
 VertexBufferPosition::VertexBufferPosition(
-   std::vector<VertexPosition>& vertices,
+   const std::vector<VertexPosition>& vertices,
    GLuint dataStoreModification) :
 	TVertexBuffer(vertices, dataStoreModification) {
 

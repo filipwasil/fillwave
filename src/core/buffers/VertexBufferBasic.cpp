@@ -123,7 +123,7 @@ VertexBufferBasic::VertexBufferBasic(
    framework::TerrainConstructor* constructor,
    GLint chunkDensity,
    GLfloat gapSize,
-   std::vector<GLuint>& indices,
+   const std::vector<GLuint>& indices,
    GLuint dataStoreModification) :
 	TVertexBuffer<VertexBasic>(dataStoreModification) {
 
@@ -225,7 +225,7 @@ VertexBufferBasic::VertexBufferBasic(
 }
 
 VertexBufferBasic::VertexBufferBasic(
-   std::vector<core::VertexBasic>& vertices,
+   const std::vector<core::VertexBasic>& vertices,
    GLuint dataStoreModification) :
 	TVertexBuffer<VertexBasic>(vertices, dataStoreModification) {
 

@@ -30,9 +30,9 @@ struct VertexParticle {
 class VertexBufferParticles: public TVertexBuffer<VertexParticle> {
  public:
 	VertexBufferParticles(
-	   std::vector<GLfloat>& velocities,
-	   std::vector<GLfloat>& positions,
-	   std::vector<GLfloat>& times);
+		const std::vector<GLfloat>& velocities,
+		const std::vector<GLfloat>& positions,
+	   const std::vector<GLfloat>& times);
 	virtual ~VertexBufferParticles() = default;
 	void log() const;
 };

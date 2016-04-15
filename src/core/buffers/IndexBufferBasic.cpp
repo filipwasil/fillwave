@@ -14,7 +14,7 @@ namespace fillwave {
 namespace core {
 
 IndexBufferBasic::IndexBufferBasic(
-   std::vector<GLuint>& data,
+   const std::vector<GLuint>& data,
    GLuint dataStoreModification) :
 	IndexBuffer(data.size(), dataStoreModification) {
 	mDataIndices = data;
