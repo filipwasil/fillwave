@@ -87,7 +87,7 @@ EmiterPointCPU::EmiterPointCPU(Engine* engine,
 
 	/* Initialize OpenGL stuff */
 	mVBO = engine->storeBuffer<core::VertexBufferParticles>(mVAO, velocities, positions, times);
-    mIBO = engine->storeBuffer<core::IndexBufferParticles>(mVAO, howMany);
+   mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO, howMany);
 
 	initPipeline();
 	initVBO();

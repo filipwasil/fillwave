@@ -8,7 +8,7 @@
 #ifndef UNIFORMBUFFER_H_
 #define UNIFORMBUFFER_H_
 
-#include <fillwave/core/buffers/Buffer.h>
+#include <fillwave/core/buffers/IBuffer.h>
 
 namespace fillwave {
 namespace core {
@@ -17,7 +17,7 @@ namespace core {
  * \brief UniformBufferObject - UBO.
  */
 
-class UniformBuffer: public Buffer {
+class UniformBuffer: public IBuffer {
  public:
 	UniformBuffer(
 	   std::string name,
@@ -33,6 +33,9 @@ class UniformBuffer: public Buffer {
 	void bindRange(GLuint id = 0);
 
 	void push(GLfloat* data);
+
+ 	void emptyCPU() override;
+ 	void emptyGPU() override;
 
  private:
 	std::string mName;

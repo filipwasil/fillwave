@@ -85,7 +85,7 @@ EmiterPointGPU::EmiterPointGPU(
 
 	mVBOGPU[0] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO, particles); //xxx todo store in engine
 	mVBOGPU[1] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO, particles); //xxx todo store in engine
-	mIBO = engine->storeBuffer<core::IndexBufferParticles>(mVAO, mHowMany); //xxx todo store in engine
+	mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO, mHowMany); //xxx todo store in engine
 
 	initPipeline();
 	initVBO();

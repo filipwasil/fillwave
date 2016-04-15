@@ -5,8 +5,8 @@
  * Author: Filip Wasil
  */
 
+#include <fillwave/core/buffers/IBuffer.h>
 #include <fillwave/Log.h>
-#include <fillwave/core/buffers/Buffer.h>
 #include <fillwave/core/pipeline/Attribute.h>
 
 FLOGINIT("Buffer", FERROR | FFATAL)
@@ -16,25 +16,25 @@ using namespace std;
 namespace fillwave {
 namespace core {
 
-Buffer::Buffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany) :
+IBuffer::IBuffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany) :
 	GLObject(howMany), mLoaded(GL_FALSE), mIndex(index) {
 	setTarget(target);
 	setDrawType(drawType);
 	reload();
 }
 
-Buffer::~Buffer() {
+IBuffer::~IBuffer() {
 	glDeleteBuffers(mHowMany, mHandles);
 }
 
-void Buffer::setElements(GLuint elements) {
+void IBuffer::setElements(GLuint elements) {
 	mTotalElements = elements;
 }
-void Buffer::setSize(GLuint size) {
+void IBuffer::setSize(GLuint size) {
 	mSize = size;
 }
 
-void Buffer::setTarget(GLuint target) {
+void IBuffer::setTarget(GLuint target) {
 	if (target == GL_ARRAY_BUFFER_BINDING || target == GL_ARRAY_BUFFER
 	      || target == GL_ELEMENT_ARRAY_BUFFER || target == GL_UNIFORM_BUFFER
 	      || target == GL_ELEMENT_ARRAY_BUFFER_BINDING
@@ -45,7 +45,7 @@ void Buffer::setTarget(GLuint target) {
 	}
 }
 
-void Buffer::setDrawType(GLuint dataStoreType) {
+void IBuffer::setDrawType(GLuint dataStoreType) {
 	if (dataStoreType == GL_STREAM_DRAW || dataStoreType == GL_STREAM_READ
 	      || dataStoreType == GL_STREAM_COPY || dataStoreType == GL_STATIC_DRAW
 	      || dataStoreType == GL_STATIC_READ || dataStoreType == GL_STATIC_COPY
@@ -57,62 +57,62 @@ void Buffer::setDrawType(GLuint dataStoreType) {
 	}
 }
 
-bool Buffer::isLoaded() {
+bool IBuffer::isLoaded() {
 	return mLoaded;
 }
 
-void Buffer::setLoaded(GLboolean loaded) {
+void IBuffer::setLoaded(GLboolean loaded) {
     mLoaded = loaded;
 }
 
-GLuint Buffer::getElements() const {
+GLuint IBuffer::getElements() const {
 	return mTotalElements;
 }
 
-GLuint Buffer::getSize() const {
+GLuint IBuffer::getSize() const {
 	return mSize;
 }
 
-GLvoid* Buffer::getData() const {
+GLvoid* IBuffer::getData() const {
 	return mData;
 }
 
-void Buffer::unmap() const {
+void IBuffer::unmap() const {
 	glUnmapBuffer(mTarget);
 	FLOG_CHECK("Could not unmap the buffer object");
 }
 
-void Buffer::bind(GLuint id) const {
+void IBuffer::bind(GLuint id) const {
 	glBindBuffer(mTarget, mHandles[id]);
 	FLOG_CHECK("Could not bind the buffer object");
 }
 
-void Buffer::bindBase(GLuint id) const {
+void IBuffer::bindBase(GLuint id) const {
 	glBindBufferBase(mTarget, mIndex, mHandles[id]);
 	FLOG_CHECK("Bind the uniform buffer object");
 }
 
-void Buffer::unbind() {
+void IBuffer::unbind() {
 	glBindBuffer(mTarget, 0);
 	FLOG_CHECK("Could not unbind the buffer object");
 }
 
-void Buffer::bind(GLuint externalTarget, GLuint id) const {
+void IBuffer::bind(GLuint externalTarget, GLuint id) const {
 	glBindBuffer(externalTarget, mHandles[id]);
 	FLOG_CHECK("Could not bind the buffer object");
 }
 
-void Buffer::bindBase(GLuint externalTarget, GLuint id) const {
+void IBuffer::bindBase(GLuint externalTarget, GLuint id) const {
 	glBindBufferBase(externalTarget, mIndex, mHandles[id]);
 	FLOG_CHECK("Bind the uniform buffer object");
 }
 
-void Buffer::unbindBase(GLuint externalTarget) {
+void IBuffer::unbindBase(GLuint externalTarget) {
 	glBindBufferBase(externalTarget, mIndex, 0);
 	FLOG_CHECK("Could not unbind the buffer object");
 }
 
-void Buffer::send() {
+void IBuffer::send() {
 	if (!mLoaded) {
 		glBufferData(mTarget, mSize, mData, mDataStoreType);
 		mLoaded = GL_TRUE;
@@ -120,7 +120,7 @@ void Buffer::send() {
 	}
 }
 
-GLvoid* Buffer::mapRange(GLenum access, GLuint size) {
+GLvoid* IBuffer::mapRange(GLenum access, GLuint size) {
 	GLvoid* ptr = nullptr;
 	if (size) {
 		ptr = glMapBufferRange(mTarget, 0, size, access);
@@ -132,7 +132,7 @@ GLvoid* Buffer::mapRange(GLenum access, GLuint size) {
 	return ptr;
 }
 
-void Buffer::reload() {
+void IBuffer::reload() {
 	glGenBuffers(mHowMany, mHandles);
 	FLOG_CHECK("reload");
 }
@@ -140,7 +140,7 @@ void Buffer::reload() {
 /* Feature not available in OpenGL ES  < 3.1 */
 #ifdef FILLWAVE_GLES_3_0
 #else
-GLvoid* Buffer::map(GLenum access) const {
+GLvoid* IBuffer::map(GLenum access) const {
 	GLvoid* ptr = glMapBuffer(mTarget, access);
 	FLOG_CHECK("Could not map the buffer object");
 	return ptr;

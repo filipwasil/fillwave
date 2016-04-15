@@ -562,8 +562,9 @@ core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, std
     return mImpl->mBuffers.mVertices.store(newData, vao);
 }
 
-core::IndexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data) {
-    return mImpl->mBuffers.mIndices.store(vao, data);
+core::IndexBuffer* Engine::storeBufferInternal(core::VertexArray* vao, const std::vector<GLuint>& data) {
+   core::IndexBuffer* newData = new core::IndexBuffer(data);
+	return mImpl->mBuffers.mIndices.store(newData, vao);
 }
 
 void Engine::removeBufferIndex(core::VertexArray* vao) {
@@ -574,8 +575,9 @@ core::VertexBufferText* Engine::storeBufferInternal(core::VertexArray* vao, cons
    return mImpl->mBuffers.mVerticesText.store(vao, data, textureCoords);
 }
 
-core::IndexBufferParticles* Engine::storeBufferInternal(core::VertexArray* vao, GLuint elements) {
-    return mImpl->mBuffers.mIndicesParticles.store(vao, elements);
+core::IndexBuffer* Engine::storeBufferInternal(core::VertexArray* vao, GLuint elements) {
+   core::IndexBuffer* newData = new core::IndexBuffer(elements, true);
+	return mImpl->mBuffers.mIndices.store(newData, vao);
 }
 
 core::VertexBufferParticlesGPU* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexParticleGPU>& particles) {
@@ -606,8 +608,8 @@ void Engine::removeBufferText(core::VertexArray* vao) {
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-core::IndexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, const aiMesh* shape) {
-   core::IndexBufferBasic* newData = new core::IndexBufferBasic(shape);
+core::IndexBuffer* Engine::storeBufferInternal(core::VertexArray* vao, const aiMesh* shape) {
+   core::IndexBuffer* newData = new core::IndexBuffer(shape);
    return mImpl->mBuffers.mIndices.store(newData, vao);
 }
 core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, const aiMesh* shape, framework::Animator* animator) {

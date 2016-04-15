@@ -11,7 +11,6 @@
 #include <fillwave/core/pipeline/Uniform.h>
 #include <fillwave/core/pipeline/Shader.h>
 #include <fillwave/core/pipeline/UniformBuffer.h>
-
 #include <memory>
 #include <iostream>
 #include <string>

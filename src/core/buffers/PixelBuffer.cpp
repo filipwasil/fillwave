@@ -7,11 +7,13 @@
 
 #include <fillwave/core/buffers/PixelBuffer.h>
 
+FLOGINIT("PixelBuffer", FERROR | FFATAL)
+
 namespace fillwave {
 namespace core {
 
 PixelBuffer::PixelBuffer(GLuint dataStoreType) :
-	Buffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
+	IBuffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
 	mData = 0;
 }
 
@@ -20,6 +22,14 @@ void PixelBuffer::setScreenSize(
    GLuint height,
    GLuint bytesPerPixel) {
 	mSize = bytesPerPixel * width * height;
+}
+
+void PixelBuffer::emptyCPU() {
+	FLOG_ERROR("Not gpu data clear is possible with this buffer");
+}
+
+void PixelBuffer::emptyGPU() {
+	FLOG_ERROR("Not gpu data clear is possible with this buffer");
 }
 
 } /* models */

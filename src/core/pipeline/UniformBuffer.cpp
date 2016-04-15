@@ -19,7 +19,7 @@ UniformBuffer::UniformBuffer(
    GLuint uniformBlockSize,
    GLuint bindingPoint,
    GLuint dataStoreModification) :
-	Buffer(GL_UNIFORM_BUFFER, dataStoreModification, index),
+	IBuffer(GL_UNIFORM_BUFFER, dataStoreModification, index),
 	mName(name),
 	mBindingPoint(bindingPoint) {
 	bind();
@@ -47,6 +47,14 @@ void UniformBuffer::push(GLfloat* data) {
 
 std::string UniformBuffer::getName() {
 	return mName;
+}
+
+void UniformBuffer::emptyCPU() {
+	FLOG_ERROR("Not cpu data clear is possible in this buffer");
+}
+
+void UniformBuffer::emptyGPU() {
+	FLOG_ERROR("Not gpu data clear is possible in this buffer");
 }
 
 } /* core */

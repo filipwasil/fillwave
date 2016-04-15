@@ -8,7 +8,8 @@
 #ifndef INDEXBUFFER_H_
 #define INDEXBUFFER_H_
 
-#include <fillwave/core/buffers/Buffer.h>
+#include <fillwave/core/buffers/IBuffer.h>
+#include <fillwave/Assets.h>
 
 namespace fillwave {
 namespace core {
@@ -17,10 +18,22 @@ namespace core {
  * \brief IndexBufferObject - IBO.
  */
 
-class IndexBuffer: public Buffer {
+class IndexBuffer: public IBuffer {
  public:
-	IndexBuffer(GLuint elements, GLuint dataStoreModification);
+	// xxx fill - fills buffer with sequential data
+	IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModification = GL_STATIC_DRAW);
+	IndexBuffer(const std::vector<GLuint>& data, GLuint dataStoreModification  = GL_STATIC_DRAW);
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	IndexBuffer(const aiMesh* shape, GLuint dataStoreModification = GL_STATIC_DRAW);
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
 	virtual ~IndexBuffer() = default;
+
+	GLuint* getDataInternal();
+	void loadElement(GLuint element);
+
+ 	void emptyCPU() override;
+ 	void emptyGPU() override;
 
  protected:
 	std::vector<GLuint> mDataIndices;

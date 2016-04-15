@@ -30,7 +30,7 @@ Skybox::Skybox(Engine* engine, core::Texture3D* texture) :
 
 	FLOG_DEBUG("Initializing skybox buffer");
 
-	mIBO = engine->storeBuffer<core::IndexBufferBasic>(mVAO, indices);
+	mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO, indices);
 	mVBO = engine->storeBuffer<core::VertexBufferPosition>(mVAO, vertices);
 
 	initPipeline();
