@@ -63,6 +63,7 @@ Model::Model(Engine* engine, core::Program* program,
 	mAnimationCallback(nullptr),
 	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
 
 	if (scene) {
@@ -73,6 +74,76 @@ Model::Model(Engine* engine, core::Program* program,
 	} else {
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
+#else
+	std::vector<tinyobj::shape_t> shapes;
+	std::vector<tinyobj::material_t> materials;
+
+	std::string err;
+	if (!tinyobj::LoadObj(shapes, materials, err, shapePath.c_str())) {
+		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
+	}
+	if (!err.empty()) { // `err` may contain warning message.
+	  FLOG_WARNING("%s", err.c_str());
+	}
+
+	FLOG_DEBUG("Shapes    : %d", shapes.size());
+	FLOG_DEBUG("Materials : %d", materials.size());
+
+	for (size_t i = 0; i < shapes.size(); i++) {
+	  printf("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
+	  printf("Size of shape[%ld].indices: %ld\n", i, shapes[i].mesh.indices.size());
+	  printf("Size of shape[%ld].material_ids: %ld\n", i, shapes[i].mesh.material_ids.size());
+//	  assert((shapes[i].mesh.indices.size() % 3) == 0);
+	  for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) {
+	    printf("  idx[%ld] = %d, %d, %d. mat_id = %d\n", f, shapes[i].mesh.indices[3*f+0], shapes[i].mesh.indices[3*f+1], shapes[i].mesh.indices[3*f+2], shapes[i].mesh.material_ids[f]);
+	  }
+
+	  printf("shape[%ld].vertices: %ld\n", i, shapes[i].mesh.positions.size());
+	  assert((shapes[i].mesh.positions.size() % 3) == 0);
+	  for (size_t v = 0; v < shapes[i].mesh.positions.size() / 3; v++) {
+	    printf("  v[%ld] = (%f, %f, %f)\n", v,
+	      shapes[i].mesh.positions[3*v+0],
+	      shapes[i].mesh.positions[3*v+1],
+	      shapes[i].mesh.positions[3*v+2]);
+	  }
+	}
+
+	for (size_t i = 0; i < materials.size(); i++) {
+	  printf("material[%ld].name = %s\n", i, materials[i].name.c_str());
+	  printf("  material.Ka = (%f, %f ,%f)\n", materials[i].ambient[0], materials[i].ambient[1], materials[i].ambient[2]);
+	  printf("  material.Kd = (%f, %f ,%f)\n", materials[i].diffuse[0], materials[i].diffuse[1], materials[i].diffuse[2]);
+	  printf("  material.Ks = (%f, %f ,%f)\n", materials[i].specular[0], materials[i].specular[1], materials[i].specular[2]);
+	  printf("  material.Tr = (%f, %f ,%f)\n", materials[i].transmittance[0], materials[i].transmittance[1], materials[i].transmittance[2]);
+	  printf("  material.Ke = (%f, %f ,%f)\n", materials[i].emission[0], materials[i].emission[1], materials[i].emission[2]);
+	  printf("  material.Ns = %f\n", materials[i].shininess);
+	  printf("  material.Ni = %f\n", materials[i].ior);
+	  printf("  material.dissolve = %f\n", materials[i].dissolve);
+	  printf("  material.illum = %d\n", materials[i].illum);
+	  printf("  material.map_Ka = %s\n", materials[i].ambient_texname.c_str());
+	  printf("  material.map_Kd = %s\n", materials[i].diffuse_texname.c_str());
+	  printf("  material.map_Ks = %s\n", materials[i].specular_texname.c_str());
+	  printf("  material.map_Ns = %s\n", materials[i].specular_highlight_texname.c_str());
+	  std::map<std::string, std::string>::const_iterator it(materials[i].unknown_parameter.begin());
+	  std::map<std::string, std::string>::const_iterator itEnd(materials[i].unknown_parameter.end());
+	  for (; it != itEnd; it++) {
+	    printf("  material.%s = %s\n", it->first.c_str(), it->second.c_str());
+	  }
+	  printf("\n");
+	}
+
+	for (GLuint i = 0; i < shapes.size(); i++) {
+
+		std::string diffuseMapPath, normalMapPath, specularMapPath;
+
+		entity->attach(
+		   loadMesh(shapes[i], Material(aMaterial),
+		            engine->storeTexture(diffuseMapPath.c_str()),
+		            engine->storeTexture(normalMapPath.c_str()),
+		            engine->storeTexture(specularMapPath.c_str()),
+		            engine));
+	}
+	#error "Not ready"
+#endif
 }
 
 Model::Model(
@@ -88,7 +159,9 @@ Model::Model(
 	mAnimationCallback(nullptr),
 	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
+
 	if (scene) {
 		initAnimations(scene);
 		initShadowing(engine); //xxx must be after initAnimations
@@ -98,6 +171,9 @@ Model::Model(
 	} else {
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
+#else
+	#error "Not ready"
+#endif
 }
 
 Model::Model(
@@ -114,7 +190,9 @@ Model::Model(
 	mAnimationCallback(nullptr),
 	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
+
 	if (scene) {
 		initAnimations(scene);
 		initShadowing(engine);
@@ -124,6 +202,9 @@ Model::Model(
 	} else {
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
+#else
+	#error "Not ready"
+#endif
 }
 
 Model::~Model() {
@@ -288,12 +369,24 @@ pMesh Model::loadMesh(
 	}
 
 	ProgramLoader loader(engine);
+	core::VertexArray* vao = new core::VertexArray();
 	return std::make_shared < Mesh
 	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-	          engine->getLightSystem(), new core::VertexBufferBasic (shape, mAnimator),
-	          new core::IndexBufferBasic (shape), mAnimator);
+	          engine->getLightSystem(), engine->storeBuffer<core::VertexBufferBasic> (vao, shape, mAnimator),
+				 engine->storeBuffer<core::IndexBufferBasic>(vao, shape), mAnimator, GL_TRIANGLES, vao);
+}
+#else /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
+pMesh loadMesh(tinyobj::shape_t& shape,
+	   const Material& material,
+	   core::Texture2D* diffuseMap,
+	   core::Texture2D* normalMap,
+	   core::Texture2D* specularMap,
+	   Engine* engine) {
+#error "Not ready"
+	return pMesh();
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
