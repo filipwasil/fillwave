@@ -69,8 +69,8 @@ class IBuffer: public GLObject {
 	GLuint mTotalElements;
 	void setElements(GLuint elements);
 	void setSize(GLuint size);
-	virtual void emptyCPU() {}
-	virtual void emptyGPU() {}
+	virtual void emptyCPU() = 0;
+	virtual void emptyGPU() = 0;
 };
 
 void unbindBuffer(GLuint target);
