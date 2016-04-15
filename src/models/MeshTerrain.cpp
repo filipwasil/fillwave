@@ -42,7 +42,7 @@ MeshTerrain::MeshTerrain(
 
 	core::VertexArray* vao = new core::VertexArray();
 	core::VertexBufferBasic* vbo = engine->storeBuffer<core::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
-	core::IndexBufferBasic* ibo = engine->storeBuffer<core::IndexBufferBasic>(vao, indices);
+	core::IndexBuffer* ibo = engine->storeBuffer<core::IndexBuffer>(vao, indices);
 
 	Material m;
 
@@ -96,7 +96,7 @@ MeshTerrain::MeshTerrain(
 
     core::VertexArray* vao = new core::VertexArray();
     core::VertexBufferBasic* vbo = engine->storeBuffer<core::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
-    core::IndexBufferBasic* ibo = engine->storeBuffer<core::IndexBufferBasic>(vao, indices);
+    core::IndexBuffer* ibo = engine->storeBuffer<core::IndexBuffer>(vao, indices);
 
     Material m;
 

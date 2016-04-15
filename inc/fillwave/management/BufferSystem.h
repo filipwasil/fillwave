@@ -8,7 +8,7 @@
 #ifndef INC_FILLWAVE_MANAGEMENT_BASE_BUFFERSYSTEM_H_
 #define INC_FILLWAVE_MANAGEMENT_BASE_BUFFERSYSTEM_H_
 
-#include <fillwave/core/buffers/Buffer.h>
+#include <fillwave/core/buffers/IBuffer.h>
 #include <fillwave/models/base/IReloadable.h>
 
 namespace fillwave {
@@ -26,14 +26,11 @@ struct BufferSystem {
 			  core::VertexArray*, framework::TerrainConstructor*, GLint, GLfloat,
 			  std::vector<GLuint>&> mVertices;
 
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::IndexBufferBasic,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::IndexBuffer,
 			  core::VertexArray*, std::vector<GLuint>&> mIndices;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferText,
 			  core::VertexArray*, const std::vector<GLfloat>&, const std::vector<GLfloat>&> mVerticesText;
-
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::IndexBufferParticles,
-			  core::VertexArray*, GLuint> mIndicesParticles;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferParticlesGPU,
 			  core::VertexArray*, std::vector<core::VertexParticleGPU>&> mVerticesParticlesGPU;

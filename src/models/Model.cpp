@@ -45,14 +45,16 @@ Model::Model(
 	std::vector<core::VertexBasic> vertices = shape.getVertices();
 	std::vector<GLuint> indices = shape.getIndices();
 
+	core::VertexArray* vao = new core::VertexArray();
 	attach(std::make_shared<Mesh>(engine, material, diffuseMap,
 	                              normalMap, specularMap,
 	                              program, mProgramShadow, mProgramShadowColor,
 	                              loader.getOcclusionOptimizedQuery(),
 	                              loader.getAmbientOcclusionGeometry(),
 	                              loader.getAmbientOcclusionColor(), engine->getLightSystem(),
-	                              new core::VertexBufferBasic (vertices),
-	                              new core::IndexBufferBasic (indices), mAnimator));
+											engine->storeBuffer<core::VertexBufferBasic> (vao, vertices),
+											engine->storeBuffer<core::IndexBuffer> (vao, indices),
+											mAnimator, GL_TRIANGLES, vao));
 }
 
 Model::Model(Engine* engine, core::Program* program,
@@ -375,7 +377,7 @@ pMesh Model::loadMesh(
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
 	          engine->getLightSystem(), engine->storeBuffer<core::VertexBufferBasic> (vao, shape, mAnimator),
-				 engine->storeBuffer<core::IndexBufferBasic>(vao, shape), mAnimator, GL_TRIANGLES, vao);
+				 engine->storeBuffer<core::IndexBuffer>(vao, shape), mAnimator, GL_TRIANGLES, vao);
 }
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 

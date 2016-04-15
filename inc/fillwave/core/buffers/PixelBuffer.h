@@ -8,7 +8,7 @@
 #ifndef PIXELBUFFER_H_
 #define PIXELBUFFER_H_
 
-#include <fillwave/core/buffers/Buffer.h>
+#include <fillwave/core/buffers/IBuffer.h>
 
 namespace fillwave {
 namespace core {
@@ -24,7 +24,7 @@ namespace core {
  *
  */
 
-class PixelBuffer: public Buffer {
+class PixelBuffer: public IBuffer {
  public:
 	PixelBuffer(GLuint dataStoreType);
 	virtual ~PixelBuffer() = default;

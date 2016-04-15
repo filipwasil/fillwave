@@ -9,7 +9,7 @@
 #define MESH_H_
 
 #include <fillwave/core/texturing/Texture2D.h>
-#include <fillwave/core/buffers/IndexBufferBasic.h>
+#include <fillwave/core/buffers/IndexBuffer.h>
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/core/operations/ConditionalRender.h>
 #include <fillwave/core/operations/TQuery.h>
@@ -48,7 +48,7 @@ class Mesh: public Entity, public IReloadable {
 	   core::Program* programAmbientOcclusionColor,
 	   LightSystem* lights = nullptr,
 	   core::VertexBufferBasic* vbo = nullptr,
-	   core::IndexBufferBasic* ibo = nullptr,
+	   core::IndexBuffer* ibo = nullptr,
 	   Animator* animator = nullptr,
 	   GLenum renderMode = GL_TRIANGLES,
 	   core::VertexArray* = nullptr);
@@ -83,7 +83,7 @@ class Mesh: public Entity, public IReloadable {
 	GLenum mRenderMode;
 
 	/* Buffers */
-	core::IndexBufferBasic* mIBO;
+	core::IndexBuffer* mIBO;
 	core::VertexBufferBasic* mVBO;
 
 	/* Light */

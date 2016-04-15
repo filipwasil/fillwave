@@ -11,7 +11,7 @@ namespace fillwave {
 namespace core {
 
 PixelBuffer::PixelBuffer(GLuint dataStoreType) :
-	Buffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
+	IBuffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
 	mData = 0;
 }
 

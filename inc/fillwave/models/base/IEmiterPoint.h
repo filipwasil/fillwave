@@ -9,7 +9,7 @@
 #define EMITERPOINT_H_
 
 #include <fillwave/models/Entity.h>
-#include <fillwave/core/buffers/IndexBufferParticles.h>
+#include <fillwave/core/buffers/IndexBuffer.h>
 #include <fillwave/core/buffers/VertexBufferParticles.h>
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/texturing/Texture.h>
@@ -58,7 +58,7 @@ class IEmiterPoint: public IReloadable, public Entity {
 	GLboolean mDepthTesting;
 	GLfloat mAlphaCutOff;
 	core::Program* mProgram;
-	core::IndexBufferParticles* mIBO;
+	core::IndexBuffer* mIBO;
 	Blending mBlending;
 };
 
