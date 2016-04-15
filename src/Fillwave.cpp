@@ -157,7 +157,7 @@ core::Sampler* Engine::storeSO(GLint textureUnit) {
 }
 
 core::VertexArray* Engine::storeVAO(framework::IReloadable* user) {
-	return mImpl->mBuffers.store(user);
+	return mImpl->mBuffers.mVertexArrays.store(user);
 }
 
 /* Inputs - insert */
@@ -554,54 +554,55 @@ void Engine::configureDebugger(eDebuggerState state) {
 }
 
 core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, framework::TerrainConstructor* constructor, GLint density, GLfloat gap, std::vector<GLuint>& indices) {
-    return mImpl->mVertices.store(vao, constructor, density, gap, indices);
+    return mImpl->mBuffers.mVertices.store(vao, constructor, density, gap, indices);
 }
 
 core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexBasic>& data) {
     core::VertexBufferBasic* newData = new core::VertexBufferBasic(data);
-    return mImpl->mVertices.store(newData, vao);
+    return mImpl->mBuffers.mVertices.store(newData, vao);
 }
+
 core::IndexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data) {
-    return mImpl->mIndices.store(vao, data);
-}
-
-core::VertexBufferText* Engine::storeBufferInternal(core::VertexArray* vao, const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords) {
-   return mImpl->mVerticesText.store(vao, data, textureCoords);
-}
-
-core::IndexBufferParticles* Engine::storeBufferInternal(core::VertexArray* vao, GLuint elements) {
-    return mImpl->mIndicesParticles.store(vao, elements);
-}
-
-core::VertexBufferParticlesGPU* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexParticleGPU>& particles) {
-    return mImpl->mVerticesParticlesGPU.store(vao, particles);
-}
-
-core::VertexBufferParticles* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<GLfloat>& velocities, std::vector<GLfloat>& positions, std::vector<GLfloat>& times) {
-    return mImpl->mVerticesParticles.store(vao, velocities, positions, times);
-}
-
-core::VertexBufferDebug* Engine::storeBufferInternal(core::VertexArray* vao, GLfloat scale) {
-    return mImpl->mVerticesDebugger.store(vao, scale);
-}
-
-core::VertexBufferFloat* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexFloat>& data) {
-    return mImpl->mVerticesFloat.store(vao, data);
-}
-
-core::VertexBufferPosition* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexPosition>& data) {
-    return mImpl->mVerticesPosition.store(vao, data);
+    return mImpl->mBuffers.mIndices.store(vao, data);
 }
 
 void Engine::removeBufferIndex(core::VertexArray* vao) {
-	mImpl->mIndices.erase(vao);
+    mImpl->mBuffers.mIndices.erase(vao);
+}
+
+core::VertexBufferText* Engine::storeBufferInternal(core::VertexArray* vao, const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords) {
+   return mImpl->mBuffers.mVerticesText.store(vao, data, textureCoords);
+}
+
+core::IndexBufferParticles* Engine::storeBufferInternal(core::VertexArray* vao, GLuint elements) {
+    return mImpl->mBuffers.mIndicesParticles.store(vao, elements);
+}
+
+core::VertexBufferParticlesGPU* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexParticleGPU>& particles) {
+    return mImpl->mBuffers.mVerticesParticlesGPU.store(vao, particles);
+}
+
+core::VertexBufferParticles* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<GLfloat>& velocities, std::vector<GLfloat>& positions, std::vector<GLfloat>& times) {
+    return mImpl->mBuffers.mVerticesParticles.store(vao, velocities, positions, times);
+}
+
+core::VertexBufferDebug* Engine::storeBufferInternal(core::VertexArray* vao, GLfloat scale) {
+    return mImpl->mBuffers.mVerticesDebugger.store(vao, scale);
+}
+
+core::VertexBufferFloat* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexFloat>& data) {
+    return mImpl->mBuffers.mVerticesFloat.store(vao, data);
+}
+
+core::VertexBufferPosition* Engine::storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexPosition>& data) {
+    return mImpl->mBuffers.mVerticesPosition.store(vao, data);
 }
 
 void Engine::removeBufferBasic(core::VertexArray* vao) {
-	mImpl->mVertices.erase(vao);
+	mImpl->mBuffers.mVertices.erase(vao);
 }
 void Engine::removeBufferText(core::VertexArray* vao) {
-	mImpl->mVerticesText.erase(vao);
+	mImpl->mBuffers.mVerticesText.erase(vao);
 }
 
 }

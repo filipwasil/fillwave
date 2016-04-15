@@ -18,7 +18,7 @@
 #include <fillwave/management/ProgramManager.h>
 #include <fillwave/management/ShaderManager.h>
 #include <fillwave/management/SamplerManager.h>
-#include <fillwave/management/BufferManager.h>
+#include <fillwave/management/BufferSystem.h>
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/management/TextureSystem.h>
 
@@ -75,19 +75,9 @@ struct Engine::EngineImpl final {
 	ManagerShaders mShaders;
 	ManagerPrograms mPrograms;
 	ManagerSamplers mSamplers;
-	ManagerBuffers mBuffers;
-	ManagerVertices mVertices;
-	ManagerVerticesText mVerticesText;
-	ManagerVerticesParticles mVerticesParticles;
-    ManagerVerticesParticlesGPU mVerticesParticlesGPU;
-    ManagerVerticesDebugger mVerticesDebugger;
-	ManagerIndices mIndices;
-	ManagerIndicesParticles mIndicesParticles;
-	ManagerVerticesFloat mVerticesFloat;
-	ManagerVerticesPosition mVerticesPosition;
-
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
+   BufferSystem mBuffers;
 	puLightSystem mLights;
 	puTextureSystem mTextures;
 	std::vector<core::PostProcessingPass> mPostProcessingPasses;
@@ -309,7 +299,7 @@ inline void Engine::EngineImpl::initUniforms() {
 inline void Engine::EngineImpl::initOcclusionTest() {
 	std::vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
 	mVAOOcclusion = new core::VertexArray();
-	mVBOOcclusion = mVerticesPosition.store(mVAOOcclusion, vec);
+	mVBOOcclusion = mBuffers.mVerticesPosition.store(mVAOOcclusion, vec);
 	mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
 	mVAOOcclusion->bind();
 	mVBOOcclusion->bind();
@@ -377,14 +367,14 @@ void Engine::EngineImpl::reload() {
 		it.second->reload();
 	}
 
-	for (auto& it : mBuffers) {
+	for (auto& it : mBuffers.mVertexArrays) {
 		it.second->reload();
 	}
 
 	mPickingPixelBuffer->reload();
 	reloadPickingBuffer();
 
-//	mScene->resetRenderer(); xxx
+//	mScene->resetRenderer(); xxx remove ?
 }
 
 inline void Engine::EngineImpl::reloadPickingBuffer() {
