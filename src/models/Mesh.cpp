@@ -37,7 +37,7 @@ Mesh::Mesh(
    core::Program* programAmbientOcclusionColor,
    LightSystem* lights,
    core::VertexBufferBasic* vbo,
-   core::IndexBufferBasic* ibo,
+   core::IndexBuffer* ibo,
    Animator* animator,
    GLenum renderMode,
    core::VertexArray* vao) :

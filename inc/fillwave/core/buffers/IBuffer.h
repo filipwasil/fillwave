@@ -19,15 +19,15 @@ namespace core {
  * \brief Base for all buffer types.
  */
 
-class Buffer: public GLObject {
+class IBuffer: public GLObject {
  public:
-	Buffer(
+	IBuffer(
 	   GLuint target,
 	   GLuint drawType = GL_STATIC_DRAW,
 	   GLuint index = 0,
 	   GLsizei howMany = 1);
 
-	virtual ~Buffer();
+	virtual ~IBuffer();
 
 	void bind(GLuint id = 0) const;
 	void bind(GLuint externalTarget, GLuint id) const;
@@ -69,6 +69,8 @@ class Buffer: public GLObject {
 	GLuint mTotalElements;
 	void setElements(GLuint elements);
 	void setSize(GLuint size);
+	virtual void emptyCPU() {}
+	virtual void emptyGPU() {}
 };
 
 void unbindBuffer(GLuint target);

@@ -18,12 +18,12 @@
 #include <fillwave/management/ProgramManager.h>
 #include <fillwave/management/ShaderManager.h>
 #include <fillwave/management/SamplerManager.h>
-#include <fillwave/management/BufferSystem.h>
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/management/TextureSystem.h>
 
 #include <fillwave/common/Macros.h>
 #include <fillwave/loaders/FileLoader.h>
+#include <fillwave/management/BufferSystem.h>
 
 FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 

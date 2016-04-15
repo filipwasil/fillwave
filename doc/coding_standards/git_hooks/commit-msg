@@ -65,13 +65,13 @@ if [ ${RET} -ne 0 ]; then
     if [ -e .git/hooks/fail-ascii-art.txt ]; then
         cat .git/hooks/fail-ascii-art.txt
     else
-        echo "Your commit has errors"
+        echo "Not acceptable commit."
     fi
 else
     if [ -e .git/hooks/correct-ascii-art.txt ]; then
         cat .git/hooks/correct-ascii-art.txt
     else
-        echo "Good job!"
+        echo "Commit looks good."
     fi
 fi
 exit $RET

@@ -9,6 +9,8 @@ option(FILLWAVE_COMPILATION_STARTUP_ANIMATION "Run startup animation before any 
 option(FILLWAVE_COMPILATION_PC_GLES "Use GLES stub for PC" OFF)
 option(FILLWAVE_COMPILATION_GLES_2_0 "Support old devices with gles 2.0 support" OFF)
 option(FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS "Usable for mesa shader compiler" ON)
+option(FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE "Asset data are stored only in GPU" ON)
+
 option(NDEBUG "Build with debug logs" OFF)
 
 option(FILLWAVE_TESTS "Build with gtest tests" OFF)

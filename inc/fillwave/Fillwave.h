@@ -29,11 +29,10 @@ namespace fillwave {
 namespace core {
     /* All buffers should be there */
 //core::VertexBufferBasic
-//core::IndexBufferBasic
+//core::IndexBuffer
     struct VertexParticleGPU;
     struct VertexPosition;
     struct VertexFloat;
-    class IndexBufferParticles;
     class VertexBufferParticles;
     class VertexBufferParticlesGPU;
     class VertexBufferFloat;
@@ -223,18 +222,18 @@ class Engine final {
 	std::unique_ptr<EngineImpl> mImpl;
 	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, framework::TerrainConstructor* constructor, GLint density, GLfloat gap, std::vector<GLuint>& indices);
 	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexBasic>& data);
-	core::IndexBufferBasic* storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data);
 	core::VertexBufferText* storeBufferInternal(core::VertexArray* vao, const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords);
-	core::IndexBufferParticles* storeBufferInternal(core::VertexArray* vao, GLuint elements);
 	core::VertexBufferParticlesGPU* storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexParticleGPU>& particles);
 	core::VertexBufferParticles* storeBufferInternal(core::VertexArray* vao, std::vector<GLfloat>& velocities, std::vector<GLfloat>& positions, std::vector<GLfloat>& times);
 	core::VertexBufferDebug* storeBufferInternal(core::VertexArray* vao, GLfloat scale);
 	core::VertexBufferFloat* storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexFloat>& data);
 	core::VertexBufferPosition* storeBufferInternal(core::VertexArray* vao, std::vector<core::VertexPosition>& data);
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-	core::IndexBufferBasic* storeBufferInternal(core::VertexArray* vao, const aiMesh* shape);
 	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, const aiMesh* shape, framework::Animator* animator);
+	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao, const aiMesh* shape);
 #endif
+	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao, std::vector<GLuint>& data);
+	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao, GLuint elements);
 };
 
 } /* fillwave */

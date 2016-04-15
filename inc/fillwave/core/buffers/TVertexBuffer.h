@@ -8,7 +8,7 @@
 #ifndef VERTEXBUFFER_H_
 #define VERTEXBUFFER_H_
 
-#include <fillwave/core/buffers/Buffer.h>
+#include <fillwave/core/buffers/IBuffer.h>
 #include <fillwave/core/pipeline/Attribute.h>
 #include <fillwave/models/shapes/Shape.h>
 
@@ -24,7 +24,7 @@ class Attribute;
  */
 
 template <class T>
-class TVertexBuffer: public Buffer {
+class TVertexBuffer: public IBuffer {
  public:
 	/* Notice
 	 * In this constructor one should initialize:
@@ -36,12 +36,12 @@ class TVertexBuffer: public Buffer {
 	 */
 
 	TVertexBuffer(GLuint dataStoreModification = GL_STATIC_DRAW) :
-		Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
+		IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
 	}
 
 	TVertexBuffer(const std::vector<T>& vertices, GLuint dataStoreModification =
 	                 GL_STATIC_DRAW) :
-		Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
+		IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
 		mDataVertices = vertices;
 		mTotalElements = mDataVertices.size();
 		mData = mDataVertices.data();
@@ -50,7 +50,7 @@ class TVertexBuffer: public Buffer {
 
 	TVertexBuffer(framework::Shape<T>& shape, GLuint dataStoreModification =
 	                 GL_STATIC_DRAW) :
-		Buffer(GL_ARRAY_BUFFER, dataStoreModification) {
+		IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
 		mDataVertices = shape.getVertices();
 		mSize = mTotalElements * sizeof(T);
 		mData = mDataVertices.data();
@@ -91,7 +91,7 @@ class TVertexBuffer: public Buffer {
 	}
 
 	void reload() {
-		Buffer::reload();
+		IBuffer::reload();
 	}
 
 	void attributesSetPointer() {

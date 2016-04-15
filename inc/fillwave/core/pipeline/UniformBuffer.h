@@ -8,7 +8,7 @@
 #ifndef UNIFORMBUFFER_H_
 #define UNIFORMBUFFER_H_
 
-#include <fillwave/core/buffers/Buffer.h>
+#include <fillwave/core/buffers/IBuffer.h>
 
 namespace fillwave {
 namespace core {
@@ -17,7 +17,7 @@ namespace core {
  * \brief UniformBufferObject - UBO.
  */
 
-class UniformBuffer: public Buffer {
+class UniformBuffer: public IBuffer {
  public:
 	UniformBuffer(
 	   std::string name,
