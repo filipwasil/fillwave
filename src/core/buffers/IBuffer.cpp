@@ -117,6 +117,11 @@ void IBuffer::send() {
 	if (!mLoaded) {
 		glBufferData(mTarget, mSize, mData, mDataStoreType);
 		mLoaded = GL_TRUE;
+#ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
+		emptyCPU();
+		mSize = 0;
+		mTotalElements = 0;
+#endif
 		FLOG_CHECK("Could not send the data");
 	}
 }
