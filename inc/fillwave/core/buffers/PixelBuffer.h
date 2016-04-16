@@ -34,7 +34,6 @@ class PixelBuffer: public IBuffer {
 };
 
 } /* core */
-typedef std::shared_ptr<core::PixelBuffer> pPixelBuffer;
 typedef std::unique_ptr<core::PixelBuffer> puPixelBuffer;
 } /* fillwave */
 
