@@ -42,6 +42,7 @@ IndexBuffer::IndexBuffer(
 		mDataIndices.push_back(shape->mFaces[i].mIndices[1]);
 		mDataIndices.push_back(shape->mFaces[i].mIndices[2]);
 	}
+	mSize = mTotalElements * sizeof(GLuint);
 	mData = mDataIndices.data();
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

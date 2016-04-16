@@ -115,6 +115,9 @@ void IBuffer::unbindBase(GLuint externalTarget) {
 
 void IBuffer::send() {
 	if (!mLoaded) {
+		if (mData == nullptr) {
+		}
+		FLOG_DEBUG("Target %d, %d, %d", mTarget, mSize, mDataStoreType);
 		glBufferData(mTarget, mSize, mData, mDataStoreType);
 		mLoaded = GL_TRUE;
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
