@@ -77,7 +77,7 @@ void IndexBuffer::emptyCPU() {
 }
 
 void IndexBuffer::emptyGPU() {
-	FLOG_ERROR("Not gpu data clear is possible in this buffer");
+	FLOG_DEBUG("Not gpu data clear is possible in this buffer");
 }
 
 } /* core */
