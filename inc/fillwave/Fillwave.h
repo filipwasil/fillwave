@@ -155,7 +155,8 @@ class Engine final {
 	core::Sampler* storeSO(GLint textureUnit);
 
 	/* Store vertex array objects */
-	core::VertexArray* storeVAO(framework::IReloadable* user = nullptr);
+	core::VertexArray* storeVAO(framework::IReloadable* user,
+	                            core::VertexArray* vao = nullptr);
 
 	template<class T, typename ...S>
 	T* storeBuffer(core::VertexArray* vao, S ... p) {

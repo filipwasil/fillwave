@@ -51,7 +51,7 @@ class Mesh: public Entity, public IReloadable {
 	   core::IndexBuffer* ibo = nullptr,
 	   Animator* animator = nullptr,
 	   GLenum renderMode = GL_TRIANGLES,
-	   core::VertexArray* = nullptr);
+	   core::VertexArray* vao = nullptr);
 
 	virtual ~Mesh() = default;
 
