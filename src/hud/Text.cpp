@@ -155,7 +155,8 @@ void Text::createVBO() {
 	mPosition.x = tmpStartingX;
 
 
-	mVBO = mEngine->storeBuffer<core::VertexBufferText>(mVAO, points_tmp, texcoords_tmp);
+	mVBO = mEngine->storeBuffer<core::VertexBufferText>(mVAO, points_tmp,
+	       texcoords_tmp);
 
 	initVBO();
 	initVAO();
@@ -197,7 +198,7 @@ inline void Text::initVAO() {
 }
 
 inline void Text::initVBO() {
-    mVBO->initAttributes(mProgram->getHandle());
+	mVBO->initAttributes(mProgram->getHandle());
 }
 
 } /* framework */

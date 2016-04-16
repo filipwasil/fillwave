@@ -16,7 +16,8 @@ FLOGINIT("IndexBuffer", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
-IndexBuffer::IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModification) :
+IndexBuffer::IndexBuffer(GLuint elements, bool fill,
+                         GLuint dataStoreModification) :
 	IBuffer(GL_ELEMENT_ARRAY_BUFFER, dataStoreModification) {
 	mTotalElements = elements;
 	mDataIndices.reserve(mTotalElements);

@@ -16,7 +16,8 @@ using namespace std;
 namespace fillwave {
 namespace core {
 
-IBuffer::IBuffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany) :
+IBuffer::IBuffer(GLuint target, GLuint drawType, GLuint index,
+                 GLsizei howMany) :
 	GLObject(howMany), mLoaded(GL_FALSE), mIndex(index) {
 	setTarget(target);
 	setDrawType(drawType);
@@ -62,7 +63,7 @@ bool IBuffer::isLoaded() {
 }
 
 void IBuffer::setLoaded(GLboolean loaded) {
-    mLoaded = loaded;
+	mLoaded = loaded;
 }
 
 GLuint IBuffer::getElements() const {

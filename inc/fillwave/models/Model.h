@@ -126,11 +126,11 @@ class Model: public Programmable {
 	   Engine* engine);
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	pMesh loadMesh(tinyobj::shape_t& shape,
-		   const Material& material,
-		   core::Texture2D* diffuseMap,
-		   core::Texture2D* normalMap,
-		   core::Texture2D* specularMap,
-		   Engine* engine);
+	               const Material& material,
+	               core::Texture2D* diffuseMap,
+	               core::Texture2D* normalMap,
+	               core::Texture2D* specularMap,
+	               Engine* engine);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 };

@@ -57,11 +57,11 @@ class VertexBufferBasic: public TVertexBuffer<VertexBasic> {
 	   framework::TerrainConstructor* constructor,
 	   GLint chunkDensity,
 	   GLfloat gapSize,
-		const std::vector<GLuint>& indices,
+	   const std::vector<GLuint>& indices,
 	   GLuint dataStoreModification = GL_STATIC_DRAW);
 
 	VertexBufferBasic(
-		const std::vector<core::VertexBasic>& vertices,
+	   const std::vector<core::VertexBasic>& vertices,
 	   GLuint dataStoreModification = GL_STATIC_DRAW);
 
 	~VertexBufferBasic() = default;

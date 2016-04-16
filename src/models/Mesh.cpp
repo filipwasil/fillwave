@@ -382,7 +382,7 @@ inline void Mesh::initVAO() {
 }
 
 inline void Mesh::initVBO() {
-    mVBO->initAttributes(mProgram->getHandle());
+	mVBO->initAttributes(mProgram->getHandle());
 	mOcclusionMatrix = glm::scale(glm::mat4(1.0f), mVBO->getOcclusionBoxSize());
 }
 

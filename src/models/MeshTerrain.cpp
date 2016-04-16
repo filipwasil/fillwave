@@ -41,7 +41,8 @@ MeshTerrain::MeshTerrain(
 	ProgramLoader loader(engine);
 
 	core::VertexArray* vao = new core::VertexArray();
-	core::VertexBufferBasic* vbo = engine->storeBuffer<core::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
+	core::VertexBufferBasic* vbo = engine->storeBuffer<core::VertexBufferBasic>(vao,
+	                               constructor, density, gapSize, indices);
 	core::IndexBuffer* ibo = engine->storeBuffer<core::IndexBuffer>(vao, indices);
 
 	Material m;
@@ -51,11 +52,11 @@ MeshTerrain::MeshTerrain(
 			pMesh ptr =
 			   std::make_shared < Mesh
 			   > (engine, m,
-			           engine->storeTexture(diffuseMapPath.c_str()),
-			           engine->storeTexture(normalMapPath.c_str()),
-			           engine->storeTexture(specularMapPath.c_str()),
-			           program,
-			           loader.getShadow(),
+			      engine->storeTexture(diffuseMapPath.c_str()),
+			      engine->storeTexture(normalMapPath.c_str()),
+			      engine->storeTexture(specularMapPath.c_str()),
+			      program,
+			      loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
 			      engine->getLightSystem(),
@@ -94,18 +95,19 @@ MeshTerrain::MeshTerrain(
 	GLint indexTerrainChunk = radius;
 	ProgramLoader loader(engine);
 
-    core::VertexArray* vao = new core::VertexArray();
-    core::VertexBufferBasic* vbo = engine->storeBuffer<core::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
-    core::IndexBuffer* ibo = engine->storeBuffer<core::IndexBuffer>(vao, indices);
+	core::VertexArray* vao = new core::VertexArray();
+	core::VertexBufferBasic* vbo = engine->storeBuffer<core::VertexBufferBasic>(vao,
+	                               constructor, density, gapSize, indices);
+	core::IndexBuffer* ibo = engine->storeBuffer<core::IndexBuffer>(vao, indices);
 
-    Material m;
+	Material m;
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			pMesh ptr =
 			   std::make_shared < Mesh
 			   > (engine, m, diffuseMap,
-			         normalMap, specularMap, program, loader.getShadow(),
+			      normalMap, specularMap, program, loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
 			      engine->getLightSystem(), vbo, ibo, nullptr, GL_TRIANGLES, vao);

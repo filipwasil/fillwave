@@ -14,7 +14,7 @@ namespace fillwave {
 namespace core {
 
 struct VertexFloat {
-    GLfloat mData;
+	GLfloat mData;
 };
 
 /*! \class VertexBufferFloat
@@ -23,7 +23,7 @@ struct VertexFloat {
 class VertexBufferFloat: public TVertexBuffer<VertexFloat> {
  public:
 	VertexBufferFloat(
-		const std::vector<VertexFloat>& values,
+	   const std::vector<VertexFloat>& values,
 	   GLuint dataStoreModification = GL_STATIC_DRAW);
 	virtual ~VertexBufferFloat() = default;
 	void log() const;

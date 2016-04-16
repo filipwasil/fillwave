@@ -30,7 +30,7 @@
     end = std::chrono::system_clock::now();\
     std::chrono::duration<double> elapsed_seconds = end-start;\
     std::cout << info << elapsed_seconds.count() << std::endl;} while(0);\
-
+ 
 #define FILLWAVE_MEASURE_START std::chrono::system_clock::now
 #define FILLWAVE_MEASURE_STOP(info, start)  do {  \
     std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - start;\

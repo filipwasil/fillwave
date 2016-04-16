@@ -52,7 +52,7 @@ class VoxelChunk: public Entity, public IReloadable {
 	GLint getSize();
 
  protected:
-    Engine* mEngine;
+	Engine* mEngine;
 	const GLfloat mVoxelGap;
 
  private:

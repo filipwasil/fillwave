@@ -324,7 +324,7 @@ VoxelChunk::VoxelChunk(
    VoxelConstructor* constructor,
    GLfloat gap) :
 	IReloadable(engine),
-    mEngine(engine),
+	mEngine(engine),
 	mVoxelGap(gap),
 	mSize(size),
 	mProgram(program),
@@ -542,7 +542,7 @@ inline void VoxelChunk::initVAO() {
 }
 
 inline void VoxelChunk::initVBO() {
-    mVBO->initAttributes(mProgram->getHandle());
+	mVBO->initAttributes(mProgram->getHandle());
 }
 
 void VoxelChunk::updateRenderer(IRenderer& renderer) {

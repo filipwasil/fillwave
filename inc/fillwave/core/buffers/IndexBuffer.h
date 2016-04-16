@@ -21,8 +21,10 @@ namespace core {
 class IndexBuffer: public IBuffer {
  public:
 	// xxx fill - fills buffer with sequential data
-	IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModification = GL_STATIC_DRAW);
-	IndexBuffer(const std::vector<GLuint>& data, GLuint dataStoreModification  = GL_STATIC_DRAW);
+	IndexBuffer(GLuint elements, bool fill,
+	            GLuint dataStoreModification = GL_STATIC_DRAW);
+	IndexBuffer(const std::vector<GLuint>& data,
+	            GLuint dataStoreModification  = GL_STATIC_DRAW);
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	IndexBuffer(const aiMesh* shape, GLuint dataStoreModification = GL_STATIC_DRAW);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
@@ -32,8 +34,8 @@ class IndexBuffer: public IBuffer {
 	GLuint* getDataInternal();
 	void loadElement(GLuint element);
 
- 	void emptyCPU() override;
- 	void emptyGPU() override;
+	void emptyCPU() override;
+	void emptyGPU() override;
 
  protected:
 	std::vector<GLuint> mDataIndices;

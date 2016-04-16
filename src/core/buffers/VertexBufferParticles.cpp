@@ -15,8 +15,8 @@ namespace core {
 
 VertexBufferParticles::VertexBufferParticles(
    const std::vector<GLfloat>& velocities,
-	const std::vector<GLfloat>& positions,
-	const std::vector<GLfloat>& times) {
+   const std::vector<GLfloat>& positions,
+   const std::vector<GLfloat>& times) {
 	size_t size = times.size();
 	if (size == velocities.size() / 3) {
 		mDataVertices.reserve(size);

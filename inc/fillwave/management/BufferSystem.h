@@ -20,32 +20,35 @@ namespace framework {
 
 struct BufferSystem {
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexArray,
-			  IReloadable*> mVertexArrays;
+	              IReloadable*> mVertexArrays;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferBasic,
-			  core::VertexArray*, framework::TerrainConstructor*, GLint, GLfloat,
-			  std::vector<GLuint>&> mVertices;
+	              core::VertexArray*, framework::TerrainConstructor*, GLint, GLfloat,
+	              std::vector<GLuint>&> mVertices;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::IndexBuffer,
-			  core::VertexArray*, std::vector<GLuint>&> mIndices;
+	              core::VertexArray*, std::vector<GLuint>&> mIndices;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferText,
-			  core::VertexArray*, const std::vector<GLfloat>&, const std::vector<GLfloat>&> mVerticesText;
+	              core::VertexArray*, const std::vector<GLfloat>&, const std::vector<GLfloat>&>
+	              mVerticesText;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferParticlesGPU,
-			  core::VertexArray*, std::vector<core::VertexParticleGPU>&> mVerticesParticlesGPU;
+	              core::VertexArray*, std::vector<core::VertexParticleGPU>&>
+	              mVerticesParticlesGPU;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferParticles,
-			  core::VertexArray*, std::vector<GLfloat>&, std::vector<GLfloat>&, std::vector<GLfloat>&> mVerticesParticles;
+	              core::VertexArray*, std::vector<GLfloat>&, std::vector<GLfloat>&, std::vector<GLfloat>&>
+	              mVerticesParticles;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferDebug,
-			  core::VertexArray*, GLfloat> mVerticesDebugger;
+	              core::VertexArray*, GLfloat> mVerticesDebugger;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferFloat,
-			  core::VertexArray*, std::vector<core::VertexFloat>&> mVerticesFloat;
+	              core::VertexArray*, std::vector<core::VertexFloat>&> mVerticesFloat;
 
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferPosition,
-			  core::VertexArray*, std::vector<core::VertexPosition>&> mVerticesPosition;
+	              core::VertexArray*, std::vector<core::VertexPosition>&> mVerticesPosition;
 
 };
 

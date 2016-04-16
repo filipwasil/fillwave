@@ -34,8 +34,8 @@ class UniformBuffer: public IBuffer {
 
 	void push(GLfloat* data);
 
- 	void emptyCPU() override;
- 	void emptyGPU() override;
+	void emptyCPU() override;
+	void emptyGPU() override;
 
  private:
 	std::string mName;

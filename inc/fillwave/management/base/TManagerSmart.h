@@ -58,13 +58,13 @@ class TManagerSmart: public std::unordered_map<K, std::unique_ptr<T>> {
  private:
 	inline void printError() {
 		const char error[] = "\033[35m[FATAL MANAGER OVERFLOW. "
-				"FILLWAVE_MANAGEMENT_MAX_ITEMS too low.] \033[0m\n";
+		                     "FILLWAVE_MANAGEMENT_MAX_ITEMS too low.] \033[0m\n";
 #ifdef __ANDROID__
 		(void)__android_log_print(ANDROID_LOG_ERROR, error, "");
 #else
 		printf(error);
 #endif
-    }
+	}
 };
 
 } /* namespace framework */

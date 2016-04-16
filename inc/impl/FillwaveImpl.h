@@ -77,7 +77,7 @@ struct Engine::EngineImpl final {
 	ManagerSamplers mSamplers;
 	std::vector<pText> mTextManager;
 	std::vector<pFont> mFontManager;
-   BufferSystem mBuffers;
+	BufferSystem mBuffers;
 	puLightSystem mLights;
 	puTextureSystem mTextures;
 	std::vector<core::PostProcessingPass> mPostProcessingPasses;

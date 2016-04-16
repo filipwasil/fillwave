@@ -214,7 +214,7 @@ inline void Debugger::initVAO() {
 }
 
 inline void Debugger::initVBO() {
-    mVBO->initAttributes(mProgram->getHandle());
+	mVBO->initAttributes(mProgram->getHandle());
 }
 
 } /* framework */

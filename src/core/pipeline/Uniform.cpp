@@ -92,11 +92,11 @@ void Uniform::push(GLint location, GLint data) {
 }
 
 void Uniform::push(GLint location, GLuint data) {
-    push(location, static_cast<GLint>(data));
+	push(location, static_cast<GLint>(data));
 }
 
 void Uniform::push(GLint location, bool data) {
-    push(location, static_cast<GLint>(data));
+	push(location, static_cast<GLint>(data));
 }
 
 void Uniform::push(GLint location, GLint* data, GLint count) {

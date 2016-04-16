@@ -83,9 +83,12 @@ EmiterPointGPU::EmiterPointGPU(
 	mNoiseTextureHandle = Create3DNoiseTexture(noiseTextureSize,
 	                      howMany / 3); //xxx todo store in Manager
 
-	mVBOGPU[0] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO, particles); //xxx todo store in engine
-	mVBOGPU[1] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO, particles); //xxx todo store in engine
-	mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO, mHowMany); //xxx todo store in engine
+	mVBOGPU[0] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO,
+	             particles); //xxx todo store in engine
+	mVBOGPU[1] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO,
+	             particles); //xxx todo store in engine
+	mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO,
+	       mHowMany); //xxx todo store in engine
 
 	initPipeline();
 	initVBO();
