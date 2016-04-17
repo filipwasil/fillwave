@@ -13,6 +13,10 @@
 namespace fillwave {
 namespace core {
 
+/*! \struct VertexFloat
+ * \brief Stores the float vertex data.
+ */
+
 struct VertexFloat {
 	GLfloat mData;
 };
@@ -20,6 +24,7 @@ struct VertexFloat {
 /*! \class VertexBufferFloat
  * \brief Vertex buffer specialized with GLfloat data structure.
  */
+
 class VertexBufferFloat: public TVertexBuffer<VertexFloat> {
  public:
 	VertexBufferFloat(

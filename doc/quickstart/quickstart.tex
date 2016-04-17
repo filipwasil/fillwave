@@ -44,12 +44,12 @@
   basicstyle=\ttfamily,
   keywordstyle=\color{blue}\bfseries,
   showstringspaces=false,
-  morekeywords={pTexture, pShader, pModel, pEntity, pScene, pProgram, pTexture2DRenderableDynamic, pTexture3D, pLightPoint, pLightSpot, pLightDirectional, pText, pCursor, pSkybox, GLfloat, GLint}
+  morekeywords={pModel, pEntity, pScene, pLightPoint, pLightSpot, pLightDirectional, pText, pCursor, pSkybox, GLfloat, GLint}
 }
 
 \begin{document}
 
-\title{\textbf{Fillwave 5}
+\title{\textbf{Fillwave 5.1}
  - new OpenGL 3.3+ (OpenGL ES 3.0+) graphics engine for C++11 }
 \author{Filip Wasil}
 
@@ -281,8 +281,8 @@ gCameraOrthographic cameraO = std::make_shared<CameraOrtographic>
 \begin{lstlisting}
 /* Create loader, and use it to create programs */
 loader::ProgramLoader loader(gEngine);
-pProgram default = loader.getDefault();
-pProgram animation = loader.getDefaultBones();
+core::Program* default = loader.getDefault();
+core::Program* animation = loader.getDefaultBones();
 \end{lstlisting}
 
 \subsection{Store functions}\label{sec:store functions}
@@ -290,22 +290,22 @@ pProgram animation = loader.getDefaultBones();
 
 \begin{lstlisting}
 /* Store the shaders providing source file path */
-pShader  storeShaderFragment(const std::string& path);
-pShader  storeShaderVertex(const std::string& path);
-pShader  storeShaderGeometry(const std::string& path);
-pShader  storeShaderTesselationControl(const std::string& path);
-pShader  storeShaderTesselationEvaluation(const std::string& p);
+core::Shader*  storeShaderFragment(const std::string& path);
+core::Shader*  storeShaderVertex(const std::string& path);
+core::Shader*  storeShaderGeometry(const std::string& path);
+core::Shader*  storeShaderTesselationControl(const std::string& path);
+core::Shader*  storeShaderTesselationEvaluation(const std::string& p);
 /* Store the shaders providing the source directly */
-pShader  storeShaderFragment(const std::string&, std::string&);
-pShader  storeShaderVertex(const std::string&, std::string&);
-pShader  storeShaderGeometry(const std::string&, std::string&);
-pShader  storeShaderTesselationControl(const std::string&, std::string&);
-pShader  storeShaderTesselationEvaluation(const std::string&, std::string&);
-pProgram storeProgram(const std::string& , std::vector<pShader>);
-pTexture storeTexture (const std::string&, const GLuint&);
-pTexture2DRenderableDynamic 
+core::Shader*  storeShaderFragment(const std::string&, std::string&);
+core::Shader*  storeShaderVertex(const std::string&, std::string&);
+core::Shader*  storeShaderGeometry(const std::string&, std::string&);
+core::Shader*  storeShaderTesselationControl(const std::string&, std::string&);
+core::Shader*  storeShaderTesselationEvaluation(const std::string&, std::string&);
+core::Program* storeProgram(const std::string& , std::vector<core::Shader*>);
+core::Texture* storeTexture (const std::string&, const GLuint&);
+core::Texture2DRenderableDynamic* 
                        storeTextureDynamic (const std::string& fragmentShaderPath);
-pTexture3D storeTexture3D(const std::string& path,
+core::Texture3D* storeTexture3D(const std::string& path,
                           const std::string& path,
                           const std::string& path,
                           const std::string& path,
@@ -413,7 +413,7 @@ pModel model = std::make_shared<Model>(engine,
 /* First method */
 BuilderModelExternalMaps builder1 (engine,
                                    modelPath,
-                                   pProgram program,
+                                   core::Program* program,
                                    diffusePath,
                                    normalPath,
                                    specularPath);
@@ -493,7 +493,7 @@ EmiterPointCPU::EmiterPointCPU(Engine* engine,
                                    glm::vec3 acceleration,
                                    glm::vec3 velocity,
                                    glm::vec3 distance,
-                                   pTexture texture,
+                                   core::Texture* texture,
                                    GLfloat lifetimeInSec,
                                    GLfloat pointSize,
                                    GLboolean dephTest,
@@ -510,7 +510,7 @@ pEmiterPointGPU::EmiterPointGPU(Engine* engine,
               glm::vec3 robustnessPosition,
               GLfloat startSize,
               GLfloat lifetime,
-	          pTexture texture,
+	          core::Texture* texture,
 	          GLenum blendingSource,
 	          GLenum blendingDestination,
 	          GLboolean dephTest,
@@ -547,7 +547,7 @@ void setBlendingFunction (GLenum sourcePixel, GLenum destPixel);
 
 \begin{lstlisting}
 
-pTexture3D texture=pTexture3D(new Texture3D("textures_right.png",
+core::Texture3D* texture=core::Texture3D*(new Texture3D("textures_right.png",
                                               "textures_left.png",
                                               "textures_ceil.png",
                                               "textures_floor.png",
@@ -563,9 +563,9 @@ scene->setSkybox(skybox);
 
 
 \begin{lstlisting}
-pShader fs = engine->storeShaderFragment("default.frag");
-pShader vs = engine->storeShaderVertex("default.vert");
-pProgram program = buildProgram(fs + vs);
+core::Shader* fs = engine->storeShader<GL_FRAGMENT_SHADER>("default.frag");
+core::Shader* vs = engine->storeShader<GL_VERTEX_SHADER>("default.vert");
+core::Program* program = buildProgram(fs + vs);
 pTerrain terrain = buildTerrainVoxel(engine,
                                   program,
                                   "textures/test.png",

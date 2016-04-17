@@ -15,7 +15,7 @@
 namespace fillwave {
 namespace core {
 
-/*! \class Buffer
+/*! \class IBuffer
  * \brief Base for all buffer types.
  */
 

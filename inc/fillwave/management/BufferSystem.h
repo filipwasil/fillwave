@@ -14,7 +14,7 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class ManagerBuffers
+/*! \class BufferSystem
  * \brief Connects VAO pointer and VAO's user pointer in single class.
  */
 
