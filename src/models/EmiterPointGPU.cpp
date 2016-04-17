@@ -83,12 +83,11 @@ EmiterPointGPU::EmiterPointGPU(
 	mNoiseTextureHandle = Create3DNoiseTexture(noiseTextureSize,
 	                      howMany / 3); //xxx todo store in Manager
 
-	mVBOGPU[0] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO,
-	             particles); //xxx todo store in engine
-	mVBOGPU[1] = engine->storeBuffer<core::VertexBufferParticlesGPU>(mVAO,
-	             particles); //xxx todo store in engine
-	mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO,
-	       mHowMany); //xxx todo store in engine
+	mVBOGPU[0] = engine->storeBuffers<core::VertexBufferParticlesGPU>(mVAO, 0,
+	             particles);
+	mVBOGPU[1] = engine->storeBuffers<core::VertexBufferParticlesGPU>(mVAO, 1,
+	             particles);
+	mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO, mHowMany);
 
 	initPipeline();
 	initVBO();
@@ -106,7 +105,7 @@ void EmiterPointGPU::draw(ICamera& camera) {
 	core::Uniform::push(mULCTimeEmiter, mTimeDeltaEmiter);
 	core::Uniform::push(mULCModelMatrixEmiter, mPhysicsMMC);
 	core::Uniform::push(mULCCameraPositionEmiter, mCameraPosition);
-	core::Uniform::push(mULCHowManyEmiter, mHowMany);
+	core::Uniform::push(mULCHowManyEmiter, static_cast<GLfloat>(mHowMany));
 	core::Uniform::push(mULCEmissionRateEmiter, mEmmisingSourceRate);
 	core::Uniform::push(mULCAccelerationEmiter, mAcceleration);
 	core::Uniform::push(mULCStartVelocityEmiter, mStartVelocity);

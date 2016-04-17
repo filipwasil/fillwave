@@ -158,9 +158,16 @@ class Engine final {
 	core::VertexArray* storeVAO(framework::IReloadable* user,
 	                            core::VertexArray* vao = nullptr);
 
+	/* Store one buffer for one VAO */
 	template<class T, typename ...S>
 	T* storeBuffer(core::VertexArray* vao, S ... p) {
 		return storeBufferInternal(vao, p...);
+	}
+
+	/* Enables to store many buffers in one VAO */
+	template<class T, typename ...S>
+	T* storeBuffers(core::VertexArray* vao, size_t idx, S ... p) {
+		return storeBuffersInternal(vao, idx, p...);
 	}
 
 	/* Buffering */
@@ -228,8 +235,8 @@ class Engine final {
 	      std::vector<core::VertexBasic>& data);
 	core::VertexBufferText* storeBufferInternal(core::VertexArray* vao,
 	      const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords);
-	core::VertexBufferParticlesGPU* storeBufferInternal(core::VertexArray* vao,
-	      std::vector<core::VertexParticleGPU>& particles);
+	core::VertexBufferParticlesGPU* storeBuffersInternal(core::VertexArray* vao,
+	      size_t idx, std::vector<core::VertexParticleGPU>& particles);
 	core::VertexBufferParticles* storeBufferInternal(core::VertexArray* vao,
 	      std::vector<GLfloat>& velocities, std::vector<GLfloat>& positions,
 	      std::vector<GLfloat>& times);

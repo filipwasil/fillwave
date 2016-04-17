@@ -33,7 +33,7 @@ struct BufferSystem {
 	              core::VertexArray*, const std::vector<GLfloat>&, const std::vector<GLfloat>&>
 	              mVerticesText;
 
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferParticlesGPU,
+	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, std::vector<core::VertexBufferParticlesGPU*>,
 	              core::VertexArray*, std::vector<core::VertexParticleGPU>&>
 	              mVerticesParticlesGPU;
 
