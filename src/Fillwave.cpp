@@ -588,9 +588,16 @@ core::IndexBuffer* Engine::storeBufferInternal(core::VertexArray* vao,
 	return mImpl->mBuffers.mIndices.store(newData, vao);
 }
 
-core::VertexBufferParticlesGPU* Engine::storeBufferInternal(
-   core::VertexArray* vao, std::vector<core::VertexParticleGPU>& particles) {
-	return mImpl->mBuffers.mVerticesParticlesGPU.store(vao, particles);
+core::VertexBufferParticlesGPU* Engine::storeBuffersInternal(
+   core::VertexArray* vao, size_t idx, std::vector<core::VertexParticleGPU>& particles) {
+	std::vector<core::VertexBufferParticlesGPU*>* ptr = new std::vector<core::VertexBufferParticlesGPU*>();
+	std::vector<core::VertexBufferParticlesGPU*>* buffers = mImpl->mBuffers.mVerticesParticlesGPU.store(ptr, vao);//constructor of vector
+	if (buffers->size() < idx ) {
+		return (*buffers)[idx];
+	}
+	FLOG_DEBUG("There is no buffer for requested index. Creating a new one.");
+	buffers->push_back(new core::VertexBufferParticlesGPU(particles));
+	return buffers->back();
 }
 
 core::VertexBufferParticles* Engine::storeBufferInternal(core::VertexArray* vao,

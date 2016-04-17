@@ -11,15 +11,12 @@
 #include <unordered_map>
 #include <fillwave/common/Macros.h>
 
-#define FILLWAVE_FORGET_ABOUT_ME()           \
-do {                                         \
-	if ((*this).find(key) != (*this).end()) { \
-		return (*this)[key].get();             \
-	}                                         \
-	if ((*this).size() >= M) {                \
-		printError();                          \
-		return nullptr;                        \
-	}                                         \
+#define FILLWAVE_FORGET_ABOUT_ME()\
+do {                              \
+	if ((*this).size() >= M) {     \
+		printError();               \
+		return nullptr;             \
+	}                              \
 } while(0)
 
 namespace fillwave {
@@ -46,11 +43,21 @@ class TManagerSmart: public std::unordered_map<K, std::unique_ptr<T>> {
 	virtual ~TManagerSmart() = default;
 
 	T* store(const K& key, P ... parameters) {
+		if ((*this).find(key) != (*this).end()) {
+			return (*this)[key].get();
+		}
 		FILLWAVE_FORGET_ABOUT_ME();
 		return ((*this)[key] = make_unique<T>(parameters...)).get();
 	}
 
+	/**
+	 * \brief Add already allocated item to manager.
+	 */
 	T* store(T* item, const K& key) {
+		if ((*this).find(key) != (*this).end()) {
+			delete item;
+			return (*this)[key].get();
+		}
 		FILLWAVE_FORGET_ABOUT_ME();
 		return ((*this)[key] = std::unique_ptr < T > (item)).get();
 	}
