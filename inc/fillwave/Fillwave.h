@@ -163,6 +163,12 @@ class Engine final {
 		return storeBufferInternal(vao, p...);
 	}
 
+	/* This function enables to store many buffers in one VAO */
+	template<class T, typename ...S>
+	T* storeBuffers(core::VertexArray* vao, size_t idx, S ... p) {
+		return storeBuffersInternal(vao, idx, p...);
+	}
+
 	/* Buffering */
 	void removeBuffer(core::VertexArray* vao); // xxx any idea of generic class ?
 	void removeBufferIndex(core::VertexArray* vao);
@@ -228,8 +234,8 @@ class Engine final {
 	      std::vector<core::VertexBasic>& data);
 	core::VertexBufferText* storeBufferInternal(core::VertexArray* vao,
 	      const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords);
-	core::VertexBufferParticlesGPU* storeBufferInternal(core::VertexArray* vao,
-	      std::vector<core::VertexParticleGPU>& particles);
+	core::VertexBufferParticlesGPU* storeBuffersInternal(core::VertexArray* vao,
+			size_t idx, std::vector<core::VertexParticleGPU>& particles);
 	core::VertexBufferParticles* storeBufferInternal(core::VertexArray* vao,
 	      std::vector<GLfloat>& velocities, std::vector<GLfloat>& positions,
 	      std::vector<GLfloat>& times);
