@@ -117,7 +117,7 @@ class Model: public Programmable {
 	   core::Texture2D* specularMap,
 	   const Material& material);
 
-	pMesh loadMesh(
+	puMesh loadMesh(
 	   const aiMesh* shape,
 	   const Material& material,
 	   core::Texture2D* diffuseMap,
@@ -125,12 +125,12 @@ class Model: public Programmable {
 	   core::Texture2D* specularMap,
 	   Engine* engine);
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
-	pMesh loadMesh(tinyobj::shape_t& shape,
-	               const Material& material,
-	               core::Texture2D* diffuseMap,
-	               core::Texture2D* normalMap,
-	               core::Texture2D* specularMap,
-	               Engine* engine);
+	puMesh loadMesh(tinyobj::shape_t& shape,
+	                const Material& material,
+	                core::Texture2D* diffuseMap,
+	                core::Texture2D* normalMap,
+	                core::Texture2D* specularMap,
+	                Engine* engine);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 };

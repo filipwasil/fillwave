@@ -125,7 +125,6 @@ class Mesh: public Entity, public IReloadable {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Mesh> pMesh;
 typedef std::unique_ptr<framework::Mesh> puMesh;
 } /* fillwave */
 

@@ -29,13 +29,13 @@ class TreePtr: public ITreeNode {
 
 	virtual ~TreePtr() = default;
 
-	void attach(T node) {
-		mChildren.push_back(node);
+	void attach(std::unique_ptr<T>&& node) {
+		mChildren.push_back(std::move(node));
 		mFlagAttachedDetached = true;
 		node->onAttached(this);
 	}
 
-	void detach(T node) {
+	void detach(T* node) {
 		auto _compare_function =
 		   [node](const T & e) -> bool {bool found = (e == node); if (found) node->onDetached(); return found;};
 	auto _begin = mChildren.begin();
@@ -57,7 +57,7 @@ class TreePtr: public ITreeNode {
 
 	void detachChildren() {
 		std::for_each(mChildren.begin(), mChildren.end(),
-		[](T & e) {
+		[](std::unique_ptr<T> & e) {
 			e->onDetached();
 		});
 		mChildren.clear();
@@ -75,7 +75,7 @@ class TreePtr: public ITreeNode {
 	bool mFlagAttachedDetached;
 
  protected:
-	std::vector<T> mChildren;
+	std::vector<std::unique_ptr<T>> mChildren;
 };
 
 } /* namespace framework */

@@ -32,15 +32,15 @@ BuilderEmiter::BuilderEmiter(Engine* engine) :
 	mAlphaCutOff(0.0) {
 }
 
-pIEmiterPoint BuilderEmiter::buildEmiterGPU() {
-	return std::make_shared < EmiterPointGPU
+puIEmiterPoint BuilderEmiter::buildEmiterGPU() {
+	return make_unique < EmiterPointGPU
 	       > (mEngine, mEmitingSourceRate, mHowMany, mColor, mAcceleration, mStartVelocity,
 	          mRobustnessVelocity, mStartPosition, mRobustnessPosition, mStartSize, mLifetime,
 	          mTexture, mBlendingSource, mBlendingDestination, mDepthTesting, mAlphaCutOff);
 }
 
-pIEmiterPoint BuilderEmiter::buildEmiterCPU() {
-	return std::make_shared < EmiterPointCPU
+puIEmiterPoint BuilderEmiter::buildEmiterCPU() {
+	return make_unique < EmiterPointCPU
 	       > (mEngine, mEmitingSourceRate, mHowMany, mColor, mAcceleration, mStartVelocity,
 	          mRobustnessVelocity, mStartPosition, mRobustnessPosition, mStartSize, mLifetime,
 	          mTexture, mBlendingSource, mBlendingDestination, mDepthTesting, mAlphaCutOff);

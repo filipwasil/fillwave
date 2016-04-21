@@ -87,7 +87,7 @@ void IScene::drawDepthColor(ICamera& camera, glm::vec3& position) {
 	}
 }
 
-void IScene::registerPickable(pEntity entity) {
+void IScene::registerPickable(Entity* entity) {
 	GLint rand_r, rand_g, rand_b;
 	glm::vec3 color;
 
