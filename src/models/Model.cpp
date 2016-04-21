@@ -46,7 +46,7 @@ Model::Model(
 	std::vector<GLuint> indices = shape.getIndices();
 
 	core::VertexArray* vao = new core::VertexArray();
-	attach(std::make_shared<Mesh>(engine, material, diffuseMap,
+	attach(make_unique<Mesh>(engine, material, diffuseMap,
 	                              normalMap, specularMap,
 	                              program, mProgramShadow, mProgramShadowColor,
 	                              loader.getOcclusionOptimizedQuery(),
@@ -270,10 +270,10 @@ inline void Model::loadNodes(
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = buildHinge();
-		entity->attach(newEntity);
+		puEntity newEntity = buildHinge();
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get(),
 		          diffuseMapPath, normalMapPath, specularMapPath);
+		entity->attach(std::move(newEntity));
 	}
 }
 
@@ -322,9 +322,9 @@ inline void Model::loadNodes(
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = buildHinge();
-		entity->attach(newEntity);
+		puEntity newEntity = buildHinge();
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get());
+		entity->attach(std::move(newEntity));
 	}
 }
 
@@ -344,18 +344,17 @@ inline void Model::loadNodes(
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
 		const aiMesh* aMesh = scene->mMeshes[i];
-		pMesh mesh = loadMesh(aMesh, material, diffuseMap,
-		                      normalMap, specularMap,
-		                      engine);
-		entity->attach(mesh);
+		entity->attach(loadMesh(aMesh, material, diffuseMap,
+         normalMap, specularMap,
+         engine));
 	}
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = buildHinge();
-		entity->attach(newEntity);
+		puEntity newEntity = buildHinge();
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMap,
 		          normalMap, specularMap, material);
+		entity->attach(std::move(newEntity));
 	}
 }
 
@@ -369,7 +368,7 @@ inline void Model::loadNodeTransformations(aiNode* node, Entity* entity) {
 	entity->moveTo(assimpToGlmVec3(position));
 }
 
-pMesh Model::loadMesh(
+puMesh Model::loadMesh(
    const aiMesh* shape,
    const Material& material,
    core::Texture2D* diffuseMap,
@@ -383,7 +382,7 @@ pMesh Model::loadMesh(
 
 	ProgramLoader loader(engine);
 	core::VertexArray* vao = new core::VertexArray();
-	return std::make_shared < Mesh
+	return make_unique < Mesh
 	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
@@ -394,14 +393,14 @@ pMesh Model::loadMesh(
 }
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-pMesh loadMesh(tinyobj::shape_t& shape,
+puMesh loadMesh(tinyobj::shape_t& shape,
                const Material& material,
                core::Texture2D* diffuseMap,
                core::Texture2D* normalMap,
                core::Texture2D* specularMap,
                Engine* engine) {
 #error "Not ready"
-	return pMesh();
+	return puMesh();
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 

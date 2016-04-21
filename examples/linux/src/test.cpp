@@ -1,9 +1,9 @@
 //============================================================================
-// Name        : Client.cpp
+// Name        : example_particles.cpp
 // Author      : Filip Wasil
 // Version     :
 // Copyright   : none
-// Description : Fillwave engine example full
+// Description : Fillwave engine example particles
 //============================================================================
 
 #include <example.h>
@@ -17,8 +17,6 @@
 #include <CallbacksGLFW/TimeStopCallback.h>
 #include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
-#include <TerrainConstructors/MountainConstructor.h>
-#include <fillwave/management/base/TManagerSmart.h>
 
 /* Physics */
 //#include <bullet>
@@ -28,14 +26,9 @@ using namespace fillwave::framework;
 using namespace std;
 
 Engine* gEngine;
-
-pCameraPerspective gCamera;
 pScenePerspective gScene;
-
-core::Program* gProgram;
-map<string, pModel> gModels;
-
-FLOGINIT("Test app", FERROR | FFATAL)
+pCameraPerspective gCamera;
+core::Texture* gTexture;
 
 int main(int argc, char* argv[]) {
    ContextGLFW mContext;
@@ -56,25 +49,14 @@ void init() {
    gScene = buildScenePerspective();
 
    /* Camera */
-   gCamera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,5.0,0.0),
+   gCamera = pCameraPerspective ( new CameraPerspective(glm::vec3(0.0,0.0,6.0),
                                                     glm::quat(),
                                                     glm::radians(90.0),
                                                     1.0,
                                                     0.1,
                                                     1000.0));
-
-   /* Shaders */
-   ProgramLoader loader(gEngine);
-   gProgram = loader.getDefault();
-
-   /* Models */
-
-
-   /* Lights */
-   pLight  light = gEngine->storeLightSpot(glm::vec3 (1.0,20.0,6.0),
-                           glm::quat (),
-                           glm::vec4 (1.0,1.0,1.0,0.0));
-   light->rotateTo(glm::vec3(1.0,0.0,0.0), glm::radians(-90.0));
+   /* Textures */
+   gTexture = gEngine->storeTexture("textures/particle.png");
 
    /* Engine callbacks */
    gEngine->registerCallback(new TimeStopCallback(gEngine));
@@ -83,35 +65,78 @@ void init() {
 }
 
 void perform() {
-   gEngine->configureFPSCounter("fonts/Titania",  glm::vec2(0.7,0.9), 100.0);
+   /* Set current scene */
    gEngine->setCurrentScene(gScene);
 
-   pIEffect fog(new Fog());
-
+   /* Attach camera to scene */
    gScene->setCamera(gCamera);
 
-   Material material;
+   /* Attach emiters to entities */
 
-   pMeshTerrain terrain = std::make_shared<MeshTerrain>(gEngine,
-                                    gProgram,
-                                    new MountainConstructor(),
-                                    material,
-                                    "textures/test.png",
-                                    "textures/testNormal.png",
-                                    "",
-                                    20,
-                                    16);
-   terrain->scaleTo(2.0);
-   terrain->addEffect(fog);
-   gScene->attach(terrain);
+   auto water = make_unique<EmiterPointCPU>(gEngine,
+         0.3,
+         60000.0,
+         glm::vec4(0.1,0.1,1.0,1.0),
+         glm::vec3(0.0,0.0,0.0),
+         glm::vec3(0.0,0.0,0.0),
+         glm::vec3(0.9,0.9,0.9),
+         glm::vec3(0.0,0.0,0.0),
+         glm::vec3(0.0,0.0,0.0),
+         10.0,
+         10.0,
+         gTexture,
+         GL_SRC_ALPHA,
+         GL_ONE,
+         GL_FALSE);
+   water->moveBy(glm::vec3(0.0,-1.0,-1.0));
+
+   auto sand = make_unique<EmiterPointCPU>(gEngine,
+         0.3,
+         60000.0,
+         glm::vec4(1.0,1.0,0.0,1.0),
+         glm::vec3(0.0,2.0,0.0),
+         glm::vec3(0.0,0.0,0.0),
+         glm::vec3(0.9,0.9,0.9),
+         glm::vec3(0.0,0.0,0.0),
+         glm::vec3(0.0,0.0,0.0),
+         10.0,
+         10.0,
+         gTexture,
+         GL_SRC_ALPHA,
+         GL_ONE,
+         GL_FALSE);
+
+   auto snow = make_unique<EmiterPointGPU>(gEngine,
+                 0.3,
+                 600.0,
+                 glm::vec4(1.0,1.0,1.0,1.0),
+                 glm::vec3(0.0,1.0,0.0),
+                 glm::vec3(0.0,0.0,0.0),
+                 glm::vec3(0.9,0.9,0.9),
+                 glm::vec3(0.0,0.0,0.0),
+                 glm::vec3(0.6,0.6,0.6),
+                 1.0,
+                 1.0,
+                 gTexture,
+                 GL_SRC_ALPHA,
+                 GL_ONE,
+                 GL_FALSE);
+
+   /* For time updates */
+   snow->attachHierarchyCallback(new TimedEmiterUpdateCallback(snow.get(), FILLWAVE_ENDLESS));
+   water->attachHierarchyCallback(new TimedEmiterUpdateCallback(water.get(), FILLWAVE_ENDLESS));
+   sand->attachHierarchyCallback(new TimedEmiterUpdateCallback(sand.get(), FILLWAVE_ENDLESS));
+
+   gScene->attach(std::move(sand));
+   gScene->attach(std::move(water));
+   gScene->attach(std::move(snow));
 }
 
 void showDescription() {
-   /* Description */
-   pText hint0 = gEngine->storeText("Fillwave example terrain", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
-   pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
-   pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
-   pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
-   pText hint1 = gEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
-   pText hint6 = gEngine->storeText("Use 'D' for toggle debugger On/Off", "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
+   pText hint0 = gEngine->storeText("Fillwave example particles", "fonts/Titania",  glm::vec2(-0.95, 0.80), 100.0);
+   pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania",  glm::vec2(-0.95, -0.40), 70.0);
+   pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania",  glm::vec2(-0.95, -0.50), 70.0);
+   pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania",  glm::vec2(-0.95, -0.60), 70.0);
+   pText hint1 = gEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania",  glm::vec2(-0.95, -0.70), 70.0);
+   pText hint6 = gEngine->storeText("Use 'D' for toggle debugger On/Off", "fonts/Titania",  glm::vec2(-0.95, -0.80), 70.0);
 }
