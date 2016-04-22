@@ -159,7 +159,8 @@ bool Skybox::getRenderItem(RenderItem& item) {
 }
 
 } /* framework */
-pSkybox buildSkybox(Engine* engine, core::Texture3D* texture) {
-	return std::make_shared < framework::Skybox > (engine, texture);
+framework::pSkybox framework::Skybox::build(Engine* engine,
+      core::Texture3D* texture) {
+	return framework::make_shared <framework::Skybox> (engine, texture);
 }
 } /* fillwave */

@@ -18,7 +18,7 @@ namespace framework {
 class Bone;
 }
 
-typedef std::shared_ptr<framework::Bone> pBone;
+typedef framework::PtrShared<framework::Bone> pBone;
 
 namespace framework {
 

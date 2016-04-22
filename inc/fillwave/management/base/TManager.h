@@ -27,8 +27,8 @@ class TPolicyShared {
 	~TPolicyShared() = default;
 
 	template <typename ... P>
-	inline std::shared_ptr<T> create(P ... parameters) {
-		return std::make_shared<T>(parameters...);
+	inline PtrShared<T> create(P ... parameters) {
+		return make_shared<T>(parameters...);
 	}
 };
 

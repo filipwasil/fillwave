@@ -49,6 +49,6 @@ pICamera SceneOrthographic::getCamera() {
 
 } /* framework */
 pSceneOrthographic buildSceneOrthographic(pCameraOrthographic camera) {
-	return std::make_shared < framework::SceneOrthographic > (camera);
+	return framework::make_shared < framework::SceneOrthographic > (camera);
 }
 } /* fillwave */

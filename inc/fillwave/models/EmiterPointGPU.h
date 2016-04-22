@@ -92,7 +92,7 @@ class EmiterPointGPU: public IEmiterPoint {
 };
 
 } /* particles */
-typedef std::shared_ptr<framework::EmiterPointGPU> pEmiterPointGPU;
+typedef framework::PtrShared<framework::EmiterPointGPU> pEmiterPointGPU;
 } /* fillwave */
 
 #endif /* EMITERPOINTGPU_H_ */

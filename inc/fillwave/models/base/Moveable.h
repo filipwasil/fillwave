@@ -10,6 +10,7 @@
 
 #include <fillwave/OpenGL.h>
 #include <fillwave/Math.h>
+#include <fillwave/common/PtrShared.h>
 #include <memory>
 #include <vector>
 
@@ -99,11 +100,11 @@ void resetMoveablesRefresh(std::vector<M>& data) {
 	}
 }
 
-GLboolean isMoveablesRefresh(std::vector<std::shared_ptr<Moveable>>& moveables);
-void resetMoveablesRefresh(std::vector<std::shared_ptr<Moveable>>& data);
+GLboolean isMoveablesRefresh(std::vector<PtrShared<Moveable>>& moveables);
+void resetMoveablesRefresh(std::vector<PtrShared<Moveable>>& data);
 
 } /* framework */
-typedef std::shared_ptr<framework::Moveable> pMoveable;
+typedef framework::PtrShared<framework::Moveable> pMoveable;
 typedef std::weak_ptr<framework::Moveable> pwMoveable;
 } /* fillwave */
 

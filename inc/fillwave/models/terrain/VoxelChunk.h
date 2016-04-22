@@ -76,7 +76,7 @@ class VoxelChunk: public Entity, public IReloadable {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::VoxelChunk> pVoxelChunk;
+typedef framework::PtrShared<framework::VoxelChunk> pVoxelChunk;
 } /* fillwave*/
 
 #endif /* VOXELCHUNK_H_ */

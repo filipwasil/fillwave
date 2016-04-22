@@ -24,6 +24,9 @@
 /* Implementation */
 #include  <impl/FillwaveImpl.h>
 
+/**/
+#include <fillwave/common/PtrShared.h>
+
 namespace fillwave {
 
 #ifdef __ANDROID__
@@ -257,7 +260,7 @@ pText Engine::storeText(
 		font = newFont;
 	}
 
-	pText text = std::make_shared < framework::Text
+	pText text = make_shared < framework::Text, framework::Text
 	             > (content, t, position, this, scale, font, color, effect);
 	mImpl->mTextManager.push_back(pText(text));
 	return text;

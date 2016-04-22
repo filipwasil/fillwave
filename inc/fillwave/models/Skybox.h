@@ -17,7 +17,9 @@
 namespace fillwave {
 class Engine;
 namespace framework {
+class Skybox;
 
+typedef framework::PtrShared<framework::Skybox> pSkybox;
 /*! \class Skybox
  * \brief Entity which moves with the camera clipping the view space with an image.
  */
@@ -34,6 +36,8 @@ class Skybox: public Entity, public IReloadable {
 
 	/* IRenderable */
 	bool getRenderItem(RenderItem& item);
+
+	static pSkybox build(Engine* engine, core::Texture3D* texture);
 
  protected:
 	core::Program* mProgram;
@@ -54,8 +58,6 @@ class Skybox: public Entity, public IReloadable {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Skybox> pSkybox;
-pSkybox buildSkybox(Engine* engine, core::Texture3D* texture);
 } /* fillwave */
 
 #endif /* SKYBOX_H_ */

@@ -22,7 +22,7 @@ LightDirectional::LightDirectional(
 	Light(position, intensity, followed),
 	mShadowTexture(shadowTexture),
 	mShadowCamera(
-	   std::make_shared < CameraOrthographic
+	   make_shared < CameraOrthographic
 	   > (position, rotation, -10.0f, 10.0f, 10.0f, -10.0f, 0.1f, 1000.0f)) {
 }
 

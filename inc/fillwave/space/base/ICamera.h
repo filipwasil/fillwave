@@ -46,8 +46,7 @@ class ICamera: public Moveable {
 	GLboolean mRefreshProjection;
 };
 } /* framework */
-typedef std::shared_ptr<framework::ICamera> pICamera;
-typedef std::weak_ptr<framework::ICamera> pwICamera;
+typedef framework::PtrShared<framework::ICamera> pICamera;
 } /* fillwave */
 
 #endif /* CAMERA_H_ */

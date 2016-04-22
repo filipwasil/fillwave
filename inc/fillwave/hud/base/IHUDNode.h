@@ -73,7 +73,7 @@ class IHUDNode {
 };
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::IHUDNode> pIHUDNode;
+typedef framework::PtrShared<framework::IHUDNode> pIHUDNode;
 } /* namespace fillwave */
 
 #endif /* INC_FILLWAVE_HUD_IHUD_NODE_H_ */

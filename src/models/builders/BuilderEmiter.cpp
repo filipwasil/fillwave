@@ -33,14 +33,14 @@ BuilderEmiter::BuilderEmiter(Engine* engine) :
 }
 
 pIEmiterPoint BuilderEmiter::buildEmiterGPU() {
-	return std::make_shared < EmiterPointGPU
+	return make_shared < IEmiterPoint, EmiterPointGPU
 	       > (mEngine, mEmitingSourceRate, mHowMany, mColor, mAcceleration, mStartVelocity,
 	          mRobustnessVelocity, mStartPosition, mRobustnessPosition, mStartSize, mLifetime,
 	          mTexture, mBlendingSource, mBlendingDestination, mDepthTesting, mAlphaCutOff);
 }
 
 pIEmiterPoint BuilderEmiter::buildEmiterCPU() {
-	return std::make_shared < EmiterPointCPU
+	return make_shared < IEmiterPoint, EmiterPointCPU
 	       > (mEngine, mEmitingSourceRate, mHowMany, mColor, mAcceleration, mStartVelocity,
 	          mRobustnessVelocity, mStartPosition, mRobustnessPosition, mStartSize, mLifetime,
 	          mTexture, mBlendingSource, mBlendingDestination, mDepthTesting, mAlphaCutOff);

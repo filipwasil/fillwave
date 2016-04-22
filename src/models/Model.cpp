@@ -46,15 +46,16 @@ Model::Model(
 	std::vector<GLuint> indices = shape.getIndices();
 
 	core::VertexArray* vao = new core::VertexArray();
-	attach(std::make_shared<Mesh>(engine, material, diffuseMap,
-	                              normalMap, specularMap,
-	                              program, mProgramShadow, mProgramShadowColor,
-	                              loader.getOcclusionOptimizedQuery(),
-	                              loader.getAmbientOcclusionGeometry(),
-	                              loader.getAmbientOcclusionColor(), engine->getLightSystem(),
-	                              engine->storeBuffer<core::VertexBufferBasic> (vao, vertices),
-	                              engine->storeBuffer<core::IndexBuffer> (vao, indices),
-	                              mAnimator, GL_TRIANGLES, vao));
+	pEntity e = make_shared<Entity, Mesh>(engine, material, diffuseMap,
+	                                      normalMap, specularMap,
+	                                      program, mProgramShadow, mProgramShadowColor,
+	                                      loader.getOcclusionOptimizedQuery(),
+	                                      loader.getAmbientOcclusionGeometry(),
+	                                      loader.getAmbientOcclusionColor(), engine->getLightSystem(),
+	                                      engine->storeBuffer<core::VertexBufferBasic> (vao, vertices),
+	                                      engine->storeBuffer<core::IndexBuffer> (vao, indices),
+	                                      mAnimator, GL_TRIANGLES, vao);
+	attach(e);
 }
 
 Model::Model(Engine* engine, core::Program* program,
@@ -260,17 +261,17 @@ inline void Model::loadNodes(
 		const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
 		const aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
 
-		entity->attach(
-		   loadMesh(aMesh, Material(aMaterial),
-		            engine->storeTexture(diffuseMapPath.c_str()),
-		            engine->storeTexture(normalMapPath.c_str()),
-		            engine->storeTexture(specularMapPath.c_str()),
-		            engine));
+		pEntity e = loadMesh(aMesh, Material(aMaterial),
+		                     engine->storeTexture(diffuseMapPath.c_str()),
+		                     engine->storeTexture(normalMapPath.c_str()),
+		                     engine->storeTexture(specularMapPath.c_str()),
+		                     engine);
+		entity->attach(e);
 	}
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = buildHinge();
+		pEntity newEntity = make_shared<Entity, Hinge>();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get(),
 		          diffuseMapPath, normalMapPath, specularMapPath);
@@ -312,17 +313,17 @@ inline void Model::loadNodes(
 		       nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS) ?
 		   specularMapPathAssimp.data : "";
 
-		entity->attach(
-		   loadMesh(aMesh, Material(aMaterial),
-		            engine->storeTexture(diffuseMapPath.c_str()),
-		            engine->storeTexture(normalMapPath.c_str()),
-		            engine->storeTexture(specularMapPath.c_str()),
-		            engine));
+		pEntity e = loadMesh(aMesh, Material(aMaterial),
+		                     engine->storeTexture(diffuseMapPath.c_str()),
+		                     engine->storeTexture(normalMapPath.c_str()),
+		                     engine->storeTexture(specularMapPath.c_str()),
+		                     engine);
+		entity->attach(e);
 	}
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = buildHinge();
+		pEntity newEntity = make_shared<Entity, Hinge>();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get());
 	}
@@ -344,15 +345,15 @@ inline void Model::loadNodes(
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
 		const aiMesh* aMesh = scene->mMeshes[i];
-		pMesh mesh = loadMesh(aMesh, material, diffuseMap,
-		                      normalMap, specularMap,
-		                      engine);
+		pEntity mesh = loadMesh(aMesh, material, diffuseMap,
+		                        normalMap, specularMap,
+		                        engine);
 		entity->attach(mesh);
 	}
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = buildHinge();
+		pEntity newEntity = make_shared<Entity, Hinge>();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMap,
 		          normalMap, specularMap, material);
@@ -369,7 +370,7 @@ inline void Model::loadNodeTransformations(aiNode* node, Entity* entity) {
 	entity->moveTo(assimpToGlmVec3(position));
 }
 
-pMesh Model::loadMesh(
+pEntity Model::loadMesh(
    const aiMesh* shape,
    const Material& material,
    core::Texture2D* diffuseMap,
@@ -383,7 +384,7 @@ pMesh Model::loadMesh(
 
 	ProgramLoader loader(engine);
 	core::VertexArray* vao = new core::VertexArray();
-	return std::make_shared < Mesh
+	return make_shared < Entity, Mesh
 	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
@@ -394,14 +395,14 @@ pMesh Model::loadMesh(
 }
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-pMesh loadMesh(tinyobj::shape_t& shape,
-               const Material& material,
-               core::Texture2D* diffuseMap,
-               core::Texture2D* normalMap,
-               core::Texture2D* specularMap,
-               Engine* engine) {
+pEntity loadMesh(tinyobj::shape_t& shape,
+                 const Material& material,
+                 core::Texture2D* diffuseMap,
+                 core::Texture2D* normalMap,
+                 core::Texture2D* specularMap,
+                 Engine* engine) {
 #error "Not ready"
-	return pMesh();
+	return pEntity();
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
@@ -499,7 +500,7 @@ pModel buildModel(
    core::Texture2D* normalMap,
    core::Texture2D* specularMap,
    framework::Material material) {
-	return std::make_shared < framework::Model
+	return make_shared < framework::Model
 	       > (engine, program, shape, diffuseMap, normalMap, specularMap, material);
 }
 
@@ -511,7 +512,7 @@ pModel buildModel(
    const std::string& diffuseMapPath,
    const std::string& normalMapPath,
    const std::string& specularMapPath) {
-	return std::make_shared < framework::Model
+	return framework::make_shared < framework::Model
 	       > (engine, program, shapePath, diffuseMapPath, normalMapPath, specularMapPath);
 }
 
@@ -523,7 +524,7 @@ pModel buildModel(
    core::Texture2D* normalMap,
    core::Texture2D* specularMap,
    framework::Material material) {
-	return std::make_shared < framework::Model
+	return framework::make_shared < framework::Model
 	       > (engine, program, shapePath, diffuseMap, normalMap, specularMap, material);
 }
 
@@ -531,7 +532,7 @@ pModel buildModel(
    Engine* engine,
    core::Program* program,
    const std::string& shapePath) {
-	return std::make_shared < framework::Model > (engine, program, shapePath);
+	return framework::make_shared < framework::Model > (engine, program, shapePath);
 }
 
 } /* fillwave */

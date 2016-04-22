@@ -24,7 +24,7 @@ namespace core {
 class Program;
 }
 
-typedef std::shared_ptr<framework::Entity> pEntity;
+typedef framework::PtrShared<framework::Entity> pEntity;
 
 namespace framework {
 

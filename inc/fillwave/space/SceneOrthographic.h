@@ -15,7 +15,7 @@ namespace fillwave {
 namespace framework {
 class SceneOrthographic;
 }
-typedef std::shared_ptr<framework::SceneOrthographic> pSceneOrthographic;
+typedef framework::PtrShared<framework::SceneOrthographic> pSceneOrthographic;
 namespace framework {
 
 /*! \class SceneOrthographic

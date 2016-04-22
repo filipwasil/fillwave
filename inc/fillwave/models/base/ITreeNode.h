@@ -8,6 +8,8 @@
 #ifndef INC_FILLWAVE_MODELS_BASE_ITREENODE_H_
 #define INC_FILLWAVE_MODELS_BASE_ITREENODE_H_
 
+#include <fillwave/common/PtrShared.h>
+
 namespace fillwave {
 namespace framework {
 
@@ -24,7 +26,7 @@ class ITreeNode {
 };
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::ITreeNode> pITreeNode;
+typedef framework::PtrShared<framework::ITreeNode> pITreeNode;
 typedef std::unique_ptr<framework::ITreeNode> puITreeNode;
 } /* namespace fillwave */
 

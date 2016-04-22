@@ -49,7 +49,7 @@ class Terrain: public Entity {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Terrain> pTerrain;
+typedef framework::PtrShared<framework::Terrain> pTerrain;
 
 pTerrain buildTerrainVoxel(
    Engine* engine,

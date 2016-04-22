@@ -22,7 +22,7 @@ LightSpot::LightSpot(
 	Light(position, intensity, followed),
 	mShadowTexture(shadowTexture),
 	mShadowCamera(
-	   std::make_shared < CameraPerspective
+	   make_shared < CameraPerspective
 	   > (position, rotation, glm::radians(90.0f), 1.0f, //xxx fix
 	      0.1f, 1000.0f)) {
 }

@@ -60,6 +60,6 @@ class Fog: public IEffect {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Fog> pFog;
+typedef framework::PtrShared<framework::Fog> pFog;
 } /* fillwave*/
 #endif /* FOG_H_ */

@@ -92,7 +92,7 @@ void perform() {
 
    Material material;
 
-   pMeshTerrain terrain = std::make_shared<MeshTerrain>(gEngine,
+   pMeshTerrain terrain = framework::make_shared<MeshTerrain>(gEngine,
                                     gProgram,
                                     new MountainConstructor(),
                                     material,
@@ -103,7 +103,9 @@ void perform() {
                                     16);
    terrain->scaleTo(2.0);
    terrain->addEffect(fog);
-   gScene->attach(terrain);
+
+   pEntity e = terrain; //xxx not nice
+   gScene->attach(e);
 }
 
 void showDescription() {

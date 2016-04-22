@@ -38,7 +38,7 @@ class ScenePerspective: public IScene {
 
 } /* framework */
 
-typedef std::shared_ptr<framework::ScenePerspective> pScenePerspective;
+typedef framework::PtrShared<framework::ScenePerspective> pScenePerspective;
 
 pScenePerspective buildScenePerspective(pCameraPerspective camera =
       pCameraPerspective());

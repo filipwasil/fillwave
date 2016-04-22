@@ -83,7 +83,7 @@ class IScene: public TreePtr<pEntity> {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::IScene> pIScene;
+typedef framework::PtrShared<framework::IScene> pIScene;
 typedef std::unique_ptr<framework::IScene> puIScene;
 } /* fillwave */
 

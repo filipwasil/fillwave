@@ -51,7 +51,7 @@ class LightDirectional: public Light {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::LightDirectional> pLightDirectional;
+typedef framework::PtrShared<framework::LightDirectional> pLightDirectional;
 } /* fillwave */
 
 #endif /* LIGHTDIRECTIONAL_H_ */

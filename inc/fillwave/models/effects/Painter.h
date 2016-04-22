@@ -32,7 +32,7 @@ class Painter: public IEffect {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Painter> pPainter;
+typedef framework::PtrShared<framework::Painter> pPainter;
 } /* fillwave */
 
 #endif /* PAINTER_H_ */

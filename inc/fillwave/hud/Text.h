@@ -76,7 +76,7 @@ class Text: public IReloadable, public IHUDNode {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Text> pText;
+typedef framework::PtrShared<framework::Text> pText;
 typedef std::unique_ptr<framework::Text> puText;
 } /* fillwave */
 

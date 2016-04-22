@@ -35,7 +35,7 @@ class Cursor: public Impostor {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Cursor> pCursor;
+typedef framework::PtrShared<framework::Cursor> pCursor;
 
 pCursor buildCursor(Engine* engine, core::Texture* texture);
 

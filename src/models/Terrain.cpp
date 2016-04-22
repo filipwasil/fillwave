@@ -98,7 +98,7 @@ pTerrain buildTerrainVoxel(
 
 	GLfloat voxelGap = 0.2;
 
-	pTerrain terrain = std::make_shared < framework::Terrain
+	pTerrain terrain = framework::make_shared < framework::Terrain
 	                   > (engine, program, radius, voxelGap);
 
 	for (GLint i = 0; i <= radius; i++) {

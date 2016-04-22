@@ -23,7 +23,7 @@ PickableModel::PickableModel(std::string name,
                                                                            texturePath),
                                                                      mText(text),
                                                                      mName(name){
-   mPickedEffect = std::make_shared<framework::BoostColor>(2.0f);
+   mPickedEffect = framework::make_shared<framework::BoostColor>(2.0f);
 }
 
 PickableModel::~PickableModel() {

@@ -65,7 +65,7 @@ class Light: public Moveable {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Light> pLight;
+typedef framework::PtrShared<framework::Light> pLight;
 } /* fillwave */
 
 #endif /* LIGHT_H_ */

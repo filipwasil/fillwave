@@ -244,6 +244,6 @@ bool Entity::getRenderItem(RenderItem& /*item*/) {
 
 } /* framework */
 pEntity buildEntity() {
-	return std::make_shared<framework::Entity>();
+	return framework::PtrShared<framework::Entity>();
 }
 } /* fillwave */

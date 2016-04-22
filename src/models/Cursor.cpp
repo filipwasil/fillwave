@@ -54,6 +54,6 @@ void Cursor::initUniformsCache() {
 
 } /* framework */
 pCursor buildCursor(Engine* engine, core::Texture* texture) {
-	return std::make_shared < framework::Cursor > (engine, texture);
+	return framework::make_shared < framework::Cursor > (engine, texture);
 }
 } /* fillwave */

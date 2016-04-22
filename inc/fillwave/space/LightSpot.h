@@ -45,7 +45,7 @@ class LightSpot: public Light {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::LightSpot> pLightSpot;
+typedef framework::PtrShared<framework::LightSpot> pLightSpot;
 } /* fillwave */
 
 #endif /* LIGHTSPOT_H_ */

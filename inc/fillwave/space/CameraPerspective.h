@@ -44,7 +44,7 @@ class CameraPerspective: public ICamera {
 	void updateProjection();
 };
 } /* framework */
-typedef std::shared_ptr<framework::CameraPerspective> pCameraPerspective;
+typedef framework::PtrShared<framework::CameraPerspective> pCameraPerspective;
 typedef std::weak_ptr<framework::CameraPerspective> pwCameraPerspective;
 } /* fillwave */
 

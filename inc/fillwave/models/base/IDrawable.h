@@ -9,6 +9,7 @@
 #define INC_FILLWAVE_MODELS_BASE_IDRAWABLE_H_
 
 #include <fillwave/Math.h>
+#include <fillwave/common/PtrShared.h>
 #include <memory>
 
 namespace fillwave {
@@ -36,7 +37,7 @@ class IDrawable {
 };
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::IDrawable> pIDrawable;
+typedef framework::PtrShared<framework::IDrawable> pIDrawable;
 typedef std::unique_ptr<framework::IDrawable> pIuDrawable;
 } /* namespace fillwave */
 

@@ -50,7 +50,7 @@ class CameraOrthographic: public ICamera {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::CameraOrthographic> pCameraOrthographic;
+typedef framework::PtrShared<framework::CameraOrthographic> pCameraOrthographic;
 typedef std::weak_ptr<framework::CameraOrthographic> pwCameraOrthographic;
 } /* fillwave */
 

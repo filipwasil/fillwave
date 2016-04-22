@@ -33,10 +33,6 @@ class Hinge: public Entity {
 };
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::Hinge> pHinge;
-static pHinge buildHinge() {
-	return std::make_shared<framework::Hinge>();
-}
 } /* namespace fillwave */
 
 #endif /* SRC_MODELS_HINGE_H_ */

@@ -9,6 +9,7 @@
 #define EFFECT_H_
 
 #include <fillwave/core/pipeline/Program.h>
+#include <fillwave/common/PtrShared.h>
 
 namespace fillwave {
 namespace framework {
@@ -52,7 +53,7 @@ class IEffect {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::IEffect> pIEffect;
+typedef framework::PtrShared<framework::IEffect> pIEffect;
 typedef std::unique_ptr<framework::IEffect> puIEffect;
 } /* fillwave */
 
