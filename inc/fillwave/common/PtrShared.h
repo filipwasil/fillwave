@@ -14,23 +14,16 @@ namespace fillwave {
 namespace framework {
 
 template<typename T>
-class PtrShared {
- public:
-	PtrShared(T* p = nullptr)
-		: m(new MetaData(p, 1)) {
+struct PtrShared final {
+	PtrShared(T* ptr = nullptr)
+		:mRefs(new size_t(1)),  mPtr(ptr) {
 	}
 
 	template <class C>
-	PtrShared(const PtrShared<C>& other) {
-		m->mPtr = other.m->mPtr;
-		m->mRefs = other.m->mRefs;
-		++m->mRefs;
+	PtrShared(const PtrShared<C>& other) : mRefs(other.mRefs), mPtr(other.mPtr) {
+		++*mRefs;
 	}
 
-	PtrShared(const PtrShared<T>& other)
-		: m(other.m) {
-		++m->mRefs;
-	}
 	~PtrShared() {
 		reset();
 	}
@@ -38,73 +31,57 @@ class PtrShared {
 	PtrShared<T>& operator=(const PtrShared<T>& other) {
 		if (this != &other) {
 			reset();
-
-			m->mPtr = other.m->mPtr;
-			m->mRefs = other.m->mRefs;
+			mPtr = other.mPtr;
+			mRefs = other.mRefs;
+			++*mRefs;
 		}
 		return *this;
 	}
 
 	operator bool() const {
-		return nullptr == m->mPtr;
+		return nullptr == mPtr;
 	}
 
 	PtrShared<T>& operator=(T* p) {
-		if (m->mPtr != p) {
-			m = {p, 1};
+		if (mPtr != p) {
+			mPtr = p;
+			mRefs = 1;
 		}
 		return *this;
 	}
 
 	T& operator*() {
-		return m->mPtr;
+		return mPtr;
 	}
 
 	const T& operator*() const {
-		return m->mPtr;
+		return mPtr;
 	}
 
 	T* operator->() {
-		return m->mPtr;
+		return mPtr;
 	}
 
 	const T* operator->() const {
-		return m->mPtr;
+		return mPtr;
 	}
 
 	void reset() {
-		if (0 == --(m->mRefs)) {
-			delete m;
+		if (0 == --*mRefs) {
+			delete mRefs;
+			delete mPtr;
+			mPtr = nullptr;
 		}
 	}
+
 	T* get() const {
-		return m->mPtr;
+		return mPtr;
 	}
 
- private:
-	struct MetaData {
-		MetaData(T* p, size_t c) : mPtr(p), mRefs(c) {
+	size_t* mRefs;
 
-		}
-		template <class C>
-		MetaData(C& other) {
-			mRefs = ++other.mRefs;
-			mPtr = other.mPtr;
-		}
-		template <class C>
-		MetaData& operator=(C* p) {
-			if (mPtr != p) {
-				mPtr = p;
-				mRefs = 1;
-			}
-			return *this;
-		}
-		T* mPtr;
-		size_t mRefs;
-	};
-
- public:
-	MetaData* m;
+private:
+	T* mPtr;
 };
 
 template <class T, typename... P>
