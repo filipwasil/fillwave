@@ -49,8 +49,8 @@ MeshTerrain::MeshTerrain(
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
-			pEntity ptr =
-			   make_shared <  Entity, Mesh
+			auto ptr =
+			   make_shared < Mesh
 			   > (engine, m,
 			      engine->storeTexture(diffuseMapPath.c_str()),
 			      engine->storeTexture(normalMapPath.c_str()),
@@ -104,8 +104,8 @@ MeshTerrain::MeshTerrain(
 
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
-			pEntity ptr =
-			   make_shared <  Entity, Mesh
+			pMesh ptr =
+			   make_shared < Mesh
 			   > (engine, m, diffuseMap,
 			      normalMap, specularMap, program, loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),

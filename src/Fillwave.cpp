@@ -260,7 +260,7 @@ pText Engine::storeText(
 		font = newFont;
 	}
 
-	pText text = make_shared < framework::Text, framework::Text
+	pText text = make_shared < Text
 	             > (content, t, position, this, scale, font, color, effect);
 	mImpl->mTextManager.push_back(pText(text));
 	return text;

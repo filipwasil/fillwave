@@ -20,8 +20,8 @@ using ::testing::Return;
 TEST(ButtonTest, CanBePicked) {
 	GLchar* const argv[] = { "./" };
 	Engine* engine = new Engine(1, argv);
-	pTexture2D texture = engine->storeTexture("data/text.png");
-	pTexture2D empty;
+	core::Texture2D* texture = engine->storeTexture("data/text.png");
+	core::Texture2D* empty;
 
 	glm::vec3 color(1.0, 1.0, 1.0);
 	glm::vec2 position(1.0, 1.0);
@@ -34,7 +34,6 @@ TEST(ButtonTest, CanBePicked) {
 
 //	EXPECT_TRUE(button.isPickable());
 
-	texture.reset();
 	delete engine;
 
 }

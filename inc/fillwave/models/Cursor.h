@@ -36,9 +36,6 @@ class Cursor: public Impostor {
 
 } /* framework */
 typedef framework::PtrShared<framework::Cursor> pCursor;
-
-pCursor buildCursor(Engine* engine, core::Texture* texture);
-
 } /* fillwave */
 
 #endif /* CURSOR_H_ */

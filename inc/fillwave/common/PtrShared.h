@@ -9,14 +9,17 @@
 #define INC_FILLWAVE_COMMON_PTRSHARED_H_
 
 #include <cwchar>
+#include <memory>
 
 namespace fillwave {
 namespace framework {
 
+#ifdef FILLWAVE_COMPILATION_OPTIMIZE_SHARED_POINTERS
+
 template<typename T>
 struct PtrShared final {
 	PtrShared(T* ptr = nullptr)
-		:mRefs(new size_t(1)),  mPtr(ptr) {
+		:mRefs(new size_t(1)), mPtr(ptr) {
 	}
 
 	template <class C>
@@ -28,18 +31,32 @@ struct PtrShared final {
 		reset();
 	}
 
+	template <class C>
+	PtrShared<T>& operator=(const C& other ) {
+		if (this != &other) {
+			reset();
+			mPtr = other.mPtr;
+			mRefs = other.mRefs;
+		}
+		return *this;
+	}
+
+	PtrShared<T>& operator=(PtrShared<T>& other) {
+		if (this != &other) {
+			reset();
+			mPtr = other.mPtr;
+			mRefs = other.mRefs;
+		}
+		return *this;
+	}
+
 	PtrShared<T>& operator=(const PtrShared<T>& other) {
 		if (this != &other) {
 			reset();
 			mPtr = other.mPtr;
 			mRefs = other.mRefs;
-			++*mRefs;
 		}
 		return *this;
-	}
-
-	operator bool() const {
-		return nullptr == mPtr;
 	}
 
 	PtrShared<T>& operator=(T* p) {
@@ -48,6 +65,10 @@ struct PtrShared final {
 			mRefs = 1;
 		}
 		return *this;
+	}
+
+	operator bool() const {
+		return nullptr == mPtr;
 	}
 
 	T& operator*() {
@@ -79,8 +100,6 @@ struct PtrShared final {
 	}
 
 	size_t* mRefs;
-
-private:
 	T* mPtr;
 };
 
@@ -89,10 +108,17 @@ PtrShared<T> make_shared(P... p) {
 	return PtrShared<T>(new T(p...));
 }
 
-template <class T, class C, typename... P>
-PtrShared<T> make_shared(P... p) {
-	return PtrShared<T>(new C(p...));
+#else
+
+template<class T>
+using PtrShared = std::shared_ptr<T>;
+
+template <class T, typename... Args>
+auto make_shared(Args&&... args) -> decltype(std::make_shared(std::forward<Args>(args)...)) {
+  return std::make_shared<T>(std::forward<Args>(args)...);
 }
+
+#endif
 
 } /* namespace framework */
 } /* namespace fillwave */

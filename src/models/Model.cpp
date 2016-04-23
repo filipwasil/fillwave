@@ -46,7 +46,7 @@ Model::Model(
 	std::vector<GLuint> indices = shape.getIndices();
 
 	core::VertexArray* vao = new core::VertexArray();
-	pEntity e = make_shared<Entity, Mesh>(engine, material, diffuseMap,
+	pEntity e = make_shared<Mesh>(engine, material, diffuseMap,
 	                                      normalMap, specularMap,
 	                                      program, mProgramShadow, mProgramShadowColor,
 	                                      loader.getOcclusionOptimizedQuery(),
@@ -271,7 +271,7 @@ inline void Model::loadNodes(
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = make_shared<Entity, Hinge>();
+		pEntity newEntity = make_shared<Hinge>();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get(),
 		          diffuseMapPath, normalMapPath, specularMapPath);
@@ -323,7 +323,7 @@ inline void Model::loadNodes(
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = make_shared<Entity, Hinge>();
+		pEntity newEntity = make_shared<Hinge>();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get());
 	}
@@ -353,7 +353,7 @@ inline void Model::loadNodes(
 
 	/* Evaluate children */
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
-		pEntity newEntity = make_shared<Entity, Hinge>();
+		pEntity newEntity = make_shared<Hinge>();
 		entity->attach(newEntity);
 		loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMap,
 		          normalMap, specularMap, material);
@@ -384,7 +384,7 @@ pEntity Model::loadMesh(
 
 	ProgramLoader loader(engine);
 	core::VertexArray* vao = new core::VertexArray();
-	return make_shared < Entity, Mesh
+	return make_shared < Mesh
 	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
