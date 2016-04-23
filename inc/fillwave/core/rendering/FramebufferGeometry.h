@@ -12,6 +12,7 @@
 #include <fillwave/core/texturing/Parameter.h>
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/management/TextureSystem.h>
+#include <memory>
 
 namespace fillwave {
 class Engine;
@@ -56,6 +57,6 @@ class FramebufferGeometry: public Framebuffer {
 };
 
 } /* core */
-typedef std::shared_ptr<core::FramebufferGeometry> puFramebufferGeometry;
+typedef std::unique_ptr<core::FramebufferGeometry> puFramebufferGeometry;
 } /* fillwave */
 #endif /* FRAMEBUFFERGEOMETRY_H_ */

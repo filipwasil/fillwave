@@ -1,6 +1,6 @@
 set(FILLWAVE_REAL_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/common/Log.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/common/string.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/common/Strings.cpp
     )
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/mocks TEST_MOCKS_SOURCES)

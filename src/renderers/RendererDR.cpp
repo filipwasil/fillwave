@@ -12,6 +12,7 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/common/Macros.h>
 #include <fillwave/management/LightSystem.h>
+#include <memory>
 
 #if defined(FILLWAVE_GLES_3_0)
 #else
@@ -41,7 +42,7 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	mDeferredColorAttachments(5),
 	mDeferredDepthAttachments(1),
 	mGBuffer(
-	   make_unique<core::FramebufferGeometry>(mTextures, mScreenSize[0],
+		make_unique<core::FramebufferGeometry>(mTextures, mScreenSize[0],
 	         mScreenSize[1], mDeferredColorAttachments,
 	         mDeferredDepthAttachments)) {
 

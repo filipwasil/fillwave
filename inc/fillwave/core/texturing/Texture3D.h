@@ -77,7 +77,7 @@ class Texture3D: public Texture {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture3D> pTexture3D;
+typedef framework::PtrShared<core::Texture3D> pTexture3D;
 } /* fillwave */
 
 #endif /* TEXTURE3D_H_ */

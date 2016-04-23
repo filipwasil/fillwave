@@ -36,7 +36,7 @@ class Button: public IHUDNode, public IPickable {
 };
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::Button> pButton;
+typedef framework::PtrShared<framework::Button> pButton;
 } /* namespace fillwave */
 
 #endif /* INC_FILLWAVE_HUD_BUTTON_H_ */

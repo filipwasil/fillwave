@@ -34,7 +34,7 @@ public:
    };
 
 } /* framework */
-typedef std::shared_ptr<framework::GradientBall> pGradientBall;
+typedef framework::PtrShared<framework::GradientBall> pGradientBall;
 } /* fillwave */
 
 #endif /* GRADIENTBALL_H_ */

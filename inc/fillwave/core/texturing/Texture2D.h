@@ -45,7 +45,7 @@ class Texture2D: public Texture {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture2D> pTexture2D;
+typedef framework::PtrShared<core::Texture2D> pTexture2D;
 } /* fillwave */
 
 #endif /* TEXTURE_2D_H_ */

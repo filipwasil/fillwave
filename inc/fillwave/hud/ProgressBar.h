@@ -39,7 +39,7 @@ class ProgressBar: public IHUDNode {
 };
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::ProgressBar> pProgressBar;
+typedef framework::PtrShared<framework::ProgressBar> pProgressBar;
 } /* namespace fillwave */
 
 #endif /* INC_FILLWAVE_HUD_PROGRESSBAR_H_ */

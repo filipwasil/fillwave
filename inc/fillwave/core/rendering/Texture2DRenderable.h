@@ -49,7 +49,7 @@ class Texture2DRenderable: public Texture2D {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture2DRenderable> pTexture2DRenderable;
+typedef framework::PtrShared<core::Texture2DRenderable> pTexture2DRenderable;
 typedef std::unique_ptr<core::Texture2DRenderable> puTexture2DRenderable;
 } /* fillwave */
 #endif /* TEXTURE2DRENDERABLE_H_ */

@@ -25,7 +25,7 @@ class Texture1D: public Texture {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture1D> pTexture1D;
+typedef framework::PtrShared<core::Texture1D> pTexture1D;
 } /* fillwave */
 
 #endif /* TEXTURE1D_H_ */

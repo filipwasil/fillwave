@@ -39,7 +39,7 @@ class Texture3DRenderableDynamic: public Texture3DRenderable {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture3DRenderableDynamic>
+typedef framework::PtrShared<core::Texture3DRenderableDynamic>
 pTexture3DRenderableDynamic;
 } /* fillwave */
 

@@ -42,7 +42,7 @@ class Texture3DRenderable: public Texture3D {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture3DRenderable> pTexture3DRenderable;
+typedef framework::PtrShared<core::Texture3DRenderable> pTexture3DRenderable;
 } /* fillwave */
 
 #endif /* TEXTURE3DRENDERABLE_H_ */

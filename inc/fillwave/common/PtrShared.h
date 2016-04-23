@@ -8,6 +8,8 @@
 #ifndef INC_FILLWAVE_COMMON_PTRSHARED_H_
 #define INC_FILLWAVE_COMMON_PTRSHARED_H_
 
+#include <cwchar>
+
 namespace fillwave {
 namespace framework {
 

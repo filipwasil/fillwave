@@ -42,7 +42,7 @@ class Texture2DRenderableDynamic: public Texture2DRenderable {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture2DRenderableDynamic>
+typedef framework::PtrShared<core::Texture2DRenderableDynamic>
 pTexture2DRenderableDynamic;
 } /* fillwave */
 

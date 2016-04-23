@@ -9,7 +9,7 @@
 #define FRAMEBUFFER_H_
 
 #include <fillwave/core/GLObject.h>
-
+#include <fillwave/common/PtrShared.h>
 #include <memory>
 
 namespace fillwave {
@@ -52,7 +52,7 @@ class Framebuffer: public GLObject {
 };
 
 } /* core */
-typedef std::shared_ptr<core::Framebuffer> pFramebuffer;
+typedef framework::PtrShared<core::Framebuffer> pFramebuffer;
 typedef std::unique_ptr<core::Framebuffer> puFramebuffer;
 } /* fillwave */
 

@@ -1,7 +1,7 @@
 	# This adds another subdirectory, which has 'project(gtest)'.
 
 	add_subdirectory(ext/gtest/googlemock)
-    add_subdirectory(ext/glmock)
+#    add_subdirectory(ext/gtest/googletest)
 	
 	enable_testing()
 
@@ -37,10 +37,10 @@
     set_property(TARGET gmock PROPERTY COMPILE_FLAGS "-w -Wno-undef")
 	# Standard linking to gtest stuff.
 	target_link_libraries(runUnitTests gtest gtest_main)
-	target_link_libraries(runUnitTests gmock)
+	#target_link_libraries(runUnitTests gmock)
 
 	# Extra linking for the project.
-	target_link_libraries(runUnitTests fillwave_mock glmock)
+	target_link_libraries(runUnitTests fillwave_mock gmock)
 
 	# This is so you can do 'make test' to see all your tests run, instead of
 	# manually running the executable runUnitTests to see those specific tests.

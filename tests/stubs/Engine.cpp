@@ -25,7 +25,9 @@ Engine::Engine(GLint /*argc*/, GLchar* const argv[]) {
 
 Engine::~Engine() = default;
 
-core::Texture2D* Engine::storeTexture(const std::string& /*texturePath*/, const GLuint& /*mapType*/, framework::eCompression /*compression*/) {
+core::Texture2D* Engine::storeTexture(
+   const std::string& /*texturePath*/,
+   framework::eCompression /*compression = framework::eCompression::eNone*/) {
 	return nullptr;
 }
 

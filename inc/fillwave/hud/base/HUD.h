@@ -28,7 +28,7 @@ class HUD: public TreePtr<pIHUDNode> {
 };
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::HUD> pHUD;
+typedef framework::PtrShared<framework::HUD> pHUD;
 typedef std::unique_ptr<framework::HUD> puHUD;
 } /* namespace fillwave */
 
