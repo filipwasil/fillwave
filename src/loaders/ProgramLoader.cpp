@@ -1611,14 +1611,11 @@ core::Program* ProgramLoader::getDefaultDR() {
 }
 
 core::Program* ProgramLoader::getDefaultFR() {
-	ShaderLoaderFragment loaderFragment;
-	ShaderLoaderVertex loaderVertex;
-
 	core::Program* p = mEngine->storeProgram("default", {
 		mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag",
-		loaderFragment.getSource()),
+			ShaderLoaderFragment().getSource()),
 		mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert",
-		loaderVertex.getSource())
+			ShaderLoaderVertex().getSource())
 	});
 
 	initDefaultUniforms(p);

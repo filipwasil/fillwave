@@ -19,6 +19,10 @@ namespace framework {
  */
 
 class ShaderLoader {
+ public:
+	ShaderLoader() = default;
+	virtual ~ShaderLoader() = default;
+
  protected:
 #if defined(FILLWAVE_GLES_3_0)
 	const std::string mGLVersion = "#version 300 es\n";
@@ -39,10 +43,6 @@ class ShaderLoader {
 	const std::string mGLVaryingOut = "out";
 
 #endif /* defined(FILLWAVE_GLES_2_0) */
-
- public:
-	ShaderLoader() = default;
-	virtual ~ShaderLoader() = default;
 };
 
 } /* framework */
