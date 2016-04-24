@@ -22,8 +22,8 @@ ProgressBar::ProgressBar(
    glm::vec2 scale)
 	:
 	IHUDNode(texture,
-	         ProgramLoader(engine).getHUDCustomFragmentShader(shaderPath),
-	         position, scale),
+	        ProgramLoader(engine).getHUDCustomFragmentShader(shaderPath),
+	        position, scale),
 	mProgress(0.0) {
 
 }

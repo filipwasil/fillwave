@@ -18,24 +18,6 @@ using ::testing::AtLeast;
 using ::testing::Return;
 
 TEST(ButtonTest, CanBePicked) {
-	GLchar* const argv[] = { "./" };
-	Engine* engine = new Engine(1, argv);
-	pTexture2D texture = engine->storeTexture("data/text.png");
-	pTexture2D empty;
-
-	glm::vec3 color(1.0, 1.0, 1.0);
-	glm::vec2 position(1.0, 1.0);
-	glm::vec2 scale(1.0, 1.0);
-
-//	MockButton button = MockButton(engine, texture, position, scale);
-
-	//EXPECT_CALL(<Which object>, <should call which function>).Times(AtLeast(how many times))
-	//ON_CALL(button, pick(color)).Times(AtLeast(1));
-
-//	EXPECT_TRUE(button.isPickable());
-
-	texture.reset();
-	delete engine;
 
 }
 

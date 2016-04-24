@@ -25,7 +25,7 @@ rm -rf ../../fillwave_build/*
 cd ../../fillwave_build
 
 # Build library DEB
-cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DFILLWAVE_TESTS=OFF -DNDEBUG=OFF -DFILLWAVE_BUILD_LINUX_EXAMPLES=ON -DFILLWAVE_SUPPRESS_WARNINGS=OFF -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=OFF  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
+cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DFILLWAVE_TESTS=ON -DNDEBUG=OFF -DFILLWAVE_BUILD_LINUX_EXAMPLES=ON -DFILLWAVE_SUPPRESS_WARNINGS=OFF -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=OFF  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 sudo dpkg -i ./libfillwave-*-Linux.deb
 
 # Build dev DEB

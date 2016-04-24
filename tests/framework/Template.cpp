@@ -5,11 +5,11 @@
  *      Author: filip
  */
 
-#include <fillwave/Log.h>
+//#include <fillwave/Log.h>
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-FLOGINIT_DEFAULT()
+//FLOGINIT_DEFAULT()
 
 //using namespace fillwave;
 //using namespace fillwave::framework;

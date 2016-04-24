@@ -115,6 +115,12 @@ void Program::log() const {
 void Program::reload() {
 }
 
+	core::Program* buildProgram(
+			const std::vector<core::Shader*>& shaders,
+			GLboolean skipLinking) {
+		return nullptr;
+	}
+
 }
 }
 

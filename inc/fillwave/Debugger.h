@@ -16,15 +16,15 @@ class FramebufferGeometry;
 }
 
 enum class eDebuggerState {
-   eLightsSpot,
-   eLightsSpotColor,
-   eLightsSpotDepth,
-   eLightsPoint,
-   eLightsPointDepth,
-   eLightsPointColor,
-   ePickingMap,
-   eOff,
-   eToggleState
+	eLightsSpot,
+	eLightsSpotColor,
+	eLightsSpotDepth,
+	eLightsPoint,
+	eLightsPointDepth,
+	eLightsPointColor,
+	ePickingMap,
+	eOff,
+	eToggleState
 };
 
 class Engine;

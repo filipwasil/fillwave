@@ -32,7 +32,9 @@ class IHUDNode {
 		mProgram(program),
 		mPosition(position),
 		mScale(scale),
-		mBlending( { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }) {
+		mBlending( {
+		GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA
+	}) {
 
 	}
 

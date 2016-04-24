@@ -20,7 +20,7 @@ namespace fillwave {
 class Engine;
 
 enum class eTextEffect {
-   eNone, eBold
+	eNone, eBold
 };
 
 namespace framework {

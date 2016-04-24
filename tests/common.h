@@ -1,12 +1,9 @@
-/*
- * common.h
- *
- *  Created on: 22 Oct 2015
- *      Author: Filip Wasil
- */
+//
+// Created by filip on 24.04.16.
+//
 
-#ifndef TESTS_COMMON_H_
-#define TESTS_COMMON_H_
+#ifndef LIBFILLWAVE_COMMON_H
+#define LIBFILLWAVE_COMMON_H
 
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wuninitialized"
@@ -17,13 +14,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-//#include <fillwave/models/Model.h>
-
 #pragma GCC diagnostic pop
 
-//using namespace fillwave;
-//using namespace fillwave::framework;
-
-//pModel getTestModel(const std::string& path);
-
-#endif /* TESTS_COMMON_H_ */
+#endif //LIBFILLWAVE_COMMON_H

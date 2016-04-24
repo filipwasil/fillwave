@@ -2408,37 +2408,37 @@
           /* Drop-out Control Rules #4 and #6 */
 
           /* The specification neither provides an exact definition */
-          /* of a `stub' nor gives exact rules to exclude them.     */
+          /* of a `stubs' nor gives exact rules to exclude them.     */
           /*                                                        */
-          /* Here the constraints we use to recognize a stub.       */
+          /* Here the constraints we use to recognize a stubs.       */
           /*                                                        */
-          /*  upper stub:                                           */
+          /*  upper stubs:                                           */
           /*                                                        */
           /*   - P_Left and P_Right are in the same contour         */
           /*   - P_Right is the successor of P_Left in that contour */
           /*   - y is the top of P_Left and P_Right                 */
           /*                                                        */
-          /*  lower stub:                                           */
+          /*  lower stubs:                                           */
           /*                                                        */
           /*   - P_Left and P_Right are in the same contour         */
           /*   - P_Left is the successor of P_Right in that contour */
           /*   - y is the bottom of P_Left                          */
           /*                                                        */
-          /* We draw a stub if the following constraints are met.   */
+          /* We draw a stubs if the following constraints are met.   */
           /*                                                        */
-          /*   - for an upper or lower stub, there is top or bottom */
+          /*   - for an upper or lower stubs, there is top or bottom */
           /*     overshoot, respectively                            */
           /*   - the covered interval is greater or equal to a half */
           /*     pixel                                              */
 
-          /* upper stub test */
+          /* upper stubs test */
           if ( left->next == right                &&
                left->height <= 0                  &&
                !( left->flags & Overshoot_Top   &&
                   x2 - x1 >= ras.precision_half ) )
             return;
 
-          /* lower stub test */
+          /* lower stubs test */
           if ( right->next == left                 &&
                left->start == y                    &&
                !( left->flags & Overshoot_Bottom &&
@@ -2618,14 +2618,14 @@
         case 5: /* smart drop-outs excluding stubs  */
           /* see Vertical_Sweep_Drop for details */
 
-          /* rightmost stub test */
+          /* rightmost stubs test */
           if ( left->next == right                &&
                left->height <= 0                  &&
                !( left->flags & Overshoot_Top   &&
                   x2 - x1 >= ras.precision_half ) )
             return;
 
-          /* leftmost stub test */
+          /* leftmost stubs test */
           if ( right->next == left                 &&
                left->start == y                    &&
                !( left->flags & Overshoot_Bottom &&
@@ -2888,11 +2888,11 @@
         case 5: /* smart drop-outs excluding stubs  */
           /* see Vertical_Sweep_Drop for details */
 
-          /* rightmost stub test */
+          /* rightmost stubs test */
           if ( left->next == right && left->height <= 0 )
             return;
 
-          /* leftmost stub test */
+          /* leftmost stubs test */
           if ( right->next == left && left->start == y )
             return;
 

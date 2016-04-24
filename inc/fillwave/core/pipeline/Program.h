@@ -77,11 +77,9 @@ class Program {
 };
 
 } /* core */
-static core::Program* buildProgram( //xxx this should not be public
+core::Program* buildProgram(
    const std::vector<core::Shader*>& shaders,
-   GLboolean skipLinking = GL_FALSE) {
-	return new core::Program(shaders, skipLinking);
-}
+   GLboolean skipLinking = GL_FALSE);
 } /* fillwave */
 
 #endif /* GLPROGRAM_H_ */

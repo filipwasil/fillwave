@@ -41,9 +41,9 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	mDeferredColorAttachments(5),
 	mDeferredDepthAttachments(1),
 	mGBuffer(
-	   make_unique<core::FramebufferGeometry>(mTextures, mScreenSize[0],
-	         mScreenSize[1], mDeferredColorAttachments,
-	         mDeferredDepthAttachments)) {
+	  make_unique<core::FramebufferGeometry>(mTextures, mScreenSize[0],
+	        mScreenSize[1], mDeferredColorAttachments,
+	        mDeferredDepthAttachments)) {
 
 	framework::Sphere sphere(3.0f, 10.0f,
 	                         10.0f); // xxx hardcoded values fix ! todo !

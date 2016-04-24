@@ -16,11 +16,13 @@ using namespace fillwave;
 using namespace fillwave::framework;
 
 TEST (Engine, texture) {
-	GLchar* const argv[]= {"./"};
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wwrite-strings"
+	GLchar* const argv[] = {"0f0f "} ;
+#pragma GCC diagnostic pop
 	Engine* engine = new Engine(1, argv);
-	pTexture2D texture = engine->storeTexture("data/text.png");
-	pTexture2D empty;
+	core::Texture2D* texture = engine->storeTexture("data/text.png");
+	core::Texture2D* empty = nullptr;
 	EXPECT_EQ (texture, empty);
-	texture.reset();
 	delete engine;
 }

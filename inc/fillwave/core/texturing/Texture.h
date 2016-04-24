@@ -60,7 +60,7 @@ class Texture2DFileHeader {
  */
 
 enum class eMemoryAllocation {
-   eMallock, eNew, eNone
+	eMallock, eNew, eNone
 };
 
 /*! \class Texture2DFile

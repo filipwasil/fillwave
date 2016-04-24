@@ -328,6 +328,10 @@ void Program::reload() {
 	}
 	FLOG_CHECK("Program linking failed");
 }
-
 } /* core */
+core::Program* buildProgram(
+   const std::vector<core::Shader*>& shaders,
+   GLboolean skipLinking) {
+	return new core::Program(shaders, skipLinking);
+}
 } /* fillwave */
