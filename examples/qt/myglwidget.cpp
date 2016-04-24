@@ -27,6 +27,7 @@
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+#include <fillwave/space/ScenePerspective.h>
 #include "myglwidget.hpp"
 
 using namespace fillwave;
@@ -49,8 +50,8 @@ MyGLWidget::~MyGLWidget()
 void MyGLWidget::initializeGL()
 {
     mEngine = unique_ptr<Engine>(new Engine(mArgc, mArgv));
-    auto camera = make_shared<CameraPerspective>(glm::vec3(0.0,0.0,6.0), glm::quat());
-    auto scene = buildScenePerspective(camera);
+    pCameraPerspective camera = make_shared<CameraPerspective>(glm::vec3(0.0,0.0,6.0), glm::quat());
+    auto scene = make_shared<ScenePerspective>(camera);
     mEngine->setCurrentScene(scene);
     mEngine->storeText("Fillwave QT widget example", "FreeSans", glm::vec2(-0.95f, 0.2f), 50.0f);
 }

@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8.11)
 
 set(CMAKE_AUTOMOC ON)
 
+message(AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa)
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5OpenGL REQUIRED)
 
