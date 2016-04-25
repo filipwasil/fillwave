@@ -36,8 +36,11 @@ include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_TEXTURE_WRITER_INCLUDES}
                     ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
-                    ${FILLWAVE_MODEL_LOADER_INCLUDES}
                     /usr/include/freetype2) #uglt freetype2 needs /usr/local/include/freetype2/ft2build.h
+
+if(FILLWAVE_BUILD_PACK)
+    include_directories(${FILLWAVE_MODEL_LOADER_INCLUDES})
+endif()
 
 if(FILLWAVE_BUILD_PACK)
 	include_directories(${FILLWAVE_EXT_GLM_INCLUDES})
