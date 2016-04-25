@@ -35,8 +35,8 @@ Model::Model(
 	Programmable(program),
 	mAnimator(nullptr),
 	mLights(engine->getLightSystem()),
-	mAnimationCallback(nullptr),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
+	mEngine(engine) {
 
 	initShadowing(engine);
 
@@ -62,8 +62,8 @@ Model::Model(Engine* engine, core::Program* program,
 	Programmable(program),
 	mAnimator(nullptr),
 	mLights(engine->getLightSystem()),
-	mAnimationCallback(nullptr),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
+	mEngine(engine) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -169,8 +169,8 @@ Model::Model(
 	Programmable(program),
 	mAnimator(nullptr),
 	mLights(engine->getLightSystem()),
-	mAnimationCallback(nullptr),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
+	mEngine(engine) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -200,8 +200,8 @@ Model::Model(
 	Programmable(program),
 	mAnimator(nullptr),
 	mLights(engine->getLightSystem()),
-	mAnimationCallback(nullptr),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
+	mEngine(engine) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -221,9 +221,6 @@ Model::Model(
 }
 
 Model::~Model() {
-	if (mAnimationCallback) {
-		delete mAnimationCallback; //xxx this the source of all problems in double free
-	}
 	if (mAnimator) {
 		delete mAnimator;
 	}
@@ -238,8 +235,7 @@ inline void Model::initAnimations(const aiScene* scene) {
 	if (scene->HasAnimations()) {
 		mAnimator = new Animator(scene);
 		FLOG_DEBUG("attached TimedBoneUpdateCallback to model");
-		mAnimationCallback = new TimedBoneUpdateCallback(this);
-		this->attachHierarchyCallback(mAnimationCallback);
+		this->attachHierarchyCallback(make_unique<TimedBoneUpdateCallback>(this));
 	}
 }
 

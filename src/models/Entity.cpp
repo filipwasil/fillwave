@@ -150,12 +150,12 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	mRefreshExternal = GL_TRUE;
 }
 
-void Entity::attachHierarchyCallback(Callback* callback) {
-	mCallbacksHierarchy.push_back(callback);
+void Entity::attachHierarchyCallback(puCallback&& callback) {
+	mCallbacksHierarchy.push_back(std::move(callback));
 }
 
-void Entity::attachPrivateCallback(Callback* callback) {
-	mCallbacksPrivate.push_back(callback);
+void Entity::attachPrivateCallback(puCallback&& callback) {
+	mCallbacksPrivate.push_back(std::move(callback));
 }
 
 void Entity::detachHierarchyCallback(Callback* callback) {
@@ -200,8 +200,8 @@ void Entity::log() const {
 }
 
 inline void Entity::handleEvent( /* xxx refactor */
-   std::vector<Callback*>& callbacks, EventType& event) {
-	for (auto it : callbacks) {
+   std::vector<puCallback>& callbacks, EventType& event) {
+	for (auto& it : callbacks) {
 		if (it->isEnabled()) {
 			if (it->getEventType() == event.getType()) {
 				it->perform(event);
@@ -211,9 +211,9 @@ inline void Entity::handleEvent( /* xxx refactor */
 	eraseFinishedCallbacks(callbacks);
 }
 
-inline void Entity::eraseFinishedCallbacks(std::vector<Callback*>& callbacks) {
+inline void Entity::eraseFinishedCallbacks(std::vector<puCallback>& callbacks) {
 	auto _find_finished_function =
-	   [](Callback * m) -> bool {bool finished = m->isFinished(); if (finished) delete m; return finished;};
+	   [](puCallback& m) -> bool {return m->isFinished();};
 auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _find_finished_function);
@@ -221,10 +221,10 @@ auto _begin = callbacks.begin();
 }
 
 inline void Entity::detachCallback(
-   std::vector<Callback*>& callbacks,
+   std::vector<puCallback>& callbacks,
    Callback* callback) {
 	auto _compare_function =
-	   [callback](const Callback * m) -> bool {bool found = (m == callback); if (found) delete m; return found;};
+	   [callback](const puCallback& m) -> bool {return m.get() == callback;};
 auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _compare_function);

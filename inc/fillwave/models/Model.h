@@ -79,8 +79,8 @@ class Model: public Programmable {
 	      mUniformLocationCacheBonesShadowColor;
  private:
 	/* Animation */
-	TimedBoneUpdateCallback* mAnimationCallback;
 	GLint mActiveAnimation;
+	Engine* mEngine;
 
 	/* Init */
 	void initUniformsCache();

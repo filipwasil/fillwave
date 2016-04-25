@@ -63,10 +63,6 @@ struct Engine::EngineImpl final {
 	framework::FileLoader mFileLoader;
 	framework::ProgramLoader mProgramLoader;
 
-	/* Scene */
-	pIScene mScene;
-	glm::vec3 mBackgroundColor;
-
 	/* Picking */
 	core::Texture2DRenderable* mPickingRenderableTexture;
 	puPixelBuffer mPickingPixelBuffer;
@@ -113,14 +109,17 @@ struct Engine::EngineImpl final {
 	/* Options */
 	GLboolean mIsOQ; /* Occlusion query */
 
-	/* Callbacks */
+		/* Scene */
+		pIScene mScene;
+		glm::vec3 mBackgroundColor;
+
+		/* Callbacks */
 	void runCallbacks();
 	void runCallbacks(framework::EventType& eventType);
 	void clearCallbacks();
 	void clearCallbacks(eEventType eventType);
 	void clearCallback(framework::Callback* callback);
-	void registerCallback(
-	   framework::Callback* callback);
+	void registerCallback(puCallback&& callback);
 	void unregisterCallback(
 	   framework::Callback* callback);
 
@@ -803,16 +802,19 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 /* Callbacks */
 
 void Engine::EngineImpl::registerCallback(
-   framework::Callback* callback) {
-	mCallbacks[callback->getEventType()].push_back(puCallback(callback));
+   puCallback&& callback) {
+	if (mCallbacks.find(callback->getEventType()) == mCallbacks.end()) {
+		mCallbacks[callback->getEventType()] = std::vector<puCallback>();
+	}
+	mCallbacks[callback->getEventType()].push_back(std::move(callback));
 }
 
 void Engine::EngineImpl::unregisterCallback(
    framework::Callback* callback) {
-	if (mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
+	if (!mCallbacks.empty() && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
 		std::vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
 		auto _compare_function =
-		   [callback](const puCallback & c) -> bool {bool found = (c.get() == callback); return found;};
+		   [callback](const puCallback & c) -> bool {return c.get() == callback;};
 		auto _begin = callbacks->begin();
 		auto _end = callbacks->end();
 		auto it = std::remove_if(_begin, _end, _compare_function);

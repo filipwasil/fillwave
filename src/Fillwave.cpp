@@ -184,8 +184,8 @@ void Engine::clearCallbacks() {
 }
 
 /* Callbacks registeration */
-void Engine::registerCallback(framework::Callback* callback) {
-	mImpl->registerCallback(callback);
+void Engine::registerCallback(puCallback&& callback) {
+	mImpl->registerCallback(std::move(callback));
 }
 
 void Engine::unregisterCallback(framework::Callback* callback) {
@@ -392,7 +392,7 @@ void Engine::configureFPSCounter(
 		/* Provide callback to refresh the FPS value */
 		mImpl->mTextFPSCallback = new framework::FPSCallback(this,
 		      mImpl->mFPSText);
-		registerCallback(mImpl->mTextFPSCallback);
+		registerCallback(std::unique_ptr<Callback>(mImpl->mTextFPSCallback));
 	} else {
 		mImpl->mFPSText.reset();
 		unregisterCallback(mImpl->mTextFPSCallback);

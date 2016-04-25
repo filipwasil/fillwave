@@ -56,8 +56,8 @@ class Entity:
 	void setTransformation(glm::mat4 modelMatrix);
 
 	/* Callbacks */
-	void attachHierarchyCallback(Callback* callback);
-	void attachPrivateCallback(Callback* callback);
+	void attachHierarchyCallback(puCallback&& callback);
+	void attachPrivateCallback(puCallback&& callback);
 	void detachHierarchyCallback(Callback* callback);
 	void detachPrivateCallback(Callback* callback);
 
@@ -99,16 +99,16 @@ class Entity:
 
 	GLboolean mChildrenPropagateEvent;
 	GLboolean mParentRefresh;
-	std::vector<Callback*> mCallbacksHierarchy;
-	std::vector<Callback*> mCallbacksPrivate;
+	std::vector<puCallback> mCallbacksHierarchy;
+	std::vector<puCallback> mCallbacksPrivate;
 
 	GLboolean mPSC;
 	GLboolean mPSR;
 
  private:
-	void handleEvent(std::vector<Callback*>& callbacks, EventType& event);
-	void eraseFinishedCallbacks(std::vector<Callback*>& callbacks);
-	void detachCallback(std::vector<Callback*>& callbacks, Callback* callback);
+	void handleEvent(std::vector<puCallback>& callbacks, EventType& event);
+	void eraseFinishedCallbacks(std::vector<puCallback>& callbacks);
+	void detachCallback(std::vector<puCallback>& callbacks, Callback* callback);
 };
 } /* framework */
 pEntity buildEntity();

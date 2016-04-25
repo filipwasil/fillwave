@@ -214,7 +214,7 @@ class Engine final {
 	/* Inputs */
 	void insertInput(framework::EventType& event);
 	void insertResizeScreen(GLuint width, GLuint height);
-	void registerCallback(framework::Callback* callback);
+	void registerCallback(puCallback&& callback);
 	void unregisterCallback(framework::Callback* callback);
 	void clearCallback(framework::Callback* callback);
 	void clearCallbacks(eEventType eventType);
