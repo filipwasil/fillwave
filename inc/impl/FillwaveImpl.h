@@ -182,11 +182,11 @@ Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
 	: mEngine(engine),
 	  mFileLoader(rootPath),
 	  mProgramLoader(engine),
-	  mBackgroundColor(0.1, 0.1, 0.1),
 	  mFrameCounter(0),
 	  mTimeFactor(1.0),
 	  mStartupTime(0.0f),
-	  mIsOQ(GL_FALSE) {
+	  mIsOQ(GL_FALSE),
+	  mBackgroundColor(0.1, 0.1, 0.1){
 //	init();
 }
 
@@ -194,11 +194,11 @@ Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
 	: mEngine(engine),
 	  mFileLoader(activity->internalDataPath),
 	  mProgramLoader(engine),
-	  mBackgroundColor(0.1, 0.1, 0.1),
 	  mFrameCounter(0),
 	  mTimeFactor(1.0),
 	  mStartupTime(0.0f),
-	  mIsOQ(GL_FALSE) {
+	  mIsOQ(GL_FALSE),
+	  mBackgroundColor(0.1, 0.1, 0.1) {
 
 	androidSetActivity(activity);
 
@@ -209,12 +209,12 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 	: mEngine(engine),
 	  mFileLoader(getFilePathOnly(argv[0])),
 	  mProgramLoader(engine),
-	  mBackgroundColor(0.1, 0.1, 0.1),
 	  mShaders(),
 	  mFrameCounter(0),
 	  mTimeFactor(1.0),
 	  mStartupTime(0.0f),
-	  mIsOQ(GL_TRUE) {
+	  mIsOQ(GL_TRUE),
+	  mBackgroundColor(0.1, 0.1, 0.1){
 #endif
 //	init();
 }
