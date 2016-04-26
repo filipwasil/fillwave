@@ -24,7 +24,7 @@ namespace core {
 class Program;
 }
 
-typedef std::shared_ptr<framework::Entity> pEntity;
+typedef std::unique_ptr<framework::Entity> puEntity;
 
 namespace framework {
 
@@ -34,7 +34,7 @@ namespace framework {
 
 class Entity:
 	public IRenderable, public IPickable, public Moveable,
-	public TreePtr<pEntity> {
+	public TreePtr<Entity> {
  public:
 	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
 	          glm::quat(1.0, 0.0, 0.0, 0.0));
@@ -111,7 +111,7 @@ class Entity:
 	void detachCallback(std::vector<puCallback>& callbacks, Callback* callback);
 };
 } /* framework */
-pEntity buildEntity();
+puEntity buildEntity();
 } /* fillwave */
 
 #endif /* ENTITY_H_ */
