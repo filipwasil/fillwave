@@ -24,7 +24,7 @@ namespace framework {
  * \brief Entity to be a root of Entity tree.
  */
 
-class IScene: public TreePtr<pEntity> {
+class IScene: public TreePtr<Entity> {
  public:
 	IScene(IRenderer* renderer = new RendererFR());
 
@@ -47,7 +47,7 @@ class IScene: public TreePtr<pEntity> {
 	void setHUD(pHUD& hud);
 
 	/* Pickable */
-	void registerPickable(pEntity entity);
+	void registerPickable(Entity* entity);
 	void pick(glm::ivec4 color);
 
 	/* Events */
@@ -72,8 +72,8 @@ class IScene: public TreePtr<pEntity> {
  protected:
 	pCursor mCursor;
 	pSkybox mSkybox;
-	std::unordered_map<GLint, pEntity> mPickingTable;
-	pEntity mLastPicked;
+	std::unordered_map<GLint, Entity*> mPickingTable;
+	Entity* mLastPicked;
 	glm::vec3 mAmbientGlobal;
 	puIRenderer mRenderer;
 	pHUD mHUD;

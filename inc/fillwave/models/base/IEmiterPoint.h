@@ -63,7 +63,7 @@ class IEmiterPoint: public IReloadable, public Entity {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::IEmiterPoint> pIEmiterPoint;
+typedef std::unique_ptr<framework::IEmiterPoint> puIEmiterPoint;
 } /* fillwave */
 
 #endif /* EMITERPOINT_H_ */

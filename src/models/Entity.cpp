@@ -8,7 +8,7 @@
 #include <fillwave/models/Entity.h>
 
 #include <fillwave/Log.h>
-
+#include <fillwave/common/Macros.h>
 #include <algorithm>
 
 FLOGINIT("Entity", FERROR | FFATAL)
@@ -170,7 +170,7 @@ void Entity::pick(glm::vec3 color) {
 	mFlagPickable = true;
 	mPickColor = color;
 	std::for_each(mChildren.begin(), mChildren.end(),
-	[color](pEntity e) {
+	[color](puEntity & e) {
 		e->pick(color);
 	});
 }
@@ -178,7 +178,7 @@ void Entity::pick(glm::vec3 color) {
 void Entity::unpick() {
 	mFlagPickable = false;
 	std::for_each(mChildren.begin(), mChildren.end(),
-	[](pEntity e) {
+	[](puEntity & e) {
 		e->unpick();
 	});
 }
@@ -243,7 +243,7 @@ bool Entity::getRenderItem(RenderItem& /*item*/) {
 }
 
 } /* framework */
-pEntity buildEntity() {
-	return std::make_shared<framework::Entity>();
+puEntity buildEntity() {
+	return framework::make_unique<framework::Entity>();
 }
 } /* fillwave */

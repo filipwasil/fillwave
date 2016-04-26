@@ -51,7 +51,7 @@ public:
    virtual ~ColorPickingCallback() = default;
    void perform (EventType& eventType);
 private:
-   pEntity mCurrentlyPicked;
+   Entity* mCurrentlyPicked;
 	Engine* mEngine;
 };
 
