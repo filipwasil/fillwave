@@ -207,8 +207,8 @@ class Engine final {
 	                       framework::FILLWAVE_ENDLESS);
 
 	/* Inputs - focus */
-	void setFocus(eEventType eventType, pEntity entity);
-	pEntity getFocus(eEventType eventType) const;
+	void setFocus(eEventType eventType, framework::Entity* entity);
+	framework::Entity* getFocus(eEventType eventType) const;
 	void clearFocus(eEventType eventType);
 
 	/* Inputs */

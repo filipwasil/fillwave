@@ -8,7 +8,7 @@
 #include <fillwave/models/Entity.h>
 
 #include <fillwave/Log.h>
-
+#include <fillwave/common/Macros.h>
 #include <algorithm>
 
 FLOGINIT("Entity", FERROR | FFATAL)
@@ -170,7 +170,7 @@ void Entity::pick(glm::vec3 color) {
 	mFlagPickable = true;
 	mPickColor = color;
 	std::for_each(mChildren.begin(), mChildren.end(),
-	[color](pEntity e) {
+	[color](puEntity & e) {
 		e->pick(color);
 	});
 }
@@ -178,7 +178,7 @@ void Entity::pick(glm::vec3 color) {
 void Entity::unpick() {
 	mFlagPickable = false;
 	std::for_each(mChildren.begin(), mChildren.end(),
-	[](pEntity e) {
+	[](puEntity & e) {
 		e->unpick();
 	});
 }
@@ -213,8 +213,8 @@ inline void Entity::handleEvent( /* xxx refactor */
 
 inline void Entity::eraseFinishedCallbacks(std::vector<puCallback>& callbacks) {
 	auto _find_finished_function =
-	   [](puCallback& m) -> bool {return m->isFinished();};
-auto _begin = callbacks.begin();
+	   [](puCallback & m) -> bool {return m->isFinished();};
+	auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _find_finished_function);
 	callbacks.erase(it, _end);
@@ -224,8 +224,8 @@ inline void Entity::detachCallback(
    std::vector<puCallback>& callbacks,
    Callback* callback) {
 	auto _compare_function =
-	   [callback](const puCallback& m) -> bool {return m.get() == callback;};
-auto _begin = callbacks.begin();
+	   [callback](const puCallback & m) -> bool {return m.get() == callback;};
+	auto _begin = callbacks.begin();
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _compare_function);
 	callbacks.erase(it, _end);
@@ -243,7 +243,7 @@ bool Entity::getRenderItem(RenderItem& /*item*/) {
 }
 
 } /* framework */
-pEntity buildEntity() {
-	return std::make_shared<framework::Entity>();
+puEntity buildEntity() {
+	return framework::make_unique<framework::Entity>();
 }
 } /* fillwave */

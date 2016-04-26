@@ -24,7 +24,6 @@ class ITreeNode {
 };
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::ITreeNode> pITreeNode;
 typedef std::unique_ptr<framework::ITreeNode> puITreeNode;
 } /* namespace fillwave */
 

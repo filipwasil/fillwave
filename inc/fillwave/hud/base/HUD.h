@@ -19,7 +19,7 @@ namespace framework {
  * \brief Heads Up Display tree.
  */
 
-class HUD: public TreePtr<pIHUDNode> {
+class HUD: public TreePtr<IHUDNode> {
  public:
 	HUD() = default;
 	virtual ~HUD() = default;

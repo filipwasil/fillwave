@@ -164,7 +164,7 @@ core::VertexArray* Engine::storeVAO(framework::IReloadable* user,
 
 /* Inputs - insert */
 void Engine::insertInput(framework::EventType& event) {
-	if (pEntity moveable = getFocus(event.getType())) {
+	if (Entity* moveable = getFocus(event.getType())) {
 		moveable->handlePrivateEvent(event);
 	}
 	mImpl->runCallbacks(event);
@@ -193,16 +193,16 @@ void Engine::unregisterCallback(framework::Callback* callback) {
 }
 
 /* Focus set */
-void Engine::setFocus(eEventType eventType, pEntity entity) {
+void Engine::setFocus(eEventType eventType, Entity* entity) {
 	mImpl->mFocus[eventType] = entity;
 }
 
-pEntity Engine::getFocus(eEventType eventType) const {
+Entity* Engine::getFocus(eEventType eventType) const {
 	return mImpl->mFocus[eventType];
 }
 
 void Engine::clearFocus(eEventType eventType) {
-	mImpl->mFocus[eventType] = pEntity();
+	mImpl->mFocus[eventType] = nullptr;
 }
 
 pText Engine::storeText(

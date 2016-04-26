@@ -9,6 +9,7 @@
 #define SRC_MODELS_HINGE_H_
 
 #include <fillwave/models/Entity.h>
+#include <fillwave/common/Macros.h>
 
 namespace fillwave {
 namespace framework {
@@ -33,9 +34,9 @@ class Hinge: public Entity {
 };
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::Hinge> pHinge;
-static pHinge buildHinge() {
-	return std::make_shared<framework::Hinge>();
+typedef std::unique_ptr<framework::Hinge> puHinge;
+static puHinge buildHinge() {
+	return framework::make_unique<framework::Hinge>();
 }
 } /* namespace fillwave */
 

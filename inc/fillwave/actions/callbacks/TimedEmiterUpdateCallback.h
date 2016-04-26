@@ -21,7 +21,7 @@ namespace framework {
 class TimedEmiterUpdateCallback: public TimedCallback {
  public:
 	TimedEmiterUpdateCallback(
-	   pIEmiterPoint emiter,
+	   IEmiterPoint* emiter,
 	   GLfloat timeToFinish,
 	   EasingFunction easing = LinearInterpolation);
 
@@ -30,7 +30,7 @@ class TimedEmiterUpdateCallback: public TimedCallback {
 	void performTime(TimeEventData& data);
 
  protected:
-	pIEmiterPoint mEmiter;
+	IEmiterPoint* mEmiter;
 
  private:
 	GLfloat mTimePassed;

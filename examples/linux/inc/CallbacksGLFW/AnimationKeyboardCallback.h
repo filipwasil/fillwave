@@ -52,11 +52,11 @@ namespace framework {
 
 class AnimationKeyboardCallback: public Callback{
 public:
-   AnimationKeyboardCallback(pEntity entity, eEventType eventType);
+   AnimationKeyboardCallback(Entity* entity, eEventType eventType);
    virtual ~AnimationKeyboardCallback();
    void perform (EventType& event);
 private:
-   pEntity mEntity;
+   Entity* mEntity;
    };
 } /* framework */
 } /* fillwave */

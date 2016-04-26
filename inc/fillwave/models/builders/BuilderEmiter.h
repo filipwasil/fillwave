@@ -39,8 +39,8 @@ class BuilderEmiter {
 	BuilderEmiter& setBlendingDestination(GLenum destinationColor);
 	BuilderEmiter& setDepthTesting(GLboolean depthTesting);
 	BuilderEmiter& setAlphaCutOff(GLfloat cutOffLevel);
-	pIEmiterPoint buildEmiterGPU();
-	pIEmiterPoint buildEmiterCPU();
+	puIEmiterPoint buildEmiterGPU();
+	puIEmiterPoint buildEmiterCPU();
 
  private:
 	Engine* mEngine;

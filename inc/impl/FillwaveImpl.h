@@ -88,7 +88,7 @@ struct Engine::EngineImpl final {
 	core::VertexArray* mVAOOcclusion;
 
 	/* Inputs - focus */
-	std::map<eEventType, pEntity> mFocus;
+	std::map<eEventType, Entity*> mFocus;
 
 	/* Inputs - callbacks */
 	std::map<eEventType, std::vector<puCallback> > mCallbacks;
@@ -109,11 +109,11 @@ struct Engine::EngineImpl final {
 	/* Options */
 	GLboolean mIsOQ; /* Occlusion query */
 
-		/* Scene */
-		pIScene mScene;
-		glm::vec3 mBackgroundColor;
+	/* Scene */
+	pIScene mScene;
+	glm::vec3 mBackgroundColor;
 
-		/* Callbacks */
+	/* Callbacks */
 	void runCallbacks();
 	void runCallbacks(framework::EventType& eventType);
 	void clearCallbacks();
@@ -186,7 +186,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
 	  mTimeFactor(1.0),
 	  mStartupTime(0.0f),
 	  mIsOQ(GL_FALSE),
-	  mBackgroundColor(0.1, 0.1, 0.1){
+	  mBackgroundColor(0.1, 0.1, 0.1) {
 //	init();
 }
 
@@ -214,7 +214,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 	  mTimeFactor(1.0),
 	  mStartupTime(0.0f),
 	  mIsOQ(GL_TRUE),
-	  mBackgroundColor(0.1, 0.1, 0.1){
+	  mBackgroundColor(0.1, 0.1, 0.1) {
 #endif
 //	init();
 }
@@ -811,7 +811,8 @@ void Engine::EngineImpl::registerCallback(
 
 void Engine::EngineImpl::unregisterCallback(
    framework::Callback* callback) {
-	if (!mCallbacks.empty() && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
+	if (!mCallbacks.empty()
+	      && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
 		std::vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
 		auto _compare_function =
 		   [callback](const puCallback & c) -> bool {return c.get() == callback;};
