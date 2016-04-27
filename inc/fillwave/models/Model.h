@@ -9,6 +9,7 @@
 #define MODEL_H_
 
 #include <fillwave/models/base/Programmable.h>
+#include <fillwave/common/IFocusable.h>
 #include <fillwave/models/Mesh.h>
 #include <fillwave/Assets.h>
 
@@ -21,7 +22,7 @@ class TimedBoneUpdateCallback;
  * \brief Drawable Mesh set.
  */
 
-class Model: public Programmable {
+class Model: public IFocusable, public Programmable {
  public:
 
 	Model(
@@ -67,6 +68,7 @@ class Model: public Programmable {
 	void setActiveAnimation(GLint animationID);
 	GLint getActiveAnimations();
 
+	void handleFocusEvent(EventType& event) override;
 	void updateRenderer(IRenderer& renderer) override;
 
 	void log() const;
@@ -80,7 +82,6 @@ class Model: public Programmable {
  private:
 	/* Animation */
 	GLint mActiveAnimation;
-	Engine* mEngine;
 
 	/* Init */
 	void initUniformsCache();
@@ -136,40 +137,7 @@ class Model: public Programmable {
 };
 
 } /* framework */
-
 typedef std::unique_ptr<framework::Model> puModel;
-
-puModel buildModel(
-   Engine* engine,
-   core::Program* program,
-   framework::Shape<core::VertexBasic>& shape,
-   core::Texture2D* diffuseMap = nullptr,
-   core::Texture2D* normalMap = nullptr,
-   core::Texture2D* specularMap = nullptr,
-   framework::Material material = framework::Material());
-
-puModel buildModel(
-   Engine* engine,
-   core::Program* program,
-   const std::string& shapePath,
-   const std::string& diffuseMapPath,
-   const std::string& normalMapPath = "",
-   const std::string& specularMapPath = "");
-
-puModel buildModel(
-   Engine* engine,
-   core::Program* program,
-   const std::string& shapePath,
-   core::Texture2D* diffuseMap,
-   core::Texture2D* normalMap = nullptr,
-   core::Texture2D* specularMap = nullptr,
-   framework::Material material = framework::Material());
-
-puModel buildModel(
-   Engine* engine,
-   core::Program* program,
-   const std::string& shapePath);
-
 } /* fillwave */
 
 #endif /* MODEL_H_ */

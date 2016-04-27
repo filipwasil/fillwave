@@ -56,9 +56,10 @@ BuilderModelManual& BuilderModelManual::setMaterial(Material material) {
 	return (*this);
 }
 
-	puModel BuilderModelManual::build() {
-	return make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMap, mNormalMap,
-	                  mSpecularMap, mMaterial);
+puModel BuilderModelManual::build() {
+	return make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMap,
+	                          mNormalMap,
+	                          mSpecularMap, mMaterial);
 }
 
 } /* framework */
