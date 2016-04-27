@@ -485,48 +485,6 @@ inline void Model::evaluateAnimations() {
 void Model::updateRenderer(IRenderer& renderer) {
 	renderer.update(this);
 }
-
-pModel buildModel(
-   Engine* engine,
-   core::Program* program,
-   framework::Shape<core::VertexBasic>& shape,
-   core::Texture2D* diffuseMap,
-   core::Texture2D* normalMap,
-   core::Texture2D* specularMap,
-   framework::Material material) {
-	return std::make_shared < framework::Model
-	       > (engine, program, shape, diffuseMap, normalMap, specularMap, material);
-}
-
+		
 } /* framework */
-pModel buildModel(
-   Engine* engine,
-   core::Program* program,
-   const std::string& shapePath,
-   const std::string& diffuseMapPath,
-   const std::string& normalMapPath,
-   const std::string& specularMapPath) {
-	return std::make_shared < framework::Model
-	       > (engine, program, shapePath, diffuseMapPath, normalMapPath, specularMapPath);
-}
-
-pModel buildModel(
-   Engine* engine,
-   core::Program* program,
-   const std::string& shapePath,
-   core::Texture2D* diffuseMap,
-   core::Texture2D* normalMap,
-   core::Texture2D* specularMap,
-   framework::Material material) {
-	return std::make_shared < framework::Model
-	       > (engine, program, shapePath, diffuseMap, normalMap, specularMap, material);
-}
-
-pModel buildModel(
-   Engine* engine,
-   core::Program* program,
-   const std::string& shapePath) {
-	return std::make_shared < framework::Model > (engine, program, shapePath);
-}
-
 } /* fillwave */

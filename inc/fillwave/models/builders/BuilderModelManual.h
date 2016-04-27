@@ -34,7 +34,7 @@ class BuilderModelManual: public BuilderModel {
 	BuilderModelManual& setNormalMapTexture(core::Texture2D* texture);
 	BuilderModelManual& setSpecularMapTexture(core::Texture2D* texture);
 	BuilderModelManual& setMaterial(Material material);
-	pModel build();
+	puModel build();
 
  private:
 	core::Texture2D* mDiffuseMap;

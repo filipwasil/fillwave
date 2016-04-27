@@ -31,9 +31,9 @@ void perform(Engine* engine) {
     core::Program* program = loader.getDefault();
     core::Program* aprogram = loader.getDefaultBones();
 
-    pModel beast_animated = buildModel(engine, aprogram, "beast.dae");
-    pModel beast_animated1 = buildModel(engine, aprogram, "beast.dae");
-    pModel beast_animated2 = buildModel(engine, aprogram, "beast.dae");
+    puModel beast_animated = make_unique<Model>(engine, aprogram, "beast.dae");
+    puModel beast_animated1 = make_unique<Model>(engine, aprogram, "beast.dae");
+    puModel beast_animated2 = make_unique<Model>(engine, aprogram, "beast.dae");
 
     beast_animated->moveTo(glm::vec3(0.0,-2.0,0.0));
     beast_animated->setActiveAnimation(FILLWAVE_DO_NOT_ANIMATE);
@@ -81,7 +81,7 @@ void perform(Engine* engine) {
     //                l2->getShadowCamera()->rotateByX(glm::radians(-90.0));
 
 //    entity1->moveBy(glm::vec3(0.0,16.0,0.0));
-//    entity1->attach(buildModel(engine,
+//    entity1->attach(make_unique<Model>(engine,
 //                                   program,
 //                                   "sphere.obj",
 //                                   "255_255_255.color"));

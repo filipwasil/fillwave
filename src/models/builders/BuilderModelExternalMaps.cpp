@@ -6,6 +6,7 @@
  */
 
 #include <fillwave/models/builders/BuilderModelExternalMaps.h>
+#include <fillwave/common/Macros.h>
 
 FLOGINIT("BuilderModelExternalMaps", FERROR | FFATAL)
 
@@ -41,8 +42,8 @@ BuilderModel& BuilderModelExternalMaps::setSpecularMapPath(std::string& path) {
 	return *this;
 }
 
-pModel BuilderModelExternalMaps::build() {
-	return buildModel(mEngine, mProgram, mShapePath, mDiffuseMapPath,
+	puModel BuilderModelExternalMaps::build() {
+	return make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMapPath,
 	                  mNormalMapPath, mSpecularMapPath);
 }
 

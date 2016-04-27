@@ -63,7 +63,7 @@ void perform(fillwave::Engine* engine) {
 
    entity1->moveBy(glm::vec3(-1.0,4.0,0.0));
 
-   pModel beast_animated = buildModel(engine, aprogram, "beast.dae");
+   pModel beast_animated = make_unique<Model>(engine, aprogram, "beast.dae");
 
    scene->attach(beast_animated);
 

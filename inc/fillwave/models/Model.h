@@ -137,9 +137,9 @@ class Model: public Programmable {
 
 } /* framework */
 
-typedef std::shared_ptr<framework::Model> pModel;
+typedef std::unique_ptr<framework::Model> puModel;
 
-pModel buildModel(
+puModel buildModel(
    Engine* engine,
    core::Program* program,
    framework::Shape<core::VertexBasic>& shape,
@@ -148,7 +148,7 @@ pModel buildModel(
    core::Texture2D* specularMap = nullptr,
    framework::Material material = framework::Material());
 
-pModel buildModel(
+puModel buildModel(
    Engine* engine,
    core::Program* program,
    const std::string& shapePath,
@@ -156,7 +156,7 @@ pModel buildModel(
    const std::string& normalMapPath = "",
    const std::string& specularMapPath = "");
 
-pModel buildModel(
+puModel buildModel(
    Engine* engine,
    core::Program* program,
    const std::string& shapePath,
@@ -165,7 +165,7 @@ pModel buildModel(
    core::Texture2D* specularMap = nullptr,
    framework::Material material = framework::Material());
 
-pModel buildModel(
+puModel buildModel(
    Engine* engine,
    core::Program* program,
    const std::string& shapePath);

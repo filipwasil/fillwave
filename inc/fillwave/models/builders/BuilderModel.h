@@ -24,7 +24,7 @@ class BuilderModel {
 
 	virtual ~BuilderModel() = default;
 
-	virtual pModel build();
+	virtual puModel build();
 
 	BuilderModel& setModelPath(std::string& path);
 	BuilderModel& setProgram(core::Program* program);

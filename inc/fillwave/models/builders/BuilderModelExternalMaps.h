@@ -31,7 +31,7 @@ class BuilderModelExternalMaps: public BuilderModel {
 	BuilderModel& setdiffusePath(std::string& path);
 	BuilderModel& setNormalMapPath(std::string& path);
 	BuilderModel& setSpecularMapPath(std::string& path);
-	pModel build();
+	puModel build();
 
  private:
 	std::string mDiffuseMapPath;

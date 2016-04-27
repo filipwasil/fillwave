@@ -6,6 +6,7 @@
  */
 
 #include <fillwave/models/builders/BuilderModelManual.h>
+#include <fillwave/common/Macros.h>
 
 FLOGINIT("BuilderModelManual", FERROR | FFATAL)
 
@@ -55,8 +56,8 @@ BuilderModelManual& BuilderModelManual::setMaterial(Material material) {
 	return (*this);
 }
 
-pModel BuilderModelManual::build() {
-	return buildModel(mEngine, mProgram, mShapePath, mDiffuseMap, mNormalMap,
+	puModel BuilderModelManual::build() {
+	return make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMap, mNormalMap,
 	                  mSpecularMap, mMaterial);
 }
 

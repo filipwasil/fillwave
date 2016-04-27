@@ -22,7 +22,7 @@ namespace framework {
 class TimedColorCallback: public TimedCallback {
  public:
 	TimedColorCallback(
-	   pModel model,
+	   Model* model,
 	   glm::vec4 endColor,
 	   GLfloat lifeTime,
 	   EasingFunction easing);
@@ -38,7 +38,7 @@ class TimedColorCallback: public TimedCallback {
  private:
 	glm::vec4 mStartColor;
 	glm::vec4 mEndColor;
-	pModel mModel;
+	Model* mModel;
 	pPainter mPainter;
 };
 

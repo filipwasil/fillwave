@@ -30,9 +30,9 @@ class TreePtr: public ITreeNode {
 	virtual ~TreePtr() = default;
 
 	void attach(std::unique_ptr<T>&& node) {
+		node->onAttached(this);
 		mChildren.push_back(std::move(node));
 		mFlagAttachedDetached = true;
-		node->onAttached(this);
 	}
 
 	void detach(T* node) {

@@ -58,7 +58,7 @@ void perform(fillwave::Engine* engine) {
 
    for (GLint i=0;i<SPHERES;i++) {
       /* build */
-      gSpheres[i]= builder.build();//buildModel(engine, progDefault, "meshes/sphere.obj", "textures/test.png");
+      gSpheres[i]= builder.build();//make_unique<Model>(engine, progDefault, "meshes/sphere.obj", "textures/test.png");
 
       /* move */
       gSpheres[i]->scaleTo(0.1);

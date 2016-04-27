@@ -13,7 +13,7 @@ namespace fillwave {
 namespace framework {
 
 TimedColorCallback::TimedColorCallback(
-   pModel model,
+   Model* model,
    glm::vec4 endColor,
    GLfloat lifeTime,
    EasingFunction easing) :
