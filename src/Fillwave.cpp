@@ -164,8 +164,8 @@ core::VertexArray* Engine::storeVAO(framework::IReloadable* user,
 
 /* Inputs - insert */
 void Engine::insertInput(framework::EventType& event) {
-	if (Entity* moveable = getFocus(event.getType())) {
-		moveable->handlePrivateEvent(event);
+	if (nullptr != mImpl->mFocus.first) {
+		mImpl->mFocus.first->handleFocusEvent(event);
 	}
 	mImpl->runCallbacks(event);
 }
@@ -184,7 +184,17 @@ void Engine::clearCallbacks() {
 }
 
 /* Callbacks registeration */
-void Engine::registerCallback(puCallback&& callback) {
+void Engine::registerCallback(puCallback&& callback,
+                              framework::IFocusable* focusable) {
+	if (nullptr != focusable) {
+		if (mImpl->mFocus.first) {
+			dropFocus(mImpl->mFocus.first);
+		}
+		mImpl->mFocus.first = focusable;
+		mImpl->mFocus.second.push_back(callback.get());
+	}
+	mImpl->mFocus.first = focusable;
+
 	mImpl->registerCallback(std::move(callback));
 }
 
@@ -192,17 +202,13 @@ void Engine::unregisterCallback(framework::Callback* callback) {
 	mImpl->unregisterCallback(callback);
 }
 
-/* Focus set */
-void Engine::setFocus(eEventType eventType, Entity* entity) {
-	mImpl->mFocus[eventType] = entity;
-}
-
-Entity* Engine::getFocus(eEventType eventType) const {
-	return mImpl->mFocus[eventType];
-}
-
-void Engine::clearFocus(eEventType eventType) {
-	mImpl->mFocus[eventType] = nullptr;
+void Engine::dropFocus(framework::IFocusable* focusable) {
+	if (focusable) {
+		for (auto& it : mImpl->mFocus.second) {
+			mImpl->unregisterCallback(it);
+		}
+	}
+	mImpl->mFocus.first = nullptr;
 }
 
 pText Engine::storeText(
