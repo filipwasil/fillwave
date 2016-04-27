@@ -88,7 +88,7 @@ struct Engine::EngineImpl final {
 	core::VertexArray* mVAOOcclusion;
 
 	/* Inputs - focus */
-	std::map<eEventType, Entity*> mFocus;
+	std::pair<IFocusable*, std::vector<Callback*>> mFocus;
 
 	/* Inputs - callbacks */
 	std::map<eEventType, std::vector<puCallback> > mCallbacks;
@@ -811,15 +811,15 @@ void Engine::EngineImpl::registerCallback(
 
 void Engine::EngineImpl::unregisterCallback(
    framework::Callback* callback) {
+	FLOG_ERROR("mCallbacks.size() %lu", mCallbacks.size());
 	if (!mCallbacks.empty()
 	      && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
 		std::vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
 		auto _compare_function =
 		   [callback](const puCallback & c) -> bool {return c.get() == callback;};
-		auto _begin = callbacks->begin();
-		auto _end = callbacks->end();
-		auto it = std::remove_if(_begin, _end, _compare_function);
-		callbacks->erase(it, _end);
+		auto it = std::remove_if(callbacks->begin(), callbacks->end(),
+		                         _compare_function);
+		callbacks->erase(it, callbacks->end());
 	}
 }
 

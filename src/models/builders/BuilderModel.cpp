@@ -23,7 +23,7 @@ BuilderModel::BuilderModel(
 	mEngine(engine), mProgram(program), mShapePath(modelPath) {
 }
 
-	puModel BuilderModel::build() {
+puModel BuilderModel::build() {
 	return make_unique<Model>(mEngine, mProgram, mShapePath);
 }
 

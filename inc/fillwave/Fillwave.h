@@ -26,6 +26,9 @@ struct ANativeActivity;
 #endif
 
 namespace fillwave {
+namespace framework {
+class Focusable;
+}
 namespace core {
 /* All buffers should be there */
 //core::VertexBufferBasic
@@ -207,14 +210,13 @@ class Engine final {
 	                       framework::FILLWAVE_ENDLESS);
 
 	/* Inputs - focus */
-	void setFocus(eEventType eventType, framework::Entity* entity);
-	framework::Entity* getFocus(eEventType eventType) const;
-	void clearFocus(eEventType eventType);
+	void dropFocus(framework::IFocusable* focusable = nullptr);
 
 	/* Inputs */
 	void insertInput(framework::EventType& event);
 	void insertResizeScreen(GLuint width, GLuint height);
-	void registerCallback(puCallback&& callback);
+	void registerCallback(puCallback&& callback,
+	                      framework::IFocusable* focusable = nullptr);
 	void unregisterCallback(framework::Callback* callback);
 	void clearCallback(framework::Callback* callback);
 	void clearCallbacks(eEventType eventType);

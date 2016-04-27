@@ -9,7 +9,7 @@
 
 #include <fillwave/Log.h>
 #include <fillwave/common/Macros.h>
-#include <algorithm>
+#include <fillwave/common/IFocusable.h>
 
 FLOGINIT("Entity", FERROR | FFATAL)
 
@@ -111,14 +111,10 @@ void Entity::updateMatrixTree() {
 }
 
 void Entity::handleHierarchyEvent(EventType& event) {
-	handleEvent(mCallbacksHierarchy, event);
+	Callback::handleEvent(mCallbacksHierarchy, event);
 	for (auto& it : mChildren) {
 		it->handleHierarchyEvent(event);
 	}
-}
-
-void Entity::handlePrivateEvent(EventType& event) {
-	handleEvent(mCallbacksPrivate, event);
 }
 
 void Entity::setTransformation(glm::mat4 modelMatrix) {
@@ -154,16 +150,8 @@ void Entity::attachHierarchyCallback(puCallback&& callback) {
 	mCallbacksHierarchy.push_back(std::move(callback));
 }
 
-void Entity::attachPrivateCallback(puCallback&& callback) {
-	mCallbacksPrivate.push_back(std::move(callback));
-}
-
 void Entity::detachHierarchyCallback(Callback* callback) {
 	detachCallback(mCallbacksHierarchy, callback);
-}
-
-void Entity::detachPrivateCallback(Callback* callback) {
-	detachCallback(mCallbacksPrivate, callback);
 }
 
 void Entity::pick(glm::vec3 color) {
@@ -197,27 +185,6 @@ GLboolean Entity::isPSR() {
 
 void Entity::log() const {
 
-}
-
-inline void Entity::handleEvent( /* xxx refactor */
-   std::vector<puCallback>& callbacks, EventType& event) {
-	for (auto& it : callbacks) {
-		if (it->isEnabled()) {
-			if (it->getEventType() == event.getType()) {
-				it->perform(event);
-			}
-		}
-	}
-	eraseFinishedCallbacks(callbacks);
-}
-
-inline void Entity::eraseFinishedCallbacks(std::vector<puCallback>& callbacks) {
-	auto _find_finished_function =
-	   [](puCallback & m) -> bool {return m->isFinished();};
-	auto _begin = callbacks.begin();
-	auto _end = callbacks.end();
-	auto it = std::remove_if(_begin, _end, _find_finished_function);
-	callbacks.erase(it, _end);
 }
 
 inline void Entity::detachCallback(
