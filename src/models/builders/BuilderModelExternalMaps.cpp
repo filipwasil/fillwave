@@ -42,9 +42,9 @@ BuilderModel& BuilderModelExternalMaps::setSpecularMapPath(std::string& path) {
 	return *this;
 }
 
-	puModel BuilderModelExternalMaps::build() {
+puModel BuilderModelExternalMaps::build() {
 	return make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMapPath,
-	                  mNormalMapPath, mSpecularMapPath);
+	                          mNormalMapPath, mSpecularMapPath);
 }
 
 } /* framework */

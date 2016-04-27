@@ -12,6 +12,7 @@
 #include <fillwave/common/IPickable.h>
 #include <fillwave/space/base/ICamera.h>
 #include <fillwave/models/base/IRenderable.h>
+#include <fillwave/common/IFocusable.h>
 #include <fillwave/models/base/TreePtr.h>
 
 namespace fillwave {
@@ -47,7 +48,6 @@ class Entity:
 
 	/* Callbacks */
 	void handleHierarchyEvent(EventType& event);
-	void handlePrivateEvent(EventType& event);
 
 	/* Model */
 	glm::mat4 getPhysicsMMC();
@@ -57,9 +57,7 @@ class Entity:
 
 	/* Callbacks */
 	void attachHierarchyCallback(puCallback&& callback);
-	void attachPrivateCallback(puCallback&& callback);
 	void detachHierarchyCallback(Callback* callback);
-	void detachPrivateCallback(Callback* callback);
 
 	/* Parent */
 	void updateMatrixTree();
@@ -100,13 +98,11 @@ class Entity:
 	GLboolean mChildrenPropagateEvent;
 	GLboolean mParentRefresh;
 	std::vector<puCallback> mCallbacksHierarchy;
-	std::vector<puCallback> mCallbacksPrivate;
 
 	GLboolean mPSC;
 	GLboolean mPSR;
 
  private:
-	void handleEvent(std::vector<puCallback>& callbacks, EventType& event);
 	void eraseFinishedCallbacks(std::vector<puCallback>& callbacks);
 	void detachCallback(std::vector<puCallback>& callbacks, Callback* callback);
 };

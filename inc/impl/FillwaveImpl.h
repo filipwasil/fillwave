@@ -88,7 +88,7 @@ struct Engine::EngineImpl final {
 	core::VertexArray* mVAOOcclusion;
 
 	/* Inputs - focus */
-	std::map<eEventType, Entity*> mFocus;
+	std::pair<IFocusable*, std::vector<Callback*>> mFocus;
 
 	/* Inputs - callbacks */
 	std::map<eEventType, std::vector<puCallback> > mCallbacks;
