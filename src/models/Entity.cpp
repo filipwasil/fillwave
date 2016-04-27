@@ -199,7 +199,7 @@ void Entity::log() const {
 
 }
 
-inline void Entity::handleEvent( /* xxx refactor */
+inline void Entity::handleEvent(
    std::vector<puCallback>& callbacks, EventType& event) {
 	for (auto& it : callbacks) {
 		if (it->isEnabled()) {

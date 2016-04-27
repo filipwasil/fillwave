@@ -12,6 +12,7 @@
 #include <fillwave/common/IPickable.h>
 #include <fillwave/space/base/ICamera.h>
 #include <fillwave/models/base/IRenderable.h>
+#include <fillwave/common/Focusable.h>
 #include <fillwave/models/base/TreePtr.h>
 
 namespace fillwave {

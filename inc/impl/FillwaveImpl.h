@@ -92,6 +92,7 @@ struct Engine::EngineImpl final {
 
 	/* Inputs - callbacks */
 	std::map<eEventType, std::vector<puCallback> > mCallbacks;
+	std::map<Focusable* , std::vector<Callback*> > mCallbacksFocusable;
 
 	/* Extras */
 	puDebugger mDebugger;

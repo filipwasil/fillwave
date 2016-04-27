@@ -184,14 +184,30 @@ void Engine::clearCallbacks() {
 }
 
 /* Callbacks registeration */
-void Engine::registerCallback(puCallback&& callback) {
-	mImpl->registerCallback(std::move(callback));
-}
+void Engine::registerCallback(puCallback&& callback, Focusable* focusable) {
+		if (focusable) {
+			if (mImpl->mCallbacksFocusable.find(focusable) != mImpl->mCallbacksFocusable.end()) {
+				mImpl->mCallbacksFocusable[focusable].push_back(callback.get());
+			} else {
+				mImpl->mCallbacksFocusable[focusable] = std::vector<Callback*>();
+			}
+		}
+		mImpl->registerCallback(std::move(callback));
+	}
 
 void Engine::unregisterCallback(framework::Callback* callback) {
 	mImpl->unregisterCallback(callback);
 }
 
+	void Engine::unregisterCallback(framework::Focusable* focusable) {
+		auto it = mImpl->mCallbacksFocusable.find(focusable);
+		if (it != mImpl->mCallbacksFocusable.end()) {
+			for (auto& callback : (*it).second) {
+				unregisterCallback(callback);
+			}
+			mImpl->mCallbacksFocusable.clear();
+		}
+	}
 /* Focus set */
 void Engine::setFocus(eEventType eventType, Entity* entity) {
 	mImpl->mFocus[eventType] = entity;

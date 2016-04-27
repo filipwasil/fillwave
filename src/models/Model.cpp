@@ -32,11 +32,11 @@ Model::Model(
    core::Texture2D* normalMap,
    core::Texture2D* specularMap,
    const Material& material) :
+		Focusable(engine),
 	Programmable(program),
 	mAnimator(nullptr),
 	mLights(engine->getLightSystem()),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
-	mEngine(engine) {
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 	initShadowing(engine);
 
@@ -59,11 +59,11 @@ Model::Model(
 
 Model::Model(Engine* engine, core::Program* program,
              const std::string& shapePath) :
+		Focusable(engine),
 	Programmable(program),
 	mAnimator(nullptr),
 	mLights(engine->getLightSystem()),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
-	mEngine(engine) {
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -166,11 +166,11 @@ Model::Model(
    const std::string& diffuseMapPath,
    const std::string& normalMapPath,
    const std::string& specularMapPath) :
+		Focusable(engine),
 	Programmable(program),
 	mAnimator(nullptr),
 	mLights(engine->getLightSystem()),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
-	mEngine(engine) {
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -197,11 +197,11 @@ Model::Model(
    core::Texture2D* normalMap,
    core::Texture2D* specularMap,
    const Material& material) :
+		Focusable(engine),
 	Programmable(program),
 	mAnimator(nullptr),
 	mLights(engine->getLightSystem()),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
-	mEngine(engine) {
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
