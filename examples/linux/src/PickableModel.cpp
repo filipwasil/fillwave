@@ -17,13 +17,13 @@ PickableModel::PickableModel(std::string name,
                              Engine* engine,
                              core::Program* program,
                              const std::string& shapePath,
-                             const std::string& texturePath):framework::Model(engine,
-                                                                           program,
-                                                                           shapePath,
-                                                                           texturePath),
-                                                                     mText(text),
-                                                                     mName(name){
-   mPickedEffect = std::make_shared<framework::BoostColor>(2.0f);
+                             const std::string& texturePath): framework::Model(engine,
+	                                   program,
+	                                   shapePath,
+	                                   texturePath),
+	mText(text),
+	mName(name) {
+	mPickedEffect = std::make_shared<framework::BoostColor>(2.0f);
 }
 
 PickableModel::~PickableModel() {
@@ -31,10 +31,10 @@ PickableModel::~PickableModel() {
 }
 
 void PickableModel::onPicked() {
-   mText->editString("Picked " + mName);
-   addEffect(mPickedEffect);
+	mText->editString("Picked " + mName);
+	addEffect(mPickedEffect);
 }
 
 void PickableModel::onUnpicked() {
-   removeEffect(mPickedEffect);
+	removeEffect(mPickedEffect);
 }

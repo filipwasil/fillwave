@@ -7,6 +7,7 @@
 
 #include <fillwave/Fillwave.h>
 #include <fillwave/models/base/IReloadable.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Reloadable", FERROR | FFATAL)
 

@@ -6,6 +6,7 @@
  */
 
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Texture2DRenderableDynamic", FERROR | FFATAL | FDEBUG)
 

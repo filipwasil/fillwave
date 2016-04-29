@@ -59,11 +59,12 @@ class IScene: public TreePtr<Entity> {
 	void drawDepthColor(ICamera& camera, glm::vec3& position);
 
 	/* Interface */
-	virtual void draw() = 0;
-	virtual void drawDepthInt() = 0;
-	virtual void drawPicking() = 0;
-	virtual void drawOcclusion() = 0;
-	virtual pICamera getCamera() = 0;
+	void draw();
+	void drawDepthInt();
+	void drawPicking();
+	void drawOcclusion();
+	ICamera* getCamera();
+	void setCamera(puICamera&& camera);
 
 	/* Optional */
 	virtual void onShow();
@@ -77,13 +78,13 @@ class IScene: public TreePtr<Entity> {
 	glm::vec3 mAmbientGlobal;
 	puIRenderer mRenderer;
 	pHUD mHUD;
+	puICamera mCamera;
 
  private:
 	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::IScene> pIScene;
 typedef std::unique_ptr<framework::IScene> puIScene;
 } /* fillwave */
 

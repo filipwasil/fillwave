@@ -6,6 +6,7 @@
  */
 
 #include <fillwave/core/buffers/PixelBuffer.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("PixelBuffer", FERROR | FFATAL)
 

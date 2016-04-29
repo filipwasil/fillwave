@@ -34,22 +34,21 @@
 #include <QGLWidget>
 #include <memory>
 
-class MyGLWidget : public QGLWidget
-{
-    Q_OBJECT
-public:
-    MyGLWidget(int argc, char* argv[], QWidget *parent = 0);
-    virtual ~MyGLWidget();
+class MyGLWidget : public QGLWidget {
+	Q_OBJECT
+ public:
+	MyGLWidget(int argc, char* argv[], QWidget *parent = 0);
+	virtual ~MyGLWidget();
 
-protected:
-    virtual void initializeGL();
-    virtual void paintGL();
-    virtual void resizeGL(int width, int height);
+ protected:
+	virtual void initializeGL();
+	virtual void paintGL();
+	virtual void resizeGL(int width, int height);
 
-private:
-    std::unique_ptr<fillwave::Engine> mEngine;
-    int mArgc;
-    char** mArgv;
+ private:
+	std::unique_ptr<fillwave::Engine> mEngine;
+	int mArgc;
+	char** mArgv;
 };
 
 #endif // MYGLWIDGET_HPP

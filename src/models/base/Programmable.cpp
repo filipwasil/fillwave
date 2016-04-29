@@ -6,6 +6,7 @@
  */
 
 #include <fillwave/models/base/Programmable.h>
+#include <fillwave/Log.h>
 #include <algorithm>
 
 FLOGINIT("Programmable", FERROR | FFATAL)

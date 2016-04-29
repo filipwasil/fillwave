@@ -13,6 +13,7 @@
 #include <fillwave/Assets.h>
 #include <fillwave/common/Strings.h>
 #include <fillwave/management/LightSystem.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("ProgramLoader", FERROR | FFATAL)
 

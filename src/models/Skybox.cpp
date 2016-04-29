@@ -9,6 +9,7 @@
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/models/shapes/SphereSkybox.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Skybox", FERROR | FFATAL)
 

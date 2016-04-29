@@ -15,13 +15,13 @@ class Engine;
 namespace framework {
 
 class TimeStopCallback: public Callback {
-public:
-   TimeStopCallback(Engine* engine);
-   virtual ~TimeStopCallback();
-   void perform(EventType& event);
-private:
-   bool mTimeOn;
-   Engine* mEngine;
+ public:
+	TimeStopCallback(Engine* engine);
+	virtual ~TimeStopCallback();
+	void perform(EventType& event);
+ private:
+	bool mTimeOn;
+	Engine* mEngine;
 };
 
 } /* framework */

@@ -7,6 +7,7 @@
 
 #include <fillwave/space/LightDirectional.h>
 #include <fillwave/loaders/ProgramLoader.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("DirectionalLight", FERROR | FFATAL)
 

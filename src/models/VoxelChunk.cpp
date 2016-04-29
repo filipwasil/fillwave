@@ -8,6 +8,7 @@
 #include <fillwave/models/terrain/VoxelChunk.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/management/LightSystem.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("VoxelChunk", FERROR | FFATAL)
 

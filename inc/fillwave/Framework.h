@@ -29,8 +29,6 @@
 #include <fillwave/actions/events/TouchTEvent.h>
 
 /* Space */
-#include <fillwave/space/SceneOrthographic.h>
-#include <fillwave/space/ScenePerspective.h>
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
 #include <fillwave/space/LightDirectional.h>

@@ -87,11 +87,15 @@ struct Engine::EngineImpl final {
 	core::VertexBufferPosition* mVBOOcclusion;
 	core::VertexArray* mVAOOcclusion;
 
-	/* Inputs - focus */
-	std::pair<IFocusable*, std::vector<Callback*>> mFocus;
-
 	/* Inputs - callbacks */
 	std::map<eEventType, std::vector<puCallback> > mCallbacks;
+
+	/* Inputs - focus */
+#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
+	std::pair<IFocusable*, std::vector<Callback*>> mFocus;
+#else
+	std::map<IFocusable*, std::vector<Callback*>> mFocus;
+#endif
 
 	/* Extras */
 	puDebugger mDebugger;
@@ -110,7 +114,7 @@ struct Engine::EngineImpl final {
 	GLboolean mIsOQ; /* Occlusion query */
 
 	/* Scene */
-	pIScene mScene;
+	puIScene mScene;
 	glm::vec3 mBackgroundColor;
 
 	/* Callbacks */
@@ -187,7 +191,6 @@ Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
 	  mStartupTime(0.0f),
 	  mIsOQ(GL_FALSE),
 	  mBackgroundColor(0.1, 0.1, 0.1) {
-//	init();
 }
 
 Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
@@ -216,7 +219,6 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 	  mIsOQ(GL_TRUE),
 	  mBackgroundColor(0.1, 0.1, 0.1) {
 #endif
-//	init();
 }
 
 Engine::EngineImpl::~EngineImpl() {

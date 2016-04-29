@@ -81,8 +81,8 @@ class Engine final {
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 	/* Scene */
-	void setCurrentScene(pIScene scene);
-	pIScene getCurrentScene() const;
+	void setCurrentScene(puIScene&& scene);
+	framework::IScene* getCurrentScene() const;
 
 	/* Time */
 	GLuint getFramesPassed();

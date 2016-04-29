@@ -12,6 +12,7 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/common/Macros.h>
 #include <fillwave/management/LightSystem.h>
+#include <fillwave/Log.h>
 
 #if defined(FILLWAVE_GLES_3_0)
 #else

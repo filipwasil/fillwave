@@ -9,6 +9,7 @@
 #define BOXOCCLUSION_H_
 
 #include <fillwave/models/shapes/Quad.h>
+#include <fillwave/core/buffers/VertexBufferPosition.h>
 
 namespace fillwave {
 namespace framework {

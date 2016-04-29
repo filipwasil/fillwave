@@ -8,6 +8,7 @@
 #include <fillwave/hud/ProgressBar.h>
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/Log.h>
 
 FLOGINIT_DEFAULT()
 

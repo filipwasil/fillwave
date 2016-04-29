@@ -6,6 +6,7 @@
  */
 
 #include <fillwave/core/buffers/VertexBufferFloat.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferFloat", FERROR | FFATAL)
 

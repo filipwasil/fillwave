@@ -40,7 +40,7 @@ namespace framework {
  */
 
 class MountainConstructor: public VoxelConstructor {
-public:
+ public:
 	MountainConstructor();
 	virtual ~MountainConstructor();
 	GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y);

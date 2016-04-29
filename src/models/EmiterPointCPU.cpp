@@ -8,8 +8,8 @@
 
 #include <fillwave/models/EmiterPointCPU.h>
 #include <fillwave/loaders/ProgramLoader.h>
-
 #include <fillwave/Fillwave.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("EmiterPointCPU", FERROR | FFATAL | FINFO)
 

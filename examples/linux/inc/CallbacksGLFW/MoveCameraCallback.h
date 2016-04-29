@@ -47,23 +47,23 @@ namespace framework {
  */
 
 class MoveCameraCallback: public Callback {
-private:
-   float mSpeed;
-   GLFWwindow* mWindow;
-   Engine* mEngine;
-public:
+ private:
+	float mSpeed;
+	GLFWwindow* mWindow;
+	Engine* mEngine;
+ public:
 	MoveCameraCallback(
-			Engine* engine,
-			eEventType eventType,
-			float speed = 1.0,
-			GLFWwindow* window = nullptr);
-   virtual ~MoveCameraCallback();
+	   Engine* engine,
+	   eEventType eventType,
+	   float speed = 1.0,
+	   GLFWwindow* window = nullptr);
+	virtual ~MoveCameraCallback();
 
-   /* perform
-    * \brief Performs EngineCallback action
-    */
+	/* perform
+	 * \brief Performs EngineCallback action
+	 */
 
-   virtual void perform (EventType& event);
+	virtual void perform (EventType& event);
 };
 
 } /* framework */

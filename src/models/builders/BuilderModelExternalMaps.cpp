@@ -7,6 +7,7 @@
 
 #include <fillwave/models/builders/BuilderModelExternalMaps.h>
 #include <fillwave/common/Macros.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("BuilderModelExternalMaps", FERROR | FFATAL)
 

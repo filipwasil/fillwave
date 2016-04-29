@@ -7,6 +7,7 @@
 
 #include <fillwave/Fillwave.h>
 #include <fillwave/models/base/IEmiterPoint.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Emiter", FERROR | FFATAL)
 

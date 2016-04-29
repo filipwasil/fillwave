@@ -8,6 +8,7 @@
 #include <fillwave/models/Terrain.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/management/LightSystem.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Terrain", FERROR | FFATAL)
 

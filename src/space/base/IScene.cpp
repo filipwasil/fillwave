@@ -9,6 +9,7 @@
 #include <fillwave/space/base/IScene.h>
 #include <fillwave/renderers/RendererPBRP.h>
 #include <fillwave/common/Macros.h>
+#include <fillwave/Log.h>
 #include <algorithm>
 
 FLOGINIT("Scene", FERROR | FFATAL)
@@ -143,6 +144,37 @@ void IScene::updateRenderer() {
 void IScene::resetRenderer(GLuint screenWidth, GLuint screenHeight) {
 	mRenderer->clear();
 	mRenderer->reset(screenWidth, screenHeight);
+}
+
+void IScene::draw() {
+	mCamera->update();
+	mRenderer->draw(*(mCamera.get()));
+}
+
+void IScene::drawPicking() {
+	for (auto& it : mChildren) {
+		it->drawPicking(*(mCamera.get()));
+	}
+}
+
+void IScene::drawDepthInt() {
+	for (auto& it : mChildren) {
+		it->drawDepth(*(mCamera.get()));
+	}
+}
+
+void IScene::drawOcclusion() {
+	for (auto& it : mChildren) {
+		it->drawOcclusionBox(*(mCamera.get()));
+	}
+}
+
+void IScene::setCamera(puICamera&& camera) {
+	mCamera = std::move(camera);
+}
+
+ICamera* IScene::getCamera() {
+	return mCamera.get();
 }
 
 void IScene::onEvent(EventType& event) {

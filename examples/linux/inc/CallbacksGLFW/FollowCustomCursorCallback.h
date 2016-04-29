@@ -20,13 +20,13 @@ namespace framework {
  */
 
 class FollowCustomCursorCallback: public Callback {
-public:
-   FollowCustomCursorCallback(Engine* engine);
-   virtual ~FollowCustomCursorCallback() = default;
-   void perform (EventType& event);
-private:
-   Engine* mEngine;
-   };
+ public:
+	FollowCustomCursorCallback(Engine* engine);
+	virtual ~FollowCustomCursorCallback() = default;
+	void perform (EventType& event);
+ private:
+	Engine* mEngine;
+};
 
 } /* framework */
 } /* fillwave */

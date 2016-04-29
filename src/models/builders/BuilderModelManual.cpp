@@ -7,6 +7,7 @@
 
 #include <fillwave/models/builders/BuilderModelManual.h>
 #include <fillwave/common/Macros.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("BuilderModelManual", FERROR | FFATAL)
 

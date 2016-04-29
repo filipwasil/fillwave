@@ -10,6 +10,7 @@
  */
 
 #include <fillwave/core/buffers/IndexBuffer.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("IndexBuffer", FERROR | FFATAL)
 

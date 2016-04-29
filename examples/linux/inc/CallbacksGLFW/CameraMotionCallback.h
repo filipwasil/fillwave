@@ -20,14 +20,14 @@ namespace framework {
  */
 
 class CameraMotionCallback: public Callback {
-public:
-   CameraMotionCallback(Engine* engine);
-   virtual ~CameraMotionCallback() = default;
-   void perform (EventType& event);
-   glm::vec3 calculateNewPosition(float time);
-private:
-   float mTimePassed;
-   Engine* mEngine;
+ public:
+	CameraMotionCallback(Engine* engine);
+	virtual ~CameraMotionCallback() = default;
+	void perform (EventType& event);
+	glm::vec3 calculateNewPosition(float time);
+ private:
+	float mTimePassed;
+	Engine* mEngine;
 };
 
 } /* framework */

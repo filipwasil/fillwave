@@ -164,9 +164,15 @@ core::VertexArray* Engine::storeVAO(framework::IReloadable* user,
 
 /* Inputs - insert */
 void Engine::insertInput(framework::EventType& event) {
-	if (nullptr != mImpl->mFocus.first) {
+#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
+	if (mImpl->mFocus.first) {
 		mImpl->mFocus.first->handleFocusEvent(event);
 	}
+#else
+	for(auto& focusable : mImpl->mFocus) {
+		focusable.first->handleFocusEvent(event);
+	}
+#endif
 	mImpl->runCallbacks(event);
 }
 
@@ -186,23 +192,27 @@ void Engine::clearCallbacks() {
 /* Callbacks registeration */
 void Engine::registerCallback(puCallback&& callback,
                               framework::IFocusable* focusable) {
-	if (nullptr != focusable) {
+	if (focusable) {
+#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
 		if (mImpl->mFocus.first) {
 			dropFocus(mImpl->mFocus.first);
 		}
 		mImpl->mFocus.first = focusable;
 		mImpl->mFocus.second.push_back(callback.get());
+#else
+		if(mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
+			FLOG_ERROR("AAA");
+			mImpl->mFocus[focusable] = std::vector<Callback*> (1, callback.get());
+		} else {
+			mImpl->mFocus[focusable].push_back(callback.get());
+		}
+#endif
 	}
-	mImpl->mFocus.first = focusable;
-
 	mImpl->registerCallback(std::move(callback));
 }
 
-void Engine::unregisterCallback(framework::Callback* callback) {
-	mImpl->unregisterCallback(callback);
-}
-
 void Engine::dropFocus(framework::IFocusable* focusable) {
+#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
 	if (focusable == mImpl->mFocus.first) {
 		for (auto& it : mImpl->mFocus.second) {
 			mImpl->unregisterCallback(it);
@@ -210,6 +220,21 @@ void Engine::dropFocus(framework::IFocusable* focusable) {
 		mImpl->mFocus.first = nullptr;
 		mImpl->mFocus.second.clear();
 	}
+#else
+	FLOG_ERROR("mImpl->mFocus.size() %lu", mImpl->mFocus.size());
+	if(!mImpl->mFocus.empty()
+	      && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
+		FLOG_ERROR("1");
+		for (auto& it : mImpl->mFocus[focusable]) {
+			FLOG_ERROR("1");
+			mImpl->unregisterCallback(it);
+		}
+	}
+#endif
+}
+
+void Engine::unregisterCallback(framework::Callback* callback) {
+	mImpl->unregisterCallback(callback);
 }
 
 pText Engine::storeText(
@@ -320,19 +345,17 @@ GLfloat Engine::getStartupAnimationTime() const {
 	return mImpl->mStartupTimeLimit;
 }
 
-void Engine::setCurrentScene(pIScene scene) {
-	if (scene) {
-		if (mImpl->mScene) {
-			mImpl->mScene->onHide();
-		}
-		mImpl->mScene = scene;
-		mImpl->mScene->onShow();
-		mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
+void Engine::setCurrentScene(puIScene&& scene) {
+	if (mImpl->mScene) {
+		mImpl->mScene->onHide();
 	}
+	mImpl->mScene = std::move(scene);
+	mImpl->mScene->onShow();
+	mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-pIScene Engine::getCurrentScene() const {
-	return mImpl->mScene;
+IScene* Engine::getCurrentScene() const {
+	return mImpl->mScene.get();
 }
 
 framework::LightSystem* Engine::getLightSystem() const {

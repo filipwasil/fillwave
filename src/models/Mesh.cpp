@@ -13,6 +13,7 @@
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Profiler.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("Mesh", FERROR | FFATAL | FINFO)
 
