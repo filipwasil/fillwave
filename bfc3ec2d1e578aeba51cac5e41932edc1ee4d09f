@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_7db8b7e5",
+        "filename": "src/space/base/IScene.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2016-04-29T19:37:29Z",
+      "side": 0,
+      "message": "Looks dangerous",
+      "revId": "bfc3ec2d1e578aeba51cac5e41932edc1ee4d09f",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
