@@ -90,7 +90,7 @@ bool Terrain::getRenderItem(RenderItem& item) {
 }
 
 } /* models */
-pTerrain buildTerrainVoxel(
+	puTerrain buildTerrainVoxel(
    Engine* engine,
    core::Program* program,
    const std::string& texturePath,
@@ -99,7 +99,7 @@ pTerrain buildTerrainVoxel(
 
 	GLfloat voxelGap = 0.2;
 
-	pTerrain terrain = std::make_shared < framework::Terrain
+	puTerrain terrain = framework::make_unique < framework::Terrain
 	                   > (engine, program, radius, voxelGap);
 
 	for (GLint i = 0; i <= radius; i++) {

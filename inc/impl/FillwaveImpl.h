@@ -114,7 +114,7 @@ struct Engine::EngineImpl final {
 	GLboolean mIsOQ; /* Occlusion query */
 
 	/* Scene */
-	puIScene mScene;
+	puScene mScene;
 	glm::vec3 mBackgroundColor;
 
 	/* Callbacks */

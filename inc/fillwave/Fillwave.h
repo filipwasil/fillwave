@@ -8,7 +8,7 @@
 #ifndef FILLWAVE_H_
 #define FILLWAVE_H_
 
-#include <fillwave/space/base/IScene.h>
+#include <fillwave/space/Scene.h>
 
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
@@ -81,8 +81,8 @@ class Engine final {
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 	/* Scene */
-	void setCurrentScene(puIScene&& scene);
-	framework::IScene* getCurrentScene() const;
+	void setCurrentScene(puScene&& scene);
+	framework::Scene* getCurrentScene() const;
 
 	/* Time */
 	GLuint getFramesPassed();

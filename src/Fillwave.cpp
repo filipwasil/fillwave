@@ -345,7 +345,7 @@ GLfloat Engine::getStartupAnimationTime() const {
 	return mImpl->mStartupTimeLimit;
 }
 
-void Engine::setCurrentScene(puIScene&& scene) {
+void Engine::setCurrentScene(puScene&& scene) {
 	if (mImpl->mScene) {
 		mImpl->mScene->onHide();
 	}
@@ -354,7 +354,7 @@ void Engine::setCurrentScene(puIScene&& scene) {
 	mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-IScene* Engine::getCurrentScene() const {
+Scene* Engine::getCurrentScene() const {
 	return mImpl->mScene.get();
 }
 

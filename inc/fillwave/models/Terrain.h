@@ -49,9 +49,9 @@ class Terrain: public Entity {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Terrain> pTerrain;
+typedef std::unique_ptr<framework::Terrain> puTerrain;
 
-pTerrain buildTerrainVoxel(
+puTerrain buildTerrainVoxel(
    Engine* engine,
    core::Program* program,
    const std::string& texturePath,

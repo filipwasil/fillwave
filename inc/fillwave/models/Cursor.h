@@ -35,10 +35,7 @@ class Cursor: public Impostor {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Cursor> pCursor;
-
-pCursor buildCursor(Engine* engine, core::Texture* texture);
-
+typedef std::unique_ptr<framework::Cursor> puCursor;
 } /* fillwave */
 
 #endif /* CURSOR_H_ */

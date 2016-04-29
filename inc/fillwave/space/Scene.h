@@ -24,11 +24,11 @@ namespace framework {
  * \brief Entity to be a root of Entity tree.
  */
 
-class IScene: public TreePtr<Entity> {
+class Scene: public TreePtr<Entity> {
  public:
-	IScene(IRenderer* renderer = new RendererFR());
+	Scene(IRenderer* renderer = new RendererFR());
 
-	virtual ~IScene() = default;
+	virtual ~Scene() = default;
 
 	void updateDependencies();
 	void updateRenderer();
@@ -36,13 +36,13 @@ class IScene: public TreePtr<Entity> {
 	void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
 	/* Cursor */
-	void setCursor(pCursor& cursor);
-	pCursor getCursor();
+	void setCursor(puCursor&& cursor);
+	Cursor* getCursor();
 	void drawCursor();
 	void moveCursor(glm::vec2 position);
 
 	/* Scene */
-	void setSkybox(pSkybox& skybox);
+	void setSkybox(puSkybox&& skybox);
 	void setAmbient(glm::vec3 cursor);
 	void setHUD(pHUD& hud);
 
@@ -71,8 +71,8 @@ class IScene: public TreePtr<Entity> {
 	virtual void onHide();
 
  protected:
-	pCursor mCursor;
-	pSkybox mSkybox;
+	puCursor mCursor;
+	puSkybox mSkybox;
 	std::unordered_map<GLint, Entity*> mPickingTable;
 	Entity* mLastPicked;
 	glm::vec3 mAmbientGlobal;
@@ -85,7 +85,7 @@ class IScene: public TreePtr<Entity> {
 };
 
 } /* framework */
-typedef std::unique_ptr<framework::IScene> puIScene;
+typedef std::unique_ptr<framework::Scene> puScene;
 } /* fillwave */
 
 #endif /* SCENE_H_ */

@@ -44,7 +44,7 @@ class Impostor: public Entity, public Finishable {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Impostor> pImpostor;
+typedef std::unique_ptr<framework::Impostor> pImpostor;
 } /* fillwave */
 
 #endif /* IMPOSTOR_H_ */

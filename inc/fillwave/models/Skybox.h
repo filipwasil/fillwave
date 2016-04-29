@@ -54,8 +54,7 @@ class Skybox: public Entity, public IReloadable {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Skybox> pSkybox;
-pSkybox buildSkybox(Engine* engine, core::Texture3D* texture);
+typedef std::unique_ptr<framework::Skybox> puSkybox;
 } /* fillwave */
 
 #endif /* SKYBOX_H_ */

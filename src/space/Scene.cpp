@@ -6,7 +6,7 @@
  */
 
 #include <fillwave/actions/events/ResizeScreenTEvent.h>
-#include <fillwave/space/base/IScene.h>
+#include <fillwave/space/Scene.h>
 #include <fillwave/renderers/RendererPBRP.h>
 #include <fillwave/common/Macros.h>
 #include <fillwave/Log.h>
@@ -17,35 +17,35 @@ FLOGINIT("Scene", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-IScene::IScene(IRenderer* renderer) :
+	Scene::Scene(IRenderer* renderer) :
 	mAmbientGlobal(glm::vec3(1.0)), mRenderer(renderer) {
 }
 
-void IScene::setRenderer(IRenderer* renderer) {
+void Scene::setRenderer(IRenderer* renderer) {
 	mRenderer = std::unique_ptr < IRenderer > (renderer);
 }
 
-void IScene::setSkybox(pSkybox& skybox) {
-	mSkybox = skybox;
+void Scene::setSkybox(puSkybox&& skybox) {
+	mSkybox = std::move(skybox);
 }
 
-void IScene::setHUD(pHUD& hud) {
+void Scene::setHUD(pHUD& hud) {
 	mHUD = hud;
 }
 
-void IScene::setCursor(pCursor& cursor) {
-	mCursor = cursor;
+void Scene::setCursor(puCursor&& cursor) {
+	mCursor = std::move(cursor);
 }
 
-void IScene::setAmbient(glm::vec3 ambient) {
+void Scene::setAmbient(glm::vec3 ambient) {
 	mAmbientGlobal = ambient;
 }
 
-pCursor IScene::getCursor() {
-	return mCursor;
+Cursor* Scene::getCursor() {
+	return mCursor.get();
 }
 
-void IScene::moveCursor(glm::vec2 position) {
+void Scene::moveCursor(glm::vec2 position) {
 	if (mCursor) {
 		mCursor->move(position);
 	} else {
@@ -53,42 +53,42 @@ void IScene::moveCursor(glm::vec2 position) {
 	}
 }
 
-void IScene::updateDependencies() {
+void Scene::updateDependencies() {
 	for (auto& it : mChildren) {
 		it->updateMatrixTree();
 	}
 }
 
-void IScene::draw(ICamera& camera) {
+void Scene::draw(ICamera& camera) {
 	camera.update();
 	mRenderer->draw(camera);
 }
 
-void IScene::drawHUD() {
+void Scene::drawHUD() {
 	if (mHUD) {
 		mHUD->draw();
 	}
 }
 
-void IScene::drawCursor() {
+void Scene::drawCursor() {
 	if (mCursor) {
 		mCursor->draw();
 	}
 }
 
-void IScene::drawDepth(ICamera& camera) {
+void Scene::drawDepth(ICamera& camera) {
 	for (auto& it : mChildren) {
 		it->drawDepth(camera);
 	}
 }
 
-void IScene::drawDepthColor(ICamera& camera, glm::vec3& position) {
+void Scene::drawDepthColor(ICamera& camera, glm::vec3& position) {
 	for (auto& it : mChildren) {
 		it->drawDepthColor(camera, position);
 	}
 }
 
-void IScene::registerPickable(Entity* entity) {
+void Scene::registerPickable(Entity* entity) {
 	GLint rand_r, rand_g, rand_b;
 	glm::vec3 color;
 
@@ -111,7 +111,7 @@ void IScene::registerPickable(Entity* entity) {
 	FLOG_ERROR("Failed to register pickable entity");
 }
 
-void IScene::pick(glm::ivec4 color) {
+void Scene::pick(glm::ivec4 color) {
 	GLint name = color.r + color.g + color.b;
 	if (mPickingTable[name]) {
 		mPickingTable[name]->onPicked();
@@ -122,7 +122,7 @@ void IScene::pick(glm::ivec4 color) {
 	}
 }
 
-void IScene::updateRenderer() {
+void Scene::updateRenderer() {
 	if (mRenderer->mFlagReload) {
 		FLOG_DEBUG("Renderer update");
 		mRenderer->clear();
@@ -141,53 +141,53 @@ void IScene::updateRenderer() {
 	}
 }
 
-void IScene::resetRenderer(GLuint screenWidth, GLuint screenHeight) {
+void Scene::resetRenderer(GLuint screenWidth, GLuint screenHeight) {
 	mRenderer->clear();
 	mRenderer->reset(screenWidth, screenHeight);
 }
 
-void IScene::draw() {
+void Scene::draw() {
 	mCamera->update();
 	mRenderer->draw(*(mCamera.get()));
 }
 
-void IScene::drawPicking() {
+void Scene::drawPicking() {
 	for (auto& it : mChildren) {
 		it->drawPicking(*(mCamera.get()));
 	}
 }
 
-void IScene::drawDepthInt() {
+void Scene::drawDepthInt() {
 	for (auto& it : mChildren) {
 		it->drawDepth(*(mCamera.get()));
 	}
 }
 
-void IScene::drawOcclusion() {
+void Scene::drawOcclusion() {
 	for (auto& it : mChildren) {
 		it->drawOcclusionBox(*(mCamera.get()));
 	}
 }
 
-void IScene::setCamera(puICamera&& camera) {
+void Scene::setCamera(puICamera&& camera) {
 	mCamera = std::move(camera);
 }
 
-ICamera* IScene::getCamera() {
+ICamera* Scene::getCamera() {
 	return mCamera.get();
 }
 
-void IScene::onEvent(EventType& event) {
+void Scene::onEvent(EventType& event) {
 	for (auto& it : mChildren) {
 		it->handleHierarchyEvent(event);
 	}
 }
 
-void IScene::onShow() {
+void Scene::onShow() {
 
 }
 
-void IScene::onHide() {
+void Scene::onHide() {
 
 }
 
