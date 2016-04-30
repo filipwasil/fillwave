@@ -19,11 +19,12 @@ std::unique_ptr<T> make_unique(Args&& ...args) {
 }
 
 template <class T>
-void remove(std::vector<T>& vector, T& item) {
-	auto it = std::find(vector.begin(), vector.end(), item);
-	if (it != vector.end()) {
-		vector.erase(it);
-	}
+void remove(std::vector<T>& vec, T& item) {
+	auto new_end = std::remove_if(vec.begin(), vec.end(),
+	[item](const std::unique_ptr<T>& l) {
+		return item == l.get();
+	});
+	vec.erase(new_end, vec.end());
 }
 
 #if (!defined UINT_MAX)

@@ -17,67 +17,22 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class TPolicyShared
- * \brief Creation policy which creates an object as shared pointer
- */
-template <class T>
-class TPolicyShared {
- public:
-	TPolicyShared() = default;
-	~TPolicyShared() = default;
-
-	template <typename ... P>
-	inline std::shared_ptr<T> create(P ... parameters) {
-		return std::make_shared<T>(parameters...);
-	}
-};
-
-/*! \class TPolicyUnique
- * \brief Creation policy which creates an object as unique pointer
- */
-template <class T>
-class TPolicyUnique {
- public:
-	TPolicyUnique() = default;
-	~TPolicyUnique() = default;
-
-	template <typename ... P>
-	inline std::unique_ptr<T> create(P ... parameters) {
-		return make_unique<T>(parameters...);
-	}
-};
-
-/*! \fn FillwaveItemConstruct
- * \brief Helper function to enable creation by policies
- */
-template <class T, class C, typename ... P>
-inline T FillwaveItemConstruct(P ... parameters) {
-	return C().create(parameters...);
-}
-
 /*! \class TManager
  * \brief Basic manager
  */
-template <class T, size_t M, class C, typename ... P>
-class TManager: public std::vector<T> {
+template <class T, size_t M, typename ... P>
+class TManager: public std::vector<std::unique_ptr<T>> {
  public:
 
 	TManager() = default;
 	virtual ~TManager() = default;
 
-	T add(P ... parameters) {
+	T* add(P ... parameters) {
 		if ((*this).size() >= M) {
-			return T();
+			return nullptr;
 		}
-		(*this).push_back(FillwaveItemConstruct<T, C, P...>(parameters...));
-		return (*this).back();
-	}
-
-	void remove(T& item) {
-		auto it = std::find((*this).begin(), (*this).end(), item);
-		if (it != (*this).end()) {
-			(*this).erase(it);
-		}
+		(*this).push_back(make_unique<T>(parameters...));
+		return (*this).back().get();
 	}
 
 	bool isNew(T& item) {

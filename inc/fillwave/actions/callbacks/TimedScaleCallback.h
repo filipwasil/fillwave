@@ -21,12 +21,12 @@ namespace framework {
 class TimedScaleCallback: public TimedCallback {
  public:
 	TimedScaleCallback(
-	   pMoveable moveable,
+	   Moveable* moveable,
 	   glm::vec3 normalizedScaleVec,
 	   GLfloat lifetime,
 	   EasingFunction easing = LinearInterpolation);
 	TimedScaleCallback(
-	   pMoveable moveable,
+	   Moveable* moveable,
 	   GLfloat normalizedScale,
 	   GLfloat lifetime,
 	   EasingFunction easing = LinearInterpolation);
@@ -38,7 +38,7 @@ class TimedScaleCallback: public TimedCallback {
  protected:
 	glm::vec3 mStartScale;
 	glm::vec3 mEndScale;
-	pMoveable mMoveable;
+	Moveable* mMoveable;
 };
 
 } /* framework */

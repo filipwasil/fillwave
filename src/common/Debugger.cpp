@@ -123,7 +123,7 @@ void Debugger::renderDepthOrthographic(GLint
 	LightDirectional* light =
 	   mEngine->getLightSystem()->mLightsDirectional[id].get();
 
-	ICamera* cam = light->getShadowCamera().get();
+	ICamera* cam = light->getShadowCamera();
 
 	light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
 
@@ -161,7 +161,7 @@ void Debugger::renderDepthPerspective(GLint
 
 	LightSpot* light = mEngine->getLightSystem()->mLightsSpot[id].get();
 
-	CameraPerspective cam = *(light->getShadowCamera().get());
+	CameraPerspective cam = *(light->getShadowCamera());
 
 	light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
 

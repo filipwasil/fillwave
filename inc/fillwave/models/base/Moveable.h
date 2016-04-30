@@ -10,6 +10,7 @@
 
 #include <fillwave/OpenGL.h>
 #include <fillwave/Math.h>
+#include <fillwave/common/Observable.h>
 #include <memory>
 #include <vector>
 
@@ -20,7 +21,7 @@ namespace framework {
  * \brief Base for every object which has a 3D position.
  */
 
-class Moveable {
+class Moveable : public Observable {
  public:
 	Moveable(glm::vec3 translation = glm::vec3(0.0), glm::quat rotation =
 	            glm::quat(1.0, 0.0, 0.0, 0.0));
@@ -103,8 +104,6 @@ GLboolean isMoveablesRefresh(std::vector<std::shared_ptr<Moveable>>& moveables);
 void resetMoveablesRefresh(std::vector<std::shared_ptr<Moveable>>& data);
 
 } /* framework */
-typedef std::shared_ptr<framework::Moveable> pMoveable;
-typedef std::weak_ptr<framework::Moveable> pwMoveable;
 } /* fillwave */
 
 #endif /* MOVEABLE_H_ */

@@ -10,6 +10,7 @@
 
 #include <fillwave/core/rendering/Texture2DRenderable.h>
 #include <fillwave/models/base/Moveable.h>
+#include <fillwave/common/IObserver.h>
 
 namespace fillwave {
 namespace framework {
@@ -42,11 +43,10 @@ struct LightAttenuationData {
  * \brief Base for all lights.
  */
 
-class Light: public Moveable {
+class Light: public Moveable, public IObserver {
  public:
-	Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed =
-	         pMoveable());
-	virtual ~Light() = default;
+	Light(glm::vec3 position, glm::vec4 intensity, Moveable* followed);
+	virtual ~Light();
 
 	void updateFromFollowed();
 
@@ -57,9 +57,10 @@ class Light: public Moveable {
 	void setIntensity(glm::vec4 intensity);
 	glm::vec4 getIntensity();
 	void log();
+	void onDeath(Observable* observable) override;
 
  protected:
-	pMoveable mFollowed;
+	Moveable* mFollowed;
 	glm::vec4 mIntensity;
 	LightAttenuationData mAttenuation;
 };

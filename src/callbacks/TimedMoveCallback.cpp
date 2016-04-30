@@ -13,7 +13,7 @@ namespace fillwave {
 namespace framework {
 
 TimedMoveCallback::TimedMoveCallback(
-   pMoveable moveable,
+		Moveable* moveable,
    glm::vec3 endPosition,
    GLfloat lifeTime,
    EasingFunction easing) :

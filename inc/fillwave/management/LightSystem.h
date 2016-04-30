@@ -19,17 +19,17 @@ namespace framework {
 
 static constexpr size_t FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER = 4;
 
-typedef TManager<pLightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, TPolicyShared<LightSpot>,
-        core::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, pMoveable>
+typedef TManager<LightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
+        core::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, Moveable*>
         ManagerSpotLights;
 
-typedef TManager<pLightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
-        TPolicyShared<LightDirectional>, core::Texture2DRenderable*, glm::vec3,
-        glm::quat, glm::vec4, pMoveable> ManagerDirectionalLights;
+typedef TManager<LightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
+        core::Texture2DRenderable*, glm::vec3,
+        glm::quat, glm::vec4, Moveable*> ManagerDirectionalLights;
 
-typedef TManager<pLightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
-        TPolicyShared<LightPoint>, core::Texture3DRenderable*, glm::vec3, glm::vec4,
-        pMoveable> ManagerPointLights;
+typedef TManager<LightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
+        core::Texture3DRenderable*, glm::vec3, glm::vec4,
+        Moveable*> ManagerPointLights;
 
 /**
  * \brief Light system knows about all light related stuff.
@@ -76,7 +76,7 @@ class LightSystem {
 	GLboolean isRefreshLightDirectional();
 	GLboolean isRefreshLightPoint();
 
-	GLfloat computePointLightBoundingSphere(pLightPoint& light);
+	GLfloat computePointLightBoundingSphere(LightPoint* light);
 };
 
 } /* framework */

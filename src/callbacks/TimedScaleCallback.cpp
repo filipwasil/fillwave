@@ -12,7 +12,7 @@ namespace fillwave {
 namespace framework {
 
 TimedScaleCallback::TimedScaleCallback(
-   pMoveable moveable,
+   Moveable* moveable,
    glm::vec3 normalizedScaleVec,
    GLfloat lifetime,
    EasingFunction easing) :
@@ -23,7 +23,7 @@ TimedScaleCallback::TimedScaleCallback(
 }
 
 TimedScaleCallback::TimedScaleCallback(
-   pMoveable moveable,
+		Moveable* moveable,
    GLfloat normalizedScale,
    GLfloat lifetime,
    EasingFunction easing) :

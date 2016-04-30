@@ -660,7 +660,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 		light2DTexture->bind(currentTextureUnit++);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		mScene->drawDepth(*(mLights->mLightsSpot[i]->getShadowCamera().get()));
+		mScene->drawDepth(*(mLights->mLightsSpot[i]->getShadowCamera()));
 	}
 
 	for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
@@ -670,7 +670,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 		light2DTexture->bind(currentTextureUnit++);
 		glClearColor(0.0, 0.0, 0.0, 1.0);
 		glClear(GL_DEPTH_BUFFER_BIT);
-		mScene->drawDepth(*(mLights->mLightsDirectional[i]->getShadowCamera().get()));
+		mScene->drawDepth(*(mLights->mLightsDirectional[i]->getShadowCamera()));
 	}
 
 	for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
@@ -685,7 +685,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 			light3DTexture->setAttachmentFace(j, GL_COLOR_ATTACHMENT0);
 			glClearColor(0.0, 0.0, 0.0, 1.0);
 			glClear(GL_DEPTH_BUFFER_BIT);
-			mScene->drawDepthColor(*(lightPoint->getShadowCamera(j).get()), lightPosition);
+			mScene->drawDepthColor(*(lightPoint->getShadowCamera(j)), lightPosition);
 		}
 		currentTextureUnit++;
 	}
@@ -710,14 +710,14 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 			mCurentTextureUnit = 0;
 			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
 				framework::CameraPerspective cameraP =
-				   *(mLights->mLightsSpot[i]->getShadowCamera().get());
+				   *(mLights->mLightsSpot[i]->getShadowCamera());
 				mDebugger->renderFromCamera(cameraP,
 				                            mCurentTextureUnit++); //xxx make more flexible
 			}
 			for (size_t i = 0; i < mLights->mLightsDirectional.size();
 			      i++) {
 				framework::CameraOrthographic cameraO =
-				   *(mLights->mLightsDirectional[i]->getShadowCamera().get());
+				   *(mLights->mLightsDirectional[i]->getShadowCamera());
 				mDebugger->renderFromCamera(cameraO,
 				                            mCurentTextureUnit++); //xxx make more flexible
 			}
@@ -744,14 +744,14 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 			mCurentTextureUnit = 0;
 			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
 				framework::CameraPerspective cameraP =
-				   *(mLights->mLightsSpot[i]->getShadowCamera().get());
+				   *(mLights->mLightsSpot[i]->getShadowCamera());
 				mDebugger->renderFromCamera(cameraP,
 				                            mCurentTextureUnit++); //xxx make more flexible
 			}
 			for (size_t i = 0; i < mLights->mLightsDirectional.size();
 			      i++) {
 				framework::CameraOrthographic cameraO =
-				   *(mLights->mLightsDirectional[i]->getShadowCamera().get());
+				   *(mLights->mLightsDirectional[i]->getShadowCamera());
 				mDebugger->renderFromCamera(cameraO,
 				                            mCurentTextureUnit++); //xxx make more flexible
 			}
@@ -765,7 +765,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
 				for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
 				      i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
 					framework::CameraPerspective cameraPF =
-					   *(mLights->mLightsPoint[j]->getShadowCamera(i).get());
+					   *(mLights->mLightsPoint[j]->getShadowCamera(i));
 					mDebugger->renderFromCamera(cameraPF, id++);
 				}
 			}

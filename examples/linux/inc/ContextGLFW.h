@@ -22,7 +22,7 @@ class ContextGLFW {
 	static GLuint mCursorPositionX;
 	static GLuint mCursorPositionY;
  public:
-	ContextGLFW();
+	ContextGLFW(int argc, char* argv[]);
 	virtual ~ContextGLFW();
 	void cursorShow();
 	void cursorHide();

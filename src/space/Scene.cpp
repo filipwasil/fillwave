@@ -17,7 +17,7 @@ FLOGINIT("Scene", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-	Scene::Scene(IRenderer* renderer) :
+Scene::Scene(IRenderer* renderer) :
 	mAmbientGlobal(glm::vec3(1.0)), mRenderer(renderer) {
 }
 

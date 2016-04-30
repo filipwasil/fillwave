@@ -11,7 +11,7 @@
 #include <fillwave/core/rendering/Texture3DRenderable.h>
 #include <fillwave/space/CameraPerspective.h>
 #include <fillwave/models/shapes/Sphere.h>
-#include <fillwave/space/base/ILight.h>
+#include <fillwave/space/base/Light.h>
 
 #include <map>
 
@@ -29,26 +29,26 @@ class LightPoint: public Light {
 	   core::Texture3DRenderable* shadowTexture,
 	   glm::vec3 position,
 	   glm::vec4 intensity,
-	   pMoveable followed = pMoveable());
+	   Moveable* followed = nullptr);
 
 	virtual ~LightPoint() = default;
 
 	core::Texture3DRenderable* getShadowTexture();
 
-	pCameraPerspective getShadowCamera(GLenum id);
+	CameraPerspective* getShadowCamera(GLenum id);
 
 	void updateShadowCamera();
 
  protected:
 	core::Texture3DRenderable* mShadowTexture;
-	std::map<GLenum, pCameraPerspective> mFaceCameras;
+	std::map<GLenum, puCameraPerspective> mFaceCameras;
 
  private:
 	Sphere mSphere;
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::LightPoint> pLightPoint;
+typedef std::unique_ptr<framework::LightPoint> puLightPoint;
 } /* fillwave */
 
 #endif /* LIGHTPOINT_H_ */

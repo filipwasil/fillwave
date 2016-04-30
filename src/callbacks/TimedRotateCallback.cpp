@@ -16,7 +16,7 @@ namespace fillwave {
 namespace framework {
 
 TimedRotateCallback::TimedRotateCallback(
-   pMoveable moveable,
+   Moveable* moveable,
    glm::vec3 axis,
    GLfloat angle,
    GLfloat lifeTime,

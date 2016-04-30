@@ -83,7 +83,7 @@ void LightSystem::pushLightUniforms(core::Program* program) {
 	/* Spot lights */
 	for (size_t i = 0; i < mLightsSpot.size(); i++) {
 		LightSpot* lightS = mLightsSpot[i].get();
-		CameraPerspective camera = *(lightS->getShadowCamera().get());
+		CameraPerspective camera = *(lightS->getShadowCamera());
 
 		for (GLuint j = 0; j < 3; j++) {
 			mLightBufferData[UBOIterator].position[j] = glm::value_ptr(
@@ -109,7 +109,7 @@ void LightSystem::pushLightUniforms(core::Program* program) {
 	/* Directional lights */
 	for (size_t i = 0; i < mLightsDirectional.size(); i++) {
 		CameraOrthographic camera =
-		   *(mLightsDirectional[i]->getShadowCamera().get());
+		   *(mLightsDirectional[i]->getShadowCamera());
 
 		for (GLuint j = 0; j < 3; j++) {
 			mLightBufferData[UBOIterator].position[j] = glm::value_ptr(
@@ -159,7 +159,7 @@ void LightSystem::pushLightUniformsDR() {
 	/* Spot lights */
 	for (size_t i = 0; i < mLightsSpot.size(); i++) {
 
-		CameraPerspective camera = *(mLightsSpot[i]->getShadowCamera().get());
+		CameraPerspective camera = *(mLightsSpot[i]->getShadowCamera());
 
 		for (GLuint j = 0; j < 3; j++) {
 			mLightBufferData[UBOIterator].position[j] = glm::value_ptr(
@@ -182,7 +182,7 @@ void LightSystem::pushLightUniformsDR() {
 	/* Directional lights */
 	for (size_t i = 0; i < mLightsDirectional.size(); i++) {
 		CameraOrthographic camera =
-		   *(mLightsDirectional[i]->getShadowCamera().get());
+		   *(mLightsDirectional[i]->getShadowCamera());
 
 		for (GLuint j = 0; j < 3; j++) {
 			mLightBufferData[UBOIterator].position[j] = glm::value_ptr(
@@ -276,7 +276,7 @@ void LightSystem::bindShadowmaps() {
 	}
 }
 
-GLfloat LightSystem::computePointLightBoundingSphere(pLightPoint& light) {
+GLfloat LightSystem::computePointLightBoundingSphere(LightPoint* light) {
 	const glm::vec4 intensity = light->getIntensity();
 	const LightAttenuationData attenuation = light->getAttenuation();
 	const GLfloat diffuseIntensity = 1.0;

@@ -10,7 +10,7 @@
 
 #include <fillwave/management/TextureSystem.h>
 #include <fillwave/space/CameraOrthographic.h>
-#include <fillwave/space/base/ILight.h>
+#include <fillwave/space/base/Light.h>
 
 namespace fillwave {
 class Engine;
@@ -35,11 +35,11 @@ class LightDirectional: public Light {
 	   glm::vec3 position,
 	   glm::quat rotation,
 	   glm::vec4 intensity,
-	   pMoveable followed);
+	   Moveable* followed = nullptr);
 	virtual ~LightDirectional() = default;
 
 	core::Texture2DRenderable* getShadowTexture();
-	pCameraOrthographic getShadowCamera();
+	CameraOrthographic* getShadowCamera();
 
 	void updateShadowCamera();
 
@@ -47,11 +47,11 @@ class LightDirectional: public Light {
 
  private:
 	core::Texture2DRenderable* mShadowTexture;
-	pCameraOrthographic mShadowCamera;
+	puCameraOrthographic mShadowCamera;
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::LightDirectional> pLightDirectional;
+typedef std::unique_ptr<framework::LightDirectional> puLightDirectional;
 } /* fillwave */
 
 #endif /* LIGHTDIRECTIONAL_H_ */

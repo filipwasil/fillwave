@@ -20,7 +20,7 @@ namespace framework {
 class TimedRotateCallback: public TimedCallback {
  public:
 	TimedRotateCallback(
-	   pMoveable moveable,
+	   Moveable* moveable,
 	   glm::vec3 axis,
 	   GLfloat angle,
 	   GLfloat lifeTime,
@@ -31,7 +31,7 @@ class TimedRotateCallback: public TimedCallback {
 	void performTime(TimeEventData& data);
 
  protected:
-	pMoveable mMoveable;
+	Moveable* mMoveable;
 
  private:
 	glm::quat mStartRotation;

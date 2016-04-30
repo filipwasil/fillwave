@@ -19,16 +19,16 @@ LightDirectional::LightDirectional(
    glm::vec3 position,
    glm::quat rotation,
    glm::vec4 intensity,
-   pMoveable followed) :
+   Moveable* followed) :
 	Light(position, intensity, followed),
 	mShadowTexture(shadowTexture),
 	mShadowCamera(
-	   std::make_shared < CameraOrthographic
+	   make_unique < CameraOrthographic
 	   > (position, rotation, -10.0f, 10.0f, 10.0f, -10.0f, 0.1f, 1000.0f)) {
 }
 
-pCameraOrthographic LightDirectional::getShadowCamera() {
-	return mShadowCamera;
+CameraOrthographic* LightDirectional::getShadowCamera() {
+	return mShadowCamera.get();
 }
 
 core::Texture2DRenderable* LightDirectional::getShadowTexture() {

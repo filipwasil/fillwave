@@ -128,22 +128,22 @@ class Engine final {
 	   const std::string& negZ);
 
 	/* Store lights */
-	pLightSpot storeLightSpot(
+	framework::LightSpot* storeLightSpot(
 	   glm::vec3 position,
 	   glm::quat rotation,
 	   glm::vec4 color,
-	   pMoveable followed = pMoveable());
+	   framework::Moveable* followed = nullptr);
 
-	pLightPoint storeLightPoint(
+	framework::LightPoint* storeLightPoint(
 	   glm::vec3 position,
 	   glm::vec4 color,
-	   pMoveable followed = pMoveable());
+	   framework::Moveable* followed = nullptr);
 
-	pLightDirectional storeLightDirectional(
+	framework::LightDirectional* storeLightDirectional(
 	   glm::vec3 position,
 	   glm::quat rotation,
 	   glm::vec4 color,
-	   pMoveable followed = pMoveable());
+	   framework::Moveable* followed = nullptr);
 
 	/* Store text */
 	pText storeText(
@@ -182,9 +182,9 @@ class Engine final {
 
 	/* Clear */
 	void clearText(pText text);
-	void clearLight(pLightSpot light);
-	void clearLight(pLightDirectional);
-	void clearLight(pLightPoint light);
+	void clearLight(framework::LightSpot *light);
+	void clearLight(framework::LightDirectional *light);
+	void clearLight(framework::LightPoint *light);
 	void clearLights();
 
 	/* Pick */

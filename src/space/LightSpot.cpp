@@ -18,11 +18,11 @@ LightSpot::LightSpot(
    glm::vec3 position,
    glm::quat rotation,
    glm::vec4 intensity,
-   pMoveable followed) :
+   Moveable* followed) :
 	Light(position, intensity, followed),
 	mShadowTexture(shadowTexture),
 	mShadowCamera(
-	   std::make_shared < CameraPerspective
+	   make_unique < CameraPerspective
 	   > (position, rotation, glm::radians(90.0f), 1.0f, //xxx fix
 	      0.1f, 1000.0f)) {
 }
@@ -36,8 +36,8 @@ core::Texture2DRenderable* LightSpot::getShadowTexture() {
  * \brief get the shadow caster camera matrix
  */
 
-pCameraPerspective LightSpot::getShadowCamera() {
-	return mShadowCamera;
+CameraPerspective* LightSpot::getShadowCamera() {
+	return mShadowCamera.get();
 }
 
 void LightSpot::updateShadowCamera() {

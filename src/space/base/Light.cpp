@@ -5,7 +5,7 @@
  *      Author: Filip Wasil
  */
 
-#include <fillwave/space/base/ILight.h>
+#include <fillwave/space/base/Light.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Light", FERROR | FFATAL)
@@ -13,9 +13,13 @@ FLOGINIT("Light", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Light::Light(glm::vec3 position, glm::vec4 intensity, pMoveable followed) :
+Light::Light(glm::vec3 position, glm::vec4 intensity, Moveable* followed) :
 	Moveable(position), mFollowed(followed), mIntensity(intensity) {
+	mFollowed->addObserver(this);
+}
 
+Light::~Light() {
+	mFollowed->dropObserver(this);
 }
 
 void Light::updateFromFollowed() {
@@ -55,6 +59,12 @@ void Light::log() {
 	};
 	FLOG_INFO("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x),
 	          d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
+}
+
+void Light::onDeath(Observable* observable) {
+	if (mFollowed == observable) {
+		mFollowed == nullptr;
+	}
 }
 
 } /* framework */

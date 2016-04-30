@@ -86,30 +86,30 @@ void Engine::drawTexture(core::Texture* t) {
 	mImpl->drawTexture(t);
 }
 
-pLightSpot Engine::storeLightSpot(
+LightSpot* Engine::storeLightSpot(
    glm::vec3 position,
    glm::quat rotation,
    glm::vec4 color,
-   pMoveable followed) {
+   Moveable* followed) {
 	return mImpl->mLights->mLightsSpot.add(
 	          mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
 	          position, rotation, color, followed);
 }
 
-pLightPoint Engine::storeLightPoint(
+LightPoint* Engine::storeLightPoint(
    glm::vec3 position,
    glm::vec4 color,
-   pMoveable followed) {
+   Moveable* followed) {
 	return mImpl->mLights->mLightsPoint.add(
 	          mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight),
 	          position, color, followed);
 }
 
-pLightDirectional Engine::storeLightDirectional(
+LightDirectional* Engine::storeLightDirectional(
    glm::vec3 position,
    glm::quat rotation,
    glm::vec4 color,
-   pMoveable followed) {
+   Moveable* followed) {
 	return mImpl->mLights->mLightsDirectional.add(
 	          mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
 	          position, rotation, color, followed);
@@ -303,16 +303,32 @@ void Engine::clearText(pText text) {
 	mImpl->mTextManager.erase(it, _end);
 }
 
-void Engine::clearLight(pLightSpot light) {
-	mImpl->mLights->mLightsSpot.remove(light);
+void Engine::clearLight(LightSpot* light) {
+	auto new_end = std::remove_if(mImpl->mLights->mLightsSpot.begin(),
+	                              mImpl->mLights->mLightsSpot.end(),
+	[light](const puLightSpot & l) {
+		return light == l.get();
+	});
+	mImpl->mLights->mLightsSpot.erase(new_end, mImpl->mLights->mLightsSpot.end());
 }
 
-void Engine::clearLight(pLightDirectional light) {
-	mImpl->mLights->mLightsDirectional.remove(light);
+void Engine::clearLight(LightDirectional* light) {
+	auto new_end = std::remove_if(mImpl->mLights->mLightsDirectional.begin(),
+	                              mImpl->mLights->mLightsDirectional.end(),
+	[light](const puLightDirectional & l) {
+		return light == l.get();
+	});
+	mImpl->mLights->mLightsDirectional.erase(new_end,
+	      mImpl->mLights->mLightsDirectional.end());
 }
 
-void Engine::clearLight(pLightPoint light) {
-	mImpl->mLights->mLightsPoint.remove(light);
+void Engine::clearLight(LightPoint* light) {
+	auto new_end = std::remove_if(mImpl->mLights->mLightsPoint.begin(),
+	                              mImpl->mLights->mLightsPoint.end(),
+	[light](const puLightPoint & l) {
+		return light == l.get();
+	});
+	mImpl->mLights->mLightsPoint.erase(new_end, mImpl->mLights->mLightsPoint.end());
 }
 
 void Engine::clearLights() {

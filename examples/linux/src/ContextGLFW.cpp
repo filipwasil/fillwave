@@ -19,7 +19,7 @@ GLFWwindow* ContextGLFW::mWindowNew;
 GLuint ContextGLFW::mCursorPositionX;
 GLuint ContextGLFW::mCursorPositionY;
 
-ContextGLFW::ContextGLFW() {
+ContextGLFW::ContextGLFW(int argc, char* argv[]) {
 
 	if (!glfwInit()) {
 		exit(EXIT_FAILURE);
@@ -32,6 +32,8 @@ ContextGLFW::ContextGLFW() {
 	mCursorPositionY = 1;
 
 	windowInit(mWindow);
+
+	ContextGLFW::mGraphicsEngine = new fillwave::Engine(argc, argv);
 }
 
 void ContextGLFW::windowInit(GLFWwindow*& window) {
@@ -77,6 +79,7 @@ void ContextGLFW::windowDeinit(GLFWwindow*& window) {
 	glfwSetWindowShouldClose(window, GL_TRUE);
 }
 ContextGLFW::~ContextGLFW() {
+	delete 	mGraphicsEngine;
 	glfwSetFramebufferSizeCallback(mWindow, NULL);
 	glfwSetKeyCallback(mWindow, NULL);
 	glfwSetScrollCallback(mWindow, NULL);

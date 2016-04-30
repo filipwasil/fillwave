@@ -22,7 +22,7 @@ namespace framework {
 class TimedMoveCallback: public TimedCallback {
  public:
 	TimedMoveCallback(
-	   pMoveable moveable,
+	   Moveable* moveable,
 	   glm::vec3 endPosition,
 	   GLfloat lifeTime,
 	   EasingFunction easing = LinearInterpolation);
@@ -34,7 +34,7 @@ class TimedMoveCallback: public TimedCallback {
  protected:
 	glm::vec3 mStartPosition;
 	glm::vec3 mEndPosition;
-	pMoveable mMoveable;
+	Moveable* mMoveable;
 };
 
 } /* framework */

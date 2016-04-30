@@ -9,7 +9,7 @@
 #define LIGHTSPOT_H_
 
 #include <fillwave/management/TextureSystem.h>
-#include <fillwave/space/base/ILight.h>
+#include <fillwave/space/base/Light.h>
 #include <fillwave/space/CameraPerspective.h>
 
 namespace fillwave {
@@ -22,7 +22,7 @@ namespace framework {
 class LightSpot: public Light {
  protected:
 	core::Texture2DRenderable* mShadowTexture;
-	pCameraPerspective mShadowCamera;
+	puCameraPerspective mShadowCamera;
 
  public:
 	LightSpot(
@@ -30,13 +30,13 @@ class LightSpot: public Light {
 	   glm::vec3 position,
 	   glm::quat rotation,
 	   glm::vec4 intensity,
-	   pMoveable followed = pMoveable());
+	   Moveable* followed = nullptr);
 
 	virtual ~LightSpot() = default;
 
 	core::Texture2DRenderable* getShadowTexture();
 
-	pCameraPerspective getShadowCamera();
+	CameraPerspective* getShadowCamera();
 
 	void updateShadowCamera();
 
@@ -45,7 +45,7 @@ class LightSpot: public Light {
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::LightSpot> pLightSpot;
+typedef std::unique_ptr<framework::LightSpot> puLightSpot;
 } /* fillwave */
 
 #endif /* LIGHTSPOT_H_ */
