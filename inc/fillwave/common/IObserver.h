@@ -14,6 +14,7 @@ class IObserver {
 	IObserver() = default;
 	virtual ~IObserver() = default;
 	virtual void onDeath(Observable* observable) = 0;
+	virtual void onChanged(Observable* observable) = 0;
 };
 }
 }

@@ -14,9 +14,7 @@ Moveable::Moveable(glm::vec3 translation, glm::quat rotation) :
 	mTranslation(translation),
 	mRotation(rotation),
 	mScale(1.0),
-	mRefresh(true),
-	mRefreshExternal(true) {
-
+	mRefresh(true) {
 }
 
 glm::vec3 Moveable::getTranslation() {
@@ -153,14 +151,6 @@ bool Moveable::isRefresh() {
 
 void Moveable::setRefresh(bool state) {
 	mRefresh = state;
-}
-
-bool Moveable::isRefreshExternal() {
-	return mRefreshExternal;
-}
-
-void Moveable::setRefreshExternal(bool state) {
-	mRefreshExternal = state;
 }
 
 glm::mat4 Moveable::getParentMMC() {

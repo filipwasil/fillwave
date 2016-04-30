@@ -35,6 +35,12 @@ class Observable {
 		                 mObservers.end());
 	}
 
+	void notifyObservers() {
+		for (auto& it : mObservers) {
+			it->onChanged(this);
+		}
+	}
+
  protected:
 	std::vector<IObserver*> mObservers;
 };

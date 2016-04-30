@@ -101,7 +101,7 @@ void Entity::updateMatrixTree() {
 		for (auto& it : mChildren) {
 			it->updateParentMatrix(mPhysicsMMC);
 		}
-		mRefreshExternal = GL_TRUE;
+		notifyObservers();
 		mParentRefresh = GL_FALSE;
 	}
 
@@ -123,7 +123,7 @@ void Entity::setTransformation(glm::mat4 modelMatrix) {
 	for (auto& it : mChildren) {
 		it->updateParentMatrix(mPhysicsMMC);
 	}
-	mRefreshExternal = GL_TRUE;
+	notifyObservers();
 }
 
 glm::mat4 Entity::getPhysicsMMC() {
@@ -134,7 +134,7 @@ void Entity::updateParentMatrix(glm::mat4& parent) {
 	mParentMMC = parent;
 	mPhysicsMMC = mParentMMC * mMMC;
 	mParentRefresh = GL_TRUE;
-	mRefreshExternal = GL_TRUE;
+	notifyObservers();
 }
 
 void Entity::updateParentRotation(glm::quat& parent) {
@@ -143,7 +143,7 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	for (auto& it : mChildren) {
 		it->updateParentRotation(localRotation);
 	}
-	mRefreshExternal = GL_TRUE;
+	notifyObservers();
 }
 
 void Entity::attachHierarchyCallback(puCallback&& callback) {

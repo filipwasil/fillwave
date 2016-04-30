@@ -47,26 +47,24 @@ class Light: public Moveable, public IObserver {
  public:
 	Light(glm::vec3 position, glm::vec4 intensity, Moveable* followed);
 	virtual ~Light();
-
 	void updateFromFollowed();
-
 	void setAttenuation(LightAttenuationData& attenuation);
-
 	LightAttenuationData getAttenuation();
-
 	void setIntensity(glm::vec4 intensity);
 	glm::vec4 getIntensity();
 	void log();
 	void onDeath(Observable* observable) override;
+	void onChanged(Observable* observable) override;
 
  protected:
 	Moveable* mFollowed;
+	bool mIsFollowedUpdated;
 	glm::vec4 mIntensity;
 	LightAttenuationData mAttenuation;
 };
 
 } /* framework */
-typedef std::shared_ptr<framework::Light> pLight;
+typedef std::unique_ptr<framework::Light> puLight;
 } /* fillwave */
 
 #endif /* LIGHT_H_ */

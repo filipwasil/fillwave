@@ -23,7 +23,7 @@ TimedScaleCallback::TimedScaleCallback(
 }
 
 TimedScaleCallback::TimedScaleCallback(
-		Moveable* moveable,
+   Moveable* moveable,
    GLfloat normalizedScale,
    GLfloat lifetime,
    EasingFunction easing) :
