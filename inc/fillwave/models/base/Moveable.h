@@ -58,10 +58,6 @@ class Moveable : public Observable {
 	bool isRefresh();
 	void setRefresh(bool state);
 
-	/* External  */
-	bool isRefreshExternal();
-	void setRefreshExternal(bool state);
-
 	/* Parent */
 	glm::mat4 getParentMMC();
 	glm::quat getParentRotation();
@@ -78,9 +74,8 @@ class Moveable : public Observable {
 	glm::mat4 mMMC;
 	glm::mat4 mParentMMC;
 
-	/* Refresh should be always set by us, but reset by the others */
+	/* Refresh flag */
 	GLboolean mRefresh;
-	GLboolean mRefreshExternal;
 };
 
 template <class M>

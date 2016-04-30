@@ -14,7 +14,8 @@ namespace fillwave {
 namespace framework {
 
 Light::Light(glm::vec3 position, glm::vec4 intensity, Moveable* followed) :
-	Moveable(position), mFollowed(followed), mIntensity(intensity) {
+	Moveable(position), mFollowed(followed), mIsFollowedUpdated(true),
+	mIntensity(intensity) {
 	mFollowed->addObserver(this);
 }
 
@@ -23,16 +24,14 @@ Light::~Light() {
 }
 
 void Light::updateFromFollowed() {
-	if (mFollowed) {
-		if (mFollowed->isRefreshExternal()) {
-			mTranslation = glm::vec3(
-			                  mFollowed->getParentMMC()
-			                  * glm::vec4(mFollowed->getTranslation(), 1.0));
-			mRotation = glm::normalize(
-			               mFollowed->getParentRotation() * mFollowed->getRotation());
-			mRefresh = GL_TRUE;
-			mFollowed->setRefreshExternal(GL_FALSE);
-		}
+	if (mFollowed && mIsFollowedUpdated) {
+		mTranslation = glm::vec3(
+		                  mFollowed->getParentMMC()
+		                  * glm::vec4(mFollowed->getTranslation(), 1.0));
+		mRotation = glm::normalize(
+		               mFollowed->getParentRotation() * mFollowed->getRotation());
+		mRefresh = GL_TRUE;
+		mIsFollowedUpdated = false;
 	}
 }
 
@@ -63,9 +62,12 @@ void Light::log() {
 
 void Light::onDeath(Observable* observable) {
 	if (mFollowed == observable) {
-		mFollowed == nullptr;
+		mFollowed = nullptr;
 	}
 }
 
+void Light::onChanged(Observable* /*observable*/) {
+	mIsFollowedUpdated = true;
+}
 } /* framework */
 } /* fillwave */
