@@ -17,14 +17,8 @@ SequenceCallback::SequenceCallback() :
 	mReloaditerator(true) {
 }
 
-SequenceCallback::~SequenceCallback() {
-	for (auto it : *this) {
-		delete it;
-	}
-}
-
 void SequenceCallback::perform(EventType& event) {
-	if (mReloaditerator) {
+	if (mReloaditerator) { //xxx i am pretty asure this can be done better
 		mCallbackIterator = this->begin();
 		mReloaditerator = false;
 	}
@@ -36,7 +30,7 @@ void SequenceCallback::perform(EventType& event) {
 	if (mCallbackIterator == end()) {
 		finish();
 		mCallbackIterator = this->begin();
-		for (auto it : *this) {
+		for (auto& it : *this) {
 			it->reset();
 		}
 	}

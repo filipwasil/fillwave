@@ -21,10 +21,10 @@ namespace framework {
  * \brief ItemCallback to execute an ordered vector of callbacks.
  */
 
-class SequenceCallback: public Callback, public std::vector<Callback*> {
+class SequenceCallback: public Callback, public std::vector<puCallback> {
  public:
 	SequenceCallback();
-	virtual ~SequenceCallback();
+	virtual ~SequenceCallback() = default;
 
 	/*	perform
 	 * \brief Performs ItemCallback action
@@ -33,11 +33,12 @@ class SequenceCallback: public Callback, public std::vector<Callback*> {
 	void perform(EventType& eventType);
 
  protected:
-	std::vector<Callback*>::iterator mCallbackIterator;
+	std::vector<puCallback>::iterator mCallbackIterator;
 	bool mReloaditerator;
 };
 
 } /* framework */
+typedef std::unique_ptr<framework::SequenceCallback> puSequenceCallback;
 } /* fillwave */
 
 #endif /* SEQUENCECALLBACK_H_ */

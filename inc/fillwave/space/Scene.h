@@ -43,7 +43,7 @@ class Scene: public TreePtr<Entity> {
 
 	/* Scene */
 	void setSkybox(puSkybox&& skybox);
-	void setHUD(puHUD&& hud);
+	void setHUD(pHUD& hud);
 	void setAmbient(glm::vec3 cursor);
 
 	/* Pickable */
@@ -77,7 +77,7 @@ class Scene: public TreePtr<Entity> {
 	Entity* mLastPicked;
 	glm::vec3 mAmbientGlobal;
 	puIRenderer mRenderer;
-	puHUD mHUD;
+	pHUD mHUD;
 	puICamera mCamera;
 
  private:

@@ -23,7 +23,7 @@ namespace framework {
 
 class LoopCallback: public Callback {
  public:
-	LoopCallback(Callback* callback, int numberOfExecutions);
+	LoopCallback(puCallback&& callback, int numberOfExecutions);
 	virtual ~LoopCallback() = default;
 
 	/*	perform
@@ -38,6 +38,7 @@ class LoopCallback: public Callback {
 };
 
 } /* framework */
+typedef std::unique_ptr<framework::LoopCallback> puLoopCallback;
 } /* fillwave */
 
 #endif /* LOOPCALLBACK_H_ */

@@ -27,6 +27,24 @@ void remove(std::vector<T>& vec, T& item) {
 	vec.erase(new_end, vec.end());
 }
 
+/* Forgive me, but i needed this so badly ... */
+template<typename CONTAINER>
+void vectorForward(CONTAINER &vec) {}
+
+template<typename CONTAINER, typename TCURRENT, typename... TNEXT>
+void vectorForward(CONTAINER &container, TCURRENT&& t, TNEXT&&... args) {
+	container->push_back(std::move(t));
+	vectorForward(container, args...);
+}
+
+template<typename CONTAINER, typename TCURRENT, typename... TNEXT>
+CONTAINER make_unique_container(TCURRENT&& t, TNEXT&&... args) {
+	CONTAINER container;
+	container->push_back(std::move(t));
+	vectorForward<CONTAINER>(container, args...);
+	return std::move(container);
+}
+
 #if (!defined UINT_MAX)
 #   define UINT_MAX (~((unsigned int)0))
 #endif

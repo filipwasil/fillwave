@@ -1,4 +1,3 @@
-
 /*
  * IScene.cpp
  *
@@ -30,13 +29,15 @@ void Scene::setSkybox(puSkybox&& skybox) {
 	mSkybox = std::move(skybox);
 }
 
-void Scene::setHUD(puHUD&& hud) {
-	mHUD = std::move(hud);
-}
-
 void Scene::setCursor(puCursor&& cursor) {
 	mCursor = std::move(cursor);
 }
+
+void Scene::setHUD(pHUD& hud) {
+	mHUD = hud;
+}
+
+
 
 void Scene::setAmbient(glm::vec3 ambient) {
 	mAmbientGlobal = ambient;

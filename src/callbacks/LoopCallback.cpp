@@ -10,9 +10,9 @@
 namespace fillwave {
 namespace framework {
 
-LoopCallback::LoopCallback(Callback* callback, int numberOfExecutions) :
+LoopCallback::LoopCallback(puCallback&& callback, int numberOfExecutions) :
 	Callback(eEventType::eTime),
-	mCallback(callback),
+	mCallback(std::move(callback)),
 	mLoopsLeft(numberOfExecutions) {
 }
 
