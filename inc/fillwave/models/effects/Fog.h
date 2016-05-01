@@ -18,12 +18,13 @@ namespace framework {
  */
 
 class Fog: public IEffect {
- private:
-	glm::vec3 mColour;
-	GLfloat mNearDistance;
-	GLfloat mFarDistance;
-
  public:
+	Fog(glm::vec3 colour = glm::vec3(0.1f, 0.1f, 0.1f),
+	    GLfloat near = 0.1f,
+	    GLfloat far = 20.0f);
+
+	virtual ~Fog() = default;
+
 	glm::vec3 getColour() {
 		return mColour;
 	}
@@ -46,17 +47,15 @@ class Fog: public IEffect {
 		mFarDistance = far;
 	}
 
-	Fog(
-	   glm::vec3 colour = glm::vec3(0.1, 0.1, 0.1),
-	   GLfloat near = 0.1,
-	   GLfloat far = 20.0f);
+	void preDrawAction(core::Program* program) override;
+	void postDrawAction(core::Program* program) override;
+	void stopAction(core::Program* program) override;
+	void startAction(core::Program* program) ;
 
-	virtual ~Fog() = default;
-
-	void preDrawAction(core::Program* program);
-	void postDrawAction(core::Program* program);
-	void stopAction(core::Program* program);
-	void startAction(core::Program* program);
+ private:
+	glm::vec3 mColour;
+	GLfloat mNearDistance;
+	GLfloat mFarDistance;
 };
 
 } /* framework */

@@ -22,10 +22,10 @@ class Painter: public IEffect {
 	Painter(glm::vec4 color);
 	virtual ~Painter() = default;
 	void setColor(glm::vec4 color);
-	void preDrawAction(core::Program* program);
-	void postDrawAction(core::Program* program);
-	void stopAction(core::Program* program);
-	void startAction(core::Program* program);
+	void preDrawAction(core::Program* program) override;
+	void postDrawAction(core::Program* program) override;
+	void stopAction(core::Program* program) override;
+	void startAction(core::Program* program) override;
 
  private:
 	glm::vec4 mColor;

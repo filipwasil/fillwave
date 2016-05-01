@@ -21,7 +21,7 @@ TimedColorCallback::TimedColorCallback(
 	mStartColor(glm::vec4(0.0)),
 	mEndColor(endColor),
 	mModel(model) {
-	mPainter = pPainter(new Painter(mStartColor));
+	mPainter = std::make_shared<Painter>(mStartColor);
 	mModel->addEffect(mPainter);
 }
 

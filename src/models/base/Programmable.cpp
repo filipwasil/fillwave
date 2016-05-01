@@ -26,7 +26,7 @@ void Programmable::drawWithEffects(ICamera& camera) {
 	/* Effects execution */
 	p->use();
 	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect e) {
+	[p](pIEffect & e) {
 		e->preDrawAction(p);
 	});
 	core::Program::disusePrograms();
@@ -39,7 +39,7 @@ void Programmable::drawWithEffects(ICamera& camera) {
 	/* Effects pre draw action */
 	p->use();
 	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect e) {
+	[p](pIEffect & e) {
 		e->postDrawAction(p);
 	});
 	core::Program::disusePrograms();
@@ -51,7 +51,7 @@ void Programmable::drawWithEffectsDR(ICamera& camera) {
 
 	/* Effects execution */
 	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect e) {
+	[p](pIEffect & e) {
 		e->preDrawAction(p);
 	});
 
@@ -62,7 +62,7 @@ void Programmable::drawWithEffectsDR(ICamera& camera) {
 
 	/* Effects pre draw action */
 	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect e) {
+	[p](pIEffect & e) {
 		e->postDrawAction(p);
 	});
 }
@@ -73,7 +73,7 @@ void Programmable::drawWithEffectsPBRP(ICamera& camera) {
 
 	/* Effects execution */
 	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect e) {
+	[p](pIEffect & e) {
 		e->preDrawAction(p);
 	});
 
@@ -84,17 +84,15 @@ void Programmable::drawWithEffectsPBRP(ICamera& camera) {
 
 	/* Effects pre draw action */
 	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect e) {
+	[p](pIEffect & e) {
 		e->postDrawAction(p);
 	});
 }
 
 void Programmable::addEffect(pIEffect effect) {
 	auto _find_function = [effect](pIEffect & m) -> bool {return m == effect;};
-	auto _begin = mEffects.begin();
-	auto _end = mEffects.end();
-	auto it = std::find_if(_begin, _end, _find_function);
-	if (it != _end) {
+	auto it = std::remove_if(mEffects.begin(), mEffects.end(), _find_function);
+	if (it != mEffects.end()) {
 		FLOG_DEBUG("Effect already added");
 		return;
 	}
@@ -106,16 +104,14 @@ void Programmable::addEffect(pIEffect effect) {
 
 void Programmable::removeEffect(pIEffect effect) {
 	auto _find_function = [effect](pIEffect & m) -> bool {return m == effect;};
-	auto _begin = mEffects.begin();
-	auto _end = mEffects.end();
-	auto it = std::remove_if(_begin, _end, _find_function);
-	mEffects.erase(it, _end);
-	if (it != _end) {
+	auto it = std::remove_if(mEffects.begin(), mEffects.end(), _find_function);
+	if (it != mEffects.end()) {
 		/* Start stop action */
 		mProgram->use();
 		effect->stopAction(mProgram);
 		core::Program::disusePrograms();
 	}
+	mEffects.erase(it, mEffects.end());
 }
 
 } /* framework */
