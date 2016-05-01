@@ -22,6 +22,9 @@ class Observable {
 	}
 
 	void addObserver(IObserver* observer) {
+		if (nullptr == observer) {
+			return;
+		}
 		for (auto& it : mObservers) {
 			if (it == observer) {
 				return;

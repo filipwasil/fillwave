@@ -16,7 +16,9 @@ namespace framework {
 Light::Light(glm::vec3 position, glm::vec4 intensity, Moveable* followed) :
 	Moveable(position), mFollowed(followed), mIsFollowedUpdated(true),
 	mIntensity(intensity) {
-	mFollowed->addObserver(this);
+	if (nullptr != mFollowed) {
+		mFollowed->addObserver(this);
+	}
 }
 
 Light::~Light() {
