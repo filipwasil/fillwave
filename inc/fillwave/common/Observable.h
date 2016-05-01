@@ -29,8 +29,8 @@ class Observable {
 			if (it == observer) {
 				return;
 			}
-			mObservers.push_back(observer);
 		}
+		mObservers.push_back(observer);
 	}
 
 	void dropObserver(IObserver* observer) {

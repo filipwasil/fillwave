@@ -22,7 +22,9 @@ Light::Light(glm::vec3 position, glm::vec4 intensity, Moveable* followed) :
 }
 
 Light::~Light() {
-	mFollowed->dropObserver(this);
+	if (nullptr != mFollowed) {
+		mFollowed->dropObserver(this);
+	}
 }
 
 void Light::updateFromFollowed() {

@@ -29,17 +29,17 @@ void remove(std::vector<T>& vec, T& item) {
 
 /* Forgive me, but i needed this so badly ... */
 template<typename CONTAINER>
-void vectorForward(CONTAINER &vec) {}
+void vectorForward(std::unique_ptr<CONTAINER> &vec) {}
 
 template<typename CONTAINER, typename TCURRENT, typename... TNEXT>
-void vectorForward(CONTAINER &container, TCURRENT&& t, TNEXT&&... args) {
+void vectorForward(std::unique_ptr<CONTAINER> &container, TCURRENT&& t, TNEXT&&... args) {
 	container->push_back(std::move(t));
 	vectorForward(container, args...);
 }
 
 template<typename CONTAINER, typename TCURRENT, typename... TNEXT>
-CONTAINER make_unique_container(TCURRENT&& t, TNEXT&&... args) {
-	CONTAINER container;
+std::unique_ptr<CONTAINER> make_unique_container(TCURRENT&& t, TNEXT&&... args) {
+	std::unique_ptr<CONTAINER> container = make_unique<CONTAINER>();
 	container->push_back(std::move(t));
 	vectorForward<CONTAINER>(container, args...);
 	return std::move(container);
