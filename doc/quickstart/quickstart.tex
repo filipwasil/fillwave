@@ -49,7 +49,7 @@
 
 \begin{document}
 
-\title{\textbf{Fillwave 5.1}
+\title{\textbf{Fillwave 6.0}
  - new OpenGL 3.3+ (OpenGL ES 3.0+) graphics engine for C++11 }
 \author{Filip Wasil}
 
@@ -196,12 +196,13 @@ void ContextGLFW1::render() {
 \section{Digging into API}
 
 \subsection{Entity}\label{sec:Entity}
-\indent \indent \textbf{pEntity} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them.
+\indent \indent \textbf{puEntity} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them. Fillwave uses \"only one owner\" principle and strongly uses unique pointers from C++11.
 
 \begin{lstlisting}
-pEntity entity_parent = buildEntity();
-pEntity entity_child = buildEntity();
-entity_parent->attach(entity_child);
+puEntity entity_parent = buildEntity();
+puEntity entity_child = buildEntity();
+entity_parent->attach(std::move(entity_child));
+entity_parent->attach(make_unique<Entity>());
 \end{lstlisting}
 
 \indent \indent \textbf{pEntity} can be moved, rotated and scaled. The transformation matrix will be computed internally. However if one needs to set it directly (for example if it is computed by physics engine) there is a function provided:
@@ -217,24 +218,15 @@ glm::mat4 getTransformation();
 \end{lstlisting}
 
 \subsection{Scene}\label{sec:Scene}
-\indent \indent \textbf{pScenePerspective} (or \textbf{pSceneOrtographic}) by design is considered to be the root node of your \textbf{pEntity} tree. It stores its own \textbf{pCameraPerspective} (or \textbf{pCameraOrtographic}), \textbf{pSkybox} and \textbf{pCursor}. It also has an \textbf{onHide()} and \textbf{onShow()} virtual functions which will be execuded during scene change.
+\indent \indent \textbf{puScene} by design is considered to be the root node of your \textbf{puEntity} tree. It stores its own \textbf{puCameraPerspective} (or \textbf{puCameraOrtographic}), \textbf{puSkybox} and \textbf{puCursor}. It also has an \textbf{onHide()} and \textbf{onShow()} virtual functions which will be execuded during scene change.
 
 \begin{lstlisting}
-/* Build scene */
-pISceneOrtographic sceneO = buildSceneOrtographic();
-pIScenePerspective speneP = buildScenePerspective();
+/* Scene */
+engine->setCurrentScene(make_unique<Scene>());
 
-/* Build camera */
-pCameraOrtographic cO = std::make_shared<CameraOrtographic>();
-pCameraPerspective cP = std::make_shared<CameraPerspective>();
-
-/* Attach camera */
-sceneO->setCamera(cO);
-speneP->setCamera(cP);
-
-/* Attach scene */
-engine->setCurrentScene(sceneP);
-
+/* Camera */
+engine->getCurrentScene()->setCamera(make_unique<CameraOrtographic>());
+engine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
 \end{lstlisting}
 
 \subsection{Camera}\label{sec:Camera}
@@ -243,15 +235,15 @@ engine->setCurrentScene(sceneP);
 
 \begin{lstlisting}
 /* Perspective and ortographic cameras */
-pCameraPerspective cameraP = std::make_shared<CameraPerspective>                
+engine->getCurrentScene()->setCamera(make_unique<CameraPerspective>
                     (glm::vec3(0.0,0.0,6.0), /* position */
                      glm::quat(), /* rotation */                
                      glm::vec3(0.0,1.0,0.0), /* head up direction */         
                      glm::radians(90.0), /* field of view angle */        
                      screenWidth/screenHeight, /* screen ratio */
                      0.1, /* projection near plane */
-                     1000.0); /* projection far plane */
-gCameraOrthographic cameraO = std::make_shared<CameraOrtographic> 
+                     1000.0)); /* projection far plane */
+engine->getCurrentScene()->setCamera(make_unique<CameraOrtographic>
                         (glm::vec3(0.0,0.0,6.0),
                          glm::quat(), /* rotation */                
                          -10.0f, /* x left culling */
@@ -259,7 +251,7 @@ gCameraOrthographic cameraO = std::make_shared<CameraOrtographic>
                          10.0f, /* y up culling */
                          -10.0f, /* y down culling */
                          0.1f, /* z near culling  */
-                         1000.0f); /* z far culling */
+                         1000.0f)); /* z far culling */
 \end{lstlisting}
 
 \subsection{Renderers}\label{sec:Renderers}
@@ -269,8 +261,8 @@ gCameraOrthographic cameraO = std::make_shared<CameraOrtographic>
 \begin{itemize}
 \item \textbf{\textcolor{gray}{RendererPBRP}}
 \item \textbf{\textcolor{gray}{RendererFR}}
-\item \textbf{\textcolor{gray}{RendererDR} (still in progress)}
-\item \textbf{\textcolor{gray}{RendererCSPBRP} (still in progress)}
+\item \textbf{\textcolor{gray}{RendererDR} (coming soon)}
+\item \textbf{\textcolor{gray}{RendererCSPBRP} (coming soon)}
 \end{itemize}
 
 \indent \indent Renderers are \textbf{per Scene} and can be set using \textbf{Scene::setRenderer()} function. Do not hesitate to create your own one. Its easy and fun (Just implement IRenderer Interface).
@@ -286,22 +278,18 @@ core::Program* animation = loader.getDefaultBones();
 \end{lstlisting}
 
 \subsection{Store functions}\label{sec:store functions}
-\indent \indent Use \textbf{"store"} functions to create OpenGL objects which will be also stored by internal managers, and which will be internally, reloaded and reused if needed. Use store functions everywhere where possible.
+\indent \indent Use \textbf{\"store\"} functions to create OpenGL objects which will be also stored by internal managers, and which will be internally, reloaded and reused if needed. Use store functions everywhere where possible.
 
 \begin{lstlisting}
-/* Store the shaders providing source file path */
-core::Shader*  storeShaderFragment(const std::string& path);
-core::Shader*  storeShaderVertex(const std::string& path);
-core::Shader*  storeShaderGeometry(const std::string& path);
-core::Shader*  storeShaderTesselationControl(const std::string& path);
-core::Shader*  storeShaderTesselationEvaluation(const std::string& p);
-/* Store the shaders providing the source directly */
-core::Shader*  storeShaderFragment(const std::string&, std::string&);
-core::Shader*  storeShaderVertex(const std::string&, std::string&);
-core::Shader*  storeShaderGeometry(const std::string&, std::string&);
-core::Shader*  storeShaderTesselationControl(const std::string&, std::string&);
-core::Shader*  storeShaderTesselationEvaluation(const std::string&, std::string&);
+/* Store shader using source directly */
+mEngine->storeShader<GL_FRAGMENT_SHADER>("fancy_name",
+		"shader code here");
+/* Store shader providing file path */
+mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag");
+
+/* Store program */
 core::Program* storeProgram(const std::string& , std::vector<core::Shader*>);
+/* Store textures */
 core::Texture* storeTexture (const std::string&, const GLuint&);
 core::Texture2DRenderableDynamic* 
                        storeTextureDynamic (const std::string& fragmentShaderPath);
@@ -321,7 +309,7 @@ pCursor  storeCursor(pTexture, GLfloat);
 \newpage
 
 \subsection{Model}\label{sec:Model}
-\indent \indent Fillwave provides different methods to build a model. You can use \textbf{buildModel} functions or direct constructors.
+\indent \indent Fillwave provides different methods to build a model. You can use make function to create unique\_unique or builder classes instead.
 
 \subsubsection{Direct methods}\label{sec:directCreation}
 
@@ -331,9 +319,9 @@ pCursor  storeCursor(pTexture, GLfloat);
  * together with your model asset file.
  */
 
-pModel model = buildModel(engine, program, "model.obj");
+puModel model = make_unique<Model>(engine, program, "model.obj");
 
-pModel model = std::make_shared<framework::Model>(engine, program, "model.obj");
+puModel model = make_unique<Model>(engine, program, "model.obj");
 
 /*
  * When the appropriate map paths are available in your
@@ -343,41 +331,21 @@ pModel model = std::make_shared<framework::Model>(engine, program, "model.obj");
 
 framework::Sphere sphere(1.0,10.0,10.0);
 
-pModel model = buildModel(engine,
+puModel model = make_unique<Model>(engine,
                           program,
                           sphere,
                           diffuseMap,
                           normalMap,
                           specularMap,
                           material);
-                         
-pModel model = std::make_shared<framework::Model>(engine,
-                          program,
-                          sphere,
-                          diffuseMap,
-                          normalMap,
-                          specularMap,
-                          material);
-        
-    
-    
-    
-    
     
          
 /* 
  * When we want to explicitily provide texture paths
  * but stll use the model asset from file.   
  */
-
-pModel model = buildModel(engine,
-                      program,
-                      "model.obj",
-                      "relativePathToDiffuseMap",
-                      "relativePathToNormalsMap",
-                      "relativePathToSpecularMap");
                       
-pModel model = std::make_shared<framework::Model>(engine,
+puModel model = make_unique<Model>(engine,
                        program,
                        "model.obj",
                        "relativePathToDiffuseMap",
@@ -389,14 +357,7 @@ pModel model = std::make_shared<framework::Model>(engine,
  * and material objects.
  */
 
-pModel model = buildModel(engine,
-                      program,
-                      "model.obj",
-                      diffuseMapTexture,
-                      normalMapTexture,
-                      specularMapTexture,
-                      material);
-pModel model = std::make_shared<Model>(engine,
+puModel model = make_unique<Model>(engine,
                       program,
                       "model.obj",
                       diffuseMapTexture,
@@ -418,12 +379,12 @@ BuilderModelExternalMaps builder1 (engine,
                                    normalPath,
                                    specularPath);
 
-pModel m = builder1.build();
+puModel m = builder1.build();
 
 /* Second method */
 BuilderModelExternalMaps builder1(engine);
 
-pModel m = builder1.setModelPath(modelPath).
+puModel m = builder1.setModelPath(modelPath).
                   setProgram(program).
                   setdiffusePath(diffuseMap).
                   setNormalMapPath(normalsMap).
@@ -444,13 +405,13 @@ BuilderModelManual builder2 (engine,
                              normalsMap,
                              specularMap,
                              material);
-pModel m = builder2.build();
+puModel m = builder2.build();
 
 /* Second method */
 
 BuilderModelManual builder2 (engine);
 
-pModel m = builder2.setModelPath(modelPath).
+puModel m = builder2.setModelPath(modelPath).
                   setProgram(program).
                   setDiffuseMapTexture(diffuseMap).
                   setNormalMapTexture(normalsMap).
@@ -467,17 +428,17 @@ GLint getAnimations();
 \end{lstlisting}
 
 \subsubsection{Effects}\label{sec:Effects}
-\indent \indent Fillwave provides \textbf{Effects} objects which can be added to each Model. You can use built in effects: \textbf{Fog}, \textbf{BoostColor}, \textbf{ClockwiseDrawEffect}, \textbf{Painter} and \textbf{TextureOnly}. You can also create Your own one by inheriting from \textbf{Effect} class and implementing all necessary methods. Remember that during the effect execution, the models program is already used, so You can call \textbf{uniformPush} function.
+\indent \indent Fillwave provides \textbf{Effects} objects which can be added to each Model. You can use built in effects: \textbf{Fog}, \textbf{BoostColor}, \textbf{ClockwiseDrawEffect}, \textbf{Painter} and \textbf{TextureOnly}. You can also create Your own one by inheriting from \textbf{Effect} class and implementing all necessary methods. Remember that during the effect execution, the models program is already used, so You can call \textbf{uniformPush} function. Effects uses shared pointer policy. They are shared between models and callbacks by design.
 
 \begin{lstlisting}
 
-pIEffect fog(new Fog());
-pIEffect boost(new BoostColor(10.0));
-pIEffect ccw(new ClockwiseDrawEffect());
-pIEffect paint(new Painter());
-pIEffect textureOnly(new TextureOnly());
+pIEffect f std::make_shared<Fog>());
+pIEffect b std::make_shared<BoostColor(10.0);
+pIEffect c std::make_shared<ClockwiseDrawEffect();
+pIEffect p std::make_shared<Painter();
+pIEffect t std::make_shared<TextureOnly();
 
-model->addEffect(fog);
+model->addEffect(f);
    
 \end{lstlisting}
 
@@ -499,7 +460,7 @@ EmiterPointCPU::EmiterPointCPU(Engine* engine,
                                    GLboolean dephTest,
                                    GLfloat alphaCutOff)
                                    
-pEmiterPointGPU::EmiterPointGPU(Engine* engine,
+EmiterPointGPU::EmiterPointGPU(Engine* engine,
               GLfloat emitingSourceRate,
               GLuint howMany,
               glm::vec4 color,
@@ -553,9 +514,8 @@ core::Texture3D* texture=core::Texture3D*(new Texture3D("textures_right.png",
                                               "textures_floor.png",
                                               "textures_front.png",
                                               "textures_back.png"));
-pSkybox skybox = buildSkybox(engine,
-                             texture);
-scene->setSkybox(skybox);
+scene->setSkybox(make_unique<Skybox>(engine,
+                             texture));
 \end{lstlisting}
 
 \subsection{Terrain}\label{sec:Terrain}
@@ -566,12 +526,12 @@ scene->setSkybox(skybox);
 core::Shader* fs = engine->storeShader<GL_FRAGMENT_SHADER>("default.frag");
 core::Shader* vs = engine->storeShader<GL_VERTEX_SHADER>("default.vert");
 core::Program* program = buildProgram(fs + vs);
-pTerrain terrain = buildTerrainVoxel(engine,
+puTerrain terrain = buildTerrainVoxel(engine,
                                   program,
                                   "textures/test.png",
                                   new terrain::MountainConstructor(),
                                   5);
-gScene->attach(terrain);
+sene->attach(std::move(terrain));
 \end{lstlisting}
 
 \indent You may have noticed that some code mensions also a \textbf{voxel terrain} feature. This is an old legacy feature and it will be replaced by more generic solution. Stay tuned.
@@ -580,7 +540,7 @@ gScene->attach(terrain);
 \indent \indent To create a terrain Mesh you should create a class derived from \textbf{TerrainConstructor} class, and implement a \textbf{calculateHeight} method. The method should take x and z coordinates in the range of (-1,1) in and return Y position.
 
 \subsection{Text}\label{sec:Text}
-\indent \indent To create a 2D on screen text using ttf fonts You can use the \textbf{storeText} function.
+\indent \indent To create a 2D on screen text using ttf fonts You can use the \textbf{storeText} function. Texts and HUD uses shared pointers policy. They are shared between the engine and the user by design.
 
 \begin{lstlisting}
 pText text = engine->storeText( "Hello Fillwave",/* content */
@@ -643,32 +603,43 @@ pText text = engine->storeText( "Hello Fillwave",/* content */
 
 \begin{lstlisting}
 TimedCallback(GLfloat timeToFinish,
-              EasingFunction easing = eEasing::None);
-TimedScaleCallback(pEntity entity,
-                   glm::vec3 normalizedScaleVec,
-                   GLfloat lifetime,
-                   EasingFunction easing);
-TimedRotateCallback(pEntity entity,
-                    glm::vec3 axis,
-                    GLfloat angle,
-                    GLfloat lifeTime,
-                    EasingFunction easing);
-TimedMoveCallback(pEntity entity,
-                  glm::vec3 endPosition,
-                  GLfloat lifeTime,
-                  EasingFunction easing);
+	EasingFunction easing = eEasing::None);
+TimedScaleCallback(Moveable* entity,
+	glm::vec3 normalizedScaleVec,
+	GLfloat lifetime,
+	EasingFunction easing);
+TimedRotateCallback(Moveable* entity,
+	glm::vec3 axis,
+	GLfloat angle,
+	GLfloat lifeTime,
+	EasingFunction easing);
+TimedMoveCallback(Moveable* entity,
+	glm::vec3 endPosition,
+	GLfloat lifeTime,
+	EasingFunction easing);
+                  
+puEntity entity = make_unique<Entity>();
+
+entity->registerHierarchyCallback(
+	make_unique<TimedMoveCallback>(
+		entity.get(),
+		glm::vec3(0.0f,0.0f,1.0f),
+		10.0f);
 \end{lstlisting}
 
 \indent \indent \textbf{TimedCallback} by itself stands only for a time delay. \textbf{TimedScaleCallback}, \textbf{TimedRotateCallback}, and \textbf{TimedMoveCallback} on the other hand can be used to modify the model scale/position/rotation in time with current easing described by std::function \textbf{EasingFunction}. Default easing for all of the callbacks is \textbf{LinearInterpolation}.
 \newpage
 
-\subsubsection{Focus functions and private callbacks}\label{sec:Focus functions and private callbacks}
-\indent \indent Focus functionality and private callbacks were introduced to enable executing particular callbacks in particular entity without iterating over the whole scene tree. To set an entity which will receive a callback from chosen input \textbf{setFocus} functions should be used.
+\subsubsection{Focus}\label{sec:Focus}
+\indent \indent Focus functionality and hierarchy callbacks were introduced to enable executing particular callbacks in particular entity without iterating over the whole scene tree. To set an entity which will receive a callback from chosen input \textbf{Engine::registerCallback} function should be used.
 \newline
 
 \begin{lstlisting}
 
-void setFocus(eEventType eventType, pEntity entity);
+/* Second parameter means that the IFocusable interface will be notified to engine so that it will be removed after during model destruction */
+engine->registerCallback(
+	   make_unique<AnimationKeyboardCallback>(beast.get(), eEventType::eKey),
+	   beast.get());
 
 \end{lstlisting}
    
@@ -676,20 +647,17 @@ void setFocus(eEventType eventType, pEntity entity);
 
 \begin{lstlisting}
 void Entity::attachHierarchyCallback(Callback* c);
-void Entity::attachPrivateCallback(Callback* c);
-void Entity::detachHierarchyCallback(Callback* c);
-void Entity::detachPrivateCallback(Callback* c);
 \end{lstlisting}
 
 \subsubsection{Register, unregister and clear functions}\label{sec:register functions}
 \indent \indent To register/unregister a callback in Fillwave use following functions:
 
 \begin{lstlisting}
-void registerCallback(Callback* c);
-void unregisterCharacterModsCallback(Callback* c);
+void registerCallback(puCallback&& c);
+void unregisterCallback(Callback* c);
 \end{lstlisting}
 
-\indent \indent Note, that there is no need to \textbf{delete} any objects. This happens inside the callbacks.
+\indent \indent Note, that there is no need to \textbf{delete} any objects. This happens inside the callbacks. One should design its callbacks so that it will unregister itself (using pointer to an Engine and calling unregisterCallback).
 
 \newpage
 

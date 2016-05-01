@@ -1,3 +1,9 @@
 inc/fillwave/Config.h
 doc/doxygen_doc
 .idea
+doc/quickstart/quickstart.aux
+doc/quickstart/quickstart.log
+doc/quickstart/quickstart.out
+doc/quickstart/quickstart.pdf
+doc/quickstart/quickstart.synctex.gz
+doc/quickstart/quickstart.toc

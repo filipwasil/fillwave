@@ -20,7 +20,7 @@
 namespace fillwave {
 namespace framework {
 
-/*! \class IScene
+/*! \class Scene
  * \brief Entity to be a root of Entity tree.
  */
 

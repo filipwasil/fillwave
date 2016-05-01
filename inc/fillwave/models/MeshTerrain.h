@@ -64,7 +64,7 @@ class MeshTerrain: public Programmable {
 };
 
 } /* framework */
-	typedef std::unique_ptr<framework::MeshTerrain> puMeshTerrain;
+typedef std::unique_ptr<framework::MeshTerrain> puMeshTerrain;
 } /* fillwave */
 
 #endif /* INC_FILLWAVE_TERRAIN_MESHTERRAIN_H_ */

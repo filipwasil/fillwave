@@ -32,13 +32,15 @@ template<typename CONTAINER>
 void vectorForward(std::unique_ptr<CONTAINER> &vec) {}
 
 template<typename CONTAINER, typename TCURRENT, typename... TNEXT>
-void vectorForward(std::unique_ptr<CONTAINER> &container, TCURRENT&& t, TNEXT&&... args) {
+void vectorForward(std::unique_ptr<CONTAINER> &container, TCURRENT&& t,
+                   TNEXT&&... args) {
 	container->push_back(std::move(t));
 	vectorForward(container, args...);
 }
 
 template<typename CONTAINER, typename TCURRENT, typename... TNEXT>
-std::unique_ptr<CONTAINER> make_unique_container(TCURRENT&& t, TNEXT&&... args) {
+std::unique_ptr<CONTAINER> make_unique_container(TCURRENT&& t,
+      TNEXT&&... args) {
 	std::unique_ptr<CONTAINER> container = make_unique<CONTAINER>();
 	container->push_back(std::move(t));
 	vectorForward<CONTAINER>(container, args...);

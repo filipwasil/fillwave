@@ -34,6 +34,10 @@ using namespace fillwave::framework;
 
 namespace fillwave {
 
+	/*! \struct EngineImpl
+* \brief Private implementation of Fillwave GE.
+*/
+
 struct Engine::EngineImpl final {
 
 #ifdef __ANDROID__
