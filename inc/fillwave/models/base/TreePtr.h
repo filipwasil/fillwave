@@ -42,7 +42,7 @@ class TreePtr: public ITreeNode {
 	void detach(T* node) {
 		auto _compare_function =
 		   [node](const T & e) -> bool {bool found = (e == node); if (found) node->onDetached(); return found;};
-		auto it = std::remove_if(mChildren.begin(), mChildren.end(), _compare_function);
+	auto it = std::remove_if(mChildren.begin(), mChildren.end(), _compare_function);
 		if (it != mChildren.end()) {
 			mFlagAttachedDetached = true;
 			mChildren.erase(it, mChildren.end());

@@ -9,11 +9,11 @@ namespace fillwave {
 namespace framework {
 class Observable;
 
-	/*! \class IObserver
- * \brief Implementation of Observer pattern.
- */
+/*! \class IObserver
+* \brief Implementation of Observer pattern.
+*/
 
-	class IObserver {
+class IObserver {
  public:
 	IObserver() = default;
 	virtual ~IObserver() = default;

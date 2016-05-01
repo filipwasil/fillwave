@@ -12,11 +12,11 @@
 namespace fillwave {
 namespace framework {
 
-	/*! \class Observable
- * \brief Implementation of Observable pattern.
- */
+/*! \class Observable
+* \brief Implementation of Observable pattern.
+*/
 
-	class Observable {
+class Observable {
  public:
 	Observable() = default;
 	virtual ~Observable() {

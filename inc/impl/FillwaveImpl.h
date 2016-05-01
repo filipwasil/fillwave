@@ -34,7 +34,7 @@ using namespace fillwave::framework;
 
 namespace fillwave {
 
-	/*! \struct EngineImpl
+/*! \struct EngineImpl
 * \brief Private implementation of Fillwave GE.
 */
 
