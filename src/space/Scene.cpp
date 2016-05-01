@@ -1,3 +1,4 @@
+
 /*
  * IScene.cpp
  *
@@ -29,8 +30,8 @@ void Scene::setSkybox(puSkybox&& skybox) {
 	mSkybox = std::move(skybox);
 }
 
-void Scene::setHUD(pHUD& hud) {
-	mHUD = hud;
+void Scene::setHUD(puHUD&& hud) {
+	mHUD = std::move(hud);
 }
 
 void Scene::setCursor(puCursor&& cursor) {
