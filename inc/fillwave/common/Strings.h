@@ -35,6 +35,7 @@ std::string to_string(T value) {
 
 std::string getFilePathOnly(const char* path);
 std::string getFileNameOnly(const char* path);
+unsigned int getFramebufferStatus();
 
 } /* fillwave */
 

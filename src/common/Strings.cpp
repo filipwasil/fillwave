@@ -8,6 +8,7 @@
 #include <fillwave/common/Strings.h>
 #include <fillwave/loaders/FileLoader.h>
 #include <fillwave/Log.h>
+#include <fillwave/OpenGL.h>
 
 FLOGINIT("String", FERROR | FFATAL)
 
@@ -82,6 +83,10 @@ std::string getFileNameOnly(const char* path) {
 	} else {
 		return std::string(path);
 	}
+}
+
+unsigned int getFramebufferStatus() {
+	return glCheckFramebufferStatus(GL_FRAMEBUFFER);
 }
 
 } /* fillwave */
