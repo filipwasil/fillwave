@@ -91,7 +91,7 @@ void Shader::log() {
 
 void Shader::reload() {
 	mHandle = glCreateShader(mType);
-	FLOG_CHECK("Shader compilation failed: %x", glGetError());
+	FLOG_CHECK("Shader creation failed");
 	loadSource();
 	compile();
 }

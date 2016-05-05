@@ -43,6 +43,9 @@ IEmiterPoint::IEmiterPoint(
 	// glEnable(GL_POINT_SPRITE) always on since OpenGL 3.2 ... but not at all drivers ://////
 	glEnable(GL_POINT_SPRITE);
 #endif
+	if(glGetError() != GL_NO_ERROR) {
+		FLOG_ERROR("Legacy features may cause a GL_INVALID_ENUM on core profile. It may happen.");
+	}
 }
 
 void IEmiterPoint::setBlending(GLenum sourceFactor, GLenum destinationFactor) {
