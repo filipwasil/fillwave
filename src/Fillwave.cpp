@@ -45,7 +45,7 @@ Engine::Engine(ANativeActivity* activity) {
 }
 #else
 Engine::Engine(GLint argc, GLchar* const argv[]) {
-	mImpl = make_unique<EngineImpl>(this, argc, argv);
+	mImpl = std::make_unique<EngineImpl>(this, argc, argv);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
@@ -176,21 +176,16 @@ void Engine::insertInput(framework::EventType& event) {
 	mImpl->runCallbacks(event);
 }
 
-/* Engine callbacks - clear */
-void Engine::clearCallback(framework::Callback* callback) {
-	mImpl->clearCallback(callback);
+void Engine::unregisterCallbacks(eEventType eventType) {
+	mImpl->unregisterCallbacks(eventType);
 }
 
-void Engine::clearCallbacks(eEventType eventType) {
-	mImpl->clearCallbacks(eventType);
-}
-
-void Engine::clearCallbacks() {
-	mImpl->clearCallbacks();
+void Engine::unregisterCallbacks() {
+	mImpl->unregisterCallbacks();
 }
 
 /* Callbacks registeration */
-void Engine::registerCallback(puCallback&& callback,
+void Engine::registerCallback(const Callback& callback,
                               framework::IFocusable* focusable) {
 	if (focusable) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
@@ -201,14 +196,13 @@ void Engine::registerCallback(puCallback&& callback,
 		mImpl->mFocus.second.push_back(callback.get());
 #else
 		if(mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
-			FLOG_ERROR("AAA");
-			mImpl->mFocus[focusable] = std::vector<Callback*> (1, callback.get());
+			mImpl->mFocus[focusable] = std::vector<CallbackId> (1, callback.getId());
 		} else {
-			mImpl->mFocus[focusable].push_back(callback.get());
+			mImpl->mFocus[focusable].push_back(callback.getId());
 		}
 #endif
 	}
-	mImpl->registerCallback(std::move(callback));
+	mImpl->registerCallback(callback);
 }
 
 void Engine::dropFocus(framework::IFocusable* focusable) {
@@ -224,17 +218,15 @@ void Engine::dropFocus(framework::IFocusable* focusable) {
 	FLOG_ERROR("mImpl->mFocus.size() %lu", mImpl->mFocus.size());
 	if(!mImpl->mFocus.empty()
 	      && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
-		FLOG_ERROR("1");
 		for (auto& it : mImpl->mFocus[focusable]) {
-			FLOG_ERROR("1");
 			mImpl->unregisterCallback(it);
 		}
 	}
 #endif
 }
 
-void Engine::unregisterCallback(framework::Callback* callback) {
-	mImpl->unregisterCallback(callback);
+void Engine::unregisterCallback(framework::CallbackId id) {
+	mImpl->unregisterCallback(id);
 }
 
 pText Engine::storeText(
@@ -436,12 +428,11 @@ void Engine::configureFPSCounter(
 		mImpl->mFPSText = storeText("", fontName, position, size);
 
 		/* Provide callback to refresh the FPS value */
-		mImpl->mTextFPSCallback = new framework::FPSCallback(this,
-		      mImpl->mFPSText);
-		registerCallback(std::unique_ptr<Callback>(mImpl->mTextFPSCallback));
+		Engine* engine = this;
+		registerCallback(framework::FPSCallback(engine, mImpl->mFPSText));
 	} else {
 		mImpl->mFPSText.reset();
-		unregisterCallback(mImpl->mTextFPSCallback);
+		unregisterCallback(mImpl->mTextFPSCallback.getId());
 	}
 }
 

@@ -10,23 +10,24 @@
 namespace fillwave {
 namespace framework {
 
-LoopCallback::LoopCallback(puCallback&& callback, int numberOfExecutions) :
-	Callback(eEventType::eTime),
-	mCallback(std::move(callback)),
-	mLoopsLeft(numberOfExecutions) {
+void doopa(EventType&) {
+	;
 }
-
-void LoopCallback::perform(EventType& event) {
-	mCallback->perform(event);
+LoopCallback::LoopCallback(const Callback&& callback, int numberOfExecutions) :
+	Callback([ & ](EventType & event) {
+	mCallback.perform(event);
 	if (mLoopsLeft != FILLWAVE_ENDLESS) {
-		if (mCallback->isFinished()) {
+		if (mCallback.getFinished()) {
 			if (--mLoopsLeft) {
-				mCallback->reset();
+				mCallback.setFinished(false);
 			} else {
-				finish();
+				mCallback.setFinished(true);
 			}
 		}
 	};
+}, eEventType::eTime),
+mCallback(callback),
+mLoopsLeft(numberOfExecutions) {
 }
 
 } /* framework */

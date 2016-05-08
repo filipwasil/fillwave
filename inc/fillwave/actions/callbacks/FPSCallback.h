@@ -22,9 +22,8 @@ namespace framework {
 
 class FPSCallback: public Callback {
  public:
-	FPSCallback(Engine* engine, pText text);
+	FPSCallback(Engine* engine, pText text = pText());
 	virtual ~FPSCallback() = default;
-	void perform(EventType& event);
 
  private:
 	pText mText;

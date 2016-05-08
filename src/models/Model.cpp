@@ -46,15 +46,15 @@ Model::Model(
 	std::vector<GLuint> indices = shape.getIndices();
 
 	core::VertexArray* vao = new core::VertexArray();
-	attach(make_unique<Mesh>(engine, material, diffuseMap,
-	                         normalMap, specularMap,
-	                         program, mProgramShadow, mProgramShadowColor,
-	                         loader.getOcclusionOptimizedQuery(),
-	                         loader.getAmbientOcclusionGeometry(),
-	                         loader.getAmbientOcclusionColor(), engine->getLightSystem(),
-	                         engine->storeBuffer<core::VertexBufferBasic> (vao, vertices),
-	                         engine->storeBuffer<core::IndexBuffer> (vao, indices),
-	                         mAnimator, GL_TRIANGLES, vao));
+	attach(std::make_unique<Mesh>(engine, material, diffuseMap,
+	                              normalMap, specularMap,
+	                              program, mProgramShadow, mProgramShadowColor,
+	                              loader.getOcclusionOptimizedQuery(),
+	                              loader.getAmbientOcclusionGeometry(),
+	                              loader.getAmbientOcclusionColor(), engine->getLightSystem(),
+	                              engine->storeBuffer<core::VertexBufferBasic> (vao, vertices),
+	                              engine->storeBuffer<core::IndexBuffer> (vao, indices),
+	                              mAnimator, GL_TRIANGLES, vao));
 }
 
 Model::Model(Engine* engine, core::Program* program,
@@ -235,7 +235,7 @@ inline void Model::initAnimations(const aiScene* scene) {
 	if (scene->HasAnimations()) {
 		mAnimator = new Animator(scene);
 		FLOG_DEBUG("attached TimedBoneUpdateCallback to model");
-		this->attachHierarchyCallback(make_unique<TimedBoneUpdateCallback>(this));
+		this->attachHierarchyCallback(TimedBoneUpdateCallback(this));
 	}
 }
 
@@ -378,7 +378,7 @@ puMesh Model::loadMesh(
 
 	ProgramLoader loader(engine);
 	core::VertexArray* vao = new core::VertexArray();
-	return make_unique < Mesh
+	return std::make_unique < Mesh
 	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
@@ -483,7 +483,7 @@ inline void Model::evaluateAnimations() {
 }
 
 void Model::handleFocusEvent(EventType& event) {
-	Callback::handleEvent<Callback*>(mCallbacks, event);
+	Callback::handleEvent(mCallbacks, event);
 }
 
 void Model::updateRenderer(IRenderer& renderer) {

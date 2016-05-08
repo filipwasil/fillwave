@@ -99,7 +99,7 @@ puTerrain buildTerrainVoxel(
 
 	GLfloat voxelGap = 0.2;
 
-	puTerrain terrain = framework::make_unique < framework::Terrain
+	puTerrain terrain = std::make_unique < framework::Terrain
 	                    > (engine, program, radius, voxelGap);
 
 	for (GLint i = 0; i <= radius; i++) {

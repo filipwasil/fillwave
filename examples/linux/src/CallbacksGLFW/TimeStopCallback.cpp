@@ -17,15 +17,7 @@ namespace fillwave {
 namespace framework {
 
 TimeStopCallback::TimeStopCallback(Engine* engine)
-	: Callback(eEventType::eKey), mTimeOn(GL_TRUE), mEngine(engine) {
-
-}
-
-TimeStopCallback::~TimeStopCallback() {
-
-}
-
-void TimeStopCallback::perform(EventType& event) {
+	: Callback([ & ] (EventType &event) {
 	KeyboardEventData data = KeyboardEvent::getData(event);
 	/* You can handle Your callback directly here ... */
 	if (data.key == GLFW_KEY_T &&
@@ -38,6 +30,8 @@ void TimeStopCallback::perform(EventType& event) {
 			mEngine->configureTime(1.0);
 		}
 	}
+}, eEventType::eKey), mTimeOn(GL_TRUE), mEngine(engine) {
+
 }
 
 } /* framework */

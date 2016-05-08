@@ -146,13 +146,13 @@ void Entity::updateParentRotation(glm::quat& parent) {
 	notifyObservers();
 }
 
-void Entity::attachHierarchyCallback(puCallback&& callback) {
-	mCallbacksHierarchy.push_back(std::move(callback));
+void Entity::attachHierarchyCallback(const Callback&& callback) {
+	mCallbacksHierarchy.push_back(callback);
 }
 
-void Entity::detachHierarchyCallback(Callback* callback) {
-	detachCallback(mCallbacksHierarchy, callback);
-}
+//void Entity::detachHierarchyCallback(Callback* callback) {
+//	detachCallback(mCallbacksHierarchy, callback);
+//}
 
 void Entity::pick(glm::vec3 color) {
 	mFlagPickable = true;
@@ -187,17 +187,15 @@ void Entity::log() const {
 
 }
 
-inline void Entity::detachCallback(
-   std::vector<puCallback>& callbacks,
-   Callback* callback) {
-	auto _compare_function =
-	   [callback](const puCallback & m) -> bool {return m.get() == callback;};
-	auto _begin = callbacks.begin();
-	auto _end = callbacks.end();
-	auto it = std::remove_if(_begin, _end, _compare_function);
-	callbacks.erase(it, _end);
-	FLOG_ERROR("Detachment of callback failed");
-}
+//inline void Entity::detachCallback(
+//   std::vector<Callback>& callbacks,
+//   Callback* callback) {
+//	auto _compare_function =
+//	   [callback](const Callback & m) -> bool {return m == callback;};
+//	auto it = std::remove_if(callbacks.begin(), callbacks.end(), _compare_function);
+//	callbacks.erase(it, callbacks.end());
+//	FLOG_ERROR("Detachment of callback failed");
+//}
 
 void Entity::updateRenderer(IRenderer& renderer) {
 	for (auto& it : mChildren) {
@@ -211,6 +209,6 @@ bool Entity::getRenderItem(RenderItem& /*item*/) {
 
 } /* framework */
 puEntity buildEntity() {
-	return framework::make_unique<framework::Entity>();
+	return std::make_unique<framework::Entity>();
 }
 } /* fillwave */

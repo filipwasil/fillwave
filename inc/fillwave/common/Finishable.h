@@ -34,22 +34,16 @@ class Finishable {
 	float getPercentageDone() const;
 
 	/*
-	 * finish
-	 * \brief Sets indicator that the object was finished
+	 * setFinished
+	 * \brief Sets indicator that the object was finished.
 	 */
-	void finish();
+	void setFinished(bool state);
 
 	/*
-	 * finish
-	 * \brief Sets indicator that the object is not finished
+	 * getFinished
+	 * \brief Returns state of the object.
 	 */
-	void reset();
-
-	/*
-	 * finish
-	 * \brief Returns state of the object
-	 */
-	bool isFinished() const;
+	bool getFinished() const;
 
  protected:
 	bool mFinished;

@@ -36,7 +36,7 @@ class Hinge: public Entity {
 } /* namespace framework */
 typedef std::unique_ptr<framework::Hinge> puHinge;
 static puHinge buildHinge() {
-	return framework::make_unique<framework::Hinge>();
+	return std::make_unique<framework::Hinge>();
 }
 } /* namespace fillwave */
 

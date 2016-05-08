@@ -57,13 +57,7 @@ class MoveCameraCallback: public Callback {
 	   eEventType eventType,
 	   float speed = 1.0,
 	   GLFWwindow* window = nullptr);
-	virtual ~MoveCameraCallback();
-
-	/* perform
-	 * \brief Performs EngineCallback action
-	 */
-
-	virtual void perform (EventType& event);
+	~MoveCameraCallback() = default;
 };
 
 } /* framework */

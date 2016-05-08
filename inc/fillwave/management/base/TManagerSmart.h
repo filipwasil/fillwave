@@ -48,7 +48,7 @@ class TManagerSmart: public std::unordered_map<K, std::unique_ptr<T>> {
 			return (*this)[key].get();
 		}
 		FILLWAVE_FORGET_ABOUT_ME();
-		return ((*this)[key] = make_unique<T>(parameters...)).get();
+		return ((*this)[key] = std::make_unique<T>(parameters...)).get();
 	}
 
 	/**

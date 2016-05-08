@@ -50,7 +50,7 @@ MeshTerrain::MeshTerrain(
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			puMesh ptr =
-			   make_unique < Mesh
+			   std::make_unique < Mesh
 			   > (engine, m,
 			      engine->storeTexture(diffuseMapPath.c_str()),
 			      engine->storeTexture(normalMapPath.c_str()),
@@ -106,7 +106,7 @@ MeshTerrain::MeshTerrain(
 	for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
 		for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
 			puMesh ptr =
-			   make_unique < Mesh
+			   std::make_unique < Mesh
 			   > (engine, m, diffuseMap,
 			      normalMap, specularMap, program, loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),

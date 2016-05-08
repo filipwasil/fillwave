@@ -215,12 +215,11 @@ class Engine final {
 	/* Inputs */
 	void insertInput(framework::EventType& event);
 	void insertResizeScreen(GLuint width, GLuint height);
-	void registerCallback(puCallback&& callback,
+	void registerCallback(const framework::Callback& callback,
 	                      framework::IFocusable* focusable = nullptr);
-	void unregisterCallback(framework::Callback* callback);
-	void clearCallback(framework::Callback* callback);
-	void clearCallbacks(eEventType eventType);
-	void clearCallbacks();
+	void unregisterCallback(framework::CallbackId Id);
+	void unregisterCallbacks(eEventType eventType);
+	void unregisterCallbacks();
 
 	void reload();
 

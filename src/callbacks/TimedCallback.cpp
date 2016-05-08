@@ -12,13 +12,11 @@ namespace fillwave {
 namespace framework {
 
 TimedCallback::TimedCallback(GLfloat timeToFinish, EasingFunction easing) :
-	Callback(eEventType::eTime, timeToFinish), mEasing(easing) {
-}
-
-void TimedCallback::perform(EventType& event) {
+	Callback([ & ](EventType & event) {
 	TimeEventData e = TimeEvent::getData(event);
 	performTime(e);
 	checkTime(e.mTimePassed);
+}, eEventType::eTime, timeToFinish), mEasing(easing) {
 }
 
 void TimedCallback::performTime(TimeEventData&) {

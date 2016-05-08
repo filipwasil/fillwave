@@ -46,23 +46,7 @@ MoveCameraCallback::MoveCameraCallback(
    eEventType eventType,
    float speed,
    GLFWwindow* window)
-	: Callback(eventType), mSpeed(speed), mWindow(window), mEngine(engine) {
-
-	/*
-	 * If we want to rotate the camera using the mouse motion
-	 * cursor should not be visible
-	 *
-	 * */
-	if (eventType == eEventType::eCursorPosition && window) {
-		glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-	}
-}
-
-MoveCameraCallback::~MoveCameraCallback() {
-
-}
-
-void MoveCameraCallback::perform(EventType& event) {
+	: Callback([ & ] (EventType & event) {
 	if (event.getType() == eEventType::eKey) {
 		KeyboardEventData e = KeyboardEvent::getData(event);
 		ICamera* camera = mEngine->getCurrentScene()->getCamera();
@@ -121,7 +105,16 @@ void MoveCameraCallback::perform(EventType& event) {
 			}
 		}
 	}
+}, eventType), mSpeed(speed), mWindow(window), mEngine(engine) {
 
+	/*
+	 * If we want to rotate the camera using the mouse motion
+	 * cursor should not be visible
+	 *
+	 * */
+	if (eventType == eEventType::eCursorPosition && window) {
+		glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	}
 }
 
 } /* framework */

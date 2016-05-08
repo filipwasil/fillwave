@@ -92,13 +92,13 @@ struct Engine::EngineImpl final {
 	core::VertexArray* mVAOOcclusion;
 
 	/* Inputs - callbacks */
-	std::map<eEventType, std::vector<puCallback> > mCallbacks;
+	std::map<eEventType, std::vector<Callback> > mCallbacks;
 
 	/* Inputs - focus */
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
-	std::pair<IFocusable*, std::vector<Callback*>> mFocus;
+	std::pair<IFocusable*, std::vector<CallbackId>> mFocus;
 #else
-	std::map<IFocusable*, std::vector<Callback*>> mFocus;
+	std::map<IFocusable*, std::vector<CallbackId>> mFocus;
 #endif
 
 	/* Extras */
@@ -106,7 +106,7 @@ struct Engine::EngineImpl final {
 	GLuint mFrameCounter;
 	GLfloat mTimeFactor;
 	pText mFPSText;
-	framework::FPSCallback* mTextFPSCallback;
+	framework::FPSCallback mTextFPSCallback;
 
 	/* Startup */
 	GLfloat mStartupTime;
@@ -124,12 +124,11 @@ struct Engine::EngineImpl final {
 	/* Callbacks */
 	void runCallbacks();
 	void runCallbacks(framework::EventType& eventType);
-	void clearCallbacks();
-	void clearCallbacks(eEventType eventType);
-	void clearCallback(framework::Callback* callback);
-	void registerCallback(puCallback&& callback);
-	void unregisterCallback(
-	   framework::Callback* callback);
+	void unregisterCallbacks();
+	void unregisterCallbacks(eEventType eventType);
+	void unregisterCallback(framework::CallbackId callback);
+	void registerCallback(const framework::Callback& callback);
+
 
 	/* Evaluation */
 	void evaluateShadowMaps();
@@ -192,6 +191,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
 	  mProgramLoader(engine),
 	  mFrameCounter(0),
 	  mTimeFactor(1.0),
+	  mTextFPSCallback(engine),
 	  mStartupTime(0.0f),
 	  mIsOQ(GL_FALSE),
 	  mBackgroundColor(0.1, 0.1, 0.1) {
@@ -203,6 +203,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
 	  mProgramLoader(engine),
 	  mFrameCounter(0),
 	  mTimeFactor(1.0),
+	  mTextFPSCallback(engine),
 	  mStartupTime(0.0f),
 	  mIsOQ(GL_FALSE),
 	  mBackgroundColor(0.1, 0.1, 0.1) {
@@ -219,6 +220,7 @@ Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
 	  mShaders(),
 	  mFrameCounter(0),
 	  mTimeFactor(1.0),
+	  mTextFPSCallback(engine),
 	  mStartupTime(0.0f),
 	  mIsOQ(GL_TRUE),
 	  mBackgroundColor(0.1, 0.1, 0.1) {
@@ -282,8 +284,9 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
-	mTextures = make_unique<framework::TextureSystem>(mFileLoader.getRootPath());
-	mLights = make_unique<framework::LightSystem>();
+	mTextures = std::make_unique<framework::TextureSystem>
+	            (mFileLoader.getRootPath());
+	mLights = std::make_unique<framework::LightSystem>();
 }
 
 inline void Engine::EngineImpl::initPipelines() {
@@ -322,7 +325,7 @@ inline void Engine::EngineImpl::initStartup() {
 	program->uniformPush("uScreenFactor", mWindowAspectRatio);
 	core::Program::disusePrograms();
 
-	mPostProcessingPassStartup = make_unique<core::PostProcessingPass>(program,
+	mPostProcessingPassStartup = std::make_unique<core::PostProcessingPass>(program,
 	                             mTextures->getDynamic("fillwave_quad_startup.frag",
 	                                   program, glm::ivec2(mWindowWidth, mWindowHeight)),
 	                             mStartupTimeLimit);
@@ -347,11 +350,8 @@ inline void Engine::EngineImpl::initPickingBuffer() {
 }
 
 inline void Engine::EngineImpl::initExtras() {
-	/* FPS counter */
-	mTextFPSCallback = NULL;
-
 	/* Debugger */
-	mDebugger = make_unique<framework::Debugger>(mEngine);
+	mDebugger = std::make_unique<framework::Debugger>(mEngine);
 }
 
 void Engine::EngineImpl::reload() {
@@ -547,7 +547,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 
 	if (mPostProcessingPasses.size()) {
 		auto _compare_function =
-		   [](core::PostProcessingPass & pass) -> bool {return pass.isFinished();};
+		   [](core::PostProcessingPass & pass) -> bool {return pass.getFinished();};
 		auto _begin = mPostProcessingPasses.begin();
 		auto _end = mPostProcessingPasses.end();
 
@@ -787,7 +787,7 @@ void Engine::EngineImpl::runCallbacks(
    framework::EventType& event) {
 	if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
 		for (auto& callback : mCallbacks[event.getType()]) {
-			callback->perform(event);
+			callback.perform(event);
 		}
 	}
 }
@@ -808,24 +808,23 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 /* Callbacks */
 
 void Engine::EngineImpl::registerCallback(
-   puCallback&& callback) {
-	if (mCallbacks.find(callback->getEventType()) == mCallbacks.end()) {
-		mCallbacks[callback->getEventType()] = std::vector<puCallback>();
+   const Callback& callback) {
+	if (mCallbacks.find(callback.getEventType()) == mCallbacks.end()) {
+		mCallbacks[callback.getEventType()] = std::vector<Callback>();
 	}
-	mCallbacks[callback->getEventType()].push_back(std::move(callback));
+	mCallbacks[callback.getEventType()].push_back(callback);
 }
 
 void Engine::EngineImpl::unregisterCallback(
-   framework::Callback* callback) {
-	FLOG_ERROR("mCallbacks.size() %lu", mCallbacks.size());
-	if (!mCallbacks.empty()
-	      && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
-		std::vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
-		auto _compare_function =
-		   [callback](const puCallback & c) -> bool {return c.get() == callback;};
-		auto it = std::remove_if(callbacks->begin(), callbacks->end(),
-		                         _compare_function);
-		callbacks->erase(it, callbacks->end());
+   framework::CallbackId id) {
+	if (!mCallbacks.empty()) {
+		for(auto& callbacks : mCallbacks) {
+			auto _compare_function =
+			   [id](Callback & c) -> bool {return c.getId() == id;};
+			auto it = std::remove_if(callbacks.second.begin(), callbacks.second.end(),
+			                         _compare_function);
+			callbacks.second.erase(it, callbacks.second.end());
+		}
 	}
 }
 
@@ -848,31 +847,15 @@ glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(
 
 /* Engine callbacks - clear */
 
-inline void Engine::EngineImpl::clearCallbacks() {
+inline void Engine::EngineImpl::unregisterCallbacks() {
 	mCallbacks.clear();
 }
 
-inline void Engine::EngineImpl::clearCallbacks(
+inline void Engine::EngineImpl::unregisterCallbacks(
    eEventType eventType) {
 	if (mCallbacks.find(eventType) != mCallbacks.end()) {
 		mCallbacks[eventType].clear();
 	}
-}
-
-void Engine::EngineImpl::clearCallback(framework::Callback* callback) {
-	eEventType e = callback->getEventType();
-	std::vector<puCallback>* callbacks = &mCallbacks[e];
-	callbacks->erase(
-	   std::remove_if( // Selectively remove elements in the second vector...
-	      callbacks->begin(),
-	      callbacks->end(),
-	[&] (puCallback const & p) {
-		// This predicate checks whether the element is contained
-		// in the second vector of pointers to be removed...
-		return callback == p.get();
-	}),
-	callbacks->end()
-	);
 }
 
 } /* fillwave */

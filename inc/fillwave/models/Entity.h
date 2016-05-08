@@ -16,7 +16,6 @@
 #include <fillwave/models/base/TreePtr.h>
 
 namespace fillwave {
-
 namespace framework {
 class Entity;
 }
@@ -56,8 +55,8 @@ class Entity:
 	void setTransformation(glm::mat4 modelMatrix);
 
 	/* Callbacks */
-	void attachHierarchyCallback(puCallback&& callback);
-	void detachHierarchyCallback(Callback* callback);
+	void attachHierarchyCallback(const Callback&& callback);
+//	void detachHierarchyCallback(Callback* callback);
 
 	/* Parent */
 	void updateMatrixTree();
@@ -97,14 +96,14 @@ class Entity:
 
 	GLboolean mChildrenPropagateEvent;
 	GLboolean mParentRefresh;
-	std::vector<puCallback> mCallbacksHierarchy;
+	std::vector<Callback> mCallbacksHierarchy;
 
 	GLboolean mPSC;
 	GLboolean mPSR;
 
  private:
-	void eraseFinishedCallbacks(std::vector<puCallback>& callbacks);
-	void detachCallback(std::vector<puCallback>& callbacks, Callback* callback);
+	void eraseFinishedCallbacks(std::vector<Callback>& callbacks);
+//	void detachCallback(std::vector<Callback>& callbacks, Callback* callback);
 };
 } /* framework */
 puEntity buildEntity();

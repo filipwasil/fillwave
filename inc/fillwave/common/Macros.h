@@ -13,11 +13,6 @@
 namespace fillwave {
 namespace framework {
 
-template <typename T, typename ...Args>
-std::unique_ptr<T> make_unique(Args&& ...args) {
-	return std::unique_ptr < T > (new T(std::forward<Args>(args)...));
-}
-
 template <class T>
 void remove(std::vector<T>& vec, T& item) {
 	auto new_end = std::remove_if(vec.begin(), vec.end(),
@@ -41,7 +36,7 @@ void vectorForward(std::unique_ptr<CONTAINER> &container, TCURRENT&& t,
 template<typename CONTAINER, typename TCURRENT, typename... TNEXT>
 std::unique_ptr<CONTAINER> make_unique_container(TCURRENT&& t,
       TNEXT&&... args) {
-	std::unique_ptr<CONTAINER> container = make_unique<CONTAINER>();
+	std::unique_ptr<CONTAINER> container = std::make_unique<CONTAINER>();
 	container->push_back(std::move(t));
 	vectorForward<CONTAINER>(container, args...);
 	return std::move(container);

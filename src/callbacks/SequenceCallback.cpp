@@ -12,28 +12,26 @@ namespace fillwave {
 namespace framework {
 
 SequenceCallback::SequenceCallback() :
-	Callback(eEventType::eTime),
-	mCallbackIterator(this->begin()),
-	mReloaditerator(true) {
-}
-
-void SequenceCallback::perform(EventType& event) {
-	if (mReloaditerator) { //xxx i am pretty asure this can be done better
+	Callback([ & ](EventType & event) {
+	if (mReloaditerator) { //xxx refactor ?
 		mCallbackIterator = this->begin();
 		mReloaditerator = false;
 	}
 
-	(*mCallbackIterator)->perform(event);
-	if ((*mCallbackIterator)->isFinished()) {
+	(*mCallbackIterator).perform(event);
+	if ((*mCallbackIterator).getFinished()) {
 		mCallbackIterator++;
 	}
 	if (mCallbackIterator == end()) {
-		finish();
+		setFinished(true);
 		mCallbackIterator = this->begin();
 		for (auto& it : *this) {
-			it->reset();
+			it.setFinished(false);
 		}
 	}
+}, eEventType::eTime),
+mCallbackIterator(this->begin()),
+mReloaditerator(true) {
 }
 
 } /* framework */

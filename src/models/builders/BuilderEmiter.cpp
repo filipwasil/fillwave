@@ -33,14 +33,14 @@ BuilderEmiter::BuilderEmiter(Engine* engine) :
 }
 
 puIEmiterPoint BuilderEmiter::buildEmiterGPU() {
-	return make_unique < EmiterPointGPU
+	return std::make_unique < EmiterPointGPU
 	       > (mEngine, mEmitingSourceRate, mHowMany, mColor, mAcceleration, mStartVelocity,
 	          mRobustnessVelocity, mStartPosition, mRobustnessPosition, mStartSize, mLifetime,
 	          mTexture, mBlendingSource, mBlendingDestination, mDepthTesting, mAlphaCutOff);
 }
 
 puIEmiterPoint BuilderEmiter::buildEmiterCPU() {
-	return make_unique < EmiterPointCPU
+	return std::make_unique < EmiterPointCPU
 	       > (mEngine, mEmitingSourceRate, mHowMany, mColor, mAcceleration, mStartVelocity,
 	          mRobustnessVelocity, mStartPosition, mRobustnessPosition, mStartSize, mLifetime,
 	          mTexture, mBlendingSource, mBlendingDestination, mDepthTesting, mAlphaCutOff);

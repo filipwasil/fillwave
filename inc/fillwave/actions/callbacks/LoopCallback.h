@@ -23,17 +23,16 @@ namespace framework {
 
 class LoopCallback: public Callback {
  public:
-	LoopCallback(puCallback&& callback, int numberOfExecutions);
+	LoopCallback(const Callback&& callback, int numberOfExecutions);
 	virtual ~LoopCallback() = default;
 
-	/*	perform
-	 * \brief Performs ItemCallback action.
+	/*	performLoop
+	 * \brief Performs LoopAction action.
 	 */
-
-	void perform(EventType& event);
+	void performLoop(EventType& event);
 
  protected:
-	puCallback mCallback;
+	Callback mCallback;
 	int mLoopsLeft;
 };
 

@@ -30,23 +30,16 @@
  *
  */
 
-#include "../../../linux/inc/CallbacksGLFW/AnimationKeyboardCallback.h"
-
+#include <CallbacksGLFW/AnimationKeyboardCallback.h>
+#include <fillwave/actions/events/EventType.h>
 
 namespace fillwave {
 namespace framework {
 
 AnimationKeyboardCallback::AnimationKeyboardCallback(
    Entity* entity,
-   eEventType EventType)
-	: Callback(EventType),
-	  mEntity(entity) {
-}
-
-AnimationKeyboardCallback::~AnimationKeyboardCallback() {
-}
-
-void AnimationKeyboardCallback::perform(EventType& event) {
+   eEventType eventType)
+	: Callback([ & ] (EventType& event) {
 	KeyboardEventData e = KeyboardEvent::getData(event);
 	if (mEntity) {
 		Model* model = static_cast<Model*>(mEntity);
@@ -88,6 +81,12 @@ void AnimationKeyboardCallback::perform(EventType& event) {
 				break;
 		}
 	}
+}
+, eventType),
+mEntity(entity) {
+}
+
+AnimationKeyboardCallback::~AnimationKeyboardCallback() {
 }
 
 } /* framework */

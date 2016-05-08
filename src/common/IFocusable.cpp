@@ -16,7 +16,7 @@ IFocusable::~IFocusable() {
 	mEngine->dropFocus(this);
 }
 
-void IFocusable::attachCallback(Callback *callback) {
+void IFocusable::attachCallback(Callback&& callback) {
 	mCallbacks.push_back(callback);
 }
 

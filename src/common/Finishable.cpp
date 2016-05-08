@@ -21,7 +21,7 @@ void Finishable::checkTime(float timePassed) {
 	mTimePassed += timePassed;
 	if (mTimePassed > mTimeToFinish && mTimeToFinish != FILLWAVE_ENDLESS) {
 		mTimePassed -= mTimeToFinish;
-		finish();
+		mFinished = true;
 	}
 }
 
@@ -31,15 +31,11 @@ float Finishable::getPercentageDone() const {
 	   1.0f : mTimePassed / mTimeToFinish;
 }
 
-void Finishable::finish() {
-	mFinished = true;
+void Finishable::setFinished(bool state) {
+	mFinished = state;
 }
 
-void Finishable::reset() {
-	mFinished = false;
-}
-
-bool Finishable::isFinished() const {
+bool Finishable::getFinished() const {
 	return mFinished;
 }
 

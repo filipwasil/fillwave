@@ -19,10 +19,10 @@ class Model;
  * It will be attached to every model containing animations.
  */
 
-class TimedBoneUpdateCallback: public TimedCallback {
+class TimedBoneUpdateCallback final: public TimedCallback {
  public:
 	TimedBoneUpdateCallback(Model* model);
-	virtual ~TimedBoneUpdateCallback() = default;
+	~TimedBoneUpdateCallback() = default;
 
 	/*	perform
 	 * \brief Performs ItemCallback action

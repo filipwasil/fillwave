@@ -64,13 +64,10 @@ void init() {
 	entity->moveBy(glm::vec3 (0.0, 2.0, 4.0));
 
 	/* Engine callbacks */
-	ContextGLFW::mGraphicsEngine->registerCallback(make_unique<TimeStopCallback>(
-	         ContextGLFW::mGraphicsEngine));
-	ContextGLFW::mGraphicsEngine->registerCallback(make_unique<MoveCameraCallback>(
-	         ContextGLFW::mGraphicsEngine, eEventType::eKey,
+	ContextGLFW::mGraphicsEngine->registerCallback(TimeStopCallback(ContextGLFW::mGraphicsEngine));
+	ContextGLFW::mGraphicsEngine->registerCallback(MoveCameraCallback(ContextGLFW::mGraphicsEngine, eEventType::eKey,
 	         0.1));
-	ContextGLFW::mGraphicsEngine->registerCallback(make_unique<MoveCameraCallback>(
-	         ContextGLFW::mGraphicsEngine, eEventType::eScroll,
+	ContextGLFW::mGraphicsEngine->registerCallback(MoveCameraCallback(ContextGLFW::mGraphicsEngine, eEventType::eScroll,
 	         0.1));
 }
 
@@ -88,7 +85,7 @@ void perform() {
 	         ProgramLoader(ContextGLFW::mGraphicsEngine).getDefault(),
 	         "textures/test.png",
 	         new MountainConstructor(),
-	         5));
+	         2));
 }
 
 void showDescription() {
