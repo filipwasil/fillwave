@@ -24,11 +24,6 @@ class TimedBoneUpdateCallback final: public TimedCallback {
 	TimedBoneUpdateCallback(Model* model);
 	~TimedBoneUpdateCallback() = default;
 
-	/*	perform
-	 * \brief Performs ItemCallback action
-	 */
-	void performTime(TimeEventData& data);
-
  protected:
 	Model* mModel;
 };

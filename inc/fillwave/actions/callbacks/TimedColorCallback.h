@@ -27,13 +27,7 @@ class TimedColorCallback: public TimedCallback {
 	   GLfloat lifeTime,
 	   EasingFunction easing);
 
-	virtual ~TimedColorCallback() = default;
-
-	/*	perform
-	 * \brief Performs ItemCallback action
-	 */
-
-	void perform(EventType& eventType);
+	~TimedColorCallback() = default;
 
  private:
 	glm::vec4 mStartColor;

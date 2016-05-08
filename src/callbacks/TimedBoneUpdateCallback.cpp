@@ -16,12 +16,11 @@ namespace fillwave {
 namespace framework {
 
 TimedBoneUpdateCallback::TimedBoneUpdateCallback(Model* model) :
-	TimedCallback(0.0), mModel(model) {
+	TimedCallback(0.0, [&](TimeEventData& data) {
+					  mModel->performAnimation(data.mTimePassed);
+				  }
+	), mModel(model) {
 	FLOG_DEBUG("Added animation callback");
-}
-
-void TimedBoneUpdateCallback::performTime(TimeEventData& data) {
-	mModel->performAnimation(data.mTimePassed);
 }
 
 } /* framework */

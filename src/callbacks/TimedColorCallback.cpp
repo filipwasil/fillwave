@@ -17,25 +17,22 @@ TimedColorCallback::TimedColorCallback(
    glm::vec4 endColor,
    GLfloat lifeTime,
    EasingFunction easing) :
-	TimedCallback(lifeTime, easing),
+	TimedCallback(lifeTime, [&] (TimeEventData& event) {
+	if (getPercentageDone() == 0.0f) {
+		mPainter->setColor(mStartColor);
+	}
+	mTimePassed += event.mTimePassed;
+	mPainter->setColor(mStartColor + ease(getPercentageDone()) * mEndColor);
+	checkTime(event.mTimePassed);
+	if (mFinished) {
+		mModel->removeEffect(mPainter);
+	}
+}, easing),
 	mStartColor(glm::vec4(0.0)),
 	mEndColor(endColor),
 	mModel(model) {
 	mPainter = std::make_shared<Painter>(mStartColor);
 	mModel->addEffect(mPainter);
-}
-
-void TimedColorCallback::perform(EventType& event) {
-	TimeEventData myData = TimeEvent::getData(event);
-	if (getPercentageDone() == 0.0f) {
-		mPainter->setColor(mStartColor);
-	}
-	mTimePassed += myData.mTimePassed;
-	mPainter->setColor(mStartColor + ease(getPercentageDone()) * mEndColor);
-	checkTime(myData.mTimePassed);
-	if (mFinished) {
-		mModel->removeEffect(mPainter);
-	}
 }
 
 } /* framework */

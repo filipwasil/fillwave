@@ -31,9 +31,7 @@ class TimedScaleCallback: public TimedCallback {
 	   GLfloat lifetime,
 	   EasingFunction easing = LinearInterpolation);
 
-	virtual ~TimedScaleCallback() = default;
-
-	void performTime(TimeEventData& data);
+	~TimedScaleCallback() = default;
 
  protected:
 	glm::vec3 mStartScale;

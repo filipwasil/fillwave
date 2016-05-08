@@ -39,7 +39,7 @@ namespace framework {
 AnimationKeyboardCallback::AnimationKeyboardCallback(
    Entity* entity,
    eEventType eventType)
-	: Callback([ & ] (EventType& event) {
+	: Callback([ & ] (EventType & event) {
 	KeyboardEventData e = KeyboardEvent::getData(event);
 	if (mEntity) {
 		Model* model = static_cast<Model*>(mEntity);

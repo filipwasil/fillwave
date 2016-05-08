@@ -17,7 +17,7 @@ namespace fillwave {
 namespace framework {
 
 TimeStopCallback::TimeStopCallback(Engine* engine)
-	: Callback([ & ] (EventType &event) {
+	: Callback([ & ] (EventType & event) {
 	KeyboardEventData data = KeyboardEvent::getData(event);
 	/* You can handle Your callback directly here ... */
 	if (data.key == GLFW_KEY_T &&

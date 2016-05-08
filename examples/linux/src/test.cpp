@@ -64,10 +64,13 @@ void init() {
 	entity->moveBy(glm::vec3 (0.0, 2.0, 4.0));
 
 	/* Engine callbacks */
-	ContextGLFW::mGraphicsEngine->registerCallback(TimeStopCallback(ContextGLFW::mGraphicsEngine));
-	ContextGLFW::mGraphicsEngine->registerCallback(MoveCameraCallback(ContextGLFW::mGraphicsEngine, eEventType::eKey,
+	ContextGLFW::mGraphicsEngine->registerCallback(TimeStopCallback(
+	         ContextGLFW::mGraphicsEngine));
+	ContextGLFW::mGraphicsEngine->registerCallback(MoveCameraCallback(
+	         ContextGLFW::mGraphicsEngine, eEventType::eKey,
 	         0.1));
-	ContextGLFW::mGraphicsEngine->registerCallback(MoveCameraCallback(ContextGLFW::mGraphicsEngine, eEventType::eScroll,
+	ContextGLFW::mGraphicsEngine->registerCallback(MoveCameraCallback(
+	         ContextGLFW::mGraphicsEngine, eEventType::eScroll,
 	         0.1));
 }
 

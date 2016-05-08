@@ -26,11 +26,6 @@ class LoopCallback: public Callback {
 	LoopCallback(const Callback&& callback, int numberOfExecutions);
 	virtual ~LoopCallback() = default;
 
-	/*	performLoop
-	 * \brief Performs LoopAction action.
-	 */
-	void performLoop(EventType& event);
-
  protected:
 	Callback mCallback;
 	int mLoopsLeft;

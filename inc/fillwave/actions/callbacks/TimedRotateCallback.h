@@ -26,9 +26,7 @@ class TimedRotateCallback: public TimedCallback {
 	   GLfloat lifeTime,
 	   EasingFunction easing = LinearInterpolation);
 
-	virtual ~TimedRotateCallback() = default;
-
-	void performTime(TimeEventData& data);
+	~TimedRotateCallback() = default;
 
  protected:
 	Moveable* mMoveable;

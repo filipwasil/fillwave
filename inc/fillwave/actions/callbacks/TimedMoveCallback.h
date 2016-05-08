@@ -27,9 +27,7 @@ class TimedMoveCallback: public TimedCallback {
 	   GLfloat lifeTime,
 	   EasingFunction easing = LinearInterpolation);
 
-	virtual ~TimedMoveCallback() = default;
-
-	void performTime(TimeEventData& data);
+	~TimedMoveCallback() = default;
 
  protected:
 	glm::vec3 mStartPosition;

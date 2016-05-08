@@ -25,9 +25,7 @@ class TimedEmiterUpdateCallback: public TimedCallback {
 	   GLfloat timeToFinish,
 	   EasingFunction easing = LinearInterpolation);
 
-	virtual ~TimedEmiterUpdateCallback() = default;
-
-	void performTime(TimeEventData& data);
+	~TimedEmiterUpdateCallback() = default;
 
  protected:
 	IEmiterPoint* mEmiter;

@@ -21,23 +21,22 @@ TimedRotateCallback::TimedRotateCallback(
    GLfloat angle,
    GLfloat lifeTime,
    EasingFunction easing) :
-	TimedCallback(lifeTime, easing),
+	TimedCallback(lifeTime, [&] (TimeEventData& data) {
+					  if (getPercentageDone() == 0.0f) {
+						  mStartRotation = mMoveable->getRotation();
+					  }
+					  mTimePassed += data.mTimePassed;
+					  mMoveable->rotateTo(mStartRotation);
+					  mMoveable->rotateBy(mAxis,
+										  mStartAngle + ease(getPercentageDone()) * mEndAngle);
+				  }
+			, easing),
 	mMoveable(moveable),
 	mStartRotation(glm::quat()),
 	mStartAngle(0.0f),
 	mEndAngle(angle),
 	mAxis(axis) {
 
-}
-
-void TimedRotateCallback::performTime(TimeEventData& data) {
-	if (getPercentageDone() == 0.0f) {
-		mStartRotation = mMoveable->getRotation();
-	}
-	mTimePassed += data.mTimePassed;
-	mMoveable->rotateTo(mStartRotation);
-	mMoveable->rotateBy(mAxis,
-	                    mStartAngle + ease(getPercentageDone()) * mEndAngle);
 }
 
 } /* framework */

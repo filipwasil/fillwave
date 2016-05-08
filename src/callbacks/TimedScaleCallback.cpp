@@ -16,7 +16,14 @@ TimedScaleCallback::TimedScaleCallback(
    glm::vec3 normalizedScaleVec,
    GLfloat lifetime,
    EasingFunction easing) :
-	TimedCallback(lifetime, easing),
+	TimedCallback(lifetime, [&] (TimeEventData& data) {
+		if (getPercentageDone() == 0.0f) {
+			mStartScale = mMoveable->getScale();
+		}
+		mTimePassed += data.mTimePassed;
+		mMoveable->scaleTo(
+				mStartScale + ease(getPercentageDone()) * (mEndScale - mStartScale));
+	}, easing),
 	mEndScale(normalizedScaleVec),
 	mMoveable(moveable) {
 
@@ -27,19 +34,18 @@ TimedScaleCallback::TimedScaleCallback(
    GLfloat normalizedScale,
    GLfloat lifetime,
    EasingFunction easing) :
-	TimedCallback(lifetime, easing),
+	TimedCallback(lifetime, [&] (TimeEventData& data) {
+					  if (getPercentageDone() == 0.0f) {
+						  mStartScale = mMoveable->getScale();
+					  }
+					  mTimePassed += data.mTimePassed;
+					  mMoveable->scaleTo(
+							  mStartScale + ease(getPercentageDone()) * (mEndScale - mStartScale));
+				  }
+			, easing),
 	mEndScale(normalizedScale, normalizedScale, normalizedScale),
 	mMoveable(moveable) {
 
-}
-
-void TimedScaleCallback::performTime(TimeEventData& data) {
-	if (getPercentageDone() == 0.0f) {
-		mStartScale = mMoveable->getScale();
-	}
-	mTimePassed += data.mTimePassed;
-	mMoveable->scaleTo(
-	   mStartScale + ease(getPercentageDone()) * (mEndScale - mStartScale));
 }
 
 } /* framework */

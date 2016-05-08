@@ -17,31 +17,23 @@
 namespace fillwave {
 namespace framework {
 
+	typedef std::function<void(TimeEventData&)> TimeFunction;
 /*! \class TimedCallback
- *
  * \brief ItemCallback to be finished after a period of time.
- *
  */
 
 class TimedCallback: public Callback {
  public:
-	TimedCallback(GLfloat timeToFinish, EasingFunction funcion =
+	TimedCallback(GLfloat timeToFinish, TimeFunction foo = TimeFunction(), EasingFunction funcion =
 	                 LinearInterpolation);
 
-	virtual ~TimedCallback() = default;
-
-	/*	perform
-	 * \brief Performs ItemCallback action.
-	 */
-
-	void perform(EventType& eventType);
-
-	virtual void performTime(TimeEventData& e);
+	~TimedCallback() = default;
 
 	GLfloat ease(GLfloat progress);
 
  private:
 	EasingFunction mEasing;
+	TimeFunction mTime;
 };
 
 } /* framework */
