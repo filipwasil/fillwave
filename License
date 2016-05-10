@@ -1,7 +1,7 @@
-Copyright (c) 2015, Filip Wasil
+Copyright (c) 2016, Filip Wasil
 All rights reserved.
 
-Fillwave C++11 graphics engine.
+Fillwave C++14 graphics engine.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
