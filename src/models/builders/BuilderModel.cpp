@@ -24,7 +24,7 @@ BuilderModel::BuilderModel(
 }
 
 puModel BuilderModel::build() {
-	return make_unique<Model>(mEngine, mProgram, mShapePath);
+	return std::make_unique<Model>(mEngine, mProgram, mShapePath);
 }
 
 BuilderModel& BuilderModel::setModelPath(std::string& path) {

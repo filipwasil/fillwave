@@ -23,17 +23,17 @@ Texture3D::Texture3D(
    Texture2DFile* fileBack,
    ParameterList& parameters) :
 	Texture(GL_TEXTURE_CUBE_MAP),
-	mRight(framework::make_unique<Texture3DFile>(fileRight,
+	mRight(std::make_unique<Texture3DFile>(fileRight,
 	       GL_TEXTURE_CUBE_MAP_POSITIVE_X)),
-	mLeft(framework::make_unique<Texture3DFile>(fileLeft,
+	mLeft(std::make_unique<Texture3DFile>(fileLeft,
 	      GL_TEXTURE_CUBE_MAP_NEGATIVE_X)),
-	mCeil(framework::make_unique<Texture3DFile>(fileCeil,
+	mCeil(std::make_unique<Texture3DFile>(fileCeil,
 	      GL_TEXTURE_CUBE_MAP_POSITIVE_Y)),
-	mFloor(framework::make_unique<Texture3DFile>(fileFloor,
+	mFloor(std::make_unique<Texture3DFile>(fileFloor,
 	       GL_TEXTURE_CUBE_MAP_NEGATIVE_Y)),
-	mFront(framework::make_unique<Texture3DFile>(fileFront,
+	mFront(std::make_unique<Texture3DFile>(fileFront,
 	       GL_TEXTURE_CUBE_MAP_POSITIVE_Z)),
-	mBack(framework::make_unique<Texture3DFile>(fileBack,
+	mBack(std::make_unique<Texture3DFile>(fileBack,
 	      GL_TEXTURE_CUBE_MAP_NEGATIVE_Z)) {
 	bind();
 	setParameters(parameters);

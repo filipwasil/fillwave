@@ -211,6 +211,6 @@ bool Entity::getRenderItem(RenderItem& /*item*/) {
 
 } /* framework */
 puEntity buildEntity() {
-	return framework::make_unique<framework::Entity>();
+	return std::make_unique<framework::Entity>();
 }
 } /* fillwave */

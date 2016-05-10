@@ -58,7 +58,7 @@ BuilderModelManual& BuilderModelManual::setMaterial(Material material) {
 }
 
 puModel BuilderModelManual::build() {
-	return make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMap,
+	return std::make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMap,
 	                          mNormalMap,
 	                          mSpecularMap, mMaterial);
 }

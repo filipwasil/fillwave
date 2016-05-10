@@ -44,7 +44,7 @@ BuilderModel& BuilderModelExternalMaps::setSpecularMapPath(std::string& path) {
 }
 
 puModel BuilderModelExternalMaps::build() {
-	return make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMapPath,
+	return std::make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMapPath,
 	                          mNormalMapPath, mSpecularMapPath);
 }
 

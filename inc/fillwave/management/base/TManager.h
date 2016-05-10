@@ -31,7 +31,7 @@ class TManager: public std::vector<std::unique_ptr<T>> {
 		if ((*this).size() >= M) {
 			return nullptr;
 		}
-		(*this).push_back(make_unique<T>(parameters...));
+		(*this).push_back(std::make_unique<T>(parameters...));
 		return (*this).back().get();
 	}
 

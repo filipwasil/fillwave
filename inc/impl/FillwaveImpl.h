@@ -282,8 +282,8 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
-	mTextures = make_unique<framework::TextureSystem>(mFileLoader.getRootPath());
-	mLights = make_unique<framework::LightSystem>();
+	mTextures = std::make_unique<framework::TextureSystem>(mFileLoader.getRootPath());
+	mLights = std::make_unique<framework::LightSystem>();
 }
 
 inline void Engine::EngineImpl::initPipelines() {
@@ -322,7 +322,7 @@ inline void Engine::EngineImpl::initStartup() {
 	program->uniformPush("uScreenFactor", mWindowAspectRatio);
 	core::Program::disusePrograms();
 
-	mPostProcessingPassStartup = make_unique<core::PostProcessingPass>(program,
+	mPostProcessingPassStartup = std::make_unique<core::PostProcessingPass>(program,
 	                             mTextures->getDynamic("fillwave_quad_startup.frag",
 	                                   program, glm::ivec2(mWindowWidth, mWindowHeight)),
 	                             mStartupTimeLimit);
@@ -351,7 +351,7 @@ inline void Engine::EngineImpl::initExtras() {
 	mTextFPSCallback = NULL;
 
 	/* Debugger */
-	mDebugger = make_unique<framework::Debugger>(mEngine);
+	mDebugger = std::make_unique<framework::Debugger>(mEngine);
 }
 
 void Engine::EngineImpl::reload() {

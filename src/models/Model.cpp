@@ -46,7 +46,7 @@ Model::Model(
 	std::vector<GLuint> indices = shape.getIndices();
 
 	core::VertexArray* vao = new core::VertexArray();
-	attach(make_unique<Mesh>(engine, material, diffuseMap,
+	attach(std::make_unique<Mesh>(engine, material, diffuseMap,
 	                         normalMap, specularMap,
 	                         program, mProgramShadow, mProgramShadowColor,
 	                         loader.getOcclusionOptimizedQuery(),
@@ -235,7 +235,7 @@ inline void Model::initAnimations(const aiScene* scene) {
 	if (scene->HasAnimations()) {
 		mAnimator = new Animator(scene);
 		FLOG_DEBUG("attached TimedBoneUpdateCallback to model");
-		this->attachHierarchyCallback(make_unique<TimedBoneUpdateCallback>(this));
+		this->attachHierarchyCallback(std::make_unique<TimedBoneUpdateCallback>(this));
 	}
 }
 
@@ -378,7 +378,7 @@ puMesh Model::loadMesh(
 
 	ProgramLoader loader(engine);
 	core::VertexArray* vao = new core::VertexArray();
-	return make_unique < Mesh
+	return std::make_unique < Mesh
 	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
