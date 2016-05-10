@@ -58,14 +58,17 @@
     std::cout << info << elapsed_seconds.count() << std::endl;} while(0);\
 
 #define FILLWAVE_MEASURE_START std::chrono::system_clock::now
-#define FILLWAVE_MEASURE_STOP(info, start)  do {  \
+#define FILLWAVE_MEASURE_STOP_PRINT(info, start)  do {  \
     std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - start;\
     std::cout << info << elapsed_seconds.count() << std::endl;} while(0);
+
+#define FILLWAVE_MEASURE_STOP_GET(start) (std::chrono::system_clock::now() - start).count()
 
 /* Usage
  *  auto start = FILLWAVE_MEASURE_START();
  *  jobs ...
- *  FILLWAVE_MEASURE_STOP("The period passed:", start)
+ *  FILLWAVE_MEASURE_STOP_PRINT("The period passed:", start)
+ *  FILLWAVE_MEASURE_STOP_GET(start)
  * */
 
 
