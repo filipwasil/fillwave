@@ -31,7 +31,7 @@ LightPoint::LightPoint(
 	                             glm::normalize(glm::vec3(1.0, 0.0, 0.0)))), glm::radians(
 	            90.0), 1.0, //1440.0/900.0,
 	         0.1, 1000.0), mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_X] =
-			std::make_unique < CameraPerspective
+	         std::make_unique < CameraPerspective
 	         > (position, glm::normalize(
 	               glm::angleAxis(glm::radians(-90.0f),
 	                              glm::normalize(glm::vec3(0.0, 1.0, 0.0)))
@@ -39,25 +39,25 @@ LightPoint::LightPoint(
 	                                glm::normalize(glm::vec3(1.0, 0.0, 0.0)))), glm::radians(
 	               90.0), 1.0, //1440.0/900.0,
 	            0.1, 1000.0), mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_Y] =
-										  std::make_unique < CameraPerspective
+	            std::make_unique < CameraPerspective
 	            > (position, glm::normalize(
 	                  glm::angleAxis(glm::radians(90.0f),
 	                                 glm::normalize(glm::vec3(1.0, 0.0, 0.0)))), glm::radians(
 	                  90.0), 1.0, //1440.0/900.0,
 	               0.1, 1000.0), mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_Y] =
-											 std::make_unique < CameraPerspective
+	               std::make_unique < CameraPerspective
 	               > (position, glm::normalize(
 	                     glm::angleAxis(glm::radians(-90.0f),
 	                                    glm::normalize(glm::vec3(1.0, 0.0, 0.0)))), glm::radians(
 	                     90.0), 1.0, //1440.0/900.0,
 	                  0.1, 1000.0), mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_Z] =
-												std::make_unique < CameraPerspective
+	                  std::make_unique < CameraPerspective
 	                  > (position, glm::normalize(
 	                        glm::angleAxis(glm::radians(180.0f),
 	                                       glm::normalize(glm::vec3(0.0, 0.0, 1.0)))), glm::radians(
 	                        90.0), 1.0, //1440.0/900.0,
 	                     0.1, 1000.0), mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_Z] =
-												   std::make_unique < CameraPerspective
+	                     std::make_unique < CameraPerspective
 	                     > (position, glm::normalize(
 	                           glm::angleAxis(glm::radians(180.0f),
 	                                 glm::normalize(glm::vec3(0.0, 1.0, 0.0)))

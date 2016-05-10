@@ -47,14 +47,14 @@ Model::Model(
 
 	core::VertexArray* vao = new core::VertexArray();
 	attach(std::make_unique<Mesh>(engine, material, diffuseMap,
-	                         normalMap, specularMap,
-	                         program, mProgramShadow, mProgramShadowColor,
-	                         loader.getOcclusionOptimizedQuery(),
-	                         loader.getAmbientOcclusionGeometry(),
-	                         loader.getAmbientOcclusionColor(), engine->getLightSystem(),
-	                         engine->storeBuffer<core::VertexBufferBasic> (vao, vertices),
-	                         engine->storeBuffer<core::IndexBuffer> (vao, indices),
-	                         mAnimator, GL_TRIANGLES, vao));
+	                              normalMap, specularMap,
+	                              program, mProgramShadow, mProgramShadowColor,
+	                              loader.getOcclusionOptimizedQuery(),
+	                              loader.getAmbientOcclusionGeometry(),
+	                              loader.getAmbientOcclusionColor(), engine->getLightSystem(),
+	                              engine->storeBuffer<core::VertexBufferBasic> (vao, vertices),
+	                              engine->storeBuffer<core::IndexBuffer> (vao, indices),
+	                              mAnimator, GL_TRIANGLES, vao));
 }
 
 Model::Model(Engine* engine, core::Program* program,

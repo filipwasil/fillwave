@@ -282,7 +282,8 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
-	mTextures = std::make_unique<framework::TextureSystem>(mFileLoader.getRootPath());
+	mTextures = std::make_unique<framework::TextureSystem>
+	            (mFileLoader.getRootPath());
 	mLights = std::make_unique<framework::LightSystem>();
 }
 

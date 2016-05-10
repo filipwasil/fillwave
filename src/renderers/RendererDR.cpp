@@ -42,7 +42,7 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	mDeferredColorAttachments(5),
 	mDeferredDepthAttachments(1),
 	mGBuffer(
-			std::make_unique<core::FramebufferGeometry>(mTextures, mScreenSize[0],
+	  std::make_unique<core::FramebufferGeometry>(mTextures, mScreenSize[0],
 	        mScreenSize[1], mDeferredColorAttachments,
 	        mDeferredDepthAttachments)) {
 
@@ -54,13 +54,13 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	core::VertexArray* vao = new
 	core::VertexArray();
 	mDeferredPointLight = std::make_unique<Mesh>(engine, Material(),
-	                                        nullptr,
-	                                        nullptr, nullptr,
-	                                        mProgramPointLight, nullptr, nullptr, loader.getOcclusionQuery(),
-	                                        nullptr, nullptr, mLights,
-	                                        engine->storeBuffer<core::VertexBufferBasic>(vao, vertices),
-	                                        engine->storeBuffer<core::IndexBuffer>(vao, indices),
-	                                        nullptr, GL_TRIANGLES, vao);
+	                      nullptr,
+	                      nullptr, nullptr,
+	                      mProgramPointLight, nullptr, nullptr, loader.getOcclusionQuery(),
+	                      nullptr, nullptr, mLights,
+	                      engine->storeBuffer<core::VertexBufferBasic>(vao, vertices),
+	                      engine->storeBuffer<core::IndexBuffer>(vao, indices),
+	                      nullptr, GL_TRIANGLES, vao);
 
 	initUniforms();
 	initGeometryBuffer();
