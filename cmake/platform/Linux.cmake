@@ -113,6 +113,10 @@ if(FILLWAVE_BUILD_SDL2_EXAMPLES)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/sdl2)
 endif()
 
+if (FILLWAVE_PERFORMANCE_TESTS)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests/performance)
+endif()
+
 # -----------------------------------------------
 # Packaging
 # -----------------------------------------------
