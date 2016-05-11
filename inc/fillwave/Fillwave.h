@@ -173,8 +173,8 @@ class Engine final {
 
 	/* Store text */
 	pText storeText(
-	   std::string content,
-	   std::string fontName,
+	   const std::string& content,
+	   const std::string& fontName,
 	   glm::vec2 position,
 	   GLfloat scale = 1.0,
 	   glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),

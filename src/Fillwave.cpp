@@ -50,12 +50,15 @@
 /* Implementation */
 #include  <impl/FillwaveImpl.h>
 
+using namespace fillwave::core;
+using namespace std;
+
 namespace fillwave {
 
 #ifdef __ANDROID__
 
-Engine::Engine(std::string rootPath) {
-	mImpl = std::make_unique<EngineImpl>(this, rootPath);
+Engine::Engine(string rootPath) {
+	mImpl = make_unique<EngineImpl>(this, rootPath);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
@@ -63,7 +66,7 @@ Engine::Engine(std::string rootPath) {
 }
 
 Engine::Engine(ANativeActivity* activity) {
-	mImpl = std::make_unique<EngineImpl>(this, activity);
+	mImpl = make_unique<EngineImpl>(this, activity);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
@@ -71,7 +74,7 @@ Engine::Engine(ANativeActivity* activity) {
 }
 #else
 Engine::Engine(GLint argc, GLchar* const argv[]) {
-	mImpl = std::make_unique<EngineImpl>(this, argc, argv);
+	mImpl = make_unique<EngineImpl>(this, argc, argv);
 	/* This init has to be outside of the initializer list,
 	 * because it needs mImpl to be created fully before Initialization.
 	 * mImpl uses Engine functions */
@@ -104,11 +107,11 @@ void Engine::drawPoints(GLfloat time) {
 }
 #endif
 
-void Engine::drawTexture(core::Texture* t, core::Program* p) {
+void Engine::drawTexture(Texture* t, Program* p) {
 	mImpl->drawTexture(t, p);
 }
 
-void Engine::drawTexture(core::Texture* t) {
+void Engine::drawTexture(Texture* t) {
 	mImpl->drawTexture(t);
 }
 
@@ -141,49 +144,49 @@ LightDirectional* Engine::storeLightDirectional(
 	          position, rotation, color, followed);
 }
 
-core::Program* Engine::storeProgram(
-   const std::string& name,
-   const std::vector<core::Shader*>& shaders,
+Program* Engine::storeProgram(
+   const string& name,
+   const vector<Shader*>& shaders,
    GLboolean skipLinking) {
 	return mImpl->mPrograms.store(name, shaders, skipLinking);
 }
 
-core::Texture2D* Engine::storeTexture(
-   const std::string& texturePath,
+Texture2D* Engine::storeTexture(
+   const string& texturePath,
    framework::eCompression compression) {
 	return mImpl->mTextures->get(texturePath, compression);
 }
 
-core::Texture2DRenderable* Engine::storeTextureRenderable() {
+Texture2DRenderable* Engine::storeTextureRenderable() {
 	return mImpl->mTextures->getColor2D(mImpl->mWindowWidth,
 	                                    mImpl->mWindowHeight);
 }
 
-core::Texture2DRenderableDynamic* Engine::storeTextureDynamic(
-   const std::string& fragmentShaderPath) {
-	const std::string path = fragmentShaderPath;
-	core::Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
-	                            fragmentShaderPath);
+Texture2DRenderableDynamic* Engine::storeTextureDynamic(
+   const string& fragmentShaderPath) {
+	const string path = fragmentShaderPath;
+	Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
+	                      fragmentShaderPath);
 	return mImpl->mTextures->getDynamic(path, program,
 	                                    glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));;
 }
 
-core::Texture3D* Engine::storeTexture3D(
-   const std::string& posX,
-   const std::string& negX,
-   const std::string& posY,
-   const std::string& negY,
-   const std::string& posZ,
-   const std::string& negZ) {
+Texture3D* Engine::storeTexture3D(
+   const string& posX,
+   const string& negX,
+   const string& posY,
+   const string& negY,
+   const string& posZ,
+   const string& negZ) {
 	return mImpl->mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
 
-core::Sampler* Engine::storeSO(GLint textureUnit) {
+Sampler* Engine::storeSO(GLint textureUnit) {
 	return mImpl->mSamplers.store(textureUnit, textureUnit);
 }
 
-core::VertexArray* Engine::storeVAO(framework::IReloadable* user,
-                                    core::VertexArray* vao) {
+VertexArray* Engine::storeVAO(framework::IReloadable* user,
+                              VertexArray* vao) {
 	return vao ? mImpl->mBuffers.mVertexArrays.store(vao,
 	       user) : mImpl->mBuffers.mVertexArrays.store(user);
 }
@@ -228,13 +231,13 @@ void Engine::registerCallback(puCallback&& callback,
 #else
 		if(mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
 			FLOG_ERROR("AAA");
-			mImpl->mFocus[focusable] = std::vector<Callback*> (1, callback.get());
+			mImpl->mFocus[focusable] = vector<Callback*> (1, callback.get());
 		} else {
 			mImpl->mFocus[focusable].push_back(callback.get());
 		}
 #endif
 	}
-	mImpl->registerCallback(std::move(callback));
+	mImpl->registerCallback(move(callback));
 }
 
 void Engine::dropFocus(framework::IFocusable* focusable) {
@@ -264,8 +267,8 @@ void Engine::unregisterCallback(framework::Callback* callback) {
 }
 
 pText Engine::storeText(
-   std::string content,
-   std::string fontName,
+   const string& content,
+   const string& fontName,
    glm::vec2 position,
    GLfloat scale,
    glm::vec4 color,
@@ -274,8 +277,8 @@ pText Engine::storeText(
 	if (not mImpl->mTextures->get(fontName + ".png")) {
 		mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
 	}
-	core::Texture2D* t = mImpl->mTextures->get(fontName + ".png",
-	                     framework::eCompression::eNone, framework::eFlip::eVertical);
+	Texture2D* t = mImpl->mTextures->get(fontName + ".png",
+	                                     framework::eCompression::eNone, framework::eFlip::eVertical);
 
 	Font* font = nullptr;
 	for (auto& it : mImpl->mFontManager) {
@@ -285,14 +288,14 @@ pText Engine::storeText(
 	}
 
 	if (not font) {
-		std::ifstream myfile(mImpl->mFileLoader.getRootPath(fontName + ".meta"));
+		ifstream myfile(mImpl->mFileLoader.getRootPath(fontName + ".meta"));
 		if (!myfile.is_open()) {
 			FLOG_ERROR("No text added. Could not write to metadata file: %s",
 			           (fontName + ".meta").c_str());
 			return pText();
 		}
-		std::string line;
-		std::string ASCII, xMin, width, yMin, height, yOffset;
+		string line;
+		string ASCII, xMin, width, yMin, height, yOffset;
 		GLfloat fXMin, fWidth, fYMin, fHeight, fYOffset;
 		GLint iASCII;
 		Font* newFont = new Font();
@@ -315,7 +318,7 @@ pText Engine::storeText(
 		font = newFont;
 	}
 
-	pText text = std::make_shared < framework::Text
+	pText text = make_shared < framework::Text
 	             > (content, t, position, this, scale, font, color, effect);
 	mImpl->mTextManager.push_back(pText(text));
 	return text;
@@ -325,13 +328,13 @@ void Engine::clearText(pText text) {
 	auto _compare_function = [text](pText t) -> bool {return (t == text);};
 	auto _begin = mImpl->mTextManager.begin();
 	auto _end = mImpl->mTextManager.end();
-	auto it = std::remove_if(_begin, _end, _compare_function);
+	auto it = remove_if(_begin, _end, _compare_function);
 	mImpl->mTextManager.erase(it, _end);
 }
 
 void Engine::clearLight(LightSpot* light) {
-	auto new_end = std::remove_if(mImpl->mLights->mLightsSpot.begin(),
-	                              mImpl->mLights->mLightsSpot.end(),
+	auto new_end = remove_if(mImpl->mLights->mLightsSpot.begin(),
+	                         mImpl->mLights->mLightsSpot.end(),
 	[light](const puLightSpot & l) {
 		return light == l.get();
 	});
@@ -339,8 +342,8 @@ void Engine::clearLight(LightSpot* light) {
 }
 
 void Engine::clearLight(LightDirectional* light) {
-	auto new_end = std::remove_if(mImpl->mLights->mLightsDirectional.begin(),
-	                              mImpl->mLights->mLightsDirectional.end(),
+	auto new_end = remove_if(mImpl->mLights->mLightsDirectional.begin(),
+	                         mImpl->mLights->mLightsDirectional.end(),
 	[light](const puLightDirectional & l) {
 		return light == l.get();
 	});
@@ -349,8 +352,8 @@ void Engine::clearLight(LightDirectional* light) {
 }
 
 void Engine::clearLight(LightPoint* light) {
-	auto new_end = std::remove_if(mImpl->mLights->mLightsPoint.begin(),
-	                              mImpl->mLights->mLightsPoint.end(),
+	auto new_end = remove_if(mImpl->mLights->mLightsPoint.begin(),
+	                         mImpl->mLights->mLightsPoint.end(),
 	[light](const puLightPoint & l) {
 		return light == l.get();
 	});
@@ -391,7 +394,7 @@ void Engine::setCurrentScene(puScene&& scene) {
 	if (mImpl->mScene) {
 		mImpl->mScene->onHide();
 	}
-	mImpl->mScene = std::move(scene);
+	mImpl->mScene = move(scene);
 	mImpl->mScene->onShow();
 	mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
@@ -409,7 +412,7 @@ framework::TextureSystem* Engine::getTextureSystem() const {
 }
 
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
-   const std::string& shapePath) {
+   const string& shapePath) {
 	PhysicsMeshBuffer* buffer = new PhysicsMeshBuffer();
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -443,19 +446,19 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(
 }
 
 void Engine::addPostProcess(
-   const std::string& fragmentShaderPath,
+   const string& fragmentShaderPath,
    GLfloat lifeTime) {
-	core::Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
-	                            fragmentShaderPath);
-	core::PostProcessingPass pass(program,
-	                              mImpl->mTextures->getDynamic(fragmentShaderPath, program,
-	                                    glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)), lifeTime);
+	Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(
+	                      fragmentShaderPath);
+	PostProcessingPass pass(program,
+	                        mImpl->mTextures->getDynamic(fragmentShaderPath, program,
+	                              glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)), lifeTime);
 	mImpl->mPostProcessingPasses.push_back(pass);
 	FLOG_DEBUG("Post processing pass added: %s", fragmentShaderPath.c_str());
 }
 
 void Engine::configureFPSCounter(
-   std::string fontName,
+   string fontName,
    glm::vec2 position,
    GLfloat size) {
 	if (fontName.size() > 1) {
@@ -464,14 +467,14 @@ void Engine::configureFPSCounter(
 		/* Provide callback to refresh the FPS value */
 		mImpl->mTextFPSCallback = new framework::FPSCallback(this,
 		      mImpl->mFPSText);
-		registerCallback(std::unique_ptr<Callback>(mImpl->mTextFPSCallback));
+		registerCallback(unique_ptr<Callback>(mImpl->mTextFPSCallback));
 	} else {
 		mImpl->mFPSText.reset();
 		unregisterCallback(mImpl->mTextFPSCallback);
 	}
 }
 
-void Engine::configureFileLogging(std::string fileName) {
+void Engine::configureFileLogging(string fileName) {
 	if (fileName.size() > 1) {
 		FLOG_INFO("File %s will be cleaned and used for logging.",
 		          fileName.c_str());
@@ -511,12 +514,12 @@ void Engine::pick(GLuint x, GLuint y) {
 	glm::ivec4 colorRead = mImpl->pickingBufferGetColor(data, x, y);
 	mImpl->mPickingPixelBuffer->unmap();
 	mImpl->mPickingPixelBuffer->unbind();
-	core::Framebuffer::bindScreenFramebuffer();
+	Framebuffer::bindScreenFramebuffer();
 	mImpl->mScene->draw();
 	mImpl->mScene->pick(colorRead);
 }
 
-void Engine::captureFramebufferToFile(const std::string& name) {
+void Engine::captureFramebufferToFile(const string& name) {
 	mImpl->mPickingRenderableTexture->bindForRendering();
 	mImpl->drawClear();
 	mImpl->mScene->draw();
@@ -545,7 +548,7 @@ void Engine::captureFramebufferToFile(const std::string& name) {
 	fclose(file);
 	mImpl->mPickingPixelBuffer->unmap();
 	mImpl->mPickingPixelBuffer->unbind();
-	core::Framebuffer::bindScreenFramebuffer();
+	Framebuffer::bindScreenFramebuffer();
 	mImpl->mScene->draw();
 }
 
@@ -571,7 +574,7 @@ void Engine::captureFramebufferToBuffer(
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-const aiScene* Engine::getModelFromFile(std::string path) {
+const aiScene* Engine::getModelFromFile(string path) {
 	FLOG_DEBUG("Reading model %s", path.c_str());
 	return mImpl->mImporter.ReadFile(
 	          (mImpl->mFileLoader.getRootPath() + path).c_str(),
@@ -581,138 +584,137 @@ const aiScene* Engine::getModelFromFile(std::string path) {
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 template <GLuint T>
-core::Shader* Engine::storeShader(const std::string& shaderPath) {
-	std::string shaderSource = "";
-	const std::string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
+Shader* Engine::storeShader(const string& shaderPath) {
+	string shaderSource = "";
+	const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
 	ReadFile(fullPath, shaderSource);
 	return mImpl->mShaders.store(fullPath, T, shaderSource);
 }
 
 template <GLuint T>
-core::Shader* Engine::storeShader(
-   const std::string& shaderPath,
-   const std::string& shaderSource) {
-	const std::string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
+Shader* Engine::storeShader(
+   const string& shaderPath,
+   const string& shaderSource) {
+	const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
 	return mImpl->mShaders.store(fullPath, T, shaderSource);
 }
 
-template core::Shader* Engine::storeShader<GL_VERTEX_SHADER>
-(const std::string&);
-template core::Shader* Engine::storeShader<GL_FRAGMENT_SHADER>
-(const std::string&);
-template core::Shader* Engine::storeShader<GL_VERTEX_SHADER>(const std::string&,
-      const std::string&);
-template core::Shader* Engine::storeShader<GL_FRAGMENT_SHADER>
-(const std::string&,
- const std::string&);
+template
+Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string&);
+template
+Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string&);
+template
+Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string&, const string&);
+template
+Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string&, const string&);
 #ifdef FILLWAVE_GLES_3_0
 #else
-template core::Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>
-(const std::string&);
-template core::Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>
-(const std::string&);
-template core::Shader* Engine::storeShader<GL_GEOMETRY_SHADER>
-(const std::string&);
-template core::Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>
-(const std::string&,
- const std::string&);
-template core::Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>
-(const std::string&, const std::string&);
-template core::Shader* Engine::storeShader<GL_GEOMETRY_SHADER>
-(const std::string&,
- const std::string&);
+template
+Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string&);
+template
+Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string&);
+template
+Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string&);
+template
+Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string&,
+      const string&);
+template
+Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string&,
+      const string&);
+template
+Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string&, const string&);
 #endif
 
 void Engine::configureDebugger(eDebuggerState state) {
 	mImpl->mDebugger->setState(state);
 }
 
-core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao,
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
       framework::TerrainConstructor* constructor, GLint density, GLfloat gap,
-      std::vector<GLuint>& indices) {
+      vector<GLuint>& indices) {
 	return mImpl->mBuffers.mVertices.store(vao, constructor, density, gap, indices);
 }
 
-core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao,
-      std::vector<core::VertexBasic>& data) {
-	core::VertexBufferBasic* newData = new core::VertexBufferBasic(data);
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
+      vector<VertexBasic>& data) {
+	VertexBufferBasic* newData = new VertexBufferBasic(data);
 	return mImpl->mBuffers.mVertices.store(newData, vao);
 }
 
-core::IndexBuffer* Engine::storeBufferInternal(core::VertexArray* vao,
-      const std::vector<GLuint>& data) {
-	core::IndexBuffer* newData = new core::IndexBuffer(data);
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao,
+      const vector<GLuint>& data) {
+	IndexBuffer* newData = new IndexBuffer(data);
 	return mImpl->mBuffers.mIndices.store(newData, vao);
 }
 
-void Engine::removeBufferIndex(core::VertexArray* vao) {
+void Engine::removeBufferIndex(VertexArray* vao) {
 	mImpl->mBuffers.mIndices.erase(vao);
 }
 
-core::VertexBufferText* Engine::storeBufferInternal(core::VertexArray* vao,
-      const std::vector<GLfloat>& data, const std::vector<GLfloat>& textureCoords) {
+VertexBufferText* Engine::storeBufferInternal(VertexArray* vao,
+      const vector<GLfloat>& data, const vector<GLfloat>& textureCoords) {
 	return mImpl->mBuffers.mVerticesText.store(vao, data, textureCoords);
 }
 
-core::IndexBuffer* Engine::storeBufferInternal(core::VertexArray* vao,
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao,
       GLuint elements) {
-	core::IndexBuffer* newData = new core::IndexBuffer(elements, true);
+	IndexBuffer* newData = new IndexBuffer(elements, true);
 	return mImpl->mBuffers.mIndices.store(newData, vao);
 }
 
-core::VertexBufferParticlesGPU* Engine::storeBuffersInternal(
-   core::VertexArray* vao, size_t idx,
-   std::vector<core::VertexParticleGPU>& particles) {
-	std::vector<core::VertexBufferParticlesGPU*>* ptr = new
-	std::vector<core::VertexBufferParticlesGPU*>();
-	std::vector<core::VertexBufferParticlesGPU*>* buffers =
+VertexBufferParticlesGPU* Engine::storeBuffersInternal(
+   VertexArray* vao, size_t idx,
+   vector<VertexParticleGPU>& particles) {
+	vector<VertexBufferParticlesGPU*>* ptr = new
+	vector<VertexBufferParticlesGPU*>();
+	vector<VertexBufferParticlesGPU*>* buffers =
 	   mImpl->mBuffers.mVerticesParticlesGPU.store(ptr, vao);//constructor of vector
 	if (buffers->size() < idx ) {
 		return (*buffers)[idx];
 	}
 	FLOG_DEBUG("There is no buffer for requested index. Creating a new one.");
-	buffers->push_back(new core::VertexBufferParticlesGPU(particles));
+	buffers->push_back(new VertexBufferParticlesGPU(particles));
 	return buffers->back();
 }
 
-core::VertexBufferParticles* Engine::storeBufferInternal(core::VertexArray* vao,
-      std::vector<GLfloat>& velocities, std::vector<GLfloat>& positions,
-      std::vector<GLfloat>& times) {
+VertexBufferParticles* Engine::storeBufferInternal(VertexArray* vao,
+      vector<GLfloat>& velocities, vector<GLfloat>& positions,
+      vector<GLfloat>& times) {
 	return mImpl->mBuffers.mVerticesParticles.store(vao, velocities, positions,
 	       times);
 }
 
-core::VertexBufferDebug* Engine::storeBufferInternal(core::VertexArray* vao,
+VertexBufferDebug* Engine::storeBufferInternal(VertexArray* vao,
       GLfloat scale) {
 	return mImpl->mBuffers.mVerticesDebugger.store(vao, scale);
 }
 
-core::VertexBufferFloat* Engine::storeBufferInternal(core::VertexArray* vao,
-      std::vector<core::VertexFloat>& data) {
+VertexBufferFloat* Engine::storeBufferInternal(VertexArray* vao,
+      vector<VertexFloat>& data) {
 	return mImpl->mBuffers.mVerticesFloat.store(vao, data);
 }
 
-core::VertexBufferPosition* Engine::storeBufferInternal(core::VertexArray* vao,
-      std::vector<core::VertexPosition>& data) {
+VertexBufferPosition* Engine::storeBufferInternal(VertexArray* vao,
+      vector<VertexPosition>& data) {
 	return mImpl->mBuffers.mVerticesPosition.store(vao, data);
 }
 
-void Engine::removeBufferBasic(core::VertexArray* vao) {
+void Engine::removeBufferBasic(VertexArray* vao) {
 	mImpl->mBuffers.mVertices.erase(vao);
 }
-void Engine::removeBufferText(core::VertexArray* vao) {
+void Engine::removeBufferText(VertexArray* vao) {
 	mImpl->mBuffers.mVerticesText.erase(vao);
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-core::IndexBuffer* Engine::storeBufferInternal(core::VertexArray* vao,
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao,
       const aiMesh* shape) {
-	core::IndexBuffer* newData = new core::IndexBuffer(shape);
+	IndexBuffer* newData = new IndexBuffer(shape);
 	return mImpl->mBuffers.mIndices.store(newData, vao);
 }
-core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao,
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
       const aiMesh* shape, framework::Animator* animator) {
-	core::VertexBufferBasic* newData = new core::VertexBufferBasic(shape, animator);
+	VertexBufferBasic* newData = new VertexBufferBasic(shape, animator);
 	return mImpl->mBuffers.mVertices.store(newData, vao);
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

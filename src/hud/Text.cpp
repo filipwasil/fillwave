@@ -43,7 +43,7 @@ namespace fillwave {
 namespace framework {
 
 Text::Text(
-   std::string& text,
+   const std::string& text,
    core::Texture2D* texture,
    glm::vec2 position,
    Engine* engine,
