@@ -4,7 +4,7 @@
 
 [![Join the chat at https://gitter.im/filipwasil/fillwave](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/filipwasil/fillwave?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[Fillwave] is a modern, native and totally free rendering engine writen in c++11 .
+[Fillwave] is a modern, native and totally free rendering engine writen in c++14.
 
 Can be used in any 3D games, apps and visualization tools or as a regular part of your game engine.
 
@@ -16,7 +16,7 @@ Can be used in any 3D games, apps and visualization tools or as a regular part o
 
 # Building with cmake
 
-To build Fillwave you must have [CMake](https://cmake.org/), [GIT](https://git-scm.com/) and C++ comliers installed (So far, Clang and GCC are supported. MSVC version will be available soon). If you are not familiar with CMake I created few scripts to help you with building the project. Note that we use external libraries - each of them in separate git submodule.
+To build Fillwave you must have [CMake](https://cmake.org/), [GIT](https://git-scm.com/) and C++ compliers installed (So far, Clang and GCC are supported. MSVC version will be available soon). If you are not familiar with CMake I created few scripts to help you with building the project. Note that we use external libraries - each of them in separate git submodule.
 
 ```
 git clone https://github.com/filipwasil/fillwave.git
