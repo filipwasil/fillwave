@@ -44,7 +44,7 @@ namespace framework {
 class Bone;
 }
 
-typedef std::shared_ptr<framework::Bone> pBone;
+typedef std::unique_ptr<framework::Bone> puBone;
 
 namespace framework {
 
@@ -52,12 +52,10 @@ namespace framework {
  * \brief Hinge used by Animator to populate bone transformations.
  */
 
-class Bone: public Hinge {
+class Bone final: public Hinge {
  public:
 	Bone(aiBone* assimpBone);
-	virtual ~Bone() = default;
-
-	void childrenUpdate();
+	~Bone() = default;
 
 	std::string getName() const;
 	glm::mat4 getOffsetMatrix() const;

@@ -36,12 +36,12 @@
 
 #include <fillwave/models/animations/Bone.h>
 #include <fillwave/core/pipeline/Program.h>
+#include <fillwave/models/animations/Animation.h>
 #include <map>
 
 namespace fillwave {
 namespace framework {
 
-class Animation;
 class Channel;
 class Animator;
 
@@ -53,7 +53,7 @@ class AssimpNode {
  public:
 	glm::mat4 mTransformation;
 	std::vector<AssimpNode*> mChildren;
-	pBone mBone;
+	Bone* mBone;
 	std::string mName;
 
 	AssimpNode(aiNode* node);
@@ -75,16 +75,13 @@ class Animator {
  public:
 	Animator(const aiScene* shape);
 	virtual ~Animator();
-	void add(aiBone* bone);
-	void add(pBone bone);
-	void add(Animation* animation);
-	pBone get(GLint id);
-	pBone get(std::string name);
+	Bone* get(GLint id);
+	Bone* get(std::string name);
 	GLint getId(std::string name) const;
 	GLint getElements() const;
 	Animation* getAnimation(GLint i) const;
 	GLint getAnimations() const;
-	std::vector<Animation*> mAnimations;
+	std::vector<puAnimation> mAnimations;
 	void log();
 
 	Channel* findChannel(
@@ -110,11 +107,10 @@ class Animator {
 	void updateTransformations(GLint activeAnimation, float timeElapsed_s);
 
  private:
-	GLint mElements;
 	float mTimeSinceStartSeconds;
 	AssimpNode* mRootAnimationNode;
 	glm::mat4 mSceneInverseMatrix;
-	std::map<GLint, pBone> mBones;
+	std::vector<puBone> mBones;
 	std::vector<glm::mat4> mAnimationsBufferData;
 };
 

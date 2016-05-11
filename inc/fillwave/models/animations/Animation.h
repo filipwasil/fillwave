@@ -37,6 +37,7 @@
 #include <fillwave/Assets.h>
 
 #include <vector>
+#include <memory>
 #include <string>
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -49,10 +50,10 @@ class Channel;
  * \brief wrapper to assimp aiAnimation*
  */
 
-class Animation {
+class Animation final {
  public:
 	Animation(aiAnimation* assimpAnimation);
-	virtual ~Animation();
+	~Animation();
 
 	/* getTicksPerSec
 	 * \brief returns an animation parameter:
@@ -95,6 +96,7 @@ class Animation {
 };
 
 } /* framework */
+typedef std::unique_ptr<framework::Animation> puAnimation;
 } /* fillwave */
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

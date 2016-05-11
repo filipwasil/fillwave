@@ -33,9 +33,9 @@
 
 
 #include <fillwave/models/animations/Animator.h>
-#include <fillwave/models/animations/Animation.h>
 #include <fillwave/models/animations/Channel.h>
 #include <fillwave/models/animations/Conversion.h>
+#include <fillwave/models/animations/Bone.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Animator", FERROR | FFATAL)
@@ -56,6 +56,9 @@ void AssimpNode::update(
    GLint activeAnimation) {
 	std::string nodeName(mName);
 	Animation* a = boneManager->getAnimation(activeAnimation);
+	if (nullptr == a) {
+		return;
+	}
 	glm::mat4 transformation = mTransformation;
 	Channel* channel = boneManager->findChannel(a, nodeName);
 
@@ -92,14 +95,14 @@ AssimpNode::~AssimpNode() {
 }
 
 Animator::Animator(const aiScene* scene) :
-	mElements(0), mTimeSinceStartSeconds(0.0) {
+	mTimeSinceStartSeconds(0.0) {
 	mAnimationsBufferData.reserve(FILLWAVE_MAX_BONES);
 
 	GLuint numBones = 0;
 
 	for (GLuint j = 0; j < scene->mNumMeshes; j++) {
 		for (GLuint i = 0; i < scene->mMeshes[j]->mNumBones; i++) {
-			add(pBone(new Bone(scene->mMeshes[j]->mBones[i])));
+			mBones.push_back(std::make_unique<Bone>(scene->mMeshes[j]->mBones[i]));
 			numBones++;
 		}
 	}
@@ -112,8 +115,7 @@ Animator::Animator(const aiScene* scene) :
 
 	for (GLuint k = 0; k < scene->mNumAnimations; k++) {
 		FLOG_DEBUG("Animation %d creation", k);
-		Animation* a = new Animation(scene->mAnimations[k]);
-		mAnimations.push_back(a);
+		mAnimations.push_back(std::make_unique<Animation>(scene->mAnimations[k]));
 	}
 
 	/* Init node tree after bones are added */
@@ -126,54 +128,36 @@ Animator::~Animator() {
 	delete mRootAnimationNode;
 }
 
-void Animator::add(pBone bone) {
-	for (auto it = mBones.begin(); it != mBones.end(); ++it) {
-		if ((*it).second == bone) {
-			FLOG_DEBUG("Bone %s already added to manager",
-			           (*it).second->getName().c_str());
-			return;
+Bone* Animator::get(GLint id) {
+	if (mBones.size() < id) {
+		return  mBones[id].get();
+	}
+	return nullptr;
+}
+
+
+Bone* Animator::get(std::string name) {
+	for (auto& it : mBones) {
+		if (it->getName() == name) {
+			return it.get();
 		}
 	}
-	mBones.insert(std::pair<GLint, pBone>(mElements, bone));
-	mElements++;
-}
-
-void Animator::add(aiBone* bone) {
-	add(pBone(new Bone(bone)));
-}
-
-void Animator::add(Animation* animation) {
-	mAnimations.push_back(animation);
-}
-
-pBone Animator::get(GLint id) {
-	if (mBones.find(id) != mBones.end()) {
-		return mBones[id];
-	} else {
-		return pBone();
-	}
-}
-
-pBone Animator::get(std::string name) {
-	for (auto it = mBones.begin(); it != mBones.end(); ++it) {
-		if ((*it).second->getName() == name) {
-			return (*it).second;
-		}
-	}
-	return pBone();
+	return nullptr;
 }
 
 GLint Animator::getId(std::string name) const {
-	for (auto it = mBones.begin(); it != mBones.end(); ++it) {
-		if ((*it).second->getName() == name) {
-			return (*it).first;
+	int idx = 0;
+	for (auto& it : mBones) {
+		if (it->getName() == name) {
+			return idx;
 		}
+		++idx;
 	}
 	return -1;
 }
 
 Animation* Animator::getAnimation(GLint i) const {
-	return (i != FILLWAVE_DO_NOT_ANIMATE ? mAnimations[i] : 0);
+	return (i != FILLWAVE_DO_NOT_ANIMATE ? mAnimations[i].get() : nullptr);
 }
 
 GLint Animator::getAnimations() const {
@@ -212,8 +196,9 @@ AssimpNode* Animator::initNode(aiNode* node) {
 }
 
 void Animator::updateBonesBuffer() {
+	int idx = 0;
 	for (auto& it : mBones) {
-		mAnimationsBufferData[it.first] = it.second->getGlobalOffsetMatrix();
+		mAnimationsBufferData[idx++] = it->getGlobalOffsetMatrix();
 	}
 }
 
@@ -223,7 +208,7 @@ void Animator::updateBonesUniform(GLint uniformLocationBones) {
 }
 
 void Animator::log() {
-	FLOG_INFO("Elements %d: ", mElements);
+	FLOG_INFO("Bones %lu ", mBones.size());
 }
 
 Channel* Animator::findChannel(
@@ -320,9 +305,7 @@ GLuint Animator::getTranslationStep(
 			return i;
 		}
 	}
-
-	assert(0);
-
+	FLOG_FATAL("Animation corrupted. No such translation step.");
 	return 0;
 }
 
@@ -350,7 +333,7 @@ GLuint Animator::getScaleStep(float timeElapsed_s, Channel* channel) const {
 }
 
 GLint Animator::getElements() const {
-	return mElements;
+	return mBones.size();
 }
 
 } /* framework */

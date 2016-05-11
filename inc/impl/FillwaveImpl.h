@@ -52,9 +52,10 @@ struct Engine::EngineImpl final {
 	Engine* mEngine;
 
 	/* Asset loader */
-#ifdef FILLWAVE_COMPILATION_TINY_ASSET_LOADER
-#else
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	Assimp::Importer mImporter;
+#else
+
 #endif
 
 	/* Screen */
