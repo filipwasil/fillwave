@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa041b7_95b2f292",
+        "filename": "cmake/external.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2016-05-14T21:52:52Z",
+      "side": 1,
+      "message": "why this is commented out?",
+      "revId": "007fe080703476879e194d1394e32d43d8c09783",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
