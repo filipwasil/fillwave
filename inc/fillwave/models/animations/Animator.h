@@ -37,7 +37,6 @@
 #include <fillwave/models/animations/Bone.h>
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/models/animations/Animation.h>
-#include <map>
 
 namespace fillwave {
 namespace framework {

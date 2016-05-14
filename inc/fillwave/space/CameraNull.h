@@ -31,7 +31,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #ifndef CAMERANULL_H_
 #define CAMERANULL_H_
 
@@ -47,13 +46,9 @@ namespace framework {
 class CameraNull: public ICamera {
  public:
 	CameraNull();
-
 	virtual ~CameraNull() = default;
-
 	void updateProjection();
-
 	GLfloat getProjectionNearPlane();
-
 	GLfloat getProjectionFarPlane();
 };
 
