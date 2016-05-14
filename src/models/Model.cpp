@@ -30,20 +30,23 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#include <fillwave/Fillwave.h>
-#include <fillwave/actions/callbacks/TimedBoneUpdateCallback.h>
-
-#include <fillwave/loaders/ProgramLoader.h>
-
-#include <fillwave/models/Model.h>
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/models/animations/Conversion.h>
 #include <fillwave/models/animations/Animation.h>
 
-#include <fillwave/Log.h>
+#else
+
+#include <fillwave/Assets.h>
+#endif
+
+#include <fillwave/actions/callbacks/TimedBoneUpdateCallback.h>
+#include <fillwave/loaders/ProgramLoader.h>
+#include <fillwave/models/Model.h>
 #include <fillwave/management/LightSystem.h>
-#include <fillwave/management/TextureSystem.h>
+#include <fillwave/Fillwave.h>
+
+#include <fillwave/Log.h>
 
 FLOGINIT("Model", FERROR | FFATAL)
 
@@ -114,8 +117,8 @@ Model::Model(Engine* engine, core::Program* program,
 		FLOG_WARNING("%s", err.c_str());
 	}
 
-	FLOG_DEBUG("Shapes    : %d", shapes.size());
-	FLOG_DEBUG("Materials : %d", materials.size());
+	FLOG_DEBUG("Shapes    : %lu", shapes.size());
+	FLOG_DEBUG("Materials : %lu", materials.size());
 
 	for (size_t i = 0; i < shapes.size(); i++) {
 		printf("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
@@ -174,14 +177,15 @@ Model::Model(Engine* engine, core::Program* program,
 
 		std::string diffuseMapPath, normalMapPath, specularMapPath;
 
-		entity->attach(
-		   loadMesh(shapes[i], Material(aMaterial),
+		attach(
+		   loadMesh(shapes[i], Material(
+		               materials[shapes[i].mesh.material_ids[0]]), //xxx doublecheck
 		            engine->storeTexture(diffuseMapPath.c_str()),
 		            engine->storeTexture(normalMapPath.c_str()),
 		            engine->storeTexture(specularMapPath.c_str()),
 		            engine));
 	}
-#error "Not ready"
+//#error "Not ready"
 #endif
 }
 
@@ -211,7 +215,7 @@ Model::Model(
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
 #else
-#error "Not ready"
+//#error "Not ready"
 #endif
 }
 
@@ -242,14 +246,16 @@ Model::Model(
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
 #else
-#error "Not ready"
+//#error "Not ready"
 #endif
 }
 
 Model::~Model() {
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	if (mAnimator) {
 		delete mAnimator;
 	}
+#endif
 }
 
 void Model::reload() {
@@ -413,18 +419,6 @@ puMesh Model::loadMesh(
 	          engine->storeBuffer<core::IndexBuffer>(vao, shape), mAnimator, GL_TRIANGLES,
 	          vao);
 }
-#else /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
-puMesh loadMesh(tinyobj::shape_t& shape,
-                const Material& material,
-                core::Texture2D* diffuseMap,
-                core::Texture2D* normalMap,
-                core::Texture2D* specularMap,
-                Engine* engine) {
-#error "Not ready"
-	return puMesh();
-}
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 void Model::performAnimation(GLfloat timeElapsed_s) {
 	mAnimator->updateTransformations(mActiveAnimation, timeElapsed_s);
@@ -444,17 +438,49 @@ GLint Model::getActiveAnimations() {
 	return mAnimator->getAnimations();
 }
 
+bool Model::isAnimated() const {
+	return mAnimator ? GL_TRUE : GL_FALSE;
+}
+
+inline void Model::evaluateAnimations() {
+	if (mAnimator) {
+		mAnimator->updateBonesBuffer();
+		mProgram->use();
+		mAnimator->updateBonesUniform(mUniformLocationCacheBones);
+		mProgramShadow->use();
+		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadow);
+		mProgramShadowColor->use();
+		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
+	}
+}
+
+#else /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
+puMesh loadMesh(tinyobj::shape_t& shape,
+                const Material& material,
+                core::Texture2D* diffuseMap,
+                core::Texture2D* normalMap,
+                core::Texture2D* specularMap,
+                Engine* engine) {
+//#error "Not ready"
+	return puMesh();
+}
+
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
 void Model::draw(ICamera& camera) {
 	evaluateAnimations();
 	drawWithEffects(camera);
 }
 
 void Model::drawPBRP(ICamera& camera) {
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	if (mAnimator) {
 		/* xxx for PBRP shadows must be updated elsewhere */
 		mAnimator->updateBonesBuffer();
 		mAnimator->updateBonesUniform(mUniformLocationCacheBones);
 	}
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 	mLights->pushLightUniforms(mProgram);
 	mLights->bindShadowmaps();
@@ -489,22 +515,6 @@ inline void Model::initShadowing(Engine* engine) {
 	} else {
 		mProgramShadow = loader.getShadow();
 		mProgramShadowColor = loader.getShadowColorCoded();
-	}
-}
-
-bool Model::isAnimated() const {
-	return mAnimator ? GL_TRUE : GL_FALSE;
-}
-
-inline void Model::evaluateAnimations() {
-	if (mAnimator) {
-		mAnimator->updateBonesBuffer();
-		mProgram->use();
-		mAnimator->updateBonesUniform(mUniformLocationCacheBones);
-		mProgramShadow->use();
-		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadow);
-		mProgramShadowColor->use();
-		mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
 	}
 }
 

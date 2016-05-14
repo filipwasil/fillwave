@@ -33,7 +33,6 @@
 
 
 #include <fillwave/models/builders/BuilderModelManual.h>
-#include <fillwave/common/Macros.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("BuilderModelManual", FERROR | FFATAL)
@@ -79,7 +78,7 @@ BuilderModelManual& BuilderModelManual::setSpecularMapTexture(
 	return (*this);
 }
 
-BuilderModelManual& BuilderModelManual::setMaterial(Material material) {
+BuilderModelManual& BuilderModelManual::setMaterial(const Material& material) {
 	mMaterial = material;
 	return (*this);
 }

@@ -38,10 +38,10 @@
 namespace fillwave {
 namespace framework {
 
-Material::Material() {
-	mAmbient = glm::vec4(0.1, 0.1, 0.1, 1.0);
-	mDiffuse = glm::vec4(1.0);
-	mSpecular = glm::vec4(1.0);
+Material::Material() :
+	mAmbient (0.1, 0.1, 0.1, 1.0),
+	mDiffuse (1.0),
+	mSpecular (1.0) {
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -60,17 +60,23 @@ Material::Material(const aiMaterial* material) {
 		mSpecular = assimpToGlmVec4(color);
 	}
 }
+#else
+Material::Material(const tinyobj::material_t& material) :
+	mAmbient (floatsToGlmVec4(material.ambient)),
+	mDiffuse (floatsToGlmVec4(material.diffuse)),
+	mSpecular (floatsToGlmVec4(material.specular)) {
+}
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-glm::vec4 Material::getAmbient() const {
+const glm::vec4& Material::getAmbient() const {
 	return mAmbient;
 }
 
-glm::vec4 Material::getDiffuse() const {
+const glm::vec4& Material::getDiffuse() const {
 	return mDiffuse;
 }
 
-glm::vec4 Material::getSpecular() const {
+const glm::vec4& Material::getSpecular() const {
 	return mSpecular;
 }
 

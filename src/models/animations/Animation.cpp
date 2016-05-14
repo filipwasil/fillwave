@@ -36,8 +36,6 @@
 #include <fillwave/Log.h>
 #include <fillwave/Assets.h>
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
 FLOGINIT("Animation", FERROR | FFATAL)
 
 namespace fillwave {
@@ -59,8 +57,6 @@ Animation::~Animation() {
 	}
 	mChannels.clear();
 }
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 } /* framework */
 } /* fillwave */

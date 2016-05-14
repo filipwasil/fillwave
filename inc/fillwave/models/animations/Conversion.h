@@ -39,14 +39,18 @@
 
 namespace fillwave {
 
-#ifdef FILLWAVE_COMPILATION_TINY_ASSET_LOADER
-
-#else
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
 glm::mat4 assimpToGlmMat4(aiMatrix4x4 matrix);
 glm::vec3 assimpToGlmVec3(aiVector3D vector);
 glm::quat assimpToGlmQuat(aiQuaternion quaternion);
 glm::vec4 assimpToGlmVec4(aiColor4D vector);
+
+#else
+
+/* xxx Attention. dangerous, but fast code */
+glm::vec3 floatsToGlmVec3(const float* vector);
+glm::vec4 floatsToGlmVec4(const float* vector);
 
 #endif
 

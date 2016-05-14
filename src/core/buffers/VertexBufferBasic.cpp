@@ -31,12 +31,13 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#include <fillwave/Log.h>
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/Assets.h>
+#endif
+
 #include <fillwave/core/buffers/VertexBufferBasic.h>
-#include <fillwave/Profiler.h>
+#include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferBasic", FERROR | FFATAL)
 

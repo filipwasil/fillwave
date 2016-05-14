@@ -39,8 +39,6 @@
 #include <fillwave/Math.h>
 #include <fillwave/Assets.h>
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
 #include <vector>
 #include <string>
 
@@ -64,7 +62,5 @@ class Channel {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 #endif /* CHANNEL_H_ */

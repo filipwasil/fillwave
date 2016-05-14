@@ -47,15 +47,17 @@ namespace framework {
 class Material {
  public:
 	Material();
+	virtual ~Material() = default;
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	Material(const aiMaterial* material);
+#else
+	Material(const tinyobj::material_t& material);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-	virtual ~Material() = default;
-	glm::vec4 getAmbient() const;
-	glm::vec4 getDiffuse() const;
-	glm::vec4 getSpecular() const;
+	const glm::vec4& getAmbient() const;
+	const glm::vec4& getDiffuse() const;
+	const glm::vec4& getSpecular() const;
 
  private:
 	glm::vec4 mAmbient;

@@ -37,8 +37,6 @@
 #include <fillwave/models/animations/Hinge.h>
 #include <fillwave/Assets.h>
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
 namespace fillwave {
 namespace framework {
 class Bone;
@@ -75,7 +73,5 @@ class Bone final: public Hinge {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 #endif /* BONE_H_ */

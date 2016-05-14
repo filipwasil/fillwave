@@ -59,7 +59,7 @@ class BuilderModelManual: public BuilderModel {
 	BuilderModelManual& setDiffuseMapTexture(core::Texture2D* texture);
 	BuilderModelManual& setNormalMapTexture(core::Texture2D* texture);
 	BuilderModelManual& setSpecularMapTexture(core::Texture2D* texture);
-	BuilderModelManual& setMaterial(Material material);
+	BuilderModelManual& setMaterial(const Material& material);
 	puModel build();
 
  private:

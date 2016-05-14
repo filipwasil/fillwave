@@ -26,16 +26,14 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#include <fillwave/common/Strings.h>
-#include <fillwave/models/Mesh.h>
-
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 #include <fillwave/models/animations/Animator.h>
+#endif
 
 #include <fillwave/loaders/ProgramLoader.h>
-
+#include <fillwave/common/Strings.h>
+#include <fillwave/models/Mesh.h>
 #include <fillwave/management/LightSystem.h>
-#include <fillwave/Profiler.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/Log.h>
 

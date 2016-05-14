@@ -46,9 +46,6 @@
 #define STR_HELPER(x) #x
 #define STR(x) STR_HELPER(x)
 
-#define FILLWAVE_AO_SAMPLE_RADIUS 1.6f
-#define FILLWAVE_OQ_VERTICES 36
-
 #define FILLWAVE_MEASURE(info, foo)  do {  \
     std::chrono::time_point<std::chrono::system_clock> start, end; \
     start = std::chrono::system_clock::now(); \
