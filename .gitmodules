@@ -12,7 +12,7 @@
 	url = https://github.com/glfw/glfw.git
 [submodule "ext/tinyobjloader"]
 	path = ext/tinyobjloader
-	url = https://github.com/syoyo/tinyobjloader.git
+	url = https://github.com/filipwasil/tinyobjloader.git
 [submodule "ext/assimp"]
 	path = ext/assimp
 	url = https://github.com/assimp/assimp.git
