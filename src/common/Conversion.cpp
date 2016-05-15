@@ -72,11 +72,11 @@ glm::vec4 assimpToGlmVec4(aiColor4D vector) {
 	return out;
 }
 
-const glm::vec3 floatsToGlmVec3(const float* in) {
+glm::vec3 floatsToGlmVec3(const float* in) {
 	return  glm::vec3(in[0], in[1], in[2]);
 }
 
-const glm::vec4 floatsToGlmVec4(const float* in) {
+glm::vec4 floatsToGlmVec4(const float* in) {
 	return  glm::vec4(in[0], in[1], in[2], in[3]);
 }
 } /* fillwave */
