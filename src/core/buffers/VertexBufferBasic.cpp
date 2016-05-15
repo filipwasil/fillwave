@@ -38,6 +38,7 @@
 
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/Log.h>
+#include <fillwave/Assets.h>
 
 FLOGINIT("VertexBufferBasic", FERROR | FFATAL)
 
@@ -69,7 +70,6 @@ VertexBufferBasic::VertexBufferBasic(
 				vertex.mColor[1] = shape->mColors[0]->g;
 				vertex.mColor[2] = shape->mColors[0]->b;
 				vertex.mColor[3] = shape->mColors[0]->a;
-				abort();
 			} else {
 				vertex.mColor[0] = 0.0f;
 				vertex.mColor[1] = 0.0f;
@@ -147,6 +147,67 @@ VertexBufferBasic::VertexBufferBasic(
 }
 
 #else
+VertexBufferBasic::VertexBufferBasic(tinyobj::shape_t& shape,
+                                     GLuint dataStoreModification) {
+
+	mTotalElements = shape.mesh.positions.size() / 3;
+	mDataVertices.resize(mTotalElements);
+
+	int threadID, numberOfThreads, chunkSize = 64;
+	(void) threadID;
+	(void) numberOfThreads;
+	(void) chunkSize;
+	{
+		#pragma omp parallel for schedule(guided) num_threads(2) if (mTotalElements > 1000)
+		for (GLuint i = 0; i < mTotalElements; i++) {
+			VertexBasic &vertex = mDataVertices[i];
+			int currentIdx = 3 * i;
+			vertex.mColor[0] = 0.0f;
+			vertex.mColor[1] = 0.0f;
+			vertex.mColor[2] = 0.0f;
+			vertex.mColor[3] = 1.0f;
+
+			vertex.mPosition[0] = shape.mesh.positions[currentIdx];
+			vertex.mPosition[1] = shape.mesh.positions[currentIdx + 1];
+			vertex.mPosition[2] = shape.mesh.positions[currentIdx + 2];
+			vertex.mPosition[3] = 1.0f;
+
+			if (shape.mesh.normals.size()) {
+				vertex.mNormal[0] = shape.mesh.normals[currentIdx];
+				vertex.mNormal[1] = shape.mesh.normals[currentIdx + 1];
+				vertex.mNormal[2] = shape.mesh.normals[currentIdx + 2];
+			} else {
+				vertex.mNormal[0] = 0.0f;
+				vertex.mNormal[1] = 0.0f;
+				vertex.mNormal[2] = 0.0f;
+			}
+
+			vertex.mNormalTangentMap[0] = 0.0f;
+			vertex.mNormalTangentMap[1] = 0.0f;
+			vertex.mNormalTangentMap[2] = 0.0f;
+
+			for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
+				vertex.mBoneID[k] = 0.0f;
+				vertex.mBoneWeight[k] = 0.0f;
+			}
+		}
+
+		for (GLuint i = 0; i < mTotalElements; i++) {
+			VertexBasic &vertex = mDataVertices[i];
+			int currentIdx = 2 * i;
+			if (shape.mesh.texcoords.size()) { //xxx what is this ?
+				vertex.mTextureUV[0] = shape.mesh.texcoords[currentIdx];
+				vertex.mTextureUV[1] = shape.mesh.texcoords[currentIdx + 1];
+			} else {
+				vertex.mTextureUV[0] = 0;
+				vertex.mTextureUV[1] = 0;
+			}
+		}
+	}
+
+	mData = mDataVertices.data();
+	mSize = mTotalElements * sizeof(VertexBasic);
+}
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 

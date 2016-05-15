@@ -47,6 +47,7 @@ AnimationKeyboardCallback::~AnimationKeyboardCallback() {
 }
 
 void AnimationKeyboardCallback::perform(EventType& event) {
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	KeyboardEventData e = KeyboardEvent::getData(event);
 	if (mEntity) {
 		Model* model = static_cast<Model*>(mEntity);
@@ -88,6 +89,7 @@ void AnimationKeyboardCallback::perform(EventType& event) {
 				break;
 		}
 	}
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 }
 
 } /* framework */

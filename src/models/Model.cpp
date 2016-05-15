@@ -65,9 +65,9 @@ Model::Model(
 	Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	mAnimator(nullptr),
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-	mLights(engine->getLightSystem()),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+	mLights(engine->getLightSystem()) {
 
 	initShadowing(engine);
 
@@ -97,9 +97,9 @@ Model::Model(Engine* engine, core::Program* program,
 	Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	mAnimator(nullptr),
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-	mLights(engine->getLightSystem()),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+	mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -127,88 +127,8 @@ Model::Model(Engine* engine, core::Program* program,
 	FLOG_DEBUG("Shapes    : %lu", shapes.size());
 	FLOG_DEBUG("Materials : %lu", materials.size());
 
-//	for (GLuint i = 0; i < node->mNumMeshes; i++) {
-//		const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
-//		const aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
-//
-//		entity->attach(
-//				loadMesh(aMesh, Material(aMaterial),
-//						 engine->storeTexture(diffuseMapPath.c_str()),
-//						 engine->storeTexture(normalMapPath.c_str()),
-//						 engine->storeTexture(specularMapPath.c_str()),
-//						 engine));
-//	}
-
-//	for (size_t i = 0; i < shapes.size(); i++) {
-//		FLOG_DEBUG("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
-//		FLOG_DEBUG("Size of shape[%ld].indices: %ld\n", i, shapes[i].mesh.indices.size());
-//		FLOG_DEBUG("Size of shape[%ld].material_ids: %ld\n", i, shapes[i].mesh.material_ids.size());
-//
-//		for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) {
-//			printf("  idx[%ld] = %d, %d, %d. mat_id = %d\n", f,
-//				   shapes[i].mesh.indices[3 * f + 0], shapes[i].mesh.indices[3 * f + 1],
-//				   shapes[i].mesh.indices[3 * f + 2], shapes[i].mesh.material_ids[f]);
-//		}
-//
-//		entity->attach(
-//				loadMesh(aMesh, Material(aMaterial),
-//						 engine->storeTexture(diffuseMapPath.c_str()),
-//						 engine->storeTexture(normalMapPath.c_str()),
-//						 engine->storeTexture(specularMapPath.c_str()),
-//						 engine));
-//	}
-//
-//	for (size_t i = 0; i < shapes.size(); i++) {
-//		for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) {
-//			printf("  idx[%ld] = %d, %d, %d. mat_id = %d\n", f,
-//			       shapes[i].mesh.indices[3 * f + 0], shapes[i].mesh.indices[3 * f + 1],
-//			       shapes[i].mesh.indices[3 * f + 2], shapes[i].mesh.material_ids[f]);
-//		}
-//
-//		printf("shape[%ld].vertices: %ld\n", i, shapes[i].mesh.positions.size());
-//		assert((shapes[i].mesh.positions.size() % 3) == 0);
-//		for (size_t v = 0; v < shapes[i].mesh.positions.size() / 3; v++) {
-//			printf("  v[%ld] = (%f, %f, %f)\n", v,
-//			       shapes[i].mesh.positions[3 * v + 0],
-//			       shapes[i].mesh.positions[3 * v + 1],
-//			       shapes[i].mesh.positions[3 * v + 2]);
-//		}
-//	}
-//
-//	for (size_t i = 0; i < materials.size(); i++) {
-//		printf("material[%ld].name = %s\n", i, materials[i].name.c_str());
-//		printf("  material.Ka = (%f, %f ,%f)\n", materials[i].ambient[0],
-//		       materials[i].ambient[1], materials[i].ambient[2]);
-//		printf("  material.Kd = (%f, %f ,%f)\n", materials[i].diffuse[0],
-//		       materials[i].diffuse[1], materials[i].diffuse[2]);
-//		printf("  material.Ks = (%f, %f ,%f)\n", materials[i].specular[0],
-//		       materials[i].specular[1], materials[i].specular[2]);
-//		printf("  material.Tr = (%f, %f ,%f)\n", materials[i].transmittance[0],
-//		       materials[i].transmittance[1], materials[i].transmittance[2]);
-//		printf("  material.Ke = (%f, %f ,%f)\n", materials[i].emission[0],
-//		       materials[i].emission[1], materials[i].emission[2]);
-//		printf("  material.Ns = %f\n", materials[i].shininess);
-//		printf("  material.Ni = %f\n", materials[i].ior);
-//		printf("  material.dissolve = %f\n", materials[i].dissolve);
-//		printf("  material.illum = %d\n", materials[i].illum);
-
-//		printf("  material.map_Ns = %s\n",
-//		       materials[i].specular_highlight_texname.c_str());
-//		std::map<std::string, std::string>::const_iterator it(
-//		   materials[i].unknown_parameter.begin());
-//		std::map<std::string, std::string>::const_iterator itEnd(
-//		   materials[i].unknown_parameter.end());
-//		for (; it != itEnd; it++) {
-//			printf("  material.%s = %s\n", it->first.c_str(), it->second.c_str());
-//		}
-//		printf("\n");
-//	}
-
 	for (GLuint i = 0; i < shapes.size(); i++) {
 
-//		printf("  material.map_Ka = %s\n", materials[i].ambient_texname.c_str());
-//		printf("  material.map_Kd = %s\n", materials[i].diffuse_texname.c_str());
-//		printf("  material.map_Ks = %s\n", materials[i].specular_texname.c_str());
 		attach(
 		   loadMesh(shapes[i], Material(
 		               materials[shapes[i].mesh.material_ids[0]]), //xxx doublecheck
@@ -218,7 +138,6 @@ Model::Model(Engine* engine, core::Program* program,
 		               materials[shapes[i].mesh.material_ids[0]].specular_texname),
 		            engine));
 	}
-//#error "Not ready"
 #endif
 }
 
@@ -233,9 +152,9 @@ Model::Model(
 	Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	mAnimator(nullptr),
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-	mLights(engine->getLightSystem()),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+	mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -266,9 +185,9 @@ Model::Model(
 	Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	mAnimator(nullptr),
+	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-	mLights(engine->getLightSystem()),
-	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
+	mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	const aiScene* scene = engine->getModelFromFile(shapePath);
@@ -515,7 +434,10 @@ puMesh Model::loadMesh(tinyobj::shape_t& shape,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 void Model::draw(ICamera& camera) {
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	evaluateAnimations();
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
 	drawWithEffects(camera);
 }
 
@@ -535,7 +457,9 @@ void Model::drawPBRP(ICamera& camera) {
 }
 
 void Model::drawDR(ICamera& camera) {
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	evaluateAnimations();
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	drawWithEffectsDR(camera);
 }
 

@@ -25,7 +25,7 @@ endif()
 message("Building binary package")
 project(libfillwave C CXX)
 
-set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator)
+set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator) #why do we need this ?
 
 # -----------------------------------------------
 # Includes
@@ -49,6 +49,10 @@ endif()
 # -----------------------------------------------
 # Targets
 # -----------------------------------------------
+
+#add_library(fillwave_object OBJECT ${FILLWAVE_SOURCES})
+#add_library(fillwave SHARED $<TARGET_OBJECTS:fillwave_object> $<TARGET_OBJECTS:tinyobjloader>)
+#add_dependencies(fillwave fillwave_object)
 
 add_library(fillwave SHARED ${FILLWAVE_SOURCES})
 
@@ -74,6 +78,8 @@ if(FILLWAVE_BUILD_PACK)
 	add_subdirectory(${FILLWAVE_EXT_FREETYPE2_PATH})
 	add_subdirectory(${FILLWAVE_EXT_GLFW_PATH}) # needs randr libraries
 endif()
+
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-whole-archive -l${CMAKE_CURRENT_BINARY_DIR}/tinyobjloader.a -Wl,-no-whole-archive")
 
 # -----------------------------------------------
 # Linker

@@ -87,10 +87,13 @@ class Model: public IFocusable, public Programmable {
 	void drawPBRP(ICamera& camera);
 	void drawDR(ICamera& camera);
 
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	/* Animation */
 	void performAnimation(GLfloat timeElapsed_us);
 	void setActiveAnimation(GLint animationID);
 	GLint getActiveAnimations();
+
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 	void handleFocusEvent(EventType& event) override;
 	void updateRenderer(IRenderer& renderer) override;
@@ -106,25 +109,23 @@ class Model: public IFocusable, public Programmable {
 	GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow,
 	      mUniformLocationCacheBonesShadowColor;
  private:
-	/* Animation */
-	GLint mActiveAnimation;
-
 	/* Init */
 	void initUniformsCache();
 	void initShadowing(Engine* engine);
-	void evaluateAnimations();
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-	void initAnimations(const aiScene* scene);
-	/* Tree */
-	void loadNodeTransformations(aiNode* node, Entity* entity);
+	/* Animation */
+	GLint mActiveAnimation;
 
+	void evaluateAnimations();
+	void initAnimations(const aiScene* scene);
+
+	void loadNodeTransformations(aiNode* node, Entity* entity);
 	void loadNodes(
 	   aiNode* node,
 	   const aiScene* scene,
 	   Engine* engine,
 	   Entity* entity);
-
 	void loadNodes(
 	   aiNode* node,
 	   const aiScene* scene,
@@ -133,7 +134,6 @@ class Model: public IFocusable, public Programmable {
 	   const std::string& diffuseMapPath,
 	   const std::string& normalMapPath,
 	   const std::string& specularMapPath);
-
 	void loadNodes(
 	   aiNode* node,
 	   const aiScene* scene,
@@ -143,7 +143,6 @@ class Model: public IFocusable, public Programmable {
 	   core::Texture2D* normalMap,
 	   core::Texture2D* specularMap,
 	   const Material& material);
-
 	puMesh loadMesh(
 	   const aiMesh* shape,
 	   const Material& material,

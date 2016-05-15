@@ -46,11 +46,11 @@ glm::vec3 assimpToGlmVec3(aiVector3D vector);
 glm::quat assimpToGlmQuat(aiQuaternion quaternion);
 glm::vec4 assimpToGlmVec4(aiColor4D vector);
 
-#else
+#else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 /* xxx Attention. dangerous, but fast code */
-glm::vec3 floatsToGlmVec3(const float* vector);
-glm::vec4 floatsToGlmVec4(const float* vector);
+glm::vec3 floatsToGlmVec3(const float* in);
+glm::vec4 floatsToGlmVec4(const float* in);
 
 #endif
 

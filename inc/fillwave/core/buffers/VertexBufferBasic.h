@@ -78,9 +78,8 @@ class VertexBufferBasic: public TVertexBuffer<VertexBasic> {
 	VertexBufferBasic(const aiMesh* shape, framework::Animator* animator =
 	                     nullptr, GLuint dataStoreModification = GL_STATIC_DRAW);
 #else
-	VertexBufferBasic(tinyobj::shape_t& shape, framework::Animator* animator =
-	                     nullptr, GLuint dataStoreModification = GL_STATIC_DRAW);
-
+	VertexBufferBasic(tinyobj::shape_t& shape,
+	                  GLuint dataStoreModification = GL_STATIC_DRAW);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 	VertexBufferBasic(
