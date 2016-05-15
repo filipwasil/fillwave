@@ -63,7 +63,9 @@ Model::Model(
    const Material& material) :
 	IFocusable(engine),
 	Programmable(program),
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	mAnimator(nullptr),
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	mLights(engine->getLightSystem()),
 	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -83,14 +85,19 @@ Model::Model(
 	                              loader.getAmbientOcclusionColor(), engine->getLightSystem(),
 	                              engine->storeBuffer<core::VertexBufferBasic> (vao, vertices),
 	                              engine->storeBuffer<core::IndexBuffer> (vao, indices),
-	                              mAnimator, GL_TRIANGLES, vao));
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	                              mAnimator,
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+	                              GL_TRIANGLES, vao));
 }
 
 Model::Model(Engine* engine, core::Program* program,
              const std::string& shapePath) :
 	IFocusable(engine),
 	Programmable(program),
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	mAnimator(nullptr),
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	mLights(engine->getLightSystem()),
 	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -120,69 +127,95 @@ Model::Model(Engine* engine, core::Program* program,
 	FLOG_DEBUG("Shapes    : %lu", shapes.size());
 	FLOG_DEBUG("Materials : %lu", materials.size());
 
-	for (size_t i = 0; i < shapes.size(); i++) {
-		printf("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
-		printf("Size of shape[%ld].indices: %ld\n", i, shapes[i].mesh.indices.size());
-		printf("Size of shape[%ld].material_ids: %ld\n", i,
-		       shapes[i].mesh.material_ids.size());
-//	  assert((shapes[i].mesh.indices.size() % 3) == 0);
-		for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) {
-			printf("  idx[%ld] = %d, %d, %d. mat_id = %d\n", f,
-			       shapes[i].mesh.indices[3 * f + 0], shapes[i].mesh.indices[3 * f + 1],
-			       shapes[i].mesh.indices[3 * f + 2], shapes[i].mesh.material_ids[f]);
-		}
+//	for (GLuint i = 0; i < node->mNumMeshes; i++) {
+//		const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
+//		const aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
+//
+//		entity->attach(
+//				loadMesh(aMesh, Material(aMaterial),
+//						 engine->storeTexture(diffuseMapPath.c_str()),
+//						 engine->storeTexture(normalMapPath.c_str()),
+//						 engine->storeTexture(specularMapPath.c_str()),
+//						 engine));
+//	}
 
-		printf("shape[%ld].vertices: %ld\n", i, shapes[i].mesh.positions.size());
-		assert((shapes[i].mesh.positions.size() % 3) == 0);
-		for (size_t v = 0; v < shapes[i].mesh.positions.size() / 3; v++) {
-			printf("  v[%ld] = (%f, %f, %f)\n", v,
-			       shapes[i].mesh.positions[3 * v + 0],
-			       shapes[i].mesh.positions[3 * v + 1],
-			       shapes[i].mesh.positions[3 * v + 2]);
-		}
-	}
+//	for (size_t i = 0; i < shapes.size(); i++) {
+//		FLOG_DEBUG("shape[%ld].name = %s\n", i, shapes[i].name.c_str());
+//		FLOG_DEBUG("Size of shape[%ld].indices: %ld\n", i, shapes[i].mesh.indices.size());
+//		FLOG_DEBUG("Size of shape[%ld].material_ids: %ld\n", i, shapes[i].mesh.material_ids.size());
+//
+//		for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) {
+//			printf("  idx[%ld] = %d, %d, %d. mat_id = %d\n", f,
+//				   shapes[i].mesh.indices[3 * f + 0], shapes[i].mesh.indices[3 * f + 1],
+//				   shapes[i].mesh.indices[3 * f + 2], shapes[i].mesh.material_ids[f]);
+//		}
+//
+//		entity->attach(
+//				loadMesh(aMesh, Material(aMaterial),
+//						 engine->storeTexture(diffuseMapPath.c_str()),
+//						 engine->storeTexture(normalMapPath.c_str()),
+//						 engine->storeTexture(specularMapPath.c_str()),
+//						 engine));
+//	}
+//
+//	for (size_t i = 0; i < shapes.size(); i++) {
+//		for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) {
+//			printf("  idx[%ld] = %d, %d, %d. mat_id = %d\n", f,
+//			       shapes[i].mesh.indices[3 * f + 0], shapes[i].mesh.indices[3 * f + 1],
+//			       shapes[i].mesh.indices[3 * f + 2], shapes[i].mesh.material_ids[f]);
+//		}
+//
+//		printf("shape[%ld].vertices: %ld\n", i, shapes[i].mesh.positions.size());
+//		assert((shapes[i].mesh.positions.size() % 3) == 0);
+//		for (size_t v = 0; v < shapes[i].mesh.positions.size() / 3; v++) {
+//			printf("  v[%ld] = (%f, %f, %f)\n", v,
+//			       shapes[i].mesh.positions[3 * v + 0],
+//			       shapes[i].mesh.positions[3 * v + 1],
+//			       shapes[i].mesh.positions[3 * v + 2]);
+//		}
+//	}
+//
+//	for (size_t i = 0; i < materials.size(); i++) {
+//		printf("material[%ld].name = %s\n", i, materials[i].name.c_str());
+//		printf("  material.Ka = (%f, %f ,%f)\n", materials[i].ambient[0],
+//		       materials[i].ambient[1], materials[i].ambient[2]);
+//		printf("  material.Kd = (%f, %f ,%f)\n", materials[i].diffuse[0],
+//		       materials[i].diffuse[1], materials[i].diffuse[2]);
+//		printf("  material.Ks = (%f, %f ,%f)\n", materials[i].specular[0],
+//		       materials[i].specular[1], materials[i].specular[2]);
+//		printf("  material.Tr = (%f, %f ,%f)\n", materials[i].transmittance[0],
+//		       materials[i].transmittance[1], materials[i].transmittance[2]);
+//		printf("  material.Ke = (%f, %f ,%f)\n", materials[i].emission[0],
+//		       materials[i].emission[1], materials[i].emission[2]);
+//		printf("  material.Ns = %f\n", materials[i].shininess);
+//		printf("  material.Ni = %f\n", materials[i].ior);
+//		printf("  material.dissolve = %f\n", materials[i].dissolve);
+//		printf("  material.illum = %d\n", materials[i].illum);
 
-	for (size_t i = 0; i < materials.size(); i++) {
-		printf("material[%ld].name = %s\n", i, materials[i].name.c_str());
-		printf("  material.Ka = (%f, %f ,%f)\n", materials[i].ambient[0],
-		       materials[i].ambient[1], materials[i].ambient[2]);
-		printf("  material.Kd = (%f, %f ,%f)\n", materials[i].diffuse[0],
-		       materials[i].diffuse[1], materials[i].diffuse[2]);
-		printf("  material.Ks = (%f, %f ,%f)\n", materials[i].specular[0],
-		       materials[i].specular[1], materials[i].specular[2]);
-		printf("  material.Tr = (%f, %f ,%f)\n", materials[i].transmittance[0],
-		       materials[i].transmittance[1], materials[i].transmittance[2]);
-		printf("  material.Ke = (%f, %f ,%f)\n", materials[i].emission[0],
-		       materials[i].emission[1], materials[i].emission[2]);
-		printf("  material.Ns = %f\n", materials[i].shininess);
-		printf("  material.Ni = %f\n", materials[i].ior);
-		printf("  material.dissolve = %f\n", materials[i].dissolve);
-		printf("  material.illum = %d\n", materials[i].illum);
-		printf("  material.map_Ka = %s\n", materials[i].ambient_texname.c_str());
-		printf("  material.map_Kd = %s\n", materials[i].diffuse_texname.c_str());
-		printf("  material.map_Ks = %s\n", materials[i].specular_texname.c_str());
-		printf("  material.map_Ns = %s\n",
-		       materials[i].specular_highlight_texname.c_str());
-		std::map<std::string, std::string>::const_iterator it(
-		   materials[i].unknown_parameter.begin());
-		std::map<std::string, std::string>::const_iterator itEnd(
-		   materials[i].unknown_parameter.end());
-		for (; it != itEnd; it++) {
-			printf("  material.%s = %s\n", it->first.c_str(), it->second.c_str());
-		}
-		printf("\n");
-	}
+//		printf("  material.map_Ns = %s\n",
+//		       materials[i].specular_highlight_texname.c_str());
+//		std::map<std::string, std::string>::const_iterator it(
+//		   materials[i].unknown_parameter.begin());
+//		std::map<std::string, std::string>::const_iterator itEnd(
+//		   materials[i].unknown_parameter.end());
+//		for (; it != itEnd; it++) {
+//			printf("  material.%s = %s\n", it->first.c_str(), it->second.c_str());
+//		}
+//		printf("\n");
+//	}
 
 	for (GLuint i = 0; i < shapes.size(); i++) {
 
-		std::string diffuseMapPath, normalMapPath, specularMapPath;
-
+//		printf("  material.map_Ka = %s\n", materials[i].ambient_texname.c_str());
+//		printf("  material.map_Kd = %s\n", materials[i].diffuse_texname.c_str());
+//		printf("  material.map_Ks = %s\n", materials[i].specular_texname.c_str());
 		attach(
 		   loadMesh(shapes[i], Material(
 		               materials[shapes[i].mesh.material_ids[0]]), //xxx doublecheck
-		            engine->storeTexture(diffuseMapPath.c_str()),
-		            engine->storeTexture(normalMapPath.c_str()),
-		            engine->storeTexture(specularMapPath.c_str()),
+		            engine->storeTexture(materials[shapes[i].mesh.material_ids[0]].diffuse_texname),
+		            engine->storeTexture(materials[shapes[i].mesh.material_ids[0]].bump_texname),
+		            engine->storeTexture(
+		               materials[shapes[i].mesh.material_ids[0]].specular_texname),
 		            engine));
 	}
 //#error "Not ready"
@@ -198,7 +231,9 @@ Model::Model(
    const std::string& specularMapPath) :
 	IFocusable(engine),
 	Programmable(program),
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	mAnimator(nullptr),
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	mLights(engine->getLightSystem()),
 	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -229,7 +264,9 @@ Model::Model(
    const Material& material) :
 	IFocusable(engine),
 	Programmable(program),
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	mAnimator(nullptr),
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	mLights(engine->getLightSystem()),
 	mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE) {
 
@@ -456,14 +493,23 @@ inline void Model::evaluateAnimations() {
 
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-puMesh loadMesh(tinyobj::shape_t& shape,
-                const Material& material,
-                core::Texture2D* diffuseMap,
-                core::Texture2D* normalMap,
-                core::Texture2D* specularMap,
-                Engine* engine) {
-//#error "Not ready"
-	return puMesh();
+puMesh Model::loadMesh(tinyobj::shape_t& shape,
+                       const Material& material,
+                       core::Texture2D* diffuseMap,
+                       core::Texture2D* normalMap,
+                       core::Texture2D* specularMap,
+                       Engine* engine) {
+
+	ProgramLoader loader(engine);
+	core::VertexArray* vao = new core::VertexArray();
+	return std::make_unique < Mesh
+	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
+	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
+	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
+	          engine->getLightSystem(), engine->storeBuffer<core::VertexBufferBasic> (vao,
+	                shape),
+	          engine->storeBuffer<core::IndexBuffer>(vao, shape.mesh.indices), GL_TRIANGLES,
+	          vao);
 }
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
@@ -498,24 +544,29 @@ void Model::log() const {
 }
 
 inline void Model::initUniformsCache() {
-	if (mAnimator) {
-		mUniformLocationCacheBones = mProgram->getUniformLocation("uBones[0]");
-		mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation(
-		                                      "uBones[0]");
-		mUniformLocationCacheBonesShadowColor =
-		   mProgramShadowColor->getUniformLocation("uBones[0]");
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	if (nullptr == mAnimator) {
+		return;
 	}
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+	mUniformLocationCacheBones = mProgram->getUniformLocation("uBones[0]");
+	mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation(
+	                                      "uBones[0]");
+	mUniformLocationCacheBonesShadowColor =
+	   mProgramShadowColor->getUniformLocation("uBones[0]");
 }
 
 inline void Model::initShadowing(Engine* engine) {
 	ProgramLoader loader(engine);
-	if (mAnimator) {
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	if (nullptr != mAnimator) {
 		mProgramShadow = loader.getShadowWithAnimation();
 		mProgramShadowColor = loader.getShadowColorCodedWithAnimation();
-	} else {
-		mProgramShadow = loader.getShadow();
-		mProgramShadowColor = loader.getShadowColorCoded();
+		return;
 	}
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+	mProgramShadow = loader.getShadow();
+	mProgramShadowColor = loader.getShadowColorCoded();
 }
 
 void Model::handleFocusEvent(EventType& event) {

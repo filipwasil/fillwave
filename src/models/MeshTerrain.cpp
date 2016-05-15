@@ -88,7 +88,11 @@ MeshTerrain::MeshTerrain(
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
 			      engine->getLightSystem(),
 			      vbo,
-			      ibo, nullptr, GL_TRIANGLES, vao);
+			      ibo,
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+			      nullptr,
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+			      GL_TRIANGLES, vao);
 
 			ptr->moveTo(
 			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,
@@ -138,7 +142,11 @@ MeshTerrain::MeshTerrain(
 			      normalMap, specularMap, program, loader.getShadow(),
 			      loader.getShadowColorCoded(), loader.getOcclusionOptimizedQuery(),
 			      loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-			      engine->getLightSystem(), vbo, ibo, nullptr, GL_TRIANGLES, vao);
+			      engine->getLightSystem(), vbo, ibo,
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+			      nullptr,
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+			      GL_TRIANGLES, vao);
 
 			ptr->moveTo(
 			   glm::vec3(density * gapSize * (GLfloat(x)), 0.0,

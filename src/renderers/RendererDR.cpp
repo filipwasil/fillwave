@@ -78,8 +78,7 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	std::vector<core::VertexBasic> vertices = sphere.getVertices();
 	std::vector<GLuint> indices = sphere.getIndices();
 
-	core::VertexArray* vao = new
-	core::VertexArray();
+	core::VertexArray* vao = new core::VertexArray();
 	mDeferredPointLight = std::make_unique<Mesh>(engine, Material(),
 	                      nullptr,
 	                      nullptr, nullptr,
@@ -87,7 +86,10 @@ RendererDR::RendererDR(Engine* engine, ProgramLoader& loader)
 	                      nullptr, nullptr, mLights,
 	                      engine->storeBuffer<core::VertexBufferBasic>(vao, vertices),
 	                      engine->storeBuffer<core::IndexBuffer>(vao, indices),
-	                      nullptr, GL_TRIANGLES, vao);
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	                      nullptr,
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+	                      GL_TRIANGLES, vao);
 
 	initUniforms();
 	initGeometryBuffer();

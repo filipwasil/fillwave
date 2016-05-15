@@ -81,8 +81,6 @@ class Model: public IFocusable, public Programmable {
 
 	virtual ~Model();
 
-	bool isAnimated() const;
-
 	void reload();
 
 	void draw(ICamera& camera);
@@ -100,7 +98,9 @@ class Model: public IFocusable, public Programmable {
 	void log() const;
 
  protected:
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	Animator* mAnimator;
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	LightSystem* mLights;
 	core::Program *mProgramShadow, *mProgramShadowColor;
 	GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow,

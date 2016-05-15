@@ -145,6 +145,9 @@ VertexBufferBasic::VertexBufferBasic(
 		}
 	}
 }
+
+#else
+
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 VertexBufferBasic::VertexBufferBasic(

@@ -61,7 +61,9 @@ Mesh::Mesh(
    LightSystem* lights,
    core::VertexBufferBasic* vbo,
    core::IndexBuffer* ibo,
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
    Animator* animator,
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
    GLenum renderMode,
    core::VertexArray* vao) :
 	IReloadable(engine, vao),
@@ -78,12 +80,13 @@ Mesh::Mesh(
 	mRenderMode(renderMode),
 	mIBO(ibo),
 	mVBO(vbo),
-	mLights(lights),
-	mAnimator(animator)
+	mLights(lights)
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+	, mAnimator(animator)
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 #ifdef FILLWAVE_GLES_3_0
 #else
-	,
-	mConditionalRendering(GL_QUERY_WAIT)
+	, mConditionalRendering(GL_QUERY_WAIT)
 #endif
 {
 	initPipeline();

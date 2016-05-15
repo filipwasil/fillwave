@@ -279,6 +279,9 @@ class Engine final {
 	      const aiMesh* shape, framework::Animator* animator);
 	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao,
 	                                       const aiMesh* shape);
+#else
+	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao,
+	      tinyobj::shape_t& shape);
 #endif
 	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao,
 	                                       const std::vector<GLuint>& data);

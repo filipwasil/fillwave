@@ -75,7 +75,9 @@ class Mesh: public Entity, public IReloadable {
 	   LightSystem* lights = nullptr,
 	   core::VertexBufferBasic* vbo = nullptr,
 	   core::IndexBuffer* ibo = nullptr,
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	   Animator* animator = nullptr,
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	   GLenum renderMode = GL_TRIANGLES,
 	   core::VertexArray* vao = nullptr);
 
