@@ -49,7 +49,7 @@ if(NOT FILLWAVE_SUPPRESS_WARNINGS)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-packed")                        # todo assimp
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-reserved-id-macro")             # todo assimp
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-switch-enum")                   # todo assimp
-                
+
     elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
 
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
@@ -90,6 +90,14 @@ if(NOT FILLWAVE_SUPPRESS_WARNINGS)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-declarations")             # stb
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")                  # build Functions
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")               # we do want to hide them in some cases
+
+        # OpenMP
+        add_definitions("-fopenmp")
+        find_package(OpenMP)
+        if(OPENMP_FOUND)
+            set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+            set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+        endif()
 
         if(FILLWAVE_BUILD_PACK)
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-shadow")                       # glm

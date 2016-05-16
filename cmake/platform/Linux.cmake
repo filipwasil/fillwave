@@ -4,27 +4,11 @@ CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 #CMAKE_POLICY(SET CMP0046 OLD) #Project dependency cmake policy
 
 # -----------------------------------------------
-# Found by cmake macro
-# -----------------------------------------------
-
-# OpenMP
-add_definitions("-fopenmp")
-find_package(OpenMP)
-if(OPENMP_FOUND)
-    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-endif()
-
-# Freeglut
-
-# -----------------------------------------------
 # Package type
 # -----------------------------------------------
 
 message("Building binary package")
 project(libfillwave C CXX)
-
-set(FILLWAVE_EXT_FONTGENERATOR_INCLUDES ext/fontgenerator) #why do we need this ?
 
 # -----------------------------------------------
 # Includes
@@ -48,10 +32,6 @@ endif()
 # -----------------------------------------------
 # Targets
 # -----------------------------------------------
-
-#add_library(fillwave_object OBJECT ${FILLWAVE_SOURCES})
-#add_library(fillwave SHARED $<TARGET_OBJECTS:fillwave_object> $<TARGET_OBJECTS:tinyobjloader>)
-#add_dependencies(fillwave fillwave_object)
 
 add_library(fillwave SHARED ${FILLWAVE_SOURCES})
 
@@ -126,10 +106,5 @@ endif()
 
 set(CPACK_DEBIAN_PACKAGE_NAME "libfillwave")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fillwave graphics engine - library package")
-if (FILLWAVE_BUILD_PACK)
-#set(CPACK_DEBIAN_PACKAGE_DEPENDS "libglm-dev (>= 0.9.5.1-1), libglew1.10 (>= 1.10.0-3), libglew-dev (>= 1.10.0-3), libassimp3, libassimp-dev (>= 3.0~dfsg-2), libfreetype6 (>= 2.5.2)")
-#set(CPACK_RPM_PACKAGE_REQUIRES "freetype, assimp")
-#set (CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
-endif()
 
 include(CPack)

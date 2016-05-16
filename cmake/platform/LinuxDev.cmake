@@ -4,19 +4,6 @@ CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 #CMAKE_POLICY(SET CMP0046 OLD) #Project dependency cmake policy
 
 # -----------------------------------------------
-# Found by cmake macro
-# -----------------------------------------------
-
-# OpenMP
-
-ADD_DEFINITIONS("-fopenmp")
-FIND_PACKAGE(OpenMP)
-IF(OPENMP_FOUND)
-    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-ENDIF(OPENMP_FOUND)
-
-# -----------------------------------------------
 # Package type
 # -----------------------------------------------
 
