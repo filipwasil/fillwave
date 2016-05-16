@@ -116,7 +116,7 @@ class Model: public IFocusable, public Programmable {
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	/* Animation */
 	GLint mActiveAnimation;
-
+	bool isAnimated() const;
 	void evaluateAnimations();
 	void initAnimations(const aiScene* scene);
 

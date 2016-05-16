@@ -30,21 +30,18 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-#include <fillwave/models/animations/Animator.h>
-#include <fillwave/models/animations/Conversion.h>
-#include <fillwave/models/animations/Animation.h>
-
-#else
-
-#include <fillwave/Assets.h>
-#endif
-
 #include <fillwave/actions/callbacks/TimedBoneUpdateCallback.h>
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/models/Model.h>
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Fillwave.h>
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+#include <fillwave/models/animations/Animator.h>
+#include <fillwave/models/animations/Conversion.h>
+#else
+#include <fillwave/Assets.h>
+#endif
 
 #include <fillwave/Log.h>
 
@@ -394,7 +391,7 @@ GLint Model::getActiveAnimations() {
 }
 
 bool Model::isAnimated() const {
-	return mAnimator ? GL_TRUE : GL_FALSE;
+	return mAnimator;
 }
 
 inline void Model::evaluateAnimations() {
