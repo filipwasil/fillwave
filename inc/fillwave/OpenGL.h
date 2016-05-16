@@ -54,6 +54,7 @@ void glesInitExtensions();
 #define glClearDepth glClearDepthf
 #define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE
 #define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
+#define GLulong GLuint
 
 #else /* defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES) */
 #include <GL/glew.h>

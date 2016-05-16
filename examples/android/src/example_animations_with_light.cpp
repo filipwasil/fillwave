@@ -15,16 +15,16 @@ using namespace fillwave::framework;
 
 void perform(Engine* engine) {
     /* Scene and camera */
-    engine->setCurrentScene(make_unique<Scene>());
+    engine->setCurrentScene(std::make_unique<Scene>());
     engine->getCurrentScene()->setCamera(
-            make_unique<CameraPerspective>(glm::vec3(0.0,2.0,18.0),
+            std::make_unique<CameraPerspective>(glm::vec3(0.0,2.0,18.0),
                                            glm::quat(),
                                            glm::radians(90.0),
                                            1.0,
                                            0.1,
                                            1000.0));
     /* Skybox */
-    engine->getCurrentScene()->setSkybox(make_unique<Skybox>(engine,
+    engine->getCurrentScene()->setSkybox(std::make_unique<Skybox>(engine,
                                                              engine->storeTexture3D("emerald_right.jpg",
                                                                                     "emerald_left.jpg",
                                                                                     "emerald_top.jpg",
@@ -40,9 +40,9 @@ void perform(Engine* engine) {
     pIEffect e = std::make_shared<TextureOnly> ();
     pIEffect f = std::make_shared<Fog> ();
 
-    puModel cactus1 = make_unique<Model>(engine, aprogram, "beast.dae");
-    puModel cactus2 = make_unique<Model>(engine, aprogram, "beast.dae");
-    puModel cactus3 = make_unique<Model>(engine, aprogram, "beast.dae");
+    puModel cactus1 = std::make_unique<Model>(engine, aprogram, "beast.dae");
+    puModel cactus2 = std::make_unique<Model>(engine, aprogram, "beast.dae");
+    puModel cactus3 = std::make_unique<Model>(engine, aprogram, "beast.dae");
 
     cactus1->moveTo(glm::vec3(0.0,-2.0,0.0));
     cactus1->rotateBy(glm::vec3(1.0,0.0,0.0), glm::radians(90.0));
@@ -77,12 +77,12 @@ void perform(Engine* engine) {
 
     entityLight->rotateByX(glm::radians(-90.0));
     entityLight->moveBy(glm::vec3(-8.0,8.0,0.0));
-    entityLight->attach(make_unique<Model>(engine,
+    entityLight->attach(std::make_unique<Model>(engine,
                                program,
                                "sphere.obj",
                                "255_255_255.color"));
 
-    puModel wall = make_unique<Model>(engine,
+    puModel wall = std::make_unique<Model>(engine,
                              program,
                              "floor.obj",
                              "stonetiles.png",   /* diffuse map */
@@ -90,10 +90,10 @@ void perform(Engine* engine) {
                              "stonetiles_s.png");/* specular map */
    wall->moveBy(glm::vec3(0.0,-3.0,0.0));
 
-    entityLight->attachHierarchyCallback(make_unique<LoopCallback>(
-           make_unique_container<SequenceCallback>(
-           make_unique<TimedMoveCallback>(entityLight.get(), glm::vec3(16.0,0.0,0.0), 10.0),
-           make_unique<TimedMoveCallback>(entityLight.get(), glm::vec3(-16.0,0.0,0.0), 10.0)),
+    entityLight->attachHierarchyCallback(std::make_unique<LoopCallback>(
+            make_unique_container<SequenceCallback>(
+                    std::make_unique<TimedMoveCallback>(entityLight.get(), glm::vec3(16.0,0.0,0.0), 10.0),
+                    std::make_unique<TimedMoveCallback>(entityLight.get(), glm::vec3(-16.0,0.0,0.0), 10.0)),
            FILLWAVE_ENDLESS));
     entityLight->scaleTo(0.02);
 
