@@ -14,7 +14,6 @@ PROJECT(libfillwave C CXX)
 # -----------------------------------------------
 
 # OpenMP
-
 ADD_DEFINITIONS("-fopenmp")
 FIND_PACKAGE(OpenMP)
 IF(OPENMP_FOUND)

@@ -90,8 +90,8 @@ class IBuffer: public GLObject {
 	GLuint mDataStoreType;
 	GLuint mIndex;
 	GLvoid* mData;
-	GLuint mSize;
-	GLuint mTotalElements;
+	GLulong mSize;
+	GLulong mTotalElements;
 	void setElements(GLuint elements);
 	void setSize(GLuint size);
 	virtual void emptyCPU() = 0;

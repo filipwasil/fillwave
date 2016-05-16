@@ -152,6 +152,7 @@ class Model: public IFocusable, public Programmable {
 	   Engine* engine);
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	puMesh loadMesh(tinyobj::shape_t& shape,
+	                tinyobj::attrib_t& attrib,
 	                const Material& material,
 	                core::Texture2D* diffuseMap,
 	                core::Texture2D* normalMap,

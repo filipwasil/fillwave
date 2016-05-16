@@ -79,6 +79,7 @@ class VertexBufferBasic: public TVertexBuffer<VertexBasic> {
 	                     nullptr, GLuint dataStoreModification = GL_STATIC_DRAW);
 #else
 	VertexBufferBasic(tinyobj::shape_t& shape,
+	                  tinyobj::attrib_t& attributes,
 	                  GLuint dataStoreModification = GL_STATIC_DRAW);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 

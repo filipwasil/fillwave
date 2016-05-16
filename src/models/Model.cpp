@@ -115,9 +115,9 @@ Model::Model(Engine* engine, core::Program* program,
 #else
 	std::vector<tinyobj::shape_t> shapes;
 	std::vector<tinyobj::material_t> materials;
-
+	tinyobj::attrib_t attrib;
 	std::string err;
-	if (!tinyobj::LoadObj(shapes, materials, err, shapePath.c_str())) {
+	if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, shapePath.c_str())) {
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
 	if (!err.empty()) { // `err` may contain warning message.
@@ -128,9 +128,8 @@ Model::Model(Engine* engine, core::Program* program,
 	FLOG_DEBUG("Materials : %lu", materials.size());
 
 	for (GLuint i = 0; i < shapes.size(); i++) {
-
 		attach(
-		   loadMesh(shapes[i], Material(
+		   loadMesh(shapes[i], attrib, Material(
 		               materials[shapes[i].mesh.material_ids[0]]), //xxx doublecheck
 		            engine->storeTexture(materials[shapes[i].mesh.material_ids[0]].diffuse_texname),
 		            engine->storeTexture(materials[shapes[i].mesh.material_ids[0]].bump_texname),
@@ -413,6 +412,7 @@ inline void Model::evaluateAnimations() {
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 puMesh Model::loadMesh(tinyobj::shape_t& shape,
+                       tinyobj::attrib_t& attrib,
                        const Material& material,
                        core::Texture2D* diffuseMap,
                        core::Texture2D* normalMap,
@@ -421,13 +421,19 @@ puMesh Model::loadMesh(tinyobj::shape_t& shape,
 
 	ProgramLoader loader(engine);
 	core::VertexArray* vao = new core::VertexArray();
+
+	std::vector<GLuint> indices(shape.mesh.indices.size(), 0);
+
+	for (GLuint i = 0; i < shape.mesh.indices.size(); i++) {
+		indices[i] = shape.mesh.indices[i].vertex_index;
+	}
 	return std::make_unique < Mesh
 	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
 	          engine->getLightSystem(), engine->storeBuffer<core::VertexBufferBasic> (vao,
-	                shape),
-	          engine->storeBuffer<core::IndexBuffer>(vao, shape.mesh.indices), GL_TRIANGLES,
+	                shape, attrib),
+	          engine->storeBuffer<core::IndexBuffer>(vao, indices), GL_TRIANGLES,
 	          vao);
 }
 

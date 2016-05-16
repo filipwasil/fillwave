@@ -719,8 +719,9 @@ VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
 }
 #else
 core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao,
-      tinyobj::shape_t& shape) {
-	VertexBufferBasic* newData = new VertexBufferBasic(shape);
+      tinyobj::shape_t& shape,
+      tinyobj::attrib_t& attributes) {
+	VertexBufferBasic* newData = new VertexBufferBasic(shape, attributes);
 	return mImpl->mBuffers.mVertices.store(newData, vao);
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

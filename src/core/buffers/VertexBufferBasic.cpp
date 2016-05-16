@@ -148,10 +148,15 @@ VertexBufferBasic::VertexBufferBasic(
 
 #else
 VertexBufferBasic::VertexBufferBasic(tinyobj::shape_t& shape,
-                                     GLuint dataStoreModification) {
+                                     tinyobj::attrib_t& attributes,
+                                     GLuint dataStoreModification) :
+	TVertexBuffer<VertexBasic>(dataStoreModification) {
 
-	mTotalElements = shape.mesh.positions.size() / 3;
+	mTotalElements = shape.mesh.num_face_vertices.size() / 3;
 	mDataVertices.resize(mTotalElements);
+
+	// Loop over faces(polygon)
+	size_t index_offset = 0;
 
 	int threadID, numberOfThreads, chunkSize = 64;
 	(void) threadID;
@@ -159,54 +164,46 @@ VertexBufferBasic::VertexBufferBasic(tinyobj::shape_t& shape,
 	(void) chunkSize;
 	{
 		#pragma omp parallel for schedule(guided) num_threads(2) if (mTotalElements > 1000)
-		for (GLuint i = 0; i < mTotalElements; i++) {
-			VertexBasic &vertex = mDataVertices[i];
-			int currentIdx = 3 * i;
-			vertex.mColor[0] = 0.0f;
-			vertex.mColor[1] = 0.0f;
-			vertex.mColor[2] = 0.0f;
-			vertex.mColor[3] = 1.0f;
+		for (size_t f = 0; f < shape.mesh.num_face_vertices.size(); f++) {
+			int fv = shape.mesh.num_face_vertices[f];
+			// Loop over vertices in the face.
+			for (size_t v = 0; v < fv; f++) {
+				// access to vertex
+				tinyobj::index_t idx = shape.mesh.indices[index_offset + v];
+				mDataVertices[f].mPosition[0] = attributes.vertices[3 * idx.vertex_index + 0];
+				mDataVertices[f].mPosition[1] = attributes.vertices[3 * idx.vertex_index + 1];
+				mDataVertices[f].mPosition[2] = attributes.vertices[3 * idx.vertex_index + 2];
+				mDataVertices[f].mNormal[0] = attributes.normals[3 * idx.normal_index + 0];
+				mDataVertices[f].mNormal[1] = attributes.normals[3 * idx.normal_index + 1];
+				mDataVertices[f].mNormal[2] = attributes.normals[3 * idx.normal_index + 2];
+				mDataVertices[f].mTextureUV[0] = attributes.texcoords[2 * idx.texcoord_index +
+				                                 0];
+				mDataVertices[f].mTextureUV[1] = attributes.texcoords[2 * idx.texcoord_index +
+				                                 1];
 
-			vertex.mPosition[0] = shape.mesh.positions[currentIdx];
-			vertex.mPosition[1] = shape.mesh.positions[currentIdx + 1];
-			vertex.mPosition[2] = shape.mesh.positions[currentIdx + 2];
-			vertex.mPosition[3] = 1.0f;
+				mDataVertices[f].mColor[0] = 0.0f;
+				mDataVertices[f].mColor[1] = 0.0f;
+				mDataVertices[f].mColor[2] = 0.0f;
+				mDataVertices[f].mColor[3] = 1.0f;
 
-			if (shape.mesh.normals.size()) {
-				vertex.mNormal[0] = shape.mesh.normals[currentIdx];
-				vertex.mNormal[1] = shape.mesh.normals[currentIdx + 1];
-				vertex.mNormal[2] = shape.mesh.normals[currentIdx + 2];
-			} else {
-				vertex.mNormal[0] = 0.0f;
-				vertex.mNormal[1] = 0.0f;
-				vertex.mNormal[2] = 0.0f;
+				mDataVertices[f].mNormalTangentMap[0] = 0.0f;
+				mDataVertices[f].mNormalTangentMap[1] = 0.0f;
+				mDataVertices[f].mNormalTangentMap[2] = 0.0f;
+
+				for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
+					mDataVertices[f].mBoneID[k] = 0.0f;
+					mDataVertices[f].mBoneWeight[k] = 0.0f;
+				}
 			}
+			index_offset += fv;
 
-			vertex.mNormalTangentMap[0] = 0.0f;
-			vertex.mNormalTangentMap[1] = 0.0f;
-			vertex.mNormalTangentMap[2] = 0.0f;
-
-			for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
-				vertex.mBoneID[k] = 0.0f;
-				vertex.mBoneWeight[k] = 0.0f;
-			}
+			// per-face material
+			shape.mesh.material_ids[f];
 		}
 
-		for (GLuint i = 0; i < mTotalElements; i++) {
-			VertexBasic &vertex = mDataVertices[i];
-			int currentIdx = 2 * i;
-			if (shape.mesh.texcoords.size()) { //xxx what is this ?
-				vertex.mTextureUV[0] = shape.mesh.texcoords[currentIdx];
-				vertex.mTextureUV[1] = shape.mesh.texcoords[currentIdx + 1];
-			} else {
-				vertex.mTextureUV[0] = 0;
-				vertex.mTextureUV[1] = 0;
-			}
-		}
+		mData = mDataVertices.data();
+		mSize = mTotalElements * sizeof(VertexBasic);
 	}
-
-	mData = mDataVertices.data();
-	mSize = mTotalElements * sizeof(VertexBasic);
 }
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

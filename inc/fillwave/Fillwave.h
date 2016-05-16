@@ -58,7 +58,7 @@ class Focusable;
 namespace core {
 /* All buffers should be there */
 //core::VertexBufferBasic
-//core::IndexBuffer
+class IndexBuffer;
 struct VertexParticleGPU;
 struct VertexPosition;
 struct VertexFloat;
@@ -280,8 +280,7 @@ class Engine final {
 	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao,
 	                                       const aiMesh* shape);
 #else
-	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao,
-	      tinyobj::shape_t& shape);
+	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao, tinyobj::shape_t& shape, tinyobj::attrib_t& attributes);
 #endif
 	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao,
 	                                       const std::vector<GLuint>& data);

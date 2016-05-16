@@ -38,6 +38,7 @@
 
 #include <fillwave/core/buffers/IndexBuffer.h>
 #include <fillwave/Log.h>
+#include <fillwave/Assets.h>
 
 FLOGINIT("IndexBuffer", FERROR | FFATAL)
 

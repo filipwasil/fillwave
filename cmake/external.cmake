@@ -1,4 +1,3 @@
-
 set(FILLWAVE_EXT_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/ext)
 set(FILLWAVE_EXT_GLM_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/ext/glm)
 set(FILLWAVE_EXT_FREETYPE2_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/ext/freetype2/include )
@@ -21,10 +20,6 @@ else()
 	set(FILLWAVE_MODEL_LOADER_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/ext/tinyobjloader)
 	set(FILLWAVE_MODEL_LOADER_PATH ${CMAKE_CURRENT_SOURCE_DIR}/ext/tinyobjloader)
 	add_subdirectory(${FILLWAVE_MODEL_LOADER_PATH})
-	#set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--export-all-symbols")
-	#set(LINK_FLAGS ${LINK_FLAGS} "-Wl,-whole-archive")
-	# tinyobjloader compiles as static lib static library
-	#set(FILLWAVE_MODEL_LOADER_SOURCES tinyobjloader)
 endif()
 
 set(FILLWAVE_TEXTURE_WRITER_INCLUDES ${CMAKE_CURRENT_SOURCE_DIR}/ext/stb)

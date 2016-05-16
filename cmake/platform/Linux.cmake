@@ -8,7 +8,6 @@ CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 # -----------------------------------------------
 
 # OpenMP
-
 add_definitions("-fopenmp")
 find_package(OpenMP)
 if(OPENMP_FOUND)
@@ -78,8 +77,6 @@ if(FILLWAVE_BUILD_PACK)
 	add_subdirectory(${FILLWAVE_EXT_FREETYPE2_PATH})
 	add_subdirectory(${FILLWAVE_EXT_GLFW_PATH}) # needs randr libraries
 endif()
-
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wl,-whole-archive -l${CMAKE_CURRENT_BINARY_DIR}/tinyobjloader.a -Wl,-no-whole-archive")
 
 # -----------------------------------------------
 # Linker
