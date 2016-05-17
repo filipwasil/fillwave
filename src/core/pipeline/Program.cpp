@@ -284,10 +284,9 @@ void Program::getUniformBlock(std::string name, GLuint bindingPoint) {
 			                    nameFromProgram.data());
 			glUniformBlockBinding(mHandle, blockIndex, bindingPoint);
 			mUnifromBuffers.push_back(
-			   puUniformBuffer(
-			      new UniformBuffer(std::string(name), blockIndex,
-			                        uniformBlockSize, bindingPoint,
-			                        GL_DYNAMIC_DRAW)));
+			   std::make_unique<UniformBuffer>(std::string(name), blockIndex,
+			                                   uniformBlockSize, bindingPoint,
+			                                   GL_DYNAMIC_DRAW));
 		}
 	}
 }

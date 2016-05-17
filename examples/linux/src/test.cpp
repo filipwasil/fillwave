@@ -1,30 +1,27 @@
 //============================================================================
-// Name        : example_terrain_voxel.cpp
+// Name        : example_callbacks.cpp
 // Author      : Filip Wasil
 // Version     :
 // Copyright   : none
-// Description : Fillwave engine example terrain voxel
+// Description : Fillwave engine example callbacks
 //============================================================================
 
 #include <example.h>
 
 /* Audio */
 //#include <portaudio.h>
-
 /* Graphics */
 #include <CallbacksGLFW/MoveCameraCallback.h>
-#include <CallbacksGLFW/AnimationKeyboardCallback.h>
 #include <CallbacksGLFW/TimeStopCallback.h>
 #include <ContextGLFW.h>
-#include <TerrainConstructors/MountainConstructor.h>
-#include <fillwave/Fillwave.h>
 
 /* Physics */
 //#include <bullet>
-
 using namespace fillwave;
 using namespace fillwave::framework;
 using namespace std;
+
+const GLuint SPHERES = 5;
 
 int main(int argc, char* argv[]) {
 	ContextGLFW mContext(argc, argv);
@@ -43,74 +40,89 @@ void init() {
 	ContextGLFW::mGraphicsEngine->getCurrentScene()->setCamera(
 	   make_unique<CameraPerspective>());
 
-	/* Entities */
-	puEntity entity = buildEntity();
-
-	/* Texture */
-	core::Texture3D* textureCubemap =
-	   ContextGLFW::mGraphicsEngine->storeTexture3D("textures/skybox/devilpunch/devpun_right.jpg",
-	         "textures/skybox/devilpunch/devpun_left.jpg",
-	         "textures/skybox/devilpunch/devpun_top.jpg",
-	         "",
-	         "textures/skybox/devilpunch/devpun_front.jpg",
-	         "textures/skybox/devilpunch/devpun_back.jpg");
 
 	/* Lights */
-	ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3 (0.0, 10.0, 1.0),
+	ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3(0.0, 0.0, 5.0),
 	      glm::quat(),
-	      glm::vec4 (1.0, 0.0, 0.0, 1.0),
-	      entity.get());
-
-	entity->moveBy(glm::vec3 (0.0, 2.0, 4.0));
+	      glm::vec4(0.0, 1.0, 0.0, 0.0));
 
 	/* Engine callbacks */
-	ContextGLFW::mGraphicsEngine->registerCallback(make_unique<TimeStopCallback>(
-	         ContextGLFW::mGraphicsEngine));
-	ContextGLFW::mGraphicsEngine->registerCallback(make_unique<MoveCameraCallback>(
-	         ContextGLFW::mGraphicsEngine, eEventType::eKey,
-	         0.1));
-	ContextGLFW::mGraphicsEngine->registerCallback(make_unique<MoveCameraCallback>(
-	         ContextGLFW::mGraphicsEngine, eEventType::eScroll,
-	         0.1));
+	ContextGLFW::mGraphicsEngine->registerCallback(make_unique<TimeStopCallback>
+	      (ContextGLFW::mGraphicsEngine));
+	ContextGLFW::mGraphicsEngine->registerCallback(make_unique
+	      <MoveCameraCallback>(ContextGLFW::mGraphicsEngine, eEventType::eKey, 0.1));
 }
 
 void perform() {
-	ContextGLFW::mGraphicsEngine->getCurrentScene()->setSkybox(make_unique<Skybox>
-	      (ContextGLFW::mGraphicsEngine,
-	       ContextGLFW::mGraphicsEngine->storeTexture3D("textures/skybox/devilpunch/devpun_right.jpg",
-	             "textures/skybox/devilpunch/devpun_left.jpg",
-	             "textures/skybox/devilpunch/devpun_top.jpg",
-	             "",
-	             "textures/skybox/devilpunch/devpun_front.jpg",
-	             "textures/skybox/devilpunch/devpun_back.jpg")));
-	ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(buildTerrainVoxel(
-	         ContextGLFW::mGraphicsEngine,
-	         ProgramLoader(ContextGLFW::mGraphicsEngine).getDefault(),
-	         "textures/test.png",
-	         new MountainConstructor(),
-	         5));
+	core::Program* p = ProgramLoader(ContextGLFW::mGraphicsEngine).getDefault();
+
+	/* Models */
+	BuilderModelExternalMaps builder(ContextGLFW::mGraphicsEngine,
+	                                 "meshes/sphere.obj",
+	                                 p, "textures/test.png");
+
+	for (GLint i = 0; i < SPHERES; i++) {
+		/* build */
+
+		puModel sphere = builder.build();
+
+		/* move */
+		sphere->scaleTo(0.1);
+		sphere->moveByX(-4 + 2 * i);
+
+		sphere->attachHierarchyCallback(make_unique<LoopCallback>(
+		                                   std::move(make_unique_container<SequenceCallback>
+		                                         (make_unique<TimedScaleCallback>(
+		                                               sphere.get(), 0.1 * 2.0,
+		                                               2.0f + i * 0.5, CircularEaseIn),
+		                                               make_unique<TimedScaleCallback>(
+		                                                     sphere.get(), 0.1 * 1.0,
+		                                                     2.0f + i * 0.5, ElasticEaseIn),
+		                                               make_unique<TimedRotateCallback>(
+		                                                     sphere.get(),
+		                                                     glm::vec3(0.0, 1.0, 0.0),
+		                                                     glm::radians(90.0f), 2.0f + i * 0.5,
+		                                                     BounceEaseIn),
+		                                               make_unique<TimedRotateCallback>(
+		                                                     sphere.get(),
+		                                                     glm::vec3(0.0, 1.0, 0.0),
+		                                                     glm::radians(90.0f), 2.0f + i * 0.5,
+		                                                     BounceEaseOut),
+		                                               make_unique<TimedMoveCallback>(
+		                                                     sphere.get(),
+		                                                     glm::vec3(0.0, -1.0, 0.0),
+		                                                     2.0f + i * 0.5))),
+		                                   FILLWAVE_ENDLESS));
+
+		ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(sphere));
+	}
+
+	puModel wall = make_unique<Model>(ContextGLFW::mGraphicsEngine, p,
+	                                  "meshes/floor.obj");
+	wall->rotateByX(glm::radians(90.0));
+	wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
+	wall->scaleTo(3.0);
+	ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(wall));
+}
+
+void quit() {
+//
 }
 
 void showDescription() {
 	pText hint0 =
-	   ContextGLFW::mGraphicsEngine->storeText("Fillwave example terrain voxel",
-	         "fonts/Titania",  glm::vec2(-0.95, 0.80), 100.0);
-	pText hint5 =
-	   ContextGLFW::mGraphicsEngine->storeText("Use mouse to move the camera",
-	         "fonts/Titania",  glm::vec2(-0.95, -0.40), 70.0);
+	   ContextGLFW::mGraphicsEngine->storeText("Fillwave example callbacks",
+	         "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
 	pText hint3 = ContextGLFW::mGraphicsEngine->storeText("Use 'S' for camera back",
 	              "fonts/Titania",
 	              glm::vec2(-0.95, -0.50), 70.0);
 	pText hint4 =
 	   ContextGLFW::mGraphicsEngine->storeText("Use 'W' for camera forward",
-	         "fonts/Titania",
-	         glm::vec2(-0.95, -0.60), 70.0);
+	         "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
 	pText hint1 =
 	   ContextGLFW::mGraphicsEngine->storeText("Use 'T' to resume/stop time",
-	         "fonts/Titania",
-	         glm::vec2(-0.95, -0.70), 70.0);
+	         "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
 	pText hint6 =
 	   ContextGLFW::mGraphicsEngine->storeText("Use 'D' for toggle debugger On/Off",
-	         "fonts/Titania",  glm::vec2(-0.95, -0.80), 70.0);
-
+	         "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
 }
