@@ -98,7 +98,7 @@ inline void TextureSystem::checkExtensions() {
 }
 
 core::Texture2D* TextureSystem::get(
-   std::string texturePath,
+   const std::string& texturePath,
    eCompression compression,
    eFlip flip) {
 	std::string filePath = mRootPath + texturePath;

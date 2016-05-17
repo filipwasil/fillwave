@@ -58,7 +58,6 @@ class IndexBuffer: public IBuffer {
 	virtual ~IndexBuffer() = default;
 
 	GLuint* getDataInternal();
-	void loadElement(GLuint element);
 
 	void emptyCPU() override;
 	void emptyGPU() override;

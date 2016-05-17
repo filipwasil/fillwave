@@ -147,62 +147,55 @@ VertexBufferBasic::VertexBufferBasic(
 
 #else
 VertexBufferBasic::VertexBufferBasic(tinyobj::shape_t& shape,
-                                     tinyobj::attrib_t& attributes,
+                                     tinyobj::attrib_t& attr,
                                      GLuint dataStoreModification) :
 	TVertexBuffer<VertexBasic>(dataStoreModification) {
 
-	mTotalElements = shape.mesh.num_face_vertices.size() / 3;
+	mTotalElements = shape.mesh.indices.size();
 	mDataVertices.resize(mTotalElements);
 
+	// Loop over shapes
 	// Loop over faces(polygon)
 	size_t index_offset = 0;
+	/* xxx OpenMP should be usefull here */
+	for (size_t f = 0; f < shape.mesh.num_face_vertices.size(); f++) {
+		int fv = shape.mesh.num_face_vertices[f];
 
-	int threadID, numberOfThreads, chunkSize = 64;
-	(void) threadID;
-	(void) numberOfThreads;
-	(void) chunkSize;
-	{
-		#pragma omp parallel for schedule(guided) num_threads(2) if (mTotalElements > 1000)
-		for (size_t f = 0; f < shape.mesh.num_face_vertices.size(); f++) {
-			int fv = shape.mesh.num_face_vertices[f];
-			// Loop over vertices in the face.
-			for (size_t v = 0; v < fv; f++) {
-				// access to vertex
-				tinyobj::index_t idx = shape.mesh.indices[index_offset + v];
-				mDataVertices[f].mPosition[0] = attributes.vertices[3 * idx.vertex_index + 0];
-				mDataVertices[f].mPosition[1] = attributes.vertices[3 * idx.vertex_index + 1];
-				mDataVertices[f].mPosition[2] = attributes.vertices[3 * idx.vertex_index + 2];
-				mDataVertices[f].mNormal[0] = attributes.normals[3 * idx.normal_index + 0];
-				mDataVertices[f].mNormal[1] = attributes.normals[3 * idx.normal_index + 1];
-				mDataVertices[f].mNormal[2] = attributes.normals[3 * idx.normal_index + 2];
-				mDataVertices[f].mTextureUV[0] = attributes.texcoords[2 * idx.texcoord_index +
-				                                 0];
-				mDataVertices[f].mTextureUV[1] = attributes.texcoords[2 * idx.texcoord_index +
-				                                 1];
-
-				mDataVertices[f].mColor[0] = 0.0f;
-				mDataVertices[f].mColor[1] = 0.0f;
-				mDataVertices[f].mColor[2] = 0.0f;
-				mDataVertices[f].mColor[3] = 1.0f;
-
-				mDataVertices[f].mNormalTangentMap[0] = 0.0f;
-				mDataVertices[f].mNormalTangentMap[1] = 0.0f;
-				mDataVertices[f].mNormalTangentMap[2] = 0.0f;
-
-				for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
-					mDataVertices[f].mBoneID[k] = 0.0f;
-					mDataVertices[f].mBoneWeight[k] = 0.0f;
-				}
+		// Loop over vertices in the face.
+		for (size_t v = 0; v < fv; v++) {
+			// access to vertex
+			size_t idxOut = index_offset + v;
+			tinyobj::index_t idx = shape.mesh.indices[idxOut];
+			mDataVertices[idxOut].mPosition[0] = attr.vertices[3 * idx.vertex_index + 0];
+			mDataVertices[idxOut].mPosition[1] = attr.vertices[3 * idx.vertex_index + 1];
+			mDataVertices[idxOut].mPosition[2] = attr.vertices[3 * idx.vertex_index + 2];
+			mDataVertices[idxOut].mPosition[3] = 1.0f;
+			mDataVertices[idxOut].mNormal[0] = attr.normals[3 * idx.normal_index + 0];
+			mDataVertices[idxOut].mNormal[1] = attr.normals[3 * idx.normal_index + 1];
+			mDataVertices[idxOut].mNormal[2] = attr.normals[3 * idx.normal_index + 2];
+			mDataVertices[idxOut].mTextureUV[0] = attr.texcoords[2 * idx.texcoord_index +
+			                                      0];
+			mDataVertices[idxOut].mTextureUV[1] = attr.texcoords[2 * idx.texcoord_index +
+			                                      1];
+			mDataVertices[idxOut].mNormalTangentMap[0] = 0.0f;
+			mDataVertices[idxOut].mNormalTangentMap[1] = 0.0f;
+			mDataVertices[idxOut].mNormalTangentMap[2] = 0.0f;
+			mDataVertices[idxOut].mColor[0] = 0.0f;
+			mDataVertices[idxOut].mColor[1] = 0.0f;
+			mDataVertices[idxOut].mColor[2] = 0.0f;
+			mDataVertices[idxOut].mColor[3] = 1.0f;
+			for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
+				mDataVertices[idxOut].mBoneID[k] = 0.0f;
+				mDataVertices[idxOut].mBoneWeight[k] = 0.0f;
 			}
-			index_offset += fv;
-
-			// per-face material
-			shape.mesh.material_ids[f];
 		}
+		index_offset += fv;
 
-		mData = mDataVertices.data();
-		mSize = mTotalElements * sizeof(VertexBasic);
+		/* per-face material */
+		/* shape.mesh.material_ids[f]; */
 	}
+	mData = mDataVertices.data();
+	mSize = mTotalElements * sizeof(VertexBasic);
 }
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

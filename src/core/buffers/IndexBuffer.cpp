@@ -94,13 +94,6 @@ IndexBuffer::IndexBuffer(
 	mData = mDataIndices.data();
 }
 
-void IndexBuffer::loadElement(GLuint element) {
-	mDataIndices.push_back(element);
-	mTotalElements++;
-	mSize = mTotalElements * sizeof(GLuint);
-	mData = mDataIndices.data();
-}
-
 void IndexBuffer::emptyCPU() {
 	mDataIndices.clear();
 }
