@@ -39,8 +39,6 @@
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/models/animations/Conversion.h>
-#else
-#include <fillwave/Assets.h>
 #endif
 
 #include <fillwave/Log.h>
@@ -121,18 +119,28 @@ Model::Model(Engine* engine, core::Program* program,
 		FLOG_WARNING("%s", err.c_str());
 	}
 
-	FLOG_DEBUG("Shapes    : %lu", shapes.size());
-	FLOG_DEBUG("Materials : %lu", materials.size());
-
+	initShadowing(engine);
 	for (GLuint i = 0; i < shapes.size(); i++) {
-		attach(
-		   loadMesh(shapes[i], attrib, Material(
-		               materials[shapes[i].mesh.material_ids[0]]), //xxx doublecheck
-		            engine->storeTexture(materials[shapes[i].mesh.material_ids[0]].diffuse_texname),
-		            engine->storeTexture(materials[shapes[i].mesh.material_ids[0]].bump_texname),
-		            engine->storeTexture(
-		               materials[shapes[i].mesh.material_ids[0]].specular_texname),
-		            engine));
+		if (shapes[i].mesh.material_ids.empty()) {
+			FLOG_FATAL("No materials available");
+		}
+
+		int materialId = shapes[i].mesh.material_ids[0];
+		if (materialId != -1) {
+			attach(loadMesh(shapes[i], attrib,
+			                Material(materials[materialId]),
+			                engine->storeTexture(materials[materialId].diffuse_texname),
+			                engine->storeTexture(materials[materialId].bump_texname),
+			                engine->storeTexture(materials[materialId].specular_texname),
+			                engine));
+			continue;
+		}
+		attach(loadMesh(shapes[i], attrib,
+		                Material(),
+		                nullptr,
+		                nullptr,
+		                nullptr,
+		                engine));
 	}
 #endif
 }
@@ -165,7 +173,31 @@ Model::Model(
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
 #else
-//#error "Not ready"
+	std::vector<tinyobj::shape_t> shapes;
+	std::vector<tinyobj::material_t> materials;
+	tinyobj::attrib_t attrib;
+	std::string err;
+	if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, shapePath.c_str())) {
+		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
+	}
+	if (!err.empty()) { // `err` may contain warning message.
+		FLOG_WARNING("%s", err.c_str());
+	}
+
+	initShadowing(engine);
+	for (GLuint i = 0; i < shapes.size(); i++) {
+		if (shapes[i].mesh.material_ids.empty()) {
+			FLOG_FATAL("No materials available");
+		}
+
+		attach(loadMesh(shapes[i], attrib,
+		                shapes[i].mesh.material_ids[0] != -1 ? Material(
+		                   materials[shapes[i].mesh.material_ids[0]]) : Material(),
+		                engine->storeTexture(diffuseMapPath.c_str()),
+		                engine->storeTexture(normalMapPath.c_str()),
+		                engine->storeTexture(specularMapPath.c_str()),
+		                engine));
+	}
 #endif
 }
 
@@ -198,7 +230,31 @@ Model::Model(
 		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
 	}
 #else
-//#error "Not ready"
+	std::vector<tinyobj::shape_t> shapes;
+	std::vector<tinyobj::material_t> materials;
+	tinyobj::attrib_t attrib;
+	std::string err;
+	if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, shapePath.c_str())) {
+		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
+	}
+	if (!err.empty()) { // `err` may contain warning message.
+		FLOG_WARNING("%s", err.c_str());
+	}
+
+	initShadowing(engine);
+	for (GLuint i = 0; i < shapes.size(); i++) {
+		if (shapes[i].mesh.material_ids.empty()) {
+			FLOG_FATAL("No materials available");
+		}
+
+		attach(loadMesh(shapes[i], attrib,
+		                shapes[i].mesh.material_ids[0] != -1 ? Material(
+		                   materials[shapes[i].mesh.material_ids[0]]) : Material(),
+		                diffuseMap,
+		                normalMap,
+		                specularMap,
+		                engine));
+	}
 #endif
 }
 
@@ -406,6 +462,18 @@ inline void Model::evaluateAnimations() {
 	}
 }
 
+
+inline void Model::initUniformsCache() {
+	if (nullptr == mAnimator) {
+		return;
+	}
+	mUniformLocationCacheBones = mProgram->getUniformLocation("uBones[0]");
+	mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation(
+	                                      "uBones[0]");
+	mUniformLocationCacheBonesShadowColor =
+	   mProgramShadowColor->getUniformLocation("uBones[0]");
+}
+
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 puMesh Model::loadMesh(tinyobj::shape_t& shape,
@@ -415,22 +483,17 @@ puMesh Model::loadMesh(tinyobj::shape_t& shape,
                        core::Texture2D* normalMap,
                        core::Texture2D* specularMap,
                        Engine* engine) {
-
 	ProgramLoader loader(engine);
 	core::VertexArray* vao = new core::VertexArray();
 
-	std::vector<GLuint> indices(shape.mesh.indices.size(), 0);
-
-	for (GLuint i = 0; i < shape.mesh.indices.size(); i++) {
-		indices[i] = shape.mesh.indices[i].vertex_index;
-	}
 	return std::make_unique < Mesh
 	       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
 	          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
 	          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
 	          engine->getLightSystem(), engine->storeBuffer<core::VertexBufferBasic> (vao,
 	                shape, attrib),
-	          engine->storeBuffer<core::IndexBuffer>(vao, indices), GL_TRIANGLES,
+	          engine->storeBuffer<core::IndexBuffer>(vao,
+	                static_cast<GLuint>(shape.mesh.indices.size())), GL_TRIANGLES,
 	          vao);
 }
 
@@ -468,19 +531,6 @@ void Model::drawDR(ICamera& camera) {
 
 void Model::log() const {
 
-}
-
-inline void Model::initUniformsCache() {
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-	if (nullptr == mAnimator) {
-		return;
-	}
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-	mUniformLocationCacheBones = mProgram->getUniformLocation("uBones[0]");
-	mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation(
-	                                      "uBones[0]");
-	mUniformLocationCacheBonesShadowColor =
-	   mProgramShadowColor->getUniformLocation("uBones[0]");
 }
 
 inline void Model::initShadowing(Engine* engine) {

@@ -55,7 +55,7 @@ class TextureSystem {
 
 	void checkExtensions();
 
-	core::Texture2D* get(std::string texturePath,
+	core::Texture2D* get(const std::string& texturePath,
 	                     eCompression = eCompression::eNone, eFlip flip =
 	                        eFlip::eVertical);
 

@@ -428,11 +428,11 @@ bool Mesh::getRenderItem(RenderItem& item) {
 	item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 	item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
 	item.mHandles[RenderItem::eRenderHandleDiffuse] =
-	   mDiffuseMap->getHandle();
+	   mDiffuseMap ? mDiffuseMap->getHandle() : 0;
 	item.mHandles[RenderItem::eRenderHandleNormal] =
-	   mNormalMap->getHandle();
+	   mNormalMap ? mNormalMap->getHandle() : 0;
 	item.mHandles[RenderItem::eRenderHandleSpecular] =
-	   mSpecularMap->getHandle();
+	   mSpecularMap ? mSpecularMap->getHandle() : 0;
 	item.mIndicesPointer = 0;
 	item.mMode = GL_TRIANGLES;
 	item.mRenderStatus = mIBO ? 0xf8 :

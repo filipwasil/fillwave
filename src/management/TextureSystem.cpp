@@ -98,10 +98,13 @@ inline void TextureSystem::checkExtensions() {
 }
 
 core::Texture2D* TextureSystem::get(
-   std::string texturePath,
+   const std::string& texturePath,
    eCompression compression,
    eFlip flip) {
 	std::string filePath = mRootPath + texturePath;
+	if (texturePath.empty()) {
+		return nullptr;
+	}
 	if (mTextures2D.find(filePath) != mTextures2D.end()) {
 		return mTextures2D[filePath].get();
 	}
@@ -111,10 +114,10 @@ core::Texture2D* TextureSystem::get(
 		FLOG_DEBUG("Texture %s added to manager", filePath.c_str());
 		core::ParameterList parameters;
 		return mTextures2D.store(filePath, file, parameters, 1);
-	} else {
-		FLOG_DEBUG("Texture %s not found", filePath.c_str());
-		return nullptr;
 	}
+
+	FLOG_DEBUG("Texture %s not found", filePath.c_str());
+	return nullptr;
 }
 
 core::Texture2DRenderableDynamic* TextureSystem::getDynamic(

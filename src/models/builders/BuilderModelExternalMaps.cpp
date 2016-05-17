@@ -45,9 +45,9 @@ BuilderModelExternalMaps::BuilderModelExternalMaps(
    Engine* engine,
    std::string modelPath,
    core::Program* program,
-   std::string diffusePath,
-   std::string normalPath,
-   std::string specularPath) :
+   const std::string& diffusePath,
+   const std::string& normalPath,
+   const std::string& specularPath) :
 	BuilderModel(engine, modelPath, program),
 	mDiffuseMapPath(diffusePath),
 	mNormalMapPath(normalPath),
