@@ -250,7 +250,9 @@ inline void Program::getUniforms() {
 			GLint location = glGetUniformLocation(mHandle, name);
 			FLOG_DEBUG("Uniform name=%s, location=%d, type=%d, num=%d", name,
 			           location, type, num);
-			mUniforms.push_back(Uniform(name, type, num, location));
+			Uniform uniform(name, type, num, location);
+			uniform.log();
+			mUniforms.push_back(uniform);
 		}
 	}
 }
@@ -284,10 +286,9 @@ void Program::getUniformBlock(std::string name, GLuint bindingPoint) {
 			                    nameFromProgram.data());
 			glUniformBlockBinding(mHandle, blockIndex, bindingPoint);
 			mUnifromBuffers.push_back(
-			   puUniformBuffer(
-			      new UniformBuffer(std::string(name), blockIndex,
+			   std::make_unique<UniformBuffer>(std::string(name), blockIndex,
 			                        uniformBlockSize, bindingPoint,
-			                        GL_DYNAMIC_DRAW)));
+			                        GL_DYNAMIC_DRAW));
 		}
 	}
 }

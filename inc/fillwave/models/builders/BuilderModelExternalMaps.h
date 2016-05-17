@@ -49,9 +49,9 @@ class BuilderModelExternalMaps: public BuilderModel {
 	   Engine* engine,
 	   std::string modelPath = "",
 	   core::Program* program = nullptr,
-	   std::string diffusePath = "",
-	   std::string normalPath = "",
-	   std::string specularPath = "");
+	   const std::string& diffusePath = "",
+	   const std::string& normalPath = "",
+	   const std::string& specularPath = "");
 	virtual ~BuilderModelExternalMaps() = default;
 
 	BuilderModel& setdiffusePath(std::string& path);
