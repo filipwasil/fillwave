@@ -126,7 +126,7 @@ core::Texture2DRenderableDynamic* TextureSystem::getDynamic(
    glm::ivec2 screenSize) {
 	std::string filePath = mRootPath + fragmentShaderPath;
 
-	core::Texture2DFile* file = mLoader.loadEmpty(screenSize);
+	core::Texture2DFile* file = mLoader.loadEmpty(screenSize.x, screenSize.y);
 
 	core::ParameterList parameters;
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));

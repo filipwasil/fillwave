@@ -35,7 +35,6 @@
 #define TEXTURELOADER_H_
 
 #include <fillwave/core/texturing/Texture.h>
-#include <fillwave/Math.h>
 #include <iostream>
 
 namespace fillwave {
@@ -108,7 +107,8 @@ class TextureLoader {
 	   eCompression compression = eCompression::eNone);
 
 	core::Texture2DFile* loadEmpty(
-	   glm::ivec2 screenSize,
+	   GLint screenWidth,
+	   GLint screenHeight,
 	   GLenum format = GL_RGBA);
 
 	core::Texture2DFile* loadVirtualFileCheckboard(

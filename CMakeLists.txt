@@ -31,8 +31,8 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler.cmake)
 # Directories
 # -----------------------------------------------
 
-set(FILLWAVE_PATH_INCLUDE "inc")
-set(FILLWAVE_PATH_SOURCE "src")
+set(FILLWAVE_PATH_INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/inc)
+set(FILLWAVE_PATH_SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # -----------------------------------------------
 # External libraries
