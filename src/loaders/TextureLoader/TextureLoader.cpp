@@ -35,20 +35,11 @@
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/loaders/FileLoader.h>
 
-#include <fillwave/Log.h>
-
-#include <fillwave/Profiler.h>
-
-#include <fillwave/Assets.h>
-#include <fillwave/common/Strings.h>
-
 #include <fillwave/Texturing.h>
 
-#include <stdlib.h>
-#include <sstream>
-#include <algorithm>
-#include <vector>
 #include <iterator>
+
+#include <fillwave/Log.h>
 
 FLOGINIT("TextureLoader", FERROR | FFATAL | FDEBUG)
 
@@ -114,7 +105,7 @@ core::Texture2DFile* TextureLoader::load(
 		(void)compression;
 		gli::texture Texture = gli::load(filePath);
 		if(Texture.empty()) {
-			return 0;
+			return nullptr;
 		}
 #ifdef FILLWAVE_GLES_3_0
 		gli::gl GL(gli::gl::PROFILE_ES30);
@@ -366,14 +357,15 @@ core::Texture2DFile* TextureLoader::load(
 }
 
 core::Texture2DFile* TextureLoader::loadEmpty(
-   glm::ivec2 screenSize,
+   GLint screenWidth,
+   GLint screenHeight,
    GLenum format) {
 	core::Texture2DFile* file = new core::Texture2DFile();
 
 	file->mHeader.mFormat = format;
 	file->mHeader.mInternalFormat = format;
-	file->mHeader.mWidth = screenSize.x;
-	file->mHeader.mHeight = screenSize.y;
+	file->mHeader.mWidth = screenWidth;
+	file->mHeader.mHeight = screenHeight;
 	file->mHeader.mType = GL_UNSIGNED_BYTE;
 
 	file->mConfig.mMipmaps = GL_TRUE;

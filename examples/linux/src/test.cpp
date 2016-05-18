@@ -98,7 +98,8 @@ void perform() {
 	}
 
 	puModel wall = make_unique<Model>(ContextGLFW::mGraphicsEngine, p,
-	                                  "meshes/floor.obj");
+	                                  "meshes/floor.obj",
+	                                  "textures/multicolor.dds");
 	wall->rotateByX(glm::radians(90.0));
 	wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
 	wall->scaleTo(3.0);
