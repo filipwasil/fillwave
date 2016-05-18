@@ -40,14 +40,9 @@
 #include <fillwave/Profiler.h>
 
 #include <fillwave/Assets.h>
-#include <fillwave/common/Strings.h>
 
 #include <fillwave/Texturing.h>
 
-#include <stdlib.h>
-#include <sstream>
-#include <algorithm>
-#include <vector>
 #include <iterator>
 
 FLOGINIT("TextureLoader", FERROR | FFATAL | FDEBUG)
@@ -114,7 +109,7 @@ core::Texture2DFile* TextureLoader::load(
 		(void)compression;
 		gli::texture Texture = gli::load(filePath);
 		if(Texture.empty()) {
-			return 0;
+			return nullptr;
 		}
 #ifdef FILLWAVE_GLES_3_0
 		gli::gl GL(gli::gl::PROFILE_ES30);
