@@ -16,10 +16,10 @@ using namespace fillwave;
 using namespace fillwave::framework;
 
 TEST (Engine, texture) {
-//	GLchar* const argv[] = {"0f0f "} ;
-//	Engine* engine = new Engine(1, argv);
-//	core::Texture2D* texture = engine->storeTexture("data/text.png");
-//	core::Texture2D* empty = nullptr;
-//	EXPECT_EQ (texture, empty);
-//	delete engine;
+	GLchar* const argv[] = {"0f0f "} ;
+	Engine* engine = new Engine(1, argv);
+	core::Texture2D* texture = engine->storeTexture("data/text.png");
+	core::Texture2D* empty = nullptr;
+	EXPECT_EQ (texture, empty);
+	delete engine;
 }

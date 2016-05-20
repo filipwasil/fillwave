@@ -31,3 +31,6 @@
 [submodule "ext/gli"]
 	path = ext/gli
 	url = https://github.com/filipwasil/gli.git
+[submodule "ext/coveralls-cmake"]
+	path = ext/coveralls-cmake
+	url = https://github.com/filipwasil/coveralls-cmake.git

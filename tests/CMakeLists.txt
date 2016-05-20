@@ -1,10 +1,11 @@
 set(FILLWAVE_REAL_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/common/Log.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/common/Strings.cpp
     )
 
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/framework TEST_FRAMEWORK_SOURCES)
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/stubs TEST_STUBS_SOURCES)
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(FILLWAVE_MOCK_SOURCES
     ${TEST_FRAMEWORK_SOURCES}

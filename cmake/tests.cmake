@@ -45,7 +45,27 @@
 	# You can also omit NAME and COMMAND. The second argument could be some other
 	# test executable.
 	add_test(that-other-test-I-made runUnitTests)
-	
+
+	# -----------------------------------------------
+	# Coverity
+	# -----------------------------------------------
+
+	if (FILLWAVE_TESTS_COVERALLS)
+		set(CMAKE_BUILD_TYPE Debug)
+		set(COVERALLS_OUTPUT_FILE test.json)
+		set(COV_PATH ${CMAKE_CURRENT_BINARY_DIR})
+		set(PROJECT_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
+		set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/ext/coveralls-cmake/cmake)
+		include(Coveralls)
+		coveralls_turn_on_coverage()
+
+		# Create the coveralls target.
+		coveralls_setup(
+				"${FILLWAVE_SOURCES}"
+				ON
+		)
+	endif()
+
 	add_custom_target(
 	    postBuildRun ALL
         COMMAND runUnitTests

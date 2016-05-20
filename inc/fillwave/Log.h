@@ -51,6 +51,7 @@ std::string getLogPath();
 void setLogPath(std::string path);
 bool isFileValid();
 void setFileInvalid();
+unsigned int getFramebufferStatus();
 
 } /* fillwave */
 
@@ -171,7 +172,7 @@ _AIX            Defined on AIX
          if ( error_unique_niosfoinfsd != GL_NO_ERROR) {                           \
             fprintf(stdout,"[%s 0x%04x] ","CORE ERROR:",error_unique_niosfoinfsd); \
             if (error_unique_niosfoinfsd == 0x0506) { /*Framebuffer error*/        \
-               GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);           \
+               GLenum status = getFramebufferStatus();                             \
                fprintf(stdout,"[%s 0x%04x] ","FRAMEBUFFER_STATUS:",status);        \
             }                                                                      \
             fprintf(stdout,"<%s:%d> ",::_tag_.c_str(),__LINE__);                   \

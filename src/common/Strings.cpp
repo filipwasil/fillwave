@@ -85,8 +85,4 @@ std::string getFileNameOnly(const char* path) {
 	}
 }
 
-unsigned int getFramebufferStatus() {
-	return glCheckFramebufferStatus(GL_FRAMEBUFFER);
-}
-
 } /* fillwave */

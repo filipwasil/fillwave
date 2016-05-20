@@ -15,6 +15,7 @@ option(FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS "You can now focus only one model
 option(NDEBUG "Build with debug logs" OFF)
 
 option(FILLWAVE_TESTS "Build with gtest tests" OFF)
+option(FILLWAVE_TESTS_COVERALLS "Generate coveralls data" ON)
 option(FILLWAVE_PERFORMANCE_TESTS "Build binary to test performance" OFF)
 
 option(FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)
