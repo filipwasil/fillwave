@@ -18,7 +18,9 @@ script:
 - git submodule update
 - mkdir ../build
 - cd ../build
-- cmake ../fillwave -DNDEBUG=OFF -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=OFF && make -j4
+- export COVERALLS_SERVICE_NAME=travis-ci
+- export COVERALLS_REPO_TOKEN=d2o967X6pH4UAZo15vBcYHLH65BNRHIvN
+- cmake ../fillwave -DFILLWAVE_TESTS=ON && make fillwave -j4
 - mkdir ../build_android
 - cd ..
 - wget http://dl.google.com/android/ndk/android-ndk-r10e-linux-x86_64.bin
