@@ -74,7 +74,7 @@ class Animator {
  public:
 	Animator(const aiScene* shape);
 	virtual ~Animator();
-	Bone* get(GLint id);
+	Bone* get(GLuint id);
 	Bone* get(std::string name);
 	GLint getId(std::string name) const;
 	GLint getElements() const;

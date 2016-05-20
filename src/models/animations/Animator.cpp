@@ -128,7 +128,7 @@ Animator::~Animator() {
 	delete mRootAnimationNode;
 }
 
-Bone* Animator::get(GLint id) {
+Bone* Animator::get(GLuint id) {
 	if (mBones.size() < id) {
 		return  mBones[id].get();
 	}

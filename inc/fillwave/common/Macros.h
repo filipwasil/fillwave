@@ -50,7 +50,7 @@ void remove(std::vector<T>& vec, T& item) {
 
 /* Forgive me, but i needed this so badly ... */
 template<typename CONTAINER>
-void vectorForward(std::unique_ptr<CONTAINER> &vec) {}
+void vectorForward(std::unique_ptr<CONTAINER> &) {}
 
 template<typename CONTAINER, typename TCURRENT, typename... TNEXT>
 void vectorForward(std::unique_ptr<CONTAINER> &container, TCURRENT&& t,

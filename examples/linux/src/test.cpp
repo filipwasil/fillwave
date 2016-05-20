@@ -61,7 +61,7 @@ void perform() {
 	                                 "meshes/sphere.obj",
 	                                 p, "textures/test.png");
 
-	for (GLint i = 0; i < SPHERES; i++) {
+	for (GLuint i = 0; i < SPHERES; i++) {
 		/* build */
 
 		puModel sphere = builder.build();
@@ -73,25 +73,25 @@ void perform() {
 		sphere->attachHierarchyCallback(make_unique<LoopCallback>(
 		                                   std::move(make_unique_container<SequenceCallback>
 		                                         (make_unique<TimedScaleCallback>(
-		                                               sphere.get(), 0.1 * 2.0,
-		                                               2.0f + i * 0.5, CircularEaseIn),
+		                                               sphere.get(), 0.1f * 2.0f,
+		                                               2.0f + i * 0.5f, CircularEaseIn),
 		                                               make_unique<TimedScaleCallback>(
-		                                                     sphere.get(), 0.1 * 1.0,
-		                                                     2.0f + i * 0.5, ElasticEaseIn),
+		                                                     sphere.get(), 0.1f * 1.0f,
+		                                                     2.0f + i * 0.5f, ElasticEaseIn),
 		                                               make_unique<TimedRotateCallback>(
 		                                                     sphere.get(),
-		                                                     glm::vec3(0.0, 1.0, 0.0),
-		                                                     glm::radians(90.0f), 2.0f + i * 0.5,
+		                                                     glm::vec3(0.0f, 1.0f, 0.0f),
+		                                                     glm::radians(90.0f), 2.0f + i * 0.5f,
 		                                                     BounceEaseIn),
 		                                               make_unique<TimedRotateCallback>(
 		                                                     sphere.get(),
-		                                                     glm::vec3(0.0, 1.0, 0.0),
-		                                                     glm::radians(90.0f), 2.0f + i * 0.5,
+		                                                     glm::vec3(0.0f, 1.0f, 0.0f),
+		                                                     glm::radians(90.0f), 2.0f + i * 0.5f,
 		                                                     BounceEaseOut),
 		                                               make_unique<TimedMoveCallback>(
 		                                                     sphere.get(),
-		                                                     glm::vec3(0.0, -1.0, 0.0),
-		                                                     2.0f + i * 0.5))),
+		                                                     glm::vec3(0.0f, -1.0f, 0.0f),
+		                                                     2.0f + i * 0.5f))),
 		                                   FILLWAVE_ENDLESS));
 
 		ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(sphere));

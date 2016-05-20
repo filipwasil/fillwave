@@ -103,6 +103,7 @@ class Model: public IFocusable, public Programmable {
  protected:
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	Animator* mAnimator;
+	GLint mActiveAnimation;
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 	LightSystem* mLights;
 	core::Program *mProgramShadow, *mProgramShadowColor;
@@ -115,7 +116,6 @@ class Model: public IFocusable, public Programmable {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 	/* Animation */
-	GLint mActiveAnimation;
 	bool isAnimated() const;
 	void evaluateAnimations();
 	void initAnimations(const aiScene* scene);
