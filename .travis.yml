@@ -20,6 +20,7 @@ script:
 - cd ../build
 - export COVERALLS_SERVICE_NAME=travis-ci
 - export COVERALLS_REPO_TOKEN=d2o967X6pH4UAZo15vBcYHLH65BNRHIvN
+- pip install --user cpp-coveralls
 - cmake ../fillwave -DFILLWAVE_TESTS=ON && make fillwave -j4
 - mkdir ../build_android
 - cd ..

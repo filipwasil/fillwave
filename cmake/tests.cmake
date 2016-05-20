@@ -60,10 +60,7 @@
 		coveralls_turn_on_coverage()
 
 		# Create the coveralls target.
-		coveralls_setup(
-				"${FILLWAVE_SOURCES}"
-				ON
-		)
+		coveralls_setup("${TEST_SOURCES}" ON)
 	endif()
 
 	add_custom_target(
