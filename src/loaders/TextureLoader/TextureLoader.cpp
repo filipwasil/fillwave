@@ -35,8 +35,6 @@
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/loaders/FileLoader.h>
 
-#include <fillwave/Texturing.h>
-
 #include <iterator>
 
 #include <fillwave/Log.h>
@@ -65,7 +63,8 @@ core::Texture2DFile* TextureLoader::load(
 		           filePath.c_str());
 		core::Texture2DFile* file = loadVirtualFileColor(512, 512, 0, 0, 0);
 		return file;
-	} else if (posColor != std::string::npos) {
+	}
+	if (posColor != std::string::npos) {
 		FLOG_DEBUG("Color texture %s generation and loading ...",
 		           filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posColor);
@@ -80,7 +79,8 @@ core::Texture2DFile* TextureLoader::load(
 		}
 		core::Texture2DFile* file = loadVirtualFileColor(512, 512, r, g, b);
 		return file;
-	} else if (posCheckboard != std::string::npos) {
+	}
+	if (posCheckboard != std::string::npos) {
 		FLOG_DEBUG("Checkboard texture %s generation and loading ...",
 		           filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posCheckboard);
@@ -95,26 +95,27 @@ core::Texture2DFile* TextureLoader::load(
 		}
 		core::Texture2DFile* file = loadVirtualFileCheckboard(512, 512, r, g, b);
 		return file;
-	} else if (posDDS != std::string::npos) {
+	}
+	if (posDDS != std::string::npos) {
 		FLOG_ERROR("Compressed Texture %s not supported yet", filePath.c_str());
 		return nullptr;
-	} else {
+	}
 #ifdef FILLWAVE_TEXTURE_LOADER_GLI
-		(void)flip;
-		(void)format;
-		(void)compression;
-		gli::texture Texture = gli::load(filePath);
-		if(Texture.empty()) {
-			return nullptr;
-		}
+	(void)flip;
+	(void)format;
+	(void)compression;
+	gli::texture Texture = gli::load(filePath);
+	if(Texture.empty()) {
+		return nullptr;
+	}
 #ifdef FILLWAVE_GLES_3_0
-		gli::gl GL(gli::gl::PROFILE_ES30);
+	gli::gl GL(gli::gl::PROFILE_ES30);
 #else /* FILLWAVE_GLES_3_0 */
-		gli::gl GL(gli::gl::PROFILE_GL33);
+	gli::gl GL(gli::gl::PROFILE_GL33);
 #endif /* FILLWAVE_GLES_3_0 */
-		gli::gl::format const Format = GL.translate(Texture.format(),
-		                               Texture.swizzles());
-		GLenum Target = GL.translate(Texture.target());
+	gli::gl::format const Format = GL.translate(Texture.format(),
+	                               Texture.swizzles());
+	GLenum Target = GL.translate(Texture.target());
 
 //		GLuint TextureName = 0;
 //		glGenTextures(1, &TextureName);
@@ -225,134 +226,133 @@ core::Texture2DFile* TextureLoader::load(
 //				}
 //		return TextureName;
 #else /* FILLWAVE_TEXTURE_LOADER_GLI */
-		GLint w, h, n;
-		GLubyte *content = stbi_load(filePath.c_str(), &w, &h, &n,
-		                             getBytesPerPixel(format));
-		if (content == NULL) { //xxx NULL, not nullptr because the stb library uses NULL
-			FILE *f = fopen(filePath.c_str(), "rb");
-			if (!f) {
-				FLOG_ERROR("Texture %s not found", filePath.c_str());
-			} else {
-				FLOG_ERROR("Texture %s found but not supported ", filePath.c_str());
-				fclose(f);
-			}
-			return nullptr;
+	GLint w, h, n;
+	GLubyte *content = stbi_load(filePath.c_str(), &w, &h, &n,
+	                             getBytesPerPixel(format));
+	if (content == NULL) { //xxx NULL, not nullptr because the stb library uses NULL
+		FILE *f = fopen(filePath.c_str(), "rb");
+		if (!f) {
+			FLOG_ERROR("Texture %s not found", filePath.c_str());
 		} else {
-			FLOG_DEBUG("Image %s size %dx%d pixel %d bytes per pixel",
-			           filePath.c_str(), w, h, n);
-			core::Texture2DFile* file = new core::Texture2DFile();
-
-			file->mHeader.mFormat = format;
-			file->mHeader.mWidth = w;
-			file->mHeader.mHeight = h;
-			file->mHeader.mType = GL_UNSIGNED_BYTE;
-
-			file->mConfig.mMipmaps = GL_TRUE;
-			file->mConfig.mMipmapsLevel = 0;
-
-			if (compression == eCompression::eNone) {
-				file->mConfig.mCompression = GL_FALSE;
-				file->mHeader.mInternalFormat = format;
-			} else {
-				file->mConfig.mCompression = GL_TRUE;
-				file->mHeader.mInternalFormat = getComporession(compression);
-				file->mConfig.mCompressionSize = 0;
-				FLOG_FATAL("Texture compression feature not ready");
-			}
-
-			file->mConfig.mBorder = 0;
-
-			file->mData = content;
-
-			file->mAllocation = core::eMemoryAllocation::eMallock;
-
-			FLOG_DEBUG("Flipping Texture %s ...", filePath.c_str());
-			switch (flip) {
-				case eFlip::eVertical:
-					#pragma omp parallel for schedule(guided) num_threads(2)
-					for (int row = 0; row < h / 2; row++) {
-						for (int column = 0; column < w; column++) {
-							int pixelOffset1 = row * w * n + column * n;
-							int pixelOffset2 = (h - row - 1) * w * n + column * n;
-							for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-								int exchangeIndex1 = pixelOffset1 + byteInPixel;
-								int exchangeIndex2 = pixelOffset2 + byteInPixel;
-								file->mData[exchangeIndex1] ^=
-								   file->mData[exchangeIndex2];
-								file->mData[exchangeIndex2] ^=
-								   file->mData[exchangeIndex1];
-								file->mData[exchangeIndex1] ^=
-								   file->mData[exchangeIndex2];
-							}
-						}
-					}
-					break;
-
-				case eFlip::eHorizontal_vertical:
-					#pragma omp parallel for schedule(guided) num_threads(2)
-					for (int row = 0; row < h; row++) {
-						for (int column = 0; column < w / 2; column++) {
-							int pixelOffset1 = row * w * n + column * n;
-							int pixelOffset2 = row * w * n + (w - column - 1) * n;
-							for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-								int exchangeIndex1 = pixelOffset1 + byteInPixel;
-								int exchangeIndex2 = pixelOffset2 + byteInPixel;
-								file->mData[exchangeIndex1] ^=
-								   file->mData[exchangeIndex2];
-								file->mData[exchangeIndex2] ^=
-								   file->mData[exchangeIndex1];
-								file->mData[exchangeIndex1] ^=
-								   file->mData[exchangeIndex2];
-							}
-						}
-					}
-					break;
-
-				case eFlip::eHorizontal:
-					#pragma omp parallel for schedule(guided) num_threads(2)
-					for (int row = 0; row < h; row++) {
-						for (int column = 0; column < w / 2; column++) {
-							int pixelOffset1 = row * w * n + column * n;
-							int pixelOffset2 = row * w * n + (w - column - 1) * n;
-							for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-								int exchangeIndex1 = pixelOffset1 + byteInPixel;
-								int exchangeIndex2 = pixelOffset2 + byteInPixel;
-								file->mData[exchangeIndex1] ^=
-								   file->mData[exchangeIndex2];
-								file->mData[exchangeIndex2] ^=
-								   file->mData[exchangeIndex1];
-								file->mData[exchangeIndex1] ^=
-								   file->mData[exchangeIndex2];
-							}
-						}
-					}
-					#pragma omp parallel for schedule(guided) num_threads(2)
-					for (int row = 0; row < h / 2; row++) {
-						for (int column = 0; column < w; column++) {
-							int pixelOffset1 = row * w * n + column * n;
-							int pixelOffset2 = (h - row - 1) * w * n + column * n;
-							for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-								int exchangeIndex1 = pixelOffset1 + byteInPixel;
-								int exchangeIndex2 = pixelOffset2 + byteInPixel;
-								file->mData[exchangeIndex1] ^=
-								   file->mData[exchangeIndex2];
-								file->mData[exchangeIndex2] ^=
-								   file->mData[exchangeIndex1];
-								file->mData[exchangeIndex1] ^=
-								   file->mData[exchangeIndex2];
-							}
-						}
-					}
-					break;
-
-				case eFlip::eNone:
-				default:
-					break;
-			}
-			return file;
+			FLOG_ERROR("Texture %s found but not supported ", filePath.c_str());
+			fclose(f);
 		}
-#endif /* FILLWAVE_TEXTURE_LOADER_GLI */
+		return nullptr;
+	} else {
+		FLOG_DEBUG("Image %s size %dx%d pixel %d bytes per pixel",
+		           filePath.c_str(), w, h, n);
+		core::Texture2DFile* file = new core::Texture2DFile();
+
+		file->mHeader.mFormat = format;
+		file->mHeader.mWidth = w;
+		file->mHeader.mHeight = h;
+		file->mHeader.mType = GL_UNSIGNED_BYTE;
+
+		file->mConfig.mMipmaps = GL_TRUE;
+		file->mConfig.mMipmapsLevel = 0;
+
+		if (compression == eCompression::eNone) {
+			file->mConfig.mCompression = GL_FALSE;
+			file->mHeader.mInternalFormat = format;
+		} else {
+			file->mConfig.mCompression = GL_TRUE;
+			file->mHeader.mInternalFormat = getComporession(compression);
+			file->mConfig.mCompressionSize = 0;
+			FLOG_FATAL("Texture compression feature not ready");
+		}
+
+		file->mConfig.mBorder = 0;
+
+		file->mData = content;
+
+		file->mAllocation = core::eMemoryAllocation::eMallock;
+
+		FLOG_DEBUG("Flipping Texture %s ...", filePath.c_str());
+		switch (flip) {
+			case eFlip::eVertical:
+				#pragma omp parallel for schedule(guided) num_threads(2)
+				for (int row = 0; row < h / 2; row++) {
+					for (int column = 0; column < w; column++) {
+						int pixelOffset1 = row * w * n + column * n;
+						int pixelOffset2 = (h - row - 1) * w * n + column * n;
+						for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
+							int exchangeIndex1 = pixelOffset1 + byteInPixel;
+							int exchangeIndex2 = pixelOffset2 + byteInPixel;
+							file->mData[exchangeIndex1] ^=
+							   file->mData[exchangeIndex2];
+							file->mData[exchangeIndex2] ^=
+							   file->mData[exchangeIndex1];
+							file->mData[exchangeIndex1] ^=
+							   file->mData[exchangeIndex2];
+						}
+					}
+				}
+				break;
+
+			case eFlip::eHorizontal_vertical:
+				#pragma omp parallel for schedule(guided) num_threads(2)
+				for (int row = 0; row < h; row++) {
+					for (int column = 0; column < w / 2; column++) {
+						int pixelOffset1 = row * w * n + column * n;
+						int pixelOffset2 = row * w * n + (w - column - 1) * n;
+						for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
+							int exchangeIndex1 = pixelOffset1 + byteInPixel;
+							int exchangeIndex2 = pixelOffset2 + byteInPixel;
+							file->mData[exchangeIndex1] ^=
+							   file->mData[exchangeIndex2];
+							file->mData[exchangeIndex2] ^=
+							   file->mData[exchangeIndex1];
+							file->mData[exchangeIndex1] ^=
+							   file->mData[exchangeIndex2];
+						}
+					}
+				}
+				break;
+
+			case eFlip::eHorizontal:
+				#pragma omp parallel for schedule(guided) num_threads(2)
+				for (int row = 0; row < h; row++) {
+					for (int column = 0; column < w / 2; column++) {
+						int pixelOffset1 = row * w * n + column * n;
+						int pixelOffset2 = row * w * n + (w - column - 1) * n;
+						for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
+							int exchangeIndex1 = pixelOffset1 + byteInPixel;
+							int exchangeIndex2 = pixelOffset2 + byteInPixel;
+							file->mData[exchangeIndex1] ^=
+							   file->mData[exchangeIndex2];
+							file->mData[exchangeIndex2] ^=
+							   file->mData[exchangeIndex1];
+							file->mData[exchangeIndex1] ^=
+							   file->mData[exchangeIndex2];
+						}
+					}
+				}
+				#pragma omp parallel for schedule(guided) num_threads(2)
+				for (int row = 0; row < h / 2; row++) {
+					for (int column = 0; column < w; column++) {
+						int pixelOffset1 = row * w * n + column * n;
+						int pixelOffset2 = (h - row - 1) * w * n + column * n;
+						for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
+							int exchangeIndex1 = pixelOffset1 + byteInPixel;
+							int exchangeIndex2 = pixelOffset2 + byteInPixel;
+							file->mData[exchangeIndex1] ^=
+							   file->mData[exchangeIndex2];
+							file->mData[exchangeIndex2] ^=
+							   file->mData[exchangeIndex1];
+							file->mData[exchangeIndex1] ^=
+							   file->mData[exchangeIndex2];
+						}
+					}
+				}
+				break;
+
+			case eFlip::eNone:
+			default:
+				break;
+		}
+		return file;
 	}
+#endif /* FILLWAVE_TEXTURE_LOADER_GLI */
 	return nullptr;
 }
 
