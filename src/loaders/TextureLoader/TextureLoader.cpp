@@ -121,114 +121,114 @@ core::Texture2DFile* TextureLoader::load(
 	                               Texture.swizzles());
 	GLenum Target = GL.translate(Texture.target());
 
-//		GLuint TextureName = 0;
-//		glGenTextures(1, &TextureName);
-//		glBindTexture(Target, TextureName);
-//		glTexParameteri(Target, GL_TEXTURE_BASE_LEVEL, 0);
-//		glTexParameteri(Target, GL_TEXTURE_MAX_LEVEL,
-//		                static_cast<GLint>(Texture.levels() - 1));
-//		glTexParameteri(Target, GL_TEXTURE_SWIZZLE_R, Format.Swizzles[0]);
-//		glTexParameteri(Target, GL_TEXTURE_SWIZZLE_G, Format.Swizzles[1]);
-//		glTexParameteri(Target, GL_TEXTURE_SWIZZLE_B, Format.Swizzles[2]);
-//		glTexParameteri(Target, GL_TEXTURE_SWIZZLE_A, Format.Swizzles[3]);
-//
-//		glm::tvec3<GLsizei> const Extent(Texture.extent());
-//		GLsizei const FaceTotal = static_cast<GLsizei>(Texture.layers() *
-//		                          Texture.faces());
-//
-//		switch(Texture.target()) {
-//			case gli::TARGET_1D:
-//				glTexStorage1D(
-//				   Target, static_cast<GLint>(Texture.levels()), Format.Internal, Extent.x);
-//				break;
-//			case gli::TARGET_1D_ARRAY:
-//			case gli::TARGET_2D:
-//			case gli::TARGET_CUBE:
-//				glTexStorage2D(
-//				   Target, static_cast<GLint>(Texture.levels()), Format.Internal,
-//				   Extent.x, Texture.target() == gli::TARGET_2D ? Extent.y : FaceTotal);
-//				break;
-//			case gli::TARGET_2D_ARRAY:
-//			case gli::TARGET_3D:
-//			case gli::TARGET_CUBE_ARRAY:
-//				glTexStorage3D(
-//				   Target, static_cast<GLint>(Texture.levels()), Format.Internal,
-//				   Extent.x, Extent.y,
-//				   Texture.target() == gli::TARGET_3D ? Extent.z : FaceTotal);
-//				break;
-//			default:
-//				assert(0);
-//				break;
-//		}
-//
-//		for(std::size_t Layer = 0; Layer < Texture.layers(); ++Layer)
-//			for(std::size_t Face = 0; Face < Texture.faces(); ++Face)
-//				for(std::size_t Level = 0; Level < Texture.levels(); ++Level) {
-//					GLsizei const LayerGL = static_cast<GLsizei>(Layer);
-//					glm::tvec3<GLsizei> Extent(Texture.extent(Level));
-//					Target = gli::is_target_cube(Texture.target())
-//					         ? static_cast<GLenum>(GL_TEXTURE_CUBE_MAP_POSITIVE_X + Face)
-//					         : Target;
-//
-//					switch(Texture.target()) {
-//						case gli::TARGET_1D:
-//							if(gli::is_compressed(Texture.format()))
-//								glCompressedTexSubImage1D(
-//								   Target, static_cast<GLint>(Level), 0, Extent.x,
-//								   Format.Internal, static_cast<GLsizei>(Texture.size(Level)),
-//								   Texture.data(Layer, Face, Level));
-//							else
-//								glTexSubImage1D(
-//								   Target, static_cast<GLint>(Level), 0, Extent.x,
-//								   Format.External, Format.Type,
-//								   Texture.data(Layer, Face, Level));
-//							break;
-//						case gli::TARGET_1D_ARRAY:
-//						case gli::TARGET_2D:
-//						case gli::TARGET_CUBE:
-//							if(gli::is_compressed(Texture.format()))
-//								glCompressedTexSubImage2D(
-//								   Target, static_cast<GLint>(Level),
-//								   0, 0,
-//								   Extent.x,
-//								   Texture.target() == gli::TARGET_1D_ARRAY ? LayerGL : Extent.y,
-//								   Format.Internal, static_cast<GLsizei>(Texture.size(Level)),
-//								   Texture.data(Layer, Face, Level));
-//							else
-//								glTexSubImage2D(
-//								   Target, static_cast<GLint>(Level),
-//								   0, 0,
-//								   Extent.x,
-//								   Texture.target() == gli::TARGET_1D_ARRAY ? LayerGL : Extent.y,
-//								   Format.External, Format.Type,
-//								   Texture.data(Layer, Face, Level));
-//							break;
-//						case gli::TARGET_2D_ARRAY:
-//						case gli::TARGET_3D:
-//						case gli::TARGET_CUBE_ARRAY:
-//							if(gli::is_compressed(Texture.format()))
-//								glCompressedTexSubImage3D(
-//								   Target, static_cast<GLint>(Level),
-//								   0, 0, 0,
-//								   Extent.x, Extent.y,
-//								   Texture.target() == gli::TARGET_3D ? Extent.z : LayerGL,
-//								   Format.Internal, static_cast<GLsizei>(Texture.size(Level)),
-//								   Texture.data(Layer, Face, Level));
-//							else
-//								glTexSubImage3D(
-//								   Target, static_cast<GLint>(Level),
-//								   0, 0, 0,
-//								   Extent.x, Extent.y,
-//								   Texture.target() == gli::TARGET_3D ? Extent.z : LayerGL,
-//								   Format.External, Format.Type,
-//								   Texture.data(Layer, Face, Level));
-//							break;
-//						default:
-//							assert(0);
-//							break;
-//					}
-//				}
-//		return TextureName;
+	GLuint TextureName = 0;
+	glGenTextures(1, &TextureName);
+	glBindTexture(Target, TextureName);
+	glTexParameteri(Target, GL_TEXTURE_BASE_LEVEL, 0);
+	glTexParameteri(Target, GL_TEXTURE_MAX_LEVEL,
+	                static_cast<GLint>(Texture.levels() - 1));
+	glTexParameteri(Target, GL_TEXTURE_SWIZZLE_R, Format.Swizzles[0]);
+	glTexParameteri(Target, GL_TEXTURE_SWIZZLE_G, Format.Swizzles[1]);
+	glTexParameteri(Target, GL_TEXTURE_SWIZZLE_B, Format.Swizzles[2]);
+	glTexParameteri(Target, GL_TEXTURE_SWIZZLE_A, Format.Swizzles[3]);
+
+	glm::tvec3<GLsizei> const Extent(Texture.extent());
+	GLsizei const FaceTotal = static_cast<GLsizei>(Texture.layers() *
+	                          Texture.faces());
+
+	switch(Texture.target()) {
+		case gli::TARGET_1D:
+			glTexStorage1D(
+			   Target, static_cast<GLint>(Texture.levels()), Format.Internal, Extent.x);
+			break;
+		case gli::TARGET_1D_ARRAY:
+		case gli::TARGET_2D:
+		case gli::TARGET_CUBE:
+			glTexStorage2D(
+			   Target, static_cast<GLint>(Texture.levels()), Format.Internal,
+			   Extent.x, Texture.target() == gli::TARGET_2D ? Extent.y : FaceTotal);
+			break;
+		case gli::TARGET_2D_ARRAY:
+		case gli::TARGET_3D:
+		case gli::TARGET_CUBE_ARRAY:
+			glTexStorage3D(
+			   Target, static_cast<GLint>(Texture.levels()), Format.Internal,
+			   Extent.x, Extent.y,
+			   Texture.target() == gli::TARGET_3D ? Extent.z : FaceTotal);
+			break;
+		default:
+			assert(0);
+			break;
+	}
+
+	for(std::size_t Layer = 0; Layer < Texture.layers(); ++Layer)
+		for(std::size_t Face = 0; Face < Texture.faces(); ++Face)
+			for(std::size_t Level = 0; Level < Texture.levels(); ++Level) {
+				GLsizei const LayerGL = static_cast<GLsizei>(Layer);
+				glm::tvec3<GLsizei> Extent(Texture.extent(Level));
+				Target = gli::is_target_cube(Texture.target())
+				         ? static_cast<GLenum>(GL_TEXTURE_CUBE_MAP_POSITIVE_X + Face)
+				         : Target;
+
+				switch(Texture.target()) {
+					case gli::TARGET_1D:
+						if(gli::is_compressed(Texture.format()))
+							glCompressedTexSubImage1D(
+							   Target, static_cast<GLint>(Level), 0, Extent.x,
+							   Format.Internal, static_cast<GLsizei>(Texture.size(Level)),
+							   Texture.data(Layer, Face, Level));
+						else
+							glTexSubImage1D(
+							   Target, static_cast<GLint>(Level), 0, Extent.x,
+							   Format.External, Format.Type,
+							   Texture.data(Layer, Face, Level));
+						break;
+					case gli::TARGET_1D_ARRAY:
+					case gli::TARGET_2D:
+					case gli::TARGET_CUBE:
+						if(gli::is_compressed(Texture.format()))
+							glCompressedTexSubImage2D(
+							   Target, static_cast<GLint>(Level),
+							   0, 0,
+							   Extent.x,
+							   Texture.target() == gli::TARGET_1D_ARRAY ? LayerGL : Extent.y,
+							   Format.Internal, static_cast<GLsizei>(Texture.size(Level)),
+							   Texture.data(Layer, Face, Level));
+						else
+							glTexSubImage2D(
+							   Target, static_cast<GLint>(Level),
+							   0, 0,
+							   Extent.x,
+							   Texture.target() == gli::TARGET_1D_ARRAY ? LayerGL : Extent.y,
+							   Format.External, Format.Type,
+							   Texture.data(Layer, Face, Level));
+						break;
+					case gli::TARGET_2D_ARRAY:
+					case gli::TARGET_3D:
+					case gli::TARGET_CUBE_ARRAY:
+						if(gli::is_compressed(Texture.format()))
+							glCompressedTexSubImage3D(
+							   Target, static_cast<GLint>(Level),
+							   0, 0, 0,
+							   Extent.x, Extent.y,
+							   Texture.target() == gli::TARGET_3D ? Extent.z : LayerGL,
+							   Format.Internal, static_cast<GLsizei>(Texture.size(Level)),
+							   Texture.data(Layer, Face, Level));
+						else
+							glTexSubImage3D(
+							   Target, static_cast<GLint>(Level),
+							   0, 0, 0,
+							   Extent.x, Extent.y,
+							   Texture.target() == gli::TARGET_3D ? Extent.z : LayerGL,
+							   Format.External, Format.Type,
+							   Texture.data(Layer, Face, Level));
+						break;
+					default:
+						assert(0);
+						break;
+				}
+			}
+	return TextureName;
 #else /* FILLWAVE_TEXTURE_LOADER_GLI */
 	GLint w, h, n;
 	GLubyte *content = stbi_load(filePath.c_str(), &w, &h, &n,
@@ -242,122 +242,120 @@ core::Texture2DFile* TextureLoader::load(
 			fclose(f);
 		}
 		return nullptr;
-	} else {
-		FLOG_DEBUG("Image %s size %dx%d pixel %d bytes per pixel",
-		           filePath.c_str(), w, h, n);
-		core::Texture2DFile* file = new core::Texture2DFile();
-
-		file->mHeader.mFormat = format;
-		file->mHeader.mWidth = w;
-		file->mHeader.mHeight = h;
-		file->mHeader.mType = GL_UNSIGNED_BYTE;
-
-		file->mConfig.mMipmaps = GL_TRUE;
-		file->mConfig.mMipmapsLevel = 0;
-
-		if (compression == eCompression::eNone) {
-			file->mConfig.mCompression = GL_FALSE;
-			file->mHeader.mInternalFormat = format;
-		} else {
-			file->mConfig.mCompression = GL_TRUE;
-			file->mHeader.mInternalFormat = getComporession(compression);
-			file->mConfig.mCompressionSize = 0;
-			FLOG_FATAL("Texture compression feature not ready");
-		}
-
-		file->mConfig.mBorder = 0;
-
-		file->mData = content;
-
-		file->mAllocation = core::eMemoryAllocation::eMallock;
-
-		FLOG_DEBUG("Flipping Texture %s ...", filePath.c_str());
-		switch (flip) {
-			case eFlip::eVertical:
-				#pragma omp parallel for schedule(guided) num_threads(2)
-				for (int row = 0; row < h / 2; row++) {
-					for (int column = 0; column < w; column++) {
-						int pixelOffset1 = row * w * n + column * n;
-						int pixelOffset2 = (h - row - 1) * w * n + column * n;
-						for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-							int exchangeIndex1 = pixelOffset1 + byteInPixel;
-							int exchangeIndex2 = pixelOffset2 + byteInPixel;
-							file->mData[exchangeIndex1] ^=
-							   file->mData[exchangeIndex2];
-							file->mData[exchangeIndex2] ^=
-							   file->mData[exchangeIndex1];
-							file->mData[exchangeIndex1] ^=
-							   file->mData[exchangeIndex2];
-						}
-					}
-				}
-				break;
-
-			case eFlip::eHorizontal_vertical:
-				#pragma omp parallel for schedule(guided) num_threads(2)
-				for (int row = 0; row < h; row++) {
-					for (int column = 0; column < w / 2; column++) {
-						int pixelOffset1 = row * w * n + column * n;
-						int pixelOffset2 = row * w * n + (w - column - 1) * n;
-						for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-							int exchangeIndex1 = pixelOffset1 + byteInPixel;
-							int exchangeIndex2 = pixelOffset2 + byteInPixel;
-							file->mData[exchangeIndex1] ^=
-							   file->mData[exchangeIndex2];
-							file->mData[exchangeIndex2] ^=
-							   file->mData[exchangeIndex1];
-							file->mData[exchangeIndex1] ^=
-							   file->mData[exchangeIndex2];
-						}
-					}
-				}
-				break;
-
-			case eFlip::eHorizontal:
-				#pragma omp parallel for schedule(guided) num_threads(2)
-				for (int row = 0; row < h; row++) {
-					for (int column = 0; column < w / 2; column++) {
-						int pixelOffset1 = row * w * n + column * n;
-						int pixelOffset2 = row * w * n + (w - column - 1) * n;
-						for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-							int exchangeIndex1 = pixelOffset1 + byteInPixel;
-							int exchangeIndex2 = pixelOffset2 + byteInPixel;
-							file->mData[exchangeIndex1] ^=
-							   file->mData[exchangeIndex2];
-							file->mData[exchangeIndex2] ^=
-							   file->mData[exchangeIndex1];
-							file->mData[exchangeIndex1] ^=
-							   file->mData[exchangeIndex2];
-						}
-					}
-				}
-				#pragma omp parallel for schedule(guided) num_threads(2)
-				for (int row = 0; row < h / 2; row++) {
-					for (int column = 0; column < w; column++) {
-						int pixelOffset1 = row * w * n + column * n;
-						int pixelOffset2 = (h - row - 1) * w * n + column * n;
-						for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-							int exchangeIndex1 = pixelOffset1 + byteInPixel;
-							int exchangeIndex2 = pixelOffset2 + byteInPixel;
-							file->mData[exchangeIndex1] ^=
-							   file->mData[exchangeIndex2];
-							file->mData[exchangeIndex2] ^=
-							   file->mData[exchangeIndex1];
-							file->mData[exchangeIndex1] ^=
-							   file->mData[exchangeIndex2];
-						}
-					}
-				}
-				break;
-
-			case eFlip::eNone:
-			default:
-				break;
-		}
-		return file;
 	}
+	FLOG_DEBUG("Image %s size %dx%d pixel %d bytes per pixel",
+	           filePath.c_str(), w, h, n);
+	core::Texture2DFile* file = new core::Texture2DFile();
+
+	file->mHeader.mFormat = format;
+	file->mHeader.mWidth = w;
+	file->mHeader.mHeight = h;
+	file->mHeader.mType = GL_UNSIGNED_BYTE;
+
+	file->mConfig.mMipmaps = GL_TRUE;
+	file->mConfig.mMipmapsLevel = 0;
+
+	if (compression == eCompression::eNone) {
+		file->mConfig.mCompression = GL_FALSE;
+		file->mHeader.mInternalFormat = format;
+	} else {
+		file->mConfig.mCompression = GL_TRUE;
+		file->mHeader.mInternalFormat = getComporession(compression);
+		file->mConfig.mCompressionSize = 0;
+		FLOG_FATAL("Texture compression feature not ready");
+	}
+
+	file->mConfig.mBorder = 0;
+
+	file->mData = content;
+
+	file->mAllocation = core::eMemoryAllocation::eMallock;
+
+	FLOG_DEBUG("Flipping Texture %s ...", filePath.c_str());
+	switch (flip) {
+		case eFlip::eVertical:
+			#pragma omp parallel for schedule(guided) num_threads(2)
+			for (int row = 0; row < h / 2; row++) {
+				for (int column = 0; column < w; column++) {
+					int pixelOffset1 = row * w * n + column * n;
+					int pixelOffset2 = (h - row - 1) * w * n + column * n;
+					for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
+						int exchangeIndex1 = pixelOffset1 + byteInPixel;
+						int exchangeIndex2 = pixelOffset2 + byteInPixel;
+						file->mData[exchangeIndex1] ^=
+						   file->mData[exchangeIndex2];
+						file->mData[exchangeIndex2] ^=
+						   file->mData[exchangeIndex1];
+						file->mData[exchangeIndex1] ^=
+						   file->mData[exchangeIndex2];
+					}
+				}
+			}
+			break;
+
+		case eFlip::eHorizontal_vertical:
+			#pragma omp parallel for schedule(guided) num_threads(2)
+			for (int row = 0; row < h; row++) {
+				for (int column = 0; column < w / 2; column++) {
+					int pixelOffset1 = row * w * n + column * n;
+					int pixelOffset2 = row * w * n + (w - column - 1) * n;
+					for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
+						int exchangeIndex1 = pixelOffset1 + byteInPixel;
+						int exchangeIndex2 = pixelOffset2 + byteInPixel;
+						file->mData[exchangeIndex1] ^=
+						   file->mData[exchangeIndex2];
+						file->mData[exchangeIndex2] ^=
+						   file->mData[exchangeIndex1];
+						file->mData[exchangeIndex1] ^=
+						   file->mData[exchangeIndex2];
+					}
+				}
+			}
+			break;
+
+		case eFlip::eHorizontal:
+			#pragma omp parallel for schedule(guided) num_threads(2)
+			for (int row = 0; row < h; row++) {
+				for (int column = 0; column < w / 2; column++) {
+					int pixelOffset1 = row * w * n + column * n;
+					int pixelOffset2 = row * w * n + (w - column - 1) * n;
+					for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
+						int exchangeIndex1 = pixelOffset1 + byteInPixel;
+						int exchangeIndex2 = pixelOffset2 + byteInPixel;
+						file->mData[exchangeIndex1] ^=
+						   file->mData[exchangeIndex2];
+						file->mData[exchangeIndex2] ^=
+						   file->mData[exchangeIndex1];
+						file->mData[exchangeIndex1] ^=
+						   file->mData[exchangeIndex2];
+					}
+				}
+			}
+			#pragma omp parallel for schedule(guided) num_threads(2)
+			for (int row = 0; row < h / 2; row++) {
+				for (int column = 0; column < w; column++) {
+					int pixelOffset1 = row * w * n + column * n;
+					int pixelOffset2 = (h - row - 1) * w * n + column * n;
+					for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
+						int exchangeIndex1 = pixelOffset1 + byteInPixel;
+						int exchangeIndex2 = pixelOffset2 + byteInPixel;
+						file->mData[exchangeIndex1] ^=
+						   file->mData[exchangeIndex2];
+						file->mData[exchangeIndex2] ^=
+						   file->mData[exchangeIndex1];
+						file->mData[exchangeIndex1] ^=
+						   file->mData[exchangeIndex2];
+					}
+				}
+			}
+			break;
+
+		case eFlip::eNone:
+		default:
+			break;
+	}
+	return file;
 #endif /* FILLWAVE_TEXTURE_LOADER_GLI */
-	return nullptr;
 }
 
 core::Texture2DFile* TextureLoader::loadEmpty(
