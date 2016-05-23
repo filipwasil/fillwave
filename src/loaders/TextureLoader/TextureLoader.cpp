@@ -34,7 +34,7 @@
 
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/loaders/FileLoader.h>
-
+#include <fillwave/Texturing.h>
 #include <iterator>
 
 #include <fillwave/Log.h>
@@ -64,19 +64,22 @@ core::Texture2DFile* TextureLoader::load(
 		core::Texture2DFile* file = loadVirtualFileColor(512, 512, 0, 0, 0);
 		return file;
 	}
+
+
 	if (posColor != std::string::npos) {
 		FLOG_DEBUG("Color texture %s generation and loading ...",
 		           filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posColor);
 		std::vector<std::string> tokens = split(sub, '_');
-		if (tokens.size() >= 3) {
-			r = atoi(tokens[0].c_str());
-			g = atoi(tokens[1].c_str());
-			b = atoi(tokens[2].c_str());
-		} else {
+		if (tokens.size() < 3) {
 			FLOG_ERROR("Could not found color parameters in %s", filePath.c_str());
 			return nullptr;
 		}
+
+		r = atoi(tokens[0].c_str());
+		g = atoi(tokens[1].c_str());
+		b = atoi(tokens[2].c_str());
+
 		core::Texture2DFile* file = loadVirtualFileColor(512, 512, r, g, b);
 		return file;
 	}
@@ -85,14 +88,15 @@ core::Texture2DFile* TextureLoader::load(
 		           filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posCheckboard);
 		std::vector<std::string> tokens = split(sub, '_');
-		if (tokens.size() >= 3) {
-			r = atoi(tokens[0].c_str());
-			g = atoi(tokens[1].c_str());
-			b = atoi(tokens[2].c_str());
-		} else {
+		if (tokens.size() < 3) {
 			FLOG_ERROR("Could not found color parameters in %s", filePath.c_str());
 			return nullptr;
 		}
+
+		r = atoi(tokens[0].c_str());
+		g = atoi(tokens[1].c_str());
+		b = atoi(tokens[2].c_str());
+
 		core::Texture2DFile* file = loadVirtualFileCheckboard(512, 512, r, g, b);
 		return file;
 	}
