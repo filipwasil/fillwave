@@ -39,33 +39,6 @@ FLOGINIT("Texture", FERROR | FFATAL | FDEBUG)
 namespace fillwave {
 namespace core {
 
-Texture2DFileConfig::Texture2DFileConfig(
-   GLint level,
-   GLint border,
-   GLboolean mipmaps,
-   GLboolean compression) :
-	mMipmapsLevel(level),
-	mMipmaps(mipmaps),
-	mCompression(compression),
-	mBorder(border),
-	mCompressionSize(0) {
-
-}
-
-Texture2DFileHeader::Texture2DFileHeader(
-   GLint internalFormat,
-   GLint format,
-   GLint type,
-   GLsizei width,
-   GLsizei height) :
-	mInternalFormat(internalFormat),
-	mHeight(height),
-	mWidth(width),
-	mType(type),
-	mFormat(format) {
-
-}
-
 Texture::Texture(GLenum textureTarget, GLsizei howMany) :
 	GLObject(howMany), mTarget(textureTarget) {
 	reload();

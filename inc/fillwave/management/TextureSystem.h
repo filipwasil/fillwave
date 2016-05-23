@@ -89,9 +89,11 @@ class TextureSystem {
 
  private:
 
+#ifdef FILLWAVE_GLES_3_0
+#else /* FILLWAVE_GLES_3_0 */
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture1D,
 	              size_t, core::ParameterList&> mTextures1D;
-
+#endif /* FILLWAVE_GLES_3_0 */
 	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2D,
 	              std::string, core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
 

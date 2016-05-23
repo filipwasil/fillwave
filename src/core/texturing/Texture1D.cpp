@@ -33,6 +33,8 @@
 
 #include <fillwave/core/texturing/Texture1D.h>
 
+#ifdef FILLWAVE_GLES_3_0
+#else /* FILLWAVE_GLES_3_0 */
 namespace fillwave {
 namespace core {
 
@@ -46,3 +48,5 @@ void Texture1D::log() {
 
 } /* core */
 } /* fillwave */
+
+#endif /* FILLWAVE_GLES_3_0 */

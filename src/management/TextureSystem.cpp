@@ -473,7 +473,10 @@ void TextureSystem::evaluateDynamicTextures(GLfloat timeExpiredInSeconds) {
 }
 
 void TextureSystem::reload() {
+#ifdef FILLWAVE_GLES_3_0
+#else /* FILLWAVE_GLES_3_0 */
 	reload(mTextures1D);
+#endif /* FILLWAVE_GLES_3_0 */
 	reload(mTextures2D);
 	reload(mTextures2DDynamic);
 	reload(mTextures2DRenderable);

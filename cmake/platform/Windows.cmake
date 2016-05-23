@@ -39,8 +39,8 @@ ADD_LIBRARY(fillwave SHARED ${FILLWAVE_SOURCES})
 # Linker
 # -----------------------------------------------
 
-ADD_DEPENDENCIES(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator ${FILLWAVE_GLEW_BUILD})
-TARGET_LINK_LIBRARIES(fillwave ${FILLWAVE_MODEL_LOADER} fontgenerator ${FILLWAVE_GLEW_BUILD})
+ADD_DEPENDENCIES(fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator ${FILLWAVE_GLEW_BUILD})
+TARGET_LINK_LIBRARIES(fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator ${FILLWAVE_GLEW_BUILD})
  
 # -----------------------------------------------
 # Installation

@@ -7,3 +7,7 @@ include_directories(${FILLWAVE_PATH_INCLUDE} ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
         )
 
 add_library(textureloader SHARED ${FILLWAVE_TEXTURE_LOADER_SOURCES})
+
+IF(ANDROID)
+	target_link_libraries(textureloader log android GLESv3)
+ENDIF(ANDROID)

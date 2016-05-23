@@ -85,12 +85,9 @@ Android script is currently designed to work only with Linux. It assumes that An
 * Examples: https://github.com/filipwasil/fillwave-examples
 * Example racer game (legacy API): https://github.com/filipwasil/fillwave-waveracer 
 
---------------------------------------
-
 |    CI build    |    Result      |
 | :-------------: |:-------------:|
 | Linux      | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master) |
-| Android    | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)      |
-| Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/w5xqq2tntoo9td6k/branch/master?svg=true)](https://ci.appveyor.com/project/filipwasil/fillwave)|
+| Android (native)    | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)      |
+| Windows (mingw)    | Needs C++14 support |
 | Coverity   | [![Coverage Status](https://coveralls.io/repos/github/filipwasil/fillwave/badge.svg?branch=master)](https://coveralls.io/github/filipwasil/fillwave?branch=master)
- |

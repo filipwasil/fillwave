@@ -55,7 +55,14 @@ typedef GLubyte* Texture2DFileData;
 class Texture2DFileConfig {
  public:
 	Texture2DFileConfig(GLint level = 0, GLint border = 0, GLboolean mipmaps =
-	                       GL_FALSE, GLboolean compression = GL_FALSE);
+	                       GL_FALSE, GLboolean compression = GL_FALSE)  :
+		mMipmapsLevel(level),
+		mMipmaps(mipmaps),
+		mCompression(compression),
+		mBorder(border),
+		mCompressionSize(0) {
+
+	}
 	GLint mMipmapsLevel;
 	GLboolean mMipmaps;
 	GLboolean mCompression;
@@ -73,7 +80,14 @@ class Texture2DFileHeader {
 	   GLint format = GL_RGBA,
 	   GLint type = GL_UNSIGNED_BYTE,
 	   GLsizei width = 0,
-	   GLsizei height = 0);
+	   GLsizei height = 0) :
+		mInternalFormat(internalFormat),
+		mHeight(height),
+		mWidth(width),
+		mType(type),
+		mFormat(format) {
+
+	}
 	GLint mInternalFormat;
 	GLsizei mHeight;
 	GLsizei mWidth;

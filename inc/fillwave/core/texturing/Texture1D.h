@@ -36,6 +36,8 @@
 
 #include <fillwave/core/texturing/Texture.h>
 
+#ifdef FILLWAVE_GLES_3_0
+#else /* FILLWAVE_GLES_3_0 */
 namespace fillwave {
 namespace core {
 
@@ -53,5 +55,7 @@ class Texture1D: public Texture {
 } /* core */
 typedef std::shared_ptr<core::Texture1D> pTexture1D;
 } /* fillwave */
+
+#endif /* FILLWAVE_GLES_3_0 */
 
 #endif /* TEXTURE1D_H_ */
