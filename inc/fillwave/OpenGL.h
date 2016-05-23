@@ -94,4 +94,7 @@ constexpr int FILLWAVE_UNIFORM_NOT_FOUND = -1;
 constexpr unsigned int FILLWAVE_AO_SAMPLE_RADIUS = 1.6f;
 constexpr unsigned int FILLWAVE_OQ_VERTICES = 36;
 
+/**/
+constexpr unsigned int FILLWAVE_GLOBJECT_MAX_CAPACITY = 10;
+
 #endif /* GLCORE_H_ */

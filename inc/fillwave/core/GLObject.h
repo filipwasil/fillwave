@@ -54,7 +54,7 @@ class GLObject {
 
  protected:
 	GLsizei mHowMany;
-	GLuint* mHandles;
+	GLuint mHandles[FILLWAVE_GLOBJECT_MAX_CAPACITY];
 };
 
 } /* core */

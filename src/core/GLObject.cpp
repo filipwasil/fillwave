@@ -33,21 +33,30 @@
 
 
 #include <fillwave/core/GLObject.h>
+#include <fillwave/Log.h>
+
+FLOGINIT_DEFAULT()
 
 namespace fillwave {
 namespace core {
 
 GLObject::GLObject(GLsizei howMany) :
-	mHowMany(howMany), mHandles(new GLuint[howMany]) {
+	mHowMany(howMany) {
+	if (mHowMany > FILLWAVE_GLOBJECT_MAX_CAPACITY) {
+		FLOG_FATAL("Currect globject size exceeded");
+	}
 
+	for(GLsizei i = 0; i < mHowMany; i++) {
+		mHandles[i] = 0;
+	}
 }
 
 GLObject::~GLObject() {
-	delete mHandles;
+
 }
 
 GLuint GLObject::getHandle(GLuint id) {
-	return mHandles[id];
+	return id < FILLWAVE_GLOBJECT_MAX_CAPACITY ? mHandles[id] : 0;
 }
 
 } /* core */
