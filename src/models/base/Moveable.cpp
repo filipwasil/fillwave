@@ -119,7 +119,7 @@ void Moveable::scaleToY(GLfloat scale) {
 }
 
 void Moveable::scaleToZ(GLfloat scale) {
-	mScale = glm::vec3(scale, mScale.y, mScale.z);
+	mScale = glm::vec3(mScale.x, mScale.y, scale);
 	mRefresh = true;
 }
 
