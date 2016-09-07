@@ -14,6 +14,10 @@ Can be used in any 3D games, apps and visualization tools or as a regular part o
 - OpenGL ES 3.0 and OpenGL 3.3+ support with programmable pipeline
 - Engine can be fully open source and free under BSD license
 
+- All models placed in examples/linux/data are various models which I found across internet.
+  I was looking only for free ones in case of which the license permits for placing them here.
+  If your work is placed here, please write to me and i will change it or remove it.
+
 # Building with cmake
 
 To build Fillwave you must have [CMake](https://cmake.org/), [GIT](https://git-scm.com/) and C++ compliers installed (So far, Clang and GCC are supported. MSVC version will be available soon). If you are not familiar with CMake I created few scripts to help you with building the project. Note that we use external libraries - each of them in separate git submodule.
@@ -31,8 +35,13 @@ cd scripts
 Linux builds requires packages installed:
 
 ```
-#Ubnuntu
+#Ubnuntu 14.04
 sudo apt-get install libglew1.10 libglew-dev libglfw3 libglfw3-dev libassimp3 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev
+```
+
+```
+#Ubnuntu 16.04
+sudo apt-get install libglew1.13 libglew-dev libglfw3 libglfw3-dev libassimp3v5 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev
 ```
 
 ```
