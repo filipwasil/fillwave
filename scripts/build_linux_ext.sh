@@ -7,14 +7,10 @@ sudo apt-get remove fillwave-examples -y
 # ../../fillwave_build
 # ../../fillwave-examples_build
 
-rm -rf ../../fillwave_build/*
+rm -rf ../../fillwave_build
 rm -rf ../../fillwave-examples_build/*
-if [ $? -eq 0 ]; then
-    echo build directory cleared
-else
-    mkdir ../../fillwave_build
-fi
-rm -rf ../../fillwave_build/*
+
+mkdir ../../fillwave_build
 
 # Remove external libraries content - we will build using system libraries
 # rm -rf ../ext/glew/*
