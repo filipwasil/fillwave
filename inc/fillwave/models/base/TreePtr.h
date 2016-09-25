@@ -43,10 +43,14 @@ namespace framework {
 
 /*! \class TreePtr
  * \brief Basic tree template class. Enables attaching and detaching nodes.
+ *
+ * \tparam T - type of the smart pointers kept in this tree
+ *
+ * \tparam C - base class for this node
  */
 
-template <class T>
-class TreePtr: public ITreeNode {
+template <class T, class C = ITreeNode>
+class TreePtr: public C {
  public:
 	TreePtr() :
 		mFlagAttachedDetached(true) {

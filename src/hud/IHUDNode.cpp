@@ -1,7 +1,7 @@
 /*
- * IHUDNode.h
+ * ProgressBar.cpp
  *
- *  Created on: Jan 10, 2016
+ *  Created on: Jan 11, 2016
  *      Author: filip
  *
  * Copyright (c) 2016, Filip Wasil
@@ -31,13 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#pragma once
-
-#include <fillwave/core/texturing/Texture2D.h>
-#include <fillwave/core/pipeline/Program.h>
-#include <fillwave/core/pipeline/Blending.h>
-
-#include <fillwave/models/base/ITreeNode.h>
+#include <fillwave/hud/base/IHUDNode.h>
 
 namespace fillwave {
 namespace framework {
@@ -46,32 +40,53 @@ namespace framework {
  * \brief HUD base element.
  */
 
-class IHUDNode : public ITreeNode {
- public:
-	IHUDNode(
-	   core::Texture2D* texture = nullptr,
-	   core::Program* program = nullptr,
-	   glm::vec2 position = glm::vec2(0.0f, 0.0f),
-	   glm::vec2 scale = glm::vec2(1.0f, 1.0f));
+IHUDNode::IHUDNode(
+   core::Texture2D* texture,
+   core::Program* program,
+   glm::vec2 position,
+   glm::vec2 scale) :
+	mTexture(texture),
+	mProgram(program),
+	mPosition(position),
+	mScale(scale),
+	mBlending( {
+	GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA
+}) {
 
-	virtual ~IHUDNode();
+}
 
-	virtual void draw();
+IHUDNode::~IHUDNode() = default;
 
-	void onAttached(ITreeNode* node) override;
+void IHUDNode::onAttached(ITreeNode* /*node*/) {
 
-	void onDetached() override;
+}
 
-	void coreDraw();
+void IHUDNode::onDetached() {
 
- protected:
-	core::Texture2D* mTexture;
-	core::Program* mProgram;
-	glm::vec2 mPosition;
-	glm::vec2 mScale;
-	Blending mBlending;
-};
+}
+
+void IHUDNode::draw() {
+	if (nullptr == mTexture || NULL == mProgram) {
+		/* tried to draw a non drawable */
+		abort();
+	}
+	mProgram->use();
+	mProgram->uniformPush("uPosition", mPosition);
+	mProgram->uniformPush("uScale", mScale);
+	coreDraw();
+}
+
+void IHUDNode::coreDraw() {
+	glDisable(GL_DEPTH_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(mBlending.mSrc, mBlending.mSrc);
+	mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	mTexture->unbind();
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
+
+}
 
 } /* namespace framework */
-typedef std::shared_ptr<framework::IHUDNode> pIHUDNode;
 } /* namespace fillwave */

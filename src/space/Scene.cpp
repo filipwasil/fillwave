@@ -60,11 +60,9 @@ void Scene::setCursor(puCursor&& cursor) {
 	mCursor = std::move(cursor);
 }
 
-void Scene::setHUD(pHUD& hud) {
+void Scene::setHUD(pHUD hud) {
 	mHUD = hud;
 }
-
-
 
 void Scene::setAmbient(glm::vec3 ambient) {
 	mAmbientGlobal = ambient;

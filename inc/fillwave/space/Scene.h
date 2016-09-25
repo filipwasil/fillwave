@@ -69,7 +69,7 @@ class Scene: public TreePtr<Entity> {
 
 	/* Scene */
 	void setSkybox(puSkybox&& skybox);
-	void setHUD(pHUD& hud);
+	void setHUD(pHUD hud);
 	void setAmbient(glm::vec3 cursor);
 
 	/* Pickable */

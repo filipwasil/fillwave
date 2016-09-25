@@ -31,7 +31,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/hud/ProgressBar.h>
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/Fillwave.h>
