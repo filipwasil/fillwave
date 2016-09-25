@@ -8,6 +8,15 @@ include_directories(${FILLWAVE_PATH_INCLUDE} ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
 
 add_library(textureloader SHARED ${FILLWAVE_TEXTURE_LOADER_SOURCES})
 
+if (FILLWAVE_BUILD_DEV)
+else()
+	if(FILLWAVE_BUILD_RPM)
+		install(TARGETS textureloader DESTINATION lib64)
+	else(FILLWAVE_BUILD_RPM)
+		install(TARGETS textureloader DESTINATION lib)
+	endif(FILLWAVE_BUILD_RPM)
+endif()
+
 IF(ANDROID)
 	target_link_libraries(textureloader log android GLESv3)
 ENDIF(ANDROID)
