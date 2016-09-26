@@ -33,6 +33,10 @@
 
 #include <fillwave/hud/base/IHUDNode.h>
 
+#include <fillwave/Log.h>
+
+FLOGINIT_DEFAULT();
+
 namespace fillwave {
 namespace framework {
 
@@ -67,8 +71,7 @@ void IHUDNode::onDetached() {
 
 void IHUDNode::draw() {
 	if (nullptr == mTexture || NULL == mProgram) {
-		/* tried to draw a non drawable */
-		abort();
+		FLOG_FATAL("tried to draw a non drawable");
 	}
 	mProgram->use();
 	mProgram->uniformPush("uPosition", mPosition);
