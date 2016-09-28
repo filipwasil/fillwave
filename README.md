@@ -58,7 +58,10 @@ dnf install glm-devel assimp.x86_64 assimp-devel.x86_64 glew.x86_64 glew-devel.x
 Next, run build script:
 
 ```
-./build_linux.sh
+for ubuntu:
+./build_linux_deb.sh
+for fedora:
+./build_linux_rpm.sh
 ```
 
 ## Windows
