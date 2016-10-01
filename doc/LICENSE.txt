@@ -1,8 +1,8 @@
 /*************************************************************************
  *
- * Fillwave C++11 graphics Engine
+ * Fillwave C++14 graphics Engine
  *
- * Copyright (C) 2015 Filip Wasil
+ * Copyright (C) 2015 Fillwave developers
  *
  *  All Rights Reserved.
  *
@@ -12,12 +12,11 @@
  * uses Fillwave library to handle graphics management.
  *
  * If You are interested in extra support, extra features
- * or cooperation I look forward to hearing from You.
+ * or cooperation We look forward to hearing from You.
  *
  * fillwave@gmail.com
  *
  */
-
 
 * OpenGL
 http://www.opengl.org/
