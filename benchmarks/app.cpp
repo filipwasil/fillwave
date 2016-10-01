@@ -1,8 +1,22 @@
+/*
+ * Copyright (c) 2016, Filip Wasil
+ * All rights reserved.
+ *
+ * Crater C++14 graphics engine.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are not permitted.
+ */
+
+#include <googlebenchmark/include/benchmark/benchmark.h>
+
 #include <fillwave/Framework.h>
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
 #include <fillwave/Profiler.h>
 #include <fillwave/Log.h>
+
+using namespace fillwave;
 
 FLOGINIT_DEFAULT()
 
@@ -57,24 +71,26 @@ int initContext() {
     }
 }
 
-void printResults() {
-    for (auto& it : mResults) {
-        FLOG_USER("%s : %f ms", it.first.c_str(), it.second*0.000001);
+static void BM_EngineCreationDestroy(benchmark::State& state) {
+    initContext();
+    char a [] = "./benchmarks";
+    GLchar* const argv[] = {
+        a
+    };
+    while (state.KeepRunning()) {
+        delete (new fillwave::Engine(1, argv));
     }
 }
+// Register the function as a benchmark
+BENCHMARK(BM_EngineCreationDestroy);
 
-int main(int argc, char* argv[]) {
-    initContext();
-
-    auto start = FILLWAVE_MEASURE_START();
-    fillwave::Engine* engine = new fillwave::Engine(argc, argv);
-    mResults.push_back(result("Creating engine", FILLWAVE_MEASURE_STOP_GET(start)));
-
-    start = FILLWAVE_MEASURE_START();
-    delete engine;
-    mResults.push_back(result("Deleting engine", FILLWAVE_MEASURE_STOP_GET(start)));
-
-    printResults();
-
-    return 0;
+// Define another benchmark
+static void BM_MoveableInTimeCreation(benchmark::State& state) {
+    while (state.KeepRunning()) {
+        framework::Moveable sut;
+    }
 }
+// Register another function as a benchmark
+BENCHMARK(BM_MoveableInTimeCreation);
+
+BENCHMARK_MAIN()

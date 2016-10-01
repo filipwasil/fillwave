@@ -22,6 +22,14 @@ ADD_DEFINITIONS(-DASSIMP_BUILD_NO_IFC_IMPORTER )
 include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake)
 
 # -----------------------------------------------
+# Debug or Release
+# -----------------------------------------------
+
+if(FILLWAVE_BUILD_RELEASE)
+    set(CMAKE_BUILD_TYPE Release)
+endif()
+
+# -----------------------------------------------
 # Compiler options
 # -----------------------------------------------
 
@@ -137,6 +145,16 @@ ENDIF(WIN32)
 
 if (FILLWAVE_TESTS)
    include(${CMAKE_CURRENT_SOURCE_DIR}/cmake/tests.cmake)
+endif()
+
+# -----------------------------------------------
+# Benchmarks
+# -----------------------------------------------
+
+if (FILLWAVE_BENCHMARK_TESTS)
+    set(BENCHMARK_ENABLE_TESTING OFF)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/ext/googlebenchmark)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/benchmarks)
 endif()
 
 CONFIGURE_FILE(

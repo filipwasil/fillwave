@@ -34,3 +34,6 @@
 [submodule "ext/coveralls-cmake"]
 	path = ext/coveralls-cmake
 	url = https://github.com/filipwasil/coveralls-cmake.git
+[submodule "ext/googlebenchmark"]
+	path = ext/googlebenchmark
+	url = https://github.com/google/benchmark.git

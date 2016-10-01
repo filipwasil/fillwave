@@ -12,11 +12,8 @@ option(FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS "Usable for mesa shader compiler"
 option(FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE "Asset data are stored only in GPU" ON)
 option(FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS "You can now focus only one model at the same time" OFF)
 
-option(NDEBUG "Build with debug logs" OFF)
-
 option(FILLWAVE_TESTS "Build with gtest tests" OFF)
 option(FILLWAVE_TESTS_COVERALLS "Generate coveralls data" ON)
-option(FILLWAVE_PERFORMANCE_TESTS "Build binary to test performance" OFF)
 
 option(FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)
 option(FILLWAVE_TEXTURE_LOADER_GLI "Use GLI texture loader" OFF)
@@ -29,3 +26,7 @@ option(FILLWAVE_BUILD_LINUX_EXAMPLES "Build linux example" OFF)
 option(FILLWAVE_BUILD_FREEGLUT_EXAMPLES "Build linux example" OFF)
 option(FILLWAVE_BUILD_QT_EXAMPLES "Build qt example" OFF)
 option(FILLWAVE_BUILD_SDL2_EXAMPLES "Build sdl2 example" OFF)
+
+option(FILLWAVE_BUILD_RELEASE "Build type" ON)
+
+option(FILLWAVE_BENCHMARK_TESTS "Build binary to test performance" ON)

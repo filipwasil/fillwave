@@ -123,6 +123,21 @@ _AIX            Defined on AIX
 
 #define FIF(mask) (::_mask_ & mask)
 
+#ifdef FILLWAVE_BUILD_RELEASE
+
+/* No debugs for release */
+
+#define FLOG_FATAL(...) do {(void);} while(0)
+#define FLOG_INFO(...) do {(void);} while(0)
+#define FLOG_DEBUG(...) do {(void);} while(0)
+#define FLOG_USER(...) do {(void);} while(0)
+#define FLOG_WARNING(...) do {(void);} while(0)
+#define FLOG_ERROR(...) do {(void);} while(0)
+#define FLOG_BASE(color, type, flag, ...) do {(void);} while(0)
+#define FLOG_CHECK(...) do {(void);} while(0)
+
+#else /* FILLWAVE_BUILD_RELEASE */
+
 #ifdef __ANDROID__
 #define FLOG_FATAL(...) do { if ( FIF(FFATAL) ) (void)__android_log_print(ANDROID_LOG_FATAL, ::_tag_.c_str(), __VA_ARGS__);} while(0)
 #define FLOG_INFO(...) do { if ( FIF(FINFO) ) (void)__android_log_print(ANDROID_LOG_INFO, ::_tag_.c_str(), __VA_ARGS__);} while(0)
@@ -189,8 +204,7 @@ _AIX            Defined on AIX
 #define FLOG_ERROR(...) FLOG_BASE(FCOLOR_RED, GPU_ERROR,  FERROR, __VA_ARGS__)
 #define FLOG_WARNING(...) FLOG_BASE(FCOLOR_YELLOW, GPU_WARNING,  FWARNING, __VA_ARGS__)
 
-#ifndef NDEBUG
-#endif /* NDEBUG */
+#endif /* FILLWAVE_BUILD_RELEASE */
 
 #endif /* __ANDROID__ */
 
