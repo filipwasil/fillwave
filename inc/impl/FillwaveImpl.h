@@ -5,8 +5,7 @@
  *      Author: filip
  */
 
-#ifndef FILLWAVE_INC_FILLWAVEIMPL_H_
-#define FILLWAVE_INC_FILLWAVEIMPL_H_
+#pragma once
 
 #include <fillwave/Core.h>
 #include <fillwave/Framework.h>
@@ -878,5 +877,3 @@ void Engine::EngineImpl::clearCallback(framework::Callback* callback) {
 }
 
 } /* fillwave */
-
-#endif /* EXT_FILLWAVE_INC_FILLWAVEIMPL_H_ */

@@ -31,10 +31,10 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef LOG_H_
-#define LOG_H_
+#pragma once
 
 /* Exceptions */
+#include <fillwave/Config.h>
 #include <fillwave/common/Strings.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -127,14 +127,14 @@ _AIX            Defined on AIX
 
 /* No debugs for release */
 
-#define FLOG_FATAL(...) do {(void);} while(0)
-#define FLOG_INFO(...) do {(void);} while(0)
-#define FLOG_DEBUG(...) do {(void);} while(0)
-#define FLOG_USER(...) do {(void);} while(0)
-#define FLOG_WARNING(...) do {(void);} while(0)
-#define FLOG_ERROR(...) do {(void);} while(0)
-#define FLOG_BASE(color, type, flag, ...) do {(void);} while(0)
-#define FLOG_CHECK(...) do {(void);} while(0)
+#define FLOG_FATAL(...) do {} while(0)
+#define FLOG_INFO(...) do {} while(0)
+#define FLOG_DEBUG(...) do {} while(0)
+#define FLOG_USER(...) do {} while(0)
+#define FLOG_WARNING(...) do {} while(0)
+#define FLOG_ERROR(...) do {} while(0)
+#define FLOG_BASE(color, type, flag, ...) do {} while(0)
+#define FLOG_CHECK(...) do {} while(0)
 
 #else /* FILLWAVE_BUILD_RELEASE */
 
@@ -207,5 +207,3 @@ _AIX            Defined on AIX
 #endif /* FILLWAVE_BUILD_RELEASE */
 
 #endif /* __ANDROID__ */
-
-#endif /* LOG_H_ */

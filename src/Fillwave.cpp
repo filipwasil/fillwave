@@ -4,7 +4,7 @@
  *  Created on: Feb 10, 2014
  *      Author: Filip Wasil
  *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2016, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -32,6 +32,9 @@
  */
 
 /* Debug */
+#include <fillwave/Config.h>
+
+/* Logs */
 #include <fillwave/Log.h>
 
 /* Profiling */

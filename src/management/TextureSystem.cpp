@@ -4,7 +4,7 @@
  *  Created on: 15 Apr 2014
  *      Author: Filip Wasil
  *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2016, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +30,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/Log.h>
 #include <fillwave/management/TextureSystem.h>

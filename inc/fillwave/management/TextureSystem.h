@@ -4,7 +4,7 @@
  *  Created on: 15 Apr 2014
  *      Author: Filip Wasil
  *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2016, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,8 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef TEXTURESYSTEM_H_
-#define TEXTURESYSTEM_H_
+#pragma once
 
 #include <fillwave/core/texturing/Texture1D.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
@@ -146,5 +145,3 @@ class TextureSystem {
 } /* framework */
 typedef std::unique_ptr<framework::TextureSystem> puTextureSystem;
 } /* fillwave */
-
-#endif /* TEXTUREMANAGER_H_ */
