@@ -106,5 +106,5 @@ Android script is currently designed to work only with Linux. It assumes that An
 | :-------------: |:-------------:|
 | Linux      | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master) |
 | Android (native)    | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)      |
-| Windows (mingw)    | Needs C++14 support |
+| Windows (mingw)    | [![Build status](https://ci.appveyor.com/api/projects/status/w5xqq2tntoo9td6k?svg=true)](https://ci.appveyor.com/project/filipwasil/fillwave) |
 | Coverity   | [![Coverage Status](https://coveralls.io/repos/github/filipwasil/fillwave/badge.svg?branch=master)](https://coveralls.io/github/filipwasil/fillwave?branch=master)
