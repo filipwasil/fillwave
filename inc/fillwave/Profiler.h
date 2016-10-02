@@ -1,10 +1,8 @@
 /*
- * Profiler.h
- *
  *  Created on: May 5, 2015
  *      Author: Filip Wasil
  *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2016, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,42 +29,9 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SRC_PROFILER_H_
-#define SRC_PROFILER_H_
+#pragma once
 
-#ifdef __APPLE__
+#if defined(__APPLE__) || defined(_WIN32) || defined(_WIN64)
 #else
 #include <omp.h>
 #endif
-
-#include <chrono>
-#include <thread>
-#include <iostream>
-
-#define STR_HELPER(x) #x
-#define STR(x) STR_HELPER(x)
-
-#define FILLWAVE_MEASURE(info, foo)  do {  \
-    std::chrono::time_point<std::chrono::system_clock> start, end; \
-    start = std::chrono::system_clock::now(); \
-    foo; \
-    end = std::chrono::system_clock::now();\
-    std::chrono::duration<double> elapsed_seconds = end-start;\
-    std::cout << info << elapsed_seconds.count() << std::endl;} while(0);\
-
-#define FILLWAVE_MEASURE_START std::chrono::system_clock::now
-#define FILLWAVE_MEASURE_STOP_PRINT(info, start)  do {  \
-    std::chrono::duration<double> elapsed_seconds = std::chrono::system_clock::now() - start;\
-    std::cout << info << elapsed_seconds.count() << std::endl;} while(0);
-
-#define FILLWAVE_MEASURE_STOP_GET(start) (std::chrono::system_clock::now() - start).count()
-
-/* Usage
- *  auto start = FILLWAVE_MEASURE_START();
- *  jobs ...
- *  FILLWAVE_MEASURE_STOP_PRINT("The period passed:", start)
- *  FILLWAVE_MEASURE_STOP_GET(start)
- * */
-
-
-#endif /* SRC_PROFILER_H_ */
