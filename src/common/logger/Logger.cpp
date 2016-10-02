@@ -1,10 +1,8 @@
 /*
- * OpenGL.cpp
+ *  Created on: 1 mar 2015
+ *      Author: filip
  *
- *  Created on: Feb 10, 2015
- *      Author: Filip Wasil
- *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2016, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,12 +29,37 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/OpenGL.h>
+#include <fillwave/common/Logger.h>
 
-void glesInitExtensions() {
-	// may be needed
+#include <fillwave/Log.h>
+
+FLOGINIT("Log", FERROR | FFATAL)
+
+namespace fillwave {
+
+std::string Logger::getLogPath() {
+	return logFilePath;
 }
 
-unsigned int getFramebufferStatus() {
-	return glCheckFramebufferStatus(GL_FRAMEBUFFER);
+void Logger::setLogPath(std::string path) {
+	FILE *fp = fopen(path.c_str(), "w");
+	if (fp) {
+		fclose(fp);
+		fileValid = true;
+		logFilePath = path;
+	} else {
+		FLOG_ERROR("Can not write to %s file", path.c_str());
+		fileValid = false;
+	}
 }
+
+bool Logger::isFileValid() {
+	return fileValid;
+}
+
+void Logger::invalidateFile() {
+	fileValid = false;
+}
+
+} /* fillwave */
+

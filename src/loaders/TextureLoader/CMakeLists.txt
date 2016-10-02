@@ -1,6 +1,6 @@
-CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
+cmake_minimum_required( VERSION 2.8.8 )
 
-AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR} FILLWAVE_TEXTURE_LOADER_SOURCES)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} FILLWAVE_TEXTURE_LOADER_SOURCES)
 
 include_directories(${FILLWAVE_PATH_INCLUDE} ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
         ${FILLWAVE_TEXTURE_LOADER_INCLUDES}/external/glm ${FILLWAVE_TEXTURE_WRITER_INCLUDES}
@@ -20,6 +20,8 @@ else()
 		install(TARGETS textureloader DESTINATION lib)
 	endif(FILLWAVE_BUILD_RPM)
 endif()
+
+target_link_libraries(textureloader logger)
 
 IF(ANDROID)
 	target_link_libraries(textureloader log android GLESv3)

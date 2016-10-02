@@ -34,7 +34,7 @@ install(FILES ${FILLWAVE_EXT_FONTGENERATOR_HEADERS} DESTINATION include)
 # Subprojects
 # -----------------------------------------------
 
-ADD_SUBDIRECTORY(ext)
+add_subdirectory(ext)
 
 # -----------------------------------------------
 # Installation

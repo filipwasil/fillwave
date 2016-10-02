@@ -1,6 +1,4 @@
 /*
- * Fillwave.cpp
- *
  *  Created on: Feb 10, 2014
  *      Author: Filip Wasil
  *
@@ -471,21 +469,21 @@ void Engine::configureFPSCounter(
 		mImpl->mTextFPSCallback = new framework::FPSCallback(this,
 		      mImpl->mFPSText);
 		registerCallback(unique_ptr<Callback>(mImpl->mTextFPSCallback));
-	} else {
-		mImpl->mFPSText.reset();
-		unregisterCallback(mImpl->mTextFPSCallback);
+        return;
 	}
+	mImpl->mFPSText.reset();
+	unregisterCallback(mImpl->mTextFPSCallback);
 }
 
 void Engine::configureFileLogging(string fileName) {
 	if (fileName.size() > 1) {
 		FLOG_INFO("File %s will be cleaned and used for logging.",
 		          fileName.c_str());
-		setLogPath(fileName);
-	} else {
-		setFileInvalid();
-		FLOG_INFO("File logging disabled.");
+		logger.setLogPath(fileName);
+        return;
 	}
+    logger.invalidateFile();
+	FLOG_INFO("File logging disabled.");
 }
 
 void Engine::reload() {

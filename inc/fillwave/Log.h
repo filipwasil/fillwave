@@ -1,10 +1,8 @@
 /*
- * log.h
- *
  *  Created on: Mar 28, 2014
  *      Author: filip
  *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2016, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -36,24 +34,13 @@
 /* Exceptions */
 #include <fillwave/Config.h>
 #include <fillwave/common/Strings.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string>
+#include <fillwave/common/Logger.h>
 
 #ifdef __ANDROID__
 #include <android/log.h>
 #endif
 
-namespace fillwave {
-
-std::string getLogPath();
-void setLogPath(std::string path);
-bool isFileValid();
-void setFileInvalid();
-unsigned int getFramebufferStatus();
-
-} /* fillwave */
+static fillwave::Logger logger;
 
 #define FBIT(offset) (1 << offset)
 
@@ -164,8 +151,8 @@ _AIX            Defined on AIX
 	do {                                                                            \
 	   if ( FIF(flag) ) {                                                           \
 	      FILE *unique_niosfoinfsd;                                                 \
-	      if (fillwave::isFileValid()) {                                            \
-	         unique_niosfoinfsd = fopen( fillwave::getLogPath().c_str(), "a" );     \
+	      if (logger.isFileValid()) {                                            \
+	         unique_niosfoinfsd = fopen( logger.getLogPath().c_str(), "a" );     \
 	         if (!unique_niosfoinfsd) {                                             \
 	            break;                                                              \
 	         }                                                                      \
@@ -176,7 +163,7 @@ _AIX            Defined on AIX
 	            FTO_STRING(type),::_tag_.c_str(),__LINE__,FCLOSECOLOROUTPUT);       \
 	      (void)fprintf(unique_niosfoinfsd,__VA_ARGS__);                            \
 	      fprintf(unique_niosfoinfsd,"\n");                                         \
-	      if (fillwave::isFileValid()) {                                            \
+	      if (logger.isFileValid()) {                                            \
 	         fclose(unique_niosfoinfsd);                                            \
 	      }                                                                         \
 	   }                                                                            \

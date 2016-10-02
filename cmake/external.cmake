@@ -28,7 +28,10 @@ set(FILLWAVE_TEXTURE_LOADER textureloader)
 if(FILLWAVE_TEXTURE_LOADER_GLI)
 	set(FILLWAVE_TEXTURE_LOADER_INCLUDES ${FILLWAVE_EXT_INCLUDES}/gli)
 endif()
+
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/TextureLoader)
+
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/common/logger)
 
 if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
     set( FILLWAVE_GLEW_BUILD glew32 )

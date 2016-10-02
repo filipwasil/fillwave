@@ -14,8 +14,8 @@ PROJECT(libfillwave C CXX)
 # -----------------------------------------------
 
 # OpenMP
-ADD_DEFINITIONS("-fopenmp")
-FIND_PACKAGE(OpenMP)
+add_definitions("-fopenmp")
+find_library(OpenMP)
 IF(OPENMP_FOUND)
     set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
@@ -25,17 +25,17 @@ ENDIF(OPENMP_FOUND)
 # Includes
 # -----------------------------------------------
 
-SET(BUILD_SHARED_LIBS OFF)
+set(BUILD_SHARED_LIBS OFF)
 
-ADD_SUBDIRECTORY(${FILLWAVE_EXT_FREETYPE2_PATH})
-ADD_SUBDIRECTORY(${FILLWAVE_EXT_FONTGENERATOR_PATH})
-ADD_SUBDIRECTORY(${FILLWAVE_MODEL_LOADER_PATH})
+add_subdirectory(${FILLWAVE_EXT_FREETYPE2_PATH})
+add_subdirectory(${FILLWAVE_EXT_FONTGENERATOR_PATH})
+add_subdirectory(${FILLWAVE_MODEL_LOADER_PATH})
 
 # -----------------------------------------------
 # Macros
 # -----------------------------------------------
 
-INCLUDE ("${CMAKE_CURRENT_SOURCE_DIR}/cmake/data.cmake")
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/data.cmake")
 
 SET(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/libs/${ANDROID_NDK_ABI_NAME})
 
@@ -45,7 +45,7 @@ SET(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/libs/${ANDROID_NDK_ABI_NAME})
 
 #include(${CMAKE_CURRENT_SOURCE_DIR}/ext/fillwave/cmake/external.cmake)
 
-INCLUDE_DIRECTORIES(${GLES30_PROCESS_INCLUDES}
+include_directories(${GLES30_PROCESS_INCLUDES}
                     ${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_GLM_INCLUDES}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
@@ -61,11 +61,11 @@ add_library(fillwave SHARED ${FILLWAVE_SOURCES})
 add_library(fillwaveStatic STATIC ${FILLWAVE_SOURCES})
 set_target_properties(fillwaveStatic PROPERTIES OUTPUT_NAME fillwave)
 
-add_dependencies(fillwave log android GLESv3 fontgenerator ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} ${OPENGL_LIBRARIES})
-add_dependencies(fillwaveStatic fontgenerator ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} log android GLESv3 ${OPENGL_LIBRARIES})
+add_dependencies(fillwave log android GLESv3 fontgenerator logger ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} ${OPENGL_LIBRARIES})
+add_dependencies(fillwaveStatic fontgenerator logger ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} log android GLESv3 ${OPENGL_LIBRARIES})
 
-target_link_libraries(fillwave log android GLESv3 fontgenerator ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} ${OPENGL_LIBRARIES})
-target_link_libraries(fillwaveStatic fontgenerator ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} log android GLESv3 ${OPENGL_LIBRARIES})
+target_link_libraries(fillwave log android GLESv3 fontgenerator ${FILLWAVE_MODEL_LOADER} logger ${FILLWAVE_TEXTURE_LOADER} ${OPENGL_LIBRARIES})
+target_link_libraries(fillwaveStatic fontgenerator ${FILLWAVE_MODEL_LOADER} logger ${FILLWAVE_TEXTURE_LOADER} log android GLESv3 ${OPENGL_LIBRARIES})
 
 if(FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/examples/android)

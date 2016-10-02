@@ -1,10 +1,10 @@
 /*
- * Log.cpp
+ * log.h
  *
- *  Created on: 1 mar 2015
+ *  Created on: Mar 28, 2014
  *      Author: filip
  *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2016, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,42 +31,22 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/OpenGL.h>
-#include <fillwave/Log.h>
-FLOGINIT("Log", FERROR | FFATAL)
+#pragma once
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include <string>
 
 namespace fillwave {
-
-std::string logFilePath = "";
-bool fileValid = false;
-
-std::string getLogPath() {
-	return logFilePath;
-}
-
-void setLogPath(std::string path) {
-	FILE *fp = fopen(path.c_str(), "w");
-	if (fp) {
-		fclose(fp);
-		fileValid = true;
-		logFilePath = path;
-	} else {
-		FLOG_ERROR("Can not write to %s file", path.c_str());
-		fileValid = false;
-	}
-}
-
-bool isFileValid() {
-	return fileValid;
-}
-
-void setFileInvalid() {
-	fileValid = false;
-}
-
-unsigned int getFramebufferStatus() {
-	return glCheckFramebufferStatus(GL_FRAMEBUFFER);
-}
-
+class Logger {
+ public:
+	std::string getLogPath();
+	void setLogPath(std::string path);
+	bool isFileValid();
+	void invalidateFile();
+ private:
+	std::string logFilePath = "";
+	bool fileValid = false;
+};
 } /* fillwave */
-
