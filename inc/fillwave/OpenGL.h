@@ -31,8 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef GLCORE_H_
-#define GLCORE_H_
+#pragma once
 
 #include <fillwave/Config.h>
 
@@ -96,5 +95,3 @@ constexpr unsigned int FILLWAVE_OQ_VERTICES = 36;
 
 /**/
 constexpr unsigned int FILLWAVE_GLOBJECT_MAX_CAPACITY = 10;
-
-#endif /* GLCORE_H_ */
