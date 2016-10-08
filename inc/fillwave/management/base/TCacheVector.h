@@ -31,8 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef INC_FILLWAVE_MANAGEMENT_BASE_TMANAGER_H_
-#define INC_FILLWAVE_MANAGEMENT_BASE_TMANAGER_H_
+#pragma once
 
 #include <memory>
 #include <vector>
@@ -57,7 +56,7 @@ class TManager: public std::vector<std::unique_ptr<T>> {
 		if ((*this).size() >= M) {
 			return nullptr;
 		}
-		(*this).push_back(std::make_unique<T>(parameters...));
+		(*this).emplace_back(std::make_unique<T>(parameters...));
 		return (*this).back().get();
 	}
 
@@ -79,5 +78,3 @@ class TManager: public std::vector<std::unique_ptr<T>> {
 
 } /* namespace framework */
 } /* namespace fillwave */
-
-#endif /* INC_FILLWAVE_MANAGEMENT_BASE_TMANAGER_H_ */

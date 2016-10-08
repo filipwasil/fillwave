@@ -51,10 +51,10 @@ namespace framework {
  * \param P - T constructor parameters
  */
 template <class T, class K, size_t M, typename ... P>
-class TManagerStack: public std::unordered_map<K, T> {
+class TCacheStack: public std::unordered_map<K, T> {
  public:
-	TManagerStack() = default;
-	virtual ~TManagerStack() = default;
+	TCacheStack() = default;
+	virtual ~TCacheStack() = default;
 
 	T& store(const K& key, P ... parameters) {
 		if ((*this).find(key) != (*this).end()) {

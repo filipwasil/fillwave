@@ -31,20 +31,17 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef PROGRAMMANAGER_H_
-#define PROGRAMMANAGER_H_
+#pragma once
 
 #include <fillwave/core/pipeline/Program.h>
-#include <fillwave/management/base/TManagerSmart.h>
+#include <fillwave/management/base/TCache.h>
 
 namespace fillwave {
 namespace framework {
 
-typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Program,
+typedef TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Program,
         std::string, const std::vector<core::Shader*>&,
-        GLboolean> ManagerPrograms;
+        GLboolean> CachePrograms;
 
 } /* framework */
 } /* fillwave */
-
-#endif /* PROGRAMMANAGER_H_ */

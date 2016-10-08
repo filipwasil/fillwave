@@ -31,8 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef INC_FILLWAVE_MANAGEMENT_BASE_TMANAGERSMART_H_
-#define INC_FILLWAVE_MANAGEMENT_BASE_TMANAGERSMART_H_
+#pragma once
 
 #include <unordered_map>
 #include <fillwave/common/Macros.h>
@@ -49,7 +48,7 @@ do {                                    \
 namespace fillwave {
 namespace framework {
 
-static constexpr size_t FILLWAVE_MANAGEMENT_MAX_ITEMS = 5000;
+constexpr size_t FILLWAVE_MANAGEMENT_MAX_ITEMS = 5000;
 
 /**
  * \brief Basic manager of composites
@@ -64,10 +63,10 @@ static constexpr size_t FILLWAVE_MANAGEMENT_MAX_ITEMS = 5000;
  */
 
 template <size_t M, class T, class K, typename ... P>
-class TManagerSmart: public std::unordered_map<K, std::unique_ptr<T>> {
+class TCache: public std::unordered_map<K, std::unique_ptr<T>> {
  public:
-	TManagerSmart() = default;
-	virtual ~TManagerSmart() = default;
+	TCache() = default;
+	virtual ~TCache() = default;
 
 	T* store(const K& key, P ... parameters) {
 		if ((*this).find(key) != (*this).end()) {
@@ -94,5 +93,3 @@ class TManagerSmart: public std::unordered_map<K, std::unique_ptr<T>> {
 } /* namespace fillwave */
 
 #undef FILLWAVE_FORGET_ABOUT_ME
-
-#endif /* INC_FILLWAVE_MANAGEMENT_BASE_TMANAGERSMART_H_ */

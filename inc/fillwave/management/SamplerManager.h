@@ -31,18 +31,15 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SAMPLERMANAGER_H_
-#define SAMPLERMANAGER_H_
+#pragma once
 
 #include <fillwave/core/texturing/Sampler.h>
 
 namespace fillwave {
 namespace framework {
 
-typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Sampler,
-        GLint, GLint> ManagerSamplers;
+typedef TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Sampler,
+        GLint, GLint> CacheSamplers;
 
 } /* framework */
 } /* fillwave */
-
-#endif /* SAMPLERMANAGER_H_ */

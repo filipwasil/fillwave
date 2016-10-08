@@ -73,9 +73,9 @@ struct Engine::EngineImpl final {
 	puPixelBuffer mPickingPixelBuffer;
 
 	/* Resources */
-	ManagerShaders mShaders;
-	ManagerPrograms mPrograms;
-	ManagerSamplers mSamplers;
+	CacheShaders mShaders;
+	CachePrograms mPrograms;
+	CacheSamplers mSamplers;
 	vector<pText> mTextManager;
 	vector<pFont> mFontManager;
 	BufferSystem mBuffers;

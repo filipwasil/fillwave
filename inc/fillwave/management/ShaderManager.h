@@ -31,18 +31,16 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SHADERMANAGER_H_
-#define SHADERMANAGER_H_
+#pragma once
 
 #include <fillwave/core/pipeline/Shader.h>
-#include <fillwave/management/base/TManagerSmart.h>
+#include <fillwave/management/base/TCache.h>
 
 namespace fillwave {
 namespace framework {
 
-typedef TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Shader,
-        std::string, GLuint, const std::string&> ManagerShaders;
+typedef TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Shader,
+        std::string, GLuint, const std::string&> CacheShaders;
 
 } /* framework */
 } /* fillwave */
-#endif /* SHADERMANAGER_H_ */

@@ -2,7 +2,7 @@
 
 Engine *-- EngineImpl
 EngineImpl *-- ManagerShaders
-EngineImpl *-- ManagerPrograms
+EngineImpl *-- Cache
 EngineImpl *-- ManagerSamplers
 EngineImpl *-- BufferManager
 EngineImpl *-- vectorpText

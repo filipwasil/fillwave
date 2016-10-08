@@ -38,7 +38,7 @@
 #include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/Assets.h>
-#include <fillwave/management/base/TManagerSmart.h>
+#include <fillwave/management/base/TCache.h>
 
 namespace fillwave {
 namespace framework {
@@ -90,38 +90,38 @@ class TextureSystem {
 
 #ifdef FILLWAVE_GLES_3_0
 #else /* FILLWAVE_GLES_3_0 */
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture1D,
-	              size_t, core::ParameterList&> mTextures1D;
+	TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture1D,
+	       size_t, core::ParameterList&> mTextures1D;
 #endif /* FILLWAVE_GLES_3_0 */
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2D,
-	              std::string, core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
+	TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2D,
+	       std::string, core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2D;
 
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2D,
-	              size_t, core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2DDeferred;
+	TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2D,
+	       size_t, core::Texture2DFile*, core::ParameterList&, GLuint> mTextures2DDeferred;
 
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2DRenderableDynamic,
-	              std::string, core::Texture2DFile*, core::ParameterList&, core::Program*>
-	              mTextures2DDynamic;
+	TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2DRenderableDynamic,
+	       std::string, core::Texture2DFile*, core::ParameterList&, core::Program*>
+	       mTextures2DDynamic;
 
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2DRenderable,
-	              size_t, GLenum, core::Texture2DFile*, core::ParameterList&>
-	              mTextures2DRenderable;
+	TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2DRenderable,
+	       size_t, GLenum, core::Texture2DFile*, core::ParameterList&>
+	       mTextures2DRenderable;
 
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3D,
-	              std::string, core::Texture2DFile*, core::Texture2DFile*,
-	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
-	              core::Texture2DFile*, core::ParameterList&> mTextures3D;
+	TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3D,
+	       std::string, core::Texture2DFile*, core::Texture2DFile*,
+	       core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+	       core::Texture2DFile*, core::ParameterList&> mTextures3D;
 
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3DRenderableDynamic,
-	              std::string, core::Texture2DFile*, core::Texture2DFile*,
-	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
-	              core::Texture2DFile*, core::ParameterList&, core::Texture2DRenderable*,
-	              core::Program*> mTextures3DDynamic;
+	TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3DRenderableDynamic,
+	       std::string, core::Texture2DFile*, core::Texture2DFile*,
+	       core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+	       core::Texture2DFile*, core::ParameterList&, core::Texture2DRenderable*,
+	       core::Program*> mTextures3DDynamic;
 
-	TManagerSmart<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3DRenderable, size_t,
-	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
-	              core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
-	              core::Texture2DRenderable*, core::ParameterList&> mTextures3DRenderable;
+	TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3DRenderable, size_t,
+	       core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+	       core::Texture2DFile*, core::Texture2DFile*, core::Texture2DFile*,
+	       core::Texture2DRenderable*, core::ParameterList&> mTextures3DRenderable;
 
 	std::vector<GLenum> mSupportedCompresssionTypes;
 	std::string mRootPath;

@@ -12,7 +12,7 @@ option(FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS "Usable for mesa shader compiler"
 option(FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE "Asset data are stored only in GPU" ON)
 option(FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS "You can now focus only one model at the same time" OFF)
 
-option(FILLWAVE_TESTS "Build with gtest tests" OFF)
+option(FILLWAVE_TESTS "Build with gtest tests" ON)
 option(FILLWAVE_TESTS_COVERALLS "Generate coveralls data" ON)
 
 option(FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)

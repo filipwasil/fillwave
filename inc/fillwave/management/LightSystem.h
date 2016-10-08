@@ -31,10 +31,9 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef LIGHTMANAGER_H_
-#define LIGHTMANAGER_H_
+#pragma once
 
-#include <fillwave/management/base/TManager.h>
+#include <fillwave/management/base/TCacheVector.h>
 #include <fillwave/space/LightDirectional.h>
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
@@ -47,15 +46,15 @@ static constexpr size_t FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER = 4;
 
 typedef TManager<LightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
         core::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, Moveable*>
-        ManagerSpotLights;
+        CacheSpotLights;
 
 typedef TManager<LightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
         core::Texture2DRenderable*, glm::vec3,
-        glm::quat, glm::vec4, Moveable*> ManagerDirectionalLights;
+        glm::quat, glm::vec4, Moveable*> CacheDirectionalLights;
 
 typedef TManager<LightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
         core::Texture3DRenderable*, glm::vec3, glm::vec4,
-        Moveable*> ManagerPointLights;
+        Moveable*> CachePointLights;
 
 /**
  * \brief Light system knows about all light related stuff.
@@ -65,9 +64,9 @@ class LightSystem {
 	LightSystem();
 	virtual ~LightSystem() = default;
 
-	ManagerSpotLights mLightsSpot;
-	ManagerDirectionalLights mLightsDirectional;
-	ManagerPointLights mLightsPoint;
+	CacheSpotLights mLightsSpot;
+	CacheDirectionalLights mLightsDirectional;
+	CachePointLights mLightsPoint;
 
 	bool isLightsRefresh();
 	void resetLightsRefresh();
@@ -108,5 +107,3 @@ class LightSystem {
 } /* framework */
 typedef std::unique_ptr<framework::LightSystem> puLightSystem;
 } /* fillwave*/
-
-#endif /* LIGHTMANAGER_H_ */
