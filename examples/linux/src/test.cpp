@@ -21,7 +21,7 @@ using namespace fillwave;
 using namespace fillwave::framework;
 using namespace std;
 
-const GLuint SPHERES = 5;
+const GLint SPHERES = 5;
 
 int main(int argc, char* argv[]) {
 	ContextGLFW mContext(argc, argv);
@@ -61,7 +61,7 @@ void perform() {
 	                                 "meshes/sphere.obj",
 	                                 p, "textures/test.png");
 
-	for (GLuint i = 0; i < SPHERES; i++) {
+	for (GLint i = 0; i < SPHERES; i++) {
 		/* build */
 
 		puModel sphere = builder.build();
@@ -99,7 +99,7 @@ void perform() {
 
 	puModel wall = make_unique<Model>(ContextGLFW::mGraphicsEngine, p,
 	                                  "meshes/floor.obj",
-	                                  "textures/multicolor.dds");
+	                                  "textures/test.png");
 	wall->rotateByX(glm::radians(90.0));
 	wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
 	wall->scaleTo(3.0);
