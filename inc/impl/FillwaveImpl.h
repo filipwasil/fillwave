@@ -30,6 +30,7 @@ struct ANativeActivity;
 class Engine;
 
 using namespace fillwave::framework;
+using namespace std;
 
 namespace fillwave {
 
@@ -40,7 +41,7 @@ namespace fillwave {
 struct Engine::EngineImpl final {
 
 #ifdef __ANDROID__
-	EngineImpl(Engine* engine, std::string rootPath);
+	EngineImpl(Engine* engine, string rootPath);
 	EngineImpl(Engine* engine, ANativeActivity* activity);
 #else
 	EngineImpl(Engine* engine, GLint argc, GLchar* const argv[]);
@@ -75,12 +76,12 @@ struct Engine::EngineImpl final {
 	ManagerShaders mShaders;
 	ManagerPrograms mPrograms;
 	ManagerSamplers mSamplers;
-	std::vector<pText> mTextManager;
-	std::vector<pFont> mFontManager;
+	vector<pText> mTextManager;
+	vector<pFont> mFontManager;
 	BufferSystem mBuffers;
 	puLightSystem mLights;
 	puTextureSystem mTextures;
-	std::vector<core::PostProcessingPass> mPostProcessingPasses;
+	vector<core::PostProcessingPass> mPostProcessingPasses;
 	core::Program* mProgramTextureLookup;
 
 	/* Fences and barriers */
@@ -92,13 +93,13 @@ struct Engine::EngineImpl final {
 	core::VertexArray* mVAOOcclusion;
 
 	/* Inputs - callbacks */
-	std::map<eEventType, std::vector<puCallback> > mCallbacks;
+	map<eEventType, vector<puCallback> > mCallbacks;
 
 	/* Inputs - focus */
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
-	std::pair<IFocusable*, std::vector<Callback*>> mFocus;
+	pair<IFocusable*, vector<Callback*>> mFocus;
 #else
-	std::map<IFocusable*, std::vector<Callback*>> mFocus;
+	map<IFocusable*, vector<Callback*>> mFocus;
 #endif
 
 	/* Extras */
@@ -163,6 +164,10 @@ struct Engine::EngineImpl final {
 
 	/* Picking */
 	glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
+	void pick(GLuint x, GLuint y);
+
+	/* Capture */
+	void captureFramebufferToFile(const string& name);
 
 	/* Initiatization */
 	void init();
@@ -186,7 +191,7 @@ struct Engine::EngineImpl final {
 
 #ifdef __ANDROID__
 
-Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
+Engine::EngineImpl::EngineImpl(Engine* engine, string rootPath)
 	: mEngine(engine),
 	  mFileLoader(rootPath),
 	  mProgramLoader(engine),
@@ -282,9 +287,9 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
-	mTextures = std::make_unique<framework::TextureSystem>
+	mTextures = make_unique<framework::TextureSystem>
 	            (mFileLoader.getRootPath());
-	mLights = std::make_unique<framework::LightSystem>();
+	mLights = make_unique<framework::LightSystem>();
 }
 
 inline void Engine::EngineImpl::initPipelines() {
@@ -303,7 +308,7 @@ inline void Engine::EngineImpl::initUniforms() {
 }
 
 inline void Engine::EngineImpl::initOcclusionTest() {
-	std::vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
+	vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
 	mVAOOcclusion = new core::VertexArray();
 	mVBOOcclusion = mBuffers.mVerticesPosition.store(mVAOOcclusion, vec);
 	mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
@@ -323,7 +328,7 @@ inline void Engine::EngineImpl::initStartup() {
 	program->uniformPush("uScreenFactor", mWindowAspectRatio);
 	core::Program::disusePrograms();
 
-	mPostProcessingPassStartup = std::make_unique<core::PostProcessingPass>(program,
+	mPostProcessingPassStartup = make_unique<core::PostProcessingPass>(program,
 	                             mTextures->getDynamic("fillwave_quad_startup.frag",
 	                                   program, glm::ivec2(mWindowWidth, mWindowHeight)),
 	                             mStartupTimeLimit);
@@ -352,7 +357,7 @@ inline void Engine::EngineImpl::initExtras() {
 	mTextFPSCallback = NULL;
 
 	/* Debugger */
-	mDebugger = std::make_unique<framework::Debugger>(mEngine);
+	mDebugger = make_unique<framework::Debugger>(mEngine);
 }
 
 void Engine::EngineImpl::reload() {
@@ -529,8 +534,7 @@ void Engine::EngineImpl::drawTexture(core::Texture* t, core::Program* p) {
 
 void Engine::EngineImpl::drawTexture(core::Texture* t) {
 	mProgramTextureLookup->use();
-	mProgramTextureLookup->uniformPush("uPostProcessingSampler",
-	                                   FILLWAVE_DIFFUSE_UNIT);
+	mProgramTextureLookup->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
 	t->bind(FILLWAVE_DIFFUSE_UNIT);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 	t->unbind();
@@ -598,7 +602,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 			(*it).checkTime(time);
 		}
 
-		auto it = std::remove_if(_begin, _end, _compare_function);
+		auto it = remove_if(_begin, _end, _compare_function);
 
 		mPostProcessingPasses.erase(it, _end);
 
@@ -811,9 +815,9 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 void Engine::EngineImpl::registerCallback(
    puCallback&& callback) {
 	if (mCallbacks.find(callback->getEventType()) == mCallbacks.end()) {
-		mCallbacks[callback->getEventType()] = std::vector<puCallback>();
+		mCallbacks[callback->getEventType()] = vector<puCallback>();
 	}
-	mCallbacks[callback->getEventType()].push_back(std::move(callback));
+	mCallbacks[callback->getEventType()].push_back(move(callback));
 }
 
 void Engine::EngineImpl::unregisterCallback(
@@ -821,11 +825,11 @@ void Engine::EngineImpl::unregisterCallback(
 	FLOG_ERROR("mCallbacks.size() %lu", mCallbacks.size());
 	if (!mCallbacks.empty()
 	      && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
-		std::vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
+		vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
 		auto _compare_function =
 		   [callback](const puCallback & c) -> bool {return c.get() == callback;};
-		auto it = std::remove_if(callbacks->begin(), callbacks->end(),
-		                         _compare_function);
+		auto it = remove_if(callbacks->begin(), callbacks->end(),
+		                    _compare_function);
 		callbacks->erase(it, callbacks->end());
 	}
 }
@@ -862,9 +866,9 @@ inline void Engine::EngineImpl::clearCallbacks(
 
 void Engine::EngineImpl::clearCallback(framework::Callback* callback) {
 	eEventType e = callback->getEventType();
-	std::vector<puCallback>* callbacks = &mCallbacks[e];
+	vector<puCallback>* callbacks = &mCallbacks[e];
 	callbacks->erase(
-	   std::remove_if( // Selectively remove elements in the second vector...
+	   remove_if( // Selectively remove elements in the second vector...
 	      callbacks->begin(),
 	      callbacks->end(),
 	[&] (puCallback const & p) {
@@ -876,4 +880,58 @@ void Engine::EngineImpl::clearCallback(framework::Callback* callback) {
 	);
 }
 
+void Engine::EngineImpl::pick(GLuint x, GLuint y) {
+	mPickingRenderableTexture->bindForRendering();
+	drawClear();
+	mScene->drawPicking();
+	mPickingPixelBuffer->bind();
+	glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA,
+	             GL_UNSIGNED_BYTE, 0);
+	FLOG_CHECK("glReadPixels failed");
+#ifdef FILLWAVE_GLES_3_0
+	GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
+#else
+	GLubyte* data = (GLubyte*) mPickingPixelBuffer->map(GL_READ_WRITE);
+#endif
+
+	glm::ivec4 colorRead = pickingBufferGetColor(data, x, y);
+	mPickingPixelBuffer->unmap();
+	mPickingPixelBuffer->unbind();
+	core::Framebuffer::bindScreenFramebuffer();
+	mScene->draw();
+	mScene->pick(colorRead);
+}
+
+void Engine::EngineImpl::captureFramebufferToFile(const string& name) {
+	mPickingRenderableTexture->bindForRendering();
+	drawClear();
+	mScene->draw();
+	mPickingPixelBuffer->bind();
+	glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA,
+	             GL_UNSIGNED_BYTE, 0);
+	FLOG_CHECK("reading pixel buffer failed");
+#ifdef FILLWAVE_GLES_3_0
+	GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
+#else
+	GLubyte* data = (GLubyte*) mPickingPixelBuffer->map(GL_READ_WRITE);
+#endif
+	data[mWindowWidth * mWindowHeight * 4] = '\0';
+	FILE* file;
+	file = fopen(mFileLoader.getRootPath(name).c_str(), "w");
+	if (file == nullptr) {
+		FLOG_ERROR("Error when takin' screenshot");
+		exit(1);
+	}
+	for (GLuint i = 0; i < mWindowWidth * mWindowHeight; i++) {
+		fprintf(file, "%c", data[4 * i]);
+		fprintf(file, "%c", data[4 * i + 1]);
+		fprintf(file, "%c", data[4 * i + 2]);
+		fprintf(file, "%c", data[4 * i] + 3);
+	}
+	fclose(file);
+	mPickingPixelBuffer->unmap();
+	mPickingPixelBuffer->unbind();
+	core::Framebuffer::bindScreenFramebuffer();
+	mScene->draw();
+}
 } /* fillwave */

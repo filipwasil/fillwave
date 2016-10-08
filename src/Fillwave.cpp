@@ -35,15 +35,9 @@
 /* Logs */
 #include <fillwave/Log.h>
 
-/* Profiling */
-#include <fillwave/Profiler.h>
-
 /* Fillwave */
 
 #include <fillwave/Fillwave.h>
-
-/* Assets */
-#include <fillwave/Assets.h>
 
 /* Stdlib */
 #include <fstream>
@@ -469,7 +463,7 @@ void Engine::configureFPSCounter(
 		mImpl->mTextFPSCallback = new framework::FPSCallback(this,
 		      mImpl->mFPSText);
 		registerCallback(unique_ptr<Callback>(mImpl->mTextFPSCallback));
-        return;
+		return;
 	}
 	mImpl->mFPSText.reset();
 	unregisterCallback(mImpl->mTextFPSCallback);
@@ -480,9 +474,9 @@ void Engine::configureFileLogging(string fileName) {
 		FLOG_INFO("File %s will be cleaned and used for logging.",
 		          fileName.c_str());
 		logger.setLogPath(fileName);
-        return;
+		return;
 	}
-    logger.invalidateFile();
+	logger.invalidateFile();
 	FLOG_INFO("File logging disabled.");
 }
 
@@ -499,58 +493,11 @@ void Engine::log() {
 }
 
 void Engine::pick(GLuint x, GLuint y) {
-	mImpl->mPickingRenderableTexture->bindForRendering();
-	mImpl->drawClear();
-	mImpl->mScene->drawPicking();
-	mImpl->mPickingPixelBuffer->bind();
-	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
-	             GL_UNSIGNED_BYTE, 0);
-	FLOG_CHECK("glReadPixels failed");
-#ifdef FILLWAVE_GLES_3_0
-	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
-#else
-	GLubyte* data = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
-#endif
-
-	glm::ivec4 colorRead = mImpl->pickingBufferGetColor(data, x, y);
-	mImpl->mPickingPixelBuffer->unmap();
-	mImpl->mPickingPixelBuffer->unbind();
-	Framebuffer::bindScreenFramebuffer();
-	mImpl->mScene->draw();
-	mImpl->mScene->pick(colorRead);
+	mImpl->pick(x, y);
 }
 
 void Engine::captureFramebufferToFile(const string& name) {
-	mImpl->mPickingRenderableTexture->bindForRendering();
-	mImpl->drawClear();
-	mImpl->mScene->draw();
-	mImpl->mPickingPixelBuffer->bind();
-	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, GL_RGBA,
-	             GL_UNSIGNED_BYTE, 0);
-	FLOG_CHECK("reading pixel buffer failed");
-#ifdef FILLWAVE_GLES_3_0
-	GLubyte* data = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
-#else
-	GLubyte* data = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
-#endif
-	data[mImpl->mWindowWidth * mImpl->mWindowHeight * 4] = '\0';
-	FILE* file;
-	file = fopen(mImpl->mFileLoader.getRootPath(name).c_str(), "w");
-	if (file == nullptr) {
-		FLOG_ERROR("Error when takin' screenshot");
-		exit(1);
-	}
-	for (GLuint i = 0; i < mImpl->mWindowWidth * mImpl->mWindowHeight; i++) {
-		fprintf(file, "%c", data[4 * i]);
-		fprintf(file, "%c", data[4 * i + 1]);
-		fprintf(file, "%c", data[4 * i + 2]);
-		fprintf(file, "%c", data[4 * i] + 3);
-	}
-	fclose(file);
-	mImpl->mPickingPixelBuffer->unmap();
-	mImpl->mPickingPixelBuffer->unbind();
-	Framebuffer::bindScreenFramebuffer();
-	mImpl->mScene->draw();
+	mImpl->captureFramebufferToFile(name);
 }
 
 void Engine::captureFramebufferToBuffer(
@@ -638,14 +585,12 @@ VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
 
 VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
       vector<VertexBasic>& data) {
-	VertexBufferBasic* newData = new VertexBufferBasic(data);
-	return mImpl->mBuffers.mVertices.store(newData, vao);
+	return mImpl->mBuffers.mVertices.store(new VertexBufferBasic(data), vao);
 }
 
 IndexBuffer* Engine::storeBufferInternal(VertexArray* vao,
       const vector<GLuint>& data) {
-	IndexBuffer* newData = new IndexBuffer(data);
-	return mImpl->mBuffers.mIndices.store(newData, vao);
+	return mImpl->mBuffers.mIndices.store(new IndexBuffer(data), vao);
 }
 
 void Engine::removeBufferIndex(VertexArray* vao) {
@@ -659,8 +604,7 @@ VertexBufferText* Engine::storeBufferInternal(VertexArray* vao,
 
 IndexBuffer* Engine::storeBufferInternal(VertexArray* vao,
       GLuint elements) {
-	IndexBuffer* newData = new IndexBuffer(elements, true);
-	return mImpl->mBuffers.mIndices.store(newData, vao);
+	return mImpl->mBuffers.mIndices.store(new IndexBuffer(elements, true), vao);
 }
 
 VertexBufferParticlesGPU* Engine::storeBuffersInternal(
@@ -710,13 +654,11 @@ void Engine::removeBufferText(VertexArray* vao) {
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 IndexBuffer* Engine::storeBufferInternal(VertexArray* vao,
       const aiMesh* shape) {
-	IndexBuffer* newData = new IndexBuffer(shape);
-	return mImpl->mBuffers.mIndices.store(newData, vao);
+	return mImpl->mBuffers.mIndices.store(new IndexBuffer(shape), vao);
 }
 VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
       const aiMesh* shape, framework::Animator* animator) {
-	VertexBufferBasic* newData = new VertexBufferBasic(shape, animator);
-	return mImpl->mBuffers.mVertices.store(newData, vao);
+	return mImpl->mBuffers.mVertices.store(new VertexBufferBasic(shape, animator), vao);
 }
 #else
 core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao,
