@@ -4,4 +4,4 @@
 --indent-switches
 --indent-classes
 --style=google
---max-code-length=120
+--max-code-length=150
