@@ -53,7 +53,7 @@ Entity::Entity(glm::vec3 translation, glm::quat rotation) :
 }
 
 Entity::~Entity() {
-	FLOG_DEBUG("Entity destroyed");
+	FLOG_DEBUG("Entity destroyed", NULL);
 }
 
 bool Entity::isAnimated() const {
@@ -223,7 +223,7 @@ inline void Entity::detachCallback(
 	auto _end = callbacks.end();
 	auto it = std::remove_if(_begin, _end, _compare_function);
 	callbacks.erase(it, _end);
-	FLOG_ERROR("Detachment of callback failed");
+	FLOG_ERROR("Detachment of callback failed", NULL);
 }
 
 void Entity::updateRenderer(IRenderer& renderer) {

@@ -120,7 +120,7 @@ std::string resolveApkWorkspace(Engine* engine, struct android_app* app) {
 static void engine_draw_frame(struct engine* engine) {
     if (engine->eglInfo.display == NULL) {
         // No display.
-        FLOG_ERROR("No Display");
+        FLOG_ERROR("No Display",NULL);
         return;
     }
 
@@ -162,7 +162,7 @@ static int32_t engine_handle_input(struct android_app* app,
          selectClip(CLIP_NONE, 0);
          setPlayingAssetAudioPlayer(isPlayingAsset);
          engine->animating = 0;
-         FLOG_ERROR("Animation stop");
+         FLOG_ERROR("Animation stop",NULL);
          return 1;
       } else if ( key_val == AKEYCODE_VOLUME_UP ||
                   key_val == AKEYCODE_VOLUME_DOWN ) {
@@ -176,12 +176,12 @@ static int32_t engine_handle_input(struct android_app* app,
 
              created = createAssetAudioPlayer(env, clazz, activity->assetManager, "background.mp3");
              if (created) {
-                FLOG_ERROR("CREATED ASSET AUDIO PLAYER");
+                FLOG_ERROR("CREATED ASSET AUDIO PLAYER",NULL);
                  isPlayingAsset = true;
                  setPlayingAssetAudioPlayer(true);
                  selectClip(CLIP_PLAYBACK, 3);
              } else {
-                 FLOG_ERROR("NOT CREATED ASSET AUDIO PLAYER");
+                 FLOG_ERROR("NOT CREATED ASSET AUDIO PLAYER",NULL);
              }
              activity->vm->DetachCurrentThread();
           } else {
@@ -190,7 +190,7 @@ static int32_t engine_handle_input(struct android_app* app,
               setPlayingAssetAudioPlayer(isPlayingAsset);
           }
           engine->animating = 1;
-          FLOG_ERROR("Animation start");
+          FLOG_ERROR("Animation start",NULL);
           return 1;
       }
       return 1;
@@ -210,7 +210,7 @@ static int32_t engine_handle_input(struct android_app* app,
                                                       engine->eglInfo.height);
                  engine->fillwave->insertInput(event);
                } else {
-                  FLOG_ERROR("Null scene pointer");
+                  FLOG_ERROR("Null scene pointer",NULL);
               }
               break;
            case AMOTION_EVENT_ACTION_UP:

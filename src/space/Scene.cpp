@@ -76,7 +76,7 @@ void Scene::moveCursor(glm::vec2 position) {
 	if (mCursor) {
 		mCursor->move(position);
 	} else {
-		FLOG_DEBUG("No cursor set");
+		FLOG_DEBUG("No cursor set", NULL);
 	}
 }
 
@@ -135,7 +135,7 @@ void Scene::registerPickable(Entity* entity) {
 			return;
 		}
 	}
-	FLOG_ERROR("Failed to register pickable entity");
+	FLOG_ERROR("Failed to register pickable entity", NULL);
 }
 
 void Scene::pick(glm::ivec4 color) {
@@ -151,7 +151,7 @@ void Scene::pick(glm::ivec4 color) {
 
 void Scene::updateRenderer() {
 	if (mRenderer->mFlagReload) {
-		FLOG_DEBUG("Renderer update");
+		FLOG_DEBUG("Renderer update", NULL);
 		mRenderer->clear();
 		if (mSkybox) {
 			mRenderer->mSkybox = mSkybox.get();
@@ -163,7 +163,7 @@ void Scene::updateRenderer() {
 		}
 		mRenderer->mFlagReload = false;
 	} else {
-		FLOG_DEBUG("Renderer waiting for update");
+		FLOG_DEBUG("Renderer waiting for update", NULL);
 		mRenderer->mFlagReload = isAttachedDetached();
 	}
 }

@@ -53,7 +53,7 @@ int Initialize(EGLNativeWindowType window, EGLContextInfo* eglInfo,
 
     if (eglMakeCurrent(eglInfo->display, eglInfo->surface, eglInfo->surface,
             eglInfo->context) == EGL_FALSE) {
-        FLOG_ERROR("Unable to eglMakeCurrent");
+        FLOG_ERROR("Unable to eglMakeCurrent",NULL);
         return -1;
     }
 
@@ -88,7 +88,7 @@ void SwapDisplay(EGLContextInfo* eglInfo) {
     if (eglGetCurrentContext() != EGL_NO_CONTEXT) {
         eglSwapBuffers(eglInfo->display, eglInfo->surface);
     } else {
-        FLOG_ERROR("Surface destroyed");
+        FLOG_ERROR("Surface destroyed",NULL);
     }
 }
 

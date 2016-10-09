@@ -61,7 +61,7 @@ void ContextGLFW::windowInit(GLFWwindow*& window) {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//xxx sure ?
 
 	if(!window) {
-		FLOG_ERROR("Could not create a new rendering window.\n");
+		FLOG_ERROR("Could not create a new rendering window.\n",NULL);
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}

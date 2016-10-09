@@ -56,7 +56,7 @@ Skybox::Skybox(Engine* engine, core::Texture3D* texture) :
 	std::vector<GLuint> indices = sphere.getIndices();
 	std::vector<core::VertexPosition> vertices = sphere.getVertices();
 
-	FLOG_DEBUG("Initializing skybox buffer");
+	FLOG_DEBUG("Initializing skybox buffer", NULL);
 
 	mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO, indices);
 	mVBO = engine->storeBuffer<core::VertexBufferPosition>(mVAO, vertices);

@@ -81,7 +81,7 @@ void Texture::setParameters(ParameterList parameters) {
 }
 
 void Texture::reload() {
-	FLOG_DEBUG("Reload");
+	FLOG_DEBUG("Reload", NULL);
 	glGenTextures(mHowMany, mHandles);
 	FLOG_CHECK("glGenTextures");
 }

@@ -51,7 +51,7 @@ Program::Program(const std::vector<core::Shader*>& shaders,
 }
 
 Program::~Program() {
-	FLOG_DEBUG("Delete program");
+	FLOG_DEBUG("Delete program", NULL);
 	for (auto& it : mShaders) {
 		detach(it);
 	}
@@ -334,7 +334,7 @@ void Program::log() const {
 		it.log();
 	}
 	for (auto& it : mShaders) {
-		FLOG_INFO("Shader:\n");
+		FLOG_INFO("Shader:\n", NULL);
 		it->log();
 	}
 }
@@ -350,7 +350,7 @@ void Program::reload() {
 	if (!mDelayedLinking) {
 		link();
 	} else {
-		FLOG_DEBUG("Program linking has be done manually\n");
+		FLOG_DEBUG("Program linking has be done manually\n", NULL);
 	}
 	FLOG_CHECK("Program linking failed");
 }

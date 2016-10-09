@@ -53,11 +53,11 @@ void PixelBuffer::setScreenSize(
 }
 
 void PixelBuffer::emptyCPU() {
-	FLOG_DEBUG("Not gpu data clear is possible with this buffer");
+	FLOG_DEBUG("Not gpu data clear is possible with this buffer", NULL);
 }
 
 void PixelBuffer::emptyGPU() {
-	FLOG_DEBUG("Not gpu data clear is possible with this buffer");
+	FLOG_DEBUG("Not gpu data clear is possible with this buffer", NULL);
 }
 
 } /* models */

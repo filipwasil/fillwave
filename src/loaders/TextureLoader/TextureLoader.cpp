@@ -262,7 +262,7 @@ core::Texture2DFile* TextureLoader::load(
 		file->mConfig.mCompression = GL_TRUE;
 		file->mHeader.mInternalFormat = getComporession(compression);
 		file->mConfig.mCompressionSize = 0;
-		FLOG_FATAL("Texture compression feature not ready");
+		FLOG_FATAL("Texture compression feature not ready", NULL);
 	}
 
 	file->mConfig.mBorder = 0;
@@ -485,7 +485,7 @@ inline GLint TextureLoader::getBytesPerPixel(GLenum format) {
 			bytes = 1;
 			break;
 		default:
-			FLOG_ERROR("Not recognized texture format loading");
+			FLOG_ERROR("Not recognized texture format loading", NULL);
 			bytes = 0;
 			break;
 	}

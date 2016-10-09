@@ -122,7 +122,7 @@ Model::Model(Engine* engine, core::Program* program,
 	initShadowing(engine);
 	for (GLuint i = 0; i < shapes.size(); i++) {
 		if (shapes[i].mesh.material_ids.empty()) {
-			FLOG_FATAL("No materials available");
+			FLOG_FATAL("No materials available", NULL);
 		}
 
 		int materialId = shapes[i].mesh.material_ids[0];
@@ -187,7 +187,7 @@ Model::Model(
 	initShadowing(engine);
 	for (GLuint i = 0; i < shapes.size(); i++) {
 		if (shapes[i].mesh.material_ids.empty()) {
-			FLOG_FATAL("No materials available");
+			FLOG_FATAL("No materials available", NULL);
 		}
 
 		attach(loadMesh(shapes[i], attrib,
@@ -244,7 +244,7 @@ Model::Model(
 	initShadowing(engine);
 	for (GLuint i = 0; i < shapes.size(); i++) {
 		if (shapes[i].mesh.material_ids.empty()) {
-			FLOG_FATAL("No materials available");
+			FLOG_FATAL("No materials available", NULL);
 		}
 
 		attach(loadMesh(shapes[i], attrib,
@@ -274,7 +274,7 @@ void Model::reload() {
 inline void Model::initAnimations(const aiScene* scene) {
 	if (scene->HasAnimations()) {
 		mAnimator = new Animator(scene);
-		FLOG_DEBUG("attached TimedBoneUpdateCallback to model");
+		FLOG_DEBUG("attached TimedBoneUpdateCallback to model", NULL);
 		this->attachHierarchyCallback(std::make_unique<TimedBoneUpdateCallback>(this));
 	}
 }

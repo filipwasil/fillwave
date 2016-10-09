@@ -35,13 +35,68 @@
 #include <fillwave/Config.h>
 #include <fillwave/common/Strings.h>
 #include <fillwave/common/Logger.h>
+#include <stdarg.h>
+#include "spdlog/spdlog.h"
 
 #ifdef __ANDROID__
 #include <android/log.h>
 #endif
 
 static fillwave::Logger logger;
+namespace journal
+{
+namespace spd = spdlog;
 
+    enum ERROR_TYPE {
+    FATAL,
+    INFO,
+    DEBUG,
+    USER,
+    ERROR,
+    WARNING
+    };
+    static void LogOut(ERROR_TYPE type, const char* format, ...) {
+        char buffer[1000];
+        //sprintf(buffer, args...);
+        std::shared_ptr<spd::logger> logs = spd::get("LogConsole");
+        //char buffer[256];
+         va_list args;
+         va_start (args, format);
+         vsnprintf (buffer,1000,format, args);
+         va_end (args);
+//           va_list argptr;
+//           va_start(argptr, format);
+//           vsnprintf(stderr, format, argptr);
+//           va_end(argptr);
+        if (logs == nullptr) {
+            logs = spd::stdout_logger_mt("LogConsole", true);
+        }
+        switch (type) {
+        case WARNING:
+            logs->warn(buffer);
+            break;
+        case FATAL:
+            logs->critical(buffer);
+            break;
+        case ERROR:
+            logs->critical(buffer);
+            break;
+        case INFO:
+            logs->info(buffer);
+            break;
+        case DEBUG:
+            logs->info(buffer);
+            break;
+        case USER:
+            logs->info(buffer);
+            break;
+        default:
+            logs->info(buffer);
+            break;
+        }
+    }
+
+}
 #define FBIT(offset) (1 << offset)
 
 #define FSTR_HELPER(x)	#x
@@ -146,28 +201,9 @@ _AIX            Defined on AIX
       }while(0)
 
 #else /* __ANDROID__ */
-
-#define FLOG_BASE(color, type, flag, ...)                                          \
-	do {                                                                            \
-	   if ( FIF(flag) ) {                                                           \
-	      FILE *unique_niosfoinfsd;                                                 \
-	      if (logger.isFileValid()) {                                            \
-	         unique_niosfoinfsd = fopen( logger.getLogPath().c_str(), "a" );     \
-	         if (!unique_niosfoinfsd) {                                             \
-	            break;                                                              \
-	         }                                                                      \
-	      } else {                                                                  \
-	         unique_niosfoinfsd = stdout;                                           \
-	      }                                                                         \
-	      fprintf(unique_niosfoinfsd,"%s%s[%s] <%s:%d> %s", FOPENCOLOROUTPUT, color,\
-	            FTO_STRING(type),::_tag_.c_str(),__LINE__,FCLOSECOLOROUTPUT);       \
-	      (void)fprintf(unique_niosfoinfsd,__VA_ARGS__);                            \
-	      fprintf(unique_niosfoinfsd,"\n");                                         \
-	      if (logger.isFileValid()) {                                            \
-	         fclose(unique_niosfoinfsd);                                            \
-	      }                                                                         \
-	   }                                                                            \
-	} while(0)
+//static journal::SpdLog logss;
+#define SPDLOG_BASE(type, message, ...)                                                     \
+		journal::LogOut(type, message, __VA_ARGS__);                              \
 
 #define FLOG_CHECK(...)\
       do { GLenum error_unique_niosfoinfsd = glGetError();                         \
@@ -184,12 +220,12 @@ _AIX            Defined on AIX
          }                                                                         \
       }while(0)
 
-#define FLOG_FATAL(...) FLOG_BASE(FCOLOR_GREY, GPU_FATAL,  FFATAL, __VA_ARGS__)
-#define FLOG_INFO(...) FLOG_BASE(FCOLOR_YELLOW, GPU_INFO,  FINFO, __VA_ARGS__)
-#define FLOG_DEBUG(...) FLOG_BASE(FCOLOR_GREEN, GPU_DEBUG,  FDEBUG, __VA_ARGS__)
-#define FLOG_USER(...) FLOG_BASE(FCOLOR_BLUE, GPU_USER,  FUSER, __VA_ARGS__)
-#define FLOG_ERROR(...) FLOG_BASE(FCOLOR_RED, GPU_ERROR,  FERROR, __VA_ARGS__)
-#define FLOG_WARNING(...) FLOG_BASE(FCOLOR_YELLOW, GPU_WARNING,  FWARNING, __VA_ARGS__)
+#define FLOG_FATAL(message, ...) SPDLOG_BASE(journal::FATAL, message, __VA_ARGS__)
+#define FLOG_INFO(message, ...) SPDLOG_BASE(journal::INFO, message, __VA_ARGS__)
+#define FLOG_DEBUG(message, ...) SPDLOG_BASE(journal::DEBUG, message, __VA_ARGS__)
+#define FLOG_USER(message, ...) SPDLOG_BASE(journal::USER, message, __VA_ARGS__)
+#define FLOG_ERROR(message, ...) SPDLOG_BASE(journal::ERROR, message, __VA_ARGS__)
+#define FLOG_WARNING(message, ...) SPDLOG_BASE(journal::WARNING, message, __VA_ARGS__)
 
 #endif /* FILLWAVE_BUILD_RELEASE */
 

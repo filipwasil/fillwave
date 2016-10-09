@@ -64,9 +64,12 @@ void TransformFeedback::begin(GLenum primitiveMode) {
 	      && primitiveMode != GL_LINE_STRIP_ADJACENCY
 #endif
 	   )
-		FLOG_ERROR("not valid primitive type");
-	else
+	{
+		FLOG_ERROR("not valid primitive type", NULL);
+	}
+	else {
 		glBeginTransformFeedback(primitiveMode);
+	}
 }
 
 void TransformFeedback::end() {

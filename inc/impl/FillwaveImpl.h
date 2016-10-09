@@ -271,11 +271,11 @@ inline void Engine::EngineImpl::initExtensions(void) {
 
 	GlewInitResult = glewInit();
 	if (GL_NO_ERROR != glGetError()) {
-		FLOG_ERROR("glewInit returned INVALID_ENUM ... It may happen");
+		FLOG_ERROR("glewInit returned INVALID_ENUM ... It may happen",NULL);
 	}
 
 	if (GLEW_OK != GlewInitResult) {
-		FLOG_ERROR("GLEW init failed. Error: %d", GlewInitResult);
+	    FLOG_ERROR("GLEW init failed. Error: %d", GlewInitResult);
 		exit(EXIT_FAILURE);
 	} else {
 		FLOG_DEBUG("OpenGL Version: %s", glGetString(GL_VERSION));
@@ -333,7 +333,7 @@ inline void Engine::EngineImpl::initStartup() {
 	                                   program, glm::ivec2(mWindowWidth, mWindowHeight)),
 	                             mStartupTimeLimit);
 
-	FLOG_DEBUG("Post processing startup pass added");
+	FLOG_DEBUG("Post processing startup pass added", NULL);
 
 	mStartupTexture = mTextures->get("logo.png", framework::eCompression::eNone);
 	if (not mStartupTexture) {
@@ -342,7 +342,7 @@ inline void Engine::EngineImpl::initStartup() {
 		if (not mStartupTexture) {
 			mStartupTexture = mTextures->get("64_64_64.color",
 			                                 framework::eCompression::eNone);
-			FLOG_ERROR("Fillwave startup logo could not be executed");
+			FLOG_ERROR("Fillwave startup logo could not be executed",NULL);
 		}
 	}
 }
@@ -919,7 +919,7 @@ void Engine::EngineImpl::captureFramebufferToFile(const string& name) {
 	FILE* file;
 	file = fopen(mFileLoader.getRootPath(name).c_str(), "w");
 	if (file == nullptr) {
-		FLOG_ERROR("Error when takin' screenshot");
+		FLOG_ERROR("Error when takin' screenshot",NULL);
 		exit(1);
 	}
 	for (GLuint i = 0; i < mWindowWidth * mWindowHeight; i++) {

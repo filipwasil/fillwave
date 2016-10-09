@@ -77,11 +77,11 @@ std::string UniformBuffer::getName() {
 }
 
 void UniformBuffer::emptyCPU() {
-	FLOG_DEBUG("Not cpu data clear is possible in this buffer");
+	FLOG_DEBUG("Not cpu data clear is possible in this buffer", NULL);
 }
 
 void UniformBuffer::emptyGPU() {
-	FLOG_DEBUG("Not gpu data clear is possible in this buffer");
+	FLOG_DEBUG("Not gpu data clear is possible in this buffer", NULL);
 }
 
 } /* core */

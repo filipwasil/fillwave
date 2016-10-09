@@ -225,7 +225,7 @@ void Engine::registerCallback(puCallback&& callback,
 		mImpl->mFocus.second.push_back(callback.get());
 #else
 		if(mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
-			FLOG_ERROR("AAA");
+			FLOG_ERROR("AAA", NULL);
 			mImpl->mFocus[focusable] = vector<Callback*> (1, callback.get());
 		} else {
 			mImpl->mFocus[focusable].push_back(callback.get());
@@ -248,9 +248,9 @@ void Engine::dropFocus(framework::IFocusable* focusable) {
 	FLOG_ERROR("mImpl->mFocus.size() %lu", mImpl->mFocus.size());
 	if(!mImpl->mFocus.empty()
 	      && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
-		FLOG_ERROR("1");
+		FLOG_ERROR("1", NULL);
 		for (auto& it : mImpl->mFocus[focusable]) {
-			FLOG_ERROR("1");
+			FLOG_ERROR("1", NULL);
 			mImpl->unregisterCallback(it);
 		}
 	}
@@ -477,7 +477,7 @@ void Engine::configureFileLogging(string fileName) {
 		return;
 	}
 	logger.invalidateFile();
-	FLOG_INFO("File logging disabled.");
+	FLOG_INFO("File logging disabled.", NULL);
 }
 
 void Engine::reload() {
@@ -485,7 +485,7 @@ void Engine::reload() {
 }
 
 void Engine::log() {
-	FLOG_INFO("Fillwave engine");
+	FLOG_INFO("Fillwave engine", NULL);
 	const GLubyte* renderer = glGetString(GL_RENDERER);
 	const GLubyte* version = glGetString(GL_VERSION);
 	FLOG_INFO("Renderer: %s\n", renderer);
@@ -617,7 +617,7 @@ VertexBufferParticlesGPU* Engine::storeBuffersInternal(
 	if (buffers->size() < idx ) {
 		return (*buffers)[idx];
 	}
-	FLOG_DEBUG("There is no buffer for requested index. Creating a new one.");
+	FLOG_DEBUG("There is no buffer for requested index. Creating a new one.", NULL);
 	buffers->push_back(new VertexBufferParticlesGPU(particles));
 	return buffers->back();
 }

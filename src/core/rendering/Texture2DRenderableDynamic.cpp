@@ -70,7 +70,7 @@ void Texture2DRenderableDynamic::initUniformsCache() {
 }
 
 void Texture2DRenderableDynamic::reload() {
-	FLOG_DEBUG("Reload");
+	FLOG_DEBUG("Reload", NULL);
 	Texture2DRenderable::reload();
 	initUniformsCache();
 }

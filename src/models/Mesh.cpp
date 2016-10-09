@@ -379,11 +379,11 @@ inline void Mesh::initUniformsCache() {
 
 inline void Mesh::initBuffers() {
 	if (mIBO) {
-		FLOG_INFO("RELOAD IBO");
+		FLOG_INFO("RELOAD IBO", NULL);
 		mIBO->reload();
 	}
 	if (mVBO) {
-		FLOG_INFO("RELOAD VBO");
+		FLOG_INFO("RELOAD VBO", NULL);
 		mVBO->reload();
 	}
 }

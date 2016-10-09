@@ -69,7 +69,7 @@ inline void ICamera::updateView() {
 
 void ICamera::update() {
 	if (mRefreshProjection) {
-		FLOG_DEBUG("Camera projection update");
+		FLOG_DEBUG("Camera projection update", NULL);
 		updateProjection();
 	}
 

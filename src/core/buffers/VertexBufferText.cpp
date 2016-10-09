@@ -57,7 +57,7 @@ VertexBufferText::VertexBufferText(
 			mDataVertices.push_back(vertex);
 		}
 	} else {
-		FLOG_ERROR("Wrong buffer sizes");
+		FLOG_ERROR("Wrong buffer sizes",NULL);
 		return;
 	}
 	mTotalElements = mDataVertices.size();

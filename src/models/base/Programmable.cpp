@@ -120,7 +120,7 @@ void Programmable::addEffect(pIEffect effect) {
 	auto _find_function = [effect](pIEffect & m) -> bool {return m == effect;};
 	auto it = std::remove_if(mEffects.begin(), mEffects.end(), _find_function);
 	if (it != mEffects.end()) {
-		FLOG_DEBUG("Effect already added");
+		FLOG_DEBUG("Effect already added", NULL);
 		return;
 	}
 	mEffects.push_back(effect);

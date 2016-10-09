@@ -574,7 +574,7 @@ jboolean createAssetAudioPlayer(JNIEnv* env, jclass clazz,
 
     // the asset might not be found
     if (NULL == asset) {
-       FLOG_ERROR("Asset not found");
+       FLOG_ERROR("Asset not found",NULL);
        return JNI_FALSE;
     }
 
@@ -644,9 +644,9 @@ void setPlayingAssetAudioPlayer(jboolean isPlaying)
     // make sure the asset audio player was created
     if (NULL != fdPlayerPlay) {
         if (isPlaying) {
-           FLOG_ERROR("Audio playback start");
+           FLOG_ERROR("Audio playback start",NULL);
         } else {
-           FLOG_ERROR("Audio playback stop");
+           FLOG_ERROR("Audio playback stop",NULL);
         }
         // set the player's state
         result = (*fdPlayerPlay)->SetPlayState(fdPlayerPlay, isPlaying ?

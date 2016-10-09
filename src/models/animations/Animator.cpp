@@ -305,7 +305,7 @@ GLuint Animator::getTranslationStep(
 			return i;
 		}
 	}
-	FLOG_FATAL("Animation corrupted. No such translation step.");
+	FLOG_FATAL("Animation corrupted. No such translation step.", NULL);
 	return 0;
 }
 

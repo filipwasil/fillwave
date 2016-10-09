@@ -47,7 +47,7 @@ int8_t android_app_read_cmd(struct android_app* android_app) {
         }
         return cmd;
     } else {
-        FLOG_ERROR("No data on command pipe!");
+        FLOG_ERROR("No data on command pipe!",NULL);
     }
     return -1;
 }
@@ -80,14 +80,14 @@ static void print_cur_config(struct android_app* android_app) {
 void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd) {
     switch (cmd) {
         case APP_CMD_INPUT_CHANGED:
-            FLOG_DEBUG("APP_CMD_INPUT_CHANGED\n");
+            FLOG_DEBUG("APP_CMD_INPUT_CHANGED\n", NULL);
             pthread_mutex_lock(&android_app->mutex);
             if (android_app->inputQueue != NULL) {
                 AInputQueue_detachLooper(android_app->inputQueue);
             }
             android_app->inputQueue = android_app->pendingInputQueue;
             if (android_app->inputQueue != NULL) {
-                FLOG_DEBUG("Attaching input queue to looper");
+                FLOG_DEBUG("Attaching input queue to looper", NULL);
                 AInputQueue_attachLooper(android_app->inputQueue,
                         android_app->looper, LOOPER_ID_INPUT, NULL,
                         &android_app->inputPollSource);
@@ -97,7 +97,7 @@ void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd) {
             break;
 
         case APP_CMD_INIT_WINDOW:
-            FLOG_DEBUG("APP_CMD_INIT_WINDOW\n");
+            FLOG_DEBUG("APP_CMD_INIT_WINDOW\n", NULL);
             pthread_mutex_lock(&android_app->mutex);
             android_app->window = android_app->pendingWindow;
             pthread_cond_broadcast(&android_app->cond);
@@ -105,7 +105,7 @@ void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd) {
             break;
 
         case APP_CMD_TERM_WINDOW:
-            FLOG_DEBUG("APP_CMD_TERM_WINDOW\n");
+            FLOG_DEBUG("APP_CMD_TERM_WINDOW\n", NULL);
             pthread_cond_broadcast(&android_app->cond);
             break;
 
@@ -121,14 +121,14 @@ void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd) {
             break;
 
         case APP_CMD_CONFIG_CHANGED:
-            FLOG_DEBUG("APP_CMD_CONFIG_CHANGED\n");
+            FLOG_DEBUG("APP_CMD_CONFIG_CHANGED\n", NULL);
             AConfiguration_fromAssetManager(android_app->config,
                     android_app->activity->assetManager);
             print_cur_config(android_app);
             break;
 
         case APP_CMD_DESTROY:
-            FLOG_DEBUG("APP_CMD_DESTROY\n");
+            FLOG_DEBUG("APP_CMD_DESTROY\n", NULL);
             android_app->destroyRequested = 1;
             break;
     }
@@ -137,14 +137,14 @@ void android_app_pre_exec_cmd(struct android_app* android_app, int8_t cmd) {
 void android_app_post_exec_cmd(struct android_app* android_app, int8_t cmd) {
     switch (cmd) {
         case APP_CMD_TERM_WINDOW:
-            FLOG_DEBUG("APP_CMD_TERM_WINDOW\n");
+            FLOG_DEBUG("APP_CMD_TERM_WINDOW\n", NULL);
             pthread_mutex_lock(&android_app->mutex);
             android_app->window = NULL;
             pthread_cond_broadcast(&android_app->cond);
             pthread_mutex_unlock(&android_app->mutex);
             break;
         case APP_CMD_SAVE_STATE:
-            FLOG_DEBUG("APP_CMD_SAVE_STATE\n");
+            FLOG_DEBUG("APP_CMD_SAVE_STATE\n", NULL);
             pthread_mutex_lock(&android_app->mutex);
             android_app->stateSaved = 1;
             pthread_cond_broadcast(&android_app->cond);
@@ -162,7 +162,7 @@ void app_dummy() {
 }
 
 static void android_app_destroy(struct android_app* android_app) {
-    FLOG_DEBUG("android_app_destroy!");
+    FLOG_DEBUG("android_app_destroy!", NULL);
     free_saved_state(android_app);
     pthread_mutex_lock(&android_app->mutex);
     if (android_app->inputQueue != NULL) {

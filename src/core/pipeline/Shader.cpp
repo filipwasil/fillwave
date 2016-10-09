@@ -60,7 +60,7 @@ void Shader::loadSource() {
 		glShaderSource(mHandle, 1, &source, nullptr);
 		FLOG_CHECK("Loading source code to the shader failed");
 	} else {
-		FLOG_FATAL("Shader not found, or empty");
+		FLOG_FATAL("Shader not found, or empty", NULL);
 	}
 }
 
@@ -83,7 +83,7 @@ void Shader::compile() {
 		}
 		glDeleteShader(mHandle);
 		mHandle = 0;
-		FLOG_FATAL("Shader can not bee compiled");
+		FLOG_FATAL("Shader can not bee compiled", NULL);
 		std::istringstream lines(mSource);
 		std::string line;
 		int i = 0;

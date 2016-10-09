@@ -153,7 +153,7 @@ bool androidExtract( const std::string& name ) {
 		assetExtracted.write(assetContent.c_str(), assetSize);
 		assetExtracted.close();
 
-		FLOG_DEBUG("File extracted");
+		FLOG_DEBUG("File extracted", NULL);
 		return true;
 	} else {
 		FLOG_ERROR("File %s not extracted. Returning empty string", name.c_str());
