@@ -78,7 +78,7 @@ IndexBuffer::IndexBuffer(
 
 GLuint* IndexBuffer::getDataInternal() {
 	if (mDataIndices.empty()) {
-		FLOG_ERROR("Not cpu data in this buffer");
+		fLogE("Not cpu data in this buffer");
 		return nullptr;
 	}
 	return mDataIndices.data();
@@ -99,7 +99,7 @@ void IndexBuffer::emptyCPU() {
 }
 
 void IndexBuffer::emptyGPU() {
-	FLOG_DEBUG("Not gpu data clear is possible in this buffer");
+	fLogD("Not gpu data clear is possible in this buffer");
 }
 
 } /* core */

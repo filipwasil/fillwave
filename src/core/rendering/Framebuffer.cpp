@@ -51,17 +51,17 @@ Framebuffer::~Framebuffer() {
 
 void Framebuffer::bind(GLuint id) const {
 	glBindFramebuffer(GL_FRAMEBUFFER, mHandles[id]);
-	FLOG_CHECK("glBindFramebuffer GL_FRAMEBUFFER");
+	fLogC("glBindFramebuffer GL_FRAMEBUFFER");
 }
 
 void Framebuffer::bindForWriting(GLuint id) const {
 	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mHandles[id]);
-	FLOG_CHECK("glBindFramebuffer GL_DRAW_FRAMEBUFFER");
+	fLogC("glBindFramebuffer GL_DRAW_FRAMEBUFFER");
 }
 
 void Framebuffer::bindForReading(GLuint id) const {
 	glBindFramebuffer(GL_READ_FRAMEBUFFER, mHandles[id]);
-	FLOG_CHECK("glBindFramebuffer GL_READ_FRAMEBUFFER");
+	fLogC("glBindFramebuffer GL_READ_FRAMEBUFFER");
 }
 
 void Framebuffer::attachTexture2D(
@@ -69,7 +69,7 @@ void Framebuffer::attachTexture2D(
    GLenum target,
    GLuint textureHandle) {
 	glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, target, textureHandle, 0);
-	FLOG_CHECK("Attach texture to framebuffer failed");
+	fLogC("Attach texture to framebuffer failed");
 }
 
 void Framebuffer::attachTexture2DDraw(
@@ -78,7 +78,7 @@ void Framebuffer::attachTexture2DDraw(
    GLuint textureHandle) {
 	glFramebufferTexture2D(
 	   GL_DRAW_FRAMEBUFFER, attachment, target, textureHandle, 0);
-	FLOG_CHECK(
+	fLogC(
 	   "attachTexture2DDraw failed. attachment: 0x%x, target: 0x%x, handle: 0x%x",
 	   attachment, target, textureHandle);
 }
@@ -105,7 +105,7 @@ void Framebuffer::bindScreenFramebufferForWriting() {
 
 void Framebuffer::reload() {
 	glGenFramebuffers(mHowMany, mHandles);
-	FLOG_CHECK("Reloading");
+	fLogC("Reloading");
 }
 
 } /* core */

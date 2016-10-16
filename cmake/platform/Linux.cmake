@@ -74,7 +74,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator freetype logger)
+target_link_libraries(fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator freetype)
 
 # -----------------------------------------------
 # Test app

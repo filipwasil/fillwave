@@ -137,7 +137,7 @@ VertexBufferBasic::VertexBufferBasic(
 					   Weight;
 					boneIdForEachVertex[VertexID]++;
 				} else {
-					FLOG_FATAL("Crater can handle maximum %d bone dependencies.",
+					fLogF("Crater can handle maximum %d bone dependencies.",
 					           FILLWAVE_MAX_BONES_DEPENDENCIES);
 				}
 			}
@@ -351,12 +351,12 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
 
 void VertexBufferBasic::log() const {
 	for (auto it : mDataVertices) {
-		FLOG_INFO("Vertex UV: %f %f", static_cast<double>(it.mTextureUV[0]),
+		fLogI("Vertex UV: %f %f", static_cast<double>(it.mTextureUV[0]),
 		          static_cast<double>(it.mTextureUV[1]));
-		FLOG_INFO("Vertex normal: %f %f %f", static_cast<double>(it.mNormal[0]),
+		fLogI("Vertex normal: %f %f %f", static_cast<double>(it.mNormal[0]),
 		          static_cast<double>(it.mNormal[1]),
 		          static_cast<double>(it.mNormal[2]));
-		FLOG_INFO("Vertex position: %f %f %f",
+		fLogI("Vertex position: %f %f %f",
 		          static_cast<double>(it.mPosition[0]),
 		          static_cast<double>(it.mPosition[1]),
 		          static_cast<double>(it.mPosition[2]));
