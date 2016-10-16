@@ -35,6 +35,7 @@
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/loaders/FileLoader.h>
 #include <fillwave/Texturing.h>
+#include <fillwave/common/Strings.h>
 #include <iterator>
 
 #include <fillwave/Log.h>
@@ -53,26 +54,24 @@ core::Texture2DFile* TextureLoader::load(
    std::string rootPath,
    eCompression compression) {
 
-	FLOG_DEBUG("Texture %s loading ...", filePath.c_str());
+	fLogD("Texture %s loading ...", filePath.c_str());
 	size_t posCheckboard = filePath.find(".checkboard");
 	size_t posColor = filePath.find(".color");
 	size_t posDDS = filePath.find(".dds");
 	uint8_t r = 0, g = 0, b = 0;
 	if (filePath == rootPath) {
-		FLOG_DEBUG("Empty texture %s generation and loading ...",
-		           filePath.c_str());
+		fLogD("Empty texture %s generation and loading ...", filePath.c_str());
 		core::Texture2DFile* file = loadVirtualFileColor(512, 512, 0, 0, 0);
 		return file;
 	}
 
 
 	if (posColor != std::string::npos) {
-		FLOG_DEBUG("Color texture %s generation and loading ...",
-		           filePath.c_str());
+		fLogD("Color texture %s generation and loading ...", filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posColor);
 		std::vector<std::string> tokens = split(sub, '_');
 		if (tokens.size() < 3) {
-			FLOG_ERROR("Could not found color parameters in %s", filePath.c_str());
+			fLogE("Could not found color parameters in %s", filePath.c_str());
 			return nullptr;
 		}
 
@@ -84,12 +83,12 @@ core::Texture2DFile* TextureLoader::load(
 		return file;
 	}
 	if (posCheckboard != std::string::npos) {
-		FLOG_DEBUG("Checkboard texture %s generation and loading ...",
-		           filePath.c_str());
+		fLogD("Checkboard texture %s generation and loading ...",
+		      filePath.c_str());
 		std::string sub = filePath.substr(rootPath.size(), posCheckboard);
 		std::vector<std::string> tokens = split(sub, '_');
 		if (tokens.size() < 3) {
-			FLOG_ERROR("Could not found color parameters in %s", filePath.c_str());
+			fLogE("Could not found color parameters in %s", filePath.c_str());
 			return nullptr;
 		}
 
@@ -101,7 +100,7 @@ core::Texture2DFile* TextureLoader::load(
 		return file;
 	}
 	if (posDDS != std::string::npos) {
-		FLOG_ERROR("Compressed Texture %s not supported yet", filePath.c_str());
+		fLogE("Compressed Texture %s not supported yet", filePath.c_str());
 		return nullptr;
 	}
 #ifdef FILLWAVE_TEXTURE_LOADER_GLI
@@ -236,15 +235,15 @@ core::Texture2DFile* TextureLoader::load(
 	if (content == NULL) { //xxx NULL, not nullptr because the stb library uses NULL
 		FILE *f = fopen(filePath.c_str(), "rb");
 		if (!f) {
-			FLOG_ERROR("Texture %s not found", filePath.c_str());
+			fLogE("Texture %s not found", filePath.c_str());
 		} else {
-			FLOG_ERROR("Texture %s found but not supported ", filePath.c_str());
+			fLogE("Texture %s found but not supported ", filePath.c_str());
 			fclose(f);
 		}
 		return nullptr;
 	}
-	FLOG_DEBUG("Image %s size %dx%d pixel %d bytes per pixel",
-	           filePath.c_str(), w, h, n);
+	fLogD("Image %s size %dx%d pixel %d bytes per pixel",
+	      filePath.c_str(), w, h, n);
 	core::Texture2DFile* file = new core::Texture2DFile();
 
 	file->mHeader.mFormat = format;
@@ -262,7 +261,7 @@ core::Texture2DFile* TextureLoader::load(
 		file->mConfig.mCompression = GL_TRUE;
 		file->mHeader.mInternalFormat = getComporession(compression);
 		file->mConfig.mCompressionSize = 0;
-		FLOG_FATAL("Texture compression feature not ready");
+		fLogF("Texture compression feature not ready");
 	}
 
 	file->mConfig.mBorder = 0;
@@ -271,7 +270,7 @@ core::Texture2DFile* TextureLoader::load(
 
 	file->mAllocation = core::eMemoryAllocation::eMallock;
 
-	FLOG_DEBUG("Flipping Texture %s ...", filePath.c_str());
+	fLogD("Flipping Texture %s ...", filePath.c_str());
 	switch (flip) {
 		case eFlip::eVertical:
 			#pragma omp parallel for schedule(guided) num_threads(2)
@@ -485,7 +484,7 @@ inline GLint TextureLoader::getBytesPerPixel(GLenum format) {
 			bytes = 1;
 			break;
 		default:
-			FLOG_ERROR("Not recognized texture format loading");
+			fLogE("Not recognized texture format loading");
 			bytes = 0;
 			break;
 	}

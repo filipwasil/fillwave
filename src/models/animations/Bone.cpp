@@ -73,7 +73,7 @@ void Bone::setGlobalOffsetMatrix(glm::mat4 m) {
 }
 
 void Bone::log() {
-	FLOG_INFO("Name: %s", (mName.c_str()));
+	fLogI("Name: %s", (mName.c_str()));
 }
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

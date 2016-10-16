@@ -31,8 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SHADER_H_
-#define SHADER_H_
+#pragma once
 
 #include <fillwave/core/GLObject.h>
 
@@ -97,5 +96,3 @@ class Shader {
 std::vector<fillwave::core::Shader*> operator+(
    std::vector<fillwave::core::Shader*> shaders,
    fillwave::core::Shader* shader2);
-
-#endif /* SHADER_H_ */

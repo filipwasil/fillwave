@@ -46,7 +46,7 @@ Texture::Texture(GLenum textureTarget, GLsizei howMany) :
 
 Texture::~Texture() {
 	glDeleteTextures(mHowMany, mHandles);
-	FLOG_CHECK("Could not delete texture");
+	fLogC("Could not delete texture");
 }
 
 GLint Texture::getTarget() {
@@ -55,23 +55,23 @@ GLint Texture::getTarget() {
 
 void Texture::bind(GLuint id) {
 	glBindTexture(mTarget, mHandles[id]);
-	FLOG_CHECK("bind (id) texture");
+	fLogC("bind (id) texture");
 }
 
 void Texture::bind(GLint textureUnit, GLuint id) {
 	glActiveTexture(GL_TEXTURE0 + textureUnit);
 	glBindTexture(mTarget, mHandles[id]);
-	FLOG_CHECK("bind (texUnit, id) texture");
+	fLogC("bind (texUnit, id) texture");
 }
 
 void Texture::unbind() {
 	glBindTexture(mTarget, 0);
-	FLOG_CHECK("unbind texture");
+	fLogC("unbind texture");
 }
 
 void Texture::setParameter(GLenum parameter, GLenum value) {
 	glTexParameteri(mTarget, parameter, value);
-	FLOG_CHECK("setParameter");
+	fLogC("setParameter");
 }
 
 void Texture::setParameters(ParameterList parameters) {
@@ -81,25 +81,25 @@ void Texture::setParameters(ParameterList parameters) {
 }
 
 void Texture::reload() {
-	FLOG_DEBUG("Reload");
+	fLogD("Reload");
 	glGenTextures(mHowMany, mHandles);
-	FLOG_CHECK("glGenTextures");
+	fLogC("glGenTextures");
 }
 
 void bindTexture(GLuint target, GLuint handle) {
 	glBindTexture(target, handle);
-	FLOG_CHECK("bind (id) texture");
+	fLogC("bind (id) texture");
 }
 
 void bindTexture(GLint textureUnit, GLuint target, GLuint handle) {
 	glActiveTexture(GL_TEXTURE0 + textureUnit);
 	glBindTexture(target, handle);
-	FLOG_CHECK("bind (texUnit, id) texture");
+	fLogC("bind (texUnit, id) texture");
 }
 
 void unbindTexture(GLuint target) {
 	glBindTexture(target, 0);
-	FLOG_CHECK("unbind texture");
+	fLogC("unbind texture");
 }
 
 } /* core  */

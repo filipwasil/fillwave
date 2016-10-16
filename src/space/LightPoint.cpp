@@ -103,7 +103,7 @@ CameraPerspective* LightPoint::getShadowCamera(GLenum
 	if (mFaceCameras.count(id) == 1) {
 		return mFaceCameras[id].get();
 	} else {
-		FLOG_FATAL(
+		fLogF(
 		   "Can not get shadow camera. This should never happen. Good bye ...");
 		return nullptr;
 	}
