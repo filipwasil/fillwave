@@ -144,7 +144,7 @@ void FramebufferGeometry::reload() {
 		   GL_TEXTURE_2D, mDeferredColors->getHandle(i));
 	}
 
-	FLOG_CHECK("attachTexture2DDraw color failed");
+	fLogC("attachTexture2DDraw color failed");
 
 	mSummary->bind(mColorBufferSize);
 	attachTexture2DDraw(
