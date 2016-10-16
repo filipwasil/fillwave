@@ -59,7 +59,7 @@ void VertexBufferPosition::log() const {
 		return static_cast<double>(f);
 	};
 	for (auto it : mDataVertices) {
-		FLOG_INFO("Vertex written: %f %f %f %f", d(it.mPosition[0]),
+		fLogI("Vertex written: %f %f %f %f", d(it.mPosition[0]),
 		          d(it.mPosition[1]), d(it.mPosition[2]), d(it.mPosition[3]));
 	}
 }

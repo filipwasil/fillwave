@@ -71,7 +71,7 @@ void IHUDNode::onDetached() {
 
 void IHUDNode::draw() {
 	if (nullptr == mTexture || NULL == mProgram) {
-		FLOG_FATAL("tried to draw a non drawable");
+		fLogF("tried to draw a non drawable");
 	}
 	mProgram->use();
 	mProgram->uniformPush("uPosition", mPosition);

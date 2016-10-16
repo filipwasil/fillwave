@@ -65,7 +65,7 @@ void TransformFeedback::begin(GLenum primitiveMode) {
 #endif
 	   )
 	{
-		FLOG_ERROR("not valid primitive type");
+		fLogE("not valid primitive type");
 	}
 	else
 	{

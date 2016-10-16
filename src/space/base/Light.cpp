@@ -87,7 +87,7 @@ void Light::log() {
 	auto d = [] (GLfloat & f) {
 		return static_cast<double>(f);
 	};
-	FLOG_INFO("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x),
+	fLogI("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x),
 	          d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
 }
 
