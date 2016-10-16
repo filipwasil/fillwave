@@ -55,7 +55,7 @@ inline void TextureSystem::checkExtensions() {
 		auto find_extension = [ccc](const char *name) ->
 		bool {
 			if ((strcmp((const char *)ccc, name) == 0)) {
-				FLOG_INFO("%s supported", name);
+				fLogI("%s supported", name);
 				return true;
 			} else {
 				return false;
@@ -110,12 +110,12 @@ core::Texture2D* TextureSystem::get(
 
 	if (core::Texture2DFile* file = mLoader.load(filePath, flip, GL_RGBA,
 	                                mRootPath, compression)) {
-		FLOG_DEBUG("Texture %s added to manager", filePath.c_str());
+		fLogD("Texture %s added to manager", filePath.c_str());
 		core::ParameterList parameters;
 		return mTextures2D.store(filePath, file, parameters, 1);
 	}
 
-	FLOG_DEBUG("Texture %s not found", filePath.c_str());
+	fLogD("Texture %s not found", filePath.c_str());
 	return nullptr;
 }
 
@@ -156,7 +156,7 @@ core::Texture3D* TextureSystem::get(
 	                         filePathNegY
 	                         + filePathPosZ + filePathNegZ;
 
-	FLOG_DEBUG("Texture to be added: %s", name.c_str());
+	fLogD("Texture to be added: %s", name.c_str());
 
 	core::ParameterList parameters;
 	parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
@@ -165,7 +165,7 @@ core::Texture3D* TextureSystem::get(
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 	parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
-	FLOG_DEBUG("Texture %s will be added to manager", name.c_str());
+	fLogD("Texture %s will be added to manager", name.c_str());
 
 	core::Texture2DFile* filePosX = mLoader.load(filePathPosX, eFlip::eNone,
 	                                GL_RGBA, mRootPath);
@@ -181,7 +181,7 @@ core::Texture3D* TextureSystem::get(
 	                                GL_RGBA, mRootPath);
 
 	if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {
-		FLOG_DEBUG("Texture %s added to manager", name.c_str());
+		fLogD("Texture %s added to manager", name.c_str());
 
 		core::Texture3D* t = mTextures3D.store(name, filePosX, fileNegX, filePosY,
 		                                       fileNegY, filePosZ,
@@ -197,36 +197,36 @@ core::Texture3D* TextureSystem::get(
 		return t;
 	} else {
 		if (!filePosX) {
-			FLOG_DEBUG("3D Texture positive x %s not found", posX.c_str());
+			fLogD("3D Texture positive x %s not found", posX.c_str());
 		} else {
 			delete filePosX;
 		}
 		if (!fileNegX) {
-			FLOG_DEBUG("3D Texture negative x %s not found", negX.c_str());
+			fLogD("3D Texture negative x %s not found", negX.c_str());
 		} else {
 			delete fileNegX;
 		}
 		if (!filePosY) {
-			FLOG_DEBUG("3D Texture positive y %s not found", posY.c_str());
+			fLogD("3D Texture positive y %s not found", posY.c_str());
 		} else {
 			delete filePosY;
 		}
 		if (!fileNegY) {
-			FLOG_DEBUG("3D Texture negative y %s not found", negY.c_str());
+			fLogD("3D Texture negative y %s not found", negY.c_str());
 		} else {
 			delete fileNegY;
 		}
 		if (!filePosZ) {
-			FLOG_DEBUG("3D Texture positive z %s not found", posZ.c_str());
+			fLogD("3D Texture positive z %s not found", posZ.c_str());
 		} else {
 			delete filePosZ;
 		}
 		if (!fileNegZ) {
-			FLOG_DEBUG("3D Texture negative z %s not found", negZ.c_str());
+			fLogD("3D Texture negative z %s not found", negZ.c_str());
 		} else {
 			delete fileNegZ;
 		}
-		FLOG_ERROR("Texture 3D %s not added to manager", name.c_str());
+		fLogE("Texture 3D %s not added to manager", name.c_str());
 		return nullptr;
 	}
 }

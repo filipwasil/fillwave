@@ -31,7 +31,7 @@ bool androidExtractAll() {
 		std::string newPath = androidGetPath(filename);
 		AAsset* asset = AAssetManager_open(gActivity->assetManager, filename,
 		                                   AASSET_MODE_STREAMING);
-		FLOG_DEBUG("File %s opened for extraction ...", filename );
+		fLogD("File %s opened for extraction ...", filename );
 		// Find size
 		off_t assetSize = AAsset_getLength(asset);
 
@@ -48,13 +48,13 @@ bool androidExtractAll() {
 		std::ifstream f(newPath.c_str());
 		if (f.good()) {
 			f.close();
-			FLOG_DEBUG("Asset %s already extracted", filename);
+			fLogD("Asset %s already extracted", filename);
 		} else {
 			// Prepare output buffer
 			std::ofstream assetExtracted(newPath.c_str(),
 			                             std::ios::out | std::ios::binary);
 			if (!assetExtracted) {
-				FLOG_ERROR("File %s not extracted", newPath.c_str());
+				fLogE("File %s not extracted", newPath.c_str());
 				return false;
 			}
 
@@ -62,7 +62,7 @@ bool androidExtractAll() {
 			assetExtracted.write(assetContent.c_str(), assetSize);
 			assetExtracted.close();
 
-			FLOG_DEBUG("File %s extracted", filename);
+			fLogD("File %s extracted", filename);
 		}
 	}
 	return true;
@@ -88,7 +88,7 @@ void androidRead(const char* pFileName, char** ppContent, unsigned int* pSize) {
 		memcpy(*ppContent, pData, fileSize);
 		*pSize = fileSize;
 
-		FLOG_DEBUG("File %s length %d", pFileName, *pSize);
+		fLogD("File %s length %d", pFileName, *pSize);
 		delete pData;
 
 		AAsset_close(pFile);
@@ -109,9 +109,9 @@ void androidReadToString(const char* pFileName, std::string& fileContent) {
 		AAsset_read(pFile, &fileContent[0], fileSize);
 
 		AAsset_close(pFile);
-		FLOG_DEBUG("File %s found", pFileName);
+		fLogD("File %s found", pFileName);
 	} else {
-		FLOG_ERROR("File %s not found", pFileName);
+		fLogE("File %s not found", pFileName);
 	}
 }
 
@@ -120,7 +120,7 @@ bool androidExtract( const std::string& name ) {
 	std::string newPath = androidGetPath(pFile);
 	AAssetDir* a;
 	if ( androidExtracted(name.c_str()) ) {
-		FLOG_DEBUG("File %s already extracted", name.c_str());
+		fLogD("File %s already extracted", name.c_str());
 		return true;
 	}
 
@@ -145,7 +145,7 @@ bool androidExtract( const std::string& name ) {
 		std::ofstream assetExtracted(newPath.c_str(),
 		                             std::ios::out | std::ios::binary);
 		if (!assetExtracted) {
-			FLOG_ERROR("File %s not extracted", newPath.c_str());
+			fLogE("File %s not extracted", newPath.c_str());
 			return false;
 		}
 
@@ -153,10 +153,10 @@ bool androidExtract( const std::string& name ) {
 		assetExtracted.write(assetContent.c_str(), assetSize);
 		assetExtracted.close();
 
-		FLOG_DEBUG("File extracted");
+		fLogD("File extracted");
 		return true;
 	} else {
-		FLOG_ERROR("File %s not extracted. Returning empty string", name.c_str());
+		fLogE("File %s not extracted. Returning empty string", name.c_str());
 		return false;
 	}
 }
@@ -172,9 +172,9 @@ bool androidExtracted(const char* pFile) {
 		AAsset* asset = AAssetManager_open(gActivity->assetManager, pFile,
 		                                   AASSET_MODE_UNKNOWN);
 		if (!asset) {
-			FLOG_ERROR("Could not find %s in asset manager", pFile);
+			fLogE("Could not find %s in asset manager", pFile);
 		} else {
-			FLOG_DEBUG("%s is not extracted", pFile);
+			fLogD("%s is not extracted", pFile);
 		}
 		return false;
 	} else {

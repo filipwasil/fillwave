@@ -238,7 +238,7 @@ void Mesh::drawOcclusionBox(ICamera& camera) {
 
 	glDrawArrays(mRenderMode, 0, gOQVertices);
 
-	FLOG_CHECK("drawOcclusionBox failed");
+	fLogC("drawOcclusionBox failed");
 
 	mOcclusionQuery.end();
 
@@ -317,11 +317,11 @@ void Mesh::onDraw() {
 		/* Perform index drawing */
 		glDrawElements(mRenderMode, mIBO->getElements(),
 		               GL_UNSIGNED_INT, reinterpret_cast<GLvoid*>(0));
-		FLOG_CHECK("glDrawElements failed");
+		fLogC("glDrawElements failed");
 	} else {
 		/* Perform array drawing */
 		glDrawArrays(mRenderMode, 0, mVBO->getElements());
-		FLOG_CHECK("glDrawArrays failed");
+		fLogC("glDrawArrays failed");
 	}
 }
 
@@ -379,11 +379,11 @@ inline void Mesh::initUniformsCache() {
 
 inline void Mesh::initBuffers() {
 	if (mIBO) {
-		FLOG_INFO("RELOAD IBO");
+		fLogI("RELOAD IBO");
 		mIBO->reload();
 	}
 	if (mVBO) {
-		FLOG_INFO("RELOAD VBO");
+		fLogI("RELOAD VBO");
 		mVBO->reload();
 	}
 }
