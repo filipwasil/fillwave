@@ -225,7 +225,7 @@ void Engine::registerCallback(puCallback&& callback,
 		mImpl->mFocus.second.push_back(callback.get());
 #else
 		if(mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
-			FLOG_ERROR("AAA");
+			fLogE("AAA");
 			mImpl->mFocus[focusable] = vector<Callback*> (1, callback.get());
 		} else {
 			mImpl->mFocus[focusable].push_back(callback.get());
@@ -245,12 +245,12 @@ void Engine::dropFocus(framework::IFocusable* focusable) {
 		mImpl->mFocus.second.clear();
 	}
 #else
-	FLOG_ERROR("mImpl->mFocus.size() %lu", mImpl->mFocus.size());
+	fLogE("mImpl->mFocus.size() %lu", mImpl->mFocus.size());
 	if(!mImpl->mFocus.empty()
 	      && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
-		FLOG_ERROR("1");
+		fLogE("1");
 		for (auto& it : mImpl->mFocus[focusable]) {
-			FLOG_ERROR("1");
+			fLogE("1");
 			mImpl->unregisterCallback(it);
 		}
 	}
@@ -285,7 +285,7 @@ pText Engine::storeText(
 	if (not font) {
 		ifstream myfile(mImpl->mFileLoader.getRootPath(fontName + ".meta"));
 		if (!myfile.is_open()) {
-			FLOG_ERROR("No text added. Could not write to metadata file: %s",
+			fLogE("No text added. Could not write to metadata file: %s",
 			           (fontName + ".meta").c_str());
 			return pText();
 		}
@@ -301,7 +301,7 @@ pText Engine::storeText(
 			newFont->mWidths[iASCII] = fWidth;
 			newFont->mOffsets[iASCII] = 1.0f - fHeight - fYOffset;
 			if (control++ > 512) { //xxx limit
-				FLOG_ERROR("Metadata can not be read for file %s.",
+				fLogE("Metadata can not be read for file %s.",
 				           (fontName + ".meta").c_str());
 				myfile.close();
 				delete newFont;
@@ -449,7 +449,7 @@ void Engine::addPostProcess(
 	                        mImpl->mTextures->getDynamic(fragmentShaderPath, program,
 	                              glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight)), lifeTime);
 	mImpl->mPostProcessingPasses.push_back(pass);
-	FLOG_DEBUG("Post processing pass added: %s", fragmentShaderPath.c_str());
+	fLogD("Post processing pass added: %s", fragmentShaderPath.c_str());
 }
 
 void Engine::configureFPSCounter(
@@ -471,13 +471,11 @@ void Engine::configureFPSCounter(
 
 void Engine::configureFileLogging(string fileName) {
 	if (fileName.size() > 1) {
-		FLOG_INFO("File %s will be cleaned and used for logging.",
+		fLogI("File %s will be cleaned and used for logging.",
 		          fileName.c_str());
-		logger.setLogPath(fileName);
-		return;
+        return;
 	}
-	logger.invalidateFile();
-	FLOG_INFO("File logging disabled.");
+	fLogI("File logging disabled.");
 }
 
 void Engine::reload() {
@@ -485,19 +483,19 @@ void Engine::reload() {
 }
 
 void Engine::log() {
-	FLOG_INFO("Fillwave engine");
+	fLogI("Fillwave engine");
 	const GLubyte* renderer = glGetString(GL_RENDERER);
 	const GLubyte* version = glGetString(GL_VERSION);
-	FLOG_INFO("Renderer: %s\n", renderer);
-	FLOG_INFO("OpenGL version supported %s\n", version);
+	fLogI("Renderer: %s\n", renderer);
+	fLogI("OpenGL version supported %s\n", version);
 }
 
 void Engine::pick(GLuint x, GLuint y) {
-	mImpl->pick(x, y);
+    mImpl->pick(x, y);
 }
 
 void Engine::captureFramebufferToFile(const string& name) {
-	mImpl->captureFramebufferToFile(name);
+    mImpl->captureFramebufferToFile(name);
 }
 
 void Engine::captureFramebufferToBuffer(
@@ -505,29 +503,29 @@ void Engine::captureFramebufferToBuffer(
    GLint* sizeInBytes,
    GLuint format,
    GLint bytesPerPixel) {
-	mImpl->mPickingRenderableTexture->bindForRendering();
-	mImpl->drawClear();
-	mImpl->mScene->draw();
-	mImpl->mPickingPixelBuffer->bind();
-	glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, format,
-	             GL_UNSIGNED_BYTE, 0);
-	FLOG_CHECK("reading pixel buffer failed");
+    mImpl->mPickingRenderableTexture->bindForRendering();
+    mImpl->drawClear();
+    mImpl->mScene->draw();
+    mImpl->mPickingPixelBuffer->bind();
+    glReadPixels(0, 0, mImpl->mWindowWidth, mImpl->mWindowHeight, format,
+                 GL_UNSIGNED_BYTE, 0);
+    fLogC("reading pixel buffer failed");
 #ifdef FILLWAVE_GLES_3_0
-	buffer = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
+    buffer = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
-	buffer = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
+    buffer = (GLubyte*) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
 #endif
-	*sizeInBytes = mImpl->mWindowWidth * mImpl->mWindowHeight * bytesPerPixel;
-	buffer[*sizeInBytes] = '\0';
+    *sizeInBytes = mImpl->mWindowWidth * mImpl->mWindowHeight * bytesPerPixel;
+    buffer[*sizeInBytes] = '\0';
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 const aiScene* Engine::getModelFromFile(string path) {
-	FLOG_DEBUG("Reading model %s", path.c_str());
-	return mImpl->mImporter.ReadFile(
-	          (mImpl->mFileLoader.getRootPath() + path).c_str(),
-	          aiProcess_Triangulate | aiProcess_SortByPType
-	          | aiProcess_CalcTangentSpace);
+    fLogD("Reading model %s", path.c_str());
+    return mImpl->mImporter.ReadFile(
+              (mImpl->mFileLoader.getRootPath() + path).c_str(),
+              aiProcess_Triangulate | aiProcess_SortByPType
+              | aiProcess_CalcTangentSpace);
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
@@ -617,7 +615,7 @@ VertexBufferParticlesGPU* Engine::storeBuffersInternal(
 	if (buffers->size() < idx ) {
 		return (*buffers)[idx];
 	}
-	FLOG_DEBUG("There is no buffer for requested index. Creating a new one.");
+	fLogD("There is no buffer for requested index. Creating a new one.");
 	buffers->push_back(new VertexBufferParticlesGPU(particles));
 	return buffers->back();
 }

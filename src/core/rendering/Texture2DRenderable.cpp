@@ -79,7 +79,7 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
 			bindForRendering();
 			mFramebuffer->attachTexture2D(
 			   GL_DEPTH_STENCIL_ATTACHMENT, target, getHandle());
-			FLOG_CHECK("Setting depth framebuffer failed");
+			fLogC("Setting depth framebuffer failed");
 			Framebuffer::bindScreenFramebuffer();
 			break;
 		case GL_DEPTH_ATTACHMENT:
@@ -94,7 +94,7 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
 			glDrawBuffer(none);
 			glReadBuffer(none); //xxx this does not have to be here
 #endif
-			FLOG_CHECK("Setting depth framebuffer failed");
+			fLogC("Setting depth framebuffer failed");
 			Framebuffer::bindScreenFramebuffer();
 			break;
 		case GL_COLOR_ATTACHMENT0:
@@ -102,7 +102,7 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
 			bindForRendering();
 			mFramebuffer->attachTexture2D(
 			   GL_COLOR_ATTACHMENT0, target, getHandle());
-			FLOG_CHECK("Setting RGBA framebuffer failed");
+			fLogC("Setting RGBA framebuffer failed");
 			unbind();
 			Framebuffer::bindScreenFramebuffer();
 			break;
