@@ -69,7 +69,7 @@ inline void ICamera::updateView() {
 
 void ICamera::update() {
 	if (mRefreshProjection) {
-		FLOG_DEBUG("Camera projection update");
+		fLogD("Camera projection update");
 		updateProjection();
 	}
 
@@ -82,9 +82,9 @@ void ICamera::log() const {
 	auto d = [] (GLfloat f) {
 		return static_cast<double>(f);
 	};
-	FLOG_INFO("Position: %f %f %f", d(mTranslation[0]), d(mTranslation[1]),
+	fLogI("Position: %f %f %f", d(mTranslation[0]), d(mTranslation[1]),
 	          d(mTranslation[2]));
-//	FLOG_INFO("Camera rotation: %f %f %f %f ", d(mRotation[0]), d(mRotation[1]),
+//	fLogI("Camera rotation: %f %f %f %f ", d(mRotation[0]), d(mRotation[1]),
 //			d(mRotation[2]), d(mRotation[4]));
 }
 

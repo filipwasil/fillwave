@@ -34,18 +34,9 @@
 /* Exceptions */
 #include <fillwave/Config.h>
 #include <fillwave/common/Strings.h>
-#include <fillwave/common/Logger.h>
 
-#ifdef __ANDROID__
-#include <android/log.h>
-#endif
+#include <stdarg.h>
 
-static fillwave::Logger logger;
-
-#define FBIT(offset) (1 << offset)
-
-#define FSTR_HELPER(x)	#x
-#define FTO_STRING(x)	FSTR_HELPER(x)
 
 /*
 __linux__       Defined on Linux
@@ -59,26 +50,6 @@ __osf__         Defined on Tru64 UNIX (formerly DEC OSF1)
 __sgi           Defined on Irix
 _AIX            Defined on AIX
 */
-
-#if defined (__linux__) || defined(__APPLE__)
-#define FCOLOR_GREEN "32m"
-#define FCOLOR_BLUE "34m"
-#define FCOLOR_YELLOW "33m"
-#define FCOLOR_RED "31m"
-#define FCOLOR_GREY "35m"
-#define FOPENCOLOROUTPUT "\033["
-#define FCLOSECOLOROUTPUT "\033[0m"
-#elif defined(_WIN32)
-#define FCOLOR_GREEN ""
-#define FCOLOR_BLUE ""
-#define FCOLOR_YELLOW ""
-#define FCOLOR_RED ""
-#define FCOLOR_GREY ""
-#define FOPENCOLOROUTPUT ""
-#define FCLOSECOLOROUTPUT ""
-#else
-
-#endif
 
 
 #define FERROR FBIT(0)
@@ -110,35 +81,78 @@ _AIX            Defined on AIX
 
 #define FIF(mask) (::_mask_ & mask)
 
+#define FBIT(offset) (1 << offset)
+
+#define FSTR_HELPER(x)  #x
+#define FTO_STRING(x)   FSTR_HELPER(x)
+
+#ifdef __ANDROID__
+#include <android/log.h>
+#endif
+
+#if !defined(FILLWAVE_BUILD_RELEASE) && !defined(__ANDROID__)
+#include "spdlog/spdlog.h"
+
+namespace spd = spdlog;
+
+static std::shared_ptr<spd::logger> logs = spd::stdout_logger_mt("LogConsole");
+static char glBuffer[256];
+
+#define fLogF(...) do { logs->critical("[%s] <%s:%d> %s", FTO_STRING(type), ::_tag_.c_str(), __LINE__, __VA_ARGS__); } while(0)
+#define fLogE(...) do { logs->critical("[%s] <%s:%d> %s", FTO_STRING(type), ::_tag_.c_str(), __LINE__, __VA_ARGS__); } while(0)
+#define fLogI(...) do { logs->info("[%s] <%s:%d> %s", FTO_STRING(type), ::_tag_.c_str(), __LINE__, __VA_ARGS__); } while(0)
+#define fLogU(...) do { logs->info("[%s] <%s:%d> %s", FTO_STRING(type), ::_tag_.c_str(), __LINE__, __VA_ARGS__); } while(0)
+#define fLogD(...) do { logs->info("[%s] <%s:%d> %s", FTO_STRING(type), ::_tag_.c_str(), __LINE__, __VA_ARGS__); } while(0)
+#define fLogW(...) do { logs->warn("[%s] <%s:%d> %s", FTO_STRING(type), ::_tag_.c_str(), __LINE__, __VA_ARGS__); } while(0)
+#define fLogC(...) do {\
+    GLenum errorCode = getGlError();\
+    if (0 != errorCode) { /* GL_NO_ERROR */\
+        int n = sprintf(glBuffer, "[%s 0x%04x] ", "CORE ERROR:", errorCode);\
+        if (n > 0) {\
+            logs->critical(glBuffer);\
+        }\
+        if (errorCode == 0x0506) { /* GL_INVALID_FRAMEBUFFER_OPERATION */\
+            GLenum status = getFramebufferStatus();\
+            n = sprintf(glBuffer, "[%s 0x%04x] ", "FRAMEBUFFER_STATUS:", status);\
+            if (n > 0) {\
+                logs->critical(glBuffer);\
+            }\
+        }\
+        logs->critical(__VA_ARGS__);\
+        abort();\
+    }\
+\
+} while (0)
+#endif
+
 #ifdef FILLWAVE_BUILD_RELEASE
 
 /* No debugs for release */
 
-#define FLOG_FATAL(...) do {} while(0)
-#define FLOG_INFO(...) do {} while(0)
-#define FLOG_DEBUG(...) do {} while(0)
-#define FLOG_USER(...) do {} while(0)
-#define FLOG_WARNING(...) do {} while(0)
-#define FLOG_ERROR(...) do {} while(0)
-#define FLOG_BASE(color, type, flag, ...) do {} while(0)
-#define FLOG_CHECK(...) do {} while(0)
+#define fLogF(...) { }
+#define fLogI(...) { }
+#define fLogD(...) { }
+#define fLogU(...) { }
+#define fLogW(...) { }
+#define fLogE(...) { }
+#define fLogC(...) { }
 
 #else /* FILLWAVE_BUILD_RELEASE */
 
 #ifdef __ANDROID__
-#define FLOG_FATAL(...) do { if ( FIF(FFATAL) ) (void)__android_log_print(ANDROID_LOG_FATAL, ::_tag_.c_str(), __VA_ARGS__);} while(0)
-#define FLOG_INFO(...) do { if ( FIF(FINFO) ) (void)__android_log_print(ANDROID_LOG_INFO, ::_tag_.c_str(), __VA_ARGS__);} while(0)
-#define FLOG_DEBUG(...) do { if ( FIF(FDEBUG) ) (void)__android_log_print(ANDROID_LOG_DEBUG, ::_tag_.c_str(), __VA_ARGS__);} while(0)
-#define FLOG_USER(...) do { if ( FIF(FUSER) ) (void)__android_log_print(ANDROID_LOG_WARN, ::_tag_.c_str(), __VA_ARGS__);} while(0)
-#define FLOG_WARNING(...) do { if ( FIF(FWARNING) ) (void)__android_log_print(ANDROID_LOG_WARN, ::_tag_.c_str(), __VA_ARGS__);} while(0)
-#define FLOG_ERROR(...) do { if ( FIF(FERROR) ) (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), __VA_ARGS__);} while(0)
+#define fLogF(...) do { if ( FIF(FFATAL) ) (void)__android_log_print(ANDROID_LOG_FATAL, ::_tag_.c_str(), __VA_ARGS__);} while(0)
+#define fLogI(...) do { if ( FIF(FINFO) ) (void)__android_log_print(ANDROID_LOG_INFO, ::_tag_.c_str(), __VA_ARGS__);} while(0)
+#define fLogD(...) do { if ( FIF(FDEBUG) ) (void)__android_log_print(ANDROID_LOG_DEBUG, ::_tag_.c_str(), __VA_ARGS__);} while(0)
+#define fLogU(...) do { if ( FIF(FUSER) ) (void)__android_log_print(ANDROID_LOG_WARN, ::_tag_.c_str(), __VA_ARGS__);} while(0)
+#define fLogW(...) do { if ( FIF(FWARNING) ) (void)__android_log_print(ANDROID_LOG_WARN, ::_tag_.c_str(), __VA_ARGS__);} while(0)
+#define fLogE(...) do { if ( FIF(FERROR) ) (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), __VA_ARGS__);} while(0)
 
-#define FLOG_CHECK(...)\
-      do { GLenum error_unique_niosfoinfsd = glGetError();\
-         if ( error_unique_niosfoinfsd != GL_NO_ERROR) {\
-            (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "CORE ERROR:", error_unique_niosfoinfsd);\
+#define fLogC(...)\
+      do { GLenum errorCode = glGetError();\
+         if ( errorCode != GL_NO_ERROR) {\
+            (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "CORE ERROR:", errorCode);\
             (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), __VA_ARGS__);\
-            if (error_unique_niosfoinfsd == 0x0506) { /*Framebuffer error*/ \
+            if (errorCode == 0x0506) { /*Framebuffer error*/ \
               GLenum status = getFramebufferStatus();\
               (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "FRAMEBUFFER_STATUS:", status);\
             }\
@@ -147,50 +161,8 @@ _AIX            Defined on AIX
 
 #else /* __ANDROID__ */
 
-#define FLOG_BASE(color, type, flag, ...)                                          \
-	do {                                                                            \
-	   if ( FIF(flag) ) {                                                           \
-	      FILE *unique_niosfoinfsd;                                                 \
-	      if (logger.isFileValid()) {                                            \
-	         unique_niosfoinfsd = fopen( logger.getLogPath().c_str(), "a" );     \
-	         if (!unique_niosfoinfsd) {                                             \
-	            break;                                                              \
-	         }                                                                      \
-	      } else {                                                                  \
-	         unique_niosfoinfsd = stdout;                                           \
-	      }                                                                         \
-	      fprintf(unique_niosfoinfsd,"%s%s[%s] <%s:%d> %s", FOPENCOLOROUTPUT, color,\
-	            FTO_STRING(type),::_tag_.c_str(),__LINE__,FCLOSECOLOROUTPUT);       \
-	      (void)fprintf(unique_niosfoinfsd,__VA_ARGS__);                            \
-	      fprintf(unique_niosfoinfsd,"\n");                                         \
-	      if (logger.isFileValid()) {                                            \
-	         fclose(unique_niosfoinfsd);                                            \
-	      }                                                                         \
-	   }                                                                            \
-	} while(0)
-
-#define FLOG_CHECK(...)\
-      do { GLenum error_unique_niosfoinfsd = glGetError();                         \
-         if ( error_unique_niosfoinfsd != GL_NO_ERROR) {                           \
-            fprintf(stdout,"[%s 0x%04x] ","CORE ERROR:",error_unique_niosfoinfsd); \
-            if (error_unique_niosfoinfsd == 0x0506) { /*Framebuffer error*/        \
-               GLenum status = getFramebufferStatus();                             \
-               fprintf(stdout,"[%s 0x%04x] ","FRAMEBUFFER_STATUS:",status);        \
-            }                                                                      \
-            fprintf(stdout,"<%s:%d> ",::_tag_.c_str(),__LINE__);                   \
-            (void)fprintf(stdout,__VA_ARGS__);                                     \
-            fprintf(stdout,"\n");                                                  \
-            abort();                                                               \
-         }                                                                         \
-      }while(0)
-
-#define FLOG_FATAL(...) FLOG_BASE(FCOLOR_GREY, GPU_FATAL,  FFATAL, __VA_ARGS__)
-#define FLOG_INFO(...) FLOG_BASE(FCOLOR_YELLOW, GPU_INFO,  FINFO, __VA_ARGS__)
-#define FLOG_DEBUG(...) FLOG_BASE(FCOLOR_GREEN, GPU_DEBUG,  FDEBUG, __VA_ARGS__)
-#define FLOG_USER(...) FLOG_BASE(FCOLOR_BLUE, GPU_USER,  FUSER, __VA_ARGS__)
-#define FLOG_ERROR(...) FLOG_BASE(FCOLOR_RED, GPU_ERROR,  FERROR, __VA_ARGS__)
-#define FLOG_WARNING(...) FLOG_BASE(FCOLOR_YELLOW, GPU_WARNING,  FWARNING, __VA_ARGS__)
-
 #endif /* FILLWAVE_BUILD_RELEASE */
 
 #endif /* __ANDROID__ */
+
+
