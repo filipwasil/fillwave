@@ -69,7 +69,7 @@ void IBuffer::setTarget(GLuint target) {
 	      || target == GL_PIXEL_PACK_BUFFER) {
 		mTarget = target;
 	} else {
-		FLOG_ERROR("Invalid target %d", mTarget);
+		fLogE("Invalid target %d", mTarget);
 	}
 }
 
@@ -81,7 +81,7 @@ void IBuffer::setDrawType(GLuint dataStoreType) {
 	      || dataStoreType == GL_DYNAMIC_COPY) {
 		mDataStoreType = dataStoreType;
 	} else {
-		FLOG_ERROR("Invalid data store type %d", mTarget);
+		fLogE("Invalid data store type %d", mTarget);
 	}
 }
 
@@ -107,37 +107,37 @@ GLvoid* IBuffer::getData() const {
 
 void IBuffer::unmap() const {
 	glUnmapBuffer(mTarget);
-	FLOG_CHECK("Could not unmap the buffer object");
+	fLogC("Could not unmap the buffer object");
 }
 
 void IBuffer::bind(GLuint id) const {
 	glBindBuffer(mTarget, mHandles[id]);
-	FLOG_CHECK("Could not bind the buffer object");
+	fLogC("Could not bind the buffer object");
 }
 
 void IBuffer::bindBase(GLuint id) const {
 	glBindBufferBase(mTarget, mIndex, mHandles[id]);
-	FLOG_CHECK("Bind the uniform buffer object");
+	fLogC("Bind the uniform buffer object");
 }
 
 void IBuffer::unbind() {
 	glBindBuffer(mTarget, 0);
-	FLOG_CHECK("Could not unbind the buffer object");
+	fLogC("Could not unbind the buffer object");
 }
 
 void IBuffer::bind(GLuint externalTarget, GLuint id) const {
 	glBindBuffer(externalTarget, mHandles[id]);
-	FLOG_CHECK("Could not bind the buffer object");
+	fLogC("Could not bind the buffer object");
 }
 
 void IBuffer::bindBase(GLuint externalTarget, GLuint id) const {
 	glBindBufferBase(externalTarget, mIndex, mHandles[id]);
-	FLOG_CHECK("Bind the uniform buffer object");
+	fLogC("Bind the uniform buffer object");
 }
 
 void IBuffer::unbindBase(GLuint externalTarget) {
 	glBindBufferBase(externalTarget, mIndex, 0);
-	FLOG_CHECK("Could not unbind the buffer object");
+	fLogC("Could not unbind the buffer object");
 }
 
 void IBuffer::send() {
@@ -148,7 +148,7 @@ void IBuffer::send() {
 		emptyCPU();
 		mData = nullptr;
 #endif
-		FLOG_CHECK("Could not send the data");
+		fLogC("Could not send the data");
 	}
 }
 
@@ -156,17 +156,17 @@ GLvoid* IBuffer::mapRange(GLenum access, GLuint size) {
 	GLvoid* ptr = nullptr;
 	if (size) {
 		ptr = glMapBufferRange(mTarget, 0, size, access);
-		FLOG_CHECK("Could not map range of the buffer object");
+		fLogC("Could not map range of the buffer object");
 	} else {
 		ptr = glMapBufferRange(mTarget, 0, mSize, access);
-		FLOG_CHECK("Could not map range of the buffer object");
+		fLogC("Could not map range of the buffer object");
 	}
 	return ptr;
 }
 
 void IBuffer::reload() {
 	glGenBuffers(mHowMany, mHandles);
-	FLOG_CHECK("reload");
+	fLogC("reload");
 }
 
 /* Feature not available in OpenGL ES  < 3.1 */
@@ -174,19 +174,19 @@ void IBuffer::reload() {
 #else
 GLvoid* IBuffer::map(GLenum access) const {
 	GLvoid* ptr = glMapBuffer(mTarget, access);
-	FLOG_CHECK("Could not map the buffer object");
+	fLogC("Could not map the buffer object");
 	return ptr;
 }
 #endif
 
 void unbindBuffer(GLuint target) {
 	glBindBuffer(target, 0);
-	FLOG_CHECK("Could not unbind the buffer object");
+	fLogC("Could not unbind the buffer object");
 }
 
 void bindBuffer(GLuint target, GLuint handle) {
 	glBindBuffer(target, handle);
-	FLOG_CHECK("Could not bind the buffer object");
+	fLogC("Could not bind the buffer object");
 }
 
 } /* core */

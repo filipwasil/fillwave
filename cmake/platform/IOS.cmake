@@ -60,8 +60,8 @@ endif()
 
 if(FILLWAVE_BUILD_DEV)
 else()
-   add_dependencies(fillwave freetype assimp fontgenerator logger)
-   target_link_libraries(fillwave freetype assimp fontgenerator logger)
+   add_dependencies(fillwave freetype assimp fontgenerator)
+   target_link_libraries(fillwave freetype assimp fontgenerator)
 endif()
 
 # -----------------------------------------------

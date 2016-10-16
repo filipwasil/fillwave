@@ -43,7 +43,7 @@ namespace core {
 GLObject::GLObject(GLsizei howMany) :
 	mHowMany(howMany) {
 	if (mHowMany > static_cast<int>(FILLWAVE_GLOBJECT_MAX_CAPACITY)) {
-		FLOG_FATAL("Currect globject size exceeded");
+		fLogF("Currect globject size exceeded");
 	}
 
 	for(GLsizei i = 0; i < mHowMany; i++) {

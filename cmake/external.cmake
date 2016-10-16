@@ -31,8 +31,6 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/TextureLoader)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src/common/logger)
-
 if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
     set( FILLWAVE_GLEW_BUILD glew32 )
 elseif( CMAKE_SIZEOF_VOID_P EQUAL 8 )

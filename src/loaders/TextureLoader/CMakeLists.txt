@@ -21,7 +21,7 @@ else()
 	endif(FILLWAVE_BUILD_RPM)
 endif()
 
-target_link_libraries(textureloader logger)
+target_link_libraries(textureloader)
 
 IF(ANDROID)
 	target_link_libraries(textureloader log android GLESv3)
