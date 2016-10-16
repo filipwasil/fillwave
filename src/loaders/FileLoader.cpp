@@ -80,7 +80,7 @@ void ReadFile(string pFileName, string& fileContent) {
 		ifs.read(&fileContent[0], size);
 		ifs.close();
 	} else {
-		FLOG_ERROR("File %s not found", pFileName.c_str());
+		fLogE("File %s not found", pFileName.c_str());
 	}
 }
 

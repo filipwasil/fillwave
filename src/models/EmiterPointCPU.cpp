@@ -182,7 +182,7 @@ inline void EmiterPointCPU::coreDraw() {
 //   glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
 	glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT,
 	               reinterpret_cast<GLvoid*>(0));
-	FLOG_CHECK("Draw elements");
+	fLogC("Draw elements");
 	glDisable(GL_BLEND);
 	if (not mDepthTesting) {
 		glDepthMask(GL_TRUE);

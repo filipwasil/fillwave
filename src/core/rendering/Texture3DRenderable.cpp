@@ -96,14 +96,14 @@ void Texture3DRenderable::setAttachment(GLenum attachment) {
 	bind();
 	mShadowTexture->bindForRendering();
 	mShadowTexture->setAttachment(attachment);
-	FLOG_CHECK("Setting RGBA framebuffer failed");
+	fLogC("Setting RGBA framebuffer failed");
 	unbind();
 	core::Framebuffer::bindScreenFramebuffer();
 }
 
 void Texture3DRenderable::setAttachmentFace(GLenum face, GLenum attachment) {
 	mShadowTexture->attachTexture2DDraw(attachment, face, getHandle());
-	FLOG_CHECK("Setting Face framebuffer failed");
+	fLogC("Setting Face framebuffer failed");
 #ifdef FILLWAVE_GLES_3_0
 	GLenum target = attachment;
 	glDrawBuffers(1, &target);
