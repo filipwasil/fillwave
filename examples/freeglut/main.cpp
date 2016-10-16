@@ -81,7 +81,7 @@ void showDescription() {
 }
 
 void disp(void) {
-	FLOG_ERROR("display");
+	fLogE("display");
 }
 
 void timer(int) {

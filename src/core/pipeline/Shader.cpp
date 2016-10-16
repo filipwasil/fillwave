@@ -34,8 +34,7 @@
 
 #include <fillwave/core/pipeline/Shader.h>
 #include <fillwave/Log.h>
-
-#include <string>
+#include <sstream>
 
 FLOGINIT("Shader", FERROR | FFATAL | FINFO | FDEBUG)
 
@@ -51,16 +50,16 @@ Shader::Shader(GLuint shaderType, const std::string& shaderSource) :
 
 Shader::~Shader() {
 	glDeleteShader(mHandle);
-	FLOG_CHECK("Shader destructor");
+	fLogC("Shader destructor");
 }
 
 void Shader::loadSource() {
 	if (not mSource.empty()) {
 		const GLchar *source = (const GLchar *) mSource.c_str();
 		glShaderSource(mHandle, 1, &source, nullptr);
-		FLOG_CHECK("Loading source code to the shader failed");
+		fLogC("Loading source code to the shader failed");
 	} else {
-		FLOG_FATAL("Shader not found, or empty");
+		fLogF("Shader not found, or empty");
 	}
 }
 
@@ -69,7 +68,7 @@ void Shader::compile() {
 
 	GLint status = 0;
 	glGetShaderiv(mHandle, GL_COMPILE_STATUS, &status);
-	FLOG_DEBUG("Compilation status: %d", status);
+	fLogD("Compilation status: %d", status);
 	if (!status) {
 		// There was an error, print it out
 		GLint infoLogLength = 0;
@@ -78,17 +77,17 @@ void Shader::compile() {
 		char* pShaderInfoLog = new char[infoLogLength];
 		if (pShaderInfoLog) {
 			glGetShaderInfoLog(mHandle, infoLogLength, NULL, pShaderInfoLog);
-			FLOG_ERROR("Compilation: %s", pShaderInfoLog);
+			fLogE("Compilation: %s", pShaderInfoLog);
 			delete pShaderInfoLog;
 		}
 		glDeleteShader(mHandle);
 		mHandle = 0;
-		FLOG_FATAL("Shader can not bee compiled");
+		fLogF("Shader can not bee compiled");
 		std::istringstream lines(mSource);
 		std::string line;
 		int i = 0;
 		while (std::getline(lines, line)) {
-			FLOG_ERROR("[%d] %s", i++, line.c_str());
+			fLogE("[%d] %s", i++, line.c_str());
 		}
 	}
 }
@@ -111,14 +110,14 @@ void Shader::log() {
 	}
 
 	if (infologLength > 0) {
-		FLOG_INFO("%s\n", infoLog.data());
+		fLogI("%s\n", infoLog.data());
 	}
-	FLOG_INFO("%s\n", mSource.c_str());
+	fLogI("%s\n", mSource.c_str());
 }
 
 void Shader::reload() {
 	mHandle = glCreateShader(mType);
-	FLOG_CHECK("Shader creation failed");
+	fLogC("Shader creation failed");
 	loadSource();
 	compile();
 }
@@ -139,7 +138,7 @@ std::string Shader::getTypeString() {
 			return "GL_TESS_EVALUATION_SHADER";
 #endif
 		default:
-			FLOG_FATAL("Shader type not recognized: %d", mType);
+			fLogF("Shader type not recognized: %d", mType);
 			return "";
 	}
 }

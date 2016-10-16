@@ -105,7 +105,7 @@ Model::Model(Engine* engine, core::Program* program,
 		initUniformsCache();
 		loadNodes(scene->mRootNode, scene, engine, this);
 	} else {
-		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
+		fLogF("Model: %s could not be read", shapePath.c_str());
 	}
 #else
 	std::vector<tinyobj::shape_t> shapes;
@@ -113,16 +113,16 @@ Model::Model(Engine* engine, core::Program* program,
 	tinyobj::attrib_t attrib;
 	std::string err;
 	if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, shapePath.c_str())) {
-		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
+		fLogF("Model: %s could not be read", shapePath.c_str());
 	}
 	if (!err.empty()) { // `err` may contain warning message.
-		FLOG_WARNING("%s", err.c_str());
+		fLogW("%s", err.c_str());
 	}
 
 	initShadowing(engine);
 	for (GLuint i = 0; i < shapes.size(); i++) {
 		if (shapes[i].mesh.material_ids.empty()) {
-			FLOG_FATAL("No materials available");
+			fLogF("No materials available");
 		}
 
 		int materialId = shapes[i].mesh.material_ids[0];
@@ -170,7 +170,7 @@ Model::Model(
 		loadNodes(scene->mRootNode, scene, engine, this, diffuseMapPath,
 		          normalMapPath, specularMapPath);
 	} else {
-		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
+		fLogF("Model: %s could not be read", shapePath.c_str());
 	}
 #else
 	std::vector<tinyobj::shape_t> shapes;
@@ -178,16 +178,16 @@ Model::Model(
 	tinyobj::attrib_t attrib;
 	std::string err;
 	if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, shapePath.c_str())) {
-		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
+		fLogF("Model: %s could not be read", shapePath.c_str());
 	}
 	if (!err.empty()) { // `err` may contain warning message.
-		FLOG_WARNING("%s", err.c_str());
+		fLogW("%s", err.c_str());
 	}
 
 	initShadowing(engine);
 	for (GLuint i = 0; i < shapes.size(); i++) {
 		if (shapes[i].mesh.material_ids.empty()) {
-			FLOG_FATAL("No materials available");
+			fLogF("No materials available");
 		}
 
 		attach(loadMesh(shapes[i], attrib,
@@ -227,7 +227,7 @@ Model::Model(
 		loadNodes(scene->mRootNode, scene, engine, this, diffuseMap, normalMap,
 		          specularMap, material);
 	} else {
-		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
+		fLogF("Model: %s could not be read", shapePath.c_str());
 	}
 #else
 	std::vector<tinyobj::shape_t> shapes;
@@ -235,16 +235,16 @@ Model::Model(
 	tinyobj::attrib_t attrib;
 	std::string err;
 	if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, shapePath.c_str())) {
-		FLOG_FATAL("Model: %s could not be read", shapePath.c_str());
+		fLogF("Model: %s could not be read", shapePath.c_str());
 	}
 	if (!err.empty()) { // `err` may contain warning message.
-		FLOG_WARNING("%s", err.c_str());
+		fLogW("%s", err.c_str());
 	}
 
 	initShadowing(engine);
 	for (GLuint i = 0; i < shapes.size(); i++) {
 		if (shapes[i].mesh.material_ids.empty()) {
-			FLOG_FATAL("No materials available");
+			fLogF("No materials available");
 		}
 
 		attach(loadMesh(shapes[i], attrib,
@@ -274,7 +274,7 @@ void Model::reload() {
 inline void Model::initAnimations(const aiScene* scene) {
 	if (scene->HasAnimations()) {
 		mAnimator = new Animator(scene);
-		FLOG_DEBUG("attached TimedBoneUpdateCallback to model");
+		fLogD("attached TimedBoneUpdateCallback to model");
 		this->attachHierarchyCallback(std::make_unique<TimedBoneUpdateCallback>(this));
 	}
 }
@@ -436,9 +436,9 @@ void Model::setActiveAnimation(GLint animationID) {
 	if (mAnimator->getAnimations() > animationID) {
 		mActiveAnimation = animationID;
 	} else {
-		FLOG_ERROR("There is no animation for slot: %d", animationID);
-		FLOG_DEBUG("Maximum number of animations: %d",
-		           mAnimator->getAnimations());
+		fLogE("There is no animation for slot: %d", animationID);
+		fLogD("Maximum number of animations: %d",
+		      mAnimator->getAnimations());
 	}
 }
 

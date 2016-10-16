@@ -448,7 +448,7 @@ inline void RendererDR::initGeometryBuffer() {
 inline void RendererDR::initGeometryShading() {
 	GLint MaxPatchVertices = 0;
 	glGetIntegerv(GL_MAX_PATCH_VERTICES, &MaxPatchVertices);
-	FLOG_DEBUG("Max supported patch vertices %d\n", MaxPatchVertices);
+	fLogD("Max supported patch vertices %d\n", MaxPatchVertices);
 	glPatchParameteri(GL_PATCH_VERTICES, 3);
 }
 

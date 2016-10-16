@@ -21,6 +21,7 @@
 #include <fillwave/management/TextureSystem.h>
 
 #include <fillwave/common/Macros.h>
+#include <fillwave/common/Strings.h>
 #include <fillwave/loaders/FileLoader.h>
 #include <fillwave/management/BufferSystem.h>
 
@@ -271,14 +272,14 @@ inline void Engine::EngineImpl::initExtensions(void) {
 
 	GlewInitResult = glewInit();
 	if (GL_NO_ERROR != glGetError()) {
-		FLOG_ERROR("glewInit returned INVALID_ENUM ... It may happen");
+		fLogE("glewInit returned INVALID_ENUM ... It may happen");
 	}
 
 	if (GLEW_OK != GlewInitResult) {
-		FLOG_ERROR("GLEW init failed. Error: %d", GlewInitResult);
+		fLogE("GLEW init failed. Error: %d", GlewInitResult);
 		exit(EXIT_FAILURE);
 	} else {
-		FLOG_DEBUG("OpenGL Version: %s", glGetString(GL_VERSION));
+		fLogD("OpenGL Version: %s", glGetString(GL_VERSION));
 	}
 
 #endif
@@ -333,7 +334,7 @@ inline void Engine::EngineImpl::initStartup() {
 	                                   program, glm::ivec2(mWindowWidth, mWindowHeight)),
 	                             mStartupTimeLimit);
 
-	FLOG_DEBUG("Post processing startup pass added");
+	fLogD("Post processing startup pass added");
 
 	mStartupTexture = mTextures->get("logo.png", framework::eCompression::eNone);
 	if (not mStartupTexture) {
@@ -342,7 +343,7 @@ inline void Engine::EngineImpl::initStartup() {
 		if (not mStartupTexture) {
 			mStartupTexture = mTextures->get("64_64_64.color",
 			                                 framework::eCompression::eNone);
-			FLOG_ERROR("Fillwave startup logo could not be executed");
+			fLogE("Fillwave startup logo could not be executed");
 		}
 	}
 }
@@ -399,7 +400,7 @@ inline void Engine::EngineImpl::reloadPickingBuffer() {
 	glReadPixels(0, 0, mWindowWidth, mWindowHeight,
 	             GL_RGBA,
 	             GL_UNSIGNED_BYTE, 0);
-	FLOG_CHECK("glReadPixels");
+	fLogC("glReadPixels");
 	mPickingPixelBuffer->unbind();
 }
 
@@ -408,11 +409,11 @@ inline void Engine::EngineImpl::initContext(void) {
 	             1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-	FLOG_CHECK("Could not set OpenGL depth testing options");
+	fLogC("Could not set OpenGL depth testing options");
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
-	FLOG_CHECK("Could not set OpenGL culling options");
+	fLogC("Could not set OpenGL culling options");
 }
 
 void Engine::EngineImpl::draw(GLfloat time) {
@@ -822,7 +823,7 @@ void Engine::EngineImpl::registerCallback(
 
 void Engine::EngineImpl::unregisterCallback(
    framework::Callback* callback) {
-	FLOG_ERROR("mCallbacks.size() %lu", mCallbacks.size());
+	fLogE("mCallbacks.size() %lu", mCallbacks.size());
 	if (!mCallbacks.empty()
 	      && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
 		vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
@@ -887,7 +888,7 @@ void Engine::EngineImpl::pick(GLuint x, GLuint y) {
 	mPickingPixelBuffer->bind();
 	glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA,
 	             GL_UNSIGNED_BYTE, 0);
-	FLOG_CHECK("glReadPixels failed");
+	fLogC("glReadPixels failed");
 #ifdef FILLWAVE_GLES_3_0
 	GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
@@ -909,7 +910,7 @@ void Engine::EngineImpl::captureFramebufferToFile(const string& name) {
 	mPickingPixelBuffer->bind();
 	glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA,
 	             GL_UNSIGNED_BYTE, 0);
-	FLOG_CHECK("reading pixel buffer failed");
+	fLogC("reading pixel buffer failed");
 #ifdef FILLWAVE_GLES_3_0
 	GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
@@ -919,7 +920,7 @@ void Engine::EngineImpl::captureFramebufferToFile(const string& name) {
 	FILE* file;
 	file = fopen(mFileLoader.getRootPath(name).c_str(), "w");
 	if (file == nullptr) {
-		FLOG_ERROR("Error when takin' screenshot");
+		fLogE("Error when takin' screenshot");
 		exit(1);
 	}
 	for (GLuint i = 0; i < mWindowWidth * mWindowHeight; i++) {

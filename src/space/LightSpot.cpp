@@ -82,26 +82,26 @@ void LightSpot::log() {
 	auto d = [] (GLfloat f) {
 		return static_cast<double>(f);
 	};
-	FLOG_INFO("mShadowCamera->getTranslation(): :%f :%f :%f",
-	          d(mShadowCamera->getTranslation().x),
-	          d(mShadowCamera->getTranslation().y),
-	          d(mShadowCamera->getTranslation().z));
-	FLOG_INFO("mShadowCamera[0]: :%f :%f :%f :%f",
-	          d(mShadowCamera->getEye()[0].x), d(mShadowCamera->getEye()[0].y),
-	          d(mShadowCamera->getEye()[0].z), d(mShadowCamera->getEye()[0].w));
-	FLOG_INFO("mShadowCamera[1]: :%f :%f :%f :%f",
-	          d(mShadowCamera->getEye()[1].x), d(mShadowCamera->getEye()[1].y),
-	          d(mShadowCamera->getEye()[1].z), d(mShadowCamera->getEye()[1].w));
-	FLOG_INFO("mShadowCamera[2]: :%f :%f :%f :%f",
-	          d(mShadowCamera->getEye()[2].x), d(mShadowCamera->getEye()[2].y),
-	          d(mShadowCamera->getEye()[2].z), d(mShadowCamera->getEye()[2].w));
-	FLOG_INFO("mShadowCamera[3]: :%f :%f :%f :%f",
-	          d(mShadowCamera->getEye()[3].x), d(mShadowCamera->getEye()[3].y),
-	          d(mShadowCamera->getEye()[3].z), d(mShadowCamera->getEye()[3].w));
-	FLOG_INFO("Light mTranslation: X:%f Y:%f Z:%f", d(mTranslation.x),
-	          d(mTranslation.y), d(mTranslation.z));
-	FLOG_INFO("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x),
-	          d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
+	fLogI("mShadowCamera->getTranslation(): :%f :%f :%f",
+	      d(mShadowCamera->getTranslation().x),
+	      d(mShadowCamera->getTranslation().y),
+	      d(mShadowCamera->getTranslation().z));
+	fLogI("mShadowCamera[0]: :%f :%f :%f :%f",
+	      d(mShadowCamera->getEye()[0].x), d(mShadowCamera->getEye()[0].y),
+	      d(mShadowCamera->getEye()[0].z), d(mShadowCamera->getEye()[0].w));
+	fLogI("mShadowCamera[1]: :%f :%f :%f :%f",
+	      d(mShadowCamera->getEye()[1].x), d(mShadowCamera->getEye()[1].y),
+	      d(mShadowCamera->getEye()[1].z), d(mShadowCamera->getEye()[1].w));
+	fLogI("mShadowCamera[2]: :%f :%f :%f :%f",
+	      d(mShadowCamera->getEye()[2].x), d(mShadowCamera->getEye()[2].y),
+	      d(mShadowCamera->getEye()[2].z), d(mShadowCamera->getEye()[2].w));
+	fLogI("mShadowCamera[3]: :%f :%f :%f :%f",
+	      d(mShadowCamera->getEye()[3].x), d(mShadowCamera->getEye()[3].y),
+	      d(mShadowCamera->getEye()[3].z), d(mShadowCamera->getEye()[3].w));
+	fLogI("Light mTranslation: X:%f Y:%f Z:%f", d(mTranslation.x),
+	      d(mTranslation.y), d(mTranslation.z));
+	fLogI("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x),
+	      d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
 	Light::log();
 }
 

@@ -16,7 +16,7 @@ namespace core {
 Sampler::Sampler(GLint textureUnit, GLuint howMany) :
 	GLObject(howMany), mTextureUnit(textureUnit) {
 	glGenSamplers(mHowMany, mHandles);
-	FLOG_CHECK("ERROR: Could not generate sampler -> ID");
+	fLogC("ERROR: Could not generate sampler -> ID");
 }
 
 Sampler::~Sampler() {
@@ -25,12 +25,12 @@ Sampler::~Sampler() {
 
 void Sampler::bind(GLuint id) {
 	glBindSampler(mTextureUnit, mHandles[id]);
-	FLOG_CHECK("Could not bind the Sampler");
+	fLogC("Could not bind the Sampler");
 }
 
 void Sampler::unbind(GLuint id) {
 	glBindSampler(0, mHandles[id]);
-	FLOG_CHECK("Could not bind the VAO");
+	fLogC("Could not bind the VAO");
 }
 
 void Sampler::setParameters(ParameterList parameters) {
@@ -41,12 +41,12 @@ void Sampler::setParameters(ParameterList parameters) {
 
 void Sampler::setParameter(GLenum parameter, GLenum value, GLuint id) {
 	glSamplerParameteri(mHandles[id], parameter, value);
-	FLOG_CHECK("setParameter: 0x%x", parameter);
+	fLogC("setParameter: 0x%x", parameter);
 }
 
 void Sampler::setParameter(Parameter parameter, GLuint id) {
 	glSamplerParameteri(mHandles[id], parameter.first, parameter.second);
-	FLOG_CHECK("setParameter");
+	fLogC("setParameter");
 }
 
 GLint Sampler::getTextureUnit() {
@@ -55,7 +55,7 @@ GLint Sampler::getTextureUnit() {
 
 void Sampler::reload() {
 	glGenSamplers(mHowMany, mHandles);
-	FLOG_CHECK("reload");
+	fLogC("reload");
 }
 
 } /* core */

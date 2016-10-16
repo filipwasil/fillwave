@@ -49,20 +49,20 @@ inline void Texture3D::sendData(
 		file->mData = customData;
 	}
 
-	FLOG_DEBUG("file->mCubeTarget 0x%x", file->mCubeTarget);
-	FLOG_DEBUG("file->mConfig.mMipmapsLevel %d", file->mConfig.mMipmapsLevel);
-	FLOG_DEBUG("file->mHeader.mInternalFormat 0x%x",
-	           file->mHeader.mInternalFormat);
-	FLOG_DEBUG("file->mHeader.mWidth %d", file->mHeader.mWidth);
-	FLOG_DEBUG("file->mHeader.mHeight %d", file->mHeader.mHeight);
-	FLOG_DEBUG("file->mConfig.mBorder %d", file->mConfig.mBorder);
-	FLOG_DEBUG("file->mHeader.mFormat 0x%x", file->mHeader.mFormat);
-	FLOG_DEBUG("file->mHeader.mType 0x%x", file->mHeader.mType);
+	fLogD("file->mCubeTarget 0x%x", file->mCubeTarget);
+	fLogD("file->mConfig.mMipmapsLevel %d", file->mConfig.mMipmapsLevel);
+	fLogD("file->mHeader.mInternalFormat 0x%x",
+	      file->mHeader.mInternalFormat);
+	fLogD("file->mHeader.mWidth %d", file->mHeader.mWidth);
+	fLogD("file->mHeader.mHeight %d", file->mHeader.mHeight);
+	fLogD("file->mConfig.mBorder %d", file->mConfig.mBorder);
+	fLogD("file->mHeader.mFormat 0x%x", file->mHeader.mFormat);
+	fLogD("file->mHeader.mType 0x%x", file->mHeader.mType);
 	glTexImage2D(file->mCubeTarget, file->mConfig.mMipmapsLevel,
 	             file->mHeader.mInternalFormat, file->mHeader.mWidth,
 	             file->mHeader.mHeight, file->mConfig.mBorder, file->mHeader.mFormat,
 	             file->mHeader.mType, (GLubyte*) file->mData);
-	FLOG_CHECK("send data");
+	fLogC("send data");
 }
 
 void Texture3D::sendData() {
@@ -102,7 +102,7 @@ void Texture3D::sendData(
 	sendData(mFront.get(), zp);
 	sendData(mBack.get(), zn);
 
-	FLOG_CHECK("send data");
+	fLogC("send data");
 }
 
 } /* core */

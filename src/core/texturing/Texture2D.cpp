@@ -38,13 +38,13 @@ void Texture2D::sendData(Texture2DFileData data) {
 		             mFile->mHeader.mHeight, mFile->mConfig.mBorder, mFile->mHeader.mFormat,
 		             mFile->mHeader.mType, (GLubyte*) mFile->mData);
 	}
-	FLOG_CHECK("send data");
+	fLogC("send data");
 }
 
 void Texture2D::generateMipMaps() {
 	if (mFile->mConfig.mMipmaps) {
 		glGenerateMipmap(mTarget);
-		FLOG_CHECK("generateMipMaps");
+		fLogC("generateMipMaps");
 	}
 }
 
@@ -58,7 +58,7 @@ void Texture2D::unbind2DTextures() {
 }
 
 void Texture2D::reload() {
-	FLOG_DEBUG("Reload");
+	fLogD("Reload");
 	Texture::reload();
 	for (GLsizei i = 0; i < mHowMany; i++) {
 		bind(i);
@@ -70,15 +70,15 @@ void Texture2D::reload() {
 }
 
 void Texture2D::log() {
-	FLOG_DEBUG("mTarget: 0x%x", mTarget);
-	FLOG_DEBUG("mFile->mConfig.mMipmapsLevel: %d", mFile->mConfig.mMipmapsLevel);
-	FLOG_DEBUG("mFile->mHeader.mInternalFormat: 0x%x",
-	           mFile->mHeader.mInternalFormat);
-	FLOG_DEBUG("mFile->mHeader.mWidth: %d", mFile->mHeader.mWidth);
-	FLOG_DEBUG("mFile->mHeader.mHeight: %d", mFile->mHeader.mHeight);
-	FLOG_DEBUG("mFile->mConfig.mBorder: %d", mFile->mConfig.mBorder);
-	FLOG_DEBUG("mFile->mConfig.mType: 0x%x", mFile->mHeader.mType);
-	FLOG_DEBUG("mFile->mHeader.mFormat: 0x%x", mFile->mHeader.mFormat);
+	fLogD("mTarget: 0x%x", mTarget);
+	fLogD("mFile->mConfig.mMipmapsLevel: %d", mFile->mConfig.mMipmapsLevel);
+	fLogD("mFile->mHeader.mInternalFormat: 0x%x",
+	      mFile->mHeader.mInternalFormat);
+	fLogD("mFile->mHeader.mWidth: %d", mFile->mHeader.mWidth);
+	fLogD("mFile->mHeader.mHeight: %d", mFile->mHeader.mHeight);
+	fLogD("mFile->mConfig.mBorder: %d", mFile->mConfig.mBorder);
+	fLogD("mFile->mConfig.mType: 0x%x", mFile->mHeader.mType);
+	fLogD("mFile->mHeader.mFormat: 0x%x", mFile->mHeader.mFormat);
 }
 
 } /* core */
