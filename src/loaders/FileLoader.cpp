@@ -71,7 +71,10 @@ string FileLoader::getRootPath(string filePath) {
 
 void ReadFile(string pFileName, string& fileContent) {
 	ifstream ifs(pFileName.c_str(), ios::binary);
-	if (ifs) {
+	if(!ifs) {
+	    fLogE("File %s not found", pFileName.c_str());
+	    return;
+	}
 		ifs.seekg(0, ios::end);
 		size_t size = ifs.tellg();
 		fileContent.resize(size);
@@ -79,9 +82,6 @@ void ReadFile(string pFileName, string& fileContent) {
 		ifs.seekg(0, ios::beg);
 		ifs.read(&fileContent[0], size);
 		ifs.close();
-	} else {
-		FLOG_ERROR("File %s not found", pFileName.c_str());
-	}
 }
 
 void WriteFile(const char* pFileName, string& fileContent) {

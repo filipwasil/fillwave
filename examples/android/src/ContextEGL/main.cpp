@@ -120,7 +120,7 @@ std::string resolveApkWorkspace(Engine* engine, struct android_app* app) {
 static void engine_draw_frame(struct engine* engine) {
     if (engine->eglInfo.display == NULL) {
         // No display.
-        FLOG_ERROR("No Display");
+        fLogE("No Display");
         return;
     }
 
@@ -162,7 +162,7 @@ static int32_t engine_handle_input(struct android_app* app,
          selectClip(CLIP_NONE, 0);
          setPlayingAssetAudioPlayer(isPlayingAsset);
          engine->animating = 0;
-         FLOG_ERROR("Animation stop");
+         fLogE("Animation stop");
          return 1;
       } else if ( key_val == AKEYCODE_VOLUME_UP ||
                   key_val == AKEYCODE_VOLUME_DOWN ) {
@@ -176,12 +176,12 @@ static int32_t engine_handle_input(struct android_app* app,
 
              created = createAssetAudioPlayer(env, clazz, activity->assetManager, "background.mp3");
              if (created) {
-                FLOG_ERROR("CREATED ASSET AUDIO PLAYER");
+                fLogE("CREATED ASSET AUDIO PLAYER");
                  isPlayingAsset = true;
                  setPlayingAssetAudioPlayer(true);
                  selectClip(CLIP_PLAYBACK, 3);
              } else {
-                 FLOG_ERROR("NOT CREATED ASSET AUDIO PLAYER");
+                 fLogE("NOT CREATED ASSET AUDIO PLAYER");
              }
              activity->vm->DetachCurrentThread();
           } else {
@@ -190,7 +190,7 @@ static int32_t engine_handle_input(struct android_app* app,
               setPlayingAssetAudioPlayer(isPlayingAsset);
           }
           engine->animating = 1;
-          FLOG_ERROR("Animation start");
+          fLogE("Animation start");
           return 1;
       }
       return 1;
@@ -210,7 +210,7 @@ static int32_t engine_handle_input(struct android_app* app,
                                                       engine->eglInfo.height);
                  engine->fillwave->insertInput(event);
                } else {
-                  FLOG_ERROR("Null scene pointer");
+                  fLogE("Null scene pointer");
               }
               break;
            case AMOTION_EVENT_ACTION_UP:
@@ -466,7 +466,7 @@ void android_main(struct android_app* state) {
                           engine_g.fillwave->getCurrentScene()->getCamera()->rotateBy(glm::vec3(0.0,1.0,0.0), speedRotationRight*glm::radians(-event.acceleration.y));
                           engine_g.fillwave->getCurrentScene()->getCamera()->rotateBy(glm::vec3(1.0,0.0,0.0), speedRotationUp*glm::radians(-(event.acceleration.z - speedRotationOffset)));
                        }
-//                       FLOG_INFO("accelerometer: x=%f y=%f z=%f",
+//                       fLogI("accelerometer: x=%f y=%f z=%f",
 //                                event.acceleration.x, event.acceleration.y,
 //                                event.acceleration.z);
                     }
