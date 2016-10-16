@@ -35,8 +35,8 @@
 #include <fillwave/actions/callbacks/FPSCallback.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/Log.h>
+#include <fillwave/common/Strings.h>
 
-FLOGINIT("FPSCallback", FERROR | FFATAL | FUSER)
 
 namespace fillwave {
 namespace framework {
@@ -55,8 +55,7 @@ void FPSCallback::perform(EventType& event) {
 		mTimePassed += e.mTimePassed;
 	} else {
 		mTimePassed -= 1.0f;
-		mText->editString(
-		   std::string("FPS ") + to_string<GLuint>(mEngine->getFramesPassed()));
+		mText->editString(std::string("FPS ") + to_string<GLuint>(mEngine->getFramesPassed()));
 	}
 }
 

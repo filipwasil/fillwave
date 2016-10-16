@@ -34,11 +34,11 @@
 
 #include <fillwave/Fillwave.h>
 #include <fillwave/common/Macros.h>
+#include <fillwave/common/Strings.h>
 #include <fillwave/management/LightSystem.h>
 
 #include <fillwave/Log.h>
 
-FLOGINIT("LightSystem", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {
@@ -128,8 +128,7 @@ void LightSystem::pushLightUniforms(core::Program* program) {
 			mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr(matrix)[j];
 		}
 
-		program->uniformPush(getNotIndexableName("uShadowMap", UBOIterator),
-		                     FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
+		program->uniformPush(getNotIndexableName("uShadowMap", UBOIterator), FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
 		UBOIterator++;
 	}
 

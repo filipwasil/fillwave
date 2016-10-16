@@ -38,7 +38,6 @@
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/management/LightSystem.h>
 
-FLOGINIT("MeshTerrain", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

@@ -35,7 +35,6 @@
 #include <fillwave/models/builders/BuilderModelManual.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("BuilderModelManual", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

@@ -36,7 +36,6 @@
 #include <fillwave/models/base/IReloadable.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Reloadable", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

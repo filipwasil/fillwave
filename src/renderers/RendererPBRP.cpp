@@ -39,7 +39,6 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT_DEFAULT()
 
 namespace fillwave {
 namespace framework {

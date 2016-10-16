@@ -38,7 +38,6 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT("BuilderModel", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

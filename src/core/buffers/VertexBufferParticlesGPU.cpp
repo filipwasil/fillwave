@@ -35,7 +35,6 @@
 #include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("VertexBufferParticlesGPU", FERROR | FFATAL)
 
 namespace fillwave {
 namespace core {

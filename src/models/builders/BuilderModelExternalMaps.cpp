@@ -36,7 +36,6 @@
 #include <fillwave/common/Macros.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("BuilderModelExternalMaps", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

@@ -38,7 +38,6 @@
 #ifdef FILLWAVE_GLES_3_0
 #else
 
-FLOGINIT("ConditionalRender", FERROR | FFATAL)
 
 namespace fillwave {
 namespace core {

@@ -1,10 +1,10 @@
 /*
- * log.h
+ * TransformFeedback.cpp
  *
- *  Created on: Mar 28, 2014
+ *  Created on: May 30, 2014
  *      Author: filip
  *
- * Copyright (c) 2016, Fillwave developers
+ * Copyright (c) 2016, Filip Wasil
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,22 +31,61 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#pragma once
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <string>
+#include <fillwave/core/rendering/TransformFeedback.h>
+#include <fillwave/Log.h>
+
+FLOGINIT("TransformFeedback", FERROR | FFATAL)
 
 namespace fillwave {
-class Logger {
- public:
-	std::string getLogPath();
-	void setLogPath(std::string path);
-	bool isFileValid();
-	void invalidateFile();
- private:
-	std::string logFilePath = "";
-	bool fileValid = false;
-};
+namespace core {
+
+TransformFeedback::TransformFeedback(GLsizei howMany) :
+	GLObject(howMany), mTarget(GL_TRANSFORM_FEEDBACK) {
+	glGenTransformFeedbacks(mHowMany, mHandles);
+}
+
+TransformFeedback::~TransformFeedback() {
+	glDeleteTransformFeedbacks(mHowMany, mHandles);
+}
+
+void TransformFeedback::bind(GLuint id) const {
+	glBindTransformFeedback(mTarget, mHandles[id]);
+}
+
+void TransformFeedback::begin(GLenum primitiveMode) {
+	if (primitiveMode != GL_POINTS && primitiveMode != GL_LINES
+	      && primitiveMode != GL_TRIANGLES
+#ifdef FILLWAVE_GLES_3_0
+#else
+	      && primitiveMode != GL_TRIANGLES_ADJACENCY
+	      && primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY
+	      && primitiveMode != GL_LINES_ADJACENCY
+	      && primitiveMode != GL_LINE_STRIP_ADJACENCY
+#endif
+	   )
+<<<<<<< HEAD
+		FLOG_ERROR("not valid primitive type");
+=======
+	{
+		fLogE("not valid primitive type");
+	}
+>>>>>>> a411715... 93 Introducing spdlog logging system.
+	else
+		glBeginTransformFeedback(primitiveMode);
+}
+
+void TransformFeedback::end() {
+	glEndTransformFeedback();
+}
+
+void TransformFeedback::pause() {
+	glPauseTransformFeedback();
+}
+
+void TransformFeedback::resume() {
+	glResumeTransformFeedback();
+}
+
+} /* core */
 } /* fillwave */

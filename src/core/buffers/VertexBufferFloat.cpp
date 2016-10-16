@@ -52,7 +52,7 @@ void VertexBufferFloat::log() const {
 		return static_cast<double>(f.mData);
 	};
 	for (auto it : mDataVertices) {
-		FLOG_INFO("Vertex written: %f", d(it));
+		fLogI("Vertex written: %f", d(it));
 	}
 }
 

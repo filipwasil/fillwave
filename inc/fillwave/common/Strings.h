@@ -58,10 +58,7 @@ static std::vector<std::string> split(const std::string &s, char delim) {
 	return elems;
 }
 
-std::string getStructField(
-   std::string structName,
-   std::string fieldName,
-   int index);
+std::string getStructField(std::string structName, std::string fieldName, int index);
 std::string getStructField(std::string structName, int index);
 std::string getNotIndexableName(std::string structName, int index);
 

@@ -37,7 +37,6 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Text", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

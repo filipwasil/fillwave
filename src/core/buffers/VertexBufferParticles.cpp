@@ -59,7 +59,7 @@ VertexBufferParticles::VertexBufferParticles(
 			mDataVertices.push_back(vertex);
 		}
 	} else {
-		FLOG_ERROR("Wrong buffer sizes");
+		fLogE("Wrong buffer sizes");
 		return;
 	}
 	mTotalElements = mDataVertices.size();
@@ -72,8 +72,8 @@ void VertexBufferParticles::log() const {
 		return static_cast<double>(f);
 	};
 	for (auto it : mDataVertices) {
-		FLOG_ERROR("Vertex written: %f %f %f %f", d(it.velocity[0]),
-		           d(it.velocity[1]), d(it.velocity[2]), d(it.startTime));
+		fLogE("Vertex written: %f %f %f %f", d(it.velocity[0]),
+		      d(it.velocity[1]), d(it.velocity[2]), d(it.startTime));
 	}
 }
 

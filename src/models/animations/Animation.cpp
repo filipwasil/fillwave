@@ -36,7 +36,6 @@
 #include <fillwave/Log.h>
 #include <fillwave/Assets.h>
 
-FLOGINIT("Animation", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

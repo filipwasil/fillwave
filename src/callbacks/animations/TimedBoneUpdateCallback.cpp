@@ -43,7 +43,7 @@ namespace framework {
 
 TimedBoneUpdateCallback::TimedBoneUpdateCallback(Model* model) :
 	TimedCallback(0.0), mModel(model) {
-	FLOG_DEBUG("Added animation callback");
+	fLogD("Added animation callback");
 }
 
 void TimedBoneUpdateCallback::performTime(TimeEventData& data) {

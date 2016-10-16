@@ -42,7 +42,6 @@
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("ProgramLoader", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

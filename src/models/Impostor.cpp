@@ -37,7 +37,6 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT("Impostor", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

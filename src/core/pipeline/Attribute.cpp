@@ -95,24 +95,24 @@ Attribute::Attribute(
 
 void Attribute::bindLocation(GLint programHandle) {
 	glBindAttribLocation(programHandle, mIndex, mName.c_str());
-	FLOG_CHECK("bindAttribLocation");
+	fLogC("bindAttribLocation");
 }
 
 void Attribute::arrayDisable() {
 	glDisableVertexAttribArray(mIndex);
-	FLOG_CHECK("disableAttribLocation");
+	fLogC("disableAttribLocation");
 }
 
 void Attribute::arrayEnable() {
 	glEnableVertexAttribArray(mIndex);
-	FLOG_CHECK("enableAttribLocation");
+	fLogC("enableAttribLocation");
 }
 
 void Attribute::arraySet() {
 	glVertexAttribPointer(mIndex, mSize,
 //                          mType,
 	                      GL_FLOAT, mNormalized, mStride, mPointer);
-	FLOG_CHECK("VertexAttribPointer");
+	fLogC("VertexAttribPointer");
 }
 
 void Attribute::setOffsetPointer(GLvoid* offset) {
@@ -136,13 +136,13 @@ std::string Attribute::getName() {
 }
 
 void Attribute::log() {
-	FLOG_INFO("mName %s", mName.c_str());
-	FLOG_INFO("mType 0x%x", mType);
-	FLOG_INFO("mIndex %d", mIndex);
-	FLOG_INFO("mSize %d", mSize);
-	FLOG_INFO("mType%d ", mType);
-	FLOG_INFO("mNormalized %d", mNormalized);
-	FLOG_INFO("mStride %d", mStride);
+	fLogI("mName %s", mName.c_str());
+	fLogI("mType 0x%x", mType);
+	fLogI("mIndex %d", mIndex);
+	fLogI("mSize %d", mSize);
+	fLogI("mType%d ", mType);
+	fLogI("mNormalized %d", mNormalized);
+	fLogI("mStride %d", mStride);
 }
 
 } /* core */

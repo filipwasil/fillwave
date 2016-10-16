@@ -27,7 +27,7 @@ int Initialize(EGLNativeWindowType window, EGLContextInfo* eglInfo,
      * the first EGLConfig that matches our criteria */
     eglChooseConfig(eglInfo->display, attribs, &config, 1, &numConfigs);
 //    if (!eglChooseConfig(eglInfo->display, attribs, &config, 1, &numConfigs)) {
-//       FLOG_ERROR("Config not found ");
+//       fLogE("Config not found ");
 //       return -1;
 //    }
 
@@ -38,11 +38,11 @@ int Initialize(EGLNativeWindowType window, EGLContextInfo* eglInfo,
     eglGetConfigAttrib(eglInfo->display, config, EGL_NATIVE_VISUAL_ID, &format);
 
 //  eglGetConfigAttrib(eglInfo->display, config, EGL_DEPTH_SIZE, &format);
-//  FLOG_INFO("Config depth: %d ", format);
+//  fLogI("Config depth: %d ", format);
 //  eglGetConfigAttrib(eglInfo->display, config, EGL_BUFFER_SIZE, &format);
-//  FLOG_INFO("Config color component size: %d ", format);
+//  fLogI("Config color component size: %d ", format);
 //  eglGetConfigAttrib(eglInfo->display, config, EGL_ALPHA_SIZE, &format);
-//  FLOG_INFO("Config alpha component size: %d ", format);
+//  fLogI("Config alpha component size: %d ", format);
 #ifdef __ANDROID__
     ANativeWindow_setBuffersGeometry((ANativeWindow*)window, 0, 0, format);
 #endif
@@ -53,7 +53,7 @@ int Initialize(EGLNativeWindowType window, EGLContextInfo* eglInfo,
 
     if (eglMakeCurrent(eglInfo->display, eglInfo->surface, eglInfo->surface,
             eglInfo->context) == EGL_FALSE) {
-        FLOG_ERROR("Unable to eglMakeCurrent");
+        fLogE("Unable to eglMakeCurrent");
         return -1;
     }
 
@@ -88,7 +88,7 @@ void SwapDisplay(EGLContextInfo* eglInfo) {
     if (eglGetCurrentContext() != EGL_NO_CONTEXT) {
         eglSwapBuffers(eglInfo->display, eglInfo->surface);
     } else {
-        FLOG_ERROR("Surface destroyed");
+        fLogE("Surface destroyed");
     }
 }
 

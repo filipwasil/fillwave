@@ -46,7 +46,6 @@
 #include <fillwave/Log.h>
 #include <fillwave/management/LightSystem.h>
 
-FLOGINIT("Debugger", FERROR | FFATAL | FINFO)
 
 namespace fillwave {
 namespace framework {

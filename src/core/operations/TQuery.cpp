@@ -44,13 +44,13 @@ template <GLenum target>
 TQuery<target>::TQuery(GLsizei howMany) :
 	GLObject(howMany) {
 	glGenQueries(mHowMany, mHandles);
-	FLOG_CHECK("Could not create query");
+	fLogC("Could not create query");
 }
 
 template <GLenum target>
 TQuery<target>::~TQuery() {
 	glDeleteQueries(mHowMany, mHandles);
-	FLOG_CHECK("Could not delete query");
+	fLogC("Could not delete query");
 }
 
 template <GLenum target>
@@ -61,23 +61,23 @@ GLuint TQuery<target>::getID(GLuint id) const {
 template <GLenum target>
 void TQuery<target>::begin(GLuint id) {
 	glBeginQuery(mTarget, mHandles[id]);
-	FLOG_CHECK("Could not begin query");
+	fLogC("Could not begin query");
 }
 
 template <GLenum target>
 void TQuery<target>::end() {
 	glEndQuery(mTarget);
-	FLOG_CHECK("Could not end query");
+	fLogC("Could not end query");
 }
 
 template <GLenum target>
 GLuint TQuery<target>::getResultAsync(GLuint resultIfNotAvailable, GLuint id) {
 	GLuint result;
 	glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT_AVAILABLE, &result);
-	FLOG_CHECK("Could not get querry result state");
+	fLogC("Could not get querry result state");
 	if (result) {
 		glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT, &result);
-		FLOG_CHECK("Could not get query async result");
+		fLogC("Could not get query async result");
 		return result;
 	} else {
 		return resultIfNotAvailable;
@@ -88,7 +88,7 @@ template <GLenum target>
 GLuint TQuery<target>::getResultSync(GLuint id) {
 	GLuint result;
 	glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT, &result);
-	FLOG_CHECK("Could not get querry sync result");
+	fLogC("Could not get querry sync result");
 	return result;
 }
 
@@ -102,16 +102,16 @@ GLboolean TQuery<target>::getResultAvailable(GLuint id) {
 template <GLenum target>
 void TQuery<target>::reload() {
 	glGenQueries(mHowMany, mHandles);
-	FLOG_CHECK("reload");
+	fLogC("reload");
 }
 
 template <GLenum target>
 void TQuery<target>::log() {
 	for (GLsizei id = 0; id < mHowMany; id++) {
 		if (glIsQuery(mHandles[id])) {
-			FLOG_INFO("Query %d exists", mHandles[id]);
+			fLogI("Query %d exists", mHandles[id]);
 		} else {
-			FLOG_INFO("Query %d does not exist", mHandles[id]);
+			fLogI("Query %d does not exist", mHandles[id]);
 		}
 	}
 }

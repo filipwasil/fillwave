@@ -37,7 +37,6 @@
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Terrain", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

@@ -535,7 +535,7 @@ inline void VoxelChunk::coreDraw() {
 
 inline void VoxelChunk::onDraw() {
 	glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
-	FLOG_CHECK("Could not draw");
+	fLogC("Could not draw");
 }
 
 inline void VoxelChunk::initBuffers() {

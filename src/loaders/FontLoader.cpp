@@ -36,7 +36,6 @@
 #include <fillwave/Log.h>
 #include <fillwave/loaders/FontLoader.h>
 
-FLOGINIT("FontLoader", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {

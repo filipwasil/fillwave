@@ -108,13 +108,13 @@ Animator::Animator(const aiScene* scene) :
 	}
 
 	if (numBones > FILLWAVE_MAX_BONES) {
-		FLOG_FATAL(
+		fLogF(
 		   "Crater can handle maximum %d bones. The model contains %d bones.",
 		   FILLWAVE_MAX_BONES, numBones);
 	}
 
 	for (GLuint k = 0; k < scene->mNumAnimations; k++) {
-		FLOG_DEBUG("Animation %d creation", k);
+		fLogD("Animation %d creation", k);
 		mAnimations.push_back(std::make_unique<Animation>(scene->mAnimations[k]));
 	}
 
@@ -172,7 +172,7 @@ void Animator::updateTransformations(
 		mTimeSinceStartSeconds = 0;
 		mRootAnimationNode->update(0, glm::mat4(1.0), this, 0);
 	} else {
-		//FLOG_INFO("Update full transformation with time: %f", timeElapsed_s);
+		//fLogI("Update full transformation with time: %f", timeElapsed_s);
 		mTimeSinceStartSeconds += timeElapsed_s;
 		float TicksPerSecond = (float) (
 		                          mAnimations[activeAnimation]->getTicksPerSec() != 0 ?
@@ -208,7 +208,7 @@ void Animator::updateBonesUniform(GLint uniformLocationBones) {
 }
 
 void Animator::log() {
-	FLOG_INFO("Bones %lu ", mBones.size());
+	fLogI("Bones %lu ", mBones.size());
 }
 
 Channel* Animator::findChannel(
@@ -305,7 +305,7 @@ GLuint Animator::getTranslationStep(
 			return i;
 		}
 	}
-	FLOG_FATAL("Animation corrupted. No such translation step.");
+	fLogF("Animation corrupted. No such translation step.");
 	return 0;
 }
 
