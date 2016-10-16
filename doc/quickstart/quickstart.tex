@@ -790,7 +790,7 @@ namespace actions {
 class NewEngineCallback: public EngineCallback {
 private:
    float mMaximimData;
-   void sayHello() {FLOG_USER("Hello event");};
+   void sayHello() {fLogU("Hello event");};
 public:
    NewEngineCallback(eEventType eventType, float data);
    NewEngineCallback(float data);

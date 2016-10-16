@@ -106,7 +106,7 @@ void IRendererCSPBRP::draw(ICamera& camera) {
 				                 reinterpret_cast<GLvoid*>(renderItem.mIndicesPointer))
 				: glDrawArrays(renderItem.mMode, renderItem.mFirst, renderItem.mCount);
 
-				FLOG_CHECK("Draw failed");
+				fLogC("Draw failed");
 
 				renderItem.mStatus.bVAO ? core::VertexArray::unbindVAO() : (void)0;
 

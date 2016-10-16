@@ -71,7 +71,7 @@ IEmiterPoint::IEmiterPoint(
 	glEnable(GL_POINT_SPRITE);
 #endif
 	if(glGetError() != GL_NO_ERROR) {
-		FLOG_ERROR("Legacy features may cause a GL_INVALID_ENUM on core profile. It may happen.");
+		fLogE("Legacy features may cause a GL_INVALID_ENUM on core profile. It may happen.");
 	}
 }
 
