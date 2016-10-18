@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "baa041b7_39dad878",
+        "filename": "inc/fillwave/Log.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2016-10-18T19:49:53Z",
+      "side": 1,
+      "message": "FLOG_CHECK is no longer macro, if we want info from opengl we will need headers(or forward-Declaration of functions?)",
+      "parentUuid": "baa041b7_198ef478",
+      "revId": "a41171557f8f74ce70d1813ff2a17b5d1ef11ca3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baa041b7_d9eacc0e",
         "filename": "src/loaders/FileLoader.cpp",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "baa041b7_a1ea270d",
+        "filename": "src/loaders/FileLoader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2016-10-18T19:49:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baa041b7_d9eacc0e",
+      "revId": "a41171557f8f74ce70d1813ff2a17b5d1ef11ca3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baa041b7_f988f06c",
         "filename": "src/loaders/TextureLoader/CMakeLists.txt",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2016-10-16T18:52:05Z",
       "side": 1,
       "message": "This line does nothing :) Please remove.",
+      "revId": "a41171557f8f74ce70d1813ff2a17b5d1ef11ca3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "baa041b7_21df376a",
+        "filename": "src/loaders/TextureLoader/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2016-10-18T19:49:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "baa041b7_f988f06c",
       "revId": "a41171557f8f74ce70d1813ff2a17b5d1ef11ca3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
