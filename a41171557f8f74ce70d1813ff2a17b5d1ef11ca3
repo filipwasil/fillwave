@@ -37,6 +37,23 @@
     },
     {
       "key": {
+        "uuid": "baa041b7_19e5d436",
+        "filename": "src/core/buffers/IBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2016-10-21T02:32:09Z",
+      "side": 1,
+      "message": "Another lame not \"early returned\" piece of crap written by me.",
+      "revId": "a41171557f8f74ce70d1813ff2a17b5d1ef11ca3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "baa041b7_d9eacc0e",
         "filename": "src/loaders/FileLoader.cpp",
         "patchSetId": 1
