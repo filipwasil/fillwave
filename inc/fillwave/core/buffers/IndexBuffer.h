@@ -36,6 +36,7 @@
 
 #include <fillwave/core/buffers/IBuffer.h>
 #include <fillwave/Assets.h>
+#include <vector>
 
 namespace fillwave {
 namespace core {

@@ -38,6 +38,7 @@
 #include <fillwave/actions/events/TEvent.h>
 #include <memory>
 #include <algorithm>
+#include <vector>
 
 namespace fillwave {
 namespace framework {
