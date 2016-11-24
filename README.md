@@ -47,10 +47,10 @@ sudo apt-get install libglew1.13 libglew-dev libglfw3 libglfw3-dev libassimp3v5 
 ```
 #Fedora
 With configured sudo:
-sudo dnf install glm-devel assimp.x86_64 assimp-devel.x86_64 glew.x86_64 glew-devel.x86_64 freetype-devel.x86_64 freetype.x86_64 spdlog
+sudo dnf install glm-devel assimp assimp-devel glew glew-devel freetype-devel freetype spdlog rpm-build rpmdevtools
 Without configured sudo:
 su
-dnf install glm-devel assimp.x86_64 assimp-devel.x86_64 glew.x86_64 glew-devel.x86_64 freetype-devel.x86_64 freetype.x86_64 spdlog
+dnf install glm-devel assimp assimp-devel glew glew-devel freetype-devel freetype spdlog rpm-build rpmdevtools
 
 ```
 
