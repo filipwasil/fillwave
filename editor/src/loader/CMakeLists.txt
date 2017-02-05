@@ -1,0 +1,13 @@
+set(SOURCELOADER
+        ${SOURCE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/MenuWidgetFabric.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/XmlLoader.cpp
+        PARENT_SCOPE
+        )
+set(HEADERSLOADER
+        ${HEADERS}
+        ${CMAKE_CURRENT_SOURCE_DIR}/MenuWidgetFabric.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/XmlLoader.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/idataloader.h
+        PARENT_SCOPE
+        )

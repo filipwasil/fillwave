@@ -3,7 +3,7 @@
 //
 
 #include "MainWidget.h"
-#include "Renderer.h"
+#include "../scene/Renderer.h"
 #include "Panel.h"
 #include <QVBoxLayout>
 #include <QVBoxLayout>
