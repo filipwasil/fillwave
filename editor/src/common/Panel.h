@@ -2,8 +2,8 @@
 // Created by filip on 30.04.16.
 //
 
-#ifndef FILLWAVE_QT_EXAMPLE_PANEL_H
-#define FILLWAVE_QT_EXAMPLE_PANEL_H
+#ifndef PANEL_H
+#define PANEL_H
 
 #include <QWidget>
 

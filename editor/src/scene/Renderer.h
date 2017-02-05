@@ -2,8 +2,8 @@
 // Created by filip on 30.04.16.
 //
 
-#ifndef FILLWAVE_QT_EXAMPLE_RENDERER_H
-#define FILLWAVE_QT_EXAMPLE_RENDERER_H
+#ifndef RENDERER_H
+#define RENDERER_H
 
 #include <fillwave/Fillwave.h>
 #include <QGLWidget>

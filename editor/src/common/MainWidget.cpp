@@ -3,13 +3,9 @@
 //
 
 #include "MainWidget.h"
-#include "Renderer.h"
+#include "scene/Renderer.h"
 #include "Panel.h"
 #include <QVBoxLayout>
-#include <QVBoxLayout>
-
-//#include <QSlider>
-//#include <QLabel>
 
 MainWidget::MainWidget(int argc, char* argv[], QWidget* parent) :
         QWidget(parent),
