@@ -1,5 +1,0 @@
-/home/radek/Pobrane/fillwave_editor_particles-master/buil/CMakeFiles/rebuild_cache.dir
-/home/radek/Pobrane/fillwave_editor_particles-master/buil/CMakeFiles/edit_cache.dir
-/home/radek/Pobrane/fillwave_editor_particles-master/buil/CMakeFiles/assets_fillwave_qt_example.dir
-/home/radek/Pobrane/fillwave_editor_particles-master/buil/CMakeFiles/fillwave_qt_example.dir
-/home/radek/Pobrane/fillwave_editor_particles-master/buil/CMakeFiles/fillwave_qt_example_automoc.dir
