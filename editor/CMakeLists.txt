@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5OpenGL REQUIRED)
+find_package(Qt5Xml REQUIRED)
 
 include_directories(SYSTEM ${Qt5Widgets_INCLUDE_DIRS})
 include_directories(SYSTEM ${Qt5OpenGL_INCLUDE_DIRS})
