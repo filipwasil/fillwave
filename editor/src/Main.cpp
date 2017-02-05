@@ -1,6 +1,6 @@
 #include <QApplication>
-#include "Renderer.h"
-#include "MainWidget.h"
+#include "scene/Renderer.h"
+#include "common/MainWidget.h"
 #include <QLayout>
 
 int main(int argc, char *argv[])

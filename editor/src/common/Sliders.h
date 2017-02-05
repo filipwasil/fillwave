@@ -2,8 +2,8 @@
 // Created by filip on 30.04.16.
 //
 
-#ifndef FILLWAVE_QT_EXAMPLE_SLIDERS_H
-#define FILLWAVE_QT_EXAMPLE_SLIDERS_H
+#ifndef SLIDERS_H
+#define SLIDERS_H
 
 #include <QWidget>
 

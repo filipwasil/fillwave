@@ -2,8 +2,8 @@
 // Created by filip on 25.04.16.
 //
 
-#ifndef FILLWAVE_QT_EXAMPLE_MAINWIDGET_H
-#define FILLWAVE_QT_EXAMPLE_MAINWIDGET_H
+#ifndef MAINWIDGET_H
+#define MAINWIDGET_H
 #include <QWidget>
 
 class QPushButton;

@@ -2,7 +2,7 @@
 #include <QVBoxLayout>
 #include <QSlider>
 #include <QLabel>
-#include  <QMouseEvent>
+#include <QMouseEvent>
 
 EditorSlider::EditorSlider(const QString& name, QWidget *parent) : QWidget(parent)
 {
