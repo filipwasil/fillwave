@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fabf19d9_1cb4ce32",
+        "filename": "editor/src/createsceneriomenu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "- QWidgetList\n- Consider change of class name. Menu should be a single widget, collection of widgets shoud have name in plural form.",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_fc835a54",
+        "filename": "editor/src/createsceneriomenu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "widgets ?",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_dca1b6f9",
+        "filename": "editor/src/createsceneriomenu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "Consider use of QWidgetList. It should be more appropriate as a container.",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_bc796284",
+        "filename": "editor/src/idatareader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "something weird? It should be: DataBaseSeparation ?",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_5c95a684",
+        "filename": "editor/src/idatareader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "why such complex structure? Is this really necessary?",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_bcf042fe",
+        "filename": "editor/src/xmlreader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "parenthesis\nif(...)\n{\n...\n}",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_7cdf4a69",
+        "filename": "editor/src/xmlreader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "parenthesis\nif(...)\n{\n...\n}",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_5cdc8672",
+        "filename": "editor/src/xmlreader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "what vector? name should be more descriptive.",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_bcc72297",
+        "filename": "editor/src/xmlreader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "De Morgan\u0027s laws ? That would simplify it.",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_fcea3a0e",
+        "filename": "editor/src/xmlreader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "QWidgetList",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_dcef761c",
+        "filename": "editor/src/xmlreader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1007791
+      },
+      "writtenOn": "2017-02-06T22:36:13Z",
+      "side": 1,
+      "message": "name should be mXml;",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
