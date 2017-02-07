@@ -8,7 +8,7 @@ build = os.environ['BUILD']
 config = os.environ['CONFIGURATION']
 platform = os.environ.get('PLATFORM')
 path = os.environ['PATH']
-cmake_command = ['cmake', '-DFMT_PEDANTIC=ON', '-DCMAKE_BUILD_TYPE=' + config, '-DASSIMP_BUILD_TESTS=OFF', '-DGLFW_BUILD_TESTS=OFF', '-DASSIMP_BUILD_ASSIMP_TOOLS=OFF', '-DGLFW_BUILD_EXAMPLES=OFF',  '-DGLFW_BUILD_DOCS=OFF']
+cmake_command = ['cmake', '-DFMT_PEDANTIC=ON', '-DCMAKE_BUILD_TYPE=' + config, '-DASSIMP_BUILD_TESTS=OFF', '-DGLFW_BUILD_TESTS=OFF', '-DASSIMP_BUILD_ASSIMP_TOOLS=OFF', '-D_WIN32_WINNT=0x600', '-DGLFW_BUILD_EXAMPLES=OFF',  '-DGLFW_BUILD_DOCS=OFF']
 if build == 'mingw':
   cmake_command.append('-GMinGW Makefiles')
   build_command = ['mingw32-make', '-j4']
