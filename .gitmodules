@@ -37,3 +37,6 @@
 [submodule "ext/googlebenchmark"]
 	path = ext/googlebenchmark
 	url = https://github.com/google/benchmark.git
+[submodule "ext/spdlog"]
+	path = ext/spdlog
+	url = https://github.com/gabime/spdlog.git
