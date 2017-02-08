@@ -1,6 +1,6 @@
 # We need thread support
 #find_package(Threads REQUIRED)
-
+cmake_minimum_required(VERSION 2.8.11)
 # Enable ExternalProject CMake module
 include(ExternalProject)
 
