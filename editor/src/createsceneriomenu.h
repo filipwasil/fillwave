@@ -4,13 +4,13 @@
 #include "xmlreader.h"
 #include "createmenuwidgets.h"
 
-namespace sceneriocreation
+namespace scenerio
 {
 class CreateScenerioMenu
 {
 public:
     CreateScenerioMenu();
-    QVector<QWidget*> create(QString path);
+    QList<QWidget*> create(QString path);
 private:
     void loadFile(QString path);
 };

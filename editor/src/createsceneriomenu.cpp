@@ -1,15 +1,16 @@
 #include "createsceneriomenu.h"
 
-namespace sceneriocreation {
+namespace scenerio
+{
 
 CreateScenerioMenu::CreateScenerioMenu()
 {
 
 }
 
-QVector<QWidget*> CreateScenerioMenu::create(QString path)
+QList<QWidget*> CreateScenerioMenu::create(QString path)
 {
-    QVector<QWidget*> widget;
+    QList<QWidget*> widget;
     return widget;
 }
 
