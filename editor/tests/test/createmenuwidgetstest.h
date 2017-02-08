@@ -15,7 +15,7 @@ class CreateMenuWidgetsTest : public testing::Test
         delete sut;
         sut = 0;
     }
-    sceneriocreation::CreateMenuWidgets* sut;
+    scenerio::CreateMenuWidgets* sut;
 };
 
 #endif // XMLLOADTEXT_H
