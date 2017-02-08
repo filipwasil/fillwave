@@ -1,6 +1,6 @@
 #include "createmenuwidgets.h"
 
-namespace sceneriocreation
+namespace scenerio
 {
 
 CreateMenuWidgets::CreateMenuWidgets()
@@ -8,10 +8,10 @@ CreateMenuWidgets::CreateMenuWidgets()
 
 }
 
-QVector<QWidget*> CreateMenuWidgets::creatWidgets(elementsData elements)
-{
-    QVector<QWidget*> widget;
-    return widget;
-}
+//QList<QWidget*> CreateMenuWidgets::creatWidgets(QList<QWidget*> elements)
+//{
+//    QList<QWidget*> widget;
+//    return widget;
+//}
 
 }
