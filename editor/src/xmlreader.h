@@ -1,27 +1,29 @@
 #ifndef XMLREADER_H
 #define XMLREADER_H
-#include "idatareader.h"
+#include "idataloader.h"
 #include <QXmlStreamReader>
 #include <QXmlStreamAttributes>
 #include <QFile>
+#include <QList>
+#include <QWidget>
 
-namespace databaseperation
+namespace loader
 {
-class XmlReader : public IDataReader
+class XmlReader : public IDataLoader
 {
 public:
     XmlReader();
-    elementsData load(QString pathToFile) override;
+    QList<QWidget*> load(QString pathToFile) override;
 
 private:
     void readXml(QFile* file);
     void processXml();
-    void procesChild();
-    std::pair<QString, QString> extractChilds();
+    void processChild();
+    std::pair<QString, QString> extractParameters();
 
-    elementsData mRetrivedData;
-    QVector<QString> mWidgetList;
-    QXmlStreamReader xml;
+    QVector<QString> mPossibleWidgets;
+    QList<QWidget*> mWidgestList;
+    QXmlStreamReader mXml;
 };
 }
 #endif // XMLREADER_H

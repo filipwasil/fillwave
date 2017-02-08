@@ -1,17 +1,18 @@
 #include "xmlreader.h"
+#include "menuwidgetfabric.h"
 #include <QMessageBox>
 
-namespace databaseperation
+namespace loader
 {
 
 XmlReader::XmlReader()
 {
     //Should be loading from some asset file
-    mWidgetList.push_back("QLineEdit");
-    mWidgetList.push_back("QSlider");
+    mPossibleWidgets.push_back("QLineEdit");
+    mPossibleWidgets.push_back("QSlider");
 }
 
-elementsData XmlReader::load(QString pathToFile)
+QList<QWidget*> XmlReader::load(QString pathToFile)
 {
     QFile file(pathToFile);
 
@@ -20,59 +21,65 @@ elementsData XmlReader::load(QString pathToFile)
        QMessageBox msgBox;
        msgBox.setText("Can't load file");
        msgBox.exec();
-       elementsData empty;
+       QList<QWidget*> empty;
        return empty;
     }
     readXml(&file);
-    return mRetrivedData;
+    return mWidgestList;
 }
 
 void XmlReader::readXml(QFile *file)
 {
-    xml.setDevice(file);
+    mXml.setDevice(file);
 
-    while(!xml.atEnd() && !xml.hasError())
+    while(!mXml.atEnd() && !mXml.hasError())
     {
-        QXmlStreamReader::TokenType token = xml.readNext();
+        QXmlStreamReader::TokenType token = mXml.readNext();
         if(token == QXmlStreamReader::StartDocument)
+        {
             continue;
+        }
         if(token == QXmlStreamReader::StartElement)
+        {
             processXml();
+        }
     }
 }
 
 void XmlReader::processXml()
 {
-    if(xml.name() == "menu")
+    if(mXml.name() == "menu")
     {
         return;
     }
-    if(mWidgetList.contains(xml.name().toString()))
-        procesChild();
+    if(mPossibleWidgets.contains(mXml.name().toString()))
+        processChild();
 }
 
-void XmlReader::procesChild()
+void XmlReader::processChild()
 {
-    QString keyName = xml.name().toString();
-    xml.readNext();
-    QVector<std::pair<QString, QString>> vector;
+    QString widgetType = mXml.name().toString();
+    mXml.readNext();
+    QVector<std::pair<QString, QString>> parametersVector;
+    MenuWidgetFabric widgetsFabric;
 
     while(!(xml.tokenType() == QXmlStreamReader::EndElement &&
             xml.name() == keyName))
     {
-        if(xml.tokenType() == QXmlStreamReader::StartElement)
+        if(mXml.tokenType() == QXmlStreamReader::StartElement)
         {
-            vector.push_back(extractChilds());
+            parametersVector.push_back(extractParameters());
         }
-        xml.readNext();
+        mXml.readNext();
     }
-    mRetrivedData.push_back(std::make_pair(keyName, vector));
+    auto widget = widgetsFabric.createWidget(widgetType, parametersVector);
+    mWidgestList.append(widget);
 }
 
-std::pair<QString, QString> XmlReader::extractChilds()
+std::pair<QString, QString> XmlReader::extractParameters()
 {
-    auto name = xml.name().toString();
-    auto text = xml.text().toString();
+    auto name = mXml.name().toString();
+    auto text = mXml.text().toString();
     return std::make_pair (name, text);
 }
 
