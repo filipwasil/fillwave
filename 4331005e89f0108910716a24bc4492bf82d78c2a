@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fabf19d9_80cdfd86",
+        "filename": "editor/src/xmlreader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-02-11T10:51:49Z",
+      "side": 1,
+      "message": "Soon will be moved to resources.",
+      "revId": "4331005e89f0108910716a24bc4492bf82d78c2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_a857bcc8",
+        "filename": "editor/src/xmlreader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-02-11T10:51:49Z",
+      "side": 1,
+      "message": "mistake.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 12
+      },
+      "revId": "4331005e89f0108910716a24bc4492bf82d78c2a",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}

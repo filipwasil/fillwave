@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fabf19d9_8094dd42",
+        "filename": "editor/src/xmlreader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-02-11T10:51:49Z",
+      "side": 0,
+      "message": "refactor class name to XmlLoader",
+      "revId": "7ca13b06ee9b80e0803b81e8e40f5de355aff4f7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
