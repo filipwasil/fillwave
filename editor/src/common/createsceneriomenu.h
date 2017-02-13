@@ -1,8 +1,10 @@
 #ifndef CREATESCENERIOMENU_H
 #define CREATESCENERIOMENU_H
 #include <QVector>
-#include "xmlreader.h"
-#include "createmenuwidgets.h"
+
+#include <QWidget>
+#include "../loader/XmlLoader.h"
+
 
 namespace sceneriocreation
 {

@@ -1,0 +1,10 @@
+set(SOURCESCENE
+        ${SOURCE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/Renderer.cpp
+        PARENT_SCOPE
+        )
+set(HEADERSSCENE
+        ${HEADERS}
+        ${CMAKE_CURRENT_SOURCE_DIR}/Renderer.h
+        PARENT_SCOPE
+        )

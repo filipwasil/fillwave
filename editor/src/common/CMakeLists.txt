@@ -1,0 +1,22 @@
+set(SOURCECOMMON
+        ${SOURCE}
+        ${CMAKE_CURRENT_SOURCE_DIR}/Tools.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Button.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/createsceneriomenu.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Editorslider.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Panel.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/Sliders.cpp
+        PARENT_SCOPE
+        )
+set(HEADERSCOMMON
+        ${HEADERS}
+        ${CMAKE_CURRENT_SOURCE_DIR}/Tools.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/Button.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/createsceneriomenu.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/Editorslider.hpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/Panel.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/Sliders.h
+        PARENT_SCOPE
+        )

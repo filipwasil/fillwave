@@ -1,6 +1,7 @@
 #include "XmlLoader.h"
-#include "menuwidgetfabric.h"
-#include "Tools.h"
+#include "MenuWidgetFabric.h"
+#include "../common/Tools.h"
+
 #include <QMessageBox>
 
 namespace loader
