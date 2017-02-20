@@ -6,21 +6,21 @@
 
 namespace loader
 {
-    bool XmlLoader::init()
-    {
+    bool XmlLoader::init() {
         bool initStatus;
         initStatus = false;
         mPossibleWidgets = tools::readFileToStrings("assets/menutypeassets.txt");
-        if (!mPossibleWidgets.isEmpty()) {
+        if (!mPossibleWidgets.isEmpty())
+        {
             initStatus = true;
         }
         return initStatus;
     }
 
-    QList<QWidget *> XmlLoader::load(QString pathToFile)
-    {
+    QList<QWidget *> XmlLoader::load(QString pathToFile) {
         QList<QWidget *> emptyList;
-        if (!init()) {
+        if (!init())
+        {
             return emptyList;
         }
         QFile file(pathToFile);
@@ -41,44 +41,51 @@ namespace loader
         while (!mXml.atEnd() && !mXml.hasError())
         {
             QXmlStreamReader::TokenType token = mXml.readNext();
-            if (token == QXmlStreamReader::StartDocument) {
+            if (token == QXmlStreamReader::StartDocument)
+            {
                 continue;
             }
-            if (token == QXmlStreamReader::StartElement) {
+            if (token == QXmlStreamReader::StartElement)
+            {
                 processXml();
             }
         }
     }
 
-    void XmlLoader::processXml()
-    {
-        if (mXml.name() == "menu") {
+    void XmlLoader::processXml() {
+        if (mXml.name() == "menu")
+        {
             return;
         }
         if (mPossibleWidgets.contains(mXml.name().toString()))
+        {
             processChild();
+        }
     }
 
-    void XmlLoader::processChild()
-    {
+    void XmlLoader::processChild() {
         QString widgetType = mXml.name().toString();
         mXml.readNext();
         QVector<std::pair<QString, QString>> parametersVector;
         MenuWidgetFabric widgetsFabric;
 
         while (!(mXml.tokenType() == QXmlStreamReader::EndElement &&
-                 mXml.name() == widgetType)) {
-            if (mXml.tokenType() == QXmlStreamReader::StartElement) {
+                 mXml.name() == widgetType))
+        {
+            if (mXml.tokenType() == QXmlStreamReader::StartElement)
+            {
                 parametersVector.push_back(extractParameter());
             }
             mXml.readNext();
         }
         auto widget = widgetsFabric.createWidget(widgetType, parametersVector);
-        mWidgetsList.append(widget);
+        if (widget)
+        {
+            mWidgetsList.append(widget);
+        }
     }
 
-    std::pair<QString, QString> XmlLoader::extractParameter()
-    {
+    std::pair<QString, QString> XmlLoader::extractParameter() {
         auto name = mXml.name().toString();
         auto text = mXml.text().toString();
         return std::make_pair(name, text);
