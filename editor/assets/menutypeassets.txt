@@ -1,1 +1,3 @@
 QSlider
+QLineEdit
+QDial

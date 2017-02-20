@@ -74,7 +74,9 @@ namespace loader
             mXml.readNext();
         }
         auto widget = widgetsFabric.createWidget(widgetType, parametersVector);
-        mWidgetsList.append(widget);
+        if (widget) {
+            mWidgetsList.append(widget);
+        }
     }
 
     std::pair<QString, QString> XmlLoader::extractParameter()
