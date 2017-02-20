@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "fabf19d9_bcffdf64",
+        "filename": "editor/src/common/MainWidget.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-02-20T18:47:48Z",
+      "side": 1,
+      "message": "CLion automaticly do this after changes in file tree. I must remove them.",
+      "parentUuid": "fabf19d9_3c2e2f8c",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fabf19d9_1c500b0a",
         "filename": "editor/src/common/Panel.h",
         "patchSetId": 1
