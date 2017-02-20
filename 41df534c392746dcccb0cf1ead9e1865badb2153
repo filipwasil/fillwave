@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fabf19d9_5c3323f6",
+        "filename": "editor/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "We di not use capital letters in cmake\u0027s commands",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_3c2e2f8c",
+        "filename": "editor/src/common/MainWidget.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "Consider not using the independent paths. Add a direcotry \"scene to includes\"",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_1c500b0a",
+        "filename": "editor/src/common/Panel.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "Change the Compile guard name",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_fc79d793",
+        "filename": "editor/src/common/Tools.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "In Fillwave we use:\n\nif () {\n}",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_fc52f711",
+        "filename": "editor/src/common/Tools.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "Change compile guard name",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_3c8aaf64",
+        "filename": "editor/src/common/createsceneriomenu.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "Name files with upper camel case",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_5c8fa374",
+        "filename": "editor/src/common/createsceneriomenu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "do not use:\n.. in include paths",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_1cec8b28",
+        "filename": "editor/src/loader/XmlLoader.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "do not use ..",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_fcee7720",
+        "filename": "editor/src/loader/idataloader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "Change this file name to upper camel case",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_dcf17302",
+        "filename": "editor/src/main.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "Change this file name to upper camel case",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_9ce09b2a",
+        "filename": "editor/src/scene/Renderer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-20T11:01:24Z",
+      "side": 1,
+      "message": "Change this compile guard name",
+      "revId": "41df534c392746dcccb0cf1ead9e1865badb2153",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
