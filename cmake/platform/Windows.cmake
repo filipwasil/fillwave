@@ -12,6 +12,7 @@ add_subdirectory(${FILLWAVE_EXT_GLEW_PATH})
 add_subdirectory(${FILLWAVE_EXT_FREETYPE2_PATH})
 add_subdirectory(${FILLWAVE_EXT_GLFW_PATH})
 add_subdirectory(${FILLWAVE_EXT_FONTGENERATOR_PATH})
+add_subdirectory(${FILLWAVE_EXT_SPDLOG_PATH})
 
 # -----------------------------------------------
 # Includes
@@ -27,8 +28,8 @@ include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_TEXTURE_WRITER_INCLUDES}
                     ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
                     ${FILLWAVE_PATH_SOURCE_PARTICLES}
+                    ${FILLWAVE_EXT_SPDLOG_INCLUDES}
                     )
-
 # -----------------------------------------------
 # Targets
 # -----------------------------------------------

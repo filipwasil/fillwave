@@ -7,7 +7,10 @@ include_directories(${FILLWAVE_PATH_INCLUDE} ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
         )
 
 IF(WIN32)
-	include_directories(${FILLWAVE_EXT_GLEW_INCLUDES})
+	include_directories(
+			${FILLWAVE_EXT_GLEW_INCLUDES}
+			${FILLWAVE_EXT_SPDLOG_INCLUDES}
+			)
 ENDIF(WIN32)
 
 add_library(textureloader SHARED ${FILLWAVE_TEXTURE_LOADER_SOURCES})
