@@ -1,19 +1,10 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 
 # -----------------------------------------------
-# Version
-# -----------------------------------------------
-
-SET(VERSION_MAJOR 6)
-SET(VERSION_MINOR 1)
-SET(VERSION_PATCH 0)
-SET(PROJECT_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
-
-# -----------------------------------------------
 # Workarounds
 # -----------------------------------------------
 
-ADD_DEFINITIONS(-DASSIMP_BUILD_NO_IFC_IMPORTER )
+add_definitions(-DASSIMP_BUILD_NO_IFC_IMPORTER)
 
 # -----------------------------------------------
 # Project options
