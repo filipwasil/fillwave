@@ -1,14 +1,13 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 
-#CMAKE_POLICY(SET CMP0048 OLD) #Project version cmake policy
-#CMAKE_POLICY(SET CMP0046 OLD) #Project dependency cmake policy
+CMAKE_POLICY(SET CMP0048 NEW)
 
 # -----------------------------------------------
 # Package type
 # -----------------------------------------------
 
 message("Building binary package")
-project(libfillwave C CXX)
+project(libfillwave VERSION 6.3.0 LANGUAGES C CXX)
 
 # -----------------------------------------------
 # Includes
@@ -19,6 +18,7 @@ include_directories(${FILLWAVE_PATH_INCLUDE}
                     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
                     ${FILLWAVE_TEXTURE_WRITER_INCLUDES}
                     ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
+                    ${FILLWAVE_EXT_SPDLOG_INCLUDES}
                     /usr/include/freetype2) #uglt freetype2 needs /usr/local/include/freetype2/ft2build.h
 
 if(FILLWAVE_BUILD_PACK)
@@ -69,7 +69,6 @@ else()
         target_link_libraries(fillwave ${FILLWAVE_GLEW_BUILD})
 		include_directories(${FILLWAVE_EXT_GLEW_INCLUDES})
     else()
-        add_dependencies(fillwave GLEW)
         target_link_libraries(fillwave GLEW)
     endif()
 endif()
