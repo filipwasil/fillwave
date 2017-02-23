@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fabf19d9_c1a2914b",
+        "filename": "editor/src/loader/MenuWidgetFabric.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-23T20:59:18Z",
+      "side": 1,
+      "message": "Do not move \"{\" to the next line.\n\nvoid foo () {\n   // code\n}\n\nis what we use here",
+      "revId": "b519f1a7dad8fb5bbfb34c0b91ed9100926ac612",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_418fa1cc",
+        "filename": "editor/src/loader/MenuWidgetFabric.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-02-23T20:59:18Z",
+      "side": 1,
+      "message": "We allo up to 120 signs per line",
+      "revId": "b519f1a7dad8fb5bbfb34c0b91ed9100926ac612",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
