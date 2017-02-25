@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "fabf19d9_64575327",
+        "filename": "editor/src/loader/MenuWidgetFabric.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-02-25T17:48:35Z",
+      "side": 1,
+      "message": "ok I will change my properties in clion",
+      "parentUuid": "fabf19d9_c1a2914b",
+      "revId": "b519f1a7dad8fb5bbfb34c0b91ed9100926ac612",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fabf19d9_418fa1cc",
         "filename": "editor/src/loader/MenuWidgetFabric.cpp",
         "patchSetId": 1
@@ -30,6 +48,52 @@
       "writtenOn": "2017-02-23T20:59:18Z",
       "side": 1,
       "message": "We allo up to 120 signs per line",
+      "revId": "b519f1a7dad8fb5bbfb34c0b91ed9100926ac612",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_ee08e7db",
+        "filename": "editor/src/loader/MenuWidgetFabric.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-02-25T17:48:35Z",
+      "side": 1,
+      "message": "to remove",
+      "range": {
+        "startLine": 13,
+        "startChar": 10,
+        "endLine": 13,
+        "endChar": 18
+      },
+      "revId": "b519f1a7dad8fb5bbfb34c0b91ed9100926ac612",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_5749b12f",
+        "filename": "editor/src/loader/factory/IMenuWidgetFactory.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-02-25T17:48:35Z",
+      "side": 1,
+      "message": "Wrong Guard.",
+      "range": {
+        "startLine": 2,
+        "startChar": 8,
+        "endLine": 2,
+        "endChar": 27
+      },
       "revId": "b519f1a7dad8fb5bbfb34c0b91ed9100926ac612",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
