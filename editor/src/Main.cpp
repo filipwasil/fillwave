@@ -3,10 +3,9 @@
 #include "common/MainWidget.h"
 #include <QLayout>
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    MainWidget w(argc, argv);
+    common::MainWidget w(argc, argv);
     w.show();
     return app.exec();
 }

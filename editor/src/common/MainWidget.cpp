@@ -4,35 +4,52 @@
 
 #include "MainWidget.h"
 #include "scene/Renderer.h"
-#include "Panel.h"
 #include <QVBoxLayout>
+#include <QList>
 
-MainWidget::MainWidget(int argc, char* argv[], QWidget* parent) :
-        QWidget(parent),
-        mRenderer(new Renderer (argc, argv)),
-        mPanel(new Panel (this, "assets/logo.png"))
-{
-    /* Main layout */
-    QVBoxLayout *horizontal = new QVBoxLayout();
-    horizontal->setDirection(QBoxLayout::LeftToRight);
+namespace common {
+    MainWidget::MainWidget(int argc, char *argv[], QWidget *parent) :
+            QMainWindow(parent),
+            mCentralWidget(new QWidget(this)),
+            mRenderer(new Renderer(argc, argv))
+    {
 
-    /* Panel layout */
+        createBarMenuActions();
+        createMenuCategories();
 
-    /* OpenGL layout */
-    QVBoxLayout *layoutEngineWindow = new QVBoxLayout();
-    mRenderer->setLayout(layoutEngineWindow);
-    resize(800,400);
+        QVBoxLayout *horizontal = new QVBoxLayout();
+        horizontal->setDirection(QBoxLayout::LeftToRight);
 
-    /* Main assemply */
-    this->setLayout(horizontal);
-    horizontal->addWidget(mPanel);
-    horizontal->addWidget(mRenderer);
+        QVBoxLayout *layoutEngineWindow = new QVBoxLayout();
+        mRenderer->setLayout(layoutEngineWindow);
+        horizontal->addWidget(mRenderer);
+        mCentralWidget->setLayout(horizontal);
+        this->setCentralWidget(mCentralWidget);
+        resize(800, 400);
+    }
 
-    QObject::connect(mPanel, &Panel::onChanged,
-                     mRenderer, &Renderer::onUpdate);
-}
+    MainWidget::~MainWidget() {
 
-MainWidget::~MainWidget()
-{
+    }
 
+    void MainWidget::createBarMenuActions() {
+        auto helloWorldAction = new QAction(tr("Hello World"), this);
+
+        QList<QAction *> scensActionList;
+        scensActionList.append(helloWorldAction);
+        mActionsListMap["Scens"] = scensActionList;
+    }
+
+    void MainWidget::createMenuCategories() {
+        mMenuBar = this->menuBar();
+        auto scens = mMenuBar->addMenu("Scens");
+
+        if (!mActionsListMap.contains("Scens")) {
+            return;
+        }
+        auto ScensActionList = mActionsListMap["Scens"];
+        for (auto action : ScensActionList) {
+            scens->addAction(action);
+        }
+    }
 }

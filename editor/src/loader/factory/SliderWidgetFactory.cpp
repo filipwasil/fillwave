@@ -7,10 +7,14 @@ namespace loader
     {
         QWidget * SliderWidgetFactory::create(QVector<std::pair<QString, QString>> &parametersVector) {
             QSlider * slider = new QSlider();
-            auto minimum = std::find_if(parametersVector.begin(), parametersVector.end(),
-                [](const std::pair<QString, QString>& parameter){ return parameter.first == "minimum"; });
-            auto maximum = std::find_if(parametersVector.begin(), parametersVector.end(),
-                [](const std::pair<QString, QString>& parameter){ return parameter.first == "maximum"; });
+            QString fieldName = "minimum";
+            auto parameterName = [&fieldName](const std::pair<QString, QString>& parameter)
+                { return parameter.first == fieldName; };
+            auto minimum = std::find_if(parametersVector.begin(), parametersVector.end(), parameterName);
+
+            fieldName = "maximum";
+            auto maximum = std::find_if(parametersVector.begin(), parametersVector.end(), parameterName);
+
             slider->setMinimum(minimum->second.toInt());
             slider->setMaximum(maximum->second.toInt());
             return slider;

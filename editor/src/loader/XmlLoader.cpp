@@ -9,7 +9,7 @@ namespace loader
     bool XmlLoader::init() {
         bool initStatus;
         initStatus = false;
-        mPossibleWidgets = tools::readFileToStrings("assets/menutypeassets.txt");
+        mPossibleWidgets = tools::readFileToStrings(VALID_MENU_TYPES_FILE);
         if (!mPossibleWidgets.isEmpty())
         {
             initStatus = true;

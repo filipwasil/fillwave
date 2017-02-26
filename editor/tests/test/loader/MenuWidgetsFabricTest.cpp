@@ -6,7 +6,7 @@
 TEST_F(MenuWidgetsFabricTestFixture, testCreateSliderWidget) {
     QString sliderType = "QSlider";
     QVector<std::pair<QString, QString>> sliderParameters;
-    sliderParameters.push_back(std::make_pair("minimum", "0"));
+    sliderParameters.push_back(std::make_pair("minimum", "1"));
     sliderParameters.push_back(std::make_pair("maximum", "100"));
 
     auto newWidget = sut->createWidget(sliderType, sliderParameters);
@@ -16,14 +16,14 @@ TEST_F(MenuWidgetsFabricTestFixture, testCreateSliderWidget) {
     QSlider* slider = qobject_cast<QSlider*>(newWidget);
 
     ASSERT_TRUE(slider);
-    EXPECT_EQ(0, slider->minimum());
+    EXPECT_EQ(1, slider->minimum());
     EXPECT_EQ(100, slider->maximum());
 }
 
 TEST_F(MenuWidgetsFabricTestFixture, testCreateDialWidget) {
     QString sliderType = "QDial";
     QVector<std::pair<QString, QString>> sliderParameters;
-    sliderParameters.push_back(std::make_pair("minimum", "0"));
+    sliderParameters.push_back(std::make_pair("minimum", "1"));
     sliderParameters.push_back(std::make_pair("maximum", "100"));
 
     auto newWidget = sut->createWidget(sliderType, sliderParameters);
@@ -33,7 +33,7 @@ TEST_F(MenuWidgetsFabricTestFixture, testCreateDialWidget) {
     QDial* slider = qobject_cast<QDial*>(newWidget);
 
     ASSERT_TRUE(slider);
-    EXPECT_EQ(0, slider->minimum());
+    EXPECT_EQ(1, slider->minimum());
     EXPECT_EQ(100, slider->maximum());
 }
 
