@@ -8,16 +8,18 @@ namespace loader
 
         QWidget *DialWidgetFactory::create(QVector<std::pair<QString, QString>> &parametersVector) {
             QDial* slider = new QDial();
-            QString fieldName = "minimum";
-            auto parameterName = [&fieldName](const std::pair<QString, QString>& parameter)
-                { return parameter.first == fieldName; };
-            auto minimum = std::find_if(parametersVector.begin(), parametersVector.end(), parameterName);
-
-            fieldName = "maximum";
-            auto maximum = std::find_if(parametersVector.begin(), parametersVector.end(), parameterName);
-
+            auto minimum = std::find_if(parametersVector.begin(), parametersVector.end(),
+                [](const std::pair<QString, QString>& parameter) { return parameter.first == "minimum"; });
+            auto maximum = std::find_if(parametersVector.begin(), parametersVector.end(),
+                [](const std::pair<QString, QString>& parameter) { return parameter.first == "maximum"; });
+            auto accesibleName = std::find_if(parametersVector.begin(), parametersVector.end(),
+                [](const std::pair<QString, QString>& parameter) { return parameter.first == "accesibleName"; });
+            auto maxWidth = std::find_if(parametersVector.begin(), parametersVector.end(),
+                [](const std::pair<QString, QString>& parameter){ return parameter.first == "maxWidth"; });
             slider->setMinimum(minimum->second.toInt());
             slider->setMaximum(maximum->second.toInt());
+            slider->setAccessibleName(accesibleName->second);
+            slider->setMaximumWidth(maxWidth->second.toInt());
             return slider;
         }
     }

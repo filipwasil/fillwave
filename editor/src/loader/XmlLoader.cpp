@@ -1,15 +1,15 @@
 #include "XmlLoader.h"
 #include "MenuWidgetFabric.h"
 #include "common/Tools.h"
-
 #include <QMessageBox>
+#include <iostream>
 
 namespace loader
 {
     bool XmlLoader::init() {
         bool initStatus;
         initStatus = false;
-        mPossibleWidgets = tools::readFileToStrings(VALID_MENU_TYPES_FILE);
+        mPossibleWidgets = tools::readFileToStrings(MENU_VALID_TYPES_FILE);
         if (!mPossibleWidgets.isEmpty())
         {
             initStatus = true;
@@ -87,7 +87,7 @@ namespace loader
 
     std::pair<QString, QString> XmlLoader::extractParameter() {
         auto name = mXml.name().toString();
-        auto text = mXml.text().toString();
+        auto text = mXml.readElementText();
         return std::make_pair(name, text);
     }
 

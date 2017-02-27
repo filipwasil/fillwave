@@ -10,7 +10,7 @@
 
 namespace loader
 {
-    #define VALID_MENU_TYPES_FILE "assets/menutypeassets.txt"
+    #define MENU_VALID_TYPES_FILE "assets/menutypeassets.txt"
 
     class XmlLoader : public IDataLoader
     {

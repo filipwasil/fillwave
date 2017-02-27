@@ -9,6 +9,7 @@
 #include <QMainWindow>
 #include <QMenuBar>
 #include <QAction>
+#include <QVBoxLayout>
 
 class QPushButton;
 
@@ -17,6 +18,8 @@ class Renderer;
 class Panel;
 
 namespace common {
+#define HELLO_WORLD_MENU_FILE "assets/SceneriosMenu/HelloWorld.xml"
+
     class MainWidget : public QMainWindow {
     Q_OBJECT
 
@@ -28,7 +31,9 @@ namespace common {
     private:
         void createBarMenuActions();
 
-        void createMenuCategories();
+        void createBarMenuCategories();
+
+        QVBoxLayout* createMainMenu();
 
         QWidget *mCentralWidget;
         Renderer *mRenderer;
