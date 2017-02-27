@@ -9,6 +9,7 @@
 #include <QMainWindow>
 #include <QMenuBar>
 #include <QAction>
+#include <QVBoxLayout>
 
 class QPushButton;
 
@@ -28,12 +29,21 @@ namespace common {
     private:
         void createBarMenuActions();
 
-        void createMenuCategories();
+        void createBarMenuCategories();
 
+        QVBoxLayout* createMainMenu();
+
+        QList<QWidget *> getMenuWidgetList() const;
+
+        QVBoxLayout *getMainMenuVBoxLayout(const QList<QWidget *> &menuWidgets);
+
+        const QString mDefaultScenerioMenu;
         QWidget *mCentralWidget;
         Renderer *mRenderer;
         QMenuBar *mMenuBar;
         QMap<QString, QList<QAction *>> mActionsListMap;
+
+
     };
 
 }

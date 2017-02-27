@@ -13,16 +13,14 @@ namespace tools
             msgBox.exec();
             return stringsVector;
         }
-        if (inputFile.open(QIODevice::ReadOnly)) {
-            QTextStream in(&inputFile);
+        QTextStream in(&inputFile);
 
-            while (!in.atEnd())
-            {
-                QString line = in.readLine();
-                stringsVector.push_back(line);
-            }
-            inputFile.close();
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            stringsVector.push_back(line);
         }
+        inputFile.close();
+
         return stringsVector;
     }
 }

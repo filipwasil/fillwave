@@ -2,7 +2,6 @@ set(SOURCECOMMON
         ${SOURCE}
         ${CMAKE_CURRENT_SOURCE_DIR}/Tools.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Button.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/CreateScenerioMenu.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Editorslider.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Panel.cpp
@@ -13,7 +12,6 @@ set(HEADERSCOMMON
         ${HEADERS}
         ${CMAKE_CURRENT_SOURCE_DIR}/Tools.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Button.h
-        ${CMAKE_CURRENT_SOURCE_DIR}/CreateScenerioMenu.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Editorslider.hpp
         ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Panel.h
