@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fabf19d9_85edb3f1",
+        "filename": "editor/src/common/MainWidget.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-02-28T09:57:05Z",
+      "side": 1,
+      "message": "no delete!",
+      "range": {
+        "startLine": 64,
+        "startChar": 27,
+        "endLine": 64,
+        "endChar": 42
+      },
+      "revId": "91896d3e35ae55b7210b84eaa34d1cf31b8529e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
