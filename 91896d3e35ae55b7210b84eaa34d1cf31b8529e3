@@ -60,6 +60,24 @@
     },
     {
       "key": {
+        "uuid": "fabf19d9_077e32ae",
+        "filename": "editor/src/common/MainWidget.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-03-03T22:14:17Z",
+      "side": 1,
+      "message": "move it to cpp file where you use this value and make it static const char* or static const string.",
+      "parentUuid": "fabf19d9_f11c2315",
+      "revId": "91896d3e35ae55b7210b84eaa34d1cf31b8529e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fabf19d9_f1c0a37e",
         "filename": "editor/src/loader/XmlLoader.h",
         "patchSetId": 1
