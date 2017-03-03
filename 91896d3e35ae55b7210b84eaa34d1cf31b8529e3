@@ -42,6 +42,24 @@
     },
     {
       "key": {
+        "uuid": "fabf19d9_f11c2315",
+        "filename": "editor/src/common/MainWidget.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-03-03T07:36:25Z",
+      "side": 1,
+      "message": "It is default scene load when we start editor. I adeed this in order not hardcode this directly in code. Perhaps in time we change this default scene.",
+      "parentUuid": "fabf19d9_51c98fab",
+      "revId": "91896d3e35ae55b7210b84eaa34d1cf31b8529e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fabf19d9_f1c0a37e",
         "filename": "editor/src/loader/XmlLoader.h",
         "patchSetId": 1
@@ -53,6 +71,24 @@
       "writtenOn": "2017-03-02T20:43:34Z",
       "side": 1,
       "message": "WTF ? :)",
+      "revId": "91896d3e35ae55b7210b84eaa34d1cf31b8529e3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fabf19d9_b116abef",
+        "filename": "editor/src/loader/XmlLoader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-03-03T07:36:25Z",
+      "side": 1,
+      "message": "Use this directly?",
+      "parentUuid": "fabf19d9_f1c0a37e",
       "revId": "91896d3e35ae55b7210b84eaa34d1cf31b8529e3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
