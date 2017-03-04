@@ -77,10 +77,7 @@ if(NOT FILLWAVE_SUPPRESS_WARNINGS)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-declarations")             # stb
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")                  # build Functions
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")               # we do want to hide them in some cases
-        if (GCC_VERSION VERSION_GREATER 6.0)
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-misleading-indentation")
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-shift-negative-value")
-        endif()
+
         # OpenMP
         add_definitions("-fopenmp")
         find_package(OpenMP)
