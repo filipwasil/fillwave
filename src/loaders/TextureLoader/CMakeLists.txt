@@ -1,5 +1,9 @@
 cmake_minimum_required( VERSION 2.8.8 )
 
+if (GCC_VERSION VERSION_GREATER 6.0)
+        add_compile_options(-Wno-misleading-indentation -Wno-shift-negative-value)
+endif()
+
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} FILLWAVE_TEXTURE_LOADER_SOURCES)
 
 include_directories(${FILLWAVE_PATH_INCLUDE} ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
