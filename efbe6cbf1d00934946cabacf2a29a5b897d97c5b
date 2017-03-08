@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ff7e916_427a185a",
+        "filename": "src/loaders/TextureLoader/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-03-08T07:01:55Z",
+      "side": 1,
+      "message": "Use tabs please",
+      "revId": "efbe6cbf1d00934946cabacf2a29a5b897d97c5b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
