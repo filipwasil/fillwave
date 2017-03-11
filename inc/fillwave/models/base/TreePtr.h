@@ -58,6 +58,10 @@ class TreePtr: public C {
 	}
 
 	virtual ~TreePtr() = default;
+	TreePtr & operator= ( const TreePtr& ) = default;
+	TreePtr ( const TreePtr & ) = default;
+	TreePtr& operator = (TreePtr&&) = default;
+	TreePtr (TreePtr&& obj) = default;
 
 	void attach(std::unique_ptr<T>&& node) {
 		if (node.get() == this) {

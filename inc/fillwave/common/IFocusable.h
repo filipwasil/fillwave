@@ -45,6 +45,8 @@ class IFocusable {
  public:
 	IFocusable(Engine* engine);
 	virtual ~IFocusable();
+	IFocusable& operator = (IFocusable&&) = default;
+	IFocusable (IFocusable&& obj) = default;
 
 	virtual void handleFocusEvent(EventType& event) = 0;
 	void attachCallback(Callback* callback);

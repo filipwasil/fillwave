@@ -1,3 +1,6 @@
+#ifndef GLPROGRAM_H_
+#define GLPROGRAM_H_
+
 /*
  * Program.h
  *
@@ -30,9 +33,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef GLPROGRAM_H_
-#define GLPROGRAM_H_
 
 #include <fillwave/core/pipeline/Uniform.h>
 #include <fillwave/core/pipeline/Shader.h>
@@ -103,7 +103,8 @@ class Program {
 };
 
 } /* core */
-core::Program* buildProgram(
+typedef std::unique_ptr<core::Program> puProgram;
+core::Program* buildProgram (
    const std::vector<core::Shader*>& shaders,
    GLboolean skipLinking = GL_FALSE);
 } /* fillwave */

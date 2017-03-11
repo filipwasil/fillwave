@@ -1,3 +1,6 @@
+#ifndef MODEL_H_
+#define MODEL_H_
+
 /*
  * Model.h
  *
@@ -30,9 +33,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef MODEL_H_
-#define MODEL_H_
 
 #include <fillwave/models/base/Programmable.h>
 #include <fillwave/common/IFocusable.h>
@@ -80,6 +80,9 @@ class Model: public IFocusable, public Programmable {
 	   const Material& material = Material());
 
 	virtual ~Model();
+
+	Model& operator = (Model&&) = default;
+	Model (Model&& obj) = default;
 
 	void reload();
 

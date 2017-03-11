@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * TimedRotateCallback.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef ROTATECALLBACK_H_
-#define ROTATECALLBACK_H_
 
 #include <fillwave/actions/callbacks/TimedCallback.h>
 
@@ -68,5 +67,3 @@ class TimedRotateCallback: public TimedCallback {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* ROTATECALLBACK_H_ */
