@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * OpenGL.h
  *
@@ -31,9 +33,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#pragma once
-
-#include <fillwave/Config.h>
+#include "fillwave/Config.h"
 
 #if defined(__APPLE__)
 #include <OpenGL/gl3.h>

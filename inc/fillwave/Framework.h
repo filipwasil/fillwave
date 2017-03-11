@@ -51,7 +51,7 @@
 #include <fillwave/actions/events/KeyboardTEvent.h>
 #include <fillwave/actions/events/MouseButtonTEvent.h>
 #include <fillwave/actions/events/ScrollTEvent.h>
-#include <fillwave/actions/events/TimeTEvent.h>
+#include <fillwave/actions/events/TimeEvent.h>
 #include <fillwave/actions/events/TouchTEvent.h>
 
 /* Space */

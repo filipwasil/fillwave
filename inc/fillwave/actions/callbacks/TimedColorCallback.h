@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * TimedColorCallback.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef INC_FILLWAVE_ACTIONS_TIMEDCOLORCALLBACK_H_
-#define INC_FILLWAVE_ACTIONS_TIMEDCOLORCALLBACK_H_
 
 #include <fillwave/actions/callbacks/TimedCallback.h>
 #include <fillwave/models/Model.h>
@@ -70,5 +69,3 @@ class TimedColorCallback: public TimedCallback {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* INC_FILLWAVE_ACTIONS_TIMEDCOLORCALLBACK_H_ */

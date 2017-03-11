@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * FPSCallback.h
  *
@@ -31,11 +33,8 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef FPSCALLBACK_H_
-#define FPSCALLBACK_H_
-
 #include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/actions/events/TimeTEvent.h>
+#include <fillwave/actions/events/TimeEvent.h>
 #include <fillwave/hud/Text.h>
 
 namespace fillwave {
@@ -60,5 +59,3 @@ class FPSCallback: public Callback {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* FPSCALLBACK_H_ */

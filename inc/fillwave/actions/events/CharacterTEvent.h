@@ -1,12 +1,11 @@
+#pragma once
+
 /*
  * CharacterEvent.h
  *
  *  Created on: Oct 4, 2014
  *      Author: Filip Wasil
  */
-
-#ifndef CHARACTEREVENT_H_
-#define CHARACTEREVENT_H_
 
 #include <fillwave/actions/events/TEvent.h>
 
@@ -37,5 +36,3 @@ class CharacterEvent: public TEvent<CharacterEventData> {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* CHARACTEREVENT_H_ */

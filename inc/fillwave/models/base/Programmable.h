@@ -49,6 +49,11 @@ class Programmable: public Entity {
 	Programmable(core::Program* program);
 
 	virtual ~Programmable() = default;
+	Programmable& operator = (const Programmable&) = default;
+	Programmable (const Programmable &) = default;
+	Programmable& operator = (Programmable&&) = default;
+	Programmable (Programmable&& obj) = default;
+
 
 	void addEffect(pIEffect effect);
 	void removeEffect(pIEffect effect);
