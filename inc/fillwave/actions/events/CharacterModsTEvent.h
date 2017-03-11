@@ -1,12 +1,11 @@
+#pragma once
+
 /*
  * CharacterModsEvent.h
  *
  *  Created on: Jan 11, 2015
  *      Author: Filip Wasil
  */
-
-#ifndef CHARACTERMODSEVENT_H_
-#define CHARACTERMODSEVENT_H_
 
 #include <fillwave/actions/events/TEvent.h>
 
@@ -38,5 +37,3 @@ class CharacterModsEvent: public TEvent<CharacterModsEventData> {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* CHARACTERMODEVENT_H_ */

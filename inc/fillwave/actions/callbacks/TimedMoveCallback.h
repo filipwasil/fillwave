@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * TimedMoveCallback.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef TIMEDMOVECALLBACK_H_
-#define TIMEDMOVECALLBACK_H_
-
 #include <fillwave/actions/callbacks/TimedCallback.h>
 #include <fillwave/models/base/Moveable.h>
 #include <fillwave/Math.h>
@@ -65,5 +64,3 @@ class TimedMoveCallback: public TimedCallback {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* TIMEDMOVECALLBACK_H_ */

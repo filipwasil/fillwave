@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * SequenceCallback.h
  *
@@ -31,12 +33,9 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SEQUENCECALLBACK_H_
-#define SEQUENCECALLBACK_H_
-
 #include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/actions/events/TimeTEvent.h>
+#include <fillwave/actions/events/TimeEvent.h>
 
 #include <vector>
 
@@ -66,5 +65,3 @@ class SequenceCallback: public Callback, public std::vector<puCallback> {
 } /* framework */
 typedef std::unique_ptr<framework::SequenceCallback> puSequenceCallback;
 } /* fillwave */
-
-#endif /* SEQUENCECALLBACK_H_ */

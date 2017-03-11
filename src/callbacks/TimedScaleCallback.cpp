@@ -32,7 +32,7 @@
  */
 
 #include <fillwave/actions/callbacks/TimedScaleCallback.h>
-#include <fillwave/actions/events/TimeTEvent.h>
+#include <fillwave/actions/events/TimeEvent.h>
 
 namespace fillwave {
 namespace framework {

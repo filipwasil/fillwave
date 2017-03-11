@@ -36,7 +36,6 @@
 
 #include <fillwave/Log.h>
 #include <fillwave/common/Macros.h>
-#include <fillwave/common/IFocusable.h>
 
 FLOGINIT("Entity", FERROR | FFATAL)
 

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * TimedScaleCallback.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef TIMEDSCALECALLBACK_H_
-#define TIMEDSCALECALLBACK_H_
 
 #include <fillwave/actions/callbacks/TimedCallback.h>
 #include <fillwave/models/base/Moveable.h>
@@ -69,5 +68,3 @@ class TimedScaleCallback: public TimedCallback {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* TIMEDSCALECALLBACK_H_ */
