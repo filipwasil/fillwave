@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * TimedEmiterUpdateCallback.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef TIMEDEMITERUPDATECALLBACK_H_
-#define TIMEDEMITERUPDATECALLBACK_H_
-
 #include <fillwave/actions/callbacks/TimedCallback.h>
 #include <fillwave/models/EmiterPointCPU.h>
 
@@ -64,5 +63,3 @@ class TimedEmiterUpdateCallback: public TimedCallback {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* TIMEDEMITERUPDATECALLBACK_H_ */

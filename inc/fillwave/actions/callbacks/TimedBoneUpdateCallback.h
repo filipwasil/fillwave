@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * TimedBoneUpdateCallback.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef TIMEDBONEUPDATECALLBACK_H_
-#define TIMEDBONEUPDATECALLBACK_H_
-
 #include <fillwave/actions/callbacks/TimedCallback.h>
 
 namespace fillwave {
@@ -61,5 +60,3 @@ class TimedBoneUpdateCallback: public TimedCallback {
 
 } /* framework */
 } /* fillwave */
-
-#endif /* TIMEDBONEUPDATECALLBACK_H_ */

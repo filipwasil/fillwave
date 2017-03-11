@@ -67,6 +67,10 @@ class Entity:
 	          glm::quat(1.0, 0.0, 0.0, 0.0));
 
 	virtual ~Entity();
+	Entity & operator= ( const Entity& ) = default;
+	Entity ( const Entity & ) = default;
+	Entity& operator = (Entity&&) = default;
+	Entity (Entity&& obj) = default;
 
 	/* Flags */
 	GLboolean isPSC();

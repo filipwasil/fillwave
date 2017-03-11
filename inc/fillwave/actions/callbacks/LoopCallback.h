@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * LoopCallback.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef LOOPCALLBACK_H_
-#define LOOPCALLBACK_H_
-
 #include <fillwave/common/Finishable.h>
 
 #include <fillwave/actions/callbacks/Callback.h>
@@ -66,5 +65,3 @@ class LoopCallback: public Callback {
 } /* framework */
 typedef std::unique_ptr<framework::LoopCallback> puLoopCallback;
 } /* fillwave */
-
-#endif /* LOOPCALLBACK_H_ */

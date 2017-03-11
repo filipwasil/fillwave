@@ -33,7 +33,7 @@
 
 #include <fillwave/actions/callbacks/TimedRotateCallback.h>
 #include <fillwave/actions/events/KeyboardTEvent.h>
-#include <fillwave/actions/events/TimeTEvent.h>
+#include <fillwave/actions/events/TimeEvent.h>
 #include <fillwave/Math.h>
 
 #include <iostream>

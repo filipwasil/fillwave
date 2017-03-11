@@ -47,6 +47,8 @@ class IPickable {
  public:
 	IPickable();
 	virtual ~IPickable() = default;
+	IPickable& operator = (IPickable&&) = default;
+	IPickable (IPickable&& obj) = default;
 
 	bool isPickable() {
 		return mFlagPickable;
