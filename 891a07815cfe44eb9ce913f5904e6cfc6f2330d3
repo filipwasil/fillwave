@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2478c6de_edefffd3",
+        "filename": "editor/src/loader/SceneController.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-03-12T19:09:35Z",
+      "side": 1,
+      "message": "Beacuse I use property system to set value in map from scene I must pass map to setProperty I can\u0027t use std::pair.",
+      "range": {
+        "startLine": 17,
+        "startChar": 32,
+        "endLine": 17,
+        "endChar": 41
+      },
+      "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "05c8331c_fc966e6b",
+        "filename": "editor/src/scene/Renderer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-03-12T19:09:35Z",
+      "side": 1,
+      "message": "If map with parameters is qpropety I must use other map to set values. In fact map who is argument in setProperty have only one key(more  like std::pair).",
+      "range": {
+        "startLine": 17,
+        "startChar": 4,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
