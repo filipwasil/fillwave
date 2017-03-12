@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Fillwave.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef FILLWAVE_H_
-#define FILLWAVE_H_
 
 #include <fillwave/space/Scene.h>
 
@@ -108,7 +107,7 @@ class Engine final {
 
 	/* Scene */
 	void setCurrentScene(puScene&& scene);
-	framework::Scene* getCurrentScene() const;
+	framework::Scene& getCurrentScene() const;
 
 	/* Time */
 	GLuint getFramesPassed();
@@ -142,8 +141,7 @@ class Engine final {
 
 	core::Texture2DRenderable* storeTextureRenderable();
 
-	core::Texture2DRenderableDynamic* storeTextureDynamic(
-	   const std::string& fragmentShaderPath);
+	core::Texture2DRenderableDynamic* storeTextureDynamic(const std::string& fragmentShaderPath);
 
 	core::Texture3D* storeTexture3D(
 	   const std::string& posX,
@@ -283,13 +281,8 @@ class Engine final {
 	core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao,
 	      tinyobj::shape_t& shape, tinyobj::attrib_t& attributes);
 #endif
-	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao,
-	                                       const std::vector<GLuint>& data);
+	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao, const std::vector<GLuint>& data);
 	core::IndexBuffer* storeBufferInternal(core::VertexArray* vao, GLuint elements);
 };
 
 } /* fillwave */
-
-#endif /*  FILLWAVE_H_ */
-
-/* Header for class com_example_runningremote_RunningRemote */

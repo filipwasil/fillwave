@@ -68,16 +68,8 @@ void Scene::setAmbient(glm::vec3 ambient) {
 	mAmbientGlobal = ambient;
 }
 
-Cursor* Scene::getCursor() {
-	return mCursor.get();
-}
-
-void Scene::moveCursor(glm::vec2 position) {
-	if (mCursor) {
-		mCursor->move(position);
-	} else {
-		fLogD("No cursor set");
-	}
+Cursor& Scene::getCursor() {
+	return *mCursor.get();
 }
 
 void Scene::updateDependencies() {
@@ -200,8 +192,8 @@ void Scene::setCamera(puICamera&& camera) {
 	mCamera = std::move(camera);
 }
 
-ICamera* Scene::getCamera() {
-	return mCamera.get();
+ICamera& Scene::getCamera() {
+	return *mCamera.get();
 }
 
 void Scene::onEvent(EventType& event) {

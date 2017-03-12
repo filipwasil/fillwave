@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Tree.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef INC_FILLWAVE_COMMON_TREE_H_
-#define INC_FILLWAVE_COMMON_TREE_H_
 
 #include <fillwave/models/base/ITreeNode.h>
 #include <vector>
@@ -116,5 +115,3 @@ class TreePtr: public C {
 
 } /* namespace framework */
 } /* namespace fillwave */
-
-#endif /* INC_FILLWAVE_COMMON_TREE_H_ */

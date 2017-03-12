@@ -394,8 +394,8 @@ void Engine::setCurrentScene(puScene&& scene) {
 	mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-Scene* Engine::getCurrentScene() const {
-	return mImpl->mScene.get();
+Scene& Engine::getCurrentScene() const {
+	return *mImpl->mScene.get();
 }
 
 framework::LightSystem* Engine::getLightSystem() const {
@@ -650,12 +650,10 @@ void Engine::removeBufferText(VertexArray* vao) {
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-IndexBuffer* Engine::storeBufferInternal(VertexArray* vao,
-      const aiMesh* shape) {
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape) {
 	return mImpl->mBuffers.mIndices.store(new IndexBuffer(shape), vao);
 }
-VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
-      const aiMesh* shape, framework::Animator* animator) {
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape, framework::Animator* animator) {
 	return mImpl->mBuffers.mVertices.store(new VertexBufferBasic(shape, animator), vao);
 }
 #else

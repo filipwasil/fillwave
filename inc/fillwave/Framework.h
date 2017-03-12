@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * framework.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef INC_FILLWAVE_FRAMEWORK_H_
-#define INC_FILLWAVE_FRAMEWORK_H_
-
 /* Events */
 #include <fillwave/actions/callbacks/FPSCallback.h>
 #include <fillwave/actions/callbacks/TimedMoveCallback.h>
@@ -58,6 +57,7 @@
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
 #include <fillwave/space/LightDirectional.h>
+#include <fillwave/space/Scene.h>
 
 /* Loaders */
 #include <fillwave/loaders/FileLoader.h>
@@ -90,5 +90,3 @@
 #include <fillwave/models/Impostor.h>
 #include <fillwave/models/EmiterPointGPU.h>
 #include <fillwave/models/EmiterPointCPU.h>
-
-#endif /* INC_FILLWAVE_FRAMEWORK_H_ */

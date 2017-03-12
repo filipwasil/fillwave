@@ -63,9 +63,12 @@ class Scene: public TreePtr<Entity> {
 
 	/* Cursor */
 	void setCursor(puCursor&& cursor);
-	Cursor* getCursor();
+	Cursor& getCursor();
 	void drawCursor();
-	void moveCursor(glm::vec2 position);
+
+	/* Camera */
+	ICamera& getCamera();
+	void setCamera(puICamera&& camera);
 
 	/* Scene */
 	void setSkybox(puSkybox&& skybox);
@@ -84,15 +87,13 @@ class Scene: public TreePtr<Entity> {
 	void drawDepth(ICamera& camera);
 	void drawDepthColor(ICamera& camera, glm::vec3& position);
 
-	/* Interface */
+	/* Draw */
 	void draw();
 	void drawDepthInt();
 	void drawPicking();
 	void drawOcclusion();
-	ICamera* getCamera();
-	void setCamera(puICamera&& camera);
 
-	/* Optional */
+	/* Interface */
 	virtual void onShow();
 	virtual void onHide();
 
