@@ -45,6 +45,29 @@
       "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2dec2470_cf9e6685",
+        "filename": "editor/tests/test/loader/SceneControllerTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-03-12T19:16:41Z",
+      "side": 1,
+      "message": "should be mText, old name was text(I tested this code before refactoring from text \u003d\u003e mText)",
+      "range": {
+        "startLine": 23,
+        "startChar": 24,
+        "endLine": 23,
+        "endChar": 34
+      },
+      "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
