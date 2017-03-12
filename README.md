@@ -60,8 +60,10 @@ Next, run build script:
 ```
 for ubuntu:
 ./build_linux_deb.sh
-for fedora:
-./build_linux_rpm.sh
+for fedora if you want build and install(you must have configured sudo):
+./build_linux_rpm.sh i
+for fedora if you want build rpm packges only(RPM packges are in fillwave_build):
+./build_linux_rpm.sh ni
 ```
 
 ## Windows
