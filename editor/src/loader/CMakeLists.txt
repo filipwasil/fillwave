@@ -2,6 +2,7 @@ set(SOURCELOADER
         ${SOURCE}
         ${CMAKE_CURRENT_SOURCE_DIR}/MenuWidgetFabric.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/XmlLoader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/SceneController.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/SliderWidgetFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/LineEditWidgetFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/DialWidgetFactory.cpp
@@ -12,6 +13,7 @@ set(HEADERSLOADER
         ${CMAKE_CURRENT_SOURCE_DIR}/MenuWidgetFabric.h
         ${CMAKE_CURRENT_SOURCE_DIR}/XmlLoader.h
         ${CMAKE_CURRENT_SOURCE_DIR}/IDataLoader.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/SceneController.h
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/IMenuWidgetFactory.h
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/SliderWidgetFactory.h
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/LineEditWidgetFactory.h

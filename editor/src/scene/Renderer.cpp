@@ -14,6 +14,7 @@ Renderer::Renderer(int argc, char* argv[], QWidget* parent) :
     glFormat.setVersion(3, 3);
     glFormat.setProfile(QGLFormat::CoreProfile);
     setFormat(glFormat);
+    mSceneParameters["mText"] = QVariant("HelloWorld");
 }
 
 Renderer::~Renderer()
@@ -69,3 +70,15 @@ void Renderer::onUpdate(int /*sliderNo*/, int /*value*/) const
 {
     abort(); /* Testing */
 }
+
+QMap<QString, QVariant> Renderer::getParameters() {
+    return mSceneParameters;
+}
+
+void Renderer::setParameters(QMap<QString, QVariant> parameters) {
+    if(!mSceneParameters.contains(parameters.firstKey())) {
+        return;
+    }
+    mSceneParameters[parameters.firstKey()] = parameters.first();
+}
+

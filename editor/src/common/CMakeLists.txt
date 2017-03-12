@@ -16,5 +16,6 @@ set(HEADERSCOMMON
         ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Panel.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Sliders.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/ISceneController.h
         PARENT_SCOPE
         )

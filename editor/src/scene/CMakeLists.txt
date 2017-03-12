@@ -6,5 +6,6 @@ set(SOURCESCENE
 set(HEADERSSCENE
         ${HEADERS}
         ${CMAKE_CURRENT_SOURCE_DIR}/Renderer.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/IScene.h
         PARENT_SCOPE
         )

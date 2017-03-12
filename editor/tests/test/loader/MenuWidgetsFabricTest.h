@@ -2,7 +2,7 @@
 #define CREATEMENUTEST_H
 
 #include <gtest/gtest.h>
-#include "MenuWidgetFabric.h"
+#include "loader/MenuWidgetFabric.h"
 
 class MenuWidgetsFabricTestFixture : public testing::Test
 {
