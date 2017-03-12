@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "e84a242d_9785fd31",
+        "filename": "editor/src/common/ISceneController.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-03-12T19:39:11Z",
+      "side": 1,
+      "message": "#pragma once",
+      "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2478c6de_edefffd3",
         "filename": "editor/src/loader/SceneController.cpp",
         "patchSetId": 1
@@ -19,6 +36,57 @@
         "endLine": 17,
         "endChar": 41
       },
+      "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe6daea7_4dc8bfd5",
+        "filename": "editor/src/loader/SceneController.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-03-12T19:39:11Z",
+      "side": 1,
+      "message": "#pragma once",
+      "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4d398513_ead87b4e",
+        "filename": "editor/src/scene/IScene.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-03-12T19:39:11Z",
+      "side": 1,
+      "message": "#pragma once",
+      "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "416c4316_92e8eefa",
+        "filename": "editor/src/scene/Renderer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-03-12T19:39:11Z",
+      "side": 1,
+      "message": "#pragma once",
       "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
@@ -48,6 +116,23 @@
     },
     {
       "key": {
+        "uuid": "e219df0b_68a91c4e",
+        "filename": "editor/tests/test/loader/MenuWidgetsFabricTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-03-12T19:39:11Z",
+      "side": 1,
+      "message": "#pragma once",
+      "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2dec2470_cf9e6685",
         "filename": "editor/tests/test/loader/SceneControllerTest.cpp",
         "patchSetId": 1
@@ -65,6 +150,23 @@
         "endLine": 23,
         "endChar": 34
       },
+      "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b531e7b0_6581304d",
+        "filename": "editor/tests/test/loader/SceneControllerTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-03-12T19:39:11Z",
+      "side": 1,
+      "message": "#pragma once",
       "revId": "891a07815cfe44eb9ce913f5904e6cfc6f2330d3",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
