@@ -1,7 +1,3 @@
-//
-// Created by filip on 25.04.16.
-//
-
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
@@ -10,6 +6,8 @@
 #include <QMenuBar>
 #include <QAction>
 #include <QVBoxLayout>
+#include "loader/LoadMenu.h"
+#include "common/SceneController.h"
 
 class QPushButton;
 
@@ -31,19 +29,11 @@ namespace common {
 
         void createBarMenuCategories();
 
-        QVBoxLayout* createMainMenu();
-
-        QList<QWidget *> getMenuWidgetList() const;
-
-        QVBoxLayout *getMainMenuVBoxLayout(const QList<QWidget *> &menuWidgets);
-
-        const QString mDefaultScenerioMenu;
         QWidget *mCentralWidget;
         Renderer *mRenderer;
         QMenuBar *mMenuBar;
         QMap<QString, QList<QAction *>> mActionsListMap;
-
-
+        SceneController *mSceneController;
     };
 
 }

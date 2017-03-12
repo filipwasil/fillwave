@@ -6,6 +6,8 @@ set(SOURCECOMMON
         ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Panel.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/Sliders.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/MenuWidgetTranslator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/SceneController.cpp
         PARENT_SCOPE
         )
 set(HEADERSCOMMON
@@ -16,5 +18,8 @@ set(HEADERSCOMMON
         ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Panel.h
         ${CMAKE_CURRENT_SOURCE_DIR}/Sliders.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/ISceneController.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/MenuWidgetTranslator.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/SceneController.h
         PARENT_SCOPE
         )

@@ -1,11 +1,9 @@
 #include "Tools.h"
 #include <QMessageBox>
 
-namespace tools
-{
-    QVector <QString> readFileToStrings(QString pathToFile)
-    {
-        QVector <QString> stringsVector;
+namespace tools {
+    QVector<QString> readFileToStrings(QString pathToFile) {
+        QVector<QString> stringsVector;
         QFile inputFile(pathToFile);
         if (!inputFile.open(QFile::ReadOnly | QFile::Text)) {
             QMessageBox msgBox;

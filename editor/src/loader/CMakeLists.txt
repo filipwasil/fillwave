@@ -5,6 +5,7 @@ set(SOURCELOADER
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/SliderWidgetFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/LineEditWidgetFactory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/DialWidgetFactory.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/LoadMenu.cpp
         PARENT_SCOPE
         )
 set(HEADERSLOADER
@@ -16,5 +17,7 @@ set(HEADERSLOADER
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/SliderWidgetFactory.h
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/LineEditWidgetFactory.h
         ${CMAKE_CURRENT_SOURCE_DIR}/factory/DialWidgetFactory.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/LoadMenu.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/IWidgetFabric.h
         PARENT_SCOPE
         )
