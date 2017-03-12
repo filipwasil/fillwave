@@ -52,8 +52,7 @@ namespace core {
  */
 class Program {
  public:
-	Program(const std::vector<core::Shader*>& shaders,
-	        GLboolean skipLinking = GL_FALSE);
+	Program(const std::vector<core::Shader*>& shaders, GLboolean skipLinking = GL_FALSE);
 
 	virtual ~Program();
 
