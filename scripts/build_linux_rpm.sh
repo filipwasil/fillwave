@@ -1,5 +1,5 @@
 #!/bin/sh
-
+install=$1
 rm -rf ../../fillwave_build
 rm -rf ../../fillwave-examples_build/*
 
@@ -25,6 +25,7 @@ cd ../fillwave_build
 
 # Clear temporary cpack archives
 rm -rf ./_CPack_Packages/*
-
-cd ..
- 
+if [ $install == "y" ]; then
+    sudo dnf remove libfill*
+    sudo dnf install libfillwave-*
+fi

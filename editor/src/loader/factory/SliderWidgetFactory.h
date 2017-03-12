@@ -1,20 +1,13 @@
-#ifndef SLIDERWIDGETFACTORY_H
-#define SLIDERWIDGETFACTORY_H
+#pragma once
 
 #include "IMenuWidgetFactory.h"
 
-namespace loader
-{
-    namespace factory
-    {
-        class SliderWidgetFactory: public IMenuWidgetFactory
-        {
-        public:
-            QWidget * create(QVector<std::pair<QString, QString>> &parametersVector);
-        };
-    }
+namespace loader {
+namespace factory {
+class SliderWidgetFactory : public IMenuWidgetFactory {
+public:
+  QWidget *create(QVector <std::pair<QString, QString>> &parametersVector, common::ISceneController *scene);
+};
+}
 }
 
-
-
-#endif //SLIDERWIDGETFACTORY_H

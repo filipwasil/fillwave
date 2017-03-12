@@ -1,34 +1,36 @@
-#ifndef XMLREADER_H
-#define XMLREADER_H
+#pragma once
 
-#include "IDataLoader.h"
 #include <QXmlStreamReader>
 #include <QXmlStreamAttributes>
 #include <QFile>
 #include <QList>
 #include <QWidget>
+#include "IDataLoader.h"
+#include "loader/IWidgetFabric.h"
 
-namespace loader
-{
-    class XmlLoader : public IDataLoader
-    {
-    public:
-        QList<QWidget *> load(QString pathToFile) override;
+namespace loader {
+class XmlLoader : public IDataLoader {
+public:
+  XmlLoader(IWidgetFabric *WidgetFabric);
 
-    private:
-        bool init();
+  virtual ~XmlLoader();
 
-        void readXml(QFile *file);
+  QList<QWidget *> load(QString pathToFile) override;
 
-        void processXml();
+private:
+  bool init();
 
-        void processChild();
+  void readXml(QFile *file);
 
-        std::pair<QString, QString> extractParameter();
+  void processXml();
 
-        QVector<QString> mPossibleWidgets;
-        QList<QWidget *> mWidgetsList;
-        QXmlStreamReader mXml;
-    };
+  void processChild();
+
+  std::pair<QString, QString> extractParameter();
+
+  QVector <QString> mPossibleWidgets;
+  QList<QWidget *> mWidgetsList;
+  QXmlStreamReader mXml;
+  IWidgetFabric *mWidgetFabric;
+};
 }
-#endif // XMLREADER_H

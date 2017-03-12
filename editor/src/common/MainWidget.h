@@ -1,15 +1,12 @@
-//
-// Created by filip on 25.04.16.
-//
-
-#ifndef MAINWIDGET_H
-#define MAINWIDGET_H
+#pragma once
 
 #include <QWidget>
 #include <QMainWindow>
 #include <QMenuBar>
 #include <QAction>
 #include <QVBoxLayout>
+#include "loader/LoadMenu.h"
+#include "common/SceneController.h"
 
 class QPushButton;
 
@@ -18,34 +15,25 @@ class Renderer;
 class Panel;
 
 namespace common {
-    class MainWidget : public QMainWindow {
-    Q_OBJECT
+class MainWidget : public QMainWindow {
+  Q_OBJECT
 
-    public:
-        MainWidget(int argc, char *argv[], QWidget *parent = 0);
+public:
+  MainWidget(int argc, char *argv[], QWidget *parent = 0);
 
-        virtual ~MainWidget();
+  virtual ~MainWidget();
 
-    private:
-        void createBarMenuActions();
+private:
+  void createBarMenuActions();
 
-        void createBarMenuCategories();
+  void createBarMenuCategories();
 
-        QVBoxLayout* createMainMenu();
-
-        QList<QWidget *> getMenuWidgetList() const;
-
-        QVBoxLayout *getMainMenuVBoxLayout(const QList<QWidget *> &menuWidgets);
-
-        const QString mDefaultScenerioMenu;
-        QWidget *mCentralWidget;
-        Renderer *mRenderer;
-        QMenuBar *mMenuBar;
-        QMap<QString, QList<QAction *>> mActionsListMap;
-
-
-    };
+  QWidget *mCentralWidget;
+  Renderer *mRenderer;
+  QMenuBar *mMenuBar;
+  QMap <QString, QList<QAction *>> mActionsListMap;
+  SceneController *mSceneController;
+};
 
 }
 
-#endif //MAINWIDGET_H
