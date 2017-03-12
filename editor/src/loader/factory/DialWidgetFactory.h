@@ -1,5 +1,4 @@
-#ifndef DIALWIDGETFACTORY_H
-#define DIALWIDGETFACTORY_H
+#pragma once
 #include "IMenuWidgetFactory.h"
 
 namespace loader
@@ -10,9 +9,8 @@ namespace loader
         class DialWidgetFactory : public IMenuWidgetFactory
         {
         public:
-            QWidget *create(QVector<std::pair<QString, QString>> &parametersVector);
+            QWidget *create(QVector<std::pair<QString, QString>> &parametersVector, common::ISceneController *scene);
         };
     }
 }
 
-#endif //DIALWIDGETFACTORY_H

@@ -1,18 +1,20 @@
-#ifndef XMLREADER_H
-#define XMLREADER_H
+#pragma once
 
-#include "IDataLoader.h"
 #include <QXmlStreamReader>
 #include <QXmlStreamAttributes>
 #include <QFile>
 #include <QList>
 #include <QWidget>
+#include "IDataLoader.h"
+#include "loader/IWidgetFabric.h"
 
-namespace loader
-{
-    class XmlLoader : public IDataLoader
-    {
+namespace loader {
+    class XmlLoader : public IDataLoader {
     public:
+        XmlLoader(IWidgetFabric *WidgetFabric);
+
+        virtual ~XmlLoader();
+
         QList<QWidget *> load(QString pathToFile) override;
 
     private:
@@ -29,6 +31,6 @@ namespace loader
         QVector<QString> mPossibleWidgets;
         QList<QWidget *> mWidgetsList;
         QXmlStreamReader mXml;
+        IWidgetFabric *mWidgetFabric;
     };
 }
-#endif // XMLREADER_H
