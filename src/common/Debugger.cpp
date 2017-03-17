@@ -119,7 +119,7 @@ void Debugger::renderFromCamera(ICamera& c, GLint id) {
 
 	glClear(GL_DEPTH_BUFFER_BIT);
 
-	mEngine->getCurrentScene().draw(c);
+	mEngine->getCurrentScene()->draw(c);
 
 	glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
@@ -130,7 +130,7 @@ void Debugger::renderPickingMap() {
 	           mEngine->getScreenSize()[1] * mMiniwindowSize);
 
 	glClear(GL_DEPTH_BUFFER_BIT);
-	mEngine->getCurrentScene().drawPicking();
+	mEngine->getCurrentScene()->drawPicking();
 	glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 

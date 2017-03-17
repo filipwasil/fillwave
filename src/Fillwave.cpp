@@ -394,8 +394,8 @@ void Engine::setCurrentScene(puScene&& scene) {
 	mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-Scene& Engine::getCurrentScene() const {
-	return *mImpl->mScene.get();
+TGetter<framework::Scene>&& Engine::getCurrentScene() const {
+	return std::move(TGetter<framework::Scene>(mImpl->mScene.get()));
 }
 
 framework::LightSystem* Engine::getLightSystem() const {

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * IScene.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef SCENE_H_
-#define SCENE_H_
-
 #include <fillwave/hud/base/HUD.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
@@ -41,6 +40,9 @@
 #include <fillwave/models/Terrain.h>
 #include <fillwave/models/base/IDrawable.h>
 #include <fillwave/renderers/RendererFR.h>
+#include <fillwave/common/TGetter.h>
+
+#include <memory>
 #include <unordered_map>
 
 namespace fillwave {
@@ -62,12 +64,12 @@ class Scene: public TreePtr<Entity> {
 	void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
 	/* Cursor */
+	TGetter<Cursor>&& getCursor();
 	void setCursor(puCursor&& cursor);
-	Cursor& getCursor();
 	void drawCursor();
 
 	/* Camera */
-	ICamera& getCamera();
+	TGetter<ICamera>&& getCamera();
 	void setCamera(puICamera&& camera);
 
 	/* Scene */
@@ -115,4 +117,3 @@ class Scene: public TreePtr<Entity> {
 typedef std::unique_ptr<framework::Scene> puScene;
 } /* fillwave */
 
-#endif /* SCENE_H_ */
