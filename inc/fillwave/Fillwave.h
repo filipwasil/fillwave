@@ -40,6 +40,8 @@
 #include <fillwave/space/LightDirectional.h>
 #include <fillwave/hud/Text.h>
 
+#include <fillwave/common/TGetter.h>
+
 /* Debugger */
 #include <fillwave/Debugger.h>
 
@@ -107,7 +109,7 @@ class Engine final {
 
 	/* Scene */
 	void setCurrentScene(puScene&& scene);
-	framework::Scene& getCurrentScene() const;
+	TGetter<framework::Scene>&& getCurrentScene() const;
 
 	/* Time */
 	GLuint getFramesPassed();
