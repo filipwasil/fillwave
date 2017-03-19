@@ -37,9 +37,14 @@
 #include <fillwave/common/Strings.h>
 #include <iterator>
 
-#include <fillwave/Log.h>
+//  TODO CRASH FIXME
 
-FLOGINIT("TextureLoader", FERROR | FFATAL | FDEBUG)
+// Putting logs in this file crashes the spdlog
+// Prable multithread problem
+
+//#include <fillwave/Log.h>
+
+//FLOGINIT("TextureLoader", FERROR | FFATAL | FDEBUG)
 
 using namespace std;
 
@@ -52,24 +57,24 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
     std::string rootPath,
     eCompression compression) {
 
-  fLogD("Texture %s loading ...", filePath.c_str());
+ // fLogD("Texture %s loading ...", filePath.c_str());
   size_t posCheckboard = filePath.find(".checkboard");
   size_t posColor = filePath.find(".color");
   size_t posDDS = filePath.find(".dds");
   uint8_t r = 0, g = 0, b = 0;
   if (filePath == rootPath) {
-    fLogD("Empty texture %s generation and loading ...", filePath.c_str());
+    //fLogD("Empty texture %s generation and loading ...", filePath.c_str());
     core::Texture2DFile *file = loadVirtualFileColor(512, 512, 0, 0, 0);
     return file;
   }
 
 
   if (posColor != std::string::npos) {
-    fLogD("Color texture %s generation and loading ...", filePath.c_str());
+    //fLogD("Color texture %s generation and loading ...", filePath.c_str());
     std::string sub = filePath.substr(rootPath.size(), posColor);
     std::vector<std::string> tokens = split(sub, '_');
     if (tokens.size() < 3) {
-      fLogE("Could not found color parameters in %s", filePath.c_str());
+//      fLogE("Could not found color parameters in %s", filePath.c_str());
       return nullptr;
     }
 
@@ -81,11 +86,11 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
     return file;
   }
   if (posCheckboard != std::string::npos) {
-    fLogD("Checkboard texture %s generation and loading ...", filePath.c_str());
+   // fLogD("Checkboard texture %s generation and loading ...", filePath.c_str());
     std::string sub = filePath.substr(rootPath.size(), posCheckboard);
     std::vector<std::string> tokens = split(sub, '_');
     if (tokens.size() < 3) {
-      fLogE("Could not found color parameters in %s", filePath.c_str());
+     // fLogE("Could not found color parameters in %s", filePath.c_str());
       return nullptr;
     }
 
@@ -97,7 +102,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
     return file;
   }
   if (posDDS != std::string::npos) {
-    fLogE("Compressed Texture %s not supported yet", filePath.c_str());
+   // fLogE("Compressed Texture %s not supported yet", filePath.c_str());
     return nullptr;
   }
 #ifdef FILLWAVE_TEXTURE_LOADER_GLI
@@ -231,14 +236,14 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
   if (content == NULL) { //xxx NULL, not nullptr because the stb library uses NULL
     FILE *f = fopen(filePath.c_str(), "rb");
     if (!f) {
-      fLogE("Texture %s not found", filePath.c_str());
+     // fLogE("Texture %s not found", filePath.c_str());
     } else {
-      fLogE("Texture %s found but not supported ", filePath.c_str());
+     // fLogE("Texture %s found but not supported ", filePath.c_str());
       fclose(f);
     }
     return nullptr;
   }
-  fLogD("Image %s size %dx%d pixel %d bytes per pixel", filePath.c_str(), w, h, n);
+//  fLogD("Image %s size %dx%d pixel %d bytes per pixel", filePath.c_str(), w, h, n);
   core::Texture2DFile *file = new core::Texture2DFile();
 
   file->mHeader.mFormat = format;
@@ -256,7 +261,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
     file->mConfig.mCompression = GL_TRUE;
     file->mHeader.mInternalFormat = getComporession(compression);
     file->mConfig.mCompressionSize = 0;
-    fLogF("Texture compression feature not ready");
+    //fLogF("Texture compression feature not ready");
   }
 
   file->mConfig.mBorder = 0;
@@ -265,7 +270,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
 
   file->mAllocation = core::eMemoryAllocation::eMallock;
 
-  fLogD("Flipping Texture %s ...", filePath.c_str());
+  //fLogD("Flipping Texture %s ...", filePath.c_str());
   switch (flip) {
     case eFlip::eVertical:
 #pragma omp parallel for schedule(guided) num_threads(2)
@@ -462,7 +467,7 @@ inline GLint TextureLoader::getBytesPerPixel(GLenum format) {
       bytes = 1;
       break;
     default:
-      fLogE("Not recognized texture format loading");
+//      fLogE("Not recognized texture format loading");
       bytes = 0;
       break;
   }
