@@ -39,8 +39,8 @@ namespace fillwave {
 namespace framework {
 
 ShaderLoaderFragment::ShaderLoaderFragment(GLuint renderTargets)
-    : mFog (GL_FALSE), mColor (GL_FALSE), mColorBoost (GL_FALSE), mTextureOnly (GL_FALSE), mPointLights (GL_TRUE)
-    , mRendertargets (renderTargets) {
+    : mFog(GL_FALSE), mColor(GL_FALSE), mColorBoost(GL_FALSE), mTextureOnly(GL_FALSE), mPointLights(GL_TRUE)
+    , mRendertargets(renderTargets) {
 
 }
 
@@ -58,7 +58,7 @@ const std::string ShaderLoaderFragment::getSource() const {
   std::string outputs;
   for (GLuint i = 0; i < mRendertargets; i++) {
 
-    outputs += "" + mGLVaryingOut + " vec4 fColor" + to_string (i) + ";\n";
+    outputs += "" + mGLVaryingOut + " vec4 fColor" + to_string(i) + ";\n";
 
   }
   outputs += "\n";
@@ -527,7 +527,7 @@ const std::string ShaderLoaderFragment::getSource() const {
 
   /* Many render targets for DR */
   for (GLuint i = 0; i < mRendertargets; i++) {
-    end += "fColor" + to_string (i) + " = color;\n";
+    end += "fColor" + to_string(i) + " = color;\n";
   }
 
   end += "\n}\n";

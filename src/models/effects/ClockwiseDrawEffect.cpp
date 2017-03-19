@@ -38,11 +38,11 @@ namespace fillwave {
 namespace framework {
 
 void ClockwiseDrawEffect::preDrawAction(core::Program *) {
-  glFrontFace (GL_CW);
+  glFrontFace(GL_CW);
 }
 
 void ClockwiseDrawEffect::postDrawAction(core::Program *) {
-  glFrontFace (GL_CCW);
+  glFrontFace(GL_CCW);
 }
 
 void ClockwiseDrawEffect::stopAction(core::Program *) {

@@ -49,7 +49,7 @@ namespace framework {
 
 class Moveable : public Observable {
 public:
-  Moveable(glm::vec3 translation = glm::vec3 (0.0), glm::quat rotation = glm::quat (1.0, 0.0, 0.0, 0.0));
+  Moveable(glm::vec3 translation = glm::vec3(0.0), glm::quat rotation = glm::quat(1.0, 0.0, 0.0, 0.0));
 
   virtual ~Moveable() = default;
 
@@ -129,7 +129,7 @@ protected:
 template <class M>
 bool isMoveablesRefresh(std::vector<M> &moveables) { //xxx to be removed
   for (auto &it : moveables) {
-    if (it->isRefresh ()) {
+    if (it->isRefresh()) {
       return true;
     }
   }
@@ -139,7 +139,7 @@ bool isMoveablesRefresh(std::vector<M> &moveables) { //xxx to be removed
 template <class M>
 void resetMoveablesRefresh(std::vector<M> &data) {
   for (auto &it : data) {
-    it->setRefresh (false);
+    it->setRefresh(false);
   }
 }
 

@@ -45,10 +45,10 @@ namespace framework {
  */
 
 IHUDNode::IHUDNode(core::Texture2D *texture, core::Program *program, glm::vec2 position, glm::vec2 scale)
-    : mTexture (texture), mProgram (program), mPosition (position), mScale (scale), mBlending ({
-                                                                                                   GL_SRC_ALPHA,
-                                                                                                   GL_ONE_MINUS_SRC_ALPHA
-                                                                                               }) {
+    : mTexture(texture), mProgram(program), mPosition(position), mScale(scale), mBlending({
+                                                                                              GL_SRC_ALPHA,
+                                                                                              GL_ONE_MINUS_SRC_ALPHA
+                                                                                          }) {
 
 }
 
@@ -66,21 +66,21 @@ void IHUDNode::draw() {
   if (nullptr == mTexture || NULL == mProgram) {
     fLogF("tried to draw a non drawable");
   }
-  mProgram->use ();
-  mProgram->uniformPush ("uPosition", mPosition);
-  mProgram->uniformPush ("uScale", mScale);
-  coreDraw ();
+  mProgram->use();
+  mProgram->uniformPush("uPosition", mPosition);
+  mProgram->uniformPush("uScale", mScale);
+  coreDraw();
 }
 
 void IHUDNode::coreDraw() {
-  glDisable (GL_DEPTH_TEST);
-  glEnable (GL_BLEND);
-  glBlendFunc (mBlending.mSrc, mBlending.mSrc);
-  mTexture->bind (FILLWAVE_DIFFUSE_UNIT);
-  glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
-  mTexture->unbind ();
-  glEnable (GL_DEPTH_TEST);
-  glDisable (GL_BLEND);
+  glDisable(GL_DEPTH_TEST);
+  glEnable(GL_BLEND);
+  glBlendFunc(mBlending.mSrc, mBlending.mSrc);
+  mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  mTexture->unbind();
+  glEnable(GL_DEPTH_TEST);
+  glDisable(GL_BLEND);
 
 }
 

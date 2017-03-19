@@ -69,7 +69,7 @@ const std::string gGLAmbient = "10001.0";
 
 /* Attributes */
 
-const std::string gGLBones = "uniform mat4 uBones[" + to_string (FILLWAVE_MAX_BONES) + "];\n";
+const std::string gGLBones = "uniform mat4 uBones[" + to_string(FILLWAVE_MAX_BONES) + "];\n";
 
 const std::string gGLVSAttributes = "layout(location = 0) " + gGLVaryingIn +
                                     " vec4 aPosition;                        \n"
@@ -1262,231 +1262,231 @@ const std::string fsStartup = gGLVersion + gGLFragmentPrecision + "#define MAX_I
     "}\n";
 
 core::Program *ProgramLoader::getShadow() {
-  return mEngine->storeProgram ("shadow_mapping", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_empty.frag", fsEmpty),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_internal_shadowing.vert", vsShadow)
+  return mEngine->storeProgram("shadow_mapping", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing.vert", vsShadow)
   });
 }
 
 core::Program *ProgramLoader::getShadowColorCoded() {
-  return mEngine->storeProgram ("shadow_mapping_color", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_internal_shadowing_color.frag", fsShadowColorCoded),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_internal_shadowing_color.vert", vsShadowColorCoded)
+  return mEngine->storeProgram("shadow_mapping_color", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_shadowing_color.frag", fsShadowColorCoded),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing_color.vert", vsShadowColorCoded)
   });
 }
 
 core::Program *ProgramLoader::getShadowWithAnimation() {
-  return mEngine->storeProgram ("shadow_mapping_animated", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_empty.frag", fsEmpty),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_internal_shadowing.vert", vsShadowAnimated)
+  return mEngine->storeProgram("shadow_mapping_animated", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing.vert", vsShadowAnimated)
   });
 }
 
 core::Program *ProgramLoader::getShadowColorCodedWithAnimation() {
-  return mEngine->storeProgram ("shadow_mapping_animated_color", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_internal_shadowing.frag", fsShadowColorCoded),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_internal_shadowing.vert", vsShadowColorCodedAnimated)
+  return mEngine->storeProgram("shadow_mapping_animated_color", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_shadowing.frag", fsShadowColorCoded),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing.vert", vsShadowColorCodedAnimated)
   });
 }
 
 core::Program *ProgramLoader::getDebugger() {
-  return mEngine->storeProgram ("debugger", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_ifillwave__debugger.frag", fsDebugger),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_internal_debugger.vert", vsDebugger)
+  return mEngine->storeProgram("debugger", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ifillwave__debugger.frag", fsDebugger),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_debugger.vert", vsDebugger)
   });
 }
 
 core::Program *ProgramLoader::getSkybox() {
-  return mEngine->storeProgram ("internal_skybox", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_internal_skybox.frag", fsSkybox),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_internal_skybox.vert", vsSkybox)
+  return mEngine->storeProgram("internal_skybox", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_skybox.frag", fsSkybox),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_skybox.vert", vsSkybox)
   });
 }
 
 core::Program *ProgramLoader::getSkyboxDR() {
-  return mEngine->storeProgram ("internal_skybox_dr", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_internal_skybox_dr.frag", fsSkyboxDR),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_internal_skybox.vert", vsSkybox)
+  return mEngine->storeProgram("internal_skybox_dr", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_skybox_dr.frag", fsSkyboxDR),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_skybox.vert", vsSkybox)
   });
 }
 
 core::Program *ProgramLoader::getText() {
-  return mEngine->storeProgram ("text", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_internal_text.frag", fsText),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_internal_text.vert", vsText)
+  return mEngine->storeProgram("text", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_text.frag", fsText),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_text.vert", vsText)
   });
 }
 
 core::Program *ProgramLoader::getTextBold() {
-  return mEngine->storeProgram ("text_bold", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_internal_text_bold.frag", fsTextBold),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_internal_text.vert", vsText)
+  return mEngine->storeProgram("text_bold", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_text_bold.frag", fsTextBold),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_text.vert", vsText)
   });
 }
 
 core::Program *ProgramLoader::getParticleGPUEmiter() {
-  return mEngine->storeProgram ("particles_gpu_emiter", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_empty.frag", fsEmpty),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_particles_gpu_emiter.vert", vsGPUEmiter)
+  return mEngine->storeProgram("particles_gpu_emiter", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_particles_gpu_emiter.vert", vsGPUEmiter)
   }, GL_TRUE);
 }
 
 core::Program *ProgramLoader::getParticleGPU() {
-  return mEngine->storeProgram ("particles_gpu_program", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_particles_gpu.frag", fsParticlesGPU),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_particles_gpu.vert", vsParticlesGPU)
+  return mEngine->storeProgram("particles_gpu_program", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_gpu.frag", fsParticlesGPU),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_particles_gpu.vert", vsParticlesGPU)
   });
 }
 
 core::Program *ProgramLoader::getParticleCPU() {
-  return mEngine->storeProgram ("particles_cpu_program", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_particles_cpu.frag", fsParticlesCPU),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_particles_cpu.vert", vsParticlesCPU)
+  return mEngine->storeProgram("particles_cpu_program", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_cpu.frag", fsParticlesCPU),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_particles_cpu.vert", vsParticlesCPU)
   });
 }
 
 core::Program *ProgramLoader::getQuad() {
-  return mEngine->storeProgram ("quad", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_quad.frag", fsQuad),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_quad.vert", vsQuad)
+  return mEngine->storeProgram("quad", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_quad.frag", fsQuad),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_quad.vert", vsQuad)
   });
 }
 
 core::Program *ProgramLoader::getQuadCustomFragmentShader(const std::string &shaderPath) {
-  return mEngine->storeProgram (shaderPath, {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> (shaderPath),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_quad_custom.vert", vsQuad)
+  return mEngine->storeProgram(shaderPath, {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>(shaderPath),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_quad_custom.vert", vsQuad)
   });
 }
 
 core::Program *ProgramLoader::getHUD() {
-  core::Program *p = mEngine->storeProgram ("hud", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_hud.frag", fsHUD),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_hud.vert", vsHUD)
+  core::Program *p = mEngine->storeProgram("hud", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_hud.frag", fsHUD),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_hud.vert", vsHUD)
   });
 
-  GLint location = glGetUniformLocation (p->getHandle (), "uDiffuseTextureUnit");
+  GLint location = glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit");
 
   if (location != -1) {
-    p->use ();
-    core::Uniform::push (location, FILLWAVE_DIFFUSE_UNIT);
+    p->use();
+    core::Uniform::push(location, FILLWAVE_DIFFUSE_UNIT);
   }
 
-  glGetError (); /* Suppress error if happened */
+  glGetError(); /* Suppress error if happened */
   return p;
 }
 
 core::Program *ProgramLoader::getHUDCustomFragmentShader(const std::string &shaderPath) {
-  core::Program *p = mEngine->storeProgram (shaderPath, {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> (shaderPath),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_hud.vert", vsHUD)
+  core::Program *p = mEngine->storeProgram(shaderPath, {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>(shaderPath),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_hud.vert", vsHUD)
   });
 
-  GLint location = glGetUniformLocation (p->getHandle (), "uDiffuseTextureUnit");
+  GLint location = glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit");
 
   if (location != -1) {
-    p->use ();
-    core::Uniform::push (location, FILLWAVE_DIFFUSE_UNIT);
+    p->use();
+    core::Uniform::push(location, FILLWAVE_DIFFUSE_UNIT);
   }
 
-  glGetError (); /* Suppress error if happened */
+  glGetError(); /* Suppress error if happened */
   return p;
 }
 
 core::Program *ProgramLoader::getQuadCustomFragmentShaderStartup() {
-  return mEngine->storeProgram ("startup", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_quad_startup.frag", fsStartup),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_quad_custom.vert", vsQuad)
+  return mEngine->storeProgram("startup", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_quad_startup.frag", fsStartup),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_quad_custom.vert", vsQuad)
   });
 }
 
 core::Program *ProgramLoader::getCursor() {
-  return mEngine->storeProgram ("cursor", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_cursor.frag", fsCursor),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_cursor.vert", vsCursor)
+  return mEngine->storeProgram("cursor", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_cursor.frag", fsCursor),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_cursor.vert", vsCursor)
   });
 }
 
 core::Program *ProgramLoader::getAmbientOcclusionGeometry() {
-  return mEngine->storeProgram ("ambient_occlusion_geometry", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_ambient_occlusion_geometry.frag", fsAOGeometry),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_ambient_occlusion_geometry.vert", vsAOGeometry)
+  return mEngine->storeProgram("ambient_occlusion_geometry", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ambient_occlusion_geometry.frag", fsAOGeometry),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_ambient_occlusion_geometry.vert", vsAOGeometry)
   });
 }
 
 core::Program *ProgramLoader::getDRAmbient() {
-  return mEngine->storeProgram ("ambient_dr", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_ambient_dr.frag", fsDRAmbient),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+  return mEngine->storeProgram("ambient_dr", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ambient_dr.frag", fsDRAmbient),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
   });
 }
 
 core::Program *ProgramLoader::getOcclusionQuery() {
-  return mEngine->storeProgram ("occlusion", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_empty.frag", fsEmpty),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_occlusion.vert", vsOcclusion)
+  return mEngine->storeProgram("occlusion", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion.vert", vsOcclusion)
   });
 }
 
 core::Program *ProgramLoader::getOcclusionOptimizedQuery() {
-  return mEngine->storeProgram ("occlusion_optimized", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_empty.frag", fsEmpty),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_occlusion.vert", vsOcclusionOptimized)
+  return mEngine->storeProgram("occlusion_optimized", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion.vert", vsOcclusionOptimized)
   });
 }
 
 core::Program *ProgramLoader::getOcclusionPureQuery() {
-  return mEngine->storeProgram ("occlusion_pure", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_empty.frag", fsEmpty),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_occlusion_pure.vert", vsCube)
+  return mEngine->storeProgram("occlusion_pure", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion_pure.vert", vsCube)
   });
 }
 
 core::Program *ProgramLoader::getDRDepthless() {
-  return mEngine->storeProgram ("dr_depthless", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_dr_depthless.frag", fsDRDepthless),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+  return mEngine->storeProgram("dr_depthless", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_depthless.frag", fsDRDepthless),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
   });
 }
 
 core::Program *ProgramLoader::getDRDirectionalLights() {
-  return mEngine->storeProgram ("dr_directional", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_dr_directional.frag", fsDRLightDirectional),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+  return mEngine->storeProgram("dr_directional", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_directional.frag", fsDRLightDirectional),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
   });
 }
 
 core::Program *ProgramLoader::getDRSpotLights() {
-  return mEngine->storeProgram ("ds_spot", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_ds_spot.frag", fsDRLightSpot),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+  return mEngine->storeProgram("ds_spot", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_spot.frag", fsDRLightSpot),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
   });
 }
 
 core::Program *ProgramLoader::getDRPointLights() {
-  return mEngine->storeProgram ("ds_point", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_ds_point.frag", fsDRLightPoint),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_ds_point.vert", vsDRLightPoint)
+  return mEngine->storeProgram("ds_point", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_point.frag", fsDRLightPoint),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_ds_point.vert", vsDRLightPoint)
   });
 }
 
 core::Program *ProgramLoader::getAmbientOcclusionColor() {
-  core::Program *p = mEngine->storeProgram ("ambient_occlusion_color", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_ambient_occlusion_color.frag", fsAOColor),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_ambient_occlusion_color.vert", vsAOColor)
+  core::Program *p = mEngine->storeProgram("ambient_occlusion_color", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ambient_occlusion_color.frag", fsAOColor),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_ambient_occlusion_color.vert", vsAOColor)
   });
-  p->use ();
+  p->use();
 
-  p->uniformPush ("uPositionMap", FILLWAVE_DIFFUSE_ATTACHMENT);
+  p->uniformPush("uPositionMap", FILLWAVE_DIFFUSE_ATTACHMENT);
 
   glm::vec3 vectors[FILLWAVE_RANDOM_VECTOR_SIZE];
 
   for (GLuint i = 0; i < FILLWAVE_RANDOM_VECTOR_SIZE; i++) {
     float scale = (float) i / (float) (FILLWAVE_RANDOM_VECTOR_SIZE);
     glm::vec3 v;
-    v.x = 2.0f * (float) rand () / RAND_MAX - 1.0f;
-    v.y = 2.0f * (float) rand () / RAND_MAX - 1.0f;
-    v.z = 2.0f * (float) rand () / RAND_MAX - 1.0f;
+    v.x = 2.0f * (float) rand() / RAND_MAX - 1.0f;
+    v.y = 2.0f * (float) rand() / RAND_MAX - 1.0f;
+    v.z = 2.0f * (float) rand() / RAND_MAX - 1.0f;
     // Use an acceleration function so more points are
     // located closer to the origin
     v *= (0.1f + 0.9f * scale * scale);
@@ -1494,9 +1494,9 @@ core::Program *ProgramLoader::getAmbientOcclusionColor() {
     vectors[i] = v;
   }
 
-  p->uniformPush ("uRandomVectors[0]", &vectors[0], FILLWAVE_RANDOM_VECTOR_SIZE);
+  p->uniformPush("uRandomVectors[0]", &vectors[0], FILLWAVE_RANDOM_VECTOR_SIZE);
 
-  p->disusePrograms ();
+  p->disusePrograms();
 
   return p;
 }
@@ -1505,12 +1505,12 @@ core::Program *ProgramLoader::getDefaultDR() {
 
   ShaderLoaderVertex loaderVertex;
 
-  core::Program *p = mEngine->storeProgram ("dr_g", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_dr_g.frag", fsDR),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_default.vert", loaderVertex.getSource ())
+  core::Program *p = mEngine->storeProgram("dr_g", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_g.frag", fsDR),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert", loaderVertex.getSource())
   });
 
-  initDefaultUniforms (p);
+  initDefaultUniforms(p);
 
   return p;
 }
@@ -1519,30 +1519,30 @@ core::Program *ProgramLoader::getDefaultFR() {
   ShaderLoaderFragment loaderFragment;
   ShaderLoaderVertex loaderVertex;
 
-  core::Program *p = mEngine->storeProgram ("default", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_default.frag", loaderFragment.getSource ()),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_default.vert", loaderVertex.getSource ())
+  core::Program *p = mEngine->storeProgram("default", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag", loaderFragment.getSource()),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert", loaderVertex.getSource())
   });
 
-  initDefaultUniforms (p);
+  initDefaultUniforms(p);
 
   return p;
 }
 
 core::Program *ProgramLoader::getDefault() {
-  return getDefaultFR ();
+  return getDefaultFR();
 }
 
 core::Program *ProgramLoader::getDefaultBonesDR() {
 
-  ShaderLoaderVertex loaderVertex (true);
+  ShaderLoaderVertex loaderVertex(true);
 
-  core::Program *p = mEngine->storeProgram ("default_animated", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_default_animated.frag", fsDR),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_default_animated.vert", loaderVertex.getSource ())
+  core::Program *p = mEngine->storeProgram("default_animated", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default_animated.frag", fsDR),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_animated.vert", loaderVertex.getSource())
   });
 
-  initDefaultUniforms (p);
+  initDefaultUniforms(p);
 
   return p;
 }
@@ -1550,77 +1550,77 @@ core::Program *ProgramLoader::getDefaultBonesDR() {
 core::Program *ProgramLoader::getDefaultBonesFR() {
 
   ShaderLoaderFragment loaderFragment;
-  ShaderLoaderVertex loaderVertex (true);
+  ShaderLoaderVertex loaderVertex(true);
 
-  core::Program *p = mEngine->storeProgram ("default_animated_dr", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER> ("fillwave_default.frag", loaderFragment.getSource ()),
-      mEngine->storeShader<GL_VERTEX_SHADER> ("fillwave_default_animated.vert", loaderVertex.getSource ())
+  core::Program *p = mEngine->storeProgram("default_animated_dr", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag", loaderFragment.getSource()),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_animated.vert", loaderVertex.getSource())
   });
 
-  initDefaultUniforms (p);
+  initDefaultUniforms(p);
 
   return p;
 }
 
 core::Program *ProgramLoader::getDefaultBones() {
-  return getDefaultBonesFR ();
+  return getDefaultBonesFR();
 }
 
 void ProgramLoader::initDefaultUniforms(core::Program *program) {
   GLint location[10];
 
-  location[0] = glGetUniformLocation (program->getHandle (), "uLightAmbientIntensity");
-  location[1] = glGetUniformLocation (program->getHandle (), "uNumberOfPointLights");
-  location[2] = glGetUniformLocation (program->getHandle (), "uNumberOfSpotLights");
-  location[3] = glGetUniformLocation (program->getHandle (), "uFogEffect");
-  location[4] = glGetUniformLocation (program->getHandle (), "uPainterEffect");
-  location[5] = glGetUniformLocation (program->getHandle (), "uTextureOnlyEffect");
-  location[6] = glGetUniformLocation (program->getHandle (), "uBoostColorEffect");
-  location[7] = glGetUniformLocation (program->getHandle (), "uDiffuseTextureUnit");
-  location[8] = glGetUniformLocation (program->getHandle (), "uNormalTextureUnit");
-  location[9] = glGetUniformLocation (program->getHandle (), "uSpecularTextureUnit");
+  location[0] = glGetUniformLocation(program->getHandle(), "uLightAmbientIntensity");
+  location[1] = glGetUniformLocation(program->getHandle(), "uNumberOfPointLights");
+  location[2] = glGetUniformLocation(program->getHandle(), "uNumberOfSpotLights");
+  location[3] = glGetUniformLocation(program->getHandle(), "uFogEffect");
+  location[4] = glGetUniformLocation(program->getHandle(), "uPainterEffect");
+  location[5] = glGetUniformLocation(program->getHandle(), "uTextureOnlyEffect");
+  location[6] = glGetUniformLocation(program->getHandle(), "uBoostColorEffect");
+  location[7] = glGetUniformLocation(program->getHandle(), "uDiffuseTextureUnit");
+  location[8] = glGetUniformLocation(program->getHandle(), "uNormalTextureUnit");
+  location[9] = glGetUniformLocation(program->getHandle(), "uSpecularTextureUnit");
 
-  program->use ();
+  program->use();
 
   if (location[0] != -1) {
-    core::Uniform::push (location[0], glm::vec4 (0.2, 0.2, 0.2, 1.0));
+    core::Uniform::push(location[0], glm::vec4(0.2, 0.2, 0.2, 1.0));
   }
   if (location[1] != -1) {
-    core::Uniform::push (location[1], 0);
+    core::Uniform::push(location[1], 0);
   }
   if (location[2] != -1) {
-    core::Uniform::push (location[2], 0);
+    core::Uniform::push(location[2], 0);
   }
   if (location[3] != -1) {
-    core::Uniform::push (location[3], false);
+    core::Uniform::push(location[3], false);
   }
   if (location[4] != -1) {
-    core::Uniform::push (location[4], false);
+    core::Uniform::push(location[4], false);
   }
   if (location[5] != -1) {
-    core::Uniform::push (location[5], false);
+    core::Uniform::push(location[5], false);
   }
   if (location[6] != -1) {
-    core::Uniform::push (location[6], false);
+    core::Uniform::push(location[6], false);
   }
   if (location[7] != -1) {
-    core::Uniform::push (location[7], FILLWAVE_DIFFUSE_UNIT);
+    core::Uniform::push(location[7], FILLWAVE_DIFFUSE_UNIT);
   }
   if (location[8] != -1) {
-    core::Uniform::push (location[8], FILLWAVE_NORMAL_UNIT);
+    core::Uniform::push(location[8], FILLWAVE_NORMAL_UNIT);
   }
   if (location[9] != -1) {
-    core::Uniform::push (location[9], FILLWAVE_SPECULAR_UNIT);
+    core::Uniform::push(location[9], FILLWAVE_SPECULAR_UNIT);
   }
 
-  core::Program::disusePrograms ();
+  core::Program::disusePrograms();
 
   /* Ignore errors*/
-  glGetError ();
+  glGetError();
 }
 
 ProgramLoader::ProgramLoader(Engine *engine)
-    : mEngine (engine) {
+    : mEngine(engine) {
 
 }
 

@@ -48,11 +48,11 @@ namespace core {
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
 VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *animator, GLuint dataStoreModification)
-    : TVertexBuffer<VertexBasic> (dataStoreModification) {
+    : TVertexBuffer<VertexBasic>(dataStoreModification) {
 
   mTotalElements = shape->mNumVertices;
 
-  mDataVertices.resize (mTotalElements);
+  mDataVertices.resize(mTotalElements);
 
   int threadID, numberOfThreads, chunkSize = 64;
   (void) threadID;
@@ -63,7 +63,7 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *a
     for (GLuint i = 0; i < mTotalElements; i++) {
       VertexBasic &vertex = mDataVertices[i];
 
-      if (shape->HasVertexColors (0)) {
+      if (shape->HasVertexColors(0)) {
         vertex.mColor[0] = shape->mColors[0]->r;
         vertex.mColor[1] = shape->mColors[0]->g;
         vertex.mColor[2] = shape->mColors[0]->b;
@@ -81,7 +81,7 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *a
       vertex.mPosition[3] = 1.0f;
 
       /* One normal each triangle - on */
-      if (shape->HasNormals ()) {
+      if (shape->HasNormals()) {
         vertex.mNormal[0] = shape->mNormals[i].x;
         vertex.mNormal[1] = shape->mNormals[i].y;
         vertex.mNormal[2] = shape->mNormals[i].z;
@@ -91,7 +91,7 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *a
         vertex.mNormal[2] = 0;
       }
 
-      if (shape->HasTextureCoords (0)) { //xxx what is this ?
+      if (shape->HasTextureCoords(0)) { //xxx what is this ?
         vertex.mTextureUV[0] = shape->mTextureCoords[0][i].x;
         vertex.mTextureUV[1] = shape->mTextureCoords[0][i].y;
       } else {
@@ -99,7 +99,7 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *a
         vertex.mTextureUV[1] = 0;
       }
 
-      if (shape->HasTangentsAndBitangents ()) {
+      if (shape->HasTangentsAndBitangents()) {
         vertex.mNormalTangentMap[0] = shape->mTangents[i].x;
         vertex.mNormalTangentMap[1] = shape->mTangents[i].y;
         vertex.mNormalTangentMap[2] = shape->mTangents[i].z;
@@ -115,13 +115,13 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *a
     }
   }
 
-  mData = mDataVertices.data ();
-  mSize = mTotalElements * sizeof (VertexBasic);
+  mData = mDataVertices.data();
+  mSize = mTotalElements * sizeof(VertexBasic);
 
   if (animator) {
     std::vector<int> boneIdForEachVertex;
-    boneIdForEachVertex.reserve (mDataVertices.size ());
-    for (size_t z = 0; z < mDataVertices.size (); z++) {
+    boneIdForEachVertex.reserve(mDataVertices.size());
+    for (size_t z = 0; z < mDataVertices.size(); z++) {
       boneIdForEachVertex[z] = 0;
     }
     /* Bones */
@@ -130,7 +130,7 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *a
         GLuint VertexID = shape->mBones[i]->mWeights[j].mVertexId;
         float Weight = shape->mBones[i]->mWeights[j].mWeight;
         if (boneIdForEachVertex[VertexID] < FILLWAVE_MAX_BONES_DEPENDENCIES) {
-          mDataVertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = animator->getId (shape->mBones[i]->mName.C_Str ());
+          mDataVertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = animator->getId(shape->mBones[i]->mName.C_Str());
           mDataVertices[VertexID].mBoneWeight[boneIdForEachVertex[VertexID]] = Weight;
           boneIdForEachVertex[VertexID]++;
         } else {
@@ -201,7 +201,7 @@ VertexBufferBasic::VertexBufferBasic(framework::TerrainConstructor *constructor,
     GLfloat gapSize,
     const std::vector<GLuint> &indices,
     GLuint dataStoreModification)
-    : TVertexBuffer<VertexBasic> (dataStoreModification) {
+    : TVertexBuffer<VertexBasic>(dataStoreModification) {
 
   core::VertexBasic vertex;
 
@@ -221,41 +221,41 @@ VertexBufferBasic::VertexBufferBasic(framework::TerrainConstructor *constructor,
       vertex.mTextureUV[0] = x / chunkDensity;
       vertex.mTextureUV[1] = z / chunkDensity;
 
-      vertex.mPosition[1] = constructor->calculateHeight (vertex.mTextureUV[0],
-                                                          vertex.mTextureUV[1]); // calculate height 0.0f;
+      vertex.mPosition[1] = constructor->calculateHeight(vertex.mTextureUV[0],
+                                                         vertex.mTextureUV[1]); // calculate height 0.0f;
 
-      mDataVertices.push_back (vertex);
+      mDataVertices.push_back(vertex);
     }
   }
 
   std::vector<glm::vec3> normals;
   std::vector<glm::vec3> tangents;
 
-  for (size_t i = 0; i < mDataVertices.size (); i++) {
-    normals.push_back (glm::vec3 (0.0));
-    tangents.push_back (glm::vec3 (0.0));
+  for (size_t i = 0; i < mDataVertices.size(); i++) {
+    normals.push_back(glm::vec3(0.0));
+    tangents.push_back(glm::vec3(0.0));
   }
 
   int j, z;
 
-  for (size_t i = 0; i < indices.size (); i += 3) {
+  for (size_t i = 0; i < indices.size(); i += 3) {
 
     /* Normals */
 
     j = i + 1;
     z = i + 2;
 
-    glm::vec3 v0 (mDataVertices[indices[i]].mPosition[0],
-                  mDataVertices[indices[i]].mPosition[1],
-                  mDataVertices[indices[i]].mPosition[2]);
-    glm::vec3 v1 (mDataVertices[indices[j]].mPosition[0],
-                  mDataVertices[indices[j]].mPosition[1],
-                  mDataVertices[indices[j]].mPosition[2]);
-    glm::vec3 v2 (mDataVertices[indices[z]].mPosition[0],
-                  mDataVertices[indices[z]].mPosition[1],
-                  mDataVertices[indices[z]].mPosition[2]);
+    glm::vec3 v0(mDataVertices[indices[i]].mPosition[0],
+                 mDataVertices[indices[i]].mPosition[1],
+                 mDataVertices[indices[i]].mPosition[2]);
+    glm::vec3 v1(mDataVertices[indices[j]].mPosition[0],
+                 mDataVertices[indices[j]].mPosition[1],
+                 mDataVertices[indices[j]].mPosition[2]);
+    glm::vec3 v2(mDataVertices[indices[z]].mPosition[0],
+                 mDataVertices[indices[z]].mPosition[1],
+                 mDataVertices[indices[z]].mPosition[2]);
 
-    glm::vec3 normal = glm::normalize (glm::cross (v1 - v0, v2 - v0));
+    glm::vec3 normal = glm::normalize(glm::cross(v1 - v0, v2 - v0));
 
     normals[indices[i]] += normal;
     normals[indices[j]] += normal;
@@ -269,22 +269,22 @@ VertexBufferBasic::VertexBufferBasic(framework::TerrainConstructor *constructor,
       deltaPosition = v1 - v0;
     }
 
-    glm::vec2 deltaUV1 (mDataVertices[indices[j]].mTextureUV[0] - mDataVertices[indices[i]].mTextureUV[0],
-                        mDataVertices[indices[j]].mTextureUV[1] - mDataVertices[indices[i]].mTextureUV[1]);
+    glm::vec2 deltaUV1(mDataVertices[indices[j]].mTextureUV[0] - mDataVertices[indices[i]].mTextureUV[0],
+                       mDataVertices[indices[j]].mTextureUV[1] - mDataVertices[indices[i]].mTextureUV[1]);
 
     glm::vec3 tangent = deltaPosition / (
         deltaUV1.s != 0 ? deltaUV1.s : 1.0f
     ); //xxx check if 0.0f  stackOverflow 17000255
-    tangent = glm::normalize (tangent - glm::dot (normal, tangent) * normal);
+    tangent = glm::normalize(tangent - glm::dot(normal, tangent) * normal);
 
     tangents[indices[i]] += tangent;
     tangents[indices[j]] += tangent;
     tangents[indices[z]] += tangent;
   }
 
-  for (size_t i = 0; i < indices.size (); i++) {
-    glm::vec3 vector3_n = glm::normalize (normals[indices[i]]);
-    glm::vec3 vector3_t = glm::normalize (tangents[indices[i]]);
+  for (size_t i = 0; i < indices.size(); i++) {
+    glm::vec3 vector3_n = glm::normalize(normals[indices[i]]);
+    glm::vec3 vector3_t = glm::normalize(tangents[indices[i]]);
     mDataVertices[indices[i]].mNormal[0] = vector3_n.x;
     mDataVertices[indices[i]].mNormal[1] = vector3_n.y;
     mDataVertices[indices[i]].mNormal[2] = vector3_n.z;
@@ -293,19 +293,19 @@ VertexBufferBasic::VertexBufferBasic(framework::TerrainConstructor *constructor,
     mDataVertices[indices[i]].mNormalTangentMap[2] = vector3_t.z;
   }
 
-  mTotalElements = mDataVertices.size ();
-  mData = mDataVertices.data ();
-  mSize = mTotalElements * sizeof (VertexBasic);
+  mTotalElements = mDataVertices.size();
+  mData = mDataVertices.data();
+  mSize = mTotalElements * sizeof(VertexBasic);
 }
 
 VertexBufferBasic::VertexBufferBasic(const std::vector<core::VertexBasic> &vertices, GLuint dataStoreModification)
-    : TVertexBuffer<VertexBasic> (vertices, dataStoreModification) {
+    : TVertexBuffer<VertexBasic>(vertices, dataStoreModification) {
 
 }
 
 glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
-  glm::vec3 maximum (-10000.0, -10000.0, -10000.0);
-  glm::vec3 minimum (10000.0, 10000.0, 10000.0);
+  glm::vec3 maximum(-10000.0, -10000.0, -10000.0);
+  glm::vec3 minimum(10000.0, 10000.0, 10000.0);
 
   for (GLuint i = 0; i < mTotalElements; i++) {
     if (mDataVertices[i].mPosition[0] > maximum.x) {
@@ -332,15 +332,15 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
 
   if (result.x > result.y) {
     if (result.x > result.z) {
-      result = glm::vec3 (result.x);
+      result = glm::vec3(result.x);
     } else {
-      result = glm::vec3 (result.z);
+      result = glm::vec3(result.z);
     }
   } else {
     if (result.y > result.z) {
-      result = glm::vec3 (result.y);
+      result = glm::vec3(result.y);
     } else {
-      result = glm::vec3 (result.z);
+      result = glm::vec3(result.z);
     }
   }
   return result * 0.5f;

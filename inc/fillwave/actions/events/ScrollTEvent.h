@@ -55,7 +55,7 @@ struct ScrollEventData {
 class ScrollEvent : public TEvent<ScrollEventData> {
 public:
   ScrollEvent(ScrollEventData data)
-      : TEvent (data) {
+      : TEvent(data) {
 
   }
 

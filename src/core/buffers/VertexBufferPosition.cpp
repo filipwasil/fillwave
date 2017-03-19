@@ -41,12 +41,12 @@ namespace fillwave {
 namespace core {
 
 VertexBufferPosition::VertexBufferPosition(framework::Shape<VertexPosition> &shape, GLuint dataStoreModification)
-    : TVertexBuffer (shape, dataStoreModification) {
+    : TVertexBuffer(shape, dataStoreModification) {
 
 }
 
 VertexBufferPosition::VertexBufferPosition(const std::vector<VertexPosition> &vertices, GLuint dataStoreModification)
-    : TVertexBuffer (vertices, dataStoreModification) {
+    : TVertexBuffer(vertices, dataStoreModification) {
 
 }
 
@@ -56,10 +56,10 @@ void VertexBufferPosition::log() const {
   };
   for (auto it : mDataVertices) {
     fLogI("Vertex written: %f %f %f %f",
-          d (it.mPosition[0]),
-          d (it.mPosition[1]),
-          d (it.mPosition[2]),
-          d (it.mPosition[3]));
+          d(it.mPosition[0]),
+          d(it.mPosition[1]),
+          d(it.mPosition[2]),
+          d(it.mPosition[3]));
   }
 }
 

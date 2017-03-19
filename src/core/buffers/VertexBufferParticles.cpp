@@ -43,9 +43,9 @@ namespace core {
 VertexBufferParticles::VertexBufferParticles(const std::vector<GLfloat> &velocities,
     const std::vector<GLfloat> &positions,
     const std::vector<GLfloat> &times) {
-  size_t size = times.size ();
-  if (size == velocities.size () / 3) {
-    mDataVertices.reserve (size);
+  size_t size = times.size();
+  if (size == velocities.size() / 3) {
+    mDataVertices.reserve(size);
     VertexParticle vertex;
     for (size_t i = 0; i < size; i++) {
       vertex.velocity[0] = velocities[i * 3];
@@ -55,15 +55,15 @@ VertexBufferParticles::VertexBufferParticles(const std::vector<GLfloat> &velocit
       vertex.startPosition[1] = positions[i * 3 + 1];
       vertex.startPosition[2] = positions[i * 3 + 2];
       vertex.startTime = times[i];
-      mDataVertices.push_back (vertex);
+      mDataVertices.push_back(vertex);
     }
   } else {
     fLogE("Wrong buffer sizes");
     return;
   }
-  mTotalElements = mDataVertices.size ();
-  mData = mDataVertices.data ();
-  mSize = mTotalElements * sizeof (VertexParticle);
+  mTotalElements = mDataVertices.size();
+  mData = mDataVertices.data();
+  mSize = mTotalElements * sizeof(VertexParticle);
 }
 
 void VertexBufferParticles::log() const {
@@ -71,7 +71,7 @@ void VertexBufferParticles::log() const {
     return static_cast<double>(f);
   };
   for (auto it : mDataVertices) {
-    fLogE("Vertex written: %f %f %f %f", d (it.velocity[0]), d (it.velocity[1]), d (it.velocity[2]), d (it.startTime));
+    fLogE("Vertex written: %f %f %f %f", d(it.velocity[0]), d(it.velocity[1]), d(it.velocity[2]), d(it.startTime));
   }
 }
 

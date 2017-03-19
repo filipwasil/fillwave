@@ -38,7 +38,7 @@ namespace fillwave {
 namespace framework {
 
 CameraOrthographic::CameraOrthographic()
-    : ICamera (glm::vec3 (0.0f, 0.0f, 0.0f), glm::quat ()) {
+    : ICamera(glm::vec3(0.0f, 0.0f, 0.0f), glm::quat()) {
 
   mCullingBox.mProjectionBottom = 10.0f;
   mCullingBox.mProjectionFar = 10.0f;
@@ -47,7 +47,7 @@ CameraOrthographic::CameraOrthographic()
   mCullingBox.mProjectionRight = 10.0f;
   mCullingBox.mProjectionTop = 10.0f;
 
-  updateProjection ();
+  updateProjection();
 }
 
 CameraOrthographic::CameraOrthographic(glm::vec3 position,
@@ -58,7 +58,7 @@ CameraOrthographic::CameraOrthographic(glm::vec3 position,
     GLfloat top,
     GLfloat near,
     GLfloat far)
-    : ICamera (position, rotation) {
+    : ICamera(position, rotation) {
 
   mCullingBox.mProjectionBottom = bottom;
   mCullingBox.mProjectionFar = far;
@@ -67,16 +67,16 @@ CameraOrthographic::CameraOrthographic(glm::vec3 position,
   mCullingBox.mProjectionRight = right;
   mCullingBox.mProjectionTop = top;
 
-  updateProjection ();
+  updateProjection();
 }
 
 void CameraOrthographic::updateProjection() {
-  mProjectionMatrix = glm::ortho (mCullingBox.mProjectionLeft,
-                                  mCullingBox.mProjectionRight,
-                                  mCullingBox.mProjectionBottom,
-                                  mCullingBox.mProjectionTop,
-                                  mCullingBox.mProjectionNear,
-                                  mCullingBox.mProjectionFar);
+  mProjectionMatrix = glm::ortho(mCullingBox.mProjectionLeft,
+                                 mCullingBox.mProjectionRight,
+                                 mCullingBox.mProjectionBottom,
+                                 mCullingBox.mProjectionTop,
+                                 mCullingBox.mProjectionNear,
+                                 mCullingBox.mProjectionFar);
 
   mRefreshProjection = GL_FALSE;
 }

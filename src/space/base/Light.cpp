@@ -41,22 +41,22 @@ namespace fillwave {
 namespace framework {
 
 Light::Light(glm::vec3 position, glm::vec4 intensity, Moveable *followed)
-    : Moveable (position), mFollowed (followed), mIsFollowedUpdated (true), mIntensity (intensity) {
+    : Moveable(position), mFollowed(followed), mIsFollowedUpdated(true), mIntensity(intensity) {
   if (nullptr != mFollowed) {
-    mFollowed->addObserver (this);
+    mFollowed->addObserver(this);
   }
 }
 
 Light::~Light() {
   if (nullptr != mFollowed) {
-    mFollowed->dropObserver (this);
+    mFollowed->dropObserver(this);
   }
 }
 
 void Light::updateFromFollowed() {
   if (mFollowed && mIsFollowedUpdated) {
-    mTranslation = glm::vec3 (mFollowed->getParentMMC () * glm::vec4 (mFollowed->getTranslation (), 1.0));
-    mRotation = glm::normalize (mFollowed->getParentRotation () * mFollowed->getRotation ());
+    mTranslation = glm::vec3(mFollowed->getParentMMC() * glm::vec4(mFollowed->getTranslation(), 1.0));
+    mRotation = glm::normalize(mFollowed->getParentRotation() * mFollowed->getRotation());
     mRefresh = GL_TRUE;
     mIsFollowedUpdated = false;
   }
@@ -83,11 +83,7 @@ void Light::log() {
   auto d = [](GLfloat &f) {
     return static_cast<double>(f);
   };
-  fLogI("Light mIntensity: R:%f G:%f B:%f A:%f",
-        d (mIntensity.x),
-        d (mIntensity.y),
-        d (mIntensity.z),
-        d (mIntensity.w));
+  fLogI("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x), d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
 }
 
 void Light::onDeath(Observable *observable) {

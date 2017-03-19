@@ -38,25 +38,25 @@ namespace fillwave {
 namespace framework {
 
 BoostColor::BoostColor(GLfloat boost)
-    : mBoost (boost) {
+    : mBoost(boost) {
 
 }
 
 void BoostColor::preDrawAction(core::Program *program) {
-  program->uniformPush ("uBoostColorEffect", true);
-  program->uniformPush ("uBoostColorFactor", mBoost);
+  program->uniformPush("uBoostColorEffect", true);
+  program->uniformPush("uBoostColorFactor", mBoost);
 }
 
 void BoostColor::postDrawAction(core::Program *program) {
-  program->uniformPush ("uBoostColorEffect", false);
+  program->uniformPush("uBoostColorEffect", false);
 }
 
 void BoostColor::stopAction(core::Program *program) {
-  program->uniformPush ("uBoostColorEffect", false);
+  program->uniformPush("uBoostColorEffect", false);
 }
 
 void BoostColor::startAction(core::Program *program) {
-  program->uniformPush ("uBoostColorEffect", true);
+  program->uniformPush("uBoostColorEffect", true);
 }
 
 } /* framework*/

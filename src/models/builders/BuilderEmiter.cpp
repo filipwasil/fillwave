@@ -41,49 +41,49 @@ namespace fillwave {
 namespace framework {
 
 BuilderEmiter::BuilderEmiter(Engine *engine)
-    : mEngine (engine), mEmitingSourceRate (0.3), mHowMany (1), mColor (glm::vec4 (1.0))
-    , mAcceleration (glm::vec3 (0.0)), mStartVelocity (glm::vec3 (0.0)), mRobustnessVelocity (glm::vec3 (0.0))
-    , mStartPosition (glm::vec3 (0.0)), mRobustnessPosition (glm::vec3 (0.0)), mStartSize (1.0), mLifetime (1.0)
-    , mTexture (engine->storeTexture ("255_255_255.color")), mBlendingSource (GL_SRC_ALPHA), mBlendingDestination (
-        GL_ONE_MINUS_SRC_ALPHA), mDepthTesting (GL_FALSE), mAlphaCutOff (0.0) {
+    : mEngine(engine), mEmitingSourceRate(0.3), mHowMany(1), mColor(glm::vec4(1.0)), mAcceleration(glm::vec3(0.0))
+    , mStartVelocity(glm::vec3(0.0)), mRobustnessVelocity(glm::vec3(0.0)), mStartPosition(glm::vec3(0.0))
+    , mRobustnessPosition(glm::vec3(0.0)), mStartSize(1.0), mLifetime(1.0), mTexture(engine->storeTexture(
+        "255_255_255.color")), mBlendingSource(GL_SRC_ALPHA), mBlendingDestination(GL_ONE_MINUS_SRC_ALPHA)
+    , mDepthTesting(GL_FALSE), mAlphaCutOff(0.0) {
 }
 
 puIEmiterPoint BuilderEmiter::buildEmiterGPU() {
-  return std::make_unique<EmiterPointGPU> (mEngine,
-                                           mEmitingSourceRate,
-                                           mHowMany,
-                                           mColor,
-                                           mAcceleration,
-                                           mStartVelocity,
-                                           mRobustnessVelocity,
-                                           mStartPosition,
-                                           mRobustnessPosition,
-                                           mStartSize,
-                                           mLifetime,
-                                           mTexture,
-                                           mBlendingSource,
-                                           mBlendingDestination,
-                                           mDepthTesting,
-                                           mAlphaCutOff);
+  return std::make_unique<EmiterPointGPU>(mEngine,
+                                          mEmitingSourceRate,
+                                          mHowMany,
+                                          mColor,
+                                          mAcceleration,
+                                          mStartVelocity,
+                                          mRobustnessVelocity,
+                                          mStartPosition,
+                                          mRobustnessPosition,
+                                          mStartSize,
+                                          mLifetime,
+                                          mTexture,
+                                          mBlendingSource,
+                                          mBlendingDestination,
+                                          mDepthTesting,
+                                          mAlphaCutOff);
 }
 
 puIEmiterPoint BuilderEmiter::buildEmiterCPU() {
-  return std::make_unique<EmiterPointCPU> (mEngine,
-                                           mEmitingSourceRate,
-                                           mHowMany,
-                                           mColor,
-                                           mAcceleration,
-                                           mStartVelocity,
-                                           mRobustnessVelocity,
-                                           mStartPosition,
-                                           mRobustnessPosition,
-                                           mStartSize,
-                                           mLifetime,
-                                           mTexture,
-                                           mBlendingSource,
-                                           mBlendingDestination,
-                                           mDepthTesting,
-                                           mAlphaCutOff);
+  return std::make_unique<EmiterPointCPU>(mEngine,
+                                          mEmitingSourceRate,
+                                          mHowMany,
+                                          mColor,
+                                          mAcceleration,
+                                          mStartVelocity,
+                                          mRobustnessVelocity,
+                                          mStartPosition,
+                                          mRobustnessPosition,
+                                          mStartSize,
+                                          mLifetime,
+                                          mTexture,
+                                          mBlendingSource,
+                                          mBlendingDestination,
+                                          mDepthTesting,
+                                          mAlphaCutOff);
 }
 
 BuilderEmiter &BuilderEmiter::setEmitingSourceRate(GLfloat emitingSourceRate) {

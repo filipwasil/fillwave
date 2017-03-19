@@ -37,13 +37,13 @@ namespace fillwave {
 namespace framework {
 
 TimedEmiterUpdateCallback::TimedEmiterUpdateCallback(IEmiterPoint *emiter, GLfloat timeToFinish, EasingFunction easing)
-    : TimedCallback (timeToFinish, easing), mEmiter (emiter), mTimePassed (0.0) {
+    : TimedCallback(timeToFinish, easing), mEmiter(emiter), mTimePassed(0.0) {
 
 }
 
 void TimedEmiterUpdateCallback::performTime(TimeEventData &data) {
   mTimePassed += data.mTimePassed;
-  mEmiter->update (mTimePassed);
+  mEmiter->update(mTimePassed);
 }
 
 } /* framework */

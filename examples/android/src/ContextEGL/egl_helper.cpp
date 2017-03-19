@@ -19,14 +19,14 @@ int Initialize(EGLNativeWindowType window,
   EGLint numConfigs;
   EGLConfig config;
 
-  eglInfo->display = eglGetDisplay (display);
+  eglInfo->display = eglGetDisplay(display);
 
-  eglInitialize (eglInfo->display, &eglInfo->major, &eglInfo->minor);
+  eglInitialize(eglInfo->display, &eglInfo->major, &eglInfo->minor);
 
   /* Here, the application chooses the configuration it desires. In this
    * sample, we have a very simplified selection process, where we pick
    * the first EGLConfig that matches our criteria */
-  eglChooseConfig (eglInfo->display, attribs, &config, 1, &numConfigs);
+  eglChooseConfig(eglInfo->display, attribs, &config, 1, &numConfigs);
 //    if (!eglChooseConfig(eglInfo->display, attribs, &config, 1, &numConfigs)) {
 //       fLogE("Config not found ");
 //       return -1;
@@ -36,7 +36,7 @@ int Initialize(EGLNativeWindowType window,
    * guaranteed to be accepted by ANativeWindow_setBuffersGeometry().
    * As soon as we picked a EGLConfig, we can safely reconfigure the
    * ANativeWindow buffers to match, using EGL_NATIVE_VISUAL_ID. */
-  eglGetConfigAttrib (eglInfo->display, config, EGL_NATIVE_VISUAL_ID, &format);
+  eglGetConfigAttrib(eglInfo->display, config, EGL_NATIVE_VISUAL_ID, &format);
 
 //  eglGetConfigAttrib(eglInfo->display, config, EGL_DEPTH_SIZE, &format);
 //  fLogI("Config depth: %d ", format);
@@ -47,16 +47,16 @@ int Initialize(EGLNativeWindowType window,
 #ifdef __ANDROID__
   ANativeWindow_setBuffersGeometry((ANativeWindow*)window, 0, 0, format);
 #endif
-  eglInfo->surface = eglCreateWindowSurface (eglInfo->display, config, window, NULL);
-  eglInfo->context = eglCreateContext (eglInfo->display, config, NULL, context_attrib_list);
+  eglInfo->surface = eglCreateWindowSurface(eglInfo->display, config, window, NULL);
+  eglInfo->context = eglCreateContext(eglInfo->display, config, NULL, context_attrib_list);
 
-  if (eglMakeCurrent (eglInfo->display, eglInfo->surface, eglInfo->surface, eglInfo->context) == EGL_FALSE) {
+  if (eglMakeCurrent(eglInfo->display, eglInfo->surface, eglInfo->surface, eglInfo->context) == EGL_FALSE) {
     fLogE("Unable to eglMakeCurrent");
     return -1;
   }
 
-  eglQuerySurface (eglInfo->display, eglInfo->surface, EGL_WIDTH, &eglInfo->width);
-  eglQuerySurface (eglInfo->display, eglInfo->surface, EGL_HEIGHT, &eglInfo->height);
+  eglQuerySurface(eglInfo->display, eglInfo->surface, EGL_WIDTH, &eglInfo->width);
+  eglQuerySurface(eglInfo->display, eglInfo->surface, EGL_HEIGHT, &eglInfo->height);
 
   return 0;
 }
@@ -66,14 +66,14 @@ int Initialize(EGLNativeWindowType window,
  */
 void Terminate(EGLContextInfo *eglInfo) {
   if (eglInfo->display != EGL_NO_DISPLAY) {
-    eglMakeCurrent (eglInfo->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
+    eglMakeCurrent(eglInfo->display, EGL_NO_SURFACE, EGL_NO_SURFACE, EGL_NO_CONTEXT);
     if (eglInfo->context != EGL_NO_CONTEXT) {
-      eglDestroyContext (eglInfo->display, eglInfo->context);
+      eglDestroyContext(eglInfo->display, eglInfo->context);
     }
     if (eglInfo->surface != EGL_NO_SURFACE) {
-      eglDestroySurface (eglInfo->display, eglInfo->surface);
+      eglDestroySurface(eglInfo->display, eglInfo->surface);
     }
-    eglTerminate (eglInfo->display);
+    eglTerminate(eglInfo->display);
   }
   eglInfo->display = EGL_NO_DISPLAY;
   eglInfo->context = EGL_NO_CONTEXT;
@@ -81,8 +81,8 @@ void Terminate(EGLContextInfo *eglInfo) {
 }
 
 void SwapDisplay(EGLContextInfo *eglInfo) {
-  if (eglGetCurrentContext () != EGL_NO_CONTEXT) {
-    eglSwapBuffers (eglInfo->display, eglInfo->surface);
+  if (eglGetCurrentContext() != EGL_NO_CONTEXT) {
+    eglSwapBuffers(eglInfo->display, eglInfo->surface);
   } else {
     fLogE("Surface destroyed");
   }

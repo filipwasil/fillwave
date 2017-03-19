@@ -29,7 +29,7 @@ struct CharacterModsEventData {
 class CharacterModsEvent : public TEvent<CharacterModsEventData> {
 public:
   CharacterModsEvent(CharacterModsEventData &data)
-      : TEvent<CharacterModsEventData> (data) {
+      : TEvent<CharacterModsEventData>(data) {
 
   }
 

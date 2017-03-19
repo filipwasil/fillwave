@@ -46,9 +46,9 @@ Texture3DRenderableDynamic::Texture3DRenderableDynamic(Texture2DFile *filePosX,
     ParameterList &parameters,
     core::Texture2DRenderable *texture2D,
     core::Program *program)
-    : Texture3DRenderable (filePosX, fileNegX, filePosY, fileNegY, filePosZ, fileNegZ, texture2D, parameters)
-    , mProgram (program), mTimePassed (0.0f) {
-  setAttachment (GL_COLOR_ATTACHMENT0);
+    : Texture3DRenderable(filePosX, fileNegX, filePosY, fileNegY, filePosZ, fileNegZ, texture2D, parameters), mProgram(
+    program), mTimePassed(0.0f) {
+  setAttachment(GL_COLOR_ATTACHMENT0);
 }
 
 } /* core */

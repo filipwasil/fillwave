@@ -64,7 +64,7 @@ public:
       Engine *engine,
       GLfloat scale,
       Font *font,
-      glm::vec4 color = glm::vec4 (1.0, 1.0, 1.0, 1.0),
+      glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
       eTextEffect effect = eTextEffect::eNone);
 
   virtual ~Text() = default;

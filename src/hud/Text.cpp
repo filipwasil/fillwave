@@ -49,78 +49,78 @@ Text::Text(const std::string &text,
     Font *font,
     glm::vec4 color,
     eTextEffect effect)
-    : IReloadable (engine), IHUDNode (texture, createProgram (engine, effect), position, glm::vec2 (scale, scale))
-    , mText (text), mColor (color), mEffect (effect), mFont (font), mEngine (engine)
-    , mViewportWidth (engine->getScreenSize ()[0]), mViewportHeight (engine->getScreenSize ()[1]) {
+    : IReloadable(engine), IHUDNode(texture, createProgram(engine, effect), position, glm::vec2(scale, scale)), mText(
+    text), mColor(color), mEffect(effect), mFont(font), mEngine(engine), mViewportWidth(engine->getScreenSize()[0])
+    , mViewportHeight(engine->getScreenSize()[1]) {
 
-  initPipeline ();
-  createVBO ();
-  initUniformsCache ();
+  initPipeline();
+  createVBO();
+  initUniformsCache();
 }
 
 void Text::draw() {
-  mProgram->use ();
+  mProgram->use();
 
-  mVAO->bind ();
-  mVBO->send ();
-  mTexture->bind (FILLWAVE_DIFFUSE_UNIT);
+  mVAO->bind();
+  mVBO->send();
+  mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
 
-  glDisable (GL_DEPTH_TEST);
-  glEnable (GL_BLEND);
-  glBlendFunc (mBlending.mSrc, mBlending.mDst);
-  glDrawArrays (GL_TRIANGLES, 0, mVBO->getElements ());
+  glDisable(GL_DEPTH_TEST);
+  glEnable(GL_BLEND);
+  glBlendFunc(mBlending.mSrc, mBlending.mDst);
+  glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
 
-  glEnable (GL_DEPTH_TEST);
-  glDisable (GL_BLEND);
+  glEnable(GL_DEPTH_TEST);
+  glDisable(GL_BLEND);
 
-  mTexture->unbind ();
-  core::VertexArray::unbindVAO ();
+  mTexture->unbind();
+  core::VertexArray::unbindVAO();
 }
 
 inline void Text::clearVBO() {
-  mEngine->removeBufferText (mVAO);
+  mEngine->removeBufferText(mVAO);
 }
 
 void Text::editString(std::string text) {
   mText = text;
-  clearVBO ();
-  createVBO ();
+  clearVBO();
+  createVBO();
 }
 
 void Text::editColor(glm::vec4 color) {
   mColor = color;
-  mProgram->use ();
-  core::Uniform::push (mUniformLocationCacheColor, mColor);
-  core::Program::disusePrograms ();
+  mProgram->use();
+  core::Uniform::push(mUniformLocationCacheColor, mColor);
+  core::Program::disusePrograms();
 }
 
 void Text::editSize(GLfloat size) { //xxx optimize
-  mScale = glm::vec2 (size, size);
-  clearVBO ();
-  createVBO ();
+  mScale = glm::vec2(size, size);
+  clearVBO();
+  createVBO();
 }
 
 void Text::editPosition(glm::vec2 position) { //xxx optimize
   mPosition = position;
-  clearVBO ();
-  createVBO ();
+  clearVBO();
+  createVBO();
 }
 
 void Text::editAspectRatio(Engine *engine) {
-  mViewportWidth = engine->getScreenSize ()[0];
-  mViewportHeight = engine->getScreenSize ()[1];
-  clearVBO ();
-  createVBO ();
+  mViewportWidth = engine->getScreenSize()[0];
+  mViewportHeight = engine->getScreenSize()[1];
+  clearVBO();
+  createVBO();
 }
 
 void Text::createVBO() {
-  int lenght = mText.length ();
+  int lenght = mText.length();
 
   std::vector<GLfloat> points_tmp;
   std::vector<GLfloat> texcoords_tmp;
 
-  points_tmp.reserve (lenght * 12);
-  texcoords_tmp.reserve (lenght * 12);
+  points_tmp.reserve(lenght * 12);
+  texcoords_tmp.reserve(lenght * 12);
 
   GLfloat tmpStartingX = mPosition.x;
 
@@ -140,81 +140,81 @@ void Text::createVBO() {
       mPosition.x += mFont->mWidths[ascii_code] * mScale.x / mViewportWidth;
     }
 
-    points_tmp.push_back (x_pos);
-    points_tmp.push_back (y_pos);
-    points_tmp.push_back (x_pos);
-    points_tmp.push_back (y_pos - mScale.x / mViewportHeight);
-    points_tmp.push_back (x_pos + mScale.x / mViewportWidth);
-    points_tmp.push_back (y_pos - mScale.x / mViewportHeight);
+    points_tmp.push_back(x_pos);
+    points_tmp.push_back(y_pos);
+    points_tmp.push_back(x_pos);
+    points_tmp.push_back(y_pos - mScale.x / mViewportHeight);
+    points_tmp.push_back(x_pos + mScale.x / mViewportWidth);
+    points_tmp.push_back(y_pos - mScale.x / mViewportHeight);
 
-    points_tmp.push_back (x_pos + mScale.x / mViewportWidth);
-    points_tmp.push_back (y_pos - mScale.x / mViewportHeight);
-    points_tmp.push_back (x_pos + mScale.x / mViewportWidth);
-    points_tmp.push_back (y_pos);
-    points_tmp.push_back (x_pos);
-    points_tmp.push_back (y_pos);
+    points_tmp.push_back(x_pos + mScale.x / mViewportWidth);
+    points_tmp.push_back(y_pos - mScale.x / mViewportHeight);
+    points_tmp.push_back(x_pos + mScale.x / mViewportWidth);
+    points_tmp.push_back(y_pos);
+    points_tmp.push_back(x_pos);
+    points_tmp.push_back(y_pos);
 
-    texcoords_tmp.push_back (s);
-    texcoords_tmp.push_back (1.0f - t + 1.0f / mFont->mAtlasRows);
-    texcoords_tmp.push_back (s);
-    texcoords_tmp.push_back (1.0f - t);
-    texcoords_tmp.push_back (s + 1.0f / mFont->mAtlasColumns);
-    texcoords_tmp.push_back (1.0f - t);
+    texcoords_tmp.push_back(s);
+    texcoords_tmp.push_back(1.0f - t + 1.0f / mFont->mAtlasRows);
+    texcoords_tmp.push_back(s);
+    texcoords_tmp.push_back(1.0f - t);
+    texcoords_tmp.push_back(s + 1.0f / mFont->mAtlasColumns);
+    texcoords_tmp.push_back(1.0f - t);
 
-    texcoords_tmp.push_back (s + 1.0f / mFont->mAtlasColumns);
-    texcoords_tmp.push_back (1.0f - t);
-    texcoords_tmp.push_back (s + 1.0f / mFont->mAtlasColumns);
-    texcoords_tmp.push_back (1.0f - t + 1.0f / mFont->mAtlasRows);
-    texcoords_tmp.push_back (s);
-    texcoords_tmp.push_back (1.0f - t + 1.0f / mFont->mAtlasRows);
+    texcoords_tmp.push_back(s + 1.0f / mFont->mAtlasColumns);
+    texcoords_tmp.push_back(1.0f - t);
+    texcoords_tmp.push_back(s + 1.0f / mFont->mAtlasColumns);
+    texcoords_tmp.push_back(1.0f - t + 1.0f / mFont->mAtlasRows);
+    texcoords_tmp.push_back(s);
+    texcoords_tmp.push_back(1.0f - t + 1.0f / mFont->mAtlasRows);
   }
 
   mPosition.x = tmpStartingX;
 
 
-  mVBO = mEngine->storeBuffer<core::VertexBufferText> (mVAO, points_tmp, texcoords_tmp);
+  mVBO = mEngine->storeBuffer<core::VertexBufferText>(mVAO, points_tmp, texcoords_tmp);
 
-  initVBO ();
-  initVAO ();
+  initVBO();
+  initVAO();
 }
 
 inline core::Program *Text::createProgram(Engine *engine, eTextEffect effect) {
   switch (effect) {
     case eTextEffect::eBold:
-      return ProgramLoader (engine).getTextBold ();
+      return ProgramLoader(engine).getTextBold();
     case eTextEffect::eNone:
     default:
-      return ProgramLoader (engine).getText ();
+      return ProgramLoader(engine).getText();
   }
 }
 
 inline void Text::initBuffers() {
-  mVBO->reload ();
+  mVBO->reload();
 }
 
 inline void Text::initPipeline() {
-  mProgram->use ();
-  mProgram->uniformPush ("uColour", mColor);
-  mProgram->uniformPush ("uTextureUnit", FILLWAVE_DIFFUSE_UNIT);
-  core::Program::disusePrograms ();
+  mProgram->use();
+  mProgram->uniformPush("uColour", mColor);
+  mProgram->uniformPush("uTextureUnit", FILLWAVE_DIFFUSE_UNIT);
+  core::Program::disusePrograms();
 }
 
 inline void Text::initUniformsCache() {
-  mUniformLocationCacheColor = mProgram->getUniformLocation ("uColour");
+  mUniformLocationCacheColor = mProgram->getUniformLocation("uColour");
 }
 
 inline void Text::initVAO() {
-  mSampler->bind ();
-  mVAO->bind ();
-  mVBO->bind ();
-  mVBO->setLoaded (GL_FALSE);
-  mVBO->send ();
-  mVBO->attributesSetForVAO ();
-  core::VertexArray::unbindVAO ();
+  mSampler->bind();
+  mVAO->bind();
+  mVBO->bind();
+  mVBO->setLoaded(GL_FALSE);
+  mVBO->send();
+  mVBO->attributesSetForVAO();
+  core::VertexArray::unbindVAO();
 }
 
 inline void Text::initVBO() {
-  mVBO->initAttributes (mProgram->getHandle ());
+  mVBO->initAttributes(mProgram->getHandle());
 }
 
 } /* framework */

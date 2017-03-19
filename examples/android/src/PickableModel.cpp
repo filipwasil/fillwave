@@ -20,8 +20,8 @@ PickableModel::PickableModel(std::string name,
     Engine *engine,
     core::Program *program,
     const std::string &shapePath)
-    : Model (engine, program, shapePath), mText (text), mName (name) {
-  mPickedEffect = pIEffect (new BoostColor (2.0f));
+    : Model(engine, program, shapePath), mText(text), mName(name) {
+  mPickedEffect = pIEffect(new BoostColor(2.0f));
 }
 
 PickableModel::~PickableModel() {
@@ -29,12 +29,12 @@ PickableModel::~PickableModel() {
 }
 
 void PickableModel::onPicked() {
-  mText->editString ("Picked " + mName);
-  addEffect (mPickedEffect);
-  this->setActiveAnimation (0);
+  mText->editString("Picked " + mName);
+  addEffect(mPickedEffect);
+  this->setActiveAnimation(0);
 }
 
 void PickableModel::onUnpicked() {
-  removeEffect (mPickedEffect);
-  this->setActiveAnimation (FILLWAVE_DO_NOT_ANIMATE);
+  removeEffect(mPickedEffect);
+  this->setActiveAnimation(FILLWAVE_DO_NOT_ANIMATE);
 }

@@ -318,22 +318,22 @@ void initNoiseTable() {
   float gradients[256 * 3];
   unsigned int *p, *psrc;
 
-  srandom (0);
+  srandom(0);
 
   // build gradient table for 3D noise
   for (i = 0; i < 256; i++) {
     /*
      * calculate 1 - 2 * random number
      */
-    a = (random () % 32768) / 32768.0f;
+    a = (random() % 32768) / 32768.0f;
     z = (1.0f - 2.0f * a);
 
-    r = sqrtf (1.0f - z * z); // r is radius of circle
+    r = sqrtf(1.0f - z * z); // r is radius of circle
 
-    a = (random () % 32768) / 32768.0f;
+    a = (random() % 32768) / 32768.0f;
     /*theta = (2.0f * (float) M_PI * a);*/
-    x = (r * cosf (a));
-    y = (r * sinf (a));
+    x = (r * cosf(a));
+    y = (r * sinf(a));
 
     gradients[i * 3] = x;
     gradients[i * 3 + 1] = y;
@@ -397,19 +397,19 @@ float noise3D(float *f) {
   fz1 = fz0 - 1;
   wz = smoothstep(fz0);
 
-  vx0 = glattice3D (ix, iy, iz, fx0, fy0, fz0);
-  vx1 = glattice3D (ix + 1, iy, iz, fx1, fy0, fz0);
+  vx0 = glattice3D(ix, iy, iz, fx0, fy0, fz0);
+  vx1 = glattice3D(ix + 1, iy, iz, fx1, fy0, fz0);
   vy0 = lerp(wx, vx0, vx1);
-  vx0 = glattice3D (ix, iy + 1, iz, fx0, fy1, fz0);
-  vx1 = glattice3D (ix + 1, iy + 1, iz, fx1, fy1, fz0);
+  vx0 = glattice3D(ix, iy + 1, iz, fx0, fy1, fz0);
+  vx1 = glattice3D(ix + 1, iy + 1, iz, fx1, fy1, fz0);
   vy1 = lerp(wx, vx0, vx1);
   vz0 = lerp(wy, vy0, vy1);
 
-  vx0 = glattice3D (ix, iy, iz + 1, fx0, fy0, fz1);
-  vx1 = glattice3D (ix + 1, iy, iz + 1, fx1, fy0, fz1);
+  vx0 = glattice3D(ix, iy, iz + 1, fx0, fy0, fz1);
+  vx1 = glattice3D(ix + 1, iy, iz + 1, fx1, fy0, fz1);
   vy0 = lerp(wx, vx0, vx1);
-  vx0 = glattice3D (ix, iy + 1, iz + 1, fx0, fy1, fz1);
-  vx1 = glattice3D (ix + 1, iy + 1, iz + 1, fx1, fy1, fz1);
+  vx0 = glattice3D(ix, iy + 1, iz + 1, fx0, fy1, fz1);
+  vx1 = glattice3D(ix + 1, iy + 1, iz + 1, fx1, fy1, fz1);
   vy1 = lerp(wx, vx0, vx1);
   vz1 = lerp(wy, vy0, vy1);
 
@@ -418,15 +418,15 @@ float noise3D(float *f) {
 
 GLuint Create3DNoiseTexture(int textureSize, float frequency) {
   GLuint textureId;
-  GLfloat *texBuf = (GLfloat *) malloc (sizeof (GLfloat) * textureSize * textureSize * textureSize);
-  GLubyte *uploadBuf = (GLubyte *) malloc (sizeof (GLubyte) * textureSize * textureSize * textureSize);
+  GLfloat *texBuf = (GLfloat *) malloc(sizeof(GLfloat) * textureSize * textureSize * textureSize);
+  GLubyte *uploadBuf = (GLubyte *) malloc(sizeof(GLubyte) * textureSize * textureSize * textureSize);
   int x, y, z;
   int index = 0;
   float min = 1000;
   float max = -1000;
   float range;
 
-  initNoiseTable ();
+  initNoiseTable();
 
   for (z = 0; z < textureSize; z++) {
     for (y = 0; y < textureSize; y++) {
@@ -440,7 +440,7 @@ GLuint Create3DNoiseTexture(int textureSize, float frequency) {
         pos[0] *= frequency;
         pos[1] *= frequency;
         pos[2] *= frequency;
-        noiseVal = noise3D (pos);
+        noiseVal = noise3D(pos);
 
         if (noiseVal < min) {
           min = noiseVal;
@@ -469,20 +469,20 @@ GLuint Create3DNoiseTexture(int textureSize, float frequency) {
     }
   }
 
-  glGenTextures (1, &textureId);
-  glBindTexture (GL_TEXTURE_3D, textureId);
-  glTexImage3D (GL_TEXTURE_3D, 0, GL_R8, textureSize, textureSize, textureSize, 0, GL_RED, GL_UNSIGNED_BYTE, uploadBuf);
+  glGenTextures(1, &textureId);
+  glBindTexture(GL_TEXTURE_3D, textureId);
+  glTexImage3D(GL_TEXTURE_3D, 0, GL_R8, textureSize, textureSize, textureSize, 0, GL_RED, GL_UNSIGNED_BYTE, uploadBuf);
 
-  glTexParameteri (GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexParameteri (GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri (GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-  glTexParameteri (GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-  glTexParameteri (GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_MIRRORED_REPEAT);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+  glTexParameteri(GL_TEXTURE_3D, GL_TEXTURE_WRAP_R, GL_MIRRORED_REPEAT);
 
-  glBindTexture (GL_TEXTURE_3D, 0);
+  glBindTexture(GL_TEXTURE_3D, 0);
 
-  free (texBuf);
-  free (uploadBuf);
+  free(texBuf);
+  free(uploadBuf);
 
   return textureId;
 }

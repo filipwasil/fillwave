@@ -41,10 +41,10 @@ namespace framework {
 
 template <class T>
 void remove(std::vector<T> &vec, T &item) {
-  auto new_end = std::remove_if (vec.begin (), vec.end (), [item](const std::unique_ptr<T> &l) {
-    return item == l.get ();
+  auto new_end = std::remove_if(vec.begin(), vec.end(), [item](const std::unique_ptr<T> &l) {
+    return item == l.get();
   });
-  vec.erase (new_end, vec.end ());
+  vec.erase(new_end, vec.end());
 }
 
 /* Forgive me, but i needed this so badly ... */
@@ -54,16 +54,16 @@ void vectorForward(std::unique_ptr<CONTAINER> &) {
 
 template <typename CONTAINER, typename TCURRENT, typename... TNEXT>
 void vectorForward(std::unique_ptr<CONTAINER> &container, TCURRENT &&t, TNEXT &&... args) {
-  container->push_back (std::move (t));
-  vectorForward (container, args...);
+  container->push_back(std::move(t));
+  vectorForward(container, args...);
 }
 
 template <typename CONTAINER, typename TCURRENT, typename... TNEXT>
 std::unique_ptr<CONTAINER> make_unique_container(TCURRENT &&t, TNEXT &&... args) {
-  std::unique_ptr<CONTAINER> container = std::make_unique<CONTAINER> ();
-  container->push_back (std::move (t));
-  vectorForward<CONTAINER> (container, args...);
-  return std::move (container);
+  std::unique_ptr<CONTAINER> container = std::make_unique<CONTAINER>();
+  container->push_back(std::move(t));
+  vectorForward<CONTAINER>(container, args...);
+  return std::move(container);
 }
 
 #if (!defined UINT_MAX)

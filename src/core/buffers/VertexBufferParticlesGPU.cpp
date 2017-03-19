@@ -40,7 +40,7 @@ namespace fillwave {
 namespace core {
 
 VertexBufferParticlesGPU::VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles)
-    : TVertexBuffer (particles, GL_DYNAMIC_COPY) {
+    : TVertexBuffer(particles, GL_DYNAMIC_COPY) {
 
 }
 

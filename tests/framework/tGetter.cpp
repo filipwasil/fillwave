@@ -12,7 +12,7 @@ TEST(TGetterTests, security_tests
 {
 std::string s = "test";
 auto fun = [&]() -> TGetter<std::string> && {
-  return TGetter<std::string> (&s);
+  return TGetter<std::string>(&s);
 };
 //ASSERT_THAT(fun()->substr(1), Eq("est")); // it is working - good!
 
@@ -28,7 +28,7 @@ auto fun = [&]() -> TGetter<std::string> && {
 // error: invalid initialization of non-const reference
 // auto& wrong3 = fun();
 
-const auto &wrong2 = fun ();
+const auto &wrong2 = fun();
 // error: passing ‘const TGetter<std::__cxx11::basic_string<char> >’ as ‘this’ argument discards qualifiers [-fpermissive]
 // ASSERT_THAT(wrong2->substr(1), Eq("est"));
 

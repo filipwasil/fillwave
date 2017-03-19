@@ -37,7 +37,7 @@ template <class TWrapped>
 class TGetter {
 public:
   TGetter(TWrapped *wrapped)
-      : mWrapped (wrapped) {
+      : mWrapped(wrapped) {
 
   }
 

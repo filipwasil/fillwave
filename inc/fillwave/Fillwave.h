@@ -97,7 +97,7 @@ public:
   void configureFileLogging(std::string fileName = "");
 
   void
-  configureFPSCounter(std::string fontName = "", glm::vec2 position = glm::vec2 (-0.95, 0.95), GLfloat size = 100.0);
+  configureFPSCounter(std::string fontName = "", glm::vec2 position = glm::vec2(-0.95, 0.95), GLfloat size = 100.0);
 
   void configureBackgroundColor(glm::vec3 color);
 
@@ -184,7 +184,7 @@ public:
       const std::string &fontName,
       glm::vec2 position,
       GLfloat scale = 1.0,
-      glm::vec4 color = glm::vec4 (1.0, 1.0, 1.0, 1.0),
+      glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
       eTextEffect effect = eTextEffect::eNone);
 
   /* Store sampler */
@@ -196,13 +196,13 @@ public:
   /* Store one buffer for one VAO */
   template <class T, typename ...S>
   T *storeBuffer(core::VertexArray *vao, S ... p) {
-    return storeBufferInternal (vao, p...);
+    return storeBufferInternal(vao, p...);
   }
 
   /* Enables to store many buffers in one VAO */
   template <class T, typename ...S>
   T *storeBuffers(core::VertexArray *vao, size_t idx, S ... p) {
-    return storeBuffersInternal (vao, idx, p...);
+    return storeBuffersInternal(vao, idx, p...);
   }
 
   /* Buffering */

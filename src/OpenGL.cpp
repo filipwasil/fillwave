@@ -38,9 +38,9 @@ void glesInitExtensions() {
 }
 
 unsigned int getFramebufferStatus() {
-  return glCheckFramebufferStatus (GL_FRAMEBUFFER);
+  return glCheckFramebufferStatus(GL_FRAMEBUFFER);
 }
 
 unsigned int getGlError() {
-  return glGetError ();
+  return glGetError();
 }

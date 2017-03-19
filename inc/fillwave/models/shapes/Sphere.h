@@ -48,20 +48,20 @@ namespace framework {
 class Sphere : public Shape<core::VertexBasic> {
 
 public:
-  Sphere(GLfloat radius, GLuint rings = 10, GLuint sectors = 10, glm::vec3 color = glm::vec3 (0.0)) {
+  Sphere(GLfloat radius, GLuint rings = 10, GLuint sectors = 10, glm::vec3 color = glm::vec3(0.0)) {
     float const R = 1.f / (float) (rings - 1);
     float const S = 1.f / (float) (sectors - 1);
     float r, s;
 
-    mVertices.resize (rings * sectors);
+    mVertices.resize(rings * sectors);
 
-    auto vb = mVertices.begin ();
+    auto vb = mVertices.begin();
 
     for (r = 0; r < rings; r++) {
       for (s = 0; s < sectors; s++) {
-        float const y = sin (-F_PI_2 + F_PI * r * R);
-        float const x = cos (2 * F_PI * s * S) * sin (F_PI * r * R);
-        float const z = sin (2 * F_PI * s * S) * sin (F_PI * r * R);
+        float const y = sin(-F_PI_2 + F_PI * r * R);
+        float const x = cos(2 * F_PI * s * S) * sin(F_PI * r * R);
+        float const z = sin(2 * F_PI * s * S) * sin(F_PI * r * R);
 
         (*vb).mTextureUV[0] = s * S;
         (*vb).mTextureUV[1] = r * R;
@@ -82,8 +82,8 @@ public:
       }
     }
 
-    mIndices.resize ((rings - 1) * sectors * 6 - 1);
-    auto i = mIndices.begin ();
+    mIndices.resize((rings - 1) * sectors * 6 - 1);
+    auto i = mIndices.begin();
     for (r = 0; r < rings - 1; r++) {
       for (s = 0; s < sectors; s++) {
         if (r == rings - 1 || s == sectors - 1) {

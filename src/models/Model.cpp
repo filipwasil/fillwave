@@ -57,58 +57,58 @@ Model::Model(Engine *engine,
     core::Texture2D *normalMap,
     core::Texture2D *specularMap,
     const Material &material)
-    : IFocusable (engine), Programmable (program),
+    : IFocusable(engine), Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-    mAnimator (nullptr), mActiveAnimation (FILLWAVE_DO_NOT_ANIMATE),
+    mAnimator(nullptr), mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-    mLights (engine->getLightSystem ()) {
+    mLights(engine->getLightSystem()) {
 
-  initShadowing (engine);
+  initShadowing(engine);
 
-  ProgramLoader loader (engine);
+  ProgramLoader loader(engine);
 
-  std::vector<core::VertexBasic> vertices = shape.getVertices ();
-  std::vector<GLuint> indices = shape.getIndices ();
+  std::vector<core::VertexBasic> vertices = shape.getVertices();
+  std::vector<GLuint> indices = shape.getIndices();
 
-  core::VertexArray *vao = new core::VertexArray ();
-  attach (std::make_unique<Mesh> (engine,
-                                  material,
-                                  diffuseMap,
-                                  normalMap,
-                                  specularMap,
-                                  program,
-                                  mProgramShadow,
-                                  mProgramShadowColor,
-                                  loader.getOcclusionOptimizedQuery (),
-                                  loader.getAmbientOcclusionGeometry (),
-                                  loader.getAmbientOcclusionColor (),
-                                  engine->getLightSystem (),
-                                  engine->storeBuffer<core::VertexBufferBasic> (vao, vertices),
-                                  engine->storeBuffer<core::IndexBuffer> (vao, indices),
+  core::VertexArray *vao = new core::VertexArray();
+  attach(std::make_unique<Mesh>(engine,
+                                material,
+                                diffuseMap,
+                                normalMap,
+                                specularMap,
+                                program,
+                                mProgramShadow,
+                                mProgramShadowColor,
+                                loader.getOcclusionOptimizedQuery(),
+                                loader.getAmbientOcclusionGeometry(),
+                                loader.getAmbientOcclusionColor(),
+                                engine->getLightSystem(),
+                                engine->storeBuffer<core::VertexBufferBasic>(vao, vertices),
+                                engine->storeBuffer<core::IndexBuffer>(vao, indices),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-                                  mAnimator,
+                                mAnimator,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-                                  GL_TRIANGLES,
-                                  vao));
+                                GL_TRIANGLES,
+                                vao));
 }
 
 Model::Model(Engine *engine, core::Program *program, const std::string &shapePath)
-    : IFocusable (engine), Programmable (program),
+    : IFocusable(engine), Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-    mAnimator (nullptr), mActiveAnimation (FILLWAVE_DO_NOT_ANIMATE),
+    mAnimator(nullptr), mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-    mLights (engine->getLightSystem ()) {
+    mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  const aiScene *scene = engine->getModelFromFile (shapePath);
+  const aiScene *scene = engine->getModelFromFile(shapePath);
 
   if (scene) {
-    initAnimations (scene);
-    initShadowing (engine);
-    initUniformsCache ();
-    loadNodes (scene->mRootNode, scene, engine, this);
+    initAnimations(scene);
+    initShadowing(engine);
+    initUniformsCache();
+    loadNodes(scene->mRootNode, scene, engine, this);
   } else {
-    fLogF("Model: %s could not be read", shapePath.c_str ());
+    fLogF("Model: %s could not be read", shapePath.c_str());
   }
 #else
   std::vector<tinyobj::shape_t> shapes;
@@ -154,22 +154,22 @@ Model::Model(Engine *engine,
     const std::string &diffuseMapPath,
     const std::string &normalMapPath,
     const std::string &specularMapPath)
-    : IFocusable (engine), Programmable (program),
+    : IFocusable(engine), Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-    mAnimator (nullptr), mActiveAnimation (FILLWAVE_DO_NOT_ANIMATE),
+    mAnimator(nullptr), mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-    mLights (engine->getLightSystem ()) {
+    mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  const aiScene *scene = engine->getModelFromFile (shapePath);
+  const aiScene *scene = engine->getModelFromFile(shapePath);
 
   if (scene) {
-    initAnimations (scene);
-    initShadowing (engine); //xxx must be after initAnimations
-    initUniformsCache ();
-    loadNodes (scene->mRootNode, scene, engine, this, diffuseMapPath, normalMapPath, specularMapPath);
+    initAnimations(scene);
+    initShadowing(engine); //xxx must be after initAnimations
+    initUniformsCache();
+    loadNodes(scene->mRootNode, scene, engine, this, diffuseMapPath, normalMapPath, specularMapPath);
   } else {
-    fLogF("Model: %s could not be read", shapePath.c_str ());
+    fLogF("Model: %s could not be read", shapePath.c_str());
   }
 #else
   std::vector<tinyobj::shape_t> shapes;
@@ -207,22 +207,22 @@ Model::Model(Engine *engine,
     core::Texture2D *normalMap,
     core::Texture2D *specularMap,
     const Material &material)
-    : IFocusable (engine), Programmable (program),
+    : IFocusable(engine), Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-    mAnimator (nullptr), mActiveAnimation (FILLWAVE_DO_NOT_ANIMATE),
+    mAnimator(nullptr), mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-    mLights (engine->getLightSystem ()) {
+    mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  const aiScene *scene = engine->getModelFromFile (shapePath);
+  const aiScene *scene = engine->getModelFromFile(shapePath);
 
   if (scene) {
-    initAnimations (scene);
-    initShadowing (engine);
-    initUniformsCache ();
-    loadNodes (scene->mRootNode, scene, engine, this, diffuseMap, normalMap, specularMap, material);
+    initAnimations(scene);
+    initShadowing(engine);
+    initUniformsCache();
+    loadNodes(scene->mRootNode, scene, engine, this, diffuseMap, normalMap, specularMap, material);
   } else {
-    fLogF("Model: %s could not be read", shapePath.c_str ());
+    fLogF("Model: %s could not be read", shapePath.c_str());
   }
 #else
   std::vector<tinyobj::shape_t> shapes;
@@ -268,10 +268,10 @@ void Model::reload() {
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
 inline void Model::initAnimations(const aiScene *scene) {
-  if (scene->HasAnimations ()) {
-    mAnimator = new Animator (scene);
+  if (scene->HasAnimations()) {
+    mAnimator = new Animator(scene);
     fLogD("attached TimedBoneUpdateCallback to model");
-    this->attachHierarchyCallback (std::make_unique<TimedBoneUpdateCallback> (this));
+    this->attachHierarchyCallback(std::make_unique<TimedBoneUpdateCallback>(this));
   }
 }
 
@@ -285,25 +285,25 @@ inline void Model::loadNodes(aiNode *node,
 
   /* Set this node transformations */
 
-  loadNodeTransformations (node, entity);
+  loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
     const aiMesh *aMesh = scene->mMeshes[node->mMeshes[i]];
     const aiMaterial *aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
 
-    entity->attach (loadMesh (aMesh,
-                              Material (aMaterial),
-                              engine->storeTexture (diffuseMapPath.c_str ()),
-                              engine->storeTexture (normalMapPath.c_str ()),
-                              engine->storeTexture (specularMapPath.c_str ()),
-                              engine));
+    entity->attach(loadMesh(aMesh,
+                            Material(aMaterial),
+                            engine->storeTexture(diffuseMapPath.c_str()),
+                            engine->storeTexture(normalMapPath.c_str()),
+                            engine->storeTexture(specularMapPath.c_str()),
+                            engine));
   }
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; i++) {
-    puEntity newEntity = buildHinge ();
-    loadNodes (node->mChildren[i], scene, engine, newEntity.get (), diffuseMapPath, normalMapPath, specularMapPath);
-    entity->attach (std::move (newEntity));
+    puEntity newEntity = buildHinge();
+    loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMapPath, normalMapPath, specularMapPath);
+    entity->attach(std::move(newEntity));
   }
 }
 
@@ -311,7 +311,7 @@ inline void Model::loadNodes(aiNode *node, const aiScene *scene, Engine *engine,
 
   /* Set this node transformations */
 
-  loadNodeTransformations (node, entity);
+  loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
     const aiMesh *aMesh = scene->mMeshes[node->mMeshes[i]];
@@ -321,51 +321,51 @@ inline void Model::loadNodes(aiNode *node, const aiScene *scene, Engine *engine,
     std::string diffuseMapPath, normalMapPath, specularMapPath;
 
     diffuseMapPath = (
-                         aMaterial->GetTexture (aiTextureType_DIFFUSE,
-                                                0,
-                                                &diffuseMapPathAssimp,
-                                                nullptr,
-                                                nullptr,
-                                                nullptr,
-                                                nullptr,
-                                                nullptr) == AI_SUCCESS
-                     ) ? diffuseMapPathAssimp.data : "255_255_255.color";
-
-    normalMapPath = (
-                        aMaterial->GetTexture (aiTextureType_NORMALS,
+                         aMaterial->GetTexture(aiTextureType_DIFFUSE,
                                                0,
-                                               &normalMapPathAssimp,
+                                               &diffuseMapPathAssimp,
                                                nullptr,
                                                nullptr,
                                                nullptr,
                                                nullptr,
                                                nullptr) == AI_SUCCESS
+                     ) ? diffuseMapPathAssimp.data : "255_255_255.color";
+
+    normalMapPath = (
+                        aMaterial->GetTexture(aiTextureType_NORMALS,
+                                              0,
+                                              &normalMapPathAssimp,
+                                              nullptr,
+                                              nullptr,
+                                              nullptr,
+                                              nullptr,
+                                              nullptr) == AI_SUCCESS
                     ) ? normalMapPathAssimp.data : "128_128_255.color";
 
     specularMapPath = (
-                          aMaterial->GetTexture (aiTextureType_SPECULAR,
-                                                 0,
-                                                 &specularMapPathAssimp,
-                                                 nullptr,
-                                                 nullptr,
-                                                 nullptr,
-                                                 nullptr,
-                                                 nullptr) == AI_SUCCESS
+                          aMaterial->GetTexture(aiTextureType_SPECULAR,
+                                                0,
+                                                &specularMapPathAssimp,
+                                                nullptr,
+                                                nullptr,
+                                                nullptr,
+                                                nullptr,
+                                                nullptr) == AI_SUCCESS
                       ) ? specularMapPathAssimp.data : "";
 
-    entity->attach (loadMesh (aMesh,
-                              Material (aMaterial),
-                              engine->storeTexture (diffuseMapPath.c_str ()),
-                              engine->storeTexture (normalMapPath.c_str ()),
-                              engine->storeTexture (specularMapPath.c_str ()),
-                              engine));
+    entity->attach(loadMesh(aMesh,
+                            Material(aMaterial),
+                            engine->storeTexture(diffuseMapPath.c_str()),
+                            engine->storeTexture(normalMapPath.c_str()),
+                            engine->storeTexture(specularMapPath.c_str()),
+                            engine));
   }
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; i++) {
-    puEntity newEntity = buildHinge ();
-    loadNodes (node->mChildren[i], scene, engine, newEntity.get ());
-    entity->attach (std::move (newEntity));
+    puEntity newEntity = buildHinge();
+    loadNodes(node->mChildren[i], scene, engine, newEntity.get());
+    entity->attach(std::move(newEntity));
   }
 }
 
@@ -380,18 +380,18 @@ inline void Model::loadNodes(aiNode *node,
 
   /* Set this node transformations */
 
-  loadNodeTransformations (node, entity);
+  loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
     const aiMesh *aMesh = scene->mMeshes[i];
-    entity->attach (loadMesh (aMesh, material, diffuseMap, normalMap, specularMap, engine));
+    entity->attach(loadMesh(aMesh, material, diffuseMap, normalMap, specularMap, engine));
   }
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; i++) {
-    puEntity newEntity = buildHinge ();
-    loadNodes (node->mChildren[i], scene, engine, newEntity.get (), diffuseMap, normalMap, specularMap, material);
-    entity->attach (std::move (newEntity));
+    puEntity newEntity = buildHinge();
+    loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMap, normalMap, specularMap, material);
+    entity->attach(std::move(newEntity));
   }
 }
 
@@ -399,10 +399,10 @@ inline void Model::loadNodeTransformations(aiNode *node, Entity *entity) {
   aiVector3t<float> scale;
   aiQuaterniont<float> rotation;
   aiVector3t<float> position;
-  node->mTransformation.Decompose (scale, rotation, position);
-  entity->scaleTo (assimpToGlmVec3 (scale));
-  entity->rotateTo (assimpToGlmQuat (rotation));
-  entity->moveTo (assimpToGlmVec3 (position));
+  node->mTransformation.Decompose(scale, rotation, position);
+  entity->scaleTo(assimpToGlmVec3(scale));
+  entity->rotateTo(assimpToGlmQuat(rotation));
+  entity->moveTo(assimpToGlmVec3(position));
 }
 
 puMesh Model::loadMesh(const aiMesh *shape,
@@ -416,42 +416,42 @@ puMesh Model::loadMesh(const aiMesh *shape,
     return nullptr;
   }
 
-  ProgramLoader loader (engine);
-  core::VertexArray *vao = new core::VertexArray ();
-  return std::make_unique<Mesh> (engine,
-                                 material,
-                                 diffuseMap,
-                                 normalMap,
-                                 specularMap,
-                                 mProgram,
-                                 mProgramShadow,
-                                 mProgramShadowColor,
-                                 loader.getOcclusionOptimizedQuery (),
-                                 loader.getAmbientOcclusionGeometry (),
-                                 loader.getAmbientOcclusionColor (),
-                                 engine->getLightSystem (),
-                                 engine->storeBuffer<core::VertexBufferBasic> (vao, shape, mAnimator),
-                                 engine->storeBuffer<core::IndexBuffer> (vao, shape),
-                                 mAnimator,
-                                 GL_TRIANGLES,
-                                 vao);
+  ProgramLoader loader(engine);
+  core::VertexArray *vao = new core::VertexArray();
+  return std::make_unique<Mesh>(engine,
+                                material,
+                                diffuseMap,
+                                normalMap,
+                                specularMap,
+                                mProgram,
+                                mProgramShadow,
+                                mProgramShadowColor,
+                                loader.getOcclusionOptimizedQuery(),
+                                loader.getAmbientOcclusionGeometry(),
+                                loader.getAmbientOcclusionColor(),
+                                engine->getLightSystem(),
+                                engine->storeBuffer<core::VertexBufferBasic>(vao, shape, mAnimator),
+                                engine->storeBuffer<core::IndexBuffer>(vao, shape),
+                                mAnimator,
+                                GL_TRIANGLES,
+                                vao);
 }
 
 void Model::performAnimation(GLfloat timeElapsed_s) {
-  mAnimator->updateTransformations (mActiveAnimation, timeElapsed_s);
+  mAnimator->updateTransformations(mActiveAnimation, timeElapsed_s);
 }
 
 void Model::setActiveAnimation(GLint animationID) {
-  if (mAnimator->getAnimations () > animationID) {
+  if (mAnimator->getAnimations() > animationID) {
     mActiveAnimation = animationID;
   } else {
     fLogE("There is no animation for slot: %d", animationID);
-    fLogD("Maximum number of animations: %d", mAnimator->getAnimations ());
+    fLogD("Maximum number of animations: %d", mAnimator->getAnimations());
   }
 }
 
 GLint Model::getActiveAnimations() {
-  return mAnimator->getAnimations ();
+  return mAnimator->getAnimations();
 }
 
 bool Model::isAnimated() const {
@@ -460,13 +460,13 @@ bool Model::isAnimated() const {
 
 inline void Model::evaluateAnimations() {
   if (mAnimator) {
-    mAnimator->updateBonesBuffer ();
-    mProgram->use ();
-    mAnimator->updateBonesUniform (mUniformLocationCacheBones);
-    mProgramShadow->use ();
-    mAnimator->updateBonesUniform (mUniformLocationCacheBonesShadow);
-    mProgramShadowColor->use ();
-    mAnimator->updateBonesUniform (mUniformLocationCacheBonesShadowColor);
+    mAnimator->updateBonesBuffer();
+    mProgram->use();
+    mAnimator->updateBonesUniform(mUniformLocationCacheBones);
+    mProgramShadow->use();
+    mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadow);
+    mProgramShadowColor->use();
+    mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
   }
 }
 
@@ -475,9 +475,9 @@ inline void Model::initUniformsCache() {
   if (nullptr == mAnimator) {
     return;
   }
-  mUniformLocationCacheBones = mProgram->getUniformLocation ("uBones[0]");
-  mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation ("uBones[0]");
-  mUniformLocationCacheBonesShadowColor = mProgramShadowColor->getUniformLocation ("uBones[0]");
+  mUniformLocationCacheBones = mProgram->getUniformLocation("uBones[0]");
+  mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation("uBones[0]");
+  mUniformLocationCacheBonesShadowColor = mProgramShadowColor->getUniformLocation("uBones[0]");
 }
 
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
@@ -507,32 +507,32 @@ puMesh Model::loadMesh(tinyobj::shape_t& shape,
 
 void Model::draw(ICamera &camera) {
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  evaluateAnimations ();
+  evaluateAnimations();
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-  drawWithEffects (camera);
+  drawWithEffects(camera);
 }
 
 void Model::drawPBRP(ICamera &camera) {
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   if (mAnimator) {
     /* xxx for PBRP shadows must be updated elsewhere */
-    mAnimator->updateBonesBuffer ();
-    mAnimator->updateBonesUniform (mUniformLocationCacheBones);
+    mAnimator->updateBonesBuffer();
+    mAnimator->updateBonesUniform(mUniformLocationCacheBones);
   }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-  mLights->pushLightUniforms (mProgram);
-  mLights->bindShadowmaps ();
+  mLights->pushLightUniforms(mProgram);
+  mLights->bindShadowmaps();
 
-  drawWithEffectsPBRP (camera);
+  drawWithEffectsPBRP(camera);
 }
 
 void Model::drawDR(ICamera &camera) {
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  evaluateAnimations ();
+  evaluateAnimations();
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-  drawWithEffectsDR (camera);
+  drawWithEffectsDR(camera);
 }
 
 void Model::log() const {
@@ -540,24 +540,24 @@ void Model::log() const {
 }
 
 inline void Model::initShadowing(Engine *engine) {
-  ProgramLoader loader (engine);
+  ProgramLoader loader(engine);
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   if (nullptr != mAnimator) {
-    mProgramShadow = loader.getShadowWithAnimation ();
-    mProgramShadowColor = loader.getShadowColorCodedWithAnimation ();
+    mProgramShadow = loader.getShadowWithAnimation();
+    mProgramShadowColor = loader.getShadowColorCodedWithAnimation();
     return;
   }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-  mProgramShadow = loader.getShadow ();
-  mProgramShadowColor = loader.getShadowColorCoded ();
+  mProgramShadow = loader.getShadow();
+  mProgramShadowColor = loader.getShadowColorCoded();
 }
 
 void Model::handleFocusEvent(EventType &event) {
-  Callback::handleEvent<Callback *> (mCallbacks, event);
+  Callback::handleEvent<Callback *>(mCallbacks, event);
 }
 
 void Model::updateRenderer(IRenderer &renderer) {
-  renderer.update (this);
+  renderer.update(this);
 }
 
 } /* framework */

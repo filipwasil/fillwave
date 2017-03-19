@@ -39,19 +39,19 @@ namespace framework {
 
 void Hinge::draw(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->draw (camera);
+    it->draw(camera);
   }
 }
 
 void Hinge::drawPBRP(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->drawPBRP (camera);
+    it->drawPBRP(camera);
   }
 }
 
 void Hinge::drawDR(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->drawDR (camera);
+    it->drawDR(camera);
   }
 }
 

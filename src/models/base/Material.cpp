@@ -39,21 +39,21 @@ namespace fillwave {
 namespace framework {
 
 Material::Material()
-    : mAmbient (0.1, 0.1, 0.1, 1.0), mDiffuse (1.0), mSpecular (1.0) {
+    : mAmbient(0.1, 0.1, 0.1, 1.0), mDiffuse(1.0), mSpecular(1.0) {
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
 Material::Material(const aiMaterial *material) {
   aiColor4D color;
-  if (AI_SUCCESS == aiGetMaterialColor (material, AI_MATKEY_COLOR_AMBIENT, &color)) {
-    mAmbient = assimpToGlmVec4 (color);
+  if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &color)) {
+    mAmbient = assimpToGlmVec4(color);
   }
-  if (AI_SUCCESS == aiGetMaterialColor (material, AI_MATKEY_COLOR_DIFFUSE, &color)) {
-    mDiffuse = assimpToGlmVec4 (color);
+  if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_DIFFUSE, &color)) {
+    mDiffuse = assimpToGlmVec4(color);
   }
-  if (AI_SUCCESS == aiGetMaterialColor (material, AI_MATKEY_COLOR_SPECULAR, &color)) {
-    mSpecular = assimpToGlmVec4 (color);
+  if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_SPECULAR, &color)) {
+    mSpecular = assimpToGlmVec4(color);
   }
 }
 

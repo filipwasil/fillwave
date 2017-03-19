@@ -42,19 +42,19 @@ namespace fillwave {
 namespace framework {
 
 Scene::Scene(IRenderer *renderer)
-    : mAmbientGlobal (glm::vec3 (1.0)), mRenderer (renderer) {
+    : mAmbientGlobal(glm::vec3(1.0)), mRenderer(renderer) {
 }
 
 void Scene::setRenderer(IRenderer *renderer) {
-  mRenderer = std::unique_ptr<IRenderer> (renderer);
+  mRenderer = std::unique_ptr<IRenderer>(renderer);
 }
 
 void Scene::setSkybox(puSkybox &&skybox) {
-  mSkybox = std::move (skybox);
+  mSkybox = std::move(skybox);
 }
 
 void Scene::setCursor(puCursor &&cursor) {
-  mCursor = std::move (cursor);
+  mCursor = std::move(cursor);
 }
 
 void Scene::setHUD(pHUD hud) {
@@ -66,41 +66,41 @@ void Scene::setAmbient(glm::vec3 ambient) {
 }
 
 TGetter<Cursor> &&Scene::getCursor() {
-  return std::move (TGetter<Cursor> (mCursor.get ()));
+  return std::move(TGetter<Cursor>(mCursor.get()));
 }
 
 void Scene::updateDependencies() {
   for (auto &it : mChildren) {
-    it->updateMatrixTree ();
+    it->updateMatrixTree();
   }
 }
 
 void Scene::draw(ICamera &camera) {
-  camera.update ();
-  mRenderer->draw (camera);
+  camera.update();
+  mRenderer->draw(camera);
 }
 
 void Scene::drawHUD() {
   if (mHUD) {
-    mHUD->draw ();
+    mHUD->draw();
   }
 }
 
 void Scene::drawCursor() {
   if (mCursor) {
-    mCursor->draw ();
+    mCursor->draw();
   }
 }
 
 void Scene::drawDepth(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->drawDepth (camera);
+    it->drawDepth(camera);
   }
 }
 
 void Scene::drawDepthColor(ICamera &camera, glm::vec3 &position) {
   for (auto &it : mChildren) {
-    it->drawDepthColor (camera, position);
+    it->drawDepthColor(camera, position);
   }
 }
 
@@ -110,17 +110,17 @@ void Scene::registerPickable(Entity *entity) {
 
   for (GLint i = 0; i < MAXIMUM_TRIALS_TO_PICK_COLOR; i++) {
 
-    rand_r = (GLfloat) (rand () % 256);
-    rand_g = (GLfloat) (rand () % 256);
-    rand_b = (GLfloat) (rand () % 256);
+    rand_r = (GLfloat) (rand() % 256);
+    rand_g = (GLfloat) (rand() % 256);
+    rand_b = (GLfloat) (rand() % 256);
 
-    color = glm::vec3 (rand_r / 255.0, rand_g / 255.0, rand_b / 255.0);
+    color = glm::vec3(rand_r / 255.0, rand_g / 255.0, rand_b / 255.0);
     GLint name = (GLint) (rand_r) + (GLint) (rand_g) + (GLint) (rand_b);
 
-    auto it = mPickingTable.find (name);
-    if (it == mPickingTable.end ()) {
+    auto it = mPickingTable.find(name);
+    if (it == mPickingTable.end()) {
       mPickingTable[name] = entity;
-      entity->pick (color);
+      entity->pick(color);
       return;
     }
   }
@@ -130,9 +130,9 @@ void Scene::registerPickable(Entity *entity) {
 void Scene::pick(glm::ivec4 color) {
   GLint name = color.r + color.g + color.b;
   if (mPickingTable[name]) {
-    mPickingTable[name]->onPicked ();
+    mPickingTable[name]->onPicked();
     if (mLastPicked) {
-      mLastPicked->onUnpicked ();
+      mLastPicked->onUnpicked();
     }
     mLastPicked = mPickingTable[name];
   }
@@ -141,61 +141,61 @@ void Scene::pick(glm::ivec4 color) {
 void Scene::updateRenderer() {
   if (mRenderer->mFlagReload) {
     fLogD("Renderer update");
-    mRenderer->clear ();
+    mRenderer->clear();
     if (mSkybox) {
-      mRenderer->mSkybox = mSkybox.get ();
+      mRenderer->mSkybox = mSkybox.get();
     } else {
       mRenderer->mSkybox = nullptr;
     }
     for (auto &it : mChildren) {
-      it->updateRenderer (*(mRenderer.get ()));
+      it->updateRenderer(*(mRenderer.get()));
     }
     mRenderer->mFlagReload = false;
   } else {
     fLogD("Renderer waiting for update");
-    mRenderer->mFlagReload = isAttachedDetached ();
+    mRenderer->mFlagReload = isAttachedDetached();
   }
 }
 
 void Scene::resetRenderer(GLuint screenWidth, GLuint screenHeight) {
-  mRenderer->clear ();
-  mRenderer->reset (screenWidth, screenHeight);
+  mRenderer->clear();
+  mRenderer->reset(screenWidth, screenHeight);
 }
 
 void Scene::draw() {
-  mCamera->update ();
-  mRenderer->draw (*(mCamera.get ()));
+  mCamera->update();
+  mRenderer->draw(*(mCamera.get()));
 }
 
 void Scene::drawPicking() {
   for (auto &it : mChildren) {
-    it->drawPicking (*(mCamera.get ()));
+    it->drawPicking(*(mCamera.get()));
   }
 }
 
 void Scene::drawDepthInt() {
   for (auto &it : mChildren) {
-    it->drawDepth (*(mCamera.get ()));
+    it->drawDepth(*(mCamera.get()));
   }
 }
 
 void Scene::drawOcclusion() {
   for (auto &it : mChildren) {
-    it->drawOcclusionBox (*(mCamera.get ()));
+    it->drawOcclusionBox(*(mCamera.get()));
   }
 }
 
 void Scene::setCamera(puICamera &&camera) {
-  mCamera = std::move (camera);
+  mCamera = std::move(camera);
 }
 
 TGetter<ICamera> &&Scene::getCamera() {
-  return std::move (TGetter<ICamera> (mCamera.get ()));
+  return std::move(TGetter<ICamera>(mCamera.get()));
 }
 
 void Scene::onEvent(EventType &event) {
   for (auto &it : mChildren) {
-    it->handleHierarchyEvent (event);
+    it->handleHierarchyEvent(event);
   }
 }
 

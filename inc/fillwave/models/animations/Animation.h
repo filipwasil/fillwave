@@ -85,7 +85,7 @@ public:
    */
 
   int getHowManyChannels() {
-    return mChannels.size ();
+    return mChannels.size();
   }
 
 private:

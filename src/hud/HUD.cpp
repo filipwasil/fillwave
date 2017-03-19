@@ -40,7 +40,7 @@ namespace framework {
 
 void HUD::draw() {
   for (auto &it : mChildren) {
-    it->draw ();
+    it->draw();
   }
 }
 

@@ -41,16 +41,16 @@ namespace fillwave {
 namespace core {
 
 TransformFeedback::TransformFeedback(GLsizei howMany)
-    : GLObject (howMany), mTarget (GL_TRANSFORM_FEEDBACK) {
-  glGenTransformFeedbacks (mHowMany, mHandles);
+    : GLObject(howMany), mTarget(GL_TRANSFORM_FEEDBACK) {
+  glGenTransformFeedbacks(mHowMany, mHandles);
 }
 
 TransformFeedback::~TransformFeedback() {
-  glDeleteTransformFeedbacks (mHowMany, mHandles);
+  glDeleteTransformFeedbacks(mHowMany, mHandles);
 }
 
 void TransformFeedback::bind(GLuint id) const {
-  glBindTransformFeedback (mTarget, mHandles[id]);
+  glBindTransformFeedback(mTarget, mHandles[id]);
 }
 
 void TransformFeedback::begin(GLenum primitiveMode) {
@@ -63,20 +63,20 @@ void TransformFeedback::begin(GLenum primitiveMode) {
       ) {
     fLogE("not valid primitive type");
   } else {
-    glBeginTransformFeedback (primitiveMode);
+    glBeginTransformFeedback(primitiveMode);
   }
 }
 
 void TransformFeedback::end() {
-  glEndTransformFeedback ();
+  glEndTransformFeedback();
 }
 
 void TransformFeedback::pause() {
-  glPauseTransformFeedback ();
+  glPauseTransformFeedback();
 }
 
 void TransformFeedback::resume() {
-  glResumeTransformFeedback ();
+  glResumeTransformFeedback();
 }
 
 } /* core */

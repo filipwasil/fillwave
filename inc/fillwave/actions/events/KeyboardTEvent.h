@@ -29,7 +29,7 @@ struct KeyboardEventData {
 class KeyboardEvent : public TEvent<KeyboardEventData> {
 public:
   KeyboardEvent(KeyboardEventData data)
-      : TEvent (data) {
+      : TEvent(data) {
 
   }
 

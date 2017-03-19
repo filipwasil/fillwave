@@ -46,9 +46,9 @@ namespace fillwave {
 namespace framework {
 
 Bone::Bone(aiBone *assimpBone) {
-  mName = assimpBone->mName.C_Str ();
-  mOffsetMatrix = assimpToGlmMat4 (assimpBone->mOffsetMatrix);
-  mGlobalOffsetMatrix = glm::mat4 (1.0);
+  mName = assimpBone->mName.C_Str();
+  mOffsetMatrix = assimpToGlmMat4(assimpBone->mOffsetMatrix);
+  mGlobalOffsetMatrix = glm::mat4(1.0);
 }
 
 void Bone::setName(std::string name) {
@@ -76,7 +76,7 @@ void Bone::setGlobalOffsetMatrix(glm::mat4 m) {
 }
 
 void Bone::log() {
-  fLogI("Name: %s", (mName.c_str ()));
+  fLogI("Name: %s", (mName.c_str()));
 }
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

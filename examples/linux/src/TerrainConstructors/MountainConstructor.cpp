@@ -49,7 +49,7 @@ GLboolean MountainConstructor::calculateActiveVoxel(GLfloat x, GLfloat z, GLfloa
   if (y == 0) {
     return GL_TRUE;
   }
-  if (calculateHeight (x, z) > y) {
+  if (calculateHeight(x, z) > y) {
     return GL_TRUE;
   } else {
     return GL_FALSE;
@@ -58,7 +58,7 @@ GLboolean MountainConstructor::calculateActiveVoxel(GLfloat x, GLfloat z, GLfloa
 
 inline GLfloat MountainConstructor::calculateHeight(GLfloat x, GLfloat z) {
 //   fLogU("X: %f Z: %f Y: %f", x,z,glm::sin(glm::radians(360*x)) * glm::sin(glm::radians(360*z)));
-  return glm::sin (glm::radians (360 * x)) * glm::sin (glm::radians (360 * z));
+  return glm::sin(glm::radians(360 * x)) * glm::sin(glm::radians(360 * z));
 }
 
 } /* framework */

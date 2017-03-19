@@ -46,7 +46,7 @@ public:
 
   virtual ~Observable() {
     for (auto &it : mObservers) {
-      it->onDeath (this);
+      it->onDeath(this);
     }
   }
 
@@ -59,16 +59,16 @@ public:
         return;
       }
     }
-    mObservers.push_back (observer);
+    mObservers.push_back(observer);
   }
 
   void dropObserver(IObserver *observer) {
-    mObservers.erase (std::remove (mObservers.begin (), mObservers.end (), observer), mObservers.end ());
+    mObservers.erase(std::remove(mObservers.begin(), mObservers.end(), observer), mObservers.end());
   }
 
   void notifyObservers() {
     for (auto &it : mObservers) {
-      it->onChanged (this);
+      it->onChanged(this);
     }
   }
 

@@ -45,7 +45,7 @@ namespace framework {
 
 class Fog : public IEffect {
 public:
-  Fog(glm::vec3 colour = glm::vec3 (0.1f, 0.1f, 0.1f), GLfloat near = 0.1f, GLfloat far = 20.0f);
+  Fog(glm::vec3 colour = glm::vec3(0.1f, 0.1f, 0.1f), GLfloat near = 0.1f, GLfloat far = 20.0f);
 
   virtual ~Fog() = default;
 

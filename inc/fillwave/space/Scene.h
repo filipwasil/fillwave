@@ -54,7 +54,7 @@ namespace framework {
 
 class Scene : public TreePtr<Entity> {
 public:
-  Scene(IRenderer *renderer = new RendererFR ());
+  Scene(IRenderer *renderer = new RendererFR());
 
   virtual ~Scene() = default;
 

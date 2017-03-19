@@ -31,8 +31,8 @@
 #include "myglwidget.hpp"
 
 int main(int argc, char *argv[]) {
-  QApplication app (argc, argv);
-  MyGLWidget widget (argc, argv);
-  widget.show ();
-  return app.exec ();
+  QApplication app(argc, argv);
+  MyGLWidget widget(argc, argv);
+  widget.show();
+  return app.exec();
 }

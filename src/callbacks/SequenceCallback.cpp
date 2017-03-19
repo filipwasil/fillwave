@@ -39,24 +39,24 @@ namespace fillwave {
 namespace framework {
 
 SequenceCallback::SequenceCallback()
-    : Callback (eEventType::eTime), mCallbackIterator (this->begin ()), mReloaditerator (true) {
+    : Callback(eEventType::eTime), mCallbackIterator(this->begin()), mReloaditerator(true) {
 }
 
 void SequenceCallback::perform(EventType &event) {
   if (mReloaditerator) { //xxx i am pretty asure this can be done better
-    mCallbackIterator = this->begin ();
+    mCallbackIterator = this->begin();
     mReloaditerator = false;
   }
 
-  (*mCallbackIterator)->perform (event);
-  if ((*mCallbackIterator)->isFinished ()) {
+  (*mCallbackIterator)->perform(event);
+  if ((*mCallbackIterator)->isFinished()) {
     mCallbackIterator++;
   }
-  if (mCallbackIterator == end ()) {
-    finish ();
-    mCallbackIterator = this->begin ();
+  if (mCallbackIterator == end()) {
+    finish();
+    mCallbackIterator = this->begin();
     for (auto &it : *this) {
-      it->reset ();
+      it->reset();
     }
   }
 }

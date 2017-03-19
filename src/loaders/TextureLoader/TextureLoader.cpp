@@ -52,52 +52,52 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
     std::string rootPath,
     eCompression compression) {
 
-  fLogD("Texture %s loading ...", filePath.c_str ());
-  size_t posCheckboard = filePath.find (".checkboard");
-  size_t posColor = filePath.find (".color");
-  size_t posDDS = filePath.find (".dds");
+  fLogD("Texture %s loading ...", filePath.c_str());
+  size_t posCheckboard = filePath.find(".checkboard");
+  size_t posColor = filePath.find(".color");
+  size_t posDDS = filePath.find(".dds");
   uint8_t r = 0, g = 0, b = 0;
   if (filePath == rootPath) {
-    fLogD("Empty texture %s generation and loading ...", filePath.c_str ());
-    core::Texture2DFile *file = loadVirtualFileColor (512, 512, 0, 0, 0);
+    fLogD("Empty texture %s generation and loading ...", filePath.c_str());
+    core::Texture2DFile *file = loadVirtualFileColor(512, 512, 0, 0, 0);
     return file;
   }
 
 
   if (posColor != std::string::npos) {
-    fLogD("Color texture %s generation and loading ...", filePath.c_str ());
-    std::string sub = filePath.substr (rootPath.size (), posColor);
-    std::vector<std::string> tokens = split (sub, '_');
-    if (tokens.size () < 3) {
-      fLogE("Could not found color parameters in %s", filePath.c_str ());
+    fLogD("Color texture %s generation and loading ...", filePath.c_str());
+    std::string sub = filePath.substr(rootPath.size(), posColor);
+    std::vector<std::string> tokens = split(sub, '_');
+    if (tokens.size() < 3) {
+      fLogE("Could not found color parameters in %s", filePath.c_str());
       return nullptr;
     }
 
-    r = atoi (tokens[0].c_str ());
-    g = atoi (tokens[1].c_str ());
-    b = atoi (tokens[2].c_str ());
+    r = atoi(tokens[0].c_str());
+    g = atoi(tokens[1].c_str());
+    b = atoi(tokens[2].c_str());
 
-    core::Texture2DFile *file = loadVirtualFileColor (512, 512, r, g, b);
+    core::Texture2DFile *file = loadVirtualFileColor(512, 512, r, g, b);
     return file;
   }
   if (posCheckboard != std::string::npos) {
-    fLogD("Checkboard texture %s generation and loading ...", filePath.c_str ());
-    std::string sub = filePath.substr (rootPath.size (), posCheckboard);
-    std::vector<std::string> tokens = split (sub, '_');
-    if (tokens.size () < 3) {
-      fLogE("Could not found color parameters in %s", filePath.c_str ());
+    fLogD("Checkboard texture %s generation and loading ...", filePath.c_str());
+    std::string sub = filePath.substr(rootPath.size(), posCheckboard);
+    std::vector<std::string> tokens = split(sub, '_');
+    if (tokens.size() < 3) {
+      fLogE("Could not found color parameters in %s", filePath.c_str());
       return nullptr;
     }
 
-    r = atoi (tokens[0].c_str ());
-    g = atoi (tokens[1].c_str ());
-    b = atoi (tokens[2].c_str ());
+    r = atoi(tokens[0].c_str());
+    g = atoi(tokens[1].c_str());
+    b = atoi(tokens[2].c_str());
 
-    core::Texture2DFile *file = loadVirtualFileCheckboard (512, 512, r, g, b);
+    core::Texture2DFile *file = loadVirtualFileCheckboard(512, 512, r, g, b);
     return file;
   }
   if (posDDS != std::string::npos) {
-    fLogE("Compressed Texture %s not supported yet", filePath.c_str ());
+    fLogE("Compressed Texture %s not supported yet", filePath.c_str());
     return nullptr;
   }
 #ifdef FILLWAVE_TEXTURE_LOADER_GLI
@@ -227,19 +227,19 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
   return TextureName;
 #else /* FILLWAVE_TEXTURE_LOADER_GLI */
   GLint w, h, n;
-  GLubyte *content = stbi_load (filePath.c_str (), &w, &h, &n, getBytesPerPixel (format));
+  GLubyte *content = stbi_load(filePath.c_str(), &w, &h, &n, getBytesPerPixel(format));
   if (content == NULL) { //xxx NULL, not nullptr because the stb library uses NULL
-    FILE *f = fopen (filePath.c_str (), "rb");
+    FILE *f = fopen(filePath.c_str(), "rb");
     if (!f) {
-      fLogE("Texture %s not found", filePath.c_str ());
+      fLogE("Texture %s not found", filePath.c_str());
     } else {
-      fLogE("Texture %s found but not supported ", filePath.c_str ());
-      fclose (f);
+      fLogE("Texture %s found but not supported ", filePath.c_str());
+      fclose(f);
     }
     return nullptr;
   }
-  fLogD("Image %s size %dx%d pixel %d bytes per pixel", filePath.c_str (), w, h, n);
-  core::Texture2DFile *file = new core::Texture2DFile ();
+  fLogD("Image %s size %dx%d pixel %d bytes per pixel", filePath.c_str(), w, h, n);
+  core::Texture2DFile *file = new core::Texture2DFile();
 
   file->mHeader.mFormat = format;
   file->mHeader.mWidth = w;
@@ -254,7 +254,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
     file->mHeader.mInternalFormat = format;
   } else {
     file->mConfig.mCompression = GL_TRUE;
-    file->mHeader.mInternalFormat = getComporession (compression);
+    file->mHeader.mInternalFormat = getComporession(compression);
     file->mConfig.mCompressionSize = 0;
     fLogF("Texture compression feature not ready");
   }
@@ -265,7 +265,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
 
   file->mAllocation = core::eMemoryAllocation::eMallock;
 
-  fLogD("Flipping Texture %s ...", filePath.c_str ());
+  fLogD("Flipping Texture %s ...", filePath.c_str());
   switch (flip) {
     case eFlip::eVertical:
 #pragma omp parallel for schedule(guided) num_threads(2)
@@ -341,7 +341,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
 }
 
 core::Texture2DFile *TextureLoader::loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format) {
-  core::Texture2DFile *file = new core::Texture2DFile ();
+  core::Texture2DFile *file = new core::Texture2DFile();
 
   file->mHeader.mFormat = format;
   file->mHeader.mInternalFormat = format;
@@ -368,8 +368,8 @@ core::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
     GLubyte blue,
     GLenum format) {
 
-  GLint bytesPerPixel = getBytesPerPixel (format);
-  GLint size = bytesPerPixel * width * height * sizeof (GLubyte);
+  GLint bytesPerPixel = getBytesPerPixel(format);
+  GLint size = bytesPerPixel * width * height * sizeof(GLubyte);
   GLubyte *content = new GLubyte[size];
 
   GLint i, r = 0, g = 0, b = 0;
@@ -390,7 +390,7 @@ core::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
     content[i + 3] = 1.0;
   }
 
-  core::Texture2DFile *file = new core::Texture2DFile ();
+  core::Texture2DFile *file = new core::Texture2DFile();
   file->mHeader.mFormat = format;
   file->mHeader.mInternalFormat = format;
   file->mHeader.mWidth = width;
@@ -415,9 +415,9 @@ core::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
     GLubyte green,
     GLubyte blue,
     GLenum format) {
-  GLint bytesPerPixel = getBytesPerPixel (format);
+  GLint bytesPerPixel = getBytesPerPixel(format);
 
-  int size = bytesPerPixel * width * height * sizeof (GLubyte);
+  int size = bytesPerPixel * width * height * sizeof(GLubyte);
   GLubyte *content = new GLubyte[size];
 
   for (int i = 0; i < size; i += bytesPerPixel) {
@@ -427,7 +427,7 @@ core::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
     content[i + 3] = 1.0;
   }
 
-  core::Texture2DFile *file = new core::Texture2DFile ();
+  core::Texture2DFile *file = new core::Texture2DFile();
   file->mHeader.mFormat = format;
   file->mHeader.mInternalFormat = format;
   file->mHeader.mWidth = width;

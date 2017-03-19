@@ -74,7 +74,7 @@ public:
       core::Texture2D *diffuseMap,
       core::Texture2D *normalMap = nullptr,
       core::Texture2D *specularMap = nullptr,
-      const Material &material = Material ());
+      const Material &material = Material());
 
   virtual ~Model();
 

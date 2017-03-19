@@ -44,7 +44,7 @@ namespace fillwave {
 namespace framework {
 
 ShaderLoaderVertex::ShaderLoaderVertex(bool animated)
-    : mAnimated (animated) {
+    : mAnimated(animated) {
 
 }
 
@@ -136,7 +136,7 @@ const std::string ShaderLoaderVertex::getSource() const {
 
       "uniform float uTime;\n"
 
-          "uniform mat4 uBones[" + to_string (FILLWAVE_MAX_BONES) + "];\n";
+          "uniform mat4 uBones[" + to_string(FILLWAVE_MAX_BONES) + "];\n";
 
   std::string mainStart =
 

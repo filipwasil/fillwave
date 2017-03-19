@@ -38,17 +38,17 @@ namespace fillwave {
 namespace framework {
 
 LoopCallback::LoopCallback(puCallback &&callback, int numberOfExecutions)
-    : Callback (eEventType::eTime), mCallback (std::move (callback)), mLoopsLeft (numberOfExecutions) {
+    : Callback(eEventType::eTime), mCallback(std::move(callback)), mLoopsLeft(numberOfExecutions) {
 }
 
 void LoopCallback::perform(EventType &event) {
-  mCallback->perform (event);
+  mCallback->perform(event);
   if (mLoopsLeft != FILLWAVE_ENDLESS) {
-    if (mCallback->isFinished ()) {
+    if (mCallback->isFinished()) {
       if (--mLoopsLeft) {
-        mCallback->reset ();
+        mCallback->reset();
       } else {
-        finish ();
+        finish();
       }
     }
   };

@@ -12,9 +12,9 @@ extern "C" {
  * Signature: ()J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_createEngine (JNIEnv * env, jobject
+JNICALL Java_com_fillwave_Fillwave_createEngine(JNIEnv * env, jobject
 clazz , jstring rootPath ) {
-Engine *e = new Engine (env->GetStringUTFChars (rootPath, nullptr)); return reinterpret_cast <jlong>(e);
+Engine *e = new Engine(env->GetStringUTFChars(rootPath, nullptr)); return reinterpret_cast <jlong>(e);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -143,22 +143,22 @@ backgroundColor) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
 
-jclass clazz = env->GetObjectClass (backgroundColor);
+jclass clazz = env->GetObjectClass(backgroundColor);
 
-jfieldID xField = env->GetFieldID (clazz, "x", "F");
-jfieldID yField = env->GetFieldID (clazz, "y", "F");
-jfieldID zField = env->GetFieldID (clazz, "z", "F");
+jfieldID xField = env->GetFieldID(clazz, "x", "F");
+jfieldID yField = env->GetFieldID(clazz, "y", "F");
+jfieldID zField = env->GetFieldID(clazz, "z", "F");
 
-jobject xO = env->GetObjectField (backgroundColor, xField);
-jobject yO = env->GetObjectField (backgroundColor, yField);
-jobject zO = env->GetObjectField (backgroundColor, zField);
+jobject xO = env->GetObjectField(backgroundColor, xField);
+jobject yO = env->GetObjectField(backgroundColor, yField);
+jobject zO = env->GetObjectField(backgroundColor, zField);
 
 jfloat *x = reinterpret_cast<jfloat *>(&xO);
 jfloat *y = reinterpret_cast<jfloat *>(&yO);
 jfloat *z = reinterpret_cast<jfloat *>(&zO);
 
 ptr->
-configureBackgroundColor(glm::vec3 (*x, *y, *z));
+configureBackgroundColor(glm::vec3(*x, *y, *z));
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -198,7 +198,7 @@ uint64_t nowNs = now.tv_sec * 1000000000ull + now.tv_nsec;
 
 float dt = 0;
 if (mLastFrameNs > 0) {
-dt = float (nowNs - mLastFrameNs) * 0.000000001f;
+dt = float(nowNs - mLastFrameNs) * 0.000000001f;
 }
 
 mLastFrameNs = nowNs;
@@ -263,7 +263,7 @@ reinterpret_cast<core::Program*>(texture));
  * Signature: (JLjava/lang/String;)Lcom/fillwave/Fillwave/PhysicsMeshBuffer;
  */
 JNIEXPORT jobject
-JNICALL Java_com_fillwave_Fillwave_getPhysicalMeshBuffer (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getPhysicalMeshBuffer(JNIEnv * , jobject, jlong
 engine,
 jstring modelPath
 ) {
@@ -278,7 +278,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
  * Signature: (J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_getLightManager (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getLightManager(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -326,12 +326,12 @@ getLightManager()
  * Signature: (J)I
  */
 JNIEXPORT jint
-JNICALL Java_com_fillwave_Fillwave_getFramesPassed (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getFramesPassed(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
 
-int res = ptr->getFramesPassed ();
+int res = ptr->getFramesPassed();
 
 return reinterpret_cast
 <jint>(res);
@@ -343,7 +343,7 @@ return reinterpret_cast
  * Signature: (JLjava/lang/String;)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_storeShaderFragment__JLjava_lang_String_2 (JNIEnv * env, jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_storeShaderFragment__JLjava_lang_String_2(JNIEnv * env, jobject, jlong
 engine,
 jstring path
 ) {
@@ -369,7 +369,7 @@ get()
  * Signature: (JLjava/lang/String;)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_storeShaderVertex__JLjava_lang_String_2 (JNIEnv * env, jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_storeShaderVertex__JLjava_lang_String_2(JNIEnv * env, jobject, jlong
 engine,
 jstring path
 ) {
@@ -395,9 +395,9 @@ get()
  * Signature: (JLjava/lang/String;Ljava/lang/String;)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_storeShaderFragment__JLjava_lang_String_2Ljava_lang_String_2 (JNIEnv * env,
-                                                                                                 jobject,
-                                                                                                 jlong
+JNICALL Java_com_fillwave_Fillwave_storeShaderFragment__JLjava_lang_String_2Ljava_lang_String_2(JNIEnv * env,
+                                                                                                jobject,
+                                                                                                jlong
 engine,
 jstring path, jstring
 source) {
@@ -426,9 +426,9 @@ get()
  * Signature: (JLjava/lang/String;Ljava/lang/String;)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_storeShaderVertex__JLjava_lang_String_2Ljava_lang_String_2 (JNIEnv * env,
-                                                                                               jobject,
-                                                                                               jlong
+JNICALL Java_com_fillwave_Fillwave_storeShaderVertex__JLjava_lang_String_2Ljava_lang_String_2(JNIEnv * env,
+                                                                                              jobject,
+                                                                                              jlong
 engine,
 jstring path, jstring
 source) {
@@ -457,7 +457,7 @@ get()
  * Signature: (JLjava/lang/String;I)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_storeTexture (JNIEnv * env, jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_storeTexture(JNIEnv * env, jobject, jlong
 engine,
 jstring path, jint
 type) {
@@ -485,7 +485,7 @@ get()
  * Signature: (JLjava/lang/String;)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_storeTextureDynamic (JNIEnv * env, jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_storeTextureDynamic(JNIEnv * env, jobject, jlong
 engine,
 jstring shaderPath
 ) {
@@ -511,7 +511,7 @@ get()
  * Signature: (JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_storeTexture3D (JNIEnv * env, jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_storeTexture3D(JNIEnv * env, jobject, jlong
 engine,
 jstring posXTexturePath, jstring
 negXTexturePath,
@@ -638,7 +638,7 @@ get()
  * Signature: (JLcom/fillwave/Fillwave/Vector3f;Lcom/fillwave/Fillwave/Vector4f;J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_storeLightPoint (JNIEnv * env, jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_storeLightPoint(JNIEnv * env, jobject, jlong
 engine,
 jobject position, jobject
 color,
@@ -733,7 +733,7 @@ return 0;
  * Signature: (JLjava/lang/String;Ljava/lang/String;FFFLcom/fillwave/Fillwave/Vector4f;I)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_storeText (JNIEnv * env, jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_storeText(JNIEnv * env, jobject, jlong
 engine,
 jstring content, jstring
 font,
@@ -744,11 +744,11 @@ jobject,
 jint) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
-pText t = ptr->storeText (env->GetStringUTFChars (content, nullptr),
-                          env->GetStringUTFChars (font, nullptr),
-                          -0.95,
-                          0.80,
-                          100.0);
+pText t = ptr->storeText(env->GetStringUTFChars(content, nullptr),
+                         env->GetStringUTFChars(font, nullptr),
+                         -0.95,
+                         0.80,
+                         100.0);
 
 return reinterpret_cast
 <jlong>(t
@@ -860,7 +860,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
  * Signature: (J)Lcom/fillwave/Fillwave/Vector2i;
  */
 JNIEXPORT jobject
-JNICALL Java_com_fillwave_Fillwave_getScreenSize (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getScreenSize(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -905,7 +905,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
  * Signature: (J)Ljava/lang/String;
  */
 JNIEXPORT jstring
-JNICALL Java_com_fillwave_Fillwave_getExecutablePath (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getExecutablePath(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -1046,7 +1046,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
  * Signature: (J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_getFocusKey (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusKey(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -1059,7 +1059,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
  * Signature: (J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_getFocusMouseButton (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusMouseButton(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -1072,7 +1072,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
  * Signature: (J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_getFocusScroll (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusScroll(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -1086,7 +1086,7 @@ return 0;
  * Signature: (J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_getFocusChar (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusChar(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -1100,7 +1100,7 @@ return 0;
  * Signature: (J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_getFocusCharMods (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusCharMods(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -1114,7 +1114,7 @@ return 0;
  * Signature: (J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_getFocusCursorEnter (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusCursorEnter(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -1128,7 +1128,7 @@ return 0;
  * Signature: (J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_getFocusCursorPosition (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusCursorPosition(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -1142,7 +1142,7 @@ return 0;
  * Signature: (J)J
  */
 JNIEXPORT jlong
-JNICALL Java_com_fillwave_Fillwave_getFocusTouchScreen (JNIEnv * , jobject, jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusTouchScreen(JNIEnv * , jobject, jlong
 engine) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
@@ -1303,7 +1303,7 @@ data.
 xPos = x;
 data.
 yPos = y;
-TouchEvent event (data);
+TouchEvent event(data);
 ptr->
 insertInput(event);
 }
@@ -1531,21 +1531,21 @@ jlong engine
 ) {
 
 Engine *e = reinterpret_cast<Engine *>(engine);
-ProgramLoader loader (e);
-pModel m = pModel (new Model (e, loader.getDefaultBones (), "animations/beast/beast.dae"));
+ProgramLoader loader(e);
+pModel m = pModel(new Model(e, loader.getDefaultBones(), "animations/beast/beast.dae"));
 
 /* Scene */
-pScenePerspective s = buildScenePerspective ();
+pScenePerspective s = buildScenePerspective();
 
 /* Camera */
-pCameraPerspective c = pCameraPerspective (new CameraPerspective (glm::vec3 (0.0, 0.0, 6.0),
-                                                                  glm::quat (),
-                                                                  glm::radians (90.0),
-                                                                  1.0,
-                                                                  0.1,
-                                                                  1000.0));
+pCameraPerspective c = pCameraPerspective(new CameraPerspective(glm::vec3(0.0, 0.0, 6.0),
+                                                                glm::quat(),
+                                                                glm::radians(90.0),
+                                                                1.0,
+                                                                0.1,
+                                                                1000.0));
 /* Textures */
-pTexture t = e->storeTexture ("textures/particle.png");
+pTexture t = e->storeTexture("textures/particle.png");
 
 /* Attach camera to scene */
 s->
@@ -1556,21 +1556,21 @@ e->
 setCurrentScene(s);
 
 /* Particle Emiter */
-pIEmiterPoint pe = pIEmiterPoint (new ::EmiterPointCPU (e,
-                                                        0.3,
-                                                        60000.0,
-                                                        glm::vec4 (0.1, 0.1, 1.0, 1.0),
-                                                        glm::vec3 (0.0, 0.0, 0.0),
-                                                        glm::vec3 (0.0, 0.0, 0.0),
-                                                        glm::vec3 (0.9, 0.9, 0.9),
-                                                        glm::vec3 (0.0, 0.0, 0.0),
-                                                        glm::vec3 (0.0, 0.0, 0.0),
-                                                        10.0,
-                                                        10.0,
-                                                        t,
-                                                        GL_SRC_ALPHA,
-                                                        GL_ONE,
-                                                        GL_FALSE));
+pIEmiterPoint pe = pIEmiterPoint(new ::EmiterPointCPU(e,
+                                                      0.3,
+                                                      60000.0,
+                                                      glm::vec4(0.1, 0.1, 1.0, 1.0),
+                                                      glm::vec3(0.0, 0.0, 0.0),
+                                                      glm::vec3(0.0, 0.0, 0.0),
+                                                      glm::vec3(0.9, 0.9, 0.9),
+                                                      glm::vec3(0.0, 0.0, 0.0),
+                                                      glm::vec3(0.0, 0.0, 0.0),
+                                                      10.0,
+                                                      10.0,
+                                                      t,
+                                                      GL_SRC_ALPHA,
+                                                      GL_ONE,
+                                                      GL_FALSE));
 
 s->
 attach(pe);

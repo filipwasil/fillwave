@@ -43,19 +43,19 @@ namespace fillwave {
 namespace core {
 
 Shader::Shader(GLuint shaderType, const std::string &shaderSource)
-    : mType (shaderType), mSource (shaderSource) {
-  reload ();
+    : mType(shaderType), mSource(shaderSource) {
+  reload();
 }
 
 Shader::~Shader() {
-  glDeleteShader (mHandle);
+  glDeleteShader(mHandle);
   fLogC("Shader destructor");
 }
 
 void Shader::loadSource() {
-  if (not mSource.empty ()) {
-    const GLchar *source = (const GLchar *) mSource.c_str ();
-    glShaderSource (mHandle, 1, &source, nullptr);
+  if (not mSource.empty()) {
+    const GLchar *source = (const GLchar *) mSource.c_str();
+    glShaderSource(mHandle, 1, &source, nullptr);
     fLogC("Loading source code to the shader failed");
   } else {
     fLogF("Shader not found, or empty");
@@ -63,30 +63,30 @@ void Shader::loadSource() {
 }
 
 void Shader::compile() {
-  glCompileShader (mHandle);
+  glCompileShader(mHandle);
 
   GLint status = 0;
-  glGetShaderiv (mHandle, GL_COMPILE_STATUS, &status);
+  glGetShaderiv(mHandle, GL_COMPILE_STATUS, &status);
   fLogD("Compilation status: %d", status);
   if (!status) {
     // There was an error, print it out
     GLint infoLogLength = 0;
-    glGetShaderiv (mHandle, GL_INFO_LOG_LENGTH, &infoLogLength);
+    glGetShaderiv(mHandle, GL_INFO_LOG_LENGTH, &infoLogLength);
 
     char *pShaderInfoLog = new char[infoLogLength];
     if (pShaderInfoLog) {
-      glGetShaderInfoLog (mHandle, infoLogLength, NULL, pShaderInfoLog);
+      glGetShaderInfoLog(mHandle, infoLogLength, NULL, pShaderInfoLog);
       fLogE("Compilation: %s", pShaderInfoLog);
       delete pShaderInfoLog;
     }
-    glDeleteShader (mHandle);
+    glDeleteShader(mHandle);
     mHandle = 0;
     fLogF("Shader can not bee compiled");
-    std::istringstream lines (mSource);
+    std::istringstream lines(mSource);
     std::string line;
     int i = 0;
-    while (std::getline (lines, line)) {
-      fLogE("[%d] %s", i++, line.c_str ());
+    while (std::getline(lines, line)) {
+      fLogE("[%d] %s", i++, line.c_str());
     }
   }
 }
@@ -95,30 +95,30 @@ void Shader::log() {
   int infologLength = 0;
   int maxLength;
 
-  if (glIsShader (mHandle)) {
-    glGetShaderiv (mHandle, GL_INFO_LOG_LENGTH, &maxLength);
+  if (glIsShader(mHandle)) {
+    glGetShaderiv(mHandle, GL_INFO_LOG_LENGTH, &maxLength);
   } else {
-    glGetProgramiv (mHandle, GL_INFO_LOG_LENGTH, &maxLength);
+    glGetProgramiv(mHandle, GL_INFO_LOG_LENGTH, &maxLength);
   }
-  std::vector<char> infoLog (maxLength);
+  std::vector<char> infoLog(maxLength);
 
-  if (glIsShader (mHandle)) {
-    glGetShaderInfoLog (mHandle, maxLength, &infologLength, infoLog.data ());
+  if (glIsShader(mHandle)) {
+    glGetShaderInfoLog(mHandle, maxLength, &infologLength, infoLog.data());
   } else {
-    glGetProgramInfoLog (mHandle, maxLength, &infologLength, infoLog.data ());
+    glGetProgramInfoLog(mHandle, maxLength, &infologLength, infoLog.data());
   }
 
   if (infologLength > 0) {
-    fLogI("%s\n", infoLog.data ());
+    fLogI("%s\n", infoLog.data());
   }
-  fLogI("%s\n", mSource.c_str ());
+  fLogI("%s\n", mSource.c_str());
 }
 
 void Shader::reload() {
-  mHandle = glCreateShader (mType);
+  mHandle = glCreateShader(mType);
   fLogC("Shader creation failed");
-  loadSource ();
-  compile ();
+  loadSource();
+  compile();
 }
 
 std::string Shader::getTypeString() {
@@ -147,7 +147,7 @@ std::string Shader::getTypeString() {
 
 std::vector<fillwave::core::Shader *>
 operator+(std::vector<fillwave::core::Shader *> shaders, fillwave::core::Shader *shader) {
-  shaders.push_back (shader);
+  shaders.push_back(shader);
   return shaders;
 }
 

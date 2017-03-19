@@ -48,13 +48,13 @@ Texture3DRenderable::Texture3DRenderable(Texture2DFile *filePosX,
     Texture2DFile *fileNegZ,
     core::Texture2DRenderable *texture,
     ParameterList &parameters)
-    : Texture3D (filePosX, //right
-                 fileNegX, //left
-                 filePosY, //ceil
-                 fileNegY, //floor
-                 filePosZ, //front
-                 fileNegZ, //back
-                 parameters), mShadowTexture (texture) {
+    : Texture3D(filePosX, //right
+                fileNegX, //left
+                filePosY, //ceil
+                fileNegY, //floor
+                filePosZ, //front
+                fileNegZ, //back
+                parameters), mShadowTexture(texture) {
 
 }
 
@@ -82,32 +82,32 @@ void Texture3DRenderable::resize(GLint width, GLint heigth) {
   mLeft->mHeader.mWidth = width;
   mLeft->mHeader.mHeight = heigth;
   mLeft->mData = nullptr;
-  bind ();
-  sendData ();
-  unbind ();
+  bind();
+  sendData();
+  unbind();
 }
 
 void Texture3DRenderable::bindForWriting() {
-  mShadowTexture->bindForWriting ();
+  mShadowTexture->bindForWriting();
 }
 
 void Texture3DRenderable::setAttachment(GLenum attachment) {
-  bind ();
-  mShadowTexture->bindForRendering ();
-  mShadowTexture->setAttachment (attachment);
+  bind();
+  mShadowTexture->bindForRendering();
+  mShadowTexture->setAttachment(attachment);
   fLogC("Setting RGBA framebuffer failed");
-  unbind ();
-  core::Framebuffer::bindScreenFramebuffer ();
+  unbind();
+  core::Framebuffer::bindScreenFramebuffer();
 }
 
 void Texture3DRenderable::setAttachmentFace(GLenum face, GLenum attachment) {
-  mShadowTexture->attachTexture2DDraw (attachment, face, getHandle ());
+  mShadowTexture->attachTexture2DDraw(attachment, face, getHandle());
   fLogC("Setting Face framebuffer failed");
 #ifdef FILLWAVE_GLES_3_0
   GLenum target = attachment;
   glDrawBuffers(1, &target);
 #else
-  glDrawBuffer (attachment);
+  glDrawBuffer(attachment);
 #endif
 }
 

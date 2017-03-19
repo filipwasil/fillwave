@@ -45,15 +45,14 @@ ProgressBar::ProgressBar(Engine *engine,
     const std::string &shaderPath,
     glm::vec2 position,
     glm::vec2 scale)
-    : IHUDNode (texture, ProgramLoader (engine).getHUDCustomFragmentShader (shaderPath), position, scale), mProgress (
-    0.0) {
+    : IHUDNode(texture, ProgramLoader(engine).getHUDCustomFragmentShader(shaderPath), position, scale), mProgress(0.0) {
 
 }
 
 void ProgressBar::draw() {
-  mProgram->use ();
-  mProgram->uniformPush ("uProgress", mProgress);
-  IHUDNode::draw ();
+  mProgram->use();
+  mProgram->uniformPush("uProgress", mProgress);
+  IHUDNode::draw();
 }
 
 void ProgressBar::setProgress(GLfloat progress) {

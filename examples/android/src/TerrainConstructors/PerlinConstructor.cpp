@@ -50,7 +50,7 @@ GLboolean PerlinConstructor::calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat 
   if (y == 0) {
     return GL_TRUE;
   }
-  if (calculateHeight (x, z) > y) {
+  if (calculateHeight(x, z) > y) {
     return GL_TRUE;
   } else {
     return GL_FALSE;
@@ -58,7 +58,7 @@ GLboolean PerlinConstructor::calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat 
 }
 
 inline GLfloat PerlinConstructor::calculateHeight(GLfloat x, GLfloat z) {
-  return glm::perlin (glm::vec2 (x, z));
+  return glm::perlin(glm::vec2(x, z));
 }
 
 } /* framework */

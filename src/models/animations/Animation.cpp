@@ -39,12 +39,12 @@ namespace fillwave {
 namespace framework {
 
 Animation::Animation(aiAnimation *assimpAnimation) {
-  mName = assimpAnimation->mName.C_Str ();
+  mName = assimpAnimation->mName.C_Str();
   mDuration = assimpAnimation->mDuration;
   mTicksPerSec = assimpAnimation->mTicksPerSecond;
-  mChannels.reserve (assimpAnimation->mNumChannels);
+  mChannels.reserve(assimpAnimation->mNumChannels);
   for (unsigned int i = 0; i < assimpAnimation->mNumChannels; i++) {
-    mChannels.push_back (new Channel (assimpAnimation->mChannels[i]));
+    mChannels.push_back(new Channel(assimpAnimation->mChannels[i]));
   }
 }
 
@@ -52,7 +52,7 @@ Animation::~Animation() {
   for (auto it : mChannels) {
     delete it;
   }
-  mChannels.clear ();
+  mChannels.clear();
 }
 
 } /* framework */

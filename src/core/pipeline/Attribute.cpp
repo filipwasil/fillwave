@@ -42,8 +42,8 @@ namespace fillwave {
 namespace core {
 
 Attribute::Attribute(std::string name, GLuint index, GLint size, GLsizei stride, GLenum type, GLboolean normalized)
-    : mStride (stride), mName (name), mIndex (index), mSize (size), mNormalized (normalized), mType (type)
-    , mPointer ((GLvoid *) 0) {
+    : mStride(stride), mName(name), mIndex(index), mSize(size), mNormalized(normalized), mType(type)
+    , mPointer((GLvoid *) 0) {
 
   switch (mType) {
     case GL_UNSIGNED_INT:
@@ -51,7 +51,7 @@ Attribute::Attribute(std::string name, GLuint index, GLint size, GLsizei stride,
     case GL_UNSIGNED_INT_VEC3:
     case GL_UNSIGNED_INT_VEC4:
       //mType = GL_UNSIGNED_SHORT;
-      mTypeSize = sizeof (GLuint);
+      mTypeSize = sizeof(GLuint);
       break;
     case GL_FLOAT:
     case GL_FLOAT_VEC2:
@@ -60,47 +60,47 @@ Attribute::Attribute(std::string name, GLuint index, GLint size, GLsizei stride,
     case GL_FLOAT_MAT2:
     case GL_FLOAT_MAT3:
     case GL_FLOAT_MAT4:
-      mTypeSize = sizeof (GLfloat);
+      mTypeSize = sizeof(GLfloat);
       break;
     case GL_INT:
     case GL_INT_VEC2:
     case GL_INT_VEC3:
     case GL_INT_VEC4:
       //mType = GL_SHORT;
-      mTypeSize = sizeof (GLint);
+      mTypeSize = sizeof(GLint);
       break;
     case GL_BOOL:
     case GL_BOOL_VEC2:
     case GL_BOOL_VEC3:
     case GL_BOOL_VEC4:
-      mTypeSize = sizeof (GLboolean);
+      mTypeSize = sizeof(GLboolean);
       break;
     default:
       std::cout << "Not supported type of attribute" << std::endl;
-      mTypeSize = sizeof (float);
+      mTypeSize = sizeof(float);
       break;
   }
 }
 
 void Attribute::bindLocation(GLint programHandle) {
-  glBindAttribLocation (programHandle, mIndex, mName.c_str ());
+  glBindAttribLocation(programHandle, mIndex, mName.c_str());
   fLogC("bindAttribLocation");
 }
 
 void Attribute::arrayDisable() {
-  glDisableVertexAttribArray (mIndex);
+  glDisableVertexAttribArray(mIndex);
   fLogC("disableAttribLocation");
 }
 
 void Attribute::arrayEnable() {
-  glEnableVertexAttribArray (mIndex);
+  glEnableVertexAttribArray(mIndex);
   fLogC("enableAttribLocation");
 }
 
 void Attribute::arraySet() {
-  glVertexAttribPointer (mIndex, mSize,
+  glVertexAttribPointer(mIndex, mSize,
 //                          mType,
-                         GL_FLOAT, mNormalized, mStride, mPointer);
+                        GL_FLOAT, mNormalized, mStride, mPointer);
   fLogC("VertexAttribPointer");
 }
 
@@ -125,7 +125,7 @@ std::string Attribute::getName() {
 }
 
 void Attribute::log() {
-  fLogI("mName %s", mName.c_str ());
+  fLogI("mName %s", mName.c_str());
   fLogI("mType 0x%x", mType);
   fLogI("mIndex %d", mIndex);
   fLogI("mSize %d", mSize);

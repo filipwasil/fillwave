@@ -40,7 +40,7 @@ namespace core {
 PostProcessingPass::PostProcessingPass(core::Program *program,
     core::Texture2DRenderableDynamic *frame,
     GLfloat lifetime)
-    : Finishable (lifetime), mFrame (frame), mProgram (program) {
+    : Finishable(lifetime), mFrame(frame), mProgram(program) {
 }
 
 core::Texture2DRenderableDynamic *PostProcessingPass::getFrame() const {

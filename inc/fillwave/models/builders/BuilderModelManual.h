@@ -51,7 +51,7 @@ public:
       core::Texture2D *diffuseMap = nullptr,
       core::Texture2D *normalMap = nullptr,
       core::Texture2D *specularMap = nullptr,
-      Material material = Material ());
+      Material material = Material());
 
   virtual ~BuilderModelManual() = default;
 

@@ -14,8 +14,8 @@ namespace fillwave {
 namespace core {
 
 Texture2D::Texture2D(Texture2DFile *file, ParameterList &parameters, GLuint howMany)
-    : Texture (GL_TEXTURE_2D, howMany), mFile (puTexture2DFile (file)), mParameters (parameters) {
-  reload ();
+    : Texture(GL_TEXTURE_2D, howMany), mFile(puTexture2DFile(file)), mParameters(parameters) {
+  reload();
 }
 
 void Texture2D::sendData(Texture2DFileData data) {
@@ -23,52 +23,52 @@ void Texture2D::sendData(Texture2DFileData data) {
     mFile->mData = data;
   }
   if (mFile->mConfig.mCompression) {
-    glCompressedTexImage2D (mTarget,
-                            mFile->mConfig.mMipmapsLevel,
-                            mFile->mHeader.mInternalFormat,
-                            mFile->mHeader.mWidth,
-                            mFile->mHeader.mHeight,
-                            mFile->mConfig.mBorder,
-                            mFile->mConfig.mCompressionSize,
-                            (GLubyte *) mFile->mData);
+    glCompressedTexImage2D(mTarget,
+                           mFile->mConfig.mMipmapsLevel,
+                           mFile->mHeader.mInternalFormat,
+                           mFile->mHeader.mWidth,
+                           mFile->mHeader.mHeight,
+                           mFile->mConfig.mBorder,
+                           mFile->mConfig.mCompressionSize,
+                           (GLubyte *) mFile->mData);
   } else {
-    glTexImage2D (mTarget,
-                  mFile->mConfig.mMipmapsLevel,
-                  mFile->mHeader.mInternalFormat,
-                  mFile->mHeader.mWidth,
-                  mFile->mHeader.mHeight,
-                  mFile->mConfig.mBorder,
-                  mFile->mHeader.mFormat,
-                  mFile->mHeader.mType,
-                  (GLubyte *) mFile->mData);
+    glTexImage2D(mTarget,
+                 mFile->mConfig.mMipmapsLevel,
+                 mFile->mHeader.mInternalFormat,
+                 mFile->mHeader.mWidth,
+                 mFile->mHeader.mHeight,
+                 mFile->mConfig.mBorder,
+                 mFile->mHeader.mFormat,
+                 mFile->mHeader.mType,
+                 (GLubyte *) mFile->mData);
   }
   fLogC("send data");
 }
 
 void Texture2D::generateMipMaps() {
   if (mFile->mConfig.mMipmaps) {
-    glGenerateMipmap (mTarget);
+    glGenerateMipmap(mTarget);
     fLogC("generateMipMaps");
   }
 }
 
 void Texture2D::unbind2DTexture(GLint textureUnit) {
-  glActiveTexture (textureUnit);
-  glBindTexture (GL_TEXTURE_2D, 0);
+  glActiveTexture(textureUnit);
+  glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Texture2D::unbind2DTextures() {
-  glBindTexture (GL_TEXTURE_2D, 0);
+  glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Texture2D::reload() {
   fLogD("Reload");
-  Texture::reload ();
+  Texture::reload();
   for (GLsizei i = 0; i < mHowMany; i++) {
-    bind (i);
-    setParameters (mParameters);
-    sendData ();
-    generateMipMaps ();
+    bind(i);
+    setParameters(mParameters);
+    sendData();
+    generateMipMaps();
 //      unbind();
   }
 }

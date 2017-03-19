@@ -67,7 +67,7 @@ public:
 typedef std::unique_ptr<framework::Hinge> puHinge;
 
 static puHinge buildHinge() {
-  return std::make_unique<framework::Hinge> ();
+  return std::make_unique<framework::Hinge>();
 }
 } /* namespace fillwave */
 

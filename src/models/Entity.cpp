@@ -43,8 +43,8 @@ namespace fillwave {
 namespace framework {
 
 Entity::Entity(glm::vec3 translation, glm::quat rotation)
-    : Moveable (translation, rotation), mChildrenPropagateEvent (GL_TRUE), mParentRefresh (GL_TRUE), mPSC (GL_TRUE)
-    , mPSR (GL_TRUE) {
+    : Moveable(translation, rotation), mChildrenPropagateEvent(GL_TRUE), mParentRefresh(GL_TRUE), mPSC(GL_TRUE), mPSR(
+    GL_TRUE) {
 
 }
 
@@ -70,37 +70,37 @@ void Entity::drawDR(ICamera & /*camera*/) {
 
 void Entity::drawPicking(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->drawPicking (camera);
+    it->drawPicking(camera);
   }
 }
 
 void Entity::drawDepth(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->drawDepth (camera);
+    it->drawDepth(camera);
   }
 }
 
 void Entity::drawDepthColor(ICamera &camera, glm::vec3 &position) {
   for (auto &it : mChildren) {
-    it->drawDepthColor (camera, position);
+    it->drawDepthColor(camera, position);
   }
 }
 
 void Entity::drawAOG(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->drawAOG (camera);
+    it->drawAOG(camera);
   }
 }
 
 void Entity::drawAOC(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->drawAOC (camera);
+    it->drawAOC(camera);
   }
 }
 
 void Entity::drawOcclusionBox(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->drawOcclusionBox (camera);
+    it->drawOcclusionBox(camera);
   }
 }
 
@@ -114,7 +114,7 @@ void Entity::onUnpicked() {
 
 void Entity::updateMatrixTree() {
   if (mRefresh) {
-    updateMatrixCache ();
+    updateMatrixCache();
     mParentRefresh = GL_TRUE;
     mRefresh = GL_FALSE;
   }
@@ -122,21 +122,21 @@ void Entity::updateMatrixTree() {
   if (mParentRefresh) {
     mPhysicsMMC = mParentMMC * mMMC;
     for (auto &it : mChildren) {
-      it->updateParentMatrix (mPhysicsMMC);
+      it->updateParentMatrix(mPhysicsMMC);
     }
-    notifyObservers ();
+    notifyObservers();
     mParentRefresh = GL_FALSE;
   }
 
   for (auto &it : mChildren) {
-    it->updateMatrixTree ();
+    it->updateMatrixTree();
   }
 }
 
 void Entity::handleHierarchyEvent(EventType &event) {
-  Callback::handleEvent (mCallbacksHierarchy, event);
+  Callback::handleEvent(mCallbacksHierarchy, event);
   for (auto &it : mChildren) {
-    it->handleHierarchyEvent (event);
+    it->handleHierarchyEvent(event);
   }
 }
 
@@ -144,9 +144,9 @@ void Entity::setTransformation(glm::mat4 modelMatrix) {
   mMMC = modelMatrix;
   mPhysicsMMC = mParentMMC * mMMC;
   for (auto &it : mChildren) {
-    it->updateParentMatrix (mPhysicsMMC);
+    it->updateParentMatrix(mPhysicsMMC);
   }
-  notifyObservers ();
+  notifyObservers();
 }
 
 glm::mat4 Entity::getPhysicsMMC() {
@@ -157,38 +157,38 @@ void Entity::updateParentMatrix(glm::mat4 &parent) {
   mParentMMC = parent;
   mPhysicsMMC = mParentMMC * mMMC;
   mParentRefresh = GL_TRUE;
-  notifyObservers ();
+  notifyObservers();
 }
 
 void Entity::updateParentRotation(glm::quat &parent) {
   mParentRotation = parent;
   glm::quat localRotation(mParentRotation *mRotation);
   for (auto &it : mChildren) {
-    it->updateParentRotation (localRotation);
+    it->updateParentRotation(localRotation);
   }
-  notifyObservers ();
+  notifyObservers();
 }
 
 void Entity::attachHierarchyCallback(puCallback &&callback) {
-  mCallbacksHierarchy.push_back (std::move (callback));
+  mCallbacksHierarchy.push_back(std::move(callback));
 }
 
 void Entity::detachHierarchyCallback(Callback *callback) {
-  detachCallback (mCallbacksHierarchy, callback);
+  detachCallback(mCallbacksHierarchy, callback);
 }
 
 void Entity::pick(glm::vec3 color) {
   mFlagPickable = true;
   mPickColor = color;
-  std::for_each (mChildren.begin (), mChildren.end (), [color](puEntity &e) {
-    e->pick (color);
+  std::for_each(mChildren.begin(), mChildren.end(), [color](puEntity &e) {
+    e->pick(color);
   });
 }
 
 void Entity::unpick() {
   mFlagPickable = false;
-  std::for_each (mChildren.begin (), mChildren.end (), [](puEntity &e) {
-    e->unpick ();
+  std::for_each(mChildren.begin(), mChildren.end(), [](puEntity &e) {
+    e->unpick();
   });
 }
 
@@ -210,18 +210,18 @@ void Entity::log() const {
 
 inline void Entity::detachCallback(std::vector<puCallback> &callbacks, Callback *callback) {
   auto _compare_function = [callback](const puCallback &m) -> bool {
-    return m.get () == callback;
+    return m.get() == callback;
   };
-  auto _begin = callbacks.begin ();
-  auto _end = callbacks.end ();
-  auto it = std::remove_if (_begin, _end, _compare_function);
-  callbacks.erase (it, _end);
+  auto _begin = callbacks.begin();
+  auto _end = callbacks.end();
+  auto it = std::remove_if(_begin, _end, _compare_function);
+  callbacks.erase(it, _end);
   fLogE("Detachment of callback failed");
 }
 
 void Entity::updateRenderer(IRenderer &renderer) {
   for (auto &it : mChildren) {
-    it->updateRenderer (renderer);
+    it->updateRenderer(renderer);
   }
 }
 
@@ -231,6 +231,6 @@ bool Entity::getRenderItem(RenderItem & /*item*/) {
 
 } /* framework */
 puEntity buildEntity() {
-  return std::make_unique<framework::Entity> ();
+  return std::make_unique<framework::Entity>();
 }
 } /* fillwave */

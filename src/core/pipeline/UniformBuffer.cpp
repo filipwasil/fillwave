@@ -45,10 +45,10 @@ UniformBuffer::UniformBuffer(std::string name,
     GLuint uniformBlockSize,
     GLuint bindingPoint,
     GLuint dataStoreModification)
-    : IBuffer (GL_UNIFORM_BUFFER, dataStoreModification, index), mName (name), mBindingPoint (bindingPoint) {
-  bind ();
-  bindBase ();
-  unbind ();
+    : IBuffer(GL_UNIFORM_BUFFER, dataStoreModification, index), mName(name), mBindingPoint(bindingPoint) {
+  bind();
+  bindBase();
+  unbind();
   mSize = uniformBlockSize;
 
 }
@@ -58,15 +58,15 @@ UniformBuffer::~UniformBuffer() {
 }
 
 void UniformBuffer::bindRange(GLuint id) {
-  return glBindBufferRange (mTarget, mBindingPoint, mHandles[id], 0, mSize);
+  return glBindBufferRange(mTarget, mBindingPoint, mHandles[id], 0, mSize);
 }
 
 void UniformBuffer::push(GLfloat *data) {
-  bind ();
+  bind();
   mData = data;
-  send ();
+  send();
   mLoaded = GL_FALSE; //xxx always load to GPU
-  unbind ();
+  unbind();
 }
 
 std::string UniformBuffer::getName() {

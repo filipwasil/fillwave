@@ -50,7 +50,7 @@ namespace framework {
 class EventType {
 public:
   EventType(eEventType type)
-      : mType (type) {
+      : mType(type) {
   }
 
   virtual ~EventType() = default;

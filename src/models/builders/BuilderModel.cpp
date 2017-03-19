@@ -43,11 +43,11 @@ namespace fillwave {
 namespace framework {
 
 BuilderModel::BuilderModel(Engine *engine, std::string modelPath, core::Program *program)
-    : mEngine (engine), mProgram (program), mShapePath (modelPath) {
+    : mEngine(engine), mProgram(program), mShapePath(modelPath) {
 }
 
 puModel BuilderModel::build() {
-  return std::make_unique<Model> (mEngine, mProgram, mShapePath);
+  return std::make_unique<Model>(mEngine, mProgram, mShapePath);
 }
 
 BuilderModel &BuilderModel::setModelPath(std::string &path) {

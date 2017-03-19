@@ -56,7 +56,7 @@ struct ResizeScreenEventData {
 class ResizeScreenEvent : public TEvent<ResizeScreenEventData> {
 public:
   ResizeScreenEvent(ResizeScreenEventData &data)
-      : TEvent (data) {
+      : TEvent(data) {
 
   }
 

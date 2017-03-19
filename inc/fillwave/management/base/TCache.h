@@ -70,23 +70,23 @@ public:
   virtual ~TCache() = default;
 
   T *store(const K &key, P ... parameters) {
-    if ((*this).find (key) != (*this).end ()) {
-      return (*this)[key].get ();
+    if ((*this).find(key) != (*this).end()) {
+      return (*this)[key].get();
     }
     FILLWAVE_FORGET_ABOUT_ME();
-    return ((*this)[key] = std::make_unique<T> (parameters...)).get ();
+    return ((*this)[key] = std::make_unique<T>(parameters...)).get();
   }
 
   /**
    * \brief Add already allocated item to manager.
    */
   T *store(T *item, const K &key) {
-    if ((*this).find (key) != (*this).end ()) {
+    if ((*this).find(key) != (*this).end()) {
       delete item;
-      return (*this)[key].get ();
+      return (*this)[key].get();
     }
     FILLWAVE_FORGET_ABOUT_ME();
-    return ((*this)[key] = std::unique_ptr<T> (item)).get ();
+    return ((*this)[key] = std::unique_ptr<T>(item)).get();
   }
 };
 

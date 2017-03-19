@@ -41,7 +41,7 @@ namespace fillwave {
 namespace core {
 
 VertexBufferFloat::VertexBufferFloat(const std::vector<VertexFloat> &values, GLuint dataStoreModification)
-    : TVertexBuffer<VertexFloat> (values, dataStoreModification) {
+    : TVertexBuffer<VertexFloat>(values, dataStoreModification) {
 
 }
 
@@ -50,7 +50,7 @@ void VertexBufferFloat::log() const {
     return static_cast<double>(f.mData);
   };
   for (auto it : mDataVertices) {
-    fLogI("Vertex written: %f", d (it));
+    fLogI("Vertex written: %f", d(it));
   }
 }
 

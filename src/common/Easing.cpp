@@ -143,27 +143,27 @@ AHFloat QuinticEaseInOut(AHFloat p) {
 
 // Modeled after quarter-cycle of sine wave
 AHFloat SineEaseIn(AHFloat p) {
-  return static_cast<AHFloat>(sinf ((p - 1.0f) * static_cast<AHFloat>(M_PI_2))) + 1.0f;
+  return static_cast<AHFloat>(sinf((p - 1.0f) * static_cast<AHFloat>(M_PI_2))) + 1.0f;
 }
 
 // Modeled after quarter-cycle of sine wave (different phase)
 AHFloat SineEaseOut(AHFloat p) {
-  return sinf (p * static_cast<AHFloat>(M_PI_2));
+  return sinf(p * static_cast<AHFloat>(M_PI_2));
 }
 
 // Modeled after half sine wave
 AHFloat SineEaseInOut(AHFloat p) {
-  return 0.5f * (1.0f - (cosf (p * static_cast<AHFloat>(M_PI))));
+  return 0.5f * (1.0f - (cosf(p * static_cast<AHFloat>(M_PI))));
 }
 
 // Modeled after shifted quadrant IV of unit circle
 AHFloat CircularEaseIn(AHFloat p) {
-  return 1.0f - sqrtf (1.0f - (p * p));
+  return 1.0f - sqrtf(1.0f - (p * p));
 }
 
 // Modeled after shifted quadrant II of unit circle
 AHFloat CircularEaseOut(AHFloat p) {
-  return sqrtf ((2.0f - p) * p);
+  return sqrtf((2.0f - p) * p);
 }
 
 // Modeled after the piecewise circular function
@@ -171,20 +171,20 @@ AHFloat CircularEaseOut(AHFloat p) {
 // y = (1/2)(sqrt(-(2x - 3)*(2x - 1)) + 1) ; [0.5, 1]
 AHFloat CircularEaseInOut(AHFloat p) {
   if (p < 0.5f) {
-    return 0.5f * (1 - sqrtf (1.0f - 4.0f * (p * p)));
+    return 0.5f * (1 - sqrtf(1.0f - 4.0f * (p * p)));
   } else {
-    return 0.5f * (sqrtf (-((2.0f * p) - 3.0f) * ((2.0f * p) - 1.0f)) + 1.0f);
+    return 0.5f * (sqrtf(-((2.0f * p) - 3.0f) * ((2.0f * p) - 1.0f)) + 1.0f);
   }
 }
 
 // Modeled after the exponential function y = 2^(10(x - 1))
 AHFloat ExponentialEaseIn(AHFloat p) {
-  return (p == 0.0f) ? p : powf (2.0f, 10.0f * (p - 1));
+  return (p == 0.0f) ? p : powf(2.0f, 10.0f * (p - 1));
 }
 
 // Modeled after the exponential function y = -2^(-10x) + 1
 AHFloat ExponentialEaseOut(AHFloat p) {
-  return (p == 1.0f) ? p : 1.0f - powf (2.0f, -10.0f * p);
+  return (p == 1.0f) ? p : 1.0f - powf(2.0f, -10.0f * p);
 }
 
 // Modeled after the piecewise exponential
@@ -196,20 +196,20 @@ AHFloat ExponentialEaseInOut(AHFloat p) {
   }
 
   if (p < 0.5f) {
-    return 0.5f * powf (2.0f, (20.0f * p) - 10.0f);
+    return 0.5f * powf(2.0f, (20.0f * p) - 10.0f);
   } else {
-    return -0.5f * powf (2.0f, (-20.0f * p) + 10.0f) + 1.0f;
+    return -0.5f * powf(2.0f, (-20.0f * p) + 10.0f) + 1.0f;
   }
 }
 
 // Modeled after the damped sine wave y = sin(13pi/2*x)*pow(2, 10 * (x - 1))
 AHFloat ElasticEaseIn(AHFloat p) {
-  return sinf (13.0f * static_cast<AHFloat>(M_PI_2) * p) * powf (2.0f, 10.0f * (p - 1.0f));
+  return sinf(13.0f * static_cast<AHFloat>(M_PI_2) * p) * powf(2.0f, 10.0f * (p - 1.0f));
 }
 
 // Modeled after the damped sine wave y = sin(-13pi/2*(x + 1))*pow(2, -10x) + 1
 AHFloat ElasticEaseOut(AHFloat p) {
-  return sinf (-13.0f * static_cast<AHFloat>(M_PI_2) * (p + 1)) * powf (2.0f, -10.0f * p) + 1.0f;
+  return sinf(-13.0f * static_cast<AHFloat>(M_PI_2) * (p + 1)) * powf(2.0f, -10.0f * p) + 1.0f;
 }
 
 // Modeled after the piecewise exponentially-damped sine wave:
@@ -217,24 +217,24 @@ AHFloat ElasticEaseOut(AHFloat p) {
 // y = (1/2)*(sin(-13pi/2*((2x-1)+1))*pow(2,-10(2*x-1)) + 2) ; [0.5, 1]
 AHFloat ElasticEaseInOut(AHFloat p) {
   if (p < 0.5f) {
-    return 0.5f * sinf (13.0f * static_cast<AHFloat>(M_PI_2) * (2.0f * p)) * powf (2.0f, 10.0f * ((2.0f * p) - 1.0f));
+    return 0.5f * sinf(13.0f * static_cast<AHFloat>(M_PI_2) * (2.0f * p)) * powf(2.0f, 10.0f * ((2.0f * p) - 1.0f));
   } else {
     return 0.5f * (
-        sinf (-13.0f * static_cast<AHFloat>(M_PI_2) * ((2.0f * p - 1.0f) + 1.0f)) *
-        powf (2.0f, -10.0f * (2.0f * p - 1.0f)) + 2.0f
+        sinf(-13.0f * static_cast<AHFloat>(M_PI_2) * ((2.0f * p - 1.0f) + 1.0f)) *
+        powf(2.0f, -10.0f * (2.0f * p - 1.0f)) + 2.0f
     );
   }
 }
 
 // Modeled after the overshooting cubic y = x^3-x*sin(x*pi)
 AHFloat BackEaseIn(AHFloat p) {
-  return p * p * p - p * sinf (p * static_cast<AHFloat>(M_PI));
+  return p * p * p - p * sinf(p * static_cast<AHFloat>(M_PI));
 }
 
 // Modeled after overshooting cubic y = 1-((1-x)^3-(1-x)*sin((1-x)*pi))
 AHFloat BackEaseOut(AHFloat p) {
   AHFloat f = (1.0f - p);
-  return 1.0f - (f * f * f - f * sinf (f * static_cast<AHFloat>(M_PI)));
+  return 1.0f - (f * f * f - f * sinf(f * static_cast<AHFloat>(M_PI)));
 }
 
 // Modeled after the piecewise overshooting cubic function:
@@ -243,15 +243,15 @@ AHFloat BackEaseOut(AHFloat p) {
 AHFloat BackEaseInOut(AHFloat p) {
   if (p < 0.5f) {
     AHFloat f = 2.0f * p;
-    return 0.5f * (f * f * f - f * sinf (f * static_cast<AHFloat>(M_PI)));
+    return 0.5f * (f * f * f - f * sinf(f * static_cast<AHFloat>(M_PI)));
   } else {
     AHFloat f = (1.0f - (2.0f * p - 1.0f));
-    return 0.5f * (1.0f - (f * f * f - f * sinf (f * static_cast<AHFloat>(M_PI)))) + 0.5f;
+    return 0.5f * (1.0f - (f * f * f - f * sinf(f * static_cast<AHFloat>(M_PI)))) + 0.5f;
   }
 }
 
 AHFloat BounceEaseIn(AHFloat p) {
-  return 1.0f - BounceEaseOut (1 - p);
+  return 1.0f - BounceEaseOut(1 - p);
 }
 
 AHFloat BounceEaseOut(AHFloat p) {
@@ -268,8 +268,8 @@ AHFloat BounceEaseOut(AHFloat p) {
 
 AHFloat BounceEaseInOut(AHFloat p) {
   if (p < 0.5f) {
-    return 0.5f * BounceEaseIn (p * 2.0f);
+    return 0.5f * BounceEaseIn(p * 2.0f);
   } else {
-    return 0.5f * BounceEaseOut (p * 2.0f - 1.0f) + 0.5f;
+    return 0.5f * BounceEaseOut(p * 2.0f - 1.0f) + 0.5f;
   }
 }

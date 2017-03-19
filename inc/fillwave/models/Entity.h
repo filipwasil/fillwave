@@ -61,7 +61,7 @@ namespace framework {
 
 class Entity : public IRenderable, public IPickable, public Moveable, public TreePtr<Entity> {
 public:
-  Entity(glm::vec3 translation = glm::vec3 (0.0), glm::quat orientation = glm::quat (1.0, 0.0, 0.0, 0.0));
+  Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation = glm::quat(1.0, 0.0, 0.0, 0.0));
 
   virtual ~Entity();
 

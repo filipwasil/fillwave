@@ -112,7 +112,7 @@ void bqPlayerCallback(SLAndroidSimpleBufferQueueItf bq, void *context) {
   if (--nextCount > 0 && NULL != nextBuffer && 0 != nextSize) {
     SLresult result;
     // enqueue another buffer
-    result = (*bqPlayerBufferQueue)->Enqueue (bqPlayerBufferQueue, nextBuffer, nextSize);
+    result = (*bqPlayerBufferQueue)->Enqueue(bqPlayerBufferQueue, nextBuffer, nextSize);
     // the most likely other result is SL_RESULT_BUFFER_INSUFFICIENT,
     // which for this code example would indicate a programming error
     assert(SL_RESULT_SUCCESS == result);
@@ -128,9 +128,9 @@ void bqRecorderCallback(SLAndroidSimpleBufferQueueItf bq, void *context) {
   // for streaming recording, here we would call Enqueue to give recorder the next buffer to fill
   // but instead, this is a one-time buffer so we stop recording
   SLresult result;
-  result = (*recorderRecord)->SetRecordState (recorderRecord, SL_RECORDSTATE_STOPPED);
+  result = (*recorderRecord)->SetRecordState(recorderRecord, SL_RECORDSTATE_STOPPED);
   if (SL_RESULT_SUCCESS == result) {
-    recorderSize = RECORDER_FRAMES * sizeof (short);
+    recorderSize = RECORDER_FRAMES * sizeof(short);
     recorderSR = SL_SAMPLINGRATE_16;
   }
 }
@@ -141,29 +141,29 @@ void createEngine() {
   SLresult result;
 
   // create engine
-  result = slCreateEngine (&engineObject, 0, NULL, 0, NULL, NULL);
+  result = slCreateEngine(&engineObject, 0, NULL, 0, NULL, NULL);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // realize the engine
-  result = (*engineObject)->Realize (engineObject, SL_BOOLEAN_FALSE);
+  result = (*engineObject)->Realize(engineObject, SL_BOOLEAN_FALSE);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the engine interface, which is needed in order to create other objects
-  result = (*engineObject)->GetInterface (engineObject, SL_IID_ENGINE, &engineEngine);
+  result = (*engineObject)->GetInterface(engineObject, SL_IID_ENGINE, &engineEngine);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // create output mix, with environmental reverb specified as a non-required interface
   const SLInterfaceID ids[1] = {SL_IID_ENVIRONMENTALREVERB};
   const SLboolean req[1] = {SL_BOOLEAN_FALSE};
-  result = (*engineEngine)->CreateOutputMix (engineEngine, &outputMixObject, 1, ids, req);
+  result = (*engineEngine)->CreateOutputMix(engineEngine, &outputMixObject, 1, ids, req);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // realize the output mix
-  result = (*outputMixObject)->Realize (outputMixObject, SL_BOOLEAN_FALSE);
+  result = (*outputMixObject)->Realize(outputMixObject, SL_BOOLEAN_FALSE);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
@@ -171,12 +171,10 @@ void createEngine() {
   // this could fail if the environmental reverb effect is not available,
   // either because the feature is not present, excessive CPU load, or
   // the required MODIFY_AUDIO_SETTINGS permission was not requested and granted
-  result = (*outputMixObject)->GetInterface (outputMixObject,
-                                             SL_IID_ENVIRONMENTALREVERB,
-                                             &outputMixEnvironmentalReverb);
+  result = (*outputMixObject)->GetInterface(outputMixObject, SL_IID_ENVIRONMENTALREVERB, &outputMixEnvironmentalReverb);
   if (SL_RESULT_SUCCESS == result) {
-    result = (*outputMixEnvironmentalReverb)->SetEnvironmentalReverbProperties (outputMixEnvironmentalReverb,
-                                                                                &reverbSettings);
+    result = (*outputMixEnvironmentalReverb)->SetEnvironmentalReverbProperties(outputMixEnvironmentalReverb,
+                                                                               &reverbSettings);
     (void) result;
   }
   // ignore unsuccessful result codes for environmental reverb, as it is optional for this example
@@ -230,33 +228,33 @@ void createBufferQueueAudioPlayer() {
       /*SL_BOOLEAN_TRUE,*/
       SL_BOOLEAN_TRUE
   };
-  result = (*engineEngine)->CreateAudioPlayer (engineEngine, &bqPlayerObject, &audioSrc, &audioSnk, 3, ids, req);
+  result = (*engineEngine)->CreateAudioPlayer(engineEngine, &bqPlayerObject, &audioSrc, &audioSnk, 3, ids, req);
 
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // realize the player
-  result = (*bqPlayerObject)->Realize (bqPlayerObject, SL_BOOLEAN_FALSE);
+  result = (*bqPlayerObject)->Realize(bqPlayerObject, SL_BOOLEAN_FALSE);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the play interface
-  result = (*bqPlayerObject)->GetInterface (bqPlayerObject, SL_IID_PLAY, &bqPlayerPlay);
+  result = (*bqPlayerObject)->GetInterface(bqPlayerObject, SL_IID_PLAY, &bqPlayerPlay);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the buffer queue interface
-  result = (*bqPlayerObject)->GetInterface (bqPlayerObject, SL_IID_BUFFERQUEUE, &bqPlayerBufferQueue);
+  result = (*bqPlayerObject)->GetInterface(bqPlayerObject, SL_IID_BUFFERQUEUE, &bqPlayerBufferQueue);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // register callback on the buffer queue
-  result = (*bqPlayerBufferQueue)->RegisterCallback (bqPlayerBufferQueue, bqPlayerCallback, NULL);
+  result = (*bqPlayerBufferQueue)->RegisterCallback(bqPlayerBufferQueue, bqPlayerCallback, NULL);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the effect send interface
-  result = (*bqPlayerObject)->GetInterface (bqPlayerObject, SL_IID_EFFECTSEND, &bqPlayerEffectSend);
+  result = (*bqPlayerObject)->GetInterface(bqPlayerObject, SL_IID_EFFECTSEND, &bqPlayerEffectSend);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
@@ -268,12 +266,12 @@ void createBufferQueueAudioPlayer() {
 #endif
 
   // get the volume interface
-  result = (*bqPlayerObject)->GetInterface (bqPlayerObject, SL_IID_VOLUME, &bqPlayerVolume);
+  result = (*bqPlayerObject)->GetInterface(bqPlayerObject, SL_IID_VOLUME, &bqPlayerVolume);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // set the player's state to playing
-  result = (*bqPlayerPlay)->SetPlayState (bqPlayerPlay, SL_PLAYSTATE_PLAYING);
+  result = (*bqPlayerPlay)->SetPlayState(bqPlayerPlay, SL_PLAYSTATE_PLAYING);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 }
@@ -284,7 +282,7 @@ jboolean createUriAudioPlayer(JNIEnv *env, jclass clazz, jstring uri) {
   SLresult result;
 
   // convert Java string to UTF-8
-  const char *utf8 = env->GetStringUTFChars (uri, NULL);
+  const char *utf8 = env->GetStringUTFChars(uri, NULL);
   assert(NULL != utf8);
 
   // configure audio source
@@ -324,41 +322,41 @@ jboolean createUriAudioPlayer(JNIEnv *env, jclass clazz, jstring uri) {
       SL_BOOLEAN_TRUE,
       SL_BOOLEAN_TRUE
   };
-  result = (*engineEngine)->CreateAudioPlayer (engineEngine, &uriPlayerObject, &audioSrc, &audioSnk, 3, ids, req);
+  result = (*engineEngine)->CreateAudioPlayer(engineEngine, &uriPlayerObject, &audioSrc, &audioSnk, 3, ids, req);
   // note that an invalid URI is not detected here, but during prepare/prefetch on Android,
   // or possibly during Realize on other platforms
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // release the Java string and UTF-8
-  env->ReleaseStringUTFChars (uri, utf8);
+  env->ReleaseStringUTFChars(uri, utf8);
 
   // realize the player
-  result = (*uriPlayerObject)->Realize (uriPlayerObject, SL_BOOLEAN_FALSE);
+  result = (*uriPlayerObject)->Realize(uriPlayerObject, SL_BOOLEAN_FALSE);
   // this will always succeed on Android, but we check result for portability to other platforms
   if (SL_RESULT_SUCCESS != result) {
-    (*uriPlayerObject)->Destroy (uriPlayerObject);
+    (*uriPlayerObject)->Destroy(uriPlayerObject);
     uriPlayerObject = NULL;
     return JNI_FALSE;
   }
 
   // get the play interface
-  result = (*uriPlayerObject)->GetInterface (uriPlayerObject, SL_IID_PLAY, &uriPlayerPlay);
+  result = (*uriPlayerObject)->GetInterface(uriPlayerObject, SL_IID_PLAY, &uriPlayerPlay);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the seek interface
-  result = (*uriPlayerObject)->GetInterface (uriPlayerObject, SL_IID_SEEK, &uriPlayerSeek);
+  result = (*uriPlayerObject)->GetInterface(uriPlayerObject, SL_IID_SEEK, &uriPlayerSeek);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the mute/solo interface
-  result = (*uriPlayerObject)->GetInterface (uriPlayerObject, SL_IID_MUTESOLO, &uriPlayerMuteSolo);
+  result = (*uriPlayerObject)->GetInterface(uriPlayerObject, SL_IID_MUTESOLO, &uriPlayerMuteSolo);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the volume interface
-  result = (*uriPlayerObject)->GetInterface (uriPlayerObject, SL_IID_VOLUME, &uriPlayerVolume);
+  result = (*uriPlayerObject)->GetInterface(uriPlayerObject, SL_IID_VOLUME, &uriPlayerVolume);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
@@ -376,7 +374,7 @@ void setPlayingUriAudioPlayer(/*JNIEnv* env,
   if (NULL != uriPlayerPlay) {
 
     // set the player's state
-    result = (*uriPlayerPlay)->SetPlayState (uriPlayerPlay, isPlaying ? SL_PLAYSTATE_PLAYING : SL_PLAYSTATE_PAUSED);
+    result = (*uriPlayerPlay)->SetPlayState(uriPlayerPlay, isPlaying ? SL_PLAYSTATE_PLAYING : SL_PLAYSTATE_PAUSED);
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
   }
@@ -392,7 +390,7 @@ void setLoopingUriAudioPlayer(JNIEnv *env, jclass clazz, jboolean isLooping) {
   if (NULL != uriPlayerSeek) {
 
     // set the looping state
-    result = (*uriPlayerSeek)->SetLoop (uriPlayerSeek, (SLboolean) isLooping, 0, SL_TIME_UNKNOWN);
+    result = (*uriPlayerSeek)->SetLoop(uriPlayerSeek, (SLboolean) isLooping, 0, SL_TIME_UNKNOWN);
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
   }
@@ -414,9 +412,9 @@ static SLMuteSoloItf getMuteSolo() {
 
 void setChannelMuteUriAudioPlayer(JNIEnv *env, jclass clazz, jint chan, jboolean mute) {
   SLresult result;
-  SLMuteSoloItf muteSoloItf = getMuteSolo ();
+  SLMuteSoloItf muteSoloItf = getMuteSolo();
   if (NULL != muteSoloItf) {
-    result = (*muteSoloItf)->SetChannelMute (muteSoloItf, chan, mute);
+    result = (*muteSoloItf)->SetChannelMute(muteSoloItf, chan, mute);
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
   }
@@ -424,9 +422,9 @@ void setChannelMuteUriAudioPlayer(JNIEnv *env, jclass clazz, jint chan, jboolean
 
 void setChannelSoloUriAudioPlayer(JNIEnv *env, jclass clazz, jint chan, jboolean solo) {
   SLresult result;
-  SLMuteSoloItf muteSoloItf = getMuteSolo ();
+  SLMuteSoloItf muteSoloItf = getMuteSolo();
   if (NULL != muteSoloItf) {
-    result = (*muteSoloItf)->SetChannelSolo (muteSoloItf, chan, solo);
+    result = (*muteSoloItf)->SetChannelSolo(muteSoloItf, chan, solo);
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
   }
@@ -435,9 +433,9 @@ void setChannelSoloUriAudioPlayer(JNIEnv *env, jclass clazz, jint chan, jboolean
 int getNumChannelsUriAudioPlayer(JNIEnv *env, jclass clazz) {
   SLuint8 numChannels;
   SLresult result;
-  SLMuteSoloItf muteSoloItf = getMuteSolo ();
+  SLMuteSoloItf muteSoloItf = getMuteSolo();
   if (NULL != muteSoloItf) {
-    result = (*muteSoloItf)->GetNumChannels (muteSoloItf, &numChannels);
+    result = (*muteSoloItf)->GetNumChannels(muteSoloItf, &numChannels);
     if (SL_RESULT_PRECONDITIONS_VIOLATED == result) {
       // channel count is not yet known
       numChannels = 0;
@@ -464,9 +462,9 @@ static SLVolumeItf getVolume() {
 
 void setVolumeUriAudioPlayer(JNIEnv *env, jclass clazz, jint millibel) {
   SLresult result;
-  SLVolumeItf volumeItf = getVolume ();
+  SLVolumeItf volumeItf = getVolume();
   if (NULL != volumeItf) {
-    result = (*volumeItf)->SetVolumeLevel (volumeItf, millibel);
+    result = (*volumeItf)->SetVolumeLevel(volumeItf, millibel);
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
   }
@@ -474,9 +472,9 @@ void setVolumeUriAudioPlayer(JNIEnv *env, jclass clazz, jint millibel) {
 
 void setMuteUriAudioPlayer(JNIEnv *env, jclass clazz, jboolean mute) {
   SLresult result;
-  SLVolumeItf volumeItf = getVolume ();
+  SLVolumeItf volumeItf = getVolume();
   if (NULL != volumeItf) {
-    result = (*volumeItf)->SetMute (volumeItf, mute);
+    result = (*volumeItf)->SetMute(volumeItf, mute);
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
   }
@@ -484,9 +482,9 @@ void setMuteUriAudioPlayer(JNIEnv *env, jclass clazz, jboolean mute) {
 
 void enableStereoPositionUriAudioPlayer(JNIEnv *env, jclass clazz, jboolean enable) {
   SLresult result;
-  SLVolumeItf volumeItf = getVolume ();
+  SLVolumeItf volumeItf = getVolume();
   if (NULL != volumeItf) {
-    result = (*volumeItf)->EnableStereoPosition (volumeItf, enable);
+    result = (*volumeItf)->EnableStereoPosition(volumeItf, enable);
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
   }
@@ -494,9 +492,9 @@ void enableStereoPositionUriAudioPlayer(JNIEnv *env, jclass clazz, jboolean enab
 
 void setStereoPositionUriAudioPlayer(JNIEnv *env, jclass clazz, jint permille) {
   SLresult result;
-  SLVolumeItf volumeItf = getVolume ();
+  SLVolumeItf volumeItf = getVolume();
   if (NULL != volumeItf) {
-    result = (*volumeItf)->SetStereoPosition (volumeItf, permille);
+    result = (*volumeItf)->SetStereoPosition(volumeItf, permille);
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
   }
@@ -511,10 +509,10 @@ jboolean enableReverb(JNIEnv *env, jclass clazz, jboolean enabled) {
     return JNI_FALSE;
   }
 
-  result = (*bqPlayerEffectSend)->EnableEffectSend (bqPlayerEffectSend,
-                                                    outputMixEnvironmentalReverb,
-                                                    (SLboolean) enabled,
-                                                    (SLmillibel) 0);
+  result = (*bqPlayerEffectSend)->EnableEffectSend(bqPlayerEffectSend,
+                                                   outputMixEnvironmentalReverb,
+                                                   (SLboolean) enabled,
+                                                   (SLmillibel) 0);
   // and even if environmental reverb was present, it might no longer be available
   if (SL_RESULT_SUCCESS != result) {
     return JNI_FALSE;
@@ -533,21 +531,21 @@ jboolean selectClip(/*JNIEnv* env, jclass clazz,*/ jint which, jint count) {
       break;
     case 1:     // CLIP_HELLO
       nextBuffer = (short *) hello;
-      nextSize = sizeof (hello);
+      nextSize = sizeof(hello);
       break;
     case 2:     // CLIP_ANDROID
       nextBuffer = (short *) android;
-      nextSize = sizeof (android);
+      nextSize = sizeof(android);
       break;
     case 3:     // CLIP_SAWTOOTH
       nextBuffer = sawtoothBuffer;
-      nextSize = sizeof (sawtoothBuffer);
+      nextSize = sizeof(sawtoothBuffer);
       break;
     case 4:     // CLIP_PLAYBACK
       // we recorded at 16 kHz, but are playing buffers at 8 Khz, so do a primitive down-sample
       if (recorderSR == SL_SAMPLINGRATE_16) {
         unsigned i;
-        for (i = 0; i < recorderSize; i += 2 * sizeof (short)) {
+        for (i = 0; i < recorderSize; i += 2 * sizeof(short)) {
           recorderBuffer[i >> 2] = recorderBuffer[i >> 1];
         }
         recorderSR = SL_SAMPLINGRATE_8;
@@ -566,7 +564,7 @@ jboolean selectClip(/*JNIEnv* env, jclass clazz,*/ jint which, jint count) {
     // here we only enqueue one buffer because it is a long clip,
     // but for streaming playback we would typically enqueue at least 2 buffers to start
     SLresult result;
-    result = (*bqPlayerBufferQueue)->Enqueue (bqPlayerBufferQueue, nextBuffer, nextSize);
+    result = (*bqPlayerBufferQueue)->Enqueue(bqPlayerBufferQueue, nextBuffer, nextSize);
     if (SL_RESULT_SUCCESS != result) {
       return JNI_FALSE;
     }
@@ -586,7 +584,7 @@ jboolean createAssetAudioPlayer(JNIEnv *env, jclass clazz, AAssetManager *mgr, c
   // use asset manager to open asset by filename
 //    AAssetManager* mgr = AAssetManager_fromJava(env, assetManager);
   assert(NULL != mgr);
-  AAsset *asset = AAssetManager_open (mgr, utf8, AASSET_MODE_UNKNOWN);
+  AAsset *asset = AAssetManager_open(mgr, utf8, AASSET_MODE_UNKNOWN);
   // release the Java string and UTF-8
 //    env->ReleaseStringUTFChars(filename, utf8);
 
@@ -598,9 +596,9 @@ jboolean createAssetAudioPlayer(JNIEnv *env, jclass clazz, AAssetManager *mgr, c
 
   // open asset as file descriptor
   off_t start, length;
-  int fd = AAsset_openFileDescriptor (asset, &start, &length);
+  int fd = AAsset_openFileDescriptor(asset, &start, &length);
   assert(0 <= fd);
-  AAsset_close (asset);
+  AAsset_close(asset);
 
   // configure audio source
   SLDataLocator_AndroidFD loc_fd = {
@@ -640,38 +638,38 @@ jboolean createAssetAudioPlayer(JNIEnv *env, jclass clazz, AAssetManager *mgr, c
       SL_BOOLEAN_TRUE,
       SL_BOOLEAN_TRUE
   };
-  result = (*engineEngine)->CreateAudioPlayer (engineEngine, &fdPlayerObject, &audioSrc, &audioSnk, 3, ids, req);
+  result = (*engineEngine)->CreateAudioPlayer(engineEngine, &fdPlayerObject, &audioSrc, &audioSnk, 3, ids, req);
 
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // realize the player
-  result = (*fdPlayerObject)->Realize (fdPlayerObject, SL_BOOLEAN_FALSE);
+  result = (*fdPlayerObject)->Realize(fdPlayerObject, SL_BOOLEAN_FALSE);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the play interface
-  result = (*fdPlayerObject)->GetInterface (fdPlayerObject, SL_IID_PLAY, &fdPlayerPlay);
+  result = (*fdPlayerObject)->GetInterface(fdPlayerObject, SL_IID_PLAY, &fdPlayerPlay);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the seek interface
-  result = (*fdPlayerObject)->GetInterface (fdPlayerObject, SL_IID_SEEK, &fdPlayerSeek);
+  result = (*fdPlayerObject)->GetInterface(fdPlayerObject, SL_IID_SEEK, &fdPlayerSeek);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the mute/solo interface
-  result = (*fdPlayerObject)->GetInterface (fdPlayerObject, SL_IID_MUTESOLO, &fdPlayerMuteSolo);
+  result = (*fdPlayerObject)->GetInterface(fdPlayerObject, SL_IID_MUTESOLO, &fdPlayerMuteSolo);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the volume interface
-  result = (*fdPlayerObject)->GetInterface (fdPlayerObject, SL_IID_VOLUME, &fdPlayerVolume);
+  result = (*fdPlayerObject)->GetInterface(fdPlayerObject, SL_IID_VOLUME, &fdPlayerVolume);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // enable whole file looping
-  result = (*fdPlayerSeek)->SetLoop (fdPlayerSeek, SL_BOOLEAN_TRUE, 0, SL_TIME_UNKNOWN);
+  result = (*fdPlayerSeek)->SetLoop(fdPlayerSeek, SL_BOOLEAN_TRUE, 0, SL_TIME_UNKNOWN);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
@@ -691,7 +689,7 @@ void setPlayingAssetAudioPlayer(jboolean isPlaying) {
       fLogE("Audio playback stop");
     }
     // set the player's state
-    result = (*fdPlayerPlay)->SetPlayState (fdPlayerPlay, isPlaying ? SL_PLAYSTATE_PLAYING : SL_PLAYSTATE_PAUSED);
+    result = (*fdPlayerPlay)->SetPlayState(fdPlayerPlay, isPlaying ? SL_PLAYSTATE_PLAYING : SL_PLAYSTATE_PAUSED);
     assert(SL_RESULT_SUCCESS == result);
     (void) result;
   }
@@ -738,29 +736,29 @@ jboolean createAudioRecorder(JNIEnv *env, jclass clazz) {
   // (requires the RECORD_AUDIO permission)
   const SLInterfaceID id[1] = {SL_IID_ANDROIDSIMPLEBUFFERQUEUE};
   const SLboolean req[1] = {SL_BOOLEAN_TRUE};
-  result = (*engineEngine)->CreateAudioRecorder (engineEngine, &recorderObject, &audioSrc, &audioSnk, 1, id, req);
+  result = (*engineEngine)->CreateAudioRecorder(engineEngine, &recorderObject, &audioSrc, &audioSnk, 1, id, req);
   if (SL_RESULT_SUCCESS != result) {
     return JNI_FALSE;
   }
 
   // realize the audio recorder
-  result = (*recorderObject)->Realize (recorderObject, SL_BOOLEAN_FALSE);
+  result = (*recorderObject)->Realize(recorderObject, SL_BOOLEAN_FALSE);
   if (SL_RESULT_SUCCESS != result) {
     return JNI_FALSE;
   }
 
   // get the record interface
-  result = (*recorderObject)->GetInterface (recorderObject, SL_IID_RECORD, &recorderRecord);
+  result = (*recorderObject)->GetInterface(recorderObject, SL_IID_RECORD, &recorderRecord);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // get the buffer queue interface
-  result = (*recorderObject)->GetInterface (recorderObject, SL_IID_ANDROIDSIMPLEBUFFERQUEUE, &recorderBufferQueue);
+  result = (*recorderObject)->GetInterface(recorderObject, SL_IID_ANDROIDSIMPLEBUFFERQUEUE, &recorderBufferQueue);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // register callback on the buffer queue
-  result = (*recorderBufferQueue)->RegisterCallback (recorderBufferQueue, bqRecorderCallback, NULL);
+  result = (*recorderBufferQueue)->RegisterCallback(recorderBufferQueue, bqRecorderCallback, NULL);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
@@ -773,10 +771,10 @@ void startRecording(JNIEnv *env, jclass clazz) {
   SLresult result;
 
   // in case already recording, stop recording and clear buffer queue
-  result = (*recorderRecord)->SetRecordState (recorderRecord, SL_RECORDSTATE_STOPPED);
+  result = (*recorderRecord)->SetRecordState(recorderRecord, SL_RECORDSTATE_STOPPED);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
-  result = (*recorderBufferQueue)->Clear (recorderBufferQueue);
+  result = (*recorderBufferQueue)->Clear(recorderBufferQueue);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
@@ -785,14 +783,14 @@ void startRecording(JNIEnv *env, jclass clazz) {
 
   // enqueue an empty buffer to be filled by the recorder
   // (for streaming recording, we would enqueue at least 2 empty buffers to start things off)
-  result = (*recorderBufferQueue)->Enqueue (recorderBufferQueue, recorderBuffer, RECORDER_FRAMES * sizeof (short));
+  result = (*recorderBufferQueue)->Enqueue(recorderBufferQueue, recorderBuffer, RECORDER_FRAMES * sizeof(short));
   // the most likely other result is SL_RESULT_BUFFER_INSUFFICIENT,
   // which for this code example would indicate a programming error
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
   // start recording
-  result = (*recorderRecord)->SetRecordState (recorderRecord, SL_RECORDSTATE_RECORDING);
+  result = (*recorderRecord)->SetRecordState(recorderRecord, SL_RECORDSTATE_RECORDING);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 }
@@ -803,7 +801,7 @@ void shutdown(JNIEnv *env, jclass clazz) {
 
   // destroy buffer queue audio player object, and invalidate all associated interfaces
   if (bqPlayerObject != NULL) {
-    (*bqPlayerObject)->Destroy (bqPlayerObject);
+    (*bqPlayerObject)->Destroy(bqPlayerObject);
     bqPlayerObject = NULL;
     bqPlayerPlay = NULL;
     bqPlayerBufferQueue = NULL;
@@ -814,7 +812,7 @@ void shutdown(JNIEnv *env, jclass clazz) {
 
   // destroy file descriptor audio player object, and invalidate all associated interfaces
   if (fdPlayerObject != NULL) {
-    (*fdPlayerObject)->Destroy (fdPlayerObject);
+    (*fdPlayerObject)->Destroy(fdPlayerObject);
     fdPlayerObject = NULL;
     fdPlayerPlay = NULL;
     fdPlayerSeek = NULL;
@@ -824,7 +822,7 @@ void shutdown(JNIEnv *env, jclass clazz) {
 
   // destroy URI audio player object, and invalidate all associated interfaces
   if (uriPlayerObject != NULL) {
-    (*uriPlayerObject)->Destroy (uriPlayerObject);
+    (*uriPlayerObject)->Destroy(uriPlayerObject);
     uriPlayerObject = NULL;
     uriPlayerPlay = NULL;
     uriPlayerSeek = NULL;
@@ -834,7 +832,7 @@ void shutdown(JNIEnv *env, jclass clazz) {
 
   // destroy audio recorder object, and invalidate all associated interfaces
   if (recorderObject != NULL) {
-    (*recorderObject)->Destroy (recorderObject);
+    (*recorderObject)->Destroy(recorderObject);
     recorderObject = NULL;
     recorderRecord = NULL;
     recorderBufferQueue = NULL;
@@ -842,14 +840,14 @@ void shutdown(JNIEnv *env, jclass clazz) {
 
   // destroy output mix object, and invalidate all associated interfaces
   if (outputMixObject != NULL) {
-    (*outputMixObject)->Destroy (outputMixObject);
+    (*outputMixObject)->Destroy(outputMixObject);
     outputMixObject = NULL;
     outputMixEnvironmentalReverb = NULL;
   }
 
   // destroy engine object, and invalidate all associated interfaces
   if (engineObject != NULL) {
-    (*engineObject)->Destroy (engineObject);
+    (*engineObject)->Destroy(engineObject);
     engineObject = NULL;
     engineEngine = NULL;
   }

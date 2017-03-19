@@ -62,71 +62,71 @@ public:
    */
 
   TVertexBuffer(GLuint dataStoreModification = GL_STATIC_DRAW)
-      : IBuffer (GL_ARRAY_BUFFER, dataStoreModification) {
+      : IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
   }
 
   TVertexBuffer(const std::vector<T> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW)
-      : IBuffer (GL_ARRAY_BUFFER, dataStoreModification) {
+      : IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
     mDataVertices = vertices;
-    mTotalElements = mDataVertices.size ();
-    mData = mDataVertices.data ();
-    mSize = mTotalElements * sizeof (T);
+    mTotalElements = mDataVertices.size();
+    mData = mDataVertices.data();
+    mSize = mTotalElements * sizeof(T);
   }
 
   TVertexBuffer(framework::Shape<T> &shape, GLuint dataStoreModification = GL_STATIC_DRAW)
-      : IBuffer (GL_ARRAY_BUFFER, dataStoreModification) {
-    mDataVertices = shape.getVertices ();
-    mSize = mTotalElements * sizeof (T);
-    mData = mDataVertices.data ();
+      : IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
+    mDataVertices = shape.getVertices();
+    mSize = mTotalElements * sizeof(T);
+    mData = mDataVertices.data();
   }
 
   ~TVertexBuffer() = default;
 
   void load(T element) {
-    mDataVertices.push_back (element);
+    mDataVertices.push_back(element);
     mTotalElements++;
-    mSize = mTotalElements * sizeof (T);
-    mData = mDataVertices.data ();
+    mSize = mTotalElements * sizeof(T);
+    mData = mDataVertices.data();
   }
 
   void initAttributes(GLint programHandle) {
-    if (mAttributes.empty ()) {
-      getAttributes (programHandle);
+    if (mAttributes.empty()) {
+      getAttributes(programHandle);
     }
     return;
   }
 
   void attributesSetForVAO() {
-    std::for_each (mAttributes.begin (), mAttributes.end (), [](Attribute &a) {
-      a.arrayEnable ();
+    std::for_each(mAttributes.begin(), mAttributes.end(), [](Attribute &a) {
+      a.arrayEnable();
     });
-    std::for_each (mAttributes.begin (), mAttributes.end (), [](Attribute &a) {
-      a.arraySet ();
+    std::for_each(mAttributes.begin(), mAttributes.end(), [](Attribute &a) {
+      a.arraySet();
     });
   }
 
   void attributesEnable() {
-    std::for_each (mAttributes.begin (), mAttributes.end (), [](Attribute &a) {
-      a.arrayEnable ();
+    std::for_each(mAttributes.begin(), mAttributes.end(), [](Attribute &a) {
+      a.arrayEnable();
     });
   }
 
   void reload() {
-    IBuffer::reload ();
+    IBuffer::reload();
   }
 
   void attributesSetPointer() {
-    std::for_each (mAttributes.begin (), mAttributes.end (), [](Attribute &a) {
-      a.arraySet ();
+    std::for_each(mAttributes.begin(), mAttributes.end(), [](Attribute &a) {
+      a.arraySet();
     });
   }
 
   T *getDataInternal() {
-    if (mDataVertices.empty ()) {
+    if (mDataVertices.empty()) {
       std::cout << "Not cpu data in this buffer" << std::endl;
       return nullptr;
     }
-    return mDataVertices.data ();
+    return mDataVertices.data();
   }
 
   virtual void log() const = 0;
@@ -136,14 +136,14 @@ protected:
 
   inline void getAttributes(GLint programHandle) {
     int howMany = -1;
-    glGetProgramiv (programHandle, GL_ACTIVE_ATTRIBUTES, &howMany);
+    glGetProgramiv(programHandle, GL_ACTIVE_ATTRIBUTES, &howMany);
     for (int i = 0; i < howMany; ++i) {
       int name_len = -1, num = -1;
       GLenum type = GL_ZERO;
       char name[200];
-      glGetActiveAttrib (programHandle, GLuint (i), sizeof (name) - 1, &name_len, &num, &type, name);
+      glGetActiveAttrib(programHandle, GLuint(i), sizeof(name) - 1, &name_len, &num, &type, name);
       name[name_len] = 0;
-      GLuint location = glGetAttribLocation (programHandle, name);
+      GLuint location = glGetAttribLocation(programHandle, name);
       GLuint size = 0;
       switch (type) {
         case GL_UNSIGNED_INT:
@@ -191,29 +191,29 @@ protected:
           size = 0;
           break;
       }
-      Attribute a (name, location, size, sizeof (T), type);
-      mAttributes.push_back (a);
+      Attribute a(name, location, size, sizeof(T), type);
+      mAttributes.push_back(a);
     }
 
     unsigned long long pointer = 0;
-    for (GLuint i = 0; i < mAttributes.size (); i++) {
+    for (GLuint i = 0; i < mAttributes.size(); i++) {
       for (auto &it : mAttributes) {
-        if (it.getIndex () == i) {
-          it.setOffsetPointer ((GLvoid *) pointer);
-          pointer += it.getSize () * it.getTypeSize ();
+        if (it.getIndex() == i) {
+          it.setOffsetPointer((GLvoid *) pointer);
+          pointer += it.getSize() * it.getTypeSize();
         }
       }
     }
   }
 
   inline void attributesBind(GLint programHandle) {
-    std::for_each (mAttributes.begin (), mAttributes.end (), [programHandle](Attribute &a) {
-      a.bindLocation (programHandle);
+    std::for_each(mAttributes.begin(), mAttributes.end(), [programHandle](Attribute &a) {
+      a.bindLocation(programHandle);
     });
   }
 
   void emptyCPU() override {
-    mDataVertices.clear ();
+    mDataVertices.clear();
   }
 
   void emptyGPU() override {

@@ -50,8 +50,8 @@ BuilderModelManual::BuilderModelManual(Engine *engine,
     core::Texture2D *normalMap,
     core::Texture2D *specularMap,
     Material material)
-    : BuilderModel (engine, modelPath, program), mDiffuseMap (diffuseMap), mNormalMap (normalMap), mSpecularMap (
-    specularMap), mMaterial (material) {
+    : BuilderModel(engine, modelPath, program), mDiffuseMap(diffuseMap), mNormalMap(normalMap)
+    , mSpecularMap(specularMap), mMaterial(material) {
 
 }
 
@@ -76,7 +76,7 @@ BuilderModelManual &BuilderModelManual::setMaterial(const Material &material) {
 }
 
 puModel BuilderModelManual::build() {
-  return std::make_unique<Model> (mEngine, mProgram, mShapePath, mDiffuseMap, mNormalMap, mSpecularMap, mMaterial);
+  return std::make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMap, mNormalMap, mSpecularMap, mMaterial);
 }
 
 } /* framework */

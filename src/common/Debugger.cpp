@@ -46,18 +46,18 @@ namespace fillwave {
 namespace framework {
 
 Debugger::Debugger(Engine *engine)
-    : IReloadable (engine), mState (eDebuggerState::eOff), mEngine (engine)
-    , mVBO (mEngine->storeBuffer<core::VertexBufferDebug> (mVAO, 1.0f)), mMiniwindowSize (1.0 / 6.0)
-    , mMiniwindowsOccupied (0) {
+    : IReloadable(engine), mState(eDebuggerState::eOff), mEngine(engine)
+    , mVBO(mEngine->storeBuffer<core::VertexBufferDebug>(mVAO, 1.0f)), mMiniwindowSize(1.0 / 6.0), mMiniwindowsOccupied(
+        0) {
 
-  ProgramLoader loader (engine);
+  ProgramLoader loader(engine);
 
-  mProgram = loader.getDebugger ();
+  mProgram = loader.getDebugger();
 
-  initPipeline ();
-  initVBO ();
-  initVAO ();
-  initUniformsCache ();
+  initPipeline();
+  initVBO();
+  initVAO();
+  initUniformsCache();
 }
 
 void Debugger::setState(eDebuggerState state) {
@@ -104,108 +104,108 @@ void Debugger::setMiniwindowSize(GLfloat size) {
 }
 
 void Debugger::renderFromCamera(ICamera &c, GLint id) {
-  glViewport (mEngine->getScreenSize ()[0] * (id) * mMiniwindowSize,
-              mEngine->getScreenSize ()[1] * (1.0f - mMiniwindowSize),
-              mEngine->getScreenSize ()[0] * mMiniwindowSize,
-              mEngine->getScreenSize ()[1] * mMiniwindowSize);
+  glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
+             mEngine->getScreenSize()[1] * (1.0f - mMiniwindowSize),
+             mEngine->getScreenSize()[0] * mMiniwindowSize,
+             mEngine->getScreenSize()[1] * mMiniwindowSize);
 
-  glClear (GL_DEPTH_BUFFER_BIT);
+  glClear(GL_DEPTH_BUFFER_BIT);
 
-  mEngine->getCurrentScene ()->draw (c);
+  mEngine->getCurrentScene()->draw(c);
 
-  glViewport (0, 0, mEngine->getScreenSize ()[0], mEngine->getScreenSize ()[1]);
+  glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
 void Debugger::renderPickingMap() {
-  glViewport (mEngine->getScreenSize ()[0] * (1.0f - mMiniwindowSize),
-              0,
-              mEngine->getScreenSize ()[0] * mMiniwindowSize,
-              mEngine->getScreenSize ()[1] * mMiniwindowSize);
+  glViewport(mEngine->getScreenSize()[0] * (1.0f - mMiniwindowSize),
+             0,
+             mEngine->getScreenSize()[0] * mMiniwindowSize,
+             mEngine->getScreenSize()[1] * mMiniwindowSize);
 
-  glClear (GL_DEPTH_BUFFER_BIT);
-  mEngine->getCurrentScene ()->drawPicking ();
-  glViewport (0, 0, mEngine->getScreenSize ()[0], mEngine->getScreenSize ()[1]);
+  glClear(GL_DEPTH_BUFFER_BIT);
+  mEngine->getCurrentScene()->drawPicking();
+  glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
 void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
-  glViewport (mEngine->getScreenSize ()[0] * (id) * mMiniwindowSize,
-              0,
-              mEngine->getScreenSize ()[0] * mMiniwindowSize,
-              mEngine->getScreenSize ()[1] * mMiniwindowSize);
+  glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
+             0,
+             mEngine->getScreenSize()[0] * mMiniwindowSize,
+             mEngine->getScreenSize()[1] * mMiniwindowSize);
 
-  glClear (GL_DEPTH_BUFFER_BIT);
+  glClear(GL_DEPTH_BUFFER_BIT);
 
-  mProgram->use ();
+  mProgram->use();
 
-  mVAO->bind ();
+  mVAO->bind();
 
-  LightDirectional *light = mEngine->getLightSystem ()->mLightsDirectional[id].get ();
+  LightDirectional *light = mEngine->getLightSystem()->mLightsDirectional[id].get();
 
-  ICamera *cam = light->getShadowCamera ();
+  ICamera *cam = light->getShadowCamera();
 
-  light->getShadowTexture ()->bind (GLint (FILLWAVE_SHADOW_FIRST_UNIT + id));
+  light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
 
-  glDisable (GL_DEPTH_TEST);
-  glEnable (GL_BLEND);
-  glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glDisable(GL_DEPTH_TEST);
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  core::Uniform::push (mULCTextureUnit, id);
-  core::Uniform::push (mULCNearPlane, cam->getProjectionNearPlane ());
-  core::Uniform::push (mULCFarPlane, cam->getProjectionFarPlane ());
+  core::Uniform::push(mULCTextureUnit, id);
+  core::Uniform::push(mULCNearPlane, cam->getProjectionNearPlane());
+  core::Uniform::push(mULCFarPlane, cam->getProjectionFarPlane());
 
-  glDrawArrays (GL_TRIANGLES, 0, mVBO->getElements ());
+  glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
 
-  glEnable (GL_DEPTH_TEST);
-  glDisable (GL_BLEND);
+  glEnable(GL_DEPTH_TEST);
+  glDisable(GL_BLEND);
 
-  core::Texture2D::unbind2DTextures ();
-  core::VertexArray::unbindVAO ();
-  core::Program::disusePrograms ();
+  core::Texture2D::unbind2DTextures();
+  core::VertexArray::unbindVAO();
+  core::Program::disusePrograms();
 
-  glViewport (0, 0, mEngine->getScreenSize ()[0], mEngine->getScreenSize ()[1]);
+  glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
 void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
-  glViewport (mEngine->getScreenSize ()[0] * (id) * mMiniwindowSize,
-              0,
-              mEngine->getScreenSize ()[0] * mMiniwindowSize,
-              mEngine->getScreenSize ()[1] * mMiniwindowSize);
+  glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
+             0,
+             mEngine->getScreenSize()[0] * mMiniwindowSize,
+             mEngine->getScreenSize()[1] * mMiniwindowSize);
 
-  glClear (GL_DEPTH_BUFFER_BIT);
+  glClear(GL_DEPTH_BUFFER_BIT);
 
-  mProgram->use ();
+  mProgram->use();
 
-  mVAO->bind ();
+  mVAO->bind();
 
-  LightSpot *light = mEngine->getLightSystem ()->mLightsSpot[id].get ();
+  LightSpot *light = mEngine->getLightSystem()->mLightsSpot[id].get();
 
-  CameraPerspective cam = *(light->getShadowCamera ());
+  CameraPerspective cam = *(light->getShadowCamera());
 
-  light->getShadowTexture ()->bind (GLint (FILLWAVE_SHADOW_FIRST_UNIT + id));
+  light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
 
-  glDisable (GL_DEPTH_TEST);
-  glEnable (GL_BLEND);
-  glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glDisable(GL_DEPTH_TEST);
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  core::Uniform::push (mULCTextureUnit, FILLWAVE_SHADOW_FIRST_UNIT + id);
-  core::Uniform::push (mULCNearPlane, cam.getProjectionNearPlane ());
-  core::Uniform::push (mULCFarPlane, cam.getProjectionFarPlane ());
+  core::Uniform::push(mULCTextureUnit, FILLWAVE_SHADOW_FIRST_UNIT + id);
+  core::Uniform::push(mULCNearPlane, cam.getProjectionNearPlane());
+  core::Uniform::push(mULCFarPlane, cam.getProjectionFarPlane());
 
-  glDrawArrays (GL_TRIANGLES, 0, mVBO->getElements ());
+  glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
 
-  glEnable (GL_DEPTH_TEST);
-  glDisable (GL_BLEND);
+  glEnable(GL_DEPTH_TEST);
+  glDisable(GL_BLEND);
 
-  core::Texture2D::unbind2DTextures ();
-  core::VertexArray::unbindVAO ();
-  core::Program::disusePrograms ();
+  core::Texture2D::unbind2DTextures();
+  core::VertexArray::unbindVAO();
+  core::Program::disusePrograms();
 
-  glViewport (0, 0, mEngine->getScreenSize ()[0], mEngine->getScreenSize ()[1]);
+  glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
 inline void Debugger::initBuffers() {
   if (mVBO) {
-    mVBO->reload ();
+    mVBO->reload();
   }
 }
 
@@ -214,25 +214,25 @@ inline void Debugger::initPipeline() {
 }
 
 inline void Debugger::initUniformsCache() {
-  mULCTextureUnit = mProgram->getUniformLocation ("uTextureUnit");
-  mULCNearPlane = mProgram->getUniformLocation ("uNearplane");
-  mULCFarPlane = mProgram->getUniformLocation ("uFarPlane");
+  mULCTextureUnit = mProgram->getUniformLocation("uTextureUnit");
+  mULCNearPlane = mProgram->getUniformLocation("uNearplane");
+  mULCFarPlane = mProgram->getUniformLocation("uFarPlane");
 }
 
 inline void Debugger::initVAO() {
-  mSampler->bind ();
-  mVAO->bind ();
+  mSampler->bind();
+  mVAO->bind();
 
-  mVBO->bind ();
-  mVBO->setLoaded (GL_FALSE);
-  mVBO->send ();
-  mVBO->attributesSetForVAO ();
+  mVBO->bind();
+  mVBO->setLoaded(GL_FALSE);
+  mVBO->send();
+  mVBO->attributesSetForVAO();
 
-  core::VertexArray::unbindVAO ();
+  core::VertexArray::unbindVAO();
 }
 
 inline void Debugger::initVBO() {
-  mVBO->initAttributes (mProgram->getHandle ());
+  mVBO->initAttributes(mProgram->getHandle());
 }
 
 } /* framework */

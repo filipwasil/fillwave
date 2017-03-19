@@ -16,13 +16,13 @@ namespace fillwave {
 namespace core {
 
 Program::Program(const std::vector<core::Shader *> &shaders, GLboolean skipLinking)
-    : mDelayedLinking (skipLinking), mShaders (shaders) {
-  reload ();
+    : mDelayedLinking(skipLinking), mShaders(shaders) {
+  reload();
 }
 
 Program::~Program() {
   for (auto &it : mShaders) {
-    detach (it);
+    detach(it);
   }
 }
 

@@ -54,11 +54,11 @@ public:
   virtual ~TManager() = default;
 
   T *add(P ... parameters) {
-    if ((*this).size () >= M) {
+    if ((*this).size() >= M) {
       return nullptr;
     }
-    (*this).emplace_back (std::make_unique<T> (parameters...));
-    return (*this).back ().get ();
+    (*this).emplace_back(std::make_unique<T>(parameters...));
+    return (*this).back().get();
   }
 
   bool isNew(T &item) {
@@ -72,7 +72,7 @@ public:
 
   void log() {
     for (auto &it : (*this)) {
-      it->log ();
+      it->log();
     }
   }
 };

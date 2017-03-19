@@ -38,8 +38,8 @@ namespace fillwave {
 namespace framework {
 
 CameraNull::CameraNull() {
-  mProjectionMatrix = glm::mat4 (1.0);
-  mCameraMatrix = glm::mat4 (1.0);
+  mProjectionMatrix = glm::mat4(1.0);
+  mCameraMatrix = glm::mat4(1.0);
   mRefreshProjection = GL_FALSE;
   mRefreshView = GL_FALSE;
 }

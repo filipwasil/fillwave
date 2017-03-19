@@ -54,7 +54,7 @@ class Skybox;
 class IRenderer {
 public:
   IRenderer()
-      : mFlagReload (true), mSkybox (nullptr) {
+      : mFlagReload(true), mSkybox(nullptr) {
 
   }
 

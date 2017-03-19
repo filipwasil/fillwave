@@ -48,7 +48,7 @@ class Quad : public Shape<core::VertexBasic> {
 public:
   Quad(GLfloat size = 1.0f) {
 
-    mVertices.resize (6);
+    mVertices.resize(6);
 
     core::VertexBasic position[6] = {{{-size, -size, 0.0, 1.0}, {
                                                                     0.0, 0.0, 0.0, 1.0
@@ -68,9 +68,9 @@ public:
                                                                                          },                {1.0, 0.0, 0.0}, {0.0, 0.0}, {0}, {   0.0}},
     };
 
-    for (size_t i = 0; i < mVertices.size (); i++) {
+    for (size_t i = 0; i < mVertices.size(); i++) {
       mVertices[i] = position[i];
-      mIndices.push_back (i);
+      mIndices.push_back(i);
     }
   }
 

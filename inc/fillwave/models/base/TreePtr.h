@@ -52,7 +52,7 @@ template <class T, class C = ITreeNode>
 class TreePtr : public C {
 public:
   TreePtr()
-      : mFlagAttachedDetached (true) {
+      : mFlagAttachedDetached(true) {
 
   }
 
@@ -67,12 +67,12 @@ public:
   TreePtr(TreePtr &&obj) = default;
 
   void attach(std::unique_ptr<T> &&node) {
-    if (node.get () == this) {
+    if (node.get() == this) {
       /* User just tried to attach entity to itself */
-      abort ();
+      abort();
     }
-    node->onAttached (this);
-    mChildren.push_back (std::move (node));
+    node->onAttached(this);
+    mChildren.push_back(std::move(node));
     mFlagAttachedDetached = true;
   }
 
@@ -80,14 +80,14 @@ public:
     auto _compare_function = [node](const T &e) -> bool {
       bool found = (e == node);
       if (found) {
-        node->onDetached ();
+        node->onDetached();
       }
       return found;
     };
-    auto it = std::remove_if (mChildren.begin (), mChildren.end (), _compare_function);
-    if (it != mChildren.end ()) {
+    auto it = std::remove_if(mChildren.begin(), mChildren.end(), _compare_function);
+    if (it != mChildren.end()) {
       mFlagAttachedDetached = true;
-      mChildren.erase (it, mChildren.end ());
+      mChildren.erase(it, mChildren.end());
     }
   }
 
@@ -100,17 +100,17 @@ public:
   }
 
   void detachChildren() {
-    std::for_each (mChildren.begin (), mChildren.end (), [](std::unique_ptr<T> &e) {
-      e->onDetached ();
+    std::for_each(mChildren.begin(), mChildren.end(), [](std::unique_ptr<T> &e) {
+      e->onDetached();
     });
-    mChildren.clear ();
+    mChildren.clear();
   }
 
   bool isAttachedDetached() {
     bool result = mFlagAttachedDetached;
     mFlagAttachedDetached = false;
     for (auto &it : mChildren) {
-      result = it->isAttachedDetached () ? true : result;
+      result = it->isAttachedDetached() ? true : result;
     }
     return result;
   }

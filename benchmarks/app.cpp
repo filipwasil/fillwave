@@ -48,8 +48,8 @@ std::vector<result> mResults;
 
 int initContext() {
 
-  if (!glfwInit ()) {
-    exit (EXIT_FAILURE);
+  if (!glfwInit()) {
+    exit(EXIT_FAILURE);
   }
 
   GLfloat screenWidth = 800;
@@ -65,40 +65,40 @@ int initContext() {
   mCursorPositionX = 1;
   mCursorPositionY = 1;
 
-  const GLFWvidmode *mode = glfwGetVideoMode (glfwGetPrimaryMonitor ());
+  const GLFWvidmode *mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
   screenWidth = mode->width;
   screenHeight = mode->height;
 
-  window = glfwCreateWindow (screenWidth, screenHeight, "Fillwave", glfwGetPrimaryMonitor (), /*NULL*/
-                             NULL);
+  window = glfwCreateWindow(screenWidth, screenHeight, "Fillwave", glfwGetPrimaryMonitor(), /*NULL*/
+                            NULL);
 
-  glfwMakeContextCurrent (window);
-  glfwWindowHint (GLFW_RED_BITS, 8);
-  glfwWindowHint (GLFW_GREEN_BITS, 8);
-  glfwWindowHint (GLFW_BLUE_BITS, 8);
-  glfwWindowHint (GLFW_DEPTH_BITS, 16);
+  glfwMakeContextCurrent(window);
+  glfwWindowHint(GLFW_RED_BITS, 8);
+  glfwWindowHint(GLFW_GREEN_BITS, 8);
+  glfwWindowHint(GLFW_BLUE_BITS, 8);
+  glfwWindowHint(GLFW_DEPTH_BITS, 16);
 
-  glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//xxx sure ?
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);//xxx sure ?
 
   if (!window) {
-    FLOG_ERROR ("Could not create a new rendering window.\n");
-    glfwTerminate ();
-    exit (EXIT_FAILURE);
+    FLOG_ERROR("Could not create a new rendering window.\n");
+    glfwTerminate();
+    exit(EXIT_FAILURE);
   }
 }
 
 static void BM_EngineCreationDestroy(benchmark::State &state) {
-  initContext ();
+  initContext();
   char a[] = "./benchmarks";
   GLchar *const argv[] = {
       a
   };
-  while (state.KeepRunning ()) {
-    delete (new fillwave::Engine (1, argv));
+  while (state.KeepRunning()) {
+    delete (new fillwave::Engine(1, argv));
   }
 }
 
@@ -107,7 +107,7 @@ BENCHMARK(BM_EngineCreationDestroy);
 
 // Define another benchmark
 static void BM_MoveableInTimeCreation(benchmark::State &state) {
-  while (state.KeepRunning ()) {
+  while (state.KeepRunning()) {
     framework::Moveable sut;
   }
 }

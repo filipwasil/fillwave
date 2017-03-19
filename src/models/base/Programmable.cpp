@@ -41,7 +41,7 @@ namespace fillwave {
 namespace framework {
 
 Programmable::Programmable(core::Program *program)
-    : mProgram (program) {
+    : mProgram(program) {
 
 }
 
@@ -50,23 +50,23 @@ void Programmable::drawWithEffects(ICamera &camera) {
   core::Program *p = mProgram;
 
   /* Effects execution */
-  p->use ();
-  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
-    e->preDrawAction (p);
+  p->use();
+  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+    e->preDrawAction(p);
   });
-  core::Program::disusePrograms ();
+  core::Program::disusePrograms();
 
   /* Draw */
   for (auto &it : mChildren) {
-    it->draw (camera);
+    it->draw(camera);
   }
 
   /* Effects pre draw action */
-  p->use ();
-  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
-    e->postDrawAction (p);
+  p->use();
+  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+    e->postDrawAction(p);
   });
-  core::Program::disusePrograms ();
+  core::Program::disusePrograms();
 }
 
 void Programmable::drawWithEffectsDR(ICamera &camera) {
@@ -74,18 +74,18 @@ void Programmable::drawWithEffectsDR(ICamera &camera) {
   core::Program *p = mProgram;
 
   /* Effects execution */
-  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
-    e->preDrawAction (p);
+  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+    e->preDrawAction(p);
   });
 
   /* Draw */
   for (auto &it : mChildren) {
-    it->drawDR (camera);
+    it->drawDR(camera);
   }
 
   /* Effects pre draw action */
-  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
-    e->postDrawAction (p);
+  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+    e->postDrawAction(p);
   });
 }
 
@@ -94,18 +94,18 @@ void Programmable::drawWithEffectsPBRP(ICamera &camera) {
   core::Program *p = mProgram;
 
   /* Effects execution */
-  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
-    e->preDrawAction (p);
+  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+    e->preDrawAction(p);
   });
 
   /* Draw */
   for (auto &it : mChildren) {
-    it->drawPBRP (camera);
+    it->drawPBRP(camera);
   }
 
   /* Effects pre draw action */
-  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
-    e->postDrawAction (p);
+  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+    e->postDrawAction(p);
   });
 }
 
@@ -113,29 +113,29 @@ void Programmable::addEffect(pIEffect effect) {
   auto _find_function = [effect](pIEffect &m) -> bool {
     return m == effect;
   };
-  auto it = std::remove_if (mEffects.begin (), mEffects.end (), _find_function);
-  if (it != mEffects.end ()) {
+  auto it = std::remove_if(mEffects.begin(), mEffects.end(), _find_function);
+  if (it != mEffects.end()) {
     fLogD("Effect already added");
     return;
   }
-  mEffects.push_back (effect);
-  mProgram->use ();
-  effect->startAction (mProgram);
-  core::Program::disusePrograms ();
+  mEffects.push_back(effect);
+  mProgram->use();
+  effect->startAction(mProgram);
+  core::Program::disusePrograms();
 }
 
 void Programmable::removeEffect(pIEffect effect) {
   auto _find_function = [effect](pIEffect &m) -> bool {
     return m == effect;
   };
-  auto it = std::remove_if (mEffects.begin (), mEffects.end (), _find_function);
-  if (it != mEffects.end ()) {
+  auto it = std::remove_if(mEffects.begin(), mEffects.end(), _find_function);
+  if (it != mEffects.end()) {
     /* Start stop action */
-    mProgram->use ();
-    effect->stopAction (mProgram);
-    core::Program::disusePrograms ();
+    mProgram->use();
+    effect->stopAction(mProgram);
+    core::Program::disusePrograms();
   }
-  mEffects.erase (it, mEffects.end ());
+  mEffects.erase(it, mEffects.end());
 }
 
 } /* framework */

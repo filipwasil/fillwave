@@ -29,7 +29,7 @@ struct CursorEnterEventData {
 class CursorEnterEvent : public TEvent<CursorEnterEventData> {
 public:
   CursorEnterEvent(CursorEnterEventData &data)
-      : TEvent (data) {
+      : TEvent(data) {
 
   }
 

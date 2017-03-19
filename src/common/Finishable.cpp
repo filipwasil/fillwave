@@ -11,7 +11,7 @@ namespace fillwave {
 namespace framework {
 
 Finishable::Finishable(float timeToFinish)
-    : mFinished (false), mTimeToFinish (timeToFinish), mTimePassed (0), mPercentageDone (0) {
+    : mFinished(false), mTimeToFinish(timeToFinish), mTimePassed(0), mPercentageDone(0) {
 
 }
 
@@ -19,7 +19,7 @@ void Finishable::checkTime(float timePassed) {
   mTimePassed += timePassed;
   if (mTimePassed > mTimeToFinish && mTimeToFinish != FILLWAVE_ENDLESS) {
     mTimePassed -= mTimeToFinish;
-    finish ();
+    finish();
   }
 }
 

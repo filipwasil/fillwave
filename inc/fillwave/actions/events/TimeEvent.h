@@ -54,7 +54,7 @@ struct TimeEventData {
 class TimeEvent : public TEvent<TimeEventData> {
 public:
   TimeEvent(TimeEventData data)
-      : TEvent (data) {
+      : TEvent(data) {
 
   }
 

@@ -62,7 +62,7 @@ public:
   }
 
   GLuint getVerticesSize() {
-    return mVertices.size ();
+    return mVertices.size();
   }
 
   std::vector<GLuint> getIndices() {
@@ -70,7 +70,7 @@ public:
   }
 
   GLuint getIndicesSize() {
-    return mIndices.size ();
+    return mIndices.size();
   }
 
 protected:

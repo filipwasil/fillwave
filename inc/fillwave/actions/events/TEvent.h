@@ -48,7 +48,7 @@ template <class T>
 class TEvent : public EventType {
 public:
   TEvent(T data)
-      : EventType (data.type), mData (data) {
+      : EventType(data.type), mData(data) {
 
   }
 

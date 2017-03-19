@@ -55,7 +55,7 @@ typedef GLubyte *Texture2DFileData;
 class Texture2DFileConfig {
 public:
   Texture2DFileConfig(GLint level = 0, GLint border = 0, GLboolean mipmaps = GL_FALSE, GLboolean compression = GL_FALSE)
-      : mMipmapsLevel (level), mMipmaps (mipmaps), mCompression (compression), mBorder (border), mCompressionSize (0) {
+      : mMipmapsLevel(level), mMipmaps(mipmaps), mCompression(compression), mBorder(border), mCompressionSize(0) {
 
   }
 
@@ -76,7 +76,7 @@ public:
       GLint type = GL_UNSIGNED_BYTE,
       GLsizei width = 0,
       GLsizei height = 0)
-      : mInternalFormat (internalFormat), mHeight (height), mWidth (width), mType (type), mFormat (format) {
+      : mInternalFormat(internalFormat), mHeight(height), mWidth(width), mType(type), mFormat(format) {
 
   }
 
@@ -111,7 +111,7 @@ public:
   virtual ~Texture2DFile() {
     switch (mAllocation) {
       case eMemoryAllocation::eMallock:
-        free (mData);
+        free(mData);
         break;
       case eMemoryAllocation::eNew:
         delete mData;

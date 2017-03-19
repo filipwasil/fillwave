@@ -28,7 +28,7 @@ struct CharacterEventData {
 class CharacterEvent : public TEvent<CharacterEventData> {
 public:
   CharacterEvent(CharacterEventData &data)
-      : TEvent (data) {
+      : TEvent(data) {
 
   }
 

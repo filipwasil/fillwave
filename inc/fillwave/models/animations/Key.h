@@ -48,7 +48,7 @@ public:
   T mValue;
 
   Key(float timeStamp, T value)
-      : mTime (timeStamp), mValue (value) {
+      : mTime(timeStamp), mValue(value) {
   }
 
   virtual ~Key() = default;

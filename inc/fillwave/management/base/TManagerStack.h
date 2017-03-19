@@ -58,15 +58,15 @@ public:
   virtual ~TCacheStack() = default;
 
   T &store(const K &key, P ... parameters) {
-    if ((*this).find (key) != (*this).end ()) {
+    if ((*this).find(key) != (*this).end()) {
       return (*this)[key];
     }
 
-    if ((*this).size () >= M) {
-      abort ();
+    if ((*this).size() >= M) {
+      abort();
     }
 
-    return (*this)[key] = T (parameters...);
+    return (*this)[key] = T(parameters...);
   }
 };
 
