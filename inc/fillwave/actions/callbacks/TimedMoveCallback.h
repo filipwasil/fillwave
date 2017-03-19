@@ -44,22 +44,21 @@ namespace framework {
  * \brief TimedCallback to move Entity at certain distance in certain time.
  */
 
-class TimedMoveCallback: public TimedCallback {
- public:
-	TimedMoveCallback(
-	   Moveable* moveable,
-	   glm::vec3 endPosition,
-	   GLfloat lifeTime,
-	   EasingFunction easing = LinearInterpolation);
+class TimedMoveCallback : public TimedCallback {
+public:
+  TimedMoveCallback(Moveable *moveable,
+      glm::vec3 endPosition,
+      GLfloat lifeTime,
+      EasingFunction easing = LinearInterpolation);
 
-	virtual ~TimedMoveCallback() = default;
+  virtual ~TimedMoveCallback() = default;
 
-	void performTime(TimeEventData& data);
+  void performTime(TimeEventData &data);
 
- protected:
-	glm::vec3 mStartPosition;
-	glm::vec3 mEndPosition;
-	Moveable* mMoveable;
+protected:
+  glm::vec3 mStartPosition;
+  glm::vec3 mEndPosition;
+  Moveable *mMoveable;
 };
 
 } /* framework */

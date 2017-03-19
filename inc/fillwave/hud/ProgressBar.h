@@ -46,22 +46,22 @@ namespace framework {
  * \brief HUD node to indicate progress.
  */
 
-class ProgressBar: public IHUDNode {
- public:
-	ProgressBar(
-	   Engine* engine,
-	   core::Texture2D* texture,
-	   const std::string& shaderPath,
-	   glm::vec2 position,
-	   glm::vec2 scale);
-	virtual ~ProgressBar() = default;
+class ProgressBar : public IHUDNode {
+public:
+  ProgressBar(Engine *engine,
+      core::Texture2D *texture,
+      const std::string &shaderPath,
+      glm::vec2 position,
+      glm::vec2 scale);
 
-	void setProgress(GLfloat progress);
+  virtual ~ProgressBar() = default;
 
-	void draw() override;
+  void setProgress(GLfloat progress);
 
- private:
-	GLfloat mProgress;
+  void draw() override;
+
+private:
+  GLfloat mProgress;
 };
 
 } /* namespace framework */

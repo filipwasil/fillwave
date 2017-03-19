@@ -43,9 +43,9 @@ namespace framework {
  */
 
 struct PhysicsMeshBuffer {
-	GLint mNumFaces;
-	std::vector<glm::vec3> mVertices;
-	std::vector<GLint> mIndices;
+  GLint mNumFaces;
+  std::vector<glm::vec3> mVertices;
+  std::vector<GLint> mIndices;
 };
 } /* framework */
 typedef std::unique_ptr<framework::PhysicsMeshBuffer> puPhysicsMeshBuffer;

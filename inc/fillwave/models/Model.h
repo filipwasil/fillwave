@@ -48,119 +48,124 @@ class TimedBoneUpdateCallback;
  * \brief Drawable Mesh set.
  */
 
-class Model: public IFocusable, public Programmable {
- public:
+class Model : public IFocusable, public Programmable {
+public:
 
-	Model(
-	   Engine* engine,
-	   core::Program* program,
-	   framework::Shape<core::VertexBasic>& shape,
-	   core::Texture2D* diffuseMap,
-	   core::Texture2D* normalMap,
-	   core::Texture2D* specularMap,
-	   const Material& material);
+  Model(Engine *engine,
+      core::Program *program,
+      framework::Shape<core::VertexBasic> &shape,
+      core::Texture2D *diffuseMap,
+      core::Texture2D *normalMap,
+      core::Texture2D *specularMap,
+      const Material &material);
 
-	Model(Engine* engine, core::Program* program, const std::string& shapePath);
+  Model(Engine *engine, core::Program *program, const std::string &shapePath);
 
-	Model(
-	   Engine* engine,
-	   core::Program* program,
-	   const std::string& shapePath,
-	   const std::string& diffuseMapPath,
-	   const std::string& normalMapPath = "",
-	   const std::string& specularMapPath = "");
+  Model(Engine *engine,
+      core::Program *program,
+      const std::string &shapePath,
+      const std::string &diffuseMapPath,
+      const std::string &normalMapPath = "",
+      const std::string &specularMapPath = "");
 
-	Model(
-	   Engine* engine,
-	   core::Program* program,
-	   const std::string& shapePath,
-	   core::Texture2D* diffuseMap,
-	   core::Texture2D* normalMap = nullptr,
-	   core::Texture2D* specularMap = nullptr,
-	   const Material& material = Material());
+  Model(Engine *engine,
+      core::Program *program,
+      const std::string &shapePath,
+      core::Texture2D *diffuseMap,
+      core::Texture2D *normalMap = nullptr,
+      core::Texture2D *specularMap = nullptr,
+      const Material &material = Material ());
 
-	virtual ~Model();
+  virtual ~Model();
 
-	Model& operator = (Model&&) = default;
-	Model (Model&& obj) = default;
+  Model &operator=(Model &&) = default;
 
-	void reload();
+  Model(Model &&obj) = default;
 
-	void draw(ICamera& camera);
-	void drawPBRP(ICamera& camera);
-	void drawDR(ICamera& camera);
+  void reload();
+
+  void draw(ICamera &camera);
+
+  void drawPBRP(ICamera &camera);
+
+  void drawDR(ICamera &camera);
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-	/* Animation */
-	void performAnimation(GLfloat timeElapsed_us);
-	void setActiveAnimation(GLint animationID);
-	GLint getActiveAnimations();
+
+  /* Animation */
+  void performAnimation(GLfloat timeElapsed_us);
+
+  void setActiveAnimation(GLint animationID);
+
+  GLint getActiveAnimations();
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-	void handleFocusEvent(EventType& event) override;
-	void updateRenderer(IRenderer& renderer) override;
+  void handleFocusEvent(EventType &event) override;
 
-	void log() const;
+  void updateRenderer(IRenderer &renderer) override;
 
- protected:
+  void log() const;
+
+protected:
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-	Animator* mAnimator;
-	GLint mActiveAnimation;
+  Animator *mAnimator;
+  GLint mActiveAnimation;
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-	LightSystem* mLights;
-	core::Program *mProgramShadow, *mProgramShadowColor;
-	GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow,
-	      mUniformLocationCacheBonesShadowColor;
- private:
-	/* Init */
-	void initUniformsCache();
-	void initShadowing(Engine* engine);
+  LightSystem *mLights;
+  core::Program *mProgramShadow, *mProgramShadowColor;
+  GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow, mUniformLocationCacheBonesShadowColor;
+private:
+  /* Init */
+  void initUniformsCache();
+
+  void initShadowing(Engine *engine);
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-	/* Animation */
-	bool isAnimated() const;
-	void evaluateAnimations();
-	void initAnimations(const aiScene* scene);
 
-	void loadNodeTransformations(aiNode* node, Entity* entity);
-	void loadNodes(
-	   aiNode* node,
-	   const aiScene* scene,
-	   Engine* engine,
-	   Entity* entity);
-	void loadNodes(
-	   aiNode* node,
-	   const aiScene* scene,
-	   Engine* engine,
-	   Entity* entity,
-	   const std::string& diffuseMapPath,
-	   const std::string& normalMapPath,
-	   const std::string& specularMapPath);
-	void loadNodes(
-	   aiNode* node,
-	   const aiScene* scene,
-	   Engine* engine,
-	   Entity* entity,
-	   core::Texture2D* diffuseMap,
-	   core::Texture2D* normalMap,
-	   core::Texture2D* specularMap,
-	   const Material& material);
-	puMesh loadMesh(
-	   const aiMesh* shape,
-	   const Material& material,
-	   core::Texture2D* diffuseMap,
-	   core::Texture2D* normalMap,
-	   core::Texture2D* specularMap,
-	   Engine* engine);
+  /* Animation */
+  bool isAnimated() const;
+
+  void evaluateAnimations();
+
+  void initAnimations(const aiScene *scene);
+
+  void loadNodeTransformations(aiNode *node, Entity *entity);
+
+  void loadNodes(aiNode *node, const aiScene *scene, Engine *engine, Entity *entity);
+
+  void loadNodes(aiNode *node,
+      const aiScene *scene,
+      Engine *engine,
+      Entity *entity,
+      const std::string &diffuseMapPath,
+      const std::string &normalMapPath,
+      const std::string &specularMapPath);
+
+  void loadNodes(aiNode *node,
+      const aiScene *scene,
+      Engine *engine,
+      Entity *entity,
+      core::Texture2D *diffuseMap,
+      core::Texture2D *normalMap,
+      core::Texture2D *specularMap,
+      const Material &material);
+
+  puMesh loadMesh(const aiMesh *shape,
+      const Material &material,
+      core::Texture2D *diffuseMap,
+      core::Texture2D *normalMap,
+      core::Texture2D *specularMap,
+      Engine *engine);
+
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
-	puMesh loadMesh(tinyobj::shape_t& shape,
-	                tinyobj::attrib_t& attrib,
-	                const Material& material,
-	                core::Texture2D* diffuseMap,
-	                core::Texture2D* normalMap,
-	                core::Texture2D* specularMap,
-	                Engine* engine);
+  puMesh loadMesh(tinyobj::shape_t& shape,
+             tinyobj::attrib_t& attrib,
+             const Material& material,
+             core::Texture2D* diffuseMap,
+             core::Texture2D* normalMap,
+             core::Texture2D* specularMap,
+             Engine* engine);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 };

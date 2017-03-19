@@ -40,20 +40,18 @@ FLOGINIT("VertexBufferFloat", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
-VertexBufferFloat::VertexBufferFloat(
-   const std::vector<VertexFloat>& values,
-   GLuint dataStoreModification) :
-	TVertexBuffer<VertexFloat>(values, dataStoreModification) {
+VertexBufferFloat::VertexBufferFloat(const std::vector<VertexFloat> &values, GLuint dataStoreModification)
+    : TVertexBuffer<VertexFloat> (values, dataStoreModification) {
 
 }
 
 void VertexBufferFloat::log() const {
-	auto d = [] (core::VertexFloat & f) {
-		return static_cast<double>(f.mData);
-	};
-	for (auto it : mDataVertices) {
-		fLogI("Vertex written: %f", d(it));
-	}
+  auto d = [](core::VertexFloat &f) {
+    return static_cast<double>(f.mData);
+  };
+  for (auto it : mDataVertices) {
+    fLogI("Vertex written: %f", d (it));
+  }
 }
 
 } /* core */

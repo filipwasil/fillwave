@@ -32,8 +32,6 @@
  */
 
 #include <fillwave/core/operations/ConditionalRender.h>
-#include <fillwave/Log.h>
-#include <memory>
 
 #ifdef FILLWAVE_GLES_3_0
 #else
@@ -42,17 +40,17 @@
 namespace fillwave {
 namespace core {
 
-ConditionalRender::ConditionalRender(GLenum mode) :
-	mMode(mode) {
+ConditionalRender::ConditionalRender(GLenum mode)
+    : mMode (mode) {
 
 }
 
 void ConditionalRender::begin(GLuint querryID) const {
-	glBeginConditionalRender(querryID, mMode);
+  glBeginConditionalRender (querryID, mMode);
 }
 
 void ConditionalRender::end() const {
-	glEndConditionalRender();
+  glEndConditionalRender ();
 }
 
 } /* core */

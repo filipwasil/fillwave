@@ -43,26 +43,29 @@ namespace framework {
  * \brief BuilderModel which builds the model from the asset file but uses external texture maps.
  */
 
-class BuilderModelExternalMaps: public BuilderModel {
- public:
-	BuilderModelExternalMaps(
-	   Engine* engine,
-	   std::string modelPath = "",
-	   core::Program* program = nullptr,
-	   const std::string& diffusePath = "",
-	   const std::string& normalPath = "",
-	   const std::string& specularPath = "");
-	virtual ~BuilderModelExternalMaps() = default;
+class BuilderModelExternalMaps : public BuilderModel {
+public:
+  BuilderModelExternalMaps(Engine *engine,
+      std::string modelPath = "",
+      core::Program *program = nullptr,
+      const std::string &diffusePath = "",
+      const std::string &normalPath = "",
+      const std::string &specularPath = "");
 
-	BuilderModel& setdiffusePath(std::string& path);
-	BuilderModel& setNormalMapPath(std::string& path);
-	BuilderModel& setSpecularMapPath(std::string& path);
-	puModel build();
+  virtual ~BuilderModelExternalMaps() = default;
 
- private:
-	std::string mDiffuseMapPath;
-	std::string mNormalMapPath;
-	std::string mSpecularMapPath;
+  BuilderModel &setdiffusePath(std::string &path);
+
+  BuilderModel &setNormalMapPath(std::string &path);
+
+  BuilderModel &setSpecularMapPath(std::string &path);
+
+  puModel build();
+
+private:
+  std::string mDiffuseMapPath;
+  std::string mNormalMapPath;
+  std::string mSpecularMapPath;
 };
 
 } /* framework */

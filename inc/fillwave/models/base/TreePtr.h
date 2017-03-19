@@ -49,68 +49,76 @@ namespace framework {
  */
 
 template <class T, class C = ITreeNode>
-class TreePtr: public C {
- public:
-	TreePtr() :
-		mFlagAttachedDetached(true) {
+class TreePtr : public C {
+public:
+  TreePtr()
+      : mFlagAttachedDetached (true) {
 
-	}
+  }
 
-	virtual ~TreePtr() = default;
-	TreePtr& operator = (const TreePtr&) = default;
-	TreePtr (const TreePtr &) = default;
-	TreePtr& operator = (TreePtr&&) = default;
-	TreePtr (TreePtr&& obj) = default;
+  virtual ~TreePtr() = default;
 
-	void attach(std::unique_ptr<T>&& node) {
-		if (node.get() == this) {
-			/* User just tried to attach entity to itself */
-			abort();
-		}
-		node->onAttached(this);
-		mChildren.push_back(std::move(node));
-		mFlagAttachedDetached = true;
-	}
+  TreePtr &operator=(const TreePtr &) = default;
 
-	void detach(T* node) {
-		auto _compare_function =
-		   [node](const T & e) -> bool {bool found = (e == node); if (found) node->onDetached(); return found;};
-	auto it = std::remove_if(mChildren.begin(), mChildren.end(), _compare_function);
-		if (it != mChildren.end()) {
-			mFlagAttachedDetached = true;
-			mChildren.erase(it, mChildren.end());
-		}
-	}
+  TreePtr(const TreePtr &) = default;
 
-	virtual void onAttached(ITreeNode*) {
+  TreePtr &operator=(TreePtr &&) = default;
 
-	}
+  TreePtr(TreePtr &&obj) = default;
 
-	virtual void onDetached() {
+  void attach(std::unique_ptr<T> &&node) {
+    if (node.get () == this) {
+      /* User just tried to attach entity to itself */
+      abort ();
+    }
+    node->onAttached (this);
+    mChildren.push_back (std::move (node));
+    mFlagAttachedDetached = true;
+  }
 
-	}
+  void detach(T *node) {
+    auto _compare_function = [node](const T &e) -> bool {
+      bool found = (e == node);
+      if (found) {
+        node->onDetached ();
+      }
+      return found;
+    };
+    auto it = std::remove_if (mChildren.begin (), mChildren.end (), _compare_function);
+    if (it != mChildren.end ()) {
+      mFlagAttachedDetached = true;
+      mChildren.erase (it, mChildren.end ());
+    }
+  }
 
-	void detachChildren() {
-		std::for_each(mChildren.begin(), mChildren.end(),
-		[](std::unique_ptr<T> & e) {
-			e->onDetached();
-		});
-		mChildren.clear();
-	}
+  virtual void onAttached(ITreeNode *) {
 
-	bool isAttachedDetached() {
-		bool result = mFlagAttachedDetached;
-		mFlagAttachedDetached = false;
-		for (auto& it : mChildren) {
-			result = it->isAttachedDetached() ? true : result;
-		}
-		return result;
-	}
+  }
 
-	bool mFlagAttachedDetached;
+  virtual void onDetached() {
 
- protected:
-	std::vector<std::unique_ptr<T>> mChildren;
+  }
+
+  void detachChildren() {
+    std::for_each (mChildren.begin (), mChildren.end (), [](std::unique_ptr<T> &e) {
+      e->onDetached ();
+    });
+    mChildren.clear ();
+  }
+
+  bool isAttachedDetached() {
+    bool result = mFlagAttachedDetached;
+    mFlagAttachedDetached = false;
+    for (auto &it : mChildren) {
+      result = it->isAttachedDetached () ? true : result;
+    }
+    return result;
+  }
+
+  bool mFlagAttachedDetached;
+
+protected:
+  std::vector<std::unique_ptr<T>> mChildren;
 };
 
 } /* namespace framework */

@@ -47,52 +47,44 @@
 namespace fillwave {
 namespace core {
 
-typedef GLubyte* Texture2DFileData;
+typedef GLubyte *Texture2DFileData;
 
 /*! \class Texture2DFileConfig
  * \brief Stores the single file configuration info.
  */
 class Texture2DFileConfig {
- public:
-	Texture2DFileConfig(GLint level = 0, GLint border = 0, GLboolean mipmaps =
-	                       GL_FALSE, GLboolean compression = GL_FALSE)  :
-		mMipmapsLevel(level),
-		mMipmaps(mipmaps),
-		mCompression(compression),
-		mBorder(border),
-		mCompressionSize(0) {
+public:
+  Texture2DFileConfig(GLint level = 0, GLint border = 0, GLboolean mipmaps = GL_FALSE, GLboolean compression = GL_FALSE)
+      : mMipmapsLevel (level), mMipmaps (mipmaps), mCompression (compression), mBorder (border), mCompressionSize (0) {
 
-	}
-	GLint mMipmapsLevel;
-	GLboolean mMipmaps;
-	GLboolean mCompression;
-	GLint mBorder;
-	GLsizei mCompressionSize;
+  }
+
+  GLint mMipmapsLevel;
+  GLboolean mMipmaps;
+  GLboolean mCompression;
+  GLint mBorder;
+  GLsizei mCompressionSize;
 };
 
 /*! \class Texture2DFileHeader
  * \brief Stores the single file header info.
  */
 class Texture2DFileHeader {
- public:
-	Texture2DFileHeader(
-	   GLint internalFormat = GL_RGBA,
-	   GLint format = GL_RGBA,
-	   GLint type = GL_UNSIGNED_BYTE,
-	   GLsizei width = 0,
-	   GLsizei height = 0) :
-		mInternalFormat(internalFormat),
-		mHeight(height),
-		mWidth(width),
-		mType(type),
-		mFormat(format) {
+public:
+  Texture2DFileHeader(GLint internalFormat = GL_RGBA,
+      GLint format = GL_RGBA,
+      GLint type = GL_UNSIGNED_BYTE,
+      GLsizei width = 0,
+      GLsizei height = 0)
+      : mInternalFormat (internalFormat), mHeight (height), mWidth (width), mType (type), mFormat (format) {
 
-	}
-	GLint mInternalFormat;
-	GLsizei mHeight;
-	GLsizei mWidth;
-	GLenum mType;
-	GLenum mFormat;
+  }
+
+  GLint mInternalFormat;
+  GLsizei mHeight;
+  GLsizei mWidth;
+  GLenum mType;
+  GLenum mFormat;
 };
 
 /*! \enum eMemoryAllocation
@@ -100,7 +92,9 @@ class Texture2DFileHeader {
  */
 
 enum class eMemoryAllocation {
-	eMallock, eNew, eNone
+  eMallock
+  , eNew
+  , eNone
 };
 
 /*! \class Texture2DFile
@@ -108,24 +102,25 @@ enum class eMemoryAllocation {
  */
 
 class Texture2DFile {
- public:
-	Texture2DFileHeader mHeader;
-	Texture2DFileConfig mConfig;
-	Texture2DFileData mData;
-	eMemoryAllocation mAllocation = eMemoryAllocation::eNone;
-	virtual ~Texture2DFile() {
-		switch (mAllocation) {
-			case eMemoryAllocation::eMallock:
-				free(mData);
-				break;
-			case eMemoryAllocation::eNew:
-				delete mData;
-				mData = nullptr;
-				break;
-			case eMemoryAllocation::eNone:
-				break;
-		}
-	}
+public:
+  Texture2DFileHeader mHeader;
+  Texture2DFileConfig mConfig;
+  Texture2DFileData mData;
+  eMemoryAllocation mAllocation = eMemoryAllocation::eNone;
+
+  virtual ~Texture2DFile() {
+    switch (mAllocation) {
+      case eMemoryAllocation::eMallock:
+        free (mData);
+        break;
+      case eMemoryAllocation::eNew:
+        delete mData;
+        mData = nullptr;
+        break;
+      case eMemoryAllocation::eNone:
+        break;
+    }
+  }
 };
 
 /*! \class Texture
@@ -133,30 +128,38 @@ class Texture2DFile {
  */
 
 //class
-class Texture: public GLObject {
- public:
-	Texture(GLenum textureTarget = GL_TEXTURE_2D, GLsizei howMany = 1);
+class Texture : public GLObject {
+public:
+  Texture(GLenum textureTarget = GL_TEXTURE_2D, GLsizei howMany = 1);
 
-	virtual ~Texture();
+  virtual ~Texture();
 
-	virtual void bind(GLuint id = 0);
-	virtual void bind(GLint textureUnit, GLuint id = 0);
-	virtual void unbind();
+  virtual void bind(GLuint id = 0);
 
-	void generateMipMaps();
-	void setParameter(GLenum parameter, GLenum value);
-	void setParameters(ParameterList paramers);
+  virtual void bind(GLint textureUnit, GLuint id = 0);
 
-	virtual GLint getTarget();
-	virtual void reload();
+  virtual void unbind();
 
-	virtual void log() = 0;
- protected:
-	GLenum mTarget;
+  void generateMipMaps();
+
+  void setParameter(GLenum parameter, GLenum value);
+
+  void setParameters(ParameterList paramers);
+
+  virtual GLint getTarget();
+
+  virtual void reload();
+
+  virtual void log() = 0;
+
+protected:
+  GLenum mTarget;
 };
 
 void bindTexture(GLuint target, GLuint handle);
+
 void bindTexture(GLint textureUnit, GLuint target, GLuint handle);
+
 void unbindTexture(GLuint target);
 
 } /* core */

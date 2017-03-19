@@ -46,20 +46,21 @@ namespace framework {
  * \brief ItemCallback to loop other callbacks.
  */
 
-class LoopCallback: public Callback {
- public:
-	LoopCallback(puCallback&& callback, int numberOfExecutions);
-	virtual ~LoopCallback() = default;
+class LoopCallback : public Callback {
+public:
+  LoopCallback(puCallback &&callback, int numberOfExecutions);
 
-	/*	perform
-	 * \brief Performs ItemCallback action.
-	 */
+  virtual ~LoopCallback() = default;
 
-	void perform(EventType& event);
+  /*	perform
+   * \brief Performs ItemCallback action.
+   */
 
- protected:
-	puCallback mCallback;
-	int mLoopsLeft;
+  void perform(EventType &event);
+
+protected:
+  puCallback mCallback;
+  int mLoopsLeft;
 };
 
 } /* framework */

@@ -47,38 +47,42 @@ namespace core {
  * \brief Framebuffer with multiple color and depth attachments.
  */
 
-class FramebufferGeometry: public Framebuffer {
- public:
-	FramebufferGeometry(
-	   framework::TextureSystem* textures,
-	   GLuint width,
-	   GLuint height,
-	   GLuint colorBuffers,
-	   GLuint depthBuffers);
+class FramebufferGeometry : public Framebuffer {
+public:
+  FramebufferGeometry(framework::TextureSystem *textures,
+      GLuint width,
+      GLuint height,
+      GLuint colorBuffers,
+      GLuint depthBuffers);
 
-	virtual ~FramebufferGeometry() = default;
+  virtual ~FramebufferGeometry() = default;
 
-	void bindAttachments();
-	void setAttachments();
-	void setAttachmentStencilDepth();
-	void setAttachmentSummaryForReading();
-	void setAttachmentSummaryForWriting();
+  void bindAttachments();
 
-	void resize(GLuint width, GLuint height);
-	void reload();
+  void setAttachments();
 
- private:
+  void setAttachmentStencilDepth();
 
-	std::vector<GLenum> mColorBuffers;
+  void setAttachmentSummaryForReading();
 
-	core::Texture2D *mDeferredColors, *mStencilDepth, *mSummary;
+  void setAttachmentSummaryForWriting();
 
-	const GLint mColorBufferSize;
-	const GLint mSummaryBufferSize;
-	const GLint mDepthStencilBufferSize;
+  void resize(GLuint width, GLuint height);
 
-	const GLenum mSummaryBuffer;
-	const GLenum mNone;
+  void reload();
+
+private:
+
+  std::vector<GLenum> mColorBuffers;
+
+  core::Texture2D *mDeferredColors, *mStencilDepth, *mSummary;
+
+  const GLint mColorBufferSize;
+  const GLint mSummaryBufferSize;
+  const GLint mDepthStencilBufferSize;
+
+  const GLenum mSummaryBuffer;
+  const GLenum mNone;
 };
 
 } /* core */

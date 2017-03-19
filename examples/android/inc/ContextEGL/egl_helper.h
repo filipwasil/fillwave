@@ -12,20 +12,23 @@
 
 namespace EGL {
 
-    struct EGLContextInfo {
-        EGLDisplay display;
-        EGLSurface surface;
-        EGLContext context;
-        int width,height;
-        EGLint major,minor;
-    };
-    int Initialize(EGLNativeWindowType window,
-                   EGLContextInfo* eglInfo,
-                   const EGLint attribs[],
-                   const EGLint context_attrib_list[],
-                   EGLNativeDisplayType display = EGL_DEFAULT_DISPLAY);
-    void Terminate(EGLContextInfo* eglInfo);
-    void SwapDisplay(EGLContextInfo* eglInfo);
+struct EGLContextInfo {
+  EGLDisplay display;
+  EGLSurface surface;
+  EGLContext context;
+  int width, height;
+  EGLint major, minor;
+};
+
+int Initialize(EGLNativeWindowType window,
+    EGLContextInfo *eglInfo,
+    const EGLint attribs[],
+    const EGLint context_attrib_list[],
+    EGLNativeDisplayType display = EGL_DEFAULT_DISPLAY);
+
+void Terminate(EGLContextInfo *eglInfo);
+
+void SwapDisplay(EGLContextInfo *eglInfo);
 } /* EGL */
 
 #endif /* EGL_UTILS_H_ */

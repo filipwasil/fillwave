@@ -48,81 +48,104 @@ namespace framework {
  */
 
 class Moveable : public Observable {
- public:
-	Moveable(glm::vec3 translation = glm::vec3(0.0), glm::quat rotation =
-	            glm::quat(1.0, 0.0, 0.0, 0.0));
-	virtual ~Moveable() = default;
+public:
+  Moveable(glm::vec3 translation = glm::vec3 (0.0), glm::quat rotation = glm::quat (1.0, 0.0, 0.0, 0.0));
 
-	void moveTo(glm::vec3 coordinates);
-	void moveToX(GLfloat distance);
-	void moveToY(GLfloat distance);
-	void moveToZ(GLfloat distance);
-	void moveBy(glm::vec3 coordinates);
-	void moveByX(GLfloat distance);
-	void moveByY(GLfloat distance);
-	void moveByZ(GLfloat distance);
-	void moveInDirection(glm::vec3 direction);
-	glm::vec3 getTranslation();
+  virtual ~Moveable() = default;
 
-	void scaleTo(GLfloat scale);
-	void scaleTo(glm::vec3 scale);
-	void scaleToX(GLfloat scale);
-	void scaleToY(GLfloat scale);
-	void scaleToZ(GLfloat scale);
-	glm::vec3 getScale();
+  void moveTo(glm::vec3 coordinates);
 
-	void rotateTo(glm::quat rotation);
-	void rotateTo(const glm::vec3 &axis, GLfloat angle);
-	void rotateBy(const glm::vec3 &axis, GLfloat angle);
-	void rotateByX(float angle);
-	void rotateByY(float angle);
-	void rotateByZ(float angle);
-	glm::quat getRotation();
+  void moveToX(GLfloat distance);
 
-	void updateMatrixCache();
+  void moveToY(GLfloat distance);
 
-	bool isRefresh();
-	void setRefresh(bool state);
+  void moveToZ(GLfloat distance);
 
-	/* Parent */
-	glm::mat4 getParentMMC();
-	glm::quat getParentRotation();
+  void moveBy(glm::vec3 coordinates);
 
- protected:
-	glm::fvec3 mTranslation;
-	glm::quat mRotation;
-	glm::vec3 mScale;
+  void moveByX(GLfloat distance);
 
-	/* Parent */
-	glm::quat mParentRotation;
+  void moveByY(GLfloat distance);
 
-	/* MMC - Model Matrix Cache */
-	glm::mat4 mMMC;
-	glm::mat4 mParentMMC;
+  void moveByZ(GLfloat distance);
 
-	/* Refresh flag */
-	GLboolean mRefresh;
+  void moveInDirection(glm::vec3 direction);
+
+  glm::vec3 getTranslation();
+
+  void scaleTo(GLfloat scale);
+
+  void scaleTo(glm::vec3 scale);
+
+  void scaleToX(GLfloat scale);
+
+  void scaleToY(GLfloat scale);
+
+  void scaleToZ(GLfloat scale);
+
+  glm::vec3 getScale();
+
+  void rotateTo(glm::quat rotation);
+
+  void rotateTo(const glm::vec3 &axis, GLfloat angle);
+
+  void rotateBy(const glm::vec3 &axis, GLfloat angle);
+
+  void rotateByX(float angle);
+
+  void rotateByY(float angle);
+
+  void rotateByZ(float angle);
+
+  glm::quat getRotation();
+
+  void updateMatrixCache();
+
+  bool isRefresh();
+
+  void setRefresh(bool state);
+
+  /* Parent */
+  glm::mat4 getParentMMC();
+
+  glm::quat getParentRotation();
+
+protected:
+  glm::fvec3 mTranslation;
+  glm::quat mRotation;
+  glm::vec3 mScale;
+
+  /* Parent */
+  glm::quat mParentRotation;
+
+  /* MMC - Model Matrix Cache */
+  glm::mat4 mMMC;
+  glm::mat4 mParentMMC;
+
+  /* Refresh flag */
+  GLboolean mRefresh;
 };
 
 template <class M>
-bool isMoveablesRefresh(std::vector<M>& moveables) { //xxx to be removed
-	for (auto& it : moveables) {
-		if (it->isRefresh()) {
-			return true;
-		}
-	}
-	return false;
+bool isMoveablesRefresh(std::vector<M> &moveables) { //xxx to be removed
+  for (auto &it : moveables) {
+    if (it->isRefresh ()) {
+      return true;
+    }
+  }
+  return false;
 }
 
 template <class M>
-void resetMoveablesRefresh(std::vector<M>& data) {
-	for (auto& it : data) {
-		it->setRefresh(false);
-	}
+void resetMoveablesRefresh(std::vector<M> &data) {
+  for (auto &it : data) {
+    it->setRefresh (false);
+  }
 }
 
-GLboolean isMoveablesRefresh(std::vector<std::shared_ptr<Moveable>>& moveables);
-void resetMoveablesRefresh(std::vector<std::shared_ptr<Moveable>>& data);
+GLboolean isMoveablesRefresh(std::vector<std::shared_ptr<Moveable>> &moveables);
+
+void resetMoveablesRefresh(std::vector<std::shared_ptr<Moveable>> &data);
 
 } /* framework */
 } /* fillwave */

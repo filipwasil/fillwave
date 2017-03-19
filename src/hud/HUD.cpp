@@ -39,9 +39,9 @@ namespace fillwave {
 namespace framework {
 
 void HUD::draw() {
-	for (auto& it : mChildren) {
-		it->draw();
-	}
+  for (auto &it : mChildren) {
+    it->draw ();
+  }
 }
 
 } /* namespace framework */

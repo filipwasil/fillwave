@@ -43,30 +43,33 @@ namespace framework {
  * \brief BuilderModel which builds the model from textures and material fillwave objects.
  */
 
-class BuilderModelManual: public BuilderModel {
- public:
-	BuilderModelManual(
-	   Engine* engine,
-	   std::string modelPath = "",
-	   core::Program* program = nullptr,
-	   core::Texture2D* diffuseMap = nullptr,
-	   core::Texture2D* normalMap = nullptr,
-	   core::Texture2D* specularMap = nullptr,
-	   Material material = Material());
+class BuilderModelManual : public BuilderModel {
+public:
+  BuilderModelManual(Engine *engine,
+      std::string modelPath = "",
+      core::Program *program = nullptr,
+      core::Texture2D *diffuseMap = nullptr,
+      core::Texture2D *normalMap = nullptr,
+      core::Texture2D *specularMap = nullptr,
+      Material material = Material ());
 
-	virtual ~BuilderModelManual() = default;
+  virtual ~BuilderModelManual() = default;
 
-	BuilderModelManual& setDiffuseMapTexture(core::Texture2D* texture);
-	BuilderModelManual& setNormalMapTexture(core::Texture2D* texture);
-	BuilderModelManual& setSpecularMapTexture(core::Texture2D* texture);
-	BuilderModelManual& setMaterial(const Material& material);
-	puModel build();
+  BuilderModelManual &setDiffuseMapTexture(core::Texture2D *texture);
 
- private:
-	core::Texture2D* mDiffuseMap;
-	core::Texture2D* mNormalMap;
-	core::Texture2D* mSpecularMap;
-	Material mMaterial;
+  BuilderModelManual &setNormalMapTexture(core::Texture2D *texture);
+
+  BuilderModelManual &setSpecularMapTexture(core::Texture2D *texture);
+
+  BuilderModelManual &setMaterial(const Material &material);
+
+  puModel build();
+
+private:
+  core::Texture2D *mDiffuseMap;
+  core::Texture2D *mNormalMap;
+  core::Texture2D *mSpecularMap;
+  Material mMaterial;
 };
 
 } /* framework */

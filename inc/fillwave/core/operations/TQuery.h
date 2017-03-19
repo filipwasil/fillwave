@@ -44,43 +44,41 @@ namespace core {
  */
 
 template <GLenum target>
-class TQuery: public GLObject {
- private:
-	GLenum mTarget = target;
+class TQuery : public GLObject {
+private:
+  GLenum mTarget = target;
 
- public:
-	TQuery(GLsizei howMany = 1);
+public:
+  TQuery(GLsizei howMany = 1);
 
-	virtual ~TQuery();
+  virtual ~TQuery();
 
-	void begin(GLuint id = 0);
+  void begin(GLuint id = 0);
 
-	void end();
+  void end();
 
-	GLuint getID(GLuint id = 0) const;
+  GLuint getID(GLuint id = 0) const;
 
-	GLuint getResultSync(GLuint id = 0);
+  GLuint getResultSync(GLuint id = 0);
 
-	GLuint getResultAsync(GLuint resultIfNotAvailable, GLuint id = 0);
+  GLuint getResultAsync(GLuint resultIfNotAvailable, GLuint id = 0);
 
-	GLboolean getResultAvailable(GLuint id = 0);
+  GLboolean getResultAvailable(GLuint id = 0);
 
-	void reload();
+  void reload();
 
-	void log();
+  void log();
 };
 
 typedef TQuery<GL_ANY_SAMPLES_PASSED> QueryIfAnySamplesPassed;
 
-typedef TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN>
-QueryHowManyTransformFeedbackPrimitivesWritten;
+typedef TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN> QueryHowManyTransformFeedbackPrimitivesWritten;
 
 #ifdef FILLWAVE_GLES_3_0
 #else
 
 typedef TQuery<GL_SAMPLES_PASSED> QueryHowManySamplesPassed;
-typedef TQuery<GL_PRIMITIVES_GENERATED>
-QueryHowManyPrimitivesGeneratedByGeometryShader;
+typedef TQuery<GL_PRIMITIVES_GENERATED> QueryHowManyPrimitivesGeneratedByGeometryShader;
 typedef TQuery<GL_TIME_ELAPSED> QueryTimeElapsed;
 
 #endif

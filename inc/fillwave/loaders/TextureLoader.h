@@ -41,8 +41,11 @@ namespace fillwave {
 namespace framework {
 
 enum class eFlip {
-	eNone, eHorizontal, eVertical, eHorizontal_vertical,
-};
+  eNone
+  , eHorizontal
+  , eVertical
+  , eHorizontal_vertical
+  , };
 
 // generic formats
 //GL_COMPRESSED_RED,
@@ -69,67 +72,59 @@ enum class eFlip {
 //GL_COMPRESSED_RGBA_S3TC_DXT5_EXT
 
 enum class eCompression {
-	eNone,
-	eGeneric_r,
-	eGeneric_rg,
-	eGeneric_rgb,
-	eGeneric_rgba,
-	eGeneric_srgb,
-	eGeneric_srgba,
-	eLatc_luminance,
-	eLatc_luminance_signed,
-	eLatc_luminance_alpha,
-	eLatc_luminance_alpha_signed,
-	eRgtc1_r,
-	eRgtc1_r_signed,
-	eRgtc1_rg,
-	eRgtc1_rg_signed,
-	eS3tc_dxt1_rgb,
-	eS3tc_dxt1_rgba,
-	eS3tc_dxt3_rgba,
-	eS3tc_dxt5_rgba,
-};
+  eNone
+  , eGeneric_r
+  , eGeneric_rg
+  , eGeneric_rgb
+  , eGeneric_rgba
+  , eGeneric_srgb
+  , eGeneric_srgba
+  , eLatc_luminance
+  , eLatc_luminance_signed
+  , eLatc_luminance_alpha
+  , eLatc_luminance_alpha_signed
+  , eRgtc1_r
+  , eRgtc1_r_signed
+  , eRgtc1_rg
+  , eRgtc1_rg_signed
+  , eS3tc_dxt1_rgb
+  , eS3tc_dxt1_rgba
+  , eS3tc_dxt3_rgba
+  , eS3tc_dxt5_rgba
+  , };
 
 /*! \class TextureLoader
  * \brief Loads texture files.
  */
 
 class TextureLoader {
- public:
-	TextureLoader() = default;
+public:
+  TextureLoader() = default;
 
-	virtual ~TextureLoader() = default;
-	core::Texture2DFile* load(
-	   const std::string& filePath,
-	   eFlip flip = eFlip::eNone,
-	   GLenum format = GL_RGBA,
-	   std::string rootPath = "",
-	   eCompression compression = eCompression::eNone);
+  virtual ~TextureLoader() = default;
 
-	core::Texture2DFile* loadEmpty(
-	   GLint screenWidth,
-	   GLint screenHeight,
-	   GLenum format = GL_RGBA);
+  core::Texture2DFile *load(const std::string &filePath,
+      eFlip flip = eFlip::eNone,
+      GLenum format = GL_RGBA,
+      std::string rootPath = "",
+      eCompression compression = eCompression::eNone);
 
-	core::Texture2DFile* loadVirtualFileCheckboard(
-	   GLuint width,
-	   GLuint height,
-	   GLubyte red,
-	   GLubyte green,
-	   GLubyte blue,
-	   GLenum format = GL_RGBA);
+  core::Texture2DFile *loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format = GL_RGBA);
 
-	core::Texture2DFile* loadVirtualFileColor(
-	   GLuint width,
-	   GLuint height,
-	   GLubyte red,
-	   GLubyte green,
-	   GLubyte blue,
-	   GLenum format = GL_RGBA);
+  core::Texture2DFile *loadVirtualFileCheckboard(GLuint width,
+      GLuint height,
+      GLubyte red,
+      GLubyte green,
+      GLubyte blue,
+      GLenum format = GL_RGBA);
 
- private:
-	GLint getBytesPerPixel(GLenum format);
-	GLenum getComporession(eCompression compression);
+  core::Texture2DFile *
+  loadVirtualFileColor(GLuint width, GLuint height, GLubyte red, GLubyte green, GLubyte blue, GLenum format = GL_RGBA);
+
+private:
+  GLint getBytesPerPixel(GLenum format);
+
+  GLenum getComporession(eCompression compression);
 };
 
 } /* framework */

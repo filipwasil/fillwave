@@ -41,16 +41,16 @@
 namespace fillwave {
 namespace framework {
 
-ColorPickingCallback::ColorPickingCallback(Engine* engine)
-	: Callback(eEventType::eMouseButton), mEngine(engine) {
+ColorPickingCallback::ColorPickingCallback(Engine *engine)
+    : Callback (eEventType::eMouseButton), mEngine (engine) {
 
 }
 
-void ColorPickingCallback::perform(EventType& event) {
-	MouseButtonEventData e = MouseButtonEvent::getData(event);
-	if (e.mAction == GLFW_RELEASE) {
-		mEngine->pick(e.mWhereX, e.mWhereY);
-	}
+void ColorPickingCallback::perform(EventType &event) {
+  MouseButtonEventData e = MouseButtonEvent::getData (event);
+  if (e.mAction == GLFW_RELEASE) {
+    mEngine->pick (e.mWhereX, e.mWhereY);
+  }
 }
 
 } /* framework */

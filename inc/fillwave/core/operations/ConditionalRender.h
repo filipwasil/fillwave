@@ -47,28 +47,28 @@ namespace core {
  */
 
 class ConditionalRender {
- public:
+public:
 
-	/*!
-	 * \brief Specifies the conditional rendering pass mode.
-	 *
-	 * \param Possible modes:
-	 *  GL_QUERY_WAIT,
-	 *  GL_QUERY_NO_WAIT,
-	 *  GL_QUERY_BY_REGION_WAIT,
-	 *  GL_QUERY_BY_REGION_NO_WAIT,
-	 */
+  /*!
+   * \brief Specifies the conditional rendering pass mode.
+   *
+   * \param Possible modes:
+   *  GL_QUERY_WAIT,
+   *  GL_QUERY_NO_WAIT,
+   *  GL_QUERY_BY_REGION_WAIT,
+   *  GL_QUERY_BY_REGION_NO_WAIT,
+   */
 
-	ConditionalRender(GLenum mode);
+  ConditionalRender(GLenum mode);
 
-	virtual ~ConditionalRender() = default;
+  virtual ~ConditionalRender() = default;
 
-	void begin(GLuint querryID) const;
+  void begin(GLuint querryID) const;
 
-	void end() const;
+  void end() const;
 
- private:
-	GLenum mMode;
+private:
+  GLenum mMode;
 };
 
 } /* core */

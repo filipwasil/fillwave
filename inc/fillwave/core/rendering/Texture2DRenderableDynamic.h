@@ -44,32 +44,28 @@ namespace core {
  * \brief Dynamic texture will update its content during runtime according to specified fragment shader.
  */
 
-class Texture2DRenderableDynamic: public Texture2DRenderable {
- public:
-	Texture2DRenderableDynamic(
-	   Texture2DFile* file,
-	   ParameterList& parameters,
-	   core::Program* program);
+class Texture2DRenderableDynamic : public Texture2DRenderable {
+public:
+  Texture2DRenderableDynamic(Texture2DFile *file, ParameterList &parameters, core::Program *program);
 
-	virtual ~Texture2DRenderableDynamic() = default;
+  virtual ~Texture2DRenderableDynamic() = default;
 
-	void draw(GLfloat timePassed);
+  void draw(GLfloat timePassed);
 
-	void reload();
+  void reload();
 
- private:
-	core::Program* mProgram;
+private:
+  core::Program *mProgram;
 
-	GLfloat mTimePassed;
-	GLint mUniformLocationCacheTime;
-	GLint mUniformLocationCachePostprocessingSampler;
+  GLfloat mTimePassed;
+  GLint mUniformLocationCacheTime;
+  GLint mUniformLocationCachePostprocessingSampler;
 
-	void initUniformsCache();
+  void initUniformsCache();
 };
 
 } /* core */
-typedef std::shared_ptr<core::Texture2DRenderableDynamic>
-pTexture2DRenderableDynamic;
+typedef std::shared_ptr<core::Texture2DRenderableDynamic> pTexture2DRenderableDynamic;
 } /* fillwave */
 
 #endif /* TEXTURE2DRENDERABLEDYNAMIC_H_ */

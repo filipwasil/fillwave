@@ -30,6 +30,9 @@
  */
 
 void init();
+
 void perform();
+
 void quit();
+
 void showDescription();

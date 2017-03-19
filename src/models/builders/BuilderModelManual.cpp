@@ -43,49 +43,40 @@ namespace framework {
  * \brief BuilderModel which builds the model from the asset file but uses external textures and meterial.
  */
 
-BuilderModelManual::BuilderModelManual(
-   Engine* engine,
-   std::string modelPath,
-   core::Program* program,
-   core::Texture2D* diffuseMap,
-   core::Texture2D* normalMap,
-   core::Texture2D* specularMap,
-   Material material) :
-	BuilderModel(engine, modelPath, program),
-	mDiffuseMap(diffuseMap),
-	mNormalMap(normalMap),
-	mSpecularMap(specularMap),
-	mMaterial(material) {
+BuilderModelManual::BuilderModelManual(Engine *engine,
+    std::string modelPath,
+    core::Program *program,
+    core::Texture2D *diffuseMap,
+    core::Texture2D *normalMap,
+    core::Texture2D *specularMap,
+    Material material)
+    : BuilderModel (engine, modelPath, program), mDiffuseMap (diffuseMap), mNormalMap (normalMap), mSpecularMap (
+    specularMap), mMaterial (material) {
 
 }
 
-BuilderModelManual& BuilderModelManual::setDiffuseMapTexture(
-   core::Texture2D* texture) {
-	mDiffuseMap = texture;
-	return (*this);
+BuilderModelManual &BuilderModelManual::setDiffuseMapTexture(core::Texture2D *texture) {
+  mDiffuseMap = texture;
+  return (*this);
 }
 
-BuilderModelManual& BuilderModelManual::setNormalMapTexture(
-   core::Texture2D* texture) {
-	mNormalMap = texture;
-	return (*this);
+BuilderModelManual &BuilderModelManual::setNormalMapTexture(core::Texture2D *texture) {
+  mNormalMap = texture;
+  return (*this);
 }
 
-BuilderModelManual& BuilderModelManual::setSpecularMapTexture(
-   core::Texture2D* texture) {
-	mSpecularMap = texture;
-	return (*this);
+BuilderModelManual &BuilderModelManual::setSpecularMapTexture(core::Texture2D *texture) {
+  mSpecularMap = texture;
+  return (*this);
 }
 
-BuilderModelManual& BuilderModelManual::setMaterial(const Material& material) {
-	mMaterial = material;
-	return (*this);
+BuilderModelManual &BuilderModelManual::setMaterial(const Material &material) {
+  mMaterial = material;
+  return (*this);
 }
 
 puModel BuilderModelManual::build() {
-	return std::make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMap,
-	                               mNormalMap,
-	                               mSpecularMap, mMaterial);
+  return std::make_unique<Model> (mEngine, mProgram, mShapePath, mDiffuseMap, mNormalMap, mSpecularMap, mMaterial);
 }
 
 } /* framework */

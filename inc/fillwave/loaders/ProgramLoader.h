@@ -45,54 +45,89 @@ namespace framework {
  * \brief Loads programs.
  */
 
-class ProgramLoader: public ShaderLoader {
- public:
-	ProgramLoader(Engine* engine);
+class ProgramLoader : public ShaderLoader {
+public:
+  ProgramLoader(Engine *engine);
 
-	virtual ~ProgramLoader() = default;
+  virtual ~ProgramLoader() = default;
 
-	core::Program* getDefault();
-	core::Program* getDefaultBones();
-	core::Program* getDefaultDR();
-	core::Program* getDefaultFR();
-	core::Program* getDefaultBonesDR();
-	core::Program* getDefaultBonesFR();
-	core::Program* getShadow();
-	core::Program* getShadowColorCoded();
-	core::Program* getShadowWithAnimation();
-	core::Program* getShadowColorCodedWithAnimation();
-	core::Program* getDebugger();
-	core::Program* getSkybox();
-	core::Program* getSkyboxDR();
-	core::Program* getHUD();
-	core::Program* getText();
-	core::Program* getTextBold();
-	core::Program* getParticleGPUEmiter();
-	core::Program* getParticleGPU();
-	core::Program* getParticleCPU();
-	core::Program* getParticleCPUNoDepthText();
-	core::Program* getQuad();
-	core::Program* getQuadCustomFragmentShaderStartup();
-	core::Program* getCursor();
-	core::Program* getDRAmbient();
-	core::Program* getAmbientOcclusionGeometry();
-	core::Program* getAmbientOcclusionColor();
-	core::Program* getOcclusionPureQuery();
-	core::Program* getOcclusionQuery();
-	core::Program* getOcclusionOptimizedQuery();
-	core::Program* getDRDepthless();
-	core::Program* getDRDirectionalLights();
-	core::Program* getDRSpotLights();
-	core::Program* getDRPointLights();
-	core::Program* getQuadCustomFragmentShader(const std::string& shaderPath);
-	core::Program* getHUDCustomFragmentShader(const std::string& shaderPath);
+  core::Program *getDefault();
 
-	static void initDefaultUniforms(core::Program* program);
- private:
+  core::Program *getDefaultBones();
 
-	Engine* mEngine;
+  core::Program *getDefaultDR();
 
-	const char *mFeedbackVaryingsGPUEmiter[6];
+  core::Program *getDefaultFR();
+
+  core::Program *getDefaultBonesDR();
+
+  core::Program *getDefaultBonesFR();
+
+  core::Program *getShadow();
+
+  core::Program *getShadowColorCoded();
+
+  core::Program *getShadowWithAnimation();
+
+  core::Program *getShadowColorCodedWithAnimation();
+
+  core::Program *getDebugger();
+
+  core::Program *getSkybox();
+
+  core::Program *getSkyboxDR();
+
+  core::Program *getHUD();
+
+  core::Program *getText();
+
+  core::Program *getTextBold();
+
+  core::Program *getParticleGPUEmiter();
+
+  core::Program *getParticleGPU();
+
+  core::Program *getParticleCPU();
+
+  core::Program *getParticleCPUNoDepthText();
+
+  core::Program *getQuad();
+
+  core::Program *getQuadCustomFragmentShaderStartup();
+
+  core::Program *getCursor();
+
+  core::Program *getDRAmbient();
+
+  core::Program *getAmbientOcclusionGeometry();
+
+  core::Program *getAmbientOcclusionColor();
+
+  core::Program *getOcclusionPureQuery();
+
+  core::Program *getOcclusionQuery();
+
+  core::Program *getOcclusionOptimizedQuery();
+
+  core::Program *getDRDepthless();
+
+  core::Program *getDRDirectionalLights();
+
+  core::Program *getDRSpotLights();
+
+  core::Program *getDRPointLights();
+
+  core::Program *getQuadCustomFragmentShader(const std::string &shaderPath);
+
+  core::Program *getHUDCustomFragmentShader(const std::string &shaderPath);
+
+  static void initDefaultUniforms(core::Program *program);
+
+private:
+
+  Engine *mEngine;
+
+  const char *mFeedbackVaryingsGPUEmiter[6];
 };
 
 } /* framework */

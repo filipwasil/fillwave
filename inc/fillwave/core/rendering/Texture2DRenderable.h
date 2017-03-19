@@ -44,34 +44,37 @@ namespace core {
  * \brief One can render to this texture and use the rendered image as a 2D texture.
  */
 
-class Texture2DRenderable: public Texture2D {
- public:
-	Texture2DRenderable(
-	   GLenum attachment,
-	   Texture2DFile* file,
-	   ParameterList& parameters);
+class Texture2DRenderable : public Texture2D {
+public:
+  Texture2DRenderable(GLenum attachment, Texture2DFile *file, ParameterList &parameters);
 
-	virtual ~Texture2DRenderable() = default;
+  virtual ~Texture2DRenderable() = default;
 
-	void resize(GLint width, GLint height);
+  void resize(GLint width, GLint height);
 
-	void bindForWriting();
-	void bindForRendering();
-	void bindForReading();
+  void bindForWriting();
 
-	void setAttachment(GLenum attachment, GLenum target = GL_TEXTURE_2D);
-	void attachTexture2DDraw(GLenum attachment, GLenum target, GLuint texHandle);
-	void attachTexture2D(GLenum attachment, GLenum target, GLuint textureHandle);
+  void bindForRendering();
 
-	void copyTo(Framebuffer* source);
-	void copyFrom(Framebuffer* source);
+  void bindForReading();
 
-	virtual void reload();
-	void log();
+  void setAttachment(GLenum attachment, GLenum target = GL_TEXTURE_2D);
 
- private:
-	puFramebuffer mFramebuffer;
-	GLenum mAttachment;
+  void attachTexture2DDraw(GLenum attachment, GLenum target, GLuint texHandle);
+
+  void attachTexture2D(GLenum attachment, GLenum target, GLuint textureHandle);
+
+  void copyTo(Framebuffer *source);
+
+  void copyFrom(Framebuffer *source);
+
+  virtual void reload();
+
+  void log();
+
+private:
+  puFramebuffer mFramebuffer;
+  GLenum mAttachment;
 };
 
 } /* core */

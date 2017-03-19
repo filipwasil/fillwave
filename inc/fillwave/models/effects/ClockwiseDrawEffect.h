@@ -43,15 +43,19 @@ namespace framework {
  * \brief Effect to draw an opposite face of each mesh.
  */
 
-class ClockwiseDrawEffect: public IEffect {
- public:
-	ClockwiseDrawEffect() = default;
-	virtual ~ClockwiseDrawEffect() = default;
+class ClockwiseDrawEffect : public IEffect {
+public:
+  ClockwiseDrawEffect() = default;
 
-	void preDrawAction(core::Program* program);
-	void postDrawAction(core::Program* program);
-	void stopAction(core::Program* program);
-	void startAction(core::Program* program);
+  virtual ~ClockwiseDrawEffect() = default;
+
+  void preDrawAction(core::Program *program);
+
+  void postDrawAction(core::Program *program);
+
+  void stopAction(core::Program *program);
+
+  void startAction(core::Program *program);
 };
 
 } /* framework */

@@ -34,17 +34,18 @@
 
 namespace fillwave {
 class ExceptionFillwave : public std::exception {
- public:
-	ExceptionFillwave(const std::string &why) : mWhy(why) {
+public:
+  ExceptionFillwave(const std::string &why)
+      : mWhy (why) {
 
-	};
+  };
 
-	virtual const char *what() const throw() {
-		return mWhy.c_str();
-	}
+  virtual const char *what() const throw () {
+    return mWhy.c_str ();
+  }
 
- private:
-	std::string mWhy;
+private:
+  std::string mWhy;
 };
 
 } /* fillwave */

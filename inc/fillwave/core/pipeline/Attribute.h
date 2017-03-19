@@ -44,35 +44,40 @@ namespace core {
  */
 
 class Attribute {
- public:
-	Attribute(
-	   std::string name,
-	   GLuint index,
-	   GLint size,
-	   GLsizei stride,
-	   GLenum type,
-	   GLboolean normalized = GL_FALSE);
-	virtual ~Attribute() = default;
-	void bindLocation(GLint programHandle);
-	void arrayDisable();
-	void arrayEnable();
-	void arraySet();
-	void setOffsetPointer(GLvoid* offset);
-	GLuint getSize();
-	std::size_t getTypeSize();
-	GLuint getIndex();
-	std::string getName();
-	void log();
+public:
+  Attribute(std::string name, GLuint index, GLint size, GLsizei stride, GLenum type, GLboolean normalized = GL_FALSE);
 
- private:
-	GLsizei mStride;
-	std::string mName;
-	GLuint mIndex;
-	GLint mSize;
-	GLboolean mNormalized;
-	std::size_t mTypeSize;
-	GLenum mType;
-	GLvoid* mPointer;
+  virtual ~Attribute() = default;
+
+  void bindLocation(GLint programHandle);
+
+  void arrayDisable();
+
+  void arrayEnable();
+
+  void arraySet();
+
+  void setOffsetPointer(GLvoid *offset);
+
+  GLuint getSize();
+
+  std::size_t getTypeSize();
+
+  GLuint getIndex();
+
+  std::string getName();
+
+  void log();
+
+private:
+  GLsizei mStride;
+  std::string mName;
+  GLuint mIndex;
+  GLint mSize;
+  GLboolean mNormalized;
+  std::size_t mTypeSize;
+  GLenum mType;
+  GLvoid *mPointer;
 };
 
 } /* core */

@@ -55,44 +55,43 @@ namespace core {
  */
 
 class Shader {
- public:
-	Shader(GLuint shaderType, const std::string& shaderSource);
+public:
+  Shader(GLuint shaderType, const std::string &shaderSource);
 
-	virtual ~Shader();
+  virtual ~Shader();
 
-	void compile();
+  void compile();
 
-	void loadSource();
+  void loadSource();
 
-	GLuint getType() {
-		return mType;
-	}
+  GLuint getType() {
+    return mType;
+  }
 
-	std::string getTypeString();
+  std::string getTypeString();
 
-	std::string getSource() {
-		return mSource;
-	}
+  std::string getSource() {
+    return mSource;
+  }
 
-	GLuint getHandle() {
-		return mHandle;
-	}
+  GLuint getHandle() {
+    return mHandle;
+  }
 
-	void log();
+  void log();
 
-	void reload();
+  void reload();
 
- private:
-	GLuint mHandle;
+private:
+  GLuint mHandle;
 
-	GLuint mType;
+  GLuint mType;
 
-	std::string mSource;
+  std::string mSource;
 };
 
 } /* core */
 } /* fillwave */
 
-std::vector<fillwave::core::Shader*> operator+(
-   std::vector<fillwave::core::Shader*> shaders,
-   fillwave::core::Shader* shader2);
+std::vector<fillwave::core::Shader *>
+operator+(std::vector<fillwave::core::Shader *> shaders, fillwave::core::Shader *shader2);

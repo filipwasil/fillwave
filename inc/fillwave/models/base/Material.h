@@ -45,24 +45,29 @@ namespace framework {
  */
 
 class Material {
- public:
-	Material();
-	virtual ~Material() = default;
+public:
+  Material();
+
+  virtual ~Material() = default;
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-	Material(const aiMaterial* material);
+
+  Material(const aiMaterial *material);
+
 #else
-	Material(const tinyobj::material_t& material);
+  Material(const tinyobj::material_t& material);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-	const glm::vec4& getAmbient() const;
-	const glm::vec4& getDiffuse() const;
-	const glm::vec4& getSpecular() const;
+  const glm::vec4 &getAmbient() const;
 
- private:
-	glm::vec4 mAmbient;
-	glm::vec4 mDiffuse;
-	glm::vec4 mSpecular;
+  const glm::vec4 &getDiffuse() const;
+
+  const glm::vec4 &getSpecular() const;
+
+private:
+  glm::vec4 mAmbient;
+  glm::vec4 mDiffuse;
+  glm::vec4 mSpecular;
 };
 
 } /* framework */

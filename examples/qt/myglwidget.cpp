@@ -33,33 +33,30 @@ using namespace fillwave;
 using namespace fillwave::framework;
 using namespace std;
 
-MyGLWidget::MyGLWidget(int argc, char* argv[], QWidget* parent) :
-	QGLWidget{parent}, mArgc{argc}, mArgv{argv} {
-	QGLFormat glFormat;
-	glFormat.setVersion(3, 3);
-	glFormat.setProfile(QGLFormat::CoreProfile);
-	setFormat(glFormat);
+MyGLWidget::MyGLWidget(int argc, char *argv[], QWidget *parent)
+    : QGLWidget{parent}, mArgc{argc}, mArgv{argv} {
+  QGLFormat glFormat;
+  glFormat.setVersion (3, 3);
+  glFormat.setProfile (QGLFormat::CoreProfile);
+  setFormat (glFormat);
 }
 
 MyGLWidget::~MyGLWidget() {
 }
 
 void MyGLWidget::initializeGL() {
-	mEngine = unique_ptr<Engine>(new Engine(mArgc, mArgv));
-	auto scene = make_shared<ScenePerspective>(make_unique<CameraPerspective>
-	             (glm::vec3(0.0, 0.0, 6.0), glm::quat()));
-	mEngine->setCurrentScene(scene);
-	mEngine->storeText("Fillwave QT widget example", "FreeSans", glm::vec2(-0.95f,
-	                   0.2f), 50.0f);
+  mEngine = unique_ptr<Engine> (new Engine (mArgc, mArgv));
+  auto scene = make_shared<ScenePerspective> (make_unique<CameraPerspective> (glm::vec3 (0.0, 0.0, 6.0), glm::quat ()));
+  mEngine->setCurrentScene (scene);
+  mEngine->storeText ("Fillwave QT widget example", "FreeSans", glm::vec2 (-0.95f, 0.2f), 50.0f);
 }
 
 void MyGLWidget::paintGL() {
-	static int i = 0;
-	mEngine->draw(static_cast<float>(++i));
-	update();
+  static int i = 0;
+  mEngine->draw (static_cast<float>(++i));
+  update ();
 }
 
 void MyGLWidget::resizeGL(int width, int height) {
-	mEngine->insertResizeScreen(static_cast<GLuint>(width),
-	                            static_cast<GLuint>(height));
+  mEngine->insertResizeScreen (static_cast<GLuint>(width), static_cast<GLuint>(height));
 }

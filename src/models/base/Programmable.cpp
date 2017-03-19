@@ -34,111 +34,108 @@
 
 #include <fillwave/models/base/Programmable.h>
 #include <fillwave/Log.h>
-#include <algorithm>
 
 FLOGINIT("Programmable", FERROR | FFATAL)
 
 namespace fillwave {
 namespace framework {
 
-Programmable::Programmable(core::Program* program) :
-	mProgram(program) {
+Programmable::Programmable(core::Program *program)
+    : mProgram (program) {
 
 }
 
-void Programmable::drawWithEffects(ICamera& camera) {
+void Programmable::drawWithEffects(ICamera &camera) {
 
-	core::Program* p = mProgram;
+  core::Program *p = mProgram;
 
-	/* Effects execution */
-	p->use();
-	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect & e) {
-		e->preDrawAction(p);
-	});
-	core::Program::disusePrograms();
+  /* Effects execution */
+  p->use ();
+  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
+    e->preDrawAction (p);
+  });
+  core::Program::disusePrograms ();
 
-	/* Draw */
-	for (auto& it : mChildren) {
-		it->draw(camera);
-	}
+  /* Draw */
+  for (auto &it : mChildren) {
+    it->draw (camera);
+  }
 
-	/* Effects pre draw action */
-	p->use();
-	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect & e) {
-		e->postDrawAction(p);
-	});
-	core::Program::disusePrograms();
+  /* Effects pre draw action */
+  p->use ();
+  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
+    e->postDrawAction (p);
+  });
+  core::Program::disusePrograms ();
 }
 
-void Programmable::drawWithEffectsDR(ICamera& camera) {
+void Programmable::drawWithEffectsDR(ICamera &camera) {
 
-	core::Program* p = mProgram;
+  core::Program *p = mProgram;
 
-	/* Effects execution */
-	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect & e) {
-		e->preDrawAction(p);
-	});
+  /* Effects execution */
+  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
+    e->preDrawAction (p);
+  });
 
-	/* Draw */
-	for (auto& it : mChildren) {
-		it->drawDR(camera);
-	}
+  /* Draw */
+  for (auto &it : mChildren) {
+    it->drawDR (camera);
+  }
 
-	/* Effects pre draw action */
-	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect & e) {
-		e->postDrawAction(p);
-	});
+  /* Effects pre draw action */
+  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
+    e->postDrawAction (p);
+  });
 }
 
-void Programmable::drawWithEffectsPBRP(ICamera& camera) {
+void Programmable::drawWithEffectsPBRP(ICamera &camera) {
 
-	core::Program* p = mProgram;
+  core::Program *p = mProgram;
 
-	/* Effects execution */
-	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect & e) {
-		e->preDrawAction(p);
-	});
+  /* Effects execution */
+  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
+    e->preDrawAction (p);
+  });
 
-	/* Draw */
-	for (auto& it : mChildren) {
-		it->drawPBRP(camera);
-	}
+  /* Draw */
+  for (auto &it : mChildren) {
+    it->drawPBRP (camera);
+  }
 
-	/* Effects pre draw action */
-	std::for_each(mEffects.begin(), mEffects.end(),
-	[p](pIEffect & e) {
-		e->postDrawAction(p);
-	});
+  /* Effects pre draw action */
+  std::for_each (mEffects.begin (), mEffects.end (), [p](pIEffect &e) {
+    e->postDrawAction (p);
+  });
 }
 
 void Programmable::addEffect(pIEffect effect) {
-	auto _find_function = [effect](pIEffect & m) -> bool {return m == effect;};
-	auto it = std::remove_if(mEffects.begin(), mEffects.end(), _find_function);
-	if (it != mEffects.end()) {
-		fLogD("Effect already added");
-		return;
-	}
-	mEffects.push_back(effect);
-	mProgram->use();
-	effect->startAction(mProgram);
-	core::Program::disusePrograms();
+  auto _find_function = [effect](pIEffect &m) -> bool {
+    return m == effect;
+  };
+  auto it = std::remove_if (mEffects.begin (), mEffects.end (), _find_function);
+  if (it != mEffects.end ()) {
+    fLogD("Effect already added");
+    return;
+  }
+  mEffects.push_back (effect);
+  mProgram->use ();
+  effect->startAction (mProgram);
+  core::Program::disusePrograms ();
 }
 
 void Programmable::removeEffect(pIEffect effect) {
-	auto _find_function = [effect](pIEffect & m) -> bool {return m == effect;};
-	auto it = std::remove_if(mEffects.begin(), mEffects.end(), _find_function);
-	if (it != mEffects.end()) {
-		/* Start stop action */
-		mProgram->use();
-		effect->stopAction(mProgram);
-		core::Program::disusePrograms();
-	}
-	mEffects.erase(it, mEffects.end());
+  auto _find_function = [effect](pIEffect &m) -> bool {
+    return m == effect;
+  };
+  auto it = std::remove_if (mEffects.begin (), mEffects.end (), _find_function);
+  if (it != mEffects.end ()) {
+    /* Start stop action */
+    mProgram->use ();
+    effect->stopAction (mProgram);
+    core::Program::disusePrograms ();
+  }
+  mEffects.erase (it, mEffects.end ());
 }
 
 } /* framework */

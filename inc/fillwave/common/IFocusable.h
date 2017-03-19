@@ -42,18 +42,22 @@ class Engine;
 namespace framework {
 
 class IFocusable {
- public:
-	IFocusable(Engine* engine);
-	virtual ~IFocusable();
-	IFocusable& operator = (IFocusable&&) = default;
-	IFocusable (IFocusable&& obj) = default;
+public:
+  IFocusable(Engine *engine);
 
-	virtual void handleFocusEvent(EventType& event) = 0;
-	void attachCallback(Callback* callback);
+  virtual ~IFocusable();
 
- protected:
-	Engine* mEngine;
-	std::vector<Callback*> mCallbacks;
+  IFocusable &operator=(IFocusable &&) = default;
+
+  IFocusable(IFocusable &&obj) = default;
+
+  virtual void handleFocusEvent(EventType &event) = 0;
+
+  void attachCallback(Callback *callback);
+
+protected:
+  Engine *mEngine;
+  std::vector<Callback *> mCallbacks;
 };
 
 }

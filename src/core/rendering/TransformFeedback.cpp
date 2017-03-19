@@ -40,46 +40,43 @@ FLOGINIT("TransformFeedback", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
-TransformFeedback::TransformFeedback(GLsizei howMany) :
-	GLObject(howMany), mTarget(GL_TRANSFORM_FEEDBACK) {
-	glGenTransformFeedbacks(mHowMany, mHandles);
+TransformFeedback::TransformFeedback(GLsizei howMany)
+    : GLObject (howMany), mTarget (GL_TRANSFORM_FEEDBACK) {
+  glGenTransformFeedbacks (mHowMany, mHandles);
 }
 
 TransformFeedback::~TransformFeedback() {
-	glDeleteTransformFeedbacks(mHowMany, mHandles);
+  glDeleteTransformFeedbacks (mHowMany, mHandles);
 }
 
 void TransformFeedback::bind(GLuint id) const {
-	glBindTransformFeedback(mTarget, mHandles[id]);
+  glBindTransformFeedback (mTarget, mHandles[id]);
 }
 
 void TransformFeedback::begin(GLenum primitiveMode) {
-	if (primitiveMode != GL_POINTS && primitiveMode != GL_LINES
-	      && primitiveMode != GL_TRIANGLES
-#ifdef FILLWAVE_GLES_3_0
-#else
-	      && primitiveMode != GL_TRIANGLES_ADJACENCY
-	      && primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY
-	      && primitiveMode != GL_LINES_ADJACENCY
-	      && primitiveMode != GL_LINE_STRIP_ADJACENCY
+  if (primitiveMode != GL_POINTS && primitiveMode != GL_LINES && primitiveMode != GL_TRIANGLES
+      #ifdef FILLWAVE_GLES_3_0
+      #else
+      && primitiveMode != GL_TRIANGLES_ADJACENCY && primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY &&
+      primitiveMode != GL_LINES_ADJACENCY && primitiveMode != GL_LINE_STRIP_ADJACENCY
 #endif
-	   ) {
-		fLogE("not valid primitive type");
-	} else {
-		glBeginTransformFeedback(primitiveMode);
-	}
+      ) {
+    fLogE("not valid primitive type");
+  } else {
+    glBeginTransformFeedback (primitiveMode);
+  }
 }
 
 void TransformFeedback::end() {
-	glEndTransformFeedback();
+  glEndTransformFeedback ();
 }
 
 void TransformFeedback::pause() {
-	glPauseTransformFeedback();
+  glPauseTransformFeedback ();
 }
 
 void TransformFeedback::resume() {
-	glResumeTransformFeedback();
+  glResumeTransformFeedback ();
 }
 
 } /* core */

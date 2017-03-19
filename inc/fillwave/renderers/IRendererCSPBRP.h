@@ -48,19 +48,23 @@ class LightManager;
  * \brief Cache Safe Program Based Render Pass IRenderer. Not ready (Rev.4.2.1).
  */
 
-class IRendererCSPBRP: public IRenderer {
- public:
-	IRendererCSPBRP(LightManager* lightManager);
-	virtual ~IRendererCSPBRP() = default;
+class IRendererCSPBRP : public IRenderer {
+public:
+  IRendererCSPBRP(LightManager *lightManager);
 
-	void update(IRenderable* renderable) override;
-	void draw(ICamera& camera) override;
-	void reset(GLuint width, GLuint height) override;
-	void clear() override;
+  virtual ~IRendererCSPBRP() = default;
 
- private:
-	std::unordered_map<GLuint, std::vector<std::vector<RenderItem>>>mRenderPasses;
-	LightManager* mLightManager;
+  void update(IRenderable *renderable) override;
+
+  void draw(ICamera &camera) override;
+
+  void reset(GLuint width, GLuint height) override;
+
+  void clear() override;
+
+private:
+  std::unordered_map<GLuint, std::vector<std::vector<RenderItem>>> mRenderPasses;
+  LightManager *mLightManager;
 };
 
 }

@@ -37,19 +37,20 @@
 namespace fillwave {
 namespace framework {
 
-Voxel::Voxel() :
-	mType(0), mActive(GL_TRUE) {
+Voxel::Voxel()
+    : mType (0), mActive (GL_TRUE) {
 }
 
 GLboolean Voxel::isActive() {
-	return mActive;
+  return mActive;
 }
+
 void Voxel::setActive(GLboolean active) {
-	mActive = active;
+  mActive = active;
 }
 
 void Voxel::setType(GLint type) {
-	mType = type;
+  mType = type;
 }
 
 } /* framework */

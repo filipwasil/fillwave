@@ -51,47 +51,48 @@ class Channel;
  */
 
 class Animation final {
- public:
-	Animation(aiAnimation* assimpAnimation);
-	~Animation();
+public:
+  Animation(aiAnimation *assimpAnimation);
 
-	/* getTicksPerSec
-	 * \brief returns an animation parameter:
-	 */
+  ~Animation();
 
-	float getTicksPerSec() {
-		return mTicksPerSec;
-	}
+  /* getTicksPerSec
+   * \brief returns an animation parameter:
+   */
 
-	/* getDuration
-	 * \brief returns an animation parameter
-	 */
+  float getTicksPerSec() {
+    return mTicksPerSec;
+  }
 
-	float getDuration() {
-		return mDuration;
-	}
+  /* getDuration
+   * \brief returns an animation parameter
+   */
 
-	/* getChannel
-	 * \brief returns particular animation channel
-	 */
+  float getDuration() {
+    return mDuration;
+  }
 
-	Channel* getChannel(int i) {
-		return mChannels[i];
-	}
+  /* getChannel
+   * \brief returns particular animation channel
+   */
 
-	/* getHowManyChannels
-	 * \brief returns how many animation channels are hidden in animation
-	 */
+  Channel *getChannel(int i) {
+    return mChannels[i];
+  }
 
-	int getHowManyChannels() {
-		return mChannels.size();
-	}
+  /* getHowManyChannels
+   * \brief returns how many animation channels are hidden in animation
+   */
 
- private:
-	std::string mName;
-	float mDuration;
-	float mTicksPerSec;
-	std::vector<Channel*> mChannels;
+  int getHowManyChannels() {
+    return mChannels.size ();
+  }
+
+private:
+  std::string mName;
+  float mDuration;
+  float mTicksPerSec;
+  std::vector<Channel *> mChannels;
 
 };
 

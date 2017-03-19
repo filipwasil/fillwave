@@ -44,13 +44,13 @@ namespace framework {
 
 using namespace std;
 
-FileLoader::FileLoader(const string& rootPath) :
-	mRootPath(rootPath) {
+FileLoader::FileLoader(const string &rootPath)
+    : mRootPath (rootPath) {
 
 }
 
 string FileLoader::getRootPath(string filePath) {
-	return (mRootPath + FILLWAVE_OS_SEPRATOR + filePath);
+  return (mRootPath + FILLWAVE_OS_SEPRATOR + filePath);
 }
 
 /*
@@ -69,26 +69,26 @@ string FileLoader::getRootPath(string filePath) {
  *
  */
 
-void ReadFile(string pFileName, string& fileContent) {
-	ifstream ifs(pFileName.c_str(), ios::binary);
-	if(!ifs) {
-		fLogE("File %s not found", pFileName.c_str());
-		return;
-	}
-	ifs.seekg(0, ios::end);
-	size_t size = ifs.tellg();
-	fileContent.resize(size);
+void ReadFile(string pFileName, string &fileContent) {
+  ifstream ifs (pFileName.c_str (), ios::binary);
+  if (!ifs) {
+    fLogE("File %s not found", pFileName.c_str ());
+    return;
+  }
+  ifs.seekg (0, ios::end);
+  size_t size = ifs.tellg ();
+  fileContent.resize (size);
 
-	ifs.seekg(0, ios::beg);
-	ifs.read(&fileContent[0], size);
-	ifs.close();
+  ifs.seekg (0, ios::beg);
+  ifs.read (&fileContent[0], size);
+  ifs.close ();
 }
 
-void WriteFile(const char* pFileName, string& fileContent) {
-	ofstream myfile;
-	myfile.open(pFileName);
-	myfile << fileContent;
-	myfile.close();
+void WriteFile(const char *pFileName, string &fileContent) {
+  ofstream myfile;
+  myfile.open (pFileName);
+  myfile << fileContent;
+  myfile.close ();
 }
 
 } /* framework */

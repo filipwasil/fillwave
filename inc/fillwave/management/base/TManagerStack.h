@@ -51,22 +51,23 @@ namespace framework {
  * \param P - T constructor parameters
  */
 template <class T, class K, size_t M, typename ... P>
-class TCacheStack: public std::unordered_map<K, T> {
- public:
-	TCacheStack() = default;
-	virtual ~TCacheStack() = default;
+class TCacheStack : public std::unordered_map<K, T> {
+public:
+  TCacheStack() = default;
 
-	T& store(const K& key, P ... parameters) {
-		if ((*this).find(key) != (*this).end()) {
-			return (*this)[key];
-		}
+  virtual ~TCacheStack() = default;
 
-		if ((*this).size() >= M) {
-			abort();
-		}
+  T &store(const K &key, P ... parameters) {
+    if ((*this).find (key) != (*this).end ()) {
+      return (*this)[key];
+    }
 
-		return (*this)[key] = T(parameters...);
-	}
+    if ((*this).size () >= M) {
+      abort ();
+    }
+
+    return (*this)[key] = T (parameters...);
+  }
 };
 
 } /* namespace framework */

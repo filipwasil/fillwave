@@ -44,24 +44,25 @@ namespace framework {
  */
 
 struct MouseButtonEventData {
-	float mWhereX, mWhereY;
-	int mButton;
-	int mAction;
-	int mMods;
-	const eEventType type = eEventType::eMouseButton;
+  float mWhereX, mWhereY;
+  int mButton;
+  int mAction;
+  int mMods;
+  const eEventType type = eEventType::eMouseButton;
 };
 
 /*! \class MouseButtonEvent
  * \brief Event introduced when something happens with the mouse buttons.
  */
 
-class MouseButtonEvent: public TEvent<MouseButtonEventData> {
- public:
-	MouseButtonEvent(MouseButtonEventData data) :
-		TEvent(data) {
+class MouseButtonEvent : public TEvent<MouseButtonEventData> {
+public:
+  MouseButtonEvent(MouseButtonEventData data)
+      : TEvent (data) {
 
-	}
-	virtual ~MouseButtonEvent() = default;
+  }
+
+  virtual ~MouseButtonEvent() = default;
 };
 
 } /* framework */

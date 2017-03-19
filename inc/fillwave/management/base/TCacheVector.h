@@ -46,34 +46,35 @@ namespace framework {
  * \brief Basic manager
  */
 template <class T, size_t M, typename ... P>
-class TManager: public std::vector<std::unique_ptr<T>> {
- public:
+class TManager : public std::vector<std::unique_ptr<T>> {
+public:
 
-	TManager() = default;
-	virtual ~TManager() = default;
+  TManager() = default;
 
-	T* add(P ... parameters) {
-		if ((*this).size() >= M) {
-			return nullptr;
-		}
-		(*this).emplace_back(std::make_unique<T>(parameters...));
-		return (*this).back().get();
-	}
+  virtual ~TManager() = default;
 
-	bool isNew(T& item) {
-		for (auto& it : (*this)) {
-			if (it == item) {
-				return false;
-			}
-		}
-		return true;
-	}
+  T *add(P ... parameters) {
+    if ((*this).size () >= M) {
+      return nullptr;
+    }
+    (*this).emplace_back (std::make_unique<T> (parameters...));
+    return (*this).back ().get ();
+  }
 
-	void log() {
-		for (auto& it : (*this)) {
-			it->log();
-		}
-	}
+  bool isNew(T &item) {
+    for (auto &it : (*this)) {
+      if (it == item) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  void log() {
+    for (auto &it : (*this)) {
+      it->log ();
+    }
+  }
 };
 
 } /* namespace framework */

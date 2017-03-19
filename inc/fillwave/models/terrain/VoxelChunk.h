@@ -50,55 +50,62 @@ class LightSystem;
  * \brief Block of Voxel objects.
  */
 
-class VoxelChunk: public Entity, public IReloadable {
- public:
-	VoxelChunk(
-	   core::Program* program,
-	   Engine* engine,
-	   const std::string& texturePath,
-	   GLint size,
-	   VoxelConstructor* constructor = nullptr,
-	   GLfloat gap = 0.2);
+class VoxelChunk : public Entity, public IReloadable {
+public:
+  VoxelChunk(core::Program *program,
+      Engine *engine,
+      const std::string &texturePath,
+      GLint size,
+      VoxelConstructor *constructor = nullptr,
+      GLfloat gap = 0.2);
 
-	~VoxelChunk();
+  ~VoxelChunk();
 
-	void setType(GLint type);
+  void setType(GLint type);
 
-	void reloadVBO();
-	void reloadVoxels(VoxelConstructor* constructor);
+  void reloadVBO();
 
-	/* IDrawable */
-	void draw(ICamera& camera) override;
-	void drawPBRP(ICamera& camera) override;
+  void reloadVoxels(VoxelConstructor *constructor);
 
-	/* IRenderable */
-	void updateRenderer(IRenderer& renderer) override;
-	bool getRenderItem(RenderItem& item) override;
+  /* IDrawable */
+  void draw(ICamera &camera) override;
 
-	GLint getSize();
+  void drawPBRP(ICamera &camera) override;
 
- protected:
-	Engine* mEngine;
-	const GLfloat mVoxelGap;
+  /* IRenderable */
+  void updateRenderer(IRenderer &renderer) override;
 
- private:
-	GLint mSize;
-	Voxel*** mVoxels;
-	core::Program* mProgram;
-	core::Texture2D* mTexture;
-	core::VertexBufferBasic* mVBO;
-	LightSystem* mLights;
+  bool getRenderItem(RenderItem &item) override;
 
-	GLint mUniformLocationCacheModelMatrix, mUniformLocationCacheCameraPosition,
-	      mUniformLocationCacheViewProjectionMatrix;
+  GLint getSize();
 
-	void onDraw();
-	void coreDraw();
-	void initBuffers();
-	void initPipeline();
-	void initVBO();
-	void initVAO();
-	void initUniformsCache();
+protected:
+  Engine *mEngine;
+  const GLfloat mVoxelGap;
+
+private:
+  GLint mSize;
+  Voxel ***mVoxels;
+  core::Program *mProgram;
+  core::Texture2D *mTexture;
+  core::VertexBufferBasic *mVBO;
+  LightSystem *mLights;
+
+  GLint mUniformLocationCacheModelMatrix, mUniformLocationCacheCameraPosition, mUniformLocationCacheViewProjectionMatrix;
+
+  void onDraw();
+
+  void coreDraw();
+
+  void initBuffers();
+
+  void initPipeline();
+
+  void initVBO();
+
+  void initVAO();
+
+  void initUniformsCache();
 };
 
 } /* framework */

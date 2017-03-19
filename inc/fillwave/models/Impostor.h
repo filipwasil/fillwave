@@ -48,25 +48,25 @@ namespace framework {
  * \brief Drawable Entity built by fragment shader. Time limited.
  */
 
-class Impostor: public Entity, public Finishable {
- public:
-	Impostor(
-	   Engine* engine,
-	   GLfloat lifetime,
-	   GLfloat size,
-	   core::Texture* texture = nullptr,
-	   GLenum blendingSource = GL_SRC_ALPHA,
-	   GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
-	virtual ~Impostor() = default;
+class Impostor : public Entity, public Finishable {
+public:
+  Impostor(Engine *engine,
+      GLfloat lifetime,
+      GLfloat size,
+      core::Texture *texture = nullptr,
+      GLenum blendingSource = GL_SRC_ALPHA,
+      GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
 
- protected:
-	core::Program* mProgram;
-	core::Texture* mTexture;
-	core::Sampler* mSampler;
-	GLfloat mSize;
-	Blending mBlending;
+  virtual ~Impostor() = default;
 
-	void coreDraw();
+protected:
+  core::Program *mProgram;
+  core::Texture *mTexture;
+  core::Sampler *mSampler;
+  GLfloat mSize;
+  Blending mBlending;
+
+  void coreDraw();
 };
 
 } /* framework */

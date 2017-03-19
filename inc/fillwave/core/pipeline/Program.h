@@ -51,58 +51,74 @@ namespace core {
  * \brief Single GLSL program object.
  */
 class Program {
- public:
-	Program(const std::vector<core::Shader*>& shaders, GLboolean skipLinking = GL_FALSE);
+public:
+  Program(const std::vector<core::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
 
-	virtual ~Program();
+  virtual ~Program();
 
-	void link();
+  void link();
 
-	/* Shaders */
-	void attach(core::Shader* shader);
-	void detach(core::Shader* shader);
+  /* Shaders */
+  void attach(core::Shader *shader);
 
-	void use() const;
+  void detach(core::Shader *shader);
 
-	static void useProgram(GLuint handle);
-	static void disusePrograms();
+  void use() const;
 
-	/* Uniforms */
-	GLboolean checkUniform(const std::string& name);
+  static void useProgram(GLuint handle);
 
-	void uniformPush(std::string name, GLint data);
-	void uniformPush(std::string name, GLint* data, GLint count);
-	void uniformPush(std::string name, GLfloat data);
-	void uniformPush(std::string name, GLfloat* data, GLint count);
-	void uniformPush(std::string name, glm::mat3 data);
-	void uniformPush(std::string name, glm::mat4 data);
-	void uniformPush(std::string name, glm::mat4* data, GLuint size);
-	void uniformPush(std::string name, glm::vec2 data);
-	void uniformPush(std::string name, glm::vec3 data);
-	void uniformPush(std::string name, glm::vec3* data, GLuint size);
-	void uniformPush(std::string name, glm::vec4 data);
+  static void disusePrograms();
 
-	/* Uniform blocks */
-	GLint getUniformLocation(std::string name);
-	void getUniformBlock(std::string name, GLuint bindingPoint);
-	GLuint getHandle() const;
-	void uniformBlockPush(std::string name, GLfloat* data);
+  /* Uniforms */
+  GLboolean checkUniform(const std::string &name);
 
-	void reload();
-	void log() const;
+  void uniformPush(std::string name, GLint data);
 
- private:
-	GLuint mHandle;
-	std::vector<Uniform> mUniforms;
-	std::vector<puUniformBuffer> mUnifromBuffers;
-	GLboolean mDelayedLinking;
-	std::vector<core::Shader*> mShaders;
-	void getUniforms();
+  void uniformPush(std::string name, GLint *data, GLint count);
+
+  void uniformPush(std::string name, GLfloat data);
+
+  void uniformPush(std::string name, GLfloat *data, GLint count);
+
+  void uniformPush(std::string name, glm::mat3 data);
+
+  void uniformPush(std::string name, glm::mat4 data);
+
+  void uniformPush(std::string name, glm::mat4 *data, GLuint size);
+
+  void uniformPush(std::string name, glm::vec2 data);
+
+  void uniformPush(std::string name, glm::vec3 data);
+
+  void uniformPush(std::string name, glm::vec3 *data, GLuint size);
+
+  void uniformPush(std::string name, glm::vec4 data);
+
+  /* Uniform blocks */
+  GLint getUniformLocation(std::string name);
+
+  void getUniformBlock(std::string name, GLuint bindingPoint);
+
+  GLuint getHandle() const;
+
+  void uniformBlockPush(std::string name, GLfloat *data);
+
+  void reload();
+
+  void log() const;
+
+private:
+  GLuint mHandle;
+  std::vector<Uniform> mUniforms;
+  std::vector<puUniformBuffer> mUnifromBuffers;
+  GLboolean mDelayedLinking;
+  std::vector<core::Shader *> mShaders;
+
+  void getUniforms();
 };
 
 } /* core */
 typedef std::unique_ptr<core::Program> puProgram;
-core::Program* buildProgram (
-   const std::vector<core::Shader*>& shaders,
-   GLboolean skipLinking = GL_FALSE);
+
+core::Program *buildProgram(const std::vector<core::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
 } /* fillwave */

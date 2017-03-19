@@ -33,45 +33,40 @@
 
 
 #include <fillwave/models/builders/BuilderModelExternalMaps.h>
-#include <fillwave/common/Macros.h>
 #include <fillwave/Log.h>
 
 
 namespace fillwave {
 namespace framework {
 
-BuilderModelExternalMaps::BuilderModelExternalMaps(
-   Engine* engine,
-   std::string modelPath,
-   core::Program* program,
-   const std::string& diffusePath,
-   const std::string& normalPath,
-   const std::string& specularPath) :
-	BuilderModel(engine, modelPath, program),
-	mDiffuseMapPath(diffusePath),
-	mNormalMapPath(normalPath),
-	mSpecularMapPath(specularPath) {
+BuilderModelExternalMaps::BuilderModelExternalMaps(Engine *engine,
+    std::string modelPath,
+    core::Program *program,
+    const std::string &diffusePath,
+    const std::string &normalPath,
+    const std::string &specularPath)
+    : BuilderModel (engine, modelPath, program), mDiffuseMapPath (diffusePath), mNormalMapPath (normalPath)
+    , mSpecularMapPath (specularPath) {
 
 }
 
-BuilderModel& BuilderModelExternalMaps::setdiffusePath(std::string& path) {
-	mDiffuseMapPath = path;
-	return *this;
+BuilderModel &BuilderModelExternalMaps::setdiffusePath(std::string &path) {
+  mDiffuseMapPath = path;
+  return *this;
 }
 
-BuilderModel& BuilderModelExternalMaps::setNormalMapPath(std::string& path) {
-	mNormalMapPath = path;
-	return *this;
+BuilderModel &BuilderModelExternalMaps::setNormalMapPath(std::string &path) {
+  mNormalMapPath = path;
+  return *this;
 }
 
-BuilderModel& BuilderModelExternalMaps::setSpecularMapPath(std::string& path) {
-	mSpecularMapPath = path;
-	return *this;
+BuilderModel &BuilderModelExternalMaps::setSpecularMapPath(std::string &path) {
+  mSpecularMapPath = path;
+  return *this;
 }
 
 puModel BuilderModelExternalMaps::build() {
-	return std::make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMapPath,
-	                               mNormalMapPath, mSpecularMapPath);
+  return std::make_unique<Model> (mEngine, mProgram, mShapePath, mDiffuseMapPath, mNormalMapPath, mSpecularMapPath);
 }
 
 } /* framework */

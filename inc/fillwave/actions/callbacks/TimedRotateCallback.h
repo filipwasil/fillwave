@@ -42,27 +42,26 @@ namespace framework {
  * \brief TimedCallback to rotate Entity at certain angle in certain time.
  */
 
-class TimedRotateCallback: public TimedCallback {
- public:
-	TimedRotateCallback(
-	   Moveable* moveable,
-	   glm::vec3 axis,
-	   GLfloat angle,
-	   GLfloat lifeTime,
-	   EasingFunction easing = LinearInterpolation);
+class TimedRotateCallback : public TimedCallback {
+public:
+  TimedRotateCallback(Moveable *moveable,
+      glm::vec3 axis,
+      GLfloat angle,
+      GLfloat lifeTime,
+      EasingFunction easing = LinearInterpolation);
 
-	virtual ~TimedRotateCallback() = default;
+  virtual ~TimedRotateCallback() = default;
 
-	void performTime(TimeEventData& data);
+  void performTime(TimeEventData &data);
 
- protected:
-	Moveable* mMoveable;
+protected:
+  Moveable *mMoveable;
 
- private:
-	glm::quat mStartRotation;
-	GLfloat mStartAngle;
-	GLfloat mEndAngle;
-	glm::vec3 mAxis;
+private:
+  glm::quat mStartRotation;
+  GLfloat mStartAngle;
+  GLfloat mEndAngle;
+  glm::vec3 mAxis;
 };
 
 } /* framework */

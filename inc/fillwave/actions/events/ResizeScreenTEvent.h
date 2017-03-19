@@ -44,22 +44,23 @@ namespace framework {
  */
 
 struct ResizeScreenEventData {
-	unsigned int width;
-	unsigned int height;
-	const eEventType type = eEventType::eResizeScreen;
+  unsigned int width;
+  unsigned int height;
+  const eEventType type = eEventType::eResizeScreen;
 };
 
 /*! \struct ResizeScreenEvent
  * \brief Event introduced when the window is resized.
  */
 
-class ResizeScreenEvent: public TEvent<ResizeScreenEventData> {
- public:
-	ResizeScreenEvent(ResizeScreenEventData& data) :
-		TEvent(data) {
+class ResizeScreenEvent : public TEvent<ResizeScreenEventData> {
+public:
+  ResizeScreenEvent(ResizeScreenEventData &data)
+      : TEvent (data) {
 
-	}
-	virtual ~ResizeScreenEvent() = default;
+  }
+
+  virtual ~ResizeScreenEvent() = default;
 };
 
 } /* namespace framework */

@@ -51,41 +51,41 @@ namespace framework {
  * \brief Drawable Entity which emits particles.
  */
 
-class IEmiterPoint: public IReloadable, public Entity {
- public:
-	IEmiterPoint(
-	   Engine* engine,
-	   GLuint howMany,
-	   GLfloat size,
-	   GLfloat lifetime,
-	   core::Texture* texture,
-	   glm::vec4 color,
-	   GLenum blendingSource,
-	   GLenum blendingDestination,
-	   GLboolean depthTesting,
-	   GLfloat alphaCutOff);
+class IEmiterPoint : public IReloadable, public Entity {
+public:
+  IEmiterPoint(Engine *engine,
+      GLuint howMany,
+      GLfloat size,
+      GLfloat lifetime,
+      core::Texture *texture,
+      glm::vec4 color,
+      GLenum blendingSource,
+      GLenum blendingDestination,
+      GLboolean depthTesting,
+      GLfloat alphaCutOff);
 
-	virtual ~IEmiterPoint() = default;
+  virtual ~IEmiterPoint() = default;
 
-	void setBlending(GLenum sourceFactor, GLenum destinationFactor);
+  void setBlending(GLenum sourceFactor, GLenum destinationFactor);
 
-	virtual void update(GLfloat timeElapsedSec) = 0;
-	virtual void draw(ICamera& camera) = 0;
+  virtual void update(GLfloat timeElapsedSec) = 0;
 
-	/* IRenderable */
-	void updateRenderer(IRenderer& renderer) override;
+  virtual void draw(ICamera &camera) = 0;
 
- protected:
-	GLfloat mStartSize;
-	GLfloat mLifetime;
-	core::Texture* mTexture;
-	glm::vec4 mColor;
-	GLuint mHowMany;
-	GLboolean mDepthTesting;
-	GLfloat mAlphaCutOff;
-	core::Program* mProgram;
-	core::IndexBuffer* mIBO;
-	Blending mBlending;
+  /* IRenderable */
+  void updateRenderer(IRenderer &renderer) override;
+
+protected:
+  GLfloat mStartSize;
+  GLfloat mLifetime;
+  core::Texture *mTexture;
+  glm::vec4 mColor;
+  GLuint mHowMany;
+  GLboolean mDepthTesting;
+  GLfloat mAlphaCutOff;
+  core::Program *mProgram;
+  core::IndexBuffer *mIBO;
+  Blending mBlending;
 };
 
 } /* framework */

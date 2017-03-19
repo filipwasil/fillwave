@@ -44,21 +44,22 @@ namespace framework {
  */
 
 struct ScrollEventData {
-	double mOffsetX, mOffsetY;
-	const eEventType type = eEventType::eScroll;
+  double mOffsetX, mOffsetY;
+  const eEventType type = eEventType::eScroll;
 };
 
 /*! \struct ScrollEvent
  * \brief Event introduced together with scrolling action.
  */
 
-class ScrollEvent: public TEvent<ScrollEventData> {
- public:
-	ScrollEvent(ScrollEventData data) :
-		TEvent(data) {
+class ScrollEvent : public TEvent<ScrollEventData> {
+public:
+  ScrollEvent(ScrollEventData data)
+      : TEvent (data) {
 
-	}
-	virtual ~ScrollEvent() = default;
+  }
+
+  virtual ~ScrollEvent() = default;
 };
 
 } /* framework */

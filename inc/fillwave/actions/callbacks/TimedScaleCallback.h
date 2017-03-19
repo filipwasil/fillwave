@@ -43,27 +43,26 @@ namespace framework {
  * \brief TimedCallback to scale the Entity to certain size in certain time.
  */
 
-class TimedScaleCallback: public TimedCallback {
- public:
-	TimedScaleCallback(
-	   Moveable* moveable,
-	   glm::vec3 normalizedScaleVec,
-	   GLfloat lifetime,
-	   EasingFunction easing = LinearInterpolation);
-	TimedScaleCallback(
-	   Moveable* moveable,
-	   GLfloat normalizedScale,
-	   GLfloat lifetime,
-	   EasingFunction easing = LinearInterpolation);
+class TimedScaleCallback : public TimedCallback {
+public:
+  TimedScaleCallback(Moveable *moveable,
+      glm::vec3 normalizedScaleVec,
+      GLfloat lifetime,
+      EasingFunction easing = LinearInterpolation);
 
-	virtual ~TimedScaleCallback() = default;
+  TimedScaleCallback(Moveable *moveable,
+      GLfloat normalizedScale,
+      GLfloat lifetime,
+      EasingFunction easing = LinearInterpolation);
 
-	void performTime(TimeEventData& data);
+  virtual ~TimedScaleCallback() = default;
 
- protected:
-	glm::vec3 mStartScale;
-	glm::vec3 mEndScale;
-	Moveable* mMoveable;
+  void performTime(TimeEventData &data);
+
+protected:
+  glm::vec3 mStartScale;
+  glm::vec3 mEndScale;
+  Moveable *mMoveable;
 };
 
 } /* framework */

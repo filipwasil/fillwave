@@ -42,8 +42,11 @@ namespace fillwave {
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
 glm::mat4 assimpToGlmMat4(aiMatrix4x4 matrix);
+
 glm::vec3 assimpToGlmVec3(aiVector3D vector);
+
 glm::quat assimpToGlmQuat(aiQuaternion quaternion);
+
 glm::vec4 assimpToGlmVec4(aiColor4D vector);
 
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */

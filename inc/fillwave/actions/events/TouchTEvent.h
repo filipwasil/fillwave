@@ -43,23 +43,24 @@ namespace framework {
  */
 
 struct TouchEventData {
-	int xPos;
-	int yPos;
-	int action;
-	const eEventType type = eEventType::eTouch;
+  int xPos;
+  int yPos;
+  int action;
+  const eEventType type = eEventType::eTouch;
 };
 
 /*! \struct TouchEvent
  * \brief Event introduced when the screen is pressed.
  */
 
-class TouchEvent: public TEvent<TouchEventData> {
- public:
-	TouchEvent(TouchEventData& data) :
-		TEvent(data) {
+class TouchEvent : public TEvent<TouchEventData> {
+public:
+  TouchEvent(TouchEventData &data)
+      : TEvent (data) {
 
-	}
-	virtual ~TouchEvent() = default;
+  }
+
+  virtual ~TouchEvent() = default;
 };
 
 } /* framework */

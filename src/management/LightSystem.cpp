@@ -33,42 +33,52 @@
 
 
 #include <fillwave/Fillwave.h>
-#include <fillwave/common/Macros.h>
 #include <fillwave/common/Strings.h>
 #include <fillwave/management/LightSystem.h>
-
-#include <fillwave/Log.h>
 
 
 namespace fillwave {
 namespace framework {
 
-const glm::mat4 FILLWAVE_UV_BIAS_MATRIX(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0,
-                                        0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
+const glm::mat4 FILLWAVE_UV_BIAS_MATRIX (0.5,
+                                         0.0,
+                                         0.0,
+                                         0.0,
+                                         0.0,
+                                         0.5,
+                                         0.0,
+                                         0.0,
+                                         0.0,
+                                         0.0,
+                                         0.5,
+                                         0.0,
+                                         0.5,
+                                         0.5,
+                                         0.5,
+                                         1.0);
 
 LightSystem::LightSystem() {
-	mLightBufferData.resize(
-	   FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER + FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER);
+  mLightBufferData.resize (FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER + FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER);
 }
 
 void LightSystem::clear() {
-	mLightsSpot.clear();
-	mLightsDirectional.clear();
-	mLightsPoint.clear();
+  mLightsSpot.clear ();
+  mLightsDirectional.clear ();
+  mLightsPoint.clear ();
 }
 
 bool LightSystem::isLightsRefresh() {
-	if (isMoveablesRefresh(mLightsSpot) || isMoveablesRefresh(mLightsDirectional)
-	      || isMoveablesRefresh(mLightsPoint)) {
-		return true;
-	}
-	return false;
+  if (isMoveablesRefresh (mLightsSpot) || isMoveablesRefresh (mLightsDirectional) ||
+      isMoveablesRefresh (mLightsPoint)) {
+    return true;
+  }
+  return false;
 }
 
 void LightSystem::resetLightsRefresh() {
-	resetMoveablesRefresh(mLightsSpot);
-	resetMoveablesRefresh(mLightsDirectional);
-	resetMoveablesRefresh(mLightsPoint);
+  resetMoveablesRefresh (mLightsSpot);
+  resetMoveablesRefresh (mLightsDirectional);
+  resetMoveablesRefresh (mLightsPoint);
 }
 
 /*
@@ -76,247 +86,211 @@ void LightSystem::resetLightsRefresh() {
  */
 
 void LightSystem::updateLightEntities() {
-	for (auto& it : mLightsSpot) {
-		it->updateFromFollowed();
-		it->updateShadowCamera();
-	}
-	for (auto& it : mLightsDirectional) {
-		it->updateFromFollowed();
-		it->updateShadowCamera();
-	}
-	for (auto& it : mLightsPoint) {
-		it->updateFromFollowed();
-		it->updateShadowCamera();
-	}
+  for (auto &it : mLightsSpot) {
+    it->updateFromFollowed ();
+    it->updateShadowCamera ();
+  }
+  for (auto &it : mLightsDirectional) {
+    it->updateFromFollowed ();
+    it->updateShadowCamera ();
+  }
+  for (auto &it : mLightsPoint) {
+    it->updateFromFollowed ();
+    it->updateShadowCamera ();
+  }
 }
 
-void LightSystem::pushLightUniforms(core::Program* program) {
+void LightSystem::pushLightUniforms(core::Program *program) {
 
-	/* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT*/
+  /* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT*/
 
-	program->uniformPush("uNumberOfSpotLights",
-	                     static_cast<GLint>(mLightsSpot.size() + mLightsDirectional.size()));
+  program->uniformPush ("uNumberOfSpotLights", static_cast<GLint>(mLightsSpot.size () + mLightsDirectional.size ()));
 
 #if defined(FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS) && defined(FILLWAVE_COMPILATION_PC_GLES)
-	/* Mesa shader compiler optimizes out "uNumberOfPointLights" but it should not */
-	/* This causes a false positive error indication here */
+  /* Mesa shader compiler optimizes out "uNumberOfPointLights" but it should not */
+  /* This causes a false positive error indication here */
 #else
-	program->uniformPush("uNumberOfPointLights",
-	                     static_cast<GLint>(mLightsPoint.size()));
+  program->uniformPush ("uNumberOfPointLights", static_cast<GLint>(mLightsPoint.size ()));
 #endif /* defined(FILLWAVE_THIRD_PARTY_WORKAROUNDS) && defined(FILLWAVE_COMPILATION_PC_GLES) */
 
-	GLint UBOIterator = 0;
+  GLint UBOIterator = 0;
 
-	/* Spot lights */
-	for (size_t i = 0; i < mLightsSpot.size(); i++) {
-		LightSpot* lightS = mLightsSpot[i].get();
-		CameraPerspective camera = *(lightS->getShadowCamera());
+  /* Spot lights */
+  for (size_t i = 0; i < mLightsSpot.size (); i++) {
+    LightSpot *lightS = mLightsSpot[i].get ();
+    CameraPerspective camera = *(lightS->getShadowCamera ());
 
-		for (GLuint j = 0; j < 3; j++) {
-			mLightBufferData[UBOIterator].position[j] = glm::value_ptr(
-			         lightS->getTranslation())[j];
-		}
-		mLightBufferData[UBOIterator].position[3] = 1.0;
+    for (GLuint j = 0; j < 3; j++) {
+      mLightBufferData[UBOIterator].position[j] = glm::value_ptr (lightS->getTranslation ())[j];
+    }
+    mLightBufferData[UBOIterator].position[3] = 1.0;
 
-		for (GLuint j = 0; j < 4; j++) {
-			mLightBufferData[UBOIterator].intensity[j] = glm::value_ptr(
-			         lightS->getIntensity())[j];
-		}
+    for (GLuint j = 0; j < 4; j++) {
+      mLightBufferData[UBOIterator].intensity[j] = glm::value_ptr (lightS->getIntensity ())[j];
+    }
 
-		glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection();
-		for (GLuint j = 0; j < 16; j++) {
-			mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr(matrix)[j];
-		}
+    glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection ();
+    for (GLuint j = 0; j < 16; j++) {
+      mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr (matrix)[j];
+    }
 
-		program->uniformPush(getNotIndexableName("uShadowMap", UBOIterator), FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
-		UBOIterator++;
-	}
+    program->uniformPush (getNotIndexableName ("uShadowMap", UBOIterator), FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
+    UBOIterator++;
+  }
 
-	/* Directional lights */
-	for (size_t i = 0; i < mLightsDirectional.size(); i++) {
-		CameraOrthographic camera =
-		   *(mLightsDirectional[i]->getShadowCamera());
+  /* Directional lights */
+  for (size_t i = 0; i < mLightsDirectional.size (); i++) {
+    CameraOrthographic camera = *(mLightsDirectional[i]->getShadowCamera ());
 
-		for (GLuint j = 0; j < 3; j++) {
-			mLightBufferData[UBOIterator].position[j] = glm::value_ptr(
-			         mLightsDirectional[i]->getTranslation())[j];
-		}
-		mLightBufferData[UBOIterator].position[3] = 1.0;
+    for (GLuint j = 0; j < 3; j++) {
+      mLightBufferData[UBOIterator].position[j] = glm::value_ptr (mLightsDirectional[i]->getTranslation ())[j];
+    }
+    mLightBufferData[UBOIterator].position[3] = 1.0;
 
-		for (GLuint j = 0; j < 4; j++) {
-			mLightBufferData[UBOIterator].intensity[j] = glm::value_ptr(
-			         mLightsDirectional[i]->getIntensity())[j];
-		}
+    for (GLuint j = 0; j < 4; j++) {
+      mLightBufferData[UBOIterator].intensity[j] = glm::value_ptr (mLightsDirectional[i]->getIntensity ())[j];
+    }
 
-		glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection();
-		for (GLuint j = 0; j < 16; j++) {
-			mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr(matrix)[j];
-		}
+    glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection ();
+    for (GLuint j = 0; j < 16; j++) {
+      mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr (matrix)[j];
+    }
 
-		program->uniformPush(getNotIndexableName("uShadowMap", UBOIterator),
-		                     FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
-		UBOIterator++;
-	}
+    program->uniformPush (getNotIndexableName ("uShadowMap", UBOIterator), FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
+    UBOIterator++;
+  }
 
-	/* Point lights */
-	for (size_t i = 0; i < mLightsPoint.size(); i++) {
-		/*LightPoint* l = mPointLights[i].get();*/
-		program->uniformPush(getStructField("uPointLights", "position", i),
-		                     glm::vec4(mLightsPoint[i]->getTranslation(), 1.0));
-		program->uniformPush(getStructField("uPointLights", "intensity", i),
-		                     mLightsPoint[i]->getIntensity());
-		program->uniformPush(getNotIndexableName("uPointShadowMap", i),
-		                     FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
-		UBOIterator++;
-	}
+  /* Point lights */
+  for (size_t i = 0; i < mLightsPoint.size (); i++) {
+    /*LightPoint* l = mPointLights[i].get();*/
+    program->uniformPush (getStructField ("uPointLights", "position", i),
+                          glm::vec4 (mLightsPoint[i]->getTranslation (), 1.0));
+    program->uniformPush (getStructField ("uPointLights", "intensity", i), mLightsPoint[i]->getIntensity ());
+    program->uniformPush (getNotIndexableName ("uPointShadowMap", i), FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
+    UBOIterator++;
+  }
 
-	if (isLightsRefresh()) {
-		pushLightUniformBuffers(program);
-		resetLightsRefresh();
-	}
+  if (isLightsRefresh ()) {
+    pushLightUniformBuffers (program);
+    resetLightsRefresh ();
+  }
 }
 
 void LightSystem::pushLightUniformsDR() {
 
-	/* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT*/
+  /* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT*/
 
-	GLint UBOIterator = 0;
+  GLint UBOIterator = 0;
 
-	/* Spot lights */
-	for (size_t i = 0; i < mLightsSpot.size(); i++) {
+  /* Spot lights */
+  for (size_t i = 0; i < mLightsSpot.size (); i++) {
 
-		CameraPerspective camera = *(mLightsSpot[i]->getShadowCamera());
+    CameraPerspective camera = *(mLightsSpot[i]->getShadowCamera ());
 
-		for (GLuint j = 0; j < 3; j++) {
-			mLightBufferData[UBOIterator].position[j] = glm::value_ptr(
-			         mLightsSpot[i]->getTranslation())[j];
-		}
-		mLightBufferData[UBOIterator].position[3] = 1.0;
+    for (GLuint j = 0; j < 3; j++) {
+      mLightBufferData[UBOIterator].position[j] = glm::value_ptr (mLightsSpot[i]->getTranslation ())[j];
+    }
+    mLightBufferData[UBOIterator].position[3] = 1.0;
 
-		for (GLuint j = 0; j < 4; j++) {
-			mLightBufferData[UBOIterator].intensity[j] = glm::value_ptr(
-			         mLightsSpot[i]->getIntensity())[j];
-		}
+    for (GLuint j = 0; j < 4; j++) {
+      mLightBufferData[UBOIterator].intensity[j] = glm::value_ptr (mLightsSpot[i]->getIntensity ())[j];
+    }
 
-		glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection();
-		for (GLuint j = 0; j < 16; j++) {
-			mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr(matrix)[j];
-		}
-		UBOIterator++;
-	}
+    glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection ();
+    for (GLuint j = 0; j < 16; j++) {
+      mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr (matrix)[j];
+    }
+    UBOIterator++;
+  }
 
-	/* Directional lights */
-	for (size_t i = 0; i < mLightsDirectional.size(); i++) {
-		CameraOrthographic camera =
-		   *(mLightsDirectional[i]->getShadowCamera());
+  /* Directional lights */
+  for (size_t i = 0; i < mLightsDirectional.size (); i++) {
+    CameraOrthographic camera = *(mLightsDirectional[i]->getShadowCamera ());
 
-		for (GLuint j = 0; j < 3; j++) {
-			mLightBufferData[UBOIterator].position[j] = glm::value_ptr(
-			         mLightsDirectional[i]->getTranslation())[j];
-		}
-		mLightBufferData[UBOIterator].position[3] = 1.0;
+    for (GLuint j = 0; j < 3; j++) {
+      mLightBufferData[UBOIterator].position[j] = glm::value_ptr (mLightsDirectional[i]->getTranslation ())[j];
+    }
+    mLightBufferData[UBOIterator].position[3] = 1.0;
 
-		for (GLuint j = 0; j < 4; j++) {
-			mLightBufferData[UBOIterator].intensity[j] = glm::value_ptr(
-			         mLightsDirectional[i]->getIntensity())[j];
-		}
+    for (GLuint j = 0; j < 4; j++) {
+      mLightBufferData[UBOIterator].intensity[j] = glm::value_ptr (mLightsDirectional[i]->getIntensity ())[j];
+    }
 
-		glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection();
-		for (GLuint j = 0; j < 16; j++) {
-			mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr(matrix)[j];
-		}
-		UBOIterator++;
-	}
+    glm::mat4 matrix = FILLWAVE_UV_BIAS_MATRIX * camera.getViewProjection ();
+    for (GLuint j = 0; j < 16; j++) {
+      mLightBufferData[UBOIterator].mvp[j] = glm::value_ptr (matrix)[j];
+    }
+    UBOIterator++;
+  }
 }
 
-void LightSystem::updateDeferredBufferSpot(
-   GLuint lightID,
-   core::Program* program,
-   GLint currentShadowUnit) {
-	program->use();
+void LightSystem::updateDeferredBufferSpot(GLuint lightID, core::Program *program, GLint currentShadowUnit) {
+  program->use ();
 
-	program->uniformPush("uLight.base.color",
-	                     mLightsSpot[lightID]->getIntensity().xyz());
-	program->uniformPush("uLight.base.ambientIntensity", 0.15f);
-	program->uniformPush("uLight.base.diffuseIntensity", 0.85f);
-	program->uniformPush("uLight.attenuation.constant", 0.1f);
-	program->uniformPush("uLight.attenuation.linear", 0.4f);
-	program->uniformPush("uLight.attenuation.exp", 0.1f);
-	program->uniformPush("uLight.position",
-	                     mLightsSpot[lightID]->getTranslation());
-	program->uniformPush("uLight.mvp",
-	                     glm::make_mat4(
-	                        mLightBufferData[currentShadowUnit - FILLWAVE_SHADOW_FIRST_UNIT].mvp));
+  program->uniformPush ("uLight.base.color", mLightsSpot[lightID]->getIntensity ().xyz ());
+  program->uniformPush ("uLight.base.ambientIntensity", 0.15f);
+  program->uniformPush ("uLight.base.diffuseIntensity", 0.85f);
+  program->uniformPush ("uLight.attenuation.constant", 0.1f);
+  program->uniformPush ("uLight.attenuation.linear", 0.4f);
+  program->uniformPush ("uLight.attenuation.exp", 0.1f);
+  program->uniformPush ("uLight.position", mLightsSpot[lightID]->getTranslation ());
+  program->uniformPush ("uLight.mvp",
+                        glm::make_mat4 (mLightBufferData[currentShadowUnit - FILLWAVE_SHADOW_FIRST_UNIT].mvp));
 
-	program->uniformPush("uShadowMap", currentShadowUnit);
-	program->uniformPush("uSpecularPower", 255.0f);
+  program->uniformPush ("uShadowMap", currentShadowUnit);
+  program->uniformPush ("uSpecularPower", 255.0f);
 }
 
-void LightSystem::updateDeferredBufferDirectional(
-   GLuint lightID,
-   core::Program* program,
-   GLint /*currentShadowUnit*/) {
-	program->use();
+void LightSystem::updateDeferredBufferDirectional(GLuint lightID, core::Program *program, GLint /*currentShadowUnit*/) {
+  program->use ();
 
-	program->uniformPush("uLight.base.color",
-	                     mLightsDirectional[lightID]->getIntensity().xyz());
-	program->uniformPush("uLight.base.ambientIntensity", 0.15f);
-	program->uniformPush("uLight.base.diffuseIntensity", 0.85f);
-	program->uniformPush("uLight.direction",
-	                     -mLightsDirectional[lightID]->getTranslation());
-	program->uniformPush("uSpecularPower", 255.0f);
+  program->uniformPush ("uLight.base.color", mLightsDirectional[lightID]->getIntensity ().xyz ());
+  program->uniformPush ("uLight.base.ambientIntensity", 0.15f);
+  program->uniformPush ("uLight.base.diffuseIntensity", 0.85f);
+  program->uniformPush ("uLight.direction", -mLightsDirectional[lightID]->getTranslation ());
+  program->uniformPush ("uSpecularPower", 255.0f);
 }
 
-void LightSystem::updateDeferredBufferPoint(
-   GLuint lightID,
-   core::Program* program,
-   GLint /*currentShadowUnit*/) {
-	program->use();
+void LightSystem::updateDeferredBufferPoint(GLuint lightID, core::Program *program, GLint /*currentShadowUnit*/) {
+  program->use ();
 
-	program->uniformPush("uLight.base.color",
-	                     mLightsPoint[lightID]->getIntensity().xyz());
-	program->uniformPush("uLight.base.ambientIntensity", 0.15f);
-	program->uniformPush("uLight.base.diffuseIntensity", 0.85f);
-	program->uniformPush("uLight.attenuation.constant", 0.4f);
-	program->uniformPush("uLight.attenuation.linear", 0.3f);
-	program->uniformPush("uLight.attenuation.exp", 0.1f);
-	program->uniformPush("uSpecularPower", 255.0f);
+  program->uniformPush ("uLight.base.color", mLightsPoint[lightID]->getIntensity ().xyz ());
+  program->uniformPush ("uLight.base.ambientIntensity", 0.15f);
+  program->uniformPush ("uLight.base.diffuseIntensity", 0.85f);
+  program->uniformPush ("uLight.attenuation.constant", 0.4f);
+  program->uniformPush ("uLight.attenuation.linear", 0.3f);
+  program->uniformPush ("uLight.attenuation.exp", 0.1f);
+  program->uniformPush ("uSpecularPower", 255.0f);
 }
 
-void LightSystem::pushLightUniformBuffers(core::Program* program) {
-	program->uniformBlockPush(
-	   FILLWAVE_LIGHTS_BINDING_POINT_NAME,
-	   reinterpret_cast<GLfloat*>(mLightBufferData.data()));
+void LightSystem::pushLightUniformBuffers(core::Program *program) {
+  program->uniformBlockPush (FILLWAVE_LIGHTS_BINDING_POINT_NAME, reinterpret_cast<GLfloat *>(mLightBufferData.data ()));
 }
 
 void LightSystem::bindShadowmaps() {
-	GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
-	for (size_t i = 0; i < mLightsSpot.size(); i++) {
-		mLightsSpot[i]->getShadowTexture()->bind(currentTextureUnit++);
-	}
-	for (size_t i = 0; i < mLightsDirectional.size(); i++) {
-		mLightsDirectional[i]->getShadowTexture()->bind(currentTextureUnit++);
-	}
-	for (size_t i = 0; i < mLightsPoint.size(); i++) {
-		mLightsPoint[i]->getShadowTexture()->bind(currentTextureUnit++);
-	}
+  GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
+  for (size_t i = 0; i < mLightsSpot.size (); i++) {
+    mLightsSpot[i]->getShadowTexture ()->bind (currentTextureUnit++);
+  }
+  for (size_t i = 0; i < mLightsDirectional.size (); i++) {
+    mLightsDirectional[i]->getShadowTexture ()->bind (currentTextureUnit++);
+  }
+  for (size_t i = 0; i < mLightsPoint.size (); i++) {
+    mLightsPoint[i]->getShadowTexture ()->bind (currentTextureUnit++);
+  }
 }
 
-GLfloat LightSystem::computePointLightBoundingSphere(LightPoint* light) {
-	const glm::vec4 intensity = light->getIntensity();
-	const LightAttenuationData attenuation = light->getAttenuation();
-	const GLfloat diffuseIntensity = 1.0;
+GLfloat LightSystem::computePointLightBoundingSphere(LightPoint *light) {
+  const glm::vec4 intensity = light->getIntensity ();
+  const LightAttenuationData attenuation = light->getAttenuation ();
+  const GLfloat diffuseIntensity = 1.0;
 
-	GLfloat MaxChannel = glm::max(glm::max(intensity.x, intensity.y),
-	                              intensity.z);
+  GLfloat MaxChannel = glm::max (glm::max (intensity.x, intensity.y), intensity.z);
 
-	return (-attenuation.mLinear
-	        + glm::sqrt(
-	           attenuation.mLinear * attenuation.mLinear
-	           - 4 * attenuation.mExp
-	           * (attenuation.mExp
-	              - 256.0f * MaxChannel * diffuseIntensity))) / 2
-	       * attenuation.mExp;
+  return (
+             -attenuation.mLinear + glm::sqrt (attenuation.mLinear * attenuation.mLinear - 4 * attenuation.mExp * (
+                 attenuation.mExp - 256.0f * MaxChannel * diffuseIntensity
+             ))) / 2 * attenuation.mExp;
 }
 
 } /* framework */

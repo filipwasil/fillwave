@@ -56,10 +56,10 @@ jboolean created = false;
  * Our saved state data.
  */
 struct saved_state {
-    float angle;
-    float rotationDirection;
-    int32_t x;
-    int32_t y;
+  float angle;
+  float rotationDirection;
+  int32_t x;
+  int32_t y;
 };
 
 
@@ -67,18 +67,18 @@ struct saved_state {
  * Shared state for our app.
  */
 struct engine {
-    struct android_app* app;
+  struct android_app *app;
 
-    int animating;
-    EGL::EGLContextInfo eglInfo;
-    struct saved_state state;
+  int animating;
+  EGL::EGLContextInfo eglInfo;
+  struct saved_state state;
 
-    Engine* fillwave;
+  Engine *fillwave;
 //    pText fpsCounter;
-    /* Accelerometer */
-    ASensorManager* sensorManager;
-    const ASensor* accelerometerSensor;
-    ASensorEventQueue* sensorEventQueue;
+  /* Accelerometer */
+  ASensorManager *sensorManager;
+  const ASensor *accelerometerSensor;
+  ASensorEventQueue *sensorEventQueue;
 };
 
 // -------------------------------------------
@@ -86,142 +86,146 @@ struct engine {
 const EGLint attribs[] = {
     EGL_RENDERABLE_TYPE,
     EGL_OPENGL_ES2_BIT,
-    EGL_BLUE_SIZE, 8,
-    EGL_GREEN_SIZE, 8,
-    EGL_RED_SIZE, 8,
-    EGL_DEPTH_SIZE, 16, // DEPTH BUFFER !!
+    EGL_BLUE_SIZE,
+    8,
+    EGL_GREEN_SIZE,
+    8,
+    EGL_RED_SIZE,
+    8,
+    EGL_DEPTH_SIZE,
+    16, // DEPTH BUFFER !!
     EGL_NONE
 };
 
-const EGLint context_attrib_list [] = {EGL_CONTEXT_CLIENT_VERSION, 3, EGL_NONE};
+const EGLint context_attrib_list[] = {
+    EGL_CONTEXT_CLIENT_VERSION,
+    3,
+    EGL_NONE
+};
 
-std::string resolveApkWorkspace(Engine* engine, struct android_app* app) {
+std::string resolveApkWorkspace(Engine *engine, struct android_app *app) {
 
-   ANativeActivity* activity = app->activity;
-   JNIEnv* env = 0;
+  ANativeActivity *activity = app->activity;
+  JNIEnv *env = 0;
 
-   activity->vm->AttachCurrentThread(&env, NULL);
+  activity->vm->AttachCurrentThread (&env, NULL);
 
-   jclass clazz = env->GetObjectClass(activity->clazz);
-   jmethodID methodID = env->GetMethodID(clazz, "getPackageCodePath",
-         "()Ljava/lang/String;");
-   jobject result = env->CallObjectMethod(activity->clazz, methodID);
+  jclass clazz = env->GetObjectClass (activity->clazz);
+  jmethodID methodID = env->GetMethodID (clazz, "getPackageCodePath", "()Ljava/lang/String;");
+  jobject result = env->CallObjectMethod (activity->clazz, methodID);
 
-   jboolean isCopy;
-   std::string assets_path = env->GetStringUTFChars((jstring) result, &isCopy);
+  jboolean isCopy;
+  std::string assets_path = env->GetStringUTFChars ((jstring) result, &isCopy);
 
-   activity->vm->DetachCurrentThread();
-   return assets_path;
+  activity->vm->DetachCurrentThread ();
+  return assets_path;
 }
 
 /**
  * Just the current frame in the display.
  */
-static void engine_draw_frame(struct engine* engine) {
-    if (engine->eglInfo.display == NULL) {
-        // No display.
-        fLogE("No Display");
-        return;
-    }
+static void engine_draw_frame(struct engine *engine) {
+  if (engine->eglInfo.display == NULL) {
+    // No display.
+    fLogE("No Display");
+    return;
+  }
 
-   static uint64_t mLastFrameNs = 0;
+  static uint64_t mLastFrameNs = 0;
 
-   Engine* ptr = reinterpret_cast<Engine*>(engine);
+  Engine *ptr = reinterpret_cast<Engine *>(engine);
 
-   timespec now;
-   clock_gettime(CLOCK_MONOTONIC, &now);
-   uint64_t nowNs = now.tv_sec*1000000000ull + now.tv_nsec;
+  timespec now;
+  clock_gettime (CLOCK_MONOTONIC, &now);
+  uint64_t nowNs = now.tv_sec * 1000000000ull + now.tv_nsec;
 
-   float dt = 0;
-   if (mLastFrameNs > 0) {
-      dt = float(nowNs - mLastFrameNs) * 0.000000001f;
-   }
+  float dt = 0;
+  if (mLastFrameNs > 0) {
+    dt = float (nowNs - mLastFrameNs) * 0.000000001f;
+  }
 
-   mLastFrameNs = nowNs;
+  mLastFrameNs = nowNs;
 
-   engine->fillwave->draw(dt);
+  engine->fillwave->draw (dt);
 
-   pthread_mutex_lock(&engine->app->mutex);
-   EGL::SwapDisplay(&engine->eglInfo);
-   pthread_mutex_unlock(&engine->app->mutex);
+  pthread_mutex_lock (&engine->app->mutex);
+  EGL::SwapDisplay (&engine->eglInfo);
+  pthread_mutex_unlock (&engine->app->mutex);
 }
 
 /**
  * Process the next input event.
  */
-static int32_t engine_handle_input(struct android_app* app,
-       AInputEvent* event) {
+static int32_t engine_handle_input(struct android_app *app, AInputEvent *event) {
 
-   struct engine* engine = (struct engine*) app->userData;
+  struct engine *engine = (struct engine *) app->userData;
 
-   if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_KEY) {
-      int key_val = AKeyEvent_getKeyCode(event);
-      if (key_val == AKEYCODE_BACK) {
-         // turn off all audio
-         isPlayingAsset = false;
-         selectClip(CLIP_NONE, 0);
-         setPlayingAssetAudioPlayer(isPlayingAsset);
-         engine->animating = 0;
-         fLogE("Animation stop");
-         return 1;
-      } else if ( key_val == AKEYCODE_VOLUME_UP ||
-                  key_val == AKEYCODE_VOLUME_DOWN ) {
-          if (!created) {
-             ANativeActivity* activity = app->activity;
-             JNIEnv* env = 0;
-
-             activity->vm->AttachCurrentThread(&env, NULL);
-
-             jclass clazz = env->GetObjectClass(activity->clazz);
-
-             created = createAssetAudioPlayer(env, clazz, activity->assetManager, "background.mp3");
-             if (created) {
-                fLogE("CREATED ASSET AUDIO PLAYER");
-                 isPlayingAsset = true;
-                 setPlayingAssetAudioPlayer(true);
-                 selectClip(CLIP_PLAYBACK, 3);
-             } else {
-                 fLogE("NOT CREATED ASSET AUDIO PLAYER");
-             }
-             activity->vm->DetachCurrentThread();
-          } else {
-              isPlayingAsset = true;
-              selectClip(CLIP_PLAYBACK, 3);
-              setPlayingAssetAudioPlayer(isPlayingAsset);
-          }
-          engine->animating = 1;
-          fLogE("Animation start");
-          return 1;
-      }
+  if (AInputEvent_getType (event) == AINPUT_EVENT_TYPE_KEY) {
+    int key_val = AKeyEvent_getKeyCode (event);
+    if (key_val == AKEYCODE_BACK) {
+      // turn off all audio
+      isPlayingAsset = false;
+      selectClip (CLIP_NONE, 0);
+      setPlayingAssetAudioPlayer (isPlayingAsset);
+      engine->animating = 0;
+      fLogE("Animation stop");
       return 1;
-   } else if (AInputEvent_getType(event) == AINPUT_EVENT_TYPE_MOTION) {
-      switch (AInputEvent_getSource(event)) {
-      case AINPUT_SOURCE_TOUCHSCREEN:
-         switch (AMotionEvent_getAction(event) & AMOTION_EVENT_ACTION_MASK) {
-           case AMOTION_EVENT_ACTION_DOWN:
-              if (engine->fillwave != NULL) {
-                 GLfloat x = AMotionEvent_getX(event,0);
-                 GLfloat y = AMotionEvent_getY(event,0);
-                 framework::TouchEventData data;
-                 data.xPos = x;
-                 data.yPos = y;
-                 framework::TouchEvent event(data);
-                 engine->fillwave->insertResizeScreen(engine->eglInfo.width,
-                                                      engine->eglInfo.height);
-                 engine->fillwave->insertInput(event);
-               } else {
-                  fLogE("Null scene pointer");
-              }
-              break;
-           case AMOTION_EVENT_ACTION_UP:
-              break;
-           case AMOTION_EVENT_ACTION_MOVE:
-              break;
-         }
-         break;
+    } else if (key_val == AKEYCODE_VOLUME_UP || key_val == AKEYCODE_VOLUME_DOWN) {
+      if (!created) {
+        ANativeActivity *activity = app->activity;
+        JNIEnv *env = 0;
+
+        activity->vm->AttachCurrentThread (&env, NULL);
+
+        jclass clazz = env->GetObjectClass (activity->clazz);
+
+        created = createAssetAudioPlayer (env, clazz, activity->assetManager, "background.mp3");
+        if (created) {
+          fLogE("CREATED ASSET AUDIO PLAYER");
+          isPlayingAsset = true;
+          setPlayingAssetAudioPlayer (true);
+          selectClip (CLIP_PLAYBACK, 3);
+        } else {
+          fLogE("NOT CREATED ASSET AUDIO PLAYER");
+        }
+        activity->vm->DetachCurrentThread ();
+      } else {
+        isPlayingAsset = true;
+        selectClip (CLIP_PLAYBACK, 3);
+        setPlayingAssetAudioPlayer (isPlayingAsset);
       }
-   }
-   return 0;
+      engine->animating = 1;
+      fLogE("Animation start");
+      return 1;
+    }
+    return 1;
+  } else if (AInputEvent_getType (event) == AINPUT_EVENT_TYPE_MOTION) {
+    switch (AInputEvent_getSource (event)) {
+      case AINPUT_SOURCE_TOUCHSCREEN:
+        switch (AMotionEvent_getAction (event) & AMOTION_EVENT_ACTION_MASK) {
+          case AMOTION_EVENT_ACTION_DOWN:
+            if (engine->fillwave != NULL) {
+              GLfloat x = AMotionEvent_getX (event, 0);
+              GLfloat y = AMotionEvent_getY (event, 0);
+              framework::TouchEventData data;
+              data.xPos = x;
+              data.yPos = y;
+              framework::TouchEvent event (data);
+              engine->fillwave->insertResizeScreen (engine->eglInfo.width, engine->eglInfo.height);
+              engine->fillwave->insertInput (event);
+            } else {
+              fLogE("Null scene pointer");
+            }
+            break;
+          case AMOTION_EVENT_ACTION_UP:
+            break;
+          case AMOTION_EVENT_ACTION_MOVE:
+            break;
+        }
+        break;
+    }
+  }
+  return 0;
 }
 
 //     INPUT EVENT
@@ -326,72 +330,67 @@ static int32_t engine_handle_input(struct android_app* app,
 /**
  * Process the next main command.
  */
-static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
-    struct engine* engine = (struct engine*) app->userData;
-    switch (cmd) {
-        case APP_CMD_SAVE_STATE:
-            // The system has asked us to save our current state.  Do so.
-            engine->app->savedState = malloc(sizeof(struct saved_state));
-            *((struct saved_state*) engine->app->savedState) = engine->state;
-            engine->app->savedStateSize = sizeof(struct saved_state);
-            break;
-        case APP_CMD_INIT_WINDOW:
-            // The window is being shown, get it ready.
-            if (engine->app->window != NULL) {
-                engine->eglInfo.major = 3;
-                engine->eglInfo.major = 0;
-                EGL::Initialize((EGLNativeWindowType) app->window,
-                        &engine->eglInfo, attribs, context_attrib_list);
+static void engine_handle_cmd(struct android_app *app, int32_t cmd) {
+  struct engine *engine = (struct engine *) app->userData;
+  switch (cmd) {
+    case APP_CMD_SAVE_STATE:
+      // The system has asked us to save our current state.  Do so.
+      engine->app->savedState = malloc (sizeof (struct saved_state));
+      *((struct saved_state *) engine->app->savedState) = engine->state;
+      engine->app->savedStateSize = sizeof (struct saved_state);
+      break;
+    case APP_CMD_INIT_WINDOW:
+      // The window is being shown, get it ready.
+      if (engine->app->window != NULL) {
+        engine->eglInfo.major = 3;
+        engine->eglInfo.major = 0;
+        EGL::Initialize ((EGLNativeWindowType) app->window, &engine->eglInfo, attribs, context_attrib_list);
 
 //                if (engine->fillwave) {
 //                   engine->fillwave->reload(); //xxx reloading does not work in 1.9.10
 //                   engine->fillwave->insertResizeScreen(engine->eglInfo.width,
 //                                                        engine->eglInfo.height);
 //                } else {
-                if (engine->fillwave) {
-                   delete engine->fillwave;
-                }
-                   engine->fillwave = new Engine(app->activity);
-                   engine->fillwave->insertResizeScreen(engine->eglInfo.width,
-                                                        engine->eglInfo.height);
-                   perform(engine->fillwave);
+        if (engine->fillwave) {
+          delete engine->fillwave;
+        }
+        engine->fillwave = new Engine (app->activity);
+        engine->fillwave->insertResizeScreen (engine->eglInfo.width, engine->eglInfo.height);
+        perform (engine->fillwave);
 //                }
 
-                engine->animating = 1;
-            }
-            break;
-        case APP_CMD_TERM_WINDOW:
-            // The window is being hidden or closed, clean it up.
-            engine->animating = 0;
+        engine->animating = 1;
+      }
+      break;
+    case APP_CMD_TERM_WINDOW:
+      // The window is being hidden or closed, clean it up.
+      engine->animating = 0;
 //            engine->fpsCounter.reset();
 //            delete engine->fillwave;
 //            engine->fillwave = nullptr;
-            EGL::Terminate(&engine->eglInfo);
-            break;
-        case APP_CMD_GAINED_FOCUS:
-            // When our app gains focus, we start monitoring the accelerometer.
-            if (engine->accelerometerSensor != NULL) {
-                ASensorEventQueue_enableSensor(engine->sensorEventQueue,
-                        engine->accelerometerSensor);
-                // We'd like to get 60 events per second (in us).
-                ASensorEventQueue_setEventRate(engine->sensorEventQueue,
-                        engine->accelerometerSensor, (1000L/60)*1000);
-            }
-            break;
-        case APP_CMD_LOST_FOCUS:
-            // Also stop animating.
-            engine->animating = 0;
-            // When our app loses focus, we stop monitoring the accelerometer.
-            // This is to avoid consuming battery while not being used.
-            if (engine->accelerometerSensor != NULL) {
-                ASensorEventQueue_disableSensor(engine->sensorEventQueue,
-                        engine->accelerometerSensor);
-            }
-            // Also stop animating.
-            engine->animating = 0;
+      EGL::Terminate (&engine->eglInfo);
+      break;
+    case APP_CMD_GAINED_FOCUS:
+      // When our app gains focus, we start monitoring the accelerometer.
+      if (engine->accelerometerSensor != NULL) {
+        ASensorEventQueue_enableSensor (engine->sensorEventQueue, engine->accelerometerSensor);
+        // We'd like to get 60 events per second (in us).
+        ASensorEventQueue_setEventRate (engine->sensorEventQueue, engine->accelerometerSensor, (1000L / 60) * 1000);
+      }
+      break;
+    case APP_CMD_LOST_FOCUS:
+      // Also stop animating.
+      engine->animating = 0;
+      // When our app loses focus, we stop monitoring the accelerometer.
+      // This is to avoid consuming battery while not being used.
+      if (engine->accelerometerSensor != NULL) {
+        ASensorEventQueue_disableSensor (engine->sensorEventQueue, engine->accelerometerSensor);
+      }
+      // Also stop animating.
+      engine->animating = 0;
 //            engine_draw_frame(engine); // xxx why
-            break;
-    }
+      break;
+  }
 }
 
 /**
@@ -399,83 +398,91 @@ static void engine_handle_cmd(struct android_app* app, int32_t cmd) {
  * android_native_app_glue.  It runs in its own thread, with its own
  * event loop for receiving input events and doing other things.
  */
-void android_main(struct android_app* state) {
-    struct engine engine_g;
-    // Make sure glue isn't stripped.
-    app_dummy();
+void android_main(struct android_app *state) {
+  struct engine engine_g;
+  // Make sure glue isn't stripped.
+  app_dummy ();
 
-    memset(&engine_g, 0, sizeof(engine_g));
-    state->userData = &engine_g;
-    state->onAppCmd = engine_handle_cmd;
-    state->onInputEvent = engine_handle_input;
-    engine_g.app = state;
+  memset (&engine_g, 0, sizeof (engine_g));
+  state->userData = &engine_g;
+  state->onAppCmd = engine_handle_cmd;
+  state->onInputEvent = engine_handle_input;
+  engine_g.app = state;
 
-    // Prepare to monitor accelerometer
-    engine_g.sensorManager = ASensorManager_getInstance();
-    engine_g.accelerometerSensor = ASensorManager_getDefaultSensor(engine_g.sensorManager,
-            ASENSOR_TYPE_ACCELEROMETER);
-    engine_g.sensorEventQueue = ASensorManager_createEventQueue(engine_g.sensorManager,
-            state->looper, LOOPER_ID_USER, NULL, NULL);
+  // Prepare to monitor accelerometer
+  engine_g.sensorManager = ASensorManager_getInstance ();
+  engine_g.accelerometerSensor = ASensorManager_getDefaultSensor (engine_g.sensorManager, ASENSOR_TYPE_ACCELEROMETER);
+  engine_g.sensorEventQueue = ASensorManager_createEventQueue (engine_g.sensorManager,
+                                                               state->looper,
+                                                               LOOPER_ID_USER,
+                                                               NULL,
+                                                               NULL);
 
-    if (state->savedState != NULL) {
-        // We are starting with a previous saved state; restore from it.
-        engine_g.state = *(struct saved_state*) state->savedState;
-    }
+  if (state->savedState != NULL) {
+    // We are starting with a previous saved state; restore from it.
+    engine_g.state = *(struct saved_state *) state->savedState;
+  }
 
-    /* Init audio */
-    createEngine();
-    createBufferQueueAudioPlayer();
+  /* Init audio */
+  createEngine ();
+  createBufferQueueAudioPlayer ();
 
-    // loop waiting for stuff to do.
+  // loop waiting for stuff to do.
 
-    while (1) {
-        // Read all pending events.
-        int ident;
-        int events;
-        struct android_poll_source* source;
+  while (1) {
+    // Read all pending events.
+    int ident;
+    int events;
+    struct android_poll_source *source;
 
-        // If not animating, we will block forever waiting for events.
-        // If animating, we loop until all events are read, then continue
-        // to draw the next frame of animation.
-        while ((ident = ALooper_pollAll(engine_g.animating ? 0 : -1, NULL,
-                &events, (void**) &source)) >= 0) {
+    // If not animating, we will block forever waiting for events.
+    // If animating, we loop until all events are read, then continue
+    // to draw the next frame of animation.
+    while ((ident = ALooper_pollAll (engine_g.animating ? 0 : -1, NULL, &events, (void **) &source)) >= 0) {
 
-            // Process this event.
-            if (source != NULL) {
-                source->process(state, source);
+      // Process this event.
+      if (source != NULL) {
+        source->process (state, source);
+      }
+
+      // Check if we are exiting.
+      if (state->destroyRequested != 0) {
+        EGL::Terminate (&engine_g.eglInfo);
+        return;
+      }
+
+      // If a sensor has data, process it now.
+      if (ident == LOOPER_ID_USER) {
+        if (engine_g.accelerometerSensor != NULL) {
+          ASensorEvent event;
+          while (ASensorEventQueue_getEvents (engine_g.sensorEventQueue, &event, 1) > 0) {
+            if (engine_g.fillwave && engine_g.animating) {
+              GLfloat speedRotationUp = 0.05;
+              GLfloat speedRotationRight = 0.15;
+              GLfloat speedRotationOffset = 4.0;
+              GLfloat speedForward = 0.01;
+              engine_g.fillwave->getCurrentScene ()->getCamera ()->moveInDirection (glm::vec3 (0.0,
+                                                                                               0.0,
+                                                                                               -speedForward));
+              engine_g.fillwave->getCurrentScene ()->getCamera ()->rotateBy (glm::vec3 (0.0, 1.0, 0.0),
+                                                                             speedRotationRight *
+                                                                             glm::radians (-event.acceleration.y));
+              engine_g.fillwave->getCurrentScene ()->getCamera ()->rotateBy (glm::vec3 (1.0, 0.0, 0.0),
+                                                                             speedRotationUp * glm::radians (-(
+                                                                                 event.acceleration.z -
+                                                                                 speedRotationOffset
+                                                                             )));
             }
-
-            // Check if we are exiting.
-            if (state->destroyRequested != 0) {
-                EGL::Terminate(&engine_g.eglInfo);
-                return;
-            }
-
-            // If a sensor has data, process it now.
-            if (ident == LOOPER_ID_USER) {
-                if (engine_g.accelerometerSensor != NULL) {
-                    ASensorEvent event;
-                    while (ASensorEventQueue_getEvents(engine_g.sensorEventQueue,
-                            &event, 1) > 0) {
-                       if (engine_g.fillwave && engine_g.animating ) {
-                          GLfloat speedRotationUp = 0.05;
-                          GLfloat speedRotationRight = 0.15;
-                          GLfloat speedRotationOffset = 4.0;
-                          GLfloat speedForward = 0.01;
-                          engine_g.fillwave->getCurrentScene()->getCamera()->moveInDirection(glm::vec3(0.0, 0.0, -speedForward));
-                          engine_g.fillwave->getCurrentScene()->getCamera()->rotateBy(glm::vec3(0.0,1.0,0.0), speedRotationRight*glm::radians(-event.acceleration.y));
-                          engine_g.fillwave->getCurrentScene()->getCamera()->rotateBy(glm::vec3(1.0,0.0,0.0), speedRotationUp*glm::radians(-(event.acceleration.z - speedRotationOffset)));
-                       }
 //                       fLogI("accelerometer: x=%f y=%f z=%f",
 //                                event.acceleration.x, event.acceleration.y,
 //                                event.acceleration.z);
-                    }
-                }
-            }
+          }
         }
-        if (engine_g.animating) {
-            engine_draw_frame(&engine_g);
-        }
+      }
     }
+    if (engine_g.animating) {
+      engine_draw_frame (&engine_g);
+    }
+  }
 }
 

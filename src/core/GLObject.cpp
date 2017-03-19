@@ -40,15 +40,15 @@ FLOGINIT_DEFAULT()
 namespace fillwave {
 namespace core {
 
-GLObject::GLObject(GLsizei howMany) :
-	mHowMany(howMany) {
-	if (mHowMany > static_cast<int>(FILLWAVE_GLOBJECT_MAX_CAPACITY)) {
-		fLogF("Currect globject size exceeded");
-	}
+GLObject::GLObject(GLsizei howMany)
+    : mHowMany (howMany) {
+  if (mHowMany > static_cast<int>(FILLWAVE_GLOBJECT_MAX_CAPACITY)) {
+    fLogF("Currect globject size exceeded");
+  }
 
-	for(GLsizei i = 0; i < mHowMany; i++) {
-		mHandles[i] = 0;
-	}
+  for (GLsizei i = 0; i < mHowMany; i++) {
+    mHandles[i] = 0;
+  }
 }
 
 GLObject::~GLObject() {
@@ -56,7 +56,7 @@ GLObject::~GLObject() {
 }
 
 GLuint GLObject::getHandle(GLuint id) {
-	return id < FILLWAVE_GLOBJECT_MAX_CAPACITY ? mHandles[id] : 0;
+  return id < FILLWAVE_GLOBJECT_MAX_CAPACITY ? mHandles[id] : 0;
 }
 
 } /* core */

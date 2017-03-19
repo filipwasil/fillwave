@@ -49,25 +49,24 @@ namespace framework {
  *
  */
 
-class TimedCallback: public Callback {
- public:
-	TimedCallback(GLfloat timeToFinish, EasingFunction funcion =
-	                 LinearInterpolation);
+class TimedCallback : public Callback {
+public:
+  TimedCallback(GLfloat timeToFinish, EasingFunction funcion = LinearInterpolation);
 
-	virtual ~TimedCallback() = default;
+  virtual ~TimedCallback() = default;
 
-	/*	perform
-	 * \brief Performs ItemCallback action.
-	 */
+  /*	perform
+   * \brief Performs ItemCallback action.
+   */
 
-	void perform(EventType& eventType);
+  void perform(EventType &eventType);
 
-	virtual void performTime(TimeEventData& e);
+  virtual void performTime(TimeEventData &e);
 
-	GLfloat ease(GLfloat progress);
+  GLfloat ease(GLfloat progress);
 
- private:
-	EasingFunction mEasing;
+private:
+  EasingFunction mEasing;
 };
 
 } /* framework */

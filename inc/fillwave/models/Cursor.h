@@ -44,20 +44,23 @@ namespace framework {
  * \brief Impostor to handle custom cursor instead of the standard one.
  */
 
-class Cursor: public Impostor {
- public:
-	Cursor(Engine* engine, core::Texture* texture);
-	virtual ~Cursor() = default;
+class Cursor : public Impostor {
+public:
+  Cursor(Engine *engine, core::Texture *texture);
 
-	void move(glm::vec2 position);
-	void draw();
+  virtual ~Cursor() = default;
 
- private:
-	GLfloat mScreenFactor;
-	GLint mULCPosition, mULCScreenFactor, mULCTextureUnit, mULCSize;
+  void move(glm::vec2 position);
 
-	void initUniformsCache();
-	bool getRenderItem(RenderItem& item) override;
+  void draw();
+
+private:
+  GLfloat mScreenFactor;
+  GLint mULCPosition, mULCScreenFactor, mULCTextureUnit, mULCSize;
+
+  void initUniformsCache();
+
+  bool getRenderItem(RenderItem &item) override;
 };
 
 } /* framework */

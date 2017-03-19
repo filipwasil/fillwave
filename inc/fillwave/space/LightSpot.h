@@ -45,28 +45,27 @@ namespace framework {
  * \brief Light implementing directional torch.
  */
 
-class LightSpot: public Light {
- protected:
-	core::Texture2DRenderable* mShadowTexture;
-	puCameraPerspective mShadowCamera;
+class LightSpot : public Light {
+protected:
+  core::Texture2DRenderable *mShadowTexture;
+  puCameraPerspective mShadowCamera;
 
- public:
-	LightSpot(
-	   core::Texture2DRenderable* shadowTexture,
-	   glm::vec3 position,
-	   glm::quat rotation,
-	   glm::vec4 intensity,
-	   Moveable* followed = nullptr);
+public:
+  LightSpot(core::Texture2DRenderable *shadowTexture,
+      glm::vec3 position,
+      glm::quat rotation,
+      glm::vec4 intensity,
+      Moveable *followed = nullptr);
 
-	virtual ~LightSpot() = default;
+  virtual ~LightSpot() = default;
 
-	core::Texture2DRenderable* getShadowTexture();
+  core::Texture2DRenderable *getShadowTexture();
 
-	CameraPerspective* getShadowCamera();
+  CameraPerspective *getShadowCamera();
 
-	void updateShadowCamera();
+  void updateShadowCamera();
 
-	void log();
+  void log();
 
 };
 

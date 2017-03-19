@@ -41,39 +41,39 @@ namespace framework {
 */
 
 class Observable {
- public:
-	Observable() = default;
-	virtual ~Observable() {
-		for (auto& it : mObservers) {
-			it->onDeath(this);
-		}
-	}
+public:
+  Observable() = default;
 
-	void addObserver(IObserver* observer) {
-		if (nullptr == observer) {
-			return;
-		}
-		for (auto& it : mObservers) {
-			if (it == observer) {
-				return;
-			}
-		}
-		mObservers.push_back(observer);
-	}
+  virtual ~Observable() {
+    for (auto &it : mObservers) {
+      it->onDeath (this);
+    }
+  }
 
-	void dropObserver(IObserver* observer) {
-		mObservers.erase(std::remove(mObservers.begin(), mObservers.end(), observer),
-		                 mObservers.end());
-	}
+  void addObserver(IObserver *observer) {
+    if (nullptr == observer) {
+      return;
+    }
+    for (auto &it : mObservers) {
+      if (it == observer) {
+        return;
+      }
+    }
+    mObservers.push_back (observer);
+  }
 
-	void notifyObservers() {
-		for (auto& it : mObservers) {
-			it->onChanged(this);
-		}
-	}
+  void dropObserver(IObserver *observer) {
+    mObservers.erase (std::remove (mObservers.begin (), mObservers.end (), observer), mObservers.end ());
+  }
 
- protected:
-	std::vector<IObserver*> mObservers;
+  void notifyObservers() {
+    for (auto &it : mObservers) {
+      it->onChanged (this);
+    }
+  }
+
+protected:
+  std::vector<IObserver *> mObservers;
 };
 
 }

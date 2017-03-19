@@ -45,35 +45,38 @@ FLOGINIT("Bone", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-Bone::Bone(aiBone* assimpBone) {
-	mName = assimpBone->mName.C_Str();
-	mOffsetMatrix = assimpToGlmMat4(assimpBone->mOffsetMatrix);
-	mGlobalOffsetMatrix = glm::mat4(1.0);
+Bone::Bone(aiBone *assimpBone) {
+  mName = assimpBone->mName.C_Str ();
+  mOffsetMatrix = assimpToGlmMat4 (assimpBone->mOffsetMatrix);
+  mGlobalOffsetMatrix = glm::mat4 (1.0);
 }
 
 void Bone::setName(std::string name) {
-	mName = name;
+  mName = name;
 }
+
 std::string Bone::getName() const {
-	return mName;
+  return mName;
 }
 
 glm::mat4 Bone::getOffsetMatrix() const {
-	return mOffsetMatrix;
+  return mOffsetMatrix;
 }
+
 glm::mat4 Bone::getGlobalOffsetMatrix() const {
-	return mGlobalOffsetMatrix;
+  return mGlobalOffsetMatrix;
 }
 
 void Bone::setOffsetMatrix(glm::mat4 m) {
-	mOffsetMatrix = m;
+  mOffsetMatrix = m;
 }
+
 void Bone::setGlobalOffsetMatrix(glm::mat4 m) {
-	mGlobalOffsetMatrix = m;
+  mGlobalOffsetMatrix = m;
 }
 
 void Bone::log() {
-	fLogI("Name: %s", (mName.c_str()));
+  fLogI("Name: %s", (mName.c_str ()));
 }
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

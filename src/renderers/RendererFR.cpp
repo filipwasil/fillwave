@@ -39,30 +39,30 @@
 namespace fillwave {
 namespace framework {
 
-void RendererFR::update(IRenderable* renderable) {
-	mRenderPasses.push_back(renderable);
+void RendererFR::update(IRenderable *renderable) {
+  mRenderPasses.push_back (renderable);
 }
 
-void RendererFR::draw(ICamera& camera) {
-	if (mSkybox) {
-		mSkybox->draw(camera);
-	}
-	glClear(GL_DEPTH_BUFFER_BIT);
-	for (auto& node : mRenderPasses) {
-		node->draw(camera);
-	}
+void RendererFR::draw(ICamera &camera) {
+  if (mSkybox) {
+    mSkybox->draw (camera);
+  }
+  glClear (GL_DEPTH_BUFFER_BIT);
+  for (auto &node : mRenderPasses) {
+    node->draw (camera);
+  }
 }
 
 void RendererFR::reset(GLuint /*width*/, GLuint /*height*/) {
-	mFlagReload = true;
+  mFlagReload = true;
 }
 
 void RendererFR::clear() {
-	mFlagReload = true;
+  mFlagReload = true;
 
-	size_t predictedSize = mRenderPasses.size() + 1;
-	mRenderPasses.clear();
-	mRenderPasses.reserve(predictedSize);
+  size_t predictedSize = mRenderPasses.size () + 1;
+  mRenderPasses.clear ();
+  mRenderPasses.reserve (predictedSize);
 }
 
 } /* namespace framework */

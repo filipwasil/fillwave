@@ -16,7 +16,10 @@ FLOGINIT_DEFAULT()
 using namespace fillwave;
 using namespace fillwave::framework;
 
-TEST (IRenderer, adding) {
-	MockIRenderer renderer();
-	MockIRenderable renderable();
+TEST (IRenderer, adding
+) {
+MockIRenderer renderer();
+
+MockIRenderable renderable();
+
 }

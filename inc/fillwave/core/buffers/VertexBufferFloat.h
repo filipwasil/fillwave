@@ -44,20 +44,20 @@ namespace core {
  */
 
 struct VertexFloat {
-	GLfloat mData;
+  GLfloat mData;
 };
 
 /*! \class VertexBufferFloat
  * \brief Vertex buffer specialized with GLfloat data structure.
  */
 
-class VertexBufferFloat: public TVertexBuffer<VertexFloat> {
- public:
-	VertexBufferFloat(
-	   const std::vector<VertexFloat>& values,
-	   GLuint dataStoreModification = GL_STATIC_DRAW);
-	virtual ~VertexBufferFloat() = default;
-	void log() const;
+class VertexBufferFloat : public TVertexBuffer<VertexFloat> {
+public:
+  VertexBufferFloat(const std::vector<VertexFloat> &values, GLuint dataStoreModification = GL_STATIC_DRAW);
+
+  virtual ~VertexBufferFloat() = default;
+
+  void log() const;
 };
 
 } /* core */

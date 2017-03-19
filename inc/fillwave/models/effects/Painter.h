@@ -43,18 +43,24 @@ namespace framework {
  * \brief Effect to draw a mesh with single color.
  */
 
-class Painter: public IEffect {
- public:
-	Painter(glm::vec4 color);
-	virtual ~Painter() = default;
-	void setColor(glm::vec4 color);
-	void preDrawAction(core::Program* program) override;
-	void postDrawAction(core::Program* program) override;
-	void stopAction(core::Program* program) override;
-	void startAction(core::Program* program) override;
+class Painter : public IEffect {
+public:
+  Painter(glm::vec4 color);
 
- private:
-	glm::vec4 mColor;
+  virtual ~Painter() = default;
+
+  void setColor(glm::vec4 color);
+
+  void preDrawAction(core::Program *program) override;
+
+  void postDrawAction(core::Program *program) override;
+
+  void stopAction(core::Program *program) override;
+
+  void startAction(core::Program *program) override;
+
+private:
+  glm::vec4 mColor;
 };
 
 } /* framework */

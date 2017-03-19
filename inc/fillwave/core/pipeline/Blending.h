@@ -41,8 +41,8 @@ namespace framework {
  */
 
 struct Blending {
-	GLenum mSrc;
-	GLenum mDst;
+  GLenum mSrc;
+  GLenum mDst;
 };
 
 } /* framework */

@@ -52,65 +52,81 @@ namespace framework {
  * \brief Entity to be a root of Entity tree.
  */
 
-class Scene: public TreePtr<Entity> {
- public:
-	Scene(IRenderer* renderer = new RendererFR());
+class Scene : public TreePtr<Entity> {
+public:
+  Scene(IRenderer *renderer = new RendererFR ());
 
-	virtual ~Scene() = default;
+  virtual ~Scene() = default;
 
-	void updateDependencies();
-	void updateRenderer();
-	void setRenderer(IRenderer* renderer);
-	void resetRenderer(GLuint screenWidth, GLuint screenHeight);
+  void updateDependencies();
 
-	/* Cursor */
-	TGetter<Cursor>&& getCursor();
-	void setCursor(puCursor&& cursor);
-	void drawCursor();
+  void updateRenderer();
 
-	/* Camera */
-	TGetter<ICamera>&& getCamera();
-	void setCamera(puICamera&& camera);
+  void setRenderer(IRenderer *renderer);
 
-	/* Scene */
-	void setSkybox(puSkybox&& skybox);
-	void setHUD(pHUD hud);
-	void setAmbient(glm::vec3 cursor);
+  void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
-	/* Pickable */
-	void registerPickable(Entity* entity);
-	void pick(glm::ivec4 color);
+  /* Cursor */
+  TGetter<Cursor> &&getCursor();
 
-	/* Events */
-	void onEvent(EventType& event);
+  void setCursor(puCursor &&cursor);
 
-	void draw(ICamera& c);
-	void drawHUD();
-	void drawDepth(ICamera& camera);
-	void drawDepthColor(ICamera& camera, glm::vec3& position);
+  void drawCursor();
 
-	/* Draw */
-	void draw();
-	void drawDepthInt();
-	void drawPicking();
-	void drawOcclusion();
+  /* Camera */
+  TGetter<ICamera> &&getCamera();
 
-	/* Interface */
-	virtual void onShow();
-	virtual void onHide();
+  void setCamera(puICamera &&camera);
 
- protected:
-	puCursor mCursor;
-	puSkybox mSkybox;
-	std::unordered_map<GLint, Entity*> mPickingTable;
-	Entity* mLastPicked;
-	glm::vec3 mAmbientGlobal;
-	puIRenderer mRenderer;
-	pHUD mHUD;
-	puICamera mCamera;
+  /* Scene */
+  void setSkybox(puSkybox &&skybox);
 
- private:
-	const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;
+  void setHUD(pHUD hud);
+
+  void setAmbient(glm::vec3 cursor);
+
+  /* Pickable */
+  void registerPickable(Entity *entity);
+
+  void pick(glm::ivec4 color);
+
+  /* Events */
+  void onEvent(EventType &event);
+
+  void draw(ICamera &c);
+
+  void drawHUD();
+
+  void drawDepth(ICamera &camera);
+
+  void drawDepthColor(ICamera &camera, glm::vec3 &position);
+
+  /* Draw */
+  void draw();
+
+  void drawDepthInt();
+
+  void drawPicking();
+
+  void drawOcclusion();
+
+  /* Interface */
+  virtual void onShow();
+
+  virtual void onHide();
+
+protected:
+  puCursor mCursor;
+  puSkybox mSkybox;
+  std::unordered_map<GLint, Entity *> mPickingTable;
+  Entity *mLastPicked;
+  glm::vec3 mAmbientGlobal;
+  puIRenderer mRenderer;
+  pHUD mHUD;
+  puICamera mCamera;
+
+private:
+  const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;
 };
 
 } /* framework */

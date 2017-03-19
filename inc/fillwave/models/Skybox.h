@@ -48,35 +48,39 @@ namespace framework {
  * \brief Entity which moves with the camera clipping the view space with an image.
  */
 
-class Skybox: public Entity, public IReloadable {
- public:
-	Skybox(Engine* engine, core::Texture3D* texture);
+class Skybox : public Entity, public IReloadable {
+public:
+  Skybox(Engine *engine, core::Texture3D *texture);
 
-	virtual ~Skybox() = default;
+  virtual ~Skybox() = default;
 
-	/* IDrawable */
-	void draw(ICamera& camera);
-	void drawDR(ICamera& camera);
+  /* IDrawable */
+  void draw(ICamera &camera);
 
-	/* IRenderable */
-	bool getRenderItem(RenderItem& item);
+  void drawDR(ICamera &camera);
 
- protected:
-	core::Program* mProgram;
-	core::Program* mProgramDR;
+  /* IRenderable */
+  bool getRenderItem(RenderItem &item);
 
- private:
-	core::Texture3D* mTexture;
-	core::VertexBufferPosition* mVBO;
-	core::IndexBuffer* mIBO;
-	GLint mULCCameraPosition, mULCModelMatrixPosition, mULCViewProjectionMatrix,
-	      mULCTextureUnit;
+protected:
+  core::Program *mProgram;
+  core::Program *mProgramDR;
 
-	void initBuffers();
-	void initPipeline();
-	void initUniformsCache();
-	void initVAO();
-	void initVBO();
+private:
+  core::Texture3D *mTexture;
+  core::VertexBufferPosition *mVBO;
+  core::IndexBuffer *mIBO;
+  GLint mULCCameraPosition, mULCModelMatrixPosition, mULCViewProjectionMatrix, mULCTextureUnit;
+
+  void initBuffers();
+
+  void initPipeline();
+
+  void initUniformsCache();
+
+  void initVAO();
+
+  void initVBO();
 };
 
 } /* framework */

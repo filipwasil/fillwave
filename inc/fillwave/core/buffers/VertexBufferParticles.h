@@ -44,23 +44,24 @@ namespace core {
  */
 
 struct VertexParticle {
-	float velocity[3];
-	float startPosition[3];
-	float startTime;
+  float velocity[3];
+  float startPosition[3];
+  float startTime;
 };
 
 /*! \class VertexBufferParticles
  * \brief Vertex buffer specialized with VertexParticle data structure.
  */
 
-class VertexBufferParticles: public TVertexBuffer<VertexParticle> {
- public:
-	VertexBufferParticles(
-	   const std::vector<GLfloat>& velocities,
-	   const std::vector<GLfloat>& positions,
-	   const std::vector<GLfloat>& times);
-	virtual ~VertexBufferParticles() = default;
-	void log() const;
+class VertexBufferParticles : public TVertexBuffer<VertexParticle> {
+public:
+  VertexBufferParticles(const std::vector<GLfloat> &velocities,
+      const std::vector<GLfloat> &positions,
+      const std::vector<GLfloat> &times);
+
+  virtual ~VertexBufferParticles() = default;
+
+  void log() const;
 };
 
 } /* core */

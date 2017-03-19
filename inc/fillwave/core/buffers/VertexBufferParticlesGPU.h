@@ -44,23 +44,25 @@ namespace core {
  */
 
 struct VertexParticleGPU {
-	float position[3];
-	float velocity[3];
-	float size;
-	float currentTime;
-	float lifetime;
-	float cameraDistance;
+  float position[3];
+  float velocity[3];
+  float size;
+  float currentTime;
+  float lifetime;
+  float cameraDistance;
 };
 
 /*! \class VertexBufferParticlesGPU
  * \brief Vertex buffer specialized with VertexParticleGPU data structure.
  */
 
-class VertexBufferParticlesGPU: public TVertexBuffer<VertexParticleGPU> {
- public:
-	VertexBufferParticlesGPU(const std::vector<VertexParticleGPU>& particles);
-	virtual ~VertexBufferParticlesGPU() = default;
-	void log() const;
+class VertexBufferParticlesGPU : public TVertexBuffer<VertexParticleGPU> {
+public:
+  VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles);
+
+  virtual ~VertexBufferParticlesGPU() = default;
+
+  void log() const;
 };
 
 } /* core */

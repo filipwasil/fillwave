@@ -43,13 +43,17 @@ namespace framework {
  * \brief Not used. Camera for which both projection and view matrices are always identities.
  */
 
-class CameraNull: public ICamera {
- public:
-	CameraNull();
-	virtual ~CameraNull() = default;
-	void updateProjection();
-	GLfloat getProjectionNearPlane();
-	GLfloat getProjectionFarPlane();
+class CameraNull : public ICamera {
+public:
+  CameraNull();
+
+  virtual ~CameraNull() = default;
+
+  void updateProjection();
+
+  GLfloat getProjectionNearPlane();
+
+  GLfloat getProjectionFarPlane();
 };
 
 } /* framework */

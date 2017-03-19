@@ -44,14 +44,17 @@ namespace core {
  * \brief VertexArrayObject - VAO
  */
 
-class VertexArray: public GLObject {
- public:
-	VertexArray(GLuint howMany = 1);
-	virtual ~VertexArray();
+class VertexArray : public GLObject {
+public:
+  VertexArray(GLuint howMany = 1);
 
-	void bind(GLuint id = 0);
-	void reload();
-	static void unbindVAO();
+  virtual ~VertexArray();
+
+  void bind(GLuint id = 0);
+
+  void reload();
+
+  static void unbindVAO();
 };
 
 void bindVAO(GLuint handle);

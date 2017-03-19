@@ -37,19 +37,18 @@
 namespace fillwave {
 namespace core {
 
-PostProcessingPass::PostProcessingPass(
-   core::Program* program,
-   core::Texture2DRenderableDynamic* frame,
-   GLfloat lifetime) :
-	Finishable(lifetime), mFrame(frame), mProgram(program) {
+PostProcessingPass::PostProcessingPass(core::Program *program,
+    core::Texture2DRenderableDynamic *frame,
+    GLfloat lifetime)
+    : Finishable (lifetime), mFrame (frame), mProgram (program) {
 }
 
-core::Texture2DRenderableDynamic* PostProcessingPass::getFrame() const {
-	return mFrame;
+core::Texture2DRenderableDynamic *PostProcessingPass::getFrame() const {
+  return mFrame;
 }
 
-core::Program* PostProcessingPass::getProgram() const {
-	return mProgram;
+core::Program *PostProcessingPass::getProgram() const {
+  return mProgram;
 }
 
 } /* core */

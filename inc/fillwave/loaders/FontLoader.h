@@ -44,10 +44,12 @@ namespace framework {
  */
 
 class FontLoader {
- public:
-	FontLoader() = default;
-	virtual ~FontLoader() = default;
-	void load(std::string name);
+public:
+  FontLoader() = default;
+
+  virtual ~FontLoader() = default;
+
+  void load(std::string name);
 };
 
 } /* framework */

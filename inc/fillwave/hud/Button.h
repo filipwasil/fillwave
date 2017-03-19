@@ -45,20 +45,20 @@ namespace framework {
  * \brief Pickable hud node.
  */
 
-class Button: public IHUDNode, public IPickable {
- public:
-	Button(
-	   Engine* engine,
-	   core::Texture2D* texture,
-	   glm::vec2 position,
-	   glm::vec2 scale);
-	virtual ~Button() = default;
+class Button : public IHUDNode, public IPickable {
+public:
+  Button(Engine *engine, core::Texture2D *texture, glm::vec2 position, glm::vec2 scale);
 
-	/* IPickable */
-	virtual void pick(glm::vec3 color) override;
-	virtual void unpick() override;
-	virtual void onPicked() override;
-	virtual void onUnpicked() override;
+  virtual ~Button() = default;
+
+  /* IPickable */
+  virtual void pick(glm::vec3 color) override;
+
+  virtual void unpick() override;
+
+  virtual void onPicked() override;
+
+  virtual void onUnpicked() override;
 };
 
 } /* namespace framework */

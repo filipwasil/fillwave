@@ -43,29 +43,29 @@ namespace core {
  * \brief UniformBufferObject - UBO.
  */
 
-class UniformBuffer: public IBuffer {
- public:
-	UniformBuffer(
-	   std::string name,
-	   GLuint index,
-	   GLuint uniformBlockSize,
-	   GLuint bindingPoint,
-	   GLuint dataStoreModification = GL_STATIC_DRAW);
+class UniformBuffer : public IBuffer {
+public:
+  UniformBuffer(std::string name,
+      GLuint index,
+      GLuint uniformBlockSize,
+      GLuint bindingPoint,
+      GLuint dataStoreModification = GL_STATIC_DRAW);
 
-	virtual ~UniformBuffer();
+  virtual ~UniformBuffer();
 
-	std::string getName();
+  std::string getName();
 
-	void bindRange(GLuint id = 0);
+  void bindRange(GLuint id = 0);
 
-	void push(GLfloat* data);
+  void push(GLfloat *data);
 
-	void emptyCPU() override;
-	void emptyGPU() override;
+  void emptyCPU() override;
 
- private:
-	std::string mName;
-	GLuint mBindingPoint;
+  void emptyGPU() override;
+
+private:
+  std::string mName;
+  GLuint mBindingPoint;
 };
 
 } /* core */

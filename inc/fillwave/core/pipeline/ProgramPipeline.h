@@ -47,16 +47,19 @@ namespace core {
  *
  */
 
-class ProgramPipeline: public GLObject {
- public:
-	ProgramPipeline(GLbitfield stage, GLsizei howMany = 1);
-	virtual ~ProgramPipeline();
-	void bind(GLuint id = 0) const;
-	void use(GLuint programHandle, GLuint id = 0) const;
+class ProgramPipeline : public GLObject {
+public:
+  ProgramPipeline(GLbitfield stage, GLsizei howMany = 1);
 
- private:
-	GLbitfield mStage;
-	GLuint mTarget;
+  virtual ~ProgramPipeline();
+
+  void bind(GLuint id = 0) const;
+
+  void use(GLuint programHandle, GLuint id = 0) const;
+
+private:
+  GLbitfield mStage;
+  GLuint mTarget;
 };
 
 } /* core */

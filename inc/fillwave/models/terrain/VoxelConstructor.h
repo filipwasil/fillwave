@@ -44,11 +44,13 @@ namespace framework {
  * \brief Construct Terrain voxel positions.
  */
 
-class VoxelConstructor: public TerrainConstructor {
- public:
-	VoxelConstructor() = default;
-	virtual ~VoxelConstructor() = default;
-	virtual GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y) = 0;
+class VoxelConstructor : public TerrainConstructor {
+public:
+  VoxelConstructor() = default;
+
+  virtual ~VoxelConstructor() = default;
+
+  virtual GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y) = 0;
 };
 
 } /* framework */

@@ -47,42 +47,45 @@ namespace framework {
  * \brief Entity to provide terrain generation functionality.
  */
 
-class Terrain: public Entity {
- public:
-	Terrain(Engine* engine, core::Program* program, GLint radius, GLfloat gap);
-	virtual ~Terrain() = default;
+class Terrain : public Entity {
+public:
+  Terrain(Engine *engine, core::Program *program, GLint radius, GLfloat gap);
 
-	void addChunk(pVoxelChunk chunk);
-	void distanceCheck(ICamera& camera);
+  virtual ~Terrain() = default;
 
-	/* IDrawable */
-	void draw(ICamera& camera) override;
-	void drawPBRP(ICamera& camera) override;
+  void addChunk(pVoxelChunk chunk);
 
-	/* IRenderable */
-	void updateRenderer(IRenderer& renderer) override;
-	bool getRenderItem(RenderItem& item) override;
+  void distanceCheck(ICamera &camera);
 
- protected:
-	void updateRendererData();
+  /* IDrawable */
+  void draw(ICamera &camera) override;
 
- private:
-	core::Program* mProgram;
-	LightSystem* mLights;
-	GLint mRadius;
-	GLfloat mGap;
-	std::vector<pVoxelChunk> mVoxelChunks;
+  void drawPBRP(ICamera &camera) override;
+
+  /* IRenderable */
+  void updateRenderer(IRenderer &renderer) override;
+
+  bool getRenderItem(RenderItem &item) override;
+
+protected:
+  void updateRendererData();
+
+private:
+  core::Program *mProgram;
+  LightSystem *mLights;
+  GLint mRadius;
+  GLfloat mGap;
+  std::vector<pVoxelChunk> mVoxelChunks;
 };
 
 } /* framework */
 typedef std::unique_ptr<framework::Terrain> puTerrain;
 
-puTerrain buildTerrainVoxel(
-   Engine* engine,
-   core::Program* program,
-   const std::string& texturePath,
-   framework::VoxelConstructor* constructor,
-   GLint radius = 0);
+puTerrain buildTerrainVoxel(Engine *engine,
+    core::Program *program,
+    const std::string &texturePath,
+    framework::VoxelConstructor *constructor,
+    GLint radius = 0);
 
 } /* fillwave*/
 

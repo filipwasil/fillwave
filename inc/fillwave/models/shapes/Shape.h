@@ -48,34 +48,34 @@ namespace framework {
 
 template <class T>
 class Shape {
- public:
-	Shape() {
+public:
+  Shape() {
 
-	}
+  }
 
-	virtual ~Shape() {
+  virtual ~Shape() {
 
-	}
+  }
 
-	std::vector<T> getVertices() {
-		return mVertices;
-	}
+  std::vector<T> getVertices() {
+    return mVertices;
+  }
 
-	GLuint getVerticesSize() {
-		return mVertices.size();
-	}
+  GLuint getVerticesSize() {
+    return mVertices.size ();
+  }
 
-	std::vector<GLuint> getIndices() {
-		return mIndices;
-	}
+  std::vector<GLuint> getIndices() {
+    return mIndices;
+  }
 
-	GLuint getIndicesSize() {
-		return mIndices.size();
-	}
+  GLuint getIndicesSize() {
+    return mIndices.size ();
+  }
 
- protected:
-	std::vector<T> mVertices;
-	std::vector<GLuint> mIndices;
+protected:
+  std::vector<T> mVertices;
+  std::vector<GLuint> mIndices;
 };
 
 } /* framework */

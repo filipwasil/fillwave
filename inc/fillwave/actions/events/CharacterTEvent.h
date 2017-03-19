@@ -17,21 +17,22 @@ namespace framework {
  */
 
 struct CharacterEventData {
-	unsigned int character;
-	const eEventType type = eEventType::eCharacter;
+  unsigned int character;
+  const eEventType type = eEventType::eCharacter;
 };
 
 /*! \struct CharacterEvent
  * \brief Event introduced when the key is pressed.
  */
 
-class CharacterEvent: public TEvent<CharacterEventData> {
- public:
-	CharacterEvent(CharacterEventData& data) :
-		TEvent(data) {
+class CharacterEvent : public TEvent<CharacterEventData> {
+public:
+  CharacterEvent(CharacterEventData &data)
+      : TEvent (data) {
 
-	}
-	virtual ~CharacterEvent() = default;
+  }
+
+  virtual ~CharacterEvent() = default;
 };
 
 } /* framework */

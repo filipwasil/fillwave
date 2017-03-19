@@ -45,14 +45,17 @@ namespace framework {
  *
  */
 
-class ColorPickingCallback: public Callback {
- public:
-	ColorPickingCallback(Engine* engine);
-	virtual ~ColorPickingCallback() = default;
-	void perform (EventType& eventType);
- private:
-	Entity* mCurrentlyPicked;
-	Engine* mEngine;
+class ColorPickingCallback : public Callback {
+public:
+  ColorPickingCallback(Engine *engine);
+
+  virtual ~ColorPickingCallback() = default;
+
+  void perform(EventType &eventType);
+
+private:
+  Entity *mCurrentlyPicked;
+  Engine *mEngine;
 };
 
 } /* framework */

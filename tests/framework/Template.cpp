@@ -14,6 +14,7 @@
 //using namespace fillwave;
 //using namespace fillwave::framework;
 
-TEST (Template, test) {
-	EXPECT_EQ (1, 1);
+TEST (Template, test
+) {
+EXPECT_EQ (1, 1);
 }

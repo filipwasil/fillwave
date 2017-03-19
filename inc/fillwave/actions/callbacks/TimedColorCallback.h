@@ -44,27 +44,23 @@ namespace framework {
  * \brief TimedCallback to change Entity color in time.
  */
 
-class TimedColorCallback: public TimedCallback {
- public:
-	TimedColorCallback(
-	   Model* model,
-	   glm::vec4 endColor,
-	   GLfloat lifeTime,
-	   EasingFunction easing);
+class TimedColorCallback : public TimedCallback {
+public:
+  TimedColorCallback(Model *model, glm::vec4 endColor, GLfloat lifeTime, EasingFunction easing);
 
-	virtual ~TimedColorCallback() = default;
+  virtual ~TimedColorCallback() = default;
 
-	/*	perform
-	 * \brief Performs ItemCallback action
-	 */
+  /*	perform
+   * \brief Performs ItemCallback action
+   */
 
-	void perform(EventType& eventType);
+  void perform(EventType &eventType);
 
- private:
-	glm::vec4 mStartColor;
-	glm::vec4 mEndColor;
-	Model* mModel;
-	pPainter mPainter;
+private:
+  glm::vec4 mStartColor;
+  glm::vec4 mEndColor;
+  Model *mModel;
+  pPainter mPainter;
 };
 
 } /* framework */

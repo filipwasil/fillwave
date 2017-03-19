@@ -52,41 +52,50 @@ namespace framework {
  */
 
 struct LighUniformData {
-	GLfloat position[4];
-	GLfloat intensity[4];
-	GLfloat mvp[16];
+  GLfloat position[4];
+  GLfloat intensity[4];
+  GLfloat mvp[16];
 };
 
 /*! \struct LightAttenuationData
  * \brief Light attenuation data.
  */
 struct LightAttenuationData {
-	GLfloat mLinear;
-	GLfloat mExp;
+  GLfloat mLinear;
+  GLfloat mExp;
 };
 
 /*! \class Light
  * \brief Base for all lights.
  */
 
-class Light: public Moveable, public IObserver {
- public:
-	Light(glm::vec3 position, glm::vec4 intensity, Moveable* followed);
-	virtual ~Light();
-	void updateFromFollowed();
-	void setAttenuation(LightAttenuationData& attenuation);
-	LightAttenuationData getAttenuation();
-	void setIntensity(glm::vec4 intensity);
-	glm::vec4 getIntensity();
-	void log();
-	void onDeath(Observable* observable) override;
-	void onChanged(Observable* observable) override;
+class Light : public Moveable, public IObserver {
+public:
+  Light(glm::vec3 position, glm::vec4 intensity, Moveable *followed);
 
- protected:
-	Moveable* mFollowed;
-	bool mIsFollowedUpdated;
-	glm::vec4 mIntensity;
-	LightAttenuationData mAttenuation;
+  virtual ~Light();
+
+  void updateFromFollowed();
+
+  void setAttenuation(LightAttenuationData &attenuation);
+
+  LightAttenuationData getAttenuation();
+
+  void setIntensity(glm::vec4 intensity);
+
+  glm::vec4 getIntensity();
+
+  void log();
+
+  void onDeath(Observable *observable) override;
+
+  void onChanged(Observable *observable) override;
+
+protected:
+  Moveable *mFollowed;
+  bool mIsFollowedUpdated;
+  glm::vec4 mIntensity;
+  LightAttenuationData mAttenuation;
 };
 
 } /* framework */

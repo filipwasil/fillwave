@@ -45,11 +45,13 @@ namespace core {
  * \brief Not used.
  */
 
-class Texture1D: public Texture {
- public:
-	Texture1D(ParameterList& parameters);
-	virtual ~Texture1D() = default;
-	void log();
+class Texture1D : public Texture {
+public:
+  Texture1D(ParameterList &parameters);
+
+  virtual ~Texture1D() = default;
+
+  void log();
 };
 
 } /* core */

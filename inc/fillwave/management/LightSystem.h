@@ -44,64 +44,60 @@ namespace framework {
 
 static constexpr size_t FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER = 4;
 
-typedef TManager<LightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
-        core::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, Moveable*>
-        CacheSpotLights;
+typedef TManager<LightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, core::Texture2DRenderable *, glm::vec3, glm::quat, glm::vec4, Moveable *> CacheSpotLights;
 
-typedef TManager<LightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
-        core::Texture2DRenderable*, glm::vec3,
-        glm::quat, glm::vec4, Moveable*> CacheDirectionalLights;
+typedef TManager<LightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, core::Texture2DRenderable *, glm::vec3, glm::quat, glm::vec4, Moveable *> CacheDirectionalLights;
 
-typedef TManager<LightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER,
-        core::Texture3DRenderable*, glm::vec3, glm::vec4,
-        Moveable*> CachePointLights;
+typedef TManager<LightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, core::Texture3DRenderable *, glm::vec3, glm::vec4, Moveable *> CachePointLights;
 
 /**
  * \brief Light system knows about all light related stuff.
  */
 class LightSystem {
- public:
-	LightSystem();
-	virtual ~LightSystem() = default;
+public:
+  LightSystem();
 
-	CacheSpotLights mLightsSpot;
-	CacheDirectionalLights mLightsDirectional;
-	CachePointLights mLightsPoint;
+  virtual ~LightSystem() = default;
 
-	bool isLightsRefresh();
-	void resetLightsRefresh();
-	void removeLights();
-	void updateLightEntities();
+  CacheSpotLights mLightsSpot;
+  CacheDirectionalLights mLightsDirectional;
+  CachePointLights mLightsPoint;
 
-	void pushLightUniformsDR();
-	void pushLightUniforms(core::Program* program);
-	void pushLightUniformBuffers(core::Program* program);
+  bool isLightsRefresh();
 
-	void clear();
-	void bindShadowmaps();
+  void resetLightsRefresh();
 
-	/* Deferred rendering */
-	void updateDeferredBufferSpot(
-	   GLuint lightID,
-	   core::Program* program,
-	   GLint currentShadowUnit);
-	void updateDeferredBufferDirectional(
-	   GLuint lightID,
-	   core::Program* program,
-	   GLint currentShadowUnit);
-	void updateDeferredBufferPoint(
-	   GLuint lightID,
-	   core::Program* program,
-	   GLint currentShadowUnit);
+  void removeLights();
 
- private:
-	std::vector<LighUniformData> mLightBufferData;
+  void updateLightEntities();
 
-	GLboolean isRefreshLightSpot();
-	GLboolean isRefreshLightDirectional();
-	GLboolean isRefreshLightPoint();
+  void pushLightUniformsDR();
 
-	GLfloat computePointLightBoundingSphere(LightPoint* light);
+  void pushLightUniforms(core::Program *program);
+
+  void pushLightUniformBuffers(core::Program *program);
+
+  void clear();
+
+  void bindShadowmaps();
+
+  /* Deferred rendering */
+  void updateDeferredBufferSpot(GLuint lightID, core::Program *program, GLint currentShadowUnit);
+
+  void updateDeferredBufferDirectional(GLuint lightID, core::Program *program, GLint currentShadowUnit);
+
+  void updateDeferredBufferPoint(GLuint lightID, core::Program *program, GLint currentShadowUnit);
+
+private:
+  std::vector<LighUniformData> mLightBufferData;
+
+  GLboolean isRefreshLightSpot();
+
+  GLboolean isRefreshLightDirectional();
+
+  GLboolean isRefreshLightPoint();
+
+  GLfloat computePointLightBoundingSphere(LightPoint *light);
 };
 
 } /* framework */

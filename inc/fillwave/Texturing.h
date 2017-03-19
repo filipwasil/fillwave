@@ -40,7 +40,9 @@
 #include <gli/gli.hpp>
 #else
 #define STB_IMAGE_IMPLEMENTATION
+
 #include <stb_image.h>
+
 #endif /* FILLWAVE_TEXTURE_LOADER_GLI */
 
 #endif /* INC_FILLWAVE_TEXTURING_H_ */

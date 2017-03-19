@@ -50,13 +50,17 @@ namespace core {
  *
  */
 
-class PixelBuffer: public IBuffer {
- public:
-	PixelBuffer(GLuint dataStoreType);
-	virtual ~PixelBuffer() = default;
-	void setScreenSize(GLuint width, GLuint height, GLuint bytesPerPixel);
-	void emptyCPU() override;
-	void emptyGPU() override;
+class PixelBuffer : public IBuffer {
+public:
+  PixelBuffer(GLuint dataStoreType);
+
+  virtual ~PixelBuffer() = default;
+
+  void setScreenSize(GLuint width, GLuint height, GLuint bytesPerPixel);
+
+  void emptyCPU() override;
+
+  void emptyGPU() override;
 };
 
 } /* core */

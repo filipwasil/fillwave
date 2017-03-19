@@ -42,7 +42,9 @@ namespace fillwave {
 namespace framework {
 
 class ICamera;
+
 class Entity;
+
 class Skybox;
 
 /*! \class IRenderer
@@ -50,22 +52,25 @@ class Skybox;
  */
 
 class IRenderer {
- public:
-	IRenderer() :
-		mFlagReload(true), mSkybox(nullptr) {
+public:
+  IRenderer()
+      : mFlagReload (true), mSkybox (nullptr) {
 
-	}
+  }
 
-	virtual ~IRenderer() = default;
+  virtual ~IRenderer() = default;
 
-	virtual void update(IRenderable* renderable) = 0;
-	virtual void draw(ICamera& camera) = 0;
-	virtual void reset(GLuint width, GLuint height) = 0;
-	virtual void clear() = 0;
+  virtual void update(IRenderable *renderable) = 0;
 
-	bool mFlagReload;
-	Skybox* mSkybox;
-	GLfloat mAmbientGlobal[3];
+  virtual void draw(ICamera &camera) = 0;
+
+  virtual void reset(GLuint width, GLuint height) = 0;
+
+  virtual void clear() = 0;
+
+  bool mFlagReload;
+  Skybox *mSkybox;
+  GLfloat mAmbientGlobal[3];
 };
 
 } /* namespace framework */

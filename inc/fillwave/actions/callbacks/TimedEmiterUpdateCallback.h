@@ -43,22 +43,19 @@ namespace framework {
  * \brief TimedCallback to update time in emiters.
  */
 
-class TimedEmiterUpdateCallback: public TimedCallback {
- public:
-	TimedEmiterUpdateCallback(
-	   IEmiterPoint* emiter,
-	   GLfloat timeToFinish,
-	   EasingFunction easing = LinearInterpolation);
+class TimedEmiterUpdateCallback : public TimedCallback {
+public:
+  TimedEmiterUpdateCallback(IEmiterPoint *emiter, GLfloat timeToFinish, EasingFunction easing = LinearInterpolation);
 
-	virtual ~TimedEmiterUpdateCallback() = default;
+  virtual ~TimedEmiterUpdateCallback() = default;
 
-	void performTime(TimeEventData& data);
+  void performTime(TimeEventData &data);
 
- protected:
-	IEmiterPoint* mEmiter;
+protected:
+  IEmiterPoint *mEmiter;
 
- private:
-	GLfloat mTimePassed;
+private:
+  GLfloat mTimePassed;
 };
 
 } /* framework */

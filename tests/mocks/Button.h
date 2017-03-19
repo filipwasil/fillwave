@@ -14,11 +14,16 @@
 using namespace fillwave;
 using namespace fillwave::framework;
 
-class MockButton: public Button {
+class MockButton : public Button {
 public:
-	/* IPickable */
-	MOCK_METHOD1(pick, void(glm::vec3 color));
-	MOCK_METHOD0(unpick, void());
-	MOCK_METHOD0(onPicked, void());
-	MOCK_METHOD0(onUnpicked, void());
+  /* IPickable */
+  MOCK_METHOD1(pick,
+  void(glm::vec3
+  color));
+  MOCK_METHOD0(unpick,
+  void());
+  MOCK_METHOD0(onPicked,
+  void());
+  MOCK_METHOD0(onUnpicked,
+  void());
 };

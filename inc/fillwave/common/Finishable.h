@@ -43,45 +43,46 @@ constexpr float FILLWAVE_ENDLESS = 0.0f;
  * \brief Base for every finishable callback.
  */
 class Finishable {
- public:
-	Finishable(float timeToFinish);
-	virtual ~Finishable() = default;
+public:
+  Finishable(float timeToFinish);
 
-	/*
-	 * checkTime
-	 * \brief checks if the lifetime time elapsed
-	 */
-	void checkTime(float timePassed);
+  virtual ~Finishable() = default;
 
-	/*
-	 * getPercentageDone
-	 * \brief returns the time progress in percentages
-	 */
-	float getPercentageDone() const;
+  /*
+   * checkTime
+   * \brief checks if the lifetime time elapsed
+   */
+  void checkTime(float timePassed);
 
-	/*
-	 * finish
-	 * \brief Sets indicator that the object was finished
-	 */
-	void finish();
+  /*
+   * getPercentageDone
+   * \brief returns the time progress in percentages
+   */
+  float getPercentageDone() const;
 
-	/*
-	 * finish
-	 * \brief Sets indicator that the object is not finished
-	 */
-	void reset();
+  /*
+   * finish
+   * \brief Sets indicator that the object was finished
+   */
+  void finish();
 
-	/*
-	 * finish
-	 * \brief Returns state of the object
-	 */
-	bool isFinished() const;
+  /*
+   * finish
+   * \brief Sets indicator that the object is not finished
+   */
+  void reset();
 
- protected:
-	bool mFinished;
-	float mTimeToFinish;
-	float mTimePassed;
-	float mPercentageDone;
+  /*
+   * finish
+   * \brief Returns state of the object
+   */
+  bool isFinished() const;
+
+protected:
+  bool mFinished;
+  float mTimeToFinish;
+  float mTimePassed;
+  float mPercentageDone;
 };
 
 } /* framework */

@@ -44,21 +44,21 @@ namespace framework {
  * \brief ShaderLoader to load fragment shader sources.
  */
 
-class ShaderLoaderFragment: public ShaderLoader {
- public:
-	ShaderLoaderFragment(GLuint renderTargets = 1);
+class ShaderLoaderFragment : public ShaderLoader {
+public:
+  ShaderLoaderFragment(GLuint renderTargets = 1);
 
-	virtual ~ShaderLoaderFragment() = default;
+  virtual ~ShaderLoaderFragment() = default;
 
-	const std::string getSource() const;
+  const std::string getSource() const;
 
- private:
-	GLboolean mFog;
-	GLboolean mColor;
-	GLboolean mColorBoost;
-	GLboolean mTextureOnly;
-	GLboolean mPointLights;
-	GLuint mRendertargets;
+private:
+  GLboolean mFog;
+  GLboolean mColor;
+  GLboolean mColorBoost;
+  GLboolean mTextureOnly;
+  GLboolean mPointLights;
+  GLuint mRendertargets;
 };
 
 } /* framework */

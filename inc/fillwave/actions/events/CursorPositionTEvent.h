@@ -18,22 +18,23 @@ namespace framework {
  */
 
 struct CursorPositionEventData {
-	double xPosition;
-	double yPosition;
-	const eEventType type = eEventType::eCursorPosition;
+  double xPosition;
+  double yPosition;
+  const eEventType type = eEventType::eCursorPosition;
 };
 
 /*! \struct CursorPositionEvent
  * \brief Event introduced when cursor position was changed.
  */
 
-class CursorPositionEvent: public TEvent<CursorPositionEventData> {
- public:
-	CursorPositionEvent(CursorPositionEventData& data) :
-		TEvent<CursorPositionEventData>(data) {
+class CursorPositionEvent : public TEvent<CursorPositionEventData> {
+public:
+  CursorPositionEvent(CursorPositionEventData &data)
+      : TEvent<CursorPositionEventData> (data) {
 
-	}
-	virtual ~CursorPositionEvent() = default;
+  }
+
+  virtual ~CursorPositionEvent() = default;
 };
 
 } /* framework */

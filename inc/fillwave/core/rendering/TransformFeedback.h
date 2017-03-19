@@ -45,24 +45,24 @@ namespace core {
  * \brief Used for GPU side comutations.
  */
 
-class TransformFeedback: public GLObject {
- public:
-	TransformFeedback(GLsizei howMany = 1);
+class TransformFeedback : public GLObject {
+public:
+  TransformFeedback(GLsizei howMany = 1);
 
-	virtual ~TransformFeedback();
+  virtual ~TransformFeedback();
 
-	void bind(GLuint id = 0) const;
+  void bind(GLuint id = 0) const;
 
-	static void begin(GLenum primitiveMode);
+  static void begin(GLenum primitiveMode);
 
-	static void end();
+  static void end();
 
-	static void pause();
+  static void pause();
 
-	static void resume();
+  static void resume();
 
- private:
-	GLuint mTarget;
+private:
+  GLuint mTarget;
 };
 
 } /* core */

@@ -44,27 +44,35 @@ namespace framework {
  * \brief Entity for which is it possible to add/remove Effect objects.
  */
 
-class Programmable: public Entity {
- public:
-	Programmable(core::Program* program);
+class Programmable : public Entity {
+public:
+  Programmable(core::Program *program);
 
-	virtual ~Programmable() = default;
-	Programmable& operator = (const Programmable&) = default;
-	Programmable (const Programmable &) = default;
-	Programmable& operator = (Programmable&&) = default;
-	Programmable (Programmable&& obj) = default;
+  virtual ~Programmable() = default;
+
+  Programmable &operator=(const Programmable &) = default;
+
+  Programmable(const Programmable &) = default;
+
+  Programmable &operator=(Programmable &&) = default;
+
+  Programmable(Programmable &&obj) = default;
 
 
-	void addEffect(pIEffect effect);
-	void removeEffect(pIEffect effect);
-	void drawWithEffects(ICamera& camera);
-	void drawWithEffectsDR(ICamera& camera);
-	void drawWithEffectsPBRP(ICamera& camera);
+  void addEffect(pIEffect effect);
 
- protected:
-	core::Program* mProgram;
+  void removeEffect(pIEffect effect);
 
-	std::vector<pIEffect> mEffects;
+  void drawWithEffects(ICamera &camera);
+
+  void drawWithEffectsDR(ICamera &camera);
+
+  void drawWithEffectsPBRP(ICamera &camera);
+
+protected:
+  core::Program *mProgram;
+
+  std::vector<pIEffect> mEffects;
 };
 
 } /* framework */

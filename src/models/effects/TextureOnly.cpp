@@ -37,20 +37,20 @@
 namespace fillwave {
 namespace framework {
 
-void TextureOnly::preDrawAction(core::Program* program) {
-	program->uniformPush("uTextureOnlyEffect", true);
+void TextureOnly::preDrawAction(core::Program *program) {
+  program->uniformPush ("uTextureOnlyEffect", true);
 }
 
-void TextureOnly::postDrawAction(core::Program* program) {
-	program->uniformPush("uTextureOnlyEffect", false);
+void TextureOnly::postDrawAction(core::Program *program) {
+  program->uniformPush ("uTextureOnlyEffect", false);
 }
 
-void TextureOnly::stopAction(core::Program* program) {
-	program->uniformPush("uTextureOnlyEffect", false);
+void TextureOnly::stopAction(core::Program *program) {
+  program->uniformPush ("uTextureOnlyEffect", false);
 }
 
-void TextureOnly::startAction(core::Program* program) {
-	program->uniformPush("uTextureOnlyEffect", true);
+void TextureOnly::startAction(core::Program *program) {
+  program->uniformPush ("uTextureOnlyEffect", true);
 }
 
 } /* framework*/

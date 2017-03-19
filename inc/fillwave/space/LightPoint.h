@@ -49,28 +49,27 @@ namespace framework {
  * \brief Not used.
  */
 
-class LightPoint: public Light {
- public:
-	LightPoint(
-	   core::Texture3DRenderable* shadowTexture,
-	   glm::vec3 position,
-	   glm::vec4 intensity,
-	   Moveable* followed = nullptr);
+class LightPoint : public Light {
+public:
+  LightPoint(core::Texture3DRenderable *shadowTexture,
+      glm::vec3 position,
+      glm::vec4 intensity,
+      Moveable *followed = nullptr);
 
-	virtual ~LightPoint() = default;
+  virtual ~LightPoint() = default;
 
-	core::Texture3DRenderable* getShadowTexture();
+  core::Texture3DRenderable *getShadowTexture();
 
-	CameraPerspective* getShadowCamera(GLenum id);
+  CameraPerspective *getShadowCamera(GLenum id);
 
-	void updateShadowCamera();
+  void updateShadowCamera();
 
- protected:
-	core::Texture3DRenderable* mShadowTexture;
-	std::map<GLenum, puCameraPerspective> mFaceCameras;
+protected:
+  core::Texture3DRenderable *mShadowTexture;
+  std::map<GLenum, puCameraPerspective> mFaceCameras;
 
- private:
-	Sphere mSphere;
+private:
+  Sphere mSphere;
 };
 
 } /* framework */

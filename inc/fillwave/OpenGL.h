@@ -56,7 +56,9 @@ void glesInitExtensions();
 #define GLulong GLuint
 
 #else /* defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES) */
+
 #include <GL/glew.h>
+
 #endif /* defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES) */
 
 #endif /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
@@ -97,4 +99,5 @@ constexpr unsigned int FILLWAVE_OQ_VERTICES = 36;
 constexpr unsigned int FILLWAVE_GLOBJECT_MAX_CAPACITY = 10;
 
 unsigned int getFramebufferStatus();
+
 unsigned int getGlError();

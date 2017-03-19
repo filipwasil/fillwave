@@ -8,16 +8,17 @@
 namespace fillwave {
 namespace framework {
 
-IFocusable::IFocusable(Engine* engine) : mEngine(engine) {
+IFocusable::IFocusable(Engine *engine)
+    : mEngine (engine) {
 
 }
 
 IFocusable::~IFocusable() {
-	mEngine->dropFocus(this);
+  mEngine->dropFocus (this);
 }
 
 void IFocusable::attachCallback(Callback *callback) {
-	mCallbacks.push_back(callback);
+  mCallbacks.push_back (callback);
 }
 
 }

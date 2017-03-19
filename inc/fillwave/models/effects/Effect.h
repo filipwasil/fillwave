@@ -44,37 +44,38 @@ namespace framework {
  */
 
 class IEffect {
- public:
-	IEffect() = default;
-	virtual ~IEffect() = default;
+public:
+  IEffect() = default;
 
-	/*!
-	 * preDrawAction
-	 * \brief virtual: defines action to be done just before the draw.
-	 */
+  virtual ~IEffect() = default;
 
-	virtual void preDrawAction(core::Program* program) = 0;
+  /*!
+   * preDrawAction
+   * \brief virtual: defines action to be done just before the draw.
+   */
 
-	/*!
-	 * postDrawAction
-	 * \brief virtual: defines action to be done just after the draw.
-	 */
+  virtual void preDrawAction(core::Program *program) = 0;
 
-	virtual void postDrawAction(core::Program* program) = 0;
+  /*!
+   * postDrawAction
+   * \brief virtual: defines action to be done just after the draw.
+   */
 
-	/*!
-	 * stopAction
-	 * \brief virtual: defines action to be done when the effect is stopped.
-	 */
+  virtual void postDrawAction(core::Program *program) = 0;
 
-	virtual void stopAction(core::Program* program) = 0;
+  /*!
+   * stopAction
+   * \brief virtual: defines action to be done when the effect is stopped.
+   */
 
-	/*!
-	 * startAction
-	 * \brief virtual: defines action to be done when the effect is started.
-	 */
+  virtual void stopAction(core::Program *program) = 0;
 
-	virtual void startAction(core::Program* program) = 0;
+  /*!
+   * startAction
+   * \brief virtual: defines action to be done when the effect is started.
+   */
+
+  virtual void startAction(core::Program *program) = 0;
 };
 
 } /* framework */

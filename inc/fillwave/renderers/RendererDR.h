@@ -51,75 +51,83 @@ class ProgramLoader;
  * \brief Deferred IRenderer. Not ready (Rev.4.2.1).
  */
 
-class RendererDR: public IRenderer {
- public:
-	RendererDR(Engine* engine, ProgramLoader& loader);
-	virtual ~RendererDR() = default;
+class RendererDR : public IRenderer {
+public:
+  RendererDR(Engine *engine, ProgramLoader &loader);
 
-	void update(IRenderable* renderable) override;
-	void draw(ICamera& camera) override;
-	void reset(GLuint width, GLuint height) override;
-	void clear() override;
+  virtual ~RendererDR() = default;
 
-	/* Init */
-	void initGeometryBuffer();
-	void initGeometryShading();
-	void initUniforms();
-	void initUniformsCache();
+  void update(IRenderable *renderable) override;
 
-	/* Passes */
-	void drawSceneCoreDR();
-	void drawGeometryPass(ICamera& camera);
-	void drawDepthlessPass();
-	void drawAmbientPass();
-	void drawAOPass(ICamera& camera);
-	void drawColorPass(ICamera& camera);
-	void drawLightsSpotPass(ICamera& camera, GLint& textureUnit);
-	void drawLightsDirectionalPass(ICamera& camera, GLint& textureUnit);
-	void drawLightsPointPass(ICamera& camera, GLint& textureUnit);
-	void drawColorPassBegin();
-	void drawColorPassEnd();
-	void drawDebug();
+  void draw(ICamera &camera) override;
 
- private:
-	glm::vec2 mScreenSize;
+  void reset(GLuint width, GLuint height) override;
 
-	LightSystem* mLights;
-	TextureSystem* mTextures;
+  void clear() override;
 
-	core::Program *mProgramMain, *mProgramMainAnimated, *mProgramDirecionalLight,
-	     *mProgramSpotLight, *mProgramPointLight, *mProgramDepthless,
-	     *mProgramAmbient, *mProgramAOGeometry, *mProgramAOColor;
+  /* Init */
+  void initGeometryBuffer();
 
-	pTexture2DRenderable mAOGeometryBuffer;
-	pTexture2DRenderable mAOColorBuffer;
+  void initGeometryShading();
 
-	puMesh mDeferredPointLight;
+  void initUniforms();
 
-	GLint mULCDRDepthlesDiffuseTexel, mULCDRDepthlessPositionTexel,
-	      mULCDRScreenSize, mULCDRAScreenSize, mULCDRADiffuseAttachment,
-	      mULCAmbient;
+  void initUniformsCache();
 
-	GLint mULCCameraPositionDirectional, mULCAmbientIntensityDirectional,
-	      mULCScreenSizeDirectional, mULCShadowUnitDirectional,
-	      mULCIsAODirectional, mULCCameraPositionPoint,
-	      mULCAmbientIntensityPoint, mULCMVPPoint, mULCScreenSizePoint,
-	      mULCShadowUnitPoint, mULCIsAOPoint;
+  /* Passes */
+  void drawSceneCoreDR();
 
-	/* ULC - Uniform location cache */
-	GLint mULCCameraPositionSpot, mULCAmbientIntensitySpot, mULCScreenSizeSpot,
-	      mULCShadowUnitSpot, mULCIsAOSpot;
+  void drawGeometryPass(ICamera &camera);
 
-	GLboolean mIsAO;
+  void drawDepthlessPass();
 
-	const GLuint mDeferredColorAttachments;
-	const GLuint mDeferredDepthAttachments;
+  void drawAmbientPass();
 
-	puFramebufferGeometry mGBuffer;
+  void drawAOPass(ICamera &camera);
 
-	std::vector<IRenderable*> mNodes; /* true -> animated, false -> not animated */
-	std::vector<IRenderable*>
-	mAnimatedNodes; /* true -> animated, false -> not animated */
+  void drawColorPass(ICamera &camera);
+
+  void drawLightsSpotPass(ICamera &camera, GLint &textureUnit);
+
+  void drawLightsDirectionalPass(ICamera &camera, GLint &textureUnit);
+
+  void drawLightsPointPass(ICamera &camera, GLint &textureUnit);
+
+  void drawColorPassBegin();
+
+  void drawColorPassEnd();
+
+  void drawDebug();
+
+private:
+  glm::vec2 mScreenSize;
+
+  LightSystem *mLights;
+  TextureSystem *mTextures;
+
+  core::Program *mProgramMain, *mProgramMainAnimated, *mProgramDirecionalLight, *mProgramSpotLight, *mProgramPointLight, *mProgramDepthless, *mProgramAmbient, *mProgramAOGeometry, *mProgramAOColor;
+
+  pTexture2DRenderable mAOGeometryBuffer;
+  pTexture2DRenderable mAOColorBuffer;
+
+  puMesh mDeferredPointLight;
+
+  GLint mULCDRDepthlesDiffuseTexel, mULCDRDepthlessPositionTexel, mULCDRScreenSize, mULCDRAScreenSize, mULCDRADiffuseAttachment, mULCAmbient;
+
+  GLint mULCCameraPositionDirectional, mULCAmbientIntensityDirectional, mULCScreenSizeDirectional, mULCShadowUnitDirectional, mULCIsAODirectional, mULCCameraPositionPoint, mULCAmbientIntensityPoint, mULCMVPPoint, mULCScreenSizePoint, mULCShadowUnitPoint, mULCIsAOPoint;
+
+  /* ULC - Uniform location cache */
+  GLint mULCCameraPositionSpot, mULCAmbientIntensitySpot, mULCScreenSizeSpot, mULCShadowUnitSpot, mULCIsAOSpot;
+
+  GLboolean mIsAO;
+
+  const GLuint mDeferredColorAttachments;
+  const GLuint mDeferredDepthAttachments;
+
+  puFramebufferGeometry mGBuffer;
+
+  std::vector<IRenderable *> mNodes; /* true -> animated, false -> not animated */
+  std::vector<IRenderable *> mAnimatedNodes; /* true -> animated, false -> not animated */
 };
 
 } /* namespace framework */

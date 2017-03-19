@@ -49,15 +49,16 @@ namespace framework {
  * \brief wrapper to assimp aiNodeAnim*
  */
 class Channel {
- public:
-	std::string mAffectedNodeName;
+public:
+  std::string mAffectedNodeName;
 
-	std::vector<Key<glm::vec3> > mKeysTranslation;
-	std::vector<Key<glm::quat> > mKeysRotation;
-	std::vector<Key<glm::vec3> > mKeysScaling;
+  std::vector<Key<glm::vec3> > mKeysTranslation;
+  std::vector<Key<glm::quat> > mKeysRotation;
+  std::vector<Key<glm::vec3> > mKeysScaling;
 
-	Channel(aiNodeAnim* assimpChannel);
-	virtual ~Channel() = default;
+  Channel(aiNodeAnim *assimpChannel);
+
+  virtual ~Channel() = default;
 };
 
 } /* framework */

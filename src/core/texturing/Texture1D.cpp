@@ -38,7 +38,8 @@
 namespace fillwave {
 namespace core {
 
-Texture1D::Texture1D(ParameterList&) : Texture(GL_TEXTURE_1D, 1) {
+Texture1D::Texture1D(ParameterList &)
+    : Texture (GL_TEXTURE_1D, 1) {
 
 }
 

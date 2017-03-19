@@ -44,16 +44,20 @@ namespace framework {
  */
 
 class Voxel {
- public:
-	Voxel();
-	~Voxel() = default;
-	GLboolean isActive();
-	void setActive(GLboolean active);
-	void setType(GLint type);
+public:
+  Voxel();
 
- private:
-	GLint mType;
-	GLboolean mActive;
+  ~Voxel() = default;
+
+  GLboolean isActive();
+
+  void setActive(GLboolean active);
+
+  void setType(GLint type);
+
+private:
+  GLint mType;
+  GLboolean mActive;
 };
 
 } /* framework */

@@ -38,11 +38,11 @@
 
 #define FILLWAVE_FORGET_ABOUT_ME()      \
 do {                                    \
-	if ((*this).size() >= M) {          \
-		/* Too many elements in cache */\
-		abort();                        \
-		return nullptr;                 \
-	}                                   \
+   if ((*this).size() >= M) {          \
+      /* Too many elements in cache */\
+      abort();                        \
+      return nullptr;                 \
+   }                                   \
 } while(0)
 
 namespace fillwave {
@@ -63,30 +63,31 @@ constexpr size_t FILLWAVE_MANAGEMENT_MAX_ITEMS = 5000;
  */
 
 template <size_t M, class T, class K, typename ... P>
-class TCache: public std::unordered_map<K, std::unique_ptr<T>> {
- public:
-	TCache() = default;
-	virtual ~TCache() = default;
+class TCache : public std::unordered_map<K, std::unique_ptr<T>> {
+public:
+  TCache() = default;
 
-	T* store(const K& key, P ... parameters) {
-		if ((*this).find(key) != (*this).end()) {
-			return (*this)[key].get();
-		}
-		FILLWAVE_FORGET_ABOUT_ME();
-		return ((*this)[key] = std::make_unique<T>(parameters...)).get();
-	}
+  virtual ~TCache() = default;
 
-	/**
-	 * \brief Add already allocated item to manager.
-	 */
-	T* store(T* item, const K& key) {
-		if ((*this).find(key) != (*this).end()) {
-			delete item;
-			return (*this)[key].get();
-		}
-		FILLWAVE_FORGET_ABOUT_ME();
-		return ((*this)[key] = std::unique_ptr < T > (item)).get();
-	}
+  T *store(const K &key, P ... parameters) {
+    if ((*this).find (key) != (*this).end ()) {
+      return (*this)[key].get ();
+    }
+    FILLWAVE_FORGET_ABOUT_ME();
+    return ((*this)[key] = std::make_unique<T> (parameters...)).get ();
+  }
+
+  /**
+   * \brief Add already allocated item to manager.
+   */
+  T *store(T *item, const K &key) {
+    if ((*this).find (key) != (*this).end ()) {
+      delete item;
+      return (*this)[key].get ();
+    }
+    FILLWAVE_FORGET_ABOUT_ME();
+    return ((*this)[key] = std::unique_ptr<T> (item)).get ();
+  }
 };
 
 } /* namespace framework */

@@ -39,8 +39,7 @@
 namespace fillwave {
 namespace framework {
 
-typedef TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Shader,
-        std::string, GLuint, const std::string&> CacheShaders;
+typedef TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Shader, std::string, GLuint, const std::string &> CacheShaders;
 
 } /* framework */
 } /* fillwave */

@@ -45,16 +45,15 @@ namespace framework {
  * \brief Not used.
  */
 
-class EmiterPointStep: public IEmiterPoint {
- public:
-	EmiterPointStep(
-	   Engine* engine,
-	   GLint howMany,
-	   GLenum blendingSource,
-	   GLenum blendingDestination,
-	   core::Texture* texture);
+class EmiterPointStep : public IEmiterPoint {
+public:
+  EmiterPointStep(Engine *engine,
+      GLint howMany,
+      GLenum blendingSource,
+      GLenum blendingDestination,
+      core::Texture *texture);
 
-	virtual ~EmiterPointStep() = default;
+  virtual ~EmiterPointStep() = default;
 };
 
 } /* framework */

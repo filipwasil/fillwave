@@ -18,22 +18,22 @@ namespace framework {
  */
 
 struct CursorEnterEventData {
-	int direction;
-	const eEventType type = eEventType::eCursorEnter;
+  int direction;
+  const eEventType type = eEventType::eCursorEnter;
 };
 
 /*! \struct CursorEnterEvent
  * \brief Event introduced when cursor enters the window.
  */
 
-class CursorEnterEvent: public TEvent<CursorEnterEventData> {
- public:
-	CursorEnterEvent(CursorEnterEventData& data) :
-		TEvent(data) {
+class CursorEnterEvent : public TEvent<CursorEnterEventData> {
+public:
+  CursorEnterEvent(CursorEnterEventData &data)
+      : TEvent (data) {
 
-	}
+  }
 
-	virtual ~CursorEnterEvent() = default;
+  virtual ~CursorEnterEvent() = default;
 };
 
 } /* framework */

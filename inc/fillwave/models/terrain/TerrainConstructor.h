@@ -44,10 +44,12 @@ namespace framework {
  */
 
 class TerrainConstructor {
- public:
-	TerrainConstructor() = default;
-	virtual ~TerrainConstructor() = default;
-	virtual GLfloat calculateHeight(GLfloat x, GLfloat z) = 0;
+public:
+  TerrainConstructor() = default;
+
+  virtual ~TerrainConstructor() = default;
+
+  virtual GLfloat calculateHeight(GLfloat x, GLfloat z) = 0;
 };
 
 } /* framework */

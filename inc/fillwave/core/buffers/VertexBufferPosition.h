@@ -44,23 +44,22 @@ namespace core {
  */
 
 struct VertexPosition {
-	GLfloat mPosition[4];
+  GLfloat mPosition[4];
 };
 
 /*! \class VertexBufferPosition
  * \brief Not used. Vertex buffer specialized with VertexPosition data structure.
  */
 
-class VertexBufferPosition: public TVertexBuffer<VertexPosition> {
- public:
-	VertexBufferPosition(
-	   framework::Shape<VertexPosition>& shape,
-	   GLuint dataStoreModification = GL_STATIC_DRAW);
-	VertexBufferPosition(
-	   const std::vector<VertexPosition>& vertices,
-	   GLuint dataStoreModification = GL_STATIC_DRAW);
-	virtual ~VertexBufferPosition() = default;
-	void log() const;
+class VertexBufferPosition : public TVertexBuffer<VertexPosition> {
+public:
+  VertexBufferPosition(framework::Shape<VertexPosition> &shape, GLuint dataStoreModification = GL_STATIC_DRAW);
+
+  VertexBufferPosition(const std::vector<VertexPosition> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW);
+
+  virtual ~VertexBufferPosition() = default;
+
+  void log() const;
 };
 
 } /* core */

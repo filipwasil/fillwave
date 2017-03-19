@@ -46,12 +46,15 @@ class IRenderer;
  * \brief Encapsulates renderable objects. To be used with IRenderer.
  */
 
-class IRenderable: public IDrawable {
- public:
-	IRenderable() = default;
-	virtual ~IRenderable() = default;
-	virtual bool getRenderItem(RenderItem& item) = 0;
-	virtual void updateRenderer(IRenderer& renderer) = 0;
+class IRenderable : public IDrawable {
+public:
+  IRenderable() = default;
+
+  virtual ~IRenderable() = default;
+
+  virtual bool getRenderItem(RenderItem &item) = 0;
+
+  virtual void updateRenderer(IRenderer &renderer) = 0;
 };
 
 } /* namespace framework */

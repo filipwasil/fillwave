@@ -42,11 +42,14 @@ namespace framework {
  */
 
 class ITreeNode {
- public:
-	ITreeNode() = default;
-	virtual ~ITreeNode() = default;
-	virtual void onAttached(ITreeNode* parent) = 0;
-	virtual void onDetached() = 0;
+public:
+  ITreeNode() = default;
+
+  virtual ~ITreeNode() = default;
+
+  virtual void onAttached(ITreeNode *parent) = 0;
+
+  virtual void onDetached() = 0;
 };
 
 } /* namespace framework */

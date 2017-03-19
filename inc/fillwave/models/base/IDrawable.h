@@ -47,18 +47,28 @@ class ICamera;
  */
 
 class IDrawable {
- public:
-	IDrawable() = default;
-	virtual ~IDrawable() = default;
-	virtual void draw(ICamera& camera) = 0;
-	virtual void drawPBRP(ICamera& camera) = 0;
-	virtual void drawDR(ICamera& camera) = 0;
-	virtual void drawDepth(ICamera& camera) = 0;
-	virtual void drawDepthColor(ICamera& camera, glm::vec3& position) = 0;
-	virtual void drawAOG(ICamera& camera) = 0;
-	virtual void drawAOC(ICamera& camera) = 0;
-	virtual void drawOcclusionBox(ICamera& camera) = 0;
-	virtual void drawPicking(ICamera& camera) = 0;
+public:
+  IDrawable() = default;
+
+  virtual ~IDrawable() = default;
+
+  virtual void draw(ICamera &camera) = 0;
+
+  virtual void drawPBRP(ICamera &camera) = 0;
+
+  virtual void drawDR(ICamera &camera) = 0;
+
+  virtual void drawDepth(ICamera &camera) = 0;
+
+  virtual void drawDepthColor(ICamera &camera, glm::vec3 &position) = 0;
+
+  virtual void drawAOG(ICamera &camera) = 0;
+
+  virtual void drawAOC(ICamera &camera) = 0;
+
+  virtual void drawOcclusionBox(ICamera &camera) = 0;
+
+  virtual void drawPicking(ICamera &camera) = 0;
 };
 
 } /* namespace framework */

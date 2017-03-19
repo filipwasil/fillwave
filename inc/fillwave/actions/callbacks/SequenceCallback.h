@@ -46,20 +46,21 @@ namespace framework {
  * \brief ItemCallback to execute an ordered vector of callbacks.
  */
 
-class SequenceCallback: public Callback, public std::vector<puCallback> {
- public:
-	SequenceCallback();
-	virtual ~SequenceCallback() = default;
+class SequenceCallback : public Callback, public std::vector<puCallback> {
+public:
+  SequenceCallback();
 
-	/*	perform
-	 * \brief Performs ItemCallback action
-	 */
+  virtual ~SequenceCallback() = default;
 
-	void perform(EventType& eventType);
+  /*	perform
+   * \brief Performs ItemCallback action
+   */
 
- protected:
-	std::vector<puCallback>::iterator mCallbackIterator;
-	bool mReloaditerator;
+  void perform(EventType &eventType);
+
+protected:
+  std::vector<puCallback>::iterator mCallbackIterator;
+  bool mReloaditerator;
 };
 
 } /* framework */

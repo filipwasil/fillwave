@@ -46,22 +46,26 @@ namespace framework {
  */
 
 class IReloadable {
- public:
-	IReloadable(Engine* engine, core::VertexArray* = nullptr);
+public:
+  IReloadable(Engine *engine, core::VertexArray * = nullptr);
 
-	virtual ~IReloadable() = default;
+  virtual ~IReloadable() = default;
 
-	virtual void initBuffers() = 0;
-	virtual void initPipeline() = 0;
-	virtual void initUniformsCache() = 0;
-	virtual void initVAO() = 0;
-	virtual void initVBO() = 0;
+  virtual void initBuffers() = 0;
 
-	void reload();
+  virtual void initPipeline() = 0;
 
- protected:
-	core::VertexArray* mVAO;
-	core::Sampler* mSampler;
+  virtual void initUniformsCache() = 0;
+
+  virtual void initVAO() = 0;
+
+  virtual void initVBO() = 0;
+
+  void reload();
+
+protected:
+  core::VertexArray *mVAO;
+  core::Sampler *mSampler;
 };
 
 } /* framework */

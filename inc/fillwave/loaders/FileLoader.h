@@ -55,19 +55,21 @@ namespace framework {
  */
 
 class FileLoader {
- public:
-	FileLoader(const std::string& rootPath);
+public:
+  FileLoader(const std::string &rootPath);
 
-	~FileLoader() = default;
+  ~FileLoader() = default;
 
-	std::string getRootPath(std::string filePath = "");
+  std::string getRootPath(std::string filePath = "");
 
- private:
-	std::string mRootPath;
+private:
+  std::string mRootPath;
 };
 
-void WriteFile(const char* pFileName, std::string& fileContent);
-void ReadFile(std::string pFileName, std::string& fileContent);
+void WriteFile(const char *pFileName, std::string &fileContent);
+
+void ReadFile(std::string pFileName, std::string &fileContent);
+
 std::string ReadFile(std::string fileName);
 
 } /* framework */

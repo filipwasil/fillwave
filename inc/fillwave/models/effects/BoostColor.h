@@ -43,17 +43,22 @@ namespace framework {
  * \brief Effect to boost the models color.
  */
 
-class BoostColor: public IEffect {
- public:
-	BoostColor(GLfloat boost = 1.0f);
-	virtual ~BoostColor() = default;
-	void preDrawAction(core::Program* program) override;
-	void postDrawAction(core::Program* program)  override;
-	void stopAction(core::Program* program)  override;
-	void startAction(core::Program* program)  override;
+class BoostColor : public IEffect {
+public:
+  BoostColor(GLfloat boost = 1.0f);
 
- private:
-	GLfloat mBoost;
+  virtual ~BoostColor() = default;
+
+  void preDrawAction(core::Program *program) override;
+
+  void postDrawAction(core::Program *program) override;
+
+  void stopAction(core::Program *program) override;
+
+  void startAction(core::Program *program) override;
+
+private:
+  GLfloat mBoost;
 };
 
 } /* framework*/

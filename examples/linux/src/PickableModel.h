@@ -13,21 +13,24 @@
 
 using namespace fillwave;
 
-class PickableModel: public framework::Model{
+class PickableModel : public framework::Model {
 private:
-   pText mText;
-   pIEffect mPickedEffect;
-   std::string mName;
+  pText mText;
+  pIEffect mPickedEffect;
+  std::string mName;
 public:
-   PickableModel(std::string name,
-                 pText text,
-                 Engine* engine,
-                 core::Program* program,
-                 const std::string& shapePath,
-                 const std::string& texturePath);
-   virtual ~PickableModel();
-   void onPicked();
-   void onUnpicked();
-   };
+  PickableModel(std::string name,
+      pText text,
+      Engine *engine,
+      core::Program *program,
+      const std::string &shapePath,
+      const std::string &texturePath);
+
+  virtual ~PickableModel();
+
+  void onPicked();
+
+  void onUnpicked();
+};
 
 #endif /* PICKABLEMODEL_H_ */

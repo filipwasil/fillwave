@@ -44,22 +44,23 @@ namespace core {
  */
 
 struct VertexText {
-	float position[2];
-	float uv[2];
+  float position[2];
+  float uv[2];
 };
 
 /*! \class VertexBufferText
  * \brief Vertex buffer specialized with VertexText data structure.
  */
 
-class VertexBufferText: public TVertexBuffer<VertexText> {
- public:
-	VertexBufferText(
-	   const std::vector<GLfloat>& data,
-	   const std::vector<GLfloat>& textureCoords,
-	   GLuint dataStoreModification = GL_DYNAMIC_DRAW);
-	virtual ~VertexBufferText() = default;
-	void log() const;
+class VertexBufferText : public TVertexBuffer<VertexText> {
+public:
+  VertexBufferText(const std::vector<GLfloat> &data,
+      const std::vector<GLfloat> &textureCoords,
+      GLuint dataStoreModification = GL_DYNAMIC_DRAW);
+
+  virtual ~VertexBufferText() = default;
+
+  void log() const;
 };
 
 } /* core */

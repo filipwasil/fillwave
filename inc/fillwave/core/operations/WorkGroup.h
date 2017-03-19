@@ -43,9 +43,10 @@ namespace core {
  */
 
 class WorkGroup {
- public:
-	WorkGroup() = default;
-	virtual ~WorkGroup() = default;
+public:
+  WorkGroup() = default;
+
+  virtual ~WorkGroup() = default;
 };
 
 } /* core */

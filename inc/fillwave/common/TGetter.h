@@ -35,19 +35,24 @@
 
 template <class TWrapped>
 class TGetter {
- public:
-	TGetter(TWrapped* wrapped) : mWrapped (wrapped) {
+public:
+  TGetter(TWrapped *wrapped)
+      : mWrapped (wrapped) {
 
-	}
+  }
 
-	TWrapped* operator -> () && {
-		return mWrapped;
-	}
- private:
-	TWrapped* mWrapped;
+  TWrapped *operator->() &&{
+    return mWrapped;
+  }
 
-	TGetter ( TGetter && ) = delete;
-	TGetter ( const TGetter & ) = delete;
-	TGetter operator = ( TGetter getter ) = delete;
-	TGetter operator = ( TGetter&& getter ) = delete;
+private:
+  TWrapped *mWrapped;
+
+  TGetter(TGetter &&) = delete;
+
+  TGetter(const TGetter &) = delete;
+
+  TGetter operator=(TGetter getter) = delete;
+
+  TGetter operator=(TGetter &&getter) = delete;
 };

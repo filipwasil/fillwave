@@ -45,26 +45,27 @@ namespace framework {
  */
 
 template <class T>
-class TEvent: public EventType {
- public:
-	TEvent(T data) :
-		EventType(data.type), mData(data) {
+class TEvent : public EventType {
+public:
+  TEvent(T data)
+      : EventType (data.type), mData (data) {
 
-	}
-	virtual ~TEvent() = default;
+  }
 
-	static T getData(EventType& eventType) {
-		TEvent<T>* e = static_cast<TEvent<T>*>(&eventType);
-		return e->mData;
-	}
+  virtual ~TEvent() = default;
 
-	static TEvent<T>* getEvent(EventType* eventType) {
-		TEvent<T>* e = static_cast<TEvent<T>*>(eventType);
-		return e;
-	}
+  static T getData(EventType &eventType) {
+    TEvent<T> *e = static_cast<TEvent<T> *>(&eventType);
+    return e->mData;
+  }
 
- private:
-	T mData;
+  static TEvent<T> *getEvent(EventType *eventType) {
+    TEvent<T> *e = static_cast<TEvent<T> *>(eventType);
+    return e;
+  }
+
+private:
+  T mData;
 };
 
 } /* framework */

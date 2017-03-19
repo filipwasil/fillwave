@@ -41,35 +41,35 @@ FLOGINIT("VertexArray", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
-VertexArray::VertexArray(GLuint howMany) :
-	GLObject(howMany) {
-	glGenVertexArrays(mHowMany, mHandles);
-	fLogC("Could not generate the VAO");
+VertexArray::VertexArray(GLuint howMany)
+    : GLObject (howMany) {
+  glGenVertexArrays (mHowMany, mHandles);
+  fLogC("Could not generate the VAO");
 }
 
 VertexArray::~VertexArray() {
-	glDeleteVertexArrays(mHowMany, mHandles);
-	fLogC("Could not delete the VAO");
+  glDeleteVertexArrays (mHowMany, mHandles);
+  fLogC("Could not delete the VAO");
 }
 
 void VertexArray::bind(GLuint id) {
-	glBindVertexArray(mHandles[id]);
-	fLogC("Could not bind the VAO");
+  glBindVertexArray (mHandles[id]);
+  fLogC("Could not bind the VAO");
 }
 
 void VertexArray::unbindVAO() {
-	glBindVertexArray(0);
-	fLogC("ould unbind the VAO");
+  glBindVertexArray (0);
+  fLogC("ould unbind the VAO");
 }
 
 void VertexArray::reload() {
-	glGenVertexArrays(mHowMany, mHandles);
-	fLogC("reload");
+  glGenVertexArrays (mHowMany, mHandles);
+  fLogC("reload");
 }
 
 void bindVAO(GLuint handle) {
-	glBindVertexArray(handle);
-	fLogC("Could not bind the VAO");
+  glBindVertexArray (handle);
+  fLogC("Could not bind the VAO");
 }
 
 } /* core */

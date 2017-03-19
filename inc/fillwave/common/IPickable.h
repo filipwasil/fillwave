@@ -44,28 +44,34 @@ namespace framework {
  */
 
 class IPickable {
- public:
-	IPickable();
-	virtual ~IPickable() = default;
-	IPickable& operator = (IPickable&&) = default;
-	IPickable (IPickable&& obj) = default;
+public:
+  IPickable();
 
-	bool isPickable() {
-		return mFlagPickable;
-	}
+  virtual ~IPickable() = default;
 
-	glm::vec3 getPickableColor() {
-		return mPickColor;
-	}
+  IPickable &operator=(IPickable &&) = default;
 
-	virtual void pick(glm::vec3 color) = 0;
-	virtual void unpick() = 0;
-	virtual void onPicked() = 0;
-	virtual void onUnpicked() = 0;
+  IPickable(IPickable &&obj) = default;
 
- protected:
-	bool mFlagPickable;
-	glm::vec3 mPickColor;
+  bool isPickable() {
+    return mFlagPickable;
+  }
+
+  glm::vec3 getPickableColor() {
+    return mPickColor;
+  }
+
+  virtual void pick(glm::vec3 color) = 0;
+
+  virtual void unpick() = 0;
+
+  virtual void onPicked() = 0;
+
+  virtual void onUnpicked() = 0;
+
+protected:
+  bool mFlagPickable;
+  glm::vec3 mPickColor;
 };
 
 } /* namespace framework */

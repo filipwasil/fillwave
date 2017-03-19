@@ -45,18 +45,22 @@ namespace framework {
  * \brief Program based render pases
  */
 
-class RendererPBRP: public IRenderer {
- public:
-	RendererPBRP() = default;
-	virtual ~RendererPBRP() = default;
+class RendererPBRP : public IRenderer {
+public:
+  RendererPBRP() = default;
 
-	void update(IRenderable* renderable) override;
-	void draw(ICamera& camera) override;
-	void reset(GLuint width, GLuint height) override;
-	void clear() override;
+  virtual ~RendererPBRP() = default;
 
- private:
-	std::unordered_map<GLuint, std::vector<IRenderable*> > mRenderPasses;
+  void update(IRenderable *renderable) override;
+
+  void draw(ICamera &camera) override;
+
+  void reset(GLuint width, GLuint height) override;
+
+  void clear() override;
+
+private:
+  std::unordered_map<GLuint, std::vector<IRenderable *> > mRenderPasses;
 };
 
 } /* namespace framework */

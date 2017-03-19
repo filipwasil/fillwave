@@ -15,20 +15,21 @@ FLOGINIT("Engine", FERROR | FFATAL | FINFO | FDEBUG)
 namespace fillwave {
 
 struct Engine::EngineImpl {
-	EngineImpl() = default;
-	~EngineImpl() = default;
+  EngineImpl() = default;
+
+  ~EngineImpl() = default;
 };
 
-Engine::Engine(GLint /*argc*/, GLchar* const argv[]) {
-	(void)argv;
+Engine::Engine(GLint /*argc*/, GLchar *const argv[]) {
+  (void) argv;
 }
 
 Engine::~Engine() {
 
 }
 
-core::Texture2D* Engine::storeTexture(const std::string& /*texturePath*/, framework::eCompression /*compression*/) {
-	return nullptr;
+core::Texture2D *Engine::storeTexture(const std::string & /*texturePath*/, framework::eCompression /*compression*/) {
+  return nullptr;
 }
 
 }

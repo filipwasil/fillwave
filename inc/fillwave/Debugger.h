@@ -42,15 +42,15 @@ class FramebufferGeometry;
 }
 
 enum class eDebuggerState {
-	eLightsSpot,
-	eLightsSpotColor,
-	eLightsSpotDepth,
-	eLightsPoint,
-	eLightsPointDepth,
-	eLightsPointColor,
-	ePickingMap,
-	eOff,
-	eToggleState
+  eLightsSpot
+  , eLightsSpotColor
+  , eLightsSpotDepth
+  , eLightsPoint
+  , eLightsPointDepth
+  , eLightsPointColor
+  , ePickingMap
+  , eOff
+  , eToggleState
 };
 
 class Engine;
@@ -68,42 +68,49 @@ class Camera;
  *
  */
 
-class Debugger: public IReloadable {
- public:
-	Debugger(Engine* engine);
-	virtual ~Debugger() = default;
+class Debugger : public IReloadable {
+public:
+  Debugger(Engine *engine);
 
-	void setState(eDebuggerState state);
-	eDebuggerState getState();
+  virtual ~Debugger() = default;
 
-	void renderFromCamera(ICamera& c, GLint id = 0);
-	void renderDepthPerspective(GLint id = 0);
-	void renderDepthOrthographic(GLint id = 0);
-	void renderPickingMap();
-	void renderGeometryBuffer(
-	   GLuint width,
-	   GLuint height,
-	   GLuint attachments,
-	   core::FramebufferGeometry* buffer);
-	void setMiniwindowSize(GLfloat size);
+  void setState(eDebuggerState state);
 
- private:
-	eDebuggerState mState;
-	core::Program* mProgram;
-	Engine* mEngine;
+  eDebuggerState getState();
 
-	core::VertexBufferDebug* mVBO;
+  void renderFromCamera(ICamera &c, GLint id = 0);
 
-	GLfloat mMiniwindowSize;
-	GLuint mMiniwindowsOccupied;
+  void renderDepthPerspective(GLint id = 0);
 
-	GLint mULCTextureUnit, mULCNearPlane, mULCFarPlane;
+  void renderDepthOrthographic(GLint id = 0);
 
-	void initBuffers();
-	void initPipeline();
-	void initVBO();
-	void initVAO();
-	void initUniformsCache();
+  void renderPickingMap();
+
+  void renderGeometryBuffer(GLuint width, GLuint height, GLuint attachments, core::FramebufferGeometry *buffer);
+
+  void setMiniwindowSize(GLfloat size);
+
+private:
+  eDebuggerState mState;
+  core::Program *mProgram;
+  Engine *mEngine;
+
+  core::VertexBufferDebug *mVBO;
+
+  GLfloat mMiniwindowSize;
+  GLuint mMiniwindowsOccupied;
+
+  GLint mULCTextureUnit, mULCNearPlane, mULCFarPlane;
+
+  void initBuffers();
+
+  void initPipeline();
+
+  void initVBO();
+
+  void initVAO();
+
+  void initUniformsCache();
 };
 
 } /* framework */

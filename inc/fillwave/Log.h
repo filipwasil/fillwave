@@ -69,7 +69,9 @@
 #ifdef __ANDROID__
 #include <android/log.h>
 #else /* __ANDROID__ */
+
 #include "spdlog/spdlog.h"
+
 #endif /* __ANDROID__ */
 
 #ifdef __ANDROID__
@@ -116,7 +118,7 @@
 #define GPU_USER ANDROID_LOG_WARN
 #define fLog() __android_log_print(LOG_FLAG, ::_tag_.c_str(), "")
 #define fLogBase(LOG_CONDITION, LOG_FLAG, ...)\
-    do { if ( FIF(LOG_CONDITION) ) (void)__android_log_print(LOG_FLAG, ::_tag_.c_str(), __VA_ARGS__); } while(0)
+   do { if ( FIF(LOG_CONDITION) ) (void)__android_log_print(LOG_FLAG, ::_tag_.c_str(), __VA_ARGS__); } while(0)
 
 #else /* __ANDROID__ */
 
@@ -135,18 +137,18 @@
 #ifdef __ANDROID__
 
 #define fLogC(...)\
-      do {\
-         (void)_mask_;\
-         GLenum errorCode = glGetError();\
-         if ( errorCode != GL_NO_ERROR) {\
-            (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "CORE ERROR:", errorCode);\
-            (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), __VA_ARGS__);\
-            if (errorCode == 0x0506) { /*Framebuffer error*/ \
-              GLenum status = getFramebufferStatus();\
-              (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "FRAMEBUFFER_STATUS:", status);\
-            }\
+    do {\
+      (void)_mask_;\
+      GLenum errorCode = glGetError();\
+      if ( errorCode != GL_NO_ERROR) {\
+        (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "CORE ERROR:", errorCode);\
+        (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), __VA_ARGS__);\
+        if (errorCode == 0x0506) { /*Framebuffer error*/ \
+          GLenum status = getFramebufferStatus();\
+          (void)__android_log_print(ANDROID_LOG_ERROR, ::_tag_.c_str(), "[%s 0x%04x] ", "FRAMEBUFFER_STATUS:", status);\
         }\
-      }while(0)
+      }\
+    }while(0)
 #else /* __ANDROID__ */
 
 #define fLogC(...) do {\

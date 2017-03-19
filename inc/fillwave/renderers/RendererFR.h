@@ -44,17 +44,22 @@ namespace framework {
  * \brief Forward IRenderer.
  */
 
-class RendererFR: public IRenderer {
- public:
-	RendererFR() = default;
-	virtual ~RendererFR() = default;
+class RendererFR : public IRenderer {
+public:
+  RendererFR() = default;
 
-	void update(IRenderable* renderable) override;
-	void draw(ICamera& camera) override;
-	void reset(GLuint width, GLuint height) override;
-	void clear() override;
- private:
-	std::vector<IRenderable*> mRenderPasses;
+  virtual ~RendererFR() = default;
+
+  void update(IRenderable *renderable) override;
+
+  void draw(ICamera &camera) override;
+
+  void reset(GLuint width, GLuint height) override;
+
+  void clear() override;
+
+private:
+  std::vector<IRenderable *> mRenderPasses;
 };
 
 } /* namespace framework */

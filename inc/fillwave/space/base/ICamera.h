@@ -44,32 +44,38 @@ namespace framework {
  * \brief Stores camera view parameters.
  */
 
-class ICamera: public Moveable {
- public:
-	ICamera();
+class ICamera : public Moveable {
+public:
+  ICamera();
 
-	ICamera(glm::vec3, glm::quat rotation);
+  ICamera(glm::vec3, glm::quat rotation);
 
-	virtual ~ICamera() = default;
+  virtual ~ICamera() = default;
 
-	void update();
-	void updateView();
+  void update();
 
-	glm::mat4 getEye();
-	glm::mat4 getProjection();
-	glm::mat4 getViewProjection();
+  void updateView();
 
-	virtual void updateProjection() = 0;
-	virtual GLfloat getProjectionNearPlane() = 0;
-	virtual GLfloat getProjectionFarPlane() = 0;
-	virtual void log() const;
+  glm::mat4 getEye();
 
- protected:
-	glm::mat4 mCameraMatrix;
-	glm::mat4 mProjectionMatrix;
+  glm::mat4 getProjection();
 
-	GLboolean mRefreshView;
-	GLboolean mRefreshProjection;
+  glm::mat4 getViewProjection();
+
+  virtual void updateProjection() = 0;
+
+  virtual GLfloat getProjectionNearPlane() = 0;
+
+  virtual GLfloat getProjectionFarPlane() = 0;
+
+  virtual void log() const;
+
+protected:
+  glm::mat4 mCameraMatrix;
+  glm::mat4 mProjectionMatrix;
+
+  GLboolean mRefreshView;
+  GLboolean mRefreshProjection;
 };
 } /* framework */
 typedef std::unique_ptr<framework::ICamera> puICamera;

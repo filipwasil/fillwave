@@ -13,111 +13,114 @@ extern "C" {
  * Method:    newEngine
  * Signature: ()J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_createEngine(
-		JNIEnv *,
-		jobject,
-		jstring rootPath);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_createEngine(JNIEnv *, jobject, jstring rootPath);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    deleteEngine
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_deleteEngine
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_deleteEngine
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    configureDebugger
  * Signature: (JI)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_configureDebugger
-(JNIEnv *, jobject, jlong, jint);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_configureDebugger
+(JNIEnv * , jobject , jlong , jint ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    configureFileLogging
  * Signature: (JLjava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_configureFileLogging
-(JNIEnv *, jobject, jlong, jstring);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_configureFileLogging
+(JNIEnv * , jobject , jlong , jstring ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    configureFPSCounter
  * Signature: (JLjava/lang/String;FFF)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_configureFPSCounter
-(JNIEnv *, jobject, jlong, jstring, jfloat, jfloat, jfloat);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_configureFPSCounter
+(JNIEnv * , jobject , jlong , jstring , jfloat , jfloat , jfloat ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    configureBackgroundColor
  * Signature: (JLcom/fillwave/Fillwave/Vector3f;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_configureBackgroundColor
-(JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_configureBackgroundColor
+(JNIEnv * , jobject , jlong , jobject ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    configureTime
  * Signature: (JF)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_configureTime
-(JNIEnv *, jobject, jlong, jfloat);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_configureTime
+(JNIEnv * , jobject , jlong , jfloat ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    draw
  * Signature: (JF)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_draw
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_draw
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    drawLines
  * Signature: (JF)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_drawLines
-(JNIEnv *, jobject, jlong, jfloat);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_drawLines
+(JNIEnv * , jobject , jlong , jfloat ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    drawPoints
  * Signature: (JF)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_drawPoints
-(JNIEnv *, jobject, jlong, jfloat);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_drawPoints
+(JNIEnv * , jobject , jlong , jfloat ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    drawTexture
  * Signature: (JJJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_drawTexture
-(JNIEnv *, jobject, jlong, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_drawTexture
+(JNIEnv * , jobject , jlong , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getPhysicalMeshBuffer
  * Signature: (JLjava/lang/String;)Lcom/fillwave/Fillwave/PhysicsMeshBuffer;
  */
-JNIEXPORT jobject JNICALL Java_com_fillwave_Fillwave_getPhysicalMeshBuffer(
-		JNIEnv *,
-		jobject,
-		jlong,
-		jstring);
+JNIEXPORT jobject
+JNICALL Java_com_fillwave_Fillwave_getPhysicalMeshBuffer (JNIEnv * , jobject, jlong, jstring);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getLightManager
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getLightManager(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_getLightManager (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
@@ -138,95 +141,80 @@ JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getLightManager(
  * Method:    getFramesPassed
  * Signature: (J)I
  */
-JNIEXPORT jint JNICALL Java_com_fillwave_Fillwave_getFramesPassed(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jint
+JNICALL Java_com_fillwave_Fillwave_getFramesPassed (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    storeShaderFragment
  * Signature: (JLjava/lang/String;)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_storeShaderFragment__JLjava_lang_String_2(
-		JNIEnv *,
-		jobject,
-		jlong,
-		jstring);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_storeShaderFragment__JLjava_lang_String_2 (JNIEnv * , jobject, jlong, jstring);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    storeShaderVertex
  * Signature: (JLjava/lang/String;)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_storeShaderVertex__JLjava_lang_String_2(
-		JNIEnv *,
-		jobject,
-		jlong,
-		jstring);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_storeShaderVertex__JLjava_lang_String_2 (JNIEnv * , jobject, jlong, jstring);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    storeShaderFragment
  * Signature: (JLjava/lang/String;Ljava/lang/String;)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_storeShaderFragment__JLjava_lang_String_2Ljava_lang_String_2(
-		JNIEnv *,
-		jobject,
-		jlong,
-		jstring,
-		jstring);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_storeShaderFragment__JLjava_lang_String_2Ljava_lang_String_2 (JNIEnv * ,
+                                                                                                 jobject,
+                                                                                                 jlong,
+                                                                                                 jstring,
+                                                                                                 jstring);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    storeShaderVertex
  * Signature: (JLjava/lang/String;Ljava/lang/String;)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_storeShaderVertex__JLjava_lang_String_2Ljava_lang_String_2(
-		JNIEnv *,
-		jobject,
-		jlong,
-		jstring,
-		jstring);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_storeShaderVertex__JLjava_lang_String_2Ljava_lang_String_2 (JNIEnv * ,
+                                                                                               jobject,
+                                                                                               jlong,
+                                                                                               jstring,
+                                                                                               jstring);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    storeTexture
  * Signature: (JLjava/lang/String;I)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_storeTexture(
-		JNIEnv *,
-		jobject,
-		jlong,
-		jstring,
-		jint);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_storeTexture (JNIEnv * , jobject, jlong, jstring, jint);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    storeTextureDynamic
  * Signature: (JLjava/lang/String;)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_storeTextureDynamic(
-		JNIEnv *,
-		jobject,
-		jlong,
-		jstring);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_storeTextureDynamic (JNIEnv * , jobject, jlong, jstring);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    storeTexture3D
  * Signature: (JLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_storeTexture3D(
-		JNIEnv *,
-		jobject,
-		jlong,
-		jstring,
-		jstring,
-		jstring,
-		jstring,
-		jstring,
-		jstring);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_storeTexture3D (JNIEnv * ,
+                                                   jobject,
+                                                   jlong,
+                                                   jstring,
+                                                   jstring,
+                                                   jstring,
+                                                   jstring,
+                                                   jstring,
+                                                   jstring);
 
 /*
  * Class:     com_fillwave_Fillwave
@@ -254,541 +242,575 @@ JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_storeTexture3D(
  * Method:    storeText
  * Signature: (JLjava/lang/String;Ljava/lang/String;FFFLcom/fillwave/Fillwave/Vector4f;I)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_storeText(
-		JNIEnv *,
-		jobject,
-		jlong,
-		jstring,
-		jstring,
-		jfloat,
-		jfloat,
-		jfloat,
-		jobject,
-		jint);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_storeText (JNIEnv * ,
+                                              jobject,
+                                              jlong,
+                                              jstring,
+                                              jstring,
+                                              jfloat,
+                                              jfloat,
+                                              jfloat,
+                                              jobject,
+                                              jint);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearText
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearText
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearText
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearLightSpot
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearLightSpot
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearLightSpot
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearLightDirectional
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearLightDirectional
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearLightDirectional
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearLightPoint
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearLightPoint
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearLightPoint
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearLights
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearLights
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearLights
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    pick
  * Signature: (JII)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_pick
-(JNIEnv *, jobject, jlong, jint, jint);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_pick
+(JNIEnv * , jobject , jlong , jint , jint ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getScreenSize
  * Signature: (J)Lcom/fillwave/Fillwave/Vector2i;
  */
-JNIEXPORT jobject JNICALL Java_com_fillwave_Fillwave_getScreenSize(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jobject
+JNICALL Java_com_fillwave_Fillwave_getScreenSize (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    log
  * Signature: ()V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_log
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_log
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    captureFramebufferToFile
  * Signature: (JLjava/lang/String;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_captureFramebufferToFile
-(JNIEnv *, jobject, jlong, jstring);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_captureFramebufferToFile
+(JNIEnv * , jobject , jlong , jstring ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getExecutablePath
  * Signature: (J)Ljava/lang/String;
  */
-JNIEXPORT jstring JNICALL Java_com_fillwave_Fillwave_getExecutablePath(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jstring
+JNICALL Java_com_fillwave_Fillwave_getExecutablePath (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    addPostProcess
  * Signature: (JLjava/lang/String;F)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_addPostProcess
-(JNIEnv *, jobject, jlong, jstring, jfloat);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_addPostProcess
+(JNIEnv * , jobject , jlong , jstring , jfloat ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    setFocusKey
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_setFocusKey
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_setFocusKey
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    setFocusMouseButton
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_setFocusMouseButton
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_setFocusMouseButton
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    setFocusScroll
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_setFocusScroll
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_setFocusScroll
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    setFocusChar
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_setFocusChar
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_setFocusChar
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    setFocusCharMods
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_setFocusCharMods
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_setFocusCharMods
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    setFocusCursorEnter
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_setFocusCursorEnter
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_setFocusCursorEnter
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    setFocusCursorPosition
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_setFocusCursorPosition
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_setFocusCursorPosition
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getFocusKey
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getFocusKey(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusKey (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getFocusMouseButton
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getFocusMouseButton(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusMouseButton (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getFocusScroll
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getFocusScroll(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusScroll (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getFocusChar
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getFocusChar(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusChar (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getFocusCharMods
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getFocusCharMods(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusCharMods (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getFocusCursorEnter
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getFocusCursorEnter(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusCursorEnter (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getFocusCursorPosition
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getFocusCursorPosition(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusCursorPosition (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    getFocusTouchScreen
  * Signature: (J)J
  */
-JNIEXPORT jlong JNICALL Java_com_fillwave_Fillwave_getFocusTouchScreen(
-		JNIEnv *,
-		jobject,
-		jlong);
+JNIEXPORT jlong
+JNICALL Java_com_fillwave_Fillwave_getFocusTouchScreen (JNIEnv * , jobject, jlong);
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    insertResizeScreen
  * Signature: (JII)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertResizeScreen
-(JNIEnv *, jobject, jlong, jint, jint);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_insertResizeScreen
+(JNIEnv * , jobject , jlong , jint , jint ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    insertInputKey
  * Signature: (JLcom/fillwave/Fillwave/KeyboardEvent;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputKey
-(JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_insertInputKey
+(JNIEnv * , jobject , jlong , jobject ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    insertInputMouseButton
  * Signature: (JLcom/fillwave/Fillwave/MouseButtonEvent;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputMouseButton
-(JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_insertInputMouseButton
+(JNIEnv * , jobject , jlong , jobject ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    insertInputScroll
  * Signature: (JLcom/fillwave/Fillwave/ScrollEvent;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputScroll
-(JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_insertInputScroll
+(JNIEnv * , jobject , jlong , jobject ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    insertInputCharacter
  * Signature: (JLcom/fillwave/Fillwave/CharacterEvent;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputCharacter
-(JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_insertInputCharacter
+(JNIEnv * , jobject , jlong , jobject ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    insertInputCharacterMods
  * Signature: (JLcom/fillwave/Fillwave/CharacterModsEvent;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputCharacterMods
-(JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_insertInputCharacterMods
+(JNIEnv * , jobject , jlong , jobject ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    insertInputCursorEnter
  * Signature: (JLcom/fillwave/Fillwave/CursorEnterEvent;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputCursorEnter
-(JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_insertInputCursorEnter
+(JNIEnv * , jobject , jlong , jobject ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    insertInputCursorPosition
  * Signature: (JLcom/fillwave/Fillwave/CursorPositionEvent;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputCursorPosition
-(JNIEnv *, jobject, jlong, jobject);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_insertInputCursorPosition
+(JNIEnv * , jobject , jlong , jobject ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    insertInputTouchScreen
  * Signature: (JLcom/fillwave/Fillwave/TouchEvent;)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_insertInputTouchScreen
-(JNIEnv *, jobject, jlong, jlong x, jlong y, jlong action);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_insertInputTouchScreen
+(JNIEnv * , jobject , jlong , jlong x, jlong
+y , jlong action ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    registerTimeCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerTimeCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_registerTimeCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    registerKeyCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerKeyCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_registerKeyCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    registerMouseButtonCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerMouseButtonCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_registerMouseButtonCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    registerScrollCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerScrollCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_registerScrollCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    registerCharCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCharCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_registerCharCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    registerCharModsCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCharModsCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_registerCharModsCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    registerCursorEnterCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCursorEnterCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_registerCursorEnterCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    registerCursorPositionCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerCursorPositionCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_registerCursorPositionCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    registerTouchScreenCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_registerTouchScreenCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_registerTouchScreenCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterTimeCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterTimeCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_unregisterTimeCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterKeyCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterKeyCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_unregisterKeyCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterMouseButtonCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterMouseButtonCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_unregisterMouseButtonCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterScrollCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterScrollCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_unregisterScrollCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterCharCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCharCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_unregisterCharCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterCharModsCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCharModsCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_unregisterCharModsCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterCursorEnterCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCursorEnterCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_unregisterCursorEnterCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterCursorPositionCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterCursorPositionCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_unregisterCursorPositionCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    unregisterTouchScreenCallback
  * Signature: (JJ)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_unregisterTouchScreenCallback
-(JNIEnv *, jobject, jlong, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_unregisterTouchScreenCallback
+(JNIEnv * , jobject , jlong , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearTimeCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearTimeCallbacks
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearTimeCallbacks
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearKeyCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearKeyCallbacks
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearKeyCallbacks
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearMouseButtonCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearMouseButtonCallbacks
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearMouseButtonCallbacks
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearScrollCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearScrollCallbacks
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearScrollCallbacks
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearCharCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearCharCallbacks
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearCharCallbacks
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearCharModsCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearCharModsCallbacks
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearCharModsCallbacks
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearCursorEnterCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearCursorEnterCallbacks
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearCursorEnterCallbacks
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearCursorPositionCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearCursorPositionCallbacks
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearCursorPositionCallbacks
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    clearTouchScreenCallbacks
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_clearTouchScreenCallbacks
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_clearTouchScreenCallbacks
+(JNIEnv * , jobject , jlong ) ;
 
 /*
  * Class:     com_fillwave_Fillwave
  * Method:    buildScene
  * Signature: (J)V
  */
-JNIEXPORT void JNICALL Java_com_fillwave_Fillwave_buildTestScene
-(JNIEnv *, jobject, jlong);
+JNIEXPORT void JNICALL
+Java_com_fillwave_Fillwave_buildTestScene
+(JNIEnv * , jobject , jlong ) ;
 #ifdef __cplusplus
 }
 #endif

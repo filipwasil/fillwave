@@ -32,7 +32,6 @@
 
 
 #include <fillwave/actions/callbacks/TimedBoneUpdateCallback.h>
-#include <fillwave/actions/events/TimeEvent.h>
 #include <fillwave/models/Model.h>
 #include <fillwave/Log.h>
 
@@ -41,13 +40,13 @@ FLOGINIT("TimedBoneUpdateCallback", FERROR | FFATAL)
 namespace fillwave {
 namespace framework {
 
-TimedBoneUpdateCallback::TimedBoneUpdateCallback(Model* model) :
-	TimedCallback(0.0), mModel(model) {
-	fLogD("Added animation callback");
+TimedBoneUpdateCallback::TimedBoneUpdateCallback(Model *model)
+    : TimedCallback (0.0), mModel (model) {
+  fLogD("Added animation callback");
 }
 
-void TimedBoneUpdateCallback::performTime(TimeEventData& data) {
-	mModel->performAnimation(data.mTimePassed);
+void TimedBoneUpdateCallback::performTime(TimeEventData &data) {
+  mModel->performAnimation (data.mTimePassed);
 }
 
 } /* framework */

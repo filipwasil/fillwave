@@ -50,25 +50,30 @@ namespace framework {
  * \brief Hinge used by Animator to populate bone transformations.
  */
 
-class Bone final: public Hinge {
- public:
-	Bone(aiBone* assimpBone);
-	~Bone() = default;
+class Bone final : public Hinge {
+public:
+  Bone(aiBone *assimpBone);
 
-	std::string getName() const;
-	glm::mat4 getOffsetMatrix() const;
-	glm::mat4 getGlobalOffsetMatrix() const;
+  ~Bone() = default;
 
-	void setName(std::string name);
-	void setOffsetMatrix(glm::mat4 m);
-	void setGlobalOffsetMatrix(glm::mat4 m);
+  std::string getName() const;
 
-	void log();
+  glm::mat4 getOffsetMatrix() const;
 
- private:
-	std::string mName;
-	glm::mat4 mOffsetMatrix;
-	glm::mat4 mGlobalOffsetMatrix;
+  glm::mat4 getGlobalOffsetMatrix() const;
+
+  void setName(std::string name);
+
+  void setOffsetMatrix(glm::mat4 m);
+
+  void setGlobalOffsetMatrix(glm::mat4 m);
+
+  void log();
+
+private:
+  std::string mName;
+  glm::mat4 mOffsetMatrix;
+  glm::mat4 mGlobalOffsetMatrix;
 };
 
 } /* framework */

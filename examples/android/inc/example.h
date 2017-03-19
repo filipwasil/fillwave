@@ -11,7 +11,8 @@
 namespace fillwave {
 class Engine;
 }
-void perform(fillwave::Engine* engine);
+
+void perform(fillwave::Engine *engine);
 
 
 #endif /* EXAMPLE_H_ */

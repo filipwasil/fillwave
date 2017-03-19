@@ -46,7 +46,8 @@ namespace fillwave {
 class Engine;
 
 enum class eTextEffect {
-	eNone, eBold
+  eNone
+  , eBold
 };
 
 namespace framework {
@@ -55,50 +56,59 @@ namespace framework {
  * \brief 2D Text on the screen.
  */
 
-class Text: public IReloadable, public IHUDNode {
- public:
-	Text(
-	   const std::string& text,
-	   core::Texture2D* texture,
-	   glm::vec2 position,
-	   Engine* engine,
-	   GLfloat scale,
-	   Font* font,
-	   glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
-	   eTextEffect effect = eTextEffect::eNone);
+class Text : public IReloadable, public IHUDNode {
+public:
+  Text(const std::string &text,
+      core::Texture2D *texture,
+      glm::vec2 position,
+      Engine *engine,
+      GLfloat scale,
+      Font *font,
+      glm::vec4 color = glm::vec4 (1.0, 1.0, 1.0, 1.0),
+      eTextEffect effect = eTextEffect::eNone);
 
-	virtual ~Text() = default;
+  virtual ~Text() = default;
 
-	void draw() override;
+  void draw() override;
 
-	void editAspectRatio(Engine* engine);
-	void editString(std::string text);
-	void editColor(glm::vec4 color);
-	void editSize(GLfloat size);
-	void editPosition(glm::vec2 position);
+  void editAspectRatio(Engine *engine);
 
- private:
-	/* Text */
-	std::string mText;
-	glm::vec4 mColor;
-	eTextEffect mEffect;
-	Font* mFont;
-	core::VertexBufferText* mVBO;
+  void editString(std::string text);
 
-	/* IHUD */
-	Engine* mEngine;
-	GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
-	GLint mViewportWidth, mViewportHeight;
+  void editColor(glm::vec4 color);
 
-	core::Program* createProgram(Engine* engine, eTextEffect effect);
-	void createVBO();
-	void clearVBO();
+  void editSize(GLfloat size);
 
-	void initVBO();
-	void initVAO();
-	void initBuffers();
-	void initPipeline();
-	void initUniformsCache();
+  void editPosition(glm::vec2 position);
+
+private:
+  /* Text */
+  std::string mText;
+  glm::vec4 mColor;
+  eTextEffect mEffect;
+  Font *mFont;
+  core::VertexBufferText *mVBO;
+
+  /* IHUD */
+  Engine *mEngine;
+  GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
+  GLint mViewportWidth, mViewportHeight;
+
+  core::Program *createProgram(Engine *engine, eTextEffect effect);
+
+  void createVBO();
+
+  void clearVBO();
+
+  void initVBO();
+
+  void initVAO();
+
+  void initBuffers();
+
+  void initPipeline();
+
+  void initUniformsCache();
 };
 
 } /* framework */

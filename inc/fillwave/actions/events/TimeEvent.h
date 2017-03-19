@@ -43,21 +43,22 @@ namespace framework {
  */
 
 struct TimeEventData {
-	float mTimePassed;
-	const eEventType type = eEventType::eTime;
+  float mTimePassed;
+  const eEventType type = eEventType::eTime;
 };
 
 /*! \class TimeEvent
  * \brief Event introduced with every single draw loop passed.
  */
 
-class TimeEvent: public TEvent<TimeEventData> {
- public:
-	TimeEvent(TimeEventData data) :
-		TEvent(data) {
+class TimeEvent : public TEvent<TimeEventData> {
+public:
+  TimeEvent(TimeEventData data)
+      : TEvent (data) {
 
-	}
-	virtual ~TimeEvent() = default;
+  }
+
+  virtual ~TimeEvent() = default;
 };
 
 } /* framework */

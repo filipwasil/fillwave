@@ -18,21 +18,22 @@ namespace framework {
  */
 
 struct KeyboardEventData {
-	int key, scanCode, action, mode;
-	const eEventType type = eEventType::eKey;
+  int key, scanCode, action, mode;
+  const eEventType type = eEventType::eKey;
 };
 
 /*! \struct KeyboardEvent
  * \brief Event introduced when something happens with the key.
  */
 
-class KeyboardEvent: public TEvent<KeyboardEventData> {
- public:
-	KeyboardEvent(KeyboardEventData data) :
-		TEvent(data) {
+class KeyboardEvent : public TEvent<KeyboardEventData> {
+public:
+  KeyboardEvent(KeyboardEventData data)
+      : TEvent (data) {
 
-	}
-	virtual ~KeyboardEvent() = default;
+  }
+
+  virtual ~KeyboardEvent() = default;
 };
 
 } /* framework */

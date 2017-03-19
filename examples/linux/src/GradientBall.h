@@ -20,18 +20,20 @@ namespace framework {
  * \brief Impostor to define a gradient ball.
  */
 
-class GradientBall: public Impostor {
+class GradientBall : public Impostor {
 private:
-   core::Program* mProgram;
+  core::Program *mProgram;
 public:
-   GradientBall(Engine* engine,
-                core::Program* program,
-                GLfloat lifetime = 1.0,
-                GLfloat size = 1.0,
-                core::Texture* texture = nullptr);
-   virtual ~GradientBall();
-   void draw(ICamera& camera);
-   };
+  GradientBall(Engine *engine,
+      core::Program *program,
+      GLfloat lifetime = 1.0,
+      GLfloat size = 1.0,
+      core::Texture *texture = nullptr);
+
+  virtual ~GradientBall();
+
+  void draw(ICamera &camera);
+};
 
 } /* framework */
 typedef std::shared_ptr<framework::GradientBall> pGradientBall;

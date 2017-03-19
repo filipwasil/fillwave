@@ -41,11 +41,13 @@
 namespace fillwave {
 namespace framework {
 
-class ColorPickingCallback: public Callback {
+class ColorPickingCallback : public Callback {
 public:
-   ColorPickingCallback(Engine* engine);
-   ~ColorPickingCallback() = default;
-   void perform (EventType& event);
+  ColorPickingCallback(Engine *engine);
+
+  ~ColorPickingCallback() = default;
+
+  void perform(EventType &event);
 };
 
 } /* framework */

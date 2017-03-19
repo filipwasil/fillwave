@@ -45,12 +45,13 @@ namespace framework {
  * \brief Heads Up Display tree.
  */
 
-class HUD: public TreePtr<IHUDNode, IHUDNode> {
- public:
-	HUD() = default;
-	virtual ~HUD() = default;
+class HUD : public TreePtr<IHUDNode, IHUDNode> {
+public:
+  HUD() = default;
 
-	virtual void draw() override;
+  virtual ~HUD() = default;
+
+  virtual void draw() override;
 };
 
 } /* namespace framework */

@@ -43,31 +43,39 @@ namespace framework {
  * \brief Camera with perspective projection.
  */
 
-class CameraPerspective: public ICamera {
- private:
-	GLfloat mProjectionFovy, mProjectionAspectRatio, mProjectionNearPlane,
-	        mProjectionFarPlane;
+class CameraPerspective : public ICamera {
+private:
+  GLfloat mProjectionFovy, mProjectionAspectRatio, mProjectionNearPlane, mProjectionFarPlane;
 
- public:
-	CameraPerspective();
+public:
+  CameraPerspective();
 
-	CameraPerspective(glm::vec3 position, glm::quat rotation, GLfloat fovy =
-	                     glm::radians(90.0f), GLfloat aspectRatio = 1.0f, GLfloat nearPlane =
-	                     0.01f, GLfloat farPlane = 100.0f);
+  CameraPerspective(glm::vec3 position,
+      glm::quat rotation,
+      GLfloat fovy = glm::radians (90.0f),
+      GLfloat aspectRatio = 1.0f,
+      GLfloat nearPlane = 0.01f,
+      GLfloat farPlane = 100.0f);
 
-	virtual ~CameraPerspective() = default;
+  virtual ~CameraPerspective() = default;
 
-	GLfloat getProjectionFovy();
-	GLfloat getProjectionAspectRatio();
-	GLfloat getProjectionNearPlane();
-	GLfloat getProjectionFarPlane();
+  GLfloat getProjectionFovy();
 
-	void setProjectionFovy(GLfloat fovy);
-	void setProjectionAspectRatio(GLfloat aspect);
-	void setProjectionNearPlane(GLfloat nearPlane);
-	void setProjectionFarPlane(GLfloat farPlane);
+  GLfloat getProjectionAspectRatio();
 
-	void updateProjection();
+  GLfloat getProjectionNearPlane();
+
+  GLfloat getProjectionFarPlane();
+
+  void setProjectionFovy(GLfloat fovy);
+
+  void setProjectionAspectRatio(GLfloat aspect);
+
+  void setProjectionNearPlane(GLfloat nearPlane);
+
+  void setProjectionFarPlane(GLfloat farPlane);
+
+  void updateProjection();
 };
 } /* framework */
 typedef std::unique_ptr<framework::CameraPerspective> puCameraPerspective;

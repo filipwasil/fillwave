@@ -28,6 +28,7 @@
 FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 
 struct ANativeActivity;
+
 class Engine;
 
 using namespace fillwave::framework;
@@ -42,217 +43,241 @@ namespace fillwave {
 struct Engine::EngineImpl final {
 
 #ifdef __ANDROID__
-	EngineImpl(Engine* engine, string rootPath);
-	EngineImpl(Engine* engine, ANativeActivity* activity);
+  EngineImpl(Engine* engine, string rootPath);
+  EngineImpl(Engine* engine, ANativeActivity* activity);
 #else
-	EngineImpl(Engine* engine, GLint argc, GLchar* const argv[]);
+
+  EngineImpl(Engine *engine, GLint argc, GLchar *const argv[]);
+
 #endif
 
-	~EngineImpl();
+  ~EngineImpl();
 
-	Engine* mEngine;
+  Engine *mEngine;
 
-	/* Asset loader */
+  /* Asset loader */
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-	Assimp::Importer mImporter;
+  Assimp::Importer mImporter;
 #else
 
 #endif
 
-	/* Screen */
-	GLuint mWindowWidth = 1920;
-	GLuint mWindowHeight = 1200;
-	GLfloat mWindowAspectRatio = 1200.0f / 1920.0f;
+  /* Screen */
+  GLuint mWindowWidth = 1920;
+  GLuint mWindowHeight = 1200;
+  GLfloat mWindowAspectRatio = 1200.0f / 1920.0f;
 
-	/* Loaders */
-	framework::FontLoader mFontLoader;
-	framework::FileLoader mFileLoader;
-	framework::ProgramLoader mProgramLoader;
+  /* Loaders */
+  framework::FontLoader mFontLoader;
+  framework::FileLoader mFileLoader;
+  framework::ProgramLoader mProgramLoader;
 
-	/* Picking */
-	core::Texture2DRenderable* mPickingRenderableTexture;
-	puPixelBuffer mPickingPixelBuffer;
+  /* Picking */
+  core::Texture2DRenderable *mPickingRenderableTexture;
+  puPixelBuffer mPickingPixelBuffer;
 
-	/* Resources */
-	CacheShaders mShaders;
-	CachePrograms mPrograms;
-	CacheSamplers mSamplers;
-	vector<pText> mTextManager;
-	vector<pFont> mFontManager;
-	BufferSystem mBuffers;
-	puLightSystem mLights;
-	puTextureSystem mTextures;
-	vector<core::PostProcessingPass> mPostProcessingPasses;
-	core::Program* mProgramTextureLookup;
+  /* Resources */
+  CacheShaders mShaders;
+  CachePrograms mPrograms;
+  CacheSamplers mSamplers;
+  vector<pText> mTextManager;
+  vector<pFont> mFontManager;
+  BufferSystem mBuffers;
+  puLightSystem mLights;
+  puTextureSystem mTextures;
+  vector<core::PostProcessingPass> mPostProcessingPasses;
+  core::Program *mProgramTextureLookup;
 
-	/* Fences and barriers */
-	puFence mFence;
+  /* Fences and barriers */
+  puFence mFence;
 
-	/* OQ */
-	core::Program* mProgramOcclusionBox;
-	core::VertexBufferPosition* mVBOOcclusion;
-	core::VertexArray* mVAOOcclusion;
+  /* OQ */
+  core::Program *mProgramOcclusionBox;
+  core::VertexBufferPosition *mVBOOcclusion;
+  core::VertexArray *mVAOOcclusion;
 
-	/* Inputs - callbacks */
-	map<eEventType, vector<puCallback> > mCallbacks;
+  /* Inputs - callbacks */
+  map<eEventType, vector<puCallback> > mCallbacks;
 
-	/* Inputs - focus */
+  /* Inputs - focus */
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
-	pair<IFocusable*, vector<Callback*>> mFocus;
+  pair<IFocusable*, vector<Callback*>> mFocus;
 #else
-	map<IFocusable*, vector<Callback*>> mFocus;
+  map<IFocusable *, vector<Callback *>> mFocus;
 #endif
 
-	/* Extras */
-	puDebugger mDebugger;
-	GLuint mFrameCounter;
-	GLfloat mTimeFactor;
-	pText mFPSText;
-	framework::FPSCallback* mTextFPSCallback;
+  /* Extras */
+  puDebugger mDebugger;
+  GLuint mFrameCounter;
+  GLfloat mTimeFactor;
+  pText mFPSText;
+  framework::FPSCallback *mTextFPSCallback;
 
-	/* Startup */
-	GLfloat mStartupTime;
-	core::Texture* mStartupTexture;
-	const GLfloat mStartupTimeLimit = 8.0f;
-	puPostProcessingPass mPostProcessingPassStartup;
+  /* Startup */
+  GLfloat mStartupTime;
+  core::Texture *mStartupTexture;
+  const GLfloat mStartupTimeLimit = 8.0f;
+  puPostProcessingPass mPostProcessingPassStartup;
 
-	/* Options */
-	GLboolean mIsOQ; /* Occlusion query */
+  /* Options */
+  GLboolean mIsOQ; /* Occlusion query */
 
-	/* Scene */
-	puScene mScene;
-	glm::vec3 mBackgroundColor;
+  /* Scene */
+  puScene mScene;
+  glm::vec3 mBackgroundColor;
 
-	/* Callbacks */
-	void runCallbacks();
-	void runCallbacks(framework::EventType& eventType);
-	void clearCallbacks();
-	void clearCallbacks(eEventType eventType);
-	void clearCallback(framework::Callback* callback);
-	void registerCallback(puCallback&& callback);
-	void unregisterCallback(
-	   framework::Callback* callback);
+  /* Callbacks */
+  void runCallbacks();
 
-	/* Evaluation */
-	void evaluateShadowMaps();
-	void evaluateDebugger();
-	void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
-	void evaluateTime(GLfloat timeExpiredInSeconds);
-	void evaluateStartupAnimation(GLfloat time);
+  void runCallbacks(framework::EventType &eventType);
 
-	/* Draw types */
-	void draw(GLfloat time);
-	void drawFront();
-	void drawOcclusionPass();
+  void clearCallbacks();
+
+  void clearCallbacks(eEventType eventType);
+
+  void clearCallback(framework::Callback *callback);
+
+  void registerCallback(puCallback &&callback);
+
+  void unregisterCallback(framework::Callback *callback);
+
+  /* Evaluation */
+  void evaluateShadowMaps();
+
+  void evaluateDebugger();
+
+  void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
+
+  void evaluateTime(GLfloat timeExpiredInSeconds);
+
+  void evaluateStartupAnimation(GLfloat time);
+
+  /* Draw types */
+  void draw(GLfloat time);
+
+  void drawFront();
+
+  void drawOcclusionPass();
 
 #ifdef FILLWAVE_GLES_3_0
 #else
-	void drawLines(GLfloat time);
 
-	void drawPoints(GLfloat time);
+  void drawLines(GLfloat time);
+
+  void drawPoints(GLfloat time);
+
 #endif
 
-	void drawTexture(core::Texture* t, core::Program* p);
-	void drawTexture(core::Texture* t);
+  void drawTexture(core::Texture *t, core::Program *p);
 
-	/* IRenderer */
-	void drawClear();
-	void drawHUD();
-	void drawSceneStartup();
+  void drawTexture(core::Texture *t);
 
-	void drawScene(GLfloat time);
-	void drawSceneCore();
+  /* IRenderer */
+  void drawClear();
 
-	/* Picking */
-	glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
-	void pick(GLuint x, GLuint y);
+  void drawHUD();
 
-	/* Capture */
-	void captureFramebufferToFile(const string& name);
+  void drawSceneStartup();
 
-	/* Initiatization */
-	void init();
-	void initExtensions();
-	void initContext();
-	void initPickingBuffer();
-	void initPipelines();
-	void initUniforms();
-	void initManagement();
-	void initExtras();
-	void initOcclusionTest();
-	void initStartup();
+  void drawScene(GLfloat time);
 
-	/* Reload */
-	void reload();
-	void reloadPickingBuffer();
+  void drawSceneCore();
 
-	/* Insert */
-	void insertResizeScreen(GLuint width, GLuint height);
+  /* Picking */
+  glm::ivec4 pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y);
+
+  void pick(GLuint x, GLuint y);
+
+  /* Capture */
+  void captureFramebufferToFile(const string &name);
+
+  /* Initiatization */
+  void init();
+
+  void initExtensions();
+
+  void initContext();
+
+  void initPickingBuffer();
+
+  void initPipelines();
+
+  void initUniforms();
+
+  void initManagement();
+
+  void initExtras();
+
+  void initOcclusionTest();
+
+  void initStartup();
+
+  /* Reload */
+  void reload();
+
+  void reloadPickingBuffer();
+
+  /* Insert */
+  void insertResizeScreen(GLuint width, GLuint height);
 };
 
 #ifdef __ANDROID__
 
 Engine::EngineImpl::EngineImpl(Engine* engine, string rootPath)
-	: mEngine(engine),
-	  mFileLoader(rootPath),
-	  mProgramLoader(engine),
-	  mFrameCounter(0),
-	  mTimeFactor(1.0),
-	  mStartupTime(0.0f),
-	  mIsOQ(GL_FALSE),
-	  mBackgroundColor(0.1, 0.1, 0.1) {
+  : mEngine(engine),
+    mFileLoader(rootPath),
+    mProgramLoader(engine),
+    mFrameCounter(0),
+    mTimeFactor(1.0),
+    mStartupTime(0.0f),
+    mIsOQ(GL_FALSE),
+    mBackgroundColor(0.1, 0.1, 0.1) {
 }
 
 Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
-	: mEngine(engine),
-	  mFileLoader(activity->internalDataPath),
-	  mProgramLoader(engine),
-	  mFrameCounter(0),
-	  mTimeFactor(1.0),
-	  mStartupTime(0.0f),
-	  mIsOQ(GL_FALSE),
-	  mBackgroundColor(0.1, 0.1, 0.1) {
+  : mEngine(engine),
+    mFileLoader(activity->internalDataPath),
+    mProgramLoader(engine),
+    mFrameCounter(0),
+    mTimeFactor(1.0),
+    mStartupTime(0.0f),
+    mIsOQ(GL_FALSE),
+    mBackgroundColor(0.1, 0.1, 0.1) {
 
-	androidSetActivity(activity);
+  androidSetActivity(activity);
 
-	androidExtractAll();
+  androidExtractAll();
 
 #else
-Engine::EngineImpl::EngineImpl(Engine* engine, GLint, GLchar* const argv[])
-	: mEngine(engine),
-	  mFileLoader(getFilePathOnly(argv[0])),
-	  mProgramLoader(engine),
-	  mShaders(),
-	  mFrameCounter(0),
-	  mTimeFactor(1.0),
-	  mStartupTime(0.0f),
-	  mIsOQ(GL_TRUE),
-	  mBackgroundColor(0.1, 0.1, 0.1) {
+
+Engine::EngineImpl::EngineImpl(Engine *engine, GLint, GLchar *const argv[])
+    : mEngine (engine), mFileLoader (getFilePathOnly (argv[0])), mProgramLoader (engine), mShaders (), mFrameCounter (0)
+    , mTimeFactor (1.0), mStartupTime (0.0f), mIsOQ (GL_TRUE), mBackgroundColor (0.1, 0.1, 0.1) {
 #endif
 }
 
 Engine::EngineImpl::~EngineImpl() {
-	if (mScene) {
-		mScene.reset();
-	}
-	mTextManager.clear();
-	mFontManager.clear();
-	mPostProcessingPasses.clear();
+  if (mScene) {
+    mScene.reset ();
+  }
+  mTextManager.clear ();
+  mFontManager.clear ();
+  mPostProcessingPasses.clear ();
 }
 
 void Engine::EngineImpl::init() {
 
-	initExtensions();
-	initContext();
-	initManagement();
-	initPipelines();
-	initUniforms();
-	initPickingBuffer();
-	initOcclusionTest();
-	initExtras();
+  initExtensions ();
+  initContext ();
+  initManagement ();
+  initPipelines ();
+  initUniforms ();
+  initPickingBuffer ();
+  initOcclusionTest ();
+  initExtras ();
 
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
-	initStartup(engine);
+  initStartup(engine);
 #endif
 //   mFence = puFence(new core::Fence());
 }
@@ -260,27 +285,27 @@ void Engine::EngineImpl::init() {
 #ifdef FILLWAVE_GLES_3_0
 
 inline void Engine::EngineImpl::initExtensions() {
-	glesInitExtensions();
+  glesInitExtensions();
 }
 
 #else
 
 inline void Engine::EngineImpl::initExtensions(void) {
 #ifdef GLEW_OK
-	GLenum GlewInitResult;
-	glewExperimental = GL_TRUE;
+  GLenum GlewInitResult;
+  glewExperimental = GL_TRUE;
 
-	GlewInitResult = glewInit();
-	if (GL_NO_ERROR != glGetError()) {
-		fLogE("glewInit returned INVALID_ENUM ... It may happen");
-	}
+  GlewInitResult = glewInit ();
+  if (GL_NO_ERROR != glGetError ()) {
+    fLogE("glewInit returned INVALID_ENUM ... It may happen");
+  }
 
-	if (GLEW_OK != GlewInitResult) {
-		fLogE("GLEW init failed. Error: %d", GlewInitResult);
-		exit(EXIT_FAILURE);
-	} else {
-		fLogD("OpenGL Version: %s", glGetString(GL_VERSION));
-	}
+  if (GLEW_OK != GlewInitResult) {
+    fLogE("GLEW init failed. Error: %d", GlewInitResult);
+    exit (EXIT_FAILURE);
+  } else {
+    fLogD("OpenGL Version: %s", glGetString (GL_VERSION));
+  }
 
 #endif
 }
@@ -288,651 +313,615 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
-	mTextures = make_unique<framework::TextureSystem>
-	            (mFileLoader.getRootPath());
-	mLights = make_unique<framework::LightSystem>();
+  mTextures = make_unique<framework::TextureSystem> (mFileLoader.getRootPath ());
+  mLights = make_unique<framework::LightSystem> ();
 }
 
 inline void Engine::EngineImpl::initPipelines() {
-	/* OT */
-	mProgramOcclusionBox = mProgramLoader.getOcclusionOptimizedQuery();
+  /* OT */
+  mProgramOcclusionBox = mProgramLoader.getOcclusionOptimizedQuery ();
 
-	/* T */
-	mProgramTextureLookup = mProgramLoader.getQuad();
+  /* T */
+  mProgramTextureLookup = mProgramLoader.getQuad ();
 }
 
 inline void Engine::EngineImpl::initUniforms() {
-	mProgramTextureLookup->use();
-	mProgramTextureLookup->uniformPush("uPostProcessingSampler",
-	                                   FILLWAVE_DIFFUSE_UNIT);
-	core::Program::disusePrograms();
+  mProgramTextureLookup->use ();
+  mProgramTextureLookup->uniformPush ("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
+  core::Program::disusePrograms ();
 }
 
 inline void Engine::EngineImpl::initOcclusionTest() {
-	vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
-	mVAOOcclusion = new core::VertexArray();
-	mVBOOcclusion = mBuffers.mVerticesPosition.store(mVAOOcclusion, vec);
-	mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
-	mVAOOcclusion->bind();
-	mVBOOcclusion->bind();
-	mVBOOcclusion->attributesSetForVAO();
-	mVBOOcclusion->send();
-	core::VertexArray::unbindVAO();
+  vector<core::VertexPosition> vec = framework::BoxOcclusion ().getVertices ();
+  mVAOOcclusion = new core::VertexArray ();
+  mVBOOcclusion = mBuffers.mVerticesPosition.store (mVAOOcclusion, vec);
+  mVBOOcclusion->initAttributes (mProgramOcclusionBox->getHandle ());
+  mVAOOcclusion->bind ();
+  mVBOOcclusion->bind ();
+  mVBOOcclusion->attributesSetForVAO ();
+  mVBOOcclusion->send ();
+  core::VertexArray::unbindVAO ();
 }
 
 inline void Engine::EngineImpl::initStartup() {
 
-	core::Program* program = mProgramLoader.getQuadCustomFragmentShaderStartup();
+  core::Program *program = mProgramLoader.getQuadCustomFragmentShaderStartup ();
 
-	program->use();
-	program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
-	program->uniformPush("uScreenFactor", mWindowAspectRatio);
-	core::Program::disusePrograms();
+  program->use ();
+  program->uniformPush ("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
+  program->uniformPush ("uScreenFactor", mWindowAspectRatio);
+  core::Program::disusePrograms ();
 
-	mPostProcessingPassStartup = make_unique<core::PostProcessingPass>(program,
-	                             mTextures->getDynamic("fillwave_quad_startup.frag",
-	                                   program, glm::ivec2(mWindowWidth, mWindowHeight)),
-	                             mStartupTimeLimit);
+  mPostProcessingPassStartup = make_unique<core::PostProcessingPass> (program,
+                                                                      mTextures->getDynamic (
+                                                                          "fillwave_quad_startup.frag",
+                                                                          program,
+                                                                          glm::ivec2 (mWindowWidth, mWindowHeight)),
+                                                                      mStartupTimeLimit);
 
-	fLogD("Post processing startup pass added");
+  fLogD("Post processing startup pass added");
 
-	mStartupTexture = mTextures->get("logo.png", framework::eCompression::eNone);
-	if (not mStartupTexture) {
-		mStartupTexture = mTextures->get("textures/logo.png",
-		                                 framework::eCompression::eNone);
-		if (not mStartupTexture) {
-			mStartupTexture = mTextures->get("64_64_64.color",
-			                                 framework::eCompression::eNone);
-			fLogE("Fillwave startup logo could not be executed");
-		}
-	}
+  mStartupTexture = mTextures->get ("logo.png", framework::eCompression::eNone);
+  if (not mStartupTexture) {
+    mStartupTexture = mTextures->get ("textures/logo.png", framework::eCompression::eNone);
+    if (not mStartupTexture) {
+      mStartupTexture = mTextures->get ("64_64_64.color", framework::eCompression::eNone);
+      fLogE("Fillwave startup logo could not be executed");
+    }
+  }
 }
 
 inline void Engine::EngineImpl::initPickingBuffer() {
-	mPickingPixelBuffer = puPixelBuffer(new core::PixelBuffer(GL_STREAM_READ));
-	reloadPickingBuffer();
+  mPickingPixelBuffer = puPixelBuffer (new core::PixelBuffer (GL_STREAM_READ));
+  reloadPickingBuffer ();
 }
 
 inline void Engine::EngineImpl::initExtras() {
-	/* FPS counter */
-	mTextFPSCallback = NULL;
+  /* FPS counter */
+  mTextFPSCallback = NULL;
 
-	/* Debugger */
-	mDebugger = make_unique<framework::Debugger>(mEngine);
+  /* Debugger */
+  mDebugger = make_unique<framework::Debugger> (mEngine);
 }
 
 void Engine::EngineImpl::reload() {
 
-	initContext();
+  initContext ();
 
-	for (auto& it : mShaders) {
-		it.second->reload();
-	}
+  for (auto &it : mShaders) {
+    it.second->reload ();
+  }
 
-	for (auto& it : mPrograms) {
-		it.second->reload();
-	}
+  for (auto &it : mPrograms) {
+    it.second->reload ();
+  }
 
-	mTextures->reload();
+  mTextures->reload ();
 
-	for (auto& it : mSamplers) {
-		it.second->reload();
-	}
+  for (auto &it : mSamplers) {
+    it.second->reload ();
+  }
 
-	for (auto& it : mBuffers.mVertexArrays) {
-		it.second->reload();
-	}
+  for (auto &it : mBuffers.mVertexArrays) {
+    it.second->reload ();
+  }
 
-	mPickingPixelBuffer->reload();
-	reloadPickingBuffer();
+  mPickingPixelBuffer->reload ();
+  reloadPickingBuffer ();
 
 //	mScene->resetRenderer(); xxx remove ?
 }
 
 inline void Engine::EngineImpl::reloadPickingBuffer() {
-	mPickingRenderableTexture = mTextures->getColor2D(mWindowWidth,
-	                            mWindowHeight);
+  mPickingRenderableTexture = mTextures->getColor2D (mWindowWidth, mWindowHeight);
 
-	mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
-	mPickingPixelBuffer->bind();
-	mPickingPixelBuffer->setLoaded(GL_FALSE);
-	mPickingPixelBuffer->send();
-	glReadPixels(0, 0, mWindowWidth, mWindowHeight,
-	             GL_RGBA,
-	             GL_UNSIGNED_BYTE, 0);
-	fLogC("glReadPixels");
-	mPickingPixelBuffer->unbind();
+  mPickingPixelBuffer->setScreenSize (mWindowWidth, mWindowHeight, 4);
+  mPickingPixelBuffer->bind ();
+  mPickingPixelBuffer->setLoaded (GL_FALSE);
+  mPickingPixelBuffer->send ();
+  glReadPixels (0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  fLogC("glReadPixels");
+  mPickingPixelBuffer->unbind ();
 }
 
 inline void Engine::EngineImpl::initContext(void) {
-	glClearColor(mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z,
-	             1.0f);
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
-	fLogC("Could not set OpenGL depth testing options");
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
-	fLogC("Could not set OpenGL culling options");
+  glClearColor (mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z, 1.0f);
+  glEnable (GL_DEPTH_TEST);
+  glDepthFunc (GL_LEQUAL);
+  fLogC("Could not set OpenGL depth testing options");
+  glEnable (GL_CULL_FACE);
+  glCullFace (GL_BACK);
+  glFrontFace (GL_CCW);
+  fLogC("Could not set OpenGL culling options");
 }
 
 void Engine::EngineImpl::draw(GLfloat time) {
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
-	/* Draw startup animation */
-	if (mStartupTime < mStartupTimeLimit) {
-		evaluateStartupAnimation(time);
-		mStartupTime += time;
-		return;
-	}
+  /* Draw startup animation */
+  if (mStartupTime < mStartupTimeLimit) {
+    evaluateStartupAnimation(time);
+    mStartupTime += time;
+    return;
+  }
 #endif
 
-	if (mScene) {
-		/* count this frame */
-		mFrameCounter++;
+  if (mScene) {
+    /* count this frame */
+    mFrameCounter++;
 
-		/* Clear main framebuffer */
-		glClearDepth(1.0f);
+    /* Clear main framebuffer */
+    glClearDepth (1.0f);
 
-		/* Calculate dynamic textures */
-		mTextures->evaluateDynamicTextures(time);
+    /* Calculate dynamic textures */
+    mTextures->evaluateDynamicTextures (time);
 
-		/* Lights evaluation */
-		glDepthMask(GL_TRUE);
-		evaluateShadowMaps();
-		drawScene(time);
-		drawFront();
-	}
+    /* Lights evaluation */
+    glDepthMask (GL_TRUE);
+    evaluateShadowMaps ();
+    drawScene (time);
+    drawFront ();
+  }
 }
 
 inline void Engine::EngineImpl::drawFront() {
-	drawHUD();
-	evaluateDebugger();
-	mScene->drawCursor();
-	mScene->updateDependencies();
-	mScene->updateRenderer();
+  drawHUD ();
+  evaluateDebugger ();
+  mScene->drawCursor ();
+  mScene->updateDependencies ();
+  mScene->updateRenderer ();
 }
 
 #ifdef FILLWAVE_GLES_3_0
 #else
+
 void Engine::EngineImpl::drawLines(GLfloat time) {
 
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
-	/* Draw startup animation */
-	if (mStartupTime < mStartupTimeLimit) {
-		evaluateStartupAnimation(time);
-		mStartupTime += time;
-		return;
-	}
+  /* Draw startup animation */
+  if (mStartupTime < mStartupTimeLimit) {
+    evaluateStartupAnimation(time);
+    mStartupTime += time;
+    return;
+  }
 #endif
 
-	/* count this frame */
-	mFrameCounter++;
+  /* count this frame */
+  mFrameCounter++;
 
-	/* clear main framebuffer */
-	glClearDepth(1.0f);
+  /* clear main framebuffer */
+  glClearDepth (1.0f);
 
-	/* Calculate dynamic textures */
-	mTextures->evaluateDynamicTextures(time);
+  /* Calculate dynamic textures */
+  mTextures->evaluateDynamicTextures (time);
 
-	/* Lights evaluation */
-	if (mScene) {
-		evaluateShadowMaps();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		drawScene(time);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		drawFront();
-	}
+  /* Lights evaluation */
+  if (mScene) {
+    evaluateShadowMaps ();
+    glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
+    drawScene (time);
+    glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
+    drawFront ();
+  }
 }
 
 void Engine::EngineImpl::drawPoints(GLfloat time) {
 
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
-	/* Draw startup animation */
-	if (mStartupTime < mStartupTimeLimit) {
-		evaluateStartupAnimation(time);
-		mStartupTime += time;
-		return;
-	}
+  /* Draw startup animation */
+  if (mStartupTime < mStartupTimeLimit) {
+    evaluateStartupAnimation(time);
+    mStartupTime += time;
+    return;
+  }
 #endif
 
-	/* count this frame */
-	mFrameCounter++;
+  /* count this frame */
+  mFrameCounter++;
 
-	/* clear main framebuffer */
-	glClearDepth(1.0f);
+  /* clear main framebuffer */
+  glClearDepth (1.0f);
 
-	/* Calculate dynamic textures */
-	mTextures->evaluateDynamicTextures(time);
+  /* Calculate dynamic textures */
+  mTextures->evaluateDynamicTextures (time);
 
-	/* Lights evaluation */
-	if (mScene) {
-		evaluateShadowMaps();
-		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-		drawScene(time);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		drawFront();
-	}
+  /* Lights evaluation */
+  if (mScene) {
+    evaluateShadowMaps ();
+    glPolygonMode (GL_FRONT_AND_BACK, GL_POINT);
+    drawScene (time);
+    glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
+    drawFront ();
+  }
 }
+
 #endif
 
 inline void Engine::EngineImpl::drawHUD() {
-	if (mScene) {
-		mScene->drawHUD();
-	}
-	for (auto& it : mTextManager) {
-		it->draw();
-	}
+  if (mScene) {
+    mScene->drawHUD ();
+  }
+  for (auto &it : mTextManager) {
+    it->draw ();
+  }
 }
 
-void Engine::EngineImpl::drawTexture(core::Texture* t, core::Program* p) {
-	p->use();
-	t->bind(FILLWAVE_DIFFUSE_UNIT);
-	p->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	t->unbind();
-	core::Program::disusePrograms();
+void Engine::EngineImpl::drawTexture(core::Texture *t, core::Program *p) {
+  p->use ();
+  t->bind (FILLWAVE_DIFFUSE_UNIT);
+  p->uniformPush ("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
+  glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
+  t->unbind ();
+  core::Program::disusePrograms ();
 }
 
-void Engine::EngineImpl::drawTexture(core::Texture* t) {
-	mProgramTextureLookup->use();
-	mProgramTextureLookup->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
-	t->bind(FILLWAVE_DIFFUSE_UNIT);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	t->unbind();
+void Engine::EngineImpl::drawTexture(core::Texture *t) {
+  mProgramTextureLookup->use ();
+  mProgramTextureLookup->uniformPush ("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
+  t->bind (FILLWAVE_DIFFUSE_UNIT);
+  glDrawArrays (GL_TRIANGLE_STRIP, 0, 4);
+  t->unbind ();
 }
 
 inline void Engine::EngineImpl::drawClear() {
-	glClearColor(mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z,
-	             1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  glClearColor (mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z, 1.0f);
+  glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 inline void Engine::EngineImpl::drawScene(GLfloat time) {
 
-	evaluateTime(time);
+  evaluateTime (time);
 
-	if (mPostProcessingPasses.size()) {
-		auto _compare_function =
-		   [](core::PostProcessingPass & pass) -> bool {return pass.isFinished();};
-		auto _begin = mPostProcessingPasses.begin();
-		auto _end = mPostProcessingPasses.end();
+  if (mPostProcessingPasses.size ()) {
+    auto _compare_function = [](core::PostProcessingPass &pass) -> bool {
+      return pass.isFinished ();
+    };
+    auto _begin = mPostProcessingPasses.begin ();
+    auto _end = mPostProcessingPasses.end ();
 
-		core::Texture2DRenderableDynamic* textureNext;
-		core::Texture2DRenderableDynamic* textureCurrent = (*_begin).getFrame();
+    core::Texture2DRenderableDynamic *textureNext;
+    core::Texture2DRenderableDynamic *textureCurrent = (*_begin).getFrame ();
 
-		core::Program* programCurrent;
+    core::Program *programCurrent;
 
-		drawClear();
-		textureCurrent->bindForWriting();
-		drawSceneCore();
+    drawClear ();
+    textureCurrent->bindForWriting ();
+    drawSceneCore ();
 
-		for (auto it = _begin; it != _end; it++) {
+    for (auto it = _begin; it != _end; it++) {
 
-			auto next = it + 1;
+      auto next = it + 1;
 
-			if (next != _end) {
+      if (next != _end) {
 
-				textureNext = (*next).getFrame();
-				textureCurrent = (*it).getFrame();
-				programCurrent = (*it).getProgram();
+        textureNext = (*next).getFrame ();
+        textureCurrent = (*it).getFrame ();
+        programCurrent = (*it).getProgram ();
 
-				textureNext->bindForWriting();
+        textureNext->bindForWriting ();
 
-				drawClear();
+        drawClear ();
 
-				textureCurrent->draw(0.0f);
+        textureCurrent->draw (0.0f);
 
-				textureNext->draw(time);
+        textureNext->draw (time);
 
-				textureNext->bindForReading();
+        textureNext->bindForReading ();
 
-			} else {
+      } else {
 
-				core::Framebuffer::bindScreenFramebuffer();
+        core::Framebuffer::bindScreenFramebuffer ();
 
-				// render to current bound framebuffer using textureCurrent as a texture to post process
-				textureCurrent->draw(time);
+        // render to current bound framebuffer using textureCurrent as a texture to post process
+        textureCurrent->draw (time);
 
-				textureCurrent = (*it).getFrame();
-				programCurrent = (*it).getProgram();
+        textureCurrent = (*it).getFrame ();
+        programCurrent = (*it).getProgram ();
 
-				// render to current bound framebuffer using textureCurrent as a texture to post process
-				drawTexture(textureCurrent, programCurrent);
-			}
+        // render to current bound framebuffer using textureCurrent as a texture to post process
+        drawTexture (textureCurrent, programCurrent);
+      }
 
-			(*it).checkTime(time);
-		}
+      (*it).checkTime (time);
+    }
 
-		auto it = remove_if(_begin, _end, _compare_function);
+    auto it = remove_if (_begin, _end, _compare_function);
 
-		mPostProcessingPasses.erase(it, _end);
+    mPostProcessingPasses.erase (it, _end);
 
-	} else {
-		drawSceneCore();
-	}
+  } else {
+    drawSceneCore ();
+  }
 }
 
 inline void Engine::EngineImpl::drawSceneCore() {
-	if (mIsOQ) {
-		drawOcclusionPass();
-	}
-	drawClear();
-	mScene->draw();
+  if (mIsOQ) {
+    drawOcclusionPass ();
+  }
+  drawClear ();
+  mScene->draw ();
 }
 
 inline void Engine::EngineImpl::drawOcclusionPass() {
-	mVAOOcclusion->bind();
+  mVAOOcclusion->bind ();
 
-	glDisable(GL_CULL_FACE);
-	glDepthMask(GL_FALSE);
-	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+  glDisable (GL_CULL_FACE);
+  glDepthMask (GL_FALSE);
+  glColorMask (GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 
-	mScene->drawOcclusion();
+  mScene->drawOcclusion ();
 
-	glEnable(GL_CULL_FACE);
-	glDepthMask(GL_TRUE);
-	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+  glEnable (GL_CULL_FACE);
+  glDepthMask (GL_TRUE);
+  glColorMask (GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
-	core::VertexArray::unbindVAO();
+  core::VertexArray::unbindVAO ();
 }
 
 inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
 
-	drawClear();
+  drawClear ();
 
-	core::Texture2DRenderableDynamic* t = mPostProcessingPassStartup->getFrame();
+  core::Texture2DRenderableDynamic *t = mPostProcessingPassStartup->getFrame ();
 
-	t->bindForWriting();
+  t->bindForWriting ();
 
-	drawTexture(mStartupTexture);
+  drawTexture (mStartupTexture);
 
-	core::Framebuffer::bindScreenFramebuffer();
+  core::Framebuffer::bindScreenFramebuffer ();
 
-	t->draw(time);
+  t->draw (time);
 
-	drawTexture(t, mPostProcessingPassStartup->getProgram());
+  drawTexture (t, mPostProcessingPassStartup->getProgram ());
 
-	mPostProcessingPassStartup->checkTime(time);
+  mPostProcessingPassStartup->checkTime (time);
 }
 
 inline void Engine::EngineImpl::evaluateShadowMaps() {
 
-	glDepthMask(GL_TRUE);
+  glDepthMask (GL_TRUE);
 
-	mLights->updateLightEntities();
+  mLights->updateLightEntities ();
 
-	GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
+  GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
 
-	core::Texture2DRenderable* light2DTexture;
-	for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-		light2DTexture = mLights->mLightsSpot[i]->getShadowTexture();
-		light2DTexture->bindForWriting();
-		light2DTexture->bind(currentTextureUnit++);
-		glClearColor(0.0, 0.0, 0.0, 1.0);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		mScene->drawDepth(*(mLights->mLightsSpot[i]->getShadowCamera()));
-	}
+  core::Texture2DRenderable *light2DTexture;
+  for (size_t i = 0; i < mLights->mLightsSpot.size (); i++) {
+    light2DTexture = mLights->mLightsSpot[i]->getShadowTexture ();
+    light2DTexture->bindForWriting ();
+    light2DTexture->bind (currentTextureUnit++);
+    glClearColor (0.0, 0.0, 0.0, 1.0);
+    glClear (GL_DEPTH_BUFFER_BIT);
+    mScene->drawDepth (*(mLights->mLightsSpot[i]->getShadowCamera ()));
+  }
 
-	for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
-		light2DTexture =
-		   mLights->mLightsDirectional[i]->getShadowTexture();
-		light2DTexture->bindForWriting();
-		light2DTexture->bind(currentTextureUnit++);
-		glClearColor(0.0, 0.0, 0.0, 1.0);
-		glClear(GL_DEPTH_BUFFER_BIT);
-		mScene->drawDepth(*(mLights->mLightsDirectional[i]->getShadowCamera()));
-	}
+  for (size_t i = 0; i < mLights->mLightsDirectional.size (); i++) {
+    light2DTexture = mLights->mLightsDirectional[i]->getShadowTexture ();
+    light2DTexture->bindForWriting ();
+    light2DTexture->bind (currentTextureUnit++);
+    glClearColor (0.0, 0.0, 0.0, 1.0);
+    glClear (GL_DEPTH_BUFFER_BIT);
+    mScene->drawDepth (*(mLights->mLightsDirectional[i]->getShadowCamera ()));
+  }
 
-	for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
-		framework::LightPoint* lightPoint = mLights->mLightsPoint[i].get();
-		core::Texture3DRenderable* light3DTexture =
-		   lightPoint->getShadowTexture();
-		glm::vec3 lightPosition(lightPoint->getTranslation());
-		light3DTexture->bindForWriting();
-		light3DTexture->bind(currentTextureUnit);
-		for (GLint j = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-		      j <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; j++) {
-			light3DTexture->setAttachmentFace(j, GL_COLOR_ATTACHMENT0);
-			glClearColor(0.0, 0.0, 0.0, 1.0);
-			glClear(GL_DEPTH_BUFFER_BIT);
-			mScene->drawDepthColor(*(lightPoint->getShadowCamera(j)), lightPosition);
-		}
-		currentTextureUnit++;
-	}
-	core::Framebuffer::bindScreenFramebuffer();
+  for (size_t i = 0; i < mLights->mLightsPoint.size (); i++) {
+    framework::LightPoint *lightPoint = mLights->mLightsPoint[i].get ();
+    core::Texture3DRenderable *light3DTexture = lightPoint->getShadowTexture ();
+    glm::vec3 lightPosition (lightPoint->getTranslation ());
+    light3DTexture->bindForWriting ();
+    light3DTexture->bind (currentTextureUnit);
+    for (GLint j = GL_TEXTURE_CUBE_MAP_POSITIVE_X; j <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; j++) {
+      light3DTexture->setAttachmentFace (j, GL_COLOR_ATTACHMENT0);
+      glClearColor (0.0, 0.0, 0.0, 1.0);
+      glClear (GL_DEPTH_BUFFER_BIT);
+      mScene->drawDepthColor (*(lightPoint->getShadowCamera (j)), lightPosition);
+    }
+    currentTextureUnit++;
+  }
+  core::Framebuffer::bindScreenFramebuffer ();
 }
 
 inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
-	if (mTimeFactor) {
-		framework::TimeEventData data;
-		data.mTimePassed = timeExpiredInSeconds;
-		framework::TimeEvent timeEvent(data);
-		runCallbacks(timeEvent);
-		mScene->onEvent(timeEvent);
-	}
+  if (mTimeFactor) {
+    framework::TimeEventData data;
+    data.mTimePassed = timeExpiredInSeconds;
+    framework::TimeEvent timeEvent (data);
+    runCallbacks (timeEvent);
+    mScene->onEvent (timeEvent);
+  }
 }
 
 inline void Engine::EngineImpl::evaluateDebugger() {
-	GLint mCurentTextureUnit = 0;
-	GLint id = 0;
-	switch (mDebugger->getState()) {
-		case eDebuggerState::eLightsSpot:
-			mCurentTextureUnit = 0;
-			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-				framework::CameraPerspective cameraP =
-				   *(mLights->mLightsSpot[i]->getShadowCamera());
-				mDebugger->renderFromCamera(cameraP,
-				                            mCurentTextureUnit++); //xxx make more flexible
-			}
-			for (size_t i = 0; i < mLights->mLightsDirectional.size();
-			      i++) {
-				framework::CameraOrthographic cameraO =
-				   *(mLights->mLightsDirectional[i]->getShadowCamera());
-				mDebugger->renderFromCamera(cameraO,
-				                            mCurentTextureUnit++); //xxx make more flexible
-			}
-			mCurentTextureUnit = 0;
-			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-				mDebugger->renderDepthPerspective(mCurentTextureUnit++);
-			}
-			for (size_t i = 0; i < mLights->mLightsDirectional.size();
-			      i++) {
-				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
-			}
-			break;
-		case eDebuggerState::eLightsSpotDepth:
-			mCurentTextureUnit = 0;
-			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-				mDebugger->renderDepthPerspective(mCurentTextureUnit++);
-			}
-			for (size_t i = 0; i < mLights->mLightsDirectional.size();
-			      i++) {
-				mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
-			}
-			break;
-		case eDebuggerState::eLightsSpotColor:
-			mCurentTextureUnit = 0;
-			for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-				framework::CameraPerspective cameraP =
-				   *(mLights->mLightsSpot[i]->getShadowCamera());
-				mDebugger->renderFromCamera(cameraP,
-				                            mCurentTextureUnit++); //xxx make more flexible
-			}
-			for (size_t i = 0; i < mLights->mLightsDirectional.size();
-			      i++) {
-				framework::CameraOrthographic cameraO =
-				   *(mLights->mLightsDirectional[i]->getShadowCamera());
-				mDebugger->renderFromCamera(cameraO,
-				                            mCurentTextureUnit++); //xxx make more flexible
-			}
-			break;
-		case eDebuggerState::eLightsPoint:
-			break;
-		case eDebuggerState::eLightsPointDepth: // only light 0
-			break;
-		case eDebuggerState::eLightsPointColor:
-			for (size_t j = 0; j < mLights->mLightsPoint.size(); j++) {
-				for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X;
-				      i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
-					framework::CameraPerspective cameraPF =
-					   *(mLights->mLightsPoint[j]->getShadowCamera(i));
-					mDebugger->renderFromCamera(cameraPF, id++);
-				}
-			}
-			break;
-		case eDebuggerState::ePickingMap:
-			mDebugger->renderPickingMap();
-			break;
-		case eDebuggerState::eOff:
-		default:
-			break;
-	}
+  GLint mCurentTextureUnit = 0;
+  GLint id = 0;
+  switch (mDebugger->getState ()) {
+    case eDebuggerState::eLightsSpot:
+      mCurentTextureUnit = 0;
+      for (size_t i = 0; i < mLights->mLightsSpot.size (); i++) {
+        framework::CameraPerspective cameraP = *(mLights->mLightsSpot[i]->getShadowCamera ());
+        mDebugger->renderFromCamera (cameraP, mCurentTextureUnit++); //xxx make more flexible
+      }
+      for (size_t i = 0; i < mLights->mLightsDirectional.size (); i++) {
+        framework::CameraOrthographic cameraO = *(mLights->mLightsDirectional[i]->getShadowCamera ());
+        mDebugger->renderFromCamera (cameraO, mCurentTextureUnit++); //xxx make more flexible
+      }
+      mCurentTextureUnit = 0;
+      for (size_t i = 0; i < mLights->mLightsSpot.size (); i++) {
+        mDebugger->renderDepthPerspective (mCurentTextureUnit++);
+      }
+      for (size_t i = 0; i < mLights->mLightsDirectional.size (); i++) {
+        mDebugger->renderDepthOrthographic (mCurentTextureUnit++);
+      }
+      break;
+    case eDebuggerState::eLightsSpotDepth:
+      mCurentTextureUnit = 0;
+      for (size_t i = 0; i < mLights->mLightsSpot.size (); i++) {
+        mDebugger->renderDepthPerspective (mCurentTextureUnit++);
+      }
+      for (size_t i = 0; i < mLights->mLightsDirectional.size (); i++) {
+        mDebugger->renderDepthOrthographic (mCurentTextureUnit++);
+      }
+      break;
+    case eDebuggerState::eLightsSpotColor:
+      mCurentTextureUnit = 0;
+      for (size_t i = 0; i < mLights->mLightsSpot.size (); i++) {
+        framework::CameraPerspective cameraP = *(mLights->mLightsSpot[i]->getShadowCamera ());
+        mDebugger->renderFromCamera (cameraP, mCurentTextureUnit++); //xxx make more flexible
+      }
+      for (size_t i = 0; i < mLights->mLightsDirectional.size (); i++) {
+        framework::CameraOrthographic cameraO = *(mLights->mLightsDirectional[i]->getShadowCamera ());
+        mDebugger->renderFromCamera (cameraO, mCurentTextureUnit++); //xxx make more flexible
+      }
+      break;
+    case eDebuggerState::eLightsPoint:
+      break;
+    case eDebuggerState::eLightsPointDepth: // only light 0
+      break;
+    case eDebuggerState::eLightsPointColor:
+      for (size_t j = 0; j < mLights->mLightsPoint.size (); j++) {
+        for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X; i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
+          framework::CameraPerspective cameraPF = *(mLights->mLightsPoint[j]->getShadowCamera (i));
+          mDebugger->renderFromCamera (cameraPF, id++);
+        }
+      }
+      break;
+    case eDebuggerState::ePickingMap:
+      mDebugger->renderPickingMap ();
+      break;
+    case eDebuggerState::eOff:
+    default:
+      break;
+  }
 }
 
-void Engine::EngineImpl::runCallbacks(
-   framework::EventType& event) {
-	if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
-		for (auto& callback : mCallbacks[event.getType()]) {
-			callback->perform(event);
-		}
-	}
+void Engine::EngineImpl::runCallbacks(framework::EventType &event) {
+  if (mCallbacks.find (event.getType ()) != mCallbacks.end ()) {
+    for (auto &callback : mCallbacks[event.getType ()]) {
+      callback->perform (event);
+    }
+  }
 }
 
 void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 
-	mWindowWidth = width;
-	mWindowHeight = height;
-	mWindowAspectRatio = static_cast<GLfloat>(mWindowHeight) / static_cast<GLfloat>
-	                     (mWindowWidth);
+  mWindowWidth = width;
+  mWindowHeight = height;
+  mWindowAspectRatio = static_cast<GLfloat>(mWindowHeight) / static_cast<GLfloat>
+  (mWindowWidth);
 
-	glViewport(0, 0, mWindowWidth, mWindowHeight);
+  glViewport (0, 0, mWindowWidth, mWindowHeight);
 
-	mTextures->resize(mWindowWidth, mWindowHeight);
-	mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
+  mTextures->resize (mWindowWidth, mWindowHeight);
+  mPickingPixelBuffer->setScreenSize (mWindowWidth, mWindowHeight, 4);
 }
 
 /* Callbacks */
 
-void Engine::EngineImpl::registerCallback(
-   puCallback&& callback) {
-	if (mCallbacks.find(callback->getEventType()) == mCallbacks.end()) {
-		mCallbacks[callback->getEventType()] = vector<puCallback>();
-	}
-	mCallbacks[callback->getEventType()].push_back(move(callback));
+void Engine::EngineImpl::registerCallback(puCallback &&callback) {
+  if (mCallbacks.find (callback->getEventType ()) == mCallbacks.end ()) {
+    mCallbacks[callback->getEventType ()] = vector<puCallback> ();
+  }
+  mCallbacks[callback->getEventType ()].push_back (move (callback));
 }
 
-void Engine::EngineImpl::unregisterCallback(
-   framework::Callback* callback) {
-	fLogE("mCallbacks.size() %lu", mCallbacks.size());
-	if (!mCallbacks.empty()
-	      && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
-		vector<puCallback>* callbacks = &mCallbacks[callback->getEventType()];
-		auto _compare_function =
-		   [callback](const puCallback & c) -> bool {return c.get() == callback;};
-		auto it = remove_if(callbacks->begin(), callbacks->end(),
-		                    _compare_function);
-		callbacks->erase(it, callbacks->end());
-	}
+void Engine::EngineImpl::unregisterCallback(framework::Callback *callback) {
+  fLogE("mCallbacks.size() %lu", mCallbacks.size ());
+  if (!mCallbacks.empty () && mCallbacks.find (callback->getEventType ()) != mCallbacks.end ()) {
+    vector<puCallback> *callbacks = &mCallbacks[callback->getEventType ()];
+    auto _compare_function = [callback](const puCallback &c) -> bool {
+      return c.get () == callback;
+    };
+    auto it = remove_if (callbacks->begin (), callbacks->end (), _compare_function);
+    callbacks->erase (it, callbacks->end ());
+  }
 }
 
-glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(
-   GLubyte* data,
-   GLuint x,
-   GLuint y) {
-	y = mWindowHeight - y;
-	GLuint id, r, g, b, a;
+glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
+  y = mWindowHeight - y;
+  GLuint id, r, g, b, a;
 
-	if (x < mWindowWidth && y < mWindowHeight) {
-		id = (x + y * mWindowWidth) * 4;
-		b = data[id];
-		g = data[id + 1];
-		r = data[id + 2];
-		a = data[id + 3];
-	}
-	return glm::ivec4(r, g, b, a);
+  if (x < mWindowWidth && y < mWindowHeight) {
+    id = (x + y * mWindowWidth) * 4;
+    b = data[id];
+    g = data[id + 1];
+    r = data[id + 2];
+    a = data[id + 3];
+  }
+  return glm::ivec4 (r, g, b, a);
 }
 
 /* Engine callbacks - clear */
 
 inline void Engine::EngineImpl::clearCallbacks() {
-	mCallbacks.clear();
+  mCallbacks.clear ();
 }
 
-inline void Engine::EngineImpl::clearCallbacks(
-   eEventType eventType) {
-	if (mCallbacks.find(eventType) != mCallbacks.end()) {
-		mCallbacks[eventType].clear();
-	}
+inline void Engine::EngineImpl::clearCallbacks(eEventType eventType) {
+  if (mCallbacks.find (eventType) != mCallbacks.end ()) {
+    mCallbacks[eventType].clear ();
+  }
 }
 
-void Engine::EngineImpl::clearCallback(framework::Callback* callback) {
-	eEventType e = callback->getEventType();
-	vector<puCallback>* callbacks = &mCallbacks[e];
-	callbacks->erase(
-	   remove_if( // Selectively remove elements in the second vector...
-	      callbacks->begin(),
-	      callbacks->end(),
-	[&] (puCallback const & p) {
-		// This predicate checks whether the element is contained
-		// in the second vector of pointers to be removed...
-		return callback == p.get();
-	}),
-	callbacks->end()
-	);
+void Engine::EngineImpl::clearCallback(framework::Callback *callback) {
+  eEventType e = callback->getEventType ();
+  vector<puCallback> *callbacks = &mCallbacks[e];
+  callbacks->erase (remove_if ( // Selectively remove elements in the second vector...
+      callbacks->begin (), callbacks->end (), [&](puCallback const &p) {
+        // This predicate checks whether the element is contained
+        // in the second vector of pointers to be removed...
+        return callback == p.get ();
+      }), callbacks->end ());
 }
 
 void Engine::EngineImpl::pick(GLuint x, GLuint y) {
-	mPickingRenderableTexture->bindForRendering();
-	drawClear();
-	mScene->drawPicking();
-	mPickingPixelBuffer->bind();
-	glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA,
-	             GL_UNSIGNED_BYTE, 0);
-	fLogC("glReadPixels failed");
+  mPickingRenderableTexture->bindForRendering ();
+  drawClear ();
+  mScene->drawPicking ();
+  mPickingPixelBuffer->bind ();
+  glReadPixels (0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  fLogC("glReadPixels failed");
 #ifdef FILLWAVE_GLES_3_0
-	GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
+  GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
-	GLubyte* data = (GLubyte*) mPickingPixelBuffer->map(GL_READ_WRITE);
+  GLubyte *data = (GLubyte *) mPickingPixelBuffer->map (GL_READ_WRITE);
 #endif
 
-	glm::ivec4 colorRead = pickingBufferGetColor(data, x, y);
-	mPickingPixelBuffer->unmap();
-	mPickingPixelBuffer->unbind();
-	core::Framebuffer::bindScreenFramebuffer();
-	mScene->draw();
-	mScene->pick(colorRead);
+  glm::ivec4 colorRead = pickingBufferGetColor (data, x, y);
+  mPickingPixelBuffer->unmap ();
+  mPickingPixelBuffer->unbind ();
+  core::Framebuffer::bindScreenFramebuffer ();
+  mScene->draw ();
+  mScene->pick (colorRead);
 }
 
-void Engine::EngineImpl::captureFramebufferToFile(const string& name) {
-	mPickingRenderableTexture->bindForRendering();
-	drawClear();
-	mScene->draw();
-	mPickingPixelBuffer->bind();
-	glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA,
-	             GL_UNSIGNED_BYTE, 0);
-	fLogC("reading pixel buffer failed");
+void Engine::EngineImpl::captureFramebufferToFile(const string &name) {
+  mPickingRenderableTexture->bindForRendering ();
+  drawClear ();
+  mScene->draw ();
+  mPickingPixelBuffer->bind ();
+  glReadPixels (0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  fLogC("reading pixel buffer failed");
 #ifdef FILLWAVE_GLES_3_0
-	GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
+  GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
-	GLubyte* data = (GLubyte*) mPickingPixelBuffer->map(GL_READ_WRITE);
+  GLubyte *data = (GLubyte *) mPickingPixelBuffer->map (GL_READ_WRITE);
 #endif
-	data[mWindowWidth * mWindowHeight * 4] = '\0';
-	FILE* file;
-	file = fopen(mFileLoader.getRootPath(name).c_str(), "w");
-	if (file == nullptr) {
-		fLogE("Error when takin' screenshot");
-		exit(1);
-	}
-	for (GLuint i = 0; i < mWindowWidth * mWindowHeight; i++) {
-		fprintf(file, "%c", data[4 * i]);
-		fprintf(file, "%c", data[4 * i + 1]);
-		fprintf(file, "%c", data[4 * i + 2]);
-		fprintf(file, "%c", data[4 * i] + 3);
-	}
-	fclose(file);
-	mPickingPixelBuffer->unmap();
-	mPickingPixelBuffer->unbind();
-	core::Framebuffer::bindScreenFramebuffer();
-	mScene->draw();
+  data[mWindowWidth * mWindowHeight * 4] = '\0';
+  FILE *file;
+  file = fopen (mFileLoader.getRootPath (name).c_str (), "w");
+  if (file == nullptr) {
+    fLogE("Error when takin' screenshot");
+    exit (1);
+  }
+  for (GLuint i = 0; i < mWindowWidth * mWindowHeight; i++) {
+    fprintf (file, "%c", data[4 * i]);
+    fprintf (file, "%c", data[4 * i + 1]);
+    fprintf (file, "%c", data[4 * i + 2]);
+    fprintf (file, "%c", data[4 * i] + 3);
+  }
+  fclose (file);
+  mPickingPixelBuffer->unmap ();
+  mPickingPixelBuffer->unbind ();
+  core::Framebuffer::bindScreenFramebuffer ();
+  mScene->draw ();
 }
 } /* fillwave */

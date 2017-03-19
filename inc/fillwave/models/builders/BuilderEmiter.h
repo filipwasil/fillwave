@@ -45,46 +45,62 @@ namespace framework {
  */
 
 class BuilderEmiter {
- public:
-	BuilderEmiter(Engine* engine);
+public:
+  BuilderEmiter(Engine *engine);
 
-	virtual ~BuilderEmiter() = default;
+  virtual ~BuilderEmiter() = default;
 
-	BuilderEmiter& setEmitingSourceRate(GLfloat emitingSourceRate);
-	BuilderEmiter& setHowMany(GLuint howmany);
-	BuilderEmiter& setColor(glm::vec4 color);
-	BuilderEmiter& setAcceleration(glm::vec3 acceleration);
-	BuilderEmiter& setStartVelocity(glm::vec3 startVelocity);
-	BuilderEmiter& setRobustnessVelocity(glm::vec3 robustnessVelocity);
-	BuilderEmiter& setStartPosition(glm::vec3 startPosition);
-	BuilderEmiter& setRobustnessPosition(glm::vec3 robustnessPosition);
-	BuilderEmiter& setStartSize(GLfloat size);
-	BuilderEmiter& setLifetime(GLfloat lifetime);
-	BuilderEmiter& setTexture(core::Texture* texture);
-	BuilderEmiter& setBlendingSource(GLenum sourceColor);
-	BuilderEmiter& setBlendingDestination(GLenum destinationColor);
-	BuilderEmiter& setDepthTesting(GLboolean depthTesting);
-	BuilderEmiter& setAlphaCutOff(GLfloat cutOffLevel);
-	puIEmiterPoint buildEmiterGPU();
-	puIEmiterPoint buildEmiterCPU();
+  BuilderEmiter &setEmitingSourceRate(GLfloat emitingSourceRate);
 
- private:
-	Engine* mEngine;
-	GLfloat mEmitingSourceRate;
-	GLuint mHowMany;
-	glm::vec4 mColor;
-	glm::vec3 mAcceleration;
-	glm::vec3 mStartVelocity;
-	glm::vec3 mRobustnessVelocity;
-	glm::vec3 mStartPosition;
-	glm::vec3 mRobustnessPosition;
-	GLfloat mStartSize;
-	GLfloat mLifetime;
-	core::Texture* mTexture;
-	GLenum mBlendingSource;
-	GLenum mBlendingDestination;
-	GLboolean mDepthTesting;
-	GLboolean mAlphaCutOff;
+  BuilderEmiter &setHowMany(GLuint howmany);
+
+  BuilderEmiter &setColor(glm::vec4 color);
+
+  BuilderEmiter &setAcceleration(glm::vec3 acceleration);
+
+  BuilderEmiter &setStartVelocity(glm::vec3 startVelocity);
+
+  BuilderEmiter &setRobustnessVelocity(glm::vec3 robustnessVelocity);
+
+  BuilderEmiter &setStartPosition(glm::vec3 startPosition);
+
+  BuilderEmiter &setRobustnessPosition(glm::vec3 robustnessPosition);
+
+  BuilderEmiter &setStartSize(GLfloat size);
+
+  BuilderEmiter &setLifetime(GLfloat lifetime);
+
+  BuilderEmiter &setTexture(core::Texture *texture);
+
+  BuilderEmiter &setBlendingSource(GLenum sourceColor);
+
+  BuilderEmiter &setBlendingDestination(GLenum destinationColor);
+
+  BuilderEmiter &setDepthTesting(GLboolean depthTesting);
+
+  BuilderEmiter &setAlphaCutOff(GLfloat cutOffLevel);
+
+  puIEmiterPoint buildEmiterGPU();
+
+  puIEmiterPoint buildEmiterCPU();
+
+private:
+  Engine *mEngine;
+  GLfloat mEmitingSourceRate;
+  GLuint mHowMany;
+  glm::vec4 mColor;
+  glm::vec3 mAcceleration;
+  glm::vec3 mStartVelocity;
+  glm::vec3 mRobustnessVelocity;
+  glm::vec3 mStartPosition;
+  glm::vec3 mRobustnessPosition;
+  GLfloat mStartSize;
+  GLfloat mLifetime;
+  core::Texture *mTexture;
+  GLenum mBlendingSource;
+  GLenum mBlendingDestination;
+  GLboolean mDepthTesting;
+  GLboolean mAlphaCutOff;
 };
 
 } /* framework */

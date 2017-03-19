@@ -40,24 +40,21 @@ FLOGINIT("PixelBuffer", FERROR | FFATAL)
 namespace fillwave {
 namespace core {
 
-PixelBuffer::PixelBuffer(GLuint dataStoreType) :
-	IBuffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
-	mData = 0;
+PixelBuffer::PixelBuffer(GLuint dataStoreType)
+    : IBuffer (GL_PIXEL_PACK_BUFFER, dataStoreType) {
+  mData = 0;
 }
 
-void PixelBuffer::setScreenSize(
-   GLuint width,
-   GLuint height,
-   GLuint bytesPerPixel) {
-	mSize = bytesPerPixel * width * height;
+void PixelBuffer::setScreenSize(GLuint width, GLuint height, GLuint bytesPerPixel) {
+  mSize = bytesPerPixel * width * height;
 }
 
 void PixelBuffer::emptyCPU() {
-	fLogD("Not gpu data clear is possible with this buffer");
+  fLogD("Not gpu data clear is possible with this buffer");
 }
 
 void PixelBuffer::emptyGPU() {
-	fLogD("Not gpu data clear is possible with this buffer");
+  fLogD("Not gpu data clear is possible with this buffer");
 }
 
 } /* models */

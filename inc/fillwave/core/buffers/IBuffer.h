@@ -44,61 +44,74 @@ namespace core {
  * \brief Base for all buffer types.
  */
 
-class IBuffer: public GLObject {
- public:
-	IBuffer(
-	   GLuint target,
-	   GLuint drawType = GL_STATIC_DRAW,
-	   GLuint index = 0,
-	   GLsizei howMany = 1);
+class IBuffer : public GLObject {
+public:
+  IBuffer(GLuint target, GLuint drawType = GL_STATIC_DRAW, GLuint index = 0, GLsizei howMany = 1);
 
-	virtual ~IBuffer();
+  virtual ~IBuffer();
 
-	void bind(GLuint id = 0) const;
-	void bind(GLuint externalTarget, GLuint id) const;
-	void bindBase(GLuint id = 0) const;
-	void bindBase(GLuint externalTarget, GLuint id) const;
-	void unbind();
-	void unbindBase(GLuint externalTarget);
+  void bind(GLuint id = 0) const;
 
-	void unmap() const;
-	void send();
+  void bind(GLuint externalTarget, GLuint id) const;
 
-	void setTarget(GLuint target);
-	void setDrawType(GLuint drawType);
+  void bindBase(GLuint id = 0) const;
 
-	bool isLoaded();
-	void setLoaded(GLboolean loaded);
+  void bindBase(GLuint externalTarget, GLuint id) const;
 
-	GLuint getElements() const;
-	GLuint getSize() const;
-	GLvoid* getData() const;
+  void unbind();
 
-	void reload();
+  void unbindBase(GLuint externalTarget);
 
-	GLvoid* mapRange(GLenum access, GLuint size = 0);
+  void unmap() const;
 
-	/* Feature not available in OpenGL ES  < 3.1 */
+  void send();
+
+  void setTarget(GLuint target);
+
+  void setDrawType(GLuint drawType);
+
+  bool isLoaded();
+
+  void setLoaded(GLboolean loaded);
+
+  GLuint getElements() const;
+
+  GLuint getSize() const;
+
+  GLvoid *getData() const;
+
+  void reload();
+
+  GLvoid *mapRange(GLenum access, GLuint size = 0);
+
+  /* Feature not available in OpenGL ES  < 3.1 */
 #ifdef FILLWAVE_GLES_3_0
 #else
-	GLvoid* map(GLenum access) const;
+
+  GLvoid *map(GLenum access) const;
+
 #endif
 
- protected:
-	GLboolean mLoaded;
-	GLuint mTarget;
-	GLuint mDataStoreType;
-	GLuint mIndex;
-	GLvoid* mData;
-	GLulong mSize;
-	GLulong mTotalElements;
-	void setElements(GLuint elements);
-	void setSize(GLuint size);
-	virtual void emptyCPU() = 0;
-	virtual void emptyGPU() = 0;
+protected:
+  GLboolean mLoaded;
+  GLuint mTarget;
+  GLuint mDataStoreType;
+  GLuint mIndex;
+  GLvoid *mData;
+  GLulong mSize;
+  GLulong mTotalElements;
+
+  void setElements(GLuint elements);
+
+  void setSize(GLuint size);
+
+  virtual void emptyCPU() = 0;
+
+  virtual void emptyGPU() = 0;
 };
 
 void unbindBuffer(GLuint target);
+
 void bindBuffer(GLuint target, GLuint handle);
 
 } /* core */

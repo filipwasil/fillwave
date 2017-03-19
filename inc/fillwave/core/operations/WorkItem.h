@@ -43,9 +43,10 @@ namespace core {
  */
 
 class WorkItem {
- public:
-	WorkItem() = default;
-	virtual ~WorkItem() = default;
+public:
+  WorkItem() = default;
+
+  virtual ~WorkItem() = default;
 };
 
 } /* core */

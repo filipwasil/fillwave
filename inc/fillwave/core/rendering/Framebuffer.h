@@ -45,36 +45,33 @@ namespace core {
  * \brief FramebufferObject - FO.
  */
 
-class Framebuffer: public GLObject {
- public:
-	Framebuffer(GLsizei howMany = 1);
+class Framebuffer : public GLObject {
+public:
+  Framebuffer(GLsizei howMany = 1);
 
-	virtual ~Framebuffer();
+  virtual ~Framebuffer();
 
-	void bind(GLuint id = 0) const;
+  void bind(GLuint id = 0) const;
 
-	void attachTexture2D(GLenum attachment, GLenum target, GLuint textureHandle);
+  void attachTexture2D(GLenum attachment, GLenum target, GLuint textureHandle);
 
-	void attachTexture2DDraw(
-	   GLenum attachment,
-	   GLenum target,
-	   GLuint textureHandle);
+  void attachTexture2DDraw(GLenum attachment, GLenum target, GLuint textureHandle);
 
-	void bindForWriting(GLuint id = 0) const;
+  void bindForWriting(GLuint id = 0) const;
 
-	void bindForReading(GLuint id = 0) const;
+  void bindForReading(GLuint id = 0) const;
 
-	void setReadColorAttachment(GLuint attachmentColor);
+  void setReadColorAttachment(GLuint attachmentColor);
 
-	void setReadDepthAttachment();
+  void setReadDepthAttachment();
 
-	virtual void reload();
+  virtual void reload();
 
-	static void bindScreenFramebuffer();
+  static void bindScreenFramebuffer();
 
-	static void bindScreenFramebufferForReading();
+  static void bindScreenFramebufferForReading();
 
-	static void bindScreenFramebufferForWriting();
+  static void bindScreenFramebufferForWriting();
 };
 
 } /* core */

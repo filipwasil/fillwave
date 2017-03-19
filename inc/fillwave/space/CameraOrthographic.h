@@ -44,34 +44,36 @@ namespace framework {
  */
 
 struct CullingBox {
-	GLfloat mProjectionLeft, mProjectionRight, mProjectionBottom, mProjectionTop,
-	        mProjectionNear, mProjectionFar;
+  GLfloat mProjectionLeft, mProjectionRight, mProjectionBottom, mProjectionTop, mProjectionNear, mProjectionFar;
 };
 
 /*! \class CameraOrthographic
  * \brief Camera with Orthographic projection.
  */
 
-class CameraOrthographic: public ICamera {
- public:
-	CameraOrthographic();
-	CameraOrthographic(
-	   glm::vec3 position,
-	   glm::quat rotation,
-	   GLfloat left,
-	   GLfloat right,
-	   GLfloat bottom,
-	   GLfloat top,
-	   GLfloat near,
-	   GLfloat far);
-	virtual ~CameraOrthographic() = default;
+class CameraOrthographic : public ICamera {
+public:
+  CameraOrthographic();
 
-	void updateProjection();
-	GLfloat getProjectionNearPlane();
-	GLfloat getProjectionFarPlane();
+  CameraOrthographic(glm::vec3 position,
+      glm::quat rotation,
+      GLfloat left,
+      GLfloat right,
+      GLfloat bottom,
+      GLfloat top,
+      GLfloat near,
+      GLfloat far);
 
- private:
-	CullingBox mCullingBox;
+  virtual ~CameraOrthographic() = default;
+
+  void updateProjection();
+
+  GLfloat getProjectionNearPlane();
+
+  GLfloat getProjectionFarPlane();
+
+private:
+  CullingBox mCullingBox;
 
 };
 

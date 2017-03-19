@@ -43,18 +43,18 @@ namespace core {
  * \brief Base class for all OpenGL objects not related to pipeline.
  */
 class GLObject {
- public:
-	GLObject(GLsizei howMany);
+public:
+  GLObject(GLsizei howMany);
 
-	virtual ~GLObject();
+  virtual ~GLObject();
 
-	GLuint getHandle(GLuint id = 0);
+  GLuint getHandle(GLuint id = 0);
 
-	virtual void reload() = 0;
+  virtual void reload() = 0;
 
- protected:
-	GLsizei mHowMany;
-	GLuint mHandles[FILLWAVE_GLOBJECT_MAX_CAPACITY];
+protected:
+  GLsizei mHowMany;
+  GLuint mHandles[FILLWAVE_GLOBJECT_MAX_CAPACITY];
 };
 
 } /* core */

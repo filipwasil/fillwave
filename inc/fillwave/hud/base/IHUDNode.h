@@ -47,29 +47,28 @@ namespace framework {
  */
 
 class IHUDNode : public ITreeNode {
- public:
-	IHUDNode(
-	   core::Texture2D* texture = nullptr,
-	   core::Program* program = nullptr,
-	   glm::vec2 position = glm::vec2(0.0f, 0.0f),
-	   glm::vec2 scale = glm::vec2(1.0f, 1.0f));
+public:
+  IHUDNode(core::Texture2D *texture = nullptr,
+      core::Program *program = nullptr,
+      glm::vec2 position = glm::vec2 (0.0f, 0.0f),
+      glm::vec2 scale = glm::vec2 (1.0f, 1.0f));
 
-	virtual ~IHUDNode();
+  virtual ~IHUDNode();
 
-	virtual void draw();
+  virtual void draw();
 
-	void onAttached(ITreeNode* node) override;
+  void onAttached(ITreeNode *node) override;
 
-	void onDetached() override;
+  void onDetached() override;
 
-	void coreDraw();
+  void coreDraw();
 
- protected:
-	core::Texture2D* mTexture;
-	core::Program* mProgram;
-	glm::vec2 mPosition;
-	glm::vec2 mScale;
-	Blending mBlending;
+protected:
+  core::Texture2D *mTexture;
+  core::Program *mProgram;
+  glm::vec2 mPosition;
+  glm::vec2 mScale;
+  Blending mBlending;
 };
 
 } /* namespace framework */

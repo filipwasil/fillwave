@@ -45,20 +45,21 @@ namespace framework {
  */
 
 class BuilderModel {
- public:
-	BuilderModel(Engine* engine, std::string modelPath, core::Program* program);
+public:
+  BuilderModel(Engine *engine, std::string modelPath, core::Program *program);
 
-	virtual ~BuilderModel() = default;
+  virtual ~BuilderModel() = default;
 
-	virtual puModel build();
+  virtual puModel build();
 
-	BuilderModel& setModelPath(std::string& path);
-	BuilderModel& setProgram(core::Program* program);
+  BuilderModel &setModelPath(std::string &path);
 
- protected:
-	Engine* mEngine;
-	core::Program* mProgram;
-	std::string mShapePath;
+  BuilderModel &setProgram(core::Program *program);
+
+protected:
+  Engine *mEngine;
+  core::Program *mProgram;
+  std::string mShapePath;
 };
 
 } /* framework */

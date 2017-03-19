@@ -46,47 +46,46 @@ namespace framework {
  * \brief Programmable to provide mesh terrain functionality.
  */
 
-class MeshTerrain: public Programmable {
- public:
-	MeshTerrain(
-	   Engine* engine,
-	   core::Program* program,
-	   TerrainConstructor* constructor,
-	   const Material& material,
-	   const std::string& diffuseMapPath,
-	   const std::string& normalMapPath,
-	   const std::string& specularMapPath,
-	   GLuint radius,
-	   GLuint density = 8);
+class MeshTerrain : public Programmable {
+public:
+  MeshTerrain(Engine *engine,
+      core::Program *program,
+      TerrainConstructor *constructor,
+      const Material &material,
+      const std::string &diffuseMapPath,
+      const std::string &normalMapPath,
+      const std::string &specularMapPath,
+      GLuint radius,
+      GLuint density = 8);
 
-	MeshTerrain(
-	   Engine* engine,
-	   core::Program* program,
-	   TerrainConstructor* constructor,
-	   const Material& material,
-	   core::Texture2D* diffuseMapPath,
-	   core::Texture2D* normalMapPath,
-	   core::Texture2D* specularMapPath,
-	   GLuint radius,
-	   GLuint density = 8);
+  MeshTerrain(Engine *engine,
+      core::Program *program,
+      TerrainConstructor *constructor,
+      const Material &material,
+      core::Texture2D *diffuseMapPath,
+      core::Texture2D *normalMapPath,
+      core::Texture2D *specularMapPath,
+      GLuint radius,
+      GLuint density = 8);
 
-	virtual ~MeshTerrain() = default;
+  virtual ~MeshTerrain() = default;
 
-	void initIBO(std::vector<GLuint>& indices, GLuint density);
+  void initIBO(std::vector<GLuint> &indices, GLuint density);
 
-	/* IDrawable */
-	void draw(ICamera& camera);
-	void drawPBRP(ICamera& camera);
+  /* IDrawable */
+  void draw(ICamera &camera);
 
-	/* IRenderable */
-	void updateRenderer(IRenderer& renderer) override;
+  void drawPBRP(ICamera &camera);
 
- private:
-	LightSystem* mLights;
-	GLfloat mChunkWidth;
-	GLfloat mJumpStep;
+  /* IRenderable */
+  void updateRenderer(IRenderer &renderer) override;
 
-	void distanceCheck(ICamera& camera);
+private:
+  LightSystem *mLights;
+  GLfloat mChunkWidth;
+  GLfloat mJumpStep;
+
+  void distanceCheck(ICamera &camera);
 };
 
 } /* framework */

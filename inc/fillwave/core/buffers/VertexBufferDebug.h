@@ -44,20 +44,22 @@ namespace core {
  */
 
 struct VertexDebug {
-	float position[2];
-	float uv[2];
+  float position[2];
+  float uv[2];
 };
 
 /*! \class VertexBufferDebug
  * \brief Vertex buffer specialized with VertexDebug data structure.
  */
 
-class VertexBufferDebug: public TVertexBuffer<VertexDebug> {
+class VertexBufferDebug : public TVertexBuffer<VertexDebug> {
 
- public:
-	VertexBufferDebug(GLfloat scale = 1.0);
-	virtual ~VertexBufferDebug() = default;
-	void log() const;
+public:
+  VertexBufferDebug(GLfloat scale = 1.0);
+
+  virtual ~VertexBufferDebug() = default;
+
+  void log() const;
 };
 
 } /* core */

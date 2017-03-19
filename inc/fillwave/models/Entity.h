@@ -59,82 +59,100 @@ namespace framework {
  * \brief Base for all Scene nodes.
  */
 
-class Entity:
-	public IRenderable, public IPickable, public Moveable,
-	public TreePtr<Entity> {
- public:
-	Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation =
-	          glm::quat(1.0, 0.0, 0.0, 0.0));
+class Entity : public IRenderable, public IPickable, public Moveable, public TreePtr<Entity> {
+public:
+  Entity(glm::vec3 translation = glm::vec3 (0.0), glm::quat orientation = glm::quat (1.0, 0.0, 0.0, 0.0));
 
-	virtual ~Entity();
-	Entity & operator= ( const Entity& ) = default;
-	Entity ( const Entity & ) = default;
-	Entity& operator = (Entity&&) = default;
-	Entity (Entity&& obj) = default;
+  virtual ~Entity();
 
-	/* Flags */
-	GLboolean isPSC();
-	GLboolean isPSR();
+  Entity &operator=(const Entity &) = default;
 
-	/* Callbacks */
-	void handleHierarchyEvent(EventType& event);
+  Entity(const Entity &) = default;
 
-	/* Model */
-	glm::mat4 getPhysicsMMC();
+  Entity &operator=(Entity &&) = default;
 
-	/* Physics */
-	void setTransformation(glm::mat4 modelMatrix);
+  Entity(Entity &&obj) = default;
 
-	/* Callbacks */
-	void attachHierarchyCallback(puCallback&& callback);
-	void detachHierarchyCallback(Callback* callback);
+  /* Flags */
+  GLboolean isPSC();
 
-	/* Parent */
-	void updateMatrixTree();
-	void updateParentMatrix(glm::mat4& parent);
-	void updateParentRotation(glm::quat& rotation);
+  GLboolean isPSR();
 
-	/* IPickable */
-	void pick(glm::vec3 color) override;
-	void unpick() override;
-	virtual void onPicked() override;
-	virtual void onUnpicked() override;
+  /* Callbacks */
+  void handleHierarchyEvent(EventType &event);
 
-	/* IDrawable */
-	virtual void draw(ICamera& camera) override;
-	virtual void drawPBRP(ICamera& camera) override;
-	virtual void drawDR(ICamera& camera) override;
-	virtual void drawDepth(ICamera& camera) override;
-	virtual void drawDepthColor(ICamera& camera, glm::vec3& position) override;
-	virtual void drawAOG(ICamera& camera) override;
-	virtual void drawAOC(ICamera& camera) override;
-	virtual void drawOcclusionBox(ICamera& camera) override;
-	virtual void drawPicking(ICamera& camera) override;
+  /* Model */
+  glm::mat4 getPhysicsMMC();
 
-	/* IRenderable */
-	virtual void updateRenderer(IRenderer& renderer) override;
-	virtual bool getRenderItem(RenderItem& item) override;
+  /* Physics */
+  void setTransformation(glm::mat4 modelMatrix);
 
-	/* Animations */
-	virtual bool isAnimated() const;
+  /* Callbacks */
+  void attachHierarchyCallback(puCallback &&callback);
 
-	/* Log */
-	virtual void log() const;
+  void detachHierarchyCallback(Callback *callback);
 
- protected:
-	/* MMC - Model Matrix Cache */
-	glm::mat4 mPhysicsMMC;
+  /* Parent */
+  void updateMatrixTree();
 
-	GLboolean mChildrenPropagateEvent;
-	GLboolean mParentRefresh;
-	std::vector<puCallback> mCallbacksHierarchy;
+  void updateParentMatrix(glm::mat4 &parent);
 
-	GLboolean mPSC;
-	GLboolean mPSR;
+  void updateParentRotation(glm::quat &rotation);
 
- private:
-	void eraseFinishedCallbacks(std::vector<puCallback>& callbacks);
-	void detachCallback(std::vector<puCallback>& callbacks, Callback* callback);
+  /* IPickable */
+  void pick(glm::vec3 color) override;
+
+  void unpick() override;
+
+  virtual void onPicked() override;
+
+  virtual void onUnpicked() override;
+
+  /* IDrawable */
+  virtual void draw(ICamera &camera) override;
+
+  virtual void drawPBRP(ICamera &camera) override;
+
+  virtual void drawDR(ICamera &camera) override;
+
+  virtual void drawDepth(ICamera &camera) override;
+
+  virtual void drawDepthColor(ICamera &camera, glm::vec3 &position) override;
+
+  virtual void drawAOG(ICamera &camera) override;
+
+  virtual void drawAOC(ICamera &camera) override;
+
+  virtual void drawOcclusionBox(ICamera &camera) override;
+
+  virtual void drawPicking(ICamera &camera) override;
+
+  /* IRenderable */
+  virtual void updateRenderer(IRenderer &renderer) override;
+
+  virtual bool getRenderItem(RenderItem &item) override;
+
+  /* Animations */
+  virtual bool isAnimated() const;
+
+  /* Log */
+  virtual void log() const;
+
+protected:
+  /* MMC - Model Matrix Cache */
+  glm::mat4 mPhysicsMMC;
+
+  GLboolean mChildrenPropagateEvent;
+  GLboolean mParentRefresh;
+  std::vector<puCallback> mCallbacksHierarchy;
+
+  GLboolean mPSC;
+  GLboolean mPSR;
+
+private:
+  void eraseFinishedCallbacks(std::vector<puCallback> &callbacks);
+
+  void detachCallback(std::vector<puCallback> &callbacks, Callback *callback);
 };
 } /* framework */
 puEntity buildEntity();

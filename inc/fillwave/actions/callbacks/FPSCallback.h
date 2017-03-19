@@ -45,16 +45,18 @@ namespace framework {
  * \brief ItemCallback to display and refresh FPS as a renderable text.
  */
 
-class FPSCallback: public Callback {
- public:
-	FPSCallback(Engine* engine, pText text);
-	virtual ~FPSCallback() = default;
-	void perform(EventType& event);
+class FPSCallback : public Callback {
+public:
+  FPSCallback(Engine *engine, pText text);
 
- private:
-	pText mText;
-	GLfloat mTimePassed;
-	Engine* mEngine;
+  virtual ~FPSCallback() = default;
+
+  void perform(EventType &event);
+
+private:
+  pText mText;
+  GLfloat mTimePassed;
+  Engine *mEngine;
 };
 
 } /* framework */

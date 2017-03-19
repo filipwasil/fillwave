@@ -15,27 +15,27 @@ using namespace std;
 namespace fillwave {
 namespace core {
 
-Program::Program(const std::vector<core::Shader*>& shaders, GLboolean skipLinking)
-		: mDelayedLinking(skipLinking), mShaders(shaders) {
-	reload();
+Program::Program(const std::vector<core::Shader *> &shaders, GLboolean skipLinking)
+    : mDelayedLinking (skipLinking), mShaders (shaders) {
+  reload ();
 }
 
 Program::~Program() {
-	for (auto& it : mShaders) {
-		detach(it);
-	}
+  for (auto &it : mShaders) {
+    detach (it);
+  }
 }
 
-void Program::attach(core::Shader* /*shader*/) {
+void Program::attach(core::Shader * /*shader*/) {
 
 }
 
-void Program::detach(core::Shader* /*shader*/) {
+void Program::detach(core::Shader * /*shader*/) {
 
 }
 
 GLuint Program::getHandle() const {
-	return mHandle;
+  return mHandle;
 }
 
 void Program::link() {
@@ -58,7 +58,7 @@ void Program::uniformPush(string /*name*/, GLint /*data*/) {
 
 }
 
-void Program::uniformPush(string /*name*/, GLint* /*data*/, GLint /*count*/) {
+void Program::uniformPush(string /*name*/, GLint * /*data*/, GLint /*count*/) {
 
 }
 
@@ -66,7 +66,7 @@ void Program::uniformPush(string /*name*/, GLfloat /*data*/) {
 
 }
 
-void Program::uniformPush(string /*name*/, GLfloat* /*data*/, GLint /*count*/) {
+void Program::uniformPush(string /*name*/, GLfloat * /*data*/, GLint /*count*/) {
 
 }
 
@@ -78,7 +78,7 @@ void Program::uniformPush(string /*name*/, glm::mat4 /*data*/) {
 
 }
 
-void Program::uniformPush(string /*name*/, glm::mat4* /*data*/, GLuint /*size*/) {
+void Program::uniformPush(string /*name*/, glm::mat4 * /*data*/, GLuint /*size*/) {
 
 }
 
@@ -90,7 +90,7 @@ void Program::uniformPush(string /*name*/, glm::vec3 /*data*/) {
 
 }
 
-void Program::uniformPush(string /*name*/, glm::vec3* /*data*/, GLuint /*size*/) {
+void Program::uniformPush(string /*name*/, glm::vec3 * /*data*/, GLuint /*size*/) {
 
 }
 
@@ -106,7 +106,7 @@ void Program::getUniformBlock(std::string /*name*/, GLuint /*bindingPoint*/) {
 
 }
 
-void Program::uniformBlockPush(std::string /*name*/, GLfloat* /*data*/) {
+void Program::uniformBlockPush(std::string /*name*/, GLfloat * /*data*/) {
 }
 
 void Program::log() const {
@@ -115,10 +115,8 @@ void Program::log() const {
 void Program::reload() {
 }
 
-core::Program* buildProgram(
-	const std::vector<core::Shader*>&,
-			GLboolean) {
-	return nullptr;
+core::Program *buildProgram(const std::vector<core::Shader *> &, GLboolean) {
+  return nullptr;
 }
 
 }

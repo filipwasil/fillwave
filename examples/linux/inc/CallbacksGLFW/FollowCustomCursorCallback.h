@@ -19,13 +19,16 @@ namespace framework {
  * \brief EngineCallback to change follow the user created custom cursor.
  */
 
-class FollowCustomCursorCallback: public Callback {
- public:
-	FollowCustomCursorCallback(Engine* engine);
-	virtual ~FollowCustomCursorCallback() = default;
-	void perform (EventType& event);
- private:
-	Engine* mEngine;
+class FollowCustomCursorCallback : public Callback {
+public:
+  FollowCustomCursorCallback(Engine *engine);
+
+  virtual ~FollowCustomCursorCallback() = default;
+
+  void perform(EventType &event);
+
+private:
+  Engine *mEngine;
 };
 
 } /* framework */

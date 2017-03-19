@@ -44,60 +44,37 @@ namespace framework {
  * \brief Shape encapsulating vertices and indices for triangle drawn quad.
  */
 
-class Quad: public Shape<core::VertexBasic> {
- public:
-	Quad(GLfloat size = 1.0f) {
+class Quad : public Shape<core::VertexBasic> {
+public:
+  Quad(GLfloat size = 1.0f) {
 
-		mVertices.resize(6);
+    mVertices.resize (6);
 
-		core::VertexBasic position[6] = { { { -size, -size, 0.0, 1.0 }, {
-					0.0,
-					0.0,
-					0.0,
-					1.0
-				}, { 0.0, 0.0, -1.0 }, { 1.0, 0.0, 0.0 }, { 0.0, 0.0 }, { 0 }, {
-					0.0
-				}
-			}, { { size, -size, 0.0, 1.0 }, { 0.0, 0.0, 0.0, 1.0 }, {
-					0.0,
-					0.0,
-					-1.0
-				}, { 1.0, 0.0, 0.0 }, { 1.0, 0.0 }, { 0 }, { 0.0 }
-			}, {
-				{ size, size, 0.0, 1.0 },
-				{ 0.0, 0.0, 0.0, 1.0 },
-				{ 0.0, 0.0, -1.0 },
-				{ 1.0, 0.0, 0.0 },
-				{ 1.0, 1.0 },
-				{ 0 },
-				{ 0.0 }
-			}, { { size, size, 0.0, 1.0 }, { 0.0, 0.0, 0.0, 1.0 }, {
-					0.0,
-					0.0,
-					-1.0
-				}, { 1.0, 0.0, 0.0 }, { 1.0, 1.0 }, { 0 }, { 0.0 }
-			}, {
-				{ -size, size, 0.0, 1.0 },
-				{ 0.0, 0.0, 0.0, 1.0 },
-				{ 0.0, 0.0, -1.0 },
-				{ 1.0, 0.0, 0.0 },
-				{ 0.0, 1.0 },
-				{ 0 },
-				{ 0.0 }
-			}, { { -size, -size, 0.0, 1.0 }, { 0.0, 0.0, 0.0, 1.0 }, {
-					0.0,
-					0.0,
-					-1.0
-				}, { 1.0, 0.0, 0.0 }, { 0.0, 0.0 }, { 0 }, { 0.0 }
-			},
-		};
+    core::VertexBasic position[6] = {{{-size, -size, 0.0, 1.0}, {
+                                                                    0.0, 0.0, 0.0, 1.0
+                                                                },                       {0.0, 0.0, -1.0}, {1.0, 0.0, 0.0}, {0.0, 0.0}, {0}, {
+                                                                                                                                                 0.0
+                                                                                                                                             }},
+                                     {{size,  -size, 0.0, 1.0}, {   0.0, 0.0, 0.0, 1.0}, {
+                                                                                          0.0, 0.0, -1.0
+                                                                                         },                {1.0, 0.0, 0.0}, {1.0, 0.0}, {0}, {   0.0}},
+                                     {{size,  size,  0.0, 1.0}, {   0.0, 0.0, 0.0, 1.0}, {0.0, 0.0, -1.0}, {1.0, 0.0, 0.0}, {1.0, 1.0}, {0}, {   0.0}},
+                                     {{size,  size,  0.0, 1.0}, {   0.0, 0.0, 0.0, 1.0}, {
+                                                                                          0.0, 0.0, -1.0
+                                                                                         },                {1.0, 0.0, 0.0}, {1.0, 1.0}, {0}, {   0.0}},
+                                     {{-size, size,  0.0, 1.0}, {   0.0, 0.0, 0.0, 1.0}, {0.0, 0.0, -1.0}, {1.0, 0.0, 0.0}, {0.0, 1.0}, {0}, {   0.0}},
+                                     {{-size, -size, 0.0, 1.0}, {   0.0, 0.0, 0.0, 1.0}, {
+                                                                                          0.0, 0.0, -1.0
+                                                                                         },                {1.0, 0.0, 0.0}, {0.0, 0.0}, {0}, {   0.0}},
+    };
 
-		for (size_t i = 0; i < mVertices.size(); i++) {
-			mVertices[i] = position[i];
-			mIndices.push_back(i);
-		}
-	}
-	virtual ~Quad() = default;
+    for (size_t i = 0; i < mVertices.size (); i++) {
+      mVertices[i] = position[i];
+      mIndices.push_back (i);
+    }
+  }
+
+  virtual ~Quad() = default;
 };
 
 } /* framework */
