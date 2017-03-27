@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bf6a1d1d_cf7af770",
+        "filename": "editor/src/loader/factory/IMenuWidgetFactory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-03-27T09:23:55Z",
+      "side": 1,
+      "message": "Remove",
+      "revId": "cb7680220ab30c305ab016c44eafc0685301d7f4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
