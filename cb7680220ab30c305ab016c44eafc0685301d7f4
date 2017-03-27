@@ -16,6 +16,24 @@
       "revId": "cb7680220ab30c305ab016c44eafc0685301d7f4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ab68b85_b85acd29",
+        "filename": "editor/src/loader/factory/IMenuWidgetFactory.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-03-27T10:47:22Z",
+      "side": 1,
+      "message": "I will. It will be in next commit in few days.",
+      "parentUuid": "bf6a1d1d_cf7af770",
+      "revId": "cb7680220ab30c305ab016c44eafc0685301d7f4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
