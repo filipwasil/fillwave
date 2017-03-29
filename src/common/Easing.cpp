@@ -43,8 +43,17 @@
 //  To Public License, Version 2, as published by Sam Hocevar. See
 //  http://sam.zoy.org/wtfpl/COPYING for more details.
 //
+
 #include <math.h>
 #include <fillwave/common/Easing.h>
+
+#ifndef M_PI
+#define M_PI           3.14159265358979323846
+#endif
+
+#ifndef M_PI_2
+#define M_PI_2         3.14159265358979323846 * 0.5
+#endif
 
 // Modeled after the line y = x
 AHFloat LinearInterpolation(AHFloat p) {
@@ -273,3 +282,11 @@ AHFloat BounceEaseInOut(AHFloat p) {
     return 0.5f * BounceEaseOut(p * 2.0f - 1.0f) + 0.5f;
   }
 }
+
+#ifndef M_PI
+#undef M_PI           3.14159265358979323846
+#endif
+
+#ifndef M_PI_2
+#undef M_PI_2         3.14159265358979323846 * 0.5
+#endif
