@@ -197,7 +197,7 @@ inline void EmiterPointGPU::coreDraw() {
   mVBOGPU[mSrcIndex]->bind();
   mVBOGPU[mSrcIndex]->attributesSetPointer();
 
-  if (not mDepthTesting) {
+  if (mDepthTesting) {
     glDepthMask(GL_FALSE);
   }
 
@@ -210,7 +210,7 @@ inline void EmiterPointGPU::coreDraw() {
   glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid *>(0));
   fLogC("Draw elements");
 
-  if (not mDepthTesting) {
+  if (mDepthTesting) {
     glDepthMask(GL_TRUE);
   }
 

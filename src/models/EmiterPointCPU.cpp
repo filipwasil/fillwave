@@ -43,7 +43,7 @@ namespace fillwave {
 namespace framework {
 
 EmiterPointCPU::EmiterPointCPU(Engine *engine,
-    GLfloat /*emitingSourceRate*/, //xxx not used for now
+    GLfloat /*emitingSourceRate*/, // todo not used for now
     GLuint howMany,
     glm::vec4 color,
     glm::vec3 acceleration,
@@ -170,7 +170,7 @@ inline void EmiterPointCPU::coreDraw() {
     mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
   }
 
-  if (not mDepthTesting) {
+  if (!mDepthTesting) {
     glDepthMask(GL_FALSE);
   }
 
@@ -181,7 +181,7 @@ inline void EmiterPointCPU::coreDraw() {
   glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid *>(0));
   fLogC("Draw elements");
   glDisable(GL_BLEND);
-  if (not mDepthTesting) {
+  if (mDepthTesting) {
     glDepthMask(GL_TRUE);
   }
 

@@ -15,9 +15,12 @@ if (WIN32)
       ${FILLWAVE_EXT_GLEW_INCLUDES}
       ${FILLWAVE_EXT_SPDLOG_INCLUDES}
   )
+  add_library (textureloader STATIC ${FILLWAVE_TEXTURE_LOADER_SOURCES})
+else()
+  add_library (textureloader SHARED ${FILLWAVE_TEXTURE_LOADER_SOURCES})
 endif (WIN32)
 
-add_library (textureloader SHARED ${FILLWAVE_TEXTURE_LOADER_SOURCES})
+message ( " ------------ ${FILLWAVE_TEXTURE_LOADER_SOURCES} ----------")
 
 if (FILLWAVE_BUILD_DEV)
 else ()

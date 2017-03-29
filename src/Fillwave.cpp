@@ -254,7 +254,7 @@ pText Engine::storeText(const string &content,
     glm::vec4 color,
     eTextEffect effect) {
   /* Check for the font texture */
-  if (not mImpl->mTextures->get(fontName + ".png")) {
+  if (!mImpl->mTextures->get(fontName + ".png")) {
     mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
   }
   Texture2D *t = mImpl->mTextures->get(fontName + ".png", framework::eCompression::eNone, framework::eFlip::eVertical);
@@ -266,7 +266,7 @@ pText Engine::storeText(const string &content,
     }
   }
 
-  if (not font) {
+  if (!font) {
     ifstream myfile(mImpl->mFileLoader.getRootPath(fontName + ".meta"));
     if (!myfile.is_open()) {
       fLogE("No text added. Could not write to metadata file: %s", (fontName + ".meta").c_str());

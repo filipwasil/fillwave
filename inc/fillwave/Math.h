@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Math.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef MATH_H_
-#define MATH_H_
-
 #define GLM_FORCE_RADIANS
 #define GLM_SWIZZLE
 
@@ -54,5 +53,3 @@ namespace fillwave {
 static const float F_PI = static_cast<float>(M_PI);
 static const float F_PI_2 = static_cast<float>(M_PI_2);
 } /* fillwave */
-
-#endif /* MATH_H_ */

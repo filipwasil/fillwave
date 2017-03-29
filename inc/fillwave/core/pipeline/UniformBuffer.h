@@ -35,6 +35,7 @@
 #define UNIFORMBUFFER_H_
 
 #include <fillwave/core/buffers/IBuffer.h>
+#include <string>
 
 namespace fillwave {
 namespace core {
