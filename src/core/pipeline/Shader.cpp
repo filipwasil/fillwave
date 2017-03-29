@@ -53,7 +53,7 @@ Shader::~Shader() {
 }
 
 void Shader::loadSource() {
-  if (not mSource.empty()) {
+  if (!mSource.empty()) {
     const GLchar *source = (const GLchar *) mSource.c_str();
     glShaderSource(mHandle, 1, &source, nullptr);
     fLogC("Loading source code to the shader failed");

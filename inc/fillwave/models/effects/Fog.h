@@ -65,12 +65,12 @@ public:
     mColour = colour;
   }
 
-  void setNearDistance(GLfloat near) {
-    mNearDistance = near;
+  void setNearDistance(GLfloat aNear) {
+    mNearDistance = aNear;
   }
 
-  void setFarDistance(GLfloat far) {
-    mFarDistance = far;
+  void setFarDistance(GLfloat aFar) {
+    mFarDistance = aFar;
   }
 
   void preDrawAction(core::Program *program) override;
