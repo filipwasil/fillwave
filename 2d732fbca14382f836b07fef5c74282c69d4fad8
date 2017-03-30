@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2e3e2d2d_38b62797",
+        "filename": "inc/impl/FillwaveImpl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-03-30T19:22:48Z",
+      "side": 1,
+      "message": "Problem with parenteheses we need to change like this \nif ((mStartupTexture \u003d mTextures-\u003eget(\"logo.png\", framework::eCompression::eNone)))",
+      "range": {
+        "startLine": 364,
+        "startChar": 6,
+        "endLine": 364,
+        "endChar": 82
+      },
+      "revId": "2d732fbca14382f836b07fef5c74282c69d4fad8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "77682240_1bc8f45d",
+        "filename": "inc/impl/FillwaveImpl.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-03-30T19:22:48Z",
+      "side": 1,
+      "message": "Problem with parentheses line in line 364",
+      "range": {
+        "startLine": 367,
+        "startChar": 5,
+        "endLine": 367,
+        "endChar": 92
+      },
+      "revId": "2d732fbca14382f836b07fef5c74282c69d4fad8",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
