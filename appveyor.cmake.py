@@ -25,7 +25,7 @@ else:
     generator += ' Win64'
   cmake_command.append('-G' + generator)
   build_command = ['msbuild', '/m:4', '/p:Config=' + config, 'FORMAT.sln']
-  test_command = ['msbuild', 'RUN_TESTS.vcxproj']
+  test_command = ['msbuild', 'fillwave.vcxproj']
 
 check_call(cmake_command)
 check_call(build_command)
