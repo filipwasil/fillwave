@@ -4,10 +4,10 @@ configuration:
 
 environment:
   matrix:
-  #- BUILD: msvc
+  - BUILD: msvc
   #- BUILD: msvc
   #  PLATFORM: x64
-  - BUILD: mingw
+  #- BUILD: mingw
 
 before_build:
   # Workaround for CMake not wanting sh.exe on PATH for MinGW.
