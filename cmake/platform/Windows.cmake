@@ -3,6 +3,8 @@ cmake_minimum_required (VERSION 2.8.8)
 cmake_policy (SET CMP0048 OLD) #Project version cmake policy
 cmake_policy (SET CMP0046 OLD) #Project dependency cmake policy
 
+set(BUILD_SHARED_LIBS OFF)
+
 # -----------------------------------------------
 # Subprojects
 # -----------------------------------------------
@@ -34,7 +36,7 @@ include_directories (${FILLWAVE_PATH_INCLUDE}
 # Targets
 # -----------------------------------------------
 
-add_library (fillwave SHARED ${FILLWAVE_SOURCES})
+add_library (fillwave STATIC ${FILLWAVE_SOURCES})
 
 # -----------------------------------------------
 # Linker

@@ -71,7 +71,7 @@ for fedora if you want build rpm packges only(RPM packges are in fillwave_build)
 Windows build needs [MinGW](http://www.mingw.org/) installed (If you want to use pthreads then use [mingw64](http://mingw-w64.org/doku.php) version). Soon VS 14 2015 version will be also available.
 
 ```
-./build_windows_mingw.bat # ./build_windows_msvc will work soon
+./build_windows_msvs.bat
 ```
 
 Please also note that if you have sh.exe in your PATH, you should remove it for the compilation time. MinGW projects does not line sh.exe in PATH. Sorry.
@@ -108,5 +108,5 @@ Android script is currently designed to work only with Linux. It assumes that An
 | :-------------: |:-------------:|
 | Linux      | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master) |
 | Android (native)    | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)      |
-| Windows (mingw)    | [![Build status](https://ci.appveyor.com/api/projects/status/w5xqq2tntoo9td6k?svg=true)](https://ci.appveyor.com/project/filipwasil/fillwave) |
+| Windows (msvs)    | [![Build status](https://ci.appveyor.com/api/projects/status/w5xqq2tntoo9td6k?svg=true)](https://ci.appveyor.com/project/filipwasil/fillwave) |
 | Coverity   | [![Coverage Status](https://coveralls.io/repos/github/filipwasil/fillwave/badge.svg?branch=master)](https://coveralls.io/github/filipwasil/fillwave?branch=master)
