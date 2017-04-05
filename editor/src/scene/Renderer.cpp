@@ -20,10 +20,10 @@ Renderer::~Renderer() {
 }
 
 void Renderer::initializeGL() {
-  mEngine = unique_ptr<Engine>(new Engine(mArgc, mArgv));
 
-  mEngine->setCurrentScene(make_unique<Scene>());
-  mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
+    mEngine = unique_ptr<Engine>(new Engine(mArgc, mArgv));
+    mEngine->setCurrentScene(make_unique<Scene>());
+    mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
                                                                        glm::quat(),
                                                                        glm::radians(90.0),
                                                                        1.0,
