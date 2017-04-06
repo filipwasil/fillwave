@@ -1,27 +1,30 @@
-project(fillwave_qt_example)
+project(fillwaveInteractiveDemo)
 cmake_minimum_required(VERSION 2.8.11)
-
+set(VERSION "1.0.1")
 set(CMAKE_AUTOMOC ON)
-
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-fPIC")
+set(PKGT ${PKGTYPE})
 
 find_package(Qt5Widgets REQUIRED)
 find_package(Qt5OpenGL REQUIRED)
 find_package(Qt5Xml REQUIRED)
-
-enable_testing()
+if (${TESTSTATUS})
+    enable_testing()
+endif()
 
 include_directories(SYSTEM ${Qt5Widgets_INCLUDE_DIRS})
 include_directories(SYSTEM ${Qt5OpenGL_INCLUDE_DIRS})
 include_directories(SYSTEM ${Qt5Xml_INCLUDE_DIRS})
 
 add_subdirectory(src/)
-add_subdirectory(tests/)
-
+if (${TESTSTATUS})
+    add_subdirectory(tests/)
+endif()
 add_custom_target(
-        assets_${PROJECT_NAME}
-        COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/assets  ${CMAKE_CURRENT_BINARY_DIR}/
+    assets_${PROJECT_NAME}
+    COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/assets  ${CMAKE_CURRENT_BINARY_DIR}/
 )
+
 
