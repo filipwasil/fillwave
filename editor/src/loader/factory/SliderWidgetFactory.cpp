@@ -4,7 +4,8 @@
 namespace loader {
 namespace factory {
 QWidget *
-SliderWidgetFactory::create(QVector <std::pair<QString, QString>> &parametersVector, common::ISceneController *scene) {
+SliderWidgetFactory::create(QVector<std::pair<QString, QString>> &parametersVector,
+    std::shared_ptr<common::ISceneController> scene) {
   QSlider *slider = new QSlider();
   auto minimum = std::find_if(parametersVector.begin(), parametersVector.end(),
       [](const std::pair <QString, QString> &parameter) { return parameter.first == "minimum"; });

@@ -1,7 +1,9 @@
 #pragma once
 
+#include <memory>
 #include <QWidget>
 #include <QVector>
+#include <memory>
 #include "common/ISceneController.h"
 
 namespace loader {
@@ -12,7 +14,8 @@ public:
 
   }
 
-  virtual QWidget *create(QVector <std::pair<QString, QString>> &parametersVector, common::ISceneController *scene) = 0;
+  virtual QWidget *
+  create(QVector<std::pair<QString, QString>> &parametersVector, std::shared_ptr<common::ISceneController> scene) = 0;
 };
 }
 }

@@ -1,10 +1,15 @@
-set(SOURCESCENE
-        ${SOURCE}
-        ${CMAKE_CURRENT_SOURCE_DIR}/Renderer.cpp
-        PARENT_SCOPE
-        )
-set(HEADERSSCENE
-        ${HEADERS}
-        ${CMAKE_CURRENT_SOURCE_DIR}/Renderer.h
-        PARENT_SCOPE
-        )
+set (SOURCESCENE
+    ${SOURCE}
+    ${CMAKE_CURRENT_SOURCE_DIR}/Renderer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ScensFactory.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/sceneImp/TextScene.cpp
+    PARENT_SCOPE
+    )
+set (HEADERSSCENE
+    ${HEADERS}
+    ${CMAKE_CURRENT_SOURCE_DIR}/Renderer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/AScene.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/sceneImp/TextScene.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ScensFactory.h
+    PARENT_SCOPE
+    )

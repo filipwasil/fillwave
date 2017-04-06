@@ -4,7 +4,7 @@
 
 namespace common {
 class MenuWidgetTranslator : public QObject {
-  Q_OBJECT
+Q_OBJECT
 public:
   MenuWidgetTranslator(QWidget *menuWidget);
 
@@ -12,7 +12,7 @@ public slots:
 
   void update();
 
-  signals :
+signals :
 
   void updateScene(QWidget *menuElement);
 

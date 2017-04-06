@@ -1,3 +1,4 @@
+#include <memory>
 #include "DialWidgetFactory.h"
 #include "QDial"
 
@@ -5,7 +6,8 @@ namespace loader {
 namespace factory {
 
 QWidget *
-DialWidgetFactory::create(QVector <std::pair<QString, QString>> &parametersVector, common::ISceneController *scene) {
+DialWidgetFactory::create(QVector<std::pair<QString, QString>> &parametersVector,
+    std::shared_ptr<common::ISceneController> scene) {
   QDial *slider = new QDial();
   auto minimum = std::find_if(parametersVector.begin(), parametersVector.end(),
       [](const std::pair <QString, QString> &parameter) { return parameter.first == "minimum"; });

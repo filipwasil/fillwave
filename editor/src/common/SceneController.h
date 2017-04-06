@@ -2,13 +2,16 @@
 
 #include <QWidget>
 #include <QVector>
+#include <memory>
 #include "common/ISceneController.h"
+#include "scene/AScene.h"
 
 namespace common {
 class SceneController : public common::ISceneController {
   Q_OBJECT
 public :
-  SceneController(QWidget *scen);
+  SceneController();
+  SceneController(std::shared_ptr<scene::AScene> scen);
 
   void updateScenField(QWidget *menuElement);
 
@@ -16,10 +19,10 @@ public :
 
   void deleteTranslators() override;
 
+  void registerNewScene(std::shared_ptr<scene::AScene> scen) override;
 private:
-  QWidget *mScene;
+  std::shared_ptr<scene::AScene> mScene;
   QVector<MenuWidgetTranslator *> mTranslators;
-
   QVariant getValue(const QWidget *menuElement) const;
 };
 }

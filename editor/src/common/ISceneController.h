@@ -2,6 +2,7 @@
 
 #include <QWidget>
 #include <common/MenuWidgetTranslator.h>
+#include "scene/AScene.h"
 
 namespace common {
 class ISceneController : public QObject {
@@ -13,7 +14,9 @@ public:
 
   virtual void deleteTranslators() = 0;
 
-  public slots:
+  virtual void registerNewScene(std::shared_ptr<scene::AScene> scen) = 0;
+
+public slots:
 
   virtual void updateScenField(QWidget *menuElement) = 0;
 };

@@ -5,9 +5,13 @@
 #include <QTextStream>
 #include <QList>
 #include <QWidget>
-#include "common/ISceneController.h"
+#include <utility>
 
 namespace tools {
-QVector <QString> readFileToStrings(QString pathToFile);
+QVector<QString> readFileToStrings(QString pathToFile);
+
+QVector<std::pair<QString, QString>> readScenarioListWithPaths();
+
+QVector<QString> readOnlyScenarioNames();
 }
 

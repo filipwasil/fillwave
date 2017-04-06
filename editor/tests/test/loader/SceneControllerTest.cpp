@@ -1,22 +1,24 @@
 #include "scene/Renderer.h"
 #include <QLineEdit>
 #include "SceneControllerTest.h"
+#include "SceneMock.h"
 
 TEST_F(SceneControllerTestFixture, testTextScene) {
-    QGLWidget *textScene = new Renderer(0, nullptr);
-    sut = new common::SceneController(textScene);
-    QLineEdit *textFiled = new QLineEdit();
-    textFiled->setObjectName("mText");
-    textFiled->setText("testCase");
+  sut = new common::SceneController();
+  QLineEdit *textFiled = new QLineEdit();
+  textFiled->setObjectName("mText");
+  textFiled->setText("testCase");
+  std::shared_ptr<SceneMock> newEngine = std::make_shared<SceneMock>();
+  sut->registerNewScene(newEngine);
+  sut->updateScenField(textFiled);
 
-    sut->updateScenField(textFiled);
+  QVariant propertyParameters = newEngine->property("sceneParameter");
+  if (!propertyParameters.canConvert<QMap<QString, QVariant>>()) {
+    ASSERT_TRUE(false);
+  }
 
-    QVariant propertyParameters = textScene->property("sceneParameter");
-    if (!propertyParameters.canConvert<QMap<QString, QVariant>>()) {
-        ASSERT_TRUE(false);
-    }
-    QMap<QString, QVariant> parameters = propertyParameters.value<QMap<QString, QVariant>>();
-    ASSERT_TRUE(parameters.contains("mText"));
-    QString textValue = parameters["mText"].toString();
-    EXPECT_EQ("testCase", textValue);
+  QMap<QString, QVariant> parameters = propertyParameters.value<QMap<QString, QVariant>>();
+  ASSERT_TRUE(parameters.contains("mText"));
+  QString textValue = parameters["mText"].toString();
+  EXPECT_EQ("testCase", textValue);
 }

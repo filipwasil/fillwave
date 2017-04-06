@@ -1,9 +1,10 @@
 #include "SceneController.h"
-#include <QVariant>
 
 namespace common {
+SceneController::SceneController() {
+}
 
-SceneController::SceneController(QWidget *scen)
+SceneController::SceneController(std::shared_ptr<scene::AScene> scen)
     : mScene(scen) {
 }
 
@@ -13,8 +14,11 @@ void SceneController::updateScenField(QWidget *menuElement) {
   if (!elementName.isValid() || !elementValue.isValid()) {
     return;
   }
-  QMap <QString, QVariant> parameter;
+  QMap<QString, QVariant> parameter;
   parameter[elementName.toString()] = elementValue;
+  if (!mScene) {
+    return;
+  }
   mScene->setProperty("sceneParameter", parameter);
 }
 
@@ -37,4 +41,9 @@ void SceneController::deleteTranslators() {
   qDeleteAll(mTranslators);
   mTranslators.clear();
 }
+
+void SceneController::registerNewScene(std::shared_ptr<scene::AScene> scen) {
+  mScene = scen;
+}
+
 }

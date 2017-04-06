@@ -9,6 +9,6 @@ public:
 
   }
 
-  virtual QWidget *createWidget(QString typeName, QVector <std::pair<QString, QString>> &parametersVector) = 0;
+  virtual QWidget *createWidget(QString typeName, QVector<std::pair<QString, QString>> &parametersVector) = 0;
 };
 }

@@ -1,11 +1,12 @@
 #include <QLineEdit>
+#include <memory>
 #include "LineEditWidgetFactory.h"
 
 namespace loader {
 namespace factory {
 
-QWidget *LineEditWidgetFactory::create(QVector <std::pair<QString, QString>> &parametersVector,
-    common::ISceneController *scene) {
+QWidget *LineEditWidgetFactory::create(QVector<std::pair<QString, QString>> &parametersVector,
+    std::shared_ptr<common::ISceneController> scene) {
   auto objectName = std::find_if(parametersVector.begin(), parametersVector.end(),
       [](const std::pair <QString, QString> &parameter) { return parameter.first == "objectName"; });
   auto text = std::find_if(parametersVector.begin(), parametersVector.end(),

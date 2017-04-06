@@ -16,12 +16,16 @@ class Panel;
 
 namespace common {
 class MainWidget : public QMainWindow {
-  Q_OBJECT
+Q_OBJECT
 
 public:
   MainWidget(int argc, char *argv[], QWidget *parent = 0);
 
   virtual ~MainWidget();
+
+public slots:
+
+  void loadNewScenario(QAction *action);
 
 private:
   void createBarMenuActions();
@@ -30,9 +34,12 @@ private:
 
   QWidget *mCentralWidget;
   Renderer *mRenderer;
+  int mArgc;
+  char **mArgv;
   QMenuBar *mMenuBar;
-  QMap <QString, QList<QAction *>> mActionsListMap;
-  SceneController *mSceneController;
+  QMap<QString, QList<QAction *>> mActionsListMap;
+  std::shared_ptr<SceneController> mSceneController;
+  QVBoxLayout *mMenuLayout;
 };
 
 }

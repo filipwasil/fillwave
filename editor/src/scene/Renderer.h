@@ -5,20 +5,17 @@
 #include <memory>
 #include <QMap>
 #include <QVariant>
-#include "IScene.h"
+#include "AScene.h"
 
 class Renderer : public QGLWidget {
-  Q_OBJECT Q_PROPERTY(QMap <QString, QVariant> sceneParameter READ getParameters WRITE setParameters)
-
 public:
   explicit Renderer(int argc, char *argv[], QWidget *parent = 0);
 
   virtual ~Renderer();
 
-  QMap <QString, QVariant> getParameters();
+  void setNewScene(std::shared_ptr<scene::AScene> scen);
 
-  void setParameters(QMap <QString, QVariant> parameters);
-
+  std::shared_ptr<scene::AScene> getScen();
 public slots:
 
   void onUpdate(int sliderNo, int value) const;
@@ -31,8 +28,7 @@ protected:
   virtual void resizeGL(int width, int height);
 
 private:
-  std::unique_ptr<fillwave::Engine> mEngine;
   int mArgc;
   char **mArgv;
-  QMap <QString, QVariant> mSceneParameters;
+  std::shared_ptr<scene::AScene> mScene;
 };
