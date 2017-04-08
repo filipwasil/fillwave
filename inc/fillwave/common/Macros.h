@@ -36,8 +36,8 @@
 
 #include <algorithm>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 template <class T>
 void remove(std::vector<T> &vec, T &item) {
@@ -75,7 +75,7 @@ std::unique_ptr<CONTAINER> make_unique_container(TCURRENT &&t, TNEXT &&... args)
  using shared_ptr_unsynchronized = std::__shared_ptr<T, __gnu_cxx::_S_single>;
  */
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* MACROS_H_ */

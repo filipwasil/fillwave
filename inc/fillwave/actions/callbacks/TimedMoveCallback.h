@@ -37,8 +37,8 @@
 #include <fillwave/models/base/Moveable.h>
 #include <fillwave/Math.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TimedMoveCallback
  * \brief TimedCallback to move Entity at certain distance in certain time.
@@ -61,5 +61,5 @@ protected:
   Moveable *mMoveable;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

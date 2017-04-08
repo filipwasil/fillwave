@@ -35,8 +35,8 @@
 
 #ifdef FILLWAVE_GLES_3_0
 #else /* FILLWAVE_GLES_3_0 */
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Texture1D::Texture1D(ParameterList &)
     : Texture(GL_TEXTURE_1D, 1) {
@@ -47,7 +47,7 @@ void Texture1D::log() {
 
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* FILLWAVE_GLES_3_0 */

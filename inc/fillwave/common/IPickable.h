@@ -36,8 +36,8 @@
 
 #include <fillwave/Math.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class IPickable
  * \brief Pickable Interface.
@@ -74,7 +74,7 @@ protected:
   glm::vec3 mPickColor;
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_COMMON_IPICKABLE_H_ */

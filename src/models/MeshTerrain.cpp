@@ -39,12 +39,12 @@
 #include <fillwave/management/LightSystem.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 //xxx code duplication in constructors. fix
 MeshTerrain::MeshTerrain(Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     TerrainConstructor *constructor,
     const Material & /*material*/, //xxx to be used
     const std::string &diffuseMapPath,
@@ -63,13 +63,13 @@ MeshTerrain::MeshTerrain(Engine *engine,
   GLint indexTerrainChunk = radius;
   ProgramLoader loader(engine);
 
-  core::VertexArray *vao = new core::VertexArray();
-  core::VertexBufferBasic *vbo = engine->storeBuffer<core::VertexBufferBasic>(vao,
+  flc::VertexArray *vao = new flc::VertexArray();
+  flc::VertexBufferBasic *vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao,
                                                                               constructor,
                                                                               density,
                                                                               gapSize,
                                                                               indices);
-  core::IndexBuffer *ibo = engine->storeBuffer<core::IndexBuffer>(vao, indices);
+  flc::IndexBuffer *ibo = engine->storeBuffer<flc::IndexBuffer>(vao, indices);
 
   Material m;
 
@@ -104,12 +104,12 @@ MeshTerrain::MeshTerrain(Engine *engine,
 
 //xxx code duplication in constructors. fix
 MeshTerrain::MeshTerrain(Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     TerrainConstructor *constructor,
     const Material & /*material*/, //xxx to be used
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
     GLuint radius,
     GLuint density)
     : Programmable(program), mLights(engine->getLightSystem()), mChunkWidth(radius * 0.2 * 16 / density), mJumpStep(
@@ -123,13 +123,13 @@ MeshTerrain::MeshTerrain(Engine *engine,
   GLint indexTerrainChunk = radius;
   ProgramLoader loader(engine);
 
-  core::VertexArray *vao = new core::VertexArray();
-  core::VertexBufferBasic *vbo = engine->storeBuffer<core::VertexBufferBasic>(vao,
+  flc::VertexArray *vao = new flc::VertexArray();
+  flc::VertexBufferBasic *vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao,
                                                                               constructor,
                                                                               density,
                                                                               gapSize,
                                                                               indices);
-  core::IndexBuffer *ibo = engine->storeBuffer<core::IndexBuffer>(vao, indices);
+  flc::IndexBuffer *ibo = engine->storeBuffer<flc::IndexBuffer>(vao, indices);
 
   Material m;
 
@@ -227,5 +227,5 @@ inline void MeshTerrain::distanceCheck(ICamera &camera) {
   }
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

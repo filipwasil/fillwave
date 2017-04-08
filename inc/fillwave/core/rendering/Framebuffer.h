@@ -38,8 +38,8 @@
 
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Framebuffer
  * \brief FramebufferObject - FO.
@@ -74,9 +74,9 @@ public:
   static void bindScreenFramebufferForWriting();
 };
 
-} /* core */
-typedef std::shared_ptr<core::Framebuffer> pFramebuffer;
-typedef std::unique_ptr<core::Framebuffer> puFramebuffer;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::Framebuffer> pFramebuffer;
+typedef std::unique_ptr<flc::Framebuffer> puFramebuffer;
+} /* flw */
 
 #endif /* FRAMEBUFFER_H_ */

@@ -34,8 +34,8 @@
 #ifndef WORKGROUP_H_
 #define WORKGROUP_H_
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class WorkGroup
  * \brief Group of compute shader jobs.
@@ -49,7 +49,7 @@ public:
   virtual ~WorkGroup() = default;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* WORKGROUP_H_ */

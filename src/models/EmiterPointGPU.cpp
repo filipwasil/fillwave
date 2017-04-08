@@ -43,8 +43,8 @@
 
 FLOGINIT("EmiterPointGPU", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 EmiterPointGPU::EmiterPointGPU(Engine *engine,
     GLfloat emitingSourceRate,
@@ -57,7 +57,7 @@ EmiterPointGPU::EmiterPointGPU(Engine *engine,
     glm::vec3 robustnessPosition,
     GLfloat startSize,
     GLfloat lifetime,
-    core::Texture *texture,
+    flc::Texture *texture,
     GLenum blendingSource,
     GLenum blendingDestination,
     GLboolean depthTesting,
@@ -80,9 +80,9 @@ EmiterPointGPU::EmiterPointGPU(Engine *engine,
   mProgram = loader.getParticleGPU();
   mProgramEmiter = loader.getParticleGPUEmiter();
 
-  std::vector<core::VertexParticleGPU> particles;
+  std::vector<flc::VertexParticleGPU> particles;
   for (GLuint i = 0; i < mHowMany; i++) {
-    core::VertexParticleGPU particle;
+    flc::VertexParticleGPU particle;
     particle.position[0] = 0.0f;
     particle.position[1] = 0.0f;
     particle.position[2] = 0.0f;
@@ -108,9 +108,9 @@ EmiterPointGPU::EmiterPointGPU(Engine *engine,
 
   mNoiseTextureHandle = Create3DNoiseTexture(noiseTextureSize, howMany / 3); //xxx todo store in Manager
 
-  mVBOGPU[0] = engine->storeBuffers<core::VertexBufferParticlesGPU>(mVAO, 0, particles);
-  mVBOGPU[1] = engine->storeBuffers<core::VertexBufferParticlesGPU>(mVAO, 1, particles);
-  mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO, mHowMany);
+  mVBOGPU[0] = engine->storeBuffers<flc::VertexBufferParticlesGPU>(mVAO, 0, particles);
+  mVBOGPU[1] = engine->storeBuffers<flc::VertexBufferParticlesGPU>(mVAO, 1, particles);
+  mIBO = engine->storeBuffer<flc::IndexBuffer>(mVAO, mHowMany);
 
   initPipeline();
   initVBO();
@@ -125,18 +125,18 @@ void EmiterPointGPU::draw(ICamera &camera) {
   /* Emit particles */
   mProgramEmiter->use();
 
-  core::Uniform::push(mULCTimeEmiter, mTimeDeltaEmiter);
-  core::Uniform::push(mULCModelMatrixEmiter, mPhysicsMMC);
-  core::Uniform::push(mULCCameraPositionEmiter, mCameraPosition);
-  core::Uniform::push(mULCHowManyEmiter, static_cast<GLfloat>(mHowMany));
-  core::Uniform::push(mULCEmissionRateEmiter, mEmmisingSourceRate);
-  core::Uniform::push(mULCAccelerationEmiter, mAcceleration);
-  core::Uniform::push(mULCStartVelocityEmiter, mStartVelocity);
-  core::Uniform::push(mULCStartPositionEmiter, mStartPosition);
-  core::Uniform::push(mULCLifeTimeEmiter, mLifetime);
-  core::Uniform::push(mULCRobustnessVelocityEmiter, mRobustnessVelocity);
-  core::Uniform::push(mULCRobustnessPositionEmiter, mRobustnessPosition);
-  core::Uniform::push(mULCNoiseSamplerEmiter, FILLWAVE_NOISE_UNIT);
+  flc::Uniform::push(mULCTimeEmiter, mTimeDeltaEmiter);
+  flc::Uniform::push(mULCModelMatrixEmiter, mPhysicsMMC);
+  flc::Uniform::push(mULCCameraPositionEmiter, mCameraPosition);
+  flc::Uniform::push(mULCHowManyEmiter, static_cast<GLfloat>(mHowMany));
+  flc::Uniform::push(mULCEmissionRateEmiter, mEmmisingSourceRate);
+  flc::Uniform::push(mULCAccelerationEmiter, mAcceleration);
+  flc::Uniform::push(mULCStartVelocityEmiter, mStartVelocity);
+  flc::Uniform::push(mULCStartPositionEmiter, mStartPosition);
+  flc::Uniform::push(mULCLifeTimeEmiter, mLifetime);
+  flc::Uniform::push(mULCRobustnessVelocityEmiter, mRobustnessVelocity);
+  flc::Uniform::push(mULCRobustnessPositionEmiter, mRobustnessPosition);
+  flc::Uniform::push(mULCNoiseSamplerEmiter, FILLWAVE_NOISE_UNIT);
 
   mVBOGPU[mSrcIndex]->bind();
   mVBOGPU[mSrcIndex]->attributesSetForVAO();
@@ -149,14 +149,14 @@ void EmiterPointGPU::draw(ICamera &camera) {
   glActiveTexture(GL_TEXTURE0 + FILLWAVE_NOISE_UNIT);
   glBindTexture(GL_TEXTURE_3D, mNoiseTextureHandle);
 
-  core::TransformFeedback::begin(GL_POINTS);
+  flc::TransformFeedback::begin(GL_POINTS);
 
   glDrawArrays(GL_POINTS, 0, mVBOGPU[mSrcIndex]->getElements());
   fLogC("Drawn buffer index %d drawing %d ", mSrcIndex, mVBOGPU[mSrcIndex]->getElements());
 
-  core::TransformFeedback::end();
+  flc::TransformFeedback::end();
 
-//   mFence = puFence (new core::Fence(GL_SYNC_GPU_COMMANDS_COMPLETE));
+//   mFence = puFence (new flc::Fence(GL_SYNC_GPU_COMMANDS_COMPLETE));
 
   glDisable(GL_RASTERIZER_DISCARD);
 
@@ -171,15 +171,15 @@ void EmiterPointGPU::draw(ICamera &camera) {
 
   mProgram->use();
 
-  core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
-  core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
-  core::Uniform::push(mULCCameraPosition, mCameraPosition);
-  core::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
-  core::Uniform::push(mULCTime, mTimeDeltaEmiter);
-  core::Uniform::push(mULCAcceleration, mAcceleration);
-  core::Uniform::push(mULCColor, mColor);
-  core::Uniform::push(mULCStartSize, mStartSize);
-  core::Uniform::push(mULCAlphaCutOff, mAlphaCutOff);
+  flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+  flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+  flc::Uniform::push(mULCCameraPosition, mCameraPosition);
+  flc::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
+  flc::Uniform::push(mULCTime, mTimeDeltaEmiter);
+  flc::Uniform::push(mULCAcceleration, mAcceleration);
+  flc::Uniform::push(mULCColor, mColor);
+  flc::Uniform::push(mULCStartSize, mStartSize);
+  flc::Uniform::push(mULCAlphaCutOff, mAlphaCutOff);
 
   coreDraw();
 }
@@ -216,8 +216,8 @@ inline void EmiterPointGPU::coreDraw() {
 
   glDisable(GL_BLEND);
 
-  core::Texture2D::unbind2DTextures();
-  core::VertexArray::unbindVAO();
+  flc::Texture2D::unbind2DTextures();
+  flc::VertexArray::unbindVAO();
 }
 
 void EmiterPointGPU::update(GLfloat timeElapsedSec) {
@@ -251,7 +251,7 @@ void EmiterPointGPU::initPipeline() {
   mProgramEmiter->use();
   mProgramEmiter->uniformPush("uNoiseSampler", FILLWAVE_NOISE_UNIT);
 
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 void EmiterPointGPU::initUniformsCache() {
@@ -295,7 +295,7 @@ void EmiterPointGPU::initVAO() {
   mIBO->bind();
   mIBO->setLoaded(GL_FALSE);
   mIBO->send();
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 void EmiterPointGPU::initVBO() {
@@ -320,5 +320,5 @@ bool EmiterPointGPU::getRenderItem(RenderItem &item) {
   return true;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

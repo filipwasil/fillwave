@@ -36,8 +36,8 @@
 
 #include <fillwave/core/buffers/VertexBufferDebug.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 class FramebufferGeometry;
 }
 
@@ -55,7 +55,7 @@ enum class eDebuggerState {
 
 class Engine;
 
-namespace framework {
+namespace flf {
 class Camera;
 
 /*! \class Debugger
@@ -70,34 +70,39 @@ class Camera;
 
 class Debugger : public IReloadable {
 public:
-  Debugger(Engine *engine);
-
+  Debugger(Engine *engine, GLsizei howManyDebugWindows = 6);
   virtual ~Debugger() = default;
 
+  /* State */
   void setState(eDebuggerState state);
-
   eDebuggerState getState();
 
+  /* Render */
+  void prepareDebugWindow(GLint id = 0);
   void renderFromCamera(ICamera &c, GLint id = 0);
-
   void renderDepthPerspective(GLint id = 0);
-
   void renderDepthOrthographic(GLint id = 0);
-
   void renderPickingMap();
-
-  void renderGeometryBuffer(GLuint width, GLuint height, GLuint attachments, core::FramebufferGeometry *buffer);
+  void renderGeometryBuffer(GLuint width, GLuint height, GLuint attachments, flc::FramebufferGeometry *buffer);
 
   void setMiniwindowSize(GLfloat size);
 
 private:
+  struct DebugWindowInfo
+  {
+      glm::ivec2 size;
+      glm::ivec2 offset;
+  };
+
+  std::vector<DebugWindowInfo> mDebugWindows;
+
   eDebuggerState mState;
-  core::Program *mProgram;
+  flc::Program *mProgram;
   Engine *mEngine;
 
-  core::VertexBufferDebug *mVBO;
+  flc::VertexBufferDebug *mVBO;
 
-  GLfloat mMiniwindowSize;
+  GLuint mDebugWindowsSize;
   GLuint mMiniwindowsOccupied;
 
   GLint mULCTextureUnit, mULCNearPlane, mULCFarPlane;
@@ -113,8 +118,8 @@ private:
   void initUniformsCache();
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Debugger> puDebugger;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Debugger> puDebugger;
+} /* flw */
 
 #endif /* DEBUGGER_H_ */

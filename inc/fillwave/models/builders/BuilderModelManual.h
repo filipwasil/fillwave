@@ -36,8 +36,8 @@
 
 #include <fillwave/models/builders/BuilderModel.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class BuilderModelManual
  * \brief BuilderModel which builds the model from textures and material fillwave objects.
@@ -47,32 +47,32 @@ class BuilderModelManual : public BuilderModel {
 public:
   BuilderModelManual(Engine *engine,
       std::string modelPath = "",
-      core::Program *program = nullptr,
-      core::Texture2D *diffuseMap = nullptr,
-      core::Texture2D *normalMap = nullptr,
-      core::Texture2D *specularMap = nullptr,
+      flc::Program *program = nullptr,
+      flc::Texture2D *diffuseMap = nullptr,
+      flc::Texture2D *normalMap = nullptr,
+      flc::Texture2D *specularMap = nullptr,
       Material material = Material());
 
   virtual ~BuilderModelManual() = default;
 
-  BuilderModelManual &setDiffuseMapTexture(core::Texture2D *texture);
+  BuilderModelManual &setDiffuseMapTexture(flc::Texture2D *texture);
 
-  BuilderModelManual &setNormalMapTexture(core::Texture2D *texture);
+  BuilderModelManual &setNormalMapTexture(flc::Texture2D *texture);
 
-  BuilderModelManual &setSpecularMapTexture(core::Texture2D *texture);
+  BuilderModelManual &setSpecularMapTexture(flc::Texture2D *texture);
 
   BuilderModelManual &setMaterial(const Material &material);
 
   puModel build();
 
 private:
-  core::Texture2D *mDiffuseMap;
-  core::Texture2D *mNormalMap;
-  core::Texture2D *mSpecularMap;
+  flc::Texture2D *mDiffuseMap;
+  flc::Texture2D *mNormalMap;
+  flc::Texture2D *mSpecularMap;
   Material mMaterial;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* INC_FILLWAVE_MODELS_BUILDERMODELMANUAL_H_ */

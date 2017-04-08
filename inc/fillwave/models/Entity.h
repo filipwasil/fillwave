@@ -41,19 +41,19 @@
 #include <fillwave/common/IFocusable.h>
 #include <fillwave/models/base/TreePtr.h>
 
-namespace fillwave {
+namespace flw {
 
-namespace framework {
+namespace flf {
 class Entity;
 }
 
-namespace core {
+namespace flc {
 class Program;
 }
 
-typedef std::unique_ptr<framework::Entity> puEntity;
+typedef std::unique_ptr<flf::Entity> puEntity;
 
-namespace framework {
+namespace flf {
 
 /*! \class Entity
  * \brief Base for all Scene nodes.
@@ -154,8 +154,8 @@ private:
 
   void detachCallback(std::vector<puCallback> &callbacks, Callback *callback);
 };
-} /* framework */
+} /* flf */
 puEntity buildEntity();
-} /* fillwave */
+} /* flw */
 
 #endif /* ENTITY_H_ */

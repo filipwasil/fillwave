@@ -39,8 +39,8 @@
 
 FLOGINIT("Entity", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Entity::Entity(glm::vec3 translation, glm::quat rotation)
     : Moveable(translation, rotation), mChildrenPropagateEvent(GL_TRUE), mParentRefresh(GL_TRUE), mPSC(GL_TRUE), mPSR(
@@ -229,8 +229,8 @@ bool Entity::getRenderItem(RenderItem & /*item*/) {
   return false;
 }
 
-} /* framework */
+} /* flf */
 puEntity buildEntity() {
-  return std::make_unique<framework::Entity>();
+  return std::make_unique<flf::Entity>();
 }
-} /* fillwave */
+} /* flw */

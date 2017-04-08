@@ -38,13 +38,13 @@
 #include <fillwave/Assets.h>
 #include <fillwave/core/buffers/TVertexBuffer.h>
 
-namespace fillwave {
+namespace flw {
 
-namespace framework {
+namespace flf {
 class Animator;
 }
 
-namespace core {
+namespace flc {
 
 /*! \struct VertexBasic
  * \brief Stores the basic vertex data.
@@ -65,7 +65,7 @@ struct VertexBasic {
  */
 
 struct FaceBasic {
-  core::VertexBasic vertices[3];
+  flc::VertexBasic vertices[3];
 };
 
 /*! \class VertexBufferBasic
@@ -77,7 +77,7 @@ public:
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
   VertexBufferBasic(const aiMesh *shape,
-      framework::Animator *animator = nullptr,
+      flf::Animator *animator = nullptr,
       GLuint dataStoreModification = GL_STATIC_DRAW);
 
 #else
@@ -86,13 +86,13 @@ public:
               GLuint dataStoreModification = GL_STATIC_DRAW);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-  VertexBufferBasic(framework::TerrainConstructor *constructor,
+  VertexBufferBasic(flf::TerrainConstructor *constructor,
       GLint chunkDensity,
       GLfloat gapSize,
       const std::vector<GLuint> &indices,
       GLuint dataStoreModification = GL_STATIC_DRAW);
 
-  VertexBufferBasic(const std::vector<core::VertexBasic> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW);
+  VertexBufferBasic(const std::vector<flc::VertexBasic> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW);
 
   ~VertexBufferBasic() = default;
 
@@ -101,7 +101,7 @@ public:
   void log() const;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* VERTEXBUFFERBASIC_H_ */

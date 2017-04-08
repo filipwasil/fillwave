@@ -39,8 +39,8 @@
 
 FLOGINIT("File", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 using namespace std;
 
@@ -76,7 +76,7 @@ void ReadFile(string pFileName, string &fileContent) {
     return;
   }
   ifs.seekg(0, ios::end);
-  size_t size = ifs.tellg();
+  auto size = ifs.tellg();
   fileContent.resize(size);
 
   ifs.seekg(0, ios::beg);
@@ -91,5 +91,5 @@ void WriteFile(const char *pFileName, string &fileContent) {
   myfile.close();
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

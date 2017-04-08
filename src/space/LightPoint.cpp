@@ -37,10 +37,10 @@
 
 FLOGINIT("LightPoint", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-LightPoint::LightPoint(core::Texture3DRenderable *shadowTexture,
+LightPoint::LightPoint(flc::Texture3DRenderable *shadowTexture,
     glm::vec3 position,
     glm::vec4 intensity,
     Moveable *followed)
@@ -108,7 +108,7 @@ LightPoint::LightPoint(core::Texture3DRenderable *shadowTexture,
       1000.0);
 }
 
-core::Texture3DRenderable *LightPoint::getShadowTexture() {
+flc::Texture3DRenderable *LightPoint::getShadowTexture() {
   return mShadowTexture;
 }
 
@@ -133,5 +133,5 @@ void LightPoint::updateShadowCamera() {
   }
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

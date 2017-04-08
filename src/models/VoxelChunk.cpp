@@ -39,8 +39,8 @@
 
 FLOGINIT("VoxelChunk", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 const GLfloat voxelPositions[] = {
     0.100000,
@@ -347,7 +347,7 @@ const GLfloat voxelUV[] = {
     0.666667
 };
 
-VoxelChunk::VoxelChunk(core::Program *program,
+VoxelChunk::VoxelChunk(flc::Program *program,
     Engine *engine,
     const std::string &texturePath,
     GLint size,
@@ -357,7 +357,7 @@ VoxelChunk::VoxelChunk(core::Program *program,
     , mTexture(engine->storeTexture(texturePath.c_str())), mLights(engine->getLightSystem()) {
 
   mVoxels = new Voxel **[mSize];
-  std::vector<core::VertexBasic> vertices;
+  std::vector<flc::VertexBasic> vertices;
   vertices.reserve(mSize * mSize * mSize * 36);
   for (GLint x = 0; x < mSize; x++) {
     mVoxels[x] = new Voxel *[mSize];
@@ -370,7 +370,7 @@ VoxelChunk::VoxelChunk(core::Program *program,
                                        : GL_TRUE;
         mVoxels[x][z][y].setActive(active);
         if (mVoxels[x][z][y].isActive()) {
-          core::VertexBasic v;
+          flc::VertexBasic v;
           for (GLint i = 0; i < 36; i++) {
             v.mPosition[0] = voxelPositions[3 * i] + mVoxelGap * (GLfloat) x - (GLfloat) mVoxelGap * (mSize - 1) / 2.0f;
             v.mPosition[1] = voxelPositions[3 * i + 1] + mVoxelGap * (GLfloat) y -
@@ -389,7 +389,7 @@ VoxelChunk::VoxelChunk(core::Program *program,
       }
     }
   }
-  mVBO = engine->storeBuffer<core::VertexBufferBasic>(mVAO, vertices);
+  mVBO = engine->storeBuffer<flc::VertexBufferBasic>(mVAO, vertices);
 
   initPipeline();
   initVBO();
@@ -419,14 +419,14 @@ void VoxelChunk::setType(GLint type) {
 
 void VoxelChunk::reloadVBO() {
 
-  std::vector<core::VertexBasic> vertices;
+  std::vector<flc::VertexBasic> vertices;
   for (GLint x = 0; x < mSize; x++) {
     mVoxels[x] = new Voxel *[mSize];
     for (GLint z = 0; z < mSize; z++) {
       mVoxels[x][z] = new Voxel[mSize];
       for (GLint y = 0; y < mSize; y++) {
         if (mVoxels[x][z][y].isActive()) {
-          core::VertexBasic v;
+          flc::VertexBasic v;
           for (GLint i = 0; i < 36; i++) {
             v.mPosition[0] = voxelPositions[3 * i] + mVoxelGap * (GLfloat) x - (GLfloat) (mSize - 1) / 2.0f;
             v.mPosition[1] = voxelPositions[3 * i + 1] + mVoxelGap * (GLfloat) y - (GLfloat) (mSize - 1) / 2.0f;
@@ -444,7 +444,7 @@ void VoxelChunk::reloadVBO() {
     }
   }
 
-  mVBO = mEngine->storeBuffer<core::VertexBufferBasic>(mVAO, vertices);
+  mVBO = mEngine->storeBuffer<flc::VertexBufferBasic>(mVAO, vertices);
 
   initVBO();
 
@@ -452,7 +452,7 @@ void VoxelChunk::reloadVBO() {
 }
 
 void VoxelChunk::reloadVoxels(VoxelConstructor *constructor) {
-  std::vector<core::VertexBasic> vertices;
+  std::vector<flc::VertexBasic> vertices;
   vertices.reserve(mSize * mSize * mSize);
   for (GLint x = 0; x < mSize; x++) {
     for (GLint z = 0; z < mSize; z++) {
@@ -469,9 +469,9 @@ void VoxelChunk::reloadVoxels(VoxelConstructor *constructor) {
 void VoxelChunk::draw(ICamera &camera) {
   mProgram->use();
 
-  core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
-  core::Uniform::push(mUniformLocationCacheCameraPosition, camera.getTranslation());
-  core::Uniform::push(mUniformLocationCacheViewProjectionMatrix, camera.getViewProjection());
+  flc::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
+  flc::Uniform::push(mUniformLocationCacheCameraPosition, camera.getTranslation());
+  flc::Uniform::push(mUniformLocationCacheViewProjectionMatrix, camera.getViewProjection());
 
   mLights->pushLightUniforms(mProgram);
   mLights->bindShadowmaps();
@@ -480,21 +480,21 @@ void VoxelChunk::draw(ICamera &camera) {
 
   coreDraw();
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 void VoxelChunk::drawPBRP(ICamera &camera) {
-  core::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
-  core::Uniform::push(mUniformLocationCacheCameraPosition, camera.getTranslation());
-  core::Uniform::push(mUniformLocationCacheViewProjectionMatrix, camera.getViewProjection());
+  flc::Uniform::push(mUniformLocationCacheModelMatrix, mPhysicsMMC);
+  flc::Uniform::push(mUniformLocationCacheCameraPosition, camera.getTranslation());
+  flc::Uniform::push(mUniformLocationCacheViewProjectionMatrix, camera.getViewProjection());
 
   mVAO->bind();
 
   coreDraw();
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 GLint VoxelChunk::getSize() {
@@ -508,7 +508,7 @@ inline void VoxelChunk::coreDraw() {
 
   onDraw();
 
-  core::Texture2D::unbind2DTextures();
+  flc::Texture2D::unbind2DTextures();
 }
 
 inline void VoxelChunk::onDraw() {
@@ -541,7 +541,7 @@ inline void VoxelChunk::initVAO() {
   mVBO->setLoaded(GL_FALSE);
   mVBO->send();
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 inline void VoxelChunk::initVBO() {
@@ -564,5 +564,5 @@ bool VoxelChunk::getRenderItem(RenderItem &item) {
   return true;
 }
 
-} /* framework */
+} /* flf */
 } /* fillwave*/

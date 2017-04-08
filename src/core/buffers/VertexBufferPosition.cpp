@@ -37,10 +37,10 @@
 
 FLOGINIT("VertexBufferPosition", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
-VertexBufferPosition::VertexBufferPosition(framework::Shape<VertexPosition> &shape, GLuint dataStoreModification)
+VertexBufferPosition::VertexBufferPosition(flf::Shape<VertexPosition> &shape, GLuint dataStoreModification)
     : TVertexBuffer(shape, dataStoreModification) {
 
 }
@@ -63,6 +63,6 @@ void VertexBufferPosition::log() const {
   }
 }
 
-} /* core */
+} /* flc */
 } /* fillwave*/
 

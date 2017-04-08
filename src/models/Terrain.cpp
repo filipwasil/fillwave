@@ -38,10 +38,10 @@
 #include <fillwave/Log.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-Terrain::Terrain(Engine *engine, core::Program *program, GLint radius, GLfloat gap)
+Terrain::Terrain(Engine *engine, flc::Program *program, GLint radius, GLfloat gap)
     : mProgram(program), mLights(engine->getLightSystem()), mRadius(radius), mGap(gap) {
 
 }
@@ -112,19 +112,19 @@ bool Terrain::getRenderItem(RenderItem &item) {
 
 } /* models */
 puTerrain buildTerrainVoxel(Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     const std::string &texturePath,
-    framework::VoxelConstructor *constructor,
+    flf::VoxelConstructor *constructor,
     GLint radius) {
 
   GLfloat voxelGap = 0.2;
 
-  puTerrain terrain = std::make_unique<framework::Terrain>(engine, program, radius, voxelGap);
+  puTerrain terrain = std::make_unique<flf::Terrain>(engine, program, radius, voxelGap);
 
   for (GLint i = 0; i <= radius; i++) {
     for (GLint x = 0; x < 1 + 2 * i; x++) {
       for (GLint z = 0; z < 1 + 2 * i; z++) {
-        pVoxelChunk chunk = pVoxelChunk(new framework::VoxelChunk(program,
+        pVoxelChunk chunk = pVoxelChunk(new flf::VoxelChunk(program,
                                                                   engine,
                                                                   texturePath,
                                                                   FILLWAVE_VOXEL_CHUNK_SIZE,
@@ -140,4 +140,4 @@ puTerrain buildTerrainVoxel(Engine *engine,
   }
   return terrain;
 }
-} /* fillwave */
+} /* flw */

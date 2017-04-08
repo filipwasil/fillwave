@@ -39,8 +39,8 @@
 #include <string>
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Shader
  *
@@ -90,8 +90,8 @@ private:
   std::string mSource;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
-std::vector<fillwave::core::Shader *>
-operator+(std::vector<fillwave::core::Shader *> shaders, fillwave::core::Shader *shader2);
+std::vector<flw::flc::Shader *>
+operator+(std::vector<flw::flc::Shader *> shaders, flw::flc::Shader *shader2);

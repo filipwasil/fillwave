@@ -40,9 +40,9 @@
 #include <fillwave/common/Finishable.h>
 #include <fillwave/models/Entity.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class Impostor
  * \brief Drawable Entity built by fragment shader. Time limited.
@@ -53,24 +53,24 @@ public:
   Impostor(Engine *engine,
       GLfloat lifetime,
       GLfloat size,
-      core::Texture *texture = nullptr,
+      flc::Texture *texture = nullptr,
       GLenum blendingSource = GL_SRC_ALPHA,
       GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
 
   virtual ~Impostor() = default;
 
 protected:
-  core::Program *mProgram;
-  core::Texture *mTexture;
-  core::Sampler *mSampler;
+  flc::Program *mProgram;
+  flc::Texture *mTexture;
+  flc::Sampler *mSampler;
   GLfloat mSize;
   Blending mBlending;
 
   void coreDraw();
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Impostor> pImpostor;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Impostor> pImpostor;
+} /* flw */
 
 #endif /* IMPOSTOR_H_ */

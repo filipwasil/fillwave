@@ -8,7 +8,7 @@
 #ifndef EVENTTYPE_H_
 #define EVENTTYPE_H_
 
-namespace fillwave {
+namespace flw {
 
 enum class eEventType {
   eMouseButton
@@ -39,7 +39,7 @@ enum class eEventType {
   , eCustom15
 };
 
-namespace framework {
+namespace flf {
 
 /*! \class EventType
  * \brief Base class for all events.
@@ -63,7 +63,7 @@ private:
   eEventType mType;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* EVENTTYPE_H_ */

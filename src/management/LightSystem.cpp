@@ -37,8 +37,8 @@
 #include <fillwave/management/LightSystem.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 const glm::mat4 FILLWAVE_UV_BIAS_MATRIX(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
 
@@ -84,7 +84,7 @@ void LightSystem::updateLightEntities() {
   }
 }
 
-void LightSystem::pushLightUniforms(core::Program *program) {
+void LightSystem::pushLightUniforms(flc::Program *program) {
 
   /* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT*/
 
@@ -208,7 +208,7 @@ void LightSystem::pushLightUniformsDR() {
   }
 }
 
-void LightSystem::updateDeferredBufferSpot(GLuint lightID, core::Program *program, GLint currentShadowUnit) {
+void LightSystem::updateDeferredBufferSpot(GLuint lightID, flc::Program *program, GLint currentShadowUnit) {
   program->use();
 
   program->uniformPush("uLight.base.color", mLightsSpot[lightID]->getIntensity().xyz());
@@ -225,7 +225,7 @@ void LightSystem::updateDeferredBufferSpot(GLuint lightID, core::Program *progra
   program->uniformPush("uSpecularPower", 255.0f);
 }
 
-void LightSystem::updateDeferredBufferDirectional(GLuint lightID, core::Program *program, GLint /*currentShadowUnit*/) {
+void LightSystem::updateDeferredBufferDirectional(GLuint lightID, flc::Program *program, GLint /*currentShadowUnit*/) {
   program->use();
 
   program->uniformPush("uLight.base.color", mLightsDirectional[lightID]->getIntensity().xyz());
@@ -235,7 +235,7 @@ void LightSystem::updateDeferredBufferDirectional(GLuint lightID, core::Program 
   program->uniformPush("uSpecularPower", 255.0f);
 }
 
-void LightSystem::updateDeferredBufferPoint(GLuint lightID, core::Program *program, GLint /*currentShadowUnit*/) {
+void LightSystem::updateDeferredBufferPoint(GLuint lightID, flc::Program *program, GLint /*currentShadowUnit*/) {
   program->use();
 
   program->uniformPush("uLight.base.color", mLightsPoint[lightID]->getIntensity().xyz());
@@ -247,7 +247,7 @@ void LightSystem::updateDeferredBufferPoint(GLuint lightID, core::Program *progr
   program->uniformPush("uSpecularPower", 255.0f);
 }
 
-void LightSystem::pushLightUniformBuffers(core::Program *program) {
+void LightSystem::pushLightUniformBuffers(flc::Program *program) {
   program->uniformBlockPush(FILLWAVE_LIGHTS_BINDING_POINT_NAME, reinterpret_cast<GLfloat *>(mLightBufferData.data()));
 }
 
@@ -277,5 +277,5 @@ GLfloat LightSystem::computePointLightBoundingSphere(LightPoint *light) {
              ))) / 2 * attenuation.mExp;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

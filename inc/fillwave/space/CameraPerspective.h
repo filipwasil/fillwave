@@ -36,8 +36,8 @@
 
 #include <fillwave/space/base/ICamera.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class CameraPerspective
  * \brief Camera with perspective projection.
@@ -77,8 +77,8 @@ public:
 
   void updateProjection();
 };
-} /* framework */
-typedef std::unique_ptr<framework::CameraPerspective> puCameraPerspective;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::CameraPerspective> puCameraPerspective;
+} /* flw */
 
 #endif /* CAMERAPERSPECTIVE_H_ */

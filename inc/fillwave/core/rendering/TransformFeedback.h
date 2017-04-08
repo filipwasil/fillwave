@@ -38,8 +38,8 @@
 
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class TransformFeedback
  * \brief Used for GPU side comutations.
@@ -65,8 +65,8 @@ private:
   GLuint mTarget;
 };
 
-} /* core */
-typedef std::shared_ptr<core::TransformFeedback> pTransformFeedback;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::TransformFeedback> pTransformFeedback;
+} /* flw */
 
 #endif /* TRANSFORMFEEDBACK_H_ */

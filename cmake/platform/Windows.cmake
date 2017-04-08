@@ -20,7 +20,8 @@ add_subdirectory (${FILLWAVE_EXT_SPDLOG_PATH})
 # Includes
 # -----------------------------------------------
 
-include_directories (${FILLWAVE_PATH_INCLUDE}
+set ( FILLWAVE_INCLUDE_DIRECTORIES
+    ${FILLWAVE_PATH_INCLUDE}
     ${FILLWAVE_EXT_INCLUDES}
     ${FILLWAVE_MODEL_LOADER_INCLUDES}
     ${FILLWAVE_EXT_GLM_INCLUDES}
@@ -32,6 +33,9 @@ include_directories (${FILLWAVE_PATH_INCLUDE}
     ${FILLWAVE_PATH_SOURCE_PARTICLES}
     ${FILLWAVE_EXT_SPDLOG_INCLUDES}
     )
+
+include_directories(${FILLWAVE_INCLUDE_DIRECTORIES})
+
 # -----------------------------------------------
 # Targets
 # -----------------------------------------------

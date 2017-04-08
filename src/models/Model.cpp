@@ -47,15 +47,15 @@
 
 FLOGINIT("Model", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Model::Model(Engine *engine,
-    core::Program *program,
-    Shape<core::VertexBasic> &shape,
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
+    flc::Program *program,
+    Shape<flc::VertexBasic> &shape,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
     const Material &material)
     : IFocusable(engine), Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -67,10 +67,10 @@ Model::Model(Engine *engine,
 
   ProgramLoader loader(engine);
 
-  std::vector<core::VertexBasic> vertices = shape.getVertices();
+  std::vector<flc::VertexBasic> vertices = shape.getVertices();
   std::vector<GLuint> indices = shape.getIndices();
 
-  core::VertexArray *vao = new core::VertexArray();
+  flc::VertexArray *vao = new flc::VertexArray();
   attach(std::make_unique<Mesh>(engine,
                                 material,
                                 diffuseMap,
@@ -83,8 +83,8 @@ Model::Model(Engine *engine,
                                 loader.getAmbientOcclusionGeometry(),
                                 loader.getAmbientOcclusionColor(),
                                 engine->getLightSystem(),
-                                engine->storeBuffer<core::VertexBufferBasic>(vao, vertices),
-                                engine->storeBuffer<core::IndexBuffer>(vao, indices),
+                                engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices),
+                                engine->storeBuffer<flc::IndexBuffer>(vao, indices),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
                                 mAnimator,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
@@ -92,7 +92,7 @@ Model::Model(Engine *engine,
                                 vao));
 }
 
-Model::Model(Engine *engine, core::Program *program, const std::string &shapePath)
+Model::Model(Engine *engine, flc::Program *program, const std::string &shapePath)
     : IFocusable(engine), Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
     mAnimator(nullptr), mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
@@ -149,7 +149,7 @@ Model::Model(Engine *engine, core::Program *program, const std::string &shapePat
 }
 
 Model::Model(Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     const std::string &shapePath,
     const std::string &diffuseMapPath,
     const std::string &normalMapPath,
@@ -201,11 +201,11 @@ Model::Model(Engine *engine,
 }
 
 Model::Model(Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     const std::string &shapePath,
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
     const Material &material)
     : IFocusable(engine), Programmable(program),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -373,9 +373,9 @@ inline void Model::loadNodes(aiNode *node,
     const aiScene *scene,
     Engine *engine,
     Entity *entity,
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
     const Material &material) {
 
   /* Set this node transformations */
@@ -407,9 +407,9 @@ inline void Model::loadNodeTransformations(aiNode *node, Entity *entity) {
 
 puMesh Model::loadMesh(const aiMesh *shape,
     const Material &material,
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
     Engine *engine) {
 
   if (!shape) {
@@ -417,7 +417,7 @@ puMesh Model::loadMesh(const aiMesh *shape,
   }
 
   ProgramLoader loader(engine);
-  core::VertexArray *vao = new core::VertexArray();
+  flc::VertexArray *vao = new flc::VertexArray();
   return std::make_unique<Mesh>(engine,
                                 material,
                                 diffuseMap,
@@ -430,8 +430,8 @@ puMesh Model::loadMesh(const aiMesh *shape,
                                 loader.getAmbientOcclusionGeometry(),
                                 loader.getAmbientOcclusionColor(),
                                 engine->getLightSystem(),
-                                engine->storeBuffer<core::VertexBufferBasic>(vao, shape, mAnimator),
-                                engine->storeBuffer<core::IndexBuffer>(vao, shape),
+                                engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator),
+                                engine->storeBuffer<flc::IndexBuffer>(vao, shape),
                                 mAnimator,
                                 GL_TRIANGLES,
                                 vao);
@@ -485,20 +485,20 @@ inline void Model::initUniformsCache() {
 puMesh Model::loadMesh(tinyobj::shape_t& shape,
                 tinyobj::attrib_t& attrib,
                 const Material& material,
-                core::Texture2D* diffuseMap,
-                core::Texture2D* normalMap,
-                core::Texture2D* specularMap,
+                flc::Texture2D* diffuseMap,
+                flc::Texture2D* normalMap,
+                flc::Texture2D* specularMap,
                 Engine* engine) {
   ProgramLoader loader(engine);
-  core::VertexArray* vao = new core::VertexArray();
+  flc::VertexArray* vao = new flc::VertexArray();
 
   return std::make_unique < Mesh
        > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-         engine->getLightSystem(), engine->storeBuffer<core::VertexBufferBasic> (vao,
+         engine->getLightSystem(), engine->storeBuffer<flc::VertexBufferBasic> (vao,
              shape, attrib),
-         engine->storeBuffer<core::IndexBuffer>(vao,
+         engine->storeBuffer<flc::IndexBuffer>(vao,
              static_cast<GLuint>(shape.mesh.indices.size())), GL_TRIANGLES,
          vao);
 }
@@ -560,5 +560,5 @@ void Model::updateRenderer(IRenderer &renderer) {
   renderer.update(this);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

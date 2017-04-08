@@ -35,8 +35,8 @@
 #include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/actions/callbacks/SequenceCallback.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 SequenceCallback::SequenceCallback()
     : Callback(eEventType::eTime), mCallbackIterator(this->begin()), mReloaditerator(true) {
@@ -61,5 +61,5 @@ void SequenceCallback::perform(EventType &event) {
   }
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

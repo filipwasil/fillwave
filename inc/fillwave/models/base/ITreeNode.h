@@ -34,8 +34,8 @@
 #ifndef INC_FILLWAVE_MODELS_BASE_ITREENODE_H_
 #define INC_FILLWAVE_MODELS_BASE_ITREENODE_H_
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class ITreeNode
  * \brief Basic tree ITreeNode Interface.
@@ -52,8 +52,8 @@ public:
   virtual void onDetached() = 0;
 };
 
-} /* namespace framework */
-typedef std::unique_ptr<framework::ITreeNode> puITreeNode;
-} /* namespace fillwave */
+} /* namespace flf */
+typedef std::unique_ptr<flf::ITreeNode> puITreeNode;
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_MODELS_BASE_ITREENODE_H_ */

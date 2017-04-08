@@ -38,8 +38,8 @@
 
 FLOGINIT("Scene", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Scene::Scene(IRenderer *renderer)
     : mAmbientGlobal(glm::vec3(1.0)), mRenderer(renderer) {
@@ -208,4 +208,4 @@ void Scene::onHide() {
 }
 
 } /* models */
-} /* fillwave */
+} /* flw */

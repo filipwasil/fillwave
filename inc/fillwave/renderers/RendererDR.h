@@ -42,8 +42,8 @@
 #if defined(FILLWAVE_GLES_3_0)
 #else
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 class ProgramLoader;
 
@@ -105,7 +105,7 @@ private:
   LightSystem *mLights;
   TextureSystem *mTextures;
 
-  core::Program *mProgramMain, *mProgramMainAnimated, *mProgramDirecionalLight, *mProgramSpotLight, *mProgramPointLight, *mProgramDepthless, *mProgramAmbient, *mProgramAOGeometry, *mProgramAOColor;
+  flc::Program *mProgramMain, *mProgramMainAnimated, *mProgramDirecionalLight, *mProgramSpotLight, *mProgramPointLight, *mProgramDepthless, *mProgramAmbient, *mProgramAOGeometry, *mProgramAOColor;
 
   pTexture2DRenderable mAOGeometryBuffer;
   pTexture2DRenderable mAOColorBuffer;
@@ -130,8 +130,8 @@ private:
   std::vector<IRenderable *> mAnimatedNodes; /* true -> animated, false -> not animated */
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* defined(FILLWAVE_GLES_3_0) */
 #endif /* INC_FILLWAVE_RENDERERS_RENDERERDR_H_ */

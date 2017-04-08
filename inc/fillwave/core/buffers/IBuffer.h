@@ -37,8 +37,8 @@
 #include <fillwave/core/GLObject.h>
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class IBuffer
  * \brief Base for all buffer types.
@@ -93,7 +93,7 @@ public:
 #endif
 
 protected:
-  GLboolean mLoaded;
+  bool mLoaded;
   GLuint mTarget;
   GLuint mDataStoreType;
   GLuint mIndex;
@@ -114,7 +114,7 @@ void unbindBuffer(GLuint target);
 
 void bindBuffer(GLuint target, GLuint handle);
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* BUFFER_H_ */

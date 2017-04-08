@@ -37,9 +37,9 @@
 #include <fillwave/hud/base/IHUDNode.h>
 #include <fillwave/models/base/TreePtr.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class HUD
  * \brief Heads Up Display tree.
@@ -54,9 +54,9 @@ public:
   virtual void draw() override;
 };
 
-} /* namespace framework */
-typedef std::shared_ptr<framework::HUD> pHUD;
-typedef std::unique_ptr<framework::HUD> puHUD;
-} /* namespace fillwave */
+} /* namespace flf */
+typedef std::shared_ptr<flf::HUD> pHUD;
+typedef std::unique_ptr<flf::HUD> puHUD;
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_HUD_BASE_HUD_H_ */

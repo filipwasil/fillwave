@@ -36,9 +36,9 @@
 
 #include <fillwave/models/base/IEmiterPoint.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class BuilderEmiter
  * \brief BuilderModel which builds the particles emiter.
@@ -70,7 +70,7 @@ public:
 
   BuilderEmiter &setLifetime(GLfloat lifetime);
 
-  BuilderEmiter &setTexture(core::Texture *texture);
+  BuilderEmiter &setTexture(flc::Texture *texture);
 
   BuilderEmiter &setBlendingSource(GLenum sourceColor);
 
@@ -96,14 +96,14 @@ private:
   glm::vec3 mRobustnessPosition;
   GLfloat mStartSize;
   GLfloat mLifetime;
-  core::Texture *mTexture;
+  flc::Texture *mTexture;
   GLenum mBlendingSource;
   GLenum mBlendingDestination;
   GLboolean mDepthTesting;
-  GLboolean mAlphaCutOff;
+  GLfloat mAlphaCutOff;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* INC_FILLWAVE_PARTICLES_BUILDEREMITER_H_ */

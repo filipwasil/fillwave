@@ -40,8 +40,8 @@
 #include <fillwave/Assets.h>
 #include <fillwave/management/base/TCache.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TextureSystem
  * \brief Manager to handle TextureObject1D, TextureObject2D and TextureObject3D objects.
@@ -55,32 +55,32 @@ public:
 
   void checkExtensions();
 
-  core::Texture2D *
+  flc::Texture2D *
   get(const std::string &texturePath, eCompression = eCompression::eNone, eFlip flip = eFlip::eVertical);
 
-  core::Texture3D *get(const std::string &posX,
+  flc::Texture3D *get(const std::string &posX,
       const std::string &negX,
       const std::string &posY,
       const std::string &negY,
       const std::string &posZ,
       const std::string &negZ);
 
-  core::Texture2DRenderable *getShadow2D(GLuint width, GLuint height);
+  flc::Texture2DRenderable *getShadow2D(GLuint width, GLuint height);
 
-  core::Texture3DRenderable *getShadow3D(GLuint width, GLuint height);
+  flc::Texture3DRenderable *getShadow3D(GLuint width, GLuint height);
 
-  core::Texture2DRenderable *getColor2D(GLuint width, GLuint height);
+  flc::Texture2DRenderable *getColor2D(GLuint width, GLuint height);
 
-  core::Texture2D *getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
+  flc::Texture2D *getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
 
-  core::Texture2D *getDeferredColorScreen(GLuint width, GLuint height, GLuint size = 1);
+  flc::Texture2D *getDeferredColorScreen(GLuint width, GLuint height, GLuint size = 1);
 
-  core::Texture2D *getDeferredDepth(GLuint width, GLuint height);
+  flc::Texture2D *getDeferredDepth(GLuint width, GLuint height);
 
-  core::Texture2D *getDeferredStencilDepth(GLuint width, GLuint height);
+  flc::Texture2D *getDeferredStencilDepth(GLuint width, GLuint height);
 
-  core::Texture2DRenderableDynamic *
-  getDynamic(const std::string &fragmentShaderPath, core::Program *program, glm::ivec2 screenSize);
+  flc::Texture2DRenderableDynamic *
+  getDynamic(const std::string &fragmentShaderPath, flc::Program *program, glm::ivec2 screenSize);
 
   void reload();
 
@@ -94,21 +94,21 @@ private:
 
 #ifdef FILLWAVE_GLES_3_0
 #else /* FILLWAVE_GLES_3_0 */
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture1D, size_t, core::ParameterList &> mTextures1D;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture1D, size_t, flc::ParameterList &> mTextures1D;
 #endif /* FILLWAVE_GLES_3_0 */
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2D, std::string, core::Texture2DFile *, core::ParameterList &, GLuint> mTextures2D;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture2D, std::string, flc::Texture2DFile *, flc::ParameterList &, GLuint> mTextures2D;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2D, size_t, core::Texture2DFile *, core::ParameterList &, GLuint> mTextures2DDeferred;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture2D, size_t, flc::Texture2DFile *, flc::ParameterList &, GLuint> mTextures2DDeferred;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2DRenderableDynamic, std::string, core::Texture2DFile *, core::ParameterList &, core::Program *> mTextures2DDynamic;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture2DRenderableDynamic, std::string, flc::Texture2DFile *, flc::ParameterList &, flc::Program *> mTextures2DDynamic;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture2DRenderable, size_t, GLenum, core::Texture2DFile *, core::ParameterList &> mTextures2DRenderable;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture2DRenderable, size_t, GLenum, flc::Texture2DFile *, flc::ParameterList &> mTextures2DRenderable;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3D, std::string, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::ParameterList &> mTextures3D;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture3D, std::string, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::ParameterList &> mTextures3D;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3DRenderableDynamic, std::string, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::ParameterList &, core::Texture2DRenderable *, core::Program *> mTextures3DDynamic;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture3DRenderableDynamic, std::string, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::ParameterList &, flc::Texture2DRenderable *, flc::Program *> mTextures3DDynamic;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Texture3DRenderable, size_t, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DFile *, core::Texture2DRenderable *, core::ParameterList &> mTextures3DRenderable;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture3DRenderable, size_t, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DRenderable *, flc::ParameterList &> mTextures3DRenderable;
 
   std::vector<GLenum> mSupportedCompresssionTypes;
   std::string mRootPath;
@@ -129,6 +129,6 @@ private:
   }
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::TextureSystem> puTextureSystem;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::TextureSystem> puTextureSystem;
+} /* flw */

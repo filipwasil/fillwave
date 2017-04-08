@@ -40,8 +40,8 @@
 
 #include <algorithm>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 class Attribute;
 
@@ -73,7 +73,7 @@ public:
     mSize = mTotalElements * sizeof(T);
   }
 
-  TVertexBuffer(framework::Shape<T> &shape, GLuint dataStoreModification = GL_STATIC_DRAW)
+  TVertexBuffer(flf::Shape<T> &shape, GLuint dataStoreModification = GL_STATIC_DRAW)
       : IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
     mDataVertices = shape.getVertices();
     mSize = mTotalElements * sizeof(T);
@@ -224,7 +224,7 @@ private:
   std::vector<Attribute> mAttributes;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* VERTEXBUFFER_H_ */

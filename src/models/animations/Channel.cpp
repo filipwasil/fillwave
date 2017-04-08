@@ -39,8 +39,8 @@
 
 FLOGINIT("Channel", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Channel::Channel(aiNodeAnim *assimpChannel) {
   mAffectedNodeName = assimpChannel->mNodeName.C_Str();
@@ -70,5 +70,5 @@ Channel::Channel(aiNodeAnim *assimpChannel) {
         mKeysTranslation.size());
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

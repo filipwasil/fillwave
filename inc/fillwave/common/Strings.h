@@ -38,7 +38,7 @@
 #include <vector>
 #include <sstream>
 
-namespace fillwave {
+namespace flw {
 
 static std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
   std::stringstream ss(s);
@@ -72,6 +72,6 @@ std::string getFilePathOnly(const char *path);
 
 std::string getFileNameOnly(const char *path);
 
-} /* fillwave */
+} /* flw */
 
 #endif /* STRING_H_ */

@@ -39,9 +39,9 @@
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/management/TextureSystem.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace core {
+namespace flc {
 
 /*! \class FramebufferGeometry
  * \brief Framebuffer with multiple color and depth attachments.
@@ -49,7 +49,7 @@ namespace core {
 
 class FramebufferGeometry : public Framebuffer {
 public:
-  FramebufferGeometry(framework::TextureSystem *textures,
+  FramebufferGeometry(flf::TextureSystem *textures,
       GLuint width,
       GLuint height,
       GLuint colorBuffers,
@@ -75,7 +75,7 @@ private:
 
   std::vector<GLenum> mColorBuffers;
 
-  core::Texture2D *mDeferredColors, *mStencilDepth, *mSummary;
+  flc::Texture2D *mDeferredColors, *mStencilDepth, *mSummary;
 
   const GLint mColorBufferSize;
   const GLint mSummaryBufferSize;
@@ -85,7 +85,7 @@ private:
   const GLenum mNone;
 };
 
-} /* core */
-typedef std::shared_ptr<core::FramebufferGeometry> puFramebufferGeometry;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::FramebufferGeometry> puFramebufferGeometry;
+} /* flw */
 #endif /* FRAMEBUFFERGEOMETRY_H_ */

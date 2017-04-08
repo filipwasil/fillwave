@@ -36,12 +36,12 @@
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/Fillwave.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-Cursor::Cursor(Engine *engine, core::Texture *texture)
-    : Impostor(engine, FILLWAVE_ENDLESS, 0.06, texture), mScreenFactor(
-    GLfloat(engine->getScreenSize()[0]) / GLfloat(engine->getScreenSize()[1])) {
+Cursor::Cursor(Engine *engine, flc::Texture *texture)
+    : Impostor(engine, FILLWAVE_ENDLESS, 0.06, texture)
+    , mScreenFactor(static_cast<GLfloat>(engine->getScreenSize()[0]) / static_cast<GLfloat>(engine->getScreenSize()[1])) {
 
   mProgram = ProgramLoader(engine).getCursor();
 
@@ -50,19 +50,19 @@ Cursor::Cursor(Engine *engine, core::Texture *texture)
 
 void Cursor::move(glm::vec2 position) {
   mProgram->use();
-  core::Uniform::push(mULCPosition, position);
-  core::Program::disusePrograms();
+  flc::Uniform::push(mULCPosition, position);
+  flc::Program::disusePrograms();
 }
 
 void Cursor::draw() {
   mProgram->use();
 
-  core::Uniform::push(mULCScreenFactor, mScreenFactor);
-  core::Uniform::push(mULCSize, mSize);
+  flc::Uniform::push(mULCScreenFactor, mScreenFactor);
+  flc::Uniform::push(mULCSize, mSize);
 
   coreDraw();
 
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 void Cursor::initUniformsCache() {
@@ -72,9 +72,9 @@ void Cursor::initUniformsCache() {
   mULCSize = mProgram->getUniformLocation("uSize");
 
   mProgram->use();
-  core::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
-  core::Program::disusePrograms();
+  flc::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
+  flc::Program::disusePrograms();
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

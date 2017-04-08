@@ -41,8 +41,8 @@
 #include <string>
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \type UniformData
  * \brief Uniform data structure.
@@ -161,8 +161,8 @@ private:
   UniformData mData;
 };
 
-} /* core */
-typedef std::unique_ptr<core::Uniform> puUniform;
-} /* fillwave */
+} /* flc */
+typedef std::unique_ptr<flc::Uniform> puUniform;
+} /* flw */
 
 #endif /* UNIFORM_H_ */

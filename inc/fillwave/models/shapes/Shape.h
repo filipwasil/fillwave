@@ -38,8 +38,8 @@
 #include <fillwave/Math.h>
 #include <vector>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Shape
  * \brief Base class for every shape. Specialized with Vertex data structure.
@@ -78,6 +78,6 @@ protected:
   std::vector<GLuint> mIndices;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 #endif /* SHAPE_H_ */

@@ -37,8 +37,8 @@
 #include <fillwave/core/buffers/IBuffer.h>
 #include <string>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class UniformBuffer
  * \brief UniformBufferObject - UBO.
@@ -69,9 +69,9 @@ private:
   GLuint mBindingPoint;
 };
 
-} /* core */
-typedef std::shared_ptr<core::UniformBuffer> pUniformBuffer;
-typedef std::shared_ptr<core::UniformBuffer> puUniformBuffer;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::UniformBuffer> pUniformBuffer;
+typedef std::shared_ptr<flc::UniformBuffer> puUniformBuffer;
+} /* flw */
 
 #endif /* UNIFORMBUFFER_H_ */

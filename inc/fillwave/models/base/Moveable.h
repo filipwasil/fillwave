@@ -40,8 +40,8 @@
 #include <memory>
 #include <vector>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Moveable
  * \brief Base for every object which has a 3D position.
@@ -147,7 +147,7 @@ GLboolean isMoveablesRefresh(std::vector<std::shared_ptr<Moveable>> &moveables);
 
 void resetMoveablesRefresh(std::vector<std::shared_ptr<Moveable>> &data);
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* MOVEABLE_H_ */

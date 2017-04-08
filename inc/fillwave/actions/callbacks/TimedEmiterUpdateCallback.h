@@ -36,8 +36,8 @@
 #include <fillwave/actions/callbacks/TimedCallback.h>
 #include <fillwave/models/EmiterPointCPU.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TimedEmiterUpdateCallback
  * \brief TimedCallback to update time in emiters.
@@ -58,5 +58,5 @@ private:
   GLfloat mTimePassed;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

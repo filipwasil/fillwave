@@ -37,8 +37,8 @@
 
 FLOGINIT("Texture3DRenderable", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Texture3DRenderable::Texture3DRenderable(Texture2DFile *filePosX,
     Texture2DFile *fileNegX,
@@ -46,7 +46,7 @@ Texture3DRenderable::Texture3DRenderable(Texture2DFile *filePosX,
     Texture2DFile *fileNegY,
     Texture2DFile *filePosZ,
     Texture2DFile *fileNegZ,
-    core::Texture2DRenderable *texture,
+    flc::Texture2DRenderable *texture,
     ParameterList &parameters)
     : Texture3D(filePosX, //right
                 fileNegX, //left
@@ -97,7 +97,7 @@ void Texture3DRenderable::setAttachment(GLenum attachment) {
   mShadowTexture->setAttachment(attachment);
   fLogC("Setting RGBA framebuffer failed");
   unbind();
-  core::Framebuffer::bindScreenFramebuffer();
+  flc::Framebuffer::bindScreenFramebuffer();
 }
 
 void Texture3DRenderable::setAttachmentFace(GLenum face, GLenum attachment) {
@@ -115,5 +115,5 @@ void Texture3DRenderable::log() {
 
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

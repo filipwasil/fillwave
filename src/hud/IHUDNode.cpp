@@ -37,14 +37,14 @@
 
 FLOGINIT_DEFAULT()
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class IHUDNode
  * \brief HUD base element.
  */
 
-IHUDNode::IHUDNode(core::Texture2D *texture, core::Program *program, glm::vec2 position, glm::vec2 scale)
+IHUDNode::IHUDNode(flc::Texture2D *texture, flc::Program *program, glm::vec2 position, glm::vec2 scale)
     : mTexture(texture), mProgram(program), mPosition(position), mScale(scale), mBlending({
                                                                                               GL_SRC_ALPHA,
                                                                                               GL_ONE_MINUS_SRC_ALPHA
@@ -84,5 +84,5 @@ void IHUDNode::coreDraw() {
 
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

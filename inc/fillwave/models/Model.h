@@ -39,9 +39,9 @@
 #include <fillwave/models/Mesh.h>
 #include <fillwave/Assets.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 class TimedBoneUpdateCallback;
 
 /*! \class Model
@@ -52,28 +52,28 @@ class Model : public IFocusable, public Programmable {
 public:
 
   Model(Engine *engine,
-      core::Program *program,
-      framework::Shape<core::VertexBasic> &shape,
-      core::Texture2D *diffuseMap,
-      core::Texture2D *normalMap,
-      core::Texture2D *specularMap,
+      flc::Program *program,
+      flf::Shape<flc::VertexBasic> &shape,
+      flc::Texture2D *diffuseMap,
+      flc::Texture2D *normalMap,
+      flc::Texture2D *specularMap,
       const Material &material);
 
-  Model(Engine *engine, core::Program *program, const std::string &shapePath);
+  Model(Engine *engine, flc::Program *program, const std::string &shapePath);
 
   Model(Engine *engine,
-      core::Program *program,
+      flc::Program *program,
       const std::string &shapePath,
       const std::string &diffuseMapPath,
       const std::string &normalMapPath = "",
       const std::string &specularMapPath = "");
 
   Model(Engine *engine,
-      core::Program *program,
+      flc::Program *program,
       const std::string &shapePath,
-      core::Texture2D *diffuseMap,
-      core::Texture2D *normalMap = nullptr,
-      core::Texture2D *specularMap = nullptr,
+      flc::Texture2D *diffuseMap,
+      flc::Texture2D *normalMap = nullptr,
+      flc::Texture2D *specularMap = nullptr,
       const Material &material = Material());
 
   virtual ~Model();
@@ -113,7 +113,7 @@ protected:
   GLint mActiveAnimation;
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
   LightSystem *mLights;
-  core::Program *mProgramShadow, *mProgramShadowColor;
+  flc::Program *mProgramShadow, *mProgramShadowColor;
   GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow, mUniformLocationCacheBonesShadowColor;
 private:
   /* Init */
@@ -146,32 +146,32 @@ private:
       const aiScene *scene,
       Engine *engine,
       Entity *entity,
-      core::Texture2D *diffuseMap,
-      core::Texture2D *normalMap,
-      core::Texture2D *specularMap,
+      flc::Texture2D *diffuseMap,
+      flc::Texture2D *normalMap,
+      flc::Texture2D *specularMap,
       const Material &material);
 
   puMesh loadMesh(const aiMesh *shape,
       const Material &material,
-      core::Texture2D *diffuseMap,
-      core::Texture2D *normalMap,
-      core::Texture2D *specularMap,
+      flc::Texture2D *diffuseMap,
+      flc::Texture2D *normalMap,
+      flc::Texture2D *specularMap,
       Engine *engine);
 
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
   puMesh loadMesh(tinyobj::shape_t& shape,
              tinyobj::attrib_t& attrib,
              const Material& material,
-             core::Texture2D* diffuseMap,
-             core::Texture2D* normalMap,
-             core::Texture2D* specularMap,
+             flc::Texture2D* diffuseMap,
+             flc::Texture2D* normalMap,
+             flc::Texture2D* specularMap,
              Engine* engine);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Model> puModel;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Model> puModel;
+} /* flw */
 
 #endif /* MODEL_H_ */

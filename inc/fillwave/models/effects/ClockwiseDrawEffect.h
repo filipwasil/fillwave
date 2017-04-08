@@ -36,8 +36,8 @@
 
 #include <fillwave/models/effects/Effect.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class ClockwiseDrawEffect
  * \brief Effect to draw an opposite face of each mesh.
@@ -49,16 +49,16 @@ public:
 
   virtual ~ClockwiseDrawEffect() = default;
 
-  void preDrawAction(core::Program *program);
+  void preDrawAction(flc::Program *program);
 
-  void postDrawAction(core::Program *program);
+  void postDrawAction(flc::Program *program);
 
-  void stopAction(core::Program *program);
+  void stopAction(flc::Program *program);
 
-  void startAction(core::Program *program);
+  void startAction(flc::Program *program);
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* CLOCKWISEDRAWEFFECT_H_ */
