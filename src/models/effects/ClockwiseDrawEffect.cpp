@@ -34,24 +34,24 @@
 
 #include <fillwave/models/effects/ClockwiseDrawEffect.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-void ClockwiseDrawEffect::preDrawAction(core::Program *) {
+void ClockwiseDrawEffect::preDrawAction(flc::Program *) {
   glFrontFace(GL_CW);
 }
 
-void ClockwiseDrawEffect::postDrawAction(core::Program *) {
+void ClockwiseDrawEffect::postDrawAction(flc::Program *) {
   glFrontFace(GL_CCW);
 }
 
-void ClockwiseDrawEffect::stopAction(core::Program *) {
+void ClockwiseDrawEffect::stopAction(flc::Program *) {
 
 }
 
-void ClockwiseDrawEffect::startAction(core::Program *) {
+void ClockwiseDrawEffect::startAction(flc::Program *) {
 
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

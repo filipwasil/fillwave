@@ -36,8 +36,8 @@
 
 #include <unordered_map>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /**
  * \brief Basic manager of composites
@@ -70,7 +70,7 @@ public:
   }
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_MANAGEMENT_BASE_TMANAGERSTACK_H_ */

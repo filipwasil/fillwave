@@ -39,8 +39,8 @@
 #ifdef FILLWAVE_GLES_3_0
 #else
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class ProgramPipeline
  * \brief Not used.
@@ -62,8 +62,8 @@ private:
   GLuint mTarget;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* PROGRAMPIPELINE_H_ */
 

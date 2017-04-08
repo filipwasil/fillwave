@@ -34,22 +34,22 @@
 
 #include <fillwave/core/operations/PostProcessingPass.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
-PostProcessingPass::PostProcessingPass(core::Program *program,
-    core::Texture2DRenderableDynamic *frame,
+PostProcessingPass::PostProcessingPass(flc::Program *program,
+    flc::Texture2DRenderableDynamic *frame,
     GLfloat lifetime)
     : Finishable(lifetime), mFrame(frame), mProgram(program) {
 }
 
-core::Texture2DRenderableDynamic *PostProcessingPass::getFrame() const {
+flc::Texture2DRenderableDynamic *PostProcessingPass::getFrame() const {
   return mFrame;
 }
 
-core::Program *PostProcessingPass::getProgram() const {
+flc::Program *PostProcessingPass::getProgram() const {
   return mProgram;
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

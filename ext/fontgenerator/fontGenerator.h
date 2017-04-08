@@ -1,3 +1,5 @@
+#pragma once
+
 /******************************************************************************\
 | OpenGL 4 Example Code.                                                       |
 | Accompanies written series "Anton's OpenGL 4 Tutorials"                      |
@@ -14,13 +16,10 @@
  * \brief Representation of freetype font.
  */
 
-#ifndef FONT_GENERATOR_H_
-#define FONT_GENERATOR_H_
-
 #include <fillwave/OpenGL.h>
 #include <memory>
 
-namespace fillwave {
+namespace flw {
 
 struct Font {
    std::string mName;
@@ -33,13 +32,9 @@ struct Font {
 typedef std::shared_ptr<Font> pFont;
 typedef std::unique_ptr<Font> puFont;
 
-}
+} /* flw */
 
 
 int generateFontMetadata (const char* ttfFilePath,
                           const char* outputPNG,
                           const char* outputMETADATA);
-
-//Font getFont (const char* ttfFilePath);
-
-#endif /* FONT_GENERATOR_H_ */

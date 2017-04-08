@@ -38,8 +38,8 @@
 #include <fillwave/space/base/Light.h>
 #include <fillwave/space/CameraPerspective.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class LightSpot
  * \brief Light implementing directional torch.
@@ -47,11 +47,11 @@ namespace framework {
 
 class LightSpot : public Light {
 protected:
-  core::Texture2DRenderable *mShadowTexture;
+  flc::Texture2DRenderable *mShadowTexture;
   puCameraPerspective mShadowCamera;
 
 public:
-  LightSpot(core::Texture2DRenderable *shadowTexture,
+  LightSpot(flc::Texture2DRenderable *shadowTexture,
       glm::vec3 position,
       glm::quat rotation,
       glm::vec4 intensity,
@@ -59,7 +59,7 @@ public:
 
   virtual ~LightSpot() = default;
 
-  core::Texture2DRenderable *getShadowTexture();
+  flc::Texture2DRenderable *getShadowTexture();
 
   CameraPerspective *getShadowCamera();
 
@@ -69,8 +69,8 @@ public:
 
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::LightSpot> puLightSpot;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::LightSpot> puLightSpot;
+} /* flw */
 
 #endif /* LIGHTSPOT_H_ */

@@ -43,9 +43,9 @@
 #include <fillwave/core/pipeline/Blending.h>
 #include <fillwave/models/base/IReloadable.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class IEmiterPoint
  * \brief Drawable Entity which emits particles.
@@ -57,7 +57,7 @@ public:
       GLuint howMany,
       GLfloat size,
       GLfloat lifetime,
-      core::Texture *texture,
+      flc::Texture *texture,
       glm::vec4 color,
       GLenum blendingSource,
       GLenum blendingDestination,
@@ -78,18 +78,18 @@ public:
 protected:
   GLfloat mStartSize;
   GLfloat mLifetime;
-  core::Texture *mTexture;
+  flc::Texture *mTexture;
   glm::vec4 mColor;
   GLuint mHowMany;
   GLboolean mDepthTesting;
   GLfloat mAlphaCutOff;
-  core::Program *mProgram;
-  core::IndexBuffer *mIBO;
+  flc::Program *mProgram;
+  flc::IndexBuffer *mIBO;
   Blending mBlending;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::IEmiterPoint> puIEmiterPoint;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::IEmiterPoint> puIEmiterPoint;
+} /* flw */
 
 #endif /* EMITERPOINT_H_ */

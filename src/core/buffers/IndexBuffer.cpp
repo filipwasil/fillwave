@@ -41,8 +41,8 @@
 
 FLOGINIT("IndexBuffer", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 IndexBuffer::IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModification)
     : IBuffer(GL_ELEMENT_ARRAY_BUFFER, dataStoreModification) {
@@ -98,5 +98,5 @@ void IndexBuffer::emptyGPU() {
   fLogD("Not gpu data clear is possible in this buffer");
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

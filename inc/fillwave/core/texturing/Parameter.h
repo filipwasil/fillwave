@@ -37,8 +37,8 @@
 #include <fillwave/OpenGL.h>
 #include <vector>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! Parameter
  * \brief Texture and Sampler parameter class.
@@ -52,7 +52,7 @@ typedef std::pair<GLenum, GLenum> Parameter;
 
 typedef std::vector<Parameter> ParameterList;
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* PARAMETER_H_ */
