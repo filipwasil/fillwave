@@ -37,8 +37,8 @@
 #include <fillwave/models/Entity.h>
 #include <fillwave/common/Macros.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Hinge
  * \brief Entity capable of populating the draw method towards children.
@@ -63,12 +63,12 @@ public:
   bool getRenderItem(RenderItem &item) override;
 };
 
-} /* namespace framework */
-typedef std::unique_ptr<framework::Hinge> puHinge;
+} /* namespace flf */
+typedef std::unique_ptr<flf::Hinge> puHinge;
 
 static puHinge buildHinge() {
-  return std::make_unique<framework::Hinge>();
+  return std::make_unique<flf::Hinge>();
 }
-} /* namespace fillwave */
+} /* namespace flw */
 
 #endif /* SRC_MODELS_HINGE_H_ */

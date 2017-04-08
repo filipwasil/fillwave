@@ -35,10 +35,10 @@
 #include <fillwave/Fillwave.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-IReloadable::IReloadable(Engine *engine, core::VertexArray *vao)
+IReloadable::IReloadable(Engine *engine, flc::VertexArray *vao)
     : mVAO(vao ? vao : engine->storeVAO(this)), mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)) {
   mSampler->bind();
   mSampler->setParameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -54,5 +54,5 @@ void IReloadable::reload() {
   initUniformsCache();
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

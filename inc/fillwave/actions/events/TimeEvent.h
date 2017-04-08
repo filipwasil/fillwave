@@ -35,8 +35,8 @@
 
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \struct TimeEventData
  * \brief Event data structure to store the amount of time expired.
@@ -61,5 +61,5 @@ public:
   virtual ~TimeEvent() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

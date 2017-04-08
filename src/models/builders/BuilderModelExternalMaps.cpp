@@ -36,16 +36,18 @@
 #include <fillwave/Log.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 BuilderModelExternalMaps::BuilderModelExternalMaps(Engine *engine,
     std::string modelPath,
-    core::Program *program,
+    flc::Program *program,
     const std::string &diffusePath,
     const std::string &normalPath,
     const std::string &specularPath)
-    : BuilderModel(engine, modelPath, program), mDiffuseMapPath(diffusePath), mNormalMapPath(normalPath)
+    : BuilderModel(engine, modelPath, program)
+    , mDiffuseMapPath(diffusePath)
+    , mNormalMapPath(normalPath)
     , mSpecularMapPath(specularPath) {
 
 }
@@ -69,6 +71,6 @@ puModel BuilderModelExternalMaps::build() {
   return std::make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMapPath, mNormalMapPath, mSpecularMapPath);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 

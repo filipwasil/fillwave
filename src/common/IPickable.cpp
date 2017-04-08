@@ -7,13 +7,13 @@
 
 #include <fillwave/common/IPickable.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 IPickable::IPickable()
     : mFlagPickable(false) {
 
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

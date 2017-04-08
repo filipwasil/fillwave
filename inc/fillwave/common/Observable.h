@@ -33,8 +33,8 @@
 #include <vector>
 #include <algorithm>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Observable
 * \brief Implementation of Observable pattern.

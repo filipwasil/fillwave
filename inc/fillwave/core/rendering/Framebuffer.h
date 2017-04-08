@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Framebuffer.h
  *
@@ -31,15 +33,12 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef FRAMEBUFFER_H_
-#define FRAMEBUFFER_H_
-
 #include <fillwave/core/GLObject.h>
 
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Framebuffer
  * \brief FramebufferObject - FO.
@@ -74,9 +73,6 @@ public:
   static void bindScreenFramebufferForWriting();
 };
 
-} /* core */
-typedef std::shared_ptr<core::Framebuffer> pFramebuffer;
-typedef std::unique_ptr<core::Framebuffer> puFramebuffer;
-} /* fillwave */
-
-#endif /* FRAMEBUFFER_H_ */
+} /* flc */
+typedef std::unique_ptr<flc::Framebuffer> puFramebuffer;
+} /* flw */

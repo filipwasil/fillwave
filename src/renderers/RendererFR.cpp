@@ -36,8 +36,8 @@
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 void RendererFR::update(IRenderable *renderable) {
   mRenderPasses.push_back(renderable);
@@ -65,5 +65,5 @@ void RendererFR::clear() {
   mRenderPasses.reserve(predictedSize);
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

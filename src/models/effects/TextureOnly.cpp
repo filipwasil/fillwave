@@ -34,24 +34,24 @@
 
 #include <fillwave/models/effects/TextureOnly.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-void TextureOnly::preDrawAction(core::Program *program) {
+void TextureOnly::preDrawAction(flc::Program *program) {
   program->uniformPush("uTextureOnlyEffect", true);
 }
 
-void TextureOnly::postDrawAction(core::Program *program) {
+void TextureOnly::postDrawAction(flc::Program *program) {
   program->uniformPush("uTextureOnlyEffect", false);
 }
 
-void TextureOnly::stopAction(core::Program *program) {
+void TextureOnly::stopAction(flc::Program *program) {
   program->uniformPush("uTextureOnlyEffect", false);
 }
 
-void TextureOnly::startAction(core::Program *program) {
+void TextureOnly::startAction(flc::Program *program) {
   program->uniformPush("uTextureOnlyEffect", true);
 }
 
 } /* framework*/
-} /* fillwave */
+} /* flw */

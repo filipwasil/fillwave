@@ -10,8 +10,8 @@
 
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \struct KeyboardEventData
  * \brief Event data structure to store the parameters of a key event.
@@ -36,7 +36,7 @@ public:
   virtual ~KeyboardEvent() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* KEYBOARDEVENT_H_ */

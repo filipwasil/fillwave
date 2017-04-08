@@ -36,14 +36,14 @@
 
 #include <fillwave/Fillwave.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 EmiterPointStep::EmiterPointStep(Engine *engine,
     GLint howMany,
     GLenum blendingSource,
     GLenum blendingDestination,
-    core::Texture *texture)
+    flc::Texture *texture)
     : IEmiterPoint(engine, howMany, 100, //size
                    1, //lifetime
                    texture, glm::vec4(1.0, 1.0, 1.0, 0.0), // color
@@ -51,5 +51,5 @@ EmiterPointStep::EmiterPointStep(Engine *engine,
 
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

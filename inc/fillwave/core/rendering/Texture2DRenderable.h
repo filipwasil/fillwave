@@ -37,8 +37,8 @@
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/rendering/Framebuffer.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Texture2DRenderable
  * \brief One can render to this texture and use the rendered image as a 2D texture.
@@ -77,8 +77,8 @@ private:
   GLenum mAttachment;
 };
 
-} /* core */
-typedef std::shared_ptr<core::Texture2DRenderable> pTexture2DRenderable;
-typedef std::unique_ptr<core::Texture2DRenderable> puTexture2DRenderable;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::Texture2DRenderable> pTexture2DRenderable;
+typedef std::unique_ptr<flc::Texture2DRenderable> puTexture2DRenderable;
+} /* flw */
 #endif /* TEXTURE2DRENDERABLE_H_ */

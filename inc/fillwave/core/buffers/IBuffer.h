@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Buffer.h
  *
@@ -31,14 +33,11 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef BUFFER_H_
-#define BUFFER_H_
-
 #include <fillwave/core/GLObject.h>
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class IBuffer
  * \brief Base for all buffer types.
@@ -72,7 +71,7 @@ public:
 
   bool isLoaded();
 
-  void setLoaded(GLboolean loaded);
+  void setLoaded(bool loaded);
 
   GLuint getElements() const;
 
@@ -93,7 +92,7 @@ public:
 #endif
 
 protected:
-  GLboolean mLoaded;
+  bool mLoaded;
   GLuint mTarget;
   GLuint mDataStoreType;
   GLuint mIndex;
@@ -114,7 +113,5 @@ void unbindBuffer(GLuint target);
 
 void bindBuffer(GLuint target, GLuint handle);
 
-} /* core */
-} /* fillwave */
-
-#endif /* BUFFER_H_ */
+} /* flc */
+} /* flw */
