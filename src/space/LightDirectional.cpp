@@ -37,10 +37,10 @@
 
 FLOGINIT("DirectionalLight", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-LightDirectional::LightDirectional(core::Texture2DRenderable *shadowTexture,
+LightDirectional::LightDirectional(flc::Texture2DRenderable *shadowTexture,
     glm::vec3 position,
     glm::quat rotation,
     glm::vec4 intensity,
@@ -60,7 +60,7 @@ CameraOrthographic *LightDirectional::getShadowCamera() {
   return mShadowCamera.get();
 }
 
-core::Texture2DRenderable *LightDirectional::getShadowTexture() {
+flc::Texture2DRenderable *LightDirectional::getShadowTexture() {
   return mShadowTexture;
 }
 
@@ -107,5 +107,5 @@ void LightDirectional::log() {
   fLogI("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x), d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

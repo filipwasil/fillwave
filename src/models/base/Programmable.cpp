@@ -37,24 +37,24 @@
 
 FLOGINIT("Programmable", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-Programmable::Programmable(core::Program *program)
+Programmable::Programmable(flc::Program *program)
     : mProgram(program) {
 
 }
 
 void Programmable::drawWithEffects(ICamera &camera) {
 
-  core::Program *p = mProgram;
+  flc::Program *p = mProgram;
 
   /* Effects execution */
   p->use();
   std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
     e->preDrawAction(p);
   });
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 
   /* Draw */
   for (auto &it : mChildren) {
@@ -66,12 +66,12 @@ void Programmable::drawWithEffects(ICamera &camera) {
   std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
     e->postDrawAction(p);
   });
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 void Programmable::drawWithEffectsDR(ICamera &camera) {
 
-  core::Program *p = mProgram;
+  flc::Program *p = mProgram;
 
   /* Effects execution */
   std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
@@ -91,7 +91,7 @@ void Programmable::drawWithEffectsDR(ICamera &camera) {
 
 void Programmable::drawWithEffectsPBRP(ICamera &camera) {
 
-  core::Program *p = mProgram;
+  flc::Program *p = mProgram;
 
   /* Effects execution */
   std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
@@ -121,7 +121,7 @@ void Programmable::addEffect(pIEffect effect) {
   mEffects.push_back(effect);
   mProgram->use();
   effect->startAction(mProgram);
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 void Programmable::removeEffect(pIEffect effect) {
@@ -133,10 +133,10 @@ void Programmable::removeEffect(pIEffect effect) {
     /* Start stop action */
     mProgram->use();
     effect->stopAction(mProgram);
-    core::Program::disusePrograms();
+    flc::Program::disusePrograms();
   }
   mEffects.erase(it, mEffects.end());
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

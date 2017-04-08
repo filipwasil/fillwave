@@ -39,8 +39,8 @@
 #include <algorithm>
 #include <vector>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Callback
  * \brief Base for all callbacks.
@@ -97,6 +97,6 @@ protected:
   eEventType mEventType;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Callback> puCallback;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Callback> puCallback;
+} /* flw */

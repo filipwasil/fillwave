@@ -41,8 +41,8 @@
 
 #include <stddef.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 //template <class... Ts>
 //struct Vertex {
@@ -130,6 +130,6 @@ namespace core {
  *
  */
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 #endif /* VERTEX_H_ */

@@ -36,8 +36,8 @@
 
 #include <fontGenerator.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class FontLoader
  * \brief Loads fonts fromttf files.
@@ -52,7 +52,7 @@ public:
   void load(std::string name);
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* FONTLOADER_H_ */

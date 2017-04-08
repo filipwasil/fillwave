@@ -37,8 +37,8 @@
 #include <fillwave/core/rendering/Texture3DRenderable.h>
 #include <fillwave/core/pipeline/Program.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Texture3DRenderableDynamic
  * \brief Not used.
@@ -53,18 +53,18 @@ public:
       Texture2DFile *filePosZ,
       Texture2DFile *fileNegZ,
       ParameterList &parameters,
-      core::Texture2DRenderable *texture2D,
-      core::Program *program);
+      flc::Texture2DRenderable *texture2D,
+      flc::Program *program);
 
   virtual ~Texture3DRenderableDynamic() = default;
 
 private:
-  core::Program *mProgram;
+  flc::Program *mProgram;
   GLfloat mTimePassed;
 };
 
-} /* core */
-typedef std::shared_ptr<core::Texture3DRenderableDynamic> pTexture3DRenderableDynamic;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::Texture3DRenderableDynamic> pTexture3DRenderableDynamic;
+} /* flw */
 
 #endif /* TEXTURE3DRENDERABLEDYNAMIC_H_ */

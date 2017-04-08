@@ -38,17 +38,17 @@
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 static constexpr size_t FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER = 4;
 
-typedef TManager<LightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, core::Texture2DRenderable *, glm::vec3, glm::quat, glm::vec4, Moveable *> CacheSpotLights;
+typedef TManager<LightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, flc::Texture2DRenderable *, glm::vec3, glm::quat, glm::vec4, Moveable *> CacheSpotLights;
 
-typedef TManager<LightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, core::Texture2DRenderable *, glm::vec3, glm::quat, glm::vec4, Moveable *> CacheDirectionalLights;
+typedef TManager<LightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, flc::Texture2DRenderable *, glm::vec3, glm::quat, glm::vec4, Moveable *> CacheDirectionalLights;
 
-typedef TManager<LightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, core::Texture3DRenderable *, glm::vec3, glm::vec4, Moveable *> CachePointLights;
+typedef TManager<LightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, flc::Texture3DRenderable *, glm::vec3, glm::vec4, Moveable *> CachePointLights;
 
 /**
  * \brief Light system knows about all light related stuff.
@@ -73,20 +73,20 @@ public:
 
   void pushLightUniformsDR();
 
-  void pushLightUniforms(core::Program *program);
+  void pushLightUniforms(flc::Program *program);
 
-  void pushLightUniformBuffers(core::Program *program);
+  void pushLightUniformBuffers(flc::Program *program);
 
   void clear();
 
   void bindShadowmaps();
 
   /* Deferred rendering */
-  void updateDeferredBufferSpot(GLuint lightID, core::Program *program, GLint currentShadowUnit);
+  void updateDeferredBufferSpot(GLuint lightID, flc::Program *program, GLint currentShadowUnit);
 
-  void updateDeferredBufferDirectional(GLuint lightID, core::Program *program, GLint currentShadowUnit);
+  void updateDeferredBufferDirectional(GLuint lightID, flc::Program *program, GLint currentShadowUnit);
 
-  void updateDeferredBufferPoint(GLuint lightID, core::Program *program, GLint currentShadowUnit);
+  void updateDeferredBufferPoint(GLuint lightID, flc::Program *program, GLint currentShadowUnit);
 
 private:
   std::vector<LighUniformData> mLightBufferData;
@@ -100,6 +100,6 @@ private:
   GLfloat computePointLightBoundingSphere(LightPoint *light);
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::LightSystem> puLightSystem;
+} /* flf */
+typedef std::unique_ptr<flf::LightSystem> puLightSystem;
 } /* fillwave*/

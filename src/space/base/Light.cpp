@@ -37,8 +37,8 @@
 
 FLOGINIT("Light", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Light::Light(glm::vec3 position, glm::vec4 intensity, Moveable *followed)
     : Moveable(position), mFollowed(followed), mIsFollowedUpdated(true), mIntensity(intensity) {
@@ -95,5 +95,5 @@ void Light::onDeath(Observable *observable) {
 void Light::onChanged(Observable * /*observable*/) {
   mIsFollowedUpdated = true;
 }
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

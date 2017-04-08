@@ -38,8 +38,8 @@
 
 FLOGINIT("Scene", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Scene::Scene(IRenderer *renderer)
     : mAmbientGlobal(glm::vec3(1.0)), mRenderer(renderer) {
@@ -108,11 +108,11 @@ void Scene::registerPickable(Entity *entity) {
   GLint rand_r, rand_g, rand_b;
   glm::vec3 color;
 
-  for (GLint i = 0; i < MAXIMUM_TRIALS_TO_PICK_COLOR; i++) {
+  for (GLint i = 0; i < MAXIMUM_TRIALS_TO_PICK_COLOR; ++i) {
 
-    rand_r = (GLfloat) (rand() % 256);
-    rand_g = (GLfloat) (rand() % 256);
-    rand_b = (GLfloat) (rand() % 256);
+    rand_r = rand() % 256;
+    rand_g = rand() % 256;
+    rand_b = rand() % 256;
 
     color = glm::vec3(rand_r / 255.0, rand_g / 255.0, rand_b / 255.0);
     GLint name = (GLint) (rand_r) + (GLint) (rand_g) + (GLint) (rand_b);
@@ -129,13 +129,15 @@ void Scene::registerPickable(Entity *entity) {
 
 void Scene::pick(glm::ivec4 color) {
   GLint name = color.r + color.g + color.b;
-  if (mPickingTable[name]) {
-    mPickingTable[name]->onPicked();
-    if (mLastPicked) {
-      mLastPicked->onUnpicked();
-    }
-    mLastPicked = mPickingTable[name];
+  if (!mPickingTable[name]) {
+    return;
   }
+
+  mPickingTable[name]->onPicked();
+  if (mLastPicked) {
+    mLastPicked->onUnpicked();
+  }
+  mLastPicked = mPickingTable[name];
 }
 
 void Scene::updateRenderer() {
@@ -208,4 +210,4 @@ void Scene::onHide() {
 }
 
 } /* models */
-} /* fillwave */
+} /* flw */

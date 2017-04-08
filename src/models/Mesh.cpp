@@ -41,30 +41,30 @@ FLOGINIT("Mesh", FERROR | FFATAL | FINFO)
 
 using namespace std;
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 const GLint gOQVertices = 36; //todo move it from here
 
 Mesh::Mesh(Engine *engine,
     const Material &material,
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
-    core::Program *program,
-    core::Program *programShadow,
-    core::Program *programShadowColor,
-    core::Program *programOcclusion,
-    core::Program *programAmbientOcclusionGeometry,
-    core::Program *programAmbientOcclusionColor,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
+    flc::Program *program,
+    flc::Program *programShadow,
+    flc::Program *programShadowColor,
+    flc::Program *programOcclusion,
+    flc::Program *programAmbientOcclusionGeometry,
+    flc::Program *programAmbientOcclusionColor,
     LightSystem *lights,
-    core::VertexBufferBasic *vbo,
-    core::IndexBuffer *ibo,
+    flc::VertexBufferBasic *vbo,
+    flc::IndexBuffer *ibo,
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
     Animator *animator,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
     GLenum renderMode,
-    core::VertexArray *vao)
+    flc::VertexArray *vao)
     : IReloadable(engine, vao), mMaterial(material), mDiffuseMap(diffuseMap), mNormalMap(normalMap), mSpecularMap(
     specularMap), mProgram(program), mProgramShadow(programShadow), mProgramShadowColor(programShadowColor), mProgramOQ(
     programOcclusion), mProgramAOGeometry(programAmbientOcclusionGeometry)
@@ -89,12 +89,12 @@ void Mesh::drawPBRP(ICamera &camera) {
   if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
   {
-    core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
-    core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
-    core::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-    core::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
-    core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-    core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+    flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+    flc::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
+    flc::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
+    flc::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
+    flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
+    flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
     coreDraw();
   }
@@ -108,12 +108,12 @@ void Mesh::draw(ICamera &camera) {
   {
     mProgram->use();
 
-    core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
-    core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
-    core::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-    core::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
-    core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-    core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+    flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+    flc::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
+    flc::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
+    flc::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
+    flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
+    flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
     mLights->pushLightUniforms(mProgram);
     mLights->bindShadowmaps();
@@ -130,13 +130,13 @@ void Mesh::drawDR(ICamera &camera) {
   {
     mProgram->use();
 
-    core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
-    core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+    flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+    flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
-    //   core::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
-    //   core::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-    //   core::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
-    //   core::Uniform::push(mULCCameraPosition, camera.getTranslation());
+    //   flc::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
+    //   flc::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
+    //   flc::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
+    //   flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
 
 //      mLights->pushLightUniformsShadowMaps(mProgram.get());
 
@@ -169,9 +169,9 @@ inline void Mesh::coreDraw() {
   //
   //#endif
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 
-  core::Texture2D::unbind2DTextures();
+  flc::Texture2D::unbind2DTextures();
 }
 
 inline void Mesh::bindTextures() {
@@ -192,23 +192,23 @@ void Mesh::drawPicking(ICamera &camera) {
   if (isPickable()) {
     mProgram->use();
 
-    core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+    flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
 
-    core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-    core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+    flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
+    flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
-    core::Uniform::push(mULCColorPicking, true);
-    core::Uniform::push(mULCPainterColor, glm::vec4(getPickableColor(), 1.0));
+    flc::Uniform::push(mULCColorPicking, true);
+    flc::Uniform::push(mULCPainterColor, glm::vec4(getPickableColor(), 1.0));
 
     mVAO->bind();
 
     onDraw();
 
-    core::VertexArray::unbindVAO();
+    flc::VertexArray::unbindVAO();
 
-    core::Uniform::push(mULCColorPicking, false);
+    flc::Uniform::push(mULCColorPicking, false);
 
-    core::Program::disusePrograms();
+    flc::Program::disusePrograms();
   }
 }
 
@@ -216,7 +216,7 @@ void Mesh::drawOcclusionBox(ICamera &camera) {
 
   mProgramOQ->use();
 
-  core::Uniform::push(mULCMVPOcclusion, camera.getViewProjection() * mPhysicsMMC * mOcclusionMatrix);
+  flc::Uniform::push(mULCMVPOcclusion, camera.getViewProjection() * mPhysicsMMC * mOcclusionMatrix);
 
   mOcclusionQuery.begin();
 
@@ -226,22 +226,22 @@ void Mesh::drawOcclusionBox(ICamera &camera) {
 
   mOcclusionQuery.end();
 
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 void Mesh::drawDepth(ICamera &camera) {
   if (isPSC()) {
     mProgramShadow->use();
 
-    core::Uniform::push(mULCMVPShadow, camera.getViewProjection() * mPhysicsMMC);
+    flc::Uniform::push(mULCMVPShadow, camera.getViewProjection() * mPhysicsMMC);
 
     mVAO->bind();
 
     onDraw();
 
-    core::VertexArray::unbindVAO();
+    flc::VertexArray::unbindVAO();
 
-    core::Program::disusePrograms();
+    flc::Program::disusePrograms();
   }
 }
 
@@ -249,45 +249,45 @@ void Mesh::drawDepthColor(ICamera &camera, glm::vec3 & /*xxx double check positi
   if (isPSC()) {
     mProgramShadowColor->use();
 
-    core::Uniform::push(mULCMVPShadowColor, camera.getViewProjection() * mPhysicsMMC);
-    core::Uniform::push(mULCModelMatrixShadowColor, mPhysicsMMC);
+    flc::Uniform::push(mULCMVPShadowColor, camera.getViewProjection() * mPhysicsMMC);
+    flc::Uniform::push(mULCModelMatrixShadowColor, mPhysicsMMC);
 
     mVAO->bind();
 
     onDraw();
 
-    core::VertexArray::unbindVAO();
+    flc::VertexArray::unbindVAO();
 
-    core::Program::disusePrograms();
+    flc::Program::disusePrograms();
   }
 }
 
 void Mesh::drawAOG(ICamera &camera) {
   mProgramAOGeometry->use();
 
-  core::Uniform::push(mULCMVPAmbientOcclusion, camera.getViewProjection() * mPhysicsMMC);
-  core::Uniform::push(mULCPositionAmbientOcclusion, camera.getEye() * mPhysicsMMC);
+  flc::Uniform::push(mULCMVPAmbientOcclusion, camera.getViewProjection() * mPhysicsMMC);
+  flc::Uniform::push(mULCPositionAmbientOcclusion, camera.getEye() * mPhysicsMMC);
 
   mVAO->bind();
 
   onDraw();
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 void Mesh::drawAOC(ICamera &camera) {
   mProgramAOColor->use();
 
-//      core::Uniform::push(mULCTextureMap, FILLWAVE_DIFFUSE_ATTACHMENT);
-  core::Uniform::push(mULCSampleRadius, FILLWAVE_AO_SAMPLE_RADIUS);
-  core::Uniform::push(mULCProjectionMatrix, camera.getProjection());
-//      core::Uniform::push(mULCRandomVectors, camera.getEye() * mPhysicsMMC);
+//      flc::Uniform::push(mULCTextureMap, FILLWAVE_DIFFUSE_ATTACHMENT);
+  flc::Uniform::push(mULCSampleRadius, FILLWAVE_AO_SAMPLE_RADIUS);
+  flc::Uniform::push(mULCProjectionMatrix, camera.getProjection());
+//      flc::Uniform::push(mULCRandomVectors, camera.getEye() * mPhysicsMMC);
 
   mVAO->bind();
 
   onDraw();
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 void Mesh::onDraw() {
@@ -375,7 +375,7 @@ inline void Mesh::initVAO() {
     mIBO->send();
   }
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 inline void Mesh::initVBO() {
@@ -407,5 +407,5 @@ bool Mesh::getRenderItem(RenderItem &item) {
   return true;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

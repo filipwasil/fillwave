@@ -36,10 +36,10 @@
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/Fillwave.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-Button::Button(Engine *engine, core::Texture2D *texture, glm::vec2 position, glm::vec2 scale)
+Button::Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm::vec2 scale)
     : IHUDNode(texture,
                ProgramLoader(engine).getHUD(),
                position,
@@ -63,5 +63,5 @@ void Button::onUnpicked() {
 
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

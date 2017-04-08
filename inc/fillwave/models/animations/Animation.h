@@ -42,8 +42,8 @@
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 class Channel;
 
 /*! \class Animation
@@ -96,9 +96,9 @@ private:
 
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Animation> puAnimation;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Animation> puAnimation;
+} /* flw */
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 

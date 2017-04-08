@@ -35,8 +35,8 @@
 
 #include <fillwave/actions/events/EventType.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TEvent
  * \brief Template for all events.
@@ -68,5 +68,5 @@ private:
   T mData;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

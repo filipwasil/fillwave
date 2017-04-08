@@ -39,8 +39,8 @@
 
 #include <vector>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class SequenceCallback
  * \brief ItemCallback to execute an ordered vector of callbacks.
@@ -63,6 +63,6 @@ protected:
   bool mReloaditerator;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::SequenceCallback> puSequenceCallback;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::SequenceCallback> puSequenceCallback;
+} /* flw */

@@ -34,30 +34,30 @@
 
 #include <fillwave/models/effects/BoostColor.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 BoostColor::BoostColor(GLfloat boost)
     : mBoost(boost) {
 
 }
 
-void BoostColor::preDrawAction(core::Program *program) {
+void BoostColor::preDrawAction(flc::Program *program) {
   program->uniformPush("uBoostColorEffect", true);
   program->uniformPush("uBoostColorFactor", mBoost);
 }
 
-void BoostColor::postDrawAction(core::Program *program) {
+void BoostColor::postDrawAction(flc::Program *program) {
   program->uniformPush("uBoostColorEffect", false);
 }
 
-void BoostColor::stopAction(core::Program *program) {
+void BoostColor::stopAction(flc::Program *program) {
   program->uniformPush("uBoostColorEffect", false);
 }
 
-void BoostColor::startAction(core::Program *program) {
+void BoostColor::startAction(flc::Program *program) {
   program->uniformPush("uBoostColorEffect", true);
 }
 
 } /* framework*/
-} /* fillwave */
+} /* flw */

@@ -37,9 +37,9 @@
  * \brief Capable to notify engine that focus related callbacks can be freed.
  */
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 class IFocusable {
 public:

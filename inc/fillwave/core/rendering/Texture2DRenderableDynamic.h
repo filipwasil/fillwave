@@ -37,8 +37,8 @@
 #include <fillwave/core/rendering/Texture2DRenderable.h>
 #include <fillwave/core/pipeline/Program.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Texture2DRenderableDynamic
  * \brief Dynamic texture will update its content during runtime according to specified fragment shader.
@@ -46,7 +46,7 @@ namespace core {
 
 class Texture2DRenderableDynamic : public Texture2DRenderable {
 public:
-  Texture2DRenderableDynamic(Texture2DFile *file, ParameterList &parameters, core::Program *program);
+  Texture2DRenderableDynamic(Texture2DFile *file, ParameterList &parameters, flc::Program *program);
 
   virtual ~Texture2DRenderableDynamic() = default;
 
@@ -55,7 +55,7 @@ public:
   void reload();
 
 private:
-  core::Program *mProgram;
+  flc::Program *mProgram;
 
   GLfloat mTimePassed;
   GLint mUniformLocationCacheTime;
@@ -64,8 +64,8 @@ private:
   void initUniformsCache();
 };
 
-} /* core */
-typedef std::shared_ptr<core::Texture2DRenderableDynamic> pTexture2DRenderableDynamic;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::Texture2DRenderableDynamic> pTexture2DRenderableDynamic;
+} /* flw */
 
 #endif /* TEXTURE2DRENDERABLEDYNAMIC_H_ */

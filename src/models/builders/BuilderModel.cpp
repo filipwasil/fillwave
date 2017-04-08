@@ -39,10 +39,10 @@
 #include <fillwave/Log.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-BuilderModel::BuilderModel(Engine *engine, std::string modelPath, core::Program *program)
+BuilderModel::BuilderModel(Engine *engine, std::string modelPath, flc::Program *program)
     : mEngine(engine), mProgram(program), mShapePath(modelPath) {
 }
 
@@ -55,10 +55,10 @@ BuilderModel &BuilderModel::setModelPath(std::string &path) {
   return *this;
 }
 
-BuilderModel &BuilderModel::setProgram(core::Program *program) {
+BuilderModel &BuilderModel::setProgram(flc::Program *program) {
   mProgram = program;
   return *this;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

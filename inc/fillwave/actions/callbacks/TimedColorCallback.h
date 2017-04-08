@@ -37,8 +37,8 @@
 #include <fillwave/models/Model.h>
 #include <fillwave/models/effects/Painter.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TimedColorCallback
  * \brief TimedCallback to change Entity color in time.
@@ -63,5 +63,5 @@ private:
   pPainter mPainter;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

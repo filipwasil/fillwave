@@ -35,8 +35,8 @@
 #include <fillwave/models/base/Material.h>
 #include <fillwave/models/animations/Conversion.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Material::Material()
     : mAmbient(0.1, 0.1, 0.1, 1.0), mDiffuse(1.0), mSpecular(1.0) {
@@ -77,5 +77,5 @@ const glm::vec4 &Material::getSpecular() const {
   return mSpecular;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

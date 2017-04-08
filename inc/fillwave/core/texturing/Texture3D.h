@@ -36,8 +36,8 @@
 
 #include <fillwave/core/texturing/Texture.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Texture3DFile
  * \brief Stores the single file info.
@@ -55,7 +55,7 @@ public:
   }
 };
 
-typedef std::unique_ptr<core::Texture3DFile> puTexture3DFile;
+typedef std::unique_ptr<flc::Texture3DFile> puTexture3DFile;
 
 /*! \class Texture3D
  * \brief Single GLSL 3D Texture object.
@@ -100,8 +100,8 @@ public:
       Texture2DFileData zn);
 };
 
-} /* core */
-typedef std::shared_ptr<core::Texture3D> pTexture3D;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::Texture3D> pTexture3D;
+} /* flw */
 
 #endif /* TEXTURE3D_H_ */

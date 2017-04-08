@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * VertexBuffer.h
  *
@@ -31,17 +33,14 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef VERTEXBUFFER_H_
-#define VERTEXBUFFER_H_
-
 #include <fillwave/core/buffers/IBuffer.h>
 #include <fillwave/core/pipeline/Attribute.h>
 #include <fillwave/models/shapes/Shape.h>
 
 #include <algorithm>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 class Attribute;
 
@@ -73,7 +72,7 @@ public:
     mSize = mTotalElements * sizeof(T);
   }
 
-  TVertexBuffer(framework::Shape<T> &shape, GLuint dataStoreModification = GL_STATIC_DRAW)
+  TVertexBuffer(flf::Shape<T> &shape, GLuint dataStoreModification = GL_STATIC_DRAW)
       : IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
     mDataVertices = shape.getVertices();
     mSize = mTotalElements * sizeof(T);
@@ -224,7 +223,5 @@ private:
   std::vector<Attribute> mAttributes;
 };
 
-} /* core */
-} /* fillwave */
-
-#endif /* VERTEXBUFFER_H_ */
+} /* flc */
+} /* flw */

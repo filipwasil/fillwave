@@ -34,8 +34,8 @@
 
 #include <fillwave/models/effects/Painter.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Painter::Painter(glm::vec4 color)
     : mColor(color) {
@@ -46,22 +46,22 @@ void Painter::setColor(glm::vec4 color) {
   mColor = color;
 }
 
-void Painter::preDrawAction(core::Program *program) {
+void Painter::preDrawAction(flc::Program *program) {
   program->uniformPush("uPainterEffect", true);
   program->uniformPush("uPainterColor", mColor);
 }
 
-void Painter::postDrawAction(core::Program *program) {
+void Painter::postDrawAction(flc::Program *program) {
   program->uniformPush("uPainterEffect", false);
 }
 
-void Painter::stopAction(core::Program *program) {
+void Painter::stopAction(flc::Program *program) {
   program->uniformPush("uPainterEffect", false);
 }
 
-void Painter::startAction(core::Program *program) {
+void Painter::startAction(flc::Program *program) {
   program->uniformPush("uPainterColor", mColor);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

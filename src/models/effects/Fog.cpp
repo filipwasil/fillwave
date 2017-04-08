@@ -35,31 +35,31 @@
 #include <fillwave/models/effects/Fog.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Fog::Fog(glm::vec3 colour, GLfloat near, GLfloat far)
     : mColour(colour), mNearDistance(near), mFarDistance(far) {
 }
 
-void Fog::preDrawAction(core::Program *program) {
+void Fog::preDrawAction(flc::Program *program) {
   program->uniformPush("uFogEffect", true);
 }
 
-void Fog::postDrawAction(core::Program *program) {
+void Fog::postDrawAction(flc::Program *program) {
   program->uniformPush("uFogEffect", false);
 }
 
-void Fog::stopAction(core::Program *program) {
+void Fog::stopAction(flc::Program *program) {
   program->uniformPush("uFogEffect", false);
 }
 
-void Fog::startAction(core::Program *program) {
+void Fog::startAction(flc::Program *program) {
   program->uniformPush("uFogEffect", true);
   program->uniformPush("uFogColor", mColour);
   program->uniformPush("uFogNearDistance", mNearDistance);
   program->uniformPush("uFogFarDistance", mFarDistance);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
