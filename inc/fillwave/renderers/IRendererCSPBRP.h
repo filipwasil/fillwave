@@ -39,8 +39,8 @@
 #include <vector>
 #include <unordered_map>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 class LightManager;
 
@@ -68,7 +68,7 @@ private:
 };
 
 }
-/* namespace framework */
-} /* namespace fillwave */
+/* namespace flf */
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_RENDERERS_IRENDERERCSPBRP_H_ */

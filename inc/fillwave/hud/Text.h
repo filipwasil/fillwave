@@ -42,7 +42,7 @@
 #include <fillwave/models/base/IReloadable.h>
 #include <map>
 
-namespace fillwave {
+namespace flw {
 class Engine;
 
 enum class eTextEffect {
@@ -50,7 +50,7 @@ enum class eTextEffect {
   , eBold
 };
 
-namespace framework {
+namespace flf {
 
 /*! \class Text
  * \brief 2D Text on the screen.
@@ -59,7 +59,7 @@ namespace framework {
 class Text : public IReloadable, public IHUDNode {
 public:
   Text(const std::string &text,
-      core::Texture2D *texture,
+      flc::Texture2D *texture,
       glm::vec2 position,
       Engine *engine,
       GLfloat scale,
@@ -87,14 +87,14 @@ private:
   glm::vec4 mColor;
   eTextEffect mEffect;
   Font *mFont;
-  core::VertexBufferText *mVBO;
+  flc::VertexBufferText *mVBO;
 
   /* IHUD */
   Engine *mEngine;
   GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
   GLint mViewportWidth, mViewportHeight;
 
-  core::Program *createProgram(Engine *engine, eTextEffect effect);
+  flc::Program *createProgram(Engine *engine, eTextEffect effect);
 
   void createVBO();
 
@@ -111,9 +111,9 @@ private:
   void initUniformsCache();
 };
 
-} /* framework */
-typedef std::shared_ptr<framework::Text> pText;
-typedef std::unique_ptr<framework::Text> puText;
-} /* fillwave */
+} /* flf */
+typedef std::shared_ptr<flf::Text> pText;
+typedef std::unique_ptr<flf::Text> puText;
+} /* flw */
 
 #endif /* TEXT_H_ */

@@ -35,10 +35,10 @@
 
 #include <fillwave/core/texturing/Sampler.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-typedef TCache <FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Sampler, GLint, GLint> CacheSamplers;
+typedef TCache <FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Sampler, GLint, GLint> CacheSamplers;
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

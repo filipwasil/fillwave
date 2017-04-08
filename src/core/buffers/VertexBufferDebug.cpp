@@ -34,8 +34,8 @@
 
 #include <fillwave/core/buffers/VertexBufferDebug.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 VertexBufferDebug::VertexBufferDebug(GLfloat) {
 
@@ -87,5 +87,5 @@ void VertexBufferDebug::log() const {
 
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

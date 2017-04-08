@@ -33,8 +33,8 @@
 
 #include <fillwave/actions/callbacks/TimedCallback.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 TimedCallback::TimedCallback(GLfloat timeToFinish, EasingFunction easing)
     : Callback(eEventType::eTime, timeToFinish), mEasing(easing) {
@@ -54,5 +54,5 @@ GLfloat TimedCallback::ease(GLfloat progress) {
   return mEasing(progress);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

@@ -37,18 +37,18 @@
 #include <fillwave/models/shapes/Quad.h>
 #include <fillwave/core/buffers/VertexBufferPosition.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class BoxOcclusion
  * \brief Basic Shape for specific usage, providing each model to participate in OQ algorithm
  */
 
-class BoxOcclusion : public Shape<core::VertexPosition> {
+class BoxOcclusion : public Shape<flc::VertexPosition> {
 public:
   BoxOcclusion(GLfloat quadSize = 1.0f)
       : mSize(quadSize), mQuad(quadSize) {
-    std::vector<core::VertexBasic> quadVertices = mQuad.getVertices();
+    std::vector<flc::VertexBasic> quadVertices = mQuad.getVertices();
     std::vector<glm::vec3> vertVertices;
 
     mVertices.resize(36);
@@ -106,7 +106,7 @@ private:
   Quad mQuad;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* BOXOCCLUSION_H_ */

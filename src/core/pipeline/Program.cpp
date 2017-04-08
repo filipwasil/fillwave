@@ -41,10 +41,10 @@ FLOGINIT("Program", FERROR | FFATAL | FINFO | FDEBUG)
 
 using namespace std;
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
-Program::Program(const std::vector<core::Shader *> &shaders, GLboolean skipLinking)
+Program::Program(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking)
     : mDelayedLinking(skipLinking), mShaders(shaders) {
   reload();
 }
@@ -58,14 +58,14 @@ Program::~Program() {
   fLogC("Delete program");
 }
 
-void Program::attach(core::Shader *shader) {
+void Program::attach(flc::Shader *shader) {
   if (mHandle) {
     glAttachShader(mHandle, shader->getHandle());
     fLogC("attach shader %d to program %d", shader->getHandle(), mHandle);
   }
 }
 
-void Program::detach(core::Shader *shader) {
+void Program::detach(flc::Shader *shader) {
   if (mHandle) {
     glDetachShader(mHandle, shader->getHandle());
     fLogC("detach shader");
@@ -339,8 +339,8 @@ void Program::reload() {
   }
   fLogC("Program linking failed");
 }
-} /* core */
-core::Program *buildProgram(const std::vector<core::Shader *> &shaders, GLboolean skipLinking) {
-  return new core::Program(shaders, skipLinking);
+} /* flc */
+flc::Program *buildProgram(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking) {
+  return new flc::Program(shaders, skipLinking);
 }
-} /* fillwave */
+} /* flw */

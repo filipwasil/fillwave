@@ -36,13 +36,13 @@
 #include <fillwave/Fillwave.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Impostor::Impostor(Engine *engine,
     GLfloat lifetime,
     GLfloat size,
-    core::Texture *texture,
+    flc::Texture *texture,
     GLenum blendingSource,
     GLenum blendingDestination)
     : Finishable(lifetime), mTexture(texture), mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)), mSize(size) {
@@ -59,7 +59,7 @@ void Impostor::coreDraw() {
   glBlendFunc(mBlending.mSrc, mBlending.mDst);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   glDisable(GL_BLEND);
-  core::Texture2D::unbind2DTextures();
+  flc::Texture2D::unbind2DTextures();
 }
 
 bool Cursor::getRenderItem(RenderItem &item) {
@@ -80,5 +80,5 @@ bool Cursor::getRenderItem(RenderItem &item) {
   return true;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

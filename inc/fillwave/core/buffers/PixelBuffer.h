@@ -36,8 +36,8 @@
 
 #include <fillwave/core/buffers/IBuffer.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class PixelBuffer
  * \brief PixelBufferObject - PBO. Used to read pixels from FBO.
@@ -63,8 +63,8 @@ public:
   void emptyGPU() override;
 };
 
-} /* core */
-typedef std::unique_ptr<core::PixelBuffer> puPixelBuffer;
-} /* fillwave */
+} /* flc */
+typedef std::unique_ptr<flc::PixelBuffer> puPixelBuffer;
+} /* flw */
 
 #endif /* PIXELBUFFER_H_ */
