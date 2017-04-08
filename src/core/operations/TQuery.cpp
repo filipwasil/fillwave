@@ -37,8 +37,8 @@
 
 FLOGINIT("Query", FERROR | FFATAL | FINFO)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 template <GLenum target>
 TQuery<target>::TQuery(GLsizei howMany)
@@ -137,5 +137,5 @@ class TQuery<GL_TIME_ELAPSED>;
 
 #endif
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

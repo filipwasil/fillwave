@@ -38,8 +38,8 @@
 #include <fillwave/core/texturing/Parameter.h>
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Sampler
  * \brief SamplerObject - SO.
@@ -68,7 +68,7 @@ private:
   GLint mTextureUnit;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* SAMPLER_H_ */

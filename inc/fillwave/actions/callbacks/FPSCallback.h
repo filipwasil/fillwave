@@ -37,9 +37,9 @@
 #include <fillwave/actions/events/TimeEvent.h>
 #include <fillwave/hud/Text.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class FPSCallback
  * \brief ItemCallback to display and refresh FPS as a renderable text.
@@ -59,5 +59,5 @@ private:
   Engine *mEngine;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

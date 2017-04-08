@@ -34,8 +34,8 @@
 #ifndef KEY_H_
 #define KEY_H_
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Key
  * \brief Base for all animation keys.
@@ -54,7 +54,7 @@ public:
   virtual ~Key() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* KEY_H_ */

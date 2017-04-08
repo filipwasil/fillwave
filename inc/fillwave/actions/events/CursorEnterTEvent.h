@@ -10,8 +10,8 @@
 
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \struct CursorEnterEventData
  * \brief Event data structure to store the CursorEntered/CursorLeaved data.
@@ -36,7 +36,7 @@ public:
   virtual ~CursorEnterEvent() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* CURSORENTEREVENT_H_ */

@@ -31,7 +31,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/renderers/RendererDR.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/loaders/ProgramLoader.h>
@@ -44,28 +43,36 @@
 
 FLOGINIT_DEFAULT()
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
-    : mScreenSize(engine->getScreenSize()), mLights(engine->getLightSystem()), mTextures(engine->getTextureSystem())
-    , mProgramMain(loader.getDefaultDR()), mProgramMainAnimated(loader.getDefaultBonesDR()), mProgramDirecionalLight(
-        loader.getDRDirectionalLights()), mProgramSpotLight(loader.getDRSpotLights())
-    , mProgramPointLight(loader.getDRPointLights()), mProgramDepthless(loader.getDRDepthless())
-    , mProgramAmbient(loader.getDRAmbient()), mProgramAOGeometry(loader.getAmbientOcclusionGeometry()), mProgramAOColor(
-        loader.getAmbientOcclusionColor()), mAOGeometryBuffer(engine->storeTextureRenderable())
-    , mAOColorBuffer(engine->storeTextureRenderable()), mIsAO(GL_FALSE), mDeferredColorAttachments(5)
-    , mDeferredDepthAttachments(1), mGBuffer(std::make_unique<core::FramebufferGeometry>(mTextures,
-                                                                                         mScreenSize[0],
-                                                                                         mScreenSize[1],
-                                                                                         mDeferredColorAttachments,
-                                                                                         mDeferredDepthAttachments)) {
-
-  framework::Sphere sphere(3.0f, 10.0f, 10.0f); // xxx hardcoded values fix ! todo !
-  std::vector<core::VertexBasic> vertices = sphere.getVertices();
+    : mScreenSize(engine->getScreenSize())
+    , mLights(engine->getLightSystem())
+    , mTextures(engine->getTextureSystem())
+    , mProgramMain(loader.getDefaultDR())
+    , mProgramMainAnimated(loader.getDefaultBonesDR())
+    , mProgramDirecionalLight(loader.getDRDirectionalLights())
+    , mProgramSpotLight(loader.getDRSpotLights())
+    , mProgramPointLight(loader.getDRPointLights())
+    , mProgramDepthless(loader.getDRDepthless())
+    , mProgramAmbient(loader.getDRAmbient())
+    , mProgramAOGeometry(loader.getAmbientOcclusionGeometry())
+    , mProgramAOColor(loader.getAmbientOcclusionColor())
+    , mAOGeometryBuffer(engine->storeTextureRenderable())
+    , mAOColorBuffer(engine->storeTextureRenderable())
+    , mIsAO(GL_FALSE), mDeferredColorAttachments(5)
+    , mDeferredDepthAttachments(1)
+    , mGBuffer(std::make_unique<flc::FramebufferGeometry>(mTextures,
+                                                          mScreenSize[0],
+                                                          mScreenSize[1],
+                                                          mDeferredColorAttachments,
+                                                          mDeferredDepthAttachments)) {
+  flf::Sphere sphere(3.0f, 10, 10); //xxx hardcoded values fix ! todo !
+  std::vector<flc::VertexBasic> vertices = sphere.getVertices();
   std::vector<GLuint> indices = sphere.getIndices();
 
-  core::VertexArray *vao = new core::VertexArray();
+  flc::VertexArray *vao = new flc::VertexArray();
   mDeferredPointLight = std::make_unique<Mesh>(engine,
                                                Material(),
                                                nullptr,
@@ -78,8 +85,8 @@ RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
                                                nullptr,
                                                nullptr,
                                                mLights,
-                                               engine->storeBuffer<core::VertexBufferBasic>(vao, vertices),
-                                               engine->storeBuffer<core::IndexBuffer>(vao, indices),
+                                               engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices),
+                                               engine->storeBuffer<flc::IndexBuffer>(vao, indices),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
                                                nullptr,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
@@ -91,7 +98,7 @@ RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
   initGeometryShading();
   initUniformsCache();
 
-  reset(mScreenSize[0], mScreenSize[1]);
+  reset(mScreenSize.x, mScreenSize.y);
 }
 
 void RendererDR::update(IRenderable *renderable) {
@@ -109,27 +116,31 @@ void RendererDR::draw(ICamera &camera) {
 }
 
 void RendererDR::reset(GLuint width, GLuint height) {
-
   mFlagReload = true;
 
-  mScreenSize = glm::vec2(width, height);
+  mScreenSize = {
+      width,
+      height
+  };
 
-  mGBuffer->resize(mScreenSize[0], mScreenSize[1]);
+  mGBuffer->resize(width, height);
+
+  const glm::vec2 screenSizeF(mScreenSize);
 
   mProgramSpotLight->use();
-  core::Uniform::push(mULCScreenSizeSpot, glm::vec2(mScreenSize[0], mScreenSize[1]));
+  flc::Uniform::push(mULCScreenSizeSpot, screenSizeF);
 
   mProgramDirecionalLight->use();
-  core::Uniform::push(mULCScreenSizeDirectional, glm::vec2(mScreenSize[0], mScreenSize[1]));
+  flc::Uniform::push(mULCScreenSizeDirectional, screenSizeF);
 
   mProgramPointLight->use();
-  core::Uniform::push(mULCScreenSizePoint, glm::vec2(mScreenSize[0], mScreenSize[1]));
+  flc::Uniform::push(mULCScreenSizePoint, screenSizeF);
 
   mProgramDepthless->use();
-  core::Uniform::push(mULCDRScreenSize, glm::vec2(mScreenSize[0], mScreenSize[1]));
+  flc::Uniform::push(mULCDRScreenSize, screenSizeF);
 
   mProgramAmbient->use();
-  core::Uniform::push(mULCDRAScreenSize, glm::vec2(mScreenSize[0], mScreenSize[1]));
+  flc::Uniform::push(mULCDRAScreenSize, screenSizeF);
 }
 
 void RendererDR::clear() {
@@ -234,8 +245,8 @@ inline void RendererDR::drawLightsSpotPass(ICamera &camera, GLint &textureUnit) 
     mProgramSpotLight->use();
     mLights->updateDeferredBufferSpot(i, mProgramSpotLight, textureUnit++);
 
-    core::Uniform::push(mULCCameraPositionSpot, camera.getTranslation());
-    core::Uniform::push(mULCIsAOSpot, mIsAO ? 1 : 0);
+    flc::Uniform::push(mULCCameraPositionSpot, camera.getTranslation());
+    flc::Uniform::push(mULCIsAOSpot, mIsAO ? 1 : 0);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   }
 }
@@ -246,8 +257,8 @@ inline void RendererDR::drawLightsDirectionalPass(ICamera &camera, GLint &textur
     mProgramDirecionalLight->use();
     mLights->updateDeferredBufferDirectional(i, mProgramDirecionalLight, textureUnit++);
 
-    core::Uniform::push(mULCCameraPositionDirectional, camera.getTranslation());
-    core::Uniform::push(mULCIsAODirectional, mIsAO ? 1 : 0);
+    flc::Uniform::push(mULCCameraPositionDirectional, camera.getTranslation());
+    flc::Uniform::push(mULCIsAODirectional, mIsAO ? 1 : 0);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   }
 }
@@ -276,15 +287,15 @@ inline void RendererDR::drawLightsPointPass(ICamera &camera, GLint &textureUnit)
     mProgramPointLight->use();
     mLights->updateDeferredBufferPoint(i, mProgramPointLight, textureUnit++);
 
-    core::Uniform::push(mULCCameraPositionPoint, camera.getTranslation());
-    core::Uniform::push(mULCMVPPoint,
+    flc::Uniform::push(mULCCameraPositionPoint, camera.getTranslation());
+    flc::Uniform::push(mULCMVPPoint,
                         camera.getViewProjection() *
                         glm::translate(glm::mat4(1.0), mLights->mLightsPoint[i]->getTranslation()));
 
-    core::Uniform::push(mULCIsAOPoint, mIsAO ? 1 : 0);
+    flc::Uniform::push(mULCIsAOPoint, mIsAO ? 1 : 0);
 //xxx      if runtime changing is not needed
 //      if (mIsAO) {
-//         core::Uniform::push(mULCIsAOPoint, 1);
+//         flc::Uniform::push(mULCIsAOPoint, 1);
 //      }
 
     mDeferredPointLight->drawFast(camera);
@@ -410,8 +421,8 @@ inline void RendererDR::initGeometryShading() {
 }
 
 inline void RendererDR::drawDebug() {
-  GLuint w = mScreenSize[0];
-  GLuint h = mScreenSize[1];
+  GLuint w = static_cast<GLuint>(mScreenSize[0]);
+  GLuint h = static_cast<GLuint>(mScreenSize[1]);
   GLuint debugAttachmentScreens[4][4] = {{0,     0,     w / 2, h / 2}, // position
                                          {0,     h / 2, w / 2, h},     // color
                                          {w / 2, h / 2, w,     h}, // normal
@@ -426,7 +437,7 @@ inline void RendererDR::drawDebug() {
     debugAttachmentScreens[i][3] = (debugAttachmentScreens[i][3] + h) / 2;
   }
 
-  core::Framebuffer::bindScreenFramebufferForWriting();
+  flc::Framebuffer::bindScreenFramebufferForWriting();
   for (GLuint i = 0; i < mDeferredColorAttachments; i++) {
     mGBuffer->bindForReading(); /* We will bind GBuffer for reading ...*/
     mGBuffer->setReadColorAttachment(i); /* ... and take color attachment color i 0 (out location 0 from fragment shader) ... */
@@ -441,10 +452,10 @@ inline void RendererDR::drawDebug() {
                       GL_COLOR_BUFFER_BIT,
                       GL_LINEAR); /* ... to finally copy it into main framebuffer */
   }
-  core::Framebuffer::bindScreenFramebuffer();
+  flc::Framebuffer::bindScreenFramebuffer();
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* defined(FILLWAVE_GLES_3_0) */

@@ -37,8 +37,8 @@
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/effects/Effect.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Programmable
  * \brief Entity for which is it possible to add/remove Effect objects.
@@ -46,7 +46,7 @@ namespace framework {
 
 class Programmable : public Entity {
 public:
-  Programmable(core::Program *program);
+  Programmable(flc::Program *program);
 
   virtual ~Programmable() = default;
 
@@ -70,12 +70,12 @@ public:
   void drawWithEffectsPBRP(ICamera &camera);
 
 protected:
-  core::Program *mProgram;
+  flc::Program *mProgram;
 
   std::vector<pIEffect> mEffects;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* SRC_MODELS_PROGRAMMABLE_H_ */

@@ -41,8 +41,8 @@
 
 FLOGINIT_DEFAULT()
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 IRendererCSPBRP::IRendererCSPBRP(LightManager *lightManager)
     : mLightManager(lightManager) {
@@ -69,7 +69,7 @@ void IRendererCSPBRP::draw(ICamera &camera) {
   }
   glClear(GL_DEPTH_BUFFER_BIT);
   for (auto &program : mRenderPasses) {
-    core::Program::useProgram(program.first);
+    flc::Program::useProgram(program.first);
 // 	Light manager supports only Fillwave programs
 //		mLightManager->pushLightUniforms(mProgram.get());
 //		mLightManager->bindShadowmaps();
@@ -81,21 +81,21 @@ void IRendererCSPBRP::draw(ICamera &camera) {
 //				uniform update todo
 
         if (renderItem.mStatus.bVAO) {
-          core::bindVAO(renderItem.mHandles[RenderItem::eRenderHandleVAO]);
+          flc::bindVAO(renderItem.mHandles[RenderItem::eRenderHandleVAO]);
         }
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
         if (renderItem.mStatus.bDiffuse) {
-          core::bindTexture(GL_TEXTURE_2D,
+          flc::bindTexture(GL_TEXTURE_2D,
                             aiTextureType_DIFFUSE,
                             renderItem.mHandles[RenderItem::eRenderHandleDiffuse]);
         }
 
         if (renderItem.mStatus.bNormal) {
-          core::bindTexture(GL_TEXTURE_2D, aiTextureType_NORMALS, renderItem.mHandles[RenderItem::eRenderHandleNormal]);
+          flc::bindTexture(GL_TEXTURE_2D, aiTextureType_NORMALS, renderItem.mHandles[RenderItem::eRenderHandleNormal]);
         }
 
         if (renderItem.mStatus.bSpecular) {
-          core::bindTexture(GL_TEXTURE_2D,
+          flc::bindTexture(GL_TEXTURE_2D,
                             aiTextureType_SPECULAR,
                             renderItem.mHandles[RenderItem::eRenderHandleSpecular]);
         }
@@ -110,9 +110,9 @@ void IRendererCSPBRP::draw(ICamera &camera) {
 
         fLogC("Draw failed");
 
-        renderItem.mStatus.bVAO ? core::VertexArray::unbindVAO() : (void) 0;
+        renderItem.mStatus.bVAO ? flc::VertexArray::unbindVAO() : (void) 0;
 
-        core::Texture2D::unbind2DTextures();
+        flc::Texture2D::unbind2DTextures();
       }
     }
   }
@@ -129,5 +129,5 @@ void IRendererCSPBRP::clear() {
   mRenderPasses.reserve(predictedSize);
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

@@ -37,9 +37,9 @@
 #include <fillwave/core/buffers/VertexArray.h>
 #include <fillwave/core/texturing/Sampler.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class IReloadable
  * \brief Encapsulates reloadable objects.
@@ -47,7 +47,7 @@ namespace framework {
 
 class IReloadable {
 public:
-  IReloadable(Engine *engine, core::VertexArray * = nullptr);
+  IReloadable(Engine *engine, flc::VertexArray * = nullptr);
 
   virtual ~IReloadable() = default;
 
@@ -64,11 +64,11 @@ public:
   void reload();
 
 protected:
-  core::VertexArray *mVAO;
-  core::Sampler *mSampler;
+  flc::VertexArray *mVAO;
+  flc::Sampler *mSampler;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* INC_FILLWAVE_MODELS_RELOADABLE_H_ */

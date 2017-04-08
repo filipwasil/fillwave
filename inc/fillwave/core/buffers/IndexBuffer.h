@@ -38,8 +38,8 @@
 #include <fillwave/Assets.h>
 #include <vector>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class IndexBuffer
  * \brief IndexBufferObject - IBO.
@@ -70,6 +70,6 @@ protected:
   std::vector<GLuint> mDataIndices;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 #endif /* INDEXBUFFER_H_ */

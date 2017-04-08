@@ -38,8 +38,8 @@
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/models/animations/Animation.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 class Channel;
 
@@ -67,11 +67,11 @@ public:
  * \brief Manager to handle Bone objects in animation.
  */
 
-class Animator {
+class Animator final {
 public:
   Animator(const aiScene *shape);
 
-  virtual ~Animator();
+  ~Animator();
 
   Bone *get(GLuint id);
 
@@ -121,7 +121,7 @@ private:
   std::vector<glm::mat4> mAnimationsBufferData;
 };
 
-} /* framework */
+} /* flf */
 } /* fillwave*/
 
 #endif /* BONEMANAGER_H_ */

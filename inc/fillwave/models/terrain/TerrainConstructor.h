@@ -36,8 +36,8 @@
 
 #include <fillwave/OpenGL.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TerrainConstructor
  * \brief Implements height map calculation function.
@@ -52,7 +52,7 @@ public:
   virtual GLfloat calculateHeight(GLfloat x, GLfloat z) = 0;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* SRC_TERRAIN_TERRAINCONSTRUCTOR_H_ */

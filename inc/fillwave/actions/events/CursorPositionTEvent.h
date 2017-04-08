@@ -10,8 +10,8 @@
 
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \struct CursorPositionEventData
  * \brief Event data structure to store the cursor position.
@@ -37,7 +37,7 @@ public:
   virtual ~CursorPositionEvent() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* CURSORPOSITIONEVENT_H_ */
