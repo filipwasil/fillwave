@@ -39,8 +39,8 @@
 
 FLOGINIT("Animator", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 AssimpNode::AssimpNode(aiNode *node)
     : mTransformation(assimpToGlmMat4(node->mTransformation)), mName(node->mName.C_Str()) {
@@ -188,7 +188,7 @@ void Animator::updateBonesBuffer() {
 }
 
 void Animator::updateBonesUniform(GLint uniformLocationBones) {
-  core::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(), FILLWAVE_MAX_BONES);
+  flc::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(), FILLWAVE_MAX_BONES);
 }
 
 void Animator::log() {
@@ -313,5 +313,5 @@ GLint Animator::getElements() const {
   return mBones.size();
 }
 
-} /* framework */
+} /* flf */
 } /* fillwave*/

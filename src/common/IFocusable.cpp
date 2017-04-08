@@ -5,8 +5,8 @@
 #include <fillwave/common/IFocusable.h>
 #include <fillwave/Fillwave.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 IFocusable::IFocusable(Engine *engine)
     : mEngine(engine) {

@@ -37,7 +37,7 @@
 #include <fillwave/Math.h>
 #include <fillwave/Assets.h>
 
-namespace fillwave {
+namespace flw {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
@@ -57,6 +57,6 @@ glm::vec4 floatsToGlmVec4(const float* in);
 
 #endif
 
-} /* fillwave */
+} /* flw */
 
 #endif /* CONVERSION_H_ */

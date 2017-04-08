@@ -36,8 +36,8 @@
 
 #include <fillwave/space/base/ICamera.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class CullingBox
  * \brief Stores culling box parameters for Orthographic projection.
@@ -77,8 +77,8 @@ private:
 
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::CameraOrthographic> puCameraOrthographic;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::CameraOrthographic> puCameraOrthographic;
+} /* flw */
 
 #endif /* CAMERAOrthographic_H_ */

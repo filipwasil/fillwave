@@ -36,8 +36,8 @@
 
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \struct ResizeScreenEventData
  * \brief Event data structure to store the new windows size.
@@ -63,7 +63,7 @@ public:
   virtual ~ResizeScreenEvent() = default;
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_ACTIONS_EVENTS_RESIZESCREENTEVENT_H_ */

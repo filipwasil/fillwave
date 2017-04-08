@@ -36,8 +36,8 @@
 
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \struct ScrollEventData
  * \brief Event data structure to store the parameters of scrolling action.
@@ -62,7 +62,7 @@ public:
   virtual ~ScrollEvent() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* SCROLLEVENT_H_ */

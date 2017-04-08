@@ -29,8 +29,8 @@
 #ifndef LIBFILLWAVE_IOBSERVER_H
 #define LIBFILLWAVE_IOBSERVER_H
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 class Observable;
 
 /*! \class IObserver

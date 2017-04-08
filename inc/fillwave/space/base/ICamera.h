@@ -37,8 +37,8 @@
 #include <fillwave/models/base/Moveable.h>
 #include <memory>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class ICamera
  * \brief Stores camera view parameters.
@@ -77,8 +77,8 @@ protected:
   GLboolean mRefreshView;
   GLboolean mRefreshProjection;
 };
-} /* framework */
-typedef std::unique_ptr<framework::ICamera> puICamera;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::ICamera> puICamera;
+} /* flw */
 
 #endif /* CAMERA_H_ */

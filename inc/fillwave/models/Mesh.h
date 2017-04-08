@@ -45,16 +45,16 @@
 #include <fillwave/models/base/IReloadable.h>
 #include <fillwave/renderers/IRenderer.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
 
-namespace framework {
+namespace flf {
 class Animator;
 
 class LightSystem;
 }
 
-namespace framework {
+namespace flf {
 
 /*! \class Mesh
  * \brief Basic drawable Entity.
@@ -63,23 +63,23 @@ class Mesh : public Entity, public IReloadable {
 public:
   Mesh(Engine *engine,
       const Material &material,
-      core::Texture2D *diffuseMap,
-      core::Texture2D *normalMap,
-      core::Texture2D *specularMap,
-      core::Program *program,
-      core::Program *ProgramShadow,
-      core::Program *programShadowColor,
-      core::Program *programOcclusion,
-      core::Program *programAmbientOcclusionGeometry,
-      core::Program *programAmbientOcclusionColor,
+      flc::Texture2D *diffuseMap,
+      flc::Texture2D *normalMap,
+      flc::Texture2D *specularMap,
+      flc::Program *program,
+      flc::Program *ProgramShadow,
+      flc::Program *programShadowColor,
+      flc::Program *programOcclusion,
+      flc::Program *programAmbientOcclusionGeometry,
+      flc::Program *programAmbientOcclusionColor,
       LightSystem *lights = nullptr,
-      core::VertexBufferBasic *vbo = nullptr,
-      core::IndexBuffer *ibo = nullptr,
+      flc::VertexBufferBasic *vbo = nullptr,
+      flc::IndexBuffer *ibo = nullptr,
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
       Animator *animator = nullptr,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
       GLenum renderMode = GL_TRIANGLES,
-      core::VertexArray *vao = nullptr);
+      flc::VertexArray *vao = nullptr);
 
   virtual ~Mesh() = default;
 
@@ -115,13 +115,13 @@ public:
 
 protected:
   Material mMaterial;
-  core::Texture2D *mDiffuseMap, *mNormalMap, *mSpecularMap;
-  core::Program *mProgram, *mProgramShadow, *mProgramShadowColor, *mProgramOQ, *mProgramAOGeometry, *mProgramAOColor;
+  flc::Texture2D *mDiffuseMap, *mNormalMap, *mSpecularMap;
+  flc::Program *mProgram, *mProgramShadow, *mProgramShadowColor, *mProgramOQ, *mProgramAOGeometry, *mProgramAOColor;
   GLenum mRenderMode;
 
   /* Buffers */
-  core::IndexBuffer *mIBO;
-  core::VertexBufferBasic *mVBO;
+  flc::IndexBuffer *mIBO;
+  flc::VertexBufferBasic *mVBO;
 
   /* Light */
   LightSystem *mLights;
@@ -131,13 +131,13 @@ protected:
 
   /* Occlusion cut off */
   glm::mat4 mOcclusionMatrix;
-  core::QueryIfAnySamplesPassed mOcclusionQuery;
+  flc::QueryIfAnySamplesPassed mOcclusionQuery;
 //   puFence mFence;
 
 #ifdef FILLWAVE_GLES_3_0
 #else
-//   core::QueryTimeElapsed mTimeQuery;
-  core::ConditionalRender mConditionalRendering;
+//   flc::QueryTimeElapsed mTimeQuery;
+  flc::ConditionalRender mConditionalRendering;
 #endif
 
 private:
@@ -165,8 +165,8 @@ private:
   void coreDraw();
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Mesh> puMesh;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Mesh> puMesh;
+} /* flw */
 
 #endif /* MODELOBJ_H_ */

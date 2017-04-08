@@ -37,8 +37,8 @@
 
 FLOGINIT("TransformFeedback", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 TransformFeedback::TransformFeedback(GLsizei howMany)
     : GLObject(howMany), mTarget(GL_TRANSFORM_FEEDBACK) {
@@ -79,5 +79,5 @@ void TransformFeedback::resume() {
   glResumeTransformFeedback();
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

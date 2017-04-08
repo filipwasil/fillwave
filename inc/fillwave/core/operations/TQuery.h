@@ -36,8 +36,8 @@
 
 #include <fillwave/core/GLObject.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class TQuery
  * \brief GLObject to ask OpenGL questions.
@@ -83,7 +83,7 @@ typedef TQuery<GL_TIME_ELAPSED> QueryTimeElapsed;
 
 #endif
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* INC_FILLWAVE_CORE_QUERY_H_ */

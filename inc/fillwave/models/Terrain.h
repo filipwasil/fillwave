@@ -36,9 +36,9 @@
 
 #include <fillwave/models/terrain/VoxelChunk.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 #define FILLWAVE_VOXEL_CHUNK_SIZE 16
 #define FILLWAVE_QUAD_CHUNK_SIZE 16
@@ -49,7 +49,7 @@ namespace framework {
 
 class Terrain : public Entity {
 public:
-  Terrain(Engine *engine, core::Program *program, GLint radius, GLfloat gap);
+  Terrain(Engine *engine, flc::Program *program, GLint radius, GLfloat gap);
 
   virtual ~Terrain() = default;
 
@@ -71,20 +71,20 @@ protected:
   void updateRendererData();
 
 private:
-  core::Program *mProgram;
+  flc::Program *mProgram;
   LightSystem *mLights;
   GLint mRadius;
   GLfloat mGap;
   std::vector<pVoxelChunk> mVoxelChunks;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Terrain> puTerrain;
+} /* flf */
+typedef std::unique_ptr<flf::Terrain> puTerrain;
 
 puTerrain buildTerrainVoxel(Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     const std::string &texturePath,
-    framework::VoxelConstructor *constructor,
+    flf::VoxelConstructor *constructor,
     GLint radius = 0);
 
 } /* fillwave*/

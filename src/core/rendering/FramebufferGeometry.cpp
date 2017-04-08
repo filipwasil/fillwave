@@ -38,13 +38,13 @@
 
 FLOGINIT("FramebufferGeometry", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 class TextureManager;
 }
-namespace core {
+namespace flc {
 
-FramebufferGeometry::FramebufferGeometry(framework::TextureSystem *textures,
+FramebufferGeometry::FramebufferGeometry(flf::TextureSystem *textures,
     GLuint width,
     GLuint height,
     GLuint colorBuffers,
@@ -155,5 +155,5 @@ void FramebufferGeometry::reload() {
   bindScreenFramebufferForWriting();
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

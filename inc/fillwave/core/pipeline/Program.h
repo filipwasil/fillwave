@@ -44,24 +44,24 @@
 
 class Attribute;
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Program
  * \brief Single GLSL program object.
  */
 class Program {
 public:
-  Program(const std::vector<core::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
+  Program(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
 
   virtual ~Program();
 
   void link();
 
   /* Shaders */
-  void attach(core::Shader *shader);
+  void attach(flc::Shader *shader);
 
-  void detach(core::Shader *shader);
+  void detach(flc::Shader *shader);
 
   void use() const;
 
@@ -112,13 +112,13 @@ private:
   std::vector<Uniform> mUniforms;
   std::vector<puUniformBuffer> mUnifromBuffers;
   GLboolean mDelayedLinking;
-  std::vector<core::Shader *> mShaders;
+  std::vector<flc::Shader *> mShaders;
 
   void getUniforms();
 };
 
-} /* core */
-typedef std::unique_ptr<core::Program> puProgram;
+} /* flc */
+typedef std::unique_ptr<flc::Program> puProgram;
 
-core::Program *buildProgram(const std::vector<core::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
-} /* fillwave */
+flc::Program *buildProgram(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
+} /* flw */

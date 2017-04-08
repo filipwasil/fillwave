@@ -37,8 +37,8 @@
 
 FLOGINIT("TimedBoneUpdateCallback", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 TimedBoneUpdateCallback::TimedBoneUpdateCallback(Model *model)
     : TimedCallback(0.0), mModel(model) {
@@ -49,5 +49,5 @@ void TimedBoneUpdateCallback::performTime(TimeEventData &data) {
   mModel->performAnimation(data.mTimePassed);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
