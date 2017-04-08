@@ -37,8 +37,8 @@
 #include <fillwave/models/base/RenderItem.h>
 #include <fillwave/models/base/IDrawable.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 class IRenderer;
 
@@ -57,7 +57,7 @@ public:
   virtual void updateRenderer(IRenderer &renderer) = 0;
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_MODELS_BASE_IRENDERABLE_H_ */

@@ -38,11 +38,11 @@
 #include <fillwave/Log.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Text::Text(const std::string &text,
-    core::Texture2D *texture,
+    flc::Texture2D *texture,
     glm::vec2 position,
     Engine *engine,
     GLfloat scale,
@@ -74,7 +74,7 @@ void Text::draw() {
   glDisable(GL_BLEND);
 
   mTexture->unbind();
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 inline void Text::clearVBO() {
@@ -90,8 +90,8 @@ void Text::editString(std::string text) {
 void Text::editColor(glm::vec4 color) {
   mColor = color;
   mProgram->use();
-  core::Uniform::push(mUniformLocationCacheColor, mColor);
-  core::Program::disusePrograms();
+  flc::Uniform::push(mUniformLocationCacheColor, mColor);
+  flc::Program::disusePrograms();
 }
 
 void Text::editSize(GLfloat size) { //xxx optimize
@@ -130,8 +130,8 @@ void Text::createVBO() {
     int atlas_col = (ascii_code - ' ') % mFont->mAtlasColumns;
     int atlas_row = (ascii_code - ' ') / mFont->mAtlasColumns;
 
-    GLfloat s = atlas_col * (1.0 / mFont->mAtlasColumns);
-    GLfloat t = (atlas_row + 1) * (1.0 / mFont->mAtlasRows);
+    GLfloat s = atlas_col * (1.0f / mFont->mAtlasColumns);
+    GLfloat t = (atlas_row + 1) * (1.0f / mFont->mAtlasRows);
 
     GLfloat x_pos = mPosition.x;
     GLfloat y_pos = mPosition.y - mScale.x / mViewportHeight * mFont->mOffsets[ascii_code];
@@ -172,13 +172,13 @@ void Text::createVBO() {
   mPosition.x = tmpStartingX;
 
 
-  mVBO = mEngine->storeBuffer<core::VertexBufferText>(mVAO, points_tmp, texcoords_tmp);
+  mVBO = mEngine->storeBuffer<flc::VertexBufferText>(mVAO, points_tmp, texcoords_tmp);
 
   initVBO();
   initVAO();
 }
 
-inline core::Program *Text::createProgram(Engine *engine, eTextEffect effect) {
+inline flc::Program *Text::createProgram(Engine *engine, eTextEffect effect) {
   switch (effect) {
     case eTextEffect::eBold:
       return ProgramLoader(engine).getTextBold();
@@ -196,7 +196,7 @@ inline void Text::initPipeline() {
   mProgram->use();
   mProgram->uniformPush("uColour", mColor);
   mProgram->uniformPush("uTextureUnit", FILLWAVE_DIFFUSE_UNIT);
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 inline void Text::initUniformsCache() {
@@ -210,12 +210,12 @@ inline void Text::initVAO() {
   mVBO->setLoaded(GL_FALSE);
   mVBO->send();
   mVBO->attributesSetForVAO();
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 inline void Text::initVBO() {
   mVBO->initAttributes(mProgram->getHandle());
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

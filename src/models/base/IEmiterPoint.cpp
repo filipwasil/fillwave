@@ -38,14 +38,14 @@
 
 FLOGINIT("Emiter", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 IEmiterPoint::IEmiterPoint(Engine *engine,
     GLuint howMany,
     GLfloat size,
     GLfloat lifetime,
-    core::Texture *texture,
+    flc::Texture *texture,
     glm::vec4 color,
     GLenum blendingSource,
     GLenum blendingDestination,
@@ -76,5 +76,5 @@ void IEmiterPoint::updateRenderer(IRenderer &renderer) {
   renderer.update(this);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

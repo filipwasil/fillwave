@@ -37,8 +37,8 @@
 
 FLOGINIT("VertexBufferText", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 VertexBufferText::VertexBufferText(const std::vector<GLfloat> &positions,
     const std::vector<GLfloat> &textureCoords,
@@ -75,5 +75,5 @@ void VertexBufferText::log() const {
   }
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

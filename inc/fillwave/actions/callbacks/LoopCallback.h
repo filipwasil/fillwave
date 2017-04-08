@@ -39,8 +39,8 @@
 #include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class LoopCallback
  * \brief ItemCallback to loop other callbacks.
@@ -63,6 +63,6 @@ protected:
   int mLoopsLeft;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::LoopCallback> puLoopCallback;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::LoopCallback> puLoopCallback;
+} /* flw */

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * FileLoader.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef FILE_H_
-#define FILE_H_
-
 #include <string>
 
 #ifdef __linux__
@@ -47,8 +46,8 @@
 #define FILLWAVE_OS_CURRENTDIR "./"
 #endif
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class FileLoader
  * \brief Loads files.
@@ -72,7 +71,6 @@ void ReadFile(std::string pFileName, std::string &fileContent);
 
 std::string ReadFile(std::string fileName);
 
-} /* framework */
-} /* fillwave */
+} /* frf */
+} /* flf */
 
-#endif /* FILE_H_ */

@@ -42,8 +42,8 @@
 #include <vector>
 #include <string>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Channel
  * \brief wrapper to assimp aiNodeAnim*
@@ -61,7 +61,7 @@ public:
   virtual ~Channel() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* CHANNEL_H_ */

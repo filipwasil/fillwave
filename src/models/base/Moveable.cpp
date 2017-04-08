@@ -34,8 +34,8 @@
 
 #include <fillwave/models/base/Moveable.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Moveable::Moveable(glm::vec3 translation, glm::quat rotation)
     : mTranslation(translation), mRotation(rotation), mScale(1.0), mRefresh(true) {
@@ -183,5 +183,5 @@ glm::quat Moveable::getParentRotation() {
   return mParentRotation;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

@@ -36,8 +36,8 @@
 
 FLOGINIT("TextureSystem", FERROR | FFATAL | FINFO | FDEBUG)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 TextureSystem::TextureSystem(const std::string &rootPath)
     : mRootPath(rootPath) {
@@ -85,7 +85,7 @@ inline void TextureSystem::checkExtensions() {
 #endif
 }
 
-core::Texture2D *TextureSystem::get(const std::string &texturePath, eCompression compression, eFlip flip) {
+flc::Texture2D *TextureSystem::get(const std::string &texturePath, eCompression compression, eFlip flip) {
   std::string filePath = mRootPath + texturePath;
   if (texturePath.empty()) {
     return nullptr;
@@ -94,9 +94,9 @@ core::Texture2D *TextureSystem::get(const std::string &texturePath, eCompression
     return mTextures2D[filePath].get();
   }
 
-  if (core::Texture2DFile *file = mLoader.load(filePath, flip, GL_RGBA, mRootPath, compression)) {
+  if (flc::Texture2DFile *file = mLoader.load(filePath, flip, GL_RGBA, mRootPath, compression)) {
     fLogD("Texture %s added to manager", filePath.c_str());
-    core::ParameterList parameters;
+    flc::ParameterList parameters;
     return mTextures2D.store(filePath, file, parameters, 1);
   }
 
@@ -104,22 +104,22 @@ core::Texture2D *TextureSystem::get(const std::string &texturePath, eCompression
   return nullptr;
 }
 
-core::Texture2DRenderableDynamic *
-TextureSystem::getDynamic(const std::string &fragmentShaderPath, core::Program *program, glm::ivec2 screenSize) {
+flc::Texture2DRenderableDynamic *
+TextureSystem::getDynamic(const std::string &fragmentShaderPath, flc::Program *program, glm::ivec2 screenSize) {
   std::string filePath = mRootPath + fragmentShaderPath;
 
-  core::Texture2DFile *file = mLoader.loadEmpty(screenSize.x, screenSize.y);
+  flc::Texture2DFile *file = mLoader.loadEmpty(screenSize.x, screenSize.y);
 
-  core::ParameterList parameters;
-  parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters;
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
   return mTextures2DDynamic.store(fragmentShaderPath, file, parameters, program);
 }
 
-core::Texture3D *TextureSystem::get(const std::string &posX,
+flc::Texture3D *TextureSystem::get(const std::string &posX,
     const std::string &negX,
     const std::string &posY,
     const std::string &negY,
@@ -137,26 +137,26 @@ core::Texture3D *TextureSystem::get(const std::string &posX,
 
   fLogD("Texture to be added: %s", name.c_str());
 
-  core::ParameterList parameters;
-  parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters;
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
   fLogD("Texture %s will be added to manager", name.c_str());
 
-  core::Texture2DFile *filePosX = mLoader.load(filePathPosX, eFlip::eNone, GL_RGBA, mRootPath);
-  core::Texture2DFile *fileNegX = mLoader.load(filePathNegX, eFlip::eNone, GL_RGBA, mRootPath);
-  core::Texture2DFile *filePosY = mLoader.load(filePathPosY, eFlip::eNone, GL_RGBA, mRootPath);
-  core::Texture2DFile *fileNegY = mLoader.load(filePathNegY, eFlip::eNone, GL_RGBA, mRootPath);
-  core::Texture2DFile *filePosZ = mLoader.load(filePathPosZ, eFlip::eNone, GL_RGBA, mRootPath);
-  core::Texture2DFile *fileNegZ = mLoader.load(filePathNegZ, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile *filePosX = mLoader.load(filePathPosX, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile *fileNegX = mLoader.load(filePathNegX, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile *filePosY = mLoader.load(filePathPosY, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile *fileNegY = mLoader.load(filePathNegY, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile *filePosZ = mLoader.load(filePathPosZ, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile *fileNegZ = mLoader.load(filePathNegZ, eFlip::eNone, GL_RGBA, mRootPath);
 
   if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {
     fLogD("Texture %s added to manager", name.c_str());
 
-    core::Texture3D *t = mTextures3D.store(name,
+    flc::Texture3D *t = mTextures3D.store(name,
                                            filePosX,
                                            fileNegX,
                                            filePosY,
@@ -209,10 +209,10 @@ core::Texture3D *TextureSystem::get(const std::string &posX,
   }
 }
 
-core::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint height) {
+flc::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint height) {
 
-  core::Texture2DFile *file = new core::Texture2DFile();
-  core::ParameterList parameters;
+  flc::Texture2DFile *file = new flc::Texture2DFile();
+  flc::ParameterList parameters;
 
   file->mHeader.mFormat = GL_DEPTH_COMPONENT;
   file->mHeader.mInternalFormat = GL_DEPTH_COMPONENT;
@@ -226,29 +226,29 @@ core::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint heigh
 
 #ifdef FILLWAVE_GLES_3_0
   file->mHeader.mType = GL_UNSIGNED_INT;
-  parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
-  parameters.push_back(core::Parameter(GL_TEXTURE_COMPARE_MODE,
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_COMPARE_MODE,
                            GL_COMPARE_REF_TO_TEXTURE));
-  parameters.push_back(core::Parameter(GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL));
 #else
   file->mHeader.mType = GL_FLOAT;
-  parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
 #endif
 
   return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file, parameters);
 }
 
-core::Texture3DRenderable *TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*height*/) {
+flc::Texture3DRenderable *TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*height*/) {
 
-  core::Texture2DFile *file[6];
+  flc::Texture2DFile *file[6];
   for (GLint i = 0; i < 6; i++) {
-    file[i] = new core::Texture2DFile();
+    file[i] = new flc::Texture2DFile();
     file[i]->mHeader.mFormat = GL_RED;
     file[i]->mHeader.mInternalFormat = GL_R32F;
     file[i]->mConfig.mMipmapsLevel = 0;
@@ -261,7 +261,7 @@ core::Texture3DRenderable *TextureSystem::getShadow3D(GLuint /*width*/, GLuint /
     file[i]->mConfig.mCompression = GL_FALSE;
   }
 
-  core::Texture2DFile *file2D = new core::Texture2DFile();
+  flc::Texture2DFile *file2D = new flc::Texture2DFile();
   file2D->mHeader.mFormat = GL_DEPTH_COMPONENT;
   file2D->mHeader.mInternalFormat = GL_DEPTH_COMPONENT32;
   file2D->mConfig.mMipmapsLevel = 0;
@@ -273,20 +273,20 @@ core::Texture3DRenderable *TextureSystem::getShadow3D(GLuint /*width*/, GLuint /
   file2D->mConfig.mMipmaps = GL_FALSE;
   file2D->mConfig.mCompression = GL_FALSE;
 
-  core::ParameterList parameters2D;
-  parameters2D.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters2D.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters2D.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters2D.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters2D;
+  parameters2D.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+  parameters2D.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+  parameters2D.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+  parameters2D.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
-  core::ParameterList parameters3D;
-  parameters3D.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters3D.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-  parameters3D.push_back(core::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters3D;
+  parameters3D.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+  parameters3D.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+  parameters3D.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+  parameters3D.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  parameters3D.push_back(flc::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
 
-  core::Texture2DRenderable *t = mTextures2DRenderable.store(mTextures2DRenderable.size(),
+  flc::Texture2DRenderable *t = mTextures2DRenderable.store(mTextures2DRenderable.size(),
                                                              GL_DEPTH_ATTACHMENT,
                                                              file2D,
                                                              parameters2D);
@@ -302,9 +302,9 @@ core::Texture3DRenderable *TextureSystem::getShadow3D(GLuint /*width*/, GLuint /
                                      parameters3D);
 }
 
-core::Texture2DRenderable *TextureSystem::getColor2D(GLuint width, GLuint height) {
+flc::Texture2DRenderable *TextureSystem::getColor2D(GLuint width, GLuint height) {
 
-  core::Texture2DFile *file = new core::Texture2DFile();
+  flc::Texture2DFile *file = new flc::Texture2DFile();
   file->mHeader.mFormat = GL_RGBA;
   file->mHeader.mInternalFormat = GL_RGBA;
   file->mConfig.mMipmapsLevel = 0;
@@ -320,22 +320,22 @@ core::Texture2DRenderable *TextureSystem::getColor2D(GLuint width, GLuint height
   file->mConfig.mMipmaps = GL_FALSE;
   file->mConfig.mCompression = GL_FALSE;
 
-  core::ParameterList parameters;
-  parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters.push_back(core::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters;
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
 
   return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_COLOR_ATTACHMENT0, file, parameters);
 }
 
-core::Texture2D *TextureSystem::getDeferredColor(GLuint width, GLuint height, GLuint size) {
+flc::Texture2D *TextureSystem::getDeferredColor(GLuint width, GLuint height, GLuint size) {
 
-  core::ParameterList parameters;
-  parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
-  parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+  flc::ParameterList parameters;
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
-  core::Texture2DFileHeader colorTextureHeader;
+  flc::Texture2DFileHeader colorTextureHeader;
 #ifdef FILLWAVE_GLES_3_0
   colorTextureHeader.mFormat = GL_RGBA;
   colorTextureHeader.mInternalFormat = GL_RGBA;
@@ -348,21 +348,21 @@ core::Texture2D *TextureSystem::getDeferredColor(GLuint width, GLuint height, GL
   colorTextureHeader.mWidth = width;
   colorTextureHeader.mHeight = height;
 
-  core::Texture2DFile *file = new core::Texture2DFile();
-  file->mConfig = core::Texture2DFileConfig();
+  flc::Texture2DFile *file = new flc::Texture2DFile();
+  file->mConfig = flc::Texture2DFileConfig();
   file->mHeader = colorTextureHeader;
   file->mData = nullptr;
 
   return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, size);
 }
 
-core::Texture2D *TextureSystem::getDeferredColorScreen(GLuint width, GLuint height, GLuint size) {
+flc::Texture2D *TextureSystem::getDeferredColorScreen(GLuint width, GLuint height, GLuint size) {
 
-  core::ParameterList parameters;
-  parameters.push_back(core::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
-  parameters.push_back(core::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+  flc::ParameterList parameters;
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
 
-  core::Texture2DFileHeader colorTextureHeader;
+  flc::Texture2DFileHeader colorTextureHeader;
 #ifdef FILLWAVE_GLES_3_0
   colorTextureHeader.mFormat = GL_RGB;
   colorTextureHeader.mInternalFormat = GL_RGBA;
@@ -375,19 +375,19 @@ core::Texture2D *TextureSystem::getDeferredColorScreen(GLuint width, GLuint heig
   colorTextureHeader.mWidth = width;
   colorTextureHeader.mHeight = height;
 
-  core::Texture2DFile *file = new core::Texture2DFile();
-  file->mConfig = core::Texture2DFileConfig();
+  flc::Texture2DFile *file = new flc::Texture2DFile();
+  file->mConfig = flc::Texture2DFileConfig();
   file->mHeader = colorTextureHeader;
   file->mData = nullptr;
 
   return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, size);
 }
 
-core::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
+flc::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
 
-  core::ParameterList parameters;
+  flc::ParameterList parameters;
 
-  core::Texture2DFileHeader depthTextureHeader;
+  flc::Texture2DFileHeader depthTextureHeader;
   depthTextureHeader.mFormat = GL_DEPTH_COMPONENT;
   depthTextureHeader.mInternalFormat = GL_DEPTH_COMPONENT;
   depthTextureHeader.mWidth = width;
@@ -398,27 +398,27 @@ core::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
   depthTextureHeader.mType = GL_FLOAT;
 #endif
 
-  core::Texture2DFile *file = new core::Texture2DFile();
-  file->mConfig = core::Texture2DFileConfig();
+  flc::Texture2DFile *file = new flc::Texture2DFile();
+  file->mConfig = flc::Texture2DFileConfig();
   file->mHeader = depthTextureHeader;
   file->mData = nullptr;
 
   return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, 1);
 }
 
-core::Texture2D *TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
+flc::Texture2D *TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
 
-  core::ParameterList parameters;
+  flc::ParameterList parameters;
 
-  core::Texture2DFileHeader stencilTextureHeader;
+  flc::Texture2DFileHeader stencilTextureHeader;
   stencilTextureHeader.mFormat = GL_DEPTH_STENCIL;
   stencilTextureHeader.mInternalFormat = GL_DEPTH32F_STENCIL8;
   stencilTextureHeader.mWidth = width;
   stencilTextureHeader.mHeight = height;
   stencilTextureHeader.mType = GL_FLOAT_32_UNSIGNED_INT_24_8_REV;
 
-  core::Texture2DFile *file = new core::Texture2DFile();
-  file->mConfig = core::Texture2DFileConfig();
+  flc::Texture2DFile *file = new flc::Texture2DFile();
+  file->mConfig = flc::Texture2DFileConfig();
   file->mHeader = stencilTextureHeader;
   file->mData = nullptr;
 
@@ -435,7 +435,7 @@ void TextureSystem::evaluateDynamicTextures(GLfloat timeExpiredInSeconds) {
     it.second->bindForWriting();
     it.second->draw(timeExpiredInSeconds);
   }
-  core::Framebuffer::bindScreenFramebuffer();
+  flc::Framebuffer::bindScreenFramebuffer();
 }
 
 void TextureSystem::reload() {
@@ -452,5 +452,5 @@ void TextureSystem::reload() {
   reload(mTextures2DDeferred);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

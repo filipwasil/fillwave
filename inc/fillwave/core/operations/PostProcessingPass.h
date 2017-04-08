@@ -38,30 +38,30 @@
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
 #include <fillwave/common/Finishable.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class PostProcessingPass
  * \brief Defines one post processing pass.
  */
 
-class PostProcessingPass : public framework::Finishable {
+class PostProcessingPass : public flf::Finishable {
 public:
-  PostProcessingPass(core::Program *p, core::Texture2DRenderableDynamic *t, GLfloat lifetime);
+  PostProcessingPass(flc::Program *p, flc::Texture2DRenderableDynamic *t, GLfloat lifetime);
 
   virtual ~PostProcessingPass() = default;
 
-  core::Texture2DRenderableDynamic *getFrame() const;
+  flc::Texture2DRenderableDynamic *getFrame() const;
 
-  core::Program *getProgram() const;
+  flc::Program *getProgram() const;
 
 private:
-  core::Texture2DRenderableDynamic *mFrame;
-  core::Program *mProgram;
+  flc::Texture2DRenderableDynamic *mFrame;
+  flc::Program *mProgram;
 };
 
-} /* core */
-typedef std::unique_ptr<core::PostProcessingPass> puPostProcessingPass;
-} /* fillwave */
+} /* flc */
+typedef std::unique_ptr<flc::PostProcessingPass> puPostProcessingPass;
+} /* flw */
 
 #endif /* SRC_OPERATIONS_POSTPROCESSINGPASS_H_ */

@@ -38,8 +38,8 @@
 #include <unordered_map>
 #include <vector>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class RendererPBRP
  * \brief Program based render pases
@@ -63,7 +63,7 @@ private:
   std::unordered_map<GLuint, std::vector<IRenderable *> > mRenderPasses;
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_CORE_RENDERERS_RENDERERPBRP_H_ */

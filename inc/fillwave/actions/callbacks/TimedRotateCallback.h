@@ -35,8 +35,8 @@
 
 #include <fillwave/actions/callbacks/TimedCallback.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TimedRotateCallback
  * \brief TimedCallback to rotate Entity at certain angle in certain time.
@@ -64,5 +64,5 @@ private:
   glm::vec3 mAxis;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

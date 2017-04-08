@@ -36,8 +36,8 @@
 
 #include <fillwave/models/builders/BuilderModel.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class BuilderModelExternalMaps
  * \brief BuilderModel which builds the model from the asset file but uses external texture maps.
@@ -47,7 +47,7 @@ class BuilderModelExternalMaps : public BuilderModel {
 public:
   BuilderModelExternalMaps(Engine *engine,
       std::string modelPath = "",
-      core::Program *program = nullptr,
+      flc::Program *program = nullptr,
       const std::string &diffusePath = "",
       const std::string &normalPath = "",
       const std::string &specularPath = "");
@@ -68,7 +68,7 @@ private:
   std::string mSpecularMapPath;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* INC_FILLWAVE_MODELS_BUILDERMODELEXTERNALMAPS_H_ */

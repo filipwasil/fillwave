@@ -36,8 +36,8 @@
 
 #include <fillwave/OpenGL.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class GLObject
  * \brief Base class for all OpenGL objects not related to pipeline.
@@ -57,7 +57,7 @@ protected:
   GLuint mHandles[FILLWAVE_GLOBJECT_MAX_CAPACITY];
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* GLOBJECT_H_ */

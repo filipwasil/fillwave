@@ -34,8 +34,8 @@
 
 #include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Texture3DRenderableDynamic::Texture3DRenderableDynamic(Texture2DFile *filePosX,
     Texture2DFile *fileNegX,
@@ -44,12 +44,12 @@ Texture3DRenderableDynamic::Texture3DRenderableDynamic(Texture2DFile *filePosX,
     Texture2DFile *filePosZ,
     Texture2DFile *fileNegZ,
     ParameterList &parameters,
-    core::Texture2DRenderable *texture2D,
-    core::Program *program)
+    flc::Texture2DRenderable *texture2D,
+    flc::Program *program)
     : Texture3DRenderable(filePosX, fileNegX, filePosY, fileNegY, filePosZ, fileNegZ, texture2D, parameters), mProgram(
     program), mTimePassed(0.0f) {
   setAttachment(GL_COLOR_ATTACHMENT0);
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

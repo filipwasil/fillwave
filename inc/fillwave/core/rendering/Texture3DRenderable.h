@@ -37,8 +37,8 @@
 #include <fillwave/core/rendering/Texture2DRenderable.h>
 #include <fillwave/core/texturing/Texture3D.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Texture3DRenderable
  * \brief One can render to this texture and use the rendered 6 images as a 2D texture.
@@ -52,7 +52,7 @@ public:
       Texture2DFile *fileNegY,
       Texture2DFile *filePosZ,
       Texture2DFile *fileNegZ,
-      core::Texture2DRenderable *texture,
+      flc::Texture2DRenderable *texture,
       ParameterList &parameters);
 
   virtual ~Texture3DRenderable() = default;
@@ -70,11 +70,11 @@ public:
   void log();
 
 protected:
-  core::Texture2DRenderable *mShadowTexture;
+  flc::Texture2DRenderable *mShadowTexture;
 };
 
-} /* core */
-typedef std::shared_ptr<core::Texture3DRenderable> pTexture3DRenderable;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::Texture3DRenderable> pTexture3DRenderable;
+} /* flw */
 
 #endif /* TEXTURE3DRENDERABLE_H_ */

@@ -36,8 +36,8 @@
 
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \struct MouseButtonEventData
  * \brief Event data structure to store the parameters of a button press event.
@@ -65,7 +65,7 @@ public:
   virtual ~MouseButtonEvent() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* MOUSEBUTTONEVENT_H_ */

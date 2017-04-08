@@ -40,9 +40,9 @@
 #include <fillwave/core/buffers/VertexBufferPosition.h>
 #include <fillwave/models/base/IReloadable.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class Skybox
  * \brief Entity which moves with the camera clipping the view space with an image.
@@ -50,7 +50,7 @@ namespace framework {
 
 class Skybox : public Entity, public IReloadable {
 public:
-  Skybox(Engine *engine, core::Texture3D *texture);
+  Skybox(Engine *engine, flc::Texture3D *texture);
 
   virtual ~Skybox() = default;
 
@@ -63,13 +63,13 @@ public:
   bool getRenderItem(RenderItem &item);
 
 protected:
-  core::Program *mProgram;
-  core::Program *mProgramDR;
+  flc::Program *mProgram;
+  flc::Program *mProgramDR;
 
 private:
-  core::Texture3D *mTexture;
-  core::VertexBufferPosition *mVBO;
-  core::IndexBuffer *mIBO;
+  flc::Texture3D *mTexture;
+  flc::VertexBufferPosition *mVBO;
+  flc::IndexBuffer *mIBO;
   GLint mULCCameraPosition, mULCModelMatrixPosition, mULCViewProjectionMatrix, mULCTextureUnit;
 
   void initBuffers();
@@ -83,8 +83,8 @@ private:
   void initVBO();
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Skybox> puSkybox;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Skybox> puSkybox;
+} /* flw */
 
 #endif /* SKYBOX_H_ */

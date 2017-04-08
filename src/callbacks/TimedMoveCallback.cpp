@@ -33,8 +33,8 @@
 
 #include <fillwave/actions/callbacks/TimedMoveCallback.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 TimedMoveCallback::TimedMoveCallback(Moveable *moveable, glm::vec3 endPosition, GLfloat lifeTime, EasingFunction easing)
     : TimedCallback(lifeTime, easing), mStartPosition(glm::vec3(0.0)), mEndPosition(endPosition), mMoveable(moveable) {
@@ -49,5 +49,5 @@ void TimedMoveCallback::performTime(TimeEventData &data) {
   mMoveable->moveTo(mStartPosition + ease(getPercentageDone()) * mEndPosition);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

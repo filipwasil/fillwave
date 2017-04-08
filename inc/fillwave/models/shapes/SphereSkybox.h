@@ -37,16 +37,16 @@
 #include <fillwave/core/buffers/VertexBufferPosition.h>
 #include <fillwave/models/shapes/Shape.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class SphereSkybox
- * \brief Shape<core::VertexPosition> encapsulating vertices and indices for triangle drawn UV sphere.
+ * \brief Shape<flc::VertexPosition> encapsulating vertices and indices for triangle drawn UV sphere.
  *
  */
 
-class SphereSkybox : public Shape<core::VertexPosition> {
+class SphereSkybox : public Shape<flc::VertexPosition> {
 public:
   SphereSkybox(GLfloat radius, GLuint rings, GLuint sectors) {
     float const R = 1.f / (float) (rings - 1);
@@ -96,7 +96,7 @@ private:
   const GLfloat mScale = 100.0;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* SPHERESKYBOX_H_ */

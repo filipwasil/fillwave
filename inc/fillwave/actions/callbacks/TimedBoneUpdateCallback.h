@@ -35,8 +35,8 @@
 
 #include <fillwave/actions/callbacks/TimedCallback.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 class Model;
 
 /*! \class TimedBoneUpdateCallback
@@ -59,5 +59,5 @@ protected:
   Model *mModel;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

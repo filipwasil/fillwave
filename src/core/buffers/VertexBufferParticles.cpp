@@ -37,8 +37,8 @@
 
 FLOGINIT("VertexBufferParticles", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 VertexBufferParticles::VertexBufferParticles(const std::vector<GLfloat> &velocities,
     const std::vector<GLfloat> &positions,
@@ -75,5 +75,5 @@ void VertexBufferParticles::log() const {
   }
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

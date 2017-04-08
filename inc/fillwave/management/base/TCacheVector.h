@@ -39,8 +39,8 @@
 #include <type_traits>
 #include <fillwave/common/Macros.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TManager
  * \brief Basic manager
@@ -77,5 +77,5 @@ public:
   }
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

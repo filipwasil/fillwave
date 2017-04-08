@@ -38,8 +38,8 @@
 #include <fillwave/models/base/Moveable.h>
 #include <fillwave/common/IObserver.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 #define MAX_LIGHTS       4
 #define USED_LIGHT_SLOTS 4
@@ -98,8 +98,8 @@ protected:
   LightAttenuationData mAttenuation;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Light> puLight;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Light> puLight;
+} /* flw */
 
 #endif /* LIGHT_H_ */

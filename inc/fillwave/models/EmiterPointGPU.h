@@ -38,9 +38,9 @@
 #include <fillwave/core/pipeline/Fence.h>
 #include <fillwave/models/base/IEmiterPoint.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class EmiterPointGPU
  * \brief Polynomial particle Emiter entirely computed on GPU.
@@ -61,7 +61,7 @@ public:
       glm::vec3 robustnessPosition,
       GLfloat startSize,
       GLfloat lifetime,
-      core::Texture *texture,
+      flc::Texture *texture,
       GLenum blendingSource,
       GLenum blendingDestination,
       GLboolean depthTesting,
@@ -92,10 +92,10 @@ private:
   glm::vec3 mRobustnessPosition;
   glm::vec3 mCameraPosition;
   GLfloat mTimeDeltaEmiter;
-  core::Program *mProgramEmiter;
+  flc::Program *mProgramEmiter;
   puFence mFence;
 
-  core::VertexBufferParticlesGPU *mVBOGPU[mPingPongBuffers];
+  flc::VertexBufferParticlesGPU *mVBOGPU[mPingPongBuffers];
 
   GLint mULCTimeEmiter, mULCEmissionRateEmiter, mULCModelMatrixEmiter, mULCCameraPositionEmiter, mULCHowManyEmiter, mULCAccelerationEmiter, mULCStartVelocityEmiter, mULCStartPositionEmiter, mULCLifeTimeEmiter, mULCRobustnessVelocityEmiter, mULCRobustnessPositionEmiter, mULCNoiseSamplerEmiter;
 
@@ -117,6 +117,6 @@ private:
 };
 
 } /* particles */
-} /* fillwave */
+} /* flw */
 
 #endif /* EMITERPOINTGPU_H_ */

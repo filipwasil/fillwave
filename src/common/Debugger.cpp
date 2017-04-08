@@ -42,13 +42,32 @@
 #include <fillwave/management/LightSystem.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-Debugger::Debugger(Engine *engine)
-    : IReloadable(engine), mState(eDebuggerState::eOff), mEngine(engine)
-    , mVBO(mEngine->storeBuffer<core::VertexBufferDebug>(mVAO, 1.0f)), mMiniwindowSize(1.0 / 6.0), mMiniwindowsOccupied(
-        0) {
+Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
+  : IReloadable(engine), mState(eDebuggerState::eOff), mEngine(engine)
+  , mVBO(mEngine->storeBuffer<flc::VertexBufferDebug>(mVAO, 1.0f))
+  , mMiniwindowsOccupied(0) {
+
+  mDebugWindows.reserve(howManyDebugWindows);
+  const float sizeFactor = 1.0f / static_cast<float>(howManyDebugWindows);
+  const float offsetY = 1.0f - sizeFactor;
+  for (int i = 0; i < howManyDebugWindows; ++i)
+  {
+    const float offsetX = static_cast<float>(i) / static_cast<float>(howManyDebugWindows);
+    DebugWindowInfo window = {
+      {
+        mEngine->getScreenSize()[0] * sizeFactor,
+        mEngine->getScreenSize()[1] * sizeFactor
+      },
+      {
+        mEngine->getScreenSize()[0] * offsetX,
+        mEngine->getScreenSize()[1] * offsetY
+      }
+    };
+    mDebugWindows.push_back(window);
+  }
 
   ProgramLoader loader(engine);
 
@@ -99,17 +118,15 @@ eDebuggerState Debugger::getState() {
   return mState;
 }
 
-void Debugger::setMiniwindowSize(GLfloat size) {
-  mMiniwindowSize = size;
+void Debugger::prepareDebugWindow(GLint id)
+{
+    DebugWindowInfo& win = mDebugWindows[id];
+    glViewport(win.offset.x, win.offset.y, win.size.x, win.size.y);
+    glClear(GL_DEPTH_BUFFER_BIT);
 }
 
 void Debugger::renderFromCamera(ICamera &c, GLint id) {
-  glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
-             mEngine->getScreenSize()[1] * (1.0f - mMiniwindowSize),
-             mEngine->getScreenSize()[0] * mMiniwindowSize,
-             mEngine->getScreenSize()[1] * mMiniwindowSize);
-
-  glClear(GL_DEPTH_BUFFER_BIT);
+  prepareDebugWindow(id);
 
   mEngine->getCurrentScene()->draw(c);
 
@@ -117,23 +134,14 @@ void Debugger::renderFromCamera(ICamera &c, GLint id) {
 }
 
 void Debugger::renderPickingMap() {
-  glViewport(mEngine->getScreenSize()[0] * (1.0f - mMiniwindowSize),
-             0,
-             mEngine->getScreenSize()[0] * mMiniwindowSize,
-             mEngine->getScreenSize()[1] * mMiniwindowSize);
+  prepareDebugWindow(mDebugWindows.size() - 1);
 
-  glClear(GL_DEPTH_BUFFER_BIT);
   mEngine->getCurrentScene()->drawPicking();
   glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
 void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
-  glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
-             0,
-             mEngine->getScreenSize()[0] * mMiniwindowSize,
-             mEngine->getScreenSize()[1] * mMiniwindowSize);
-
-  glClear(GL_DEPTH_BUFFER_BIT);
+  prepareDebugWindow(id);
 
   mProgram->use();
 
@@ -149,27 +157,24 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  core::Uniform::push(mULCTextureUnit, id);
-  core::Uniform::push(mULCNearPlane, cam->getProjectionNearPlane());
-  core::Uniform::push(mULCFarPlane, cam->getProjectionFarPlane());
+  flc::Uniform::push(mULCTextureUnit, id);
+  flc::Uniform::push(mULCNearPlane, cam->getProjectionNearPlane());
+  flc::Uniform::push(mULCFarPlane, cam->getProjectionFarPlane());
 
   glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
 
   glEnable(GL_DEPTH_TEST);
   glDisable(GL_BLEND);
 
-  core::Texture2D::unbind2DTextures();
-  core::VertexArray::unbindVAO();
-  core::Program::disusePrograms();
+  flc::Texture2D::unbind2DTextures();
+  flc::VertexArray::unbindVAO();
+  flc::Program::disusePrograms();
 
   glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
 void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
-  glViewport(mEngine->getScreenSize()[0] * (id) * mMiniwindowSize,
-             0,
-             mEngine->getScreenSize()[0] * mMiniwindowSize,
-             mEngine->getScreenSize()[1] * mMiniwindowSize);
+  prepareDebugWindow(id);
 
   glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -187,18 +192,18 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
   glEnable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-  core::Uniform::push(mULCTextureUnit, FILLWAVE_SHADOW_FIRST_UNIT + id);
-  core::Uniform::push(mULCNearPlane, cam.getProjectionNearPlane());
-  core::Uniform::push(mULCFarPlane, cam.getProjectionFarPlane());
+  flc::Uniform::push(mULCTextureUnit, FILLWAVE_SHADOW_FIRST_UNIT + id);
+  flc::Uniform::push(mULCNearPlane, cam.getProjectionNearPlane());
+  flc::Uniform::push(mULCFarPlane, cam.getProjectionFarPlane());
 
   glDrawArrays(GL_TRIANGLES, 0, mVBO->getElements());
 
   glEnable(GL_DEPTH_TEST);
   glDisable(GL_BLEND);
 
-  core::Texture2D::unbind2DTextures();
-  core::VertexArray::unbindVAO();
-  core::Program::disusePrograms();
+  flc::Texture2D::unbind2DTextures();
+  flc::VertexArray::unbindVAO();
+  flc::Program::disusePrograms();
 
   glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
@@ -228,13 +233,13 @@ inline void Debugger::initVAO() {
   mVBO->send();
   mVBO->attributesSetForVAO();
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 inline void Debugger::initVBO() {
   mVBO->initAttributes(mProgram->getHandle());
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 

@@ -33,8 +33,8 @@
 
 #include <fillwave/actions/callbacks/TimedScaleCallback.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 TimedScaleCallback::TimedScaleCallback(Moveable *moveable,
     glm::vec3 normalizedScaleVec,
@@ -61,5 +61,5 @@ void TimedScaleCallback::performTime(TimeEventData &data) {
   mMoveable->scaleTo(mStartScale + ease(getPercentageDone()) * (mEndScale - mStartScale));
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

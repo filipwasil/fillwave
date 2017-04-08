@@ -35,6 +35,7 @@
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/Texturing.h>
 #include <fillwave/common/Strings.h>
+#include <fillwave/common/Macros.h>
 #include <iterator>
 
 #include <fillwave/Log.h>
@@ -43,10 +44,10 @@ FLOGINIT("TextureLoader", FERROR | FFATAL | FDEBUG)
 
 using namespace std;
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-core::Texture2DFile *TextureLoader::load(const std::string &filePath,
+flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     eFlip flip,
     GLenum format,
     std::string rootPath,
@@ -59,7 +60,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
   uint8_t r = 0, g = 0, b = 0;
   if (filePath == rootPath) {
     fLogD("Empty texture %s generation and loading ...", filePath.c_str());
-    core::Texture2DFile *file = loadVirtualFileColor(512, 512, 0, 0, 0);
+    flc::Texture2DFile *file = loadVirtualFileColor(512, 512, 0, 0, 0);
     return file;
   }
 
@@ -77,7 +78,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
     g = atoi(tokens[1].c_str());
     b = atoi(tokens[2].c_str());
 
-    core::Texture2DFile *file = loadVirtualFileColor(512, 512, r, g, b);
+    flc::Texture2DFile *file = loadVirtualFileColor(512, 512, r, g, b);
     return file;
   }
   if (posCheckboard != std::string::npos) {
@@ -93,7 +94,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
     g = atoi(tokens[1].c_str());
     b = atoi(tokens[2].c_str());
 
-    core::Texture2DFile *file = loadVirtualFileCheckboard(512, 512, r, g, b);
+    flc::Texture2DFile *file = loadVirtualFileCheckboard(512, 512, r, g, b);
     return file;
   }
   if (posDDS != std::string::npos) {
@@ -229,8 +230,9 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
   GLint w, h, n;
   GLubyte *content = stbi_load(filePath.c_str(), &w, &h, &n, getBytesPerPixel(format));
   if (content == NULL) { //xxx NULL, not nullptr because the stb library uses NULL
-    FILE *f = fopen(filePath.c_str(), "rb");
-    if (!f) {
+    FILE *f;
+    auto errorNo = fopen_ss(&f, filePath.c_str(), "rb");
+    if (errorNo) {
      fLogE("Texture %s not found", filePath.c_str());
     } else {
      fLogE("Texture %s found but not supported ", filePath.c_str());
@@ -239,7 +241,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
     return nullptr;
   }
   fLogD("Image %s size %dx%d pixel %d bytes per pixel", filePath.c_str(), w, h, n);
-  core::Texture2DFile *file = new core::Texture2DFile();
+  flc::Texture2DFile *file = new flc::Texture2DFile();
 
   file->mHeader.mFormat = format;
   file->mHeader.mWidth = w;
@@ -263,7 +265,7 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
 
   file->mData = content;
 
-  file->mAllocation = core::eMemoryAllocation::eMallock;
+  file->mAllocation = flc::eMemoryAllocation::eMallock;
 
   fLogD("Flipping Texture %s ...", filePath.c_str());
   switch (flip) {
@@ -340,8 +342,8 @@ core::Texture2DFile *TextureLoader::load(const std::string &filePath,
 #endif /* FILLWAVE_TEXTURE_LOADER_GLI */
 }
 
-core::Texture2DFile *TextureLoader::loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format) {
-  core::Texture2DFile *file = new core::Texture2DFile();
+flc::Texture2DFile *TextureLoader::loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format) {
+  flc::Texture2DFile *file = new flc::Texture2DFile();
 
   file->mHeader.mFormat = format;
   file->mHeader.mInternalFormat = format;
@@ -356,12 +358,12 @@ core::Texture2DFile *TextureLoader::loadEmpty(GLint screenWidth, GLint screenHei
 
   file->mData = nullptr;
 
-  file->mAllocation = core::eMemoryAllocation::eNone;
+  file->mAllocation = flc::eMemoryAllocation::eNone;
 
   return file;
 }
 
-core::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
+flc::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
     GLuint height,
     GLubyte red,
     GLubyte green,
@@ -387,10 +389,10 @@ core::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
     content[i] = r;
     content[i + 1] = g;
     content[i + 2] = b;
-    content[i + 3] = 1.0;
+    content[i + 3] = 1;
   }
 
-  core::Texture2DFile *file = new core::Texture2DFile();
+  flc::Texture2DFile *file = new flc::Texture2DFile();
   file->mHeader.mFormat = format;
   file->mHeader.mInternalFormat = format;
   file->mHeader.mWidth = width;
@@ -404,12 +406,12 @@ core::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
 
   file->mData = content;
 
-  file->mAllocation = core::eMemoryAllocation::eNew;
+  file->mAllocation = flc::eMemoryAllocation::eNew;
 
   return file;
 }
 
-core::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
+flc::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
     GLuint height,
     GLubyte red,
     GLubyte green,
@@ -424,10 +426,10 @@ core::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
     content[i] = red;
     content[i + 1] = green;
     content[i + 2] = blue;
-    content[i + 3] = 1.0;
+    content[i + 3] = 1;
   }
 
-  core::Texture2DFile *file = new core::Texture2DFile();
+  flc::Texture2DFile *file = new flc::Texture2DFile();
   file->mHeader.mFormat = format;
   file->mHeader.mInternalFormat = format;
   file->mHeader.mWidth = width;
@@ -441,7 +443,7 @@ core::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
 
   file->mData = content;
 
-  file->mAllocation = core::eMemoryAllocation::eNew;
+  file->mAllocation = flc::eMemoryAllocation::eNew;
 
   return file;
 }
@@ -541,5 +543,5 @@ inline GLenum TextureLoader::getComporession(eCompression compression) {
   return GL_NONE;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
