@@ -130,8 +130,8 @@ void Text::createVBO() {
     int atlas_col = (ascii_code - ' ') % mFont->mAtlasColumns;
     int atlas_row = (ascii_code - ' ') / mFont->mAtlasColumns;
 
-    GLfloat s = atlas_col * (1.0 / mFont->mAtlasColumns);
-    GLfloat t = (atlas_row + 1) * (1.0 / mFont->mAtlasRows);
+    GLfloat s = atlas_col * (1.0f / mFont->mAtlasColumns);
+    GLfloat t = (atlas_row + 1) * (1.0f / mFont->mAtlasRows);
 
     GLfloat x_pos = mPosition.x;
     GLfloat y_pos = mPosition.y - mScale.x / mViewportHeight * mFont->mOffsets[ascii_code];

@@ -90,12 +90,12 @@ public:
           break;
         }
 
-        *i++ = r * sectors + (s + 1);
-        *i++ = r * sectors + s;
-        *i++ = (r + 1) * sectors + (s + 1);
-        *i++ = (r + 1) * sectors + s;
-        *i++ = (r + 1) * sectors + (s + 1);
-        *i++ = r * sectors + s;
+        *i++ = static_cast<GLuint>(r * sectors + (s + 1));
+        *i++ = static_cast<GLuint>(r * sectors + s);
+        *i++ = static_cast<GLuint>((r + 1) * sectors + (s + 1));
+        *i++ = static_cast<GLuint>((r + 1) * sectors + s);
+        *i++ = static_cast<GLuint>((r + 1) * sectors + (s + 1));
+        *i++ = static_cast<GLuint>(r * sectors + s);
       }
     }
   }

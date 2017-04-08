@@ -47,8 +47,9 @@ namespace framework {
 
 Debugger::Debugger(Engine *engine)
     : IReloadable(engine), mState(eDebuggerState::eOff), mEngine(engine)
-    , mVBO(mEngine->storeBuffer<core::VertexBufferDebug>(mVAO, 1.0f)), mMiniwindowSize(1.0 / 6.0), mMiniwindowsOccupied(
-        0) {
+    , mVBO(mEngine->storeBuffer<core::VertexBufferDebug>(mVAO, 1.0f))
+    , mMiniwindowSize(1.0f / 6.0f)
+    , mMiniwindowsOccupied(0) {
 
   ProgramLoader loader(engine);
 

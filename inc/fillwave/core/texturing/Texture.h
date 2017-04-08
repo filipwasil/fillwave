@@ -40,7 +40,9 @@
 
 #include <memory>
 
-#if __APPLE__ or _WIN32
+#if __APPLE__
+#include <stdlib.h>
+#elif _WIN32
 #include <stdlib.h>
 #endif
 

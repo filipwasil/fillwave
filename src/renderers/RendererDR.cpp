@@ -410,8 +410,8 @@ inline void RendererDR::initGeometryShading() {
 }
 
 inline void RendererDR::drawDebug() {
-  GLuint w = mScreenSize[0];
-  GLuint h = mScreenSize[1];
+  GLuint w = static_cast<GLuint>(mScreenSize[0]);
+  GLuint h = static_cast<GLuint>(mScreenSize[1]);
   GLuint debugAttachmentScreens[4][4] = {{0,     0,     w / 2, h / 2}, // position
                                          {0,     h / 2, w / 2, h},     // color
                                          {w / 2, h / 2, w,     h}, // normal

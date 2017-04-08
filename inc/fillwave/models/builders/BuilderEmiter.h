@@ -100,7 +100,7 @@ private:
   GLenum mBlendingSource;
   GLenum mBlendingDestination;
   GLboolean mDepthTesting;
-  GLboolean mAlphaCutOff;
+  GLfloat mAlphaCutOff;
 };
 
 } /* framework */

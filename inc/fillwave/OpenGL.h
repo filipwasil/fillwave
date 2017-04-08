@@ -92,7 +92,7 @@ constexpr GLint FILLWAVE_SHADOW_FIRST_UNIT = 10;
 constexpr unsigned int FILLWAVE_LIGHTS_BINDING_POINT = 0;
 constexpr int FILLWAVE_UNIFORM_NOT_FOUND = -1;
 
-constexpr unsigned int FILLWAVE_AO_SAMPLE_RADIUS = 1.6f;
+constexpr float FILLWAVE_AO_SAMPLE_RADIUS = 1.6f;
 constexpr unsigned int FILLWAVE_OQ_VERTICES = 36;
 
 /**/

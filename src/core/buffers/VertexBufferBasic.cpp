@@ -109,7 +109,7 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *a
         vertex.mNormalTangentMap[2] = 0;
       }
       for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
-        vertex.mBoneID[k] = 0.0f;
+        vertex.mBoneID[k] = 0;
         vertex.mBoneWeight[k] = 0.0f;
       }
     }
