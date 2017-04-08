@@ -43,8 +43,8 @@
 #include <android/asset_manager_jni.h>
 #include <string>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 void androidSetActivity(ANativeActivity* activity);
 
@@ -56,8 +56,8 @@ bool androidExtract( const std::string& name );
 std::string androidGetPath( const char* pFile );
 bool androidExtractAll();
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* ANDROIDLOADER_H_ */
 

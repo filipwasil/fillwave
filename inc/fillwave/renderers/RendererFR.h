@@ -37,8 +37,8 @@
 #include <fillwave/renderers/IRenderer.h>
 #include <vector>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class RendererFR
  * \brief Forward IRenderer.
@@ -62,7 +62,7 @@ private:
   std::vector<IRenderable *> mRenderPasses;
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_RENDERERS_RENDERERFR_H_ */

@@ -32,7 +32,7 @@
 #include <exception>
 #include <string>
 
-namespace fillwave {
+namespace flw {
 class ExceptionFillwave : public std::exception {
 public:
   ExceptionFillwave(const std::string &why)
@@ -48,6 +48,6 @@ private:
   std::string mWhy;
 };
 
-} /* fillwave */
+} /* flw */
 
 #endif /* EXCEPTIONFILLWAVE_H */

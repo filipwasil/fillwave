@@ -36,8 +36,8 @@
 
 #include <fillwave/OpenGL.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Voxel
  * \brief Single terrain element.
@@ -60,7 +60,7 @@ private:
   GLboolean mActive;
 };
 
-} /* framework */
+} /* flf */
 } /* fillwave*/
 
 #endif /* VOXEL_H_ */

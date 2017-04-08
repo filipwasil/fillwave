@@ -40,8 +40,8 @@
 #include <fillwave/Log.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 void RendererPBRP::update(IRenderable *renderable) {
   RenderItem item;
@@ -62,7 +62,7 @@ void RendererPBRP::draw(ICamera &camera) {
   }
   glClear(GL_DEPTH_BUFFER_BIT);
   for (auto &program : mRenderPasses) {
-    core::Program::useProgram(program.first);
+    flc::Program::useProgram(program.first);
     for (auto &node : program.second) {
       node->drawPBRP(camera);
     }
@@ -81,5 +81,5 @@ void RendererPBRP::clear() {
   mRenderPasses.reserve(predictedSize);
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

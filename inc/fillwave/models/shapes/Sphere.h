@@ -37,15 +37,15 @@
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/models/shapes/Shape.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Sphere
- * \brief Shape<core::VertexBasic> encapsulating vertices and indices for triangle drawn UV sphere.
+ * \brief Shape<flc::VertexBasic> encapsulating vertices and indices for triangle drawn UV sphere.
  *
  */
 
-class Sphere : public Shape<core::VertexBasic> {
+class Sphere : public Shape<flc::VertexBasic> {
 
 public:
   Sphere(GLfloat radius, GLuint rings = 10, GLuint sectors = 10, glm::vec3 color = glm::vec3(0.0)) {
@@ -90,12 +90,12 @@ public:
           break;
         }
 
-        *i++ = r * sectors + (s + 1);
-        *i++ = r * sectors + s;
-        *i++ = (r + 1) * sectors + (s + 1);
-        *i++ = (r + 1) * sectors + s;
-        *i++ = (r + 1) * sectors + (s + 1);
-        *i++ = r * sectors + s;
+        *i++ = static_cast<GLuint>(r * sectors + (s + 1));
+        *i++ = static_cast<GLuint>(r * sectors + s);
+        *i++ = static_cast<GLuint>((r + 1) * sectors + (s + 1));
+        *i++ = static_cast<GLuint>((r + 1) * sectors + s);
+        *i++ = static_cast<GLuint>((r + 1) * sectors + (s + 1));
+        *i++ = static_cast<GLuint>(r * sectors + s);
       }
     }
   }
@@ -103,7 +103,7 @@ public:
   ~Sphere() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* SPHERE_H_ */

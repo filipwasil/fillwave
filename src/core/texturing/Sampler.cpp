@@ -10,8 +10,8 @@
 
 FLOGINIT("Sampler", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Sampler::Sampler(GLint textureUnit, GLuint howMany)
     : GLObject(howMany), mTextureUnit(textureUnit) {
@@ -58,5 +58,5 @@ void Sampler::reload() {
   fLogC("reload");
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

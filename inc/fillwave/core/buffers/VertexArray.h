@@ -37,8 +37,8 @@
 #include <fillwave/core/GLObject.h>
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class VertexArray
  * \brief VertexArrayObject - VAO
@@ -60,6 +60,6 @@ public:
 void bindVAO(GLuint handle);
 
 } /* buffer */
-} /* fillwave */
+} /* flw */
 
 #endif /* ARRAY_H_ */

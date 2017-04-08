@@ -10,8 +10,8 @@
 
 FLOGINIT("Texture2D", FERROR | FFATAL | FDEBUG)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Texture2D::Texture2D(Texture2DFile *file, ParameterList &parameters, GLuint howMany)
     : Texture(GL_TEXTURE_2D, howMany), mFile(puTexture2DFile(file)), mParameters(parameters) {
@@ -84,5 +84,5 @@ void Texture2D::log() {
   fLogD("mFile->mHeader.mFormat: 0x%x", mFile->mHeader.mFormat);
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

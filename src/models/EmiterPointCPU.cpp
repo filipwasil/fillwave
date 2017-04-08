@@ -39,8 +39,8 @@
 
 FLOGINIT("EmiterPointCPU", FERROR | FFATAL | FINFO)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 EmiterPointCPU::EmiterPointCPU(Engine *engine,
     GLfloat /*emitingSourceRate*/, // todo not used for now
@@ -53,7 +53,7 @@ EmiterPointCPU::EmiterPointCPU(Engine *engine,
     glm::vec3 robustnessPosition,
     GLfloat startSize,
     GLfloat lifetime,
-    core::Texture *texture,
+    flc::Texture *texture,
     GLenum blendingSource,
     GLenum blendingDestination,
     GLboolean depthTesting,
@@ -111,8 +111,8 @@ EmiterPointCPU::EmiterPointCPU(Engine *engine,
   }
 
   /* Initialize OpenGL stuff */
-  mVBO = engine->storeBuffer<core::VertexBufferParticles>(mVAO, velocities, positions, times);
-  mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO, howMany);
+  mVBO = engine->storeBuffer<flc::VertexBufferParticles>(mVAO, velocities, positions, times);
+  mIBO = engine->storeBuffer<flc::IndexBuffer>(mVAO, howMany);
 
   initPipeline();
   initVBO();
@@ -122,8 +122,8 @@ EmiterPointCPU::EmiterPointCPU(Engine *engine,
 
 void EmiterPointCPU::update(GLfloat timeElapsedSec) {
   mProgram->use();
-  core::Uniform::push(mULCTimeElapsed, timeElapsedSec);
-  core::Program::disusePrograms();
+  flc::Uniform::push(mULCTimeElapsed, timeElapsedSec);
+  flc::Program::disusePrograms();
 }
 
 void EmiterPointCPU::draw(ICamera &camera) {
@@ -131,33 +131,33 @@ void EmiterPointCPU::draw(ICamera &camera) {
 
   mProgram->use();
 
-  core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
-  core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
-  core::Uniform::push(mULCCameraPosition, mCameraPosition);
-  core::Uniform::push(mULCPointSize, mStartSize);
-  core::Uniform::push(mULCColor, mColor);
-  core::Uniform::push(mULCAcceleration, mAcceleration);
-  core::Uniform::push(mULCLifeTime, mLifetime);
-  core::Uniform::push(mULCAlphaCutOff, mAlphaCutOff);
-//   core::Uniform::push(mULCSourcePosition, mTranslation);
+  flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+  flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+  flc::Uniform::push(mULCCameraPosition, mCameraPosition);
+  flc::Uniform::push(mULCPointSize, mStartSize);
+  flc::Uniform::push(mULCColor, mColor);
+  flc::Uniform::push(mULCAcceleration, mAcceleration);
+  flc::Uniform::push(mULCLifeTime, mLifetime);
+  flc::Uniform::push(mULCAlphaCutOff, mAlphaCutOff);
+//   flc::Uniform::push(mULCSourcePosition, mTranslation);
 
   coreDraw();
 
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 void EmiterPointCPU::drawPBRP(ICamera &camera) {
   mCameraPosition = camera.getTranslation();
 
-  core::Uniform::push(mULCModelMatrix, mPhysicsMMC);
-  core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
-  core::Uniform::push(mULCCameraPosition, mCameraPosition);
-  core::Uniform::push(mULCPointSize, mStartSize);
-  core::Uniform::push(mULCColor, mColor);
-  core::Uniform::push(mULCAcceleration, mAcceleration);
-  core::Uniform::push(mULCLifeTime, mLifetime);
-  core::Uniform::push(mULCAlphaCutOff, mAlphaCutOff);
-//   core::Uniform::push(mULCSourcePosition, mTranslation);
+  flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
+  flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+  flc::Uniform::push(mULCCameraPosition, mCameraPosition);
+  flc::Uniform::push(mULCPointSize, mStartSize);
+  flc::Uniform::push(mULCColor, mColor);
+  flc::Uniform::push(mULCAcceleration, mAcceleration);
+  flc::Uniform::push(mULCLifeTime, mLifetime);
+  flc::Uniform::push(mULCAlphaCutOff, mAlphaCutOff);
+//   flc::Uniform::push(mULCSourcePosition, mTranslation);
 
   coreDraw();
 }
@@ -185,9 +185,9 @@ inline void EmiterPointCPU::coreDraw() {
     glDepthMask(GL_TRUE);
   }
 
-  core::Texture2D::unbind2DTextures();
+  flc::Texture2D::unbind2DTextures();
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 void EmiterPointCPU::initBuffers() {
@@ -202,7 +202,7 @@ void EmiterPointCPU::initBuffers() {
 void EmiterPointCPU::initPipeline() {
   mProgram->use();
   mProgram->uniformPush("uTextureUnit", FILLWAVE_DIFFUSE_UNIT);
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 void EmiterPointCPU::initUniformsCache() {
@@ -229,7 +229,7 @@ void EmiterPointCPU::initVAO() {
   mIBO->bind();
   mIBO->setLoaded(GL_FALSE);
   mIBO->send();
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 void EmiterPointCPU::initVBO() {
@@ -252,5 +252,5 @@ bool EmiterPointCPU::getRenderItem(RenderItem &item) {
   return true;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

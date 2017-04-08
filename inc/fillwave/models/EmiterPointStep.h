@@ -37,9 +37,9 @@
 #include <fillwave/models/animations/Key.h>
 #include <fillwave/models/base/IEmiterPoint.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class EmiterPointStep
  * \brief Not used.
@@ -51,12 +51,12 @@ public:
       GLint howMany,
       GLenum blendingSource,
       GLenum blendingDestination,
-      core::Texture *texture);
+      flc::Texture *texture);
 
   virtual ~EmiterPointStep() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* EmiterPointStep_H_ */
