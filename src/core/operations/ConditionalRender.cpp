@@ -37,8 +37,8 @@
 #else
 
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 ConditionalRender::ConditionalRender(GLenum mode)
     : mMode(mode) {
@@ -53,7 +53,7 @@ void ConditionalRender::end() const {
   glEndConditionalRender();
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif

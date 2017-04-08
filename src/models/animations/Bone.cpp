@@ -42,8 +42,8 @@
 
 FLOGINIT("Bone", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Bone::Bone(aiBone *assimpBone) {
   mName = assimpBone->mName.C_Str();
@@ -82,4 +82,4 @@ void Bone::log() {
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 } /* framwework */
-} /* fillwave */
+} /* flw */

@@ -40,8 +40,8 @@ FLOGINIT("Buffer", FERROR | FFATAL)
 
 using namespace std;
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 IBuffer::IBuffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany)
     : GLObject(howMany), mLoaded(GL_FALSE), mIndex(index) {
@@ -85,7 +85,7 @@ bool IBuffer::isLoaded() {
   return mLoaded;
 }
 
-void IBuffer::setLoaded(GLboolean loaded) {
+void IBuffer::setLoaded(bool loaded) {
   mLoaded = loaded;
 }
 
@@ -187,5 +187,5 @@ void bindBuffer(GLuint target, GLuint handle) {
   fLogC("Could not bind the buffer object");
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

@@ -36,33 +36,33 @@
 #include <fillwave/core/buffers/IBuffer.h>
 #include <fillwave/models/base/IReloadable.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class BufferSystem
  * \brief Connects VAO pointer and VAO's user pointer in single class.
  */
 
 struct BufferSystem {
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexArray, IReloadable *> mVertexArrays;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexArray, IReloadable *> mVertexArrays;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferBasic, core::VertexArray *, framework::TerrainConstructor *, GLint, GLfloat, std::vector<GLuint> &> mVertices;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferBasic, flc::VertexArray *, flf::TerrainConstructor *, GLint, GLfloat, std::vector<GLuint> &> mVertices;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::IndexBuffer, core::VertexArray *, std::vector<GLuint> &> mIndices;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::IndexBuffer, flc::VertexArray *, std::vector<GLuint> &> mIndices;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferText, core::VertexArray *, const std::vector<GLfloat> &, const std::vector<GLfloat> &> mVerticesText;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferText, flc::VertexArray *, const std::vector<GLfloat> &, const std::vector<GLfloat> &> mVerticesText;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, std::vector<core::VertexBufferParticlesGPU *>, core::VertexArray *, std::vector<core::VertexParticleGPU> &> mVerticesParticlesGPU;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, std::vector<flc::VertexBufferParticlesGPU *>, flc::VertexArray *, std::vector<flc::VertexParticleGPU> &> mVerticesParticlesGPU;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferParticles, core::VertexArray *, std::vector<GLfloat> &, std::vector<GLfloat> &, std::vector<GLfloat> &> mVerticesParticles;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferParticles, flc::VertexArray *, std::vector<GLfloat> &, std::vector<GLfloat> &, std::vector<GLfloat> &> mVerticesParticles;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferDebug, core::VertexArray *, GLfloat> mVerticesDebugger;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferDebug, flc::VertexArray *, GLfloat> mVerticesDebugger;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferFloat, core::VertexArray *, std::vector<core::VertexFloat> &> mVerticesFloat;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferFloat, flc::VertexArray *, std::vector<flc::VertexFloat> &> mVerticesFloat;
 
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::VertexBufferPosition, core::VertexArray *, std::vector<core::VertexPosition> &> mVerticesPosition;
+  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferPosition, flc::VertexArray *, std::vector<flc::VertexPosition> &> mVerticesPosition;
 
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

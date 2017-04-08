@@ -38,8 +38,8 @@
 #include <fillwave/core/operations/TQuery.h>
 #include <fillwave/models/base/IEmiterPoint.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class EmiterPointCPU
  * \brief Polynomial particle Emiter.
@@ -60,7 +60,7 @@ public:
       glm::vec3 robustnessPosition = glm::vec3(0.0),
       GLfloat startSize = 1.0,
       GLfloat lifetime = 6.0,
-      core::Texture *texture = nullptr,
+      flc::Texture *texture = nullptr,
       GLenum blendingSource = GL_SRC_ALPHA,
       GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA,
       GLboolean depthTesting = GL_TRUE,
@@ -86,7 +86,7 @@ private:
   glm::vec3 mCameraPosition;
 
   /* ULC - Uniform location cache */
-  core::VertexBufferParticles *mVBO;
+  flc::VertexBufferParticles *mVBO;
   GLint mULCModelMatrix, mULCTextureUnit, mULCViewProjectionMatrix, mULCCameraPosition, mULCPointSize, mULCColor, mULCAcceleration, mULCLifeTime, mULCAlphaCutOff, mULCSourcePosition, mULCTimeElapsed;
 
   void initBuffers();
@@ -102,7 +102,7 @@ private:
   void coreDraw();
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* EMITER_POINT_CPU_H_ */

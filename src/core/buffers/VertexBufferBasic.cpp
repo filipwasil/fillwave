@@ -42,12 +42,12 @@
 
 FLOGINIT("VertexBufferBasic", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *animator, GLuint dataStoreModification)
+VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, flf::Animator *animator, GLuint dataStoreModification)
     : TVertexBuffer<VertexBasic>(dataStoreModification) {
 
   mTotalElements = shape->mNumVertices;
@@ -109,7 +109,7 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, framework::Animator *a
         vertex.mNormalTangentMap[2] = 0;
       }
       for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
-        vertex.mBoneID[k] = 0.0f;
+        vertex.mBoneID[k] = 0;
         vertex.mBoneWeight[k] = 0.0f;
       }
     }
@@ -196,14 +196,14 @@ VertexBufferBasic::VertexBufferBasic(tinyobj::shape_t& shape,
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-VertexBufferBasic::VertexBufferBasic(framework::TerrainConstructor *constructor,
+VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
     GLint chunkDensity,
     GLfloat gapSize,
     const std::vector<GLuint> &indices,
     GLuint dataStoreModification)
     : TVertexBuffer<VertexBasic>(dataStoreModification) {
 
-  core::VertexBasic vertex;
+  flc::VertexBasic vertex;
 
   for (float z = 0; z <= chunkDensity; z++) {
     for (float x = 0; x <= chunkDensity; x++) {
@@ -298,7 +298,7 @@ VertexBufferBasic::VertexBufferBasic(framework::TerrainConstructor *constructor,
   mSize = mTotalElements * sizeof(VertexBasic);
 }
 
-VertexBufferBasic::VertexBufferBasic(const std::vector<core::VertexBasic> &vertices, GLuint dataStoreModification)
+VertexBufferBasic::VertexBufferBasic(const std::vector<flc::VertexBasic> &vertices, GLuint dataStoreModification)
     : TVertexBuffer<VertexBasic>(vertices, dataStoreModification) {
 
 }
@@ -360,5 +360,5 @@ void VertexBufferBasic::log() const {
   }
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

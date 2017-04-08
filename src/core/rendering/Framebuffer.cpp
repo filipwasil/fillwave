@@ -37,8 +37,8 @@
 
 FLOGINIT("Framebuffer", FERROR | FFATAL | FDEBUG)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Framebuffer::Framebuffer(GLsizei howMany)
     : GLObject(howMany) {
@@ -99,5 +99,5 @@ void Framebuffer::reload() {
   fLogC("Reloading");
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

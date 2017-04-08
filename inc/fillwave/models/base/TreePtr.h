@@ -37,8 +37,8 @@
 #include <vector>
 #include <algorithm>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TreePtr
  * \brief Basic tree template class. Enables attaching and detaching nodes.
@@ -121,5 +121,5 @@ protected:
   std::vector<std::unique_ptr<T>> mChildren;
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

@@ -37,8 +37,8 @@
 #include <fillwave/OpenGL.h>
 #include <fillwave/core/pipeline/Blending.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 /*! \struct RenderItem
  * \brief Single draw item structure
  */
@@ -85,7 +85,7 @@ struct RenderItem {
   GLuint mHandles[eRenderHandlesSize];
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_MODELS_BASE_RENDERITEM_H_ */

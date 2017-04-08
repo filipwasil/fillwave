@@ -36,8 +36,8 @@
 
 FLOGINIT("Texture", FERROR | FFATAL | FDEBUG)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Texture::Texture(GLenum textureTarget, GLsizei howMany)
     : GLObject(howMany), mTarget(textureTarget) {
@@ -103,4 +103,4 @@ void unbindTexture(GLuint target) {
 }
 
 } /* core  */
-} /* fillwave */
+} /* flw */

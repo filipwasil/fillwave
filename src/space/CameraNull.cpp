@@ -34,8 +34,8 @@
 
 #include <fillwave/space/CameraNull.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 CameraNull::CameraNull() {
   mProjectionMatrix = glm::mat4(1.0);
@@ -56,5 +56,5 @@ GLfloat CameraNull::getProjectionFarPlane() {
   return 0.0f;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw*/

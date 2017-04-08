@@ -34,8 +34,8 @@
 #include <fillwave/actions/callbacks/TimedColorCallback.h>
 #include <fillwave/Log.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 TimedColorCallback::TimedColorCallback(Model *model, glm::vec4 endColor, GLfloat lifeTime, EasingFunction easing)
     : TimedCallback(lifeTime, easing), mStartColor(glm::vec4(0.0)), mEndColor(endColor), mModel(model) {
@@ -56,6 +56,6 @@ void TimedColorCallback::perform(EventType &event) {
   }
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 

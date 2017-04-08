@@ -14,8 +14,8 @@
 
 FLOGINIT("Android loader", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 ANativeActivity* gActivity;
 
@@ -183,7 +183,7 @@ bool androidExtracted(const char* pFile) {
   }
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* __ANDROID__ */

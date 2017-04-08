@@ -34,8 +34,8 @@
 #ifndef WORKITEM_H_
 #define WORKITEM_H_
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class WorkItem
  * \brief Single compute shader job.
@@ -49,7 +49,7 @@ public:
   virtual ~WorkItem() = default;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* WORKITEM_H_ */

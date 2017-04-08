@@ -36,8 +36,8 @@
 #include <fillwave/actions/callbacks/TimedCallback.h>
 #include <fillwave/models/base/Moveable.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TimedScaleCallback
  * \brief TimedCallback to scale the Entity to certain size in certain time.
@@ -65,5 +65,5 @@ protected:
   Moveable *mMoveable;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

@@ -36,8 +36,8 @@
 
 #include <fillwave/core/texturing/Texture.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Texture2D
  * \brief Single GLSL 2D Texture object.
@@ -67,8 +67,8 @@ protected:
   ParameterList mParameters;
 };
 
-} /* core */
-typedef std::shared_ptr<core::Texture2D> pTexture2D;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::Texture2D> pTexture2D;
+} /* flw */
 
 #endif /* TEXTURE_2D_H_ */

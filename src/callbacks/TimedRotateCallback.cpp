@@ -33,8 +33,8 @@
 
 #include <fillwave/actions/callbacks/TimedRotateCallback.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 TimedRotateCallback::TimedRotateCallback(Moveable *moveable,
     glm::vec3 axis,
@@ -55,5 +55,5 @@ void TimedRotateCallback::performTime(TimeEventData &data) {
   mMoveable->rotateBy(mAxis, mStartAngle + ease(getPercentageDone()) * mEndAngle);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

@@ -36,8 +36,8 @@
 
 #include <memory>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 /*! \struct PhysicsMeshBuffer
  * \brief Physical mesh data.
  */
@@ -47,8 +47,8 @@ struct PhysicsMeshBuffer {
   std::vector<glm::vec3> mVertices;
   std::vector<GLint> mIndices;
 };
-} /* framework */
-typedef std::unique_ptr<framework::PhysicsMeshBuffer> puPhysicsMeshBuffer;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::PhysicsMeshBuffer> puPhysicsMeshBuffer;
+} /* flw */
 
 #endif /* INC_FILLWAVE_COMMON_PHYSICSMESHBUFFER_H_ */
