@@ -40,10 +40,10 @@
 
 FLOGINIT("Skybox", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-Skybox::Skybox(Engine *engine, core::Texture3D *texture)
+Skybox::Skybox(Engine *engine, flc::Texture3D *texture)
     : IReloadable(engine), mTexture(texture) {
 
   ProgramLoader loader(engine);
@@ -54,12 +54,12 @@ Skybox::Skybox(Engine *engine, core::Texture3D *texture)
   SphereSkybox sphere(1.0, 10, 10);
 
   std::vector<GLuint> indices = sphere.getIndices();
-  std::vector<core::VertexPosition> vertices = sphere.getVertices();
+  std::vector<flc::VertexPosition> vertices = sphere.getVertices();
 
   fLogD("Initializing skybox buffer");
 
-  mIBO = engine->storeBuffer<core::IndexBuffer>(mVAO, indices);
-  mVBO = engine->storeBuffer<core::VertexBufferPosition>(mVAO, vertices);
+  mIBO = engine->storeBuffer<flc::IndexBuffer>(mVAO, indices);
+  mVBO = engine->storeBuffer<flc::VertexBufferPosition>(mVAO, vertices);
 
   initPipeline();
   initVBO();
@@ -70,10 +70,10 @@ Skybox::Skybox(Engine *engine, core::Texture3D *texture)
 void Skybox::draw(ICamera &camera) {
   mProgram->use();
 
-  core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-  core::Uniform::push(mULCModelMatrixPosition, mPhysicsMMC);
-  core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
-  core::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
+  flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
+  flc::Uniform::push(mULCModelMatrixPosition, mPhysicsMMC);
+  flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+  flc::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
 
   mVAO->bind();
 
@@ -89,19 +89,19 @@ void Skybox::draw(ICamera &camera) {
   }
   glFrontFace(GL_CCW);
 
-  core::Texture2D::unbind2DTextures();
+  flc::Texture2D::unbind2DTextures();
 
-  core::VertexArray::unbindVAO();
-  core::Program::disusePrograms();
+  flc::VertexArray::unbindVAO();
+  flc::Program::disusePrograms();
 }
 
 void Skybox::drawDR(ICamera &camera) {
   mProgramDR->use();
 
-  core::Uniform::push(mULCCameraPosition, camera.getTranslation());
-  core::Uniform::push(mULCModelMatrixPosition, mPhysicsMMC);
-  core::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
-  core::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
+  flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
+  flc::Uniform::push(mULCModelMatrixPosition, mPhysicsMMC);
+  flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
+  flc::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
 
   mVAO->bind();
 
@@ -117,10 +117,10 @@ void Skybox::drawDR(ICamera &camera) {
   }
   glFrontFace(GL_CCW);
 
-  core::Texture2D::unbind2DTextures();
+  flc::Texture2D::unbind2DTextures();
 
-  core::VertexArray::unbindVAO();
-  core::Program::disusePrograms();
+  flc::VertexArray::unbindVAO();
+  flc::Program::disusePrograms();
 }
 
 inline void Skybox::initBuffers() {
@@ -156,7 +156,7 @@ inline void Skybox::initVAO() {
     mIBO->setLoaded(GL_FALSE);
     mIBO->send();
   }
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 inline void Skybox::initVBO() {
@@ -177,5 +177,5 @@ bool Skybox::getRenderItem(RenderItem &item) {
   return true;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

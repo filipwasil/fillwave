@@ -36,8 +36,8 @@
 
 #include <fillwave/core/pipeline/Program.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class IEffect
  * \brief Base for effects.
@@ -54,33 +54,33 @@ public:
    * \brief virtual: defines action to be done just before the draw.
    */
 
-  virtual void preDrawAction(core::Program *program) = 0;
+  virtual void preDrawAction(flc::Program *program) = 0;
 
   /*!
    * postDrawAction
    * \brief virtual: defines action to be done just after the draw.
    */
 
-  virtual void postDrawAction(core::Program *program) = 0;
+  virtual void postDrawAction(flc::Program *program) = 0;
 
   /*!
    * stopAction
    * \brief virtual: defines action to be done when the effect is stopped.
    */
 
-  virtual void stopAction(core::Program *program) = 0;
+  virtual void stopAction(flc::Program *program) = 0;
 
   /*!
    * startAction
    * \brief virtual: defines action to be done when the effect is started.
    */
 
-  virtual void startAction(core::Program *program) = 0;
+  virtual void startAction(flc::Program *program) = 0;
 };
 
-} /* framework */
-typedef std::shared_ptr<framework::IEffect> pIEffect;
-typedef std::unique_ptr<framework::IEffect> puIEffect;
-} /* fillwave */
+} /* flf */
+typedef std::shared_ptr<flf::IEffect> pIEffect;
+typedef std::unique_ptr<flf::IEffect> puIEffect;
+} /* flw */
 
 #endif /* EFFECT_H_ */

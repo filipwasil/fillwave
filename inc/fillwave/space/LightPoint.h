@@ -41,9 +41,9 @@
 
 #include <map>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class LightPoint
  * \brief Not used.
@@ -51,29 +51,29 @@ namespace framework {
 
 class LightPoint : public Light {
 public:
-  LightPoint(core::Texture3DRenderable *shadowTexture,
+  LightPoint(flc::Texture3DRenderable *shadowTexture,
       glm::vec3 position,
       glm::vec4 intensity,
       Moveable *followed = nullptr);
 
   virtual ~LightPoint() = default;
 
-  core::Texture3DRenderable *getShadowTexture();
+  flc::Texture3DRenderable *getShadowTexture();
 
   CameraPerspective *getShadowCamera(GLenum id);
 
   void updateShadowCamera();
 
 protected:
-  core::Texture3DRenderable *mShadowTexture;
+  flc::Texture3DRenderable *mShadowTexture;
   std::map<GLenum, puCameraPerspective> mFaceCameras;
 
 private:
   Sphere mSphere;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::LightPoint> puLightPoint;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::LightPoint> puLightPoint;
+} /* flw */
 
 #endif /* LIGHTPOINT_H_ */

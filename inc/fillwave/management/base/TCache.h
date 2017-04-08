@@ -45,8 +45,8 @@ do {                                    \
    }                                   \
 } while(0)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 constexpr size_t FILLWAVE_MANAGEMENT_MAX_ITEMS = 5000;
 
@@ -90,7 +90,7 @@ public:
   }
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 #undef FILLWAVE_FORGET_ABOUT_ME

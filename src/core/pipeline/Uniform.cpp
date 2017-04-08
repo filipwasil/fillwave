@@ -37,8 +37,8 @@
 
 FLOGINIT("Uniform", FERROR | FFATAL | FINFO)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Uniform::Uniform(std::string name, GLuint type, GLsizei size, GLint location)
     : mName(name), mType(type), mSize(size), mLocation(location) {
@@ -261,5 +261,5 @@ void Uniform::log() const {
   fLogI("Size: %d", mSize);
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

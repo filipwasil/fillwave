@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * macros.h
  *
@@ -31,13 +33,10 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef MACROS_H_
-#define MACROS_H_
-
 #include <algorithm>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 template <class T>
 void remove(std::vector<T> &vec, T &item) {
@@ -70,12 +69,15 @@ std::unique_ptr<CONTAINER> make_unique_container(TCURRENT &&t, TNEXT &&... args)
 #   define UINT_MAX (~((unsigned int)0))
 #endif
 
+#ifdef __unix
+#define fopen_s(pFile,filename,mode) NULL == ((*(pFile))=fopen((filename),  (mode)))
+#endif
+
+
 /*
  template<typename T>
  using shared_ptr_unsynchronized = std::__shared_ptr<T, __gnu_cxx::_S_single>;
  */
 
-} /* namespace framework */
-} /* namespace fillwave */
-
-#endif /* MACROS_H_ */
+} /* namespace flf */
+} /* namespace flw */

@@ -36,8 +36,8 @@
 
 #include <fillwave/core/buffers/TVertexBuffer.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \struct VertexText
  * \brief Stores the text vertex data.
@@ -63,7 +63,7 @@ public:
   void log() const;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* VERTEXBUFFERTEXT_H_ */

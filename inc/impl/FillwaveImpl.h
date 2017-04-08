@@ -31,10 +31,10 @@ struct ANativeActivity;
 
 class Engine;
 
-using namespace fillwave::framework;
+using namespace flw::flf;
 using namespace std;
 
-namespace fillwave {
+namespace flw {
 
 /*! \struct EngineImpl
 * \brief Private implementation of Fillwave GE.
@@ -68,12 +68,12 @@ struct Engine::EngineImpl final {
   GLfloat mWindowAspectRatio = 1200.0f / 1920.0f;
 
   /* Loaders */
-  framework::FontLoader mFontLoader;
-  framework::FileLoader mFileLoader;
-  framework::ProgramLoader mProgramLoader;
+  flf::FontLoader mFontLoader;
+  flf::FileLoader mFileLoader;
+  flf::ProgramLoader mProgramLoader;
 
   /* Picking */
-  core::Texture2DRenderable *mPickingRenderableTexture;
+  flc::Texture2DRenderable *mPickingRenderableTexture;
   puPixelBuffer mPickingPixelBuffer;
 
   /* Resources */
@@ -85,16 +85,16 @@ struct Engine::EngineImpl final {
   BufferSystem mBuffers;
   puLightSystem mLights;
   puTextureSystem mTextures;
-  vector<core::PostProcessingPass> mPostProcessingPasses;
-  core::Program *mProgramTextureLookup;
+  vector<flc::PostProcessingPass> mPostProcessingPasses;
+  flc::Program *mProgramTextureLookup;
 
   /* Fences and barriers */
   puFence mFence;
 
   /* OQ */
-  core::Program *mProgramOcclusionBox;
-  core::VertexBufferPosition *mVBOOcclusion;
-  core::VertexArray *mVAOOcclusion;
+  flc::Program *mProgramOcclusionBox;
+  flc::VertexBufferPosition *mVBOOcclusion;
+  flc::VertexArray *mVAOOcclusion;
 
   /* Inputs - callbacks */
   map<eEventType, vector<puCallback> > mCallbacks;
@@ -111,11 +111,11 @@ struct Engine::EngineImpl final {
   GLuint mFrameCounter;
   GLfloat mTimeFactor;
   pText mFPSText;
-  framework::FPSCallback *mTextFPSCallback;
+  flf::FPSCallback *mTextFPSCallback;
 
   /* Startup */
   GLfloat mStartupTime;
-  core::Texture *mStartupTexture;
+  flc::Texture *mStartupTexture;
   const GLfloat mStartupTimeLimit = 8.0f;
   puPostProcessingPass mPostProcessingPassStartup;
 
@@ -129,17 +129,17 @@ struct Engine::EngineImpl final {
   /* Callbacks */
   void runCallbacks();
 
-  void runCallbacks(framework::EventType &eventType);
+  void runCallbacks(flf::EventType &eventType);
 
   void clearCallbacks();
 
   void clearCallbacks(eEventType eventType);
 
-  void clearCallback(framework::Callback *callback);
+  void clearCallback(flf::Callback *callback);
 
   void registerCallback(puCallback &&callback);
 
-  void unregisterCallback(framework::Callback *callback);
+  void unregisterCallback(flf::Callback *callback);
 
   /* Evaluation */
   void evaluateShadowMaps();
@@ -168,9 +168,9 @@ struct Engine::EngineImpl final {
 
 #endif
 
-  void drawTexture(core::Texture *t, core::Program *p);
+  void drawTexture(flc::Texture *t, flc::Program *p);
 
-  void drawTexture(core::Texture *t);
+  void drawTexture(flc::Texture *t);
 
   /* IRenderer */
   void drawClear();
@@ -279,7 +279,7 @@ void Engine::EngineImpl::init() {
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
   initStartup(engine);
 #endif
-//   mFence = puFence(new core::Fence());
+//   mFence = puFence(new flc::Fence());
 }
 
 #ifdef FILLWAVE_GLES_3_0
@@ -313,8 +313,8 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
-  mTextures = make_unique<framework::TextureSystem>(mFileLoader.getRootPath());
-  mLights = make_unique<framework::LightSystem>();
+  mTextures = make_unique<flf::TextureSystem>(mFileLoader.getRootPath());
+  mLights = make_unique<flf::LightSystem>();
 }
 
 inline void Engine::EngineImpl::initPipelines() {
@@ -328,31 +328,31 @@ inline void Engine::EngineImpl::initPipelines() {
 inline void Engine::EngineImpl::initUniforms() {
   mProgramTextureLookup->use();
   mProgramTextureLookup->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 inline void Engine::EngineImpl::initOcclusionTest() {
-  vector<core::VertexPosition> vec = framework::BoxOcclusion().getVertices();
-  mVAOOcclusion = new core::VertexArray();
+  vector<flc::VertexPosition> vec = flf::BoxOcclusion().getVertices();
+  mVAOOcclusion = new flc::VertexArray();
   mVBOOcclusion = mBuffers.mVerticesPosition.store(mVAOOcclusion, vec);
   mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
   mVAOOcclusion->bind();
   mVBOOcclusion->bind();
   mVBOOcclusion->attributesSetForVAO();
   mVBOOcclusion->send();
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 inline void Engine::EngineImpl::initStartup() {
 
-  core::Program *program = mProgramLoader.getQuadCustomFragmentShaderStartup();
+  flc::Program *program = mProgramLoader.getQuadCustomFragmentShaderStartup();
 
   program->use();
   program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
   program->uniformPush("uScreenFactor", mWindowAspectRatio);
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 
-  mPostProcessingPassStartup = make_unique<core::PostProcessingPass>(program,
+  mPostProcessingPassStartup = make_unique<flc::PostProcessingPass>(program,
                                                                      mTextures->getDynamic("fillwave_quad_startup.frag",
                                                                                            program,
                                                                                            glm::ivec2(mWindowWidth,
@@ -361,22 +361,22 @@ inline void Engine::EngineImpl::initStartup() {
 
   fLogD("Post processing startup pass added");
 
-  mStartupTexture = mTextures->get("logo.png", framework::eCompression::eNone);
+  mStartupTexture = mTextures->get("logo.png", flf::eCompression::eNone);
   if (mStartupTexture) {
     return;
   }
 
-  mStartupTexture = mTextures->get("textures/logo.png", framework::eCompression::eNone);
+  mStartupTexture = mTextures->get("textures/logo.png", flf::eCompression::eNone);
   if (mStartupTexture) {
     return;
   }
 
-  mStartupTexture = mTextures->get("64_64_64.color", framework::eCompression::eNone);
+  mStartupTexture = mTextures->get("64_64_64.color", flf::eCompression::eNone);
   fLogE("Fillwave startup logo could not be executed");
 }
 
 inline void Engine::EngineImpl::initPickingBuffer() {
-  mPickingPixelBuffer = puPixelBuffer(new core::PixelBuffer(GL_STREAM_READ));
+  mPickingPixelBuffer = puPixelBuffer(new flc::PixelBuffer(GL_STREAM_READ));
   reloadPickingBuffer();
 }
 
@@ -385,7 +385,7 @@ inline void Engine::EngineImpl::initExtras() {
   mTextFPSCallback = NULL;
 
   /* Debugger */
-  mDebugger = make_unique<framework::Debugger>(mEngine);
+  mDebugger = make_unique<flf::Debugger>(mEngine);
 }
 
 void Engine::EngineImpl::reload() {
@@ -549,16 +549,16 @@ inline void Engine::EngineImpl::drawHUD() {
   }
 }
 
-void Engine::EngineImpl::drawTexture(core::Texture *t, core::Program *p) {
+void Engine::EngineImpl::drawTexture(flc::Texture *t, flc::Program *p) {
   p->use();
   t->bind(FILLWAVE_DIFFUSE_UNIT);
   p->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   t->unbind();
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
-void Engine::EngineImpl::drawTexture(core::Texture *t) {
+void Engine::EngineImpl::drawTexture(flc::Texture *t) {
   mProgramTextureLookup->use();
   mProgramTextureLookup->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
   t->bind(FILLWAVE_DIFFUSE_UNIT);
@@ -576,16 +576,16 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
   evaluateTime(time);
 
   if (mPostProcessingPasses.size()) {
-    auto _compare_function = [](core::PostProcessingPass &pass) -> bool {
+    auto _compare_function = [](flc::PostProcessingPass &pass) -> bool {
       return pass.isFinished();
     };
     auto _begin = mPostProcessingPasses.begin();
     auto _end = mPostProcessingPasses.end();
 
-    core::Texture2DRenderableDynamic *textureNext;
-    core::Texture2DRenderableDynamic *textureCurrent = (*_begin).getFrame();
+    flc::Texture2DRenderableDynamic *textureNext;
+    flc::Texture2DRenderableDynamic *textureCurrent = (*_begin).getFrame();
 
-    core::Program *programCurrent;
+    flc::Program *programCurrent;
 
     drawClear();
     textureCurrent->bindForWriting();
@@ -613,7 +613,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 
       } else {
 
-        core::Framebuffer::bindScreenFramebuffer();
+        flc::Framebuffer::bindScreenFramebuffer();
 
         // render to current bound framebuffer using textureCurrent as a texture to post process
         textureCurrent->draw(time);
@@ -658,20 +658,20 @@ inline void Engine::EngineImpl::drawOcclusionPass() {
   glDepthMask(GL_TRUE);
   glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
 
-  core::VertexArray::unbindVAO();
+  flc::VertexArray::unbindVAO();
 }
 
 inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
 
   drawClear();
 
-  core::Texture2DRenderableDynamic *t = mPostProcessingPassStartup->getFrame();
+  flc::Texture2DRenderableDynamic *t = mPostProcessingPassStartup->getFrame();
 
   t->bindForWriting();
 
   drawTexture(mStartupTexture);
 
-  core::Framebuffer::bindScreenFramebuffer();
+  flc::Framebuffer::bindScreenFramebuffer();
 
   t->draw(time);
 
@@ -688,7 +688,7 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 
   GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
 
-  core::Texture2DRenderable *light2DTexture;
+  flc::Texture2DRenderable *light2DTexture;
   for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
     light2DTexture = mLights->mLightsSpot[i]->getShadowTexture();
     light2DTexture->bindForWriting();
@@ -708,8 +708,8 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
   }
 
   for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
-    framework::LightPoint *lightPoint = mLights->mLightsPoint[i].get();
-    core::Texture3DRenderable *light3DTexture = lightPoint->getShadowTexture();
+    flf::LightPoint *lightPoint = mLights->mLightsPoint[i].get();
+    flc::Texture3DRenderable *light3DTexture = lightPoint->getShadowTexture();
     glm::vec3 lightPosition(lightPoint->getTranslation());
     light3DTexture->bindForWriting();
     light3DTexture->bind(currentTextureUnit);
@@ -721,14 +721,14 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
     }
     currentTextureUnit++;
   }
-  core::Framebuffer::bindScreenFramebuffer();
+  flc::Framebuffer::bindScreenFramebuffer();
 }
 
 inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
   if (mTimeFactor) {
-    framework::TimeEventData data;
+    flf::TimeEventData data;
     data.mTimePassed = timeExpiredInSeconds;
-    framework::TimeEvent timeEvent(data);
+    flf::TimeEvent timeEvent(data);
     runCallbacks(timeEvent);
     mScene->onEvent(timeEvent);
   }
@@ -741,11 +741,11 @@ inline void Engine::EngineImpl::evaluateDebugger() {
     case eDebuggerState::eLightsSpot:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-        framework::CameraPerspective cameraP = *(mLights->mLightsSpot[i]->getShadowCamera());
+        flf::CameraPerspective cameraP = *(mLights->mLightsSpot[i]->getShadowCamera());
         mDebugger->renderFromCamera(cameraP, mCurentTextureUnit++); //xxx make more flexible
       }
       for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
-        framework::CameraOrthographic cameraO = *(mLights->mLightsDirectional[i]->getShadowCamera());
+        flf::CameraOrthographic cameraO = *(mLights->mLightsDirectional[i]->getShadowCamera());
         mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
       }
       mCurentTextureUnit = 0;
@@ -768,11 +768,11 @@ inline void Engine::EngineImpl::evaluateDebugger() {
     case eDebuggerState::eLightsSpotColor:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-        framework::CameraPerspective cameraP = *(mLights->mLightsSpot[i]->getShadowCamera());
+        flf::CameraPerspective cameraP = *(mLights->mLightsSpot[i]->getShadowCamera());
         mDebugger->renderFromCamera(cameraP, mCurentTextureUnit++); //xxx make more flexible
       }
       for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
-        framework::CameraOrthographic cameraO = *(mLights->mLightsDirectional[i]->getShadowCamera());
+        flf::CameraOrthographic cameraO = *(mLights->mLightsDirectional[i]->getShadowCamera());
         mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
       }
       break;
@@ -783,7 +783,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
     case eDebuggerState::eLightsPointColor:
       for (size_t j = 0; j < mLights->mLightsPoint.size(); j++) {
         for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X; i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
-          framework::CameraPerspective cameraPF = *(mLights->mLightsPoint[j]->getShadowCamera(i));
+          flf::CameraPerspective cameraPF = *(mLights->mLightsPoint[j]->getShadowCamera(i));
           mDebugger->renderFromCamera(cameraPF, id++);
         }
       }
@@ -797,7 +797,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
   }
 }
 
-void Engine::EngineImpl::runCallbacks(framework::EventType &event) {
+void Engine::EngineImpl::runCallbacks(flf::EventType &event) {
   if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
     for (auto &callback : mCallbacks[event.getType()]) {
       callback->perform(event);
@@ -827,7 +827,7 @@ void Engine::EngineImpl::registerCallback(puCallback &&callback) {
   mCallbacks[callback->getEventType()].push_back(move(callback));
 }
 
-void Engine::EngineImpl::unregisterCallback(framework::Callback *callback) {
+void Engine::EngineImpl::unregisterCallback(flf::Callback *callback) {
   fLogE("mCallbacks.size() %lu", mCallbacks.size());
   if (!mCallbacks.empty() && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
     vector<puCallback> *callbacks = &mCallbacks[callback->getEventType()];
@@ -865,7 +865,7 @@ inline void Engine::EngineImpl::clearCallbacks(eEventType eventType) {
   }
 }
 
-void Engine::EngineImpl::clearCallback(framework::Callback *callback) {
+void Engine::EngineImpl::clearCallback(flf::Callback *callback) {
   eEventType e = callback->getEventType();
   vector<puCallback> *callbacks = &mCallbacks[e];
   callbacks->erase(remove_if( // Selectively remove elements in the second vector...
@@ -892,7 +892,7 @@ void Engine::EngineImpl::pick(GLuint x, GLuint y) {
   glm::ivec4 colorRead = pickingBufferGetColor(data, x, y);
   mPickingPixelBuffer->unmap();
   mPickingPixelBuffer->unbind();
-  core::Framebuffer::bindScreenFramebuffer();
+  flc::Framebuffer::bindScreenFramebuffer();
   mScene->draw();
   mScene->pick(colorRead);
 }
@@ -911,8 +911,8 @@ void Engine::EngineImpl::captureFramebufferToFile(const string &name) {
 #endif
   data[mWindowWidth * mWindowHeight * 4] = '\0';
   FILE *file;
-  file = fopen(mFileLoader.getRootPath(name).c_str(), "w");
-  if (file == nullptr) {
+  auto errorNo = fopen_s(&file, mFileLoader.getRootPath(name).c_str(), "w");
+  if (errorNo) {
     fLogE("Error when takin' screenshot");
     exit(1);
   }
@@ -925,7 +925,9 @@ void Engine::EngineImpl::captureFramebufferToFile(const string &name) {
   fclose(file);
   mPickingPixelBuffer->unmap();
   mPickingPixelBuffer->unbind();
-  core::Framebuffer::bindScreenFramebuffer();
+  flc::Framebuffer::bindScreenFramebuffer();
   mScene->draw();
 }
-} /* fillwave */
+} /* flw */
+
+#undef FILLWAVE_FOPEN

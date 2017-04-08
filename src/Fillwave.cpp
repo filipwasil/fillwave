@@ -35,7 +35,7 @@
 /* Logs */
 #include <fillwave/Log.h>
 
-/* Fillwave */
+/* flw */
 
 #include <fillwave/Fillwave.h>
 
@@ -45,10 +45,10 @@
 /* Implementation */
 #include  <impl/FillwaveImpl.h>
 
-using namespace fillwave::core;
+using namespace flw::flc;
 using namespace std;
 
-namespace fillwave {
+namespace flw {
 
 #ifdef __ANDROID__
 
@@ -139,11 +139,11 @@ Engine::storeLightDirectional(glm::vec3 position, glm::quat rotation, glm::vec4 
                                                 followed);
 }
 
-Program *Engine::storeProgram(const string &name, const vector<Shader *> &shaders, GLboolean skipLinking) {
-  return mImpl->mPrograms.store(name, shaders, skipLinking);
+Program *Engine::storeProgram(const string &name, const vector<Shader *> &shaders, bool isSkipLinking) {
+  return mImpl->mPrograms.store(name, shaders, isSkipLinking);
 }
 
-Texture2D *Engine::storeTexture(const string &texturePath, framework::eCompression compression) {
+Texture2D *Engine::storeTexture(const string &texturePath, flf::eCompression compression) {
   return mImpl->mTextures->get(texturePath, compression);
 }
 
@@ -170,12 +170,12 @@ Sampler *Engine::storeSO(GLint textureUnit) {
   return mImpl->mSamplers.store(textureUnit, textureUnit);
 }
 
-VertexArray *Engine::storeVAO(framework::IReloadable *user, VertexArray *vao) {
+VertexArray *Engine::storeVAO(flf::IReloadable *user, VertexArray *vao) {
   return vao ? mImpl->mBuffers.mVertexArrays.store(vao, user) : mImpl->mBuffers.mVertexArrays.store(user);
 }
 
 /* Inputs - insert */
-void Engine::insertInput(framework::EventType &event) {
+void Engine::insertInput(flf::EventType &event) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
   if (mImpl->mFocus.first) {
     mImpl->mFocus.first->handleFocusEvent(event);
@@ -189,7 +189,7 @@ void Engine::insertInput(framework::EventType &event) {
 }
 
 /* Engine callbacks - clear */
-void Engine::clearCallback(framework::Callback *callback) {
+void Engine::clearCallback(flf::Callback *callback) {
   mImpl->clearCallback(callback);
 }
 
@@ -202,7 +202,7 @@ void Engine::clearCallbacks() {
 }
 
 /* Callbacks registeration */
-void Engine::registerCallback(puCallback &&callback, framework::IFocusable *focusable) {
+void Engine::registerCallback(puCallback &&callback, flf::IFocusable *focusable) {
   if (focusable) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
     if (mImpl->mFocus.first) {
@@ -222,7 +222,7 @@ void Engine::registerCallback(puCallback &&callback, framework::IFocusable *focu
   mImpl->registerCallback(move(callback));
 }
 
-void Engine::dropFocus(framework::IFocusable *focusable) {
+void Engine::dropFocus(flf::IFocusable *focusable) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
   if (focusable == mImpl->mFocus.first) {
     for (auto& it : mImpl->mFocus.second) {
@@ -243,7 +243,7 @@ void Engine::dropFocus(framework::IFocusable *focusable) {
 #endif
 }
 
-void Engine::unregisterCallback(framework::Callback *callback) {
+void Engine::unregisterCallback(flf::Callback *callback) {
   mImpl->unregisterCallback(callback);
 }
 
@@ -257,7 +257,7 @@ pText Engine::storeText(const string &content,
   if (!mImpl->mTextures->get(fontName + ".png")) {
     mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
   }
-  Texture2D *t = mImpl->mTextures->get(fontName + ".png", framework::eCompression::eNone, framework::eFlip::eVertical);
+  Texture2D *t = mImpl->mTextures->get(fontName + ".png", flf::eCompression::eNone, flf::eFlip::eVertical);
 
   Font *font = nullptr;
   for (auto &it : mImpl->mFontManager) {
@@ -295,7 +295,7 @@ pText Engine::storeText(const string &content,
     font = newFont;
   }
 
-  pText text = make_shared<framework::Text>(content, t, position, this, scale, font, color, effect);
+  pText text = make_shared<flf::Text>(content, t, position, this, scale, font, color, effect);
   mImpl->mTextManager.push_back(pText(text));
   return text;
 }
@@ -376,15 +376,15 @@ void Engine::setCurrentScene(puScene &&scene) {
   mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-TGetter<framework::Scene> &&Engine::getCurrentScene() const {
-  return std::move(TGetter<framework::Scene>(mImpl->mScene.get()));
+TGetter<flf::Scene> &&Engine::getCurrentScene() const {
+  return std::move(TGetter<flf::Scene>(mImpl->mScene.get()));
 }
 
-framework::LightSystem *Engine::getLightSystem() const {
+flf::LightSystem *Engine::getLightSystem() const {
   return mImpl->mLights.get();
 }
 
-framework::TextureSystem *Engine::getTextureSystem() const {
+flf::TextureSystem *Engine::getTextureSystem() const {
   return mImpl->mTextures.get();
 }
 
@@ -434,7 +434,7 @@ void Engine::configureFPSCounter(string fontName, glm::vec2 position, GLfloat si
     mImpl->mFPSText = storeText("", fontName, position, size);
 
     /* Provide callback to refresh the FPS value */
-    mImpl->mTextFPSCallback = new framework::FPSCallback(this, mImpl->mFPSText);
+    mImpl->mTextFPSCallback = new flf::FPSCallback(this, mImpl->mFPSText);
     registerCallback(unique_ptr<Callback>(mImpl->mTextFPSCallback));
     return;
   }
@@ -540,7 +540,7 @@ void Engine::configureDebugger(eDebuggerState state) {
 }
 
 VertexBufferBasic *Engine::storeBufferInternal(VertexArray *vao,
-    framework::TerrainConstructor *constructor,
+    flf::TerrainConstructor *constructor,
     GLint density,
     GLfloat gap,
     vector<GLuint> &indices) {
@@ -614,12 +614,12 @@ IndexBuffer *Engine::storeBufferInternal(VertexArray *vao, const aiMesh *shape) 
   return mImpl->mBuffers.mIndices.store(new IndexBuffer(shape), vao);
 }
 
-VertexBufferBasic *Engine::storeBufferInternal(VertexArray *vao, const aiMesh *shape, framework::Animator *animator) {
+VertexBufferBasic *Engine::storeBufferInternal(VertexArray *vao, const aiMesh *shape, flf::Animator *animator) {
   return mImpl->mBuffers.mVertices.store(new VertexBufferBasic(shape, animator), vao);
 }
 
 #else
-core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao,
+flc::VertexBufferBasic* Engine::storeBufferInternal(flc::VertexArray* vao,
     tinyobj::shape_t& shape,
     tinyobj::attrib_t& attributes) {
   VertexBufferBasic* newData = new VertexBufferBasic(shape, attributes);
@@ -628,4 +628,4 @@ core::VertexBufferBasic* Engine::storeBufferInternal(core::VertexArray* vao,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 }
-/* fillwave */
+/* flw */

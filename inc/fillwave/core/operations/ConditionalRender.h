@@ -39,8 +39,8 @@
 
 #include <fillwave/OpenGL.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class ConditionalRender
  * \brief Operation of rendering only meshes passing the occlusion test.
@@ -71,8 +71,8 @@ private:
   GLenum mMode;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif
 

@@ -9,8 +9,8 @@
 
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \struct CharacterModsEventData
  * \brief Event data structure to store the character together with modifier keys.
@@ -36,5 +36,5 @@ public:
   virtual ~CharacterModsEvent() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

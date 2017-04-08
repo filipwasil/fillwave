@@ -34,8 +34,8 @@
 
 #include <fillwave/space/CameraOrthographic.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 CameraOrthographic::CameraOrthographic()
     : ICamera(glm::vec3(0.0f, 0.0f, 0.0f), glm::quat()) {
@@ -89,6 +89,6 @@ GLfloat CameraOrthographic::getProjectionFarPlane() {
   return mCullingBox.mProjectionFar;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 

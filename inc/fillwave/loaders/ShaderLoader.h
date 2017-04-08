@@ -37,8 +37,8 @@
 #include <fillwave/OpenGL.h>
 #include <string>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class ShaderLoader
  * \brief Loads shader sources.
@@ -72,7 +72,7 @@ public:
   virtual ~ShaderLoader() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* SHADERLOADER_H_ */

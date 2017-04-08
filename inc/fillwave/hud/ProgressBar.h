@@ -38,9 +38,9 @@
 #include <fillwave/core/rendering/Texture2DRenderable.h>
 #include <fillwave/core/pipeline/Program.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class ProgressBar
  * \brief HUD node to indicate progress.
@@ -49,7 +49,7 @@ namespace framework {
 class ProgressBar : public IHUDNode {
 public:
   ProgressBar(Engine *engine,
-      core::Texture2D *texture,
+      flc::Texture2D *texture,
       const std::string &shaderPath,
       glm::vec2 position,
       glm::vec2 scale);
@@ -64,8 +64,8 @@ private:
   GLfloat mProgress;
 };
 
-} /* namespace framework */
-typedef std::shared_ptr<framework::ProgressBar> pProgressBar;
-} /* namespace fillwave */
+} /* namespace flf */
+typedef std::shared_ptr<flf::ProgressBar> pProgressBar;
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_HUD_PROGRESSBAR_H_ */

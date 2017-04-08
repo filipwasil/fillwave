@@ -37,8 +37,8 @@
 #include <fillwave/Math.h>
 #include <fillwave/Assets.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Material
  * \brief Per mesh material info.
@@ -70,7 +70,7 @@ private:
   glm::vec4 mSpecular;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* SRC_MODELS_MATERIAL_H_ */

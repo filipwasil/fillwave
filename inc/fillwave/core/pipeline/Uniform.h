@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Uniform.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef UNIFORM_H_
-#define UNIFORM_H_
-
 #include <fillwave/OpenGL.h>
 
 #include <fillwave/Math.h>
@@ -41,8 +40,8 @@
 #include <string>
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \type UniformData
  * \brief Uniform data structure.
@@ -161,8 +160,6 @@ private:
   UniformData mData;
 };
 
-} /* core */
-typedef std::unique_ptr<core::Uniform> puUniform;
-} /* fillwave */
-
-#endif /* UNIFORM_H_ */
+} /* flc */
+typedef std::unique_ptr<flc::Uniform> puUniform;
+} /* flw */

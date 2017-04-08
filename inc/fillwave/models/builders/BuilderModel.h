@@ -36,9 +36,9 @@
 
 #include <fillwave/models/Model.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class BuilderModel
  * \brief Builder which builds the model from the asset file.
@@ -46,7 +46,7 @@ namespace framework {
 
 class BuilderModel {
 public:
-  BuilderModel(Engine *engine, std::string modelPath, core::Program *program);
+  BuilderModel(Engine *engine, std::string modelPath, flc::Program *program);
 
   virtual ~BuilderModel() = default;
 
@@ -54,15 +54,15 @@ public:
 
   BuilderModel &setModelPath(std::string &path);
 
-  BuilderModel &setProgram(core::Program *program);
+  BuilderModel &setProgram(flc::Program *program);
 
 protected:
   Engine *mEngine;
-  core::Program *mProgram;
+  flc::Program *mProgram;
   std::string mShapePath;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* INC_FILLWAVE_MODELS_BUILDERMODEL_H_ */

@@ -10,7 +10,7 @@
 #include <fillwave/Log.h>
 
 
-namespace fillwave {
+namespace flw {
 
 std::string getStructField(std::string structName, std::string fieldName, int index) {
   std::string strIndex;
@@ -57,4 +57,4 @@ std::string getFileNameOnly(const char *path) {
   return std::string(path);
 }
 
-} /* fillwave */
+} /* flw */

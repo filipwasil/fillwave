@@ -36,8 +36,8 @@
 
 #include <fillwave/core/buffers/TVertexBuffer.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \struct VertexDebug
  * \brief Stores the debugger vertex data.
@@ -62,7 +62,7 @@ public:
   void log() const;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* VERTEXBUFFERDEBUG_H_ */

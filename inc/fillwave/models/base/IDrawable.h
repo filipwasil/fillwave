@@ -37,8 +37,8 @@
 #include <fillwave/Math.h>
 #include <memory>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 class ICamera;
 
@@ -71,9 +71,9 @@ public:
   virtual void drawPicking(ICamera &camera) = 0;
 };
 
-} /* namespace framework */
-typedef std::shared_ptr<framework::IDrawable> pIDrawable;
-typedef std::unique_ptr<framework::IDrawable> pIuDrawable;
-} /* namespace fillwave */
+} /* namespace flf */
+typedef std::shared_ptr<flf::IDrawable> pIDrawable;
+typedef std::unique_ptr<flf::IDrawable> pIuDrawable;
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_MODELS_BASE_IDRAWABLE_H_ */

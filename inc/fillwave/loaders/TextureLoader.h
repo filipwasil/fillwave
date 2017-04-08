@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * TextureLoader.h
  *
@@ -31,14 +33,11 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef TEXTURELOADER_H_
-#define TEXTURELOADER_H_
-
 #include <fillwave/core/texturing/Texture.h>
 #include <iostream>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 enum class eFlip {
   eNone
@@ -103,22 +102,22 @@ public:
 
   virtual ~TextureLoader() = default;
 
-  core::Texture2DFile *load(const std::string &filePath,
+  flc::Texture2DFile *load(const std::string &filePath,
       eFlip flip = eFlip::eNone,
       GLenum format = GL_RGBA,
       std::string rootPath = "",
       eCompression compression = eCompression::eNone);
 
-  core::Texture2DFile *loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format = GL_RGBA);
+  flc::Texture2DFile *loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format = GL_RGBA);
 
-  core::Texture2DFile *loadVirtualFileCheckboard(GLuint width,
+  flc::Texture2DFile *loadVirtualFileCheckboard(GLuint width,
       GLuint height,
       GLubyte red,
       GLubyte green,
       GLubyte blue,
       GLenum format = GL_RGBA);
 
-  core::Texture2DFile *
+  flc::Texture2DFile *
   loadVirtualFileColor(GLuint width, GLuint height, GLubyte red, GLubyte green, GLubyte blue, GLenum format = GL_RGBA);
 
 private:
@@ -127,7 +126,5 @@ private:
   GLenum getComporession(eCompression compression);
 };
 
-} /* framework */
-} /* fillwave */
-
-#endif /* TEXTURELOADER_H_ */
+} /* flw */
+} /* flf */

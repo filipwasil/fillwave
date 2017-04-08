@@ -9,8 +9,8 @@
 
 #include <fillwave/actions/events/TEvent.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \struct CharacterEventData
  * \brief Event data structure to store the character.
@@ -35,5 +35,5 @@ public:
   virtual ~CharacterEvent() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

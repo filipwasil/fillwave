@@ -47,30 +47,29 @@
 
 FLOGINIT("Model", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Model::Model(Engine *engine,
-    core::Program *program,
-    Shape<core::VertexBasic> &shape,
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
+    flc::Program *program,
+    Shape<flc::VertexBasic> &shape,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
     const Material &material)
-    : IFocusable(engine), Programmable(program),
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-    mAnimator(nullptr), mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-    mLights(engine->getLightSystem()) {
+    : IFocusable(engine)
+    , Programmable(program)
+    , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+    , mLights(engine->getLightSystem()) {
 
   initShadowing(engine);
 
   ProgramLoader loader(engine);
 
-  std::vector<core::VertexBasic> vertices = shape.getVertices();
+  std::vector<flc::VertexBasic> vertices = shape.getVertices();
   std::vector<GLuint> indices = shape.getIndices();
 
-  core::VertexArray *vao = new core::VertexArray();
+  flc::VertexArray *vao = new flc::VertexArray();
   attach(std::make_unique<Mesh>(engine,
                                 material,
                                 diffuseMap,
@@ -83,21 +82,20 @@ Model::Model(Engine *engine,
                                 loader.getAmbientOcclusionGeometry(),
                                 loader.getAmbientOcclusionColor(),
                                 engine->getLightSystem(),
-                                engine->storeBuffer<core::VertexBufferBasic>(vao, vertices),
-                                engine->storeBuffer<core::IndexBuffer>(vao, indices),
+                                engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices),
+                                engine->storeBuffer<flc::IndexBuffer>(vao, indices),
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-                                mAnimator,
+                                mAnimator.get(),
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
                                 GL_TRIANGLES,
                                 vao));
 }
 
-Model::Model(Engine *engine, core::Program *program, const std::string &shapePath)
-    : IFocusable(engine), Programmable(program),
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-    mAnimator(nullptr), mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-    mLights(engine->getLightSystem()) {
+Model::Model(Engine *engine, flc::Program *program, const std::string &shapePath)
+    : IFocusable(engine)
+    , Programmable(program)
+    , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+    , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   const aiScene *scene = engine->getModelFromFile(shapePath);
@@ -149,16 +147,15 @@ Model::Model(Engine *engine, core::Program *program, const std::string &shapePat
 }
 
 Model::Model(Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     const std::string &shapePath,
     const std::string &diffuseMapPath,
     const std::string &normalMapPath,
     const std::string &specularMapPath)
-    : IFocusable(engine), Programmable(program),
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-    mAnimator(nullptr), mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-    mLights(engine->getLightSystem()) {
+    : IFocusable(engine)
+    , Programmable(program)
+    , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+    , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   const aiScene *scene = engine->getModelFromFile(shapePath);
@@ -201,17 +198,16 @@ Model::Model(Engine *engine,
 }
 
 Model::Model(Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     const std::string &shapePath,
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
     const Material &material)
-    : IFocusable(engine), Programmable(program),
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-    mAnimator(nullptr), mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE),
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-    mLights(engine->getLightSystem()) {
+    : IFocusable(engine)
+    , Programmable(program)
+    , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+    , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   const aiScene *scene = engine->getModelFromFile(shapePath);
@@ -253,14 +249,6 @@ Model::Model(Engine *engine,
 #endif
 }
 
-Model::~Model() {
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  if (mAnimator) {
-    delete mAnimator;
-  }
-#endif
-}
-
 void Model::reload() {
 
 }
@@ -269,7 +257,7 @@ void Model::reload() {
 
 inline void Model::initAnimations(const aiScene *scene) {
   if (scene->HasAnimations()) {
-    mAnimator = new Animator(scene);
+    mAnimator = std::make_unique<Animator>(scene);
     fLogD("attached TimedBoneUpdateCallback to model");
     this->attachHierarchyCallback(std::make_unique<TimedBoneUpdateCallback>(this));
   }
@@ -373,9 +361,9 @@ inline void Model::loadNodes(aiNode *node,
     const aiScene *scene,
     Engine *engine,
     Entity *entity,
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
     const Material &material) {
 
   /* Set this node transformations */
@@ -407,9 +395,9 @@ inline void Model::loadNodeTransformations(aiNode *node, Entity *entity) {
 
 puMesh Model::loadMesh(const aiMesh *shape,
     const Material &material,
-    core::Texture2D *diffuseMap,
-    core::Texture2D *normalMap,
-    core::Texture2D *specularMap,
+    flc::Texture2D *diffuseMap,
+    flc::Texture2D *normalMap,
+    flc::Texture2D *specularMap,
     Engine *engine) {
 
   if (!shape) {
@@ -417,7 +405,7 @@ puMesh Model::loadMesh(const aiMesh *shape,
   }
 
   ProgramLoader loader(engine);
-  core::VertexArray *vao = new core::VertexArray();
+  flc::VertexArray *vao = new flc::VertexArray();
   return std::make_unique<Mesh>(engine,
                                 material,
                                 diffuseMap,
@@ -430,32 +418,37 @@ puMesh Model::loadMesh(const aiMesh *shape,
                                 loader.getAmbientOcclusionGeometry(),
                                 loader.getAmbientOcclusionColor(),
                                 engine->getLightSystem(),
-                                engine->storeBuffer<core::VertexBufferBasic>(vao, shape, mAnimator),
-                                engine->storeBuffer<core::IndexBuffer>(vao, shape),
-                                mAnimator,
+                                engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get()),
+                                engine->storeBuffer<flc::IndexBuffer>(vao, shape),
+                                mAnimator.get(),
                                 GL_TRIANGLES,
                                 vao);
 }
 
 void Model::performAnimation(GLfloat timeElapsed_s) {
-  mAnimator->updateTransformations(mActiveAnimation, timeElapsed_s);
-}
-
-void Model::setActiveAnimation(GLint animationID) {
-  if (mAnimator->getAnimations() > animationID) {
-    mActiveAnimation = animationID;
-  } else {
-    fLogE("There is no animation for slot: %d", animationID);
-    fLogD("Maximum number of animations: %d", mAnimator->getAnimations());
+  if (mAnimator) {
+    mAnimator->updateTransformations(mActiveAnimation, timeElapsed_s);
   }
 }
 
+void Model::setActiveAnimation(GLint animationID) {
+  if (mAnimator && mAnimator->getAnimations() > animationID) {
+    mActiveAnimation = animationID;
+    return;
+  }
+  fLogE("There is no animation for slot: %d", animationID);
+  fLogD("Maximum number of animations: %d", mAnimator->getAnimations());
+}
+
 GLint Model::getActiveAnimations() {
-  return mAnimator->getAnimations();
+  if (mAnimator) {
+    return mAnimator->getAnimations();
+  }
+  return 0;
 }
 
 bool Model::isAnimated() const {
-  return mAnimator;
+  return nullptr != mAnimator.get();
 }
 
 inline void Model::evaluateAnimations() {
@@ -472,12 +465,11 @@ inline void Model::evaluateAnimations() {
 
 
 inline void Model::initUniformsCache() {
-  if (nullptr == mAnimator) {
-    return;
+  if (mAnimator) {
+    mUniformLocationCacheBones = mProgram->getUniformLocation("uBones[0]");
+    mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation("uBones[0]");
+    mUniformLocationCacheBonesShadowColor = mProgramShadowColor->getUniformLocation("uBones[0]");
   }
-  mUniformLocationCacheBones = mProgram->getUniformLocation("uBones[0]");
-  mUniformLocationCacheBonesShadow = mProgramShadow->getUniformLocation("uBones[0]");
-  mUniformLocationCacheBonesShadowColor = mProgramShadowColor->getUniformLocation("uBones[0]");
 }
 
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
@@ -485,20 +477,20 @@ inline void Model::initUniformsCache() {
 puMesh Model::loadMesh(tinyobj::shape_t& shape,
                 tinyobj::attrib_t& attrib,
                 const Material& material,
-                core::Texture2D* diffuseMap,
-                core::Texture2D* normalMap,
-                core::Texture2D* specularMap,
+                flc::Texture2D* diffuseMap,
+                flc::Texture2D* normalMap,
+                flc::Texture2D* specularMap,
                 Engine* engine) {
   ProgramLoader loader(engine);
-  core::VertexArray* vao = new core::VertexArray();
+  flc::VertexArray* vao = new flc::VertexArray();
 
   return std::make_unique < Mesh
        > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
          mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
          loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-         engine->getLightSystem(), engine->storeBuffer<core::VertexBufferBasic> (vao,
+         engine->getLightSystem(), engine->storeBuffer<flc::VertexBufferBasic> (vao,
              shape, attrib),
-         engine->storeBuffer<core::IndexBuffer>(vao,
+         engine->storeBuffer<flc::IndexBuffer>(vao,
              static_cast<GLuint>(shape.mesh.indices.size())), GL_TRIANGLES,
          vao);
 }
@@ -542,7 +534,7 @@ void Model::log() const {
 inline void Model::initShadowing(Engine *engine) {
   ProgramLoader loader(engine);
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  if (nullptr != mAnimator) {
+  if (mAnimator) {
     mProgramShadow = loader.getShadowWithAnimation();
     mProgramShadowColor = loader.getShadowColorCodedWithAnimation();
     return;
@@ -560,5 +552,5 @@ void Model::updateRenderer(IRenderer &renderer) {
   renderer.update(this);
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

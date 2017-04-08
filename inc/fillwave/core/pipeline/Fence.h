@@ -38,8 +38,8 @@
 
 #include <memory>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Fence
  * \brief Sets a fence for a gpu to wait.
@@ -57,8 +57,8 @@ private:
   GLsync mHandle;
 };
 
-} /* core */
-typedef std::unique_ptr<core::Fence> puFence;
-} /* fillwave */
+} /* flc */
+typedef std::unique_ptr<flc::Fence> puFence;
+} /* flw */
 
 #endif /* FENCE_H_ */

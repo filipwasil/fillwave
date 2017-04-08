@@ -37,8 +37,8 @@
 #include <fillwave/loaders/FontLoader.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 void FontLoader::load(std::string name) {
   std::vector<std::string> splitted = split(name, '/');
@@ -55,5 +55,5 @@ void FontLoader::load(std::string name) {
   }
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

@@ -45,8 +45,8 @@
 #include <memory>
 #include <unordered_map>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Scene
  * \brief Entity to be a root of Entity tree.
@@ -129,7 +129,7 @@ private:
   const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Scene> puScene;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Scene> puScene;
+} /* flw */
 

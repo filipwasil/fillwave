@@ -35,8 +35,8 @@
 #include <fillwave/hud/Button.h>
 #include <fillwave/Fillwave.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 void HUD::draw() {
   for (auto &it : mChildren) {
@@ -44,5 +44,5 @@ void HUD::draw() {
   }
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

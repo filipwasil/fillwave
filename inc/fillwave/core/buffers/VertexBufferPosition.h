@@ -36,8 +36,8 @@
 
 #include <fillwave/core/buffers/TVertexBuffer.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \struct VertexPosition
  * \brief Not used. Stores the position vertex data.
@@ -53,7 +53,7 @@ struct VertexPosition {
 
 class VertexBufferPosition : public TVertexBuffer<VertexPosition> {
 public:
-  VertexBufferPosition(framework::Shape<VertexPosition> &shape, GLuint dataStoreModification = GL_STATIC_DRAW);
+  VertexBufferPosition(flf::Shape<VertexPosition> &shape, GLuint dataStoreModification = GL_STATIC_DRAW);
 
   VertexBufferPosition(const std::vector<VertexPosition> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW);
 
@@ -62,7 +62,7 @@ public:
   void log() const;
 };
 
-} /* core */
+} /* flc */
 } /* fillwave*/
 
 #endif /* VertexBufferPosition_H_ */

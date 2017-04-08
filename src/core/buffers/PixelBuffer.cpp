@@ -37,8 +37,8 @@
 
 FLOGINIT("PixelBuffer", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 PixelBuffer::PixelBuffer(GLuint dataStoreType)
     : IBuffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
@@ -58,4 +58,4 @@ void PixelBuffer::emptyGPU() {
 }
 
 } /* models */
-} /* fillwave */
+} /* flw */

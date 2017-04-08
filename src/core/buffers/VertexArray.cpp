@@ -38,8 +38,8 @@
 
 FLOGINIT("VertexArray", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 VertexArray::VertexArray(GLuint howMany)
     : GLObject(howMany) {
@@ -72,5 +72,5 @@ void bindVAO(GLuint handle) {
   fLogC("Could not bind the VAO");
 }
 
-} /* core */
-} /* Fillwave */
+} /* flc */
+} /* flw */

@@ -38,9 +38,9 @@
 #include <fillwave/space/CameraOrthographic.h>
 #include <fillwave/space/base/Light.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /**
  * \brief Light UBO data.
@@ -56,7 +56,7 @@ struct LightDirectioData {
  */
 class LightDirectional : public Light {
 public:
-  LightDirectional(core::Texture2DRenderable *shadowTexture,
+  LightDirectional(flc::Texture2DRenderable *shadowTexture,
       glm::vec3 position,
       glm::quat rotation,
       glm::vec4 intensity,
@@ -64,7 +64,7 @@ public:
 
   virtual ~LightDirectional() = default;
 
-  core::Texture2DRenderable *getShadowTexture();
+  flc::Texture2DRenderable *getShadowTexture();
 
   CameraOrthographic *getShadowCamera();
 
@@ -73,12 +73,12 @@ public:
   void log();
 
 private:
-  core::Texture2DRenderable *mShadowTexture;
+  flc::Texture2DRenderable *mShadowTexture;
   puCameraOrthographic mShadowCamera;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::LightDirectional> puLightDirectional;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::LightDirectional> puLightDirectional;
+} /* flw */
 
 #endif /* LIGHTDIRECTIONAL_H_ */
