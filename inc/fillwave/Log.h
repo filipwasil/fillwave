@@ -72,6 +72,12 @@
 
 #include "spdlog/spdlog.h"
 
+#ifdef _WIN32
+#define FILLWAVE_SPRINTF sprintf_s
+#else
+#define FILLWAVE_SPRINTF sprintf
+#endif /* _WIN32 */
+
 #endif /* __ANDROID__ */
 
 #ifdef __ANDROID__
@@ -88,7 +94,7 @@
 #endif /* __ANDROID__ */
 
 #define FLOGINIT_DEFAULT()                                              \
-   static const std::string _tag_ = fillwave::getFileNameOnly(__FILE__);\
+   static const std::string _tag_ = flw::getFileNameOnly(__FILE__);\
    static const char _mask_ = FBIT_MAX;                                 \
    FLOG_CREATE_STATIC_LOGGER()
 
@@ -122,14 +128,14 @@
 
 #else /* __ANDROID__ */
 
-#define fLog() sprintf(buffer, "%s:%d", ::_tag_.c_str(), __LINE__)
+#define fLog() FILLWAVE_SPRINTF(buffer, "%s:%d", ::_tag_.c_str(), __LINE__)
 #define fLogBase(LOG_CONDITION, LOG_FLAG, ...) LOG_FLAG ## _FN(LOG_CONDITION, __VA_ARGS__)
-#define GPU_FATAL_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); sprintf(buffer, __VA_ARGS__); logs->critical(buffer); } } while(0)
-#define GPU_ERROR_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); sprintf(buffer, __VA_ARGS__); logs->critical(buffer); } } while(0)
-#define GPU_WARNING_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); sprintf(buffer, __VA_ARGS__); logs->warn(buffer); } } while(0)
-#define GPU_DEBUG_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); sprintf(buffer, __VA_ARGS__); logs->info(buffer); } } while(0)
-#define GPU_INFO_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); sprintf(buffer, __VA_ARGS__); logs->info(buffer); } } while(0)
-#define GPU_USER_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); sprintf(buffer, __VA_ARGS__); logs->info(buffer); } } while(0)
+#define GPU_FATAL_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->critical(buffer); } } while(0)
+#define GPU_ERROR_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->critical(buffer); } } while(0)
+#define GPU_WARNING_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->warn(buffer); } } while(0)
+#define GPU_DEBUG_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->info(buffer); } } while(0)
+#define GPU_INFO_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->info(buffer); } } while(0)
+#define GPU_USER_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->info(buffer); } } while(0)
 
 #endif /* __ANDROID__ */
 
@@ -157,13 +163,13 @@
     GLenum errorCode = getGlError();\
     if (0 != errorCode) { /* GL_NO_ERROR */\
         char glBuffer[256];\
-        int n = sprintf(glBuffer, "[%s 0x%04x] ", "CORE ERROR:", errorCode);\
+        int n = FILLWAVE_SPRINTF(glBuffer, "[%s 0x%04x] ", "CORE ERROR:", errorCode);\
         if (n > 0) {\
             logs->critical(glBuffer);\
         }\
         if (errorCode == 0x0506) { /* GL_INVALID_FRAMEBUFFER_OPERATION */\
             GLenum status = getFramebufferStatus();\
-            n = sprintf(glBuffer, "[%s 0x%04x] ", "FRAMEBUFFER_STATUS:", status);\
+            n = FILLWAVE_SPRINTF(glBuffer, "[%s 0x%04x] ", "FRAMEBUFFER_STATUS:", status);\
             if (n > 0) {\
                 logs->critical(glBuffer);\
             }\
@@ -182,6 +188,10 @@
 #define fLogU(...) fLogBase(FUSER, GPU_USER, __VA_ARGS__)
 #define fLogD(...) fLogBase(FDEBUG, GPU_DEBUG, __VA_ARGS__)
 #define fLogW(...) fLogBase(FWARNING, GPU_WARN, __VA_ARGS__)
+
+//#ifdef FILLWAVE_SPRINTF
+//#undef FILLWAVE_SPRINTF
+//#endif /* FILLWAVE_SPRINTF */
 
 #endif /* FILLWAVE_BUILD_RELEASE */
 

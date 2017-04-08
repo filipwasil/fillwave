@@ -36,8 +36,8 @@
 
 #include <fillwave/models/effects/Effect.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Fog
  * \brief Effect to create a fog.
@@ -73,13 +73,13 @@ public:
     mFarDistance = aFar;
   }
 
-  void preDrawAction(core::Program *program) override;
+  void preDrawAction(flc::Program *program) override;
 
-  void postDrawAction(core::Program *program) override;
+  void postDrawAction(flc::Program *program) override;
 
-  void stopAction(core::Program *program) override;
+  void stopAction(flc::Program *program) override;
 
-  void startAction(core::Program *program);
+  void startAction(flc::Program *program);
 
 private:
   glm::vec3 mColour;
@@ -87,7 +87,7 @@ private:
   GLfloat mFarDistance;
 };
 
-} /* framework */
-typedef std::shared_ptr<framework::Fog> pFog;
+} /* flf */
+typedef std::shared_ptr<flf::Fog> pFog;
 } /* fillwave*/
 #endif /* FOG_H_ */

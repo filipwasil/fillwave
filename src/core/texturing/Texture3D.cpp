@@ -11,8 +11,8 @@
 
 FLOGINIT("Texture3D", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Texture3D::Texture3D(Texture2DFile *fileRight,
     Texture2DFile *fileLeft,
@@ -98,5 +98,5 @@ void Texture3D::sendData(Texture2DFileData xp,
   fLogC("send data");
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

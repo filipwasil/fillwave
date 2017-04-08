@@ -36,8 +36,8 @@
 
 #include <fillwave/core/buffers/TVertexBuffer.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \struct VertexParticleGPU
  * \brief Stores the particle vertex data computed entirely on GPU.
@@ -65,7 +65,7 @@ public:
   void log() const;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* VertexBufferParticlesGPU_H_ */

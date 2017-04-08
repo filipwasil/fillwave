@@ -38,8 +38,8 @@
 
 #ifdef FILLWAVE_GLES_3_0
 #else /* FILLWAVE_GLES_3_0 */
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Texture1D
  * \brief Not used.
@@ -54,9 +54,9 @@ public:
   void log();
 };
 
-} /* core */
-typedef std::shared_ptr<core::Texture1D> pTexture1D;
-} /* fillwave */
+} /* flc */
+typedef std::shared_ptr<flc::Texture1D> pTexture1D;
+} /* flw */
 
 #endif /* FILLWAVE_GLES_3_0 */
 

@@ -37,11 +37,11 @@
 #include <fillwave/Log.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 ProgressBar::ProgressBar(Engine *engine,
-    core::Texture2D *texture,
+    flc::Texture2D *texture,
     const std::string &shaderPath,
     glm::vec2 position,
     glm::vec2 scale)
@@ -59,5 +59,5 @@ void ProgressBar::setProgress(GLfloat progress) {
   mProgress = progress;
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

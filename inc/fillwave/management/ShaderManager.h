@@ -36,10 +36,10 @@
 #include <fillwave/core/pipeline/Shader.h>
 #include <fillwave/management/base/TCache.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-typedef TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, core::Shader, std::string, GLuint, const std::string &> CacheShaders;
+typedef TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Shader, std::string, GLuint, const std::string &> CacheShaders;
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

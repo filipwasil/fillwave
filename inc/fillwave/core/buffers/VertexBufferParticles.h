@@ -36,8 +36,8 @@
 
 #include <fillwave/core/buffers/TVertexBuffer.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \struct VertexParticle
  * \brief Stores the particle vertex data.
@@ -64,7 +64,7 @@ public:
   void log() const;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* VERTEXBUFFERPARTICLES_H_ */

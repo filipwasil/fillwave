@@ -36,8 +36,8 @@
 
 #include <fillwave/models/effects/Effect.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TextureOnly
  * \brief Effect to color the model with texture only (exclude light effects and shadows).
@@ -49,16 +49,16 @@ public:
 
   virtual ~TextureOnly() = default;
 
-  void preDrawAction(core::Program *program) override;
+  void preDrawAction(flc::Program *program) override;
 
-  void postDrawAction(core::Program *program) override;
+  void postDrawAction(flc::Program *program) override;
 
-  void stopAction(core::Program *program) override;
+  void stopAction(flc::Program *program) override;
 
-  void startAction(core::Program *program) override;
+  void startAction(flc::Program *program) override;
 };
 
 } /* framework*/
-} /* fillwave */
+} /* flw */
 
 #endif /* TEXTUREONLY_H_ */

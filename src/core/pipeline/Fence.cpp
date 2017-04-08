@@ -34,8 +34,8 @@
 
 #include <fillwave/core/pipeline/Fence.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Fence::Fence(GLenum target)
     : mHandle(glFenceSync(target, 0)) {
@@ -50,5 +50,5 @@ void Fence::wait(unsigned long long timeoutSpecifier) const {
   glWaitSync(mHandle, 0, timeoutSpecifier);
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

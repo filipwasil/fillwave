@@ -34,7 +34,7 @@
 
 #include <fillwave/models/animations/Conversion.h>
 
-namespace fillwave {
+namespace flw {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
@@ -84,4 +84,4 @@ glm::vec4 floatsToGlmVec4(const float *in) {
   return glm::vec4(in[0], in[1], in[2], in[3]);
 }
 
-} /* fillwave */
+} /* flw */

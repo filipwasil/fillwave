@@ -34,8 +34,8 @@
 
 #include <fillwave/models/terrain/Voxel.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Voxel::Voxel()
     : mType(0), mActive(GL_TRUE) {
@@ -53,5 +53,5 @@ void Voxel::setType(GLint type) {
   mType = type;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

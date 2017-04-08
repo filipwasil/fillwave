@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Texture.h
  *
@@ -31,21 +33,20 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef TEXTURE_H_
-#define TEXTURE_H_
-
 #include <fillwave/core/GLObject.h>
 
 #include <fillwave/core/texturing/Parameter.h>
 
 #include <memory>
 
-#if __APPLE__ or _WIN32
+#if __APPLE__
+#include <stdlib.h>
+#elif _WIN32
 #include <stdlib.h>
 #endif
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 typedef GLubyte *Texture2DFileData;
 
@@ -162,9 +163,7 @@ void bindTexture(GLint textureUnit, GLuint target, GLuint handle);
 
 void unbindTexture(GLuint target);
 
-} /* core */
-typedef std::shared_ptr<core::Texture> pTexture;
-typedef std::unique_ptr<core::Texture2DFile> puTexture2DFile;
-} /* fillwave */
-
-#endif /* TEXTURE_H_ */
+} /* flc */
+typedef std::shared_ptr<flc::Texture> pTexture;
+typedef std::unique_ptr<flc::Texture2DFile> puTexture2DFile;
+} /* flw */
