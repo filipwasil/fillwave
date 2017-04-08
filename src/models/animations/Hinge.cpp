@@ -34,8 +34,8 @@
 
 #include <fillwave/models/animations/Hinge.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 void Hinge::draw(ICamera &camera) {
   for (auto &it : mChildren) {
@@ -64,5 +64,5 @@ bool Hinge::getRenderItem(RenderItem & /*item*/) {
   return false;
 }
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */

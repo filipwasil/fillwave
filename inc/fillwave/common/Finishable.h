@@ -34,8 +34,8 @@
 #ifndef FINISHABLE_H_
 #define FINISHABLE_H_
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 constexpr float FILLWAVE_ENDLESS = 0.0f;
 
@@ -85,7 +85,7 @@ protected:
   float mPercentageDone;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* FINISHABLE_H_ */

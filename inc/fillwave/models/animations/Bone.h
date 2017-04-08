@@ -37,14 +37,14 @@
 #include <fillwave/models/animations/Hinge.h>
 #include <fillwave/Assets.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 class Bone;
 }
 
-typedef std::unique_ptr<framework::Bone> puBone;
+typedef std::unique_ptr<flf::Bone> puBone;
 
-namespace framework {
+namespace flf {
 
 /*! \class Bone
  * \brief Hinge used by Animator to populate bone transformations.
@@ -76,7 +76,7 @@ private:
   glm::mat4 mGlobalOffsetMatrix;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* BONE_H_ */

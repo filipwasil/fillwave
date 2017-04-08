@@ -36,18 +36,18 @@
 
 #include <fillwave/models/shapes/Quad.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Box
  * \brief Basic Shape for general usage. Indices and vertices provided.
  */
 
-class Box : public Shape<core::VertexBasic> {
+class Box : public Shape<flc::VertexBasic> {
 public:
   Box(GLfloat quadSize = 1.0f)
       : mSize(quadSize), mQuad(quadSize) {
-    std::vector<core::VertexBasic> quadVertices = mQuad.getVertices();
+    std::vector<flc::VertexBasic> quadVertices = mQuad.getVertices();
     std::vector<glm::vec3> vertVertices;
 
     mVertices.resize(36);
@@ -111,6 +111,6 @@ private:
   Quad mQuad;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 #endif /* BOX_H_ */

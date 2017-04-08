@@ -36,8 +36,8 @@
 
 #include <fillwave/space/base/ICamera.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class CameraNull
  * \brief Not used. Camera for which both projection and view matrices are always identities.
@@ -56,6 +56,6 @@ public:
   GLfloat getProjectionFarPlane();
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 #endif /* CAMERANULL_H_ */

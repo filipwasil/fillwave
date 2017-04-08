@@ -36,8 +36,8 @@
 
 #include <fillwave/models/effects/Effect.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Painter
  * \brief Effect to draw a mesh with single color.
@@ -51,20 +51,20 @@ public:
 
   void setColor(glm::vec4 color);
 
-  void preDrawAction(core::Program *program) override;
+  void preDrawAction(flc::Program *program) override;
 
-  void postDrawAction(core::Program *program) override;
+  void postDrawAction(flc::Program *program) override;
 
-  void stopAction(core::Program *program) override;
+  void stopAction(flc::Program *program) override;
 
-  void startAction(core::Program *program) override;
+  void startAction(flc::Program *program) override;
 
 private:
   glm::vec4 mColor;
 };
 
-} /* framework */
-typedef std::shared_ptr<framework::Painter> pPainter;
-} /* fillwave */
+} /* flf */
+typedef std::shared_ptr<flf::Painter> pPainter;
+} /* flw */
 
 #endif /* PAINTER_H_ */

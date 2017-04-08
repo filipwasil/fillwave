@@ -37,8 +37,8 @@
 
 FLOGINIT("Camera", FERROR | FFATAL | FINFO)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 ICamera::ICamera(glm::vec3 position, glm::quat rotation)
     : Moveable(position, rotation), mRefreshView(GL_TRUE), mRefreshProjection(GL_TRUE) {
@@ -93,5 +93,5 @@ glm::mat4 ICamera::getViewProjection() {
   return mProjectionMatrix * mCameraMatrix;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

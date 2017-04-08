@@ -41,9 +41,9 @@
 #include <fillwave/models/base/IReloadable.h>
 #include <fillwave/models/Entity.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 class LightSystem;
 
 /*! \class VoxelChunk
@@ -52,7 +52,7 @@ class LightSystem;
 
 class VoxelChunk : public Entity, public IReloadable {
 public:
-  VoxelChunk(core::Program *program,
+  VoxelChunk(flc::Program *program,
       Engine *engine,
       const std::string &texturePath,
       GLint size,
@@ -86,9 +86,9 @@ protected:
 private:
   GLint mSize;
   Voxel ***mVoxels;
-  core::Program *mProgram;
-  core::Texture2D *mTexture;
-  core::VertexBufferBasic *mVBO;
+  flc::Program *mProgram;
+  flc::Texture2D *mTexture;
+  flc::VertexBufferBasic *mVBO;
   LightSystem *mLights;
 
   GLint mUniformLocationCacheModelMatrix, mUniformLocationCacheCameraPosition, mUniformLocationCacheViewProjectionMatrix;
@@ -108,8 +108,8 @@ private:
   void initUniformsCache();
 };
 
-} /* framework */
-typedef std::shared_ptr<framework::VoxelChunk> pVoxelChunk;
+} /* flf */
+typedef std::shared_ptr<flf::VoxelChunk> pVoxelChunk;
 } /* fillwave*/
 
 #endif /* VOXELCHUNK_H_ */

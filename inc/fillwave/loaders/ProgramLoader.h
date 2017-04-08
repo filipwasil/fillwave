@@ -37,9 +37,9 @@
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/loaders/ShaderLoader.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class ProgramLoader
  * \brief Loads programs.
@@ -51,77 +51,77 @@ public:
 
   virtual ~ProgramLoader() = default;
 
-  core::Program *getDefault();
+  flc::Program *getDefault();
 
-  core::Program *getDefaultBones();
+  flc::Program *getDefaultBones();
 
-  core::Program *getDefaultDR();
+  flc::Program *getDefaultDR();
 
-  core::Program *getDefaultFR();
+  flc::Program *getDefaultFR();
 
-  core::Program *getDefaultBonesDR();
+  flc::Program *getDefaultBonesDR();
 
-  core::Program *getDefaultBonesFR();
+  flc::Program *getDefaultBonesFR();
 
-  core::Program *getShadow();
+  flc::Program *getShadow();
 
-  core::Program *getShadowColorCoded();
+  flc::Program *getShadowColorCoded();
 
-  core::Program *getShadowWithAnimation();
+  flc::Program *getShadowWithAnimation();
 
-  core::Program *getShadowColorCodedWithAnimation();
+  flc::Program *getShadowColorCodedWithAnimation();
 
-  core::Program *getDebugger();
+  flc::Program *getDebugger();
 
-  core::Program *getSkybox();
+  flc::Program *getSkybox();
 
-  core::Program *getSkyboxDR();
+  flc::Program *getSkyboxDR();
 
-  core::Program *getHUD();
+  flc::Program *getHUD();
 
-  core::Program *getText();
+  flc::Program *getText();
 
-  core::Program *getTextBold();
+  flc::Program *getTextBold();
 
-  core::Program *getParticleGPUEmiter();
+  flc::Program *getParticleGPUEmiter();
 
-  core::Program *getParticleGPU();
+  flc::Program *getParticleGPU();
 
-  core::Program *getParticleCPU();
+  flc::Program *getParticleCPU();
 
-  core::Program *getParticleCPUNoDepthText();
+  flc::Program *getParticleCPUNoDepthText();
 
-  core::Program *getQuad();
+  flc::Program *getQuad();
 
-  core::Program *getQuadCustomFragmentShaderStartup();
+  flc::Program *getQuadCustomFragmentShaderStartup();
 
-  core::Program *getCursor();
+  flc::Program *getCursor();
 
-  core::Program *getDRAmbient();
+  flc::Program *getDRAmbient();
 
-  core::Program *getAmbientOcclusionGeometry();
+  flc::Program *getAmbientOcclusionGeometry();
 
-  core::Program *getAmbientOcclusionColor();
+  flc::Program *getAmbientOcclusionColor();
 
-  core::Program *getOcclusionPureQuery();
+  flc::Program *getOcclusionPureQuery();
 
-  core::Program *getOcclusionQuery();
+  flc::Program *getOcclusionQuery();
 
-  core::Program *getOcclusionOptimizedQuery();
+  flc::Program *getOcclusionOptimizedQuery();
 
-  core::Program *getDRDepthless();
+  flc::Program *getDRDepthless();
 
-  core::Program *getDRDirectionalLights();
+  flc::Program *getDRDirectionalLights();
 
-  core::Program *getDRSpotLights();
+  flc::Program *getDRSpotLights();
 
-  core::Program *getDRPointLights();
+  flc::Program *getDRPointLights();
 
-  core::Program *getQuadCustomFragmentShader(const std::string &shaderPath);
+  flc::Program *getQuadCustomFragmentShader(const std::string &shaderPath);
 
-  core::Program *getHUDCustomFragmentShader(const std::string &shaderPath);
+  flc::Program *getHUDCustomFragmentShader(const std::string &shaderPath);
 
-  static void initDefaultUniforms(core::Program *program);
+  static void initDefaultUniforms(flc::Program *program);
 
 private:
 
@@ -130,7 +130,7 @@ private:
   const char *mFeedbackVaryingsGPUEmiter[6];
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* SRC_LOADERS_PROGRAMLOADER_H_ */

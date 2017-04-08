@@ -36,8 +36,8 @@
 #include <fillwave/Log.h>
 
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 VertexBufferParticlesGPU::VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles)
     : TVertexBuffer(particles, GL_DYNAMIC_COPY) {
@@ -48,5 +48,5 @@ void VertexBufferParticlesGPU::log() const {
 
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

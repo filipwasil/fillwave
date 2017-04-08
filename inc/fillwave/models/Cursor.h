@@ -36,9 +36,9 @@
 
 #include <fillwave/models/Impostor.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class Cursor
  * \brief Impostor to handle custom cursor instead of the standard one.
@@ -46,7 +46,7 @@ namespace framework {
 
 class Cursor : public Impostor {
 public:
-  Cursor(Engine *engine, core::Texture *texture);
+  Cursor(Engine *engine, flc::Texture *texture);
 
   virtual ~Cursor() = default;
 
@@ -63,8 +63,8 @@ private:
   bool getRenderItem(RenderItem &item) override;
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::Cursor> puCursor;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::Cursor> puCursor;
+} /* flw */
 
 #endif /* CURSOR_H_ */

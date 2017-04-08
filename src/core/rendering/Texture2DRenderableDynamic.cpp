@@ -37,12 +37,12 @@
 
 FLOGINIT("Texture2DRenderableDynamic", FERROR | FFATAL | FDEBUG)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Texture2DRenderableDynamic::Texture2DRenderableDynamic(Texture2DFile *file,
     ParameterList &parameters,
-    core::Program *program)
+    flc::Program *program)
     : Texture2DRenderable(GL_COLOR_ATTACHMENT0, file, parameters), mProgram(program), mTimePassed(0.0f) {
   initUniformsCache();
 }
@@ -51,12 +51,12 @@ void Texture2DRenderableDynamic::draw(GLfloat timePassed) {
   mTimePassed += timePassed;
   mProgram->use();
   bind(FILLWAVE_DIFFUSE_UNIT);
-  core::Uniform::push(mUniformLocationCacheTime, mTimePassed);
+  flc::Uniform::push(mUniformLocationCacheTime, mTimePassed);
   glEnable(GL_BLEND);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   glDisable(GL_BLEND);
   unbind();
-  core::Program::disusePrograms();
+  flc::Program::disusePrograms();
 }
 
 void Texture2DRenderableDynamic::initUniformsCache() {
@@ -70,5 +70,5 @@ void Texture2DRenderableDynamic::reload() {
   initUniformsCache();
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

@@ -38,8 +38,8 @@
 
 FLOGINIT("Attribute", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Attribute::Attribute(std::string name, GLuint index, GLint size, GLsizei stride, GLenum type, GLboolean normalized)
     : mStride(stride), mName(name), mIndex(index), mSize(size), mNormalized(normalized), mType(type)
@@ -134,5 +134,5 @@ void Attribute::log() {
   fLogI("mStride %d", mStride);
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

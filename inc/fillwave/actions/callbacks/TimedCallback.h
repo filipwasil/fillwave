@@ -40,8 +40,8 @@
 #include <fillwave/models/base/Moveable.h>
 #include <fillwave/OpenGL.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class TimedCallback
  *
@@ -69,7 +69,7 @@ private:
   EasingFunction mEasing;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 

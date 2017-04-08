@@ -39,8 +39,8 @@
 
 #include <fillwave/models/base/ITreeNode.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class IHUDNode
  * \brief HUD base element.
@@ -48,8 +48,8 @@ namespace framework {
 
 class IHUDNode : public ITreeNode {
 public:
-  IHUDNode(core::Texture2D *texture = nullptr,
-      core::Program *program = nullptr,
+  IHUDNode(flc::Texture2D *texture = nullptr,
+      flc::Program *program = nullptr,
       glm::vec2 position = glm::vec2(0.0f, 0.0f),
       glm::vec2 scale = glm::vec2(1.0f, 1.0f));
 
@@ -64,13 +64,13 @@ public:
   void coreDraw();
 
 protected:
-  core::Texture2D *mTexture;
-  core::Program *mProgram;
+  flc::Texture2D *mTexture;
+  flc::Program *mProgram;
   glm::vec2 mPosition;
   glm::vec2 mScale;
   Blending mBlending;
 };
 
-} /* namespace framework */
-typedef std::shared_ptr<framework::IHUDNode> pIHUDNode;
-} /* namespace fillwave */
+} /* namespace flf */
+typedef std::shared_ptr<flf::IHUDNode> pIHUDNode;
+} /* namespace flw */

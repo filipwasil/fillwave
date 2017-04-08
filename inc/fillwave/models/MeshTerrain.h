@@ -38,9 +38,9 @@
 #include <fillwave/models/base/Programmable.h>
 #include <fillwave/models/terrain/TerrainConstructor.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class MeshTerrain
  * \brief Programmable to provide mesh terrain functionality.
@@ -49,7 +49,7 @@ namespace framework {
 class MeshTerrain : public Programmable {
 public:
   MeshTerrain(Engine *engine,
-      core::Program *program,
+      flc::Program *program,
       TerrainConstructor *constructor,
       const Material &material,
       const std::string &diffuseMapPath,
@@ -59,12 +59,12 @@ public:
       GLuint density = 8);
 
   MeshTerrain(Engine *engine,
-      core::Program *program,
+      flc::Program *program,
       TerrainConstructor *constructor,
       const Material &material,
-      core::Texture2D *diffuseMapPath,
-      core::Texture2D *normalMapPath,
-      core::Texture2D *specularMapPath,
+      flc::Texture2D *diffuseMapPath,
+      flc::Texture2D *normalMapPath,
+      flc::Texture2D *specularMapPath,
       GLuint radius,
       GLuint density = 8);
 
@@ -88,8 +88,8 @@ private:
   void distanceCheck(ICamera &camera);
 };
 
-} /* framework */
-typedef std::unique_ptr<framework::MeshTerrain> puMeshTerrain;
-} /* fillwave */
+} /* flf */
+typedef std::unique_ptr<flf::MeshTerrain> puMeshTerrain;
+} /* flw */
 
 #endif /* INC_FILLWAVE_TERRAIN_MESHTERRAIN_H_ */

@@ -35,13 +35,13 @@
 #include <fillwave/models/animations/Channel.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 Animation::Animation(aiAnimation *assimpAnimation) {
   mName = assimpAnimation->mName.C_Str();
-  mDuration = assimpAnimation->mDuration;
-  mTicksPerSec = assimpAnimation->mTicksPerSecond;
+  mDuration = static_cast<float>(assimpAnimation->mDuration);
+  mTicksPerSec = static_cast<float>(assimpAnimation->mTicksPerSecond);
   mChannels.reserve(assimpAnimation->mNumChannels);
   for (unsigned int i = 0; i < assimpAnimation->mNumChannels; i++) {
     mChannels.push_back(new Channel(assimpAnimation->mChannels[i]));
@@ -55,5 +55,5 @@ Animation::~Animation() {
   mChannels.clear();
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

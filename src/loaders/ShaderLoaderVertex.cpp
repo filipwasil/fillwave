@@ -40,8 +40,8 @@
 #error "Max bone dependencies for animations not defined"
 #endif
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 ShaderLoaderVertex::ShaderLoaderVertex(bool animated)
     : mAnimated(animated) {
@@ -228,5 +228,5 @@ const std::string ShaderLoaderVertex::getSource() const {
   return mGLVersion + mGLVertexPrecision + attributes + outputs + uniforms + main;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

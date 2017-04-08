@@ -37,8 +37,8 @@
 
 FLOGINIT("Texture2DRenderable", FERROR | FFATAL | FDEBUG)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 Texture2DRenderable::Texture2DRenderable(GLenum attachment, Texture2DFile *file, ParameterList &parameters)
     : Texture2D(file, parameters), mFramebuffer(puFramebuffer(new Framebuffer())), mAttachment(attachment) {
@@ -151,5 +151,5 @@ void Texture2DRenderable::reload() {
   setAttachment(mAttachment);
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

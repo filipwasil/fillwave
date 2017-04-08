@@ -37,8 +37,8 @@
 
 FLOGINIT_DEFAULT()
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 GLObject::GLObject(GLsizei howMany)
     : mHowMany(howMany) {
@@ -59,5 +59,5 @@ GLuint GLObject::getHandle(GLuint id) {
   return id < FILLWAVE_GLOBJECT_MAX_CAPACITY ? mHandles[id] : 0;
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

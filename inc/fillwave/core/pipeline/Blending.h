@@ -34,8 +34,8 @@
 #ifndef INC_FILLWAVE_COMMON_BLENDING_H_
 #define INC_FILLWAVE_COMMON_BLENDING_H_
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 /*! \struct Blending
  * \brief Structure defining the blending parameters.
  */
@@ -45,7 +45,7 @@ struct Blending {
   GLenum mDst;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* INC_FILLWAVE_COMMON_BLENDING_H_ */

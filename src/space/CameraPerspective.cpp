@@ -34,23 +34,28 @@
 
 #include <fillwave/space/CameraPerspective.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 CameraPerspective::CameraPerspective()
-    : mProjectionFovy(glm::radians(90.0)), mProjectionAspectRatio(1.0), mProjectionNearPlane(0.01), mProjectionFarPlane(
-    100.0) {
+  : mProjectionFovy(glm::radians(90.0f))
+  , mProjectionAspectRatio(1.0f)
+  , mProjectionNearPlane(0.01f)
+  , mProjectionFarPlane(100.0f) {
   updateProjection();
 }
 
 CameraPerspective::CameraPerspective(glm::vec3 position,
-    glm::quat rotation,
-    GLfloat fovy,
-    GLfloat aspectRatio,
-    GLfloat nearPlane,
-    GLfloat farPlane)
-    : ICamera(position, rotation), mProjectionFovy(fovy), mProjectionAspectRatio(aspectRatio), mProjectionNearPlane(
-    nearPlane), mProjectionFarPlane(farPlane) {
+  glm::quat rotation,
+  GLfloat fovy,
+  GLfloat aspectRatio,
+  GLfloat nearPlane,
+  GLfloat farPlane)
+  : ICamera(position, rotation)
+  , mProjectionFovy(fovy)
+  , mProjectionAspectRatio(aspectRatio)
+  , mProjectionNearPlane(nearPlane)
+  , mProjectionFarPlane(farPlane) {
   updateProjection();
 }
 
@@ -98,5 +103,5 @@ void CameraPerspective::setProjectionFarPlane(GLfloat farPlane) {
   mRefreshProjection = GL_TRUE;
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

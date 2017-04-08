@@ -36,8 +36,8 @@
 
 #include <fillwave/core/pipeline/Program.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class Attribute
  * \brief VertexAttribute to be kept within the VertexBuffer.
@@ -80,7 +80,7 @@ private:
   GLvoid *mPointer;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* ATTRIBUTE_H_ */

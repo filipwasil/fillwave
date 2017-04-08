@@ -36,8 +36,8 @@
 
 #include <fillwave/core/buffers/TVertexBuffer.h>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \struct VertexFloat
  * \brief Stores the float vertex data.
@@ -60,7 +60,7 @@ public:
   void log() const;
 };
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */
 
 #endif /* SRC_CORE_BUFFERS_VERTEXBUFFERFLOAT_H_ */

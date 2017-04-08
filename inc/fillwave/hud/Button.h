@@ -37,9 +37,9 @@
 #include <fillwave/hud/base/IHUDNode.h>
 #include <fillwave/common/IPickable.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class Button
  * \brief Pickable hud node.
@@ -47,7 +47,7 @@ namespace framework {
 
 class Button : public IHUDNode, public IPickable {
 public:
-  Button(Engine *engine, core::Texture2D *texture, glm::vec2 position, glm::vec2 scale);
+  Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm::vec2 scale);
 
   virtual ~Button() = default;
 
@@ -61,8 +61,8 @@ public:
   virtual void onUnpicked() override;
 };
 
-} /* namespace framework */
-typedef std::shared_ptr<framework::Button> pButton;
-} /* namespace fillwave */
+} /* namespace flf */
+typedef std::shared_ptr<flf::Button> pButton;
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_HUD_BUTTON_H_ */

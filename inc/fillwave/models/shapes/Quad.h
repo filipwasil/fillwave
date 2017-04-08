@@ -37,20 +37,20 @@
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/models/shapes/Shape.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class Quad
  * \brief Shape encapsulating vertices and indices for triangle drawn quad.
  */
 
-class Quad : public Shape<core::VertexBasic> {
+class Quad : public Shape<flc::VertexBasic> {
 public:
   Quad(GLfloat size = 1.0f) {
 
     mVertices.resize(6);
 
-    core::VertexBasic position[6] = {{{-size, -size, 0.0, 1.0}, {
+    flc::VertexBasic position[6] = {{{-size, -size, 0.0, 1.0}, {
                                                                     0.0, 0.0, 0.0, 1.0
                                                                 },                       {0.0, 0.0, -1.0}, {1.0, 0.0, 0.0}, {0.0, 0.0}, {0}, {
                                                                                                                                                  0.0
@@ -77,7 +77,7 @@ public:
   virtual ~Quad() = default;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* SRC_MODELS_SHAPES_QUAD_H_ */

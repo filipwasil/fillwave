@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * FramebufferGeometry.h
  *
@@ -31,17 +33,14 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef FRAMEBUFFERGEOMETRY_H_
-#define FRAMEBUFFERGEOMETRY_H_
-
 #include <fillwave/core/rendering/Framebuffer.h>
 #include <fillwave/core/texturing/Parameter.h>
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/management/TextureSystem.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace core {
+namespace flc {
 
 /*! \class FramebufferGeometry
  * \brief Framebuffer with multiple color and depth attachments.
@@ -49,7 +48,7 @@ namespace core {
 
 class FramebufferGeometry : public Framebuffer {
 public:
-  FramebufferGeometry(framework::TextureSystem *textures,
+  FramebufferGeometry(flf::TextureSystem *textures,
       GLuint width,
       GLuint height,
       GLuint colorBuffers,
@@ -75,7 +74,9 @@ private:
 
   std::vector<GLenum> mColorBuffers;
 
-  core::Texture2D *mDeferredColors, *mStencilDepth, *mSummary;
+  flc::Texture2D *mDeferredColors;
+  flc::Texture2D *mStencilDepth;
+  flc::Texture2D *mSummary;
 
   const GLint mColorBufferSize;
   const GLint mSummaryBufferSize;
@@ -85,7 +86,6 @@ private:
   const GLenum mNone;
 };
 
-} /* core */
-typedef std::shared_ptr<core::FramebufferGeometry> puFramebufferGeometry;
-} /* fillwave */
-#endif /* FRAMEBUFFERGEOMETRY_H_ */
+} /* flc */
+typedef std::shared_ptr<flc::FramebufferGeometry> puFramebufferGeometry;
+} /* flw */

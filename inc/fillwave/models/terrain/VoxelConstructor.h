@@ -37,8 +37,8 @@
 #include <fillwave/OpenGL.h>
 #include <fillwave/models/terrain/TerrainConstructor.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class VoxelConstructor
  * \brief Construct Terrain voxel positions.
@@ -53,7 +53,7 @@ public:
   virtual GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y) = 0;
 };
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */
 
 #endif /* VOXEL_CONSTRUCTOR_H_ */

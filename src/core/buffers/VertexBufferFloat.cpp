@@ -37,8 +37,8 @@
 
 FLOGINIT("VertexBufferFloat", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 VertexBufferFloat::VertexBufferFloat(const std::vector<VertexFloat> &values, GLuint dataStoreModification)
     : TVertexBuffer<VertexFloat>(values, dataStoreModification) {
@@ -46,7 +46,7 @@ VertexBufferFloat::VertexBufferFloat(const std::vector<VertexFloat> &values, GLu
 }
 
 void VertexBufferFloat::log() const {
-  auto d = [](core::VertexFloat &f) {
+  auto d = [](flc::VertexFloat &f) {
     return static_cast<double>(f.mData);
   };
   for (auto it : mDataVertices) {
@@ -54,5 +54,5 @@ void VertexBufferFloat::log() const {
   }
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

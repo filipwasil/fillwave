@@ -37,8 +37,8 @@
 #include <fillwave/Log.h>
 
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 FPSCallback::FPSCallback(Engine *engine, pText text)
     : Callback(eEventType::eTime), mText(text), mTimePassed(0.0), mEngine(engine) {
@@ -55,5 +55,5 @@ void FPSCallback::perform(EventType &event) {
   }
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

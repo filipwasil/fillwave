@@ -52,13 +52,13 @@
 struct ANativeActivity;
 #endif
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 class Focusable;
 }
-namespace core {
+namespace flc {
 /* All buffers should be there */
-//core::VertexBufferBasic
+//flc::VertexBufferBasic
 class IndexBuffer;
 
 struct VertexParticleGPU;
@@ -105,14 +105,10 @@ public:
 
   /* Draw */
   void draw(GLfloat time);
-
   void drawLines(GLfloat time);
-
   void drawPoints(GLfloat time);
-
-  void drawTexture(core::Texture *t, core::Program *p);
-
-  void drawTexture(core::Texture *t);
+  void drawTexture(flc::Texture *t, flc::Program *p);
+  void drawTexture(flc::Texture *t);
 
   /* Assets */
   puPhysicsMeshBuffer getPhysicalMeshBuffer(const std::string &shapePath);
@@ -124,12 +120,10 @@ public:
 
   /* Scene */
   void setCurrentScene(puScene &&scene);
-
-  TGetter<framework::Scene> &&getCurrentScene() const;
+  TGetter<flf::Scene> &&getCurrentScene() const;
 
   /* Time */
   GLuint getFramesPassed();
-
   GLfloat getStartupAnimationTime() const;
 
   /**
@@ -143,25 +137,18 @@ public:
    * GL_GEOMETRY_SHADER
    * GL_FRAGMENT_SHADER
    */
-
-  template <GLuint T>
-  core::Shader *storeShader(const std::string &shaderPath);
-
-  template <GLuint T>
-  core::Shader *storeShader(const std::string &shaderPath, const std::string &shaderSource);
-
-  core::Program *
-  storeProgram(const std::string &name, const std::vector<core::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
+  template <GLuint T> flc::Shader *storeShader(const std::string &shaderPath);
+  template <GLuint T> flc::Shader *storeShader(const std::string &shaderPath, const std::string &shaderSource);
+  flc::Program * storeProgram(const std::string &name, const std::vector<flc::Shader *> &shaders, bool isSkipLinking = false);
 
   /* Store textures */
-  core::Texture2D *
-  storeTexture(const std::string &texturePath, framework::eCompression compression = framework::eCompression::eNone);
+  flc::Texture2D *storeTexture(const std::string &path, flf::eCompression com = flf::eCompression::eNone);
 
-  core::Texture2DRenderable *storeTextureRenderable();
+  flc::Texture2DRenderable *storeTextureRenderable();
 
-  core::Texture2DRenderableDynamic *storeTextureDynamic(const std::string &fragmentShaderPath);
+  flc::Texture2DRenderableDynamic *storeTextureDynamic(const std::string &fragmentShaderPath);
 
-  core::Texture3D *storeTexture3D(const std::string &posX,
+  flc::Texture3D *storeTexture3D(const std::string &posX,
       const std::string &negX,
       const std::string &posY,
       const std::string &negY,
@@ -169,61 +156,51 @@ public:
       const std::string &negZ);
 
   /* Store lights */
-  framework::LightSpot *
-  storeLightSpot(glm::vec3 position, glm::quat rotation, glm::vec4 color, framework::Moveable *followed = nullptr);
-
-  framework::LightPoint *storeLightPoint(glm::vec3 position, glm::vec4 color, framework::Moveable *followed = nullptr);
-
-  framework::LightDirectional *storeLightDirectional(glm::vec3 position,
+  flf::LightSpot *storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable *followed = nullptr);
+  flf::LightPoint *storeLightPoint(glm::vec3 position, glm::vec4 color, flf::Moveable *followed = nullptr);
+  flf::LightDirectional *storeLightDirectional(glm::vec3 position,
       glm::quat rotation,
       glm::vec4 color,
-      framework::Moveable *followed = nullptr);
+      flf::Moveable *followed = nullptr);
 
   /* Store text */
   pText storeText(const std::string &content,
       const std::string &fontName,
       glm::vec2 position,
-      GLfloat scale = 1.0,
-      glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
+      GLfloat scale = 1.0f,
+      glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
       eTextEffect effect = eTextEffect::eNone);
 
   /* Store sampler */
-  core::Sampler *storeSO(GLint textureUnit);
+  flc::Sampler *storeSO(GLint textureUnit);
 
   /* Store vertex array objects */
-  core::VertexArray *storeVAO(framework::IReloadable *user, core::VertexArray *vao = nullptr);
+  flc::VertexArray *storeVAO(flf::IReloadable *user, flc::VertexArray *vao = nullptr);
 
   /* Store one buffer for one VAO */
   template <class T, typename ...S>
-  T *storeBuffer(core::VertexArray *vao, S ... p) {
+  T *storeBuffer(flc::VertexArray *vao, S ... p) {
     return storeBufferInternal(vao, p...);
   }
 
   /* Enables to store many buffers in one VAO */
   template <class T, typename ...S>
-  T *storeBuffers(core::VertexArray *vao, size_t idx, S ... p) {
+  T *storeBuffers(flc::VertexArray *vao, size_t idx, S ... p) {
     return storeBuffersInternal(vao, idx, p...);
   }
 
   /* Buffering */
-  void removeBuffer(core::VertexArray *vao); // xxx any idea of generic class ?
-  void removeBufferIndex(core::VertexArray *vao);
-
-  void removeBufferIndexParticles(core::VertexArray *vao);
-
-  void removeBufferBasic(core::VertexArray *vao);
-
-  void removeBufferText(core::VertexArray *vao);
+  void removeBuffer(flc::VertexArray *vao); // xxx any idea of generic class ?
+  void removeBufferIndex(flc::VertexArray *vao);
+  void removeBufferIndexParticles(flc::VertexArray *vao);
+  void removeBufferBasic(flc::VertexArray *vao);
+  void removeBufferText(flc::VertexArray *vao);
 
   /* Clear */
   void clearText(pText text);
-
-  void clearLight(framework::LightSpot *light);
-
-  void clearLight(framework::LightDirectional *light);
-
-  void clearLight(framework::LightPoint *light);
-
+  void clearLight(flf::LightSpot *light);
+  void clearLight(flf::LightDirectional *light);
+  void clearLight(flf::LightPoint *light);
   void clearLights();
 
   /* Pick */
@@ -231,7 +208,6 @@ public:
 
   /* Screen */
   glm::ivec2 getScreenSize() const;
-
   GLfloat getScreenAspectRatio() const;
 
   /* Log */
@@ -239,82 +215,73 @@ public:
 
   /* Screenshot */
   void captureFramebufferToFile(const std::string &name);
-
-  void
-  captureFramebufferToBuffer(GLubyte *buffer, GLint *sizeInBytes, GLuint format = GL_RGBA, GLint bytesPerPixel = 4);
+  void captureFramebufferToBuffer(GLubyte *buf, GLint *sizeInBytes, GLuint format = GL_RGBA, GLint bytesPerPixel = 4);
 
   /* Post processing */
-  void addPostProcess(const std::string &fragmentShaderPath, GLfloat lifeTime = framework::FILLWAVE_ENDLESS);
+  void addPostProcess(const std::string &fragmentShaderPath, GLfloat lifeTime = flf::FILLWAVE_ENDLESS);
 
   /* Inputs - focus */
-  void dropFocus(framework::IFocusable *focusable = nullptr);
+  void dropFocus(flf::IFocusable *focusable = nullptr);
 
   /* Inputs */
-  void insertInput(framework::EventType &event);
-
+  void insertInput(flf::EventType &event);
   void insertResizeScreen(GLuint width, GLuint height);
-
-  void registerCallback(puCallback &&callback, framework::IFocusable *focusable = nullptr);
-
-  void unregisterCallback(framework::Callback *callback);
-
-  void clearCallback(framework::Callback *callback);
-
+  void registerCallback(puCallback &&callback, flf::IFocusable *focusable = nullptr);
+  void unregisterCallback(flf::Callback *callback);
+  void clearCallback(flf::Callback *callback);
   void clearCallbacks(eEventType eventType);
-
   void clearCallbacks();
-
   void reload();
 
-  framework::LightSystem *getLightSystem() const;
-
-  framework::TextureSystem *getTextureSystem() const;
+  /* Systems */
+  flf::LightSystem *getLightSystem() const;
+  flf::TextureSystem *getTextureSystem() const;
 
 private:
   struct EngineImpl;
   std::unique_ptr<EngineImpl> mImpl;
 
-  core::VertexBufferBasic *storeBufferInternal(core::VertexArray *vao,
-      framework::TerrainConstructor *constructor,
+  flc::VertexBufferBasic *storeBufferInternal(flc::VertexArray *vao,
+      flf::TerrainConstructor *constructor,
       GLint density,
       GLfloat gap,
       std::vector<GLuint> &indices);
 
-  core::VertexBufferBasic *storeBufferInternal(core::VertexArray *vao, std::vector<core::VertexBasic> &data);
+  flc::VertexBufferBasic *storeBufferInternal(flc::VertexArray *vao, std::vector<flc::VertexBasic> &data);
 
-  core::VertexBufferText *storeBufferInternal(core::VertexArray *vao,
+  flc::VertexBufferText *storeBufferInternal(flc::VertexArray *vao,
       const std::vector<GLfloat> &data,
       const std::vector<GLfloat> &textureCoords);
 
-  core::VertexBufferParticlesGPU *
-  storeBuffersInternal(core::VertexArray *vao, size_t idx, std::vector<core::VertexParticleGPU> &particles);
+  flc::VertexBufferParticlesGPU *
+  storeBuffersInternal(flc::VertexArray *vao, size_t idx, std::vector<flc::VertexParticleGPU> &particles);
 
-  core::VertexBufferParticles *storeBufferInternal(core::VertexArray *vao,
+  flc::VertexBufferParticles *storeBufferInternal(flc::VertexArray *vao,
       std::vector<GLfloat> &velocities,
       std::vector<GLfloat> &positions,
       std::vector<GLfloat> &times);
 
-  core::VertexBufferDebug *storeBufferInternal(core::VertexArray *vao, GLfloat scale);
+  flc::VertexBufferDebug *storeBufferInternal(flc::VertexArray *vao, GLfloat scale);
 
-  core::VertexBufferFloat *storeBufferInternal(core::VertexArray *vao, std::vector<core::VertexFloat> &data);
+  flc::VertexBufferFloat *storeBufferInternal(flc::VertexArray *vao, std::vector<flc::VertexFloat> &data);
 
-  core::VertexBufferPosition *storeBufferInternal(core::VertexArray *vao, std::vector<core::VertexPosition> &data);
+  flc::VertexBufferPosition *storeBufferInternal(flc::VertexArray *vao, std::vector<flc::VertexPosition> &data);
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-  core::VertexBufferBasic *
-  storeBufferInternal(core::VertexArray *vao, const aiMesh *shape, framework::Animator *animator);
+  flc::VertexBufferBasic *
+  storeBufferInternal(flc::VertexArray *vao, const aiMesh *shape, flf::Animator *animator);
 
-  core::IndexBuffer *storeBufferInternal(core::VertexArray *vao, const aiMesh *shape);
+  flc::IndexBuffer *storeBufferInternal(flc::VertexArray *vao, const aiMesh *shape);
 
 #else
-  core::VertexBufferBasic* storeBufferInternal(core::VertexArray* vao,
+  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray* vao,
       tinyobj::shape_t& shape, tinyobj::attrib_t& attributes);
 #endif
 
-  core::IndexBuffer *storeBufferInternal(core::VertexArray *vao, const std::vector<GLuint> &data);
+  flc::IndexBuffer *storeBufferInternal(flc::VertexArray *vao, const std::vector<GLuint> &data);
 
-  core::IndexBuffer *storeBufferInternal(core::VertexArray *vao, GLuint elements);
+  flc::IndexBuffer *storeBufferInternal(flc::VertexArray *vao, GLuint elements);
 };
 
-} /* fillwave */
+} /* flw */

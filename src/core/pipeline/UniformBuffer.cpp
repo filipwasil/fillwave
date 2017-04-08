@@ -37,8 +37,8 @@
 
 FLOGINIT("UniformBuffer", FERROR | FFATAL)
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 UniformBuffer::UniformBuffer(std::string name,
     GLuint index,
@@ -81,5 +81,5 @@ void UniformBuffer::emptyGPU() {
   fLogD("Not gpu data clear is possible in this buffer");
 }
 
-} /* core */
-} /* fillwave */
+} /* flc */
+} /* flw */

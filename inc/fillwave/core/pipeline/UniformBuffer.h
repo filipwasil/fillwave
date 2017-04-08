@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * UniformBuffer.h
  *
@@ -31,14 +33,11 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef UNIFORMBUFFER_H_
-#define UNIFORMBUFFER_H_
-
 #include <fillwave/core/buffers/IBuffer.h>
 #include <string>
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 /*! \class UniformBuffer
  * \brief UniformBufferObject - UBO.
@@ -69,9 +68,7 @@ private:
   GLuint mBindingPoint;
 };
 
-} /* core */
-typedef std::shared_ptr<core::UniformBuffer> pUniformBuffer;
-typedef std::shared_ptr<core::UniformBuffer> puUniformBuffer;
-} /* fillwave */
-
-#endif /* UNIFORMBUFFER_H_ */
+} /* flc */
+typedef std::shared_ptr<flc::UniformBuffer> pUniformBuffer;
+typedef std::shared_ptr<flc::UniformBuffer> puUniformBuffer;
+} /* flw */

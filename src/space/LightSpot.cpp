@@ -37,10 +37,10 @@
 
 FLOGINIT("Spotlight", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
-LightSpot::LightSpot(core::Texture2DRenderable *shadowTexture,
+LightSpot::LightSpot(flc::Texture2DRenderable *shadowTexture,
     glm::vec3 position,
     glm::quat rotation,
     glm::vec4 intensity,
@@ -50,7 +50,7 @@ LightSpot::LightSpot(core::Texture2DRenderable *shadowTexture,
                                                         0.1f, 1000.0f)) {
 }
 
-core::Texture2DRenderable *LightSpot::getShadowTexture() {
+flc::Texture2DRenderable *LightSpot::getShadowTexture() {
   return mShadowTexture;
 }
 
@@ -107,5 +107,5 @@ void LightSpot::log() {
   Light::log();
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

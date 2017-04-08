@@ -37,8 +37,8 @@
 #ifdef FILLWAVE_GLES_3_0
 #else
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
 ProgramPipeline::ProgramPipeline(GLbitfield stage, GLsizei howMany)
     : GLObject(howMany), mStage(stage), mTarget(GL_TRANSFORM_FEEDBACK) {
@@ -57,7 +57,7 @@ void ProgramPipeline::use(GLuint programHandle, GLuint id) const {
   glUseProgramStages(mHandles[id], mStage, programHandle);
 }
 
-} /* core */
+} /* flc */
 } /* fillwave  */
 
 #endif /* FILLWAVE_GLES_3_0 */

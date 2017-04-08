@@ -38,8 +38,8 @@
 #include <fillwave/models/base/IRenderable.h>
 #include <memory>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 class ICamera;
 
@@ -73,8 +73,8 @@ public:
   GLfloat mAmbientGlobal[3];
 };
 
-} /* namespace framework */
-typedef std::unique_ptr<framework::IRenderer> puIRenderer;
-} /* namespace fillwave */
+} /* namespace flf */
+typedef std::unique_ptr<flf::IRenderer> puIRenderer;
+} /* namespace flw */
 
 #endif /* INC_FILLWAVE_CORE_RENDERERS_RENDERER_H_ */
