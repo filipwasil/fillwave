@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47c34043_2698a7af",
+        "filename": "inc/fillwave/common/Macros.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-04-10T19:52:06Z",
+      "side": 1,
+      "message": "/usr/include/spdlog/details/file_helper.h: In member function ‘void spdlog::details::file_helper::open(const filename_t\u0026, bool)’:\n/home/radek/programowanie/filwave/fillwave/inc/fillwave/common/Macros.h:73:38: error: expected unqualified-id before ‘__null’\n #define fopen_s(pFile,filename,mode) NULL \u003d\u003d ((*(pFile))\u003dfopen((filename),  (mode)))",
+      "revId": "8889ba8c17525babe3e5b9c8463466c050ab7013",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
