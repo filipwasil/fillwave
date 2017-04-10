@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2a287c7a_aa767a83",
+        "filename": "src/loaders/TextureLoader/TextureLoader.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-04-10T16:29:42Z",
+      "side": 1,
+      "message": "Still fopen_s, I\u0027m unable to built this on linux(gcc).",
+      "range": {
+        "startLine": 233,
+        "startChar": 19,
+        "endLine": 233,
+        "endChar": 26
+      },
+      "revId": "cfe031583ff6b7eb2dbf609437fcd78dd9d23ea0",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
