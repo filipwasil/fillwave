@@ -4,7 +4,7 @@
  *  Created on: Dec 31, 2015
  *      Author: filip
  *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.

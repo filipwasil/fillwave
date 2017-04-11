@@ -1,10 +1,12 @@
+#pragma once
+
 /*
  * CameraOrthographic.h
  *
  *  Created on: Dec 21, 2014
  *      Author: Filip Wasil
  *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef CAMERAOrthographic_H_
-#define CAMERAOrthographic_H_
 
 #include <fillwave/space/base/ICamera.h>
 
@@ -80,5 +79,3 @@ private:
 } /* flf */
 typedef std::unique_ptr<flf::CameraOrthographic> puCameraOrthographic;
 } /* flw */
-
-#endif /* CAMERAOrthographic_H_ */

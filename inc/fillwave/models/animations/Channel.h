@@ -1,10 +1,7 @@
+#pragma once
+
 /*
- * Channel.h
- *
- *  Created on: Jul 10, 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,9 +27,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef CHANNEL_H_
-#define CHANNEL_H_
 
 #include <fillwave/models/animations/Key.h>
 
@@ -63,5 +57,3 @@ public:
 
 } /* flf */
 } /* flw */
-
-#endif /* CHANNEL_H_ */

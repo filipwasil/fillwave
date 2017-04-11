@@ -1,10 +1,7 @@
+#pragma once
+
 /*
- * Button.h
- *
- *  Created on: Jan 11, 2016
- *      Author: filip
- *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,9 +27,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef INC_FILLWAVE_HUD_BUTTON_H_
-#define INC_FILLWAVE_HUD_BUTTON_H_
 
 #include <fillwave/hud/base/IHUDNode.h>
 #include <fillwave/common/IPickable.h>
@@ -64,5 +58,3 @@ public:
 } /* namespace flf */
 typedef std::shared_ptr<flf::Button> pButton;
 } /* namespace flw */
-
-#endif /* INC_FILLWAVE_HUD_BUTTON_H_ */

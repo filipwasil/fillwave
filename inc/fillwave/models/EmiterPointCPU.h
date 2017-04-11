@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * EmiterPointCPU.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef EMITER_POINT_CPU_H_
-#define EMITER_POINT_CPU_H_
 
 #include <fillwave/core/buffers/VertexBufferFloat.h>
 #include <fillwave/core/operations/TQuery.h>
@@ -104,5 +103,3 @@ private:
 
 } /* flf */
 } /* flw */
-
-#endif /* EMITER_POINT_CPU_H_ */

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * BuilderEmiter.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef INC_FILLWAVE_PARTICLES_BUILDEREMITER_H_
-#define INC_FILLWAVE_PARTICLES_BUILDEREMITER_H_
 
 #include <fillwave/models/base/IEmiterPoint.h>
 
@@ -105,5 +104,3 @@ private:
 
 } /* flf */
 } /* flw */
-
-#endif /* INC_FILLWAVE_PARTICLES_BUILDEREMITER_H_ */

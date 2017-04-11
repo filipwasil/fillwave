@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Entity.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef ENTITY_H_
-#define ENTITY_H_
 
 #include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/common/IPickable.h>
@@ -157,5 +156,3 @@ private:
 } /* flf */
 puEntity buildEntity();
 } /* flw */
-
-#endif /* ENTITY_H_ */

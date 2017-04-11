@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * EmiterPointGPU.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef EMITERPOINTGPU_H_
-#define EMITERPOINTGPU_H_
 
 #include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
 #include <fillwave/core/pipeline/Fence.h>
@@ -118,5 +117,3 @@ private:
 
 } /* particles */
 } /* flw */
-
-#endif /* EMITERPOINTGPU_H_ */

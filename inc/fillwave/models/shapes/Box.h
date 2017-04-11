@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Box.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef BOX_H_
-#define BOX_H_
 
 #include <fillwave/models/shapes/Quad.h>
 
@@ -113,4 +112,3 @@ private:
 
 } /* flf */
 } /* flw */
-#endif /* BOX_H_ */

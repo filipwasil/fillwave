@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * BoxOcclusion.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef BOXOCCLUSION_H_
-#define BOXOCCLUSION_H_
 
 #include <fillwave/models/shapes/Quad.h>
 #include <fillwave/core/buffers/VertexBufferPosition.h>
@@ -108,5 +107,3 @@ private:
 
 } /* flf */
 } /* flw */
-
-#endif /* BOXOCCLUSION_H_ */

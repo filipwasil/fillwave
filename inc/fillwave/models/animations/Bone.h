@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Bone.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef BONE_H_
-#define BONE_H_
 
 #include <fillwave/models/animations/Hinge.h>
 #include <fillwave/Assets.h>
@@ -78,5 +77,3 @@ private:
 
 } /* flf */
 } /* flw */
-
-#endif /* BONE_H_ */

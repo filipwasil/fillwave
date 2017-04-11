@@ -1,10 +1,7 @@
+#pragma once
+
 /*
- * BuilderModel.h
- *
- *  Created on: Apr 26, 2015
- *      Author: Filip Wasil
- *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2017, Filip Wasil
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,9 +27,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef INC_FILLWAVE_MODELS_BUILDERMODEL_H_
-#define INC_FILLWAVE_MODELS_BUILDERMODEL_H_
 
 #include <fillwave/models/Model.h>
 
@@ -64,5 +58,3 @@ protected:
 
 } /* flf */
 } /* flw */
-
-#endif /* INC_FILLWAVE_MODELS_BUILDERMODEL_H_ */

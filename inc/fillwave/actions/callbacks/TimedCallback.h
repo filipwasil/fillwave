@@ -1,6 +1,5 @@
 #pragma once
 
-
 /*
  * TimedCallback.h
  *

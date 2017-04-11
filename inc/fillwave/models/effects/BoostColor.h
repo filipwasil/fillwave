@@ -1,9 +1,6 @@
+#pragma once
+
 /*
- * BoostColor.h
- *
- *  Created on: Dec 5, 2014
- *      Author: Filip Wasil
- *
  * Copyright (c) 2016, Filip Wasil
  * All rights reserved.
  *
@@ -30,9 +27,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef BOOSTCOLOR_H_
-#define BOOSTCOLOR_H_
 
 #include <fillwave/models/effects/Effect.h>
 
@@ -63,5 +57,3 @@ private:
 
 } /* framework*/
 } /* flw */
-
-#endif /* BOOSTCOLOR_H_ */

@@ -1,10 +1,7 @@
+#pragma once
+
 /*
- * BuilderModelExternalMaps.h
- *
- *  Created on: Apr 27, 2015
- *      Author: filip
- *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,9 +27,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef INC_FILLWAVE_MODELS_BUILDERMODELEXTERNALMAPS_H_
-#define INC_FILLWAVE_MODELS_BUILDERMODELEXTERNALMAPS_H_
 
 #include <fillwave/models/builders/BuilderModel.h>
 
@@ -70,5 +64,3 @@ private:
 
 } /* flf */
 } /* flw */
-
-#endif /* INC_FILLWAVE_MODELS_BUILDERMODELEXTERNALMAPS_H_ */

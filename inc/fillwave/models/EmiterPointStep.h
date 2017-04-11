@@ -1,3 +1,4 @@
+#pragma once
 /*
  * EmiterPointStep.h
  *
@@ -31,9 +32,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef EmiterPointStep_H_
-#define EmiterPointStep_H_
-
 #include <fillwave/models/animations/Key.h>
 #include <fillwave/models/base/IEmiterPoint.h>
 
@@ -58,5 +56,3 @@ public:
 
 } /* flf */
 } /* flw */
-
-#endif /* EmiterPointStep_H_ */

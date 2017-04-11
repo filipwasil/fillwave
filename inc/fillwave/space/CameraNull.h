@@ -1,10 +1,7 @@
+#pragma once
+
 /*
- * CameraNull.h
- *
- *  Created on: 26 May 2015
- *      Author: Filip Wasil
- *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,9 +28,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef CAMERANULL_H_
-#define CAMERANULL_H_
-
 #include <fillwave/space/base/ICamera.h>
 
 namespace flw {
@@ -58,4 +52,3 @@ public:
 
 } /* flf */
 } /* flw */
-#endif /* CAMERANULL_H_ */

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Attribute.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef ATTRIBUTE_H_
-#define ATTRIBUTE_H_
 
 #include <fillwave/core/pipeline/Program.h>
 
@@ -82,5 +81,3 @@ private:
 
 } /* flc */
 } /* flw */
-
-#endif /* ATTRIBUTE_H_ */

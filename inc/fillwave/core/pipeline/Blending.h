@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Blending.h
  *
@@ -31,9 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef INC_FILLWAVE_COMMON_BLENDING_H_
-#define INC_FILLWAVE_COMMON_BLENDING_H_
-
 namespace flw {
 namespace flf {
 /*! \struct Blending
@@ -47,5 +46,3 @@ struct Blending {
 
 } /* flf */
 } /* flw */
-
-#endif /* INC_FILLWAVE_COMMON_BLENDING_H_ */
