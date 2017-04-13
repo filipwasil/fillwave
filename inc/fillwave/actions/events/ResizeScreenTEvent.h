@@ -57,5 +57,5 @@ public:
   virtual ~ResizeScreenEvent() = default;
 };
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

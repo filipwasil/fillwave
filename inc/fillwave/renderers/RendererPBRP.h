@@ -57,5 +57,5 @@ private:
   std::unordered_map<GLuint, std::vector<IRenderable *> > mRenderPasses;
 };
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

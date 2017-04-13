@@ -72,5 +72,5 @@ public:
   }
 };
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

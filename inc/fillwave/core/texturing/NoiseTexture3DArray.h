@@ -1,3 +1,5 @@
+#pragma once
+
 // The MIT License (MIT)
 //
 // Copyright (c) 2013 Dan Ginsburg, Budirijanto Purnomo

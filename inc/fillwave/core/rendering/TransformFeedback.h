@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-* Copyright (c) 2017, Filip Wasil
+* Copyright (c) 2017, Fillwave developers
 * All rights reserved.
 *
 * Fillwave C++14 graphics engine.

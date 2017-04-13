@@ -1,5 +1,7 @@
+#pragma once
+
 /*
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2017, Filip Wasil
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -25,9 +27,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef LIBFILLWAVE_IFOCUSABLE_H
-#define LIBFILLWAVE_IFOCUSABLE_H
 
 #include <fillwave/actions/events/EventType.h>
 #include <fillwave/actions/callbacks/Callback.h>
@@ -60,7 +59,5 @@ protected:
   std::vector<Callback *> mCallbacks;
 };
 
-}
-}
-
-#endif //LIBFILLWAVE_IFOCUSABLE_H
+} /* flf */
+} /* flw */

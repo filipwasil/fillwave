@@ -79,5 +79,5 @@ struct RenderItem {
   GLuint mHandles[eRenderHandlesSize];
 };
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

@@ -52,5 +52,5 @@ public:
   void startAction(flc::Program *program) override;
 };
 
-} /* framework*/
+} /* flf */
 } /* flw */

@@ -56,5 +56,5 @@ private:
   std::vector<IRenderable *> mRenderPasses;
 };
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Animation.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef ANIMATION_H_
-#define ANIMATION_H_
 
 #include <fillwave/Assets.h>
 
@@ -101,5 +100,3 @@ typedef std::unique_ptr<flf::Animation> puAnimation;
 } /* flw */
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
-#endif /* ANIMATION_H_ */

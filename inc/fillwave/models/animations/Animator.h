@@ -1,10 +1,12 @@
+#pragma once
+
 /*
  * Animator.h
  *
  *  Created on: Jun 25, 2014
  *      Author: Filip Wasil
  *
- * Copyright (c) 2016, Filip Wasil
+ * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef ANIMATOR_H_
-#define ANIMATOR_H_
 
 #include <fillwave/models/animations/Bone.h>
 #include <fillwave/core/pipeline/Program.h>
@@ -123,5 +122,3 @@ private:
 
 } /* flf */
 } /* fillwave*/
-
-#endif /* BONEMANAGER_H_ */

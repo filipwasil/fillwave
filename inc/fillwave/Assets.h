@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * Assets.h
  *
@@ -31,10 +33,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#ifndef FILLWAVE_ASSETS_H_
-#define FILLWAVE_ASSETS_H_
-
 #include <fillwave/Config.h>
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -56,5 +54,3 @@
 #define FILLWAVE_DO_NOT_ANIMATE -1
 #define FILLWAVE_MAX_BONES 45
 #define FILLWAVE_MAX_BONES_DEPENDENCIES 4
-
-#endif /* FILLWAVE_ASSETS_H_ */

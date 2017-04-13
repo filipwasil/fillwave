@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * AndroidLoader.h
  *
@@ -33,9 +35,6 @@
 
 #ifdef __ANDROID__
 
-#ifndef ANDROIDLOADER_H_
-#define ANDROIDLOADER_H_
-
 // For native asset manager
 #include <sys/types.h>
 #include <android/native_activity.h>
@@ -60,5 +59,3 @@ bool androidExtractAll();
 } /* flw */
 
 #endif /* ANDROIDLOADER_H_ */
-
-#endif /* __ANDROID__ */

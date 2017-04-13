@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * IRenderer.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef INC_FILLWAVE_CORE_RENDERERS_RENDERER_H_
-#define INC_FILLWAVE_CORE_RENDERERS_RENDERER_H_
 
 #include <fillwave/OpenGL.h>
 #include <fillwave/models/base/IRenderable.h>
@@ -76,5 +75,3 @@ public:
 } /* namespace flf */
 typedef std::unique_ptr<flf::IRenderer> puIRenderer;
 } /* namespace flw */
-
-#endif /* INC_FILLWAVE_CORE_RENDERERS_RENDERER_H_ */

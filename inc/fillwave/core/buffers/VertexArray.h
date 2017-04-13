@@ -53,5 +53,5 @@ public:
 
 void bindVAO(GLuint handle);
 
-} /* buffer */
+} /* flf */
 } /* flw */

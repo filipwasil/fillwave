@@ -31,7 +31,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/Texturing.h>
 #include <fillwave/common/Strings.h>
