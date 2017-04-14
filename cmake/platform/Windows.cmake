@@ -4,6 +4,14 @@ cmake_policy (SET CMP0048 OLD) #Project version cmake policy
 cmake_policy (SET CMP0046 OLD) #Project dependency cmake policy
 
 set(BUILD_SHARED_LIBS OFF)
+set(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
+set(ASSIMP_BUILD_TESTS OFF)
+set(ASSIMP_BUILD_TESTS OFF)
+set(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
+set(GLFW_BUILD_EXAMPLES OFF)
+set(GLFW_BUILD_EXAMPLES OFF)
+set(GLFW_BUILD_DOCS OFF)
+set(BUILD_CPU_DEMOS OFF)
 
 # -----------------------------------------------
 # Subprojects
