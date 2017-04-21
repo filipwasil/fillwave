@@ -397,7 +397,7 @@ inline void Engine::EngineImpl::initStartup() {
 }
 
 inline void Engine::EngineImpl::initPickingBuffer() {
-  mPickingPixelBuffer = puPixelBuffer(new flc::PixelBuffer(GL_STREAM_READ));
+  mPickingPixelBuffer = std::make_unique<flc::PixelBuffer>(GL_STREAM_READ);
   reloadPickingBuffer();
 }
 
@@ -762,12 +762,10 @@ inline void Engine::EngineImpl::evaluateDebugger() {
     case eDebuggerState::eLightsSpot:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-        flf::CameraPerspective cameraP = *(mLights->mLightsSpot[i]->getShadowCamera());
-        mDebugger->renderFromCamera(cameraP, mCurentTextureUnit++); //xxx make more flexible
+        mDebugger->renderFromCamera(*(mLights->mLightsSpot[i]->getShadowCamera()), mCurentTextureUnit++);
       }
       for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
-        flf::CameraOrthographic cameraO = *(mLights->mLightsDirectional[i]->getShadowCamera());
-        mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
+        mDebugger->renderFromCamera(*(mLights->mLightsDirectional[i]->getShadowCamera()), mCurentTextureUnit++);
       }
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
@@ -789,12 +787,10 @@ inline void Engine::EngineImpl::evaluateDebugger() {
     case eDebuggerState::eLightsSpotColor:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
-        flf::CameraPerspective cameraP = *(mLights->mLightsSpot[i]->getShadowCamera());
-        mDebugger->renderFromCamera(cameraP, mCurentTextureUnit++); //xxx make more flexible
+        mDebugger->renderFromCamera(*(mLights->mLightsSpot[i]->getShadowCamera()), mCurentTextureUnit++);
       }
       for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
-        flf::CameraOrthographic cameraO = *(mLights->mLightsDirectional[i]->getShadowCamera());
-        mDebugger->renderFromCamera(cameraO, mCurentTextureUnit++); //xxx make more flexible
+        mDebugger->renderFromCamera(*(mLights->mLightsDirectional[i]->getShadowCamera()), mCurentTextureUnit++);
       }
       break;
     case eDebuggerState::eLightsPoint:

@@ -11,8 +11,8 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 class MockButton : public Button {
 public:

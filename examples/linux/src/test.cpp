@@ -17,8 +17,8 @@
 
 /* Physics */
 //#include <bullet>
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::flf;
 using namespace std;
 
 const GLint SPHERES = 5;
@@ -49,7 +49,7 @@ void init() {
 }
 
 void perform() {
-  core::Program *p = ProgramLoader(ContextGLFW::mGraphicsEngine).getDefault();
+  flc::Program *p = ProgramLoader(ContextGLFW::mGraphicsEngine).getDefault();
 
   /* Models */
   BuilderModelExternalMaps builder(ContextGLFW::mGraphicsEngine, "meshes/sphere.obj", p, "textures/test.png");
@@ -88,8 +88,7 @@ void quit() {
 }
 
 void showDescription() {
-  pText hint0 = ContextGLFW::mGraphicsEngine->storeText("Fillwave example callbacks",
-                                                        "fonts/Titania",
+  pText hint0 = ContextGLFW::mGraphicsEngine->storeText("Fillwave example callbacks", "fonts/Titania",
                                                         glm::vec2(-0.95, 0.80),
                                                         100.0);
   pText hint3 = ContextGLFW::mGraphicsEngine->storeText("Use 'S' for camera back",

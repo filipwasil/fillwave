@@ -1,7 +1,7 @@
 #include "../jni-lib/FillwaveJNI.h"
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 #ifdef __cplusplus
 extern "C" {

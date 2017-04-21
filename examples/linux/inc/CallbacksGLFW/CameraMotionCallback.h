@@ -11,9 +11,9 @@
 #include <fillwave/Framework.h>
 #include <fillwave/Math.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class CameraMotionCallback
  * \brief EngineCallback to move the camera in circle road around point (0.0,0.0,0.0).

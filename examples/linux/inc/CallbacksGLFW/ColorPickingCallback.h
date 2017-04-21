@@ -35,9 +35,9 @@
 
 #include <fillwave/Framework.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class ColorPickingCallback
  *

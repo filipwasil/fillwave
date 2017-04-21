@@ -8,9 +8,9 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/extras/Log.h>
 
-using namespace fillwave;
+using namespace flw;
 
-void perform(fillwave::Engine *engine) {
+void perform(flw::Engine *engine) {
 
   /* Scene */
   pScene gScene = buildScene();

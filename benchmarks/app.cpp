@@ -39,7 +39,7 @@
 #include <fillwave/Profiler.h>
 #include <fillwave/Log.h>
 
-using namespace fillwave;
+using namespace flw;
 
 FLOGINIT_DEFAULT()
 
@@ -98,7 +98,7 @@ static void BM_EngineCreationDestroy(benchmark::State &state) {
       a
   };
   while (state.KeepRunning()) {
-    delete (new fillwave::Engine(1, argv));
+    delete (new flw::Engine(1, argv));
   }
 }
 
@@ -108,7 +108,7 @@ BENCHMARK(BM_EngineCreationDestroy);
 // Define another benchmark
 static void BM_MoveableInTimeCreation(benchmark::State &state) {
   while (state.KeepRunning()) {
-    framework::Moveable sut;
+    flf::Moveable sut;
   }
 }
 

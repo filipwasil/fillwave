@@ -49,7 +49,7 @@ protected:
   virtual void resizeGL(int width, int height);
 
 private:
-  std::unique_ptr<fillwave::Engine> mEngine;
+  std::unique_ptr<flw::Engine> mEngine;
   int mArgc;
   char **mArgv;
 };

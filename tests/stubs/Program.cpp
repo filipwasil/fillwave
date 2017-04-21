@@ -12,7 +12,7 @@ FLOGINIT("Program", FERROR | FFATAL | FINFO | FDEBUG)
 
 using namespace std;
 
-namespace fillwave {
+namespace flw {
 namespace core {
 
 Program::Program(const std::vector<core::Shader *> &shaders, GLboolean skipLinking)

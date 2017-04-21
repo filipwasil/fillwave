@@ -32,8 +32,8 @@
 
 #include <fillwave/models/terrain/VoxelConstructor.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 /*! \class PerlinConstructor
  * \brief Implements VoxelConstructor and QuadConstructor to build an example terrain.

@@ -10,8 +10,8 @@
 #include <fillwave/models/shapes/Quad.h>
 #include <fillwave/Framework.h>
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 void perform(Engine *engine) {
   /* Scene and camera */

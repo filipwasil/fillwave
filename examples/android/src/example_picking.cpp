@@ -11,9 +11,9 @@
 #include "../../android/inc/CallbacksEGL/ColorPickingCallback.h"
 #include "../../android/src/PickableModel.h"
 
-using namespace fillwave;
+using namespace flw;
 
-void perform(fillwave::Engine *engine) {
+void perform(flw::Engine *engine) {
   /* Scene */
   pScene scene = buildScene();
 

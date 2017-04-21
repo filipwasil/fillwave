@@ -8,11 +8,11 @@
 #ifndef EXAMPLE_H_
 #define EXAMPLE_H_
 
-namespace fillwave {
+namespace flw {
 class Engine;
 }
 
-void perform(fillwave::Engine *engine);
+void perform(flw::Engine *engine);
 
 
 #endif /* EXAMPLE_H_ */

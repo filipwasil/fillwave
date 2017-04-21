@@ -37,7 +37,7 @@
 
 FLOGINIT("TransformFeedback", FERROR | FFATAL)
 
-namespace fillwave {
+namespace flw {
 namespace core {
 
 TransformFeedback::TransformFeedback(GLsizei howMany)

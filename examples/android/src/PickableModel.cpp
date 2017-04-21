@@ -12,8 +12,8 @@
 
 FLOGINIT("name", FERROR | FFATAL)
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 PickableModel::PickableModel(std::string name,
     pText text,

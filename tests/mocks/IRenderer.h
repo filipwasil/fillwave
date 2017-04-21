@@ -14,8 +14,8 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 class MockIRenderer : public IRenderer {
 public:

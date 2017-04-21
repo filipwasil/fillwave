@@ -6,8 +6,8 @@
 
 #include <fillwave/Log.h>
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 using namespace std;
 
 FLOGINIT_DEFAULT()

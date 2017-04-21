@@ -7,8 +7,8 @@
 
 #include "../../../linux/inc/CallbacksGLFW/FollowCustomCursorCallback.h"
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 FollowCustomCursorCallback::FollowCustomCursorCallback(Engine *engine)
     : Callback(eEventType::eCursorPosition), mEngine(engine) {

@@ -8,8 +8,8 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/Log.h>
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 void perform(Engine *engine) {
   /* Scene */

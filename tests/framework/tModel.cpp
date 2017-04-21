@@ -7,5 +7,5 @@
 
 #include <fillwave/models/Model.h>
 
-using namespace fillwave;
+using namespace flw;
 

@@ -7,14 +7,14 @@
 
 #include "../../linux/src/GradientBall.h"
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 GradientBall::GradientBall(Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     GLfloat lifetime,
     GLfloat size,
-    core::Texture *texture)
+    flc::Texture *texture)
     : Impostor(engine, lifetime, size, texture), mProgram(program) {
 }
 
@@ -31,5 +31,5 @@ void GradientBall::draw(ICamera &camera) {
   coreDraw();
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

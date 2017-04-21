@@ -12,8 +12,8 @@
 
 FLOGINIT_DEFAULT()
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 TEST (Engine, texture
 ) {
