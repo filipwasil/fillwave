@@ -10,10 +10,10 @@
 
 #include "../../android/inc/CallbacksEGL/TimedMoveCallbackCustom.h"
 
-using namespace fillwave;
-using namespace fillwave::actions;
+using namespace flw;
+using namespace flw::actions;
 
-void perform(fillwave::Engine *engine) {
+void perform(flw::Engine *engine) {
   /* Scene */
   pScenePerspective gScene = buildScenePerspective();
 
@@ -28,7 +28,7 @@ void perform(fillwave::Engine *engine) {
 
   /* Program */
   loader::ProgramLoader loader;
-  core::Program *progDefault = loader.getDefault(engine);
+  flc::Program *progDefault = loader.getDefault(engine);
 
 
   /* Lights */

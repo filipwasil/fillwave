@@ -1,18 +1,11 @@
-/*
- * Button.cpp
- *
- *  Created on: Jan 21, 2016
- *      Author: filip
- */
-
 #pragma once
 
 #include <fillwave/hud/Button.h>
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::flf;
 
 class MockButton : public Button {
 public:

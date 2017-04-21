@@ -11,9 +11,9 @@
 #include <fillwave/Framework.h>
 #include <fillwave/Fillwave.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 /*! \class FollowCustomCursorCallback
  * \brief EngineCallback to change follow the user created custom cursor.

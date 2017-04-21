@@ -1,7 +1,7 @@
 #include "../jni-lib/FillwaveJNI.h"
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 #ifdef __cplusplus
 extern "C" {
@@ -254,8 +254,8 @@ jlong texture
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
 
-ptr->drawTexture(reinterpret_cast<core::Texture*>(program),
-reinterpret_cast<core::Program*>(texture));
+ptr->drawTexture(reinterpret_cast<flc::Texture*>(program),
+reinterpret_cast<flc::Program*>(texture));
 }
 /*
  * Class:     com_fillwave_Fillwave

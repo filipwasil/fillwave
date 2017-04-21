@@ -1,18 +1,10 @@
-/*
- * TimeStopCallback.h
- *
- *  Created on: 15 sty 2015
- *      Author: filip
- */
-
-#ifndef INC_FILLWAVE_TIMESTOPCALLBACK_H_
-#define INC_FILLWAVE_TIMESTOPCALLBACK_H_
+#pragma once
 
 #include <fillwave/Framework.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
-namespace framework {
+namespace flf {
 
 class TimeStopCallback : public Callback {
 public:
@@ -27,7 +19,5 @@ private:
   Engine *mEngine;
 };
 
-} /* framework */
-} /* fillwave */
-
-#endif /* INC_FILLWAVE_TIMESTOPCALLBACK_H_ */
+} /* flf */
+} /* flw */

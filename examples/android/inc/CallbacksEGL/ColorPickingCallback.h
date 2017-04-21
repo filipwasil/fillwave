@@ -38,8 +38,8 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/actions/callbacks/Callback.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 class ColorPickingCallback : public Callback {
 public:

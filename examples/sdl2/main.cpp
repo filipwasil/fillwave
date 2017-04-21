@@ -11,7 +11,7 @@
 
 #define PROGRAM_NAME "Fillwave test"
 
-using namespace fillwave;
+using namespace flw;
 using namespace std;
 
 /* A simple function that prints a message, the error code returned by SDL,

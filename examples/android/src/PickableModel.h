@@ -11,8 +11,8 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/Framework.h>
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 class PickableModel : public Model {
 private:
@@ -20,7 +20,7 @@ private:
   pIEffect mPickedEffect;
   std::string mName;
 public:
-  PickableModel(std::string name, pText text, Engine *engine, core::Program *program, const std::string &shapePath);
+  PickableModel(std::string name, pText text, Engine *engine, flc::Program *program, const std::string &shapePath);
 
   virtual ~PickableModel();
 

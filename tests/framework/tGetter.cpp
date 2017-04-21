@@ -3,8 +3,6 @@
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-FLOGINIT_DEFAULT()
-
 using namespace testing;
 
 TEST(TGetterTests, security_tests

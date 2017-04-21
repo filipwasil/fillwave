@@ -92,7 +92,7 @@ Probably you will ask how is Fillwave better than other, more extended engines o
   \item "examples" - multiplatform examples
   \item "scripts" - building scripts
 \end{itemize}
-\indent \indent Engine uses dual namespace design style for modules. Code is splitted into three namespaces: \textbf{fillwave}, \textbf{fillwave:framework}, \textbf{fillwave::core}. Core layer uses directly OpenGL driver API. \textbf{Framework} layer uses the \textbf{core} and by design implements a middleware of this project. The highest layer can be found under \textbf{fillwave} namespace. It is what we call Fillwave API. Naming convention is following:
+\indent \indent Engine uses dual namespace design style for modules. Code is splitted into three namespaces: \textbf{fillwave}, \textbf{fillwave:framework}, \textbf{flw::core}. Core layer uses directly OpenGL driver API. \textbf{Framework} layer uses the \textbf{core} and by design implements a middleware of this project. The highest layer can be found under \textbf{fillwave} namespace. It is what we call Fillwave API. Naming convention is following:
 \begin{itemize}
   \item "p" - shared pointer (Ex. pEntity)
   \item "pu" - unique pointer (Ex. puRenderer)
@@ -107,7 +107,7 @@ Probably you will ask how is Fillwave better than other, more extended engines o
 \begin{lstlisting}
 #include <fillwave/Fillwave.h>
 
-using namespace fillwave;
+using namespace flw;
 
 int main(int argc, char* argv[]) {
    /* Create OpenGL/OpenGLES context */
@@ -146,14 +146,14 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
                                    int action,
                                    int mods) {
    /* Create an event data and fill it */
-   fillwave::framework::KeyboardEventData data;
+   flw::flf::KeyboardEventData data;
    data.action = action;
    data.key = key;
    data.mode = mods;
    data.scanCode = scancode;
    
    /* Create an event */
-   fillwave::framework::KeyboardEvent event(data);
+   flw::flf::KeyboardEvent event(data);
    
    /* insert an event */
    mGraphicsEngine->insertInput(event);
@@ -273,8 +273,8 @@ engine->getCurrentScene()->setCamera(make_unique<CameraOrtographic>
 \begin{lstlisting}
 /* Create loader, and use it to create programs */
 loader::ProgramLoader loader(gEngine);
-core::Program* default = loader.getDefault();
-core::Program* animation = loader.getDefaultBones();
+flc::Program* default = loader.getDefault();
+flc::Program* animation = loader.getDefaultBones();
 \end{lstlisting}
 
 \subsection{Store functions}\label{sec:store functions}
@@ -288,12 +288,12 @@ mEngine->storeShader<GL_FRAGMENT_SHADER>("fancy_name",
 mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag");
 
 /* Store program */
-core::Program* storeProgram(const std::string& , std::vector<core::Shader*>);
+flc::Program* storeProgram(const std::string& , std::vector<flc::Shader*>);
 /* Store textures */
-core::Texture* storeTexture (const std::string&, const GLuint&);
-core::Texture2DRenderableDynamic* 
+flc::Texture* storeTexture (const std::string&, const GLuint&);
+flc::Texture2DRenderableDynamic*
                        storeTextureDynamic (const std::string& fragmentShaderPath);
-core::Texture3D* storeTexture3D(const std::string& path,
+flc::Texture3D* storeTexture3D(const std::string& path,
                           const std::string& path,
                           const std::string& path,
                           const std::string& path,
@@ -326,10 +326,10 @@ puModel model = make_unique<Model>(engine, program, "model.obj");
 /*
  * When the appropriate map paths are available in your
  * file and you want to draw Your custom shape derived 
- * from framework::Shape<core::VertexBasic> 
+ * from flf::Shape<flc::VertexBasic>
  */
 
-framework::Sphere sphere(1.0,10.0,10.0);
+flf::Sphere sphere(1.0,10.0,10.0);
 
 puModel model = make_unique<Model>(engine,
                           program,
@@ -374,7 +374,7 @@ puModel model = make_unique<Model>(engine,
 /* First method */
 BuilderModelExternalMaps builder1 (engine,
                                    modelPath,
-                                   core::Program* program,
+                                   flc::Program* program,
                                    diffusePath,
                                    normalPath,
                                    specularPath);
@@ -454,7 +454,7 @@ EmiterPointCPU::EmiterPointCPU(Engine* engine,
                                    glm::vec3 acceleration,
                                    glm::vec3 velocity,
                                    glm::vec3 distance,
-                                   core::Texture* texture,
+                                   flc::Texture* texture,
                                    GLfloat lifetimeInSec,
                                    GLfloat pointSize,
                                    GLboolean dephTest,
@@ -471,7 +471,7 @@ EmiterPointGPU::EmiterPointGPU(Engine* engine,
               glm::vec3 robustnessPosition,
               GLfloat startSize,
               GLfloat lifetime,
-	          core::Texture* texture,
+	          flc::Texture* texture,
 	          GLenum blendingSource,
 	          GLenum blendingDestination,
 	          GLboolean dephTest,
@@ -508,7 +508,7 @@ void setBlendingFunction (GLenum sourcePixel, GLenum destPixel);
 
 \begin{lstlisting}
 
-core::Texture3D* texture=core::Texture3D*(new Texture3D("textures_right.png",
+flc::Texture3D* texture=flc::Texture3D*(new Texture3D("textures_right.png",
                                               "textures_left.png",
                                               "textures_ceil.png",
                                               "textures_floor.png",
@@ -523,9 +523,9 @@ scene->setSkybox(make_unique<Skybox>(engine,
 
 
 \begin{lstlisting}
-core::Shader* fs = engine->storeShader<GL_FRAGMENT_SHADER>("default.frag");
-core::Shader* vs = engine->storeShader<GL_VERTEX_SHADER>("default.vert");
-core::Program* program = buildProgram(fs + vs);
+flc::Shader* fs = engine->storeShader<GL_FRAGMENT_SHADER>("default.frag");
+flc::Shader* vs = engine->storeShader<GL_VERTEX_SHADER>("default.vert");
+flc::Program* program = buildProgram(fs + vs);
 puTerrain terrain = buildTerrainVoxel(engine,
                                   program,
                                   "textures/test.png",
@@ -767,7 +767,7 @@ void Engine::configureDebugger(eDebuggerState state);
 \subsection{Events}\label{sec:Custom events}
 \begin{lstlisting}
 
-namespace fillwave {
+namespace flw {
 namespace actions {
 struct NewEventData {
    int data;
@@ -784,7 +784,7 @@ public:
 \end{lstlisting}
 \subsection{Callbacks}\label{sec:Custom callbacks}
 \begin{lstlisting}
-namespace fillwave {
+namespace flw {
 namespace actions {
 
 class NewEngineCallback: public EngineCallback {
@@ -805,10 +805,10 @@ public:
 \subsection{Easing}\label{sec:Custom easing}
 \textbf{TimedMoveCallbackCustom.h}
 \begin{lstlisting}
-namespace fillwave {
+namespace flw {
 namespace actions {
 
-class TimedMoveCallbackCustom: public fillwave::framework::TimedMoveCallback {
+class TimedMoveCallbackCustom: public flw::flf::TimedMoveCallback {
 public:
    TimedMoveCallbackCustom(pEntity entity,
                            glm::vec3 endPosition,
@@ -821,7 +821,7 @@ public:
 \end{lstlisting}
 \textbf{TimedMoveCallbackCustom.cpp}
 \begin{lstlisting}
-namespace fillwave {
+namespace flw {
 namespace actions {
 
 TimedMoveCallbackCustom::TimedMoveCallbackCustom(pEntity entity,
@@ -874,8 +874,8 @@ private:
 	std::vector<IRenderable*> mContainer;
 };
 
-} /* namespace framework */
-} /* namespace fillwave */
+} /* namespace flf */
+} /* namespace flw */
 
 \end{lstlisting}
 

@@ -15,11 +15,11 @@ FLOGINIT("PickableModel", FERROR | FFATAL)
 PickableModel::PickableModel(std::string name,
     pText text,
     Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     const std::string &shapePath,
     const std::string &texturePath)
-    : framework::Model(engine, program, shapePath, texturePath), mText(text), mName(name) {
-  mPickedEffect = std::make_shared<framework::BoostColor>(2.0f);
+    : flf::Model(engine, program, shapePath, texturePath), mText(text), mName(name) {
+  mPickedEffect = std::make_shared<flf::BoostColor>(2.0f);
 }
 
 PickableModel::~PickableModel() {

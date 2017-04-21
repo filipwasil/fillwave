@@ -8,8 +8,8 @@
 #include "../../../linux/inc/CallbacksGLFW/CameraMotionCallback.h"
 #include <fillwave/Fillwave.h>
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 CameraMotionCallback::CameraMotionCallback(Engine *engine)
     : Callback(eEventType::eTime), mTimePassed(0.0), mEngine(engine) {

@@ -12,10 +12,10 @@ FLOGINIT("Program", FERROR | FFATAL | FINFO | FDEBUG)
 
 using namespace std;
 
-namespace fillwave {
-namespace core {
+namespace flw {
+namespace flc {
 
-Program::Program(const std::vector<core::Shader *> &shaders, GLboolean skipLinking)
+Program::Program(const std::vector<Shader *> &shaders, GLboolean skipLinking)
     : mDelayedLinking(skipLinking), mShaders(shaders) {
   reload();
 }
@@ -26,11 +26,11 @@ Program::~Program() {
   }
 }
 
-void Program::attach(core::Shader * /*shader*/) {
+void Program::attach(Shader * /*shader*/) {
 
 }
 
-void Program::detach(core::Shader * /*shader*/) {
+void Program::detach(Shader * /*shader*/) {
 
 }
 
@@ -115,7 +115,7 @@ void Program::log() const {
 void Program::reload() {
 }
 
-core::Program *buildProgram(const std::vector<core::Shader *> &, GLboolean) {
+Program *buildProgram(const std::vector<Shader *> &, GLboolean) {
   return nullptr;
 }
 

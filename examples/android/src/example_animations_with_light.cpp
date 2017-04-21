@@ -10,8 +10,8 @@
 #include <fillwave/models/shapes/Quad.h>
 #include <fillwave/Framework.h>
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 void perform(Engine *engine) {
   /* Scene and camera */
@@ -33,8 +33,8 @@ void perform(Engine *engine) {
 
   /* Program */
   ProgramLoader loader(engine);
-  core::Program *program = loader.getDefault();
-  core::Program *aprogram = loader.getDefaultBones();
+  flc::Program *program = loader.getDefault();
+  flc::Program *aprogram = loader.getDefaultBones();
 
   pIEffect e = std::make_shared<TextureOnly>();
   pIEffect f = std::make_shared<Fog>();

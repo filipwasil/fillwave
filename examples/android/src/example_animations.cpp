@@ -8,8 +8,8 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/Log.h>
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 void perform(Engine *engine) {
   /* Scene */
@@ -28,8 +28,8 @@ void perform(Engine *engine) {
 
   /* Program */
   ProgramLoader loader(engine);
-  core::Program *program = loader.getDefault();
-  core::Program *aprogram = loader.getDefaultBones();
+  flc::Program *program = loader.getDefault();
+  flc::Program *aprogram = loader.getDefaultBones();
 
   puModel beast_animated = make_unique<Model>(engine, aprogram, "beast.dae");
   puModel beast_animated1 = make_unique<Model>(engine, aprogram, "beast.dae");

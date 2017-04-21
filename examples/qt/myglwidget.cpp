@@ -29,8 +29,8 @@
  */
 #include "myglwidget.hpp"
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 using namespace std;
 
 MyGLWidget::MyGLWidget(int argc, char *argv[], QWidget *parent)

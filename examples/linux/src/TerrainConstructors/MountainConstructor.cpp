@@ -34,8 +34,8 @@
 
 FLOGINIT("MountainConstructor", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 MountainConstructor::MountainConstructor() {
 

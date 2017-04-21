@@ -1,18 +1,10 @@
-/*
- * ContextGLFW.h
- *
- *  Created on: Jan 8, 2015
- *      Author: filip
- */
-
-#ifndef ContextGLFW_H_
-#define ContextGLFW_H_
+#pragma once
 
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
 #include <fillwave/Framework.h>
 
-namespace fillwave {
+namespace flw {
 class Engine;
 }
 
@@ -32,7 +24,7 @@ public:
 
   void render();
 
-  static fillwave::Engine *mGraphicsEngine;
+  static flw::Engine *mGraphicsEngine;
   static GLFWwindow *mWindow;
   static GLFWwindow *mWindowNew;
   static GLfloat mScreenWidth;
@@ -62,5 +54,3 @@ public:
 
   static void reload();
 };
-
-#endif /* ContextGLFW_H_ */

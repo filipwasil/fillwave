@@ -1,21 +1,11 @@
-/*
- * IRenderer.cpp
- *
- *  Created on: Jan 31, 2016
- *      Author: filip
- */
-
-#ifndef TESTS_MOCKS_IRENDERER_CPP_
-#define TESTS_MOCKS_IRENDERER_CPP_
-
 #pragma once
 
 #include <fillwave/renderers/IRenderer.h>
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 class MockIRenderer : public IRenderer {
 public:
@@ -36,4 +26,3 @@ public:
 
 }
 }
-#endif /* TESTS_MOCKS_IRENDERER_CPP_ */

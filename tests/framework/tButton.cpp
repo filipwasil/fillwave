@@ -1,18 +1,9 @@
-/*
- * Button.cpp
- *
- *  Created on: Jan 17, 2016
- *      Author: filip
- */
-
 #include <fillwave/Log.h>
 #include <fillwave/Fillwave.h>
 #include "../mocks/Button.h"
 
-FLOGINIT_DEFAULT()
-
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::flf;
 
 using ::testing::AtLeast;
 using ::testing::Return;

@@ -12,13 +12,13 @@
 
 FLOGINIT("name", FERROR | FFATAL)
 
-using namespace fillwave;
-using namespace fillwave::framework;
+using namespace flw;
+using namespace flw::framework;
 
 PickableModel::PickableModel(std::string name,
     pText text,
     Engine *engine,
-    core::Program *program,
+    flc::Program *program,
     const std::string &shapePath)
     : Model(engine, program, shapePath), mText(text), mName(name) {
   mPickedEffect = pIEffect(new BoostColor(2.0f));

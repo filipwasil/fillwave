@@ -8,9 +8,9 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/extras/Log.h>
 
-using namespace fillwave;
+using namespace flw;
 
-void perform(fillwave::Engine *engine) {
+void perform(flw::Engine *engine) {
   /* Scene */
   pScene gScene = buildScene();
 
@@ -34,7 +34,7 @@ void perform(fillwave::Engine *engine) {
   pShader vertex = engine->storeShaderVertex("default.vert");
 
   /* Programs */
-  core::Program *gProgram = buildProgram(vertex + fragment);
+  flc::Program *gProgram = buildProgram(vertex + fragment);
 
   /* Models */
   pModel sphere = buildModel(engine, gProgram, "sphere.obj", textureDynamic);

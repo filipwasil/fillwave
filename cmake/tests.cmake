@@ -70,3 +70,5 @@
       COMMENT "Running unit tests"
       VERBATIM
   )
+
+  add_dependencies(fillwave postBuildRun)

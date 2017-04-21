@@ -1,19 +1,11 @@
-/*
- * PickableModel.h
- *
- *  Created on: Nov 16, 2014
- *      Author: filip
- */
-
-#ifndef PICKABLEMODEL_H_
-#define PICKABLEMODEL_H_
+#pragma once
 
 #include <fillwave/Fillwave.h>
 #include <fillwave/Framework.h>
 
-using namespace fillwave;
+using namespace flw;
 
-class PickableModel : public framework::Model {
+class PickableModel : public flf::Model {
 private:
   pText mText;
   pIEffect mPickedEffect;
@@ -22,7 +14,7 @@ public:
   PickableModel(std::string name,
       pText text,
       Engine *engine,
-      core::Program *program,
+      flc::Program *program,
       const std::string &shapePath,
       const std::string &texturePath);
 
@@ -32,5 +24,3 @@ public:
 
   void onUnpicked();
 };
-
-#endif /* PICKABLEMODEL_H_ */

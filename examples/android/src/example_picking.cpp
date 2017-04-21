@@ -11,9 +11,9 @@
 #include "../../android/inc/CallbacksEGL/ColorPickingCallback.h"
 #include "../../android/src/PickableModel.h"
 
-using namespace fillwave;
+using namespace flw;
 
-void perform(fillwave::Engine *engine) {
+void perform(flw::Engine *engine) {
   /* Scene */
   pScene scene = buildScene();
 
@@ -30,8 +30,8 @@ void perform(fillwave::Engine *engine) {
 
   /* Program */
   loader::ProgramLoader loader;
-  core::Program *program = loader.getDefault();
-  core::Program *aprogram = loader.getDefaultBones();
+  flc::Program *program = loader.getDefault();
+  flc::Program *aprogram = loader.getDefaultBones();
 
   pModel beast_animated = buildModel(engine, aprogram, "beast.dae");
   pModel beast_animated1 = buildModel(engine, aprogram, "beast.dae");

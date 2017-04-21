@@ -38,8 +38,8 @@
 
 FLOGINIT("MoveCameraCallback", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 MoveCameraCallback::MoveCameraCallback(Engine *engine, eEventType eventType, float speed, GLFWwindow *window)
     : Callback(eventType), mSpeed(speed), mWindow(window), mEngine(engine) {

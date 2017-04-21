@@ -120,9 +120,9 @@ eDebuggerState Debugger::getState() {
 
 void Debugger::prepareDebugWindow(GLint id)
 {
-    DebugWindowInfo& win = mDebugWindows[id];
-    glViewport(win.offset.x, win.offset.y, win.size.x, win.size.y);
-    glClear(GL_DEPTH_BUFFER_BIT);
+  DebugWindowInfo& win = mDebugWindows[id];
+  glViewport(win.offset.x, win.offset.y, win.size.x, win.size.y);
+  glClear(GL_DEPTH_BUFFER_BIT);
 }
 
 void Debugger::renderFromCamera(ICamera &c, GLint id) {

@@ -10,9 +10,9 @@
 #include <fillwave/models/shapes/Sphere.h>
 #include "../../android/inc/TerrainConstructors/PerlinConstructor.h"
 
-using namespace fillwave;
+using namespace flw;
 
-void perform(fillwave::Engine *engine) {
+void perform(flw::Engine *engine) {
   /* Scene */
   pScenePerspective scene = buildScenePerspective();
 
@@ -29,8 +29,8 @@ void perform(fillwave::Engine *engine) {
 
   /* Program */
   loader::ProgramLoader loader;
-  core::Program *program = loader.getDefault(engine);
-  core::Program *aprogram = loader.getDefaultBones(engine);
+  flc::Program *program = loader.getDefault(engine);
+  flc::Program *aprogram = loader.getDefaultBones(engine);
 
   pShader vertex = engine->storeShaderVertex("default.vert");
 

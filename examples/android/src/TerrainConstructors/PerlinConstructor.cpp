@@ -35,8 +35,8 @@
 
 FLOGINIT("PerlinConstructor", FERROR | FFATAL)
 
-namespace fillwave {
-namespace framework {
+namespace flw {
+namespace flf {
 
 PerlinConstructor::PerlinConstructor() {
 //	noise::module::Perlin mPerlin;

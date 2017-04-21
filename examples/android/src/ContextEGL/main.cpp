@@ -41,7 +41,7 @@
 
 FLOGINIT("Fillwave android example", FERROR | FFATAL)
 
-using namespace fillwave;
+using namespace flw;
 
 static int CLIP_NONE = 0;
 static int CLIP_HELLO = 1;
@@ -207,10 +207,10 @@ static int32_t engine_handle_input(struct android_app *app, AInputEvent *event) 
             if (engine->fillwave != NULL) {
               GLfloat x = AMotionEvent_getX(event, 0);
               GLfloat y = AMotionEvent_getY(event, 0);
-              framework::TouchEventData data;
+              flf::TouchEventData data;
               data.xPos = x;
               data.yPos = y;
-              framework::TouchEvent event(data);
+              flf::TouchEvent event(data);
               engine->fillwave->insertResizeScreen(engine->eglInfo.width, engine->eglInfo.height);
               engine->fillwave->insertInput(event);
             } else {
