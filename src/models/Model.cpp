@@ -518,8 +518,8 @@ void Model::drawPBRP(ICamera &camera) {
   }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-  mLights->pushLightUniforms(mProgram);
-  mLights->bindShadowmaps();
+  mLights.pushLightUniforms(mProgram);
+  mLights.bindShadowmaps();
 
   drawWithEffectsPBRP(camera);
 }

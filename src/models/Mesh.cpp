@@ -57,7 +57,7 @@ Mesh::Mesh(Engine *engine,
     flc::Program *programOcclusion,
     flc::Program *programAmbientOcclusionGeometry,
     flc::Program *programAmbientOcclusionColor,
-    LightSystem *lights,
+    LightSystem &lights,
     flc::VertexBufferBasic *vbo,
     flc::IndexBuffer *ibo,
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -65,10 +65,21 @@ Mesh::Mesh(Engine *engine,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
     GLenum renderMode,
     flc::VertexArray *vao)
-    : IReloadable(engine, vao), mMaterial(material), mDiffuseMap(diffuseMap), mNormalMap(normalMap), mSpecularMap(
-    specularMap), mProgram(program), mProgramShadow(programShadow), mProgramShadowColor(programShadowColor), mProgramOQ(
-    programOcclusion), mProgramAOGeometry(programAmbientOcclusionGeometry)
-    , mProgramAOColor(programAmbientOcclusionColor), mRenderMode(renderMode), mIBO(ibo), mVBO(vbo), mLights(lights)
+    : IReloadable(engine, vao)
+    , mMaterial(material)
+    , mDiffuseMap(diffuseMap)
+    , mNormalMap(normalMap)
+    , mSpecularMap(specularMap)
+    , mProgram(program)
+    , mProgramShadow(programShadow)
+    , mProgramShadowColor(programShadowColor)
+    , mProgramOQ(programOcclusion)
+    , mProgramAOGeometry(programAmbientOcclusionGeometry)
+    , mProgramAOColor(programAmbientOcclusionColor)
+    , mRenderMode(renderMode)
+    , mIBO(ibo)
+    , mVBO(vbo)
+    , mLights(lights)
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
     , mAnimator(animator)
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
@@ -115,8 +126,8 @@ void Mesh::draw(ICamera &camera) {
     flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
     flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
-    mLights->pushLightUniforms(mProgram);
-    mLights->bindShadowmaps();
+    mLights.pushLightUniforms(mProgram);
+    mLights.bindShadowmaps();
 
     coreDraw();
   }
@@ -138,10 +149,10 @@ void Mesh::drawDR(ICamera &camera) {
     //   flc::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
     //   flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
 
-//      mLights->pushLightUniformsShadowMaps(mProgram.get());
+//      mLights.pushLightUniformsShadowMaps(mProgram.get());
 
-    mLights->pushLightUniformsDR();
-    mLights->bindShadowmaps();
+    mLights.pushLightUniformsDR();
+    mLights.bindShadowmaps();
 
     coreDraw();
   }
@@ -149,7 +160,7 @@ void Mesh::drawDR(ICamera &camera) {
 
 void Mesh::drawFast(ICamera &) {
   mProgram->use();
-  mLights->bindShadowmaps();
+  mLights.bindShadowmaps();
 
   coreDraw();
 }

@@ -75,7 +75,7 @@ public:
   void updateRenderer(IRenderer &renderer) override;
 
 private:
-  LightSystem *mLights;
+  LightSystem &mLights;
   GLfloat mChunkWidth;
   GLfloat mJumpStep;
 

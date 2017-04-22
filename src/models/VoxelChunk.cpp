@@ -353,8 +353,13 @@ VoxelChunk::VoxelChunk(flc::Program *program,
     GLint size,
     VoxelConstructor *constructor,
     GLfloat gap)
-    : IReloadable(engine), mEngine(engine), mVoxelGap(gap), mSize(size), mProgram(program)
-    , mTexture(engine->storeTexture(texturePath.c_str())), mLights(engine->getLightSystem()) {
+    : IReloadable(engine)
+    , mEngine(engine)
+    , mVoxelGap(gap)
+    , mSize(size)
+    , mProgram(program)
+    , mTexture(engine->storeTexture(texturePath.c_str()))
+    , mLights(engine->getLightSystem()) {
 
   mVoxels = new Voxel **[mSize];
   std::vector<flc::VertexBasic> vertices;
@@ -473,8 +478,8 @@ void VoxelChunk::draw(ICamera &camera) {
   flc::Uniform::push(mUniformLocationCacheCameraPosition, camera.getTranslation());
   flc::Uniform::push(mUniformLocationCacheViewProjectionMatrix, camera.getViewProjection());
 
-  mLights->pushLightUniforms(mProgram);
-  mLights->bindShadowmaps();
+  mLights.pushLightUniforms(mProgram);
+  mLights.bindShadowmaps();
 
   mVAO->bind();
 

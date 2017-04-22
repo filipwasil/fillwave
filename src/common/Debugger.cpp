@@ -131,7 +131,7 @@ void Debugger::prepareDebugWindow(GLint id)
 void Debugger::renderFromCamera(ICamera &c, GLint id) {
   prepareDebugWindow(id);
 
-  mEngine->getCurrentScene()->draw(c);
+  mEngine->getCurrentScene().draw(c);
 
   glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
@@ -139,7 +139,7 @@ void Debugger::renderFromCamera(ICamera &c, GLint id) {
 void Debugger::renderPickingMap() {
   prepareDebugWindow(mDebugWindows.size() - 1);
 
-  mEngine->getCurrentScene()->drawPicking();
+  mEngine->getCurrentScene().drawPicking();
   glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
@@ -150,7 +150,7 @@ void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe l
 
   mVAO->bind();
 
-  LightDirectional *light = mEngine->getLightSystem()->mLightsDirectional[id].get();
+  LightDirectional *light = mEngine->getLightSystem().mLightsDirectional[id].get();
 
   ICamera *cam = light->getShadowCamera();
 
@@ -185,7 +185,7 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
 
   mVAO->bind();
 
-  LightSpot *light = mEngine->getLightSystem()->mLightsSpot[id].get();
+  LightSpot *light = mEngine->getLightSystem().mLightsSpot[id].get();
 
   CameraPerspective cam = *(light->getShadowCamera());
 

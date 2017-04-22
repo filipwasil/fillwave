@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
 void init() {
   /* Scene and camera */
   ContextGLFW::mGraphicsEngine->setCurrentScene(make_unique<Scene>());
-  ContextGLFW::mGraphicsEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
+  ContextGLFW::mGraphicsEngine->getCurrentScene().setCamera(make_unique<CameraPerspective>());
 
   /* Lights */
   ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3(0.0, 0.0, 10.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
@@ -76,14 +76,14 @@ void perform() {
         make_unique<TimedMoveCallback>(sphere.get(), upY, 2.0f + i * 0.5f),
         make_unique<TimedMoveCallback>(sphere.get(), downY, 2.0f + i * 0.5f))), FILLWAVE_ENDLESS));
 
-    ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(sphere));
+    ContextGLFW::mGraphicsEngine->getCurrentScene().attach(std::move(sphere));
   }
 
   puModel wall = make_unique<Model>(ContextGLFW::mGraphicsEngine, p, "meshes/floor.obj", "textures/test.png");
   wall->rotateByX(glm::radians(90.0));
   wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
   wall->scaleTo(3.0);
-  ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(wall));
+  ContextGLFW::mGraphicsEngine->getCurrentScene().attach(std::move(wall));
 }
 
 void quit() {

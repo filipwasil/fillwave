@@ -34,9 +34,6 @@ namespace flw {
 class Engine;
 namespace flf {
 
-#define FILLWAVE_VOXEL_CHUNK_SIZE 16
-#define FILLWAVE_QUAD_CHUNK_SIZE 16
-
 /*! \class Terrain
  * \brief Entity to provide terrain generation functionality.
  */
@@ -66,7 +63,7 @@ protected:
 
 private:
   flc::Program *mProgram;
-  LightSystem *mLights;
+  LightSystem &mLights;
   GLint mRadius;
   GLfloat mGap;
   std::vector<pVoxelChunk> mVoxelChunks;

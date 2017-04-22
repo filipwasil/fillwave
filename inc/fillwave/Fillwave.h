@@ -115,7 +115,7 @@ public:
 
   /* Scene */
   void setCurrentScene(puScene &&scene);
-  flf::Scene* getCurrentScene() const;
+  flf::Scene &getCurrentScene() const;
 
   /* Time */
   GLuint getFramesPassed();
@@ -229,8 +229,8 @@ public:
   void reload();
 
   /* Systems */
-  flf::LightSystem *getLightSystem() const;
-  flf::TextureSystem *getTextureSystem() const;
+  flf::LightSystem &getLightSystem() const;
+  flf::TextureSystem &getTextureSystem() const;
 
 private:
   struct EngineImpl;

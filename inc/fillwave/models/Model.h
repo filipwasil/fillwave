@@ -107,7 +107,7 @@ protected:
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
   GLint mActiveAnimation;
 
-  LightSystem *mLights;
+  LightSystem &mLights;
   flc::Program *mProgramShadow;
   flc::Program *mProgramShadowColor;
   GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow, mUniformLocationCacheBonesShadowColor;

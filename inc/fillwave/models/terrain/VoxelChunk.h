@@ -83,7 +83,7 @@ private:
   flc::Program *mProgram;
   flc::Texture2D *mTexture;
   flc::VertexBufferBasic *mVBO;
-  LightSystem *mLights;
+  LightSystem &mLights;
 
   GLint mUniformLocationCacheModelMatrix, mUniformLocationCacheCameraPosition, mUniformLocationCacheViewProjectionMatrix;
 

@@ -21,7 +21,7 @@ TextScene::~TextScene() {
 void TextScene::init() {
   mEngine = std::make_shared<flw::Engine>(mArgc, mArgv);
   mEngine->setCurrentScene(std::make_unique<Scene>());
-  mEngine->getCurrentScene()->setCamera(std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
+  mEngine->getCurrentScene().setCamera(std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
                                                                             glm::quat(),
                                                                             glm::radians(90.0),
                                                                             1.0,
@@ -45,7 +45,7 @@ void TextScene::init() {
 
   snow->attachHierarchyCallback(std::make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
 
-  mEngine->getCurrentScene()->attach(std::move(snow));
+  mEngine->getCurrentScene().attach(std::move(snow));
 
   mText = mEngine->storeText("Fillwave editor", "FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
 }

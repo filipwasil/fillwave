@@ -240,10 +240,10 @@ inline void RendererDR::drawDepthlessPass() {
 }
 
 inline void RendererDR::drawLightsSpotPass(ICamera &camera, GLint &textureUnit) {
-  for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
+  for (size_t i = 0; i < mLights.mLightsSpot.size(); i++) {
 
     mProgramSpotLight->use();
-    mLights->updateDeferredBufferSpot(i, mProgramSpotLight, textureUnit++);
+    mLights.updateDeferredBufferSpot(i, mProgramSpotLight, textureUnit++);
 
     flc::Uniform::push(mULCCameraPositionSpot, camera.getTranslation());
     flc::Uniform::push(mULCIsAOSpot, mIsAO ? 1 : 0);
@@ -252,10 +252,10 @@ inline void RendererDR::drawLightsSpotPass(ICamera &camera, GLint &textureUnit) 
 }
 
 inline void RendererDR::drawLightsDirectionalPass(ICamera &camera, GLint &textureUnit) {
-  for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
+  for (size_t i = 0; i < mLights.mLightsDirectional.size(); i++) {
 
     mProgramDirecionalLight->use();
-    mLights->updateDeferredBufferDirectional(i, mProgramDirecionalLight, textureUnit++);
+    mLights.updateDeferredBufferDirectional(i, mProgramDirecionalLight, textureUnit++);
 
     flc::Uniform::push(mULCCameraPositionDirectional, camera.getTranslation());
     flc::Uniform::push(mULCIsAODirectional, mIsAO ? 1 : 0);
@@ -266,7 +266,7 @@ inline void RendererDR::drawLightsDirectionalPass(ICamera &camera, GLint &textur
 inline void RendererDR::drawLightsPointPass(ICamera &camera, GLint &textureUnit) {
   glEnable(GL_STENCIL_TEST);
 
-  for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
+  for (size_t i = 0; i < mLights.mLightsPoint.size(); i++) {
     // DSStencilPass
 
     mGBuffer->setAttachmentStencilDepth();
@@ -285,12 +285,12 @@ inline void RendererDR::drawLightsPointPass(ICamera &camera, GLint &textureUnit)
     glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_DECR_WRAP, GL_KEEP);
 
     mProgramPointLight->use();
-    mLights->updateDeferredBufferPoint(i, mProgramPointLight, textureUnit++);
+    mLights.updateDeferredBufferPoint(i, mProgramPointLight, textureUnit++);
 
     flc::Uniform::push(mULCCameraPositionPoint, camera.getTranslation());
     flc::Uniform::push(mULCMVPPoint,
                         camera.getViewProjection() *
-                        glm::translate(glm::mat4(1.0), mLights->mLightsPoint[i]->getTranslation()));
+                        glm::translate(glm::mat4(1.0), mLights.mLightsPoint[i]->getTranslation()));
 
     flc::Uniform::push(mULCIsAOPoint, mIsAO ? 1 : 0);
 //xxx      if runtime changing is not needed

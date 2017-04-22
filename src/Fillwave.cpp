@@ -376,16 +376,16 @@ void Engine::setCurrentScene(puScene &&scene) {
   mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-flf::Scene *Engine::getCurrentScene() const {
-  return mImpl->mScene.get();
+flf::Scene &Engine::getCurrentScene() const {
+  return *mImpl->mScene.get();
 }
 
-flf::LightSystem *Engine::getLightSystem() const {
-  return mImpl->mLights.get();
+flf::LightSystem &Engine::getLightSystem() const {
+  return *mImpl->mLights.get();
 }
 
-flf::TextureSystem *Engine::getTextureSystem() const {
-  return mImpl->mTextures.get();
+flf::TextureSystem &Engine::getTextureSystem() const {
+  return *mImpl->mTextures.get();
 }
 
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const string &shapePath) {

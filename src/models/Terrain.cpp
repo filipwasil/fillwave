@@ -37,12 +37,16 @@
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Log.h>
 
+static int FILLWAVE_VOXEL_CHUNK_SIZE = 16;
 
 namespace flw {
 namespace flf {
 
 Terrain::Terrain(Engine *engine, flc::Program *program, GLint radius, GLfloat gap)
-    : mProgram(program), mLights(engine->getLightSystem()), mRadius(radius), mGap(gap) {
+    : mProgram(program)
+    , mLights(engine->getLightSystem())
+    , mRadius(radius)
+    , mGap(gap) {
 
 }
 
@@ -55,8 +59,8 @@ void Terrain::draw(ICamera &camera) {
 
 void Terrain::drawPBRP(ICamera &camera) {
   distanceCheck(camera);
-  mLights->pushLightUniforms(mProgram);
-  mLights->bindShadowmaps();
+  mLights.pushLightUniforms(mProgram);
+  mLights.bindShadowmaps();
   for (auto &it : mVoxelChunks) {
     it->drawPBRP(camera);
   }
@@ -110,14 +114,14 @@ bool Terrain::getRenderItem(RenderItem &item) {
   return true;
 }
 
-} /* models */
+} /* flf */
 puTerrain buildTerrainVoxel(Engine *engine,
     flc::Program *program,
     const std::string &texturePath,
     flf::VoxelConstructor *constructor,
     GLint radius) {
 
-  GLfloat voxelGap = 0.2f;
+  const GLfloat voxelGap = 0.2f;
 
   puTerrain terrain = std::make_unique<flf::Terrain>(engine, program, radius, voxelGap);
 

@@ -192,8 +192,8 @@ void MeshTerrain::draw(ICamera &camera) {
 
 void MeshTerrain::drawPBRP(ICamera &camera) {
   distanceCheck(camera);
-  mLights->pushLightUniforms(mProgram);
-  mLights->bindShadowmaps();
+  mLights.pushLightUniforms(mProgram);
+  mLights.bindShadowmaps();
   for (auto &it : mChildren) {
     it->drawPBRP(camera);
   }

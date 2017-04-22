@@ -66,7 +66,7 @@ public:
       flc::Program *programOcclusion,
       flc::Program *programAmbientOcclusionGeometry,
       flc::Program *programAmbientOcclusionColor,
-      LightSystem *lights = nullptr,
+      LightSystem &lights,
       flc::VertexBufferBasic *vbo = nullptr,
       flc::IndexBuffer *ibo = nullptr,
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -118,7 +118,7 @@ protected:
   flc::VertexBufferBasic *mVBO;
 
   /* Light */
-  LightSystem *mLights;
+  LightSystem &mLights;
 
   /* Animations */
   Animator *mAnimator;

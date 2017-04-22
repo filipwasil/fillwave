@@ -40,7 +40,6 @@ public:
     return mWrapped;
   }
 
-
   ~TGetter ()
   {
     mWrapped = nullptr;

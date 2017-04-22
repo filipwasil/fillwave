@@ -18,7 +18,7 @@ CameraMotionCallback::CameraMotionCallback(Engine *engine)
 
 void CameraMotionCallback::perform(EventType &event) {
   mTimePassed += TimeEvent::getData(event).mTimePassed;
-  mEngine->getCurrentScene()->getCamera()->moveTo(calculateNewPosition(mTimePassed));
+  mEngine->getCurrentScene().getCamera()->moveTo(calculateNewPosition(mTimePassed));
 }
 
 glm::vec3 CameraMotionCallback::calculateNewPosition(float time) {

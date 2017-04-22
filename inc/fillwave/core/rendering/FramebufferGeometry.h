@@ -44,7 +44,7 @@ namespace flc {
 
 class FramebufferGeometry : public Framebuffer {
 public:
-  FramebufferGeometry(flf::TextureSystem *textures,
+  FramebufferGeometry(flf::TextureSystem &textures,
       GLuint width,
       GLuint height,
       GLuint colorBuffers,

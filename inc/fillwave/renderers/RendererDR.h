@@ -96,8 +96,8 @@ public:
 private:
   glm::ivec2 mScreenSize;
 
-  LightSystem *mLights;
-  TextureSystem *mTextures;
+  LightSystem &mLights;
+  TextureSystem &mTextures;
 
   flc::Program *mProgramMain, *mProgramMainAnimated, *mProgramDirecionalLight, *mProgramSpotLight, *mProgramPointLight, *mProgramDepthless, *mProgramAmbient, *mProgramAOGeometry, *mProgramAOColor;
 
@@ -106,12 +106,31 @@ private:
 
   puMesh mDeferredPointLight;
 
-  GLint mULCDRDepthlesDiffuseTexel, mULCDRDepthlessPositionTexel, mULCDRScreenSize, mULCDRAScreenSize, mULCDRADiffuseAttachment, mULCAmbient;
+  GLint mULCDRDepthlesDiffuseTexel;
+  GLint mULCDRDepthlessPositionTexel;
+  GLint mULCDRScreenSize;
+  GLint mULCDRAScreenSize;
+  GLint mULCDRADiffuseAttachment;
+  GLint mULCAmbient;
 
-  GLint mULCCameraPositionDirectional, mULCAmbientIntensityDirectional, mULCScreenSizeDirectional, mULCShadowUnitDirectional, mULCIsAODirectional, mULCCameraPositionPoint, mULCAmbientIntensityPoint, mULCMVPPoint, mULCScreenSizePoint, mULCShadowUnitPoint, mULCIsAOPoint;
+  GLint mULCCameraPositionDirectional;
+  GLint mULCAmbientIntensityDirectional;
+  GLint mULCScreenSizeDirectional;
+  GLint mULCShadowUnitDirectional;
+  GLint mULCIsAODirectional;
+  GLint mULCCameraPositionPoint;
+  GLint mULCAmbientIntensityPoint;
+  GLint mULCMVPPoint;
+  GLint mULCScreenSizePoint;
+  GLint mULCShadowUnitPoint;
+  GLint mULCIsAOPoint;
 
   /* ULC - Uniform location cache */
-  GLint mULCCameraPositionSpot, mULCAmbientIntensitySpot, mULCScreenSizeSpot, mULCShadowUnitSpot, mULCIsAOSpot;
+  GLint mULCCameraPositionSpot;
+  GLint mULCAmbientIntensitySpot;
+  GLint mULCScreenSizeSpot;
+  GLint mULCShadowUnitSpot;
+  GLint mULCIsAOSpot;
 
   GLboolean mIsAO;
 
