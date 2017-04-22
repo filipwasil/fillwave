@@ -40,6 +40,11 @@ public:
     return mWrapped;
   }
 
+
+  ~TGetter ()
+  {
+    mWrapped = nullptr;
+  }
 private:
   TWrapped *mWrapped;
 

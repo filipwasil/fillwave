@@ -39,7 +39,10 @@ void init() {
   ContextGLFW::mGraphicsEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
 
   /* Lights */
-  ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
+  ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3(0.0, 0.0, 10.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
+  ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3(1.0, 0.0, 15.0), glm::quat(), glm::vec4(1.0, 1.0, 0.0, 0.0));
+  ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3(-1.0, 0.0, 15.0), glm::quat(), glm::vec4(0.0, 1.0, 1.0, 0.0));
+  ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3(0.0, 1.0, 20.0), glm::quat(), glm::vec4(0.0, 0.0, 1.0, 0.0));
 
   /* Engine callbacks */
   ContextGLFW::mGraphicsEngine->registerCallback(make_unique<TimeStopCallback>(ContextGLFW::mGraphicsEngine));

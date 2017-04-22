@@ -69,7 +69,7 @@ public:
   void drawCursor();
 
   /* Camera */
-  TGetter<ICamera> &&getCamera();
+  ICamera *getCamera();
 
   void setCamera(puICamera &&camera);
 

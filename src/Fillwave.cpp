@@ -376,8 +376,8 @@ void Engine::setCurrentScene(puScene &&scene) {
   mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-TGetter<flf::Scene> &&Engine::getCurrentScene() const {
-  return std::move(TGetter<flf::Scene>(mImpl->mScene.get()));
+flf::Scene *Engine::getCurrentScene() const {
+  return mImpl->mScene.get();
 }
 
 flf::LightSystem *Engine::getLightSystem() const {
@@ -396,7 +396,7 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const string &shapePath) {
                                                    aiProcess_Triangulate | aiProcess_SortByPType |
                                                    aiProcess_CalcTangentSpace);
   if (scene) {
-    for (GLuint i = 0; i < scene->mNumMeshes; i++) {
+    for (GLuint i = 0; i < scene->mNumMeshes; ++i) {
       const aiMesh *shape = scene->mMeshes[i];
       buffer->mNumFaces = shape->mNumFaces;
       buffer->mVertices.reserve(shape->mNumVertices);
@@ -410,7 +410,7 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const string &shapePath) {
         glm::vec3 vertex(shape->mVertices[z].x, shape->mVertices[z].y, shape->mVertices[z].z);
         buffer->mVertices.push_back(vertex);
       }
-      break;      //for now fillwave supports only one mesh here;
+      break;      //todo for now fillwave supports only one mesh here;
     }
   }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

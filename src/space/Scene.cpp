@@ -141,22 +141,18 @@ void Scene::pick(glm::ivec4 color) {
 }
 
 void Scene::updateRenderer() {
-  if (mRenderer->mFlagReload) {
-    fLogD("Renderer update");
-    mRenderer->clear();
-    if (mSkybox) {
-      mRenderer->mSkybox = mSkybox.get();
-    } else {
-      mRenderer->mSkybox = nullptr;
-    }
-    for (auto &it : mChildren) {
-      it->updateRenderer(*(mRenderer.get()));
-    }
-    mRenderer->mFlagReload = false;
-  } else {
+  if (!mRenderer->mFlagReload) {
     fLogD("Renderer waiting for update");
     mRenderer->mFlagReload = isAttachedDetached();
+    return;
   }
+  fLogD("Renderer update");
+  mRenderer->clear();
+  mRenderer->mSkybox = mSkybox ? mSkybox.get() : nullptr;
+  for (auto &it : mChildren) {
+    it->updateRenderer(*(mRenderer.get()));
+  }
+  mRenderer->mFlagReload = false;
 }
 
 void Scene::resetRenderer(GLuint screenWidth, GLuint screenHeight) {
@@ -191,8 +187,8 @@ void Scene::setCamera(puICamera &&camera) {
   mCamera = std::move(camera);
 }
 
-TGetter<ICamera> &&Scene::getCamera() {
-  return std::move(TGetter<ICamera>(mCamera.get()));
+ICamera* Scene::getCamera() {
+  return mCamera.get();
 }
 
 void Scene::onEvent(EventType &event) {

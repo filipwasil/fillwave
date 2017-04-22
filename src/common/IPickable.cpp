@@ -11,7 +11,7 @@ namespace flw {
 namespace flf {
 
 IPickable::IPickable()
-    : mFlagPickable(false) {
+  : mFlagPickable(false) {
 
 }
 

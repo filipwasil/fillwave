@@ -79,8 +79,6 @@ public:
   void renderPickingMap();
   void renderGeometryBuffer(GLuint width, GLuint height, GLuint attachments, flc::FramebufferGeometry *buffer);
 
-  void setMiniwindowSize(GLfloat size);
-
 private:
   struct DebugWindowInfo
   {

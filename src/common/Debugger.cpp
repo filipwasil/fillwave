@@ -46,24 +46,27 @@ namespace flw {
 namespace flf {
 
 Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
-  : IReloadable(engine), mState(eDebuggerState::eOff), mEngine(engine)
+  : IReloadable(engine)
+  , mState(eDebuggerState::eOff)
+  , mEngine(engine)
   , mVBO(mEngine->storeBuffer<flc::VertexBufferDebug>(mVAO, 1.0f))
   , mMiniwindowsOccupied(0) {
 
   mDebugWindows.reserve(howManyDebugWindows);
+  const glm::vec2 size = mEngine->getScreenSize();
   const float sizeFactor = 1.0f / static_cast<float>(howManyDebugWindows);
-  const float offsetY = 1.0f - sizeFactor;
+  const float offsetY = 1.0f - sizeFactor * (size.x/size.y);
   for (int i = 0; i < howManyDebugWindows; ++i)
   {
-    const float offsetX = static_cast<float>(i) / static_cast<float>(howManyDebugWindows);
+    const float offsetX = static_cast<float>(i) * sizeFactor;
     DebugWindowInfo window = {
       {
-        mEngine->getScreenSize()[0] * sizeFactor,
-        mEngine->getScreenSize()[1] * sizeFactor
+        size.x * sizeFactor,
+        size.y * sizeFactor
       },
       {
-        mEngine->getScreenSize()[0] * offsetX,
-        mEngine->getScreenSize()[1] * offsetY
+        size.x * offsetX,
+        size.y * offsetY
       }
     };
     mDebugWindows.push_back(window);
@@ -186,7 +189,7 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
 
   CameraPerspective cam = *(light->getShadowCamera());
 
-  light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
+  light->getShadowTexture()->bind(FILLWAVE_SHADOW_FIRST_UNIT + id);
 
   glDisable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);
