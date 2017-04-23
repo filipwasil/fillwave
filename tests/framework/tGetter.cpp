@@ -5,37 +5,65 @@
 
 using namespace testing;
 
-TEST(TGetterTests, security_tests
+struct Fool {
+  Fool () : a (0) {
+
+  }
+
+  void fooConst() const {
+    std::cout << "\nValue: " << a <<  std::endl;
+  }
+
+  void foo() {
+    std::cout << "\nValue: " << a <<  std::endl;
+  }
+
+private:
+  int a;
+};
+
+template <class Used>
+class User {
+  Used used;
+public:
+  flw::TGetter<Used> get() {
+    auto fun = [&]() -> flw::TGetter<Used> {
+      return &used;
+    };
+    return fun();
+  }
+};
+
+TEST(TGetterTests, security_tests_when_copy_enabled
 )
 {
-std::string s = "test";
-auto fun = [&]() -> TGetter<std::string> && {
-  return TGetter<std::string>(&s);
-};
-//ASSERT_THAT(fun()->substr(1), Eq("est")); // it is working - good!
+  // Error field private
+//  User<Fool> sut;
+//  sut.get()->foo();
 
-// error: ‘TGetter<TWrapped>::TGetter(TGetter<TWrapped>&&) [with TWrapped = std::__cxx11::basic_string<char>]’ is private
-// auto good1 = fun();
+  // Error use of deleted function
+//  auto u = sut.get();
+//  u->foo();
+//  u->fooConst();
 
-// error: ‘TGetter<TWrapped>::TGetter(TGetter<TWrapped>&&) [with TWrapped = std::__cxx11::basic_string<char>]’ is private
-// const auto good2 = fun();
+  // Error use of deleted function
+//  auto&& u = sut.get();
+//  u->foo();
+//  u->fooConst();
 
-// error: ‘std::__cxx11::basic_string<char>* TGetter<std::__cxx11::basic_string<char> >::mWrapped’ is private
-// auto* wrong = fun().mWrapped;
+  // Error field private
+//  auto* wrong = sut.get().mWrapped;
 
-// error: invalid initialization of non-const reference
-// auto& wrong3 = fun();
+  // Error argument discards qualifiers, and deleted function
+// const auto u = sut.get();
+//  const auto&& u = sut.get();
+//  u->foo();
+//  u->fooConst();
 
-const auto &wrong2 = fun();
-// error: passing ‘const TGetter<std::__cxx11::basic_string<char> >’ as ‘this’ argument discards qualifiers [-fpermissive]
-// ASSERT_THAT(wrong2->substr(1), Eq("est"));
+  // Error invalid initialization of non-const reference
+  // auto& wrong = sut.get();
 
-// only one at the time from below will work - if two are running SEH exception is thrown
-
-// error: passing ‘TGetter<std::__cxx11::basic_string<char> >’ as ‘this’ argument discards qualifiers [-fpermissive]
-// ASSERT_THAT(const_cast<TGetter<std::string>&>(wrong2)->substr(1), Eq("est"));
-
-// Non valid case
-// ASSERT_THAT(const_cast<TGetter<std::string>&&>(wrong2)->substr(1), Eq("est"));
-
+//  auto&& u = sut.get();
+//  std::move(u)->foo();
+//  std::move(u)->fooConst();
 }

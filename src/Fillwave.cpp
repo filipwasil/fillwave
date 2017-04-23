@@ -376,8 +376,8 @@ void Engine::setCurrentScene(puScene &&scene) {
   mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-flf::Scene &Engine::getCurrentScene() const {
-  return *mImpl->mScene.get();
+TGetter<Scene> Engine::getCurrentScene() const {
+  return TGetter<Scene>(mImpl->mScene.get());
 }
 
 flf::LightSystem &Engine::getLightSystem() const {

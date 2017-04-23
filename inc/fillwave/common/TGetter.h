@@ -28,30 +28,40 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+namespace flw {
+  class Engine;
+namespace flf {
+  class Scene;
+}
 template <class TWrapped>
 class TGetter {
+  friend class Engine;
+  friend class flf::Scene;
 public:
   TGetter(TWrapped *wrapped)
       : mWrapped(wrapped) {
-
   }
 
-  TWrapped *operator->() &&{
+  TWrapped *operator->() && {
     return mWrapped;
   }
 
-  ~TGetter ()
-  {
+  ~TGetter () {
     mWrapped = nullptr;
   }
-private:
-  TWrapped *mWrapped;
 
-  TGetter(TGetter &&) = delete;
+  TWrapped *operator->()& = delete;
 
   TGetter(const TGetter &) = delete;
 
   TGetter operator=(TGetter getter) = delete;
 
   TGetter operator=(TGetter &&getter) = delete;
+
+private:
+  TGetter(TGetter &&) = default;
+
+  TWrapped *mWrapped;
 };
+} /* flw */
+

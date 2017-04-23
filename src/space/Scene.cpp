@@ -42,7 +42,8 @@ namespace flw {
 namespace flf {
 
 Scene::Scene(IRenderer *renderer)
-    : mAmbientGlobal(glm::vec3(1.0)), mRenderer(renderer) {
+    : mAmbientGlobal(glm::vec3(1.0))
+    , mRenderer(renderer) {
 }
 
 void Scene::setRenderer(IRenderer *renderer) {
@@ -65,8 +66,8 @@ void Scene::setAmbient(glm::vec3 ambient) {
   mAmbientGlobal = ambient;
 }
 
-Cursor &Scene::getCursor() {
-  return *mCursor.get();
+TGetter<Cursor> &&Scene::getCursor() {
+  return std::move(TGetter<Cursor>(mCursor.get()));
 }
 
 void Scene::updateDependencies() {
@@ -187,8 +188,8 @@ void Scene::setCamera(puICamera &&camera) {
   mCamera = std::move(camera);
 }
 
-ICamera &Scene::getCamera() {
-  return *mCamera.get();
+TGetter<ICamera> &&Scene::getCamera() {
+  return std::move(TGetter<ICamera>(mCamera.get()));
 }
 
 void Scene::onEvent(EventType &event) {

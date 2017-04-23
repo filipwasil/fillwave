@@ -62,14 +62,14 @@ public:
   void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
   /* Cursor */
-  Cursor &getCursor();
+  TGetter<Cursor> &&getCursor();
 
   void setCursor(puCursor &&cursor);
 
   void drawCursor();
 
   /* Camera */
-  ICamera &getCamera();
+  TGetter<ICamera> &&getCamera();
 
   void setCamera(puICamera &&camera);
 
@@ -111,14 +111,15 @@ public:
   virtual void onHide();
 
 protected:
+  puIRenderer mRenderer;
+  puHUD mHUD;
   puCursor mCursor;
+  puICamera mCamera;
   puSkybox mSkybox;
+
   std::unordered_map<GLint, Entity *> mPickingTable;
   Entity *mLastPicked;
   glm::vec3 mAmbientGlobal;
-  puIRenderer mRenderer;
-  puHUD mHUD;
-  puICamera mCamera;
 
 private:
   const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;
