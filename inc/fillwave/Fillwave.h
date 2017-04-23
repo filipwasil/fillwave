@@ -115,7 +115,7 @@ public:
 
   /* Scene */
   void setCurrentScene(puScene &&scene);
-  flf::Scene &getCurrentScene() const;
+  TGetter<flf::Scene> getCurrentScene() const;
 
   /* Time */
   GLuint getFramesPassed();
