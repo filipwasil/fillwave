@@ -37,7 +37,7 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT("Program", FERROR | FFATAL | FINFO | FDEBUG)
+FLOGINIT_DEFAULT()
 
 using namespace std;
 
@@ -45,7 +45,8 @@ namespace flw {
 namespace flc {
 
 Program::Program(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking)
-    : mDelayedLinking(skipLinking), mShaders(shaders) {
+    : mDelayedLinking(skipLinking)
+    , mShaders(shaders) {
   reload();
 }
 

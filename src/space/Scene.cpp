@@ -65,8 +65,8 @@ void Scene::setAmbient(glm::vec3 ambient) {
   mAmbientGlobal = ambient;
 }
 
-TGetter<Cursor> &&Scene::getCursor() {
-  return std::move(TGetter<Cursor>(mCursor.get()));
+Cursor &Scene::getCursor() {
+  return *mCursor.get();
 }
 
 void Scene::updateDependencies() {
@@ -187,8 +187,8 @@ void Scene::setCamera(puICamera &&camera) {
   mCamera = std::move(camera);
 }
 
-ICamera* Scene::getCamera() {
-  return mCamera.get();
+ICamera &Scene::getCamera() {
+  return *mCamera.get();
 }
 
 void Scene::onEvent(EventType &event) {
