@@ -62,14 +62,14 @@ public:
   void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
   /* Cursor */
-  TGetter<Cursor> &&getCursor();
+  Cursor &getCursor();
 
   void setCursor(puCursor &&cursor);
 
   void drawCursor();
 
   /* Camera */
-  ICamera *getCamera();
+  ICamera &getCamera();
 
   void setCamera(puICamera &&camera);
 
