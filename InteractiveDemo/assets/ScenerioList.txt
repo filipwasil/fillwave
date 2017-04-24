@@ -1,2 +1,4 @@
 Hello World
 assets/SceneriosMenu/HelloWorld.xml
+Simple Scene
+assets/SceneriosMenu/SimpleScene.xml

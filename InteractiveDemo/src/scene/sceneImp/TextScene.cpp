@@ -55,4 +55,8 @@ void TextScene::perform() {
   std::string string = tmp.toString().toStdString();
   mText->editString(string);
 }
+
+void TextScene::setDefaultParameters(const QVector<std::pair<QString, QString>> &param) {
+
+}
 }

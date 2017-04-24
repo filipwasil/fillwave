@@ -14,6 +14,8 @@ public:
 
   void init() override;
 
+  void setDefaultParameters(const QVector<std::pair<QString, QString>> &param) override;
+
   void perform() override;
 
 private:

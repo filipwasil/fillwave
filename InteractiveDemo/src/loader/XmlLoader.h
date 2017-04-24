@@ -17,6 +17,8 @@ public:
 
   QList<QWidget *> load(QString pathToFile) override;
 
+  const QVector<std::pair<QString, QString>> getParameters();
+
 private:
   bool init();
 
@@ -28,7 +30,8 @@ private:
 
   std::pair<QString, QString> extractParameter();
 
-  QVector <QString> mPossibleWidgets;
+  QVector<std::pair<QString, QString>> parametersVector;
+  QVector<QString> mPossibleWidgets;
   QList<QWidget *> mWidgetsList;
   QXmlStreamReader mXml;
   IWidgetFabric *mWidgetFabric;

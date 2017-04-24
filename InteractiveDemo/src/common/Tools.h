@@ -5,6 +5,9 @@
 #include <QTextStream>
 #include <QList>
 #include <QWidget>
+#include <QHash>
+#include <QVariant>
+#include <QtWidgets/QVBoxLayout>
 #include <utility>
 
 namespace tools {

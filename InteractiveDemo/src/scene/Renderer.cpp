@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "scene/sceneImp/TextScene.h"
 #include "scene/ScensFactory.h"
+#include "scene/sceneImp/SimpleScene.h"
 
 using namespace flw;
 using namespace flw::flf;
@@ -13,7 +14,7 @@ Renderer::Renderer(int argc, char *argv[], QWidget *parent)
   glFormat.setProfile(QGLFormat::CoreProfile);
   setFormat(glFormat);
   this->makeCurrent();
-  mScene = std::make_shared<scene::TextScene>(mArgc, mArgv);
+  mScene = std::make_shared<scene::SimpleScene>(mArgc, mArgv);
 }
 
 Renderer::~Renderer() {

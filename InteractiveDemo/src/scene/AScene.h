@@ -19,6 +19,8 @@ public:
 
   virtual void perform() = 0;
 
+  virtual void setDefaultParameters(const QVector<std::pair<QString, QString>> &param) = 0;
+
   QMap<QString, QVariant> getParameters() {
     return mSceneParameters;
   };
