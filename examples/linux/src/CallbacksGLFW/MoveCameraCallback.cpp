@@ -66,10 +66,10 @@ void MoveCameraCallback::perform(EventType &event) {
         KeyboardEventData e = KeyboardEvent::getData(event);
         switch (e.key) {
           case GLFW_KEY_W:
-            mEngine->getCurrentScene().getCamera().moveInDirection(glm::vec3(0.0, 0.0, -mSpeed));
+            mEngine->getCurrentScene()->getCamera()->moveInDirection(glm::vec3(0.0, 0.0, -mSpeed));
             break;
           case GLFW_KEY_S:
-            mEngine->getCurrentScene().getCamera().moveInDirection(glm::vec3(0.0, 0.0, mSpeed));
+            mEngine->getCurrentScene()->getCamera()->moveInDirection(glm::vec3(0.0, 0.0, mSpeed));
             break;
           case GLFW_KEY_D:
             if (e.action == GLFW_RELEASE) {
@@ -94,9 +94,9 @@ void MoveCameraCallback::perform(EventType &event) {
       {
         ScrollEventData e = ScrollEvent::getData(event);
         if (e.mOffsetY < 0.0) { // scroll down
-          mEngine->getCurrentScene().getCamera().moveBy(glm::vec3(0.0, 0.0, mSpeed));
+          mEngine->getCurrentScene()->getCamera()->moveBy(glm::vec3(0.0, 0.0, mSpeed));
         } else if (e.mOffsetY > 0.0) { // scroll up
-          mEngine->getCurrentScene().getCamera().moveBy(glm::vec3(0.0, 0.0, -mSpeed));
+          mEngine->getCurrentScene()->getCamera()->moveBy(glm::vec3(0.0, 0.0, -mSpeed));
         }
       }
       break;
@@ -112,9 +112,9 @@ void MoveCameraCallback::perform(EventType &event) {
         double dx = e.xPosition - screenSize[0] / 2;
         double dy = screenSize[1] / 2 - e.yPosition;
         if (init) { /* debounce */
-          mEngine->getCurrentScene().getCamera().rotateBy(glm::vec3(0.0f, 1.0f, 0.0f), -mSpeed * d(glm::radians(dx)));
-          mEngine->getCurrentScene().getCamera().rotateBy(glm::vec3(1.0f, 0.0f, 0.0f), mSpeed * d(glm::radians(dy)));
-          mEngine->getCurrentScene().getCamera().update();
+          mEngine->getCurrentScene()->getCamera()->rotateBy(glm::vec3(0.0f, 1.0f, 0.0f), -mSpeed * d(glm::radians(dx)));
+          mEngine->getCurrentScene()->getCamera()->rotateBy(glm::vec3(1.0f, 0.0f, 0.0f), mSpeed * d(glm::radians(dy)));
+          mEngine->getCurrentScene()->getCamera()->update();
         } else {
           init = true;
         }
