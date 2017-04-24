@@ -24,6 +24,7 @@ bool XmlLoader::init() {
 
 QList<QWidget *> XmlLoader::load(QString pathToFile) {
   QList < QWidget * > emptyList;
+  parametersVector.clear();
   if (!init()) {
     return emptyList;
   }
@@ -64,7 +65,6 @@ void XmlLoader::processXml() {
 void XmlLoader::processChild() {
   QString widgetType = mXml.name().toString();
   mXml.readNext();
-  QVector <std::pair<QString, QString>> parametersVector;
 
   while (!(
       mXml.tokenType() == QXmlStreamReader::EndElement && mXml.name() == widgetType
@@ -84,5 +84,9 @@ std::pair<QString, QString> XmlLoader::extractParameter() {
   auto name = mXml.name().toString();
   auto text = mXml.readElementText();
   return std::make_pair(name, text);
+}
+
+const QVector<std::pair<QString, QString>> XmlLoader::getParameters() {
+  return parametersVector;
 }
 }
