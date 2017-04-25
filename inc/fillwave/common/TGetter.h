@@ -29,39 +29,49 @@
  */
 
 namespace flw {
-  class Engine;
-namespace flf {
-  class Scene;
-}
-template <class TWrapped>
+
+template <class TPtr>
 class TGetter {
-  friend class Engine;
-  friend class flf::Scene;
-public:
-  TGetter(TWrapped *wrapped)
-      : mWrapped(wrapped) {
-  }
-
-  TWrapped *operator->() && {
-    return mWrapped;
-  }
-
-  ~TGetter () {
-    mWrapped = nullptr;
-  }
-
-  TWrapped *operator->()& = delete;
-
-  TGetter(const TGetter &) = delete;
-
-  TGetter operator=(TGetter getter) = delete;
-
-  TGetter operator=(TGetter &&getter) = delete;
-
 private:
-  TGetter(TGetter &&) = default;
+    class TGetterHelper {
+    public:
+        TGetterHelper(TPtr *ptr)
+            : mPtr(ptr) {
+        }
 
-  TWrapped *mWrapped;
+        TPtr *operator->() && {
+            return mPtr;
+        }
+
+        ~TGetterHelper() {
+            mPtr = nullptr;
+        }
+
+    private:
+        TPtr *operator->()& = delete;
+
+        TPtr *mPtr;
+    };
+
+public:
+    TGetter(TPtr* p) : mHelper(p) {
+
+    }
+
+    TPtr *operator->() && {
+        return std::move(mHelper)->operator->();
+    }
+
+    TGetter(TGetter &&) = default;
+
+    TGetter(const TGetter &) = delete;
+
+    TGetter *operator->()& = delete;
+
+    TGetter operator=(TGetter getter) = delete;
+
+    TGetter operator=(TGetter &&getter) = delete;
+private:
+    TGetterHelper mHelper;
 };
 } /* flw */
-
