@@ -29,11 +29,13 @@
  */
 
 namespace flw {
+class TGetterHelper;
 
 template <class TPtr>
 class TGetter {
 private:
   class TGetterHelper {
+    friend class TGetter;
   public:
     TGetterHelper(TPtr *ptr) : mPtr(ptr) {
     }
@@ -43,6 +45,15 @@ private:
     }
 
   private:
+
+    TGetterHelper(TGetterHelper &&) = default;
+
+    TGetterHelper(const TGetter &) = delete;
+
+    TGetterHelper operator=(TGetterHelper getter) = delete;
+
+    TGetterHelper operator=(TGetterHelper &&getter) = delete;
+
     TPtr *operator->()& = delete;
 
     TPtr *mPtr;
