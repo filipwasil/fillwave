@@ -34,14 +34,12 @@
  */
 
 #include <fillwave/models/animations/Bone.h>
-#include <fillwave/core/pipeline/Program.h>
 #include <fillwave/models/animations/Animation.h>
 
 namespace flw {
 namespace flf {
 
 class Channel;
-
 class Animator;
 
 /*! \class AssimpNode

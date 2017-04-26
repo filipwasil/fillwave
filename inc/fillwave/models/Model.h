@@ -31,6 +31,7 @@
 #include <fillwave/models/base/Programmable.h>
 #include <fillwave/common/IFocusable.h>
 #include <fillwave/models/Mesh.h>
+#include <fillwave/models/animations/Animator.h>
 #include <fillwave/Assets.h>
 
 namespace flw {

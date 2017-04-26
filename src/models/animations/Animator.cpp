@@ -35,6 +35,7 @@
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/models/animations/Channel.h>
 #include <fillwave/models/animations/Conversion.h>
+#include <fillwave/core/pipeline/Program.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Animator", FERROR | FFATAL)

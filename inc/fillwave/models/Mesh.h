@@ -44,7 +44,6 @@ class Engine;
 
 namespace flf {
 class Animator;
-
 class LightSystem;
 }
 
