@@ -42,8 +42,8 @@ namespace flw {
 namespace flf {
 
 Scene::Scene(IRenderer *renderer)
-    : mAmbientGlobal(glm::vec3(1.0))
-    , mRenderer(renderer) {
+    : mRenderer(renderer)
+    , mAmbientGlobal(glm::vec3(1.0)) {
 }
 
 void Scene::setRenderer(IRenderer *renderer) {
