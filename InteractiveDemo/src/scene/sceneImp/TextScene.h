@@ -6,7 +6,7 @@
 namespace scene {
 class TextScene : public AScene {
   Q_OBJECT
-  Q_PROPERTY(QMap<QString, QVariant> sceneParameter READ getParameters WRITE setParameters)
+  Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
 public:
   TextScene(int argc, char **argv);
 
