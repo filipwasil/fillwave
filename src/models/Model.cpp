@@ -293,7 +293,7 @@ inline void Model::loadNodes(aiNode *node,
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; i++) {
-    puEntity newEntity = buildHinge();
+    puEntity newEntity = std::make_unique<flf::Hinge>();
     loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMapPath, normalMapPath, specularMapPath);
     entity->attach(std::move(newEntity));
   }
@@ -355,7 +355,7 @@ inline void Model::loadNodes(aiNode *node, const aiScene *scene, Engine *engine,
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; i++) {
-    puEntity newEntity = buildHinge();
+    puEntity newEntity = std::make_unique<flf::Hinge>();
     loadNodes(node->mChildren[i], scene, engine, newEntity.get());
     entity->attach(std::move(newEntity));
   }
@@ -381,7 +381,7 @@ inline void Model::loadNodes(aiNode *node,
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; i++) {
-    puEntity newEntity = buildHinge();
+    puEntity newEntity = std::make_unique<flf::Hinge>();
     loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMap, normalMap, specularMap, material);
     entity->attach(std::move(newEntity));
   }

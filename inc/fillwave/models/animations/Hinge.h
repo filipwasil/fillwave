@@ -59,8 +59,4 @@ public:
 
 } /* namespace flf */
 typedef std::unique_ptr<flf::Hinge> puHinge;
-
-static puHinge buildHinge() {
-  return std::make_unique<flf::Hinge>();
-}
 } /* namespace flw */

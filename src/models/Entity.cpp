@@ -43,7 +43,11 @@ namespace flw {
 namespace flf {
 
 Entity::Entity(glm::vec3 translation, glm::quat rotation)
-    : Moveable(translation, rotation), mChildrenPropagateEvent(GL_TRUE), mParentRefresh(GL_TRUE), mPSC(GL_TRUE), mPSR(
+    : Moveable(translation, rotation)
+    , mChildrenPropagateEvent(GL_TRUE)
+    , mParentRefresh(GL_TRUE)
+    , mPSC(GL_TRUE)
+    , mPSR(
     GL_TRUE) {
 
 }
