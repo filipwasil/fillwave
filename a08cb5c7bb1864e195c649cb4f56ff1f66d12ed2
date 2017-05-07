@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1edfc3ab_407402b8",
+        "filename": "InteractiveDemo/src/scene/sceneImp/SimpleScene.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-05-07T12:57:05Z",
+      "side": 1,
+      "message": "Change QMap\u003cQString, QVariant\u003e to QMap. Older version of qt are not comaptile.",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "a08cb5c7bb1864e195c649cb4f56ff1f66d12ed2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
