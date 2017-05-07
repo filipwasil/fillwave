@@ -1,2 +1,4 @@
 Hello World
 assets/SceneriosMenu/HelloWorld.xml
+Animation Scene
+assets/SceneriosMenu/AnimationScene.xml

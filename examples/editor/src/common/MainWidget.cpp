@@ -61,7 +61,7 @@ void MainWidget::loadNewScenario(QAction *action) {
   newMenu.recreateMenu(mMenuLayout, action->text());
 
   scene::ScensFactory scenFactory(mArgc, mArgv);
-  auto scen = scenFactory.createScen("Hello World");
+  auto scen = scenFactory.createScen(action->text());
   if (!scen) {
     return;
   }

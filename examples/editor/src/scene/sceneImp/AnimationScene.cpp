@@ -61,7 +61,7 @@ void AnimationScene::init() {
 
   mEngine->getCurrentScene()->attach(std::move(snow));
 
-  mText = mEngine->storeText("Fillwave editor", "FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
+  mText = mEngine->storeText("Animation Scene", "FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
 }
 
 void AnimationScene::perform() {
