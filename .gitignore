@@ -2,6 +2,8 @@ inc/fillwave/Config.h
 doc/doxygen_doc
 cmake-build-debug
 .idea
+examples/editor/.idea
+build
 doc/quickstart/quickstart.aux
 doc/quickstart/quickstart.log
 doc/quickstart/quickstart.out
