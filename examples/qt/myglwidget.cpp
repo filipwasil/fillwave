@@ -30,7 +30,7 @@
 #include "myglwidget.hpp"
 
 using namespace flw;
-using namespace flw::framework;
+using namespace flw::flf;
 using namespace std;
 
 MyGLWidget::MyGLWidget(int argc, char *argv[], QWidget *parent)
@@ -46,8 +46,10 @@ MyGLWidget::~MyGLWidget() {
 
 void MyGLWidget::initializeGL() {
   mEngine = unique_ptr<Engine>(new Engine(mArgc, mArgv));
-  auto scene = make_shared<ScenePerspective>(make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0), glm::quat()));
-  mEngine->setCurrentScene(scene);
+  auto scene = make_unique<Scene>();
+  auto camera = make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0), glm::quat());
+  scene->setCamera(std::move(camera));
+  mEngine->setCurrentScene(std::move(scene));
   mEngine->storeText("Fillwave QT widget example", "FreeSans", glm::vec2(-0.95f, 0.2f), 50.0f);
 }
 
