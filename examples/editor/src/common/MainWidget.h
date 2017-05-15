@@ -5,7 +5,7 @@
 #include <QMenuBar>
 #include <QAction>
 #include <QVBoxLayout>
-#include "loader/LoadMenu.h"
+#include "loader/CreateMenu.h"
 #include "common/SceneController.h"
 
 class QPushButton;

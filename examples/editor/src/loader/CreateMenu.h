@@ -8,9 +8,9 @@
 
 namespace loader {
 
-class LoadMenu {
+class CreateMenu {
 public:
-  LoadMenu(std::shared_ptr<common::ISceneController> sceneController);
+  CreateMenu(std::shared_ptr<common::ISceneController> sceneController);
 
   QVBoxLayout *createDefaultMainMenu();
 
