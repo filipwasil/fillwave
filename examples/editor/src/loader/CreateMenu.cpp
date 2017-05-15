@@ -2,19 +2,19 @@
 #include <QLabel>
 #include <QLayoutItem>
 #include "scene/Renderer.h"
-#include "LoadMenu.h"
+#include "CreateMenu.h"
 #include "loader/XmlLoader.h"
 #include "loader/MenuWidgetFabric.h"
 #include "common/Tools.h"
 
 namespace loader {
 
-LoadMenu::LoadMenu(std::shared_ptr<common::ISceneController> sceneController)
+CreateMenu::CreateMenu(std::shared_ptr<common::ISceneController> sceneController)
     : mSceneController(sceneController) {
 
 }
 
-QVBoxLayout *LoadMenu::createDefaultMainMenu() {
+QVBoxLayout *CreateMenu::createDefaultMainMenu() {
   QList<QWidget *> menuWidgets = getMenuWidgetList(QString("assets/SceneriosMenu/HelloWorld.xml"));
   if (menuWidgets.isEmpty()) {
     QMessageBox msgBox;
@@ -26,7 +26,7 @@ QVBoxLayout *LoadMenu::createDefaultMainMenu() {
   return vbox;
 }
 
-QList<QWidget *> LoadMenu::getMenuWidgetList(QString path) const {
+QList<QWidget *> CreateMenu::getMenuWidgetList(QString path) const {
   mSceneController->deleteTranslators();
   loader::MenuWidgetFabric *widgetFabric = new loader::MenuWidgetFabric(mSceneController);
   std::unique_ptr<loader::XmlLoader> loadMenuEntries = std::make_unique<loader::XmlLoader>(widgetFabric);
@@ -36,13 +36,13 @@ QList<QWidget *> LoadMenu::getMenuWidgetList(QString path) const {
   return menuWidgets;
 }
 
-QVBoxLayout *LoadMenu::getMainMenuVBoxLayout(const QList<QWidget *> &menuWidgets) {
+QVBoxLayout *CreateMenu::getMainMenuVBoxLayout(const QList<QWidget *> &menuWidgets) {
   QVBoxLayout *vbox = new QVBoxLayout();
   fillLayoutWithWidgets(menuWidgets, vbox);
   return vbox;
 }
 
-void LoadMenu::fillLayoutWithWidgets(const QList<QWidget *> &menuWidgets, QVBoxLayout *vbox) const {
+void CreateMenu::fillLayoutWithWidgets(const QList<QWidget *> &menuWidgets, QVBoxLayout *vbox) const {
   for (auto mWidget : menuWidgets) {
     QLabel *label = new QLabel(mWidget->accessibleName());
     vbox->addWidget(label);
@@ -51,13 +51,13 @@ void LoadMenu::fillLayoutWithWidgets(const QList<QWidget *> &menuWidgets, QVBoxL
   vbox->setAlignment(Qt::AlignTop);
 }
 
-void LoadMenu::recreateMenu(QVBoxLayout *VBLayout, QString sceneName) {
+void CreateMenu::recreateMenu(QVBoxLayout *VBLayout, QString sceneName) {
   auto newWidgetsList = getNewMainMenuWidgets(sceneName);
   clearLayout(VBLayout);
   fillLayoutWithWidgets(newWidgetsList, VBLayout);
 }
 
-QList<QWidget *> LoadMenu::getNewMainMenuWidgets(QString sceneName) {
+QList<QWidget *> CreateMenu::getNewMainMenuWidgets(QString sceneName) {
   QString scenarioPath = getScenePath(sceneName);
   if (scenarioPath.isEmpty()) {
     QList<QWidget *> emptyList;
@@ -67,7 +67,7 @@ QList<QWidget *> LoadMenu::getNewMainMenuWidgets(QString sceneName) {
   return menuWidgetList;
 }
 
-QString LoadMenu::getScenePath(QString sceneName) {
+QString CreateMenu::getScenePath(QString sceneName) {
   auto scenarioData = tools::readScenarioListWithPaths();
   auto itObj = std::find_if(scenarioData.begin(), scenarioData.end(), [&sceneName](auto o) {
     return o.first == sceneName;
@@ -79,7 +79,7 @@ QString LoadMenu::getScenePath(QString sceneName) {
   return scenarioPath;
 }
 
-void LoadMenu::clearLayout(QVBoxLayout *VBLayout) {
+void CreateMenu::clearLayout(QVBoxLayout *VBLayout) {
   QLayoutItem *child;
   while ((child = VBLayout->takeAt(0)) != 0) {
     delete child;

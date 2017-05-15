@@ -16,7 +16,9 @@ message(${SRC_FILES})
 message(${SOURCECOMMON})
 message(${HEADERSCOMMON})
 message(${SOURCELOADER})
-
+if (WIN32)
+    add_dependencies (${PROJECT_NAME} fillwave glfw)
+endif()
 qt5_use_modules(${PROJECT_NAME} Widgets)
 
 target_link_libraries(${PROJECT_NAME}

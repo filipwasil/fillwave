@@ -17,7 +17,7 @@ MainWidget::MainWidget(int argc, char *argv[], QWidget *parent)
   horizontal->setDirection(QBoxLayout::LeftToRight);
   QVBoxLayout *layoutEngineWindow = new QVBoxLayout();
   mSceneController = std::make_shared<SceneController>(mRenderer->getScen());
-  loader::LoadMenu defaultMenu(mSceneController);
+  loader::CreateMenu defaultMenu(mSceneController);
   mMenuLayout = defaultMenu.createDefaultMainMenu();
   horizontal->addLayout(mMenuLayout);
 
@@ -57,7 +57,7 @@ void MainWidget::createBarMenuCategories() {
 }
 
 void MainWidget::loadNewScenario(QAction *action) {
-  loader::LoadMenu newMenu(mSceneController);
+  loader::CreateMenu newMenu(mSceneController);
   newMenu.recreateMenu(mMenuLayout, action->text());
 
   scene::ScensFactory scenFactory(mArgc, mArgv);
