@@ -2,7 +2,6 @@ cmake_minimum_required (VERSION 2.8.8)
 
 cmake_policy (SET CMP0048 OLD) #Project version cmake policy
 cmake_policy (SET CMP0046 OLD) #Project dependency cmake policy
-
 set(BUILD_SHARED_LIBS OFF)
 set(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
 set(ASSIMP_BUILD_TESTS OFF)
@@ -23,7 +22,12 @@ add_subdirectory (${FILLWAVE_EXT_FREETYPE2_PATH})
 add_subdirectory (${FILLWAVE_EXT_GLFW_PATH})
 add_subdirectory (${FILLWAVE_EXT_FONTGENERATOR_PATH})
 add_subdirectory (${FILLWAVE_EXT_SPDLOG_PATH})
-
+add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/examples/editor)
+#add_custom_target(
+#    assets_${PROJECT_NAME}
+#    COMMAND cp -r ${CMAKE_CURRENT_SOURCE_DIR}/examples/editor/assets ${CMAKE_CURRENT_BINARY_DIR}/
+#)
+#add_dependencies(fillwave assets_${PROJECT_NAME})
 # -----------------------------------------------
 # Includes
 # -----------------------------------------------
@@ -72,6 +76,10 @@ install (TARGETS fillwave DESTINATION bin COMPONENT fillwave)
 install (DIRECTORY inc/fillwave DESTINATION include COMPONENT fillwave)
 install (DIRECTORY ext/glm DESTINATION include COMPONENT fillwave)
 
+install (TARGETS fillwave DESTINATION examples/editor COMPONENT fillwave)
+
+install (DIRECTORY ${FILLWAVE_PATH_INCLUDE} DESTINATION examples/editor/inc/fillwave)
+#install (DIRECTORY inc/fillwave DESTINATION examples/editor/fillwave/src COMPONENT fillwave)
 set (CPACK_GENERATOR "TGZ")
 
 include (CPack)
