@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "46313f15_f92dffb6",
+        "filename": "cmake/platform/Windows.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-05-16T07:49:51Z",
+      "side": 1,
+      "message": "This should depend on option from options.cmake",
+      "revId": "766f47adbc9ebc2c949ff5ef606611d6a9bab793",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
