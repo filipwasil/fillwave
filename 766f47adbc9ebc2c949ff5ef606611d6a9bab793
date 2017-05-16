@@ -16,6 +16,23 @@
       "revId": "766f47adbc9ebc2c949ff5ef606611d6a9bab793",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a7d87f04_1b434a49",
+        "filename": "examples/editor/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2017-05-16T07:51:00Z",
+      "side": 1,
+      "message": "Aren\u0027t there any global paths to be used here.\nFor example paths defined in external.cmake ?",
+      "revId": "766f47adbc9ebc2c949ff5ef606611d6a9bab793",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
