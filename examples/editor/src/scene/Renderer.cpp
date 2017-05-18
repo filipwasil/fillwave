@@ -1,3 +1,4 @@
+#include <scene/sceneImp/CallbacksScene.h>
 #include "Renderer.h"
 #include "scene/sceneImp/TextScene.h"
 #include "scene/ScensFactory.h"
@@ -13,7 +14,7 @@ Renderer::Renderer(int argc, char *argv[], QWidget *parent)
   glFormat.setProfile(QGLFormat::CoreProfile);
   setFormat(glFormat);
   this->makeCurrent();
-  mScene = std::make_shared<scene::TextScene>(mArgc, mArgv);
+  mScene = std::make_shared<scene::CallbacksScene>(mArgc, mArgv);
 }
 
 Renderer::~Renderer() {
