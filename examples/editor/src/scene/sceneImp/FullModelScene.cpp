@@ -1,0 +1,119 @@
+//============================================================================
+// Name        : example_normals_and_specular_map.cpp
+// Author      : Filip Wasil
+// Version     :
+// Copyright   : none
+// Description : Fillwave normals and specular map example
+//============================================================================
+
+#include <example.h>
+
+/* Audio */
+//#include <portaudio.h>
+
+/* Graphics */
+#include <CallbacksGLFW/MoveCameraCallback.h>
+#include <CallbacksGLFW/AnimationKeyboardCallback.h>
+#include <CallbacksGLFW/TimeStopCallback.h>
+#include <ContextGLFW.h>
+#include <fillwave/Fillwave.h>
+
+/* Physics */
+//#include <bullet>
+
+using namespace flw;
+using namespace flw::flf;
+using namespace std;
+
+void init() {
+	/* Scene and camera */
+	mEngine->setCurrentScene(make_unique<Scene>());
+	mEngine->getCurrentScene().setCamera(
+	   make_unique<CameraPerspective>(glm::vec3(0.0, 2.0, 10.0),
+	                                  glm::quat(),
+	                                  glm::radians(90.0),
+	                                  1.0,
+	                                  0.1,
+	                                  1000.0));
+
+	/* Entities */
+	puEntity light = buildEntity();
+
+	/* Lights */
+	LightSpot* l = mEngine->storeLightSpot(glm::vec3 (0.0, 1.0,
+	               0.0),
+	               glm::quat(),
+	               glm::vec4 (1.0, 1.0, 1.0, 0.0),
+	               light.get());
+
+	light->rotateByX(glm::radians(-90.0));
+
+	flc::Program* program = ProgramLoader(
+	                            mEngine).getDefault();
+
+	light->attach(make_unique<Model>(mEngine,
+	                                 program,
+	                                 "meshes/sphere.obj",
+	                                 "255_255_255.color"));
+	light->attachHierarchyCallback(make_unique<TimedMoveCallback>(light.get(),
+	                               glm::vec3(4.0, 0.0, 0.0), 50.0));
+	light->scaleTo(0.02);
+	light->moveBy(glm::vec3(-2.0, 4.0, 0.0));
+
+	puModel wall = make_unique<Model>(mEngine,
+	                                  program,
+	                                  "meshes/floor.obj",
+	                                  "textures/wall/stonetiles.png",
+	                                  "textures/wall/stonetiles_n.png",
+	                                  "textures/wall/stonetiles_s.png");
+	wall->moveInDirection(glm::vec3(0.0, -2.0, 0.0));
+	wall->scaleTo(1.0);
+
+	mEngine->getCurrentScene().attach(std::move(wall));
+	mEngine->getCurrentScene().attach(std::move(light));
+
+	/* Engine callbacks */
+	mEngine->registerCallback(make_unique<TimeStopCallback>(
+	         mEngine));
+	mEngine->registerCallback(make_unique<MoveCameraCallback>(
+	         mEngine, eEventType::eKey, 0.1));
+	mEngine->registerCallback(make_unique<MoveCameraCallback>(
+	         mEngine, eEventType::eCursorPosition, 0.1,
+	         ContextGLFW::mWindow));
+}
+
+void perform() {
+	/* Attach entities and entity to the scene */
+
+	mEngine->getCurrentScene().setSkybox(make_unique<Skybox>
+	      (mEngine,
+	       mEngine->storeTexture3D("textures/skybox/hourglass/hourglass_right.jpg",
+	             "textures/skybox/hourglass/hourglass_left.jpg",
+	             "textures/skybox/hourglass/hourglass_top.jpg",
+	             "",
+	             "textures/skybox/hourglass/hourglass_front.jpg",
+	             "textures/skybox/hourglass/hourglass_back.jpg")));
+}
+
+void showDescription() {
+	pText hint0 =
+	   mEngine->storeText("Fillwave example normal mapping",
+	         "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
+	pText hint5 =
+	   mEngine->storeText("Use mouse to move the camera",
+	         "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
+	pText hint3 = mEngine->storeText("Use 'S' for camera back",
+	              "fonts/Titania",
+	              glm::vec2(-0.95, -0.50), 70.0);
+	pText hint4 =
+	   mEngine->storeText("Use 'W' for camera forward",
+	         "fonts/Titania",
+	         glm::vec2(-0.95, -0.60), 70.0);
+	pText hint1 =
+	   mEngine->storeText("Use 'T' to resume/stop time",
+	         "fonts/Titania",
+	         glm::vec2(-0.95, -0.70), 70.0);
+	pText hint6 =
+	   mEngine->storeText("Use 'D' for toggle debugger On/Off",
+	         "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
+}

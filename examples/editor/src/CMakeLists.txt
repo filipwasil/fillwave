@@ -1,4 +1,6 @@
 aux_source_directory(. SRC_FILES)
+aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/scene/callbacks CALLBACKS_SOURCES)
+
 
 include_directories(".")
 
@@ -9,7 +11,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/scene)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 add_executable(${PROJECT_NAME} ${SRC_FILES} ${SOURCECOMMON} ${HEADERSCOMMON}
-    ${SOURCELOADER} ${HEADERSLOADER} ${SOURCESCENE} ${HEADERSSCENE})
+    ${SOURCELOADER} ${HEADERSLOADER} ${SOURCESCENE} ${HEADERSSCENE} ${CALLBACKS_SOURCES})
 
 message(${PROJECT_NAME})
 message(${SRC_FILES})

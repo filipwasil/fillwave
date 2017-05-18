@@ -1,7 +1,7 @@
 #include <fillwave/space/Scene.h>
 #include <fillwave/models/EmiterPointGPU.h>
 #include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
-#include "scene/sceneImp/callbacks/AnimationKeyboardCallback.h"
+#include "scene/callbacks/AnimationKeyboardCallback.h"
 #include <fillwave/Fillwave.h>
 #include <fillwave/Framework.h>
 #include "AnimationScene.h"
