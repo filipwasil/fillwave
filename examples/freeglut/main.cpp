@@ -12,7 +12,7 @@ using namespace std;
 
 FLOGINIT_DEFAULT()
 
-Engine *gEngine;
+Engine *mEngine;
 
 pCameraPerspective gCamera;
 pScenePerspective gScene;
@@ -33,19 +33,19 @@ void init() {
                                                 1000.0);
 
   /* Shaders */
-  gProgram = ProgramLoader(gEngine).getDefault();
+  gProgram = ProgramLoader(mEngine).getDefault();
 
   /* Models */
 
 
   /* Lights */
-  pLight light = gEngine->storeLightSpot(glm::vec3(1.0, 20.0, 6.0), glm::quat(), glm::vec4(1.0, 1.0, 1.0, 0.0));
+  pLight light = mEngine->storeLightSpot(glm::vec3(1.0, 20.0, 6.0), glm::quat(), glm::vec4(1.0, 1.0, 1.0, 0.0));
   light->rotateTo(glm::vec3(1.0, 0.0, 0.0), glm::radians(-90.0));
 }
 
 void perform() {
-  gEngine->configureFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
-  gEngine->setCurrentScene(gScene);
+  mEngine->configureFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
+  mEngine->setCurrentScene(gScene);
 
   pIEffect fog(new Fog());
 
@@ -53,7 +53,7 @@ void perform() {
 
   Material material;
 
-  pMeshTerrain terrain = std::make_shared<MeshTerrain>(gEngine,
+  pMeshTerrain terrain = std::make_shared<MeshTerrain>(mEngine,
                                                        gProgram,
                                                        new MountainConstructor(),
                                                        material,
@@ -69,12 +69,12 @@ void perform() {
 
 void showDescription() {
   /* Description */
-  pText hint0 = gEngine->storeText("Fillwave example terrain", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
-  pText hint5 = gEngine->storeText("Use mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
-  pText hint3 = gEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
-  pText hint4 = gEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
-  pText hint1 = gEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
-  pText hint6 = gEngine->storeText("Use 'D' for toggle debugger On/Off",
+  pText hint0 = mEngine->storeText("Fillwave example terrain", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
+  pText hint5 = mEngine->storeText("Use mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
+  pText hint3 = mEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
+  pText hint4 = mEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
+  pText hint1 = mEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
+  pText hint6 = mEngine->storeText("Use 'D' for toggle debugger On/Off",
                                    "fonts/Titania",
                                    glm::vec2(-0.95, -0.80),
                                    70.0);
@@ -90,7 +90,7 @@ void timer(int) {
   int delta = New - Old;
   Old = New;
 
-  gEngine->draw(static_cast<float>(delta) * 0.001f);
+  mEngine->draw(static_cast<float>(delta) * 0.001f);
 
   glutSwapBuffers();
 
@@ -98,7 +98,7 @@ void timer(int) {
 }
 
 void resize(int width, int height) {
-  gEngine->insertResizeScreen(width, height);
+  mEngine->insertResizeScreen(width, height);
 }
 
 
@@ -122,7 +122,7 @@ int main(int argc, char *argv[]) {
   glutTimerFunc(100, timer, 1);
   glutReshapeFunc(resize);
 
-  gEngine = new Engine(argc, argv);
+  mEngine = new Engine(argc, argv);
 
   init();
   perform();
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]) {
 
   glutMainLoop();
 
-  delete gEngine;
+  delete mEngine;
 
   return 0;
 }
