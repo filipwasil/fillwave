@@ -89,7 +89,7 @@ AssimpNode::~AssimpNode() {
 
 Animator::Animator(const aiScene *scene)
     : mTimeSinceStartSeconds(0.0) {
-  mAnimationsBufferData.reserve(FILLWAVE_MAX_BONES);
+  mAnimationsBufferData.resize(FILLWAVE_MAX_BONES);
 
   GLuint numBones = 0;
 

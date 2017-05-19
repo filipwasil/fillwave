@@ -120,7 +120,7 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, flf::Animator *animato
 
   if (animator) {
     std::vector<int> boneIdForEachVertex;
-    boneIdForEachVertex.reserve(mDataVertices.size());
+    boneIdForEachVertex.resize(mDataVertices.size());
     for (size_t z = 0; z < mDataVertices.size(); z++) {
       boneIdForEachVertex[z] = 0;
     }
