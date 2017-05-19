@@ -1,6 +1,5 @@
-#include <scene/sceneImp/CallbacksScene.h>
 #include "Renderer.h"
-#include "scene/sceneImp/TextScene.h"
+#include "scene/sceneImp/FullModelScene.h"
 #include "scene/ScensFactory.h"
 
 using namespace flw;
@@ -14,7 +13,7 @@ Renderer::Renderer(int argc, char *argv[], QWidget *parent)
   glFormat.setProfile(QGLFormat::CoreProfile);
   setFormat(glFormat);
   this->makeCurrent();
-  mScene = std::make_shared<scene::CallbacksScene>(mArgc, mArgv);
+  mScene = std::make_shared<scene::FullModelScene>(mArgc, mArgv);
 }
 
 Renderer::~Renderer() {
@@ -25,7 +24,7 @@ void Renderer::initializeGL() {
 }
 
 void Renderer::paintGL() {
-  mScene->getEngine()->draw(1.0f / 60.0f);
+  mScene->getEngine()->draw(1.0f / 600.0f);
   update();
 }
 

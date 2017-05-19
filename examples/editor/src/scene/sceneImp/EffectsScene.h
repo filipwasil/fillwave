@@ -8,7 +8,7 @@ class EffectsScene : public AScene {
   Q_OBJECT
   Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
 public:
-  EffectsScene(int argc, char **argv){}
+  EffectsScene(int argc, char **argv);
 
   virtual ~EffectsScene(){}
 

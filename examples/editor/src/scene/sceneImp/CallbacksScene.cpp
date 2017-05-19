@@ -9,15 +9,12 @@ const GLuint SPHERES = 5;
 
 namespace scene {
 
-CallbacksScene::CallbacksScene(int argc, char **argv)
-    : mArgc(argc), mArgv(argv) {
-  //mSceneParameters["mText"] = QVariant("HelloWorld");
+CallbacksScene::CallbacksScene(int argc, char **argv) : AScene (argc, argv) {
+  mSceneParameters["mText"] = QVariant("HelloWorld");
   init();
 }
 
 void CallbacksScene::init() {
-  mEngine = std::make_shared<flw::Engine>(mArgc, mArgv);
-
   pText hint0 = mEngine->storeText("Fillwave example callbacks", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
   pText hint3 = mEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
   pText hint4 = mEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
@@ -38,9 +35,7 @@ void CallbacksScene::init() {
   /* Engine callbacks */
   mEngine->registerCallback(make_unique<TimeStopCallback>(mEngine.get()));
   mEngine->registerCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
-}
 
-void CallbacksScene::perform() {
   flc::Program *p = ProgramLoader(mEngine.get()).getDefault();
 
   /* Models */
@@ -49,11 +44,12 @@ void CallbacksScene::perform() {
   for (GLint i = 0; i < SPHERES; i++) {
     /* build */
 
-    puModel sphere = builder.build();
+    auto sphere = builder.build();
 
     /* move */
     sphere->scaleTo(0.1);
     sphere->moveByX(-4 + 2 * i);
+    sphere->moveByZ(-4);
 
     sphere->attachHierarchyCallback(make_unique<LoopCallback>(std::move(make_unique_container<SequenceCallback>(
         make_unique<TimedScaleCallback>(sphere.get(), 0.1 * 2.0, 2.0f + i * 0.5, CircularEaseIn),
@@ -78,6 +74,10 @@ void CallbacksScene::perform() {
   wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
   wall->scaleTo(3.0);
   mEngine->getCurrentScene()->attach(std::move(wall));
+}
+
+void CallbacksScene::perform() {
+
 }
 
 }

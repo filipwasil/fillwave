@@ -7,6 +7,12 @@ using namespace std;
 
 namespace scene {
 
+PostProcessingScene::PostProcessingScene(int argc, char **argv)
+		: AScene(argc, argv) {
+	mSceneParameters["mText"] = QVariant("HelloWorld");
+	init();
+}
+
 void PostProcessingScene::init() {
 	/* Scene and camera */
 	mEngine->setCurrentScene(make_unique<Scene>());
@@ -26,7 +32,10 @@ void PostProcessingScene::init() {
 
 	/* Models */
 
-	puModel model = make_unique<Model>(mEngine.get(), ProgramLoader(mEngine.get()).getDefault(), "meshes/sphere.obj", textureDynamic);
+	puModel model = make_unique<Model>(mEngine.get(),
+	                                   ProgramLoader(mEngine.get()).getDefault(),
+	                                   "meshes/sphere.obj",
+	                                   textureDynamic);
 	model->moveBy(glm::vec3(0.0, 0.0, -15.0));
 
 	/* Lights */
@@ -43,14 +52,16 @@ void PostProcessingScene::init() {
 //	                                                          ContextGLFW::mWindow));
 
 	mEngine->getCurrentScene()->attach(std::move(model));
-}
 
-void PostProcessingScene::perform() {
 	/* Description */
 	pText description = mEngine->storeText("Fillwave example post processing shader",
 	                                       "fonts/Titania",
 	                                       glm::vec2(-0.95, 0.95),
 	                                       100.0);
+}
+
+void PostProcessingScene::perform() {
+
 }
 
 }

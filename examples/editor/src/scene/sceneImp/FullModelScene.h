@@ -5,12 +5,17 @@
 
 namespace scene {
 class FullModelScene : public AScene {
-  Q_OBJECT
-  Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
+Q_OBJECT
+  Q_PROPERTY(QMap sceneParameter
+                 READ
+                 getParameters
+                 WRITE
+                 setParameters)
 public:
-  FullModelScene(int argc, char **argv){}
+  FullModelScene(int argc, char **argv);
 
-  virtual ~FullModelScene(){}
+  virtual ~FullModelScene() {
+  }
 
   void init() override;
 

@@ -8,7 +8,7 @@ class OrtpgraphicProjectionScene : public AScene {
   Q_OBJECT
   Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
 public:
-  OrtpgraphicProjectionScene(int argc, char **argv){}
+  OrtpgraphicProjectionScene(int argc, char **argv);
 
   virtual ~OrtpgraphicProjectionScene(){}
 

@@ -7,6 +7,12 @@ using namespace std;
 
 namespace scene {
 
+SkyboxScene::SkyboxScene(int argc, char **argv)
+		: AScene(argc, argv) {
+	mSceneParameters["mText"] = QVariant("HelloWorld");
+	init();
+}
+
 void SkyboxScene::init() {
 	/* Scene and camera */
 	mEngine->setCurrentScene(make_unique<Scene>());
@@ -24,9 +30,6 @@ void SkyboxScene::init() {
 //	                                                          eEventType::eCursorPosition,
 //	                                                          0.1,
 //	                                                          ContextGLFW::mWindow));
-}
-
-void SkyboxScene::perform() {
 	mEngine->getCurrentScene()->setSkybox(make_unique<Skybox>(mEngine.get(),
 	                                                          mEngine->storeTexture3D(
 			                                                          "textures/skybox/emerald/emerald_right.jpg",
@@ -36,6 +39,10 @@ void SkyboxScene::perform() {
 			                                                          "textures/skybox/emerald/emerald_front.jpg",
 			                                                          "textures/skybox/emerald/emerald_back.jpg")));
 	pText hint0 = mEngine->storeText("Fillwave example skybox", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
+}
+
+void SkyboxScene::perform() {
+
 }
 
 }

@@ -8,11 +8,11 @@ class HudScene : public AScene {
   Q_OBJECT
   Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
 public:
-  HudScene(int argc, char **argv){}
+  HudScene(int argc, char **argv);
 
   virtual ~HudScene(){}
 
-  void init() override {}
+  void init() override;
 
   void perform() override;
 

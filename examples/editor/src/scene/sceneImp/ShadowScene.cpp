@@ -7,6 +7,12 @@ using namespace std;
 
 namespace scene {
 
+ShadowScene::ShadowScene(int argc, char **argv)
+		: AScene(argc, argv) {
+	mSceneParameters["mText"] = QVariant("HelloWorld");
+	init();
+}
+
 void ShadowScene::init() {
 	/* Scene and camera */
 	mEngine->setCurrentScene(make_unique<Scene>());
@@ -64,12 +70,8 @@ void ShadowScene::init() {
 //	                                                          eEventType::eCursorPosition,
 //	                                                          0.1,
 //	                                                          ContextGLFW::mWindow));
-}
 
-void ShadowScene::perform() {
 	/* Programs */
-	flc::Program *program = ProgramLoader(mEngine.get()).getDefault();
-
 	puModel wall = make_unique<Model>(mEngine.get(), program, "meshes/floor.obj");
 	puModel shadowCastingBall1 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
 	puModel shadowCastingBall2 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
@@ -118,6 +120,10 @@ void ShadowScene::perform() {
 	                                 "fonts/Titania",
 	                                 glm::vec2(-0.95, -0.80),
 	                                 70.0);
+}
+
+void ShadowScene::perform() {
+
 }
 
 }

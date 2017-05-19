@@ -34,6 +34,9 @@
 
 #include <fillwave/models/Impostor.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/Log.h>
+
+FLOGINIT_DEFAULT()
 
 
 namespace flw {
@@ -58,6 +61,7 @@ void Impostor::coreDraw() {
   glEnable(GL_BLEND);
   glBlendFunc(mBlending.mSrc, mBlending.mDst);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  fLogC("Drawing impostor failed");
   glDisable(GL_BLEND);
   flc::Texture2D::unbind2DTextures();
 }

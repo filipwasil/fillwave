@@ -64,5 +64,5 @@ protected:
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::Impostor> pImpostor;
+typedef std::unique_ptr<flf::Impostor> puImpostor;
 } /* flw */

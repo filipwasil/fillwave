@@ -18,8 +18,6 @@ public:
 
 private:
   flw::pText mText;
-  int mArgc;
-  char **mArgv;
 };
 
 }

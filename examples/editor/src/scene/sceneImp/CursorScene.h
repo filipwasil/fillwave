@@ -8,7 +8,7 @@ class CursorScene : public AScene {
   Q_OBJECT
   Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
 public:
-  CursorScene(int argc, char **argv){}
+  CursorScene(int argc, char **argv);
 
   virtual ~CursorScene(){}
 

@@ -8,7 +8,7 @@ class ParticlesScene : public AScene {
   Q_OBJECT
   Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
 public:
-  ParticlesScene(int argc, char **argv){}
+  ParticlesScene(int argc, char **argv);
 
   virtual ~ParticlesScene(){}
 

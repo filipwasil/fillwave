@@ -9,7 +9,7 @@ using namespace flw::flf;
 
 namespace scene {
 TextScene::TextScene(int argc, char **argv)
-    : mArgc(argc), mArgv(argv) {
+    : AScene(argc, argv) {
   mSceneParameters["mText"] = QVariant("HelloWorld");
   init();
 }
@@ -19,7 +19,6 @@ TextScene::~TextScene() {
 }
 
 void TextScene::init() {
-  mEngine = std::make_shared<flw::Engine>(mArgc, mArgv);
   mEngine->setCurrentScene(std::make_unique<Scene>());
   mEngine->getCurrentScene()->setCamera(std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
                                                                             glm::quat(),
@@ -55,4 +54,5 @@ void TextScene::perform() {
   std::string string = tmp.toString().toStdString();
   mText->editString(string);
 }
+
 }

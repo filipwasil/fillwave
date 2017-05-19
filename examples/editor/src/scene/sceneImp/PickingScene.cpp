@@ -8,6 +8,12 @@ using namespace std;
 
 namespace scene {
 
+PickingScene::PickingScene(int argc, char **argv)
+		: AScene(argc, argv) {
+	mSceneParameters["mText"] = QVariant("HelloWorld");
+	init();
+}
+
 void PickingScene::init() {
 	/* Scene and camera */
 	mEngine->setCurrentScene(make_unique<Scene>());
@@ -16,9 +22,7 @@ void PickingScene::init() {
 	/* Engine callbacks */
 	mEngine->registerCallback(make_unique<TimeStopCallback>(mEngine.get()));
 	mEngine->registerCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
-}
 
-void PickingScene::perform() {
 	mEngine->getCurrentScene()->setCursor(make_unique<Cursor>(mEngine.get(),
 	                                                          mEngine->storeTexture("textures/cursor/standard_blue.png")));
 
@@ -95,6 +99,10 @@ void PickingScene::perform() {
 	                                       100.0);
 
 	pText hint0 = mEngine->storeText("Pick a sphere", "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
+}
+
+void PickingScene::perform() {
+
 }
 
 }

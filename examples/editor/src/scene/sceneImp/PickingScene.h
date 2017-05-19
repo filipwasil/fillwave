@@ -8,7 +8,7 @@ class PickingScene : public AScene {
   Q_OBJECT
   Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
 public:
-  PickingScene(int argc, char **argv){}
+  PickingScene(int argc, char **argv);
 
   virtual ~PickingScene(){}
 

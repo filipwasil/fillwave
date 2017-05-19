@@ -10,7 +10,9 @@ class CallbacksScene : public AScene {
 public:
   CallbacksScene(int argc, char **argv);
 
-  virtual ~CallbacksScene() {}
+  virtual ~CallbacksScene() {
+    // nothing
+  }
 
   void init() override;
 
@@ -18,8 +20,6 @@ public:
 
 private:
   flw::pText mText;
-  int mArgc;
-  char **mArgv;
 };
 
 }
