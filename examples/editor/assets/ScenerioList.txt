@@ -8,7 +8,7 @@ Simple
 assets/SceneriosMenu/Simple.xml
 Hud
 assets/SceneriosMenu/HudScene.xml
-Otographic
+Ortographic projection
 assets/SceneriosMenu/OrtpgraphicProjectionScene.xml
 Particles
 assets/SceneriosMenu/ParticlesScene.xml
