@@ -44,7 +44,7 @@
   basicstyle=\ttfamily,
   keywordstyle=\color{blue}\bfseries,
   showstringspaces=false,
-  morekeywords={pModel, pEntity, pScene, pLightPoint, pLightSpot, pLightDirectional, pText, pCursor, pSkybox, GLfloat, GLint}
+  morekeywords={puModel, puEntity, puScene, puLightPoint, puLightSpot, puLightDirectional, pText, puCursor, puSkybox, GLfloat, GLint}
 }
 
 \begin{document}
@@ -56,7 +56,7 @@
 \maketitle
 
 \begin{abstract}
-Before you start please ensure your graphics card driver supports at least OpenGL 3.3 and GLSL 330 or OpenGL ES 3.0 and GLSL 300 ES. Also, your c++ compiler must support c++11 standard (Ex. g++\textgreater4.7 or clang++\textgreater3.3). PC Context examples provided are using GLFW3. Android context samples use are using EGL (Java and native). Of course you can use any stub you like (Ex. freeglut, qt or other).
+Before you start please ensure your graphics card driver supports at least OpenGL 3.3 and GLSL 330 or OpenGL ES 3.0 and GLSL 300 ES. Also, your C++ compiler must support c++14 standard (Ex. g++\textgreater4.7 or clang++\textgreater3.3). PC Context examples provided are using GLFW3. Editor provided uses the qt5 QT5 and are editable according to your needs. Android context samples use are using EGL (Java and native). Of course you can use any stub you like (Ex. freeglut, qt or other).
 \end{abstract}
 
 \pagebreak
@@ -66,7 +66,7 @@ Before you start please ensure your graphics card driver supports at least OpenG
 
 \section{Introduction}
 \subsection{Features}\label{sec:Features}
-\indent \indent Graphics engine which you are about to use provides extremely, easy, portable, and uses C++11 modern API. It has all the essential functionalities that are needed to create a graphics layer for your application:
+\indent \indent Graphics engine which you are about to use provides extremely, easy, portable, and uses C++14 modern API. It has all the essential functionalities that are needed to create a graphics layer for your application:
 
 \begin{itemize}
   \item Physics buffers for each model.
@@ -92,7 +92,7 @@ Probably you will ask how is Fillwave better than other, more extended engines o
   \item "examples" - multiplatform examples
   \item "scripts" - building scripts
 \end{itemize}
-\indent \indent Engine uses dual namespace design style for modules. Code is splitted into three namespaces: \textbf{fillwave}, \textbf{fillwave:framework}, \textbf{flw::core}. Core layer uses directly OpenGL driver API. \textbf{Framework} layer uses the \textbf{core} and by design implements a middleware of this project. The highest layer can be found under \textbf{fillwave} namespace. It is what we call Fillwave API. Naming convention is following:
+\indent \indent Engine uses dual namespace design style for modules. Code is splitted into three namespaces: \textbf{flw}, \textbf{flw:flf}, \textbf{flw::core}. Core layer uses directly OpenGL driver API. \textbf{Framework} layer uses the \textbf{core} and by design implements a middleware of this project. The highest layer can be found under \textbf{fillwave} namespace. It is what we call Fillwave API. Naming convention is following:
 \begin{itemize}
   \item "p" - shared pointer (Ex. pEntity)
   \item "pu" - unique pointer (Ex. puRenderer)
@@ -110,12 +110,10 @@ Probably you will ask how is Fillwave better than other, more extended engines o
 using namespace flw;
 
 int main(int argc, char* argv[]) {
-   /* Create OpenGL/OpenGLES context */
-   Engine* fillwave = new Engine(argc, argv);
-   /* Create scene */
-   /* enter rendering loop */
-   delete engine;
-   /* Delete OpenGL/OpenGLES context*/
+   ... /* Create OpenGL/OpenGLES context */
+   auto fillwave = std::make_unique<Engine>(argc, argv); /* Create Engine instance */
+   ... /* create and init scene */
+   ... /* enter rendering loop */
    exit(EXIT_SUCCESS);
 }
 \end{lstlisting}
@@ -133,7 +131,6 @@ void insertInput(CharacterModsEvent& e);
 void insertInput(CursorEnterEvent& e);
 void insertInput(CursorPositionEvent& e);
 void insertInput(TouchEvent& e);
-void insertInput(TouchEvent& e);
 \end{lstlisting}
 
 \indent \indent Every time when there is an event incoming to you context, (Does not matter if you are using glfw, freegut, QT or other library) and you want Fillwave to handle it you should \textbf{insert} a proper event into the engine using \textbf{insertEvent} function. Above there is an example using GLFW. The \textbf{keyboardCallback} function was previously registered as keyboard callback in GLFW.  
@@ -146,12 +143,12 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
                                    int action,
                                    int mods) {
    /* Create an event data and fill it */
-   flw::flf::KeyboardEventData data;
-   data.action = action;
-   data.key = key;
-   data.mode = mods;
-   data.scanCode = scancode;
-   
+   flw::flf::KeyboardEventData data {
+     action;
+     key;
+     mods;
+     scancode;
+   };
    /* Create an event */
    flw::flf::KeyboardEvent event(data);
    
@@ -162,7 +159,7 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
 
 \subsection{Rendering loop}\label{sec:Loop}
 
-\indent \indent Last step that has to be done in order to use fillwave is rendering loop creation. In each iteration a \textbf{draw}, \textbf{drawLines}, or \textbf{drawPoints} function must be called with the \textbf{"How many seconds passed since last draw"} parameter. Also there is an extra \textbf{drawTexture} function which can display if a single texture in all You want to see. GLFW example of render loop will look like:
+\indent \indent Last step that has to be done in order to use fillwave is rendering loop creation. In each iteration a \textbf{draw}, \textbf{drawLines}, or \textbf{drawPoints} function must be called with the \textbf{"How many seconds passed since last draw"} parameter. Also there is an extra \textbf{drawTexture} function which can be used if a single texture in all You want to see. GLFW example of render loop will look like:
 
 \begin{lstlisting}
 void ContextGLFW1::render() {
@@ -196,7 +193,7 @@ void ContextGLFW1::render() {
 \section{Digging into API}
 
 \subsection{Entity}\label{sec:Entity}
-\indent \indent \textbf{puEntity} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them. Fillwave uses \"only one owner\" principle and strongly uses unique pointers from C++11.
+\indent \indent \textbf{puEntity} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them. Fillwave uses \"only one owner\" principle and strongly uses unique pointers from C++14.
 
 \begin{lstlisting}
 puEntity entity_parent = buildEntity();
@@ -205,7 +202,7 @@ entity_parent->attach(std::move(entity_child));
 entity_parent->attach(make_unique<Entity>());
 \end{lstlisting}
 
-\indent \indent \textbf{pEntity} can be moved, rotated and scaled. The transformation matrix will be computed internally. However if one needs to set it directly (for example if it is computed by physics engine) there is a function provided:
+\indent \indent \textbf{puEntity} can be moved, rotated and scaled. The transformation matrix will be computed internally. However if one needs to set it directly (for example if it is computed by physics engine) there is a function provided:
 
 \begin{lstlisting}
 void setTransformation(glm::mat4 transformationMatrix);
@@ -256,13 +253,13 @@ engine->getCurrentScene()->setCamera(make_unique<CameraOrtographic>
 
 \subsection{Renderers}\label{sec:Renderers}
 
-\indent \indent In current revision (5.0.0) there are 4 types of renderers:
+\indent \indent In current revision (7.0.0) there are 4 types of renderers:
 
 \begin{itemize}
 \item \textbf{\textcolor{gray}{RendererPBRP}}
 \item \textbf{\textcolor{gray}{RendererFR}}
-\item \textbf{\textcolor{gray}{RendererDR} (coming soon)}
-\item \textbf{\textcolor{gray}{RendererCSPBRP} (coming soon)}
+\item \textbf{\textcolor{gray}{RendererDR} (partially done)}
+\item \textbf{\textcolor{gray}{RendererCSPBRP} (partially done)}
 \end{itemize}
 
 \indent \indent Renderers are \textbf{per Scene} and can be set using \textbf{Scene::setRenderer()} function. Do not hesitate to create your own one. Its easy and fun (Just implement IRenderer Interface).
@@ -319,9 +316,7 @@ pCursor  storeCursor(pTexture, GLfloat);
  * together with your model asset file.
  */
 
-puModel model = make_unique<Model>(engine, program, "model.obj");
-
-puModel model = make_unique<Model>(engine, program, "model.obj");
+auto model = make_unique<Model>(engine, program, "model.obj");
 
 /*
  * When the appropriate map paths are available in your
@@ -331,7 +326,7 @@ puModel model = make_unique<Model>(engine, program, "model.obj");
 
 flf::Sphere sphere(1.0,10.0,10.0);
 
-puModel model = make_unique<Model>(engine,
+auto model = make_unique<Model>(engine,
                           program,
                           sphere,
                           diffuseMap,
@@ -345,7 +340,7 @@ puModel model = make_unique<Model>(engine,
  * but stll use the model asset from file.   
  */
                       
-puModel model = make_unique<Model>(engine,
+auto model = make_unique<Model>(engine,
                        program,
                        "model.obj",
                        "relativePathToDiffuseMap",
@@ -357,7 +352,7 @@ puModel model = make_unique<Model>(engine,
  * and material objects.
  */
 
-puModel model = make_unique<Model>(engine,
+auto model = make_unique<Model>(engine,
                       program,
                       "model.obj",
                       diffuseMapTexture,
@@ -379,12 +374,12 @@ BuilderModelExternalMaps builder1 (engine,
                                    normalPath,
                                    specularPath);
 
-puModel m = builder1.build();
+auto m = builder1.build();
 
 /* Second method */
 BuilderModelExternalMaps builder1(engine);
 
-puModel m = builder1.setModelPath(modelPath).
+auto m = builder1.setModelPath(modelPath).
                   setProgram(program).
                   setdiffusePath(diffuseMap).
                   setNormalMapPath(normalsMap).
@@ -405,13 +400,13 @@ BuilderModelManual builder2 (engine,
                              normalsMap,
                              specularMap,
                              material);
-puModel m = builder2.build();
+auto m = builder2.build();
 
 /* Second method */
 
 BuilderModelManual builder2 (engine);
 
-puModel m = builder2.setModelPath(modelPath).
+auto m = builder2.setModelPath(modelPath).
                   setProgram(program).
                   setDiffuseMapTexture(diffuseMap).
                   setNormalMapTexture(normalsMap).
@@ -514,8 +509,7 @@ flc::Texture3D* texture=flc::Texture3D*(new Texture3D("textures_right.png",
                                               "textures_floor.png",
                                               "textures_front.png",
                                               "textures_back.png"));
-scene->setSkybox(make_unique<Skybox>(engine,
-                             texture));
+scene->setSkybox(make_unique<Skybox>(engine, texture));
 \end{lstlisting}
 
 \subsection{Terrain}\label{sec:Terrain}
@@ -526,7 +520,7 @@ scene->setSkybox(make_unique<Skybox>(engine,
 flc::Shader* fs = engine->storeShader<GL_FRAGMENT_SHADER>("default.frag");
 flc::Shader* vs = engine->storeShader<GL_VERTEX_SHADER>("default.vert");
 flc::Program* program = buildProgram(fs + vs);
-puTerrain terrain = buildTerrainVoxel(engine,
+auto terrain = buildTerrainVoxel(engine,
                                   program,
                                   "textures/test.png",
                                   new terrain::MountainConstructor(),
@@ -572,12 +566,12 @@ pText text = engine->storeText( "Hello Fillwave",/* content */
 \indent \indent All objects in Fillwave have a \textbf{log} function which prints most of the objects data to standard output. There are also predefined macros ready to use:
 
 \begin{itemize}
-\item \textbf{\textcolor{blue}{FLOG\_USER}} - free to use.
-\item \textbf{\textcolor{gray}{FLOG\_CHECK}} - checks OpenGL errors.
-\item \textbf{\textcolor{cyan}{FLOG\_INFO}} - prints \textbf{log} function information.
-\item \textbf{\textcolor{yellow}{FLOG\_DEBUG}} - reserved for internal debug info.
-\item \textbf{\textcolor{red}{FLOG\_ERROR}} - called in case of internal engine error.
-\item \textbf{\textcolor{gray}{FLOG\_FATAL}} - just like FLOG\_ERROR but also calls abort(). It indicates blocking errors like: "Shaders not found". If such error occurs, and the reason is not trivial then it needs further investigation by the author. Do not hesitate to contact me in such case.
+\item \textbf{\textcolor{blue}{fLogU}} - free to use.
+\item \textbf{\textcolor{gray}{fLogC}} - checks OpenGL errors.
+\item \textbf{\textcolor{cyan}{fLogI}} - prints \textbf{log} function information.
+\item \textbf{\textcolor{yellow}{fLogD}} - reserved for internal debug info.
+\item \textbf{\textcolor{red}{fLogE}} - called in case of internal engine error.
+\item \textbf{\textcolor{gray}{flogF}} - just like \textbf{fLogE} but also calls abort(). It indicates blocking errors like: "Shaders not found". If such error occurs, and the reason is not trivial then it needs further investigation by the author. Do not hesitate to contact me in such case.
 \end{itemize}
 \indent To print a debug info in a certain source file You should define a module name and debug flags with macro \textbf{FLOGINIT}. Examples below:
 \begin{lstlisting}
