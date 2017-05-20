@@ -365,7 +365,7 @@ const std::string fsDRAmbientG = gGLVersion + gGLFragmentPrecision +
 
                                      "void main() {\n"
                                      "   fWorldPosition = vec3(0.0, 0.0, " + gGLAmbient + ");\n"
-                                     "   fDiffuseTexel = texture2D(uTextureUnit, vTextureCoordinate).xyz;\n"
+                                     "   fDiffuseTexel = texture(uTextureUnit, vTextureCoordinate).xyz;\n"
                                      "   fNormal = vec3(0.0);\n"
                                      "   fSpecularTexel = vec3(0.0);\n"
                                      "}\n";
@@ -511,7 +511,7 @@ const std::string fsParticlesGPU = gGLVersion + gGLFragmentPrecision + //xxx low
                                        "uniform sampler2D uTextureUnit;                       \n"
                                        "uniform float uAlphaCutOff;                           \n" +
                                    gGLColorOutDefinition + "void main() {                                         \n"
-                                       "   vec4 texel = texture2D( uTextureUnit, gl_PointCoord ); \n"
+                                       "   vec4 texel = texture( uTextureUnit, gl_PointCoord ); \n"
                                        "   " + gGLColorOutAssingment + " = texel * uColor;                        \n"
                                        "   if(length(texel * uColor) < uAlphaCutOff) {                \n"
                                        "      discard;                                        \n"
@@ -772,12 +772,7 @@ const std::string fsDR = gGLVersion + "in vec4 vVertexWorldSpace;\n"
                              "uniform sampler2D uSpecularTextureUnit;\n"
 
                              "void main() {\n"
-#ifdef FILLWAVE_GLES_3_0
                              "   vec3 texelNormal = texture(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
-#else
-                             "   vec3 texelNormal = texture2D(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
-#endif
-
                              "   vec3 Normal = normalize(vVertexNormal);\n"
                              "   vec3 Tangent = normalize(vVertexNormalTangent);\n"
 
@@ -797,14 +792,8 @@ const std::string fsDR = gGLVersion + "in vec4 vVertexWorldSpace;\n"
                              "   }\n"
 
                              "   fWorldPosition = vVertexWorldSpace.xyz;\n"
-
-#ifdef FILLWAVE_GLES_3_0
-                         "   fDiffuseTexel = texture(uDiffuseTextureUnit, vTextureCoordinate).xyz + vColor.xyz;\n"
-                         "   fSpecularTexel = texture(uSpecularTextureUnit, vTextureCoordinate).rrr * 255.0;\n"
-#else
-                             "   fDiffuseTexel = texture2D(uDiffuseTextureUnit, vTextureCoordinate).xyz + vColor.xyz;\n"
-                             "   fSpecularTexel = texture2D(uSpecularTextureUnit, vTextureCoordinate).rrr * 255.0;\n"
-#endif
+                             "   fDiffuseTexel = texture(uDiffuseTextureUnit, vTextureCoordinate).xyz + vColor.xyz;\n"
+                             "   fSpecularTexel = texture(uSpecularTextureUnit, vTextureCoordinate).rrr * 255.0;\n"
                              "   fNormal = vertexNormal;\n"
                              "}\n\n";
 
@@ -901,17 +890,11 @@ std::string fsDRLightDirectional = gGLVersion + gGLFragmentPrecision + gGLLightD
 
                                    "void main() {\n"
                                        "    vec2 TexCoord = CalcTexCoord();\n"
-#ifdef FILLWAVE_GLES_3_0
-"   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
-"   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-"   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
-"   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
-#else
-    "   vec3 WorldPos = texture2D(uWorldPositionAttachment, TexCoord).xyz;\n"
-    "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-    "   vec3 Normal = texture2D(uNormalAttachment, TexCoord).xyz;\n"
-    "   float specularTexel = texture2D(uSpecularTexelAttachment, TexCoord).x;\n"
-#endif
+    "   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
+    "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+    "   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
+    "   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
+
     "   Normal = normalize(Normal);\n"
 
     "   fColor = vec4(Color, 1.0) * CalcDirectionalLight(WorldPos, Normal, specularTexel);\n"
@@ -991,17 +974,11 @@ std::string fsDRLightPoint = gGLVersion + gGLFragmentPrecision + gGLLightDefinit
 
                              "void main() {\n"
                                  "    vec2 TexCoord = CalcTexCoord();\n"
-#ifdef FILLWAVE_GLES_3_0
-"   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
-"   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-"   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
-"   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
-#else
-    "   vec3 WorldPos = texture2D(uWorldPositionAttachment, TexCoord).xyz;\n"
-    "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-    "   vec3 Normal = texture2D(uNormalAttachment, TexCoord).xyz;\n"
-    "   float specularTexel = texture2D(uSpecularTexelAttachment, TexCoord).x;\n"
-#endif
+
+    "   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
+    "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+    "   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
+    "   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
     "   Normal = normalize(Normal);\n"
 
     "   fColor = vec4(Color, 1.0) * CalcPointLight(WorldPos, Normal, specularTexel);\n"
@@ -1097,17 +1074,11 @@ std::string fsDRLightSpot = gGLVersion + gGLFragmentPrecision + gGLLightDefiniti
 
                             "void main() {\n"
                                 "    vec2 TexCoord = CalcTexCoord();\n"
-#ifdef FILLWAVE_GLES_3_0
-"   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
-"   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-"   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
-"   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
-#else
-    "   vec3 WorldPos = texture2D(uWorldPositionAttachment, TexCoord).xyz;\n"
-    "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-    "   vec3 Normal = texture2D(uNormalAttachment, TexCoord).xyz;\n"
-    "   float specularTexel = texture2D(uSpecularTexelAttachment, TexCoord).x;\n"
-#endif
+
+    "   vec3 WorldPos = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
+    "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+    "   vec3 Normal = texture(uNormalAttachment, TexCoord).xyz;\n"
+    "   float specularTexel = texture(uSpecularTexelAttachment, TexCoord).x;\n"
     "   Normal = normalize(Normal);\n"
 
     "   fColor = vec4(Color, 1.0) * CalcSpotLight(WorldPos, Normal, specularTexel);\n"
@@ -1120,13 +1091,8 @@ std::string fsDRDepthless = gGLVersion + gGLFragmentPrecision + +"uniform sample
     "    return gl_FragCoord.xy / uScreenSize;\n"
     "}\n" + gGLColorOutDefinition + "void main() {\n"
                                 "   vec2 TexCoord = CalcTexCoord();\n"
-#ifdef FILLWAVE_GLES_3_0
-                            "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-                            "   vec3 code = texture(uWorldPositionAttachment, TexCoord).xyz;\n"
-#else
-                                "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-                                "   float code = texture2D(uWorldPositionAttachment, TexCoord).z;\n"
-#endif
+                                "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
+                                "   float code = texture(uWorldPositionAttachment, TexCoord).z;\n"
                                 //fsSkyboxDR
                                 "   if(code == vec3(1.0,1.0," + gGLCodeZeroDepth + ")) {\n"
                                 "      fColor = vec4(Color, 1.0);\n"
@@ -1142,11 +1108,7 @@ std::string fsDRAmbient = gGLVersion + gGLFragmentPrecision + +"uniform sampler2
     "}\n" + gGLColorOutDefinition + "uniform vec3 uAmbient;"
                               "void main() {\n"
                               "   vec2 TexCoord = CalcTexCoord();\n"
-#ifdef FILLWAVE_GLES_3_0
                               "   vec3 Color = texture(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-#else
-                              "   vec3 Color = texture2D(uDiffuseTexelAttachment, TexCoord).xyz;\n"
-#endif
                               "   fColor = vec4(Color * uAmbient, 1.0);\n"
                               "}\n";
 
@@ -1164,11 +1126,8 @@ const std::string fsAOColor = gGLVersion + gGLFragmentPrecision + "in vec2 vText
                                   "uniform vec3 uRandomVectors[FILLWAVE_RANDOM_VECTORS_SIZE];\n"
 
                                   "void main() {\n"
-#ifdef FILLWAVE_GLES_3_0
+
                                   "   vec3 texelPosition = texture(uPositionMap, vTextureCoordinate).xyz;\n"
-#else
-                                  "   vec3 texelPosition = texture2D(uPositionMap, vTextureCoordinate).xyz;\n"
-#endif
 
                                   "   float AO = 0.0;\n"
 
@@ -1178,13 +1137,7 @@ const std::string fsAOColor = gGLVersion + gGLFragmentPrecision + "in vec2 vText
                                   "      offset = uP * offset;\n"
                                   "      offset.xy /= offset.w;\n"
                                   "      offset.xy = offset.xy * 0.5 + vec2(0.5);\n"
-
-#ifdef FILLWAVE_GLES_3_0
                                   "      float sampleDepth = texture(uPositionMap, offset.xy).b;\n"
-#else
-                                  "      float sampleDepth = texture2D(uPositionMap, offset.xy).b;\n"
-#endif
-
                                   "      if (abs(texelPosition.z - sampleDepth) < uSampleRadius) {\n"
                                   "         AO += step(sampleDepth,samplePos.z);\n"
                                   "      }\n"
@@ -1210,11 +1163,7 @@ const std::string fsStartup = gGLVersion + gGLFragmentPrecision + "#define MAX_I
 
     "   vec2 coordinates = vec2((vPosition.x*(uScreenFactor) + 1.0) /2.0, (vPosition.y*(uScreenFactor)+1.0)/2.0);\n"
 
-#ifdef FILLWAVE_GLES_3_0
     "   vec4 texel = texture(uPostProcessingSampler, coordinates);\n"
-#else
-    "   vec4 texel = texture2D(uPostProcessingSampler, coordinates);\n"
-#endif
 
     /* Blur */
 
