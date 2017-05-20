@@ -17,61 +17,30 @@
 
 namespace scene {
 
+template <class T>
+std::function<std::shared_ptr<scene::AScene>(int, char **)> factoryEntry()
+{
+  return [](int argc_, char **argv_) {
+    return std::make_shared<T>(argc_, argv_);
+  };
+}
+
 ScensFactory::ScensFactory(int argc, char **argv)
     : mArgc(argc), mArgv(argv) {
-  mScens["Hello World"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::TextScene>(argc_, argv_);
-  };
-  mScens["Animation"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::AnimationScene>(argc_, argv_);
-
-  };
-  mScens["Specular lights"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::FullModelScene>(argc_, argv_);
-
-  };
-  mScens["Callbacks"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::CallbacksScene>(argc_, argv_);
-
-  };
-  mScens["Cursor"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::CursorScene>(argc_, argv_);
-
-  };
-  mScens["Dynamic texture"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::DynamicTextureScene>(argc_, argv_);
-
-  };
-  mScens["Picking"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::PickingScene>(argc_, argv_);
-
-  };
-  mScens["Effects"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::EffectsScene>(argc_, argv_);
-
-  };
-  mScens["Hud"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::HudScene>(argc_, argv_);
-
-  };
-  mScens["Ortographic projection"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::OrtpgraphicProjectionScene>(argc_, argv_);
-
-  };
-  mScens["Particles"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::ParticlesScene>(argc_, argv_);
-
-  };
-  mScens["Post processing"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::PostProcessingScene>(argc_, argv_);
-
-  };
-  mScens["Shadows"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::ShadowScene>(argc_, argv_);
-  };
-  mScens["Skybox"] = [](int argc_, char **argv_) {
-    return std::make_shared<scene::SkyboxScene>(argc_, argv_);
-  };
+  mScens["Hello World"] = factoryEntry<scene::TextScene>();
+  mScens["Animation"] = factoryEntry<scene::AnimationScene>();
+  mScens["Specular lights"] = factoryEntry<scene::FullModelScene>();
+  mScens["Callbacks"] = factoryEntry<scene::CallbacksScene>();
+  mScens["Cursor"] = factoryEntry<scene::CursorScene>();
+  mScens["Dynamic texture"] = factoryEntry<scene::DynamicTextureScene>();
+  mScens["Picking"] = factoryEntry<scene::PickingScene>();
+  mScens["Effects"] = factoryEntry<scene::EffectsScene>();
+  mScens["Hud"] = factoryEntry<scene::HudScene>();
+  mScens["Ortographic projection"] = factoryEntry<scene::OrtpgraphicProjectionScene>();
+  mScens["Particles"] = factoryEntry<scene::ParticlesScene>();
+  mScens["Post processing"] = factoryEntry<scene::PostProcessingScene>();
+  mScens["Shadows"] = factoryEntry<scene::ShadowScene>();
+  mScens["Skybox"] = factoryEntry<scene::SkyboxScene>();
 }
 
 std::shared_ptr<scene::AScene> ScensFactory::createScen(QString name) {
