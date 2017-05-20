@@ -22,8 +22,8 @@ SliderWidgetFactory::create(QVector<std::pair<QString, QString>> &parametersVect
   slider->setObjectName(objectName->second);
   slider->setMaximumWidth(maxWidth->second.toInt());
   slider->setAccessibleName(accessibleName->second);
-  common::MenuWidgetTranslator *sliderTranslator = new common::MenuWidgetTranslator(slider);
-  QObject::connect(slider, &QSlider::sliderReleased, sliderTranslator, &common::MenuWidgetTranslator::update);
+  common::translators::MenuWidgetTranslatorStandardValues *sliderTranslator = new common::translators::MenuWidgetTranslatorStandardValues(slider);
+  QObject::connect(slider, &QSlider::sliderReleased, sliderTranslator, &common::translators::MenuWidgetTranslatorStandardValues::update);
   scene->addTranslator(sliderTranslator);
   return slider;
 }

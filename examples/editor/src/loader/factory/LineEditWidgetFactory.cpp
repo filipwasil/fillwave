@@ -1,6 +1,7 @@
 #include <QLineEdit>
 #include <memory>
 #include "LineEditWidgetFactory.h"
+#include "common/translators/MenuWidgetTranslatorLineEdit.h"
 
 namespace loader {
 namespace factory {
@@ -20,8 +21,8 @@ QWidget *LineEditWidgetFactory::create(QVector<std::pair<QString, QString>> &par
   textArea->setText(text->second);
   textArea->setMaximumWidth(maxWidth->second.toInt());
   textArea->setAccessibleName(accessibleName->second);
-  common::MenuWidgetTranslator *textTranslator = new common::MenuWidgetTranslator(textArea);
-  QObject::connect(textArea, &QLineEdit::returnPressed, textTranslator, &common::MenuWidgetTranslator::update);
+  common::translators::IMenuWidgetTranslator *textTranslator = new common::translators::MenuWidgetTranslatorLineEdit(textArea);
+  QObject::connect(textArea, &QLineEdit::returnPressed, textTranslator, &common::translators::IMenuWidgetTranslator::update);
   scene->addTranslator(textTranslator);
   return textArea;
 }

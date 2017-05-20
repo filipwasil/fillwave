@@ -19,7 +19,7 @@ public:
 protected:
   QString getScenePath(QString sceneName);
 
-  void clearLayout(QVBoxLayout *VBLayout);
+  void clearLayout(QLayout *VBLayout);
 
   QList<QWidget *> getMenuWidgetList(QString path) const;
 

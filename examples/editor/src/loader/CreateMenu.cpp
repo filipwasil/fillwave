@@ -79,9 +79,16 @@ QString CreateMenu::getScenePath(QString sceneName) {
   return scenarioPath;
 }
 
-void CreateMenu::clearLayout(QVBoxLayout *VBLayout) {
+void CreateMenu::clearLayout(QLayout *VBLayout) {
   QLayoutItem *child;
-  while ((child = VBLayout->takeAt(0)) != 0) {
+  while (VBLayout->count() != 0) {
+    child = VBLayout->takeAt(0);
+    if (child->layout() != 0) {
+      clearLayout(child->layout());
+    } else if (child->widget() != 0) {
+      delete child->widget();
+    }
+
     delete child;
   }
 }

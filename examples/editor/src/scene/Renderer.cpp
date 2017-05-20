@@ -1,4 +1,3 @@
-#include <scene/sceneImp/TextScene.h>
 #include "Renderer.h"
 #include "scene/sceneImp/TextScene.h"
 #include "scene/ScensFactory.h"
