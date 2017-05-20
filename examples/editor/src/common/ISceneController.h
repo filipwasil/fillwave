@@ -1,7 +1,9 @@
 #pragma once
 
 #include <QWidget>
-#include <common/MenuWidgetTranslator.h>
+#include <QVariant>
+#include <utility>
+#include <common/translators/MenuWidgetTranslatorStandardValues.h>
 #include "scene/AScene.h"
 
 namespace common {
@@ -10,7 +12,7 @@ public:
   virtual ~ISceneController() {
   }
 
-  virtual void addTranslator(MenuWidgetTranslator *translator) = 0;
+  virtual void addTranslator(translators::IMenuWidgetTranslator *translator) = 0;
 
   virtual void deleteTranslators() = 0;
 
@@ -18,7 +20,7 @@ public:
 
 public slots:
 
-  virtual void updateScenField(QWidget *menuElement) = 0;
+  virtual void updateScenField(std::pair<QString, QVariant> menuElement) = 0;
 };
 }
 

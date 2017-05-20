@@ -13,7 +13,10 @@ class AScene : public QObject {
 
 public:
   AScene(int argc, char * const*argv) {
-    mEngine = std::make_shared<flw::Engine>(argc, argv);
+    if (argv != nullptr)
+    {
+      mEngine = std::make_shared<flw::Engine>(argc, argv);
+    }
   }
 
   virtual ~AScene() {

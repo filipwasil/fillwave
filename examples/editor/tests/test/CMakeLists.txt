@@ -12,7 +12,7 @@ set (SOURCESRC
     ${EDITOR_SOURCE_DIR}/src/loader/factory/SliderWidgetFactory.cpp
     ${EDITOR_SOURCE_DIR}/src/loader/factory/DialWidgetFactory.cpp
     ${EDITOR_SOURCE_DIR}/src/loader/factory/LineEditWidgetFactory.cpp
-    ${EDITOR_SOURCE_DIR}/src/common/MenuWidgetTranslator.cpp
+    ${EDITOR_SOURCE_DIR}/src/common/MenuWidgetTranslatorStandardValues.cpp
     )
 
 add_executable (runUnitTestsEditor

@@ -5,8 +5,7 @@
 
 class SceneMock : public scene::AScene {
 public:
-  MOCK_METHOD1(updateValue, void(const std::pair<QString, QString> &value));
-
+  SceneMock(int argc, char ** argv) : AScene(argc, argv) {}
   MOCK_METHOD0(init, void());
 
   MOCK_METHOD0(perform, void());

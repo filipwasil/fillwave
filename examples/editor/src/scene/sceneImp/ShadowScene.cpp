@@ -9,7 +9,12 @@ namespace scene {
 
 ShadowScene::ShadowScene(int argc, char **argv)
 		: AScene(argc, argv) {
-	mSceneParameters["mText"] = QVariant("HelloWorld");
+	mSceneParameters["mFirstShadow"] = QVariant("0_255_0");
+	mSceneParameters["mSecondShadow"] = QVariant("0_255_0");
+	mSceneParameters["mThirdShadow"] = QVariant("0_255_0");
+	mSceneParameters["mFourthShadow"] = QVariant("0_255_0");
+	mSceneParameters["mFifthtShadow"] = QVariant("0_255_0");
+
 	init();
 }
 

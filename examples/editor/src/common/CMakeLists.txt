@@ -2,8 +2,10 @@ set(SOURCECOMMON
         ${SOURCE}
     ${CMAKE_CURRENT_SOURCE_DIR}/Tools.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/MenuWidgetTranslator.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/SceneController.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorStandardValues.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorLineEdit.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorButtonColor.cpp
         PARENT_SCOPE
         )
 set(HEADERSCOMMON
@@ -11,7 +13,10 @@ set(HEADERSCOMMON
     ${CMAKE_CURRENT_SOURCE_DIR}/Tools.h
     ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ISceneController.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/MenuWidgetTranslator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SceneController.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorStandardValues.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/translators/IMenuWidgetTranslator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorLineEdit.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorButtonColor.h
         PARENT_SCOPE
         )
