@@ -18,7 +18,6 @@ AnimationScene::~AnimationScene() {
 }
 
 void AnimationScene::init() {
-  mEngine = std::make_shared<flw::Engine>(mArgc, mArgv);
   mEngine->setCurrentScene(std::make_unique<Scene>());
   mEngine->getCurrentScene()->setCamera(std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
                                                                             glm::quat(),

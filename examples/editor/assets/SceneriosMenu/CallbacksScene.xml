@@ -3,7 +3,7 @@
     <QLineEdit>
         <accessibleName>Text</accessibleName>
         <objectName>mText</objectName>
-        <defaultText>Animation Scene</defaultText>
+        <defaultText>Callbacks scene</defaultText>
         <maxWidth>150</maxWidth>
     </QLineEdit>
 </Nowy>
