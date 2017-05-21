@@ -53,9 +53,9 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     eCompression compression) {
 
   fLogD("Texture %s loading ...", filePath.c_str());
-  size_t posCheckboard = filePath.find(".checkboard");
-  size_t posColor = filePath.find(".color");
-  size_t posDDS = filePath.find(".dds");
+  const size_t posCheckboard = filePath.find(".checkboard");
+  const size_t posColor = filePath.find(".color");
+  const size_t posDDS = filePath.find(".dds");
   uint8_t r = 0, g = 0, b = 0;
   if (filePath == rootPath) {
     fLogD("Empty texture %s generation and loading ...", filePath.c_str());
@@ -228,13 +228,13 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
 #else /* FILLWAVE_TEXTURE_LOADER_GLI */
   GLint w, h, n;
   GLubyte *content = stbi_load(filePath.c_str(), &w, &h, &n, getBytesPerPixel(format));
-  if (content == NULL) { //xxx NULL, not nullptr because the stb library uses NULL
+  if (NULL == content) { //xxx NULL, not nullptr because the stb library uses NULL
     FILE *f;
     auto errorNo = fopen_s(&f, filePath.c_str(), "rb");
     if (errorNo) {
-     fLogE("Texture %s not found", filePath.c_str());
+      fLogE("Texture %s not found", filePath.c_str());
     } else {
-     fLogE("Texture %s found but not supported ", filePath.c_str());
+      fLogE("Texture %s found but not supported ", filePath.c_str());
       fclose(f);
     }
     return nullptr;
@@ -270,13 +270,13 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
   switch (flip) {
     case eFlip::eVertical:
 #pragma omp parallel for schedule(guided) num_threads(2)
-      for (int row = 0; row < h / 2; row++) {
-        for (int column = 0; column < w; column++) {
-          int pixelOffset1 = row * w * n + column * n;
-          int pixelOffset2 = (h - row - 1) * w * n + column * n;
-          for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-            int exchangeIndex1 = pixelOffset1 + byteInPixel;
-            int exchangeIndex2 = pixelOffset2 + byteInPixel;
+      for (int row = 0; row < h / 2; ++row) {
+        for (int column = 0; column < w; ++column) {
+          const int pixelOffset1 = row * w * n + column * n;
+          const int pixelOffset2 = (h - row - 1) * w * n + column * n;
+          for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
+            const int exchangeIndex1 = pixelOffset1 + byteInPixel;
+            const int exchangeIndex2 = pixelOffset2 + byteInPixel;
             file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
             file->mData[exchangeIndex2] ^= file->mData[exchangeIndex1];
             file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
@@ -287,13 +287,13 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
 
     case eFlip::eHorizontal_vertical:
 #pragma omp parallel for schedule(guided) num_threads(2)
-      for (int row = 0; row < h; row++) {
-        for (int column = 0; column < w / 2; column++) {
-          int pixelOffset1 = row * w * n + column * n;
-          int pixelOffset2 = row * w * n + (w - column - 1) * n;
-          for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-            int exchangeIndex1 = pixelOffset1 + byteInPixel;
-            int exchangeIndex2 = pixelOffset2 + byteInPixel;
+      for (int row = 0; row < h; ++row) {
+        for (int column = 0; column < w / 2; ++column) {
+          const int pixelOffset1 = row * w * n + column * n;
+          const int pixelOffset2 = row * w * n + (w - column - 1) * n;
+          for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
+            const int exchangeIndex1 = pixelOffset1 + byteInPixel;
+            const int exchangeIndex2 = pixelOffset2 + byteInPixel;
             file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
             file->mData[exchangeIndex2] ^= file->mData[exchangeIndex1];
             file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
@@ -304,13 +304,13 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
 
     case eFlip::eHorizontal:
 #pragma omp parallel for schedule(guided) num_threads(2)
-      for (int row = 0; row < h; row++) {
-        for (int column = 0; column < w / 2; column++) {
-          int pixelOffset1 = row * w * n + column * n;
-          int pixelOffset2 = row * w * n + (w - column - 1) * n;
-          for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-            int exchangeIndex1 = pixelOffset1 + byteInPixel;
-            int exchangeIndex2 = pixelOffset2 + byteInPixel;
+      for (int row = 0; row < h; ++row) {
+        for (int column = 0; column < w / 2; ++column) {
+          const int pixelOffset1 = row * w * n + column * n;
+          const int pixelOffset2 = row * w * n + (w - column - 1) * n;
+          for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
+            const int exchangeIndex1 = pixelOffset1 + byteInPixel;
+            const int exchangeIndex2 = pixelOffset2 + byteInPixel;
             file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
             file->mData[exchangeIndex2] ^= file->mData[exchangeIndex1];
             file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
@@ -318,13 +318,13 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
         }
       }
 #pragma omp parallel for schedule(guided) num_threads(2)
-      for (int row = 0; row < h / 2; row++) {
-        for (int column = 0; column < w; column++) {
-          int pixelOffset1 = row * w * n + column * n;
-          int pixelOffset2 = (h - row - 1) * w * n + column * n;
-          for (int byteInPixel = 0; byteInPixel < n; byteInPixel++) {
-            int exchangeIndex1 = pixelOffset1 + byteInPixel;
-            int exchangeIndex2 = pixelOffset2 + byteInPixel;
+      for (int row = 0; row < h / 2; ++row) {
+        for (int column = 0; column < w; ++column) {
+          const int pixelOffset1 = row * w * n + column * n;
+          const int pixelOffset2 = (h - row - 1) * w * n + column * n;
+          for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
+            const int exchangeIndex1 = pixelOffset1 + byteInPixel;
+            const int exchangeIndex2 = pixelOffset2 + byteInPixel;
             file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
             file->mData[exchangeIndex2] ^= file->mData[exchangeIndex1];
             file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
@@ -369,8 +369,8 @@ flc::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
     GLubyte blue,
     GLenum format) {
 
-  GLint bytesPerPixel = getBytesPerPixel(format);
-  GLint size = bytesPerPixel * width * height * sizeof(GLubyte);
+  const GLint bytesPerPixel = getBytesPerPixel(format);
+  const GLint size = bytesPerPixel * width * height * sizeof(GLubyte);
   GLubyte *content = new GLubyte[size];
 
   GLint i, r = 0, g = 0, b = 0;
@@ -416,9 +416,8 @@ flc::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
     GLubyte green,
     GLubyte blue,
     GLenum format) {
-  GLint bytesPerPixel = getBytesPerPixel(format);
-
-  int size = bytesPerPixel * width * height * sizeof(GLubyte);
+  const GLint bytesPerPixel = getBytesPerPixel(format);
+  const int size = bytesPerPixel * width * height * sizeof(GLubyte);
   GLubyte *content = new GLubyte[size];
 
   for (int i = 0; i < size; i += bytesPerPixel) {
@@ -477,63 +476,44 @@ inline GLenum TextureLoader::getComporession(eCompression compression) {
   switch (compression) {
     case eCompression::eNone:
       return GL_NONE;
-      break;
     case eCompression::eGeneric_r:
       return GL_COMPRESSED_RED;
-      break;
     case eCompression::eGeneric_rg:
       return GL_COMPRESSED_RG;
-      break;
     case eCompression::eGeneric_rgb:
       return GL_COMPRESSED_RGB;
-      break;
     case eCompression::eGeneric_rgba:
       return GL_COMPRESSED_RGBA;
-      break;
     case eCompression::eGeneric_srgb:
       return GL_COMPRESSED_SRGB;
-      break;
     case eCompression::eGeneric_srgba:
       return GL_COMPRESSED_SRGB_ALPHA;
-      break;
 #if defined(__APPLE__)
 #else
     case eCompression::eLatc_luminance:
       return GL_COMPRESSED_LUMINANCE_LATC1_EXT;
-      break;
     case eCompression::eLatc_luminance_signed:
       return GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT;
-      break;
     case eCompression::eLatc_luminance_alpha:
       return GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT;
-      break;
     case eCompression::eLatc_luminance_alpha_signed:
       return GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_EXT;
-      break;
     case eCompression::eRgtc1_r:
       return GL_COMPRESSED_RED_RGTC1_EXT;
-      break;
     case eCompression::eRgtc1_r_signed:
       return GL_COMPRESSED_SIGNED_RED_RGTC1_EXT;
-      break;
     case eCompression::eRgtc1_rg:
       return GL_COMPRESSED_RED_GREEN_RGTC2_EXT;
-      break;
     case eCompression::eRgtc1_rg_signed:
       return GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT;
-      break;
     case eCompression::eS3tc_dxt1_rgb:
       return GL_COMPRESSED_RGB_S3TC_DXT1_EXT;
-      break;
     case eCompression::eS3tc_dxt1_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
-      break;
     case eCompression::eS3tc_dxt3_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT3_EXT;
-      break;
     case eCompression::eS3tc_dxt5_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
-      break;
 #endif /* __APPLE__ */
     default:
       break;
