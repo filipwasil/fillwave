@@ -12,16 +12,16 @@ To build this application you must go to scripts folder in main fillwave directo
 to build on linux you must run script: <br />
 
 ```
-build_windows_msvc_InterActiveDemo.bat PATH_TO_QT
+build_windows_msvc_editor.bat PATH_TO_QT
 ```
 
 You must provide path to QT for example:
 
 ```
-build_windows_msvc_InterActiveDemo.bat C:/Qt/5.8/msvc2015_64
+build_windows_msvc_editor.bat C:/Qt/5.8/msvc2015_64
 ```
-After scripts ends  you should go to build_InteractiveDemo/Debug folder. You should find there 
-fillwaveInteractiveDemo.exe. <br />
+After scripts ends  you should go to build_editor/Debug folder. You should find there 
+fillwaveEditor.exe. <br />
 Occasionally, ucrtbased.dll can be missing, in that case you must find and copy to Debug folder this .dll from Program 
 Files (x86)\Windows Kits, 
 You must choose correct version for example for windows 10 and x64 path is: <br /> 
