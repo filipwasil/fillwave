@@ -2,6 +2,7 @@
 
 #include <fillwave/Fillwave.h>
 #include <QGLWidget>
+#include <chrono>
 #include <memory>
 #include <QMap>
 #include <QVariant>
@@ -30,5 +31,6 @@ protected:
 private:
   int mArgc;
   char **mArgv;
+  decltype(std::chrono::high_resolution_clock::now()) mTime;
   std::shared_ptr<scene::AScene> mScene;
 };

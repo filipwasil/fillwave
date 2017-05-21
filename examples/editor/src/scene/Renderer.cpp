@@ -7,6 +7,9 @@ using namespace flw;
 using namespace flw::flf;
 using namespace std;
 
+using Time = std::chrono::high_resolution_clock;
+using ms = std::chrono::milliseconds;
+
 Renderer::Renderer(int argc, char *argv[], QWidget *parent)
     : QGLWidget{parent}, mArgc{argc}, mArgv{argv} {
   QGLFormat glFormat;
@@ -15,6 +18,7 @@ Renderer::Renderer(int argc, char *argv[], QWidget *parent)
   setFormat(glFormat);
   this->makeCurrent();
   mScene = std::make_shared<scene::TextScene>(mArgc, mArgv);
+  mTime = Time::now();
 }
 
 Renderer::~Renderer() {
@@ -25,7 +29,9 @@ void Renderer::initializeGL() {
 }
 
 void Renderer::paintGL() {
-  mScene->getEngine()->draw(1.0f / 600.0f);
+  auto currentTime = Time::now();
+  mScene->getEngine()->draw(std::chrono::duration<float>(currentTime - mTime).count());
+  mTime = currentTime;
   update();
 }
 
