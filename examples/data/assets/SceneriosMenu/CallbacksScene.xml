@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Nowy>
+    <QLineEdit>
+        <accessibleName>Text</accessibleName>
+        <objectName>mText</objectName>
+        <defaultText>Callbacks scene</defaultText>
+        <maxWidth>150</maxWidth>
+    </QLineEdit>
+</Nowy>
