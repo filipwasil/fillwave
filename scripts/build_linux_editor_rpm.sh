@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-cd ../InteractiveDemo
+cd ../examples/editor
 rm -rf bin
 mkdir bin
 cp assets/fonts/* bin/
 cd bin
-cmake .. -DTESTSTATUS=FALSE -DPKGSTATUS=ON -DPKGTYPE=DEB
+cmake .. -DTESTSTATUS=FALSE -DPKGSTATUS=ON -DPKGTYPE=RPM
 make -j3
 cpack -c Relase

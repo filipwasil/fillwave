@@ -12,7 +12,7 @@ To build this application you must go to scripts folder in main fillwave directo
 to build on linux you must run script: <br />
 
 ```
-build_windows_msvc_InterActiveDemo.bat PATH_TO_QT
+build_windows_msvc_editor.bat PATH_TO_QT
 ```
 
 You must provide path to QT for example:

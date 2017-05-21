@@ -1,4 +1,4 @@
-project(fillwaveInteractiveDemo)
+project(fillwaveEditor)
 cmake_minimum_required(VERSION 2.8.11)
 set(VERSION "1.0.1")
 set(CMAKE_AUTOMOC ON)
