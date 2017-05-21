@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <QHash>
+#include <QMap>
 #include <functional>
 #include "IMenuWidgetFactory.h"
 #include "common/translators/IMenuWidgetTranslator.h"
@@ -14,7 +14,7 @@ public:
   QWidget *create(QVector<std::pair<QString, QString>> &parametersVector,
       std::shared_ptr<common::ISceneController> scene);
 private:
-  QHash<QString, std::function<common::translators::IMenuWidgetTranslator*(QWidget* widget, QString value)>>
+  QMap<QString, std::function<common::translators::IMenuWidgetTranslator*(QWidget* widget, QString value)>>
       mTranslatorTypes;
 };
 }

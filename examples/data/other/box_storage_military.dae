@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="utf-8"?>
+<COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
+  <asset>
+    <contributor>
+      <author>Blender User</author>
+      <authoring_tool>Blender 2.75.0 commit date:2015-07-07, commit time:14:56, hash:c27589e</authoring_tool>
+    </contributor>
+    <created>2015-07-23T12:59:39</created>
+    <modified>2015-07-23T12:59:39</modified>
+    <unit name="meter" meter="1"/>
+    <up_axis>Z_UP</up_axis>
+  </asset>
+  <library_cameras>
+    <camera id="Camera-camera" name="Camera">
+      <optics>
+        <technique_common>
+          <perspective>
+            <xfov sid="xfov">49.13434</xfov>
+            <aspect_ratio>1.777778</aspect_ratio>
+            <znear sid="znear">0.1</znear>
+            <zfar sid="zfar">100</zfar>
+          </perspective>
+        </technique_common>
+      </optics>
+      <extra>
+        <technique profile="blender">
+          <YF_dofdist>0</YF_dofdist>
+          <shiftx>0</shiftx>
+          <shifty>0</shifty>
+        </technique>
+      </extra>
+    </camera>
+  </library_cameras>
+  <library_lights>
+    <light id="Lamp-light" name="Lamp">
+      <technique_common>
+        <point>
+          <color sid="color">2 2 2</color>
+          <constant_attenuation>1</constant_attenuation>
+          <linear_attenuation>0</linear_attenuation>
+          <quadratic_attenuation>0.00111109</quadratic_attenuation>
+        </point>
+      </technique_common>
+      <extra>
+        <technique profile="blender">
+          <adapt_thresh>0.000999987</adapt_thresh>
+          <area_shape>0</area_shape>
+          <area_size>1</area_size>
+          <area_sizey>1</area_sizey>
+          <area_sizez>1</area_sizez>
+          <atm_distance_factor>1</atm_distance_factor>
+          <atm_extinction_factor>1</atm_extinction_factor>
+          <atm_turbidity>2</atm_turbidity>
+          <att1>0</att1>
+          <att2>1</att2>
+          <backscattered_light>1</backscattered_light>
+          <bias>1</bias>
+          <blue>1</blue>
+          <buffers>1</buffers>
+          <bufflag>0</bufflag>
+          <bufsize>2880</bufsize>
+          <buftype>2</buftype>
+          <clipend>30.002</clipend>
+          <clipsta>1.000799</clipsta>
+          <compressthresh>0.04999995</compressthresh>
+          <dist sid="blender_dist">29.99998</dist>
+          <energy sid="blender_energy">2</energy>
+          <falloff_type>2</falloff_type>
+          <filtertype>0</filtertype>
+          <flag>0</flag>
+          <gamma sid="blender_gamma">1</gamma>
+          <green>1</green>
+          <halo_intensity sid="blnder_halo_intensity">1</halo_intensity>
+          <horizon_brightness>1</horizon_brightness>
+          <mode>8192</mode>
+          <ray_samp>1</ray_samp>
+          <ray_samp_method>1</ray_samp_method>
+          <ray_samp_type>0</ray_samp_type>
+          <ray_sampy>1</ray_sampy>
+          <ray_sampz>1</ray_sampz>
+          <red>1</red>
+          <samp>3</samp>
+          <shadhalostep>0</shadhalostep>
+          <shadow_b sid="blender_shadow_b">0</shadow_b>
+          <shadow_g sid="blender_shadow_g">0</shadow_g>
+          <shadow_r sid="blender_shadow_r">0</shadow_r>
+          <sky_colorspace>0</sky_colorspace>
+          <sky_exposure>1</sky_exposure>
+          <skyblendfac>1</skyblendfac>
+          <skyblendtype>1</skyblendtype>
+          <soft>3</soft>
+          <spotblend>0.15</spotblend>
+          <spotsize>75</spotsize>
+          <spread>1</spread>
+          <sun_brightness>1</sun_brightness>
+          <sun_effect_type>0</sun_effect_type>
+          <sun_intensity>1</sun_intensity>
+          <sun_size>1</sun_size>
+          <type>0</type>
+        </technique>
+      </extra>
+    </light>
+  </library_lights>
+  <library_images>
+    <image id="box_storage_mil02_nor" name="box_storage_mil02_nor">
+      <init_from>box_storage_mil02_nor.png</init_from>
+    </image>
+    <image id="box_storage_mil02_spe" name="box_storage_mil02_spe">
+      <init_from>box_storage_mil02_spe.png</init_from>
+    </image>
+    <image id="box_storage_mil02_dif" name="box_storage_mil02_dif">
+      <init_from>box_storage_mil02_dif.png</init_from>
+    </image>
+  </library_images>
+  <library_effects>
+    <effect id="box_storage_mil02-effect">
+      <profile_COMMON>
+        <newparam sid="box_storage_mil02_dif-surface">
+          <surface type="2D">
+            <init_from>box_storage_mil02_dif</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="box_storage_mil02_dif-sampler">
+          <sampler2D>
+            <source>box_storage_mil02_dif-surface</source>
+          </sampler2D>
+        </newparam>
+        <newparam sid="box_storage_mil02_spe-surface">
+          <surface type="2D">
+            <init_from>box_storage_mil02_spe</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="box_storage_mil02_spe-sampler">
+          <sampler2D>
+            <source>box_storage_mil02_spe-surface</source>
+          </sampler2D>
+        </newparam>
+        <newparam sid="box_storage_mil02_nor-surface">
+          <surface type="2D">
+            <init_from>box_storage_mil02_nor</init_from>
+          </surface>
+        </newparam>
+        <newparam sid="box_storage_mil02_nor-sampler">
+          <sampler2D>
+            <source>box_storage_mil02_nor-surface</source>
+          </sampler2D>
+        </newparam>
+        <technique sid="common">
+          <lambert>
+            <emission>
+              <color sid="emission">0 0 0 1</color>
+            </emission>
+            <ambient>
+              <color sid="ambient">0 0 0 1</color>
+            </ambient>
+            <diffuse>
+              <texture texture="box_storage_mil02_dif-sampler" texcoord="UVTex"/>
+            </diffuse>
+            <specular>
+              <texture texture="box_storage_mil02_spe-sampler" texcoord="UVTex"/>
+            </specular>
+            <index_of_refraction>
+              <float sid="index_of_refraction">1</float>
+            </index_of_refraction>
+          </lambert>
+          <extra>
+            <technique profile="FCOLLADA">
+              <bump>
+                <texture texture="box_storage_mil02_nor-sampler" texcoord="UVTex"/>
+              </bump>
+            </technique>
+          </extra>
+        </technique>
+      </profile_COMMON>
+    </effect>
+  </library_effects>
+  <library_materials>
+    <material id="box_storage_mil02-material" name="box_storage_mil02">
+      <instance_effect url="#box_storage_mil02-effect"/>
+    </material>
+  </library_materials>
+  <library_geometries>
+    <geometry id="box_storage_mil02-mesh" name="box_storage_mil02">
+      <mesh>
+        <source id="box_storage_mil02-mesh-positions">
+          <float_array id="box_storage_mil02-mesh-positions-array" count="372">-0.2321131 0.2316724 0.004997253 0.2352026 0.2316724 0.004997253 -0.2369956 -0.2376842 0.4598757 0.2369998 0.2376842 0.4598757 0.2369998 -0.2376841 0.4598757 0.2352027 -0.2356433 0.004997253 -0.2321131 -0.2356433 0.004997253 -0.2369957 0.2376841 0.4598757 0.2369918 0.2376841 9.47118e-5 0.2369996 -0.2376841 9.47118e-5 -0.2369998 -0.2376841 9.47118e-5 -0.2369998 0.2376841 9.47118e-5 -0.2432689 -0.2439714 0.1463394 -0.2432689 0.2439714 0.1463394 0.2432687 -0.2439714 0.1463394 0.2432607 0.2439714 0.1463394 -0.2432689 -0.2439714 0.3283649 -0.2432689 0.2439714 0.3283649 0.2432687 -0.2439714 0.3283649 0.2432607 0.2439714 0.328365 -0.2432689 -0.2439714 0.1169303 -0.2432689 0.2439714 0.1169304 0.2432687 -0.2439714 0.1169303 0.2432607 0.2439714 0.1169304 -0.2432689 -0.2439714 0.3578825 -0.2432689 0.2439714 0.3578826 0.2432687 -0.2439714 0.3578826 0.2432607 0.2439714 0.3578827 0.2432607 0.2439714 0.3578827 0.2432687 -0.2439714 0.3578826 -0.2432689 0.2439714 0.3578826 -0.2432689 -0.2439714 0.3578825 0.2432607 0.2439714 0.1169304 0.2432687 -0.2439714 0.1169303 -0.2432689 0.2439714 0.1169304 -0.2432689 -0.2439714 0.1169303 0.2432607 0.2439714 0.328365 0.2432687 -0.2439714 0.3283649 -0.2432689 0.2439714 0.3283649 -0.2432689 -0.2439714 0.3283649 0.2432607 0.2439714 0.1463394 0.2432687 -0.2439714 0.1463394 -0.2432689 0.2439714 0.1463394 -0.2432689 -0.2439714 0.1463394 -0.2369998 0.2376841 0.1491421 0.2369918 0.2376841 0.1491421 0.2369996 -0.2376841 0.1491421 -0.2369998 -0.2376841 0.149142 -0.2369998 0.2376841 0.3254085 0.2369918 0.2376841 0.3254086 0.2369996 -0.2376841 0.3254085 -0.2369998 -0.2376841 0.3254085 -0.2369998 0.2376841 0.1141276 0.2369918 0.2376841 0.1141276 0.2369996 -0.2376841 0.1141276 -0.2369998 -0.2376841 0.1141276 -0.2369998 0.2376841 0.3599219 0.2369918 0.2376841 0.3599219 0.2369996 -0.2376841 0.3599218 -0.2369998 -0.2376841 0.3599218 -0.2369998 0.2376841 0.1491421 0.2369918 0.2376841 0.1491421 -0.2369998 0.2376841 0.3254085 0.2369918 0.2376841 0.3254086 -0.2369998 0.2376841 0.1141276 0.2369918 0.2376841 0.1141276 -0.2369998 0.2376841 0.3599219 0.2369918 0.2376841 0.3599219 -0.2369998 0.2376841 9.47118e-5 0.2369918 0.2376841 9.47118e-5 -0.2369998 0.2376841 0.4598757 0.2369918 0.2376841 0.4598757 0.2369918 0.2376841 0.1491421 0.2369996 -0.2376841 0.1491421 0.2369918 0.2376841 0.3254086 0.2369996 -0.2376841 0.3254085 0.2369918 0.2376841 0.1141276 0.2369996 -0.2376841 0.1141276 0.2369918 0.2376841 0.3599219 0.2369996 -0.2376841 0.3599218 0.2369996 -0.2376841 9.47118e-5 0.2369918 0.2376841 9.47118e-5 0.2369918 0.2376841 0.4598757 0.2369996 -0.2376841 0.4598757 0.2369996 -0.2376841 0.1491421 -0.2369998 -0.2376841 0.149142 0.2369996 -0.2376841 0.3254085 -0.2369998 -0.2376841 0.3254085 0.2369996 -0.2376841 0.1141276 -0.2369998 -0.2376841 0.1141276 0.2369996 -0.2376841 0.3599218 -0.2369998 -0.2376841 0.3599218 -0.2369998 -0.2376841 9.47118e-5 0.2369996 -0.2376841 9.47118e-5 -0.2369998 -0.2376841 0.4598757 0.2369996 -0.2376841 0.4598757 -0.2369998 0.2376841 0.1491421 -0.2369998 -0.2376841 0.149142 -0.2369998 0.2376841 0.3254085 -0.2369998 -0.2376841 0.3254085 -0.2369998 0.2376841 0.1141276 -0.2369998 -0.2376841 0.1141276 -0.2369998 0.2376841 0.3599219 -0.2369998 -0.2376841 0.3599218 -0.2369998 0.2376841 9.47118e-5 -0.2369998 -0.2376841 9.47118e-5 -0.2369998 0.2376841 0.4598757 -0.2369998 -0.2376841 0.4598757 0.2432607 0.2439714 0.3578827 0.2432687 -0.2439714 0.3578826 -0.2432689 0.2439714 0.3578826 -0.2432689 -0.2439714 0.3578825 0.2432607 0.2439714 0.1169304 0.2432687 -0.2439714 0.1169303 -0.2432689 0.2439714 0.1169304 -0.2432689 -0.2439714 0.1169303 0.2432607 0.2439714 0.328365 0.2432687 -0.2439714 0.3283649 -0.2432689 0.2439714 0.3283649 -0.2432689 -0.2439714 0.3283649 0.2432607 0.2439714 0.1463394 0.2432687 -0.2439714 0.1463394 -0.2432689 0.2439714 0.1463394 -0.2432689 -0.2439714 0.1463394</float_array>
+          <technique_common>
+            <accessor source="#box_storage_mil02-mesh-positions-array" count="124" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="box_storage_mil02-mesh-normals">
+          <float_array id="box_storage_mil02-mesh-normals-array" count="183">0.5746473 -0.5737318 0.58362 -0.5767904 -0.5733723 0.5818567 -0.7049916 -0.7091117 0.01214659 0.7064562 -0.7075549 0.01690757 0.7084685 0.7056608 0.01074266 0.574189 0.5765085 0.5813305 -0.7069723 0.7072164 0.005951166 -0.5763309 0.5761477 0.579566 0 0 -1 0 -1 0 0 1 0 0 -1 -5.0628e-7 0 1 -5.06288e-7 -1.48635e-7 0.3085259 0.9512159 0 -0.3085231 0.9512169 0.3093277 4.84214e-6 0.9509556 -0.3093315 -1.68685e-7 0.9509543 0 0.4071568 -0.9133583 0 -0.4071548 -0.9133592 0.4081411 6.74022e-6 -0.9129189 -0.4081391 0 -0.9129198 1.3776e-7 0.4255252 -0.9049466 0 -0.4255241 -0.9049472 0.4265398 7.20782e-6 -0.9044689 -0.4265313 0 -0.9044729 0 0.4071565 0.9133585 0 -0.407153 0.91336 0.4081392 6.57253e-6 0.9129198 -0.4081373 0 0.9129206 0 1 -1.44635e-7 0 1 -1.49514e-7 1 1.63748e-5 0 1 1.62873e-5 -1.30674e-7 1 1.6373e-5 -1.4908e-7 0 -1 1.49511e-7 -1 0 0 1 1.64063e-5 5.04822e-7 1 1.6355e-5 0 -1.44803e-7 0.3085239 0.9512166 0 -0.308527 0.9512157 0.3093398 4.79213e-6 0.9509515 -0.3093265 -1.85739e-7 0.9509559 0 0.4071546 -0.9133592 0 -0.407157 -0.9133582 0.4081429 6.74023e-6 -0.9129181 -0.4081357 0 -0.9129213 1.41404e-7 0.4255247 -0.9049468 0 -0.4255289 -0.904945 0.426537 7.19419e-6 -0.9044702 -0.4265342 0 -0.9044715 0 0.4071559 0.9133588 0 -0.4071561 0.9133586 0.4081396 6.59758e-6 0.9129196 -0.4081339 0 0.9129222 1 1.63609e-5 0 1 1.64247e-5 -1.30674e-7 1 1.64646e-5 1.49081e-7 -1 0 0 1 1.63595e-5 5.04822e-7 -1 0 0 1 1.6355e-5 0</float_array>
+          <technique_common>
+            <accessor source="#box_storage_mil02-mesh-normals-array" count="61" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="box_storage_mil02-mesh-map-0">
+          <float_array id="box_storage_mil02-mesh-map-0-array" count="504">0.7312638 0.7352128 0.7312639 0.6283733 0.8417343 0.6283733 0.7312639 0.2974021 0.8417344 0.2974021 0.8417343 0.4042415 0.7312639 0.4079748 0.8417343 0.4079748 0.8417343 0.5148143 0.7312639 0.6250135 0.7312639 0.5181741 0.8417343 0.5181741 0.7280147 0.5148143 0.6176763 0.5148143 0.6176763 0.4079748 0.4942823 0.7492384 0.4942823 0.5268828 0.7162017 0.5268828 0.01629197 0.8212564 0.2402489 0.8212564 0.2402489 0.8326623 0.7195581 0.8326623 0.4909258 0.8326623 0.4909257 0.8212564 0.01629197 0.9257967 0.2402489 0.9257967 0.2402489 0.9374619 0.7195581 0.9374051 0.4909258 0.9374051 0.4909257 0.9257967 0.7195581 0.9374049 0.7195581 0.9404102 0.4909258 0.9404102 0.01629197 0.9374619 0.2402489 0.9374618 0.2402489 0.9404101 0.2523999 0.9374049 0.4814816 0.9374049 0.4814816 0.9404101 0.9580839 0.94041 0.7290023 0.9404102 0.7290023 0.9374619 0.7195581 0.8212564 0.4909258 0.8212564 0.4909258 0.8181865 0.01629197 0.8181865 0.2402489 0.8181865 0.2402489 0.8212564 0.2523999 0.8212564 0.2523999 0.8181865 0.4814816 0.8181865 0.9580839 0.8212564 0.7290022 0.8212564 0.7290022 0.8181865 0.7195581 0.9257967 0.4909257 0.9257967 0.4909257 0.9232909 0.01629197 0.9232909 0.2402489 0.9232909 0.2402489 0.9257967 0.2523999 0.9257967 0.2523999 0.9232909 0.4814816 0.9232909 0.9580838 0.9257967 0.7290022 0.9257967 0.7290023 0.9232909 0.7195581 0.8326623 0.7195581 0.8354229 0.4909258 0.8354231 0.01629197 0.8326623 0.2402489 0.8326623 0.2402489 0.8352859 0.2523999 0.8326623 0.4814816 0.8326623 0.4814816 0.8354228 0.9580839 0.8354228 0.7290022 0.8354229 0.7290022 0.8326623 0.7179956 0.9232909 0.4936601 0.9232909 0.4936601 0.8354231 0.7179957 0.8181865 0.4936601 0.8181865 0.4936601 0.7647914 0.7179957 0.9878333 0.4936601 0.9878333 0.4936601 0.9404102 0.2534399 0.9232909 0.2534399 0.8354228 0.4783567 0.8354228 0.2534399 0.7647913 0.4783567 0.7647914 0.4783567 0.8181865 0.2534399 0.9878332 0.2534399 0.9404101 0.4783567 0.9404101 0.01629197 0.835286 0.2402489 0.8352859 0.2402489 0.9232909 0.01629197 0.8181865 0.01629197 0.7647913 0.2402489 0.7647913 0.01629197 0.9404101 0.2402489 0.9404101 0.2402489 0.9878332 0.9553496 0.9232909 0.731346 0.9232909 0.7313459 0.8354229 0.9553496 0.8181865 0.7313459 0.8181865 0.731346 0.7647914 0.9553496 0.9878332 0.731346 0.9878333 0.731346 0.9404102 0.2523999 0.9374049 0.2523999 0.9257967 0.4814816 0.9257967 0.9580838 0.9374617 0.7290022 0.9374619 0.7290023 0.9257967 0.2523999 0.8212564 0.4814816 0.8212564 0.4814816 0.8326623 0.9580839 0.8326623 0.7290022 0.8326623 0.7290022 0.8212564 0.8417343 0.7352128 0.7312638 0.7352128 0.8417343 0.6283733 0.7312639 0.4042415 0.7312639 0.2974021 0.8417343 0.4042415 0.7312639 0.5148143 0.7312639 0.4079748 0.8417343 0.5148143 0.8417343 0.6250135 0.7312639 0.6250135 0.8417343 0.5181741 0.7280147 0.4079748 0.7280147 0.5148143 0.6176763 0.4079748 0.7162017 0.7492384 0.4942823 0.7492384 0.7162017 0.5268828 0.01629197 0.8326623 0.01629197 0.8212564 0.2402489 0.8326623 0.7195581 0.8212564 0.7195581 0.8326623 0.4909257 0.8212564 0.01629197 0.9374619 0.01629197 0.9257967 0.2402489 0.9374619 0.7195581 0.9257967 0.7195581 0.9374051 0.4909257 0.9257967 0.4909258 0.9374051 0.7195581 0.9374049 0.4909258 0.9404102 0.01629197 0.9404101 0.01629197 0.9374619 0.2402489 0.9404101 0.2523999 0.9404101 0.2523999 0.9374049 0.4814816 0.9404101 0.9580838 0.9374617 0.9580839 0.94041 0.7290023 0.9374619 0.7195581 0.8181865 0.7195581 0.8212564 0.4909258 0.8181865 0.01629197 0.8212564 0.01629197 0.8181865 0.2402489 0.8212564 0.4814816 0.8212564 0.2523999 0.8212564 0.4814816 0.8181865 0.9580839 0.8181865 0.9580839 0.8212564 0.7290022 0.8181865 0.7195581 0.9232909 0.7195581 0.9257967 0.4909257 0.9232909 0.01629197 0.9257967 0.01629197 0.9232909 0.2402489 0.9257967 0.4814816 0.9257967 0.2523999 0.9257967 0.4814816 0.9232909 0.9580838 0.9232909 0.9580838 0.9257967 0.7290023 0.9232909 0.4909258 0.8326623 0.7195581 0.8326623 0.4909258 0.8354231 0.01629197 0.835286 0.01629197 0.8326623 0.2402489 0.8352859 0.2523999 0.8354228 0.2523999 0.8326623 0.4814816 0.8354228 0.9580839 0.8326623 0.9580839 0.8354228 0.7290022 0.8326623 0.7179956 0.8354229 0.7179956 0.9232909 0.4936601 0.8354231 0.7179957 0.7647914 0.7179957 0.8181865 0.4936601 0.7647914 0.7179957 0.9404102 0.7179957 0.9878333 0.4936601 0.9404102 0.4783567 0.9232909 0.2534399 0.9232909 0.4783567 0.8354228 0.2534399 0.8181865 0.2534399 0.7647913 0.4783567 0.8181865 0.4783567 0.9878333 0.2534399 0.9878332 0.4783567 0.9404101 0.01629197 0.9232909 0.01629197 0.835286 0.2402489 0.9232909 0.2402489 0.8181865 0.01629197 0.8181865 0.2402489 0.7647913 0.01629197 0.9878332 0.01629197 0.9404101 0.2402489 0.9878332 0.9553496 0.8354228 0.9553496 0.9232909 0.7313459 0.8354229 0.9553496 0.7647913 0.9553496 0.8181865 0.731346 0.7647914 0.9553496 0.94041 0.9553496 0.9878332 0.731346 0.9404102 0.4814816 0.9374049 0.2523999 0.9374049 0.4814816 0.9257967 0.9580838 0.9257967 0.9580838 0.9374617 0.7290023 0.9257967 0.2523999 0.8326623 0.2523999 0.8212564 0.4814816 0.8326623 0.9580839 0.8212564 0.9580839 0.8326623 0.7290022 0.8212564</float_array>
+          <technique_common>
+            <accessor source="#box_storage_mil02-mesh-map-0-array" count="252" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="box_storage_mil02-mesh-vertices">
+          <input semantic="POSITION" source="#box_storage_mil02-mesh-positions"/>
+        </vertices>
+        <polylist material="box_storage_mil02-material" count="84">
+          <input semantic="VERTEX" source="#box_storage_mil02-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#box_storage_mil02-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#box_storage_mil02-mesh-map-0" offset="2" set="0"/>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>0 0 0 1 1 1 3 2 2 0 0 3 7 3 4 2 4 5 6 5 6 2 4 7 4 6 8 1 1 9 5 7 10 4 6 11 0 0 12 6 5 13 5 7 14 8 8 15 9 8 16 10 8 17 20 9 18 22 9 19 14 9 20 13 10 21 15 10 22 23 10 23 16 11 24 18 11 25 26 11 26 25 12 27 27 12 28 19 12 29 56 13 30 57 13 31 28 13 32 59 14 33 31 14 34 29 14 35 58 15 36 29 15 37 28 15 38 56 16 39 30 16 40 31 16 41 52 17 42 34 17 43 32 17 44 54 18 45 33 18 46 35 18 47 54 19 48 53 19 49 32 19 50 55 20 51 35 20 52 34 20 53 48 21 54 38 21 55 36 21 56 50 22 57 37 22 58 39 22 59 50 23 60 49 23 61 36 23 62 51 24 63 39 24 64 38 24 65 44 25 66 45 25 67 40 25 68 47 26 69 43 26 70 41 26 71 46 27 72 41 27 73 40 27 74 44 28 75 42 28 76 43 28 77 62 10 78 63 10 79 61 10 80 64 29 81 65 29 82 69 29 83 70 30 84 71 30 85 67 30 86 75 31 87 73 31 88 72 31 89 80 32 90 81 32 91 76 32 92 83 33 93 79 33 94 78 33 95 85 9 96 84 9 97 86 9 98 89 9 99 92 9 100 93 9 101 91 34 102 90 34 103 95 34 104 99 35 105 98 35 106 96 35 107 101 35 108 100 35 109 104 35 110 107 35 111 106 35 112 102 35 113 109 36 114 117 36 115 116 36 116 111 35 117 110 35 118 118 35 119 113 37 120 112 37 121 120 37 122 123 35 123 122 35 124 114 35 125 7 3 126 0 0 127 3 2 128 6 5 129 0 0 130 2 4 131 5 7 132 6 5 133 4 6 134 3 2 135 1 1 136 4 6 137 1 1 138 0 0 139 5 7 140 11 8 141 8 8 142 10 8 143 12 9 144 20 9 145 14 9 146 21 10 147 13 10 148 23 10 149 24 9 150 16 9 151 26 9 152 17 10 153 25 10 154 19 10 155 30 38 156 56 38 157 28 38 158 58 39 159 59 39 160 29 39 161 57 40 162 58 40 163 28 40 164 59 41 165 56 41 166 31 41 167 53 42 168 52 42 169 32 42 170 55 43 171 54 43 172 35 43 173 33 44 174 54 44 175 32 44 176 52 45 177 55 45 178 34 45 179 49 46 180 48 46 181 36 46 182 51 47 183 50 47 184 39 47 185 37 48 186 50 48 187 36 48 188 48 49 189 51 49 190 38 49 191 42 50 192 44 50 193 40 50 194 46 51 195 47 51 196 41 51 197 45 52 198 46 52 199 40 52 200 47 53 201 44 53 202 43 53 203 60 10 204 62 10 205 61 10 206 68 10 207 64 10 208 69 10 209 66 10 210 70 10 211 67 10 212 74 54 213 75 54 214 72 54 215 77 55 216 80 55 217 76 55 218 82 56 219 83 56 220 78 56 221 87 9 222 85 9 223 86 9 224 88 9 225 89 9 226 93 9 227 94 9 228 91 9 229 95 9 230 97 35 231 99 35 232 96 35 233 105 35 234 101 35 235 104 35 236 103 57 237 107 57 238 102 57 239 108 58 240 109 58 241 116 58 242 119 59 243 111 59 244 118 59 245 121 60 246 113 60 247 120 60 248 115 35 249 123 35 250 114 35 251</p>
+        </polylist>
+      </mesh>
+    </geometry>
+    <geometry id="box_storage_mil02_001-mesh" name="box_storage_mil02.001">
+      <mesh>
+        <source id="box_storage_mil02_001-mesh-positions">
+          <float_array id="box_storage_mil02_001-mesh-positions-array" count="84">-0.2372435 0.2376841 0.4598757 -0.2372435 0.2376841 0.5728982 -0.2372435 -0.2376841 0.5728982 -0.2372435 -0.2376841 0.4598757 -0.2372435 -0.2376841 0.5728982 0.2372435 -0.2376841 0.4598757 -0.2372435 -0.2376841 0.4598757 0.2372435 -0.2376841 0.5728982 0.2372435 0.2376841 0.5728982 0.2372435 -0.2376841 0.4598757 0.2372435 0.2376841 0.4598757 0.2372435 -0.2376841 0.5728982 -0.2372435 0.2376841 0.4598757 0.2372435 0.2376841 0.5728982 -0.2372435 0.2376841 0.5728982 0.2372435 0.2376841 0.4598757 0.2372435 -0.2376841 0.5728982 -0.2372435 -0.2376841 0.5728982 -0.2372435 0.2376841 0.5728982 0.2372435 0.2376841 0.5728982 0.2369998 -0.2376841 0.4598757 -0.2369956 -0.2376842 0.4598757 0.2352026 -0.2356433 0.5693115 -0.2369957 0.2376841 0.4598757 0.2369998 0.2376842 0.4598757 0.2352026 0.2316723 0.5693115 -0.2321131 -0.2356434 0.5693115 -0.2321131 0.2316722 0.5693115</float_array>
+          <technique_common>
+            <accessor source="#box_storage_mil02_001-mesh-positions-array" count="28" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="box_storage_mil02_001-mesh-normals">
+          <float_array id="box_storage_mil02_001-mesh-normals-array" count="39">-1 0 0 0 -1 0 1 0 0 0 1 0 0 0 1 0.7120344 0.7007119 -0.04483211 0.7031604 -0.7075551 -0.07022446 0.5658168 -0.5619409 -0.6033853 -0.697786 -0.7145105 -0.05069202 -0.5749915 -0.5606167 -0.5958975 -0.7064012 0.7073777 -0.0247817 -0.5731119 0.5722879 -0.5865402 0.5640528 0.5737273 -0.5938699</float_array>
+          <technique_common>
+            <accessor source="#box_storage_mil02_001-mesh-normals-array" count="13" stride="3">
+              <param name="X" type="float"/>
+              <param name="Y" type="float"/>
+              <param name="Z" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <source id="box_storage_mil02_001-mesh-map-0">
+          <float_array id="box_storage_mil02_001-mesh-map-0-array" count="120">0.02854716 0.4376913 0.0765407 0.4376913 0.0765407 0.6604062 0.3130586 0.4231773 0.08894133 0.4231773 0.08894133 0.3763086 0.3740777 0.4366951 0.3740777 0.6607771 0.3276442 0.6607771 0.0901212 0.7220386 0.0901212 0.6746077 0.3121913 0.6746077 0.09059649 0.6617357 0.09059649 0.4384865 0.3128184 0.4384865 0.4421989 0.4890847 0.4421989 0.3787462 0.4647462 0.3787462 0.578334 0.3529498 0.578334 0.3754971 0.4679953 0.3754971 0.6041303 0.4890847 0.581583 0.4890847 0.5815829 0.3787462 0.4679954 0.4923338 0.5783339 0.4923338 0.5783339 0.5148812 0.578334 0.3787462 0.578334 0.4890847 0.4679953 0.4890847 0.02854716 0.6604062 0.02854716 0.4376913 0.0765407 0.6604062 0.3130586 0.3763086 0.3130586 0.4231773 0.08894133 0.3763086 0.3276442 0.4366951 0.3740777 0.4366951 0.3276442 0.6607771 0.3121913 0.7220386 0.0901212 0.7220386 0.3121913 0.6746077 0.3128184 0.6617358 0.09059649 0.6617357 0.3128184 0.4384865 0.4647461 0.4890847 0.4421989 0.4890847 0.4647462 0.3787462 0.4679953 0.3529497 0.578334 0.3529498 0.4679953 0.3754971 0.6041303 0.3787462 0.6041303 0.4890847 0.5815829 0.3787462 0.4679954 0.5148812 0.4679954 0.4923338 0.5783339 0.5148812 0.4679953 0.3787462 0.578334 0.3787462 0.4679953 0.4890847</float_array>
+          <technique_common>
+            <accessor source="#box_storage_mil02_001-mesh-map-0-array" count="60" stride="2">
+              <param name="S" type="float"/>
+              <param name="T" type="float"/>
+            </accessor>
+          </technique_common>
+        </source>
+        <vertices id="box_storage_mil02_001-mesh-vertices">
+          <input semantic="POSITION" source="#box_storage_mil02_001-mesh-positions"/>
+        </vertices>
+        <polylist material="box_storage_mil02-material" count="20">
+          <input semantic="VERTEX" source="#box_storage_mil02_001-mesh-vertices" offset="0"/>
+          <input semantic="NORMAL" source="#box_storage_mil02_001-mesh-normals" offset="1"/>
+          <input semantic="TEXCOORD" source="#box_storage_mil02_001-mesh-map-0" offset="2" set="0"/>
+          <vcount>3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 </vcount>
+          <p>3 0 0 2 0 1 1 0 2 7 1 3 4 1 4 6 1 5 9 2 6 10 2 7 8 2 8 12 3 9 14 3 10 13 3 11 18 4 12 17 4 13 16 4 14 21 5 15 23 6 16 27 7 17 24 8 18 25 9 19 27 7 20 20 10 21 22 11 22 25 9 23 26 12 24 22 11 25 20 10 26 25 9 27 22 11 28 26 12 29 0 0 30 3 0 31 1 0 32 5 1 33 7 1 34 6 1 35 11 2 36 9 2 37 8 2 38 15 3 39 12 3 40 13 3 41 19 4 42 18 4 43 16 4 44 26 12 45 21 5 46 27 7 47 23 6 48 24 8 49 27 7 50 24 8 51 20 10 52 25 9 53 21 5 54 26 12 55 20 10 56 27 7 57 25 9 58 26 12 59</p>
+        </polylist>
+      </mesh>
+    </geometry>
+  </library_geometries>
+  <library_animations>
+    <animation id="box_storage_mil02_rotation_euler_X">
+      <source id="box_storage_mil02_rotation_euler_X-input">
+        <float_array id="box_storage_mil02_rotation_euler_X-input-array" count="3">0.04166662 5 10.04167</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_rotation_euler_X-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_rotation_euler_X-output">
+        <float_array id="box_storage_mil02_rotation_euler_X-output-array" count="3">0 0 0</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_rotation_euler_X-output-array" count="3" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_rotation_euler_X-interpolation">
+        <Name_array id="box_storage_mil02_rotation_euler_X-interpolation-array" count="3">STEP STEP STEP</Name_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_rotation_euler_X-interpolation-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="box_storage_mil02_rotation_euler_X-sampler">
+        <input semantic="INPUT" source="#box_storage_mil02_rotation_euler_X-input"/>
+        <input semantic="OUTPUT" source="#box_storage_mil02_rotation_euler_X-output"/>
+        <input semantic="INTERPOLATION" source="#box_storage_mil02_rotation_euler_X-interpolation"/>
+      </sampler>
+      <channel source="#box_storage_mil02_rotation_euler_X-sampler" target="box_storage_mil02/rotationX.ANGLE"/>
+    </animation>
+    <animation id="box_storage_mil02_rotation_euler_Y">
+      <source id="box_storage_mil02_rotation_euler_Y-input">
+        <float_array id="box_storage_mil02_rotation_euler_Y-input-array" count="3">0.04166662 5 10.04167</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_rotation_euler_Y-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_rotation_euler_Y-output">
+        <float_array id="box_storage_mil02_rotation_euler_Y-output-array" count="3">0 0 0</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_rotation_euler_Y-output-array" count="3" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_rotation_euler_Y-interpolation">
+        <Name_array id="box_storage_mil02_rotation_euler_Y-interpolation-array" count="3">STEP STEP STEP</Name_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_rotation_euler_Y-interpolation-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="box_storage_mil02_rotation_euler_Y-sampler">
+        <input semantic="INPUT" source="#box_storage_mil02_rotation_euler_Y-input"/>
+        <input semantic="OUTPUT" source="#box_storage_mil02_rotation_euler_Y-output"/>
+        <input semantic="INTERPOLATION" source="#box_storage_mil02_rotation_euler_Y-interpolation"/>
+      </sampler>
+      <channel source="#box_storage_mil02_rotation_euler_Y-sampler" target="box_storage_mil02/rotationY.ANGLE"/>
+    </animation>
+    <animation id="box_storage_mil02_rotation_euler_Z">
+      <source id="box_storage_mil02_rotation_euler_Z-input">
+        <float_array id="box_storage_mil02_rotation_euler_Z-input-array" count="3">0.04166662 5 10.04167</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_rotation_euler_Z-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_rotation_euler_Z-output">
+        <float_array id="box_storage_mil02_rotation_euler_Z-output-array" count="3">-180 -360 -540</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_rotation_euler_Z-output-array" count="3" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_rotation_euler_Z-interpolation">
+        <Name_array id="box_storage_mil02_rotation_euler_Z-interpolation-array" count="3">LINEAR LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_rotation_euler_Z-interpolation-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="box_storage_mil02_rotation_euler_Z-sampler">
+        <input semantic="INPUT" source="#box_storage_mil02_rotation_euler_Z-input"/>
+        <input semantic="OUTPUT" source="#box_storage_mil02_rotation_euler_Z-output"/>
+        <input semantic="INTERPOLATION" source="#box_storage_mil02_rotation_euler_Z-interpolation"/>
+      </sampler>
+      <channel source="#box_storage_mil02_rotation_euler_Z-sampler" target="box_storage_mil02/rotationZ.ANGLE"/>
+    </animation>
+    <animation id="box_storage_mil02_001_rotation_euler_X">
+      <source id="box_storage_mil02_001_rotation_euler_X-input">
+        <float_array id="box_storage_mil02_001_rotation_euler_X-input-array" count="3">0.04166662 5 10.04167</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_001_rotation_euler_X-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_001_rotation_euler_X-output">
+        <float_array id="box_storage_mil02_001_rotation_euler_X-output-array" count="3">0 0 0</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_001_rotation_euler_X-output-array" count="3" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_001_rotation_euler_X-interpolation">
+        <Name_array id="box_storage_mil02_001_rotation_euler_X-interpolation-array" count="3">STEP STEP STEP</Name_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_001_rotation_euler_X-interpolation-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="box_storage_mil02_001_rotation_euler_X-sampler">
+        <input semantic="INPUT" source="#box_storage_mil02_001_rotation_euler_X-input"/>
+        <input semantic="OUTPUT" source="#box_storage_mil02_001_rotation_euler_X-output"/>
+        <input semantic="INTERPOLATION" source="#box_storage_mil02_001_rotation_euler_X-interpolation"/>
+      </sampler>
+      <channel source="#box_storage_mil02_001_rotation_euler_X-sampler" target="box_storage_mil02_001/rotationX.ANGLE"/>
+    </animation>
+    <animation id="box_storage_mil02_001_rotation_euler_Y">
+      <source id="box_storage_mil02_001_rotation_euler_Y-input">
+        <float_array id="box_storage_mil02_001_rotation_euler_Y-input-array" count="3">0.04166662 5 10.04167</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_001_rotation_euler_Y-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_001_rotation_euler_Y-output">
+        <float_array id="box_storage_mil02_001_rotation_euler_Y-output-array" count="3">0 0 0</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_001_rotation_euler_Y-output-array" count="3" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_001_rotation_euler_Y-interpolation">
+        <Name_array id="box_storage_mil02_001_rotation_euler_Y-interpolation-array" count="3">STEP STEP STEP</Name_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_001_rotation_euler_Y-interpolation-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="box_storage_mil02_001_rotation_euler_Y-sampler">
+        <input semantic="INPUT" source="#box_storage_mil02_001_rotation_euler_Y-input"/>
+        <input semantic="OUTPUT" source="#box_storage_mil02_001_rotation_euler_Y-output"/>
+        <input semantic="INTERPOLATION" source="#box_storage_mil02_001_rotation_euler_Y-interpolation"/>
+      </sampler>
+      <channel source="#box_storage_mil02_001_rotation_euler_Y-sampler" target="box_storage_mil02_001/rotationY.ANGLE"/>
+    </animation>
+    <animation id="box_storage_mil02_001_rotation_euler_Z">
+      <source id="box_storage_mil02_001_rotation_euler_Z-input">
+        <float_array id="box_storage_mil02_001_rotation_euler_Z-input-array" count="3">0.04166662 5 10.04167</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_001_rotation_euler_Z-input-array" count="3" stride="1">
+            <param name="TIME" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_001_rotation_euler_Z-output">
+        <float_array id="box_storage_mil02_001_rotation_euler_Z-output-array" count="3">-180 -360 -540</float_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_001_rotation_euler_Z-output-array" count="3" stride="1">
+            <param name="ANGLE" type="float"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <source id="box_storage_mil02_001_rotation_euler_Z-interpolation">
+        <Name_array id="box_storage_mil02_001_rotation_euler_Z-interpolation-array" count="3">LINEAR LINEAR LINEAR</Name_array>
+        <technique_common>
+          <accessor source="#box_storage_mil02_001_rotation_euler_Z-interpolation-array" count="3" stride="1">
+            <param name="INTERPOLATION" type="name"/>
+          </accessor>
+        </technique_common>
+      </source>
+      <sampler id="box_storage_mil02_001_rotation_euler_Z-sampler">
+        <input semantic="INPUT" source="#box_storage_mil02_001_rotation_euler_Z-input"/>
+        <input semantic="OUTPUT" source="#box_storage_mil02_001_rotation_euler_Z-output"/>
+        <input semantic="INTERPOLATION" source="#box_storage_mil02_001_rotation_euler_Z-interpolation"/>
+      </sampler>
+      <channel source="#box_storage_mil02_001_rotation_euler_Z-sampler" target="box_storage_mil02_001/rotationZ.ANGLE"/>
+    </animation>
+  </library_animations>
+  <library_controllers/>
+  <library_visual_scenes>
+    <visual_scene id="Scene" name="Scene">
+      <node id="box_storage_mil02" name="box_storage_mil02" type="NODE">
+        <translate sid="location">0 0 0</translate>
+        <rotate sid="rotationZ">0 0 1 180</rotate>
+        <rotate sid="rotationY">0 1 0 0</rotate>
+        <rotate sid="rotationX">1 0 0 0</rotate>
+        <scale sid="scale">1 1 1</scale>
+        <instance_geometry url="#box_storage_mil02-mesh" name="box_storage_mil02">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="box_storage_mil02-material" target="#box_storage_mil02-material">
+                <bind_vertex_input semantic="UVTex" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+      <node id="Camera" name="Camera" type="NODE">
+        <translate sid="location">7.481132 -6.50764 5.343665</translate>
+        <rotate sid="rotationZ">0 0 1 46.69194</rotate>
+        <rotate sid="rotationY">0 1 0 0.619768</rotate>
+        <rotate sid="rotationX">1 0 0 63.5593</rotate>
+        <scale sid="scale">1 0.9999999 1</scale>
+        <instance_camera url="#Camera-camera"/>
+      </node>
+      <node id="Lamp" name="Lamp" type="NODE">
+        <translate sid="location">-0.3394492 -0.5853637 0.6982148</translate>
+        <rotate sid="rotationZ">0 0 1 106.9363</rotate>
+        <rotate sid="rotationY">0 1 0 3.163707</rotate>
+        <rotate sid="rotationX">1 0 0 37.26105</rotate>
+        <scale sid="scale">1 0.9999999 1</scale>
+        <instance_light url="#Lamp-light"/>
+      </node>
+      <node id="box_storage_mil02_001" name="box_storage_mil02_001" type="NODE">
+        <translate sid="location">0 0 0</translate>
+        <rotate sid="rotationZ">0 0 1 180</rotate>
+        <rotate sid="rotationY">0 1 0 0</rotate>
+        <rotate sid="rotationX">1 0 0 0</rotate>
+        <scale sid="scale">1 1 1</scale>
+        <instance_geometry url="#box_storage_mil02_001-mesh" name="box_storage_mil02_001">
+          <bind_material>
+            <technique_common>
+              <instance_material symbol="box_storage_mil02-material" target="#box_storage_mil02-material">
+                <bind_vertex_input semantic="UVTex" input_semantic="TEXCOORD" input_set="0"/>
+              </instance_material>
+            </technique_common>
+          </bind_material>
+        </instance_geometry>
+      </node>
+    </visual_scene>
+  </library_visual_scenes>
+  <scene>
+    <instance_visual_scene url="#Scene"/>
+  </scene>
+</COLLADA>

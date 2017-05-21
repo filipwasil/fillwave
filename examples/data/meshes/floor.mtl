@@ -1,0 +1,11 @@
+# Blender MTL File: 'floor.blend'
+# Material Count: 1
+
+newmtl None
+Ns 0
+Ka 0.200000 0.200000 0.200000
+Kd 0.8 0.8 0.8
+Ks 0.8 0.8 0.8
+d 1
+illum 2
+map_Kd textures/test.png

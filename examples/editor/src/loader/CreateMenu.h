@@ -3,7 +3,7 @@
 #include <memory>
 #include <QWidget>
 #include <QVBoxLayout>
-#include <QHash>
+#include <QMap>
 #include "common/ISceneController.h"
 
 namespace loader {

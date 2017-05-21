@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Nowy>
+    <QLineEdit>
+        <accessibleName>Amount of spheres</accessibleName>
+        <objectName>mAmount</objectName>
+        <minimum>0</minimum>
+        <maximum>10</maximum>
+        <maxWidth>150</maxWidth>
+    </QLineEdit>
+</Nowy>

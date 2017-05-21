@@ -2,7 +2,7 @@
 
 #include <memory>
 #include <functional>
-#include <QHash>
+#include <QMap>
 #include "AScene.h"
 
 namespace scene {
@@ -15,7 +15,7 @@ public:
 private:
   int mArgc;
   char **mArgv;
-  QHash<QString, std::function<std::shared_ptr<scene::AScene>(int, char **)>> mScens;
+  QMap<QString, std::function<std::shared_ptr<scene::AScene>(int, char **)>> mScens;
 };
 }
 

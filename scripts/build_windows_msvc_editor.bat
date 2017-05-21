@@ -8,9 +8,8 @@ cmake ../fillwave -DCMAKE_GENERATOR_PLATFORM=x64 -DFILLWAVE_BUILD_QT_EDITOR=ON -
 cmake --build examples/editor
 xcopy ext\glew\DEBUG\glew64.dll DEBUG\glew64.dll*
 xcopy ext\assimp\code\Debug\assimp-vc140-mt.dll DEBUG\assimp-vc140-mt.dll*
-xcopy ..\fillwave\examples\editor\assets DEBUG\assets\* /S
-xcopy DEBUG\assets\fonts DEBUG\* /S
-xcopy ..\fillwave\examples\linux\data\animations DEBUG\animations\* /S
+xcopy ..\fillwave\examples\data\assets\fonts DEBUG\* /S
+xcopy ..\fillwave\examples\data\* DEBUG\* /S
 set currentPath=%cd%
 cd %qtpath%\bin
 windeployqt %currentPath%\Debug\fillwaveEditor.exe
