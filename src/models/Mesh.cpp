@@ -377,12 +377,12 @@ inline void Mesh::initVAO() {
 
   mVBO->bind();
   mVBO->attributesSetForVAO();
-  mVBO->setLoaded(GL_FALSE);
+  //mVBO->setLoaded(GL_FALSE);
   mVBO->send();
 
   if (mIBO) {
     mIBO->bind();
-    mIBO->setLoaded(GL_FALSE);
+    //mIBO->setLoaded(GL_FALSE);
     mIBO->send();
   }
 
