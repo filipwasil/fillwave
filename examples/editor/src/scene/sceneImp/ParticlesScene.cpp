@@ -87,7 +87,7 @@ void ParticlesScene::init() {
 
 	mEngine->getCurrentScene()->attach(std::move(sand));
 	mEngine->getCurrentScene()->attach(std::move(water));
-	mEngine->getCurrentScene()->attach(std::move(snow));
+	//mEngine->getCurrentScene()->attach(std::move(snow));
 
 	pText hint0 = mEngine->storeText("Fillwave example particles", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
 	pText hint5 = mEngine->storeText("Use mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);

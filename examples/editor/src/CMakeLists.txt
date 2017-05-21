@@ -2,6 +2,7 @@ aux_source_directory(. SRC_FILES)
 aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/scene/callbacks CALLBACKS_SOURCES)
 aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/scene/sceneImp SCENES_SOURCES)
 aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/scene/objects OBJECTS_SOURCES)
+aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/scene/terrain TERRAIN_SOURCES)
 
 include_directories(".")
 
