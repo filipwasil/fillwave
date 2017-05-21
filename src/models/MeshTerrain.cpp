@@ -77,7 +77,7 @@ MeshTerrain::MeshTerrain(Engine *engine,
 
   for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
     for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
-      puMesh ptr = std::make_unique<Mesh>(engine,
+      auto ptr = std::make_unique<Mesh>(engine,
                                           m,
                                           engine->storeTexture(diffuseMapPath.c_str()),
                                           engine->storeTexture(normalMapPath.c_str()),
@@ -170,8 +170,8 @@ void MeshTerrain::initIBO(std::vector<GLuint> &indices, GLuint density) {
 
   indices.reserve(density * density);
 
-  for (GLuint z = 0; z < density; z++) {
-    for (GLuint x = 0; x < density; x++) {
+  for (GLuint z = 0; z < density; ++z) {
+    for (GLuint x = 0; x < density; ++x) {
       pointsWidth = density + 1;
       pointsWidthNext = density + 2;
       offset = x + z * pointsWidth;
