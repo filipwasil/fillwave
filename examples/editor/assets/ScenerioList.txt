@@ -2,8 +2,6 @@ Hello World
 assets/SceneriosMenu/HelloWorld.xml
 Animation
 assets/SceneriosMenu/AnimationScene.xml
-Callbacks
-assets/SceneriosMenu/CallbacksScene.xml
 Simple
 assets/SceneriosMenu/Simple.xml
 Hud
