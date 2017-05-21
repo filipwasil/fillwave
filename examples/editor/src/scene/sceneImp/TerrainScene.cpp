@@ -17,7 +17,7 @@ TerrainScene::TerrainScene(int argc, char **argv)
 void TerrainScene::init() {
   /* Scene and camera */
   mEngine->setCurrentScene(make_unique<Scene>());
-  mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 16.0),
+  mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>(glm::vec3(0.0, 4.0, 16.0),
                                                                        glm::quat(),
                                                                        glm::radians(90.0),
                                                                        1.0,
@@ -35,9 +35,7 @@ void TerrainScene::init() {
 //	mEngine->registerCallback(make_unique<MoveCameraCallback>(
 //	         mEngine, eEventType::eCursorPosition, 0.1,
 //	         ContextGLFW::mWindow));
-}
 
-void TerrainScene::perform() {
   mEngine->configureFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
 
   puMeshTerrain terrain = make_unique<MeshTerrain>(mEngine.get(),
@@ -63,6 +61,10 @@ void TerrainScene::perform() {
                                    "fonts/Titania",
                                    glm::vec2(-0.95, -0.80),
                                    70.0);
+}
+
+void TerrainScene::perform() {
+
 }
 
 }

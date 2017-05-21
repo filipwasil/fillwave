@@ -14,6 +14,7 @@
 #include <scene/sceneImp/PostProcessingScene.h>
 #include <scene/sceneImp/ShadowScene.h>
 #include <scene/sceneImp/SkyboxScene.h>
+#include <scene/sceneImp/TerrainScene.h>
 
 namespace scene {
 
@@ -41,6 +42,7 @@ ScensFactory::ScensFactory(int argc, char **argv)
   mScens["Post processing"] = factoryEntry<scene::PostProcessingScene>();
   mScens["Shadows"] = factoryEntry<scene::ShadowScene>();
   mScens["Skybox"] = factoryEntry<scene::SkyboxScene>();
+  mScens["Terrain"] = factoryEntry<scene::TerrainScene>();
 }
 
 std::shared_ptr<scene::AScene> ScensFactory::createScen(QString name) {

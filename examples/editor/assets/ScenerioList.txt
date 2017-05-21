@@ -30,3 +30,5 @@ Cursor
 assets/SceneriosMenu/CursorScene.xml
 Effects
 assets/SceneriosMenu/EffectsScene.xml
+Terrain
+assets/SceneriosMenu/EffectsScene.xml
