@@ -123,6 +123,16 @@ public:
     return mDataVertices.data();
   }
 
+  void emptyCPU() override {
+    mDataVertices.clear();
+    mData = nullptr;
+    mTotalElements = 0;
+  }
+
+  void emptyGPU() override {
+    std::cout << "Not gpu data clear is possible in this buffer" << std::endl;
+  }
+
   virtual void log() const = 0;
 
 protected:
@@ -204,14 +214,6 @@ protected:
     std::for_each(mAttributes.begin(), mAttributes.end(), [programHandle](Attribute &a) {
       a.bindLocation(programHandle);
     });
-  }
-
-  void emptyCPU() override {
-    mDataVertices.clear();
-  }
-
-  void emptyGPU() override {
-    std::cout << "Not gpu data clear is possible in this buffer" << std::endl;
   }
 
 private:

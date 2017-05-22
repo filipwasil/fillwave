@@ -92,6 +92,8 @@ IndexBuffer::IndexBuffer(const std::vector<GLuint> &data, GLuint dataStoreModifi
 
 void IndexBuffer::emptyCPU() {
   mDataIndices.clear();
+  mData = nullptr;
+  mTotalElements = 0;
 }
 
 void IndexBuffer::emptyGPU() {

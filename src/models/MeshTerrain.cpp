@@ -65,13 +65,9 @@ MeshTerrain::MeshTerrain(Engine *engine,
   GLint indexTerrainChunk = radius;
   ProgramLoader loader(engine);
 
-  flc::VertexArray *vao = new flc::VertexArray();
-  flc::VertexBufferBasic *vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao,
-                                                                              constructor,
-                                                                              density,
-                                                                              gapSize,
-                                                                              indices);
-  flc::IndexBuffer *ibo = engine->storeBuffer<flc::IndexBuffer>(vao, indices);
+  auto vao = new flc::VertexArray();
+  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
+  auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, indices);
 
   Material m;
 
@@ -127,20 +123,14 @@ MeshTerrain::MeshTerrain(Engine *engine,
   GLint indexTerrainChunk = radius;
   ProgramLoader loader(engine);
 
-  flc::VertexArray *vao = new flc::VertexArray();
-  flc::VertexBufferBasic *vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao,
-                                                                              constructor,
-                                                                              density,
-                                                                              gapSize,
-                                                                              indices);
-  flc::IndexBuffer *ibo = engine->storeBuffer<flc::IndexBuffer>(vao, indices);
-
-  Material m;
+  auto vao = new flc::VertexArray();
+  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
+  auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, indices);
 
   for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
     for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
       puMesh ptr = std::make_unique<Mesh>(engine,
-                                          m,
+                                          Material(),
                                           diffuseMap,
                                           normalMap,
                                           specularMap,

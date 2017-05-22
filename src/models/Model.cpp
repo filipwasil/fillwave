@@ -409,7 +409,9 @@ puMesh Model::loadMesh(const aiMesh *shape,
   }
 
   ProgramLoader loader(engine);
-  flc::VertexArray *vao = new flc::VertexArray();
+  auto vao = new flc::VertexArray();
+  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get());
+  auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
   return std::make_unique<Mesh>(engine,
                                 material,
                                 diffuseMap,
@@ -422,11 +424,14 @@ puMesh Model::loadMesh(const aiMesh *shape,
                                 loader.getAmbientOcclusionGeometry(),
                                 loader.getAmbientOcclusionColor(),
                                 engine->getLightSystem(),
-                                engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get()),
-                                engine->storeBuffer<flc::IndexBuffer>(vao, shape),
+                                vbo,
+                                ibo,
                                 mAnimator.get(),
                                 GL_TRIANGLES,
                                 vao);
+#ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
+  vbo->emptyCPU();
+#endif
 }
 
 void Model::performAnimation(GLfloat timeElapsed_s) {

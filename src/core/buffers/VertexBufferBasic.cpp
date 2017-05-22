@@ -205,8 +205,8 @@ VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
 
   flc::VertexBasic vertex;
 
-  for (float z = 0; z <= chunkDensity; z++) {
-    for (float x = 0; x <= chunkDensity; x++) {
+  for (float z = 0; z <= chunkDensity; ++z) {
+    for (float x = 0; x <= chunkDensity; ++x) {
 
       vertex.mColor[0] = 0.0f;
       vertex.mColor[1] = 0.0f;
@@ -307,7 +307,7 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
   glm::vec3 maximum(-10000.0, -10000.0, -10000.0);
   glm::vec3 minimum(10000.0, 10000.0, 10000.0);
 
-  for (GLuint i = 0; i < mTotalElements; i++) {
+  for (GLuint i = 0; i < mTotalElements; ++i) {
     if (mDataVertices[i].mPosition[0] > maximum.x) {
       maximum.x = mDataVertices[i].mPosition[0];
     }

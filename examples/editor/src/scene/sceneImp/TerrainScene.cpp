@@ -1,6 +1,6 @@
 #include "scene/callbacks/Callbacks.h"
 #include "TerrainScene.h"
-#include "scene/terrain/MountainConstructor.h"
+#include "scene/terrain/PerlinConstructor.h"
 
 using namespace flw;
 using namespace flw::flf;
@@ -40,7 +40,7 @@ void TerrainScene::init() {
 
   puMeshTerrain terrain = make_unique<MeshTerrain>(mEngine.get(),
                                                    ProgramLoader(mEngine.get()).getDefault(),
-                                                   new MountainConstructor(),
+                                                   new PerlinConstructor(),
                                                    Material(),
                                                    "textures/test.png",
                                                    "textures/testNormal.png",
