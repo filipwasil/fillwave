@@ -234,15 +234,9 @@ const std::string ShaderLoaderFragment::getSource() const {
       "   vec4 diffuseSum;\n"
       "   vec4 colorDiffuse;\n"
       "   vec3 toLightDirection;\n"
-#ifdef FILLWAVE_GLES_3_0
-  "   vec4 texelDiffuse = uLightDiffuseIntensity * texture(uDiffuseTextureUnit, vTextureCoordinate);\n"
-  "   vec3 texelNormal = texture(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
-  "   vec4 texelSpecular = uLightSpecularIntensity * texture(uSpecularTextureUnit, vTextureCoordinate) * 255.0;\n"
-#else
-      "   vec4 texelDiffuse = uLightDiffuseIntensity * texture2D(uDiffuseTextureUnit, vTextureCoordinate);\n"
-      "   vec3 texelNormal = texture2D(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
-      "   vec4 texelSpecular = uLightSpecularIntensity * texture2D(uSpecularTextureUnit, vTextureCoordinate) * 255.0;\n"
-#endif
+      "   vec4 texelDiffuse = uLightDiffuseIntensity * texture(uDiffuseTextureUnit, vTextureCoordinate);\n"
+      "   vec3 texelNormal = texture(uNormalTextureUnit, vTextureCoordinate).xyz;\n"
+      "   vec4 texelSpecular = uLightSpecularIntensity * texture(uSpecularTextureUnit, vTextureCoordinate) * 255.0;\n"
 
       "   vec3 vertexNormal;\n"
 
