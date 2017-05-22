@@ -27,7 +27,7 @@ public:
     return mSceneParameters;
   };
 
-  void setParameters(QMap<QString, QVariant> parameters) {
+  virtual void setParameters(QMap<QString, QVariant> parameters) {
     if (!mSceneParameters.contains(parameters.firstKey())) {
       return;
     }

@@ -1,3 +1,4 @@
+#include <QColor>
 #include "scene/callbacks/Callbacks.h"
 #include "ShadowScene.h"
 
@@ -9,12 +10,6 @@ namespace scene {
 
 ShadowScene::ShadowScene(int argc, char **argv, QMap<QString, QVariant> varValues)
 		: AScene(argc, argv, varValues) {
-	mSceneParameters["mFirstShadow"] = QVariant("0_255_0");
-	mSceneParameters["mSecondShadow"] = QVariant("0_255_0");
-	mSceneParameters["mThirdShadow"] = QVariant("0_255_0");
-	mSceneParameters["mFourthShadow"] = QVariant("0_255_0");
-	mSceneParameters["mFifthtShadow"] = QVariant("0_255_0");
-
 	init();
 }
 
@@ -33,11 +28,15 @@ void ShadowScene::init() {
 	puEntity lightSource_3 = buildEntity();
 
 	/* Lights */
-	mEngine->storeLightSpot(glm::vec3(0.0, 1.0, 0.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0), lightSource_1.get());
-
-	mEngine->storeLightSpot(glm::vec3(0.0, 1.0, 0.0), glm::quat(), glm::vec4(0.0, 0.0, 1.0, 0.0), lightSource_2.get());
-
-	mEngine->storeLightSpot(glm::vec3(1.0, 1.0, 1.0), glm::quat(), glm::vec4(1.0, 0.0, 0.0, 0.0), lightSource_3.get());
+	auto firstColor = mSceneParameters["mFirstShadow"].value<QColor>();
+	mFirstLigth = mEngine->storeLightSpot(glm::vec3(0.0, 1.0, 0.0), glm::quat(), glm::vec4
+			(firstColor.redF(), firstColor.greenF(), firstColor.blueF(), firstColor.alphaF()), lightSource_1.get());
+  auto secondColor = mSceneParameters["mSecondShadow"].value<QColor>();
+	mSecomdLigth = mEngine->storeLightSpot(glm::vec3(0.0, 1.0, 0.0), glm::quat(), glm::vec4
+      (secondColor.redF(), secondColor.greenF(), secondColor.blueF(), secondColor.alphaF()), lightSource_2.get());
+  auto thirdColor = mSceneParameters["mThirdShadow"].value<QColor>();
+	mThirdLigth = mEngine->storeLightSpot(glm::vec3(1.0, 1.0, 1.0), glm::quat(), glm::vec4
+       (thirdColor.redF(), thirdColor.greenF(), thirdColor.blueF(), thirdColor.alphaF()), lightSource_3.get());
 
 	/* Programs */
 	flc::Program *program = ProgramLoader(mEngine.get()).getDefault();
@@ -128,7 +127,13 @@ void ShadowScene::init() {
 }
 
 void ShadowScene::perform() {
-
+	auto firstColor = mSceneParameters["mFirstShadow"].value<QColor>();
+	mFirstLigth->setIntensity(glm::vec4(firstColor.redF(), firstColor.greenF(), firstColor.blueF(), firstColor.alphaF()));
+  auto secondColor = mSceneParameters["mSecondShadow"].value<QColor>();
+  mSecomdLigth->setIntensity(glm::vec4
+	    (secondColor.redF(), secondColor.greenF(), secondColor.blueF(), secondColor.alphaF()));
+	auto thirdColor = mSceneParameters["mThirdShadow"].value<QColor>();
+	mThirdLigth->setIntensity(glm::vec4
+	    (thirdColor.redF(), thirdColor.greenF(), thirdColor.blueF(), thirdColor.alphaF()));
 }
-
 }

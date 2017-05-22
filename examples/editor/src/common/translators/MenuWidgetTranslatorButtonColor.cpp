@@ -4,8 +4,12 @@
 namespace common {
 namespace translators {
 MenuWidgetTranslatorButtonColor::MenuWidgetTranslatorButtonColor(const QWidget *menuWidget, QString color)
-    : MenuWidgetTranslatorStandardValues(menuWidget),
-      mLastRGBValue(color) {
+    : MenuWidgetTranslatorStandardValues(menuWidget) {
+  auto vecColor = color.splitRef("_");
+  mLastColor.setRedF(vecColor[0].toFloat());
+  mLastColor.setGreenF(vecColor[1].toFloat());
+  mLastColor.setBlue(vecColor[2].toFloat());
+  mLastColor.setAlphaF(vecColor[3].toFloat());
 }
 
 void MenuWidgetTranslatorButtonColor::update() {
@@ -13,30 +17,21 @@ void MenuWidgetTranslatorButtonColor::update() {
     return;
   }
   auto valueColor = getColor();
-  if (valueColor.isEmpty()) {
+  if (!valueColor) {
     return;
   }
-  mLastRGBValue = valueColor;
   auto value = getCurrentValues();
   emit updateScene(value);
 }
 
-QString MenuWidgetTranslatorButtonColor::getColor() {
+bool MenuWidgetTranslatorButtonColor::getColor() {
   QColorDialog colorDialog;
   int status = colorDialog.exec();
   if (status == QDialog::DialogCode::Rejected) {
-    QString empty;
-    return empty;
+    return false;
   }
-  auto color = colorDialog.currentColor();
-  auto red = color.red();
-  auto green = color.green();
-  auto blue = color.blue();
-  QString rgb = QString::number(red) + "_";
-  rgb.append(QString::number(green));
-  rgb.append("_");
-  rgb.append(QString::number(blue));
-  return rgb;
+  mLastColor = colorDialog.currentColor();
+  return true;
 }
 
 std::pair<QString, QVariant> MenuWidgetTranslatorButtonColor::getCurrentValues() {
@@ -45,10 +40,9 @@ std::pair<QString, QVariant> MenuWidgetTranslatorButtonColor::getCurrentValues()
     std::pair<QString, QVariant> empty;
     return empty;
   }
-  std::pair<QString, QVariant> elementValue = std::make_pair(name.toString(), QVariant(mLastRGBValue));
+  std::pair<QString, QVariant> elementValue = std::make_pair(name.toString(), QVariant(mLastColor));
   return elementValue;
 }
-
 
 }
 }
