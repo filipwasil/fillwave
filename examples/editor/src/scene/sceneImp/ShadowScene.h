@@ -20,6 +20,7 @@ private:
   flw::pText mText;
   int mArgc;
   char **mArgv;
+  flw::flf::LightSpot* mFirstLigth;
 };
 
 }

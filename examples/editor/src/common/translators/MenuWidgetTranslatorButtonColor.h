@@ -1,5 +1,6 @@
 #pragma once
 
+#include <QHash>
 #include "MenuWidgetTranslatorStandardValues.h"
 
 namespace common {
@@ -15,9 +16,9 @@ public slots:
   void update();
 
 protected:
-  QString getColor();
+  bool getColor();
 
-  QString mLastRGBValue;
+  QHash<QString, QVariant> mLastRGBValue;
 };
 
 }
