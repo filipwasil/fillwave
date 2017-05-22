@@ -6,7 +6,7 @@
         <defaultText>Change Color</defaultText>
         <maxWidth>150</maxWidth>
         <translatorType>ColorDialog</translatorType>
-        <defaultValue>64_128_255</defaultValue>
+        <defaultValue>1_0_0_0</defaultValue>
     </QPushButton>
     <QPushButton>
         <accessibleName>Second shadow color</accessibleName>
@@ -14,7 +14,7 @@
         <defaultText>Change Color</defaultText>
         <maxWidth>150</maxWidth>
         <translatorType>ColorDialog</translatorType>
-        <defaultValue>64_128_255</defaultValue>
+        <defaultValue>1_0_0_0</defaultValue>
     </QPushButton>
     <QPushButton>
         <accessibleName>Third shadow color</accessibleName>
@@ -22,22 +22,6 @@
         <defaultText>Change Color</defaultText>
         <maxWidth>150</maxWidth>
         <translatorType>ColorDialog</translatorType>
-        <defaultValue>64_128_255</defaultValue>
-    </QPushButton>
-    <QPushButton>
-        <accessibleName>Fourth shadow color</accessibleName>
-        <objectName>mFourthShadow</objectName>
-        <defaultText>Change Color</defaultText>
-        <maxWidth>150</maxWidth>
-        <translatorType>ColorDialog</translatorType>
-        <defaultValue>64_128_255</defaultValue>
-    </QPushButton>
-    <QPushButton>
-        <accessibleName>Fifth shadow color</accessibleName>
-        <objectName>mFifthtShadow</objectName>
-        <defaultText>Change Color</defaultText>
-        <maxWidth>150</maxWidth>
-        <translatorType>ColorDialog</translatorType>
-        <defaultValue>64_128_255</defaultValue>
+        <defaultValue>1_0_0_0</defaultValue>
     </QPushButton>
 </Nowy>
