@@ -9,12 +9,6 @@ namespace scene {
 
 ShadowScene::ShadowScene(int argc, char **argv, QMap<QString, QVariant> varValues)
 		: AScene(argc, argv, varValues) {
-	mSceneParameters["mFirstShadow"] = QVariant("0_255_0");
-	mSceneParameters["mSecondShadow"] = QVariant("0_255_0");
-	mSceneParameters["mThirdShadow"] = QVariant("0_255_0");
-	mSceneParameters["mFourthShadow"] = QVariant("0_255_0");
-	mSceneParameters["mFifthtShadow"] = QVariant("0_255_0");
-
 	init();
 }
 
@@ -33,10 +27,13 @@ void ShadowScene::init() {
 	puEntity lightSource_3 = buildEntity();
 
 	/* Lights */
-	mEngine->storeLightSpot(glm::vec3(0.0, 1.0, 0.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0), lightSource_1.get());
-
+	auto firstColor = mSceneParameters["mFirstShadow"].toMap();
+	float test = firstColor["Red"].toFloat();
+	mEngine->storeLightSpot(glm::vec3(0.0, 1.0, 0.0), glm::quat(), glm::vec4(firstColor["Red"].toFloat(),
+      firstColor["Green"].toFloat(), firstColor["Blue"].toFloat(), firstColor["Alpha"].toFloat()), lightSource_1.get());
+	auto secondColor = mSceneParameters["mSecondShadow"].toMap();
 	mEngine->storeLightSpot(glm::vec3(0.0, 1.0, 0.0), glm::quat(), glm::vec4(0.0, 0.0, 1.0, 0.0), lightSource_2.get());
-
+	auto thirdColor = mSceneParameters["mThirdShadow"].toMap();
 	mEngine->storeLightSpot(glm::vec3(1.0, 1.0, 1.0), glm::quat(), glm::vec4(1.0, 0.0, 0.0, 0.0), lightSource_3.get());
 
 	/* Programs */
@@ -130,5 +127,4 @@ void ShadowScene::init() {
 void ShadowScene::perform() {
 
 }
-
 }

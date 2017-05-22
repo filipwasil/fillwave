@@ -4,8 +4,12 @@
 namespace common {
 namespace translators {
 MenuWidgetTranslatorButtonColor::MenuWidgetTranslatorButtonColor(const QWidget *menuWidget, QString color)
-    : MenuWidgetTranslatorStandardValues(menuWidget),
-      mLastRGBValue(color) {
+    : MenuWidgetTranslatorStandardValues(menuWidget) {
+  auto vecColor = color.splitRef("_");
+  mLastRGBValue["Red"] = QVariant(vecColor[0].toFloat());
+  mLastRGBValue["Green"] = QVariant(vecColor[1].toFloat());
+  mLastRGBValue["Blue"] = QVariant(vecColor[2].toFloat());
+  mLastRGBValue["Alpha"] = QVariant(vecColor[3].toFloat());
 }
 
 void MenuWidgetTranslatorButtonColor::update() {
@@ -16,7 +20,6 @@ void MenuWidgetTranslatorButtonColor::update() {
   if (valueColor.isEmpty()) {
     return;
   }
-  mLastRGBValue = valueColor;
   auto value = getCurrentValues();
   emit updateScene(value);
 }
@@ -28,15 +31,12 @@ QString MenuWidgetTranslatorButtonColor::getColor() {
     QString empty;
     return empty;
   }
+  QVector<qreal> colors;
   auto color = colorDialog.currentColor();
-  auto red = color.red();
-  auto green = color.green();
-  auto blue = color.blue();
-  QString rgb = QString::number(red) + "_";
-  rgb.append(QString::number(green));
-  rgb.append("_");
-  rgb.append(QString::number(blue));
-  return rgb;
+  mLastRGBValue["Red"] = QVariant(color.redF());
+  mLastRGBValue["Green"] = QVariant(color.greenF());
+  mLastRGBValue["Blue"] = QVariant(color.blueF());
+  mLastRGBValue["Alpha"] = QVariant(color.alphaF());
 }
 
 std::pair<QString, QVariant> MenuWidgetTranslatorButtonColor::getCurrentValues() {
@@ -48,7 +48,6 @@ std::pair<QString, QVariant> MenuWidgetTranslatorButtonColor::getCurrentValues()
   std::pair<QString, QVariant> elementValue = std::make_pair(name.toString(), QVariant(mLastRGBValue));
   return elementValue;
 }
-
 
 }
 }
