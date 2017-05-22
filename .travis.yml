@@ -1,9 +1,9 @@
 dist: trusty
 install:
 - lsb_release -a
-- echo "deb http://cz.archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
-- echo "deb http://cz.archive.ubuntu.com/ubuntu xenial main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
-- echo "deb-src http://cz.archive.ubuntu.com/ubuntu xenial main " | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+- echo "deb http://pl.archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+- echo "deb http://pl.archive.ubuntu.com/ubuntu xenial main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
+- echo "deb-src http://pl.archive.ubuntu.com/ubuntu xenial main " | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
 - sudo apt-get update
 - sudo apt-get install libglew1.10 libglew-dev libglfw3 libglfw3-dev -y --force-yes
 - sudo apt-get install libassimp3v5 -y --force-yes
