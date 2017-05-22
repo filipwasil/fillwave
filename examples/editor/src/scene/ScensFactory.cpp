@@ -19,10 +19,10 @@
 namespace scene {
 
 template <class T>
-std::function<std::shared_ptr<scene::AScene>(int, char **)> factoryEntry()
+std::function<std::shared_ptr<scene::AScene>(int, char **, QMap<QString, QVariant>)> factoryEntry()
 {
-  return [](int argc_, char **argv_) {
-    return std::make_shared<T>(argc_, argv_);
+  return [](int argc_, char ** argv_, QMap<QString, QVariant> mapa) {
+    return std::make_shared<T>(argc_, argv_, mapa);
   };
 }
 
@@ -45,11 +45,11 @@ ScensFactory::ScensFactory(int argc, char **argv)
   mScens["Terrain"] = factoryEntry<scene::TerrainScene>();
 }
 
-std::shared_ptr<scene::AScene> ScensFactory::createScen(QString name) {
+std::shared_ptr<scene::AScene> ScensFactory::createScen(QString name, QMap<QString, QVariant> valueMap) {
   if (!mScens.contains(name)) {
     return nullptr;
   }
   auto scen = mScens[name];
-  return scen(mArgc, mArgv);
+  return scen(mArgc, mArgv, valueMap);
 }
 }

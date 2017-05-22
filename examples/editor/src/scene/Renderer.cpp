@@ -16,7 +16,9 @@ Renderer::Renderer(int argc, char *argv[], QWidget *parent)
   glFormat.setProfile(QGLFormat::CoreProfile);
   setFormat(glFormat);
   this->makeCurrent();
-  mScene = std::make_shared<scene::TextScene>(mArgc, mArgv);
+  QMap<QString, QVariant> text;
+  text["mText"] = "Hello World";
+  mScene = std::make_shared<scene::TextScene>(mArgc, mArgv, text);
   mTime = Time::now();
 }
 

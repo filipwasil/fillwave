@@ -7,8 +7,8 @@ using namespace std;
 
 namespace scene {
 
-OrtpgraphicProjectionScene::OrtpgraphicProjectionScene(int argc, char **argv)
-		: AScene(argc, argv) {
+OrtpgraphicProjectionScene::OrtpgraphicProjectionScene(int argc, char **argv, QMap<QString, QVariant> varValues)
+		: AScene(argc, argv, varValues) {
 	mSceneParameters["mText"] = QVariant("HelloWorld");
 	init();
 }

@@ -7,8 +7,8 @@ using namespace std;
 
 namespace scene {
 
-ShadowScene::ShadowScene(int argc, char **argv)
-		: AScene(argc, argv) {
+ShadowScene::ShadowScene(int argc, char **argv, QMap<QString, QVariant> varValues)
+		: AScene(argc, argv, varValues) {
 	mSceneParameters["mFirstShadow"] = QVariant("0_255_0");
 	mSceneParameters["mSecondShadow"] = QVariant("0_255_0");
 	mSceneParameters["mThirdShadow"] = QVariant("0_255_0");

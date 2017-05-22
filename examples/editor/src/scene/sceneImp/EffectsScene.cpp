@@ -7,8 +7,8 @@ using namespace std;
 
 namespace scene {
 
-EffectsScene::EffectsScene(int argc, char **argv)
-		: AScene(argc, argv) {
+EffectsScene::EffectsScene(int argc, char **argv, QMap<QString, QVariant> varValues)
+		: AScene(argc, argv, varValues) {
 	mSceneParameters["mText"] = QVariant("HelloWorld");
 	init();
 }

@@ -13,7 +13,7 @@ Q_OBJECT
                  WRITE
                  setParameters)
 public:
-  TerrainScene(int argc, char **argv);
+  TerrainScene(int argc, char **argv, QMap<QString, QVariant> varValues);
 
   virtual ~TerrainScene() {
   }

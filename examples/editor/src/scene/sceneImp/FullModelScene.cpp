@@ -7,8 +7,8 @@ using namespace std;
 
 namespace scene {
 
-FullModelScene::FullModelScene(int argc, char **argv)
-		: AScene(argc, argv) {
+FullModelScene::FullModelScene(int argc, char **argv, QMap<QString, QVariant> varValues)
+		: AScene(argc, argv, varValues) {
 	mSceneParameters["mText"] = QVariant("HelloWorld");
 	init();
 }

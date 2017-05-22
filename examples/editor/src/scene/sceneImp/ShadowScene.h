@@ -8,7 +8,7 @@ class ShadowScene : public AScene {
   Q_OBJECT
   Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
 public:
-  ShadowScene(int argc, char **argv);
+  ShadowScene(int argc, char **argv, QMap<QString, QVariant> varValues);
 
   virtual ~ShadowScene(){}
 

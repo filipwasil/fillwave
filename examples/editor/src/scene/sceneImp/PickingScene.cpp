@@ -8,8 +8,8 @@ using namespace std;
 
 namespace scene {
 
-PickingScene::PickingScene(int argc, char **argv)
-		: AScene(argc, argv) {
+PickingScene::PickingScene(int argc, char **argv, QMap<QString, QVariant> varValues)
+		: AScene(argc, argv, varValues) {
 	mSceneParameters["mText"] = QVariant("HelloWorld");
 	init();
 }

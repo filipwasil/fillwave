@@ -12,7 +12,7 @@ Q_OBJECT
                  WRITE
                  setParameters)
 public:
-  FullModelScene(int argc, char **argv);
+  FullModelScene(int argc, char **argv, QMap<QString, QVariant> varValues);
 
   virtual ~FullModelScene() {
   }

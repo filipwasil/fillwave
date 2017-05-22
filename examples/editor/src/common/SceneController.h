@@ -2,6 +2,8 @@
 
 #include <QWidget>
 #include <QVector>
+#include <QMap>
+#include <QVariant>
 #include <memory>
 #include "common/ISceneController.h"
 #include "scene/AScene.h"
@@ -22,6 +24,8 @@ public :
   void deleteTranslators() override;
 
   void registerNewScene(std::shared_ptr<scene::AScene> scen) override;
+
+  QMap<QString, QVariant> getCurrentMenuValues();
 private:
   void reInitSceneValues();
   std::shared_ptr<scene::AScene> mScene;

@@ -24,8 +24,8 @@ using namespace std;
 
 namespace scene {
 
-DynamicTextureScene::DynamicTextureScene(int argc, char **argv)
-		: AScene(argc, argv) {
+DynamicTextureScene::DynamicTextureScene(int argc, char **argv, QMap<QString, QVariant> varValues)
+		: AScene(argc, argv, varValues) {
 	mSceneParameters["mText"] = QVariant("HelloWorld");
 	init();
 }
