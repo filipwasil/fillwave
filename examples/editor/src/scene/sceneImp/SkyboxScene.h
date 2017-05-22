@@ -8,7 +8,7 @@ class SkyboxScene : public AScene {
   Q_OBJECT
   Q_PROPERTY(QMap sceneParameter READ getParameters WRITE setParameters)
 public:
-  SkyboxScene(int argc, char **argv);
+  SkyboxScene(int argc, char **argv, QMap<QString, QVariant> varValues);
 
   virtual ~SkyboxScene() {}
 

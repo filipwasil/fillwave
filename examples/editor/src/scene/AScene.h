@@ -12,7 +12,7 @@ namespace scene {
 class AScene : public QObject {
 
 public:
-  AScene(int argc, char * const*argv) {
+  AScene(int argc, char *const *argv, QMap<QString, QVariant> parametersMap) : mSceneParameters(parametersMap) {
       mEngine = std::make_shared<flw::Engine>(argc, argv);
   }
 

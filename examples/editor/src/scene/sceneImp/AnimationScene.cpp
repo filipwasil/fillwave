@@ -8,7 +8,8 @@ using namespace flw;
 using namespace flw::flf;
 
 namespace scene {
-AnimationScene::AnimationScene(int argc, char **argv) : AScene (argc, argv) {
+AnimationScene::AnimationScene(int argc, char **argv, QMap<QString, QVariant> varValues)
+    : AScene(argc, argv, varValues) {
   mSceneParameters["mText"] = QVariant("HelloWorld");
   init();
 }

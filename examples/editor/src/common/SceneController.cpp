@@ -42,12 +42,20 @@ void SceneController::deleteTranslators() {
 
 void SceneController::registerNewScene(std::shared_ptr<scene::AScene> scen) {
   mScene = scen;
-  reInitSceneValues();
 }
 
 void SceneController::reInitSceneValues() {
   for (const auto translator : mTranslators) {
     updateScenField(translator->getCurrentValues());
   }
+}
+
+QMap<QString, QVariant> SceneController::getCurrentMenuValues() {
+  QMap<QString, QVariant> values;
+  for (const auto pairValue : mTranslators) {
+    auto val = pairValue->getCurrentValues();
+    values.insert(val.first, val.second);
+  }
+  return values;
 }
 }

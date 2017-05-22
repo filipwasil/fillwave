@@ -7,8 +7,8 @@ using namespace std;
 
 namespace scene {
 
-PostProcessingScene::PostProcessingScene(int argc, char **argv)
-		: AScene(argc, argv) {
+PostProcessingScene::PostProcessingScene(int argc, char **argv, QMap<QString, QVariant> varValues)
+		: AScene(argc, argv, varValues) {
 	mSceneParameters["mText"] = QVariant("HelloWorld");
 	init();
 }

@@ -8,9 +8,8 @@ using namespace flw;
 using namespace flw::flf;
 
 namespace scene {
-TextScene::TextScene(int argc, char **argv)
-    : AScene(argc, argv) {
-  mSceneParameters["mText"] = QVariant("HelloWorld");
+TextScene::TextScene(int argc, char **argv, QMap<QString, QVariant> varValues)
+    : AScene(argc, argv, varValues) {
   init();
 }
 
@@ -45,8 +44,8 @@ void TextScene::init() {
   snow->attachHierarchyCallback(std::make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
 
   mEngine->getCurrentScene()->attach(std::move(snow));
-
-  mText = mEngine->storeText("Fillwave editor", "FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
+  auto startTextVariant = mSceneParameters["mText"];
+  mText = mEngine->storeText(startTextVariant.toString().toStdString(), "FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
 }
 
 void TextScene::perform() {
