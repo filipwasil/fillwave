@@ -40,7 +40,9 @@ namespace flc {
 PostProcessingPass::PostProcessingPass(flc::Program *program,
     flc::Texture2DRenderableDynamic *frame,
     GLfloat lifetime)
-    : Finishable(lifetime), mFrame(frame), mProgram(program) {
+    : Finishable(lifetime)
+    , mFrame(frame)
+    , mProgram(program) {
 }
 
 flc::Texture2DRenderableDynamic *PostProcessingPass::getFrame() const {

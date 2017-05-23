@@ -42,11 +42,11 @@ class LightManager;
  * \brief Cache Safe Program Based Render Pass IRenderer. Not ready (Rev.4.2.1).
  */
 
-class IRendererCSPBRP : public IRenderer {
+class RendererCSPBRP : public IRenderer {
 public:
-  IRendererCSPBRP(LightManager *lightManager);
+  RendererCSPBRP(LightManager *lightManager);
 
-  virtual ~IRendererCSPBRP() = default;
+  virtual ~RendererCSPBRP() = default;
 
   void update(IRenderable *renderable) override;
 

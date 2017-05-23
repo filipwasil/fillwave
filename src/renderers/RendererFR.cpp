@@ -65,5 +65,5 @@ void RendererFR::clear() {
   mRenderPasses.reserve(predictedSize);
 }
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

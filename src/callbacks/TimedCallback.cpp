@@ -37,7 +37,8 @@ namespace flw {
 namespace flf {
 
 TimedCallback::TimedCallback(GLfloat timeToFinish, EasingFunction easing)
-    : Callback(eEventType::eTime, timeToFinish), mEasing(easing) {
+    : Callback(eEventType::eTime, timeToFinish)
+    , mEasing(easing) {
 }
 
 void TimedCallback::perform(EventType &event) {
@@ -47,7 +48,7 @@ void TimedCallback::perform(EventType &event) {
 }
 
 void TimedCallback::performTime(TimeEventData &) {
-  // just wait
+  // nothing
 }
 
 GLfloat TimedCallback::ease(GLfloat progress) {

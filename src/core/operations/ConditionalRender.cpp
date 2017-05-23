@@ -31,7 +31,6 @@
 #ifdef FILLWAVE_GLES_3_0
 #else
 
-
 namespace flw {
 namespace flc {
 

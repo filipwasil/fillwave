@@ -69,33 +69,24 @@ void Terrain::drawPBRP(ICamera &camera) {
 inline void Terrain::distanceCheck(ICamera &camera) {
   /* check if there are any children too far away from the camera */
   glm::vec3 distanceToCamera;
-  GLfloat direction = 0.0f;
 
-  GLint cenralChunkIndex = ((mRadius * 2 + 1) * (mRadius * 2 + 1) - 1) / 2;
-  distanceToCamera = camera.getTranslation() - glm::vec3(mVoxelChunks[cenralChunkIndex]->getTranslation());
+  GLint centralChunkIndex = ((mRadius * 2 + 1) * (mRadius * 2 + 1) - 1) / 2;
+  distanceToCamera = camera.getTranslation() - glm::vec3(mVoxelChunks[centralChunkIndex]->getTranslation());
 
   GLfloat singleChunkWidth = FILLWAVE_VOXEL_CHUNK_SIZE * mGap * mRadius;
   GLfloat maximumDistance = singleChunkWidth * 0.5f;
 
-  if (glm::abs(distanceToCamera.x) > maximumDistance) { //OK
-    if (distanceToCamera.x > 0.0f) {
-      direction = 1.0;
-    } else {
-      direction = -1.0;
-    }
+  if (glm::abs(distanceToCamera.x) > maximumDistance) {
+    const float direction = distanceToCamera.x > 0.0f ? 1.0 : -1.0;
     for (auto &it : mVoxelChunks) {
-      it->moveBy(glm::vec3(direction * singleChunkWidth, 0.0, 0.0)); //OK
+      it->moveByX(direction * singleChunkWidth);
     }
   }
 
-  if (glm::abs(distanceToCamera.z) > maximumDistance) { //OK
-    if (distanceToCamera.z > 0.0f) {
-      direction = 1.0;
-    } else {
-      direction = -1.0;
-    }
+  if (glm::abs(distanceToCamera.z) > maximumDistance) {
+    const float direction = distanceToCamera.z > 0.0f ? 1.0 : -1.0;
     for (auto &it : mVoxelChunks) {
-      it->moveBy(glm::vec3(0.0, 0.0, direction * singleChunkWidth)); //OK
+      it->moveByZ(direction * singleChunkWidth);
     }
   }
 }

@@ -39,11 +39,13 @@ namespace flw {
 namespace flf {
 
 SequenceCallback::SequenceCallback()
-    : Callback(eEventType::eTime), mCallbackIterator(this->begin()), mReloaditerator(true) {
+    : Callback(eEventType::eTime)
+    , mCallbackIterator(this->begin())
+    , mReloaditerator(true) {
 }
 
 void SequenceCallback::perform(EventType &event) {
-  if (mReloaditerator) { //xxx i am pretty asure this can be done better
+  if (mReloaditerator) {
     mCallbackIterator = this->begin();
     mReloaditerator = false;
   }

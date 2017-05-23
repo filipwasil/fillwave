@@ -44,9 +44,12 @@ EmiterPointStep::EmiterPointStep(Engine *engine,
     GLenum blendingSource,
     GLenum blendingDestination,
     flc::Texture *texture)
-    : IEmiterPoint(engine, howMany, 100, //size
+    : IEmiterPoint(engine,
+                   howMany,
+                   100, //size
                    1, //lifetime
-                   texture, glm::vec4(1.0, 1.0, 1.0, 0.0), // color
+                   texture,
+                   glm::vec4(1.0, 1.0, 1.0, 0.0), // color
                    blendingSource, blendingDestination, GL_FALSE, 1.0) {
 
 }

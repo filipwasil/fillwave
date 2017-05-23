@@ -59,5 +59,5 @@ void BoostColor::startAction(flc::Program *program) {
   program->uniformPush("uBoostColorEffect", true);
 }
 
-} /* framework*/
+} /* flf */
 } /* flw */

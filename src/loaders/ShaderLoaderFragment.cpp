@@ -39,7 +39,11 @@ namespace flw {
 namespace flf {
 
 ShaderLoaderFragment::ShaderLoaderFragment(GLuint renderTargets)
-    : mFog(GL_FALSE), mColor(GL_FALSE), mColorBoost(GL_FALSE), mTextureOnly(GL_FALSE), mPointLights(GL_TRUE)
+    : mFog(GL_FALSE)
+    , mColor(GL_FALSE)
+    , mColorBoost(GL_FALSE)
+    , mTextureOnly(GL_FALSE)
+    , mPointLights(GL_TRUE)
     , mRendertargets(renderTargets) {
 
 }

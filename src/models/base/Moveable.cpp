@@ -38,7 +38,10 @@ namespace flw {
 namespace flf {
 
 Moveable::Moveable(glm::vec3 translation, glm::quat rotation)
-    : mTranslation(translation), mRotation(rotation), mScale(1.0), mRefresh(true) {
+    : mTranslation(translation)
+    , mRotation(rotation)
+    , mScale(1.0f)
+    , mRefresh(true) {
 }
 
 glm::vec3 Moveable::getTranslation() {
@@ -154,9 +157,8 @@ void Moveable::rotateBy(const glm::vec3 &axis, GLfloat angle) {
   Axis = (glm::mat4_cast(mRotation) * glm::vec4(Axis, 1.0)).xyz();
 
   Axis = Axis * sinf(angle / 2.0f);
-  float scalar = cosf(angle / 2.0f);
-
-  glm::quat offset(scalar, Axis.x, Axis.y, Axis.z);
+  const float scalar = cosf(angle / 2.0f);
+  const glm::quat offset(scalar, Axis.x, Axis.y, Axis.z);
 
   mRotation = offset * mRotation;
   mRotation = glm::normalize(mRotation);
@@ -167,7 +169,7 @@ void Moveable::updateMatrixCache() {
   mMMC = glm::translate(glm::mat4(1.0), mTranslation) * glm::mat4_cast(mRotation) * glm::scale(glm::mat4(1.0), mScale);
 }
 
-bool Moveable::isRefresh() {
+bool Moveable::isRefresh() const {
   return mRefresh;
 }
 
@@ -175,11 +177,11 @@ void Moveable::setRefresh(bool state) {
   mRefresh = state;
 }
 
-glm::mat4 Moveable::getParentMMC() {
+glm::mat4 Moveable::getParentMMC() const {
   return mParentMMC;
 }
 
-glm::quat Moveable::getParentRotation() {
+glm::quat Moveable::getParentRotation() const {
   return mParentRotation;
 }
 

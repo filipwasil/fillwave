@@ -176,8 +176,6 @@ inline void EmiterPointCPU::coreDraw() {
 
   glEnable(GL_BLEND);
   glBlendFunc(mBlending.mSrc, mBlending.mDst);
-//   glBlendFuncSeparate(GL_ONE, GL_ONE, GL_ONE, GL_ONE);
-//   glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR);
   glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid *>(0));
   fLogC("Draw elements");
   glDisable(GL_BLEND);
@@ -215,7 +213,6 @@ void EmiterPointCPU::initUniformsCache() {
   mULCAcceleration = mProgram->getUniformLocation("uAcceleration");
   mULCLifeTime = mProgram->getUniformLocation("uLifeTime");
   mULCAlphaCutOff = mProgram->getUniformLocation("uAlphaCutOff");
-//   mULCSourcePosition = mProgram->getUniformLocation("uSourcePosition");
   mULCTextureUnit = mProgram->getUniformLocation("uTextureUnit");
 }
 
@@ -248,7 +245,7 @@ bool EmiterPointCPU::getRenderItem(RenderItem &item) {
   item.mIndicesPointer = 0;
   item.mMode = GL_POINTS;
 
-  item.mRenderStatus = 0xe4; // 11100100
+  item.mRenderStatus = 0xe4;
   return true;
 }
 

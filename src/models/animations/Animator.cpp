@@ -88,13 +88,13 @@ AssimpNode::~AssimpNode() {
 }
 
 Animator::Animator(const aiScene *scene)
-    : mTimeSinceStartSeconds(0.0) {
+    : mTimeSinceStartSeconds(0.0f) {
   mAnimationsBufferData.resize(FILLWAVE_MAX_BONES);
 
   GLuint numBones = 0;
 
-  for (GLuint j = 0; j < scene->mNumMeshes; j++) {
-    for (GLuint i = 0; i < scene->mMeshes[j]->mNumBones; i++) {
+  for (GLuint j = 0; j < scene->mNumMeshes; ++j) {
+    for (GLuint i = 0; i < scene->mMeshes[j]->mNumBones; ++i) {
       mBones.push_back(std::make_unique<Bone>(scene->mMeshes[j]->mBones[i]));
       numBones++;
     }
@@ -156,19 +156,18 @@ GLint Animator::getAnimations() const {
 
 void Animator::updateTransformations(GLint activeAnimation, float timeElapsed_s) {
 
-  if (activeAnimation == FILLWAVE_DO_NOT_ANIMATE) {
+  if (FILLWAVE_DO_NOT_ANIMATE == activeAnimation) {
     mTimeSinceStartSeconds = 0;
     mRootAnimationNode->update(0, glm::mat4(1.0), this, 0);
-  } else {
-    //fLogI("Update full transformation with time: %f", timeElapsed_s);
-    mTimeSinceStartSeconds += timeElapsed_s;
-    float TicksPerSecond = (float) (
-        mAnimations[activeAnimation]->getTicksPerSec() != 0 ? mAnimations[activeAnimation]->getTicksPerSec() : 25.0f
-    );
-    float TimeInTicks = mTimeSinceStartSeconds * TicksPerSecond;
-    float AnimationTime = fmod(TimeInTicks, (float) mAnimations[activeAnimation]->getDuration());
-    mRootAnimationNode->update(AnimationTime, glm::mat4(1.0), this, activeAnimation);
+    return;
   }
+  mTimeSinceStartSeconds += timeElapsed_s;
+  float TicksPerSecond = (float) (
+      mAnimations[activeAnimation]->getTicksPerSec() != 0 ? mAnimations[activeAnimation]->getTicksPerSec() : 25.0f
+  );
+  float TimeInTicks = mTimeSinceStartSeconds * TicksPerSecond;
+  float AnimationTime = fmod(TimeInTicks, (float) mAnimations[activeAnimation]->getDuration());
+  mRootAnimationNode->update(AnimationTime, glm::mat4(1.0), this, activeAnimation);
 }
 
 AssimpNode *Animator::initNode(aiNode *node) {
@@ -197,7 +196,7 @@ void Animator::log() {
 }
 
 Channel *Animator::findChannel(Animation *animation, const std::string &nodeName) const {
-  for (int i = 0; i < animation->getHowManyChannels(); i++) {
+  for (int i = 0; i < animation->getHowManyChannels(); ++i) {
     Channel *channel = animation->getChannel(i);
 
     if (std::string(channel->mAffectedNodeName) == nodeName) {
@@ -208,7 +207,7 @@ Channel *Animator::findChannel(Animation *animation, const std::string &nodeName
 }
 
 glm::vec3 Animator::getCurrentTranslation(float timeElapsed_s, Channel *channel) const {
-  if (channel->mKeysTranslation.size() == 1) {
+  if (1 == channel->mKeysTranslation.size()) {
     return channel->mKeysTranslation[0].mValue;
   }
 
@@ -218,9 +217,7 @@ glm::vec3 Animator::getCurrentTranslation(float timeElapsed_s, Channel *channel)
   float DeltaTime = (float) (
       channel->mKeysTranslation[NextPositionIndex].mTime - channel->mKeysTranslation[PositionIndex].mTime
   );
-  float alpha = (
-                    timeElapsed_s - (float) channel->mKeysTranslation[PositionIndex].mTime
-                ) / DeltaTime;
+  float alpha = (timeElapsed_s - (float) channel->mKeysTranslation[PositionIndex].mTime) / DeltaTime;
   assert(alpha >= 0.0f && alpha <= 1.0f);
   const glm::vec3 &Start = channel->mKeysTranslation[PositionIndex].mValue;
   const glm::vec3 &End = channel->mKeysTranslation[NextPositionIndex].mValue;
@@ -236,12 +233,8 @@ glm::vec3 Animator::getCurrentScale(float timeElapsed_s, Channel *channel) const
   GLuint ScalingIndex = getScaleStep(timeElapsed_s, channel);
   GLuint NextScalingIndex = (ScalingIndex + 1);
   assert(NextScalingIndex < channel->mKeysScaling.size());
-  float DeltaTime = (float) (
-      channel->mKeysScaling[NextScalingIndex].mTime - channel->mKeysScaling[ScalingIndex].mTime
-  );
-  float alpha = (
-                    timeElapsed_s - (float) channel->mKeysScaling[ScalingIndex].mTime
-                ) / DeltaTime;
+  float DeltaTime = channel->mKeysScaling[NextScalingIndex].mTime - channel->mKeysScaling[ScalingIndex].mTime;
+  float alpha = (timeElapsed_s - channel->mKeysScaling[ScalingIndex].mTime) / DeltaTime;
   assert(alpha >= 0.0f && alpha <= 1.0f);
   glm::vec3 Start = channel->mKeysScaling[ScalingIndex].mValue;
   glm::vec3 End = channel->mKeysScaling[NextScalingIndex].mValue;
@@ -250,19 +243,15 @@ glm::vec3 Animator::getCurrentScale(float timeElapsed_s, Channel *channel) const
 }
 
 glm::quat Animator::getCurrentRotation(float timeElapsed_s, Channel *channel) const {
-  if (channel->mKeysRotation.size() == 1) {
+  if (1 == channel->mKeysRotation.size()) {
     return channel->mKeysRotation[0].mValue;
   }
 
   GLuint RotationIndex = getRotationStep(timeElapsed_s, channel);
   GLuint NextRotationIndex = (RotationIndex + 1);
   assert(NextRotationIndex < channel->mKeysRotation.size());
-  float DeltaTime = (float) (
-      channel->mKeysRotation[NextRotationIndex].mTime - channel->mKeysRotation[RotationIndex].mTime
-  );
-  float alpha = (
-                    timeElapsed_s - (float) channel->mKeysRotation[RotationIndex].mTime
-                ) / DeltaTime;
+  float DeltaTime = channel->mKeysRotation[NextRotationIndex].mTime - channel->mKeysRotation[RotationIndex].mTime;
+  float alpha = (timeElapsed_s - (float) channel->mKeysRotation[RotationIndex].mTime) / DeltaTime;
   assert(alpha >= 0.0f && alpha <= 1.0f);
   glm::quat startRotation = channel->mKeysRotation[RotationIndex].mValue;
   glm::quat endRotation = channel->mKeysRotation[NextRotationIndex].mValue;
@@ -278,7 +267,7 @@ glm::fquat Animator::lerp(const glm::fquat &v0, const glm::fquat &v1, float alph
 }
 
 GLuint Animator::getTranslationStep(float timeElapsed_s, Channel *channel) const {
-  for (GLuint i = 0; i < channel->mKeysTranslation.size() - 1; i++) {
+  for (GLuint i = 0; i < channel->mKeysTranslation.size() - 1; ++i) {
     if (timeElapsed_s < (float) channel->mKeysTranslation[i + 1].mTime) {
       return i;
     }
@@ -289,14 +278,12 @@ GLuint Animator::getTranslationStep(float timeElapsed_s, Channel *channel) const
 
 GLuint Animator::getRotationStep(float timeElapsed_s, Channel *channel) const {
   assert(channel->mKeysRotation.size() > 0);
-  for (GLuint i = 0; i < channel->mKeysRotation.size() - 1; i++) {
-    if (timeElapsed_s < (float) channel->mKeysRotation[i + 1].mTime) {
+  for (GLuint i = 0; i < channel->mKeysRotation.size() - 1; ++i) {
+    if (timeElapsed_s < channel->mKeysRotation[i + 1].mTime) {
       return i;
     }
   }
-
-  assert(0);
-
+  fLogF("No such rotation step");
   return 0;
 }
 
@@ -315,4 +302,4 @@ GLint Animator::getElements() const {
 }
 
 } /* flf */
-} /* fillwave*/
+} /* flw */

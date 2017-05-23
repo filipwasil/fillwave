@@ -58,6 +58,6 @@ void ProgramPipeline::use(GLuint programHandle, GLuint id) const {
 }
 
 } /* flc */
-} /* fillwave  */
+} /* flw  */
 
 #endif /* FILLWAVE_GLES_3_0 */

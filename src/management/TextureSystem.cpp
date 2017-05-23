@@ -86,7 +86,7 @@ inline void TextureSystem::checkExtensions() {
 }
 
 flc::Texture2D *TextureSystem::get(const std::string &texturePath, eCompression compression, eFlip flip) {
-  std::string filePath = mRootPath + texturePath;
+  const std::string filePath = mRootPath + texturePath;
   if (texturePath.empty()) {
     return nullptr;
   }

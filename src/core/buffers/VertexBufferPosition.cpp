@@ -51,15 +51,12 @@ VertexBufferPosition::VertexBufferPosition(const std::vector<VertexPosition> &ve
 }
 
 void VertexBufferPosition::log() const {
-  auto d = [](GLfloat &f) {
-    return static_cast<double>(f);
-  };
   for (auto it : mDataVertices) {
     fLogI("Vertex written: %f %f %f %f",
-          d(it.mPosition[0]),
-          d(it.mPosition[1]),
-          d(it.mPosition[2]),
-          d(it.mPosition[3]));
+          static_cast<double>(it.mPosition[0]),
+          static_cast<double>(it.mPosition[1]),
+          static_cast<double>(it.mPosition[2]),
+          static_cast<double>(it.mPosition[3]));
   }
 }
 

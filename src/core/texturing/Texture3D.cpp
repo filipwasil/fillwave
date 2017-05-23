@@ -21,7 +21,8 @@ Texture3D::Texture3D(Texture2DFile *fileRight,
     Texture2DFile *fileFront,
     Texture2DFile *fileBack,
     ParameterList &parameters)
-    : Texture(GL_TEXTURE_CUBE_MAP), mRight(std::make_unique<Texture3DFile>(fileRight, GL_TEXTURE_CUBE_MAP_POSITIVE_X))
+    : Texture(GL_TEXTURE_CUBE_MAP)
+    , mRight(std::make_unique<Texture3DFile>(fileRight, GL_TEXTURE_CUBE_MAP_POSITIVE_X))
     , mLeft(std::make_unique<Texture3DFile>(fileLeft, GL_TEXTURE_CUBE_MAP_NEGATIVE_X))
     , mCeil(std::make_unique<Texture3DFile>(fileCeil, GL_TEXTURE_CUBE_MAP_POSITIVE_Y))
     , mFloor(std::make_unique<Texture3DFile>(fileFloor, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))
@@ -78,7 +79,7 @@ void Texture3D::unbindCubemapTexture(GLint textureUnit) {
 }
 
 void Texture3D::log() {
-
+  // nothing
 }
 
 void Texture3D::sendData(Texture2DFileData xp,

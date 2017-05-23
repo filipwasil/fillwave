@@ -68,6 +68,7 @@ RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
                                                           mScreenSize[1],
                                                           mDeferredColorAttachments,
                                                           mDeferredDepthAttachments)) {
+  //todo RendererDR not ready
   flf::Sphere sphere(3.0f, 10, 10); //xxx hardcoded values fix ! todo !
   std::vector<flc::VertexBasic> vertices = sphere.getVertices();
   std::vector<GLuint> indices = sphere.getIndices();

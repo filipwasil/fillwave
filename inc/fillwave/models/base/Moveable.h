@@ -95,14 +95,14 @@ public:
 
   void updateMatrixCache();
 
-  bool isRefresh();
+  bool isRefresh() const;
 
   void setRefresh(bool state);
 
   /* Parent */
-  glm::mat4 getParentMMC();
+  glm::mat4 getParentMMC() const;
 
-  glm::quat getParentRotation();
+  glm::quat getParentRotation() const;
 
 protected:
   glm::fvec3 mTranslation;

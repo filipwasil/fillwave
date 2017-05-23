@@ -40,7 +40,8 @@ namespace flw {
 namespace flc {
 
 Texture::Texture(GLenum textureTarget, GLsizei howMany)
-    : GLObject(howMany), mTarget(textureTarget) {
+    : GLObject(howMany)
+    , mTarget(textureTarget) {
   reload();
 }
 

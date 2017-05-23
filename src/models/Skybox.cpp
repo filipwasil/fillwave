@@ -51,7 +51,7 @@ Skybox::Skybox(Engine *engine, flc::Texture3D *texture)
   mProgram = loader.getSkybox();
   mProgramDR = loader.getSkyboxDR();
 
-  SphereSkybox sphere(1.0, 10, 10);
+  SphereSkybox sphere(1.0f, 10, 10);
 
   std::vector<GLuint> indices = sphere.getIndices();
   std::vector<flc::VertexPosition> vertices = sphere.getVertices();

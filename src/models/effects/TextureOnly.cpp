@@ -53,5 +53,5 @@ void TextureOnly::startAction(flc::Program *program) {
   program->uniformPush("uTextureOnlyEffect", true);
 }
 
-} /* framework*/
+} /* flf */
 } /* flw */

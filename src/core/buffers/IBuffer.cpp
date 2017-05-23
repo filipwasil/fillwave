@@ -44,7 +44,9 @@ namespace flw {
 namespace flc {
 
 IBuffer::IBuffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany)
-    : GLObject(howMany), mLoaded(GL_FALSE), mIndex(index) {
+    : GLObject(howMany)
+    , mLoaded(GL_FALSE)
+    , mIndex(index) {
   setTarget(target);
   setDrawType(drawType);
   reload();

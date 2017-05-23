@@ -41,11 +41,14 @@ namespace flw {
 namespace flc {
 
 Uniform::Uniform(std::string name, GLuint type, GLsizei size, GLint location)
-    : mName(name), mType(type), mSize(size), mLocation(location) {
-  /* xxx validate parameters */
+    : mName(name)
+    , mType(type)
+    , mSize(size)
+    , mLocation(location) {
+  // nothing
 }
 
-GLboolean Uniform::isName(std::string &name) const {
+bool Uniform::isName(const std::string& name) const {
   return mName == name;
 }
 

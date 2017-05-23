@@ -41,7 +41,9 @@ namespace flw {
 namespace flc {
 
 Texture2DRenderable::Texture2DRenderable(GLenum attachment, Texture2DFile *file, ParameterList &parameters)
-    : Texture2D(file, parameters), mFramebuffer(puFramebuffer(new Framebuffer())), mAttachment(attachment) {
+    : Texture2D(file, parameters)
+    , mFramebuffer(std::make_unique<Framebuffer>())
+    , mAttachment(attachment) {
   setAttachment(attachment);
 }
 
@@ -67,7 +69,7 @@ void Texture2DRenderable::bindForReading() {
 }
 
 void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
-  GLenum none = GL_NONE;
+  const GLenum none = GL_NONE;
   switch (attachment) {
     case GL_DEPTH_STENCIL_ATTACHMENT:
       bind();

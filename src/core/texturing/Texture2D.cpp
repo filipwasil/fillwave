@@ -14,7 +14,9 @@ namespace flw {
 namespace flc {
 
 Texture2D::Texture2D(Texture2DFile *file, ParameterList &parameters, GLuint howMany)
-    : Texture(GL_TEXTURE_2D, howMany), mFile(puTexture2DFile(file)), mParameters(parameters) {
+    : Texture(GL_TEXTURE_2D, howMany)
+    , mFile(puTexture2DFile(file))
+    , mParameters(parameters) {
   reload();
 }
 
@@ -69,7 +71,6 @@ void Texture2D::reload() {
     setParameters(mParameters);
     sendData();
     generateMipMaps();
-//      unbind();
   }
 }
 

@@ -41,7 +41,8 @@ namespace flw {
 namespace flf {
 
 TimedBoneUpdateCallback::TimedBoneUpdateCallback(Model *model)
-    : TimedCallback(0.0), mModel(model) {
+    : TimedCallback(0.0)
+    , mModel(model) {
   fLogD("Added animation callback");
 }
 

@@ -45,16 +45,17 @@ UniformBuffer::UniformBuffer(std::string name,
     GLuint uniformBlockSize,
     GLuint bindingPoint,
     GLuint dataStoreModification)
-    : IBuffer(GL_UNIFORM_BUFFER, dataStoreModification, index), mName(name), mBindingPoint(bindingPoint) {
+    : IBuffer(GL_UNIFORM_BUFFER, dataStoreModification, index)
+    , mName(name)
+    , mBindingPoint(bindingPoint) {
   bind();
   bindBase();
   unbind();
   mSize = uniformBlockSize;
-
 }
 
 UniformBuffer::~UniformBuffer() {
-
+  // nothing
 }
 
 void UniformBuffer::bindRange(GLuint id) {
@@ -62,10 +63,11 @@ void UniformBuffer::bindRange(GLuint id) {
 }
 
 void UniformBuffer::push(GLfloat *data) {
+  //todo optimization i think we can limit uniform buffer loading to GPU
   bind();
   mData = data;
   send();
-  mLoaded = GL_FALSE; //xxx always load to GPU
+  mLoaded = GL_FALSE;
   unbind();
 }
 

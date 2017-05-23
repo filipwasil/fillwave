@@ -34,7 +34,8 @@
 #include <fillwave/OpenGL.h>
 
 void glesInitExtensions() {
-  // may be needed
+  //todo consider removing this function
+  // nothing
 }
 
 unsigned int getFramebufferStatus() {

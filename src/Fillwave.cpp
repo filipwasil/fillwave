@@ -212,7 +212,6 @@ void Engine::registerCallback(puCallback &&callback, flf::IFocusable *focusable)
     mImpl->mFocus.second.push_back(callback.get());
 #else
     if (mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
-      fLogE("AAA");
       mImpl->mFocus[focusable] = vector<Callback *>(1, callback.get());
     } else {
       mImpl->mFocus[focusable].push_back(callback.get());
@@ -234,9 +233,7 @@ void Engine::dropFocus(flf::IFocusable *focusable) {
 #else
   fLogE("mImpl->mFocus.size() %lu", mImpl->mFocus.size());
   if (!mImpl->mFocus.empty() && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
-    fLogE("1");
     for (auto &it : mImpl->mFocus[focusable]) {
-      fLogE("1");
       mImpl->unregisterCallback(it);
     }
   }
@@ -352,7 +349,7 @@ GLfloat Engine::getScreenAspectRatio() const {
 void Engine::insertResizeScreen(GLuint width, GLuint height) {
   mImpl->insertResizeScreen(width, height);
 
-  for (auto &it : mImpl->mTextManager) { //xxx todo optimize to update only VBO
+  for (auto &it : mImpl->mTextManager) { //todo optimization update only VBO
     it->editAspectRatio(this);
   }
 }
@@ -570,9 +567,8 @@ IndexBuffer *Engine::storeBufferInternal(VertexArray *vao, GLuint elements) {
 
 VertexBufferParticlesGPU *
 Engine::storeBuffersInternal(VertexArray *vao, size_t idx, vector<VertexParticleGPU> &particles) {
-  vector<VertexBufferParticlesGPU *> *ptr = new vector<VertexBufferParticlesGPU *>();
-  vector<VertexBufferParticlesGPU *> *buffers = mImpl->mBuffers.mVerticesParticlesGPU.store(ptr,
-                                                                                            vao);//constructor of vector
+  auto ptr = new vector<VertexBufferParticlesGPU *>();
+  auto buffers = mImpl->mBuffers.mVerticesParticlesGPU.store(ptr, vao);
   if (buffers->size() < idx) {
     return (*buffers)[idx];
   }

@@ -565,7 +565,7 @@ bool VoxelChunk::getRenderItem(RenderItem &item) {
   item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
   item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
   item.mMode = GL_TRIANGLES;
-  item.mRenderStatus = 0xc0; // vao, ibo, diff, norm, spec, blend, cont, anim
+  item.mRenderStatus = 0xc0;
   return true;
 }
 

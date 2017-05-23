@@ -39,7 +39,8 @@ namespace flw {
 namespace flf {
 
 IReloadable::IReloadable(Engine *engine, flc::VertexArray *vao)
-    : mVAO(vao ? vao : engine->storeVAO(this)), mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)) {
+    : mVAO(vao ? vao : engine->storeVAO(this))
+    , mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)) {
   mSampler->bind();
   mSampler->setParameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   mSampler->setParameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST);

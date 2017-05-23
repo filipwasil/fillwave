@@ -46,11 +46,8 @@ VertexBufferFloat::VertexBufferFloat(const std::vector<VertexFloat> &values, GLu
 }
 
 void VertexBufferFloat::log() const {
-  auto d = [](flc::VertexFloat &f) {
-    return static_cast<double>(f.mData);
-  };
   for (auto it : mDataVertices) {
-    fLogI("Vertex written: %f", d(it));
+    fLogI("Vertex written: %f", static_cast<double>(it.mData));
   }
 }
 

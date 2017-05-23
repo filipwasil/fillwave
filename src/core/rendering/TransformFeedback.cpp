@@ -41,7 +41,8 @@ namespace flw {
 namespace flc {
 
 TransformFeedback::TransformFeedback(GLsizei howMany)
-    : GLObject(howMany), mTarget(GL_TRANSFORM_FEEDBACK) {
+    : GLObject(howMany)
+    , mTarget(GL_TRANSFORM_FEEDBACK) {
   glGenTransformFeedbacks(mHowMany, mHandles);
 }
 
@@ -54,18 +55,23 @@ void TransformFeedback::bind(GLuint id) const {
 }
 
 void TransformFeedback::begin(GLenum primitiveMode) {
-  if (primitiveMode != GL_POINTS && primitiveMode != GL_LINES && primitiveMode != GL_TRIANGLES
-      #ifdef FILLWAVE_GLES_3_0
-      #else
-      && primitiveMode != GL_TRIANGLES_ADJACENCY && primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY &&
-      primitiveMode != GL_LINES_ADJACENCY && primitiveMode != GL_LINE_STRIP_ADJACENCY
+  if (primitiveMode != GL_POINTS
+      && primitiveMode != GL_LINES
+      && primitiveMode != GL_TRIANGLES
+#ifdef FILLWAVE_GLES_3_0
+#else
+      && primitiveMode != GL_TRIANGLES_ADJACENCY
+      && primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY
+      && primitiveMode != GL_LINES_ADJACENCY
+      && primitiveMode != GL_LINE_STRIP_ADJACENCY
 #endif
       ) {
     fLogE("not valid primitive type");
-  } else {
-    glBeginTransformFeedback(primitiveMode);
+    return;
   }
+  glBeginTransformFeedback(primitiveMode);
 }
+
 
 void TransformFeedback::end() {
   glEndTransformFeedback();

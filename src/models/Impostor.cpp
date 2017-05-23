@@ -48,7 +48,10 @@ Impostor::Impostor(Engine *engine,
     flc::Texture *texture,
     GLenum blendingSource,
     GLenum blendingDestination)
-    : Finishable(lifetime), mTexture(texture), mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)), mSize(size) {
+    : Finishable(lifetime)
+    , mTexture(texture)
+    , mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT))
+    , mSize(size) {
   mBlending.mSrc = blendingSource;
   mBlending.mDst = blendingDestination;
 }

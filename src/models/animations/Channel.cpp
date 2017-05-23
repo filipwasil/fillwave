@@ -45,19 +45,19 @@ namespace flf {
 Channel::Channel(aiNodeAnim *assimpChannel) {
   mAffectedNodeName = assimpChannel->mNodeName.C_Str();
 
-  for (unsigned int i = 0; i < assimpChannel->mNumPositionKeys; i++) {
+  for (unsigned int i = 0; i < assimpChannel->mNumPositionKeys; ++i) {
     Key<glm::vec3> keyTranslation(static_cast<float>(assimpChannel->mPositionKeys[i].mTime),
                                   assimpToGlmVec3(assimpChannel->mPositionKeys[i].mValue));
     mKeysTranslation.push_back(keyTranslation);
   }
 
-  for (unsigned int i = 0; i < assimpChannel->mNumRotationKeys; i++) {
+  for (unsigned int i = 0; i < assimpChannel->mNumRotationKeys; ++i) {
     Key<glm::quat> keyQuaternion(static_cast<float>(assimpChannel->mRotationKeys[i].mTime),
                                  assimpToGlmQuat(assimpChannel->mRotationKeys[i].mValue));
     mKeysRotation.push_back(keyQuaternion);
   }
 
-  for (unsigned int i = 0; i < assimpChannel->mNumScalingKeys; i++) {
+  for (unsigned int i = 0; i < assimpChannel->mNumScalingKeys; ++i) {
     Key<glm::vec3> keyScaling(static_cast<float>(assimpChannel->mScalingKeys[i].mTime),
                               assimpToGlmVec3(assimpChannel->mScalingKeys[i].mValue));
     mKeysScaling.push_back(keyScaling);

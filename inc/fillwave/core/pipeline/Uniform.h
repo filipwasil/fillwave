@@ -73,7 +73,7 @@ public:
 
   virtual ~Uniform() = default;
 
-  GLboolean isName(std::string &name) const;
+  bool isName(const std::string &name) const;
 
   GLuint getType() const;
 

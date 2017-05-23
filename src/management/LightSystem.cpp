@@ -53,10 +53,7 @@ void LightSystem::clear() {
 }
 
 bool LightSystem::isLightsRefresh() {
-  if (isMoveablesRefresh(mLightsSpot) || isMoveablesRefresh(mLightsDirectional) || isMoveablesRefresh(mLightsPoint)) {
-    return true;
-  }
-  return false;
+  return isMoveablesRefresh(mLightsSpot) || isMoveablesRefresh(mLightsDirectional) || isMoveablesRefresh (mLightsPoint);
 }
 
 void LightSystem::resetLightsRefresh() {
@@ -86,7 +83,7 @@ void LightSystem::updateLightEntities() {
 
 void LightSystem::pushLightUniforms(flc::Program *program) {
 
-  /* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT*/
+  /* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT */
 
   program->uniformPush("uNumberOfSpotLights", static_cast<GLint>(mLightsSpot.size() + mLightsDirectional.size()));
 
@@ -208,7 +205,7 @@ void LightSystem::pushLightUniformsDR() {
   }
 }
 
-void LightSystem::updateDeferredBufferSpot(GLuint lightID, flc::Program *program, GLint currentShadowUnit) {
+void LightSystem::updateDeferredBufferSpot(GLuint lightID, flc::Program *program, GLint shadowUnit) {
   program->use();
 
   program->uniformPush("uLight.base.color", mLightsSpot[lightID]->getIntensity().xyz());
@@ -218,14 +215,13 @@ void LightSystem::updateDeferredBufferSpot(GLuint lightID, flc::Program *program
   program->uniformPush("uLight.attenuation.linear", 0.4f);
   program->uniformPush("uLight.attenuation.exp", 0.1f);
   program->uniformPush("uLight.position", mLightsSpot[lightID]->getTranslation());
-  program->uniformPush("uLight.mvp",
-                       glm::make_mat4(mLightBufferData[currentShadowUnit - FILLWAVE_SHADOW_FIRST_UNIT].mvp));
+  program->uniformPush("uLight.mvp", glm::make_mat4(mLightBufferData[shadowUnit - FILLWAVE_SHADOW_FIRST_UNIT].mvp));
 
-  program->uniformPush("uShadowMap", currentShadowUnit);
+  program->uniformPush("uShadowMap", shadowUnit);
   program->uniformPush("uSpecularPower", 255.0f);
 }
 
-void LightSystem::updateDeferredBufferDirectional(GLuint lightID, flc::Program *program, GLint /*currentShadowUnit*/) {
+void LightSystem::updateDeferredBufferDirectional(GLuint lightID, flc::Program *program, GLint /*shadowUnit*/) {
   program->use();
 
   program->uniformPush("uLight.base.color", mLightsDirectional[lightID]->getIntensity().xyz());
@@ -235,7 +231,7 @@ void LightSystem::updateDeferredBufferDirectional(GLuint lightID, flc::Program *
   program->uniformPush("uSpecularPower", 255.0f);
 }
 
-void LightSystem::updateDeferredBufferPoint(GLuint lightID, flc::Program *program, GLint /*currentShadowUnit*/) {
+void LightSystem::updateDeferredBufferPoint(GLuint lightID, flc::Program *program, GLint /*shadowUnit*/) {
   program->use();
 
   program->uniformPush("uLight.base.color", mLightsPoint[lightID]->getIntensity().xyz());
@@ -265,16 +261,12 @@ void LightSystem::bindShadowmaps() {
 }
 
 GLfloat LightSystem::computePointLightBoundingSphere(LightPoint *light) {
-  const glm::vec4 intensity = light->getIntensity();
-  const LightAttenuationData attenuation = light->getAttenuation();
-  const GLfloat diffuseIntensity = 1.0;
-
-  GLfloat MaxChannel = glm::max(glm::max(intensity.x, intensity.y), intensity.z);
-
-  return (
-             -attenuation.mLinear + glm::sqrt(attenuation.mLinear * attenuation.mLinear - 4 * attenuation.mExp * (
-                 attenuation.mExp - 256.0f * MaxChannel * diffuseIntensity
-             ))) / 2 * attenuation.mExp;
+  const glm::vec4 i = light->getIntensity();
+  const LightAttenuationData a = light->getAttenuation();
+  const GLfloat diffuse = 1.0f;
+  const GLfloat maxRGB = glm::max(glm::max(i.x, i.y), i.z);
+  //todo  " 2 * a.mExp " at the end looks like an error
+  return glm::sqrt(a.mLinear * a.mLinear - 4.0f * a.mExp * (a.mExp - 256.0f * maxRGB * diffuse) - a.mLinear) / 2 * a.mExp;
 }
 
 } /* flf */

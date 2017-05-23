@@ -39,7 +39,9 @@ namespace flw {
 namespace flf {
 
 Material::Material()
-    : mAmbient(0.1, 0.1, 0.1, 1.0), mDiffuse(1.0), mSpecular(1.0) {
+    : mAmbient(0.1, 0.1, 0.1, 1.0)
+    , mDiffuse(1.0)
+    , mSpecular(1.0) {
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP

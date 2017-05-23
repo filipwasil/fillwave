@@ -54,10 +54,6 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, flf::Animator *animato
 
   mDataVertices.resize(mTotalElements);
 
-  int threadID, numberOfThreads, chunkSize = 64;
-  (void) threadID;
-  (void) numberOfThreads;
-  (void) chunkSize;
   {
 #pragma omp parallel for schedule(guided) num_threads(2) if (mTotalElements > 1000)
     for (GLuint i = 0; i < mTotalElements; i++) {
@@ -282,7 +278,7 @@ VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
     tangents[indices[z]] += tangent;
   }
 
-  for (size_t i = 0; i < indices.size(); i++) {
+  for (size_t i = 0; i < indices.size(); ++i) {
     glm::vec3 vector3_n = glm::normalize(normals[indices[i]]);
     glm::vec3 vector3_t = glm::normalize(tangents[indices[i]]);
     mDataVertices[indices[i]].mNormal[0] = vector3_n.x;
@@ -331,17 +327,9 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
   glm::vec3 result = maximum - minimum;
 
   if (result.x > result.y) {
-    if (result.x > result.z) {
-      result = glm::vec3(result.x);
-    } else {
-      result = glm::vec3(result.z);
-    }
+    result = result.x > result.z ? glm::vec3(result.x) : glm::vec3(result.z);
   } else {
-    if (result.y > result.z) {
-      result = glm::vec3(result.y);
-    } else {
-      result = glm::vec3(result.z);
-    }
+    result = result.y > result.z ? glm::vec3(result.y) : glm::vec3(result.z);
   }
   return result * 0.5f;
 }

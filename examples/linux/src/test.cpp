@@ -1,9 +1,9 @@
 //============================================================================
-// Name        : Client.cpp
+// Name        : example_particles.cpp
 // Author      : Filip Wasil
 // Version     :
 // Copyright   : none
-// Description : Fillwave engine example full
+// Description : Fillwave engine example particles
 //============================================================================
 
 #include <example.h>
@@ -17,7 +17,6 @@
 #include <CallbacksGLFW/TimeStopCallback.h>
 #include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
-#include <TerrainConstructors/MountainConstructor.h>
 
 /* Physics */
 //#include <bullet>
@@ -41,21 +40,13 @@ void init() {
   /* Scene and camera */
   ContextGLFW::mGraphicsEngine->setCurrentScene(make_unique<Scene>());
   ContextGLFW::mGraphicsEngine->getCurrentScene()->setCamera(
-      make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 16.0),
+      make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
                                      glm::quat(),
                                      glm::radians(90.0),
                                      1.0,
                                      0.1,
                                      1000.0));
 
-  /* Lights */
-  auto light = ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3 (1.0, 20.0,
-                                                                       6.0),
-                                                            glm::quat (),
-                                                            glm::vec4 (1.0, 1.0, 1.0, 0.0));
-  light->rotateTo(glm::vec3(1.0, 0.0, 0.0), glm::radians(-90.0));
-
-  /* Engine callbacks */
   /* Engine callbacks */
   ContextGLFW::mGraphicsEngine->registerCallback(make_unique<TimeStopCallback>(
       ContextGLFW::mGraphicsEngine));
@@ -67,44 +58,75 @@ void init() {
 }
 
 void perform() {
-  ContextGLFW::mGraphicsEngine->configureFPSCounter("fonts/Titania",
-                                                    glm::vec2(0.7, 0.9), 100.0);
+  /* Attach emiters to entities */
+  puIEmiterPoint water = make_unique<EmiterPointCPU>(ContextGLFW::mGraphicsEngine,
+                                                     0.3,
+                                                     60000.0,
+                                                     glm::vec4(0.1, 0.1, 1.0, 1.0),
+                                                     glm::vec3(0.0, 0.0, 0.0),
+                                                     glm::vec3(0.0, 0.0, 0.0),
+                                                     glm::vec3(0.9, 0.9, 0.9),
+                                                     glm::vec3(0.0, 0.0, 0.0),
+                                                     glm::vec3(0.0, 0.0, 0.0),
+                                                     10.0,
+                                                     10.0,
+                                                     ContextGLFW::mGraphicsEngine->storeTexture("textures/particle.png"),
+                                                     GL_SRC_ALPHA,
+                                                     GL_ONE,
+                                                     GL_FALSE);
+  water->moveBy(glm::vec3(0.0, -1.0, -1.0));
 
-  puMeshTerrain terrain = make_unique<MeshTerrain>(ContextGLFW::mGraphicsEngine,
-                                                   ProgramLoader(ContextGLFW::mGraphicsEngine).getDefault(),
-                                                   new MountainConstructor(),
-                                                   Material(),
-                                                   "textures/test.png",
-                                                   "textures/testNormal.png",
-                                                   "",
-                                                   20,
-                                                   16);
-  terrain->scaleTo(1.0);
-  terrain->addEffect(make_shared<Fog>());
-  ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(terrain));
+  puIEmiterPoint sand = make_unique<EmiterPointCPU>(ContextGLFW::mGraphicsEngine,
+                                                    0.3,
+                                                    60000.0,
+                                                    glm::vec4(1.0, 1.0, 0.0, 1.0),
+                                                    glm::vec3(0.0, 2.0, 0.0),
+                                                    glm::vec3(0.0, 0.0, 0.0),
+                                                    glm::vec3(0.9, 0.9, 0.9),
+                                                    glm::vec3(0.0, 0.0, 0.0),
+                                                    glm::vec3(0.0, 0.0, 0.0),
+                                                    10.0,
+                                                    10.0,
+                                                    ContextGLFW::mGraphicsEngine->storeTexture("textures/particle.png"),
+                                                    GL_SRC_ALPHA,
+                                                    GL_ONE,
+                                                    GL_FALSE);
+
+  puIEmiterPoint snow = make_unique<EmiterPointGPU>(ContextGLFW::mGraphicsEngine,
+                                                    0.3,
+                                                    600.0,
+                                                    glm::vec4(1.0, 1.0, 1.0, 1.0),
+                                                    glm::vec3(0.0, 1.0, 0.0),
+                                                    glm::vec3(0.0, 0.0, 0.0),
+                                                    glm::vec3(0.9, 0.9, 0.9),
+                                                    glm::vec3(0.0, 0.0, 0.0),
+                                                    glm::vec3(0.6, 0.6, 0.6),
+                                                    1.0,
+                                                    1.0,
+                                                    ContextGLFW::mGraphicsEngine->storeTexture("textures/particle.png"),
+                                                    GL_SRC_ALPHA,
+                                                    GL_ONE,
+                                                    GL_FALSE);
+
+  /* For time updates */
+  snow->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(snow.get(),
+                                                                       FILLWAVE_ENDLESS));
+  water->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>
+                                     (water.get(),
+                                      FILLWAVE_ENDLESS));
+  sand->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(sand.get(),
+                                                                       FILLWAVE_ENDLESS));
+
+  ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(sand));
+  ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(water));
+  ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(snow));
 }
 
 void showDescription() {
-  /* Description */
-  pText hint0 =
-      ContextGLFW::mGraphicsEngine->storeText("Fillwave example terrain",
-                                              "fonts/Titania",
-                                              glm::vec2(-0.95, 0.80), 100.0);
-  pText hint5 =
-      ContextGLFW::mGraphicsEngine->storeText("Use mouse to move the camera",
-                                              "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
-  pText hint3 = ContextGLFW::mGraphicsEngine->storeText("Use 'S' for camera back",
-                                                        "fonts/Titania",
-                                                        glm::vec2(-0.95, -0.50), 70.0);
-  pText hint4 =
-      ContextGLFW::mGraphicsEngine->storeText("Use 'W' for camera forward",
-                                              "fonts/Titania",
-                                              glm::vec2(-0.95, -0.60), 70.0);
-  pText hint1 =
-      ContextGLFW::mGraphicsEngine->storeText("Use 'T' to resume/stop time",
-                                              "fonts/Titania",
-                                              glm::vec2(-0.95, -0.70), 70.0);
-  pText hint6 =
-      ContextGLFW::mGraphicsEngine->storeText("Use 'D' for toggle debugger On/Off",
-                                              "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
+  ContextGLFW::mGraphicsEngine->storeText("Particles", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
+  ContextGLFW::mGraphicsEngine->storeText("Mouse to move the camera","fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
+  ContextGLFW::mGraphicsEngine->storeText("'S' camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
+  ContextGLFW::mGraphicsEngine->storeText("'W' camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
+  ContextGLFW::mGraphicsEngine->storeText("'T' resume/stop time", "fonts/Titania",glm::vec2(-0.95, -0.70), 70.0);
+  ContextGLFW::mGraphicsEngine->storeText("'D' toggle debugger On/Off", "fonts/Titania",  glm::vec2(-0.95, -0.80), 70.0);
 }

@@ -43,7 +43,7 @@ Animation::Animation(aiAnimation *assimpAnimation) {
   mDuration = static_cast<float>(assimpAnimation->mDuration);
   mTicksPerSec = static_cast<float>(assimpAnimation->mTicksPerSecond);
   mChannels.reserve(assimpAnimation->mNumChannels);
-  for (unsigned int i = 0; i < assimpAnimation->mNumChannels; i++) {
+  for (unsigned int i = 0; i < assimpAnimation->mNumChannels; ++i) {
     mChannels.push_back(new Channel(assimpAnimation->mChannels[i]));
   }
 }

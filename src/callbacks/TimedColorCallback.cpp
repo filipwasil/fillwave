@@ -38,7 +38,10 @@ namespace flw {
 namespace flf {
 
 TimedColorCallback::TimedColorCallback(Model *model, glm::vec4 endColor, GLfloat lifeTime, EasingFunction easing)
-    : TimedCallback(lifeTime, easing), mStartColor(glm::vec4(0.0)), mEndColor(endColor), mModel(model) {
+    : TimedCallback(lifeTime, easing)
+    , mStartColor(glm::vec4(0.0))
+    , mEndColor(endColor)
+    , mModel(model) {
   mPainter = std::make_shared<Painter>(mStartColor);
   mModel->addEffect(mPainter);
 }

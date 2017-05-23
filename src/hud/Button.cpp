@@ -56,11 +56,11 @@ void Button::unpick() {
 }
 
 void Button::onPicked() {
-
+  // nothing
 }
 
 void Button::onUnpicked() {
-
+  // nothing
 }
 
 } /* namespace flf */

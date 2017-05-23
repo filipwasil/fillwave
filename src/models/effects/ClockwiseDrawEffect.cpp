@@ -46,11 +46,11 @@ void ClockwiseDrawEffect::postDrawAction(flc::Program *) {
 }
 
 void ClockwiseDrawEffect::stopAction(flc::Program *) {
-
+  // nothing
 }
 
 void ClockwiseDrawEffect::startAction(flc::Program *) {
-
+  // nothing
 }
 
 } /* flf */

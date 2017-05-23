@@ -71,7 +71,7 @@ VertexBufferDebug::VertexBufferDebug(GLfloat) {
 
   mDataVertices.reserve(6);
   VertexDebug vertex;
-  for (int i = 0; i < 6; i++) {
+  for (int i = 0; i < 6; ++i) {
     vertex.position[0] = debugWindow2DPositions[2 * i];
     vertex.position[1] = debugWindow2DPositions[2 * i + 1];
     vertex.uv[0] = debugWindow2DUV[2 * i];

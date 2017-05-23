@@ -71,8 +71,8 @@ MeshTerrain::MeshTerrain(Engine *engine,
 
   Material m;
 
-  for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
-    for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
+  for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; ++x) {
+    for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; ++z) {
       auto ptr = std::make_unique<Mesh>(engine,
                                           m,
                                           engine->storeTexture(diffuseMapPath.c_str()),
@@ -127,8 +127,8 @@ MeshTerrain::MeshTerrain(Engine *engine,
   auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
   auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, indices);
 
-  for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; x++) {
-    for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; z++) {
+  for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; ++x) {
+    for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; ++z) {
       puMesh ptr = std::make_unique<Mesh>(engine,
                                           Material(),
                                           diffuseMap,
@@ -195,21 +195,15 @@ void MeshTerrain::updateRenderer(IRenderer &renderer) {
 
 inline void MeshTerrain::distanceCheck(ICamera &camera) {
   /* check if there are any children too far away from the camera */
-  glm::vec3 distanceToCamera;
-  GLfloat direction = 0.0f;
+  const glm::vec3 distanceToCamera = camera.getTranslation() - getTranslation();
+  const GLfloat maximumDistance = mJumpStep * 2;
+  const GLfloat jumpStep = mJumpStep * 2;
 
-  distanceToCamera = camera.getTranslation() - getTranslation();
-
-  GLfloat maximumDistance = mJumpStep * 2;
-  GLfloat jumpStep = mJumpStep * 2;
   if (glm::abs(distanceToCamera.x) > maximumDistance) {
-    direction = distanceToCamera.x > 0.0f ? 1.0f : -1.0f;
-    moveBy(glm::vec3(direction * jumpStep, 0.0, 0.0));
+    moveByX( ( distanceToCamera.x > 0.0f ? 1.0f : -1.0f ) * jumpStep);
   }
-
   if (glm::abs(distanceToCamera.z) > maximumDistance) {
-    direction = distanceToCamera.z > 0.0f ? 1.0f : -1.0f;
-    moveBy(glm::vec3(0.0, 0.0, direction * jumpStep));
+    moveByZ( ( distanceToCamera.z > 0.0f ? 1.0f : -1.0f ) * jumpStep);
   }
 }
 

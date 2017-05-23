@@ -47,8 +47,7 @@ Entity::Entity(glm::vec3 translation, glm::quat rotation)
     , mChildrenPropagateEvent(GL_TRUE)
     , mParentRefresh(GL_TRUE)
     , mPSC(GL_TRUE)
-    , mPSR(
-    GL_TRUE) {
+    , mPSR(GL_TRUE) {
 
 }
 
@@ -61,15 +60,15 @@ bool Entity::isAnimated() const {
 }
 
 void Entity::draw(ICamera & /*camera*/) {
-
+  // nothing
 }
 
 void Entity::drawPBRP(ICamera & /*camera*/) {
-
+  // nothing
 }
 
 void Entity::drawDR(ICamera & /*camera*/) {
-
+  // nothing
 }
 
 void Entity::drawPicking(ICamera &camera) {
@@ -109,11 +108,11 @@ void Entity::drawOcclusionBox(ICamera &camera) {
 }
 
 void Entity::onPicked() {
-
+  // nothing
 }
 
 void Entity::onUnpicked() {
-
+  // nothing
 }
 
 void Entity::updateMatrixTree() {
@@ -204,12 +203,8 @@ GLboolean Entity::isPSR() {
   return mPSR;
 }
 
-//void Entity::setPSR(GLboolean value) {
-//   mPSR = value;
-//}
-
 void Entity::log() const {
-
+  // nothing
 }
 
 inline void Entity::detachCallback(std::vector<puCallback> &callbacks, Callback *callback) {

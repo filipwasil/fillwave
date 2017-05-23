@@ -41,8 +41,12 @@ TimedRotateCallback::TimedRotateCallback(Moveable *moveable,
     GLfloat angle,
     GLfloat lifeTime,
     EasingFunction easing)
-    : TimedCallback(lifeTime, easing), mMoveable(moveable), mStartRotation(glm::quat()), mStartAngle(0.0f), mEndAngle(
-    angle), mAxis(axis) {
+    : TimedCallback(lifeTime, easing)
+    , mMoveable(moveable)
+    , mStartRotation(glm::quat())
+    , mStartAngle(0.0f)
+    , mEndAngle(angle)
+    , mAxis(axis) {
 
 }
 

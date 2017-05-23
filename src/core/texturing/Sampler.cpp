@@ -14,7 +14,8 @@ namespace flw {
 namespace flc {
 
 Sampler::Sampler(GLint textureUnit, GLuint howMany)
-    : GLObject(howMany), mTextureUnit(textureUnit) {
+    : GLObject(howMany)
+    , mTextureUnit(textureUnit) {
   glGenSamplers(mHowMany, mHandles);
   fLogC("ERROR: Could not generate sampler -> ID");
 }

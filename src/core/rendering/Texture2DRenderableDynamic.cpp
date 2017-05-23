@@ -43,7 +43,9 @@ namespace flc {
 Texture2DRenderableDynamic::Texture2DRenderableDynamic(Texture2DFile *file,
     ParameterList &parameters,
     flc::Program *program)
-    : Texture2DRenderable(GL_COLOR_ATTACHMENT0, file, parameters), mProgram(program), mTimePassed(0.0f) {
+    : Texture2DRenderable(GL_COLOR_ATTACHMENT0, file, parameters)
+    , mProgram(program)
+    , mTimePassed(0.0f) {
   initUniformsCache();
 }
 

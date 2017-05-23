@@ -118,7 +118,7 @@ public:
 private:
   GLint getBytesPerPixel(GLenum format);
 
-  GLenum getComporession(eCompression compression);
+  GLenum getCompression(eCompression compression);
 };
 
 } /* flw */

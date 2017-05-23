@@ -144,13 +144,6 @@ void Mesh::drawDR(ICamera &camera) {
     flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
     flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
-    //   flc::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
-    //   flc::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-    //   flc::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
-    //   flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
-
-//      mLights.pushLightUniformsShadowMaps(mProgram.get());
-
     mLights.pushLightUniformsDR();
     mLights.bindShadowmaps();
 
@@ -170,8 +163,8 @@ inline void Mesh::coreDraw() {
 
   bindTextures();
 
-  //xxx blinking scene
-  //xxx (OpenGL 3.3+)consider using conditional rendering this way:
+  //todo issue with blinking scene
+  //todo (OpenGL 3.3+)consider using conditional rendering this way:
   //#ifdef FILLWAVE_GLES_3_0
   //#else
   //   mConditionalRendering.begin(mOcclusionQuery.getID());
@@ -289,10 +282,8 @@ void Mesh::drawAOG(ICamera &camera) {
 void Mesh::drawAOC(ICamera &camera) {
   mProgramAOColor->use();
 
-//      flc::Uniform::push(mULCTextureMap, FILLWAVE_DIFFUSE_ATTACHMENT);
   flc::Uniform::push(mULCSampleRadius, FILLWAVE_AO_SAMPLE_RADIUS);
   flc::Uniform::push(mULCProjectionMatrix, camera.getProjection());
-//      flc::Uniform::push(mULCRandomVectors, camera.getEye() * mPhysicsMMC);
 
   mVAO->bind();
 

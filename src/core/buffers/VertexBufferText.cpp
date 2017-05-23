@@ -44,7 +44,7 @@ VertexBufferText::VertexBufferText(const std::vector<GLfloat> &positions,
     const std::vector<GLfloat> &textureCoords,
     GLuint dataStoreModification)
     : TVertexBuffer(dataStoreModification) {
-  size_t size = positions.size();
+  const size_t size = positions.size();
   if (size == textureCoords.size()) {
     mDataVertices.reserve(size / 2);
     VertexText vertex;
@@ -65,13 +65,12 @@ VertexBufferText::VertexBufferText(const std::vector<GLfloat> &positions,
 }
 
 void VertexBufferText::log() const {
-  auto d = [](GLfloat &f) {
-    return static_cast<double>(f);
-  };
-  for (auto it : mDataVertices) {
-    for (size_t i = 0; i < mDataVertices.size(); i++) {
-      fLogE("Vertex written: %f %f %f %f", d(it.position[0]), d(it.position[1]), d(it.uv[0]), d(it.uv[1]));
-    }
+  for (auto& it : mDataVertices) {
+    fLogE("Vertex written: %f %f %f %f",
+          static_cast<double>(it.position[0]),
+          static_cast<double>(it.position[1]),
+          static_cast<double>(it.uv[0]),
+          static_cast<double>(it.uv[1]));
   }
 }
 

@@ -255,9 +255,9 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     file->mHeader.mInternalFormat = format;
   } else {
     file->mConfig.mCompression = GL_TRUE;
-    file->mHeader.mInternalFormat = getComporession(compression);
+    file->mHeader.mInternalFormat = getCompression(compression);
     file->mConfig.mCompressionSize = 0;
-    //fLogF("Texture compression feature not ready");
+    fLogF("Texture compression feature not ready");
   }
 
   file->mConfig.mBorder = 0;
@@ -462,14 +462,14 @@ inline GLint TextureLoader::getBytesPerPixel(GLenum format) {
       bytes = 1;
       break;
     default:
-//      fLogE("Not recognized texture format loading");
+      fLogE("Not recognized texture format loading");
       bytes = 0;
       break;
   }
   return bytes;
 }
 
-inline GLenum TextureLoader::getComporession(eCompression compression) {
+inline GLenum TextureLoader::getCompression(eCompression compression) {
 #ifdef FILLWAVE_GLES_3_0
   (void)compression;
 #else

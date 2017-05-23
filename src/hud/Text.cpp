@@ -49,8 +49,14 @@ Text::Text(const std::string &text,
     Font *font,
     glm::vec4 color,
     eTextEffect effect)
-    : IReloadable(engine), IHUDNode(texture, createProgram(engine, effect), position, glm::vec2(scale, scale)), mText(
-    text), mColor(color), mEffect(effect), mFont(font), mEngine(engine), mViewportWidth(engine->getScreenSize()[0])
+    : IReloadable(engine)
+    , IHUDNode(texture, createProgram(engine, effect), position, glm::vec2(scale, scale))
+    , mText(text)
+    , mColor(color)
+    , mEffect(effect)
+    , mFont(font)
+    , mEngine(engine)
+    , mViewportWidth(engine->getScreenSize()[0])
     , mViewportHeight(engine->getScreenSize()[1]) {
 
   initPipeline();
@@ -125,16 +131,16 @@ void Text::createVBO() {
   GLfloat tmpStartingX = mPosition.x;
 
   for (int i = 0; i < lenght; i++) {
-    int ascii_code = mText[i];
+    const int ascii_code = mText[i];
 
-    int atlas_col = (ascii_code - ' ') % mFont->mAtlasColumns;
-    int atlas_row = (ascii_code - ' ') / mFont->mAtlasColumns;
+    const int atlas_col = (ascii_code - ' ') % mFont->mAtlasColumns;
+    const int atlas_row = (ascii_code - ' ') / mFont->mAtlasColumns;
 
-    GLfloat s = atlas_col * (1.0f / mFont->mAtlasColumns);
-    GLfloat t = (atlas_row + 1) * (1.0f / mFont->mAtlasRows);
+    const GLfloat s = atlas_col * (1.0f / mFont->mAtlasColumns);
+    const GLfloat t = (atlas_row + 1) * (1.0f / mFont->mAtlasRows);
 
-    GLfloat x_pos = mPosition.x;
-    GLfloat y_pos = mPosition.y - mScale.x / mViewportHeight * mFont->mOffsets[ascii_code];
+    const GLfloat x_pos = mPosition.x;
+    const GLfloat y_pos = mPosition.y - mScale.x / mViewportHeight * mFont->mOffsets[ascii_code];
 
     if (i + 1 < lenght) {
       mPosition.x += mFont->mWidths[ascii_code] * mScale.x / mViewportWidth;
@@ -170,7 +176,6 @@ void Text::createVBO() {
   }
 
   mPosition.x = tmpStartingX;
-
 
   mVBO = mEngine->storeBuffer<flc::VertexBufferText>(mVAO, points_tmp, texcoords_tmp);
 

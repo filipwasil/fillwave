@@ -47,7 +47,7 @@ VertexBufferParticles::VertexBufferParticles(const std::vector<GLfloat> &velocit
   if (size == velocities.size() / 3) {
     mDataVertices.reserve(size);
     VertexParticle vertex;
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; ++i) {
       vertex.velocity[0] = velocities[i * 3];
       vertex.velocity[1] = velocities[i * 3 + 1];
       vertex.velocity[2] = velocities[i * 3 + 2];
@@ -67,11 +67,12 @@ VertexBufferParticles::VertexBufferParticles(const std::vector<GLfloat> &velocit
 }
 
 void VertexBufferParticles::log() const {
-  auto d = [](GLfloat &f) {
-    return static_cast<double>(f);
-  };
   for (auto it : mDataVertices) {
-    fLogE("Vertex written: %f %f %f %f", d(it.velocity[0]), d(it.velocity[1]), d(it.velocity[2]), d(it.startTime));
+    fLogE("Vertex written: %f %f %f %f",
+          static_cast<double>(it.velocity[0]),
+          static_cast<double>(it.velocity[1]),
+          static_cast<double>(it.velocity[2]),
+          static_cast<double>(it.startTime));
   }
 }
 

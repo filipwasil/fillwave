@@ -38,7 +38,7 @@ void TerrainScene::init() {
 
   mEngine->configureFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
 
-  puMeshTerrain terrain = make_unique<MeshTerrain>(mEngine.get(),
+  auto terrain = make_unique<MeshTerrain>(mEngine.get(),
                                                    ProgramLoader(mEngine.get()).getDefault(),
                                                    new PerlinConstructor(),
                                                    Material(),
@@ -52,15 +52,12 @@ void TerrainScene::init() {
   mEngine->getCurrentScene()->attach(std::move(terrain));
 
   /* Description */
-  pText hint0 = mEngine->storeText("Fillwave example terrain", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
-  pText hint5 = mEngine->storeText("Use mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
-  pText hint3 = mEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
-  pText hint4 = mEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
-  pText hint1 = mEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
-  pText hint6 = mEngine->storeText("Use 'D' for toggle debugger On/Off",
-                                   "fonts/Titania",
-                                   glm::vec2(-0.95, -0.80),
-                                   70.0);
+  mEngine->storeText("Terrain example", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
+  mEngine->storeText("Mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
+  mEngine->storeText("'S' camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
+  mEngine->storeText("'W' camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
+  mEngine->storeText("'T' resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
+  mEngine->storeText("'D' debugger On/Off", "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
 }
 
 void TerrainScene::perform() {

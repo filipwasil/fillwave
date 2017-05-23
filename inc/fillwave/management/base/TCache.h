@@ -85,7 +85,7 @@ public:
   }
 };
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */
 
 #undef FILLWAVE_FORGET_ABOUT_ME

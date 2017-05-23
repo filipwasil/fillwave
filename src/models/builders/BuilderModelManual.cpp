@@ -50,8 +50,11 @@ BuilderModelManual::BuilderModelManual(Engine *engine,
     flc::Texture2D *normalMap,
     flc::Texture2D *specularMap,
     Material material)
-    : BuilderModel(engine, modelPath, program), mDiffuseMap(diffuseMap), mNormalMap(normalMap)
-    , mSpecularMap(specularMap), mMaterial(material) {
+    : BuilderModel(engine, modelPath, program)
+    , mDiffuseMap(diffuseMap)
+    , mNormalMap(normalMap)
+    , mSpecularMap(specularMap)
+    , mMaterial(material) {
 
 }
 

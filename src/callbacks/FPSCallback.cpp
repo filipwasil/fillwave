@@ -41,7 +41,10 @@ namespace flw {
 namespace flf {
 
 FPSCallback::FPSCallback(Engine *engine, pText text)
-    : Callback(eEventType::eTime), mText(text), mTimePassed(0.0), mEngine(engine) {
+    : Callback(eEventType::eTime)
+    , mText(text)
+    , mTimePassed(0.0f)
+    , mEngine(engine) {
 
 }
 

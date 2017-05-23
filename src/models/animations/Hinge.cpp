@@ -56,7 +56,7 @@ void Hinge::drawDR(ICamera &camera) {
 }
 
 void Hinge::updateRenderer(IRenderer & /*renderer*/) {
-  /* Hinge meant not to be drawn */
+  // nothing
 }
 
 bool Hinge::getRenderItem(RenderItem & /*item*/) {
@@ -64,5 +64,5 @@ bool Hinge::getRenderItem(RenderItem & /*item*/) {
   return false;
 }
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

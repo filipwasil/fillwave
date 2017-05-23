@@ -45,21 +45,24 @@ namespace flf {
  */
 
 IHUDNode::IHUDNode(flc::Texture2D *texture, flc::Program *program, glm::vec2 position, glm::vec2 scale)
-    : mTexture(texture), mProgram(program), mPosition(position), mScale(scale), mBlending({
-                                                                                              GL_SRC_ALPHA,
-                                                                                              GL_ONE_MINUS_SRC_ALPHA
-                                                                                          }) {
-
+    : mTexture(texture)
+    , mProgram(program)
+    , mPosition(position)
+    , mScale(scale) {
+  mBlending = {
+      GL_SRC_ALPHA,
+      GL_ONE_MINUS_SRC_ALPHA
+  };
 }
 
 IHUDNode::~IHUDNode() = default;
 
-void IHUDNode::onAttached(ITreeNode * /*node*/) {
-
+void IHUDNode::onAttached(ITreeNode* /*node*/) {
+  // nothing
 }
 
 void IHUDNode::onDetached() {
-
+  // nothing
 }
 
 void IHUDNode::draw() {
@@ -81,7 +84,6 @@ void IHUDNode::coreDraw() {
   mTexture->unbind();
   glEnable(GL_DEPTH_TEST);
   glDisable(GL_BLEND);
-
 }
 
 } /* namespace flf */

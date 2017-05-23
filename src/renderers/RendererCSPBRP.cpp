@@ -32,7 +32,7 @@
  */
 
 
-#include <fillwave/renderers/IRendererCSPBRP.h>
+#include <fillwave/renderers/RendererCSPBRP.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/core/texturing/Texture2D.h>
@@ -44,12 +44,12 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-IRendererCSPBRP::IRendererCSPBRP(LightManager *lightManager)
+RendererCSPBRP::RendererCSPBRP(LightManager *lightManager)
     : mLightManager(lightManager) {
 
 }
 
-void IRendererCSPBRP::update(IRenderable *renderable) {
+void RendererCSPBRP::update(IRenderable *renderable) {
   RenderItem item;
   renderable->getRenderItem(item);
   GLuint programId = item.mHandles[RenderItem::eRenderHandleProgram];
@@ -63,7 +63,8 @@ void IRendererCSPBRP::update(IRenderable *renderable) {
   }
 }
 
-void IRendererCSPBRP::draw(ICamera &camera) {
+void RendererCSPBRP::draw(ICamera &camera) {
+  //todo RendererCSPBRP is not ready
   if (mSkybox) {
     mSkybox->draw(camera);
   }
@@ -76,9 +77,9 @@ void IRendererCSPBRP::draw(ICamera &camera) {
     for (auto &container : program.second) {
       // Evaluate animations
       // other stuff
-      // xxx todo Is Lambda fast enough ?
+      // Is Lambda fast enough ?
       for (auto &renderItem : container) {
-//				uniform update todo
+//				uniform update
 
         if (renderItem.mStatus.bVAO) {
           flc::bindVAO(renderItem.mHandles[RenderItem::eRenderHandleVAO]);
@@ -101,7 +102,7 @@ void IRendererCSPBRP::draw(ICamera &camera) {
         }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-        // xxx Only assimp handled
+        // Only assimp handled
         renderItem.mStatus.bIndexDraw ? glDrawElements(renderItem.mMode,
                                                        renderItem.mCount,
                                                        renderItem.mDataType,
@@ -118,11 +119,11 @@ void IRendererCSPBRP::draw(ICamera &camera) {
   }
 }
 
-void IRendererCSPBRP::reset(GLuint /*width*/, GLuint /*height*/) {
+void RendererCSPBRP::reset(GLuint /*width*/, GLuint /*height*/) {
   mFlagReload = true;
 }
 
-void IRendererCSPBRP::clear() {
+void RendererCSPBRP::clear() {
   mFlagReload = true;
   size_t predictedSize = mRenderPasses.size() + 1;
   mRenderPasses.clear();
