@@ -23,44 +23,25 @@ aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR} BENCHMARK_SOURCES)
 # Binary
 # -----------------------------------------------
 
-add_executable (benchmarks ${BENCHMARK_SOURCES})
+add_executable (fillwaveBenchmarks ${BENCHMARK_SOURCES})
 
 # -----------------------------------------------
 # Dependencies
 # -----------------------------------------------
 
-add_dependencies (benchmarks benchmark fillwave)
+add_dependencies (fillwaveBenchmarks benchmark fillwave)
 
 # -----------------------------------------------
 # Linked libraries
 # -----------------------------------------------
 
-target_link_libraries (benchmarks benchmark fillwave glfw)
+target_link_libraries (fillwaveBenchmarks benchmark fillwave glfw)
 
 # -----------------------------------------------
 # Benchmark specific
 # -----------------------------------------------
 
-if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-  set (CPP_14_FLAG "-std=c++14")
-endif ()
+set (CMAKE_CXX_STANDARD 14)
+set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-  if (WIN32)
-    set (CPP_14_FLAG "-std=c++14")
-  else ()
-    set (CPP_14_FLAG "-std=gnu++14")
-  endif ()
-endif ()
-
-if (${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
-  set (CPP_14_FLAG "-std=c++14")
-endif ()
-
-if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Intel")
-  set (CPP_14_FLAG "-std=c++14")
-endif ()
-
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__cplusplus=201402L")
-
-set_property (TARGET benchmark PROPERTY COMPILE_FLAGS "-w -Wno-missing-declarations -w -Wno-old-style-cast ${CPP_14_FLAG}")
+set_property (TARGET fillwaveBenchmarks PROPERTY COMPILE_FLAGS "-w -Wno-missing-declarations -w -Wno-old-style-cast ${CPP_14_FLAG}")
