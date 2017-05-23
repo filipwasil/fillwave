@@ -9,7 +9,6 @@ namespace scene {
 
 ParticlesScene::ParticlesScene(int argc, char **argv, QMap<QString, QVariant> varValues)
 		: AScene(argc, argv, varValues) {
-	mSceneParameters["mText"] = QVariant("HelloWorld");
 	init();
 }
 
@@ -101,7 +100,9 @@ void ParticlesScene::init() {
 }
 
 void ParticlesScene::perform() {
-
+//Example
+	QVariant tmp = mSceneParameters["mVar1"];
+	int value1 = tmp.toInt();
 }
 
 }

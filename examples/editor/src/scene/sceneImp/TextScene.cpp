@@ -51,7 +51,6 @@ void TextScene::init() {
 void TextScene::perform() {
   QVariant tmp = mSceneParameters["mText"];
   std::string string = tmp.toString().toStdString();
-  mText->editString(string);
 }
 
 }

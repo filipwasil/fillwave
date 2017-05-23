@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Nowy>
+    <QSlider>
+        <accessibleName>Fill with your text</accessibleName>
+        <objectName>mVar1</objectName>
+        <minimum>0</minimum>
+        <maximum>100</maximum>
+        <defaultValue>0</defaultValue>
+        <maxWidth>150</maxWidth>
+        <maxHeight>75</maxHeight>
+    </QSlider>
+    <QSlider>
+        <accessibleName>Fill with your text</accessibleName>
+        <objectName>mVar2</objectName>
+        <minimum>0</minimum>
+        <maximum>100</maximum>
+        <defaultValue>0</defaultValue>
+        <maxWidth>150</maxWidth>
+        <maxHeight>75</maxHeight>
+    </QSlider>
+    <QSlider>
+        <accessibleName>Fill with your text</accessibleName>
+        <objectName>mVar3</objectName>
+        <minimum>0</minimum>
+        <maximum>100</maximum>
+        <defaultValue>0</defaultValue>
+        <maxWidth>150</maxWidth>
+        <maxHeight>75</maxHeight>
+    </QSlider>
+    <QSlider>
+        <accessibleName>Fill with your text</accessibleName>
+        <objectName>mVar4</objectName>
+        <minimum>0</minimum>
+        <maximum>100</maximum>
+        <defaultValue>0</defaultValue>
+        <maxWidth>150</maxWidth>
+        <maxHeight>75</maxHeight>
+    </QSlider>
+    <QPushButton>
+        <accessibleName>Your Color</accessibleName>
+        <objectName>mFirstColor</objectName>
+        <defaultText>Change Color</defaultText>
+        <maxWidth>150</maxWidth>
+        <translatorType>ColorDialog</translatorType>
+        <defaultValue>1_0_0_0</defaultValue>
+    </QPushButton>
+</Nowy>
