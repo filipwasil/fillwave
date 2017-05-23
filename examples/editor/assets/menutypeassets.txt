@@ -1,4 +1,0 @@
-QSlider
-QLineEdit
-QDial
-QPushButton
