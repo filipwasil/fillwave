@@ -1,11 +1,11 @@
 # Particle editor for Fillwave GE (template)
 This is application who provides various of example for fillwave 3d engine. <br />
 # Prerequisites
-<ul>
-  <li>MSVC 2015 build tools</li>
-  <li>QT5.X MSVC 64-bit version. You should add msvc2015_64 folder from QT directory to PATH.</li>
-  <li>Visual studio 2015 redistributable packeg</li>
-</ul> 
+
+* MSVC 2015 build tools
+* QT5.X MSVC 64-bit version. You should add msvc2015_64 folder from QT directory to PATH.
+* Visual studio 2015 redistributable packeg
+
 # How to build <br />
 **Windows** <br />
 To build this application you must go to scripts folder in main fillwave directory. 
@@ -29,7 +29,15 @@ You must choose correct version for example for windows 10 and x64 path is: <br 
 ```
 C:\Program Files (x86)\Windows Kits\10\bin\x64\ucrt
 ```
-<br />
-**Linux**
 
+**Linux** <br />
+To build on linux you need to have install Qt 5.5 >. Next go to script folder and:<br />
+To build on debian distributions run:
+```
+./build_linux_editor_deb.sh
+```
+To build on RPM based distributions run:
+```
+./build_linux_editor_rpm.sh
+```
 ![QTEditor.png](https://github.com/filipwasil/fillwave_editor_particles/blob/master/screens/QTEditor.png)
