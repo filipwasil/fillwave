@@ -59,7 +59,7 @@ void init() {
 
 void perform() {
   /* Attach emiters to entities */
-  puIEmiterPoint water = make_unique<EmiterPointCPU>(ContextGLFW::mGraphicsEngine,
+  auto water = make_unique<EmiterPointCPU>(ContextGLFW::mGraphicsEngine,
                                                      0.3,
                                                      60000.0,
                                                      glm::vec4(0.1, 0.1, 1.0, 1.0),

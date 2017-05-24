@@ -250,11 +250,11 @@ Model::Model(Engine *engine,
 }
 
 Model::~Model() {
-
+  // nothing
 }
 
 void Model::reload() {
-
+  // nothing
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -276,7 +276,6 @@ inline void Model::loadNodes(aiNode *node,
     const std::string &specularMapPath) {
 
   /* Set this node transformations */
-
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
@@ -302,7 +301,6 @@ inline void Model::loadNodes(aiNode *node,
 inline void Model::loadNodes(aiNode *node, const aiScene *scene, Engine *engine, Entity *entity) {
 
   /* Set this node transformations */
-
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
@@ -371,7 +369,6 @@ inline void Model::loadNodes(aiNode *node,
     const Material &material) {
 
   /* Set this node transformations */
-
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
@@ -412,7 +409,7 @@ puMesh Model::loadMesh(const aiMesh *shape,
   auto vao = new flc::VertexArray();
   auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get());
   auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
-  return std::make_unique<Mesh>(engine,
+  auto mesh = std::make_unique<Mesh>(engine,
                                 material,
                                 diffuseMap,
                                 normalMap,
@@ -432,6 +429,7 @@ puMesh Model::loadMesh(const aiMesh *shape,
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
   vbo->emptyCPU();
 #endif
+  return std::move(mesh);
 }
 
 void Model::performAnimation(GLfloat timeElapsed_s) {
@@ -517,7 +515,7 @@ void Model::draw(ICamera &camera) {
 void Model::drawPBRP(ICamera &camera) {
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   if (mAnimator) {
-    /* xxx for PBRP shadows must be updated elsewhere */
+    //todo for PBRP shadows must be updated elsewhere
     mAnimator->updateBonesBuffer();
     mAnimator->updateBonesUniform(mUniformLocationCacheBones);
   }
