@@ -56,7 +56,7 @@
 \maketitle
 
 \begin{abstract}
-Before you start please ensure your graphics card driver supports at least OpenGL 3.3 and GLSL 330 or OpenGL ES 3.0 and GLSL 300 ES. Also, your C++ compiler must support c++14 standard (Ex. g++\textgreater4.7 or clang++\textgreater3.3). PC Context examples provided are using GLFW3. Editor provided uses the qt5 QT5 and are editable according to your needs. Android context samples use are using EGL (Java and native). Of course you can use any stub you like (Ex. freeglut, qt or other).
+Before you start please ensure your graphics card driver supports at least OpenGL 3.3 and GLSL 330 or OpenGL ES 3.0 and GLSL 300 ES. Also, your C++ compiler must support c++14 standard (Ex. g++\textgreater6.1 or clang++\textgreater3.3). PC Context examples provided are using GLFW3. Editor provided uses the qt5 QT5 and are editable according to your needs. Android context samples use are using EGL (Java and native). Of course you can use any stub you like (Ex. freeglut, qt or other).
 \end{abstract}
 
 \pagebreak
@@ -92,9 +92,9 @@ Probably you will ask how is Fillwave better than other, more extended engines o
   \item "examples" - multiplatform examples
   \item "scripts" - building scripts
 \end{itemize}
-\indent \indent Engine uses dual namespace design style for modules. Code is splitted into three namespaces: \textbf{flw}, \textbf{flw:flf}, \textbf{flw::core}. Core layer uses directly OpenGL driver API. \textbf{Framework} layer uses the \textbf{core} and by design implements a middleware of this project. The highest layer can be found under \textbf{fillwave} namespace. It is what we call Fillwave API. Naming convention is following:
+\indent \indent Engine uses dual namespace design style for modules. Code is splitted into three namespaces: \textbf{flw}, \textbf{flw:flf}, \textbf{flw::flc}. Core layer uses directly OpenGL driver API. \textbf{Framework} layer uses the \textbf{core} and by design implements a middleware of this project. The highest layer can be found under \textbf{fillwave} namespace. It is what we call Fillwave API. Naming convention is following:
 \begin{itemize}
-  \item "p" - shared pointer (Ex. pEntity)
+  \item "p" - shared pointer (Ex. pText)
   \item "pu" - unique pointer (Ex. puRenderer)
   \item "pw" - weak pointer (Ex. pwCameraPerspective)
   \item "e" - enumeration class (Ex. eDebuggerState)
@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
 \end{lstlisting}
 
 \subsection{Context creation}\label{sec:Context}
-\indent \indent During the context initialization stage One must provide Fillwave engine a window (surface to draw on) and use \textbf{insert} functions in your context input handlers.
+\indent \indent During the context initialization stage one must provide Fillwave engine a window (surface to draw on) and use \textbf{insert} functions in your context input handlers.
 
 \begin{lstlisting}
 void insertResizeScreen(GLuint width, GLuint height);
@@ -159,14 +159,13 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
 
 \subsection{Rendering loop}\label{sec:Loop}
 
-\indent \indent Last step that has to be done in order to use fillwave is rendering loop creation. In each iteration a \textbf{draw}, \textbf{drawLines}, or \textbf{drawPoints} function must be called with the \textbf{"How many seconds passed since last draw"} parameter. Also there is an extra \textbf{drawTexture} function which can be used if a single texture in all You want to see. GLFW example of render loop will look like:
+\indent \indent Last step that has to be done in order to use Fillwave is rendering loop creation. In each iteration a \textbf{draw}, \textbf{drawLines}, or \textbf{drawPoints} function must be called with the \textbf{"How many seconds passed since last draw"} parameter. Also there is an extra \textbf{drawTexture} function which can be used if a single texture in all You want to see. GLFW example of render loop will look like:
 
 \begin{lstlisting}
 void ContextGLFW1::render() {
    while (!glfwWindowShouldClose(mWindow)) {
-      GLfloat timeSinceLastFrameInSec, now = glfwGetTime();
-
-      timeSinceLastFrameInSec = now - mTimeExpired;
+      float now = glfwGetTime();
+      float timeSinceLastFrameInSec = now - mTimeExpired;
       mTimeExpired = now;
       mGraphicsEngine->draw(timeSinceLastFrameInSec);
 
@@ -196,8 +195,8 @@ void ContextGLFW1::render() {
 \indent \indent \textbf{puEntity} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them. Fillwave uses \"only one owner\" principle and strongly uses unique pointers from C++14.
 
 \begin{lstlisting}
-puEntity entity_parent = buildEntity();
-puEntity entity_child = buildEntity();
+auto entity_parent = buildEntity();
+auto entity_child = buildEntity();
 entity_parent->attach(std::move(entity_child));
 entity_parent->attach(make_unique<Entity>());
 \end{lstlisting}
@@ -270,8 +269,8 @@ engine->getCurrentScene()->setCamera(make_unique<CameraOrtographic>
 \begin{lstlisting}
 /* Create loader, and use it to create programs */
 loader::ProgramLoader loader(mEngine);
-flc::Program* default = loader.getDefault();
-flc::Program* animation = loader.getDefaultBones();
+auto d = loader.getDefault();
+auto a = loader.getDefaultBones();
 \end{lstlisting}
 
 \subsection{Store functions}\label{sec:store functions}
@@ -296,11 +295,10 @@ flc::Texture3D* storeTexture3D(const std::string& path,
                           const std::string& path,
                           const std::string& path,
                           const std::string& path);
-pLightSpot storeLightSpot(glm::vec3, glm::vec4, pEntity);
-pLightPoint storeLightPoint(glm::vec3, glm::vec4, pEntity);
-pLightDirectional storeLightDirectional(glm::vec4, glm::vec3);
-pText storeText(std::string,std::string,GLfloat,GLfloat,GLfloat);
-pCursor  storeCursor(pTexture, GLfloat);
+auto storeLightSpot(glm::vec3, glm::vec4, pEntity);
+auto storeLightPoint(glm::vec3, glm::vec4, pEntity);
+auto storeLightDirectional(glm::vec4, glm::vec3);
+auto storeText(std::string,std::string,GLfloat,GLfloat,GLfloat);
 \end{lstlisting}
 
 \newpage
@@ -324,11 +322,9 @@ auto model = make_unique<Model>(engine, program, "model.obj");
  * from flf::Shape<flc::VertexBasic>
  */
 
-flf::Sphere sphere(1.0,10.0,10.0);
-
 auto model = make_unique<Model>(engine,
                           program,
-                          sphere,
+                          flf::Sphere(1.0,10.0,10.0),
                           diffuseMap,
                           normalMap,
                           specularMap,
@@ -427,11 +423,11 @@ GLint getAnimations();
 
 \begin{lstlisting}
 
-pIEffect f std::make_shared<Fog>());
-pIEffect b std::make_shared<BoostColor(10.0);
-pIEffect c std::make_shared<ClockwiseDrawEffect();
-pIEffect p std::make_shared<Painter();
-pIEffect t std::make_shared<TextureOnly();
+auto f std::make_shared<Fog>());
+auto b std::make_shared<BoostColor(10.0);
+auto c std::make_shared<ClockwiseDrawEffect();
+auto p std::make_shared<Painter();
+auto t std::make_shared<TextureOnly();
 
 model->addEffect(f);
    
@@ -503,7 +499,7 @@ void setBlendingFunction (GLenum sourcePixel, GLenum destPixel);
 
 \begin{lstlisting}
 
-flc::Texture3D* texture=flc::Texture3D*(new Texture3D("textures_right.png",
+auto texture=flc::Texture3D*(new Texture3D("textures_right.png",
                                               "textures_left.png",
                                               "textures_ceil.png",
                                               "textures_floor.png",
@@ -517,13 +513,13 @@ scene->setSkybox(make_unique<Skybox>(engine, texture));
 
 
 \begin{lstlisting}
-flc::Shader* fs = engine->storeShader<GL_FRAGMENT_SHADER>("default.frag");
-flc::Shader* vs = engine->storeShader<GL_VERTEX_SHADER>("default.vert");
-flc::Program* program = buildProgram(fs + vs);
+auto fs = engine->storeShader<GL_FRAGMENT_SHADER>("default.frag");
+auto vs = engine->storeShader<GL_VERTEX_SHADER>("default.vert");
+auto program = buildProgram(fs + vs);
 auto terrain = buildTerrainVoxel(engine,
                                   program,
                                   "textures/test.png",
-                                  new terrain::MountainConstructor(),
+                                  new MountainConstructor(),
                                   5);
 sene->attach(std::move(terrain));
 \end{lstlisting}
@@ -537,7 +533,7 @@ sene->attach(std::move(terrain));
 \indent \indent To create a 2D on screen text using ttf fonts You can use the \textbf{storeText} function. Texts and HUD uses shared pointers policy. They are shared between the engine and the user by design.
 
 \begin{lstlisting}
-pText text = engine->storeText( "Hello Fillwave",/* content */
+auto text = engine->storeText( "Hello Fillwave",/* content */
                                 "FreeMono",/* font to use */
                                 -0.95, /*left bottom y start (-1,1)*/    
                                 -0.80, /*left bottom x start (-1,1)*/     
@@ -868,8 +864,8 @@ private:
 	std::vector<IRenderable*> mContainer;
 };
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */
 
 \end{lstlisting}
 
