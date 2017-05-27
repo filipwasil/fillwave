@@ -17,7 +17,7 @@ option (FILLWAVE_TESTS_COVERALLS "Generate coveralls data" ON)
 
 option (FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)
 option (FILLWAVE_TEXTURE_LOADER_GLI "Use GLI texture loader" OFF)
-option (FILLWAVE_SUPPRESS_WARNINGS "Suppress warnings during compilation" ON)
+option (FILLWAVE_SUPPRESS_WARNINGS "Suppress warnings during compilation" OFF)
 
 option (FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP "Build android native test app" OFF)
 option (FILLWAVE_BUILD_ANDROID_JNI_LIB "Build android jni library" OFF)

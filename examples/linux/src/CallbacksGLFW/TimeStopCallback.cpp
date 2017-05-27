@@ -5,19 +5,18 @@
  *      Author: filip
  */
 
-#include "../../../linux/inc/CallbacksGLFW/TimeStopCallback.h"
+#include <CallbacksGLFW/TimeStopCallback.h>
 
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
-#include <fillwave/Log.h>
-
-FLOGINIT("TimeStopCallback", FERROR | FFATAL)
 
 namespace flw {
 namespace flf {
 
 TimeStopCallback::TimeStopCallback(Engine *engine)
-    : Callback(eEventType::eKey), mTimeOn(GL_TRUE), mEngine(engine) {
+    : Callback(eEventType::eKey)
+    , mTimeOn(GL_TRUE)
+    , mEngine(engine) {
 
 }
 

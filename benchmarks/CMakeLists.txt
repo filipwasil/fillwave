@@ -44,4 +44,4 @@ target_link_libraries (fillwaveBenchmarks benchmark fillwave glfw)
 set (CMAKE_CXX_STANDARD 14)
 set (CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set_property (TARGET fillwaveBenchmarks PROPERTY COMPILE_FLAGS "-w -Wno-missing-declarations -w -Wno-old-style-cast ${CPP_14_FLAG}")
+set_property (TARGET fillwaveBenchmarks PROPERTY COMPILE_FLAGS "-w -Wno-missing-declarations -w -Wno-old-style-cast")

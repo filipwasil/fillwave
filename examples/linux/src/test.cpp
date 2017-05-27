@@ -60,63 +60,58 @@ void init() {
 void perform() {
   /* Attach emiters to entities */
   auto water = make_unique<EmiterPointCPU>(ContextGLFW::mGraphicsEngine,
-                                                     0.3,
-                                                     60000.0,
-                                                     glm::vec4(0.1, 0.1, 1.0, 1.0),
-                                                     glm::vec3(0.0, 0.0, 0.0),
-                                                     glm::vec3(0.0, 0.0, 0.0),
-                                                     glm::vec3(0.9, 0.9, 0.9),
-                                                     glm::vec3(0.0, 0.0, 0.0),
-                                                     glm::vec3(0.0, 0.0, 0.0),
-                                                     10.0,
-                                                     10.0,
-                                                     ContextGLFW::mGraphicsEngine->storeTexture("textures/particle.png"),
-                                                     GL_SRC_ALPHA,
-                                                     GL_ONE,
-                                                     GL_FALSE);
+                                           0.3,
+                                           60000.0,
+                                           glm::vec4(0.1, 0.1, 1.0, 1.0),
+                                           glm::vec3(0.0, 0.0, 0.0),
+                                           glm::vec3(0.0, 0.0, 0.0),
+                                           glm::vec3(0.9, 0.9, 0.9),
+                                           glm::vec3(0.0, 0.0, 0.0),
+                                           glm::vec3(0.0, 0.0, 0.0),
+                                           10.0,
+                                           10.0,
+                                           ContextGLFW::mGraphicsEngine->storeTexture("textures/particle.png"),
+                                           GL_SRC_ALPHA,
+                                           GL_ONE,
+                                           GL_FALSE);
   water->moveBy(glm::vec3(0.0, -1.0, -1.0));
 
-  puIEmiterPoint sand = make_unique<EmiterPointCPU>(ContextGLFW::mGraphicsEngine,
-                                                    0.3,
-                                                    60000.0,
-                                                    glm::vec4(1.0, 1.0, 0.0, 1.0),
-                                                    glm::vec3(0.0, 2.0, 0.0),
-                                                    glm::vec3(0.0, 0.0, 0.0),
-                                                    glm::vec3(0.9, 0.9, 0.9),
-                                                    glm::vec3(0.0, 0.0, 0.0),
-                                                    glm::vec3(0.0, 0.0, 0.0),
-                                                    10.0,
-                                                    10.0,
-                                                    ContextGLFW::mGraphicsEngine->storeTexture("textures/particle.png"),
-                                                    GL_SRC_ALPHA,
-                                                    GL_ONE,
-                                                    GL_FALSE);
+  auto sand = make_unique<EmiterPointCPU>(ContextGLFW::mGraphicsEngine,
+                                          0.3,
+                                          60000.0,
+                                          glm::vec4(1.0, 1.0, 0.0, 1.0),
+                                          glm::vec3(0.0, 2.0, 0.0),
+                                          glm::vec3(0.0, 0.0, 0.0),
+                                          glm::vec3(0.9, 0.9, 0.9),
+                                          glm::vec3(0.0, 0.0, 0.0),
+                                          glm::vec3(0.0, 0.0, 0.0),
+                                          10.0,
+                                          10.0,
+                                          ContextGLFW::mGraphicsEngine->storeTexture("textures/particle.png"),
+                                          GL_SRC_ALPHA,
+                                          GL_ONE,
+                                          GL_FALSE);
 
-  puIEmiterPoint snow = make_unique<EmiterPointGPU>(ContextGLFW::mGraphicsEngine,
-                                                    0.3,
-                                                    600.0,
-                                                    glm::vec4(1.0, 1.0, 1.0, 1.0),
-                                                    glm::vec3(0.0, 1.0, 0.0),
-                                                    glm::vec3(0.0, 0.0, 0.0),
-                                                    glm::vec3(0.9, 0.9, 0.9),
-                                                    glm::vec3(0.0, 0.0, 0.0),
-                                                    glm::vec3(0.6, 0.6, 0.6),
-                                                    1.0,
-                                                    1.0,
-                                                    ContextGLFW::mGraphicsEngine->storeTexture("textures/particle.png"),
-                                                    GL_SRC_ALPHA,
-                                                    GL_ONE,
-                                                    GL_FALSE);
+  auto snow = make_unique<EmiterPointGPU>(ContextGLFW::mGraphicsEngine,
+                                          0.3,
+                                          600.0,
+                                          glm::vec4(1.0, 1.0, 1.0, 1.0),
+                                          glm::vec3(0.0, 1.0, 0.0),
+                                          glm::vec3(0.0, 0.0, 0.0),
+                                          glm::vec3(0.9, 0.9, 0.9),
+                                          glm::vec3(0.0, 0.0, 0.0),
+                                          glm::vec3(0.6, 0.6, 0.6),
+                                          1.0,
+                                          1.0,
+                                          ContextGLFW::mGraphicsEngine->storeTexture("textures/particle.png"),
+                                          GL_SRC_ALPHA,
+                                          GL_ONE,
+                                          GL_FALSE);
 
   /* For time updates */
-  snow->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(snow.get(),
-                                                                       FILLWAVE_ENDLESS));
-  water->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>
-                                     (water.get(),
-                                      FILLWAVE_ENDLESS));
-  sand->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(sand.get(),
-                                                                       FILLWAVE_ENDLESS));
-
+  snow->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
+  water->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(water.get(), FILLWAVE_ENDLESS));
+  sand->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(sand.get(), FILLWAVE_ENDLESS));
   ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(sand));
   ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(water));
   ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(snow));

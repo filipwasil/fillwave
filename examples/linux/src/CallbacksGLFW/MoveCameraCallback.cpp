@@ -30,13 +30,10 @@
  *
  */
 
-#include "../../../linux/inc/CallbacksGLFW/MoveCameraCallback.h"
+#include <CallbacksGLFW/MoveCameraCallback.h>
 
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
-#include <fillwave/Log.h>
-
-FLOGINIT("MoveCameraCallback", FERROR | FFATAL)
 
 namespace flw {
 namespace flf {

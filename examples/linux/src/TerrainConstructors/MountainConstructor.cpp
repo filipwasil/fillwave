@@ -27,12 +27,9 @@
  *
  */
 
-#include "../../../linux/inc/TerrainConstructors/MountainConstructor.h"
+#include <TerrainConstructors/MountainConstructor.h>
 
 #include <fillwave/Math.h>
-#include <fillwave/Log.h>
-
-FLOGINIT("MountainConstructor", FERROR | FFATAL)
 
 namespace flw {
 namespace flf {

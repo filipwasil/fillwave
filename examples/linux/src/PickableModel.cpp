@@ -5,12 +5,8 @@
  *      Author: filip
  */
 
-#include "../../linux/src/PickableModel.h"
-
+#include "PickableModel.h"
 #include <fillwave/Log.h>
-#include <fillwave/models/effects/BoostColor.h>
-
-FLOGINIT("PickableModel", FERROR | FFATAL)
 
 PickableModel::PickableModel(std::string name,
     pText text,
@@ -18,7 +14,9 @@ PickableModel::PickableModel(std::string name,
     flc::Program *program,
     const std::string &shapePath,
     const std::string &texturePath)
-    : flf::Model(engine, program, shapePath, texturePath), mText(text), mName(name) {
+    : flf::Model(engine, program, shapePath, texturePath)
+    , mText(text)
+    , mName(name) {
   mPickedEffect = std::make_shared<flf::BoostColor>(2.0f);
 }
 

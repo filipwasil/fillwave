@@ -31,17 +31,12 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <googlebenchmark/include/benchmark/benchmark.h>
-
 #include <fillwave/Framework.h>
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
-#include <fillwave/Profiler.h>
-#include <fillwave/Log.h>
+#include <benchmark/benchmark.h>
 
 using namespace flw;
-
-FLOGINIT_DEFAULT()
 
 typedef std::pair<std::string, float> result;
 std::vector<result> mResults;
@@ -70,8 +65,7 @@ int initContext() {
   screenWidth = mode->width;
   screenHeight = mode->height;
 
-  window = glfwCreateWindow(screenWidth, screenHeight, "Fillwave", glfwGetPrimaryMonitor(), /*NULL*/
-                            NULL);
+  window = glfwCreateWindow(screenWidth, screenHeight, "Fillwave", glfwGetPrimaryMonitor(), NULL);
 
   glfwMakeContextCurrent(window);
   glfwWindowHint(GLFW_RED_BITS, 8);
