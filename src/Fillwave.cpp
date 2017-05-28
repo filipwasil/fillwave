@@ -1,49 +1,52 @@
 /*
- *  Created on: Feb 10, 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2016, Fillwave developers
- * All rights reserved.
- *
- * Fillwave C++14 graphics engine.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- *
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
- *   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- *   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- *   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- *   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- *   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- *   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- *   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+*   Created on: Feb 10, 2014
+*       Author: Filip Wasil
+* 
+*  Copyright (c) 2016, Fillwave developers
+*  All rights reserved.
+* 
+*  Fillwave C++14 graphics engine.
+* 
+*  Redistribution and use in source and binary forms, with or without
+*  modification, are permitted provided that the following conditions are met:
+* 
+* *  Redistributions of source code must retain the above copyright notice, this
+*    list of conditions and the following disclaimer.
+* 
+* *  Redistributions in binary form must reproduce the above copyright notice,
+*    this list of conditions and the following disclaimer in the documentation
+*    and/or other materials provided with the distribution.
+* 
+*    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+*    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+*    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+*    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+*    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+*    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+*    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+*    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+*    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+*    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
 
-/* Debug */
+/* Debug  */
 #include <fillwave/Config.h>
 
-/* Logs */
+/* Logs  */
 #include <fillwave/Log.h>
 
-/* flw */
+/* flw  */
 
 #include <fillwave/Fillwave.h>
 
-/* Stdlib */
+/* Stdlib  */
 #include <fstream>
 
-/* Implementation */
+/* Implementation  */
 #include  <impl/FillwaveImpl.h>
+
+/* Implementation  */
+#include  <fillwave/models/animations/Conversion.h>
 
 using namespace flw::flc;
 using namespace std;
@@ -55,25 +58,25 @@ namespace flw {
 Engine::Engine(string rootPath) {
   mImpl = make_unique<EngineImpl>(this, rootPath);
   /* This init has to be outside of the initializer list,
-   * because it needs mImpl to be created fully before Initialization.
-   * mImpl uses Engine functions */
+  *  because it needs mImpl to be created fully before Initialization.
+  *  mImpl uses Engine functions  */
   mImpl->init();
 }
 
 Engine::Engine(ANativeActivity* activity) {
   mImpl = make_unique<EngineImpl>(this, activity);
   /* This init has to be outside of the initializer list,
-   * because it needs mImpl to be created fully before Initialization.
-   * mImpl uses Engine functions */
+  *  because it needs mImpl to be created fully before Initialization.
+  *  mImpl uses Engine functions  */
   mImpl->init();
 }
 #else
 
-Engine::Engine(GLint argc, GLchar *const argv[]) {
+Engine::Engine(GLint argc, GLchar* const argv[]) {
   mImpl = make_unique<EngineImpl>(this, argc, argv);
   /* This init has to be outside of the initializer list,
-   * because it needs mImpl to be created fully before Initialization.
-   * mImpl uses Engine functions */
+  *  because it needs mImpl to be created fully before Initialization.
+  *  mImpl uses Engine functions  */
   mImpl->init();
 }
 
@@ -106,15 +109,15 @@ void Engine::drawPoints(GLfloat time) {
 
 #endif
 
-void Engine::drawTexture(Texture *t, Program *p) {
+void Engine::drawTexture(Texture* t, Program* p) {
   mImpl->drawTexture(t, p);
 }
 
-void Engine::drawTexture(Texture *t) {
+void Engine::drawTexture(Texture* t) {
   mImpl->drawTexture(t);
 }
 
-LightSpot *Engine::storeLightSpot(glm::vec3 position, glm::quat rotation, glm::vec4 color, Moveable *followed) {
+LightSpot* Engine::storeLightSpot(glm::vec3 position, glm::quat rotation, glm::vec4 color, Moveable* followed) {
   return mImpl->mLights->mLightsSpot.add(mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
                                          position,
                                          rotation,
@@ -122,15 +125,15 @@ LightSpot *Engine::storeLightSpot(glm::vec3 position, glm::quat rotation, glm::v
                                          followed);
 }
 
-LightPoint *Engine::storeLightPoint(glm::vec3 position, glm::vec4 color, Moveable *followed) {
+LightPoint* Engine::storeLightPoint(glm::vec3 position, glm::vec4 color, Moveable* followed) {
   return mImpl->mLights->mLightsPoint.add(mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight),
                                           position,
                                           color,
                                           followed);
 }
 
-LightDirectional *
-Engine::storeLightDirectional(glm::vec3 position, glm::quat rotation, glm::vec4 color, Moveable *followed) {
+LightDirectional* 
+Engine::storeLightDirectional(glm::vec3 position, glm::quat rotation, glm::vec4 color, Moveable* followed) {
   return mImpl->mLights->mLightsDirectional.add(mImpl->mTextures->getShadow2D(mImpl->mWindowWidth,
                                                                               mImpl->mWindowHeight),
                                                 position,
@@ -139,25 +142,25 @@ Engine::storeLightDirectional(glm::vec3 position, glm::quat rotation, glm::vec4 
                                                 followed);
 }
 
-Program *Engine::storeProgram(const string &name, const vector<Shader *> &shaders, bool isSkipLinking) {
+Program* Engine::storeProgram(const string &name, const vector<Shader* > &shaders, bool isSkipLinking) {
   return mImpl->mPrograms.store(name, shaders, isSkipLinking);
 }
 
-Texture2D *Engine::storeTexture(const string &texturePath, flf::eCompression compression) {
+Texture2D* Engine::storeTexture(const string &texturePath, flf::eCompression compression) {
   return mImpl->mTextures->get(texturePath, compression);
 }
 
-Texture2DRenderable *Engine::storeTextureRenderable() {
+Texture2DRenderable* Engine::storeTextureRenderable() {
   return mImpl->mTextures->getColor2D(mImpl->mWindowWidth, mImpl->mWindowHeight);
 }
 
-Texture2DRenderableDynamic *Engine::storeTextureDynamic(const string &fragmentShaderPath) {
+Texture2DRenderableDynamic* Engine::storeTextureDynamic(const string &fragmentShaderPath) {
   const string path = fragmentShaderPath;
-  Program *program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
+  Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
   return mImpl->mTextures->getDynamic(path, program, glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));;
 }
 
-Texture3D *Engine::storeTexture3D(const string &posX,
+Texture3D* Engine::storeTexture3D(const string &posX,
     const string &negX,
     const string &posY,
     const string &negY,
@@ -166,15 +169,15 @@ Texture3D *Engine::storeTexture3D(const string &posX,
   return mImpl->mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
 
-Sampler *Engine::storeSO(GLint textureUnit) {
+Sampler* Engine::storeSO(GLint textureUnit) {
   return mImpl->mSamplers.store(textureUnit, textureUnit);
 }
 
-VertexArray *Engine::storeVAO(flf::IReloadable *user, VertexArray *vao) {
+VertexArray* Engine::storeVAO(flf::IReloadable* user, VertexArray* vao) {
   return vao ? mImpl->mBuffers.mVertexArrays.store(vao, user) : mImpl->mBuffers.mVertexArrays.store(user);
 }
 
-/* Inputs - insert */
+/* Inputs - insert  */
 void Engine::insertInput(flf::EventType &event) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
   if (mImpl->mFocus.first) {
@@ -188,8 +191,8 @@ void Engine::insertInput(flf::EventType &event) {
   mImpl->runCallbacks(event);
 }
 
-/* Engine callbacks - clear */
-void Engine::clearCallback(flf::Callback *callback) {
+/* Engine callbacks - clear  */
+void Engine::clearCallback(flf::Callback* callback) {
   mImpl->clearCallback(callback);
 }
 
@@ -201,8 +204,8 @@ void Engine::clearCallbacks() {
   mImpl->clearCallbacks();
 }
 
-/* Callbacks registeration */
-void Engine::registerCallback(puCallback &&callback, flf::IFocusable *focusable) {
+/* Callbacks registeration  */
+void Engine::registerCallback(puCallback &&callback, flf::IFocusable* focusable) {
   if (focusable) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
     if (mImpl->mFocus.first) {
@@ -212,7 +215,7 @@ void Engine::registerCallback(puCallback &&callback, flf::IFocusable *focusable)
     mImpl->mFocus.second.push_back(callback.get());
 #else
     if (mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
-      mImpl->mFocus[focusable] = vector<Callback *>(1, callback.get());
+      mImpl->mFocus[focusable] = vector<Callback* >(1, callback.get());
     } else {
       mImpl->mFocus[focusable].push_back(callback.get());
     }
@@ -221,7 +224,7 @@ void Engine::registerCallback(puCallback &&callback, flf::IFocusable *focusable)
   mImpl->registerCallback(move(callback));
 }
 
-void Engine::dropFocus(flf::IFocusable *focusable) {
+void Engine::dropFocus(flf::IFocusable* focusable) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
   if (focusable == mImpl->mFocus.first) {
     for (auto& it : mImpl->mFocus.second) {
@@ -240,7 +243,7 @@ void Engine::dropFocus(flf::IFocusable *focusable) {
 #endif
 }
 
-void Engine::unregisterCallback(flf::Callback *callback) {
+void Engine::unregisterCallback(flf::Callback* callback) {
   mImpl->unregisterCallback(callback);
 }
 
@@ -250,13 +253,13 @@ pText Engine::storeText(const string &content,
     GLfloat scale,
     glm::vec4 color,
     eTextEffect effect) {
-  /* Check for the font texture */
+  /* Check for the font texture  */
   if (!mImpl->mTextures->get(fontName + ".png")) {
     mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
   }
-  Texture2D *t = mImpl->mTextures->get(fontName + ".png", flf::eCompression::eNone, flf::eFlip::eVertical);
+  Texture2D* t = mImpl->mTextures->get(fontName + ".png", flf::eCompression::eNone, flf::eFlip::eVertical);
 
-  Font *font = nullptr;
+  Font* font = nullptr;
   for (auto &it : mImpl->mFontManager) {
     if (it->mName == fontName) {
       font = it.get();
@@ -273,7 +276,7 @@ pText Engine::storeText(const string &content,
     string ASCII, xMin, width, yMin, height, yOffset;
     GLfloat fXMin, fWidth, fYMin, fHeight, fYOffset;
     GLint iASCII;
-    Font *newFont = new Font();
+    Font* newFont = new Font();
     GLint control = 0;
     while (!myfile.eof()) {
       getline(myfile, line);
@@ -307,7 +310,7 @@ void Engine::clearText(pText text) {
   mImpl->mTextManager.erase(it, _end);
 }
 
-void Engine::clearLight(LightSpot *light) {
+void Engine::clearLight(LightSpot* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsSpot.begin(),
                            mImpl->mLights->mLightsSpot.end(),
                            [light](const puLightSpot &l) {
@@ -316,7 +319,7 @@ void Engine::clearLight(LightSpot *light) {
   mImpl->mLights->mLightsSpot.erase(new_end, mImpl->mLights->mLightsSpot.end());
 }
 
-void Engine::clearLight(LightDirectional *light) {
+void Engine::clearLight(LightDirectional* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsDirectional.begin(),
                            mImpl->mLights->mLightsDirectional.end(),
                            [light](const puLightDirectional &l) {
@@ -325,7 +328,7 @@ void Engine::clearLight(LightDirectional *light) {
   mImpl->mLights->mLightsDirectional.erase(new_end, mImpl->mLights->mLightsDirectional.end());
 }
 
-void Engine::clearLight(LightPoint *light) {
+void Engine::clearLight(LightPoint* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsPoint.begin(),
                            mImpl->mLights->mLightsPoint.end(),
                            [light](const puLightPoint &l) {
@@ -378,45 +381,44 @@ TGetter<Scene> Engine::getCurrentScene() const {
 }
 
 flf::LightSystem &Engine::getLightSystem() const {
-  return *mImpl->mLights.get();
+  return* mImpl->mLights.get();
 }
 
 flf::TextureSystem &Engine::getTextureSystem() const {
-  return *mImpl->mTextures.get();
+  return* mImpl->mTextures.get();
 }
 
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const string &shapePath) {
-  PhysicsMeshBuffer *buffer = new PhysicsMeshBuffer();
+  auto buffer = new PhysicsMeshBuffer();
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  const aiScene *scene = mImpl->mImporter.ReadFile((mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
+  const auto scene = mImpl->mImporter.ReadFile((mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
                                                    aiProcess_Triangulate | aiProcess_SortByPType |
                                                    aiProcess_CalcTangentSpace);
   if (scene) {
     for (GLuint i = 0; i < scene->mNumMeshes; ++i) {
-      const aiMesh *shape = scene->mMeshes[i];
+      const aiMesh* shape = scene->mMeshes[i];
       buffer->mNumFaces = shape->mNumFaces;
       buffer->mVertices.reserve(shape->mNumVertices);
-      buffer->mIndices.reserve(shape->mNumFaces * 3);
-      for (GLuint j = 0; j < shape->mNumFaces; j++) {
+      buffer->mIndices.reserve(shape->mNumFaces*  3);
+      for (GLuint j = 0; j < shape->mNumFaces; ++j) {
         buffer->mIndices.push_back(shape->mFaces[j].mIndices[0]);
         buffer->mIndices.push_back(shape->mFaces[j].mIndices[1]);
         buffer->mIndices.push_back(shape->mFaces[j].mIndices[2]);
       }
-      for (GLuint z = 0; z < shape->mNumVertices; z++) {
-        glm::vec3 vertex(shape->mVertices[z].x, shape->mVertices[z].y, shape->mVertices[z].z);
-        buffer->mVertices.push_back(vertex);
+      for (GLuint z = 0; z < shape->mNumVertices; ++z) {
+        buffer->mVertices.push_back(assimpToGlmVec3(shape->mVertices[z]));
       }
       break;      //todo for now fillwave supports only one mesh here;
     }
   }
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
 
   return puPhysicsMeshBuffer(buffer);
 }
 
 void Engine::addPostProcess(const string &fragmentShaderPath, GLfloat lifeTime) {
-  Program *program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
+  Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
   PostProcessingPass pass(program,
                           mImpl->mTextures->getDynamic(fragmentShaderPath,
                                                        program,
@@ -430,7 +432,7 @@ void Engine::configureFPSCounter(string fontName, glm::vec2 position, GLfloat si
   if (fontName.size() > 1) {
     mImpl->mFPSText = storeText("", fontName, position, size);
 
-    /* Provide callback to refresh the FPS value */
+    /* Provide callback to refresh the FPS value  */
     mImpl->mTextFPSCallback = new flf::FPSCallback(this, mImpl->mFPSText);
     registerCallback(unique_ptr<Callback>(mImpl->mTextFPSCallback));
     return;
@@ -453,8 +455,8 @@ void Engine::reload() {
 
 void Engine::log() {
   fLogI("Fillwave engine");
-  const GLubyte *renderer = glGetString(GL_RENDERER);
-  const GLubyte *version = glGetString(GL_VERSION);
+  const GLubyte* renderer = glGetString(GL_RENDERER);
+  const GLubyte* version = glGetString(GL_VERSION);
   fLogI("Renderer: %s\n", renderer);
   fLogI("OpenGL version supported %s\n", version);
 }
@@ -467,7 +469,7 @@ void Engine::captureFramebufferToFile(const string &name) {
   mImpl->captureFramebufferToFile(name);
 }
 
-void Engine::captureFramebufferToBuffer(GLubyte *buffer, GLint *sizeInBytes, GLuint format, GLint bytesPerPixel) {
+void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLuint format, GLint bytesPerPixel) {
   mImpl->mPickingRenderableTexture->bindForRendering();
   mImpl->drawClear();
   mImpl->mScene->draw();
@@ -477,24 +479,24 @@ void Engine::captureFramebufferToBuffer(GLubyte *buffer, GLint *sizeInBytes, GLu
 #ifdef FILLWAVE_GLES_3_0
   buffer = (GLubyte*)mImpl->mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
-  buffer = (GLubyte *) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
+  buffer = (GLubyte* ) mImpl->mPickingPixelBuffer->map(GL_READ_WRITE);
 #endif
-  *sizeInBytes = mImpl->mWindowWidth * mImpl->mWindowHeight * bytesPerPixel;
+ * sizeInBytes = mImpl->mWindowWidth*  mImpl->mWindowHeight*  bytesPerPixel;
   buffer[*sizeInBytes] = '\0';
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-const aiScene *Engine::getModelFromFile(string path) {
+const aiScene* Engine::getModelFromFile(string path) {
   fLogD("Reading model %s", path.c_str());
   return mImpl->mImporter.ReadFile((mImpl->mFileLoader.getRootPath() + path).c_str(),
                                    aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);
 }
 
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
 
 template <GLuint T>
-Shader *Engine::storeShader(const string &shaderPath) {
+Shader* Engine::storeShader(const string &shaderPath) {
   string shaderSource = "";
   const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
   ReadFile(fullPath, shaderSource);
@@ -502,33 +504,33 @@ Shader *Engine::storeShader(const string &shaderPath) {
 }
 
 template <GLuint T>
-Shader *Engine::storeShader(const string &shaderPath, const string &shaderSource) {
+Shader* Engine::storeShader(const string &shaderPath, const string &shaderSource) {
   const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
   return mImpl->mShaders.store(fullPath, T, shaderSource);
 }
 
-template Shader *Engine::storeShader<GL_VERTEX_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string &);
 
-template Shader *Engine::storeShader<GL_FRAGMENT_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string &);
 
-template Shader *Engine::storeShader<GL_VERTEX_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string &, const string &);
 
-template Shader *Engine::storeShader<GL_FRAGMENT_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string &, const string &);
 
 #ifdef FILLWAVE_GLES_3_0
 #else
 
-template Shader *Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &);
 
-template Shader *Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &);
 
-template Shader *Engine::storeShader<GL_GEOMETRY_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &);
 
-template Shader *Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &, const string &);
 
-template Shader *Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &, const string &);
 
-template Shader *Engine::storeShader<GL_GEOMETRY_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &, const string &);
 
 #endif
 
@@ -536,38 +538,38 @@ void Engine::configureDebugger(eDebuggerState state) {
   mImpl->mDebugger->setState(state);
 }
 
-VertexBufferBasic *Engine::storeBufferInternal(VertexArray *vao,
-    flf::TerrainConstructor *constructor,
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
+    flf::TerrainConstructor* constructor,
     GLint density,
     GLfloat gap,
     vector<GLuint> &indices) {
   return mImpl->mBuffers.mVertices.store(vao, constructor, density, gap, indices);
 }
 
-VertexBufferBasic *Engine::storeBufferInternal(VertexArray *vao, vector<VertexBasic> &data) {
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, vector<VertexBasic> &data) {
   return mImpl->mBuffers.mVertices.store(new VertexBufferBasic(data), vao);
 }
 
-IndexBuffer *Engine::storeBufferInternal(VertexArray *vao, const vector<GLuint> &data) {
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const vector<GLuint> &data) {
   return mImpl->mBuffers.mIndices.store(new IndexBuffer(data), vao);
 }
 
-void Engine::removeBufferIndex(VertexArray *vao) {
+void Engine::removeBufferIndex(VertexArray* vao) {
   mImpl->mBuffers.mIndices.erase(vao);
 }
 
-VertexBufferText *
-Engine::storeBufferInternal(VertexArray *vao, const vector<GLfloat> &data, const vector<GLfloat> &textureCoords) {
+VertexBufferText* 
+Engine::storeBufferInternal(VertexArray* vao, const vector<GLfloat> &data, const vector<GLfloat> &textureCoords) {
   return mImpl->mBuffers.mVerticesText.store(vao, data, textureCoords);
 }
 
-IndexBuffer *Engine::storeBufferInternal(VertexArray *vao, GLuint elements) {
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, GLuint elements) {
   return mImpl->mBuffers.mIndices.store(new IndexBuffer(elements, true), vao);
 }
 
-VertexBufferParticlesGPU *
-Engine::storeBuffersInternal(VertexArray *vao, size_t idx, vector<VertexParticleGPU> &particles) {
-  auto ptr = new vector<VertexBufferParticlesGPU *>();
+VertexBufferParticlesGPU* 
+Engine::storeBuffersInternal(VertexArray* vao, size_t idx, vector<VertexParticleGPU> &particles) {
+  auto ptr = new vector<VertexBufferParticlesGPU* >();
   auto buffers = mImpl->mBuffers.mVerticesParticlesGPU.store(ptr, vao);
   if (buffers->size() < idx) {
     return (*buffers)[idx];
@@ -577,40 +579,40 @@ Engine::storeBuffersInternal(VertexArray *vao, size_t idx, vector<VertexParticle
   return buffers->back();
 }
 
-VertexBufferParticles *Engine::storeBufferInternal(VertexArray *vao,
+VertexBufferParticles* Engine::storeBufferInternal(VertexArray* vao,
     vector<GLfloat> &velocities,
     vector<GLfloat> &positions,
     vector<GLfloat> &times) {
   return mImpl->mBuffers.mVerticesParticles.store(vao, velocities, positions, times);
 }
 
-VertexBufferDebug *Engine::storeBufferInternal(VertexArray *vao, GLfloat scale) {
+VertexBufferDebug* Engine::storeBufferInternal(VertexArray* vao, GLfloat scale) {
   return mImpl->mBuffers.mVerticesDebugger.store(vao, scale);
 }
 
-VertexBufferFloat *Engine::storeBufferInternal(VertexArray *vao, vector<VertexFloat> &data) {
+VertexBufferFloat* Engine::storeBufferInternal(VertexArray* vao, vector<VertexFloat> &data) {
   return mImpl->mBuffers.mVerticesFloat.store(vao, data);
 }
 
-VertexBufferPosition *Engine::storeBufferInternal(VertexArray *vao, vector<VertexPosition> &data) {
+VertexBufferPosition* Engine::storeBufferInternal(VertexArray* vao, vector<VertexPosition> &data) {
   return mImpl->mBuffers.mVerticesPosition.store(vao, data);
 }
 
-void Engine::removeBufferBasic(VertexArray *vao) {
+void Engine::removeBufferBasic(VertexArray* vao) {
   mImpl->mBuffers.mVertices.erase(vao);
 }
 
-void Engine::removeBufferText(VertexArray *vao) {
+void Engine::removeBufferText(VertexArray* vao) {
   mImpl->mBuffers.mVerticesText.erase(vao);
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-IndexBuffer *Engine::storeBufferInternal(VertexArray *vao, const aiMesh *shape) {
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape) {
   return mImpl->mBuffers.mIndices.store(new IndexBuffer(shape), vao);
 }
 
-VertexBufferBasic *Engine::storeBufferInternal(VertexArray *vao, const aiMesh *shape, flf::Animator *animator) {
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape, flf::Animator* animator) {
   return mImpl->mBuffers.mVertices.store(new VertexBufferBasic(shape, animator), vao);
 }
 
@@ -621,7 +623,7 @@ flc::VertexBufferBasic* Engine::storeBufferInternal(flc::VertexArray* vao,
   VertexBufferBasic* newData = new VertexBufferBasic(shape, attributes);
   return mImpl->mBuffers.mVertices.store(newData, vao);
 }
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
 
 }
-/* flw */
+/* flw  */

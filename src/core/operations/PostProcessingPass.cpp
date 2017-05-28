@@ -45,11 +45,11 @@ PostProcessingPass::PostProcessingPass(flc::Program *program,
     , mProgram(program) {
 }
 
-flc::Texture2DRenderableDynamic *PostProcessingPass::getFrame() const {
+flc::Texture2DRenderableDynamic* PostProcessingPass::getFrame() const {
   return mFrame;
 }
 
-flc::Program *PostProcessingPass::getProgram() const {
+flc::Program* PostProcessingPass::getProgram() const {
   return mProgram;
 }
 

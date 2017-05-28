@@ -40,8 +40,8 @@ namespace flw {
 
 glm::mat4 assimpToGlmMat4(aiMatrix4x4 matrix) {
   glm::mat4 out;
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
+  for (int i = 0; i < 4; ++i) {
+    for (int j = 0; j < 4; ++j) {
       out[i][j] = matrix[j][i];
     }
   }
@@ -49,29 +49,15 @@ glm::mat4 assimpToGlmMat4(aiMatrix4x4 matrix) {
 }
 
 glm::vec3 assimpToGlmVec3(aiVector3D vector) {
-  glm::vec3 out;
-  for (int i = 0; i < 3; i++) {
-    out[i] = vector[i];
-  }
-  return out;
+  return glm::vec3(vector.x, vector.y, vector.z);
 }
 
 glm::quat assimpToGlmQuat(aiQuaternion quaternion) {
-  glm::quat out;
-  out.w = quaternion.w;
-  out.x = quaternion.x;
-  out.y = quaternion.y;
-  out.z = quaternion.z;
-  return out;
+  return glm::quat(quaternion.w, quaternion.x, quaternion.y, quaternion.z);
 }
 
 glm::vec4 assimpToGlmVec4(aiColor4D vector) {
-  glm::vec4 out;
-  out.r = vector.r;
-  out.g = vector.b;
-  out.b = vector.g;
-  out.a = vector.a;
-  return out;
+  return glm::vec4(vector.r, vector.g, vector.b, vector.a);
 }
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
