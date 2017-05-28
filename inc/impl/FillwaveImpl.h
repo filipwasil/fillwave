@@ -147,61 +147,52 @@ struct Engine::EngineImpl final {
   puScene mScene;
   glm::vec3 mBackgroundColor;
 
+  /* Initiatization */
+  void init();
+  void initExtensions();
+  void initContext();
+  void initPickingBuffer();
+  void initPipelines();
+  void initUniforms();
+  void initManagement();
+  void initExtras();
+  void initOcclusionTest();
+  void initStartup();
+
   /* Callbacks */
   void runCallbacks();
-
   void runCallbacks(flf::EventType &eventType);
 
-  void clearCallbacks();
-
-  void clearCallbacks(eEventType eventType);
-
-  void clearCallback(flf::Callback *callback);
-
-  void registerCallback(puCallback &&callback);
-
-  void unregisterCallback(flf::Callback *callback);
+  void attachCallback(puCallback &&callback);
+  void detachCallbacks();
+  void detachCallbacks(eEventType eventType);
+  void detachCallback(flf::Callback *callback);
 
   /* Evaluation */
   void evaluateShadowMaps();
-
   void evaluateDebugger();
-
   void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
-
   void evaluateTime(GLfloat timeExpiredInSeconds);
-
   void evaluateStartupAnimation(GLfloat time);
 
   /* Draw types */
   void draw(GLfloat time);
-
   void drawFront();
-
   void drawOcclusionPass();
 
 #ifdef FILLWAVE_GLES_3_0
 #else
-
   void drawLines(GLfloat time);
-
   void drawPoints(GLfloat time);
-
 #endif
-
   void drawTexture(flc::Texture *t, flc::Program *p);
-
   void drawTexture(flc::Texture *t);
 
   /* IRenderer */
   void drawClear();
-
   void drawHUD();
-
   void drawSceneStartup();
-
   void drawScene(GLfloat time);
-
   void drawSceneCore();
 
   /* Picking */
@@ -212,30 +203,8 @@ struct Engine::EngineImpl final {
   /* Capture */
   void captureFramebufferToFile(const string &name);
 
-  /* Initiatization */
-  void init();
-
-  void initExtensions();
-
-  void initContext();
-
-  void initPickingBuffer();
-
-  void initPipelines();
-
-  void initUniforms();
-
-  void initManagement();
-
-  void initExtras();
-
-  void initOcclusionTest();
-
-  void initStartup();
-
   /* Reload */
   void reload();
-
   void reloadPickingBuffer();
 
   /* Insert */
@@ -837,23 +806,11 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 
 /* Callbacks */
 
-void Engine::EngineImpl::registerCallback(puCallback &&callback) {
+void Engine::EngineImpl::attachCallback(puCallback &&callback) {
   if (mCallbacks.find(callback->getEventType()) == mCallbacks.end()) {
     mCallbacks[callback->getEventType()] = vector<puCallback>();
   }
   mCallbacks[callback->getEventType()].push_back(move(callback));
-}
-
-void Engine::EngineImpl::unregisterCallback(flf::Callback *callback) {
-  fLogE("mCallbacks.size() %lu", mCallbacks.size());
-  if (!mCallbacks.empty() && mCallbacks.find(callback->getEventType()) != mCallbacks.end()) {
-    vector<puCallback> *callbacks = &mCallbacks[callback->getEventType()];
-    auto _compare_function = [callback](const puCallback &c) -> bool {
-      return c.get() == callback;
-    };
-    auto it = remove_if(callbacks->begin(), callbacks->end(), _compare_function);
-    callbacks->erase(it, callbacks->end());
-  }
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
@@ -872,17 +829,17 @@ glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GL
 
 /* Engine callbacks - clear */
 
-inline void Engine::EngineImpl::clearCallbacks() {
+inline void Engine::EngineImpl::detachCallbacks() {
   mCallbacks.clear();
 }
 
-inline void Engine::EngineImpl::clearCallbacks(eEventType eventType) {
+inline void Engine::EngineImpl::detachCallbacks(eEventType eventType) {
   if (mCallbacks.find(eventType) != mCallbacks.end()) {
     mCallbacks[eventType].clear();
   }
 }
 
-void Engine::EngineImpl::clearCallback(flf::Callback *callback) {
+void Engine::EngineImpl::detachCallback(flf::Callback *callback) {
   eEventType e = callback->getEventType();
   vector<puCallback> *callbacks = &mCallbacks[e];
   callbacks->erase(remove_if( // Selectively remove elements in the second vector...

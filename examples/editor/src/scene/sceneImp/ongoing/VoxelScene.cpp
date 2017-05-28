@@ -64,12 +64,12 @@ void init() {
 	entity->moveBy(glm::vec3 (0.0, 2.0, 4.0));
 
 	/* Engine callbacks */
-	mEngine->registerCallback(make_unique<TimeStopCallback>(
+	mEngine->attachCallback(make_unique<TimeStopCallback>(
 	         mEngine));
-	mEngine->registerCallback(make_unique<MoveCameraCallback>(
+	mEngine->attachCallback(make_unique<MoveCameraCallback>(
 	         mEngine, eEventType::eKey,
 	         0.1));
-	mEngine->registerCallback(make_unique<MoveCameraCallback>(
+	mEngine->attachCallback(make_unique<MoveCameraCallback>(
 	         mEngine, eEventType::eScroll,
 	         0.1));
 }

@@ -45,11 +45,11 @@ Java_com_fillwave_Fillwave_configureFileLogging
 
 /*
  * Class:     com_fillwave_Fillwave
- * Method:    configureFPSCounter
+ * Method:    configFPSCounter
  * Signature: (JLjava/lang/String;FFF)V
  */
 JNIEXPORT void JNICALL
-Java_com_fillwave_Fillwave_configureFPSCounter
+Java_com_fillwave_Fillwave_configFPSCounter
 (JNIEnv * , jobject , jlong , jstring , jfloat , jfloat , jfloat ) ;
 
 /*

@@ -70,7 +70,7 @@ void MoveCameraCallback::perform(EventType &event) {
             break;
           case GLFW_KEY_D:
             if (e.action == GLFW_RELEASE) {
-              mEngine->configureDebugger(eDebuggerState::eToggleState);
+              mEngine->configDebugger(eDebuggerState::eToggleState);
             }
             break;
         }

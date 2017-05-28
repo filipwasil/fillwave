@@ -20,14 +20,14 @@ void PickingScene::init() {
 	mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
 
 	/* Engine callbacks */
-	mEngine->registerCallback(make_unique<TimeStopCallback>(mEngine.get()));
-	mEngine->registerCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
+	mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
+	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
 
 	mEngine->getCurrentScene()->setCursor(make_unique<Cursor>(mEngine.get(),
 	                                                          mEngine->storeTexture("textures/cursor/standard_blue.png")));
 
 	/* Make cursor visible for current scene */
-	mEngine->registerCallback(make_unique<FollowCustomCursorCallback>(mEngine.get()));
+	mEngine->attachCallback(make_unique<FollowCustomCursorCallback>(mEngine.get()));
 
 	/* Picking info text which will be modified frequently */
 	pText pickInfo = mEngine->storeText("Nothing picked", "fonts/Titania", glm::vec2(-0.95, 0.80), 60.0);
@@ -90,7 +90,7 @@ void PickingScene::init() {
 	mEngine->getCurrentScene()->attach(std::move(ballModel5));
 
 	/* Register picking callback */
-	mEngine->registerCallback(make_unique<ColorPickingCallback>(mEngine.get()));
+	mEngine->attachCallback(make_unique<ColorPickingCallback>(mEngine.get()));
 
 	/* Description */
 	pText description = mEngine->storeText("Fillwave example cursor picking",

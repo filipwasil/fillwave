@@ -31,3 +31,5 @@ option (FILLWAVE_BUILD_SDL2_EXAMPLES "Build sdl2 example" OFF)
 option (FILLWAVE_BUILD_RELEASE "Build type" OFF)
 
 option (FILLWAVE_BENCHMARK_TESTS "Build binary to test performance" OFF)
+
+option (FILLWAVE_DEBUG_OPENGL_APITRACE "Use apitrace to generate OpenGL trace" OFF)

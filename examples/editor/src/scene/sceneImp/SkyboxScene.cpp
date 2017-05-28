@@ -24,9 +24,9 @@ void SkyboxScene::init() {
 	                                                                     1000.0));
 
 	/* Engine callbacks */
-	mEngine->registerCallback(make_unique<TimeStopCallback>(mEngine.get()));
-	mEngine->registerCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
-//	mEngine->registerCallback(make_unique<MoveCameraCallback>(mEngine,
+	mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
+	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
+//	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine,
 //	                                                          eEventType::eCursorPosition,
 //	                                                          0.1,
 //	                                                          ContextGLFW::mWindow));

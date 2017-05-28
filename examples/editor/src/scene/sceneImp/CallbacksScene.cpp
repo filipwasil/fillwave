@@ -34,8 +34,8 @@ void CallbacksScene::init() {
   mEngine->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
 
   /* Engine callbacks */
-  mEngine->registerCallback(make_unique<TimeStopCallback>(mEngine.get()));
-  mEngine->registerCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
+  mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
+  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
 
   flc::Program *p = ProgramLoader(mEngine.get()).getDefault();
 

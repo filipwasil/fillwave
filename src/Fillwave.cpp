@@ -84,11 +84,11 @@ Engine::Engine(GLint argc, GLchar* const argv[]) {
 
 Engine::~Engine() = default;
 
-void Engine::configureBackgroundColor(glm::vec3 color) {
+void Engine::configBackgroundColor(glm::vec3 color) {
   mImpl->mBackgroundColor = color;
 }
 
-void Engine::configureTime(GLfloat timeFactor) {
+void Engine::configTime(GLfloat timeFactor) {
   mImpl->mTimeFactor = timeFactor;
 }
 
@@ -191,21 +191,24 @@ void Engine::insertInput(flf::EventType &event) {
   mImpl->runCallbacks(event);
 }
 
-/* Engine callbacks - clear  */
-void Engine::clearCallback(flf::Callback* callback) {
-  mImpl->clearCallback(callback);
-}
-
-void Engine::clearCallbacks(eEventType eventType) {
-  mImpl->clearCallbacks(eventType);
-}
-
-void Engine::clearCallbacks() {
-  mImpl->clearCallbacks();
+/* Detach */
+void Engine::detach(flf::Entity* entity) {
+  if (mImpl->mScene) {
+    mImpl->mScene->detach(entity);
+  }
+  mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
 /* Callbacks registeration  */
-void Engine::registerCallback(puCallback &&callback, flf::IFocusable* focusable) {
+void Engine::detachCallbacks(eEventType eventType) {
+  mImpl->detachCallbacks(eventType);
+}
+
+void Engine::detachCallbacks() {
+  mImpl->detachCallbacks();
+}
+
+void Engine::attachCallback(puCallback &&callback, flf::IFocusable* focusable) {
   if (focusable) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
     if (mImpl->mFocus.first) {
@@ -221,14 +224,14 @@ void Engine::registerCallback(puCallback &&callback, flf::IFocusable* focusable)
     }
 #endif
   }
-  mImpl->registerCallback(move(callback));
+  mImpl->attachCallback(move(callback));
 }
 
 void Engine::dropFocus(flf::IFocusable* focusable) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
   if (focusable == mImpl->mFocus.first) {
     for (auto& it : mImpl->mFocus.second) {
-      mImpl->unregisterCallback(it);
+      mImpl->unattachCallback(it);
     }
     mImpl->mFocus.first = nullptr;
     mImpl->mFocus.second.clear();
@@ -237,14 +240,14 @@ void Engine::dropFocus(flf::IFocusable* focusable) {
   fLogE("mImpl->mFocus.size() %lu", mImpl->mFocus.size());
   if (!mImpl->mFocus.empty() && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
     for (auto &it : mImpl->mFocus[focusable]) {
-      mImpl->unregisterCallback(it);
+      mImpl->detachCallback(it);
     }
   }
 #endif
 }
 
-void Engine::unregisterCallback(flf::Callback* callback) {
-  mImpl->unregisterCallback(callback);
+void Engine::detachCallback(flf::Callback* callback) {
+  mImpl->detachCallback(callback);
 }
 
 pText Engine::storeText(const string &content,
@@ -300,7 +303,7 @@ pText Engine::storeText(const string &content,
   return text;
 }
 
-void Engine::clearText(pText text) {
+void Engine::detach(pText text) {
   auto _compare_function = [text](pText t) -> bool {
     return (t == text);
   };
@@ -310,7 +313,7 @@ void Engine::clearText(pText text) {
   mImpl->mTextManager.erase(it, _end);
 }
 
-void Engine::clearLight(LightSpot* light) {
+void Engine::detach(LightSpot* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsSpot.begin(),
                            mImpl->mLights->mLightsSpot.end(),
                            [light](const puLightSpot &l) {
@@ -319,7 +322,7 @@ void Engine::clearLight(LightSpot* light) {
   mImpl->mLights->mLightsSpot.erase(new_end, mImpl->mLights->mLightsSpot.end());
 }
 
-void Engine::clearLight(LightDirectional* light) {
+void Engine::detach(LightDirectional* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsDirectional.begin(),
                            mImpl->mLights->mLightsDirectional.end(),
                            [light](const puLightDirectional &l) {
@@ -328,7 +331,7 @@ void Engine::clearLight(LightDirectional* light) {
   mImpl->mLights->mLightsDirectional.erase(new_end, mImpl->mLights->mLightsDirectional.end());
 }
 
-void Engine::clearLight(LightPoint* light) {
+void Engine::detach(LightPoint* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsPoint.begin(),
                            mImpl->mLights->mLightsPoint.end(),
                            [light](const puLightPoint &l) {
@@ -337,7 +340,7 @@ void Engine::clearLight(LightPoint* light) {
   mImpl->mLights->mLightsPoint.erase(new_end, mImpl->mLights->mLightsPoint.end());
 }
 
-void Engine::clearLights() {
+void Engine::detachLights() {
   mImpl->mLights->clear();
 }
 
@@ -395,22 +398,24 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const string &shapePath) {
   const auto scene = mImpl->mImporter.ReadFile((mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
                                                    aiProcess_Triangulate | aiProcess_SortByPType |
                                                    aiProcess_CalcTangentSpace);
-  if (scene) {
-    for (GLuint i = 0; i < scene->mNumMeshes; ++i) {
-      const aiMesh* shape = scene->mMeshes[i];
-      buffer->mNumFaces = shape->mNumFaces;
-      buffer->mVertices.reserve(shape->mNumVertices);
-      buffer->mIndices.reserve(shape->mNumFaces*  3);
-      for (GLuint j = 0; j < shape->mNumFaces; ++j) {
-        buffer->mIndices.push_back(shape->mFaces[j].mIndices[0]);
-        buffer->mIndices.push_back(shape->mFaces[j].mIndices[1]);
-        buffer->mIndices.push_back(shape->mFaces[j].mIndices[2]);
-      }
-      for (GLuint z = 0; z < shape->mNumVertices; ++z) {
-        buffer->mVertices.push_back(assimpToGlmVec3(shape->mVertices[z]));
-      }
-      break;      //todo for now fillwave supports only one mesh here;
+  if (nullptr == scene) {
+    return puPhysicsMeshBuffer(buffer);
+  }
+
+  for (GLuint i = 0; i < scene->mNumMeshes; ++i) {
+    const aiMesh* shape = scene->mMeshes[i];
+    buffer->mNumFaces = shape->mNumFaces;
+    buffer->mVertices.reserve(shape->mNumVertices);
+    buffer->mIndices.reserve(shape->mNumFaces*  3);
+    for (GLuint j = 0; j < shape->mNumFaces; ++j) {
+      buffer->mIndices.push_back(shape->mFaces[j].mIndices[0]);
+      buffer->mIndices.push_back(shape->mFaces[j].mIndices[1]);
+      buffer->mIndices.push_back(shape->mFaces[j].mIndices[2]);
     }
+    for (GLuint z = 0; z < shape->mNumVertices; ++z) {
+      buffer->mVertices.push_back(assimpToGlmVec3(shape->mVertices[z]));
+    }
+    break;      //todo for now fillwave supports only one mesh here;
   }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
 
@@ -428,20 +433,20 @@ void Engine::addPostProcess(const string &fragmentShaderPath, GLfloat lifeTime) 
   fLogD("Post processing pass added: %s", fragmentShaderPath.c_str());
 }
 
-void Engine::configureFPSCounter(string fontName, glm::vec2 position, GLfloat size) {
+void Engine::configFPSCounter(string fontName, glm::vec2 position, GLfloat size) {
   if (fontName.size() > 1) {
     mImpl->mFPSText = storeText("", fontName, position, size);
 
     /* Provide callback to refresh the FPS value  */
     mImpl->mTextFPSCallback = new flf::FPSCallback(this, mImpl->mFPSText);
-    registerCallback(unique_ptr<Callback>(mImpl->mTextFPSCallback));
+    attachCallback(unique_ptr<Callback>(mImpl->mTextFPSCallback));
     return;
   }
   mImpl->mFPSText.reset();
-  unregisterCallback(mImpl->mTextFPSCallback);
+  detachCallback(mImpl->mTextFPSCallback);
 }
 
-void Engine::configureFileLogging(string fileName) {
+void Engine::configFileLogging(string fileName) {
   if (fileName.size() > 1) {
     fLogI("File %s will be cleaned and used for logging.", fileName.c_str());
     return;
@@ -534,7 +539,7 @@ template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &, const s
 
 #endif
 
-void Engine::configureDebugger(eDebuggerState state) {
+void Engine::configDebugger(eDebuggerState state) {
   mImpl->mDebugger->setState(state);
 }
 
@@ -620,7 +625,7 @@ VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* s
 flc::VertexBufferBasic* Engine::storeBufferInternal(flc::VertexArray* vao,
     tinyobj::shape_t& shape,
     tinyobj::attrib_t& attributes) {
-  VertexBufferBasic* newData = new VertexBufferBasic(shape, attributes);
+  auto newData = new VertexBufferBasic(shape, attributes);
   return mImpl->mBuffers.mVertices.store(newData, vao);
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */

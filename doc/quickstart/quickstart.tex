@@ -621,13 +621,13 @@ entity->registerHierarchyCallback(
 \newpage
 
 \subsubsection{Focus}\label{sec:Focus}
-\indent \indent Focus functionality and hierarchy callbacks were introduced to enable executing particular callbacks in particular entity without iterating over the whole scene tree. To set an entity which will receive a callback from chosen input \textbf{Engine::registerCallback} function should be used.
+\indent \indent Focus functionality and hierarchy callbacks were introduced to enable executing particular callbacks in particular entity without iterating over the whole scene tree. To set an entity which will receive a callback from chosen input \textbf{Engine::attachCallback} function should be used.
 \newline
 
 \begin{lstlisting}
 
 /* Second parameter means that the IFocusable interface will be notified to engine so that it will be removed after during model destruction */
-engine->registerCallback(
+engine->attachCallback(
 	   make_unique<AnimationKeyboardCallback>(beast.get(), eEventType::eKey),
 	   beast.get());
 
@@ -643,11 +643,11 @@ void Entity::attachHierarchyCallback(Callback* c);
 \indent \indent To register/unregister a callback in Fillwave use following functions:
 
 \begin{lstlisting}
-void registerCallback(puCallback&& c);
-void unregisterCallback(Callback* c);
+void attachCallback(puCallback&& c);
+void unattachCallback(Callback* c);
 \end{lstlisting}
 
-\indent \indent Note, that there is no need to \textbf{delete} any objects. This happens inside the callbacks. One should design its callbacks so that it will unregister itself (using pointer to an Engine and calling unregisterCallback).
+\indent \indent Note, that there is no need to \textbf{delete} any objects. This happens inside the callbacks. One should design its callbacks so that it will unregister itself (using pointer to an Engine and calling unattachCallback).
 
 \newpage
 
@@ -702,7 +702,7 @@ std::string Engine::getExecutablePath()
 \indent To set/reset current "frames per seconds" counter in right left corner use:
 
 \begin{lstlisting}
-void Engine::configureFPSCounter(std::string fontName = "",
+void Engine::configFPSCounter(std::string fontName = "",
                             GLfloat xPosition = -0.95,
                             GLfloat yPosition = 0.95,
                             GLfloat size = 100.0);
@@ -713,7 +713,7 @@ empty or not valid font name will disable the FPS counter.
 \indent To set/reset reset file logging use:
 
 \begin{lstlisting}
-void Engine::configureFileLogging(std::string fileName = "");
+void Engine::configFileLogging(std::string fileName = "");
 \end{lstlisting}
 
 empty or not valid file name will disable the file logging.

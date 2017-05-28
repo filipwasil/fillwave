@@ -30,13 +30,13 @@ void TerrainScene::init() {
 
   /* Engine callbacks */
   /* Engine callbacks */
-  mEngine->registerCallback(make_unique<TimeStopCallback>(mEngine.get()));
-  mEngine->registerCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
-//	mEngine->registerCallback(make_unique<MoveCameraCallback>(
+  mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
+  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
+//	mEngine->attachCallback(make_unique<MoveCameraCallback>(
 //	         mEngine, eEventType::eCursorPosition, 0.1,
 //	         ContextGLFW::mWindow));
 
-  mEngine->configureFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
+  mEngine->configFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
 
   auto terrain = make_unique<MeshTerrain>(mEngine.get(),
                                                    ProgramLoader(mEngine.get()).getDefault(),

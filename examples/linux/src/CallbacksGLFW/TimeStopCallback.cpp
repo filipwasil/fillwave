@@ -30,10 +30,10 @@ void TimeStopCallback::perform(EventType &event) {
   if (data.key == GLFW_KEY_T && data.action == GLFW_PRESS) {
     if (mTimeOn) {
       mTimeOn = false;
-      mEngine->configureTime(0.0);
+      mEngine->configTime(0.0);
     } else {
       mTimeOn = true;
-      mEngine->configureTime(1.0);
+      mEngine->configTime(1.0);
     }
   }
 }

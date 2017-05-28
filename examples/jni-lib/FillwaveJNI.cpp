@@ -99,11 +99,11 @@ nullptr));
 }
 /*
  * Class:     com_fillwave_Fillwave
- * Method:    configureFPSCounter
+ * Method:    configFPSCounter
  * Signature: (JLjava/lang/String;FFF)V
  */
 JNIEXPORT void JNICALL
-Java_com_fillwave_Fillwave_configureFPSCounter
+Java_com_fillwave_Fillwave_configFPSCounter
 (JNIEnv
 *env, jobject,
 jlong engine, jstring
@@ -116,7 +116,7 @@ jfloat size
 Engine *ptr = reinterpret_cast<Engine *>(engine);
 
 ptr->
-configureFPSCounter(env
+configFPSCounter(env
 ->
 GetStringUTFChars(fontName,
 nullptr),
@@ -124,7 +124,7 @@ xPosition,
 yPosition,
 size);
 
-//   void configureFPSCounter(std::string fontName = "",
+//   void configFPSCounter(std::string fontName = "",
 //                            GLfloat xPosition = -0.95,
 //                            GLfloat yPosition = 0.95,
 //                            GLfloat size = 100.0);
@@ -1324,7 +1324,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 
 ptr->
-registerCallback(ptrC);
+attachCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1343,7 +1343,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 
 ptr->
-registerCallback(ptrC);
+attachCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1362,7 +1362,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 
 ptr->
-registerCallback(ptrC);
+attachCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1381,7 +1381,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 
 ptr->
-registerCallback(ptrC);
+attachCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1400,7 +1400,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 
 ptr->
-registerCallback(ptrC);
+attachCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1419,7 +1419,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 
 ptr->
-registerCallback(ptrC);
+attachCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1438,7 +1438,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 
 ptr->
-registerCallback(ptrC);
+attachCallback(ptrC);
 }
 /*
  * Class:     com_fillwave_Fillwave
@@ -1457,7 +1457,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 
 ptr->
-registerCallback(ptrC);
+attachCallback(ptrC);
 }
 
 /*
@@ -1466,7 +1466,7 @@ registerCallback(ptrC);
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL
-Java_com_fillwave_Fillwave_registerCallback
+Java_com_fillwave_Fillwave_attachCallback
 (JNIEnv
 *, jobject,
 jlong engine, jlong
@@ -1477,7 +1477,7 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 
 ptr->
-registerCallback(ptrC);
+attachCallback(ptrC);
 }
 
 /*
@@ -1486,7 +1486,7 @@ registerCallback(ptrC);
  * Signature: (JJ)V
  */
 JNIEXPORT void JNICALL
-Java_com_fillwave_Fillwave_unregisterCallback
+Java_com_fillwave_Fillwave_unattachCallback
 (JNIEnv
 *, jobject,
 jlong engine, jlong
@@ -1495,7 +1495,7 @@ callback) {
 Engine *ptr = reinterpret_cast<Engine *>(engine);
 Callback *ptrC = reinterpret_cast<Callback *>(callback);
 ptr->
-unregisterCallback(ptrC);
+unattachCallback(ptrC);
 }
 
 /*

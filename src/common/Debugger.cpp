@@ -143,7 +143,7 @@ void Debugger::renderPickingMap() {
   glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
-void Debugger::renderDepthOrthographic(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
+void Debugger::renderDepthOrthographic(GLint id) { //todo remove lights from engine through engine
   prepareDebugWindow(id);
 
   mProgram->use();

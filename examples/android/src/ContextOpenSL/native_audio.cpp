@@ -249,7 +249,7 @@ void createBufferQueueAudioPlayer() {
   (void) result;
 
   // register callback on the buffer queue
-  result = (*bqPlayerBufferQueue)->RegisterCallback(bqPlayerBufferQueue, bqPlayerCallback, NULL);
+  result = (*bqPlayerBufferQueue)->attachCallback(bqPlayerBufferQueue, bqPlayerCallback, NULL);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 
@@ -758,7 +758,7 @@ jboolean createAudioRecorder(JNIEnv *env, jclass clazz) {
   (void) result;
 
   // register callback on the buffer queue
-  result = (*recorderBufferQueue)->RegisterCallback(recorderBufferQueue, bqRecorderCallback, NULL);
+  result = (*recorderBufferQueue)->attachCallback(recorderBufferQueue, bqRecorderCallback, NULL);
   assert(SL_RESULT_SUCCESS == result);
   (void) result;
 

@@ -44,7 +44,7 @@ void init() {
 }
 
 void perform() {
-  mEngine->configureFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
+  mEngine->configFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
   mEngine->setCurrentScene(gScene);
 
   pIEffect fog(new Fog());

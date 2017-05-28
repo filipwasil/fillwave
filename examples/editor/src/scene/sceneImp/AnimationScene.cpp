@@ -27,16 +27,15 @@ void AnimationScene::init() {
                                                                             0.1,
                                                                             1000.0));
 
-  auto beast = std::make_unique<Model>(mEngine.get(), ProgramLoader(mEngine.get()).getDefaultBones(),
-                                  "animations/beast/beast.dae");
+  auto beast = std::make_unique<Model>(mEngine.get(),
+                                       ProgramLoader(mEngine.get()).getDefaultBones(),
+                                       "animations/beast/beast.dae");
   beast->scaleTo(3.0f);
   beast->rotateByX(90.0f);
   beast->setActiveAnimation(0);
   mEngine->getCurrentScene()->attach(std::move(beast));
 
-  mEngine->registerCallback(
-      std::make_unique<AnimationKeyboardCallback>(beast.get(), eEventType::eKey),
-      beast.get());
+  mEngine->attachCallback(std::make_unique<AnimationKeyboardCallback>(beast.get(), eEventType::eKey), beast.get());
 
   puIEmiterPoint snow = std::make_unique<EmiterPointCPU>(mEngine.get(),
                                                          0.3,

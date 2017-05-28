@@ -87,16 +87,11 @@ public:
   virtual ~Engine();
 
   /* Configuration */
-  void configureDebugger(eDebuggerState state);
-
-  void configureFileLogging(std::string fileName = "");
-
-  void
-  configureFPSCounter(std::string fontName = "", glm::vec2 position = glm::vec2(-0.95, 0.95), GLfloat size = 100.0);
-
-  void configureBackgroundColor(glm::vec3 color);
-
-  void configureTime(GLfloat timeFactor);
+  void configDebugger(eDebuggerState state);
+  void configFileLogging(std::string fileName = "");
+  void configFPSCounter(std::string fontName = "", glm::vec2 position = glm::vec2(-0.95, 0.95), GLfloat size = 100.0);
+  void configBackgroundColor(glm::vec3 color);
+  void configTime(GLfloat timeFactor);
 
   /* Draw */
   void draw(GLfloat time);
@@ -104,6 +99,14 @@ public:
   void drawPoints(GLfloat time);
   void drawTexture(flc::Texture *t, flc::Program *p);
   void drawTexture(flc::Texture *t);
+
+  /* Remove */
+  void detach(pText text);
+  void detach(flf::LightSpot *light);
+  void detach(flf::LightDirectional *light);
+  void detach(flf::LightPoint *light);
+  void detachLights();
+  void detach(flf::Entity*);
 
   /* Assets */
   puPhysicsMeshBuffer getPhysicalMeshBuffer(const std::string &shapePath);
@@ -185,18 +188,11 @@ public:
   }
 
   /* Buffering */
-  void removeBuffer(flc::VertexArray *vao); // xxx any idea of generic class ?
+  void removeBuffer(flc::VertexArray *vao); //todo any idea of generic class ? template it ?
   void removeBufferIndex(flc::VertexArray *vao);
   void removeBufferIndexParticles(flc::VertexArray *vao);
   void removeBufferBasic(flc::VertexArray *vao);
   void removeBufferText(flc::VertexArray *vao);
-
-  /* Clear */
-  void clearText(pText text);
-  void clearLight(flf::LightSpot *light);
-  void clearLight(flf::LightDirectional *light);
-  void clearLight(flf::LightPoint *light);
-  void clearLights();
 
   /* Pick */
   void pick(GLuint x, GLuint y);
@@ -221,11 +217,10 @@ public:
   /* Inputs */
   void insertInput(flf::EventType &event);
   void insertResizeScreen(GLuint width, GLuint height);
-  void registerCallback(puCallback &&callback, flf::IFocusable *focusable = nullptr);
-  void unregisterCallback(flf::Callback *callback);
-  void clearCallback(flf::Callback *callback);
-  void clearCallbacks(eEventType eventType);
-  void clearCallbacks();
+  void attachCallback(puCallback &&callback, flf::IFocusable *focusable = nullptr);
+  void detachCallback(flf::Callback *callback);
+  void detachCallbacks(eEventType eventType);
+  void detachCallbacks();
   void reload();
 
   /* Systems */

@@ -79,7 +79,7 @@ public class Fillwave {
           /* Configuration */
    public native void configureDebugger(long engine, int state);
    public native void configureFileLogging(long engine, String fileName /*= ""*/);
-   public native void configureFPSCounter(long engine,
+   public native void configFPSCounter(long engine,
 		                                  String fontName/* = ""*/,
                                           float xPosition/* = -0.95*/,
                                           float yPosition /*= 0.95*/,

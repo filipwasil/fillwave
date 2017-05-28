@@ -68,9 +68,9 @@ void ShadowScene::init() {
 	mEngine->getCurrentScene()->attach(std::move(lightSource_3));
 
 	/* Engine callbacks */
-	mEngine->registerCallback(make_unique<TimeStopCallback>(mEngine.get()));
-	mEngine->registerCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
-//	mEngine->registerCallback(make_unique<MoveCameraCallback>(mEngine.get(),
+	mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
+	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
+//	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(),
 //	                                                          eEventType::eCursorPosition,
 //	                                                          0.1,
 //	                                                          ContextGLFW::mWindow));

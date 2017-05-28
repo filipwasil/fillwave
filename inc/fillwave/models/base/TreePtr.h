@@ -71,9 +71,9 @@ public:
     mFlagAttachedDetached = true;
   }
 
-  void detach(T *node) {
-    auto _compare_function = [node](const T &e) -> bool {
-      bool found = (e == node);
+  void detach(T* node) {
+    auto _compare_function = [node](std::unique_ptr<T> const& e) -> bool {
+      bool found = (e.get() == node);
       if (found) {
         node->onDetached();
       }

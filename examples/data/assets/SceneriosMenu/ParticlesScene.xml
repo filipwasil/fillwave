@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Nowy>
     <QSlider>
-        <accessibleName>Fill with your text</accessibleName>
-        <objectName>mVar1</objectName>
+        <accessibleName>Acceleration</accessibleName>
+        <objectName>mAcceleration</objectName>
         <minimum>0</minimum>
         <maximum>100</maximum>
         <defaultValue>0</defaultValue>
@@ -10,8 +10,8 @@
         <maxHeight>75</maxHeight>
     </QSlider>
     <QSlider>
-        <accessibleName>Fill with your text</accessibleName>
-        <objectName>mVar2</objectName>
+        <accessibleName>Initial speed</accessibleName>
+        <objectName>mSpeed</objectName>
         <minimum>0</minimum>
         <maximum>100</maximum>
         <defaultValue>0</defaultValue>
@@ -19,8 +19,8 @@
         <maxHeight>75</maxHeight>
     </QSlider>
     <QSlider>
-        <accessibleName>Fill with your text</accessibleName>
-        <objectName>mVar3</objectName>
+        <accessibleName>Rubustness position</accessibleName>
+        <objectName>mRP</objectName>
         <minimum>0</minimum>
         <maximum>100</maximum>
         <defaultValue>0</defaultValue>
@@ -28,8 +28,8 @@
         <maxHeight>75</maxHeight>
     </QSlider>
     <QSlider>
-        <accessibleName>Fill with your text</accessibleName>
-        <objectName>mVar4</objectName>
+        <accessibleName>Rubustness velocity</accessibleName>
+        <objectName>mRV</objectName>
         <minimum>0</minimum>
         <maximum>100</maximum>
         <defaultValue>0</defaultValue>
@@ -37,8 +37,16 @@
         <maxHeight>75</maxHeight>
     </QSlider>
     <QPushButton>
-        <accessibleName>Your Color</accessibleName>
-        <objectName>mFirstColor</objectName>
+        <accessibleName>Water color</accessibleName>
+        <objectName>mWaterColor</objectName>
+        <defaultText>Change Color</defaultText>
+        <maxWidth>150</maxWidth>
+        <translatorType>ColorDialog</translatorType>
+        <defaultValue>1_0_0_0</defaultValue>
+    </QPushButton>
+    <QPushButton>
+        <accessibleName>Sand color</accessibleName>
+        <objectName>mSandColor</objectName>
         <defaultText>Change Color</defaultText>
         <maxWidth>150</maxWidth>
         <translatorType>ColorDialog</translatorType>

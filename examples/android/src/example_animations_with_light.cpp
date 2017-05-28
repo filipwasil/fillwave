@@ -96,5 +96,5 @@ void perform(Engine *engine) {
   engine->getCurrentScene()->attach(std::move(cactus2));
   engine->getCurrentScene()->attach(std::move(cactus3));
 
-  engine->configureFPSCounter("bridgenorth", glm::vec2(0.6, 0.9), 70.0);
+  engine->configFPSCounter("bridgenorth", glm::vec2(0.6, 0.9), 70.0);
 }

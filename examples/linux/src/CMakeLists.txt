@@ -79,3 +79,26 @@ if (UNIX AND NOT ANDROID)
   target_link_libraries (${PROGRAM} pthread glfw fillwave)
   copy_resources (${PROGRAM})
 endif (UNIX AND NOT ANDROID)
+
+# -----------------------------------------------
+# APITRACE DEBUG
+# -----------------------------------------------
+
+if (FILLWAVE_DEBUG_OPENGL_APITRACE)
+  add_custom_target (
+      ${PROGRAM}GenerateTrace ALL
+      COMMAND rm ${CMAKE_CURRENT_BINARY_DIR}/${PROGRAM}.trace
+      COMMAND apitrace trace ${CMAKE_BINARY_DIR}/${PROGRAM}
+      DEPENDS ${PROGRAM}
+      COMMENT "Collect OpenGL trace with apitrace"
+      VERBATIM
+  )
+
+  add_custom_target (
+      ${PROGRAM}ReplayTrace ALL
+      COMMAND qapitrace ${CMAKE_CURRENT_BINARY_DIR}/${PROGRAM}.trace
+      DEPENDS ${PROGRAM}GenerateTrace
+      COMMENT "Replay OpenGL trace with qapitrace"
+      VERBATIM
+  )
+endif ()
