@@ -145,7 +145,7 @@ endif ()
 if (FILLWAVE_BENCHMARK_TESTS)
   set (BENCHMARK_ENABLE_TESTING OFF)
   add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/ext/googlebenchmark)
-  set_property (TARGET benchmark PROPERTY COMPILE_FLAGS "-Wno-double-promotion")
+  set_property (TARGET benchmark PROPERTY COMPILE_FLAGS "-Wno-double-promotion -Wno-undef")
   add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/benchmarks)
 endif ()
 

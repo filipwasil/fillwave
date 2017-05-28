@@ -97,6 +97,4 @@ if (NOT FILLWAVE_SUPPRESS_WARNINGS)
       set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-format-nonliteral")            # assimp built internally
     endif ()
   endif ()
-
-  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-undef")                   # todo CallbackLoop.cpp
 endif ()

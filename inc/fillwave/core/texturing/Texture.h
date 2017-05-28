@@ -34,9 +34,9 @@
 
 #include <memory>
 
-#if __APPLE__
+#ifdef __APPLE__
 #include <stdlib.h>
-#elif _WIN32
+#elif defined(_WIN32)
 #include <stdlib.h>
 #endif
 
