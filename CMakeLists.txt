@@ -131,6 +131,21 @@ if (WIN32)
 endif (WIN32)
 
 # -----------------------------------------------
+# Compiler
+# -----------------------------------------------
+
+if (NOT FILLWAVE_SUPPRESS_WARNINGS)
+  include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/common.cmake)
+  if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
+    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/clang.cmake)
+  elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
+    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/gcc.cmake)
+  elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
+    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/msvc.cmake)
+  endif ()
+endif ()
+
+# -----------------------------------------------
 # Tests
 # -----------------------------------------------
 
