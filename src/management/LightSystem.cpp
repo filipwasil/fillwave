@@ -208,7 +208,7 @@ void LightSystem::pushLightUniformsDR() {
 void LightSystem::updateDeferredBufferSpot(GLuint lightID, flc::Program *program, GLint shadowUnit) {
   program->use();
 
-  program->uniformPush("uLight.base.color", mLightsSpot[lightID]->getIntensity().xyz());
+  program->uniformPush("uLight.base.color", glm::vec3(mLightsSpot[lightID]->getIntensity()));
   program->uniformPush("uLight.base.ambientIntensity", 0.15f);
   program->uniformPush("uLight.base.diffuseIntensity", 0.85f);
   program->uniformPush("uLight.attenuation.constant", 0.1f);
@@ -224,7 +224,7 @@ void LightSystem::updateDeferredBufferSpot(GLuint lightID, flc::Program *program
 void LightSystem::updateDeferredBufferDirectional(GLuint lightID, flc::Program *program, GLint /*shadowUnit*/) {
   program->use();
 
-  program->uniformPush("uLight.base.color", mLightsDirectional[lightID]->getIntensity().xyz());
+  program->uniformPush("uLight.base.color", glm::vec3(mLightsDirectional[lightID]->getIntensity()));
   program->uniformPush("uLight.base.ambientIntensity", 0.15f);
   program->uniformPush("uLight.base.diffuseIntensity", 0.85f);
   program->uniformPush("uLight.direction", -mLightsDirectional[lightID]->getTranslation());
@@ -234,7 +234,7 @@ void LightSystem::updateDeferredBufferDirectional(GLuint lightID, flc::Program *
 void LightSystem::updateDeferredBufferPoint(GLuint lightID, flc::Program *program, GLint /*shadowUnit*/) {
   program->use();
 
-  program->uniformPush("uLight.base.color", mLightsPoint[lightID]->getIntensity().xyz());
+  program->uniformPush("uLight.base.color", glm::vec3(mLightsPoint[lightID]->getIntensity()));
   program->uniformPush("uLight.base.ambientIntensity", 0.15f);
   program->uniformPush("uLight.base.diffuseIntensity", 0.85f);
   program->uniformPush("uLight.attenuation.constant", 0.4f);

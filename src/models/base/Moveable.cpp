@@ -153,8 +153,7 @@ void Moveable::rotateByZ(float angle) {
 }
 
 void Moveable::rotateBy(const glm::vec3 &axis, GLfloat angle) {
-  glm::vec3 Axis = glm::normalize(axis);
-  Axis = (glm::mat4_cast(mRotation) * glm::vec4(Axis, 1.0)).xyz();
+  glm::vec3 Axis (glm::mat4_cast(mRotation) * glm::vec4(glm::normalize(axis), 1.0));
 
   Axis = Axis * sinf(angle / 2.0f);
   const float scalar = cosf(angle / 2.0f);

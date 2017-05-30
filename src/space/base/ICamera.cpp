@@ -54,8 +54,8 @@ inline void ICamera::updateView() {
   updateMatrixCache();
 
   mCameraMatrix = glm::lookAt(mTranslation,
-                              mTranslation + (glm::mat4_cast(mRotation) * glm::vec4(0.0, 0.0, -1.0, 1.0)).xyz(),
-                              (glm::mat4_cast(mRotation) * glm::vec4(0.0, 1.0, 0.0, 1.0)).xyz());
+                              mTranslation + glm::vec3((glm::mat4_cast(mRotation) * glm::vec4(0.0, 0.0, -1.0, 1.0))),
+                              glm::vec3((glm::mat4_cast(mRotation) * glm::vec4(0.0, 1.0, 0.0, 1.0))));
 
   mRefreshView = GL_FALSE;
   mRefresh = GL_FALSE;
