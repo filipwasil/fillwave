@@ -13,14 +13,6 @@ add_definitions (-DASSIMP_BUILD_NO_IFC_IMPORTER)
 include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake)
 
 # -----------------------------------------------
-# Debug or Release
-# -----------------------------------------------
-
-if (FILLWAVE_BUILD_RELEASE)
-  set (CMAKE_BUILD_TYPE Release)
-endif ()
-
-# -----------------------------------------------
 # Compiler flags
 # -----------------------------------------------
 

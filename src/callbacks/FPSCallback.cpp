@@ -33,9 +33,10 @@
 
 
 #include <fillwave/actions/callbacks/FPSCallback.h>
-#include <fillwave/Fillwave.h>
-#include <fillwave/Log.h>
+#include <string>
+#include <sstream>
 
+#include <fillwave/Fillwave.h>
 
 namespace flw {
 namespace flf {
@@ -53,8 +54,11 @@ void FPSCallback::perform(EventType &event) {
   if (mTimePassed < 1.0f) {
     mTimePassed += e.mTimePassed;
   } else {
+    std::ostringstream oss;
+    oss << "FPS " << mEngine->getFramesPassed();
+    std::string count = oss.str();
     mTimePassed -= 1.0f;
-    mText->editString(std::string("FPS ") + to_string<GLuint>(mEngine->getFramesPassed()));
+    mText->editString(std::string(count));
   }
 }
 
