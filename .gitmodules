@@ -40,3 +40,6 @@
 [submodule "ext/spdlog"]
 	path = ext/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "ext/cotire"]
+	path = ext/cotire
+	url = https://github.com/sakra/cotire.git

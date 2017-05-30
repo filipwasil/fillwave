@@ -21,10 +21,19 @@ if (FILLWAVE_BUILD_RELEASE)
 endif ()
 
 # -----------------------------------------------
-# Compiler options
+# Compiler flags
 # -----------------------------------------------
 
-include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler.cmake)
+if (NOT FILLWAVE_SUPPRESS_WARNINGS)
+  include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/common.cmake)
+  if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
+    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/clang.cmake)
+  elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
+    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/gcc.cmake)
+  elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
+    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/msvc.cmake)
+  endif ()
+endif ()
 
 # -----------------------------------------------
 # Directories
@@ -129,21 +138,6 @@ endif (APPLE)
 if (WIN32)
   include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Windows.cmake)
 endif (WIN32)
-
-# -----------------------------------------------
-# Compiler
-# -----------------------------------------------
-
-if (NOT FILLWAVE_SUPPRESS_WARNINGS)
-  include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/common.cmake)
-  if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/clang.cmake)
-  elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "GNU")
-    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/gcc.cmake)
-  elseif (${CMAKE_CXX_COMPILER_ID} STREQUAL "MSVC")
-    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/msvc.cmake)
-  endif ()
-endif ()
 
 # -----------------------------------------------
 # Tests
