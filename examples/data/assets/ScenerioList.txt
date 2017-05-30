@@ -3,7 +3,7 @@ assets/SceneriosMenu/HelloWorld.xml
 Animation
 assets/SceneriosMenu/AnimationScene.xml
 Simple
-assets/SceneriosMenu/Simple.xml
+assets/SceneriosMenu/SimpleScene.xml
 Hud
 assets/SceneriosMenu/HudScene.xml
 Ortographic projection
