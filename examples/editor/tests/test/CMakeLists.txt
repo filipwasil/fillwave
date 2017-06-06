@@ -12,7 +12,11 @@ set (SOURCESRC
     ${EDITOR_SOURCE_DIR}/src/loader/factory/SliderWidgetFactory.cpp
     ${EDITOR_SOURCE_DIR}/src/loader/factory/DialWidgetFactory.cpp
     ${EDITOR_SOURCE_DIR}/src/loader/factory/LineEditWidgetFactory.cpp
-    ${EDITOR_SOURCE_DIR}/src/common/MenuWidgetTranslatorStandardValues.cpp
+    ${EDITOR_SOURCE_DIR}/src/loader/factory/ColorPushButtonWidgetFactory.cpp
+    ${EDITOR_SOURCE_DIR}/src/common/translators/MenuWidgetTranslatorStandardValues.cpp
+    ${EDITOR_SOURCE_DIR}/src/common/translators/MenuWidgetTranslatorButtonColor.cpp
+    ${EDITOR_SOURCE_DIR}/src/common/translators/MenuWidgetTranslatorLineEdit.cpp
+    ${EDITOR_SOURCE_DIR}/src/common/translators/IMenuWidgetTranslator.h
     )
 
 add_executable (runUnitTestsEditor
@@ -22,7 +26,7 @@ add_executable (runUnitTestsEditor
     ${SOURCESRC})
 
 # Standard linking to gtest stuff.
-target_link_libraries (runUnitTestsEditor gtest gtest_main gmock gmock_main)
+target_link_libraries (runUnitTestsEditor gtest gtest_main gmock gmock_main pthread)
 
 target_link_libraries (runUnitTestsEditor
     Qt5::Widgets

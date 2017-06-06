@@ -5,7 +5,7 @@
 
 class SceneControllerMock : public common::ISceneController {
 public:
-  MOCK_METHOD1(addTranslator, void(common::IMenuWidgetTranslator
+  MOCK_METHOD1(addTranslator, void(common::translators::IMenuWidgetTranslator
       *translator));
 
   MOCK_METHOD1(updateScenField, void(const std::pair<QString, QVariant>

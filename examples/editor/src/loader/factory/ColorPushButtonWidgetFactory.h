@@ -7,15 +7,10 @@
 
 namespace loader {
 namespace factory {
-class PushButtonWidgetFactory : public IMenuWidgetFactory{
+class ColorPushButtonWidgetFactory : public IMenuWidgetFactory{
 public:
-  PushButtonWidgetFactory();
-
   QWidget *create(QVector<std::pair<QString, QString>> &parametersVector,
       std::shared_ptr<common::ISceneController> scene);
-private:
-  QMap<QString, std::function<common::translators::IMenuWidgetTranslator*(QWidget* widget, QString value)>>
-      mTranslatorTypes;
 };
 }
 }

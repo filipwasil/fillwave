@@ -7,8 +7,13 @@
 
 class MenuWidgetsFabricTestFixture : public testing::Test {
 protected:
+  MenuWidgetsFabricTestFixture() :
+      mSceneController(std::make_shared<SceneControllerMock>())
+  {
+
+  }
   virtual void SetUp() override {
-    mSceneController = std::make_shared<SceneControllerMock>();
+    mSceneController.reset(new SceneControllerMock());
     sut = new loader::MenuWidgetFabric(mSceneController);
   }
 
@@ -17,7 +22,7 @@ protected:
     sut = 0;
   }
 
-  loader::MenuWidgetFabric *sut;
+  loader::MenuWidgetFabric* sut;
   std::shared_ptr<SceneControllerMock> mSceneController;
 };
 

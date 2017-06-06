@@ -58,10 +58,12 @@ void MainWidget::createBarMenuCategories() {
 
 void MainWidget::loadNewScenario(QAction *action) {
   loader::CreateMenu newMenu(mSceneController);
-  newMenu.recreateMenu(mMenuLayout, action->text());
+  auto sceneName = action->text();
+  sceneName = sceneName.remove("&");
+  newMenu.recreateMenu(mMenuLayout, sceneName);
 
   scene::ScensFactory scenFactory(mArgc, mArgv);
-  auto scen = scenFactory.createScen(action->text(), mSceneController->getCurrentMenuValues());
+  auto scen = scenFactory.createScen(sceneName, mSceneController->getCurrentMenuValues());
   if (!scen) {
     return;
   }

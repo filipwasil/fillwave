@@ -5,7 +5,7 @@
 
 class SceneMock : public scene::AScene {
 public:
-  SceneMock(int argc, char ** argv) : AScene(argc, argv) {}
+  SceneMock(int argc, char * const* argv, QMap<QString, QVariant> parametersMap) : AScene(argc, argv, parametersMap) {}
   MOCK_METHOD0(init, void());
 
   MOCK_METHOD0(perform, void());

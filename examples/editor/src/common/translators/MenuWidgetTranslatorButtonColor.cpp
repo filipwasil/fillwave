@@ -3,13 +3,13 @@
 
 namespace common {
 namespace translators {
-MenuWidgetTranslatorButtonColor::MenuWidgetTranslatorButtonColor(const QWidget *menuWidget, QString color)
+MenuWidgetTranslatorButtonColor::MenuWidgetTranslatorButtonColor(const QWidget *menuWidget,
+    QHash<QString, float> defaultValues)
     : MenuWidgetTranslatorStandardValues(menuWidget) {
-  auto vecColor = color.splitRef("_");
-  mLastColor.setRedF(vecColor[0].toFloat());
-  mLastColor.setGreenF(vecColor[1].toFloat());
-  mLastColor.setBlue(vecColor[2].toFloat());
-  mLastColor.setAlphaF(vecColor[3].toFloat());
+  mLastColor.setRedF(defaultValues["Red"]);
+  mLastColor.setGreenF(defaultValues["Green"]);
+  mLastColor.setBlue(defaultValues["Blue"]);
+  mLastColor.setAlphaF(defaultValues["Alpha"]);
 }
 
 void MenuWidgetTranslatorButtonColor::update() {

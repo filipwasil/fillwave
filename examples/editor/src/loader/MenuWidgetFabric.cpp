@@ -4,7 +4,7 @@
 #include "factory/SliderWidgetFactory.h"
 #include "factory/DialWidgetFactory.h"
 #include "factory/LineEditWidgetFactory.h"
-#include "factory/PushButtonWidgetFactory.h"
+#include "factory/ColorPushButtonWidgetFactory.h"
 
 namespace loader {
 MenuWidgetFabric::MenuWidgetFabric(std::shared_ptr<common::ISceneController> scene)
@@ -12,7 +12,7 @@ MenuWidgetFabric::MenuWidgetFabric(std::shared_ptr<common::ISceneController> sce
   mFabricMap["QSlider"] = new factory::SliderWidgetFactory();
   mFabricMap["QDial"] = new factory::DialWidgetFactory();
   mFabricMap["QLineEdit"] = new factory::LineEditWidgetFactory();
-  mFabricMap["QPushButton"] = new factory::PushButtonWidgetFactory();
+  mFabricMap["ColorQPushButton"] = new factory::ColorPushButtonWidgetFactory();
 }
 
 MenuWidgetFabric::~MenuWidgetFabric() {

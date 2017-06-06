@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Nowy>
-    <QPushButton>
+    <ColorQPushButton>
         <accessibleName>First shadow color</accessibleName>
         <objectName>mFirstShadow</objectName>
         <defaultText>Change Color</defaultText>
         <maxWidth>150</maxWidth>
         <translatorType>ColorDialog</translatorType>
-        <defaultValue>1_0_0_0</defaultValue>
-    </QPushButton>
-    <QPushButton>
+        <defaultRed>1</defaultRed>
+        <defaultGreen>0</defaultGreen>
+        <defaultBlue>0</defaultBlue>
+        <defaultAlpha>0</defaultAlpha>
+    </ColorQPushButton>
+    <ColorQPushButton>
         <accessibleName>Second shadow color</accessibleName>
         <objectName>mSecondShadow</objectName>
         <defaultText>Change Color</defaultText>
         <maxWidth>150</maxWidth>
         <translatorType>ColorDialog</translatorType>
-        <defaultValue>1_0_0_0</defaultValue>
-    </QPushButton>
-    <QPushButton>
+        <defaultRed>1</defaultRed>
+        <defaultGreen>0</defaultGreen>
+        <defaultBlue>0</defaultBlue>
+        <defaultAlpha>0</defaultAlpha>
+    </ColorQPushButton>
+    <ColorQPushButton>
         <accessibleName>Third shadow color</accessibleName>
         <objectName>mThirdShadow</objectName>
         <defaultText>Change Color</defaultText>
         <maxWidth>150</maxWidth>
         <translatorType>ColorDialog</translatorType>
-        <defaultValue>1_0_0_0</defaultValue>
-    </QPushButton>
+        <defaultRed>1</defaultRed>
+        <defaultGreen>0</defaultGreen>
+        <defaultBlue>0</defaultBlue>
+        <defaultAlpha>0</defaultAlpha>>
+    </ColorQPushButton>
 </Nowy>
