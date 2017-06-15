@@ -17,11 +17,13 @@ set (SOURCESRC
     ${EDITOR_SOURCE_DIR}/src/common/translators/MenuWidgetTranslatorButtonColor.cpp
     ${EDITOR_SOURCE_DIR}/src/common/translators/MenuWidgetTranslatorLineEdit.cpp
     ${EDITOR_SOURCE_DIR}/src/common/translators/IMenuWidgetTranslator.h
+    ${EDITOR_SOURCE_DIR}/src/common/SceneEventFactory.cpp
     )
 
 add_executable (runUnitTestsEditor
     ${CMAKE_CURRENT_SOURCE_DIR}/loader/MenuWidgetsFabricTest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/loader/SceneControllerTest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/common/SceneEventFactoryTest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/MainTest.cpp
     ${SOURCESRC})
 

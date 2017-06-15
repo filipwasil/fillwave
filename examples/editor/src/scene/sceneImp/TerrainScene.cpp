@@ -1,6 +1,8 @@
 #include "scene/callbacks/Callbacks.h"
 #include "TerrainScene.h"
 #include "scene/terrain/PerlinConstructor.h"
+#include <scene/callbacks/StandardKeyboardEventHandler.h>
+#include <scene/callbacks/StandardMouseEventHandler.h>
 
 using namespace flw;
 using namespace flw::flf;
@@ -32,9 +34,12 @@ void TerrainScene::init() {
   /* Engine callbacks */
   mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
   mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
-//	mEngine->attachCallback(make_unique<MoveCameraCallback>(
-//	         mEngine, eEventType::eCursorPosition, 0.1,
-//	         ContextGLFW::mWindow));
+	mEngine->attachCallback(make_unique<MoveCameraCallback>(
+	         mEngine.get(), eEventType::eCursorPosition, 0.1));
+  mEventsHandler.push_back(
+      std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
+  mEventsHandler.push_back(
+      std::make_unique<scene::callbacks::StandardMouseEventHandler>(mEngine));
 
   mEngine->configFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
 
@@ -53,7 +58,8 @@ void TerrainScene::init() {
 
   /* Description */
   mEngine->storeText("Terrain example", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
-  mEngine->storeText("Mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
+  mEngine->storeText("To move the camera push rigth mouse button and move", "fonts/Titania",
+                     glm::vec2(-0.95, -0.40), 70.0);
   mEngine->storeText("'S' camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
   mEngine->storeText("'W' camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
   mEngine->storeText("'T' resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);

@@ -40,7 +40,7 @@ std::pair<QString, QVariant> MenuWidgetTranslatorButtonColor::getCurrentValues()
     std::pair<QString, QVariant> empty;
     return empty;
   }
-  std::pair<QString, QVariant> elementValue = std::make_pair(name.toString(), QVariant(mLastColor));
+  std::pair<QString, QVariant> elementValue = std::make_pair(name.toString(), QVariant(std::move(mLastColor)));
   return elementValue;
 }
 

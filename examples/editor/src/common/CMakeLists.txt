@@ -6,6 +6,7 @@ set(SOURCECOMMON
     ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorStandardValues.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorLineEdit.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorButtonColor.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/SceneEventFactory.cpp
         PARENT_SCOPE
         )
 set(HEADERSCOMMON
@@ -18,5 +19,6 @@ set(HEADERSCOMMON
     ${CMAKE_CURRENT_SOURCE_DIR}/translators/IMenuWidgetTranslator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorLineEdit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/translators/MenuWidgetTranslatorButtonColor.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SceneEventFactory.h
         PARENT_SCOPE
         )

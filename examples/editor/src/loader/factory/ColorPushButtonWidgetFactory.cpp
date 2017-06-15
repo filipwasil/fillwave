@@ -1,5 +1,4 @@
 #include <QPushButton>
-#include <QHash>
 #include "common/translators/MenuWidgetTranslatorButtonColor.h"
 #include "ColorPushButtonWidgetFactory.h"
 namespace loader {

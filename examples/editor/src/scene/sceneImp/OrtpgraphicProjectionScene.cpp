@@ -1,5 +1,7 @@
 #include "scene/callbacks/Callbacks.h"
 #include "OrtpgraphicProjectionScene.h"
+#include <scene/callbacks/StandardKeyboardEventHandler.h>
+#include <scene/callbacks/StandardMouseEventHandler.h>
 
 using namespace flw;
 using namespace flw::flf;
@@ -68,9 +70,12 @@ void OrtpgraphicProjectionScene::init() {
 	/* Engine callbacks */
 	mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
 	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
-//	mEngine->attachCallback(make_unique<MoveCameraCallback>(
-//	         mEngine, eEventType::eCursorPosition, 0.1,
-//	         ContextGLFW::mWindow));
+	mEngine->attachCallback(make_unique<MoveCameraCallback>(
+	         mEngine.get(), eEventType::eCursorPosition, 0.1));
+	mEventsHandler.push_back(
+			std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
+	mEventsHandler.push_back(
+			std::make_unique<scene::callbacks::StandardMouseEventHandler>(mEngine));
 
 	/* Programs */
 	auto wall = make_unique<Model>(mEngine.get(), program, "meshes/floor.obj");
@@ -114,7 +119,7 @@ void OrtpgraphicProjectionScene::init() {
 	mEngine->getCurrentScene()->attach(std::move(shadowCastingBall5));
 
 	auto hint0 = mEngine->storeText("Fillwave example shadowing", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
-	auto hint5 = mEngine->storeText("Use mouse to move the camera", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
+	auto hint5 = mEngine->storeText("To move the camera push rigth mouse button and move", "fonts/Titania", glm::vec2(-0.95, -0.40), 70.0);
 	auto hint3 = mEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
 	auto hint4 = mEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
 	auto hint1 = mEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);

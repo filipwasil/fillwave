@@ -5,8 +5,10 @@
 #include <QString>
 #include <QMap>
 #include <QVariant>
+#include <QVector>
 #include <QObject>
 #include <fillwave/Fillwave.h>
+#include "scene/callbacks/IEventHandler.h"
 
 namespace scene {
 class AScene : public QObject {
@@ -41,8 +43,18 @@ public:
     return mEngine;
   };
 
+  bool eventFilter(QObject *watched, QEvent *event) override {
+    if (!mEventsHandler.empty()) {
+        for(auto & mEvent : mEventsHandler) {
+          mEvent->handle(event);
+        }
+    }
+    return QObject::eventFilter(watched, event);
+  }
+
 protected:
   std::shared_ptr<flw::Engine> mEngine;
   QMap<QString, QVariant> mSceneParameters;
+  std::vector<std::unique_ptr<scene::callbacks::IEventHandler>> mEventsHandler;
 };
 }
