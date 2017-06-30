@@ -15,3 +15,6 @@ set (FILLWAVE_MOCK_SOURCES
 
 add_library (fillwave_stubs SHARED ${TEST_STUBS_SOURCES})
 add_library (fillwave_mock SHARED ${FILLWAVE_MOCK_SOURCES})
+
+set_property (TARGET fillwave_stubs PROPERTY COMPILE_FLAGS "-w -Wno-undef")
+set_property (TARGET fillwave_mock PROPERTY COMPILE_FLAGS "-w -Wno-undef")

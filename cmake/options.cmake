@@ -1,3 +1,6 @@
+# -----------------------------------------------
+# Main Options
+# -----------------------------------------------
 
 option (FILLWAVE_BUILD_DEV "Build development package" OFF)
 option (FILLWAVE_BUILD_LIB "Build main fillwave package" ON)
@@ -5,6 +8,11 @@ option (FILLWAVE_BUILD_DEB "Build deb packages" OFF)
 option (FILLWAVE_BUILD_RPM "Build rpm packages" OFF)
 option (FILLWAVE_BUILD_TGZ "Build tgz packages" OFF)
 option (FILLWAVE_BUILD_PACK "Do not build external packages when not needed (Linux builds)" OFF)
+
+# -----------------------------------------------
+# Platform options
+# -----------------------------------------------
+
 option (FILLWAVE_COMPILATION_STARTUP_ANIMATION "Run startup animation before any other action" OFF)
 option (FILLWAVE_COMPILATION_PC_GLES "Use GLES stub for PC" OFF)
 option (FILLWAVE_COMPILATION_GLES_2_0 "Support old devices with gles 2.0 support" OFF)
@@ -18,6 +26,10 @@ option (FILLWAVE_TESTS_COVERALLS "Generate coveralls data" ON)
 option (FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)
 option (FILLWAVE_TEXTURE_LOADER_GLI "Use GLI texture loader" OFF)
 option (FILLWAVE_SUPPRESS_WARNINGS "Suppress warnings during compilation" OFF)
+
+# -----------------------------------------------
+# Build Options
+# -----------------------------------------------
 
 option (FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP "Build android native test app" OFF)
 option (FILLWAVE_BUILD_ANDROID_JNI_LIB "Build android jni library" OFF)
@@ -34,3 +46,7 @@ option (FILLWAVE_BUILD_RELEASE "Build type" OFF)
 option (FILLWAVE_BENCHMARK_TESTS "Build binary to test performance" OFF)
 
 option (FILLWAVE_DEBUG_OPENGL_APITRACE "Use apitrace to generate OpenGL trace" OFF)
+
+# -----------------------------------------------
+# CI Options
+# -----------------------------------------------
