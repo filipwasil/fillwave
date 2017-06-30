@@ -11,20 +11,10 @@ namespace scene {
 
 CallbacksScene::CallbacksScene(int argc, char **argv, QMap<QString, QVariant> varValues)
     : AScene(argc, argv, varValues) {
-  mSceneParameters["mText"] = QVariant("HelloWorld");
   init();
 }
 
 void CallbacksScene::init() {
-  pText hint0 = mEngine->storeText("Fillwave example callbacks", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
-  pText hint3 = mEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
-  pText hint4 = mEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
-  pText hint1 = mEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
-  pText hint6 = mEngine->storeText("Use 'D' for toggle debugger On/Off",
-                                   "fonts/Titania",
-                                   glm::vec2(-0.95, -0.80),
-                                   70.0);
-
   /* Scene and camera */
   mEngine->setCurrentScene(make_unique<Scene>());
   mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
@@ -65,7 +55,8 @@ void CallbacksScene::init() {
                                          glm::radians(90.0f),
                                          2.0f + i * 0.5,
                                          BounceEaseOut),
-        make_unique<TimedMoveCallback>(sphere.get(), glm::vec3(0.0, -1.0, 0.0), 2.0f + i * 0.5))), FILLWAVE_ENDLESS));
+        make_unique<TimedMoveCallback>(sphere.get(), glm::vec3(0.0, -1.0, 0.0), 2.0f + i * 0.5),
+        make_unique<TimedMoveCallback>(sphere.get(), glm::vec3(0.0, 1.0, 0.0), 2.0f + i * 0.5))), FILLWAVE_ENDLESS));
 
     mEngine->getCurrentScene()->attach(std::move(sphere));
   }
