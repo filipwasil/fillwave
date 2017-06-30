@@ -7,7 +7,7 @@ cmake_policy (SET CMP0048 NEW)
 # -----------------------------------------------
 
 message ("Building binary package")
-project (libfillwave VERSION 6.3.0 LANGUAGES C CXX)
+project (libfillwave VERSION 7.0.0 LANGUAGES C CXX)
 
 # -----------------------------------------------
 # Includes
@@ -110,10 +110,10 @@ if (FILLWAVE_BUILD_COTIRE)
 endif()
 
 # -----------------------------------------------
-# Packaging
+# Speed up building
 # -----------------------------------------------
 
-set (CPACK_DEBIAN_PACKAGE_NAME "libfillwave")
-set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fillwave graphics engine - library package")
-
-include (CPack)
+if (FILLWAVE_BUILD_COTIRE)
+  include (${FILLWAVE_EXT_COTIRE_PATH}/CMake/cotire.cmake)
+  cotire(fillwave)
+endif()

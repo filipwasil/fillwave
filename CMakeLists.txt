@@ -98,12 +98,6 @@ set (FILLWAVE_SOURCES
     )
 
 # -----------------------------------------------
-# Packaging
-# -----------------------------------------------
-
-include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/package.cmake)
-
-# -----------------------------------------------
 # Platform
 # -----------------------------------------------
 
@@ -113,11 +107,11 @@ if (UNIX AND NOT ANDROID AND NOT APPLE)
   else ()
     include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Linux.cmake)
   endif ()
-endif (UNIX AND NOT ANDROID AND NOT APPLE)
+endif ()
 
 if (ANDROID)
   include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Android.cmake)
-endif (ANDROID)
+endif ()
 
 if (APPLE)
   if (IOS)
@@ -125,11 +119,19 @@ if (APPLE)
   else ()
     include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/OSX.cmake)
   endif ()
-endif (APPLE)
+endif ()
 
 if (WIN32)
   include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Windows.cmake)
-endif (WIN32)
+endif ()
+
+# -----------------------------------------------
+# Packaging
+# -----------------------------------------------
+
+if (NOT WIN32)
+  include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/package.cmake)
+endif ()
 
 # -----------------------------------------------
 # Tests

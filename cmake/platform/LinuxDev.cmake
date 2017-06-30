@@ -1,14 +1,13 @@
 cmake_minimum_required (VERSION 2.8.8)
 
-#CMAKE_POLICY(SET CMP0048 OLD) #Project version cmake policy
-#CMAKE_POLICY(SET CMP0046 OLD) #Project dependency cmake policy
+cmake_policy (SET CMP0048 NEW)
 
 # -----------------------------------------------
 # Package type
 # -----------------------------------------------
 
 message ("Building development package")
-project (libfillwave-dev C CXX)
+project (libfillwave-dev VERSION 7.0.0 LANGUAGES C CXX)
 
 # -----------------------------------------------
 # Asset loader
@@ -42,9 +41,3 @@ add_subdirectory (ext)
 
 set (CPACK_DEBIAN_PACKAGE_NAME "libfillwave-dev")
 set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fillwave graphics engine - development package")
-
-if (FILLWAVE_BUILD_PACK)
-  set (CPACK_DEBIAN_PACKAGE_DEPENDS "libfillwave (>= ${CPACK_PACKAGE_VERSION_MAJOR}.${CPACK_PACKAGE_VERSION_MINOR}.${CPACK_PACKAGE_VERSION_PATCH})")
-endif ()
-
-include (CPack)
