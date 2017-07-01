@@ -29,7 +29,13 @@ set (BUILD_SHARED_LIBS OFF)
 
 add_subdirectory (${FILLWAVE_EXT_FREETYPE2_PATH})
 add_subdirectory (${FILLWAVE_EXT_FONTGENERATOR_PATH})
+
 add_subdirectory (${FILLWAVE_MODEL_LOADER_PATH})
+if (ANDROID)
+  set_property (TARGET ${FILLWAVE_MODEL_LOADER} PROPERTY COMPILE_FLAGS "-w -Wno-undef")
+  set_property (TARGET ${FILLWAVE_MODEL_LOADER} PROPERTY COMPILE_FLAGS "-w -Wno-shadow")
+  set_property (TARGET ${FILLWAVE_MODEL_LOADER} PROPERTY COMPILE_FLAGS "-w -Wno-ignored-qualifiers")
+endif()
 
 # -----------------------------------------------
 # Macros
@@ -74,18 +80,3 @@ endif ()
 if (FILLWAVE_BUILD_ANDROID_JNI_LIB)
   add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/examples/jni-lib)
 endif ()
-
-# -----------------------------------------------
-# Installation
-# -----------------------------------------------
-
-install (DIRECTORY ext/glm DESTINATION include/glm COMPONENT fillwave)
-install (DIRECTORY inc/fillwave DESTINATION include COMPONENT fillwave)
-install (DIRECTORY ext/glm/glm DESTINATION include/glm COMPONENT fillwave)
-install (FILES ${FILLWAVE_TEXTURE_LOADER_HEADERS} DESTINATION usr/include)
-install (FILES ${FILLWAVE_EXT_FONTGENERATOR_HEADERS} DESTINATION usr/include)
-
-install (TARGETS fillwave DESTINATION lib COMPONENT fillwave)
-install (TARGETS fillwaveStatic DESTINATION lib COMPONENT fillwaveStatic)
-
-include (CPack)

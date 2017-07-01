@@ -35,7 +35,7 @@
 
   set_property (TARGET gmock PROPERTY COMPILE_FLAGS "-w -Wno-undef")
   # Standard linking to gtest stuff.
-  target_link_libraries (runUnitTests gtest gtest_main fillwave_mock)
+  target_link_libraries (runUnitTests gtest fillwave_mock)
   target_link_libraries (runUnitTests gmock)
 
   # This is so you can do 'make test' to see all your tests run, instead of
