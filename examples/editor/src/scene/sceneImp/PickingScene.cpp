@@ -1,6 +1,7 @@
 #include "scene/callbacks/Callbacks.h"
 #include "PickingScene.h"
 #include "scene/objects/PickableModel.h"
+#include "scene/callbacks/StandardKeyboardEventHandler.h"
 
 using namespace flw;
 using namespace flw::flf;
@@ -22,7 +23,8 @@ void PickingScene::init() {
 	/* Engine callbacks */
 	mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
 	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
-
+	mEventsHandler.push_back(
+			std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
 	mEngine->getCurrentScene()->setCursor(make_unique<Cursor>(mEngine.get(),
 	                                                          mEngine->storeTexture("textures/cursor/standard_blue.png")));
 
