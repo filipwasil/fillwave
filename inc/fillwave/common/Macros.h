@@ -34,7 +34,8 @@
  */
 
 #include <algorithm>
-#include "memory"
+#include <memory>
+#include <vector>
 
 namespace flw {
 namespace flf {
@@ -79,6 +80,8 @@ static int fopen_s(FILE **f, const char *name, const char *mode) {
   }
   return ret;
 }
+#else
+#include <stdio.h>
 #endif
 
 /*

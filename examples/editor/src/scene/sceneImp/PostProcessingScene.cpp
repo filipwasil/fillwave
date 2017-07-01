@@ -1,5 +1,7 @@
 #include "scene/callbacks/Callbacks.h"
 #include "PostProcessingScene.h"
+#include "scene/callbacks/StandardKeyboardEventHandler.h"
+#include "scene/callbacks/StandardMouseEventHandler.h"
 
 using namespace flw;
 using namespace flw::flf;
@@ -46,10 +48,13 @@ void PostProcessingScene::init() {
 	/* Engine callbacks */
 	mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
 	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
-//	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine,
-//	                                                          eEventType::eCursorPosition,
-//	                                                          0.1,
-//	                                                          ContextGLFW::mWindow));
+	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(),
+	                                                          eEventType::eCursorPosition,
+	                                                          0.01));
+	mEventsHandler.push_back(
+			std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
+	mEventsHandler.push_back(
+			std::make_unique<scene::callbacks::StandardMouseEventHandler>(mEngine));
 
 	mEngine->getCurrentScene()->attach(std::move(model));
 
