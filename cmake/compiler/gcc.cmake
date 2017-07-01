@@ -30,6 +30,8 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-format-extra-args")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-cast-align") # todo stb android gcc
+
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unknown-pragmas")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-float-equal")  # todo assimp
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-old-style-cast")   # todo assimp
@@ -44,6 +46,9 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wno-strict-overflow") #
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wno-unsafe-loop-optimizations") # stb
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wno-unused-variable") # GCC ERROR !! False positive
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wno-unused-but-set-variable") # GCC ERROR !! False positive
+
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-unused-variable") # GCC ERROR !! False positive
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-unused-but-set-variable") # GCC ERROR !! False positive
 
 # OpenMP
 add_definitions ("-fopenmp")

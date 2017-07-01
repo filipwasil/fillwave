@@ -129,7 +129,7 @@ endif ()
 # Packaging
 # -----------------------------------------------
 
-if (NOT WIN32)
+if (NOT WIN32 AND NOT ANDROID)
   include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/package.cmake)
 endif ()
 
