@@ -71,6 +71,14 @@ std::unique_ptr<CONTAINER> make_unique_container(TCURRENT &&t, TNEXT &&... args)
 #   define UINT_MAX (~((unsigned int)0))
 #endif
 
+/*
+ template<typename T>
+ using shared_ptr_unsynchronized = std::__shared_ptr<T, __gnu_cxx::_S_single>;
+ */
+
+} /* flf */
+} /* flw */
+
 #ifdef __unix
 static int fopen_s(FILE **f, const char *name, const char *mode) {
   int ret = 0;
@@ -83,11 +91,3 @@ static int fopen_s(FILE **f, const char *name, const char *mode) {
 #else
 #include <stdio.h>
 #endif
-
-/*
- template<typename T>
- using shared_ptr_unsynchronized = std::__shared_ptr<T, __gnu_cxx::_S_single>;
- */
-
-} /* flf */
-} /* flw */

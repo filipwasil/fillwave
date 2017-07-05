@@ -898,7 +898,7 @@ void Engine::EngineImpl::captureFramebufferToFile(const std::string &name) {
 #endif
   data[mWindowWidth * mWindowHeight * 4] = '\0';
   FILE *file;
-  auto errorNo = flf::fopen_s(&file, mFileLoader.getRootPath(name).c_str(), "w");
+  auto errorNo = fopen_s(&file, mFileLoader.getRootPath(name).c_str(), "w");
   if (errorNo) {
     fLogE("Error when takin' screenshot");
     exit(1);
