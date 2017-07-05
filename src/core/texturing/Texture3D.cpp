@@ -34,7 +34,7 @@ Texture3D::Texture3D(Texture2DFile *fileRight,
   unbind();
 }
 
-inline void Texture3D::sendData(Texture3DFile *file, Texture2DFileData customData) {
+inline void Texture3D::sendData(flc::Texture3DFile* file, GLubyte* customData) {
 
   if (customData) {
     file->mData = customData;
@@ -82,12 +82,12 @@ void Texture3D::log() {
   // nothing
 }
 
-void Texture3D::sendData(Texture2DFileData xp,
-    Texture2DFileData xn,
-    Texture2DFileData yp,
-    Texture2DFileData yn,
-    Texture2DFileData zp,
-    Texture2DFileData zn) {
+void Texture3D::sendData(GLubyte* xp,
+    GLubyte* xn,
+    GLubyte* yp,
+    GLubyte* yn,
+    GLubyte* zp,
+    GLubyte* zn) {
 
   sendData(mRight.get(), xp);
   sendData(mLeft.get(), xn);

@@ -34,7 +34,7 @@
 //    This is an example that demonstrates generating and using
 //    a 3D noise texture.
 //
-#define _USE_MATH_DEFINES
+// #define _USE_MATH_DEFINES
 
 #include <fillwave/Fillwave.h>
 

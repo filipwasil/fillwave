@@ -40,7 +40,7 @@ namespace flc {
 
 class Texture2DRenderable : public Texture2D {
 public:
-  Texture2DRenderable(GLenum attachment, Texture2DFile *file, ParameterList &parameters);
+  Texture2DRenderable(GLenum attachment, flc::Texture2DFile *file, ParameterList &parameters);
 
   virtual ~Texture2DRenderable() = default;
 

@@ -45,7 +45,7 @@ public:
 
   void generateMipMaps();
 
-  void sendData(Texture2DFileData data = nullptr);
+  void sendData(GLubyte* data = nullptr);
 
   virtual void reload();
 

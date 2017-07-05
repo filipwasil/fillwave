@@ -40,15 +40,16 @@ class GLObject {
 public:
   GLObject(GLsizei howMany);
 
-  virtual ~GLObject();
+  ~GLObject();
 
   GLuint getHandle(GLuint id = 0);
 
-  virtual void reload() = 0;
+private:
+  static const GLsizei MAX_ELEMENTS = 10;
 
 protected:
   GLsizei mHowMany;
-  GLuint mHandles[FILLWAVE_GLOBJECT_MAX_CAPACITY];
+  GLuint mHandles[MAX_ELEMENTS];
 };
 
 } /* flc */

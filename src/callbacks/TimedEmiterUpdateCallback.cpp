@@ -38,8 +38,7 @@ namespace flf {
 
 TimedEmiterUpdateCallback::TimedEmiterUpdateCallback(IEmiterPoint *emiter, GLfloat timeToFinish, EasingFunction easing)
     : TimedCallback(timeToFinish, easing)
-    , mEmiter(emiter)
-    , mTimePassed(0.0) {
+    , mEmiter(emiter) {
 
 }
 

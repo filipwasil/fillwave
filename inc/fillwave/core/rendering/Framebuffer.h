@@ -41,7 +41,7 @@ namespace flc {
 
 class Framebuffer : public GLObject {
 public:
-  Framebuffer(GLsizei howMany = 1);
+  Framebuffer(GLuint howMany = 1);
 
   virtual ~Framebuffer();
 

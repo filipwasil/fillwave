@@ -63,7 +63,7 @@ Channel::Channel(aiNodeAnim *assimpChannel) {
     mKeysScaling.push_back(keyScaling);
   }
 
-  fLogD(" Added an animation channel \n name: %s \n keys S: %lu keys R: %lu keys P: %lu",
+  fLogD(" Added an animation channel \n name: %s \n keys S: %du keys R: %du keys P: %du",
         mAffectedNodeName.c_str(),
         mKeysScaling.size(),
         mKeysRotation.size(),

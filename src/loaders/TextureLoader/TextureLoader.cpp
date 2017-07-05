@@ -59,7 +59,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
   uint8_t r = 0, g = 0, b = 0;
   if (filePath == rootPath) {
     fLogD("Empty texture %s generation and loading ...", filePath.c_str());
-    flc::Texture2DFile *file = loadVirtualFileColor(512, 512, 0, 0, 0);
+    auto file = loadVirtualFileColor(512, 512, 0, 0, 0);
     return file;
   }
 
@@ -77,7 +77,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     g = atoi(tokens[1].c_str());
     b = atoi(tokens[2].c_str());
 
-    flc::Texture2DFile *file = loadVirtualFileColor(512, 512, r, g, b);
+    auto file = loadVirtualFileColor(512, 512, r, g, b);
     return file;
   }
   if (posCheckboard != std::string::npos) {
@@ -93,7 +93,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     g = atoi(tokens[1].c_str());
     b = atoi(tokens[2].c_str());
 
-    flc::Texture2DFile *file = loadVirtualFileCheckboard(512, 512, r, g, b);
+    auto file = loadVirtualFileCheckboard(512, 512, r, g, b);
     return file;
   }
   if (posDDS != std::string::npos) {
@@ -227,7 +227,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
   return TextureName;
 #else /* FILLWAVE_TEXTURE_LOADER_GLI */
   GLint w, h, n;
-  GLubyte *content = stbi_load(filePath.c_str(), &w, &h, &n, getBytesPerPixel(format));
+  auto content = stbi_load(filePath.c_str(), &w, &h, &n, getBytesPerPixel(format));
   if (NULL == content) { //xxx NULL, not nullptr because the stb library uses NULL
     FILE *f;
     auto errorNo = fopen_s(&f, filePath.c_str(), "rb");
@@ -240,7 +240,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     return nullptr;
   }
   fLogD("Image %s size %dx%d pixel %d bytes per pixel", filePath.c_str(), w, h, n);
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  auto file = new flc::Texture2DFile();
 
   file->mHeader.mFormat = format;
   file->mHeader.mWidth = w;
@@ -334,7 +334,6 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
       break;
 
     case eFlip::eNone:
-    default:
       break;
   }
   return file;
@@ -342,7 +341,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
 }
 
 flc::Texture2DFile *TextureLoader::loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format) {
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  auto file = new flc::Texture2DFile();
 
   file->mHeader.mFormat = format;
   file->mHeader.mInternalFormat = format;
@@ -371,7 +370,7 @@ flc::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
 
   const GLint bytesPerPixel = getBytesPerPixel(format);
   const GLint size = bytesPerPixel * width * height * sizeof(GLubyte);
-  GLubyte *content = new GLubyte[size];
+  auto content = new GLubyte[size];
 
   GLint i, r = 0, g = 0, b = 0;
   for (i = 0; i < size; i += bytesPerPixel) {
@@ -391,7 +390,7 @@ flc::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
     content[i + 3] = 1;
   }
 
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  auto file = new flc::Texture2DFile();
   file->mHeader.mFormat = format;
   file->mHeader.mInternalFormat = format;
   file->mHeader.mWidth = width;
@@ -427,7 +426,7 @@ flc::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
     content[i + 3] = 1;
   }
 
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  auto file = new flc::Texture2DFile();
   file->mHeader.mFormat = format;
   file->mHeader.mInternalFormat = format;
   file->mHeader.mWidth = width;

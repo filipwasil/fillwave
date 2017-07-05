@@ -40,8 +40,7 @@ FLOGINIT("Framebuffer", FERROR | FFATAL | FDEBUG)
 namespace flw {
 namespace flc {
 
-Framebuffer::Framebuffer(GLsizei howMany)
-    : GLObject(howMany) {
+Framebuffer::Framebuffer(GLuint howMany) : GLObject(howMany) {
   reload();
 }
 

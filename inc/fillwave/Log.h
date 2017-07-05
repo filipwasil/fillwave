@@ -28,8 +28,9 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-/* Exceptions */
 #include <fillwave/Config.h>
+#include <fillwave/PlatformSW.h>
+#include <string>
 
 #ifdef FILLWAVE_BUILD_RELEASE
 
@@ -49,7 +50,7 @@
 
 #else /* FILLWAVE_BUILD_RELEASE */
 
-#include <fillwave/common/Strings.h>
+//#include <fillwave/common/Strings.h>
 
 #define FERROR FBIT(0)
 #define FINFO FBIT(1)
@@ -90,9 +91,12 @@
 
 #endif /* __ANDROID__ */
 
-#define FLOGINIT_DEFAULT()                                              \
-   static const std::string _tag_ = flw::getFileNameOnly(__FILE__);\
-   static const char _mask_ = FBIT_MAX;                                 \
+#define FLOGINIT_DEFAULT()                                                                            \
+   static const std::string _tag_ =  (                                                                \
+      std::string(__FILE__).find(FILLWAVE_OS_SEPRATOR) == std::string::npos ? std::string(__FILE__) : \
+      std::string(__FILE__).substr(std::string(__FILE__).find_last_of(                                \
+          FILLWAVE_OS_SEPRATOR) + 1, std::string(__FILE__).size()));                                  \
+   static const char _mask_ = FBIT_MAX;                                                               \
    FLOG_CREATE_STATIC_LOGGER()
 
 #define FLOGINIT_MASK(mask)                                             \

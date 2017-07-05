@@ -48,9 +48,6 @@ public:
 
 protected:
   IEmiterPoint *mEmiter;
-
-private:
-  GLfloat mTimePassed;
 };
 
 } /* flf */

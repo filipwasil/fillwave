@@ -53,9 +53,9 @@ public:
       const std::vector<GLfloat> &positions,
       const std::vector<GLfloat> &times);
 
-  virtual ~VertexBufferParticles() = default;
+  ~VertexBufferParticles() override = default;
 
-  void log() const;
+  void log() const override;
 };
 
 } /* flc */

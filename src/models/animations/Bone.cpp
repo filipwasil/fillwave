@@ -75,7 +75,7 @@ void Bone::setGlobalOffsetMatrix(glm::mat4 m) {
   mGlobalOffsetMatrix = m;
 }
 
-void Bone::log() {
+void Bone::log() const {
   fLogI("Name: %s", (mName.c_str()));
 }
 

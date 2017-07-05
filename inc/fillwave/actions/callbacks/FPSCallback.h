@@ -50,7 +50,6 @@ public:
 
 private:
   pText mText;
-  GLfloat mTimePassed;
   Engine *mEngine;
 };
 

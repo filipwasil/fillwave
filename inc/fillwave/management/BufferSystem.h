@@ -44,24 +44,15 @@ namespace flf {
  */
 
 struct BufferSystem {
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexArray, IReloadable *> mVertexArrays;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferBasic, flc::VertexArray *, flf::TerrainConstructor *, GLint, GLfloat, std::vector<GLuint> &> mVertices;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::IndexBuffer, flc::VertexArray *, std::vector<GLuint> &> mIndices;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferText, flc::VertexArray *, const std::vector<GLfloat> &, const std::vector<GLfloat> &> mVerticesText;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, std::vector<flc::VertexBufferParticlesGPU *>, flc::VertexArray *, std::vector<flc::VertexParticleGPU> &> mVerticesParticlesGPU;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferParticles, flc::VertexArray *, std::vector<GLfloat> &, std::vector<GLfloat> &, std::vector<GLfloat> &> mVerticesParticles;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferDebug, flc::VertexArray *, GLfloat> mVerticesDebugger;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferFloat, flc::VertexArray *, std::vector<flc::VertexFloat> &> mVerticesFloat;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::VertexBufferPosition, flc::VertexArray *, std::vector<flc::VertexPosition> &> mVerticesPosition;
-
+  TCache<MAX_CACHE_SIZE, flc::VertexArray, IReloadable *> mVertexArrays;
+  TCache<MAX_CACHE_SIZE, flc::VertexBufferBasic, flc::VertexArray *, flf::TerrainConstructor *, GLint, GLfloat, std::vector<GLuint> &> mVertices;
+  TCache<MAX_CACHE_SIZE, flc::IndexBuffer, flc::VertexArray *, std::vector<GLuint> &> mIndices;
+  TCache<MAX_CACHE_SIZE, flc::VertexBufferText, flc::VertexArray *, const std::vector<GLfloat> &, const std::vector<GLfloat> &> mVerticesText;
+  TCache<MAX_CACHE_SIZE, std::vector<flc::VertexBufferParticlesGPU *>, flc::VertexArray *, std::vector<flc::VertexParticleGPU> &> mVerticesParticlesGPU;
+  TCache<MAX_CACHE_SIZE, flc::VertexBufferParticles, flc::VertexArray *, std::vector<GLfloat> &, std::vector<GLfloat> &, std::vector<GLfloat> &> mVerticesParticles;
+  TCache<MAX_CACHE_SIZE, flc::VertexBufferDebug, flc::VertexArray *, GLfloat> mVerticesDebugger;
+  TCache<MAX_CACHE_SIZE, flc::VertexBufferFloat, flc::VertexArray *, std::vector<flc::VertexFloat> &> mVerticesFloat;
+  TCache<MAX_CACHE_SIZE, flc::VertexBufferPosition, flc::VertexArray *, std::vector<flc::VertexPosition> &> mVerticesPosition;
 };
 
 } /* flf */

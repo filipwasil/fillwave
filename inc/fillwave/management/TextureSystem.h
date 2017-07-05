@@ -60,20 +60,13 @@ public:
       const std::string &posZ,
       const std::string &negZ);
 
-  flc::Texture2DRenderable *getShadow2D(GLuint width, GLuint height);
-
-  flc::Texture3DRenderable *getShadow3D(GLuint width, GLuint height);
-
-  flc::Texture2DRenderable *getColor2D(GLuint width, GLuint height);
-
-  flc::Texture2D *getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
-
-  flc::Texture2D *getDeferredColorScreen(GLuint width, GLuint height, GLuint size = 1);
-
-  flc::Texture2D *getDeferredDepth(GLuint width, GLuint height);
-
-  flc::Texture2D *getDeferredStencilDepth(GLuint width, GLuint height);
-
+  flc::Texture2DRenderable* getShadow2D(GLuint width, GLuint height);
+  flc::Texture3DRenderable* getShadow3D(GLuint width, GLuint height);
+  flc::Texture2DRenderable* getColor2D(GLuint width, GLuint height);
+  flc::Texture2D* getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
+  flc::Texture2D* getDeferredColorScreen(GLuint width, GLuint height, GLuint size = 1);
+  flc::Texture2D* getDeferredDepth(GLuint width, GLuint height);
+  flc::Texture2D* getDeferredStencilDepth(GLuint width, GLuint height);
   flc::Texture2DRenderableDynamic *
   getDynamic(const std::string &fragmentShaderPath, flc::Program *program, glm::ivec2 screenSize);
 
@@ -89,21 +82,15 @@ private:
 
 #ifdef FILLWAVE_GLES_3_0
 #else /* FILLWAVE_GLES_3_0 */
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture1D, size_t, flc::ParameterList &> mTextures1D;
+  TCache<MAX_CACHE_SIZE, flc::Texture1D, size_t, flc::ParameterList &> mTextures1D;
 #endif /* FILLWAVE_GLES_3_0 */
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture2D, std::string, flc::Texture2DFile *, flc::ParameterList &, GLuint> mTextures2D;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture2D, size_t, flc::Texture2DFile *, flc::ParameterList &, GLuint> mTextures2DDeferred;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture2DRenderableDynamic, std::string, flc::Texture2DFile *, flc::ParameterList &, flc::Program *> mTextures2DDynamic;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture2DRenderable, size_t, GLenum, flc::Texture2DFile *, flc::ParameterList &> mTextures2DRenderable;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture3D, std::string, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::ParameterList &> mTextures3D;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture3DRenderableDynamic, std::string, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::ParameterList &, flc::Texture2DRenderable *, flc::Program *> mTextures3DDynamic;
-
-  TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Texture3DRenderable, size_t, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DFile *, flc::Texture2DRenderable *, flc::ParameterList &> mTextures3DRenderable;
+  TCache<MAX_CACHE_SIZE, flc::Texture2D, std::string, flc::Texture2DFile* , flc::ParameterList &, GLuint> mTextures2D;
+  TCache<MAX_CACHE_SIZE, flc::Texture2D, size_t, flc::Texture2DFile* , flc::ParameterList &, GLuint> mTextures2DDeferred;
+  TCache<MAX_CACHE_SIZE, flc::Texture2DRenderableDynamic, std::string, flc::Texture2DFile*, flc::ParameterList &, flc::Program *> mTextures2DDynamic;
+  TCache<MAX_CACHE_SIZE, flc::Texture2DRenderable, size_t, GLenum, flc::Texture2DFile *, flc::ParameterList &> mTextures2DRenderable;
+  TCache<MAX_CACHE_SIZE, flc::Texture3D, std::string, flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::ParameterList &> mTextures3D;
+  TCache<MAX_CACHE_SIZE, flc::Texture3DRenderableDynamic, std::string, flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::ParameterList &, flc::Texture2DRenderable *, flc::Program *> mTextures3DDynamic;
+  TCache<MAX_CACHE_SIZE, flc::Texture3DRenderable, size_t, flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DRenderable *, flc::ParameterList &> mTextures3DRenderable;
 
   std::vector<GLenum> mSupportedCompresssionTypes;
   std::string mRootPath;

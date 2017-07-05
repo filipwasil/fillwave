@@ -43,12 +43,12 @@ namespace flf {
 
 class IHUDNode : public ITreeNode {
 public:
-  IHUDNode(flc::Texture2D *texture = nullptr,
-      flc::Program *program = nullptr,
+  IHUDNode(flc::Texture2D* texture = nullptr,
+      flc::Program* program = nullptr,
       glm::vec2 position = glm::vec2(0.0f, 0.0f),
       glm::vec2 scale = glm::vec2(1.0f, 1.0f));
 
-  virtual ~IHUDNode();
+  virtual ~IHUDNode() override;
 
   virtual void draw();
 
@@ -59,8 +59,8 @@ public:
   void coreDraw();
 
 protected:
-  flc::Texture2D *mTexture;
-  flc::Program *mProgram;
+  flc::Texture2D* mTexture;
+  flc::Program* mProgram;
   glm::vec2 mPosition;
   glm::vec2 mScale;
   Blending mBlending;

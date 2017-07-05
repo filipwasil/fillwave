@@ -52,9 +52,9 @@ public:
       const std::vector<GLfloat> &textureCoords,
       GLuint dataStoreModification = GL_DYNAMIC_DRAW);
 
-  virtual ~VertexBufferText() = default;
+  ~VertexBufferText() override = default;
 
-  void log() const;
+  void log() const override;
 };
 
 } /* flc */

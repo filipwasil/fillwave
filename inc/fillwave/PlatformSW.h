@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-* Copyright (c) 2017, Filip Wasil
+* Copyright (c) 2017, Fillwave developers
 * All rights reserved.
 *
 * Fillwave C++14 graphics engine.
@@ -28,36 +28,13 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/core/buffers/TVertexBuffer.h>
-
-namespace flw {
-namespace flc {
-
-/*! \struct VertexParticleGPU
- * \brief Stores the particle vertex data computed entirely on GPU.
- */
-
-struct VertexParticleGPU {
-  float position[3];
-  float velocity[3];
-  float size;
-  float currentTime;
-  float lifetime;
-  float cameraDistance;
-};
-
-/*! \class VertexBufferParticlesGPU
- * \brief Vertex buffer specialized with VertexParticleGPU data structure.
- */
-
-class VertexBufferParticlesGPU : public TVertexBuffer<VertexParticleGPU> {
-public:
-  VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles);
-
-  ~VertexBufferParticlesGPU() override = default;
-
-  void log() const override;
-};
-
-} /* flc */
-} /* flw */
+#ifdef __linux__
+#define FILLWAVE_OS_SEPRATOR "/"
+#define FILLWAVE_OS_CURRENTDIR "./"
+#elif _WIN32
+#define FILLWAVE_OS_SEPRATOR "\\"
+#define FILLWAVE_OS_CURRENTDIR "./"
+#elif __APPLE__
+#define FILLWAVE_OS_SEPRATOR "/"
+#define FILLWAVE_OS_CURRENTDIR "./"
+#endif

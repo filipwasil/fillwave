@@ -429,7 +429,7 @@ puMesh Model::loadMesh(const aiMesh *shape,
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
   vbo->emptyCPU();
 #endif
-  return std::move(mesh);
+  return mesh;
 }
 
 void Model::performAnimation(GLfloat timeElapsed_s) {

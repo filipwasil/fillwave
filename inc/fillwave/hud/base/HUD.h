@@ -43,7 +43,7 @@ class HUD : public TreePtr<IHUDNode, IHUDNode> {
 public:
   HUD() = default;
 
-  virtual ~HUD() = default;
+  ~HUD() override = default;
 
   virtual void draw() override;
 };

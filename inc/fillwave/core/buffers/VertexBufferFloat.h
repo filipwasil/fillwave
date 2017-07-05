@@ -49,9 +49,9 @@ class VertexBufferFloat : public TVertexBuffer<VertexFloat> {
 public:
   VertexBufferFloat(const std::vector<VertexFloat> &values, GLuint dataStoreModification = GL_STATIC_DRAW);
 
-  virtual ~VertexBufferFloat() = default;
+  ~VertexBufferFloat() override = default;
 
-  void log() const;
+  void log() const override;
 };
 
 } /* flc */

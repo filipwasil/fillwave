@@ -40,7 +40,7 @@ FLOGINIT("Texture2DRenderable", FERROR | FFATAL | FDEBUG)
 namespace flw {
 namespace flc {
 
-Texture2DRenderable::Texture2DRenderable(GLenum attachment, Texture2DFile *file, ParameterList &parameters)
+Texture2DRenderable::Texture2DRenderable(GLenum attachment, flc::Texture2DFile *file, ParameterList &parameters)
     : Texture2D(file, parameters)
     , mFramebuffer(std::make_unique<Framebuffer>())
     , mAttachment(attachment) {

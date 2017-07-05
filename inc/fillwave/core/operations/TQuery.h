@@ -37,15 +37,12 @@ namespace flc {
  * \brief GLObject to ask OpenGL questions.
  */
 
-template <GLenum target>
-class TQuery : public GLObject {
-private:
-  GLenum mTarget = target;
-
+template <GLenum TARGET>
+class TQuery final : public GLObject {
 public:
-  TQuery(GLsizei howMany = 1);
+  TQuery(GLuint howMany = 1);
 
-  virtual ~TQuery();
+  ~TQuery();
 
   void begin(GLuint id = 0);
 
@@ -64,16 +61,15 @@ public:
   void log();
 };
 
-typedef TQuery<GL_ANY_SAMPLES_PASSED> QueryIfAnySamplesPassed;
-
-typedef TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN> QueryHowManyTransformFeedbackPrimitivesWritten;
+using QueryIfAnySamplesPassed = TQuery<GL_ANY_SAMPLES_PASSED>;
+using QueryHowManyTransformFeedbackPrimitivesWritten = TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN>;
 
 #ifdef FILLWAVE_GLES_3_0
 #else
 
-typedef TQuery<GL_SAMPLES_PASSED> QueryHowManySamplesPassed;
-typedef TQuery<GL_PRIMITIVES_GENERATED> QueryHowManyPrimitivesGeneratedByGeometryShader;
-typedef TQuery<GL_TIME_ELAPSED> QueryTimeElapsed;
+using QueryHowManySamplesPassed = TQuery<GL_SAMPLES_PASSED>;
+using QueryHowManyPrimitivesGeneratedByGeometryShader = TQuery<GL_PRIMITIVES_GENERATED>;
+using QueryTimeElapsed = TQuery<GL_TIME_ELAPSED>;
 
 #endif
 

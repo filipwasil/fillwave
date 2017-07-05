@@ -1,7 +1,5 @@
-#pragma once
-
 /*
-* Copyright (c) 2017, Filip Wasil
+* Copyright (c) 2017, Fillwave developers
 * All rights reserved.
 *
 * Fillwave C++14 graphics engine.
@@ -28,36 +26,51 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/core/buffers/TVertexBuffer.h>
+#include "fillwave/loaders/TextureFiles.h"
+#include <cstdlib>
 
 namespace flw {
 namespace flc {
 
-/*! \struct VertexParticleGPU
- * \brief Stores the particle vertex data computed entirely on GPU.
- */
+Texture2DFileConfig::Texture2DFileConfig(GLint level,
+    GLint border,
+    GLboolean mipmaps,
+    GLboolean compression)
+    : mMipmapsLevel(level)
+    , mMipmaps(mipmaps)
+    , mCompression(compression)
+    , mBorder(border)
+    , mCompressionSize(0) {
 
-struct VertexParticleGPU {
-  float position[3];
-  float velocity[3];
-  float size;
-  float currentTime;
-  float lifetime;
-  float cameraDistance;
-};
+}
 
-/*! \class VertexBufferParticlesGPU
- * \brief Vertex buffer specialized with VertexParticleGPU data structure.
- */
 
-class VertexBufferParticlesGPU : public TVertexBuffer<VertexParticleGPU> {
-public:
-  VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles);
+Texture2DFileHeader::Texture2DFileHeader(GLint internalFormat,
+    GLint format,
+    GLint type,
+    GLsizei width,
+    GLsizei height)
+    : mInternalFormat(internalFormat)
+    , mHeight(height)
+    , mWidth(width)
+    , mType(type)
+    , mFormat(format) {
 
-  ~VertexBufferParticlesGPU() override = default;
+}
 
-  void log() const override;
-};
+Texture2DFile::~Texture2DFile() {
+  switch (mAllocation) {
+    case eMemoryAllocation::eMallock:
+      free(mData);
+      break;
+    case eMemoryAllocation::eNew:
+      delete mData;
+      mData = nullptr;
+      break;
+    case eMemoryAllocation::eNone:
+      break;
+  }
+}
 
 } /* flc */
 } /* flw */

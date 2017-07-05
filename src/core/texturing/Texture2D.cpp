@@ -20,7 +20,7 @@ Texture2D::Texture2D(Texture2DFile *file, ParameterList &parameters, GLuint howM
   reload();
 }
 
-void Texture2D::sendData(Texture2DFileData data) {
+void Texture2D::sendData(GLubyte* data) {
   if (data) {
     mFile->mData = data;
   }

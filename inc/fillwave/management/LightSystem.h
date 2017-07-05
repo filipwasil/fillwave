@@ -97,4 +97,4 @@ private:
 
 } /* flf */
 typedef std::unique_ptr<flf::LightSystem> puLightSystem;
-} /* fillwave*/
+} /* flw */

@@ -40,12 +40,12 @@ FLOGINIT("Texture3DRenderable", FERROR | FFATAL)
 namespace flw {
 namespace flc {
 
-Texture3DRenderable::Texture3DRenderable(Texture2DFile *filePosX,
-    Texture2DFile *fileNegX,
-    Texture2DFile *filePosY,
-    Texture2DFile *fileNegY,
-    Texture2DFile *filePosZ,
-    Texture2DFile *fileNegZ,
+Texture3DRenderable::Texture3DRenderable(flc::Texture2DFile *filePosX,
+    flc::Texture2DFile *fileNegX,
+    flc::Texture2DFile *filePosY,
+    flc::Texture2DFile *fileNegY,
+    flc::Texture2DFile *filePosZ,
+    flc::Texture2DFile *fileNegZ,
     flc::Texture2DRenderable *texture,
     ParameterList &parameters)
     : Texture3D(filePosX, //right

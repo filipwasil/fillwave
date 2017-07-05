@@ -42,7 +42,12 @@
 #include <fillwave/management/TextureSystem.h>
 
 #include <fillwave/common/Macros.h>
+
+#ifdef __ANDROID__
+#else /* __ANDROID__ */
 #include <fillwave/common/Strings.h>
+#endif /* __ANDROID__ */
+
 #include <fillwave/loaders/FileLoader.h>
 #include <fillwave/management/BufferSystem.h>
 
@@ -51,9 +56,6 @@ FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 struct ANativeActivity;
 
 class Engine;
-
-using namespace flw::flf;
-using namespace std;
 
 namespace flw {
 
@@ -64,7 +66,7 @@ namespace flw {
 struct Engine::EngineImpl final {
 
 #ifdef __ANDROID__
-  EngineImpl(Engine* engine, string rootPath);
+  EngineImpl(Engine* engine, std::string rootPath);
   EngineImpl(Engine* engine, ANativeActivity* activity);
 #else
 
@@ -98,15 +100,15 @@ struct Engine::EngineImpl final {
   puPixelBuffer mPickingPixelBuffer;
 
   /* Resources */
-  CacheShaders mShaders;
-  CachePrograms mPrograms;
-  CacheSamplers mSamplers;
-  vector<pText> mTextManager;
-  vector<pFont> mFontManager;
-  BufferSystem mBuffers;
+  flf::CacheShaders mShaders;
+  flf::CachePrograms mPrograms;
+  flf::CacheSamplers mSamplers;
+  std::vector<pText> mTextManager;
+  std::vector<pFont> mFontManager;
+  flf::BufferSystem mBuffers;
   puLightSystem mLights;
   puTextureSystem mTextures;
-  vector<flc::PostProcessingPass> mPostProcessingPasses;
+  std::vector<flc::PostProcessingPass> mPostProcessingPasses;
   flc::Program *mProgramTextureLookup;
 
   /* Fences and barriers */
@@ -118,13 +120,13 @@ struct Engine::EngineImpl final {
   flc::VertexArray *mVAOOcclusion;
 
   /* Inputs - callbacks */
-  map<eEventType, vector<puCallback> > mCallbacks;
+  std::map<eEventType, std::vector<puCallback> > mCallbacks;
 
   /* Inputs - focus */
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
   pair<IFocusable*, vector<Callback*>> mFocus;
 #else
-  map<IFocusable *, vector<Callback *>> mFocus;
+  std::map<flw::flf::IFocusable*, std::vector<flw::flf::Callback*>> mFocus;
 #endif
 
   /* Extras */
@@ -132,7 +134,7 @@ struct Engine::EngineImpl final {
   GLuint mFrameCounter;
   GLfloat mTimeFactor;
   pText mFPSText;
-  flf::FPSCallback *mTextFPSCallback;
+  flf::FPSCallback* mTextFPSCallback;
 
   /* Startup */
   GLfloat mStartupTime;
@@ -196,12 +198,12 @@ struct Engine::EngineImpl final {
   void drawSceneCore();
 
   /* Picking */
-  glm::ivec4 pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y);
+  glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
 
   void pick(GLuint x, GLuint y);
 
   /* Capture */
-  void captureFramebufferToFile(const string &name);
+  void captureFramebufferToFile(const std::string& name);
 
   /* Reload */
   void reload();
@@ -213,36 +215,46 @@ struct Engine::EngineImpl final {
 
 #ifdef __ANDROID__
 
-Engine::EngineImpl::EngineImpl(Engine* engine, string rootPath)
-  : mEngine(engine),
-    mFileLoader(rootPath),
-    mProgramLoader(engine),
-    mFrameCounter(0),
-    mTimeFactor(1.0),
-    mStartupTime(0.0f),
-    mIsOQ(GL_FALSE),
-    mBackgroundColor(0.1, 0.1, 0.1) {
+Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
+  : mEngine(engine)
+  , mFileLoader(rootPath)
+  , mProgramLoader(engine)
+  , mFrameCounter(0)
+  , mTimeFactor(1.0)
+  , mTextFPSCallback(nullptr)
+  , mStartupTime(0.0f)
+  , mIsOQ(GL_FALSE)
+  , mBackgroundColor(0.1, 0.1, 0.1) {
 }
 
 Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
-  : mEngine(engine),
-    mFileLoader(activity->internalDataPath),
-    mProgramLoader(engine),
-    mFrameCounter(0),
-    mTimeFactor(1.0),
-    mStartupTime(0.0f),
-    mIsOQ(GL_FALSE),
-    mBackgroundColor(0.1, 0.1, 0.1) {
+  : mEngine(engine)
+  , mFileLoader(activity->internalDataPath)
+  , mProgramLoader(engine)
+  , mFrameCounter(0)
+  , mTimeFactor(1.0)
+  , mTextFPSCallback(nullptr)
+  , mStartupTime(0.0f)
+  , mIsOQ(GL_FALSE)
+  , mBackgroundColor(0.1, 0.1, 0.1) {
 
-  androidSetActivity(activity);
+  flf::androidSetActivity(activity);
 
-  androidExtractAll();
+  flf::androidExtractAll();
 
 #else
 
 Engine::EngineImpl::EngineImpl(Engine *engine, GLint, GLchar *const argv[])
-    : mEngine(engine), mFileLoader(getFilePathOnly(argv[0])), mProgramLoader(engine), mShaders(), mFrameCounter(0)
-    , mTimeFactor(1.0), mStartupTime(0.0f), mIsOQ(GL_TRUE), mBackgroundColor(0.1, 0.1, 0.1) {
+    : mEngine(engine)
+    , mFileLoader(getFilePathOnly(argv[0]))
+    , mProgramLoader(engine)
+    , mShaders()
+    , mFrameCounter(0)
+    , mTimeFactor(1.0)
+    , mTextFPSCallback(nullptr)
+    , mStartupTime(0.0f)
+    , mIsOQ(GL_TRUE)
+    , mBackgroundColor(0.1, 0.1, 0.1) {
 #endif
 }
 
@@ -303,8 +315,8 @@ inline void Engine::EngineImpl::initExtensions(void) {
 #endif
 
 inline void Engine::EngineImpl::initManagement() {
-  mTextures = make_unique<flf::TextureSystem>(mFileLoader.getRootPath());
-  mLights = make_unique<flf::LightSystem>();
+  mTextures = std::make_unique<flf::TextureSystem>(mFileLoader.getRootPath());
+  mLights = std::make_unique<flf::LightSystem>();
 }
 
 inline void Engine::EngineImpl::initPipelines() {
@@ -322,7 +334,7 @@ inline void Engine::EngineImpl::initUniforms() {
 }
 
 inline void Engine::EngineImpl::initOcclusionTest() {
-  vector<flc::VertexPosition> vec = flf::BoxOcclusion().getVertices();
+  std::vector<flc::VertexPosition> vec = flf::BoxOcclusion().getVertices();
   mVAOOcclusion = new flc::VertexArray();
   mVBOOcclusion = mBuffers.mVerticesPosition.store(mVAOOcclusion, vec);
   mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
@@ -342,7 +354,7 @@ inline void Engine::EngineImpl::initStartup() {
   program->uniformPush("uScreenFactor", mWindowAspectRatio);
   flc::Program::disusePrograms();
 
-  mPostProcessingPassStartup = make_unique<flc::PostProcessingPass>(program,
+  mPostProcessingPassStartup = std::make_unique<flc::PostProcessingPass>(program,
                                                                      mTextures->getDynamic("fillwave_quad_startup.frag",
                                                                                            program,
                                                                                            glm::ivec2(mWindowWidth,
@@ -371,11 +383,8 @@ inline void Engine::EngineImpl::initPickingBuffer() {
 }
 
 inline void Engine::EngineImpl::initExtras() {
-  /* FPS counter */
-  mTextFPSCallback = NULL;
-
   /* Debugger */
-  mDebugger = make_unique<flf::Debugger>(mEngine);
+  mDebugger = std::make_unique<flf::Debugger>(mEngine);
 }
 
 void Engine::EngineImpl::reload() {
@@ -808,14 +817,18 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 
 void Engine::EngineImpl::attachCallback(puCallback &&callback) {
   if (mCallbacks.find(callback->getEventType()) == mCallbacks.end()) {
-    mCallbacks[callback->getEventType()] = vector<puCallback>();
+    mCallbacks[callback->getEventType()] = std::vector<puCallback>();
   }
   mCallbacks[callback->getEventType()].push_back(move(callback));
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
   y = mWindowHeight - y;
-  GLuint id, r, g, b, a;
+  GLuint id = 0;
+  GLuint r = 0;
+  GLuint g = 0;
+  GLuint b = 0;
+  GLuint a = 0;
 
   if (x < mWindowWidth && y < mWindowHeight) {
     id = (x + y * mWindowWidth) * 4;
@@ -841,7 +854,7 @@ inline void Engine::EngineImpl::detachCallbacks(eEventType eventType) {
 
 void Engine::EngineImpl::detachCallback(flf::Callback *callback) {
   eEventType e = callback->getEventType();
-  vector<puCallback> *callbacks = &mCallbacks[e];
+  std::vector<puCallback> *callbacks = &mCallbacks[e];
   callbacks->erase(remove_if( // Selectively remove elements in the second vector...
       callbacks->begin(), callbacks->end(), [&](puCallback const &p) {
         // This predicate checks whether the element is contained
@@ -871,7 +884,7 @@ void Engine::EngineImpl::pick(GLuint x, GLuint y) {
   mScene->pick(colorRead);
 }
 
-void Engine::EngineImpl::captureFramebufferToFile(const string &name) {
+void Engine::EngineImpl::captureFramebufferToFile(const std::string &name) {
   mPickingRenderableTexture->bindForRendering();
   drawClear();
   mScene->draw();
@@ -885,7 +898,7 @@ void Engine::EngineImpl::captureFramebufferToFile(const string &name) {
 #endif
   data[mWindowWidth * mWindowHeight * 4] = '\0';
   FILE *file;
-  auto errorNo = fopen_s(&file, mFileLoader.getRootPath(name).c_str(), "w");
+  auto errorNo = flf::fopen_s(&file, mFileLoader.getRootPath(name).c_str(), "w");
   if (errorNo) {
     fLogE("Error when takin' screenshot");
     exit(1);

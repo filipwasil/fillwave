@@ -60,10 +60,10 @@ public:
       GLboolean depthTesting = GL_TRUE,
       GLfloat alphaCutOffLevel = 0.0f);
 
-  virtual ~EmiterPointCPU() = default;
+  virtual ~EmiterPointCPU() override = default;
 
   /* IEmiterPoint */
-  void update(GLfloat timeElapsedSec);
+  void update(GLfloat timeElapsedSec) override;
 
   /* IDrawable */
   void draw(ICamera &camera) override;
@@ -83,15 +83,15 @@ private:
   flc::VertexBufferParticles *mVBO;
   GLint mULCModelMatrix, mULCTextureUnit, mULCViewProjectionMatrix, mULCCameraPosition, mULCPointSize, mULCColor, mULCAcceleration, mULCLifeTime, mULCAlphaCutOff, mULCSourcePosition, mULCTimeElapsed;
 
-  void initBuffers();
+  void initBuffers() override;
 
-  void initPipeline();
+  void initPipeline() override;
 
-  void initUniformsCache();
+  void initUniformsCache() override;
 
-  void initVAO();
+  void initVAO() override;
 
-  void initVBO();
+  void initVBO() override;
 
   void coreDraw();
 };

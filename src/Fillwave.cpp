@@ -117,7 +117,7 @@ void Engine::drawTexture(Texture* t) {
   mImpl->drawTexture(t);
 }
 
-LightSpot* Engine::storeLightSpot(glm::vec3 position, glm::quat rotation, glm::vec4 color, Moveable* followed) {
+flf::LightSpot* Engine::storeLightSpot(glm::vec3 position, glm::quat rotation, glm::vec4 color, flf::Moveable* followed) {
   return mImpl->mLights->mLightsSpot.add(mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
                                          position,
                                          rotation,
@@ -125,15 +125,15 @@ LightSpot* Engine::storeLightSpot(glm::vec3 position, glm::quat rotation, glm::v
                                          followed);
 }
 
-LightPoint* Engine::storeLightPoint(glm::vec3 position, glm::vec4 color, Moveable* followed) {
+flf::LightPoint* Engine::storeLightPoint(glm::vec3 position, glm::vec4 color, flf::Moveable* followed) {
   return mImpl->mLights->mLightsPoint.add(mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight),
                                           position,
                                           color,
                                           followed);
 }
 
-LightDirectional* 
-Engine::storeLightDirectional(glm::vec3 position, glm::quat rotation, glm::vec4 color, Moveable* followed) {
+flf::LightDirectional*
+Engine::storeLightDirectional(glm::vec3 position, glm::quat rotation, glm::vec4 color, flf::Moveable* followed) {
   return mImpl->mLights->mLightsDirectional.add(mImpl->mTextures->getShadow2D(mImpl->mWindowWidth,
                                                                               mImpl->mWindowHeight),
                                                 position,
@@ -218,7 +218,7 @@ void Engine::attachCallback(puCallback &&callback, flf::IFocusable* focusable) {
     mImpl->mFocus.second.push_back(callback.get());
 #else
     if (mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
-      mImpl->mFocus[focusable] = vector<Callback* >(1, callback.get());
+      mImpl->mFocus[focusable] = vector<flf::Callback* >(1, callback.get());
     } else {
       mImpl->mFocus[focusable].push_back(callback.get());
     }
@@ -237,7 +237,7 @@ void Engine::dropFocus(flf::IFocusable* focusable) {
     mImpl->mFocus.second.clear();
   }
 #else
-  fLogE("mImpl->mFocus.size() %lu", mImpl->mFocus.size());
+  fLogE("mImpl->mFocus.size() %ud", mImpl->mFocus.size());
   if (!mImpl->mFocus.empty() && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
     for (auto &it : mImpl->mFocus[focusable]) {
       mImpl->detachCallback(it);
@@ -313,7 +313,7 @@ void Engine::detach(pText text) {
   mImpl->mTextManager.erase(it, _end);
 }
 
-void Engine::detach(LightSpot* light) {
+void Engine::detach(flf::LightSpot* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsSpot.begin(),
                            mImpl->mLights->mLightsSpot.end(),
                            [light](const puLightSpot &l) {
@@ -322,7 +322,7 @@ void Engine::detach(LightSpot* light) {
   mImpl->mLights->mLightsSpot.erase(new_end, mImpl->mLights->mLightsSpot.end());
 }
 
-void Engine::detach(LightDirectional* light) {
+void Engine::detach(flf::LightDirectional* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsDirectional.begin(),
                            mImpl->mLights->mLightsDirectional.end(),
                            [light](const puLightDirectional &l) {
@@ -331,7 +331,7 @@ void Engine::detach(LightDirectional* light) {
   mImpl->mLights->mLightsDirectional.erase(new_end, mImpl->mLights->mLightsDirectional.end());
 }
 
-void Engine::detach(LightPoint* light) {
+void Engine::detach(flf::LightPoint* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsPoint.begin(),
                            mImpl->mLights->mLightsPoint.end(),
                            [light](const puLightPoint &l) {
@@ -379,8 +379,8 @@ void Engine::setCurrentScene(puScene &&scene) {
   mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-TGetter<Scene> Engine::getCurrentScene() const {
-  return TGetter<Scene>(mImpl->mScene.get());
+TGetter<flf::Scene> Engine::getCurrentScene() const {
+  return TGetter<flf::Scene>(mImpl->mScene.get());
 }
 
 flf::LightSystem &Engine::getLightSystem() const {
@@ -392,7 +392,7 @@ flf::TextureSystem &Engine::getTextureSystem() const {
 }
 
 puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const string &shapePath) {
-  auto buffer = new PhysicsMeshBuffer();
+  auto buffer = new flf::PhysicsMeshBuffer();
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   const auto scene = mImpl->mImporter.ReadFile((mImpl->mFileLoader.getRootPath() + shapePath).c_str(),
@@ -439,7 +439,7 @@ void Engine::configFPSCounter(string fontName, glm::vec2 position, GLfloat size)
 
     /* Provide callback to refresh the FPS value  */
     mImpl->mTextFPSCallback = new flf::FPSCallback(this, mImpl->mFPSText);
-    attachCallback(unique_ptr<Callback>(mImpl->mTextFPSCallback));
+    attachCallback(unique_ptr<flf::Callback>(mImpl->mTextFPSCallback));
     return;
   }
   mImpl->mFPSText.reset();
@@ -504,7 +504,7 @@ template <GLuint T>
 Shader* Engine::storeShader(const string &shaderPath) {
   string shaderSource = "";
   const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
-  ReadFile(fullPath, shaderSource);
+  flf::ReadFile(fullPath, shaderSource);
   return mImpl->mShaders.store(fullPath, T, shaderSource);
 }
 

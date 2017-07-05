@@ -74,7 +74,7 @@ public:
     mData = mDataVertices.data();
   }
 
-  ~TVertexBuffer() = default;
+  ~TVertexBuffer() override = default;
 
   void load(T element) {
     mDataVertices.push_back(element);

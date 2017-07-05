@@ -29,17 +29,7 @@
 */
 
 #include <string>
-
-#ifdef __linux__
-#define FILLWAVE_OS_SEPRATOR "/"
-#define FILLWAVE_OS_CURRENTDIR "./"
-#elif _WIN32
-#define FILLWAVE_OS_SEPRATOR "\\"
-#define FILLWAVE_OS_CURRENTDIR "./"
-#elif __APPLE__
-#define FILLWAVE_OS_SEPRATOR "/"
-#define FILLWAVE_OS_CURRENTDIR "./"
-#endif
+#include "fillwave/PlatformSW.h"
 
 namespace flw {
 namespace flf {

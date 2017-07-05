@@ -53,7 +53,7 @@ class Bone final : public Hinge {
 public:
   Bone(aiBone *assimpBone);
 
-  ~Bone() = default;
+  ~Bone() override = default;
 
   std::string getName() const;
 
@@ -67,7 +67,7 @@ public:
 
   void setGlobalOffsetMatrix(glm::mat4 m);
 
-  void log();
+  void log() const override;
 
 private:
   std::string mName;

@@ -33,6 +33,10 @@
 
 
 #include <fillwave/core/pipeline/Shader.h>
+#include <string>
+#include <sstream>
+#include <iostream>
+
 #include <fillwave/Log.h>
 
 FLOGINIT("Shader", FERROR | FFATAL | FINFO | FDEBUG)
@@ -77,7 +81,7 @@ void Shader::compile() {
     if (pShaderInfoLog) {
       glGetShaderInfoLog(mHandle, infoLogLength, NULL, pShaderInfoLog);
       fLogE("Compilation: %s", pShaderInfoLog);
-      delete pShaderInfoLog;
+      delete []pShaderInfoLog;
     }
     glDeleteShader(mHandle);
     mHandle = 0;

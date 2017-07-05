@@ -42,7 +42,7 @@ class Programmable : public Entity {
 public:
   Programmable(flc::Program *program);
 
-  virtual ~Programmable() = default;
+  ~Programmable() override = default;
 
   Programmable &operator=(const Programmable &) = default;
 

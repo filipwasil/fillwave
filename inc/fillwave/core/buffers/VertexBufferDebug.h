@@ -51,9 +51,9 @@ class VertexBufferDebug : public TVertexBuffer<VertexDebug> {
 public:
   VertexBufferDebug(GLfloat scale = 1.0);
 
-  virtual ~VertexBufferDebug() = default;
+  ~VertexBufferDebug() override = default;
 
-  void log() const;
+  void log() const override;
 };
 
 } /* flc */

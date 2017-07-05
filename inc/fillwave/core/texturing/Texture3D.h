@@ -29,36 +29,21 @@
 */
 
 #include <fillwave/core/texturing/Texture.h>
+#include <fillwave/loaders/TextureFiles.h>
 
 namespace flw {
 namespace flc {
-
-/*! \class Texture3DFile
- * \brief Stores the single file info.
- */
-
-class Texture3DFile : public Texture2DFile {
-public:
-  GLenum mCubeTarget;
-
-  Texture3DFile(Texture2DFile *file, GLenum target)
-      : mCubeTarget(target) {
-    mHeader = file->mHeader;
-    mConfig = file->mConfig;
-    mData = file->mData;
-  }
-};
-
-typedef std::unique_ptr<flc::Texture3DFile> puTexture3DFile;
 
 /*! \class Texture3D
  * \brief Single GLSL 3D Texture object.
  * It consists of six 2D images.
  */
 
+using puTexture3DFile = std::unique_ptr<flc::Texture3DFile>;
+
 class Texture3D : public Texture {
 private:
-  void sendData(Texture3DFile *file, Texture2DFileData customData = nullptr);
+  void sendData(Texture3DFile* file, GLubyte* customData = nullptr);
 
 public:
   puTexture3DFile mRight; /* Positive X*/
@@ -86,12 +71,12 @@ public:
 
   static void unbindCubemapTextures();
 
-  void sendData(Texture2DFileData xp,
-      Texture2DFileData xn,
-      Texture2DFileData yp,
-      Texture2DFileData yn,
-      Texture2DFileData zp,
-      Texture2DFileData zn);
+  void sendData(GLubyte* xp,
+      GLubyte* xn,
+      GLubyte* yp,
+      GLubyte* yn,
+      GLubyte* zp,
+      GLubyte* zn);
 };
 
 } /* flc */

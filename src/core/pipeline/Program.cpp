@@ -91,7 +91,7 @@ void Program::link() {
       if (GLchar *pInfoLog = new GLchar[infoLogLength]) {
         glGetProgramInfoLog(mHandle, infoLogLength, nullptr, pInfoLog);
         fLogF("linking : %s", pInfoLog);
-        delete pInfoLog;
+        delete []pInfoLog;
       }
     }
     mHandle = 0;
@@ -293,7 +293,7 @@ void Program::log() const {
   GLint value;
   glGetProgramiv(mHandle, GL_INFO_LOG_LENGTH, &value);
   std::vector<GLchar> infoLog(value);
-  fLogI("Shaders\n %lu", mShaders.size());
+  fLogI("Shaders\n %du", mShaders.size());
   if (glIsProgram(mHandle)) {
     fLogI("Program handle %d is valid", mHandle);
   } else {
@@ -316,7 +316,7 @@ void Program::log() const {
   glGetProgramiv(mHandle, GL_ACTIVE_UNIFORM_MAX_LENGTH, &value);
   fLogI("GL_ACTIVE_UNIFORM_MAX_LENGTH: %d", value);
 
-  fLogI("Uniforms:\n %lu", mUniforms.size());
+  fLogI("Uniforms:\n %du", mUniforms.size());
   for (auto &it : mUniforms) {
     it.log();
   }

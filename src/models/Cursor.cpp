@@ -54,7 +54,7 @@ void Cursor::move(glm::vec2 position) {
   flc::Program::disusePrograms();
 }
 
-void Cursor::draw() {
+void Cursor::redraw() {
   mProgram->use();
 
   flc::Uniform::push(mULCScreenFactor, mScreenFactor);

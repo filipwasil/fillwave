@@ -40,39 +40,37 @@ FLOGINIT("Query", FERROR | FFATAL | FINFO)
 namespace flw {
 namespace flc {
 
-template <GLenum target>
-TQuery<target>::TQuery(GLsizei howMany)
-    :
-    GLObject(howMany) {
+template <GLenum TARGET>
+TQuery<TARGET>::TQuery(GLuint howMany) : GLObject(howMany) {
   glGenQueries(mHowMany, mHandles);
   fLogC("Could not create query");
 }
 
-template <GLenum target>
-TQuery<target>::~TQuery() {
+template <GLenum TARGET>
+TQuery<TARGET>::~TQuery() {
   glDeleteQueries(mHowMany, mHandles);
   fLogC("Could not delete query");
 }
 
-template <GLenum target>
-GLuint TQuery<target>::getID(GLuint id) const {
+template <GLenum TARGET>
+GLuint TQuery<TARGET>::getID(GLuint id) const {
   return mHandles[id];
 }
 
-template <GLenum target>
-void TQuery<target>::begin(GLuint id) {
-  glBeginQuery(mTarget, mHandles[id]);
+template <GLenum TARGET>
+void TQuery<TARGET>::begin(GLuint id) {
+  glBeginQuery(TARGET, mHandles[id]);
   fLogC("Could not begin query");
 }
 
-template <GLenum target>
-void TQuery<target>::end() {
-  glEndQuery(mTarget);
+template <GLenum TARGET>
+void TQuery<TARGET>::end() {
+  glEndQuery(TARGET);
   fLogC("Could not end query");
 }
 
-template <GLenum target>
-GLuint TQuery<target>::getResultAsync(GLuint resultIfNotAvailable, GLuint id) {
+template <GLenum TARGET>
+GLuint TQuery<TARGET>::getResultAsync(GLuint resultIfNotAvailable, GLuint id) {
   GLuint result;
   glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT_AVAILABLE, &result);
   fLogC("Could not get querry result state");
@@ -85,30 +83,30 @@ GLuint TQuery<target>::getResultAsync(GLuint resultIfNotAvailable, GLuint id) {
   }
 }
 
-template <GLenum target>
-GLuint TQuery<target>::getResultSync(GLuint id) {
+template <GLenum TARGET>
+GLuint TQuery<TARGET>::getResultSync(GLuint id) {
   GLuint result;
   glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT, &result);
   fLogC("Could not get querry sync result");
   return result;
 }
 
-template <GLenum target>
-GLboolean TQuery<target>::getResultAvailable(GLuint id) {
+template <GLenum TARGET>
+GLboolean TQuery<TARGET>::getResultAvailable(GLuint id) {
   GLuint result;
   glGetQueryObjectuiv(mHandles[id], GL_QUERY_RESULT_AVAILABLE, &result);
   return result ? GL_TRUE : GL_FALSE;
 }
 
-template <GLenum target>
-void TQuery<target>::reload() {
+template <GLenum TARGET>
+void TQuery<TARGET>::reload() {
   glGenQueries(mHowMany, mHandles);
   fLogC("reload");
 }
 
-template <GLenum target>
-void TQuery<target>::log() {
-  for (GLsizei id = 0; id < mHowMany; id++) {
+template <GLenum TARGET>
+void TQuery<TARGET>::log() {
+  for (GLsizei id = 0; id < mHowMany; ++id) {
     if (glIsQuery(mHandles[id])) {
       fLogI("Query %d exists", mHandles[id]);
     } else {

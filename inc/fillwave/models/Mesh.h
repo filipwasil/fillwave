@@ -74,7 +74,7 @@ public:
       GLenum renderMode = GL_TRIANGLES,
       flc::VertexArray *vao = nullptr);
 
-  virtual ~Mesh() = default;
+  virtual ~Mesh() override;
 
   /* IDrawable */
   void draw(ICamera &camera) override;
@@ -100,7 +100,7 @@ public:
 
   virtual bool getRenderItem(RenderItem &item) override;
 
-  void log() const;
+  void log() const override;
 
   void drawFast(ICamera &camera);
 
@@ -108,19 +108,26 @@ public:
 
 protected:
   Material mMaterial;
-  flc::Texture2D *mDiffuseMap, *mNormalMap, *mSpecularMap;
-  flc::Program *mProgram, *mProgramShadow, *mProgramShadowColor, *mProgramOQ, *mProgramAOGeometry, *mProgramAOColor;
+  flc::Texture2D* mDiffuseMap;
+  flc::Texture2D* mNormalMap;
+  flc::Texture2D* mSpecularMap;
+  flc::Program* mProgram;
+  flc::Program* mProgramShadow;
+  flc::Program* mProgramShadowColor;
+  flc::Program* mProgramOQ;
+  flc::Program* mProgramAOGeometry;
+  flc::Program* mProgramAOColor;
   GLenum mRenderMode;
 
   /* Buffers */
-  flc::IndexBuffer *mIBO;
-  flc::VertexBufferBasic *mVBO;
+  flc::IndexBuffer* mIBO;
+  flc::VertexBufferBasic* mVBO;
 
   /* Light */
   LightSystem &mLights;
 
   /* Animations */
-  Animator *mAnimator;
+  Animator* mAnimator;
 
   /* Occlusion cut off */
   glm::mat4 mOcclusionMatrix;
@@ -143,15 +150,15 @@ private:
   GLint mULCMVPAmbientOcclusion, mULCPositionAmbientOcclusion;
   GLint mULCSampleRadius, mULCProjectionMatrix;
 
-  void initBuffers();
+  void initBuffers() override;
 
-  void initPipeline();
+  void initPipeline() override;
 
-  void initUniformsCache();
+  void initUniformsCache() override;
 
-  void initVAO();
+  void initVAO() override;
 
-  void initVBO();
+  void initVBO() override;
 
   void bindTextures();
 

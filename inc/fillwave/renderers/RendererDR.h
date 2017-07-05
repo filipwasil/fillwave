@@ -49,7 +49,7 @@ class RendererDR : public IRenderer {
 public:
   RendererDR(Engine *engine, ProgramLoader &loader);
 
-  virtual ~RendererDR() = default;
+  ~RendererDR() override = default;
 
   void update(IRenderable *renderable) override;
 

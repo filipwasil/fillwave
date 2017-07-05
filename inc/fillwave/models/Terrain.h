@@ -42,7 +42,7 @@ class Terrain : public Entity {
 public:
   Terrain(Engine *engine, flc::Program *program, GLint radius, GLfloat gap);
 
-  virtual ~Terrain() = default;
+  ~Terrain() override = default;
 
   void addChunk(pVoxelChunk chunk);
 

@@ -46,7 +46,7 @@ FramebufferGeometry::FramebufferGeometry(flf::TextureSystem &textures,
     GLuint height,
     GLuint colorBuffers,
     GLuint depthBuffers)
-    : Framebuffer(1)
+    : Framebuffer()
     , mColorBufferSize(colorBuffers)
     , mSummaryBufferSize(1)
     , mDepthStencilBufferSize(depthBuffers)
@@ -61,7 +61,7 @@ FramebufferGeometry::FramebufferGeometry(flf::TextureSystem &textures,
 }
 
 void FramebufferGeometry::resize(GLuint width, GLuint height) {
-  for (GLint i = 0; i < mColorBufferSize; i++) {
+  for (GLint i = 0; i < mColorBufferSize; ++i) {
     mDeferredColors->mFile->mHeader.mWidth = width;
     mDeferredColors->mFile->mHeader.mHeight = height;
     mDeferredColors->mFile->mData = nullptr;
@@ -132,7 +132,7 @@ void FramebufferGeometry::reload() {
 
   bindForWriting();
 
-  for (GLint i = 0; i < mColorBufferSize; i++) {
+  for (GLint i = 0; i < mColorBufferSize; ++i) {
     mDeferredColors->bind(i, i);
     attachTexture2DDraw(GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, mDeferredColors->getHandle(i));
   }
@@ -145,7 +145,7 @@ void FramebufferGeometry::reload() {
   mStencilDepth->bind();
   attachTexture2DDraw(GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, mStencilDepth->getHandle());
 
-  for (GLint i = 0; i < mColorBufferSize + 1; i++) {
+  for (GLint i = 0; i < mColorBufferSize + 1; ++i) {
     mColorBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
   }
 

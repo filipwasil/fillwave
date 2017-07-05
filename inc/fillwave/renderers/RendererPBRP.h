@@ -43,7 +43,7 @@ class RendererPBRP : public IRenderer {
 public:
   RendererPBRP() = default;
 
-  virtual ~RendererPBRP() = default;
+  ~RendererPBRP() override = default;
 
   void update(IRenderable *renderable) override;
 

@@ -192,7 +192,7 @@ void Animator::updateBonesUniform(GLint uniformLocationBones) {
 }
 
 void Animator::log() {
-  fLogI("Bones %lu ", mBones.size());
+  fLogI("Bones %du ", mBones.size());
 }
 
 Channel *Animator::findChannel(Animation *animation, const std::string &nodeName) const {

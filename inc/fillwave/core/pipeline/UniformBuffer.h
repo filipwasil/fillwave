@@ -46,7 +46,7 @@ public:
       GLuint bindingPoint,
       GLuint dataStoreModification = GL_STATIC_DRAW);
 
-  virtual ~UniformBuffer();
+  virtual ~UniformBuffer() override;
 
   std::string getName();
 

@@ -33,7 +33,6 @@
 
 
 #include <fillwave/common/Strings.h>
-#include <fillwave/Log.h>
 #include <fillwave/loaders/FontLoader.h>
 
 

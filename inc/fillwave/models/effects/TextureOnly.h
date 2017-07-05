@@ -41,7 +41,7 @@ class TextureOnly : public IEffect {
 public:
   TextureOnly() = default;
 
-  virtual ~TextureOnly() = default;
+  ~TextureOnly() override = default;
 
   void preDrawAction(flc::Program *program) override;
 

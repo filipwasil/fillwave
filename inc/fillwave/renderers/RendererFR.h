@@ -42,7 +42,7 @@ class RendererFR : public IRenderer {
 public:
   RendererFR() = default;
 
-  virtual ~RendererFR() = default;
+  ~RendererFR() override = default;
 
   void update(IRenderable *renderable) override;
 

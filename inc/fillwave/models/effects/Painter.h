@@ -41,7 +41,7 @@ class Painter : public IEffect {
 public:
   Painter(glm::vec4 color);
 
-  virtual ~Painter() = default;
+  virtual ~Painter() override = default;
 
   void setColor(glm::vec4 color);
 

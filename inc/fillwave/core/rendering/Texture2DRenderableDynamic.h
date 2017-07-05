@@ -40,7 +40,7 @@ namespace flc {
 
 class Texture2DRenderableDynamic : public Texture2DRenderable {
 public:
-  Texture2DRenderableDynamic(Texture2DFile *file, ParameterList &parameters, flc::Program *program);
+  Texture2DRenderableDynamic(flc::Texture2DFile *file, ParameterList &parameters, flc::Program *program);
 
   virtual ~Texture2DRenderableDynamic() = default;
 

@@ -58,13 +58,13 @@ public:
       GLboolean depthTesting,
       GLfloat alphaCutOff);
 
-  virtual ~IEmiterPoint() = default;
+  ~IEmiterPoint() override = default;
 
   void setBlending(GLenum sourceFactor, GLenum destinationFactor);
 
   virtual void update(GLfloat timeElapsedSec) = 0;
 
-  virtual void draw(ICamera &camera) = 0;
+  void draw(ICamera &camera) override = 0;
 
   /* IRenderable */
   void updateRenderer(IRenderer &renderer) override;

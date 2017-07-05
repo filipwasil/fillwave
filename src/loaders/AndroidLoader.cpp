@@ -65,8 +65,8 @@ bool androidExtractAll() {
       fLogD("File %s extracted", filename);
     }
   }
-  return true;
   AAssetDir_close(assetDir);
+    return true;
 }
 
 void androidRead(const char* pFileName, char** ppContent, unsigned int* pSize) {
@@ -89,8 +89,7 @@ void androidRead(const char* pFileName, char** ppContent, unsigned int* pSize) {
     *pSize = fileSize;
 
     fLogD("File %s length %d", pFileName, *pSize);
-    delete pData;
-
+    delete [] pData;
     AAsset_close(pFile);
   }
 }
@@ -105,7 +104,7 @@ void androidReadToString(const char* pFileName, std::string& fileContent) {
     off_t fileSize = AAsset_getLength(pFile);
 
     fileContent.resize(fileSize);
-    char* pData = new char[fileSize];
+    //char* pData = new char[fileSize];
     AAsset_read(pFile, &fileContent[0], fileSize);
 
     AAsset_close(pFile);
@@ -118,7 +117,7 @@ void androidReadToString(const char* pFileName, std::string& fileContent) {
 bool androidExtract( const std::string& name ) {
   const char* pFile = name.c_str();
   std::string newPath = androidGetPath(pFile);
-  AAssetDir* a;
+  //AAssetDir* a;
   if ( androidExtracted(name.c_str()) ) {
     fLogD("File %s already extracted", name.c_str());
     return true;

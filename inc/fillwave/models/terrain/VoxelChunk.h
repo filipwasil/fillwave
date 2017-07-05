@@ -46,14 +46,14 @@ class LightSystem;
 
 class VoxelChunk : public Entity, public IReloadable {
 public:
-  VoxelChunk(flc::Program *program,
+  VoxelChunk(flc::Program* program,
       Engine *engine,
       const std::string &texturePath,
       GLint size,
       VoxelConstructor *constructor = nullptr,
       GLfloat gap = 0.2);
 
-  ~VoxelChunk();
+  ~VoxelChunk() override;
 
   void setType(GLint type);
 
@@ -91,15 +91,15 @@ private:
 
   void coreDraw();
 
-  void initBuffers();
+  void initBuffers() override;
 
-  void initPipeline();
+  void initPipeline() override;
 
-  void initVBO();
+  void initVBO() override;
 
-  void initVAO();
+  void initVAO() override;
 
-  void initUniformsCache();
+  void initUniformsCache() override;
 };
 
 } /* flf */

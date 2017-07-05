@@ -52,7 +52,7 @@ public:
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-  virtual ~IndexBuffer() = default;
+  ~IndexBuffer() override = default;
 
   GLuint *getDataInternal();
 

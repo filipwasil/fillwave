@@ -42,7 +42,7 @@ namespace flc {
 
 GLObject::GLObject(GLsizei howMany)
     : mHowMany(howMany) {
-  if (mHowMany > static_cast<int>(FILLWAVE_GLOBJECT_MAX_CAPACITY)) {
+  if (mHowMany > MAX_ELEMENTS) {
     fLogF("Currect globject size exceeded");
   }
 
@@ -56,7 +56,7 @@ GLObject::~GLObject() {
 }
 
 GLuint GLObject::getHandle(GLuint id) {
-  return id < FILLWAVE_GLOBJECT_MAX_CAPACITY ? mHandles[id] : 0;
+  return id < MAX_ELEMENTS ? mHandles[id] : 0;
 }
 
 } /* flc */

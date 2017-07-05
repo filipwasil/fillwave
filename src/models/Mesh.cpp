@@ -46,22 +46,22 @@ namespace flf {
 
 const GLint gOQVertices = 36; //todo move it from here
 
-Mesh::Mesh(Engine *engine,
-    const Material &material,
-    flc::Texture2D *diffuseMap,
-    flc::Texture2D *normalMap,
-    flc::Texture2D *specularMap,
-    flc::Program *program,
-    flc::Program *programShadow,
-    flc::Program *programShadowColor,
-    flc::Program *programOcclusion,
-    flc::Program *programAmbientOcclusionGeometry,
-    flc::Program *programAmbientOcclusionColor,
-    LightSystem &lights,
-    flc::VertexBufferBasic *vbo,
-    flc::IndexBuffer *ibo,
+Mesh::Mesh(Engine* engine,
+    const Material& material,
+    flc::Texture2D* diffuseMap,
+    flc::Texture2D* normalMap,
+    flc::Texture2D* specularMap,
+    flc::Program* program,
+    flc::Program* programShadow,
+    flc::Program* programShadowColor,
+    flc::Program* programOcclusion,
+    flc::Program* programAmbientOcclusionGeometry,
+    flc::Program* programAmbientOcclusionColor,
+    LightSystem& lights,
+    flc::VertexBufferBasic* vbo,
+    flc::IndexBuffer* ibo,
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-    Animator *animator,
+    Animator* animator,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
     GLenum renderMode,
     flc::VertexArray *vao)
@@ -83,6 +83,7 @@ Mesh::Mesh(Engine *engine,
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
     , mAnimator(animator)
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+    , mOcclusionQuery()
 #ifdef FILLWAVE_GLES_3_0
 #else
     , mConditionalRendering(GL_QUERY_WAIT)
@@ -92,6 +93,10 @@ Mesh::Mesh(Engine *engine,
   initVBO();
   initVAO();
   initUniformsCache();
+}
+
+Mesh::~Mesh() {
+    /* empty */
 }
 
 void Mesh::drawPBRP(ICamera &camera) {

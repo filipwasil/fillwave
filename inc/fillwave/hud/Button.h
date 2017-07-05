@@ -43,16 +43,16 @@ class Button : public IHUDNode, public IPickable {
 public:
   Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm::vec2 scale);
 
-  virtual ~Button() = default;
+  virtual ~Button() override = default;
 
   /* IPickable */
-  virtual void pick(glm::vec3 color) override;
+  void pick(glm::vec3 color) override;
 
-  virtual void unpick() override;
+  void unpick() override;
 
-  virtual void onPicked() override;
+  void onPicked() override;
 
-  virtual void onUnpicked() override;
+  void onUnpicked() override;
 };
 
 } /* namespace flf */

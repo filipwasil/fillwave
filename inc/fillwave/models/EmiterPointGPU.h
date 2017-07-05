@@ -61,10 +61,10 @@ public:
       GLboolean depthTesting,
       GLfloat alphaCutOffLevel = 0.0f);
 
-  virtual ~EmiterPointGPU() = default;
+  ~EmiterPointGPU() override = default;
 
   /* IEmiterPoint */
-  void update(GLfloat timeElapsedSec);
+  void update(GLfloat timeElapsedSec) override;
 
   /* IDrawable */
   void draw(ICamera &camera) override;
@@ -95,15 +95,15 @@ private:
 
   GLint mULCModelMatrix, mULCViewProjectionMatrix, mULCCameraPosition, mULCTextureUnit, mULCTime, mULCAcceleration, mULCColor, mULCAlphaCutOff, mULCStartSize;
 
-  void initBuffers();
+  void initBuffers() override;
 
-  void initPipeline();
+  void initPipeline() override;
 
-  void initVBO();
+  void initVBO() override;
 
-  void initVAO();
+  void initVAO() override;
 
-  void initUniformsCache();
+  void initUniformsCache() override;
 
   void coreDraw();
 

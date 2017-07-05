@@ -41,8 +41,7 @@ FLOGINIT("VertexArray", FERROR | FFATAL)
 namespace flw {
 namespace flc {
 
-VertexArray::VertexArray(GLuint howMany)
-    : GLObject(howMany) {
+VertexArray::VertexArray(GLuint howMany) : GLObject(howMany) {
   glGenVertexArrays(mHowMany, mHandles);
   fLogC("Could not generate the VAO");
 }

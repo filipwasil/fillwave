@@ -34,7 +34,7 @@
 namespace flw {
 namespace flf {
 
-typedef TCache<FILLWAVE_MANAGEMENT_MAX_ITEMS, flc::Program, std::string, const std::vector<flc::Shader *> &, GLboolean> CachePrograms;
+using CachePrograms = TCache<MAX_CACHE_SIZE, flc::Program, std::string, const std::vector<flc::Shader *> &, GLboolean>;
 
 } /* flf */
 } /* flw */

@@ -87,11 +87,11 @@ public:
 
   VertexBufferBasic(const std::vector<flc::VertexBasic> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW);
 
-  ~VertexBufferBasic() = default;
+  ~VertexBufferBasic() override = default;
 
   glm::vec3 getOcclusionBoxSize();
 
-  void log() const;
+  void log() const override;
 };
 
 } /* flc */

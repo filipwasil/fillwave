@@ -67,7 +67,7 @@ class Light : public Moveable, public IObserver {
 public:
   Light(glm::vec3 position, glm::vec4 intensity, Moveable *followed);
 
-  virtual ~Light();
+  ~Light() override;
 
   void updateFromFollowed();
 

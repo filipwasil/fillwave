@@ -42,11 +42,11 @@ class Cursor : public Impostor {
 public:
   Cursor(Engine *engine, flc::Texture *texture);
 
-  virtual ~Cursor() = default;
+  ~Cursor() override = default;
 
   void move(glm::vec2 position);
 
-  void draw();
+  void redraw();
 
 private:
   GLfloat mScreenFactor;

@@ -29,7 +29,6 @@
 */
 
 #include <fillwave/models/Entity.h>
-#include <fillwave/common/Macros.h>
 
 namespace flw {
 namespace flf {
@@ -42,14 +41,14 @@ class Hinge : public Entity {
 public:
   Hinge() = default;
 
-  virtual ~Hinge() = default;
+  ~Hinge() override = default;
 
   /* IDrawable */
-  void draw(ICamera &camera);
+  void draw(ICamera &camera) override;
 
-  void drawPBRP(ICamera &camera);
+  void drawPBRP(ICamera &camera) override;
 
-  void drawDR(ICamera &camera);
+  void drawDR(ICamera &camera) override;
 
   /* IRenderable */
   void updateRenderer(IRenderer &renderer) override;

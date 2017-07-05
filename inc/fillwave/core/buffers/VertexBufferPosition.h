@@ -51,9 +51,9 @@ public:
 
   VertexBufferPosition(const std::vector<VertexPosition> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW);
 
-  virtual ~VertexBufferPosition() = default;
+  ~VertexBufferPosition() override = default;
 
-  void log() const;
+  void log() const override;
 };
 
 } /* flc */

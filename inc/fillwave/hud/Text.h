@@ -61,7 +61,7 @@ public:
       glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
       eTextEffect effect = eTextEffect::eNone);
 
-  virtual ~Text() = default;
+  ~Text() override = default;
 
   void draw() override;
 
@@ -94,15 +94,15 @@ private:
 
   void clearVBO();
 
-  void initVBO();
+  void initVBO() override;
 
-  void initVAO();
+  void initVAO() override;
 
-  void initBuffers();
+  void initBuffers() override;
 
-  void initPipeline();
+  void initPipeline() override;
 
-  void initUniformsCache();
+  void initUniformsCache() override;
 };
 
 } /* flf */

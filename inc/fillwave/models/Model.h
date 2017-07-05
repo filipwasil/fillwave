@@ -71,7 +71,7 @@ public:
       flc::Texture2D *specularMap = nullptr,
       const Material &material = Material());
 
-  virtual ~Model();
+  ~Model() override;
 
   Model &operator=(Model &&) = default;
 
@@ -79,11 +79,11 @@ public:
 
   void reload();
 
-  void draw(ICamera &camera);
+  void draw(ICamera &camera) override;
 
-  void drawPBRP(ICamera &camera);
+  void drawPBRP(ICamera &camera) override;
 
-  void drawDR(ICamera &camera);
+  void drawDR(ICamera &camera) override;
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
@@ -100,7 +100,7 @@ public:
 
   void updateRenderer(IRenderer &renderer) override;
 
-  void log() const;
+  void log() const override;
 
 protected:
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -121,7 +121,7 @@ private:
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
   /* Animation */
-  bool isAnimated() const;
+  bool isAnimated() const override;
 
   void evaluateAnimations();
 

@@ -29,7 +29,6 @@
 */
 
 #include <unordered_map>
-#include <fillwave/common/Macros.h>
 
 #define FILLWAVE_FORGET_ABOUT_ME()     \
 do {                                   \
@@ -43,7 +42,7 @@ do {                                   \
 namespace flw {
 namespace flf {
 
-constexpr size_t FILLWAVE_MANAGEMENT_MAX_ITEMS = 5000;
+constexpr size_t MAX_CACHE_SIZE = 5000;
 
 /**
  * \brief Basic manager of composites

@@ -40,12 +40,12 @@ namespace flc {
 
 class Texture3DRenderableDynamic : public Texture3DRenderable {
 public:
-  Texture3DRenderableDynamic(Texture2DFile *filePosX,
-      Texture2DFile *fileNegX,
-      Texture2DFile *filePosY,
-      Texture2DFile *fileNegY,
-      Texture2DFile *filePosZ,
-      Texture2DFile *fileNegZ,
+  Texture3DRenderableDynamic(flc::Texture2DFile *filePosX,
+      flc::Texture2DFile *fileNegX,
+      flc::Texture2DFile *filePosY,
+      flc::Texture2DFile *fileNegY,
+      flc::Texture2DFile *filePosZ,
+      flc::Texture2DFile *fileNegZ,
       ParameterList &parameters,
       flc::Texture2DRenderable *texture2D,
       flc::Program *program);

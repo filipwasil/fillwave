@@ -94,7 +94,7 @@ flc::Texture2D *TextureSystem::get(const std::string &texturePath, eCompression 
     return mTextures2D[filePath].get();
   }
 
-  if (flc::Texture2DFile *file = mLoader.load(filePath, flip, GL_RGBA, mRootPath, compression)) {
+  if (flc::Texture2DFile* file = mLoader.load(filePath, flip, GL_RGBA, mRootPath, compression)) {
     fLogD("Texture %s added to manager", filePath.c_str());
     flc::ParameterList parameters;
     return mTextures2D.store(filePath, file, parameters, 1);
@@ -108,7 +108,7 @@ flc::Texture2DRenderableDynamic *
 TextureSystem::getDynamic(const std::string &fragmentShaderPath, flc::Program *program, glm::ivec2 screenSize) {
   std::string filePath = mRootPath + fragmentShaderPath;
 
-  flc::Texture2DFile *file = mLoader.loadEmpty(screenSize.x, screenSize.y);
+  flc::Texture2DFile* file = mLoader.loadEmpty(screenSize.x, screenSize.y);
 
   flc::ParameterList parameters;
   parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
@@ -146,12 +146,12 @@ flc::Texture3D *TextureSystem::get(const std::string &posX,
 
   fLogD("Texture %s will be added to manager", name.c_str());
 
-  flc::Texture2DFile *filePosX = mLoader.load(filePathPosX, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile *fileNegX = mLoader.load(filePathNegX, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile *filePosY = mLoader.load(filePathPosY, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile *fileNegY = mLoader.load(filePathNegY, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile *filePosZ = mLoader.load(filePathPosZ, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile *fileNegZ = mLoader.load(filePathNegZ, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* filePosX = mLoader.load(filePathPosX, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* fileNegX = mLoader.load(filePathNegX, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* filePosY = mLoader.load(filePathPosY, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* fileNegY = mLoader.load(filePathNegY, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* filePosZ = mLoader.load(filePathPosZ, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* fileNegZ = mLoader.load(filePathNegZ, eFlip::eNone, GL_RGBA, mRootPath);
 
   if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {
     fLogD("Texture %s added to manager", name.c_str());
@@ -211,7 +211,7 @@ flc::Texture3D *TextureSystem::get(const std::string &posX,
 
 flc::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint height) {
 
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  auto file = new flc::Texture2DFile();
   flc::ParameterList parameters;
 
   file->mHeader.mFormat = GL_DEPTH_COMPONENT;
@@ -244,10 +244,10 @@ flc::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint height
   return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file, parameters);
 }
 
-flc::Texture3DRenderable *TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*height*/) {
+flc::Texture3DRenderable* TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*height*/) {
 
-  flc::Texture2DFile *file[6];
-  for (GLint i = 0; i < 6; i++) {
+  flc::Texture2DFile* file[6];
+  for (GLint i = 0; i < 6; ++i) {
     file[i] = new flc::Texture2DFile();
     file[i]->mHeader.mFormat = GL_RED;
     file[i]->mHeader.mInternalFormat = GL_R32F;
@@ -261,7 +261,7 @@ flc::Texture3DRenderable *TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*
     file[i]->mConfig.mCompression = GL_FALSE;
   }
 
-  flc::Texture2DFile *file2D = new flc::Texture2DFile();
+  auto file2D = new flc::Texture2DFile();
   file2D->mHeader.mFormat = GL_DEPTH_COMPONENT;
   file2D->mHeader.mInternalFormat = GL_DEPTH_COMPONENT32;
   file2D->mConfig.mMipmapsLevel = 0;
@@ -304,7 +304,7 @@ flc::Texture3DRenderable *TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*
 
 flc::Texture2DRenderable *TextureSystem::getColor2D(GLuint width, GLuint height) {
 
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  flc::Texture2DFile* file = new flc::Texture2DFile();
   file->mHeader.mFormat = GL_RGBA;
   file->mHeader.mInternalFormat = GL_RGBA;
   file->mConfig.mMipmapsLevel = 0;
@@ -348,7 +348,7 @@ flc::Texture2D *TextureSystem::getDeferredColor(GLuint width, GLuint height, GLu
   colorTextureHeader.mWidth = width;
   colorTextureHeader.mHeight = height;
 
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  auto file = new flc::Texture2DFile();
   file->mConfig = flc::Texture2DFileConfig();
   file->mHeader = colorTextureHeader;
   file->mData = nullptr;
@@ -356,7 +356,7 @@ flc::Texture2D *TextureSystem::getDeferredColor(GLuint width, GLuint height, GLu
   return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, size);
 }
 
-flc::Texture2D *TextureSystem::getDeferredColorScreen(GLuint width, GLuint height, GLuint size) {
+flc::Texture2D* TextureSystem::getDeferredColorScreen(GLuint width, GLuint height, GLuint size) {
 
   flc::ParameterList parameters;
   parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
@@ -375,7 +375,7 @@ flc::Texture2D *TextureSystem::getDeferredColorScreen(GLuint width, GLuint heigh
   colorTextureHeader.mWidth = width;
   colorTextureHeader.mHeight = height;
 
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  auto file = new flc::Texture2DFile();
   file->mConfig = flc::Texture2DFileConfig();
   file->mHeader = colorTextureHeader;
   file->mData = nullptr;
@@ -398,7 +398,7 @@ flc::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
   depthTextureHeader.mType = GL_FLOAT;
 #endif
 
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  auto file = new flc::Texture2DFile();
   file->mConfig = flc::Texture2DFileConfig();
   file->mHeader = depthTextureHeader;
   file->mData = nullptr;
@@ -417,7 +417,7 @@ flc::Texture2D *TextureSystem::getDeferredStencilDepth(GLuint width, GLuint heig
   stencilTextureHeader.mHeight = height;
   stencilTextureHeader.mType = GL_FLOAT_32_UNSIGNED_INT_24_8_REV;
 
-  flc::Texture2DFile *file = new flc::Texture2DFile();
+  auto file = new flc::Texture2DFile();
   file->mConfig = flc::Texture2DFileConfig();
   file->mHeader = stencilTextureHeader;
   file->mData = nullptr;

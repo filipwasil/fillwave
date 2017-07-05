@@ -46,7 +46,7 @@ class RendererCSPBRP : public IRenderer {
 public:
   RendererCSPBRP(LightManager *lightManager);
 
-  virtual ~RendererCSPBRP() = default;
+  ~RendererCSPBRP() override = default;
 
   void update(IRenderable *renderable) override;
 

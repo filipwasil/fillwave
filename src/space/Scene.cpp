@@ -89,7 +89,7 @@ void Scene::drawHUD() {
 
 void Scene::drawCursor() {
   if (mCursor) {
-    mCursor->draw();
+    mCursor->redraw();
   }
 }
 

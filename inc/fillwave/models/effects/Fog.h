@@ -41,7 +41,7 @@ class Fog : public IEffect {
 public:
   Fog(glm::vec3 colour = glm::vec3(0.1f, 0.1f, 0.1f), GLfloat near = 0.1f, GLfloat far = 20.0f);
 
-  virtual ~Fog() = default;
+  ~Fog() override = default;
 
   glm::vec3 getColour() {
     return mColour;
@@ -67,13 +67,13 @@ public:
     mFarDistance = aFar;
   }
 
-  void preDrawAction(flc::Program *program) override;
+  void preDrawAction(flc::Program* program) override;
 
-  void postDrawAction(flc::Program *program) override;
+  void postDrawAction(flc::Program* program) override;
 
-  void stopAction(flc::Program *program) override;
+  void stopAction(flc::Program* program) override;
 
-  void startAction(flc::Program *program);
+  void startAction(flc::Program* program) override;
 
 private:
   glm::vec3 mColour;

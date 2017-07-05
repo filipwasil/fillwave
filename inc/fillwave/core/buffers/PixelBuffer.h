@@ -48,7 +48,7 @@ class PixelBuffer : public IBuffer {
 public:
   PixelBuffer(GLuint dataStoreType);
 
-  virtual ~PixelBuffer() = default;
+  ~PixelBuffer() override = default;
 
   void setScreenSize(GLuint width, GLuint height, GLuint bytesPerPixel);
 

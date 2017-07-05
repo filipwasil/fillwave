@@ -48,7 +48,7 @@ public:
       glm::vec2 position,
       glm::vec2 scale);
 
-  virtual ~ProgressBar() = default;
+  virtual ~ProgressBar() override = default;
 
   void setProgress(GLfloat progress);
 

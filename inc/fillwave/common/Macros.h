@@ -34,6 +34,7 @@
  */
 
 #include <algorithm>
+#include "memory"
 
 namespace flw {
 namespace flf {
@@ -85,5 +86,5 @@ static int fopen_s(FILE **f, const char *name, const char *mode) {
  using shared_ptr_unsynchronized = std::__shared_ptr<T, __gnu_cxx::_S_single>;
  */
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

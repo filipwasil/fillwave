@@ -41,7 +41,7 @@ class BoostColor : public IEffect {
 public:
   BoostColor(GLfloat boost = 1.0f);
 
-  virtual ~BoostColor() = default;
+  virtual ~BoostColor() override = default;
 
   void preDrawAction(flc::Program *program) override;
 
