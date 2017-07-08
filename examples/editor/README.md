@@ -31,13 +31,40 @@ C:\Program Files (x86)\Windows Kits\10\bin\x64\ucrt
 ```
 
 **Linux** <br />
-To build on linux you need to have install Qt 5.5 >. Next go to script folder and:<br />
-To build on debian distributions run:
+
+To build on linux you need to have install Qt 5.5 >.
+There are two ways to build editor manually or by script. <br />
+The easiest way is to use  script who generate RPM or DEB packeg, of course binary with application is built to.
+To use scripts go to scripts folder and run: <br />
+To build on debian/ubuntu
 ```
 ./build_linux_editor_deb.sh
 ```
-To build on RPM based distributions run:
+To build on RPM based distributions
 ```
 ./build_linux_editor_rpm.sh
 ```
+In folder outside main fillwave folder, there will be genereted packeg and binary.
+
+If you want to build only binary and unit tests for application you must compile files manually.<br />
+For example we want build application in bin folder outside main fillwave folder, additionally we want to build binary
+ with unit tests. <br />
+ ```
+ #we are in fillwave main folder
+ cd ..
+ mkdir bin
+ cd bin
+ cmake ../fillwave -DFILLWAVE_BUILD_QT_EDITOR=ON -DTESTSTATUS=ON
+ cmake --build examples/editor -- -j9 #you can change numbers of jobs
+ ```
+After building is end we can run application or UT.
+ ```
+ #We are in bin folder
+ #To run application
+ ./fillwaveEditor
+ #To run UT
+ cd examples/editor/tests/test/
+ ./runUnitTestsEditor
+ ```
+
 ![QTEditor.png](https://github.com/filipwasil/fillwave_editor_particles/blob/master/screens/QTEditor.png)

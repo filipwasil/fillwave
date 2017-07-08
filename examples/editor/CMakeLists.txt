@@ -5,8 +5,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_FLAGS "-fPIC")
-set(PKGSTAT ${PKGSTATUS})
-set(PKGT ${PKGTYPE})
 set(EDITOR_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 if (WIN32)
@@ -34,3 +32,4 @@ add_subdirectory(src)
 if (${TESTSTATUS})
     add_subdirectory(tests)
 endif()
+
