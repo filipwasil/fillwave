@@ -1,5 +1,6 @@
 #include "CallbacksScene.h"
 #include "scene/callbacks/Callbacks.h"
+#include "fillwave/common/Macros.h"
 
 using namespace flw;
 using namespace flw::flf;
