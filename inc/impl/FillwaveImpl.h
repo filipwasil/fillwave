@@ -290,7 +290,7 @@ inline void Engine::EngineImpl::initExtensions() {
   glesInitExtensions();
 }
 
-#else
+#else /* FILLWAVE_GLES_3_0 */
 
 inline void Engine::EngineImpl::initExtensions(void) {
 #ifdef GLEW_OK
@@ -309,10 +309,10 @@ inline void Engine::EngineImpl::initExtensions(void) {
     fLogD("OpenGL Version: %s", glGetString(GL_VERSION));
   }
 
-#endif
+#endif /* GLEW_OK */
 }
 
-#endif
+#endif /* FILLWAVE_GLES_3_0 */
 
 inline void Engine::EngineImpl::initManagement() {
   mTextures = std::make_unique<flf::TextureSystem>(mFileLoader.getRootPath());
