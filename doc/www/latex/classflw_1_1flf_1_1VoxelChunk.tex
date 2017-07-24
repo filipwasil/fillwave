@@ -1,0 +1,65 @@
+\hypertarget{classflw_1_1flf_1_1VoxelChunk}{}\section{flw\+:\+:flf\+:\+:Voxel\+Chunk Class Reference}
+\label{classflw_1_1flf_1_1VoxelChunk}\index{flw\+::flf\+::\+Voxel\+Chunk@{flw\+::flf\+::\+Voxel\+Chunk}}
+
+
+Block of \hyperlink{classflw_1_1flf_1_1Voxel}{Voxel} objects.  
+
+
+
+
+{\ttfamily \#include $<$Voxel\+Chunk.\+h$>$}
+
+Inheritance diagram for flw\+:\+:flf\+:\+:Voxel\+Chunk\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.589744cm]{classflw_1_1flf_1_1VoxelChunk}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Voxel\+Chunk} (\hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program, \hyperlink{classflw_1_1Engine}{Engine} $\ast$engine, const std\+::string \&texture\+Path, G\+Lint size, \hyperlink{classflw_1_1flf_1_1VoxelConstructor}{Voxel\+Constructor} $\ast$constructor=nullptr, G\+Lfloat gap=0.\+2)\hypertarget{classflw_1_1flf_1_1VoxelChunk_a0bfa0da98e8545a7ca325f80efebf473}{}\label{classflw_1_1flf_1_1VoxelChunk_a0bfa0da98e8545a7ca325f80efebf473}
+
+\item 
+void {\bfseries set\+Type} (G\+Lint type)\hypertarget{classflw_1_1flf_1_1VoxelChunk_aed73af0ac1484a5390b42601b3c869be}{}\label{classflw_1_1flf_1_1VoxelChunk_aed73af0ac1484a5390b42601b3c869be}
+
+\item 
+void {\bfseries reload\+V\+BO} ()\hypertarget{classflw_1_1flf_1_1VoxelChunk_a1af997eab931244f7387fcf961e7a9ed}{}\label{classflw_1_1flf_1_1VoxelChunk_a1af997eab931244f7387fcf961e7a9ed}
+
+\item 
+void {\bfseries reload\+Voxels} (\hyperlink{classflw_1_1flf_1_1VoxelConstructor}{Voxel\+Constructor} $\ast$constructor)\hypertarget{classflw_1_1flf_1_1VoxelChunk_a369bdf2852ddf649a5732bf197391ed2}{}\label{classflw_1_1flf_1_1VoxelChunk_a369bdf2852ddf649a5732bf197391ed2}
+
+\item 
+void {\bfseries draw} (\hyperlink{classflw_1_1flf_1_1ICamera}{I\+Camera} \&camera) override\hypertarget{classflw_1_1flf_1_1VoxelChunk_a6378fa9aabff73ae9ce0a8cfa31dd29f}{}\label{classflw_1_1flf_1_1VoxelChunk_a6378fa9aabff73ae9ce0a8cfa31dd29f}
+
+\item 
+void {\bfseries draw\+P\+B\+RP} (\hyperlink{classflw_1_1flf_1_1ICamera}{I\+Camera} \&camera) override\hypertarget{classflw_1_1flf_1_1VoxelChunk_a74caf1ee59229bd42aecd5e547806b26}{}\label{classflw_1_1flf_1_1VoxelChunk_a74caf1ee59229bd42aecd5e547806b26}
+
+\item 
+void {\bfseries update\+Renderer} (\hyperlink{classflw_1_1flf_1_1IRenderer}{I\+Renderer} \&renderer) override\hypertarget{classflw_1_1flf_1_1VoxelChunk_a838a8d066f2c549b02df8d4ce5e74453}{}\label{classflw_1_1flf_1_1VoxelChunk_a838a8d066f2c549b02df8d4ce5e74453}
+
+\item 
+bool {\bfseries get\+Render\+Item} (\hyperlink{structflw_1_1flf_1_1RenderItem}{Render\+Item} \&item) override\hypertarget{classflw_1_1flf_1_1VoxelChunk_a17bcd385a0b401fd51f70e3db01fbb81}{}\label{classflw_1_1flf_1_1VoxelChunk_a17bcd385a0b401fd51f70e3db01fbb81}
+
+\item 
+G\+Lint {\bfseries get\+Size} ()\hypertarget{classflw_1_1flf_1_1VoxelChunk_ad6c2aaabd515bfccd852144859f58532}{}\label{classflw_1_1flf_1_1VoxelChunk_ad6c2aaabd515bfccd852144859f58532}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classflw_1_1Engine}{Engine} $\ast$ {\bfseries m\+Engine}\hypertarget{classflw_1_1flf_1_1VoxelChunk_a28db1ba31831e301f732ecd634490724}{}\label{classflw_1_1flf_1_1VoxelChunk_a28db1ba31831e301f732ecd634490724}
+
+\item 
+const G\+Lfloat {\bfseries m\+Voxel\+Gap}\hypertarget{classflw_1_1flf_1_1VoxelChunk_a32a0b3d840f90ecd1486a8bb65a10466}{}\label{classflw_1_1flf_1_1VoxelChunk_a32a0b3d840f90ecd1486a8bb65a10466}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Block of \hyperlink{classflw_1_1flf_1_1Voxel}{Voxel} objects. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/models/terrain/Voxel\+Chunk.\+h\end{DoxyCompactItemize}

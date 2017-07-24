@@ -1,0 +1,82 @@
+\hypertarget{classflw_1_1flf_1_1TreePtr}{}\section{flw\+:\+:flf\+:\+:Tree\+Ptr$<$ T, C $>$ Class Template Reference}
+\label{classflw_1_1flf_1_1TreePtr}\index{flw\+::flf\+::\+Tree\+Ptr$<$ T, C $>$@{flw\+::flf\+::\+Tree\+Ptr$<$ T, C $>$}}
+
+
+Basic tree template class. Enables attaching and detaching nodes.  
+
+
+
+
+{\ttfamily \#include $<$Tree\+Ptr.\+h$>$}
+
+Inheritance diagram for flw\+:\+:flf\+:\+:Tree\+Ptr$<$ T, C $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classflw_1_1flf_1_1TreePtr}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classflw_1_1flf_1_1TreePtr}{Tree\+Ptr} \& {\bfseries operator=} (const \hyperlink{classflw_1_1flf_1_1TreePtr}{Tree\+Ptr} \&)=default\hypertarget{classflw_1_1flf_1_1TreePtr_a1391b85aded5a02b3eaf49276354f20d}{}\label{classflw_1_1flf_1_1TreePtr_a1391b85aded5a02b3eaf49276354f20d}
+
+\item 
+{\bfseries Tree\+Ptr} (const \hyperlink{classflw_1_1flf_1_1TreePtr}{Tree\+Ptr} \&)=default\hypertarget{classflw_1_1flf_1_1TreePtr_a342479c2abb2dd8861bc358db1728e20}{}\label{classflw_1_1flf_1_1TreePtr_a342479c2abb2dd8861bc358db1728e20}
+
+\item 
+\hyperlink{classflw_1_1flf_1_1TreePtr}{Tree\+Ptr} \& {\bfseries operator=} (\hyperlink{classflw_1_1flf_1_1TreePtr}{Tree\+Ptr} \&\&)=default\hypertarget{classflw_1_1flf_1_1TreePtr_a4d6bb09d0daf4784fbfc5892ccf229d8}{}\label{classflw_1_1flf_1_1TreePtr_a4d6bb09d0daf4784fbfc5892ccf229d8}
+
+\item 
+{\bfseries Tree\+Ptr} (\hyperlink{classflw_1_1flf_1_1TreePtr}{Tree\+Ptr} \&\&obj)=default\hypertarget{classflw_1_1flf_1_1TreePtr_ae490a01d5a3b41c8ff69b902f530429c}{}\label{classflw_1_1flf_1_1TreePtr_ae490a01d5a3b41c8ff69b902f530429c}
+
+\item 
+void {\bfseries attach} (std\+::unique\+\_\+ptr$<$ T $>$ \&\&node)\hypertarget{classflw_1_1flf_1_1TreePtr_afddb82f8fd20632610e951f55b2528bf}{}\label{classflw_1_1flf_1_1TreePtr_afddb82f8fd20632610e951f55b2528bf}
+
+\item 
+void {\bfseries detach} (T $\ast$node)\hypertarget{classflw_1_1flf_1_1TreePtr_aeb59cfe99394f4b3a98abeb5d2ad2021}{}\label{classflw_1_1flf_1_1TreePtr_aeb59cfe99394f4b3a98abeb5d2ad2021}
+
+\item 
+virtual void {\bfseries on\+Attached} (\hyperlink{classflw_1_1flf_1_1ITreeNode}{I\+Tree\+Node} $\ast$)\hypertarget{classflw_1_1flf_1_1TreePtr_a9f6fd4ca7f98953523a41741699e6697}{}\label{classflw_1_1flf_1_1TreePtr_a9f6fd4ca7f98953523a41741699e6697}
+
+\item 
+virtual void {\bfseries on\+Detached} ()\hypertarget{classflw_1_1flf_1_1TreePtr_a3b46ca5d542a91fe8f4b6287795e1f1c}{}\label{classflw_1_1flf_1_1TreePtr_a3b46ca5d542a91fe8f4b6287795e1f1c}
+
+\item 
+void {\bfseries detach\+Children} ()\hypertarget{classflw_1_1flf_1_1TreePtr_a7f65d157133d4596d40bf58ebddb29d3}{}\label{classflw_1_1flf_1_1TreePtr_a7f65d157133d4596d40bf58ebddb29d3}
+
+\item 
+bool {\bfseries is\+Attached\+Detached} ()\hypertarget{classflw_1_1flf_1_1TreePtr_adebf899fb4768f1b7b9c473162e48409}{}\label{classflw_1_1flf_1_1TreePtr_adebf899fb4768f1b7b9c473162e48409}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries m\+Flag\+Attached\+Detached}\hypertarget{classflw_1_1flf_1_1TreePtr_aa6c1d65eac91ccc16bd573db2cab3f95}{}\label{classflw_1_1flf_1_1TreePtr_aa6c1d65eac91ccc16bd573db2cab3f95}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ T $>$ $>$ {\bfseries m\+Children}\hypertarget{classflw_1_1flf_1_1TreePtr_a4f7344eab3e0ace889a3a80b42a78173}{}\label{classflw_1_1flf_1_1TreePtr_a4f7344eab3e0ace889a3a80b42a78173}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T, class C = I\+Tree\+Node$>$\\*
+class flw\+::flf\+::\+Tree\+Ptr$<$ T, C $>$}
+
+Basic tree template class. Enables attaching and detaching nodes. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & -\/ type of the smart pointers kept in this tree\\
+\hline
+{\em C} & -\/ base class for this node \\
+\hline
+\end{DoxyTemplParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/models/base/Tree\+Ptr.\+h\end{DoxyCompactItemize}

@@ -32,6 +32,12 @@
 #include <string>
 
 namespace flw {
+namespace flf {
+
+/*! \class ExceptionFillwave
+ * \brief Not used
+ */
+
 class ExceptionFillwave : public std::exception {
 public:
   ExceptionFillwave(const std::string &why)
@@ -47,4 +53,5 @@ private:
   std::string mWhy;
 };
 
+} /* flf */
 } /* flw */

@@ -1,0 +1,76 @@
+\hypertarget{structflw_1_1flf_1_1RenderItem}{}\section{flw\+:\+:flf\+:\+:Render\+Item Struct Reference}
+\label{structflw_1_1flf_1_1RenderItem}\index{flw\+::flf\+::\+Render\+Item@{flw\+::flf\+::\+Render\+Item}}
+
+
+Single draw item structure.  
+
+
+
+
+{\ttfamily \#include $<$Render\+Item.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries e\+Render\+Handles} \{ \\*
+{\bfseries e\+Render\+Handle\+Program}, 
+{\bfseries e\+Render\+Handle\+V\+AO}, 
+{\bfseries e\+Render\+Handle\+Diffuse}, 
+{\bfseries e\+Render\+Handle\+Normal}, 
+\\*
+{\bfseries e\+Render\+Handle\+Specular}, 
+{\bfseries e\+Render\+Handle\+Sampler}, 
+{\bfseries e\+Render\+Handles\+Size}
+ \}\hypertarget{structflw_1_1flf_1_1RenderItem_aa6b3d77e6446873ee9dcfc072b7c62a0}{}\label{structflw_1_1flf_1_1RenderItem_aa6b3d77e6446873ee9dcfc072b7c62a0}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\begin{tabbing}
+xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=xx\=\kill
+union \{\\
+\>GLubyte {\bfseries mRenderStatus}\\
+\>struct \{\\
+\>\>GLubyte {\bfseries bVAO}: 1\\
+\>\>GLubyte {\bfseries bIndexDraw}: 1\\
+\>\>GLubyte {\bfseries bDiffuse}: 1\\
+\>\>GLubyte {\bfseries bNormal}: 1\\
+\>\>GLubyte {\bfseries bSpecular}: 1\\
+\>\>GLubyte {\bfseries bBlending}: 1\\
+\>\>GLubyte {\bfseries bIsContainer}: 1\\
+\>\>GLubyte {\bfseries bIsAnimated}: 1\\
+\>\} {\bfseries mStatus}\\
+\}; \hypertarget{structflw_1_1flf_1_1RenderItem_ad06d37e58fdbc631f514e94535578136}{}\label{structflw_1_1flf_1_1RenderItem_ad06d37e58fdbc631f514e94535578136}
+\\
+
+\end{tabbing}\item 
+G\+Lenum {\bfseries m\+Mode}\hypertarget{structflw_1_1flf_1_1RenderItem_a4e7932d1ecf952ceb556aeccf311178a}{}\label{structflw_1_1flf_1_1RenderItem_a4e7932d1ecf952ceb556aeccf311178a}
+
+\item 
+G\+Lsizei {\bfseries m\+First}\hypertarget{structflw_1_1flf_1_1RenderItem_a17b5fabb005ace813c2514cf5c50fcfa}{}\label{structflw_1_1flf_1_1RenderItem_a17b5fabb005ace813c2514cf5c50fcfa}
+
+\item 
+G\+Lsizei {\bfseries m\+Count}\hypertarget{structflw_1_1flf_1_1RenderItem_a925ea582099a60e28adc726f286d1e20}{}\label{structflw_1_1flf_1_1RenderItem_a925ea582099a60e28adc726f286d1e20}
+
+\item 
+G\+Lenum {\bfseries m\+Data\+Type}\hypertarget{structflw_1_1flf_1_1RenderItem_a0f2abbeab716701b3e34ff0093bb31bc}{}\label{structflw_1_1flf_1_1RenderItem_a0f2abbeab716701b3e34ff0093bb31bc}
+
+\item 
+G\+Lint {\bfseries m\+Indices\+Pointer}\hypertarget{structflw_1_1flf_1_1RenderItem_a03ee83918a408f0b8358396b3e25a2c9}{}\label{structflw_1_1flf_1_1RenderItem_a03ee83918a408f0b8358396b3e25a2c9}
+
+\item 
+\hyperlink{structflw_1_1flf_1_1Blending}{Blending} {\bfseries m\+Blend}\hypertarget{structflw_1_1flf_1_1RenderItem_a6418a83fa0555f4ea35bd5b0a0c1c113}{}\label{structflw_1_1flf_1_1RenderItem_a6418a83fa0555f4ea35bd5b0a0c1c113}
+
+\item 
+G\+Luint {\bfseries m\+Handles} \mbox{[}e\+Render\+Handles\+Size\mbox{]}\hypertarget{structflw_1_1flf_1_1RenderItem_ad1b5e8cf568c099ebefd386b1965e385}{}\label{structflw_1_1flf_1_1RenderItem_ad1b5e8cf568c099ebefd386b1965e385}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Single draw item structure. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/models/base/Render\+Item.\+h\end{DoxyCompactItemize}

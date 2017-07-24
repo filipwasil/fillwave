@@ -1,45 +1,10 @@
 /**
-\mainpage Fillwave graphics engine for c++11.
+\mainpage Fillwave C++11 graphics engine for
 
 <h2><b>Requirements</b></h2>
 
-- PC with OpenGL 3.3+ and GLSL 330+ support.
+- PC with OpenGL 3.3+ and GLSL 330+ support
 - Android with OpenGL 3.0+, GLSL ES 300+ support. (API > 18, Rev. > 4.3)</p>
-
-<h3><b>Build scripts</b></h3>
-
-- build_android_native_app.sh
-
-Builds Android native application on Linux host.
-
-- build_android_jni_lib.sh
-
-Builds Android jni library application on Linux host.
-
-- build_android_activity.sh
-
-Builds Android regular activity on Linux host.
-Uses build_android_jni_lib.sh script to build jni library.
-
-- build_linux.sh
-
-Builds Linux version of library (Redhat/Ubuntu/Fedora/Debian) on Linux host.
-
-- build_linux_gles.sh
-
-Builds Linux version of library using GL ES 3.0 context (Needs mesa libraries) on Linux host.
-
-- build_ios.sh
-
-Builds iOS (Currently not working) on OSX host.
-
-- build_windows-mingw.bat
-
-Builds Windows version of library on Windows host (Needs MinGW and CMake added in PATH).
-
-- build_windows_msvc.bat
-
-Builds Windows version of library on Windows host (Currently not working).
 
 <h3><b>Libraries used</b></h3>
 

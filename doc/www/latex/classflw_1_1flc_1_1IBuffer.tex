@@ -1,0 +1,124 @@
+\hypertarget{classflw_1_1flc_1_1IBuffer}{}\section{flw\+:\+:flc\+:\+:I\+Buffer Class Reference}
+\label{classflw_1_1flc_1_1IBuffer}\index{flw\+::flc\+::\+I\+Buffer@{flw\+::flc\+::\+I\+Buffer}}
+
+
+Base for all buffer types.  
+
+
+
+
+{\ttfamily \#include $<$I\+Buffer.\+h$>$}
+
+Inheritance diagram for flw\+:\+:flc\+:\+:I\+Buffer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=12.000000cm]{classflw_1_1flc_1_1IBuffer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries I\+Buffer} (G\+Luint target, G\+Luint draw\+Type=G\+L\+\_\+\+S\+T\+A\+T\+I\+C\+\_\+\+D\+R\+AW, G\+Luint index=0, G\+Lsizei how\+Many=1)\hypertarget{classflw_1_1flc_1_1IBuffer_ad7053cc22011388104c4bcc6ca05599e}{}\label{classflw_1_1flc_1_1IBuffer_ad7053cc22011388104c4bcc6ca05599e}
+
+\item 
+void {\bfseries bind} (G\+Luint id=0) const \hypertarget{classflw_1_1flc_1_1IBuffer_ac45d3729b5e4b1fe52d79275a94c4ccc}{}\label{classflw_1_1flc_1_1IBuffer_ac45d3729b5e4b1fe52d79275a94c4ccc}
+
+\item 
+void {\bfseries bind} (G\+Luint external\+Target, G\+Luint id) const \hypertarget{classflw_1_1flc_1_1IBuffer_a4d02d0364f840398c213f6c7f9700d8e}{}\label{classflw_1_1flc_1_1IBuffer_a4d02d0364f840398c213f6c7f9700d8e}
+
+\item 
+void {\bfseries bind\+Base} (G\+Luint id=0) const \hypertarget{classflw_1_1flc_1_1IBuffer_af229d6fa4fbb30bacb81dcac734db783}{}\label{classflw_1_1flc_1_1IBuffer_af229d6fa4fbb30bacb81dcac734db783}
+
+\item 
+void {\bfseries bind\+Base} (G\+Luint external\+Target, G\+Luint id) const \hypertarget{classflw_1_1flc_1_1IBuffer_ab64c3e009a119394f895b3dacf4cc665}{}\label{classflw_1_1flc_1_1IBuffer_ab64c3e009a119394f895b3dacf4cc665}
+
+\item 
+void {\bfseries unbind} ()\hypertarget{classflw_1_1flc_1_1IBuffer_aa838099c22a2799d4cad641f8d40e674}{}\label{classflw_1_1flc_1_1IBuffer_aa838099c22a2799d4cad641f8d40e674}
+
+\item 
+void {\bfseries unbind\+Base} (G\+Luint external\+Target)\hypertarget{classflw_1_1flc_1_1IBuffer_a1321b63bca1153b09b914f9ca8d52b2a}{}\label{classflw_1_1flc_1_1IBuffer_a1321b63bca1153b09b914f9ca8d52b2a}
+
+\item 
+void {\bfseries unmap} () const \hypertarget{classflw_1_1flc_1_1IBuffer_adb045f3a301425168ba2b2bd9009c876}{}\label{classflw_1_1flc_1_1IBuffer_adb045f3a301425168ba2b2bd9009c876}
+
+\item 
+void {\bfseries send} ()\hypertarget{classflw_1_1flc_1_1IBuffer_a0fa4b45e543ed7f945f8d216628e7c53}{}\label{classflw_1_1flc_1_1IBuffer_a0fa4b45e543ed7f945f8d216628e7c53}
+
+\item 
+void {\bfseries set\+Target} (G\+Luint target)\hypertarget{classflw_1_1flc_1_1IBuffer_a7d73a5dcb2cc252fe329565a4c329433}{}\label{classflw_1_1flc_1_1IBuffer_a7d73a5dcb2cc252fe329565a4c329433}
+
+\item 
+void {\bfseries set\+Draw\+Type} (G\+Luint draw\+Type)\hypertarget{classflw_1_1flc_1_1IBuffer_a641903dd05dbe080d8f761ec55bffa97}{}\label{classflw_1_1flc_1_1IBuffer_a641903dd05dbe080d8f761ec55bffa97}
+
+\item 
+bool {\bfseries is\+Loaded} ()\hypertarget{classflw_1_1flc_1_1IBuffer_a5d6c3aea1c1ea096aa9f27197bb0cd64}{}\label{classflw_1_1flc_1_1IBuffer_a5d6c3aea1c1ea096aa9f27197bb0cd64}
+
+\item 
+void {\bfseries set\+Loaded} (bool loaded)\hypertarget{classflw_1_1flc_1_1IBuffer_a27fe03746857f00fb4631c73645a3a3a}{}\label{classflw_1_1flc_1_1IBuffer_a27fe03746857f00fb4631c73645a3a3a}
+
+\item 
+G\+Luint {\bfseries get\+Elements} () const \hypertarget{classflw_1_1flc_1_1IBuffer_aa7dc7de3135438e773925f58034125de}{}\label{classflw_1_1flc_1_1IBuffer_aa7dc7de3135438e773925f58034125de}
+
+\item 
+G\+Luint {\bfseries get\+Size} () const \hypertarget{classflw_1_1flc_1_1IBuffer_aa2ae6b3c9491fa3f5c3ca4d45b738215}{}\label{classflw_1_1flc_1_1IBuffer_aa2ae6b3c9491fa3f5c3ca4d45b738215}
+
+\item 
+G\+Lvoid $\ast$ {\bfseries get\+Data} () const \hypertarget{classflw_1_1flc_1_1IBuffer_a3962d189ef43bc43d247c5bff7ccc5e1}{}\label{classflw_1_1flc_1_1IBuffer_a3962d189ef43bc43d247c5bff7ccc5e1}
+
+\item 
+void {\bfseries reload} ()\hypertarget{classflw_1_1flc_1_1IBuffer_a3336186b4cabbfd41764d594856ea470}{}\label{classflw_1_1flc_1_1IBuffer_a3336186b4cabbfd41764d594856ea470}
+
+\item 
+G\+Lvoid $\ast$ {\bfseries map\+Range} (G\+Lenum access, G\+Luint size=0)\hypertarget{classflw_1_1flc_1_1IBuffer_a1a24ce0fc4b8c5bfcc684deb7173c493}{}\label{classflw_1_1flc_1_1IBuffer_a1a24ce0fc4b8c5bfcc684deb7173c493}
+
+\item 
+G\+Lvoid $\ast$ {\bfseries map} (G\+Lenum access) const \hypertarget{classflw_1_1flc_1_1IBuffer_ab8174b93310fb75d673246a6c0e84901}{}\label{classflw_1_1flc_1_1IBuffer_ab8174b93310fb75d673246a6c0e84901}
+
+\item 
+virtual void {\bfseries empty\+C\+PU} ()=0\hypertarget{classflw_1_1flc_1_1IBuffer_a947b4716bdab96de09bf448211189ad7}{}\label{classflw_1_1flc_1_1IBuffer_a947b4716bdab96de09bf448211189ad7}
+
+\item 
+virtual void {\bfseries empty\+G\+PU} ()=0\hypertarget{classflw_1_1flc_1_1IBuffer_ac3793d00dbfcc62b7b78cd9c6edac746}{}\label{classflw_1_1flc_1_1IBuffer_ac3793d00dbfcc62b7b78cd9c6edac746}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries set\+Elements} (G\+Luint elements)\hypertarget{classflw_1_1flc_1_1IBuffer_abfef8a1d484a0a974e1b68899b94793e}{}\label{classflw_1_1flc_1_1IBuffer_abfef8a1d484a0a974e1b68899b94793e}
+
+\item 
+void {\bfseries set\+Size} (G\+Luint size)\hypertarget{classflw_1_1flc_1_1IBuffer_a07a92c12bc564ea26ef2091915b992e3}{}\label{classflw_1_1flc_1_1IBuffer_a07a92c12bc564ea26ef2091915b992e3}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries m\+Loaded}\hypertarget{classflw_1_1flc_1_1IBuffer_a7012500f1c886ae84e9bd7d878f70a8b}{}\label{classflw_1_1flc_1_1IBuffer_a7012500f1c886ae84e9bd7d878f70a8b}
+
+\item 
+G\+Luint {\bfseries m\+Target}\hypertarget{classflw_1_1flc_1_1IBuffer_a3d34efd1977e2ea9b859b32458c23236}{}\label{classflw_1_1flc_1_1IBuffer_a3d34efd1977e2ea9b859b32458c23236}
+
+\item 
+G\+Luint {\bfseries m\+Data\+Store\+Type}\hypertarget{classflw_1_1flc_1_1IBuffer_a099516254495f4a99e65121816d02bab}{}\label{classflw_1_1flc_1_1IBuffer_a099516254495f4a99e65121816d02bab}
+
+\item 
+G\+Luint {\bfseries m\+Index}\hypertarget{classflw_1_1flc_1_1IBuffer_ad6cf73186e60ec40248b14c5b11f00ee}{}\label{classflw_1_1flc_1_1IBuffer_ad6cf73186e60ec40248b14c5b11f00ee}
+
+\item 
+G\+Lvoid $\ast$ {\bfseries m\+Data}\hypertarget{classflw_1_1flc_1_1IBuffer_ad576bb156f18bf6050414445ce768737}{}\label{classflw_1_1flc_1_1IBuffer_ad576bb156f18bf6050414445ce768737}
+
+\item 
+G\+Lulong {\bfseries m\+Size}\hypertarget{classflw_1_1flc_1_1IBuffer_af6d84c87b8a85e193de1c7d62e0c5098}{}\label{classflw_1_1flc_1_1IBuffer_af6d84c87b8a85e193de1c7d62e0c5098}
+
+\item 
+G\+Lulong {\bfseries m\+Total\+Elements}\hypertarget{classflw_1_1flc_1_1IBuffer_a64fbd477df8e2731e70198cf43f59577}{}\label{classflw_1_1flc_1_1IBuffer_a64fbd477df8e2731e70198cf43f59577}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base for all buffer types. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/core/buffers/I\+Buffer.\+h\end{DoxyCompactItemize}

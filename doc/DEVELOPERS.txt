@@ -6,6 +6,4 @@ Main architect and designer: filipwasil
 Developers:
 
 revcorey
-MiOgonowski
 darkenk
-mamilo

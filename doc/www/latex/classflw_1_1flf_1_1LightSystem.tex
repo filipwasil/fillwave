@@ -1,0 +1,70 @@
+\hypertarget{classflw_1_1flf_1_1LightSystem}{}\section{flw\+:\+:flf\+:\+:Light\+System Class Reference}
+\label{classflw_1_1flf_1_1LightSystem}\index{flw\+::flf\+::\+Light\+System@{flw\+::flf\+::\+Light\+System}}
+
+
+\hyperlink{classflw_1_1flf_1_1Light}{Light} system knows about all light related stuff.  
+
+
+
+
+{\ttfamily \#include $<$Light\+System.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool {\bfseries is\+Lights\+Refresh} ()\hypertarget{classflw_1_1flf_1_1LightSystem_a7651524658ab9cb67409d2a7a3b40785}{}\label{classflw_1_1flf_1_1LightSystem_a7651524658ab9cb67409d2a7a3b40785}
+
+\item 
+void {\bfseries reset\+Lights\+Refresh} ()\hypertarget{classflw_1_1flf_1_1LightSystem_a88558cb8efc715a0d0af143c55266904}{}\label{classflw_1_1flf_1_1LightSystem_a88558cb8efc715a0d0af143c55266904}
+
+\item 
+void {\bfseries remove\+Lights} ()\hypertarget{classflw_1_1flf_1_1LightSystem_acf0550d7bd5a1e1594a3327252d4c73f}{}\label{classflw_1_1flf_1_1LightSystem_acf0550d7bd5a1e1594a3327252d4c73f}
+
+\item 
+void {\bfseries update\+Light\+Entities} ()\hypertarget{classflw_1_1flf_1_1LightSystem_aacee6250b5bd3879a9ebd742181d9bd9}{}\label{classflw_1_1flf_1_1LightSystem_aacee6250b5bd3879a9ebd742181d9bd9}
+
+\item 
+void {\bfseries push\+Light\+Uniforms\+DR} ()\hypertarget{classflw_1_1flf_1_1LightSystem_aec0348329c501772f89787d1b0d145d0}{}\label{classflw_1_1flf_1_1LightSystem_aec0348329c501772f89787d1b0d145d0}
+
+\item 
+void {\bfseries push\+Light\+Uniforms} (\hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program)\hypertarget{classflw_1_1flf_1_1LightSystem_aae4432792a7c0048d0b9ce8f42c486d2}{}\label{classflw_1_1flf_1_1LightSystem_aae4432792a7c0048d0b9ce8f42c486d2}
+
+\item 
+void {\bfseries push\+Light\+Uniform\+Buffers} (\hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program)\hypertarget{classflw_1_1flf_1_1LightSystem_a80af6b13ff567db8dc821fce8bd4d64f}{}\label{classflw_1_1flf_1_1LightSystem_a80af6b13ff567db8dc821fce8bd4d64f}
+
+\item 
+void {\bfseries clear} ()\hypertarget{classflw_1_1flf_1_1LightSystem_a2af93a35df56344840ceeeaaca9ea1e9}{}\label{classflw_1_1flf_1_1LightSystem_a2af93a35df56344840ceeeaaca9ea1e9}
+
+\item 
+void {\bfseries bind\+Shadowmaps} ()\hypertarget{classflw_1_1flf_1_1LightSystem_abe92c7226cc53a7ed44e32d74191aaf5}{}\label{classflw_1_1flf_1_1LightSystem_abe92c7226cc53a7ed44e32d74191aaf5}
+
+\item 
+void {\bfseries update\+Deferred\+Buffer\+Spot} (G\+Luint light\+ID, \hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program, G\+Lint current\+Shadow\+Unit)\hypertarget{classflw_1_1flf_1_1LightSystem_ab46894fd98f0ca50c2545d7c1845fb26}{}\label{classflw_1_1flf_1_1LightSystem_ab46894fd98f0ca50c2545d7c1845fb26}
+
+\item 
+void {\bfseries update\+Deferred\+Buffer\+Directional} (G\+Luint light\+ID, \hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program, G\+Lint current\+Shadow\+Unit)\hypertarget{classflw_1_1flf_1_1LightSystem_a8898bf26255c0aeef983943706df775b}{}\label{classflw_1_1flf_1_1LightSystem_a8898bf26255c0aeef983943706df775b}
+
+\item 
+void {\bfseries update\+Deferred\+Buffer\+Point} (G\+Luint light\+ID, \hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program, G\+Lint current\+Shadow\+Unit)\hypertarget{classflw_1_1flf_1_1LightSystem_a9311e0a1011ba6c1efda80d874fbcaac}{}\label{classflw_1_1flf_1_1LightSystem_a9311e0a1011ba6c1efda80d874fbcaac}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classflw_1_1flf_1_1TManager}{Cache\+Spot\+Lights} {\bfseries m\+Lights\+Spot}\hypertarget{classflw_1_1flf_1_1LightSystem_afb42372c19f612b0b825ba3ccd63cc58}{}\label{classflw_1_1flf_1_1LightSystem_afb42372c19f612b0b825ba3ccd63cc58}
+
+\item 
+\hyperlink{classflw_1_1flf_1_1TManager}{Cache\+Directional\+Lights} {\bfseries m\+Lights\+Directional}\hypertarget{classflw_1_1flf_1_1LightSystem_a59a23e29ca90a821d083f213ebc6450d}{}\label{classflw_1_1flf_1_1LightSystem_a59a23e29ca90a821d083f213ebc6450d}
+
+\item 
+\hyperlink{classflw_1_1flf_1_1TManager}{Cache\+Point\+Lights} {\bfseries m\+Lights\+Point}\hypertarget{classflw_1_1flf_1_1LightSystem_a92509acd5b371300c80f33241fbf9715}{}\label{classflw_1_1flf_1_1LightSystem_a92509acd5b371300c80f33241fbf9715}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classflw_1_1flf_1_1Light}{Light} system knows about all light related stuff. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/management/Light\+System.\+h\end{DoxyCompactItemize}

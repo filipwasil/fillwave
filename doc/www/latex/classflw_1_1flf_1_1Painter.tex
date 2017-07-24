@@ -1,0 +1,105 @@
+\hypertarget{classflw_1_1flf_1_1Painter}{}\section{flw\+:\+:flf\+:\+:Painter Class Reference}
+\label{classflw_1_1flf_1_1Painter}\index{flw\+::flf\+::\+Painter@{flw\+::flf\+::\+Painter}}
+
+
+Effect to draw a mesh with single color.  
+
+
+
+
+{\ttfamily \#include $<$Painter.\+h$>$}
+
+Inheritance diagram for flw\+:\+:flf\+:\+:Painter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classflw_1_1flf_1_1Painter}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Painter} (glm\+::vec4 color)\hypertarget{classflw_1_1flf_1_1Painter_a4999a420255c4391e9d515abadcee395}{}\label{classflw_1_1flf_1_1Painter_a4999a420255c4391e9d515abadcee395}
+
+\item 
+void {\bfseries set\+Color} (glm\+::vec4 color)\hypertarget{classflw_1_1flf_1_1Painter_a5a682f895dec9a1fa7c6642116c2ed95}{}\label{classflw_1_1flf_1_1Painter_a5a682f895dec9a1fa7c6642116c2ed95}
+
+\item 
+void \hyperlink{classflw_1_1flf_1_1Painter_a92e72e8875c374e4fc118cbd9e003dd5}{pre\+Draw\+Action} (\hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program) override
+\begin{DoxyCompactList}\small\item\em virtual\+: defines action to be done just before the draw. \end{DoxyCompactList}\item 
+void \hyperlink{classflw_1_1flf_1_1Painter_a18960e396393ce9b3fd0d8cc91fc6864}{post\+Draw\+Action} (\hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program) override
+\begin{DoxyCompactList}\small\item\em virtual\+: defines action to be done just after the draw. \end{DoxyCompactList}\item 
+void \hyperlink{classflw_1_1flf_1_1Painter_a8ab637228dbefe1befaa92825507ad0e}{stop\+Action} (\hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program) override
+\begin{DoxyCompactList}\small\item\em virtual\+: defines action to be done when the effect is stopped. \end{DoxyCompactList}\item 
+void \hyperlink{classflw_1_1flf_1_1Painter_aa5104b3f3db56f13d93172203f6fa105}{start\+Action} (\hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$program) override
+\begin{DoxyCompactList}\small\item\em virtual\+: defines action to be done when the effect is started. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Effect to draw a mesh with single color. 
+
+\subsection{Member Function Documentation}
+\index{flw\+::flf\+::\+Painter@{flw\+::flf\+::\+Painter}!post\+Draw\+Action@{post\+Draw\+Action}}
+\index{post\+Draw\+Action@{post\+Draw\+Action}!flw\+::flf\+::\+Painter@{flw\+::flf\+::\+Painter}}
+\subsubsection[{\texorpdfstring{post\+Draw\+Action(flc\+::\+Program $\ast$program) override}{postDrawAction(flc::Program *program) override}}]{\setlength{\rightskip}{0pt plus 5cm}void flw\+::flf\+::\+Painter\+::post\+Draw\+Action (
+\begin{DoxyParamCaption}
+\item[{{\bf flc\+::\+Program} $\ast$}]{program}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{classflw_1_1flf_1_1Painter_a18960e396393ce9b3fd0d8cc91fc6864}{}\label{classflw_1_1flf_1_1Painter_a18960e396393ce9b3fd0d8cc91fc6864}
+
+
+virtual\+: defines action to be done just after the draw. 
+
+post\+Draw\+Action 
+
+Implements \hyperlink{classflw_1_1flf_1_1IEffect_a6bb11d90e7e4da057ca398bd8c61208a}{flw\+::flf\+::\+I\+Effect}.
+
+\index{flw\+::flf\+::\+Painter@{flw\+::flf\+::\+Painter}!pre\+Draw\+Action@{pre\+Draw\+Action}}
+\index{pre\+Draw\+Action@{pre\+Draw\+Action}!flw\+::flf\+::\+Painter@{flw\+::flf\+::\+Painter}}
+\subsubsection[{\texorpdfstring{pre\+Draw\+Action(flc\+::\+Program $\ast$program) override}{preDrawAction(flc::Program *program) override}}]{\setlength{\rightskip}{0pt plus 5cm}void flw\+::flf\+::\+Painter\+::pre\+Draw\+Action (
+\begin{DoxyParamCaption}
+\item[{{\bf flc\+::\+Program} $\ast$}]{program}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{classflw_1_1flf_1_1Painter_a92e72e8875c374e4fc118cbd9e003dd5}{}\label{classflw_1_1flf_1_1Painter_a92e72e8875c374e4fc118cbd9e003dd5}
+
+
+virtual\+: defines action to be done just before the draw. 
+
+pre\+Draw\+Action 
+
+Implements \hyperlink{classflw_1_1flf_1_1IEffect_ae65eed21e40a226c7739d3c5dedd9e50}{flw\+::flf\+::\+I\+Effect}.
+
+\index{flw\+::flf\+::\+Painter@{flw\+::flf\+::\+Painter}!start\+Action@{start\+Action}}
+\index{start\+Action@{start\+Action}!flw\+::flf\+::\+Painter@{flw\+::flf\+::\+Painter}}
+\subsubsection[{\texorpdfstring{start\+Action(flc\+::\+Program $\ast$program) override}{startAction(flc::Program *program) override}}]{\setlength{\rightskip}{0pt plus 5cm}void flw\+::flf\+::\+Painter\+::start\+Action (
+\begin{DoxyParamCaption}
+\item[{{\bf flc\+::\+Program} $\ast$}]{program}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{classflw_1_1flf_1_1Painter_aa5104b3f3db56f13d93172203f6fa105}{}\label{classflw_1_1flf_1_1Painter_aa5104b3f3db56f13d93172203f6fa105}
+
+
+virtual\+: defines action to be done when the effect is started. 
+
+start\+Action 
+
+Implements \hyperlink{classflw_1_1flf_1_1IEffect_afc7cec9080d135ed264b08a90c7b94e9}{flw\+::flf\+::\+I\+Effect}.
+
+\index{flw\+::flf\+::\+Painter@{flw\+::flf\+::\+Painter}!stop\+Action@{stop\+Action}}
+\index{stop\+Action@{stop\+Action}!flw\+::flf\+::\+Painter@{flw\+::flf\+::\+Painter}}
+\subsubsection[{\texorpdfstring{stop\+Action(flc\+::\+Program $\ast$program) override}{stopAction(flc::Program *program) override}}]{\setlength{\rightskip}{0pt plus 5cm}void flw\+::flf\+::\+Painter\+::stop\+Action (
+\begin{DoxyParamCaption}
+\item[{{\bf flc\+::\+Program} $\ast$}]{program}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}\hypertarget{classflw_1_1flf_1_1Painter_a8ab637228dbefe1befaa92825507ad0e}{}\label{classflw_1_1flf_1_1Painter_a8ab637228dbefe1befaa92825507ad0e}
+
+
+virtual\+: defines action to be done when the effect is stopped. 
+
+stop\+Action 
+
+Implements \hyperlink{classflw_1_1flf_1_1IEffect_a1a03eaf63a9d4edbd8764540d2d4133c}{flw\+::flf\+::\+I\+Effect}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/models/effects/Painter.\+h\end{DoxyCompactItemize}

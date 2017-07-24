@@ -32,13 +32,13 @@
 #include <fillwave/actions/callbacks/Callback.h>
 #include <vector>
 
-/*! \class IFocusable
- * \brief Capable to notify engine that focus related callbacks can be freed.
- */
-
 namespace flw {
 class Engine;
 namespace flf {
+
+/*! \class IFocusable
+ * \brief Capable to notify engine that focus related callbacks can be freed.
+ */
 
 class IFocusable {
 public:

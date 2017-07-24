@@ -1,0 +1,77 @@
+\hypertarget{classflw_1_1flf_1_1IEmiterPoint}{}\section{flw\+:\+:flf\+:\+:I\+Emiter\+Point Class Reference}
+\label{classflw_1_1flf_1_1IEmiterPoint}\index{flw\+::flf\+::\+I\+Emiter\+Point@{flw\+::flf\+::\+I\+Emiter\+Point}}
+
+
+Drawable \hyperlink{classflw_1_1flf_1_1Entity}{Entity} which emits particles.  
+
+
+
+
+{\ttfamily \#include $<$I\+Emiter\+Point.\+h$>$}
+
+Inheritance diagram for flw\+:\+:flf\+:\+:I\+Emiter\+Point\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.589744cm]{classflw_1_1flf_1_1IEmiterPoint}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries I\+Emiter\+Point} (\hyperlink{classflw_1_1Engine}{Engine} $\ast$engine, G\+Luint how\+Many, G\+Lfloat size, G\+Lfloat lifetime, \hyperlink{classflw_1_1flc_1_1Texture}{flc\+::\+Texture} $\ast$texture, glm\+::vec4 color, G\+Lenum blending\+Source, G\+Lenum blending\+Destination, G\+Lboolean depth\+Testing, G\+Lfloat alpha\+Cut\+Off)\hypertarget{classflw_1_1flf_1_1IEmiterPoint_a1f761af10d0b44e2847ea0f2150cdc0e}{}\label{classflw_1_1flf_1_1IEmiterPoint_a1f761af10d0b44e2847ea0f2150cdc0e}
+
+\item 
+void {\bfseries set\+Blending} (G\+Lenum source\+Factor, G\+Lenum destination\+Factor)\hypertarget{classflw_1_1flf_1_1IEmiterPoint_ad59e7a2e8b4559a54657638aa7249c8b}{}\label{classflw_1_1flf_1_1IEmiterPoint_ad59e7a2e8b4559a54657638aa7249c8b}
+
+\item 
+virtual void {\bfseries update} (G\+Lfloat time\+Elapsed\+Sec)=0\hypertarget{classflw_1_1flf_1_1IEmiterPoint_a7bfbe34cfbcf3222ab5e9068aedb3962}{}\label{classflw_1_1flf_1_1IEmiterPoint_a7bfbe34cfbcf3222ab5e9068aedb3962}
+
+\item 
+void {\bfseries draw} (\hyperlink{classflw_1_1flf_1_1ICamera}{I\+Camera} \&camera) override=0\hypertarget{classflw_1_1flf_1_1IEmiterPoint_aeffded615ab4356617b62556f6f13456}{}\label{classflw_1_1flf_1_1IEmiterPoint_aeffded615ab4356617b62556f6f13456}
+
+\item 
+void {\bfseries update\+Renderer} (\hyperlink{classflw_1_1flf_1_1IRenderer}{I\+Renderer} \&renderer) override\hypertarget{classflw_1_1flf_1_1IEmiterPoint_a1945d37be66cb8ef17f3f6d96f146dcc}{}\label{classflw_1_1flf_1_1IEmiterPoint_a1945d37be66cb8ef17f3f6d96f146dcc}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+G\+Lfloat {\bfseries m\+Start\+Size}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_a82128cd89b94e7d8bef15957bd2ecbd4}{}\label{classflw_1_1flf_1_1IEmiterPoint_a82128cd89b94e7d8bef15957bd2ecbd4}
+
+\item 
+G\+Lfloat {\bfseries m\+Lifetime}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_a81255b1505630b745f025cc67c4ed6fc}{}\label{classflw_1_1flf_1_1IEmiterPoint_a81255b1505630b745f025cc67c4ed6fc}
+
+\item 
+\hyperlink{classflw_1_1flc_1_1Texture}{flc\+::\+Texture} $\ast$ {\bfseries m\+Texture}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_ac2274b9022573a50a1c1b30cd259dc3f}{}\label{classflw_1_1flf_1_1IEmiterPoint_ac2274b9022573a50a1c1b30cd259dc3f}
+
+\item 
+glm\+::vec4 {\bfseries m\+Color}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_afa54cf746b412ba2cfe60d5350f3a881}{}\label{classflw_1_1flf_1_1IEmiterPoint_afa54cf746b412ba2cfe60d5350f3a881}
+
+\item 
+G\+Luint {\bfseries m\+How\+Many}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_afcabb90669a52d3076d2aa4e28d6b6d2}{}\label{classflw_1_1flf_1_1IEmiterPoint_afcabb90669a52d3076d2aa4e28d6b6d2}
+
+\item 
+G\+Lboolean {\bfseries m\+Depth\+Testing}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_a64ffd2fbf1f0b93e83748a44c90fa0ed}{}\label{classflw_1_1flf_1_1IEmiterPoint_a64ffd2fbf1f0b93e83748a44c90fa0ed}
+
+\item 
+G\+Lfloat {\bfseries m\+Alpha\+Cut\+Off}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_afd35bb053498b1bf4a736ff32b971983}{}\label{classflw_1_1flf_1_1IEmiterPoint_afd35bb053498b1bf4a736ff32b971983}
+
+\item 
+\hyperlink{classflw_1_1flc_1_1Program}{flc\+::\+Program} $\ast$ {\bfseries m\+Program}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_ab31e42a70b7432ae87c10d0845f57c43}{}\label{classflw_1_1flf_1_1IEmiterPoint_ab31e42a70b7432ae87c10d0845f57c43}
+
+\item 
+\hyperlink{classflw_1_1flc_1_1IndexBuffer}{flc\+::\+Index\+Buffer} $\ast$ {\bfseries m\+I\+BO}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_a6b2fea983d79268295f284f32df8b90e}{}\label{classflw_1_1flf_1_1IEmiterPoint_a6b2fea983d79268295f284f32df8b90e}
+
+\item 
+\hyperlink{structflw_1_1flf_1_1Blending}{Blending} {\bfseries m\+Blending}\hypertarget{classflw_1_1flf_1_1IEmiterPoint_a2afe359942465183b4fe614f55e631aa}{}\label{classflw_1_1flf_1_1IEmiterPoint_a2afe359942465183b4fe614f55e631aa}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Drawable \hyperlink{classflw_1_1flf_1_1Entity}{Entity} which emits particles. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/filip/\+Projects/fillwave/inc/fillwave/models/base/I\+Emiter\+Point.\+h\end{DoxyCompactItemize}

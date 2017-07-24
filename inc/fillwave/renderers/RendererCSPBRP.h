@@ -38,7 +38,7 @@ namespace flf {
 
 class LightManager;
 
-/*! \class IRendererCSPBRP
+/*! \class RendererCSPBRP
  * \brief Cache Safe Program Based Render Pass IRenderer. Not ready (Rev.4.2.1).
  */
 
