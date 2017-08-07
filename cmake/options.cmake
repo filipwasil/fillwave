@@ -38,6 +38,7 @@ option (FILLWAVE_BUILD_LINUX_EXAMPLES "Build linux example" OFF)
 option (FILLWAVE_BUILD_FREEGLUT_EXAMPLES "Build linux example" OFF)
 option (FILLWAVE_BUILD_QT_EXAMPLES "Build qt example" OFF)
 option (FILLWAVE_BUILD_QT_EDITOR "Build qt interactive demo" OFF)
+option (FILLWAVE_BUILD_LEVEL_EDITOR "Build qt level game editor" OFF)
 option (FILLWAVE_BUILD_SDL2_EXAMPLES "Build sdl2 example" OFF)
 option (FILLWAVE_BUILD_COTIRE "Build with cotire" OFF)
 

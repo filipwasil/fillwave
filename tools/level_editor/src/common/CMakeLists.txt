@@ -1,0 +1,10 @@
+set(SOURCECOMMON
+        ${SOURCE}
+    ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.cpp
+        PARENT_SCOPE
+        )
+set(HEADERSCOMMON
+        ${HEADERS}
+    ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.h
+        PARENT_SCOPE
+        )

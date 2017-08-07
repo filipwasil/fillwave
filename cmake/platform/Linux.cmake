@@ -104,6 +104,10 @@ if (FILLWAVE_BUILD_QT_EDITOR)
   add_dependencies(fillwave assets_${PROJECT_NAME})
 endif ()
 
+if(FILLWAVE_BUILD_LEVEL_EDITOR)
+  add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/tools/level_editor)
+endif()
+
 if (FILLWAVE_BUILD_COTIRE)
   include (${FILLWAVE_EXT_COTIRE_PATH}/CMake/cotire.cmake)
   cotire(fillwave)
