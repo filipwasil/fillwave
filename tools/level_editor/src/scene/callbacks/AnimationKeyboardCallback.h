@@ -1,4 +1,5 @@
 #pragma once
+
 #include <fillwave/Fillwave.h>
 #include <fillwave/Framework.h>
 
@@ -6,16 +7,16 @@ namespace flw {
 class Engine;
 namespace flf {
 
-class AnimationKeyboardCallback : public Callback {
-public:
-  AnimationKeyboardCallback(Entity *entity, EEventType eventType);
+class AnimationKeyboardCallback {
+ public:
+  AnimationKeyboardCallback(Entity* entity);
 
   virtual ~AnimationKeyboardCallback();
 
-  void perform(EventType &event);
+  void perform(const Event& event);
 
-private:
-  Entity *mEntity;
+ private:
+  Entity* mEntity;
 };
 } /* flf */
 } /* flw */

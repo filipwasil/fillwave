@@ -9,12 +9,14 @@
 #include <QObject>
 #include <fillwave/Fillwave.h>
 #include "scene/callbacks/IEventHandler.h"
+#include "objects/SceneModel.h"
 
 namespace scene {
 class AScene : public QObject {
 
-public:
-  AScene(int argc, char *const *argv, QMap<QString, QVariant> parametersMap) : mSceneParameters(parametersMap) {
+ public:
+  AScene(int argc, char* const* argv, QMap<QString, QVariant> parametersMap)
+    : mSceneParameters(parametersMap) {
     if (argv != nullptr) {
       mEngine = std::make_shared<flw::Engine>(argc, argv);
     }
@@ -43,16 +45,16 @@ public:
     return mEngine;
   };
 
-  bool eventFilter(QObject *watched, QEvent *event) override {
+  bool eventFilter(QObject* watched, QEvent* event) override {
     if (!mEventsHandler.empty()) {
-        for(auto & mEvent : mEventsHandler) {
-          mEvent->handle(event);
-        }
+      for (auto& mEvent : mEventsHandler) {
+        mEvent->handle(event);
+      }
     }
     return QObject::eventFilter(watched, event);
   }
 
-protected:
+ protected:
   std::shared_ptr<flw::Engine> mEngine;
   QMap<QString, QVariant> mSceneParameters;
   std::vector<std::unique_ptr<scene::callbacks::IEventHandler>> mEventsHandler;

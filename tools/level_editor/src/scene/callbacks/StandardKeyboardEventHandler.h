@@ -9,14 +9,14 @@
 namespace scene {
 namespace callbacks {
 class StandardKeyboardEventHandler : public IEventHandler {
-public:
-  StandardKeyboardEventHandler(const std::shared_ptr<flw::Engine> &engine);
+ public:
+  StandardKeyboardEventHandler(const std::shared_ptr<flw::Engine>& engine);
 
-  void handle(QEvent *event) override;
+  void handle(QEvent* event) override;
 
-private:
+ private:
   std::shared_ptr<flw::Engine> mEngine;
- // common::SceneEventFactory mEventFactory;
+  // common::SceneEventFactory mEventFactory;
 };
 }
 }

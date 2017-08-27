@@ -9,28 +9,29 @@
 #include "AScene.h"
 
 class Renderer : public QGLWidget {
-public:
-  explicit Renderer(int argc, char *argv[], QWidget *parent = 0);
+ public:
+  explicit Renderer(int argc, char* argv[], QWidget* parent = 0);
 
   virtual ~Renderer();
 
   void setNewScene(std::shared_ptr<scene::AScene> scen);
 
   std::shared_ptr<scene::AScene> getScen();
-public slots:
+
+ public slots:
 
   void onUpdate(int sliderNo, int value) const;
 
-protected:
+ protected:
   virtual void initializeGL();
 
   virtual void paintGL();
 
   virtual void resizeGL(int width, int height);
 
-private:
+ private:
   int mArgc;
-  char **mArgv;
+  char** mArgv;
   decltype(std::chrono::high_resolution_clock::now()) mTime;
   std::shared_ptr<scene::AScene> mScene;
 };

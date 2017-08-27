@@ -6,14 +6,17 @@ namespace flw {
 class Engine;
 namespace flf {
 
-class TimeStopCallback: public Callback {
+class TimeStopCallback {
  public:
-	TimeStopCallback(Engine* engine);
-	virtual ~TimeStopCallback();
-	void perform(EventType& event);
+  TimeStopCallback(Engine* engine);
+
+  virtual ~TimeStopCallback();
+
+  void perform(const Event& event);
+
  private:
-	bool mTimeOn;
-	Engine* mEngine;
+  bool mTimeOn;
+  Engine* mEngine;
 };
 
 } /* flf */

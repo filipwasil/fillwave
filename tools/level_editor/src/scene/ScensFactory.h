@@ -7,15 +7,15 @@
 
 namespace scene {
 class ScensFactory {
-public:
-  ScensFactory(int argc, char **argv);
+ public:
+  ScensFactory(int argc, char** argv);
 
   std::shared_ptr<scene::AScene> createScen(QString name, QMap<QString, QVariant> valueMap);
 
-private:
+ private:
   int mArgc;
-  char **mArgv;
-  QMap<QString, std::function<std::shared_ptr<scene::AScene>(int, char **, QMap<QString, QVariant>)>> mScens;
+  char** mArgv;
+  QMap<QString, std::function<std::shared_ptr<scene::AScene>(int, char**, QMap<QString, QVariant>)>> mScens;
 };
 }
 

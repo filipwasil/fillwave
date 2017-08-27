@@ -5,18 +5,18 @@ namespace flw {
 namespace flf {
 
 CameraMotionCallback::CameraMotionCallback(Engine* engine)
-	: Callback(EEventType::eTime), mTimePassed(0.0), mEngine(engine) {
+  : mTimePassed(0.0)
+  , mEngine(engine) {
 
 }
 
-void CameraMotionCallback::perform (EventType& event) {
-	mTimePassed += TimeEvent::getData(event).mTimePassed;
-	mEngine->getCurrentScene()->getCamera()->moveTo(calculateNewPosition(
-	         mTimePassed));
+void CameraMotionCallback::perform(const Event& event) {
+  mTimePassed += event.getData().mTime.mTimePassed;
+  mEngine->getCurrentScene()->getCamera()->moveTo(calculateNewPosition(mTimePassed));
 }
 
 glm::vec3 CameraMotionCallback::calculateNewPosition(float time) {
-	return glm::vec3(15 * sin(time), 15.0, 15 * cos(time));
+  return glm::vec3(15 * sin(time), 15.0, 15 * cos(time));
 }
 
 } /* framework */

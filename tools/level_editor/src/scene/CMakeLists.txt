@@ -4,7 +4,7 @@ set (SOURCESCENE
     ${CMAKE_CURRENT_SOURCE_DIR}/ScensFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/callbacks/StandardKeyboardEventHandler.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/callbacks/StandardMouseEventHandler.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/sceneImp/TextScene.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/sceneImp/EmptyScene.cpp
     PARENT_SCOPE
     )
 set (HEADERSSCENE
@@ -15,6 +15,6 @@ set (HEADERSSCENE
     ${CMAKE_CURRENT_SOURCE_DIR}/callbacks/IEventHandler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/callbacks/StandardKeyboardEventHandler.h
     ${CMAKE_CURRENT_SOURCE_DIR}/callbacks/StandardMouseEventHandler.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/sceneImp/TextScene.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/sceneImp/EmptyScene.h
     PARENT_SCOPE
     )

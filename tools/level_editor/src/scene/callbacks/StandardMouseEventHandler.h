@@ -1,22 +1,18 @@
 #pragma once
 
-#include <memory>
-#include <fillwave/Fillwave.h>
-#include <QtCore/QEvent>
-#include "IEventHandler.h"
+#include <QTreeView>
 //#include "common/SceneEventFactory.h"
 
 namespace scene {
 namespace callbacks {
-class StandardMouseEventHandler : public IEventHandler {
-public:
-  StandardMouseEventHandler(const std::shared_ptr<flw::Engine> &engine);
+class StandardMouseEventHandler : public QObject {
+ public:
+  StandardMouseEventHandler(QTreeView* tree, QObject* parent = nullptr);
 
-  void handle(QEvent *event) override;
+  bool eventFilter(QObject* watched, QEvent* event) override;
 
-private:
-  std::shared_ptr<flw::Engine> mEngine;
-  //common::SceneEventFactory mEventFactory;
+ private:
+  QTreeView* mTree;
 };
 
 }

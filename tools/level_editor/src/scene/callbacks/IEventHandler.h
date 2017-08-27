@@ -6,10 +6,11 @@ namespace scene {
 namespace callbacks {
 
 class IEventHandler {
-public:
-  virtual ~IEventHandler() = default;
+ public:
+  virtual ~IEventHandler() {
+  }
 
-  virtual void handle(QEvent *event) = 0;
+  virtual void handle(QEvent* event) = 0;
 
 };
 }

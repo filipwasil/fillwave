@@ -1,24 +1,32 @@
 #include "StandardMouseEventHandler.h"
 #include <QMouseEvent>
+#include <QModelIndex>
 
 namespace scene {
 namespace callbacks {
 
-StandardMouseEventHandler::StandardMouseEventHandler(const std::shared_ptr<flw::Engine> &engine)
-    : mEngine(engine) {
+StandardMouseEventHandler::StandardMouseEventHandler(QTreeView* tree, QObject* parent)
+  : QObject(parent)
+  , mTree(tree) {
 }
 
-void StandardMouseEventHandler::handle(QEvent *event) {
-  if (event->type() == QEvent::MouseMove) {
-    QMouseEvent *mouse = static_cast<QMouseEvent *>(event);
-    if (!(mouse->buttons() & Qt::RightButton)) {
-      return;
-    }
-    int x = mouse->x();
-    int y = mouse->y();
-    //auto cursorEvent = mEventFactory.getCursorPositionEvent(x, y);
-    //mEngine->insertInput(cursorEvent);
+bool StandardMouseEventHandler::eventFilter(QObject* watched, QEvent* event) {
+  if (event->type() != QEvent::MouseButtonRelease) {
+    return QObject::eventFilter(watched, event);
   }
+  QMouseEvent* mouse = static_cast<QMouseEvent*>(event);
+  if (!(mouse->button()) == Qt::LeftButton) {
+    return QObject::eventFilter(watched, event);
+  }
+  QModelIndex item = mTree->indexAt(mouse->pos());
+  bool selected = mTree->selectionModel()->isSelected(mTree->indexAt(mouse->pos()));
+
+  if ((item.row() == -1 && item.column() == -1)) {
+    mTree->clearSelection();
+    const QModelIndex index;
+    mTree->selectionModel()->setCurrentIndex(index, QItemSelectionModel::Select);
+  }
+
 }
 
 }

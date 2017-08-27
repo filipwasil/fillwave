@@ -1,19 +1,18 @@
 #include "ScensFactory.h"
 
 
-
 namespace scene {
 
 template <class T>
-std::function<std::shared_ptr<scene::AScene>(int, char **, QMap<QString, QVariant>)> factoryEntry()
-{
-  return [](int argc_, char ** argv_, QMap<QString, QVariant> mapa) {
+std::function<std::shared_ptr<scene::AScene>(int, char**, QMap<QString, QVariant>)> factoryEntry() {
+  return [](int argc_, char** argv_, QMap<QString, QVariant> mapa) {
     return std::make_shared<T>(argc_, argv_, mapa);
   };
 }
 
-ScensFactory::ScensFactory(int argc, char **argv)
-    : mArgc(argc), mArgv(argv) {
+ScensFactory::ScensFactory(int argc, char** argv)
+  : mArgc(argc)
+  , mArgv(argv) {
   /*mScens["Hello World"] = factoryEntry<scene::TextScene>();
   mScens["Animation"] = factoryEntry<scene::AnimationScene>();
   mScens["Specular lights"] = factoryEntry<scene::FullModelScene>();
