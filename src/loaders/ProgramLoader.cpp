@@ -38,8 +38,7 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/common/Strings.h>
 #include <fillwave/management/LightSystem.h>
-#include <fillwave/Log.h>
-
+#include <fstream>
 
 namespace flw {
 namespace flf {
@@ -1571,6 +1570,28 @@ void ProgramLoader::initDefaultUniforms(flc::Program *program) {
 ProgramLoader::ProgramLoader(Engine *engine)
     : mEngine(engine) {
 
+}
+
+flc::Program* ProgramLoader::getCustom(const std::string &fs, const std::string &vs) {
+  auto copy = [](const std::string &shaderPath) {
+    std::ifstream v (shaderPath.c_str());
+    std::string line, vss;
+    if (v.is_open())
+    {
+      while ( getline (v,line) )
+      {
+        vss +=  line + '\n';
+      }
+      v.close();
+    }
+    return vss;
+  };
+
+  flc::Program *p = mEngine->storeProgram("default_animated_dr", {
+      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag", copy(fs)),
+      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_animated.vert", copy(vs))
+  });
+  return p;
 }
 
 } /* flf */

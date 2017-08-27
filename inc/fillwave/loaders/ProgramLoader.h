@@ -115,6 +115,8 @@ public:
 
   flc::Program *getHUDCustomFragmentShader(const std::string &shaderPath);
 
+  flc::Program *getCustom(const std::string &fs, const std::string &vs);
+
   static void initDefaultUniforms(flc::Program *program);
 
 private:
