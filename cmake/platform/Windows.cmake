@@ -25,6 +25,7 @@ add_subdirectory (${FILLWAVE_EXT_SPDLOG_PATH})
 if (FILLWAVE_BUILD_QT_EDITOR)
     add_subdirectory (${FILLWAVE_EXAMPLE_EDITOR_PATH})
 endif()
+
 # -----------------------------------------------
 # Includes
 # -----------------------------------------------
@@ -50,6 +51,13 @@ include_directories(${FILLWAVE_INCLUDE_DIRECTORIES})
 # -----------------------------------------------
 
 add_library (fillwave STATIC ${FILLWAVE_SOURCES})
+
+add_custom_target (
+    copy_win
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/glew/Debug/glew64d.lib ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/glew/Debug/glew64d.dll ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/examples/data/ ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+)
 
 # -----------------------------------------------
 # Linker

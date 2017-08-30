@@ -142,6 +142,14 @@ if (FILLWAVE_TESTS)
 endif ()
 
 # -----------------------------------------------
+# Multiplatform examples
+# -----------------------------------------------
+
+if (FILLWAVE_BUILD_GLFW_EXAMPLES)
+  add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/examples/glfw)
+endif ()
+
+# -----------------------------------------------
 # Benchmarks
 # -----------------------------------------------
 
