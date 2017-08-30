@@ -83,10 +83,6 @@ if (FILLWAVE_BUILD_FREEGLUT_EXAMPLES)
   add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/examples/freeglut)
 endif ()
 
-if (FILLWAVE_BUILD_LINUX_EXAMPLES)
-  add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/examples/linux)
-endif ()
-
 if (FILLWAVE_BUILD_QT_EXAMPLES)
   add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/examples/qt)
 endif ()
