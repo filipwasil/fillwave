@@ -72,7 +72,7 @@ EmiterPointCPU::EmiterPointCPU(Engine *engine,
 
   ProgramLoader loader(engine);
 
-  mProgram = loader.getParticleCPU();
+  mProgram = loader.getProgram(EProgram::particleCPU);
 
   /* Fill buffers */
   GLfloat time = 0.0f; // start time
@@ -86,23 +86,23 @@ EmiterPointCPU::EmiterPointCPU(Engine *engine,
   velocities.reserve(3 * howMany);
   cameraDistanceTF.reserve(howMany);
 
-  for (GLuint i = 0; i < howMany; i++) {
+  for (GLuint i = 0; i < howMany; ++i) {
 
     times.push_back(time);
     time += 1.0f / lifetime;
-
+    const auto max = static_cast<GLfloat>( RAND_MAX );
     /* particles velocity */
-    GLfloat x = (((GLfloat) rand() / (GLfloat) RAND_MAX)) * robustnessVelocity.x * 1.0f - robustnessVelocity.x * 0.5f;
-    GLfloat y = (((GLfloat) rand() / (GLfloat) RAND_MAX)) * robustnessVelocity.y * 1.0f - robustnessVelocity.y * 0.5f;
-    GLfloat z = (((GLfloat) rand() / (GLfloat) RAND_MAX)) * robustnessVelocity.z * 1.0f - robustnessVelocity.z * 0.5f;
+    GLfloat x = (static_cast<GLfloat>(rand()) / max) * robustnessVelocity.x * 1.0f - robustnessVelocity.x * 0.5f;
+    GLfloat y = (static_cast<GLfloat>(rand()) / max) * robustnessVelocity.y * 1.0f - robustnessVelocity.y * 0.5f;
+    GLfloat z = (static_cast<GLfloat>(rand()) / max) * robustnessVelocity.z * 1.0f - robustnessVelocity.z * 0.5f;
     velocities.push_back(x);
     velocities.push_back(y);
     velocities.push_back(z);
 
     /* emiter surface shape */
-    x = ((GLfloat) rand() / (GLfloat) RAND_MAX) * robustnessPosition.x * 1.0f - robustnessPosition.x * 0.5f;
-    y = ((GLfloat) rand() / (GLfloat) RAND_MAX) * robustnessPosition.y * 1.0f - robustnessPosition.y * 0.5f;
-    z = ((GLfloat) rand() / (GLfloat) RAND_MAX) * robustnessPosition.z * 1.0f - robustnessPosition.z * 0.5f;
+    x = (static_cast<GLfloat>(rand()) / max) * robustnessPosition.x * 1.0f - robustnessPosition.x * 0.5f;
+    y = (static_cast<GLfloat>(rand()) / max) * robustnessPosition.y * 1.0f - robustnessPosition.y * 0.5f;
+    z = (static_cast<GLfloat>(rand()) / max) * robustnessPosition.z * 1.0f - robustnessPosition.z * 0.5f;
     positions.push_back(x);
     positions.push_back(y);
     positions.push_back(z);

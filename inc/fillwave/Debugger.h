@@ -35,7 +35,7 @@ namespace flc {
 class FramebufferGeometry;
 }
 
-enum class eDebuggerState {
+enum class EDebuggerState {
   eLightsSpot
   , eLightsSpotColor
   , eLightsSpotDepth
@@ -68,8 +68,8 @@ public:
   virtual ~Debugger() = default;
 
   /* State */
-  void setState(eDebuggerState state);
-  eDebuggerState getState();
+  void setState(EDebuggerState state);
+  EDebuggerState getState();
 
   /* Render */
   void prepareDebugWindow(GLint id = 0);
@@ -88,7 +88,7 @@ private:
 
   std::vector<DebugWindowInfo> mDebugWindows;
 
-  eDebuggerState mState;
+  EDebuggerState mState;
   flc::Program *mProgram;
   Engine *mEngine;
 

@@ -32,7 +32,7 @@
 #include <fillwave/PlatformSW.h>
 #include <string>
 
-#ifdef FILLWAVE_BUILD_RELEASE
+#ifdef FILLWAVE_COMPILATION_RELEASE
 
 #define FLOGINIT_DEFAULT()
 #define FLOGINIT_MASK(mask)
@@ -48,7 +48,7 @@
 #define fLogE(...) { }
 #define fLogC(...) { }
 
-#else /* FILLWAVE_BUILD_RELEASE */
+#else /* FILLWAVE_COMPILATION_RELEASE */
 
 //#include <fillwave/common/Strings.h>
 
@@ -190,4 +190,4 @@
 #define fLogD(...) fLogBase(FDEBUG, GPU_DEBUG, __VA_ARGS__)
 #define fLogW(...) fLogBase(FWARNING, GPU_WARN, __VA_ARGS__)
 
-#endif /* FILLWAVE_BUILD_RELEASE */
+#endif /* FILLWAVE_COMPILATION_RELEASE */

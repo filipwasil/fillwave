@@ -40,7 +40,7 @@ namespace flw {
 namespace flf {
 
 ColorPickingCallback::ColorPickingCallback(Engine *engine)
-    : Callback(eEventType::eTouch), mEngine(engine) {
+    : Callback(EEventType::eTouch), mEngine(engine) {
 
 }
 

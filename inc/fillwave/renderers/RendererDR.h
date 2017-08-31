@@ -99,7 +99,15 @@ private:
   LightSystem &mLights;
   TextureSystem &mTextures;
 
-  flc::Program *mProgramMain, *mProgramMainAnimated, *mProgramDirecionalLight, *mProgramSpotLight, *mProgramPointLight, *mProgramDepthless, *mProgramAmbient, *mProgramAOGeometry, *mProgramAOColor;
+  flc::Program* mProgramMain;
+  flc::Program* mProgramMainAnimated;
+  flc::Program* mProgramDirectionalLight;
+  flc::Program* mProgramSpotLight;
+  flc::Program* mProgramPointLight;
+  flc::Program* mProgramDepthless;
+  flc::Program* mProgramAmbient;
+  flc::Program* mProgramAOGeometry;
+  flc::Program* mProgramAOColor;
 
   puTexture2DRenderable mAOGeometryBuffer;
   puTexture2DRenderable mAOColorBuffer;
@@ -143,7 +151,7 @@ private:
   std::vector<IRenderable *> mAnimatedNodes; /* true -> animated, false -> not animated */
 };
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */
 
 #endif /* defined(FILLWAVE_GLES_3_0) */

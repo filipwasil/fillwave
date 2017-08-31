@@ -15,7 +15,7 @@ mkdir ../../fillwave_build
 cd ../../fillwave_build
 
 # Build library RPM
-cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF  -DFILLWAVE_SUPPRESS_WARNINGS=OFF -DFILLWAVE_BUILD_RPM=ON -DFILLWAVE_BUILD_DEB=OFF -DFILLWAVE_BUILD_DEV=OFF  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
+cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF  -DFILLWAVE_COMPILATION_SUPPRESS_WARNINGS=OFF -DFILLWAVE_BUILD_RPM=ON -DFILLWAVE_BUILD_DEB=OFF -DFILLWAVE_BUILD_DEV=OFF  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack
 
 # Build dev RPM
 cmake ../fillwave -G"Eclipse CDT4 - Unix Makefiles" -DNDEBUG=OFF -DFILLWAVE_BUILD_RPM=ON -DFILLWAVE_BUILD_DEB=OFF -DFILLWAVE_BUILD_DEV=ON  -D_ECLIPSE_VERSION="4.4" && make -j4 && cpack

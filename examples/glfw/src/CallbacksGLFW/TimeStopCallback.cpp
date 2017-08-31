@@ -14,7 +14,7 @@ namespace flw {
 namespace flf {
 
 TimeStopCallback::TimeStopCallback(Engine *engine)
-    : Callback(eEventType::eKey)
+    : Callback(EEventType::eKey)
     , mTimeOn(GL_TRUE)
     , mEngine(engine) {
 

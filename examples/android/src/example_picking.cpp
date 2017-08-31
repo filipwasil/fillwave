@@ -98,7 +98,7 @@ void perform(flw::Engine *engine) {
   entity1->moveBy(glm::vec3(-8.0, 4.0, 0.0));
   scene->attach(entity1);
 
-  engine->configureDebugger(eDebuggerState::pickingMap);
+  engine->configureDebugger(EDebuggerState::pickingMap);
   scene->registerPickable(beast_animated);
   scene->registerPickable(beast_animated1);
   scene->registerPickable(beast_animated2);

@@ -42,7 +42,7 @@ namespace flw {
 namespace flf {
 
 FPSCallback::FPSCallback(Engine *engine, pText text)
-    : Callback(eEventType::eTime)
+    : Callback(EEventType::eTime)
     , mText(text)
     , mEngine(engine) {
 

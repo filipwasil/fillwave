@@ -50,18 +50,19 @@ RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
     : mScreenSize(engine->getScreenSize())
     , mLights(engine->getLightSystem())
     , mTextures(engine->getTextureSystem())
-    , mProgramMain(loader.getDefaultDR())
-    , mProgramMainAnimated(loader.getDefaultBonesDR())
-    , mProgramDirecionalLight(loader.getDRDirectionalLights())
-    , mProgramSpotLight(loader.getDRSpotLights())
-    , mProgramPointLight(loader.getDRPointLights())
-    , mProgramDepthless(loader.getDRDepthless())
-    , mProgramAmbient(loader.getDRAmbient())
-    , mProgramAOGeometry(loader.getAmbientOcclusionGeometry())
-    , mProgramAOColor(loader.getAmbientOcclusionColor())
+    , mProgramMain(loader.getProgram(EProgram::basicDR))
+    , mProgramMainAnimated(loader.getProgram(EProgram::basicAnimatedDR))
+    , mProgramDirectionalLight(loader.getProgram(EProgram::directionalLightsDR))
+    , mProgramSpotLight(loader.getProgram(EProgram::spotLightsDR))
+    , mProgramPointLight(loader.getProgram(EProgram::pointLightsDR))
+    , mProgramDepthless(loader.getProgram(EProgram::depthlessDR))
+    , mProgramAmbient(loader.getProgram(EProgram::ambientDR))
+    , mProgramAOGeometry(loader.getProgram(EProgram::ambientOcclusionGeometry))
+    , mProgramAOColor(loader.getProgram(EProgram::ambientOcclusionColor))
     , mAOGeometryBuffer(engine->storeTextureRenderable())
     , mAOColorBuffer(engine->storeTextureRenderable())
-    , mIsAO(GL_FALSE), mDeferredColorAttachments(5)
+    , mIsAO(GL_FALSE)
+    , mDeferredColorAttachments(5)
     , mDeferredDepthAttachments(1)
     , mGBuffer(std::make_unique<flc::FramebufferGeometry>(mTextures,
                                                           mScreenSize[0],
@@ -70,10 +71,10 @@ RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
                                                           mDeferredDepthAttachments)) {
   //todo RendererDR not ready
   flf::Sphere sphere(3.0f, 10, 10); //xxx hardcoded values fix ! todo !
-  std::vector<flc::VertexBasic> vertices = sphere.getVertices();
-  std::vector<GLuint> indices = sphere.getIndices();
+  auto vertices = sphere.getVertices();
+  auto indices = sphere.getIndices();
 
-  flc::VertexArray *vao = new flc::VertexArray();
+  auto vao = new flc::VertexArray();
   mDeferredPointLight = std::make_unique<Mesh>(engine,
                                                Material(),
                                                nullptr,
@@ -82,7 +83,7 @@ RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
                                                mProgramPointLight,
                                                nullptr,
                                                nullptr,
-                                               loader.getOcclusionQuery(),
+                                               loader.getProgram(EProgram::occlusionQuery),
                                                nullptr,
                                                nullptr,
                                                mLights,
@@ -131,7 +132,7 @@ void RendererDR::reset(GLuint width, GLuint height) {
   mProgramSpotLight->use();
   flc::Uniform::push(mULCScreenSizeSpot, screenSizeF);
 
-  mProgramDirecionalLight->use();
+  mProgramDirectionalLight->use();
   flc::Uniform::push(mULCScreenSizeDirectional, screenSizeF);
 
   mProgramPointLight->use();
@@ -255,8 +256,8 @@ inline void RendererDR::drawLightsSpotPass(ICamera &camera, GLint &textureUnit) 
 inline void RendererDR::drawLightsDirectionalPass(ICamera &camera, GLint &textureUnit) {
   for (size_t i = 0; i < mLights.mLightsDirectional.size(); i++) {
 
-    mProgramDirecionalLight->use();
-    mLights.updateDeferredBufferDirectional(i, mProgramDirecionalLight, textureUnit++);
+    mProgramDirectionalLight->use();
+    mLights.updateDeferredBufferDirectional(i, mProgramDirectionalLight, textureUnit++);
 
     flc::Uniform::push(mULCCameraPositionDirectional, camera.getTranslation());
     flc::Uniform::push(mULCIsAODirectional, mIsAO ? 1 : 0);
@@ -340,13 +341,13 @@ inline void RendererDR::drawColorPassEnd() {
 }
 
 inline void RendererDR::initUniforms() {
-  mProgramDirecionalLight->use();
-  mProgramDirecionalLight->uniformPush("uWorldPositionAttachment", FILLWAVE_POSITION_ATTACHMENT);
-  mProgramDirecionalLight->uniformPush("uDiffuseTexelAttachment", FILLWAVE_DIFFUSE_ATTACHMENT);
-  mProgramDirecionalLight->uniformPush("uNormalAttachment", FILLWAVE_NORMAL_ATTACHMENT);
-  mProgramDirecionalLight->uniformPush("uSpecularTexelAttachment", FILLWAVE_SPECULAR_ATTACHMENT);
-  mProgramDirecionalLight->uniformPush("uScreenSize", mScreenSize);
-  mProgramDirecionalLight->uniformPush("uAOMap", FILLWAVE_AO_UNIT);
+  mProgramDirectionalLight->use();
+  mProgramDirectionalLight->uniformPush("uWorldPositionAttachment", FILLWAVE_POSITION_ATTACHMENT);
+  mProgramDirectionalLight->uniformPush("uDiffuseTexelAttachment", FILLWAVE_DIFFUSE_ATTACHMENT);
+  mProgramDirectionalLight->uniformPush("uNormalAttachment", FILLWAVE_NORMAL_ATTACHMENT);
+  mProgramDirectionalLight->uniformPush("uSpecularTexelAttachment", FILLWAVE_SPECULAR_ATTACHMENT);
+  mProgramDirectionalLight->uniformPush("uScreenSize", mScreenSize);
+  mProgramDirectionalLight->uniformPush("uAOMap", FILLWAVE_AO_UNIT);
 
   mProgramSpotLight->use();
   mProgramSpotLight->uniformPush("uWorldPositionAttachment", FILLWAVE_POSITION_ATTACHMENT);
@@ -383,11 +384,11 @@ inline void RendererDR::initUniformsCache() {
   mULCShadowUnitSpot = mProgramSpotLight->getUniformLocation("uShadowUnit");
   mULCIsAOSpot = mProgramSpotLight->getUniformLocation("uIsAO");
 
-  mULCCameraPositionDirectional = mProgramDirecionalLight->getUniformLocation("uCameraPosition");
-  mULCAmbientIntensityDirectional = mProgramDirecionalLight->getUniformLocation("uAmbientIntensity");
-  mULCScreenSizeDirectional = mProgramDirecionalLight->getUniformLocation("uScreenSize");
-  mULCShadowUnitDirectional = mProgramDirecionalLight->getUniformLocation("uShadowUnit");
-  mULCIsAODirectional = mProgramDirecionalLight->getUniformLocation("uIsAO");
+  mULCCameraPositionDirectional = mProgramDirectionalLight->getUniformLocation("uCameraPosition");
+  mULCAmbientIntensityDirectional = mProgramDirectionalLight->getUniformLocation("uAmbientIntensity");
+  mULCScreenSizeDirectional = mProgramDirectionalLight->getUniformLocation("uScreenSize");
+  mULCShadowUnitDirectional = mProgramDirectionalLight->getUniformLocation("uShadowUnit");
+  mULCIsAODirectional = mProgramDirectionalLight->getUniformLocation("uIsAO");
 
   mULCCameraPositionPoint = mProgramPointLight->getUniformLocation("uCameraPosition");
   mULCMVPPoint = mProgramPointLight->getUniformLocation("uMVP");

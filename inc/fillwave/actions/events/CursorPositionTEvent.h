@@ -40,7 +40,7 @@ namespace flf {
 struct CursorPositionEventData {
   double xPosition;
   double yPosition;
-  const eEventType type = eEventType::eCursorPosition;
+  const EEventType type = EEventType::eCursorPosition;
 };
 
 /*! \struct CursorPositionEvent

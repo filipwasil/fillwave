@@ -39,7 +39,7 @@ namespace flf {
 
 struct TimeEventData {
   float mTimePassed;
-  const eEventType type = eEventType::eTime;
+  const EEventType type = EEventType::eTime;
 };
 
 /*! \class TimeEvent

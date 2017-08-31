@@ -6,13 +6,13 @@
 namespace flw {
 namespace flf {
 
-MoveCameraCallback::MoveCameraCallback(Engine *engine, eEventType eventType, float speed)
+MoveCameraCallback::MoveCameraCallback(Engine *engine, EEventType eventType, float speed)
     : Callback(eventType), mSpeed(speed), mEngine(engine) {
 
 }
 
 void MoveCameraCallback::perform(EventType &event) {
-  if (event.getType() == eEventType::eKey) {
+  if (event.getType() == EEventType::eKey) {
     KeyboardEventData e = KeyboardEvent::getData(event);
     switch (e.key) {
       case Qt::Key_W:
@@ -23,11 +23,11 @@ void MoveCameraCallback::perform(EventType &event) {
         break;
       case Qt::Key_D:
         if (e.action == QEvent::KeyRelease) {
-          mEngine->configDebugger(eDebuggerState::eToggleState);
+          mEngine->configDebugger(EDebuggerState::eToggleState);
         }
         break;
     }
-  } else if (event.getType() == eEventType::eCursorPosition) {
+  } else if (event.getType() == EEventType::eCursorPosition) {
     static bool init = false;
     static int  a = 0;
     auto d = [](double value) {

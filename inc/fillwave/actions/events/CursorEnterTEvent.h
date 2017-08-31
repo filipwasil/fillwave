@@ -39,7 +39,7 @@ namespace flf {
 
 struct CursorEnterEventData {
   int direction;
-  const eEventType type = eEventType::eCursorEnter;
+  const EEventType type = EEventType::eCursorEnter;
 };
 
 /*! \struct CursorEnterEvent

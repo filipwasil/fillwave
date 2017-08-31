@@ -6,7 +6,7 @@ namespace flw {
 namespace flf {
 
 TimeStopCallback::TimeStopCallback(Engine *engine)
-    : Callback(eEventType::eKey), mTimeOn(GL_TRUE), mEngine(engine) {
+    : Callback(EEventType::eKey), mTimeOn(GL_TRUE), mEngine(engine) {
 
 }
 

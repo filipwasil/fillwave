@@ -29,6 +29,7 @@
 */
 
 #include <fillwave/core/pipeline/Program.h>
+#include <fillwave/loaders/ProgramLoaderTypes.h>
 #include <fillwave/loaders/ShaderLoader.h>
 
 namespace flw {
@@ -45,83 +46,19 @@ public:
 
   virtual ~ProgramLoader() = default;
 
-  flc::Program *getDefault();
+  flc::Program* getProgram(EProgram program);
 
-  flc::Program *getDefaultBones();
+  flc::Program* getQuadCustomFragmentShader(const std::string &shaderPath);
 
-  flc::Program *getDefaultDR();
+  flc::Program* getHUDCustomFragmentShader(const std::string &shaderPath);
 
-  flc::Program *getDefaultFR();
-
-  flc::Program *getDefaultBonesDR();
-
-  flc::Program *getDefaultBonesFR();
-
-  flc::Program *getShadow();
-
-  flc::Program *getShadowColorCoded();
-
-  flc::Program *getShadowWithAnimation();
-
-  flc::Program *getShadowColorCodedWithAnimation();
-
-  flc::Program *getDebugger();
-
-  flc::Program *getSkybox();
-
-  flc::Program *getSkyboxDR();
-
-  flc::Program *getHUD();
-
-  flc::Program *getText();
-
-  flc::Program *getTextBold();
-
-  flc::Program *getParticleGPUEmiter();
-
-  flc::Program *getParticleGPU();
-
-  flc::Program *getParticleCPU();
-
-  flc::Program *getParticleCPUNoDepthText();
-
-  flc::Program *getQuad();
-
-  flc::Program *getQuadCustomFragmentShaderStartup();
-
-  flc::Program *getCursor();
-
-  flc::Program *getDRAmbient();
-
-  flc::Program *getAmbientOcclusionGeometry();
-
-  flc::Program *getAmbientOcclusionColor();
-
-  flc::Program *getOcclusionPureQuery();
-
-  flc::Program *getOcclusionQuery();
-
-  flc::Program *getOcclusionOptimizedQuery();
-
-  flc::Program *getDRDepthless();
-
-  flc::Program *getDRDirectionalLights();
-
-  flc::Program *getDRSpotLights();
-
-  flc::Program *getDRPointLights();
-
-  flc::Program *getQuadCustomFragmentShader(const std::string &shaderPath);
-
-  flc::Program *getHUDCustomFragmentShader(const std::string &shaderPath);
-
-  flc::Program *getCustom(const std::string &fs, const std::string &vs);
+  flc::Program* getCustom(const std::string &fs, const std::string &vs);
 
   static void initDefaultUniforms(flc::Program *program);
 
 private:
 
-  Engine *mEngine;
+  Engine* mEngine;
 
   const char *mFeedbackVaryingsGPUEmiter[6];
 };

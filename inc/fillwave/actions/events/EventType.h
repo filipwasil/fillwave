@@ -30,7 +30,7 @@
 
 namespace flw {
 
-enum class eEventType {
+enum class EEventType {
   eMouseButton
   , eCursorPosition
   , eCursorEnter
@@ -69,18 +69,18 @@ namespace flf {
 
 class EventType {
 public:
-  EventType(eEventType type)
+  EventType(EEventType type)
       : mType(type) {
   }
 
   virtual ~EventType() = default;
 
-  eEventType getType() {
+  EEventType getType() {
     return mType;
   }
 
 private:
-  eEventType mType;
+  EEventType mType;
 };
 
 } /* flf */

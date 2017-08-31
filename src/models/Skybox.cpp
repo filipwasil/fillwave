@@ -48,8 +48,8 @@ Skybox::Skybox(Engine *engine, flc::Texture3D *texture)
 
   ProgramLoader loader(engine);
 
-  mProgram = loader.getSkybox();
-  mProgramDR = loader.getSkyboxDR();
+  mProgram = loader.getProgram(EProgram::skybox);
+  mProgramDR = loader.getProgram(EProgram::skyboxDR);
 
   SphereSkybox sphere(1.0f, 10, 10);
 

@@ -3,7 +3,7 @@
 namespace flw {
 namespace flf {
 
-AnimationKeyboardCallback::AnimationKeyboardCallback(Entity *entity, eEventType EventType)
+AnimationKeyboardCallback::AnimationKeyboardCallback(Entity *entity, EEventType EventType)
     : Callback(EventType), mEntity(entity) {
 }
 

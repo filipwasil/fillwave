@@ -48,7 +48,7 @@ Text::Text(const std::string &text,
     GLfloat scale,
     Font *font,
     glm::vec4 color,
-    eTextEffect effect)
+    ETextEffect effect)
     : IReloadable(engine)
     , IHUDNode(texture, createProgram(engine, effect), position, glm::vec2(scale, scale))
     , mText(text)
@@ -183,13 +183,13 @@ void Text::createVBO() {
   initVAO();
 }
 
-inline flc::Program *Text::createProgram(Engine *engine, eTextEffect effect) {
+inline flc::Program *Text::createProgram(Engine *engine, ETextEffect effect) {
   switch (effect) {
-    case eTextEffect::eBold:
-      return ProgramLoader(engine).getTextBold();
-    case eTextEffect::eNone:
+    case ETextEffect::eBold:
+      return ProgramLoader(engine).getProgram(EProgram::textBold);
+    case ETextEffect::eNone:
     default:
-      return ProgramLoader(engine).getText();
+      return ProgramLoader(engine).getProgram(EProgram::text);
   }
 }
 

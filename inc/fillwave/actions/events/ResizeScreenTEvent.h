@@ -40,7 +40,7 @@ namespace flf {
 struct ResizeScreenEventData {
   unsigned int width;
   unsigned int height;
-  const eEventType type = eEventType::eResizeScreen;
+  const EEventType type = EEventType::eResizeScreen;
 };
 
 /*! \struct ResizeScreenEvent

@@ -47,7 +47,7 @@ namespace flf {
 
 Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
   : IReloadable(engine)
-  , mState(eDebuggerState::eOff)
+  , mState(EDebuggerState::eOff)
   , mEngine(engine)
   , mVBO(mEngine->storeBuffer<flc::VertexBufferDebug>(mVAO, 1.0f))
   , mMiniwindowsOccupied(0) {
@@ -74,7 +74,7 @@ Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
 
   ProgramLoader loader(engine);
 
-  mProgram = loader.getDebugger();
+  mProgram = loader.getProgram(EProgram::debugger);
 
   initPipeline();
   initVBO();
@@ -82,32 +82,32 @@ Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
   initUniformsCache();
 }
 
-void Debugger::setState(eDebuggerState state) {
-  if (state == eDebuggerState::eToggleState) {
+void Debugger::setState(EDebuggerState state) {
+  if (state == EDebuggerState::eToggleState) {
     switch (mState) {
-      case eDebuggerState::eLightsSpot:
-        mState = eDebuggerState::eLightsSpotDepth;
+      case EDebuggerState::eLightsSpot:
+        mState = EDebuggerState::eLightsSpotDepth;
         break;
-      case eDebuggerState::eLightsSpotDepth:
-        mState = eDebuggerState::eLightsSpotColor;
+      case EDebuggerState::eLightsSpotDepth:
+        mState = EDebuggerState::eLightsSpotColor;
         break;
-      case eDebuggerState::eLightsSpotColor:
-        mState = eDebuggerState::eLightsPoint;
+      case EDebuggerState::eLightsSpotColor:
+        mState = EDebuggerState::eLightsPoint;
         break;
-      case eDebuggerState::eLightsPoint:
-        mState = eDebuggerState::eLightsPointDepth;
+      case EDebuggerState::eLightsPoint:
+        mState = EDebuggerState::eLightsPointDepth;
         break;
-      case eDebuggerState::eLightsPointDepth:
-        mState = eDebuggerState::eLightsPointColor;
+      case EDebuggerState::eLightsPointDepth:
+        mState = EDebuggerState::eLightsPointColor;
         break;
-      case eDebuggerState::eLightsPointColor:
-        mState = eDebuggerState::ePickingMap;
+      case EDebuggerState::eLightsPointColor:
+        mState = EDebuggerState::ePickingMap;
         break;
-      case eDebuggerState::ePickingMap:
-        mState = eDebuggerState::eOff;
+      case EDebuggerState::ePickingMap:
+        mState = EDebuggerState::eOff;
         break;
-      case eDebuggerState::eOff:
-        mState = eDebuggerState::eLightsSpot;
+      case EDebuggerState::eOff:
+        mState = EDebuggerState::eLightsSpot;
         break;
       default:
         break;
@@ -117,7 +117,7 @@ void Debugger::setState(eDebuggerState state) {
   }
 }
 
-eDebuggerState Debugger::getState() {
+EDebuggerState Debugger::getState() {
   return mState;
 }
 

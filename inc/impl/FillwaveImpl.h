@@ -109,7 +109,7 @@ struct Engine::EngineImpl final {
   puLightSystem mLights;
   puTextureSystem mTextures;
   std::vector<flc::PostProcessingPass> mPostProcessingPasses;
-  flc::Program *mProgramTextureLookup;
+  flc::Program* mProgramTextureLookup;
 
   /* Fences and barriers */
   puFence mFence;
@@ -120,7 +120,7 @@ struct Engine::EngineImpl final {
   flc::VertexArray *mVAOOcclusion;
 
   /* Inputs - callbacks */
-  std::map<eEventType, std::vector<puCallback> > mCallbacks;
+  std::map<EEventType, std::vector<puCallback>> mCallbacks;
 
   /* Inputs - focus */
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
@@ -167,7 +167,7 @@ struct Engine::EngineImpl final {
 
   void attachCallback(puCallback &&callback);
   void detachCallbacks();
-  void detachCallbacks(eEventType eventType);
+  void detachCallbacks(EEventType eventType);
   void detachCallback(flf::Callback *callback);
 
   /* Evaluation */
@@ -321,10 +321,10 @@ inline void Engine::EngineImpl::initManagement() {
 
 inline void Engine::EngineImpl::initPipelines() {
   /* OT */
-  mProgramOcclusionBox = mProgramLoader.getOcclusionOptimizedQuery();
+  mProgramOcclusionBox = mProgramLoader.getProgram(flf::EProgram::occlusionOptimizedQuery);
 
   /* T */
-  mProgramTextureLookup = mProgramLoader.getQuad();
+  mProgramTextureLookup = mProgramLoader.getProgram(flf::EProgram::quad);
 }
 
 inline void Engine::EngineImpl::initUniforms() {
@@ -347,7 +347,7 @@ inline void Engine::EngineImpl::initOcclusionTest() {
 
 inline void Engine::EngineImpl::initStartup() {
 
-  flc::Program *program = mProgramLoader.getQuadCustomFragmentShaderStartup();
+  flc::Program *program = mProgramLoader.getProgram(flf::EProgram::quadCustomFragmentShaderStartup);
 
   program->use();
   program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
@@ -363,17 +363,17 @@ inline void Engine::EngineImpl::initStartup() {
 
   fLogD("Post processing startup pass added");
 
-  mStartupTexture = mTextures->get("logo.png", flf::eCompression::eNone);
+  mStartupTexture = mTextures->get("logo.png", flf::ECompression::eNone);
   if (mStartupTexture) {
     return;
   }
 
-  mStartupTexture = mTextures->get("textures/logo.png", flf::eCompression::eNone);
+  mStartupTexture = mTextures->get("textures/logo.png", flf::ECompression::eNone);
   if (mStartupTexture) {
     return;
   }
 
-  mStartupTexture = mTextures->get("64_64_64.color", flf::eCompression::eNone);
+  mStartupTexture = mTextures->get("64_64_64.color", flf::ECompression::eNone);
   fLogE("Fillwave startup logo could not be executed");
 }
 
@@ -411,8 +411,6 @@ void Engine::EngineImpl::reload() {
 
   mPickingPixelBuffer->reload();
   reloadPickingBuffer();
-
-//	mScene->resetRenderer(); xxx remove ?
 }
 
 inline void Engine::EngineImpl::reloadPickingBuffer() {
@@ -737,7 +735,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
   GLint mCurentTextureUnit = 0;
   GLint id = 0;
   switch (mDebugger->getState()) {
-    case eDebuggerState::eLightsSpot:
+    case EDebuggerState::eLightsSpot:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
         mDebugger->renderFromCamera(*(mLights->mLightsSpot[i]->getShadowCamera()), mCurentTextureUnit++);
@@ -753,7 +751,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
         mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
       }
       break;
-    case eDebuggerState::eLightsSpotDepth:
+    case EDebuggerState::eLightsSpotDepth:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
         mDebugger->renderDepthPerspective(mCurentTextureUnit++);
@@ -762,7 +760,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
         mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
       }
       break;
-    case eDebuggerState::eLightsSpotColor:
+    case EDebuggerState::eLightsSpotColor:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
         mDebugger->renderFromCamera(*(mLights->mLightsSpot[i]->getShadowCamera()), mCurentTextureUnit++);
@@ -771,11 +769,11 @@ inline void Engine::EngineImpl::evaluateDebugger() {
         mDebugger->renderFromCamera(*(mLights->mLightsDirectional[i]->getShadowCamera()), mCurentTextureUnit++);
       }
       break;
-    case eDebuggerState::eLightsPoint:
+    case EDebuggerState::eLightsPoint:
       break;
-    case eDebuggerState::eLightsPointDepth: // only light 0
+    case EDebuggerState::eLightsPointDepth: // only light 0
       break;
-    case eDebuggerState::eLightsPointColor:
+    case EDebuggerState::eLightsPointColor:
       for (size_t j = 0; j < mLights->mLightsPoint.size(); j++) {
         for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X; i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
           flf::CameraPerspective cameraPF = *(mLights->mLightsPoint[j]->getShadowCamera(i));
@@ -783,10 +781,10 @@ inline void Engine::EngineImpl::evaluateDebugger() {
         }
       }
       break;
-    case eDebuggerState::ePickingMap:
+    case EDebuggerState::ePickingMap:
       mDebugger->renderPickingMap();
       break;
-    case eDebuggerState::eOff:
+    case EDebuggerState::eOff:
     default:
       break;
   }
@@ -846,14 +844,14 @@ inline void Engine::EngineImpl::detachCallbacks() {
   mCallbacks.clear();
 }
 
-inline void Engine::EngineImpl::detachCallbacks(eEventType eventType) {
+inline void Engine::EngineImpl::detachCallbacks(EEventType eventType) {
   if (mCallbacks.find(eventType) != mCallbacks.end()) {
     mCallbacks[eventType].clear();
   }
 }
 
 void Engine::EngineImpl::detachCallback(flf::Callback *callback) {
-  eEventType e = callback->getEventType();
+  EEventType e = callback->getEventType();
   std::vector<puCallback> *callbacks = &mCallbacks[e];
   callbacks->erase(remove_if( // Selectively remove elements in the second vector...
       callbacks->begin(), callbacks->end(), [&](puCallback const &p) {

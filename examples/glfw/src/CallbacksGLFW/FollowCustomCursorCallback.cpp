@@ -11,7 +11,7 @@ namespace flw {
 namespace flf {
 
 FollowCustomCursorCallback::FollowCustomCursorCallback(Engine *engine)
-    : Callback(eEventType::eCursorPosition)
+    : Callback(EEventType::eCursorPosition)
     , mEngine(engine) {
 
 }

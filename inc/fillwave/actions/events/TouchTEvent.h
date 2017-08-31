@@ -41,7 +41,7 @@ struct TouchEventData {
   int xPos;
   int yPos;
   int action;
-  const eEventType type = eEventType::eTouch;
+  const EEventType type = EEventType::eTouch;
 };
 
 /*! \struct TouchEvent

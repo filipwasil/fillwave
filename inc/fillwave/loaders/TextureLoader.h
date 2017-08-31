@@ -35,7 +35,7 @@
 namespace flw {
 namespace flf {
 
-enum class eFlip {
+enum class EFlip {
   eNone
   , eHorizontal
   , eVertical
@@ -66,7 +66,7 @@ enum class eFlip {
 //GL_COMPRESSED_RGBA_S3TC_DXT3_EXT
 //GL_COMPRESSED_RGBA_S3TC_DXT5_EXT
 
-enum class eCompression {
+enum class ECompression {
   eNone
   , eGeneric_r
   , eGeneric_rg
@@ -99,10 +99,10 @@ public:
   virtual ~TextureLoader() = default;
 
   flc::Texture2DFile* load(const std::string &filePath,
-      eFlip flip = eFlip::eNone,
+      EFlip flip = EFlip::eNone,
       GLenum format = GL_RGBA,
       std::string rootPath = "",
-      eCompression compression = eCompression::eNone);
+      ECompression compression = ECompression::eNone);
 
   flc::Texture2DFile* loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format = GL_RGBA);
 
@@ -119,7 +119,7 @@ public:
 private:
   GLint getBytesPerPixel(GLenum format);
 
-  GLenum getCompression(eCompression compression);
+  GLenum getCompression(ECompression compression);
 };
 
 } /* flw */

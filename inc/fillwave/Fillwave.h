@@ -87,7 +87,7 @@ public:
   virtual ~Engine();
 
   /* Configuration */
-  void configDebugger(eDebuggerState state);
+  void configDebugger(EDebuggerState state);
   void configFileLogging(std::string fileName = "");
   void configFPSCounter(std::string fontName = "", glm::vec2 position = glm::vec2(-0.95, 0.95), GLfloat size = 100.0);
   void configBackgroundColor(glm::vec3 color);
@@ -140,7 +140,7 @@ public:
   flc::Program * storeProgram(const std::string &name, const std::vector<flc::Shader *> &shaders, bool isSkipLinking = false);
 
   /* Store textures */
-  flc::Texture2D *storeTexture(const std::string &path, flf::eCompression com = flf::eCompression::eNone);
+  flc::Texture2D *storeTexture(const std::string &path, flf::ECompression com = flf::ECompression::eNone);
 
   flc::Texture2DRenderable *storeTextureRenderable();
 
@@ -167,7 +167,7 @@ public:
       glm::vec2 position,
       GLfloat scale = 1.0f,
       glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
-      eTextEffect effect = eTextEffect::eNone);
+      ETextEffect effect = ETextEffect::eNone);
 
   /* Store sampler */
   flc::Sampler *storeSO(GLint textureUnit);
@@ -219,7 +219,7 @@ public:
   void insertResizeScreen(GLuint width, GLuint height);
   void attachCallback(puCallback &&callback, flf::IFocusable *focusable = nullptr);
   void detachCallback(flf::Callback *callback);
-  void detachCallbacks(eEventType eventType);
+  void detachCallbacks(EEventType eventType);
   void detachCallbacks();
   void reload();
 

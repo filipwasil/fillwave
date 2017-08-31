@@ -70,11 +70,11 @@ public:
   GLenum mFormat;
 };
 
-/*! \enum eMemoryAllocation
+/*! \enum EMemoryAllocation
  * \brief Stores the type of memory free method
  */
 
-enum class eMemoryAllocation {
+enum class EMemoryAllocation {
   eMallock
   , eNew
   , eNone
@@ -89,7 +89,7 @@ public:
   Texture2DFileHeader mHeader;
   Texture2DFileConfig mConfig;
   GLubyte* mData;
-  eMemoryAllocation mAllocation = eMemoryAllocation::eNone;
+  EMemoryAllocation mAllocation = EMemoryAllocation::eNone;
 
   virtual ~Texture2DFile();
 };

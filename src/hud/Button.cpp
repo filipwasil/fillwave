@@ -41,7 +41,7 @@ namespace flf {
 
 Button::Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm::vec2 scale)
     : IHUDNode(texture,
-               ProgramLoader(engine).getHUD(),
+               ProgramLoader(engine).getProgram(EProgram::hud),
                position,
                glm::vec2(scale.x, scale.y * engine->getScreenAspectRatio())) {
 

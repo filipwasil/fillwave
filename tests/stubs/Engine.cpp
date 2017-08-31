@@ -28,7 +28,7 @@ Engine::~Engine() {
 
 }
 
-flc::Texture2D *Engine::storeTexture(const std::string & /*texturePath*/, flf::eCompression /*compression*/) {
+flc::Texture2D *Engine::storeTexture(const std::string & /*texturePath*/, flf::ECompression /*compression*/) {
   return nullptr;
 }
 

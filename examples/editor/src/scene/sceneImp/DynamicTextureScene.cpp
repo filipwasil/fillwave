@@ -49,9 +49,9 @@ void DynamicTextureScene::init() {
 
   /* Engine callbacks */
   mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
-  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
+  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
 	mEngine->attachCallback(make_unique<MoveCameraCallback>(
-			mEngine.get(), eEventType::eCursorPosition, 0.01));
+			mEngine.get(), EEventType::eCursorPosition, 0.01));
 
   auto model = make_unique<Model>(mEngine.get(),
                                   ProgramLoader(mEngine.get()).getDefault(),

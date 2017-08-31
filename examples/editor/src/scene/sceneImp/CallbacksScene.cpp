@@ -26,7 +26,7 @@ void CallbacksScene::init() {
 
   /* Engine callbacks */
   mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
-  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
+  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
 
   flc::Program *p = ProgramLoader(mEngine.get()).getDefault();
 

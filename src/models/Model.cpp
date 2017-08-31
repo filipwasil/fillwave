@@ -78,9 +78,9 @@ Model::Model(Engine *engine,
                                 program,
                                 mProgramShadow,
                                 mProgramShadowColor,
-                                loader.getOcclusionOptimizedQuery(),
-                                loader.getAmbientOcclusionGeometry(),
-                                loader.getAmbientOcclusionColor(),
+                                loader.getProgram(EProgram::occlusionOptimizedQuery),
+                                loader.getProgram(EProgram::ambientOcclusionGeometry),
+                                loader.getProgram(EProgram::ambientOcclusionColor),
                                 engine->getLightSystem(),
                                 engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices),
                                 engine->storeBuffer<flc::IndexBuffer>(vao, indices),
@@ -417,9 +417,9 @@ puMesh Model::loadMesh(const aiMesh *shape,
                                 mProgram,
                                 mProgramShadow,
                                 mProgramShadowColor,
-                                loader.getOcclusionOptimizedQuery(),
-                                loader.getAmbientOcclusionGeometry(),
-                                loader.getAmbientOcclusionColor(),
+                                loader.getProgram(EProgram::occlusionOptimizedQuery),
+                                loader.getProgram(EProgram::ambientOcclusionGeometry),
+                                loader.getProgram(EProgram::ambientOcclusionColor),
                                 engine->getLightSystem(),
                                 vbo,
                                 ibo,
@@ -542,13 +542,13 @@ inline void Model::initShadowing(Engine *engine) {
   ProgramLoader loader(engine);
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   if (mAnimator) {
-    mProgramShadow = loader.getShadowWithAnimation();
-    mProgramShadowColor = loader.getShadowColorCodedWithAnimation();
+    mProgramShadow = loader.getProgram(EProgram::shadowWithAnimation);
+    mProgramShadowColor = loader.getProgram(EProgram::shadowColorCodedWithAnimation);
     return;
   }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-  mProgramShadow = loader.getShadow();
-  mProgramShadowColor = loader.getShadowColorCoded();
+  mProgramShadow = loader.getProgram(EProgram::shadow);
+  mProgramShadowColor = loader.getProgram(EProgram::shadowColorCoded);
 }
 
 void Model::handleFocusEvent(EventType &event) {

@@ -39,7 +39,7 @@
 namespace flw {
 class Engine;
 
-enum class eTextEffect {
+enum class ETextEffect {
   eNone
   , eBold
 };
@@ -59,7 +59,7 @@ public:
       GLfloat scale,
       Font *font,
       glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
-      eTextEffect effect = eTextEffect::eNone);
+      ETextEffect effect = ETextEffect::eNone);
 
   ~Text() override = default;
 
@@ -79,7 +79,7 @@ private:
   /* Text */
   std::string mText;
   glm::vec4 mColor;
-  eTextEffect mEffect;
+  ETextEffect mEffect;
   Font *mFont;
   flc::VertexBufferText *mVBO;
 
@@ -88,7 +88,7 @@ private:
   GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
   GLint mViewportWidth, mViewportHeight;
 
-  flc::Program *createProgram(Engine *engine, eTextEffect effect);
+  flc::Program *createProgram(Engine *engine, ETextEffect effect);
 
   void createVBO();
 

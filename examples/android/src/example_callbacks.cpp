@@ -20,7 +20,7 @@ void perform(flw::Engine *engine) {
   /* Camera */
   space::CameraPerspective gCamera(glm::vec3(0.0, 0.0, 6.0), glm::quat(), glm::radians(90.0), 1.0, 0.1, 1000.0);
 
-  engine->configureDebugger(eDebuggerState::eLightsSpot);
+  engine->configureDebugger(EDebuggerState::eLightsSpot);
 
   const GLuint SPHERES = 5;
   pModel gSpheres[SPHERES];

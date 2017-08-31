@@ -146,7 +146,7 @@ Program* Engine::storeProgram(const string &name, const vector<Shader* > &shader
   return mImpl->mPrograms.store(name, shaders, isSkipLinking);
 }
 
-Texture2D* Engine::storeTexture(const string &texturePath, flf::eCompression compression) {
+Texture2D* Engine::storeTexture(const string &texturePath, flf::ECompression compression) {
   return mImpl->mTextures->get(texturePath, compression);
 }
 
@@ -200,7 +200,7 @@ void Engine::detach(flf::Entity* entity) {
 }
 
 /* Callbacks registeration  */
-void Engine::detachCallbacks(eEventType eventType) {
+void Engine::detachCallbacks(EEventType eventType) {
   mImpl->detachCallbacks(eventType);
 }
 
@@ -255,12 +255,12 @@ pText Engine::storeText(const string &content,
     glm::vec2 position,
     GLfloat scale,
     glm::vec4 color,
-    eTextEffect effect) {
+    ETextEffect effect) {
   /* Check for the font texture  */
   if (!mImpl->mTextures->get(fontName + ".png")) {
     mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
   }
-  Texture2D* t = mImpl->mTextures->get(fontName + ".png", flf::eCompression::eNone, flf::eFlip::eVertical);
+  Texture2D* t = mImpl->mTextures->get(fontName + ".png", flf::ECompression::eNone, flf::EFlip::eVertical);
 
   Font* font = nullptr;
   for (auto &it : mImpl->mFontManager) {
@@ -539,7 +539,7 @@ template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &, const s
 
 #endif
 
-void Engine::configDebugger(eDebuggerState state) {
+void Engine::configDebugger(EDebuggerState state) {
   mImpl->mDebugger->setState(state);
 }
 

@@ -51,7 +51,7 @@ public:
   void checkExtensions();
 
   flc::Texture2D *
-  get(const std::string &texturePath, eCompression = eCompression::eNone, eFlip flip = eFlip::eVertical);
+  get(const std::string &texturePath, ECompression = ECompression::eNone, EFlip flip = EFlip::eVertical);
 
   flc::Texture3D *get(const std::string &posX,
       const std::string &negX,
