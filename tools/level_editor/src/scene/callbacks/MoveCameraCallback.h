@@ -14,7 +14,7 @@ class MoveCameraCallback: public Callback {
  public:
 	MoveCameraCallback(
 	   Engine* engine,
-	   eEventType eventType,
+	   EEventType eventType,
 	   float speed = 1.0);
 	virtual ~MoveCameraCallback() = default;
 

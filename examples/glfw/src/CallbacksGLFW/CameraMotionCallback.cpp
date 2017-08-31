@@ -12,7 +12,7 @@ namespace flw {
 namespace flf {
 
 CameraMotionCallback::CameraMotionCallback(Engine *engine)
-    : Callback(eEventType::eTime), mTimePassed(0.0), mEngine(engine) {
+    : Callback(EEventType::eTime), mTimePassed(0.0), mEngine(engine) {
 
 }
 

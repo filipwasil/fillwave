@@ -42,7 +42,7 @@ namespace flw {
 namespace flf {
 
 ColorPickingCallback::ColorPickingCallback(Engine *engine)
-    : Callback(eEventType::eMouseButton), mEngine(engine) {
+    : Callback(EEventType::eMouseButton), mEngine(engine) {
 
 }
 

@@ -48,13 +48,16 @@ constexpr GLuint FILLWAVE_RANDOM_VECTOR_SIZE = 64;
 /* Headers */
 #if defined(FILLWAVE_GLES_3_0)
 const std::string gGLVersion = "#version 300 es\n";
+#else /* defined(FILLWAVE_GLES_3_0) */
+#if defined(FILLWAVE_COMPILATION_OPENGL_4_5)
+const std::string gGLVersion = "#version 450 core\n";
+#else /* defined(FILLWAVE_COMPILATION_OPENGL_4_5) */
+const std::string gGLVersion = "#version 330 core\n";
+#endif /* defined(FILLWAVE_COMPILATION_OPENGL_4_5) */
+#endif /* defined(FILLWAVE_GLES_3_0) */
+
 const std::string gGLFragmentPrecision = "precision lowp float;\n";
 const std::string gGLVertexPrecision = "precision mediump float;\n";
-#else /* defined(FILLWAVE_GLES_3_0) */
-const std::string gGLVersion = "#version 330 core\n";
-const std::string gGLFragmentPrecision = "\n";
-const std::string gGLVertexPrecision = "\n";
-#endif /* defined(FILLWAVE_GLES_3_0) */
 
 const std::string gGLVaryingIn = "in";
 const std::string gGLVaryingOut = "out";
@@ -1209,6 +1212,11 @@ const std::string fsStartup = gGLVersion + gGLFragmentPrecision + "#define MAX_I
 
     "}\n";
 
+flc::Program* ProgramLoader::getProgram(ProgramLoader::EProgram program)
+{
+
+}
+
 flc::Program *ProgramLoader::getShadow() {
   return mEngine->storeProgram("shadow_mapping", {
       mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
@@ -1362,7 +1370,7 @@ flc::Program *ProgramLoader::getAmbientOcclusionGeometry() {
   });
 }
 
-flc::Program *ProgramLoader::getDRAmbient() {
+flc::Program *ProgramLoader::getAmbientDR() {
   return mEngine->storeProgram("ambient_dr", {
       mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ambient_dr.frag", fsDRAmbient),
       mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
@@ -1467,7 +1475,7 @@ flc::Program *ProgramLoader::getDefaultFR() {
   ShaderLoaderFragment loaderFragment;
   ShaderLoaderVertex loaderVertex;
 
-  flc::Program *p = mEngine->storeProgram("default", {
+  auto p = mEngine->storeProgram("default", {
       mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag", loaderFragment.getSource()),
       mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert", loaderVertex.getSource())
   });

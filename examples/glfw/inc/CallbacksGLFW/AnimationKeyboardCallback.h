@@ -18,7 +18,7 @@ namespace flf {
 
 class AnimationKeyboardCallback : public Callback {
 public:
-  AnimationKeyboardCallback(Entity *entity, eEventType eventType);
+  AnimationKeyboardCallback(Entity *entity, EEventType eventType);
 
   virtual ~AnimationKeyboardCallback();
 

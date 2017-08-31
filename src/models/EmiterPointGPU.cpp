@@ -77,8 +77,8 @@ EmiterPointGPU::EmiterPointGPU(Engine *engine,
 
   ProgramLoader loader(engine);
 
-  mProgram = loader.getParticleGPU();
-  mProgramEmiter = loader.getParticleGPUEmiter();
+  mProgram = loader.getProgram(EProgram::particleGPU);
+  mProgramEmiter = loader.getProgram(EProgram::particleGPUEmiter);
 
   std::vector<flc::VertexParticleGPU> particles;
   for (GLuint i = 0; i < mHowMany; i++) {

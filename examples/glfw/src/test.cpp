@@ -60,7 +60,7 @@ void init() {
 
   light->rotateByX(glm::radians(-90.0));
 
-  flc::Program *program = ProgramLoader(ContextGLFW::mGraphicsEngine).getDefault();
+  auto program = ProgramLoader(ContextGLFW::mGraphicsEngine).getDefault();
 
   light->attach(make_unique<Model>(ContextGLFW::mGraphicsEngine, program, "meshes/sphere.obj", "255_255_255.color"));
   light->attachHierarchyCallback(make_unique<TimedMoveCallback>(light.get(), glm::vec3(4.0, 0.0, 0.0), 50.0));
@@ -72,7 +72,7 @@ void init() {
   puModel wall = make_unique<Model>(ContextGLFW::mGraphicsEngine,
                                     program,
                                     "meshes/floor.obj",
-                                    ContextGLFW::mGraphicsEngine->storeTexture("255_255_255.checkers"),
+                                    ContextGLFW::mGraphicsEngine->storeTexture("255_255_255.checkboard"),
                                     ContextGLFW::mGraphicsEngine->storeTexture("255_255_255.color"),
                                     ContextGLFW::mGraphicsEngine->storeTexture("255_255_255.color"));
   wall->moveInDirection(glm::vec3(0.0, -2.0, 0.0));
@@ -84,10 +84,10 @@ void init() {
   /* Engine callbacks */
   ContextGLFW::mGraphicsEngine->attachCallback(make_unique<TimeStopCallback>(ContextGLFW::mGraphicsEngine));
   ContextGLFW::mGraphicsEngine->attachCallback(make_unique<MoveCameraCallback>(ContextGLFW::mGraphicsEngine,
-                                                                                 eEventType::eKey,
+                                                                                 EEventType::eKey,
                                                                                  0.1));
   ContextGLFW::mGraphicsEngine->attachCallback(make_unique<MoveCameraCallback>(ContextGLFW::mGraphicsEngine,
-                                                                                 eEventType::eCursorPosition,
+                                                                                 EEventType::eCursorPosition,
                                                                                  0.1,
                                                                                  ContextGLFW::mWindow));
 

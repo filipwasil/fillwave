@@ -72,7 +72,7 @@ EmiterPointCPU::EmiterPointCPU(Engine *engine,
 
   ProgramLoader loader(engine);
 
-  mProgram = loader.getParticleCPU();
+  mProgram = loader.getProgram(EProgram::particleCPU);
 
   /* Fill buffers */
   GLfloat time = 0.0f; // start time

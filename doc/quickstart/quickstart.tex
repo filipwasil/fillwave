@@ -97,7 +97,7 @@ Probably you will ask how is Fillwave better than other, more extended engines o
   \item "p" - shared pointer (Ex. pText)
   \item "pu" - unique pointer (Ex. puRenderer)
   \item "pw" - weak pointer (Ex. pwCameraPerspective)
-  \item "e" - enumeration class (Ex. eDebuggerState)
+  \item "e" - enumeration class (Ex. EDebuggerState)
   \item "I" - interface (Ex. IDrawable)
 \end{itemize}
 
@@ -538,7 +538,7 @@ auto text = engine->storeText( "Hello Fillwave",/* content */
                                 -0.95, /*left bottom y start (-1,1)*/    
                                 -0.80, /*left bottom x start (-1,1)*/     
                                 100.0, /* text size */
-                                eTextEffect::none); /* text effect */
+                                ETextEffect::none); /* text effect */
 \end{lstlisting}
 
 \indent \indent Fillwave will look for the font in the directory relative to Your binary directory. If it will not find it, it will search the \textbf{/usr/share/fonts/truetype/freefont/} directory. Next, it will create a texture and save its metadata. Finally this texture will be used as an atlas.
@@ -628,7 +628,7 @@ entity->registerHierarchyCallback(
 
 /* Second parameter means that the IFocusable interface will be notified to engine so that it will be removed after during model destruction */
 engine->attachCallback(
-	   make_unique<AnimationKeyboardCallback>(beast.get(), eEventType::eKey),
+	   make_unique<AnimationKeyboardCallback>(beast.get(), EEventType::eKey),
 	   beast.get());
 
 \end{lstlisting}
@@ -735,7 +735,7 @@ pModel model = buildModel(engine,
 \indent \indent Debugger related API is provided to enable simple debugging of depth maps from each spot light, and to enable viewing the pickable objects if there are any of them registered in the scene. debugger can be configured using one of the following enum constants. \textbf{toggleState} is a special value which will just iterate over the possible debugger configurations.
 
 \begin{lstlisting}
-enum class eDebuggerState {
+enum class EDebuggerState {
    lightsSpot,
    lightsSpotColor,
    lightsSpotDepth,
@@ -747,7 +747,7 @@ enum class eDebuggerState {
    toggleState
 };
 
-void Engine::configureDebugger(eDebuggerState state);
+void Engine::configureDebugger(EDebuggerState state);
 \end{lstlisting}
 
 \newpage
@@ -761,7 +761,7 @@ namespace flw {
 namespace actions {
 struct NewEventData {
    int data;
-   const eEventType type = eEventType::custom0; /* event ID */
+   const EEventType type = EEventType::custom0; /* event ID */
 };
 
 class NewEvent: public Event<NewEventData> {
@@ -782,7 +782,7 @@ private:
    float mMaximimData;
    void sayHello() {fLogU("Hello event");};
 public:
-   NewEngineCallback(eEventType eventType, float data);
+   NewEngineCallback(EEventType eventType, float data);
    NewEngineCallback(float data);
 
    virtual ~NewActionCallback();

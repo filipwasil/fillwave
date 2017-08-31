@@ -42,7 +42,7 @@ namespace flf {
  */
 class Callback : public Finishable {
 public:
-  Callback(eEventType eventType, float timeToFinish = FILLWAVE_ENDLESS)
+  Callback(EEventType eventType, float timeToFinish = FILLWAVE_ENDLESS)
       : Finishable(timeToFinish), mEnabled(true), mEventType(eventType) {
   }
 
@@ -62,7 +62,7 @@ public:
     mEnabled = false;
   }
 
-  eEventType getEventType() {
+  EEventType getEventType() {
     return mEventType;
   }
 
@@ -89,7 +89,7 @@ public:
 
 protected:
   bool mEnabled;
-  eEventType mEventType;
+  EEventType mEventType;
 };
 
 } /* flf */

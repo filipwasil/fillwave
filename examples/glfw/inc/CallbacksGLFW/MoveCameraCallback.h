@@ -19,7 +19,7 @@ private:
   GLFWwindow *mWindow;
   Engine *mEngine;
 public:
-  MoveCameraCallback(Engine *engine, eEventType eventType, float speed = 1.0, GLFWwindow *window = nullptr);
+  MoveCameraCallback(Engine *engine, EEventType eventType, float speed = 1.0, GLFWwindow *window = nullptr);
 
   virtual ~MoveCameraCallback();
 

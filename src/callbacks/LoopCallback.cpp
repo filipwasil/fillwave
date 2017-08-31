@@ -38,7 +38,7 @@ namespace flw {
 namespace flf {
 
 LoopCallback::LoopCallback(puCallback &&callback, int numberOfExecutions)
-    : Callback(eEventType::eTime)
+    : Callback(EEventType::eTime)
     , mCallback(std::move(callback))
     , mLoopsLeft(numberOfExecutions) {
 }

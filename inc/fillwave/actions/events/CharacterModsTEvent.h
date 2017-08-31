@@ -40,7 +40,7 @@ namespace flf {
 struct CharacterModsEventData {
   unsigned int character;
   int modsifierKeys;
-  const eEventType type = eEventType::eCharacterMods;
+  const EEventType type = EEventType::eCharacterMods;
 };
 
 /*! \struct CharacterModsEvent

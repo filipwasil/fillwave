@@ -46,35 +46,35 @@ Engine *ptr = reinterpret_cast<Engine *>(engine);
 switch (configuration) {
 case 0:
 ptr->
-configureDebugger(eDebuggerState::eOff);
+configureDebugger(EDebuggerState::eOff);
 break;
 case 1:
 ptr->
-configureDebugger(eDebuggerState::eLightsPointDepth);
+configureDebugger(EDebuggerState::eLightsPointDepth);
 break;
 case 2:
 ptr->
-configureDebugger(eDebuggerState::eLightsSpot);
+configureDebugger(EDebuggerState::eLightsSpot);
 break;
 case 3:
 ptr->
-configureDebugger(eDebuggerState::eLightsSpotColor);
+configureDebugger(EDebuggerState::eLightsSpotColor);
 break;
 case 4:
 ptr->
-configureDebugger(eDebuggerState::eLightsSpotDepth);
+configureDebugger(EDebuggerState::eLightsSpotDepth);
 break;
 case 5:
 ptr->
-configureDebugger(eDebuggerState::eLightsPoint);
+configureDebugger(EDebuggerState::eLightsPoint);
 break;
 case 6:
 ptr->
-configureDebugger(eDebuggerState::ePickingMap);
+configureDebugger(EDebuggerState::ePickingMap);
 break;
 default:
 ptr->
-configureDebugger(eDebuggerState::eToggleState);
+configureDebugger(EDebuggerState::eToggleState);
 break;
 }}
 /*
@@ -1511,7 +1511,7 @@ jlong engine
 ) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
-eEventType type = eEventType::eTime; /* example */
+EEventType type = EEventType::eTime; /* example */
 ptr->
 
 clearCallbacks();

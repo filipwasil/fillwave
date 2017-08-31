@@ -67,10 +67,10 @@ void init() {
 	mEngine->attachCallback(make_unique<TimeStopCallback>(
 	         mEngine));
 	mEngine->attachCallback(make_unique<MoveCameraCallback>(
-	         mEngine, eEventType::eKey,
+	         mEngine, EEventType::eKey,
 	         0.1));
 	mEngine->attachCallback(make_unique<MoveCameraCallback>(
-	         mEngine, eEventType::eScroll,
+	         mEngine, EEventType::eScroll,
 	         0.1));
 }
 

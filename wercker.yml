@@ -44,7 +44,7 @@ build:
                 git submodule update
                 mkdir ../build
                 cd ../build
-                cmake ../fillwave -DFILLWAVE_SUPPRESS_WARNINGS=OFF -DNDEBUG=OFF -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=OFF
+                cmake ../fillwave -DFILLWAVE_COMPILATION_SUPPRESS_WARNINGS=OFF -DNDEBUG=OFF -DFILLWAVE_BUILD_RPM=OFF -DFILLWAVE_BUILD_DEB=ON -DFILLWAVE_BUILD_DEV=OFF
                 make -j4
                 mkdir ../build_android
                 cd ..

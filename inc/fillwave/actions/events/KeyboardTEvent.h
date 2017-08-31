@@ -39,7 +39,7 @@ namespace flf {
 
 struct KeyboardEventData {
   int key, scanCode, action, mode;
-  const eEventType type = eEventType::eKey;
+  const EEventType type = EEventType::eKey;
 };
 
 /*! \struct KeyboardEvent

@@ -85,7 +85,7 @@ inline void TextureSystem::checkExtensions() {
 #endif
 }
 
-flc::Texture2D *TextureSystem::get(const std::string &texturePath, eCompression compression, eFlip flip) {
+flc::Texture2D *TextureSystem::get(const std::string &texturePath, ECompression compression, EFlip flip) {
   const std::string filePath = mRootPath + texturePath;
   if (texturePath.empty()) {
     return nullptr;
@@ -146,12 +146,12 @@ flc::Texture3D *TextureSystem::get(const std::string &posX,
 
   fLogD("Texture %s will be added to manager", name.c_str());
 
-  flc::Texture2DFile* filePosX = mLoader.load(filePathPosX, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* fileNegX = mLoader.load(filePathNegX, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* filePosY = mLoader.load(filePathPosY, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* fileNegY = mLoader.load(filePathNegY, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* filePosZ = mLoader.load(filePathPosZ, eFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* fileNegZ = mLoader.load(filePathNegZ, eFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* filePosX = mLoader.load(filePathPosX, EFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* fileNegX = mLoader.load(filePathNegX, EFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* filePosY = mLoader.load(filePathPosY, EFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* fileNegY = mLoader.load(filePathNegY, EFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* filePosZ = mLoader.load(filePathPosZ, EFlip::eNone, GL_RGBA, mRootPath);
+  flc::Texture2DFile* fileNegZ = mLoader.load(filePathNegZ, EFlip::eNone, GL_RGBA, mRootPath);
 
   if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {
     fLogD("Texture %s added to manager", name.c_str());

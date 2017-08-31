@@ -47,10 +47,10 @@ namespace flw {
 namespace flf {
 
 flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
-    eFlip flip,
+    EFlip flip,
     GLenum format,
     std::string rootPath,
-    eCompression compression) {
+    ECompression compression) {
 
   fLogD("Texture %s loading ...", filePath.c_str());
   const size_t posCheckboard = filePath.find(".checkboard");
@@ -250,7 +250,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
   file->mConfig.mMipmaps = GL_TRUE;
   file->mConfig.mMipmapsLevel = 0;
 
-  if (compression == eCompression::eNone) {
+  if (compression == ECompression::eNone) {
     file->mConfig.mCompression = GL_FALSE;
     file->mHeader.mInternalFormat = format;
   } else {
@@ -264,11 +264,11 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
 
   file->mData = content;
 
-  file->mAllocation = flc::eMemoryAllocation::eMallock;
+  file->mAllocation = flc::EMemoryAllocation::eMallock;
 
   fLogD("Flipping Texture %s ...", filePath.c_str());
   switch (flip) {
-    case eFlip::eVertical:
+    case EFlip::eVertical:
 #pragma omp parallel for schedule(guided) num_threads(2)
       for (int row = 0; row < h / 2; ++row) {
         for (int column = 0; column < w; ++column) {
@@ -285,7 +285,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
       }
       break;
 
-    case eFlip::eHorizontal_vertical:
+    case EFlip::eHorizontal_vertical:
 #pragma omp parallel for schedule(guided) num_threads(2)
       for (int row = 0; row < h; ++row) {
         for (int column = 0; column < w / 2; ++column) {
@@ -302,7 +302,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
       }
       break;
 
-    case eFlip::eHorizontal:
+    case EFlip::eHorizontal:
 #pragma omp parallel for schedule(guided) num_threads(2)
       for (int row = 0; row < h; ++row) {
         for (int column = 0; column < w / 2; ++column) {
@@ -333,7 +333,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
       }
       break;
 
-    case eFlip::eNone:
+    case EFlip::eNone:
       break;
   }
   return file;
@@ -356,7 +356,7 @@ flc::Texture2DFile *TextureLoader::loadEmpty(GLint screenWidth, GLint screenHeig
 
   file->mData = nullptr;
 
-  file->mAllocation = flc::eMemoryAllocation::eNone;
+  file->mAllocation = flc::EMemoryAllocation::eNone;
 
   return file;
 }
@@ -404,7 +404,7 @@ flc::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
 
   file->mData = content;
 
-  file->mAllocation = flc::eMemoryAllocation::eNew;
+  file->mAllocation = flc::EMemoryAllocation::eNew;
 
   return file;
 }
@@ -440,7 +440,7 @@ flc::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
 
   file->mData = content;
 
-  file->mAllocation = flc::eMemoryAllocation::eNew;
+  file->mAllocation = flc::EMemoryAllocation::eNew;
 
   return file;
 }
@@ -468,50 +468,50 @@ inline GLint TextureLoader::getBytesPerPixel(GLenum format) {
   return bytes;
 }
 
-inline GLenum TextureLoader::getCompression(eCompression compression) {
+inline GLenum TextureLoader::getCompression(ECompression compression) {
 #ifdef FILLWAVE_GLES_3_0
   (void)compression;
 #else
   switch (compression) {
-    case eCompression::eNone:
+    case ECompression::eNone:
       return GL_NONE;
-    case eCompression::eGeneric_r:
+    case ECompression::eGeneric_r:
       return GL_COMPRESSED_RED;
-    case eCompression::eGeneric_rg:
+    case ECompression::eGeneric_rg:
       return GL_COMPRESSED_RG;
-    case eCompression::eGeneric_rgb:
+    case ECompression::eGeneric_rgb:
       return GL_COMPRESSED_RGB;
-    case eCompression::eGeneric_rgba:
+    case ECompression::eGeneric_rgba:
       return GL_COMPRESSED_RGBA;
-    case eCompression::eGeneric_srgb:
+    case ECompression::eGeneric_srgb:
       return GL_COMPRESSED_SRGB;
-    case eCompression::eGeneric_srgba:
+    case ECompression::eGeneric_srgba:
       return GL_COMPRESSED_SRGB_ALPHA;
 #if defined(__APPLE__)
 #else
-    case eCompression::eLatc_luminance:
+    case ECompression::eLatc_luminance:
       return GL_COMPRESSED_LUMINANCE_LATC1_EXT;
-    case eCompression::eLatc_luminance_signed:
+    case ECompression::eLatc_luminance_signed:
       return GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT;
-    case eCompression::eLatc_luminance_alpha:
+    case ECompression::eLatc_luminance_alpha:
       return GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT;
-    case eCompression::eLatc_luminance_alpha_signed:
+    case ECompression::eLatc_luminance_alpha_signed:
       return GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_EXT;
-    case eCompression::eRgtc1_r:
+    case ECompression::eRgtc1_r:
       return GL_COMPRESSED_RED_RGTC1_EXT;
-    case eCompression::eRgtc1_r_signed:
+    case ECompression::eRgtc1_r_signed:
       return GL_COMPRESSED_SIGNED_RED_RGTC1_EXT;
-    case eCompression::eRgtc1_rg:
+    case ECompression::eRgtc1_rg:
       return GL_COMPRESSED_RED_GREEN_RGTC2_EXT;
-    case eCompression::eRgtc1_rg_signed:
+    case ECompression::eRgtc1_rg_signed:
       return GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT;
-    case eCompression::eS3tc_dxt1_rgb:
+    case ECompression::eS3tc_dxt1_rgb:
       return GL_COMPRESSED_RGB_S3TC_DXT1_EXT;
-    case eCompression::eS3tc_dxt1_rgba:
+    case ECompression::eS3tc_dxt1_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
-    case eCompression::eS3tc_dxt3_rgba:
+    case ECompression::eS3tc_dxt3_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT3_EXT;
-    case eCompression::eS3tc_dxt5_rgba:
+    case ECompression::eS3tc_dxt5_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
 #endif /* __APPLE__ */
     default:

@@ -39,7 +39,7 @@ namespace flf {
 
 struct ScrollEventData {
   double mOffsetX, mOffsetY;
-  const eEventType type = eEventType::eScroll;
+  const EEventType type = EEventType::eScroll;
 };
 
 /*! \struct ScrollEvent

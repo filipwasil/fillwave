@@ -16,7 +16,7 @@ include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/options.cmake)
 # Compiler flags
 # -----------------------------------------------
 
-if (NOT FILLWAVE_SUPPRESS_WARNINGS)
+if (NOT FILLWAVE_COMPILATION_SUPPRESS_WARNINGS)
   include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/common.cmake)
   if (${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
     include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/compiler/clang.cmake)

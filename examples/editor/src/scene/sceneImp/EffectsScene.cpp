@@ -25,10 +25,10 @@ void EffectsScene::init() {
 
 	/* Engine callbacks */
 	mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
-	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), eEventType::eKey, 0.1));
+	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
 	mEngine->attachCallback(make_unique<MoveCameraCallback>
 			                          (mEngine.get(),
-			                           eEventType::eCursorPosition, 0.01));
+			                           EEventType::eCursorPosition, 0.01));
 	mEventsHandler.push_back(
 			std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
 	mEventsHandler.push_back(

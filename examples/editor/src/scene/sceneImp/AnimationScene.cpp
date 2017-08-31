@@ -34,7 +34,7 @@ void AnimationScene::init() {
   beast->setActiveAnimation(0);
   mEngine->getCurrentScene()->attach(std::move(beast));
 
-  mEngine->attachCallback(std::make_unique<AnimationKeyboardCallback>(beast.get(), eEventType::eKey), beast.get());
+  mEngine->attachCallback(std::make_unique<AnimationKeyboardCallback>(beast.get(), EEventType::eKey), beast.get());
 
   puIEmiterPoint snow = std::make_unique<EmiterPointCPU>(mEngine.get(),
                                                          0.3,

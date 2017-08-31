@@ -28,32 +28,43 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/actions/events/TEvent.h>
-
 namespace flw {
 namespace flf {
 
-/*! \struct CharacterEventData
- * \brief Event data structure to store the character.
- */
-
-struct CharacterEventData {
-  unsigned int character;
-  const EEventType type = EEventType::eCharacter;
-};
-
-/*! \struct CharacterEvent
- * \brief Event introduced when the key is pressed.
- */
-
-class CharacterEvent : public TEvent<CharacterEventData> {
-public:
-  CharacterEvent(CharacterEventData &data)
-      : TEvent(data) {
-
-  }
-
-  virtual ~CharacterEvent() = default;
+enum class EProgram {
+  basic,
+  basicFR,
+  basicDR,
+  basicAnimated,
+  basicAnimatedFR,
+  basicAnimatedDR,
+  shadow,
+  shadowColorCoded,
+  shadowWithAnimation,
+  shadowColorCodedWithAnimation,
+  debugger,
+  skybox,
+  skyboxDR,
+  hUD,
+  text,
+  textBold,
+  particleGPUEmiter,
+  particleGPU,
+  particleCPU,
+  particleCPUNoDepthText,
+  quad,
+  quadCustomFragmentShaderStartup,
+  cursor,
+  ambientOcclusionGeometry,
+  ambientOcclusionColor,
+  occlusionPureQuery,
+  occlusionQuery,
+  occlusionOptimizedQuery,
+  ambientDR,
+  depthlessDR,
+  directionalLightsDR,
+  spotLightsDR,
+  pointLightsDR,
 };
 
 } /* flf */

@@ -118,5 +118,5 @@ void perform(Engine *engine) {
 //	   scene->attach(e);
   entity1->attach(e);
 
-//    engine->configureDebugger(eDebuggerState::lightsSpot);
+//    engine->configureDebugger(EDebuggerState::lightsSpot);
 }

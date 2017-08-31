@@ -38,7 +38,7 @@
 namespace flw {
 namespace flf {
 
-MoveCameraCallback::MoveCameraCallback(Engine *engine, eEventType eventType, float speed, GLFWwindow *window)
+MoveCameraCallback::MoveCameraCallback(Engine *engine, EEventType eventType, float speed, GLFWwindow *window)
     : Callback(eventType), mSpeed(speed), mWindow(window), mEngine(engine) {
 
   /*
@@ -46,7 +46,7 @@ MoveCameraCallback::MoveCameraCallback(Engine *engine, eEventType eventType, flo
    * cursor should not be visible
    *
    * */
-  if (eventType == eEventType::eCursorPosition && window) {
+  if (eventType == EEventType::eCursorPosition && window) {
     glfwSetInputMode(mWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
   }
 }
@@ -58,7 +58,7 @@ MoveCameraCallback::~MoveCameraCallback() {
 void MoveCameraCallback::perform(EventType &event) {
   switch (event.getType())
   {
-    case eEventType::eKey:
+    case EEventType::eKey:
       {
         KeyboardEventData e = KeyboardEvent::getData(event);
         switch (e.key) {
@@ -70,13 +70,13 @@ void MoveCameraCallback::perform(EventType &event) {
             break;
           case GLFW_KEY_D:
             if (e.action == GLFW_RELEASE) {
-              mEngine->configDebugger(eDebuggerState::eToggleState);
+              mEngine->configDebugger(EDebuggerState::eToggleState);
             }
             break;
         }
       }
       break;
-    case eEventType::eMouseButton:
+    case EEventType::eMouseButton:
       {
         MouseButtonEventData e = MouseButtonEvent::getData(event);
         if (e.mButton == GLFW_MOUSE_BUTTON_LEFT) {
@@ -87,7 +87,7 @@ void MoveCameraCallback::perform(EventType &event) {
         }
       }
       break;
-    case eEventType::eScroll:
+    case EEventType::eScroll:
       {
         ScrollEventData e = ScrollEvent::getData(event);
         if (e.mOffsetY < 0.0) { // scroll down
@@ -97,7 +97,7 @@ void MoveCameraCallback::perform(EventType &event) {
         }
       }
       break;
-    case eEventType::eCursorPosition:
+    case EEventType::eCursorPosition:
       {
         static bool init = false;
         static int a = 0;

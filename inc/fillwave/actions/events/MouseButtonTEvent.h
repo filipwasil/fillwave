@@ -42,7 +42,7 @@ struct MouseButtonEventData {
   int mButton;
   int mAction;
   int mMods;
-  const eEventType type = eEventType::eMouseButton;
+  const EEventType type = EEventType::eMouseButton;
 };
 
 /*! \class MouseButtonEvent

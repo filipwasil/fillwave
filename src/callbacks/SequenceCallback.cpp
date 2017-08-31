@@ -39,7 +39,7 @@ namespace flw {
 namespace flf {
 
 SequenceCallback::SequenceCallback()
-    : Callback(eEventType::eTime)
+    : Callback(EEventType::eTime)
     , mCallbackIterator(this->begin())
     , mReloaditerator(true) {
 }
