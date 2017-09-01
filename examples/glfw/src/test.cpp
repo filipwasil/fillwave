@@ -60,6 +60,11 @@ void init() {
 
   light->rotateByX(glm::radians(-90.0));
 
+//  auto program = ProgramLoader(ContextGLFW::mGraphicsEngine).
+//      storeCustomProgram("name",
+//                GL_FRAGMENT_SHADER, "code fs",
+//                GL_VERTEX_SHADER, "code vs");
+
   auto program = ProgramLoader(ContextGLFW::mGraphicsEngine).getProgram(EProgram::basic);
 
   light->attach(make_unique<Model>(ContextGLFW::mGraphicsEngine, program, "meshes/sphere.obj", "255_255_255.color"));

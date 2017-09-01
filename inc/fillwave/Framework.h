@@ -55,7 +55,6 @@
 #include <fillwave/space/Scene.h>
 
 /* Loaders */
-#include <fillwave/loaders/FileLoader.h>
 #include <fillwave/loaders/AndroidLoader.h>
 #include <fillwave/loaders/ProgramLoader.h>
 

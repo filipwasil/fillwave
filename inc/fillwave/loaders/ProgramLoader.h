@@ -31,6 +31,7 @@
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/loaders/ProgramLoaderTypes.h>
 #include <fillwave/loaders/ShaderLoader.h>
+#include <fillwave/loaders/FileLoader.h>
 
 namespace flw {
 class Engine;
@@ -52,11 +53,33 @@ public:
 
   flc::Program* getHUDCustomFragmentShader(const std::string &shaderPath);
 
-  flc::Program* getCustom(const std::string &fs, const std::string &vs);
-
   static void initDefaultUniforms(flc::Program *program);
 
 private:
+  flc::Shader* storeShader(const std::string& shaderPath, GLuint type);
+
+  const std::vector<flc::Shader*> getCustomShader(GLuint type, const std::string& shaderPath) {
+    std::string code;
+    ReadFile(shaderPath.c_str(), code);
+    return { storeShader(shaderPath, type) };
+  }
+
+  template <typename ...Args>
+  const std::vector<flc::Shader*> getCustomShader(GLuint type, const std::string& shaderPath, Args ...args) {
+    auto shaders = getCustomShader(args...);
+    std::string code;
+    ReadFile(shaderPath.c_str(), code);
+    shaders.push_back( { storeShader(shaderPath, type) } );
+    return shaders;
+  }
+
+  flc::Program* storeProgram(const std::string& name, const std::vector<flc::Shader*>& shaders);
+
+public:
+  template <typename ...Args>
+  flc::Program* storeCustomProgram(const std::string& name, Args ...args) {
+    return storeProgram(name, getCustomShader(args...));
+  }
 
   Engine* mEngine;
 

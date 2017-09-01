@@ -509,35 +509,16 @@ Shader* Engine::storeShader(const string &shaderPath) {
 }
 
 template <GLuint T>
-Shader* Engine::storeShader(const string &shaderPath, const string &shaderSource) {
-  const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
-  return mImpl->mShaders.store(fullPath, T, shaderSource);
+Shader* Engine::storeShader(const string& shaderPath, const string& shaderSource) {
+  return mImpl->mShaders.store(mImpl->mFileLoader.getRootPath() + shaderPath, T, shaderSource);
 }
 
-template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string &);
-
-template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string &);
-
-template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string &, const string &);
-
-template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string &, const string &);
-
-#ifdef FILLWAVE_GLES_3_0
-#else
-
-template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &);
-
-template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &);
-
-template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &);
-
-template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &, const string &);
-
-template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &, const string &);
-
-template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &, const string &);
-
-#endif
+Shader* Engine::storeShader(const string &shaderPath, GLuint type) {
+  string shaderSource = "";
+  const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
+  flf::ReadFile(fullPath, shaderSource);
+  return mImpl->mShaders.store(fullPath, type, shaderSource);
+}
 
 void Engine::configDebugger(EDebuggerState state) {
   mImpl->mDebugger->setState(state);
@@ -629,6 +610,31 @@ flc::VertexBufferBasic* Engine::storeBufferInternal(flc::VertexArray* vao,
   return mImpl->mBuffers.mVertices.store(newData, vao);
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
+
+template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string &);
+
+template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string &);
+
+template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string &, const string &);
+
+template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string &, const string &);
+
+#ifdef FILLWAVE_GLES_3_0
+#else
+
+template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &);
+
+template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &);
+
+template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &);
+
+template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &, const string &);
+
+template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &, const string &);
+
+template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &, const string &);
+
+#endif
 
 }
 /* flw  */

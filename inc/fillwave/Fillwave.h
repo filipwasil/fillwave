@@ -135,9 +135,10 @@ public:
    * GL_GEOMETRY_SHADER
    * GL_FRAGMENT_SHADER
    */
-  template <GLuint T> flc::Shader *storeShader(const std::string &shaderPath);
-  template <GLuint T> flc::Shader *storeShader(const std::string &shaderPath, const std::string &shaderSource);
-  flc::Program * storeProgram(const std::string &name, const std::vector<flc::Shader *> &shaders, bool isSkipLinking = false);
+  template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath);
+  template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath, const std::string &shaderSource);
+  flc::Shader* storeShader(const std::string &shaderPath, GLuint type);
+  flc::Program* storeProgram(const std::string &name, const std::vector<flc::Shader *> &shaders, bool isSkipLinking = false);
 
   /* Store textures */
   flc::Texture2D *storeTexture(const std::string &path, flf::ECompression com = flf::ECompression::eNone);

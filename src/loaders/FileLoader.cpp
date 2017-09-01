@@ -69,7 +69,7 @@ string FileLoader::getRootPath(string filePath) {
  *
  */
 
-void ReadFile(string fileName, string &fileContent) {
+void ReadFile(string fileName, string& fileContent) {
   ifstream ifs(fileName.c_str(), ios::binary);
   if (!ifs) {
     fLogE("File %s not found", fileName.c_str());

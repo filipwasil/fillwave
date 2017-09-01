@@ -1283,48 +1283,57 @@ flc::Program* ProgramLoader::getProgram(EProgram program) {
       p->use();
       flc::Uniform::push(glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit"), FILLWAVE_DIFFUSE_UNIT);
       return p;
+
     case EProgram::text:
       return mEngine->storeProgram("text", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_text.frag", fsText),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_text.vert", vsText)
       });
+
     case EProgram::textBold:
       return mEngine->storeProgram("text_bold", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_text_bold.frag", fsTextBold),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_text.vert", vsText)
       });
+
     case EProgram::particleGPUEmiter:
       return mEngine->storeProgram("particles_gpu_emiter", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_particles_gpu_emiter.vert", vsGPUEmiter)
       }, GL_TRUE);
+
     case EProgram::particleGPU:
       return mEngine->storeProgram("particles_gpu_program", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_gpu.frag", fsParticlesGPU),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_particles_gpu.vert", vsParticlesGPU)
       });
+
     case EProgram::particleCPU:
       return mEngine->storeProgram("particles_cpu_program", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_cpu.frag", fsParticlesCPU),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_particles_cpu.vert", vsParticlesCPU)
       });
+
     case EProgram::particleCPUNoDepthText:
     case EProgram::quad:
       return mEngine->storeProgram("quad", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_quad.frag", fsQuad),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_quad.vert", vsQuad)
       });
+
     case EProgram::quadCustomFragmentShaderStartup:
     case EProgram::cursor:
       return mEngine->storeProgram("cursor", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_cursor.frag", fsCursor),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_cursor.vert", vsCursor)
       });
+
     case EProgram::ambientOcclusionGeometry:
       return mEngine->storeProgram("ambient_occlusion_geometry", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ambient_occlusion_geometry.frag", fsAOGeometry),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_ambient_occlusion_geometry.vert", vsAOGeometry)
       });
+
     case EProgram::ambientOcclusionColor:
       p = mEngine->storeProgram("ambient_occlusion_color", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ambient_occlusion_color.frag", fsAOColor),
@@ -1353,62 +1362,67 @@ flc::Program* ProgramLoader::getProgram(EProgram program) {
 
         p->uniformPush("uRandomVectors[0]", &vectors[0], FILLWAVE_RANDOM_VECTOR_SIZE);
       }
-
       p->disusePrograms();
       return p;
+
     case EProgram::occlusionPureQuery:
       return mEngine->storeProgram("occlusion_pure", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion_pure.vert", vsCube)
       });
+
     case EProgram::occlusionQuery:
       return mEngine->storeProgram("occlusion", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion.vert", vsOcclusion)
       });
+
     case EProgram::occlusionOptimizedQuery:
       return mEngine->storeProgram("occlusion_optimized", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_occlusion.vert", vsOcclusionOptimized)
       });
+
     case EProgram::basicDR:
       p = mEngine->storeProgram("dr_g", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_g.frag", fsDR),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert", ShaderLoaderVertex().getSource())
       });
-
       initDefaultUniforms(p);
-
       return p;
+
     case EProgram::basicAnimatedDR:
       p = mEngine->storeProgram("default_animated", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default_animated.frag", fsDR),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_animated.vert", ShaderLoaderVertex(true).getSource())
       });
-
       initDefaultUniforms(p);
-
       return p;
+
     case EProgram::ambientDR:
       return mEngine->storeProgram("ambient_dr", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ambient_dr.frag", fsDRAmbient),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
       });
+
     case EProgram::depthlessDR:
       return mEngine->storeProgram("dr_depthless", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_depthless.frag", fsDRDepthless),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
       });
+
     case EProgram::directionalLightsDR:
       return mEngine->storeProgram("dr_directional", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_directional.frag", fsDRLightDirectional),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
       });
+
     case EProgram::spotLightsDR:
       return mEngine->storeProgram("ds_spot", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_spot.frag", fsDRLightSpot),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
       });
+
     case EProgram::pointLightsDR:
       return mEngine->storeProgram("ds_point", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_point.frag", fsDRLightPoint),
@@ -1500,26 +1514,12 @@ ProgramLoader::ProgramLoader(Engine *engine)
 
 }
 
-flc::Program* ProgramLoader::getCustom(const std::string &fs, const std::string &vs) {
-  auto copy = [](const std::string &shaderPath) {
-    std::ifstream v (shaderPath.c_str());
-    std::string line, vss;
-    if (v.is_open())
-    {
-      while ( getline (v,line) )
-      {
-        vss +=  line + '\n';
-      }
-      v.close();
-    }
-    return vss;
-  };
+flc::Program* ProgramLoader::storeProgram(const std::string& name, const std::vector<flc::Shader*>& shaders) {
+  return mEngine->storeProgram(name.c_str(), shaders);
+}
 
-  flc::Program *p = mEngine->storeProgram("default_animated_dr", {
-      mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag", copy(fs)),
-      mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_animated.vert", copy(vs))
-  });
-  return p;
+flc::Shader* ProgramLoader::storeShader(const std::string& shaderPath, GLuint type) {
+  return mEngine->storeShader(shaderPath, type);
 }
 
 } /* flf */

@@ -54,7 +54,5 @@ void WriteFile(const char *fileName, std::string &fileContent);
 
 void ReadFile(std::string fileName, std::string &fileContent);
 
-std::string ReadFile(std::string fileName);
-
 } /* flf */
 } /* flf */
