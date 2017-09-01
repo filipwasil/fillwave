@@ -68,8 +68,6 @@ for fedora if you want build rpm packges only(RPM packges are in fillwave_build)
 
 ## Windows
 
-Windows build needs [MinGW](http://www.mingw.org/) installed (If you want to use pthreads then use [mingw64](http://mingw-w64.org/doku.php) version). Soon VS 14 2015 version will be also available.
-
 ```
 ./build_windows_msvs.bat
 ```
