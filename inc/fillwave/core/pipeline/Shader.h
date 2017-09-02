@@ -51,6 +51,11 @@ namespace flc {
 
 class Shader {
 public:
+  struct DebugInfo {
+    std::string type;
+    std::string fileExtension;
+  };
+
   Shader(GLuint shaderType, const std::string &shaderSource);
 
   virtual ~Shader();
@@ -59,21 +64,17 @@ public:
 
   void loadSource();
 
-  GLuint getType() {
+  GLuint getType() const {
     return mType;
   }
 
-  std::string getTypeString();
-
-  std::string getSource() {
-    return mSource;
-  }
+  DebugInfo getDebugInfo() const;
 
   GLuint getHandle() {
     return mHandle;
   }
 
-  void log();
+  void log(const std::string& programName);
 
   void reload();
 

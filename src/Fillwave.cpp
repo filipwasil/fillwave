@@ -513,13 +513,6 @@ Shader* Engine::storeShader(const string& shaderPath, const string& shaderSource
   return mImpl->mShaders.store(mImpl->mFileLoader.getRootPath() + shaderPath, T, shaderSource);
 }
 
-Shader* Engine::storeShader(const string &shaderPath, GLuint type) {
-  string shaderSource = "";
-  const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
-  flf::ReadFile(fullPath, shaderSource);
-  return mImpl->mShaders.store(fullPath, type, shaderSource);
-}
-
 void Engine::configDebugger(EDebuggerState state) {
   mImpl->mDebugger->setState(state);
 }

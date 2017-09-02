@@ -100,7 +100,7 @@ public:
 
   void reload();
 
-  void log() const;
+  void log(const std::string& programName) const;
 
 private:
   GLuint mHandle;
@@ -114,6 +114,4 @@ private:
 
 } /* flc */
 typedef std::unique_ptr<flc::Program> puProgram;
-
-flc::Program *buildProgram(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
 } /* flw */

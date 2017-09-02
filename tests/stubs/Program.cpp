@@ -109,14 +109,10 @@ void Program::getUniformBlock(std::string /*name*/, GLuint /*bindingPoint*/) {
 void Program::uniformBlockPush(std::string /*name*/, GLfloat * /*data*/) {
 }
 
-void Program::log() const {
+void Program::log(const std::string& /*fileName*/) const {
 }
 
 void Program::reload() {
-}
-
-Program *buildProgram(const std::vector<Shader *> &, GLboolean) {
-  return nullptr;
 }
 
 }

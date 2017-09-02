@@ -60,12 +60,18 @@ void init() {
 
   light->rotateByX(glm::radians(-90.0));
 
-//  auto program = ProgramLoader(ContextGLFW::mGraphicsEngine).
-//      storeCustomProgram("name",
-//                GL_FRAGMENT_SHADER, "code fs",
-//                GL_VERTEX_SHADER, "code vs");
+// test code in test file
+#if 0
+  ContextGLFW::mGraphicsEngine->storeProgram("custom_program", {
+      ContextGLFW::mGraphicsEngine->storeShader<GL_FRAGMENT_SHADER>("basic_program.frag"),
+      ContextGLFW::mGraphicsEngine->storeShader<GL_VERTEX_SHADER>("basic_program.vert"),
+      ContextGLFW::mGraphicsEngine->storeShader<GL_GEOMETRY_SHADER>("basic_program.geom"),
+      ContextGLFW::mGraphicsEngine->storeShader<GL_TESS_CONTROL_SHADER>("basic_program.tesc"),
+      ContextGLFW::mGraphicsEngine->storeShader<GL_TESS_EVALUATION_SHADER>("basic_program.tese")
+  });
+#endif
 
-  auto program = ProgramLoader(ContextGLFW::mGraphicsEngine).getProgram(EProgram::basic);
+  auto program = ProgramLoader(ContextGLFW::mGraphicsEngine).getProgram(EProgram::basic, "basic_program");
 
   light->attach(make_unique<Model>(ContextGLFW::mGraphicsEngine, program, "meshes/sphere.obj", "255_255_255.color"));
   light->attachHierarchyCallback(make_unique<TimedMoveCallback>(light.get(), glm::vec3(4.0, 0.0, 0.0), 50.0));

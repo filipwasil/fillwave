@@ -1,6 +1,4 @@
 /*
- * Shader.cpp
- *
  *  Created on: 28 Mar 2014
  *      Author: Filip Wasil
  *
@@ -33,10 +31,7 @@
 
 
 #include <fillwave/core/pipeline/Shader.h>
-#include <string>
-#include <sstream>
-#include <iostream>
-
+#include "fillwave/loaders/FileLoader.h"
 #include <fillwave/Log.h>
 
 FLOGINIT("Shader", FERROR | FFATAL | FINFO | FDEBUG)
@@ -47,7 +42,8 @@ namespace flw {
 namespace flc {
 
 Shader::Shader(GLuint shaderType, const std::string &shaderSource)
-    : mType(shaderType), mSource(shaderSource) {
+    : mType(shaderType)
+    , mSource(shaderSource) {
   reload();
 }
 
@@ -95,7 +91,7 @@ void Shader::compile() {
   }
 }
 
-void Shader::log() {
+void Shader::log(const std::string& programName) {
   int infologLength = 0;
   int maxLength;
 
@@ -116,6 +112,10 @@ void Shader::log() {
     fLogI("%s\n", infoLog.data());
   }
   fLogI("%s\n", mSource.c_str());
+  if (!programName.empty()) {
+    flw::flf::WriteFile((programName + getDebugInfo().fileExtension).c_str(), mSource);
+    return;
+  }
 }
 
 void Shader::reload() {
@@ -125,24 +125,24 @@ void Shader::reload() {
   compile();
 }
 
-std::string Shader::getTypeString() {
+Shader::DebugInfo Shader::getDebugInfo() const {
   switch (mType) {
     case GL_FRAGMENT_SHADER:
-      return "GL_FRAGMENT_SHADER";
+      return { "GL_FRAGMENT_SHADER", ".frag" };
     case GL_VERTEX_SHADER:
-      return "GL_VERTEX_SHADER";
+      return {"GL_VERTEX_SHADER", ".vert" };
 #ifdef FILLWAVE_GLES_3_0
 #else
     case GL_GEOMETRY_SHADER:
-      return "GL_GEOMETRY_SHADER";
+      return {"GL_GEOMETRY_SHADER", ".geom" };
     case GL_TESS_CONTROL_SHADER:
-      return "GL_TESS_CONTROL_SHADER";
+      return {"GL_TESS_CONTROL_SHADER", ".tesc" };
     case GL_TESS_EVALUATION_SHADER:
-      return "GL_TESS_EVALUATION_SHADER";
+      return {"GL_TESS_EVALUATION_SHADER", ".tese" };
 #endif
     default:
       fLogF("Shader type not recognized: %d", mType);
-      return "";
+      return DebugInfo();
   }
 }
 

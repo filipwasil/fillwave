@@ -1,9 +1,4 @@
 /*
- * FileLoader.cpp
- *
- *  Created on: 28 Mar, 2014
- *      Author: Filip Wasil
- *
  * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
@@ -84,11 +79,14 @@ void ReadFile(string fileName, string& fileContent) {
   ifs.close();
 }
 
-void WriteFile(const char *fileName, string &fileContent) {
-  ofstream myfile;
-  myfile.open(fileName);
-  myfile << fileContent;
-  myfile.close();
+void WriteFile(const char* fileName, const string& fileContent) {
+  ofstream file (fileName);
+  if (!file.is_open()) {
+    cout << "Unable to open file";
+    return;
+  }
+  file << fileContent << endl;
+  file.close();
 }
 
 } /* flf */

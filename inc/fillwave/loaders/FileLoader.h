@@ -50,9 +50,9 @@ private:
   std::string mRootPath;
 };
 
-void WriteFile(const char *fileName, std::string &fileContent);
+void ReadFile(std::string fileName, std::string& fileContent);
 
-void ReadFile(std::string fileName, std::string &fileContent);
+void WriteFile(const char *fileName, const std::string& fileContent);
 
 } /* flf */
 } /* flf */

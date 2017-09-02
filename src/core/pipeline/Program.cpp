@@ -1,6 +1,4 @@
 /*
- * Program.cpp
- *
  *  Created on: 3 Oct 2013
  *      Author: Filip Wasil
  *
@@ -288,7 +286,7 @@ void Program::uniformBlockPush(std::string name, GLfloat *data) {
   fLogE("Uniform buffer %s not found", name.c_str());
 }
 
-void Program::log() const {
+void Program::log(const std::string& programName) const {
   GLint infologLength = 0;
   GLint value;
   glGetProgramiv(mHandle, GL_INFO_LOG_LENGTH, &value);
@@ -322,7 +320,7 @@ void Program::log() const {
   }
   for (auto &it : mShaders) {
     fLogI("Shader:\n");
-    it->log();
+    it->log(programName);
   }
 }
 
@@ -331,7 +329,7 @@ void Program::reload() {
   fLogC("Program creation failed");
   for (auto it : mShaders) {
     attach(it);
-    fLogC("Failed to attach shader of type %s", it->getTypeString().c_str());
+    fLogC("Failed to attach shader of type %s", it->getDebugInfo().type.c_str());
   }
   if (!mDelayedLinking) {
     link();
@@ -340,8 +338,6 @@ void Program::reload() {
   }
   fLogC("Program linking failed");
 }
+
 } /* flc */
-flc::Program *buildProgram(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking) {
-  return new flc::Program(shaders, skipLinking);
-}
 } /* flw */

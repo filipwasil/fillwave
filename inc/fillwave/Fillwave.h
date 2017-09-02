@@ -137,7 +137,6 @@ public:
    */
   template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath);
   template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath, const std::string &shaderSource);
-  flc::Shader* storeShader(const std::string &shaderPath, GLuint type);
   flc::Program* storeProgram(const std::string &name, const std::vector<flc::Shader *> &shaders, bool isSkipLinking = false);
 
   /* Store textures */
