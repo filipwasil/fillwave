@@ -77,14 +77,14 @@ inline void Terrain::distanceCheck(ICamera &camera) {
   GLfloat maximumDistance = singleChunkWidth * 0.5f;
 
   if (glm::abs(distanceToCamera.x) > maximumDistance) {
-    const float direction = distanceToCamera.x > 0.0f ? 1.0 : -1.0;
+    const float direction = distanceToCamera.x > 0.0f ? 1.0f : -1.0f;
     for (auto &it : mVoxelChunks) {
       it->moveByX(direction * singleChunkWidth);
     }
   }
 
   if (glm::abs(distanceToCamera.z) > maximumDistance) {
-    const float direction = distanceToCamera.z > 0.0f ? 1.0 : -1.0;
+    const float direction = distanceToCamera.z > 0.0f ? 1.0f : -1.0f;
     for (auto &it : mVoxelChunks) {
       it->moveByZ(direction * singleChunkWidth);
     }

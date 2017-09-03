@@ -34,6 +34,8 @@
 #include "fillwave/loaders/FileLoader.h"
 #include <fillwave/Log.h>
 
+#include <sstream>
+
 FLOGINIT("Shader", FERROR | FFATAL | FINFO | FDEBUG)
 
 using namespace std;

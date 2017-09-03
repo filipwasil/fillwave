@@ -79,8 +79,8 @@ void ReadFile(string fileName, string& fileContent) {
   ifs.close();
 }
 
-void WriteFile(const char* fileName, const string& fileContent) {
-  ofstream file (fileName);
+void WriteFile(const char* fileName, const std::string& fileContent) {
+  std::ofstream file (fileName);
   if (!file.is_open()) {
     cout << "Unable to open file";
     return;
