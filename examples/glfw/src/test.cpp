@@ -60,7 +60,6 @@ void init() {
 
   light->rotateByX(glm::radians(-90.0));
 
-// test code in test file
 #if 0
   ContextGLFW::mGraphicsEngine->storeProgram("custom_program", {
       ContextGLFW::mGraphicsEngine->storeShader<GL_FRAGMENT_SHADER>("basic_program.frag"),

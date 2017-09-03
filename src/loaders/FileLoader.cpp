@@ -82,7 +82,7 @@ void ReadFile(string fileName, string& fileContent) {
 void WriteFile(const char* fileName, const std::string& fileContent) {
   std::ofstream file (fileName);
   if (!file.is_open()) {
-    fLogE("File %s not found", fileName);
+    fLogE("File %s can not be created", fileName);
     return;
   }
   file << fileContent << endl;
