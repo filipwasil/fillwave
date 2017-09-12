@@ -63,5 +63,5 @@ void Button::onUnpicked() {
   // nothing
 }
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

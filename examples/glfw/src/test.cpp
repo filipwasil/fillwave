@@ -1,147 +1,104 @@
 //============================================================================
-// Name        : example_normals_and_specular_map.cpp
+// Name        : example_text.cpp
 // Author      : Filip Wasil
 // Version     :
 // Copyright   : none
-// Description : Fillwave normals and specular map example
+// Description : Fillwave engine example text
 //============================================================================
 
+#include <ContextGLFW.h>
 #include <example.h>
 
-/* Audio */
-//#include <portaudio.h>
-
 /* Graphics */
-#include <CallbacksGLFW/MoveCameraCallback.h>
-#include <CallbacksGLFW/AnimationKeyboardCallback.h>
-#include <CallbacksGLFW/TimeStopCallback.h>
-#include <ContextGLFW.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/Framework.h>
 
-/* Physics */
-//#include <bullet>
+#include <string>
+#include <sstream>
 
 using namespace flw;
 using namespace flw::flf;
 using namespace std;
+using namespace glm;
 
-#ifdef _WIN32
-GLFWwindow *ContextGLFW::mWindow;
-#endif
+std::vector<pText> texts;
+pText shift;
 
-int main(int argc, char *argv[]) {
+void createDynamicTexts() {
+  shift =
+      ContextGLFW::mGraphicsEngine->storeText("5",
+                                              "fonts/bridgenorth",
+                                              vec2(-0.05, 0.25), 400.0,
+                                              vec4(1.0, 1.0, 1.0, 1.0),
+                                              ETextEffect::eBold);
+}
+
+void createGauge(
+    int angleStep
+    , int angleStart
+    , int angleStop
+    , int valueStart
+    , int valueStop
+    , vec2 positionsCenter
+    , float radius) {
+  angleStep %= 360;
+  angleStart %= 360;
+  angleStop %= 360;
+  if (angleStep <= 0 && angleStart - angleStop < angleStep) {
+    // bad input data
+    return;
+  }
+
+  const int angleSteps = (angleStop - angleStart)/angleStep;
+  const int valueStep = (valueStop - valueStart)/angleSteps;
+
+  int angle = angleStart;
+  int value = valueStart;
+  while (angle <= angleStop) {
+    std::ostringstream oss;
+    oss << value;
+    std::string val = oss.str();
+    float a = static_cast<float>(angle);
+    const glm::vec2 screenSize = ContextGLFW::mGraphicsEngine->getScreenSize();
+    float f = screenSize.x/screenSize.y;
+    float x = positionsCenter.x + ( radius * cos(radians(-a - 90.f)) ) / f;
+    float y = positionsCenter.y + ( radius * sin(radians(-a - 90.f)) );
+    texts.push_back(ContextGLFW::mGraphicsEngine->storeText(val.c_str(), "fonts/bridgenorth", vec2(x, y), 80.0, vec4(1.0, 1.0, 1.0, 1.0), ETextEffect::eBold));
+    angle += angleStep;
+    value += valueStep;
+  }
+}
+
+int main(int argc, char* argv[]) {
   ContextGLFW mContext(argc, argv);
-  ContextGLFW::mGraphicsEngine->insertResizeScreen(mContext.getScreenWidth(), mContext.getScreenHeight());
-  init();
+  ContextGLFW::mGraphicsEngine->insertResizeScreen(mContext.getScreenWidth(),
+                                                   mContext.getScreenHeight());
   perform();
-  showDescription();
   mContext.render();
   exit(EXIT_SUCCESS);
 }
 
-void init() {
+void perform() {
   /* Scene and camera */
   ContextGLFW::mGraphicsEngine->setCurrentScene(make_unique<Scene>());
-  ContextGLFW::mGraphicsEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>(glm::vec3(0.0, 2.0, 10.0),
-                                                                                            glm::quat(),
-                                                                                            glm::radians(90.0),
-                                                                                            1.0,
-                                                                                            0.1,
-                                                                                            1000.0));
+  ContextGLFW::mGraphicsEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
 
-  /* Entities */
-  puEntity light = buildEntity();
+  puHUD hud = make_unique<HUD>();
 
-  /* Lights */
-  ContextGLFW::mGraphicsEngine->storeLightSpot(glm::vec3(0.0, 1.0, 0.0),
-                                               glm::quat(),
-                                               glm::vec4(1.0, 1.0, 1.0, 0.0),
-                                               light.get());
+  auto gauges = make_unique < ProgressBar
+  >(ContextGLFW::mGraphicsEngine,
+    ContextGLFW::mGraphicsEngine->storeTexture("128_128_64.color"),
+    "shaders/gauge/gauge.frag",
+    vec2(-1.0f, -1.0f),
+    vec2(2.0f, 2.0f));
 
-  light->rotateByX(glm::radians(-90.0));
+  gauges->setProgress(0.9);
+  createGauge(20, 30, 330, 0, 300, vec2(-0.65, 0.0f), 0.43f);
+  createGauge(27, 45, 315, 0, 10, vec2(0.60, 0.0f), 0.43f);
 
-#if 0
-  ContextGLFW::mGraphicsEngine->storeProgram("custom_program", {
-      ContextGLFW::mGraphicsEngine->storeShader<GL_FRAGMENT_SHADER>("basic_program.frag"),
-      ContextGLFW::mGraphicsEngine->storeShader<GL_VERTEX_SHADER>("basic_program.vert"),
-      ContextGLFW::mGraphicsEngine->storeShader<GL_GEOMETRY_SHADER>("basic_program.geom"),
-      ContextGLFW::mGraphicsEngine->storeShader<GL_TESS_CONTROL_SHADER>("basic_program.tesc"),
-      ContextGLFW::mGraphicsEngine->storeShader<GL_TESS_EVALUATION_SHADER>("basic_program.tese")
-  });
-#endif
+  hud->attach(std::move(gauges));
 
-  auto program = ProgramLoader(ContextGLFW::mGraphicsEngine).getProgram(EProgram::basic, "basic_program");
+  createDynamicTexts();
 
-  light->attach(make_unique<Model>(ContextGLFW::mGraphicsEngine, program, "meshes/sphere.obj", "255_255_255.color"));
-  light->attachHierarchyCallback(make_unique<TimedMoveCallback>(light.get(), glm::vec3(4.0, 0.0, 0.0), 50.0));
-  light->scaleTo(0.02);
-  light->moveBy(glm::vec3(-2.0, 4.0, 0.0));
-
-  auto mirroredContent = ContextGLFW::mGraphicsEngine->storeTextureRenderable();
-
-  puModel wall = make_unique<Model>(ContextGLFW::mGraphicsEngine,
-                                    program,
-                                    "meshes/floor.obj",
-                                    ContextGLFW::mGraphicsEngine->storeTexture("255_255_255.checkboard"),
-                                    ContextGLFW::mGraphicsEngine->storeTexture("255_255_255.color"),
-                                    ContextGLFW::mGraphicsEngine->storeTexture("255_255_255.color"));
-  wall->moveInDirection(glm::vec3(0.0, -2.0, 0.0));
-  wall->scaleTo(1.0);
-
-  ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(wall));
-  ContextGLFW::mGraphicsEngine->getCurrentScene()->attach(std::move(light));
-
-  /* Engine callbacks */
-  ContextGLFW::mGraphicsEngine->attachCallback(make_unique<TimeStopCallback>(ContextGLFW::mGraphicsEngine));
-  ContextGLFW::mGraphicsEngine->attachCallback(make_unique<MoveCameraCallback>(ContextGLFW::mGraphicsEngine,
-                                                                                 EEventType::eKey,
-                                                                                 0.1));
-  ContextGLFW::mGraphicsEngine->attachCallback(make_unique<MoveCameraCallback>(ContextGLFW::mGraphicsEngine,
-                                                                                 EEventType::eCursorPosition,
-                                                                                 0.1,
-                                                                                 ContextGLFW::mWindow));
-
-  CameraPerspective c(glm::vec3(0.0, 2.0, 10.0),
-                                 glm::quat(),
-                                 glm::radians(90.0),
-                                 1.0,
-                                 0.1,
-                                 1000.0);
-  mirroredContent->bindForWriting();
-  ContextGLFW::mGraphicsEngine->getCurrentScene()->draw(c);
-  mirroredContent->bindForRendering();
-}
-
-void perform() {
-  /* Attach entities and entity to the scene */
-
-  ContextGLFW::mGraphicsEngine->getCurrentScene()->setSkybox(make_unique<Skybox>(ContextGLFW::mGraphicsEngine,
-                                                                                 ContextGLFW::mGraphicsEngine->storeTexture3D(
-                                                                                     "textures/skybox/hourglass/hourglass_right.jpg",
-                                                                                     "textures/skybox/hourglass/hourglass_left.jpg",
-                                                                                     "textures/skybox/hourglass/hourglass_top.jpg",
-                                                                                     "",
-                                                                                     "textures/skybox/hourglass/hourglass_front.jpg",
-                                                                                     "textures/skybox/hourglass/hourglass_back.jpg")));
-}
-
-void showDescription() {
-  ContextGLFW::mGraphicsEngine->storeText("Fillwave example normal mapping",
-                                          "fonts/Titania",
-                                          glm::vec2(-0.95, 0.80),
-                                          100.0);
-  ContextGLFW::mGraphicsEngine->storeText("Use mouse to move the camera",
-                                          "fonts/Titania",
-                                          glm::vec2(-0.95, -0.40),
-                                          70.0);
-  ContextGLFW::mGraphicsEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
-  ContextGLFW::mGraphicsEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
-  ContextGLFW::mGraphicsEngine->storeText("Use 'T' to resume/stop time",
-                                          "fonts/Titania",
-                                          glm::vec2(-0.95, -0.70),
-                                          70.0);
-  ContextGLFW::mGraphicsEngine->storeText("Use 'D' for toggle debugger On/Off",
-                                          "fonts/Titania",
-                                          glm::vec2(-0.95, -0.80),
-                                          70.0);
+  ContextGLFW::mGraphicsEngine->getCurrentScene()->setHUD(std::move(hud));
 }

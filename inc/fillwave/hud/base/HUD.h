@@ -48,6 +48,6 @@ public:
   virtual void draw() override;
 };
 
-} /* namespace flf */
+} /* flf */
 typedef std::unique_ptr<flf::HUD> puHUD;
-} /* namespace flw */
+} /* flw */
