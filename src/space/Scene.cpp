@@ -81,8 +81,9 @@ void Scene::draw(ICamera &camera) {
   mRenderer->draw(camera);
 }
 
-void Scene::drawHUD() {
+void Scene::drawHUD(float timeExpiredInSeconds) {
   if (mHUD) {
+    mHUD->evaluateTime(timeExpiredInSeconds);
     mHUD->draw();
   }
 }

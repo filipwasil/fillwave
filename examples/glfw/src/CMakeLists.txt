@@ -18,6 +18,7 @@ set (SOURCE_FILES test.cpp
     ContextGLFW.cpp
     PickableModel.cpp
     GradientBall.cpp
+    Cluster.cpp
     ${SOURCE_CALLBACKS_GLFW}
     ${SOURCE_CONSTRUCTORS})
 

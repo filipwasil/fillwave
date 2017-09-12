@@ -31,18 +31,16 @@
  */
 
 #include "CallbacksGLFW/ColorPickingCallback.h"
-//#include <fillwave/Log.h>
 
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
-
-//FLOGINIT("ColorPickingCallback", FERROR | FFATAL)
 
 namespace flw {
 namespace flf {
 
 ColorPickingCallback::ColorPickingCallback(Engine *engine)
-    : Callback(EEventType::eMouseButton), mEngine(engine) {
+    : Callback(EEventType::eMouseButton)
+    , mEngine(engine) {
 
 }
 
@@ -53,5 +51,5 @@ void ColorPickingCallback::perform(EventType &event) {
   }
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

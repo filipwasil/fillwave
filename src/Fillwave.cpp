@@ -501,7 +501,7 @@ const aiScene* Engine::getModelFromFile(string path) {
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
 
 template <GLuint T>
-Shader* Engine::storeShader(const string &shaderPath) {
+Shader* Engine::storeShader(const string& shaderPath) {
   string shaderSource = "";
   const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
   flf::ReadFile(fullPath, shaderSource);

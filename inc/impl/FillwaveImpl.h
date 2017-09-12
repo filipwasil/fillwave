@@ -149,6 +149,8 @@ struct Engine::EngineImpl final {
   puScene mScene;
   glm::vec3 mBackgroundColor;
 
+  void update();
+
   /* Initiatization */
   void init();
   void initExtensions();
@@ -172,14 +174,13 @@ struct Engine::EngineImpl final {
 
   /* Evaluation */
   void evaluateShadowMaps();
-  void evaluateDebugger();
+  void updateDebugger();
   void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
   void evaluateTime(GLfloat timeExpiredInSeconds);
   void evaluateStartupAnimation(GLfloat time);
 
   /* Draw types */
   void draw(GLfloat time);
-  void drawFront();
   void drawOcclusionPass();
 
 #ifdef FILLWAVE_GLES_3_0
@@ -191,11 +192,11 @@ struct Engine::EngineImpl final {
   void drawTexture(flc::Texture *t);
 
   /* IRenderer */
-  void drawClear();
-  void drawHUD();
-  void drawSceneStartup();
-  void drawScene(GLfloat time);
-  void drawSceneCore();
+  inline void drawClear();
+  inline void drawTexts();
+  inline void drawSceneStartup();
+  inline void drawScene(GLfloat time);
+  inline void drawSceneCore();
 
   /* Picking */
   glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
@@ -460,13 +461,13 @@ void Engine::EngineImpl::draw(GLfloat time) {
     glDepthMask(GL_TRUE);
     evaluateShadowMaps();
     drawScene(time);
-    drawFront();
+    drawTexts();
+    update();
   }
 }
 
-inline void Engine::EngineImpl::drawFront() {
-  drawHUD();
-  evaluateDebugger();
+inline void Engine::EngineImpl::update() {
+  updateDebugger();
   mScene->drawCursor();
   mScene->updateDependencies();
   mScene->updateRenderer();
@@ -501,7 +502,7 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     drawScene(time);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    drawFront();
+    update();
   }
 }
 
@@ -531,16 +532,13 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
     drawScene(time);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    drawFront();
+    update();
   }
 }
 
 #endif
 
-inline void Engine::EngineImpl::drawHUD() {
-  if (mScene) {
-    mScene->drawHUD();
-  }
+inline void Engine::EngineImpl::drawTexts() {
   for (auto &it : mTextManager) {
     it->draw();
   }
@@ -568,9 +566,9 @@ inline void Engine::EngineImpl::drawClear() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-inline void Engine::EngineImpl::drawScene(GLfloat time) {
+inline void Engine::EngineImpl::drawScene(GLfloat timeExpiredInSeconds) {
 
-  evaluateTime(time);
+  evaluateTime(timeExpiredInSeconds);
 
   if (mPostProcessingPasses.size()) {
     auto _compare_function = [](flc::PostProcessingPass &pass) -> bool {
@@ -604,7 +602,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 
         textureCurrent->draw(0.0f);
 
-        textureNext->draw(time);
+        textureNext->draw(timeExpiredInSeconds);
 
         textureNext->bindForReading();
 
@@ -613,7 +611,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
         flc::Framebuffer::bindScreenFramebuffer();
 
         // render to current bound framebuffer using textureCurrent as a texture to post process
-        textureCurrent->draw(time);
+        textureCurrent->draw(timeExpiredInSeconds);
 
         textureCurrent = (*it).getFrame();
         programCurrent = (*it).getProgram();
@@ -622,7 +620,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
         drawTexture(textureCurrent, programCurrent);
       }
 
-      (*it).checkTime(time);
+      (*it).checkTime(timeExpiredInSeconds);
     }
 
     auto it = remove_if(_begin, _end, _compare_function);
@@ -631,6 +629,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
 
   } else {
     drawSceneCore();
+    mScene->drawHUD(timeExpiredInSeconds);
   }
 }
 
@@ -731,7 +730,7 @@ inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
   }
 }
 
-inline void Engine::EngineImpl::evaluateDebugger() {
+inline void Engine::EngineImpl::updateDebugger() {
   GLint mCurentTextureUnit = 0;
   GLint id = 0;
   switch (mDebugger->getState()) {

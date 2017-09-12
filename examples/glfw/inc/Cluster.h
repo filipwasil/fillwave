@@ -36,28 +36,47 @@ namespace flw {
 class Engine;
 namespace flf {
 
-/*! \class ProgressBar
+/*! \class Cluster
  * \brief HUD node to indicate progress.
  */
 
-class ProgressBar : public IHUDNode {
+class Cluster : public IHUDNode {
 public:
-  ProgressBar(Engine *engine,
+  Cluster(Engine *engine,
       flc::Texture2D *texture,
       const std::string &shaderPath,
       glm::vec2 position,
       glm::vec2 scale);
 
-  virtual ~ProgressBar() override = default;
+  virtual ~Cluster() override = default;
 
-  void setProgress(GLfloat progress);
+  void setSpeed(GLfloat progress);
 
-  void draw() override;
+  void setRPM(GLfloat progress);
+
+  void evaluateTime(float time) override;
+
+  void createGauge(
+      int angleStep
+      , int angleStart
+      , int angleStop
+      , int valueStart
+      , int valueStop
+      , glm::vec2 positionsCenter
+      , float radius);
+
+  void setShift(unsigned int shift);
 
 private:
-  GLfloat mProgress;
+  std::vector<pText> mTexts;
+  pText mShift;
+
+  float mSpeed;
+  float mRPM;
+  float mTimePassed;
+  Engine* mEngine;
 };
 
-} /* namespace flf */
-typedef std::unique_ptr<flf::ProgressBar> puProgressBar;
-} /* namespace flw */
+} /* flf */
+typedef std::unique_ptr<flf::Cluster> puCluster;
+} /* flw */

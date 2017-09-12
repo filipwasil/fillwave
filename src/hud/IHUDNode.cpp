@@ -33,10 +33,6 @@
 
 #include <fillwave/hud/base/IHUDNode.h>
 
-#include <fillwave/Log.h>
-
-FLOGINIT_DEFAULT()
-
 namespace flw {
 namespace flf {
 
@@ -44,11 +40,16 @@ namespace flf {
  * \brief HUD base element.
  */
 
-IHUDNode::IHUDNode(flc::Texture2D *texture, flc::Program *program, glm::vec2 position, glm::vec2 scale)
+IHUDNode::IHUDNode(
+    flc::Texture2D *texture
+    , flc::Program *program
+    , glm::vec2 position
+    , glm::vec2 scale)
     : mTexture(texture)
     , mProgram(program)
     , mPosition(position)
-    , mScale(scale) {
+    , mScale(scale)
+ {
   mBlending = {
       GL_SRC_ALPHA,
       GL_ONE_MINUS_SRC_ALPHA
@@ -65,10 +66,11 @@ void IHUDNode::onDetached() {
   // nothing
 }
 
+void IHUDNode::evaluateTime(float /*timeExpiredInSeconds*/) {
+  // nothing
+}
+
 void IHUDNode::draw() {
-  if (nullptr == mTexture || NULL == mProgram) {
-    fLogF("tried to draw a non drawable");
-  }
   mProgram->use();
   mProgram->uniformPush("uPosition", mPosition);
   mProgram->uniformPush("uScale", mScale);
@@ -79,12 +81,16 @@ void IHUDNode::coreDraw() {
   glDisable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);
   glBlendFunc(mBlending.mSrc, mBlending.mSrc);
-  mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  mTexture->unbind();
+  if (nullptr == mTexture) {
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  } else {
+    mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    mTexture->unbind();
+  }
   glEnable(GL_DEPTH_TEST);
   glDisable(GL_BLEND);
 }
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

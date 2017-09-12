@@ -90,7 +90,7 @@ public:
 
   void draw(ICamera &c);
 
-  void drawHUD();
+  void drawHUD(float time);
 
   void drawDepth(ICamera &camera);
 
