@@ -44,5 +44,5 @@ void HUD::draw() {
   }
 }
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

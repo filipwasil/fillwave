@@ -43,7 +43,8 @@ namespace flf {
 
 class IHUDNode : public ITreeNode {
 public:
-  IHUDNode(flc::Texture2D* texture = nullptr,
+  IHUDNode(
+      flc::Texture2D* texture = nullptr,
       flc::Program* program = nullptr,
       glm::vec2 position = glm::vec2(0.0f, 0.0f),
       glm::vec2 scale = glm::vec2(1.0f, 1.0f));
