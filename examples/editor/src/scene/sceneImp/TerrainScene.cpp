@@ -44,7 +44,7 @@ void TerrainScene::init() {
   mEngine->configFPSCounter("fonts/Titania", glm::vec2(0.7, 0.9), 100.0);
 
   auto terrain = make_unique<MeshTerrain>(mEngine.get(),
-                                                   ProgramLoader(mEngine.get()).getDefault(),
+                                                   ProgramLoader(mEngine.get()).getProgram(EProgram::basic),
                                                    new PerlinConstructor(),
                                                    Material(),
                                                    "textures/test.png",

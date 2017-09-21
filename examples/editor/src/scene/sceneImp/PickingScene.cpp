@@ -34,7 +34,7 @@ void PickingScene::init() {
 	/* Picking info text which will be modified frequently */
 	pText pickInfo = mEngine->storeText("Nothing picked", "fonts/Titania", glm::vec2(-0.95, 0.80), 60.0);
 
-	auto program = ProgramLoader(mEngine.get()).getDefault();
+	auto program = ProgramLoader(mEngine.get()).getProgram(EProgram::basic);
 
 	/* build ball model */
 	puModel ballModel1 = make_unique<PickableModel>("left ball",

@@ -1,3 +1,4 @@
+#include <fillwave/loaders/ProgramLoader.h>
 #include "scene/callbacks/Callbacks.h"
 #include "OrtpgraphicProjectionScene.h"
 #include <scene/callbacks/StandardKeyboardEventHandler.h>
@@ -39,7 +40,7 @@ void OrtpgraphicProjectionScene::init() {
 	mEngine->storeLightSpot(glm::vec3(1.0, 1.0, 1.0), glm::quat(), glm::vec4(1.0, 0.0, 0.0, 0.0), lightSource_3.get());
 
 	/* Programs */
-	flc::Program *program = ProgramLoader(mEngine.get()).getDefault();
+	flc::Program *program = ProgramLoader(mEngine.get()).getProgram(EProgram::basic);
 
 	lightSource_1->attach(make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "0_255_0.color"));
 	lightSource_2->attach(make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "0_0_255.color"));

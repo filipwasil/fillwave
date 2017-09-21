@@ -35,7 +35,7 @@ void EffectsScene::init() {
 			std::make_unique<scene::callbacks::StandardMouseEventHandler>(mEngine));
 
 	puModel model = make_unique<Model>(mEngine.get(),
-	                                   ProgramLoader(mEngine.get()).getDefault(),
+	                                   ProgramLoader(mEngine.get()).getProgram(EProgram::basic),
 	                                   "meshes/sphere.obj",
 	                                   "64_128_255.checkboard");
 	pIEffect fog = make_shared<Fog>();

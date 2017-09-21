@@ -54,7 +54,7 @@ void DynamicTextureScene::init() {
 			mEngine.get(), EEventType::eCursorPosition, 0.01));
 
   auto model = make_unique<Model>(mEngine.get(),
-                                  ProgramLoader(mEngine.get()).getDefault(),
+                                  ProgramLoader(mEngine.get()).getProgram(EProgram::basic),
                                   "meshes/sphere.obj",
                                   mEngine->storeTextureDynamic("shaders/water/water.frag"));
   model->moveBy(glm::vec3(0.0, 0.0, -15.0));

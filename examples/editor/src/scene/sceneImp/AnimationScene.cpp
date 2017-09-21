@@ -1,6 +1,7 @@
 #include <fillwave/space/Scene.h>
 #include <fillwave/models/EmiterPointGPU.h>
 #include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
+#include <fillwave/loaders/ProgramLoader.h>
 #include "scene/callbacks/AnimationKeyboardCallback.h"
 #include "AnimationScene.h"
 
@@ -27,7 +28,7 @@ void AnimationScene::init() {
                                                                             1000.0));
 
   auto beast = std::make_unique<Model>(mEngine.get(),
-                                       ProgramLoader(mEngine.get()).getDefaultBones(),
+                                       ProgramLoader(mEngine.get()).getProgram(EProgram::basic),
                                        "animations/beast/beast.dae");
   beast->scaleTo(3.0f);
   beast->rotateByX(90.0f);

@@ -28,7 +28,7 @@ void CallbacksScene::init() {
   mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
   mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
 
-  flc::Program *p = ProgramLoader(mEngine.get()).getDefault();
+  flc::Program *p = ProgramLoader(mEngine.get()).getProgram(EProgram::basic);
 
   /* Models */
   BuilderModelExternalMaps builder(mEngine.get(), "meshes/sphere.obj", p, "textures/test.png");

@@ -2,6 +2,7 @@
 #include "scene/callbacks/Callbacks.h"
 #include <scene/callbacks/StandardKeyboardEventHandler.h>
 #include <scene/callbacks/StandardMouseEventHandler.h>
+#include <fillwave/loaders/ProgramLoader.h>
 
 using namespace flw;
 using namespace flw::flf;
@@ -36,7 +37,7 @@ void FullModelScene::init() {
 
 	light->rotateByX(glm::radians(-90.0));
 
-	flc::Program *program = ProgramLoader(mEngine.get()).getDefault();
+	flc::Program *program = ProgramLoader(mEngine.get()).getProgram(EProgram::basic);
 
 	light->attach(make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "255_255_255.color"));
 	light->attachHierarchyCallback(make_unique<TimedMoveCallback>(light.get(), glm::vec3(4.0, 0.0, 0.0), 50.0));

@@ -35,7 +35,7 @@ void PostProcessingScene::init() {
 	/* Models */
 
 	puModel model = make_unique<Model>(mEngine.get(),
-	                                   ProgramLoader(mEngine.get()).getDefault(),
+	                                   ProgramLoader(mEngine.get()).getProgram(EProgram::basic),
 	                                   "meshes/sphere.obj",
 	                                   textureDynamic);
 	model->moveBy(glm::vec3(0.0, 0.0, -15.0));
