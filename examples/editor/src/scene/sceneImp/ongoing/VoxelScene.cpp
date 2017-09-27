@@ -15,7 +15,7 @@
 #include <CallbacksGLFW/MoveCameraCallback.h>
 #include <CallbacksGLFW/AnimationKeyboardCallback.h>
 #include <CallbacksGLFW/TimeStopCallback.h>
-#include <ContextGLFW.h>
+#include <App.h>
 #include <TerrainConstructors/MountainConstructor.h>
 #include <fillwave/Fillwave.h>
 
@@ -27,7 +27,7 @@ using namespace flw::flf;
 using namespace std;
 
 int main(int argc, char* argv[]) {
-	ContextGLFW mContext(argc, argv);
+	App mContext(argc, argv);
 	mEngine->insertResizeScreen(mContext.getScreenWidth(),
 	      mContext.getScreenHeight());
 	init();

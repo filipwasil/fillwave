@@ -39,28 +39,27 @@ namespace flw {
 namespace flf {
 
 SequenceCallback::SequenceCallback()
-    : Callback(EEventType::eTime)
+    : Callback([this](EventType& event) {
+      if (mReloaditerator) {
+        mCallbackIterator = this->begin();
+        mReloaditerator = false;
+      }
+
+      (*mCallbackIterator).mPerform(event);
+      if ((*mCallbackIterator).isFinished()) {
+        mCallbackIterator++;
+      }
+      if (mCallbackIterator == end()) {
+        finish();
+        mCallbackIterator = this->begin();
+        for (auto &it : *this) {
+          it.reset();
+        }
+      }
+    }
+    , EEventType::eTime)
     , mCallbackIterator(this->begin())
     , mReloaditerator(true) {
-}
-
-void SequenceCallback::perform(EventType &event) {
-  if (mReloaditerator) {
-    mCallbackIterator = this->begin();
-    mReloaditerator = false;
-  }
-
-  (*mCallbackIterator)->perform(event);
-  if ((*mCallbackIterator)->isFinished()) {
-    mCallbackIterator++;
-  }
-  if (mCallbackIterator == end()) {
-    finish();
-    mCallbackIterator = this->begin();
-    for (auto &it : *this) {
-      it->reset();
-    }
-  }
 }
 
 } /* flf */

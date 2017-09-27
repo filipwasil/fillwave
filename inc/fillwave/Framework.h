@@ -79,6 +79,5 @@
 #include <fillwave/models/effects/TextureOnly.h>
 
 /* Particles */
-#include <fillwave/models/Impostor.h>
 #include <fillwave/models/EmiterPointGPU.h>
 #include <fillwave/models/EmiterPointCPU.h>

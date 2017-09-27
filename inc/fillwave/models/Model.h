@@ -33,6 +33,7 @@
 #include <fillwave/models/Mesh.h>
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/Assets.h>
+#include "fillwave/common/TGetter.h"
 
 namespace flw {
 class Engine;
@@ -155,6 +156,7 @@ private:
       flc::Texture2D *specularMap,
       Engine *engine);
 
+  TGetter<Mesh> getMesh(size_t id);
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
   puMesh loadMesh(tinyobj::shape_t& shape,
              tinyobj::attrib_t& attrib,
@@ -164,7 +166,7 @@ private:
              flc::Texture2D* specularMap,
              Engine* engine);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
+  std::vector<Mesh*> mMeshes;
 };
 
 } /* flf */

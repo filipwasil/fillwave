@@ -73,25 +73,23 @@ public:
   GLboolean isPSR();
 
   /* Callbacks */
-  void handleHierarchyEvent(EventType &event);
+  void handleHierarchyEvent(EventType& event);
 
   /* Model */
   glm::mat4 getPhysicsMMC();
 
   /* Physics */
-  void setTransformation(glm::mat4 modelMatrix);
+  void setTransformation(glm::mat4& modelMatrix);
 
   /* Callbacks */
-  void attachHierarchyCallback(puCallback &&callback);
-
-  void detachHierarchyCallback(Callback *callback);
+  void attachHierarchyCallback(Callback&& callback);
 
   /* Parent */
   void updateMatrixTree();
 
-  void updateParentMatrix(glm::mat4 &parent);
+  void updateParentMatrix(glm::mat4& parent);
 
-  void updateParentRotation(glm::quat &rotation);
+  void updateParentRotation(glm::quat& rotation);
 
   /* IPickable */
   void pick(glm::vec3 color) override;
@@ -138,7 +136,7 @@ protected:
 
   GLboolean mChildrenPropagateEvent;
   GLboolean mParentRefresh;
-  std::vector<puCallback> mCallbacksHierarchy;
+  std::vector<Callback> mCallbacksHierarchy;
 
   GLboolean mPSC;
   GLboolean mPSR;

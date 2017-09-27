@@ -30,7 +30,6 @@
 
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
-#include <fillwave/common/Finishable.h>
 
 namespace flw {
 namespace flc {
@@ -39,7 +38,7 @@ namespace flc {
  * \brief Defines one post processing pass.
  */
 
-class PostProcessingPass : public flf::Finishable {
+class PostProcessingPass {
 public:
   PostProcessingPass(flc::Program *p, flc::Texture2DRenderableDynamic *t, GLfloat lifetime);
 
@@ -49,9 +48,15 @@ public:
 
   flc::Program *getProgram() const;
 
+  void proceed(float timePassed);
+
+  bool isFinished() const;
+
 private:
   flc::Texture2DRenderableDynamic *mFrame;
   flc::Program *mProgram;
+  float mTimePassed;
+  float mLifetime;
 };
 
 } /* flc */

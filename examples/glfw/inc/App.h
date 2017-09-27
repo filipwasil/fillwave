@@ -8,15 +8,15 @@ namespace flw {
 class Engine;
 }
 
-class ContextGLFW {
+class App {
 private:
   GLfloat mTimeExpired = 0.0f;
   static GLuint mCursorPositionX;
   static GLuint mCursorPositionY;
 public:
-  ContextGLFW(int argc, char *argv[]);
+  App(int argc, char *argv[]);
 
-  virtual ~ContextGLFW();
+  virtual ~App();
 
   void cursorShow();
 
@@ -24,7 +24,7 @@ public:
 
   void render();
 
-  static flw::Engine *mGraphicsEngine;
+  static flw::Engine *mGraphics;
   static GLFWwindow *mWindow;
   static GLFWwindow *mWindowNew;
   static GLfloat mScreenWidth;

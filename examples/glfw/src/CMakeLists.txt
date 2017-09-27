@@ -15,10 +15,11 @@ aux_source_directory (CallbacksGLFW/ SOURCE_CALLBACKS_GLFW)
 aux_source_directory (TerrainConstructors/ SOURCE_CONSTRUCTORS)
 
 set (SOURCE_FILES test.cpp
-    ContextGLFW.cpp
+    App.cpp
     PickableModel.cpp
     GradientBall.cpp
     Cluster.cpp
+    Cradle.cpp
     ${SOURCE_CALLBACKS_GLFW}
     ${SOURCE_CONSTRUCTORS})
 

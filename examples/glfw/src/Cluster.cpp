@@ -36,6 +36,10 @@
 #include <fillwave/Log.h>
 #include "Cluster.h"
 
+namespace {
+constexpr float speedFactor = 0.015f;
+}
+
 namespace flw {
 namespace flf {
 
@@ -57,13 +61,7 @@ Cluster::Cluster(Engine* engine,
 
 void Cluster::evaluateTime(float time) {
   mProgram->use();
-  constexpr float speedFactor = 0.02f;
   mTimePassed += time * (mSpeed * speedFactor + 0.5f);
-  if (mRPM < 315.0f) {
-    mRPM+= 0.2f;
-  } else if (mSpeed < 345.0f) {
-    mSpeed += 0.2f;
-  }
   mProgram->uniformPush("uTime", mTimePassed);
   mProgram->uniformPush("uSpeedAngle", mSpeed);
   mProgram->uniformPush("uRPMAngle", mRPM);

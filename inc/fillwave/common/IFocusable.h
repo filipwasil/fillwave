@@ -52,11 +52,11 @@ public:
 
   virtual void handleFocusEvent(EventType &event) = 0;
 
-  void attachCallback(Callback *callback);
+  void attachCallback(Callback callback);
 
 protected:
-  Engine *mEngine;
-  std::vector<Callback *> mCallbacks;
+  Engine* mEngine;
+  std::vector<Callback> mCallbacks;
 };
 
 } /* flf */

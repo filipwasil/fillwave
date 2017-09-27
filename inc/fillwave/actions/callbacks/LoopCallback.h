@@ -33,11 +33,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/common/Finishable.h>
-
 #include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/actions/events/TEvent.h>
 
 namespace flw {
 namespace flf {
@@ -48,21 +44,14 @@ namespace flf {
 
 class LoopCallback : public Callback {
 public:
-  LoopCallback(puCallback &&callback, int numberOfExecutions);
+  LoopCallback(Callback&& callback, int numberOfExecutions);
 
   virtual ~LoopCallback() = default;
 
-  /*	perform
-   * \brief Performs ItemCallback action.
-   */
-
-  void perform(EventType &event);
-
 protected:
-  puCallback mCallback;
+  Callback mCallback;
   int mLoopsLeft;
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::LoopCallback> puLoopCallback;
 } /* flw */

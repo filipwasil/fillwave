@@ -137,7 +137,7 @@ void insertInput(TouchEvent& e);
 
 \begin{lstlisting}
 
-void ContextGLFW1::keyboardCallback(GLFWwindow* window,
+void App1::keyboardCallback(GLFWwindow* window,
                                    int key,
                                    int scancode,
                                    int action,
@@ -153,7 +153,7 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
    flw::flf::KeyboardEvent event(data);
    
    /* insert an event */
-   mGraphicsEngine->insertInput(event);
+   mGraphics->insertInput(event);
 }
 \end{lstlisting}
 
@@ -162,12 +162,12 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
 \indent \indent Last step that has to be done in order to use Fillwave is rendering loop creation. In each iteration a \textbf{draw}, \textbf{drawLines}, or \textbf{drawPoints} function must be called with the \textbf{"How many seconds passed since last draw"} parameter. Also there is an extra \textbf{drawTexture} function which can be used if a single texture in all You want to see. GLFW example of render loop will look like:
 
 \begin{lstlisting}
-void ContextGLFW1::render() {
+void App1::render() {
    while (!glfwWindowShouldClose(mWindow)) {
       float now = glfwGetTime();
       float timeSinceLastFrameInSec = now - mTimeExpired;
       mTimeExpired = now;
-      mGraphicsEngine->draw(timeSinceLastFrameInSec);
+      mGraphics->draw(timeSinceLastFrameInSec);
 
       /* We were writing to back buffer - make it visible */
       glfwSwapBuffers(mWindow);

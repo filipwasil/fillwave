@@ -120,13 +120,13 @@ struct Engine::EngineImpl final {
   flc::VertexArray *mVAOOcclusion;
 
   /* Inputs - callbacks */
-  std::map<EEventType, std::vector<puCallback>> mCallbacks;
+  std::map<EEventType, std::vector<flf::Callback>> mCallbacks;
 
   /* Inputs - focus */
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
   pair<IFocusable*, vector<Callback*>> mFocus;
 #else
-  std::map<flw::flf::IFocusable*, std::vector<flw::flf::Callback*>> mFocus;
+  std::map<flw::flf::IFocusable*, std::vector<flw::flf::Callback>> mFocus;
 #endif
 
   /* Extras */
@@ -134,7 +134,7 @@ struct Engine::EngineImpl final {
   GLuint mFrameCounter;
   GLfloat mTimeFactor;
   pText mFPSText;
-  flf::FPSCallback* mTextFPSCallback;
+  flf::FPSCallback mTextFPSCallback;
 
   /* Startup */
   GLfloat mStartupTime;
@@ -165,12 +165,11 @@ struct Engine::EngineImpl final {
 
   /* Callbacks */
   void runCallbacks();
-  void runCallbacks(flf::EventType &eventType);
+  void runCallbacks(flf::EventType& eventType);
 
-  void attachCallback(puCallback &&callback);
+  void attachCallback(flf::Callback&& callback);
   void detachCallbacks();
   void detachCallbacks(EEventType eventType);
-  void detachCallback(flf::Callback *callback);
 
   /* Evaluation */
   void evaluateShadowMaps();
@@ -187,6 +186,7 @@ struct Engine::EngineImpl final {
 #else
   void drawLines(GLfloat time);
   void drawPoints(GLfloat time);
+  void drawWithLines(GLfloat time);
 #endif
   void drawTexture(flc::Texture *t, flc::Program *p);
   void drawTexture(flc::Texture *t);
@@ -506,6 +506,39 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
   }
 }
 
+void Engine::EngineImpl::drawWithLines(GLfloat time) {
+
+#ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
+  /* Draw startup animation */
+  if (mStartupTime < mStartupTimeLimit) {
+    evaluateStartupAnimation(time);
+    mStartupTime += time;
+    return;
+  }
+#endif
+
+  if (mScene) {
+    /* count this frame */
+    mFrameCounter++;
+
+    /* Clear main framebuffer */
+    glClearDepth(1.0f);
+
+    /* Calculate dynamic textures */
+    mTextures->evaluateDynamicTextures(time);
+
+    /* Lights evaluation */
+    glDepthMask(GL_TRUE);
+    evaluateShadowMaps();
+    drawScene(time);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    drawScene(time);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    drawTexts();
+    update();
+  }
+}
+
 void Engine::EngineImpl::drawPoints(GLfloat time) {
 
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
@@ -620,7 +653,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat timeExpiredInSeconds) {
         drawTexture(textureCurrent, programCurrent);
       }
 
-      (*it).checkTime(timeExpiredInSeconds);
+      (*it).proceed(timeExpiredInSeconds);
     }
 
     auto it = remove_if(_begin, _end, _compare_function);
@@ -673,7 +706,7 @@ inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
 
   drawTexture(t, mPostProcessingPassStartup->getProgram());
 
-  mPostProcessingPassStartup->checkTime(time);
+  mPostProcessingPassStartup->proceed(time);
 }
 
 inline void Engine::EngineImpl::evaluateShadowMaps() {
@@ -791,9 +824,10 @@ inline void Engine::EngineImpl::updateDebugger() {
 
 void Engine::EngineImpl::runCallbacks(flf::EventType &event) {
   if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
-    for (auto &callback : mCallbacks[event.getType()]) {
-      callback->perform(event);
-    }
+    auto& callbacks = mCallbacks[event.getType()];
+//    for (auto &callback : callbacks) {
+//      callback.mPerform(event);
+//    }
   }
 }
 
@@ -812,11 +846,11 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
 
 /* Callbacks */
 
-void Engine::EngineImpl::attachCallback(puCallback &&callback) {
-  if (mCallbacks.find(callback->getEventType()) == mCallbacks.end()) {
-    mCallbacks[callback->getEventType()] = std::vector<puCallback>();
+void Engine::EngineImpl::attachCallback(flf::Callback&& callback) {
+  if (mCallbacks.find(callback.getEventType()) == mCallbacks.end()) {
+    mCallbacks[callback.getEventType()] = std::vector<flf::Callback>();
   }
-  mCallbacks[callback->getEventType()].push_back(move(callback));
+  mCallbacks[callback.getEventType()].push_back(callback);
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
@@ -847,17 +881,6 @@ inline void Engine::EngineImpl::detachCallbacks(EEventType eventType) {
   if (mCallbacks.find(eventType) != mCallbacks.end()) {
     mCallbacks[eventType].clear();
   }
-}
-
-void Engine::EngineImpl::detachCallback(flf::Callback *callback) {
-  EEventType e = callback->getEventType();
-  std::vector<puCallback> *callbacks = &mCallbacks[e];
-  callbacks->erase(remove_if( // Selectively remove elements in the second vector...
-      callbacks->begin(), callbacks->end(), [&](puCallback const &p) {
-        // This predicate checks whether the element is contained
-        // in the second vector of pointers to be removed...
-        return callback == p.get();
-      }), callbacks->end());
 }
 
 void Engine::EngineImpl::pick(GLuint x, GLuint y) {

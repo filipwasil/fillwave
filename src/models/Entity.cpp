@@ -136,14 +136,14 @@ void Entity::updateMatrixTree() {
   }
 }
 
-void Entity::handleHierarchyEvent(EventType &event) {
+void Entity::handleHierarchyEvent(EventType& event) {
   Callback::handleEvent(mCallbacksHierarchy, event);
   for (auto &it : mChildren) {
     it->handleHierarchyEvent(event);
   }
 }
 
-void Entity::setTransformation(glm::mat4 modelMatrix) {
+void Entity::setTransformation(glm::mat4& modelMatrix) {
   mMMC = modelMatrix;
   mPhysicsMMC = mParentMMC * mMMC;
   for (auto &it : mChildren) {
@@ -156,14 +156,14 @@ glm::mat4 Entity::getPhysicsMMC() {
   return mPhysicsMMC;
 }
 
-void Entity::updateParentMatrix(glm::mat4 &parent) {
+void Entity::updateParentMatrix(glm::mat4& parent) {
   mParentMMC = parent;
   mPhysicsMMC = mParentMMC * mMMC;
   mParentRefresh = GL_TRUE;
   notifyObservers();
 }
 
-void Entity::updateParentRotation(glm::quat &parent) {
+void Entity::updateParentRotation(glm::quat& parent) {
   mParentRotation = parent;
   glm::quat localRotation(mParentRotation *mRotation);
   for (auto &it : mChildren) {
@@ -172,12 +172,8 @@ void Entity::updateParentRotation(glm::quat &parent) {
   notifyObservers();
 }
 
-void Entity::attachHierarchyCallback(puCallback &&callback) {
+void Entity::attachHierarchyCallback(Callback&& callback) {
   mCallbacksHierarchy.push_back(std::move(callback));
-}
-
-void Entity::detachHierarchyCallback(Callback *callback) {
-  detachCallback(mCallbacksHierarchy, callback);
 }
 
 void Entity::pick(glm::vec3 color) {

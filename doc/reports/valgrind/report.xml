@@ -15,14 +15,14 @@
 ==17105==    by 0x505E0C8: ??? (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
 ==17105==    by 0x505EDC8: ??? (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
 ==17105==    by 0x505B3DC: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
-==17105==    by 0x421E96: ContextGLFW::ContextGLFW() (ContextGLFW.cpp:23)
+==17105==    by 0x421E96: App::App() (App.cpp:23)
 ==17105==    by 0x41B455: main (test.cpp:44)
 ==17105==  Address 0xc160c6a is 58 bytes inside a block of size 16,384 alloc'd
 ==17105==    at 0x4C2DC90: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
 ==17105==    by 0x6390BF1: XOpenDisplay (in /usr/lib/x86_64-linux-gnu/libX11.so.6.3.0)
 ==17105==    by 0x505E18B: ??? (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
 ==17105==    by 0x505B3DC: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
-==17105==    by 0x421E96: ContextGLFW::ContextGLFW() (ContextGLFW.cpp:23)
+==17105==    by 0x421E96: App::App() (App.cpp:23)
 ==17105==    by 0x41B455: main (test.cpp:44)
 ==17105== 
 ==17105== Conditional jump or move depends on uninitialised value(s)
@@ -31,7 +31,7 @@
 ==17105==    by 0x505FC65: ??? (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
 ==17105==    by 0x505EDF4: ??? (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
 ==17105==    by 0x505B3DC: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
-==17105==    by 0x421E96: ContextGLFW::ContextGLFW() (ContextGLFW.cpp:23)
+==17105==    by 0x421E96: App::App() (App.cpp:23)
 ==17105==    by 0x41B455: main (test.cpp:44)
 ==17105== 
 ==17105== Conditional jump or move depends on uninitialised value(s)
@@ -40,7 +40,7 @@
 ==17105==    by 0x505FC65: ??? (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
 ==17105==    by 0x505EDF4: ??? (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
 ==17105==    by 0x505B3DC: glfwInit (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
-==17105==    by 0x421E96: ContextGLFW::ContextGLFW() (ContextGLFW.cpp:23)
+==17105==    by 0x421E96: App::App() (App.cpp:23)
 ==17105==    by 0x41B455: main (test.cpp:44)
 ==17105== 
 ==17105== Conditional jump or move depends on uninitialised value(s)
@@ -83,7 +83,7 @@
 ==17105==    by 0xA45BE83: ??? (in /usr/lib/nvidia-346/libnvidia-glcore.so.346.59)
 ==17105==    by 0x9FA9300: ??? (in /usr/lib/nvidia-346/libnvidia-glcore.so.346.59)
 ==17105==    by 0x505D12C: glfwCreateWindow (in /usr/lib/x86_64-linux-gnu/libglfw.so.3.0)
-==17105==    by 0x421F66: ContextGLFW::windowInit(GLFWwindow*&) (ContextGLFW.cpp:47)
+==17105==    by 0x421F66: App::windowInit(GLFWwindow*&) (App.cpp:47)
 ==17105== 
 ==17105== Mismatched free() / delete / delete []
 ==17105==    at 0x4C2D2E0: operator delete(void*) (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)

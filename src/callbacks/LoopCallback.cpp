@@ -33,27 +33,27 @@
 
 
 #include <fillwave/actions/callbacks/LoopCallback.h>
+#include "fillwave/actions/events/EventType.h"
 
 namespace flw {
 namespace flf {
 
-LoopCallback::LoopCallback(puCallback &&callback, int numberOfExecutions)
-    : Callback(EEventType::eTime)
+LoopCallback::LoopCallback(Callback&& callback, int numberOfExecutions)
+    : Callback([this] (EventType& event) {
+      mCallback.mPerform(event);
+      if (mLoopsLeft != 0.0f) {
+        if (mCallback.isFinished()) {
+          if (--mLoopsLeft) {
+            mCallback.reset();
+          } else {
+            finish();
+          }
+        }
+      };
+    }
+    , EEventType::eTime)
     , mCallback(std::move(callback))
     , mLoopsLeft(numberOfExecutions) {
-}
-
-void LoopCallback::perform(EventType &event) {
-  mCallback->perform(event);
-  if (mLoopsLeft != FILLWAVE_ENDLESS) {
-    if (mCallback->isFinished()) {
-      if (--mLoopsLeft) {
-        mCallback->reset();
-      } else {
-        finish();
-      }
-    }
-  };
 }
 
 } /* flf */

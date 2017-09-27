@@ -263,7 +263,7 @@ inline void Model::initAnimations(const aiScene *scene) {
   if (scene->HasAnimations()) {
     mAnimator = std::make_unique<Animator>(scene);
     fLogD("attached TimedBoneUpdateCallback to model");
-    this->attachHierarchyCallback(std::make_unique<TimedBoneUpdateCallback>(this));
+    this->attachHierarchyCallback(TimedBoneUpdateCallback(this));
   }
 }
 
@@ -429,8 +429,18 @@ puMesh Model::loadMesh(const aiMesh *shape,
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
   vbo->emptyCPU();
 #endif
+  mMeshes.push_back(mesh.get());
   return mesh;
 }
+
+TGetter<Mesh> Model::getMesh(size_t id) {
+  if (id < mMeshes.size()) {
+    return TGetter<Mesh> (mMeshes.at(id));
+  }
+  fLogF("Requested mesh does not exist. Id requested: %d", static_cast<int>(id));
+  return TGetter<Mesh>(nullptr);
+}
+
 
 void Model::performAnimation(GLfloat timeElapsed_s) {
   if (mAnimator) {
@@ -552,7 +562,7 @@ inline void Model::initShadowing(Engine *engine) {
 }
 
 void Model::handleFocusEvent(EventType &event) {
-  Callback::handleEvent<Callback *>(mCallbacks, event);
+  Callback::handleEvent<Callback>(mCallbacks, event);
 }
 
 void Model::updateRenderer(IRenderer &renderer) {

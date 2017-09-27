@@ -103,6 +103,10 @@ void Engine::drawLines(GLfloat time) {
   mImpl->drawLines(time);
 }
 
+void Engine::drawWithLines(GLfloat time) {
+  mImpl->drawWithLines(time);
+}
+
 void Engine::drawPoints(GLfloat time) {
   mImpl->drawPoints(time);
 }
@@ -189,6 +193,7 @@ void Engine::insertInput(flf::EventType &event) {
   }
 #endif
   mImpl->runCallbacks(event);
+  mImpl->mTextFPSCallback.mPerform(event);
 }
 
 /* Detach */
@@ -208,7 +213,7 @@ void Engine::detachCallbacks() {
   mImpl->detachCallbacks();
 }
 
-void Engine::attachCallback(puCallback &&callback, flf::IFocusable* focusable) {
+void Engine::attachCallback(flf::Callback&& callback, flf::IFocusable* focusable) {
   if (focusable) {
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
     if (mImpl->mFocus.first) {
@@ -218,37 +223,33 @@ void Engine::attachCallback(puCallback &&callback, flf::IFocusable* focusable) {
     mImpl->mFocus.second.push_back(callback.get());
 #else
     if (mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
-      mImpl->mFocus[focusable] = vector<flf::Callback* >(1, callback.get());
+      mImpl->mFocus[focusable] = vector<flf::Callback>(1, callback);
     } else {
-      mImpl->mFocus[focusable].push_back(callback.get());
+      mImpl->mFocus[focusable].push_back(callback);
     }
 #endif
   }
-  mImpl->attachCallback(move(callback));
+  mImpl->attachCallback(std::move(callback));
 }
 
-void Engine::dropFocus(flf::IFocusable* focusable) {
-#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
-  if (focusable == mImpl->mFocus.first) {
-    for (auto& it : mImpl->mFocus.second) {
-      mImpl->unattachCallback(it);
-    }
-    mImpl->mFocus.first = nullptr;
-    mImpl->mFocus.second.clear();
-  }
-#else
-  fLogE("mImpl->mFocus.size() %ud", mImpl->mFocus.size());
-  if (!mImpl->mFocus.empty() && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
-    for (auto &it : mImpl->mFocus[focusable]) {
-      mImpl->detachCallback(it);
-    }
-  }
-#endif
-}
-
-void Engine::detachCallback(flf::Callback* callback) {
-  mImpl->detachCallback(callback);
-}
+//void Engine::dropFocus(flf::IFocusable* focusable) {
+//#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
+//  if (focusable == mImpl->mFocus.first) {
+//    for (auto& it : mImpl->mFocus.second) {
+//      mImpl->unattachCallback(it);
+//    }
+//    mImpl->mFocus.first = nullptr;
+//    mImpl->mFocus.second.clear();
+//  }
+//#else
+//  fLogE("mImpl->mFocus.size() %ud", mImpl->mFocus.size());
+//  if (!mImpl->mFocus.empty() && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
+//    for (auto &it : mImpl->mFocus[focusable]) {
+//      mImpl->detachCallbacks(it);
+//    }
+//  }
+//#endif
+//}
 
 pText Engine::storeText(const string &content,
     const string &fontName,
@@ -436,14 +437,9 @@ void Engine::addPostProcess(const string &fragmentShaderPath, GLfloat lifeTime) 
 void Engine::configFPSCounter(string fontName, glm::vec2 position, GLfloat size) {
   if (fontName.size() > 1) {
     mImpl->mFPSText = storeText("", fontName, position, size);
-
-    /* Provide callback to refresh the FPS value  */
-    mImpl->mTextFPSCallback = new flf::FPSCallback(this, mImpl->mFPSText);
-    attachCallback(unique_ptr<flf::Callback>(mImpl->mTextFPSCallback));
+    mImpl->mTextFPSCallback.set(mImpl->mFPSText);
     return;
   }
-  mImpl->mFPSText.reset();
-  detachCallback(mImpl->mTextFPSCallback);
 }
 
 void Engine::configFileLogging(string fileName) {

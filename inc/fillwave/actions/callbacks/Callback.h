@@ -28,7 +28,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/common/Finishable.h>
 #include <fillwave/actions/events/TEvent.h>
 #include <memory>
 #include <algorithm>
@@ -40,46 +39,40 @@ namespace flf {
 /*! \class Callback
  * \brief Base for all callbacks.
  */
-class Callback : public Finishable {
+
+class Callback {
+
 public:
-  Callback(EEventType eventType, float timeToFinish = FILLWAVE_ENDLESS)
-      : Finishable(timeToFinish), mEnabled(true), mEventType(eventType) {
+  Callback(std::function<void(EventType &event)> perform, EEventType eventType, float timeToFinish = 0.0f)
+    : mPerform(perform)
+    , mEventType(eventType)
+    , mFinished(false)
+    , mTimeToFinish(timeToFinish)
+    , mTimePassed(0.0f)
+    , mPercentageDone(0.0f) {
+
   }
 
-  virtual void perform(EventType &event) = 0;
+  std::function<void(EventType &event)> mPerform;
 
-  ~Callback() = default;
-
-  bool isEnabled() {
-    return mEnabled;
-  }
-
-  void enable() {
-    mEnabled = true;
-  }
-
-  void disable() {
-    mEnabled = false;
-  }
+  virtual ~Callback() = default;
 
   EEventType getEventType() {
     return mEventType;
   }
 
   template <class T>
-  static void handleEvent(std::vector<T> &callbacks, EventType &event) {
+  static void handleEvent(std::vector<T>& callbacks, EventType &event) {
     /* Run callbacks */
     for (auto &it : callbacks) {
-      if (it->isEnabled()) {
-        if (it->getEventType() == event.getType()) {
-          it->perform(event);
-        }
+      if (it.getEventType() == event.getType()) {
+        it.mPerform(event);
       }
     }
 
     /* Erase finished callbacks */
     auto _find_finished_function = [](T &m) -> bool {
-      return m->isFinished();
+      return m.isFinished();
     };
     auto _begin = callbacks.begin();
     auto _end = callbacks.end();
@@ -87,9 +80,57 @@ public:
     callbacks.erase(it, _end);
   }
 
+  /*
+ * checkTime
+ * \brief checks if the lifetime time elapsed
+ */
+  void checkTime(float timePassed) {
+    mTimePassed += timePassed;
+    if (mTimePassed > mTimeToFinish && mTimeToFinish != 0.0f) {
+      mTimePassed -= mTimeToFinish;
+      finish();
+    }
+  }
+
+  /*
+   * getPercentageDone
+   * \brief returns the time progress in percentages
+   */
+  float getPercentageDone() const {
+    return mTimePassed / mTimeToFinish >= 1.0f ? 1.0f : mTimePassed / mTimeToFinish;
+  }
+
+  /*
+   * finish
+   * \brief Sets indicator that the object was finished
+   */
+  void finish() {
+    mFinished = true;
+  }
+
+  /*
+   * reset
+   * \brief Sets indicator that the object is not finished
+   */
+  void reset() {
+    mFinished = false;
+  }
+
+  /*
+   * finish
+   * \brief Returns state of the object
+   */
+  bool isFinished() const {
+    return mFinished;
+  }
+
 protected:
-  bool mEnabled;
   EEventType mEventType;
+
+  bool mFinished;
+  float mTimeToFinish;
+  float mTimePassed;
+  float mPercentageDone;
 };
 
 } /* flf */

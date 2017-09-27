@@ -40,7 +40,7 @@ namespace flf {
 
 class TimedScaleCallback : public TimedCallback {
 public:
-  TimedScaleCallback(Moveable *moveable,
+  TimedScaleCallback(Moveable* moveable,
       glm::vec3 normalizedScaleVec,
       GLfloat lifetime,
       EasingFunction easing = LinearInterpolation);

@@ -42,12 +42,8 @@ namespace flf {
 
 class FPSCallback : public Callback {
 public:
-  FPSCallback(Engine *engine, pText text);
-
-  virtual ~FPSCallback() = default;
-
-  void perform(EventType &event);
-
+  FPSCallback(Engine *engine);
+  void set(pText text);
 private:
   pText mText;
   Engine *mEngine;

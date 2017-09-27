@@ -37,14 +37,13 @@ namespace flw {
 namespace flf {
 
 TimedCallback::TimedCallback(GLfloat timeToFinish, EasingFunction easing)
-    : Callback(EEventType::eTime, timeToFinish)
+    : Callback([this] (EventType& event) {
+      TimeEventData e = TimeEvent::getData(event);
+      performTime(e);
+      checkTime(e.mTimePassed);
+    }
+    , EEventType::eTime, timeToFinish)
     , mEasing(easing) {
-}
-
-void TimedCallback::perform(EventType &event) {
-  TimeEventData e = TimeEvent::getData(event);
-  performTime(e);
-  checkTime(e.mTimePassed);
 }
 
 void TimedCallback::performTime(TimeEventData &) {

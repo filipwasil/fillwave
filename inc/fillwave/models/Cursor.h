@@ -28,7 +28,10 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/models/Impostor.h>
+#include <fillwave/core/texturing/Texture2D.h>
+#include <fillwave/core/texturing/Sampler.h>
+#include <fillwave/core/pipeline/Program.h>
+#include <fillwave/models/Entity.h>
 
 namespace flw {
 class Engine;
@@ -38,15 +41,24 @@ namespace flf {
  * \brief Impostor to handle custom cursor instead of the standard one.
  */
 
-class Cursor : public Impostor {
+class Cursor final {
 public:
   Cursor(Engine *engine, flc::Texture *texture);
 
-  ~Cursor() override = default;
+  ~Cursor() = default;
 
   void move(glm::vec2 position);
 
   void redraw();
+
+protected:
+  flc::Program *mProgram;
+  flc::Texture *mTexture;
+  flc::Sampler *mSampler;
+  GLfloat mSize;
+  Blending mBlending;
+
+  void coreDraw();
 
 private:
   GLfloat mScreenFactor;
@@ -54,7 +66,7 @@ private:
 
   void initUniformsCache();
 
-  bool getRenderItem(RenderItem &item) override;
+  bool getRenderItem(RenderItem &item);
 };
 
 } /* flf */

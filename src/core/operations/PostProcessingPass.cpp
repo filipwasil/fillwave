@@ -40,9 +40,10 @@ namespace flc {
 PostProcessingPass::PostProcessingPass(flc::Program *program,
     flc::Texture2DRenderableDynamic *frame,
     GLfloat lifetime)
-    : Finishable(lifetime)
-    , mFrame(frame)
-    , mProgram(program) {
+    : mFrame(frame)
+    , mProgram(program)
+    , mTimePassed(0.0f)
+    , mLifetime (lifetime) {
 }
 
 flc::Texture2DRenderableDynamic* PostProcessingPass::getFrame() const {
@@ -51,6 +52,14 @@ flc::Texture2DRenderableDynamic* PostProcessingPass::getFrame() const {
 
 flc::Program* PostProcessingPass::getProgram() const {
   return mProgram;
+}
+
+void PostProcessingPass::proceed(float timePassed) {
+  mTimePassed += timePassed;
+}
+
+bool PostProcessingPass::isFinished() const {
+  return mTimePassed > mLifetime && mLifetime != 0.0f;
 }
 
 } /* flc */

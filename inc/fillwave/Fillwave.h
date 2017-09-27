@@ -96,6 +96,7 @@ public:
   /* Draw */
   void draw(GLfloat time);
   void drawLines(GLfloat time);
+  void drawWithLines(GLfloat time);
   void drawPoints(GLfloat time);
   void drawTexture(flc::Texture *t, flc::Program *p);
   void drawTexture(flc::Texture *t);
@@ -209,7 +210,7 @@ public:
   void captureFramebufferToBuffer(GLubyte *buf, GLint *sizeInBytes, GLuint format = GL_RGBA, GLint bytesPerPixel = 4);
 
   /* Post processing */
-  void addPostProcess(const std::string &fragmentShaderPath, GLfloat lifeTime = flf::FILLWAVE_ENDLESS);
+  void addPostProcess(const std::string &fragmentShaderPath, GLfloat lifeTime = 0.0f);
 
   /* Inputs - focus */
   void dropFocus(flf::IFocusable *focusable = nullptr);
@@ -217,8 +218,7 @@ public:
   /* Inputs */
   void insertInput(flf::EventType &event);
   void insertResizeScreen(GLuint width, GLuint height);
-  void attachCallback(puCallback &&callback, flf::IFocusable *focusable = nullptr);
-  void detachCallback(flf::Callback *callback);
+  void attachCallback(flf::Callback&& callback, flf::IFocusable *focusable = nullptr);
   void detachCallbacks(EEventType eventType);
   void detachCallbacks();
   void reload();

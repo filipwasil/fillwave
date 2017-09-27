@@ -35,13 +35,21 @@
 #include <fillwave/models/Cursor.h>
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/Log.h>
+
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
 
 Cursor::Cursor(Engine *engine, flc::Texture *texture)
-    : Impostor(engine, FILLWAVE_ENDLESS, 0.06f, texture)
+    : mTexture(texture)
+    , mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT))
+    , mSize(0.06f)
     , mScreenFactor(static_cast<GLfloat>(engine->getScreenSize()[0]) / static_cast<GLfloat>(engine->getScreenSize()[1])) {
+
+  mBlending.mSrc = GL_SRC_ALPHA;
+  mBlending.mDst = GL_ONE_MINUS_SRC_ALPHA;
 
   mProgram = ProgramLoader(engine).getProgram(EProgram::cursor);
 
@@ -74,6 +82,37 @@ void Cursor::initUniformsCache() {
   mProgram->use();
   flc::Uniform::push(mULCTextureUnit, FILLWAVE_DIFFUSE_UNIT);
   flc::Program::disusePrograms();
+}
+
+void Cursor::coreDraw() {
+  if (mTexture) {
+    mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
+  }
+
+  glEnable(GL_BLEND);
+  glBlendFunc(mBlending.mSrc, mBlending.mDst);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  fLogC("Drawing impostor failed");
+  glDisable(GL_BLEND);
+  flc::Texture2D::unbind2DTextures();
+}
+
+bool Cursor::getRenderItem(RenderItem &item) {
+  item.mBlend = mBlending;
+  item.mCount = 4;
+  item.mDataType = GL_NONE;
+  item.mFirst = 0;
+  item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+  item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+  item.mHandles[RenderItem::eRenderHandleVAO] = 0;
+  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+  item.mHandles[RenderItem::eRenderHandleNormal] = 0;
+  item.mHandles[RenderItem::eRenderHandleSpecular] = 0;
+  item.mIndicesPointer = 0;
+  item.mMode = GL_TRIANGLE_STRIP;
+  item.mStatus.bBlending = 1;
+  item.mRenderStatus = 0x24; // blending, diffuse
+  return true;
 }
 
 } /* flf */

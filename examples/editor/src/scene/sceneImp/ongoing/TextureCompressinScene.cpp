@@ -6,7 +6,7 @@
 // Description : Fillwave engine example texture compression
 //============================================================================
 
-#include <ContextGLFW.h>
+#include <App.h>
 #include <example.h>
 
 /* Graphics */
@@ -23,7 +23,7 @@ using namespace std;
 FLOGINIT("Test app", FERROR | FFATAL)
 
 int main(int argc, char* argv[]) {
-	ContextGLFW mContext;
+	App mContext;
 	mEngine = new Engine(argc, argv);
 	mEngine->insertResizeScreen(mContext.getScreenWidth(),
 	      mContext.getScreenHeight());

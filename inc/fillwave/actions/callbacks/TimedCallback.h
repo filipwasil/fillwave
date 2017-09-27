@@ -49,12 +49,6 @@ public:
 
   virtual ~TimedCallback() = default;
 
-  /*	perform
-   * \brief Performs ItemCallback action.
-   */
-
-  void perform(EventType &eventType);
-
   virtual void performTime(TimeEventData &e);
 
   GLfloat ease(GLfloat progress);
