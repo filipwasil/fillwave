@@ -42,9 +42,8 @@ FLOGINIT("Entity", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-Entity::Entity(glm::vec3 translation, glm::quat rotation)
-    : Moveable(translation, rotation)
-    , mChildrenPropagateEvent(GL_TRUE)
+Entity::Entity()
+    : mChildrenPropagateEvent(GL_TRUE)
     , mParentRefresh(GL_TRUE)
     , mPSC(GL_TRUE)
     , mPSR(GL_TRUE) {
@@ -136,10 +135,12 @@ void Entity::updateMatrixTree() {
   }
 }
 
-void Entity::handleHierarchyEvent(EventType& event) {
-  Callback::handleEvent(mCallbacksHierarchy, event);
+void Entity::handleEvent(const Event& event) {
+  for (auto &it : mCallbacks) {
+    it(event);
+  }
   for (auto &it : mChildren) {
-    it->handleHierarchyEvent(event);
+    it->handleEvent(event);
   }
 }
 
@@ -172,7 +173,7 @@ void Entity::updateParentRotation(glm::quat& parent) {
   notifyObservers();
 }
 
-void Entity::attachHierarchyCallback(Callback&& callback) {
+void Entity::attachCallback(Callback&& callback) {
   mCallbacksHierarchy.push_back(std::move(callback));
 }
 

@@ -39,6 +39,7 @@
 
 /* Debugger */
 #include <fillwave/Debugger.h>
+#include <fillwave/common/Aliases.h>
 
 /* Common */
 #include <fillwave/common/PhysicsMeshBuffer.h>
@@ -212,15 +213,10 @@ public:
   /* Post processing */
   void addPostProcess(const std::string &fragmentShaderPath, GLfloat lifeTime = 0.0f);
 
-  /* Inputs - focus */
-  void dropFocus(flf::IFocusable *focusable = nullptr);
-
   /* Inputs */
-  void insertInput(flf::EventType &event);
-  void insertResizeScreen(GLuint width, GLuint height);
-  void attachCallback(flf::Callback&& callback, flf::IFocusable *focusable = nullptr);
-  void detachCallbacks(EEventType eventType);
-  void detachCallbacks();
+  void insertEvent(const flf::Event& event);
+  int attachHandler(flf::EventHandler h);
+  void detachHandler(int id);
   void reload();
 
   /* Systems */

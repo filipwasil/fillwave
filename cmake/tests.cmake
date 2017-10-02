@@ -18,12 +18,18 @@
   aux_source_directory (tests/interface TEST_INTERFACE_SOURCES)
   aux_source_directory (tests/core TEST_CORE_SOURCES)
   aux_source_directory (tests/framework TEST_FRAMEWORK_SOURCES)
+  set(TEST_SOURCES_PRODUCTION
+      ${FILLWAVE_PATH_SOURCE}/models/base/Moveable.cpp
+      ${FILLWAVE_PATH_SOURCE}/models/base/MoveableEased.cpp
+      ${FILLWAVE_PATH_SOURCE}/common/Easing.cpp)
+
 
   set (TEST_SOURCES
       ${TEST_COMMON_SOURCES}
       ${TEST_API_SOURCES}
       ${TEST_CORE_SOURCES}
       ${TEST_FRAMEWORK_SOURCES}
+      ${TEST_SOURCES_PRODUCTION}
       )
 
   add_executable (runUnitTests ${TEST_SOURCES})

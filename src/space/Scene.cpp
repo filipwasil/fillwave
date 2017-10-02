@@ -199,6 +199,12 @@ void Scene::onEvent(EventType &event) {
   }
 }
 
+void Scene::stepInTime(float timePassedInSeconds) {
+  for (auto &it : mChildren) {
+    it->stepInTIme(timePassedInSeconds);
+  }
+}
+
 void Scene::onShow() {
 
 }

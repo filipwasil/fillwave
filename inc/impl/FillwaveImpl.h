@@ -119,22 +119,15 @@ struct Engine::EngineImpl final {
   flc::VertexBufferPosition *mVBOOcclusion;
   flc::VertexArray *mVAOOcclusion;
 
-  /* Inputs - callbacks */
-  std::map<EEventType, std::vector<flf::Callback>> mCallbacks;
-
-  /* Inputs - focus */
-#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
-  pair<IFocusable*, vector<Callback*>> mFocus;
-#else
-  std::map<flw::flf::IFocusable*, std::vector<flw::flf::Callback>> mFocus;
-#endif
+  /* Input handlers */
+  flf::vec<flf::EventHandler> mHandlers;
 
   /* Extras */
   puDebugger mDebugger;
   GLuint mFrameCounter;
   GLfloat mTimeFactor;
   pText mFPSText;
-  flf::FPSCallback mTextFPSCallback;
+  //flf::FPSCallback mTextFPSCallback;
 
   /* Startup */
   GLfloat mStartupTime;
@@ -163,13 +156,11 @@ struct Engine::EngineImpl final {
   void initOcclusionTest();
   void initStartup();
 
-  /* Callbacks */
-  void runCallbacks();
-  void runCallbacks(flf::EventType& eventType);
+  /* Events */
+  void handleEvent(const flf::Event& event);
 
-  void attachCallback(flf::Callback&& callback);
-  void detachCallbacks();
-  void detachCallbacks(EEventType eventType);
+  void attachHandler(EventHandler handler);
+  void detachHandlers();
 
   /* Evaluation */
   void evaluateShadowMaps();
@@ -252,7 +243,7 @@ Engine::EngineImpl::EngineImpl(Engine *engine, GLint, GLchar *const argv[])
     , mShaders()
     , mFrameCounter(0)
     , mTimeFactor(1.0)
-    , mTextFPSCallback(nullptr)
+    //, mTextFPSCallback(nullptr)
     , mStartupTime(0.0f)
     , mIsOQ(GL_TRUE)
     , mBackgroundColor(0.1, 0.1, 0.1) {
@@ -757,9 +748,9 @@ inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
   if (mTimeFactor) {
     flf::TimeEventData data;
     data.mTimePassed = timeExpiredInSeconds;
-    flf::TimeEvent timeEvent(data);
-    runCallbacks(timeEvent);
-    mScene->onEvent(timeEvent);
+    flf::TimeEvent e(data);
+    runCallbacks(e);
+    mScene->stepInTime(timeExpiredInSeconds);
   }
 }
 
@@ -822,7 +813,7 @@ inline void Engine::EngineImpl::updateDebugger() {
   }
 }
 
-void Engine::EngineImpl::runCallbacks(flf::EventType &event) {
+void Engine::EngineImpl::runCallbacks(flf::EventType& event) {
   if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
     auto& callbacks = mCallbacks[event.getType()];
 //    for (auto &callback : callbacks) {
