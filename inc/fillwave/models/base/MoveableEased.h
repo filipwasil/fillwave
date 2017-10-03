@@ -30,7 +30,6 @@
 
 #include <fillwave/models/base/Moveable.h>
 #include <fillwave/Math.h>
-//#include <Event.h>
 #include <fillwave/common/Easing.h>
 #include <fillwave/common/Allocator.h>
 #include <functional>
@@ -50,8 +49,29 @@ class MoveableEased : public Moveable {
 	void stop();
 	float stepInTime(float delta);
 
+	void attachTimeCallback(float deltaTime, Callback<float(float)> aAction) {
+		mTimeCallbacks.push_back([this, deltaTime, aAction](float aDeltaTime) {
+			if (0.0f == deltaTime) {
+				return deltaTime;
+			}
+
+			if (mCallbackTimePassed == 0.0f) {
+				aAction(0.0f);
+			}
+
+			mCallbackTimePassed += aDeltaTime;
+			aAction(mCallbackTimePassed/deltaTime >= 1.0f ? 1.0f : mCallbackTimePassed/deltaTime);
+			if (mCallbackTimePassed < deltaTime) {
+				return 0.0f;
+			}
+			float timeLeft = mCallbackTimePassed - deltaTime;
+			mCallbackTimePassed = 0;
+			return timeLeft;
+		});
+	}
+
 	template <typename ...ARGS>
-	void addCustomCallback(float deltaTime, Callback<float(float, ARGS...)> aAction, ARGS&&... args) {
+	void attachTimeCallback(float deltaTime, Callback<float(float, ARGS...)> aAction, ARGS&&... args) {
 		mTimeCallbacks.push_back([this, deltaTime, aAction, args...](float aDeltaTime) {
 			if (mCallbackTimePassed == 0.0f) {
 				aAction(0.0f, std::forward<ARGS...>(args...));
@@ -66,12 +86,13 @@ class MoveableEased : public Moveable {
 			return timeLeft;
 		});
 	}
+ protected:
+  float mCallbackTimePassed;
 
  private:
-	float mCallbackTimePassed;
 	unsigned int mCurrentCallbackIdx;
-	vec<Callback<float(float)>> mTimeCallbacks;
 	unsigned int mCallbackLoops;
+	vec<Callback<float(float)>> mTimeCallbacks;
 
 	struct {
 		glm::vec3 mTranslation;

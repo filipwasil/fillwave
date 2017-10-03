@@ -30,7 +30,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/actions/callbacks/TimedBoneUpdateCallback.h>
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/models/Model.h>
 #include <fillwave/management/LightSystem.h>
@@ -57,8 +56,7 @@ Model::Model(Engine *engine,
     flc::Texture2D *normalMap,
     flc::Texture2D *specularMap,
     const Material &material)
-    : IFocusable(engine)
-    , Programmable(program)
+    : Programmable(program)
     , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
     , mLights(engine->getLightSystem()) {
 
@@ -92,8 +90,7 @@ Model::Model(Engine *engine,
 }
 
 Model::Model(Engine *engine, flc::Program *program, const std::string &shapePath)
-    : IFocusable(engine)
-    , Programmable(program)
+    : Programmable(program)
     , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
     , mLights(engine->getLightSystem()) {
 
@@ -152,8 +149,7 @@ Model::Model(Engine *engine,
     const std::string &diffuseMapPath,
     const std::string &normalMapPath,
     const std::string &specularMapPath)
-    : IFocusable(engine)
-    , Programmable(program)
+    : Programmable(program)
     , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
     , mLights(engine->getLightSystem()) {
 
@@ -204,8 +200,7 @@ Model::Model(Engine *engine,
     flc::Texture2D *normalMap,
     flc::Texture2D *specularMap,
     const Material &material)
-    : IFocusable(engine)
-    , Programmable(program)
+    : Programmable(program)
     , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
     , mLights(engine->getLightSystem()) {
 
@@ -263,7 +258,7 @@ inline void Model::initAnimations(const aiScene *scene) {
   if (scene->HasAnimations()) {
     mAnimator = std::make_unique<Animator>(scene);
     fLogD("attached TimedBoneUpdateCallback to model");
-    this->attachHierarchyCallback(TimedBoneUpdateCallback(this));
+    this->attachHandler([this](const Event& event){this->performAnimation(event.getData().mTime.mTimePassed);});
   }
 }
 
@@ -442,9 +437,9 @@ TGetter<Mesh> Model::getMesh(size_t id) {
 }
 
 
-void Model::performAnimation(GLfloat timeElapsed_s) {
+void Model::performAnimation(GLfloat timeElapsedInSeconds) {
   if (mAnimator) {
-    mAnimator->updateTransformations(mActiveAnimation, timeElapsed_s);
+    mAnimator->updateTransformations(mActiveAnimation, timeElapsedInSeconds);
   }
 }
 
@@ -559,10 +554,6 @@ inline void Model::initShadowing(Engine *engine) {
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
   mProgramShadow = loader.getProgram(EProgram::shadow);
   mProgramShadowColor = loader.getProgram(EProgram::shadowColorCoded);
-}
-
-void Model::handleFocusEvent(EventType &event) {
-  Callback::handleEvent<Callback>(mCallbacks, event);
 }
 
 void Model::updateRenderer(IRenderer &renderer) {

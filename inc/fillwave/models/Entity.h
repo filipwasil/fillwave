@@ -82,7 +82,9 @@ public:
   void setTransformation(glm::mat4& modelMatrix);
 
   /* Callbacks */
-  void attachHandler(EventHandler h);
+  void attachHandler(EventHandler&& h);
+
+  void detachHandlers();
 
   /* Parent */
   void updateMatrixTree();

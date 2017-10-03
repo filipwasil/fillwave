@@ -214,9 +214,11 @@ public:
   void addPostProcess(const std::string &fragmentShaderPath, GLfloat lifeTime = 0.0f);
 
   /* Inputs */
-  void insertEvent(const flf::Event& event);
-  int attachHandler(flf::EventHandler h);
-  void detachHandler(int id);
+  void onEvent(const flf::Event& event);
+  void onResizeScreen(GLuint width, GLuint height);
+  void attachHandler(flf::EventHandler&& h);
+  void detachHandlers();
+
   void reload();
 
   /* Systems */

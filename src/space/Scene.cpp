@@ -31,8 +31,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#include <fillwave/actions/events/ResizeScreenTEvent.h>
 #include <fillwave/space/Scene.h>
 #include <fillwave/Log.h>
 
@@ -193,15 +191,15 @@ TGetter<ICamera> Scene::getCamera() {
   return TGetter<ICamera>(mCamera.get());
 }
 
-void Scene::onEvent(EventType &event) {
+void Scene::onEvent(const Event& event) {
   for (auto &it : mChildren) {
-    it->handleHierarchyEvent(event);
+    it->handleEvent(event);
   }
 }
 
 void Scene::stepInTime(float timePassedInSeconds) {
-  for (auto &it : mChildren) {
-    it->stepInTIme(timePassedInSeconds);
+  for (auto& it : mChildren) {
+    it->stepInTime(timePassedInSeconds);
   }
 }
 

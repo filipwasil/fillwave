@@ -18,6 +18,7 @@ GLFWwindow *App::mWindow;
 GLFWwindow *App::mWindowNew;
 GLuint App::mCursorPositionX;
 GLuint App::mCursorPositionY;
+flw::flf::EventData App::mEventData;
 
 App::App(int argc, char *argv[]) {
 
@@ -116,7 +117,7 @@ void App::render() {
 }
 
 void App::resizeCallback(GLFWwindow * /*window*/, int width, int height) {//xxx todo
-  mGraphics->insertResizeScreen(width, height);
+  mGraphics->onResizeScreen(width, height);
 }
 
 GLuint App::getScreenWidth() {
@@ -136,39 +137,32 @@ void App::keyboardCallback(GLFWwindow * /*window*/, int key, int scancode, int a
 
   /* And/Or provide it to Fillwave to executeall entity callbacks when focused */
 
-  flw::flf::KeyboardEventData data;
-  data.action = action;
-  data.key = key;
-  data.mode = mods;
-  data.scanCode = scancode;
-  flw::flf::KeyboardEvent event(data);
-  mGraphics->insertInput(event);
+  mEventData.mKey.action = action;
+  mEventData.mKey.key = key;
+  mEventData.mKey.mode = mods;
+  mEventData.mKey.scanCode = scancode;
+  flw::flf::Event event(flw::flf::eEventType::key, mEventData);
+  mGraphics->onEvent(event);
 }
 
 void App::mouseButtonCallback(GLFWwindow * /*window*/, int button, int action, int mods) {
-  flw::flf::MouseButtonEventData data;
-  data.mWhereX = mCursorPositionX;
-  data.mWhereY = mCursorPositionY;
-  data.mAction = action;
-  data.mButton = button;
-  data.mMods = mods;
-  flw::flf::MouseButtonEvent event(data);
-  mGraphics->insertInput(event);
+  mEventData.mMouseButton.mWhereX = mCursorPositionX;
+  mEventData.mMouseButton.mWhereY = mCursorPositionY;
+  mEventData.mMouseButton.mAction = action;
+  mEventData.mMouseButton.mButton = button;
+  mEventData.mMouseButton.mMods = mods;
+  onEvent(flw::flf::eEventType::mouseButton);
 }
 
-void App::scrollCallback(GLFWwindow * /*window*/, double xoffset, double yoffset) {
-  flw::flf::ScrollEventData d;
-  d.mOffsetX = xoffset;
-  d.mOffsetY = yoffset;
-  flw::flf::ScrollEvent event(d);
-  mGraphics->insertInput(event);
+void App::scrollCallback(GLFWwindow * /*window*/, double /*xoffset*/, double /*yoffset*/) {
+//  mEventData.mOffsetX = xoffset;
+//  mEventData.mOffsetY = yoffset;
+//  mGraphics->onEvent(flw::flf::eEventType::scroll);
 }
 
 void App::characterCallback(GLFWwindow * /*window*/, unsigned int ascii) {
-  flw::flf::CharacterEventData d;
-  d.character = ascii;
-  flw::flf::CharacterEvent event(d);
-  mGraphics->insertInput(event);
+  mEventData.mChar.character = ascii;
+  onEvent(flw::flf::eEventType::character);
 }
 
 void App::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, double ypos) {
@@ -196,15 +190,16 @@ void App::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, double yp
   mCursorPositionX = xpos;
   mCursorPositionY = ypos;
 
-  flw::flf::CursorPositionEvent event(d);
-  mGraphics->insertInput(event);
+  onEvent(flw::flf::eEventType::cursorPosition);
 }
 
 void App::cursorEnterCallback(GLFWwindow * /*window*/, int in) {
-  flw::flf::CursorEnterEventData d;
-  d.direction = in;
-  flw::flf::CursorEnterEvent event(d);
-  mGraphics->insertInput(event);
+  mEventData.mCursorEnter.direction = in;
+  onEvent(flw::flf::eEventType::cursorEnter);
+}
+
+void App::onEvent(const flw::flf::eEventType& type) {
+  mGraphics->onEvent(flw::flf::Event(type, mEventData));
 }
 
 void App::reload() {

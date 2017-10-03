@@ -32,17 +32,17 @@ namespace flw {
 namespace flf {
 
 enum class eEventType {
-	eMouseButton,
-	eCursorPosition,
-	eCursorEnter,
-	eScroll,
-	eKey,
-	eCharacter,
-	eCharacterMods,
-	eTime,
-	eTouch,
-	eResizeScreen,
-	eCustom
+	mouseButton,
+	cursorPosition,
+	cursorEnter,
+	scroll,
+	key,
+	character,
+	characterMods,
+	time,
+	touch,
+	resizeScreen,
+	custom
 };
 
 struct CursorEnterEventData {
@@ -152,11 +152,11 @@ class Event {
 
 	}
 
-	eEventType getType() {
+	eEventType getType() const {
 		return mType;
 	}
 
-	EventData getData() {
+	EventData getData() const {
 		return mData;
 	}
 

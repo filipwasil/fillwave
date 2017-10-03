@@ -181,19 +181,9 @@ VertexArray* Engine::storeVAO(flf::IReloadable* user, VertexArray* vao) {
   return vao ? mImpl->mBuffers.mVertexArrays.store(vao, user) : mImpl->mBuffers.mVertexArrays.store(user);
 }
 
-/* Inputs - insert  */
-void Engine::insertInput(flf::EventType &event) {
-#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
-  if (mImpl->mFocus.first) {
-    mImpl->mFocus.first->handleFocusEvent(event);
-  }
-#else
-  for (auto &focusable : mImpl->mFocus) {
-    focusable.first->handleFocusEvent(event);
-  }
-#endif
-  mImpl->runCallbacks(event);
-  mImpl->mTextFPSCallback.mPerform(event);
+void Engine::onEvent(const flf::Event& event) {
+  mImpl->onEvent(event);
+  //mImpl->mTextFPSCallback.mPerform(event);
 }
 
 /* Detach */
@@ -204,52 +194,13 @@ void Engine::detach(flf::Entity* entity) {
   mImpl->mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-/* Callbacks registeration  */
-void Engine::detachCallbacks(EEventType eventType) {
-  mImpl->detachCallbacks(eventType);
+void Engine::detachHandlers() {
+  mImpl->detachHandlers();
 }
 
-void Engine::detachCallbacks() {
-  mImpl->detachCallbacks();
+void Engine::attachHandler(flf::EventHandler&& handler) {
+  mImpl->attachHandler(std::move(handler));
 }
-
-void Engine::attachCallback(flf::Callback&& callback, flf::IFocusable* focusable) {
-  if (focusable) {
-#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
-    if (mImpl->mFocus.first) {
-      dropFocus(mImpl->mFocus.first);
-    }
-    mImpl->mFocus.first = focusable;
-    mImpl->mFocus.second.push_back(callback.get());
-#else
-    if (mImpl->mFocus.find(focusable) == mImpl->mFocus.end()) {
-      mImpl->mFocus[focusable] = vector<flf::Callback>(1, callback);
-    } else {
-      mImpl->mFocus[focusable].push_back(callback);
-    }
-#endif
-  }
-  mImpl->attachCallback(std::move(callback));
-}
-
-//void Engine::dropFocus(flf::IFocusable* focusable) {
-//#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
-//  if (focusable == mImpl->mFocus.first) {
-//    for (auto& it : mImpl->mFocus.second) {
-//      mImpl->unattachCallback(it);
-//    }
-//    mImpl->mFocus.first = nullptr;
-//    mImpl->mFocus.second.clear();
-//  }
-//#else
-//  fLogE("mImpl->mFocus.size() %ud", mImpl->mFocus.size());
-//  if (!mImpl->mFocus.empty() && mImpl->mFocus.find(focusable) != mImpl->mFocus.end()) {
-//    for (auto &it : mImpl->mFocus[focusable]) {
-//      mImpl->detachCallbacks(it);
-//    }
-//  }
-//#endif
-//}
 
 pText Engine::storeText(const string &content,
     const string &fontName,
@@ -353,8 +304,8 @@ GLfloat Engine::getScreenAspectRatio() const {
   return mImpl->mWindowAspectRatio;
 }
 
-void Engine::insertResizeScreen(GLuint width, GLuint height) {
-  mImpl->insertResizeScreen(width, height);
+void Engine::onResizeScreen(GLuint width, GLuint height) {
+  mImpl->onResizeScreen(width, height);
 
   for (auto &it : mImpl->mTextManager) { //todo optimization update only VBO
     it->editAspectRatio(this);
@@ -437,7 +388,7 @@ void Engine::addPostProcess(const string &fragmentShaderPath, GLfloat lifeTime) 
 void Engine::configFPSCounter(string fontName, glm::vec2 position, GLfloat size) {
   if (fontName.size() > 1) {
     mImpl->mFPSText = storeText("", fontName, position, size);
-    mImpl->mTextFPSCallback.set(mImpl->mFPSText);
+    //mImpl->mTextFPSCallback.set(mImpl->mFPSText);
     return;
   }
 }

@@ -28,11 +28,9 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/Core.h>
-#include <fillwave/Framework.h>
-
-/* Extras */
-#include <fillwave/Debugger.h>
+#include "fillwave/Core.h"
+#include "fillwave/Debugger.h"
+#include "fillwave/Framework.h"
 
 /* Management */
 #include <fillwave/management/ProgramManager.h>
@@ -157,9 +155,10 @@ struct Engine::EngineImpl final {
   void initStartup();
 
   /* Events */
-  void handleEvent(const flf::Event& event);
+  void onEvent(const flf::Event& event);
+  void onResizeScreen(GLuint width, GLuint height);
 
-  void attachHandler(EventHandler handler);
+  void attachHandler(flf::EventHandler&& handler);
   void detachHandlers();
 
   /* Evaluation */
@@ -200,9 +199,6 @@ struct Engine::EngineImpl final {
   /* Reload */
   void reload();
   void reloadPickingBuffer();
-
-  /* Insert */
-  void insertResizeScreen(GLuint width, GLuint height);
 };
 
 #ifdef __ANDROID__
@@ -746,10 +742,13 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 
 inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
   if (mTimeFactor) {
-    flf::TimeEventData data;
-    data.mTimePassed = timeExpiredInSeconds;
-    flf::TimeEvent e(data);
-    runCallbacks(e);
+    flf::EventData data;
+    data.mTime = {
+        timeExpiredInSeconds
+    };
+    ;
+
+    mScene->onEvent(flf::Event(flf::eEventType::time, data));
     mScene->stepInTime(timeExpiredInSeconds);
   }
 }
@@ -813,16 +812,7 @@ inline void Engine::EngineImpl::updateDebugger() {
   }
 }
 
-void Engine::EngineImpl::runCallbacks(flf::EventType& event) {
-  if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
-    auto& callbacks = mCallbacks[event.getType()];
-//    for (auto &callback : callbacks) {
-//      callback.mPerform(event);
-//    }
-  }
-}
-
-void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
+void Engine::EngineImpl::onResizeScreen(GLuint width, GLuint height) {
 
   mWindowWidth = width;
   mWindowHeight = height;
@@ -835,13 +825,18 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
   mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
 }
 
-/* Callbacks */
-
-void Engine::EngineImpl::attachCallback(flf::Callback&& callback) {
-  if (mCallbacks.find(callback.getEventType()) == mCallbacks.end()) {
-    mCallbacks[callback.getEventType()] = std::vector<flf::Callback>();
+void Engine::EngineImpl::onEvent(const flf::Event& event) {
+  for (auto& handler : mHandlers) {
+    handler(event);
   }
-  mCallbacks[callback.getEventType()].push_back(callback);
+}
+
+void Engine::EngineImpl::attachHandler(flf::EventHandler&& handler) {
+  mHandlers.push_back(handler);
+}
+
+void Engine::EngineImpl::detachHandlers() {
+
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
@@ -860,18 +855,6 @@ glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GL
     a = data[id + 3];
   }
   return glm::ivec4(r, g, b, a);
-}
-
-/* Engine callbacks - clear */
-
-inline void Engine::EngineImpl::detachCallbacks() {
-  mCallbacks.clear();
-}
-
-inline void Engine::EngineImpl::detachCallbacks(EEventType eventType) {
-  if (mCallbacks.find(eventType) != mCallbacks.end()) {
-    mCallbacks[eventType].clear();
-  }
 }
 
 void Engine::EngineImpl::pick(GLuint x, GLuint y) {

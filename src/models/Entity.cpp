@@ -136,11 +136,18 @@ void Entity::updateMatrixTree() {
 }
 
 void Entity::handleEvent(const Event& event) {
-  for (auto &it : mCallbacks) {
-    it(event);
+  if (event.getType() == eEventType::time) {
+    for (auto &handler : mEventHandlers) {
+      handler(event);
+    }
   }
-  for (auto &it : mChildren) {
-    it->handleEvent(event);
+
+  for (auto &handler : mEventHandlers) {
+    handler(event);
+  }
+
+  for (auto &child : mChildren) {
+    child->handleEvent(event);
   }
 }
 
@@ -173,10 +180,6 @@ void Entity::updateParentRotation(glm::quat& parent) {
   notifyObservers();
 }
 
-void Entity::attachCallback(Callback&& callback) {
-  mCallbacksHierarchy.push_back(std::move(callback));
-}
-
 void Entity::pick(glm::vec3 color) {
   mFlagPickable = true;
   mPickColor = color;
@@ -204,20 +207,9 @@ void Entity::log() const {
   // nothing
 }
 
-inline void Entity::detachCallback(std::vector<puCallback> &callbacks, Callback *callback) {
-  auto _compare_function = [callback](const puCallback &m) -> bool {
-    return m.get() == callback;
-  };
-  auto _begin = callbacks.begin();
-  auto _end = callbacks.end();
-  auto it = std::remove_if(_begin, _end, _compare_function);
-  callbacks.erase(it, _end);
-  fLogE("Detachment of callback failed");
-}
-
 void Entity::updateRenderer(IRenderer &renderer) {
   for (auto &it : mChildren) {
-    it->updateRenderer(renderer);
+      it->updateRenderer(renderer);
   }
 }
 
@@ -225,8 +217,13 @@ bool Entity::getRenderItem(RenderItem & /*item*/) {
   return false;
 }
 
-} /* flf */
-puEntity buildEntity() {
-  return std::make_unique<flf::Entity>();
+void Entity::attachHandler(EventHandler&& h) {
+  mEventHandlers.push_back(h);
 }
+
+void Entity::detachHandlers() {
+  mEventHandlers.clear();
+}
+
+} /* flf */
 } /* flw */
