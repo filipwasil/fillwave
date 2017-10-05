@@ -40,7 +40,7 @@ class GLObject {
 public:
   GLObject(GLsizei howMany);
 
-  ~GLObject();
+  virtual ~GLObject();
 
   GLuint getHandle(GLuint id = 0);
 

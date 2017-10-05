@@ -34,11 +34,6 @@
 
 #include <fillwave/models/Entity.h>
 
-#include <fillwave/Log.h>
-#include <fillwave/common/Macros.h>
-
-FLOGINIT("Entity", FERROR | FFATAL)
-
 namespace flw {
 namespace flf {
 
@@ -47,11 +42,11 @@ Entity::Entity()
     , mParentRefresh(GL_TRUE)
     , mPSC(GL_TRUE)
     , mPSR(GL_TRUE) {
-
+  // nothing
 }
 
 Entity::~Entity() {
-  fLogD("Entity destroyed");
+  // nothing
 }
 
 bool Entity::isAnimated() const {

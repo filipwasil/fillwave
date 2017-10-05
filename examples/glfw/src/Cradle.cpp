@@ -81,6 +81,18 @@ Cradle::Cradle(flw::Engine* engine) {
   mAccelerationV =
       engine->storeText(
           "F:", "fonts/bridgenorth", glm::vec2(-0.95, 0.75), 100.0, glm::vec4(1.0, 1.0, 1.0, 1.0), ETextEffect::eBold);
+
+//  engine->attachHandler([] (flf::Event& event), eEventType::key) {
+//  if (event.mData.mKey == GLFW_KEY_T && event.mData.mKey == GLFW_PRESS) {
+//    if (mTimeOn) {
+//      mTimeOn = false;
+//      mEngine->configTime(0.0);
+//    } else {
+//      mTimeOn = true;
+//      mEngine->configTime(1.0);
+//    }
+//  }
+//  });
 }
 
 void Cradle::setAcceleration(float vertical, float horizontal, float frontal) {

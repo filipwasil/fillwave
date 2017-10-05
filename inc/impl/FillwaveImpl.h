@@ -62,6 +62,10 @@ namespace flw {
 */
 
 struct Engine::EngineImpl final {
+  struct TargetEvenHandler {
+    flf::eEventType type;
+    flf::EventHandler handler;
+  };
 
 #ifdef __ANDROID__
   EngineImpl(Engine* engine, std::string rootPath);
@@ -118,7 +122,7 @@ struct Engine::EngineImpl final {
   flc::VertexArray *mVAOOcclusion;
 
   /* Input handlers */
-  flf::vec<flf::EventHandler> mHandlers;
+  flf::vec<TargetEvenHandler> mHandlers;
 
   /* Extras */
   puDebugger mDebugger;
@@ -158,7 +162,7 @@ struct Engine::EngineImpl final {
   void onEvent(const flf::Event& event);
   void onResizeScreen(GLuint width, GLuint height);
 
-  void attachHandler(flf::EventHandler&& handler);
+  void attachHandler(flf::EventHandler&& handler, flf::eEventType type);
   void detachHandlers();
 
   /* Evaluation */
@@ -827,12 +831,12 @@ void Engine::EngineImpl::onResizeScreen(GLuint width, GLuint height) {
 
 void Engine::EngineImpl::onEvent(const flf::Event& event) {
   for (auto& handler : mHandlers) {
-    handler(event);
+    handler.handler(event);
   }
 }
 
-void Engine::EngineImpl::attachHandler(flf::EventHandler&& handler) {
-  mHandlers.push_back(handler);
+void Engine::EngineImpl::attachHandler(flf::EventHandler&& handler, flf::eEventType type) {
+  mHandlers.push_back({type, std::move(handler)});
 }
 
 void Engine::EngineImpl::detachHandlers() {

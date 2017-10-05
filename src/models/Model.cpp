@@ -37,7 +37,6 @@
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-#include <fillwave/models/animations/Animator.h>
 #include <fillwave/models/animations/Conversion.h>
 
 #endif

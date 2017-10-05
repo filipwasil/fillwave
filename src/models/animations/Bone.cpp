@@ -31,9 +31,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
-#include <memory>
-
 #include <fillwave/models/animations/Bone.h>
 #include <fillwave/Log.h>
 #include <fillwave/models/animations/Conversion.h>

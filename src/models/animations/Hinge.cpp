@@ -31,7 +31,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/common/Macros.h>
 #include <fillwave/models/animations/Hinge.h>
 
 namespace flw {

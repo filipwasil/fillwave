@@ -31,7 +31,6 @@
 #endif
 
 #include <fillwave/loaders/ProgramLoader.h>
-#include <fillwave/common/Strings.h>
 #include <fillwave/models/Mesh.h>
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Fillwave.h>

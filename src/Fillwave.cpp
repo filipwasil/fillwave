@@ -198,8 +198,8 @@ void Engine::detachHandlers() {
   mImpl->detachHandlers();
 }
 
-void Engine::attachHandler(flf::EventHandler&& handler) {
-  mImpl->attachHandler(std::move(handler));
+void Engine::attachHandler(flf::EventHandler&& handler, flf::eEventType type) {
+  mImpl->attachHandler(std::move(handler), type);
 }
 
 pText Engine::storeText(const string &content,

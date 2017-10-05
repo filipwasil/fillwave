@@ -37,9 +37,6 @@
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
 
-#include <fillwave/Log.h>
-
-
 namespace flw {
 namespace flf {
 
