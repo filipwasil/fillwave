@@ -44,33 +44,11 @@ Cradle::Cradle(flw::Engine* engine) {
   railsOuter->rotateByY(glm::radians(180.0f));
   railsOuter->rotateByZ(glm::radians(45.0f));
 
-//  railsOuter->attachHierarchyCallback(make_unique<LoopCallback>(
-//      make_unique_container<SequenceCallback>(
-//          make_unique<TimedRotateCallback>(
-//              railsOuter.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsOuter.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(-90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsOuter.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(-90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsOuter.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(90.0f),
-//              4.0,
-//              BounceEaseOut)),
-//      FILLWAVE_ENDLESS));
+  railsOuter->rotateByEased(2.0, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsOuter->rotateByEased(2.0, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsOuter->rotateByEased(2.0, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsOuter->rotateByEased(2.0, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsOuter->loop(5000);
 
   auto railsInner = make_unique <Model> (
       engine
@@ -84,34 +62,11 @@ Cradle::Cradle(flw::Engine* engine) {
   railsInner->addEffect(make_shared<TextureOnly>());
   railsInner->rotateByX(glm::radians(90.0f));
   railsInner->rotateByZ(glm::radians(90.0f));
-
-//  railsInner->attachHierarchyCallback(make_unique<LoopCallback>(
-//      make_unique_container<SequenceCallback>(
-//          make_unique<TimedRotateCallback>(
-//              railsInner.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsInner.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(-90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsInner.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(-90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsInner.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(90.0f),
-//              4.0,
-//              BounceEaseOut)),
-//      FILLWAVE_ENDLESS));
+  railsInner->rotateByEased(1.5, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsInner->rotateByEased(2.5, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsInner->rotateByEased(3.5, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsInner->rotateByEased(0.5, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsInner->loop(5000);
 
   railsOuter->attach(std::move(railsInner));
 

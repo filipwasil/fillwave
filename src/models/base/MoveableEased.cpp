@@ -43,6 +43,27 @@ MoveableEased::MoveableEased(unsigned int aReservedSpaceForCallbacks)
 	mTimeCallbacks.reserve(aReservedSpaceForCallbacks);
 }
 
+void MoveableEased::attachTimeCallback(float deltaTime, Callback<float(float)> aAction) {
+	mTimeCallbacks.push_back([this, deltaTime, aAction](float aDeltaTime) {
+		if (0.0f == deltaTime) {
+			return deltaTime;
+		}
+
+		if (mCallbackTimePassed == 0.0f) {
+			aAction(0.0f);
+		}
+
+		mCallbackTimePassed += aDeltaTime;
+		aAction(mCallbackTimePassed/deltaTime >= 1.0f ? 1.0f : mCallbackTimePassed/deltaTime);
+		if (mCallbackTimePassed < deltaTime) {
+			return 0.0f;
+		}
+		float timeLeft = mCallbackTimePassed - deltaTime;
+		mCallbackTimePassed = 0;
+		return timeLeft;
+	});
+}
+
 void MoveableEased::waitInTime(float aDurationInSeconds) {
 	mTimeCallbacks.push_back([this, aDurationInSeconds](float aDeltaTime) {
 		mCallbackTimePassed += aDeltaTime;

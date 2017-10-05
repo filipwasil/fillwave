@@ -8,17 +8,23 @@
     <option name="INDENT_NAMESPACE_MEMBERS" value="0" />
     <option name="INDENT_C_STRUCT_MEMBERS" value="2" />
     <option name="INDENT_CLASS_MEMBERS" value="2" />
+    <option name="INDENT_VISIBILITY_KEYWORDS" value="1" />
     <option name="INDENT_INSIDE_CODE_BLOCK" value="2" />
     <option name="FUNCTION_PARAMETERS_WRAP" value="5" />
-    <option name="FUNCTION_PARAMETERS_ALIGN_MULTILINE" value="false" />
     <option name="FUNCTION_PARAMETERS_ALIGN_MULTILINE_PARS" value="true" />
+    <option name="FUNCTION_PARAMETERS_COMMA_ON_NEXT_LINE" value="true" />
     <option name="FUNCTION_CALL_ARGUMENTS_WRAP" value="5" />
+    <option name="CLASS_CONSTRUCTOR_INIT_LIST_WRAP" value="2" />
     <option name="CLASS_CONSTRUCTOR_INIT_LIST_ALIGN_MULTILINE" value="false" />
     <option name="CLASS_CONSTRUCTOR_INIT_LIST_COMMA_ON_NEXT_LINE" value="true" />
     <option name="CLASS_CONSTRUCTOR_INIT_LIST_NEW_LINE_BEFORE_COLON" value="1" />
     <option name="SUPERCLASS_LIST_BEFORE_COLON" value="0" />
     <option name="SPACE_BEFORE_TEMPLATE_DECLARATION_LT" value="true" />
     <option name="ENUM_CONSTANTS_COMMA_ON_NEXT_LINE" value="true" />
+    <option name="SPACE_BEFORE_POINTER_IN_DECLARATION" value="false" />
+    <option name="SPACE_AFTER_POINTER_IN_DECLARATION" value="true" />
+    <option name="SPACE_BEFORE_REFERENCE_IN_DECLARATION" value="false" />
+    <option name="SPACE_AFTER_REFERENCE_IN_DECLARATION" value="true" />
     <option name="DISCHARGED_SHORT_TERNARY_OPERATOR" value="true" />
     <option name="FIELDS_PREFIX" value="m" />
   </Objective-C>
@@ -74,7 +80,7 @@
     <option name="ENUM_CONSTANTS_WRAP" value="2" />
     <indentOptions>
       <option name="INDENT_SIZE" value="2" />
-      <option name="CONTINUATION_INDENT_SIZE" value="4" />
+      <option name="CONTINUATION_INDENT_SIZE" value="2" />
       <option name="TAB_SIZE" value="2" />
       <option name="SMART_TABS" value="true" />
     </indentOptions>

@@ -98,6 +98,8 @@ public:
 
   void unpick() override;
 
+  void stepInTime(float timeSinceLastFrameInSeconds);
+
   virtual void onPicked() override;
 
   virtual void onUnpicked() override;

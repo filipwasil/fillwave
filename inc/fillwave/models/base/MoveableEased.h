@@ -41,34 +41,24 @@ namespace flf {
 class MoveableEased : public Moveable {
  public:
 	explicit MoveableEased(unsigned int aReservedSpaceForCallbacks = 1);
+
 	void waitInTime(float deltaTime);
+
 	void moveByEased(float deltaTime, const glm::vec3& deltaMove, Callback<float(float)> ease = LinearInterpolation);
+
 	void scaleByEased(float deltaTime, const glm::vec3& aScale, Callback<float(float)> ease = LinearInterpolation);
+
 	void rotateByEased(float deltaTime, const float aAngle, const glm::vec3& aAxis, Callback<float(float)> ease = LinearInterpolation);
+
 	void loop(int loops);
+
 	void stop();
+
+	bool isMoving();
+
 	float stepInTime(float delta);
 
-	void attachTimeCallback(float deltaTime, Callback<float(float)> aAction) {
-		mTimeCallbacks.push_back([this, deltaTime, aAction](float aDeltaTime) {
-			if (0.0f == deltaTime) {
-				return deltaTime;
-			}
-
-			if (mCallbackTimePassed == 0.0f) {
-				aAction(0.0f);
-			}
-
-			mCallbackTimePassed += aDeltaTime;
-			aAction(mCallbackTimePassed/deltaTime >= 1.0f ? 1.0f : mCallbackTimePassed/deltaTime);
-			if (mCallbackTimePassed < deltaTime) {
-				return 0.0f;
-			}
-			float timeLeft = mCallbackTimePassed - deltaTime;
-			mCallbackTimePassed = 0;
-			return timeLeft;
-		});
-	}
+	void attachTimeCallback(float deltaTime, Callback<float(float)> aAction);
 
 	template <typename ...ARGS>
 	void attachTimeCallback(float deltaTime, Callback<float(float, ARGS...)> aAction, ARGS&&... args) {
@@ -86,6 +76,7 @@ class MoveableEased : public Moveable {
 			return timeLeft;
 		});
 	}
+
  protected:
   float mCallbackTimePassed;
 

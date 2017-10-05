@@ -225,5 +225,12 @@ void Entity::detachHandlers() {
   mEventHandlers.clear();
 }
 
+void Entity::stepInTime(float timeSinceLastFrameInSeconds) {
+  MoveableEased::stepInTime(timeSinceLastFrameInSeconds);
+  for (auto &it : mChildren) {
+    it->stepInTime(timeSinceLastFrameInSeconds);
+  }
+}
+
 } /* flf */
 } /* flw */
