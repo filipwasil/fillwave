@@ -57,7 +57,7 @@ class Entity : public IRenderable, public IPickable, public Moveable, public Tre
 public:
   Entity();
 
-  ~Entity() override;
+  ~Entity() override = default;
 
   Entity &operator=(const Entity &) = default;
 
@@ -68,9 +68,9 @@ public:
   Entity(Entity &&obj) = default;
 
   /* Flags */
-  GLboolean isPSC();
+  bool isPSC();
 
-  GLboolean isPSR();
+  bool isPSR();
 
   /* Callbacks */
   void handleEvent(const Event& event);
