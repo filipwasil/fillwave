@@ -86,7 +86,9 @@ public:
   void pick(glm::ivec4 color);
 
   /* Events */
-  void onEvent(EventType &event);
+  void onEvent(const Event& event);
+
+  void stepInTime(float timePassedInSeconds);
 
   void draw(ICamera &c);
 

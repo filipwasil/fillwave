@@ -34,25 +34,19 @@
 
 #include <fillwave/models/Entity.h>
 
-#include <fillwave/Log.h>
-#include <fillwave/common/Macros.h>
-
-FLOGINIT("Entity", FERROR | FFATAL)
-
 namespace flw {
 namespace flf {
 
-Entity::Entity(glm::vec3 translation, glm::quat rotation)
-    : Moveable(translation, rotation)
-    , mChildrenPropagateEvent(GL_TRUE)
+Entity::Entity()
+    : mChildrenPropagateEvent(GL_TRUE)
     , mParentRefresh(GL_TRUE)
     , mPSC(GL_TRUE)
     , mPSR(GL_TRUE) {
-
+  // nothing
 }
 
 Entity::~Entity() {
-  fLogD("Entity destroyed");
+  // nothing
 }
 
 bool Entity::isAnimated() const {
@@ -136,10 +130,19 @@ void Entity::updateMatrixTree() {
   }
 }
 
-void Entity::handleHierarchyEvent(EventType &event) {
-  Callback::handleEvent(mCallbacksHierarchy, event);
-  for (auto &it : mChildren) {
-    it->handleHierarchyEvent(event);
+void Entity::handleEvent(const Event& event) {
+  if (event.getType() == eEventType::time) {
+    for (auto &handler : mEventHandlers) {
+      handler(event);
+    }
+  }
+
+  for (auto &handler : mEventHandlers) {
+    handler(event);
+  }
+
+  for (auto &child : mChildren) {
+    child->handleEvent(event);
   }
 }
 
@@ -172,14 +175,6 @@ void Entity::updateParentRotation(glm::quat &parent) {
   notifyObservers();
 }
 
-void Entity::attachHierarchyCallback(puCallback &&callback) {
-  mCallbacksHierarchy.push_back(std::move(callback));
-}
-
-void Entity::detachHierarchyCallback(Callback *callback) {
-  detachCallback(mCallbacksHierarchy, callback);
-}
-
 void Entity::pick(glm::vec3 color) {
   mFlagPickable = true;
   mPickColor = color;
@@ -207,20 +202,9 @@ void Entity::log() const {
   // nothing
 }
 
-inline void Entity::detachCallback(std::vector<puCallback> &callbacks, Callback *callback) {
-  auto _compare_function = [callback](const puCallback &m) -> bool {
-    return m.get() == callback;
-  };
-  auto _begin = callbacks.begin();
-  auto _end = callbacks.end();
-  auto it = std::remove_if(_begin, _end, _compare_function);
-  callbacks.erase(it, _end);
-  fLogE("Detachment of callback failed");
-}
-
 void Entity::updateRenderer(IRenderer &renderer) {
   for (auto &it : mChildren) {
-    it->updateRenderer(renderer);
+      it->updateRenderer(renderer);
   }
 }
 
@@ -228,8 +212,20 @@ bool Entity::getRenderItem(RenderItem & /*item*/) {
   return false;
 }
 
-} /* flf */
-puEntity buildEntity() {
-  return std::make_unique<flf::Entity>();
+void Entity::attachHandler(EventHandler&& h) {
+  mEventHandlers.push_back(h);
 }
+
+void Entity::detachHandlers() {
+  mEventHandlers.clear();
+}
+
+void Entity::stepInTime(float timeSinceLastFrameInSeconds) {
+  Moveable::stepInTime(timeSinceLastFrameInSeconds);
+  for (auto &it : mChildren) {
+    it->stepInTime(timeSinceLastFrameInSeconds);
+  }
+}
+
+} /* flf */
 } /* flw */

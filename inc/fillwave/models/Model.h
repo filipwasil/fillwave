@@ -29,7 +29,6 @@
 */
 
 #include <fillwave/models/base/Programmable.h>
-#include <fillwave/common/IFocusable.h>
 #include <fillwave/models/Mesh.h>
 #include <fillwave/models/animations/Animator.h>
 #include <fillwave/Assets.h>
@@ -43,7 +42,7 @@ class TimedBoneUpdateCallback;
  * \brief Drawable Mesh set.
  */
 
-class Model : public IFocusable, public Programmable {
+class Model : public Programmable {
 public:
 
   Model(Engine *engine,
@@ -95,8 +94,6 @@ public:
   GLint getActiveAnimations();
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
-  void handleFocusEvent(EventType &event) override;
 
   void updateRenderer(IRenderer &renderer) override;
 

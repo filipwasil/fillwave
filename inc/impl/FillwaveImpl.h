@@ -28,11 +28,9 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/Core.h>
-#include <fillwave/Framework.h>
-
-/* Extras */
-#include <fillwave/Debugger.h>
+#include "fillwave/Core.h"
+#include "fillwave/Debugger.h"
+#include "fillwave/Framework.h"
 
 /* Management */
 #include <fillwave/management/ProgramManager.h>
@@ -64,6 +62,10 @@ namespace flw {
 */
 
 struct Engine::EngineImpl final {
+  struct TargetEvenHandler {
+    flf::eEventType type;
+    flf::EventHandler handler;
+  };
 
 #ifdef __ANDROID__
   EngineImpl(Engine* engine, std::string rootPath);
@@ -119,22 +121,15 @@ struct Engine::EngineImpl final {
   flc::VertexBufferPosition *mVBOOcclusion;
   flc::VertexArray *mVAOOcclusion;
 
-  /* Inputs - callbacks */
-  std::map<EEventType, std::vector<puCallback>> mCallbacks;
-
-  /* Inputs - focus */
-#ifdef FILLWAVE_COMPILATION_OPTIMIZE_ONE_FOCUS
-  pair<IFocusable*, vector<Callback*>> mFocus;
-#else
-  std::map<flw::flf::IFocusable*, std::vector<flw::flf::Callback*>> mFocus;
-#endif
+  /* Input handlers */
+  flf::vec<TargetEvenHandler> mHandlers;
 
   /* Extras */
   puDebugger mDebugger;
   GLuint mFrameCounter;
   GLfloat mTimeFactor;
   pText mFPSText;
-  flf::FPSCallback* mTextFPSCallback;
+  //flf::FPSCallback mTextFPSCallback;
 
   /* Startup */
   GLfloat mStartupTime;
@@ -161,14 +156,12 @@ struct Engine::EngineImpl final {
   void initOcclusionTest();
   void initStartup();
 
-  /* Callbacks */
-  void runCallbacks();
-  void runCallbacks(flf::EventType &eventType);
+  /* Events */
+  void onEvent(const flf::Event& event);
+  void onResizeScreen(GLuint width, GLuint height);
 
-  void attachCallback(puCallback &&callback);
-  void detachCallbacks();
-  void detachCallbacks(EEventType eventType);
-  void detachCallback(flf::Callback *callback);
+  void attachHandler(flf::EventHandler&& handler, flf::eEventType type);
+  void detachHandlers();
 
   /* Evaluation */
   void evaluateShadowMaps();
@@ -208,9 +201,6 @@ struct Engine::EngineImpl final {
   /* Reload */
   void reload();
   void reloadPickingBuffer();
-
-  /* Insert */
-  void insertResizeScreen(GLuint width, GLuint height);
 };
 
 #ifdef __ANDROID__
@@ -251,7 +241,7 @@ Engine::EngineImpl::EngineImpl(Engine *engine, GLint, GLchar *const argv[])
     , mShaders()
     , mFrameCounter(0)
     , mTimeFactor(1.0)
-    , mTextFPSCallback(nullptr)
+    //, mTextFPSCallback(nullptr)
     , mStartupTime(0.0f)
     , mIsOQ(GL_TRUE)
     , mBackgroundColor(0.1, 0.1, 0.1) {
@@ -723,11 +713,14 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
 
 inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
   if (mTimeFactor) {
-    flf::TimeEventData data;
-    data.mTimePassed = timeExpiredInSeconds;
-    flf::TimeEvent timeEvent(data);
-    runCallbacks(timeEvent);
-    mScene->onEvent(timeEvent);
+    flf::EventData data;
+    data.mTime = {
+        timeExpiredInSeconds
+    };
+    ;
+
+    mScene->onEvent(flf::Event(flf::eEventType::time, data));
+    mScene->stepInTime(timeExpiredInSeconds);
   }
 }
 
@@ -790,15 +783,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
   }
 }
 
-void Engine::EngineImpl::runCallbacks(flf::EventType &event) {
-  if (mCallbacks.find(event.getType()) != mCallbacks.end()) {
-    for (auto &callback : mCallbacks[event.getType()]) {
-      callback->perform(event);
-    }
-  }
-}
-
-void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
+void Engine::EngineImpl::onResizeScreen(GLuint width, GLuint height) {
 
   mWindowWidth = width;
   mWindowHeight = height;
@@ -811,13 +796,18 @@ void Engine::EngineImpl::insertResizeScreen(GLuint width, GLuint height) {
   mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
 }
 
-/* Callbacks */
-
-void Engine::EngineImpl::attachCallback(puCallback &&callback) {
-  if (mCallbacks.find(callback->getEventType()) == mCallbacks.end()) {
-    mCallbacks[callback->getEventType()] = std::vector<puCallback>();
+void Engine::EngineImpl::onEvent(const flf::Event& event) {
+  for (auto& handler : mHandlers) {
+    handler.handler(event);
   }
-  mCallbacks[callback->getEventType()].push_back(move(callback));
+}
+
+void Engine::EngineImpl::attachHandler(flf::EventHandler&& handler, flf::eEventType type) {
+  mHandlers.push_back({type, std::move(handler)});
+}
+
+void Engine::EngineImpl::detachHandlers() {
+
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
@@ -836,29 +826,6 @@ glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GL
     a = data[id + 3];
   }
   return glm::ivec4(r, g, b, a);
-}
-
-/* Engine callbacks - clear */
-
-inline void Engine::EngineImpl::detachCallbacks() {
-  mCallbacks.clear();
-}
-
-inline void Engine::EngineImpl::detachCallbacks(EEventType eventType) {
-  if (mCallbacks.find(eventType) != mCallbacks.end()) {
-    mCallbacks[eventType].clear();
-  }
-}
-
-void Engine::EngineImpl::detachCallback(flf::Callback *callback) {
-  EEventType e = callback->getEventType();
-  std::vector<puCallback> *callbacks = &mCallbacks[e];
-  callbacks->erase(remove_if( // Selectively remove elements in the second vector...
-      callbacks->begin(), callbacks->end(), [&](puCallback const &p) {
-        // This predicate checks whether the element is contained
-        // in the second vector of pointers to be removed...
-        return callback == p.get();
-      }), callbacks->end());
 }
 
 void Engine::EngineImpl::pick(GLuint x, GLuint y) {

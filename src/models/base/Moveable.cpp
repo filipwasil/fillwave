@@ -37,11 +37,15 @@
 namespace flw {
 namespace flf {
 
-Moveable::Moveable(glm::vec3 translation, glm::quat rotation)
+Moveable::Moveable(glm::vec3 translation, glm::quat rotation, unsigned int callbacksCount)
     : mTranslation(translation)
     , mRotation(rotation)
     , mScale(1.0f)
-    , mRefresh(true) {
+    , mRefresh(true)
+    , mCallbackTimePassed(0)
+    , mCurrentCallbackIdx(0)
+    , mCallbackLoops(1) {
+  mTimeCallbacks.reserve(callbacksCount);
 }
 
 glm::vec3 Moveable::getTranslation() {
@@ -182,6 +186,131 @@ glm::mat4 Moveable::getParentMMC() const {
 
 glm::quat Moveable::getParentRotation() const {
   return mParentRotation;
+}
+
+void Moveable::attachTimeCallback(float deltaTime, Callback<float(float)> action) {
+  mTimeCallbacks.push_back([this, deltaTime, action](float aDeltaTime) {
+    if (0.0f == deltaTime) {
+      return deltaTime;
+    }
+
+    if (mCallbackTimePassed == 0.0f) {
+      action(0.0f);
+    }
+
+    mCallbackTimePassed += aDeltaTime;
+    action(mCallbackTimePassed/deltaTime >= 1.0f ? 1.0f : mCallbackTimePassed/deltaTime);
+    if (mCallbackTimePassed < deltaTime) {
+      return 0.0f;
+    }
+    float timeLeft = mCallbackTimePassed - deltaTime;
+    mCallbackTimePassed = 0;
+    return timeLeft;
+  });
+}
+
+void Moveable::waitInTime(float aDurationInSeconds) {
+  mTimeCallbacks.push_back([this, aDurationInSeconds](float aDeltaTime) {
+    mCallbackTimePassed += aDeltaTime;
+    if (mCallbackTimePassed < aDurationInSeconds) {
+      return 0.0f;
+    }
+    float timeLeft = mCallbackTimePassed - aDurationInSeconds;
+    mCallbackTimePassed = 0;
+    return timeLeft;
+  });
+}
+
+void Moveable::moveBy(float aDurationInSeconds,
+  const glm::vec3& deltaMove,
+  Callback<float(float)> aEase) {
+  mTimeCallbacks.push_back([this, aDurationInSeconds, deltaMove, aEase](float aDeltaTime) {
+    if (mCallbackTimePassed == 0.0f) {
+      mBase.mTranslation = mTranslation;
+    }
+    mCallbackTimePassed += aDeltaTime;
+    const float percentageDone = mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
+    moveTo(mBase.mTranslation +
+           aEase(percentageDone) * deltaMove);
+    if (mCallbackTimePassed < aDurationInSeconds) {
+      return 0.0f;
+    }
+    float timeLeft = mCallbackTimePassed - aDurationInSeconds;
+    mCallbackTimePassed = 0;
+    return timeLeft;
+  });
+}
+
+void Moveable::scaleBy(float aDurationInSeconds,
+  const glm::vec3& aDeltaScale,
+  Callback<float(float)> aEase) {
+  mTimeCallbacks.push_back([this, aDurationInSeconds, aDeltaScale, aEase](float aDeltaTime) {
+    if (mCallbackTimePassed == 0.0f) {
+      mBase.mScale = mScale;
+    }
+    mCallbackTimePassed += aDeltaTime;
+    const float percentageDone = mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
+    scaleTo(mBase.mScale + aEase(percentageDone) * aDeltaScale);
+    if (mCallbackTimePassed < aDurationInSeconds) {
+      return 0.0f;
+    }
+    float timeLeft = mCallbackTimePassed - aDurationInSeconds;
+    mCallbackTimePassed = 0;
+    return timeLeft;
+  });
+}
+
+void Moveable::rotateBy(float aDurationInSeconds, const float aDeltaAngle, const glm::vec3& aAxis,
+  Callback<float(float)> aEase) {
+  mTimeCallbacks.push_back([this, aDurationInSeconds, aDeltaAngle, aAxis, aEase](float aDeltaTime) {
+    if (mCallbackTimePassed == 0.0f) {
+      mBase.mRotation = mRotation;
+    }
+    mCallbackTimePassed += aDeltaTime;
+    const float percentageDone = mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
+    rotateTo(mBase.mRotation);
+    rotateBy(aAxis, aEase(percentageDone) * aDeltaAngle);
+    if (mCallbackTimePassed < aDurationInSeconds) {
+      return 0.0f;
+    }
+    float timeLeft = mCallbackTimePassed - aDurationInSeconds;
+    mCallbackTimePassed = 0;
+    return timeLeft;
+  });
+}
+
+float Moveable::stepInTime(float delta) {
+  if (mTimeCallbacks.empty() || mCurrentCallbackIdx == mTimeCallbacks.size()) {
+    return delta;
+  }
+
+  float timeStillLeft = delta;
+  do {
+    timeStillLeft = mTimeCallbacks[mCurrentCallbackIdx](timeStillLeft);
+    if (timeStillLeft == 0.0f) {
+      return 0.0f;
+    }
+    mCallbackTimePassed = 0.0f;
+    if (++mCurrentCallbackIdx < mTimeCallbacks.size()) {
+      continue;
+    }
+    mCurrentCallbackIdx = 0;
+    if (mCallbackLoops > 1) {
+      mCallbackLoops--;
+      continue;
+    }
+    mTimeCallbacks.clear();
+    return timeStillLeft;
+  } while(1);
+}
+
+void Moveable::stop() {
+  mTimeCallbacks.clear();
+  mCurrentCallbackIdx = 0;
+}
+
+void Moveable::loop(int loops) {
+  mCallbackLoops = loops;
 }
 
 } /* flf */

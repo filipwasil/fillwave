@@ -28,30 +28,25 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/actions/events/TimeEvent.h>
+#include <fillwave/actions/Event.h>
 #include <fillwave/hud/Text.h>
 
 namespace flw {
 class Engine;
 namespace flf {
 
-/*! \class FPSCallback
- * \brief ItemCallback to display and refresh FPS as a renderable text.
- */
-
-class FPSCallback : public Callback {
-public:
-  FPSCallback(Engine *engine, pText text);
-
-  virtual ~FPSCallback() = default;
-
-  void perform(EventType &event);
-
-private:
-  pText mText;
-  Engine *mEngine;
-};
+///*! \class FPSCallback
+// * \brief ItemCallback to display and refresh FPS as a renderable text.
+// */
+//
+//class FPSCallback : public Callback {
+//public:
+//  FPSCallback(Engine *engine);
+//  void set(pText text);
+//private:
+//  pText mText;
+//  Engine *mEngine;
+//};
 
 } /* flf */
 } /* flw */

@@ -72,6 +72,11 @@ IEmiterPoint::IEmiterPoint(Engine *engine,
   if (glGetError() != GL_NO_ERROR) {
     fLogE("Legacy features may cause a GL_INVALID_ENUM on core profile. It may happen.");
   }
+
+  attachHandler([this] (const Event& event) {
+    mCallbackTimePassed += event.getData().mTime.mTimePassed;
+    update(mCallbackTimePassed);
+  } );
 }
 
 void IEmiterPoint::setBlending(GLenum sourceFactor, GLenum destinationFactor) {

@@ -7,8 +7,6 @@
 
 #include <fillwave/common/Strings.h>
 #include <fillwave/loaders/FileLoader.h>
-#include <fillwave/Log.h>
-
 
 namespace flw {
 

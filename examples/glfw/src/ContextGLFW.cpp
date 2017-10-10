@@ -11,13 +11,14 @@
 
 FLOGINIT("BackendGLFW", FERROR | FFATAL)
 
-flw::Engine *ContextGLFW::mGraphicsEngine;
-GLfloat ContextGLFW::mScreenWidth;
-GLfloat ContextGLFW::mScreenHeight;
-GLFWwindow *ContextGLFW::mWindow;
-GLFWwindow *ContextGLFW::mWindowNew;
-GLuint ContextGLFW::mCursorPositionX;
-GLuint ContextGLFW::mCursorPositionY;
+flw::Engine *App::mGraphics;
+GLfloat App::mScreenWidth;
+GLfloat App::mScreenHeight;
+GLFWwindow *App::mWindow;
+GLFWwindow *App::mWindowNew;
+GLuint App::mCursorPositionX;
+GLuint App::mCursorPositionY;
+flw::flf::EventData App::mEventData;
 
 ContextGLFW::ContextGLFW(int argc, char *argv[]) {
 
@@ -115,8 +116,8 @@ void ContextGLFW::render() {
   mWindow = nullptr;
 }
 
-void ContextGLFW::resizeCallback(GLFWwindow * /*window*/, int width, int height) {//xxx todo
-  mGraphicsEngine->insertResizeScreen(width, height);
+void App::resizeCallback(GLFWwindow * /*window*/, int width, int height) {//xxx todo
+  mGraphics->onResizeScreen(width, height);
 }
 
 GLuint ContextGLFW::getScreenWidth() {
@@ -136,39 +137,32 @@ void ContextGLFW::keyboardCallback(GLFWwindow * /*window*/, int key, int scancod
 
   /* And/Or provide it to Fillwave to executeall entity callbacks when focused */
 
-  flw::flf::KeyboardEventData data;
-  data.action = action;
-  data.key = key;
-  data.mode = mods;
-  data.scanCode = scancode;
-  flw::flf::KeyboardEvent event(data);
-  mGraphicsEngine->insertInput(event);
+  mEventData.mKey.action = action;
+  mEventData.mKey.key = key;
+  mEventData.mKey.mode = mods;
+  mEventData.mKey.scanCode = scancode;
+  flw::flf::Event event(flw::flf::eEventType::key, mEventData);
+  mGraphics->onEvent(event);
 }
 
-void ContextGLFW::mouseButtonCallback(GLFWwindow * /*window*/, int button, int action, int mods) {
-  flw::flf::MouseButtonEventData data;
-  data.mWhereX = mCursorPositionX;
-  data.mWhereY = mCursorPositionY;
-  data.mAction = action;
-  data.mButton = button;
-  data.mMods = mods;
-  flw::flf::MouseButtonEvent event(data);
-  mGraphicsEngine->insertInput(event);
+void App::mouseButtonCallback(GLFWwindow * /*window*/, int button, int action, int mods) {
+  mEventData.mMouseButton.mWhereX = mCursorPositionX;
+  mEventData.mMouseButton.mWhereY = mCursorPositionY;
+  mEventData.mMouseButton.mAction = action;
+  mEventData.mMouseButton.mButton = button;
+  mEventData.mMouseButton.mMods = mods;
+  onEvent(flw::flf::eEventType::mouseButton);
 }
 
-void ContextGLFW::scrollCallback(GLFWwindow * /*window*/, double xoffset, double yoffset) {
-  flw::flf::ScrollEventData d;
-  d.mOffsetX = xoffset;
-  d.mOffsetY = yoffset;
-  flw::flf::ScrollEvent event(d);
-  mGraphicsEngine->insertInput(event);
+void App::scrollCallback(GLFWwindow * /*window*/, double /*xoffset*/, double /*yoffset*/) {
+//  mEventData.mOffsetX = xoffset;
+//  mEventData.mOffsetY = yoffset;
+//  mGraphics->onEvent(flw::flf::eEventType::scroll);
 }
 
-void ContextGLFW::characterCallback(GLFWwindow * /*window*/, unsigned int ascii) {
-  flw::flf::CharacterEventData d;
-  d.character = ascii;
-  flw::flf::CharacterEvent event(d);
-  mGraphicsEngine->insertInput(event);
+void App::characterCallback(GLFWwindow * /*window*/, unsigned int ascii) {
+  mEventData.mChar.character = ascii;
+  onEvent(flw::flf::eEventType::character);
 }
 
 void ContextGLFW::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, double ypos) {
@@ -196,15 +190,16 @@ void ContextGLFW::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, d
   mCursorPositionX = xpos;
   mCursorPositionY = ypos;
 
-  flw::flf::CursorPositionEvent event(d);
-  mGraphicsEngine->insertInput(event);
+  onEvent(flw::flf::eEventType::cursorPosition);
 }
 
-void ContextGLFW::cursorEnterCallback(GLFWwindow * /*window*/, int in) {
-  flw::flf::CursorEnterEventData d;
-  d.direction = in;
-  flw::flf::CursorEnterEvent event(d);
-  mGraphicsEngine->insertInput(event);
+void App::cursorEnterCallback(GLFWwindow * /*window*/, int in) {
+  mEventData.mCursorEnter.direction = in;
+  onEvent(flw::flf::eEventType::cursorEnter);
+}
+
+void App::onEvent(const flw::flf::eEventType& type) {
+  mGraphics->onEvent(flw::flf::Event(type, mEventData));
 }
 
 void ContextGLFW::reload() {

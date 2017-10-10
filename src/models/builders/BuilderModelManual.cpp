@@ -33,8 +33,6 @@
 
 
 #include <fillwave/models/builders/BuilderModelManual.h>
-#include <fillwave/Log.h>
-
 
 namespace flw {
 namespace flf {

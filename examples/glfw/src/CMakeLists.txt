@@ -7,17 +7,17 @@ cmake_minimum_required (VERSION 2.8.8)
 # Source files
 # -----------------------------------------------
 
-#PROJECT(testGameExample C CXX)
-
 set (PROJECT_VERSION 1.0.0)
 
 aux_source_directory (CallbacksGLFW/ SOURCE_CALLBACKS_GLFW)
 aux_source_directory (TerrainConstructors/ SOURCE_CONSTRUCTORS)
 
-set (SOURCE_FILES test.cpp
-    ContextGLFW.cpp
+set (SOURCE_FILES
+    test.cpp
+    App.cpp
     PickableModel.cpp
-    GradientBall.cpp
+    Cluster.cpp
+    Cradle.cpp
     ${SOURCE_CALLBACKS_GLFW}
     ${SOURCE_CONSTRUCTORS})
 

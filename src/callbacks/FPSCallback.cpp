@@ -35,31 +35,31 @@
 #include <fillwave/actions/callbacks/FPSCallback.h>
 #include <string>
 #include <sstream>
-
 #include <fillwave/Fillwave.h>
 
 namespace flw {
 namespace flf {
 
-FPSCallback::FPSCallback(Engine *engine, pText text)
-    : Callback(EEventType::eTime)
-    , mText(text)
-    , mEngine(engine) {
-
-}
-
-void FPSCallback::perform(EventType &event) {
-  TimeEventData e = TimeEvent::getData(event);
-  if (mTimePassed < 1.0f) {
-    mTimePassed += e.mTimePassed;
-  } else {
-    std::ostringstream oss;
-    oss << "FPS " << mEngine->getFramesPassed();
-    std::string count = oss.str();
-    mTimePassed -= 1.0f;
-    mText->editString(std::string(count));
-  }
-}
+//FPSCallback::FPSCallback(Engine *engine)
+//    : Callback([this] (EventType& event) {
+//      TimeEventData e = TimeEvent::getData(event);
+//      if (mTimePassed < 1.0f) {
+//        mTimePassed += e.mTimePassed;
+//      } else {
+//        std::ostringstream oss;
+//        oss << "FPS " << mEngine->getFramesPassed();
+//        std::string count = oss.str();
+//        mTimePassed -= 1.0f;
+//        mText->editString(std::string(count));
+//      }
+//    }
+//    , EEventType::eTime)
+//    , mEngine(engine) {
+//}
+//
+//void FPSCallback::set(pText text) {
+//  mText = text;
+//}
 
 } /* flf */
 } /* flw */

@@ -35,7 +35,6 @@
 #include <fillwave/models/Terrain.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/management/LightSystem.h>
-#include <fillwave/Log.h>
 
 static int FILLWAVE_VOXEL_CHUNK_SIZE = 16;
 

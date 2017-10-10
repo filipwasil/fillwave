@@ -28,16 +28,16 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/actions/callbacks/Callback.h>
 #include <fillwave/common/IPickable.h>
 #include <fillwave/space/base/ICamera.h>
 #include <fillwave/models/base/IRenderable.h>
-#include <fillwave/common/IFocusable.h>
+#include <fillwave/models/base/Moveable.h>
 #include <fillwave/models/base/TreePtr.h>
+#include <fillwave/actions/Event.h>
 
 namespace flw {
-
 namespace flf {
+
 class Entity;
 }
 
@@ -55,7 +55,7 @@ namespace flf {
 
 class Entity : public IRenderable, public IPickable, public Moveable, public TreePtr<Entity> {
 public:
-  Entity(glm::vec3 translation = glm::vec3(0.0), glm::quat orientation = glm::quat(1.0, 0.0, 0.0, 0.0));
+  Entity();
 
   ~Entity() override;
 
@@ -73,7 +73,7 @@ public:
   GLboolean isPSR();
 
   /* Callbacks */
-  void handleHierarchyEvent(EventType &event);
+  void handleEvent(const Event& event);
 
   /* Model */
   glm::mat4 getPhysicsMMC();
@@ -82,9 +82,9 @@ public:
   void setTransformation(glm::mat4 modelMatrix);
 
   /* Callbacks */
-  void attachHierarchyCallback(puCallback &&callback);
+  void attachHandler(EventHandler&& h);
 
-  void detachHierarchyCallback(Callback *callback);
+  void detachHandlers();
 
   /* Parent */
   void updateMatrixTree();
@@ -97,6 +97,8 @@ public:
   void pick(glm::vec3 color) override;
 
   void unpick() override;
+
+  void stepInTime(float timeSinceLastFrameInSeconds);
 
   virtual void onPicked() override;
 
@@ -138,16 +140,11 @@ protected:
 
   GLboolean mChildrenPropagateEvent;
   GLboolean mParentRefresh;
-  std::vector<puCallback> mCallbacksHierarchy;
+  vec<EventHandler> mEventHandlers;
 
   GLboolean mPSC;
   GLboolean mPSR;
-
-private:
-  void eraseFinishedCallbacks(std::vector<puCallback> &callbacks);
-
-  void detachCallback(std::vector<puCallback> &callbacks, Callback *callback);
 };
+
 } /* flf */
-puEntity buildEntity();
 } /* flw */

@@ -25,14 +25,9 @@ using namespace flw;
 using namespace flw::flf;
 using namespace std;
 
-#ifdef _WIN32
-GLFWwindow *ContextGLFW::mWindow;
-#endif
-
-int main(int argc, char *argv[]) {
-  ContextGLFW mContext(argc, argv);
-  ContextGLFW::mGraphicsEngine->insertResizeScreen(mContext.getScreenWidth(), mContext.getScreenHeight());
-  init();
+int main(int argc, char* argv[]) {
+  App mContext(argc, argv);
+  App::mGraphics->onResizeScreen(mContext.getScreenWidth(), mContext.getScreenHeight());
   perform();
   showDescription();
   mContext.render();

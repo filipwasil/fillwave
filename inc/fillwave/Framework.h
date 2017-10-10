@@ -30,23 +30,6 @@
 
 /* Events */
 #include <fillwave/actions/callbacks/FPSCallback.h>
-#include <fillwave/actions/callbacks/TimedMoveCallback.h>
-#include <fillwave/actions/callbacks/TimedRotateCallback.h>
-#include <fillwave/actions/callbacks/TimedScaleCallback.h>
-#include <fillwave/actions/callbacks/TimedCallback.h>
-#include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
-#include <fillwave/actions/callbacks/LoopCallback.h>
-#include <fillwave/actions/callbacks/SequenceCallback.h>
-#include <fillwave/actions/events/CharacterModsTEvent.h>
-#include <fillwave/actions/events/CharacterTEvent.h>
-#include <fillwave/actions/events/CursorEnterTEvent.h>
-#include <fillwave/actions/events/CursorPositionTEvent.h>
-#include <fillwave/actions/events/CursorPositionTEvent.h>
-#include <fillwave/actions/events/KeyboardTEvent.h>
-#include <fillwave/actions/events/MouseButtonTEvent.h>
-#include <fillwave/actions/events/ScrollTEvent.h>
-#include <fillwave/actions/events/TimeEvent.h>
-#include <fillwave/actions/events/TouchTEvent.h>
 
 /* Space */
 #include <fillwave/space/LightPoint.h>
