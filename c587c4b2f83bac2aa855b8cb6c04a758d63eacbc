@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "be0787b2_d41b284f",
+        "filename": "src/models/Entity.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-10T20:20:01Z",
+      "side": 1,
+      "message": "Perhaps better solution will be use in .h file \"\u003d default\" instead of define empty descructor in .cpp?",
+      "range": {
+        "startLine": 49,
+        "startChar": 5,
+        "endLine": 49,
+        "endChar": 12
+      },
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
