@@ -36,6 +36,8 @@
 //
 // #define _USE_MATH_DEFINES
 
+#include "fillwave/Fillwave.h"
+
 #define NOISE_TABLE_MASK   255
 
 #define FLOOR(x)           ((int)(x) - ((x) < 0 && (x) != (int)(x)))

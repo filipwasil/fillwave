@@ -45,10 +45,6 @@ Entity::Entity()
   // nothing
 }
 
-Entity::~Entity() {
-  // nothing
-}
-
 bool Entity::isAnimated() const {
   return false;
 }
@@ -190,11 +186,11 @@ void Entity::unpick() {
   });
 }
 
-GLboolean Entity::isPSC() {
+bool Entity::isPSC() {
   return mPSC;
 }
 
-GLboolean Entity::isPSR() {
+bool Entity::isPSR() {
   return mPSR;
 }
 
