@@ -11,8 +11,15 @@ class Engine;
 class App {
 private:
   GLfloat mTimeExpired = 0.0f;
+
   static GLuint mCursorPositionX;
+
   static GLuint mCursorPositionY;
+
+  static flw::flf::EventData mEventData;
+
+  static void onEvent(const flw::flf::eEventType& type);
+
 public:
   App(int argc, char *argv[]);
 

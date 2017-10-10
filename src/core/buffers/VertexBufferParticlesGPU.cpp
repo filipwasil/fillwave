@@ -33,8 +33,6 @@
 
 
 #include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
-#include <fillwave/Log.h>
-
 
 namespace flw {
 namespace flc {

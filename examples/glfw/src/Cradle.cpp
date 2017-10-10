@@ -44,33 +44,11 @@ Cradle::Cradle(flw::Engine* engine) {
   railsOuter->rotateByY(glm::radians(180.0f));
   railsOuter->rotateByZ(glm::radians(45.0f));
 
-//  railsOuter->attachHierarchyCallback(make_unique<LoopCallback>(
-//      make_unique_container<SequenceCallback>(
-//          make_unique<TimedRotateCallback>(
-//              railsOuter.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsOuter.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(-90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsOuter.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(-90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsOuter.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(90.0f),
-//              4.0,
-//              BounceEaseOut)),
-//      FILLWAVE_ENDLESS));
+  railsOuter->rotateBy(2.0, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsOuter->rotateBy(2.0, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsOuter->rotateBy(2.0, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsOuter->rotateBy(2.0, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsOuter->loop(5000);
 
   auto railsInner = make_unique <Model> (
       engine
@@ -84,34 +62,11 @@ Cradle::Cradle(flw::Engine* engine) {
   railsInner->addEffect(make_shared<TextureOnly>());
   railsInner->rotateByX(glm::radians(90.0f));
   railsInner->rotateByZ(glm::radians(90.0f));
-
-//  railsInner->attachHierarchyCallback(make_unique<LoopCallback>(
-//      make_unique_container<SequenceCallback>(
-//          make_unique<TimedRotateCallback>(
-//              railsInner.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsInner.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(-90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsInner.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(-90.0f),
-//              4.0,
-//              BounceEaseOut),
-//          make_unique<TimedRotateCallback>(
-//              railsInner.get(),
-//              glm::vec3(1.0, 0.0, 0.0),
-//              glm::radians(90.0f),
-//              4.0,
-//              BounceEaseOut)),
-//      FILLWAVE_ENDLESS));
+  railsInner->rotateBy(1.5, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsInner->rotateBy(2.5, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsInner->rotateBy(3.5, glm::radians(90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsInner->rotateBy(0.5, glm::radians(-90.0f), glm::vec3(1.0, 0.0, 0.0), BounceEaseOut);
+  railsInner->loop(5000);
 
   railsOuter->attach(std::move(railsInner));
 
@@ -126,6 +81,18 @@ Cradle::Cradle(flw::Engine* engine) {
   mAccelerationV =
       engine->storeText(
           "F:", "fonts/bridgenorth", glm::vec2(-0.95, 0.75), 100.0, glm::vec4(1.0, 1.0, 1.0, 1.0), ETextEffect::eBold);
+
+//  engine->attachHandler([] (flf::Event& event), eEventType::key) {
+//  if (event.mData.mKey == GLFW_KEY_T && event.mData.mKey == GLFW_PRESS) {
+//    if (mTimeOn) {
+//      mTimeOn = false;
+//      mEngine->configTime(0.0);
+//    } else {
+//      mTimeOn = true;
+//      mEngine->configTime(1.0);
+//    }
+//  }
+//  });
 }
 
 void Cradle::setAcceleration(float vertical, float horizontal, float frontal) {

@@ -34,7 +34,6 @@
 
 #include <fillwave/core/buffers/IBuffer.h>
 #include <fillwave/Log.h>
-#include <fillwave/core/pipeline/Attribute.h>
 
 FLOGINIT("Buffer", FERROR | FFATAL)
 

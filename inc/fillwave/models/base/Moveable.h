@@ -31,8 +31,13 @@
 #include <fillwave/OpenGL.h>
 #include <fillwave/Math.h>
 #include <fillwave/common/Observable.h>
+#include <fillwave/models/base/Moveable.h>
+#include <fillwave/common/Easing.h>
+#include <fillwave/common/Allocator.h>
 #include <memory>
 #include <vector>
+#include <functional>
+#include <algorithm>
 
 namespace flw {
 namespace flf {
@@ -43,7 +48,8 @@ namespace flf {
 
 class Moveable : public Observable {
 public:
-  Moveable(glm::vec3 translation = glm::vec3(0.0), glm::quat rotation = glm::quat(1.0, 0.0, 0.0, 0.0));
+  Moveable(
+    glm::vec3 translation = glm::vec3(0.0), glm::quat r = glm::quat(1.0, 0.0, 0.0, 0.0), unsigned int callbacks = 1);
 
   virtual ~Moveable() = default;
 
@@ -104,6 +110,41 @@ public:
 
   glm::quat getParentRotation() const;
 
+  void waitInTime(float deltaTime);
+
+  void moveBy(float deltaTime, const glm::vec3& deltaMove, Callback<float(float)> ease = LinearInterpolation);
+
+  void scaleBy(float deltaTime, const glm::vec3& aScale, Callback<float(float)> ease = LinearInterpolation);
+
+  void rotateBy(float deltaTime, const float aAngle, const glm::vec3& aAxis, Callback<float(float)> ease = LinearInterpolation);
+
+  void loop(int loops);
+
+  void stop();
+
+  bool isMoving();
+
+  float stepInTime(float delta);
+
+  void attachTimeCallback(float deltaTime, Callback<float(float)> aAction);
+
+  template <typename ...ARGS>
+  void attachTimeCallback(float deltaTime, Callback<float(float, ARGS...)> aAction, ARGS&&... args) {
+    mTimeCallbacks.push_back([this, deltaTime, aAction, args...](float aDeltaTime) {
+      if (mCallbackTimePassed == 0.0f) {
+        aAction(0.0f, std::forward<ARGS...>(args...));
+      }
+      mCallbackTimePassed += aDeltaTime;
+      aAction(mCallbackTimePassed/deltaTime >= 1.0f ? 1.0f : mCallbackTimePassed/deltaTime, args...);
+      if (mCallbackTimePassed < deltaTime) {
+        return 0.0f;
+      }
+      float timeLeft = mCallbackTimePassed - deltaTime;
+      mCallbackTimePassed = 0;
+      return timeLeft;
+    });
+  }
+
 protected:
   glm::fvec3 mTranslation;
   glm::quat mRotation;
@@ -118,6 +159,19 @@ protected:
 
   /* Refresh flag */
   bool mRefresh;
+
+  float mCallbackTimePassed;
+
+ private:
+  unsigned int mCurrentCallbackIdx;
+  unsigned int mCallbackLoops;
+  vec<Callback<float(float)>> mTimeCallbacks;
+
+  struct {
+    glm::vec3 mTranslation;
+    glm::vec3 mScale;
+    glm::quat mRotation;
+  } mBase;
 };
 
 template <class M>

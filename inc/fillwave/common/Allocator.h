@@ -28,33 +28,19 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/actions/events/TEvent.h>
+#include <fillwave/common/Aliases.h>
+#include <vector>
+#include <cmath>
 
 namespace flw {
 namespace flf {
 
-/*! \struct CharacterEventData
- * \brief Event data structure to store the character.
- */
+template <class T>
+using Allocator = std::allocator<T>;
 
-struct CharacterEventData {
-  unsigned int character;
-  const EEventType type = EEventType::eCharacter;
-};
 
-/*! \struct CharacterEvent
- * \brief Event introduced when the key is pressed.
- */
-
-class CharacterEvent : public TEvent<CharacterEventData> {
-public:
-  CharacterEvent(CharacterEventData &data)
-      : TEvent(data) {
-
-  }
-
-  virtual ~CharacterEvent() = default;
-};
+template <class T>
+using vec = std::vector<T, Allocator<T>>;
 
 } /* flf */
 } /* flw */

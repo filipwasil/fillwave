@@ -27,8 +27,7 @@ using namespace glm;
 
 int main(int argc, char* argv[]) {
   App mContext(argc, argv);
-  App::mGraphics->insertResizeScreen(mContext.getScreenWidth(),
-                                                   mContext.getScreenHeight());
+  App::mGraphics->onResizeScreen(mContext.getScreenWidth(), mContext.getScreenHeight());
   perform();
   Cradle cradle(App::mGraphics);
   mContext.render();

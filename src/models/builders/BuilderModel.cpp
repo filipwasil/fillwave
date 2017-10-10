@@ -36,9 +36,6 @@
 
 #include <fillwave/Fillwave.h>
 
-#include <fillwave/Log.h>
-
-
 namespace flw {
 namespace flf {
 

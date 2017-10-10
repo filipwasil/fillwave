@@ -33,7 +33,6 @@
 
 
 #include <fillwave/models/MeshTerrain.h>
-#include <fillwave/Log.h>
 #include <fillwave/Fillwave.h>
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/management/LightSystem.h>
