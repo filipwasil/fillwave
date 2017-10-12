@@ -2,6 +2,108 @@
   "comments": [
     {
       "key": {
+        "uuid": "7ca267fc_4320f7a6",
+        "filename": "examples/glfw/inc/CallbacksGLFW/AnimationKeyboardCallback.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "Perhaps better to turn off this file in cmake instead of comments?",
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a37c7f7a_28b8d8bd",
+        "filename": "examples/glfw/src/CallbacksGLFW/AnimationKeyboardCallback.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "Like with .h files, turn off them in cmake?",
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2ef11271_748d6a71",
+        "filename": "examples/glfw/src/test.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "using namespace std!",
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9f06dae_2ceedf04",
+        "filename": "inc/fillwave/common/Aliases.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "tab instead of spaces.",
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0047e030_401d9d2d",
+        "filename": "inc/impl/FillwaveImpl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "emplace_back? {type, handler}",
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "76029750_715d5310",
+        "filename": "src/callbacks/FPSCallback.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "turn off in cmake instead of comment?",
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "be0787b2_d41b284f",
         "filename": "src/models/Entity.cpp",
         "patchSetId": 1
@@ -19,6 +121,74 @@
         "endLine": 49,
         "endChar": 12
       },
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f0bfce26_c92beeab",
+        "filename": "src/models/Mesh.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "remove using namespace std;",
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "71fc6918_fc547356",
+        "filename": "src/models/base/Moveable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "We have some guidelines about how big lambda can be?",
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c9377b9e_f5f38410",
+        "filename": "src/models/base/Moveable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "Perhaps when lambda is \u003e 10 lines we should use std::bind to function?",
+      "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c18baca4_9b984352",
+        "filename": "tests/framework/tMoveable.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-10-12T16:39:30Z",
+      "side": 1,
+      "message": "tabs instead of spaces.",
       "revId": "c587c4b2f83bac2aa855b8cb6c04a758d63eacbc",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
