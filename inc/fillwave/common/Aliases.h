@@ -12,8 +12,6 @@
 
 #include <memory>
 
-#include "fillwave/actions/Event.h"
-
 namespace flw {
 namespace flf {
 
@@ -25,13 +23,11 @@ using ps = std::shared_ptr<T>;
 
 template <typename T, typename... Args>
 pu<T> make_pu(Args&&... args) {
-	return std::make_unique<T>(std::forward<Args>(args)...);
+  return std::make_unique<T>(std::forward<Args>(args)...);
 }
 
 template <class T>
 using Callback = std::function<T>;
-
-using EventHandler = std::function<void(const Event&)>;
 
 } /* flf */
 } /* flw */

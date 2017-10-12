@@ -39,7 +39,7 @@ void Renderer::paintGL() {
 }
 
 void Renderer::resizeGL(int width, int height) {
-  mScene->getEngine()->insertResizeScreen(static_cast<GLuint>(width), static_cast<GLuint>(height));
+  mScene->getEngine()->onResizeScreen(static_cast<GLuint>(width), static_cast<GLuint>(height));
 }
 
 void Renderer::onUpdate(int /*sliderNo*/, int /*value*/) const {

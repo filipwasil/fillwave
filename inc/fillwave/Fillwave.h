@@ -28,21 +28,22 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/space/Scene.h>
+#include "fillwave/space/Scene.h"
 
-#include <fillwave/space/LightPoint.h>
-#include <fillwave/space/LightSpot.h>
-#include <fillwave/space/LightDirectional.h>
-#include <fillwave/hud/Text.h>
+#include "fillwave/space/LightPoint.h"
+#include "fillwave/space/LightSpot.h"
+#include "fillwave/space/LightDirectional.h"
+#include "fillwave/hud/Text.h"
 
-#include <fillwave/common/TGetter.h>
+#include "fillwave/common/TGetter.h"
 
 /* Debugger */
-#include <fillwave/Debugger.h>
-#include <fillwave/common/Aliases.h>
+#include "fillwave/Debugger.h"
+#include "fillwave/common/Aliases.h"
+#include "fillwave/actions/Event.h"
 
 /* Common */
-#include <fillwave/common/PhysicsMeshBuffer.h>
+#include "fillwave/common/PhysicsMeshBuffer.h"
 
 #ifdef __ANDROID__
 struct ANativeActivity;
@@ -215,7 +216,7 @@ public:
   /* Inputs */
   void onEvent(const flf::Event& event);
   void onResizeScreen(GLuint width, GLuint height);
-  void attachHandler(flf::EventHandler&& h, flf::eEventType type);
+  void attachHandler(std::function<void(const flf::Event&)>&& h, flf::eEventType type);
   void detachHandlers();
 
   void reload();
