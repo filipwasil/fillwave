@@ -38,8 +38,6 @@
 
 FLOGINIT("Mesh", FERROR | FFATAL | FINFO)
 
-using namespace std;
-
 namespace flw {
 namespace flf {
 

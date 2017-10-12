@@ -62,9 +62,14 @@ namespace flw {
 */
 
 struct Engine::EngineImpl final {
-  struct TargetEvenHandler {
-    flf::eEventType type;
-    flf::EventHandler handler;
+  struct TargetEventHandler {
+    TargetEventHandler (flf::eEventType t, flf::EventHandler h)
+      : type(t)
+      , handler(h) {
+      // nothing
+    }
+    const flf::eEventType type;
+    const flf::EventHandler handler;
   };
 
 #ifdef __ANDROID__
@@ -122,7 +127,7 @@ struct Engine::EngineImpl final {
   flc::VertexArray *mVAOOcclusion;
 
   /* Input handlers */
-  flf::vec<TargetEvenHandler> mHandlers;
+  flf::vec<TargetEventHandler> mHandlers;
 
   /* Extras */
   puDebugger mDebugger;
@@ -836,7 +841,7 @@ void Engine::EngineImpl::onEvent(const flf::Event& event) {
 }
 
 void Engine::EngineImpl::attachHandler(flf::EventHandler&& handler, flf::eEventType type) {
-  mHandlers.push_back({type, std::move(handler)});
+  mHandlers.emplace_back(type, std::move(handler));
 }
 
 void Engine::EngineImpl::detachHandlers() {

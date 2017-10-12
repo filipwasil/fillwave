@@ -193,11 +193,9 @@ void Moveable::attachTimeCallback(float deltaTime, Callback<float(float)> action
     if (0.0f == deltaTime) {
       return deltaTime;
     }
-
     if (mCallbackTimePassed == 0.0f) {
       action(0.0f);
     }
-
     mCallbackTimePassed += aDeltaTime;
     action(mCallbackTimePassed/deltaTime >= 1.0f ? 1.0f : mCallbackTimePassed/deltaTime);
     if (mCallbackTimePassed < deltaTime) {
@@ -221,17 +219,15 @@ void Moveable::waitInTime(float aDurationInSeconds) {
   });
 }
 
-void Moveable::moveBy(float aDurationInSeconds,
-  const glm::vec3& deltaMove,
-  Callback<float(float)> aEase) {
+void Moveable::moveBy(float aDurationInSeconds, const glm::vec3& deltaMove, Callback<float(float)> aEase) {
   mTimeCallbacks.push_back([this, aDurationInSeconds, deltaMove, aEase](float aDeltaTime) {
     if (mCallbackTimePassed == 0.0f) {
       mBase.mTranslation = mTranslation;
     }
     mCallbackTimePassed += aDeltaTime;
-    const float percentageDone = mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
-    moveTo(mBase.mTranslation +
-           aEase(percentageDone) * deltaMove);
+    const float percentageDone =
+      mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
+    moveTo(mBase.mTranslation + aEase(percentageDone) * deltaMove);
     if (mCallbackTimePassed < aDurationInSeconds) {
       return 0.0f;
     }
@@ -241,15 +237,14 @@ void Moveable::moveBy(float aDurationInSeconds,
   });
 }
 
-void Moveable::scaleBy(float aDurationInSeconds,
-  const glm::vec3& aDeltaScale,
-  Callback<float(float)> aEase) {
+void Moveable::scaleBy(float aDurationInSeconds, const glm::vec3& aDeltaScale, Callback<float(float)> aEase) {
   mTimeCallbacks.push_back([this, aDurationInSeconds, aDeltaScale, aEase](float aDeltaTime) {
     if (mCallbackTimePassed == 0.0f) {
       mBase.mScale = mScale;
     }
     mCallbackTimePassed += aDeltaTime;
-    const float percentageDone = mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
+    const float percentageDone =
+      mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
     scaleTo(mBase.mScale + aEase(percentageDone) * aDeltaScale);
     if (mCallbackTimePassed < aDurationInSeconds) {
       return 0.0f;
@@ -283,7 +278,6 @@ float Moveable::stepInTime(float delta) {
   if (mTimeCallbacks.empty() || mCurrentCallbackIdx == mTimeCallbacks.size()) {
     return delta;
   }
-
   float timeStillLeft = delta;
   do {
     timeStillLeft = mTimeCallbacks[mCurrentCallbackIdx](timeStillLeft);
