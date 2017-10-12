@@ -33,21 +33,22 @@
 #include "fillwave/Framework.h"
 
 /* Management */
-#include <fillwave/management/ProgramManager.h>
-#include <fillwave/management/ShaderManager.h>
-#include <fillwave/management/SamplerManager.h>
-#include <fillwave/management/LightSystem.h>
-#include <fillwave/management/TextureSystem.h>
+#include "fillwave/management/ProgramManager.h"
+#include "fillwave/management/ShaderManager.h"
+#include "fillwave/management/SamplerManager.h"
+#include "fillwave/management/LightSystem.h"
+#include "fillwave/management/TextureSystem.h"
 
-#include <fillwave/common/Macros.h>
+#include "fillwave/actions/EventHandler.h"
+#include "fillwave/common/Macros.h"
 
 #ifdef __ANDROID__
 #else /* __ANDROID__ */
-#include <fillwave/common/Strings.h>
+#include "fillwave/common/Strings.h"
 #endif /* __ANDROID__ */
 
-#include <fillwave/loaders/FileLoader.h>
-#include <fillwave/management/BufferSystem.h>
+#include "fillwave/loaders/FileLoader.h"
+#include "fillwave/management/BufferSystem.h"
 
 FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 
@@ -62,11 +63,6 @@ namespace flw {
 */
 
 struct Engine::EngineImpl final {
-  struct TargetEvenHandler {
-    flf::eEventType type;
-    flf::EventHandler handler;
-  };
-
 #ifdef __ANDROID__
   EngineImpl(Engine* engine, std::string rootPath);
   EngineImpl(Engine* engine, ANativeActivity* activity);
@@ -122,7 +118,7 @@ struct Engine::EngineImpl final {
   flc::VertexArray *mVAOOcclusion;
 
   /* Input handlers */
-  flf::vec<TargetEvenHandler> mHandlers;
+  flf::vec<flf::EventHandler> mHandlers;
 
   /* Extras */
   puDebugger mDebugger;
@@ -159,10 +155,10 @@ struct Engine::EngineImpl final {
   void initStartup();
 
   /* Events */
-  void onEvent(const flf::Event& event);
+  void onEvent(const flf::Event& event) const;
   void onResizeScreen(GLuint width, GLuint height);
 
-  void attachHandler(flf::EventHandler&& handler, flf::eEventType type);
+  void attachHandler(std::function<void(const flf::Event&)>&& handler, flf::eEventType type);
   void detachHandlers();
 
   /* Evaluation */
@@ -829,14 +825,14 @@ void Engine::EngineImpl::onResizeScreen(GLuint width, GLuint height) {
   mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
 }
 
-void Engine::EngineImpl::onEvent(const flf::Event& event) {
-  for (auto& handler : mHandlers) {
-    handler.handler(event);
+void Engine::EngineImpl::onEvent(const flf::Event& event) const {
+  for (const auto& handler : mHandlers) {
+    handler.handle(event);
   }
 }
 
-void Engine::EngineImpl::attachHandler(flf::EventHandler&& handler, flf::eEventType type) {
-  mHandlers.push_back({type, std::move(handler)});
+void Engine::EngineImpl::attachHandler(std::function<void(const flf::Event&)>&& handler, flf::eEventType type) {
+  mHandlers.emplace_back(type, std::move(handler));
 }
 
 void Engine::EngineImpl::detachHandlers() {

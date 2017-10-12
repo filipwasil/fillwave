@@ -33,12 +33,13 @@
 #include <fillwave/models/base/IRenderable.h>
 #include <fillwave/models/base/Moveable.h>
 #include <fillwave/models/base/TreePtr.h>
-#include <fillwave/actions/Event.h>
 
 namespace flw {
 namespace flf {
-
 class Entity;
+class EventHandler;
+class Event;
+enum class eEventType;
 }
 
 namespace flc {
@@ -57,7 +58,7 @@ class Entity : public IRenderable, public IPickable, public Moveable, public Tre
 public:
   Entity();
 
-  ~Entity() override = default;
+  ~Entity() override;
 
   Entity &operator=(const Entity &) = default;
 
@@ -82,7 +83,7 @@ public:
   void setTransformation(glm::mat4& modelMatrix);
 
   /* Callbacks */
-  void attachHandler(EventHandler&& h);
+  void attachHandler(std::function<void(const Event&)>&& h, eEventType eventType);
 
   void detachHandlers();
 

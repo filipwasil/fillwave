@@ -257,7 +257,10 @@ inline void Model::initAnimations(const aiScene *scene) {
   if (scene->HasAnimations()) {
     mAnimator = std::make_unique<Animator>(scene);
     fLogD("attached TimedBoneUpdateCallback to model");
-    this->attachHandler([this](const Event& event){this->performAnimation(event.getData().mTime.mTimePassed);});
+    this->attachHandler(
+      [this](const Event& event){
+        this->performAnimation(event.getData().mTime.mTimePassed);
+      }, eEventType::time);
   }
 }
 

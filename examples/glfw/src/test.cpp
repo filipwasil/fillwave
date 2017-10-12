@@ -20,11 +20,6 @@
 #include <string>
 #include <sstream>
 
-using namespace flw;
-using namespace flw::flf;
-using namespace std;
-using namespace glm;
-
 int main(int argc, char* argv[]) {
   App mContext(argc, argv);
   App::mGraphics->onResizeScreen(mContext.getScreenWidth(), mContext.getScreenHeight());
@@ -36,13 +31,6 @@ int main(int argc, char* argv[]) {
 
 void perform() {
   /* Scene and camera */
-  App::mGraphics->setCurrentScene(make_unique<Scene>());
-  App::mGraphics->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
-
-//  puHUD hud = make_unique<HUD>();
-//
-//  hud->attach(make_unique<Cluster>(
-//      App::mGraphics, nullptr, "shaders/gauge/gauge.frag", vec2(-1.0f, -1.0f), vec2(2.0f, 2.0f)));
-//
-//  App::mGraphics->getCurrentScene()->setHUD(std::move(hud));
+  App::mGraphics->setCurrentScene(std::make_unique<flw::flf::Scene>());
+  App::mGraphics->getCurrentScene()->setCamera(std::make_unique<flw::flf::CameraPerspective>());
 }

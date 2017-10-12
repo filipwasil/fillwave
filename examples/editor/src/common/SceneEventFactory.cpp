@@ -20,11 +20,11 @@ flw::flf::KeyboardEventData SceneEventFactory::getKeyboardEvent(int action, int 
   return data;
 }
 
-flw::flf::CursorPositionEvent SceneEventFactory::getCursorPositionEvent(int x, int y) {
-  flw::flf::CursorPositionEventData d;
-  d.xPosition = x;
-  d.yPosition = y;
-  flw::flf::CursorPositionEvent event(d);
+flw::flf::Event SceneEventFactory::getCursorPositionEvent(int x, int y) {
+  flw::flf::EventData d;
+  d.mCursorPosition.xPosition = x;
+  d.mCursorPosition.yPosition = y;
+  flw::flf::Event event(flw::flf::eEventType::cursorPosition, d);
   return event;
 }
 

@@ -32,7 +32,8 @@
  */
 
 
-#include <fillwave/models/Entity.h>
+#include "fillwave/models/Entity.h"
+#include "fillwave/actions/EventHandler.h"
 
 namespace flw {
 namespace flf {
@@ -42,6 +43,10 @@ Entity::Entity()
     , mParentRefresh(GL_TRUE)
     , mPSC(GL_TRUE)
     , mPSR(GL_TRUE) {
+  // nothing
+}
+
+Entity::~Entity() {
   // nothing
 }
 
@@ -127,17 +132,10 @@ void Entity::updateMatrixTree() {
 }
 
 void Entity::handleEvent(const Event& event) {
-  if (event.getType() == eEventType::time) {
-    for (auto &handler : mEventHandlers) {
-      handler(event);
-    }
+  for (auto& handler : mEventHandlers) {
+    handler.handle(event);
   }
-
-  for (auto &handler : mEventHandlers) {
-    handler(event);
-  }
-
-  for (auto &child : mChildren) {
+  for (auto& child : mChildren) {
     child->handleEvent(event);
   }
 }
@@ -208,8 +206,8 @@ bool Entity::getRenderItem(RenderItem & /*item*/) {
   return false;
 }
 
-void Entity::attachHandler(EventHandler&& h) {
-  mEventHandlers.push_back(h);
+void Entity::attachHandler(std::function<void(const Event&)>&& h, eEventType eventType) {
+  mEventHandlers.emplace_back(eventType, h);
 }
 
 void Entity::detachHandlers() {
