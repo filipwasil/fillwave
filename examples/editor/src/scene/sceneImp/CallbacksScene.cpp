@@ -16,6 +16,9 @@ CallbacksScene::CallbacksScene(int argc, char **argv, QMap<QString, QVariant> va
 }
 
 void CallbacksScene::init() {
+  //Entire Scen must be rewrite.
+
+
   /* Scene and camera */
   mEngine->setCurrentScene(make_unique<Scene>());
   mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
@@ -25,6 +28,8 @@ void CallbacksScene::init() {
   mEngine->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
 
   /* Engine callbacks */
+  //We still use mEngine->configTime(0.0) ?
+  //How we move camera, in the same maner as before?moveInDirection ?
   mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
   mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
 

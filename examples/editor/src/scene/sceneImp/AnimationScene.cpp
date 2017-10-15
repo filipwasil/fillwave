@@ -33,7 +33,7 @@ void AnimationScene::init() {
   beast->rotateByX(90.0f);
   beast->setActiveAnimation(0);
   mEngine->getCurrentScene()->attach(std::move(beast));
-
+  //What instead of AnimationKeyboardCallback? It's need? In this class I see only easy operation of getting model.
   mEngine->attachCallback(std::make_unique<AnimationKeyboardCallback>(beast.get(), EEventType::eKey), beast.get());
 
   puIEmiterPoint snow = std::make_unique<EmiterPointCPU>(mEngine.get(),

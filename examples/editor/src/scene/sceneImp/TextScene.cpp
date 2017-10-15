@@ -41,6 +41,7 @@ void TextScene::init() {
                                                          GL_ONE,
                                                          GL_FALSE);
 
+  //Now interface do not have attachHierarchyCallback and TimedEmiterUpdateCallback is not present.
   snow->attachHierarchyCallback(std::make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
 
   mEngine->getCurrentScene()->attach(std::move(snow));
