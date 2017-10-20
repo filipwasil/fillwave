@@ -388,7 +388,7 @@ void Engine::configFPSCounter(string fontName, glm::vec2 position, GLfloat size)
     return;
   }
   mImpl->mFPSText.reset();
-  detachCallback(mImpl->mTextFPSCallback);
+  //detachCallback(mImpl->mTextFPSCallback);
 }
 
 void Engine::configFileLogging(string fileName) {

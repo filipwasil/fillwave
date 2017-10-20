@@ -43,5 +43,4 @@ template <class T>
 using vec = std::vector<T, Allocator<T>>;
 
 } /* flf */
-typedef std::unique_ptr<flf::SequenceCallback> puSequenceCallback;
 } /* flw */

@@ -143,8 +143,8 @@ protected:
   GLboolean mParentRefresh;
   vec<EventHandler> mEventHandlers;
 
-  GLboolean mPSC;
-  GLboolean mPSR;
+  bool mPSC;
+  bool mPSR;
 };
 
 } /* flf */

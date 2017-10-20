@@ -28,10 +28,11 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/models/base/Programmable.h>
-#include <fillwave/models/Mesh.h>
-#include <fillwave/models/animations/Animator.h>
-#include <fillwave/Assets.h>
+#include "fillwave/models/base/Programmable.h"
+#include "fillwave/models/Mesh.h"
+#include "fillwave/models/animations/Animator.h"
+#include "fillwave/Assets.h"
+#include "fillwave/common/TGetter.h"
 
 namespace flw {
 class Engine;
@@ -93,6 +94,8 @@ public:
 
   GLint getActiveAnimations();
 
+  TGetter<Mesh> getMesh(size_t id);
+
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
   void updateRenderer(IRenderer &renderer) override;
@@ -105,10 +108,11 @@ protected:
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
   GLint mActiveAnimation;
 
-  LightSystem &mLights;
-  flc::Program *mProgramShadow;
-  flc::Program *mProgramShadowColor;
+  LightSystem& mLights;
+  flc::Program* mProgramShadow;
+  flc::Program* mProgramShadowColor;
   GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow, mUniformLocationCacheBonesShadowColor;
+  vec<Mesh*> mMeshes;
 private:
   /* Init */
   void initUniformsCache();
