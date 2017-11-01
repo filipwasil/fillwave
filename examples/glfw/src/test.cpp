@@ -101,4 +101,3 @@ void showDescription() {
   setupParam("par16", glm::vec2(0.70, -0.52));
 }
 
-

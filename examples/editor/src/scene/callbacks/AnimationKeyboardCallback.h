@@ -6,16 +6,16 @@ namespace flw {
 class Engine;
 namespace flf {
 
-class AnimationKeyboardCallback : public Callback {
+class AnimationKeyboardCallback {
 public:
-  AnimationKeyboardCallback(Entity *entity, EEventType eventType);
+  AnimationKeyboardCallback(Model* model);
 
   virtual ~AnimationKeyboardCallback();
 
-  void perform(EventType &event);
+  void perform(const Event& event);
 
 private:
-  Entity *mEntity;
+  Model* mModel;
 };
 } /* flf */
 } /* flw */

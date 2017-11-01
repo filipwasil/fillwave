@@ -4,15 +4,20 @@ namespace flw {
 namespace flf {
 
 FollowCustomCursorCallback::FollowCustomCursorCallback(Engine* engine)
-	: Callback(EEventType::eCursorPosition), mEngine(engine) {
+  : mEngine(engine) {
 
 }
 
-void FollowCustomCursorCallback::perform (EventType& event) {
-	CursorPositionEventData e = CursorPositionEvent::getData(event);
-	mEngine->getCurrentScene()->getCursor()->move(glm::vec2((e.xPosition /
-	                                       mEngine->getScreenSize()[0]) * 2.0 - 1.0,
-	                                       -(e.yPosition / mEngine->getScreenSize()[1]) * 2.0 + 1.0));
+void FollowCustomCursorCallback::perform(const Event& event) {
+
+  CursorPositionEventData e = event.getData().mCursorPosition;
+  auto xPosition = ((
+                      e.xPosition / mEngine->getScreenSize()[0]
+                    ) * 2.0 - 1.0
+                   ) * 0.1;
+  auto yPosition = (-(e.yPosition / mEngine->getScreenSize()[1]) * 2.0 + 1.0) * 0.5;
+  mEngine->getCurrentScene()->getCamera()->moveByX(xPosition);
+  mEngine->getCurrentScene()->getCamera()->moveByY(yPosition);
 }
 
 } /* framework */

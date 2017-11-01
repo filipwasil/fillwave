@@ -31,11 +31,22 @@ void TerrainScene::init() {
   light->rotateTo(glm::vec3(1.0, 0.0, 0.0), glm::radians(-90.0));
 
   /* Engine callbacks */
-  /* Engine callbacks */
-  mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
-  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
-	mEngine->attachCallback(make_unique<MoveCameraCallback>(
-	         mEngine.get(), EEventType::eCursorPosition, 0.01));
+  mTimeCallback = std::make_unique<TimeStopCallback>(mEngine.get());
+  mCameraCallback = std::make_unique<MoveCameraCallback>(mEngine.get(), 0.1);
+  mSecondCameraCallback = std::make_unique<FollowCustomCursorCallback>(mEngine.get());
+  std::function<void(const flf::Event&)> timeFuncHandler = std::bind(&TimeStopCallback::perform,
+                                                                     &(*mTimeCallback),
+                                                                     std::placeholders::_1);
+  std::function<void(const flf::Event&)> cameraFuncHandler = std::bind(&MoveCameraCallback::perform,
+                                                                       &(*mCameraCallback),
+                                                                       std::placeholders::_1);
+  std::function<void(const flf::Event&)> secondCameraFuncHandler = std::bind(&FollowCustomCursorCallback::perform,
+                                                                             &(*mSecondCameraCallback),
+                                                                             std::placeholders::_1);
+  mEngine->attachHandler(std::move(timeFuncHandler), flw::flf::eEventType::key);
+  mEngine->attachHandler(std::move(cameraFuncHandler), flw::flf::eEventType::key);
+  mEngine->attachHandler(std::move(secondCameraFuncHandler), flw::flf::eEventType::cursorPosition);
+
   mEventsHandler.push_back(
       std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
   mEventsHandler.push_back(

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <fillwave/Fillwave.h>
+#include <memory>
 #include "scene/AScene.h"
 
 namespace scene {
@@ -24,6 +25,9 @@ public:
 
 private:
   flw::pText mText;
+  std::unique_ptr<flw::flf::TimeStopCallback> mTimeCallback;
+  std::unique_ptr<flw::flf::MoveCameraCallback> mCameraCallback;
+  std::unique_ptr<flw::flf::FollowCustomCursorCallback> mSecondCameraCallback;
 };
 
 }
