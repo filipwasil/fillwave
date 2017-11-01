@@ -6,14 +6,14 @@
 namespace flw {
 namespace flf {
 
-MoveCameraCallback::MoveCameraCallback(Engine *engine, EEventType eventType, float speed)
-    : Callback(eventType), mSpeed(speed), mEngine(engine) {
+MoveCameraCallback::MoveCameraCallback(Engine *engine, float speed)
+    :mSpeed(speed), mEngine(engine) {
 
 }
 
-void MoveCameraCallback::perform(EventType &event) {
-  if (event.getType() == EEventType::eKey) {
-    KeyboardEventData e = KeyboardEvent::getData(event);
+void MoveCameraCallback::perform(const Event &event) {
+  if (event.getType() == eEventType::key) {
+    KeyboardEventData e = event.getData();
     switch (e.key) {
       case Qt::Key_W:
         mEngine->getCurrentScene()->getCamera()->moveInDirection(glm::vec3(0.0, 0.0, -mSpeed));
@@ -27,13 +27,13 @@ void MoveCameraCallback::perform(EventType &event) {
         }
         break;
     }
-  } else if (event.getType() == EEventType::eCursorPosition) {
+  } else if (event.getType() == eEventType::cursorPosition) {
     static bool init = false;
     static int  a = 0;
     auto d = [](double value) {
       return static_cast<float>(value);
     };
-    CursorPositionEventData e = CursorPositionEvent::getData(event);
+    CursorPositionEventData e = event.getData();
     glm::ivec2 screenSize = mEngine->getScreenSize();
     double dx = e.xPosition - screenSize[0] / 2;
     double dy = screenSize[1] / 2 - e.yPosition;

@@ -16,8 +16,9 @@ void StandardMouseEventHandler::handle(QEvent *event) {
     }
     int x = mouse->x();
     int y = mouse->y();
-    auto cursorEvent = mEventFactory.getCursorPositionEvent(x, y);
-    mEngine->insertInput(cursorEvent);
+    auto cursorData = mEventFactory.getCursorPositionData(x, y);
+    flw::flf::Event lEvent(flw::flf::eEventType::key,cursorData);
+    mEngine->onEvent(lEvent);
   }
 }
 

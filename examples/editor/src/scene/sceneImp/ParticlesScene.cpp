@@ -26,10 +26,21 @@ void ParticlesScene::init() {
 	                                                                     1000.0));
 
 	/* Engine callbacks */
-	mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
-	mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
-	mEngine->attachCallback(make_unique<MoveCameraCallback>(
-			mEngine.get(), EEventType::eCursorPosition, 0.01));
+	mTimeCallback = std::make_unique<TimeStopCallback>(mEngine.get());
+	mCameraCallback = std::make_unique<MoveCameraCallback>(mEngine.get(), 0.1);
+	mSecondCameraCallback = std::make_unique<MoveCameraCallback>(mEngine.get(), 0.01);
+	std::function<void(const flf::Event &)> timeFuncHandler = std::bind(&TimeStopCallback::perform,
+	                                                                    &(*mTimeCallback),
+	                                                                    std::placeholders::_1);
+	std::function<void(const flf::Event &)> cameraFuncHandler = std::bind(&MoveCameraCallback::perform,
+	                                                                      &(*mCameraCallback),
+	                                                                      std::placeholders::_1);
+	std::function<void(const flf::Event &)> secondCameraFuncHandler = std::bind(&MoveCameraCallback::perform,
+	                                                                      &(*mSecondCameraCallback),
+	                                                                      std::placeholders::_1);
+	mEngine->attachHandler(std::move(timeFuncHandler), flw::flf::eEventType::key);
+	mEngine->attachHandler(std::move(cameraFuncHandler), flw::flf::eEventType::key);
+	mEngine->attachHandler(std::move(secondCameraFuncHandler), flw::flf::eEventType::cursorPosition);
 	mEventsHandler.push_back(
 			std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
 	mEventsHandler.push_back(
@@ -86,9 +97,10 @@ void ParticlesScene::init() {
 	                                                  GL_FALSE);
 
 	/* For time updates */
-	snow->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
-	water->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(water.get(), FILLWAVE_ENDLESS));
-	sand->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(sand.get(), FILLWAVE_ENDLESS));
+
+	//snow->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
+	//water->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(water.get(), FILLWAVE_ENDLESS));
+	//sand->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(sand.get(), FILLWAVE_ENDLESS));
 
   mWaterPtr = water.get();
   mSandPtr = sand.get();
@@ -106,6 +118,7 @@ void ParticlesScene::init() {
 	                                 "fonts/Titania",
 	                                 glm::vec2(-0.95, -0.80),
 	                                 70.0);
+
 }
 
 void ParticlesScene::perform() {
@@ -133,7 +146,7 @@ void ParticlesScene::perform() {
                                           GL_ONE,
                                           GL_FALSE);
 	mSandPtr = sand.get();
-	mSandPtr->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(sand.get(), FILLWAVE_ENDLESS));
+	//mSandPtr->attachHierarchyCallback(make_unique<TimedEmiterUpdateCallback>(sand.get(), FILLWAVE_ENDLESS));
 	mEngine->getCurrentScene()->attach(std::move(sand));
 }
 

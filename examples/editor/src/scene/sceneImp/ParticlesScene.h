@@ -28,6 +28,9 @@ private:
   flw::flf::EmiterPointCPU* mSandPtr;
   int mArgc;
   char **mArgv;
+  std::unique_ptr<flw::flf::TimeStopCallback> mTimeCallback;
+  std::unique_ptr<flw::flf::MoveCameraCallback> mCameraCallback;
+  std::unique_ptr<flw::flf::MoveCameraCallback> mSecondCameraCallback;
 };
 
 }

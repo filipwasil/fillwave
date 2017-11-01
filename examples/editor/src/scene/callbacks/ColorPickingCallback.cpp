@@ -5,12 +5,12 @@ namespace flw {
 namespace flf {
 
 ColorPickingCallback::ColorPickingCallback(Engine* engine)
-	: Callback(EEventType::eMouseButton), mEngine(engine) {
+	: mEngine(engine) {
 
 }
 
-void ColorPickingCallback::perform(EventType& event) {
-	MouseButtonEventData e = MouseButtonEvent::getData(event);
+void ColorPickingCallback::perform(const Event &event) {
+	MouseButtonEventData e = event.getData();
 //	if (e.mAction == GLFW_RELEASE) {
 		mEngine->pick(e.mWhereX, e.mWhereY);
 //	}

@@ -6,16 +6,14 @@ namespace flw {
 namespace flf {
 
 TimeStopCallback::TimeStopCallback(Engine *engine)
-    : Callback(EEventType::eKey), mTimeOn(GL_TRUE), mEngine(engine) {
+    :mTimeOn(GL_TRUE), mEngine(engine) {
 
 }
 
-TimeStopCallback::~TimeStopCallback() {
+TimeStopCallback::~TimeStopCallback() = default;
 
-}
-
-void TimeStopCallback::perform(EventType &event) {
-  KeyboardEventData data = KeyboardEvent::getData(event);
+void TimeStopCallback::perform(const Event &event) {
+  KeyboardEventData data = event.getData();
   /* You can handle Your callback directly here ... */
   if (data.key == Qt::Key_T && data.action == QEvent::KeyPress) {
     if (mTimeOn) {
