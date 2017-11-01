@@ -28,7 +28,7 @@ std::function<std::shared_ptr<scene::AScene>(int, char **, QMap<QString, QVarian
 
 ScensFactory::ScensFactory(int argc, char **argv)
     : mArgc(argc), mArgv(argv) {
-  mScens["Hello World"] = factoryEntry<scene::TextScene>();
+  mScens["Text"] = factoryEntry<scene::TextScene>();
   mScens["Animation"] = factoryEntry<scene::AnimationScene>();
   mScens["Specular lights"] = factoryEntry<scene::FullModelScene>();
   mScens["Callbacks"] = factoryEntry<scene::CallbacksScene>();

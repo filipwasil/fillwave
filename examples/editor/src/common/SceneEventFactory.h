@@ -8,10 +8,10 @@ namespace common {
 
 class SceneEventFactory {
 public:
-  flw::flf::KeyboardEventData getDefaultKeyboardEvent(int key);
+  flw::flf::EventData getDefaultKeyboardData(int key);
 
-  flw::flf::KeyboardEventData getKeyboardEvent(int action, int key, int mode, int scanCode);
+  flw::flf::EventData getKeyboardData(int action, int key, int mode, int scanCode);
 
-  flw::flf::Event getCursorPositionEvent(int x, int y);
+  flw::flf::EventData getCursorPositionData(int x, int y);
 };
 }

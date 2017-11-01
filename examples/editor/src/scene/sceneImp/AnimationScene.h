@@ -2,6 +2,7 @@
 
 #include <fillwave/Fillwave.h>
 #include "scene/AScene.h"
+#include "scene/callbacks/AnimationKeyboardCallback.h"
 
 namespace scene {
 class AnimationScene : public AScene {
@@ -20,6 +21,8 @@ private:
   flw::pText mText;
   int mArgc;
   char **mArgv;
+  std::unique_ptr<flw::flf::AnimationKeyboardCallback> mAnimationCallback;
+  std::function<void(const flw::flf::Event&)> animationFuncHandler;
 };
 
 }
