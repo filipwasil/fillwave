@@ -7,11 +7,11 @@ namespace flw {
 class Engine;
 namespace flf {
 
-class FollowCustomCursorCallback: public Callback {
+class FollowCustomCursorCallback {
  public:
 	FollowCustomCursorCallback(Engine* engine);
 	virtual ~FollowCustomCursorCallback() = default;
-	void perform (EventType& event);
+	void perform(const Event &event);
  private:
 	Engine* mEngine;
 };

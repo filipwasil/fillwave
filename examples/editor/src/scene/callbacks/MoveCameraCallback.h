@@ -1,24 +1,22 @@
 #pragma once
 
-#include <fillwave/actions/callbacks/Callback.h>
-#include <fillwave/actions/events/TEvent.h>
+#include <fillwave/actions/Event.h>
 
 namespace flw {
 class Engine;
 namespace flf {
 
-class MoveCameraCallback: public Callback {
+class MoveCameraCallback{
  private:
 	float mSpeed;
 	Engine* mEngine;
  public:
 	MoveCameraCallback(
 	   Engine* engine,
-	   EEventType eventType,
 	   float speed = 1.0);
 	virtual ~MoveCameraCallback() = default;
 
-	virtual void perform (EventType& event);
+	virtual void perform(const flw::flf::Event &event);
 };
 
 } /* flf */

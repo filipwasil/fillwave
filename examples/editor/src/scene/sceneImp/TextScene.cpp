@@ -1,6 +1,5 @@
 #include <fillwave/space/Scene.h>
 #include <fillwave/models/EmiterPointGPU.h>
-#include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
 #include <fillwave/Fillwave.h>
 #include "TextScene.h"
 
@@ -18,6 +17,7 @@ TextScene::~TextScene() {
 }
 
 void TextScene::init() {
+
   mEngine->setCurrentScene(std::make_unique<Scene>());
   mEngine->getCurrentScene()->setCamera(std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
                                                                             glm::quat(),
@@ -40,9 +40,9 @@ void TextScene::init() {
                                                          GL_SRC_ALPHA,
                                                          GL_ONE,
                                                          GL_FALSE);
-
-  snow->attachHierarchyCallback(std::make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
-
+  /*auto emiterUpdate = std::make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS);
+  snow->attachHierarchyCallback();
+*/
   mEngine->getCurrentScene()->attach(std::move(snow));
   auto startTextVariant = mSceneParameters["mText"];
   mText = mEngine->storeText(startTextVariant.toString().toStdString(), "FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);

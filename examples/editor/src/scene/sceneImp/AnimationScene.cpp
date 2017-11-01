@@ -1,16 +1,14 @@
 #include <fillwave/space/Scene.h>
 #include <fillwave/models/EmiterPointGPU.h>
-#include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
 #include <fillwave/loaders/ProgramLoader.h>
-#include "scene/callbacks/AnimationKeyboardCallback.h"
 #include "AnimationScene.h"
 
 using namespace flw;
 using namespace flw::flf;
 
 namespace scene {
-AnimationScene::AnimationScene(int argc, char **argv, QMap<QString, QVariant> varValues)
-    : AScene(argc, argv, varValues) {
+AnimationScene::AnimationScene(int argc, char** argv, QMap<QString, QVariant> varValues)
+  : AScene(argc, argv, varValues) {
   init();
 }
 
@@ -34,8 +32,11 @@ void AnimationScene::init() {
   beast->rotateByX(90.0f);
   beast->setActiveAnimation(0);
   mEngine->getCurrentScene()->attach(std::move(beast));
-
-  mEngine->attachCallback(std::make_unique<AnimationKeyboardCallback>(beast.get(), EEventType::eKey), beast.get());
+  mAnimationCallback = std::make_unique<AnimationKeyboardCallback>(beast.get());
+  animationFuncHandler = std::bind(&AnimationKeyboardCallback::perform,
+                                                                          &(*mAnimationCallback),
+                                                                          std::placeholders::_1);
+  mEngine->attachHandler(std::move(animationFuncHandler), flw::flf::eEventType::key);
 
   puIEmiterPoint snow = std::make_unique<EmiterPointCPU>(mEngine.get(),
                                                          0.3,
@@ -53,7 +54,7 @@ void AnimationScene::init() {
                                                          GL_ONE,
                                                          GL_FALSE);
 
-  snow->attachHierarchyCallback(std::make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
+  //snow->attachHierarchyCallback(std::make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
 
   mEngine->getCurrentScene()->attach(std::move(snow));
 

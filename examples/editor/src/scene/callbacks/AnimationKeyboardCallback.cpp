@@ -3,15 +3,15 @@
 namespace flw {
 namespace flf {
 
-AnimationKeyboardCallback::AnimationKeyboardCallback(Entity *entity, EEventType EventType)
-    : Callback(EventType), mEntity(entity) {
+AnimationKeyboardCallback::AnimationKeyboardCallback(Entity *entity)
+    : mEntity(entity) {
 }
 
 AnimationKeyboardCallback::~AnimationKeyboardCallback() {
 }
 
-void AnimationKeyboardCallback::perform(EventType & event) {
-  KeyboardEventData e = KeyboardEvent::getData(event);
+void AnimationKeyboardCallback::perform(const Event& event) {
+  KeyboardEventData e = event.getData();
   if (mEntity) {
     Model *model = static_cast<Model *>(mEntity);
   }

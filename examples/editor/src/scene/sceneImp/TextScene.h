@@ -1,6 +1,7 @@
 #pragma once
 
 #include <fillwave/Fillwave.h>
+#include <fillwave/models/EmiterPointCPU.h>
 #include "scene/AScene.h"
 
 namespace scene {
