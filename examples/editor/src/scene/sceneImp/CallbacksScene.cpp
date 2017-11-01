@@ -16,57 +16,46 @@ CallbacksScene::CallbacksScene(int argc, char **argv, QMap<QString, QVariant> va
 }
 
 void CallbacksScene::init() {
-  /* Scene and camera */
-  mEngine->setCurrentScene(make_unique<Scene>());
-  mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
+  auto e = mEngine.get();
 
+  /* Scene and camera */
+  e->setCurrentScene(make_unique<Scene>());
+  e->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
+  e->getCurrentScene()->getCamera()->moveTo(glm::vec3(0.0, 0.0, 7.0));
 
   /* Lights */
-  mEngine->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
+  e->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
+  
+  auto p = ProgramLoader(e).getProgram(EProgram::basic);
 
-  /* Engine callbacks */
-  mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
-  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
-
-  flc::Program *p = ProgramLoader(mEngine.get()).getProgram(EProgram::basic);
-
-  /* Models */
-  BuilderModelExternalMaps builder(mEngine.get(), "meshes/sphere.obj", p, "textures/test.png");
+  BuilderModelExternalMaps builder(e, "meshes/cubemap.obj", p, "textures/test.png");
+  auto wall = make_unique<Model>(e, p, "meshes/floor.obj");
 
   for (GLint i = 0; i < SPHERES; i++) {
-    /* build */
+    const auto t = 1.0f + i * 0.5f;
 
+    /* build */
     auto sphere = builder.build();
 
     /* move */
-    sphere->scaleTo(0.1);
+    sphere->scaleTo(0.005);
     sphere->moveByX(-4 + 2 * i);
-    sphere->moveByZ(-4);
+    sphere->rotateByX(glm::radians(45.0f));
+    sphere->scaleBy(t, glm::vec3(0.05f), ElasticEaseIn);
+    sphere->scaleTo(t, glm::vec3(0.005f), ElasticEaseIn);
+    sphere->rotateBy(t, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0), BounceEaseIn);
+    sphere->rotateBy(t, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0), BounceEaseOut);
+    sphere->moveBy(t, glm::vec3(-(0.5f * SPHERES) + i, -2.0, 0.0), ElasticEaseIn);
+    sphere->moveBy(t, glm::vec3( (0.5f * SPHERES) - i, 2.0, 0.0), ElasticEaseIn);
+    sphere->loop(1000);
 
-    sphere->attachHierarchyCallback(make_unique<LoopCallback>(std::move(make_unique_container<SequenceCallback>(
-        make_unique<TimedScaleCallback>(sphere.get(), 0.1 * 2.0, 2.0f + i * 0.5, CircularEaseIn),
-        make_unique<TimedScaleCallback>(sphere.get(), 0.1 * 1.0, 2.0f + i * 0.5, ElasticEaseIn),
-        make_unique<TimedRotateCallback>(sphere.get(),
-                                         glm::vec3(0.0, 1.0, 0.0),
-                                         glm::radians(90.0f),
-                                         2.0f + i * 0.5,
-                                         BounceEaseIn),
-        make_unique<TimedRotateCallback>(sphere.get(),
-                                         glm::vec3(0.0, 1.0, 0.0),
-                                         glm::radians(90.0f),
-                                         2.0f + i * 0.5,
-                                         BounceEaseOut),
-        make_unique<TimedMoveCallback>(sphere.get(), glm::vec3(0.0, -1.0, 0.0), 2.0f + i * 0.5),
-        make_unique<TimedMoveCallback>(sphere.get(), glm::vec3(0.0, 1.0, 0.0), 2.0f + i * 0.5))), FILLWAVE_ENDLESS));
-
-    mEngine->getCurrentScene()->attach(std::move(sphere));
+    e->getCurrentScene()->attach(std::move(sphere));
   }
 
-  puModel wall = make_unique<Model>(mEngine.get(), p, "meshes/floor.obj");
   wall->rotateByX(glm::radians(90.0));
   wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
   wall->scaleTo(3.0);
-  mEngine->getCurrentScene()->attach(std::move(wall));
+  e->getCurrentScene()->attach(std::move(wall));
 }
 
 void CallbacksScene::perform() {

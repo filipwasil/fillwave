@@ -84,6 +84,24 @@ void perform() {
   wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
   wall->scaleTo(3.0);
   ContextGLFW::mGraphics->getCurrentScene()->attach(std::move(wall));
+
+  auto snow = make_unique<EmiterPointGPU>(ContextGLFW::mGraphics,
+                                          0.3,
+                                          200.0,
+                                          glm::vec4(10.0, 10.0, 10.0, 1.0),
+                                          glm::vec3(0.0, 10.0, 0.0),
+                                          glm::vec3(0.0, 0.0, 0.0),
+                                          glm::vec3(10.9, 10.9, 0.9),
+                                          glm::vec3(0.0, 0.0, 0.0),
+                                          glm::vec3(15.6, 0.6, 0.6),
+                                          1.0,
+                                          1.0,
+                                          ContextGLFW::mGraphics->storeTexture("textures/particle.png"),
+                                          GL_SRC_ALPHA,
+                                          GL_ONE,
+                                          GL_FALSE);
+  snow->moveBy( { 0.0, 3.0, 0.0} );
+  ContextGLFW::mGraphics->getCurrentScene()->attach(std::move(snow));
 }
 
 void quit() {
@@ -92,9 +110,5 @@ void quit() {
 
 void showDescription() {
   auto e = ContextGLFW::mGraphics;
-  auto h1 = e->storeText("Fillwave example callbacks", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
-  auto h2 = e->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
-  auto h3 = e->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
-  auto h4 = e->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
-  auto h5 = e->storeText("Use 'D' for toggle debugger On/Off", "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
+  auto h2 = e->storeText("Test app", "fonts/Titania", glm::vec2(-0.95, 0.80), 70.0);
 }
