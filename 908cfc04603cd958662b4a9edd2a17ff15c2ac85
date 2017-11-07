@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "250f030c_6729821e",
+        "filename": "examples/editor/src/scene/sceneImp/AnimationScene.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-11-07T19:06:16Z",
+      "side": 1,
+      "message": "Animation is not loaded.",
+      "revId": "908cfc04603cd958662b4a9edd2a17ff15c2ac85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "87a8e85f_fd9a1500",
+        "filename": "examples/editor/src/scene/sceneImp/AnimationScene.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-11-07T19:06:16Z",
+      "side": 1,
+      "message": "What with this? TimedEmiterUpdateCallback is removed is any equivalent?",
+      "revId": "908cfc04603cd958662b4a9edd2a17ff15c2ac85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f0dab0d_f2d3aef0",
+        "filename": "examples/editor/src/scene/sceneImp/CallbacksScene.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-11-07T19:06:16Z",
+      "side": 1,
+      "message": "What with this callbacks? They are not exist in source code now.",
+      "revId": "908cfc04603cd958662b4a9edd2a17ff15c2ac85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fc257539_677d6974",
+        "filename": "examples/editor/src/scene/sceneImp/TextScene.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2017-11-07T19:06:16Z",
+      "side": 1,
+      "message": "scene is working but we need any equivalent?",
+      "revId": "908cfc04603cd958662b4a9edd2a17ff15c2ac85",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
