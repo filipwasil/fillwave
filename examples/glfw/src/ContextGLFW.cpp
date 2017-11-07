@@ -11,14 +11,14 @@
 
 FLOGINIT("BackendGLFW", FERROR | FFATAL)
 
-flw::Engine *App::mGraphics;
-GLfloat App::mScreenWidth;
-GLfloat App::mScreenHeight;
-GLFWwindow *App::mWindow;
-GLFWwindow *App::mWindowNew;
-GLuint App::mCursorPositionX;
-GLuint App::mCursorPositionY;
-flw::flf::EventData App::mEventData;
+flw::Engine *ContextGLFW::mGraphics;
+GLfloat ContextGLFW::mScreenWidth;
+GLfloat ContextGLFW::mScreenHeight;
+GLFWwindow *ContextGLFW::mWindow;
+GLFWwindow *ContextGLFW::mWindowNew;
+GLuint ContextGLFW::mCursorPositionX;
+GLuint ContextGLFW::mCursorPositionY;
+flw::flf::EventData ContextGLFW::mEventData;
 
 ContextGLFW::ContextGLFW(int argc, char *argv[]) {
 
@@ -34,7 +34,7 @@ ContextGLFW::ContextGLFW(int argc, char *argv[]) {
 
   windowInit(mWindow);
 
-  ContextGLFW::mGraphicsEngine = new flw::Engine(argc, argv);
+  ContextGLFW::mGraphics = new flw::Engine(argc, argv);
 }
 
 void ContextGLFW::windowInit(GLFWwindow *&window) {
@@ -77,7 +77,7 @@ void ContextGLFW::windowDeinit(GLFWwindow *&window) {
 }
 
 ContextGLFW::~ContextGLFW() {
-  delete mGraphicsEngine;
+  delete mGraphics;
   glfwSetFramebufferSizeCallback(mWindow, NULL);
   glfwSetKeyCallback(mWindow, NULL);
   glfwSetScrollCallback(mWindow, NULL);
@@ -106,9 +106,9 @@ void ContextGLFW::render() {
     timeSinceLastFrameInSec = now - mTimeExpired;
     mTimeExpired = now;
 
-    mGraphicsEngine->draw(timeSinceLastFrameInSec);
-//      mGraphicsEngine->drawLines(timeSinceLastFrameInSec);
-//      mGraphicsEngine->drawPoints(timeSinceLastFrameInSec);
+    mGraphics->draw(timeSinceLastFrameInSec);
+//      mGraphics->drawLines(timeSinceLastFrameInSec);
+//      mGraphics->drawPoints(timeSinceLastFrameInSec);
 
     glfwSwapBuffers(mWindow);
     glfwPollEvents();
@@ -116,7 +116,7 @@ void ContextGLFW::render() {
   mWindow = nullptr;
 }
 
-void App::resizeCallback(GLFWwindow * /*window*/, int width, int height) {//xxx todo
+void ContextGLFW::resizeCallback(GLFWwindow * /*window*/, int width, int height) {//xxx todo
   mGraphics->onResizeScreen(width, height);
 }
 
@@ -145,7 +145,7 @@ void ContextGLFW::keyboardCallback(GLFWwindow * /*window*/, int key, int scancod
   mGraphics->onEvent(event);
 }
 
-void App::mouseButtonCallback(GLFWwindow * /*window*/, int button, int action, int mods) {
+void ContextGLFW::mouseButtonCallback(GLFWwindow * /*window*/, int button, int action, int mods) {
   mEventData.mMouseButton.mWhereX = mCursorPositionX;
   mEventData.mMouseButton.mWhereY = mCursorPositionY;
   mEventData.mMouseButton.mAction = action;
@@ -154,22 +154,22 @@ void App::mouseButtonCallback(GLFWwindow * /*window*/, int button, int action, i
   onEvent(flw::flf::eEventType::mouseButton);
 }
 
-void App::scrollCallback(GLFWwindow * /*window*/, double /*xoffset*/, double /*yoffset*/) {
+void ContextGLFW::scrollCallback(GLFWwindow * /*window*/, double /*xoffset*/, double /*yoffset*/) {
 //  mEventData.mOffsetX = xoffset;
 //  mEventData.mOffsetY = yoffset;
 //  mGraphics->onEvent(flw::flf::eEventType::scroll);
 }
 
-void App::characterCallback(GLFWwindow * /*window*/, unsigned int ascii) {
+void ContextGLFW::characterCallback(GLFWwindow * /*window*/, unsigned int ascii) {
   mEventData.mChar.character = ascii;
   onEvent(flw::flf::eEventType::character);
 }
 
 void ContextGLFW::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, double ypos) {
   flw::flf::CursorPositionEventData d;
-  if (xpos > mGraphicsEngine->getScreenSize()[0]) {
-    glfwSetCursorPos(mWindow, mGraphicsEngine->getScreenSize()[0], ypos);
-    d.xPosition = mGraphicsEngine->getScreenSize()[0];
+  if (xpos > mGraphics->getScreenSize()[0]) {
+    glfwSetCursorPos(mWindow, mGraphics->getScreenSize()[0], ypos);
+    d.xPosition = mGraphics->getScreenSize()[0];
   } else if (xpos < 0.0) {
     glfwSetCursorPos(mWindow, 0.0, ypos);
     d.xPosition = 0.0;
@@ -177,9 +177,9 @@ void ContextGLFW::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, d
     d.xPosition = xpos;
   }
 
-  if (ypos > mGraphicsEngine->getScreenSize()[1]) {
-    glfwSetCursorPos(mWindow, xpos, mGraphicsEngine->getScreenSize()[1]);
-    d.yPosition = mGraphicsEngine->getScreenSize()[1];
+  if (ypos > mGraphics->getScreenSize()[1]) {
+    glfwSetCursorPos(mWindow, xpos, mGraphics->getScreenSize()[1]);
+    d.yPosition = mGraphics->getScreenSize()[1];
   } else if (ypos < 0.0) {
     glfwSetCursorPos(mWindow, xpos, 0);
     d.yPosition = 0;
@@ -193,17 +193,17 @@ void ContextGLFW::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, d
   onEvent(flw::flf::eEventType::cursorPosition);
 }
 
-void App::cursorEnterCallback(GLFWwindow * /*window*/, int in) {
+void ContextGLFW::cursorEnterCallback(GLFWwindow * /*window*/, int in) {
   mEventData.mCursorEnter.direction = in;
   onEvent(flw::flf::eEventType::cursorEnter);
 }
 
-void App::onEvent(const flw::flf::eEventType& type) {
+void ContextGLFW::onEvent(const flw::flf::eEventType& type) {
   mGraphics->onEvent(flw::flf::Event(type, mEventData));
 }
 
 void ContextGLFW::reload() {
   windowDeinit(mWindow);
   windowInit(mWindowNew);
-  ContextGLFW::mGraphicsEngine->reload();
+  ContextGLFW::mGraphics->reload();
 }

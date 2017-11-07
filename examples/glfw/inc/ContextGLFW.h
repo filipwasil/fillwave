@@ -31,7 +31,7 @@ public:
 
   void render();
 
-  static flw::Engine *mGraphicsEngine;
+  static flw::Engine *mGraphics;
   static GLFWwindow *mWindow;
   static GLFWwindow *mWindowNew;
   static GLfloat mScreenWidth;

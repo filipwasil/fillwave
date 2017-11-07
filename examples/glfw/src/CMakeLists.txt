@@ -14,10 +14,8 @@ aux_source_directory (TerrainConstructors/ SOURCE_CONSTRUCTORS)
 
 set (SOURCE_FILES
     test.cpp
-    App.cpp
     PickableModel.cpp
-    Cluster.cpp
-    Cradle.cpp
+    ContextGLFW.cpp
     ${SOURCE_CALLBACKS_GLFW}
     ${SOURCE_CONSTRUCTORS})
 
