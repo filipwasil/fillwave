@@ -207,68 +207,124 @@ void Moveable::attachTimeCallback(float deltaTime, Callback<float(float)> action
   });
 }
 
-void Moveable::waitInTime(float aDurationInSeconds) {
-  mTimeCallbacks.push_back([this, aDurationInSeconds](float aDeltaTime) {
+void Moveable::waitInTime(float durationSec) {
+  mTimeCallbacks.push_back([this, durationSec](float aDeltaTime) {
     mCallbackTimePassed += aDeltaTime;
-    if (mCallbackTimePassed < aDurationInSeconds) {
+    if (mCallbackTimePassed < durationSec) {
       return 0.0f;
     }
-    float timeLeft = mCallbackTimePassed - aDurationInSeconds;
+    float timeLeft = mCallbackTimePassed - durationSec;
     mCallbackTimePassed = 0;
     return timeLeft;
   });
 }
 
-void Moveable::moveBy(float aDurationInSeconds, const glm::vec3& deltaMove, Callback<float(float)> aEase) {
-  mTimeCallbacks.push_back([this, aDurationInSeconds, deltaMove, aEase](float aDeltaTime) {
+void Moveable::moveBy(float durationSec, const glm::vec3& deltaMove, Callback<float(float)> ease) {
+  mTimeCallbacks.push_back([this, durationSec, deltaMove, ease](float aDeltaTime) {
     if (mCallbackTimePassed == 0.0f) {
       mBase.mTranslation = mTranslation;
     }
     mCallbackTimePassed += aDeltaTime;
     const float percentageDone =
-      mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
-    moveTo(mBase.mTranslation + aEase(percentageDone) * deltaMove);
-    if (mCallbackTimePassed < aDurationInSeconds) {
+      mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
+    moveTo(mBase.mTranslation + ease(percentageDone) * deltaMove);
+    if (mCallbackTimePassed < durationSec) {
       return 0.0f;
     }
-    float timeLeft = mCallbackTimePassed - aDurationInSeconds;
+    float timeLeft = mCallbackTimePassed - durationSec;
     mCallbackTimePassed = 0;
     return timeLeft;
   });
 }
 
-void Moveable::scaleBy(float aDurationInSeconds, const glm::vec3& aDeltaScale, Callback<float(float)> aEase) {
-  mTimeCallbacks.push_back([this, aDurationInSeconds, aDeltaScale, aEase](float aDeltaTime) {
+void Moveable::moveTo(float durationSec, const glm::vec3& endTranslation, Callback<float(float)> ease) {
+  mTimeCallbacks.push_back([this, durationSec, endTranslation, ease](float aDeltaTime) {
+    if (mCallbackTimePassed == 0.0f) {
+      mBase.mTranslation = mTranslation;
+    }
+    mCallbackTimePassed += aDeltaTime;
+    const float percentageDone =
+      mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
+    const glm::vec3 deltaMove = endTranslation - mBase.mTranslation;
+    moveTo(mBase.mTranslation + ease(percentageDone) * deltaMove);
+    if (mCallbackTimePassed < durationSec) {
+      return 0.0f;
+    }
+    float timeLeft = mCallbackTimePassed - durationSec;
+    mCallbackTimePassed = 0;
+    return timeLeft;
+  });
+}
+
+
+void Moveable::scaleBy(float durationSec, const glm::vec3& deltaScale, Callback<float(float)> ease) {
+  mTimeCallbacks.push_back([this, durationSec, deltaScale, ease](float aDeltaTime) {
     if (mCallbackTimePassed == 0.0f) {
       mBase.mScale = mScale;
     }
     mCallbackTimePassed += aDeltaTime;
     const float percentageDone =
-      mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
-    scaleTo(mBase.mScale + aEase(percentageDone) * aDeltaScale);
-    if (mCallbackTimePassed < aDurationInSeconds) {
+      mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
+    scaleTo(mBase.mScale * ( 1.0f + ease(percentageDone) * deltaScale ) );
+    if (mCallbackTimePassed < durationSec) {
       return 0.0f;
     }
-    float timeLeft = mCallbackTimePassed - aDurationInSeconds;
+    float timeLeft = mCallbackTimePassed - durationSec;
     mCallbackTimePassed = 0;
     return timeLeft;
   });
 }
 
-void Moveable::rotateBy(float aDurationInSeconds, const float aDeltaAngle, const glm::vec3& aAxis,
-  Callback<float(float)> aEase) {
-  mTimeCallbacks.push_back([this, aDurationInSeconds, aDeltaAngle, aAxis, aEase](float aDeltaTime) {
+void Moveable::scaleTo(float durationSec, const glm::vec3& endScale, Callback<float(float)> ease) {
+  mTimeCallbacks.push_back([this, durationSec, endScale, ease](float aDeltaTime) {
+    if (mCallbackTimePassed == 0.0f) {
+      mBase.mScale = mScale;
+    }
+    mCallbackTimePassed += aDeltaTime;
+    const float percentageDone =
+      mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
+    const glm::vec3 deltaScale = endScale - mBase.mScale;
+    scaleTo(mBase.mScale * ( 1.0f + ease(percentageDone) * deltaScale ) );
+    if (mCallbackTimePassed < durationSec) {
+      return 0.0f;
+    }
+    float timeLeft = mCallbackTimePassed - durationSec;
+    mCallbackTimePassed = 0;
+    return timeLeft;
+  });
+}
+
+void Moveable::rotateBy(float durationSec, const float endAngle, const glm::vec3& axis, Callback<float(float)> ease) {
+  mTimeCallbacks.push_back([this, durationSec, endAngle, axis, ease](float aDeltaTime) {
     if (mCallbackTimePassed == 0.0f) {
       mBase.mRotation = mRotation;
     }
     mCallbackTimePassed += aDeltaTime;
-    const float percentageDone = mCallbackTimePassed / aDurationInSeconds >= 1.0f ? 1.0f : mCallbackTimePassed / aDurationInSeconds;
+    const float percentageDone = mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
     rotateTo(mBase.mRotation);
-    rotateBy(aAxis, aEase(percentageDone) * aDeltaAngle);
-    if (mCallbackTimePassed < aDurationInSeconds) {
+    rotateBy(axis, ease(percentageDone) * endAngle);
+    if (mCallbackTimePassed < durationSec) {
       return 0.0f;
     }
-    float timeLeft = mCallbackTimePassed - aDurationInSeconds;
+    float timeLeft = mCallbackTimePassed - durationSec;
+    mCallbackTimePassed = 0;
+    return timeLeft;
+  });
+}
+
+void Moveable::rotateTo(float durationSec, const float endAngle, const glm::vec3& axis, Callback<float(float)> ease) {
+  mTimeCallbacks.push_back([this, durationSec, endAngle, axis, ease](float aDeltaTime) {
+    if (mCallbackTimePassed == 0.0f) {
+      mBase.mRotation = mRotation;
+    }
+    mCallbackTimePassed += aDeltaTime;
+    const float percentageDone = mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
+    rotateTo(axis, ease(percentageDone) * endAngle);
+    rotateTo(glm::mix(mBase.mRotation, mRotation, ease(percentageDone)));
+    if (mCallbackTimePassed < durationSec) {
+      return 0.0f;
+    }
+    float timeLeft = mCallbackTimePassed - durationSec;
     mCallbackTimePassed = 0;
     return timeLeft;
   });

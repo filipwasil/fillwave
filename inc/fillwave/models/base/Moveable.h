@@ -114,9 +114,15 @@ public:
 
   void moveBy(float deltaTime, const glm::vec3& deltaMove, Callback<float(float)> ease = LinearInterpolation);
 
+  void moveTo(float durationInSeconds, const glm::vec3& endTranslation, Callback<float(float)> ease);
+
   void scaleBy(float deltaTime, const glm::vec3& aScale, Callback<float(float)> ease = LinearInterpolation);
 
+  void scaleTo(float deltaTime, const glm::vec3& aScale, Callback<float(float)> ease = LinearInterpolation);
+
   void rotateBy(float deltaTime, const float aAngle, const glm::vec3& aAxis, Callback<float(float)> ease = LinearInterpolation);
+
+  void rotateTo(float deltaTime, const float aAngle, const glm::vec3& aAxis, Callback<float(float)> ease = LinearInterpolation);
 
   void loop(int loops);
 

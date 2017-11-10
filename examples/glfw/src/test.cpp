@@ -55,26 +55,24 @@ void perform() {
   flc::Program* p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic);
 
   /* Models */
-  BuilderModelExternalMaps builder(ContextGLFW::mGraphics,
-                                   "meshes/sphere.obj",
-                                   p, "textures/test.png");
+  BuilderModelExternalMaps builder(ContextGLFW::mGraphics, "meshes/cubemap.obj", p, "textures/test.png");
 
   for (GLint i = 0; i < SPHERES; i++) {
-    /* build */
+    const auto t = 1.0f + i * 0.5f;
 
-    puModel sphere = builder.build();
+    /* build */
+    auto sphere = builder.build();
 
     /* move */
-    sphere->scaleTo(0.1);
+    sphere->scaleTo(0.005);
     sphere->moveByX(-4 + 2 * i);
-
-    const auto t = 1.0f + i * 0.5f;
+    sphere->rotateByX(glm::radians(45.0f));
     sphere->scaleBy(t, glm::vec3(0.05f), ElasticEaseIn);
     sphere->scaleBy(t, glm::vec3(-0.05f), ElasticEaseIn);
     sphere->rotateBy(t, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0), BounceEaseIn);
-    sphere->rotateBy(2.0f + i * 0.5f, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0), BounceEaseOut);
-    sphere->moveBy(2.0f + i * 0.5f, glm::vec3(0.0, -1.0, 0.0), ElasticEaseIn);
-    sphere->moveBy(2.0f + i * 0.5f, glm::vec3(0.0, 1.0, 0.0), ElasticEaseIn);
+    sphere->rotateBy(t, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0), BounceEaseOut);
+    sphere->moveBy(t, glm::vec3(-(0.5f * SPHERES) + i, -2.0, 0.0), ElasticEaseIn);
+    sphere->moveBy(t, glm::vec3( (0.5f * SPHERES) - i, 2.0, 0.0), ElasticEaseIn);
     sphere->loop(1000);
 
     ContextGLFW::mGraphics->getCurrentScene()->attach(std::move(sphere));
@@ -93,19 +91,10 @@ void quit() {
 }
 
 void showDescription() {
-  pText hint0 =
-    ContextGLFW::mGraphics->storeText("Fillwave example callbacks",
-                                            "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
-  pText hint3 = ContextGLFW::mGraphics->storeText("Use 'S' for camera back",
-                                                        "fonts/Titania",
-                                                        glm::vec2(-0.95, -0.50), 70.0);
-  pText hint4 =
-    ContextGLFW::mGraphics->storeText("Use 'W' for camera forward",
-                                            "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
-  pText hint1 =
-    ContextGLFW::mGraphics->storeText("Use 'T' to resume/stop time",
-                                            "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
-  pText hint6 =
-    ContextGLFW::mGraphics->storeText("Use 'D' for toggle debugger On/Off",
-                                            "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
+  auto e = ContextGLFW::mGraphics;
+  auto h1 = e->storeText("Fillwave example callbacks", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
+  auto h2 = e->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
+  auto h3 = e->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
+  auto h4 = e->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
+  auto h5 = e->storeText("Use 'D' for toggle debugger On/Off", "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
 }
