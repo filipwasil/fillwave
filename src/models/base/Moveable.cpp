@@ -282,8 +282,7 @@ void Moveable::scaleTo(float durationSec, const glm::vec3& endScale, Callback<fl
     mCallbackTimePassed += aDeltaTime;
     const float percentageDone = mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
     const float easedProgress = ease(percentageDone);
-    const glm::vec3 scale = endScale - mBase.mScale;
-    scaleTo(mBase.mScale + easedProgress * scale);
+    scaleTo(mBase.mScale + easedProgress * (endScale - mBase.mScale));
     if (mCallbackTimePassed <= durationSec) {
       return 0.0f;
     }

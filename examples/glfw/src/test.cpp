@@ -37,7 +37,7 @@ void init() {
   /* Scene and camera */
   ContextGLFW::mGraphics->setCurrentScene(make_unique<Scene>());
   ContextGLFW::mGraphics->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
-  ContextGLFW::mGraphics->getCurrentScene()->getCamera()->moveTo(glm::vec3(0.0, 0.0, 14.0));
+  ContextGLFW::mGraphics->getCurrentScene()->getCamera()->moveTo(glm::vec3(0.0, 0.0, 7.0));
 
   /* Lights */
   ContextGLFW::mGraphics->storeLightSpot(glm::vec3(0.0, 0.0, 5.0),
@@ -45,14 +45,14 @@ void init() {
                                                glm::vec4(0.0, 1.0, 0.0, 0.0));
 
   /* Engine callbacks */
-//  ContextGLFW::mGraphics->attachHandler(make_unique<TimeStopCallback>
-//                                                   (ContextGLFW::mGraphics));
-//  ContextGLFW::mGraphics->registerCallback(make_unique
-//                                                   <MoveCameraCallback>(ContextGLFW::mGraphics, eEventType::eKey, 0.1));
+//  ContextGLFW::mGraphics->attachHandler(make_unique<TimeStopCallback> (ContextGLFW::mGraphics));
+//  ContextGLFW::mGraphics->registerCallback(make_unique <MoveCameraCallback>(ContextGLFW::mGraphics,
+// eEventType::eKey, 0.1));
 }
 
 void perform() {
   flc::Program* p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic);
+  flc::Program* pt = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic);
 
   /* Models */
   BuilderModelExternalMaps builder(ContextGLFW::mGraphics, "meshes/cubemap.obj", p, "textures/test.png");
@@ -68,7 +68,7 @@ void perform() {
     sphere->moveByX(-4 + 2 * i);
     sphere->rotateByX(glm::radians(45.0f));
     sphere->scaleBy(t, glm::vec3(0.05f), ElasticEaseIn);
-    sphere->scaleBy(t, glm::vec3(-0.05f), ElasticEaseIn);
+    sphere->scaleTo(t, glm::vec3(0.005f), ElasticEaseIn);
     sphere->rotateBy(t, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0), BounceEaseIn);
     sphere->rotateBy(t, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0), BounceEaseOut);
     sphere->moveBy(t, glm::vec3(-(0.5f * SPHERES) + i, -2.0, 0.0), ElasticEaseIn);
