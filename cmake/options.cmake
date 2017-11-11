@@ -29,7 +29,7 @@ option (FILLWAVE_COMPILATION_RELEASE "Build type" OFF)
 # -----------------------------------------------
 
 option (FILLWAVE_TESTS "Build with gtest tests" OFF)
-option (FILLWAVE_TESTS_COVERALLS "Generate coveralls data" ON)
+option (FILLWAVE_TESTS_COVERALLS "Generate coveralls data" OFF)
 
 # -----------------------------------------------
 # External libraries options

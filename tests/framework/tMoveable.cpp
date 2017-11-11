@@ -224,7 +224,7 @@ TEST (Moveable, MoveByDifferentPositionCheckResultAfterOneAndHalfStep) {
 
 TEST (Moveable, ScaleByTheSamePosition) {
   Moveable sut;
-  sut.scaleBy(1.1f, glm::vec3(0.0, 0.0, 0.0));
+  sut.scaleBy(1.1f, glm::vec3(1.0, 1.0, 1.0));
   sut.stepInTime(1.0f);
   EXPECT_EQ(glm::vec3(1.0, 1.0, 1.0), sut.getScale());
 }
@@ -239,15 +239,15 @@ TEST (Moveable, ScaleByDifferentPosition) {
 TEST (Moveable, ScaleByDifferentScaleCheckResultAfterFullStep) {
   Moveable sut1, sut2;
   sut2.scaleTo(glm::vec3(2.0, 6.0, 11.0));
-  sut1.scaleBy(1.1f, glm::vec3(1.0, 5.0, 10.0));
+  sut1.scaleBy(1.1f, glm::vec3(2.0, 6.0, 11.0));
   sut1.stepInTime(1.1f);
   EXPECT_EQ(sut2.getScale(), sut1.getScale());
 }
 
 TEST (Moveable, ScaleByDifferentScaleCheckResultAfterHalfStep) {
   Moveable sut1, sut2;
-  sut2.scaleTo(glm::vec3(0.5, 1.0, 1.5));
-  sut1.scaleBy(1.1f, glm::vec3(-1.0, 0.0, 1.0));
+  sut2.scaleTo(glm::vec3(0.75, 0.6, 1.5));
+  sut1.scaleBy(1.1f, glm::vec3(0.5, 0.2, 2.0));
   sut1.stepInTime(0.55f);
   EXPECT_EQ(sut2.getScale(), sut1.getScale());
 }
@@ -255,20 +255,20 @@ TEST (Moveable, ScaleByDifferentScaleCheckResultAfterHalfStep) {
 TEST (Moveable, ScaleByDifferentScaleCheckResultAfterOneAndHalfStep) {
   Moveable sut1, sut2;
   sut2.scaleTo(glm::vec3(2.5, 4.0, 10.0));
-  sut1.scaleBy(1.1f, glm::vec3(1.0, 2.0, 6.0));
-  sut1.scaleBy(1.1f, glm::vec3(1.0, 2.0, 6.0));
+  sut1.scaleBy(1.1f, glm::vec3(2.5, 4.0, 10.0));
+  sut1.scaleBy(1.1f, glm::vec3(1.0, 1.0, 1.0));
   sut1.stepInTime(1.1f);
   sut1.stepInTime(0.55f);
   EXPECT_EQ(sut2.getScale(), sut1.getScale());
 }
 
-TEST (Moveable, stop) {
+TEST (Moveable, ScalyByCallbacksInterrupted) {
   Moveable sut1, sut2;
-  sut2.scaleTo(glm::vec3(2.5, 4.0, 10.0));
-  sut1.scaleBy(1.1f, glm::vec3(1.0, 2.0, 6.0));
+  sut2.scaleTo(glm::vec3(2.5, 4.0, 36.0));
+  sut1.scaleBy(1.1f, glm::vec3(2.5, 2.0, 6.0));
   sut1.scaleBy(1.1f, glm::vec3(1.0, 2.0, 6.0));
   sut1.stepInTime(1.1f);
-  sut1.stepInTime(0.55f);
+  sut1.stepInTime(1.1f);
   sut1.stop();
   sut1.stepInTime(1.1f);
   sut1.stepInTime(0.55f);
@@ -280,6 +280,27 @@ TEST (Moveable, stop) {
   sut1.stepInTime(0.55f);
   EXPECT_EQ(sut2.getScale(), sut1.getScale());
 }
+
+
+TEST (Moveable, ScalyToCallbacksInterrupted) {
+  Moveable sut1, sut2;
+  sut2.scaleTo(glm::vec3(2.5, 4.0, 36.0));
+  sut1.scaleTo(1.1f, glm::vec3(2.5, 4.0, 36.0));
+  sut1.stepInTime(2.1f);
+  sut1.stepInTime(1.1f);
+  EXPECT_EQ(sut2.getScale(), sut1.getScale());
+}
+
+TEST (Moveable, ScalyToWithDifferentValue) {
+  Moveable sut1, sut2;
+  sut2.scaleTo(glm::vec3(3.5, 4.0, 36.0));
+  sut1.scaleTo(1.1f, glm::vec3(2.5, 4.0, 36.0));
+  sut1.scaleTo(1.1f, glm::vec3(3.5, 4.0, 36.0));
+  sut1.stepInTime(2.1f);
+  sut1.stepInTime(1.1f);
+  EXPECT_EQ(sut2.getScale(), sut1.getScale());
+}
+
 
 } /* flf */
 } /* flw */

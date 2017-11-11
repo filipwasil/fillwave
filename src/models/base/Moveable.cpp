@@ -210,7 +210,7 @@ void Moveable::attachTimeCallback(float deltaTime, Callback<float(float)> action
 void Moveable::waitInTime(float durationSec) {
   mTimeCallbacks.push_back([this, durationSec](float aDeltaTime) {
     mCallbackTimePassed += aDeltaTime;
-    if (mCallbackTimePassed < durationSec) {
+    if (mCallbackTimePassed <= durationSec) {
       return 0.0f;
     }
     float timeLeft = mCallbackTimePassed - durationSec;
@@ -225,10 +225,9 @@ void Moveable::moveBy(float durationSec, const glm::vec3& deltaMove, Callback<fl
       mBase.mTranslation = mTranslation;
     }
     mCallbackTimePassed += aDeltaTime;
-    const float percentageDone =
-      mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
+    const float percentageDone = mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
     moveTo(mBase.mTranslation + ease(percentageDone) * deltaMove);
-    if (mCallbackTimePassed < durationSec) {
+    if (mCallbackTimePassed <= durationSec) {
       return 0.0f;
     }
     float timeLeft = mCallbackTimePassed - durationSec;
@@ -243,11 +242,10 @@ void Moveable::moveTo(float durationSec, const glm::vec3& endTranslation, Callba
       mBase.mTranslation = mTranslation;
     }
     mCallbackTimePassed += aDeltaTime;
-    const float percentageDone =
-      mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
+    const float percentageDone = mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
     const glm::vec3 deltaMove = endTranslation - mBase.mTranslation;
     moveTo(mBase.mTranslation + ease(percentageDone) * deltaMove);
-    if (mCallbackTimePassed < durationSec) {
+    if (mCallbackTimePassed <= durationSec) {
       return 0.0f;
     }
     float timeLeft = mCallbackTimePassed - durationSec;
@@ -263,10 +261,11 @@ void Moveable::scaleBy(float durationSec, const glm::vec3& deltaScale, Callback<
       mBase.mScale = mScale;
     }
     mCallbackTimePassed += aDeltaTime;
-    const float percentageDone =
-      mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
-    scaleTo(mBase.mScale * ( 1.0f + ease(percentageDone) * deltaScale ) );
-    if (mCallbackTimePassed < durationSec) {
+    const float percentageDone = mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
+    const float easedProgress = ease(percentageDone);
+    const glm::vec3 scale = mBase.mScale * ( deltaScale - glm::vec3(1.0) );
+    scaleTo(mBase.mScale + easedProgress * scale);
+    if (mCallbackTimePassed <= durationSec) {
       return 0.0f;
     }
     float timeLeft = mCallbackTimePassed - durationSec;
@@ -281,11 +280,11 @@ void Moveable::scaleTo(float durationSec, const glm::vec3& endScale, Callback<fl
       mBase.mScale = mScale;
     }
     mCallbackTimePassed += aDeltaTime;
-    const float percentageDone =
-      mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
-    const glm::vec3 deltaScale = endScale - mBase.mScale;
-    scaleTo(mBase.mScale * ( 1.0f + ease(percentageDone) * deltaScale ) );
-    if (mCallbackTimePassed < durationSec) {
+    const float percentageDone = mCallbackTimePassed / durationSec >= 1.0f ? 1.0f : mCallbackTimePassed / durationSec;
+    const float easedProgress = ease(percentageDone);
+    const glm::vec3 scale = endScale - mBase.mScale;
+    scaleTo(mBase.mScale + easedProgress * scale);
+    if (mCallbackTimePassed <= durationSec) {
       return 0.0f;
     }
     float timeLeft = mCallbackTimePassed - durationSec;
