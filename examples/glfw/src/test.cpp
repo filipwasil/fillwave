@@ -51,8 +51,18 @@ void init() {
 }
 
 void perform() {
-  flc::Program* p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic);
-  flc::Program* pt = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic);
+  //auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic, "shaders/tesselation");
+  auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic, "shaders/tesselation");
+
+  auto e = ContextGLFW::mGraphics;
+
+
+//  auto pt = e->storeProgram("occlusion_optimized", {
+//    e->storeShader<GL_FRAGMENT_SHADER>("shaders/tesselation.frag"),
+//    e->storeShader<GL_VERTEX_SHADER>("shaders/tesselation.vert"),
+//    e->storeShader<GL_TESS_CONTROL_SHADER>("shaders/tesselation.tesc"),
+//    e->storeShader<GL_TESS_EVALUATION_SHADER>("shaders/tesselation.tese")
+//  });
 
   /* Models */
   BuilderModelExternalMaps builder(ContextGLFW::mGraphics, "meshes/cubemap.obj", p, "textures/test.png");
@@ -78,8 +88,7 @@ void perform() {
     ContextGLFW::mGraphics->getCurrentScene()->attach(std::move(sphere));
   }
 
-  puModel wall = make_unique<Model>(ContextGLFW::mGraphics, p,
-                                    "meshes/floor.obj");
+  puModel wall = make_unique<Model>(ContextGLFW::mGraphics, p, "meshes/floor.obj");
   wall->rotateByX(glm::radians(90.0));
   wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
   wall->scaleTo(3.0);

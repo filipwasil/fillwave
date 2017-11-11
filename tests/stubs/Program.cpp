@@ -110,6 +110,7 @@ void Program::uniformBlockPush(std::string /*name*/, GLfloat * /*data*/) {
 }
 
 void Program::log(const std::string& /*fileName*/) const {
+
 }
 
 void Program::reload() {

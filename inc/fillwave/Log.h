@@ -92,25 +92,25 @@
 #endif /* __ANDROID__ */
 
 #define FLOGINIT_DEFAULT()                                                                            \
-   static const std::string _tag_ =  (                                                                \
+   static const char* _tag_ =  (                                                                \
       std::string(__FILE__).find(FILLWAVE_OS_SEPRATOR) == std::string::npos ? std::string(__FILE__) : \
       std::string(__FILE__).substr(std::string(__FILE__).find_last_of(                                \
-          FILLWAVE_OS_SEPRATOR) + 1, std::string(__FILE__).size()));                                  \
+          FILLWAVE_OS_SEPRATOR) + 1, std::string(__FILE__).size())).c_str();                                  \
    static const char _mask_ = FBIT_MAX;                                                               \
    FLOG_CREATE_STATIC_LOGGER()
 
 #define FLOGINIT_MASK(mask)                                             \
-   static const std::string _tag_ = (__FILE__);                         \
+   static const char* _tag_ = (__FILE__);                         \
    static const char _mask_ = (mask);                                   \
    FLOG_CREATE_STATIC_LOGGER()
 
 #define FLOGINIT(tag, mask)                                             \
-   static const std::string _tag_ = (tag);                              \
+   static const char* _tag_ = (tag);                              \
    static const char _mask_ = (mask);                                   \
    FLOG_CREATE_STATIC_LOGGER()
 
 #define FLOGINIT_NONE()                                                 \
-   static const std::string _tag_ = "";                                 \
+   static const char* _tag_ = "";                                 \
    static const char _mask_ = 0;                                        \
    FLOG_CREATE_STATIC_LOGGER()
 
@@ -129,7 +129,7 @@
 
 #else /* __ANDROID__ */
 
-#define fLog() FILLWAVE_SPRINTF(buffer, "%s:%d", ::_tag_.c_str(), __LINE__)
+#define fLog() FILLWAVE_SPRINTF(buffer, "%s:%d", ::_tag_, __LINE__)
 #define fLogBase(LOG_CONDITION, LOG_FLAG, ...) LOG_FLAG ## _FN(LOG_CONDITION, __VA_ARGS__)
 #define GPU_FATAL_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->critical(buffer); } } while(0)
 #define GPU_ERROR_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->critical(buffer); } } while(0)

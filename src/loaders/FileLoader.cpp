@@ -32,7 +32,7 @@
 
 #include <fstream>
 
-FLOGINIT("File", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
@@ -79,13 +79,16 @@ void ReadFile(string fileName, string& fileContent) {
   ifs.close();
 }
 
-void WriteFile(const char* fileName, const std::string& fileContent) {
+void WriteFile(const char* fileName, const std::string& fileContent, bool printOut) {
   std::ofstream file (fileName);
   if (!file.is_open()) {
     fLogE("File %s can not be created", fileName);
     return;
   }
   file << fileContent << endl;
+  if (printOut) {
+    fLogE("Shader created: %s\n%s", fileName, fileContent.c_str());
+  }
   file.close();
 }
 

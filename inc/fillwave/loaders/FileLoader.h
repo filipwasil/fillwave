@@ -52,7 +52,7 @@ private:
 
 void ReadFile(std::string fileName, std::string& fileContent);
 
-void WriteFile(const char *fileName, const std::string& fileContent);
+void WriteFile(const char *fileName, const std::string& fileContent, bool printOut = false);
 
 } /* flf */
 } /* flf */
