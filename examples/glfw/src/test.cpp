@@ -52,7 +52,7 @@ void init() {
 
 void perform() {
   //auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic, "shaders/tesselation");
-  auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic, "shaders/tesselation");
+  auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic);
 
   auto e = ContextGLFW::mGraphics;
 

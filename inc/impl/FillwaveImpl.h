@@ -94,7 +94,7 @@ struct Engine::EngineImpl final {
   flf::ProgramLoader mProgramLoader;
 
   /* Picking */
-  flc::Texture2DRenderable *mPickingRenderableTexture;
+  flc::Texture2DRenderable* mPickingRenderableTexture;
   puPixelBuffer mPickingPixelBuffer;
 
   /* Resources */
@@ -143,6 +143,7 @@ struct Engine::EngineImpl final {
   /* Initiatization */
   void init();
   void initExtensions();
+  void initTesselation();
   void initContext();
   void initPickingBuffer();
   void initPipelines();
@@ -278,7 +279,7 @@ inline void Engine::EngineImpl::initExtensions() {
 
 #else /* FILLWAVE_GLES_3_0 */
 
-inline void Engine::EngineImpl::initExtensions(void) {
+inline void Engine::EngineImpl::initExtensions() {
 #ifdef GLEW_OK
   GLenum GlewInitResult;
   glewExperimental = GL_TRUE;
@@ -294,6 +295,11 @@ inline void Engine::EngineImpl::initExtensions(void) {
   } else {
     fLogD("OpenGL Version: %s", glGetString(GL_VERSION));
   }
+  GLint maxPatchVertices = 0;
+  glGetIntegerv(GL_MAX_PATCH_VERTICES, &maxPatchVertices);
+  fLogD("Max supported patches for tesselation: %i", maxPatchVertices);
+  // suppress error if tesselation is not supported
+  glGetError();
 
 #endif /* GLEW_OK */
 }
@@ -371,6 +377,11 @@ inline void Engine::EngineImpl::initPickingBuffer() {
 inline void Engine::EngineImpl::initExtras() {
   /* Debugger */
   mDebugger = std::make_unique<flf::Debugger>(mEngine);
+
+  /* Tesselation */
+  glPatchParameteri(GL_PATCH_VERTICES, 3);
+  /* Suppress error if setting patch up fails */
+  glGetError();
 }
 
 void Engine::EngineImpl::reload() {
@@ -565,10 +576,10 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
     auto _begin = mPostProcessingPasses.begin();
     auto _end = mPostProcessingPasses.end();
 
-    flc::Texture2DRenderableDynamic *textureNext;
-    flc::Texture2DRenderableDynamic *textureCurrent = (*_begin).getFrame();
+    flc::Texture2DRenderableDynamic* textureNext;
+    flc::Texture2DRenderableDynamic* textureCurrent = (*_begin).getFrame();
 
-    flc::Program *programCurrent;
+    flc::Program* programCurrent;
 
     drawClear();
     textureCurrent->bindForWriting();

@@ -20,16 +20,16 @@ struct Engine::EngineImpl {
   ~EngineImpl() = default;
 };
 
-Engine::Engine(GLint /*argc*/, GLchar *const argv[]) {
-  (void) argv;
+Engine::Engine(GLint /*argc*/, GLchar *const /*argv*/[]) {
+  // nothing
 }
 
 Engine::~Engine() {
-
+  // nothing
 }
 
 flc::Texture2D *Engine::storeTexture(const std::string & /*texturePath*/, flf::ECompression /*compression*/) {
   return nullptr;
 }
 
-}
+} /* flw */
