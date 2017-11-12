@@ -1,0 +1,2 @@
+git push ssh://filipwasil@review.gerrithub.io:29418/filipwasil/fillwave HEAD:refs/changes/CHANGE_ID
+git push ssh://filipwasil@review.gerrithub.io:29418/filipwasil/fillwave HEAD:refs/for/dev_master
