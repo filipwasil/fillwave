@@ -142,7 +142,7 @@ Engine::storeLightDirectional(glm::vec3 position, glm::quat rotation, glm::vec4 
                                                 followed);
 }
 
-Program* Engine::storeProgram(const string &name, const vector<Shader* > &shaders, bool isSkipLinking) {
+Program* Engine::storeProgram(const string& name, const vector<Shader*>& shaders, bool isSkipLinking) {
   return mImpl->mPrograms.store(name, shaders, isSkipLinking);
 }
 
@@ -160,12 +160,13 @@ Texture2DRenderableDynamic* Engine::storeTextureDynamic(const string &fragmentSh
   return mImpl->mTextures->getDynamic(path, program, glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));;
 }
 
-Texture3D* Engine::storeTexture3D(const string &posX,
-    const string &negX,
-    const string &posY,
-    const string &negY,
-    const string &posZ,
-    const string &negZ) {
+Texture3D* Engine::storeTexture3D(
+  const string &posX
+  , const string &negX
+  , const string &posY
+  , const string &negY
+  , const string &posZ
+  , const string &negZ) {
   return mImpl->mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
 
