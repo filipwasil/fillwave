@@ -29,7 +29,6 @@
 #include <fillwave/PlatformSW.h>
 #include <fillwave/loaders/FileLoader.h>
 #include <fillwave/Log.h>
-
 #include <fstream>
 
 FLOGINIT_DEFAULT()

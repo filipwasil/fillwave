@@ -92,25 +92,25 @@
 #endif /* __ANDROID__ */
 
 #define FLOGINIT_DEFAULT()                                                                            \
-   static const char* _tag_ =  (                                                                \
+   static const std::string _tag_ =  (                                                                \
       std::string(__FILE__).find(FILLWAVE_OS_SEPRATOR) == std::string::npos ? std::string(__FILE__) : \
       std::string(__FILE__).substr(std::string(__FILE__).find_last_of(                                \
-          FILLWAVE_OS_SEPRATOR) + 1, std::string(__FILE__).size())).c_str();                                  \
+          FILLWAVE_OS_SEPRATOR) + 1, std::string(__FILE__).size()));                                  \
    static const char _mask_ = FBIT_MAX;                                                               \
    FLOG_CREATE_STATIC_LOGGER()
 
 #define FLOGINIT_MASK(mask)                                             \
-   static const char* _tag_ = (__FILE__);                         \
+   static const std::string _tag_ = (__FILE__);                         \
    static const char _mask_ = (mask);                                   \
    FLOG_CREATE_STATIC_LOGGER()
 
 #define FLOGINIT(tag, mask)                                             \
-   static const char* _tag_ = (tag);                              \
+   static const std::string _tag_ = (tag);                              \
    static const char _mask_ = (mask);                                   \
    FLOG_CREATE_STATIC_LOGGER()
 
 #define FLOGINIT_NONE()                                                 \
-   static const char* _tag_ = "";                                 \
+   static const std::string _tag_ = "";                                 \
    static const char _mask_ = 0;                                        \
    FLOG_CREATE_STATIC_LOGGER()
 

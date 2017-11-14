@@ -53,16 +53,8 @@ void init() {
 void perform() {
   //auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic, "shaders/tesselation");
   auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic);
-
+  //auto pe = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basicAnimated);
   auto e = ContextGLFW::mGraphics;
-
-
-//  auto pt = e->storeProgram("occlusion_optimized", {
-//    e->storeShader<GL_FRAGMENT_SHADER>("shaders/tesselation.frag"),
-//    e->storeShader<GL_VERTEX_SHADER>("shaders/tesselation.vert"),
-//    e->storeShader<GL_TESS_CONTROL_SHADER>("shaders/tesselation.tesc"),
-//    e->storeShader<GL_TESS_EVALUATION_SHADER>("shaders/tesselation.tese")
-//  });
 
   /* Models */
   BuilderModelExternalMaps builder(ContextGLFW::mGraphics, "meshes/cubemap.obj", p, "textures/test.png");
