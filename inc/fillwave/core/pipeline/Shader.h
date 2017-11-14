@@ -85,5 +85,5 @@ private:
 } /* flc */
 } /* flw */
 
-std::vector<flw::flc::Shader *>
-operator+(std::vector<flw::flc::Shader *> shaders, flw::flc::Shader *shader2);
+std::vector<flw::flc::Shader*>
+operator+(std::vector<flw::flc::Shader* > shaders, flw::flc::Shader* shader);

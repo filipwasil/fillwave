@@ -1227,7 +1227,7 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
 
     case EProgram::basicAnimated:
     case EProgram::basicAnimatedFR:
-      p = mEngine->storeProgram("default_animated_dr", {
+      p = mEngine->storeProgram("default_animated", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag", ShaderLoaderFragment().getSource()),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_animated.vert", ShaderLoaderVertex(true).getSource())
       });
@@ -1403,17 +1403,18 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
       break;
 
     case EProgram::basicDR:
-      p = mEngine->storeProgram("dr_g", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_g.frag", fsDR),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default.vert", ShaderLoaderVertex().getSource())
+      p = mEngine->storeProgram("default_dr", {
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default_dr.frag", fsDR),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_dr.vert", ShaderLoaderVertex().getSource())
       });
       initDefaultUniforms(p);
       break;
 
     case EProgram::basicAnimatedDR:
-      p = mEngine->storeProgram("default_animated", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default_animated.frag", fsDR),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_animated.vert", ShaderLoaderVertex(true).getSource())
+      p = mEngine->storeProgram("default_animated_dr", {
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default_animated_dr.frag", fsDR),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_animated_dr.vert", ShaderLoaderVertex(true)
+            .getSource())
       });
       initDefaultUniforms(p);
       break;

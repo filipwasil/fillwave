@@ -47,12 +47,7 @@ Program::Program(const std::vector<flc::Shader*>& shaders, GLboolean skipLinking
 }
 
 Program::~Program() {
-  fLogD("Delete program");
-  for (auto &it : mShaders) {
-    detach(it);
-  }
-  glDeleteProgram(mHandle);
-  fLogC("Delete program");
+  unload();
 }
 
 void Program::attach(flc::Shader* shader) {

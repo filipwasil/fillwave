@@ -53,11 +53,11 @@ void init() {
 void perform() {
   //auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic, "shaders/tesselation");
   auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic);
-  auto pe = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basicAnimated);
   auto e = ContextGLFW::mGraphics;
 
   /* Models */
   BuilderModelExternalMaps builder(ContextGLFW::mGraphics, "meshes/cubemap.obj", p, "textures/test.png");
+  auto wall = make_unique<Model>(ContextGLFW::mGraphics, p, "meshes/floor.obj");
 
   for (GLint i = 0; i < SPHERES; i++) {
     const auto t = 1.0f + i * 0.5f;
@@ -80,7 +80,6 @@ void perform() {
     ContextGLFW::mGraphics->getCurrentScene()->attach(std::move(sphere));
   }
 
-  puModel wall = make_unique<Model>(ContextGLFW::mGraphics, p, "meshes/floor.obj");
   wall->rotateByX(glm::radians(90.0));
   wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
   wall->scaleTo(3.0);

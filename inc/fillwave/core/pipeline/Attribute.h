@@ -42,11 +42,11 @@ namespace flc {
  * \brief VertexAttribute to be kept within the VertexBuffer.
  */
 
-class Attribute {
+class Attribute final {
 public:
   Attribute(std::string name, GLuint index, GLint size, GLsizei stride, GLenum type, GLboolean normalized = GL_FALSE);
 
-  virtual ~Attribute() = default;
+  ~Attribute() = default;
 
   void bindLocation(GLint programHandle);
 

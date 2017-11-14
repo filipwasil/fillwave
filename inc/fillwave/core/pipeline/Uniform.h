@@ -67,11 +67,11 @@ typedef union UniformData {
  * \brief Uniform.
  */
 
-class Uniform {
+class Uniform final {
 public:
-  Uniform(std::string name, GLuint type, GLsizei size, GLint location);
+  Uniform(const std::string& name, GLuint type, GLsizei size, GLint location);
 
-  virtual ~Uniform() = default;
+  ~Uniform() = default;
 
   bool isName(const std::string &name) const;
 

@@ -40,7 +40,7 @@ FLOGINIT("Uniform", FERROR | FFATAL | FINFO)
 namespace flw {
 namespace flc {
 
-Uniform::Uniform(std::string name, GLuint type, GLsizei size, GLint location)
+Uniform::Uniform(const std::string& name, GLuint type, GLsizei size, GLint location)
     : mName(name)
     , mType(type)
     , mSize(size)
