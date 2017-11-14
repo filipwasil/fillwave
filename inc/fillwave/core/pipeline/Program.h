@@ -45,19 +45,15 @@ namespace flc {
 /*! \class Program
  * \brief Single GLSL program object.
  */
-class Program {
+class Program final {
 public:
   Program(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
 
-  virtual ~Program();
+  ~Program();
 
   void link();
 
   /* Shaders */
-  void attach(flc::Shader *shader);
-
-  void detach(flc::Shader *shader);
-
   void use() const;
 
   static void useProgram(GLuint handle);
@@ -65,38 +61,36 @@ public:
   static void disusePrograms();
 
   /* Uniforms */
-  GLboolean checkUniform(const std::string &name);
+  void uniformPush(const std::string& name, GLint data);
 
-  void uniformPush(std::string name, GLint data);
+  void uniformPush(const std::string& name, GLint *data, GLint count);
 
-  void uniformPush(std::string name, GLint *data, GLint count);
+  void uniformPush(const std::string& name, GLfloat data);
 
-  void uniformPush(std::string name, GLfloat data);
+  void uniformPush(const std::string& name, GLfloat *data, GLint count);
 
-  void uniformPush(std::string name, GLfloat *data, GLint count);
+  void uniformPush(const std::string& name, glm::mat3 data);
 
-  void uniformPush(std::string name, glm::mat3 data);
+  void uniformPush(const std::string& name, glm::mat4 data);
 
-  void uniformPush(std::string name, glm::mat4 data);
+  void uniformPush(const std::string& name, glm::mat4 *data, GLuint size);
 
-  void uniformPush(std::string name, glm::mat4 *data, GLuint size);
+  void uniformPush(const std::string& name, glm::vec2 data);
 
-  void uniformPush(std::string name, glm::vec2 data);
+  void uniformPush(const std::string& name, glm::vec3 data);
 
-  void uniformPush(std::string name, glm::vec3 data);
+  void uniformPush(const std::string& name, glm::vec3 *data, GLuint size);
 
-  void uniformPush(std::string name, glm::vec3 *data, GLuint size);
-
-  void uniformPush(std::string name, glm::vec4 data);
+  void uniformPush(const std::string& name, glm::vec4 data);
 
   /* Uniform blocks */
-  GLint getUniformLocation(std::string name);
+  GLint getUniformLocation(const std::string& name);
 
-  void getUniformBlock(std::string name, GLuint bindingPoint);
+  void getUniformBlock(const std::string& name, GLuint bindingPoint);
 
   GLuint getHandle() const;
 
-  void uniformBlockPush(std::string name, GLfloat *data);
+  void uniformBlockPush(const std::string& name, GLfloat* data);
 
   void reload();
 
@@ -106,10 +100,18 @@ private:
   GLuint mHandle;
   std::vector<Uniform> mUniforms;
   std::vector<puUniformBuffer> mUnifromBuffers;
-  GLboolean mDelayedLinking;
-  std::vector<flc::Shader *> mShaders;
+  bool mDelayedLinking;
+  std::vector<flc::Shader*> mShaders;
 
-  void getUniforms();
+  inline void getUniforms();
+
+  inline void attach(flc::Shader* shader);
+
+  inline void detach(flc::Shader* shader);
+
+  inline void load();
+
+  inline void unload();
 };
 
 } /* flc */

@@ -37,15 +37,13 @@
 
 FLOGINIT_DEFAULT()
 
-using namespace std;
-
 namespace flw {
 namespace flc {
 
-Program::Program(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking)
+Program::Program(const std::vector<flc::Shader*>& shaders, GLboolean skipLinking)
     : mDelayedLinking(skipLinking)
     , mShaders(shaders) {
-  reload();
+  load();
 }
 
 Program::~Program() {
@@ -57,14 +55,14 @@ Program::~Program() {
   fLogC("Delete program");
 }
 
-void Program::attach(flc::Shader *shader) {
+void Program::attach(flc::Shader* shader) {
   if (mHandle) {
     glAttachShader(mHandle, shader->getHandle());
     fLogC("attach shader %d to program %d", shader->getHandle(), mHandle);
   }
 }
 
-void Program::detach(flc::Shader *shader) {
+void Program::detach(flc::Shader* shader) {
   if (mHandle) {
     glDetachShader(mHandle, shader->getHandle());
     fLogC("detach shader");
@@ -116,7 +114,7 @@ void Program::use() const {
   fLogC("use");
 }
 
-void Program::uniformPush(string name, GLint data) {
+void Program::uniformPush(const std::string& name, GLint data) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data);
@@ -126,7 +124,7 @@ void Program::uniformPush(string name, GLint data) {
   fLogE("Can not find \"int %s\" uniform name in program", name.c_str());
 }
 
-void Program::uniformPush(string name, GLint *data, GLint count) {
+void Program::uniformPush(const std::string& name, GLint *data, GLint count) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data, count);
@@ -136,7 +134,7 @@ void Program::uniformPush(string name, GLint *data, GLint count) {
   fLogE("Can not find \"int %s\" uniform name in program", name.c_str());
 }
 
-void Program::uniformPush(string name, GLfloat data) {
+void Program::uniformPush(const std::string& name, GLfloat data) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data);
@@ -146,7 +144,7 @@ void Program::uniformPush(string name, GLfloat data) {
   fLogE("Can not find \"float %s\" uniform name in program", name.c_str());
 }
 
-void Program::uniformPush(string name, GLfloat *data, GLint count) {
+void Program::uniformPush(const std::string& name, GLfloat *data, GLint count) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data, count);
@@ -156,7 +154,7 @@ void Program::uniformPush(string name, GLfloat *data, GLint count) {
   fLogE("Can not find \"float %s\" uniform name in program", name.c_str());
 }
 
-void Program::uniformPush(string name, glm::mat3 data) {
+void Program::uniformPush(const std::string& name, glm::mat3 data) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data);
@@ -166,7 +164,7 @@ void Program::uniformPush(string name, glm::mat3 data) {
   fLogE("Can not find \"mat3 %s\" uniform name in program", name.c_str());
 }
 
-void Program::uniformPush(string name, glm::mat4 data) {
+void Program::uniformPush(const std::string& name, glm::mat4 data) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data);
@@ -176,7 +174,7 @@ void Program::uniformPush(string name, glm::mat4 data) {
   fLogE("Can not find \"mat4 %s\" uniform name in program", name.c_str());
 }
 
-void Program::uniformPush(string name, glm::mat4 *data, GLuint size) {
+void Program::uniformPush(const std::string& name, glm::mat4 *data, GLuint size) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data, size);
@@ -186,7 +184,7 @@ void Program::uniformPush(string name, glm::mat4 *data, GLuint size) {
   fLogE("Can not find \"mat4 %s\" uniform name in program", name.c_str());
 }
 
-void Program::uniformPush(string name, glm::vec2 data) {
+void Program::uniformPush(const std::string& name, glm::vec2 data) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data);
@@ -196,7 +194,7 @@ void Program::uniformPush(string name, glm::vec2 data) {
   fLogE("Can not find \"glm::vec2 %s\" uniform name in program", name.c_str());
 }
 
-void Program::uniformPush(string name, glm::vec3 data) {
+void Program::uniformPush(const std::string& name, glm::vec3 data) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data);
@@ -206,7 +204,7 @@ void Program::uniformPush(string name, glm::vec3 data) {
   fLogE("Can not find \"glm::vec3 %s\" uniform name in program", name.c_str());
 }
 
-void Program::uniformPush(string name, glm::vec3 *data, GLuint size) {
+void Program::uniformPush(const std::string& name, glm::vec3 *data, GLuint size) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data, size);
@@ -216,7 +214,7 @@ void Program::uniformPush(string name, glm::vec3 *data, GLuint size) {
   fLogE("Can not find %d \"vec3 %s\" uniforms name in program", size, name.c_str());
 }
 
-void Program::uniformPush(string name, glm::vec4 data) {
+void Program::uniformPush(const std::string& name, glm::vec4 data) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       it.push(data);
@@ -243,7 +241,7 @@ inline void Program::getUniforms() {
   }
 }
 
-GLint Program::getUniformLocation(std::string name) {
+GLint Program::getUniformLocation(const std::string& name) {
   for (auto &it : mUniforms) {
     if (it.isName(name)) {
       return it.getLocation();
@@ -253,7 +251,7 @@ GLint Program::getUniformLocation(std::string name) {
   return FILLWAVE_UNIFORM_NOT_FOUND;
 }
 
-void Program::getUniformBlock(std::string name, GLuint bindingPoint) {
+void Program::getUniformBlock(const std::string& name, GLuint bindingPoint) {
   GLint howMany = -1;
   GLint uniformBlockSize = 0;
   glGetProgramiv(mHandle, GL_ACTIVE_UNIFORM_BLOCKS, &howMany);
@@ -276,7 +274,7 @@ void Program::getUniformBlock(std::string name, GLuint bindingPoint) {
   }
 }
 
-void Program::uniformBlockPush(std::string name, GLfloat *data) {
+void Program::uniformBlockPush(const std::string& name, GLfloat *data) {
   for (auto &it : mUnifromBuffers) {
     if (it->getName() == name) {
       it->push(data);
@@ -315,19 +313,19 @@ void Program::log(const std::string& programName) const {
   fLogI("GL_ACTIVE_UNIFORM_MAX_LENGTH: %d", value);
 
   fLogI("Uniforms:\n %du", mUniforms.size());
-  for (auto &it : mUniforms) {
+  for (auto& it : mUniforms) {
     it.log();
   }
-  for (auto &it : mShaders) {
+  for (auto& it : mShaders) {
     fLogI("Shader:\n");
     it->log(programName);
   }
 }
 
-void Program::reload() {
+void Program::load() {
   mHandle = glCreateProgram();
   fLogC("Program creation failed");
-  for (auto it : mShaders) {
+  for (auto& it : mShaders) {
     attach(it);
     fLogC("Failed to attach shader of type %s", it->getDebugInfo().type.c_str());
   }
@@ -337,6 +335,19 @@ void Program::reload() {
     fLogD("Program linking has be done manually\n");
   }
   fLogC("Program linking failed");
+}
+
+void Program::unload() {
+  for (auto &it : mShaders) {
+    detach(it);
+  }
+  glDeleteProgram(mHandle);
+  fLogC("Deleted program");
+}
+
+void Program::reload() {
+  unload();
+  load();
 }
 
 } /* flc */

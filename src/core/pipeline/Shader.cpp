@@ -120,6 +120,14 @@ void Shader::log(const std::string& programName) {
   }
 }
 
+GLuint Shader::getType() const {
+  return mType;
+}
+
+GLuint Shader::getHandle() const {
+  return mHandle;
+}
+
 void Shader::reload() {
   mHandle = glCreateShader(mType);
   fLogC("Shader creation failed");
@@ -152,7 +160,7 @@ Shader::DebugInfo Shader::getDebugInfo() const {
 } /* flw */
 
 std::vector<flw::flc::Shader *>
-operator+(std::vector<flw::flc::Shader *> shaders, flw::flc::Shader *shader) {
+operator+(std::vector<flw::flc::Shader* > shaders, flw::flc::Shader *shader) {
   shaders.push_back(shader);
   return shaders;
 }
