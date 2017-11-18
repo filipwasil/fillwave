@@ -20,6 +20,7 @@
 using namespace flw;
 using namespace flw::flf;
 using namespace std;
+using namespace glm;
 
 const GLint SPHERES = 5;
 
@@ -38,70 +39,37 @@ void init() {
   ContextGLFW::mGraphics->setCurrentScene(make_unique<Scene>());
   ContextGLFW::mGraphics->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
   ContextGLFW::mGraphics->getCurrentScene()->getCamera()->moveTo(glm::vec3(0.0, 0.0, 7.0));
-
-  /* Lights */
-  ContextGLFW::mGraphics->storeLightSpot(glm::vec3(0.0, 0.0, 5.0),
-                                               glm::quat(),
-                                               glm::vec4(0.0, 1.0, 0.0, 0.0));
-
-  /* Engine callbacks */
-//  ContextGLFW::mGraphics->attachHandler(make_unique<TimeStopCallback> (ContextGLFW::mGraphics));
-//  ContextGLFW::mGraphics->registerCallback(make_unique <MoveCameraCallback>(ContextGLFW::mGraphics,
-// eEventType::eKey, 0.1));
 }
 
 void perform() {
-  //auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic, "shaders/tesselation");
-  auto p = ProgramLoader(ContextGLFW::mGraphics).getProgram(EProgram::basic);
-  auto e = ContextGLFW::mGraphics;
+  /* Scene and camera */
+  ContextGLFW::mGraphics->setCurrentScene(make_unique<Scene>());
+  ContextGLFW::mGraphics->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
 
-  /* Models */
-  BuilderModelExternalMaps builder(ContextGLFW::mGraphics, "meshes/cubemap.obj", p, "textures/test.png");
-  auto wall = make_unique<Model>(ContextGLFW::mGraphics, p, "meshes/floor.obj");
+  puHUD hud = make_unique<HUD>();
 
-  for (GLint i = 0; i < SPHERES; i++) {
-    const auto t = 1.0f + i * 0.5f;
+  auto background = ContextGLFW::mGraphics->storeTexture("textures/wall/stonetiles_s.png");
+  auto gauge = ContextGLFW::mGraphics->storeTexture("textures/wall/stonetiles_s.png");
+//  auto gauges
 
-    /* build */
-    auto sphere = builder.build();
+  auto gaugeHud
+    = make_unique < IHUDNode > (
+      gauge
+      , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
+      , vec2(-1.0f)
+      , vec2(2.0f));
 
-    /* move */
-    sphere->scaleTo(0.005);
-    sphere->moveByX(-4 + 2 * i);
-    sphere->rotateByX(glm::radians(45.0f));
-    sphere->scaleBy(t, glm::vec3(0.05f), ElasticEaseIn);
-    sphere->scaleTo(t, glm::vec3(0.005f), ElasticEaseIn);
-    sphere->rotateBy(t, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0), BounceEaseIn);
-    sphere->rotateBy(t, glm::radians(90.0f), glm::vec3(0.0, 1.0, 0.0), BounceEaseOut);
-    sphere->moveBy(t, glm::vec3(-(0.5f * SPHERES) + i, -2.0, 0.0), ElasticEaseIn);
-    sphere->moveBy(t, glm::vec3( (0.5f * SPHERES) - i, 2.0, 0.0), ElasticEaseIn);
-    sphere->loop(1000);
+  auto backgroundHud
+    = make_unique < IHUDNode > (
+      gauge
+      , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
+      , vec2(-0.75f, -0.75f)
+      , vec2( 1.0f,  1.0f));
 
-    ContextGLFW::mGraphics->getCurrentScene()->attach(std::move(sphere));
-  }
+  hud->attach(std::move(backgroundHud));
+  hud->attach(std::move(gaugeHud));
 
-  wall->rotateByX(glm::radians(90.0));
-  wall->moveInDirection(glm::vec3(0.0, -10.0, 0.0));
-  wall->scaleTo(3.0);
-  ContextGLFW::mGraphics->getCurrentScene()->attach(std::move(wall));
-
-  auto snow = make_unique<EmiterPointGPU>(ContextGLFW::mGraphics,
-                                          0.3,
-                                          200.0,
-                                          glm::vec4(10.0, 10.0, 10.0, 1.0),
-                                          glm::vec3(0.0, 10.0, 0.0),
-                                          glm::vec3(0.0, 0.0, 0.0),
-                                          glm::vec3(10.9, 10.9, 0.9),
-                                          glm::vec3(0.0, 0.0, 0.0),
-                                          glm::vec3(15.6, 0.6, 0.6),
-                                          1.0,
-                                          1.0,
-                                          ContextGLFW::mGraphics->storeTexture("textures/particle.png"),
-                                          GL_SRC_ALPHA,
-                                          GL_ONE,
-                                          GL_FALSE);
-  snow->moveBy( { 0.0, 3.0, 0.0} );
-  ContextGLFW::mGraphics->getCurrentScene()->attach(std::move(snow));
+  ContextGLFW::mGraphics->getCurrentScene()->setHUD(std::move(hud));
 }
 
 void quit() {

@@ -40,16 +40,16 @@ void HudScene::init() {
 	                                glm::vec2(-0.95, 0.60),
 	                                glm::vec2(0.1)));
 
-	auto bar = make_unique<ProgressBar>(mEngine.get(),
-	                                    mEngine->storeTexture("128_128_64.color"),
-	                                    "shaders/progress_bar/progress.frag",
-	                                    glm::vec2(-0.75, -.45),
-	                                    glm::vec2(1.5, 0.1));
+//	auto bar = make_unique<ProgressBar>(mEngine.get(),
+//	                                    mEngine->storeTexture("128_128_64.color"),
+//	                                    "shaders/progress_bar/progress.frag",
+//	                                    glm::vec2(-0.75, -.45),
+//	                                    glm::vec2(1.5, 0.1));
 
 
-	hud->attach(std::move(bar));
+//	hud->attach(std::move(bar));
 
-	mEngine->getCurrentScene()->setHUD(std::move(hud));
+//	mEngine->getCurrentScene()->setHUD(std::move(hud));
 
 	pText t1 = mEngine->storeText("Fillwave Buttons", "fonts/bridgenorth", glm::vec2(-0.95, -0.8), 100.0);
 }
