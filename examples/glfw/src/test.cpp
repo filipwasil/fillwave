@@ -48,26 +48,26 @@ void perform() {
 
   puHUD hud = make_unique<HUD>();
 
-  auto background = ContextGLFW::mGraphics->storeTexture("textures/wall/stonetiles_s.png");
-  auto gauge = ContextGLFW::mGraphics->storeTexture("textures/wall/stonetiles_s.png");
-//  auto gauges
+  auto p = ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag");
+  p->use();
+  p->uniformPush("uResolution", glm::vec2(ContextGLFW::mScreenWidth, ContextGLFW::mScreenHeight));
+  hud->attach(make_unique < Sprite > (
+    ContextGLFW::mGraphics->storeTexture("textures/wall/stonetiles.png")
+    , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
+    , vec2(-0.75f, -0.75f)
+    , vec2( 1.0f,  1.0f)));
 
-  auto gaugeHud
-    = make_unique < Sprite > (
-      gauge
-      , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
-      , vec2(-1.0f)
-      , vec2(2.0f));
+//  hud->attach(make_unique < Sprite > (
+//    ContextGLFW::mGraphics->storeTexture("textures/W.JPG")
+//    , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
+//    , vec2(-0.5f, -0.5f)
+//    , vec2( 0.25f,  0.25f)));
 
-  auto backgroundHud
-    = make_unique < Sprite > (
-      gauge
-      , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
-      , vec2(-0.75f, -0.75f)
-      , vec2( 1.0f,  1.0f));
-
-  hud->attach(std::move(backgroundHud));
-  hud->attach(std::move(gaugeHud));
+  hud->attach(make_unique < Sprite > (
+    ContextGLFW::mGraphics->storeTexture("textures/W.JPG")
+    , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
+    , vec2(-1.0f)
+    , vec2(2.0f)));
 
   ContextGLFW::mGraphics->getCurrentScene()->setHUD(std::move(hud));
 }
@@ -76,7 +76,29 @@ void quit() {
 //
 }
 
+void setupParam(const char* name, glm::vec2 position) {
+  ContextGLFW::mGraphics->storeText(name, "fonts/Titania", position, 70.0);
+  position.y -= 0.06f;
+  ContextGLFW::mGraphics->storeText((std::string(name) + std::string("val")).c_str(), "fonts/Titania", position, 80.0);
+}
+
 void showDescription() {
   auto e = ContextGLFW::mGraphics;
-  auto h2 = e->storeText("Test app", "fonts/Titania", glm::vec2(-0.95, 0.80), 70.0);
+  setupParam("par1", glm::vec2(0.30, 0.28));
+  setupParam("par2", glm::vec2(0.50, 0.28));
+  setupParam("par3", glm::vec2(0.70, 0.28));
+  setupParam("par4", glm::vec2(0.30, 0.08));
+  setupParam("par5", glm::vec2(0.50, 0.08));
+  setupParam("par6", glm::vec2(0.70, 0.08));
+  setupParam("par7", glm::vec2(0.30, -0.12));
+  setupParam("par8", glm::vec2(0.50, -0.12));
+  setupParam("par9", glm::vec2(0.70, -0.12));
+  setupParam("par11", glm::vec2(0.30, -0.32));
+  setupParam("par12", glm::vec2(0.50, -0.32));
+  setupParam("par13", glm::vec2(0.70, -0.32));
+  setupParam("par14", glm::vec2(0.30, -0.52));
+  setupParam("par15", glm::vec2(0.50, -0.52));
+  setupParam("par16", glm::vec2(0.70, -0.52));
 }
+
+
