@@ -31,7 +31,7 @@
 #include <fillwave/core/buffers/VertexBufferText.h>
 #include <fillwave/core/pipeline/Program.h>
 
-#include <fillwave/hud/base/IHUDNode.h>
+#include <fillwave/hud/base/Sprite.h>
 #include <fillwave/loaders/FontLoader.h>
 #include <fillwave/models/base/IReloadable.h>
 #include <map>
@@ -50,7 +50,7 @@ namespace flf {
  * \brief 2D Text on the screen.
  */
 
-class Text : public IReloadable, public IHUDNode {
+class Text : public IReloadable, public Sprite {
 public:
   Text(const std::string &text,
       flc::Texture2D *texture,

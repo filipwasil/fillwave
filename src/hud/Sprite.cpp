@@ -31,7 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/hud/base/IHUDNode.h>
+#include <fillwave/hud/base/Sprite.h>
 
 #include <fillwave/Log.h>
 
@@ -40,11 +40,11 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-/*! \class IHUDNode
+/*! \class Sprite
  * \brief HUD base element.
  */
 
-IHUDNode::IHUDNode(flc::Texture2D *texture, flc::Program *program, glm::vec2 position, glm::vec2 scale)
+Sprite::Sprite(flc::Texture2D *texture, flc::Program *program, glm::vec2 position, glm::vec2 scale)
     : mTexture(texture)
     , mProgram(program)
     , mPosition(position)
@@ -55,17 +55,17 @@ IHUDNode::IHUDNode(flc::Texture2D *texture, flc::Program *program, glm::vec2 pos
   };
 }
 
-IHUDNode::~IHUDNode() = default;
+Sprite::~Sprite() = default;
 
-void IHUDNode::onAttached(ITreeNode* /*node*/) {
+void Sprite::onAttached(ITreeNode* /*node*/) {
   // nothing
 }
 
-void IHUDNode::onDetached() {
+void Sprite::onDetached() {
   // nothing
 }
 
-void IHUDNode::draw() {
+void Sprite::draw() {
   if (nullptr == mTexture || NULL == mProgram) {
     fLogF("tried to draw a non drawable");
   }
@@ -75,7 +75,7 @@ void IHUDNode::draw() {
   coreDraw();
 }
 
-void IHUDNode::coreDraw() {
+void Sprite::coreDraw() {
   glDisable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);
   glBlendFunc(mBlending.mSrc, mBlending.mSrc);
@@ -86,5 +86,5 @@ void IHUDNode::coreDraw() {
   glDisable(GL_BLEND);
 }
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

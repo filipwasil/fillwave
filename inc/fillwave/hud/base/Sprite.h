@@ -37,18 +37,18 @@
 namespace flw {
 namespace flf {
 
-/*! \class IHUDNode
+/*! \class Sprite
  * \brief HUD base element.
  */
 
-class IHUDNode : public ITreeNode {
+class Sprite : public ITreeNode {
 public:
-  IHUDNode(flc::Texture2D* texture = nullptr,
+  Sprite(flc::Texture2D* texture = nullptr,
       flc::Program* program = nullptr,
       glm::vec2 position = glm::vec2(0.0f, 0.0f),
       glm::vec2 scale = glm::vec2(1.0f, 1.0f));
 
-  virtual ~IHUDNode() override;
+  virtual ~Sprite() override;
 
   virtual void draw();
 
@@ -67,5 +67,5 @@ protected:
 };
 
 } /* namespace flf */
-typedef std::shared_ptr<flf::IHUDNode> pIHUDNode;
+typedef std::shared_ptr<flf::Sprite> pSprite;
 } /* namespace flw */

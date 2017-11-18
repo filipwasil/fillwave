@@ -48,7 +48,7 @@ Text::Text(const std::string &text,
     glm::vec4 color,
     ETextEffect effect)
     : IReloadable(engine)
-    , IHUDNode(texture, createProgram(engine, effect), position, glm::vec2(scale, scale))
+    , Sprite(texture, createProgram(engine, effect), position, glm::vec2(scale, scale))
     , mText(text)
     , mColor(color)
     , mEffect(effect)

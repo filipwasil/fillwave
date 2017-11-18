@@ -1,6 +1,6 @@
 #include <fillwave/space/Scene.h>
 #include <fillwave/models/EmiterPointGPU.h>
-#include <fillwave/actions/callbacks/TimedEmiterUpdateCallback.h>
+#include <fillwave/models/EmiterPointCPU.h>
 #include <fillwave/Fillwave.h>
 #include "TextScene.h"
 
@@ -40,8 +40,6 @@ void TextScene::init() {
                                                          GL_SRC_ALPHA,
                                                          GL_ONE,
                                                          GL_FALSE);
-
-  snow->attachHierarchyCallback(std::make_unique<TimedEmiterUpdateCallback>(snow.get(), FILLWAVE_ENDLESS));
 
   mEngine->getCurrentScene()->attach(std::move(snow));
   auto startTextVariant = mSceneParameters["mText"];

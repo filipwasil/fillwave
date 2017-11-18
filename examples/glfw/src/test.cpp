@@ -53,14 +53,14 @@ void perform() {
 //  auto gauges
 
   auto gaugeHud
-    = make_unique < IHUDNode > (
+    = make_unique < Sprite > (
       gauge
       , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
       , vec2(-1.0f)
       , vec2(2.0f));
 
   auto backgroundHud
-    = make_unique < IHUDNode > (
+    = make_unique < Sprite > (
       gauge
       , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
       , vec2(-0.75f, -0.75f)

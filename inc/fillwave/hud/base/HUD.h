@@ -28,7 +28,7 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/hud/base/IHUDNode.h>
+#include <fillwave/hud/base/Sprite.h>
 #include <fillwave/models/base/TreePtr.h>
 
 namespace flw {
@@ -39,7 +39,7 @@ namespace flf {
  * \brief Heads Up Display tree.
  */
 
-class HUD : public TreePtr<IHUDNode, IHUDNode> {
+class HUD : public TreePtr<Sprite, Sprite> {
 public:
   HUD() = default;
 

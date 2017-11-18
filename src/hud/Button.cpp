@@ -40,7 +40,7 @@ namespace flw {
 namespace flf {
 
 Button::Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm::vec2 scale)
-    : IHUDNode(texture,
+    : Sprite(texture,
                ProgramLoader(engine).getProgram(EProgram::hud),
                position,
                glm::vec2(scale.x, scale.y * engine->getScreenAspectRatio())) {
@@ -63,5 +63,5 @@ void Button::onUnpicked() {
   // nothing
 }
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

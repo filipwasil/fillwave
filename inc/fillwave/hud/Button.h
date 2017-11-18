@@ -28,7 +28,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/hud/base/IHUDNode.h>
+#include <fillwave/hud/base/Sprite.h>
 #include <fillwave/common/IPickable.h>
 
 namespace flw {
@@ -39,7 +39,7 @@ namespace flf {
  * \brief Pickable hud node.
  */
 
-class Button : public IHUDNode, public IPickable {
+class Button : public Sprite, public IPickable {
 public:
   Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm::vec2 scale);
 
@@ -55,6 +55,5 @@ public:
   void onUnpicked() override;
 };
 
-} /* namespace flf */
-typedef std::shared_ptr<flf::Button> pButton;
-} /* namespace flw */
+} /* flf */
+} /* flw */
