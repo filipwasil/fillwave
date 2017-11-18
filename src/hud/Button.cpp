@@ -35,6 +35,9 @@
 #include <fillwave/hud/Button.h>
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/Fillwave.h>
+#include <fillwave/Log.h>
+
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
@@ -63,5 +66,5 @@ void Button::onUnpicked() {
   // nothing
 }
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

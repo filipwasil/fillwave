@@ -44,5 +44,11 @@ void HUD::draw() {
   }
 }
 
-} /* namespace flf */
-} /* namespace flw */
+void HUD::evaluateTime(float timeExpiredInSeconds) {
+  for (auto &it : mChildren) {
+    it->evaluateTime(timeExpiredInSeconds);
+  }
+}
+
+} /* flf */
+} /* flw */

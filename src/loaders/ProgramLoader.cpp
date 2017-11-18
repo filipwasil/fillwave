@@ -1290,6 +1290,7 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
       });
       p->use();
       flc::Uniform::push(glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit"), FILLWAVE_DIFFUSE_UNIT);
+      flc::Uniform::push(glGetUniformLocation(p->getHandle(), "uResolution"), glm::vec2(mEngine->getScreenSize()));
       break;
 
     case EProgram::text:
@@ -1473,11 +1474,15 @@ flc::Program* ProgramLoader::getHUDCustomFragmentShader(const std::string &shade
       mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_hud.vert", vsHUD)
   });
 
+  p->use();
   GLint location = glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit");
-
   if (location != -1) {
-    p->use();
     flc::Uniform::push(location, FILLWAVE_DIFFUSE_UNIT);
+  }
+
+  location = glGetUniformLocation(p->getHandle(), "uResolution");
+  if (location != -1) {
+    flc::Uniform::push(location, glm::vec2(mEngine->getScreenSize()));
   }
 
   glGetError(); /* Suppress error if happened */

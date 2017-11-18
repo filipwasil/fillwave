@@ -31,12 +31,9 @@
  */
 
 #include "CallbacksGLFW/ColorPickingCallback.h"
-//#include <fillwave/Log.h>
 
 #include <fillwave/Fillwave.h>
 #include <GLFW/glfw3.h>
-
-//FLOGINIT("ColorPickingCallback", FERROR | FFATAL)
 
 namespace flw {
 namespace flf {
@@ -54,5 +51,5 @@ namespace flf {
 //  }
 //}
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

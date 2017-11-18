@@ -45,9 +45,11 @@ public:
 
   ~HUD() override = default;
 
-  virtual void draw() override;
+  void draw() override;
+
+  void evaluateTime(float timeExpiredInSeconds) override;
 };
 
-} /* namespace flf */
+} /* flf */
 typedef std::unique_ptr<flf::HUD> puHUD;
-} /* namespace flw */
+} /* flw */
