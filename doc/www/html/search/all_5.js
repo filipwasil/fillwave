@@ -6,7 +6,6 @@ var searchData=
   ['finishable',['Finishable',['../classflw_1_1flf_1_1Finishable.html',1,'flw::flf']]],
   ['fog',['Fog',['../classflw_1_1flf_1_1Fog.html',1,'flw::flf']]],
   ['fontloader',['FontLoader',['../classflw_1_1flf_1_1FontLoader.html',1,'flw::flf']]],
-  ['fpscallback',['FPSCallback',['../classFPSCallback.html',1,'']]],
   ['framebuffer',['Framebuffer',['../classflw_1_1flc_1_1Framebuffer.html',1,'flw::flc']]],
   ['framebuffergeometry',['FramebufferGeometry',['../classflw_1_1flc_1_1FramebufferGeometry.html',1,'flw::flc']]],
   ['fillwave_20c_2b_2b11_20graphics_20engine_20for',['Fillwave C++11 graphics engine for',['../index.html',1,'']]]

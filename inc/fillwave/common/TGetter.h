@@ -29,12 +29,9 @@
  */
 
 namespace flw {
-class TGetterHelper;
-
 /*! \class TGetter
  * \brief Wrapper which makes the wrapped pointer not storable and not copyable
  */
-
 template <class TPtr>
 class TGetter {
 private:

@@ -35,10 +35,6 @@ namespace flw {
 class Engine;
 namespace flf {
 
-///*! \class FPSCallback
-// * \brief ItemCallback to display and refresh FPS as a renderable text.
-// */
-//
 //class FPSCallback : public Callback {
 //public:
 //  FPSCallback(Engine *engine);
