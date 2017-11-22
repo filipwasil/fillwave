@@ -174,7 +174,6 @@
 boxfont setfont
 1 boundaspect scale
 (flw::flf::Model) cw
-(flw::flf::IFocusable) cw
 (flw::flf::Programmable) cw
 (flw::flf::Entity) cw
 (flw::flf::IRenderable) cw
@@ -195,8 +194,7 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (flw::flf::Model) 0.750000 0.000000 box
- (flw::flf::IFocusable) 0.000000 1.000000 box
+ (flw::flf::Model) 1.500000 0.000000 box
  (flw::flf::Programmable) 1.500000 1.000000 box
  (flw::flf::Entity) 1.500000 2.000000 box
  (flw::flf::IRenderable) 0.000000 3.000000 box
@@ -210,11 +208,7 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- relations -----
 
 solid
-0 0.750000 0.000000 out
-solid
-0.000000 1.500000 1.000000 conn
-solid
-1 0.000000 1.000000 in
+0 1.500000 0.000000 out
 solid
 1 1.500000 1.000000 in
 solid

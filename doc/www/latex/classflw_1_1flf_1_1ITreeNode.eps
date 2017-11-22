@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 145.502646
+%%BoundingBox: 0 0 500 220.000000
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,13 +19,13 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 3.436364 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 2.272727 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
 /yspacing 0 def
 /rows 11 def
-/cols 6 def
+/cols 5 def
 /scalefactor 0 def
 /boxfont /Times-Roman findfont fontheight scalefont def
 
@@ -174,12 +174,11 @@
 boxfont setfont
 1 boundaspect scale
 (flw::flf::ITreeNode) cw
-(flw::flf::IHUDNode) cw
+(flw::flf::Sprite) cw
 (flw::flf::TreePtr< Entity >) cw
 (flw::flf::Button) cw
-(flw::flf::ProgressBar) cw
 (flw::flf::Text) cw
-(flw::flf::TreePtr< IHUDNode, IHUDNode >) cw
+(flw::flf::TreePtr< Sprite, Sprite >) cw
 (flw::flf::Entity) cw
 (flw::flf::Scene) cw
 (flw::flf::HUD) cw
@@ -202,47 +201,46 @@ boundx scalefactor div boundy scalefactor div scale
 
 % ----- classes -----
 
- (flw::flf::ITreeNode) 3.000000 10.000000 box
- (flw::flf::IHUDNode) 1.500000 9.000000 box
- (flw::flf::TreePtr< Entity >) 4.500000 9.000000 box
+ (flw::flf::ITreeNode) 2.250000 10.000000 box
+ (flw::flf::Sprite) 1.000000 9.000000 box
+ (flw::flf::TreePtr< Entity >) 3.500000 9.000000 box
  (flw::flf::Button) 0.000000 8.000000 box
- (flw::flf::ProgressBar) 1.000000 8.000000 box
- (flw::flf::Text) 2.000000 8.000000 box
- (flw::flf::TreePtr< IHUDNode, IHUDNode >) 3.000000 8.000000 box
- (flw::flf::Entity) 4.000000 8.000000 box
- (flw::flf::Scene) 5.000000 8.000000 box
- (flw::flf::HUD) 3.000000 7.000000 box
- (flw::flf::Hinge) 5.000000 7.000000 box
-5.000000 7.000000 mark
- (flw::flf::IEmiterPoint) 5.000000 6.000000 box
-5.000000 6.000000 mark
- (flw::flf::Impostor) 5.000000 5.000000 box
-5.000000 5.000000 mark
- (flw::flf::Mesh) 5.000000 4.000000 box
- (flw::flf::Programmable) 5.000000 3.000000 box
-5.000000 3.000000 mark
- (flw::flf::Skybox) 5.000000 2.000000 box
- (flw::flf::Terrain) 5.000000 1.000000 box
- (flw::flf::VoxelChunk) 5.000000 0.000000 box
+ (flw::flf::Text) 1.000000 8.000000 box
+ (flw::flf::TreePtr< Sprite, Sprite >) 2.000000 8.000000 box
+ (flw::flf::Entity) 3.000000 8.000000 box
+ (flw::flf::Scene) 4.000000 8.000000 box
+ (flw::flf::HUD) 2.000000 7.000000 box
+ (flw::flf::Hinge) 4.000000 7.000000 box
+4.000000 7.000000 mark
+ (flw::flf::IEmiterPoint) 4.000000 6.000000 box
+4.000000 6.000000 mark
+ (flw::flf::Impostor) 4.000000 5.000000 box
+4.000000 5.000000 mark
+ (flw::flf::Mesh) 4.000000 4.000000 box
+ (flw::flf::Programmable) 4.000000 3.000000 box
+4.000000 3.000000 mark
+ (flw::flf::Skybox) 4.000000 2.000000 box
+ (flw::flf::Terrain) 4.000000 1.000000 box
+ (flw::flf::VoxelChunk) 4.000000 0.000000 box
 
 % ----- relations -----
 
 solid
-1 3.000000 9.250000 out
+1 2.250000 9.250000 out
 solid
-1.500000 4.500000 10.000000 conn
+1.000000 3.500000 10.000000 conn
 solid
-0 1.500000 9.750000 in
+0 1.000000 9.750000 in
 solid
-1 1.500000 8.250000 out
+1 1.000000 8.250000 out
 solid
-0.000000 3.000000 9.000000 conn
+0.000000 2.000000 9.000000 conn
 solid
-0 4.500000 9.750000 in
+0 3.500000 9.750000 in
 solid
-1 4.500000 8.250000 out
+1 3.500000 8.250000 out
 solid
-4.000000 5.000000 9.000000 conn
+3.000000 4.000000 9.000000 conn
 solid
 0 0.000000 8.750000 in
 solid
@@ -250,32 +248,30 @@ solid
 solid
 0 2.000000 8.750000 in
 solid
+1 2.000000 7.250000 out
+solid
 0 3.000000 8.750000 in
 solid
 1 3.000000 7.250000 out
 solid
 0 4.000000 8.750000 in
 solid
-1 4.000000 7.250000 out
+0 2.000000 7.750000 in
 solid
-0 5.000000 8.750000 in
+0 3.000000 7.500000 hedge
 solid
-0 3.000000 7.750000 in
+0 3.000000 6.500000 hedge
 solid
-0 4.000000 7.500000 hedge
+0 3.000000 5.500000 hedge
 solid
-0 4.000000 6.500000 hedge
+0 3.000000 4.500000 hedge
 solid
-0 4.000000 5.500000 hedge
+0 3.000000 3.500000 hedge
 solid
-0 4.000000 4.500000 hedge
+0 3.000000 2.500000 hedge
 solid
-0 4.000000 3.500000 hedge
+0 3.000000 1.500000 hedge
 solid
-0 4.000000 2.500000 hedge
+0 3.000000 0.500000 hedge
 solid
-0 4.000000 1.500000 hedge
-solid
-0 4.000000 0.500000 hedge
-solid
-4.000000 8.000000 0.500000 vedge
+3.000000 8.000000 0.500000 vedge

@@ -5,7 +5,7 @@
 %%For: 
 %Magnification: 1.00
 %%Orientation: Portrait
-%%BoundingBox: 0 0 500 317.460317
+%%BoundingBox: 0 0 500 400.000000
 %%Pages: 0
 %%BeginSetup
 %%EndSetup
@@ -19,7 +19,7 @@
 /marginwidth 10 def
 /distx 20 def
 /disty 40 def
-/boundaspect 1.575000 def  % aspect ratio of the BoundingBox (width/height)
+/boundaspect 1.250000 def  % aspect ratio of the BoundingBox (width/height)
 /boundx 500 def
 /boundy boundx boundaspect div def
 /xspacing 0 def
@@ -174,8 +174,8 @@
 boxfont setfont
 1 boundaspect scale
 (flw::flf::HUD) cw
-(flw::flf::TreePtr< IHUDNode, IHUDNode >) cw
-(flw::flf::IHUDNode) cw
+(flw::flf::TreePtr< Sprite, Sprite >) cw
+(flw::flf::Sprite) cw
 (flw::flf::ITreeNode) cw
 /boxwidth boxwidth marginwidth 2 mul add def
 /xspacing boxwidth distx add def
@@ -189,8 +189,8 @@ boundx scalefactor div boundy scalefactor div scale
 % ----- classes -----
 
  (flw::flf::HUD) 0.000000 0.000000 box
- (flw::flf::TreePtr< IHUDNode, IHUDNode >) 0.000000 1.000000 box
- (flw::flf::IHUDNode) 0.000000 2.000000 box
+ (flw::flf::TreePtr< Sprite, Sprite >) 0.000000 1.000000 box
+ (flw::flf::Sprite) 0.000000 2.000000 box
  (flw::flf::ITreeNode) 0.000000 3.000000 box
 
 % ----- relations -----

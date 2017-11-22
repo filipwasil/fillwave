@@ -12,83 +12,74 @@ Single G\+L\+SL program object.
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Program} (const std\+::vector$<$ \hyperlink{classflw_1_1flc_1_1Shader}{flc\+::\+Shader} $\ast$ $>$ \&shaders, G\+Lboolean skip\+Linking=G\+L\+\_\+\+F\+A\+L\+SE)\hypertarget{classflw_1_1flc_1_1Program_a56a35b8e7b6d81f591f67dfe24a4d660}{}\label{classflw_1_1flc_1_1Program_a56a35b8e7b6d81f591f67dfe24a4d660}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_ac775aa5155c4a4450f721f7aeb0d127e}\label{classflw_1_1flc_1_1Program_ac775aa5155c4a4450f721f7aeb0d127e}} 
+{\bfseries Program} (const std\+::vector$<$ \hyperlink{classflw_1_1flc_1_1Shader}{flc\+::\+Shader} $\ast$$>$ \&shaders, G\+Lboolean skip\+Linking=G\+L\+\_\+\+F\+A\+L\+SE)
 \item 
-void {\bfseries link} ()\hypertarget{classflw_1_1flc_1_1Program_a520ce30c0932e26ea8478ca0e328e2c3}{}\label{classflw_1_1flc_1_1Program_a520ce30c0932e26ea8478ca0e328e2c3}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a520ce30c0932e26ea8478ca0e328e2c3}\label{classflw_1_1flc_1_1Program_a520ce30c0932e26ea8478ca0e328e2c3}} 
+void {\bfseries link} ()
 \item 
-void {\bfseries attach} (\hyperlink{classflw_1_1flc_1_1Shader}{flc\+::\+Shader} $\ast$shader)\hypertarget{classflw_1_1flc_1_1Program_a9ad2cbaff11970a08cfce8828e4dee10}{}\label{classflw_1_1flc_1_1Program_a9ad2cbaff11970a08cfce8828e4dee10}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a1c5eb7e8c479acdf183863301c5981b7}\label{classflw_1_1flc_1_1Program_a1c5eb7e8c479acdf183863301c5981b7}} 
+void {\bfseries use} () const
 \item 
-void {\bfseries detach} (\hyperlink{classflw_1_1flc_1_1Shader}{flc\+::\+Shader} $\ast$shader)\hypertarget{classflw_1_1flc_1_1Program_a57618797187b09f2fbfff68a1d3643b4}{}\label{classflw_1_1flc_1_1Program_a57618797187b09f2fbfff68a1d3643b4}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a68484c02ee898b259b17734ae21a334a}\label{classflw_1_1flc_1_1Program_a68484c02ee898b259b17734ae21a334a}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, G\+Lint data)
 \item 
-void {\bfseries use} () const \hypertarget{classflw_1_1flc_1_1Program_a4c5f95bace46189eeb5a15299a63bfb5}{}\label{classflw_1_1flc_1_1Program_a4c5f95bace46189eeb5a15299a63bfb5}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a221826b414a0d6b241f1b9f6a27aa29b}\label{classflw_1_1flc_1_1Program_a221826b414a0d6b241f1b9f6a27aa29b}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, G\+Lint $\ast$data, G\+Lint count)
 \item 
-G\+Lboolean {\bfseries check\+Uniform} (const std\+::string \&name)\hypertarget{classflw_1_1flc_1_1Program_ac98053fec99f6bc361f515664748bcf7}{}\label{classflw_1_1flc_1_1Program_ac98053fec99f6bc361f515664748bcf7}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a92eed61b077f468622fad0bb1a7d0237}\label{classflw_1_1flc_1_1Program_a92eed61b077f468622fad0bb1a7d0237}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, G\+Lfloat data)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, G\+Lint data)\hypertarget{classflw_1_1flc_1_1Program_a9ca0ca0e8c29955c8fe1a556bc36fce1}{}\label{classflw_1_1flc_1_1Program_a9ca0ca0e8c29955c8fe1a556bc36fce1}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_ab1bd6f0fdf5b2403b8454133ce6c3638}\label{classflw_1_1flc_1_1Program_ab1bd6f0fdf5b2403b8454133ce6c3638}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, G\+Lfloat $\ast$data, G\+Lint count)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, G\+Lint $\ast$data, G\+Lint count)\hypertarget{classflw_1_1flc_1_1Program_a3b2605cb8296214b02710d6df436ddf4}{}\label{classflw_1_1flc_1_1Program_a3b2605cb8296214b02710d6df436ddf4}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a7e9b29036710549bf5134d700d9cea52}\label{classflw_1_1flc_1_1Program_a7e9b29036710549bf5134d700d9cea52}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, glm\+::mat3 data)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, G\+Lfloat data)\hypertarget{classflw_1_1flc_1_1Program_aaa662a66594f353b769f664cd61809b9}{}\label{classflw_1_1flc_1_1Program_aaa662a66594f353b769f664cd61809b9}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_abcb7bb900a9b8d7be7610fa56e4d9aac}\label{classflw_1_1flc_1_1Program_abcb7bb900a9b8d7be7610fa56e4d9aac}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, glm\+::mat4 data)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, G\+Lfloat $\ast$data, G\+Lint count)\hypertarget{classflw_1_1flc_1_1Program_ab4b532c34a56e55fb65b43ffd8aad629}{}\label{classflw_1_1flc_1_1Program_ab4b532c34a56e55fb65b43ffd8aad629}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a15b41bceefb2ef7114a17bc792d115fd}\label{classflw_1_1flc_1_1Program_a15b41bceefb2ef7114a17bc792d115fd}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, glm\+::mat4 $\ast$data, G\+Luint size)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, glm\+::mat3 data)\hypertarget{classflw_1_1flc_1_1Program_ab5cea8fdc3dccf65ba239af5d77e6973}{}\label{classflw_1_1flc_1_1Program_ab5cea8fdc3dccf65ba239af5d77e6973}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a31ba13c5384d234d99bf2917124560e2}\label{classflw_1_1flc_1_1Program_a31ba13c5384d234d99bf2917124560e2}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, glm\+::vec2 data)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, glm\+::mat4 data)\hypertarget{classflw_1_1flc_1_1Program_a6ef7793f8007f68a69294f9742e715b8}{}\label{classflw_1_1flc_1_1Program_a6ef7793f8007f68a69294f9742e715b8}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_adb701b32a31d78975f64c23cc0fa766e}\label{classflw_1_1flc_1_1Program_adb701b32a31d78975f64c23cc0fa766e}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, glm\+::vec3 data)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, glm\+::mat4 $\ast$data, G\+Luint size)\hypertarget{classflw_1_1flc_1_1Program_a54050b6a3c1fb61c123600ab02a28e66}{}\label{classflw_1_1flc_1_1Program_a54050b6a3c1fb61c123600ab02a28e66}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_aa8e8db77972082825b35e29e788d7874}\label{classflw_1_1flc_1_1Program_aa8e8db77972082825b35e29e788d7874}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, glm\+::vec3 $\ast$data, G\+Luint size)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, glm\+::vec2 data)\hypertarget{classflw_1_1flc_1_1Program_a82310ff1a7e7eb6950a053eee51d4335}{}\label{classflw_1_1flc_1_1Program_a82310ff1a7e7eb6950a053eee51d4335}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a967d5a361c511cccb2b9f38e83fe6137}\label{classflw_1_1flc_1_1Program_a967d5a361c511cccb2b9f38e83fe6137}} 
+void {\bfseries uniform\+Push} (const std\+::string \&name, glm\+::vec4 data)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, glm\+::vec3 data)\hypertarget{classflw_1_1flc_1_1Program_a7e659f2f9d6dc6f07f4c117543ebaced}{}\label{classflw_1_1flc_1_1Program_a7e659f2f9d6dc6f07f4c117543ebaced}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a48bb32e2ba3491037073a997aff93b4a}\label{classflw_1_1flc_1_1Program_a48bb32e2ba3491037073a997aff93b4a}} 
+G\+Lint {\bfseries get\+Uniform\+Location} (const std\+::string \&name)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, glm\+::vec3 $\ast$data, G\+Luint size)\hypertarget{classflw_1_1flc_1_1Program_ab52f0623dd1d3a973eb0862fdf06f48c}{}\label{classflw_1_1flc_1_1Program_ab52f0623dd1d3a973eb0862fdf06f48c}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_add45fb923c2c4b4cd87609eafd788e20}\label{classflw_1_1flc_1_1Program_add45fb923c2c4b4cd87609eafd788e20}} 
+void {\bfseries get\+Uniform\+Block} (const std\+::string \&name, G\+Luint binding\+Point)
 \item 
-void {\bfseries uniform\+Push} (std\+::string name, glm\+::vec4 data)\hypertarget{classflw_1_1flc_1_1Program_a1c21744e8d0787ffb59677f9e13d21a0}{}\label{classflw_1_1flc_1_1Program_a1c21744e8d0787ffb59677f9e13d21a0}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a56bf8f9f6d28ac2c923d9a62c7528c68}\label{classflw_1_1flc_1_1Program_a56bf8f9f6d28ac2c923d9a62c7528c68}} 
+G\+Luint {\bfseries get\+Handle} () const
 \item 
-G\+Lint {\bfseries get\+Uniform\+Location} (std\+::string name)\hypertarget{classflw_1_1flc_1_1Program_a10e9c36fb125695989c0670174d6f985}{}\label{classflw_1_1flc_1_1Program_a10e9c36fb125695989c0670174d6f985}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a394e1f669e3dd5ef487d21ecd95911ed}\label{classflw_1_1flc_1_1Program_a394e1f669e3dd5ef487d21ecd95911ed}} 
+void {\bfseries uniform\+Block\+Push} (const std\+::string \&name, G\+Lfloat $\ast$data)
 \item 
-void {\bfseries get\+Uniform\+Block} (std\+::string name, G\+Luint binding\+Point)\hypertarget{classflw_1_1flc_1_1Program_aa2ce8fe7bd5d4f0dbec3cb72c64e08fe}{}\label{classflw_1_1flc_1_1Program_aa2ce8fe7bd5d4f0dbec3cb72c64e08fe}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a76b6dc68fb09c934ebefd82ef645ad35}\label{classflw_1_1flc_1_1Program_a76b6dc68fb09c934ebefd82ef645ad35}} 
+void {\bfseries reload} ()
 \item 
-G\+Luint {\bfseries get\+Handle} () const \hypertarget{classflw_1_1flc_1_1Program_a8860dc2402cef6b5a79f1da7826630f1}{}\label{classflw_1_1flc_1_1Program_a8860dc2402cef6b5a79f1da7826630f1}
-
-\item 
-void {\bfseries uniform\+Block\+Push} (std\+::string name, G\+Lfloat $\ast$data)\hypertarget{classflw_1_1flc_1_1Program_a73e1d72031cd7b2a1cf7b5d1595cd921}{}\label{classflw_1_1flc_1_1Program_a73e1d72031cd7b2a1cf7b5d1595cd921}
-
-\item 
-void {\bfseries reload} ()\hypertarget{classflw_1_1flc_1_1Program_a76b6dc68fb09c934ebefd82ef645ad35}{}\label{classflw_1_1flc_1_1Program_a76b6dc68fb09c934ebefd82ef645ad35}
-
-\item 
-void {\bfseries log} () const \hypertarget{classflw_1_1flc_1_1Program_a7f6a25c827a057c5efe419d116533f7b}{}\label{classflw_1_1flc_1_1Program_a7f6a25c827a057c5efe419d116533f7b}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a39e2fe465a06f119b07fdc0b5da59187}\label{classflw_1_1flc_1_1Program_a39e2fe465a06f119b07fdc0b5da59187}} 
+void {\bfseries log} (const std\+::string \&program\+Name) const
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static void {\bfseries use\+Program} (G\+Luint handle)\hypertarget{classflw_1_1flc_1_1Program_a866a579bba8c15face6ce9051e1aa88b}{}\label{classflw_1_1flc_1_1Program_a866a579bba8c15face6ce9051e1aa88b}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a866a579bba8c15face6ce9051e1aa88b}\label{classflw_1_1flc_1_1Program_a866a579bba8c15face6ce9051e1aa88b}} 
+static void {\bfseries use\+Program} (G\+Luint handle)
 \item 
-static void {\bfseries disuse\+Programs} ()\hypertarget{classflw_1_1flc_1_1Program_a949005d6544d46d10cd56b6ef8955c81}{}\label{classflw_1_1flc_1_1Program_a949005d6544d46d10cd56b6ef8955c81}
-
+\mbox{\Hypertarget{classflw_1_1flc_1_1Program_a949005d6544d46d10cd56b6ef8955c81}\label{classflw_1_1flc_1_1Program_a949005d6544d46d10cd56b6ef8955c81}} 
+static void {\bfseries disuse\+Programs} ()
 \end{DoxyCompactItemize}
 
 
@@ -97,4 +88,4 @@ Single G\+L\+SL program object.
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-/home/filip/\+Projects/fillwave/inc/fillwave/core/pipeline/Program.\+h\end{DoxyCompactItemize}
+/home/filip/projects/fillwave/inc/fillwave/core/pipeline/Program.\+h\end{DoxyCompactItemize}

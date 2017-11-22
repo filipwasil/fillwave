@@ -7,6 +7,5 @@ var searchData=
   ['lightpoint',['LightPoint',['../classflw_1_1flf_1_1LightPoint.html',1,'flw::flf']]],
   ['lightspot',['LightSpot',['../classflw_1_1flf_1_1LightSpot.html',1,'flw::flf']]],
   ['lightsystem',['LightSystem',['../classflw_1_1flf_1_1LightSystem.html',1,'flw::flf']]],
-  ['lighuniformdata',['LighUniformData',['../structflw_1_1flf_1_1LighUniformData.html',1,'flw::flf']]],
-  ['loopcallback',['LoopCallback',['../classflw_1_1flf_1_1LoopCallback.html',1,'flw::flf']]]
+  ['lighuniformdata',['LighUniformData',['../structflw_1_1flf_1_1LighUniformData.html',1,'flw::flf']]]
 ];
