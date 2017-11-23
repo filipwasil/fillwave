@@ -28,9 +28,6 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-/* Events */
-#include <fillwave/actions/callbacks/FPSCallback.h>
-
 /* Space */
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
