@@ -49,8 +49,8 @@
 
 \begin{document}
 
-\title{\textbf{Fillwave 7.0.0}
- - new OpenGL 3.3+ (OpenGL ES 3.0+) graphics engine for C++11 }
+\title{\textbf{Fillwave 7.9.0}
+ - new OpenGL 3.3+ (OpenGL ES 3.0+) graphics engine for C++14 }
 \author{Filip Wasil}
 
 \maketitle
@@ -122,15 +122,15 @@ int main(int argc, char* argv[]) {
 \indent \indent During the context initialization stage one must provide Fillwave engine a window (surface to draw on) and use \textbf{insert} functions in your context input handlers.
 
 \begin{lstlisting}
-void insertResizeScreen(GLuint width, GLuint height);
-void insertInput(KeyboardEvent& e);
-void insertInput(MouseButtonEvent& e);
-void insertInput(ScrollEvent  & e);
-void insertInput(CharacterEvent& e);
-void insertInput(CharacterModsEvent& e);
-void insertInput(CursorEnterEvent& e);
-void insertInput(CursorPositionEvent& e);
-void insertInput(TouchEvent& e);
+void onResizeScreen(GLuint width, GLuint height);
+void onInput(KeyboardEvent& e);
+void onInput(MouseButtonEvent& e);
+void onInput(ScrollEvent  & e);
+void onInput(CharacterEvent& e);
+void onInput(CharacterModsEvent& e);
+void onInput(CursorEnterEvent& e);
+void onInput(CursorPositionEvent& e);
+void onInput(TouchEvent& e);
 \end{lstlisting}
 
 \indent \indent Every time when there is an event incoming to you context, (Does not matter if you are using glfw, freegut, QT or other library) and you want Fillwave to handle it you should \textbf{insert} a proper event into the engine using \textbf{insertEvent} function. Above there is an example using GLFW. The \textbf{keyboardCallback} function was previously registered as keyboard callback in GLFW.  
@@ -153,7 +153,7 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
    flw::flf::KeyboardEvent event(data);
    
    /* insert an event */
-   mGraphicsEngine->insertInput(event);
+   mGraphicsEngine->onInput(event);
 }
 \end{lstlisting}
 
@@ -195,8 +195,8 @@ void ContextGLFW1::render() {
 \indent \indent \textbf{puEntity} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them. Fillwave uses \"only one owner\" principle and strongly uses unique pointers from C++14.
 
 \begin{lstlisting}
-auto entity_parent = buildEntity();
-auto entity_child = buildEntity();
+auto entity_parent = pe<Entity();
+auto entity_child = make_unique<Entity>();
 entity_parent->attach(std::move(entity_child));
 entity_parent->attach(make_unique<Entity>());
 \end{lstlisting}
@@ -269,8 +269,8 @@ engine->getCurrentScene()->setCamera(make_unique<CameraOrtographic>
 \begin{lstlisting}
 /* Create loader, and use it to create programs */
 loader::ProgramLoader loader(mEngine);
-auto d = loader.getDefault();
-auto a = loader.getDefaultBones();
+auto d = loader.getProgram(Eprogram::basic);
+auto a = loader.getProgram(Eprogram::basicAnimated);
 \end{lstlisting}
 
 \subsection{Store functions}\label{sec:store functions}
@@ -477,20 +477,6 @@ void setBlendingFunction (GLenum sourcePixel, GLenum destPixel);
 
 \indent \textbf{EmiterPointCPU} emits particles using a round surface source. You can set the radius of this surface (\textbf{emitingSurfaceRadius}), and emiting \textbf{robustness}. \textbf{Robustness = 0} will make the particles flow perpendicular to the emiting surface. Parameter \textbf{dephTest} is critical. Using the depth test is slower but it guarantees that particles will stay visible only when they should be. Giving up the depth test will make them look much nicer and rendered faster, but they will be visible \textbf{always} which can make scene look not natural. AlphaCutOff parameter privides additional feature to discard all pixels with alpha value less than alphaCutOff.
 
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.17]{../../../fillwave-examples/screens/particles.png}
-    \caption{Particles with depth test active}
-    \label{particle_depth_test}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.17]{../../../fillwave-examples/screens/particles_b.png}
-    \caption{Particles without depth test active}
-    \label{particle_no_depth_test}
-\end{figure}
-
 \newpage
 
 \subsection{Skybox}\label{sec:Skybox}
@@ -643,17 +629,15 @@ void Entity::attachHierarchyCallback(Callback* c);
 \indent \indent To register/unregister a callback in Fillwave use following functions:
 
 \begin{lstlisting}
-void attachCallback(puCallback&& c);
-void unattachCallback(Callback* c);
+void Entity::attachHandler(std::function<void(const Event&)>&& e, eEventType t)
+void detachHandlers();
 \end{lstlisting}
-
-\indent \indent Note, that there is no need to \textbf{delete} any objects. This happens inside the callbacks. One should design its callbacks so that it will unregister itself (using pointer to an Engine and calling unattachCallback).
 
 \newpage
 
 \subsection{Easing}\label{sec:Easing}
 
-\indent \indent Timed Callbacks can be used to modify model transformation (scale, rotation and position) in time with particular easing. You can choose one of following easings define by \textbf{EasingFunction}:
+\indent \indent Handlers can be used to modify model transformation (scale, rotation and position) in time with particular easing. You can choose one of following easings define by \textbf{EasingFunction}:
 
 \begin{center}
 
@@ -684,13 +668,13 @@ PhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const std::string& shapePath)
 \indent To change the background color use:
 
 \begin{lstlisting}
-void Engine::configureBackgroundColor (glm::vec3 color);
+void Engine::configBackgroundColor (glm::vec3 color);
 \end{lstlisting}
 
 \indent To apply the time factor to in Fillwave engine use:
 
 \begin{lstlisting}
-void Engine::configureTime(GLfloat timeFactor); /* 1.0f as default */
+void Engine::configTime(GLfloat timeFactor); /* 1.0f as default */
 \end{lstlisting}
 
 \indent To get the current executable directory use:
@@ -699,17 +683,6 @@ void Engine::configureTime(GLfloat timeFactor); /* 1.0f as default */
 std::string Engine::getExecutablePath()
 \end{lstlisting}
 
-\indent To set/reset current "frames per seconds" counter in right left corner use:
-
-\begin{lstlisting}
-void Engine::configFPSCounter(std::string fontName = "",
-                            GLfloat xPosition = -0.95,
-                            GLfloat yPosition = 0.95,
-                            GLfloat size = 100.0);
-\end{lstlisting}
-
-empty or not valid font name will disable the FPS counter.
-
 \indent To set/reset reset file logging use:
 
 \begin{lstlisting}
@@ -717,6 +690,8 @@ void Engine::configFileLogging(std::string fileName = "");
 \end{lstlisting}
 
 empty or not valid file name will disable the file logging.
+
+\newpage
 
 \indent There are few texture generators built-in in Fillwave. To use them just pass one of the patterns as a texture path in \textbf{Model} constructor or \textbf{storeTexture} function:
 \begin{lstlisting}
@@ -752,89 +727,6 @@ void Engine::configureDebugger(EDebuggerState state);
 
 \newpage
 
-\section{Customization}
-
-\subsection{Events}\label{sec:Custom events}
-\begin{lstlisting}
-
-namespace flw {
-namespace actions {
-struct NewEventData {
-   int data;
-   const EEventType type = EEventType::custom0; /* event ID */
-};
-
-class NewEvent: public Event<NewEventData> {
-public:
-   NewEvent();
-   virtual ~NewEvent();
-};
-} /* actions */
-} /* fillwave */
-\end{lstlisting}
-\subsection{Callbacks}\label{sec:Custom callbacks}
-\begin{lstlisting}
-namespace flw {
-namespace actions {
-
-class NewEngineCallback: public EngineCallback {
-private:
-   float mMaximimData;
-   void sayHello() {fLogU("Hello event");};
-public:
-   NewEngineCallback(EEventType eventType, float data);
-   NewEngineCallback(float data);
-
-   virtual ~NewActionCallback();
-   void perform (Engine* engine, EventType* event);
-   };
-
-} /* actions */
-} /* fillwave */
-\end{lstlisting}
-\subsection{Easing}\label{sec:Custom easing}
-\textbf{TimedMoveCallbackCustom.h}
-\begin{lstlisting}
-namespace flw {
-namespace actions {
-
-class TimedMoveCallbackCustom: public flw::flf::TimedMoveCallback {
-public:
-   TimedMoveCallbackCustom(pEntity entity,
-                           glm::vec3 endPosition,
-                           GLfloat lifeTime);
-   virtual ~TimedMoveCallbackCustom();
-   GLfloat easeCustom(GLfloat progress);
-};
-} /* actions */
-} /* fillwave */
-\end{lstlisting}
-\textbf{TimedMoveCallbackCustom.cpp}
-\begin{lstlisting}
-namespace flw {
-namespace actions {
-
-TimedMoveCallbackCustom::TimedMoveCallbackCustom(pEntity entity,
-                                                 glm::vec3 endPosition,
-                                                 GLfloat lifeTime):TimedMoveCallback(entity, endPosition,lifeTime, eEasing::Custom) {
-
-}
-
-TimedMoveCallbackCustom::~TimedMoveCallbackCustom() {
-
-}
-
-GLfloat TimedMoveCallbackCustom::easeCustom(GLfloat progress) {
-   /* You custom easing function goes here. For example: */
-   return QuinticEaseIn(progress)*QuinticEaseIn(progress);
-}
-
-} /* actions */
-} /* fillwave */
-\end{lstlisting}
-%\subsection{Custom buffers}\label{sec:Custom buffers}
-%\lstinputlisting[firstline=33,lastline=70]%{../../../fillwave/inc/fillwave/core/VertexBufferTerrain.h}
-
 \subsection{Renderers}\label{sec:Custom renderers}
 \indent By implementation of custom renderer class, one can simply manage the rendering approach of Fillwave engine. This is the most powerfull feature, because it provides a lot of flexibility. The simplest renderer example RendererFR. The most complex one we have here is RendererDR. 
 
@@ -869,272 +761,7 @@ private:
 
 \end{lstlisting}
 
-\section{Examples}
-
-Basic example You can find below:
-\lstinputlisting[firstline=33,lastline=200]{../../../fillwave-examples/src/example_simple/example_simple.cpp}
-
-Basic example You can find below:
 \newpage
-
-\large
-
-\href{https://github.com/filipwasil/Fillwave-examples}{Main example repository}
-\newline\newline
-\href{https://github.com/filipwasil/fillwave-examples/blob/master/src/example_text/example_text.cpp}{Example: Text} \newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_animation/example_animation.cpp}{Example: Animation}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_callbacks/example_callbacks.cpp}{Example: Timed callbacks with custom easing}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_cursor_picking/PickableModel.cpp}{Example: Picking}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/tree/master/src/example_dynamic_texture}{Example: Dynamic texture}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_effects/example_effects.cpp}{Example: Effects}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_normals_and_specular_map/example_normals_and_specular_map.cpp}{Example: Specular and normal maps}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_skybox/example_skybox.cpp}{Example: Skybox}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_shadow/example_shadow.cpp}{Example: Lights}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_particles/example_particles.cpp}{Example: Particles}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_terrain_quad/example_terrain_quad.cpp}{Example: Quad Terrain}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_terrain_voxel/example_terrain_voxel.cpp}{Example: Voxel terrain}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_impostor/example_impostor.cpp}{Example: Custom shader shape}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_post_processing/example_post_processing.cpp}{Example: Postprocessing}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_ortographic_projection/example_ortographic_projection.cpp}{Example: Ortographic projection}
-\newline
-\href{https://github.com/filipwasil/Fillwave-examples/blob/master/src/example_effects/example_effects.cpp}{Example: Effects}
-\newline\newline
-------------------------------------------------------
-\newline
-\href{https://github.com/filipwasil/fillwave-waveracer}{Waveracer game draft}
-\newline
-------------------------------------------------------
-\newline\newline
-\href{https://github.com/filipwasil/fillwave-android-activity}{Example: Android activity}
-\newline
-\href{https://github.com/filipwasil/fillwave-android-jni-lib}{Example: Android JNI library}
-\newline
-\href{https://github.com/filipwasil/fillwave-android-activity-native}{Example: Android pure native project}
-\newpage
-%\begin{equation}
-%\label{eq:1}
-%\sum_{i=0}^{\infty} a_i x^i
-%\end{equation}
-
-\section{Licenses}\label{sec:Licenses}
-\begin{lstlisting}
-/**********************************************************************************
- * Copyright (c) 2016, Filip Wasil
- * All rights reserved.
- *
- * Fillwave C++14 graphics engine.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * * Redistributions of source code must retain the above copyright notice, this
- *   list of conditions and the following disclaimer.
- *
- * * Redistributions in binary form must reproduce the above copyright notice,
- *   this list of conditions and the following disclaimer in the documentation
- *   and/or other materials provided with the distribution.
- *
- *   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- *   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- *   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- *   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- *   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- *   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- *   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- *   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
- 
- /* OpenGL
-http://www.opengl.org/
-
-* AssImp library
-Open Asset Import Library (assimp)
-
-Copyright (c) 2006-2012, assimp team
-All rights reserved.
-
-Redistribution and use of this software in source and binary forms, 
-with or without modification, are permitted provided that the 
-following conditions are met:
-
-* Redistributions of source code must retain the above
-  copyright notice, this list of conditions and the
-  following disclaimer.
-
-* Redistributions in binary form must reproduce the above
-  copyright notice, this list of conditions and the
-  following disclaimer in the documentation and/or other
-  materials provided with the distribution.
-
-* Neither the name of the assimp team, nor the names of its
-  contributors may be used to endorse or promote products
-  derived from this software without specific prior
-  written permission of the assimp team.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY 
-THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-
-
-******************************************************************************
-
-AN EXCEPTION applies to all files in the ./test/models-nonbsd folder.
-These are 3d models for testing purposes, from various free sources
-on the internet. They are - unless otherwise stated - copyright of
-their respective creators, which may impose additional requirements
-on the use of their work. For any of these models, see 
-<model-name>.source.txt for more legal information. Contact us if you
-are a copyright holder and believe that we credited you inproperly or 
-if you don't want your files to appear in the repository.
-
-
-******************************************************************************
-
-Poly2Tri Copyright (c) 2009-2010, Poly2Tri Contributors
-http://code.google.com/p/poly2tri/
-
-All rights reserved.
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
-
-* Redistributions of source code must retain the above copyright notice,
-  this list of conditions and the following disclaimer.
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
-* Neither the name of Poly2Tri nor the names of its contributors may be
-  used to endorse or promote products derived from this software without specific
-  prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-* FreeType 2 library (FTL licence)
-http://www.freetype.org/
-
-  This  license  grants  a  worldwide, royalty-free,  perpetual  and
-  irrevocable right  and license to use,  execute, perform, compile,
-  display,  copy,   create  derivative  works   of,  distribute  and
-  sublicense the  FreeType Project (in  both source and  object code
-  forms)  and  derivative works  thereof  for  any  purpose; and  to
-  authorize others  to exercise  some or all  of the  rights granted
-  herein, subject to the following conditions:
-
-    o Redistribution of  source code  must retain this  license file
-      (`FTL.TXT') unaltered; any  additions, deletions or changes to
-      the original  files must be clearly  indicated in accompanying
-      documentation.   The  copyright   notices  of  the  unaltered,
-      original  files must  be  preserved in  all  copies of  source
-      files.
-
-    o Redistribution in binary form must provide a  disclaimer  that
-      states  that  the software is based in part of the work of the
-      FreeType Team,  in  the  distribution  documentation.  We also
-      encourage you to put an URL to the FreeType web page  in  your
-      documentation, though this isn't mandatory.
-
-  These conditions  apply to any  software derived from or  based on
-  the FreeType Project,  not just the unmodified files.   If you use
-  our work, you  must acknowledge us.  However, no  fee need be paid
-  to us.
-
-* GLEW library
-http://glew.sourceforge.net/
-
-GLEW is originally derived from the EXTGL project by Lev Povalahev. The source
-code is licensed under the Modified BSD License, the Mesa 3-D License
-(MIT License), and the Khronos License (MIT License). The automatic code
-generation scripts are released under the GNU GPL. 
-
-* Lanyon
-Released under MIT License
-Copyright (c) 2014 Mark Otto.
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the "Software"),
-to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Software, and to permit persons to whom
-the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice
-shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-* fontGenerator
-/******************************************************************************\
-| OpenGL 4 Example Code.                                                       |
-| Accompanies written series "Anton's OpenGL 4 Tutorials"                      |
-| Email: anton at antongerdelan dot net                                        |
-| First version 5 Feb 2014                                                     |
-| Copyright Dr Anton Gerdelan, Trinity College Dublin, Ireland.                |
-| See individual libraries and assets for respective legal notices             |
-
-* Sean Barrett's public domain stb_image and stb_image_write libraries
-http://nothings.org/
-
-/* stbiw-0.92 - public domain - http://nothings.org/stb/stb_image_write.h
-   writes out PNG/BMP/TGA images to C stdio - Sean Barrett 2010
-                            no warranty implied; use at your own risk
-
-
-Before including,
-
-    #define STB_IMAGE_WRITE_IMPLEMENTATION
-
-in the file that you want to have the implementation.
-
-
-ABOUT:
-
-   This header file is a library for writing images to C stdio. It could be
-   adapted to write to memory or a general streaming interface; let me know.
-
-   The PNG output is not optimal; it is 20-50% larger than the file
-   written by a decent optimizing implementation. This library is designed
-   for source code compactness and simplicitly, not optimal image file size
-   or run-time performance.
-
-*/
-\end{lstlisting}
 
 \bibliographystyle{unsrt}
 \bibliography{my_references}
