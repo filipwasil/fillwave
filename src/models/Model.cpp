@@ -67,7 +67,7 @@ Model::Model(Engine* engine,
   std::vector<flc::VertexBasic> vertices = shape.getVertices();
   std::vector<GLuint> indices = shape.getIndices();
 
-  flc::VertexArray *vao = new flc::VertexArray();
+  flc::VertexArray* vao = new flc::VertexArray();
   attach(std::make_unique<Mesh>(engine,
                                 material,
                                 diffuseMap,
@@ -147,22 +147,10 @@ Model::Model(Engine* engine,
     , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  const aiScene *scene = engine->getModelFromFile(shapePath);
-
-  if (scene) {
-    initAnimations(scene);
-    initShadowing(engine);
-    initUniformsCache();
-    loadNodes(scene->mRootNode
-      , scene
-      , this
-      , mEngine->storeTexture(diffuseMapPath.c_str())
-      , mEngine->storeTexture(normalMapPath.c_str())
-      , mEngine->storeTexture(specularMapPath.c_str()));
-
-  } else {
-    fLogF("Model: %s could not be read", shapePath.c_str());
-  }
+  reloadModel(shapePath
+    , mEngine->storeTexture(diffuseMapPath.c_str())
+    , mEngine->storeTexture(normalMapPath.c_str())
+    , mEngine->storeTexture(specularMapPath.c_str()));
 #else
   std::vector<tinyobj::shape_t> shapes;
   std::vector<tinyobj::material_t> materials;
@@ -205,15 +193,11 @@ Model::Model(Engine* engine,
     , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  const aiScene* scene = engine->getModelFromFile(shapePath);
-  if (scene) {
-    initAnimations(scene);
-    initShadowing(engine);
-    initUniformsCache();
-    loadNodes(scene->mRootNode, scene, this, diffuseMap, normalMap, specularMap, material);
-  } else {
-    fLogF("Model: %s could not be read", shapePath.c_str());
-  }
+  reloadModel(shapePath
+    , diffuseMap
+    , normalMap
+    , specularMap
+    , material);
 #else
   std::vector<tinyobj::shape_t> shapes;
   std::vector<tinyobj::material_t> materials;
@@ -260,14 +244,19 @@ void Model::reloadModel(const std::string& path) {
   }
 }
 
-void Model::reloadModel(const std::string& path, flc::Texture2D* diff, flc::Texture2D* norm, flc::Texture2D* specular) {
+void Model::reloadModel(
+  const std::string& path
+  , flc::Texture2D* diff
+  , flc::Texture2D* norm
+  , flc::Texture2D* specular
+  , const Material& material) {
   unloadNodes();
   const aiScene* scene = mEngine->getModelFromFile(path);
   if (scene) {
     initAnimations(scene);
     initShadowing(mEngine);
     initUniformsCache();
-    loadNodes(scene->mRootNode, scene, this, diff, norm, specular);
+    loadNodes(scene->mRootNode, scene, this, diff, norm, specular, material);
   } else {
     fLogF("Model: %s could not be read", shapePath.c_str());
   }

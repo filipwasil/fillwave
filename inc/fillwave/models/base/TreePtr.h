@@ -61,7 +61,7 @@ public:
 
   TreePtr(TreePtr &&obj) = default;
 
-  void attach(std::unique_ptr<T> &&node) {
+  void attach(std::unique_ptr<T>&& node) {
     if (node.get() == this) {
       /* User just tried to attach entity to itself */
       abort();

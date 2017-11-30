@@ -79,7 +79,12 @@ public:
 
   void reloadModel(const std::string& shapePath);
 
-  void reloadModel(const std::string& path, flc::Texture2D* diff, flc::Texture2D* norm, flc::Texture2D* specular);
+  void reloadModel(
+    const std::string& path
+    , flc::Texture2D* diff
+    , flc::Texture2D* norm
+    , flc::Texture2D* specular
+    , const Material& material = Material());
 
   void draw(ICamera &camera) override;
 
