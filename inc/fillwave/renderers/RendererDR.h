@@ -112,7 +112,7 @@ private:
   puTexture2DRenderable mAOGeometryBuffer;
   puTexture2DRenderable mAOColorBuffer;
 
-  puMesh mDeferredPointLight;
+  pu<Mesh> mDeferredPointLight;
 
   GLint mULCDRDepthlesDiffuseTexel;
   GLint mULCDRDepthlessPositionTexel;

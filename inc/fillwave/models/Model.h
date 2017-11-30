@@ -46,29 +46,29 @@ class TimedBoneUpdateCallback;
 class Model : public Programmable {
 public:
 
-  Model(Engine *engine,
-      flc::Program *program,
-      flf::Shape<flc::VertexBasic> &shape,
-      flc::Texture2D *diffuseMap,
-      flc::Texture2D *normalMap,
-      flc::Texture2D *specularMap,
+  Model(Engine* engine,
+      flc::Program* program,
+      flf::Shape<flc::VertexBasic>& shape,
+      flc::Texture2D* diffuseMap,
+      flc::Texture2D* normalMap,
+      flc::Texture2D* specularMap,
       const Material &material);
 
-  Model(Engine *engine, flc::Program *program, const std::string &shapePath);
+  Model(Engine *engine, flc::Program* program, const std::string& shapePath);
 
   Model(Engine *engine,
-      flc::Program *program,
-      const std::string &shapePath,
-      const std::string &diffuseMapPath,
-      const std::string &normalMapPath = "",
-      const std::string &specularMapPath = "");
+      flc::Program* program,
+      const std::string& shapePath,
+      const std::string& diffuseMapPath,
+      const std::string& normalMapPath = "",
+      const std::string& specularMapPath = "");
 
   Model(Engine *engine,
-      flc::Program *program,
-      const std::string &shapePath,
-      flc::Texture2D *diffuseMap,
-      flc::Texture2D *normalMap = nullptr,
-      flc::Texture2D *specularMap = nullptr,
+      flc::Program* program,
+      const std::string& shapePath,
+      flc::Texture2D* diffuseMap,
+      flc::Texture2D* normalMap = nullptr,
+      flc::Texture2D* specularMap = nullptr,
       const Material &material = Material());
 
   ~Model() override;
@@ -77,7 +77,9 @@ public:
 
   Model(Model &&obj) = default;
 
-  void reload();
+  void reloadModel(const std::string& shapePath);
+
+  void reloadModel(const std::string& path, flc::Texture2D* diff, flc::Texture2D* norm, flc::Texture2D* specular);
 
   void draw(ICamera &camera) override;
 
@@ -103,6 +105,7 @@ public:
   void log() const override;
 
 protected:
+  Engine* mEngine;
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   std::unique_ptr<Animator> mAnimator;
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
@@ -128,32 +131,25 @@ private:
 
   void initAnimations(const aiScene *scene);
 
+  void unloadNodes();
+
   void loadNodeTransformations(aiNode *node, Entity *entity);
 
-  void loadNodes(aiNode *node, const aiScene *scene, Engine *engine, Entity *entity);
+  void loadNodes(aiNode *node, const aiScene *scene, Entity *entity);
 
   void loadNodes(aiNode *node,
       const aiScene *scene,
-      Engine *engine,
       Entity *entity,
-      const std::string &diffuseMapPath,
-      const std::string &normalMapPath,
-      const std::string &specularMapPath);
+      flc::Texture2D* diffuse,
+      flc::Texture2D* normal,
+      flc::Texture2D* specular,
+      const Material &material = Material());
 
-  void loadNodes(aiNode *node,
-      const aiScene *scene,
-      Engine *engine,
-      Entity *entity,
-      flc::Texture2D *diffuseMap,
-      flc::Texture2D *normalMap,
-      flc::Texture2D *specularMap,
-      const Material &material);
-
-  puMesh loadMesh(const aiMesh *shape,
+  pu<Mesh> loadMesh(const aiMesh *shape,
       const Material &material,
-      flc::Texture2D *diffuseMap,
-      flc::Texture2D *normalMap,
-      flc::Texture2D *specularMap,
+      flc::Texture2D* diffuse,
+      flc::Texture2D* normal,
+      flc::Texture2D* specular,
       Engine *engine);
 
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */

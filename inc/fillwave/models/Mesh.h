@@ -56,23 +56,23 @@ class Mesh : public Entity, public IReloadable {
 public:
   Mesh(Engine *engine,
       const Material &material,
-      flc::Texture2D *diffuseMap,
-      flc::Texture2D *normalMap,
-      flc::Texture2D *specularMap,
-      flc::Program *program,
-      flc::Program *ProgramShadow,
-      flc::Program *programShadowColor,
-      flc::Program *programOcclusion,
-      flc::Program *programAmbientOcclusionGeometry,
-      flc::Program *programAmbientOcclusionColor,
+      flc::Texture2D* diffuseMap,
+      flc::Texture2D* normalMap,
+      flc::Texture2D* specularMap,
+      flc::Program* program,
+      flc::Program* ProgramShadow,
+      flc::Program* programShadowColor,
+      flc::Program* programOcclusion,
+      flc::Program* programAmbientOcclusionGeometry,
+      flc::Program* programAmbientOcclusionColor,
       LightSystem &lights,
-      flc::VertexBufferBasic *vbo = nullptr,
-      flc::IndexBuffer *ibo = nullptr,
+      flc::VertexBufferBasic* vbo = nullptr,
+      flc::IndexBuffer* ibo = nullptr,
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-      Animator *animator = nullptr,
+      Animator* animator = nullptr,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
       GLenum renderMode = GL_TRIANGLES,
-      flc::VertexArray *vao = nullptr);
+      flc::VertexArray* vao = nullptr);
 
   virtual ~Mesh() override;
 
@@ -106,7 +106,7 @@ public:
 
   virtual void onDraw();
 
-protected:
+ protected:
   Material mMaterial;
   flc::Texture2D* mDiffuseMap;
   flc::Texture2D* mNormalMap;
@@ -166,5 +166,4 @@ private:
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::Mesh> puMesh;
 } /* flw */

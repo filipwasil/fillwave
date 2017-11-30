@@ -48,14 +48,15 @@ FLOGINIT("Model", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-Model::Model(Engine *engine,
-    flc::Program *program,
+Model::Model(Engine* engine,
+    flc::Program* program,
     Shape<flc::VertexBasic> &shape,
-    flc::Texture2D *diffuseMap,
-    flc::Texture2D *normalMap,
-    flc::Texture2D *specularMap,
-    const Material &material)
+    flc::Texture2D* diffuseMap,
+    flc::Texture2D* normalMap,
+    flc::Texture2D* specularMap,
+    const Material& material)
     : Programmable(program)
+    , mEngine(engine)
     , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
     , mLights(engine->getLightSystem()) {
 
@@ -88,22 +89,14 @@ Model::Model(Engine *engine,
                                 vao));
 }
 
-Model::Model(Engine *engine, flc::Program *program, const std::string &shapePath)
+Model::Model(Engine* engine, flc::Program* program, const std::string& shapePath)
     : Programmable(program)
+    , mEngine(engine)
     , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
     , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  const aiScene *scene = engine->getModelFromFile(shapePath);
-
-  if (scene) {
-    initAnimations(scene);
-    initShadowing(engine);
-    initUniformsCache();
-    loadNodes(scene->mRootNode, scene, engine, this);
-  } else {
-    fLogF("Model: %s could not be read", shapePath.c_str());
-  }
+  reloadModel(shapePath);
 #else
   std::vector<tinyobj::shape_t> shapes;
   std::vector<tinyobj::material_t> materials;
@@ -142,13 +135,14 @@ Model::Model(Engine *engine, flc::Program *program, const std::string &shapePath
 #endif
 }
 
-Model::Model(Engine *engine,
-    flc::Program *program,
-    const std::string &shapePath,
-    const std::string &diffuseMapPath,
-    const std::string &normalMapPath,
-    const std::string &specularMapPath)
+Model::Model(Engine* engine,
+    flc::Program* program,
+    const std::string& shapePath,
+    const std::string& diffuseMapPath,
+    const std::string& normalMapPath,
+    const std::string& specularMapPath)
     : Programmable(program)
+    , mEngine(engine)
     , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
     , mLights(engine->getLightSystem()) {
 
@@ -157,9 +151,15 @@ Model::Model(Engine *engine,
 
   if (scene) {
     initAnimations(scene);
-    initShadowing(engine); //xxx must be after initAnimations
+    initShadowing(engine);
     initUniformsCache();
-    loadNodes(scene->mRootNode, scene, engine, this, diffuseMapPath, normalMapPath, specularMapPath);
+    loadNodes(scene->mRootNode
+      , scene
+      , this
+      , mEngine->storeTexture(diffuseMapPath.c_str())
+      , mEngine->storeTexture(normalMapPath.c_str())
+      , mEngine->storeTexture(specularMapPath.c_str()));
+
   } else {
     fLogF("Model: %s could not be read", shapePath.c_str());
   }
@@ -192,25 +192,25 @@ Model::Model(Engine *engine,
 #endif
 }
 
-Model::Model(Engine *engine,
-    flc::Program *program,
-    const std::string &shapePath,
-    flc::Texture2D *diffuseMap,
-    flc::Texture2D *normalMap,
-    flc::Texture2D *specularMap,
-    const Material &material)
+Model::Model(Engine* engine,
+    flc::Program* program,
+    const std::string& shapePath,
+    flc::Texture2D* diffuseMap,
+    flc::Texture2D* normalMap,
+    flc::Texture2D* specularMap,
+    const Material& material)
     : Programmable(program)
+    , mEngine(engine)
     , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
     , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  const aiScene *scene = engine->getModelFromFile(shapePath);
-
+  const aiScene* scene = engine->getModelFromFile(shapePath);
   if (scene) {
     initAnimations(scene);
     initShadowing(engine);
     initUniformsCache();
-    loadNodes(scene->mRootNode, scene, engine, this, diffuseMap, normalMap, specularMap, material);
+    loadNodes(scene->mRootNode, scene, this, diffuseMap, normalMap, specularMap, material);
   } else {
     fLogF("Model: %s could not be read", shapePath.c_str());
   }
@@ -247,8 +247,30 @@ Model::~Model() {
   // nothing
 }
 
-void Model::reload() {
-  // nothing
+void Model::reloadModel(const std::string& path) {
+  unloadNodes();
+  const aiScene* scene = mEngine->getModelFromFile(path);
+  if (scene) {
+    initAnimations(scene);
+    initShadowing(mEngine);
+    initUniformsCache();
+    loadNodes(scene->mRootNode, scene, this);
+  } else {
+    fLogF("Model: %s could not be read", shapePath.c_str());
+  }
+}
+
+void Model::reloadModel(const std::string& path, flc::Texture2D* diff, flc::Texture2D* norm, flc::Texture2D* specular) {
+  unloadNodes();
+  const aiScene* scene = mEngine->getModelFromFile(path);
+  if (scene) {
+    initAnimations(scene);
+    initShadowing(mEngine);
+    initUniformsCache();
+    loadNodes(scene->mRootNode, scene, this, diff, norm, specular);
+  } else {
+    fLogF("Model: %s could not be read", shapePath.c_str());
+  }
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -264,44 +286,20 @@ inline void Model::initAnimations(const aiScene *scene) {
   }
 }
 
-inline void Model::loadNodes(aiNode *node,
-    const aiScene *scene,
-    Engine *engine,
-    Entity *entity,
-    const std::string &diffuseMapPath,
-    const std::string &normalMapPath,
-    const std::string &specularMapPath) {
-
-  /* Set this node transformations */
-  loadNodeTransformations(node, entity);
-
-  for (GLuint i = 0; i < node->mNumMeshes; i++) {
-    const aiMesh *aMesh = scene->mMeshes[node->mMeshes[i]];
-    const aiMaterial *aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
-
-    entity->attach(loadMesh(aMesh,
-                            Material(aMaterial),
-                            engine->storeTexture(diffuseMapPath.c_str()),
-                            engine->storeTexture(normalMapPath.c_str()),
-                            engine->storeTexture(specularMapPath.c_str()),
-                            engine));
+inline void Model::unloadNodes() {
+  for (auto mesh : mMeshes) {
+    detach(mesh);
   }
-
-  /* Evaluate children */
-  for (GLuint i = 0; i < node->mNumChildren; i++) {
-    puEntity newEntity = std::make_unique<flf::Hinge>();
-    loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMapPath, normalMapPath, specularMapPath);
-    entity->attach(std::move(newEntity));
-  }
+  mMeshes.clear();
 }
 
-inline void Model::loadNodes(aiNode *node, const aiScene *scene, Engine *engine, Entity *entity) {
+inline void Model::loadNodes(aiNode *node, const aiScene *scene, Entity *entity) {
 
   /* Set this node transformations */
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
-    const aiMesh *aMesh = scene->mMeshes[node->mMeshes[i]];
+    const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
     const aiMaterial *aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
 
     aiString diffuseMapPathAssimp, normalMapPathAssimp, specularMapPathAssimp;
@@ -342,41 +340,40 @@ inline void Model::loadNodes(aiNode *node, const aiScene *scene, Engine *engine,
 
     entity->attach(loadMesh(aMesh,
                             Material(aMaterial),
-                            engine->storeTexture(diffuseMapPath.c_str()),
-                            engine->storeTexture(normalMapPath.c_str()),
-                            engine->storeTexture(specularMapPath.c_str()),
-                            engine));
+                            mEngine->storeTexture(diffuseMapPath.c_str()),
+                            mEngine->storeTexture(normalMapPath.c_str()),
+                            mEngine->storeTexture(specularMapPath.c_str()),
+                            mEngine));
   }
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; i++) {
     puEntity newEntity = std::make_unique<flf::Hinge>();
-    loadNodes(node->mChildren[i], scene, engine, newEntity.get());
+    loadNodes(node->mChildren[i], scene, newEntity.get());
     entity->attach(std::move(newEntity));
   }
 }
 
 inline void Model::loadNodes(aiNode *node,
     const aiScene *scene,
-    Engine *engine,
     Entity *entity,
-    flc::Texture2D *diffuseMap,
-    flc::Texture2D *normalMap,
-    flc::Texture2D *specularMap,
-    const Material &material) {
+    flc::Texture2D* diffuseMap,
+    flc::Texture2D* normalMap,
+    flc::Texture2D* specularMap,
+    const Material& material) {
 
   /* Set this node transformations */
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
-    const aiMesh *aMesh = scene->mMeshes[i];
-    entity->attach(loadMesh(aMesh, material, diffuseMap, normalMap, specularMap, engine));
+    const aiMesh* aMesh = scene->mMeshes[i];
+    entity->attach(loadMesh(aMesh, material, diffuseMap, normalMap, specularMap, mEngine));
   }
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; i++) {
     puEntity newEntity = std::make_unique<flf::Hinge>();
-    loadNodes(node->mChildren[i], scene, engine, newEntity.get(), diffuseMap, normalMap, specularMap, material);
+    loadNodes(node->mChildren[i], scene, newEntity.get(), diffuseMap, normalMap, specularMap, material);
     entity->attach(std::move(newEntity));
   }
 }
@@ -391,12 +388,12 @@ inline void Model::loadNodeTransformations(aiNode *node, Entity *entity) {
   entity->moveTo(assimpToGlmVec3(position));
 }
 
-puMesh Model::loadMesh(const aiMesh *shape,
-    const Material &material,
-    flc::Texture2D *diffuseMap,
-    flc::Texture2D *normalMap,
-    flc::Texture2D *specularMap,
-    Engine *engine) {
+pu<Mesh> Model::loadMesh(const aiMesh* shape,
+    const Material& material,
+    flc::Texture2D* diffuseMap,
+    flc::Texture2D* normalMap,
+    flc::Texture2D* specularMap,
+    Engine* engine) {
 
   if (!shape) {
     return nullptr;
@@ -461,7 +458,7 @@ GLint Model::getActiveAnimations() {
 }
 
 bool Model::isAnimated() const {
-  return nullptr != mAnimator.get();
+  return mAnimator ? true : false;
 }
 
 inline void Model::evaluateAnimations() {
@@ -544,7 +541,7 @@ void Model::log() const {
 
 }
 
-inline void Model::initShadowing(Engine *engine) {
+inline void Model::initShadowing(Engine* engine) {
   ProgramLoader loader(engine);
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   if (mAnimator) {
