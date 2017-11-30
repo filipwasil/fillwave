@@ -258,7 +258,7 @@ void Model::reloadModel(
     initUniformsCache();
     loadNodes(scene->mRootNode, scene, this, diff, norm, specular, material);
   } else {
-    fLogF("Model: %s could not be read", shapePath.c_str());
+    fLogF("Model: %s could not be read", path.c_str());
   }
 }
 
