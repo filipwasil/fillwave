@@ -128,7 +128,7 @@ MeshTerrain::MeshTerrain(Engine *engine,
 
   for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; ++x) {
     for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; ++z) {
-      puMesh ptr = std::make_unique<Mesh>(engine,
+      pu<Mesh> ptr = std::make_unique<Mesh>(engine,
                                           Material(),
                                           diffuseMap,
                                           normalMap,
