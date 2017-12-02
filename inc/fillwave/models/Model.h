@@ -119,7 +119,9 @@ protected:
   LightSystem& mLights;
   flc::Program* mProgramShadow;
   flc::Program* mProgramShadowColor;
-  GLint mUniformLocationCacheBones, mUniformLocationCacheBonesShadow, mUniformLocationCacheBonesShadowColor;
+  GLint mUniformLocationCacheBones;
+  GLint mUniformLocationCacheBonesShadow;
+  GLint mUniformLocationCacheBonesShadowColor;
   vec<Mesh*> mMeshes;
 private:
   /* Init */
@@ -138,13 +140,13 @@ private:
 
   void unloadNodes();
 
-  void loadNodeTransformations(aiNode *node, Entity *entity);
+  void loadNodeTransformations(aiNode*  node, Entity* entity);
 
-  void loadNodes(aiNode *node, const aiScene *scene, Entity *entity);
+  void loadNodes(aiNode*  node, const aiScene *scene, Entity* entity);
 
-  void loadNodes(aiNode *node,
+  void loadNodes(aiNode*  node,
       const aiScene *scene,
-      Entity *entity,
+      Entity* entity,
       flc::Texture2D* diffuse,
       flc::Texture2D* normal,
       flc::Texture2D* specular,
@@ -157,14 +159,17 @@ private:
       flc::Texture2D* specular,
       Engine *engine);
 
+  inline const char* getMeshTextureName(aiTextureType type, aiString& path, const aiMaterial* mat);
+
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
-  puMesh loadMesh(tinyobj::shape_t& shape,
+  pu<Mesh> loadMesh(tinyobj::shape_t& shape,
              tinyobj::attrib_t& attrib,
              const Material& material,
              flc::Texture2D* diffuseMap,
              flc::Texture2D* normalMap,
              flc::Texture2D* specularMap,
              Engine* engine);
+
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 };

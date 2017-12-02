@@ -81,7 +81,7 @@ public:
   void setAmbient(glm::vec3 cursor);
 
   /* Pickable */
-  void registerPickable(Entity *entity);
+  void registerPickable(Entity* entity);
 
   void pick(glm::ivec4 color);
 
@@ -119,8 +119,8 @@ protected:
   puICamera mCamera;
   puSkybox mSkybox;
 
-  std::unordered_map<GLint, Entity *> mPickingTable;
-  Entity *mLastPicked;
+  std::unordered_map<GLint, Entity* > mPickingTable;
+  Entity* mLastPicked;
   glm::vec3 mAmbientGlobal;
 
 private:

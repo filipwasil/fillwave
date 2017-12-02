@@ -53,7 +53,7 @@ public:
   Bone *mBone;
   std::string mName;
 
-  AssimpNode(aiNode *node);
+  AssimpNode(aiNode*  node);
 
   virtual ~AssimpNode();
 
@@ -102,7 +102,7 @@ public:
 
   glm::fquat lerp(const glm::fquat &v0, const glm::fquat &v1, float alpha) const;
 
-  AssimpNode *initNode(aiNode *node);
+  AssimpNode *initNode(aiNode*  node);
 
   void updateBonesBuffer();
 

@@ -234,14 +234,13 @@ Model::~Model() {
 void Model::reloadModel(const std::string& path) {
   unloadNodes();
   const aiScene* scene = mEngine->getModelFromFile(path);
-  if (scene) {
-    initAnimations(scene);
-    initShadowing(mEngine);
-    initUniformsCache();
-    loadNodes(scene->mRootNode, scene, this);
-  } else {
-    fLogF("Model: %s could not be read", shapePath.c_str());
+  if (!scene) {
+    fLogF("Model: %s could not be read", path.c_str());
   }
+  initAnimations(scene);
+  initShadowing(mEngine);
+  initUniformsCache();
+  loadNodes(scene->mRootNode, scene, this);
 }
 
 void Model::reloadModel(
@@ -252,14 +251,13 @@ void Model::reloadModel(
   , const Material& material) {
   unloadNodes();
   const aiScene* scene = mEngine->getModelFromFile(path);
-  if (scene) {
-    initAnimations(scene);
-    initShadowing(mEngine);
-    initUniformsCache();
-    loadNodes(scene->mRootNode, scene, this, diff, norm, specular, material);
-  } else {
+  if (!scene) {
     fLogF("Model: %s could not be read", path.c_str());
   }
+  initAnimations(scene);
+  initShadowing(mEngine);
+  initUniformsCache();
+  loadNodes(scene->mRootNode, scene, this, diff, norm, specular, material);
 }
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -282,57 +280,24 @@ inline void Model::unloadNodes() {
   mMeshes.clear();
 }
 
-inline void Model::loadNodes(aiNode *node, const aiScene *scene, Entity *entity) {
+inline void Model::loadNodes(aiNode *node, const aiScene *scene, Entity* entity) {
 
   /* Set this node transformations */
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
     const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
-    const aiMaterial *aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
+    const aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
 
     aiString diffuseMapPathAssimp, normalMapPathAssimp, specularMapPathAssimp;
-    std::string diffuseMapPath, normalMapPath, specularMapPath;
 
-    diffuseMapPath = (
-                         aMaterial->GetTexture(aiTextureType_DIFFUSE,
-                                               0,
-                                               &diffuseMapPathAssimp,
-                                               nullptr,
-                                               nullptr,
-                                               nullptr,
-                                               nullptr,
-                                               nullptr) == AI_SUCCESS
-                     ) ? diffuseMapPathAssimp.data : "255_255_255.color";
-
-    normalMapPath = (
-                        aMaterial->GetTexture(aiTextureType_NORMALS,
-                                              0,
-                                              &normalMapPathAssimp,
-                                              nullptr,
-                                              nullptr,
-                                              nullptr,
-                                              nullptr,
-                                              nullptr) == AI_SUCCESS
-                    ) ? normalMapPathAssimp.data : "128_128_255.color";
-
-    specularMapPath = (
-                          aMaterial->GetTexture(aiTextureType_SPECULAR,
-                                                0,
-                                                &specularMapPathAssimp,
-                                                nullptr,
-                                                nullptr,
-                                                nullptr,
-                                                nullptr,
-                                                nullptr) == AI_SUCCESS
-                      ) ? specularMapPathAssimp.data : "";
-
-    entity->attach(loadMesh(aMesh,
-                            Material(aMaterial),
-                            mEngine->storeTexture(diffuseMapPath.c_str()),
-                            mEngine->storeTexture(normalMapPath.c_str()),
-                            mEngine->storeTexture(specularMapPath.c_str()),
-                            mEngine));
+    entity->attach(
+      loadMesh(aMesh
+        , Material(aMaterial)
+        , mEngine->storeTexture(getMeshTextureName(aiTextureType_DIFFUSE, diffuseMapPathAssimp, aMaterial))
+        , mEngine->storeTexture(getMeshTextureName(aiTextureType_NORMALS, normalMapPathAssimp, aMaterial))
+        , mEngine->storeTexture(getMeshTextureName(aiTextureType_SPECULAR, specularMapPathAssimp, aMaterial))
+        , mEngine));
   }
 
   /* Evaluate children */
@@ -345,7 +310,7 @@ inline void Model::loadNodes(aiNode *node, const aiScene *scene, Entity *entity)
 
 inline void Model::loadNodes(aiNode *node,
     const aiScene *scene,
-    Entity *entity,
+    Entity* entity,
     flc::Texture2D* diffuseMap,
     flc::Texture2D* normalMap,
     flc::Texture2D* specularMap,
@@ -354,20 +319,25 @@ inline void Model::loadNodes(aiNode *node,
   /* Set this node transformations */
   loadNodeTransformations(node, entity);
 
-  for (GLuint i = 0; i < node->mNumMeshes; i++) {
-    const aiMesh* aMesh = scene->mMeshes[i];
+  for (GLuint i = 0; i < node->mNumMeshes; ++i) {
+    const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
     entity->attach(loadMesh(aMesh, material, diffuseMap, normalMap, specularMap, mEngine));
   }
 
   /* Evaluate children */
-  for (GLuint i = 0; i < node->mNumChildren; i++) {
+  for (GLuint i = 0; i < node->mNumChildren; ++i) {
     puEntity newEntity = std::make_unique<flf::Hinge>();
     loadNodes(node->mChildren[i], scene, newEntity.get(), diffuseMap, normalMap, specularMap, material);
     entity->attach(std::move(newEntity));
   }
 }
 
-inline void Model::loadNodeTransformations(aiNode *node, Entity *entity) {
+
+inline const char* Model::getMeshTextureName(aiTextureType type, aiString& path, const aiMaterial* mat) {
+  return mat->GetTexture(type, 0, &path, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS ? path.data : "";
+}
+
+inline void Model::loadNodeTransformations(aiNode *node, Entity* entity) {
   aiVector3t<float> scale;
   aiQuaterniont<float> rotation;
   aiVector3t<float> position;
