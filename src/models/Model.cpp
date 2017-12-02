@@ -334,7 +334,9 @@ inline void Model::loadNodes(aiNode *node,
 
 
 inline const char* Model::getMeshTextureName(aiTextureType type, aiString& path, const aiMaterial* mat) {
-  return mat->GetTexture(type, 0, &path, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS ? path.data : "";
+  return mat->GetTexture(type, 0, &path, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS
+         ? path.data
+         : "128_128_128.color";
 }
 
 inline void Model::loadNodeTransformations(aiNode *node, Entity* entity) {

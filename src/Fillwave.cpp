@@ -146,7 +146,7 @@ Program* Engine::storeProgram(const string& name, const vector<Shader*>& shaders
   return mImpl->mPrograms.store(name, shaders, isSkipLinking);
 }
 
-Texture2D* Engine::storeTexture(const string &texturePath, flf::ECompression compression) {
+Texture2D* Engine::storeTexture(const string& texturePath, flf::ECompression compression) {
   return mImpl->mTextures->get(texturePath, compression);
 }
 
@@ -154,19 +154,19 @@ Texture2DRenderable* Engine::storeTextureRenderable() {
   return mImpl->mTextures->getColor2D(mImpl->mWindowWidth, mImpl->mWindowHeight);
 }
 
-Texture2DRenderableDynamic* Engine::storeTextureDynamic(const string &fragmentShaderPath) {
+Texture2DRenderableDynamic* Engine::storeTextureDynamic(const string& fragmentShaderPath) {
   const string path = fragmentShaderPath;
   Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
   return mImpl->mTextures->getDynamic(path, program, glm::ivec2(mImpl->mWindowWidth, mImpl->mWindowHeight));;
 }
 
 Texture3D* Engine::storeTexture3D(
-  const string &posX
-  , const string &negX
-  , const string &posY
-  , const string &negY
-  , const string &posZ
-  , const string &negZ) {
+  const string& posX
+  , const string& negX
+  , const string& posY
+  , const string& negY
+  , const string& posZ
+  , const string& negZ) {
   return mImpl->mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
 
@@ -199,8 +199,8 @@ void Engine::attachHandler(std::function<void(const flf::Event&)>&& handler, flf
   mImpl->attachHandler(std::move(handler), type);
 }
 
-pText Engine::storeText(const string &content,
-    const string &fontName,
+pText Engine::storeText(const string& content,
+    const string& fontName,
     glm::vec2 position,
     GLfloat scale,
     glm::vec4 color,
@@ -340,7 +340,7 @@ flf::TextureSystem &Engine::getTextureSystem() const {
   return* mImpl->mTextures.get();
 }
 
-puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const string &shapePath) {
+puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const string& shapePath) {
   auto buffer = new flf::PhysicsMeshBuffer();
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -371,7 +371,7 @@ puPhysicsMeshBuffer Engine::getPhysicalMeshBuffer(const string &shapePath) {
   return puPhysicsMeshBuffer(buffer);
 }
 
-void Engine::addPostProcess(const string &fragmentShaderPath, GLfloat lifeTime) {
+void Engine::addPostProcess(const string& fragmentShaderPath, GLfloat lifeTime) {
   Program* program = mImpl->mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
   PostProcessingPass pass(program,
                           mImpl->mTextures->getDynamic(fragmentShaderPath,
@@ -416,7 +416,7 @@ void Engine::pick(GLuint x, GLuint y) {
   mImpl->pick(x, y);
 }
 
-void Engine::captureFramebufferToFile(const string &name) {
+void Engine::captureFramebufferToFile(const string& name) {
   mImpl->captureFramebufferToFile(name);
 }
 
@@ -447,7 +447,7 @@ const aiScene* Engine::getModelFromFile(string path) {
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
 
 template <GLuint T>
-Shader* Engine::storeShader(const string &shaderPath) {
+Shader* Engine::storeShader(const string& shaderPath) {
   string shaderSource = "";
   const string fullPath = mImpl->mFileLoader.getRootPath() + shaderPath;
   flf::ReadFile(fullPath, shaderSource);
@@ -550,28 +550,28 @@ flc::VertexBufferBasic* Engine::storeBufferInternal(flc::VertexArray* vao,
 }
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
 
-template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string& );
 
-template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string& );
 
-template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string& , const string& );
 
-template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string& , const string& );
 
 #ifdef FILLWAVE_GLES_3_0
 #else
 
-template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string& );
 
-template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string& );
 
-template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &);
+template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string& );
 
-template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string& , const string& );
 
-template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string& , const string& );
 
-template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string &, const string &);
+template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string& , const string& );
 
 #endif
 
