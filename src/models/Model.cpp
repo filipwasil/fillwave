@@ -262,7 +262,7 @@ void Model::reloadModel(
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-inline void Model::initAnimations(const aiScene *scene) {
+inline void Model::initAnimations(const aiScene* scene) {
   if (scene->HasAnimations()) {
     mAnimator = std::make_unique<Animator>(scene);
     fLogD("attached TimedBoneUpdateCallback to model");
@@ -280,7 +280,7 @@ inline void Model::unloadNodes() {
   mMeshes.clear();
 }
 
-inline void Model::loadNodes(aiNode *node, const aiScene *scene, Entity* entity) {
+inline void Model::loadNodes(aiNode *node, const aiScene* scene, Entity* entity) {
 
   /* Set this node transformations */
   loadNodeTransformations(node, entity);
@@ -309,7 +309,7 @@ inline void Model::loadNodes(aiNode *node, const aiScene *scene, Entity* entity)
 }
 
 inline void Model::loadNodes(aiNode *node,
-    const aiScene *scene,
+    const aiScene* scene,
     Entity* entity,
     flc::Texture2D* diffuseMap,
     flc::Texture2D* normalMap,

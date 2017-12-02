@@ -87,7 +87,7 @@ AssimpNode::~AssimpNode() {
   }
 }
 
-Animator::Animator(const aiScene *scene)
+Animator::Animator(const aiScene* scene)
     : mTimeSinceStartSeconds(0.0f) {
   mAnimationsBufferData.resize(FILLWAVE_MAX_BONES);
 

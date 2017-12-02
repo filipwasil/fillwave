@@ -136,16 +136,16 @@ private:
 
   void evaluateAnimations();
 
-  void initAnimations(const aiScene *scene);
+  void initAnimations(const aiScene* scene);
 
   void unloadNodes();
 
-  void loadNodeTransformations(aiNode*  node, Entity* entity);
+  void loadNodeTransformations(aiNode* node, Entity* entity);
 
-  void loadNodes(aiNode*  node, const aiScene *scene, Entity* entity);
+  void loadNodes(aiNode* node, const aiScene* scene, Entity* entity);
 
-  void loadNodes(aiNode*  node,
-      const aiScene *scene,
+  void loadNodes(aiNode* node,
+      const aiScene* scene,
       Entity* entity,
       flc::Texture2D* diffuse,
       flc::Texture2D* normal,
