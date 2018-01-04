@@ -1,6 +1,5 @@
 #include "StandardMouseEventHandler.h"
 #include <QMouseEvent>
-#include <QModelIndex>
 
 namespace scene {
 namespace callbacks {
@@ -14,7 +13,7 @@ bool StandardMouseEventHandler::eventFilter(QObject* watched, QEvent* event) {
   if (event->type() != QEvent::MouseButtonRelease) {
     return QObject::eventFilter(watched, event);
   }
-  QMouseEvent* mouse = static_cast<QMouseEvent*>(event);
+  QMouseEvent* mouse = dynamic_cast<QMouseEvent*>(event);
   if (!(mouse->button()) == Qt::LeftButton) {
     return QObject::eventFilter(watched, event);
   }

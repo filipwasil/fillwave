@@ -9,7 +9,7 @@ namespace flf {
 
 class FollowCustomCursorCallback {
  public:
-  FollowCustomCursorCallback(Engine* engine);
+  explicit FollowCustomCursorCallback(Engine* engine);
 
   virtual ~FollowCustomCursorCallback() = default;
 

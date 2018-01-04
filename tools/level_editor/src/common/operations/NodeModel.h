@@ -12,18 +12,20 @@ namespace operations {
 class NodeModel : public QObject {
  Q_OBJECT
  public:
-  NodeModel(QObject* parent);
+  explicit NodeModel(QObject* parent);
 
-  void addSceneModel(std::shared_ptr<objects::SceneModel> object);
+  void addSceneModel(std::unique_ptr<objects::SceneModel> && object);
 
-  void addNodeToModel(objects::INodeBase* node, int modelId);
+  std::shared_ptr<flw::Engine> getSceneEngine(quintptr sceneId);
+
+  void addNodeToModel(objects::ANodeBase* node, quintptr modelId);
 
  signals:
 
   void elementInserted(std::shared_ptr<objects::SceneModel> element);
   //TODO: memory mangment checks.
  private:
-  std::vector<std::shared_ptr<objects::SceneModel>> mModel;
+  std::vector<std::unique_ptr<objects::SceneModel>> mModel;
 };
 
 }

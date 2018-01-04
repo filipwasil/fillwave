@@ -1,7 +1,6 @@
 #include <QtWidgets/QWidget>
 #include <QVBoxLayout>
-#include <memory>
-#include  "common/windows/basic/NodeNameInput.h"
+#include "common/windows/basic/NodeNameInput.h"
 #include "NewNode.h"
 
 
@@ -13,7 +12,7 @@ NewNode::NewNode(QWidget* parent)
   , mNodeModel(new QStandardItemModel())
   , mNodeList(new QTreeView())
   , mOk(new QPushButton("OK"))
-  , mCancel(new QPushButton("Cancle")) {
+  , mCancel(new QPushButton("Cancel")) {
   mTypeMap["Sprite"] = ENodeType::SPRITE;
   mSelectedNode = ENodeType::NONE;
   init();

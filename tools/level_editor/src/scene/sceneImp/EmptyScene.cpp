@@ -1,6 +1,5 @@
 #include <fillwave/space/Scene.h>
 #include <fillwave/models/EmiterPointGPU.h>
-#include <fillwave/Fillwave.h>
 #include "EmptyScene.h"
 
 using namespace flw;

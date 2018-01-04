@@ -7,8 +7,7 @@ namespace callbacks {
 
 class IEventHandler {
  public:
-  virtual ~IEventHandler() {
-  }
+  virtual ~IEventHandler() = default;
 
   virtual void handle(QEvent* event) = 0;
 

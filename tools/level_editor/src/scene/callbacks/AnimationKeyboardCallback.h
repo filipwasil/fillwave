@@ -9,7 +9,7 @@ namespace flf {
 
 class AnimationKeyboardCallback {
  public:
-  AnimationKeyboardCallback(Entity* entity);
+  explicit AnimationKeyboardCallback(Entity* entity);
 
   virtual ~AnimationKeyboardCallback();
 

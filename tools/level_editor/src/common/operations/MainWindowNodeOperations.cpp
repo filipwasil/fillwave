@@ -1,11 +1,8 @@
 #include <QLabel>
 #include <QToolButton>
-#include <QIcon>
 #include "MainWindowNodeOperations.h"
-#include "common/ENodeType.hpp"
 #include "common/windows/basic/NewNode.h"
-#include "objects/NodeFactory.h"
-#include "common/InternalConsts.h"
+#include "common/operations/helpers/StandardItemsHelper.h"
 
 namespace common {
 MainWindowNodeOperations::MainWindowNodeOperations(QObject* parent)
@@ -23,7 +20,7 @@ QVBoxLayout* MainWindowNodeOperations::createNodeWidget() {
   label->setAlignment(Qt::AlignHCenter);
   QToolButton* addNode = new QToolButton();
   addNode->setIcon(QIcon("icons/add.png"));
-  QObject::connect(addNode, &QToolButton::clicked, this, &MainWindowNodeOperations::newNodeDailog);
+  QObject::connect(addNode, &QToolButton::clicked, this, &MainWindowNodeOperations::newNodeDialog);
   QToolButton* deleteNode = new QToolButton();
   deleteNode->setIcon(QIcon("icons/delete.png"));
   QHBoxLayout* hBox = new QHBoxLayout();
@@ -66,25 +63,25 @@ QVBoxLayout* MainWindowNodeOperations::createOther() {
   return vBox;
 }
 
-void MainWindowNodeOperations::newNodeDailog() {
+void MainWindowNodeOperations::newNodeDialog() {
   common::windows::basic::NewNode sNode;
   sNode.exec();
   auto nodeType = sNode.getSelectedNode();
   if (nodeType == ENodeType::NONE) {
     return;
   }
-  objects::NodeFactory nFactory;
+  common::operations::helpers::StandardItemsHelper itemHelper;
   QModelIndex idx = mScenTree->currentIndex();
   auto item = mSceneModel->itemFromIndex(idx);
-  auto newItem = nFactory.createStandrdItem(nodeType, sNode.getName());
+  auto newItem = itemHelper.createStandardItem(nodeType, sNode.getName());
   if (item) {
     item->setChild(item->rowCount(), newItem);
   } else {
     mSceneModel->appendRow(newItem);
   }
   auto newItemModel = newItem->index();
-  auto readyNode = nFactory.createNode(nodeType, sNode.getName(), newItemModel.internalId());
-
+  NodeData nodeInfo(nodeType, newItemModel.internalId(), sNode.getName());
+  emit addNewNode(nodeInfo);
 }
 
 }

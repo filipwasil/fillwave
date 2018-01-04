@@ -8,7 +8,7 @@ namespace flf {
 
 class CameraMotionCallback {
  public:
-  CameraMotionCallback(Engine* engine);
+  explicit CameraMotionCallback(Engine* engine);
 
   virtual ~CameraMotionCallback() = default;
 

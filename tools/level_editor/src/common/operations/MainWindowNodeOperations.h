@@ -5,15 +5,30 @@
 #include <QTableView>
 #include "common/MainWidget.h"
 #include "scene/callbacks/StandardMouseEventHandler.h"
+#include "objects/ANodeBase.h"
+#include "common/ENodeType.hpp"
 
 namespace common {
 
+struct NodeData
+{
+  NodeData(ENodeType type, quintptr id, const QString& name)
+    : mType(type)
+    , mId(id)
+    , name(name) {
+  }
+
+  ENodeType mType = ENodeType::NONE;
+  quintptr mId = 0;
+  QString name;
+};
 
 class MainWindowNodeOperations : public QObject {
+  Q_OBJECT
  public:
   MainWindowNodeOperations(QObject* parent = nullptr);
 
-  void newNodeDailog();
+  void newNodeDialog();
 
   virtual ~MainWindowNodeOperations();
 
@@ -30,7 +45,8 @@ class MainWindowNodeOperations : public QObject {
   QVBoxLayout* createInspectorView();
 
   QVBoxLayout* createOther();
-
+signals:
+  void addNewNode(NodeData node);
  private:
   QTreeView* mScenTree;
   QStandardItemModel* mSceneModel;

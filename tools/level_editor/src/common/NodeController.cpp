@@ -1,7 +1,7 @@
 #include <QModelIndex>
 #include <QTableView>
-#include <QVariant>
-#include "NodeController.h"
+#include <common/operations/MainWindowNodeOperations.h>
+#include "objects/NodeFactory.h"
 
 namespace common {
 NodeController::NodeController(QObject* parent)
@@ -18,13 +18,19 @@ void NodeController::inspectorUpdate(const QModelIndex& index) {
   }
 }
 
-void NodeController::addSceneModel(std::shared_ptr<objects::SceneModel> object, std::shared_ptr<scene::AScene> scene) {
-  object->setSceneView(scene);
-  mModel->addSceneModel(object);
+void NodeController::addSceneModel(std::unique_ptr<objects::SceneModel> && object) {
+  mModel->addSceneModel(std::move(object));
 }
 
-void NodeController::addNodeToModel() {
-  // Przekazanie nowo stworzonego noda do modelu
+void NodeController::addNodeToModel(NodeData node) {
+  auto sceneEngine = mModel->getSceneEngine(mCurrentScenId);
+  if (!sceneEngine)
+  {
+    return;
+  }
+  objects::NodeFactory nFactory(sceneEngine);
+  objects::ANodeBase* readyNode = nFactory.createNode(node.mType, node.name, node.mId);
+  mModel->addNodeToModel(readyNode, mCurrentScenId);
 }
 
 }

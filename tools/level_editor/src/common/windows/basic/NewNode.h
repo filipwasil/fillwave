@@ -13,7 +13,7 @@ namespace basic {
 
 class NewNode : public QDialog {
  public:
-  NewNode(QWidget* parent = Q_NULLPTR);
+  explicit NewNode(QWidget* parent = Q_NULLPTR);
 
   ENodeType getSelectedNode() const;
 

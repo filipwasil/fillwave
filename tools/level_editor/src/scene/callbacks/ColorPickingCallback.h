@@ -8,7 +8,7 @@ namespace flf {
 
 class ColorPickingCallback {
  public:
-  ColorPickingCallback(Engine* engine);
+  explicit ColorPickingCallback(Engine* engine);
 
   virtual ~ColorPickingCallback() = default;
 

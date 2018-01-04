@@ -1,8 +1,7 @@
 #pragma once
 
 #include <QMap>
-#include <QStandardItem>
-#include "objects/INodeBase.h"
+#include "objects/ANodeBase.h"
 #include "common/ENodeType.hpp"
 #include "INodeCreator.h"
 
@@ -10,13 +9,12 @@ namespace objects {
 
 class NodeFactory {
  public:
-  NodeFactory();
+  explicit NodeFactory(std::shared_ptr<flw::Engine> engine);
 
-  INodeBase* createNode(common::ENodeType type, QString name, qintptr id);
-
-  QStandardItem* createStandrdItem(common::ENodeType type, const QString& name);
+  ANodeBase* createNode(common::ENodeType type, QString name, qintptr id);
 
  private:
+  std::shared_ptr<flw::Engine> mEngine;
   QMap<common::ENodeType, INodeCreator*> nodeCreators;
 };
 }

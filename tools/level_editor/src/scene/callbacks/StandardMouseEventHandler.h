@@ -7,7 +7,7 @@ namespace scene {
 namespace callbacks {
 class StandardMouseEventHandler : public QObject {
  public:
-  StandardMouseEventHandler(QTreeView* tree, QObject* parent = nullptr);
+  explicit StandardMouseEventHandler(QTreeView* tree, QObject* parent = nullptr);
 
   bool eventFilter(QObject* watched, QEvent* event) override;
 

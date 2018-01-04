@@ -1,20 +1,22 @@
+#include <fillwave/Fillwave.h>
+#include <fillwave/Framework.h>
 #include "NodeFactory.h"
 #include "objects/creators/SpriteCreator.h"
-#include "common/InternalConsts.h"
-#include "INodeBase.h"
+
+using namespace flw;
+using namespace flw::flf;
 
 namespace objects {
-NodeFactory::NodeFactory() {
+NodeFactory::NodeFactory(std::shared_ptr<flw::Engine> engine)
+  : mEngine(engine) {
   nodeCreators[common::ENodeType::SPRITE] = new creators::SpriteCreator();
 }
 
-INodeBase* NodeFactory::createNode(common::ENodeType type, QString name, qintptr id) {
+ANodeBase* NodeFactory::createNode(common::ENodeType type, QString name, qintptr id) {
+  auto program = ProgramLoader(mEngine.get()).getProgram(EProgram::basic);
+  // TODO: Na razie zabity testowy obiekt
+  puModel ballModel1 = std::make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj");
   return (nodeCreators[type])->createCompleteNode(name, id);
-}
-
-QStandardItem* NodeFactory::createStandrdItem(common::ENodeType type, const QString& name) {
-  QStandardItem* testItem = new QStandardItem(QIcon(SPRITE_ICON_PATH), name);
-  return testItem;
 }
 
 }

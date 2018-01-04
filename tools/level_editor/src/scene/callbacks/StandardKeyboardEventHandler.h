@@ -10,7 +10,7 @@ namespace scene {
 namespace callbacks {
 class StandardKeyboardEventHandler : public IEventHandler {
  public:
-  StandardKeyboardEventHandler(const std::shared_ptr<flw::Engine>& engine);
+  explicit StandardKeyboardEventHandler(const std::shared_ptr<flw::Engine>& engine);
 
   void handle(QEvent* event) override;
 

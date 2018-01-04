@@ -7,13 +7,12 @@ AnimationKeyboardCallback::AnimationKeyboardCallback(Entity* entity)
   : mEntity(entity) {
 }
 
-AnimationKeyboardCallback::~AnimationKeyboardCallback() {
-}
+AnimationKeyboardCallback::~AnimationKeyboardCallback() = default;
 
 void AnimationKeyboardCallback::perform(const Event& event) {
   KeyboardEventData e = event.getData();
   if (mEntity) {
-    Model* model = static_cast<Model*>(mEntity);
+    auto* model = dynamic_cast<Model*>(mEntity);
   }
 }
 

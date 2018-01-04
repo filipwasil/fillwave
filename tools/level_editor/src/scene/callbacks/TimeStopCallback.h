@@ -8,7 +8,7 @@ namespace flf {
 
 class TimeStopCallback {
  public:
-  TimeStopCallback(Engine* engine);
+  explicit TimeStopCallback(Engine* engine);
 
   virtual ~TimeStopCallback();
 

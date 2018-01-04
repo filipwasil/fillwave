@@ -14,7 +14,7 @@ class NodeNameInput : public QDialog {
 
   QString getName();
 
-  virtual ~NodeNameInput();
+  ~NodeNameInput() override;
 
  private:
   QPushButton* mOk;

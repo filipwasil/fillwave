@@ -11,7 +11,7 @@ class MoveCameraCallback {
   float mSpeed;
   Engine* mEngine;
  public:
-  MoveCameraCallback(Engine* engine, float speed = 1.0);
+  explicit MoveCameraCallback(Engine* engine, float speed = 1.0);
 
   virtual ~MoveCameraCallback() = default;
 

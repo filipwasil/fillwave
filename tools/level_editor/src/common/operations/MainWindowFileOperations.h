@@ -8,7 +8,7 @@ namespace operations {
 
 class MainWindowFileOperations : public QObject {
  public:
-  MainWindowFileOperations(QObject* parent = nullptr);
+  explicit MainWindowFileOperations(QObject* parent = nullptr);
 
   QVBoxLayout* createFileSystemTree();
 

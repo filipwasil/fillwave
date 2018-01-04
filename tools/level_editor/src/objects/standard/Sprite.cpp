@@ -2,14 +2,13 @@
 
 namespace objects {
 namespace standard {
-Sprite::Sprite(qintptr nodeIde, flw::flf::Model* nodeDataModel)
-  : mNodeIde(nodeIde)
-  , mNodeDataModel(nodeDataModel) {
+Sprite::Sprite(qintptr nodeIde, flw::flf::Model* nodeDataModel, QObject* parent)
+  : ANodeBase(parent, nodeDataModel, nodeIde) {
   init();
 }
 
 QVector<QStandardItemModel*> Sprite::getStandardModelForData() {
-  return mTableModelRepersentation;
+  return mTableModelRepresentation;
 }
 
 std::string Sprite::getObjectName() {
@@ -17,6 +16,10 @@ std::string Sprite::getObjectName() {
 }
 
 void Sprite::init() {
+  if (!mNodeDataModel)
+  {
+    return;
+  }
   QStandardItemModel* positionModel = new QStandardItemModel(this);
   QList<QStandardItem*> positionNameColumn;
   QList<QStandardItem*> positionValuesColumn;
@@ -37,7 +40,7 @@ void Sprite::init() {
   positionModel->insertColumn(0, positionNameColumn);
   positionModel->insertColumn(1, positionValuesColumn);
 
-  mTableModelRepersentation.push_back(positionModel);
+  mTableModelRepresentation.push_back(positionModel);
 }
 
 void Sprite::AddObjectToScene(std::shared_ptr<scene::AScene> mSceneView) {

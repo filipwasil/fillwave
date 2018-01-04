@@ -10,7 +10,7 @@
 
 class Renderer : public QGLWidget {
  public:
-  explicit Renderer(int argc, char* argv[], QWidget* parent = 0);
+  explicit Renderer(int argc, char* argv[], QWidget* parent = nullptr);
 
   virtual ~Renderer();
 

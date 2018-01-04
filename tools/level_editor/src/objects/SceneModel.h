@@ -3,7 +3,7 @@
 #include <memory>
 #include <QStandardItem>
 #include <QStandardItemModel>
-#include <objects/INodeBase.h>
+#include <objects/ANodeBase.h>
 #include <scene/AScene.h>
 
 namespace scene {
@@ -15,27 +15,26 @@ namespace objects {
 
 class SceneModel : public QObject {
  public:
-  SceneModel(quintptr id);
+  SceneModel(quintptr id, std::shared_ptr<scene::AScene> sceneV);
 
   ~SceneModel() = default;
 
-  INodeBase* getSignleObject(quintptr objectId);
+  ANodeBase* getSingleObject(quintptr objectId);
 
-  void modelUpdated() {
-  };
+  void modelUpdated();
+
+  std::shared_ptr<flw::Engine> getSceneEngine();
 
   quintptr getSceneID() const;
 
-  void addNode(INodeBase* node);
-
-  void setSceneView(std::shared_ptr<scene::AScene> sceneEngine);
+  void addNode(ANodeBase* node);
 
  private:
-  void addNewNodeToScen(INodeBase* node);
+  void addNewNodeToScen(ANodeBase* node);
 
  protected:
   quintptr mSceneID;
-  std::vector<INodeBase*> mModelObjects;
+  std::vector<ANodeBase*> mModelObjects;
   std::shared_ptr<scene::AScene> mSceneView;
 };
 

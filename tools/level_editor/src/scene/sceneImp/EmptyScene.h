@@ -16,14 +16,14 @@ class EmptyScene : public AScene {
  public:
   EmptyScene(int argc, char** argv, QMap<QString, QVariant> varValues);
 
-  virtual ~EmptyScene();
+  ~EmptyScene() override;
 
   void init() override;
 
   void perform() override;
 
  private:
-  flw::pText mText;
+  flw::flf::ps<flw::flf::Text> mText;
 };
 
 }

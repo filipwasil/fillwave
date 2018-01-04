@@ -1,5 +1,4 @@
 #include <QHBoxLayout>
-#include <QVBoxLayout>
 #include "NodeNameInput.h"
 
 namespace common {

@@ -22,8 +22,7 @@ class AScene : public QObject {
     }
   }
 
-  virtual ~AScene() {
-  }
+  virtual ~AScene() = default;
 
   virtual void init() = 0;
 

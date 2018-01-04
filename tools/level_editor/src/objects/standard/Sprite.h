@@ -1,15 +1,15 @@
 #pragma once
 
 #include <QIcon>
-#include "objects/INodeBase.h"
+#include "objects/ANodeBase.h"
 
 namespace objects {
 namespace standard {
-class Sprite : public INodeBase {
+class Sprite : public ANodeBase {
  public:
-  Sprite(qintptr nodeIde, flw::flf::Model* nodeDataModel);
+  Sprite(qintptr nodeIde, flw::flf::Model* nodeDataModel, QObject* parent = nullptr);
 
-  ~Sprite() = default;
+  ~Sprite() override = default;
 
   QVector<QStandardItemModel*> getStandardModelForData() override;
 
@@ -20,9 +20,7 @@ class Sprite : public INodeBase {
  private:
   void init();
 
-  qintptr mNodeIde;
-  flw::flf::Model* mNodeDataModel;
-  QVector<QStandardItemModel*> mTableModelRepersentation;
+  QVector<QStandardItemModel*> mTableModelRepresentation;
 };
 }
 }

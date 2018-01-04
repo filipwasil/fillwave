@@ -2,28 +2,31 @@
 
 #include <QtCore/QObject>
 #include "common/operations/NodeModel.h"
+#include "ENodeType.hpp"
 
 namespace common {
+class NodeData;
 
 class NodeController : public QObject {
  Q_OBJECT
 
  public:
 
-  NodeController(QObject* parent = nullptr);
+  explicit NodeController(QObject* parent = nullptr);
 
-  ~NodeController() = default;
+  ~NodeController() override = default;
 
-  void addSceneModel(std::shared_ptr<objects::SceneModel> object, std::shared_ptr<scene::AScene> scene);
+  void addSceneModel(std::unique_ptr<objects::SceneModel> && object);
+
 
  public slots:
 
   void inspectorUpdate(const QModelIndex& index);
 
-  void addNodeToModel();
+  void addNodeToModel(NodeData node);
 
  private:
-  int mCurrentScenId;
+  quintptr mCurrentScenId;
   std::unique_ptr<operations::NodeModel> mModel;
 };
 

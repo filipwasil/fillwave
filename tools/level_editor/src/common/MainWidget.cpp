@@ -16,9 +16,13 @@ MainWidget::MainWidget(int argc, char* argv[], QWidget* parent)
   , mArgv(argv) {
   mNodeOperations = std::make_unique<MainWindowNodeOperations>(this);
   mFileSystemOperations = std::make_unique<operations::MainWindowFileOperations>(this);
-  mNodeContoller = std::make_unique<common::NodeController>();
+  mNodeController = std::make_unique<common::NodeController>();
   createBarMenu();
   create();
+  QObject::connect(mNodeOperations.get(),
+                   &MainWindowNodeOperations::addNewNode,
+                   mNodeController.get(),
+                   &common::NodeController::addNodeToModel);
 
   QWidget* leftWidget;
   QWidget* rightWidget;
@@ -36,8 +40,9 @@ MainWidget::MainWidget(int argc, char* argv[], QWidget* parent)
   mWidgetSplitter->setSizes(sizeList);
   this->setCentralWidget(mWidgetSplitter);
   resize(mWindowWidth, mWindowHeight);
-  auto firstModel = std::make_shared<objects::SceneModel>(0);
-  mNodeContoller->addSceneModel(firstModel, mRenderer->getScen());
+  auto firstModel = std::make_unique<objects::SceneModel>(0, mRenderer->getScen());
+
+  mNodeController->addSceneModel(std::move(firstModel));
 }
 
 void MainWidget::initMainGui(QWidget*& leftWidget, QWidget*& rightWidget) const {
@@ -64,7 +69,7 @@ void MainWidget::initMainGui(QWidget*& leftWidget, QWidget*& rightWidget) const 
 }
 
 MainWidget::~MainWidget() {
-
+ // TODO: sprawdzić zarządzanie pamięcią
 }
 
 void MainWidget::createBarMenu() {
