@@ -34,7 +34,7 @@
 #include <fillwave/core/texturing/Texture.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Texture", FERROR | FFATAL | FDEBUG)
+FLOGINIT_MASK(FERROR | FFATAL | FDEBUG)
 
 namespace flw {
 namespace flc {

@@ -34,7 +34,7 @@
 #include <fillwave/Log.h>
 #include <fillwave/management/TextureSystem.h>
 
-FLOGINIT("TextureSystem", FERROR | FFATAL | FINFO | FDEBUG)
+FLOGINIT_MASK(FERROR | FFATAL | FINFO | FDEBUG)
 
 namespace flw {
 namespace flf {
@@ -54,7 +54,7 @@ inline void TextureSystem::checkExtensions() {
     const GLubyte *ccc = glGetStringi(GL_EXTENSIONS, i);
     auto find_extension = [ccc](const char *name) -> bool {
       if ((strcmp((const char *) ccc, name) == 0)) {
-        fLogI("%s supported", name);
+        fLogI(name, " compression supported");
         return true;
       } else {
         return false;
@@ -95,12 +95,12 @@ flc::Texture2D *TextureSystem::get(const std::string &texturePath, ECompression 
   }
 
   if (flc::Texture2DFile* file = mLoader.load(filePath, flip, GL_RGBA, mRootPath, compression)) {
-    fLogD("Texture %s added to manager", filePath.c_str());
+    fLogD("Texture ", filePath, " added to manager");
     flc::ParameterList parameters;
     return mTextures2D.store(filePath, file, parameters, 1);
   }
 
-  fLogD("Texture %s not found", filePath.c_str());
+  fLogD("Texture ", filePath, " not found");
   return nullptr;
 }
 

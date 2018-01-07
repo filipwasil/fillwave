@@ -52,7 +52,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     std::string rootPath,
     ECompression compression) {
 
-  fLogD("Texture %s loading ...", filePath.c_str());
+  fLogD("Texture ", filePath.c_str(), " loading ...");
   const size_t posCheckboard = filePath.find(".checkboard");
   const size_t posColor = filePath.find(".color");
   const size_t posDDS = filePath.find(".dds");
@@ -65,11 +65,11 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
 
 
   if (posColor != std::string::npos) {
-    fLogD("Color texture %s generation and loading ...", filePath.c_str());
+    fLogD("Color texture ", filePath.c_str(), " generation and loading ...");
     std::string sub = filePath.substr(rootPath.size(), posColor);
     std::vector<std::string> tokens = split(sub, '_');
     if (tokens.size() < 3) {
-      fLogE("Could not found color parameters in %s", filePath.c_str());
+      fLogE("Could not found color parameters in ", filePath.c_str());
       return nullptr;
     }
 
@@ -81,11 +81,11 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     return file;
   }
   if (posCheckboard != std::string::npos) {
-    fLogD("Checkboard texture %s generation and loading ...", filePath.c_str());
+    fLogD("Checkboard texture ", filePath.c_str(), " generation and loading ...");
     std::string sub = filePath.substr(rootPath.size(), posCheckboard);
     std::vector<std::string> tokens = split(sub, '_');
     if (tokens.size() < 3) {
-      fLogE("Could not found color parameters in %s", filePath.c_str());
+      fLogE("Could not found color parameters in ", filePath.c_str());
       return nullptr;
     }
 
@@ -239,7 +239,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     }
     return nullptr;
   }
-  fLogD("Image %s size %dx%d pixel %d bytes per pixel", filePath.c_str(), w, h, n);
+  fLogD("Image ",filePath, " size ", w, "x", h, " pixel ", n, " bytes per pixel");
   auto file = new flc::Texture2DFile();
 
   file->mHeader.mFormat = format;
@@ -266,7 +266,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
 
   file->mAllocation = flc::EMemoryAllocation::eMallock;
 
-  fLogD("Flipping Texture %s ...", filePath.c_str());
+  fLogD("Flipping Texture", filePath, " ...");
   switch (flip) {
     case EFlip::eVertical:
 #pragma omp parallel for schedule(guided) num_threads(2)

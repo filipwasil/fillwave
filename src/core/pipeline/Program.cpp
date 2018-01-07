@@ -35,7 +35,7 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT_DEFAULT()
+FLOGINIT_MASK(FFATAL | FERROR)
 
 namespace flw {
 namespace flc {

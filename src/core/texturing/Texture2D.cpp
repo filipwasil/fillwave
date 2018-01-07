@@ -8,7 +8,7 @@
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Texture2D", FERROR | FFATAL | FDEBUG)
+FLOGINIT_MASK(FERROR | FFATAL | FDEBUG)
 
 namespace flw {
 namespace flc {
