@@ -35,69 +35,62 @@ int main(int argc, char* argv[]) {
 }
 
 void init() {
-  /* Scene and camera */
-  ContextGLFW::mGraphics->setCurrentScene(make_unique<Scene>());
-  ContextGLFW::mGraphics->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
-  ContextGLFW::mGraphics->getCurrentScene()->getCamera()->moveTo(glm::vec3(0.0, 0.0, 7.0));
 }
 
 void perform() {
-  /* Scene and camera */
-  ContextGLFW::mGraphics->setCurrentScene(make_unique<Scene>());
-  ContextGLFW::mGraphics->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
+  auto mEngine = ContextGLFW::mGraphics;
+  mEngine->setCurrentScene(make_unique<Scene>());
+  mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
 
-  puHUD hud = make_unique<HUD>();
+  /* Entities */
+  auto light = std::make_unique<Entity>();
+  light->moveTo(glm::vec3(0.0, 0.0, 3.0));
 
-  auto p = ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag");
-  p->use();
-  p->uniformPush("uResolution", glm::vec2(ContextGLFW::mScreenWidth, ContextGLFW::mScreenHeight));
-  hud->attach(make_unique < Sprite > (
-    ContextGLFW::mGraphics->storeTexture("textures/wall/stonetiles.png")
-    , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
-    , vec2(-0.75f, -0.75f)
-    , vec2( 1.0f,  1.0f)));
+  /* Texture */
+  flc::Texture2D *textureN = mEngine->storeTexture("255_255_255.color");
+  flc::Texture2D *textureS = mEngine->storeTexture("");
 
-//  hud->attach(make_unique < Sprite > (
-//    ContextGLFW::mGraphics->storeTexture("textures/W.JPG")
-//    , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
-//    , vec2(-0.5f, -0.5f)
-//    , vec2( 0.25f,  0.25f)));
+  /* Lights */
+  mEngine->storeLightSpot(glm::vec3(1.0, 1.0, 3.0), glm::quat(), glm::vec4(1.0, 1.0, 1.0, 0.0), light.get());
 
-  hud->attach(make_unique < Sprite > (
-    ContextGLFW::mGraphics->storeTexture("textures/W.JPG")
-    , ProgramLoader(ContextGLFW::mGraphics).getHUDCustomFragmentShader("shaders/gauge/gauge.frag")
-    , vec2(-1.0f)
-    , vec2(2.0f)));
+  /* Engine callbacks */
+//  mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
+//  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
+//  mEngine->attachCallback(make_unique<MoveCameraCallback>(
+//    mEngine.get(), EEventType::eCursorPosition, 0.01));
 
-  ContextGLFW::mGraphics->getCurrentScene()->setHUD(std::move(hud));
+  auto model = make_unique<Model>(mEngine,
+                                  ProgramLoader(mEngine).getProgram(EProgram::basic),
+                                  "meshes/sphere.obj",
+                                  mEngine->storeTextureDynamic("shaders/water/water.frag"));
+  model->moveBy(glm::vec3(0.0, 0.0, -15.0));
+  mEngine->getCurrentScene()->attach(std::move(model));
+
+  /* Description */
+  pText hint5 = mEngine->storeText("To move the camera push rigth mouse button and move",
+                                   "fonts/Titania",
+                                   glm::vec2(-0.95, -0.40),
+                                   70.0);
+  pText hint3 = mEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
+  pText hint4 = mEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
+  pText hint1 = mEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
+  pText hint6 = mEngine->storeText("Use 'D' for toggle debugger On/Off",
+                                   "fonts/Titania",
+                                   glm::vec2(-0.95, -0.80),
+                                   70.0);
+//  mEventsHandler.push_back(
+//    std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
+//  mEventsHandler.push_back(
+//    std::make_unique<scene::callbacks::StandardMouseEventHandler>(mEngine));
 }
 
 void quit() {
 //
 }
 
-void setupParam(const char* name, glm::vec2 position) {
-  ContextGLFW::mGraphics->storeText(name, "fonts/Titania", position, 70.0);
-  position.y -= 0.06f;
-  ContextGLFW::mGraphics->storeText((std::string(name) + std::string("val")).c_str(), "fonts/Titania", position, 80.0);
+void setupParam(const char* , glm::vec2 ) {
 }
 
 void showDescription() {
-  auto e = ContextGLFW::mGraphics;
-  setupParam("par1", glm::vec2(0.30, 0.28));
-  setupParam("par2", glm::vec2(0.50, 0.28));
-  setupParam("par3", glm::vec2(0.70, 0.28));
-  setupParam("par4", glm::vec2(0.30, 0.08));
-  setupParam("par5", glm::vec2(0.50, 0.08));
-  setupParam("par6", glm::vec2(0.70, 0.08));
-  setupParam("par7", glm::vec2(0.30, -0.12));
-  setupParam("par8", glm::vec2(0.50, -0.12));
-  setupParam("par9", glm::vec2(0.70, -0.12));
-  setupParam("par11", glm::vec2(0.30, -0.32));
-  setupParam("par12", glm::vec2(0.50, -0.32));
-  setupParam("par13", glm::vec2(0.70, -0.32));
-  setupParam("par14", glm::vec2(0.30, -0.52));
-  setupParam("par15", glm::vec2(0.50, -0.52));
-  setupParam("par16", glm::vec2(0.70, -0.52));
 }
 
