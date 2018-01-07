@@ -50,8 +50,7 @@
 
 #else /* FILLWAVE_COMPILATION_RELEASE */
 
-//#include <fillwave/common/Strings.h>
-
+#define FBIT(offset) (1 << offset)
 #define FERROR FBIT(0)
 #define FINFO FBIT(1)
 #define FDEBUG FBIT(2)
@@ -60,7 +59,6 @@
 #define FWARNING FBIT(5)
 #define FBIT_MAX (FERROR | FINFO | FDEBUG | FFATAL | FUSER | FWARNING)
 #define FIF(mask) (::_mask_ & mask)
-#define FBIT(offset) (1 << offset)
 #define FSTR_HELPER(x) #x
 #define FTO_STRING(x) FSTR_HELPER(x)
 
@@ -68,26 +66,30 @@
 #include <android/log.h>
 #else /* __ANDROID__ */
 
-#include "spdlog/spdlog.h"
+#include <sstream>
+#include <iostream>
 
 #ifdef _WIN32
-#define FILLWAVE_SPRINTF sprintf_s
+constexpr auto FLOG_BLACK = "";
+constexpr auto FLOG_RED = "";
+constexpr auto FLOG_GREEN = "";
+constexpr auto FLOG_YELLOW = "";
+constexpr auto FLOG_BLUE = "";
+constexpr auto FLOG_MAGENTA = "";
+constexpr auto FLOG_CYAN = "";
+constexpr auto FLOG_WHITE = "";
+constexpr auto FLOG_END = "";
 #else
-#define FILLWAVE_SPRINTF sprintf
+constexpr auto FLOG_BLACK = "\033[0;30m";
+constexpr auto FLOG_RED = "\033[0;31m";
+constexpr auto FLOG_GREEN = "\033[0;32m";
+constexpr auto FLOG_YELLOW = "\033[0;33m";
+constexpr auto FLOG_BLUE = "\033[0;34m";
+constexpr auto FLOG_MAGENTA = "\033[0;35m";
+constexpr auto FLOG_CYAN = "\033[0;36m";
+constexpr auto FLOG_WHITE = "\033[0;37m";
+constexpr auto FLOG_END = "\033[0m";
 #endif /* _WIN32 */
-
-#endif /* __ANDROID__ */
-
-#ifdef __ANDROID__
-
-#define FLOG_CREATE_STATIC_LOGGER()
-
-#else /* __ANDROID__ */
-
-#define FLOG_CREATE_STATIC_LOGGER()\
-    constexpr unsigned int FILLWAVE_LOG_BUFFER_SIZE = 1000;\
-    static const auto logs = spdlog::stdout_logger_mt(_tag_);\
-    static char buffer[FILLWAVE_LOG_BUFFER_SIZE] { 0 };
 
 #endif /* __ANDROID__ */
 
@@ -96,23 +98,22 @@
       std::string(__FILE__).find(FILLWAVE_OS_SEPRATOR) == std::string::npos ? std::string(__FILE__) : \
       std::string(__FILE__).substr(std::string(__FILE__).find_last_of(                                \
           FILLWAVE_OS_SEPRATOR) + 1, std::string(__FILE__).size()));                                  \
-   static const char _mask_ = FBIT_MAX;                                                               \
-   FLOG_CREATE_STATIC_LOGGER()
+   static const char _mask_ = FBIT_MAX;
 
 #define FLOGINIT_MASK(mask)                                             \
-   static const std::string _tag_ = (__FILE__);                         \
-   static const char _mask_ = (mask);                                   \
-   FLOG_CREATE_STATIC_LOGGER()
+   static const std::string _tag_ =  (                                                                \
+      std::string(__FILE__).find(FILLWAVE_OS_SEPRATOR) == std::string::npos ? std::string(__FILE__) : \
+      std::string(__FILE__).substr(std::string(__FILE__).find_last_of(                                \
+          FILLWAVE_OS_SEPRATOR) + 1, std::string(__FILE__).size()));                                  \
+   static const char _mask_ = (mask);
 
 #define FLOGINIT(tag, mask)                                             \
    static const std::string _tag_ = (tag);                              \
-   static const char _mask_ = (mask);                                   \
-   FLOG_CREATE_STATIC_LOGGER()
+   static const char _mask_ = (mask);
 
 #define FLOGINIT_NONE()                                                 \
    static const std::string _tag_ = "";                                 \
-   static const char _mask_ = 0;                                        \
-   FLOG_CREATE_STATIC_LOGGER()
+   static const char _mask_ = 0;
 
 /* Log */
 #ifdef __ANDROID__
@@ -129,14 +130,27 @@
 
 #else /* __ANDROID__ */
 
-#define fLog() FILLWAVE_SPRINTF(buffer, "%s:%d", ::_tag_, __LINE__)
+template<typename T>
+static void fLogBase(std::stringstream& s, const T& t) { std::cout << s.str() << t << FLOG_END << std::endl; }
+template<typename T, typename... Args>
+static void fLogBase(std::stringstream& s, const T& t, Args... args) { s << t; fLogBase(s, args...); }
+
 #define fLogBase(LOG_CONDITION, LOG_FLAG, ...) LOG_FLAG ## _FN(LOG_CONDITION, __VA_ARGS__)
-#define GPU_FATAL_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->critical(buffer); } } while(0)
-#define GPU_ERROR_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->critical(buffer); } } while(0)
-#define GPU_WARNING_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->warn(buffer); } } while(0)
-#define GPU_DEBUG_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->info(buffer); } } while(0)
-#define GPU_INFO_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->info(buffer); } } while(0)
-#define GPU_USER_FN(COND, ...) do { if ( FIF(COND) ) { fLog(); FILLWAVE_SPRINTF(buffer, __VA_ARGS__); logs->info(buffer); } } while(0)
+#define GPU_FN(COLOR, COND, ...)\
+do {\
+  if ( FIF(COND) ) {\
+    std::stringstream s;\
+    s << COLOR;\
+    fLogBase(s, ::_tag_,":", __LINE__, " ", __VA_ARGS__);\
+  }\
+} while(0)
+
+#define GPU_FATAL_FN(COND, ...) GPU_FN(FLOG_MAGENTA, COND, __VA_ARGS__)
+#define GPU_ERROR_FN(COND, ...) GPU_FN(FLOG_RED, COND, __VA_ARGS__)
+#define GPU_WARNING_FN(COND, ...) GPU_FN(FLOG_YELLOW, COND, __VA_ARGS__)
+#define GPU_DEBUG_FN(COND, ...) GPU_FN(FLOG_GREEN, COND, __VA_ARGS__)
+#define GPU_INFO_FN(COND, ...) GPU_FN(FLOG_WHITE, COND, __VA_ARGS__)
+#define GPU_USER_FN(COND, ...) GPU_FN(FLOG_BLUE, COND, __VA_ARGS__)
 
 #endif /* __ANDROID__ */
 
@@ -158,24 +172,29 @@
     }while(0)
 #else /* __ANDROID__ */
 
+#ifdef _WIN32
+#define FILLWAVE_SPRINTF sprintf_s
+#else
+#define FILLWAVE_SPRINTF sprintf
+#endif /* _WIN32 */
+
 #define fLogC(...) do {\
-    (void)buffer;\
     (void)_mask_;\
     GLenum errorCode = getGlError();\
     if (0 != errorCode) { /* GL_NO_ERROR */\
         char glBuffer[256];\
         int n = FILLWAVE_SPRINTF(glBuffer, "[%s 0x%04x] ", "CORE ERROR:", errorCode);\
         if (n > 0) {\
-            logs->critical(glBuffer);\
+            fLogF(glBuffer);\
         }\
         if (errorCode == 0x0506) { /* GL_INVALID_FRAMEBUFFER_OPERATION */\
             GLenum status = getFramebufferStatus();\
             n = FILLWAVE_SPRINTF(glBuffer, "[%s 0x%04x] ", "FRAMEBUFFER_STATUS:", status);\
             if (n > 0) {\
-                logs->critical(glBuffer);\
+                fLogF(glBuffer);\
             }\
         }\
-        logs->critical(__VA_ARGS__);\
+        fLogF(__VA_ARGS__);\
         abort();\
     }\
 \

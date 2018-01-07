@@ -289,14 +289,14 @@ inline void Engine::EngineImpl::initExtensions() {
   }
 
   if (GLEW_OK != GlewInitResult) {
-    fLogE("GLEW init failed. Error: %d", GlewInitResult);
+    fLogE("GLEW init failed. Error: ", GlewInitResult);
     exit(EXIT_FAILURE);
   } else {
-    fLogD("OpenGL Version: %s", glGetString(GL_VERSION));
+    fLogD("OpenGL Version: ", glGetString(GL_VERSION));
   }
   GLint maxPatchVertices = 0;
   glGetIntegerv(GL_MAX_PATCH_VERTICES, &maxPatchVertices);
-  fLogD("Max supported patches for tesselation: %i", maxPatchVertices);
+  fLogD("Max supported patches for tesselation: ", maxPatchVertices);
   // suppress error if tesselation is not supported
   glGetError();
 

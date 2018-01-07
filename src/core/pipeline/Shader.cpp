@@ -36,7 +36,7 @@
 
 #include <sstream>
 
-FLOGINIT("Shader", FERROR | FFATAL | FINFO | FDEBUG)
+FLOGINIT_MASK(FERROR | FFATAL | FINFO | FDEBUG)
 
 using namespace std;
 
@@ -69,7 +69,7 @@ void Shader::compile() {
 
   GLint status = 0;
   glGetShaderiv(mHandle, GL_COMPILE_STATUS, &status);
-  fLogD("Compilation status: %d", status);
+  fLogD("Compilation status: ", status);
   if (!status) {
     // There was an error, print it out
     GLint infoLogLength = 0;
@@ -78,7 +78,7 @@ void Shader::compile() {
     char *pShaderInfoLog = new char[infoLogLength];
     if (pShaderInfoLog) {
       glGetShaderInfoLog(mHandle, infoLogLength, NULL, pShaderInfoLog);
-      fLogE("Compilation: %s", pShaderInfoLog);
+      fLogE("Compilation: ", pShaderInfoLog);
       delete []pShaderInfoLog;
     }
     glDeleteShader(mHandle);
@@ -88,7 +88,7 @@ void Shader::compile() {
     std::string line;
     int i = 0;
     while (std::getline(lines, line)) {
-      fLogE("[%d] %s", i++, line.c_str());
+      fLogE("[", i++, "] ", line.c_str());
     }
   }
 }

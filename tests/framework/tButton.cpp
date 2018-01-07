@@ -1,4 +1,3 @@
-#include <fillwave/Log.h>
 #include <fillwave/Fillwave.h>
 #include "../mocks/Button.h"
 

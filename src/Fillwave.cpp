@@ -439,7 +439,7 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
 const aiScene* Engine::getModelFromFile(string path) {
-  fLogD("Reading model %s", path.c_str());
+  fLogD("Reading model ", path);
   return mImpl->mImporter.ReadFile((mImpl->mFileLoader.getRootPath() + path).c_str(),
                                    aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);
 }
