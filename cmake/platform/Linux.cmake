@@ -20,10 +20,6 @@ include_directories (${FILLWAVE_PATH_INCLUDE}
     ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
     /usr/include/freetype2) #uglt freetype2 needs /usr/local/include/freetype2/ft2build.h
 
-if (FILLWAVE_COMPILATION_UBUNTU1710_WORKAROUNDS OR FILLWAVE_BUILD_PACK)
-  include_directories (${FILLWAVE_EXT_SPDLOG_INCLUDES})
-endif()
-
 if (FILLWAVE_BUILD_PACK)
   include_directories (${FILLWAVE_MODEL_LOADER_INCLUDES})
 endif ()
