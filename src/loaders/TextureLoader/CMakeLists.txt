@@ -17,10 +17,6 @@ else()
   add_library (textureloader SHARED ${FILLWAVE_TEXTURE_LOADER_SOURCES})
 endif (WIN32)
 
-if (FILLWAVE_COMPILATION_UBUNTU1710_WORKAROUNDS OR WIN32)
-  include_directories (${FILLWAVE_EXT_SPDLOG_INCLUDES})
-endif()
-
 if (FILLWAVE_BUILD_DEV)
 else ()
   if (FILLWAVE_BUILD_RPM)

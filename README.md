@@ -41,16 +41,16 @@ sudo apt-get install libglew1.10 libglew-dev libglfw3 libglfw3-dev libassimp3 li
 
 ```
 #Ubnuntu 16.04
-sudo apt-get install libglew1.13 libglew-dev libglfw3 libglfw3-dev libassimp3v5 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev libspdlog-dev cmake
+sudo apt-get install libglew1.13 libglew-dev libglfw3 libglfw3-dev libassimp3v5 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev cmake
 ```
 
 ```
 #Fedora
 With configured sudo:
-sudo dnf install glm-devel assimp assimp-devel glew glew-devel freetype-devel freetype spdlog rpm-build rpmdevtools
+sudo dnf install glm-devel assimp assimp-devel glew glew-devel freetype-devel freetype rpm-build rpmdevtools
 Without configured sudo:
 su
-dnf install glm-devel assimp assimp-devel glew glew-devel freetype-devel freetype spdlog rpm-build rpmdevtools
+dnf install glm-devel assimp assimp-devel glew glew-devel freetype-devel freetype rpm-build rpmdevtools
 
 ```
 

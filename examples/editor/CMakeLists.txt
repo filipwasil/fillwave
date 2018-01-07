@@ -29,10 +29,6 @@ if (WIN32)
     include_directories(${FILLWAVE_EXT_FONTGENERATOR_PATH})
 endif()
 
-if (FILLWAVE_COMPILATION_UBUNTU1710_WORKAROUNDS OR WIN32)
-    include_directories (${FILLWAVE_EXT_SPDLOG_INCLUDES})
-endif()
-
 include_directories(SYSTEM ${Qt5Widgets_INCLUDE_DIRS})
 include_directories(SYSTEM ${Qt5OpenGL_INCLUDE_DIRS})
 include_directories(SYSTEM ${Qt5Xml_INCLUDE_DIRS})
