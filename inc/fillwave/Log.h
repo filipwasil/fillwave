@@ -115,7 +115,6 @@ constexpr auto FLOG_END = "\033[0m";
    static const std::string _tag_ = "";                                 \
    static const char _mask_ = 0;
 
-/* Log */
 #ifdef __ANDROID__
 
 #define GPU_FATAL ANDROID_LOG_FATAL
@@ -124,6 +123,21 @@ constexpr auto FLOG_END = "\033[0m";
 #define GPU_DEBUG ANDROID_LOG_DEBUG
 #define GPU_WARN ANDROID_LOG_WARN
 #define GPU_USER ANDROID_LOG_WARN
+
+#else /* __ANDROID__ */
+
+#define GPU_FATAL FLOG_MAGENTA
+#define GPU_ERROR FLOG_RED
+#define GPU_INFO FLOG_WHITE
+#define GPU_DEBUG FLOG_GREEN
+#define GPU_WARN FLOG_YELLOW
+#define GPU_USER FLOG_BLUE
+
+#endif /* __ANDROID__ */
+
+/* Log */
+#ifdef __ANDROID__
+
 #define fLog() __android_log_print(LOG_FLAG, ::_tag_.c_str(), "")
 #define fLogBase(LOG_CONDITION, LOG_FLAG, ...)\
    do { if ( FIF(LOG_CONDITION) ) (void)__android_log_print(LOG_FLAG, ::_tag_.c_str(), __VA_ARGS__); } while(0)
@@ -131,26 +145,23 @@ constexpr auto FLOG_END = "\033[0m";
 #else /* __ANDROID__ */
 
 template<typename T>
-static void fLogBase(std::stringstream& s, const T& t) { std::cout << s.str() << t << FLOG_END << std::endl; }
+static void fLogWithStream(std::stringstream& s, const T& t) {
+  std::cout << s.str() << t << FLOG_END << std::endl;
+}
 template<typename T, typename... Args>
-static void fLogBase(std::stringstream& s, const T& t, Args... args) { s << t; fLogBase(s, args...); }
+static void fLogWithStream(std::stringstream& s, const T& t, Args... args) {
+  s << t;
+  fLogWithStream(s, args...);
+}
 
-#define fLogBase(LOG_CONDITION, LOG_FLAG, ...) LOG_FLAG ## _FN(LOG_CONDITION, __VA_ARGS__)
-#define GPU_FN(COLOR, COND, ...)\
+#define fLogBase(COLOR, COND, ...)\
 do {\
   if ( FIF(COND) ) {\
     std::stringstream s;\
     s << COLOR;\
-    fLogBase(s, ::_tag_,":", __LINE__, " ", __VA_ARGS__);\
+    fLogWithStream(s, ::_tag_,":", __LINE__, " ", __VA_ARGS__);\
   }\
 } while(0)
-
-#define GPU_FATAL_FN(COND, ...) GPU_FN(FLOG_MAGENTA, COND, __VA_ARGS__)
-#define GPU_ERROR_FN(COND, ...) GPU_FN(FLOG_RED, COND, __VA_ARGS__)
-#define GPU_WARNING_FN(COND, ...) GPU_FN(FLOG_YELLOW, COND, __VA_ARGS__)
-#define GPU_DEBUG_FN(COND, ...) GPU_FN(FLOG_GREEN, COND, __VA_ARGS__)
-#define GPU_INFO_FN(COND, ...) GPU_FN(FLOG_WHITE, COND, __VA_ARGS__)
-#define GPU_USER_FN(COND, ...) GPU_FN(FLOG_BLUE, COND, __VA_ARGS__)
 
 #endif /* __ANDROID__ */
 
@@ -202,11 +213,11 @@ do {\
 
 #endif /* __ANDROID__ */
 
-#define fLogF(...) fLogBase(FFATAL, GPU_FATAL, __VA_ARGS__)
-#define fLogE(...) fLogBase(FERROR, GPU_ERROR, __VA_ARGS__)
-#define fLogI(...) fLogBase(FINFO, GPU_INFO, __VA_ARGS__)
-#define fLogU(...) fLogBase(FUSER, GPU_USER, __VA_ARGS__)
-#define fLogD(...) fLogBase(FDEBUG, GPU_DEBUG, __VA_ARGS__)
-#define fLogW(...) fLogBase(FWARNING, GPU_WARN, __VA_ARGS__)
+#define fLogF(...) fLogBase(FLOG_MAGENTA, FFATAL, __VA_ARGS__)
+#define fLogE(...) fLogBase(FLOG_RED, FERROR, __VA_ARGS__)
+#define fLogI(...) fLogBase(FLOG_WHITE, FINFO, __VA_ARGS__)
+#define fLogU(...) fLogBase(FLOG_BLUE, FUSER, __VA_ARGS__)
+#define fLogD(...) fLogBase(FLOG_GREEN, FDEBUG, __VA_ARGS__)
+#define fLogW(...) fLogBase(FLOG_YELLOW, FWARNING, __VA_ARGS__)
 
 #endif /* FILLWAVE_COMPILATION_RELEASE */
