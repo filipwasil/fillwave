@@ -1,21 +1,5 @@
-//============================================================================
-// Name        : example_callbacks.cpp
-// Author      : Filip Wasil
-// Version     :
-// Copyright   : none
-// Description : Fillwave engine example callbacks
-//============================================================================
-
 #include <example.h>
-
-/* Audio */
-//#include <portaudio.h>
-/* Graphics */
-#include <CallbacksGLFW/MoveCameraCallback.h>
-#include <CallbacksGLFW/TimeStopCallback.h>
 #include <ContextGLFW.h>
-
-/* Physics */
 
 using namespace flw;
 using namespace flw::flf;
