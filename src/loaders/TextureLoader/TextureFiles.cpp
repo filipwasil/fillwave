@@ -32,16 +32,13 @@
 namespace flw {
 namespace flc {
 
-Texture2DFileConfig::Texture2DFileConfig(GLint level,
-    GLint border,
-    GLboolean mipmaps,
-    GLboolean compression)
+Texture2DFileConfig::Texture2DFileConfig(GLint level, GLint border, GLboolean mipmaps, GLboolean compression)
     : mMipmapsLevel(level)
     , mMipmaps(mipmaps)
     , mCompression(compression)
     , mBorder(border)
     , mCompressionSize(0) {
-
+  // nothing
 }
 
 
@@ -55,7 +52,7 @@ Texture2DFileHeader::Texture2DFileHeader(GLint internalFormat,
     , mWidth(width)
     , mType(type)
     , mFormat(format) {
-
+  // nothing
 }
 
 Texture2DFile::~Texture2DFile() {

@@ -38,7 +38,8 @@ private:
   class TGetterHelper {
     friend class TGetter;
   public:
-    TGetterHelper(TPtr *ptr) : mPtr(ptr) {
+    TGetterHelper(TPtr *ptr)
+        : mPtr(ptr) {
     }
 
     TPtr *operator->() && {
@@ -51,9 +52,9 @@ private:
 
     TGetterHelper(const TGetter &) = delete;
 
-    TGetterHelper operator=(TGetterHelper getter) = delete;
+    TGetterHelper operator = (TGetterHelper getter) = delete;
 
-    TGetterHelper operator=(TGetterHelper &&getter) = delete;
+    TGetterHelper operator = (TGetterHelper &&getter) = delete;
 
     TPtr *operator->()& = delete;
 
@@ -61,7 +62,8 @@ private:
   };
 
 public:
-  TGetter(TPtr* p) : mHelper(p) {
+  TGetter(TPtr* p)
+      : mHelper(p) {
 
   }
 
@@ -75,9 +77,9 @@ public:
 
   TGetter *operator->()& = delete;
 
-  TGetter operator=(TGetter getter) = delete;
+  TGetter operator = (TGetter getter) = delete;
 
-  TGetter operator=(TGetter &&getter) = delete;
+  TGetter operator = (TGetter &&getter) = delete;
 
 private:
   TGetterHelper mHelper;

@@ -48,40 +48,42 @@ Texture3DRenderable::Texture3DRenderable(flc::Texture2DFile *filePosX,
     flc::Texture2DFile *fileNegZ,
     flc::Texture2DRenderable *texture,
     ParameterList &parameters)
-    : Texture3D(filePosX, //right
-                fileNegX, //left
-                filePosY, //ceil
-                fileNegY, //floor
-                filePosZ, //front
-                fileNegZ, //back
-                parameters), mShadowTexture(texture) {
+    : Texture3D(filePosX //right
+                , fileNegX //left
+                , filePosY //ceil
+                , fileNegY //floor
+                , filePosZ //front
+                , fileNegZ //back
+                , parameters)
+    , mShadowTexture(texture) {
 
 }
 
 void Texture3DRenderable::resize(GLint width, GLint heigth) {
-  mFront->mHeader.mWidth = width;
-  mFront->mHeader.mHeight = heigth;
-  mFront->mData = nullptr;
+  mFront->mFile2d.mHeader.mWidth = width;
+  mFront->mFile2d.mHeader.mHeight = heigth;
+  mFront->mFile2d.mData = nullptr;
 
-  mBack->mHeader.mWidth = width;
-  mBack->mHeader.mHeight = heigth;
-  mBack->mData = nullptr;
+  mBack->mFile2d.mHeader.mWidth = width;
+  mBack->mFile2d.mHeader.mHeight = heigth;
+  mBack->mFile2d.mData = nullptr;
 
-  mCeil->mHeader.mWidth = width;
-  mCeil->mHeader.mHeight = heigth;
-  mCeil->mData = nullptr;
+  mCeil->mFile2d.mHeader.mWidth = width;
+  mCeil->mFile2d.mHeader.mHeight = heigth;
+  mCeil->mFile2d.mData = nullptr;
 
-  mFloor->mHeader.mWidth = width;
-  mFloor->mHeader.mHeight = heigth;
-  mFloor->mData = nullptr;
+  mFloor->mFile2d.mHeader.mWidth = width;
+  mFloor->mFile2d.mHeader.mHeight = heigth;
+  mFloor->mFile2d.mData = nullptr;
 
-  mRight->mHeader.mWidth = width;
-  mRight->mHeader.mHeight = heigth;
-  mRight->mData = nullptr;
+  mRight->mFile2d.mHeader.mWidth = width;
+  mRight->mFile2d.mHeader.mHeight = heigth;
+  mRight->mFile2d.mData = nullptr;
 
-  mLeft->mHeader.mWidth = width;
-  mLeft->mHeader.mHeight = heigth;
-  mLeft->mData = nullptr;
+  mLeft->mFile2d.mHeader.mWidth = width;
+  mLeft->mFile2d.mHeader.mHeight = heigth;
+  mLeft->mFile2d.mData = nullptr;
+
   bind();
   sendData();
   unbind();
@@ -112,7 +114,7 @@ void Texture3DRenderable::setAttachmentFace(GLenum face, GLenum attachment) {
 }
 
 void Texture3DRenderable::log() {
-
+  // nothing
 }
 
 } /* flc */

@@ -35,7 +35,7 @@ void Sampler::unbind(GLuint id) {
 }
 
 void Sampler::setParameters(ParameterList parameters) {
-  for (auto it : parameters) {
+  for (auto& it : parameters) {
     setParameter(it.first, it.second);
   }
 }

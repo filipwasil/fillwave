@@ -84,30 +84,33 @@ enum class EMemoryAllocation {
  * \brief Stores the single file info.
  */
 
-class Texture2DFile {
-public:
+struct Texture2DFile {
+  Texture2DFile()
+      : mAllocation (EMemoryAllocation::eNone) {
+
+  }
+  ~Texture2DFile();
+
   Texture2DFileHeader mHeader;
   Texture2DFileConfig mConfig;
   GLubyte* mData;
-  EMemoryAllocation mAllocation = EMemoryAllocation::eNone;
-
-  virtual ~Texture2DFile();
+  EMemoryAllocation mAllocation;
 };
 
 /*! \class Texture3DFile
  * \brief Stores the single file info.
  */
 
-class Texture3DFile : public Texture2DFile {
-public:
-  GLenum mCubeTarget;
-
-  Texture3DFile(Texture2DFile *file, GLenum target)
-      : mCubeTarget(target) {
-    mHeader = file->mHeader;
-    mConfig = file->mConfig;
-    mData = file->mData;
+struct Texture3DFile {
+  Texture3DFile(Texture2DFile* file, GLenum target)
+    : mCubeTarget(target) {
+    mFile2d.mHeader = file->mHeader;
+    mFile2d.mConfig = file->mConfig;
+    mFile2d.mData = file->mData;
+    delete file;
   }
+  Texture2DFile mFile2d;
+  GLenum mCubeTarget;
 };
 
 } /* flc */

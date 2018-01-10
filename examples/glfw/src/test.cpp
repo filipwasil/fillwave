@@ -53,12 +53,6 @@ void perform() {
   /* Lights */
   mEngine->storeLightSpot(glm::vec3(1.0, 1.0, 3.0), glm::quat(), glm::vec4(1.0, 1.0, 1.0, 0.0), light.get());
 
-  /* Engine callbacks */
-//  mEngine->attachCallback(make_unique<TimeStopCallback>(mEngine.get()));
-//  mEngine->attachCallback(make_unique<MoveCameraCallback>(mEngine.get(), EEventType::eKey, 0.1));
-//  mEngine->attachCallback(make_unique<MoveCameraCallback>(
-//    mEngine.get(), EEventType::eCursorPosition, 0.01));
-
   auto model = make_unique<Model>(mEngine,
                                   ProgramLoader(mEngine).getProgram(EProgram::basic),
                                   "meshes/sphere.obj",
@@ -78,10 +72,21 @@ void perform() {
                                    "fonts/Titania",
                                    glm::vec2(-0.95, -0.80),
                                    70.0);
-//  mEventsHandler.push_back(
-//    std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
-//  mEventsHandler.push_back(
-//    std::make_unique<scene::callbacks::StandardMouseEventHandler>(mEngine));
+
+  auto screenSize = mEngine->getScreenSize();
+
+  auto textureFile = TextureLoader().loadEmpty(screenSize.x, screenSize.y);
+
+  flc::ParameterList parameters = {
+      flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+      , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+      , flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+      , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+  };
+
+  auto program = ProgramLoader(mEngine).getProgram(EProgram::basic);
+
+  flw::flc::Texture2DRenderable t(GL_COLOR_ATTACHMENT0, textureFile, parameters);
 }
 
 void quit() {

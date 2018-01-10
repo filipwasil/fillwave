@@ -53,7 +53,7 @@ inline void TextureSystem::checkExtensions() {
   for (int i = 0; i < NumberOfExtensions; i++) {
     const GLubyte *ccc = glGetStringi(GL_EXTENSIONS, i);
     auto find_extension = [ccc](const char *name) -> bool {
-      if ((strcmp((const char *) ccc, name) == 0)) {
+      if (0 == (strcmp((const char *) ccc, name))) {
         fLogI(name, " compression supported");
         return true;
       } else {
@@ -85,11 +85,12 @@ inline void TextureSystem::checkExtensions() {
 #endif
 }
 
-flc::Texture2D *TextureSystem::get(const std::string &texturePath, ECompression compression, EFlip flip) {
+flc::Texture2D* TextureSystem::get(const std::string &texturePath, ECompression compression, EFlip flip) {
   const std::string filePath = mRootPath + texturePath;
   if (texturePath.empty()) {
     return nullptr;
   }
+
   if (mTextures2D.find(filePath) != mTextures2D.end()) {
     return mTextures2D[filePath].get();
   }
@@ -108,13 +109,14 @@ flc::Texture2DRenderableDynamic *
 TextureSystem::getDynamic(const std::string &fragmentShaderPath, flc::Program *program, glm::ivec2 screenSize) {
   std::string filePath = mRootPath + fragmentShaderPath;
 
-  flc::Texture2DFile* file = mLoader.loadEmpty(screenSize.x, screenSize.y);
+  auto file = mLoader.loadEmpty(screenSize.x, screenSize.y);
 
-  flc::ParameterList parameters;
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters = {
+    flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+    , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+  };
 
   return mTextures2DDynamic.store(fragmentShaderPath, file, parameters, program);
 }
@@ -137,82 +139,65 @@ flc::Texture3D *TextureSystem::get(const std::string &posX,
 
   fLogD("Texture to be added: %s", name.c_str());
 
-  flc::ParameterList parameters;
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters = {
+    flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+    , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+  };
 
   fLogD("Texture %s will be added to manager", name.c_str());
 
-  flc::Texture2DFile* filePosX = mLoader.load(filePathPosX, EFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* fileNegX = mLoader.load(filePathNegX, EFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* filePosY = mLoader.load(filePathPosY, EFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* fileNegY = mLoader.load(filePathNegY, EFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* filePosZ = mLoader.load(filePathPosZ, EFlip::eNone, GL_RGBA, mRootPath);
-  flc::Texture2DFile* fileNegZ = mLoader.load(filePathNegZ, EFlip::eNone, GL_RGBA, mRootPath);
+  auto filePosX = mLoader.load(filePathPosX, EFlip::eNone, GL_RGBA, mRootPath);
+  auto fileNegX = mLoader.load(filePathNegX, EFlip::eNone, GL_RGBA, mRootPath);
+  auto filePosY = mLoader.load(filePathPosY, EFlip::eNone, GL_RGBA, mRootPath);
+  auto fileNegY = mLoader.load(filePathNegY, EFlip::eNone, GL_RGBA, mRootPath);
+  auto filePosZ = mLoader.load(filePathPosZ, EFlip::eNone, GL_RGBA, mRootPath);
+  auto fileNegZ = mLoader.load(filePathNegZ, EFlip::eNone, GL_RGBA, mRootPath);
 
   if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {
     fLogD("Texture %s added to manager", name.c_str());
 
-    flc::Texture3D *t = mTextures3D.store(name,
-                                           filePosX,
-                                           fileNegX,
-                                           filePosY,
-                                           fileNegY,
-                                           filePosZ,
-                                           fileNegZ,
-                                           parameters);
-
-    delete filePosX;
-    delete fileNegX;
-    delete filePosY;
-    delete fileNegY;
-    delete filePosZ;
-    delete fileNegZ;
+    auto t = mTextures3D.store(name, filePosX, fileNegX, filePosY, fileNegY, filePosZ, fileNegZ, parameters);
 
     return t;
-  } else {
-    if (!filePosX) {
-      fLogD("3D Texture positive x %s not found", posX.c_str());
-    } else {
-      delete filePosX;
-    }
-    if (!fileNegX) {
-      fLogD("3D Texture negative x %s not found", negX.c_str());
-    } else {
-      delete fileNegX;
-    }
-    if (!filePosY) {
-      fLogD("3D Texture positive y %s not found", posY.c_str());
-    } else {
-      delete filePosY;
-    }
-    if (!fileNegY) {
-      fLogD("3D Texture negative y %s not found", negY.c_str());
-    } else {
-      delete fileNegY;
-    }
-    if (!filePosZ) {
-      fLogD("3D Texture positive z %s not found", posZ.c_str());
-    } else {
-      delete filePosZ;
-    }
-    if (!fileNegZ) {
-      fLogD("3D Texture negative z %s not found", negZ.c_str());
-    } else {
-      delete fileNegZ;
-    }
-    fLogE("Texture 3D %s not added to manager", name.c_str());
-    return nullptr;
   }
+  if (!filePosX) {
+    fLogD("3D Texture positive x %s not found", posX.c_str());
+  } else {
+    delete filePosX;
+  }
+  if (!fileNegX) {
+    fLogD("3D Texture negative x %s not found", negX.c_str());
+  } else {
+    delete fileNegX;
+  }
+  if (!filePosY) {
+    fLogD("3D Texture positive y %s not found", posY.c_str());
+  } else {
+    delete filePosY;
+  }
+  if (!fileNegY) {
+    fLogD("3D Texture negative y %s not found", negY.c_str());
+  } else {
+    delete fileNegY;
+  }
+  if (!filePosZ) {
+    fLogD("3D Texture positive z %s not found", posZ.c_str());
+  } else {
+    delete filePosZ;
+  }
+  if (!fileNegZ) {
+    fLogD("3D Texture negative z %s not found", negZ.c_str());
+  } else {
+    delete fileNegZ;
+  }
+  fLogE("Texture 3D %s not added to manager", name.c_str());
+  return nullptr;
 }
 
 flc::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint height) {
-
   auto file = new flc::Texture2DFile();
-  flc::ParameterList parameters;
 
   file->mHeader.mFormat = GL_DEPTH_COMPONENT;
   file->mHeader.mInternalFormat = GL_DEPTH_COMPONENT;
@@ -226,19 +211,22 @@ flc::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint height
 
 #ifdef FILLWAVE_GLES_3_0
   file->mHeader.mType = GL_UNSIGNED_INT;
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_COMPARE_MODE,
-                           GL_COMPARE_REF_TO_TEXTURE));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL));
+  flc::ParameterList parameters = {
+      flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+      , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+      , flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER)
+      , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER)
+      , flc::Parameter(GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE)
+      , flc::Parameter(GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL)
+  };
 #else
   file->mHeader.mType = GL_FLOAT;
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
+  flc::ParameterList parameters = {
+    flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER)
+    , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER)
+  };
 #endif
 
   return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file, parameters);
@@ -273,18 +261,20 @@ flc::Texture3DRenderable* TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*
   file2D->mConfig.mMipmaps = GL_FALSE;
   file2D->mConfig.mCompression = GL_FALSE;
 
-  flc::ParameterList parameters2D;
-  parameters2D.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters2D.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters2D.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters2D.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters2D = {
+    flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER)
+    , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER)
+  };
 
-  flc::ParameterList parameters3D;
-  parameters3D.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters3D.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters3D.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters3D.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
-  parameters3D.push_back(flc::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters3D = {
+    flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+    , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+    , flc::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE)
+  };
 
   flc::Texture2DRenderable *t = mTextures2DRenderable.store(mTextures2DRenderable.size(),
                                                              GL_DEPTH_ATTACHMENT,
@@ -320,20 +310,22 @@ flc::Texture2DRenderable *TextureSystem::getColor2D(GLuint width, GLuint height)
   file->mConfig.mMipmaps = GL_FALSE;
   file->mConfig.mCompression = GL_FALSE;
 
-  flc::ParameterList parameters;
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+  flc::ParameterList parameters2D = {
+    flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+    , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+  };
 
-  return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_COLOR_ATTACHMENT0, file, parameters);
+  return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_COLOR_ATTACHMENT0, file, parameters2D);
 }
 
 flc::Texture2D *TextureSystem::getDeferredColor(GLuint width, GLuint height, GLuint size) {
 
-  flc::ParameterList parameters;
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+  flc::ParameterList parameters2D = {
+    flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+    , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+  };
 
   flc::Texture2DFileHeader colorTextureHeader;
 #ifdef FILLWAVE_GLES_3_0
@@ -353,14 +345,15 @@ flc::Texture2D *TextureSystem::getDeferredColor(GLuint width, GLuint height, GLu
   file->mHeader = colorTextureHeader;
   file->mData = nullptr;
 
-  return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, size);
+  return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters2D, size);
 }
 
 flc::Texture2D* TextureSystem::getDeferredColorScreen(GLuint width, GLuint height, GLuint size) {
 
-  flc::ParameterList parameters;
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST));
-  parameters.push_back(flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+  flc::ParameterList parameters2D = {
+    flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+    , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+  };
 
   flc::Texture2DFileHeader colorTextureHeader;
 #ifdef FILLWAVE_GLES_3_0
@@ -380,7 +373,7 @@ flc::Texture2D* TextureSystem::getDeferredColorScreen(GLuint width, GLuint heigh
   file->mHeader = colorTextureHeader;
   file->mData = nullptr;
 
-  return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters, size);
+  return mTextures2DDeferred.store(mTextures2DDeferred.size(), file, parameters2D, size);
 }
 
 flc::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {

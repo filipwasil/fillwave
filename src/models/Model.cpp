@@ -253,6 +253,7 @@ void Model::reloadModel(
   const aiScene* scene = mEngine->getModelFromFile(path);
   if (!scene) {
     fLogF("Model: %s could not be read", path.c_str());
+    return;
   }
   initAnimations(scene);
   initShadowing(mEngine);
