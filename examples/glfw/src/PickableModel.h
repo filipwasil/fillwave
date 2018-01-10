@@ -7,12 +7,12 @@ using namespace flw;
 
 class PickableModel : public flf::Model {
 private:
-  pText mText;
+  flf::ps<flf::Text> mText;
   pIEffect mPickedEffect;
   std::string mName;
 public:
   PickableModel(std::string name,
-      pText text,
+      flf::ps<flf::Text> text,
       Engine *engine,
       flc::Program *program,
       const std::string &shapePath,

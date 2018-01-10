@@ -97,10 +97,10 @@ public:
   void log(const std::string& programName) const;
 
 private:
+  const bool mDelayedLinking;
   GLuint mHandle;
   std::vector<Uniform> mUniforms;
   std::vector<puUniformBuffer> mUnifromBuffers;
-  bool mDelayedLinking;
   std::vector<flc::Shader*> mShaders;
 
   inline void getUniforms();

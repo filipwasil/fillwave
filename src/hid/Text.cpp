@@ -32,7 +32,7 @@
  */
 
 
-#include <fillwave/hud/Text.h>
+#include <fillwave/hid/Text.h>
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/Fillwave.h>
 

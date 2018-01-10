@@ -31,7 +31,7 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/hud/base/Sprite.h>
+#include <fillwave/hid/base/Sprite.h>
 
 #include <fillwave/Log.h>
 

@@ -1,6 +1,9 @@
-#pragma once
-
 /*
+ * HUD.cpp
+ *
+ *  Created on: Jan 11, 2016
+ *      Author: filip
+ *
  * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
@@ -28,32 +31,18 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/hud/base/Sprite.h>
-#include <fillwave/common/IPickable.h>
+
+#include <fillwave/hid/Button.h>
+#include <fillwave/Fillwave.h>
 
 namespace flw {
-class Engine;
 namespace flf {
 
-/*! \class Button
- * \brief Pickable hud node.
- */
-
-class Button : public Sprite, public IPickable {
-public:
-  Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm::vec2 scale);
-
-  virtual ~Button() override = default;
-
-  /* IPickable */
-  void pick(glm::vec3 color) override;
-
-  void unpick() override;
-
-  void onPicked() override;
-
-  void onUnpicked() override;
-};
+void HID::draw() {
+  for (auto &it : mChildren) {
+    it->draw();
+  }
+}
 
 } /* flf */
 } /* flw */

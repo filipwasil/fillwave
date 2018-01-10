@@ -9,7 +9,7 @@
 #include <fillwave/Log.h>
 
 PickableModel::PickableModel(std::string name,
-    pText text,
+    flf::ps<flf::Text> text,
     Engine *engine,
     flc::Program *program,
     const std::string &shapePath,

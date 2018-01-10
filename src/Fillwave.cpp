@@ -199,7 +199,7 @@ void Engine::attachHandler(std::function<void(const flf::Event&)>&& handler, flf
   mImpl->attachHandler(std::move(handler), type);
 }
 
-pText Engine::storeText(const string& content,
+flf::ps<flf::Text> Engine::storeText(const string& content,
     const string& fontName,
     glm::vec2 position,
     GLfloat scale,
@@ -222,7 +222,7 @@ pText Engine::storeText(const string& content,
     ifstream myfile(mImpl->mFileLoader.getRootPath(fontName + ".meta"));
     if (!myfile.is_open()) {
       fLogE("No text added. Could not write to metadata file: %s", (fontName + ".meta").c_str());
-      return pText();
+      return flf::ps<flf::Text>();
     }
     string line;
     string ASCII, xMin, width, yMin, height, yOffset;
@@ -239,7 +239,7 @@ pText Engine::storeText(const string& content,
         fLogE("Metadata can not be read for file %s.", (fontName + ".meta").c_str());
         myfile.close();
         delete newFont;
-        return pText();
+        return flf::ps<flf::Text>();
       }
     }
     myfile.close();
@@ -247,13 +247,13 @@ pText Engine::storeText(const string& content,
     font = newFont;
   }
 
-  pText text = make_shared<flf::Text>(content, t, position, this, scale, font, color, effect);
-  mImpl->mTextManager.push_back(pText(text));
+  flf::ps<flf::Text> text = make_shared<flf::Text>(content, t, position, this, scale, font, color, effect);
+  mImpl->mTextManager.push_back(flf::ps<flf::Text>(text));
   return text;
 }
 
-void Engine::detach(pText text) {
-  auto _compare_function = [text](pText t) -> bool {
+void Engine::detach(flf::ps<flf::Text> text) {
+  auto _compare_function = [text](flf::ps<flf::Text> t) -> bool {
     return (t == text);
   };
   auto _begin = mImpl->mTextManager.begin();

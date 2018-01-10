@@ -241,8 +241,8 @@ flc::Texture3DRenderable* TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*
     file[i]->mHeader.mInternalFormat = GL_R32F;
     file[i]->mConfig.mMipmapsLevel = 0;
     file[i]->mConfig.mBorder = 0;
-    file[i]->mHeader.mWidth = 512; // /*width ?*/
-    file[i]->mHeader.mHeight = 512; // /*height ?*/
+    file[i]->mHeader.mWidth = 512;
+    file[i]->mHeader.mHeight = 512;
     file[i]->mHeader.mType = GL_FLOAT;
     file[i]->mData = nullptr;
     file[i]->mConfig.mMipmaps = GL_FALSE;
@@ -276,20 +276,8 @@ flc::Texture3DRenderable* TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*
     , flc::Parameter(GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE)
   };
 
-  flc::Texture2DRenderable *t = mTextures2DRenderable.store(mTextures2DRenderable.size(),
-                                                             GL_DEPTH_ATTACHMENT,
-                                                             file2D,
-                                                             parameters2D);
-
-  return mTextures3DRenderable.store(mTextures3DRenderable.size(),
-                                     file[0],
-                                     file[1],
-                                     file[2],
-                                     file[3],
-                                     file[4],
-                                     file[5],
-                                     t,
-                                     parameters3D);
+  auto t = mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file2D, parameters2D);
+  return mTextures3DRenderable.store(mTextures3DRenderable.size(), file[0], file[1], file[2], file[3], file[4], file[5], t, parameters3D);
 }
 
 flc::Texture2DRenderable *TextureSystem::getColor2D(GLuint width, GLuint height) {

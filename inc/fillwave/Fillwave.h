@@ -33,7 +33,7 @@
 #include "fillwave/space/LightPoint.h"
 #include "fillwave/space/LightSpot.h"
 #include "fillwave/space/LightDirectional.h"
-#include "fillwave/hud/Text.h"
+#include "fillwave/hid/Text.h"
 
 #include "fillwave/common/TGetter.h"
 
@@ -103,7 +103,7 @@ public:
   void drawTexture(flc::Texture *t);
 
   /* Remove */
-  void detach(pText text);
+  void detach(flf::ps<flf::Text> text);
   void detach(flf::LightSpot *light);
   void detach(flf::LightDirectional *light);
   void detach(flf::LightPoint *light);
@@ -164,7 +164,7 @@ public:
       flf::Moveable *followed = nullptr);
 
   /* Store text */
-  pText storeText(const std::string &content,
+  flf::ps<flf::Text> storeText(const std::string &content,
       const std::string &fontName,
       glm::vec2 position,
       GLfloat scale = 1.0f,
