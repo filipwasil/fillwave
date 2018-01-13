@@ -1,10 +1,5 @@
 /*
- * GLObject.cpp
- *
- *  Created on: 22 May 2015
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,7 +26,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/core/GLObject.h>
 #include <fillwave/Log.h>
 
@@ -46,7 +40,7 @@ GLObject::GLObject(GLsizei howMany)
     fLogF("Currect globject size exceeded");
   }
 
-  for (GLsizei i = 0; i < mHowMany; i++) {
+  for (GLsizei i = 0; i < mHowMany; ++i) {
     mHandles[i] = 0;
   }
 }

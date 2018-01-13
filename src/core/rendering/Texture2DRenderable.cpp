@@ -1,10 +1,5 @@
 /*
- * Texture2DRenderable.cpp
- *
- *  Created on: Aug 13, 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -144,7 +139,7 @@ void Texture2DRenderable::copyFrom(Framebuffer *source) {
 }
 
 void Texture2DRenderable::log() {
-
+  // nothing
 }
 
 void Texture2DRenderable::reload() {

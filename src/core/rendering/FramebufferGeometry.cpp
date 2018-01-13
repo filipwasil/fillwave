@@ -1,10 +1,5 @@
 /*
- * FramebufferGeometry.cpp
- *
- *  Created on: 22 May 2015
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.

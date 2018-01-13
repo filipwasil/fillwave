@@ -1,10 +1,5 @@
 /*
- * Attribute.cpp
- *
- *  Created on: 2 Mar 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/core/pipeline/Attribute.h>
 
@@ -101,9 +95,7 @@ void Attribute::arrayEnable() {
 }
 
 void Attribute::arraySet() {
-  glVertexAttribPointer(mIndex, mSize,
-//                          mType,
-                        GL_FLOAT, mNormalized, mStride, mPointer);
+  glVertexAttribPointer(mIndex, mSize, GL_FLOAT, mNormalized, mStride, mPointer);
   fLogC("VertexAttribPointer");
 }
 
@@ -128,13 +120,13 @@ std::string Attribute::getName() {
 }
 
 void Attribute::log() {
-  fLogI("mName %s", mName.c_str());
-  fLogI("mType 0x%x", mType);
-  fLogI("mIndex %d", mIndex);
-  fLogI("mSize %d", mSize);
-  fLogI("mType%d ", mType);
-  fLogI("mNormalized %d", mNormalized);
-  fLogI("mStride %d", mStride);
+  fLogI("mName ", mName.c_str());
+  fLogI("mType ", mType);
+  fLogI("mIndex ", mIndex);
+  fLogI("mSize ", mSize);
+  fLogI("mType ", mType);
+  fLogI("mNormalized ", mNormalized);
+  fLogI("mStride ", mStride);
 }
 
 } /* flc */

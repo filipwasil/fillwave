@@ -1,10 +1,5 @@
 /*
- * Framebuffer.cpp
- *
- *  Created on: 3 April 2013
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/core/rendering/Framebuffer.h>
 #include <fillwave/Log.h>
@@ -70,7 +64,7 @@ void Framebuffer::attachTexture2D(GLenum attachment, GLenum target, GLuint textu
 
 void Framebuffer::attachTexture2DDraw(GLenum attachment, GLenum target, GLuint textureHandle) {
   glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, attachment, target, textureHandle, 0);
-  fLogC("attachTexture2DDraw failed. attachment: 0x%x, target: 0x%x, handle: 0x%x", attachment, target, textureHandle);
+  fLogC("attachTexture2DDraw failed. attachment: ", attachment, ", target: ", target, ", handle: ", textureHandle);
 }
 
 void Framebuffer::setReadColorAttachment(GLuint attachmentColor) {

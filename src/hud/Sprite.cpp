@@ -1,10 +1,5 @@
 /*
- * ProgressBar.cpp
- *
- *  Created on: Jan 11, 2016
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.

@@ -1,10 +1,5 @@
 /*
- * Fence.cpp
- *
- *  Created on: Jun 4, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,7 +26,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/core/pipeline/Fence.h>
 
 namespace flw {
@@ -39,7 +33,7 @@ namespace flc {
 
 Fence::Fence(GLenum target)
     : mHandle(glFenceSync(target, 0)) {
-
+  // nothing
 }
 
 Fence::~Fence() {

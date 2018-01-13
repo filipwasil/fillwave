@@ -1,10 +1,5 @@
 /*
- * Uniform.cpp
- *
- *  Created on: May 11, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/core/pipeline/Uniform.h>
 #include <fillwave/Log.h>
@@ -124,7 +118,7 @@ void Uniform::push(glm::mat4 *value, GLuint size) {
 
 void Uniform::push(GLint location, GLint data) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniform1i(location, data);
     fLogC("Uniform int push failed");
@@ -141,7 +135,7 @@ void Uniform::push(GLint location, bool data) {
 
 void Uniform::push(GLint location, GLint *data, GLint count) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniform1iv(location, count, data);
     fLogC("Uniform var int push failed");
@@ -150,7 +144,7 @@ void Uniform::push(GLint location, GLint *data, GLint count) {
 
 void Uniform::push(GLint location, GLfloat data) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniform1f(location, data);
     fLogC("Uniform float push failed");
@@ -159,7 +153,7 @@ void Uniform::push(GLint location, GLfloat data) {
 
 void Uniform::push(GLint location, GLfloat *data, GLint count) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniform1fv(location, count, data);
     fLogC("Uniform var float push failed");
@@ -168,7 +162,7 @@ void Uniform::push(GLint location, GLfloat *data, GLint count) {
 
 void Uniform::push(GLint location, glm::vec2 data) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniform2fv(location, 1, glm::value_ptr(data));
     fLogC("Uniform vec2 push failed");
@@ -177,7 +171,7 @@ void Uniform::push(GLint location, glm::vec2 data) {
 
 void Uniform::push(GLint location, glm::vec3 data) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniform3fv(location, 1, glm::value_ptr(data));
     fLogC("Uniform vec3 push failed");
@@ -186,7 +180,7 @@ void Uniform::push(GLint location, glm::vec3 data) {
 
 void Uniform::push(GLint location, glm::vec4 data) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniform4fv(location, 1, glm::value_ptr(data));
     fLogC("Uniform vec4 push failed");
@@ -195,7 +189,7 @@ void Uniform::push(GLint location, glm::vec4 data) {
 
 void Uniform::push(GLint location, glm::mat2 data) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniformMatrix2fv(location, 1, GL_FALSE, glm::value_ptr(data));
     fLogC("Uniform mat2 push failed");
@@ -204,7 +198,7 @@ void Uniform::push(GLint location, glm::mat2 data) {
 
 void Uniform::push(GLint location, glm::mat3 data) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(data));
     fLogC("Uniform mat3 push failed");
@@ -213,7 +207,7 @@ void Uniform::push(GLint location, glm::mat3 data) {
 
 void Uniform::push(GLint location, glm::mat4 data) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(data));
     fLogC("Uniform mat4 push failed");
@@ -222,7 +216,7 @@ void Uniform::push(GLint location, glm::mat4 data) {
 
 void Uniform::push(GLint location, glm::mat4 *data, GLuint size) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location %d", location);
+    fLogE("No int uniform under location ", location);
   } else {
     glUniformMatrix4fv(location, size, GL_FALSE, reinterpret_cast<GLfloat *>(data));
     fLogC("Uniform var mat4 push failed");
@@ -258,10 +252,10 @@ void Uniform::setData(UniformData data) {
 }
 
 void Uniform::log() const {
-  fLogI("Name: %s", mName.c_str());
-  fLogI("Location: %d", mLocation);
-  fLogI("Type: 0x%x", mType);
-  fLogI("Size: %d", mSize);
+  fLogI("Name: ", mName.c_str());
+  fLogI("Location: ", mLocation);
+  fLogI("Type: ", mType);
+  fLogI("Size: ", mSize);
 }
 
 } /* flc */

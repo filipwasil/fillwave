@@ -1,10 +1,5 @@
 /*
- * Texture.cpp
- *
- *  Created on: 2 Apr 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.

@@ -1,10 +1,5 @@
 /*
- * Texture1D.cpp
- *
- *  Created on: Sep 10, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -40,7 +35,7 @@ namespace flc {
 
 Texture1D::Texture1D(ParameterList &)
     : Texture(GL_TEXTURE_1D, 1) {
-
+  // nothing
 }
 
 void Texture1D::log() {

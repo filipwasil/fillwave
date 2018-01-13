@@ -1,10 +1,5 @@
 /*
- * Query.cpp
- *
- *  Created on: May 17, 2015
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/core/operations/TQuery.h>
 #include <fillwave/Log.h>
@@ -108,9 +102,9 @@ template <GLenum TARGET>
 void TQuery<TARGET>::log() {
   for (GLsizei id = 0; id < mHowMany; ++id) {
     if (glIsQuery(mHandles[id])) {
-      fLogI("Query %d exists", mHandles[id]);
+      fLogI("Query ", mHandles[id], " exists");
     } else {
-      fLogI("Query %d does not exist", mHandles[id]);
+      fLogI("Query ", mHandles[id], " does not exist");
     }
   }
 }

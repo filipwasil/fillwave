@@ -1,8 +1,5 @@
 /*
- *  Created on: 3 Oct 2013
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -29,7 +26,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/pipeline/Attribute.h>
 
@@ -53,7 +49,7 @@ Program::~Program() {
 void Program::attach(flc::Shader* shader) {
   if (mHandle) {
     glAttachShader(mHandle, shader->getHandle());
-    fLogC("attach shader %d to program %d", shader->getHandle(), mHandle);
+    fLogC("attach shader ", shader->getHandle(), "to program ", mHandle);
   }
 }
 
@@ -81,7 +77,7 @@ void Program::link() {
     if (infoLogLength) {
       if (GLchar *pInfoLog = new GLchar[infoLogLength]) {
         glGetProgramInfoLog(mHandle, infoLogLength, nullptr, pInfoLog);
-        fLogF("linking : %s", pInfoLog);
+        fLogF("linking : ", pInfoLog);
         delete []pInfoLog;
       }
     }
@@ -116,7 +112,7 @@ void Program::uniformPush(const std::string& name, GLint data) {
       return;
     }
   }
-  fLogE("Can not find \"int %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"int ", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, GLint *data, GLint count) {
@@ -126,7 +122,7 @@ void Program::uniformPush(const std::string& name, GLint *data, GLint count) {
       return;
     }
   }
-  fLogE("Can not find \"int %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"int ", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, GLfloat data) {
@@ -136,7 +132,7 @@ void Program::uniformPush(const std::string& name, GLfloat data) {
       return;
     }
   }
-  fLogE("Can not find \"float %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"float ", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, GLfloat *data, GLint count) {
@@ -146,7 +142,7 @@ void Program::uniformPush(const std::string& name, GLfloat *data, GLint count) {
       return;
     }
   }
-  fLogE("Can not find \"float %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"float ", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, glm::mat3 data) {
@@ -156,7 +152,7 @@ void Program::uniformPush(const std::string& name, glm::mat3 data) {
       return;
     }
   }
-  fLogE("Can not find \"mat3 %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"glm::mat3 ", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, glm::mat4 data) {
@@ -166,7 +162,7 @@ void Program::uniformPush(const std::string& name, glm::mat4 data) {
       return;
     }
   }
-  fLogE("Can not find \"mat4 %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"glm::mat4 ", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, glm::mat4 *data, GLuint size) {
@@ -176,7 +172,7 @@ void Program::uniformPush(const std::string& name, glm::mat4 *data, GLuint size)
       return;
     }
   }
-  fLogE("Can not find \"mat4 %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"glm::mat4", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, glm::vec2 data) {
@@ -186,7 +182,7 @@ void Program::uniformPush(const std::string& name, glm::vec2 data) {
       return;
     }
   }
-  fLogE("Can not find \"glm::vec2 %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"glm::vec4 ", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, glm::vec3 data) {
@@ -196,7 +192,7 @@ void Program::uniformPush(const std::string& name, glm::vec3 data) {
       return;
     }
   }
-  fLogE("Can not find \"glm::vec3 %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"glm::vec3 ", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, glm::vec3 *data, GLuint size) {
@@ -206,7 +202,7 @@ void Program::uniformPush(const std::string& name, glm::vec3 *data, GLuint size)
       return;
     }
   }
-  fLogE("Can not find %d \"vec3 %s\" uniforms name in program", size, name.c_str());
+  fLogE("Can not find %d \"glm::vec3 ", name, "\" uniform name in program");
 }
 
 void Program::uniformPush(const std::string& name, glm::vec4 data) {
@@ -216,7 +212,7 @@ void Program::uniformPush(const std::string& name, glm::vec4 data) {
       return;
     }
   }
-  fLogE("Can not find \"glm::vec4 %s\" uniform name in program", name.c_str());
+  fLogE("Can not find \"glm::vec4 ", name, "\" uniform name in program");
 }
 
 inline void Program::getUniforms() {
@@ -230,7 +226,7 @@ inline void Program::getUniforms() {
       glGetActiveUniform(mHandle, GLuint(i), sizeof(name) - 1, &name_len, &num, &type, name);
       name[name_len] = 0;
       GLint location = glGetUniformLocation(mHandle, name);
-      fLogD("Uniform name=%s, location=%d, type=%d, num=%d", name, location, type, num);
+      fLogD("Uniform name=", name, ", location=", location, ", type=", type, ", num=", num);
       mUniforms.push_back(Uniform(name, type, num, location));
     }
   }
@@ -242,7 +238,7 @@ GLint Program::getUniformLocation(const std::string& name) {
       return it.getLocation();
     }
   }
-  fLogD("Can not find uniform %s in program", name.c_str());
+  fLogD("Can not find uniform ", name, " in program");
   return FILLWAVE_UNIFORM_NOT_FOUND;
 }
 
@@ -257,7 +253,7 @@ void Program::getUniformBlock(const std::string& name, GLuint bindingPoint) {
     glGetActiveUniformBlockiv(mHandle, GLuint(i), GL_UNIFORM_BLOCK_DATA_SIZE, &uniformBlockSize);
     nameFromProgram[name_len] = 0;
     if (std::string(nameFromProgram.data()) == name) {
-      fLogD("Uniform block name=%s, index=%d, size=%d ", std::string(name).c_str(), GLuint(i), uniformBlockSize);
+      fLogD("Uniform block name=", name, ", index=", GLuint(i), ", size=%d ", uniformBlockSize);
       GLuint blockIndex = glGetUniformBlockIndex(mHandle, nameFromProgram.data());
       glUniformBlockBinding(mHandle, blockIndex, bindingPoint);
       mUnifromBuffers.push_back(std::make_unique<UniformBuffer>(std::string(name),
@@ -276,7 +272,7 @@ void Program::uniformBlockPush(const std::string& name, GLfloat *data) {
       return;
     }
   }
-  fLogE("Uniform buffer %s not found", name.c_str());
+  fLogE("Uniform buffer ", name, " not found");
 }
 
 void Program::log(const std::string& programName) const {
@@ -286,28 +282,28 @@ void Program::log(const std::string& programName) const {
   std::vector<GLchar> infoLog(value);
   fLogI("Shaders\n %du", mShaders.size());
   if (glIsProgram(mHandle)) {
-    fLogI("Program handle %d is valid", mHandle);
+    fLogI("Program handle ", mHandle, " is valid");
   } else {
-    fLogI("Program handle %d is not valid", mHandle);
+    fLogI("Program handle ", mHandle, " is not valid");
   }
   glGetProgramInfoLog(mHandle, value, &infologLength, infoLog.data());
-  fLogI("INFOR LOG: %s", infoLog.data());
+  fLogI("INFOR LOG: ", infoLog.data());
   glGetProgramiv(mHandle, GL_INFO_LOG_LENGTH, &value);
-  fLogI("GL_INFO_LOG_LENGTH: %d", value);
+  fLogI("GL_INFO_LOG_LENGTH: ", value);
   glGetProgramiv(mHandle, GL_VALIDATE_STATUS, &value);
-  fLogI("GL_VALIDATE_STATUS: %d", value);
+  fLogI("GL_VALIDATE_STATUS: ", value);
   glGetProgramiv(mHandle, GL_ATTACHED_SHADERS, &value);
-  fLogI("GL_ATTACHED_SHADERS: %d", value);
+  fLogI("GL_ATTACHED_SHADERS: ", value);
   glGetProgramiv(mHandle, GL_ACTIVE_ATTRIBUTES, &value);
-  fLogI("GL_ACTIVE_ATTRIBUTES: %d", value);
+  fLogI("GL_ACTIVE_ATTRIBUTES: ", value);
   glGetProgramiv(mHandle, GL_ACTIVE_UNIFORMS, &value);
-  fLogI("GL_ACTIVE_UNIFORMS: %d", value);
+  fLogI("GL_ACTIVE_UNIFORMS: ", value);
   glGetProgramiv(mHandle, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH, &value);
-  fLogI("GL_ACTIVE_ATTRIBUTE_MAX_LENGTH: %d", value);
+  fLogI("GL_ACTIVE_ATTRIBUTE_MAX_LENGTH: ", value);
   glGetProgramiv(mHandle, GL_ACTIVE_UNIFORM_MAX_LENGTH, &value);
-  fLogI("GL_ACTIVE_UNIFORM_MAX_LENGTH: %d", value);
+  fLogI("GL_ACTIVE_UNIFORM_MAX_LENGTH: ", value);
 
-  fLogI("Uniforms:\n %du", mUniforms.size());
+  fLogI("Uniforms:\n ", mUniforms.size());
   for (auto& it : mUniforms) {
     it.log();
   }
@@ -322,7 +318,7 @@ void Program::load() {
   fLogC("Program creation failed");
   for (auto& it : mShaders) {
     attach(it);
-    fLogC("Failed to attach shader of type %s", it->getDebugInfo().type.c_str());
+    fLogC("Failed to attach shader of type ", it->getDebugInfo().type);
   }
   if (!mDelayedLinking) {
     link();

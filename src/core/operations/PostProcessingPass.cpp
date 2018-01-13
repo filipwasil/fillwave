@@ -1,10 +1,5 @@
 /*
- * PostProcessingPass.cpp
- *
- *  Created on: 4 mar 2015
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,7 +26,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/core/operations/PostProcessingPass.h>
 
 namespace flw {
@@ -43,6 +37,7 @@ PostProcessingPass::PostProcessingPass(flc::Program *program,
     : Finishable(lifetime)
     , mFrame(frame)
     , mProgram(program) {
+  // nothing
 }
 
 flc::Texture2DRenderableDynamic* PostProcessingPass::getFrame() const {

@@ -1,10 +1,5 @@
 /*
- * ProgramPipeline.cpp
- *
- *  Created on: May 30, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,7 +26,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/core/pipeline/ProgramPipeline.h>
 
 #ifdef FILLWAVE_GLES_3_0
@@ -41,7 +35,9 @@ namespace flw {
 namespace flc {
 
 ProgramPipeline::ProgramPipeline(GLbitfield stage, GLsizei howMany)
-    : GLObject(howMany), mStage(stage), mTarget(GL_TRANSFORM_FEEDBACK) {
+    : GLObject(howMany)
+    , mStage(stage)
+    , mTarget(GL_TRANSFORM_FEEDBACK) {
   glGenProgramPipelines(mHowMany, mHandles);
 }
 

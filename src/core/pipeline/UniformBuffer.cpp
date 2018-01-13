@@ -1,10 +1,5 @@
 /*
- * UniformBuffer.cpp
- *
- *  Created on: May 18, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/core/pipeline/UniformBuffer.h>
 #include <fillwave/Log.h>
@@ -63,7 +57,6 @@ void UniformBuffer::bindRange(GLuint id) {
 }
 
 void UniformBuffer::push(GLfloat *data) {
-  //todo optimization i think we can limit uniform buffer loading to GPU
   bind();
   mData = data;
   send();

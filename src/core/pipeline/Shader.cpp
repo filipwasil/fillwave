@@ -151,7 +151,7 @@ Shader::DebugInfo Shader::getDebugInfo() const {
       return {"GL_TESS_EVALUATION_SHADER", ".tese" };
 #endif
     default:
-      fLogF("Shader type not recognized: %d", mType);
+      fLogF("Shader type not recognized: ", mType);
       return DebugInfo();
   }
 }
@@ -160,7 +160,7 @@ Shader::DebugInfo Shader::getDebugInfo() const {
 } /* flw */
 
 std::vector<flw::flc::Shader *>
-operator+(std::vector<flw::flc::Shader* > shaders, flw::flc::Shader *shader) {
+operator+(std::vector<flw::flc::Shader*> shaders, flw::flc::Shader* shader) {
   shaders.push_back(shader);
   return shaders;
 }

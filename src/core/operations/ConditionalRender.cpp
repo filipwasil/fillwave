@@ -36,7 +36,7 @@ namespace flc {
 
 ConditionalRender::ConditionalRender(GLenum mode)
     : mMode(mode) {
-
+  // nothing
 }
 
 void ConditionalRender::begin(GLuint querryID) const {

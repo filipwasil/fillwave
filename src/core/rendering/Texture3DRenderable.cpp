@@ -1,10 +1,5 @@
 /*
- * Texture3DRenderable.cpp
- *
- *  Created on: Dec 1, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.

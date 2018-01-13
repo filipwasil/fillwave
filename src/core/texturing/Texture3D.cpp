@@ -1,8 +1,29 @@
 /*
- * Texture3D.cpp
+ * Copyright (c) 2018, Fillwave developers
+ * All rights reserved.
  *
- *  Created on: 2 Apr 2014
- *      Author: Filip Wasil
+ * Fillwave C++14 graphics engine.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
+ *
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
+ *
+ *   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ *   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ *   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ *   DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ *   FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ *   DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ *   SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ *   CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 #include <fillwave/core/texturing/Texture3D.h>
@@ -39,14 +60,14 @@ inline void Texture3D::sendData(flc::Texture3DFile* file, GLubyte* customData) {
     file->mFile2d.mData = customData;
   }
 
-  fLogD("file->mCubeTarget 0x%x", file->mCubeTarget);
-  fLogD("file->mConfig.mMipmapsLevel %d", file->mFile2d.mConfig.mMipmapsLevel);
-  fLogD("file->mHeader.mInternalFormat 0x%x", file->mFile2d.mHeader.mInternalFormat);
-  fLogD("file->mHeader.mWidth %d", file->mFile2d.mHeader.mWidth);
-  fLogD("file->mHeader.mHeight %d", file->mFile2d.mHeader.mHeight);
-  fLogD("file->mConfig.mBorder %d", file->mFile2d.mConfig.mBorder);
-  fLogD("file->mHeader.mFormat 0x%x", file->mFile2d.mHeader.mFormat);
-  fLogD("file->mHeader.mType 0x%x", file->mFile2d.mHeader.mType);
+  fLogD("file->mCubeTarget ", file->mCubeTarget);
+  fLogD("file->mConfig.mMipmapsLevel ", file->mFile2d.mConfig.mMipmapsLevel);
+  fLogD("file->mHeader.mInternalFormat ", file->mFile2d.mHeader.mInternalFormat);
+  fLogD("file->mHeader.mWidth ", file->mFile2d.mHeader.mWidth);
+  fLogD("file->mHeader.mHeight ", file->mFile2d.mHeader.mHeight);
+  fLogD("file->mConfig.mBorder ", file->mFile2d.mConfig.mBorder);
+  fLogD("file->mHeader.mFormat ", file->mFile2d.mHeader.mFormat);
+  fLogD("file->mHeader.mType ", file->mFile2d.mHeader.mType);
   glTexImage2D(file->mCubeTarget,
                file->mFile2d.mConfig.mMipmapsLevel,
                file->mFile2d.mHeader.mInternalFormat,
@@ -81,12 +102,7 @@ void Texture3D::log() {
   // nothing
 }
 
-void Texture3D::sendData(GLubyte* xp,
-    GLubyte* xn,
-    GLubyte* yp,
-    GLubyte* yn,
-    GLubyte* zp,
-    GLubyte* zn) {
+void Texture3D::sendData(GLubyte* xp, GLubyte* xn, GLubyte* yp, GLubyte* yn, GLubyte* zp, GLubyte* zn) {
 
   sendData(mRight.get(), xp);
   sendData(mLeft.get(), xn);

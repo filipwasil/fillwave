@@ -1,10 +1,5 @@
 /*
- * TextureLoader.cpp
- *
- *  Created on: 4 Apr 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -58,18 +53,18 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
   const size_t posDDS = filePath.find(".dds");
   uint8_t r = 0, g = 0, b = 0;
   if (filePath == rootPath) {
-    fLogD("Empty texture %s generation and loading ...", filePath.c_str());
+    fLogD("Empty texture ", filePath, " generation and loading ...");
     auto file = loadVirtualFileColor(512, 512, 0, 0, 0);
     return file;
   }
 
 
   if (posColor != std::string::npos) {
-    fLogD("Color texture ", filePath.c_str(), " generation and loading ...");
+    fLogD("Color texture ", filePath, " generation and loading ...");
     std::string sub = filePath.substr(rootPath.size(), posColor);
     std::vector<std::string> tokens = split(sub, '_');
     if (tokens.size() < 3) {
-      fLogE("Could not found color parameters in ", filePath.c_str());
+      fLogE("Could not found color parameters in ", filePath);
       return nullptr;
     }
 
@@ -81,11 +76,11 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     return file;
   }
   if (posCheckboard != std::string::npos) {
-    fLogD("Checkboard texture ", filePath.c_str(), " generation and loading ...");
+    fLogD("Checkboard texture ", filePath, " generation and loading ...");
     std::string sub = filePath.substr(rootPath.size(), posCheckboard);
     std::vector<std::string> tokens = split(sub, '_');
     if (tokens.size() < 3) {
-      fLogE("Could not found color parameters in ", filePath.c_str());
+      fLogE("Could not found color parameters in ", filePath);
       return nullptr;
     }
 
@@ -97,7 +92,7 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     return file;
   }
   if (posDDS != std::string::npos) {
-    fLogE("Compressed Texture %s not supported yet", filePath.c_str());
+    fLogE("Compressed Texture ", filePath, " not supported yet");
     return nullptr;
   }
 #ifdef FILLWAVE_TEXTURE_LOADER_GLI
@@ -232,9 +227,9 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     FILE *f;
     auto errorNo = fopen_s(&f, filePath.c_str(), "rb");
     if (errorNo) {
-      fLogE("Texture %s not found", filePath.c_str());
+      fLogE("Texture ", filePath, " not found");
     } else {
-      fLogE("Texture %s found but not supported ", filePath.c_str());
+      fLogE("Texture ", filePath, " found but not supported ");
       fclose(f);
     }
     return nullptr;
