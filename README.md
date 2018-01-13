@@ -108,3 +108,6 @@ Android script is currently designed to work only with Linux. It assumes that An
 | Android (native)    | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)      |
 | Windows (msvs)    | [![Build status](https://ci.appveyor.com/api/projects/status/w5xqq2tntoo9td6k?svg=true)](https://ci.appveyor.com/project/filipwasil/fillwave) |
 | Coverity   | [![Coverage Status](https://coveralls.io/repos/github/filipwasil/fillwave/badge.svg?branch=master)](https://coveralls.io/github/filipwasil/fillwave?branch=master)
+
+## Thanks to
+<img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/clion.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/zube.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/travis.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/appveyor.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/gerrit.png" width="32" height="32">
