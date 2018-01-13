@@ -56,8 +56,8 @@ void Scene::setCursor(puCursor &&cursor) {
   mCursor = std::move(cursor);
 }
 
-void Scene::setHID(puHID hud) {
-  mHID = std::move(hud);
+void Scene::setHUD(pu<HUD> hud) {
+  mHeadUpDisplay = std::move(hud);
 }
 
 void Scene::setAmbient(glm::vec3 ambient) {
@@ -80,8 +80,8 @@ void Scene::draw(ICamera &camera) {
 }
 
 void Scene::drawHUD() {
-  if (mHID) {
-    mHID->draw();
+  if (mHeadUpDisplay) {
+    mHeadUpDisplay->draw();
   }
 }
 

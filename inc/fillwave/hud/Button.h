@@ -1,9 +1,6 @@
+#pragma once
+
 /*
- * ProgressBar.cpp
- *
- *  Created on: Jan 11, 2016
- *      Author: filip
- *
  * Copyright (c) 2017, Fillwave developers
  * All rights reserved.
  *
@@ -31,60 +28,29 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/hid/base/Sprite.h>
-
-#include <fillwave/Log.h>
-
-FLOGINIT_DEFAULT()
+#include <fillwave/hud/base/Sprite.h>
+#include <fillwave/common/IPickable.h>
 
 namespace flw {
+class Engine;
 namespace flf {
 
-/*! \class Sprite
- * \brief HUD base element.
+/*! \class Button
+ * \brief Pickable hud node.
  */
 
-Sprite::Sprite(flc::Texture2D *texture, flc::Program *program, glm::vec2 position, glm::vec2 scale)
-    : mTexture(texture)
-    , mProgram(program)
-    , mPosition(position)
-    , mScale(scale) {
-  mBlending = {
-      GL_SRC_ALPHA,
-      GL_ONE_MINUS_SRC_ALPHA
-  };
-}
+class Button : public Sprite, public IPickable {
+public:
+  Button(Engine* engine, flc::Texture2D* texture, glm::vec2 position, glm::vec2 scale);
 
-Sprite::~Sprite() = default;
+  virtual ~Button() override = default;
 
-void Sprite::onAttached(ITreeNode* /*node*/) {
-  // nothing
-}
-
-void Sprite::onDetached() {
-  // nothing
-}
-
-void Sprite::draw() {
-  if (nullptr == mTexture || NULL == mProgram) {
-    fLogF("tried to draw a non drawable");
-  }
-  mProgram->use();
-  mProgram->uniformPush("uPosition", mPosition);
-  mProgram->uniformPush("uScale", mScale);
-  coreDraw();
-}
-
-void Sprite::coreDraw() {
-  glDisable(GL_DEPTH_TEST);
-  glEnable(GL_BLEND);
-  glBlendFunc(mBlending.mSrc, mBlending.mSrc);
-  mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  mTexture->unbind();
-  glEnable(GL_DEPTH_TEST);
-  glDisable(GL_BLEND);
-}
+  /* IPickable */
+  void pick(glm::vec3 color) override;
+  void unpick() override;
+  void onPicked() override;
+  void onUnpicked() override;
+};
 
 } /* flf */
 } /* flw */

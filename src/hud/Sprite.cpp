@@ -1,5 +1,5 @@
 /*
- * Button.cpp
+ * ProgressBar.cpp
  *
  *  Created on: Jan 11, 2016
  *      Author: filip
@@ -31,36 +31,58 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+#include <fillwave/hud/base/Sprite.h>
+#include <fillwave/Log.h>
 
-#include <fillwave/hid/Button.h>
-#include <fillwave/loaders/ProgramLoader.h>
-#include <fillwave/Fillwave.h>
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
 
-Button::Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm::vec2 scale)
-    : Sprite(texture,
-               ProgramLoader(engine).getProgram(EProgram::hud),
-               position,
-               glm::vec2(scale.x, scale.y * engine->getScreenAspectRatio())) {
+/*! \class Sprite
+ * \brief HUD base element.
+ */
 
+Sprite::Sprite(flc::Texture2D *texture, flc::Program *program, glm::vec2 position, glm::vec2 scale)
+    : mTexture(texture)
+    , mProgram(program)
+    , mPosition(position)
+    , mScale(scale) {
+  mBlending = {
+      GL_SRC_ALPHA,
+      GL_ONE_MINUS_SRC_ALPHA
+  };
 }
 
-void Button::pick(glm::vec3 /*color*/) {
-  mFlagPickable = true;
-}
+Sprite::~Sprite() = default;
 
-void Button::unpick() {
-  mFlagPickable = false;
-}
-
-void Button::onPicked() {
+void Sprite::onAttached(ITreeNode* /*node*/) {
   // nothing
 }
 
-void Button::onUnpicked() {
+void Sprite::onDetached() {
   // nothing
+}
+
+void Sprite::draw() {
+  if (nullptr == mTexture || NULL == mProgram) {
+    fLogF("tried to draw a non drawable");
+  }
+  mProgram->use();
+  mProgram->uniformPush("uPosition", mPosition);
+  mProgram->uniformPush("uScale", mScale);
+  coreDraw();
+}
+
+void Sprite::coreDraw() {
+  glDisable(GL_DEPTH_TEST);
+  glEnable(GL_BLEND);
+  glBlendFunc(mBlending.mSrc, mBlending.mSrc);
+  mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
+  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+  mTexture->unbind();
+  glEnable(GL_DEPTH_TEST);
+  glDisable(GL_BLEND);
 }
 
 } /* flf */

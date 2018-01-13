@@ -1,5 +1,5 @@
 /*
- * HUD.cpp
+ * Button.cpp
  *
  *  Created on: Jan 11, 2016
  *      Author: filip
@@ -32,16 +32,35 @@
  */
 
 
-#include <fillwave/hid/Button.h>
+#include <fillwave/hud/Button.h>
+#include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/Fillwave.h>
 
 namespace flw {
 namespace flf {
 
-void HID::draw() {
-  for (auto &it : mChildren) {
-    it->draw();
-  }
+Button::Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm::vec2 scale)
+    : Sprite(texture
+    , ProgramLoader(engine).getProgram(EProgram::hud)
+    , position
+    , glm::vec2(scale.x, scale.y * engine->getScreenAspectRatio())) {
+  // nothing
+}
+
+void Button::pick(glm::vec3 /*color*/) {
+  mFlagPickable = true;
+}
+
+void Button::unpick() {
+  mFlagPickable = false;
+}
+
+void Button::onPicked() {
+  // nothing
+}
+
+void Button::onUnpicked() {
+  // nothing
 }
 
 } /* flf */

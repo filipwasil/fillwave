@@ -51,8 +51,8 @@
 #include <fillwave/models/MeshTerrain.h>
 
 /* HUD */
-#include <fillwave/hid/Text.h>
-#include <fillwave/hid/Button.h>
+#include <fillwave/hud/Text.h>
+#include <fillwave/hud/Button.h>
 
 /* Effects */
 #include <fillwave/models/effects/Fog.h>

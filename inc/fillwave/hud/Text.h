@@ -28,26 +28,82 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/hid/base/Sprite.h>
-#include <fillwave/models/base/TreePtr.h>
+#include <fillwave/core/buffers/VertexBufferText.h>
+#include <fillwave/core/pipeline/Program.h>
+
+#include <fillwave/hud/base/Sprite.h>
+#include <fillwave/loaders/FontLoader.h>
+#include <fillwave/models/base/IReloadable.h>
+#include <map>
 
 namespace flw {
 class Engine;
+
+enum class ETextEffect {
+  eNone
+  , eBold
+};
+
 namespace flf {
 
-/*! \class HID
- * \brief Human interface device tree.
+/*! \class Text
+ * \brief 2D Text on the screen.
  */
 
-class HID : public TreePtr<Sprite, Sprite> {
+class Text : public IReloadable, public Sprite {
 public:
-  HID() = default;
+  Text(const std::string &text,
+      flc::Texture2D *texture,
+      glm::vec2 position,
+      Engine *engine,
+      GLfloat scale,
+      Font *font,
+      glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
+      ETextEffect effect = ETextEffect::eNone);
 
-  ~HID() override = default;
+  ~Text() override = default;
 
-  virtual void draw() override;
+  void draw() override;
+
+  void editAspectRatio(Engine *engine);
+
+  void editString(std::string text);
+
+  void editColor(glm::vec4 color);
+
+  void editSize(GLfloat size);
+
+  void editPosition(glm::vec2 position);
+
+private:
+  /* Text */
+  std::string mText;
+  glm::vec4 mColor;
+  ETextEffect mEffect;
+  Font *mFont;
+  flc::VertexBufferText *mVBO;
+
+  /* IHUD */
+  Engine *mEngine;
+  GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
+  GLint mViewportWidth, mViewportHeight;
+
+  flc::Program *createProgram(Engine *engine, ETextEffect effect);
+
+  void createVBO();
+
+  void clearVBO();
+
+  void initVBO() override;
+
+  void initVAO() override;
+
+  void initBuffers() override;
+
+  void initPipeline() override;
+
+  void initUniformsCache() override;
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::HID> puHID;
 } /* flw */

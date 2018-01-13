@@ -28,7 +28,7 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/hid/base/HID.h>
+#include <fillwave/hud/base/HUD.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
 #include <fillwave/models/Cursor.h>
@@ -76,7 +76,7 @@ public:
   /* Scene */
   void setSkybox(puSkybox &&skybox);
 
-  void setHID(puHID hud);
+  void setHUD(pu<HUD> hud);
 
   void setAmbient(glm::vec3 cursor);
 
@@ -114,7 +114,7 @@ public:
 
 protected:
   puIRenderer mRenderer;
-  pu<HID> mHID;
+  pu<HUD> mHeadUpDisplay;
   puCursor mCursor;
   puICamera mCamera;
   puSkybox mSkybox;

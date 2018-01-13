@@ -65,7 +65,7 @@ aux_source_directory ("src/models/builders" FILLWAVE_MODELS_BUILDERS_SOURCES)
 aux_source_directory ("src/space" FILLWAVE_SPACE_SOURCES)
 aux_source_directory ("src/space/base" FILLWAVE_SPACE_BASE_SOURCES)
 
-aux_source_directory ("src/hid" FILLWAVE_HUD_SOURCES)
+aux_source_directory ("src/hud" FILLWAVE_HUD_SOURCES)
 aux_source_directory ("src/callbacks" FILLWAVE_CALLBACKS_SOURCES)
 aux_source_directory ("src/loaders" FILLWAVE_LOADERS_SOURCES)
 aux_source_directory ("src/management" FILLWAVE_MANAGEMENT_SOURCES)

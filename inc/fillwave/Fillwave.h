@@ -33,7 +33,7 @@
 #include "fillwave/space/LightPoint.h"
 #include "fillwave/space/LightSpot.h"
 #include "fillwave/space/LightDirectional.h"
-#include "fillwave/hid/Text.h"
+#include "fillwave/hud/Text.h"
 
 #include "fillwave/common/TGetter.h"
 
