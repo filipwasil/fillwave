@@ -29,12 +29,12 @@
 */
 
 #ifdef __linux__
-#define FILLWAVE_OS_SEPRATOR "/"
-#define FILLWAVE_OS_CURRENTDIR "./"
+constexpr const char* FILLWAVE_OS_SEPRATOR = "/";
+constexpr const char* FILLWAVE_OS_CURRENTDIR = "./";
 #elif _WIN32
-#define FILLWAVE_OS_SEPRATOR "\\"
-#define FILLWAVE_OS_CURRENTDIR "./"
+constexpr const char* FILLWAVE_OS_SEPRATOR = "\\";
+constexpr const char* FILLWAVE_OS_CURRENTDIR = "./";
 #elif __APPLE__
-#define FILLWAVE_OS_SEPRATOR "/"
-#define FILLWAVE_OS_CURRENTDIR "./"
+constexpr const char* FILLWAVE_OS_SEPRATOR = "/";
+constexpr const char* FILLWAVE_OS_CURRENTDIR = "./";
 #endif

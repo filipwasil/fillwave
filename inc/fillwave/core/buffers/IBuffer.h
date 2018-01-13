@@ -76,7 +76,7 @@ public:
 
   void reload();
 
-  GLvoid *mapRange(GLenum access, GLuint size = 0);
+  GLvoid* mapRange(GLenum access, GLuint size = 0);
 
   /* Feature not available in OpenGL ES  < 3.1 */
 #ifdef FILLWAVE_GLES_3_0

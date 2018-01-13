@@ -1,10 +1,5 @@
 /*
- * Buffer.cpp
- *
- * Created on: 1 Mar 2013
- * Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -166,7 +161,7 @@ void IBuffer::reload() {
 #ifdef FILLWAVE_GLES_3_0
 #else
 
-GLvoid *IBuffer::map(GLenum access) const {
+GLvoid* IBuffer::map(GLenum access) const {
   GLvoid *ptr = glMapBuffer(mTarget, access);
   fLogC("Could not map the buffer object");
   return ptr;

@@ -1,10 +1,5 @@
 /*
- * Debugger.cpp
- *
- *  Created on: Jul 26, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/core/buffers/VertexBufferDebug.h>
 #include <fillwave/Fillwave.h>
@@ -60,14 +54,8 @@ Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
   {
     const float offsetX = static_cast<float>(i) * sizeFactor;
     DebugWindowInfo window = {
-      {
-        size.x * sizeFactor,
-        size.y * sizeFactor
-      },
-      {
-        size.x * offsetX,
-        size.y * offsetY
-      }
+      { size.x * sizeFactor , size.y * sizeFactor }
+      , { size.x * offsetX , size.y * offsetY }
     };
     mDebugWindows.push_back(window);
   }
@@ -121,8 +109,7 @@ EDebuggerState Debugger::getState() {
   return mState;
 }
 
-void Debugger::prepareDebugWindow(GLint id)
-{
+void Debugger::prepareDebugWindow(GLint id) {
   DebugWindowInfo& win = mDebugWindows[id];
   glViewport(win.offset.x, win.offset.y, win.size.x, win.size.y);
   glClear(GL_DEPTH_BUFFER_BIT);
@@ -130,29 +117,26 @@ void Debugger::prepareDebugWindow(GLint id)
 
 void Debugger::renderFromCamera(ICamera &c, GLint id) {
   prepareDebugWindow(id);
-
   mEngine->getCurrentScene()->draw(c);
-
   glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
 void Debugger::renderPickingMap() {
   prepareDebugWindow(mDebugWindows.size() - 1);
-
   mEngine->getCurrentScene()->drawPicking();
   glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
-void Debugger::renderDepthOrthographic(GLint id) { //todo remove lights from engine through engine
+void Debugger::renderDepthOrthographic(GLint id) {
   prepareDebugWindow(id);
 
   mProgram->use();
 
   mVAO->bind();
 
-  LightDirectional *light = mEngine->getLightSystem().mLightsDirectional[id].get();
+  auto light = mEngine->getLightSystem().mLightsDirectional[id].get();
 
-  ICamera *cam = light->getShadowCamera();
+  auto cam = light->getShadowCamera();
 
   light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
 
@@ -176,7 +160,7 @@ void Debugger::renderDepthOrthographic(GLint id) { //todo remove lights from eng
   glViewport(0, 0, mEngine->getScreenSize()[0], mEngine->getScreenSize()[1]);
 }
 
-void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe lightID żeby można było usuwać światła
+void Debugger::renderDepthPerspective(GLint id) {
   prepareDebugWindow(id);
 
   glClear(GL_DEPTH_BUFFER_BIT);
@@ -185,9 +169,9 @@ void Debugger::renderDepthPerspective(GLint id) { //xxx ujednolicić to całe li
 
   mVAO->bind();
 
-  LightSpot *light = mEngine->getLightSystem().mLightsSpot[id].get();
+  auto light = mEngine->getLightSystem().mLightsSpot[id].get();
 
-  CameraPerspective cam = *(light->getShadowCamera());
+  auto cam = *(light->getShadowCamera());
 
   light->getShadowTexture()->bind(FILLWAVE_SHADOW_FIRST_UNIT + id);
 

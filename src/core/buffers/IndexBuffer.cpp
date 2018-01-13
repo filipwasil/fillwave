@@ -1,10 +1,5 @@
 /*
- * IndexBuffer.cpp
- *
- *  Created on: 16 Apr 2015
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 /*! \class IndexBufferBasic
  * \brief IBO for regular usage.
@@ -62,11 +56,14 @@ IndexBuffer::IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModificatio
 IndexBuffer::IndexBuffer(const aiMesh *shape, GLuint dataStoreModification)
     : IBuffer(GL_ELEMENT_ARRAY_BUFFER, dataStoreModification) {
   mTotalElements = shape->mNumFaces * 3;
-//   #pragma omp parallel for schedule(guided) num_threads(2) if (shape->mNumFaces > 1000) disaster
+  mDataIndices.resize(mTotalElements);
+
+#pragma omp parallel for schedule(guided) num_threads(2) if (shape->mNumFaces > 1000)
   for (GLuint i = 0; i < shape->mNumFaces; i++) {
-    mDataIndices.push_back(shape->mFaces[i].mIndices[0]);
-    mDataIndices.push_back(shape->mFaces[i].mIndices[1]);
-    mDataIndices.push_back(shape->mFaces[i].mIndices[2]);
+    const GLuint idx = 3 * i;
+    mDataIndices[idx] = shape->mFaces[i].mIndices[0];
+    mDataIndices[idx + 1] = shape->mFaces[i].mIndices[1];
+    mDataIndices[idx + 2] = shape->mFaces[i].mIndices[2];
   }
   mSize = mTotalElements * sizeof(GLuint);
   mData = mDataIndices.data();
