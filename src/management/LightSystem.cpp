@@ -1,10 +1,5 @@
 /*
- * LightSystem.cpp
- *
- *  Created on: 18 Apr 2013
- *      Author: Filip Wasil
- *
- * Copyright (c) 2016, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/Fillwave.h>
 #include <fillwave/common/Strings.h>
@@ -61,10 +55,6 @@ void LightSystem::resetLightsRefresh() {
   resetMoveablesRefresh(mLightsDirectional);
   resetMoveablesRefresh(mLightsPoint);
 }
-
-/*
- * Update each light translation according to its Entity
- */
 
 void LightSystem::updateLightEntities() {
   for (auto &it : mLightsSpot) {
@@ -265,7 +255,7 @@ GLfloat LightSystem::computePointLightBoundingSphere(LightPoint *light) {
   const LightAttenuationData a = light->getAttenuation();
   const GLfloat diffuse = 1.0f;
   const GLfloat maxRGB = glm::max(glm::max(i.x, i.y), i.z);
-  //todo  " 2 * a.mExp " at the end looks like an error
+  //todo validate this equation
   return glm::sqrt(a.mLinear * a.mLinear - 4.0f * a.mExp * (a.mExp - 256.0f * maxRGB * diffuse) - a.mLinear) / 2 * a.mExp;
 }
 

@@ -1,10 +1,5 @@
 /*
- * TextureManager.cpp
- *
- *  Created on: 15 Apr 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2016, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -137,7 +132,7 @@ flc::Texture3D *TextureSystem::get(const std::string &posX,
 
   const std::string name = filePathPosX + filePathNegX + filePathPosY + filePathNegY + filePathPosZ + filePathNegZ;
 
-  fLogD("Texture to be added: %s", name.c_str());
+  fLogD("Texture to be added: ", name);
 
   flc::ParameterList parameters = {
     flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
@@ -146,7 +141,7 @@ flc::Texture3D *TextureSystem::get(const std::string &posX,
     , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
   };
 
-  fLogD("Texture %s will be added to manager", name.c_str());
+  fLogD("Texture ", name, " will be added to manager");
 
   auto filePosX = mLoader.load(filePathPosX, EFlip::eNone, GL_RGBA, mRootPath);
   auto fileNegX = mLoader.load(filePathNegX, EFlip::eNone, GL_RGBA, mRootPath);
@@ -156,43 +151,43 @@ flc::Texture3D *TextureSystem::get(const std::string &posX,
   auto fileNegZ = mLoader.load(filePathNegZ, EFlip::eNone, GL_RGBA, mRootPath);
 
   if (filePosX && fileNegX && filePosY && fileNegY && filePosZ && fileNegZ) {
-    fLogD("Texture %s added to manager", name.c_str());
+    fLogD("Texture ", name, " has been added to manager");
 
     auto t = mTextures3D.store(name, filePosX, fileNegX, filePosY, fileNegY, filePosZ, fileNegZ, parameters);
 
     return t;
   }
   if (!filePosX) {
-    fLogD("3D Texture positive x %s not found", posX.c_str());
+    fLogD("3D Texture positive x ", posX, " not found");
   } else {
     delete filePosX;
   }
   if (!fileNegX) {
-    fLogD("3D Texture negative x %s not found", negX.c_str());
+    fLogD("3D Texture negative x ", negX, " not found");
   } else {
     delete fileNegX;
   }
   if (!filePosY) {
-    fLogD("3D Texture positive y %s not found", posY.c_str());
+    fLogD("3D Texture positive y ", posY, " not found");
   } else {
     delete filePosY;
   }
   if (!fileNegY) {
-    fLogD("3D Texture negative y %s not found", negY.c_str());
+    fLogD("3D Texture negative y ", negY, " not found");
   } else {
     delete fileNegY;
   }
   if (!filePosZ) {
-    fLogD("3D Texture positive z %s not found", posZ.c_str());
+    fLogD("3D Texture positive z ", posZ, " not found");
   } else {
     delete filePosZ;
   }
   if (!fileNegZ) {
-    fLogD("3D Texture negative z %s not found", negZ.c_str());
+    fLogD("3D Texture negative z ", negZ, " not found");
   } else {
     delete fileNegZ;
   }
-  fLogE("Texture 3D %s not added to manager", name.c_str());
+  fLogE("Texture 3D ", name, " not added to manager");
   return nullptr;
 }
 

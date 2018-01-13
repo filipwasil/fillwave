@@ -1,10 +1,5 @@
 /*
- * ShaderLoaderFragment.cpp
- *
- *  Created on: 13 May 2015
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/common/Strings.h>
 #include <fillwave/loaders/ShaderLoaderFragment.h>
