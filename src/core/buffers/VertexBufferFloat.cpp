@@ -1,10 +1,5 @@
 /*
- * VertexBufferFloat.cpp
- *
- *  Created on: Sep 8, 2015
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,7 +26,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/core/buffers/VertexBufferFloat.h>
 #include <fillwave/Log.h>
 
@@ -47,7 +41,7 @@ VertexBufferFloat::VertexBufferFloat(const std::vector<VertexFloat> &values, GLu
 
 void VertexBufferFloat::log() const {
   for (auto it : mDataVertices) {
-    fLogI("Vertex written: %f", static_cast<double>(it.mData));
+    fLogI("Vertex written: ", it.mData);
   }
 }
 

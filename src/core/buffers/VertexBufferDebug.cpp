@@ -1,10 +1,5 @@
 /*
- * VertexBufferDebug.cpp
- *
- *  Created on: Aug 9, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/core/buffers/VertexBufferDebug.h>
 
@@ -72,10 +66,11 @@ VertexBufferDebug::VertexBufferDebug(GLfloat) {
   mDataVertices.reserve(6);
   VertexDebug vertex;
   for (int i = 0; i < 6; ++i) {
-    vertex.position[0] = debugWindow2DPositions[2 * i];
-    vertex.position[1] = debugWindow2DPositions[2 * i + 1];
-    vertex.uv[0] = debugWindow2DUV[2 * i];
-    vertex.uv[1] = debugWindow2DUV[2 * i + 1];
+    const int idx = 2 * i;
+    vertex.position[0] = debugWindow2DPositions[idx];
+    vertex.position[1] = debugWindow2DPositions[idx + 1];
+    vertex.uv[0] = debugWindow2DUV[idx];
+    vertex.uv[1] = debugWindow2DUV[idx + 1];
     mDataVertices.push_back(vertex);
   }
   mTotalElements = mDataVertices.size();
@@ -84,7 +79,7 @@ VertexBufferDebug::VertexBufferDebug(GLfloat) {
 }
 
 void VertexBufferDebug::log() const {
-
+  // nothing
 }
 
 } /* flc */

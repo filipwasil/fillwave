@@ -1,10 +1,5 @@
 /*
- * VertexBufferParticlesGPU.cpp
- *
- *  Created on: Aug 30, 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,7 +26,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
 
 namespace flw {
@@ -39,11 +33,11 @@ namespace flc {
 
 VertexBufferParticlesGPU::VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles)
     : TVertexBuffer(particles, GL_DYNAMIC_COPY) {
-
+  // nothing
 }
 
 void VertexBufferParticlesGPU::log() const {
-
+  // nothing
 }
 
 } /* flc */

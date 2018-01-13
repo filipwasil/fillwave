@@ -1,10 +1,5 @@
 /*
- * VertexBufferText.cpp
- *
- *  Created on: Jul 26, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,7 +26,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/core/buffers/VertexBufferText.h>
 #include <fillwave/Log.h>
 
@@ -40,9 +34,9 @@ FLOGINIT("VertexBufferText", FERROR | FFATAL)
 namespace flw {
 namespace flc {
 
-VertexBufferText::VertexBufferText(const std::vector<GLfloat> &positions,
-    const std::vector<GLfloat> &textureCoords,
-    GLuint dataStoreModification)
+VertexBufferText::VertexBufferText(const std::vector<GLfloat>& positions
+                                   , const std::vector<GLfloat>& textureCoords
+                                   , GLuint dataStoreModification)
     : TVertexBuffer(dataStoreModification) {
   const size_t size = positions.size();
   if (size == textureCoords.size()) {
@@ -66,11 +60,7 @@ VertexBufferText::VertexBufferText(const std::vector<GLfloat> &positions,
 
 void VertexBufferText::log() const {
   for (auto& it : mDataVertices) {
-    fLogE("Vertex written: %f %f %f %f",
-          static_cast<double>(it.position[0]),
-          static_cast<double>(it.position[1]),
-          static_cast<double>(it.uv[0]),
-          static_cast<double>(it.uv[1]));
+    fLogE("Vertex written: ", it.position[0], " ", it.position[1], " ", it.uv[0], " ", it.uv[1]);
   }
 }
 

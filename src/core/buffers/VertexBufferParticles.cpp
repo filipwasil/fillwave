@@ -1,10 +1,5 @@
 /*
- * VertexBufferParticles.cpp
- *
- *  Created on: Aug 30, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -30,7 +25,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
 
 #include <fillwave/core/buffers/VertexBufferParticles.h>
 #include <fillwave/Log.h>
@@ -68,11 +62,7 @@ VertexBufferParticles::VertexBufferParticles(const std::vector<GLfloat> &velocit
 
 void VertexBufferParticles::log() const {
   for (auto it : mDataVertices) {
-    fLogE("Vertex written: %f %f %f %f",
-          static_cast<double>(it.velocity[0]),
-          static_cast<double>(it.velocity[1]),
-          static_cast<double>(it.velocity[2]),
-          static_cast<double>(it.startTime));
+    fLogE("Vertex written: ", it.velocity[0], " ", it.velocity[1], " ", it.velocity[2], " ", it.startTime);
   }
 }
 

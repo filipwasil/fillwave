@@ -1,10 +1,5 @@
 /*
- * VertexBufferPosition.cpp
- *
- *  Created on: Dec 7, 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -31,7 +26,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/core/buffers/VertexBufferPosition.h>
 #include <fillwave/Log.h>
 
@@ -40,26 +34,22 @@ FLOGINIT("VertexBufferPosition", FERROR | FFATAL)
 namespace flw {
 namespace flc {
 
-VertexBufferPosition::VertexBufferPosition(flf::Shape<VertexPosition> &shape, GLuint dataStoreModification)
+VertexBufferPosition::VertexBufferPosition(flf::Shape<VertexPosition>& shape, GLuint dataStoreModification)
     : TVertexBuffer(shape, dataStoreModification) {
-
+  // nothing
 }
 
-VertexBufferPosition::VertexBufferPosition(const std::vector<VertexPosition> &vertices, GLuint dataStoreModification)
+VertexBufferPosition::VertexBufferPosition(const std::vector<VertexPosition>& vertices, GLuint dataStoreModification)
     : TVertexBuffer(vertices, dataStoreModification) {
-
+  // nothing
 }
 
 void VertexBufferPosition::log() const {
   for (auto it : mDataVertices) {
-    fLogI("Vertex written: %f %f %f %f",
-          static_cast<double>(it.mPosition[0]),
-          static_cast<double>(it.mPosition[1]),
-          static_cast<double>(it.mPosition[2]),
-          static_cast<double>(it.mPosition[3]));
+    fLogI("Vertex written: ", it.mPosition[0], " ", it.mPosition[1], " ", it.mPosition[2], " ", it.mPosition[3]);
   }
 }
 
 } /* flc */
-} /* fillwave*/
+} /* flw*/
 

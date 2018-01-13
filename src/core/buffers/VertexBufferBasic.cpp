@@ -1,10 +1,5 @@
 /*
- * VertexBufferBasic.cpp
- *
- *  Created on: May 17, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -51,7 +46,6 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, flf::Animator *animato
     : TVertexBuffer<VertexBasic>(dataStoreModification) {
 
   mTotalElements = shape->mNumVertices;
-
   mDataVertices.resize(mTotalElements);
 
   {
@@ -203,23 +197,16 @@ VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
 
   for (float z = 0; z <= chunkDensity; ++z) {
     for (float x = 0; x <= chunkDensity; ++x) {
-
       vertex.mColor[0] = 0.0f;
       vertex.mColor[1] = 0.0f;
       vertex.mColor[2] = 0.0f;
       vertex.mColor[3] = 1.0f;
-
       vertex.mPosition[0] = gapSize * (x - chunkDensity / 2);
       vertex.mPosition[2] = gapSize * (z - chunkDensity / 2);
-
       vertex.mPosition[3] = 1.0;
-
       vertex.mTextureUV[0] = x / chunkDensity;
       vertex.mTextureUV[1] = z / chunkDensity;
-
-      vertex.mPosition[1] = constructor->calculateHeight(vertex.mTextureUV[0],
-                                                         vertex.mTextureUV[1]); // calculate height 0.0f;
-
+      vertex.mPosition[1] = constructor->calculateHeight(vertex.mTextureUV[0], vertex.mTextureUV[1]);
       mDataVertices.push_back(vertex);
     }
   }
@@ -237,25 +224,22 @@ VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
   for (size_t i = 0; i < indices.size(); i += 3) {
 
     /* Normals */
-
     j = i + 1;
     z = i + 2;
 
-    glm::vec3 v0(mDataVertices[indices[i]].mPosition[0],
-                 mDataVertices[indices[i]].mPosition[1],
-                 mDataVertices[indices[i]].mPosition[2]);
-    glm::vec3 v1(mDataVertices[indices[j]].mPosition[0],
-                 mDataVertices[indices[j]].mPosition[1],
-                 mDataVertices[indices[j]].mPosition[2]);
-    glm::vec3 v2(mDataVertices[indices[z]].mPosition[0],
-                 mDataVertices[indices[z]].mPosition[1],
-                 mDataVertices[indices[z]].mPosition[2]);
+    const GLuint iIdx = indices[i];
+    const GLuint jIdx = indices[j];
+    const GLuint zIdx = indices[z];
+
+    glm::vec3 v0(mDataVertices[iIdx].mPosition[0], mDataVertices[iIdx].mPosition[1], mDataVertices[iIdx].mPosition[2]);
+    glm::vec3 v1(mDataVertices[jIdx].mPosition[0], mDataVertices[jIdx].mPosition[1], mDataVertices[jIdx].mPosition[2]);
+    glm::vec3 v2(mDataVertices[zIdx].mPosition[0], mDataVertices[zIdx].mPosition[1], mDataVertices[zIdx].mPosition[2]);
 
     glm::vec3 normal = glm::normalize(glm::cross(v1 - v0, v2 - v0));
 
-    normals[indices[i]] += normal;
-    normals[indices[j]] += normal;
-    normals[indices[z]] += normal;
+    normals[iIdx] += normal;
+    normals[jIdx] += normal;
+    normals[zIdx] += normal;
 
     /* Tangents */
     glm::vec3 deltaPosition;
@@ -265,16 +249,14 @@ VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
       deltaPosition = v1 - v0;
     }
 
-    glm::vec2 deltaUV1(mDataVertices[indices[j]].mTextureUV[0] - mDataVertices[indices[i]].mTextureUV[0],
-                       mDataVertices[indices[j]].mTextureUV[1] - mDataVertices[indices[i]].mTextureUV[1]);
+    glm::vec2 deltaUV1(mDataVertices[jIdx].mTextureUV[0] - mDataVertices[iIdx].mTextureUV[0],
+                       mDataVertices[jIdx].mTextureUV[1] - mDataVertices[iIdx].mTextureUV[1]);
 
-    glm::vec3 tangent = deltaPosition / (
-        deltaUV1.s != 0 ? deltaUV1.s : 1.0f
-    ); //xxx check if 0.0f  stackOverflow 17000255
+    glm::vec3 tangent = deltaPosition / ( deltaUV1.s != 0 ? deltaUV1.s : 1.0f );
     tangent = glm::normalize(tangent - glm::dot(normal, tangent) * normal);
 
-    tangents[indices[i]] += tangent;
-    tangents[indices[j]] += tangent;
+    tangents[iIdx] += tangent;
+    tangents[jIdx] += tangent;
     tangents[indices[z]] += tangent;
   }
 
@@ -336,15 +318,9 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
 
 void VertexBufferBasic::log() const {
   for (auto it : mDataVertices) {
-    fLogI("Vertex UV: %f %f", static_cast<double>(it.mTextureUV[0]), static_cast<double>(it.mTextureUV[1]));
-    fLogI("Vertex normal: %f %f %f",
-          static_cast<double>(it.mNormal[0]),
-          static_cast<double>(it.mNormal[1]),
-          static_cast<double>(it.mNormal[2]));
-    fLogI("Vertex position: %f %f %f",
-          static_cast<double>(it.mPosition[0]),
-          static_cast<double>(it.mPosition[1]),
-          static_cast<double>(it.mPosition[2]));
+    fLogI("Vertex UV: ", it.mTextureUV[0], " ", it.mTextureUV[1]);
+    fLogI("Vertex normal: ",it.mNormal[0], " ", it.mNormal[1], " ", it.mNormal[2]);
+    fLogI("Vertex position: ",it.mPosition[0], " ", it.mPosition[1], " ", it.mPosition[2]);
   }
 }
 
