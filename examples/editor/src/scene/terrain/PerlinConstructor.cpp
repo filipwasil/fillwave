@@ -9,9 +9,7 @@ PerlinConstructor::PerlinConstructor() {
 //	noise::module::Perlin mPerlin;
 }
 
-PerlinConstructor::~PerlinConstructor() {
-
-}
+PerlinConstructor::~PerlinConstructor() = default;
 
 GLboolean PerlinConstructor::calculateActiveVoxel(GLfloat x, GLfloat z,
       GLfloat y) {

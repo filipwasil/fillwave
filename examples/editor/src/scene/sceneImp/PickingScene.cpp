@@ -43,7 +43,7 @@ void PickingScene::init() {
   mEngine->attachHandler(std::move(customCursorFuncHandler), flw::flf::eEventType::custom);
 
   /* Picking info text which will be modified frequently */
-  pText pickInfo = mEngine->storeText("Nothing picked", "fonts/Titania", glm::vec2(-0.95, 0.80), 60.0);
+  flw::flf::ps<flw::flf::Text> pickInfo = mEngine->storeText("Nothing picked", "fonts/Titania", glm::vec2(-0.95, 0.80), 60.0);
 
   auto program = ProgramLoader(mEngine.get()).getProgram(EProgram::basic);
 
@@ -109,12 +109,12 @@ void PickingScene::init() {
   mEngine->attachHandler(std::move(colorFuncHandler), flw::flf::eEventType::custom);
 
   /* Description */
-  pText description = mEngine->storeText("Fillwave example cursor picking",
+  flw::flf::ps<flw::flf::Text> description = mEngine->storeText("Fillwave example cursor picking",
                                          "fonts/Titania",
                                          glm::vec2(-0.95, 0.95),
                                          100.0);
 
-  pText hint0 = mEngine->storeText("Pick a sphere", "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
+  flw::flf::ps<flw::flf::Text> hint0 = mEngine->storeText("Pick a sphere", "fonts/Titania", glm::vec2(-0.95, -0.80), 70.0);
 }
 
 void PickingScene::perform() {

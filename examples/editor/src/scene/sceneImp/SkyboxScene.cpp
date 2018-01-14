@@ -1,6 +1,4 @@
 #include "SkyboxScene.h"
-#include "scene/callbacks/StandardKeyboardEventHandler.h"
-#include "scene/callbacks/StandardMouseEventHandler.h"
 
 using namespace flw;
 using namespace flw::flf;
@@ -39,15 +37,15 @@ void SkyboxScene::init() {
                                                               "",
                                                               "textures/skybox/emerald/emerald_front.jpg",
                                                               "textures/skybox/emerald/emerald_back.jpg")));
-  pText hint0 = mEngine->storeText("Fillwave example skybox", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
-  pText hint5 = mEngine->storeText("To move the camera push rigth mouse button and move",
+  flw::flf::ps<flw::flf::Text> hint0 = mEngine->storeText("Fillwave example skybox", "fonts/Titania", glm::vec2(-0.95, 0.80), 100.0);
+  flw::flf::ps<flw::flf::Text> hint5 = mEngine->storeText("To move the camera push rigth mouse button and move",
                                    "fonts/Titania",
                                    glm::vec2(-0.95, -0.40),
                                    70.0);
-  pText hint3 = mEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
-  pText hint4 = mEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
-  pText hint1 = mEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
-  pText hint6 = mEngine->storeText("Use 'D' for toggle debugger On/Off",
+  flw::flf::ps<flw::flf::Text> hint3 = mEngine->storeText("Use 'S' for camera back", "fonts/Titania", glm::vec2(-0.95, -0.50), 70.0);
+  flw::flf::ps<flw::flf::Text> hint4 = mEngine->storeText("Use 'W' for camera forward", "fonts/Titania", glm::vec2(-0.95, -0.60), 70.0);
+  flw::flf::ps<flw::flf::Text> hint1 = mEngine->storeText("Use 'T' to resume/stop time", "fonts/Titania", glm::vec2(-0.95, -0.70), 70.0);
+  flw::flf::ps<flw::flf::Text> hint6 = mEngine->storeText("Use 'D' for toggle debugger On/Off",
                                    "fonts/Titania",
                                    glm::vec2(-0.95, -0.80),
                                    70.0);

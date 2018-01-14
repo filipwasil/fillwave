@@ -11,14 +11,14 @@ class CursorScene : public AScene {
 public:
   CursorScene(int argc, char **argv, QMap<QString, QVariant> varValues);
 
-  virtual ~CursorScene(){}
+  ~CursorScene() override = default;
 
   void init() override;
 
   void perform() override;
 
 private:
-  flw::pText mText;
+  flw::flf::ps<flw::flf::Text> mText;
   int mArgc;
   char **mArgv;
   std::unique_ptr<flw::flf::TimeStopCallback> mTimeCallback;

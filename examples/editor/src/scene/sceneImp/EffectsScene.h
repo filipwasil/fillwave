@@ -13,15 +13,14 @@ class EffectsScene : public AScene {
  public:
   EffectsScene(int argc, char** argv, QMap<QString, QVariant> varValues);
 
-  virtual ~EffectsScene() {
-  }
+  ~EffectsScene() override = default;
 
   void init() override;
 
   void perform() override;
 
  private:
-  flw::pText mText;
+  flw::flf::ps<flw::flf::Text> mText;
   int mArgc;
   char** mArgv;
 };

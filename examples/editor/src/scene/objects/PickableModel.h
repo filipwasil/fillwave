@@ -7,17 +7,17 @@ using namespace flw;
 
 class PickableModel: public flf::Model {
  private:
-	pText mText;
+	flw::flf::ps<flw::flf::Text> mText;
 	pIEffect mPickedEffect;
 	std::string mName;
  public:
 	PickableModel(std::string name,
-	              pText text,
+	              flw::flf::ps<flw::flf::Text> text,
 	              Engine* engine,
 	              flc::Program* program,
 	              const std::string& shapePath,
 	              const std::string& texturePath);
 	virtual ~PickableModel();
-	void onPicked();
-	void onUnpicked();
+	void onPicked() override;
+	void onUnpicked() override;
 };

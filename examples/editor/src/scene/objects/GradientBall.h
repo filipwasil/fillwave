@@ -24,7 +24,7 @@ class GradientBall: public Impostor {
 	             GLfloat size = 1.0,
 	             flc::Texture* texture = nullptr);
 	virtual ~GradientBall();
-	void draw(ICamera& camera);
+	void draw(ICamera& camera) override;
 };
 
 } /* flf */

@@ -22,7 +22,7 @@ class FullModelScene : public AScene {
   void perform() override;
 
  private:
-  flw::pText mText;
+  flw::flf::ps<flw::flf::Text> mText;
   int mArgc;
   char** mArgv;
 };
