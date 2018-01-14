@@ -92,24 +92,24 @@ void perform() {
 }
 
 void showDescription() {
-	pText hint0 =
+	flw::flf::ps<flw::flf::Text> hint0 =
 	   mEngine->storeText("Fillwave example terrain voxel",
 	         "fonts/Titania",  glm::vec2(-0.95, 0.80), 100.0);
-	pText hint5 =
+	flw::flf::ps<flw::flf::Text> hint5 =
 	   mEngine->storeText("Use mouse to move the camera",
 	         "fonts/Titania",  glm::vec2(-0.95, -0.40), 70.0);
-	pText hint3 = mEngine->storeText("Use 'S' for camera back",
+	flw::flf::ps<flw::flf::Text> hint3 = mEngine->storeText("Use 'S' for camera back",
 	              "fonts/Titania",
 	              glm::vec2(-0.95, -0.50), 70.0);
-	pText hint4 =
+	flw::flf::ps<flw::flf::Text> hint4 =
 	   mEngine->storeText("Use 'W' for camera forward",
 	         "fonts/Titania",
 	         glm::vec2(-0.95, -0.60), 70.0);
-	pText hint1 =
+	flw::flf::ps<flw::flf::Text> hint1 =
 	   mEngine->storeText("Use 'T' to resume/stop time",
 	         "fonts/Titania",
 	         glm::vec2(-0.95, -0.70), 70.0);
-	pText hint6 =
+	flw::flf::ps<flw::flf::Text> hint6 =
 	   mEngine->storeText("Use 'D' for toggle debugger On/Off",
 	         "fonts/Titania",  glm::vec2(-0.95, -0.80), 70.0);
 

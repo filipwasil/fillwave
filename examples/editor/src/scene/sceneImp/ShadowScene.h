@@ -10,14 +10,14 @@ class ShadowScene : public AScene {
 public:
   ShadowScene(int argc, char **argv, QMap<QString, QVariant> varValues);
 
-  virtual ~ShadowScene(){}
+  ~ShadowScene() override = default;
 
   void init() override;
 
   void perform() override;
 
 private:
-  flw::pText mText;
+  flw::flf::ps<flw::flf::Text> mText;
   int mArgc;
   char **mArgv;
   flw::flf::LightSpot* mFirstLigth;

@@ -11,14 +11,14 @@ class SkyboxScene : public AScene {
 public:
   SkyboxScene(int argc, char **argv, QMap<QString, QVariant> varValues);
 
-  virtual ~SkyboxScene() {}
+  virtual ~SkyboxScene() = default;
 
   void init() override;
 
   void perform() override;
 
 private:
-  flw::pText mText;
+  flw::flf::ps<flw::flf::Text> mText;
   int mArgc;
   char **mArgv;
   std::unique_ptr<flw::flf::TimeStopCallback> mTimeCallback;

@@ -9,7 +9,7 @@
 #include <fillwave/Log.h>
 
 PickableModel::PickableModel(std::string name,
-                             pText text,
+                             flw::flf::ps<flw::flf::Text> text,
                              Engine* engine,
                              flc::Program* program,
                              const std::string& shapePath,
@@ -22,9 +22,7 @@ PickableModel::PickableModel(std::string name,
 	mPickedEffect = pIEffect(new flf::BoostColor(2.0f));
 }
 
-PickableModel::~PickableModel() {
-
-}
+PickableModel::~PickableModel() = default;
 
 void PickableModel::onPicked() {
 	mText->editString("Picked " + mName);

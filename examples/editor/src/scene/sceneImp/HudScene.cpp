@@ -18,7 +18,7 @@ void HudScene::init() {
 	mEngine->setCurrentScene(make_unique<Scene>());
 	mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
 
-	puHUD hud = make_unique<HUD>();
+	std::unique_ptr<flw::flf::HUD> hud = make_unique<HUD>();
 
 	hud->attach(make_unique<Button>(mEngine.get(),
 	                                mEngine->storeTexture("buttons/start-1.png"),
@@ -51,7 +51,7 @@ void HudScene::init() {
 
 //	mEngine->getCurrentScene()->setHUD(std::move(hud));
 
-	pText t1 = mEngine->storeText("Fillwave Buttons", "fonts/bridgenorth", glm::vec2(-0.95, -0.8), 100.0);
+	flw::flf::ps<flw::flf::Text> t1 = mEngine->storeText("Fillwave Buttons", "fonts/bridgenorth", glm::vec2(-0.95, -0.8), 100.0);
 }
 
 void HudScene::perform() {

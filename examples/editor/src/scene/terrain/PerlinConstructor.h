@@ -15,8 +15,8 @@ class PerlinConstructor: public VoxelConstructor {
  public:
 	PerlinConstructor();
 	virtual ~PerlinConstructor();
-	GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y);
-	GLfloat calculateHeight(GLfloat x, GLfloat z);
+	GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y) override;
+	GLfloat calculateHeight(GLfloat x, GLfloat z) override;
 };
 
 } /* framework */

@@ -1,6 +1,5 @@
 #include <fillwave/space/Scene.h>
 #include <fillwave/models/EmiterPointGPU.h>
-#include <fillwave/Fillwave.h>
 #include "TextScene.h"
 
 using namespace flw;
@@ -12,9 +11,7 @@ TextScene::TextScene(int argc, char **argv, QMap<QString, QVariant> varValues)
   init();
 }
 
-TextScene::~TextScene() {
-
-}
+TextScene::~TextScene() = default;
 
 void TextScene::init() {
 
