@@ -13,7 +13,7 @@
 
 namespace scene {
 class AScene : public QObject {
-
+//TODO: Demonatrz property system
  public:
   AScene(int argc, char* const* argv, QMap<QString, QVariant> parametersMap)
     : mSceneParameters(parametersMap) {

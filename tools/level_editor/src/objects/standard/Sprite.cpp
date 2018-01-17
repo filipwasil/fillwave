@@ -16,8 +16,7 @@ std::string Sprite::getObjectName() {
 }
 
 void Sprite::init() {
-  if (!mNodeDataModel)
-  {
+  if (!mNodeDataModel) {
     return;
   }
   QStandardItemModel* positionModel = new QStandardItemModel(this);

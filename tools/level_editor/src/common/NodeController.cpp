@@ -30,7 +30,14 @@ void NodeController::addNodeToModel(NodeData node) {
   }
   objects::NodeFactory nFactory(sceneEngine);
   objects::ANodeBase* readyNode = nFactory.createNode(node.mType, node.name, node.mId);
+  addCreatedModelToScene(readyNode, sceneEngine);
   mModel->addNodeToModel(readyNode, mCurrentScenId);
 }
-
+void NodeController::addCreatedModelToScene(objects::ANodeBase* node, std::shared_ptr<flw::Engine> engine)
+{
+  flw::flf::Model* obj = node->getEngineModel();
+  std::unique_ptr<flw::flf::Model> model;
+  model.reset(obj);
+  engine->getCurrentScene()->attach(std::move(model));
+}
 }

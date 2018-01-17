@@ -1,5 +1,6 @@
 #pragma once
-
+#include <fillwave/Fillwave.h>
+#include <fillwave/Framework.h>
 #include "common/ENodeType.hpp"
 #include "ANodeBase.h"
 
@@ -9,6 +10,6 @@ class INodeCreator {
  public:
   virtual ~INodeCreator() = default;
 
-  virtual ANodeBase* createCompleteNode(QString& name, qintptr id) = 0;
+  virtual ANodeBase* createCompleteNode(QString& name, qintptr id, std::shared_ptr<flw::Engine> engine) = 0;
 };
 }

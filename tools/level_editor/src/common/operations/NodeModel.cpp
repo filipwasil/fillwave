@@ -22,7 +22,6 @@ void NodeModel::addNodeToModel(objects::ANodeBase* node, quintptr modelId) {
     return;
   }
   (*it)->addNode(node);
-  // TODO: dodawanie obiektu do pozyskanego modelu
 }
 
 std::shared_ptr<flw::Engine> NodeModel::getSceneEngine(quintptr sceneId) {
