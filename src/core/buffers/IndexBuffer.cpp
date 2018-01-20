@@ -44,7 +44,7 @@ IndexBuffer::IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModificatio
   mDataIndices.reserve(mTotalElements);
   mSize = mTotalElements * sizeof(GLuint);
   if (fill) {
-    for (GLuint i = 0; i < elements; i++) {
+    for (GLuint i = 0; i < elements; ++i) {
       mDataIndices.push_back(i);
     }
     mData = mDataIndices.data();

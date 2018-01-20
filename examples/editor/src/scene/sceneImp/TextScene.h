@@ -2,6 +2,7 @@
 
 #include <fillwave/Fillwave.h>
 #include <fillwave/models/EmiterPointCPU.h>
+#include "fillwave/common/Aliases.h"
 #include "scene/AScene.h"
 
 namespace scene {

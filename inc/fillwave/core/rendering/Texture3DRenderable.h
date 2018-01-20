@@ -68,5 +68,4 @@ protected:
 };
 
 } /* flc */
-typedef std::shared_ptr<flc::Texture3DRenderable> pTexture3DRenderable;
 } /* flw */

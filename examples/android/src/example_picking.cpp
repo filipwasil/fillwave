@@ -35,7 +35,7 @@ void perform(flw::Engine *engine) {
 
   pModel beast_animated = buildModel(engine, aprogram, "beast.dae");
   pModel beast_animated1 = buildModel(engine, aprogram, "beast.dae");
-  pText pick = engine->storeText("Nothing picked", "bridgenorth", -0.95, -0.45, 100.0);
+  flw::flf::ps<flw::flf::Text> pick = engine->storeText("Nothing picked", "bridgenorth", -0.95, -0.45, 100.0);
   pModel beast_animated2 = pModel(new PickableModel("pickable beast", pick, engine, aprogram, "beast.dae"));
 
   beast_animated->moveTo(glm::vec3(0.0, -2.0, 0.0));
@@ -53,7 +53,7 @@ void perform(flw::Engine *engine) {
   scene->attach(beast_animated2);
 
   /* Skybox */
-  pTexture3D textureCubemap = engine->storeTexture3D("emerald_right.jpg",
+  flw::flf::ps<flw::flf::Text>ure3D textureCubemap = engine->storeTexture3D("emerald_right.jpg",
                                                      "emerald_left.jpg",
                                                      "emerald_top.jpg",
                                                      "",
@@ -66,7 +66,7 @@ void perform(flw::Engine *engine) {
   scene->setSkybox(skybox);
 
   /* Text */
-  pText text = engine->storeText("Fillwave Android example", "bridgenorth", -0.95, 0.95, 50.0);
+  flw::flf::ps<flw::flf::Text> text = engine->storeText("Fillwave Android example", "bridgenorth", -0.95, 0.95, 50.0);
 
   /* Specular and normal mapping*/
   pEntity entity1 = buildEntity();

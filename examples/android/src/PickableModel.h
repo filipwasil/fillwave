@@ -16,11 +16,11 @@ using namespace flw::framework;
 
 class PickableModel : public Model {
 private:
-  pText mText;
+  flw::flf::ps<flw::flf::Text> mText;
   pIEffect mPickedEffect;
   std::string mName;
 public:
-  PickableModel(std::string name, pText text, Engine *engine, flc::Program *program, const std::string &shapePath);
+  PickableModel(std::string name, flw::flf::ps<flw::flf::Text> text, Engine *engine, flc::Program *program, const std::string &shapePath);
 
   virtual ~PickableModel();
 

@@ -58,5 +58,4 @@ private:
 };
 
 } /* flc */
-typedef std::shared_ptr<flc::Texture3DRenderableDynamic> pTexture3DRenderableDynamic;
 } /* flw */

@@ -16,7 +16,7 @@ using namespace flw;
 using namespace flw::framework;
 
 PickableModel::PickableModel(std::string name,
-    pText text,
+    flw::flf::ps<flw::flf::Text> text,
     Engine *engine,
     flc::Program *program,
     const std::string &shapePath)

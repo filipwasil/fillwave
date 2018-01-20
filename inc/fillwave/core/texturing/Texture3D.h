@@ -80,5 +80,4 @@ public:
 };
 
 } /* flc */
-typedef std::shared_ptr<flc::Texture3D> pTexture3D;
 } /* flw */

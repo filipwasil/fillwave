@@ -74,7 +74,7 @@ struct engine {
   struct saved_state state;
 
   Engine *fillwave;
-//    pText fpsCounter;
+//    flw::flf::ps<flw::flf::Text> fpsCounter;
   /* Accelerometer */
   ASensorManager *sensorManager;
   const ASensor *accelerometerSensor;

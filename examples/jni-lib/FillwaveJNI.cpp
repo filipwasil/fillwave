@@ -744,7 +744,7 @@ jobject,
 jint) {
 
 Engine *ptr = reinterpret_cast<Engine *>(engine);
-pText t = ptr->storeText(env->GetStringUTFChars(content, nullptr),
+flw::flf::ps<flw::flf::Text> t = ptr->storeText(env->GetStringUTFChars(content, nullptr),
                          env->GetStringUTFChars(font, nullptr),
                          -0.95,
                          0.80,
@@ -1545,7 +1545,7 @@ pCameraPerspective c = pCameraPerspective(new CameraPerspective(glm::vec3(0.0, 0
                                                                 0.1,
                                                                 1000.0));
 /* Textures */
-pTexture t = e->storeTexture("textures/particle.png");
+flw::flf::ps<flw::flf::Text>ure t = e->storeTexture("textures/particle.png");
 
 /* Attach camera to scene */
 s->

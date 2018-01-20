@@ -50,7 +50,7 @@ void perform(Engine *engine) {
   scene->attach(beast_animated2);
 
   /* Skybox */
-  pTexture3D textureCubemap = engine->storeTexture3D("emerald_right.jpg",
+  flw::flf::ps<flw::flf::Text>ure3D textureCubemap = engine->storeTexture3D("emerald_right.jpg",
                                                      "emerald_left.jpg",
                                                      "emerald_top.jpg",
                                                      "",
@@ -63,7 +63,7 @@ void perform(Engine *engine) {
   scene->setSkybox(skybox);
 
   /* Text */
-  pText text = engine->storeText("Fillwave Android example", "bridgenorth", -0.95, 0.95, 100.0);
+  flw::flf::ps<flw::flf::Text> text = engine->storeText("Fillwave Android example", "bridgenorth", -0.95, 0.95, 100.0);
 
   /* Specular and normal mapping*/
   pEntity entity1 = buildEntity();
@@ -97,7 +97,7 @@ void perform(Engine *engine) {
   entity1->scaleTo(0.02);
   scene->attach(entity1);
 
-  pTexture gTexture = engine->storeTexture("fire.png");
+  flw::flf::ps<flw::flf::Text>ure gTexture = engine->storeTexture("fire.png");
   pEmiterPointGPU e = pEmiterPointGPU(new EmiterPointGPU(engine,
                                                          0.3,
                                                          2000.0,

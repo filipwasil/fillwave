@@ -64,7 +64,7 @@ void perform(Engine *engine) {
   cactus3->addEffect(f);
 
   /* Text */
-  pText text = engine->storeText("Fillwave example", "bridgenorth", glm::vec2(-0.95, 0.95), 100.0);
+  flw::flf::ps<flw::flf::Text> text = engine->storeText("Fillwave example", "bridgenorth", glm::vec2(-0.95, 0.95), 100.0);
 
   /* Specular and normal mapping*/
   puEntity entityLight = buildEntity();

@@ -27,7 +27,7 @@ void perform(flw::Engine *engine) {
   /* Texture */
   engine->addPostProcess("process1.frag", 8.0);
 
-  pTexture textureDynamic = engine->storeTextureDynamic("water.frag");
+  flw::flf::ps<flw::flf::Text>ure textureDynamic = engine->storeTextureDynamic("water.frag");
 
   /* Shaders */
   pShader fragment = engine->storeShaderFragment("default.frag");
@@ -53,5 +53,5 @@ void perform(flw::Engine *engine) {
   sphere->moveBy(glm::vec3(0.0, 0.0, -15.0));
 
   /* Description */
-  pText description = engine->storeText("Fillwave example post processing shader", "bridgenorth", -0.95, 0.95, 100.0);
+  flw::flf::ps<flw::flf::Text> description = engine->storeText("Fillwave example post processing shader", "bridgenorth", -0.95, 0.95, 100.0);
 }

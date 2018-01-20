@@ -23,7 +23,7 @@ void perform(flw::Engine *engine) {
                                                                                0.1,
                                                                                1000.0));
   /* Textures */
-  pTexture gTexture = engine->storeTexture("particle.png");
+  flw::flf::ps<flw::flf::Text>ure gTexture = engine->storeTexture("particle.png");
 
   /* Set current scene */
   engine->setCurrentScene(gScene);

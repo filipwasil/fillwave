@@ -35,7 +35,7 @@ void perform(flw::Engine *engine) {
   pShader vertex = engine->storeShaderVertex("default.vert");
 
   /* Skybox */
-  pTexture3D textureCubemap = engine->storeTexture3D("emerald_right.jpg",
+  flw::flf::ps<flw::flf::Text>ure3D textureCubemap = engine->storeTexture3D("emerald_right.jpg",
                                                      "emerald_left.jpg",
                                                      "emerald_top.jpg",
                                                      "",
@@ -48,7 +48,7 @@ void perform(flw::Engine *engine) {
   scene->setSkybox(skybox);
 
   /* Text */
-  pText text = engine->storeText("Fillwave terrain example", "bridgenorth", -0.95, 0.95, 100.0);
+  flw::flf::ps<flw::flf::Text> text = engine->storeText("Fillwave terrain example", "bridgenorth", -0.95, 0.95, 100.0);
 
   /* Specular and normal mapping*/
   pEntity entity1 = buildEntity();

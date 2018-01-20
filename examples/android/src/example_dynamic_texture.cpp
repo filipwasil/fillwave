@@ -25,9 +25,9 @@ void perform(flw::Engine *engine) {
   pEntity gEntityLight = buildEntity();
 
   /* Texture */
-  pTexture textureDynamic = engine->storeTextureDynamic("water.frag");
-  pTexture textureN = engine->storeTexture("255_255_255.color");
-  pTexture textureS = engine->storeTexture("");
+  flw::flf::ps<flw::flf::Text>ure textureDynamic = engine->storeTextureDynamic("water.frag");
+  flw::flf::ps<flw::flf::Text>ure textureN = engine->storeTexture("255_255_255.color");
+  flw::flf::ps<flw::flf::Text>ure textureS = engine->storeTexture("");
 
   /* Shaders */
   pShader fragment = engine->storeShaderFragment("default.frag");
@@ -53,7 +53,7 @@ void perform(flw::Engine *engine) {
   sphere->moveBy(glm::vec3(0.0, 0.0, -15.0));
 
   /* Description */
-  pText hint0 = engine->storeText("Fillwave example dynamic texture", "bridgenorth", -0.95, 0.95, 100.0);
+  flw::flf::ps<flw::flf::Text> hint0 = engine->storeText("Fillwave example dynamic texture", "bridgenorth", -0.95, 0.95, 100.0);
 
   engine->debuggerOn(GL_TRUE);
 
