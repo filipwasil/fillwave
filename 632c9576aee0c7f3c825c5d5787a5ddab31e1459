@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "445fb97d_80079805",
+        "filename": "tools/level_editor/src/common/NodeController.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-01-20T16:30:52Z",
+      "side": 0,
+      "message": "Brace in the same line",
+      "revId": "632c9576aee0c7f3c825c5d5787a5ddab31e1459",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a62b37e2_2f1ddf79",
+        "filename": "tools/level_editor/src/objects/SceneModel.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-01-20T16:30:52Z",
+      "side": 0,
+      "message": "Jak usunąć to usunąć :)",
+      "revId": "632c9576aee0c7f3c825c5d5787a5ddab31e1459",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
