@@ -50,27 +50,22 @@ struct LightDirectioData {
  */
 class LightDirectional : public Light {
 public:
-  LightDirectional(flc::Texture2DRenderable *shadowTexture,
-      glm::vec3 position,
-      glm::quat rotation,
-      glm::vec4 intensity,
-      Moveable *followed = nullptr);
+  LightDirectional(flc::Texture2DRenderable* tex, glm::vec3 pos, glm::quat rot, glm::vec4 intensity, Moveable* observed = nullptr);
 
   virtual ~LightDirectional() = default;
 
-  flc::Texture2DRenderable *getShadowTexture();
+  flc::Texture2DRenderable* getShadowTexture();
 
-  CameraOrthographic *getShadowCamera();
+  CameraOrthographic* getShadowCamera();
 
   void updateShadowCamera();
 
   void log();
 
 private:
-  flc::Texture2DRenderable *mShadowTexture;
+  flc::Texture2DRenderable* mShadowTexture;
   puCameraOrthographic mShadowCamera;
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::LightDirectional> puLightDirectional;
 } /* flw */

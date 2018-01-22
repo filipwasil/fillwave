@@ -49,7 +49,7 @@ public:
     }
   }
 
-  void addObserver(IObserver *observer) {
+  void addObserver(IObserver* observer) {
     if (nullptr == observer) {
       return;
     }
@@ -61,7 +61,7 @@ public:
     mObservers.push_back(observer);
   }
 
-  void dropObserver(IObserver *observer) {
+  void dropObserver(IObserver* observer) {
     mObservers.erase(std::remove(mObservers.begin(), mObservers.end(), observer), mObservers.end());
   }
 
@@ -72,7 +72,7 @@ public:
   }
 
 protected:
-  std::vector<IObserver *> mObservers;
+  std::vector<IObserver*> mObservers;
 };
 
 } /* flf */

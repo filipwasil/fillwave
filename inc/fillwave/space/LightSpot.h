@@ -45,17 +45,17 @@ protected:
   puCameraPerspective mShadowCamera;
 
 public:
-  LightSpot(flc::Texture2DRenderable *shadowTexture,
+  LightSpot(flc::Texture2DRenderable* shadowTexture,
       glm::vec3 position,
       glm::quat rotation,
       glm::vec4 intensity,
-      Moveable *followed = nullptr);
+      Moveable* followed = nullptr);
 
   virtual ~LightSpot() = default;
 
-  flc::Texture2DRenderable *getShadowTexture();
+  flc::Texture2DRenderable* getShadowTexture();
 
-  CameraPerspective *getShadowCamera();
+  CameraPerspective* getShadowCamera();
 
   void updateShadowCamera();
 
@@ -64,5 +64,4 @@ public:
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::LightSpot> puLightSpot;
 } /* flw */

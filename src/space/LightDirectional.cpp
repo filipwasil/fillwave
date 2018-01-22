@@ -40,27 +40,18 @@ FLOGINIT("DirectionalLight", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-LightDirectional::LightDirectional(flc::Texture2DRenderable *shadowTexture,
-    glm::vec3 position,
-    glm::quat rotation,
-    glm::vec4 intensity,
-    Moveable *followed)
-    : Light(position, intensity, followed), mShadowTexture(shadowTexture)
-    , mShadowCamera(std::make_unique<CameraOrthographic>(position,
-                                                         rotation,
-                                                         -10.0f,
-                                                         10.0f,
-                                                         10.0f,
-                                                         -10.0f,
-                                                         0.1f,
-                                                         1000.0f)) {
+LightDirectional::LightDirectional(flc::Texture2DRenderable* tex, glm::vec3 pos, glm::quat rot, glm::vec4 intensity, Moveable* observed)
+    : Light(pos, intensity, observed)
+    , mShadowTexture(tex)
+    , mShadowCamera(std::make_unique<CameraOrthographic>(pos, rot, -10.0f, 10.0f, 10.0f, -10.0f, 0.1f, 1000.0f)) {
+  //  nothing
 }
 
-CameraOrthographic *LightDirectional::getShadowCamera() {
+CameraOrthographic* LightDirectional::getShadowCamera() {
   return mShadowCamera.get();
 }
 
-flc::Texture2DRenderable *LightDirectional::getShadowTexture() {
+flc::Texture2DRenderable* LightDirectional::getShadowTexture() {
   return mShadowTexture;
 }
 
@@ -75,36 +66,15 @@ void LightDirectional::updateShadowCamera() {
   }
 }
 
-/* Camera */
 void LightDirectional::log() {
-  auto d = [](GLfloat f) {
-    return static_cast<double>(f);
-  };
-  fLogI("mShadowCamera->getTranslation(): :%f :%f :%f",
-        d(mShadowCamera->getTranslation().x),
-        d(mShadowCamera->getTranslation().y),
-        d(mShadowCamera->getTranslation().z));
-  fLogI("mShadowCamera[0]: :%f :%f :%f :%f",
-        d(mShadowCamera->getEye()[0].x),
-        d(mShadowCamera->getEye()[0].y),
-        d(mShadowCamera->getEye()[0].z),
-        d(mShadowCamera->getEye()[0].w));
-  fLogI("mShadowCamera[1]: :%f :%f :%f :%f",
-        d(mShadowCamera->getEye()[1].x),
-        d(mShadowCamera->getEye()[1].y),
-        d(mShadowCamera->getEye()[1].z),
-        d(mShadowCamera->getEye()[1].w));
-  fLogI("mShadowCamera[2]: :%f :%f :%f :%f",
-        d(mShadowCamera->getEye()[2].x),
-        d(mShadowCamera->getEye()[2].y),
-        d(mShadowCamera->getEye()[2].z),
-        d(mShadowCamera->getEye()[2].w));
-  fLogI("mShadowCamera[3]: :%f :%f :%f :%f",
-        d(mShadowCamera->getEye()[3].x),
-        d(mShadowCamera->getEye()[3].y),
-        d(mShadowCamera->getEye()[3].z),
-        d(mShadowCamera->getEye()[3].w));
-  fLogI("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x), d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
+  const auto translation = mShadowCamera->getTranslation();
+  const auto eyeMatrix = mShadowCamera->getEye();
+  fLogI("mShadowCamera->getTranslation(): ", translation.x, translation.y, translation.z);
+  fLogI("mShadowCamera[0]: ", eyeMatrix[0].x, " ", eyeMatrix[0].y, " ", eyeMatrix[0].z, " ", eyeMatrix[0].w);
+  fLogI("mShadowCamera[1]: ", eyeMatrix[1].x, " ", eyeMatrix[1].y, " ", eyeMatrix[1].z, " ", eyeMatrix[1].w);
+  fLogI("mShadowCamera[2]: ", eyeMatrix[2].x, " ", eyeMatrix[2].y, " ", eyeMatrix[2].z, " ", eyeMatrix[2].w);
+  fLogI("mShadowCamera[3]: ", eyeMatrix[3].x, " ", eyeMatrix[3].y, " ", eyeMatrix[3].z, " ", eyeMatrix[3].w);
+  fLogI("Light mIntensity: R:", mIntensity.x, "G: ", mIntensity.y, "B: ",mIntensity.z, "A: ", mIntensity.w);
 }
 
 } /* flf */

@@ -40,41 +40,38 @@ FLOGINIT("LightPoint", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-LightPoint::LightPoint(flc::Texture3DRenderable *shadowTexture,
-    glm::vec3 position,
-    glm::vec4 intensity,
-    Moveable *followed)
-    : Light(position, intensity, followed)
-    , mShadowTexture(shadowTexture)
+LightPoint::LightPoint(flc::Texture3DRenderable* tex, glm::vec3 pos, glm::vec4 intensity, Moveable* observed)
+    : Light(pos, intensity, observed)
+    , mShadowTexture(tex)
     , mSphere(1.0f, 10, 10) {
     const glm::vec3 axisX(1.0f, 0.0f, 0.0f);
     const glm::vec3 axisY(0.0f, 1.0f, 0.0f);
     const glm::vec3 axisZ(0.0f, 0.0f, 1.0f);
     mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_X] =
-        std::make_unique<CameraPerspective>(position,
+        std::make_unique<CameraPerspective>(pos,
             glm::normalize(glm::angleAxis(glm::radians(90.0f), axisY) * glm::angleAxis(glm::radians(180.0f), axisX)),
             glm::radians(90.0f), 1.0f, 0.1f, 1000.0f);
     mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_X] =
         std::make_unique<CameraPerspective>(
-            position,
+            pos,
             glm::normalize(glm::angleAxis(glm::radians(-90.0f), axisY) * glm::angleAxis(glm::radians(180.0f), axisX)),
             glm::radians(90.0f), 1.0f, 0.1f, 1000.0f);
     mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_Y] =
-        std::make_unique<CameraPerspective>(position,
+        std::make_unique<CameraPerspective>(pos,
             glm::normalize(glm::angleAxis(glm::radians(90.0f), axisX)),
             glm::radians(90.0f), 1.0f, 0.1f, 1000.0f);
     mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_Y] =
         std::make_unique<CameraPerspective>(
-            position,
+            pos,
             glm::normalize(glm::angleAxis(glm::radians(-90.0f), axisX)),
             glm::radians(90.0f), 1.0f, 0.1f, 1000.0f);
     mFaceCameras[GL_TEXTURE_CUBE_MAP_POSITIVE_Z] =
-        std::make_unique<CameraPerspective>(position,
+        std::make_unique<CameraPerspective>(pos,
             glm::normalize(glm::angleAxis(glm::radians(180.0f), axisZ)),
             glm::radians(90.0f), 1.0f, 0.1f, 1000.0f);
     mFaceCameras[GL_TEXTURE_CUBE_MAP_NEGATIVE_Z] =
         std::make_unique<CameraPerspective>(
-            position,
+            pos,
             glm::normalize(glm::angleAxis(glm::radians(180.0f), axisY) * glm::angleAxis(glm::radians(180.0f), axisZ)),
             glm::radians(90.0f), 1.0f, 0.1f, 1000.0f);
 }
@@ -92,8 +89,8 @@ CameraPerspective *LightPoint::getShadowCamera(GLenum id) {
 }
 
 void LightPoint::updateShadowCamera() {
-  if (mFollowed) {
-    mTranslation = mFollowed->getTranslation();
+  if (mObserved) {
+    mTranslation = mObserved->getTranslation();
   }
   for (auto &it : mFaceCameras) {
     if (it.second->getTranslation() != mTranslation) {

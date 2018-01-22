@@ -40,23 +40,26 @@ FLOGINIT("Light", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-Light::Light(glm::vec3 position, glm::vec4 intensity, Moveable *followed)
-    : Moveable(position), mFollowed(followed), mIsFollowedUpdated(true), mIntensity(intensity) {
-  if (nullptr != mFollowed) {
-    mFollowed->addObserver(this);
+Light::Light(glm::vec3 pos, glm::vec4 intensity, Moveable* observed)
+    : Moveable(pos)
+    , mObserved(observed)
+    , mIsFollowedUpdated(true)
+    , mIntensity(intensity) {
+  if (nullptr != mObserved) {
+    mObserved->addObserver(this);
   }
 }
 
 Light::~Light() {
-  if (nullptr != mFollowed) {
-    mFollowed->dropObserver(this);
+  if (nullptr != mObserved) {
+    mObserved->dropObserver(this);
   }
 }
 
 void Light::updateFromFollowed() {
-  if (mFollowed && mIsFollowedUpdated) {
-    mTranslation = glm::vec3(mFollowed->getParentMMC() * glm::vec4(mFollowed->getTranslation(), 1.0));
-    mRotation = glm::normalize(mFollowed->getParentRotation() * mFollowed->getRotation());
+  if (mObserved && mIsFollowedUpdated) {
+    mTranslation = glm::vec3(mObserved->getParentMMC() * glm::vec4(mObserved->getTranslation(), 1.0));
+    mRotation = glm::normalize(mObserved->getParentRotation() * mObserved->getRotation());
     mRefresh = GL_TRUE;
     mIsFollowedUpdated = false;
   }
@@ -87,12 +90,12 @@ void Light::log() {
 }
 
 void Light::onDeath(Observable *observable) {
-  if (mFollowed == observable) {
-    mFollowed = nullptr;
+  if (mObserved == observable) {
+    mObserved = nullptr;
   }
 }
 
-void Light::onChanged(Observable * /*observable*/) {
+void Light::onChanged(Observable* /*observable*/) {
   mIsFollowedUpdated = true;
 }
 } /* flf */

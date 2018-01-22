@@ -117,29 +117,20 @@ void Engine::drawTexture(Texture* t) {
   mImpl->drawTexture(t);
 }
 
-flf::LightSpot* Engine::storeLightSpot(glm::vec3 position, glm::quat rotation, glm::vec4 color, flf::Moveable* followed) {
-  return mImpl->mLights->mLightsSpot.add(mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight),
-                                         position,
-                                         rotation,
-                                         color,
-                                         followed);
+flf::LightSpot* Engine::storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
+  return mImpl->mLights->mLightsSpot.add(
+      mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight), pos, rot, col, observed);
 }
 
-flf::LightPoint* Engine::storeLightPoint(glm::vec3 position, glm::vec4 color, flf::Moveable* followed) {
-  return mImpl->mLights->mLightsPoint.add(mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight),
-                                          position,
-                                          color,
-                                          followed);
+flf::LightPoint* Engine::storeLightPoint(glm::vec3 pos, glm::vec4 col, flf::Moveable* observed) {
+  return mImpl->mLights->mLightsPoint.add(
+      mImpl->mTextures->getShadow3D(mImpl->mWindowWidth, mImpl->mWindowHeight), pos, col, observed);
 }
 
 flf::LightDirectional*
-Engine::storeLightDirectional(glm::vec3 position, glm::quat rotation, glm::vec4 color, flf::Moveable* followed) {
-  return mImpl->mLights->mLightsDirectional.add(mImpl->mTextures->getShadow2D(mImpl->mWindowWidth,
-                                                                              mImpl->mWindowHeight),
-                                                position,
-                                                rotation,
-                                                color,
-                                                followed);
+Engine::storeLightDirectional(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
+  return mImpl->mLights->mLightsDirectional.add(
+      mImpl->mTextures->getShadow2D(mImpl->mWindowWidth, mImpl->mWindowHeight), pos, rot, col, observed);
 }
 
 Program* Engine::storeProgram(const string& name, const vector<Shader*>& shaders, bool isSkipLinking) {
@@ -265,7 +256,7 @@ void Engine::detach(flf::ps<flf::Text> text) {
 void Engine::detach(flf::LightSpot* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsSpot.begin(),
                            mImpl->mLights->mLightsSpot.end(),
-                           [light](const puLightSpot &l) {
+                           [light](const flf::pu<flf::LightSpot> &l) {
                              return light == l.get();
                            });
   mImpl->mLights->mLightsSpot.erase(new_end, mImpl->mLights->mLightsSpot.end());
@@ -274,7 +265,7 @@ void Engine::detach(flf::LightSpot* light) {
 void Engine::detach(flf::LightDirectional* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsDirectional.begin(),
                            mImpl->mLights->mLightsDirectional.end(),
-                           [light](const puLightDirectional &l) {
+                           [light](const flf::pu<flf::LightDirectional> &l) {
                              return light == l.get();
                            });
   mImpl->mLights->mLightsDirectional.erase(new_end, mImpl->mLights->mLightsDirectional.end());
@@ -283,7 +274,7 @@ void Engine::detach(flf::LightDirectional* light) {
 void Engine::detach(flf::LightPoint* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsPoint.begin(),
                            mImpl->mLights->mLightsPoint.end(),
-                           [light](const puLightPoint &l) {
+                           [light](const flf::pu<flf::LightPoint> &l) {
                              return light == l.get();
                            });
   mImpl->mLights->mLightsPoint.erase(new_end, mImpl->mLights->mLightsPoint.end());

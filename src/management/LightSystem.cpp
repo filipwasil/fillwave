@@ -37,7 +37,7 @@ namespace flf {
 const glm::mat4 FILLWAVE_UV_BIAS_MATRIX(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
 
 LightSystem::LightSystem() {
-  mLightBufferData.resize(FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER + FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER);
+  mLightBufferData.resize(MAX_LIGHTS);
 }
 
 void LightSystem::clear() {

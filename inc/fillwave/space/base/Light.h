@@ -35,11 +35,8 @@
 namespace flw {
 namespace flf {
 
-#define MAX_LIGHTS       4
-#define USED_LIGHT_SLOTS 4
-#if(USED_LIGHT_SLOTS > MAX_LIGHTS)
-#error "used light slots can not be grater than available lights"
-#endif
+constexpr size_t MAX_LIGHTS = 4;
+constexpr size_t USED_LIGHT_SLOTS = 4;
 
 /*! \struct LighUniformData
  * \brief Light UBO data.
@@ -65,7 +62,7 @@ struct LightAttenuationData {
 
 class Light : public Moveable, public IObserver {
 public:
-  Light(glm::vec3 position, glm::vec4 intensity, Moveable *followed);
+  Light(glm::vec3 pos, glm::vec4 intensity, Moveable* observed);
 
   ~Light() override;
 
@@ -81,12 +78,12 @@ public:
 
   void log();
 
-  void onDeath(Observable *observable) override;
+  void onDeath(Observable* observable) override;
 
-  void onChanged(Observable *observable) override;
+  void onChanged(Observable* observable) override;
 
 protected:
-  Moveable *mFollowed;
+  Moveable* mObserved;
   bool mIsFollowedUpdated;
   glm::vec4 mIntensity;
   LightAttenuationData mAttenuation;

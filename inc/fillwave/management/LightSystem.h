@@ -37,13 +37,9 @@ namespace flw {
 class Engine;
 namespace flf {
 
-static constexpr size_t FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER = 4;
-
-typedef TManager<LightSpot, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, flc::Texture2DRenderable *, glm::vec3, glm::quat, glm::vec4, Moveable *> CacheSpotLights;
-
-typedef TManager<LightDirectional, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, flc::Texture2DRenderable *, glm::vec3, glm::quat, glm::vec4, Moveable *> CacheDirectionalLights;
-
-typedef TManager<LightPoint, FILLWAVE_MAXIMUM_LIGHTS_IN_MANAGER, flc::Texture3DRenderable *, glm::vec3, glm::vec4, Moveable *> CachePointLights;
+using CacheSpotLights = TManager<LightSpot, MAX_LIGHTS, flc::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, flf::Moveable*>;
+using CacheDirectionalLights = TManager<LightDirectional, MAX_LIGHTS, flc::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, flf::Moveable*>;
+using CachePointLights = TManager<LightPoint, MAX_LIGHTS, flc::Texture3DRenderable*, glm::vec3, glm::vec4, flf::Moveable*>;
 
 /**
  * \brief Light system knows about all light related stuff.
