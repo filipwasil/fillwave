@@ -13,7 +13,6 @@ install:
 - g++ --version
 script:
 - git clone --depth=50 --branch=master https://github.com/filipwasil/fillwave.git filipwasil/fillwave
-- cd fillwave 
 - git submodule update --init --recursive
 - git submodule update
 - mkdir ../build
