@@ -20,7 +20,7 @@ class EffectsScene : public AScene {
   void perform() override;
 
  private:
-  flw::flf::ps<flw::flf::Text> mText;
+  flw::ps<flw::flf::Text> mText;
   int mArgc;
   char** mArgv;
 };

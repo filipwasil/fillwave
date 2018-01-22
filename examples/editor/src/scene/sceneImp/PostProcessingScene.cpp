@@ -59,7 +59,7 @@ void PostProcessingScene::init() {
 //	mEngine->getCurrentScene()->attach(std::move(model));
 //
 //	/* Description */
-//	flw::flf::ps<flw::flf::Text> description = mEngine->storeText("Fillwave example post processing shader",
+//	flw::ps<flw::flf::Text> description = mEngine->storeText("Fillwave example post processing shader",
 //	                                       "fonts/Titania",
 //	                                       glm::vec2(-0.95, 0.95),
 //	                                       100.0);

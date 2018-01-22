@@ -51,7 +51,7 @@ class Channel;
 
 class Animation final {
 public:
-  Animation(aiAnimation *assimpAnimation);
+  Animation(aiAnimation* assimpAnimation);
 
   ~Animation();
 
@@ -75,7 +75,7 @@ public:
    * \brief returns particular animation channel
    */
 
-  Channel *getChannel(int i) {
+  Channel* getChannel(int i) {
     return mChannels[i];
   }
 

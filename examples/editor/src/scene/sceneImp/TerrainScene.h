@@ -23,7 +23,7 @@ public:
   void perform() override;
 
 private:
-  flw::flf::ps<flw::flf::Text> mText;
+  flw::ps<flw::flf::Text> mText;
   std::unique_ptr<flw::flf::TimeStopCallback> mTimeCallback;
   std::unique_ptr<flw::flf::MoveCameraCallback> mCameraCallback;
   std::unique_ptr<flw::flf::FollowCustomCursorCallback> mSecondCameraCallback;
