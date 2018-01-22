@@ -9,19 +9,20 @@
 #include <fillwave/Log.h>
 
 PickableModel::PickableModel(std::string name,
-    flf::ps<flf::Text> text,
-    Engine *engine,
-    flc::Program *program,
-    const std::string &shapePath,
-    const std::string &texturePath)
-    : flf::Model(engine, program, shapePath, texturePath)
+    flw::ps<flw::flf::Text> text,
+    flw::Engine* engine,
+    flw::flc::Program* program,
+    const std::string& shapePath,
+    const std::string& texturePath)
+    : flw::flf::Model(engine, program, shapePath, texturePath)
     , mText(text)
+    , mPickedEffect(std::make_shared<flw::flf::BoostColor>(2.0f))
     , mName(name) {
-  mPickedEffect = std::make_shared<flf::BoostColor>(2.0f);
+  // nothing
 }
 
 PickableModel::~PickableModel() {
-
+  // nothing
 }
 
 void PickableModel::onPicked() {

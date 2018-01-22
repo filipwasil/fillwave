@@ -53,20 +53,20 @@ public:
   Programmable(Programmable &&obj) = default;
 
 
-  void addEffect(pIEffect effect);
+  void addEffect(ps<IEffect> effect);
 
-  void removeEffect(pIEffect effect);
+  void removeEffect(ps<IEffect> effect);
 
-  void drawWithEffects(ICamera &camera);
+  void drawWithEffects(ICamera& camera);
 
-  void drawWithEffectsDR(ICamera &camera);
+  void drawWithEffectsDR(ICamera& camera);
 
-  void drawWithEffectsPBRP(ICamera &camera);
+  void drawWithEffectsPBRP(ICamera& camera);
 
 protected:
-  flc::Program *mProgram;
+  flc::Program* mProgram;
 
-  std::vector<pIEffect> mEffects;
+  std::vector<ps<IEffect>> mEffects;
 };
 
 } /* flf */

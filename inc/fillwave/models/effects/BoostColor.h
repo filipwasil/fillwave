@@ -41,19 +41,19 @@ class BoostColor : public IEffect {
 public:
   BoostColor(GLfloat boost = 1.0f);
 
-  virtual ~BoostColor() override = default;
+  ~BoostColor() override = default;
 
-  void preDrawAction(flc::Program *program) override;
+  void preDrawAction(flc::Program* program) override;
 
-  void postDrawAction(flc::Program *program) override;
+  void postDrawAction(flc::Program* program) override;
 
-  void stopAction(flc::Program *program) override;
+  void stopAction(flc::Program* program) override;
 
-  void startAction(flc::Program *program) override;
+  void startAction(flc::Program* program) override;
 
 private:
   GLfloat mBoost;
 };
 
-} /* framework*/
+} /* flf */
 } /* flw */

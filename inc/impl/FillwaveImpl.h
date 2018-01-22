@@ -101,8 +101,8 @@ struct Engine::EngineImpl final {
   flf::CacheShaders mShaders;
   flf::CachePrograms mPrograms;
   flf::CacheSamplers mSamplers;
-  std::vector<flf::ps<flf::Text>> mTextManager;
-  std::vector<pFont> mFontManager;
+  std::vector<ps<flf::Text>> mTextManager;
+  std::vector<ps<Font>> mFontManager;
   flf::BufferSystem mBuffers;
   puLightSystem mLights;
   puTextureSystem mTextures;
@@ -124,7 +124,7 @@ struct Engine::EngineImpl final {
   puDebugger mDebugger;
   GLuint mFrameCounter;
   GLfloat mTimeFactor;
-  flf::ps<flf::Text> mFPSText;
+  ps<flf::Text> mFPSText;
   //flf::FPSCallback mTextFPSCallback;
 
   /* Startup */

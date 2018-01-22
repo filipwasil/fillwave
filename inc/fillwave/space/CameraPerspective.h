@@ -72,5 +72,4 @@ public:
   void updateProjection();
 };
 } /* flf */
-typedef std::unique_ptr<flf::CameraPerspective> puCameraPerspective;
 } /* flw */

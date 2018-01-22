@@ -29,12 +29,6 @@ struct Font {
    const GLint mAtlasRows = 16;
 };
 
-typedef std::shared_ptr<Font> pFont;
-typedef std::unique_ptr<Font> puFont;
-
 } /* flw */
 
-
-int generateFontMetadata (const char* ttfFilePath,
-                          const char* outputPNG,
-                          const char* outputMETADATA);
+int generateFontMetadata (const char* ttfFilePath, const char* outputPNG, const char* outputMETADATA);

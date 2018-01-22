@@ -45,22 +45,19 @@ namespace flf {
 
 class LightPoint : public Light {
 public:
-  LightPoint(flc::Texture3DRenderable *shadowTexture,
-      glm::vec3 position,
-      glm::vec4 intensity,
-      Moveable *followed = nullptr);
+  LightPoint(flc::Texture3DRenderable* tex, glm::vec3 pos, glm::vec4 intensity, Moveable* observed = nullptr);
 
   virtual ~LightPoint() = default;
 
-  flc::Texture3DRenderable *getShadowTexture();
+  flc::Texture3DRenderable* getShadowTexture();
 
-  CameraPerspective *getShadowCamera(GLenum id);
+  CameraPerspective* getShadowCamera(GLenum id);
 
   void updateShadowCamera();
 
 protected:
-  flc::Texture3DRenderable *mShadowTexture;
-  std::map<GLenum, puCameraPerspective> mFaceCameras;
+  flc::Texture3DRenderable* mShadowTexture;
+  std::map<GLenum, pu<CameraPerspective>> mFaceCameras;
 
 private:
   Sphere mSphere;

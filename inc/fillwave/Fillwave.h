@@ -103,7 +103,7 @@ public:
   void drawTexture(flc::Texture *t);
 
   /* Remove */
-  void detach(flf::ps<flf::Text> text);
+  void detach(ps<flf::Text> text);
   void detach(flf::LightSpot *light);
   void detach(flf::LightDirectional *light);
   void detach(flf::LightPoint *light);
@@ -164,7 +164,7 @@ public:
       flf::Moveable *followed = nullptr);
 
   /* Store text */
-  flf::ps<flf::Text> storeText(const std::string &content,
+  ps<flf::Text> storeText(const std::string &content,
       const std::string &fontName,
       glm::vec2 position,
       GLfloat scale = 1.0f,

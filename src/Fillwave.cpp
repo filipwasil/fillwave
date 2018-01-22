@@ -190,7 +190,7 @@ void Engine::attachHandler(std::function<void(const flf::Event&)>&& handler, flf
   mImpl->attachHandler(std::move(handler), type);
 }
 
-flf::ps<flf::Text> Engine::storeText(const string& content,
+ps<flf::Text> Engine::storeText(const string& content,
     const string& fontName,
     glm::vec2 position,
     GLfloat scale,
@@ -213,7 +213,7 @@ flf::ps<flf::Text> Engine::storeText(const string& content,
     ifstream myfile(mImpl->mFileLoader.getRootPath(fontName + ".meta"));
     if (!myfile.is_open()) {
       fLogE("No text added. Could not write to metadata file: %s", (fontName + ".meta").c_str());
-      return flf::ps<flf::Text>();
+      return ps<flf::Text>();
     }
     string line;
     string ASCII, xMin, width, yMin, height, yOffset;
@@ -230,21 +230,21 @@ flf::ps<flf::Text> Engine::storeText(const string& content,
         fLogE("Metadata can not be read for file %s.", (fontName + ".meta").c_str());
         myfile.close();
         delete newFont;
-        return flf::ps<flf::Text>();
+        return ps<flf::Text>();
       }
     }
     myfile.close();
-    mImpl->mFontManager.push_back(pFont(newFont));
+    mImpl->mFontManager.push_back(ps<Font>(newFont));
     font = newFont;
   }
 
-  flf::ps<flf::Text> text = make_shared<flf::Text>(content, t, position, this, scale, font, color, effect);
-  mImpl->mTextManager.push_back(flf::ps<flf::Text>(text));
+  ps<flf::Text> text = make_shared<flf::Text>(content, t, position, this, scale, font, color, effect);
+  mImpl->mTextManager.push_back(ps<flf::Text>(text));
   return text;
 }
 
-void Engine::detach(flf::ps<flf::Text> text) {
-  auto _compare_function = [text](flf::ps<flf::Text> t) -> bool {
+void Engine::detach(ps<flf::Text> text) {
+  auto _compare_function = [text](ps<flf::Text> t) -> bool {
     return (t == text);
   };
   auto _begin = mImpl->mTextManager.begin();
@@ -256,7 +256,7 @@ void Engine::detach(flf::ps<flf::Text> text) {
 void Engine::detach(flf::LightSpot* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsSpot.begin(),
                            mImpl->mLights->mLightsSpot.end(),
-                           [light](const flf::pu<flf::LightSpot> &l) {
+                           [light](const pu<flf::LightSpot> &l) {
                              return light == l.get();
                            });
   mImpl->mLights->mLightsSpot.erase(new_end, mImpl->mLights->mLightsSpot.end());
@@ -265,7 +265,7 @@ void Engine::detach(flf::LightSpot* light) {
 void Engine::detach(flf::LightDirectional* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsDirectional.begin(),
                            mImpl->mLights->mLightsDirectional.end(),
-                           [light](const flf::pu<flf::LightDirectional> &l) {
+                           [light](const pu<flf::LightDirectional> &l) {
                              return light == l.get();
                            });
   mImpl->mLights->mLightsDirectional.erase(new_end, mImpl->mLights->mLightsDirectional.end());
@@ -274,7 +274,7 @@ void Engine::detach(flf::LightDirectional* light) {
 void Engine::detach(flf::LightPoint* light) {
   auto new_end = remove_if(mImpl->mLights->mLightsPoint.begin(),
                            mImpl->mLights->mLightsPoint.end(),
-                           [light](const flf::pu<flf::LightPoint> &l) {
+                           [light](const pu<flf::LightPoint> &l) {
                              return light == l.get();
                            });
   mImpl->mLights->mLightsPoint.erase(new_end, mImpl->mLights->mLightsPoint.end());

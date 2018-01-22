@@ -73,6 +73,4 @@ public:
 };
 
 } /* flf */
-typedef std::shared_ptr<flf::IEffect> pIEffect;
-typedef std::unique_ptr<flf::IEffect> puIEffect;
 } /* flw */

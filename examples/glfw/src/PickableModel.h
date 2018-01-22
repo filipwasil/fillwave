@@ -3,24 +3,23 @@
 #include <fillwave/Fillwave.h>
 #include <fillwave/Framework.h>
 
-using namespace flw;
-
-class PickableModel : public flf::Model {
-private:
-  flf::ps<flf::Text> mText;
-  pIEffect mPickedEffect;
-  std::string mName;
+class PickableModel : public flw::flf::Model {
 public:
   PickableModel(std::string name,
-      flf::ps<flf::Text> text,
-      Engine *engine,
-      flc::Program *program,
-      const std::string &shapePath,
-      const std::string &texturePath);
+      flw::ps<flw::flf::Text> text,
+      flw::Engine* engine,
+      flw::flc::Program* program,
+      const std::string& shapePath,
+      const std::string& texturePath);
 
-  virtual ~PickableModel();
+  ~PickableModel() override;
 
-  void onPicked();
+  void onPicked() override;
 
-  void onUnpicked();
+  void onUnpicked() override;
+
+private:
+    flw::ps<flw::flf::Text> mText;
+    flw::ps<flw::flf::IEffect> mPickedEffect;
+    std::string mName;
 };

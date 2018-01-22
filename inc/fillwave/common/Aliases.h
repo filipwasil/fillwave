@@ -13,7 +13,6 @@
 #include <memory>
 
 namespace flw {
-namespace flf {
 
 template <class T>
 using pu = std::unique_ptr<T>;
@@ -29,5 +28,4 @@ pu<T> make_pu(Args&&... args) {
 template <class T>
 using Callback = std::function<T>;
 
-} /* flf */
 } /* flw */

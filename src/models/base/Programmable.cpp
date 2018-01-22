@@ -40,18 +40,18 @@ FLOGINIT("Programmable", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-Programmable::Programmable(flc::Program *program)
+Programmable::Programmable(flc::Program* program)
     : mProgram(program) {
-
+  // nothing
 }
 
-void Programmable::drawWithEffects(ICamera &camera) {
+void Programmable::drawWithEffects(ICamera& camera) {
 
-  flc::Program *p = mProgram;
+  flc::Program* p = mProgram;
 
   /* Effects execution */
   p->use();
-  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+  std::for_each(mEffects.begin(), mEffects.end(), [p](ps<IEffect>& e) {
     e->preDrawAction(p);
   });
   flc::Program::disusePrograms();
@@ -63,7 +63,7 @@ void Programmable::drawWithEffects(ICamera &camera) {
 
   /* Effects pre draw action */
   p->use();
-  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+  std::for_each(mEffects.begin(), mEffects.end(), [p](ps<IEffect>& e) {
     e->postDrawAction(p);
   });
   flc::Program::disusePrograms();
@@ -74,7 +74,7 @@ void Programmable::drawWithEffectsDR(ICamera &camera) {
   flc::Program *p = mProgram;
 
   /* Effects execution */
-  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+  std::for_each(mEffects.begin(), mEffects.end(), [p](ps<IEffect>& e) {
     e->preDrawAction(p);
   });
 
@@ -84,7 +84,7 @@ void Programmable::drawWithEffectsDR(ICamera &camera) {
   }
 
   /* Effects pre draw action */
-  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+  std::for_each(mEffects.begin(), mEffects.end(), [p](ps<IEffect>& e) {
     e->postDrawAction(p);
   });
 }
@@ -94,7 +94,7 @@ void Programmable::drawWithEffectsPBRP(ICamera &camera) {
   flc::Program *p = mProgram;
 
   /* Effects execution */
-  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+  std::for_each(mEffects.begin(), mEffects.end(), [p](ps<IEffect>& e) {
     e->preDrawAction(p);
   });
 
@@ -104,13 +104,13 @@ void Programmable::drawWithEffectsPBRP(ICamera &camera) {
   }
 
   /* Effects pre draw action */
-  std::for_each(mEffects.begin(), mEffects.end(), [p](pIEffect &e) {
+  std::for_each(mEffects.begin(), mEffects.end(), [p](ps<IEffect>& e) {
     e->postDrawAction(p);
   });
 }
 
-void Programmable::addEffect(pIEffect effect) {
-  auto _find_function = [effect](pIEffect &m) -> bool {
+void Programmable::addEffect(ps<IEffect> effect) {
+  auto _find_function = [effect](ps<IEffect>& m) -> bool {
     return m == effect;
   };
   auto it = std::remove_if(mEffects.begin(), mEffects.end(), _find_function);
@@ -124,8 +124,8 @@ void Programmable::addEffect(pIEffect effect) {
   flc::Program::disusePrograms();
 }
 
-void Programmable::removeEffect(pIEffect effect) {
-  auto _find_function = [effect](pIEffect &m) -> bool {
+void Programmable::removeEffect(ps<IEffect> effect) {
+  auto _find_function = [effect](ps<IEffect>& m) -> bool {
     return m == effect;
   };
   auto it = std::remove_if(mEffects.begin(), mEffects.end(), _find_function);

@@ -41,15 +41,11 @@ namespace flf {
 
 class LightSpot : public Light {
 protected:
-  flc::Texture2DRenderable *mShadowTexture;
-  puCameraPerspective mShadowCamera;
+  flc::Texture2DRenderable* mShadowTexture;
+  pu<CameraPerspective> mShadowCamera;
 
 public:
-  LightSpot(flc::Texture2DRenderable* shadowTexture,
-      glm::vec3 position,
-      glm::quat rotation,
-      glm::vec4 intensity,
-      Moveable* followed = nullptr);
+  LightSpot(flc::Texture2DRenderable* tex, glm::vec3 pos, glm::quat rot, glm::vec4 intensity, Moveable* observed = nullptr);
 
   virtual ~LightSpot() = default;
 
