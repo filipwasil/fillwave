@@ -5,7 +5,7 @@ install:
 - echo "deb http://pl.archive.ubuntu.com/ubuntu xenial main" | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
 - echo "deb-src http://pl.archive.ubuntu.com/ubuntu xenial main " | sudo tee -a /etc/apt/sources.list.d/fillwave_ext.list
 - sudo apt-get update
-- sudo apt-get install libglew1.10 libglew-dev libglfw3 libglfw3-dev libspdlog-dev -y --force-yes
+- sudo apt-get install libglew1.10 libglew-dev libglfw3 libglfw3-dev -y --force-yes
 - sudo apt-get install libassimp3v5 -y --force-yes
 - sudo apt-get install libassimp-dev cmake -y --force-yes
 - sudo apt-get install libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev -y --force-yes
