@@ -40,14 +40,7 @@ namespace flc {
 
 class Texture3DRenderable : public Texture3D {
 public:
-  Texture3DRenderable(flc::Texture2DFile *filePosX,
-      flc::Texture2DFile *fileNegX,
-      flc::Texture2DFile *filePosY,
-      flc::Texture2DFile *fileNegY,
-      flc::Texture2DFile *filePosZ,
-      flc::Texture2DFile *fileNegZ,
-      flc::Texture2DRenderable *texture,
-      ParameterList &parameters);
+  Texture3DRenderable(TextureConfig* posX, TextureConfig* negX, TextureConfig* posY, TextureConfig* nY, TextureConfig* pZ, TextureConfig* nZ, Texture2DRenderable* text, ParameterList &param);
 
   virtual ~Texture3DRenderable() = default;
 

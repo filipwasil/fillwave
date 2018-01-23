@@ -84,13 +84,13 @@ private:
 #else /* FILLWAVE_GLES_3_0 */
   TCache<MAX_CACHE_SIZE, flc::Texture1D, size_t, flc::ParameterList &> mTextures1D;
 #endif /* FILLWAVE_GLES_3_0 */
-  TCache<MAX_CACHE_SIZE, flc::Texture2D, std::string, flc::Texture2DFile* , flc::ParameterList &, GLuint> mTextures2D;
-  TCache<MAX_CACHE_SIZE, flc::Texture2D, size_t, flc::Texture2DFile* , flc::ParameterList &, GLuint> mTextures2DDeferred;
-  TCache<MAX_CACHE_SIZE, flc::Texture2DRenderableDynamic, std::string, flc::Texture2DFile*, flc::ParameterList &, flc::Program *> mTextures2DDynamic;
-  TCache<MAX_CACHE_SIZE, flc::Texture2DRenderable, size_t, GLenum, flc::Texture2DFile *, flc::ParameterList &> mTextures2DRenderable;
-  TCache<MAX_CACHE_SIZE, flc::Texture3D, std::string, flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::ParameterList &> mTextures3D;
-  TCache<MAX_CACHE_SIZE, flc::Texture3DRenderableDynamic, std::string, flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::ParameterList &, flc::Texture2DRenderable *, flc::Program *> mTextures3DDynamic;
-  TCache<MAX_CACHE_SIZE, flc::Texture3DRenderable, size_t, flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DFile* , flc::Texture2DRenderable *, flc::ParameterList &> mTextures3DRenderable;
+  TCache<MAX_CACHE_SIZE, flc::Texture2D, std::string, flc::TextureConfig* , flc::ParameterList &, GLuint> mTextures2D;
+  TCache<MAX_CACHE_SIZE, flc::Texture2D, size_t, flc::TextureConfig* , flc::ParameterList &, GLuint> mTextures2DDeferred;
+  TCache<MAX_CACHE_SIZE, flc::Texture2DRenderableDynamic, std::string, flc::TextureConfig*, flc::ParameterList &, flc::Program *> mTextures2DDynamic;
+  TCache<MAX_CACHE_SIZE, flc::Texture2DRenderable, size_t, GLenum, flc::TextureConfig *, flc::ParameterList &> mTextures2DRenderable;
+  TCache<MAX_CACHE_SIZE, flc::Texture3D, std::string, flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::ParameterList &> mTextures3D;
+  TCache<MAX_CACHE_SIZE, flc::Texture3DRenderableDynamic, std::string, flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig*, flc::ParameterList &, flc::Texture2DRenderable *, flc::Program *> mTextures3DDynamic;
+  TCache<MAX_CACHE_SIZE, flc::Texture3DRenderable, size_t, flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::TextureConfig* , flc::Texture2DRenderable *, flc::ParameterList &> mTextures3DRenderable;
 
   std::vector<GLenum> mSupportedCompresssionTypes;
   std::string mRootPath;

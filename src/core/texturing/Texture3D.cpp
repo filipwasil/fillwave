@@ -34,49 +34,43 @@ FLOGINIT("Texture3D", FERROR | FFATAL)
 namespace flw {
 namespace flc {
 
-Texture3D::Texture3D(Texture2DFile *fileRight,
-    Texture2DFile* fileLeft,
-    Texture2DFile* fileCeil,
-    Texture2DFile* fileFloor,
-    Texture2DFile* fileFront,
-    Texture2DFile* fileBack,
-    ParameterList& parameters)
+Texture3D::Texture3D(TextureConfig* right, TextureConfig* left, TextureConfig* ceil, TextureConfig* floor, TextureConfig* front, TextureConfig* back, ParameterList& param)
     : Texture(GL_TEXTURE_CUBE_MAP)
-    , mRight(std::make_unique<Texture3DFile>(fileRight, GL_TEXTURE_CUBE_MAP_POSITIVE_X))
-    , mLeft(std::make_unique<Texture3DFile>(fileLeft, GL_TEXTURE_CUBE_MAP_NEGATIVE_X))
-    , mCeil(std::make_unique<Texture3DFile>(fileCeil, GL_TEXTURE_CUBE_MAP_POSITIVE_Y))
-    , mFloor(std::make_unique<Texture3DFile>(fileFloor, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y))
-    , mFront(std::make_unique<Texture3DFile>(fileFront, GL_TEXTURE_CUBE_MAP_POSITIVE_Z))
-    , mBack(std::make_unique<Texture3DFile>(fileBack, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z)) {
+    , mRight(right)
+    , mLeft(left)
+    , mCeil(ceil)
+    , mFloor(floor)
+    , mFront(front)
+    , mBack(back) {
   bind();
-  setParameters(parameters);
+  setParameters(param);
   sendData();
   unbind();
 }
 
-inline void Texture3D::sendData(flc::Texture3DFile* file, GLubyte* customData) {
+inline void Texture3D::sendData(TextureConfig* cfg, GLubyte* customData) {
 
   if (customData) {
-    file->mFile2d.mData = customData;
+    cfg->mData = customData;
   }
 
-  fLogD("file->mCubeTarget ", file->mCubeTarget);
-  fLogD("file->mConfig.mMipmapsLevel ", file->mFile2d.mConfig.mMipmapsLevel);
-  fLogD("file->mHeader.mInternalFormat ", file->mFile2d.mHeader.mInternalFormat);
-  fLogD("file->mHeader.mWidth ", file->mFile2d.mHeader.mWidth);
-  fLogD("file->mHeader.mHeight ", file->mFile2d.mHeader.mHeight);
-  fLogD("file->mConfig.mBorder ", file->mFile2d.mConfig.mBorder);
-  fLogD("file->mHeader.mFormat ", file->mFile2d.mHeader.mFormat);
-  fLogD("file->mHeader.mType ", file->mFile2d.mHeader.mType);
-  glTexImage2D(file->mCubeTarget,
-               file->mFile2d.mConfig.mMipmapsLevel,
-               file->mFile2d.mHeader.mInternalFormat,
-               file->mFile2d.mHeader.mWidth,
-               file->mFile2d.mHeader.mHeight,
-               file->mFile2d.mConfig.mBorder,
-               file->mFile2d.mHeader.mFormat,
-               file->mFile2d.mHeader.mType,
-               (GLubyte *) file->mFile2d.mData);
+  fLogD("cfg->mCubeTarget ", cfg->mCubeTarget);
+  fLogD("cfg->mContent.mMipmapsLevel ", cfg->mContent.mMipmapsLevel);
+  fLogD("cfg->mHeader.mInternalFormat ", cfg->mHeader.mInternalFormat);
+  fLogD("cfg->mHeader.mWidth ", cfg->mHeader.mWidth);
+  fLogD("cfg->mHeader.mHeight ", cfg->mHeader.mHeight);
+  fLogD("cfg->mContent.mBorder ", cfg->mContent.mBorder);
+  fLogD("cfg->mHeader.mFormat ", cfg->mHeader.mFormat);
+  fLogD("cfg->mHeader.mType ", cfg->mHeader.mType);
+  glTexImage2D(cfg->mCubeTarget,
+               cfg->mContent.mMipmapsLevel,
+               cfg->mHeader.mInternalFormat,
+               cfg->mHeader.mWidth,
+               cfg->mHeader.mHeight,
+               cfg->mContent.mBorder,
+               cfg->mHeader.mFormat,
+               cfg->mHeader.mType,
+               (GLubyte *) cfg->mData);
   fLogC("send data");
 }
 

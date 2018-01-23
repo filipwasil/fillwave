@@ -40,7 +40,7 @@ namespace flc {
 
 class Texture2DRenderableDynamic : public Texture2DRenderable {
 public:
-  Texture2DRenderableDynamic(flc::Texture2DFile *file, ParameterList &parameters, flc::Program *program);
+  Texture2DRenderableDynamic(flc::TextureConfig* file, ParameterList& parameters, flc::Program* program);
 
   virtual ~Texture2DRenderableDynamic() = default;
 
@@ -49,7 +49,7 @@ public:
   void reload();
 
 private:
-  flc::Program *mProgram;
+  flc::Program* mProgram;
 
   GLfloat mTimePassed;
   GLint mUniformLocationCacheTime;
@@ -59,5 +59,4 @@ private:
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::Texture2DRenderableDynamic> puTexture2DRenderableDynamic;
 } /* flw */

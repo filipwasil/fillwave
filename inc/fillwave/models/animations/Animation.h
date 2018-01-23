@@ -83,7 +83,7 @@ public:
    * \brief returns how many animation channels are hidden in animation
    */
 
-  int getHowManyChannels() {
+  size_t getHowManyChannels() {
     return mChannels.size();
   }
 

@@ -28,8 +28,11 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/core/GLObject.h>
 #include <fillwave/loaders/TextureLoader.h>
+
+#include <fillwave/common/Aliases.h>
+
+#include <fillwave/core/GLObject.h>
 #include <fillwave/core/texturing/Parameter.h>
 
 #include <memory>
@@ -79,5 +82,4 @@ void bindTexture(GLint textureUnit, GLuint target, GLuint handle);
 void unbindTexture(GLuint target);
 
 } /* flc */
-typedef std::unique_ptr<flc::Texture2DFile> puTexture2DFile;
 } /* flw */

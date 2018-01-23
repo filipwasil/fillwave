@@ -28,7 +28,7 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "fillwave/loaders/TextureFiles.h"
+#include "fillwave/loaders/TextureConfigs.h"
 #include <iostream>
 #include <memory>
 
@@ -98,23 +98,16 @@ public:
 
   virtual ~TextureLoader() = default;
 
-  flc::Texture2DFile* load(const std::string &filePath,
+  flc::TextureConfig* load(const std::string &filePath,
       EFlip flip = EFlip::eNone,
       GLenum format = GL_RGBA,
       std::string rootPath = "",
-      ECompression compression = ECompression::eNone);
+      ECompression compression = ECompression::eNone,
+      GLenum cubeTarget = 0);
 
-  flc::Texture2DFile* loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format = GL_RGBA);
-
-  flc::Texture2DFile* loadVirtualFileCheckboard(GLuint width,
-      GLuint height,
-      GLubyte red,
-      GLubyte green,
-      GLubyte blue,
-      GLenum format = GL_RGBA);
-
-  flc::Texture2DFile*
-  loadVirtualFileColor(GLuint width, GLuint height, GLubyte red, GLubyte green, GLubyte blue, GLenum format = GL_RGBA);
+  flc::TextureConfig* loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format = GL_RGBA);
+  flc::TextureConfig* loadVirtualFileCheckboard(GLuint width, GLuint height, GLubyte red, GLubyte green, GLubyte blue, GLenum format = GL_RGBA);
+  flc::TextureConfig* loadVirtualFileColor(GLuint width, GLuint height, GLubyte red, GLubyte green, GLubyte blue, GLenum format = GL_RGBA);
 
 private:
   GLint getBytesPerPixel(GLenum format);

@@ -39,7 +39,7 @@ namespace flc {
 
 class Texture2D : public Texture {
 public:
-  Texture2D(Texture2DFile *file, ParameterList &parameters, GLuint howMany = 1);
+  Texture2D(TextureConfig *file, ParameterList &parameters, GLuint howMany = 1);
 
   virtual ~Texture2D() = default;
 
@@ -55,7 +55,7 @@ public:
 
   static void unbind2DTextures();
 
-  puTexture2DFile mFile;
+  pu<TextureConfig> mCfg;
 
 protected:
   ParameterList mParameters;

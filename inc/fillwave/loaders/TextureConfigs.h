@@ -33,86 +33,74 @@
 namespace flw {
 namespace flc {
 
-/*! \class Texture2DFileConfig
- * \brief Stores the single file configuration info.
- */
-class Texture2DFileConfig {
-public:
-  Texture2DFileConfig(
-      GLint level = 0,
-      GLint border = 0,
-      GLboolean mipmaps = GL_FALSE,
-      GLboolean compression = GL_FALSE);
-
-  GLint mMipmapsLevel;
-  GLboolean mMipmaps;
-  GLboolean mCompression;
-  GLint mBorder;
-  GLsizei mCompressionSize;
-};
-
-/*! \class Texture2DFileHeader
- * \brief Stores the single file header info.
- */
-class Texture2DFileHeader {
-public:
-  Texture2DFileHeader(
-      GLint internalFormat = GL_RGBA,
-      GLint format = GL_RGBA,
-      GLint type = GL_UNSIGNED_BYTE,
-      GLsizei width = 0,
-      GLsizei height = 0);
-
-  GLint mInternalFormat;
-  GLsizei mHeight;
-  GLsizei mWidth;
-  GLenum mType;
-  GLenum mFormat;
-};
-
 /*! \enum EMemoryAllocation
  * \brief Stores the type of memory free method
  */
-
 enum class EMemoryAllocation {
   eMallock
   , eNew
   , eNone
 };
 
-/*! \class Texture2DFile
- * \brief Stores the single file info.
- */
+/*! \class TextureConfig
+* \brief Stores the single texture data
+*/
+struct TextureConfig final {
+  /*! \class Header
+  * \brief Stores the single file header info.
+  */
+  struct Header {
+    Header(GLint internalFormat = GL_RGBA, GLint format = GL_RGBA, GLint type = GL_UNSIGNED_BYTE, GLsizei width = 0, GLsizei height = 0)
+        : mInternalFormat(internalFormat)
+        , mHeight(height)
+        , mWidth(width)
+        , mType(type)
+        , mFormat(format) {
+        // nothing
+    }
+    GLint mInternalFormat;
+    GLsizei mHeight;
+    GLsizei mWidth;
+    GLenum mType;
+    GLenum mFormat;
+  };
+  /*! \class Content
+  * \brief Stores the single file info.
+  */
+  struct Content {
+    Content(GLint level = 0,  GLint border = 0, GLboolean mipmaps = GL_FALSE, GLboolean compression = GL_FALSE)
+        : mMipmapsLevel(level)
+        , mMipmaps(mipmaps)
+        , mCompression(compression)
+        , mBorder(border)
+        , mCompressionSize(0)
+        , mCubeTarget(0) {
+      // nothing
+    }
+    GLint mMipmapsLevel;
+    GLboolean mMipmaps;
+    GLboolean mCompression;
+    GLint mBorder;
+    GLsizei mCompressionSize;
+    GLenum mCubeTarget;
+  };
 
-struct Texture2DFile final {
-  Texture2DFile()
-      : mAllocation (EMemoryAllocation::eNone) {
-
+  TextureConfig()
+      : mHeader()
+      , mContent()
+      , mCubeTarget()
+      , mAllocation(EMemoryAllocation::eNone)
+      , mData(nullptr) {
+    // nothing
   }
-  ~Texture2DFile();
-  void freeMemory();
-  Texture2DFileHeader mHeader;
-  Texture2DFileConfig mConfig;
-  GLubyte* mData;
+
+  ~TextureConfig();
+
+  Header mHeader;
+  Content mContent;
   EMemoryAllocation mAllocation;
-};
-
-/*! \class Texture3DFile
- * \brief Stores the single file info.
- */
-
-struct Texture3DFile final {
-  Texture3DFile(Texture2DFile* file, GLenum target)
-    : mCubeTarget(target) {
-    mFile2d.mHeader = file->mHeader;
-    mFile2d.mConfig = file->mConfig;
-    mFile2d.mData = file->mData;
-  }
-  ~Texture3DFile() {
-      mFile2d.freeMemory();
-  }
-  Texture2DFile mFile2d;
   GLenum mCubeTarget;
+  GLubyte* mData;
 };
 
 } /* flc */

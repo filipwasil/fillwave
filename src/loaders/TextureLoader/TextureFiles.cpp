@@ -26,40 +26,13 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "fillwave/loaders/TextureFiles.h"
+#include "fillwave/loaders/TextureConfigs.h"
 #include <cstdlib>
 
 namespace flw {
 namespace flc {
 
-Texture2DFileConfig::Texture2DFileConfig(GLint level, GLint border, GLboolean mipmaps, GLboolean compression)
-    : mMipmapsLevel(level)
-    , mMipmaps(mipmaps)
-    , mCompression(compression)
-    , mBorder(border)
-    , mCompressionSize(0) {
-  // nothing
-}
-
-
-Texture2DFileHeader::Texture2DFileHeader(GLint internalFormat,
-    GLint format,
-    GLint type,
-    GLsizei width,
-    GLsizei height)
-    : mInternalFormat(internalFormat)
-    , mHeight(height)
-    , mWidth(width)
-    , mType(type)
-    , mFormat(format) {
-  // nothing
-}
-
-Texture2DFile::~Texture2DFile() {
-  freeMemory();
-}
-
-void Texture2DFile::freeMemory() {
+TextureConfig::~TextureConfig() {
   switch (mAllocation) {
   case EMemoryAllocation::eMallock:
     free(mData);
@@ -68,7 +41,7 @@ void Texture2DFile::freeMemory() {
     delete mData;
     mData = nullptr;
     break;
-  case EMemoryAllocation::eNone:
+ case EMemoryAllocation::eNone:
     break;
   }
 }

@@ -35,49 +35,44 @@ FLOGINIT("Texture3DRenderable", FERROR | FFATAL)
 namespace flw {
 namespace flc {
 
-Texture3DRenderable::Texture3DRenderable(flc::Texture2DFile *filePosX,
-    flc::Texture2DFile *fileNegX,
-    flc::Texture2DFile *filePosY,
-    flc::Texture2DFile *fileNegY,
-    flc::Texture2DFile *filePosZ,
-    flc::Texture2DFile *fileNegZ,
-    flc::Texture2DRenderable *texture,
-    ParameterList &parameters)
-    : Texture3D(filePosX //right
-                , fileNegX //left
-                , filePosY //ceil
-                , fileNegY //floor
-                , filePosZ //front
-                , fileNegZ //back
-                , parameters)
-    , mShadowTexture(texture) {
-
+Texture3DRenderable::Texture3DRenderable(
+  TextureConfig* pX
+  , TextureConfig* nX
+  , TextureConfig* pY
+  , TextureConfig* nY
+  , TextureConfig* pZ
+  , TextureConfig* nZ
+  , Texture2DRenderable* tex
+  , ParameterList& params)
+    : Texture3D(pX /*right*/ , nX /*left*/ , pY /*ceil*/ , nY /*floor*/ , pZ /*front*/ , nZ /*back*/ , params)
+    , mShadowTexture(tex) {
+  // nothing
 }
 
 void Texture3DRenderable::resize(GLint width, GLint heigth) {
-  mFront->mFile2d.mHeader.mWidth = width;
-  mFront->mFile2d.mHeader.mHeight = heigth;
-  mFront->mFile2d.mData = nullptr;
+  mFront->mHeader.mWidth = width;
+  mFront->mHeader.mHeight = heigth;
+  mFront->mData = nullptr;
 
-  mBack->mFile2d.mHeader.mWidth = width;
-  mBack->mFile2d.mHeader.mHeight = heigth;
-  mBack->mFile2d.mData = nullptr;
+  mBack->mHeader.mWidth = width;
+  mBack->mHeader.mHeight = heigth;
+  mBack->mData = nullptr;
 
-  mCeil->mFile2d.mHeader.mWidth = width;
-  mCeil->mFile2d.mHeader.mHeight = heigth;
-  mCeil->mFile2d.mData = nullptr;
+  mCeil->mHeader.mWidth = width;
+  mCeil->mHeader.mHeight = heigth;
+  mCeil->mData = nullptr;
 
-  mFloor->mFile2d.mHeader.mWidth = width;
-  mFloor->mFile2d.mHeader.mHeight = heigth;
-  mFloor->mFile2d.mData = nullptr;
+  mFloor->mHeader.mWidth = width;
+  mFloor->mHeader.mHeight = heigth;
+  mFloor->mData = nullptr;
 
-  mRight->mFile2d.mHeader.mWidth = width;
-  mRight->mFile2d.mHeader.mHeight = heigth;
-  mRight->mFile2d.mData = nullptr;
+  mRight->mHeader.mWidth = width;
+  mRight->mHeader.mHeight = heigth;
+  mRight->mData = nullptr;
 
-  mLeft->mFile2d.mHeader.mWidth = width;
-  mLeft->mFile2d.mHeader.mHeight = heigth;
-  mLeft->mFile2d.mData = nullptr;
+  mLeft->mHeader.mWidth = width;
+  mLeft->mHeader.mHeight = heigth;
+  mLeft->mData = nullptr;
 
   bind();
   sendData();
@@ -94,7 +89,7 @@ void Texture3DRenderable::setAttachment(GLenum attachment) {
   mShadowTexture->setAttachment(attachment);
   fLogC("Setting RGBA framebuffer failed");
   unbind();
-  flc::Framebuffer::bindScreenFramebuffer();
+  Framebuffer::bindScreenFramebuffer();
 }
 
 void Texture3DRenderable::setAttachmentFace(GLenum face, GLenum attachment) {

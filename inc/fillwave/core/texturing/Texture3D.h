@@ -29,7 +29,7 @@
 */
 
 #include <fillwave/core/texturing/Texture.h>
-#include <fillwave/loaders/TextureFiles.h>
+#include <fillwave/loaders/TextureConfigs.h>
 
 namespace flw {
 namespace flc {
@@ -39,27 +39,19 @@ namespace flc {
  * It consists of six 2D images.
  */
 
-using puTexture3DFile = std::unique_ptr<flc::Texture3DFile>;
-
 class Texture3D : public Texture {
 private:
-  void sendData(Texture3DFile* file, GLubyte* customData = nullptr);
+  void sendData(TextureConfig* file, GLubyte* customData = nullptr);
 
 public:
-  puTexture3DFile mRight; /* Positive X*/
-  puTexture3DFile mLeft; /* Negative X*/
-  puTexture3DFile mCeil; /* Positive Y*/
-  puTexture3DFile mFloor; /* Negative Y*/
-  puTexture3DFile mFront; /* Positive Z*/
-  puTexture3DFile mBack; /* Negative Z*/
+  pu<TextureConfig> mRight; /* Positive X*/
+  pu<TextureConfig> mLeft; /* Negative X*/
+  pu<TextureConfig> mCeil; /* Positive Y*/
+  pu<TextureConfig> mFloor; /* Negative Y*/
+  pu<TextureConfig> mFront; /* Positive Z*/
+  pu<TextureConfig> mBack; /* Negative Z*/
 
-  Texture3D(Texture2DFile *fileRight,
-      Texture2DFile *fileLeft,
-      Texture2DFile *fileCeil,
-      Texture2DFile *fileFloor,
-      Texture2DFile *fileFront,
-      Texture2DFile *fileBack,
-      ParameterList &parameters);
+  Texture3D(TextureConfig* right, TextureConfig* left, TextureConfig* ceil, TextureConfig* floor, TextureConfig* front, TextureConfig* back, ParameterList& param);
 
   virtual ~Texture3D() = default;
 
@@ -71,12 +63,7 @@ public:
 
   static void unbindCubemapTextures();
 
-  void sendData(GLubyte* xp,
-      GLubyte* xn,
-      GLubyte* yp,
-      GLubyte* yn,
-      GLubyte* zp,
-      GLubyte* zn);
+  void sendData(GLubyte* xp, GLubyte* xn, GLubyte* yp, GLubyte* yn, GLubyte* zp, GLubyte* zn);
 };
 
 } /* flc */

@@ -34,11 +34,9 @@ FLOGINIT("Texture2DRenderableDynamic", FERROR | FFATAL | FDEBUG)
 namespace flw {
 namespace flc {
 
-Texture2DRenderableDynamic::Texture2DRenderableDynamic(flc::Texture2DFile *file,
-    ParameterList &parameters,
-    flc::Program *program)
-    : Texture2DRenderable(GL_COLOR_ATTACHMENT0, file, parameters)
-    , mProgram(program)
+Texture2DRenderableDynamic::Texture2DRenderableDynamic(flc::TextureConfig* cfg, ParameterList& param, flc::Program* prog)
+    : Texture2DRenderable(GL_COLOR_ATTACHMENT0, cfg, param)
+    , mProgram(prog)
     , mTimePassed(0.0f) {
   initUniformsCache();
 }

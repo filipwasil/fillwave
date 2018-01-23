@@ -32,17 +32,17 @@ namespace flw {
 namespace flc {
 
 Texture3DRenderableDynamic::Texture3DRenderableDynamic(
-    flc::Texture2DFile *filePosX,
-    flc::Texture2DFile *fileNegX,
-    flc::Texture2DFile *filePosY,
-    flc::Texture2DFile *fileNegY,
-    flc::Texture2DFile *filePosZ,
-    flc::Texture2DFile *fileNegZ,
-    ParameterList &parameters,
-    flc::Texture2DRenderable *texture2D,
-    flc::Program *program)
-    : Texture3DRenderable(filePosX, fileNegX, filePosY, fileNegY, filePosZ, fileNegZ, texture2D, parameters)
-    , mProgram(program)
+    TextureConfig* pX
+    , TextureConfig* nX
+    , TextureConfig* pY
+    , TextureConfig* nY
+    , TextureConfig* pZ
+    , TextureConfig* nZ
+    , ParameterList& param
+    , Texture2DRenderable* tex
+    , Program* prog)
+    : Texture3DRenderable(pX, nX, pY, nY, pZ, nZ, tex, param)
+    , mProgram(prog)
     , mTimePassed(0.0f) {
   setAttachment(GL_COLOR_ATTACHMENT0);
 }

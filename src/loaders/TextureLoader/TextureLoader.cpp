@@ -41,11 +41,12 @@ using namespace std;
 namespace flw {
 namespace flf {
 
-flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
+flc::TextureConfig* TextureLoader::load(const std::string &filePath,
     EFlip flip,
     GLenum format,
     std::string rootPath,
-    ECompression compression) {
+    ECompression compression,
+    GLenum cubeTarget) {
 
   fLogD("Texture ", filePath.c_str(), " loading ...");
   const size_t posCheckboard = filePath.find(".checkboard");
@@ -235,31 +236,33 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     return nullptr;
   }
   fLogD("Image ",filePath, " size ", w, "x", h, " pixel ", n, " bytes per pixel");
-  auto file = new flc::Texture2DFile();
+  auto cfg = new flc::TextureConfig();
 
-  file->mHeader.mFormat = format;
-  file->mHeader.mWidth = w;
-  file->mHeader.mHeight = h;
-  file->mHeader.mType = GL_UNSIGNED_BYTE;
+  cfg->mHeader.mFormat = format;
+  cfg->mHeader.mWidth = w;
+  cfg->mHeader.mHeight = h;
+  cfg->mHeader.mType = GL_UNSIGNED_BYTE;
 
-  file->mConfig.mMipmaps = GL_TRUE;
-  file->mConfig.mMipmapsLevel = 0;
+  cfg->mContent.mMipmaps = GL_TRUE;
+  cfg->mContent.mMipmapsLevel = 0;
+
+  cfg->mContent.mCubeTarget = cubeTarget;
 
   if (compression == ECompression::eNone) {
-    file->mConfig.mCompression = GL_FALSE;
-    file->mHeader.mInternalFormat = format;
+    cfg->mContent.mCompression = GL_FALSE;
+    cfg->mHeader.mInternalFormat = format;
   } else {
-    file->mConfig.mCompression = GL_TRUE;
-    file->mHeader.mInternalFormat = getCompression(compression);
-    file->mConfig.mCompressionSize = 0;
+    cfg->mContent.mCompression = GL_TRUE;
+    cfg->mHeader.mInternalFormat = getCompression(compression);
+    cfg->mContent.mCompressionSize = 0;
     fLogF("Texture compression feature not ready");
   }
 
-  file->mConfig.mBorder = 0;
+  cfg->mContent.mBorder = 0;
 
-  file->mData = content;
+  cfg->mData = content;
 
-  file->mAllocation = flc::EMemoryAllocation::eMallock;
+  cfg->mAllocation = flc::EMemoryAllocation::eMallock;
 
   fLogD("Flipping Texture", filePath, " ...");
   switch (flip) {
@@ -272,9 +275,9 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
           for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
             const int exchangeIndex1 = pixelOffset1 + byteInPixel;
             const int exchangeIndex2 = pixelOffset2 + byteInPixel;
-            file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
-            file->mData[exchangeIndex2] ^= file->mData[exchangeIndex1];
-            file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
+            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
+            cfg->mData[exchangeIndex2] ^= cfg->mData[exchangeIndex1];
+            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
           }
         }
       }
@@ -289,9 +292,9 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
           for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
             const int exchangeIndex1 = pixelOffset1 + byteInPixel;
             const int exchangeIndex2 = pixelOffset2 + byteInPixel;
-            file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
-            file->mData[exchangeIndex2] ^= file->mData[exchangeIndex1];
-            file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
+            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
+            cfg->mData[exchangeIndex2] ^= cfg->mData[exchangeIndex1];
+            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
           }
         }
       }
@@ -306,9 +309,9 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
           for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
             const int exchangeIndex1 = pixelOffset1 + byteInPixel;
             const int exchangeIndex2 = pixelOffset2 + byteInPixel;
-            file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
-            file->mData[exchangeIndex2] ^= file->mData[exchangeIndex1];
-            file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
+            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
+            cfg->mData[exchangeIndex2] ^= cfg->mData[exchangeIndex1];
+            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
           }
         }
       }
@@ -320,9 +323,9 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
           for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
             const int exchangeIndex1 = pixelOffset1 + byteInPixel;
             const int exchangeIndex2 = pixelOffset2 + byteInPixel;
-            file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
-            file->mData[exchangeIndex2] ^= file->mData[exchangeIndex1];
-            file->mData[exchangeIndex1] ^= file->mData[exchangeIndex2];
+            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
+            cfg->mData[exchangeIndex2] ^= cfg->mData[exchangeIndex1];
+            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
           }
         }
       }
@@ -331,32 +334,32 @@ flc::Texture2DFile *TextureLoader::load(const std::string &filePath,
     case EFlip::eNone:
       break;
   }
-  return file;
+  return cfg;
 #endif /* FILLWAVE_TEXTURE_LOADER_GLI */
 }
 
-flc::Texture2DFile *TextureLoader::loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format) {
-  auto file = new flc::Texture2DFile();
+flc::TextureConfig* TextureLoader::loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format) {
+  auto cfg = new flc::TextureConfig();
 
-  file->mHeader.mFormat = format;
-  file->mHeader.mInternalFormat = format;
-  file->mHeader.mWidth = screenWidth;
-  file->mHeader.mHeight = screenHeight;
-  file->mHeader.mType = GL_UNSIGNED_BYTE;
+  cfg->mHeader.mFormat = format;
+  cfg->mHeader.mInternalFormat = format;
+  cfg->mHeader.mWidth = screenWidth;
+  cfg->mHeader.mHeight = screenHeight;
+  cfg->mHeader.mType = GL_UNSIGNED_BYTE;
 
-  file->mConfig.mMipmaps = GL_TRUE;
-  file->mConfig.mMipmapsLevel = 0;
-  file->mConfig.mCompression = GL_FALSE;
-  file->mConfig.mBorder = 0;
+  cfg->mContent.mMipmaps = GL_TRUE;
+  cfg->mContent.mMipmapsLevel = 0;
+  cfg->mContent.mCompression = GL_FALSE;
+  cfg->mContent.mBorder = 0;
 
-  file->mData = nullptr;
+  cfg->mData = nullptr;
 
-  file->mAllocation = flc::EMemoryAllocation::eNone;
+  cfg->mAllocation = flc::EMemoryAllocation::eNone;
 
-  return file;
+  return cfg;
 }
 
-flc::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
+flc::TextureConfig* TextureLoader::loadVirtualFileCheckboard(GLuint width,
     GLuint height,
     GLubyte red,
     GLubyte green,
@@ -385,26 +388,26 @@ flc::Texture2DFile *TextureLoader::loadVirtualFileCheckboard(GLuint width,
     content[i + 3] = 1;
   }
 
-  auto file = new flc::Texture2DFile();
-  file->mHeader.mFormat = format;
-  file->mHeader.mInternalFormat = format;
-  file->mHeader.mWidth = width;
-  file->mHeader.mHeight = height;
-  file->mHeader.mType = GL_UNSIGNED_BYTE;
+  auto cfg = new flc::TextureConfig();
+  cfg->mHeader.mFormat = format;
+  cfg->mHeader.mInternalFormat = format;
+  cfg->mHeader.mWidth = width;
+  cfg->mHeader.mHeight = height;
+  cfg->mHeader.mType = GL_UNSIGNED_BYTE;
 
-  file->mConfig.mMipmaps = GL_TRUE;
-  file->mConfig.mMipmapsLevel = 0;
-  file->mConfig.mCompression = GL_FALSE;
-  file->mConfig.mBorder = 0;
+  cfg->mContent.mMipmaps = GL_TRUE;
+  cfg->mContent.mMipmapsLevel = 0;
+  cfg->mContent.mCompression = GL_FALSE;
+  cfg->mContent.mBorder = 0;
 
-  file->mData = content;
+  cfg->mData = content;
 
-  file->mAllocation = flc::EMemoryAllocation::eNew;
+  cfg->mAllocation = flc::EMemoryAllocation::eNew;
 
-  return file;
+  return cfg;
 }
 
-flc::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
+flc::TextureConfig *TextureLoader::loadVirtualFileColor(GLuint width,
     GLuint height,
     GLubyte red,
     GLubyte green,
@@ -421,23 +424,23 @@ flc::Texture2DFile *TextureLoader::loadVirtualFileColor(GLuint width,
     content[i + 3] = 1;
   }
 
-  auto file = new flc::Texture2DFile();
-  file->mHeader.mFormat = format;
-  file->mHeader.mInternalFormat = format;
-  file->mHeader.mWidth = width;
-  file->mHeader.mHeight = height;
-  file->mHeader.mType = GL_UNSIGNED_BYTE;
+  auto cfg = new flc::TextureConfig();
+  cfg->mHeader.mFormat = format;
+  cfg->mHeader.mInternalFormat = format;
+  cfg->mHeader.mWidth = width;
+  cfg->mHeader.mHeight = height;
+  cfg->mHeader.mType = GL_UNSIGNED_BYTE;
 
-  file->mConfig.mMipmaps = GL_FALSE;
-  file->mConfig.mMipmapsLevel = 0;
-  file->mConfig.mCompression = GL_FALSE;
-  file->mConfig.mBorder = 0;
+  cfg->mContent.mMipmaps = GL_FALSE;
+  cfg->mContent.mMipmapsLevel = 0;
+  cfg->mContent.mCompression = GL_FALSE;
+  cfg->mContent.mBorder = 0;
 
-  file->mData = content;
+  cfg->mData = content;
 
-  file->mAllocation = flc::EMemoryAllocation::eNew;
+  cfg->mAllocation = flc::EMemoryAllocation::eNew;
 
-  return file;
+  return cfg;
 }
 
 inline GLint TextureLoader::getBytesPerPixel(GLenum format) {

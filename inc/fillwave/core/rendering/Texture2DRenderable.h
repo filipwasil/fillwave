@@ -40,7 +40,7 @@ namespace flc {
 
 class Texture2DRenderable : public Texture2D {
 public:
-  Texture2DRenderable(GLenum attachment, flc::Texture2DFile *file, ParameterList &parameters);
+  Texture2DRenderable(GLenum attachment, flc::TextureConfig *file, ParameterList &parameters);
 
   virtual ~Texture2DRenderable() = default;
 
@@ -67,10 +67,9 @@ public:
   void log();
 
 private:
-  puFramebuffer mFramebuffer;
+  flc::Framebuffer mFramebuffer;
   GLenum mAttachment;
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::Texture2DRenderable> puTexture2DRenderable;
 } /* flw */

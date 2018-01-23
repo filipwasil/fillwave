@@ -109,8 +109,8 @@ private:
   flc::Program* mProgramAOGeometry;
   flc::Program* mProgramAOColor;
 
-  puTexture2DRenderable mAOGeometryBuffer;
-  puTexture2DRenderable mAOColorBuffer;
+  pu<flc::Texture2DRenderable> mAOGeometryBuffer;
+  pu<flc::Texture2DRenderable> mAOColorBuffer;
 
   pu<Mesh> mDeferredPointLight;
 

@@ -34,42 +34,42 @@ FLOGINIT_MASK(FERROR | FFATAL | FDEBUG)
 namespace flw {
 namespace flc {
 
-Texture2D::Texture2D(Texture2DFile *file, ParameterList &parameters, GLuint howMany)
+Texture2D::Texture2D(TextureConfig* cfg, ParameterList &parameters, GLuint howMany)
     : Texture(GL_TEXTURE_2D, howMany)
-    , mFile(puTexture2DFile(file))
+    , mCfg(pu<TextureConfig>(cfg))
     , mParameters(parameters) {
   reload();
 }
 
 void Texture2D::sendData(GLubyte* data) {
   if (data) {
-    mFile->mData = data;
+    mCfg->mData = data;
   }
-  if (mFile->mConfig.mCompression) {
+  if (mCfg->mContent.mCompression) {
     glCompressedTexImage2D(mTarget,
-                           mFile->mConfig.mMipmapsLevel,
-                           mFile->mHeader.mInternalFormat,
-                           mFile->mHeader.mWidth,
-                           mFile->mHeader.mHeight,
-                           mFile->mConfig.mBorder,
-                           mFile->mConfig.mCompressionSize,
-                           (GLubyte *) mFile->mData);
+                           mCfg->mContent.mMipmapsLevel,
+                           mCfg->mHeader.mInternalFormat,
+                           mCfg->mHeader.mWidth,
+                           mCfg->mHeader.mHeight,
+                           mCfg->mContent.mBorder,
+                           mCfg->mContent.mCompressionSize,
+                           (GLubyte *) mCfg->mData);
   } else {
     glTexImage2D(mTarget,
-                 mFile->mConfig.mMipmapsLevel,
-                 mFile->mHeader.mInternalFormat,
-                 mFile->mHeader.mWidth,
-                 mFile->mHeader.mHeight,
-                 mFile->mConfig.mBorder,
-                 mFile->mHeader.mFormat,
-                 mFile->mHeader.mType,
-                 (GLubyte *) mFile->mData);
+                 mCfg->mContent.mMipmapsLevel,
+                 mCfg->mHeader.mInternalFormat,
+                 mCfg->mHeader.mWidth,
+                 mCfg->mHeader.mHeight,
+                 mCfg->mContent.mBorder,
+                 mCfg->mHeader.mFormat,
+                 mCfg->mHeader.mType,
+                 (GLubyte *) mCfg->mData);
   }
   fLogC("send data");
 }
 
 void Texture2D::generateMipMaps() {
-  if (mFile->mConfig.mMipmaps) {
+  if (mCfg->mContent.mMipmaps) {
     glGenerateMipmap(mTarget);
     fLogC("generateMipMaps");
   }
@@ -97,13 +97,13 @@ void Texture2D::reload() {
 
 void Texture2D::log() {
   fLogD("mTarget: 0x%x", mTarget);
-  fLogD("mFile->mConfig.mMipmapsLevel: %d", mFile->mConfig.mMipmapsLevel);
-  fLogD("mFile->mHeader.mInternalFormat: 0x%x", mFile->mHeader.mInternalFormat);
-  fLogD("mFile->mHeader.mWidth: %d", mFile->mHeader.mWidth);
-  fLogD("mFile->mHeader.mHeight: %d", mFile->mHeader.mHeight);
-  fLogD("mFile->mConfig.mBorder: %d", mFile->mConfig.mBorder);
-  fLogD("mFile->mConfig.mType: 0x%x", mFile->mHeader.mType);
-  fLogD("mFile->mHeader.mFormat: 0x%x", mFile->mHeader.mFormat);
+  fLogD("mCfg->mContent.mMipmapsLevel: %d", mCfg->mContent.mMipmapsLevel);
+  fLogD("mCfg->mHeader.mInternalFormat: 0x%x", mCfg->mHeader.mInternalFormat);
+  fLogD("mCfg->mHeader.mWidth: %d", mCfg->mHeader.mWidth);
+  fLogD("mCfg->mHeader.mHeight: %d", mCfg->mHeader.mHeight);
+  fLogD("mCfg->mContent.mBorder: %d", mCfg->mContent.mBorder);
+  fLogD("mCfg->mContent.mType: 0x%x", mCfg->mHeader.mType);
+  fLogD("mCfg->mHeader.mFormat: 0x%x", mCfg->mHeader.mFormat);
 }
 
 } /* flc */
