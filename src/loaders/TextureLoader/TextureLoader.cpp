@@ -55,8 +55,9 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
   uint8_t r = 0, g = 0, b = 0;
   if (filePath == rootPath) {
     fLogD("Empty texture ", filePath, " generation and loading ...");
-    auto file = loadVirtualFileColor(512, 512, 0, 0, 0);
-    return file;
+    auto cfg = loadVirtualFileColor(512, 512, 0, 0, 0);
+    cfg->mHeader.mCubeTarget = cubeTarget;
+    return cfg;
   }
 
 
@@ -73,8 +74,9 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
     g = atoi(tokens[1].c_str());
     b = atoi(tokens[2].c_str());
 
-    auto file = loadVirtualFileColor(512, 512, r, g, b);
-    return file;
+    auto cfg = loadVirtualFileColor(512, 512, r, g, b);
+    cfg->mHeader.mCubeTarget = cubeTarget;
+    return cfg;
   }
   if (posCheckboard != std::string::npos) {
     fLogD("Checkboard texture ", filePath, " generation and loading ...");
@@ -89,8 +91,9 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
     g = atoi(tokens[1].c_str());
     b = atoi(tokens[2].c_str());
 
-    auto file = loadVirtualFileCheckboard(512, 512, r, g, b);
-    return file;
+    auto cfg = loadVirtualFileCheckboard(512, 512, r, g, b);
+    cfg->mHeader.mCubeTarget = cubeTarget;
+    return cfg;
   }
   if (posDDS != std::string::npos) {
     fLogE("Compressed Texture ", filePath, " not supported yet");
@@ -246,7 +249,7 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
   cfg->mContent.mMipmaps = GL_TRUE;
   cfg->mContent.mMipmapsLevel = 0;
 
-  cfg->mContent.mCubeTarget = cubeTarget;
+  cfg->mHeader.mCubeTarget = cubeTarget;
 
   if (compression == ECompression::eNone) {
     cfg->mContent.mCompression = GL_FALSE;

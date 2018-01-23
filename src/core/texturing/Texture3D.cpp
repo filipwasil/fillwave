@@ -29,7 +29,7 @@
 #include <fillwave/core/texturing/Texture3D.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Texture3D", FERROR | FFATAL)
+FLOGINIT("Texture3D", FERROR | FFATAL | FDEBUG)
 
 namespace flw {
 namespace flc {
@@ -54,7 +54,7 @@ inline void Texture3D::sendData(TextureConfig* cfg, GLubyte* customData) {
     cfg->mData = customData;
   }
 
-  fLogD("cfg->mCubeTarget ", cfg->mCubeTarget);
+  fLogD("cfg->mHeader->mCubeTarget ", cfg->mHeader.mCubeTarget);
   fLogD("cfg->mContent.mMipmapsLevel ", cfg->mContent.mMipmapsLevel);
   fLogD("cfg->mHeader.mInternalFormat ", cfg->mHeader.mInternalFormat);
   fLogD("cfg->mHeader.mWidth ", cfg->mHeader.mWidth);
@@ -62,7 +62,7 @@ inline void Texture3D::sendData(TextureConfig* cfg, GLubyte* customData) {
   fLogD("cfg->mContent.mBorder ", cfg->mContent.mBorder);
   fLogD("cfg->mHeader.mFormat ", cfg->mHeader.mFormat);
   fLogD("cfg->mHeader.mType ", cfg->mHeader.mType);
-  glTexImage2D(cfg->mCubeTarget,
+  glTexImage2D(cfg->mHeader.mCubeTarget,
                cfg->mContent.mMipmapsLevel,
                cfg->mHeader.mInternalFormat,
                cfg->mHeader.mWidth,

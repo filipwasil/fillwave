@@ -55,7 +55,8 @@ struct TextureConfig final {
       , mHeight(height)
       , mWidth(width)
       , mType(type)
-      , mFormat(format) {
+      , mFormat(format)
+      , mCubeTarget(0) {
       // nothing
     }
     GLint mInternalFormat;
@@ -63,6 +64,7 @@ struct TextureConfig final {
     GLsizei mWidth;
     GLenum mType;
     GLenum mFormat;
+    GLenum mCubeTarget;
   };
   /*! \class Content
   * \brief Stores the single file info.
@@ -73,8 +75,7 @@ struct TextureConfig final {
       , mMipmaps(mipmaps)
       , mCompression(compression)
       , mBorder(border)
-      , mCompressionSize(0)
-      , mCubeTarget(0) {
+      , mCompressionSize(0) {
       // nothing
     }
     GLint mMipmapsLevel;
@@ -82,14 +83,12 @@ struct TextureConfig final {
     GLboolean mCompression;
     GLint mBorder;
     GLsizei mCompressionSize;
-    GLenum mCubeTarget;
   };
 
   TextureConfig()
     : mHeader()
     , mContent()
     , mAllocation(EMemoryAllocation::eNone)
-    , mCubeTarget()
     , mData(nullptr) {
     // nothing
   }
@@ -99,7 +98,6 @@ struct TextureConfig final {
   Header mHeader;
   Content mContent;
   EMemoryAllocation mAllocation;
-  GLenum mCubeTarget;
   GLubyte* mData;
 };
 
