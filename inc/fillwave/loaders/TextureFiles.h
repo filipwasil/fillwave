@@ -84,13 +84,13 @@ enum class EMemoryAllocation {
  * \brief Stores the single file info.
  */
 
-struct Texture2DFile {
+struct Texture2DFile final {
   Texture2DFile()
       : mAllocation (EMemoryAllocation::eNone) {
 
   }
   ~Texture2DFile();
-
+  void freeMemory();
   Texture2DFileHeader mHeader;
   Texture2DFileConfig mConfig;
   GLubyte* mData;
@@ -101,13 +101,15 @@ struct Texture2DFile {
  * \brief Stores the single file info.
  */
 
-struct Texture3DFile {
+struct Texture3DFile final {
   Texture3DFile(Texture2DFile* file, GLenum target)
     : mCubeTarget(target) {
     mFile2d.mHeader = file->mHeader;
     mFile2d.mConfig = file->mConfig;
     mFile2d.mData = file->mData;
-    delete file;
+  }
+  ~Texture3DFile() {
+      mFile2d.freeMemory();
   }
   Texture2DFile mFile2d;
   GLenum mCubeTarget;

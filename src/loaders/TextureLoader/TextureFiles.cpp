@@ -56,16 +56,20 @@ Texture2DFileHeader::Texture2DFileHeader(GLint internalFormat,
 }
 
 Texture2DFile::~Texture2DFile() {
+  freeMemory();
+}
+
+void Texture2DFile::freeMemory() {
   switch (mAllocation) {
-    case EMemoryAllocation::eMallock:
-      free(mData);
-      break;
-    case EMemoryAllocation::eNew:
-      delete mData;
-      mData = nullptr;
-      break;
-    case EMemoryAllocation::eNone:
-      break;
+  case EMemoryAllocation::eMallock:
+    free(mData);
+    break;
+  case EMemoryAllocation::eNew:
+    delete mData;
+    mData = nullptr;
+    break;
+  case EMemoryAllocation::eNone:
+    break;
   }
 }
 

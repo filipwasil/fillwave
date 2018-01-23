@@ -134,8 +134,7 @@ void LightSystem::pushLightUniforms(flc::Program *program) {
   /* Point lights */
   for (size_t i = 0; i < mLightsPoint.size(); i++) {
     /*LightPoint* l = mPointLights[i].get();*/
-    program->uniformPush(getStructField("uPointLights", "position", i),
-                         glm::vec4(mLightsPoint[i]->getTranslation(), 1.0));
+    program->uniformPush(getStructField("uPointLights", "position", i), glm::vec4(mLightsPoint[i]->getTranslation(), 1.0));
     program->uniformPush(getStructField("uPointLights", "intensity", i), mLightsPoint[i]->getIntensity());
     program->uniformPush(getNotIndexableName("uPointShadowMap", i), FILLWAVE_SHADOW_FIRST_UNIT + UBOIterator);
     UBOIterator++;
