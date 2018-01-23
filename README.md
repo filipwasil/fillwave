@@ -9,7 +9,6 @@
 Can be used in any 3D games, apps and visualization tools or as a regular part of your game engine.
 
 - Multiplatform (Linux, Windows, Android, OSX)
-- Native Android apps (JNI, or C++).
 - Using the greatest open source libraries (Ex. glm for math and assimp for assets)
 - OpenGL ES 3.0 and OpenGL 3.3+ support with programmable pipeline
 - Engine can be fully open source and free under BSD license
@@ -105,9 +104,14 @@ Android script is currently designed to work only with Linux. It assumes that An
 |    CI build    |    Result      |
 | :-------------: |:-------------:|
 | Linux      | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master) |
-| Android (native)    | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)      |
 | Windows (msvs)    | [![Build status](https://ci.appveyor.com/api/projects/status/w5xqq2tntoo9td6k?svg=true)](https://ci.appveyor.com/project/filipwasil/fillwave) |
-| Coverity   | [![Coverage Status](https://coveralls.io/repos/github/filipwasil/fillwave/badge.svg?branch=master)](https://coveralls.io/github/filipwasil/fillwave?branch=master)
 
-## Thanks to
+# Coming soon
+- Native Android apps (JNI, or C++).
+|    CI build    |    Result      |
+| :-------------: |:-------------:|
+| Coverity   | [![Coverage Status](https://coveralls.io/repos/github/filipwasil/fillwave/badge.svg?branch=master)](https://coveralls.io/github/filipwasil/fillwave?branch=master)
+| Android (native)    | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master)      |
+
+# Special thanks to
 <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/clion.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/zube.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/travis.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/appveyor.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/gerrit.png" width="32" height="32">
