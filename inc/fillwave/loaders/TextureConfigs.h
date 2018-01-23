@@ -51,12 +51,12 @@ struct TextureConfig final {
   */
   struct Header {
     Header(GLint internalFormat = GL_RGBA, GLint format = GL_RGBA, GLint type = GL_UNSIGNED_BYTE, GLsizei width = 0, GLsizei height = 0)
-        : mInternalFormat(internalFormat)
-        , mHeight(height)
-        , mWidth(width)
-        , mType(type)
-        , mFormat(format) {
-        // nothing
+      : mInternalFormat(internalFormat)
+      , mHeight(height)
+      , mWidth(width)
+      , mType(type)
+      , mFormat(format) {
+      // nothing
     }
     GLint mInternalFormat;
     GLsizei mHeight;
@@ -69,12 +69,12 @@ struct TextureConfig final {
   */
   struct Content {
     Content(GLint level = 0,  GLint border = 0, GLboolean mipmaps = GL_FALSE, GLboolean compression = GL_FALSE)
-        : mMipmapsLevel(level)
-        , mMipmaps(mipmaps)
-        , mCompression(compression)
-        , mBorder(border)
-        , mCompressionSize(0)
-        , mCubeTarget(0) {
+      : mMipmapsLevel(level)
+      , mMipmaps(mipmaps)
+      , mCompression(compression)
+      , mBorder(border)
+      , mCompressionSize(0)
+      , mCubeTarget(0) {
       // nothing
     }
     GLint mMipmapsLevel;
@@ -86,11 +86,11 @@ struct TextureConfig final {
   };
 
   TextureConfig()
-      : mHeader()
-      , mContent()
-      , mCubeTarget()
-      , mAllocation(EMemoryAllocation::eNone)
-      , mData(nullptr) {
+    : mHeader()
+    , mContent()
+    , mAllocation(EMemoryAllocation::eNone)
+    , mCubeTarget()
+    , mData(nullptr) {
     // nothing
   }
 

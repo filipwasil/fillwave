@@ -195,9 +195,9 @@ void Animator::log() {
   fLogI("Bones %du ", mBones.size());
 }
 
-Channel *Animator::findChannel(Animation *animation, const std::string &nodeName) const {
-  for (int i = 0; i < animation->getHowManyChannels(); ++i) {
-    Channel *channel = animation->getChannel(i);
+Channel* Animator::findChannel(Animation *animation, const std::string &nodeName) const {
+  for (size_t i = 0; i < animation->getHowManyChannels(); ++i) {
+    Channel* channel = animation->getChannel(i);
 
     if (std::string(channel->mAffectedNodeName) == nodeName) {
       return channel;

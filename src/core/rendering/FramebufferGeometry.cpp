@@ -57,24 +57,24 @@ FramebufferGeometry::FramebufferGeometry(flf::TextureSystem &textures,
 
 void FramebufferGeometry::resize(GLuint width, GLuint height) {
   for (GLint i = 0; i < mColorBufferSize; ++i) {
-    mDeferredColors->mFile->mHeader.mWidth = width;
-    mDeferredColors->mFile->mHeader.mHeight = height;
-    mDeferredColors->mFile->mData = nullptr;
+    mDeferredColors->mCfg->mHeader.mWidth = width;
+    mDeferredColors->mCfg->mHeader.mHeight = height;
+    mDeferredColors->mCfg->mData = nullptr;
     mDeferredColors->bind(i, i);
     mDeferredColors->sendData();
     mDeferredColors->unbind();
   }
 
-  mSummary->mFile->mHeader.mWidth = width;
-  mSummary->mFile->mHeader.mHeight = height;
-  mSummary->mFile->mData = nullptr;
+  mSummary->mCfg->mHeader.mWidth = width;
+  mSummary->mCfg->mHeader.mHeight = height;
+  mSummary->mCfg->mData = nullptr;
   mSummary->bind(mColorBufferSize, mColorBufferSize);
   mSummary->sendData();
   mSummary->unbind();
 
-  mStencilDepth->mFile->mHeader.mWidth = width;
-  mStencilDepth->mFile->mHeader.mHeight = height;
-  mStencilDepth->mFile->mData = nullptr;
+  mStencilDepth->mCfg->mHeader.mWidth = width;
+  mStencilDepth->mCfg->mHeader.mHeight = height;
+  mStencilDepth->mCfg->mData = nullptr;
   mStencilDepth->bind(mColorBufferSize + mSummaryBufferSize, 0);
   mStencilDepth->sendData();
   mStencilDepth->unbind();
