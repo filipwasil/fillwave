@@ -41,19 +41,18 @@ namespace flc {
 
 class PostProcessingPass : public flf::Finishable {
 public:
-  PostProcessingPass(flc::Program *p, flc::Texture2DRenderableDynamic *t, GLfloat lifetime);
+  PostProcessingPass(flc::Program* p, flc::Texture2DRenderableDynamic* t, GLfloat lifetime);
 
   virtual ~PostProcessingPass() = default;
 
-  flc::Texture2DRenderableDynamic *getFrame() const;
+  flc::Texture2DRenderableDynamic* getFrame() const;
 
-  flc::Program *getProgram() const;
+  flc::Program* getProgram() const;
 
 private:
-  flc::Texture2DRenderableDynamic *mFrame;
-  flc::Program *mProgram;
+  flc::Texture2DRenderableDynamic* mFrame;
+  flc::Program* mProgram;
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::PostProcessingPass> puPostProcessingPass;
 } /* flw */

@@ -39,9 +39,9 @@ void perform(Engine *engine) {
   pIEffect e = std::make_shared<TextureOnly>();
   pIEffect f = std::make_shared<Fog>();
 
-  puModel cactus1 = std::make_unique<Model>(engine, aprogram, "beast.dae");
-  puModel cactus2 = std::make_unique<Model>(engine, aprogram, "beast.dae");
-  puModel cactus3 = std::make_unique<Model>(engine, aprogram, "beast.dae");
+  pu<Model> cactus1 = std::make_unique<Model>(engine, aprogram, "beast.dae");
+  pu<Model> cactus2 = std::make_unique<Model>(engine, aprogram, "beast.dae");
+  pu<Model> cactus3 = std::make_unique<Model>(engine, aprogram, "beast.dae");
 
   cactus1->moveTo(glm::vec3(0.0, -2.0, 0.0));
   cactus1->rotateBy(glm::vec3(1.0, 0.0, 0.0), glm::radians(90.0));
@@ -78,7 +78,7 @@ void perform(Engine *engine) {
   entityLight->moveBy(glm::vec3(-8.0, 8.0, 0.0));
   entityLight->attach(std::make_unique<Model>(engine, program, "sphere.obj", "255_255_255.color"));
 
-  puModel wall = std::make_unique<Model>(engine, program, "floor.obj", "stonetiles.png",   /* diffuse map */
+  pu<Model> wall = std::make_unique<Model>(engine, program, "floor.obj", "stonetiles.png",   /* diffuse map */
                                          "stonetiles_n.png", /* normals map */
                                          "stonetiles_s.png");/* specular map */
   wall->moveBy(glm::vec3(0.0, -3.0, 0.0));

@@ -44,7 +44,7 @@ public:
 
   ~Terrain() override = default;
 
-  void addChunk(pVoxelChunk chunk);
+  void addChunk(pu<VoxelChunk> chunk);
 
   void distanceCheck(ICamera &camera);
 
@@ -66,16 +66,12 @@ private:
   LightSystem &mLights;
   GLint mRadius;
   GLfloat mGap;
-  std::vector<pVoxelChunk> mVoxelChunks;
+  std::vector<pu<VoxelChunk>> mVoxelChunks;
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::Terrain> puTerrain;
 
-puTerrain buildTerrainVoxel(Engine *engine,
-    flc::Program *program,
-    const std::string &texturePath,
-    flf::VoxelConstructor *constructor,
-    GLint radius = 0);
+pu<flf::Terrain>
+  buildTerrainVoxel(Engine*, flc::Program*, const std::string& path, flf::VoxelConstructor*, GLint radius = 0);
 
 } /* flw */

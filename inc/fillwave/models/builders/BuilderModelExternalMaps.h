@@ -54,7 +54,7 @@ public:
 
   BuilderModel &setSpecularMapPath(std::string &path);
 
-  puModel build();
+  pu<Model> build();
 
 private:
   std::string mDiffuseMapPath;

@@ -53,7 +53,7 @@ public:
   void clear() override;
 
 private:
-  std::vector<IRenderable *> mRenderPasses;
+  std::vector<IRenderable*> mRenderPasses;
 };
 
 } /* flf */

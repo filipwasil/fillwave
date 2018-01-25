@@ -42,7 +42,7 @@ void FullModelScene::init() {
   light->waitInTime(1);
   light->moveBy(10.1f, glm::vec3(1.0, 5.0, 10.0));
 
-  puModel wall = make_unique<Model>(mEngine.get(),
+  pu<Model> wall = make_unique<Model>(mEngine.get(),
                                     program,
                                     "meshes/floor.obj",
                                     "textures/wall/stonetiles.png",

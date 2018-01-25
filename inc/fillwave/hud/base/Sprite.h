@@ -66,6 +66,5 @@ protected:
   Blending mBlending;
 };
 
-} /* namespace flf */
-typedef std::shared_ptr<flf::Sprite> pSprite;
-} /* namespace flw */
+} /* flf */
+} /* flw */

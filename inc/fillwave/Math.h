@@ -44,6 +44,6 @@
 #endif
 
 namespace flw {
-static const float F_PI = static_cast<float>(M_PI);
-static const float F_PI_2 = static_cast<float>(M_PI_2);
+constexpr float F_PI = static_cast<float>(M_PI);
+constexpr float F_PI_2 = static_cast<float>(M_PI_2);
 } /* flw */

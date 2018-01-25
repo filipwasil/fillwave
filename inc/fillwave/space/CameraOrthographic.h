@@ -72,5 +72,4 @@ private:
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::CameraOrthographic> puCameraOrthographic;
 } /* flw */

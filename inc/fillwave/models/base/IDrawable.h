@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * IDrawable.h
  *
@@ -30,9 +32,6 @@
  *   OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
-#ifndef INC_FILLWAVE_MODELS_BASE_IDRAWABLE_H_
-#define INC_FILLWAVE_MODELS_BASE_IDRAWABLE_H_
 
 #include <fillwave/Math.h>
 #include <memory>
@@ -71,9 +70,5 @@ public:
   virtual void drawPicking(ICamera &camera) = 0;
 };
 
-} /* namespace flf */
-typedef std::shared_ptr<flf::IDrawable> pIDrawable;
-typedef std::unique_ptr<flf::IDrawable> pIuDrawable;
-} /* namespace flw */
-
-#endif /* INC_FILLWAVE_MODELS_BASE_IDRAWABLE_H_ */
+} /* flf */
+} /* flw */

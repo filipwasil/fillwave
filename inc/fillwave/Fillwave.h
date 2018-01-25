@@ -115,11 +115,11 @@ public:
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-  const aiScene *getModelFromFile(std::string path); /* xxx remove */
+  const aiScene*  getModelFromFile(const std::string& path);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
   /* Scene */
-  void setCurrentScene(puScene &&scene);
+  void setCurrentScene(pu<flf::Scene> &&scene);
   TGetter<flf::Scene> getCurrentScene() const;
 
   /* Time */

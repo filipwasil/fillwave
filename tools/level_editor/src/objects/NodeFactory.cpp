@@ -15,7 +15,7 @@ NodeFactory::NodeFactory(std::shared_ptr<flw::Engine> engine)
 ANodeBase* NodeFactory::createNode(common::ENodeType type, QString name, qintptr id) {
   auto program = ProgramLoader(mEngine.get()).getProgram(EProgram::basic);
   // TODO: Na razie zabity testowy obiekt
-  puModel ballModel1 = std::make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj");
+  pu<Model> ballModel1 = std::make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj");
   return (nodeCreators[type])->createCompleteNode(name, id);
 }
 

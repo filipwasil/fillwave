@@ -31,9 +31,9 @@ void perform(Engine *engine) {
   flc::Program *program = loader.getDefault();
   flc::Program *aprogram = loader.getDefaultBones();
 
-  puModel beast_animated = make_unique<Model>(engine, aprogram, "beast.dae");
-  puModel beast_animated1 = make_unique<Model>(engine, aprogram, "beast.dae");
-  puModel beast_animated2 = make_unique<Model>(engine, aprogram, "beast.dae");
+  pu<Model> beast_animated = make_unique<Model>(engine, aprogram, "beast.dae");
+  pu<Model> beast_animated1 = make_unique<Model>(engine, aprogram, "beast.dae");
+  pu<Model> beast_animated2 = make_unique<Model>(engine, aprogram, "beast.dae");
 
   beast_animated->moveTo(glm::vec3(0.0, -2.0, 0.0));
   beast_animated->setActiveAnimation(FILLWAVE_DO_NOT_ANIMATE);

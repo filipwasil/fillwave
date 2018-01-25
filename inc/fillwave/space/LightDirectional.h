@@ -64,7 +64,7 @@ public:
 
 private:
   flc::Texture2DRenderable* mShadowTexture;
-  puCameraOrthographic mShadowCamera;
+  pu<CameraOrthographic> mShadowCamera;
 };
 
 } /* flf */

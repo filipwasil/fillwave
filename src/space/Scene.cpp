@@ -39,7 +39,7 @@ FLOGINIT("Scene", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-Scene::Scene(IRenderer *renderer)
+Scene::Scene(IRenderer* renderer)
     : mRenderer(renderer)
     , mAmbientGlobal(glm::vec3(1.0)) {
 }
@@ -48,11 +48,11 @@ void Scene::setRenderer(IRenderer *renderer) {
   mRenderer = std::unique_ptr<IRenderer>(renderer);
 }
 
-void Scene::setSkybox(puSkybox &&skybox) {
+void Scene::setSkybox(pu<Skybox>&& skybox) {
   mSkybox = std::move(skybox);
 }
 
-void Scene::setCursor(puCursor &&cursor) {
+void Scene::setCursor(pu<Cursor> &&cursor) {
   mCursor = std::move(cursor);
 }
 
@@ -182,7 +182,7 @@ void Scene::drawOcclusion() {
   }
 }
 
-void Scene::setCamera(puICamera &&camera) {
+void Scene::setCamera(pu<ICamera> &&camera) {
   mCamera = std::move(camera);
 }
 

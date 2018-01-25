@@ -22,7 +22,7 @@ void TextScene::init() {
                                                                             1.0,
                                                                             0.1,
                                                                             1000.0));
-  puIEmiterPoint snow = std::make_unique<EmiterPointCPU>(mEngine.get(),
+  auto snow = std::make_unique<EmiterPointCPU>(mEngine.get(),
                                                          0.3,
                                                          600.0,
                                                          glm::vec4(1.0, 1.0, 1.0, 1.0),

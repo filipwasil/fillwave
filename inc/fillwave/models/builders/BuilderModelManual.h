@@ -57,7 +57,7 @@ public:
 
   BuilderModelManual &setMaterial(const Material &material);
 
-  puModel build();
+  pu<Model> build();
 
 private:
   flc::Texture2D *mDiffuseMap;

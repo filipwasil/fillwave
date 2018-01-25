@@ -78,5 +78,4 @@ private:
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::Skybox> puSkybox;
 } /* flw */

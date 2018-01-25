@@ -147,8 +147,8 @@ private:
 
   puFramebufferGeometry mGBuffer;
 
-  std::vector<IRenderable *> mNodes; /* true -> animated, false -> not animated */
-  std::vector<IRenderable *> mAnimatedNodes; /* true -> animated, false -> not animated */
+  std::vector<IRenderable*> mNodes; /* true -> animated, false -> not animated */
+  std::vector<IRenderable*> mAnimatedNodes; /* true -> animated, false -> not animated */
 };
 
 } /* flf */

@@ -43,7 +43,7 @@ BuilderModel::BuilderModel(Engine *engine, std::string modelPath, flc::Program *
     : mEngine(engine), mProgram(program), mShapePath(modelPath) {
 }
 
-puModel BuilderModel::build() {
+pu<Model> BuilderModel::build() {
   return std::make_unique<Model>(mEngine, mProgram, mShapePath);
 }
 

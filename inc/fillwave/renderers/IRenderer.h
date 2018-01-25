@@ -72,6 +72,5 @@ public:
   GLfloat mAmbientGlobal[3];
 };
 
-} /* namespace flf */
-typedef std::unique_ptr<flf::IRenderer> puIRenderer;
-} /* namespace flw */
+} /* flf */
+} /* flw */

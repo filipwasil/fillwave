@@ -28,13 +28,13 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/core/pipeline/Program.h>
+#include <fillwave/core/pipeline/Shader.h>
 #include <fillwave/management/base/TCache.h>
 
 namespace flw {
 namespace flf {
 
-using CachePrograms = TCache<MAX_CACHE_SIZE, flc::Program, std::string, const std::vector<flc::Shader *> &, GLboolean>;
+using CacheShader = TCache<MAX_CACHE_SIZE, flc::Shader, std::string, GLuint, const std::string &>;
 
 } /* flf */
 } /* flw */

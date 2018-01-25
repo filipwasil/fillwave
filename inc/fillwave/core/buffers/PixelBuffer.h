@@ -58,5 +58,4 @@ public:
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::PixelBuffer> puPixelBuffer;
 } /* flw */

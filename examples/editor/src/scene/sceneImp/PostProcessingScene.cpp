@@ -34,7 +34,7 @@ void PostProcessingScene::init() {
 //
 //	/* Models */
 //
-//	puModel model = make_unique<Model>(mEngine.get(),
+//	pu<Model> model = make_unique<Model>(mEngine.get(),
 //	                                   ProgramLoader(mEngine.get()).getProgram(EProgram::basic),
 //	                                   "meshes/sphere.obj",
 //	                                   textureDynamic);

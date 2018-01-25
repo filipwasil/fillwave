@@ -83,5 +83,4 @@ protected:
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::IEmiterPoint> puIEmiterPoint;
 } /* flw */

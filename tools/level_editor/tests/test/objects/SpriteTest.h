@@ -9,7 +9,7 @@ class SpriteTest : public testing::Test {
   SpriteTest() : sut_(0, nullptr) {
    /* std::string str = "/";
     auto engine = std::make_shared<flw::Engine>(1, nullptr);
-    flw::puModel ballModel1 = std::make_unique<flw::flf::Model>(nullptr, nullptr,
+    flw::pu<Model> ballModel1 = std::make_unique<flw::flf::Model>(nullptr, nullptr,
                                                     "meshes/sphere.obj");*/
 
   }

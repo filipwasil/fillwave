@@ -82,7 +82,7 @@ public:
 
   GLint getAnimations() const;
 
-  std::vector<puAnimation> mAnimations;
+  std::vector<pu<Animation>> mAnimations;
 
   void log();
 
@@ -119,4 +119,4 @@ private:
 };
 
 } /* flf */
-} /* fillwave*/
+} /* flw */

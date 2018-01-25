@@ -58,5 +58,4 @@ private:
 };
 
 } /* flf */
-typedef std::shared_ptr<flf::Painter> pPainter;
 } /* flw */

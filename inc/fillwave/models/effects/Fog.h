@@ -82,5 +82,4 @@ private:
 };
 
 } /* flf */
-typedef std::shared_ptr<flf::Fog> pFog;
-} /* fillwave*/
+} /* flw */

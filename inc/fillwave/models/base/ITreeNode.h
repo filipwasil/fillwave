@@ -46,6 +46,5 @@ public:
   virtual void onDetached() = 0;
 };
 
-} /* namespace flf */
-typedef std::unique_ptr<flf::ITreeNode> puITreeNode;
-} /* namespace flw */
+} /* flf */
+} /* flw */

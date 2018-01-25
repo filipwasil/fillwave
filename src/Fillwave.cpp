@@ -310,7 +310,7 @@ GLfloat Engine::getStartupAnimationTime() const {
   return mImpl->mStartupTimeLimit;
 }
 
-void Engine::setCurrentScene(puScene &&scene) {
+void Engine::setCurrentScene(pu<flf::Scene> &&scene) {
   if (mImpl->mScene) {
     mImpl->mScene->onHide();
   }
@@ -429,7 +429,7 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-const aiScene* Engine::getModelFromFile(string path) {
+const aiScene* Engine::getModelFromFile(const string& path) {
   fLogD("Reading model ", path);
   return mImpl->mImporter.ReadFile((mImpl->mFileLoader.getRootPath() + path).c_str(),
                                    aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);

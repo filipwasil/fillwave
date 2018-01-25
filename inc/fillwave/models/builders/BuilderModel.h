@@ -44,15 +44,15 @@ public:
 
   virtual ~BuilderModel() = default;
 
-  virtual puModel build();
+  virtual pu<Model> build();
 
   BuilderModel &setModelPath(std::string &path);
 
   BuilderModel &setProgram(flc::Program *program);
 
 protected:
-  Engine *mEngine;
-  flc::Program *mProgram;
+  Engine* mEngine;
+  flc::Program* mProgram;
   std::string mShapePath;
 };
 

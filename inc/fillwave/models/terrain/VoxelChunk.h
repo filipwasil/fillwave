@@ -103,5 +103,4 @@ private:
 };
 
 } /* flf */
-typedef std::shared_ptr<flf::VoxelChunk> pVoxelChunk;
-} /* fillwave*/
+} /* fflw */

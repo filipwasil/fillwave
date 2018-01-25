@@ -58,8 +58,8 @@ public:
   void reload();
 
 protected:
-  flc::VertexArray *mVAO;
-  flc::Sampler *mSampler;
+  flc::VertexArray* mVAO;
+  flc::Sampler* mSampler;
 };
 
 } /* flf */

@@ -79,9 +79,9 @@ public:
 
   BuilderEmiter &setAlphaCutOff(GLfloat cutOffLevel);
 
-  puIEmiterPoint buildEmiterGPU();
+  pu<IEmiterPoint> buildEmiterGPU();
 
-  puIEmiterPoint buildEmiterCPU();
+  pu<IEmiterPoint> buildEmiterCPU();
 
 private:
   Engine *mEngine;

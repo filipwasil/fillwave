@@ -59,7 +59,7 @@ BuilderEmiter::BuilderEmiter(Engine *engine)
     , mAlphaCutOff(0.0f) {
 }
 
-puIEmiterPoint BuilderEmiter::buildEmiterGPU() {
+pu<IEmiterPoint> BuilderEmiter::buildEmiterGPU() {
   return std::make_unique<EmiterPointGPU>(mEngine,
                                           mEmitingSourceRate,
                                           mHowMany,
@@ -78,7 +78,7 @@ puIEmiterPoint BuilderEmiter::buildEmiterGPU() {
                                           mAlphaCutOff);
 }
 
-puIEmiterPoint BuilderEmiter::buildEmiterCPU() {
+pu<IEmiterPoint> BuilderEmiter::buildEmiterCPU() {
   return std::make_unique<EmiterPointCPU>(mEngine,
                                           mEmitingSourceRate,
                                           mHowMany,

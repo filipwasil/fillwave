@@ -1,7 +1,7 @@
 #pragma once
 
 /*
- * BufferSystem.h
+ * BufferCache.h
  *
  *  Created on: Apr 15, 2016
  *      Author: Filip Wasil
@@ -39,11 +39,11 @@
 namespace flw {
 namespace flf {
 
-/*! \class BufferSystem
+/*! \class BufferCache
  * \brief Connects VAO pointer and VAO's user pointer in single class.
  */
 
-struct BufferSystem {
+struct CacheBuffer {
   TCache<MAX_CACHE_SIZE, flc::VertexArray, IReloadable *> mVertexArrays;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferBasic, flc::VertexArray *, flf::TerrainConstructor *, GLint, GLfloat, std::vector<GLuint> &> mVertices;
   TCache<MAX_CACHE_SIZE, flc::IndexBuffer, flc::VertexArray *, std::vector<GLuint> &> mIndices;

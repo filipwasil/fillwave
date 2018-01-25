@@ -51,5 +51,5 @@ public:
   virtual void updateRenderer(IRenderer &renderer) = 0;
 };
 
-} /* namespace flf */
-} /* namespace flw */
+} /* flf */
+} /* flw */

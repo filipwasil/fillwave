@@ -110,5 +110,5 @@ private:
   void sort(glm::vec3 cameraPosition);
 };
 
-} /* particles */
+} /* flf */
 } /* flw */

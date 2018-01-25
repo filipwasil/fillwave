@@ -64,17 +64,17 @@ public:
   /* Cursor */
   TGetter<Cursor> getCursor();
 
-  void setCursor(puCursor &&cursor);
+  void setCursor(pu<Cursor>&& cursor);
 
   void drawCursor();
 
   /* Camera */
   TGetter<ICamera> getCamera();
 
-  void setCamera(puICamera &&camera);
+  void setCamera(pu<ICamera>&& camera);
 
   /* Scene */
-  void setSkybox(puSkybox &&skybox);
+  void setSkybox(pu<Skybox>&& skybox);
 
   void setHUD(pu<HUD> hud);
 
@@ -113,11 +113,11 @@ public:
   virtual void onHide();
 
 protected:
-  puIRenderer mRenderer;
+  pu<IRenderer> mRenderer;
   pu<HUD> mHeadUpDisplay;
-  puCursor mCursor;
-  puICamera mCamera;
-  puSkybox mSkybox;
+  pu<Cursor> mCursor;
+  pu<ICamera> mCamera;
+  pu<Skybox> mSkybox;
 
   std::unordered_map<GLint, Entity* > mPickingTable;
   Entity* mLastPicked;
@@ -128,6 +128,5 @@ private:
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::Scene> puScene;
 } /* flw */
 

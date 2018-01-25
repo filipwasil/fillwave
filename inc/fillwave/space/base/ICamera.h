@@ -71,6 +71,6 @@ protected:
   GLboolean mRefreshView;
   GLboolean mRefreshProjection;
 };
+
 } /* flf */
-typedef std::unique_ptr<flf::ICamera> puICamera;
 } /* flw */

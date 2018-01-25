@@ -50,7 +50,7 @@ public:
   std::vector<Key<glm::quat> > mKeysRotation;
   std::vector<Key<glm::vec3> > mKeysScaling;
 
-  Channel(aiNodeAnim *assimpChannel);
+  Channel(aiNodeAnim* assimpChannel);
 
   virtual ~Channel() = default;
 };

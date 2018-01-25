@@ -48,7 +48,7 @@ void PickingScene::init() {
   auto program = ProgramLoader(mEngine.get()).getProgram(EProgram::basic);
 
   /* build ball model */
-  puModel ballModel1 = make_unique<PickableModel>("left ball",
+  pu<Model> ballModel1 = make_unique<PickableModel>("left ball",
                                                   pickInfo,
                                                   mEngine.get(),
                                                   program,
@@ -56,7 +56,7 @@ void PickingScene::init() {
                                                   "64_128_255.checkboard");
   ballModel1->scaleTo(0.1);
   ballModel1->moveBy(glm::vec3(-3.0, 0.0, 0.0));
-  puModel ballModel2 = make_unique<PickableModel>("right ball",
+  pu<Model> ballModel2 = make_unique<PickableModel>("right ball",
                                                   pickInfo,
                                                   mEngine.get(),
                                                   program,
@@ -64,14 +64,14 @@ void PickingScene::init() {
                                                   "64_128_255.checkboard");
   ballModel2->scaleTo(0.1);
   ballModel2->moveBy(glm::vec3(3.0, 0.0, 0.0));
-  puModel ballModel3 = make_unique<PickableModel>("center ball",
+  pu<Model> ballModel3 = make_unique<PickableModel>("center ball",
                                                   pickInfo,
                                                   mEngine.get(),
                                                   program,
                                                   "meshes/sphere.obj",
                                                   "64_128_255.checkboard");
   ballModel3->scaleTo(0.1);
-  puModel ballModel4 = make_unique<PickableModel>("up ball",
+  pu<Model> ballModel4 = make_unique<PickableModel>("up ball",
                                                   pickInfo,
                                                   mEngine.get(),
                                                   program,
@@ -79,7 +79,7 @@ void PickingScene::init() {
                                                   "64_128_255.checkboard");
   ballModel4->scaleTo(0.1);
   ballModel4->moveBy(glm::vec3(0.0, 3.0, 0.0));
-  puModel ballModel5 = make_unique<PickableModel>("down ball",
+  pu<Model> ballModel5 = make_unique<PickableModel>("down ball",
                                                   pickInfo,
                                                   mEngine.get(),
                                                   program,

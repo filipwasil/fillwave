@@ -84,12 +84,12 @@ void ShadowScene::init() {
   /* Engine callbacks */
   prepareStandardCallbacks();
   /* Programs */
-  puModel wall = make_unique<Model>(mEngine.get(), program, "meshes/floor.obj");
-  puModel shadowCastingBall1 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
-  puModel shadowCastingBall2 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
-  puModel shadowCastingBall3 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
-  puModel shadowCastingBall4 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
-  puModel shadowCastingBall5 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
+  pu<Model> wall = make_unique<Model>(mEngine.get(), program, "meshes/floor.obj");
+  pu<Model> shadowCastingBall1 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
+  pu<Model> shadowCastingBall2 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
+  pu<Model> shadowCastingBall3 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
+  pu<Model> shadowCastingBall4 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
+  pu<Model> shadowCastingBall5 = make_unique<Model>(mEngine.get(), program, "meshes/sphere.obj", "64_128_255.checkboard");
 
   /* Manipulate objects directly */
   wall->rotateByX(glm::radians(90.0));

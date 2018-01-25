@@ -76,7 +76,7 @@ BuilderModelManual &BuilderModelManual::setMaterial(const Material &material) {
   return (*this);
 }
 
-puModel BuilderModelManual::build() {
+pu<Model> BuilderModelManual::build() {
   return std::make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMap, mNormalMap, mSpecularMap, mMaterial);
 }
 

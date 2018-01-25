@@ -58,7 +58,7 @@ public:
 
 private:
   std::unordered_map<GLuint, std::vector<std::vector<RenderItem>>> mRenderPasses;
-  LightManager *mLightManager;
+  LightManager* mLightManager;
 };
 
 } /* flf */

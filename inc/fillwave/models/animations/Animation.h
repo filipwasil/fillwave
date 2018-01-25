@@ -96,7 +96,6 @@ private:
 };
 
 } /* flf */
-typedef std::unique_ptr<flf::Animation> puAnimation;
 } /* flw */
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */

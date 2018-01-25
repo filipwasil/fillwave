@@ -73,5 +73,3 @@ struct TCache final : public std::unordered_map<K, std::unique_ptr<T>> {
 
 } /* flf */
 } /* flw */
-
-#undef FILLWAVE_FORGET_ABOUT_ME

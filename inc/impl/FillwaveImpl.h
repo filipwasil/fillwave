@@ -33,9 +33,9 @@
 #include "fillwave/Framework.h"
 
 /* Management */
-#include "fillwave/management/ProgramManager.h"
-#include "fillwave/management/ShaderManager.h"
-#include "fillwave/management/SamplerManager.h"
+#include "fillwave/management/CacheProgram.h"
+#include "fillwave/management/Cachehader.h"
+#include "fillwave/management/CacheSampler.h"
 #include "fillwave/management/LightSystem.h"
 #include "fillwave/management/TextureSystem.h"
 
@@ -48,7 +48,7 @@
 #endif /* __ANDROID__ */
 
 #include "fillwave/loaders/FileLoader.h"
-#include "fillwave/management/BufferSystem.h"
+#include "fillwave/management/CacheBuffer.h"
 
 FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 
@@ -95,17 +95,17 @@ struct Engine::EngineImpl final {
 
   /* Picking */
   flc::Texture2DRenderable* mPickingRenderableTexture;
-  puPixelBuffer mPickingPixelBuffer;
+  pu<flc::PixelBuffer> mPickingPixelBuffer;
 
   /* Resources */
-  flf::CacheShaders mShaders;
-  flf::CachePrograms mPrograms;
-  flf::CacheSamplers mSamplers;
+  flf::CacheShader mShaders;
+  flf::CacheProgram mPrograms;
+  flf::CacheSampler mSamplers;
   std::vector<ps<flf::Text>> mTextManager;
   std::vector<ps<Font>> mFontManager;
-  flf::BufferSystem mBuffers;
-  puLightSystem mLights;
-  puTextureSystem mTextures;
+  flf::CacheBuffer mBuffers;
+  pu<flf::LightSystem> mLights;
+  pu<flf::TextureSystem> mTextures;
   std::vector<flc::PostProcessingPass> mPostProcessingPasses;
   flc::Program* mProgramTextureLookup;
 
@@ -121,7 +121,7 @@ struct Engine::EngineImpl final {
   flf::vec<flf::EventHandler> mHandlers;
 
   /* Extras */
-  puDebugger mDebugger;
+  pu<flf::Debugger> mDebugger;
   GLuint mFrameCounter;
   GLfloat mTimeFactor;
   ps<flf::Text> mFPSText;
@@ -129,15 +129,15 @@ struct Engine::EngineImpl final {
 
   /* Startup */
   GLfloat mStartupTime;
-  flc::Texture *mStartupTexture;
+  flc::Texture* mStartupTexture;
   const GLfloat mStartupTimeLimit = 8.0f;
-  puPostProcessingPass mPostProcessingPassStartup;
+  pu<flc::PostProcessingPass> mPostProcessingPassStartup;
 
   /* Options */
   GLboolean mIsOQ; /* Occlusion query */
 
   /* Scene */
-  puScene mScene;
+  pu<flf::Scene> mScene;
   glm::vec3 mBackgroundColor;
 
   /* Initiatization */

@@ -33,7 +33,7 @@
 namespace flw {
 namespace flf {
 
-typedef TCache <MAX_CACHE_SIZE, flc::Sampler, GLint, GLint> CacheSamplers;
+using CacheSampler = TCache <MAX_CACHE_SIZE, flc::Sampler, GLint, GLint>;
 
 } /* flf */
 } /* flw */
