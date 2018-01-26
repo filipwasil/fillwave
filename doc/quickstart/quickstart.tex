@@ -49,14 +49,14 @@
 
 \begin{document}
 
-\title{\textbf{Fillwave 7.9.0}
+\title{\textbf{Fillwave 8.0.0}
  - new OpenGL 3.3+ (OpenGL ES 3.0+) graphics engine for C++14 }
 \author{Filip Wasil}
 
 \maketitle
 
 \begin{abstract}
-Before you start please ensure your graphics card driver supports at least OpenGL 3.3 and GLSL 330 or OpenGL ES 3.0 and GLSL 300 ES. Also, your C++ compiler must support c++14 standard (Ex. g++\textgreater6.1 or clang++\textgreater3.3). PC Context examples provided are using GLFW3. Editor provided uses the qt5 QT5 and are editable according to your needs. Android context samples use are using EGL (Java and native). Of course you can use any stub you like (Ex. freeglut, qt or other).
+Before you start please ensure your graphics card driver supports at least OpenGL 3.3 and GLSL 330 or OpenGL ES 3.0 and GLSL 300 ES. Also, your C++ compiler must support c++14 standard (Ex. g++\textgreater6.1 or clang++\textgreater3.3). PC Context examples provided are using GLFW3. Editor provided uses the qt5 QT5 and are editable according to your needs. Android context will be available soon using EGL (Java and native). Of course you can use any stub you like (Ex. freeglut, qt or other).
 \end{abstract}
 
 \pagebreak
@@ -92,15 +92,11 @@ Probably you will ask how is Fillwave better than other, more extended engines o
   \item "examples" - multiplatform examples
   \item "scripts" - building scripts
 \end{itemize}
-\indent \indent Engine uses dual namespace design style for modules. Code is splitted into three namespaces: \textbf{flw}, \textbf{flw:flf}, \textbf{flw::flc}. Core layer uses directly OpenGL driver API. \textbf{Framework} layer uses the \textbf{core} and by design implements a middleware of this project. The highest layer can be found under \textbf{fillwave} namespace. It is what we call Fillwave API. Naming convention is following:
-\begin{itemize}
-  \item "p" - shared pointer (Ex. pText)
-  \item "pu" - unique pointer (Ex. puRenderer)
-  \item "pw" - weak pointer (Ex. pwCameraPerspective)
-  \item "e" - enumeration class (Ex. EDebuggerState)
-  \item "I" - interface (Ex. IDrawable)
-\end{itemize}
-
+\indent \indent Engine uses dual namespace design style for modules. Code is splitted into three namespaces: \textbf{flw}, \textbf{flw:flf}, \textbf{flw::flc}. Core layer uses directly OpenGL driver API. \textbf{Framework} layer uses the \textbf{core} and by design implements a middleware of thie library. The highest layer can be found under \textbf{flw} namespace. Fillwave uses "E" as prefix for enum classes and "I" as prefix for Interfaces. Additionally it introduces few aliases for std templated data types.
+\begin{lstlisting}
+   "flw::pu < >" - alias of std::unique_ptr
+   "flw::ps < >" - alias of std::shared_ptr
+\end{lstlisting}
 \subsection{Getting started}\label{sec:Getting started}
 \indent \indent The basic application skeleton looks like:
 
@@ -122,18 +118,10 @@ int main(int argc, char* argv[]) {
 \indent \indent During the context initialization stage one must provide Fillwave engine a window (surface to draw on) and use \textbf{insert} functions in your context input handlers.
 
 \begin{lstlisting}
-void onResizeScreen(GLuint width, GLuint height);
-void onInput(KeyboardEvent& e);
-void onInput(MouseButtonEvent& e);
-void onInput(ScrollEvent  & e);
-void onInput(CharacterEvent& e);
-void onInput(CharacterModsEvent& e);
-void onInput(CursorEnterEvent& e);
-void onInput(CursorPositionEvent& e);
-void onInput(TouchEvent& e);
+void Engine::onEvent(const flf::Event& event)
 \end{lstlisting}
 
-\indent \indent Every time when there is an event incoming to you context, (Does not matter if you are using glfw, freegut, QT or other library) and you want Fillwave to handle it you should \textbf{insert} a proper event into the engine using \textbf{insertEvent} function. Above there is an example using GLFW. The \textbf{keyboardCallback} function was previously registered as keyboard callback in GLFW.  
+\indent \indent Every time when there is an event incoming to you context, (Does not matter if you are using glfw, freegut, QT or other library) and you want Fillwave to handle it you should \textbf{insert} a proper event into the engine using \textbf{onEvent} function. Above there is an example using GLFW. The \textbf{keyboardCallback} function was previously registered as keyboard callback in GLFW.  
 
 \begin{lstlisting}
 
@@ -153,7 +141,7 @@ void ContextGLFW1::keyboardCallback(GLFWwindow* window,
    flw::flf::KeyboardEvent event(data);
    
    /* insert an event */
-   mGraphicsEngine->onInput(event);
+   mGraphicsEngine->onEvent(event);
 }
 \end{lstlisting}
 
@@ -195,7 +183,7 @@ void ContextGLFW1::render() {
 \indent \indent \textbf{puEntity} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them. Fillwave uses \"only one owner\" principle and strongly uses unique pointers from C++14.
 
 \begin{lstlisting}
-auto entity_parent = pe<Entity();
+auto entity_parent = pu<Entity();
 auto entity_child = make_unique<Entity>();
 entity_parent->attach(std::move(entity_child));
 entity_parent->attach(make_unique<Entity>());
@@ -214,15 +202,15 @@ glm::mat4 getTransformation();
 \end{lstlisting}
 
 \subsection{Scene}\label{sec:Scene}
-\indent \indent \textbf{puScene} by design is considered to be the root node of your \textbf{puEntity} tree. It stores its own \textbf{puCameraPerspective} (or \textbf{puCameraOrtographic}), \textbf{puSkybox} and \textbf{puCursor}. It also has an \textbf{onHide()} and \textbf{onShow()} virtual functions which will be execuded during scene change.
+\indent \indent \textbf{puScene} by design is considered to be the root node of your \textbf{puEntity} tree. It stores its own \textbf{pu<CameraPerspective>} (or \textbf{pu<CameraOrtographic>}), \textbf{pu<Skybox>} and \textbf{pu<Cursor>}. It also has an \textbf{onHide()} and \textbf{onShow()} virtual functions which will be execuded during scene change.
 
 \begin{lstlisting}
 /* Scene */
-engine->setCurrentScene(make_unique<Scene>());
+engine->setCurrentScene(std::make_unique<Scene>());
 
 /* Camera */
-engine->getCurrentScene()->setCamera(make_unique<CameraOrtographic>());
-engine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
+engine->getCurrentScene()->setCamera(std::make_unique<CameraOrtographic>());
+engine->getCurrentScene()->setCamera(std::make_unique<CameraPerspective>());
 \end{lstlisting}
 
 \subsection{Camera}\label{sec:Camera}
@@ -728,7 +716,7 @@ void Engine::configureDebugger(EDebuggerState state);
 \newpage
 
 \subsection{Renderers}\label{sec:Custom renderers}
-\indent By implementation of custom renderer class, one can simply manage the rendering approach of Fillwave engine. This is the most powerfull feature, because it provides a lot of flexibility. The simplest renderer example RendererFR. The most complex one we have here is RendererDR. 
+\indent IRenderer interface class is used when one needs custom renerpass. This is the powerfull feature providing flexibility. The simplest renderer example RendererFR. The are others but all work in following way: Scene, when being drawn call the IRenderer::update, giving itself as a parameter.
 
 \begin{lstlisting}
 /*! \class CustomRenderer
