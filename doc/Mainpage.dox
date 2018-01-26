@@ -1,10 +1,12 @@
 /**
-\mainpage Fillwave C++11 graphics engine for
+\mainpage
+
+Fillwave C++14 OpenGL/OpenGLES graphics engine
 
 <h2><b>Requirements</b></h2>
 
-- PC with OpenGL 3.3+ and GLSL 330+ support
-- Android with OpenGL 3.0+, GLSL ES 300+ support. (API > 18, Rev. > 4.3)</p>
+- PC (Linux debian based / Windows) with OpenGL 3.3+ and GLSL 330+ support
+- Anroid NDK and JNI (work in progress)
 
 <h3><b>Libraries used</b></h3>
 
