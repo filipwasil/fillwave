@@ -1,11 +1,6 @@
 #pragma once
 
 /*
- * BufferCache.h
- *
- *  Created on: Apr 15, 2016
- *      Author: Filip Wasil
- *
  * Copyright (c) 2016, Fillwave developers
  * All rights reserved.
  *
@@ -39,10 +34,9 @@
 namespace flw {
 namespace flf {
 
-/*! \class BufferCache
+/*! \class CacheBuffer
  * \brief Connects VAO pointer and VAO's user pointer in single class.
  */
-
 struct CacheBuffer {
   TCache<MAX_CACHE_SIZE, flc::VertexArray, IReloadable *> mVertexArrays;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferBasic, flc::VertexArray *, flf::TerrainConstructor *, GLint, GLfloat, std::vector<GLuint> &> mVertices;
