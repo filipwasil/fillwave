@@ -32,13 +32,13 @@ PROJECT_NAME           = "Fillwave"
 # This could be handy for archiving the generated documentation or
 # if some version control system is used.
 
-PROJECT_NUMBER         = "7.9.0"
+PROJECT_NUMBER         = "8.0.0"
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer
 # a quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "Modern OpenGL C++11 graphics engine"
+PROJECT_BRIEF          = "OpenGL C++14 graphics engine"
 
 # With the PROJECT_LOGO tag one can specify an logo or icon that is
 # included in the documentation. The maximum height of the logo should not

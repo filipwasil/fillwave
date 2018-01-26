@@ -9,7 +9,7 @@
  * This library is available free of charge for any commercial
  * or non-commercial use. However, You are obligated to put a clearly
  * visible information in Your license agreement that Your Software
- * uses Fillwave library to handle graphics management.
+ * uses Fillwave if so.
  *
  * If You are interested in extra support, extra features
  * or cooperation We look forward to hearing from You.
