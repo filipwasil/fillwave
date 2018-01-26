@@ -43,6 +43,7 @@
 #include "fillwave/common/Macros.h"
 
 #ifdef __ANDROID__
+struct ANativeActivity;
 #else /* __ANDROID__ */
 #include "fillwave/common/Strings.h"
 #endif /* __ANDROID__ */
@@ -52,13 +53,9 @@
 
 FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
 
-struct ANativeActivity;
-
-class Engine;
-
 namespace flw {
 
-/*! \struct EngineImpl
+/*! \struct Engine::EngineImpl
 * \brief Private implementation of Fillwave GE.
 */
 
