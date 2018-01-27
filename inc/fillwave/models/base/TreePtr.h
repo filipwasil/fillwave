@@ -31,6 +31,7 @@
 #include <fillwave/models/base/ITreeNode.h>
 #include <vector>
 #include <algorithm>
+#include <utility>
 
 namespace flw {
 namespace flf {
@@ -48,7 +49,7 @@ class TreePtr : public C {
 public:
   TreePtr()
       : mFlagAttachedDetached(true) {
-
+    // nothing
   }
 
   virtual ~TreePtr() = default;
@@ -63,12 +64,17 @@ public:
 
   void attach(std::unique_ptr<T>&& node) {
     if (node.get() == this) {
-      /* User just tried to attach entity to itself */
+      /* User just tried to attach tree node to itself */
       abort();
     }
     node->onAttached(this);
     mChildren.push_back(std::move(node));
     mFlagAttachedDetached = true;
+  }
+
+  template <typename TNode, typename ...TArguments>
+  void attachNew(TArguments ...args) {
+    attach(std::make_unique<TNode>(args...));
   }
 
   void detach(T* node) {
@@ -87,11 +93,11 @@ public:
   }
 
   virtual void onAttached(ITreeNode *) {
-
+    // nothing
   }
 
   virtual void onDetached() {
-
+    // nothing
   }
 
   void detachChildren() {
