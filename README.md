@@ -2,7 +2,7 @@
 
 [Fillwave]: https://filipwasil.bitbucket.io/
 
-[![Join the chat at https://gitter.im/filipwasil/fillwave](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/filipwasil/fillwave?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![GitHub release](https://img.shields.io/github/release/filipwasil/fillwave.svg)](https://github.com/filipwasil/fillwave/releases/latest) [![Join the chat at https://gitter.im/filipwasil/fillwave](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/filipwasil/fillwave?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [Fillwave] is a modern, native and totally free rendering engine writen in c++14.
 
@@ -54,7 +54,7 @@ dnf install glm-devel assimp assimp-devel glew glew-devel freetype-devel freetyp
 ```
 
 
-Next, run build script:
+Next run build script:
 
 ```
 for ubuntu:
@@ -73,21 +73,6 @@ for fedora if you want build rpm packges only(RPM packges are in fillwave_build)
 
 Please also note that if you have sh.exe in your PATH, you should remove it for the compilation time. MinGW projects does not line sh.exe in PATH. Sorry.
 
-## Android
-
-Android script is currently designed to work only with Linux. It assumes that Android [NDK] (http://developer.android.com/ndk/index.html) is under ~/Tools/android-ndk-r10e. If this is not true, update the script with correct path.
-
-```
-./build_android.sh
-
-```
-
-## OSX
-
-```
-./build_osx.sh
-```
-
 ## Developers
 
 * Workflow: https://github.com/filipwasil/fillwave/wiki/Workflow
@@ -95,11 +80,6 @@ Android script is currently designed to work only with Linux. It assumes that An
 * Review: https://review.gerrithub.io/#/admin/projects/filipwasil/fillwave
 * Agile: https://zube.io/boards/43120442
 
-## Other repos
-
-* Particle editor: https://github.com/filipwasil/fillwave_editor_particles
-* Examples: https://github.com/filipwasil/fillwave-examples
-* Example racer game (legacy API): https://github.com/filipwasil/fillwave-waveracer 
 
 |    CI build    |    Result      |
 | :-------------: |:-------------:|
