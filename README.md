@@ -75,10 +75,9 @@ Please also note that if you have sh.exe in your PATH, you should remove it for 
 
 ## Developers
 
-* Workflow: https://github.com/filipwasil/fillwave/wiki/Workflow
-* Coding standards: https://github.com/filipwasil/fillwave/tree/master/doc/coding_standards/ide
-* Review: https://review.gerrithub.io/#/admin/projects/filipwasil/fillwave
-* Agile: https://zube.io/boards/43120442
+* [Workflow](https://github.com/filipwasil/fillwave/wiki/Workflow)
+* [Coding standards](https://github.com/filipwasil/fillwave/tree/master/doc/coding_standards)
+* [Review](https://review.gerrithub.io/#/admin/projects/filipwasil/fillwave)
 
 
 |    CI build    |    Result      |
@@ -88,6 +87,7 @@ Please also note that if you have sh.exe in your PATH, you should remove it for 
 
 # Coming soon
 - Native Android apps (JNI, or C++)
+- iOS/macOS builds
 
 # Special thanks to
 <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/clion.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/zube.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/travis.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/appveyor.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/gerrit.png" width="32" height="32">
