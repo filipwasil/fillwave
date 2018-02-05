@@ -12,7 +12,7 @@ set (PROJECT_VERSION 1.0.0)
 aux_source_directory (TerrainConstructors/ SOURCE_CONSTRUCTORS)
 
 set (SOURCE_FILES
-    test.cpp
+    example_1_scene_and_model.cpp
     PickableModel.cpp
     ContextGLFW.cpp
     ${SOURCE_CONSTRUCTORS})
