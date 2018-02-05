@@ -25,7 +25,7 @@ void PostProcessingScene::init() {
 //	                                                                     0.1,
 //	                                                                     1000.0));
 //	/* Entities */
-//	puEntity entity = buildEntity();
+//	pu<Entity> entity = buildEntity();
 //
 //	/* Texture */
 //	mEngine->addPostProcess("shaders/process/process1.frag", 8.0);

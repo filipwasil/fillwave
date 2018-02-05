@@ -44,7 +44,7 @@ void init() {
 	   make_unique<CameraPerspective>());
 
 	/* Entities */
-	puEntity entity = buildEntity();
+	pu<Entity> entity = buildEntity();
 
 	/* Texture */
 	flc::Texture3D* textureCubemap =

@@ -37,7 +37,7 @@ void DynamicTextureScene::init() {
 //  mEngine->getCurrentScene()->setCamera(make_unique<CameraPerspective>());
 //
 //  /* Entities */
-//  puEntity light = buildEntity();
+//  pu<Entity> light = buildEntity();
 //  light->moveTo(glm::vec3(0.0, 0.0, 3.0));
 //
 //  /* Texture */

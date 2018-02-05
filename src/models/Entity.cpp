@@ -172,14 +172,14 @@ void Entity::updateParentRotation(glm::quat &parent) {
 void Entity::pick(glm::vec3 color) {
   mFlagPickable = true;
   mPickColor = color;
-  std::for_each(mChildren.begin(), mChildren.end(), [color](puEntity &e) {
+  std::for_each(mChildren.begin(), mChildren.end(), [color](pu<Entity>& e) {
     e->pick(color);
   });
 }
 
 void Entity::unpick() {
   mFlagPickable = false;
-  std::for_each(mChildren.begin(), mChildren.end(), [](puEntity &e) {
+  std::for_each(mChildren.begin(), mChildren.end(), [](pu<Entity> &e) {
     e->unpick();
   });
 }

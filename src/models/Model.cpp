@@ -43,7 +43,7 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT("Model", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
@@ -303,7 +303,7 @@ inline void Model::loadNodes(aiNode *node, const aiScene* scene, Entity* entity)
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; i++) {
-    puEntity newEntity = std::make_unique<flf::Hinge>();
+    pu<Entity> newEntity = std::make_unique<flf::Hinge>();
     loadNodes(node->mChildren[i], scene, newEntity.get());
     entity->attach(std::move(newEntity));
   }
@@ -327,7 +327,7 @@ inline void Model::loadNodes(aiNode *node,
 
   /* Evaluate children */
   for (GLuint i = 0; i < node->mNumChildren; ++i) {
-    puEntity newEntity = std::make_unique<flf::Hinge>();
+    pu<Entity> newEntity = std::make_unique<flf::Hinge>();
     loadNodes(node->mChildren[i], scene, newEntity.get(), diffuseMap, normalMap, specularMap, material);
     entity->attach(std::move(newEntity));
   }
@@ -396,20 +396,26 @@ TGetter<Mesh> Model::getMesh(size_t id) {
   return TGetter<Mesh>(nullptr);
 }
 
-
 void Model::performAnimation(GLfloat timeElapsedInSeconds) {
-  if (mAnimator) {
+  if (mAnimator && mAnimator->getAnimations() > mActiveAnimation) {
     mAnimator->updateTransformations(mActiveAnimation, timeElapsedInSeconds);
   }
 }
 
 void Model::setActiveAnimation(GLint animationID) {
-  if (mAnimator && mAnimator->getAnimations() > animationID) {
-    mActiveAnimation = animationID;
+  if (!mAnimator) {
+    fLogE("This model is not animated. Active animation not set.");
     return;
   }
-  fLogE("There is no animation for slot: %d", animationID);
-  fLogD("Maximum number of animations: %d", mAnimator->getAnimations());
+
+  if (mAnimator->getAnimations() <= animationID) {
+    fLogD("Animation ", mActiveAnimation, " has stopped due to setting a non-valid animation id:", animationID);
+    mActiveAnimation = FILLWAVE_DO_NOT_ANIMATE;
+    return;
+  }
+
+  fLogD("New active animation set: ", mActiveAnimation);
+  mActiveAnimation = animationID;
 }
 
 GLint Model::getActiveAnimations() {

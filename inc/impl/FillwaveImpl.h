@@ -803,6 +803,7 @@ void Engine::EngineImpl::onEvent(const flf::Event& event) const {
   for (const auto& handler : mHandlers) {
     handler.handle(event);
   }
+  mScene->onEvent(event);
 }
 
 void Engine::EngineImpl::attachHandler(std::function<void(const flf::Event&)>&& handler, flf::eEventType type) {
@@ -810,7 +811,7 @@ void Engine::EngineImpl::attachHandler(std::function<void(const flf::Event&)>&& 
 }
 
 void Engine::EngineImpl::detachHandlers() {
-
+  mHandlers.clear();
 }
 
 glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {

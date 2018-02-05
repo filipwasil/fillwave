@@ -24,7 +24,7 @@ void FullModelScene::init() {
                                                                        1000.0));
 
   /* Entities */
-  puEntity light = std::make_unique<flw::flf::Entity>();
+  pu<Entity> light = std::make_unique<flw::flf::Entity>();
 
   /* Lights */
   LightSpot* l = mEngine->storeLightSpot(glm::vec3(0.0, 1.0, 0.0),

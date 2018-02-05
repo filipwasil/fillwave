@@ -46,6 +46,6 @@
 #include <tinyobjloader/tiny_obj_loader.h>
 #endif
 
-#define FILLWAVE_DO_NOT_ANIMATE -1
-#define FILLWAVE_MAX_BONES 45
-#define FILLWAVE_MAX_BONES_DEPENDENCIES 4
+constexpr int FILLWAVE_DO_NOT_ANIMATE = -1;
+constexpr int FILLWAVE_MAX_BONES = 45;
+#define FILLWAVE_MAX_BONES_DEPENDENCIES 4 // todo rewrite program factory

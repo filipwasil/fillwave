@@ -67,7 +67,7 @@ void perform(Engine *engine) {
   flw::flf::ps<flw::flf::Text> text = engine->storeText("Fillwave example", "bridgenorth", glm::vec2(-0.95, 0.95), 100.0);
 
   /* Specular and normal mapping*/
-  puEntity entityLight = buildEntity();
+  pu<Entity> entityLight = buildEntity();
 
   LightDirectional *light = engine->storeLightDirectional(glm::vec3(0.0, 0.6, 0.0),
                                                           glm::quat(),

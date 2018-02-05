@@ -44,7 +44,7 @@
   basicstyle=\ttfamily,
   keywordstyle=\color{blue}\bfseries,
   showstringspaces=false,
-  morekeywords={puModel, puEntity, puScene, puLightPoint, puLightSpot, puLightDirectional, pText, puCursor, puSkybox, GLfloat, GLint}
+  morekeywords={puModel, pu<Entity>, puScene, puLightPoint, puLightSpot, puLightDirectional, pText, puCursor, puSkybox, GLfloat, GLint}
 }
 
 \begin{document}
@@ -180,7 +180,7 @@ void ContextGLFW1::render() {
 \section{Digging into API}
 
 \subsection{Entity}\label{sec:Entity}
-\indent \indent \textbf{puEntity} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them. Fillwave uses \"only one owner\" principle and strongly uses unique pointers from C++14.
+\indent \indent \textbf{pu<Entity>} is a base draw tree node. You can attach any other entities, models, particle emiters to it. You can move, rotate, and scale each of them. Fillwave uses \"only one owner\" principle and strongly uses unique pointers from C++14.
 
 \begin{lstlisting}
 auto entity_parent = pu<Entity();
@@ -189,7 +189,7 @@ entity_parent->attach(std::move(entity_child));
 entity_parent->attach(make_unique<Entity>());
 \end{lstlisting}
 
-\indent \indent \textbf{puEntity} can be moved, rotated and scaled. The transformation matrix will be computed internally. However if one needs to set it directly (for example if it is computed by physics engine) there is a function provided:
+\indent \indent \textbf{pu<Entity>} can be moved, rotated and scaled. The transformation matrix will be computed internally. However if one needs to set it directly (for example if it is computed by physics engine) there is a function provided:
 
 \begin{lstlisting}
 void setTransformation(glm::mat4 transformationMatrix);
@@ -202,7 +202,7 @@ glm::mat4 getTransformation();
 \end{lstlisting}
 
 \subsection{Scene}\label{sec:Scene}
-\indent \indent \textbf{puScene} by design is considered to be the root node of your \textbf{puEntity} tree. It stores its own \textbf{pu<CameraPerspective>} (or \textbf{pu<CameraOrtographic>}), \textbf{pu<Skybox>} and \textbf{pu<Cursor>}. It also has an \textbf{onHide()} and \textbf{onShow()} virtual functions which will be execuded during scene change.
+\indent \indent \textbf{puScene} by design is considered to be the root node of your \textbf{pu<Entity>} tree. It stores its own \textbf{pu<CameraPerspective>} (or \textbf{pu<CameraOrtographic>}), \textbf{pu<Skybox>} and \textbf{pu<Cursor>}. It also has an \textbf{onHide()} and \textbf{onShow()} virtual functions which will be execuded during scene change.
 
 \begin{lstlisting}
 /* Scene */
@@ -582,7 +582,7 @@ TimedMoveCallback(Moveable* entity,
 	GLfloat lifeTime,
 	EasingFunction easing);
                   
-puEntity entity = make_unique<Entity>();
+pu<Entity> entity = make_unique<Entity>();
 
 entity->registerHierarchyCallback(
 	make_unique<TimedMoveCallback>(

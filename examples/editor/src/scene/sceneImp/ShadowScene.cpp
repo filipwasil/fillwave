@@ -22,9 +22,9 @@ void ShadowScene::init() {
                                                                        0.1,
                                                                        1000.0));
   /* Entities */
-  puEntity lightSource_1 = std::make_unique<Entity>();
-  puEntity lightSource_2 = std::make_unique<Entity>();
-  puEntity lightSource_3 = std::make_unique<Entity>();
+  pu<Entity> lightSource_1 = std::make_unique<Entity>();
+  pu<Entity> lightSource_2 = std::make_unique<Entity>();
+  pu<Entity> lightSource_3 = std::make_unique<Entity>();
 
   /* Lights */
   auto firstColor = mSceneParameters["mFirstShadow"].value<QColor>();

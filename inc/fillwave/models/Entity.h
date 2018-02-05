@@ -46,8 +46,6 @@ namespace flc {
 class Program;
 }
 
-typedef std::unique_ptr<flf::Entity> puEntity;
-
 namespace flf {
 
 /*! \class Entity

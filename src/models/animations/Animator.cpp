@@ -146,7 +146,7 @@ GLint Animator::getId(std::string name) const {
   return -1;
 }
 
-Animation *Animator::getAnimation(GLint i) const {
+Animation* Animator::getAnimation(GLint i) const {
   return (i != FILLWAVE_DO_NOT_ANIMATE ? mAnimations[i].get() : nullptr);
 }
 
