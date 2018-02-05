@@ -48,13 +48,13 @@ public:
 
   virtual ~BuilderModelExternalMaps() = default;
 
-  BuilderModel &setdiffusePath(std::string &path);
+  BuilderModel& setdiffusePath(const std::string& path);
 
-  BuilderModel &setNormalMapPath(std::string &path);
+  BuilderModel& setNormalMapPath(const std::string& path);
 
-  BuilderModel &setSpecularMapPath(std::string &path);
+  BuilderModel& setSpecularMapPath(const std::string& path);
 
-  pu<Model> build();
+  pu<Model> build() const override;
 
 private:
   std::string mDiffuseMapPath;

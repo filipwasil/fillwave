@@ -40,15 +40,15 @@ namespace flf {
 
 class BuilderModel {
 public:
-  BuilderModel(Engine *engine, std::string modelPath, flc::Program *program);
+  BuilderModel(Engine* engine, std::string modelPath, flc::Program* program);
 
   virtual ~BuilderModel() = default;
 
-  virtual pu<Model> build();
+  virtual pu<Model> build() const;
 
-  BuilderModel &setModelPath(std::string &path);
+  BuilderModel& setModelPath(const std::string& path);
 
-  BuilderModel &setProgram(flc::Program *program);
+  BuilderModel& setProgram(flc::Program* program);
 
 protected:
   Engine* mEngine;

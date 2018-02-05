@@ -41,12 +41,12 @@ namespace flf {
  * \brief BuilderModel which builds the model from the asset file but uses external textures and meterial.
  */
 
-BuilderModelManual::BuilderModelManual(Engine *engine,
+BuilderModelManual::BuilderModelManual(Engine* engine,
     std::string modelPath,
-    flc::Program *program,
-    flc::Texture2D *diffuseMap,
-    flc::Texture2D *normalMap,
-    flc::Texture2D *specularMap,
+    flc::Program* program,
+    flc::Texture2D* diffuseMap,
+    flc::Texture2D* normalMap,
+    flc::Texture2D* specularMap,
     Material material)
     : BuilderModel(engine, modelPath, program)
     , mDiffuseMap(diffuseMap)
@@ -56,27 +56,27 @@ BuilderModelManual::BuilderModelManual(Engine *engine,
 
 }
 
-BuilderModelManual &BuilderModelManual::setDiffuseMapTexture(flc::Texture2D *texture) {
+BuilderModelManual &BuilderModelManual::setDiffuseMapTexture(flc::Texture2D* texture) {
   mDiffuseMap = texture;
   return (*this);
 }
 
-BuilderModelManual &BuilderModelManual::setNormalMapTexture(flc::Texture2D *texture) {
+BuilderModelManual &BuilderModelManual::setNormalMapTexture(flc::Texture2D* texture) {
   mNormalMap = texture;
   return (*this);
 }
 
-BuilderModelManual &BuilderModelManual::setSpecularMapTexture(flc::Texture2D *texture) {
+BuilderModelManual &BuilderModelManual::setSpecularMapTexture(flc::Texture2D* texture) {
   mSpecularMap = texture;
   return (*this);
 }
 
-BuilderModelManual &BuilderModelManual::setMaterial(const Material &material) {
+BuilderModelManual &BuilderModelManual::setMaterial(const Material& material) {
   mMaterial = material;
   return (*this);
 }
 
-pu<Model> BuilderModelManual::build() {
+pu<Model> BuilderModelManual::build() const {
   return std::make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMap, mNormalMap, mSpecularMap, mMaterial);
 }
 

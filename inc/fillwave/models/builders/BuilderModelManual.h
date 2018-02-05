@@ -49,20 +49,20 @@ public:
 
   virtual ~BuilderModelManual() = default;
 
-  BuilderModelManual &setDiffuseMapTexture(flc::Texture2D *texture);
+  BuilderModelManual& setDiffuseMapTexture(flc::Texture2D* texture);
 
-  BuilderModelManual &setNormalMapTexture(flc::Texture2D *texture);
+  BuilderModelManual& setNormalMapTexture(flc::Texture2D* texture);
 
-  BuilderModelManual &setSpecularMapTexture(flc::Texture2D *texture);
+  BuilderModelManual& setSpecularMapTexture(flc::Texture2D* texture);
 
-  BuilderModelManual &setMaterial(const Material &material);
+  BuilderModelManual& setMaterial(const Material &material);
 
-  pu<Model> build();
+  pu<Model> build() const;
 
 private:
-  flc::Texture2D *mDiffuseMap;
-  flc::Texture2D *mNormalMap;
-  flc::Texture2D *mSpecularMap;
+  flc::Texture2D* mDiffuseMap;
+  flc::Texture2D* mNormalMap;
+  flc::Texture2D* mSpecularMap;
   Material mMaterial;
 };
 

@@ -39,20 +39,22 @@
 namespace flw {
 namespace flf {
 
-BuilderModel::BuilderModel(Engine *engine, std::string modelPath, flc::Program *program)
-    : mEngine(engine), mProgram(program), mShapePath(modelPath) {
+BuilderModel::BuilderModel(Engine* engine, std::string modelPath, flc::Program* program)
+    : mEngine(engine)
+    , mProgram(program)
+    , mShapePath(modelPath) {
 }
 
-pu<Model> BuilderModel::build() {
+pu<Model> BuilderModel::build() const {
   return std::make_unique<Model>(mEngine, mProgram, mShapePath);
 }
 
-BuilderModel &BuilderModel::setModelPath(std::string &path) {
+BuilderModel& BuilderModel::setModelPath(const std::string& path) {
   mShapePath = path;
   return *this;
 }
 
-BuilderModel &BuilderModel::setProgram(flc::Program *program) {
+BuilderModel& BuilderModel::setProgram(flc::Program* program) {
   mProgram = program;
   return *this;
 }

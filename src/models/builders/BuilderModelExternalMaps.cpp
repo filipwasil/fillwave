@@ -37,12 +37,12 @@
 namespace flw {
 namespace flf {
 
-BuilderModelExternalMaps::BuilderModelExternalMaps(Engine *engine,
+BuilderModelExternalMaps::BuilderModelExternalMaps(Engine* engine,
     std::string modelPath,
-    flc::Program *program,
-    const std::string &diffusePath,
-    const std::string &normalPath,
-    const std::string &specularPath)
+    flc::Program* program,
+    const std::string& diffusePath,
+    const std::string& normalPath,
+    const std::string& specularPath)
     : BuilderModel(engine, modelPath, program)
     , mDiffuseMapPath(diffusePath)
     , mNormalMapPath(normalPath)
@@ -50,22 +50,22 @@ BuilderModelExternalMaps::BuilderModelExternalMaps(Engine *engine,
 
 }
 
-BuilderModel &BuilderModelExternalMaps::setdiffusePath(std::string &path) {
+BuilderModel &BuilderModelExternalMaps::setdiffusePath(const std::string& path) {
   mDiffuseMapPath = path;
   return *this;
 }
 
-BuilderModel &BuilderModelExternalMaps::setNormalMapPath(std::string &path) {
+BuilderModel &BuilderModelExternalMaps::setNormalMapPath(const std::string& path) {
   mNormalMapPath = path;
   return *this;
 }
 
-BuilderModel &BuilderModelExternalMaps::setSpecularMapPath(std::string &path) {
+BuilderModel &BuilderModelExternalMaps::setSpecularMapPath(const std::string& path) {
   mSpecularMapPath = path;
   return *this;
 }
 
-pu<Model> BuilderModelExternalMaps::build() {
+pu<Model> BuilderModelExternalMaps::build() const {
   return std::make_unique<Model>(mEngine, mProgram, mShapePath, mDiffuseMapPath, mNormalMapPath, mSpecularMapPath);
 }
 
