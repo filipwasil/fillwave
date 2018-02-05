@@ -226,7 +226,7 @@ ps<flf::Text> Engine::storeText(const string& content,
       myfile >> iASCII >> fXMin >> fWidth >> fYMin >> fHeight >> fYOffset;
       newFont->mWidths[iASCII] = fWidth;
       newFont->mOffsets[iASCII] = 1.0f - fHeight - fYOffset;
-      if (control++ > 512) { //xxx limit
+      if (control++ > FILLWAVE_MAX_TEXTS) {
         fLogE("Metadata can not be read for file %s.", (fontName + ".meta").c_str());
         myfile.close();
         delete newFont;

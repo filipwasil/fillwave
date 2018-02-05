@@ -48,4 +48,5 @@
 
 constexpr int FILLWAVE_DO_NOT_ANIMATE = -1;
 constexpr int FILLWAVE_MAX_BONES = 45;
+constexpr int FILLWAVE_MAX_TEXTS = 512;
 #define FILLWAVE_MAX_BONES_DEPENDENCIES 4 // todo rewrite program factory
