@@ -392,7 +392,7 @@ TGetter<Mesh> Model::getMesh(size_t id) {
   if (id < mMeshes.size()) {
     return TGetter<Mesh> (mMeshes.at(id));
   }
-  fLogF("Requested mesh does not exist. Id requested: %d", static_cast<int>(id));
+  fLogF("Requested mesh does not exist. Id requested: ", static_cast<int>(id));
   return TGetter<Mesh>(nullptr);
 }
 
