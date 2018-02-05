@@ -135,8 +135,6 @@ void ContextGLFW::keyboardCallback(GLFWwindow * /*window*/, int key, int scancod
     windowDeinit(mWindow);
   }
 
-  /* And/Or provide it to Fillwave to executeall entity callbacks when focused */
-
   mEventData.mKey.action = action;
   mEventData.mKey.key = key;
   mEventData.mKey.mode = mods;
@@ -146,18 +144,18 @@ void ContextGLFW::keyboardCallback(GLFWwindow * /*window*/, int key, int scancod
 }
 
 void ContextGLFW::mouseButtonCallback(GLFWwindow * /*window*/, int button, int action, int mods) {
-  mEventData.mMouseButton.mWhereX = mCursorPositionX;
-  mEventData.mMouseButton.mWhereY = mCursorPositionY;
-  mEventData.mMouseButton.mAction = action;
-  mEventData.mMouseButton.mButton = button;
-  mEventData.mMouseButton.mMods = mods;
+  mEventData.mMouseButton.whereX = mCursorPositionX;
+  mEventData.mMouseButton.whereY = mCursorPositionY;
+  mEventData.mMouseButton.action = action;
+  mEventData.mMouseButton.button = button;
+  mEventData.mMouseButton.mods = mods;
   onEvent(flw::flf::eEventType::mouseButton);
 }
 
-void ContextGLFW::scrollCallback(GLFWwindow * /*window*/, double /*xoffset*/, double /*yoffset*/) {
-//  mEventData.mOffsetX = xoffset;
-//  mEventData.mOffsetY = yoffset;
-//  mGraphics->onEvent(flw::flf::eEventType::scroll);
+void ContextGLFW::scrollCallback(GLFWwindow * /*window*/, double xoffset, double yoffset) {
+  mEventData.mMouseScroll.offsetX = xoffset;
+  mEventData.mMouseScroll.offsetY = yoffset;
+  onEvent(flw::flf::eEventType::scroll);
 }
 
 void ContextGLFW::characterCallback(GLFWwindow * /*window*/, unsigned int ascii) {
@@ -166,25 +164,24 @@ void ContextGLFW::characterCallback(GLFWwindow * /*window*/, unsigned int ascii)
 }
 
 void ContextGLFW::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, double ypos) {
-  flw::flf::CursorPositionEventData d;
   if (xpos > mGraphics->getScreenSize()[0]) {
     glfwSetCursorPos(mWindow, mGraphics->getScreenSize()[0], ypos);
-    d.xPosition = mGraphics->getScreenSize()[0];
+    mEventData.mCursorPosition.xPosition = mGraphics->getScreenSize()[0];
   } else if (xpos < 0.0) {
     glfwSetCursorPos(mWindow, 0.0, ypos);
-    d.xPosition = 0.0;
+    mEventData.mCursorPosition.xPosition = 0.0;
   } else {
-    d.xPosition = xpos;
+    mEventData.mCursorPosition.xPosition = xpos;
   }
 
   if (ypos > mGraphics->getScreenSize()[1]) {
     glfwSetCursorPos(mWindow, xpos, mGraphics->getScreenSize()[1]);
-    d.yPosition = mGraphics->getScreenSize()[1];
+    mEventData.mCursorPosition.yPosition = mGraphics->getScreenSize()[1];
   } else if (ypos < 0.0) {
     glfwSetCursorPos(mWindow, xpos, 0);
-    d.yPosition = 0;
+    mEventData.mCursorPosition.yPosition = 0;
   } else {
-    d.yPosition = ypos;
+    mEventData.mCursorPosition.yPosition = ypos;
   }
 
   mCursorPositionX = xpos;

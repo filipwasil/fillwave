@@ -52,7 +52,7 @@ void Scene::setSkybox(pu<Skybox>&& skybox) {
   mSkybox = std::move(skybox);
 }
 
-void Scene::setCursor(pu<Cursor> &&cursor) {
+void Scene::setCursor(pu<Cursor>&& cursor) {
   mCursor = std::move(cursor);
 }
 

@@ -74,7 +74,7 @@ IEmiterPoint::IEmiterPoint(Engine *engine,
   }
 
   attachHandler([this] (const Event& event) {
-    mCallbackTimePassed += event.getData().mTime.mTimePassed;
+    mCallbackTimePassed += event.getData().mTime.timePassed;
     update(mCallbackTimePassed);
   }, eEventType::time );
 }

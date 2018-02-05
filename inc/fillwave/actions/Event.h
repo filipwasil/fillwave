@@ -32,17 +32,17 @@ namespace flw {
 namespace flf {
 
 enum class eEventType {
-	mouseButton,
-	cursorPosition,
-	cursorEnter,
-	scroll,
-	key,
-	character,
-	characterMods,
-	time,
-	touch,
-	resizeScreen,
-	custom
+  mouseButton
+  , cursorPosition
+  , cursorEnter
+  , scroll
+  , key
+  , character
+  , characterMods
+  , time
+  , touch
+  , resizeScreen
+  , custom
 };
 
 struct CursorEnterEventData {
@@ -55,14 +55,23 @@ struct CursorPositionEventData {
 };
 
 struct KeyboardEventData {
-	int key, scanCode, action, mode;
+	int key;
+  int scanCode;
+  int action;
+  int mode;
 };
 
 struct MouseButtonEventData {
-	float mWhereX, mWhereY;
-	int mButton;
-	int mAction;
-	int mMods;
+	float whereX;
+  float whereY;
+	int button;
+	int action;
+	int mods;
+};
+
+struct MouseScrollEventData {
+	double offsetX;
+	double offsetY;
 };
 
 struct CharacterEventData {
@@ -81,15 +90,15 @@ struct TouchEventData {
 };
 
 struct TimeEventData {
-	float mTimePassed;
+	float timePassed;
 };
 
 union CustomEventData {
-	float *mDataFloat;
-	int *mDataInt;
-	unsigned int *mDataUint;
-	char *mDataChar;
-	unsigned int mSize;
+	float* dataFloat;
+	int* dataInt;
+	unsigned int* dataUint;
+	char* dataChar;
+	unsigned int size;
 };
 
 union EventData {
@@ -97,6 +106,7 @@ union EventData {
 	CursorPositionEventData mCursorPosition;
 	KeyboardEventData mKey;
 	MouseButtonEventData mMouseButton;
+	MouseScrollEventData mMouseScroll;
 	CharacterEventData mChar;
 	ResizeScreenEventData mResize;
 	TouchEventData mTouch;
@@ -117,6 +127,10 @@ union EventData {
 
 	operator MouseButtonEventData () const {
 		return mMouseButton;
+	}
+
+	operator MouseScrollEventData () const {
+		return mMouseScroll;
 	}
 
 	operator CharacterEventData () const {
@@ -141,7 +155,7 @@ union EventData {
 };
 
 /*!
- * \brief todo
+ * \brief Event
  */
 
 class Event {
@@ -149,7 +163,7 @@ class Event {
 	Event(eEventType type, EventData data)
 			: mType(type)
 			, mData(data) {
-
+    // nothing
 	}
 
 	eEventType getType() const {

@@ -48,28 +48,7 @@ class WallModel : public Model {
 int main(int argc, char* argv[]) {
   ContextGLFW mContext(argc, argv);
 
-  auto scene = std::make_unique<Scene>();
-  auto camera = std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
-                                                    glm::quat(),
-                                                    glm::radians(90.0),
-                                                    1.0,
-                                                    0.1,
-                                                    1000.0);
-  camera->moveTo(glm::vec3(0.0, 0.0, 7.0));
-
-  scene->setCamera(std::move(camera));
-
-  /* Lights */
   ContextGLFW::mGraphics->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
-
-  for (GLint i = 0; i < 5; i++) {
-    const auto t = 1.0f + static_cast<float>(i) * 0.5f;
-    scene->attachNew<CubeModel>(i, t);
-  }
-
-  scene->attachNew<WallModel>();
-
-  ContextGLFW::mGraphics->setCurrentScene(std::move(scene));
 
   ContextGLFW::mGraphics->attachHandler([](const Event& event) {
     KeyboardEventData e = event.getData();
@@ -79,6 +58,24 @@ int main(int argc, char* argv[]) {
       ContextGLFW::mGraphics->configTime(1.0f);
     }
   }, flw::flf::eEventType::key);
+
+  auto camera = std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
+                                                    glm::quat(),
+                                                    glm::radians(90.0),
+                                                    1.0,
+                                                    0.1,
+                                                    1000.0);
+  camera->moveTo(glm::vec3(0.0, 0.0, 7.0));
+
+  auto scene = std::make_unique<Scene>();
+  for (GLint i = 0; i < 5; ++i) {
+    const auto t = 1.0f + static_cast<float>(i) * 0.5f;
+    scene->attachNew<CubeModel>(i, t);
+  }
+  scene->attachNew<WallModel>();
+  scene->setCamera(std::move(camera));
+
+  ContextGLFW::mGraphics->setCurrentScene(std::move(scene));
 
   mContext.render();
   exit(EXIT_SUCCESS);

@@ -269,7 +269,7 @@ inline void Model::initAnimations(const aiScene* scene) {
     fLogD("attached TimedBoneUpdateCallback to model");
     this->attachHandler(
       [this](const Event& event){
-        this->performAnimation(event.getData().mTime.mTimePassed);
+        this->performAnimation(event.getData().mTime.timePassed);
       }, eEventType::time);
   }
 }
