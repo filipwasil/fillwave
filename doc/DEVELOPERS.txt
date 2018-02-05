@@ -5,5 +5,5 @@ Main architect and designer: filipwasil
 
 Developers:
 
-revcorey
-darkenk
+qt editor - revcorey
+qt example - darkenk
