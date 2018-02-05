@@ -69,8 +69,6 @@ struct SnowEmiter : public EmiterPointGPU {
   }
 };
 
-
-
 int main(int argc, char* argv[]) {
   ContextGLFW mContext(argc, argv);
   ContextGLFW::mGraphics->attachHandler([](const Event& event) {

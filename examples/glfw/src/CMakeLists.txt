@@ -13,7 +13,6 @@ aux_source_directory (TerrainConstructors/ SOURCE_CONSTRUCTORS)
 
 set (SOURCE_FILES
     example_3_cursor_picking.cpp
-    PickableModel.cpp
     ContextGLFW.cpp
     ${SOURCE_CONSTRUCTORS})
 

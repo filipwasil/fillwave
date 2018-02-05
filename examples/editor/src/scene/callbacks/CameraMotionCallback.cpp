@@ -10,14 +10,13 @@ CameraMotionCallback::CameraMotionCallback(Engine* engine)
 }
 
 void CameraMotionCallback::perform(const Event &event) {
-	mTimePassed += event.getData().mTime.mTimePassed;
-	mEngine->getCurrentScene()->getCamera()->moveTo(calculateNewPosition(
-	         mTimePassed));
+	mTimePassed += event.getData().mTime.timePassed;
+	mEngine->getCurrentScene()->getCamera()->moveTo(calculateNewPosition(mTimePassed));
 }
 
 glm::vec3 CameraMotionCallback::calculateNewPosition(float time) {
 	return glm::vec3(15 * sin(time), 15.0, 15 * cos(time));
 }
 
-} /* framework */
-} /* fillwave */
+} /* flf */
+} /* flw */

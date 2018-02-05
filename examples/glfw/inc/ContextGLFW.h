@@ -25,9 +25,9 @@ public:
 
   virtual ~ContextGLFW();
 
-  void cursorShow();
+  static void cursorShow();
 
-  void cursorHide();
+  static void cursorHide();
 
   void render();
 
