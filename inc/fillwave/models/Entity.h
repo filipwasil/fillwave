@@ -58,13 +58,9 @@ public:
 
   ~Entity() override;
 
-  Entity &operator=(const Entity &) = default;
+  Entity& operator=(Entity &&);
 
-  Entity(const Entity &) = default;
-
-  Entity &operator=(Entity &&) = default;
-
-  Entity(Entity &&obj) = default;
+  Entity(Entity &&obj);
 
   /* Flags */
   bool isPSC();

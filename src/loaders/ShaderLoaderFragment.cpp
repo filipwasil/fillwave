@@ -33,7 +33,7 @@ namespace flw {
 namespace flf {
 
 ShaderLoaderFragment::ShaderLoaderFragment(GLuint renderTargets) : mRendertargets(renderTargets) {
-
+  // nothing
 }
 
 const std::string ShaderLoaderFragment::getSource() const {

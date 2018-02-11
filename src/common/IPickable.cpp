@@ -36,5 +36,19 @@ IPickable::IPickable()
   // nothing
 }
 
+IPickable::~IPickable() = default;
+
+IPickable& IPickable::operator=(const IPickable &) = default;
+
+IPickable::IPickable(const IPickable &obj) = default;
+
+bool IPickable::isPickable() {
+  return mFlagPickable;
+}
+
+glm::vec3 IPickable::getPickableColor() {
+  return mPickColor;
+}
+
 } /* flf */
 } /* flw */

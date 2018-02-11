@@ -50,6 +50,16 @@ ICamera::ICamera()
   updateView();
 }
 
+ICamera::~ICamera() = default;
+
+ICamera::ICamera(const ICamera&) = default;
+
+ICamera& ICamera::operator=(const ICamera&) = default;
+
+ICamera::ICamera (ICamera&&) = default;
+
+ICamera& ICamera::operator=(ICamera &&) = default;
+
 inline void ICamera::updateView() {
   updateMatrixCache();
 

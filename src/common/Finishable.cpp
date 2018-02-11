@@ -36,8 +36,14 @@ Finishable::Finishable(float timeToFinish)
     , mTimeToFinish(timeToFinish)
     , mTimePassed(0.0f)
     , mPercentageDone(0.0f) {
-
+  // nothing
 }
+
+Finishable::~Finishable() = default;
+
+Finishable::Finishable(const Finishable& arg) = default;
+
+Finishable& Finishable::operator= (const Finishable& postProcessingPass) = default;
 
 void Finishable::checkTime(float timePassed) {
   mTimePassed += timePassed;

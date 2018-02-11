@@ -1,10 +1,5 @@
 /*
- * IEmiterPoint.cpp
- *
- *  Created on: 16 Jun 2014
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.

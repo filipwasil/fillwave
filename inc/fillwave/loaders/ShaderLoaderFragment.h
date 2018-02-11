@@ -38,11 +38,9 @@ namespace flf {
  * \brief ShaderLoader to load fragment shader sources.
  */
 
-class ShaderLoaderFragment : public ShaderLoader {
+class ShaderLoaderFragment final : public ShaderLoader {
 public:
   ShaderLoaderFragment(GLuint renderTargets = 1);
-
-  virtual ~ShaderLoaderFragment() = default;
 
   const std::string getSource() const;
 

@@ -51,5 +51,7 @@ Texture3DRenderableDynamic::Texture3DRenderableDynamic(
   (void) mTimePassed;
 }
 
+Texture3DRenderableDynamic::~Texture3DRenderableDynamic() = default;
+
 } /* flc */
 } /* flw */

@@ -42,60 +42,9 @@ namespace flf {
 class Sphere : public Shape<flc::VertexBasic> {
 
 public:
-  Sphere(GLfloat radius, GLuint rings = 10, GLuint sectors = 10, glm::vec3 color = glm::vec3(0.0)) {
-    float const R = 1.f / (float) (rings - 1);
-    float const S = 1.f / (float) (sectors - 1);
-    float r;
-    float s;
+  Sphere(GLfloat radius, GLuint rings = 10, GLuint sectors = 10, glm::vec3 color = glm::vec3(0.0));
 
-    mVertices.resize(rings * sectors);
-
-    auto vb = mVertices.begin();
-
-    for (r = 0; r < rings; r++) {
-      for (s = 0; s < sectors; s++) {
-        float const y = sin(-F_PI_2 + F_PI * r * R);
-        float const x = cos(2 * F_PI * s * S) * sin(F_PI * r * R);
-        float const z = sin(2 * F_PI * s * S) * sin(F_PI * r * R);
-
-        (*vb).mTextureUV[0] = s * S;
-        (*vb).mTextureUV[1] = r * R;
-
-        (*vb).mPosition[0] = x * radius;
-        (*vb).mPosition[1] = y * radius;
-        (*vb).mPosition[2] = z * radius;
-        (*vb).mPosition[3] = 1.0;
-
-        (*vb).mNormal[0] = x;
-        (*vb).mNormal[1] = y;
-        (*vb).mNormal[2] = z;
-
-        (*vb).mColor[0] = color.x;
-        (*vb).mColor[1] = color.y;
-        (*vb).mColor[2] = color.z;
-        vb++;
-      }
-    }
-
-    mIndices.resize((rings - 1) * sectors * 6 - 1);
-    auto i = mIndices.begin();
-    for (r = 0; r < rings - 1; r++) {
-      for (s = 0; s < sectors; s++) {
-        if (static_cast<GLuint>(r) == rings - 1 || static_cast<GLuint>(s) == sectors - 1) {
-          break;
-        }
-
-        *i++ = static_cast<GLuint>(r * sectors + (s + 1));
-        *i++ = static_cast<GLuint>(r * sectors + s);
-        *i++ = static_cast<GLuint>((r + 1) * sectors + (s + 1));
-        *i++ = static_cast<GLuint>((r + 1) * sectors + s);
-        *i++ = static_cast<GLuint>((r + 1) * sectors + (s + 1));
-        *i++ = static_cast<GLuint>(r * sectors + s);
-      }
-    }
-  }
-
-  ~Sphere() = default;
+  ~Sphere() override;
 };
 
 } /* flf */

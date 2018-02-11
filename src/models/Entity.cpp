@@ -50,6 +50,10 @@ Entity::~Entity() {
   // nothing
 }
 
+Entity& Entity::operator=(Entity &&) = default;
+
+Entity::Entity(Entity&& ) = default;
+
 bool Entity::isAnimated() const {
   return false;
 }

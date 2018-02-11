@@ -45,8 +45,6 @@ class ProgramLoader : public ShaderLoader {
 public:
   ProgramLoader(Engine *engine);
 
-  virtual ~ProgramLoader() = default;
-
   flc::Program* getProgram(EProgram program, const std::string& filenamePrefixForShaders = "");
 
   flc::Program* getQuadCustomFragmentShader(const std::string &shaderPath);

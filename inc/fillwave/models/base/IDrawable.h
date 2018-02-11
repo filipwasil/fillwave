@@ -47,9 +47,17 @@ class ICamera;
 
 class IDrawable {
 public:
-  IDrawable() = default;
+  IDrawable();
 
-  virtual ~IDrawable() = default;
+  virtual ~IDrawable();
+
+  IDrawable &operator=(const IDrawable &);
+
+  IDrawable(const IDrawable &);
+
+  IDrawable &operator=(IDrawable &&);
+
+  IDrawable(IDrawable&& );
 
   virtual void draw(ICamera &camera) = 0;
 

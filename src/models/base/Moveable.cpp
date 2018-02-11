@@ -48,6 +48,16 @@ Moveable::Moveable(glm::vec3 translation, glm::quat rotation, unsigned int callb
   mTimeCallbacks.reserve(callbacksCount);
 }
 
+Moveable::~Moveable() = default;
+
+Moveable& Moveable::operator=(const Moveable&) = default;
+
+Moveable::Moveable(const Moveable&) = default;
+
+Moveable& Moveable::operator=(Moveable &&) = default;
+
+Moveable::Moveable (Moveable&&) = default;
+
 glm::vec3 Moveable::getTranslation() {
   return mTranslation;
 }

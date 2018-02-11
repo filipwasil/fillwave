@@ -42,16 +42,14 @@ namespace flf {
  * \brief Manager to handle TextureObject1D, TextureObject2D and TextureObject3D objects.
  */
 
-class TextureSystem {
+class TextureSystem final {
 public:
   TextureSystem(const std::string &rootPath);
 
-  virtual ~TextureSystem() = default;
-
   void checkExtensions();
 
-  flc::Texture2D *
-  get(const std::string &texturePath, ECompression = ECompression::eNone, EFlip flip = EFlip::eVertical);
+  flc::Texture2D* get(
+    const std::string &texturePath, ECompression = ECompression::eNone, EFlip flip = EFlip::vertical);
 
   flc::Texture3D *get(const std::string &posX,
       const std::string &negX,

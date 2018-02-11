@@ -33,12 +33,12 @@
 
 
 #include <fillwave/Fillwave.h>
-
+#include <fillwave/models/base/IReloadable.h>
 
 namespace flw {
 namespace flf {
 
-IReloadable::IReloadable(Engine *engine, flc::VertexArray *vao)
+IReloadable::IReloadable(Engine* engine, flc::VertexArray* vao)
     : mVAO(vao ? vao : engine->storeVAO(this))
     , mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)) {
   mSampler->bind();
@@ -46,6 +46,8 @@ IReloadable::IReloadable(Engine *engine, flc::VertexArray *vao)
   mSampler->setParameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   mSampler->setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 }
+
+IReloadable::~IReloadable() = default;
 
 void IReloadable::reload() {
   initBuffers();

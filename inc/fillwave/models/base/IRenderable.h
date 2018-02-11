@@ -42,13 +42,17 @@ class IRenderer;
 
 class IRenderable : public IDrawable {
 public:
-  IRenderable() = default;
+  IRenderable();
 
-  virtual ~IRenderable() = default;
+  virtual ~IRenderable();
 
-  virtual bool getRenderItem(RenderItem &item) = 0;
+  IRenderable &operator=(const IRenderable&);
 
-  virtual void updateRenderer(IRenderer &renderer) = 0;
+  IRenderable(const IRenderable&);
+
+  virtual bool getRenderItem(RenderItem& item) = 0;
+
+  virtual void updateRenderer(IRenderer& renderer) = 0;
 };
 
 } /* flf */

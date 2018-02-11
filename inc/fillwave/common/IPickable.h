@@ -41,19 +41,15 @@ class IPickable {
 public:
   IPickable();
 
-  virtual ~IPickable() = default;
+  virtual ~IPickable();
 
-  IPickable &operator=(IPickable &&) = default;
+  IPickable& operator=(const IPickable&);
 
-  IPickable(IPickable &&obj) = default;
+  IPickable(const IPickable&);
 
-  bool isPickable() {
-    return mFlagPickable;
-  }
+  bool isPickable();
 
-  glm::vec3 getPickableColor() {
-    return mPickColor;
-  }
+  glm::vec3 getPickableColor();
 
   virtual void pick(glm::vec3 color) = 0;
 

@@ -41,9 +41,9 @@ namespace flf {
 
 class IReloadable {
 public:
-  IReloadable(Engine *engine, flc::VertexArray * = nullptr);
+  IReloadable(Engine* engine, flc::VertexArray* = nullptr);
 
-  virtual ~IReloadable() = default;
+  virtual ~IReloadable();
 
   virtual void initBuffers() = 0;
 

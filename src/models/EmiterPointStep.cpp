@@ -51,8 +51,10 @@ EmiterPointStep::EmiterPointStep(Engine *engine,
                    texture,
                    glm::vec4(1.0, 1.0, 1.0, 0.0), // color
                    blendingSource, blendingDestination, GL_FALSE, 1.0) {
-
+  // nothing
 }
+
+EmiterPointStep::~EmiterPointStep() = default;
 
 } /* flf */
 } /* flw */

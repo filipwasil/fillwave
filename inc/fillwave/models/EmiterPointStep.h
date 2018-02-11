@@ -45,9 +45,9 @@ public:
       GLint howMany,
       GLenum blendingSource,
       GLenum blendingDestination,
-      flc::Texture *texture);
+      flc::Texture* texture);
 
-  virtual ~EmiterPointStep() = default;
+  ~EmiterPointStep() override;
 };
 
 } /* flf */

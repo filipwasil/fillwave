@@ -38,13 +38,21 @@ class Observable;
 
 class IObserver {
 public:
-  IObserver() = default;
+  IObserver();
 
-  virtual ~IObserver() = default;
+  virtual ~IObserver();
 
-  virtual void onDeath(Observable *observable) = 0;
+  IObserver(const IObserver& arg);
 
-  virtual void onChanged(Observable *observable) = 0;
+  IObserver& operator=(const IObserver&);
+
+  IObserver (IObserver&&);
+
+  IObserver& operator=(IObserver &&);
+
+  virtual void onDeath(Observable* observable) = 0;
+
+  virtual void onChanged(Observable* observable) = 0;
 };
 } /* flf */
 } /* flw */

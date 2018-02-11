@@ -36,10 +36,14 @@ namespace flf {
  */
 
 class ITreeNode {
-public:
-  ITreeNode() = default;
+ public:
+  ITreeNode();
 
-  virtual ~ITreeNode() = default;
+  virtual ~ITreeNode();
+
+  ITreeNode& operator=(const ITreeNode&);
+
+  ITreeNode(const ITreeNode&);
 
   virtual void onAttached(ITreeNode *parent) = 0;
 

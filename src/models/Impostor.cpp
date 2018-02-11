@@ -56,6 +56,8 @@ Impostor::Impostor(Engine *engine,
   mBlending.mDst = blendingDestination;
 }
 
+Impostor::~Impostor() = default;
+
 void Impostor::coreDraw() {
   if (mTexture) {
     mTexture->bind(FILLWAVE_DIFFUSE_UNIT);

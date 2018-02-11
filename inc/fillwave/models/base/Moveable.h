@@ -51,9 +51,15 @@ public:
   Moveable(
     glm::vec3 translation = glm::vec3(0.0), glm::quat r = glm::quat(1.0, 0.0, 0.0, 0.0), unsigned int callbacks = 1);
 
-  ~Moveable() override = default;
+  ~Moveable() override;
 
-  Moveable(const Moveable& arg) = default;
+  Moveable &operator=(const Moveable&);
+
+  Moveable(const Moveable&);
+
+  Moveable& operator= (Moveable &&);
+
+  Moveable (Moveable&&);
 
   void moveTo(glm::vec3 coordinates);
 

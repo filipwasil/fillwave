@@ -47,7 +47,7 @@ protected:
 public:
   LightSpot(flc::Texture2DRenderable* tex, glm::vec3 pos, glm::quat rot, glm::vec4 intensity, Moveable* observed = nullptr);
 
-  virtual ~LightSpot() = default;
+  ~LightSpot() override;
 
   flc::Texture2DRenderable* getShadowTexture();
 

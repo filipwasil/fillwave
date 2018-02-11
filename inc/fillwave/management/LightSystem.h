@@ -44,11 +44,9 @@ using CachePointLights = TManager<LightPoint, MAX_LIGHTS, flc::Texture3DRenderab
 /**
  * \brief Light system knows about all light related stuff.
  */
-class LightSystem {
+class LightSystem final {
 public:
   LightSystem();
-
-  virtual ~LightSystem() = default;
 
   CacheSpotLights mLightsSpot;
   CacheDirectionalLights mLightsDirectional;

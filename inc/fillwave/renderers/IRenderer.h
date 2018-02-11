@@ -54,11 +54,11 @@ class IRenderer {
  public:
   IRenderer() = default;
 
-  virtual ~IRenderer() = default;
+  virtual ~IRenderer();
 
-  virtual void update(IRenderable *renderable) = 0;
+  virtual void update(IRenderable* renderable) = 0;
 
-  virtual void draw(ICamera &camera) = 0;
+  virtual void draw(ICamera& camera) = 0;
 
   virtual void reset(GLuint width, GLuint height) = 0;
 

@@ -40,11 +40,11 @@ class Finishable {
 public:
   Finishable(float timeToFinish);
 
-  virtual ~Finishable() = default;
+  virtual ~Finishable();
 
-  Finishable(const Finishable& arg) = default;
+  Finishable(const Finishable& arg);
 
-  Finishable& operator= (const Finishable& postProcessingPass) = default;
+  Finishable& operator= (const Finishable& postProcessingPass);
 
   /*
    * checkTime

@@ -38,8 +38,7 @@ namespace flf {
  * \brief Loads shader sources.
  */
 
-class ShaderLoader {
-protected:
+struct ShaderLoader {
 /* Headers */
 #if defined(FILLWAVE_GLES_3_0)
   const std::string mGLVersion = "#version 300 es\n";
@@ -55,11 +54,6 @@ protected:
 
   const std::string mGLVaryingIn = "in";
   const std::string mGLVaryingOut = "out";
-
-public:
-  ShaderLoader() = default;
-
-  virtual ~ShaderLoader() = default;
 };
 
 } /* flf */

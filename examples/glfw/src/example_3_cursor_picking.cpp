@@ -1,50 +1,39 @@
-#include <example.h>
-#include <ContextGLFW.h>
-#include <fillwave/Log.h>
+#include "example_3_cursor_picking.h"
 
 using namespace flw;
 using namespace flw::flf;
 using namespace flw::flc;
 using namespace flw::flc;
 
-class PickableModel : public flw::flf::Model {
- public:
+PickableModel::PickableModel(std::string name,
+  flw::ps<flw::flf::Text> text,
+  flw::Engine* engine,
+  glm::vec3 initialPosition)
+  : flw::flf::Model(
+  engine
+  , ProgramLoader(engine).getProgram(EProgram::basic)
+  , "meshes/sphere.obj"
+  , "64_128_255.checkboard")
+  , mText(text)
+  , mPickedEffect(std::make_shared<flw::flf::BoostColor>(6.0f))
+  , mName(name) {
+  scaleTo(0.1);
+  moveBy(initialPosition);
+  ContextGLFW::mGraphics->getCurrentScene()->registerPickable(this);
+}
 
-  PickableModel(std::string name,
-    flw::ps<flw::flf::Text> text,
-    flw::Engine* engine,
-    glm::vec3 initialPosition)
-    : flw::flf::Model(
-      engine
-      , ProgramLoader(engine).getProgram(EProgram::basic)
-      , "meshes/sphere.obj"
-      , "64_128_255.checkboard")
-    , mText(text)
-    , mPickedEffect(std::make_shared<flw::flf::BoostColor>(6.0f))
-    , mName(name) {
-    scaleTo(0.1);
-    moveBy(initialPosition);
-    ContextGLFW::mGraphics->getCurrentScene()->registerPickable(this);
-  }
+PickableModel::~PickableModel() {
+  // nothing
+}
 
-  ~PickableModel() override {
-    // nothing
-  }
+void PickableModel::onPicked() {
+  mText->editString("Picked " + mName);
+  addEffect(mPickedEffect);
+}
 
-  void onPicked() override {
-    mText->editString("Picked " + mName);
-    addEffect(mPickedEffect);
-  }
-
-  void onUnpicked() override {
-    removeEffect(mPickedEffect);
-  }
-
- private:
-  flw::ps<flw::flf::Text> mText;
-  flw::ps<flw::flf::IEffect> mPickedEffect;
-  std::string mName;
-};
+void PickableModel::onUnpicked() {
+  removeEffect(mPickedEffect);
+}
 
 int main(int argc, char* argv[]) {
   ContextGLFW mContext(argc, argv);

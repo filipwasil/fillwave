@@ -37,12 +37,7 @@ namespace flf {
  * \brief Loads fonts fromttf files.
  */
 
-class FontLoader {
-public:
-  FontLoader() = default;
-
-  virtual ~FontLoader() = default;
-
+struct FontLoader {
   void load(std::string name);
 };
 

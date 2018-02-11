@@ -41,11 +41,17 @@ namespace flf {
 
 class Observable {
 public:
-  Observable() = default;
+  Observable();
 
   virtual ~Observable();
 
-  Observable(const Observable& arg) = default;
+  Observable(const Observable& arg);
+
+  Observable& operator=(const Observable&);
+
+  Observable (Observable&&);
+
+  Observable& operator=(Observable &&);
 
   void addObserver(IObserver* observer);
 

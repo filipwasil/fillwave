@@ -1,11 +1,6 @@
 #pragma once
 
 /*
- * BuilderEmiter.h
- *
- *  Created on: Apr 26, 2015
- *      Author: Filip Wasil
- *
  * Copyright (c) 2016, Filip Wasil
  * All rights reserved.
  *
@@ -45,9 +40,7 @@ namespace flf {
 
 class BuilderEmiter {
 public:
-  BuilderEmiter(Engine *engine);
-
-  virtual ~BuilderEmiter() = default;
+  BuilderEmiter(Engine* engine);
 
   BuilderEmiter &setEmitingSourceRate(GLfloat emitingSourceRate);
 

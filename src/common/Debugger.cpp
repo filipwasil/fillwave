@@ -70,6 +70,8 @@ Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
   initUniformsCache();
 }
 
+Debugger::~Debugger() = default;
+
 void Debugger::setState(EDebuggerState state) {
   if (state == EDebuggerState::eToggleState) {
     switch (mState) {

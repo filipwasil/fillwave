@@ -40,18 +40,20 @@ FLOGINIT("Spotlight", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-LightSpot::LightSpot(flc::Texture2DRenderable *shadowTexture,
+LightSpot::LightSpot(flc::Texture2DRenderable* shadowTexture,
     glm::vec3 position,
     glm::quat rotation,
     glm::vec4 intensity,
-    Moveable *followed)
+    Moveable* followed)
     : Light(position
     , intensity
     , followed)
     , mShadowTexture(shadowTexture)
-    , mShadowCamera(std::make_unique<CameraPerspective>(position, rotation, glm::radians(90.0f), 1.0f, //xxx fix
-                                                        0.1f, 1000.0f)) {
+    , mShadowCamera(std::make_unique<CameraPerspective>(position, rotation, glm::radians(90.0f), 1.0f, 0.1f, 1000.0f)) {
+  // nothing
 }
+
+LightSpot::~LightSpot() = default;
 
 flc::Texture2DRenderable *LightSpot::getShadowTexture() {
   return mShadowTexture;

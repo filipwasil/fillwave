@@ -41,6 +41,8 @@ using namespace std;
 namespace flw {
 namespace flf {
 
+TextureLoader::TextureLoader() = default;
+
 flc::TextureConfig* TextureLoader::load(const std::string &filePath,
     EFlip flip,
     GLenum format,
@@ -269,7 +271,7 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
 
   fLogD("Flipping Texture", filePath, " ...");
   switch (flip) {
-    case EFlip::eVertical:
+    case EFlip::vertical:
 #pragma omp parallel for schedule(guided) num_threads(2)
       for (int row = 0; row < h / 2; ++row) {
         for (int column = 0; column < w; ++column) {
@@ -286,7 +288,7 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
       }
       break;
 
-    case EFlip::eHorizontal_vertical:
+    case EFlip::horizontalVertical:
 #pragma omp parallel for schedule(guided) num_threads(2)
       for (int row = 0; row < h; ++row) {
         for (int column = 0; column < w / 2; ++column) {
@@ -303,7 +305,7 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
       }
       break;
 
-    case EFlip::eHorizontal:
+    case EFlip::horizontal:
 #pragma omp parallel for schedule(guided) num_threads(2)
       for (int row = 0; row < h; ++row) {
         for (int column = 0; column < w / 2; ++column) {
@@ -334,7 +336,7 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
       }
       break;
 
-    case EFlip::eNone:
+    case EFlip::none:
       break;
   }
   return cfg;

@@ -40,12 +40,19 @@ FLOGINIT("DirectionalLight", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-LightDirectional::LightDirectional(flc::Texture2DRenderable* tex, glm::vec3 pos, glm::quat rot, glm::vec4 intensity, Moveable* observed)
-    : Light(pos, intensity, observed)
-    , mShadowTexture(tex)
-    , mShadowCamera(std::make_unique<CameraOrthographic>(pos, rot, -10.0f, 10.0f, 10.0f, -10.0f, 0.1f, 1000.0f)) {
+LightDirectional::LightDirectional(
+  flc::Texture2DRenderable* tex,
+  glm::vec3 pos,
+  glm::quat rot,
+  glm::vec4 intensity,
+  Moveable* observed)
+  : Light(pos, intensity, observed)
+  , mShadowTexture(tex)
+  , mShadowCamera(std::make_unique<CameraOrthographic>(pos, rot, -10.0f, 10.0f, 10.0f, -10.0f, 0.1f, 1000.0f)) {
   //  nothing
 }
+
+LightDirectional::~LightDirectional() = default;
 
 CameraOrthographic* LightDirectional::getShadowCamera() {
   return mShadowCamera.get();

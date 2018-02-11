@@ -44,11 +44,11 @@ template <class T>
 class Shape {
 public:
   Shape() {
-
+    // nothing
   }
 
   virtual ~Shape() {
-
+    // nothing
   }
 
   std::vector<T> getVertices() {

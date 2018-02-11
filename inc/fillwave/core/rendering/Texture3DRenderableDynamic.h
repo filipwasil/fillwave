@@ -51,7 +51,7 @@ public:
       , Texture2DRenderable* tex
       , Program* prog);
 
-  virtual ~Texture3DRenderableDynamic() = default;
+  ~Texture3DRenderableDynamic() override;
 
 private:
   Program* mProgram;

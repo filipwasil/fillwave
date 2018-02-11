@@ -47,7 +47,7 @@ class LightPoint : public Light {
 public:
   LightPoint(flc::Texture3DRenderable* tex, glm::vec3 pos, glm::vec4 intensity, Moveable* observed = nullptr);
 
-  virtual ~LightPoint() = default;
+  ~LightPoint() override;
 
   flc::Texture3DRenderable* getShadowTexture();
 

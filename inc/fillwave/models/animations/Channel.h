@@ -42,7 +42,7 @@ namespace flf {
 /*! \class Channel
  * \brief wrapper to assimp aiNodeAnim*
  */
-class Channel {
+class Channel final {
 public:
   std::string mAffectedNodeName;
 
@@ -51,8 +51,6 @@ public:
   std::vector<Key<glm::vec3> > mKeysScaling;
 
   Channel(aiNodeAnim* assimpChannel);
-
-  virtual ~Channel() = default;
 };
 
 } /* flf */

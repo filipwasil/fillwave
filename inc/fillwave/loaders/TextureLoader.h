@@ -36,10 +36,10 @@ namespace flw {
 namespace flf {
 
 enum class EFlip {
-  eNone
-  , eHorizontal
-  , eVertical
-  , eHorizontal_vertical
+  none
+  , horizontal
+  , vertical
+  , horizontalVertical
   , };
 
 // generic formats
@@ -94,12 +94,10 @@ enum class ECompression {
 
 class TextureLoader {
 public:
-  TextureLoader() = default;
-
-  virtual ~TextureLoader() = default;
+  TextureLoader();
 
   flc::TextureConfig* load(const std::string &filePath,
-      EFlip flip = EFlip::eNone,
+      EFlip flip = EFlip::none,
       GLenum format = GL_RGBA,
       std::string rootPath = "",
       ECompression compression = ECompression::eNone,

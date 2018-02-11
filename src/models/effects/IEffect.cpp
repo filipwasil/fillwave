@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 * Copyright (c) 2017, Fillwave developers
 * All rights reserved.
@@ -28,45 +26,14 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/models/Entity.h>
 #include <fillwave/models/effects/IEffect.h>
 
 namespace flw {
 namespace flf {
 
-/*! \class Programmable
- * \brief Entity for which is it possible to add/remove Effect objects.
- */
+IEffect::IEffect() = default;
 
-class Programmable : public Entity {
-public:
-  Programmable(flc::Program *program);
-
-  ~Programmable() override;
-
-  Programmable& operator=(const Programmable &);
-
-  Programmable(const Programmable &);
-
-  Programmable& operator=(Programmable &&);
-
-  Programmable(Programmable&& obj);
-
-  void addEffect(ps<IEffect> effect);
-
-  void removeEffect(ps<IEffect> effect);
-
-  void drawWithEffects(ICamera& camera);
-
-  void drawWithEffectsDR(ICamera& camera);
-
-  void drawWithEffectsPBRP(ICamera& camera);
-
-protected:
-  flc::Program* mProgram;
-
-  std::vector<ps<IEffect>> mEffects;
-};
+IEffect::~IEffect() = default;
 
 } /* flf */
 } /* flw */

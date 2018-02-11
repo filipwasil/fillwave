@@ -71,6 +71,7 @@ aux_source_directory ("src/loaders" FILLWAVE_LOADERS_SOURCES)
 aux_source_directory ("src/management" FILLWAVE_MANAGEMENT_SOURCES)
 aux_source_directory ("src/common" FILLWAVE_COMMON_SOURCES)
 aux_source_directory ("src/renderers" FILLWAVE_RENDERERS_SOURCES)
+aux_source_directory ("src/models/shapes" FILLWAVE_SHAPES_SOURCES)
 
 set (FILLWAVE_SOURCES
     ${FILLWAVE_ROOT_SOURCES}
@@ -95,6 +96,7 @@ set (FILLWAVE_SOURCES
     ${FILLWAVE_RENDERERS_SOURCES}
     ${FILLWAVE_HUD_SOURCES}
     ${FILLWAVE_MODEL_LOADER_SOURCES}
+    ${FILLWAVE_SHAPES_SOURCES}
     )
 
 # -----------------------------------------------

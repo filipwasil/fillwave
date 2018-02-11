@@ -65,7 +65,7 @@ class Camera;
 class Debugger : public IReloadable {
 public:
   Debugger(Engine *engine, GLsizei howManyDebugWindows = 6);
-  virtual ~Debugger() = default;
+  ~Debugger() override;
 
   /* State */
   void setState(EDebuggerState state);
@@ -99,15 +99,15 @@ private:
 
   GLint mULCTextureUnit, mULCNearPlane, mULCFarPlane;
 
-  void initBuffers();
+  void initBuffers() override;
 
-  void initPipeline();
+  void initPipeline() override;
 
-  void initVBO();
+  void initVBO() override;
 
-  void initVAO();
+  void initVAO() override;
 
-  void initUniformsCache();
+  void initUniformsCache() override;
 };
 
 } /* flf */

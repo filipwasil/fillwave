@@ -50,9 +50,10 @@ struct LightDirectioData {
  */
 class LightDirectional : public Light {
 public:
-  LightDirectional(flc::Texture2DRenderable* tex, glm::vec3 pos, glm::quat rot, glm::vec4 intensity, Moveable* observed = nullptr);
+  LightDirectional(
+    flc::Texture2DRenderable* tex, glm::vec3 pos, glm::quat rot, glm::vec4 intensity, Moveable* observed = nullptr);
 
-  virtual ~LightDirectional() = default;
+  ~LightDirectional() override;
 
   flc::Texture2DRenderable* getShadowTexture();
 

@@ -37,11 +37,9 @@ namespace flf {
  * \brief ShaderLoader to load vertex shader sources.
  */
 
-class ShaderLoaderVertex : public ShaderLoader {
+class ShaderLoaderVertex final : public ShaderLoader {
 public:
   ShaderLoaderVertex(bool animated = false);
-
-  virtual ~ShaderLoaderVertex() = default;
 
   const std::string getSource() const;
 

@@ -55,7 +55,7 @@ public:
 
   ConditionalRender(GLenum mode);
 
-  virtual ~ConditionalRender() = default;
+  virtual ~ConditionalRender();
 
   void begin(GLuint querryID) const;
 

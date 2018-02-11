@@ -28,7 +28,7 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/models/effects/Effect.h>
+#include <fillwave/models/effects/IEffect.h>
 
 namespace flw {
 namespace flf {

@@ -45,6 +45,12 @@ Programmable::Programmable(flc::Program* program)
   // nothing
 }
 
+Programmable::~Programmable() = default;
+
+Programmable& Programmable::operator=(Programmable &&) = default;
+
+Programmable::Programmable(Programmable&& obj) = default;
+
 void Programmable::drawWithEffects(ICamera& camera) {
 
   flc::Program* p = mProgram;

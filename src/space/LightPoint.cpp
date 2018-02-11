@@ -97,5 +97,7 @@ void LightPoint::updateShadowCamera() {
   }
 }
 
+LightPoint::~LightPoint() = default;
+
 } /* flf */
 } /* flw */

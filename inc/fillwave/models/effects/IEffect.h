@@ -39,37 +39,37 @@ namespace flf {
 
 class IEffect {
 public:
-  IEffect() = default;
+  IEffect();
 
-  virtual ~IEffect() = default;
+  virtual ~IEffect();
 
   /*!
    * preDrawAction
    * \brief virtual: defines action to be done just before the draw.
    */
 
-  virtual void preDrawAction(flc::Program *program) = 0;
+  virtual void preDrawAction(flc::Program* program) = 0;
 
   /*!
    * postDrawAction
    * \brief virtual: defines action to be done just after the draw.
    */
 
-  virtual void postDrawAction(flc::Program *program) = 0;
+  virtual void postDrawAction(flc::Program* program) = 0;
 
   /*!
    * stopAction
    * \brief virtual: defines action to be done when the effect is stopped.
    */
 
-  virtual void stopAction(flc::Program *program) = 0;
+  virtual void stopAction(flc::Program* program) = 0;
 
   /*!
    * startAction
    * \brief virtual: defines action to be done when the effect is started.
    */
 
-  virtual void startAction(flc::Program *program) = 0;
+  virtual void startAction(flc::Program* program) = 0;
 };
 
 } /* flf */

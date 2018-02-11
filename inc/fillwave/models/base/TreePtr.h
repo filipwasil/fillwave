@@ -54,13 +54,13 @@ public:
 
   virtual ~TreePtr() = default;
 
-  TreePtr &operator=(const TreePtr &) = default;
+  TreePtr &operator=(const TreePtr &) = delete;
 
-  TreePtr(const TreePtr &) = default;
+  TreePtr(const TreePtr &) = delete;
 
   TreePtr &operator=(TreePtr &&) = default;
 
-  TreePtr(TreePtr &&obj) = default;
+  TreePtr(TreePtr&& ) = default;
 
   void attach(std::unique_ptr<T>&& node) {
     if (node.get() == this) {

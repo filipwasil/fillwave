@@ -31,7 +31,6 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-
 #include <fillwave/models/builders/BuilderEmiter.h>
 #include <fillwave/models/EmiterPointCPU.h>
 #include <fillwave/models/EmiterPointGPU.h>

@@ -39,6 +39,8 @@ ConditionalRender::ConditionalRender(GLenum mode)
   // nothing
 }
 
+ConditionalRender::~ConditionalRender() = default;
+
 void ConditionalRender::begin(GLuint querryID) const {
   glBeginConditionalRender(querryID, mMode);
 }
