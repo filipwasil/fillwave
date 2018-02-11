@@ -42,9 +42,9 @@ PostProcessingPass::PostProcessingPass(flc::Program *program,
 
 PostProcessingPass::~PostProcessingPass() = default;
 
-PostProcessingPass::PostProcessingPass(const PostProcessingPass& arg) = default;
+PostProcessingPass::PostProcessingPass(const PostProcessingPass&) = default;
 
-PostProcessingPass& PostProcessingPass::operator= (const PostProcessingPass& postProcessingPass) = default;
+PostProcessingPass& PostProcessingPass::operator= (const PostProcessingPass&) = default;
 
 flc::Texture2DRenderableDynamic* PostProcessingPass::getFrame() const {
   return mFrame;
