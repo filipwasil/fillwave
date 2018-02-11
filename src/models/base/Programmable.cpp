@@ -49,7 +49,7 @@ Programmable::~Programmable() = default;
 
 Programmable& Programmable::operator=(Programmable &&) = default;
 
-Programmable::Programmable(Programmable&& obj) = default;
+Programmable::Programmable(Programmable&&) = default;
 
 void Programmable::drawWithEffects(ICamera& camera) {
 
