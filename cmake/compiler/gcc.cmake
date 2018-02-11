@@ -26,30 +26,14 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wundef")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wunsafe-loop-optimizations")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wvector-operation-performance")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wzero-as-null-pointer-constant")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-format-extra-args")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-cast-align") # todo stb android gcc
-
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unknown-pragmas")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-float-equal")  # todo assimp
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-old-style-cast")   # todo assimp
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-zero-as-null-pointer-constant")# todo assimp
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-include-dirs") # general
+# STB library warnings
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion") #stb
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-old-style-cast")   # stb, assimp
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-zero-as-null-pointer-constant")# stb assimp
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-cast-qual")# stb
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-declarations") # stb
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")  # build Functions
-#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-overloaded-virtual")   # we do want to hide them in some cases
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-format")   # details of logging mechanism
-
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wno-strict-overflow") # stb
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wno-unsafe-loop-optimizations") # stb
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wno-unused-variable") # GCC ERROR !! False positive
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -Wno-unused-but-set-variable") # GCC ERROR !! False positive
-
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-unused-variable") # GCC ERROR !! False positive
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wno-unused-but-set-variable") # GCC ERROR !! False positive
 
 # OpenMP
 add_definitions ("-fopenmp")

@@ -45,7 +45,8 @@ public:
   Sphere(GLfloat radius, GLuint rings = 10, GLuint sectors = 10, glm::vec3 color = glm::vec3(0.0)) {
     float const R = 1.f / (float) (rings - 1);
     float const S = 1.f / (float) (sectors - 1);
-    float r, s;
+    float r;
+    float s;
 
     mVertices.resize(rings * sectors);
 
@@ -80,7 +81,7 @@ public:
     auto i = mIndices.begin();
     for (r = 0; r < rings - 1; r++) {
       for (s = 0; s < sectors; s++) {
-        if (r == rings - 1 || s == sectors - 1) {
+        if (static_cast<GLuint>(r) == rings - 1 || static_cast<GLuint>(s) == sectors - 1) {
           break;
         }
 

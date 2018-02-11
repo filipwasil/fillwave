@@ -47,8 +47,7 @@ public:
   FramebufferGeometry(flf::TextureSystem &textures,
       GLuint width,
       GLuint height,
-      GLuint colorBuffers,
-      GLuint depthBuffers);
+      GLuint colorBuffers);
 
   virtual ~FramebufferGeometry() = default;
 
@@ -76,10 +75,8 @@ private:
 
   const GLint mColorBufferSize;
   const GLint mSummaryBufferSize;
-  const GLint mDepthStencilBufferSize;
 
   const GLenum mSummaryBuffer;
-  const GLenum mNone;
 };
 
 } /* flc */

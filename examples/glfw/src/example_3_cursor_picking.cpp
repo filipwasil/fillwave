@@ -7,8 +7,6 @@ using namespace flw::flf;
 using namespace flw::flc;
 using namespace flw::flc;
 
-FLOGINIT_DEFAULT()
-
 class PickableModel : public flw::flf::Model {
  public:
 

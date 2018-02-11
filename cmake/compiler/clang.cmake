@@ -34,12 +34,16 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-covered-switch-default") # todo as
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-undef")   # todo glm
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-undefined-reinterpret-cast")   # todo glm
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-shadow-field-in-constructor")   # todo glm
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-comma")   # stb
+
 
 # possible to fix
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-comma")   # todo font generator
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-float-equal")   # todo CallbackLoop.cpp
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-prototypes")# todo general
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field")# todo general
+#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-float-equal")   # todo CallbackLoop.cpp
+#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-prototypes")# todo general
+#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field")# todo general
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-nested-anon-types")# todo general
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")# todo general
+#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")# todo general
+
+# TQuery
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-undefined-func-template")# todo general
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-weak-template-vtables")# todo general

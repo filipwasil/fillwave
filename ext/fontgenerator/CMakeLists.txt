@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 2.8.8)
 
-include_directories(${FILLWAVE_EXT_FREETYPE2_INCLUDES} ${FILLWAVE_TEXTURE_WRITER_INCLUDES})
+include_directories(
+   ${FILLWAVE_EXT_FREETYPE2_INCLUDES}
+   ${FILLWAVE_TEXTURE_WRITER_INCLUDES}
+)
 
 add_library(fontgenerator STATIC fontGenerator.cpp)
 

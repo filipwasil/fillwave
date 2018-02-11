@@ -252,7 +252,7 @@ VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
     glm::vec2 deltaUV1(mDataVertices[jIdx].mTextureUV[0] - mDataVertices[iIdx].mTextureUV[0],
                        mDataVertices[jIdx].mTextureUV[1] - mDataVertices[iIdx].mTextureUV[1]);
 
-    glm::vec3 tangent = deltaPosition / ( deltaUV1.s != 0 ? deltaUV1.s : 1.0f );
+    glm::vec3 tangent = deltaPosition / ( deltaUV1.s != 0.0f ? deltaUV1.s : 1.0f );
     tangent = glm::normalize(tangent - glm::dot(normal, tangent) * normal);
 
     tangents[iIdx] += tangent;

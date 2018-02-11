@@ -26,7 +26,6 @@ include_directories (${PROJECT_INCLUDES})
 include_directories (${FILLWAVE_PATH_EXT_INCLUDE})
 include_directories (${FILLWAVE_PATH_INCLUDE})
 include_directories (${CMAKE_SOURCE_DIR}/inc)
-include_directories (${CMAKE_SOURCE_DIR}/test/inc)
 
 # -----------------------------------------------
 # ANDROID
@@ -70,7 +69,6 @@ endif (WIN32 OR FILLWAVE_BUILD_PACK)
 # -----------------------------------------------
 
 if(UNIX)
-    add_dependencies (${PROGRAM} pthread glfw fillwave)
     target_link_libraries (${PROGRAM} pthread glfw fillwave)
     if (ANDROID)
     else()
