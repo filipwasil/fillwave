@@ -781,7 +781,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
       mDebugger->renderPickingMap();
       break;
     case EDebuggerState::eOff:
-    default:
+    case EDebuggerState::eToggleState:
       break;
   }
 }

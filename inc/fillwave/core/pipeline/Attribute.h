@@ -46,8 +46,6 @@ class Attribute final {
 public:
   Attribute(std::string name, GLuint index, GLint size, GLsizei stride, GLenum type, GLboolean normalized = GL_FALSE);
 
-  ~Attribute() = default;
-
   void bindLocation(GLint programHandle);
 
   void arrayDisable();

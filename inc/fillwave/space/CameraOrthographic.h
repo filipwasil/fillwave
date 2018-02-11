@@ -38,7 +38,12 @@ namespace flf {
  */
 
 struct CullingBox {
-  GLfloat mProjectionLeft, mProjectionRight, mProjectionBottom, mProjectionTop, mProjectionNear, mProjectionFar;
+  GLfloat mProjectionLeft;
+  GLfloat mProjectionRight;
+  GLfloat mProjectionBottom;
+  GLfloat mProjectionTop;
+  GLfloat mProjectionNear;
+  GLfloat mProjectionFar;
 };
 
 /*! \class CameraOrthographic
@@ -58,17 +63,20 @@ public:
       GLfloat near,
       GLfloat far);
 
-  virtual ~CameraOrthographic() = default;
+  ~CameraOrthographic() override = default;
 
-  void updateProjection();
+  CameraOrthographic(const CameraOrthographic& camera) = default;
 
-  GLfloat getProjectionNearPlane();
+  CameraOrthographic& operator= (const CameraOrthographic& camera) = default;
 
-  GLfloat getProjectionFarPlane();
+  void updateProjection() override;
+
+  GLfloat getProjectionNearPlane() override;
+
+  GLfloat getProjectionFarPlane() override;
 
 private:
   CullingBox mCullingBox;
-
 };
 
 } /* flf */

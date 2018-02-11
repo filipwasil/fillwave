@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-* Copyright (c) 2017, Fillwave developers
+* Copyright (c) 2018, Fillwave developers
 * All rights reserved.
 *
 * Fillwave C++14 graphics engine.
@@ -38,15 +38,13 @@ namespace flf {
  * \brief Per mesh material info.
  */
 
-class Material {
+class Material final {
 public:
   Material();
 
-  virtual ~Material() = default;
-
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-  Material(const aiMaterial *material);
+  Material(const aiMaterial* material);
 
 #else
   Material(const tinyobj::material_t& material);

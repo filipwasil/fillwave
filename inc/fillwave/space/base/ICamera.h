@@ -44,7 +44,9 @@ public:
 
   ICamera(glm::vec3, glm::quat rotation);
 
-  virtual ~ICamera() = default;
+  virtual ~ICamera() override = default;
+
+  ICamera(const ICamera& arg) = default;
 
   void update();
 

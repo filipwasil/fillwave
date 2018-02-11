@@ -49,6 +49,8 @@ public:
     }
   }
 
+  Observable(const Observable& arg) = default;
+
   void addObserver(IObserver* observer) {
     if (nullptr == observer) {
       return;

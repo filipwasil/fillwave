@@ -43,7 +43,11 @@ class PostProcessingPass : public flf::Finishable {
 public:
   PostProcessingPass(flc::Program* p, flc::Texture2DRenderableDynamic* t, GLfloat lifetime);
 
-  virtual ~PostProcessingPass() = default;
+  ~PostProcessingPass() override = default;
+
+  PostProcessingPass(const PostProcessingPass& arg) = default;
+
+  PostProcessingPass& operator= (const PostProcessingPass& postProcessingPass) = default;
 
   flc::Texture2DRenderableDynamic* getFrame() const;
 

@@ -42,6 +42,10 @@ public:
 
   virtual ~Finishable() = default;
 
+  Finishable(const Finishable& arg) = default;
+
+  Finishable& operator= (const Finishable& postProcessingPass) = default;
+
   /*
    * checkTime
    * \brief checks if the lifetime time elapsed

@@ -71,8 +71,6 @@ class Uniform final {
 public:
   Uniform(const std::string& name, GLuint type, GLsizei size, GLint location);
 
-  ~Uniform() = default;
-
   bool isName(const std::string &name) const;
 
   GLuint getType() const;
@@ -156,5 +154,4 @@ private:
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::Uniform> puUniform;
 } /* flw */

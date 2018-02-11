@@ -35,17 +35,15 @@ namespace flf {
  * \brief Base for all animation keys.
  */
 
-template <class T>
-class Key {
-public:
-  float mTime;
-  T mValue;
-
-  Key(float timeStamp, T value)
-      : mTime(timeStamp), mValue(value) {
+template <class TValue>
+struct Key final {
+  Key(float timeStamp, TValue value)
+    : mTime(timeStamp)
+    , mValue(value) {
   }
 
-  virtual ~Key() = default;
+  float mTime;
+  TValue mValue;
 };
 
 } /* flf */

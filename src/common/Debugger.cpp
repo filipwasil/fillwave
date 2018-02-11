@@ -97,7 +97,7 @@ void Debugger::setState(EDebuggerState state) {
       case EDebuggerState::eOff:
         mState = EDebuggerState::eLightsSpot;
         break;
-      default:
+      case EDebuggerState::eToggleState:
         break;
     }
   } else {

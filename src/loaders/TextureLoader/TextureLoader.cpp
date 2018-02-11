@@ -515,8 +515,6 @@ inline GLenum TextureLoader::getCompression(ECompression compression) {
     case ECompression::eS3tc_dxt5_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
 #endif /* __APPLE__ */
-    default:
-      break;
   }
 #endif /* FILLWAVE_GLES_3_0 */
   return GL_NONE;

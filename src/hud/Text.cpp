@@ -34,21 +34,21 @@ namespace flw {
 namespace flf {
 
 Text::Text(const std::string &text,
-    flc::Texture2D *texture,
-    glm::vec2 position,
-    Engine *engine,
-    GLfloat scale,
-    Font *font,
-    glm::vec4 color,
-    ETextEffect effect)
-    : IReloadable(engine)
-    , Sprite(texture, createProgram(engine, effect), position, glm::vec2(scale, scale))
-    , mText(text)
-    , mColor(color)
-    , mFont(font)
-    , mEngine(engine)
-    , mViewportWidth(engine->getScreenSize()[0])
-    , mViewportHeight(engine->getScreenSize()[1]) {
+  flc::Texture2D *texture,
+  glm::vec2 position,
+  Engine *engine,
+  GLfloat scale,
+  Font *font,
+  glm::vec4 color,
+  ETextEffect effect)
+  : IReloadable(engine)
+  , Sprite(texture, createProgram(engine, effect), position, glm::vec2(scale, scale))
+  , mText(text)
+  , mColor(color)
+  , mFont(font)
+  , mEngine(engine)
+  , mViewportWidth(engine->getScreenSize()[0])
+  , mViewportHeight(engine->getScreenSize()[1]) {
 
   initPipeline();
   createVBO();
@@ -174,14 +174,14 @@ void Text::createVBO() {
   initVAO();
 }
 
-inline flc::Program *Text::createProgram(Engine *engine, ETextEffect effect) {
+inline flc::Program* Text::createProgram(Engine *engine, ETextEffect effect) {
   switch (effect) {
     case ETextEffect::eBold:
       return ProgramLoader(engine).getProgram(EProgram::textBold);
     case ETextEffect::eNone:
-    default:
       return ProgramLoader(engine).getProgram(EProgram::text);
   }
+  return nullptr;
 }
 
 inline void Text::initBuffers() {

@@ -39,7 +39,10 @@ namespace flf {
 
 class CameraPerspective : public ICamera {
 private:
-  GLfloat mProjectionFovy, mProjectionAspectRatio, mProjectionNearPlane, mProjectionFarPlane;
+  GLfloat mProjectionFovy;
+  GLfloat mProjectionAspectRatio;
+  GLfloat mProjectionNearPlane;
+  GLfloat mProjectionFarPlane;
 
 public:
   CameraPerspective();
@@ -51,15 +54,15 @@ public:
       GLfloat nearPlane = 0.01f,
       GLfloat farPlane = 100.0f);
 
-  virtual ~CameraPerspective() = default;
-
   GLfloat getProjectionFovy();
 
   GLfloat getProjectionAspectRatio();
 
-  GLfloat getProjectionNearPlane();
+  GLfloat getProjectionNearPlane() override;
 
-  GLfloat getProjectionFarPlane();
+  GLfloat getProjectionFarPlane() override;
+
+  void updateProjection() override;
 
   void setProjectionFovy(GLfloat fovy);
 
@@ -68,8 +71,6 @@ public:
   void setProjectionNearPlane(GLfloat nearPlane);
 
   void setProjectionFarPlane(GLfloat farPlane);
-
-  void updateProjection();
 };
 } /* flf */
 } /* flw */
