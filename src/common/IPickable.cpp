@@ -40,7 +40,7 @@ IPickable::~IPickable() = default;
 
 IPickable& IPickable::operator=(const IPickable &) = default;
 
-IPickable::IPickable(const IPickable &obj) = default;
+IPickable::IPickable(const IPickable &) = default;
 
 bool IPickable::isPickable() {
   return mFlagPickable;

@@ -41,7 +41,7 @@ IDrawable::IDrawable(const IDrawable &) = default;
 
 IDrawable& IDrawable::operator=(IDrawable &&) = default;
 
-IDrawable::IDrawable(IDrawable&& ) = default;
+IDrawable::IDrawable(IDrawable &&) = default;
 
 } /* flf */
 } /* flw */

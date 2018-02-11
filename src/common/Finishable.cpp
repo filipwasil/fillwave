@@ -41,7 +41,7 @@ Finishable::Finishable(float timeToFinish)
 
 Finishable::~Finishable() = default;
 
-Finishable::Finishable(const Finishable& arg) = default;
+Finishable::Finishable(const Finishable&) = default;
 
 Finishable& Finishable::operator= (const Finishable& postProcessingPass) = default;
 
