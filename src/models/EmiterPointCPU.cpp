@@ -1,10 +1,5 @@
 /*
- * EmiterPointCPU.cpp
- *
- *  Created on: Sep 10, 2014
- *      Author: filip
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -43,32 +38,35 @@ namespace flw {
 namespace flf {
 
 EmiterPointCPU::EmiterPointCPU(Engine *engine,
-    GLfloat /*emitingSourceRate*/, // todo not used for now
-    GLuint howMany,
-    glm::vec4 color,
-    glm::vec3 acceleration,
-    glm::vec3 startVelocity,
-    glm::vec3 robustnessVelocity,
-    glm::vec3 startPosition,
-    glm::vec3 robustnessPosition,
-    GLfloat startSize,
-    GLfloat lifetime,
-    flc::Texture *texture,
-    GLenum blendingSource,
-    GLenum blendingDestination,
-    GLboolean depthTesting,
-    GLfloat alphaCutOffLevel)
-    : IEmiterPoint(engine,
-                   howMany,
-                   startSize,
-                   lifetime,
-                   texture,
-                   color,
-                   blendingSource,
-                   blendingDestination,
-                   depthTesting,
-                   alphaCutOffLevel), mAcceleration(acceleration), mStartVelocity(startVelocity), mStartPosition(
-    startPosition) {
+  GLfloat /*emitingSourceRate*/,
+  GLuint howMany,
+  glm::vec4 color,
+  glm::vec3 acceleration,
+  glm::vec3 startVelocity,
+  glm::vec3 robustnessVelocity,
+  glm::vec3 startPosition,
+  glm::vec3 robustnessPosition,
+  GLfloat startSize,
+  GLfloat lifetime,
+  flc::Texture *texture,
+  GLenum blendingSource,
+  GLenum blendingDestination,
+  GLboolean depthTesting,
+  GLfloat alphaCutOffLevel)
+  : IEmiterPoint(engine,
+                 howMany,
+                 startSize,
+                 lifetime,
+                 texture,
+                 color,
+                 blendingSource,
+                 blendingDestination,
+                 depthTesting,
+                 alphaCutOffLevel)
+  , mAcceleration(acceleration)
+  , mStartVelocity(startVelocity)
+  , mStartPosition(
+  startPosition) {
 
   ProgramLoader loader(engine);
 

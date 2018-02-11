@@ -36,8 +36,7 @@ namespace flc {
 
 ProgramPipeline::ProgramPipeline(GLbitfield stage, GLsizei howMany)
     : GLObject(howMany)
-    , mStage(stage)
-    , mTarget(GL_TRANSFORM_FEEDBACK) {
+    , mStage(stage) {
   glGenProgramPipelines(mHowMany, mHandles);
 }
 

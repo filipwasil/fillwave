@@ -53,7 +53,6 @@ public:
 
 private:
   GLbitfield mStage;
-  GLuint mTarget;
 };
 
 } /* flc */

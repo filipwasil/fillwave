@@ -45,6 +45,10 @@ Texture3DRenderableDynamic::Texture3DRenderableDynamic(
     , mProgram(prog)
     , mTimePassed(0.0f) {
   setAttachment(GL_COLOR_ATTACHMENT0);
+  assert("todo feature not ready");
+  (void) mProgram;
+  (void) mTarget;
+  (void) mTimePassed;
 }
 
 } /* flc */

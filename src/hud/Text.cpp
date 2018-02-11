@@ -45,7 +45,6 @@ Text::Text(const std::string &text,
     , Sprite(texture, createProgram(engine, effect), position, glm::vec2(scale, scale))
     , mText(text)
     , mColor(color)
-    , mEffect(effect)
     , mFont(font)
     , mEngine(engine)
     , mViewportWidth(engine->getScreenSize()[0])

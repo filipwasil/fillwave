@@ -44,9 +44,8 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-RendererCSPBRP::RendererCSPBRP(LightManager *lightManager)
-    : mLightManager(lightManager) {
-
+RendererCSPBRP::RendererCSPBRP(LightSystem* lightManager) : mLights(lightManager) {
+  assert("Feature not ready");
 }
 
 void RendererCSPBRP::update(IRenderable *renderable) {
@@ -71,8 +70,9 @@ void RendererCSPBRP::draw(ICamera &camera) {
   glClear(GL_DEPTH_BUFFER_BIT);
   for (auto &program : mRenderPasses) {
     flc::Program::useProgram(program.first);
-// 	Light manager supports only Fillwave programs
-//		mLightManager->pushLightUniforms(mProgram.get());
+    (void) mLights;
+// 	Light system supports only Fillwave programs
+//    mLights->pushLightUniforms(program.first);
 //		mLightManager->bindShadowmaps();
     for (auto &container : program.second) {
       // Evaluate animations

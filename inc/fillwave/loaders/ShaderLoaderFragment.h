@@ -47,11 +47,6 @@ public:
   const std::string getSource() const;
 
 private:
-  GLboolean mFog;
-  GLboolean mColor;
-  GLboolean mColorBoost;
-  GLboolean mTextureOnly;
-  GLboolean mPointLights;
   GLuint mRendertargets;
 };
 

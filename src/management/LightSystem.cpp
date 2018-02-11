@@ -71,7 +71,7 @@ void LightSystem::updateLightEntities() {
   }
 }
 
-void LightSystem::pushLightUniforms(flc::Program *program) {
+void LightSystem::pushLightUniforms(flc::Program* program) {
 
   /* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT */
 

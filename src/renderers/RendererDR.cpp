@@ -63,12 +63,10 @@ RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
     , mAOColorBuffer(engine->storeTextureRenderable())
     , mIsAO(GL_FALSE)
     , mDeferredColorAttachments(5)
-    , mDeferredDepthAttachments(1)
     , mGBuffer(std::make_unique<flc::FramebufferGeometry>(mTextures,
                                                           mScreenSize[0],
                                                           mScreenSize[1],
-                                                          mDeferredColorAttachments,
-                                                          mDeferredDepthAttachments)) {
+                                                          mDeferredColorAttachments)) {
   //todo RendererDR not ready
   flf::Sphere sphere(3.0f, 10, 10); //xxx hardcoded values fix ! todo !
   auto vertices = sphere.getVertices();

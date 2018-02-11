@@ -143,7 +143,6 @@ private:
   GLboolean mIsAO;
 
   const GLuint mDeferredColorAttachments;
-  const GLuint mDeferredDepthAttachments;
 
   puFramebufferGeometry mGBuffer;
 

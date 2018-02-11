@@ -76,7 +76,6 @@ public:
 
 private:
   LightSystem &mLights;
-  GLfloat mChunkWidth;
   GLfloat mJumpStep;
 
   void distanceCheck(ICamera &camera);

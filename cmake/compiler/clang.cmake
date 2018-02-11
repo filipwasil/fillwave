@@ -38,7 +38,6 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-comma")   # stb
 
 
 # possible to fix
-#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-float-equal")   # todo CallbackLoop.cpp
 #set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-prototypes")# todo general
 #set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field")# todo general
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-nested-anon-types")# todo general
@@ -47,3 +46,6 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-nested-anon-types")# todo general
 # TQuery
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-undefined-func-template")# todo general
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-weak-template-vtables")# todo general
+
+# external libraries
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-float-equal")   # todo 3d noise generation

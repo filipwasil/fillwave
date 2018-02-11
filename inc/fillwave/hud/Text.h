@@ -79,16 +79,16 @@ private:
   /* Text */
   std::string mText;
   glm::vec4 mColor;
-  ETextEffect mEffect;
-  Font *mFont;
-  flc::VertexBufferText *mVBO;
+  Font* mFont;
+  flc::VertexBufferText* mVBO;
 
   /* IHUD */
-  Engine *mEngine;
-  GLint mUniformLocationCacheColor, mUniformLocationCacheTextureUnit;
-  GLint mViewportWidth, mViewportHeight;
+  Engine* mEngine;
+  GLint mUniformLocationCacheColor;
+  GLint mViewportWidth;
+  GLint mViewportHeight;
 
-  flc::Program *createProgram(Engine *engine, ETextEffect effect);
+  flc::Program* createProgram(Engine* engine, ETextEffect effect);
 
   void createVBO();
 

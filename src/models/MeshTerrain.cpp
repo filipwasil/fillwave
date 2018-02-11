@@ -41,20 +41,19 @@
 namespace flw {
 namespace flf {
 
-//xxx code duplication in constructors. fix
+// todo code duplication in constructors
 MeshTerrain::MeshTerrain(Engine *engine,
-    flc::Program *program,
-    TerrainConstructor *constructor,
-    const Material & /*material*/, //xxx to be used
-    const std::string &diffuseMapPath,
-    const std::string &normalMapPath,
-    const std::string &specularMapPath,
-    GLuint radius,
-    GLuint density)
-    : Programmable(program)
-    , mLights(engine->getLightSystem())
-    , mChunkWidth(radius * 0.2f * 16.0f / density)
-    , mJumpStep(density * 0.2f * 16.0f / density) {
+  flc::Program *program,
+  TerrainConstructor *constructor,
+  const Material & /*material*/, //xxx to be used
+  const std::string &diffuseMapPath,
+  const std::string &normalMapPath,
+  const std::string &specularMapPath,
+  GLuint radius,
+  GLuint density)
+  : Programmable(program)
+  , mLights(engine->getLightSystem())
+  , mJumpStep(density * 0.2f * 16.0f / density) {
 
   std::vector<GLuint> indices;
 
@@ -103,15 +102,14 @@ MeshTerrain::MeshTerrain(Engine *engine,
 MeshTerrain::MeshTerrain(Engine *engine,
     flc::Program *program,
     TerrainConstructor *constructor,
-    const Material & /*material*/, //xxx to be used
-    flc::Texture2D *diffuseMap,
-    flc::Texture2D *normalMap,
-    flc::Texture2D *specularMap,
+    const Material& /*material*/, //xxx to be used
+    flc::Texture2D* diffuseMap,
+    flc::Texture2D* normalMap,
+    flc::Texture2D* specularMap,
     GLuint radius,
     GLuint density)
     : Programmable(program)
     , mLights(engine->getLightSystem())
-    , mChunkWidth(radius * 0.2f * 16.0f / density)
     , mJumpStep(density * 0.2f * 16.0f / density) {
 
   std::vector<GLuint> indices;

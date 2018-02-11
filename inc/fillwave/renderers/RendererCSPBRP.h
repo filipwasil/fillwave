@@ -36,7 +36,7 @@
 namespace flw {
 namespace flf {
 
-class LightManager;
+class LightSystem;
 
 /*! \class RendererCSPBRP
  * \brief Cache Safe Program Based Render Pass IRenderer. Not ready (Rev.4.2.1).
@@ -44,7 +44,7 @@ class LightManager;
 
 class RendererCSPBRP : public IRenderer {
 public:
-  RendererCSPBRP(LightManager *lightManager);
+  RendererCSPBRP(LightSystem* lightManager);
 
   ~RendererCSPBRP() override = default;
 
@@ -58,7 +58,7 @@ public:
 
 private:
   std::unordered_map<GLuint, std::vector<std::vector<RenderItem>>> mRenderPasses;
-  LightManager* mLightManager;
+  LightSystem* mLights;
 };
 
 } /* flf */

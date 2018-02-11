@@ -81,7 +81,16 @@ private:
 
   /* ULC - Uniform location cache */
   flc::VertexBufferParticles *mVBO;
-  GLint mULCModelMatrix, mULCTextureUnit, mULCViewProjectionMatrix, mULCCameraPosition, mULCPointSize, mULCColor, mULCAcceleration, mULCLifeTime, mULCAlphaCutOff, mULCSourcePosition, mULCTimeElapsed;
+  GLint mULCModelMatrix;
+  GLint mULCTextureUnit;
+  GLint mULCViewProjectionMatrix;
+  GLint mULCCameraPosition;
+  GLint mULCPointSize;
+  GLint mULCColor;
+  GLint mULCAcceleration;
+  GLint mULCLifeTime;
+  GLint mULCAlphaCutOff;
+  GLint mULCTimeElapsed;
 
   void initBuffers() override;
 

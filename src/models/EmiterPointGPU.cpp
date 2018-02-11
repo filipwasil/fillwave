@@ -1,10 +1,5 @@
 /*
- * EmiterPointGPU.cpp
- *
- *  Created on: 22 Apr 2015
- *      Author: Filip Wasil
- *
- * Copyright (c) 2017, Fillwave developers
+ * Copyright (c) 2018, Fillwave developers
  * All rights reserved.
  *
  * Fillwave C++14 graphics engine.
@@ -47,33 +42,38 @@ namespace flw {
 namespace flf {
 
 EmiterPointGPU::EmiterPointGPU(Engine *engine,
-    GLfloat emitingSourceRate,
-    GLuint howMany,
-    glm::vec4 color,
-    glm::vec3 acceleration,
-    glm::vec3 startVelocity,
-    glm::vec3 /*robustnessVelocity*/, // xxx this is not used for now
-    glm::vec3 startPosition,
-    glm::vec3 robustnessPosition,
-    GLfloat startSize,
-    GLfloat lifetime,
-    flc::Texture *texture,
-    GLenum blendingSource,
-    GLenum blendingDestination,
-    GLboolean depthTesting,
-    GLfloat alphaCutOffLevel)
-    : IEmiterPoint(engine,
-                   howMany,
-                   startSize,
-                   lifetime,
-                   texture,
-                   color,
-                   blendingSource,
-                   blendingDestination,
-                   depthTesting,
-                   alphaCutOffLevel), mSrcIndex(0), mNoiseTextureHandle(0), mEmmisingSourceRate(emitingSourceRate)
-    , mAcceleration(acceleration), mStartVelocity(startVelocity), mRobustnessVelocity(robustnessPosition)
-    , mStartPosition(startPosition), mRobustnessPosition(robustnessPosition), mTimeDeltaEmiter(0.0) {
+  GLfloat emitingSourceRate,
+  GLuint howMany,
+  glm::vec4 color,
+  glm::vec3 acceleration,
+  glm::vec3 startVelocity,
+  glm::vec3 robustnessVelocity,
+  glm::vec3 startPosition,
+  glm::vec3 robustnessPosition,
+  GLfloat startSize,
+  GLfloat lifetime,
+  flc::Texture *texture,
+  GLenum blendingSource,
+  GLenum blendingDestination,
+  GLboolean depthTesting,
+  GLfloat alphaCutOffLevel)
+  : IEmiterPoint(engine,
+                 howMany,
+                 startSize,
+                 lifetime,
+                 texture,
+                 color,
+                 blendingSource,
+                 blendingDestination,
+                 depthTesting,
+                 alphaCutOffLevel)
+  , mSrcIndex(0)
+  , mNoiseTextureHandle(0)
+  , mEmmisingSourceRate(emitingSourceRate)
+  , mAcceleration(acceleration)
+  , mStartVelocity(startVelocity)
+  , mRobustnessVelocity(robustnessVelocity)
+  , mStartPosition(startPosition), mRobustnessPosition(robustnessPosition), mTimeDeltaEmiter(0.0) {
 
   ProgramLoader loader(engine);
 
