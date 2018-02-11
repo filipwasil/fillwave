@@ -41,6 +41,7 @@ namespace flf {
 
 Scene::Scene(IRenderer* renderer)
     : mRenderer(renderer)
+    , mLastPicked(nullptr)
     , mAmbientGlobal(glm::vec3(1.0)) {
 }
 
