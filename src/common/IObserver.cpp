@@ -35,13 +35,13 @@ IObserver::IObserver() = default;
 
 IObserver::~IObserver() = default;
 
-IObserver::IObserver(const IObserver& arg) = default;
+IObserver::IObserver(const IObserver &) = default;
 
-IObserver& IObserver::operator=(const IObserver&) = default;
+IObserver& IObserver::operator=(const IObserver &) = default;
 
-IObserver& IObserver::operator=(IObserver&&) = default;
+IObserver& IObserver::operator=(IObserver &&) = default;
 
-IObserver::IObserver(IObserver&&) = default;
+IObserver::IObserver(IObserver &&) = default;
 
 } /* flf */
 } /* flw */

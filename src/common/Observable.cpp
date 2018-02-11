@@ -41,13 +41,13 @@ Observable::~Observable() {
   }
 }
 
-Observable::Observable(const Observable& arg) = default;
+Observable::Observable(const Observable &) = default;
 
-Observable& Observable::operator=(const Observable&) = default;
+Observable& Observable::operator=(const Observable &) = default;
 
-Observable& Observable::operator=(Observable&&) = default;
+Observable& Observable::operator=(Observable &&) = default;
 
-Observable::Observable (Observable&&) = default;
+Observable::Observable (Observable &&) = default;
 
 void Observable::addObserver(IObserver* observer) {
   if (nullptr == observer) {
