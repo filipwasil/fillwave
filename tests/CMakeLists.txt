@@ -1,5 +1,6 @@
 set (FILLWAVE_PRODUCTION_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/../src/common/Strings.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../src/common/Observable.cpp
     )
 
 aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/framework TEST_FRAMEWORK_SOURCES)

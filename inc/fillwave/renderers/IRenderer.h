@@ -51,11 +51,8 @@ class Skybox;
  */
 
 class IRenderer {
-public:
-  IRenderer()
-      : mFlagReload(true), mSkybox(nullptr) {
-
-  }
+ public:
+  IRenderer() = default;
 
   virtual ~IRenderer() = default;
 
@@ -67,8 +64,8 @@ public:
 
   virtual void clear() = 0;
 
-  bool mFlagReload;
-  Skybox *mSkybox;
+  bool mFlagReload = true;
+  Skybox* mSkybox = nullptr;
   GLfloat mAmbientGlobal[3];
 };
 

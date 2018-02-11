@@ -793,7 +793,7 @@ const std::string fsDR = gGLVersion + "in vec4 vVertexWorldSpace;\n"
                              "   fNormal = vertexNormal;\n"
                              "}\n\n";
 
-std::string vsDRShaderQuad = gGLVersion + "void main() {\n"
+const std::string vsDRShaderQuad = gGLVersion + "void main() {\n"
     "   vec4 vertexPosition;\n"
     "   switch(gl_VertexID) {\n"
     "      case 0:\n"
@@ -813,7 +813,7 @@ std::string vsDRShaderQuad = gGLVersion + "void main() {\n"
     "   gl_Position = vertexPosition;\n"
     "}\n";
 
-std::string vsDRLightDirectional = gGLVersion + gGLVSAttributesPosition +
+const std::string vsDRLightDirectional = gGLVersion + gGLVSAttributesPosition +
 
                                    "uniform mat4 uMVP;\n"
 
@@ -821,7 +821,7 @@ std::string vsDRLightDirectional = gGLVersion + gGLVSAttributesPosition +
                                        "   gl_Position = uMVP * aPosition;\n"
                                        "}\n";
 
-std::string fsDRLightDirectional = gGLVersion + gGLFragmentPrecision + gGLLightDefinitions +
+const std::string fsDRLightDirectional = gGLVersion + gGLFragmentPrecision + gGLLightDefinitions +
 
                                    "uniform int uIsAO;\n"
                                        "uniform sampler2D uAOMap;\n"
@@ -896,9 +896,9 @@ std::string fsDRLightDirectional = gGLVersion + gGLFragmentPrecision + gGLLightD
     "   fColor = vec4(Color, 1.0) * CalcDirectionalLight(WorldPos, Normal, specularTexel);\n"
     "}\n";
 
-std::string vsDRLightPoint = gGLVersion + gGLVSAttributes + vsSimpleVertexPass;
+const std::string vsDRLightPoint = gGLVersion + gGLVSAttributes + vsSimpleVertexPass;
 
-std::string fsDRLightPoint = gGLVersion + gGLFragmentPrecision + gGLLightDefinitions +
+const std::string fsDRLightPoint = gGLVersion + gGLFragmentPrecision + gGLLightDefinitions +
 
                              "uniform int uIsAO;\n"
                                  "uniform sampler2D uAOMap;\n"
@@ -980,7 +980,7 @@ std::string fsDRLightPoint = gGLVersion + gGLFragmentPrecision + gGLLightDefinit
     "   fColor = vec4(Color, 1.0) * CalcPointLight(WorldPos, Normal, specularTexel);\n"
     "}\n";
 
-std::string fsDRLightSpot = gGLVersion + gGLFragmentPrecision + gGLLightDefinitions +
+const std::string fsDRLightSpot = gGLVersion + gGLFragmentPrecision + gGLLightDefinitions +
 
                             "uniform sampler2D uShadowMap;\n"
 
@@ -1080,7 +1080,7 @@ std::string fsDRLightSpot = gGLVersion + gGLFragmentPrecision + gGLLightDefiniti
     "   fColor = vec4(Color, 1.0) * CalcSpotLight(WorldPos, Normal, specularTexel);\n"
     "}\n";
 
-std::string fsDRDepthless = gGLVersion + gGLFragmentPrecision + +"uniform sampler2D uDiffuseTexelAttachment;\n"
+const std::string fsDRDepthless = gGLVersion + gGLFragmentPrecision + +"uniform sampler2D uDiffuseTexelAttachment;\n"
     "uniform sampler2D uWorldPositionAttachment;\n"
     "uniform vec2 uScreenSize;\n"
     "vec2 CalcTexCoord() {\n"
@@ -1097,7 +1097,7 @@ std::string fsDRDepthless = gGLVersion + gGLFragmentPrecision + +"uniform sample
                                 "   }\n"
                                 "}\n";
 
-std::string fsDRAmbient = gGLVersion + gGLFragmentPrecision + +"uniform sampler2D uDiffuseTexelAttachment;\n"
+const std::string fsDRAmbient = gGLVersion + gGLFragmentPrecision + +"uniform sampler2D uDiffuseTexelAttachment;\n"
     "uniform vec2 uScreenSize;\n"
     "vec2 CalcTexCoord() {\n"
     "    return gl_FragCoord.xy / uScreenSize;\n"

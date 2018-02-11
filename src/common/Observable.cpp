@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 * Copyright (c) 2018, Fillwave developers
 * All rights reserved.
@@ -28,34 +26,40 @@
 *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include <fillwave/common/IObserver.h>
+#include <fillwave/common/Observable.h>
 #include <vector>
 #include <algorithm>
 
 namespace flw {
 namespace flf {
 
-/*! \class Observable
-* \brief Implementation of Observable pattern.
-*/
+Observable::~Observable() {
+  for (auto &it : mObservers) {
+    it->onDeath(this);
+  }
+}
 
-class Observable {
-public:
-  Observable() = default;
+void Observable::addObserver(IObserver* observer) {
+  if (nullptr == observer) {
+    return;
+  }
+  for (auto &it : mObservers) {
+    if (it == observer) {
+      return;
+    }
+  }
+  mObservers.push_back(observer);
+}
 
-  virtual ~Observable();
+void Observable::dropObserver(IObserver* observer) {
+  mObservers.erase(std::remove(mObservers.begin(), mObservers.end(), observer), mObservers.end());
+}
 
-  Observable(const Observable& arg) = default;
-
-  void addObserver(IObserver* observer);
-
-  void dropObserver(IObserver* observer);
-
-  void notifyObservers();
-
-protected:
-  std::vector<IObserver*> mObservers;
-};
+void Observable::notifyObservers() {
+  for (auto &it : mObservers) {
+    it->onChanged(this);
+  }
+}
 
 } /* flf */
 } /* flw */
