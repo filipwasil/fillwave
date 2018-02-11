@@ -62,6 +62,21 @@ std::string getNotIndexableName(std::string structName, int index) {
   return structName + strIndex;
 }
 
+std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+  std::stringstream ss(s);
+  std::string item;
+  while (std::getline(ss, item, delim)) {
+    elems.push_back(item);
+  }
+  return elems;
+}
+
+std::vector<std::string> split(const std::string &s, char delim) {
+  std::vector<std::string> elems;
+  split(s, delim, elems);
+  return elems;
+}
+
 std::string getFilePathOnly(const char *path) {
   if (std::string(path).find(FILLWAVE_OS_SEPRATOR) != std::string::npos) {
     return std::string(path).substr(0, std::string(path).find_last_of(FILLWAVE_OS_SEPRATOR));
