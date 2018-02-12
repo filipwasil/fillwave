@@ -1,9 +1,0 @@
-The license file states that product is designed by "Fillwave developers".
-What we mean by that is
-
-Main architect and designer: filipwasil
-
-Developers:
-
-qt editor - revcorey
-qt example - darkenk

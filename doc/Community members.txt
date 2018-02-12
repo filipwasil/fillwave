@@ -1,0 +1,6 @@
+Main architect and designer: Filip Wasil
+
+Developers:
+
+qt editor - revcorey
+qt example - darkenk
