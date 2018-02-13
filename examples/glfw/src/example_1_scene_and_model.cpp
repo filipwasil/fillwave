@@ -44,9 +44,22 @@ void init() {
                                                     0.1,
                                                     1000.0);
 
+  auto skybox = std::make_unique<Skybox>(
+    ContextGLFW::mGraphics
+    , ContextGLFW::mGraphics->storeTexture3D(
+      "textures/skybox/emerald/emerald_right.jpg"
+      , "textures/skybox/emerald/emerald_left.jpg"
+      , "textures/skybox/emerald/emerald_top.jpg"
+      , ""
+      , "textures/skybox/emerald/emerald_front.jpg"
+      , "textures/skybox/emerald/emerald_back.jpg")
+  );
+
   scene->attachNew<TestModel>();
 
   scene->setCamera(std::move(camera));
+
+  scene->setSkybox(std::move(skybox));
 
   ContextGLFW::mGraphics->setCurrentScene(std::move(scene));
 }

@@ -5,6 +5,8 @@ CubeModel::CubeModel(int i, float t)
   ContextGLFW::mGraphics
   , flw::flf::ProgramLoader(ContextGLFW::mGraphics).getProgram(flw::flf::EProgram::basic)
   , "meshes/cubemap.obj"
+  , "textures/test.png"
+  , "textures/test.png"
   , "textures/test.png") {
 
   scaleTo(0.005);
@@ -51,13 +53,20 @@ int main(int argc, char* argv[]) {
     }
   }, flw::flf::EEventType::key);
 
+  ContextGLFW::mGraphics->attachHandler([](const flw::flf::Event& event) {
+    flw::flf::KeyboardEventData e = event.getData();
+    if (GLFW_KEY_D == e.key && e.action == GLFW_RELEASE) {
+      ContextGLFW::mGraphics->configDebugger(flw::EDebuggerState::toggleState);
+    }
+  }, flw::flf::EEventType::key);
+
   auto camera = std::make_unique<flw::flf::CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
                                                     glm::quat(),
                                                     glm::radians(90.0),
                                                     1.0,
                                                     0.1,
                                                     1000.0);
-  camera->moveTo(glm::vec3(0.0, 0.0, 7.0));
+  camera->moveTo(glm::vec3(0.0, 0.0, 8.0));
 
   auto scene = std::make_unique<flw::flf::Scene>();
   for (GLint i = 0; i < 5; ++i) {
