@@ -20,6 +20,7 @@
  */
 
 #include <fillwave/core/GLObject.h>
+
 #include <fillwave/Log.h>
 
 FLOGINIT_DEFAULT()
@@ -29,7 +30,7 @@ namespace flc {
 
 GLObject::GLObject(GLsizei howMany)
     : mHowMany(howMany) {
-  if (mHowMany > MAX_ELEMENTS) {
+  if (mHowMany > FILLWAVE_GLOBJECTS_MAX) {
     fLogF("Currect globject size exceeded");
   }
 
@@ -38,12 +39,10 @@ GLObject::GLObject(GLsizei howMany)
   }
 }
 
-GLObject::~GLObject() {
-
-}
+GLObject::~GLObject() = default;
 
 GLuint GLObject::getHandle(GLuint id) {
-  return id < MAX_ELEMENTS ? mHandles[id] : 0;
+  return id < FILLWAVE_GLOBJECTS_MAX ? mHandles[id] : 0;
 }
 
 } /* flc */

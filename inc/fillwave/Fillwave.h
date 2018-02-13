@@ -21,14 +21,14 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "fillwave/space/Scene.h"
+#include <fillwave/space/Scene.h>
 
-#include "fillwave/space/LightPoint.h"
-#include "fillwave/space/LightSpot.h"
-#include "fillwave/space/LightDirectional.h"
-#include "fillwave/hud/Text.h"
+#include <fillwave/space/LightPoint.h>
+#include <fillwave/space/LightSpot.h>
+#include <fillwave/space/LightDirectional.h>
+#include <fillwave/hud/Text.h>
 
-#include "fillwave/common/TGetter.h"
+#include <fillwave/common/TGetter.h>
 
 /* Debugger */
 #include "fillwave/Debugger.h"
@@ -135,18 +135,19 @@ public:
   flc::Program* storeProgram(const std::string &name, const std::vector<flc::Shader *> &shaders, bool isSkipLinking = false);
 
   /* Store textures */
-  flc::Texture2D *storeTexture(const std::string &path, flf::ECompression com = flf::ECompression::eNone);
+  flc::Texture2D* storeTexture(const std::string &path, flf::ECompression com = flf::ECompression::none);
 
-  flc::Texture2DRenderable *storeTextureRenderable();
+  flc::Texture2DRenderable* storeTextureRenderable();
 
-  flc::Texture2DRenderableDynamic *storeTextureDynamic(const std::string &fragmentShaderPath);
+  flc::Texture2DRenderableDynamic* storeTextureDynamic(const std::string &fragmentShaderPath);
 
-  flc::Texture3D *storeTexture3D(const std::string &posX,
-      const std::string &negX,
-      const std::string &posY,
-      const std::string &negY,
-      const std::string &posZ,
-      const std::string &negZ);
+  flc::Texture3D* storeTexture3D(
+    const std::string &posX
+    , const std::string &negX
+    , const std::string &posY
+    , const std::string &negY
+    , const std::string &posZ
+    , const std::string &negZ);
 
   /* Store lights */
   flf::LightSpot *storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable *followed = nullptr);
@@ -162,7 +163,7 @@ public:
       glm::vec2 position,
       GLfloat scale = 1.0f,
       glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
-      ETextEffect effect = ETextEffect::eNone);
+      ETextEffect effect = ETextEffect::none);
 
   /* Store sampler */
   flc::Sampler *storeSO(GLint textureUnit);

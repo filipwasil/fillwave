@@ -190,7 +190,7 @@ ps<flf::Text> Engine::storeText(const string& content,
   if (!mImpl->mTextures->get(fontName + ".png")) {
     mImpl->mFontLoader.load(mImpl->mFileLoader.getRootPath() + fontName);
   }
-  Texture2D* t = mImpl->mTextures->get(fontName + ".png", flf::ECompression::eNone, flf::EFlip::vertical);
+  Texture2D* t = mImpl->mTextures->get(fontName + ".png", flf::ECompression::none, flf::EFlip::vertical);
 
   Font* font = nullptr;
   for (auto &it : mImpl->mFontManager) {

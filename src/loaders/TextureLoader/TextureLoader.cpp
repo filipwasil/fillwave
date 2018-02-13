@@ -249,7 +249,7 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
 
   cfg->mHeader.mCubeTarget = cubeTarget;
 
-  if (compression == ECompression::eNone) {
+  if (compression == ECompression::none) {
     cfg->mContent.mCompression = GL_FALSE;
     cfg->mHeader.mInternalFormat = format;
   } else {
@@ -263,7 +263,7 @@ flc::TextureConfig* TextureLoader::load(const std::string &filePath,
 
   cfg->mData = content;
 
-  cfg->mAllocation = flc::EMemoryAllocation::eMallock;
+  cfg->mAllocation = flc::EMemoryAllocation::cstyle;
 
   fLogD("Flipping Texture", filePath, " ...");
   switch (flip) {
@@ -355,7 +355,7 @@ flc::TextureConfig* TextureLoader::loadEmpty(GLint screenWidth, GLint screenHeig
 
   cfg->mData = nullptr;
 
-  cfg->mAllocation = flc::EMemoryAllocation::eNone;
+  cfg->mAllocation = flc::EMemoryAllocation::none;
 
   return cfg;
 }
@@ -403,7 +403,7 @@ flc::TextureConfig* TextureLoader::loadVirtualFileCheckboard(GLuint width,
 
   cfg->mData = content;
 
-  cfg->mAllocation = flc::EMemoryAllocation::eNew;
+  cfg->mAllocation = flc::EMemoryAllocation::standard;
 
   return cfg;
 }
@@ -439,7 +439,7 @@ flc::TextureConfig *TextureLoader::loadVirtualFileColor(GLuint width,
 
   cfg->mData = content;
 
-  cfg->mAllocation = flc::EMemoryAllocation::eNew;
+  cfg->mAllocation = flc::EMemoryAllocation::standard;
 
   return cfg;
 }
@@ -472,45 +472,45 @@ inline GLenum TextureLoader::getCompression(ECompression compression) {
   (void)compression;
 #else
   switch (compression) {
-    case ECompression::eNone:
+    case ECompression::none:
       return GL_NONE;
-    case ECompression::eGeneric_r:
+    case ECompression::generic_r:
       return GL_COMPRESSED_RED;
-    case ECompression::eGeneric_rg:
+    case ECompression::generic_rg:
       return GL_COMPRESSED_RG;
-    case ECompression::eGeneric_rgb:
+    case ECompression::generic_rgb:
       return GL_COMPRESSED_RGB;
-    case ECompression::eGeneric_rgba:
+    case ECompression::generic_rgba:
       return GL_COMPRESSED_RGBA;
-    case ECompression::eGeneric_srgb:
+    case ECompression::generic_srgb:
       return GL_COMPRESSED_SRGB;
-    case ECompression::eGeneric_srgba:
+    case ECompression::generic_srgba:
       return GL_COMPRESSED_SRGB_ALPHA;
 #if defined(__APPLE__)
 #else
-    case ECompression::eLatc_luminance:
+    case ECompression::latc_luminance:
       return GL_COMPRESSED_LUMINANCE_LATC1_EXT;
-    case ECompression::eLatc_luminance_signed:
+    case ECompression::latc_luminance_signed:
       return GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT;
-    case ECompression::eLatc_luminance_alpha:
+    case ECompression::latc_luminance_alpha:
       return GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT;
-    case ECompression::eLatc_luminance_alpha_signed:
+    case ECompression::latc_luminance_alpha_signed:
       return GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_EXT;
-    case ECompression::eRgtc1_r:
+    case ECompression::rgtc1_r:
       return GL_COMPRESSED_RED_RGTC1_EXT;
-    case ECompression::eRgtc1_r_signed:
+    case ECompression::rgtc1_r_signed:
       return GL_COMPRESSED_SIGNED_RED_RGTC1_EXT;
-    case ECompression::eRgtc1_rg:
+    case ECompression::rgtc1_rg:
       return GL_COMPRESSED_RED_GREEN_RGTC2_EXT;
-    case ECompression::eRgtc1_rg_signed:
+    case ECompression::rgtc1_rg_signed:
       return GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT;
-    case ECompression::eS3tc_dxt1_rgb:
+    case ECompression::s3tc_dxt1_rgb:
       return GL_COMPRESSED_RGB_S3TC_DXT1_EXT;
-    case ECompression::eS3tc_dxt1_rgba:
+    case ECompression::s3tc_dxt1_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
-    case ECompression::eS3tc_dxt3_rgba:
+    case ECompression::s3tc_dxt3_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT3_EXT;
-    case ECompression::eS3tc_dxt5_rgba:
+    case ECompression::s3tc_dxt5_rgba:
       return GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
 #endif /* __APPLE__ */
   }

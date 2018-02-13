@@ -344,17 +344,17 @@ inline void Engine::EngineImpl::initStartup() {
 
   fLogD("Post processing startup pass added");
 
-  mStartupTexture = mTextures->get("logo.png", flf::ECompression::eNone);
+  mStartupTexture = mTextures->get("logo.png", flf::ECompression::none);
   if (mStartupTexture) {
     return;
   }
 
-  mStartupTexture = mTextures->get("textures/logo.png", flf::ECompression::eNone);
+  mStartupTexture = mTextures->get("textures/logo.png", flf::ECompression::none);
   if (mStartupTexture) {
     return;
   }
 
-  mStartupTexture = mTextures->get("64_64_64.color", flf::ECompression::eNone);
+  mStartupTexture = mTextures->get("64_64_64.color", flf::ECompression::none);
   fLogE("Fillwave startup logo could not be executed");
 }
 
@@ -724,7 +724,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
   GLint mCurentTextureUnit = 0;
   GLint id = 0;
   switch (mDebugger->getState()) {
-    case EDebuggerState::eLightsSpot:
+    case EDebuggerState::lightsSpot:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
         mDebugger->renderFromCamera(*(mLights->mLightsSpot[i]->getShadowCamera()), mCurentTextureUnit++);
@@ -740,7 +740,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
         mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
       }
       break;
-    case EDebuggerState::eLightsSpotDepth:
+    case EDebuggerState::lightsSpotDepth:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
         mDebugger->renderDepthPerspective(mCurentTextureUnit++);
@@ -749,7 +749,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
         mDebugger->renderDepthOrthographic(mCurentTextureUnit++);
       }
       break;
-    case EDebuggerState::eLightsSpotColor:
+    case EDebuggerState::lightsSpotColor:
       mCurentTextureUnit = 0;
       for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
         mDebugger->renderFromCamera(*(mLights->mLightsSpot[i]->getShadowCamera()), mCurentTextureUnit++);
@@ -758,11 +758,11 @@ inline void Engine::EngineImpl::evaluateDebugger() {
         mDebugger->renderFromCamera(*(mLights->mLightsDirectional[i]->getShadowCamera()), mCurentTextureUnit++);
       }
       break;
-    case EDebuggerState::eLightsPoint:
+    case EDebuggerState::lightsPoint:
       break;
-    case EDebuggerState::eLightsPointDepth: // only light 0
+    case EDebuggerState::lightsPointDepth: // only light 0
       break;
-    case EDebuggerState::eLightsPointColor:
+    case EDebuggerState::lightsPointColor:
       for (size_t j = 0; j < mLights->mLightsPoint.size(); j++) {
         for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X; i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
           flf::CameraPerspective cameraPF = *(mLights->mLightsPoint[j]->getShadowCamera(i));
@@ -770,11 +770,11 @@ inline void Engine::EngineImpl::evaluateDebugger() {
         }
       }
       break;
-    case EDebuggerState::ePickingMap:
+    case EDebuggerState::pickingMap:
       mDebugger->renderPickingMap();
       break;
-    case EDebuggerState::eOff:
-    case EDebuggerState::eToggleState:
+    case EDebuggerState::off:
+    case EDebuggerState::toggleState:
       break;
   }
 }

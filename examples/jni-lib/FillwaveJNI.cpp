@@ -50,23 +50,23 @@ configureDebugger(EDebuggerState::eOff);
 break;
 case 1:
 ptr->
-configureDebugger(EDebuggerState::eLightsPointDepth);
+configureDebugger(EDebuggerState::lightsPointDepth);
 break;
 case 2:
 ptr->
-configureDebugger(EDebuggerState::eLightsSpot);
+configureDebugger(EDebuggerState::lightsSpot);
 break;
 case 3:
 ptr->
-configureDebugger(EDebuggerState::eLightsSpotColor);
+configureDebugger(EDebuggerState::lightsSpotColor);
 break;
 case 4:
 ptr->
-configureDebugger(EDebuggerState::eLightsSpotDepth);
+configureDebugger(EDebuggerState::lightsSpotDepth);
 break;
 case 5:
 ptr->
-configureDebugger(EDebuggerState::eLightsPoint);
+configureDebugger(EDebuggerState::lightsPoint);
 break;
 case 6:
 ptr->

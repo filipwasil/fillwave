@@ -33,8 +33,8 @@ namespace flw {
 class Engine;
 
 enum class ETextEffect {
-  eNone
-  , eBold
+  none
+  , bold
 };
 
 namespace flf {
@@ -52,7 +52,7 @@ public:
       GLfloat scale,
       Font *font,
       glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),
-      ETextEffect effect = ETextEffect::eNone);
+      ETextEffect effect = ETextEffect::none);
 
   ~Text() override = default;
 

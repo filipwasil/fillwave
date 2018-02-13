@@ -135,12 +135,18 @@ flc::Texture3D* TextureSystem::get(const std::string &posX,
 
   fLogD("Texture ", name, " will be added to manager");
 
-  auto cfgPX = mLoader.load(filePathPosX, EFlip::none, GL_RGBA, mRootPath, ECompression::eNone, GL_TEXTURE_CUBE_MAP_POSITIVE_X);
-  auto cfgNX = mLoader.load(filePathNegX, EFlip::none, GL_RGBA, mRootPath, ECompression::eNone, GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
-  auto cfgPY = mLoader.load(filePathPosY, EFlip::none, GL_RGBA, mRootPath, ECompression::eNone, GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
-  auto cfgNY = mLoader.load(filePathNegY, EFlip::none, GL_RGBA, mRootPath, ECompression::eNone, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
-  auto cfgPZ = mLoader.load(filePathPosZ, EFlip::none, GL_RGBA, mRootPath, ECompression::eNone, GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
-  auto cfgNZ = mLoader.load(filePathNegZ, EFlip::none, GL_RGBA, mRootPath, ECompression::eNone, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
+  auto cfgPX =
+    mLoader.load(filePathPosX, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+  auto cfgNX =
+    mLoader.load(filePathNegX, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
+  auto cfgPY =
+    mLoader.load(filePathPosY, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
+  auto cfgNY =
+    mLoader.load(filePathNegY, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+  auto cfgPZ =
+    mLoader.load(filePathPosZ, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
+  auto cfgNZ =
+    mLoader.load(filePathNegZ, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 
   if (cfgPX && cfgNX && cfgPY && cfgNY && cfgPZ && cfgNZ) {
     fLogD("Texture ", name, " has been added to manager");

@@ -169,9 +169,9 @@ void Text::createVBO() {
 
 inline flc::Program* Text::createProgram(Engine *engine, ETextEffect effect) {
   switch (effect) {
-    case ETextEffect::eBold:
+    case ETextEffect::bold:
       return ProgramLoader(engine).getProgram(EProgram::textBold);
-    case ETextEffect::eNone:
+    case ETextEffect::none:
       return ProgramLoader(engine).getProgram(EProgram::text);
   }
   return nullptr;

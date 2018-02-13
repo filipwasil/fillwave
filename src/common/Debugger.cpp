@@ -32,7 +32,7 @@ namespace flf {
 
 Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
   : IReloadable(engine)
-  , mState(EDebuggerState::eOff)
+  , mState(EDebuggerState::off)
   , mEngine(engine)
   , mVBO(mEngine->storeBuffer<flc::VertexBufferDebug>(mVAO, 1.0f))
   , mMiniwindowsOccupied(0) {
@@ -64,33 +64,33 @@ Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
 Debugger::~Debugger() = default;
 
 void Debugger::setState(EDebuggerState state) {
-  if (state == EDebuggerState::eToggleState) {
+  if (state == EDebuggerState::toggleState) {
     switch (mState) {
-      case EDebuggerState::eLightsSpot:
-        mState = EDebuggerState::eLightsSpotDepth;
+      case EDebuggerState::lightsSpot:
+        mState = EDebuggerState::lightsSpotDepth;
         break;
-      case EDebuggerState::eLightsSpotDepth:
-        mState = EDebuggerState::eLightsSpotColor;
+      case EDebuggerState::lightsSpotDepth:
+        mState = EDebuggerState::lightsSpotColor;
         break;
-      case EDebuggerState::eLightsSpotColor:
-        mState = EDebuggerState::eLightsPoint;
+      case EDebuggerState::lightsSpotColor:
+        mState = EDebuggerState::lightsPoint;
         break;
-      case EDebuggerState::eLightsPoint:
-        mState = EDebuggerState::eLightsPointDepth;
+      case EDebuggerState::lightsPoint:
+        mState = EDebuggerState::lightsPointDepth;
         break;
-      case EDebuggerState::eLightsPointDepth:
-        mState = EDebuggerState::eLightsPointColor;
+      case EDebuggerState::lightsPointDepth:
+        mState = EDebuggerState::lightsPointColor;
         break;
-      case EDebuggerState::eLightsPointColor:
-        mState = EDebuggerState::ePickingMap;
+      case EDebuggerState::lightsPointColor:
+        mState = EDebuggerState::pickingMap;
         break;
-      case EDebuggerState::ePickingMap:
-        mState = EDebuggerState::eOff;
+      case EDebuggerState::pickingMap:
+        mState = EDebuggerState::off;
         break;
-      case EDebuggerState::eOff:
-        mState = EDebuggerState::eLightsSpot;
+      case EDebuggerState::off:
+        mState = EDebuggerState::lightsSpot;
         break;
-      case EDebuggerState::eToggleState:
+      case EDebuggerState::toggleState:
         break;
     }
   } else {

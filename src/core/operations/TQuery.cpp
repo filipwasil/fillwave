@@ -29,7 +29,8 @@ namespace flw {
 namespace flc {
 
 template <GLenum TARGET>
-TQuery<TARGET>::TQuery(GLuint howMany) : GLObject(howMany) {
+TQuery<TARGET>::TQuery(GLuint howMany)
+  : mHowMany(howMany) {
   glGenQueries(mHowMany, mHandles);
   fLogC("Could not create query");
 }

@@ -28,14 +28,14 @@ namespace flc {
 
 TextureConfig::~TextureConfig() {
   switch (mAllocation) {
-  case EMemoryAllocation::eMallock:
+  case EMemoryAllocation::cstyle:
     free(mData);
     break;
-  case EMemoryAllocation::eNew:
+  case EMemoryAllocation::standard:
     delete mData;
     mData = nullptr;
     break;
- case EMemoryAllocation::eNone:
+ case EMemoryAllocation::none:
     break;
   }
 }

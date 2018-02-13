@@ -31,7 +31,7 @@ namespace flc {
  */
 
 template <GLenum TARGET>
-class TQuery final : public GLObject {
+class TQuery final {
 public:
   TQuery(GLuint howMany = 1);
 
@@ -52,6 +52,10 @@ public:
   void reload();
 
   void log();
+
+ protected:
+  GLsizei mHowMany;
+  GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
 };
 
 using QueryIfAnySamplesPassed = TQuery<GL_ANY_SAMPLES_PASSED>;

@@ -30,9 +30,9 @@ namespace flc {
  * \brief Stores the type of memory free method
  */
 enum class EMemoryAllocation {
-  eMallock
-  , eNew
-  , eNone
+  cstyle
+  , standard
+  , none
 };
 
 /*! \class TextureConfig
@@ -81,7 +81,7 @@ struct TextureConfig final {
   TextureConfig()
     : mHeader()
     , mContent()
-    , mAllocation(EMemoryAllocation::eNone)
+    , mAllocation(EMemoryAllocation::none)
     , mData(nullptr) {
     // nothing
   }

@@ -37,12 +37,9 @@ public:
 
   GLuint getHandle(GLuint id = 0);
 
-private:
-  static const GLsizei MAX_ELEMENTS = 10;
-
 protected:
   GLsizei mHowMany;
-  GLuint mHandles[MAX_ELEMENTS];
+  GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
 };
 
 } /* flc */

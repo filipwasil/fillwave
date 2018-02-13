@@ -83,7 +83,9 @@ constexpr int FILLWAVE_UNIFORM_NOT_FOUND = -1;
 constexpr float FILLWAVE_AO_SAMPLE_RADIUS = 1.6f;
 constexpr unsigned int FILLWAVE_OQ_VERTICES = 36;
 
-/**/
+constexpr GLsizei FILLWAVE_GLOBJECTS_MAX = 10;
+
+/* OpenGL globals */
 unsigned int getFramebufferStatus();
 
 unsigned int getGlError();
