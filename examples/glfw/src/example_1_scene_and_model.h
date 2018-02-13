@@ -1,22 +1,13 @@
+#pragma once
+
 #include <example.h>
 #include <ContextGLFW.h>
 
-class PickableModel : public flw::flf::Model {
+class TestModel : public flw::flf::Model {
  public:
+  TestModel();
 
-  PickableModel(std::string name,
-    flw::ps<flw::flf::Text> text,
-    flw::Engine* engine,
-    glm::vec3 initialPosition);
+  ~TestModel() override;
 
-  ~PickableModel() override;
-
-  void onPicked() override;
-
-  void onUnpicked() override;
-
- private:
-  flw::ps<flw::flf::Text> mText;
-  flw::ps<flw::flf::IEffect> mPickedEffect;
-  std::string mName;
+  TestModel& operator=(const TestModel&);
 };

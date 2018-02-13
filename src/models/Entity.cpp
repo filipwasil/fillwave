@@ -197,7 +197,7 @@ bool Entity::getRenderItem(RenderItem & /*item*/) {
   return false;
 }
 
-void Entity::attachHandler(std::function<void(const Event&)>&& h, eEventType eventType) {
+void Entity::attachHandler(std::function<void(const Event&)>&& h, EEventType eventType) {
   mEventHandlers.emplace_back(eventType, h);
 }
 

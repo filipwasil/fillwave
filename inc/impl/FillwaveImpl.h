@@ -146,7 +146,7 @@ struct Engine::EngineImpl final {
   void onEvent(const flf::Event& event) const;
   void onResizeScreen(GLuint width, GLuint height);
 
-  void attachHandler(std::function<void(const flf::Event&)>&& handler, flf::eEventType type);
+  void attachHandler(std::function<void(const flf::Event&)>&& handler, flf::EEventType type);
   void detachHandlers();
 
   /* Evaluation */
@@ -715,7 +715,7 @@ inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
     };
     ;
 
-    mScene->onEvent(flf::Event(flf::eEventType::time, data));
+    mScene->onEvent(flf::Event(flf::EEventType::time, data));
     mScene->stepInTime(timeExpiredInSeconds);
   }
 }
@@ -799,7 +799,7 @@ void Engine::EngineImpl::onEvent(const flf::Event& event) const {
   mScene->onEvent(event);
 }
 
-void Engine::EngineImpl::attachHandler(std::function<void(const flf::Event&)>&& handler, flf::eEventType type) {
+void Engine::EngineImpl::attachHandler(std::function<void(const flf::Event&)>&& handler, flf::EEventType type) {
   mHandlers.emplace_back(type, std::move(handler));
 }
 

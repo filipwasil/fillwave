@@ -36,7 +36,7 @@ void AnimationScene::init() {
   mEngine->getCurrentScene()->attach(std::move(beast));
 
   animationFuncHandler = std::bind(&AnimationKeyboardCallback::perform, &(*mAnimationCallback), std::placeholders::_1);
-  mEngine->attachHandler(std::move(animationFuncHandler), flw::flf::eEventType::key);
+  mEngine->attachHandler(std::move(animationFuncHandler), flw::flf::EEventType::key);
 
   mText = mEngine->storeText("Animation Scene", "FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
 }

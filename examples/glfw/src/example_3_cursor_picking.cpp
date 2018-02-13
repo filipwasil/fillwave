@@ -46,14 +46,14 @@ int main(int argc, char* argv[]) {
     auto xPosition = ( ( e.xPosition / engine->getScreenSize()[0]) * 2.0 - 1.0);
     auto yPosition = (-( e.yPosition / engine->getScreenSize()[1]) * 2.0 + 1.0);
     engine->getCurrentScene()->getCursor()->move(glm::vec2(xPosition, yPosition));
-  }, flw::flf::eEventType::cursorPosition);
+  }, flw::flf::EEventType::cursorPosition);
 
   engine->attachHandler([engine](const Event& event) {
     MouseButtonEventData e = event.getData();
     if (e.action == GLFW_RELEASE) {
       engine->pick(e.whereX, e.whereY);
     }
-  }, flw::flf::eEventType::mouseButton);
+  }, flw::flf::EEventType::mouseButton);
 
   auto scene = std::make_unique<Scene>();
   auto camera = std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),

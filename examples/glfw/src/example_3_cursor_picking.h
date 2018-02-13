@@ -1,3 +1,5 @@
+#pragma once
+
 #include <example.h>
 #include <ContextGLFW.h>
 

@@ -32,7 +32,7 @@ namespace flf {
 class Entity;
 class EventHandler;
 class Event;
-enum class eEventType;
+enum class EEventType;
 }
 
 namespace flc {
@@ -70,7 +70,7 @@ public:
   void setTransformation(glm::mat4 modelMatrix);
 
   /* Callbacks */
-  void attachHandler(std::function<void(const Event&)>&& h, eEventType eventType);
+  void attachHandler(std::function<void(const Event&)>&& h, EEventType eventType);
 
   void detachHandlers();
 

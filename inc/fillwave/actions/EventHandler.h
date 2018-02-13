@@ -29,7 +29,7 @@ namespace flf {
 
 class EventHandler {
  public:
-  EventHandler (flf::eEventType t, std::function<void(const Event&)> h)
+  EventHandler (flf::EEventType t, std::function<void(const Event&)> h)
     : type(t)
     , handler(h) {
     // nothing
@@ -42,7 +42,7 @@ class EventHandler {
   }
 
  private:
-  const flf::eEventType type;
+  const flf::EEventType type;
   const std::function<void(const Event&)> handler;
 };
 

@@ -24,7 +24,7 @@
 namespace flw {
 namespace flf {
 
-enum class eEventType {
+enum class EEventType {
   mouseButton
   , cursorPosition
   , cursorEnter
@@ -153,13 +153,13 @@ union EventData {
 
 class Event {
  public:
-	Event(eEventType type, EventData data)
+	Event(EEventType type, EventData data)
 			: mType(type)
 			, mData(data) {
     // nothing
 	}
 
-	eEventType getType() const {
+	EEventType getType() const {
 		return mType;
 	}
 
@@ -168,7 +168,7 @@ class Event {
 	}
 
  private:
-	eEventType mType;
+	EEventType mType;
 	EventData mData;
 };
 

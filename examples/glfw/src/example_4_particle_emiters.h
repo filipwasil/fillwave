@@ -3,7 +3,20 @@
 #include <example.h>
 #include <ContextGLFW.h>
 
-class CubeModel : public flw::flf::Model {
- public:
-  CubeModel(int i, float t);
+struct WaterEmiter : public flw::flf::EmiterPointCPU {
+  WaterEmiter();
+
+  ~WaterEmiter() override;
+};
+
+struct SandEmiter : public flw::flf::EmiterPointCPU {
+  SandEmiter();
+
+  ~SandEmiter() override;
+};
+
+struct SnowEmiter : public flw::flf::EmiterPointGPU {
+  SnowEmiter();
+
+  ~SnowEmiter() override;
 };

@@ -259,7 +259,7 @@ inline void Model::initAnimations(const aiScene* scene) {
     this->attachHandler(
       [this](const Event& event){
         this->performAnimation(event.getData().mTime.timePassed);
-      }, eEventType::time);
+      }, EEventType::time);
   }
 }
 

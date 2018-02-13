@@ -63,7 +63,7 @@ IEmiterPoint::IEmiterPoint(Engine *engine,
   attachHandler([this] (const Event& event) {
     mCallbackTimePassed += event.getData().mTime.timePassed;
     update(mCallbackTimePassed);
-  }, eEventType::time );
+  }, EEventType::time );
 }
 
 void IEmiterPoint::setBlending(GLenum sourceFactor, GLenum destinationFactor) {

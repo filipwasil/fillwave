@@ -617,7 +617,7 @@ void Entity::attachHierarchyCallback(Callback* c);
 \indent \indent To register/unregister a callback in Fillwave use following functions:
 
 \begin{lstlisting}
-void Entity::attachHandler(std::function<void(const Event&)>&& e, eEventType t)
+void Entity::attachHandler(std::function<void(const Event&)>&& e, EEventType t)
 void detachHandlers();
 \end{lstlisting}
 

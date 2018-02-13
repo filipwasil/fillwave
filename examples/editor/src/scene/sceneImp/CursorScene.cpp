@@ -27,8 +27,8 @@ void CursorScene::init() {
   std::function<void(const flf::Event&)> cameraFuncHandler = std::bind(&MoveCameraCallback::perform,
                                                                        &(*mCameraCallback),
                                                                        std::placeholders::_1);
-  mEngine->attachHandler(std::move(timeFuncHandler), flw::flf::eEventType::key);
-  mEngine->attachHandler(std::move(cameraFuncHandler), flw::flf::eEventType::key);
+  mEngine->attachHandler(std::move(timeFuncHandler), flw::flf::EEventType::key);
+  mEngine->attachHandler(std::move(cameraFuncHandler), flw::flf::EEventType::key);
   mEventsHandler.push_back(std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
   /* Cursor texture */
   flc::Texture2D* textureC = mEngine->storeTexture("textures/cursor/standard_blue.png");
@@ -40,7 +40,7 @@ void CursorScene::init() {
   std::function<void(const flf::Event &)> customCursorFuncHandler = std::bind(&FollowCustomCursorCallback::perform,
                                                                               &(*mCustomCursorCallback),
                                                                               std::placeholders::_1);
-  mEngine->attachHandler(std::move(customCursorFuncHandler), flw::flf::eEventType::custom);
+  mEngine->attachHandler(std::move(customCursorFuncHandler), flw::flf::EEventType::custom);
 
   /* Description */
   flw::ps<flw::flf::Text> description =

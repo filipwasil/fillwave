@@ -68,9 +68,9 @@ class AScene : public QObject {
     std::function<void(const flw::flf::Event&)> secondCameraFuncHandler = std::bind(&flw::flf::FollowCustomCursorCallback::perform,
                                                                                     &(*mSecondCameraCallback),
                                                                                     std::placeholders::_1);
-    mEngine->attachHandler(std::move(timeFuncHandler), flw::flf::eEventType::key);
-    mEngine->attachHandler(std::move(cameraFuncHandler), flw::flf::eEventType::key);
-    mEngine->attachHandler(std::move(secondCameraFuncHandler), flw::flf::eEventType::cursorPosition);
+    mEngine->attachHandler(std::move(timeFuncHandler), flw::flf::EEventType::key);
+    mEngine->attachHandler(std::move(cameraFuncHandler), flw::flf::EEventType::key);
+    mEngine->attachHandler(std::move(secondCameraFuncHandler), flw::flf::EEventType::cursorPosition);
 
     mEventsHandler.push_back(std::make_unique<callbacks::StandardKeyboardEventHandler>(mEngine));
     mEventsHandler.push_back(std::make_unique<callbacks::StandardMouseEventHandler>(mEngine));

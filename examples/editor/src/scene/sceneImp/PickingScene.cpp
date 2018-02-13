@@ -30,8 +30,8 @@ void PickingScene::init() {
   std::function<void(const flf::Event &)> cameraFuncHandler = std::bind(&MoveCameraCallback::perform,
                                                                         &(*mCameraCallback),
                                                                         std::placeholders::_1);
-  mEngine->attachHandler(std::move(timeFuncHandler), flw::flf::eEventType::key);
-  mEngine->attachHandler(std::move(cameraFuncHandler), flw::flf::eEventType::key);
+  mEngine->attachHandler(std::move(timeFuncHandler), flw::flf::EEventType::key);
+  mEngine->attachHandler(std::move(cameraFuncHandler), flw::flf::EEventType::key);
   mEventsHandler.push_back(std::make_unique<scene::callbacks::StandardKeyboardEventHandler>(mEngine));
   mEngine->getCurrentScene()->setCursor(make_unique<Cursor>(mEngine.get(),
                                                             mEngine->storeTexture("textures/cursor/standard_blue.png")));
@@ -40,7 +40,7 @@ void PickingScene::init() {
   std::function<void(const flf::Event &)> customCursorFuncHandler = std::bind(&FollowCustomCursorCallback::perform,
                                                                               &(*mCustomCursorCallback),
                                                                               std::placeholders::_1);
-  mEngine->attachHandler(std::move(customCursorFuncHandler), flw::flf::eEventType::custom);
+  mEngine->attachHandler(std::move(customCursorFuncHandler), flw::flf::EEventType::custom);
 
   /* Picking info text which will be modified frequently */
   flw::ps<flw::flf::Text> pickInfo = mEngine->storeText("Nothing picked", "fonts/Titania", glm::vec2(-0.95, 0.80), 60.0);
@@ -106,7 +106,7 @@ void PickingScene::init() {
   std::function<void(const flf::Event &)> colorFuncHandler = std::bind(&ColorPickingCallback::perform,
                                                                        &(*mColorCallback),
                                                                        std::placeholders::_1);
-  mEngine->attachHandler(std::move(colorFuncHandler), flw::flf::eEventType::custom);
+  mEngine->attachHandler(std::move(colorFuncHandler), flw::flf::EEventType::custom);
 
   /* Description */
   flw::ps<flw::flf::Text> description = mEngine->storeText("Fillwave example cursor picking",

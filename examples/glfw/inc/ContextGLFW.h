@@ -18,7 +18,7 @@ private:
 
   static flw::flf::EventData mEventData;
 
-  static void onEvent(const flw::flf::eEventType& type);
+  static void onEvent(const flw::flf::EEventType& type);
 
 public:
   ContextGLFW(int argc, char *argv[]);

@@ -12,7 +12,7 @@ MoveCameraCallback::MoveCameraCallback(Engine *engine, float speed)
 }
 
 void MoveCameraCallback::perform(const Event &event) {
-  if (event.getType() == eEventType::key) {
+  if (event.getType() == EEventType::key) {
     KeyboardEventData e = event.getData();
     switch (e.key) {
       case Qt::Key_W:
@@ -27,7 +27,7 @@ void MoveCameraCallback::perform(const Event &event) {
         }
         break;
     }
-  } else if (event.getType() == eEventType::cursorPosition) {
+  } else if (event.getType() == EEventType::cursorPosition) {
     static bool init = false;
     static int  a = 0;
     auto d = [](double value) {

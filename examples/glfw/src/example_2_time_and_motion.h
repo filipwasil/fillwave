@@ -3,11 +3,16 @@
 #include <example.h>
 #include <ContextGLFW.h>
 
-class TestModel : public flw::flf::Model {
+class CubeModel : public flw::flf::Model {
  public:
-  TestModel();
+  CubeModel(int i, float t);
 
-  ~TestModel() override;
+  ~CubeModel() override;
+};
 
-  TestModel& operator=(const TestModel&);
+class WallModel : public flw::flf::Model {
+ public:
+  WallModel();
+
+  ~WallModel() override;
 };

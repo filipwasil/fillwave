@@ -210,7 +210,7 @@ public:
   /* Inputs */
   void onEvent(const flf::Event& event);
   void onResizeScreen(GLuint width, GLuint height);
-  void attachHandler(std::function<void(const flf::Event&)>&& h, flf::eEventType type);
+  void attachHandler(std::function<void(const flf::Event&)>&& h, flf::EEventType type);
   void detachHandlers();
 
   void reload();

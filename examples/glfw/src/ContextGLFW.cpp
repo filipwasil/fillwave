@@ -139,7 +139,7 @@ void ContextGLFW::keyboardCallback(GLFWwindow * /*window*/, int key, int scancod
   mEventData.mKey.key = key;
   mEventData.mKey.mode = mods;
   mEventData.mKey.scanCode = scancode;
-  flw::flf::Event event(flw::flf::eEventType::key, mEventData);
+  flw::flf::Event event(flw::flf::EEventType::key, mEventData);
   mGraphics->onEvent(event);
 }
 
@@ -149,18 +149,18 @@ void ContextGLFW::mouseButtonCallback(GLFWwindow * /*window*/, int button, int a
   mEventData.mMouseButton.action = action;
   mEventData.mMouseButton.button = button;
   mEventData.mMouseButton.mods = mods;
-  onEvent(flw::flf::eEventType::mouseButton);
+  onEvent(flw::flf::EEventType::mouseButton);
 }
 
 void ContextGLFW::scrollCallback(GLFWwindow * /*window*/, double xoffset, double yoffset) {
   mEventData.mMouseScroll.offsetX = xoffset;
   mEventData.mMouseScroll.offsetY = yoffset;
-  onEvent(flw::flf::eEventType::scroll);
+  onEvent(flw::flf::EEventType::scroll);
 }
 
 void ContextGLFW::characterCallback(GLFWwindow * /*window*/, unsigned int ascii) {
   mEventData.mChar.character = ascii;
-  onEvent(flw::flf::eEventType::character);
+  onEvent(flw::flf::EEventType::character);
 }
 
 void ContextGLFW::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, double ypos) {
@@ -187,15 +187,15 @@ void ContextGLFW::cursorPositionCallback(GLFWwindow * /*window*/, double xpos, d
   mCursorPositionX = xpos;
   mCursorPositionY = ypos;
 
-  onEvent(flw::flf::eEventType::cursorPosition);
+  onEvent(flw::flf::EEventType::cursorPosition);
 }
 
 void ContextGLFW::cursorEnterCallback(GLFWwindow * /*window*/, int in) {
   mEventData.mCursorEnter.direction = in;
-  onEvent(flw::flf::eEventType::cursorEnter);
+  onEvent(flw::flf::EEventType::cursorEnter);
 }
 
-void ContextGLFW::onEvent(const flw::flf::eEventType& type) {
+void ContextGLFW::onEvent(const flw::flf::EEventType& type) {
   mGraphics->onEvent(flw::flf::Event(type, mEventData));
 }
 

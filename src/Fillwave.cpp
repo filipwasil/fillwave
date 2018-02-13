@@ -176,7 +176,7 @@ void Engine::detachHandlers() {
   mImpl->detachHandlers();
 }
 
-void Engine::attachHandler(std::function<void(const flf::Event&)>&& handler, flf::eEventType type) {
+void Engine::attachHandler(std::function<void(const flf::Event&)>&& handler, flf::EEventType type) {
   mImpl->attachHandler(std::move(handler), type);
 }
 
