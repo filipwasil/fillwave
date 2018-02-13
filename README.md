@@ -8,10 +8,11 @@
 
 Can be used in any 3D games, apps and visualization tools or as a regular part of your game engine.
 
-- Multiplatform (Linux, Windows, Android, OSX)
+- Multiplatform (Linux, Windows)
+- MIT License
 - Using the greatest open source libraries (Ex. glm for math and assimp for assets)
 - OpenGL ES 3.0 and OpenGL 3.3+ support with programmable pipeline
-- Engine can be fully open source and free under BSD license
+- todo Android and macOS
 
 - All models placed in examples/linux/data are various models which I found across internet.
   I was looking only for free ones in case of which the license permits for placing them here.
