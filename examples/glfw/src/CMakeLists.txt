@@ -10,7 +10,7 @@ cmake_minimum_required (VERSION 2.8.8)
 set (PROJECT_VERSION 1.0.0)
 
 set (SOURCE_FILES
-    example_1_scene_and_model.cpp
+    example_2_time_and_motion.cpp
     ContextGLFW.cpp)
 
 # -----------------------------------------------

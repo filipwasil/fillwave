@@ -1,14 +1,11 @@
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Weverything")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
 
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unreachable-code-loop-increment") # todo CLANG compiler error
-
 # possible to fix
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-nested-anon-types")
 
 # TQuery
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-undefined-func-template")
-#set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-weak-template-vtables")
 
 if (FILLWAVE_BUILD_PACK)
   # assimp
