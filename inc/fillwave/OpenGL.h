@@ -34,7 +34,9 @@ void glesInitExtensions();
 #if defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES)
 
 #define FILLWAVE_GLES_3_0
+#define GLFW_INCLUDE_ES2
 #define GL_GLEXT_PROTOTYPES
+
 #include <GLES3/gl3.h>
 #include <GLES3/gl3ext.h>
 

@@ -10,7 +10,7 @@ cmake_minimum_required (VERSION 2.8.8)
 set (PROJECT_VERSION 1.0.0)
 
 set (SOURCE_FILES
-    example_2_time_and_motion.cpp
+    example_1_scene_and_model.cpp
     ContextGLFW.cpp)
 
 # -----------------------------------------------
@@ -66,11 +66,15 @@ endif (WIN32 OR FILLWAVE_BUILD_PACK)
 # -----------------------------------------------
 
 if(UNIX)
-    target_link_libraries (${PROGRAM} pthread glfw fillwave)
-    if (ANDROID)
+  if (ANDROID)
+  else()
+    copy_resources (${PROGRAM})
+    if (FILLWAVE_COMPILATION_PC_GLES)
+      target_link_libraries (${PROGRAM} pthread glfw GLESv2 fillwave)
     else()
-        copy_resources (${PROGRAM})
-    endif ()
+      target_link_libraries (${PROGRAM} pthread glfw fillwave)
+    endif()
+  endif ()
 else()
     add_dependencies (${PROGRAM} glfw fillwave)
     target_link_libraries (${PROGRAM} glfw fillwave)

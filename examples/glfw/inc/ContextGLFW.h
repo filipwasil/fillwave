@@ -1,7 +1,9 @@
 #pragma once
 
 #include <fillwave/Fillwave.h>
+
 #include <GLFW/glfw3.h>
+
 #include <fillwave/Framework.h>
 
 namespace flw {

@@ -367,8 +367,12 @@ inline void Engine::EngineImpl::initExtras() {
   /* Debugger */
   mDebugger = std::make_unique<flf::Debugger>(mEngine);
 
+#ifdef FILLWAVE_COMPILATION_PC_GLES
+#else
   /* Tesselation */
   glPatchParameteri(GL_PATCH_VERTICES, 3);
+#endif // FILLWAVE_COMPILATION_PC_GLES
+
   /* Suppress error if setting patch up fails */
   glGetError();
 }

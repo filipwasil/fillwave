@@ -91,7 +91,7 @@ void FramebufferGeometry::setAttachments() {
 
 void FramebufferGeometry::setAttachmentStencilDepth() {
 #ifdef FILLWAVE_GLES_3_0
-  glDrawBuffers(1, &mNone);
+  glDrawBuffers(1, GL_NONE);
 #else
   glDrawBuffer(GL_NONE);
 #endif
