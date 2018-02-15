@@ -377,12 +377,12 @@ pu<Mesh> Model::loadMesh(const aiMesh* shape,
   return mesh;
 }
 
-TGetter<Mesh> Model::getMesh(size_t id) {
+pp<Mesh> Model::getMesh(size_t id) {
   if (id < mMeshes.size()) {
-    return TGetter<Mesh> (mMeshes.at(id));
+    return pp<Mesh> (mMeshes.at(id));
   }
   fLogF("Requested mesh does not exist. Id requested: ", static_cast<int>(id));
-  return TGetter<Mesh>(nullptr);
+  return pp<Mesh>(nullptr);
 }
 
 void Model::performAnimation(GLfloat timeElapsedInSeconds) {

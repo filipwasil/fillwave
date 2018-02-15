@@ -28,7 +28,7 @@
 #include <fillwave/space/LightDirectional.h>
 #include <fillwave/hud/Text.h>
 
-#include <fillwave/common/TGetter.h>
+#include <fillwave/common/ProtectedPointer.h>
 
 /* Debugger */
 #include "fillwave/Debugger.h"
@@ -104,7 +104,7 @@ public:
   void detach(flf::Entity*);
 
   /* Assets */
-  puPhysicsMeshBuffer getPhysicalMeshBuffer(const std::string &shapePath);
+  pu<flf::PhysicsMeshBuffer> getPhysicalMeshBuffer(const std::string &shapePath);
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
@@ -113,7 +113,7 @@ public:
 
   /* Scene */
   void setCurrentScene(pu<flf::Scene> &&scene);
-  TGetter<flf::Scene> getCurrentScene() const;
+  pp<flf::Scene> getCurrentScene() const;
 
   /* Time */
   GLuint getFramesPassed();

@@ -22,59 +22,59 @@
  */
 
 namespace flw {
-/*! \class TGetter
+/*! \class ProtectedPointer
  * \brief Wrapper which makes the wrapped pointer not storable and not copyable
  */
 template <class TPtr>
-class TGetter {
-private:
-  class TGetterHelper {
-    friend class TGetter;
-  public:
-    TGetterHelper(TPtr *ptr)
-        : mPtr(ptr) {
+class ProtectedPointer {
+ private:
+  class Helper {
+    friend class ProtectedPointer;
+   public:
+    Helper(TPtr* ptr)
+      : mPtr(ptr) {
     }
 
-    TPtr *operator->() && {
+    TPtr* operator->() && {
       return mPtr;
     }
 
-  private:
+   private:
 
-    TGetterHelper(TGetterHelper &&) = default;
+    Helper(Helper &&) = default;
 
-    TGetterHelper(const TGetter &) = delete;
+    Helper(const ProtectedPointer &) = delete;
 
-    TGetterHelper operator = (TGetterHelper getter) = delete;
+    Helper operator = (Helper) = delete;
 
-    TGetterHelper operator = (TGetterHelper &&getter) = delete;
+    Helper operator = (Helper&&) = delete;
 
-    TPtr *operator->()& = delete;
+    TPtr* operator->()& = delete;
 
-    TPtr *mPtr;
+    TPtr* mPtr;
   };
 
-public:
-  TGetter(TPtr* p)
-      : mHelper(p) {
+ public:
+  ProtectedPointer(TPtr* p)
+    : mHelper(p) {
 
   }
 
-  TGetterHelper && operator->() && {
+  Helper && operator->() && {
     return std::move(mHelper);
   }
 
-  TGetter(TGetter &&) = default;
+  ProtectedPointer(ProtectedPointer &&) = default;
 
-  TGetter(const TGetter &) = delete;
+  ProtectedPointer(const ProtectedPointer &) = delete;
 
-  TGetter *operator->()& = delete;
+  ProtectedPointer* operator->()& = delete;
 
-  TGetter operator = (TGetter getter) = delete;
+  ProtectedPointer operator = (ProtectedPointer getter) = delete;
 
-  TGetter operator = (TGetter &&getter) = delete;
+  ProtectedPointer operator = (ProtectedPointer&& getter) = delete;
 
-private:
-  TGetterHelper mHelper;
+ private:
+  Helper mHelper;
 };
 } /* flw */

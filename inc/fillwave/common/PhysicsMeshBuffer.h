@@ -25,15 +25,15 @@
 
 namespace flw {
 namespace flf {
+
 /*! \struct PhysicsMeshBuffer
  * \brief Physical mesh data.
  */
-
 struct PhysicsMeshBuffer {
   GLint mNumFaces;
   std::vector<glm::vec3> mVertices;
   std::vector<GLint> mIndices;
 };
+
 } /* flf */
-typedef std::unique_ptr<flf::PhysicsMeshBuffer> puPhysicsMeshBuffer;
 } /* flw */

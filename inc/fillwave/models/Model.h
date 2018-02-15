@@ -25,7 +25,7 @@
 #include "fillwave/models/Mesh.h"
 #include "fillwave/models/animations/Animator.h"
 #include "fillwave/Assets.h"
-#include "fillwave/common/TGetter.h"
+#include "fillwave/common/ProtectedPointer.h"
 
 namespace flw {
 class Engine;
@@ -94,7 +94,7 @@ public:
 
   GLint getActiveAnimations();
 
-  TGetter<Mesh> getMesh(size_t id);
+  pp<Mesh> getMesh(size_t id);
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 

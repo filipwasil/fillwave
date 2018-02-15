@@ -28,7 +28,7 @@
 #include <fillwave/models/Terrain.h>
 #include <fillwave/models/base/IDrawable.h>
 #include <fillwave/renderers/RendererFR.h>
-#include <fillwave/common/TGetter.h>
+#include <fillwave/common/ProtectedPointer.h>
 
 #include <memory>
 #include <unordered_map>
@@ -55,14 +55,14 @@ public:
   void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
   /* Cursor */
-  TGetter<Cursor> getCursor();
+  pp<Cursor> getCursor();
 
   void setCursor(pu<Cursor>&& cursor);
 
   void drawCursor();
 
   /* Camera */
-  TGetter<ICamera> getCamera();
+  pp<ICamera> getCamera();
 
   void setCamera(pu<ICamera>&& camera);
 

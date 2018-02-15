@@ -21,6 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include "ProtectedPointer.h"
+
 #include <memory>
 #include <functional>
 
@@ -31,6 +33,9 @@ using pu = std::unique_ptr<T>;
 
 template <class T>
 using ps = std::shared_ptr<T>;
+
+template <class T>
+using pp = ProtectedPointer<T>;
 
 template <typename T, typename... Args>
 pu<T> make_pu(Args&&... args) {

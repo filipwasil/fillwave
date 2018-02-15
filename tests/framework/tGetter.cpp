@@ -26,15 +26,15 @@ template <class Used>
 class User {
   Used used;
 public:
-  flw::TGetter<Used> get() {
-    auto fun = [&]() -> flw::TGetter<Used> {
+  flw::pp<Used> get() {
+    auto fun = [&]() -> flw::pp<Used> {
       return &used;
     };
     return fun();
   }
 };
 
-TEST(TGetterTests, security_tests_when_copy_enabled
+TEST(ppTests, security_tests_when_copy_enabled
 )
 {
   // Error field private
