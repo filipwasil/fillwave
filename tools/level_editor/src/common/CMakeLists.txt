@@ -9,6 +9,7 @@ set (SOURCECOMMON
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/helpers/StandardItemsHelper.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/windows/basic/NewNode.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/windows/basic/NodeNameInput.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/windows/basic/AssetsDialogChooser.cpp
     PARENT_SCOPE
     )
 set (HEADERSCOMMON
@@ -20,9 +21,10 @@ set (HEADERSCOMMON
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/MainWindowFileOperations.h
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/NodeModel.h
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/PrepareItemUniqueId.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/operations/helpers/StandardItemsHelper.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/operations/helpers/StandardItemsHelper.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ENodeType.hpp
     ${CMAKE_CURRENT_SOURCE_DIR}/windows/basic/NewNode.h
     ${CMAKE_CURRENT_SOURCE_DIR}/windows/basic/NodeNameInput.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/windows/basic/AssetsDialogChooser.h
     PARENT_SCOPE
     )

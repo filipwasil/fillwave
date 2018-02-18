@@ -13,8 +13,6 @@ class Sprite : public ANodeBase {
 
   QVector<QStandardItemModel*> getStandardModelForData() override;
 
-  void AddObjectToScene(std::shared_ptr<scene::AScene> mSceneView) override;
-
   std::string getObjectName();
 
  private:

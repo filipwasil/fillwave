@@ -11,7 +11,7 @@ CameraMotionCallback::CameraMotionCallback(Engine* engine)
 }
 
 void CameraMotionCallback::perform(const Event& event) {
-  mTimePassed += event.getData().mTime.mTimePassed;
+  mTimePassed += event.getData().mTime.timePassed;
   mEngine->getCurrentScene()->getCamera()->moveTo(calculateNewPosition(mTimePassed));
 }
 

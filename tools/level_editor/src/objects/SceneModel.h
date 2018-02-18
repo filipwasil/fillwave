@@ -29,9 +29,6 @@ class SceneModel : public QObject {
 
   void addNode(ANodeBase* node);
 
- private:
-  void addNewNodeToScen(ANodeBase* node);
-
  protected:
   quintptr mSceneID;
   std::vector<ANodeBase*> mModelObjects;

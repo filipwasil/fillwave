@@ -23,7 +23,7 @@ class EmptyScene : public AScene {
   void perform() override;
 
  private:
-  flw::flf::ps<flw::flf::Text> mText;
+  std::shared_ptr<flw::flf::Text> mText;
 };
 
 }

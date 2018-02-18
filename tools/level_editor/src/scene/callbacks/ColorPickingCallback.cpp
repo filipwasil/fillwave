@@ -12,7 +12,7 @@ ColorPickingCallback::ColorPickingCallback(Engine* engine)
 void ColorPickingCallback::perform(const Event& event) {
   MouseButtonEventData e = event.getData();
 //	if (e.mAction == GLFW_RELEASE) {
-  mEngine->pick(e.mWhereX, e.mWhereY);
+  mEngine->pick(e.whereX, e.whereY);
 //	}
 }
 
