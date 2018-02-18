@@ -69,7 +69,7 @@ void MainWidget::initMainGui(QWidget*& leftWidget, QWidget*& rightWidget) const 
 }
 
 MainWidget::~MainWidget() {
- // TODO: sprawdzić zarządzanie pamięcią
+ // TODO: check memory
 }
 
 void MainWidget::createBarMenu() {

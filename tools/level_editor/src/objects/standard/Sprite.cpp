@@ -16,8 +16,7 @@ std::string Sprite::getObjectName() {
 }
 
 void Sprite::init() {
-  if (!mNodeDataModel)
-  {
+  if (!mNodeDataModel) {
     return;
   }
   QStandardItemModel* positionModel = new QStandardItemModel(this);
@@ -42,11 +41,6 @@ void Sprite::init() {
 
   mTableModelRepresentation.push_back(positionModel);
 }
-
-void Sprite::AddObjectToScene(std::shared_ptr<scene::AScene> mSceneView) {
-
-}
-
 
 }
 }

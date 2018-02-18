@@ -22,15 +22,13 @@ void NodeModel::addNodeToModel(objects::ANodeBase* node, quintptr modelId) {
     return;
   }
   (*it)->addNode(node);
-  // TODO: dodawanie obiektu do pozyskanego modelu
 }
 
 std::shared_ptr<flw::Engine> NodeModel::getSceneEngine(quintptr sceneId) {
   auto scene = std::find_if(mModel.begin(), mModel.end(), [sceneId = sceneId](const auto &obj) {
     return sceneId == obj->getSceneID();
   });
-  if (scene == mModel.end())
-  {
+  if (scene == mModel.end()) {
     return nullptr;
   }
   return (*scene)->getSceneEngine();

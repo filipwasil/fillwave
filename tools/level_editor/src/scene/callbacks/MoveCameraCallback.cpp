@@ -24,7 +24,7 @@ void MoveCameraCallback::perform(const Event& event) {
         break;
       case Qt::Key_D:
         if (e.action == QEvent::KeyRelease) {
-          mEngine->configDebugger(EDebuggerState::eToggleState);
+          mEngine->configDebugger(EDebuggerState::toggleState);
         }
         break;
     }

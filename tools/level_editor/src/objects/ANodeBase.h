@@ -23,8 +23,6 @@ class ANodeBase : public QObject {
 
   virtual QVector<QStandardItemModel*> getStandardModelForData() = 0;
 
-  virtual void AddObjectToScene(std::shared_ptr<scene::AScene> mSceneView) = 0; // TODO: Prawdopodbnie nie potrzebana
-
   flw::flf::Model* getEngineModel() {
     return mNodeDataModel;
   };

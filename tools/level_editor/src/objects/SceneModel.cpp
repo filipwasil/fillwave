@@ -28,16 +28,7 @@ quintptr SceneModel::getSceneID() const {
 
 void SceneModel::addNode(ANodeBase* node) {
   node->setParent(this);
-  addNewNodeToScen(node);
   mModelObjects.push_back(node);
-}
-
-void SceneModel::addNewNodeToScen(ANodeBase* node) {
-  std::shared_ptr<flw::Engine> engine = mSceneView->getEngine();
-  flw::flf::Model* obj = node->getEngineModel();
-  std::unique_ptr<flw::flf::Model> model;
-  model.reset(obj);
-  engine->getCurrentScene()->attach(std::move(model));
 }
 
 void SceneModel::modelUpdated() {

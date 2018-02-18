@@ -18,19 +18,28 @@ void NodeController::inspectorUpdate(const QModelIndex& index) {
   }
 }
 
-void NodeController::addSceneModel(std::unique_ptr<objects::SceneModel> && object) {
+void NodeController::addSceneModel(std::unique_ptr<objects::SceneModel>&& object) {
   mModel->addSceneModel(std::move(object));
 }
 
 void NodeController::addNodeToModel(NodeData node) {
   auto sceneEngine = mModel->getSceneEngine(mCurrentScenId);
-  if (!sceneEngine)
-  {
+  if (!sceneEngine) {
     return;
   }
   objects::NodeFactory nFactory(sceneEngine);
   objects::ANodeBase* readyNode = nFactory.createNode(node.mType, node.name, node.mId);
+  if (!readyNode) {
+    return;
+  }
+  addCreatedModelToScene(readyNode, sceneEngine);
   mModel->addNodeToModel(readyNode, mCurrentScenId);
 }
 
+void NodeController::addCreatedModelToScene(objects::ANodeBase* node, std::shared_ptr<flw::Engine> engine) {
+  flw::flf::Model* obj = node->getEngineModel();
+  std::unique_ptr<flw::flf::Model> model;
+  model.reset(obj);
+  engine->getCurrentScene()->attach(std::move(model));
+}
 }

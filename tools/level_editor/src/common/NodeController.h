@@ -16,8 +16,9 @@ class NodeController : public QObject {
 
   ~NodeController() override = default;
 
-  void addSceneModel(std::unique_ptr<objects::SceneModel> && object);
+  void addSceneModel(std::unique_ptr<objects::SceneModel>&& object);
 
+  void addCreatedModelToScene(objects::ANodeBase* node, std::shared_ptr<flw::Engine> engine);
 
  public slots:
 
