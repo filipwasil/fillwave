@@ -34,32 +34,37 @@ void PickableModel::onUnpicked() {
   removeEffect(mPickedEffect);
 }
 
+void initCallbacks() {
+  auto eng = ContextGLFW::mGraphics;
+  eng->attachHandler([eng](const Event& event) {
+    CursorPositionEventData e = event.getData();
+    auto xPosition = ( ( e.xPosition / eng->getScreenSize()[0]) * 2.0 - 1.0);
+    auto yPosition = (-( e.yPosition / eng->getScreenSize()[1]) * 2.0 + 1.0);
+    eng->getCurrentScene()->getCursor()->move(glm::vec2(xPosition, yPosition));
+  }, flw::flf::EEventType::cursorPosition);
+
+  eng->attachHandler([eng](const flw::flf::Event& event) {
+    flw::flf::KeyboardEventData e = event.getData();
+    if (GLFW_KEY_D == e.key && e.action == GLFW_RELEASE) {
+      eng->configDebugger(flw::EDebuggerState::toggleState);
+    }
+  }, flw::flf::EEventType::key);
+
+  eng->attachHandler([eng](const Event& event) {
+    MouseButtonEventData e = event.getData();
+    if (e.action == GLFW_RELEASE) {
+      eng->pick(e.whereX, e.whereY);
+    }
+  }, flw::flf::EEventType::mouseButton);
+}
+
 int main(int argc, char* argv[]) {
   ContextGLFW mContext(argc, argv);
   ContextGLFW::cursorHide();
 
-  auto engine = ContextGLFW::mGraphics;
+  auto eng = ContextGLFW::mGraphics;
 
-  engine->attachHandler([engine](const Event& event) {
-    CursorPositionEventData e = event.getData();
-    auto xPosition = ( ( e.xPosition / engine->getScreenSize()[0]) * 2.0 - 1.0);
-    auto yPosition = (-( e.yPosition / engine->getScreenSize()[1]) * 2.0 + 1.0);
-    engine->getCurrentScene()->getCursor()->move(glm::vec2(xPosition, yPosition));
-  }, flw::flf::EEventType::cursorPosition);
-
-  ContextGLFW::mGraphics->attachHandler([](const flw::flf::Event& event) {
-    flw::flf::KeyboardEventData e = event.getData();
-    if (GLFW_KEY_D == e.key && e.action == GLFW_RELEASE) {
-      ContextGLFW::mGraphics->configDebugger(flw::EDebuggerState::toggleState);
-    }
-  }, flw::flf::EEventType::key);
-
-  engine->attachHandler([engine](const Event& event) {
-    MouseButtonEventData e = event.getData();
-    if (e.action == GLFW_RELEASE) {
-      engine->pick(e.whereX, e.whereY);
-    }
-  }, flw::flf::EEventType::mouseButton);
+  initCallbacks();
 
   auto scene = std::make_unique<Scene>();
   auto camera = std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
@@ -71,17 +76,16 @@ int main(int argc, char* argv[]) {
 
   scene->setCamera(std::move(camera));
 
-  scene->setCursor(std::make_unique<Cursor>(
-    engine, engine->storeTexture("textures/cursor/cool.png")));
+  scene->setCursor(std::make_unique<Cursor>(eng, eng->storeTexture("textures/cursor/cool.png")));
 
-  engine->setCurrentScene(std::move(scene));
+  eng->setCurrentScene(std::move(scene));
 
-  auto info = engine->storeText("Nothing picked", "fonts/Titania", glm::vec2(-0.98, 0.98), 60.0);
-  engine->getCurrentScene()->attachNew<PickableModel>("left", info, engine, glm::vec3(-3.0, 0.0, 0.0));
-  engine->getCurrentScene()->attachNew<PickableModel>("right", info, engine, glm::vec3(3.0, 0.0, 0.0));
-  engine->getCurrentScene()->attachNew<PickableModel>("center", info, engine, glm::vec3(0.0, 0.0, 0.0));
-  engine->getCurrentScene()->attachNew<PickableModel>("up", info, engine, glm::vec3(0.0, 3.0, 0.0));
-  engine->getCurrentScene()->attachNew<PickableModel>("down", info, engine, glm::vec3(0.0, -3.0, 0.0));
+  auto info = eng->storeText("Nothing picked", "fonts/Titania", glm::vec2(-0.98, 0.98), 60.0);
+  eng->getCurrentScene()->attachNew<PickableModel>("left", info, eng, glm::vec3(-3.0, 0.0, 0.0));
+  eng->getCurrentScene()->attachNew<PickableModel>("right", info, eng, glm::vec3(3.0, 0.0, 0.0));
+  eng->getCurrentScene()->attachNew<PickableModel>("center", info, eng, glm::vec3(0.0, 0.0, 0.0));
+  eng->getCurrentScene()->attachNew<PickableModel>("up", info, eng, glm::vec3(0.0, 3.0, 0.0));
+  eng->getCurrentScene()->attachNew<PickableModel>("down", info, eng, glm::vec3(0.0, -3.0, 0.0));
 
   mContext.render();
   exit(EXIT_SUCCESS);

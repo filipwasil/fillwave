@@ -39,11 +39,7 @@ WallModel::WallModel()
 
 WallModel::~WallModel() = default;
 
-int main(int argc, char* argv[]) {
-  ContextGLFW mContext(argc, argv);
-
-  ContextGLFW::mGraphics->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
-
+void initCallbacks() {
   ContextGLFW::mGraphics->attachHandler([](const flw::flf::Event& event) {
     flw::flf::KeyboardEventData e = event.getData();
     if (GLFW_KEY_T == e.key) {
@@ -59,6 +55,14 @@ int main(int argc, char* argv[]) {
       ContextGLFW::mGraphics->configDebugger(flw::EDebuggerState::toggleState);
     }
   }, flw::flf::EEventType::key);
+}
+
+int main(int argc, char* argv[]) {
+  ContextGLFW mContext(argc, argv);
+
+  ContextGLFW::mGraphics->storeLightSpot(glm::vec3(0.0, 0.0, 5.0), glm::quat(), glm::vec4(0.0, 1.0, 0.0, 0.0));
+
+  initCallbacks();
 
   auto camera = std::make_unique<flw::flf::CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
                                                     glm::quat(),
@@ -73,6 +77,7 @@ int main(int argc, char* argv[]) {
     const auto t = 1.0f + static_cast<float>(i) * 0.5f;
     scene->attachNew<CubeModel>(i, t);
   }
+
   scene->attachNew<WallModel>();
   scene->setCamera(std::move(camera));
 

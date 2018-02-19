@@ -22,3 +22,5 @@ class PickableModel : public flw::flf::Model {
   flw::ps<flw::flf::IEffect> mPickedEffect;
   std::string mName;
 };
+
+void initCallbacks();

@@ -34,8 +34,6 @@ int main(int argc, char* argv[]) {
 }
 
 void init() {
-
-
   auto scene = std::make_unique<Scene>();
   auto camera = std::make_unique<CameraPerspective>(glm::vec3(0.0, 0.0, 6.0),
                                                     glm::quat(),

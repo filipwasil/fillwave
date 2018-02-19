@@ -71,6 +71,7 @@ SnowEmiter::~SnowEmiter() = default;
 
 int main(int argc, char* argv[]) {
   ContextGLFW mContext(argc, argv);
+
   ContextGLFW::mGraphics->attachHandler([](const Event& event) {
     KeyboardEventData e = event.getData();
     if (GLFW_KEY_T == e.key) {

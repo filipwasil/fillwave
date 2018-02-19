@@ -16,3 +16,5 @@ class WallModel : public flw::flf::Model {
 
   ~WallModel() override;
 };
+
+void initCallbacks();
