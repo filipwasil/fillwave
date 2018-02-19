@@ -42,7 +42,7 @@ namespace flf {
 
 class Scene : public TreePtr<Entity> {
 public:
-  Scene(IRenderer *renderer = new RendererFR());
+  Scene(IRenderer* renderer = new RendererFR());
 
   virtual ~Scene() = default;
 
@@ -69,7 +69,7 @@ public:
   /* Scene */
   void setSkybox(pu<Skybox>&& skybox);
 
-  void setHUD(pu<HUD> hud);
+  void setHUD(pu<HUD>&& hud);
 
   void setAmbient(glm::vec3 cursor);
 
@@ -83,13 +83,13 @@ public:
 
   void stepInTime(float timePassedInSeconds);
 
-  void draw(ICamera &c);
+  void draw(ICamera& c);
 
   void drawHUD();
 
-  void drawDepth(ICamera &camera);
+  void drawDepth(ICamera& camera);
 
-  void drawDepthColor(ICamera &camera, glm::vec3 &position);
+  void drawDepthColor(ICamera& camera, glm::vec3& position);
 
   /* Draw */
   void draw();

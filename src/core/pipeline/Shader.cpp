@@ -151,7 +151,7 @@ Shader::DebugInfo Shader::getDebugInfo() const {
 } /* flw */
 
 std::vector<flw::flc::Shader *>
-operator+(std::vector<flw::flc::Shader*> shaders, flw::flc::Shader* shader) {
+operator+(std::vector<flw::flc::Shader*>& shaders, flw::flc::Shader* shader) {
   shaders.push_back(shader);
   return shaders;
 }

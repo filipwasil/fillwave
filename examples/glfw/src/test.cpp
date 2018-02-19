@@ -6,7 +6,7 @@ using namespace flw::flf;
 using namespace flw::flc;
 using namespace flw::flc;
 
-const GLint SPHERES = 5;
+//const GLint SPHERES = 5;
 
 int main(int argc, char* argv[]) {
   ContextGLFW mContext(argc, argv);
@@ -26,8 +26,8 @@ void init() {
   light->moveTo(glm::vec3(0.0, 0.0, 3.0));
 
   /* Texture */
-  auto textureN = engine->storeTexture("255_255_255.color");
-  auto textureS = engine->storeTexture("");
+  //auto textureN = engine->storeTexture("255_255_255.color");
+  //auto textureS = engine->storeTexture("");
 
   /* Lights */
   engine->storeLightSpot(glm::vec3(1.0, 1.0, 3.0), glm::quat(), glm::vec4(1.0, 1.0, 1.0, 0.0), light.get());
@@ -50,7 +50,7 @@ void init() {
     , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
   };
 
-  auto program = ProgramLoader(engine).getProgram(EProgram::basic);
+  //auto program = ProgramLoader(engine).getProgram(EProgram::basic);
 
   flw::flc::Texture2DRenderable t(GL_COLOR_ATTACHMENT0, textureFile, parameters);
 }

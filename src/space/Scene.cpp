@@ -28,12 +28,13 @@ namespace flw {
 namespace flf {
 
 Scene::Scene(IRenderer* renderer)
-    : mRenderer(renderer)
-    , mLastPicked(nullptr)
-    , mAmbientGlobal(glm::vec3(1.0)) {
+  : mRenderer(renderer)
+  , mLastPicked(nullptr)
+  , mAmbientGlobal(glm::vec3(1.0)) {
+  // nothing
 }
 
-void Scene::setRenderer(IRenderer *renderer) {
+void Scene::setRenderer(IRenderer* renderer) {
   mRenderer = std::unique_ptr<IRenderer>(renderer);
 }
 
@@ -45,7 +46,7 @@ void Scene::setCursor(pu<Cursor>&& cursor) {
   mCursor = std::move(cursor);
 }
 
-void Scene::setHUD(pu<HUD> hud) {
+void Scene::setHUD(pu<HUD>&& hud) {
   mHeadUpDisplay = std::move(hud);
 }
 
@@ -105,8 +106,7 @@ void Scene::registerPickable(Entity* entity) {
     color = glm::vec3(rand_r / 255.0, rand_g / 255.0, rand_b / 255.0);
     GLint name = (GLint) (rand_r) + (GLint) (rand_g) + (GLint) (rand_b);
 
-    auto it = mPickingTable.find(name);
-    if (it == mPickingTable.end()) {
+    if (mPickingTable.find(name) == mPickingTable.end()) {
       mPickingTable[name] = entity;
       entity->pick(color);
       return;

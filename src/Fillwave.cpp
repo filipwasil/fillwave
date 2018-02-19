@@ -68,6 +68,7 @@ Engine::Engine(GLint argc, GLchar* const argv[]) {
   *  because it needs mImpl to be created fully before Initialization.
   *  mImpl uses Engine functions  */
   mImpl->init();
+  std::vector<flw::flf::Entity, std::allocator<flw::flf::Entity>> a;
 }
 
 #endif

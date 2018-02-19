@@ -44,7 +44,17 @@ void ContextGLFW::windowInit(GLFWwindow *&window) {
   mScreenWidth = mode->width;
   mScreenHeight = mode->height;
 
-  window = glfwCreateWindow(mScreenWidth, mScreenHeight, "Fillwave", glfwGetPrimaryMonitor(), NULL);
+  // for presentation purposes
+  int monitorsSize = 0;
+  auto monitors = glfwGetMonitors(&monitorsSize);
+
+  if (monitorsSize > 1) {
+    window = glfwCreateWindow(mScreenWidth, mScreenHeight, "Fillwave", monitors[1], NULL);
+  } else if (monitorsSize == 1) {
+    window = glfwCreateWindow(mScreenWidth, mScreenHeight, "Fillwave", monitors[0], NULL);
+  } else {
+    // no monitors to get
+  }
 
   glfwMakeContextCurrent(window);
   glfwWindowHint(GLFW_RED_BITS, 8);

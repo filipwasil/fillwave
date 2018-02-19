@@ -48,6 +48,13 @@ int main(int argc, char* argv[]) {
     engine->getCurrentScene()->getCursor()->move(glm::vec2(xPosition, yPosition));
   }, flw::flf::EEventType::cursorPosition);
 
+  ContextGLFW::mGraphics->attachHandler([](const flw::flf::Event& event) {
+    flw::flf::KeyboardEventData e = event.getData();
+    if (GLFW_KEY_D == e.key && e.action == GLFW_RELEASE) {
+      ContextGLFW::mGraphics->configDebugger(flw::EDebuggerState::toggleState);
+    }
+  }, flw::flf::EEventType::key);
+
   engine->attachHandler([engine](const Event& event) {
     MouseButtonEventData e = event.getData();
     if (e.action == GLFW_RELEASE) {
@@ -66,7 +73,7 @@ int main(int argc, char* argv[]) {
   scene->setCamera(std::move(camera));
 
   scene->setCursor(std::make_unique<Cursor>(
-    engine, engine->storeTexture("textures/cursor/standard_blue.png")));
+    engine, engine->storeTexture("textures/cursor/cool.png")));
 
   engine->setCurrentScene(std::move(scene));
 
