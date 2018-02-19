@@ -44,7 +44,7 @@ public:
 
   glm::vec3 getPickableColor();
 
-  virtual void pick(glm::vec3 color) = 0;
+  virtual void assignColor(const glm::vec3& color) = 0;
 
   virtual void unpick() = 0;
 

@@ -82,7 +82,7 @@ public:
   void updateParentRotation(glm::quat &rotation);
 
   /* IPickable */
-  void pick(glm::vec3 color) override;
+  void assignColor(const glm::vec3& color) override;
 
   void unpick() override;
 

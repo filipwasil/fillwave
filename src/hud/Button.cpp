@@ -34,8 +34,9 @@ Button::Button(Engine *engine, flc::Texture2D *texture, glm::vec2 position, glm:
   // nothing
 }
 
-void Button::pick(glm::vec3 /*color*/) {
+void Button::assignColor(const glm::vec3& color) {
   mFlagPickable = true;
+  mPickColor = color;
 }
 
 void Button::unpick() {

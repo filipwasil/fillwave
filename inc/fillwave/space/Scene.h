@@ -114,10 +114,8 @@ protected:
 
   std::unordered_map<GLint, Entity* > mPickingTable;
   Entity* mLastPicked;
+  GLint mCurrentPicableColor;
   glm::vec3 mAmbientGlobal;
-
-private:
-  const GLint MAXIMUM_TRIALS_TO_PICK_COLOR = 2000;
 };
 
 } /* flf */

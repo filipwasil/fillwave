@@ -9,14 +9,13 @@ PickableModel::PickableModel(std::string name,
   flw::ps<flw::flf::Text> text,
   flw::Engine* engine,
   glm::vec3 initialPosition)
-  : flw::flf::Model(
-  engine
-  , ProgramLoader(engine).getProgram(EProgram::basic)
-  , "meshes/sphere.obj"
-  , "64_128_255.checkboard")
-  , mText(text)
-  , mPickedEffect(std::make_shared<flw::flf::BoostColor>(6.0f))
-  , mName(name) {
+  : flw::flf::Model(engine
+    , ProgramLoader(engine).getProgram(EProgram::basic)
+    , "meshes/sphere.obj"
+    , "64_128_255.checkboard")
+    , mText(text)
+    , mPickedEffect(std::make_shared<flw::flf::BoostColor>(6.0f))
+    , mName(name) {
   scaleTo(0.1);
   moveBy(initialPosition);
   ContextGLFW::mGraphics->getCurrentScene()->registerPickable(this);

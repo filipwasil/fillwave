@@ -22,7 +22,7 @@
 #include <fillwave/space/Scene.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Scene", FERROR | FFATAL)
+FLOGINIT("Scene.cpp", FERROR | FFATAL | FUSER | FDEBUG)
 
 namespace flw {
 namespace flf {
@@ -30,6 +30,7 @@ namespace flf {
 Scene::Scene(IRenderer* renderer)
   : mRenderer(renderer)
   , mLastPicked(nullptr)
+  , mCurrentPicableColor(0)
   , mAmbientGlobal(glm::vec3(1.0)) {
   // nothing
 }
@@ -94,29 +95,28 @@ void Scene::drawDepthColor(ICamera &camera, glm::vec3 &position) {
 }
 
 void Scene::registerPickable(Entity* entity) {
-  GLint rand_r, rand_g, rand_b;
-  glm::vec3 color;
+  glm::ivec3 nextColor(
+    mCurrentPicableColor % 256
+    , (mCurrentPicableColor / 256) % 256
+    , (mCurrentPicableColor / ( 256 * 256) )  % 256);
 
-  for (GLint i = 0; i < MAXIMUM_TRIALS_TO_PICK_COLOR; ++i) {
+  glm::vec3 color(nextColor.r / 256.0f, nextColor.g / 256.0f, nextColor.b / 256.0f);
 
-    rand_r = rand() % 256;
-    rand_g = rand() % 256;
-    rand_b = rand() % 256;
+  fLogD("Assigned Picked color: ", color.r, " ", color.g, " ", color.b);
 
-    color = glm::vec3(rand_r / 255.0, rand_g / 255.0, rand_b / 255.0);
-    GLint name = (GLint) (rand_r) + (GLint) (rand_g) + (GLint) (rand_b);
+  mPickingTable[mCurrentPicableColor] = entity;
 
-    if (mPickingTable.find(name) == mPickingTable.end()) {
-      mPickingTable[name] = entity;
-      entity->pick(color);
-      return;
-    }
-  }
-  fLogE("Failed to register pickable entity");
+  entity->assignColor(color);
+
+  mCurrentPicableColor+=1;
 }
 
 void Scene::pick(glm::ivec4 color) {
-  GLint name = color.r + color.g + color.b;
+
+  GLint name = color.r * 256 * 256 + color.g * 256 + color.b;
+
+  fLogD("Picked color:", " ", color.r, " ", color.g, " ", color.b, " Name: ", name);
+
   if (!mPickingTable[name]) {
     return;
   }
@@ -130,11 +130,11 @@ void Scene::pick(glm::ivec4 color) {
 
 void Scene::updateRenderer() {
   if (!mRenderer->mFlagReload) {
-    fLogD("Renderer waiting for update");
+    fLogI("Renderer waiting for update");
     mRenderer->mFlagReload = isAttachedDetached();
     return;
   }
-  fLogD("Renderer update");
+  fLogI("Renderer update");
   mRenderer->clear();
   mRenderer->mSkybox = mSkybox ? mSkybox.get() : nullptr;
   for (auto &it : mChildren) {

@@ -160,11 +160,11 @@ void Entity::updateParentRotation(glm::quat &parent) {
   notifyObservers();
 }
 
-void Entity::pick(glm::vec3 color) {
+void Entity::assignColor(const glm::vec3& color) {
   mFlagPickable = true;
   mPickColor = color;
   std::for_each(mChildren.begin(), mChildren.end(), [color](pu<Entity>& e) {
-    e->pick(color);
+    e->assignColor(color);
   });
 }
 
