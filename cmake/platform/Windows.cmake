@@ -21,9 +21,6 @@ add_subdirectory (${FILLWAVE_EXT_GLEW_PATH})
 add_subdirectory (${FILLWAVE_EXT_FREETYPE2_PATH})
 add_subdirectory (${FILLWAVE_EXT_GLFW_PATH})
 add_subdirectory (${FILLWAVE_EXT_FONTGENERATOR_PATH})
-if (FILLWAVE_BUILD_QT_EDITOR)
-    add_subdirectory (${FILLWAVE_EXAMPLE_EDITOR_PATH})
-endif()
 
 # -----------------------------------------------
 # Includes
