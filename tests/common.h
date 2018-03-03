@@ -1,6 +1,7 @@
-//
-// Created by filip on 24.04.16.
-//
+#pragma once
+
+#include "gtest/gtest.h"
+#include "gmock/gmock.h"
 
 #ifndef LIBFILLWAVE_COMMON_H
 #define LIBFILLWAVE_COMMON_H

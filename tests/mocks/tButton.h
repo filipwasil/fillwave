@@ -1,8 +1,8 @@
 #pragma once
 
+#include "../common.h"
+
 #include <fillwave/hud/Button.h>
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
 
 using namespace flw;
 using namespace flw::flf;

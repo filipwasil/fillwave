@@ -1,13 +1,12 @@
-#include <fillwave/Log.h>
+#include "../common.h"
+
 #include <fillwave/Fillwave.h>
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
 
 using namespace testing;
 
 struct Fool {
   Fool () : a (0) {
-
+    //nothing
   }
 
   void fooConst() const {

@@ -1,5 +1,4 @@
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#include "../common.h"
 
 #include <fillwave/models/base/Moveable.h>
 

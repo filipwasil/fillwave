@@ -26,7 +26,7 @@
 #include <fillwave/common/Observable.h>
 #include <fillwave/models/base/Moveable.h>
 #include <fillwave/common/Easing.h>
-#include <fillwave/common/Allocator.h>
+#include <fillwave/common/Containers.h>
 #include <memory>
 #include <vector>
 #include <functional>
@@ -172,7 +172,7 @@ protected:
  private:
   unsigned int mCurrentCallbackIdx;
   unsigned int mCallbackLoops;
-  vec<Callback<float(float)>> mTimeCallbacks;
+  vecHeap<Callback<float(float)>> mTimeCallbacks;
 
   struct {
     glm::vec3 mTranslation;

@@ -5,16 +5,8 @@
  *      Author: filip
  */
 
-//#include <fillwave/Log.h>
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#include "../common.h"
 
-//FLOGINIT_DEFAULT()
-
-//using namespace flw;
-//using namespace flw::framework;
-
-TEST (Template, test
-) {
-EXPECT_EQ (1, 1);
+TEST (Template, test) {
+   EXPECT_EQ (1, 1);
 }

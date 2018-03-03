@@ -21,19 +21,33 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/common/Aliases.h>
-#include <vector>
-#include <cmath>
+#include <fillwave/OpenGL.h>
 
 namespace flw {
 namespace flf {
 
-template <class T>
-using Allocator = std::allocator<T>;
+template <class TValueType>
+class AllocatorStack {
+ public:
+  using value_type = TValueType;
+  AllocatorStack() {
+    // nothing
+  }
 
+  template <class TAllocatorType>
+  AllocatorStack(AllocatorStack<TAllocatorType> const&) {
+    // nothing
+  }
 
-template <class T>
-using vec = std::vector<T, Allocator<T>>;
+  TValueType* allocate(size_t size);
+  void deallocate(TValueType* ptr, size_t size);
+};
+
+template <class TValueType>
+bool operator == (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs);
+
+template <class TValueType>
+bool operator != (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs);
 
 } /* flf */
 } /* flw */

@@ -128,7 +128,7 @@ protected:
 
   GLboolean mChildrenPropagateEvent;
   GLboolean mParentRefresh;
-  vec<EventHandler> mEventHandlers;
+  vecStack<EventHandler> mEventHandlers;
 
   bool mPSC;
   bool mPSR;

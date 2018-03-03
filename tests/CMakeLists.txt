@@ -1,12 +1,15 @@
+set(TESTS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
 set (FILLWAVE_PRODUCTION_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/common/Strings.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/../src/common/Observable.cpp
+    ${TESTS_DIR}/../src/common/Strings.cpp
+    ${TESTS_DIR}/../src/common/Observable.cpp
     )
 
-aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/framework TEST_FRAMEWORK_SOURCES)
-aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/stubs TEST_STUBS_SOURCES)
+aux_source_directory (${TESTS_DIR}/framework TEST_FRAMEWORK_SOURCES)
+aux_source_directory (${TESTS_DIR}/stubs TEST_STUBS_SOURCES)
+aux_source_directory (${TESTS_DIR}/mocks TEST_MOCK_SOURCES)
 
-include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+include_directories (${TESTS_DIR})
 
 set (FILLWAVE_MOCK_SOURCES
     ${TEST_FRAMEWORK_SOURCES}

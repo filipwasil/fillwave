@@ -115,7 +115,7 @@ protected:
   GLint mUniformLocationCacheBones;
   GLint mUniformLocationCacheBonesShadow;
   GLint mUniformLocationCacheBonesShadowColor;
-  vec<Mesh*> mMeshes;
+  vecHeap<Mesh*> mMeshes;
 private:
   /* Init */
   void initUniformsCache();
