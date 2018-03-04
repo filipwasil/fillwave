@@ -9,11 +9,10 @@
 #include <QObject>
 #include <fillwave/Fillwave.h>
 #include "scene/callbacks/IEventHandler.h"
-#include "objects/SceneModel.h"
 
 namespace scene {
 class AScene : public QObject {
-//TODO: Demonatrz property system
+//TODO: Property System to remove
  public:
   AScene(int argc, char* const* argv, QMap<QString, QVariant> parametersMap)
     : mSceneParameters(parametersMap) {

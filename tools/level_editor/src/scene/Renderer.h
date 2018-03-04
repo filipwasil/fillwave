@@ -12,7 +12,7 @@ class Renderer : public QGLWidget {
  public:
   explicit Renderer(int argc, char* argv[], QWidget* parent = nullptr);
 
-  virtual ~Renderer();
+  virtual ~Renderer() = default;
 
   void setNewScene(std::shared_ptr<scene::AScene> scen);
 

@@ -1,6 +1,5 @@
 #include "Renderer.h"
 #include "scene/sceneImp/EmptyScene.h"
-#include "scene/ScensFactory.h"
 
 using namespace flw;
 using namespace flw::flf;
@@ -24,9 +23,6 @@ Renderer::Renderer(int argc, char* argv[], QWidget* parent)
   mTime = Time::now();
   this->setFocusPolicy(Qt::StrongFocus);
   this->setMouseTracking(true);
-}
-
-Renderer::~Renderer() {
 }
 
 void Renderer::initializeGL() {
