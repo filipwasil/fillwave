@@ -13,6 +13,8 @@ class NodeFactory {
 
   ANodeBase* createNode(common::ENodeType type, QString name, qintptr id);
 
+  virtual ~NodeFactory();
+
  private:
   std::shared_ptr<flw::Engine> mEngine;
   QMap<common::ENodeType, INodeCreator*> nodeCreators;

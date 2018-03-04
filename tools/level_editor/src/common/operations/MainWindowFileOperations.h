@@ -8,11 +8,12 @@ namespace operations {
 
 class MainWindowFileOperations : public QObject {
  public:
-  explicit MainWindowFileOperations(QObject* parent = nullptr);
+  explicit MainWindowFileOperations(QWidget* parent = nullptr);
 
   QVBoxLayout* createFileSystemTree();
 
  private:
+  QWidget* mParent;
   QTreeView* mFileSystemTree;
 };
 

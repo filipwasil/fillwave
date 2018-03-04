@@ -9,16 +9,16 @@ namespace windows {
 namespace basic {
 NewNode::NewNode(QWidget* parent)
   : QDialog(parent)
-  , mNodeModel(new QStandardItemModel())
-  , mNodeList(new QTreeView())
-  , mOk(new QPushButton("OK"))
-  , mCancel(new QPushButton("Cancel")) {
+  , mNodeModel(new QStandardItemModel(this))
+  , mNodeList(new QTreeView(this))
+  , mOk(new QPushButton("OK", this))
+  , mCancel(new QPushButton("Cancel", this)) {
   mTypeMap["Sprite"] = ENodeType::SPRITE;
   mSelectedNode = ENodeType::NONE;
   init();
-  QVBoxLayout* mainLayout = new QVBoxLayout();
+  QVBoxLayout* mainLayout = new QVBoxLayout(this);
   mainLayout->addWidget(mNodeList);
-  QHBoxLayout* buttonLayout = new QHBoxLayout();
+  QHBoxLayout* buttonLayout = new QHBoxLayout(this);
   buttonLayout->addWidget(mOk);
   buttonLayout->addWidget(mCancel);
   mainLayout->addLayout(buttonLayout);
@@ -29,7 +29,7 @@ NewNode::NewNode(QWidget* parent)
 }
 
 void NewNode::init() {
-  QStandardItemModel* model = new QStandardItemModel();
+  QStandardItemModel* model = new QStandardItemModel(this);
   QStandardItem* item = new QStandardItem(QString("Sprite"));
   model->setItem(0, 0, item);
   mNodeList->setModel(model);

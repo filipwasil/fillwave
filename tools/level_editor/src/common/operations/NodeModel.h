@@ -23,7 +23,6 @@ class NodeModel : public QObject {
  signals:
 
   void elementInserted(std::shared_ptr<objects::SceneModel> element);
-  //TODO: memory mangment checks.
  private:
   std::vector<std::unique_ptr<objects::SceneModel>> mModel;
 };

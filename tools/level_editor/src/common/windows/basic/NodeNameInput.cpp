@@ -7,13 +7,13 @@ namespace basic {
 
 NodeNameInput::NodeNameInput(QWidget* parent)
   : QDialog(parent) {
-  QHBoxLayout* buttons = new QHBoxLayout();
-  mOk = new QPushButton("Ok");
-  mCancel = new QPushButton("Cancel");
+  QHBoxLayout* buttons = new QHBoxLayout(this);
+  mOk = new QPushButton("Ok", this);
+  mCancel = new QPushButton("Cancel", this);
   buttons->addWidget(mOk);
   buttons->addWidget(mCancel);
-  QVBoxLayout* all = new QVBoxLayout();
-  mName = new QLineEdit();
+  QVBoxLayout* all = new QVBoxLayout(this);
+  mName = new QLineEdit(this);
   all->addWidget(mName);
   all->addLayout(buttons);
   QObject::connect(mOk, &QPushButton::clicked, this, &QDialog::close);
@@ -26,11 +26,6 @@ QString NodeNameInput::getName() {
   return mName->text();
 }
 
-NodeNameInput::~NodeNameInput() {
-  delete mOk;
-  delete mCancel;
-  delete mName;
-}
 }
 }
 }

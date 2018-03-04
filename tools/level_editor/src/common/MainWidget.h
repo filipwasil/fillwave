@@ -56,8 +56,6 @@ class MainWidget : public QMainWindow {
   std::unique_ptr<common::MainWindowNodeOperations> mNodeOperations;
   std::unique_ptr<common::operations::MainWindowFileOperations> mFileSystemOperations;
   std::unique_ptr<common::NodeController> mNodeController;
-
-
 };
 
 }

@@ -11,7 +11,7 @@ namespace basic {
 class AssetsDialogChooser : public QObject {
  Q_OBJECT
  public:
-  AssetsDialogChooser(QObject* parent = Q_NULLPTR);
+  explicit AssetsDialogChooser(QObject* parent = Q_NULLPTR);
 
   virtual ~AssetsDialogChooser();
 

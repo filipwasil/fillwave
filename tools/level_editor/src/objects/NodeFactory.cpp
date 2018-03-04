@@ -1,3 +1,4 @@
+#include <QtAlgorithms>
 #include "NodeFactory.h"
 #include "objects/creators/SpriteCreator.h"
 
@@ -9,6 +10,10 @@ NodeFactory::NodeFactory(std::shared_ptr<flw::Engine> engine)
 
 ANodeBase* NodeFactory::createNode(common::ENodeType type, QString name, qintptr id) {
   return (nodeCreators[type])->createCompleteNode(name, id, mEngine);
+}
+
+NodeFactory::~NodeFactory() {
+  qDeleteAll(nodeCreators);
 }
 
 }

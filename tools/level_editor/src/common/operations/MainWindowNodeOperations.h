@@ -26,7 +26,7 @@ struct NodeData
 class MainWindowNodeOperations : public QObject {
   Q_OBJECT
  public:
-  MainWindowNodeOperations(QObject* parent = nullptr);
+  MainWindowNodeOperations(QWidget* parent = nullptr);
 
   void newNodeDialog();
 
@@ -48,6 +48,7 @@ class MainWindowNodeOperations : public QObject {
 signals:
   void addNewNode(NodeData node);
  private:
+  QWidget *mParent;
   QTreeView* mScenTree;
   QStandardItemModel* mSceneModel;
   QTableView* mInspectorView;
