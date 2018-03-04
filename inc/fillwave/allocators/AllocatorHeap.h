@@ -30,24 +30,52 @@ template <class TValueType>
 class AllocatorHeap {
  public:
   using value_type = TValueType;
-  AllocatorHeap() {
+  AllocatorHeap()
+    : mSizeBytes (1 << 16)
+    , mSizeElements (mSizeBytes / sizeof(TValueType))
+    , mValues (new GLubyte[mSizeBytes]) {
     // nothing
+  }
+
+  virtual ~AllocatorHeap() {
+    delete [] mValues;
   }
 
   template <class TAllocatorType>
-  AllocatorHeap(AllocatorHeap<TAllocatorType> const&) {
-    // nothing
+  AllocatorHeap(AllocatorHeap<TAllocatorType> const& allocator) {
+    *this = allocator;
   }
 
-  TValueType* allocate(size_t size);
-  void deallocate(TValueType* ptr, size_t size);
+  // todo confirm. Arg means that allocated element id equals size
+  TValueType* allocate(size_t size) {
+    if (size > mSizeElements) {
+      std::cout
+        << "Exceeded maximum memory reserved (" << mSizeBytes << " bytes)"
+        << " of " << typeid(TValueType).name() << "Stack allocator" << std::endl;
+      return nullptr;
+    }
+    return ::new (mValues) TValueType;
+  }
+
+  void deallocate(TValueType* ptr, size_t size) {
+    memcpy(mValues, ptr, size);
+  }
+
+  size_t getMaxMemorySize() {
+    return mSizeBytes;
+  }
+
+ private:
+  size_t mSizeBytes;
+  size_t mSizeElements;
+  GLubyte* mValues;
 };
 
 template <class TValueType>
-bool operator == (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs);
+bool operator == (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) = delete;
 
 template <class TValueType>
-bool operator != (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs);
+bool operator != (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) = delete;
 
 } /* flf */
 } /* flw */
