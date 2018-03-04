@@ -65,10 +65,10 @@ class AllocatorStack {
 };
 
 template <class TValueType>
-bool operator == (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs);
+bool operator == (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs) = delete;;
 
 template <class TValueType>
-bool operator != (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs);
+bool operator != (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs) = delete;;
 
 } /* flf */
 } /* flw */
