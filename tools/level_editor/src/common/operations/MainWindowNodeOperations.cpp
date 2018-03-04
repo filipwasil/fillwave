@@ -1,8 +1,6 @@
 #include <QLabel>
 #include <QToolButton>
 #include "MainWindowNodeOperations.h"
-#include "common/windows/basic/NewNode.h"
-#include "common/operations/helpers/StandardItemsHelper.h"
 
 namespace common {
 MainWindowNodeOperations::MainWindowNodeOperations(QWidget* parent)
@@ -43,12 +41,17 @@ QVBoxLayout* MainWindowNodeOperations::createNodeWidget() {
 QVBoxLayout* MainWindowNodeOperations::createInspectorView() {
   QLabel* label = new QLabel("Inspector", mParent);
   label->setAlignment(Qt::AlignHCenter);
-
-  mInspectorView = new QTableView(mParent);
-  mInspectorView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  QVBoxLayout* vBox = new QVBoxLayout(mParent);
+  QWidget* inspectorWidget = new QWidget(mParent);
+  inspectorWidget->setLayout(new QVBoxLayout(inspectorWidget));
+  auto mInspectorView2 = new QTableView();
+  mInspectorView2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  QVBoxLayout* vBox = new QVBoxLayout();
+  mInspectorScrollArea = new QScrollArea(mParent);
+  mInspectorScrollArea->setBackgroundRole(QPalette::Dark);
+  mInspectorScrollArea->setWidget(inspectorWidget);
   vBox->addWidget(label);
-  vBox->addWidget(mInspectorView);
+  vBox->addWidget(mInspectorScrollArea);
+  inspectorWidget->show();
   return vBox;
 }
 
@@ -65,24 +68,6 @@ QVBoxLayout* MainWindowNodeOperations::createOther() {
 }
 
 void MainWindowNodeOperations::newNodeDialog() {
-  common::windows::basic::NewNode sNode;
-  sNode.exec();
-  auto nodeType = sNode.getSelectedNode();
-  if (nodeType == ENodeType::NONE) {
-    return;
-  }
-  common::operations::helpers::StandardItemsHelper itemHelper;
-  QModelIndex idx = mScenTree->currentIndex();
-  auto item = mSceneModel->itemFromIndex(idx);
-  auto newItem = itemHelper.createStandardItem(nodeType, sNode.getName());
-  if (item) {
-    item->setChild(item->rowCount(), newItem);
-  } else {
-    mSceneModel->appendRow(newItem);
-  }
-  auto newItemModel = newItem->index();
-  NodeData nodeInfo(nodeType, newItemModel.internalId(), sNode.getName());
-  emit addNewNode(nodeInfo);
 }
 
 }

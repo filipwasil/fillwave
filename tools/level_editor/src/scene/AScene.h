@@ -9,7 +9,6 @@
 #include <QObject>
 #include <fillwave/Fillwave.h>
 #include "scene/callbacks/IEventHandler.h"
-#include "objects/SceneModel.h"
 
 namespace scene {
 class AScene : public QObject {

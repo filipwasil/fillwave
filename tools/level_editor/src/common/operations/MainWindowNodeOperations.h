@@ -3,28 +3,14 @@
 #include <QTreeView>
 #include <QStandardItemModel>
 #include <QTableView>
+#include <QScrollArea>
 #include "common/MainWidget.h"
 #include "scene/callbacks/StandardMouseEventHandler.h"
-#include "objects/ANodeBase.h"
-#include "common/ENodeType.hpp"
 
 namespace common {
 
-struct NodeData
-{
-  NodeData(ENodeType type, quintptr id, const QString& name)
-    : mType(type)
-    , mId(id)
-    , name(name) {
-  }
-
-  ENodeType mType = ENodeType::NONE;
-  quintptr mId = 0;
-  QString name;
-};
-
 class MainWindowNodeOperations : public QObject {
-  Q_OBJECT
+ Q_OBJECT
  public:
   MainWindowNodeOperations(QWidget* parent = nullptr);
 
@@ -45,14 +31,13 @@ class MainWindowNodeOperations : public QObject {
   QVBoxLayout* createInspectorView();
 
   QVBoxLayout* createOther();
-signals:
-  void addNewNode(NodeData node);
+
  private:
-  QWidget *mParent;
+  QWidget* mParent;
   QTreeView* mScenTree;
   QStandardItemModel* mSceneModel;
-  QTableView* mInspectorView;
   QTreeWidget* mOther;
+  QScrollArea* mInspectorScrollArea;
   scene::callbacks::StandardMouseEventHandler* eventFilterMouse;
 };
 
