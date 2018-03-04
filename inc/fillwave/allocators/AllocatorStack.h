@@ -35,12 +35,33 @@ class AllocatorStack {
   }
 
   template <class TAllocatorType>
-  AllocatorStack(AllocatorStack<TAllocatorType> const&) {
-    // nothing
+  AllocatorStack(AllocatorStack<TAllocatorType> const& allocator) {
+    *this = allocator;
   }
 
-  TValueType* allocate(size_t size);
-  void deallocate(TValueType* ptr, size_t size);
+  // todo confirm. Arg means that allocated element id equals size
+  TValueType* allocate(size_t size) {
+    if (size > mSizeElements) {
+      std::cout
+        << "Exceeded maximum memory reserved (" << mSizeBytes << " bytes)"
+        << " of " << typeid(TValueType).name() << "Stack allocator" << std::endl;
+      return nullptr;
+    }
+    return ::new (mValues) TValueType;
+  }
+
+  void deallocate(TValueType* ptr, size_t size) {
+    memcpy(mValues, ptr, size);
+  }
+
+  static size_t getMaxMemorySize() {
+    return mSizeBytes;
+  }
+
+ private:
+  static constexpr size_t mSizeBytes = 1 << 16;
+  static constexpr size_t mSizeElements = mSizeBytes / sizeof(TValueType);
+  TValueType mValues[mSizeElements];
 };
 
 template <class TValueType>

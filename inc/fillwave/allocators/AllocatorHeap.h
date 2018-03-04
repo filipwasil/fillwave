@@ -30,17 +30,36 @@ template <class TValueType>
 class AllocatorHeap {
  public:
   using value_type = TValueType;
-  AllocatorHeap() {
+  AllocatorHeap()
+    : mCurrentIdx ()
+    , mOccupied {0} {
     // nothing
   }
 
   template <class TAllocatorType>
-  AllocatorHeap(AllocatorHeap<TAllocatorType> const&) {
-    // nothing
+  AllocatorHeap(AllocatorHeap<TAllocatorType> const& allocator) {
+    *this = allocator;
   }
 
-  TValueType* allocate(size_t size);
-  void deallocate(TValueType* ptr, size_t size);
+  TValueType* allocate(size_t size) {
+    GLubyte* ptr = mBytes + mCurrentIdx * sizeof(TValueType);
+    while (0 != mOccupied[(++mCurrentIdx)%mSizeElements]) {
+
+    }
+    ptr += mCurrentIdx * sizeof(TValueType);
+    return new (ptr) TValueType;
+  }
+  void deallocate(TValueType* ptr, size_t size) {
+
+  }
+
+ private:
+  static constexpr size_t mSizeBytes = 100000;
+  static constexpr size_t mSizeElements = mSizeBytes / sizeof(TValueType);
+  size_t mCurrentIdx;
+  // todo potential optimization, use one bit instead of int. Is it worth it anyway ?
+  int mOccupied[mSizeElements];
+  GLubyte mBytes[mSizeBytes];
 };
 
 template <class TValueType>
