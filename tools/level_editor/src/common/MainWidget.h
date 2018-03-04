@@ -15,7 +15,6 @@
 #include "scene/callbacks/StandardMouseEventHandler.h"
 #include "common/operations/MainWindowNodeOperations.h"
 #include "common/operations/MainWindowFileOperations.h"
-#include "common/NodeController.h"
 
 class QPushButton;
 
@@ -55,9 +54,6 @@ class MainWidget : public QMainWindow {
   QMenu* mHelpMenu;
   std::unique_ptr<common::MainWindowNodeOperations> mNodeOperations;
   std::unique_ptr<common::operations::MainWindowFileOperations> mFileSystemOperations;
-  std::unique_ptr<common::NodeController> mNodeController;
-
-
 };
 
 }
