@@ -31,9 +31,14 @@ class AllocatorHeap {
  public:
   using value_type = TValueType;
   AllocatorHeap()
-    : mCurrentIdx ()
-    , mOccupied {0} {
+    : mSizeBytes (1 << 16)
+    , mSizeElements (mSizeBytes / sizeof(TValueType))
+    , mValues (new GLubyte[mSizeBytes]) {
     // nothing
+  }
+
+  virtual ~AllocatorHeap() {
+    delete [] mValues;
   }
 
   template <class TAllocatorType>
@@ -41,32 +46,36 @@ class AllocatorHeap {
     *this = allocator;
   }
 
+  // todo confirm. Arg means that allocated element id equals size
   TValueType* allocate(size_t size) {
-    GLubyte* ptr = mBytes + mCurrentIdx * sizeof(TValueType);
-    while (0 != mOccupied[(++mCurrentIdx)%mSizeElements]) {
-
+    if (size > mSizeElements) {
+      std::cout
+        << "Exceeded maximum memory reserved (" << mSizeBytes << " bytes)"
+        << " of " << typeid(TValueType).name() << "Stack allocator" << std::endl;
+      return nullptr;
     }
-    ptr += mCurrentIdx * sizeof(TValueType);
-    return new (ptr) TValueType;
+    return ::new (mValues) TValueType;
   }
-  void deallocate(TValueType* ptr, size_t size) {
 
+  void deallocate(TValueType* ptr, size_t size) {
+    memcpy(mValues, ptr, size);
+  }
+
+  size_t getMaxMemorySize() {
+    return mSizeBytes;
   }
 
  private:
-  static constexpr size_t mSizeBytes = 100000;
-  static constexpr size_t mSizeElements = mSizeBytes / sizeof(TValueType);
-  size_t mCurrentIdx;
-  // todo potential optimization, use one bit instead of int. Is it worth it anyway ?
-  int mOccupied[mSizeElements];
-  GLubyte mBytes[mSizeBytes];
+  size_t mSizeBytes;
+  size_t mSizeElements;
+  GLubyte* mValues;
 };
 
 template <class TValueType>
-bool operator == (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs);
+bool operator == (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) = delete;
 
 template <class TValueType>
-bool operator != (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs);
+bool operator != (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) = delete;
 
 } /* flf */
 } /* flw */
