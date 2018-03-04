@@ -1,12 +1,11 @@
 #include <QLabel>
 #include <QToolButton>
 #include "MainWindowNodeOperations.h"
-#include "common/windows/basic/NewNode.h"
-#include "common/operations/helpers/StandardItemsHelper.h"
 
 namespace common {
-MainWindowNodeOperations::MainWindowNodeOperations(QObject* parent)
-  : QObject(parent) {
+MainWindowNodeOperations::MainWindowNodeOperations(QWidget* parent)
+  : mParent(parent)
+  , QObject(parent) {
 
 }
 
@@ -16,21 +15,21 @@ MainWindowNodeOperations::~MainWindowNodeOperations() {
 }
 
 QVBoxLayout* MainWindowNodeOperations::createNodeWidget() {
-  QLabel* label = new QLabel("Node");
+  QLabel* label = new QLabel("Node", mParent);
   label->setAlignment(Qt::AlignHCenter);
-  QToolButton* addNode = new QToolButton();
+  QToolButton* addNode = new QToolButton(mParent);
   addNode->setIcon(QIcon("icons/add.png"));
   QObject::connect(addNode, &QToolButton::clicked, this, &MainWindowNodeOperations::newNodeDialog);
-  QToolButton* deleteNode = new QToolButton();
+  QToolButton* deleteNode = new QToolButton(mParent);
   deleteNode->setIcon(QIcon("icons/delete.png"));
-  QHBoxLayout* hBox = new QHBoxLayout();
+  QHBoxLayout* hBox = new QHBoxLayout(mParent);
   hBox->addWidget(addNode);
   hBox->addWidget(deleteNode);
-  mScenTree = new QTreeView();
+  mScenTree = new QTreeView(mParent);
   mScenTree->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  mSceneModel = new QStandardItemModel();
+  mSceneModel = new QStandardItemModel(mParent);
   mScenTree->setModel(mSceneModel);
-  QVBoxLayout* vBox = new QVBoxLayout();
+  QVBoxLayout* vBox = new QVBoxLayout(mParent);
   vBox->addWidget(label);
   vBox->addLayout(hBox);
   vBox->addWidget(mScenTree);
@@ -43,45 +42,33 @@ QVBoxLayout* MainWindowNodeOperations::createInspectorView() {
   QLabel* label = new QLabel("Inspector");
   label->setAlignment(Qt::AlignHCenter);
 
-  mInspectorView = new QTableView();
-  mInspectorView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  QWidget* inspectorWidget = new QWidget(mParent);
+  inspectorWidget->setLayout(new QVBoxLayout(inspectorWidget));
+  auto mInspectorView2 = new QTableView();
+  mInspectorView2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   QVBoxLayout* vBox = new QVBoxLayout();
+  mInspectorScrollArea = new QScrollArea(mParent);
+  mInspectorScrollArea->setBackgroundRole(QPalette::Dark);
+  mInspectorScrollArea->setWidget(inspectorWidget);
   vBox->addWidget(label);
-  vBox->addWidget(mInspectorView);
+  vBox->addWidget(mInspectorScrollArea);
+  inspectorWidget->show();
   return vBox;
 }
 
 QVBoxLayout* MainWindowNodeOperations::createOther() {
-  QLabel* label = new QLabel("Other");
+  QLabel* label = new QLabel("Other", mParent);
   label->setAlignment(Qt::AlignHCenter);
 
-  mOther = new QTreeWidget();
+  mOther = new QTreeWidget(mParent);
   mOther->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  QVBoxLayout* vBox = new QVBoxLayout();
+  QVBoxLayout* vBox = new QVBoxLayout(mParent);
   vBox->addWidget(label);
   vBox->addWidget(mOther);
   return vBox;
 }
 
 void MainWindowNodeOperations::newNodeDialog() {
-  common::windows::basic::NewNode sNode;
-  sNode.exec();
-  auto nodeType = sNode.getSelectedNode();
-  if (nodeType == ENodeType::NONE) {
-    return;
-  }
-  common::operations::helpers::StandardItemsHelper itemHelper;
-  QModelIndex idx = mScenTree->currentIndex();
-  auto item = mSceneModel->itemFromIndex(idx);
-  auto newItem = itemHelper.createStandardItem(nodeType, sNode.getName());
-  if (item) {
-    item->setChild(item->rowCount(), newItem);
-  } else {
-    mSceneModel->appendRow(newItem);
-  }
-  auto newItemModel = newItem->index();
-  NodeData nodeInfo(nodeType, newItemModel.internalId(), sNode.getName());
-  emit addNewNode(nodeInfo);
 }
 
 }
