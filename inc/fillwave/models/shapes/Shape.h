@@ -23,7 +23,7 @@
 
 #include <fillwave/OpenGL.h>
 #include <fillwave/Math.h>
-#include <vector>
+#include <fillwave/common/Containers.h>
 
 namespace flw {
 namespace flf {
@@ -33,7 +33,7 @@ namespace flf {
  *
  */
 
-template <class T>
+template <class TVertex>
 class Shape {
 public:
   Shape() {
@@ -44,7 +44,7 @@ public:
     // nothing
   }
 
-  std::vector<T> getVertices() {
+  vec<TVertex> getVertices() {
     return mVertices;
   }
 
@@ -61,8 +61,8 @@ public:
   }
 
 protected:
-  std::vector<T> mVertices;
-  std::vector<GLuint> mIndices;
+  vec<TVertex> mVertices;
+  vec<GLuint> mIndices;
 };
 
 } /* flf */

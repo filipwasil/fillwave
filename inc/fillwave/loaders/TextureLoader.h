@@ -33,7 +33,7 @@ enum class EFlip {
   , horizontal
   , vertical
   , horizontalVertical
-  , };
+};
 
 // generic formats
 //GL_COMPRESSED_RED,

@@ -30,35 +30,39 @@ template <class TValueType>
 class AllocatorHeap {
  public:
   using value_type = TValueType;
-  AllocatorHeap()
-    : mSizeBytes (1 << 16)
+  using propagate_on_container_move_assignment = std::true_type;
+  using is_always_equal = std::true_type;
+
+  AllocatorHeap() noexcept
+    : mSizeBytes (1 << 14)
     , mSizeElements (mSizeBytes / sizeof(TValueType))
     , mValues (new GLubyte[mSizeBytes]) {
     // nothing
+  }
+
+  AllocatorHeap(AllocatorHeap const& allocator) noexcept {
+    *this = allocator;
+  }
+
+  template <class TAllocatorType>
+  AllocatorHeap(AllocatorHeap<TAllocatorType> const& allocator) noexcept {
+    *this = allocator;
   }
 
   virtual ~AllocatorHeap() {
     delete [] mValues;
   }
 
-  template <class TAllocatorType>
-  AllocatorHeap(AllocatorHeap<TAllocatorType> const& allocator) {
-    *this = allocator;
-  }
-
-  // todo confirm. Arg means that allocated element id equals size
   TValueType* allocate(size_t size) {
     if (size > mSizeElements) {
-      std::cout
-        << "Exceeded maximum memory reserved (" << mSizeBytes << " bytes)"
-        << " of " << typeid(TValueType).name() << "Stack allocator" << std::endl;
+      // container overloaded
       return nullptr;
     }
     return ::new (mValues) TValueType;
   }
 
-  void deallocate(TValueType* ptr, size_t size) {
-    memcpy(mValues, ptr, size);
+  void deallocate(TValueType* ptr, size_t) {
+    // nothing
   }
 
   size_t getMaxMemorySize() {
@@ -72,10 +76,14 @@ class AllocatorHeap {
 };
 
 template <class TValueType>
-bool operator == (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) = delete;
+bool operator == (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) {
+  return true;
+}
 
 template <class TValueType>
-bool operator != (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) = delete;
+bool operator != (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) {
+  return false;
+}
 
 } /* flf */
 } /* flw */

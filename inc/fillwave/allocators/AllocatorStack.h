@@ -22,6 +22,7 @@
  */
 
 #include <fillwave/OpenGL.h>
+#include <array>
 
 namespace flw {
 namespace flf {
@@ -30,28 +31,32 @@ template <class TValueType>
 class AllocatorStack {
  public:
   using value_type = TValueType;
-  AllocatorStack() {
+  using propagate_on_container_move_assignment = std::true_type;
+  using is_always_equal = std::true_type;
+
+  AllocatorStack() noexcept {
     // nothing
   }
 
-  template <class TAllocatorType>
-  AllocatorStack(AllocatorStack<TAllocatorType> const& allocator) {
+  AllocatorStack(AllocatorStack const& allocator) noexcept {
     *this = allocator;
   }
 
-  // todo confirm. Arg means that allocated element id equals size
+  template <class TAllocatorType>
+  AllocatorStack(AllocatorStack<TAllocatorType> const& allocator) noexcept {
+    *this = allocator;
+  }
+
   TValueType* allocate(size_t size) {
     if (size > mSizeElements) {
-      std::cout
-        << "Exceeded maximum memory reserved (" << mSizeBytes << " bytes)"
-        << " of " << typeid(TValueType).name() << "Stack allocator" << std::endl;
+      // container overloaded
       return nullptr;
     }
-    return ::new (mValues) TValueType;
+    return new (mValues.data()) TValueType;
   }
 
   void deallocate(TValueType* ptr, size_t size) {
-    memcpy(mValues, ptr, size);
+    // nothing
   }
 
   static size_t getMaxMemorySize() {
@@ -59,16 +64,20 @@ class AllocatorStack {
   }
 
  private:
-  static constexpr size_t mSizeBytes = 1 << 16;
+  static constexpr size_t mSizeBytes = 1 << 14;
   static constexpr size_t mSizeElements = mSizeBytes / sizeof(TValueType);
-  TValueType mValues[mSizeElements];
+  std::array<TValueType, mSizeElements> mValues;
 };
 
 template <class TValueType>
-bool operator == (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs) = delete;;
+bool operator == (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs) {
+  return true;
+}
 
 template <class TValueType>
-bool operator != (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs) = delete;;
+bool operator != (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs) {
+  return false;
+}
 
 } /* flf */
 } /* flw */

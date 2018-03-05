@@ -315,7 +315,7 @@ inline void Engine::EngineImpl::initUniforms() {
 }
 
 inline void Engine::EngineImpl::initOcclusionTest() {
-  std::vector<flc::VertexPosition> vec = flf::BoxOcclusion().getVertices();
+  flf::vec<flc::VertexPosition> vec = flf::BoxOcclusion().getVertices();
   mVAOOcclusion = new flc::VertexArray();
   mVBOOcclusion = mBuffers.mVerticesPosition.store(mVAOOcclusion, vec);
   mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
@@ -328,7 +328,7 @@ inline void Engine::EngineImpl::initOcclusionTest() {
 
 inline void Engine::EngineImpl::initStartup() {
 
-  flc::Program *program = mProgramLoader.getProgram(flf::EProgram::quadCustomFragmentShaderStartup);
+  auto program = mProgramLoader.getProgram(flf::EProgram::quadCustomFragmentShaderStartup);
 
   program->use();
   program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);

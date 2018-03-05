@@ -21,6 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <fillwave/allocators/AllocatorStack.h>
+#include <fillwave/allocators/AllocatorHeap.h>
 #include <fillwave/common/Aliases.h>
 #include <vector>
 #include <cmath>
@@ -35,10 +37,10 @@ template <class T>
 using vec = std::vector<T, Allocator<T>>;
 
 template <class T>
-using vecStack = std::vector<T, Allocator<T>>;
+using vecStack = std::vector<T, AllocatorStack<T>>;
 
 template <class T>
-using vecHeap = std::vector<T, Allocator<T>>;
+using vecHeap = std::vector<T, AllocatorHeap<T>>;
 
 } /* flf */
 } /* flw */

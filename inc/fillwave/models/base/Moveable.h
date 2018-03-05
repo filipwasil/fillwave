@@ -172,7 +172,7 @@ protected:
  private:
   unsigned int mCurrentCallbackIdx;
   unsigned int mCallbackLoops;
-  vecHeap<Callback<float(float)>> mTimeCallbacks;
+  vec<Callback<float(float)>> mTimeCallbacks;
 
   struct {
     glm::vec3 mTranslation;
