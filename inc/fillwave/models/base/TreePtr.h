@@ -22,7 +22,7 @@
  */
 
 #include <fillwave/models/base/ITreeNode.h>
-#include <vector>
+#include <fillwave/common/Containers.h>
 #include <algorithm>
 #include <utility>
 
@@ -112,7 +112,7 @@ public:
   bool mFlagAttachedDetached;
 
 protected:
-  std::vector<std::unique_ptr<T>> mChildren;
+  vec<std::unique_ptr<T>> mChildren;
 };
 
 } /* flf */

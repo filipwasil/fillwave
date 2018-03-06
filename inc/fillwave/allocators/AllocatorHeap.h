@@ -61,7 +61,7 @@ class AllocatorHeap {
     return ::new (mValues) TValueType;
   }
 
-  void deallocate(TValueType* ptr, size_t) {
+  void deallocate(TValueType*, size_t) {
     // nothing
   }
 
@@ -76,12 +76,12 @@ class AllocatorHeap {
 };
 
 template <class TValueType>
-bool operator == (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) {
+bool operator == (AllocatorHeap<TValueType> const& , AllocatorHeap<TValueType> const&) {
   return true;
 }
 
 template <class TValueType>
-bool operator != (AllocatorHeap<TValueType> const& rhs, AllocatorHeap<TValueType> const& lhs) {
+bool operator != (AllocatorHeap<TValueType> const&, AllocatorHeap<TValueType> const&) {
   return false;
 }
 

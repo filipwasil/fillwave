@@ -55,7 +55,7 @@ class AllocatorStack {
     return new (mValues.data()) TValueType;
   }
 
-  void deallocate(TValueType* ptr, size_t size) {
+  void deallocate(TValueType*, size_t) {
     // nothing
   }
 
@@ -70,12 +70,12 @@ class AllocatorStack {
 };
 
 template <class TValueType>
-bool operator == (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs) {
+bool operator == (AllocatorStack<TValueType> const&, AllocatorStack<TValueType> const&) {
   return true;
 }
 
 template <class TValueType>
-bool operator != (AllocatorStack<TValueType> const& rhs, AllocatorStack<TValueType> const& lhs) {
+bool operator != (AllocatorStack<TValueType> const&, AllocatorStack<TValueType> const&) {
   return false;
 }
 
