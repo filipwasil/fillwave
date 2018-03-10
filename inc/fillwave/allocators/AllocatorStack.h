@@ -22,16 +22,38 @@
  */
 
 #include <fillwave/OpenGL.h>
-#include <array>
+#include <memory>
 
 namespace flw {
 namespace flf {
 
+/*
+ * Limitations
+ *
+ * - TValueType must have a default cconstructor
+ * - Size is limited to  1kB
+ *
+ * */
+
 template <class TValueType>
 class AllocatorStack {
+
  public:
+
   using value_type = TValueType;
+
+  using pointer = TValueType*;
+
+  using difference_type = typename std::pointer_traits<pointer>::difference_type;
+
+  using size_type = std::make_unsigned_t<difference_type>;
+
+  using propagate_on_container_copy_assignment = std::true_type;
+
   using propagate_on_container_move_assignment = std::true_type;
+
+  using propagate_on_container_swap = std::true_type;
+
   using is_always_equal = std::true_type;
 
   AllocatorStack() noexcept {
@@ -47,26 +69,38 @@ class AllocatorStack {
     *this = allocator;
   }
 
-  TValueType* allocate(size_t size) {
-    if (size > mSizeElements) {
-      // container overloaded
-      return nullptr;
-    }
-    return new (mValues.data()) TValueType;
+  ~AllocatorStack() {
+    // nothing
+  }
+
+  template <class... Args>
+  void construct(TValueType* p, Args&& ... args) {
+    *p = TValueType(std::forward<Args...>(args...));
+  }
+
+  void destroy(TValueType* ) {
+    // nothing
+  }
+
+  size_type max_size() {
+    return mSizeElements;
+  }
+
+  TValueType* allocate(size_t) {
+    return static_cast<TValueType*>(mValues);
   }
 
   void deallocate(TValueType*, size_t) {
     // nothing
   }
 
-  static size_t getMaxMemorySize() {
-    return mSizeBytes;
-  }
-
  private:
-  static constexpr size_t mSizeBytes = 1 << 14;
+
+  static constexpr size_t mSizeBytes = 1 << 10;
+
   static constexpr size_t mSizeElements = mSizeBytes / sizeof(TValueType);
-  std::array<TValueType, mSizeElements> mValues;
+
+  TValueType mValues [mSizeElements];
 };
 
 template <class TValueType>

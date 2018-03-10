@@ -22,22 +22,42 @@
  */
 
 #include <fillwave/OpenGL.h>
+#include <memory>
 
 namespace flw {
 namespace flf {
 
+/*
+ * Limitations
+ *
+ * - TValueType must have a default cconstructor
+ * - Size is limited to  16kB
+ *
+ * */
+
 template <class TValueType>
 class AllocatorHeap {
+
  public:
+
   using value_type = TValueType;
+
+  using pointer = TValueType*;
+
+  using difference_type = typename std::pointer_traits<pointer>::difference_type;
+
+  using size_type = std::make_unsigned_t<difference_type>;
+
+  using propagate_on_container_copy_assignment = std::true_type;
+
   using propagate_on_container_move_assignment = std::true_type;
+
+  using propagate_on_container_swap = std::true_type;
+
   using is_always_equal = std::true_type;
 
-  AllocatorHeap() noexcept
-    : mSizeBytes (1 << 14)
-    , mSizeElements (mSizeBytes / sizeof(TValueType))
-    , mValues (new GLubyte[mSizeBytes]) {
-    // nothing
+  AllocatorHeap() noexcept {
+    mValues = new TValueType[mSizeElements];
   }
 
   AllocatorHeap(AllocatorHeap const& allocator) noexcept {
@@ -49,34 +69,42 @@ class AllocatorHeap {
     *this = allocator;
   }
 
-  virtual ~AllocatorHeap() {
+  ~AllocatorHeap() {
     delete [] mValues;
   }
 
-  TValueType* allocate(size_t size) {
-    if (size > mSizeElements) {
-      // container overloaded
-      return nullptr;
-    }
-    return ::new (mValues) TValueType;
+  template <class... Args>
+  void construct(TValueType* p, Args&& ... args) {
+    *p = TValueType(std::forward<Args...>(args...));
+  }
+
+  void destroy(TValueType* ) {
+    // nothing
+  }
+
+  size_type max_size() {
+    return mSizeElements;
+  }
+
+  TValueType* allocate(size_t) {
+    return static_cast<TValueType*>(mValues);
   }
 
   void deallocate(TValueType*, size_t) {
     // nothing
   }
 
-  size_t getMaxMemorySize() {
-    return mSizeBytes;
-  }
-
  private:
-  size_t mSizeBytes;
-  size_t mSizeElements;
-  GLubyte* mValues;
+
+  static constexpr size_t mSizeBytes = 1 << 14;
+
+  static constexpr size_t mSizeElements = mSizeBytes / sizeof(TValueType);
+
+  TValueType* mValues;
 };
 
 template <class TValueType>
-bool operator == (AllocatorHeap<TValueType> const& , AllocatorHeap<TValueType> const&) {
+bool operator == (AllocatorHeap<TValueType> const&, AllocatorHeap<TValueType> const&) {
   return true;
 }
 

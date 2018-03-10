@@ -135,8 +135,7 @@ TEST (AllocatorHeap, ValueDifferentOneAfterAddingClearingAndAddingDifferentEleme
 }
 
 TEST (AllocatorHeap, AllocateFullMemory) {
-  auto maxBytes = AllocatorHeap<DualIntStructure>().getMaxMemorySize();
-  auto maxElements = maxBytes / sizeof(DualIntStructure);
+  auto maxElements = AllocatorHeap<DualIntStructure>().max_size();
   std::vector<DualIntStructure, AllocatorHeap<DualIntStructure>> sut;
 
   for (size_t i = 0; i < maxElements; ++i) {
@@ -156,8 +155,7 @@ TEST (AllocatorHeap, AllocateFullMemory) {
 }
 
 TEST (AllocatorHeap, AllocateFullMemoryNextClearingAndAllocateFullMemoryAgain) {
-  auto maxBytes = AllocatorHeap<DualIntStructure>().getMaxMemorySize();
-  auto maxElements = maxBytes / sizeof(DualIntStructure);
+  auto maxElements = AllocatorHeap<DualIntStructure>().max_size();
   std::vector<DualIntStructure, AllocatorHeap<DualIntStructure>> sut;
 
   for (size_t i = 0; i < maxElements; ++i) {

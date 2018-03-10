@@ -32,7 +32,15 @@ namespace flc {
 
 class Attribute final {
 public:
-  Attribute(std::string name, GLuint index, GLint size, GLsizei stride, GLenum type, GLboolean normalized = GL_FALSE);
+  Attribute();
+
+  Attribute(
+    const std::string& name
+    , GLuint index
+    , GLint size
+    , GLsizei stride
+    , GLenum type
+    , GLboolean normalized = GL_FALSE);
 
   void bindLocation(GLint programHandle);
 

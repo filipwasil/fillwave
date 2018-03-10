@@ -22,7 +22,10 @@
  */
 #include <fillwave/core/buffers/IBuffer.h>
 #include <fillwave/core/pipeline/Attribute.h>
+
 #include <fillwave/models/shapes/Shape.h>
+
+#include <fillwave/common/Containers.h>
 
 #include <algorithm>
 
@@ -133,6 +136,7 @@ protected:
   inline void getAttributes(GLint programHandle) {
     int howMany = -1;
     glGetProgramiv(programHandle, GL_ACTIVE_ATTRIBUTES, &howMany);
+    mAttributes.reserve(howMany);
     for (int i = 0; i < howMany; ++i) {
       int name_len = -1, num = -1;
       GLenum type = GL_ZERO;
@@ -187,6 +191,7 @@ protected:
           size = 0;
           break;
       }
+      //std::string n(name);
       Attribute a(name, location, size, sizeof(T), type);
       mAttributes.push_back(a);
     }
@@ -209,7 +214,7 @@ protected:
   }
 
 private:
-  std::vector<Attribute> mAttributes;
+  flf::vecStack<Attribute> mAttributes;
 };
 
 } /* flc */

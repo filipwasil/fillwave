@@ -23,19 +23,31 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT("Attribute", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {
 
-Attribute::Attribute(std::string name, GLuint index, GLint size, GLsizei stride, GLenum type, GLboolean normalized)
-    : mStride(stride)
-    , mName(name)
-    , mIndex(index)
-    , mSize(size)
-    , mNormalized(normalized)
-    , mType(type)
+Attribute::Attribute()
+    : mStride(0)
+    , mName("")
+    , mIndex(0)
+    , mSize(0)
+    , mNormalized(0)
+    , mTypeSize(0)
+    , mType(0)
     , mPointer((GLvoid *) 0) {
+  // nothing
+}
+
+Attribute::Attribute(const std::string& name, GLuint index, GLint size, GLsizei stride, GLenum type, GLboolean normalized)
+  : mStride(stride)
+  , mName(name)
+  , mIndex(index)
+  , mSize(size)
+  , mNormalized(normalized)
+  , mType(type)
+  , mPointer((GLvoid *) 0) {
 
   switch (mType) {
     case GL_UNSIGNED_INT:

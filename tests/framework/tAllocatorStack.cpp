@@ -135,8 +135,7 @@ TEST (StackAllocator, ValueDifferentOneAfterAddingClearingAndAddingDifferentElem
 }
 
 TEST (StackAllocator, AllocateFullMemory) {
-  auto maxBytes = AllocatorStack<DualIntStruct>::getMaxMemorySize();
-  auto maxElements = maxBytes / sizeof(DualIntStruct);
+  auto maxElements = AllocatorStack<DualIntStruct>().max_size();
   std::vector<DualIntStruct, AllocatorStack<DualIntStruct>> sut;
 
   for (size_t i = 0; i < maxElements; ++i) {
@@ -156,8 +155,7 @@ TEST (StackAllocator, AllocateFullMemory) {
 }
 
 TEST (StackAllocator, AllocateFullMemoryNextClearingAndAllocateFullMemoryAgain) {
-  auto maxBytes = AllocatorStack<DualIntStruct>::getMaxMemorySize();
-  auto maxElements = maxBytes / sizeof(DualIntStruct);
+  auto maxElements = AllocatorStack<DualIntStruct>().max_size();
   std::vector<DualIntStruct, AllocatorStack<DualIntStruct>> sut;
 
   for (size_t i = 0; i < maxElements; ++i) {
