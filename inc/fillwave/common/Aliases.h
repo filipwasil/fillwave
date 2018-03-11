@@ -21,7 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "ProtectedPointer.h"
+#include <fillwave/common/pointers/PointerProtected.h>
+#include <fillwave/common/pointers/PointerCache.h>
 
 #include <memory>
 #include <functional>
@@ -35,7 +36,10 @@ template <class T>
 using ps = std::shared_ptr<T>;
 
 template <class T>
-using pp = ProtectedPointer<T>;
+using pp = PointerProtected<T>;
+
+template <class T>
+using pc = PointerCache<T>;
 
 template <typename T, typename... Args>
 pu<T> make_pu(Args&&... args) {

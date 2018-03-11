@@ -28,7 +28,7 @@
 #include <fillwave/models/Terrain.h>
 #include <fillwave/models/base/IDrawable.h>
 #include <fillwave/renderers/RendererFR.h>
-#include <fillwave/common/ProtectedPointer.h>
+#include <fillwave/common/pointers/PointerProtected.h>
 
 #include <memory>
 #include <unordered_map>

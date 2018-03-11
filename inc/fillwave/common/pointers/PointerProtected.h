@@ -21,25 +21,60 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/common/allocators/AllocatorStack.h>
-#include <fillwave/common/allocators/AllocatorHeap.h>
-#include <fillwave/common/Aliases.h>
-#include <vector>
-
 namespace flw {
-namespace flf {
+/*! \class PointerProtected
+ * \brief Wrapper which makes the wrapped pointer not storable and not copyable
+ */
+template <class TValueType>
+class PointerProtected {
+ private:
+  class Helper {
+    friend class PointerProtected;
+   public:
+    Helper(TValueType* ptr)
+      : mPtr(ptr) {
+    }
 
-template <class T>
-using Allocator = std::allocator<T>;
+    TValueType* operator->() && {
+      return mPtr;
+    }
 
-template <class T>
-using vec = std::vector<T, Allocator<T>>;
+   private:
 
-template <class T>
-using vecStack = std::vector<T, AllocatorStack<T>>;
+    Helper(Helper &&) = default;
 
-template <class T>
-using vecHeap = std::vector<T, AllocatorHeap<T>>;
+    Helper(const PointerProtected &) = delete;
 
-} /* flf */
+    Helper operator = (Helper) = delete;
+
+    Helper operator = (Helper&&) = delete;
+
+    TValueType* operator->()& = delete;
+
+    TValueType* mPtr;
+  };
+
+ public:
+  PointerProtected(TValueType* p)
+    : mHelper(p) {
+    // nothing
+  }
+
+  Helper && operator->() && {
+    return std::move(mHelper);
+  }
+
+  PointerProtected(PointerProtected &&) = default;
+
+  PointerProtected(const PointerProtected &) = delete;
+
+  PointerProtected* operator->()& = delete;
+
+  PointerProtected operator = (PointerProtected getter) = delete;
+
+  PointerProtected operator = (PointerProtected&& getter) = delete;
+
+ private:
+  Helper mHelper;
+};
 } /* flw */

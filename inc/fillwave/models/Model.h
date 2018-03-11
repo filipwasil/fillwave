@@ -25,7 +25,7 @@
 #include "fillwave/models/Mesh.h"
 #include "fillwave/models/animations/Animator.h"
 #include "fillwave/Assets.h"
-#include "fillwave/common/ProtectedPointer.h"
+#include "fillwave/common/pointers/PointerProtected.h"
 
 namespace flw {
 class Engine;

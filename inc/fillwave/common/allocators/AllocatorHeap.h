@@ -31,12 +31,12 @@ namespace flf {
  * Limitations
  *
  * - TValueType must have a default cconstructor
- * - Size is limited to  1kB
+ * - Size is limited to  16kB
  *
  * */
 
 template <class TValueType>
-class AllocatorStack {
+class AllocatorHeap {
 
  public:
 
@@ -56,21 +56,19 @@ class AllocatorStack {
 
   using is_always_equal = std::true_type;
 
-  AllocatorStack() noexcept {
-    // nothing
+  AllocatorHeap() noexcept {
+    mValues = new TValueType[mSizeElements];
   }
 
-  AllocatorStack(AllocatorStack const& allocator) noexcept {
-    *this = allocator;
-  }
+  AllocatorHeap(AllocatorHeap const& allocator) = default;
 
-  template <class TAllocatorType>
-  AllocatorStack(AllocatorStack<TAllocatorType> const& allocator) noexcept {
-    *this = allocator;
-  }
+//  template <class TAllocatorType>
+//  AllocatorHeap(AllocatorHeap<TAllocatorType> const& allocator) noexcept {
+//    *this = allocator;
+//  }
 
-  ~AllocatorStack() {
-    // nothing
+  ~AllocatorHeap() {
+    delete [] mValues;
   }
 
   template <class... Args>
@@ -96,20 +94,20 @@ class AllocatorStack {
 
  private:
 
-  static constexpr size_t mSizeBytes = 1 << 10;
+  static constexpr size_t mSizeBytes = 1 << 14;
 
   static constexpr size_t mSizeElements = mSizeBytes / sizeof(TValueType);
 
-  TValueType mValues [mSizeElements];
+  TValueType* mValues;
 };
 
 template <class TValueType>
-bool operator == (AllocatorStack<TValueType> const&, AllocatorStack<TValueType> const&) {
+bool operator == (AllocatorHeap<TValueType> const&, AllocatorHeap<TValueType> const&) {
   return true;
 }
 
 template <class TValueType>
-bool operator != (AllocatorStack<TValueType> const&, AllocatorStack<TValueType> const&) {
+bool operator != (AllocatorHeap<TValueType> const&, AllocatorHeap<TValueType> const&) {
   return false;
 }
 

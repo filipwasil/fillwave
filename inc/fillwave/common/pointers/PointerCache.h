@@ -21,60 +21,28 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <memory>
+
 namespace flw {
-/*! \class ProtectedPointer
- * \brief Wrapper which makes the wrapped pointer not storable and not copyable
- */
-template <class TPtr>
-class ProtectedPointer {
- private:
-  class Helper {
-    friend class ProtectedPointer;
-   public:
-    Helper(TPtr* ptr)
-      : mPtr(ptr) {
-    }
 
-    TPtr* operator->() && {
-      return mPtr;
-    }
-
-   private:
-
-    Helper(Helper &&) = default;
-
-    Helper(const ProtectedPointer &) = delete;
-
-    Helper operator = (Helper) = delete;
-
-    Helper operator = (Helper&&) = delete;
-
-    TPtr* operator->()& = delete;
-
-    TPtr* mPtr;
-  };
-
+template <class T>
+class PointerCache : public std::unique_ptr<T> {
  public:
-  ProtectedPointer(TPtr* p)
-    : mHelper(p) {
-
+  PointerCache()
+    : mPtr() {
+    //
   }
-
-  Helper && operator->() && {
-    return std::move(mHelper);
-  }
-
-  ProtectedPointer(ProtectedPointer &&) = default;
-
-  ProtectedPointer(const ProtectedPointer &) = delete;
-
-  ProtectedPointer* operator->()& = delete;
-
-  ProtectedPointer operator = (ProtectedPointer getter) = delete;
-
-  ProtectedPointer operator = (ProtectedPointer&& getter) = delete;
 
  private:
-  Helper mHelper;
+  T* create() {
+    // nothing
+  }
+
+  void destroy(T*) {
+    // nothing
+  }
+
+  std::unique_ptr<T> mPtr;
 };
+
 } /* flw */

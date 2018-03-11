@@ -28,7 +28,7 @@
 #include <fillwave/space/LightDirectional.h>
 #include <fillwave/hud/Text.h>
 
-#include <fillwave/common/ProtectedPointer.h>
+#include <fillwave/common/pointers/PointerProtected.h>
 
 /* Debugger */
 #include "fillwave/Debugger.h"

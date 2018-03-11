@@ -1,7 +1,7 @@
 #include "../common.h"
 
 #include <fillwave/Fillwave.h>
-#include <fillwave/allocators/AllocatorHeap.h>
+#include <fillwave/common/allocators/AllocatorHeap.h>
 
 using namespace flw;
 using namespace flw::flf;
