@@ -62,10 +62,10 @@ class AllocatorHeap {
 
   AllocatorHeap(AllocatorHeap const& allocator) = default;
 
-//  template <class TAllocatorType>
-//  AllocatorHeap(AllocatorHeap<TAllocatorType> const& allocator) noexcept {
-//    *this = allocator;
-//  }
+  template <class TAllocatorType>
+  AllocatorHeap(AllocatorHeap<TAllocatorType> const& allocator) noexcept {
+    *this = allocator;
+  }
 
   ~AllocatorHeap() {
     delete [] mValues;

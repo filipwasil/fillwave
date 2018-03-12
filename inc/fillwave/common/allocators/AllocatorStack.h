@@ -64,10 +64,10 @@ class AllocatorStack {
     *this = allocator;
   }
 
-//  template <class TAllocatorType>
-//  AllocatorStack(AllocatorStack<TAllocatorType> const& allocator) noexcept {
-//    *this = allocator;
-//  }
+  template <class TAllocatorType>
+  AllocatorStack(AllocatorStack<TAllocatorType> const& allocator) noexcept {
+    *this = allocator;
+  }
 
   ~AllocatorStack() {
     // nothing
