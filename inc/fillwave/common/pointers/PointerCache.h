@@ -40,8 +40,8 @@ class PointerCache : public std::unique_ptr<TValueType, void(*)(TValueType*)> {
 
   template <typename ...Args>
   PointerCache(Args&&... args)
-    :  std::unique_ptr<TValueType, void(*)(TValueType*)> (create(), [](TValueType*){})
-    , mPtrStack { { { std::forward<Args>(args)...} } } {
+    : std::unique_ptr<TValueType, void(*)(TValueType*)> (create(), [](TValueType*){})
+    , mPtrStack ( { { { std::forward<Args>(args)...} } } ) {
     // nothing
   }
 
