@@ -74,8 +74,7 @@ aux_source_directory ("src/renderers" FILLWAVE_RENDERERS_SOURCES)
 aux_source_directory ("src/models/shapes" FILLWAVE_SHAPES_SOURCES)
 
 set (FILLWAVE_ENGINE_SOURCES
-    ${FILLWAVE_PATH_SOURCE}/engine/Engine.cpp
-    ${FILLWAVE_PATH_SOURCE}/engine/EngineImpl.cpp)
+    ${FILLWAVE_PATH_SOURCE}/engine/Engine.cpp)
 
 set (FILLWAVE_SOURCES
     ${FILLWAVE_ROOT_SOURCES}
