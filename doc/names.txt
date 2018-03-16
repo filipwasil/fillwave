@@ -1,0 +1,5 @@
+OC - Occlusio Querry
+AO - Ambient Occlusion
+VAO - Vertex Buffer Object
+VBO - VertexBufferObject
+IBO - IndexBufferObject

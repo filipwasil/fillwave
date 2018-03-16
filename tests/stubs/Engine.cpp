@@ -14,13 +14,18 @@ FLOGINIT("Engine", FERROR | FFATAL | FINFO | FDEBUG)
 
 namespace flw {
 
-struct Engine::EngineImpl {
-  EngineImpl() = default;
+Engine::Engine(GLint /*argc*/, GLchar* const /*argv*/[])
+  : mFileLoader("")
+  , mProgramLoader(this) {
+  // nothing
+}
 
-  ~EngineImpl() = default;
-};
+EnginePC::EnginePC(GLint argc, GLchar *const argv[])
+  : Engine (argc, argv) {
+  // nothing
+}
 
-Engine::Engine(GLint /*argc*/, GLchar *const /*argv*/[]) {
+EnginePC::~EnginePC() {
   // nothing
 }
 

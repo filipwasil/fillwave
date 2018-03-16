@@ -29,7 +29,6 @@
 #include <fillwave/models/Entity.h>
 
 namespace flw {
-class Engine;
 namespace flf {
 class LightSystem;
 
@@ -40,11 +39,11 @@ class LightSystem;
 class VoxelChunk : public Entity, public IReloadable {
 public:
   VoxelChunk(flc::Program* program,
-      Engine *engine,
-      const std::string &texturePath,
-      GLint size,
-      VoxelConstructor *constructor = nullptr,
-      GLfloat gap = 0.2);
+    Engine* engine,
+    const std::string &texturePath,
+    GLint size,
+    VoxelConstructor* constructor = nullptr,
+    GLfloat gap = 0.2);
 
   ~VoxelChunk() override;
 
@@ -67,12 +66,12 @@ public:
   GLint getSize();
 
 protected:
-  Engine *mEngine;
+  Engine* mEngine;
   const GLfloat mVoxelGap;
 
 private:
   GLint mSize;
-  Voxel ***mVoxels;
+  Voxel*** mVoxels;
   flc::Program *mProgram;
   flc::Texture2D *mTexture;
   flc::VertexBufferBasic *mVBO;

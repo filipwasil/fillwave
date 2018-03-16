@@ -19,17 +19,17 @@ bool operator != (DualIntStruct const& lhs, DualIntStruct const& rhs) {
   return lhs.a != rhs.a || lhs.b != rhs.b;
 }
 
-TEST (StackAllocator, definingIntVector) {
+TEST (AllocatorStack, definingIntVector) {
   std::vector<int, AllocatorStack<int>> sut;
   EXPECT_EQ (1, 1);
 }
 
-TEST (StackAllocator, SizeEqualZeroWhenDefiningAContainer) {
+TEST (AllocatorStack, SizeEqualZeroWhenDefiningAContainer) {
   std::vector<DualIntStruct, AllocatorStack<DualIntStruct>> sut;
   EXPECT_EQ (sut.size(), 0);
 }
 
-TEST (StackAllocator, SizeEqualOneWhenPushingOneValueToContainer) {
+TEST (AllocatorStack, SizeEqualOneWhenPushingOneValueToContainer) {
   DualIntStruct value {
     111111,
     999990
@@ -39,7 +39,7 @@ TEST (StackAllocator, SizeEqualOneWhenPushingOneValueToContainer) {
   EXPECT_EQ (sut.size(), 1);
 }
 
-TEST (StackAllocator, ValueSizeWhenPushingOneElementToDualIntStructVector) {
+TEST (AllocatorStack, ValueSizeWhenPushingOneElementToDualIntStructVector) {
   DualIntStruct value {
     111111,
     999990
@@ -49,7 +49,7 @@ TEST (StackAllocator, ValueSizeWhenPushingOneElementToDualIntStructVector) {
   EXPECT_EQ (sizeof(sut[0]), sizeof(value));
 }
 
-TEST (StackAllocator, ValueEqualsWhenPushingOneElementToContainer) {
+TEST (AllocatorStack, ValueEqualsWhenPushingOneElementToContainer) {
   DualIntStruct value {
     111111,
     999990
@@ -59,7 +59,7 @@ TEST (StackAllocator, ValueEqualsWhenPushingOneElementToContainer) {
   EXPECT_EQ (sut[0], value);
 }
 
-TEST (StackAllocator, ValueNotEqualsWhenPushingOneElementToContainerAndChangingItOutside) {
+TEST (AllocatorStack, ValueNotEqualsWhenPushingOneElementToContainerAndChangingItOutside) {
   DualIntStruct value {
     111111,
     999990
@@ -71,7 +71,7 @@ TEST (StackAllocator, ValueNotEqualsWhenPushingOneElementToContainerAndChangingI
 }
 
 // todo potential optimization. Use paramtric tests
-TEST (StackAllocator, ElementsOrderWhenWhenPushingManyElementsToContainer) {
+TEST (AllocatorStack, ElementsOrderWhenWhenPushingManyElementsToContainer) {
   DualIntStruct v1 {
     1,
     2
@@ -105,7 +105,7 @@ TEST (StackAllocator, ElementsOrderWhenWhenPushingManyElementsToContainer) {
   EXPECT_EQ (sut[4], v5);
 }
 
-TEST (StackAllocator, SizeEqualOneAfterAddingClearingAndAddingElementToContainer) {
+TEST (AllocatorStack, SizeEqualOneAfterAddingClearingAndAddingElementToContainer) {
   DualIntStruct v {
     1,
     2
@@ -117,7 +117,7 @@ TEST (StackAllocator, SizeEqualOneAfterAddingClearingAndAddingElementToContainer
   EXPECT_EQ (sut.size(), 1);
 }
 
-TEST (StackAllocator, ValueDifferentOneAfterAddingClearingAndAddingDifferentElementsToContainer) {
+TEST (AllocatorStack, ValueDifferentOneAfterAddingClearingAndAddingDifferentElementsToContainer) {
   DualIntStruct v1 {
     1,
     2
@@ -134,7 +134,7 @@ TEST (StackAllocator, ValueDifferentOneAfterAddingClearingAndAddingDifferentElem
   EXPECT_NE (sut[0], v1);
 }
 
-TEST (StackAllocator, AllocateFullMemory) {
+TEST (AllocatorStack, AllocateFullMemory) {
   auto maxElements = AllocatorStack<DualIntStruct>().max_size();
   std::vector<DualIntStruct, AllocatorStack<DualIntStruct>> sut;
 
@@ -154,7 +154,7 @@ TEST (StackAllocator, AllocateFullMemory) {
   EXPECT_EQ (sut[lastIdx], lastValue);
 }
 
-TEST (StackAllocator, AllocateFullMemoryNextClearingAndAllocateFullMemoryAgain) {
+TEST (AllocatorStack, AllocateFullMemoryNextClearingAndAllocateFullMemoryAgain) {
   auto maxElements = AllocatorStack<DualIntStruct>().max_size();
   std::vector<DualIntStruct, AllocatorStack<DualIntStruct>> sut;
 
@@ -183,4 +183,29 @@ TEST (StackAllocator, AllocateFullMemoryNextClearingAndAllocateFullMemoryAgain) 
   };
 
   EXPECT_EQ (sut[lastIdx], lastValue);
+}
+
+TEST (AllocatorStack, VectorEqualityCheck) {
+  vecHeap<DualIntStruct> sut1;
+  vecHeap<DualIntStruct> sut2;
+  EXPECT_EQ (sut1, sut2);
+}
+
+TEST (AllocatorStack, AllocatorEqualityCheck) {
+  AllocatorStack<DualIntStruct> sut;
+}
+
+TEST (AllocatorStack, NestAllocator) {
+  vecStack<DualIntStruct> sut1 { {1, 2} };
+  vecStack<vecStack<DualIntStruct>> sut;// { { sut1 } };
+  for (auto& it : sut) {
+    for (auto& i : it) {
+
+    }
+  }
+  for (auto& it : sut) {
+    for (auto& i : it) {
+
+    }
+  }
 }

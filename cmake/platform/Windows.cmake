@@ -45,7 +45,9 @@ include_directories(${FILLWAVE_INCLUDE_DIRECTORIES})
 # Targets
 # -----------------------------------------------
 
-add_library (fillwave STATIC ${FILLWAVE_SOURCES})
+set (FILLWAVE_PLATFORM_SPECIFIC_SOURCES ${FILLWAVE_SOURCES} ${FILLWAVE_PATH_SOURCE}/engine/EnginePC.cpp)
+
+add_library (fillwave SHARED ${FILLWAVE_PLATFORM_SPECIFIC_SOURCES})
 
 add_custom_target (
     copy_win

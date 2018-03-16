@@ -21,44 +21,16 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/management/TextureSystem.h>
-#include <fillwave/space/CameraOrthographic.h>
-#include <fillwave/space/base/Light.h>
+#include <fillwave/engine/Engine.h>
 
 namespace flw {
-namespace flf {
 
-/**
- * \brief Light UBO data.
- */
-struct LightDirectioData {
-  GLfloat position[4];
-  GLfloat intensity[4];
-  GLfloat mvp[16];
+class EnginePC : public Engine{
+ public:
+
+  EnginePC(GLint argc, GLchar *const argv[]);
+
+  ~EnginePC() override;
 };
 
-/**
- * \brief Light with Orthographic projection.
- */
-class LightDirectional : public Light {
-public:
-  LightDirectional(
-    flc::Texture2DRenderable* tex, glm::vec3 pos, glm::quat rot, glm::vec4 intensity, Moveable* observed = nullptr);
-
-  ~LightDirectional() override;
-
-  flc::Texture2DRenderable* getShadowTexture();
-
-  CameraOrthographic* getShadowCamera();
-
-  void updateShadowCamera();
-
-  void log();
-
-private:
-  flc::Texture2DRenderable* mShadowTexture;
-  pu<CameraOrthographic> mShadowCamera;
-};
-
-} /* flf */
 } /* flw */

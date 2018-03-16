@@ -22,6 +22,8 @@
  */
 
 #include <fillwave/core/buffers/VertexBufferDebug.h>
+#include <fillwave/models/base/IReloadable.h>
+#include <fillwave/space/base/ICamera.h>
 
 namespace flw {
 namespace flc {
@@ -57,7 +59,7 @@ class Camera;
 
 class Debugger : public IReloadable {
 public:
-  Debugger(Engine *engine, GLsizei howManyDebugWindows = 6);
+  Debugger(Engine* engine, GLsizei howManyDebugWindows = 6);
   ~Debugger() override;
 
   /* State */
@@ -73,8 +75,7 @@ public:
   void renderGeometryBuffer(GLuint width, GLuint height, GLuint attachments, flc::FramebufferGeometry *buffer);
 
 private:
-  struct DebugWindowInfo
-  {
+  struct DebugWindowInfo {
       glm::ivec2 size;
       glm::ivec2 offset;
   };
@@ -82,8 +83,8 @@ private:
   std::vector<DebugWindowInfo> mDebugWindows;
 
   EDebuggerState mState;
-  flc::Program *mProgram;
-  Engine *mEngine;
+  flc::Program* mProgram;
+  Engine* mEngine;
 
   flc::VertexBufferDebug *mVBO;
 

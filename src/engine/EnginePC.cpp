@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -21,44 +19,30 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/management/TextureSystem.h>
-#include <fillwave/space/CameraOrthographic.h>
-#include <fillwave/space/base/Light.h>
+/* Debug  */
+#include <fillwave/Config.h>
+
+/* Logs  */
+#include <fillwave/Log.h>
+
+/* flw  */
+#include <fillwave/Fillwave.h>
+
+/* Implementation  */
+#include  <fillwave/models/animations/Conversion.h>
+
+using namespace flw::flc;
+using namespace std;
 
 namespace flw {
-namespace flf {
 
-/**
- * \brief Light UBO data.
- */
-struct LightDirectioData {
-  GLfloat position[4];
-  GLfloat intensity[4];
-  GLfloat mvp[16];
-};
+EnginePC::EnginePC(GLint argc, GLchar* const argv[])
+  : Engine(argc, argv) {
+  // nothing
+}
 
-/**
- * \brief Light with Orthographic projection.
- */
-class LightDirectional : public Light {
-public:
-  LightDirectional(
-    flc::Texture2DRenderable* tex, glm::vec3 pos, glm::quat rot, glm::vec4 intensity, Moveable* observed = nullptr);
+EnginePC::~EnginePC() {
+  // nothing
+}
 
-  ~LightDirectional() override;
-
-  flc::Texture2DRenderable* getShadowTexture();
-
-  CameraOrthographic* getShadowCamera();
-
-  void updateShadowCamera();
-
-  void log();
-
-private:
-  flc::Texture2DRenderable* mShadowTexture;
-  pu<CameraOrthographic> mShadowCamera;
-};
-
-} /* flf */
-} /* flw */
+} /* flw  */

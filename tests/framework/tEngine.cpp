@@ -7,7 +7,7 @@ using namespace flw::flf;
 
 TEST (Engine, texture) {
   GLchar *const argv[] = {"0f0f "};
-  auto engine = make_pu<Engine>(1, argv);
+  auto engine = make_pu<EnginePC>(1, argv);
   auto texture = engine->storeTexture("data/text.png");
   auto empty = nullptr;
   EXPECT_EQ (texture, empty);

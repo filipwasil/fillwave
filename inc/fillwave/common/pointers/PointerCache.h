@@ -22,27 +22,39 @@
  */
 
 #include <memory>
+#include <array>
+#include <utility>
+#include <iostream>
 
 namespace flw {
 
-template <class T>
-class PointerCache : public std::unique_ptr<T> {
+template <class TValueType>
+class PointerCache : public std::unique_ptr<TValueType, void(*)(TValueType*)> {
  public:
+
   PointerCache()
-    : mPtr() {
-    //
+    : std::unique_ptr<TValueType, void(*)(TValueType*)> (create(), [](TValueType*){})
+    , mPtrStack() {
+    // nothing
+  }
+
+  template <typename ...Args>
+  PointerCache(Args&&... args)
+    :  std::unique_ptr<TValueType, void(*)(TValueType*)> (create(), [](TValueType*){})
+    , mPtrStack { { { std::forward<Args>(args)...} } } {
+    // nothing
   }
 
  private:
-  T* create() {
+  TValueType* create() {
+    return mPtrStack.data();
+  }
+
+  void destroy(TValueType*) {
     // nothing
   }
 
-  void destroy(T*) {
-    // nothing
-  }
-
-  std::unique_ptr<T> mPtr;
+  std::array<TValueType, 1> mPtrStack;
 };
 
 } /* flw */

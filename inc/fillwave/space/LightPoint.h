@@ -29,7 +29,6 @@
 #include <map>
 
 namespace flw {
-class Engine;
 namespace flf {
 
 /*! \class LightPoint

@@ -33,7 +33,7 @@ namespace flf {
 
 class Terrain : public Entity {
 public:
-  Terrain(Engine *engine, flc::Program *program, GLint radius, GLfloat gap);
+  Terrain(Engine* engine, flc::Program* program, GLint radius, GLfloat gap);
 
   ~Terrain() override = default;
 

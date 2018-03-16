@@ -7,7 +7,7 @@ cmake_policy (SET CMP0048 NEW)
 # -----------------------------------------------
 
 message ("Building binary package")
-project (libfillwave VERSION 7.0.0 LANGUAGES C CXX)
+project (libfillwave VERSION 8.1.0 LANGUAGES C CXX)
 
 # -----------------------------------------------
 # Includes
@@ -32,7 +32,9 @@ endif ()
 # Targets
 # -----------------------------------------------
 
-add_library (fillwave SHARED ${FILLWAVE_SOURCES})
+set (FILLWAVE_PLATFORM_SPECIFIC_SOURCES ${FILLWAVE_SOURCES} ${FILLWAVE_PATH_SOURCE}/engine/EnginePC.cpp)
+
+add_library (fillwave SHARED ${FILLWAVE_PLATFORM_SPECIFIC_SOURCES})
 
 # -----------------------------------------------
 # Installation

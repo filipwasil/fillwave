@@ -21,7 +21,11 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/IBuffer.h>
+#include <fillwave/core/buffers/VertexBufferPosition.h>
+#include <fillwave/core/buffers/VertexBufferFloat.h>
+#include <fillwave/core/buffers/VertexBufferDebug.h>
+#include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
+#include <fillwave/core/buffers/VertexBufferParticles.h>
 #include <fillwave/models/base/IReloadable.h>
 
 namespace flw {

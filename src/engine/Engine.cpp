@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -20,6 +18,20 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+
+/* Debug  */
+#include <fillwave/Config.h>
+
+/* Logs  */
+#include <fillwave/Log.h>
+
+/* Stdlib  */
+#include <fstream>
+
+/* Implementation  */
+#include  <fillwave/models/animations/Conversion.h>
+
+#include <fillwave/Fillwave.h>
 
 #include "fillwave/Core.h"
 #include "fillwave/Debugger.h"
@@ -44,207 +56,23 @@ struct ANativeActivity;
 #include "fillwave/loaders/FileLoader.h"
 #include "fillwave/management/CacheBuffer.h"
 
-FLOGINIT("Engine", FERROR | FFATAL | FDEBUG | FINFO)
+FLOGINIT_DEFAULT()
+
+using namespace flw::flc;
+using namespace std;
 
 namespace flw {
 
-/*! \struct Engine::EngineImpl
-* \brief Private implementation of Fillwave GE.
-*/
-
-struct Engine::EngineImpl final {
-#ifdef __ANDROID__
-  EngineImpl(Engine* engine, std::string rootPath);
-  EngineImpl(Engine* engine, ANativeActivity* activity);
-#else
-
-  EngineImpl(Engine *engine, GLint argc, GLchar *const argv[]);
-
-#endif
-
-  ~EngineImpl();
-
-  Engine *mEngine;
-
-  /* Asset loader */
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  Assimp::Importer mImporter;
-#else
-
-#endif
-
-  /* Screen */
-  GLuint mWindowWidth = 1920;
-  GLuint mWindowHeight = 1200;
-  GLfloat mWindowAspectRatio = 1200.0f / 1920.0f;
-
-  /* Loaders */
-  flf::FontLoader mFontLoader;
-  flf::FileLoader mFileLoader;
-  flf::ProgramLoader mProgramLoader;
-
-  /* Picking */
-  flc::Texture2DRenderable* mPickingRenderableTexture;
-  pu<flc::PixelBuffer> mPickingPixelBuffer;
-
-  /* Resources */
-  flf::CacheShader mShaders;
-  flf::CacheProgram mPrograms;
-  flf::CacheSampler mSamplers;
-  std::vector<ps<flf::Text>> mTextManager;
-  std::vector<ps<Font>> mFontManager;
-  flf::CacheBuffer mBuffers;
-  pu<flf::LightSystem> mLights;
-  pu<flf::TextureSystem> mTextures;
-  std::vector<flc::PostProcessingPass> mPostProcessingPasses;
-  flc::Program* mProgramTextureLookup;
-
-  /* Fences and barriers */
-  puFence mFence;
-
-  /* OQ */
-  flc::Program *mProgramOcclusionBox;
-  flc::VertexBufferPosition *mVBOOcclusion;
-  flc::VertexArray *mVAOOcclusion;
-
-  /* Input handlers */
-  flf::vec<flf::EventHandler> mHandlers;
-
-  /* Extras */
-  pu<flf::Debugger> mDebugger;
-  GLuint mFrameCounter;
-  GLfloat mTimeFactor;
-  ps<flf::Text> mFPSText;
-  //flf::FPSCallback mTextFPSCallback;
-
-  /* Startup */
-  GLfloat mStartupTime;
-  flc::Texture* mStartupTexture;
-  const GLfloat mStartupTimeLimit = 8.0f;
-  pu<flc::PostProcessingPass> mPostProcessingPassStartup;
-
-  /* Options */
-  GLboolean mIsOQ; /* Occlusion query */
-
-  /* Scene */
-  pu<flf::Scene> mScene;
-  glm::vec3 mBackgroundColor;
-
-  /* Initiatization */
-  void init();
-  void initExtensions();
-  void initContext();
-  void initPickingBuffer();
-  void initPipelines();
-  void initUniforms();
-  void initManagement();
-  void initExtras();
-  void initOcclusionTest();
-  void initStartup();
-
-  /* Events */
-  void onEvent(const flf::Event& event) const;
-  void onResizeScreen(GLuint width, GLuint height);
-
-  void attachHandler(std::function<void(const flf::Event&)>&& handler, flf::EEventType type);
-  void detachHandlers();
-
-  /* Evaluation */
-  void evaluateShadowMaps();
-  void evaluateDebugger();
-  void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
-  void evaluateTime(GLfloat timeExpiredInSeconds);
-  void evaluateStartupAnimation(GLfloat time);
-
-  /* Draw types */
-  void draw(GLfloat time);
-  void drawFront();
-  void drawOcclusionPass();
-
-#ifdef FILLWAVE_GLES_3_0
-#else
-  void drawLines(GLfloat time);
-  void drawPoints(GLfloat time);
-#endif
-  void drawTexture(flc::Texture *t, flc::Program *p);
-  void drawTexture(flc::Texture *t);
-
-  /* IRenderer */
-  void drawClear();
-  void drawHUD();
-  void drawSceneStartup();
-  void drawScene(GLfloat time);
-  void drawSceneCore();
-
-  /* Picking */
-  glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
-
-  void pick(GLuint x, GLuint y);
-
-  /* Capture */
-  void captureFramebufferToFile(const std::string& name);
-
-  /* Reload */
-  void reload();
-  void reloadPickingBuffer();
-};
-
-#ifdef __ANDROID__
-
-Engine::EngineImpl::EngineImpl(Engine* engine, std::string rootPath)
-  : mEngine(engine)
-  , mFileLoader(rootPath)
-  , mProgramLoader(engine)
+Engine::Engine(GLint /*argc*/, GLchar *const argv[])
+  : mFileLoader(getFilePathOnly(argv[0]))
+  , mProgramLoader(this)
+  , mShaders()
   , mFrameCounter(0)
   , mTimeFactor(1.0)
-  , mTextFPSCallback(nullptr)
   , mStartupTime(0.0f)
-  , mIsOQ(GL_FALSE)
-  , mBackgroundColor(0.1, 0.1, 0.1) {
-}
-
-Engine::EngineImpl::EngineImpl(Engine* engine, ANativeActivity* activity)
-  : mEngine(engine)
-  , mFileLoader(activity->internalDataPath)
-  , mProgramLoader(engine)
-  , mFrameCounter(0)
-  , mTimeFactor(1.0)
-  , mTextFPSCallback(nullptr)
-  , mStartupTime(0.0f)
-  , mIsOQ(GL_FALSE)
-  , mBackgroundColor(0.1, 0.1, 0.1) {
-
-  flf::androidSetActivity(activity);
-
-  flf::androidExtractAll();
-
-#else
-
-Engine::EngineImpl::EngineImpl(Engine *engine, GLint, GLchar *const argv[])
-    : mEngine(engine)
-    , mFileLoader(getFilePathOnly(argv[0]))
-    , mProgramLoader(engine)
-    , mShaders()
-    , mFrameCounter(0)
-    , mTimeFactor(1.0)
-    //, mTextFPSCallback(nullptr)
-    , mStartupTime(0.0f)
-    , mIsOQ(GL_TRUE)
-    , mBackgroundColor(0.1, 0.1, 0.1) {
-#endif
-}
-
-Engine::EngineImpl::~EngineImpl() {
-  if (mScene) {
-    mScene.reset();
-  }
-  mTextManager.clear();
-  mFontManager.clear();
-  mPostProcessingPasses.clear();
-}
-
-void Engine::EngineImpl::init() {
-
+  , mIsOQ(GL_TRUE)
+  , mBackgroundColor(0.1, 0.1, 0.1)
+  , mModelLoader() {
   initExtensions();
   initContext();
   initManagement();
@@ -260,15 +88,7 @@ void Engine::EngineImpl::init() {
 //   mFence = puFence(new flc::Fence());
 }
 
-#ifdef FILLWAVE_GLES_3_0
-
-inline void Engine::EngineImpl::initExtensions() {
-  glesInitExtensions();
-}
-
-#else /* FILLWAVE_GLES_3_0 */
-
-inline void Engine::EngineImpl::initExtensions() {
+void Engine::initExtensions() {
 #ifdef GLEW_OK
   GLenum GlewInitResult;
   glewExperimental = GL_TRUE;
@@ -293,14 +113,12 @@ inline void Engine::EngineImpl::initExtensions() {
 #endif /* GLEW_OK */
 }
 
-#endif /* FILLWAVE_GLES_3_0 */
-
-inline void Engine::EngineImpl::initManagement() {
+void Engine::initManagement() {
   mTextures = std::make_unique<flf::TextureSystem>(mFileLoader.getRootPath());
   mLights = std::make_unique<flf::LightSystem>();
 }
 
-inline void Engine::EngineImpl::initPipelines() {
+void Engine::initPipelines() {
   /* OT */
   mProgramOcclusionBox = mProgramLoader.getProgram(flf::EProgram::occlusionOptimizedQuery);
 
@@ -308,13 +126,13 @@ inline void Engine::EngineImpl::initPipelines() {
   mProgramTextureLookup = mProgramLoader.getProgram(flf::EProgram::quad);
 }
 
-inline void Engine::EngineImpl::initUniforms() {
+void Engine::initUniforms() {
   mProgramTextureLookup->use();
   mProgramTextureLookup->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
   flc::Program::disusePrograms();
 }
 
-inline void Engine::EngineImpl::initOcclusionTest() {
+void Engine::initOcclusionTest() {
   flf::vec<flc::VertexPosition> vec = flf::BoxOcclusion().getVertices();
   mVAOOcclusion = new flc::VertexArray();
   mVBOOcclusion = mBuffers.mVerticesPosition.store(mVAOOcclusion, vec);
@@ -326,7 +144,7 @@ inline void Engine::EngineImpl::initOcclusionTest() {
   flc::VertexArray::unbindVAO();
 }
 
-inline void Engine::EngineImpl::initStartup() {
+void Engine::initStartup() {
 
   auto program = mProgramLoader.getProgram(flf::EProgram::quadCustomFragmentShaderStartup);
 
@@ -336,11 +154,11 @@ inline void Engine::EngineImpl::initStartup() {
   flc::Program::disusePrograms();
 
   mPostProcessingPassStartup = std::make_unique<flc::PostProcessingPass>(program,
-                                                                     mTextures->getDynamic("fillwave_quad_startup.frag",
-                                                                                           program,
-                                                                                           glm::ivec2(mWindowWidth,
-                                                                                                      mWindowHeight)),
-                                                                     mStartupTimeLimit);
+                                                                         mTextures->getDynamic("fillwave_quad_startup.frag",
+                                                                                               program,
+                                                                                               glm::ivec2(mWindowWidth,
+                                                                                                          mWindowHeight)),
+                                                                         mStartupTimeLimit);
 
   fLogD("Post processing startup pass added");
 
@@ -358,14 +176,14 @@ inline void Engine::EngineImpl::initStartup() {
   fLogE("Fillwave startup logo could not be executed");
 }
 
-inline void Engine::EngineImpl::initPickingBuffer() {
+void Engine::initPickingBuffer() {
   mPickingPixelBuffer = std::make_unique<flc::PixelBuffer>(GL_STREAM_READ);
   reloadPickingBuffer();
 }
 
-inline void Engine::EngineImpl::initExtras() {
+void Engine::initExtras() {
   /* Debugger */
-  mDebugger = std::make_unique<flf::Debugger>(mEngine);
+  mDebugger = std::make_unique<flf::Debugger>(this);
 
 #ifdef FILLWAVE_COMPILATION_PC_GLES
 #else
@@ -377,7 +195,7 @@ inline void Engine::EngineImpl::initExtras() {
   glGetError();
 }
 
-void Engine::EngineImpl::reload() {
+void Engine::reload() {
 
   initContext();
 
@@ -403,7 +221,7 @@ void Engine::EngineImpl::reload() {
   reloadPickingBuffer();
 }
 
-inline void Engine::EngineImpl::reloadPickingBuffer() {
+void Engine::reloadPickingBuffer() {
   mPickingRenderableTexture = mTextures->getColor2D(mWindowWidth, mWindowHeight);
 
   mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
@@ -415,7 +233,7 @@ inline void Engine::EngineImpl::reloadPickingBuffer() {
   mPickingPixelBuffer->unbind();
 }
 
-inline void Engine::EngineImpl::initContext(void) {
+void Engine::initContext(void) {
   glClearColor(mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z, 1.0f);
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LEQUAL);
@@ -426,7 +244,410 @@ inline void Engine::EngineImpl::initContext(void) {
   fLogC("Could not set OpenGL culling options");
 }
 
-void Engine::EngineImpl::draw(GLfloat time) {
+Engine::~Engine() {
+  if (mScene) {
+    mScene.reset();
+  }
+  mTextManager.clear();
+  mFontManager.clear();
+  mPostProcessingPasses.clear();
+}
+
+void Engine::configBackgroundColor(glm::vec3 color) {
+  mBackgroundColor = color;
+}
+
+void Engine::configTime(GLfloat timeFactor) {
+  mTimeFactor = timeFactor;
+}
+
+flf::LightSpot* Engine::storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
+  return mLights->mLightsSpot.add(
+      mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
+}
+
+flf::LightPoint* Engine::storeLightPoint(glm::vec3 pos, glm::vec4 col, flf::Moveable* observed) {
+  return mLights->mLightsPoint.add(
+      mTextures->getShadow3D(mWindowWidth, mWindowHeight), pos, col, observed);
+}
+
+flf::LightDirectional*
+Engine::storeLightDirectional(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
+  return mLights->mLightsDirectional.add(
+      mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
+}
+
+Program* Engine::storeProgram(const string& name, const vector<Shader*>& shaders, bool isSkipLinking) {
+  return mPrograms.store(name, shaders, isSkipLinking);
+}
+
+Texture2D* Engine::storeTexture(const string& texturePath, flf::ECompression compression) {
+  return mTextures->get(texturePath, compression);
+}
+
+Texture2DRenderable* Engine::storeTextureRenderable() {
+  return mTextures->getColor2D(mWindowWidth, mWindowHeight);
+}
+
+Texture2DRenderableDynamic* Engine::storeTextureDynamic(const string& fragmentShaderPath) {
+  const string path = fragmentShaderPath;
+  Program* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
+  return mTextures->getDynamic(path, program, glm::ivec2(mWindowWidth, mWindowHeight));;
+}
+
+Texture3D* Engine::storeTexture3D(
+  const string& posX
+  , const string& negX
+  , const string& posY
+  , const string& negY
+  , const string& posZ
+  , const string& negZ) {
+  return mTextures->get(posX, negX, posY, negY, posZ, negZ);
+}
+
+Sampler* Engine::storeSO(GLint textureUnit) {
+  return mSamplers.store(textureUnit, textureUnit);
+}
+
+VertexArray* Engine::storeVAO(flf::IReloadable* user, VertexArray* vao) {
+  return vao ? mBuffers.mVertexArrays.store(vao, user) : mBuffers.mVertexArrays.store(user);
+}
+
+/* Detach */
+void Engine::detach(flf::Entity* entity) {
+  if (mScene) {
+    mScene->detach(entity);
+  }
+  mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
+}
+
+ps<flf::Text> Engine::storeText(const string& content,
+    const string& fontName,
+    glm::vec2 position,
+    GLfloat scale,
+    glm::vec4 color,
+    ETextEffect effect) {
+  /* Check for the font texture  */
+  if (!mTextures->get(fontName + ".png")) {
+    mFontLoader.load(mFileLoader.getRootPath() + fontName);
+  }
+  auto t = mTextures->get(fontName + ".png", flf::ECompression::none, flf::EFlip::vertical);
+
+  Font* font = nullptr;
+  for (auto &it : mFontManager) {
+    if (it->mName == fontName) {
+      font = it.get();
+    }
+  }
+
+  if (!font) {
+    ifstream myfile(mFileLoader.getRootPath(fontName + ".meta"));
+    if (!myfile.is_open()) {
+      fLogE("No text added. Could not write to metadata file: %s", (fontName + ".meta").c_str());
+      return ps<flf::Text>();
+    }
+    string line;
+    string ASCII, xMin, width, yMin, height, yOffset;
+    GLfloat fXMin, fWidth, fYMin, fHeight, fYOffset;
+    GLint iASCII;
+    Font* newFont = new Font();
+    GLint control = 0;
+    while (!myfile.eof()) {
+      getline(myfile, line);
+      myfile >> iASCII >> fXMin >> fWidth >> fYMin >> fHeight >> fYOffset;
+      newFont->mWidths[iASCII] = fWidth;
+      newFont->mOffsets[iASCII] = 1.0f - fHeight - fYOffset;
+      if (control++ > FILLWAVE_MAX_TEXTS) {
+        fLogE("Metadata can not be read for file %s.", (fontName + ".meta").c_str());
+        myfile.close();
+        delete newFont;
+        return ps<flf::Text>();
+      }
+    }
+    myfile.close();
+    mFontManager.push_back(ps<Font>(newFont));
+    font = newFont;
+  }
+
+  ps<flf::Text> text = make_shared<flf::Text>(content, t, position, this, scale, font, color, effect);
+  mTextManager.push_back(ps<flf::Text>(text));
+  return text;
+}
+
+void Engine::detach(ps<flf::Text> text) {
+  auto _compare_function = [text](ps<flf::Text> t) -> bool {
+    return (t == text);
+  };
+  auto _begin = mTextManager.begin();
+  auto _end = mTextManager.end();
+  auto it = remove_if(_begin, _end, _compare_function);
+  mTextManager.erase(it, _end);
+}
+
+void Engine::detach(flf::LightSpot* light) {
+  auto new_end = remove_if(mLights->mLightsSpot.begin(),
+                           mLights->mLightsSpot.end(),
+                           [light](const pu<flf::LightSpot> &l) {
+                             return light == l.get();
+                           });
+  mLights->mLightsSpot.erase(new_end, mLights->mLightsSpot.end());
+}
+
+void Engine::detach(flf::LightDirectional* light) {
+  auto new_end = remove_if(mLights->mLightsDirectional.begin(),
+                           mLights->mLightsDirectional.end(),
+                           [light](const pu<flf::LightDirectional> &l) {
+                             return light == l.get();
+                           });
+  mLights->mLightsDirectional.erase(new_end, mLights->mLightsDirectional.end());
+}
+
+void Engine::detach(flf::LightPoint* light) {
+  auto new_end = remove_if(mLights->mLightsPoint.begin(),
+                           mLights->mLightsPoint.end(),
+                           [light](const pu<flf::LightPoint> &l) {
+                             return light == l.get();
+                           });
+  mLights->mLightsPoint.erase(new_end, mLights->mLightsPoint.end());
+}
+
+void Engine::detachLights() {
+  mLights->clear();
+}
+
+glm::ivec2 Engine::getScreenSize() const {
+  return glm::ivec2(mWindowWidth, mWindowHeight);
+}
+
+GLfloat Engine::getScreenAspectRatio() const {
+  return mWindowAspectRatio;
+}
+
+GLuint Engine::getFramesPassed() {
+  GLuint result = mFrameCounter;
+  mFrameCounter = 0;
+  return result;
+}
+
+GLfloat Engine::getStartupAnimationTime() const {
+  return mStartupTimeLimit;
+}
+
+void Engine::setCurrentScene(pu<flf::Scene> &&scene) {
+  if (mScene) {
+    mScene->onHide();
+  }
+  mScene = move(scene);
+  mScene->onShow();
+  mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
+}
+
+pp<flf::Scene> Engine::getCurrentScene() const {
+  return pp<flf::Scene>(mScene.get());
+}
+
+flf::LightSystem &Engine::getLightSystem() const {
+  return* mLights.get();
+}
+
+flf::TextureSystem &Engine::getTextureSystem() const {
+  return* mTextures.get();
+}
+
+pu<flf::PhysicsMeshBuffer> Engine::getPhysicalMeshBuffer(const string& shapePath) {
+  auto buffer = make_pu<flf::PhysicsMeshBuffer>();
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+  auto scene = mModelLoader.mImporter->ReadFile(
+    (mFileLoader.getRootPath() + shapePath).c_str()
+    , aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);
+
+  if (nullptr == scene) {
+    fLogF("Scene: ", shapePath, " could not be imported.");
+    return buffer;
+  }
+
+  if (scene->mNumMeshes != 1) {
+    fLogF("Scene: ", shapePath, " can only have one mesh for physics buffer purposes");
+    return buffer;
+  }
+
+  const aiMesh* shape = scene->mMeshes[0];
+  buffer->mNumFaces = shape->mNumFaces;
+  buffer->mVertices.reserve(shape->mNumVertices);
+  buffer->mIndices.reserve(shape->mNumFaces*  3);
+  for (GLuint j = 0; j < shape->mNumFaces; ++j) {
+    buffer->mIndices.push_back(shape->mFaces[j].mIndices[0]);
+    buffer->mIndices.push_back(shape->mFaces[j].mIndices[1]);
+    buffer->mIndices.push_back(shape->mFaces[j].mIndices[2]);
+  }
+  for (GLuint z = 0; z < shape->mNumVertices; ++z) {
+    buffer->mVertices.push_back(assimpToGlmVec3(shape->mVertices[z]));
+  }
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
+
+  return buffer;
+}
+
+void Engine::addPostProcess(const string& fragmentShaderPath, GLfloat lifeTime) {
+  Program* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
+  PostProcessingPass pass(program,
+                          mTextures->getDynamic(fragmentShaderPath,
+                                                       program,
+                                                       glm::ivec2(mWindowWidth, mWindowHeight)),
+                          lifeTime);
+  mPostProcessingPasses.push_back(pass);
+  fLogD("Post processing pass added: %s", fragmentShaderPath.c_str());
+}
+
+void Engine::configFPSCounter(string fontName, glm::vec2 position, GLfloat size) {
+  if (fontName.size() > 1) {
+    mFPSText = storeText("", fontName, position, size);
+    //mTextFPSCallback.set(mFPSText);
+    return;
+  }
+  mFPSText.reset();
+  //detachCallback(mTextFPSCallback);
+}
+
+void Engine::configFileLogging(string fileName) {
+  if (fileName.size() > 1) {
+    fLogI("File %s will be cleaned and used for logging.", fileName.c_str());
+    return;
+  }
+  fLogI("File logging disabled.");
+}
+
+void Engine::log() {
+  fLogI("Fillwave engine");
+  const GLubyte* renderer = glGetString(GL_RENDERER);
+  const GLubyte* version = glGetString(GL_VERSION);
+  fLogI("Renderer: %s\n", renderer);
+  fLogI("OpenGL version supported %s\n", version);
+}
+
+void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLuint format, GLint bytesPerPixel) {
+  mPickingRenderableTexture->bindForRendering();
+  drawClear();
+  mScene->draw();
+  mPickingPixelBuffer->bind();
+  glReadPixels(0, 0, mWindowWidth, mWindowHeight, format, GL_UNSIGNED_BYTE, 0);
+  fLogC("reading pixel buffer failed");
+#ifdef FILLWAVE_GLES_3_0
+  buffer = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
+#else
+  buffer = (GLubyte* ) mPickingPixelBuffer->map(GL_READ_WRITE);
+#endif
+ * sizeInBytes = mWindowWidth*  mWindowHeight*  bytesPerPixel;
+  buffer[*sizeInBytes] = '\0';
+}
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+
+const aiScene* Engine::getModelFromFile(const string& path) {
+  fLogD("Reading model ", path);
+  return mModelLoader.mImporter->ReadFile((mFileLoader.getRootPath() + path).c_str(),
+                                   aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);
+}
+
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
+
+template <GLuint T>
+Shader* Engine::storeShader(const string& shaderPath) {
+  string shaderSource = "";
+  const string fullPath = mFileLoader.getRootPath() + shaderPath;
+  flf::ReadFile(fullPath, shaderSource);
+  return mShaders.store(fullPath, T, shaderSource);
+}
+
+template <GLuint T>
+Shader* Engine::storeShader(const string& shaderPath, const string& shaderSource) {
+  return mShaders.store(mFileLoader.getRootPath() + shaderPath, T, shaderSource);
+}
+
+void Engine::configDebugger(EDebuggerState state) {
+  mDebugger->setState(state);
+}
+
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
+    flf::TerrainConstructor* constructor,
+    GLint density,
+    GLfloat gap,
+    vector<GLuint> &indices) {
+  return mBuffers.mVertices.store(vao, constructor, density, gap, indices);
+}
+
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, vector<VertexBasic> &data) {
+  return mBuffers.mVertices.store(new VertexBufferBasic(data), vao);
+}
+
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const vector<GLuint> &data) {
+  return mBuffers.mIndices.store(new IndexBuffer(data), vao);
+}
+
+void Engine::removeBufferIndex(VertexArray* vao) {
+  mBuffers.mIndices.erase(vao);
+}
+
+VertexBufferText* 
+Engine::storeBufferInternal(VertexArray* vao, const vector<GLfloat> &data, const vector<GLfloat> &textureCoords) {
+  return mBuffers.mVerticesText.store(vao, data, textureCoords);
+}
+
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, GLuint elements) {
+  return mBuffers.mIndices.store(new IndexBuffer(elements, true), vao);
+}
+
+VertexBufferParticlesGPU* 
+Engine::storeBuffersInternal(VertexArray* vao, size_t idx, vector<VertexParticleGPU> &particles) {
+  auto ptr = new vector<VertexBufferParticlesGPU* >();
+  auto buffers = mBuffers.mVerticesParticlesGPU.store(ptr, vao);
+  if (buffers->size() < idx) {
+    return (*buffers)[idx];
+  }
+  fLogD("There is no buffer for requested index. Creating a new one.");
+  buffers->push_back(new VertexBufferParticlesGPU(particles));
+  return buffers->back();
+}
+
+VertexBufferParticles* Engine::storeBufferInternal(VertexArray* vao,
+    vector<GLfloat> &velocities,
+    vector<GLfloat> &positions,
+    vector<GLfloat> &times) {
+  return mBuffers.mVerticesParticles.store(vao, velocities, positions, times);
+}
+
+VertexBufferDebug* Engine::storeBufferInternal(VertexArray* vao, GLfloat scale) {
+  return mBuffers.mVerticesDebugger.store(vao, scale);
+}
+
+VertexBufferFloat* Engine::storeBufferInternal(VertexArray* vao, vector<VertexFloat> &data) {
+  return mBuffers.mVerticesFloat.store(vao, data);
+}
+
+VertexBufferPosition* Engine::storeBufferInternal(VertexArray* vao, vector<VertexPosition> &data) {
+  return mBuffers.mVerticesPosition.store(vao, data);
+}
+
+void Engine::removeBufferBasic(VertexArray* vao) {
+  mBuffers.mVertices.erase(vao);
+}
+
+void Engine::removeBufferText(VertexArray* vao) {
+  mBuffers.mVerticesText.erase(vao);
+}
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape) {
+  return mBuffers.mIndices.store(new IndexBuffer(shape), vao);
+}
+
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape, flf::Animator* animator) {
+  return mBuffers.mVertices.store(new VertexBufferBasic(shape, animator), vao);
+}
+
+void Engine::draw(GLfloat time) {
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
   /* Draw startup animation */
   if (mStartupTime < mStartupTimeLimit) {
@@ -454,7 +675,7 @@ void Engine::EngineImpl::draw(GLfloat time) {
   }
 }
 
-inline void Engine::EngineImpl::drawFront() {
+void Engine::drawFront() {
   drawHUD();
   evaluateDebugger();
   mScene->drawCursor();
@@ -465,7 +686,7 @@ inline void Engine::EngineImpl::drawFront() {
 #ifdef FILLWAVE_GLES_3_0
 #else
 
-void Engine::EngineImpl::drawLines(GLfloat time) {
+void Engine::drawLines(GLfloat time) {
 
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
   /* Draw startup animation */
@@ -495,7 +716,7 @@ void Engine::EngineImpl::drawLines(GLfloat time) {
   }
 }
 
-void Engine::EngineImpl::drawPoints(GLfloat time) {
+void Engine::drawPoints(GLfloat time) {
 
 #ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
   /* Draw startup animation */
@@ -527,7 +748,7 @@ void Engine::EngineImpl::drawPoints(GLfloat time) {
 
 #endif
 
-inline void Engine::EngineImpl::drawHUD() {
+void Engine::drawHUD() {
   if (mScene) {
     mScene->drawHUD();
   }
@@ -536,7 +757,7 @@ inline void Engine::EngineImpl::drawHUD() {
   }
 }
 
-void Engine::EngineImpl::drawTexture(flc::Texture *t, flc::Program *p) {
+void Engine::drawTexture(flc::Texture *t, flc::Program *p) {
   p->use();
   t->bind(FILLWAVE_DIFFUSE_UNIT);
   p->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
@@ -545,7 +766,7 @@ void Engine::EngineImpl::drawTexture(flc::Texture *t, flc::Program *p) {
   flc::Program::disusePrograms();
 }
 
-void Engine::EngineImpl::drawTexture(flc::Texture *t) {
+void Engine::drawTexture(flc::Texture *t) {
   mProgramTextureLookup->use();
   mProgramTextureLookup->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
   t->bind(FILLWAVE_DIFFUSE_UNIT);
@@ -553,12 +774,12 @@ void Engine::EngineImpl::drawTexture(flc::Texture *t) {
   t->unbind();
 }
 
-inline void Engine::EngineImpl::drawClear() {
+void Engine::drawClear() {
   glClearColor(mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z, 1.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-inline void Engine::EngineImpl::drawScene(GLfloat time) {
+void Engine::drawScene(GLfloat time) {
 
   evaluateTime(time);
 
@@ -624,7 +845,7 @@ inline void Engine::EngineImpl::drawScene(GLfloat time) {
   }
 }
 
-inline void Engine::EngineImpl::drawSceneCore() {
+void Engine::drawSceneCore() {
   if (mIsOQ) {
     drawOcclusionPass();
   }
@@ -632,7 +853,7 @@ inline void Engine::EngineImpl::drawSceneCore() {
   mScene->draw();
 }
 
-inline void Engine::EngineImpl::drawOcclusionPass() {
+void Engine::drawOcclusionPass() {
   mVAOOcclusion->bind();
 
   glDisable(GL_CULL_FACE);
@@ -648,7 +869,7 @@ inline void Engine::EngineImpl::drawOcclusionPass() {
   flc::VertexArray::unbindVAO();
 }
 
-inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
+void Engine::evaluateStartupAnimation(GLfloat time) {
 
   drawClear();
 
@@ -667,7 +888,7 @@ inline void Engine::EngineImpl::evaluateStartupAnimation(GLfloat time) {
   mPostProcessingPassStartup->checkTime(time);
 }
 
-inline void Engine::EngineImpl::evaluateShadowMaps() {
+void Engine::evaluateShadowMaps() {
 
   glDepthMask(GL_TRUE);
 
@@ -711,11 +932,11 @@ inline void Engine::EngineImpl::evaluateShadowMaps() {
   flc::Framebuffer::bindScreenFramebuffer();
 }
 
-inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
+void Engine::evaluateTime(GLfloat timeExpiredInSeconds) {
   if (mTimeFactor) {
     flf::EventData data;
     data.mTime = {
-        timeExpiredInSeconds
+      timeExpiredInSeconds
     };
     ;
 
@@ -724,7 +945,7 @@ inline void Engine::EngineImpl::evaluateTime(GLfloat timeExpiredInSeconds) {
   }
 }
 
-inline void Engine::EngineImpl::evaluateDebugger() {
+void Engine::evaluateDebugger() {
   GLint mCurentTextureUnit = 0;
   GLint id = 0;
   switch (mDebugger->getState()) {
@@ -783,7 +1004,7 @@ inline void Engine::EngineImpl::evaluateDebugger() {
   }
 }
 
-void Engine::EngineImpl::onResizeScreen(GLuint width, GLuint height) {
+void Engine::onResizeScreen(GLuint width, GLuint height) {
 
   mWindowWidth = width;
   mWindowHeight = height;
@@ -794,24 +1015,28 @@ void Engine::EngineImpl::onResizeScreen(GLuint width, GLuint height) {
 
   mTextures->resize(mWindowWidth, mWindowHeight);
   mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
+
+  for (auto &it : mTextManager) { //todo optimization update only VBO
+    it->editAspectRatio(this);
+  }
 }
 
-void Engine::EngineImpl::onEvent(const flf::Event& event) const {
+void Engine::onEvent(const flf::Event& event) const {
   for (const auto& handler : mHandlers) {
     handler.handle(event);
   }
   mScene->onEvent(event);
 }
 
-void Engine::EngineImpl::attachHandler(std::function<void(const flf::Event&)>&& handler, flf::EEventType type) {
+void Engine::attachHandler(std::function<void(const flf::Event&)>&& handler, flf::EEventType type) {
   mHandlers.emplace_back(type, std::move(handler));
 }
 
-void Engine::EngineImpl::detachHandlers() {
+void Engine::detachHandlers() {
   mHandlers.clear();
 }
 
-glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
+glm::ivec4 Engine::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
   y = mWindowHeight - y;
   GLuint id = 0;
   GLuint r = 0;
@@ -829,7 +1054,7 @@ glm::ivec4 Engine::EngineImpl::pickingBufferGetColor(GLubyte *data, GLuint x, GL
   return glm::ivec4(r, g, b, a);
 }
 
-void Engine::EngineImpl::pick(GLuint x, GLuint y) {
+void Engine::pick(GLuint x, GLuint y) {
   mPickingRenderableTexture->bindForRendering();
   drawClear();
   mScene->drawPicking();
@@ -850,7 +1075,7 @@ void Engine::EngineImpl::pick(GLuint x, GLuint y) {
   mScene->pick(colorRead);
 }
 
-void Engine::EngineImpl::captureFramebufferToFile(const std::string &name) {
+void Engine::captureFramebufferToFile(const std::string &name) {
   mPickingRenderableTexture->bindForRendering();
   drawClear();
   mScene->draw();
@@ -881,6 +1106,40 @@ void Engine::EngineImpl::captureFramebufferToFile(const std::string &name) {
   flc::Framebuffer::bindScreenFramebuffer();
   mScene->draw();
 }
-} /* flw */
 
-#undef FILLWAVE_FOPEN
+#else
+flc::VertexBufferBasic* Engine::storeBufferInternal(flc::VertexArray* vao,
+    tinyobj::shape_t& shape,
+    tinyobj::attrib_t& attributes) {
+  auto newData = new VertexBufferBasic(shape, attributes);
+  return mBuffers.mVertices.store(newData, vao);
+}
+#endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
+
+template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string& );
+
+template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string& );
+
+template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string& , const string& );
+
+template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string& , const string& );
+
+#ifdef FILLWAVE_GLES_3_0
+#else
+
+template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string& );
+
+template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string& );
+
+template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string& );
+
+template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string& , const string& );
+
+template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string& , const string& );
+
+template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string& , const string& );
+
+#endif
+
+}
+/* flw  */

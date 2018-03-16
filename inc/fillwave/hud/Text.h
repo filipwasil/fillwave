@@ -30,6 +30,7 @@
 #include <map>
 
 namespace flw {
+
 class Engine;
 
 enum class ETextEffect {
@@ -48,7 +49,7 @@ public:
   Text(const std::string &text,
       flc::Texture2D *texture,
       glm::vec2 position,
-      Engine *engine,
+      Engine* engine,
       GLfloat scale,
       Font *font,
       glm::vec4 color = glm::vec4(1.0, 1.0, 1.0, 1.0),

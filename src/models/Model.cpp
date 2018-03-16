@@ -222,7 +222,7 @@ Model::~Model() {
 
 void Model::reloadModel(const std::string& path) {
   unloadNodes();
-  const aiScene* scene = mEngine->getModelFromFile(path);
+  const auto* scene = mEngine->getModelFromFile(path);
   if (!scene) {
     fLogF("Model: %s could not be read", path.c_str());
   }

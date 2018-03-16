@@ -34,7 +34,7 @@ ContextGLFW::ContextGLFW(int argc, char *argv[]) {
 
   windowInit(mWindow);
 
-  ContextGLFW::mGraphics = new flw::Engine(argc, argv);
+  ContextGLFW::mGraphics = new flw::EnginePC(argc, argv);
 }
 
 void ContextGLFW::windowInit(GLFWwindow *&window) {

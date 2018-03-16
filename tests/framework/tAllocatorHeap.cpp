@@ -184,3 +184,17 @@ TEST (AllocatorHeap, AllocateFullMemoryNextClearingAndAllocateFullMemoryAgain) {
 
   EXPECT_EQ (sut[lastIdx], lastValue);
 }
+
+TEST (AllocatorHeap, VectorEqualityCheck) {
+  vecHeap<DualIntStructure> sut1;
+  vecHeap<DualIntStructure> sut2;
+  EXPECT_EQ (sut1, sut2);
+}
+
+TEST (AllocatorHeap, AllocatorEqualityCheck) {
+  AllocatorHeap<DualIntStructure> sut;
+}
+
+TEST (AllocatorHeap, NestAllocator) {
+  vecHeap<vecHeap<int>> sut;
+}
