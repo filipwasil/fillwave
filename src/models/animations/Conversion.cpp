@@ -23,32 +23,6 @@
 
 namespace flw {
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-glm::mat4 assimpToGlmMat4(aiMatrix4x4 matrix) {
-  glm::mat4 out;
-  for (int i = 0; i < 4; ++i) {
-    for (int j = 0; j < 4; ++j) {
-      out[i][j] = matrix[j][i];
-    }
-  }
-  return out;
-}
-
-glm::vec3 assimpToGlmVec3(aiVector3D vector) {
-  return glm::vec3(vector.x, vector.y, vector.z);
-}
-
-glm::quat assimpToGlmQuat(aiQuaternion quaternion) {
-  return glm::quat(quaternion.w, quaternion.x, quaternion.y, quaternion.z);
-}
-
-glm::vec4 assimpToGlmVec4(aiColor4D vector) {
-  return glm::vec4(vector.r, vector.g, vector.b, vector.a);
-}
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
 glm::vec3 floatsToGlmVec3(const float *in) {
   return glm::vec3(in[0], in[1], in[2]);
 }

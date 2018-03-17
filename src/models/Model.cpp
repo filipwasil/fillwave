@@ -24,12 +24,6 @@
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Fillwave.h>
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-#include <fillwave/models/animations/Conversion.h>
-
-#endif
-
 #include <fillwave/Log.h>
 
 FLOGINIT_DEFAULT()
@@ -71,9 +65,7 @@ Model::Model(Engine* engine,
                                 engine->getLightSystem(),
                                 engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices),
                                 engine->storeBuffer<flc::IndexBuffer>(vao, indices),
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
                                 mAnimator.get(),
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
                                 GL_TRIANGLES,
                                 vao));
 }
@@ -313,7 +305,7 @@ inline void Model::loadNodes(aiNode *node,
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; ++i) {
-    const ModelLoader::Shape* mesh = scene->mMeshes[node->mMeshes[i]];
+    const auto* mesh = scene->mMeshes[node->mMeshes[i]];
     entity->attach(loadMesh(mesh, material, diffuseMap, normalMap, specularMap, mEngine));
   }
 
@@ -332,27 +324,22 @@ std::string Model::getMeshTextureName(aiTextureType type, const aiMaterial* mat)
          : "128_128_128.color";
 }
 
-inline void Model::loadNodeTransformations(aiNode *node, Entity* entity) {
-  aiVector3t<float> scale;
-  aiQuaterniont<float> rotation;
-  aiVector3t<float> position;
-  node->mTransformation.Decompose(scale, rotation, position);
-  entity->scaleTo(assimpToGlmVec3(scale));
-  entity->rotateTo(assimpToGlmQuat(rotation));
-  entity->moveTo(assimpToGlmVec3(position));
+inline void Model::loadNodeTransformations(ModelLoader::Node* node, Entity* entity) {
+  ModelLoader::assignTransformation(node, entity);
 }
 
-pu<Mesh> Model::loadMesh(const ModelLoader::Shape* shape,
+pu<Mesh> Model::loadMesh(const ModelLoader::ShapeType* shape,
     const Material& material,
     flc::Texture2D* diffuseMap,
     flc::Texture2D* normalMap,
     flc::Texture2D* specularMap,
     Engine* engine) {
 
+  const ModelLoader::ShapeDataType shapeData {};
   ProgramLoader loader(engine);
   auto vao = new flc::VertexArray();
   auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
-  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get());
+  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, &shapeData, mAnimator.get());
   auto mesh = std::make_unique<Mesh>(engine,
                                 material,
                                 diffuseMap,

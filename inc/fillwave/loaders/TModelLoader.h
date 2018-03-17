@@ -21,19 +21,25 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/modelLoaderTraits/ModelLoaderDefault.h>
 #include <fillwave/models/shapes/PhysicsMeshBuffer.h>
 #include <fillwave/models/base/Material.h>
-#include <fillwave/core/buffers/IndexBuffer.h>
 
 namespace flw {
+namespace flc {
+class IndexBuffer;
+class VertexBufferBasic;
+}
 namespace flf {
+class Animator;
+class Entity;
 
 template <class ModelLoaderTraits>
 class TModelLoader final {
  public:
+  using Node = typename ModelLoaderTraits::Node;
   using Scene = typename ModelLoaderTraits::Scene;
-  using Shape = typename ModelLoaderTraits::Shape;
+  using ShapeType = typename ModelLoaderTraits::ShapeType;
+  using ShapeDataType = typename ModelLoaderTraits::ShapeDataType;
   using MaterialType = typename ModelLoaderTraits::MaterialType;
   using TextureType = typename ModelLoaderTraits::TextureType;
   using String = typename ModelLoaderTraits::String;
@@ -46,7 +52,9 @@ class TModelLoader final {
   static void getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer);
   static Material getMaterial(const MaterialType& material);
   static Material getTexturePath(TextureType type, const MaterialType& material);
-  static ::flw::flc::IndexBuffer* getIndexBuffer(const Shape* shape);
+  static ::flw::flc::IndexBuffer* getIndexBuffer(const ShapeType* shape);
+  static ::flw::flc::VertexBufferBasic* getVertexBuffer(const ShapeType* shape, const ShapeDataType* data, Animator* a);
+  static void assignTransformation (Node* node, Entity* entity);
 
   Importer* mImporter;
   Flags mFlags;

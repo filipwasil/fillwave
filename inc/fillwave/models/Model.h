@@ -145,7 +145,7 @@ private:
       flc::Texture2D* specular,
       const Material &material = Material());
 
-  pu<Mesh> loadMesh(const ModelLoader::Shape* shape,
+  pu<Mesh> loadMesh(const ModelLoader::ShapeType* shape,
       const Material& material,
       flc::Texture2D* diffuse,
       flc::Texture2D* normal,

@@ -514,8 +514,7 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
 
 const ModelLoader::Scene* Engine::getModelFromFile(const string& path) {
   fLogD("Reading model ", path);
-  return mModelLoader.mImporter->ReadFile((mFileLoader.getRootPath() + path).c_str(),
-                                   aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);
+  return mModelLoader.mImporter->ReadFile((mFileLoader.getRootPath() + path).c_str(), mModelLoader.mFlags);
 }
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
@@ -605,14 +604,16 @@ void Engine::removeBufferText(VertexArray* vao) {
   mBuffers.mVerticesText.erase(vao);
 }
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const ModelLoader::Shape* shape) {
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const ModelLoader::ShapeType* shape) {
   return mBuffers.mIndices.store(ModelLoader::getIndexBuffer(shape), vao);
 }
 
-VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, const ModelLoader::Shape* shape, flf::Animator* animator) {
-  return mBuffers.mVertices.store(new VertexBufferBasic(shape, animator), vao);
+VertexBufferBasic* Engine::storeBufferInternal(
+  VertexArray* vao
+  , const ModelLoader::ShapeType* shape
+  , const ModelLoader::ShapeDataType* data
+  , flf::Animator* animator) {
+  return mBuffers.mVertices.store(ModelLoader::getVertexBuffer(shape, data, animator), vao);
 }
 
 void Engine::draw(GLfloat time) {
@@ -1072,15 +1073,6 @@ void Engine::captureFramebufferToFile(const std::string &name) {
   flc::Framebuffer::bindScreenFramebuffer();
   mScene->draw();
 }
-
-#else
-flc::VertexBufferBasic* Engine::storeBufferInternal(flc::VertexArray* vao,
-    tinyobj::shape_t& shape,
-    tinyobj::attrib_t& attributes) {
-  auto newData = new VertexBufferBasic(shape, attributes);
-  return mBuffers.mVertices.store(newData, vao);
-}
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
 
 template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string& );
 

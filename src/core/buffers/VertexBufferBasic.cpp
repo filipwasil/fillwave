@@ -36,94 +36,6 @@ namespace flc {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-VertexBufferBasic::VertexBufferBasic(const ModelLoader::Shape* shape, flf::Animator *animator, GLuint dataStoreModification)
-    : TVertexBuffer<VertexBasic>(dataStoreModification) {
-
-  mTotalElements = shape->mNumVertices;
-  mDataVertices.resize(mTotalElements);
-
-  {
-#pragma omp parallel for schedule(guided) num_threads(2) if (mTotalElements > 1000)
-    for (GLuint i = 0; i < mTotalElements; i++) {
-      VertexBasic &vertex = mDataVertices[i];
-
-      if (shape->HasVertexColors(0)) {
-        vertex.mColor[0] = shape->mColors[0]->r;
-        vertex.mColor[1] = shape->mColors[0]->g;
-        vertex.mColor[2] = shape->mColors[0]->b;
-        vertex.mColor[3] = shape->mColors[0]->a;
-      } else {
-        vertex.mColor[0] = 0.0f;
-        vertex.mColor[1] = 0.0f;
-        vertex.mColor[2] = 0.0f;
-        vertex.mColor[3] = 1.0f;
-      }
-
-      vertex.mPosition[0] = shape->mVertices[i].x;
-      vertex.mPosition[1] = shape->mVertices[i].y;
-      vertex.mPosition[2] = shape->mVertices[i].z;
-      vertex.mPosition[3] = 1.0f;
-
-      /* One normal each triangle - on */
-      if (shape->HasNormals()) {
-        vertex.mNormal[0] = shape->mNormals[i].x;
-        vertex.mNormal[1] = shape->mNormals[i].y;
-        vertex.mNormal[2] = shape->mNormals[i].z;
-      } else {
-        vertex.mNormal[0] = 0;
-        vertex.mNormal[1] = 0;
-        vertex.mNormal[2] = 0;
-      }
-
-      if (shape->HasTextureCoords(0)) { //xxx what is this ?
-        vertex.mTextureUV[0] = shape->mTextureCoords[0][i].x;
-        vertex.mTextureUV[1] = shape->mTextureCoords[0][i].y;
-      } else {
-        vertex.mTextureUV[0] = 0;
-        vertex.mTextureUV[1] = 0;
-      }
-
-      if (shape->HasTangentsAndBitangents()) {
-        vertex.mNormalTangentMap[0] = shape->mTangents[i].x;
-        vertex.mNormalTangentMap[1] = shape->mTangents[i].y;
-        vertex.mNormalTangentMap[2] = shape->mTangents[i].z;
-      } else {
-        vertex.mNormalTangentMap[0] = 0;
-        vertex.mNormalTangentMap[1] = 0;
-        vertex.mNormalTangentMap[2] = 0;
-      }
-      for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
-        vertex.mBoneID[k] = 0;
-        vertex.mBoneWeight[k] = 0.0f;
-      }
-    }
-  }
-
-  mData = mDataVertices.data();
-  mSize = mTotalElements * sizeof(VertexBasic);
-
-  if (animator) {
-    std::vector<int> boneIdForEachVertex;
-    boneIdForEachVertex.resize(mDataVertices.size());
-    for (size_t z = 0; z < mDataVertices.size(); z++) {
-      boneIdForEachVertex[z] = 0;
-    }
-    /* Bones */
-    for (GLuint i = 0; i < shape->mNumBones; i++) {
-      for (GLuint j = 0; j < shape->mBones[i]->mNumWeights; j++) {
-        GLuint VertexID = shape->mBones[i]->mWeights[j].mVertexId;
-        float Weight = shape->mBones[i]->mWeights[j].mWeight;
-        if (boneIdForEachVertex[VertexID] < FILLWAVE_MAX_BONES_DEPENDENCIES) {
-          mDataVertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = animator->getId(shape->mBones[i]->mName.C_Str());
-          mDataVertices[VertexID].mBoneWeight[boneIdForEachVertex[VertexID]] = Weight;
-          boneIdForEachVertex[VertexID]++;
-        } else {
-          fLogF("Crater can handle maximum %d bone dependencies.", FILLWAVE_MAX_BONES_DEPENDENCIES);
-        }
-      }
-    }
-  }
-}
 
 #else
 VertexBufferBasic::VertexBufferBasic(const tinyobj::shape_t& shape,
@@ -271,8 +183,8 @@ VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
 }
 
 VertexBufferBasic::VertexBufferBasic(const std::vector<flc::VertexBasic> &vertices, GLuint dataStoreModification)
-    : TVertexBuffer<VertexBasic>(vertices, dataStoreModification) {
-
+  : TVertexBuffer<VertexBasic>(vertices, dataStoreModification) {
+  // nothing
 }
 
 glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {

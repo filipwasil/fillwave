@@ -247,10 +247,8 @@ class Engine {
   const GLfloat mStartupTimeLimit = 8.0f;
   pu<flc::PostProcessingPass> mPostProcessingPassStartup;
 
-  /* Options */
   GLboolean mIsOQ;
 
-  /* Scene */
   pu<flf::Scene> mScene;
 
   glm::vec3 mBackgroundColor;
@@ -324,26 +322,27 @@ class Engine {
       , flf::vec<GLfloat> &pos
       , flf::vec<GLfloat> &tim);
 
+  flc::VertexBufferBasic* storeBufferInternal(
+    flc::VertexArray* vao
+    , const ModelLoader::ShapeType* shape
+    , const ModelLoader::ShapeDataType* data
+    , flf::Animator* animator);
+
   flc::VertexBufferDebug* storeBufferInternal(flc::VertexArray *vao, GLfloat scale);
   flc::VertexBufferFloat* storeBufferInternal(flc::VertexArray *vao, flf::vec<flc::VertexFloat> &data);
   flc::VertexBufferPosition* storeBufferInternal(flc::VertexArray *vao, flf::vec<flc::VertexPosition> &data);
+  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const ModelLoader::ShapeType* shape);
+  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const flf::vec<GLuint> &data);
+  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, GLuint elements);
+
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
  public:
   const aiScene* getModelFromFile(const std::string& path);
- private:
-  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray *vao, const aiMesh* shape, flf::Animator *animator);
-  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const aiMesh* shape);
-#else
-  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray* vao, const tinyobj::shape_t& shape, tinyobj::attrib_t&
-  attr);
 #endif
-  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const flf::vec<GLuint> &data);
-  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, GLuint elements);
 
-  /* Picking */
+ private:
   glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
-
   void reloadPickingBuffer();
 
 };

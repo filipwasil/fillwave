@@ -19,8 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Channel.h>
-#include <fillwave/models/animations/Conversion.h>
+#include <fillwave/models/animations/Animator.h>
 
 #include <fillwave/Log.h>
 
@@ -29,25 +28,30 @@ FLOGINIT("Channel", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-Channel::Channel(aiNodeAnim *assimpChannel) {
+Animator::Channel::Channel(aiNodeAnim *assimpChannel) {
   mAffectedNodeName = assimpChannel->mNodeName.C_Str();
 
+  mKeysTranslation.reserve(assimpChannel->mNumPositionKeys);
+  mKeysRotation.reserve(assimpChannel->mNumRotationKeys);
+  mKeysScaling.reserve(assimpChannel->mNumScalingKeys);
+
   for (unsigned int i = 0; i < assimpChannel->mNumPositionKeys; ++i) {
-    Key<glm::vec3> keyTranslation(static_cast<float>(assimpChannel->mPositionKeys[i].mTime),
-                                  assimpToGlmVec3(assimpChannel->mPositionKeys[i].mValue));
-    mKeysTranslation.push_back(keyTranslation);
+    mKeysTranslation.emplace_back(
+      static_cast<float>(assimpChannel->mPositionKeys[i].mTime)
+      , AssimpNode::convert(assimpChannel->mPositionKeys[i].mValue));
   }
 
   for (unsigned int i = 0; i < assimpChannel->mNumRotationKeys; ++i) {
-    Key<glm::quat> keyQuaternion(static_cast<float>(assimpChannel->mRotationKeys[i].mTime),
-                                 assimpToGlmQuat(assimpChannel->mRotationKeys[i].mValue));
-    mKeysRotation.push_back(keyQuaternion);
+    mKeysRotation.emplace_back(
+      static_cast<float>(assimpChannel->mRotationKeys[i].mTime)
+      , AssimpNode::convert(assimpChannel->mRotationKeys[i].mValue));
   }
 
   for (unsigned int i = 0; i < assimpChannel->mNumScalingKeys; ++i) {
-    Key<glm::vec3> keyScaling(static_cast<float>(assimpChannel->mScalingKeys[i].mTime),
-                              assimpToGlmVec3(assimpChannel->mScalingKeys[i].mValue));
-    mKeysScaling.push_back(keyScaling);
+    mKeysScaling.emplace_back(
+      static_cast<float>(assimpChannel->mScalingKeys[i].mTime)
+      , AssimpNode::convert(assimpChannel->mScalingKeys[i].mValue)
+    );
   }
 
   fLogD(" Added an animation channel \n name: %s \n keys S: %du keys R: %du keys P: %du",

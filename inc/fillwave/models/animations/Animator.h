@@ -21,8 +21,13 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Bone.h>
-#include <fillwave/models/animations/Animation.h>
+#include <fillwave/Math.h>
+
+#include <fillwave/models/animations/Hinge.h>
+#include <fillwave/models/animations/Key.h>
+
+#include <vector>
+#include <string>
 
 namespace flw {
 namespace flf {
@@ -30,37 +35,98 @@ namespace flf {
 class Channel;
 class Animator;
 
-/*! \class AssimpNode
- * \brief Wrapper for assimp aiNode.
- */
-
-class AssimpNode {
-public:
-  glm::mat4 mTransformation;
-  std::vector<AssimpNode *> mChildren;
-  Bone *mBone;
-  std::string mName;
-
-  AssimpNode(aiNode*  node);
-
-  virtual ~AssimpNode();
-
-  void update(float time, glm::mat4 parent, Animator *boneManager, GLint activeAnimation);
-};
-
 /*! \class Animator
  * \brief Manager to handle Bone objects in animation.
  */
 
 class Animator final {
 public:
-  Animator(const aiScene *shape);
+  class Bone final : public Hinge {
+   public:
+    Bone(aiBone *assimpBone);
+    ~Bone() override = default;
+    std::string getName() const;
+    glm::mat4 getOffsetMatrix() const;
+    glm::mat4 getGlobalOffsetMatrix() const;
+    void setName(std::string name);
+    void setOffsetMatrix(glm::mat4 m);
+    void setGlobalOffsetMatrix(glm::mat4 m);
+    void log() const override;
+
+   private:
+    std::string mName;
+    glm::mat4 mOffsetMatrix;
+    glm::mat4 mGlobalOffsetMatrix;
+  };
+
+  class AssimpNode {
+   public:
+    AssimpNode(aiNode* node);
+    virtual ~AssimpNode();
+
+    void update(float time, glm::mat4 parent, Animator *boneManager, GLint activeAnimation);
+
+    static glm::mat4 convert(aiMatrix4x4 matrix);
+    static glm::vec3 convert(aiVector3D vec);
+    static glm::vec4 convert(aiColor4D vec);
+    static glm::quat convert(aiQuaternion vec);
+
+    Bone* mBone;
+    std::vector<AssimpNode *> mChildren;
+
+   private:
+    std::string mName;
+    glm::mat4 mTransformation;
+  };
+
+  class Channel final {
+   public:
+    std::string mAffectedNodeName;
+
+    std::vector<Key<glm::vec3> > mKeysTranslation;
+    std::vector<Key<glm::quat> > mKeysRotation;
+    std::vector<Key<glm::vec3> > mKeysScaling;
+
+    Channel(aiNodeAnim* assimpChannel);
+  };
+
+  class Animation final {
+   public:
+    Animation(aiAnimation* assimpAnimation);
+
+    ~Animation();
+
+    float getTicksPerSec() {
+      return mTicksPerSec;
+    }
+
+    float getDuration() {
+      return mDuration;
+    }
+
+    Channel* getChannel(int i) {
+      return mChannels[i];
+    }
+
+    size_t getHowManyChannels() {
+      return mChannels.size();
+    }
+
+   private:
+    std::string mName;
+    float mDuration;
+    float mTicksPerSec;
+    std::vector<Channel *> mChannels;
+
+  };
+
+  Animator(const ModelLoader::Scene* scene);
 
   ~Animator();
 
-  Bone *get(GLuint id);
+  Bone* get(GLuint id);
 
-  Bone *get(std::string name);
+  Bone* get(std::string name);
 
   GLint getId(std::string name) const;
 
@@ -74,18 +140,14 @@ public:
 
   void log();
 
-  Channel *findChannel(Animation *animation, const std::string &nodeName) const;
+  Channel* findChannel(Animation *animation, const std::string &nodeName) const;
 
   glm::vec3 getCurrentTranslation(float timeElapsed_s, Channel *channel) const;
-
   glm::quat getCurrentRotation(float timeElapsed_s, Channel *channel) const;
-
   glm::vec3 getCurrentScale(float timeElapsed_s, Channel *channel) const;
 
   GLuint getTranslationStep(float timeElapsed_s, Channel *channel) const;
-
   GLuint getRotationStep(float timeElapsed_s, Channel *channel) const;
-
   GLuint getScaleStep(float timeElapsed_s, Channel *channel) const;
 
   glm::fquat lerp(const glm::fquat &v0, const glm::fquat &v1, float alpha) const;
@@ -102,7 +164,7 @@ private:
   float mTimeSinceStartSeconds;
   AssimpNode *mRootAnimationNode;
   glm::mat4 mSceneInverseMatrix;
-  std::vector<puBone> mBones;
+  std::vector<pu<Bone>> mBones;
   std::vector<glm::mat4> mAnimationsBufferData;
 };
 

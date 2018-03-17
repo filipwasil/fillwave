@@ -31,13 +31,19 @@ namespace flf {
 
 struct ModelLoaderTraitsAssimp {
  public:
+  using Node = aiNode;
   using Scene = aiScene;
-  using Shape = aiMesh;
+  using ShapeType = aiMesh;
+  using ShapeDataType = unsigned int;
   using MaterialType = aiMaterial;
   using TextureType = aiTextureType;
   using String = aiString;
   using Importer = Assimp::Importer;
   using Flags = unsigned int;
+  using Vec3 = aiVector3D;
+  using Vec4 = aiColor4D;
+  using Quat = aiQuaternion;
+  using Mat4 = aiMatrix4x4;
 };
 
 } /* flf */

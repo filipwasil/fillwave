@@ -33,22 +33,17 @@ namespace flf {
 class Hinge : public Entity {
 public:
   Hinge() = default;
-
   ~Hinge() override = default;
 
   /* IDrawable */
   void draw(ICamera &camera) override;
-
   void drawPBRP(ICamera &camera) override;
-
   void drawDR(ICamera &camera) override;
 
   /* IRenderable */
   void updateRenderer(IRenderer &renderer) override;
-
   bool getRenderItem(RenderItem &item) override;
 };
 
-} /* namespace flf */
-typedef std::unique_ptr<flf::Hinge> puHinge;
-} /* namespace flw */
+} /* flf */
+} /* flw */

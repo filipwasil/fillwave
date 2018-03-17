@@ -20,8 +20,6 @@
  */
 
 #include <fillwave/models/animations/Animator.h>
-#include <fillwave/models/animations/Channel.h>
-#include <fillwave/models/animations/Conversion.h>
 
 #include <fillwave/core/pipeline/Program.h>
 
@@ -32,52 +30,8 @@ FLOGINIT("Animator", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-AssimpNode::AssimpNode(aiNode *node)
-    : mTransformation(assimpToGlmMat4(node->mTransformation)), mName(node->mName.C_Str()) {
-
-}
-
-void AssimpNode::update(float timeElapsed_s, glm::mat4 parent, Animator *boneManager, GLint activeAnimation) {
-  std::string nodeName(mName);
-  Animation *a = boneManager->getAnimation(activeAnimation);
-  if (nullptr == a) {
-    return;
-  }
-  glm::mat4 transformation = mTransformation;
-  Channel *channel = boneManager->findChannel(a, nodeName);
-
-  if (channel) {
-    glm::vec3 scaling = boneManager->getCurrentScale(timeElapsed_s, channel);
-    glm::mat4 scale = glm::scale(glm::mat4(1.0), scaling);
-
-    glm::quat rotation = boneManager->getCurrentRotation(timeElapsed_s, channel);
-    glm::mat4 rotate = glm::mat4_cast(rotation);
-
-    glm::vec3 translation = boneManager->getCurrentTranslation(timeElapsed_s, channel);
-    glm::mat4 translate = glm::translate(glm::mat4(1.0), translation);
-
-    transformation = translate * rotate * scale;
-  }
-
-  glm::mat4 m = parent * transformation;
-
-  if (mBone) {
-    mBone->setGlobalOffsetMatrix(m * mBone->getOffsetMatrix());
-  }
-
-  for (auto &it : mChildren) {
-    it->update(timeElapsed_s, m, boneManager, activeAnimation);
-  }
-}
-
-AssimpNode::~AssimpNode() {
-  for (auto &it : mChildren) {
-    delete it;
-  }
-}
-
 Animator::Animator(const ModelLoader::Scene* scene)
-    : mTimeSinceStartSeconds(0.0f) {
+  : mTimeSinceStartSeconds(0.0f) {
   mAnimationsBufferData.resize(FILLWAVE_MAX_BONES);
 
   GLuint numBones = 0;
@@ -99,7 +53,7 @@ Animator::Animator(const ModelLoader::Scene* scene)
   }
 
   /* Init node tree after bones are added */
-  mSceneInverseMatrix = glm::inverse(assimpToGlmMat4(scene->mRootNode->mTransformation));
+  mSceneInverseMatrix = glm::inverse(AssimpNode::convert(scene->mRootNode->mTransformation));
   mRootAnimationNode = initNode(scene->mRootNode);
 }
 
@@ -107,7 +61,7 @@ Animator::~Animator() {
   delete mRootAnimationNode;
 }
 
-Bone *Animator::get(GLuint id) {
+Animator::Bone* Animator::get(GLuint id) {
   if (mBones.size() < id) {
     return mBones[id].get();
   }
@@ -115,7 +69,7 @@ Bone *Animator::get(GLuint id) {
 }
 
 
-Bone *Animator::get(std::string name) {
+Animator::Bone *Animator::get(std::string name) {
   for (auto &it : mBones) {
     if (it->getName() == name) {
       return it.get();
@@ -135,7 +89,7 @@ GLint Animator::getId(std::string name) const {
   return -1;
 }
 
-Animation* Animator::getAnimation(GLint i) const {
+Animator::Animation* Animator::getAnimation(GLint i) const {
   return (i != FILLWAVE_DO_NOT_ANIMATE ? mAnimations[i].get() : nullptr);
 }
 
@@ -159,8 +113,8 @@ void Animator::updateTransformations(GLint activeAnimation, float timeElapsed_s)
   mRootAnimationNode->update(AnimationTime, glm::mat4(1.0), this, activeAnimation);
 }
 
-AssimpNode *Animator::initNode(aiNode *node) {
-  AssimpNode *assimpNode = new AssimpNode(node);
+Animator::AssimpNode* Animator::initNode(aiNode *node) {
+  AssimpNode* assimpNode = new AssimpNode(node);
   assimpNode->mBone = get(node->mName.C_Str());
 
   for (GLuint i = 0; i < node->mNumChildren; i++) {
@@ -184,7 +138,7 @@ void Animator::log() {
   fLogI("Bones %du ", mBones.size());
 }
 
-Channel* Animator::findChannel(Animation *animation, const std::string &nodeName) const {
+Animator::Channel* Animator::findChannel(Animator::Animation *animation, const std::string& nodeName) const {
   for (size_t i = 0; i < animation->getHowManyChannels(); ++i) {
     Channel* channel = animation->getChannel(i);
 

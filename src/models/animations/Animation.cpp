@@ -19,23 +19,22 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Animation.h>
-#include <fillwave/models/animations/Channel.h>
+#include <fillwave/models/animations/Animator.h>
 
 namespace flw {
 namespace flf {
 
-Animation::Animation(aiAnimation* assimpAnimation) {
+Animator::Animation::Animation(aiAnimation* assimpAnimation) {
   mName = assimpAnimation->mName.C_Str();
   mDuration = static_cast<float>(assimpAnimation->mDuration);
   mTicksPerSec = static_cast<float>(assimpAnimation->mTicksPerSecond);
   mChannels.reserve(assimpAnimation->mNumChannels);
   for (unsigned int i = 0; i < assimpAnimation->mNumChannels; ++i) {
-    mChannels.push_back(new Channel(assimpAnimation->mChannels[i]));
+    mChannels.push_back(new Animator::Channel(assimpAnimation->mChannels[i]));
   }
 }
 
-Animation::~Animation() {
+Animator::Animation::~Animation() {
   for (auto it : mChannels) {
     delete it;
   }
