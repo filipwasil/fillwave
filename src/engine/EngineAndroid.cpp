@@ -24,48 +24,13 @@
 
 namespace flw {
 
-EngineAndroid::EngineAndroid(string rootPath) {
-  mImpl = make_unique<EngineImpl>(this, rootPath);
-  /* This init has to be outside of the initializer list,
-  *  because it needs mImpl to be created fully before Initialization.
-  *  mImpl uses Engine functions  */
-  mImpl->init();
+EngineAndroid::EngineAndroid(const string& rootPath)
+  : Engine(rootPath) {
+  // nothing
 }
 
 EngineAndroid::EngineAndroid(ANativeActivity* activity) {
-  mImpl = make_unique<EngineImpl>(this, activity);
-  /* This init has to be outside of the initializer list,
-  *  because it needs mImpl to be created fully before Initialization.
-  *  mImpl uses Engine functions  */
-  mImpl->init();
-}
-
-Engine::EngineImpl(Engine* engine, std::string rootPath)
-: mEngine(engine)
-, mFileLoader(rootPath)
-, mProgramLoader(engine)
-, mFrameCounter(0)
-, mTimeFactor(1.0)
-, mTextFPSCallback(nullptr)
-, mStartupTime(0.0f)
-, mIsOQ(GL_FALSE)
-, mBackgroundColor(0.1, 0.1, 0.1) {
-}
-
-Engine::EngineImpl(Engine* engine, ANativeActivity* activity)
-: mEngine(engine)
-, mFileLoader(activity->internalDataPath)
-, mProgramLoader(engine)
-, mFrameCounter(0)
-, mTimeFactor(1.0)
-, mTextFPSCallback(nullptr)
-, mStartupTime(0.0f)
-, mIsOQ(GL_FALSE)
-, mBackgroundColor(0.1, 0.1, 0.1) {
-
-  flf::androidSetActivity(activity);
-
-  flf::androidExtractAll();
+  // nothing
 }
 
 /* flw  */

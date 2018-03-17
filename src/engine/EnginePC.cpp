@@ -36,8 +36,8 @@ using namespace std;
 
 namespace flw {
 
-EnginePC::EnginePC(GLint argc, GLchar* const argv[])
-  : Engine(argc, argv) {
+EnginePC::EnginePC(GLint /*argc*/, GLchar* const argv[])
+  : Engine(argv[0]) {
   // nothing
 }
 

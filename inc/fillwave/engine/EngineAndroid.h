@@ -23,9 +23,12 @@
 
 #include <fillwave/engine/Engine.h>
 
+struct ANativeActivity;
+
 class EngineAndroid {
  public:
-  EngineAndroid(std::string rootPath);
+
+  EngineAndroid(const std::string& rootPath);
+
   EngineAndroid(ANativeActivity* activity);
- private:
 };

@@ -22,7 +22,7 @@
 #include <fillwave/loaders/ModelLoader.h>
 
 namespace flw {
-
+namespace flf {
 ModelLoader::ModelLoader() {
   mImporter = new Assimp::Importer();
 }
@@ -31,4 +31,5 @@ ModelLoader::~ModelLoader() {
   delete mImporter;
 }
 
+} /* flf */
 } /* flw */

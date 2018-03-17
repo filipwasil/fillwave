@@ -24,6 +24,7 @@
 #include <fillwave/Assets.h>
 
 namespace flw {
+namespace flf {
 
 class ModelLoader {
  public:
@@ -32,4 +33,5 @@ class ModelLoader {
   Assimp::Importer* mImporter;
 };
 
+} /* flf */
 } /* flw */

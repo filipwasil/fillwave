@@ -23,6 +23,8 @@
 
 #include <fillwave/engine/Engine.h>
 
+#include <fillwave/common/Strings.h>
+
 namespace flw {
 
 class EnginePC : public Engine{

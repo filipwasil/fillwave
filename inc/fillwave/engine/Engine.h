@@ -31,51 +31,39 @@
 #include <fillwave/common/pointers/PointerProtected.h>
 
 /* Debugger */
-#include "fillwave/Debugger.h"
-#include "fillwave/common/Aliases.h"
-#include "fillwave/actions/Event.h"
+#include <fillwave/Debugger.h>
+#include <fillwave/common/Aliases.h>
+#include <fillwave/actions/Event.h>
 
 /* Common */
-#include "fillwave/common/PhysicsMeshBuffer.h"
-
-#ifdef __ANDROID__
-struct ANativeActivity;
-#endif
+#include <fillwave/common/PhysicsMeshBuffer.h>
 
 #include <fillwave/loaders/FileLoader.h>
-#include <fillwave/management/CacheBuffer.h>
-#include "fillwave/management/CacheProgram.h"
-#include "fillwave/management/Cachehader.h"
-#include "fillwave/management/CacheSampler.h"
-#include "fillwave/management/LightSystem.h"
-#include "fillwave/management/TextureSystem.h"
-
-#include "fillwave/actions/EventHandler.h"
-#include "fillwave/common/Macros.h"
-
-#include "fillwave/Core.h"
-#include "fillwave/Debugger.h"
-#include "fillwave/Framework.h"
-
-/* Management */
 
 
-#ifdef __ANDROID__
-struct ANativeActivity;
-#else /* __ANDROID__ */
-#include "fillwave/common/Strings.h"
-#endif /* __ANDROID__ */
+#include <fillwave/actions/EventHandler.h>
+#include <fillwave/common/Macros.h>
+
+#include <fillwave/Core.h>
+#include <fillwave/Debugger.h>
+#include <fillwave/Framework.h>
 
 #include <fillwave/loaders/FileLoader.h>
-#include <fillwave/management/CacheBuffer.h>
 #include <fillwave/loaders/ModelLoader.h>
+
+#include <fillwave/management/CacheBuffer.h>
+#include <fillwave/management/CacheProgram.h>
+#include <fillwave/management/Cachehader.h>
+#include <fillwave/management/CacheSampler.h>
+
+#include <fillwave/management/TextureSystem.h>
+#include <fillwave/management/LightSystem.h>
 
 namespace flw {
 namespace flf {
 class Focusable;
 }
 namespace flc {
-/* All buffers should be there */
 class IndexBuffer;
 struct VertexParticleGPU;
 struct VertexPosition;
@@ -92,7 +80,7 @@ class VertexBufferPosition;
 
 class Engine {
  public:
-  Engine(GLint argc, GLchar *const argv[]);
+  Engine(const std::string& runtimeBinaryFilePath);
 
   virtual ~Engine();
 
@@ -107,14 +95,14 @@ class Engine {
   void draw(GLfloat time);
   void drawLines(GLfloat time);
   void drawPoints(GLfloat time);
-  void drawTexture(flc::Texture *t, flc::Program *p);
-  void drawTexture(flc::Texture *t);
+  void drawTexture(flc::Texture* t, flc::Program* p);
+  void drawTexture(flc::Texture* t);
 
   /* Remove */
   void detach(ps<flf::Text> text);
-  void detach(flf::LightSpot *light);
-  void detach(flf::LightDirectional *light);
-  void detach(flf::LightPoint *light);
+  void detach(flf::LightSpot* light);
+  void detach(flf::LightDirectional* light);
+  void detach(flf::LightPoint* light);
   void detachLights();
   void detach(flf::Entity*);
 
@@ -147,7 +135,7 @@ class Engine {
    */
   template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath);
   template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath, const std::string &shaderSource);
-  flc::Program* storeProgram(const std::string &name, const std::vector<flc::Shader *> &shaders, bool isSkipLinking = false);
+  flc::Program* storeProgram(const std::string &name, const flf::vec<flc::Shader *> &shaders, bool isSkipLinking = false);
 
   /* Store textures */
   flc::Texture2D* storeTexture(const std::string &path, flf::ECompression com = flf::ECompression::none);
@@ -228,57 +216,16 @@ class Engine {
   flf::LightSystem& getLightSystem() const;
   flf::TextureSystem& getTextureSystem() const;
 
- private:
-
-  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray *vao,
-    flf::TerrainConstructor *constructor,
-    GLint density,
-    GLfloat gap,
-    std::vector<GLuint> &indices);
-
-  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray *vao, std::vector<flc::VertexBasic> &data);
-
-  flc::VertexBufferText* storeBufferInternal(flc::VertexArray *vao,
-    const std::vector<GLfloat> &data,
-    const std::vector<GLfloat> &textureCoords);
-
-  flc::VertexBufferParticlesGPU*
-  storeBuffersInternal(flc::VertexArray *vao, size_t idx, std::vector<flc::VertexParticleGPU> &particles);
-
-  flc::VertexBufferParticles *storeBufferInternal(flc::VertexArray *vao,
-    std::vector<GLfloat> &velocities,
-    std::vector<GLfloat> &positions,
-    std::vector<GLfloat> &times);
-
-  flc::VertexBufferDebug* storeBufferInternal(flc::VertexArray *vao, GLfloat scale);
-  flc::VertexBufferFloat* storeBufferInternal(flc::VertexArray *vao, std::vector<flc::VertexFloat> &data);
-  flc::VertexBufferPosition* storeBufferInternal(flc::VertexArray *vao, std::vector<flc::VertexPosition> &data);
-
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-  flc::VertexBufferBasic*
-  storeBufferInternal(flc::VertexArray *vao, const aiMesh *shape, flf::Animator *animator);
-
-  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const aiMesh *shape);
-
-#else
-  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray* vao,
-      tinyobj::shape_t& shape, tinyobj::attrib_t& attributes);
-#endif
-
-  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const std::vector<GLuint> &data);
-  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, GLuint elements);
-
-
   /* Screen */
-  GLuint mWindowWidth = 1920;
-  GLuint mWindowHeight = 1200;
-  GLfloat mWindowAspectRatio = 1200.0f / 1920.0f;
+  GLuint mWindowWidth;
+  GLuint mWindowHeight;
+  GLfloat mWindowAspectRatio;
 
   /* Loaders */
   flf::FontLoader mFontLoader;
   flf::FileLoader mFileLoader;
   flf::ProgramLoader mProgramLoader;
+  flf::ModelLoader mModelLoader;
 
   /* Picking */
   flc::Texture2DRenderable* mPickingRenderableTexture;
@@ -288,12 +235,12 @@ class Engine {
   flf::CacheShader mShaders;
   flf::CacheProgram mPrograms;
   flf::CacheSampler mSamplers;
-  std::vector<ps<flf::Text>> mTextManager;
-  std::vector<ps<Font>> mFontManager;
+  flf::vec<ps<flf::Text>> mTextManager;
+  flf::vec<ps<Font>> mFontManager;
   flf::CacheBuffer mBuffers;
   pu<flf::LightSystem> mLights;
   pu<flf::TextureSystem> mTextures;
-  std::vector<flc::PostProcessingPass> mPostProcessingPasses;
+  flf::vec<flc::PostProcessingPass> mPostProcessingPasses;
   flc::Program* mProgramTextureLookup;
 
   /* Fences and barriers */
@@ -325,9 +272,8 @@ class Engine {
 
   /* Scene */
   pu<flf::Scene> mScene;
-  glm::vec3 mBackgroundColor;
 
-  ModelLoader mModelLoader;
+  glm::vec3 mBackgroundColor;
 
  public:
   /* Events */
@@ -337,7 +283,6 @@ class Engine {
   void detachHandlers();
 
  private:
-
   /* Initiatization */
   void init();
   void initExtensions();
@@ -366,6 +311,51 @@ class Engine {
   void drawSceneStartup();
   void drawScene(GLfloat time);
   void drawSceneCore();
+
+  flc::VertexBufferBasic*
+    storeBufferInternal(
+      flc::VertexArray* vao
+      , flf::TerrainConstructor* constructor
+      , GLint density
+      , GLfloat gap
+      , flf::vec<GLuint> &indices);
+
+  flc::VertexBufferBasic*
+    storeBufferInternal(
+      flc::VertexArray *vao
+      , flf::vec<flc::VertexBasic> &data);
+
+  flc::VertexBufferText*
+    storeBufferInternal(
+      flc::VertexArray *vao
+      , const flf::vec<GLfloat> &data
+      , const flf::vec<GLfloat> &coords);
+
+  flc::VertexBufferParticlesGPU*
+    storeBuffersInternal(
+      flc::VertexArray *vao
+      , size_t idx
+      , flf::vec<flc::VertexParticleGPU> &particles);
+
+  flc::VertexBufferParticles*
+    storeBufferInternal(
+      flc::VertexArray *vao
+      , flf::vec<GLfloat> &vel
+      , flf::vec<GLfloat> &pos
+      , flf::vec<GLfloat> &tim);
+
+  flc::VertexBufferDebug* storeBufferInternal(flc::VertexArray *vao, GLfloat scale);
+  flc::VertexBufferFloat* storeBufferInternal(flc::VertexArray *vao, flf::vec<flc::VertexFloat> &data);
+  flc::VertexBufferPosition* storeBufferInternal(flc::VertexArray *vao, flf::vec<flc::VertexPosition> &data);
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray *vao, const aiMesh *shape, flf::Animator *animator);
+  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const aiMesh *shape);
+#else
+  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray* vao, tinyobj::shape_t& shape, tinyobj::attrib_t& attr);
+#endif
+  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const flf::vec<GLuint> &data);
+  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, GLuint elements);
 
   /* Picking */
   glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);

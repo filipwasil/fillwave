@@ -31,30 +31,26 @@
 /* Implementation  */
 #include  <fillwave/models/animations/Conversion.h>
 
-#include <fillwave/Fillwave.h>
+#include <fillwave/engine/Engine.h>
 
-#include "fillwave/Core.h"
-#include "fillwave/Debugger.h"
-#include "fillwave/Framework.h"
+#include <fillwave/Core.h>
+#include <fillwave/Debugger.h>
+#include <fillwave/Framework.h>
 
 /* Management */
-#include "fillwave/management/CacheProgram.h"
-#include "fillwave/management/Cachehader.h"
-#include "fillwave/management/CacheSampler.h"
-#include "fillwave/management/LightSystem.h"
-#include "fillwave/management/TextureSystem.h"
+#include <fillwave/management/CacheProgram.h>
+#include <fillwave/management/Cachehader.h>
+#include <fillwave/management/CacheSampler.h>
+#include <fillwave/management/LightSystem.h>
+#include <fillwave/management/TextureSystem.h>
 
-#include "fillwave/actions/EventHandler.h"
-#include "fillwave/common/Macros.h"
+#include <fillwave/actions/EventHandler.h>
+#include <fillwave/common/Macros.h>
 
-#ifdef __ANDROID__
-struct ANativeActivity;
-#else /* __ANDROID__ */
-#include "fillwave/common/Strings.h"
-#endif /* __ANDROID__ */
+#include <fillwave/common/Strings.h>
 
-#include "fillwave/loaders/FileLoader.h"
-#include "fillwave/management/CacheBuffer.h"
+#include <fillwave/loaders/FileLoader.h>
+#include <fillwave/management/CacheBuffer.h>
 
 FLOGINIT_DEFAULT()
 
@@ -63,16 +59,19 @@ using namespace std;
 
 namespace flw {
 
-Engine::Engine(GLint /*argc*/, GLchar *const argv[])
-  : mFileLoader(getFilePathOnly(argv[0]))
+Engine::Engine(const std::string& runtimeBinaryFilePath)
+  : mWindowWidth(1920)
+  , mWindowHeight(1200)
+  , mWindowAspectRatio(mWindowHeight / mWindowWidth)
+  , mFileLoader(getFilePathOnly(runtimeBinaryFilePath.c_str()))
   , mProgramLoader(this)
+  , mModelLoader()
   , mShaders()
   , mFrameCounter(0)
   , mTimeFactor(1.0)
   , mStartupTime(0.0f)
   , mIsOQ(GL_TRUE)
-  , mBackgroundColor(0.1, 0.1, 0.1)
-  , mModelLoader() {
+  , mBackgroundColor(0.1, 0.1, 0.1) {
   initExtensions();
   initContext();
   initManagement();
@@ -938,7 +937,6 @@ void Engine::evaluateTime(GLfloat timeExpiredInSeconds) {
     data.mTime = {
       timeExpiredInSeconds
     };
-    ;
 
     mScene->onEvent(flf::Event(flf::EEventType::time, data));
     mScene->stepInTime(timeExpiredInSeconds);
@@ -1005,7 +1003,6 @@ void Engine::evaluateDebugger() {
 }
 
 void Engine::onResizeScreen(GLuint width, GLuint height) {
-
   mWindowWidth = width;
   mWindowHeight = height;
   mWindowAspectRatio = static_cast<GLfloat>(mWindowHeight) / static_cast<GLfloat>

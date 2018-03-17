@@ -14,14 +14,14 @@ FLOGINIT("Engine", FERROR | FFATAL | FINFO | FDEBUG)
 
 namespace flw {
 
-Engine::Engine(GLint /*argc*/, GLchar* const /*argv*/[])
+Engine::Engine(const std::string&)
   : mFileLoader("")
   , mProgramLoader(this) {
   // nothing
 }
 
 EnginePC::EnginePC(GLint argc, GLchar *const argv[])
-  : Engine (argc, argv) {
+  : Engine ("") {
   // nothing
 }
 
