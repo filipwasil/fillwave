@@ -36,10 +36,10 @@ namespace flc {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, flf::Animator *animator, GLuint dataStoreModification)
+VertexBufferBasic::VertexBufferBasic(const aiMesh& shape, flf::Animator *animator, GLuint dataStoreModification)
     : TVertexBuffer<VertexBasic>(dataStoreModification) {
 
-  mTotalElements = shape->mNumVertices;
+  mTotalElements = shape.mNumVertices;
   mDataVertices.resize(mTotalElements);
 
   {
@@ -47,11 +47,11 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, flf::Animator *animato
     for (GLuint i = 0; i < mTotalElements; i++) {
       VertexBasic &vertex = mDataVertices[i];
 
-      if (shape->HasVertexColors(0)) {
-        vertex.mColor[0] = shape->mColors[0]->r;
-        vertex.mColor[1] = shape->mColors[0]->g;
-        vertex.mColor[2] = shape->mColors[0]->b;
-        vertex.mColor[3] = shape->mColors[0]->a;
+      if (shape.HasVertexColors(0)) {
+        vertex.mColor[0] = shape.mColors[0]->r;
+        vertex.mColor[1] = shape.mColors[0]->g;
+        vertex.mColor[2] = shape.mColors[0]->b;
+        vertex.mColor[3] = shape.mColors[0]->a;
       } else {
         vertex.mColor[0] = 0.0f;
         vertex.mColor[1] = 0.0f;
@@ -59,34 +59,34 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, flf::Animator *animato
         vertex.mColor[3] = 1.0f;
       }
 
-      vertex.mPosition[0] = shape->mVertices[i].x;
-      vertex.mPosition[1] = shape->mVertices[i].y;
-      vertex.mPosition[2] = shape->mVertices[i].z;
+      vertex.mPosition[0] = shape.mVertices[i].x;
+      vertex.mPosition[1] = shape.mVertices[i].y;
+      vertex.mPosition[2] = shape.mVertices[i].z;
       vertex.mPosition[3] = 1.0f;
 
       /* One normal each triangle - on */
-      if (shape->HasNormals()) {
-        vertex.mNormal[0] = shape->mNormals[i].x;
-        vertex.mNormal[1] = shape->mNormals[i].y;
-        vertex.mNormal[2] = shape->mNormals[i].z;
+      if (shape.HasNormals()) {
+        vertex.mNormal[0] = shape.mNormals[i].x;
+        vertex.mNormal[1] = shape.mNormals[i].y;
+        vertex.mNormal[2] = shape.mNormals[i].z;
       } else {
         vertex.mNormal[0] = 0;
         vertex.mNormal[1] = 0;
         vertex.mNormal[2] = 0;
       }
 
-      if (shape->HasTextureCoords(0)) { //xxx what is this ?
-        vertex.mTextureUV[0] = shape->mTextureCoords[0][i].x;
-        vertex.mTextureUV[1] = shape->mTextureCoords[0][i].y;
+      if (shape.HasTextureCoords(0)) { //xxx what is this ?
+        vertex.mTextureUV[0] = shape.mTextureCoords[0][i].x;
+        vertex.mTextureUV[1] = shape.mTextureCoords[0][i].y;
       } else {
         vertex.mTextureUV[0] = 0;
         vertex.mTextureUV[1] = 0;
       }
 
-      if (shape->HasTangentsAndBitangents()) {
-        vertex.mNormalTangentMap[0] = shape->mTangents[i].x;
-        vertex.mNormalTangentMap[1] = shape->mTangents[i].y;
-        vertex.mNormalTangentMap[2] = shape->mTangents[i].z;
+      if (shape.HasTangentsAndBitangents()) {
+        vertex.mNormalTangentMap[0] = shape.mTangents[i].x;
+        vertex.mNormalTangentMap[1] = shape.mTangents[i].y;
+        vertex.mNormalTangentMap[2] = shape.mTangents[i].z;
       } else {
         vertex.mNormalTangentMap[0] = 0;
         vertex.mNormalTangentMap[1] = 0;
@@ -109,12 +109,12 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, flf::Animator *animato
       boneIdForEachVertex[z] = 0;
     }
     /* Bones */
-    for (GLuint i = 0; i < shape->mNumBones; i++) {
-      for (GLuint j = 0; j < shape->mBones[i]->mNumWeights; j++) {
-        GLuint VertexID = shape->mBones[i]->mWeights[j].mVertexId;
-        float Weight = shape->mBones[i]->mWeights[j].mWeight;
+    for (GLuint i = 0; i < shape.mNumBones; i++) {
+      for (GLuint j = 0; j < shape.mBones[i]->mNumWeights; j++) {
+        GLuint VertexID = shape.mBones[i]->mWeights[j].mVertexId;
+        float Weight = shape.mBones[i]->mWeights[j].mWeight;
         if (boneIdForEachVertex[VertexID] < FILLWAVE_MAX_BONES_DEPENDENCIES) {
-          mDataVertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = animator->getId(shape->mBones[i]->mName.C_Str());
+          mDataVertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = animator->getId(shape.mBones[i]->mName.C_Str());
           mDataVertices[VertexID].mBoneWeight[boneIdForEachVertex[VertexID]] = Weight;
           boneIdForEachVertex[VertexID]++;
         } else {
@@ -126,7 +126,7 @@ VertexBufferBasic::VertexBufferBasic(const aiMesh *shape, flf::Animator *animato
 }
 
 #else
-VertexBufferBasic::VertexBufferBasic(tinyobj::shape_t& shape,
+VertexBufferBasic::VertexBufferBasic(const tinyobj::shape_t& shape,
                          tinyobj::attrib_t& attr,
                          GLuint dataStoreModification) :
   TVertexBuffer<VertexBasic>(dataStoreModification) {

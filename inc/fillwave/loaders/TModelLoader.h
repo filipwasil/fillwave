@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,17 +21,21 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/ModelLoader.h>
+#include <fillwave/Assets.h>
 
 namespace flw {
 namespace flf {
-ModelLoader::ModelLoader() {
-  mImporter = new Assimp::Importer();
-}
 
-ModelLoader::~ModelLoader() {
-  delete mImporter;
-}
+template <class ModelLoaderTraits>
+class TModelLoader final {
+ public:
+  using Shape = typename ModelLoaderTraits::Shape;
+  using String = typename ModelLoaderTraits::String;
+  using Importer = typename ModelLoaderTraits::Importer;
+  TModelLoader();
+  ~TModelLoader();
+  Importer* mImporter;
+};
 
 } /* flf */
 } /* flw */

@@ -281,8 +281,12 @@ inline void Model::loadNodes(aiNode *node, const aiScene* scene, Entity* entity)
 
     aiString diffuseMapPathAssimp, normalMapPathAssimp, specularMapPathAssimp;
 
+    if (nullptr == aMesh) {
+      continue;
+    }
+
     entity->attach(
-      loadMesh(aMesh
+      loadMesh(*aMesh
         , Material(aMaterial)
         , mEngine->storeTexture(getMeshTextureName(aiTextureType_DIFFUSE, diffuseMapPathAssimp, aMaterial))
         , mEngine->storeTexture(getMeshTextureName(aiTextureType_NORMALS, normalMapPathAssimp, aMaterial))
@@ -310,7 +314,7 @@ inline void Model::loadNodes(aiNode *node,
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; ++i) {
-    const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
+    const aiMesh& aMesh = *scene->mMeshes[node->mMeshes[i]];
     entity->attach(loadMesh(aMesh, material, diffuseMap, normalMap, specularMap, mEngine));
   }
 
@@ -339,16 +343,12 @@ inline void Model::loadNodeTransformations(aiNode *node, Entity* entity) {
   entity->moveTo(assimpToGlmVec3(position));
 }
 
-pu<Mesh> Model::loadMesh(const aiMesh* shape,
+pu<Mesh> Model::loadMesh(const aiMesh& shape,
     const Material& material,
     flc::Texture2D* diffuseMap,
     flc::Texture2D* normalMap,
     flc::Texture2D* specularMap,
     Engine* engine) {
-
-  if (!shape) {
-    return nullptr;
-  }
 
   ProgramLoader loader(engine);
   auto vao = new flc::VertexArray();
@@ -441,7 +441,7 @@ inline void Model::initUniformsCache() {
 
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-puMesh Model::loadMesh(tinyobj::shape_t& shape,
+puMesh Model::loadMesh(const tinyobj::shape_t& shape,
                 tinyobj::attrib_t& attrib,
                 const Material& material,
                 flc::Texture2D* diffuseMap,

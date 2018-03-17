@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -21,41 +19,24 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/IBuffer.h>
-#include <fillwave/Assets.h>
-#include <vector>
+#include <fillwave/loaders/TModelLoader.h>
+#include <fillwave/loaders/modelLoaders/ModelLoaderAssimp.h>
 
 namespace flw {
-namespace flc {
+namespace flf {
 
-/*! \class IndexBuffer
- * \brief IndexBufferObject - IBO.
- */
+template<>
+TModelLoader<ModelLoaderTraitsAssimp>::TModelLoader() {
+  mImporter = new Assimp::Importer();
+}
 
-class IndexBuffer : public IBuffer {
-public:
-  // xxx fill - fills buffer with sequential data
-  IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModification = GL_STATIC_DRAW);
+template<>
+TModelLoader<ModelLoaderTraitsAssimp>::~TModelLoader() {
+  delete mImporter;
+}
 
-  IndexBuffer(const std::vector<GLuint> &data, GLuint dataStoreModification = GL_STATIC_DRAW);
+template
+class TModelLoader<ModelLoaderTraitsAssimp>;
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-  IndexBuffer(const aiMesh& shape, GLuint dataStoreModification = GL_STATIC_DRAW);
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
-  ~IndexBuffer() override = default;
-
-  GLuint *getDataInternal();
-
-  void emptyCPU() override;
-
-  void emptyGPU() override;
-
-protected:
-  std::vector<GLuint> mDataIndices;
-};
-
-} /* flc */
+} /* flf */
 } /* flw */

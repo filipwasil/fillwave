@@ -1,13 +1,16 @@
-#include <fillwave/loaders/ModelLoader.h>
+#include <fillwave/loaders/TModelLoader.h>
+#include <fillwave/loaders/modelLoaders/ModelLoaderAssimp.h>
 
 namespace flw {
 namespace flf {
 
-ModelLoader::ModelLoader() {
+template<>
+TModelLoader<ModelLoaderTraitsAssimp>::TModelLoader() {
   // nothing
 }
 
-ModelLoader::~ModelLoader() {
+template<>
+TModelLoader<ModelLoaderTraitsAssimp>::~TModelLoader() {
   // nothing
 }
 

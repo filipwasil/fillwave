@@ -42,17 +42,17 @@ IndexBuffer::IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModificatio
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-IndexBuffer::IndexBuffer(const aiMesh *shape, GLuint dataStoreModification)
+IndexBuffer::IndexBuffer(const aiMesh& shape, GLuint dataStoreModification)
     : IBuffer(GL_ELEMENT_ARRAY_BUFFER, dataStoreModification) {
-  mTotalElements = shape->mNumFaces * 3;
+  mTotalElements = shape.mNumFaces * 3;
   mDataIndices.resize(mTotalElements);
 
-#pragma omp parallel for schedule(guided) num_threads(2) if (shape->mNumFaces > 1000)
-  for (GLuint i = 0; i < shape->mNumFaces; i++) {
+#pragma omp parallel for schedule(guided) num_threads(2) if (shape.mNumFaces > 1000)
+  for (GLuint i = 0; i < shape.mNumFaces; i++) {
     const GLuint idx = 3 * i;
-    mDataIndices[idx] = shape->mFaces[i].mIndices[0];
-    mDataIndices[idx + 1] = shape->mFaces[i].mIndices[1];
-    mDataIndices[idx + 2] = shape->mFaces[i].mIndices[2];
+    mDataIndices[idx] = shape.mFaces[i].mIndices[0];
+    mDataIndices[idx + 1] = shape.mFaces[i].mIndices[1];
+    mDataIndices[idx + 2] = shape.mFaces[i].mIndices[2];
   }
   mSize = mTotalElements * sizeof(GLuint);
   mData = mDataIndices.data();

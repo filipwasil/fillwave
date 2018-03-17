@@ -62,7 +62,7 @@ class VertexBufferBasic : public TVertexBuffer<VertexBasic> {
 public:
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-  VertexBufferBasic(const aiMesh *shape,
+  VertexBufferBasic(const aiMesh& shape,
       flf::Animator *animator = nullptr,
       GLuint dataStoreModification = GL_STATIC_DRAW);
 
@@ -72,7 +72,7 @@ public:
               GLuint dataStoreModification = GL_STATIC_DRAW);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-  VertexBufferBasic(flf::TerrainConstructor *constructor,
+  VertexBufferBasic(flf::TerrainConstructor* constructor,
       GLint chunkDensity,
       GLfloat gapSize,
       const std::vector<GLuint> &indices,

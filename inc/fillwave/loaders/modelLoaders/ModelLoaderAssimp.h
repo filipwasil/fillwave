@@ -26,11 +26,12 @@
 namespace flw {
 namespace flf {
 
-class ModelLoader {
+struct ModelLoaderTraitsAssimp {
  public:
-  ModelLoader();
-  virtual ~ModelLoader();
-  Assimp::Importer* mImporter;
+  using Shape = aiMesh;
+  using String = aiString;
+  using Importer = Assimp::Importer;
+  static constexpr unsigned int Flags = aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace;
 };
 
 } /* flf */
