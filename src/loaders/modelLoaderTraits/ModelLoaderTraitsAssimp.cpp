@@ -193,7 +193,7 @@ flw::flc::VertexBufferBasic*
         GLuint VertexID = shape->mBones[i]->mWeights[j].mVertexId;
         float Weight = shape->mBones[i]->mWeights[j].mWeight;
         if (boneIdForEachVertex[VertexID] < FILLWAVE_MAX_BONES_DEPENDENCIES) {
-          vertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = a->getId(shape->mBones[i]->mName.C_Str());
+          vertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = a->getBoneId(shape->mBones[i]->mName.C_Str());
           vertices[VertexID].mBoneWeight[boneIdForEachVertex[VertexID]] = Weight;
           boneIdForEachVertex[VertexID]++;
         } else {

@@ -321,7 +321,7 @@ inline void Model::loadNodes(
   }
 }
 
-std::string Model::getMeshTextureName(aiTextureType type, const aiMaterial* mat) {
+std::string Model::getMeshTextureName(ModelLoader::TextureType type, const aiMaterial* mat) {
   aiString name;
   return mat->GetTexture(type, 0, &name, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS
          ? name.data
@@ -377,7 +377,7 @@ pp<Mesh> Model::getMesh(size_t id) {
 }
 
 void Model::performAnimation(GLfloat timeElapsedInSeconds) {
-  if (mAnimator && mAnimator->getAnimations() > mActiveAnimation) {
+  if (mAnimator && mAnimator->getAnimationsCount() > mActiveAnimation) {
     mAnimator->updateTransformations(mActiveAnimation, timeElapsedInSeconds);
   }
 }
@@ -388,7 +388,7 @@ void Model::setActiveAnimation(GLint animationID) {
     return;
   }
 
-  if (mAnimator->getAnimations() <= animationID) {
+  if (mAnimator->getAnimationsCount() <= animationID) {
     fLogD("Animation ", mActiveAnimation, " has stopped due to setting a non-valid animation id:", animationID);
     mActiveAnimation = FILLWAVE_DO_NOT_ANIMATE;
     return;
@@ -400,7 +400,7 @@ void Model::setActiveAnimation(GLint animationID) {
 
 GLint Model::getActiveAnimations() {
   if (mAnimator) {
-    return mAnimator->getAnimations();
+    return mAnimator->getAnimationsCount();
   }
   return 0;
 }

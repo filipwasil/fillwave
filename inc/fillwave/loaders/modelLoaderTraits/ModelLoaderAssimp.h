@@ -30,7 +30,6 @@ namespace flw {
 namespace flf {
 
 struct ModelLoaderTraitsAssimp {
- public:
   using Node = aiNode;
   using Scene = aiScene;
   using ShapeType = aiMesh;

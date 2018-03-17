@@ -98,7 +98,7 @@ public:
 
   void log() const override;
 
-protected:
+ protected:
   Engine* mEngine;
   std::unique_ptr<Animator> mAnimator;
   GLint mActiveAnimation;
@@ -110,7 +110,8 @@ protected:
   GLint mUniformLocationCacheBonesShadow;
   GLint mUniformLocationCacheBonesShadowColor;
   vecHeap<Mesh*> mMeshes;
-private:
+
+ private:
   /* Init */
   void initUniformsCache();
 
@@ -121,7 +122,7 @@ private:
 
   void evaluateAnimations();
 
-  void initAnimations(const aiScene* scene);
+  void initAnimations(const ModelLoader::Scene* scene);
 
   void unloadNodes();
 
@@ -147,7 +148,7 @@ private:
     , flc::Texture2D* specular
     , Engine *engine);
 
-  std::string getMeshTextureName(aiTextureType type, const ModelLoader::MaterialType* m);
+  std::string getMeshTextureName(ModelLoader::TextureType type, const ModelLoader::MaterialType* m);
 };
 
 } /* flf */

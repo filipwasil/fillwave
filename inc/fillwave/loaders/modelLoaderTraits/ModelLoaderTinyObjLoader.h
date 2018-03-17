@@ -27,15 +27,14 @@ namespace flw {
 namespace flf {
 
 struct ModelLoaderTraitsTinyObjLoader {
- public:
-  using Node = void;
-  using Scene = void;
+  using Node = unsigned int;
+  using Scene = unsigned int;
   using ShapeType = tinyobj::shape_t;
   using ShapeDataType = tinyobj::attrib_t;
   using MaterialType = tinyobj::material_t;
-  using TextureType = tinyobj::texture_t;
+  using TextureType = unsigned int;
   using String = const char;
-  using Importer = void;
+  using Importer = unsigned int;
   using Flags = unsigned int;
 };
 

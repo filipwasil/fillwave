@@ -33,7 +33,7 @@ namespace flf {
 } /* flf */
 } /* flw */
 
-#elif defined(FILLWAVE_MODEL_LOADER_TINY_OBJ_LOADER)
+#elif defined(FILLWAVE_MODEL_LOADER_TINYOBJLOADER)
 
 #include <fillwave/loaders/modelLoaderTraits/ModelLoaderTinyObjLoader.h>
 

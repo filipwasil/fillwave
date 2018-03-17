@@ -41,5 +41,21 @@ Animator::Animation::~Animation() {
   mChannels.clear();
 }
 
+float Animator::Animation::getTicksPerSec() {
+  return mTicksPerSec;
+}
+
+float Animator::Animation::getDuration() {
+  return mDuration;
+}
+
+Animator::Channel* Animator::Animation::getChannel(int i) {
+  return mChannels[i];
+}
+
+size_t Animator::Animation::getHowManyChannels() {
+  return mChannels.size();
+}
+
 } /* flf */
 } /* flw */

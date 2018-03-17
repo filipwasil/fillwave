@@ -78,7 +78,7 @@ Animator::Bone *Animator::get(std::string name) {
   return nullptr;
 }
 
-GLint Animator::getId(std::string name) const {
+GLint Animator::getBoneId(const std::string& name) const {
   int idx = 0;
   for (auto &it : mBones) {
     if (it->getName() == name) {
@@ -93,7 +93,7 @@ Animator::Animation* Animator::getAnimation(GLint i) const {
   return (i != FILLWAVE_DO_NOT_ANIMATE ? mAnimations[i].get() : nullptr);
 }
 
-GLint Animator::getAnimations() const {
+GLint Animator::getAnimationsCount() const {
   return mAnimations.size();
 }
 
@@ -132,10 +132,6 @@ void Animator::updateBonesBuffer() {
 
 void Animator::updateBonesUniform(GLint uniformLocationBones) {
   flc::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(), FILLWAVE_MAX_BONES);
-}
-
-void Animator::log() {
-  fLogI("Bones %du ", mBones.size());
 }
 
 Animator::Channel* Animator::findChannel(Animator::Animation *animation, const std::string& nodeName) const {
@@ -238,10 +234,6 @@ GLuint Animator::getScaleStep(float timeElapsed_s, Channel *channel) const {
     }
   }
   return 0;
-}
-
-GLint Animator::getElements() const {
-  return mBones.size();
 }
 
 } /* flf */
