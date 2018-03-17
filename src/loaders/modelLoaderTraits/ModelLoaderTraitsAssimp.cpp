@@ -21,6 +21,7 @@
 
 #include <fillwave/loaders/TModelLoader.h>
 #include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
+#include <fillwave/models/animations/Conversion.h>
 
 namespace flw {
 namespace flf {
@@ -40,13 +41,15 @@ TModelLoader<ModelLoaderTraitsAssimp>::~TModelLoader() {
 template<>
 void TModelLoader<ModelLoaderTraitsAssimp>::getPhysicsBuffer(const char* assetPath, flf::PhysicsMeshBuffer& buffer) {
 
-  auto scene = mImporter->ReadFile(assetPath, mFlags);
+  Importer importer;
+
+  auto scene = importer.ReadFile(assetPath, aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);
 
   if (nullptr == scene) {
     return;
   }
 
-  if (scene->mNumMeshes != 1) {
+  if (1 != scene->mNumMeshes) {
     return;
   }
 
@@ -63,6 +66,41 @@ void TModelLoader<ModelLoaderTraitsAssimp>::getPhysicsBuffer(const char* assetPa
     const auto& v = shape->mVertices[z];
     buffer.mVertices[z] = { { v.x, v.y, v.z } };
   }
+}
+
+template<>
+Material TModelLoader<ModelLoaderTraitsAssimp>::getMaterial(
+  const TModelLoader<ModelLoaderTraitsAssimp>::MaterialType& mat) {
+  Material material;
+  aiColor4D color;
+  if (AI_SUCCESS == aiGetMaterialColor(&mat, AI_MATKEY_COLOR_AMBIENT, &color)) {
+    material.mAmbient = assimpToGlmVec4(color);
+  }
+  if (AI_SUCCESS == aiGetMaterialColor(&mat, AI_MATKEY_COLOR_DIFFUSE, &color)) {
+    material.mDiffuse = assimpToGlmVec4(color);
+  }
+  if (AI_SUCCESS == aiGetMaterialColor(&mat, AI_MATKEY_COLOR_SPECULAR, &color)) {
+    material.mSpecular = assimpToGlmVec4(color);
+  }
+  return material;
+}
+
+template<>
+flc::IndexBuffer* TModelLoader<ModelLoaderTraitsAssimp>::getIndexBuffer(const Shape* shape) {
+
+  std::vector<GLuint> indices;
+
+  indices.resize(shape->mNumFaces * 3);
+
+  #pragma omp parallel for schedule(guided) num_threads(2) if (shape->mNumFaces > 1000)
+    for (GLuint i = 0; i < shape->mNumFaces; i++) {
+      const GLuint idx = 3 * i;
+      indices[idx] = shape->mFaces[i].mIndices[0];
+      indices[idx + 1] = shape->mFaces[i].mIndices[1];
+      indices[idx + 2] = shape->mFaces[i].mIndices[2];
+    }
+
+  return new ::flw::flc::IndexBuffer(indices);
 }
 
 template

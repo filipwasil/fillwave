@@ -512,7 +512,7 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-const aiScene* Engine::getModelFromFile(const string& path) {
+const ModelLoader::Scene* Engine::getModelFromFile(const string& path) {
   fLogD("Reading model ", path);
   return mModelLoader.mImporter->ReadFile((mFileLoader.getRootPath() + path).c_str(),
                                    aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);
@@ -607,11 +607,11 @@ void Engine::removeBufferText(VertexArray* vao) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape) {
-  return mBuffers.mIndices.store(new IndexBuffer(shape), vao);
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const ModelLoader::Shape* shape) {
+  return mBuffers.mIndices.store(ModelLoader::getIndexBuffer(shape), vao);
 }
 
-VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape, flf::Animator* animator) {
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, const ModelLoader::Shape* shape, flf::Animator* animator) {
   return mBuffers.mVertices.store(new VertexBufferBasic(shape, animator), vao);
 }
 

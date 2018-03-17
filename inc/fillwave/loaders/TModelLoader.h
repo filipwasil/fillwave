@@ -23,6 +23,8 @@
 
 #include <fillwave/loaders/modelLoaderTraits/ModelLoaderDefault.h>
 #include <fillwave/models/shapes/PhysicsMeshBuffer.h>
+#include <fillwave/models/base/Material.h>
+#include <fillwave/core/buffers/IndexBuffer.h>
 
 namespace flw {
 namespace flf {
@@ -30,13 +32,22 @@ namespace flf {
 template <class ModelLoaderTraits>
 class TModelLoader final {
  public:
+  using Scene = typename ModelLoaderTraits::Scene;
   using Shape = typename ModelLoaderTraits::Shape;
+  using MaterialType = typename ModelLoaderTraits::MaterialType;
+  using TextureType = typename ModelLoaderTraits::TextureType;
   using String = typename ModelLoaderTraits::String;
   using Importer = typename ModelLoaderTraits::Importer;
   using Flags = typename ModelLoaderTraits::Flags;
+
   TModelLoader();
   ~TModelLoader();
-  void getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer);
+
+  static void getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer);
+  static Material getMaterial(const MaterialType& material);
+  static Material getTexturePath(TextureType type, const MaterialType& material);
+  static ::flw::flc::IndexBuffer* getIndexBuffer(const Shape* shape);
+
   Importer* mImporter;
   Flags mFlags;
 };

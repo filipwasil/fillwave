@@ -239,7 +239,7 @@ void Model::reloadModel(
   , flc::Texture2D* specular
   , const Material& material) {
   unloadNodes();
-  const aiScene* scene = mEngine->getModelFromFile(path);
+  const auto* scene = mEngine->getModelFromFile(path);
   if (!scene) {
     fLogF("Model: %s could not be read", path.c_str());
     return;
@@ -252,7 +252,7 @@ void Model::reloadModel(
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-inline void Model::initAnimations(const aiScene* scene) {
+inline void Model::initAnimations(const ModelLoader::Scene* scene) {
   if (scene->HasAnimations()) {
     mAnimator = std::make_unique<Animator>(scene);
     fLogD("attached TimedBoneUpdateCallback to model");
@@ -270,27 +270,26 @@ inline void Model::unloadNodes() {
   mMeshes.clear();
 }
 
-inline void Model::loadNodes(aiNode *node, const aiScene* scene, Entity* entity) {
+inline void Model::loadNodes(aiNode *node, const ModelLoader::Scene* scene, Entity* entity) {
 
   /* Set this node transformations */
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; i++) {
-    const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
-    const aiMaterial* aMaterial = scene->mMaterials[aMesh->mMaterialIndex];
+    const auto mesh = scene->mMeshes[node->mMeshes[i]];
 
-    aiString diffuseMapPathAssimp, normalMapPathAssimp, specularMapPathAssimp;
-
-    if (nullptr == aMesh) {
+    if (nullptr == mesh) {
       continue;
     }
 
+    const auto material = scene->mMaterials[mesh->mMaterialIndex];
+
     entity->attach(
-      loadMesh(aMesh
-        , Material(aMaterial)
-        , mEngine->storeTexture(getMeshTextureName(aiTextureType_DIFFUSE, diffuseMapPathAssimp, aMaterial))
-        , mEngine->storeTexture(getMeshTextureName(aiTextureType_NORMALS, normalMapPathAssimp, aMaterial))
-        , mEngine->storeTexture(getMeshTextureName(aiTextureType_SPECULAR, specularMapPathAssimp, aMaterial))
+      loadMesh(mesh
+        , ModelLoader::getMaterial(*material)
+        , mEngine->storeTexture(getMeshTextureName(aiTextureType_DIFFUSE, material))
+        , mEngine->storeTexture(getMeshTextureName(aiTextureType_NORMALS, material))
+        , mEngine->storeTexture(getMeshTextureName(aiTextureType_SPECULAR, material))
         , mEngine));
   }
 
@@ -303,7 +302,7 @@ inline void Model::loadNodes(aiNode *node, const aiScene* scene, Entity* entity)
 }
 
 inline void Model::loadNodes(aiNode *node,
-    const aiScene* scene,
+    const ModelLoader::Scene* scene,
     Entity* entity,
     flc::Texture2D* diffuseMap,
     flc::Texture2D* normalMap,
@@ -314,8 +313,8 @@ inline void Model::loadNodes(aiNode *node,
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; ++i) {
-    const aiMesh* aMesh = scene->mMeshes[node->mMeshes[i]];
-    entity->attach(loadMesh(aMesh, material, diffuseMap, normalMap, specularMap, mEngine));
+    const ModelLoader::Shape* mesh = scene->mMeshes[node->mMeshes[i]];
+    entity->attach(loadMesh(mesh, material, diffuseMap, normalMap, specularMap, mEngine));
   }
 
   /* Evaluate children */
@@ -326,10 +325,10 @@ inline void Model::loadNodes(aiNode *node,
   }
 }
 
-
-inline const char* Model::getMeshTextureName(aiTextureType type, aiString& path, const aiMaterial* mat) {
-  return mat->GetTexture(type, 0, &path, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS
-         ? path.data
+std::string Model::getMeshTextureName(aiTextureType type, const aiMaterial* mat) {
+  aiString name;
+  return mat->GetTexture(type, 0, &name, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS
+         ? name.data
          : "128_128_128.color";
 }
 
@@ -343,7 +342,7 @@ inline void Model::loadNodeTransformations(aiNode *node, Entity* entity) {
   entity->moveTo(assimpToGlmVec3(position));
 }
 
-pu<Mesh> Model::loadMesh(const aiMesh* shape,
+pu<Mesh> Model::loadMesh(const ModelLoader::Shape* shape,
     const Material& material,
     flc::Texture2D* diffuseMap,
     flc::Texture2D* normalMap,

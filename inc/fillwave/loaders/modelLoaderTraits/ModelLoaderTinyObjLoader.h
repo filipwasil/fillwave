@@ -31,7 +31,10 @@ namespace flf {
 
 struct ModelLoaderTraitsTinyObjLoader {
  public:
+  using Scene = void*;
   using Shape = tinyobj::shape_t;
+  using MaterialType = tinyobj::material_t;
+  using TextureType = tinyobj::texture_t;
   using String = const char*;
   using Importer = void*;
   using Flags = tinyobj::attrib_t;

@@ -96,9 +96,9 @@ void Mesh::drawPBRP(ICamera &camera) {
 #endif
   {
     flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
-    flc::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
-    flc::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-    flc::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
+    flc::Uniform::push(mULCLightAmbientIntensity, mMaterial.mAmbient);
+    flc::Uniform::push(mULCLightDiffuseIntensity, mMaterial.mDiffuse);
+    flc::Uniform::push(mULCLightSpecularIntensity, mMaterial.mSpecular);
     flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
     flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 
@@ -115,9 +115,9 @@ void Mesh::draw(ICamera &camera) {
     mProgram->use();
 
     flc::Uniform::push(mULCModelMatrix, mPhysicsMMC);
-    flc::Uniform::push(mULCLightAmbientIntensity, mMaterial.getAmbient());
-    flc::Uniform::push(mULCLightDiffuseIntensity, mMaterial.getDiffuse());
-    flc::Uniform::push(mULCLightSpecularIntensity, mMaterial.getSpecular());
+    flc::Uniform::push(mULCLightAmbientIntensity, mMaterial.mAmbient);
+    flc::Uniform::push(mULCLightDiffuseIntensity, mMaterial.mDiffuse);
+    flc::Uniform::push(mULCLightSpecularIntensity, mMaterial.mSpecular);
     flc::Uniform::push(mULCCameraPosition, camera.getTranslation());
     flc::Uniform::push(mULCViewProjectionMatrix, camera.getViewProjection());
 

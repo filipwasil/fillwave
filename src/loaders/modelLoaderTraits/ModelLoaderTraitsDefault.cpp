@@ -34,5 +34,10 @@ ModelLoader<ModelLoaderTraitsDefault>::~ModelLoader() {
   // nothing
 }
 
+template<>
+void TModelLoader<ModelLoaderTraitsDefault>::getPhysicsBuffer(const char* /*path*/, flf::PhysicsMeshBuffer&/*buf*/) {
+  // nothing
+}
+
 } /* flf */
 } /* flw */

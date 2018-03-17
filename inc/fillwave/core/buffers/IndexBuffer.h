@@ -34,20 +34,13 @@ namespace flc {
 
 class IndexBuffer : public IBuffer {
 public:
-  // xxx fill - fills buffer with sequential data
   IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModification = GL_STATIC_DRAW);
 
   IndexBuffer(const std::vector<GLuint> &data, GLuint dataStoreModification = GL_STATIC_DRAW);
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-  IndexBuffer(const aiMesh* shape, GLuint dataStoreModification = GL_STATIC_DRAW);
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
   ~IndexBuffer() override = default;
 
-  GLuint *getDataInternal();
+  GLuint* getDataInternal();
 
   void emptyCPU() override;
 

@@ -40,6 +40,15 @@ void TModelLoader<ModelLoaderTraitsTinyObjLoader>::getPhysicsBuffer(const char*,
   // nothing
 }
 
+template<>
+Meterial TModelLoader<ModelLoaderTraitsTinyObjLoader>::getMaterial(const MaterialType& material) {
+  Meterial mat;
+  mat.mAmbient = floatsToGlmVec4(material.ambient);
+  mat.mDiffuse = floatsToGlmVec4(material.diffuse);
+  mat.mSpecular = floatsToGlmVec4(material.specular);
+  return mat;
+}
+
 template
 class TModelLoader<ModelLoaderTraitsTinyObjLoader>;
 

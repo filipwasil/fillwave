@@ -31,7 +31,10 @@ namespace flf {
 
 struct ModelLoaderTraitsAssimp {
  public:
+  using Scene = aiScene;
   using Shape = aiMesh;
+  using MaterialType = aiMaterial;
+  using TextureType = aiTextureType;
   using String = aiString;
   using Importer = Assimp::Importer;
   using Flags = unsigned int;

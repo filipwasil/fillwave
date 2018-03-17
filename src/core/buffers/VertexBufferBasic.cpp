@@ -36,7 +36,7 @@ namespace flc {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-VertexBufferBasic::VertexBufferBasic(const aiMesh* shape, flf::Animator *animator, GLuint dataStoreModification)
+VertexBufferBasic::VertexBufferBasic(const ModelLoader::Shape* shape, flf::Animator *animator, GLuint dataStoreModification)
     : TVertexBuffer<VertexBasic>(dataStoreModification) {
 
   mTotalElements = shape->mNumVertices;

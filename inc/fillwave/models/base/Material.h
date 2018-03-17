@@ -31,25 +31,8 @@ namespace flf {
  * \brief Per mesh material info.
  */
 
-class Material final {
-public:
+struct Material final {
   Material();
-
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-  Material(const aiMaterial* material);
-
-#else
-  Material(const tinyobj::material_t& material);
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
-  const glm::vec4 &getAmbient() const;
-
-  const glm::vec4 &getDiffuse() const;
-
-  const glm::vec4 &getSpecular() const;
-
-private:
   glm::vec4 mAmbient;
   glm::vec4 mDiffuse;
   glm::vec4 mSpecular;

@@ -23,6 +23,8 @@
 
 #include <fillwave/common/pointers/PointerProtected.h>
 #include <fillwave/common/pointers/PointerCache.h>
+#include <fillwave/loaders/ModelLoaderTraits.h>
+#include <fillwave/loaders/TModelLoader.h>
 
 #include <memory>
 #include <functional>
@@ -48,5 +50,7 @@ pu<T> make_pu(Args&&... args) {
 
 template <class T>
 using Callback = std::function<T>;
+
+using ModelLoader = flf::TModelLoader<flf::ModelLoaderTraits>;
 
 } /* flw */

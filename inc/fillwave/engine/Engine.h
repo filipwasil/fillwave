@@ -105,11 +105,6 @@ class Engine {
   /* Assets */
   void getPhysicalMeshBuffer(const std::string& path, flf::PhysicsMeshBuffer& buffer);
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-  const aiScene* getModelFromFile(const std::string& path);
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
   /* Scene */
   void setCurrentScene(pu<flf::Scene> &&scene);
   pp<flf::Scene> getCurrentScene() const;
@@ -210,7 +205,7 @@ class Engine {
   flf::FontLoader mFontLoader;
   flf::FileLoader mFileLoader;
   flf::ProgramLoader mProgramLoader;
-  flf::TModelLoader<flf::ModelLoaderTraits> mModelLoader;
+  ModelLoader mModelLoader;
 
   /* Picking */
   flc::Texture2DRenderable* mPickingRenderableTexture;
@@ -334,6 +329,9 @@ class Engine {
   flc::VertexBufferPosition* storeBufferInternal(flc::VertexArray *vao, flf::vec<flc::VertexPosition> &data);
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+ public:
+  const aiScene* getModelFromFile(const std::string& path);
+ private:
   flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray *vao, const aiMesh* shape, flf::Animator *animator);
   flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const aiMesh* shape);
 #else

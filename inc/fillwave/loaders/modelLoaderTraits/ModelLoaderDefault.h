@@ -26,10 +26,13 @@ namespace flf {
 
 struct ModelLoaderTraitsDefault {
  public:
+  using Scene = void*;
   using Shape = void*;
+  using MaterialType = void*;
+  using TextureType = unsigned int;
   using String = void*;
   using Importer = void*;
-  static constexpr unsigned int Flags = 0;
+  using Flags = unsigned int;
 };
 
 } /* flf */

@@ -135,24 +135,24 @@ private:
 
   void loadNodeTransformations(aiNode* node, Entity* entity);
 
-  void loadNodes(aiNode* node, const aiScene* scene, Entity* entity);
+  void loadNodes(aiNode* node, const ModelLoader::Scene* scene, Entity* entity);
 
   void loadNodes(aiNode* node,
-      const aiScene* scene,
+      const ModelLoader::Scene* scene,
       Entity* entity,
       flc::Texture2D* diffuse,
       flc::Texture2D* normal,
       flc::Texture2D* specular,
       const Material &material = Material());
 
-  pu<Mesh> loadMesh(const aiMesh* shape,
+  pu<Mesh> loadMesh(const ModelLoader::Shape* shape,
       const Material& material,
       flc::Texture2D* diffuse,
       flc::Texture2D* normal,
       flc::Texture2D* specular,
       Engine *engine);
 
-  inline const char* getMeshTextureName(aiTextureType type, aiString& path, const aiMaterial* mat);
+  std::string getMeshTextureName(aiTextureType type, const ModelLoader::MaterialType* m);
 
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
   pu<Mesh> loadMesh(tinyobj::shape_t& shape,

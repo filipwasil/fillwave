@@ -29,41 +29,7 @@ Material::Material()
     : mAmbient(0.1, 0.1, 0.1, 1.0)
     , mDiffuse(1.0)
     , mSpecular(1.0) {
-}
-
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-Material::Material(const aiMaterial *material) {
-  aiColor4D color;
-  if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_AMBIENT, &color)) {
-    mAmbient = assimpToGlmVec4(color);
-  }
-  if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_DIFFUSE, &color)) {
-    mDiffuse = assimpToGlmVec4(color);
-  }
-  if (AI_SUCCESS == aiGetMaterialColor(material, AI_MATKEY_COLOR_SPECULAR, &color)) {
-    mSpecular = assimpToGlmVec4(color);
-  }
-}
-
-#else
-Material::Material(const tinyobj::material_t& material) :
-  mAmbient (floatsToGlmVec4(material.ambient)),
-  mDiffuse (floatsToGlmVec4(material.diffuse)),
-  mSpecular (floatsToGlmVec4(material.specular)) {
-}
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
-const glm::vec4 &Material::getAmbient() const {
-  return mAmbient;
-}
-
-const glm::vec4 &Material::getDiffuse() const {
-  return mDiffuse;
-}
-
-const glm::vec4 &Material::getSpecular() const {
-  return mSpecular;
+  // nothing
 }
 
 } /* flf */
