@@ -33,7 +33,7 @@ namespace flf {
 
 Model::Model(Engine* engine,
     flc::Program* program,
-    Shape<flc::VertexBasic> &shape,
+    Shape<flc::VertexBasic>& shape,
     flc::Texture2D* diffuseMap,
     flc::Texture2D* normalMap,
     flc::Texture2D* specularMap,
@@ -286,7 +286,7 @@ inline void Model::loadNodes(aiNode *node, const ModelLoader::Scene* scene, Enti
   }
 
   /* Evaluate children */
-  for (GLuint i = 0; i < node->mNumChildren; i++) {
+  for (GLuint i = 0; i < node->mNumChildren; ++i) {
     pu<Entity> newEntity = std::make_unique<flf::Hinge>();
     loadNodes(node->mChildren[i], scene, newEntity.get());
     entity->attach(std::move(newEntity));

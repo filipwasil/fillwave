@@ -120,7 +120,7 @@ flw::flc::VertexBufferBasic*
   vertices.resize(elements);
 
   {
-#pragma omp parallel for schedule(guided) num_threads(2) if (mTotalElements > 1000)
+#pragma omp parallel for schedule(guided) num_threads(2) if (shape->mNumVertices > 1000)
     for (GLuint i = 0; i < elements; i++) {
       flc::VertexBasic &vertex = vertices[i];
 
