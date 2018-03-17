@@ -75,9 +75,7 @@ RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
                                                mLights,
                                                engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices),
                                                engine->storeBuffer<flc::IndexBuffer>(vao, indices),
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
                                                nullptr,
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
                                                GL_TRIANGLES,
                                                vao);
 

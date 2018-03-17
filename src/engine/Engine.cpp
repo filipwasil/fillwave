@@ -60,8 +60,8 @@ using namespace std;
 namespace flw {
 
 Engine::Engine(const std::string& runtimeBinaryFilePath)
-  : mWindowWidth(1920)
-  , mWindowHeight(1200)
+  : mWindowWidth(1)
+  , mWindowHeight(1)
   , mWindowAspectRatio(mWindowHeight / mWindowWidth)
   , mFileLoader(getFilePathOnly(runtimeBinaryFilePath.c_str()))
   , mProgramLoader(this)
@@ -152,12 +152,13 @@ void Engine::initStartup() {
   program->uniformPush("uScreenFactor", mWindowAspectRatio);
   flc::Program::disusePrograms();
 
-  mPostProcessingPassStartup = std::make_unique<flc::PostProcessingPass>(program,
-                                                                         mTextures->getDynamic("fillwave_quad_startup.frag",
-                                                                                               program,
-                                                                                               glm::ivec2(mWindowWidth,
-                                                                                                          mWindowHeight)),
-                                                                         mStartupTimeLimit);
+  mPostProcessingPassStartup =
+    std::make_unique<flc::PostProcessingPass>(
+      program
+      , mTextures->getDynamic("fillwave_quad_startup.frag"
+        , program
+        , glm::ivec2(mWindowWidth, mWindowHeight)),
+      mStartupTimeLimit);
 
   fLogD("Post processing startup pass added");
 
@@ -190,7 +191,7 @@ void Engine::initExtras() {
   glPatchParameteri(GL_PATCH_VERTICES, 3);
 #endif // FILLWAVE_COMPILATION_PC_GLES
 
-  /* Suppress error if setting patch up fails */
+  /* Suppress error if setting up patch fails */
   glGetError();
 }
 
@@ -510,14 +511,10 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
   buffer[*sizeInBytes] = '\0';
 }
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-const ModelLoader::Scene* Engine::getModelFromFile(const string& path) {
+const ModelLoader::Scene* Engine::getScene(const string& path) {
   fLogD("Reading model ", path);
-  return mModelLoader.mImporter->ReadFile((mFileLoader.getRootPath() + path).c_str(), mModelLoader.mFlags);
+  return mModelLoader.getScene((mFileLoader.getRootPath() + path).c_str());
 }
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
 
 template <GLuint T>
 Shader* Engine::storeShader(const string& shaderPath) {

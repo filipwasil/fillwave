@@ -61,9 +61,7 @@ public:
       LightSystem &lights,
       flc::VertexBufferBasic* vbo = nullptr,
       flc::IndexBuffer* ibo = nullptr,
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
       Animator* animator = nullptr,
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
       GLenum renderMode = GL_TRIANGLES,
       flc::VertexArray* vao = nullptr);
 

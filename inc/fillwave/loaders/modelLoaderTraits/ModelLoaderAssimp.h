@@ -40,10 +40,6 @@ struct ModelLoaderTraitsAssimp {
   using String = aiString;
   using Importer = Assimp::Importer;
   using Flags = unsigned int;
-  using Vec3 = aiVector3D;
-  using Vec4 = aiColor4D;
-  using Quat = aiQuaternion;
-  using Mat4 = aiMatrix4x4;
 };
 
 } /* flf */

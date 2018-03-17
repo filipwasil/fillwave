@@ -49,12 +49,14 @@ class TModelLoader final {
   TModelLoader();
   ~TModelLoader();
 
+  const Scene* getScene(const char* path);
+
   static void getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer);
   static Material getMaterial(const MaterialType& material);
   static Material getTexturePath(TextureType type, const MaterialType& material);
   static ::flw::flc::IndexBuffer* getIndexBuffer(const ShapeType* shape);
   static ::flw::flc::VertexBufferBasic* getVertexBuffer(const ShapeType* shape, const ShapeDataType* data, Animator* a);
-  static void assignTransformation (Node* node, Entity* entity);
+  static void assignTransformation (const Node* node, Entity* entity);
 
   Importer* mImporter;
   Flags mFlags;

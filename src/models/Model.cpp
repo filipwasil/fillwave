@@ -71,10 +71,10 @@ Model::Model(Engine* engine,
 }
 
 Model::Model(Engine* engine, flc::Program* program, const std::string& shapePath)
-    : Programmable(program)
-    , mEngine(engine)
-    , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
-    , mLights(engine->getLightSystem()) {
+  : Programmable(program)
+  , mEngine(engine)
+  , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+  , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   reloadModel(shapePath);
@@ -116,16 +116,16 @@ Model::Model(Engine* engine, flc::Program* program, const std::string& shapePath
 #endif
 }
 
-Model::Model(Engine* engine,
-    flc::Program* program,
-    const std::string& shapePath,
-    const std::string& diffuseMapPath,
-    const std::string& normalMapPath,
-    const std::string& specularMapPath)
-    : Programmable(program)
-    , mEngine(engine)
-    , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
-    , mLights(engine->getLightSystem()) {
+Model::Model(Engine* engine
+             , flc::Program* program
+             , const std::string& shapePath
+             , const std::string& diffuseMapPath
+             , const std::string& normalMapPath
+             , const std::string& specularMapPath)
+  : Programmable(program)
+  , mEngine(engine)
+  , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+  , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   reloadModel(shapePath
@@ -161,17 +161,17 @@ Model::Model(Engine* engine,
 #endif
 }
 
-Model::Model(Engine* engine,
-    flc::Program* program,
-    const std::string& shapePath,
-    flc::Texture2D* diffuseMap,
-    flc::Texture2D* normalMap,
-    flc::Texture2D* specularMap,
-    const Material& material)
-    : Programmable(program)
-    , mEngine(engine)
-    , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
-    , mLights(engine->getLightSystem()) {
+Model::Model(Engine* engine
+             , flc::Program* program
+             , const std::string& shapePath
+             , flc::Texture2D* diffuseMap
+             , flc::Texture2D* normalMap
+             , flc::Texture2D* specularMap
+             , const Material& material)
+  : Programmable(program)
+  , mEngine(engine)
+  , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+  , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   reloadModel(shapePath
@@ -214,7 +214,7 @@ Model::~Model() {
 
 void Model::reloadModel(const std::string& path) {
   unloadNodes();
-  const auto* scene = mEngine->getModelFromFile(path);
+  const auto* scene = mEngine->getScene(path);
   if (!scene) {
     fLogF("Model: %s could not be read", path.c_str());
   }
@@ -231,7 +231,7 @@ void Model::reloadModel(
   , flc::Texture2D* specular
   , const Material& material) {
   unloadNodes();
-  const auto* scene = mEngine->getModelFromFile(path);
+  const auto* scene = mEngine->getScene(path);
   if (!scene) {
     fLogF("Model: %s could not be read", path.c_str());
     return;
@@ -262,7 +262,7 @@ inline void Model::unloadNodes() {
   mMeshes.clear();
 }
 
-inline void Model::loadNodes(aiNode *node, const ModelLoader::Scene* scene, Entity* entity) {
+inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene* scene, Entity* entity) {
 
   /* Set this node transformations */
   loadNodeTransformations(node, entity);
@@ -275,9 +275,11 @@ inline void Model::loadNodes(aiNode *node, const ModelLoader::Scene* scene, Enti
     }
 
     const auto material = scene->mMaterials[mesh->mMaterialIndex];
+    const ModelLoader::ShapeDataType shapeData {};
 
     entity->attach(
       loadMesh(mesh
+        , &shapeData
         , ModelLoader::getMaterial(*material)
         , mEngine->storeTexture(getMeshTextureName(aiTextureType_DIFFUSE, material))
         , mEngine->storeTexture(getMeshTextureName(aiTextureType_NORMALS, material))
@@ -293,20 +295,22 @@ inline void Model::loadNodes(aiNode *node, const ModelLoader::Scene* scene, Enti
   }
 }
 
-inline void Model::loadNodes(aiNode *node,
-    const ModelLoader::Scene* scene,
-    Entity* entity,
-    flc::Texture2D* diffuseMap,
-    flc::Texture2D* normalMap,
-    flc::Texture2D* specularMap,
-    const Material& material) {
+inline void Model::loadNodes(
+  const ModelLoader::Node* node
+  , const ModelLoader::Scene* scene
+  , Entity* entity
+  , flc::Texture2D* diffuseMap
+  , flc::Texture2D* normalMap
+  , flc::Texture2D* specularMap
+  , const Material& material) {
 
   /* Set this node transformations */
   loadNodeTransformations(node, entity);
 
   for (GLuint i = 0; i < node->mNumMeshes; ++i) {
     const auto* mesh = scene->mMeshes[node->mMeshes[i]];
-    entity->attach(loadMesh(mesh, material, diffuseMap, normalMap, specularMap, mEngine));
+    const ModelLoader::ShapeDataType data {};
+    entity->attach(loadMesh(mesh, &data, material, diffuseMap, normalMap, specularMap, mEngine));
   }
 
   /* Evaluate children */
@@ -324,22 +328,23 @@ std::string Model::getMeshTextureName(aiTextureType type, const aiMaterial* mat)
          : "128_128_128.color";
 }
 
-inline void Model::loadNodeTransformations(ModelLoader::Node* node, Entity* entity) {
+inline void Model::loadNodeTransformations(const ModelLoader::Node* node, Entity* entity) {
   ModelLoader::assignTransformation(node, entity);
 }
 
-pu<Mesh> Model::loadMesh(const ModelLoader::ShapeType* shape,
-    const Material& material,
-    flc::Texture2D* diffuseMap,
-    flc::Texture2D* normalMap,
-    flc::Texture2D* specularMap,
-    Engine* engine) {
+pu<Mesh> Model::loadMesh(
+  const ModelLoader::ShapeType* shape
+  , const ModelLoader::ShapeDataType* data
+  , const Material& material
+  , flc::Texture2D* diffuseMap
+  , flc::Texture2D* normalMap
+  , flc::Texture2D* specularMap
+  , Engine* engine) {
 
-  const ModelLoader::ShapeDataType shapeData {};
   ProgramLoader loader(engine);
   auto vao = new flc::VertexArray();
   auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
-  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, &shapeData, mAnimator.get());
+  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, data, mAnimator.get());
   auto mesh = std::make_unique<Mesh>(engine,
                                 material,
                                 diffuseMap,
@@ -451,22 +456,16 @@ puMesh Model::loadMesh(const tinyobj::shape_t& shape,
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 void Model::draw(ICamera &camera) {
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   evaluateAnimations();
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
   drawWithEffects(camera);
 }
 
 void Model::drawPBRP(ICamera &camera) {
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   if (mAnimator) {
     //todo for PBRP shadows must be updated elsewhere
     mAnimator->updateBonesBuffer();
     mAnimator->updateBonesUniform(mUniformLocationCacheBones);
   }
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
   mLights.pushLightUniforms(mProgram);
   mLights.bindShadowmaps();
 
@@ -474,9 +473,7 @@ void Model::drawPBRP(ICamera &camera) {
 }
 
 void Model::drawDR(ICamera &camera) {
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   evaluateAnimations();
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
   drawWithEffectsDR(camera);
 }
 
@@ -486,13 +483,11 @@ void Model::log() const {
 
 inline void Model::initShadowing(Engine* engine) {
   ProgramLoader loader(engine);
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   if (mAnimator) {
     mProgramShadow = loader.getProgram(EProgram::shadowWithAnimation);
     mProgramShadowColor = loader.getProgram(EProgram::shadowColorCodedWithAnimation);
     return;
   }
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
   mProgramShadow = loader.getProgram(EProgram::shadow);
   mProgramShadowColor = loader.getProgram(EProgram::shadowColorCoded);
 }

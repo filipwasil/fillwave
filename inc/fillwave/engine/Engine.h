@@ -135,18 +135,16 @@ class Engine {
   /* Store lights */
   flf::LightSpot* storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable *followed = nullptr);
   flf::LightPoint* storeLightPoint(glm::vec3 position, glm::vec4 color, flf::Moveable *followed = nullptr);
-  flf::LightDirectional* storeLightDirectional(glm::vec3 position,
-    glm::quat rotation,
-    glm::vec4 color,
-    flf::Moveable* followed = nullptr);
+  flf::LightDirectional* storeLightDirectional(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* m = nullptr);
 
   /* Store text */
-  ps<flf::Text> storeText(const std::string &content,
-    const std::string &fontName,
-    glm::vec2 position,
-    GLfloat scale = 1.0f,
-    glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
-    ETextEffect effect = ETextEffect::none);
+  ps<flf::Text> storeText(
+    const std::string &text
+    , const std::string &font
+    , glm::vec2 pos
+    , GLfloat scale = 1.0f
+    , glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)
+    , ETextEffect effect = ETextEffect::none);
 
   /* Store sampler */
   flc::Sampler* storeSO(GLint textureUnit);
@@ -173,8 +171,13 @@ class Engine {
   void removeBufferBasic(flc::VertexArray* vao);
   void removeBufferText(flc::VertexArray* vao);
 
-  /* Pick */
-  void pick(GLuint x, GLuint y);
+  /* Screenshot */
+  void captureFramebufferToFile(const std::string &name);
+  void captureFramebufferToBuffer(GLubyte *buf, GLint *sizeInBytes, GLuint format = GL_RGBA, GLint bytesPerPixel = 4);
+
+  /* Systems */
+  flf::LightSystem& getLightSystem() const;
+  flf::TextureSystem& getTextureSystem() const;
 
   /* Screen */
   glm::ivec2 getScreenSize() const;
@@ -183,18 +186,11 @@ class Engine {
   /* Log */
   void log();
 
-  /* Screenshot */
-  void captureFramebufferToFile(const std::string &name);
-  void captureFramebufferToBuffer(GLubyte *buf, GLint *sizeInBytes, GLuint format = GL_RGBA, GLint bytesPerPixel = 4);
-
   /* Post processing */
   void addPostProcess(const std::string &fragmentShaderPath, GLfloat lifeTime = flf::FILLWAVE_ENDLESS);
-
+  const ModelLoader::Scene* getScene(const std::string& path);
   void reload();
 
-  /* Systems */
-  flf::LightSystem& getLightSystem() const;
-  flf::TextureSystem& getTextureSystem() const;
 
   /* Screen */
   GLuint mWindowWidth;
@@ -335,13 +331,9 @@ class Engine {
   flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const flf::vec<GLuint> &data);
   flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, GLuint elements);
 
-
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
- public:
-  const aiScene* getModelFromFile(const std::string& path);
-#endif
-
  private:
+  /* Pick */
+  void pick(GLuint x, GLuint y);
   glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
   void reloadPickingBuffer();
 

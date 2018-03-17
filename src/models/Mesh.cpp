@@ -19,9 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 #include <fillwave/models/animations/Animator.h>
-#endif
 
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/models/Mesh.h>
@@ -50,9 +48,7 @@ Mesh::Mesh(Engine* engine,
     LightSystem& lights,
     flc::VertexBufferBasic* vbo,
     flc::IndexBuffer* ibo,
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
     Animator* animator,
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
     GLenum renderMode,
     flc::VertexArray *vao)
     : IReloadable(engine, vao)
@@ -70,9 +66,7 @@ Mesh::Mesh(Engine* engine,
     , mIBO(ibo)
     , mVBO(vbo)
     , mLights(lights)
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
     , mAnimator(animator)
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
     , mOcclusionQuery()
 #ifdef FILLWAVE_GLES_3_0
 #else

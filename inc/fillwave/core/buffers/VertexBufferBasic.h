@@ -60,19 +60,12 @@ struct FaceBasic {
 
 class VertexBufferBasic : public TVertexBuffer<VertexBasic> {
 public:
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
   VertexBufferBasic(
     const ModelLoader::ShapeType* shape
     , const ModelLoader::ShapeDataType* data
     , flf::Animator *animator = nullptr
     , GLuint dataStoreModification = GL_STATIC_DRAW);
 
-#else
-  VertexBufferBasic(const tinyobj::shape_t& shape,
-              const tinyobj::attrib_t& attributes,
-              GLuint dataStoreModification = GL_STATIC_DRAW);
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
   VertexBufferBasic(flf::TerrainConstructor* constructor,
       GLint chunkDensity,

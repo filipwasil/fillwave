@@ -77,6 +77,11 @@ void TModelLoader<ModelLoaderTraitsAssimp>::getPhysicsBuffer(const char* assetPa
 }
 
 template<>
+const TModelLoader<ModelLoaderTraitsAssimp>::Scene* TModelLoader<ModelLoaderTraitsAssimp>::getScene(const char* path) {
+  return mImporter->ReadFile(path, mFlags);
+}
+
+template<>
 Material TModelLoader<ModelLoaderTraitsAssimp>::getMaterial(const MaterialType& mat) {
   Material material;
   aiColor4D color;
@@ -152,7 +157,7 @@ flw::flc::VertexBufferBasic*
         vertex.mNormal[2] = 0;
       }
 
-      if (shape->HasTextureCoords(0)) { //xxx what is this ?
+      if (shape->HasTextureCoords(0)) {
         vertex.mTextureUV[0] = shape->mTextureCoords[0][i].x;
         vertex.mTextureUV[1] = shape->mTextureCoords[0][i].y;
       } else {
@@ -201,7 +206,7 @@ flw::flc::VertexBufferBasic*
 }
 
 template<>
-void TModelLoader<ModelLoaderTraitsAssimp>::assignTransformation (Node* node, Entity* entity) {
+void TModelLoader<ModelLoaderTraitsAssimp>::assignTransformation (const Node* node, Entity* entity) {
   aiVector3t<float> scale;
   aiQuaterniont<float> rot;
   aiVector3t<float> pos;

@@ -23,12 +23,7 @@
 
 #include <fillwave/Config.h>
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-#include <assimp/Importer.hpp> // C++ importer interface
-#include <assimp/scene.h> // Output data structure
-#include <assimp/postprocess.h> // Post processing flags
-#include <assimp/material.h>
+#if defined (FILLWAVE_MODEL_LOADER_ASSIMP)
 
 #include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
 
@@ -39,8 +34,6 @@ namespace flf {
 } /* flw */
 
 #elif defined(FILLWAVE_MODEL_LOADER_TINY_OBJ_LOADER)
-
-#include <tinyobjloader/tiny_obj_loader.h>
 
 #include <fillwave/loaders/modelLoaderTraits/ModelLoaderTinyObjLoader.h>
 

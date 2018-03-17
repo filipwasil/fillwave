@@ -21,16 +21,14 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <assimp/Importer.hpp> // C++ importer interface
-#include <assimp/scene.h> // Output data structure
-#include <assimp/postprocess.h> // Post processing flags
-#include <assimp/material.h>
+#include <tinyobjloader/tiny_obj_loader.h>
 
 namespace flw {
 namespace flf {
 
 struct ModelLoaderTraitsTinyObjLoader {
  public:
+  using Node = void;
   using Scene = void;
   using ShapeType = tinyobj::shape_t;
   using ShapeDataType = tinyobj::attrib_t;

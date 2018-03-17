@@ -85,8 +85,6 @@ public:
 
   void drawDR(ICamera &camera) override;
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
   /* Animation */
   void performAnimation(GLfloat timeElapsed_us);
 
@@ -96,17 +94,13 @@ public:
 
   pp<Mesh> getMesh(size_t id);
 
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
   void updateRenderer(IRenderer &renderer) override;
 
   void log() const override;
 
 protected:
   Engine* mEngine;
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
   std::unique_ptr<Animator> mAnimator;
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
   GLint mActiveAnimation;
 
   LightSystem& mLights;
@@ -122,8 +116,6 @@ private:
 
   void initShadowing(Engine *engine);
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
   /* Animation */
   bool isAnimated() const override;
 
@@ -133,38 +125,29 @@ private:
 
   void unloadNodes();
 
-  void loadNodeTransformations(aiNode* node, Entity* entity);
+  void loadNodeTransformations(const ModelLoader::Node* node, Entity* entity);
 
-  void loadNodes(aiNode* node, const ModelLoader::Scene* scene, Entity* entity);
+  void loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene* scene, Entity* entity);
 
-  void loadNodes(aiNode* node,
-      const ModelLoader::Scene* scene,
-      Entity* entity,
-      flc::Texture2D* diffuse,
-      flc::Texture2D* normal,
-      flc::Texture2D* specular,
-      const Material &material = Material());
+  void loadNodes(
+    const ModelLoader::Node* node
+    , const ModelLoader::Scene* scene
+    , Entity* entity
+    , flc::Texture2D* diffuse
+    , flc::Texture2D* normal
+    , flc::Texture2D* specular
+    , const Material &material = Material());
 
-  pu<Mesh> loadMesh(const ModelLoader::ShapeType* shape,
-      const Material& material,
-      flc::Texture2D* diffuse,
-      flc::Texture2D* normal,
-      flc::Texture2D* specular,
-      Engine *engine);
+  pu<Mesh> loadMesh(
+    const ModelLoader::ShapeType* shape
+    , const ModelLoader::ShapeDataType* data
+    , const Material& material
+    , flc::Texture2D* diffuse
+    , flc::Texture2D* normal
+    , flc::Texture2D* specular
+    , Engine *engine);
 
   std::string getMeshTextureName(aiTextureType type, const ModelLoader::MaterialType* m);
-
-#else /* FILLWAVE_MODEL_LOADER_ASSIMP */
-  pu<Mesh> loadMesh(tinyobj::shape_t& shape,
-             tinyobj::attrib_t& attrib,
-             const Material& material,
-             flc::Texture2D* diffuseMap,
-             flc::Texture2D* normalMap,
-             flc::Texture2D* specularMap,
-             Engine* engine);
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
 };
 
 } /* flf */

@@ -72,9 +72,7 @@ MeshTerrain::MeshTerrain(Engine *engine,
                                           engine->getLightSystem(),
                                           vbo,
                                           ibo,
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
                                           nullptr,
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
                                           GL_TRIANGLES,
                                           vao);
 
@@ -127,9 +125,7 @@ MeshTerrain::MeshTerrain(Engine *engine,
                                           engine->getLightSystem(),
                                           vbo,
                                           ibo,
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
                                           nullptr,
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
                                           GL_TRIANGLES,
                                           vao);
 
