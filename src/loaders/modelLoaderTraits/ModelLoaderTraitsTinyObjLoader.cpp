@@ -35,6 +35,11 @@ TModelLoader<ModelLoaderTraitsTinyObjLoader>::~TModelLoader() {
   // nothing
 }
 
+template<>
+void TModelLoader<ModelLoaderTraitsTinyObjLoader>::getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer) {
+  // nothing
+}
+
 template
 class TModelLoader<ModelLoaderTraitsTinyObjLoader>;
 

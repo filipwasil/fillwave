@@ -22,6 +22,8 @@
  */
 
 #include <memory>
+#include <vector>
+#include <array>
 
 namespace flw {
 namespace flf {
@@ -30,9 +32,9 @@ namespace flf {
  * \brief Physical mesh data.
  */
 struct PhysicsMeshBuffer {
-  GLint mNumFaces;
-  std::vector<glm::vec3> mVertices;
-  std::vector<GLint> mIndices;
+  unsigned int mNumFaces;
+  std::vector<std::array<float, 3>> mVertices;
+  std::vector<unsigned int> mIndices;
 };
 
 } /* flf */

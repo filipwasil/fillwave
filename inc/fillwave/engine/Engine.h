@@ -36,10 +36,6 @@
 #include <fillwave/actions/Event.h>
 
 /* Common */
-#include <fillwave/common/PhysicsMeshBuffer.h>
-
-#include <fillwave/loaders/FileLoader.h>
-
 
 #include <fillwave/actions/EventHandler.h>
 #include <fillwave/common/Macros.h>
@@ -107,7 +103,7 @@ class Engine {
   void detach(flf::Entity*);
 
   /* Assets */
-  pu<flf::PhysicsMeshBuffer> getPhysicalMeshBuffer(const std::string &shapePath);
+  void getPhysicalMeshBuffer(const std::string& path, flf::PhysicsMeshBuffer& buffer);
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
@@ -122,17 +118,6 @@ class Engine {
   GLuint getFramesPassed();
   GLfloat getStartupAnimationTime() const;
 
-  /**
-   * Store shaders.
-   *
-   * T can be:
-   *
-   * GL_VERTEX_SHADER
-   * GL_TESS_CONTROL_SHADER
-   * GL_TESS_EVALUATION_SHADER
-   * GL_GEOMETRY_SHADER
-   * GL_FRAGMENT_SHADER
-   */
   template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath);
   template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath, const std::string &shaderSource);
   flc::Program* storeProgram(const std::string &name, const flf::vec<flc::Shader *> &shaders, bool isSkipLinking = false);

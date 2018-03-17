@@ -31,9 +31,6 @@
 #include <fillwave/loaders/AndroidLoader.h>
 #include <fillwave/loaders/ProgramLoader.h>
 
-/* Common */
-#include <fillwave/common/PhysicsMeshBuffer.h>
-
 /* Models */
 #include <fillwave/models/builders/BuilderModelManual.h>
 #include <fillwave/models/builders/BuilderModelExternalMaps.h>

@@ -22,6 +22,7 @@
  */
 
 #include <fillwave/loaders/modelLoaderTraits/ModelLoaderDefault.h>
+#include <fillwave/models/shapes/PhysicsMeshBuffer.h>
 
 namespace flw {
 namespace flf {
@@ -35,6 +36,7 @@ class TModelLoader final {
   using Flags = typename ModelLoaderTraits::Flags;
   TModelLoader();
   ~TModelLoader();
+  void getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer);
   Importer* mImporter;
   Flags mFlags;
 };

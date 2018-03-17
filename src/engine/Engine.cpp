@@ -453,39 +453,8 @@ flf::TextureSystem &Engine::getTextureSystem() const {
   return* mTextures.get();
 }
 
-pu<flf::PhysicsMeshBuffer> Engine::getPhysicalMeshBuffer(const string& shapePath) {
-  auto buffer = make_pu<flf::PhysicsMeshBuffer>();
-
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  auto scene = mModelLoader.mImporter->ReadFile(
-    (mFileLoader.getRootPath() + shapePath).c_str()
-    , aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);
-
-  if (nullptr == scene) {
-    fLogF("Scene: ", shapePath, " could not be imported.");
-    return buffer;
-  }
-
-  if (scene->mNumMeshes != 1) {
-    fLogF("Scene: ", shapePath, " can only have one mesh for physics buffer purposes");
-    return buffer;
-  }
-
-  const aiMesh* shape = scene->mMeshes[0];
-  buffer->mNumFaces = shape->mNumFaces;
-  buffer->mVertices.reserve(shape->mNumVertices);
-  buffer->mIndices.reserve(shape->mNumFaces*  3);
-  for (GLuint j = 0; j < shape->mNumFaces; ++j) {
-    buffer->mIndices.push_back(shape->mFaces[j].mIndices[0]);
-    buffer->mIndices.push_back(shape->mFaces[j].mIndices[1]);
-    buffer->mIndices.push_back(shape->mFaces[j].mIndices[2]);
-  }
-  for (GLuint z = 0; z < shape->mNumVertices; ++z) {
-    buffer->mVertices.push_back(assimpToGlmVec3(shape->mVertices[z]));
-  }
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP  */
-
-  return buffer;
+void Engine::getPhysicalMeshBuffer(const string& shapePath, flf::PhysicsMeshBuffer& buffer) {
+  mModelLoader.getPhysicsBuffer((mFileLoader.getRootPath() + shapePath).c_str(), buffer);
 }
 
 void Engine::addPostProcess(const string& fragmentShaderPath, GLfloat lifeTime) {

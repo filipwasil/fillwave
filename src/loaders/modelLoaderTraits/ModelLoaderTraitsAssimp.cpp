@@ -37,6 +37,34 @@ TModelLoader<ModelLoaderTraitsAssimp>::~TModelLoader() {
   delete mImporter;
 }
 
+template<>
+void TModelLoader<ModelLoaderTraitsAssimp>::getPhysicsBuffer(const char* assetPath, flf::PhysicsMeshBuffer& buffer) {
+
+  auto scene = mImporter->ReadFile(assetPath, mFlags);
+
+  if (nullptr == scene) {
+    return;
+  }
+
+  if (scene->mNumMeshes != 1) {
+    return;
+  }
+
+  const aiMesh* shape = scene->mMeshes[0];
+  buffer.mNumFaces = shape->mNumFaces;
+  buffer.mVertices.reserve(shape->mNumVertices);
+  buffer.mIndices.reserve(shape->mNumFaces*  3);
+  for (GLuint j = 0; j < shape->mNumFaces; ++j) {
+    buffer.mIndices.push_back(shape->mFaces[j].mIndices[0]);
+    buffer.mIndices.push_back(shape->mFaces[j].mIndices[1]);
+    buffer.mIndices.push_back(shape->mFaces[j].mIndices[2]);
+  }
+  for (GLuint z = 0; z < shape->mNumVertices; ++z) {
+    const auto& v = shape->mVertices[z];
+    buffer.mVertices[z] = { { v.x, v.y, v.z } };
+  }
+}
+
 template
 class TModelLoader<ModelLoaderTraitsAssimp>;
 
