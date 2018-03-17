@@ -21,11 +21,11 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "fillwave/models/base/Programmable.h"
-#include "fillwave/models/Mesh.h"
-#include "fillwave/models/animations/Animator.h"
-#include "fillwave/Assets.h"
-#include "fillwave/common/pointers/PointerProtected.h"
+#include <fillwave/models/base/Programmable.h>
+#include <fillwave/models/Mesh.h>
+#include <fillwave/models/animations/Animator.h>
+#include <fillwave/loaders/ModelLoaderTraits.h>
+#include <fillwave/common/pointers/PointerProtected.h>
 
 namespace flw {
 class Engine;
@@ -145,8 +145,8 @@ private:
       flc::Texture2D* specular,
       const Material &material = Material());
 
-  pu<Mesh> loadMesh(const aiMesh& shape,
-      const Material &material,
+  pu<Mesh> loadMesh(const aiMesh* shape,
+      const Material& material,
       flc::Texture2D* diffuse,
       flc::Texture2D* normal,
       flc::Texture2D* specular,

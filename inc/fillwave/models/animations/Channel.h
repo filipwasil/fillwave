@@ -24,7 +24,7 @@
 #include <fillwave/models/animations/Key.h>
 
 #include <fillwave/Math.h>
-#include <fillwave/Assets.h>
+#include <fillwave/loaders/ModelLoaderTraits.h>
 
 #include <vector>
 #include <string>

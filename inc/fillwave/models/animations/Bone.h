@@ -22,7 +22,7 @@
  */
 
 #include <fillwave/models/animations/Hinge.h>
-#include <fillwave/Assets.h>
+#include <fillwave/loaders/ModelLoaderTraits.h>
 
 namespace flw {
 namespace flf {

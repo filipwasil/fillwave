@@ -22,7 +22,7 @@
  */
 
 #include <fillwave/models/terrain/TerrainConstructor.h>
-#include <fillwave/Assets.h>
+#include <fillwave/loaders/ModelLoaderTraits.h>
 #include <fillwave/core/buffers/TVertexBuffer.h>
 
 namespace flw {
@@ -62,13 +62,13 @@ class VertexBufferBasic : public TVertexBuffer<VertexBasic> {
 public:
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-  VertexBufferBasic(const aiMesh& shape,
+  VertexBufferBasic(const aiMesh* shape,
       flf::Animator *animator = nullptr,
       GLuint dataStoreModification = GL_STATIC_DRAW);
 
 #else
-  VertexBufferBasic(tinyobj::shape_t& shape,
-              tinyobj::attrib_t& attributes,
+  VertexBufferBasic(const tinyobj::shape_t& shape,
+              const tinyobj::attrib_t& attributes,
               GLuint dataStoreModification = GL_STATIC_DRAW);
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 

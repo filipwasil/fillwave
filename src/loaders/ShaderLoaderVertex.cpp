@@ -20,7 +20,7 @@
  */
 
 #include <fillwave/loaders/ShaderLoaderVertex.h>
-#include <fillwave/Assets.h>
+#include <fillwave/loaders/ModelLoaderTraits.h>
 #include <fillwave/common/Strings.h>
 
 #ifndef FILLWAVE_MAX_BONES_DEPENDENCIES

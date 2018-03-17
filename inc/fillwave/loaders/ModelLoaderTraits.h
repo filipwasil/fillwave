@@ -21,23 +21,48 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <fillwave/Config.h>
+
+#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+
+#include <assimp/Importer.hpp> // C++ importer interface
+#include <assimp/scene.h> // Output data structure
+#include <assimp/postprocess.h> // Post processing flags
+#include <assimp/material.h>
+
+#include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
+
+namespace flw {
+namespace flf {
+  using ModelLoaderTraits = ModelLoaderTraitsAssimp;
+} /* flf */
+} /* flw */
+
+#elif defined(FILLWAVE_MODEL_LOADER_TINY_OBJ_LOADER)
+
+#include <tinyobjloader/tiny_obj_loader.h>
+
+#include <fillwave/loaders/modelLoaderTraits/ModelLoaderTinyObjLoader.h>
+
+namespace flw {
+namespace flf {
+  using ModelLoaderTraits = ModelLoaderTraitsTinyObjLoader;
+} /* flf */
+} /* flw */
+
+#else
+
 #include <fillwave/loaders/modelLoaderTraits/ModelLoaderDefault.h>
 
 namespace flw {
 namespace flf {
-
-template <class ModelLoaderTraits>
-class TModelLoader final {
- public:
-  using Shape = typename ModelLoaderTraits::Shape;
-  using String = typename ModelLoaderTraits::String;
-  using Importer = typename ModelLoaderTraits::Importer;
-  using Flags = typename ModelLoaderTraits::Flags;
-  TModelLoader();
-  ~TModelLoader();
-  Importer* mImporter;
-  Flags mFlags;
-};
-
+  using ModelLoaderTraits = ModelLoaderTraitsDefault;
 } /* flf */
 } /* flw */
+
+#endif
+
+constexpr int FILLWAVE_DO_NOT_ANIMATE = -1;
+constexpr int FILLWAVE_MAX_BONES = 45;
+constexpr int FILLWAVE_MAX_TEXTS = 512;
+#define FILLWAVE_MAX_BONES_DEPENDENCIES 4 // todo rewrite program factory

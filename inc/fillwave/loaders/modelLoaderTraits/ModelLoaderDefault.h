@@ -21,20 +21,16 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/Config.h>
+namespace flw {
+namespace flf {
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
+struct ModelLoaderTraitsDefault {
+ public:
+  using Shape = void*;
+  using String = void*;
+  using Importer = void*;
+  static constexpr unsigned int Flags = 0;
+};
 
-#include <assimp/Importer.hpp> // C++ importer interface
-#include <assimp/scene.h> // Output data structure
-#include <assimp/postprocess.h> // Post processing flags
-#include <assimp/material.h>
-
-#else
-#include <tinyobjloader/tiny_obj_loader.h>
-#endif
-
-constexpr int FILLWAVE_DO_NOT_ANIMATE = -1;
-constexpr int FILLWAVE_MAX_BONES = 45;
-constexpr int FILLWAVE_MAX_TEXTS = 512;
-#define FILLWAVE_MAX_BONES_DEPENDENCIES 4 // todo rewrite program factory
+} /* flf */
+} /* flw */

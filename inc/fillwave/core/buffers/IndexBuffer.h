@@ -22,7 +22,7 @@
  */
 
 #include <fillwave/core/buffers/IBuffer.h>
-#include <fillwave/Assets.h>
+#include <fillwave/loaders/ModelLoaderTraits.h>
 #include <vector>
 
 namespace flw {
@@ -41,7 +41,7 @@ public:
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-  IndexBuffer(const aiMesh& shape, GLuint dataStoreModification = GL_STATIC_DRAW);
+  IndexBuffer(const aiMesh* shape, GLuint dataStoreModification = GL_STATIC_DRAW);
 
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 

@@ -50,7 +50,6 @@
 
 #include <fillwave/loaders/FileLoader.h>
 #include <fillwave/loaders/TModelLoader.h>
-#include <fillwave/loaders/modelLoaders/ModelLoaderAssimp.h>
 
 #include <fillwave/management/CacheBuffer.h>
 #include <fillwave/management/CacheProgram.h>
@@ -226,7 +225,7 @@ class Engine {
   flf::FontLoader mFontLoader;
   flf::FileLoader mFileLoader;
   flf::ProgramLoader mProgramLoader;
-  flf::TModelLoader<flf::ModelLoaderTraitsAssimp> mModelLoader;
+  flf::TModelLoader<flf::ModelLoaderTraits> mModelLoader;
 
   /* Picking */
   flc::Texture2DRenderable* mPickingRenderableTexture;
@@ -350,8 +349,8 @@ class Engine {
   flc::VertexBufferPosition* storeBufferInternal(flc::VertexArray *vao, flf::vec<flc::VertexPosition> &data);
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray *vao, const aiMesh& shape, flf::Animator *animator);
-  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const aiMesh& shape);
+  flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray *vao, const aiMesh* shape, flf::Animator *animator);
+  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const aiMesh* shape);
 #else
   flc::VertexBufferBasic* storeBufferInternal(flc::VertexArray* vao, const tinyobj::shape_t& shape, tinyobj::attrib_t&
   attr);

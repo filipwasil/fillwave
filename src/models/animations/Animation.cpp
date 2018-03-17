@@ -25,7 +25,7 @@
 namespace flw {
 namespace flf {
 
-Animation::Animation(aiAnimation *assimpAnimation) {
+Animation::Animation(aiAnimation* assimpAnimation) {
   mName = assimpAnimation->mName.C_Str();
   mDuration = static_cast<float>(assimpAnimation->mDuration);
   mTicksPerSec = static_cast<float>(assimpAnimation->mTicksPerSecond);

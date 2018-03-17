@@ -25,7 +25,7 @@
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
 #include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
 #include <fillwave/loaders/TextureLoader.h>
-#include <fillwave/Assets.h>
+#include <fillwave/loaders/ModelLoaderTraits.h>
 #include <fillwave/management/base/TCache.h>
 
 namespace flw {

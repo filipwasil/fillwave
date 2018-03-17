@@ -21,22 +21,20 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/modelLoaderTraits/ModelLoaderDefault.h>
+#include <assimp/Importer.hpp> // C++ importer interface
+#include <assimp/scene.h> // Output data structure
+#include <assimp/postprocess.h> // Post processing flags
+#include <assimp/material.h>
 
 namespace flw {
 namespace flf {
 
-template <class ModelLoaderTraits>
-class TModelLoader final {
+struct ModelLoaderTraitsTinyObjLoader {
  public:
-  using Shape = typename ModelLoaderTraits::Shape;
-  using String = typename ModelLoaderTraits::String;
-  using Importer = typename ModelLoaderTraits::Importer;
-  using Flags = typename ModelLoaderTraits::Flags;
-  TModelLoader();
-  ~TModelLoader();
-  Importer* mImporter;
-  Flags mFlags;
+  using Shape = tinyobj::shape_t;
+  using String = const char*;
+  using Importer = void*;
+  using Flags = tinyobj::attrib_t;
 };
 
 } /* flf */

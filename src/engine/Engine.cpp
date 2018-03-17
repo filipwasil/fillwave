@@ -638,11 +638,11 @@ void Engine::removeBufferText(VertexArray* vao) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
 
-IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const aiMesh& shape) {
+IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape) {
   return mBuffers.mIndices.store(new IndexBuffer(shape), vao);
 }
 
-VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, const aiMesh& shape, flf::Animator* animator) {
+VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao, const aiMesh* shape, flf::Animator* animator) {
   return mBuffers.mVertices.store(new VertexBufferBasic(shape, animator), vao);
 }
 

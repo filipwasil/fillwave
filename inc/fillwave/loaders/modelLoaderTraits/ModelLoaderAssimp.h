@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,24 +21,21 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/TModelLoader.h>
-#include <fillwave/loaders/modelLoaders/ModelLoaderAssimp.h>
+#include <assimp/Importer.hpp> // C++ importer interface
+#include <assimp/scene.h> // Output data structure
+#include <assimp/postprocess.h> // Post processing flags
+#include <assimp/material.h>
 
 namespace flw {
 namespace flf {
 
-template<>
-TModelLoader<ModelLoaderTraitsAssimp>::TModelLoader() {
-  mImporter = new Assimp::Importer();
-}
-
-template<>
-TModelLoader<ModelLoaderTraitsAssimp>::~TModelLoader() {
-  delete mImporter;
-}
-
-template
-class TModelLoader<ModelLoaderTraitsAssimp>;
+struct ModelLoaderTraitsAssimp {
+ public:
+  using Shape = aiMesh;
+  using String = aiString;
+  using Importer = Assimp::Importer;
+  using Flags = unsigned int;
+};
 
 } /* flf */
 } /* flw */

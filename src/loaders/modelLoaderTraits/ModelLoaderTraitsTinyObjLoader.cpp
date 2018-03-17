@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -21,18 +19,24 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/Assets.h>
+#include <fillwave/loaders/TModelLoader.h>
+#include <fillwave/loaders/modelLoaderTraits/ModelLoaderTinyObjLoader.h>
 
 namespace flw {
 namespace flf {
 
-struct ModelLoaderTraitsAssimp {
- public:
-  using Shape = aiMesh;
-  using String = aiString;
-  using Importer = Assimp::Importer;
-  static constexpr unsigned int Flags = aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace;
-};
+template<>
+TModelLoader<ModelLoaderTraitsTinyObjLoader>::TModelLoader() {
+  // nothing
+}
+
+template<>
+TModelLoader<ModelLoaderTraitsTinyObjLoader>::~TModelLoader() {
+  // nothing
+}
+
+template
+class TModelLoader<ModelLoaderTraitsTinyObjLoader>;
 
 } /* flf */
 } /* flw */
