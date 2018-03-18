@@ -23,6 +23,8 @@
 
 #include <fillwave/core/pipeline/Uniform.h>
 
+#include <fillwave/loaders/ModelLoader.h>
+
 #include <fillwave/Log.h>
 
 FLOGINIT_DEFAULT()

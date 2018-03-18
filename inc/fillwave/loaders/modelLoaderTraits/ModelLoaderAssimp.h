@@ -26,10 +26,10 @@
 #include <assimp/postprocess.h> // Post processing flags
 #include <assimp/material.h>
 
+#include <fillwave/models/animations/AnimatorAssimp.h>
+
 namespace flw {
 namespace flf {
-
-class AnimatorAssimp;
 
 struct ModelLoaderTraitsAssimp {
   using Node = aiNode;
@@ -42,6 +42,7 @@ struct ModelLoaderTraitsAssimp {
   using Importer = Assimp::Importer;
   using Animator = AnimatorAssimp;
   using Flags = unsigned int;
+
   static constexpr int COUNT_BONES_DEFINED = 45;
   static constexpr int COUNT_BONES_USED = 4;
   static constexpr int FLAG_ANIMATION_OFF = -1;

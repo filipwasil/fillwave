@@ -26,15 +26,13 @@
 #include <fillwave/models/animations/Key.h>
 #include <fillwave/models/animations/Bone.h>
 
-#include <fillwave/loaders/ModelLoader.h>
-
 #include <vector>
 #include <string>
 
+#include <assimp/scene.h>
+
 namespace flw {
 namespace flf {
-
-class AnimatorAssimp;
 
 /*! \class AnimatorAssimp
  * \brief Manager to handle Bone objects in animation.
@@ -43,7 +41,7 @@ class AnimatorAssimp;
 class AnimatorAssimp final {
 
 public:
-  AnimatorAssimp(const ModelLoader::Scene* scene);
+  AnimatorAssimp(const aiScene* scene);
   ~AnimatorAssimp();
 
  public:

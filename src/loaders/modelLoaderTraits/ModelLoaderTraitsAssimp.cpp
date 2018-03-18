@@ -22,11 +22,10 @@
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/core/buffers/IndexBuffer.h>
 
-#include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
-
-#include <fillwave/models/animations/AnimatorAssimp.h>
 #include <fillwave/models/shapes/PhysicsMeshBuffer.h>
 #include <fillwave/models/base/Material.h>
+
+#include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
 
 #include <fillwave/Log.h>
 
@@ -175,7 +174,7 @@ flw::flc::VertexBufferBasic*
         vertex.mNormalTangentMap[1] = 0;
         vertex.mNormalTangentMap[2] = 0;
       }
-      for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
+      for (int k = 0; k < TModelLoader::COUNT_BONES_USED; k++) {
         vertex.mBoneID[k] = 0;
         vertex.mBoneWeight[k] = 0.0f;
       }
@@ -193,12 +192,12 @@ flw::flc::VertexBufferBasic*
       for (GLuint j = 0; j < shape->mBones[i]->mNumWeights; j++) {
         GLuint VertexID = shape->mBones[i]->mWeights[j].mVertexId;
         float Weight = shape->mBones[i]->mWeights[j].mWeight;
-        if (boneIdForEachVertex[VertexID] < FILLWAVE_MAX_BONES_DEPENDENCIES) {
+        if (boneIdForEachVertex[VertexID] < TModelLoader::COUNT_BONES_USED) {
           vertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = a->getBoneId(shape->mBones[i]->mName.C_Str());
           vertices[VertexID].mBoneWeight[boneIdForEachVertex[VertexID]] = Weight;
           boneIdForEachVertex[VertexID]++;
         } else {
-          fLogF("Crater can handle maximum %d bone dependencies.", FILLWAVE_MAX_BONES_DEPENDENCIES);
+          fLogF("Crater can handle maximum %d bone dependencies.", TModelLoader::COUNT_BONES_USED);
         }
       }
     }

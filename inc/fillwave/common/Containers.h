@@ -30,10 +30,7 @@ namespace flw {
 namespace flf {
 
 template <class T>
-using Allocator = std::allocator<T>;
-
-template <class T>
-using vec = std::vector<T, Allocator<T>>;
+using vec = std::vector<T, std::allocator<T>>;
 
 template <class T>
 using vecStack = std::vector<T, AllocatorStack<T>>;

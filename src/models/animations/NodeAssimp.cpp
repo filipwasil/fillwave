@@ -30,7 +30,7 @@ AnimatorAssimp::NodeAssimp::NodeAssimp(aiNode *node)
   // nothing
 }
 
-void AnimatorAssimp::NodeAssimp::update(float timeElapsed_s, glm::mat4 parent, ModelLoader::Animator* animator, GLint
+void AnimatorAssimp::NodeAssimp::update(float timeElapsed_s, glm::mat4 parent, AnimatorAssimp* animator, GLint
 activeAnim) {
   std::string nodeName(mName);
   Animation *a = animator->getAnimation(activeAnim);

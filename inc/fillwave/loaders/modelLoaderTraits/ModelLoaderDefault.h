@@ -36,9 +36,9 @@ struct ModelLoaderTraitsDefault {
   using Animator = unsigned int;
   using Flags = unsigned int;
 
-  static constexpr int COUNT_BONES_DEFINED = 0;
-  static constexpr int COUNT_BONES_USED = 0;
-  static constexpr int FLAG_ANIMATION_OFF = 0;
+  static constexpr int COUNT_BONES_DEFINED = 1;
+  static constexpr int COUNT_BONES_USED = 1;
+  static constexpr int FLAG_ANIMATION_OFF = -1;
 };
 
 } /* flf */

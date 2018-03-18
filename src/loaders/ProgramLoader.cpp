@@ -70,115 +70,14 @@ const std::string gGLVSAttributes = "layout(location = 0) " + gGLVaryingIn +
                                     " vec3 aNormalTangent;                   \n"
                                         "layout(location = 4) " + gGLVaryingIn +
                                     " vec2 aTextureCoordinate;               \n"
-#if FILLWAVE_MAX_BONES_DEPENDENCIES == 8
-"layout(location = 5) " + gGLVaryingIn +
-" ivec4 aBoneID;                         \n"
-"layout(location = 6) " + gGLVaryingIn +
-" ivec4 aBoneID2;                        \n"
-"layout(location = 7) " + gGLVaryingIn +
-" vec4 aWeight;                          \n"
-"layout(location = 8) " + gGLVaryingIn +
-" vec4 aWeight2;                         \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 7
-"layout(location = 5) " + gGLVaryingIn +
-" ivec4 aBoneID;                         \n"
-"layout(location = 6) " + gGLVaryingIn +
-" ivec3 aBoneID2;                        \n"
-"layout(location = 7) " + gGLVaryingIn +
-" vec4 aWeight;                          \n"
-"layout(location = 8) " + gGLVaryingIn +
-" vec3 aWeight2;                         \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 6
-"layout(location = 5) " + gGLVaryingIn +
-" ivec4 aBoneID;                         \n"
-"layout(location = 6) " + gGLVaryingIn +
-" ivec2 aBoneID2;                        \n"
-"layout(location = 7) " + gGLVaryingIn +
-" vec4 aWeight;                          \n"
-"layout(location = 8) " + gGLVaryingIn +
-" vec2 aWeight2;                         \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 5
-"layout(location = 5) " + gGLVaryingIn +
-" ivec4 aBoneID;                         \n"
-"layout(location = 6) " + gGLVaryingIn +
-" int aBoneID2;                          \n"
-"layout(location = 7) " + gGLVaryingIn +
-" vec4 aWeight;                          \n"
-"layout(location = 8) " + gGLVaryingIn +
-" float aWeight2;                        \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 4
     "layout(location = 5) " + gGLVaryingIn + " ivec4 aBoneID;                         \n"
                                         "layout(location = 6) " + gGLVaryingIn +
                                     " vec4 aWeight;                          \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 3
-"layout(location = 5) " + gGLVaryingIn +
-" ivec3 aBoneID;                         \n"
-"layout(location = 6) " + gGLVaryingIn +
-" vec3 aWeight;                          \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 2
-"layout(location = 5) " + gGLVaryingIn +
-" ivec2 aBoneID;                         \n"
-"layout(location = 6) " + gGLVaryingIn +
-" vec2 aWeight;                          \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 1
-"layout(location = 5) " + gGLVaryingIn +
-" int aBoneID;                           \n"
-"layout(location = 6) " + gGLVaryingIn +
-" float aWeight;                         \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 0
-#else
-#error "Too many bone dependencies"
-#endif
-
 const std::string gGLVSBonesTransformation =
-#if FILLWAVE_MAX_BONES_DEPENDENCIES == 8
-"      uBones[aBoneID.x] * aWeight.x +                          \n"
-"      uBones[aBoneID.y] * aWeight.y +                          \n"
-"      uBones[aBoneID.z] * aWeight.z +                          \n"
-"      uBones[aBoneID.w] * aWeight.w +                          \n"
-"      uBones[aBoneID2.x] * aWeight2.x +                        \n"
-"      uBones[aBoneID2.y] * aWeight2.y +                        \n"
-"      uBones[aBoneID2.z] * aWeight2.z +                        \n"
-"      uBones[aBoneID2.w] * aWeight2.w                          \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 7
-"      uBones[aBoneID.x] * aWeight.x +                          \n"
-"      uBones[aBoneID.y] * aWeight.y +                          \n"
-"      uBones[aBoneID.z] * aWeight.z +                          \n"
-"      uBones[aBoneID.w] * aWeight.w +                          \n"
-"      uBones[aBoneID2.x] * aWeight2.x +                        \n"
-"      uBones[aBoneID2.y] * aWeight2.y +                        \n"
-"      uBones[aBoneID2.z] * aWeight2.z                          \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 6
-"      uBones[aBoneID.x] * aWeight.x +                          \n"
-"      uBones[aBoneID.y] * aWeight.y +                          \n"
-"      uBones[aBoneID.z] * aWeight.z +                          \n"
-"      uBones[aBoneID.w] * aWeight.w +                          \n"
-"      uBones[aBoneID2.x] * aWeight2.x +                        \n"
-"      uBones[aBoneID2.y] * aWeight2.y                          \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 5
-"      uBones[aBoneID.x] * aWeight.x +                          \n"
-"      uBones[aBoneID.y] * aWeight.y +                          \n"
-"      uBones[aBoneID.z] * aWeight.z +                          \n"
-"      uBones[aBoneID.w] * aWeight.w +                          \n"
-"      uBones[aBoneID2.x] * aWeight2.x                          \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 4
-    "      uBones[aBoneID.x] * aWeight.x +                          \n"
+        "      uBones[aBoneID.x] * aWeight.x +                          \n"
         "      uBones[aBoneID.y] * aWeight.y +                          \n"
         "      uBones[aBoneID.z] * aWeight.z +                          \n"
         "      uBones[aBoneID.w] * aWeight.w                            \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 3
-"      uBones[aBoneID.x] * aWeight.x +                          \n"
-"      uBones[aBoneID.y] * aWeight.y +                          \n"
-"      uBones[aBoneID.z] * aWeight.z                            \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 2
-"      uBones[aBoneID.x] * aWeight.x +                          \n"
-"      uBones[aBoneID.y] * aWeight.y                            \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 1
-"      uBones[aBoneID.x] * aWeight.x                            \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 0
-#else
-#error "Too many bone dependencies"
-#endif
 ;
 const std::string gGLVSAttributesPosition = "layout(location = 0) " + gGLVaryingIn +
                                             " vec4 aPosition;                        \n";

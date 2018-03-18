@@ -54,5 +54,3 @@ namespace flf {
 } /* flw */
 
 #endif
-
-#define FILLWAVE_MAX_BONES_DEPENDENCIES 4 // todo rewrite program factory

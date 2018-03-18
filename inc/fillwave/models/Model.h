@@ -23,7 +23,7 @@
 
 #include <fillwave/models/base/Programmable.h>
 #include <fillwave/models/Mesh.h>
-#include <fillwave/models/animations/AnimatorAssimp.h>
+
 #include <fillwave/loaders/ModelLoaderTraits.h>
 #include <fillwave/common/pointers/PointerProtected.h>
 

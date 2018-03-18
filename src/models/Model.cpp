@@ -20,8 +20,12 @@
  */
 
 #include <fillwave/loaders/ProgramLoader.h>
+
 #include <fillwave/models/Model.h>
+#include <fillwave/models/Hinge.h>
+
 #include <fillwave/management/LightSystem.h>
+
 #include <fillwave/Fillwave.h>
 
 #include <fillwave/Log.h>
@@ -70,15 +74,70 @@ Model::Model(Engine* engine,
                                 vao));
 }
 
-Model::Model(Engine* engine, flc::Program* program, const std::string& shapePath)
+Model::Model(
+  Engine* engine
+  , flc::Program* program
+  , const std::string& shapePath)
+  : Programmable(program)
+  , mEngine(engine)
+  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
+  , mLights(engine->getLightSystem()) {
+  reloadModel(shapePath);
+}
+
+Model::Model(Engine* engine
+             , flc::Program* program
+             , const std::string& shapePath
+             , const std::string& diffuseMapPath
+             , const std::string& normalMapPath
+             , const std::string& specularMapPath)
   : Programmable(program)
   , mEngine(engine)
   , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
   , mLights(engine->getLightSystem()) {
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  reloadModel(shapePath);
-#else
+  reloadModel(shapePath
+    , mEngine->storeTexture(diffuseMapPath.c_str())
+    , mEngine->storeTexture(normalMapPath.c_str())
+    , mEngine->storeTexture(specularMapPath.c_str()));
+}
+
+Model::Model(Engine* engine
+             , flc::Program* program
+             , const std::string& shapePath
+             , flc::Texture2D* diffuseMap
+             , flc::Texture2D* normalMap
+             , flc::Texture2D* specularMap
+             , const Material& material)
+  : Programmable(program)
+  , mEngine(engine)
+  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
+  , mLights(engine->getLightSystem()) {
+
+  reloadModel(shapePath
+    , diffuseMap
+    , normalMap
+    , specularMap
+    , material);
+}
+
+Model::~Model() {
+  // nothing
+}
+
+void Model::reloadModel(const std::string& path) {
+  unloadNodes();
+  const auto* scene = mEngine->getScene(path);
+  if (!scene) {
+    fLogF("Model: %s could not be read", path.c_str());
+  }
+  initAnimations(scene);
+  initShadowing(mEngine);
+  initUniformsCache();
+  loadNodes(scene->mRootNode, scene, this);
+
+  ///////////////
+#if 0
   std::vector<tinyobj::shape_t> shapes;
   std::vector<tinyobj::material_t> materials;
   tinyobj::attrib_t attrib;
@@ -100,10 +159,22 @@ Model::Model(Engine* engine, flc::Program* program, const std::string& shapePath
     if (materialId != -1) {
       attach(loadMesh(shapes[i], attrib,
                  Material(materials[materialId]),
+// or
+//               shapes[i].mesh.material_ids[0] != -1 ? Material(
+//               materials[shapes[i].mesh.material_ids[0]]) : Material(),
                  engine->storeTexture(materials[materialId].diffuse_texname),
                  engine->storeTexture(materials[materialId].bump_texname),
                  engine->storeTexture(materials[materialId].specular_texname),
-                 engine));
+// or Tex*
+//               diffuseMap,
+//               normalMap,
+//               specularMap,
+
+// or paths
+//               engine->storeTexture(diffuseMapPath.c_str()),
+//               engine->storeTexture(normalMapPath.c_str()),
+//               engine->storeTexture(specularMapPath.c_str()),
+//                 engine));
       continue;
     }
     attach(loadMesh(shapes[i], attrib,
@@ -114,114 +185,6 @@ Model::Model(Engine* engine, flc::Program* program, const std::string& shapePath
                engine));
   }
 #endif
-}
-
-Model::Model(Engine* engine
-             , flc::Program* program
-             , const std::string& shapePath
-             , const std::string& diffuseMapPath
-             , const std::string& normalMapPath
-             , const std::string& specularMapPath)
-  : Programmable(program)
-  , mEngine(engine)
-  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
-  , mLights(engine->getLightSystem()) {
-
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  reloadModel(shapePath
-    , mEngine->storeTexture(diffuseMapPath.c_str())
-    , mEngine->storeTexture(normalMapPath.c_str())
-    , mEngine->storeTexture(specularMapPath.c_str()));
-#else
-  std::vector<tinyobj::shape_t> shapes;
-  std::vector<tinyobj::material_t> materials;
-  tinyobj::attrib_t attrib;
-  std::string err;
-  if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, shapePath.c_str())) {
-    fLogF("Model: %s could not be read", shapePath.c_str());
-  }
-  if (!err.empty()) { // `err` may contain warning message.
-    fLogW("%s", err.c_str());
-  }
-
-  initShadowing(engine);
-  for (GLuint i = 0; i < shapes.size(); i++) {
-    if (shapes[i].mesh.material_ids.empty()) {
-      fLogF("No materials available");
-    }
-
-    attach(loadMesh(shapes[i], attrib,
-               shapes[i].mesh.material_ids[0] != -1 ? Material(
-                 materials[shapes[i].mesh.material_ids[0]]) : Material(),
-               engine->storeTexture(diffuseMapPath.c_str()),
-               engine->storeTexture(normalMapPath.c_str()),
-               engine->storeTexture(specularMapPath.c_str()),
-               engine));
-  }
-#endif
-}
-
-Model::Model(Engine* engine
-             , flc::Program* program
-             , const std::string& shapePath
-             , flc::Texture2D* diffuseMap
-             , flc::Texture2D* normalMap
-             , flc::Texture2D* specularMap
-             , const Material& material)
-  : Programmable(program)
-  , mEngine(engine)
-  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
-  , mLights(engine->getLightSystem()) {
-
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-  reloadModel(shapePath
-    , diffuseMap
-    , normalMap
-    , specularMap
-    , material);
-#else
-  std::vector<tinyobj::shape_t> shapes;
-  std::vector<tinyobj::material_t> materials;
-  tinyobj::attrib_t attrib;
-  std::string err;
-  if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, shapePath.c_str())) {
-    fLogF("Model: %s could not be read", shapePath.c_str());
-  }
-  if (!err.empty()) { // `err` may contain warning message.
-    fLogW("%s", err.c_str());
-  }
-
-  initShadowing(engine);
-  for (GLuint i = 0; i < shapes.size(); i++) {
-    if (shapes[i].mesh.material_ids.empty()) {
-      fLogF("No materials available");
-    }
-
-    attach(loadMesh(shapes[i], attrib,
-               shapes[i].mesh.material_ids[0] != -1 ? Material(
-                 materials[shapes[i].mesh.material_ids[0]]) : Material(),
-               diffuseMap,
-               normalMap,
-               specularMap,
-               engine));
-  }
-#endif
-}
-
-Model::~Model() {
-  // nothing
-}
-
-void Model::reloadModel(const std::string& path) {
-  unloadNodes();
-  const auto* scene = mEngine->getScene(path);
-  if (!scene) {
-    fLogF("Model: %s could not be read", path.c_str());
-  }
-  initAnimations(scene);
-  initShadowing(mEngine);
-  initUniformsCache();
-  loadNodes(scene->mRootNode, scene, this);
 }
 
 void Model::reloadModel(
@@ -332,42 +295,6 @@ inline void Model::loadNodeTransformations(const ModelLoader::Node* node, Entity
   ModelLoader::assignTransformation(node, entity);
 }
 
-pu<Mesh> Model::loadMesh(
-  const ModelLoader::ShapeType* shape
-  , const ModelLoader::ShapeDataType* data
-  , const Material& material
-  , flc::Texture2D* diffuseMap
-  , flc::Texture2D* normalMap
-  , flc::Texture2D* specularMap
-  , Engine* engine) {
-
-  ProgramLoader loader(engine);
-  auto vao = new flc::VertexArray();
-  auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
-  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, data, mAnimator.get());
-  auto mesh = std::make_unique<Mesh>(engine,
-                                material,
-                                diffuseMap,
-                                normalMap,
-                                specularMap,
-                                mProgram,
-                                mProgramShadow,
-                                mProgramShadowColor,
-                                loader.getProgram(EProgram::occlusionOptimizedQuery),
-                                loader.getProgram(EProgram::ambientOcclusionGeometry),
-                                loader.getProgram(EProgram::ambientOcclusionColor),
-                                engine->getLightSystem(),
-                                vbo,
-                                ibo,
-                                mAnimator.get(),
-                                GL_TRIANGLES,
-                                vao);
-#ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
-  vbo->emptyCPU();
-#endif
-  return mesh;
-}
-
 pp<Mesh> Model::getMesh(size_t id) {
   if (id < mMeshes.size()) {
     return pp<Mesh> (mMeshes.at(id));
@@ -432,28 +359,44 @@ inline void Model::initUniformsCache() {
 
 #else /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
-puMesh Model::loadMesh(const tinyobj::shape_t& shape,
-                tinyobj::attrib_t& attrib,
-                const Material& material,
-                flc::Texture2D* diffuseMap,
-                flc::Texture2D* normalMap,
-                flc::Texture2D* specularMap,
-                Engine* engine) {
-  ProgramLoader loader(engine);
-  flc::VertexArray* vao = new flc::VertexArray();
-
-  return std::make_unique < Mesh
-       > (engine, material, diffuseMap, normalMap, specularMap, mProgram,
-         mProgramShadow, mProgramShadowColor, loader.getOcclusionOptimizedQuery(),
-         loader.getAmbientOcclusionGeometry(), loader.getAmbientOcclusionColor(),
-         engine->getLightSystem(), engine->storeBuffer<flc::VertexBufferBasic> (vao,
-             shape, attrib),
-         engine->storeBuffer<flc::IndexBuffer>(vao,
-             static_cast<GLuint>(shape.mesh.indices.size())), GL_TRIANGLES,
-         vao);
-}
-
 #endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
+
+pu<Mesh> Model::loadMesh(
+  const ModelLoader::ShapeType* shape
+  , const ModelLoader::ShapeDataType* data
+  , const Material& material
+  , flc::Texture2D* diffuseMap
+  , flc::Texture2D* normalMap
+  , flc::Texture2D* specularMap
+  , Engine* engine) {
+
+  ProgramLoader loader(engine);
+  auto vao = new flc::VertexArray();
+  auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
+//  engine->storeBuffer<flc::IndexBuffer>(vao, static_cast<GLuint>(shape.mesh.indices.size())), GL_TRIANGLES, vao);
+  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, data, mAnimator.get());
+  auto mesh = std::make_unique<Mesh>(engine,
+                                     material,
+                                     diffuseMap,
+                                     normalMap,
+                                     specularMap,
+                                     mProgram,
+                                     mProgramShadow,
+                                     mProgramShadowColor,
+                                     loader.getProgram(EProgram::occlusionOptimizedQuery),
+                                     loader.getProgram(EProgram::ambientOcclusionGeometry),
+                                     loader.getProgram(EProgram::ambientOcclusionColor),
+                                     engine->getLightSystem(),
+                                     vbo,
+                                     ibo,
+                                     mAnimator.get(),
+                                     GL_TRIANGLES,
+                                     vao);
+#ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
+  vbo->emptyCPU();
+#endif
+  return mesh;
+}
 
 void Model::draw(ICamera &camera) {
   evaluateAnimations();

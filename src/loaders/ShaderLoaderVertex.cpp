@@ -24,10 +24,6 @@
 #include <fillwave/common/Strings.h>
 #include <fillwave/loaders/ModelLoader.h>
 
-#ifndef FILLWAVE_MAX_BONES_DEPENDENCIES
-#error "Max bone dependencies for animations not defined"
-#endif
-
 namespace flw {
 namespace flf {
 
@@ -43,64 +39,8 @@ const std::string ShaderLoaderVertex::getSource() const {
                                "layout(location = 2) " + mGLVaryingIn + " vec3 aNormal;                          \n"
                                "layout(location = 3) " + mGLVaryingIn + " vec3 aNormalTangent;                   \n"
                                "layout(location = 4) " + mGLVaryingIn + " vec2 aTextureCoordinate;               \n"
-#if FILLWAVE_MAX_BONES_DEPENDENCIES == 8
-                           "layout(location = 5) " + mGLVaryingIn +
-                           " ivec4 aBoneID;                         \n"
-                           "layout(location = 6) " + mGLVaryingIn +
-                           " ivec4 aBoneID2;                        \n"
-                           "layout(location = 7) " + mGLVaryingIn +
-                           " vec4 aWeight;                          \n"
-                           "layout(location = 8) " + mGLVaryingIn +
-                           " vec4 aWeight2;                         \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 7
-                           "layout(location = 5) " + mGLVaryingIn +
-                           " ivec4 aBoneID;                         \n"
-                           "layout(location = 6) " + mGLVaryingIn +
-                           " ivec3 aBoneID2;                        \n"
-                           "layout(location = 7) " + mGLVaryingIn +
-                           " vec4 aWeight;                          \n"
-                           "layout(location = 8) " + mGLVaryingIn +
-                           " vec3 aWeight2;                         \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 6
-                           "layout(location = 5) " + mGLVaryingIn +
-                           " ivec4 aBoneID;                         \n"
-                           "layout(location = 6) " + mGLVaryingIn +
-                           " ivec2 aBoneID2;                        \n"
-                           "layout(location = 7) " + mGLVaryingIn +
-                           " vec4 aWeight;                          \n"
-                           "layout(location = 8) " + mGLVaryingIn +
-                           " vec2 aWeight2;                         \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 5
-                           "layout(location = 5) " + mGLVaryingIn +
-                           " ivec4 aBoneID;                         \n"
-                           "layout(location = 6) " + mGLVaryingIn +
-                           " int aBoneID2;                          \n"
-                           "layout(location = 7) " + mGLVaryingIn +
-                           " vec4 aWeight;                          \n"
-                           "layout(location = 8) " + mGLVaryingIn +
-                           " float aWeight2;                        \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 4
                                "layout(location = 5) " + mGLVaryingIn + " ivec4 aBoneID;                         \n"
                                "layout(location = 6) " + mGLVaryingIn + " vec4 aWeight;                          \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 3
-  "layout(location = 5) " + mGLVaryingIn +
-  " ivec3 aBoneID;                         \n"
-  "layout(location = 6) " + mGLVaryingIn +
-  " vec3 aWeight;                          \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 2
-  "layout(location = 5) " + mGLVaryingIn +
-  " ivec2 aBoneID;                         \n"
-  "layout(location = 6) " + mGLVaryingIn +
-  " vec2 aWeight;                          \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 1
-  "layout(location = 5) " + mGLVaryingIn +
-  " int aBoneID;                           \n"
-  "layout(location = 6) " + mGLVaryingIn +
-  " float aWeight;                         \n";
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 0
-#else
-#error "Too many bone dependencies"
-#endif
 
   std::string outputs =
 
@@ -133,54 +73,10 @@ const std::string ShaderLoaderVertex::getSource() const {
   std::string mainBones =
 
       "   mat4 BoneTransform = "
-#if FILLWAVE_MAX_BONES_DEPENDENCIES == 8
-      "      uBones[aBoneID.x] * aWeight.x +                          \n"
-      "      uBones[aBoneID.y] * aWeight.y +                          \n"
-      "      uBones[aBoneID.z] * aWeight.z +                          \n"
-      "      uBones[aBoneID.w] * aWeight.w +                          \n"
-      "      uBones[aBoneID2.x] * aWeight2.x +                        \n"
-      "      uBones[aBoneID2.y] * aWeight2.y +                        \n"
-      "      uBones[aBoneID2.z] * aWeight2.z +                        \n"
-      "      uBones[aBoneID2.w] * aWeight2.w                          \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 7
-      "      uBones[aBoneID.x] * aWeight.x +                          \n"
-      "      uBones[aBoneID.y] * aWeight.y +                          \n"
-      "      uBones[aBoneID.z] * aWeight.z +                          \n"
-      "      uBones[aBoneID.w] * aWeight.w +                          \n"
-      "      uBones[aBoneID2.x] * aWeight2.x +                        \n"
-      "      uBones[aBoneID2.y] * aWeight2.y +                        \n"
-      "      uBones[aBoneID2.z] * aWeight2.z                          \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 6
-      "      uBones[aBoneID.x] * aWeight.x +                          \n"
-      "      uBones[aBoneID.y] * aWeight.y +                          \n"
-      "      uBones[aBoneID.z] * aWeight.z +                          \n"
-      "      uBones[aBoneID.w] * aWeight.w +                          \n"
-      "      uBones[aBoneID2.x] * aWeight2.x +                        \n"
-      "      uBones[aBoneID2.y] * aWeight2.y                          \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 5
-      "      uBones[aBoneID.x] * aWeight.x +                          \n"
-      "      uBones[aBoneID.y] * aWeight.y +                          \n"
-      "      uBones[aBoneID.z] * aWeight.z +                          \n"
-      "      uBones[aBoneID.w] * aWeight.w +                          \n"
-      "      uBones[aBoneID2.x] * aWeight2.x                          \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 4
           "      uBones[aBoneID.x] * aWeight.x +                          \n"
           "      uBones[aBoneID.y] * aWeight.y +                          \n"
           "      uBones[aBoneID.z] * aWeight.z +                          \n"
           "      uBones[aBoneID.w] * aWeight.w                            \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 3
-      "      uBones[aBoneID.x] * aWeight.x +                          \n"
-      "      uBones[aBoneID.y] * aWeight.y +                          \n"
-      "      uBones[aBoneID.z] * aWeight.z                            \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 2
-      "      uBones[aBoneID.x] * aWeight.x +                          \n"
-      "      uBones[aBoneID.y] * aWeight.y                            \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 1
-      "      uBones[aBoneID.x] * aWeight.x                            \n"
-#elif FILLWAVE_MAX_BONES_DEPENDENCIES == 0
-#else
-#error "Too many bone dependencies"
-#endif
           ";\n";
 
   std::string mainComputations =

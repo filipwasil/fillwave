@@ -21,72 +21,12 @@
 
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 
-#include <fillwave/models/animations/AnimatorAssimp.h>
-
 #include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferBasic", FERROR | FFATAL)
 
 namespace flw {
 namespace flc {
-
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
-
-#else
-VertexBufferBasic::VertexBufferBasic(const tinyobj::shape_t& shape,
-                         const tinyobj::attrib_t& attr,
-                         GLuint dataStoreModification) :
-  TVertexBuffer<VertexBasic>(dataStoreModification) {
-
-  mTotalElements = shape.mesh.indices.size();
-  mDataVertices.resize(mTotalElements);
-
-  // Loop over shapes
-  // Loop over faces(polygon)
-  size_t index_offset = 0;
-  /* xxx OpenMP should be usefull here */
-  for (size_t f = 0; f < shape.mesh.num_face_vertices.size(); f++) {
-    int fv = shape.mesh.num_face_vertices[f];
-
-    // Loop over vertices in the face.
-    for (size_t v = 0; v < fv; v++) {
-      // access to vertex
-      size_t idxOut = index_offset + v;
-      tinyobj::index_t idx = shape.mesh.indices[idxOut];
-      mDataVertices[idxOut].mPosition[0] = attr.vertices[3 * idx.vertex_index + 0];
-      mDataVertices[idxOut].mPosition[1] = attr.vertices[3 * idx.vertex_index + 1];
-      mDataVertices[idxOut].mPosition[2] = attr.vertices[3 * idx.vertex_index + 2];
-      mDataVertices[idxOut].mPosition[3] = 1.0f;
-      mDataVertices[idxOut].mNormal[0] = attr.normals[3 * idx.normal_index + 0];
-      mDataVertices[idxOut].mNormal[1] = attr.normals[3 * idx.normal_index + 1];
-      mDataVertices[idxOut].mNormal[2] = attr.normals[3 * idx.normal_index + 2];
-      mDataVertices[idxOut].mTextureUV[0] = attr.texcoords[2 * idx.texcoord_index +
-                                0];
-      mDataVertices[idxOut].mTextureUV[1] = attr.texcoords[2 * idx.texcoord_index +
-                                1];
-      mDataVertices[idxOut].mNormalTangentMap[0] = 0.0f;
-      mDataVertices[idxOut].mNormalTangentMap[1] = 0.0f;
-      mDataVertices[idxOut].mNormalTangentMap[2] = 0.0f;
-      mDataVertices[idxOut].mColor[0] = 0.0f;
-      mDataVertices[idxOut].mColor[1] = 0.0f;
-      mDataVertices[idxOut].mColor[2] = 0.0f;
-      mDataVertices[idxOut].mColor[3] = 1.0f;
-      for (int k = 0; k < FILLWAVE_MAX_BONES_DEPENDENCIES; k++) {
-        mDataVertices[idxOut].mBoneID[k] = 0.0f;
-        mDataVertices[idxOut].mBoneWeight[k] = 0.0f;
-      }
-    }
-    index_offset += fv;
-
-    /* per-face material */
-    /* shape.mesh.material_ids[f]; */
-  }
-  mData = mDataVertices.data();
-  mSize = mTotalElements * sizeof(VertexBasic);
-}
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
 
 VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
     GLint chunkDensity,
