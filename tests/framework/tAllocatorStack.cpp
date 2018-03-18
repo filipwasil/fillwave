@@ -1,6 +1,6 @@
 #include "../common.h"
 
-#include <fillwave/Fillwave.h>
+#include <fillwave/common/Aliases.h>
 #include <fillwave/common/allocators/AllocatorStack.h>
 
 using namespace flw;
@@ -186,8 +186,8 @@ TEST (AllocatorStack, AllocateFullMemoryNextClearingAndAllocateFullMemoryAgain) 
 }
 
 TEST (AllocatorStack, VectorEqualityCheck) {
-  vecHeap<DualIntStruct> sut1;
-  vecHeap<DualIntStruct> sut2;
+  std::vector<DualIntStruct, AllocatorStack<DualIntStruct>> sut1;
+  std::vector<DualIntStruct, AllocatorStack<DualIntStruct>> sut2;
   EXPECT_EQ (sut1, sut2);
 }
 
@@ -196,16 +196,5 @@ TEST (AllocatorStack, AllocatorEqualityCheck) {
 }
 
 TEST (AllocatorStack, NestAllocator) {
-  vecStack<DualIntStruct> sut1 { {1, 2} };
-  vecStack<vecStack<DualIntStruct>> sut;// { { sut1 } };
-  for (auto& it : sut) {
-    for (auto& i : it) {
-
-    }
-  }
-  for (auto& it : sut) {
-    for (auto& i : it) {
-
-    }
-  }
+  // todo
 }

@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Animator.h>
+#include <fillwave/models/animations/AnimatorAssimp.h>
 
 #include <fillwave/loaders/ProgramLoader.h>
 #include <fillwave/models/Mesh.h>
@@ -48,7 +48,7 @@ Mesh::Mesh(Engine* engine,
     LightSystem& lights,
     flc::VertexBufferBasic* vbo,
     flc::IndexBuffer* ibo,
-    Animator* animator,
+    ModelLoader::Animator* animator,
     GLenum renderMode,
     flc::VertexArray *vao)
     : IReloadable(engine, vao)

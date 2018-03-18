@@ -23,8 +23,10 @@
 
 #include <fillwave/Math.h>
 
-#include <fillwave/models/animations/Hinge.h>
 #include <fillwave/models/animations/Key.h>
+#include <fillwave/models/animations/Bone.h>
+
+#include <fillwave/loaders/ModelLoader.h>
 
 #include <vector>
 #include <string>
@@ -32,51 +34,39 @@
 namespace flw {
 namespace flf {
 
-class Animator;
+class AnimatorAssimp;
 
-/*! \class Animator
+/*! \class AnimatorAssimp
  * \brief Manager to handle Bone objects in animation.
  */
 
-class Animator final {
+class AnimatorAssimp final {
 
 public:
-  Animator(const ModelLoader::Scene* scene);
-  ~Animator();
+  AnimatorAssimp(const ModelLoader::Scene* scene);
+  ~AnimatorAssimp();
 
  public:
   GLint getAnimationsCount() const;
   GLint getBoneId(const std::string& name) const;
 
-  void updateBonesBuffer();
-  void updateBonesUniform(GLint uniformLocationBones);
-  void updateTransformations(GLint activeAnimation, float timeElapsed_s);
+  void updateBonesBufferRAM();
+  void updateBonesBufferVRAM(GLint uniformLocationBones);
+  void updateAnimation(GLint activeAnimation, float timeElapsed_s);
 
  private:
-  class Bone final : public Hinge {
+  class BoneAssimp : public Bone {
    public:
-    Bone(aiBone *assimpBone);
-    ~Bone() override = default;
-    std::string getName() const;
-    glm::mat4 getOffsetMatrix() const;
-    glm::mat4 getGlobalOffsetMatrix() const;
-    void setName(std::string name);
-    void setOffsetMatrix(glm::mat4 m);
-    void setGlobalOffsetMatrix(glm::mat4 m);
-    void log() const override;
-
-   private:
-    std::string mName;
-    glm::mat4 mOffsetMatrix;
-    glm::mat4 mGlobalOffsetMatrix;
+    BoneAssimp(aiBone* assimpBone);
+    ~BoneAssimp() override;
   };
 
-  class AssimpNode final {
+  class NodeAssimp final {
    public:
-    AssimpNode(aiNode* node);
-    virtual ~AssimpNode();
+    NodeAssimp(aiNode* node);
+    virtual ~NodeAssimp();
 
-    void update(float time, glm::mat4 parent, Animator *boneManager, GLint activeAnimation);
+    void update(float time, glm::mat4 parent, AnimatorAssimp* animator, GLint activeAnimation);
 
     static glm::mat4 convert(aiMatrix4x4 matrix);
     static glm::vec3 convert(aiVector3D vec);
@@ -84,7 +74,7 @@ public:
     static glm::quat convert(aiQuaternion vec);
 
     Bone* mBone;
-    std::vector<AssimpNode *> mChildren;
+    std::vector<NodeAssimp*> mChildren;
 
    private:
     std::string mName;
@@ -123,7 +113,7 @@ public:
   Bone* get(std::string name);
   Channel* findChannel(Animation *animation, const std::string &nodeName) const;
   Animation* getAnimation(GLint i) const;
-  AssimpNode* initNode(aiNode* node);
+  NodeAssimp* initNode(aiNode* node);
   glm::fquat lerp(const glm::fquat &v0, const glm::fquat &v1, float alpha) const;
 
   glm::vec3 getCurrentTranslation(float timeElapsed_s, Channel *channel) const;
@@ -135,7 +125,7 @@ public:
   GLuint getScaleStep(float timeElapsed_s, Channel *channel) const;
 
   float mTimeSinceStartSeconds;
-  AssimpNode *mRootAnimationNode;
+  NodeAssimp* mRootAnimationNode;
   glm::mat4 mSceneInverseMatrix;
   std::vector<pu<Bone>> mBones;
   std::vector<glm::mat4> mAnimationsBufferData;

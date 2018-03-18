@@ -22,6 +22,7 @@
  */
 
 #include <fillwave/models/base/Moveable.h>
+#include <fillwave/Math.h>
 #include <memory>
 
 namespace flw {

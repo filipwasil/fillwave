@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,16 +21,33 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Conversion.h>
+#include <fillwave/models/Hinge.h>
+#include <fillwave/Math.h>
 
 namespace flw {
+namespace flf {
 
-glm::vec3 floatsToGlmVec3(const float *in) {
-  return glm::vec3(in[0], in[1], in[2]);
-}
+/*! \class Key
+ * \brief Base for all animation keys.
+ */
 
-glm::vec4 floatsToGlmVec4(const float *in) {
-  return glm::vec4(in[0], in[1], in[2], in[3]);
-}
+class Bone : public Hinge {
+ public:
+  Bone(const std::string& name, const glm::mat4& offsetMatrix, const glm::mat4& globalOffsetMatrix);
+  ~Bone() override = default;
+  std::string getName() const;
+  glm::mat4 getOffsetMatrix() const;
+  glm::mat4 getGlobalOffsetMatrix() const;
+  void setName(std::string name);
+  void setOffsetMatrix(glm::mat4 m);
+  void setGlobalOffsetMatrix(glm::mat4 m);
+  void log() const override;
 
+ private:
+  std::string mName;
+  glm::mat4 mOffsetMatrix;
+  glm::mat4 mGlobalOffsetMatrix;
+};
+
+} /* flf */
 } /* flw */

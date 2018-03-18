@@ -80,7 +80,7 @@ private:
   glm::vec3 mCameraPosition;
   GLfloat mTimeDeltaEmiter;
   flc::Program *mProgramEmiter;
-  puFence mFence;
+  pu<flc::Fence> mFence;
 
   flc::VertexBufferParticlesGPU *mVBOGPU[mPingPongBuffers];
 

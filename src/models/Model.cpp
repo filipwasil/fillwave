@@ -40,7 +40,7 @@ Model::Model(Engine* engine,
     const Material& material)
     : Programmable(program)
     , mEngine(engine)
-    , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+    , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
     , mLights(engine->getLightSystem()) {
 
   initShadowing(engine);
@@ -73,7 +73,7 @@ Model::Model(Engine* engine,
 Model::Model(Engine* engine, flc::Program* program, const std::string& shapePath)
   : Programmable(program)
   , mEngine(engine)
-  , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
   , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -124,7 +124,7 @@ Model::Model(Engine* engine
              , const std::string& specularMapPath)
   : Programmable(program)
   , mEngine(engine)
-  , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
   , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -170,7 +170,7 @@ Model::Model(Engine* engine
              , const Material& material)
   : Programmable(program)
   , mEngine(engine)
-  , mActiveAnimation(FILLWAVE_DO_NOT_ANIMATE)
+  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
   , mLights(engine->getLightSystem()) {
 
 #ifdef FILLWAVE_MODEL_LOADER_ASSIMP
@@ -246,7 +246,7 @@ void Model::reloadModel(
 
 inline void Model::initAnimations(const ModelLoader::Scene* scene) {
   if (scene->HasAnimations()) {
-    mAnimator = std::make_unique<Animator>(scene);
+    mAnimator = std::make_unique<ModelLoader::Animator>(scene);
     fLogD("attached TimedBoneUpdateCallback to model");
     this->attachHandler(
       [this](const Event& event){
@@ -378,7 +378,7 @@ pp<Mesh> Model::getMesh(size_t id) {
 
 void Model::performAnimation(GLfloat timeElapsedInSeconds) {
   if (mAnimator && mAnimator->getAnimationsCount() > mActiveAnimation) {
-    mAnimator->updateTransformations(mActiveAnimation, timeElapsedInSeconds);
+    mAnimator->updateAnimation(mActiveAnimation, timeElapsedInSeconds);
   }
 }
 
@@ -390,7 +390,7 @@ void Model::setActiveAnimation(GLint animationID) {
 
   if (mAnimator->getAnimationsCount() <= animationID) {
     fLogD("Animation ", mActiveAnimation, " has stopped due to setting a non-valid animation id:", animationID);
-    mActiveAnimation = FILLWAVE_DO_NOT_ANIMATE;
+    mActiveAnimation = ModelLoader::FLAG_ANIMATION_OFF;
     return;
   }
 
@@ -411,13 +411,13 @@ bool Model::isAnimated() const {
 
 inline void Model::evaluateAnimations() {
   if (mAnimator) {
-    mAnimator->updateBonesBuffer();
+    mAnimator->updateBonesBufferRAM();
     mProgram->use();
-    mAnimator->updateBonesUniform(mUniformLocationCacheBones);
+    mAnimator->updateBonesBufferVRAM(mUniformLocationCacheBones);
     mProgramShadow->use();
-    mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadow);
+    mAnimator->updateBonesBufferVRAM(mUniformLocationCacheBonesShadow);
     mProgramShadowColor->use();
-    mAnimator->updateBonesUniform(mUniformLocationCacheBonesShadowColor);
+    mAnimator->updateBonesBufferVRAM(mUniformLocationCacheBonesShadowColor);
   }
 }
 
@@ -463,8 +463,8 @@ void Model::draw(ICamera &camera) {
 void Model::drawPBRP(ICamera &camera) {
   if (mAnimator) {
     //todo for PBRP shadows must be updated elsewhere
-    mAnimator->updateBonesBuffer();
-    mAnimator->updateBonesUniform(mUniformLocationCacheBones);
+    mAnimator->updateBonesBufferRAM();
+    mAnimator->updateBonesBufferVRAM(mUniformLocationCacheBones);
   }
   mLights.pushLightUniforms(mProgram);
   mLights.bindShadowmaps();

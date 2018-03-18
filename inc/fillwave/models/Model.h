@@ -23,7 +23,7 @@
 
 #include <fillwave/models/base/Programmable.h>
 #include <fillwave/models/Mesh.h>
-#include <fillwave/models/animations/Animator.h>
+#include <fillwave/models/animations/AnimatorAssimp.h>
 #include <fillwave/loaders/ModelLoaderTraits.h>
 #include <fillwave/common/pointers/PointerProtected.h>
 
@@ -100,7 +100,7 @@ public:
 
  protected:
   Engine* mEngine;
-  std::unique_ptr<Animator> mAnimator;
+  std::unique_ptr<ModelLoader::Animator> mAnimator;
   GLint mActiveAnimation;
 
   LightSystem& mLights;

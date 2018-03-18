@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Animator.h>
+#include <fillwave/models/animations/AnimatorAssimp.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Bone", FERROR | FFATAL)
@@ -27,37 +27,38 @@ FLOGINIT("Bone", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-Animator::Bone::Bone(aiBone* assimpBone) {
-  mName = assimpBone->mName.C_Str();
-  mOffsetMatrix = AssimpNode::convert(assimpBone->mOffsetMatrix);
-  mGlobalOffsetMatrix = glm::mat4(1.0);
+Bone::Bone(const std::string& name, const glm::mat4& offsetMatrix, const glm::mat4& globalOffsetMatrix)
+  : mName(name)
+  , mOffsetMatrix(offsetMatrix)
+  , mGlobalOffsetMatrix(globalOffsetMatrix) {
+ // nothing
 }
 
-void Animator::Bone::setName(std::string name) {
+void Bone::setName(std::string name) {
   mName = name;
 }
 
-std::string Animator::Bone::getName() const {
+std::string Bone::getName() const {
   return mName;
 }
 
-glm::mat4 Animator::Bone::getOffsetMatrix() const {
+glm::mat4 Bone::getOffsetMatrix() const {
   return mOffsetMatrix;
 }
 
-glm::mat4 Animator::Bone::getGlobalOffsetMatrix() const {
+glm::mat4 Bone::getGlobalOffsetMatrix() const {
   return mGlobalOffsetMatrix;
 }
 
-void Animator::Bone::setOffsetMatrix(glm::mat4 m) {
+void Bone::setOffsetMatrix(glm::mat4 m) {
   mOffsetMatrix = m;
 }
 
-void Animator::Bone::setGlobalOffsetMatrix(glm::mat4 m) {
+void Bone::setGlobalOffsetMatrix(glm::mat4 m) {
   mGlobalOffsetMatrix = m;
 }
 
-void Animator::Bone::log() const {
+void Bone::log() const {
   fLogI("Name: %s", (mName.c_str()));
 }
 

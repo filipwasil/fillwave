@@ -22,6 +22,7 @@
 #include <fillwave/loaders/ShaderLoaderVertex.h>
 #include <fillwave/loaders/ModelLoaderTraits.h>
 #include <fillwave/common/Strings.h>
+#include <fillwave/loaders/ModelLoader.h>
 
 #ifndef FILLWAVE_MAX_BONES_DEPENDENCIES
 #error "Max bone dependencies for animations not defined"
@@ -123,7 +124,7 @@ const std::string ShaderLoaderVertex::getSource() const {
 
       "uniform float uTime;\n"
 
-          "uniform mat4 uBones[" + to_string(FILLWAVE_MAX_BONES) + "];\n";
+          "uniform mat4 uBones[" + to_string(ModelLoader::COUNT_BONES_DEFINED) + "];\n";
 
   std::string mainStart =
 

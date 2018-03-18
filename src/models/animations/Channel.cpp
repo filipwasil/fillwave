@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Animator.h>
+#include <fillwave/models/animations/AnimatorAssimp.h>
 
 #include <fillwave/Log.h>
 
@@ -28,7 +28,7 @@ FLOGINIT("Channel", FERROR | FFATAL)
 namespace flw {
 namespace flf {
 
-Animator::Channel::Channel(aiNodeAnim *assimpChannel) {
+AnimatorAssimp::Channel::Channel(aiNodeAnim *assimpChannel) {
   mAffectedNodeName = assimpChannel->mNodeName.C_Str();
 
   mKeysTranslation.reserve(assimpChannel->mNumPositionKeys);
@@ -38,19 +38,19 @@ Animator::Channel::Channel(aiNodeAnim *assimpChannel) {
   for (unsigned int i = 0; i < assimpChannel->mNumPositionKeys; ++i) {
     mKeysTranslation.emplace_back(
       static_cast<float>(assimpChannel->mPositionKeys[i].mTime)
-      , AssimpNode::convert(assimpChannel->mPositionKeys[i].mValue));
+      , NodeAssimp::convert(assimpChannel->mPositionKeys[i].mValue));
   }
 
   for (unsigned int i = 0; i < assimpChannel->mNumRotationKeys; ++i) {
     mKeysRotation.emplace_back(
       static_cast<float>(assimpChannel->mRotationKeys[i].mTime)
-      , AssimpNode::convert(assimpChannel->mRotationKeys[i].mValue));
+      , NodeAssimp::convert(assimpChannel->mRotationKeys[i].mValue));
   }
 
   for (unsigned int i = 0; i < assimpChannel->mNumScalingKeys; ++i) {
     mKeysScaling.emplace_back(
       static_cast<float>(assimpChannel->mScalingKeys[i].mTime)
-      , AssimpNode::convert(assimpChannel->mScalingKeys[i].mValue)
+      , NodeAssimp::convert(assimpChannel->mScalingKeys[i].mValue)
     );
   }
 

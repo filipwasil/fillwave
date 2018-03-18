@@ -58,7 +58,7 @@ const std::string gGLAmbient = "10001.0";
 
 /* Attributes */
 
-const std::string gGLBones = "uniform mat4 uBones[" + to_string(FILLWAVE_MAX_BONES) + "];\n";
+const std::string gGLBones = "uniform mat4 uBones[" + to_string(ModelLoader::COUNT_BONES_DEFINED) + "];\n";
 
 const std::string gGLVSAttributes = "layout(location = 0) " + gGLVaryingIn +
                                     " vec4 aPosition;                        \n"

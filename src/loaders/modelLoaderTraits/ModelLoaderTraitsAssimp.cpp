@@ -19,13 +19,14 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/TModelLoader.h>
-#include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
-
-#include <fillwave/models/animations/Animator.h>
-
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/core/buffers/IndexBuffer.h>
+
+#include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
+
+#include <fillwave/models/animations/AnimatorAssimp.h>
+#include <fillwave/models/shapes/PhysicsMeshBuffer.h>
+#include <fillwave/models/base/Material.h>
 
 #include <fillwave/Log.h>
 

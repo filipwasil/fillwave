@@ -20,37 +20,23 @@
  */
 
 /* Debug  */
+
 #include <fillwave/Config.h>
-
-/* Logs  */
-#include <fillwave/Log.h>
-
-/* Stdlib  */
-#include <fstream>
-
-/* Implementation  */
-#include  <fillwave/models/animations/Conversion.h>
 
 #include <fillwave/engine/Engine.h>
 
-#include <fillwave/Core.h>
-#include <fillwave/Debugger.h>
-#include <fillwave/Framework.h>
-
-/* Management */
-#include <fillwave/management/CacheProgram.h>
-#include <fillwave/management/Cachehader.h>
-#include <fillwave/management/CacheSampler.h>
-#include <fillwave/management/LightSystem.h>
-#include <fillwave/management/TextureSystem.h>
-
 #include <fillwave/actions/EventHandler.h>
-#include <fillwave/common/Macros.h>
 
+#include <fillwave/common/Macros.h>
 #include <fillwave/common/Strings.h>
 
 #include <fillwave/loaders/FileLoader.h>
-#include <fillwave/management/CacheBuffer.h>
+
+#include <fillwave/models/shapes/BoxOcclusion.h>
+
+#include <fillwave/Log.h>
+
+#include <fstream>
 
 FLOGINIT_DEFAULT()
 
@@ -352,12 +338,13 @@ ps<flf::Text> Engine::storeText(const string& content,
     GLint iASCII;
     Font* newFont = new Font();
     GLint control = 0;
+    constexpr GLint maxMetadataLinesSize = 512;
     while (!myfile.eof()) {
       getline(myfile, line);
       myfile >> iASCII >> fXMin >> fWidth >> fYMin >> fHeight >> fYOffset;
       newFont->mWidths[iASCII] = fWidth;
       newFont->mOffsets[iASCII] = 1.0f - fHeight - fYOffset;
-      if (control++ > FILLWAVE_MAX_TEXTS) {
+      if (control++ > maxMetadataLinesSize) {
         fLogE("Metadata can not be read for file %s.", (fontName + ".meta").c_str());
         myfile.close();
         delete newFont;
@@ -609,7 +596,7 @@ VertexBufferBasic* Engine::storeBufferInternal(
   VertexArray* vao
   , const ModelLoader::ShapeType* shape
   , const ModelLoader::ShapeDataType* data
-  , flf::Animator* animator) {
+  , ModelLoader::Animator* animator) {
   return mBuffers.mVertices.store(ModelLoader::getVertexBuffer(shape, data, animator), vao);
 }
 

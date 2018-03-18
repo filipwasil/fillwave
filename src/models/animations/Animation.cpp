@@ -19,41 +19,41 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Animator.h>
+#include <fillwave/models/animations/AnimatorAssimp.h>
 
 namespace flw {
 namespace flf {
 
-Animator::Animation::Animation(aiAnimation* assimpAnimation) {
+AnimatorAssimp::Animation::Animation(aiAnimation* assimpAnimation) {
   mName = assimpAnimation->mName.C_Str();
   mDuration = static_cast<float>(assimpAnimation->mDuration);
   mTicksPerSec = static_cast<float>(assimpAnimation->mTicksPerSecond);
   mChannels.reserve(assimpAnimation->mNumChannels);
   for (unsigned int i = 0; i < assimpAnimation->mNumChannels; ++i) {
-    mChannels.push_back(new Animator::Channel(assimpAnimation->mChannels[i]));
+    mChannels.push_back(new AnimatorAssimp::Channel(assimpAnimation->mChannels[i]));
   }
 }
 
-Animator::Animation::~Animation() {
+AnimatorAssimp::Animation::~Animation() {
   for (auto it : mChannels) {
     delete it;
   }
   mChannels.clear();
 }
 
-float Animator::Animation::getTicksPerSec() {
+float AnimatorAssimp::Animation::getTicksPerSec() {
   return mTicksPerSec;
 }
 
-float Animator::Animation::getDuration() {
+float AnimatorAssimp::Animation::getDuration() {
   return mDuration;
 }
 
-Animator::Channel* Animator::Animation::getChannel(int i) {
+AnimatorAssimp::Channel* AnimatorAssimp::Animation::getChannel(int i) {
   return mChannels[i];
 }
 
-size_t Animator::Animation::getHowManyChannels() {
+size_t AnimatorAssimp::Animation::getHowManyChannels() {
   return mChannels.size();
 }
 

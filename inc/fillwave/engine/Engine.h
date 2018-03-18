@@ -21,39 +21,41 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <fillwave/Config.h>
+
+#include <fillwave/common/Aliases.h>
+
 #include <fillwave/space/Scene.h>
+
+#include <fillwave/common/Macros.h>
+
+#include <fillwave/actions/Event.h>
 
 #include <fillwave/space/LightPoint.h>
 #include <fillwave/space/LightSpot.h>
 #include <fillwave/space/LightDirectional.h>
 #include <fillwave/hud/Text.h>
 
-#include <fillwave/common/pointers/PointerProtected.h>
-
-/* Debugger */
-#include <fillwave/Debugger.h>
-#include <fillwave/common/Aliases.h>
-#include <fillwave/actions/Event.h>
-
-/* Common */
-
 #include <fillwave/actions/EventHandler.h>
-#include <fillwave/common/Macros.h>
-
-#include <fillwave/Core.h>
-#include <fillwave/Debugger.h>
-#include <fillwave/Framework.h>
 
 #include <fillwave/loaders/FileLoader.h>
-#include <fillwave/loaders/TModelLoader.h>
+#include <fillwave/loaders/ModelLoader.h>
+#include <fillwave/loaders/ProgramLoader.h>
 
 #include <fillwave/management/CacheBuffer.h>
 #include <fillwave/management/CacheProgram.h>
 #include <fillwave/management/Cachehader.h>
 #include <fillwave/management/CacheSampler.h>
 
-#include <fillwave/management/TextureSystem.h>
 #include <fillwave/management/LightSystem.h>
+#include <fillwave/management/TextureSystem.h>
+
+#include <fillwave/core/buffers/PixelBuffer.h>
+#include <fillwave/core/pipeline/Fence.h>
+
+#include <fillwave/core/operations/PostProcessingPass.h>
+
+#include <fillwave/Debugger.h>
 
 namespace flw {
 namespace flf {
@@ -220,7 +222,7 @@ class Engine {
   flc::Program* mProgramTextureLookup;
 
   /* Fences and barriers */
-  puFence mFence;
+  pu<flc::Fence> mFence;
 
   /* OQ */
   flc::Program *mProgramOcclusionBox;
@@ -322,7 +324,7 @@ class Engine {
     flc::VertexArray* vao
     , const ModelLoader::ShapeType* shape
     , const ModelLoader::ShapeDataType* data
-    , flf::Animator* animator);
+    , ModelLoader::Animator* animator);
 
   flc::VertexBufferDebug* storeBufferInternal(flc::VertexArray *vao, GLfloat scale);
   flc::VertexBufferFloat* storeBufferInternal(flc::VertexArray *vao, flf::vec<flc::VertexFloat> &data);

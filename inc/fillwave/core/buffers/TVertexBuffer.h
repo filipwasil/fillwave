@@ -52,6 +52,7 @@ public:
 
   TVertexBuffer(GLuint dataStoreModification = GL_STATIC_DRAW)
       : IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
+    // nothing
   }
 
   TVertexBuffer(const std::vector<T> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW)

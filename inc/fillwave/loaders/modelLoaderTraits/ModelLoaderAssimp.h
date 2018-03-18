@@ -29,6 +29,8 @@
 namespace flw {
 namespace flf {
 
+class AnimatorAssimp;
+
 struct ModelLoaderTraitsAssimp {
   using Node = aiNode;
   using Scene = aiScene;
@@ -38,7 +40,11 @@ struct ModelLoaderTraitsAssimp {
   using TextureType = aiTextureType;
   using String = aiString;
   using Importer = Assimp::Importer;
+  using Animator = AnimatorAssimp;
   using Flags = unsigned int;
+  static constexpr int COUNT_BONES_DEFINED = 45;
+  static constexpr int COUNT_BONES_USED = 4;
+  static constexpr int FLAG_ANIMATION_OFF = -1;
 };
 
 } /* flf */

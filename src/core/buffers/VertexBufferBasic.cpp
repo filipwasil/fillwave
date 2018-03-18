@@ -21,7 +21,7 @@
 
 #include <fillwave/core/buffers/VertexBufferBasic.h>
 
-#include <fillwave/models/animations/Animator.h>
+#include <fillwave/models/animations/AnimatorAssimp.h>
 
 #include <fillwave/Log.h>
 

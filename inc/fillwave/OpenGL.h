@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "fillwave/Config.h"
+#include <fillwave/Config.h>
 
 #if defined(__APPLE__)
 #include <OpenGL/gl3.h>

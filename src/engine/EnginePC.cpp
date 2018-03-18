@@ -19,17 +19,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* Debug  */
-#include <fillwave/Config.h>
-
-/* Logs  */
-#include <fillwave/Log.h>
-
 /* flw  */
 #include <fillwave/Fillwave.h>
-
-/* Implementation  */
-#include  <fillwave/models/animations/Conversion.h>
 
 using namespace flw::flc;
 using namespace std;

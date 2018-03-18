@@ -1,5 +1,4 @@
-#include <fillwave/loaders/TModelLoader.h>
-#include <fillwave/loaders/ModelLoaderTraits.h>
+#include <fillwave/loaders/modelLoaderTraits/TModelLoader.h>
 
 namespace flw {
 namespace flf {

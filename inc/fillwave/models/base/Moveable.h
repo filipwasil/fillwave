@@ -21,12 +21,16 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/OpenGL.h>
-#include <fillwave/Math.h>
-#include <fillwave/common/Observable.h>
 #include <fillwave/models/base/Moveable.h>
+
+#include <fillwave/common/Observable.h>
 #include <fillwave/common/Easing.h>
 #include <fillwave/common/Containers.h>
+#include <fillwave/common/Aliases.h>
+
+#include <fillwave/OpenGL.h>
+#include <fillwave/Math.h>
+
 #include <memory>
 #include <vector>
 #include <functional>

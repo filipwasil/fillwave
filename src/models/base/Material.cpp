@@ -20,7 +20,6 @@
  */
 
 #include <fillwave/models/base/Material.h>
-#include <fillwave/models/animations/Conversion.h>
 
 namespace flw {
 namespace flf {

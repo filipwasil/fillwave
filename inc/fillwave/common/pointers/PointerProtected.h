@@ -21,6 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <memory>
+
 namespace flw {
 /*! \class PointerProtected
  * \brief Wrapper which makes the wrapped pointer not storable and not copyable

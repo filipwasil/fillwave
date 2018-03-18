@@ -61,7 +61,7 @@ public:
       LightSystem &lights,
       flc::VertexBufferBasic* vbo = nullptr,
       flc::IndexBuffer* ibo = nullptr,
-      Animator* animator = nullptr,
+      ModelLoader::Animator* animator = nullptr,
       GLenum renderMode = GL_TRIANGLES,
       flc::VertexArray* vao = nullptr);
 
@@ -118,7 +118,7 @@ public:
   LightSystem &mLights;
 
   /* Animations */
-  Animator* mAnimator;
+  ModelLoader::Animator* mAnimator;
 
   /* Occlusion cut off */
   glm::mat4 mOcclusionMatrix;

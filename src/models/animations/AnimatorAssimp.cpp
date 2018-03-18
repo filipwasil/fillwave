@@ -19,32 +19,42 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Animator.h>
+#include <fillwave/models/animations/AnimatorAssimp.h>
 
-#include <fillwave/core/pipeline/Program.h>
+#include <fillwave/core/pipeline/Uniform.h>
 
 #include <fillwave/Log.h>
 
-FLOGINIT("Animator", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
 
-Animator::Animator(const ModelLoader::Scene* scene)
+AnimatorAssimp::BoneAssimp::BoneAssimp(aiBone* assimpBone)
+  : Bone( assimpBone->mName.C_Str(), NodeAssimp::convert(assimpBone->mOffsetMatrix), glm::mat4(1.0)) {
+  // nothing
+}
+
+AnimatorAssimp::BoneAssimp::~BoneAssimp() {
+  // nothing
+}
+
+AnimatorAssimp::AnimatorAssimp(const ModelLoader::Scene* scene)
   : mTimeSinceStartSeconds(0.0f) {
-  mAnimationsBufferData.resize(FILLWAVE_MAX_BONES);
+  mAnimationsBufferData.resize(ModelLoader::COUNT_BONES_DEFINED);
 
   GLuint numBones = 0;
 
   for (GLuint j = 0; j < scene->mNumMeshes; ++j) {
     for (GLuint i = 0; i < scene->mMeshes[j]->mNumBones; ++i) {
-      mBones.push_back(std::make_unique<Bone>(scene->mMeshes[j]->mBones[i]));
+      mBones.push_back(std::make_unique<BoneAssimp>(scene->mMeshes[j]->mBones[i]));
       numBones++;
     }
   }
 
-  if (numBones > FILLWAVE_MAX_BONES) {
-    fLogF("Crater can handle maximum %d bones. The model contains %d bones.", FILLWAVE_MAX_BONES, numBones);
+  if (numBones > ModelLoader::COUNT_BONES_DEFINED) {
+    fLogF("We can handle maximum %d bones. The model contains %d bones.", ModelLoader::COUNT_BONES_DEFINED,
+          numBones);
   }
 
   for (GLuint k = 0; k < scene->mNumAnimations; k++) {
@@ -53,15 +63,15 @@ Animator::Animator(const ModelLoader::Scene* scene)
   }
 
   /* Init node tree after bones are added */
-  mSceneInverseMatrix = glm::inverse(AssimpNode::convert(scene->mRootNode->mTransformation));
+  mSceneInverseMatrix = glm::inverse(NodeAssimp::convert(scene->mRootNode->mTransformation));
   mRootAnimationNode = initNode(scene->mRootNode);
 }
 
-Animator::~Animator() {
+AnimatorAssimp::~AnimatorAssimp() {
   delete mRootAnimationNode;
 }
 
-Animator::Bone* Animator::get(GLuint id) {
+Bone* AnimatorAssimp::get(GLuint id) {
   if (mBones.size() < id) {
     return mBones[id].get();
   }
@@ -69,7 +79,7 @@ Animator::Bone* Animator::get(GLuint id) {
 }
 
 
-Animator::Bone *Animator::get(std::string name) {
+Bone* AnimatorAssimp::get(std::string name) {
   for (auto &it : mBones) {
     if (it->getName() == name) {
       return it.get();
@@ -78,7 +88,7 @@ Animator::Bone *Animator::get(std::string name) {
   return nullptr;
 }
 
-GLint Animator::getBoneId(const std::string& name) const {
+GLint AnimatorAssimp::getBoneId(const std::string& name) const {
   int idx = 0;
   for (auto &it : mBones) {
     if (it->getName() == name) {
@@ -89,17 +99,16 @@ GLint Animator::getBoneId(const std::string& name) const {
   return -1;
 }
 
-Animator::Animation* Animator::getAnimation(GLint i) const {
-  return (i != FILLWAVE_DO_NOT_ANIMATE ? mAnimations[i].get() : nullptr);
+AnimatorAssimp::Animation* AnimatorAssimp::getAnimation(GLint i) const {
+  return (i != ModelLoader::FLAG_ANIMATION_OFF ? mAnimations[i].get() : nullptr);
 }
 
-GLint Animator::getAnimationsCount() const {
+GLint AnimatorAssimp::getAnimationsCount() const {
   return mAnimations.size();
 }
 
-void Animator::updateTransformations(GLint activeAnimation, float timeElapsed_s) {
-
-  if (FILLWAVE_DO_NOT_ANIMATE == activeAnimation) {
+void AnimatorAssimp::updateAnimation(GLint activeAnimation, float timeElapsed_s) {
+  if (ModelLoader::FLAG_ANIMATION_OFF == activeAnimation) {
     mTimeSinceStartSeconds = 0;
     mRootAnimationNode->update(0, glm::mat4(1.0), this, 0);
     return;
@@ -113,8 +122,8 @@ void Animator::updateTransformations(GLint activeAnimation, float timeElapsed_s)
   mRootAnimationNode->update(AnimationTime, glm::mat4(1.0), this, activeAnimation);
 }
 
-Animator::AssimpNode* Animator::initNode(aiNode *node) {
-  AssimpNode* assimpNode = new AssimpNode(node);
+AnimatorAssimp::NodeAssimp* AnimatorAssimp::initNode(aiNode *node) {
+  NodeAssimp* assimpNode = new NodeAssimp(node);
   assimpNode->mBone = get(node->mName.C_Str());
 
   for (GLuint i = 0; i < node->mNumChildren; i++) {
@@ -123,21 +132,20 @@ Animator::AssimpNode* Animator::initNode(aiNode *node) {
   return assimpNode;
 }
 
-void Animator::updateBonesBuffer() {
+void AnimatorAssimp::updateBonesBufferRAM() {
   int idx = 0;
   for (auto &it : mBones) {
     mAnimationsBufferData[idx++] = it->getGlobalOffsetMatrix();
   }
 }
 
-void Animator::updateBonesUniform(GLint uniformLocationBones) {
-  flc::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(), FILLWAVE_MAX_BONES);
+void AnimatorAssimp::updateBonesBufferVRAM(GLint uniformLocationBones) {
+  flc::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(), ModelLoader::COUNT_BONES_DEFINED);
 }
 
-Animator::Channel* Animator::findChannel(Animator::Animation *animation, const std::string& nodeName) const {
+AnimatorAssimp::Channel* AnimatorAssimp::findChannel(AnimatorAssimp::Animation *animation, const std::string& nodeName) const {
   for (size_t i = 0; i < animation->getHowManyChannels(); ++i) {
-    Channel* channel = animation->getChannel(i);
-
+    auto channel = animation->getChannel(i);
     if (std::string(channel->mAffectedNodeName) == nodeName) {
       return channel;
     }
@@ -145,7 +153,7 @@ Animator::Channel* Animator::findChannel(Animator::Animation *animation, const s
   return nullptr;
 }
 
-glm::vec3 Animator::getCurrentTranslation(float timeElapsed_s, Channel *channel) const {
+glm::vec3 AnimatorAssimp::getCurrentTranslation(float timeElapsed_s, Channel *channel) const {
   if (1 == channel->mKeysTranslation.size()) {
     return channel->mKeysTranslation[0].mValue;
   }
@@ -164,7 +172,7 @@ glm::vec3 Animator::getCurrentTranslation(float timeElapsed_s, Channel *channel)
   return Start + alpha * Delta;
 }
 
-glm::vec3 Animator::getCurrentScale(float timeElapsed_s, Channel *channel) const {
+glm::vec3 AnimatorAssimp::getCurrentScale(float timeElapsed_s, Channel *channel) const {
   if (channel->mKeysScaling.size() == 1) {
     return channel->mKeysScaling[0].mValue;
   }
@@ -181,7 +189,7 @@ glm::vec3 Animator::getCurrentScale(float timeElapsed_s, Channel *channel) const
   return Start + alpha * Delta;
 }
 
-glm::quat Animator::getCurrentRotation(float timeElapsed_s, Channel *channel) const {
+glm::quat AnimatorAssimp::getCurrentRotation(float timeElapsed_s, Channel *channel) const {
   if (1 == channel->mKeysRotation.size()) {
     return channel->mKeysRotation[0].mValue;
   }
@@ -197,7 +205,7 @@ glm::quat Animator::getCurrentRotation(float timeElapsed_s, Channel *channel) co
   return lerp(startRotation, endRotation, alpha);
 }
 
-glm::fquat Animator::lerp(const glm::fquat &v0, const glm::fquat &v1, float alpha) const {
+glm::fquat AnimatorAssimp::lerp(const glm::fquat &v0, const glm::fquat &v1, float alpha) const {
   glm::vec4 start = glm::vec4(v0.x, v0.y, v0.z, v0.w);
   glm::vec4 end = glm::vec4(v1.x, v1.y, v1.z, v1.w);
   glm::vec4 interp = glm::mix(start, end, alpha);
@@ -205,7 +213,7 @@ glm::fquat Animator::lerp(const glm::fquat &v0, const glm::fquat &v1, float alph
   return glm::fquat(interp.w, interp.x, interp.y, interp.z);
 }
 
-GLuint Animator::getTranslationStep(float timeElapsed_s, Channel *channel) const {
+GLuint AnimatorAssimp::getTranslationStep(float timeElapsed_s, Channel *channel) const {
   for (GLuint i = 0; i < channel->mKeysTranslation.size() - 1; ++i) {
     if (timeElapsed_s < (float) channel->mKeysTranslation[i + 1].mTime) {
       return i;
@@ -215,7 +223,7 @@ GLuint Animator::getTranslationStep(float timeElapsed_s, Channel *channel) const
   return 0;
 }
 
-GLuint Animator::getRotationStep(float timeElapsed_s, Channel *channel) const {
+GLuint AnimatorAssimp::getRotationStep(float timeElapsed_s, Channel *channel) const {
   assert(channel->mKeysRotation.size() > 0);
   for (GLuint i = 0; i < channel->mKeysRotation.size() - 1; ++i) {
     if (timeElapsed_s < channel->mKeysRotation[i + 1].mTime) {
@@ -226,7 +234,7 @@ GLuint Animator::getRotationStep(float timeElapsed_s, Channel *channel) const {
   return 0;
 }
 
-GLuint Animator::getScaleStep(float timeElapsed_s, Channel *channel) const {
+GLuint AnimatorAssimp::getScaleStep(float timeElapsed_s, Channel *channel) const {
   assert(channel->mKeysScaling.size() > 0);
   for (GLuint i = 0; i < channel->mKeysScaling.size() - 1; i++) {
     if (timeElapsed_s < (float) channel->mKeysScaling[i + 1].mTime) {

@@ -35,7 +35,12 @@ struct ModelLoaderTraitsTinyObjLoader {
   using TextureType = unsigned int;
   using String = const char;
   using Importer = unsigned int;
+  using Animator = unsigned int;
   using Flags = unsigned int;
+
+  static constexpr int COUNT_BONES_DEFINED = 0;
+  static constexpr int COUNT_BONES_USED = 0;
+  static constexpr int FLAG_ANIMATION_OFF = 0;
 };
 
 } /* flf */

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,37 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Hinge.h>
+#include <fillwave/loaders/modelLoaderTraits/TModelLoader.h>
 
 namespace flw {
-namespace flf {
-
-void Hinge::draw(ICamera &camera) {
-  for (auto &it : mChildren) {
-    it->draw(camera);
-  }
-}
-
-void Hinge::drawPBRP(ICamera &camera) {
-  for (auto &it : mChildren) {
-    it->drawPBRP(camera);
-  }
-}
-
-void Hinge::drawDR(ICamera &camera) {
-  for (auto &it : mChildren) {
-    it->drawDR(camera);
-  }
-}
-
-void Hinge::updateRenderer(IRenderer & /*renderer*/) {
-  // nothing
-}
-
-bool Hinge::getRenderItem(RenderItem & /*item*/) {
-  /* Hinge meant not to be drawn */
-  return false;
-}
-
-} /* flf */
+  using ModelLoader = flf::TModelLoader<flf::ModelLoaderTraits>;
 } /* flw */

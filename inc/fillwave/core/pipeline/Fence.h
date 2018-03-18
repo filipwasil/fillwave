@@ -45,5 +45,4 @@ private:
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::Fence> puFence;
 } /* flw */

@@ -22,7 +22,7 @@
  */
 
 #include <fillwave/core/buffers/IBuffer.h>
-#include <fillwave/loaders/ModelLoaderTraits.h>
+
 #include <vector>
 
 namespace flw {

@@ -22,8 +22,10 @@
  */
 
 #include <fillwave/models/terrain/TerrainConstructor.h>
-#include <fillwave/loaders/ModelLoaderTraits.h>
+
 #include <fillwave/core/buffers/TVertexBuffer.h>
+
+#include <fillwave/loaders/ModelLoader.h>
 
 namespace flw {
 namespace flf {
@@ -42,8 +44,8 @@ struct VertexBasic {
   GLfloat mNormal[3];
   GLfloat mNormalTangentMap[3];
   GLfloat mTextureUV[2];
-  GLint mBoneID[FILLWAVE_MAX_BONES_DEPENDENCIES];
-  GLfloat mBoneWeight[FILLWAVE_MAX_BONES_DEPENDENCIES];
+  GLint mBoneID[ModelLoader::COUNT_BONES_USED];
+  GLfloat mBoneWeight[ModelLoader::COUNT_BONES_USED];
 };
 
 /*! \struct FaceBasic
@@ -60,12 +62,6 @@ struct FaceBasic {
 
 class VertexBufferBasic : public TVertexBuffer<VertexBasic> {
 public:
-  VertexBufferBasic(
-    const ModelLoader::ShapeType* shape
-    , const ModelLoader::ShapeDataType* data
-    , flf::Animator *animator = nullptr
-    , GLuint dataStoreModification = GL_STATIC_DRAW);
-
 
   VertexBufferBasic(flf::TerrainConstructor* constructor,
       GLint chunkDensity,

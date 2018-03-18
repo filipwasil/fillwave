@@ -21,8 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/shapes/PhysicsMeshBuffer.h>
-#include <fillwave/models/base/Material.h>
+#include <fillwave/loaders/ModelLoaderTraits.h>
 
 namespace flw {
 namespace flc {
@@ -32,10 +31,16 @@ class VertexBufferBasic;
 namespace flf {
 class Animator;
 class Entity;
+struct Material;
+struct PhysicsMeshBuffer;
 
 template <class ModelLoaderTraits>
 class TModelLoader final {
  public:
+
+  TModelLoader();
+  ~TModelLoader();
+
   using Node = typename ModelLoaderTraits::Node;
   using Scene = typename ModelLoaderTraits::Scene;
   using ShapeType = typename ModelLoaderTraits::ShapeType;
@@ -44,10 +49,12 @@ class TModelLoader final {
   using TextureType = typename ModelLoaderTraits::TextureType;
   using String = typename ModelLoaderTraits::String;
   using Importer = typename ModelLoaderTraits::Importer;
+  using Animator = typename ModelLoaderTraits::Animator;
   using Flags = typename ModelLoaderTraits::Flags;
 
-  TModelLoader();
-  ~TModelLoader();
+  static constexpr int COUNT_BONES_DEFINED = ModelLoaderTraits::COUNT_BONES_DEFINED;
+  static constexpr int COUNT_BONES_USED = ModelLoaderTraits::COUNT_BONES_USED;
+  static constexpr int FLAG_ANIMATION_OFF = ModelLoaderTraits::FLAG_ANIMATION_OFF;
 
   const Scene* getScene(const char* path);
 
