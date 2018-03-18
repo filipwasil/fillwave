@@ -38,7 +38,6 @@ class TimedBoneUpdateCallback;
 
 class Model : public Programmable {
 public:
-
   Model(Engine* engine,
       flc::Program* program,
       flf::Shape<flc::VertexBasic>& shape,
@@ -114,19 +113,14 @@ public:
  private:
   /* Init */
   void initUniformsCache();
-
   void initShadowing(Engine *engine);
 
   /* Animation */
+  void initAnimations(const ModelLoader::Scene* scene);
+  void evaluateAnimations();
   bool isAnimated() const override;
 
-  void evaluateAnimations();
-
-  void initAnimations(const ModelLoader::Scene* scene);
-
   void unloadNodes();
-
-  void loadNodeTransformations(const ModelLoader::Node* node, Entity* entity);
 
   void loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene* scene, Entity* entity);
 
@@ -141,14 +135,12 @@ public:
 
   pu<Mesh> loadMesh(
     const ModelLoader::ShapeType* shape
-    , const ModelLoader::ShapeDataType* data
+    , const ModelLoader::ShapeDataType& data
     , const Material& material
     , flc::Texture2D* diffuse
     , flc::Texture2D* normal
     , flc::Texture2D* specular
     , Engine *engine);
-
-  std::string getMeshTextureName(ModelLoader::TextureType type, const ModelLoader::MaterialType* m);
 };
 
 } /* flf */

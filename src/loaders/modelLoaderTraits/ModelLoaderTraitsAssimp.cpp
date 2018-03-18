@@ -28,6 +28,7 @@
 #include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
 
 #include <fillwave/Log.h>
+#include <fillwave/models/Model.h>
 
 FLOGINIT_DEFAULT()
 
@@ -82,17 +83,17 @@ const TModelLoader<ModelLoaderTraitsAssimp>::Scene* TModelLoader<ModelLoaderTrai
 }
 
 template<>
-Material TModelLoader<ModelLoaderTraitsAssimp>::getMaterial(const MaterialType& mat) {
+const Material TModelLoader<ModelLoaderTraitsAssimp>::getMaterial(const MaterialType& mat) {
   Material material;
   aiColor4D color;
   if (AI_SUCCESS == aiGetMaterialColor(&mat, AI_MATKEY_COLOR_AMBIENT, &color)) {
-    material.mAmbient = glm::vec4(color.r, color.b, color.g, color.a);
+    material.mAmbient = glm::vec4(color.r, color.g, color.b, color.a);
   }
   if (AI_SUCCESS == aiGetMaterialColor(&mat, AI_MATKEY_COLOR_DIFFUSE, &color)) {
-    material.mDiffuse = glm::vec4(color.r, color.b, color.g, color.a);
+    material.mDiffuse = glm::vec4(color.r, color.g, color.b, color.a);
   }
   if (AI_SUCCESS == aiGetMaterialColor(&mat, AI_MATKEY_COLOR_SPECULAR, &color)) {
-    material.mSpecular = glm::vec4(color.r, color.b, color.g, color.a);
+    material.mSpecular = glm::vec4(color.r, color.g, color.b, color.a);
   }
   return material;
 }
@@ -117,10 +118,10 @@ flc::IndexBuffer* TModelLoader<ModelLoaderTraitsAssimp>::getIndexBuffer(const Sh
 
 template<>
 flw::flc::VertexBufferBasic*
-  TModelLoader<ModelLoaderTraitsAssimp>::getVertexBuffer(const ShapeType* shape, const ShapeDataType* /*d*/, Animator* a) {
+  TModelLoader<ModelLoaderTraitsAssimp>::getVertexBuffer(const ShapeType* sh, const ShapeDataType& /*d*/, Animator* a) {
   std::vector<flc::VertexBasic> vertices;
 
-  const size_t elements = shape->mNumVertices;
+  const size_t elements = sh->mNumVertices;
 
   vertices.resize(elements);
 
@@ -129,11 +130,11 @@ flw::flc::VertexBufferBasic*
     for (GLuint i = 0; i < elements; i++) {
       flc::VertexBasic &vertex = vertices[i];
 
-      if (shape->HasVertexColors(0)) {
-        vertex.mColor[0] = shape->mColors[0]->r;
-        vertex.mColor[1] = shape->mColors[0]->g;
-        vertex.mColor[2] = shape->mColors[0]->b;
-        vertex.mColor[3] = shape->mColors[0]->a;
+      if (sh->HasVertexColors(0)) {
+        vertex.mColor[0] = sh->mColors[0]->r;
+        vertex.mColor[1] = sh->mColors[0]->g;
+        vertex.mColor[2] = sh->mColors[0]->b;
+        vertex.mColor[3] = sh->mColors[0]->a;
       } else {
         vertex.mColor[0] = 0.0f;
         vertex.mColor[1] = 0.0f;
@@ -141,34 +142,34 @@ flw::flc::VertexBufferBasic*
         vertex.mColor[3] = 1.0f;
       }
 
-      vertex.mPosition[0] = shape->mVertices[i].x;
-      vertex.mPosition[1] = shape->mVertices[i].y;
-      vertex.mPosition[2] = shape->mVertices[i].z;
+      vertex.mPosition[0] = sh->mVertices[i].x;
+      vertex.mPosition[1] = sh->mVertices[i].y;
+      vertex.mPosition[2] = sh->mVertices[i].z;
       vertex.mPosition[3] = 1.0f;
 
       /* One normal each triangle - on */
-      if (shape->HasNormals()) {
-        vertex.mNormal[0] = shape->mNormals[i].x;
-        vertex.mNormal[1] = shape->mNormals[i].y;
-        vertex.mNormal[2] = shape->mNormals[i].z;
+      if (sh->HasNormals()) {
+        vertex.mNormal[0] = sh->mNormals[i].x;
+        vertex.mNormal[1] = sh->mNormals[i].y;
+        vertex.mNormal[2] = sh->mNormals[i].z;
       } else {
         vertex.mNormal[0] = 0;
         vertex.mNormal[1] = 0;
         vertex.mNormal[2] = 0;
       }
 
-      if (shape->HasTextureCoords(0)) {
-        vertex.mTextureUV[0] = shape->mTextureCoords[0][i].x;
-        vertex.mTextureUV[1] = shape->mTextureCoords[0][i].y;
+      if (sh->HasTextureCoords(0)) {
+        vertex.mTextureUV[0] = sh->mTextureCoords[0][i].x;
+        vertex.mTextureUV[1] = sh->mTextureCoords[0][i].y;
       } else {
         vertex.mTextureUV[0] = 0;
         vertex.mTextureUV[1] = 0;
       }
 
-      if (shape->HasTangentsAndBitangents()) {
-        vertex.mNormalTangentMap[0] = shape->mTangents[i].x;
-        vertex.mNormalTangentMap[1] = shape->mTangents[i].y;
-        vertex.mNormalTangentMap[2] = shape->mTangents[i].z;
+      if (sh->HasTangentsAndBitangents()) {
+        vertex.mNormalTangentMap[0] = sh->mTangents[i].x;
+        vertex.mNormalTangentMap[1] = sh->mTangents[i].y;
+        vertex.mNormalTangentMap[2] = sh->mTangents[i].z;
       } else {
         vertex.mNormalTangentMap[0] = 0;
         vertex.mNormalTangentMap[1] = 0;
@@ -188,12 +189,12 @@ flw::flc::VertexBufferBasic*
       boneIdForEachVertex[z] = 0;
     }
     /* Bones */
-    for (GLuint i = 0; i < shape->mNumBones; i++) {
-      for (GLuint j = 0; j < shape->mBones[i]->mNumWeights; j++) {
-        GLuint VertexID = shape->mBones[i]->mWeights[j].mVertexId;
-        float Weight = shape->mBones[i]->mWeights[j].mWeight;
+    for (GLuint i = 0; i < sh->mNumBones; i++) {
+      for (GLuint j = 0; j < sh->mBones[i]->mNumWeights; j++) {
+        GLuint VertexID = sh->mBones[i]->mWeights[j].mVertexId;
+        float Weight = sh->mBones[i]->mWeights[j].mWeight;
         if (boneIdForEachVertex[VertexID] < TModelLoader::COUNT_BONES_USED) {
-          vertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = a->getBoneId(shape->mBones[i]->mName.C_Str());
+          vertices[VertexID].mBoneID[boneIdForEachVertex[VertexID]] = a->getBoneId(sh->mBones[i]->mName.C_Str());
           vertices[VertexID].mBoneWeight[boneIdForEachVertex[VertexID]] = Weight;
           boneIdForEachVertex[VertexID]++;
         } else {
@@ -214,6 +215,40 @@ void TModelLoader<ModelLoaderTraitsAssimp>::assignTransformation (const Node* no
   entity->scaleTo(glm::vec3(scale.x, scale.y, scale.z));
   entity->rotateTo(glm::quat(rot.w, rot.x, rot.y, rot.z));
   entity->moveTo(glm::vec3(pos.x, pos.y, pos.z));
+}
+
+const std::string getTextureName (ModelLoader::TextureType type, const aiMaterial* mat) {
+  aiString s;
+  return
+    mat->GetTexture(
+      type, 0, &s, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS ? s.data : "128_128_128.color";
+};
+
+template<>
+std::vector<TModelLoader<ModelLoaderTraitsAssimp>::MeshCreationInfo>
+  TModelLoader<ModelLoaderTraitsAssimp>::getMeshes(const Node* node, const Scene* scene) {
+
+  vec<MeshCreationInfo> meshes;
+  meshes.reserve(node->mNumMeshes);
+
+  for (GLuint i = 0; i < node->mNumMeshes; i++) {
+    const auto mesh = scene->mMeshes[node->mMeshes[i]];
+
+    if (nullptr == mesh) {
+      continue;
+    }
+
+    const auto material = scene->mMaterials[mesh->mMaterialIndex];
+
+    meshes.push_back(ModelLoader::MeshCreationInfo {
+      mesh
+      , ModelLoader::ShapeDataType{}
+      , getMaterial(*material)
+      , getTextureName(aiTextureType_DIFFUSE, material)
+      , getTextureName(aiTextureType_NORMALS, material)
+      , getTextureName(aiTextureType_SPECULAR, material) } );
+  }
+  return meshes;
 }
 
 template

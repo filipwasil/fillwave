@@ -30,10 +30,9 @@ AnimatorAssimp::NodeAssimp::NodeAssimp(aiNode *node)
   // nothing
 }
 
-void AnimatorAssimp::NodeAssimp::update(float timeElapsed_s, glm::mat4 parent, AnimatorAssimp* animator, GLint
-activeAnim) {
+void AnimatorAssimp::NodeAssimp::update(float deltaTime, glm::mat4 parent, AnimatorAssimp* animator, GLint activeAnim) {
   std::string nodeName(mName);
-  Animation *a = animator->getAnimation(activeAnim);
+  Animation* a = animator->getAnimation(activeAnim);
   if (nullptr == a) {
     return;
   }
@@ -41,13 +40,13 @@ activeAnim) {
   Channel *channel = animator->findChannel(a, nodeName);
 
   if (channel) {
-    glm::vec3 scaling = animator->getCurrentScale(timeElapsed_s, channel);
+    glm::vec3 scaling = animator->getCurrentScale(deltaTime, channel);
     glm::mat4 scale = glm::scale(glm::mat4(1.0), scaling);
 
-    glm::quat rotation = animator->getCurrentRotation(timeElapsed_s, channel);
+    glm::quat rotation = animator->getCurrentRotation(deltaTime, channel);
     glm::mat4 rotate = glm::mat4_cast(rotation);
 
-    glm::vec3 translation = animator->getCurrentTranslation(timeElapsed_s, channel);
+    glm::vec3 translation = animator->getCurrentTranslation(deltaTime, channel);
     glm::mat4 translate = glm::translate(glm::mat4(1.0), translation);
 
     transformation = translate * rotate * scale;
@@ -60,7 +59,7 @@ activeAnim) {
   }
 
   for (auto &it : mChildren) {
-    it->update(timeElapsed_s, m, animator, activeAnim);
+    it->update(deltaTime, m, animator, activeAnim);
   }
 }
 

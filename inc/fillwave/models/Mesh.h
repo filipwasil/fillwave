@@ -48,7 +48,7 @@ namespace flf {
 class Mesh : public Entity, public IReloadable {
 public:
   Mesh(Engine *engine,
-      const Material &material,
+      const Material& material,
       flc::Texture2D* diffuseMap,
       flc::Texture2D* normalMap,
       flc::Texture2D* specularMap,

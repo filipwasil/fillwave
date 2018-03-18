@@ -595,7 +595,7 @@ IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const ModelLoader::Sh
 VertexBufferBasic* Engine::storeBufferInternal(
   VertexArray* vao
   , const ModelLoader::ShapeType* shape
-  , const ModelLoader::ShapeDataType* data
+  , const ModelLoader::ShapeDataType& data
   , ModelLoader::Animator* animator) {
   return mBuffers.mVertices.store(ModelLoader::getVertexBuffer(shape, data, animator), vao);
 }

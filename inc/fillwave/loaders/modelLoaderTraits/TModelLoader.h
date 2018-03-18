@@ -22,6 +22,7 @@
  */
 
 #include <fillwave/loaders/ModelLoaderTraits.h>
+#include <fillwave/models/base/Material.h>
 
 namespace flw {
 namespace flc {
@@ -52,6 +53,15 @@ class TModelLoader final {
   using Animator = typename ModelLoaderTraits::Animator;
   using Flags = typename ModelLoaderTraits::Flags;
 
+  struct MeshCreationInfo {
+    const ShapeType* shape;
+    const ShapeDataType& data;
+    const Material material;
+    const std::string diffuse;
+    const std::string normal;
+    const std::string specular;
+  };
+
   static constexpr int COUNT_BONES_DEFINED = ModelLoaderTraits::COUNT_BONES_DEFINED;
   static constexpr int COUNT_BONES_USED = ModelLoaderTraits::COUNT_BONES_USED;
   static constexpr int FLAG_ANIMATION_OFF = ModelLoaderTraits::FLAG_ANIMATION_OFF;
@@ -59,11 +69,12 @@ class TModelLoader final {
   const Scene* getScene(const char* path);
 
   static void getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer);
-  static Material getMaterial(const MaterialType& material);
+  static const Material getMaterial(const MaterialType& material);
   static Material getTexturePath(TextureType type, const MaterialType& material);
   static ::flw::flc::IndexBuffer* getIndexBuffer(const ShapeType* shape);
-  static ::flw::flc::VertexBufferBasic* getVertexBuffer(const ShapeType* shape, const ShapeDataType* data, Animator* a);
+  static ::flw::flc::VertexBufferBasic* getVertexBuffer(const ShapeType* shape, const ShapeDataType& data, Animator* a);
   static void assignTransformation (const Node* node, Entity* entity);
+  static std::vector<MeshCreationInfo> getMeshes(const Node* node, const Scene* scene);
 
   Importer* mImporter;
   Flags mFlags;

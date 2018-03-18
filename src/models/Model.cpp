@@ -205,8 +205,6 @@ void Model::reloadModel(
   loadNodes(scene->mRootNode, scene, this, diff, norm, specular, material);
 }
 
-#ifdef FILLWAVE_MODEL_LOADER_ASSIMP
-
 inline void Model::initAnimations(const ModelLoader::Scene* scene) {
   if (scene->HasAnimations()) {
     mAnimator = std::make_unique<ModelLoader::Animator>(scene);
@@ -228,26 +226,20 @@ inline void Model::unloadNodes() {
 inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene* scene, Entity* entity) {
 
   /* Set this node transformations */
-  loadNodeTransformations(node, entity);
-
-  for (GLuint i = 0; i < node->mNumMeshes; i++) {
-    const auto mesh = scene->mMeshes[node->mMeshes[i]];
-
-    if (nullptr == mesh) {
-      continue;
-    }
-
-    const auto material = scene->mMaterials[mesh->mMaterialIndex];
-    const ModelLoader::ShapeDataType shapeData {};
-
+  ModelLoader::assignTransformation(node, entity);
+  auto meshes = ModelLoader::getMeshes(node, scene);
+  for (auto& meshCreationInfo : meshes) {
     entity->attach(
-      loadMesh(mesh
-        , &shapeData
-        , ModelLoader::getMaterial(*material)
-        , mEngine->storeTexture(getMeshTextureName(aiTextureType_DIFFUSE, material))
-        , mEngine->storeTexture(getMeshTextureName(aiTextureType_NORMALS, material))
-        , mEngine->storeTexture(getMeshTextureName(aiTextureType_SPECULAR, material))
-        , mEngine));
+      loadMesh(
+        meshCreationInfo.shape
+        , meshCreationInfo.data
+        , meshCreationInfo.material
+        , mEngine->storeTexture(meshCreationInfo.diffuse)
+        , mEngine->storeTexture(meshCreationInfo.normal)
+        , mEngine->storeTexture(meshCreationInfo.specular)
+        , mEngine
+      )
+    );
   }
 
   /* Evaluate children */
@@ -258,7 +250,7 @@ inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::S
   }
 }
 
-inline void Model::loadNodes(
+void Model::loadNodes (
   const ModelLoader::Node* node
   , const ModelLoader::Scene* scene
   , Entity* entity
@@ -266,14 +258,18 @@ inline void Model::loadNodes(
   , flc::Texture2D* normalMap
   , flc::Texture2D* specularMap
   , const Material& material) {
-
   /* Set this node transformations */
-  loadNodeTransformations(node, entity);
-
-  for (GLuint i = 0; i < node->mNumMeshes; ++i) {
-    const auto* mesh = scene->mMeshes[node->mMeshes[i]];
-    const ModelLoader::ShapeDataType data {};
-    entity->attach(loadMesh(mesh, &data, material, diffuseMap, normalMap, specularMap, mEngine));
+  ModelLoader::assignTransformation(node, entity);
+  auto meshes = ModelLoader::getMeshes(node, scene);
+  for (auto & meshCreationInfo : meshes) {
+    entity->attach(loadMesh(
+      meshCreationInfo.shape
+      , meshCreationInfo.data
+      , material
+      , diffuseMap
+      , normalMap
+      , specularMap
+      , mEngine));
   }
 
   /* Evaluate children */
@@ -282,17 +278,6 @@ inline void Model::loadNodes(
     loadNodes(node->mChildren[i], scene, newEntity.get(), diffuseMap, normalMap, specularMap, material);
     entity->attach(std::move(newEntity));
   }
-}
-
-std::string Model::getMeshTextureName(ModelLoader::TextureType type, const aiMaterial* mat) {
-  aiString name;
-  return mat->GetTexture(type, 0, &name, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS
-         ? name.data
-         : "128_128_128.color";
-}
-
-inline void Model::loadNodeTransformations(const ModelLoader::Node* node, Entity* entity) {
-  ModelLoader::assignTransformation(node, entity);
 }
 
 pp<Mesh> Model::getMesh(size_t id) {
@@ -357,13 +342,9 @@ inline void Model::initUniformsCache() {
   }
 }
 
-#else /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
-#endif /* FILLWAVE_MODEL_LOADER_ASSIMP */
-
 pu<Mesh> Model::loadMesh(
   const ModelLoader::ShapeType* shape
-  , const ModelLoader::ShapeDataType* data
+  , const ModelLoader::ShapeDataType& data
   , const Material& material
   , flc::Texture2D* diffuseMap
   , flc::Texture2D* normalMap

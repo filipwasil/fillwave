@@ -22,7 +22,6 @@
  */
 
 #include <fillwave/Math.h>
-#include <fillwave/loaders/ModelLoaderTraits.h>
 
 namespace flw {
 namespace flf {
