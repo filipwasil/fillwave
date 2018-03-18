@@ -222,7 +222,7 @@ const std::string getTextureName (ModelLoader::TextureType type, const aiMateria
   return
     mat->GetTexture(
       type, 0, &s, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS ? s.data : "128_128_128.color";
-};
+}
 
 template<>
 std::vector<TModelLoader<ModelLoaderTraitsAssimp>::MeshCreationInfo>
