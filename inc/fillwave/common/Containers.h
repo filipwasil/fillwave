@@ -24,6 +24,8 @@
 #include <fillwave/common/allocators/AllocatorStack.h>
 #include <fillwave/common/allocators/AllocatorHeap.h>
 
+#include <vector>
+
 namespace flw {
 namespace flf {
 
