@@ -23,7 +23,7 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT("VertexBufferBasic", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {

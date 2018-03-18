@@ -22,7 +22,7 @@
 #include <fillwave/core/buffers/IndexBuffer.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("IndexBuffer", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {
