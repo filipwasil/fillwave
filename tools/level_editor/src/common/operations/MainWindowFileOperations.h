@@ -10,7 +10,7 @@ class MainWindowFileOperations : public QObject {
  public:
   explicit MainWindowFileOperations(QWidget* parent = nullptr);
 
-  QVBoxLayout* createFileSystemTree();
+  QVBoxLayout* createFileSystemTree(QWidget* parent);
 
  private:
   QWidget* mParent;

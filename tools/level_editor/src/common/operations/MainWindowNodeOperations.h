@@ -14,8 +14,6 @@ class MainWindowNodeOperations : public QObject {
  public:
   MainWindowNodeOperations(QWidget* parent = nullptr);
 
-  void newNodeDialog();
-
   virtual ~MainWindowNodeOperations();
 
   MainWindowNodeOperations(const MainWindowNodeOperations& mE) = default;
@@ -26,18 +24,13 @@ class MainWindowNodeOperations : public QObject {
 
   MainWindowNodeOperations& operator=(MainWindowNodeOperations&& mE) = default;
 
-  QVBoxLayout* createNodeWidget();
+  QVBoxLayout* createNodeLayout(QWidget* parent);
 
-  QVBoxLayout* createInspectorView();
+  QVBoxLayout* createInspectorViewLayout(QWidget* parent);
 
-  QVBoxLayout* createOther();
+  QVBoxLayout* createObjectPropertiesLayout(QWidget* parent);
 
  private:
-  QWidget* mParent;
-  QTreeView* mScenTree;
-  QStandardItemModel* mSceneModel;
-  QTreeWidget* mOther;
-  QScrollArea* mInspectorScrollArea;
   scene::callbacks::StandardMouseEventHandler* eventFilterMouse;
 };
 

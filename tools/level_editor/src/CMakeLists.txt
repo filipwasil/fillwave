@@ -30,8 +30,8 @@ if (NOT WIN32 AND NOT ANDROID)
   add_custom_command(
       TARGET ${PROJECT_NAME} POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E copy_directory
-      ${FILLWAVE_LEVEL_EDITOR_ICONS}
-      ${CMAKE_BINARY_DIR}/icons)
+      ${FILLWAVE_EXAMPLES_DATA}
+      ${CMAKE_BINARY_DIR})
 
  #[[ set (CPACK_PACKAGE_VERSION ${VERSION})
 

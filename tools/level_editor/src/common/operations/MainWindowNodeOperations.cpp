@@ -4,8 +4,7 @@
 
 namespace common {
 MainWindowNodeOperations::MainWindowNodeOperations(QWidget* parent)
-  : mParent(parent)
-  , QObject(parent) {
+  : QObject(parent) {
 
 }
 
@@ -14,60 +13,54 @@ MainWindowNodeOperations::~MainWindowNodeOperations() {
   eventFilterMouse = nullptr;
 }
 
-QVBoxLayout* MainWindowNodeOperations::createNodeWidget() {
-  QLabel* label = new QLabel("Node", mParent);
+QVBoxLayout* MainWindowNodeOperations::createNodeLayout(QWidget* parent) {
+  QLabel* label = new QLabel("Node", parent);
   label->setAlignment(Qt::AlignHCenter);
-  QToolButton* addNode = new QToolButton(mParent);
+  QToolButton* addNode = new QToolButton(parent);
   addNode->setIcon(QIcon("icons/add.png"));
-  QObject::connect(addNode, &QToolButton::clicked, this, &MainWindowNodeOperations::newNodeDialog);
-  QToolButton* deleteNode = new QToolButton(mParent);
+  QToolButton* deleteNode = new QToolButton(parent);
   deleteNode->setIcon(QIcon("icons/delete.png"));
-  QHBoxLayout* hBox = new QHBoxLayout(mParent);
+  QHBoxLayout* hBox = new QHBoxLayout();
   hBox->addWidget(addNode);
   hBox->addWidget(deleteNode);
-  mScenTree = new QTreeView(mParent);
-  mScenTree->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  mSceneModel = new QStandardItemModel(mParent);
-  mScenTree->setModel(mSceneModel);
-  QVBoxLayout* vBox = new QVBoxLayout(mParent);
+  auto scenTree = new QTreeView(parent);
+  scenTree->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  auto sceneModel = new QStandardItemModel(parent);
+  scenTree->setModel(sceneModel);
+  QVBoxLayout* vBox = new QVBoxLayout();
   vBox->addWidget(label);
   vBox->addLayout(hBox);
-  vBox->addWidget(mScenTree);
-  eventFilterMouse = new scene::callbacks::StandardMouseEventHandler(mScenTree, this);
-  mScenTree->viewport()->installEventFilter(eventFilterMouse);
+  vBox->addWidget(scenTree);
+  eventFilterMouse = new scene::callbacks::StandardMouseEventHandler(scenTree, this);
+  scenTree->viewport()->installEventFilter(eventFilterMouse);
   return vBox;
 }
 
-QVBoxLayout* MainWindowNodeOperations::createInspectorView() {
-  QLabel* label = new QLabel("Inspector", mParent);
+
+QVBoxLayout* MainWindowNodeOperations::createInspectorViewLayout(QWidget* parent) {
+  QLabel* label = new QLabel("Inspector", parent);
   label->setAlignment(Qt::AlignHCenter);
-  QWidget* inspectorWidget = new QWidget(mParent);
+  QWidget* inspectorWidget = new QWidget(parent);
   inspectorWidget->setLayout(new QVBoxLayout(inspectorWidget));
-  auto mInspectorView2 = new QTableView();
-  mInspectorView2->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
   QVBoxLayout* vBox = new QVBoxLayout();
-  mInspectorScrollArea = new QScrollArea(mParent);
-  mInspectorScrollArea->setBackgroundRole(QPalette::Dark);
-  mInspectorScrollArea->setWidget(inspectorWidget);
+  auto inspectorScrollArea = new QScrollArea(parent);
+  inspectorScrollArea->setBackgroundRole(QPalette::Dark);
+  inspectorScrollArea->setWidget(inspectorWidget);
   vBox->addWidget(label);
-  vBox->addWidget(mInspectorScrollArea);
+  vBox->addWidget(inspectorScrollArea);
   inspectorWidget->show();
   return vBox;
 }
 
-QVBoxLayout* MainWindowNodeOperations::createOther() {
-  QLabel* label = new QLabel("Other", mParent);
+QVBoxLayout* MainWindowNodeOperations::createObjectPropertiesLayout(QWidget* parent) {
+  QLabel* label = new QLabel("Other", parent);
   label->setAlignment(Qt::AlignHCenter);
-
-  mOther = new QTreeWidget(mParent);
-  mOther->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  QVBoxLayout* vBox = new QVBoxLayout(mParent);
+  auto other = new QTreeWidget(parent);
+  other->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  QVBoxLayout* vBox = new QVBoxLayout();
   vBox->addWidget(label);
-  vBox->addWidget(mOther);
+  vBox->addWidget(other);
   return vBox;
-}
-
-void MainWindowNodeOperations::newNodeDialog() {
 }
 
 }

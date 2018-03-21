@@ -11,6 +11,7 @@
 #include <QTreeView>
 #include <QTabWidget>
 #include <QStandardItemModel>
+#include <QMenu>
 #include <memory>
 #include "scene/callbacks/StandardMouseEventHandler.h"
 #include "common/operations/MainWindowNodeOperations.h"
@@ -38,11 +39,11 @@ class MainWidget : public QMainWindow {
  private:
   void createBarMenu();
 
-  void initMainGui(QWidget*& leftWidget, QWidget*& rightWidget) const;
+  void initMainGui();
 
   static const int mWindowWidth = 800;
   static const int mWindowHeight = 400;
-  QSplitter* mWidgetSplitter;
+
   QWidget* mCentralWidget;
   QTabWidget* mScensTab;
   Renderer* mRenderer;

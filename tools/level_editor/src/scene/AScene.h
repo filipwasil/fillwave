@@ -17,7 +17,7 @@ class AScene : public QObject {
   AScene(int argc, char* const* argv, QMap<QString, QVariant> parametersMap)
     : mSceneParameters(parametersMap) {
     if (argv != nullptr) {
-      mEngine = std::make_shared<flw::Engine>(argc, argv);
+      mEngine = std::make_shared<flw::EnginePC>(argc, argv);
     }
   }
 
