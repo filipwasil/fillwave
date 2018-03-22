@@ -21,22 +21,31 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <assimp/Importer.hpp> // C++ importer interface
+#include <assimp/scene.h> // Output data structure
+#include <assimp/postprocess.h> // Post processing flags
+#include <assimp/material.h>
+
+#include <fillwave/loaders/modelloader/assimp/AnimatorAssimp.h>
+
 namespace flw {
 namespace flf {
 
-/*! \class Key
- * \brief Base for all animation keys.
- */
+struct ModelLoaderTraitsAssimp {
+  using Node = aiNode;
+  using Scene = aiScene;
+  using ShapeType = aiMesh;
+  using ShapeDataType = unsigned int;
+  using MaterialType = aiMaterial;
+  using TextureType = aiTextureType;
+  using String = aiString;
+  using Importer = Assimp::Importer;
+  using Animator = AnimatorAssimp;
+  using Flags = unsigned int;
 
-template <class TValue>
-struct Key final {
-  Key(float timeStamp, TValue value)
-    : mTime(timeStamp)
-    , mValue(value) {
-  }
-
-  float mTime;
-  TValue mValue;
+  static constexpr int COUNT_BONES_DEFINED = 45;
+  static constexpr int COUNT_BONES_USED = 4;
+  static constexpr int FLAG_ANIMATION_OFF = -1;
 };
 
 } /* flf */

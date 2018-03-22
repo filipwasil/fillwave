@@ -23,8 +23,8 @@
 
 #include <fillwave/Math.h>
 
-#include <fillwave/models/animations/Key.h>
-#include <fillwave/models/animations/Bone.h>
+#include <fillwave/loaders/modelloader/AnimationKey.h>
+#include <fillwave/loaders/modelloader/BoneDefault.h>
 
 #include <vector>
 #include <string>
@@ -47,12 +47,12 @@ public:
  public:
   GLint getBoneId(const std::string& name) const;
   void performAnimation(GLfloat timeElapsedInSeconds);
-  void setActiveAnimation(GLint activeAnimation);
+  void setActiveAnimation(size_t activeAnimation);
   void updateBonesBufferRAM();
   void updateBonesBufferVRAM(GLint uniformLocationBones);
 
  private:
-  class BoneAssimp : public Bone {
+  class BoneAssimp : public BoneDefault {
    public:
     BoneAssimp(aiBone* assimpBone);
     ~BoneAssimp() override;
@@ -70,7 +70,7 @@ public:
     static glm::vec4 convert(aiColor4D vec);
     static glm::quat convert(aiQuaternion vec);
 
-    Bone* mBone;
+    BoneDefault* mBone;
     std::vector<NodeAssimp*> mChildren;
 
    private:
@@ -106,8 +106,8 @@ public:
     std::vector<Channel *> mChannels;
   };
 
-  Bone* get(GLuint id);
-  Bone* get(std::string name);
+  BoneDefault* get(GLuint id);
+  BoneDefault* get(std::string name);
   Channel* findChannel(Animation *animation, const std::string &nodeName) const;
   Animation* getAnimation(GLint i) const;
   NodeAssimp* initNode(aiNode* node);
@@ -124,7 +124,7 @@ public:
   float mTimeSinceStartSeconds;
   NodeAssimp* mRootAnimationNode;
   glm::mat4 mSceneInverseMatrix;
-  std::vector<pu<Bone>> mBones;
+  std::vector<pu<BoneDefault>> mBones;
   std::vector<glm::mat4> mAnimationsBufferData;
   std::vector<pu<Animation>> mAnimations;
   GLint mActiveAnimation;

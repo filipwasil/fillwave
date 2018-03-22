@@ -21,31 +21,32 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <assimp/Importer.hpp> // C++ importer interface
-#include <assimp/scene.h> // Output data structure
-#include <assimp/postprocess.h> // Post processing flags
-#include <assimp/material.h>
-
-#include <fillwave/models/animations/AnimatorAssimp.h>
+#include <fillwave/models/Hinge.h>
+#include <fillwave/Math.h>
 
 namespace flw {
 namespace flf {
 
-struct ModelLoaderTraitsAssimp {
-  using Node = aiNode;
-  using Scene = aiScene;
-  using ShapeType = aiMesh;
-  using ShapeDataType = unsigned int;
-  using MaterialType = aiMaterial;
-  using TextureType = aiTextureType;
-  using String = aiString;
-  using Importer = Assimp::Importer;
-  using Animator = AnimatorAssimp;
-  using Flags = unsigned int;
+/*! \class BoneDefault
+ * \brief Base for all animation keys.
+ */
 
-  static constexpr int COUNT_BONES_DEFINED = 45;
-  static constexpr int COUNT_BONES_USED = 4;
-  static constexpr int FLAG_ANIMATION_OFF = -1;
+class BoneDefault : public Hinge {
+ public:
+  BoneDefault(const std::string& name, const glm::mat4& offsetMatrix, const glm::mat4& globalOffsetMatrix);
+  ~BoneDefault() override = default;
+  std::string getName() const;
+  glm::mat4 getOffsetMatrix() const;
+  glm::mat4 getGlobalOffsetMatrix() const;
+  void setName(std::string name);
+  void setOffsetMatrix(glm::mat4 m);
+  void setGlobalOffsetMatrix(glm::mat4 m);
+  void log() const override;
+
+ private:
+  std::string mName;
+  glm::mat4 mOffsetMatrix;
+  glm::mat4 mGlobalOffsetMatrix;
 };
 
 } /* flf */

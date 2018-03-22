@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Key.h>
+#include <fillwave/loaders/modelloader/AnimationKey.h>
 #include <fillwave/models/base/IEmiterPoint.h>
 
 namespace flw {

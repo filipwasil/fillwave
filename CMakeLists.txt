@@ -56,7 +56,7 @@ aux_source_directory ("src/core/operations" FILLWAVE_CORE_OPERATIONS_SOURCES)
 aux_source_directory ("src/models" FILLWAVE_MODELS_SOURCES)
 aux_source_directory ("src/models/base" FILLWAVE_MODELS_BASE_SOURCES)
 
-aux_source_directory ("src/models/animations" FILLWAVE_MODELS_ANIMATIONS_SOURCES)
+aux_source_directory ("src/loaders/modelloader" FILLWAVE_MODELS_ANIMATIONS_SOURCES)
 
 aux_source_directory ("src/models/effects" FILLWAVE_MODELS_EFFECTS_SOURCES)
 aux_source_directory ("src/models/builders" FILLWAVE_MODELS_BUILDERS_SOURCES)

@@ -21,30 +21,23 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/common/Nothing.h>
-#include <fillwave/models/animations/AnimatorDefault.h>
-
-#include <tinyobjloader/tiny_obj_loader.h>
-
 namespace flw {
 namespace flf {
 
-struct ModelLoaderTraitsTinyObjLoader {
+/*! \class Key
+ * \brief Base for all animation keys.
+ */
 
-  using Node = Nothing;
-  using Scene = Nothing;
-  using ShapeType = tinyobj::shape_t;
-  using ShapeDataType = tinyobj::attrib_t;
-  using MaterialType = tinyobj::material_t;
-  using TextureType = Nothing;
-  using String = Nothing;
-  using Importer = Nothing;
-  using Animator = AnimatorDefault;
-  using Flags = Nothing;
+template <class TValue>
+struct Key final {
+  Key(float timeStamp, TValue value)
+    : mTime(timeStamp)
+    , mValue(value) {
+    // nothing
+  }
 
-  static constexpr int COUNT_BONES_DEFINED = 1;
-  static constexpr int COUNT_BONES_USED = 1;
-  static constexpr int FLAG_ANIMATION_OFF = -1;
+  float mTime;
+  TValue mValue;
 };
 
 } /* flf */

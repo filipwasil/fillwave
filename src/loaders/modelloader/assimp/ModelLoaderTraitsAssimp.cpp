@@ -25,7 +25,7 @@
 #include <fillwave/models/shapes/PhysicsMeshBuffer.h>
 #include <fillwave/models/base/Material.h>
 
-#include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
+#include <fillwave/loaders/modelloader/assimp/ModelLoaderAssimp.h>
 
 #include <fillwave/Log.h>
 #include <fillwave/models/Model.h>
@@ -225,11 +225,11 @@ const std::string getTextureName (ModelLoader::TextureType type, const aiMateria
 }
 
 template<>
-Animator* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getAnimator(const Scene* scene) {
+AnimatorAssimp* TModelLoader<ModelLoaderTraitsAssimp>::getAnimator(const Scene* scene) {
   if (0 == scene->mNumAnimations) {
     return nullptr;
   }
-  return new Animator(scene);
+  return new AnimatorAssimp(scene);
 }
 
 template<>
@@ -257,6 +257,22 @@ std::vector<TModelLoader<ModelLoaderTraitsAssimp>::MeshCreationInfo>
       , getTextureName(aiTextureType_SPECULAR, material) } );
   }
   return meshes;
+}
+
+template<>
+std::vector<TModelLoader<ModelLoaderTraitsAssimp>::Node*>
+  TModelLoader<ModelLoaderTraitsAssimp>::getChildren(const Node* node) {
+  std::vector<Node*> children;
+  children.reserve(node->mNumChildren);
+  for (size_t i = 0; i < node->mNumChildren; ++i) {
+    children.push_back(node->mChildren[i]);
+  }
+  return children;
+}
+
+template<>
+TModelLoader<ModelLoaderTraitsAssimp>::Node* TModelLoader<ModelLoaderTraitsAssimp>::getRootNode(const Scene* scene) {
+  return scene->mRootNode;
 }
 
 template

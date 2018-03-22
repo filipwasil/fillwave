@@ -25,7 +25,7 @@
 #include <fillwave/models/shapes/PhysicsMeshBuffer.h>
 #include <fillwave/models/base/Material.h>
 
-#include <fillwave/loaders/modelLoaderTraits/ModelLoaderTinyObjLoader.h>
+#include <fillwave/loaders/modelloader/tinyobjloader/ModelLoaderTinyObjLoader.h>
 
 namespace flw {
 namespace flf {
@@ -54,10 +54,6 @@ const TModelLoader<ModelLoaderTraitsTinyObjLoader>::Scene* TModelLoader<ModelLoa
 template<>
 std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::Node*> TModelLoader<ModelLoaderTraitsTinyObjLoader>::getChildren(const Node* /*node*/) {
   std::vector<Node*> children;
-//  children.reserve(node->mNumChildren);
-//  for (auto* child : node->mChildren) {
-//    children.push_back(child);
-//  }
 // todo
   return children;
 }

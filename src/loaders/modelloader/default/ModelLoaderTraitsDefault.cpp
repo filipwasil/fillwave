@@ -19,29 +19,23 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-//#include <string>
-#include <fillwave/models/animations/AnimatorDefault.h>
+#include <fillwave/loaders/modelloader/TModelLoader.h>
 
 namespace flw {
 namespace flf {
 
-GLint AnimatorDefault::getBoneId(const std::string& /*name*/) const {
-  return 0;
-}
-
-void AnimatorDefault::performAnimation(GLfloat /*timeElapsedInSeconds*/) {
+template<>
+ModelLoader<ModelLoaderTraitsDefault>::ModelLoader() {
   // nothing
 }
 
-void AnimatorDefault::setActiveAnimation(GLint /*activeAnimation*/) {
+template<>
+ModelLoader<ModelLoaderTraitsDefault>::~ModelLoader() {
   // nothing
 }
 
-void AnimatorDefault::updateBonesBufferRAM() {
-  // nothing
-}
-
-void AnimatorDefault::updateBonesBufferVRAM(GLint /*uniformLocationBones*/) {
+template<>
+void TModelLoader<ModelLoaderTraitsDefault>::getPhysicsBuffer(const char* /*path*/, flf::PhysicsMeshBuffer&/*buf*/) {
   // nothing
 }
 

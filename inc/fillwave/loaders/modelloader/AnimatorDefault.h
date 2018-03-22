@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,48 +21,30 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/Bone.h>
-#include <fillwave/Log.h>
+#include <fillwave/Math.h>
 
-FLOGINIT_DEFAULT()
+#include <fillwave/loaders/modelloader/AnimationKey.h>
+#include <fillwave/loaders/modelloader/BoneDefault.h>
+
+#include <vector>
+#include <string>
+
+#include <assimp/scene.h>
 
 namespace flw {
 namespace flf {
 
-Bone::Bone(const std::string& name, const glm::mat4& offsetMatrix, const glm::mat4& globalOffsetMatrix)
-  : mName(name)
-  , mOffsetMatrix(offsetMatrix)
-  , mGlobalOffsetMatrix(globalOffsetMatrix) {
- // nothing
-}
+struct AnimatorDefault final {
+  GLint getBoneId(const std::string& name) const;
 
-void Bone::setName(std::string name) {
-  mName = name;
-}
+  void performAnimation(GLfloat timeElapsedInSeconds);
 
-std::string Bone::getName() const {
-  return mName;
-}
+  void setActiveAnimation(GLint activeAnimation);
 
-glm::mat4 Bone::getOffsetMatrix() const {
-  return mOffsetMatrix;
-}
+  void updateBonesBufferRAM();
 
-glm::mat4 Bone::getGlobalOffsetMatrix() const {
-  return mGlobalOffsetMatrix;
-}
-
-void Bone::setOffsetMatrix(glm::mat4 m) {
-  mOffsetMatrix = m;
-}
-
-void Bone::setGlobalOffsetMatrix(glm::mat4 m) {
-  mGlobalOffsetMatrix = m;
-}
-
-void Bone::log() const {
-  fLogI("Name: %s", (mName.c_str()));
-}
+  void updateBonesBufferVRAM(GLint uniformLocationBones);
+};
 
 } /* flf */
 } /* flw */

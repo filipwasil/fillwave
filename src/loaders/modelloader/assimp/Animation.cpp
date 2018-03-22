@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -21,33 +19,43 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/Hinge.h>
-#include <fillwave/Math.h>
+#include <fillwave/loaders/modelloader/assimp/AnimatorAssimp.h>
 
 namespace flw {
 namespace flf {
 
-/*! \class Key
- * \brief Base for all animation keys.
- */
+AnimatorAssimp::Animation::Animation(aiAnimation* assimpAnimation) {
+  mName = assimpAnimation->mName.C_Str();
+  mDuration = static_cast<float>(assimpAnimation->mDuration);
+  mTicksPerSec = static_cast<float>(assimpAnimation->mTicksPerSecond);
+  mChannels.reserve(assimpAnimation->mNumChannels);
+  for (unsigned int i = 0; i < assimpAnimation->mNumChannels; ++i) {
+    mChannels.push_back(new AnimatorAssimp::Channel(assimpAnimation->mChannels[i]));
+  }
+}
 
-class Bone : public Hinge {
- public:
-  Bone(const std::string& name, const glm::mat4& offsetMatrix, const glm::mat4& globalOffsetMatrix);
-  ~Bone() override = default;
-  std::string getName() const;
-  glm::mat4 getOffsetMatrix() const;
-  glm::mat4 getGlobalOffsetMatrix() const;
-  void setName(std::string name);
-  void setOffsetMatrix(glm::mat4 m);
-  void setGlobalOffsetMatrix(glm::mat4 m);
-  void log() const override;
+AnimatorAssimp::Animation::~Animation() {
+  for (auto it : mChannels) {
+    delete it;
+  }
+  mChannels.clear();
+}
 
- private:
-  std::string mName;
-  glm::mat4 mOffsetMatrix;
-  glm::mat4 mGlobalOffsetMatrix;
-};
+float AnimatorAssimp::Animation::getTicksPerSec() {
+  return mTicksPerSec;
+}
+
+float AnimatorAssimp::Animation::getDuration() {
+  return mDuration;
+}
+
+AnimatorAssimp::Channel* AnimatorAssimp::Animation::getChannel(int i) {
+  return mChannels[i];
+}
+
+size_t AnimatorAssimp::Animation::getHowManyChannels() {
+  return mChannels.size();
+}
 
 } /* flf */
 } /* flw */

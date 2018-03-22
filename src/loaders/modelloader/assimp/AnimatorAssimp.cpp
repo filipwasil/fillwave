@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/AnimatorAssimp.h>
+#include <fillwave/loaders/modelloader/assimp/AnimatorAssimp.h>
 
 #include <fillwave/core/pipeline/Uniform.h>
 
@@ -33,8 +33,7 @@ namespace flw {
 namespace flf {
 
 AnimatorAssimp::BoneAssimp::BoneAssimp(aiBone* assimpBone)
-  : Bone( assimpBone->mName.C_Str(), NodeAssimp::convert(assimpBone->mOffsetMatrix), glm::mat4(1.0))
-  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF) {
+  : BoneDefault(assimpBone->mName.C_Str(), NodeAssimp::convert(assimpBone->mOffsetMatrix), glm::mat4(1.0)) {
   // nothing
 }
 
@@ -43,7 +42,8 @@ AnimatorAssimp::BoneAssimp::~BoneAssimp() {
 }
 
 AnimatorAssimp::AnimatorAssimp(const ModelLoader::Scene* scene)
-  : mTimeSinceStartSeconds(0.0f) {
+  : mTimeSinceStartSeconds(0.0f)
+  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF) {
   mAnimationsBufferData.resize(ModelLoader::COUNT_BONES_DEFINED);
 
   GLuint numBones = 0;
@@ -74,7 +74,7 @@ AnimatorAssimp::~AnimatorAssimp() {
   delete mRootAnimationNode;
 }
 
-Bone* AnimatorAssimp::get(GLuint id) {
+BoneDefault* AnimatorAssimp::get(GLuint id) {
   if (mBones.size() < id) {
     return mBones[id].get();
   }
@@ -82,7 +82,7 @@ Bone* AnimatorAssimp::get(GLuint id) {
 }
 
 
-Bone* AnimatorAssimp::get(std::string name) {
+BoneDefault* AnimatorAssimp::get(std::string name) {
   for (auto &it : mBones) {
     if (it->getName() == name) {
       return it.get();
@@ -110,23 +110,19 @@ AnimatorAssimp::Animation* AnimatorAssimp::getAnimation(GLint i) const {
   return (i != ModelLoader::FLAG_ANIMATION_OFF ? mAnimations[i].get() : nullptr);
 }
 
-GLint AnimatorAssimp::getAnimationsCount() const {
-  return mAnimations.size();
-}
-
-void AnimatorAssimp::updateAnimation(GLint activeAnimation, float timeElapsed_s) {
-  if (ModelLoader::FLAG_ANIMATION_OFF == activeAnimation) {
+void AnimatorAssimp::performAnimation(float timeElapsed_s) {
+  if (ModelLoader::FLAG_ANIMATION_OFF == mActiveAnimation) {
     mTimeSinceStartSeconds = 0;
     mRootAnimationNode->update(0, glm::mat4(1.0), this, 0);
     return;
   }
   mTimeSinceStartSeconds += timeElapsed_s;
   float TicksPerSecond = (float) (
-      mAnimations[activeAnimation]->getTicksPerSec() != 0 ? mAnimations[activeAnimation]->getTicksPerSec() : 25.0f
+      mAnimations[mActiveAnimation]->getTicksPerSec() != 0 ? mAnimations[mActiveAnimation]->getTicksPerSec() : 25.0f
   );
   float TimeInTicks = mTimeSinceStartSeconds * TicksPerSecond;
-  float AnimationTime = fmod(TimeInTicks, (float) mAnimations[activeAnimation]->getDuration());
-  mRootAnimationNode->update(AnimationTime, glm::mat4(1.0), this, activeAnimation);
+  float AnimationTime = fmod(TimeInTicks, (float) mAnimations[mActiveAnimation]->getDuration());
+  mRootAnimationNode->update(AnimationTime, glm::mat4(1.0), this, mActiveAnimation);
 }
 
 AnimatorAssimp::NodeAssimp* AnimatorAssimp::initNode(aiNode *node) {
@@ -150,13 +146,7 @@ void AnimatorAssimp::updateBonesBufferVRAM(GLint uniformLocationBones) {
   flc::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(), ModelLoader::COUNT_BONES_DEFINED);
 }
 
-void AnimatorAssimp::performAnimation(GLfloat timeElapsedInSeconds) {
-  if (mAnimator->getAnimationsCount() > mActiveAnimation) {
-    mAnimator->updateAnimation(mActiveAnimation, timeElapsedInSeconds);
-  }
-}
-
-void AnimatorAssimp::setActiveAnimation(GLint activeAnimation) {
+void AnimatorAssimp::setActiveAnimation(size_t animationID) {
   if (mAnimations.size() <= animationID) {
     fLogD("Animation ", mActiveAnimation, " has stopped due to setting a non-valid animation id:", animationID);
     mActiveAnimation = ModelLoader::FLAG_ANIMATION_OFF;

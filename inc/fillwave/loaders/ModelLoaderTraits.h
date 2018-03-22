@@ -25,7 +25,7 @@
 
 #if defined (FILLWAVE_MODEL_LOADER_ASSIMP)
 
-#include <fillwave/loaders/modelLoaderTraits/ModelLoaderAssimp.h>
+#include <fillwave/loaders/modelloader/assimp/ModelLoaderAssimp.h>
 
 namespace flw {
 namespace flf {
@@ -35,7 +35,7 @@ namespace flf {
 
 #elif defined(FILLWAVE_MODEL_LOADER_TINYOBJLOADER)
 
-#include <fillwave/loaders/modelLoaderTraits/ModelLoaderTinyObjLoader.h>
+#include <fillwave/loaders/modelloader/tinyobjloader/ModelLoaderTinyObjLoader.h>
 
 namespace flw {
 namespace flf {
@@ -45,7 +45,7 @@ namespace flf {
 
 #else
 
-#include <fillwave/loaders/modelLoaderTraits/ModelLoaderDefault.h>
+#include <fillwave/loaders/modelloader/ModelLoaderDefault.h>
 
 namespace flw {
 namespace flf {

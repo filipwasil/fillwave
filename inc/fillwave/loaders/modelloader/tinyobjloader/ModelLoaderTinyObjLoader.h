@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,43 +21,31 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/modelLoaderTraits/AnimatorAssimp.h>
+#include <fillwave/common/Nothing.h>
+#include <fillwave/loaders/modelloader/AnimatorDefault.h>
+
+#include <tinyobjloader/tiny_obj_loader.h>
 
 namespace flw {
 namespace flf {
 
-AnimatorAssimp::Animation::Animation(aiAnimation* assimpAnimation) {
-  mName = assimpAnimation->mName.C_Str();
-  mDuration = static_cast<float>(assimpAnimation->mDuration);
-  mTicksPerSec = static_cast<float>(assimpAnimation->mTicksPerSecond);
-  mChannels.reserve(assimpAnimation->mNumChannels);
-  for (unsigned int i = 0; i < assimpAnimation->mNumChannels; ++i) {
-    mChannels.push_back(new AnimatorAssimp::Channel(assimpAnimation->mChannels[i]));
-  }
-}
+struct ModelLoaderTraitsTinyObjLoader {
 
-AnimatorAssimp::Animation::~Animation() {
-  for (auto it : mChannels) {
-    delete it;
-  }
-  mChannels.clear();
-}
+  using Node = Nothing;
+  using Scene = Nothing;
+  using ShapeType = tinyobj::shape_t;
+  using ShapeDataType = tinyobj::attrib_t;
+  using MaterialType = tinyobj::material_t;
+  using TextureType = Nothing;
+  using String = Nothing;
+  using Importer = Nothing;
+  using Animator = AnimatorDefault;
+  using Flags = Nothing;
 
-float AnimatorAssimp::Animation::getTicksPerSec() {
-  return mTicksPerSec;
-}
-
-float AnimatorAssimp::Animation::getDuration() {
-  return mDuration;
-}
-
-AnimatorAssimp::Channel* AnimatorAssimp::Animation::getChannel(int i) {
-  return mChannels[i];
-}
-
-size_t AnimatorAssimp::Animation::getHowManyChannels() {
-  return mChannels.size();
-}
+  static constexpr int COUNT_BONES_DEFINED = 1;
+  static constexpr int COUNT_BONES_USED = 1;
+  static constexpr int FLAG_ANIMATION_OFF = -1;
+};
 
 } /* flf */
 } /* flw */
