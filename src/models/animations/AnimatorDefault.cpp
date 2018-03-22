@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -21,40 +19,31 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <memory>
-#include <array>
-#include <utility>
-#include <iostream>
+//#include <string>
+#include <fillwave/models/animations/AnimatorDefault.h>
 
 namespace flw {
+namespace flf {
 
-template <class TValueType>
-class PointerCache : public std::unique_ptr<TValueType, void(*)(TValueType*)> {
- public:
+GLint AnimatorDefault::getBoneId(const std::string& /*name*/) const {
+  return 0;
+}
 
-  PointerCache()
-    : std::unique_ptr<TValueType, void(*)(TValueType*)> (nullptr, [](TValueType*){})
-    , mPtrStack() {
-    // nothing
-  }
+void AnimatorDefault::performAnimation(GLfloat /*timeElapsedInSeconds*/) {
+  // nothing
+}
 
-  template <typename ...Args>
-  PointerCache(Args&&... args)
-    : std::unique_ptr<TValueType, void(*)(TValueType*)> (create(), [](TValueType*){})
-    , mPtrStack ( { { { std::forward<Args>(args)...} } } ) {
-    // nothing
-  }
+void AnimatorDefault::setActiveAnimation(GLint /*activeAnimation*/) {
+  // nothing
+}
 
- private:
-  TValueType* create() {
-    return mPtrStack.data();
-  }
+void AnimatorDefault::updateBonesBufferRAM() {
+  // nothing
+}
 
-  void destroy(TValueType*) {
-    // nothing
-  }
+void AnimatorDefault::updateBonesBufferVRAM(GLint /*uniformLocationBones*/) {
+  // nothing
+}
 
-  std::array<TValueType, 1> mPtrStack;
-};
-
+} /* flf */
 } /* flw */

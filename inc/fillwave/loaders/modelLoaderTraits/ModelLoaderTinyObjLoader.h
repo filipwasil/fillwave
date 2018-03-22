@@ -21,22 +21,26 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <fillwave/common/Nothing.h>
+#include <fillwave/models/animations/AnimatorDefault.h>
+
 #include <tinyobjloader/tiny_obj_loader.h>
 
 namespace flw {
 namespace flf {
 
 struct ModelLoaderTraitsTinyObjLoader {
-  using Node = unsigned int;
-  using Scene = unsigned int;
+
+  using Node = Nothing;
+  using Scene = Nothing;
   using ShapeType = tinyobj::shape_t;
   using ShapeDataType = tinyobj::attrib_t;
   using MaterialType = tinyobj::material_t;
-  using TextureType = unsigned int;
-  using String = const char;
-  using Importer = unsigned int;
-  using Animator = unsigned int;
-  using Flags = unsigned int;
+  using TextureType = Nothing;
+  using String = Nothing;
+  using Importer = Nothing;
+  using Animator = AnimatorDefault;
+  using Flags = Nothing;
 
   static constexpr int COUNT_BONES_DEFINED = 1;
   static constexpr int COUNT_BONES_USED = 1;

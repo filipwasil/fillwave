@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,43 +21,30 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/AnimatorAssimp.h>
+#include <fillwave/Math.h>
+
+#include <fillwave/models/animations/Key.h>
+#include <fillwave/models/animations/Bone.h>
+
+#include <vector>
+#include <string>
+
+#include <assimp/scene.h>
 
 namespace flw {
 namespace flf {
 
-AnimatorAssimp::Animation::Animation(aiAnimation* assimpAnimation) {
-  mName = assimpAnimation->mName.C_Str();
-  mDuration = static_cast<float>(assimpAnimation->mDuration);
-  mTicksPerSec = static_cast<float>(assimpAnimation->mTicksPerSecond);
-  mChannels.reserve(assimpAnimation->mNumChannels);
-  for (unsigned int i = 0; i < assimpAnimation->mNumChannels; ++i) {
-    mChannels.push_back(new AnimatorAssimp::Channel(assimpAnimation->mChannels[i]));
-  }
-}
+struct AnimatorDefault final {
+  GLint getBoneId(const std::string& name) const;
 
-AnimatorAssimp::Animation::~Animation() {
-  for (auto it : mChannels) {
-    delete it;
-  }
-  mChannels.clear();
-}
+  void performAnimation(GLfloat timeElapsedInSeconds);
 
-float AnimatorAssimp::Animation::getTicksPerSec() {
-  return mTicksPerSec;
-}
+  void setActiveAnimation(GLint activeAnimation);
 
-float AnimatorAssimp::Animation::getDuration() {
-  return mDuration;
-}
+  void updateBonesBufferRAM();
 
-AnimatorAssimp::Channel* AnimatorAssimp::Animation::getChannel(int i) {
-  return mChannels[i];
-}
-
-size_t AnimatorAssimp::Animation::getHowManyChannels() {
-  return mChannels.size();
-}
+  void updateBonesBufferVRAM(GLint uniformLocationBones);
+};
 
 } /* flf */
 } /* flw */

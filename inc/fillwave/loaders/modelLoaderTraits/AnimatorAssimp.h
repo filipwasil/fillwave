@@ -45,12 +45,11 @@ public:
   ~AnimatorAssimp();
 
  public:
-  GLint getAnimationsCount() const;
   GLint getBoneId(const std::string& name) const;
-
+  void performAnimation(GLfloat timeElapsedInSeconds);
+  void setActiveAnimation(GLint activeAnimation);
   void updateBonesBufferRAM();
   void updateBonesBufferVRAM(GLint uniformLocationBones);
-  void updateAnimation(GLint activeAnimation, float timeElapsed_s);
 
  private:
   class BoneAssimp : public Bone {
@@ -128,6 +127,7 @@ public:
   std::vector<pu<Bone>> mBones;
   std::vector<glm::mat4> mAnimationsBufferData;
   std::vector<pu<Animation>> mAnimations;
+  GLint mActiveAnimation;
 };
 
 } /* flf */

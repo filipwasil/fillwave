@@ -20,14 +20,13 @@ if (FILLWAVE_MODEL_LOADER_ASSIMP)
   set (FILLWAVE_MODEL_LOADER assimp)
   set (FILLWAVE_MODEL_LOADER_INCLUDES ${FILLWAVE_EXT_INCLUDES}/assimp/include)
   set (FILLWAVE_MODEL_LOADER_PATH ${FILLWAVE_EXT_INCLUDES}/assimp)
-  set (FILLWAVE_MODEL_LOADER_TRAITS
-      ${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/modelLoaderTraits/ModelLoaderTraitsAssimp.cpp)
+  aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/modelLoaderTraits/assimp FILLWAVE_MODEL_LOADER_TRAITS)
 else (FILLWAVE_MODEL_LOADER_TINYOBJLOADER)
   set (FILLWAVE_MODEL_LOADER tinyobjloader)
   set (FILLWAVE_MODEL_LOADER_INCLUDES ${FILLWAVE_EXT_INCLUDES}/tinyobjloader)
   set (FILLWAVE_MODEL_LOADER_PATH ${FILLWAVE_EXT_INCLUDES}/tinyobjloader)
-  set (FILLWAVE_MODEL_LOADER_TRAITS
-      ${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/modelLoaderTraits/ModelLoaderTraitsTinyObjLoader.cpp)
+  aux_source_directory (
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/modelLoaderTraits/tinyobjloader FILLWAVE_MODEL_LOADER_TRAITS)
   add_subdirectory (${FILLWAVE_MODEL_LOADER_PATH})
 endif ()
 

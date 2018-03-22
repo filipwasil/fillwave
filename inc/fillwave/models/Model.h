@@ -89,8 +89,6 @@ public:
 
   void setActiveAnimation(GLint animationID);
 
-  GLint getActiveAnimations();
-
   pp<Mesh> getMesh(size_t id);
 
   void updateRenderer(IRenderer &renderer) override;
@@ -99,8 +97,7 @@ public:
 
  protected:
   Engine* mEngine;
-  std::unique_ptr<ModelLoader::Animator> mAnimator;
-  GLint mActiveAnimation;
+  pu<ModelLoader::Animator> mAnimator;
 
   LightSystem& mLights;
   flc::Program* mProgramShadow;

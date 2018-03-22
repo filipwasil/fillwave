@@ -21,20 +21,22 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <fillwave/common/Nothing.h>
+
 namespace flw {
 namespace flf {
 
 struct ModelLoaderTraitsDefault {
-  using Node = unsigned int;
-  using Scene = unsigned int;
-  using ShapeType = unsigned int;
-  using ShapeDataType = unsigned int;
-  using MaterialType = unsigned int;
-  using TextureType = unsigned int;
-  using String = unsigned int;
-  using Importer = unsigned int;
-  using Animator = unsigned int;
-  using Flags = unsigned int;
+  using Node = Nothing;
+  using Scene = Nothing;
+  using ShapeType = Nothing;
+  using ShapeDataType = Nothing;
+  using MaterialType = Nothing;
+  using TextureType = Nothing;
+  using String = Nothing;
+  using Importer = Nothing;
+  using Animator = Nothing;
+  using Flags = Nothing;
 
   static constexpr int COUNT_BONES_DEFINED = 1;
   static constexpr int COUNT_BONES_USED = 1;

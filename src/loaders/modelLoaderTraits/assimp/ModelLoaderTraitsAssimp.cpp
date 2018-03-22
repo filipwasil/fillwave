@@ -207,7 +207,7 @@ flw::flc::VertexBufferBasic*
 }
 
 template<>
-void TModelLoader<ModelLoaderTraitsAssimp>::assignTransformation (const Node* node, Entity* entity) {
+void TModelLoader<ModelLoaderTraitsAssimp>::setTransformation(const Node* node, Entity* entity) {
   aiVector3t<float> scale;
   aiQuaterniont<float> rot;
   aiVector3t<float> pos;
@@ -222,6 +222,14 @@ const std::string getTextureName (ModelLoader::TextureType type, const aiMateria
   return
     mat->GetTexture(
       type, 0, &s, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS ? s.data : "128_128_128.color";
+}
+
+template<>
+Animator* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getAnimator(const Scene* scene) {
+  if (0 == scene->mNumAnimations) {
+    return nullptr;
+  }
+  return new Animator(scene);
 }
 
 template<>

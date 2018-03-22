@@ -25,11 +25,14 @@
 #include <fillwave/models/base/Material.h>
 
 namespace flw {
+
 namespace flc {
 class IndexBuffer;
 class VertexBufferBasic;
 }
+
 namespace flf {
+
 class Animator;
 class Entity;
 struct Material;
@@ -73,9 +76,13 @@ class TModelLoader final {
   static Material getTexturePath(TextureType type, const MaterialType& material);
   static ::flw::flc::IndexBuffer* getIndexBuffer(const ShapeType* shape);
   static ::flw::flc::VertexBufferBasic* getVertexBuffer(const ShapeType* shape, const ShapeDataType& data, Animator* a);
-  static void assignTransformation (const Node* node, Entity* entity);
+  static void setTransformation (const Node* node, Entity* entity);
   static std::vector<MeshCreationInfo> getMeshes(const Node* node, const Scene* scene);
+  static std::vector<Node*> getChildren(const Node*);
+  static Node* getRootNode(const Scene*);
+  static Animator* getAnimator(const Scene*);
 
+  //    mAnimator = std::make_unique<ModelLoader::Animator>(scene);
   Importer* mImporter;
   Flags mFlags;
 };

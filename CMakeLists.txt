@@ -55,10 +55,9 @@ aux_source_directory ("src/core/operations" FILLWAVE_CORE_OPERATIONS_SOURCES)
 
 aux_source_directory ("src/models" FILLWAVE_MODELS_SOURCES)
 aux_source_directory ("src/models/base" FILLWAVE_MODELS_BASE_SOURCES)
-if (FILLWAVE_MODEL_LOADER_ASSIMP)
-  aux_source_directory ("src/models/animations" FILLWAVE_MODELS_ANIMATIONS_SOURCES)
-  aux_source_directory ("src/callbacks/animations" FILLWAVE_CALLBACKS_ANIMATIONS_SOURCES)
-endif ()
+
+aux_source_directory ("src/models/animations" FILLWAVE_MODELS_ANIMATIONS_SOURCES)
+
 aux_source_directory ("src/models/effects" FILLWAVE_MODELS_EFFECTS_SOURCES)
 aux_source_directory ("src/models/builders" FILLWAVE_MODELS_BUILDERS_SOURCES)
 
@@ -66,7 +65,6 @@ aux_source_directory ("src/space" FILLWAVE_SPACE_SOURCES)
 aux_source_directory ("src/space/base" FILLWAVE_SPACE_BASE_SOURCES)
 
 aux_source_directory ("src/hud" FILLWAVE_HUD_SOURCES)
-aux_source_directory ("src/callbacks" FILLWAVE_CALLBACKS_SOURCES)
 aux_source_directory ("src/loaders" FILLWAVE_LOADERS_SOURCES)
 aux_source_directory ("src/management" FILLWAVE_MANAGEMENT_SOURCES)
 aux_source_directory ("src/common" FILLWAVE_COMMON_SOURCES)
@@ -91,8 +89,6 @@ set (FILLWAVE_SOURCES
     ${FILLWAVE_MODELS_BUILDERS_SOURCES}
     ${FILLWAVE_SPACE_SOURCES}
     ${FILLWAVE_SPACE_BASE_SOURCES}
-    ${FILLWAVE_CALLBACKS_SOURCES}
-    ${FILLWAVE_CALLBACKS_ANIMATIONS_SOURCES}
     ${FILLWAVE_LOADERS_SOURCES}
     ${FILLWAVE_MANAGEMENT_SOURCES}
     ${FILLWAVE_COMMON_SOURCES}

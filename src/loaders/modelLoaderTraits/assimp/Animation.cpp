@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -21,40 +19,43 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <memory>
-#include <array>
-#include <utility>
-#include <iostream>
+#include <fillwave/loaders/modelLoaderTraits/AnimatorAssimp.h>
 
 namespace flw {
+namespace flf {
 
-template <class TValueType>
-class PointerCache : public std::unique_ptr<TValueType, void(*)(TValueType*)> {
- public:
-
-  PointerCache()
-    : std::unique_ptr<TValueType, void(*)(TValueType*)> (nullptr, [](TValueType*){})
-    , mPtrStack() {
-    // nothing
+AnimatorAssimp::Animation::Animation(aiAnimation* assimpAnimation) {
+  mName = assimpAnimation->mName.C_Str();
+  mDuration = static_cast<float>(assimpAnimation->mDuration);
+  mTicksPerSec = static_cast<float>(assimpAnimation->mTicksPerSecond);
+  mChannels.reserve(assimpAnimation->mNumChannels);
+  for (unsigned int i = 0; i < assimpAnimation->mNumChannels; ++i) {
+    mChannels.push_back(new AnimatorAssimp::Channel(assimpAnimation->mChannels[i]));
   }
+}
 
-  template <typename ...Args>
-  PointerCache(Args&&... args)
-    : std::unique_ptr<TValueType, void(*)(TValueType*)> (create(), [](TValueType*){})
-    , mPtrStack ( { { { std::forward<Args>(args)...} } } ) {
-    // nothing
+AnimatorAssimp::Animation::~Animation() {
+  for (auto it : mChannels) {
+    delete it;
   }
+  mChannels.clear();
+}
 
- private:
-  TValueType* create() {
-    return mPtrStack.data();
-  }
+float AnimatorAssimp::Animation::getTicksPerSec() {
+  return mTicksPerSec;
+}
 
-  void destroy(TValueType*) {
-    // nothing
-  }
+float AnimatorAssimp::Animation::getDuration() {
+  return mDuration;
+}
 
-  std::array<TValueType, 1> mPtrStack;
-};
+AnimatorAssimp::Channel* AnimatorAssimp::Animation::getChannel(int i) {
+  return mChannels[i];
+}
 
+size_t AnimatorAssimp::Animation::getHowManyChannels() {
+  return mChannels.size();
+}
+
+} /* flf */
 } /* flw */

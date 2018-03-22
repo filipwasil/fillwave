@@ -21,40 +21,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <memory>
-#include <array>
-#include <utility>
-#include <iostream>
-
-namespace flw {
-
-template <class TValueType>
-class PointerCache : public std::unique_ptr<TValueType, void(*)(TValueType*)> {
- public:
-
-  PointerCache()
-    : std::unique_ptr<TValueType, void(*)(TValueType*)> (nullptr, [](TValueType*){})
-    , mPtrStack() {
-    // nothing
-  }
-
-  template <typename ...Args>
-  PointerCache(Args&&... args)
-    : std::unique_ptr<TValueType, void(*)(TValueType*)> (create(), [](TValueType*){})
-    , mPtrStack ( { { { std::forward<Args>(args)...} } } ) {
-    // nothing
-  }
-
- private:
-  TValueType* create() {
-    return mPtrStack.data();
-  }
-
-  void destroy(TValueType*) {
-    // nothing
-  }
-
-  std::array<TValueType, 1> mPtrStack;
+struct Nothing {
+  // nothing
 };
-
-} /* flw */

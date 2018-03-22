@@ -33,8 +33,8 @@ option (FILLWAVE_TESTS_COVERALLS "Generate coveralls data" OFF)
 # External libraries options
 # -----------------------------------------------
 
-option (FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)
-option (FILLWAVE_MODEL_LOADER_TINYOBJLOADER "Use Tiny obj loader" OFF)
+option (FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" OFF)
+option (FILLWAVE_MODEL_LOADER_TINYOBJLOADER "Use Tiny obj loader" ON)
 option (FILLWAVE_TEXTURE_LOADER_GLI "Use GLI texture loader" OFF)
 
 # -----------------------------------------------

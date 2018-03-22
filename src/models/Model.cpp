@@ -44,7 +44,6 @@ Model::Model(Engine* engine,
     const Material& material)
     : Programmable(program)
     , mEngine(engine)
-    , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
     , mLights(engine->getLightSystem()) {
 
   initShadowing(engine);
@@ -55,23 +54,25 @@ Model::Model(Engine* engine,
   std::vector<GLuint> indices = shape.getIndices();
 
   flc::VertexArray* vao = new flc::VertexArray();
-  attach(std::make_unique<Mesh>(engine,
-                                material,
-                                diffuseMap,
-                                normalMap,
-                                specularMap,
-                                program,
-                                mProgramShadow,
-                                mProgramShadowColor,
-                                loader.getProgram(EProgram::occlusionOptimizedQuery),
-                                loader.getProgram(EProgram::ambientOcclusionGeometry),
-                                loader.getProgram(EProgram::ambientOcclusionColor),
-                                engine->getLightSystem(),
-                                engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices),
-                                engine->storeBuffer<flc::IndexBuffer>(vao, indices),
-                                mAnimator.get(),
-                                GL_TRIANGLES,
-                                vao));
+  attach(std::make_unique<Mesh>(
+    engine
+    , material
+    , diffuseMap
+    , normalMap
+    , specularMap
+    , program
+    , mProgramShadow
+    , mProgramShadowColor
+    , loader.getProgram(EProgram::occlusionOptimizedQuery)
+    , loader.getProgram(EProgram::ambientOcclusionGeometry)
+    , loader.getProgram(EProgram::ambientOcclusionColor)
+    , engine->getLightSystem()
+    , engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices)
+    , engine->storeBuffer<flc::IndexBuffer>(vao, indices)
+    , mAnimator.get()
+    , GL_TRIANGLES
+    , vao)
+  );
 }
 
 Model::Model(
@@ -80,7 +81,6 @@ Model::Model(
   , const std::string& shapePath)
   : Programmable(program)
   , mEngine(engine)
-  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
   , mLights(engine->getLightSystem()) {
   reloadModel(shapePath);
 }
@@ -93,7 +93,6 @@ Model::Model(Engine* engine
              , const std::string& specularMapPath)
   : Programmable(program)
   , mEngine(engine)
-  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
   , mLights(engine->getLightSystem()) {
 
   reloadModel(shapePath
@@ -111,7 +110,6 @@ Model::Model(Engine* engine
              , const Material& material)
   : Programmable(program)
   , mEngine(engine)
-  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF)
   , mLights(engine->getLightSystem()) {
 
   reloadModel(shapePath
@@ -129,12 +127,12 @@ void Model::reloadModel(const std::string& path) {
   unloadNodes();
   const auto* scene = mEngine->getScene(path);
   if (!scene) {
-    fLogF("Model: %s could not be read", path.c_str());
+    fLogF("Model: ", path, " could not be read");
   }
   initAnimations(scene);
   initShadowing(mEngine);
   initUniformsCache();
-  loadNodes(scene->mRootNode, scene, this);
+  loadNodes(ModelLoader::getRootNode(scene), scene, this);
 
   ///////////////
 #if 0
@@ -202,12 +200,12 @@ void Model::reloadModel(
   initAnimations(scene);
   initShadowing(mEngine);
   initUniformsCache();
-  loadNodes(scene->mRootNode, scene, this, diff, norm, specular, material);
+  loadNodes(ModelLoader::getRootNode(scene), scene, this, diff, norm, specular, material);
 }
 
 inline void Model::initAnimations(const ModelLoader::Scene* scene) {
-  if (scene->HasAnimations()) {
-    mAnimator = std::make_unique<ModelLoader::Animator>(scene);
+  mAnimator = std::unique_ptr<ModelLoader::Animator>(ModelLoader::getAnimator(scene));
+  if (mAnimator) {
     fLogD("attached TimedBoneUpdateCallback to model");
     this->attachHandler(
       [this](const Event& event){
@@ -226,7 +224,7 @@ inline void Model::unloadNodes() {
 inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene* scene, Entity* entity) {
 
   /* Set this node transformations */
-  ModelLoader::assignTransformation(node, entity);
+  ModelLoader::setTransformation(node, entity);
   auto meshes = ModelLoader::getMeshes(node, scene);
   for (auto& meshCreationInfo : meshes) {
     entity->attach(
@@ -243,9 +241,11 @@ inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::S
   }
 
   /* Evaluate children */
-  for (GLuint i = 0; i < node->mNumChildren; ++i) {
+  auto children = ModelLoader::getChildren(node);
+
+  for (auto* child : children) {
     pu<Entity> newEntity = std::make_unique<flf::Hinge>();
-    loadNodes(node->mChildren[i], scene, newEntity.get());
+    loadNodes(child, scene, newEntity.get());
     entity->attach(std::move(newEntity));
   }
 }
@@ -258,8 +258,8 @@ void Model::loadNodes (
   , flc::Texture2D* normalMap
   , flc::Texture2D* specularMap
   , const Material& material) {
-  /* Set this node transformations */
-  ModelLoader::assignTransformation(node, entity);
+
+  ModelLoader::setTransformation(node, entity);
   auto meshes = ModelLoader::getMeshes(node, scene);
   for (auto & meshCreationInfo : meshes) {
     entity->attach(loadMesh(
@@ -273,9 +273,11 @@ void Model::loadNodes (
   }
 
   /* Evaluate children */
-  for (GLuint i = 0; i < node->mNumChildren; ++i) {
+  auto children = ModelLoader::getChildren(node);
+
+  for (auto* child : children) {
     pu<Entity> newEntity = std::make_unique<flf::Hinge>();
-    loadNodes(node->mChildren[i], scene, newEntity.get(), diffuseMap, normalMap, specularMap, material);
+    loadNodes(child, scene, newEntity.get(), diffuseMap, normalMap, specularMap, material);
     entity->attach(std::move(newEntity));
   }
 }
@@ -289,32 +291,19 @@ pp<Mesh> Model::getMesh(size_t id) {
 }
 
 void Model::performAnimation(GLfloat timeElapsedInSeconds) {
-  if (mAnimator && mAnimator->getAnimationsCount() > mActiveAnimation) {
-    mAnimator->updateAnimation(mActiveAnimation, timeElapsedInSeconds);
-  }
-}
-
-void Model::setActiveAnimation(GLint animationID) {
-  if (!mAnimator) {
+  if (nullptr == mAnimator) {
     fLogE("This model is not animated. Active animation not set.");
     return;
   }
-
-  if (mAnimator->getAnimationsCount() <= animationID) {
-    fLogD("Animation ", mActiveAnimation, " has stopped due to setting a non-valid animation id:", animationID);
-    mActiveAnimation = ModelLoader::FLAG_ANIMATION_OFF;
-    return;
-  }
-
-  fLogD("New active animation set: ", mActiveAnimation);
-  mActiveAnimation = animationID;
+  mAnimator->performAnimation(timeElapsedInSeconds);
 }
 
-GLint Model::getActiveAnimations() {
-  if (mAnimator) {
-    return mAnimator->getAnimationsCount();
+void Model::setActiveAnimation(GLint animationID) {
+  if (nullptr == mAnimator) {
+    fLogE("This model is not animated. Active animation not set.");
+    return;
   }
-  return 0;
+  mAnimator->setActiveAnimation(animationID);
 }
 
 bool Model::isAnimated() const {
@@ -356,15 +345,9 @@ pu<Mesh> Model::loadMesh(
   auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
 //  engine->storeBuffer<flc::IndexBuffer>(vao, static_cast<GLuint>(shape.mesh.indices.size())), GL_TRIANGLES, vao);
   auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, data, mAnimator.get());
-  auto mesh = std::make_unique<Mesh>(engine,
-                                     material,
-                                     diffuseMap,
-                                     normalMap,
-                                     specularMap,
-                                     mProgram,
-                                     mProgramShadow,
-                                     mProgramShadowColor,
-                                     loader.getProgram(EProgram::occlusionOptimizedQuery),
+  auto mesh = std::make_unique<Mesh>(
+    engine, material, diffuseMap, normalMap, specularMap, mProgram, mProgramShadow, mProgramShadowColor, loader
+      .getProgram(EProgram::occlusionOptimizedQuery),
                                      loader.getProgram(EProgram::ambientOcclusionGeometry),
                                      loader.getProgram(EProgram::ambientOcclusionColor),
                                      engine->getLightSystem(),

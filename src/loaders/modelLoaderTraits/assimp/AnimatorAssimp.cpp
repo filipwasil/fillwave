@@ -33,7 +33,8 @@ namespace flw {
 namespace flf {
 
 AnimatorAssimp::BoneAssimp::BoneAssimp(aiBone* assimpBone)
-  : Bone( assimpBone->mName.C_Str(), NodeAssimp::convert(assimpBone->mOffsetMatrix), glm::mat4(1.0)) {
+  : Bone( assimpBone->mName.C_Str(), NodeAssimp::convert(assimpBone->mOffsetMatrix), glm::mat4(1.0))
+  , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF) {
   // nothing
 }
 
@@ -90,6 +91,10 @@ Bone* AnimatorAssimp::get(std::string name) {
   return nullptr;
 }
 
+void UpdateAnimation() {
+
+}
+
 GLint AnimatorAssimp::getBoneId(const std::string& name) const {
   int idx = 0;
   for (auto &it : mBones) {
@@ -144,6 +149,24 @@ void AnimatorAssimp::updateBonesBufferRAM() {
 void AnimatorAssimp::updateBonesBufferVRAM(GLint uniformLocationBones) {
   flc::Uniform::push(uniformLocationBones, mAnimationsBufferData.data(), ModelLoader::COUNT_BONES_DEFINED);
 }
+
+void AnimatorAssimp::performAnimation(GLfloat timeElapsedInSeconds) {
+  if (mAnimator->getAnimationsCount() > mActiveAnimation) {
+    mAnimator->updateAnimation(mActiveAnimation, timeElapsedInSeconds);
+  }
+}
+
+void AnimatorAssimp::setActiveAnimation(GLint activeAnimation) {
+  if (mAnimations.size() <= animationID) {
+    fLogD("Animation ", mActiveAnimation, " has stopped due to setting a non-valid animation id:", animationID);
+    mActiveAnimation = ModelLoader::FLAG_ANIMATION_OFF;
+    return;
+  }
+
+  fLogD("New active animation set: ", mActiveAnimation);
+  mActiveAnimation = animationID;
+}
+
 
 AnimatorAssimp::Channel* AnimatorAssimp::findChannel(AnimatorAssimp::Animation *animation, const std::string& nodeName) const {
   for (size_t i = 0; i < animation->getHowManyChannels(); ++i) {

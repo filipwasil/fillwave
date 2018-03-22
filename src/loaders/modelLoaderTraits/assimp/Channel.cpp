@@ -19,11 +19,10 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/models/animations/AnimatorAssimp.h>
-
+#include <fillwave/loaders/modelLoaderTraits/AnimatorAssimp.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Channel", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
