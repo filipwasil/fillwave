@@ -1,60 +1,63 @@
 #pragma once
 
-#include <QWidget>
-#include <QMainWindow>
-#include <QSplitter>
-#include <QMenuBar>
-#include <QAction>
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QTreeWidget>
-#include <QTreeView>
-#include <QTabWidget>
-#include <QStandardItemModel>
-#include <QMenu>
 #include <memory>
-#include "scene/callbacks/StandardMouseEventHandler.h"
-#include "common/operations/MainWindowNodeOperations.h"
-#include "common/operations/MainWindowFileOperations.h"
+#include <QAction>
+#include <QHBoxLayout>
+#include <QMainWindow>
+#include <QMenu>
+#include <QMenuBar>
+#include <QSplitter>
+#include <QStandardItemModel>
+#include <QTabWidget>
+#include <QTreeView>
+#include <QTreeWidget>
+#include <QVBoxLayout>
+#include <QWidget>
 
-class QPushButton;
+#include "common/operations/UiFilesWindowsCreator.h"
+#include "common/operations/UiWindowsCreator.h"
+#include "common/widgets/DockWidget.h"
+#include "scene/callbacks/StandardMouseEventHandler.h"
 
 class Renderer;
 
-class Panel;
-
-
 namespace common {
 
-class MainWindowNodeOperations;
+class UiWindowsCreator;
 
 class MainWidget : public QMainWindow {
  Q_OBJECT
 
  public:
-  MainWidget(int argc, char* argv[], QWidget* parent = 0);
+  MainWidget(int argc, char* argv[], QWidget* parent = Q_NULLPTR);
 
-  virtual ~MainWidget();
+ ~MainWidget();
 
  private:
   void createBarMenu();
 
   void initMainGui();
 
+  void createDock(QString dockName, QWidget* widget, QString actionName, QMenu* subMenu, Qt::DockWidgetArea dockArea);
+
   static const int mWindowWidth = 800;
   static const int mWindowHeight = 400;
 
   QWidget* mCentralWidget;
-  QTabWidget* mScensTab;
+  QTabWidget* mScenesTab;
   Renderer* mRenderer;
   int mArgc;
   char** mArgv;
   QMenu* mFileMenu;
   QMenu* mEditMenu;
   QMenu* mToolsMenu;
+  QMenu* mWindowsMenu;
   QMenu* mHelpMenu;
-  std::unique_ptr<common::MainWindowNodeOperations> mNodeOperations;
-  std::unique_ptr<common::operations::MainWindowFileOperations> mFileSystemOperations;
+  QTreeView* mNodeTreeView;
+  QTreeView* mFilesTreeView;
+  QScrollArea* mInspectorArea;
+  QTreeView* mObjectPropertiesView;
+  scene::callbacks::StandardMouseEventHandler* mNodeMouseHandler;
 };
 
 }

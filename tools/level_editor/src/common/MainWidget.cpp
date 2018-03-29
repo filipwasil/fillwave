@@ -1,6 +1,6 @@
 #include <memory>
+#include <QAction>
 #include <QtWidgets/QLabel>
-#include <QDockWidget>
 #include <QToolButton>
 #include <QListWidget>
 #include "MainWidget.h"
@@ -10,74 +10,80 @@ namespace common {
 MainWidget::MainWidget(int argc, char* argv[], QWidget* parent)
   : QMainWindow(parent)
   , mCentralWidget(new QWidget(this))
-  , mScensTab(new QTabWidget(this))
+  , mScenesTab(new QTabWidget(this))
   , mRenderer(new Renderer(argc, argv))
   , mArgc(argc)
   , mArgv(argv) {
-  mNodeOperations = std::make_unique<MainWindowNodeOperations>(this);
-  mFileSystemOperations = std::make_unique<operations::MainWindowFileOperations>(this);
   createBarMenu();
   create();
   initMainGui();
 
-  mScensTab->addTab(mRenderer, "Empty");
-  QVBoxLayout* tabLayout = new QVBoxLayout();
-  tabLayout->addWidget(mScensTab);
+  mScenesTab->addTab(mRenderer, "Empty");
+  auto tabLayout = new QVBoxLayout();
+  tabLayout->addWidget(mScenesTab);
   mCentralWidget->setLayout(tabLayout);
   this->setCentralWidget(mCentralWidget);
   resize(mWindowWidth, mWindowHeight);
 }
 
 MainWidget::~MainWidget() {
-  // TODO: check memory
 }
 
 void MainWidget::initMainGui() {
-  auto nodeWindow = new QWidget();
-  auto fileWindow = new QWidget();
-  auto inspectorWindow = new QWidget();
-  auto objectPropertiesWindow = new QWidget();
+  auto nodeWindow = new QWidget(this);
+  auto fileWindow = new QWidget(this);
+  auto inspectorWindow = new QWidget(this);
+  auto objectPropertiesWindow = new QWidget(this);
+  auto dockWindowsMenu = mWindowsMenu->addMenu(tr("Docks Windows"));
+  UiWindowsCreator createLayouts;
+  UiFilesWindowsCreator filesWindowCreator;
 
-  QVBoxLayout* nodeLayout = new QVBoxLayout();
-  nodeLayout->addLayout(mNodeOperations->createNodeLayout(nodeWindow));
+  auto nodeLayout = new QVBoxLayout();
+  mNodeTreeView = new QTreeView(this);
+  mNodeMouseHandler = createLayouts.installEventFilterOnTreeView(mNodeTreeView, this);
+  nodeLayout->addLayout(createLayouts.createNodeLayout(mNodeTreeView, nodeWindow));
   nodeWindow->setLayout(nodeLayout);
 
-  QVBoxLayout* fileLayout = new QVBoxLayout();
-  fileLayout->addLayout(mFileSystemOperations->createFileSystemTree(fileWindow));
+  auto fileLayout = new QVBoxLayout();
+  mFilesTreeView = new QTreeView(this);
+  fileLayout->addLayout(filesWindowCreator.createFileSystemTree(mFilesTreeView, this));
   fileWindow->setLayout(fileLayout);
 
-  QVBoxLayout* inspectorLayout = new QVBoxLayout();
-  inspectorLayout->addLayout(mNodeOperations->createInspectorViewLayout(inspectorWindow));
+  auto inspectorLayout = new QVBoxLayout();
+  mInspectorArea = new QScrollArea(this);
+  inspectorLayout->addLayout(createLayouts.createInspectorViewLayout(mInspectorArea, inspectorWindow));
   inspectorWindow->setLayout(inspectorLayout);
 
-  QVBoxLayout* propertiesLayout = new QVBoxLayout();
-  propertiesLayout->addLayout(mNodeOperations->createObjectPropertiesLayout(objectPropertiesWindow));
+  auto propertiesLayout = new QVBoxLayout();
+  mObjectPropertiesView = new QTreeView(this);
+  propertiesLayout->addLayout(createLayouts.createObjectPropertiesLayout(mObjectPropertiesView, objectPropertiesWindow));
   objectPropertiesWindow->setLayout(propertiesLayout);
+  createDock("Node Area", nodeWindow, "Node", dockWindowsMenu, Qt::LeftDockWidgetArea);
+  createDock("File Area", fileWindow, "Files", dockWindowsMenu, Qt::LeftDockWidgetArea);
+  createDock("Inspector Area", inspectorWindow, "Inspector", dockWindowsMenu, Qt::RightDockWidgetArea);
+  createDock("Properties Area", objectPropertiesWindow, "Properties", dockWindowsMenu, Qt::RightDockWidgetArea);
+}
 
-  QDockWidget *dock = new QDockWidget(tr("NodeArea"), this);
+void MainWidget::createDock(QString dockName
+    , QWidget* widget
+    , QString actionName
+    , QMenu* subMenu
+    , Qt::DockWidgetArea dockArea) {
+  widgets::DockWidget* dock = new widgets::DockWidget(dockName, this);
   dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-  dock->setWidget(nodeWindow);
-  addDockWidget(Qt::LeftDockWidgetArea, dock, Qt::Horizontal);
-
-  dock = new QDockWidget(tr("FileArea"), this);
-  dock->setWidget(fileWindow);
-  addDockWidget(Qt::LeftDockWidgetArea, dock, Qt::Horizontal);
-
-  dock = new QDockWidget(tr("InspectorArea"), this);
-  dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
-  dock->setWidget(inspectorWindow);
-  addDockWidget(Qt::RightDockWidgetArea, dock, Qt::Horizontal);
-
-  dock = new QDockWidget(tr("PropertiesArea"), this);
-  dock->setWidget(objectPropertiesWindow);
-  addDockWidget(Qt::RightDockWidgetArea, dock, Qt::Horizontal);
+  dock->setWidget(widget);
+  auto dockWindowAction = new QAction(actionName, this);
+  connect(dockWindowAction, &QAction::triggered, dock, &widgets::DockWidget::show);
+  subMenu->addAction(dockWindowAction);
+  addDockWidget(dockArea, dock, Qt::Horizontal);
 }
 
 void MainWidget::createBarMenu() {
-  mFileMenu = menuBar()->addMenu(tr("&File"));
-  mEditMenu = menuBar()->addMenu(tr("&Edit"));
-  mToolsMenu = menuBar()->addMenu(tr("&Tools"));
-  mHelpMenu = menuBar()->addMenu(tr("&Help"));
+  mFileMenu = menuBar()->addMenu(tr("File"));
+  mEditMenu = menuBar()->addMenu(tr("Edit"));
+  mToolsMenu = menuBar()->addMenu(tr("Tools"));
+  mWindowsMenu = menuBar()->addMenu(tr("Windows"));
+  mHelpMenu = menuBar()->addMenu(tr("Help"));
 }
 
 }
