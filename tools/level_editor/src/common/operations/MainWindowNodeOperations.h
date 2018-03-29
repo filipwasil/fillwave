@@ -12,17 +12,9 @@ namespace common {
 class MainWindowNodeOperations : public QObject {
  Q_OBJECT
  public:
-  MainWindowNodeOperations(QWidget* parent = nullptr);
+  explicit MainWindowNodeOperations(QWidget* parent = nullptr);
 
-  virtual ~MainWindowNodeOperations();
-
-  MainWindowNodeOperations(const MainWindowNodeOperations& mE) = default;
-
-  MainWindowNodeOperations(MainWindowNodeOperations&& mE) = default;
-
-  MainWindowNodeOperations& operator=(const MainWindowNodeOperations& mE) = default;
-
-  MainWindowNodeOperations& operator=(MainWindowNodeOperations&& mE) = default;
+ ~MainWindowNodeOperations();
 
   QVBoxLayout* createNodeLayout(QWidget* parent);
 

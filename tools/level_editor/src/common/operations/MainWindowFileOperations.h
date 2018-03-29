@@ -6,14 +6,11 @@
 namespace common {
 namespace operations {
 
-class MainWindowFileOperations : public QObject {
+class MainWindowFileOperations {
  public:
-  explicit MainWindowFileOperations(QWidget* parent = nullptr);
-
   QVBoxLayout* createFileSystemTree(QWidget* parent);
 
  private:
-  QWidget* mParent;
   QTreeView* mFileSystemTree;
 };
 
