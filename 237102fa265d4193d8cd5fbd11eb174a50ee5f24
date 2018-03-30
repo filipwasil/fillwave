@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e10d6011_dc6e9c5b",
+        "filename": "tools/level_editor/src/common/operations/UiWindowsCreator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-03-30T07:20:48Z",
+      "side": 1,
+      "message": "change parent from mainwindow to treeview.",
+      "revId": "237102fa265d4193d8cd5fbd11eb174a50ee5f24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
