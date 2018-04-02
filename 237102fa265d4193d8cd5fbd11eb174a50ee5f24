@@ -16,6 +16,24 @@
       "revId": "237102fa265d4193d8cd5fbd11eb174a50ee5f24",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "778542e1_278b09c2",
+        "filename": "tools/level_editor/src/common/operations/UiWindowsCreator.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-04-02T20:23:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e10d6011_dc6e9c5b",
+      "revId": "237102fa265d4193d8cd5fbd11eb174a50ee5f24",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
