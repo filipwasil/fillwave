@@ -113,17 +113,17 @@ public:
   void initShadowing(Engine *engine);
 
   /* Animation */
-  void initAnimations(const ModelLoader::Scene* scene);
+  void initAnimations(const ModelLoader::Scene& scene);
   void evaluateAnimations();
   bool isAnimated() const override;
 
   void unloadNodes();
 
-  void loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene* scene, Entity* entity);
+  void loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene& scene, Entity* entity);
 
   void loadNodes(
     const ModelLoader::Node* node
-    , const ModelLoader::Scene* scene
+    , const ModelLoader::Scene& scene
     , Entity* entity
     , flc::Texture2D* diffuse
     , flc::Texture2D* normal
@@ -132,7 +132,6 @@ public:
 
   pu<Mesh> loadMesh(
     const ModelLoader::ShapeType* shape
-    , const ModelLoader::ShapeDataType& data
     , const Material& material
     , flc::Texture2D* diffuse
     , flc::Texture2D* normal

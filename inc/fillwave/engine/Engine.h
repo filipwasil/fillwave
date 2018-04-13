@@ -190,9 +190,7 @@ class Engine {
 
   /* Post processing */
   void addPostProcess(const std::string &fragmentShaderPath, GLfloat lifeTime = flf::FILLWAVE_ENDLESS);
-  const ModelLoader::Scene* getScene(const std::string& path);
   void reload();
-
 
   /* Screen */
   GLuint mWindowWidth;
@@ -323,7 +321,6 @@ class Engine {
   flc::VertexBufferBasic* storeBufferInternal(
     flc::VertexArray* vao
     , const ModelLoader::ShapeType* shape
-    , const ModelLoader::ShapeDataType& data
     , ModelLoader::Animator* animator);
 
   flc::VertexBufferDebug* storeBufferInternal(flc::VertexArray *vao, GLfloat scale);

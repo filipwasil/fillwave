@@ -53,7 +53,7 @@ Model::Model(Engine* engine,
   std::vector<flc::VertexBasic> vertices = shape.getVertices();
   std::vector<GLuint> indices = shape.getIndices();
 
-  flc::VertexArray* vao = new flc::VertexArray();
+  auto vao = new flc::VertexArray();
   attach(std::make_unique<Mesh>(
     engine
     , material
@@ -124,65 +124,11 @@ Model::~Model() {
 }
 
 void Model::reloadModel(const std::string& path) {
-  unloadNodes();
-  const auto* scene = mEngine->getScene(path);
-  if (!scene) {
-    fLogF("Model: ", path, " could not be read");
-  }
+  const auto scene = ModelLoader::Scene(path.c_str());
   initAnimations(scene);
   initShadowing(mEngine);
   initUniformsCache();
   loadNodes(ModelLoader::getRootNode(scene), scene, this);
-
-  ///////////////
-#if 0
-  std::vector<tinyobj::shape_t> shapes;
-  std::vector<tinyobj::material_t> materials;
-  tinyobj::attrib_t attrib;
-  std::string err;
-  if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &err, shapePath.c_str())) {
-    fLogF("Model: %s could not be read", shapePath.c_str());
-  }
-  if (!err.empty()) { // `err` may contain warning message.
-    fLogW("%s", err.c_str());
-  }
-
-  initShadowing(engine);
-  for (GLuint i = 0; i < shapes.size(); i++) {
-    if (shapes[i].mesh.material_ids.empty()) {
-      fLogF("No materials available");
-    }
-
-    int materialId = shapes[i].mesh.material_ids[0];
-    if (materialId != -1) {
-      attach(loadMesh(shapes[i], attrib,
-                 Material(materials[materialId]),
-// or
-//               shapes[i].mesh.material_ids[0] != -1 ? Material(
-//               materials[shapes[i].mesh.material_ids[0]]) : Material(),
-                 engine->storeTexture(materials[materialId].diffuse_texname),
-                 engine->storeTexture(materials[materialId].bump_texname),
-                 engine->storeTexture(materials[materialId].specular_texname),
-// or Tex*
-//               diffuseMap,
-//               normalMap,
-//               specularMap,
-
-// or paths
-//               engine->storeTexture(diffuseMapPath.c_str()),
-//               engine->storeTexture(normalMapPath.c_str()),
-//               engine->storeTexture(specularMapPath.c_str()),
-//                 engine));
-      continue;
-    }
-    attach(loadMesh(shapes[i], attrib,
-               Material(),
-               nullptr,
-               nullptr,
-               nullptr,
-               engine));
-  }
-#endif
 }
 
 void Model::reloadModel(
@@ -192,18 +138,14 @@ void Model::reloadModel(
   , flc::Texture2D* specular
   , const Material& material) {
   unloadNodes();
-  const auto* scene = mEngine->getScene(path);
-  if (!scene) {
-    fLogF("Model: %s could not be read", path.c_str());
-    return;
-  }
+  const auto scene = ModelLoader::Scene(path.c_str());
   initAnimations(scene);
   initShadowing(mEngine);
   initUniformsCache();
   loadNodes(ModelLoader::getRootNode(scene), scene, this, diff, norm, specular, material);
 }
 
-inline void Model::initAnimations(const ModelLoader::Scene* scene) {
+inline void Model::initAnimations(const ModelLoader::Scene& scene) {
   mAnimator = std::unique_ptr<ModelLoader::Animator>(ModelLoader::getAnimator(scene));
   if (mAnimator) {
     fLogD("attached TimedBoneUpdateCallback to model");
@@ -221,7 +163,7 @@ inline void Model::unloadNodes() {
   mMeshes.clear();
 }
 
-inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene* scene, Entity* entity) {
+inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene& scene, Entity* entity) {
 
   /* Set this node transformations */
   ModelLoader::setTransformation(node, entity);
@@ -230,7 +172,6 @@ inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::S
     entity->attach(
       loadMesh(
         meshCreationInfo.shape
-        , meshCreationInfo.data
         , meshCreationInfo.material
         , mEngine->storeTexture(meshCreationInfo.diffuse)
         , mEngine->storeTexture(meshCreationInfo.normal)
@@ -252,7 +193,7 @@ inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::S
 
 void Model::loadNodes (
   const ModelLoader::Node* node
-  , const ModelLoader::Scene* scene
+  , const ModelLoader::Scene& scene
   , Entity* entity
   , flc::Texture2D* diffuseMap
   , flc::Texture2D* normalMap
@@ -264,7 +205,6 @@ void Model::loadNodes (
   for (auto & meshCreationInfo : meshes) {
     entity->attach(loadMesh(
       meshCreationInfo.shape
-      , meshCreationInfo.data
       , material
       , diffuseMap
       , normalMap
@@ -333,7 +273,6 @@ inline void Model::initUniformsCache() {
 
 pu<Mesh> Model::loadMesh(
   const ModelLoader::ShapeType* shape
-  , const ModelLoader::ShapeDataType& data
   , const Material& material
   , flc::Texture2D* diffuseMap
   , flc::Texture2D* normalMap
@@ -344,7 +283,7 @@ pu<Mesh> Model::loadMesh(
   auto vao = new flc::VertexArray();
   auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
 //  engine->storeBuffer<flc::IndexBuffer>(vao, static_cast<GLuint>(shape.mesh.indices.size())), GL_TRIANGLES, vao);
-  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, data, mAnimator.get());
+  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get());
   auto mesh = std::make_unique<Mesh>(
     engine, material, diffuseMap, normalMap, specularMap, mProgram, mProgramShadow, mProgramShadowColor, loader
       .getProgram(EProgram::occlusionOptimizedQuery),

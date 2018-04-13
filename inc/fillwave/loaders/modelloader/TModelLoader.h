@@ -48,17 +48,13 @@ class TModelLoader final {
   using Node = typename ModelLoaderTraits::Node;
   using Scene = typename ModelLoaderTraits::Scene;
   using ShapeType = typename ModelLoaderTraits::ShapeType;
-  using ShapeDataType = typename ModelLoaderTraits::ShapeDataType;
   using MaterialType = typename ModelLoaderTraits::MaterialType;
   using TextureType = typename ModelLoaderTraits::TextureType;
   using String = typename ModelLoaderTraits::String;
-  using Importer = typename ModelLoaderTraits::Importer;
   using Animator = typename ModelLoaderTraits::Animator;
-  using Flags = typename ModelLoaderTraits::Flags;
 
   struct MeshCreationInfo {
     const ShapeType* shape;
-    const ShapeDataType& data;
     const Material material;
     const std::string diffuse;
     const std::string normal;
@@ -69,22 +65,16 @@ class TModelLoader final {
   static constexpr int COUNT_BONES_USED = ModelLoaderTraits::COUNT_BONES_USED;
   static constexpr int FLAG_ANIMATION_OFF = ModelLoaderTraits::FLAG_ANIMATION_OFF;
 
-  const Scene* getScene(const char* path);
-
   static void getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer);
   static const Material getMaterial(const MaterialType& material);
   static Material getTexturePath(TextureType type, const MaterialType& material);
   static ::flw::flc::IndexBuffer* getIndexBuffer(const ShapeType* shape);
-  static ::flw::flc::VertexBufferBasic* getVertexBuffer(const ShapeType* shape, const ShapeDataType& data, Animator* a);
+  static ::flw::flc::VertexBufferBasic* getVertexBuffer(const ShapeType *shape, Animator *a);
   static void setTransformation (const Node* node, Entity* entity);
-  static std::vector<MeshCreationInfo> getMeshes(const Node* node, const Scene* scene);
+  static std::vector<MeshCreationInfo> getMeshes(const Node* node, const Scene& scene);
   static std::vector<Node*> getChildren(const Node*);
-  static Node* getRootNode(const Scene*);
-  static Animator* getAnimator(const Scene*);
-
-  //    mAnimator = std::make_unique<ModelLoader::Animator>(scene);
-  Importer* mImporter;
-  Flags mFlags;
+  static Node* getRootNode(const Scene&);
+  static Animator* getAnimator(const Scene&);
 };
 
 } /* flf */

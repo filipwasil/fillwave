@@ -41,7 +41,7 @@ AnimatorAssimp::BoneAssimp::~BoneAssimp() {
   // nothing
 }
 
-AnimatorAssimp::AnimatorAssimp(const ModelLoader::Scene* scene)
+AnimatorAssimp::AnimatorAssimp(const aiScene* scene)
   : mTimeSinceStartSeconds(0.0f)
   , mActiveAnimation(ModelLoader::FLAG_ANIMATION_OFF) {
   mAnimationsBufferData.resize(ModelLoader::COUNT_BONES_DEFINED);
@@ -92,7 +92,7 @@ BoneDefault* AnimatorAssimp::get(std::string name) {
 }
 
 void UpdateAnimation() {
-
+  // nothing
 }
 
 GLint AnimatorAssimp::getBoneId(const std::string& name) const {

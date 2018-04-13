@@ -32,13 +32,17 @@ namespace flf {
 struct ModelLoaderTraitsTinyObjLoader {
 
   using Node = Nothing;
-  using Scene = Nothing;
   using ShapeType = tinyobj::shape_t;
-  using ShapeDataType = tinyobj::attrib_t;
   using MaterialType = tinyobj::material_t;
+
+  struct Scene {
+    Scene(const char* path);
+    std::vector<ShapeType> shapes;
+    std::vector<MaterialType> materials;
+  };
+
   using TextureType = Nothing;
   using String = Nothing;
-  using Importer = Nothing;
   using Animator = AnimatorDefault;
   using Flags = Nothing;
 

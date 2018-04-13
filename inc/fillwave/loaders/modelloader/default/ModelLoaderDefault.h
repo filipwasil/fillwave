@@ -30,11 +30,9 @@ struct ModelLoaderTraitsDefault {
   using Node = Nothing;
   using Scene = Nothing;
   using ShapeType = Nothing;
-  using ShapeDataType = Nothing;
   using MaterialType = Nothing;
   using TextureType = Nothing;
   using String = Nothing;
-  using Importer = Nothing;
   using Animator = Nothing;
   using Flags = Nothing;
 

@@ -22,7 +22,7 @@
 #include <fillwave/Log.h>
 #include <fillwave/management/TextureSystem.h>
 
-FLOGINIT_MASK(FERROR | FFATAL | FINFO | FDEBUG)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {

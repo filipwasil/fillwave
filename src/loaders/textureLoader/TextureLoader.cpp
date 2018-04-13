@@ -30,7 +30,7 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT("TextureLoader", FERROR | FFATAL | FDEBUG)
+FLOGINIT_DEFAULT()
 
 using namespace std;
 

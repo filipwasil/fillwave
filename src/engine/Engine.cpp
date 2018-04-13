@@ -498,11 +498,6 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
   buffer[*sizeInBytes] = '\0';
 }
 
-const ModelLoader::Scene* Engine::getScene(const string& path) {
-  fLogD("Reading model ", path);
-  return mModelLoader.getScene((mFileLoader.getRootPath() + path).c_str());
-}
-
 template <GLuint T>
 Shader* Engine::storeShader(const string& shaderPath) {
   string shaderSource = "";
@@ -595,9 +590,8 @@ IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, const ModelLoader::Sh
 VertexBufferBasic* Engine::storeBufferInternal(
   VertexArray* vao
   , const ModelLoader::ShapeType* shape
-  , const ModelLoader::ShapeDataType& data
   , ModelLoader::Animator* animator) {
-  return mBuffers.mVertices.store(ModelLoader::getVertexBuffer(shape, data, animator), vao);
+  return mBuffers.mVertices.store(ModelLoader::getVertexBuffer(shape, animator), vao);
 }
 
 void Engine::draw(GLfloat time) {

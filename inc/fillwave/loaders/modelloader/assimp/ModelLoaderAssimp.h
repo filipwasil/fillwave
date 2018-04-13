@@ -33,15 +33,17 @@ namespace flf {
 
 struct ModelLoaderTraitsAssimp {
   using Node = aiNode;
-  using Scene = aiScene;
+  struct Scene {
+    Scene (const char* path);
+    Assimp::Importer mImporter;
+    const aiScene* mScene;
+  };
   using ShapeType = aiMesh;
   using ShapeDataType = unsigned int;
   using MaterialType = aiMaterial;
   using TextureType = aiTextureType;
   using String = aiString;
-  using Importer = Assimp::Importer;
   using Animator = AnimatorAssimp;
-  using Flags = unsigned int;
 
   static constexpr int COUNT_BONES_DEFINED = 45;
   static constexpr int COUNT_BONES_USED = 4;

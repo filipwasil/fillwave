@@ -29,8 +29,6 @@
 #include <vector>
 #include <string>
 
-#include <assimp/scene.h>
-
 namespace flw {
 namespace flf {
 

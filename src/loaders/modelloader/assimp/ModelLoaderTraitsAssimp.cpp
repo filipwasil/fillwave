@@ -36,15 +36,21 @@ namespace flw {
 namespace flf {
 
 template<>
-TModelLoader<ModelLoaderTraitsAssimp>::TModelLoader()
- : mImporter(new Assimp::Importer())
- , mFlags(aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace) {
+TModelLoader<ModelLoaderTraitsAssimp>::TModelLoader() {
   // nothing
 }
 
 template<>
 TModelLoader<ModelLoaderTraitsAssimp>::~TModelLoader() {
-  delete mImporter;
+  // nothing
+}
+
+ModelLoaderTraitsAssimp::Scene::Scene(const char* path)
+  : mImporter()
+  , mScene(importer.ReadFile(path, aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace)) {
+  if (!scene) {
+    fLogF("Model: ", path, " could not be read");
+  }
 }
 
 template<>
@@ -75,11 +81,6 @@ void TModelLoader<ModelLoaderTraitsAssimp>::getPhysicsBuffer(const char* assetPa
     const auto& v = shape->mVertices[z];
     buffer.mVertices[z] = { { v.x, v.y, v.z } };
   }
-}
-
-template<>
-const TModelLoader<ModelLoaderTraitsAssimp>::Scene* TModelLoader<ModelLoaderTraitsAssimp>::getScene(const char* path) {
-  return mImporter->ReadFile(path, mFlags);
 }
 
 template<>
@@ -118,7 +119,7 @@ flc::IndexBuffer* TModelLoader<ModelLoaderTraitsAssimp>::getIndexBuffer(const Sh
 
 template<>
 flw::flc::VertexBufferBasic*
-  TModelLoader<ModelLoaderTraitsAssimp>::getVertexBuffer(const ShapeType* sh, const ShapeDataType& /*d*/, Animator* a) {
+  TModelLoader<ModelLoaderTraitsAssimp>::getVertexBuffer(const ShapeType* sh, Animator* a) {
   std::vector<flc::VertexBasic> vertices;
 
   const size_t elements = sh->mNumVertices;
@@ -225,32 +226,31 @@ const std::string getTextureName (ModelLoader::TextureType type, const aiMateria
 }
 
 template<>
-AnimatorAssimp* TModelLoader<ModelLoaderTraitsAssimp>::getAnimator(const Scene* scene) {
-  if (0 == scene->mNumAnimations) {
+AnimatorAssimp* TModelLoader<ModelLoaderTraitsAssimp>::getAnimator(const Scene& scene) {
+  if (0 == scene.scene->mNumAnimations) {
     return nullptr;
   }
-  return new AnimatorAssimp(scene);
+  return new AnimatorAssimp(scene.scene);
 }
 
 template<>
 std::vector<TModelLoader<ModelLoaderTraitsAssimp>::MeshCreationInfo>
-  TModelLoader<ModelLoaderTraitsAssimp>::getMeshes(const Node* node, const Scene* scene) {
+  TModelLoader<ModelLoaderTraitsAssimp>::getMeshes(const Node* node, const Scene& scene) {
 
   vec<MeshCreationInfo> meshes;
   meshes.reserve(node->mNumMeshes);
 
-  for (GLuint i = 0; i < node->mNumMeshes; i++) {
-    const auto mesh = scene->mMeshes[node->mMeshes[i]];
+  for (GLuint i = 0; i < node->mNumMeshes; ++i) {
+    const auto mesh = scene.scene->mMeshes[node->mMeshes[i]];
 
     if (nullptr == mesh) {
       continue;
     }
 
-    const auto material = scene->mMaterials[mesh->mMaterialIndex];
+    const auto material = scene.scene->mMaterials[mesh->mMaterialIndex];
 
     meshes.push_back(ModelLoader::MeshCreationInfo {
       mesh
-      , ModelLoader::ShapeDataType{}
       , getMaterial(*material)
       , getTextureName(aiTextureType_DIFFUSE, material)
       , getTextureName(aiTextureType_NORMALS, material)
@@ -271,8 +271,8 @@ std::vector<TModelLoader<ModelLoaderTraitsAssimp>::Node*>
 }
 
 template<>
-TModelLoader<ModelLoaderTraitsAssimp>::Node* TModelLoader<ModelLoaderTraitsAssimp>::getRootNode(const Scene* scene) {
-  return scene->mRootNode;
+TModelLoader<ModelLoaderTraitsAssimp>::Node* TModelLoader<ModelLoaderTraitsAssimp>::getRootNode(const Scene& scene) {
+  return scene.scene->mRootNode;
 }
 
 template

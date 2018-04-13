@@ -26,6 +26,11 @@
 #include <fillwave/models/base/Material.h>
 
 #include <fillwave/loaders/modelloader/tinyobjloader/ModelLoaderTinyObjLoader.h>
+#include <tinyobjloader/tiny_obj_loader.h>
+
+#include <fillwave/Log.h>
+
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
@@ -40,35 +45,32 @@ TModelLoader<ModelLoaderTraitsTinyObjLoader>::~TModelLoader() {
   // nothing
 }
 
-template<>
-void TModelLoader<ModelLoaderTraitsTinyObjLoader>::getPhysicsBuffer(const char*, PhysicsMeshBuffer& /*buffer*/) {
-  // todo
+ModelLoaderTraitsTinyObjLoader::Scene::Scene(const char* path) {
+  std::string err = tinyobj::LoadObj(shapes, materials, path);
+  if (!err.empty()) {
+    fLogE(err);
+  }
 }
 
 template<>
-const TModelLoader<ModelLoaderTraitsTinyObjLoader>::Scene* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getScene(const char* /*path*/) {
-  // todo
-  return nullptr;
+void TModelLoader<ModelLoaderTraitsTinyObjLoader>::getPhysicsBuffer(const char*, PhysicsMeshBuffer& /*buffer*/) {
+  // nothing
 }
 
 template<>
 std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::Node*> TModelLoader<ModelLoaderTraitsTinyObjLoader>::getChildren(const Node* /*node*/) {
   std::vector<Node*> children;
-// todo
   return children;
 }
 
 template<>
-TModelLoader<ModelLoaderTraitsTinyObjLoader>::Node* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getRootNode(const Scene* /*scene*/) {
-  //todo
+TModelLoader<ModelLoaderTraitsTinyObjLoader>::Node* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getRootNode(const Scene&) {
   return nullptr;
 }
 
 template<>
-TModelLoader<ModelLoaderTraitsTinyObjLoader>::Animator* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getAnimator(const
-                                                                                                            Scene* /*scene*/) {
-  //todo
-  return nullptr;
+TModelLoader<ModelLoaderTraitsTinyObjLoader>::Animator* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getAnimator(const Scene&) {
+  return static_cast<Animator*>(nullptr);
 }
 
 template<>
@@ -82,68 +84,43 @@ const Material TModelLoader<ModelLoaderTraitsTinyObjLoader>::getMaterial(const M
 
 template<>
 flw::flc::VertexBufferBasic*
-TModelLoader<ModelLoaderTraitsTinyObjLoader>::getVertexBuffer(const ShapeType* /*sh*/, const ShapeDataType& /*d*/, Animator* /*a*/) {
+TModelLoader<ModelLoaderTraitsTinyObjLoader>::getVertexBuffer(
+  const ShapeType* shape
+  , Animator* /*a*/) {
   vec<flw::flc::VertexBasic> vertices;
 
-//  VertexBufferBasic::VertexBufferBasic(const tinyobj::shape_t& shape,
-//  const tinyobj::attrib_t& attr,
-//  GLuint dataStoreModification) :
-//  TVertexBuffer<VertexBasic>(dataStoreModification) {
+  vertices.resize(shape->mesh.normals.size());
 
-//  mTotalElements = sh.mesh.indices.size();
-//  mDataVertices.resize(mTotalElements);
-//
-//  // Loop over shs
-//  // Loop over faces(polygon)
-//  size_t index_offset = 0;
-//  /* xxx OpenMP should be usefull here */
-//  for (size_t f = 0; f < sh.mesh.num_face_vertices.size(); f++) {
-//    int fv = sh.mesh.num_face_vertices[f];
-//
-//    // Loop over vertices in the face.
-//    for (size_t v = 0; v < fv; v++) {
-//      // access to vertex
-//      size_t idxOut = index_offset + v;
-//      tinyobj::index_t idx = sh.mesh.indices[idxOut];
-//      mDataVertices[idxOut].mPosition[0] = attr.vertices[3 * idx.vertex_index + 0];
-//      mDataVertices[idxOut].mPosition[1] = attr.vertices[3 * idx.vertex_index + 1];
-//      mDataVertices[idxOut].mPosition[2] = attr.vertices[3 * idx.vertex_index + 2];
-//      mDataVertices[idxOut].mPosition[3] = 1.0f;
-//      mDataVertices[idxOut].mNormal[0] = attr.normals[3 * idx.normal_index + 0];
-//      mDataVertices[idxOut].mNormal[1] = attr.normals[3 * idx.normal_index + 1];
-//      mDataVertices[idxOut].mNormal[2] = attr.normals[3 * idx.normal_index + 2];
-//      mDataVertices[idxOut].mTextureUV[0] = attr.texcoords[2 * idx.texcoord_index +
-//                                                           0];
-//      mDataVertices[idxOut].mTextureUV[1] = attr.texcoords[2 * idx.texcoord_index +
-//                                                           1];
-//      mDataVertices[idxOut].mNormalTangentMap[0] = 0.0f;
-//      mDataVertices[idxOut].mNormalTangentMap[1] = 0.0f;
-//      mDataVertices[idxOut].mNormalTangentMap[2] = 0.0f;
-//      mDataVertices[idxOut].mColor[0] = 0.0f;
-//      mDataVertices[idxOut].mColor[1] = 0.0f;
-//      mDataVertices[idxOut].mColor[2] = 0.0f;
-//      mDataVertices[idxOut].mColor[3] = 1.0f;
-//      for (int k = 0; k < COUNT_BONES_USED; k++) {
-//        mDataVertices[idxOut].mBoneID[k] = 0.0f;
-//        mDataVertices[idxOut].mBoneWeight[k] = 0.0f;
-//      }
-//    }
-//    index_offset += fv;
-//
-//    /* per-face material */
-//    /* sh.mesh.material_ids[f]; */
-//  }
-//  mData = mDataVertices.data();
-//  mSize = mTotalElements * sizeof(VertexBasic);
-  // todo
-  return new flc::VertexBufferBasic (vertices);
+  const auto sizeN = shape->mesh.normals.size();
+  for (size_t f = 0; f < sizeN; f+=3) {
+    vertices[f].mNormal[0] = shape->mesh.normals[f];
+    vertices[f + 1].mNormal[1] = shape->mesh.normals[f + 1];
+    vertices[f + 2].mNormal[2] = shape->mesh.normals[f + 2];
+  }
+
+  const auto sizeP = shape->mesh.positions.size();
+  for (size_t f = 0; f < sizeP; f+=3) {
+    vertices[f].mPosition[0] = shape->mesh.positions[f];
+    vertices[f + 1].mPosition[1] = shape->mesh.positions[f + 1];
+    vertices[f + 2].mPosition[2] = shape->mesh.positions[f + 2];
+  }
+
+  const auto sizeUV = shape->mesh.texcoords.size();
+  for (size_t f = 0; f < sizeUV; f+=2) {
+    vertices[f].mTextureUV[0] = shape->mesh.texcoords[f];
+    vertices[f + 1].mTextureUV[1] = shape->mesh.texcoords[f + 1];
+  }
+
+  return new flc::VertexBufferBasic(vertices);
 }
 
 template<>
-flc::IndexBuffer* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getIndexBuffer(const ShapeType* /*shape*/) {
-
+flc::IndexBuffer* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getIndexBuffer(const ShapeType *shape) {
   std::vector<GLuint> indices;
-
+  indices.resize(shape->mesh.indices.size());
+  for (size_t f = 0; f < shape->mesh.indices.size(); ++f) {
+    indices[f] = shape->mesh.indices[f];
+  }
   return new ::flw::flc::IndexBuffer(indices);
 }
 
@@ -154,9 +131,20 @@ void TModelLoader<ModelLoaderTraitsTinyObjLoader>::setTransformation(const Node*
 
 template<>
 std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo>
-TModelLoader<ModelLoaderTraitsTinyObjLoader>::getMeshes(const Node* /*node*/, const Scene* /*scene*/) {
-  //todo
-  return std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo>();
+TModelLoader<ModelLoaderTraitsTinyObjLoader>::getMeshes(const Node* /*node*/, const Scene& scene) {
+  std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo> rvo;
+  rvo.reserve(scene.shapes.size());
+  for (auto& shape : scene.shapes) {
+    TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo a = {
+      &shape
+      , Material()
+      , ""
+      , ""
+      , ""
+    };
+    rvo.push_back(a);
+  }
+  return rvo;
 }
 
 template

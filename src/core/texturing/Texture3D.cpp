@@ -22,7 +22,7 @@
 #include <fillwave/core/texturing/Texture3D.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Texture3D", FERROR | FFATAL | FDEBUG)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {
