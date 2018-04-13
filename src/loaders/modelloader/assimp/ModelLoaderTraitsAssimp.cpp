@@ -47,8 +47,8 @@ TModelLoader<ModelLoaderTraitsAssimp>::~TModelLoader() {
 
 ModelLoaderTraitsAssimp::Scene::Scene(const char* path)
   : mImporter()
-  , mScene(importer.ReadFile(path, aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace)) {
-  if (!scene) {
+  , mScene(mImporter.ReadFile(path, aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace)) {
+  if (!mScene) {
     fLogF("Model: ", path, " could not be read");
   }
 }
@@ -56,19 +56,17 @@ ModelLoaderTraitsAssimp::Scene::Scene(const char* path)
 template<>
 void TModelLoader<ModelLoaderTraitsAssimp>::getPhysicsBuffer(const char* assetPath, flf::PhysicsMeshBuffer& buffer) {
 
-  Importer importer;
+  Scene scene(assetPath);
 
-  auto scene = importer.ReadFile(assetPath, aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace);
-
-  if (nullptr == scene) {
+  if (nullptr == scene.mScene) {
     return;
   }
 
-  if (1 != scene->mNumMeshes) {
+  if (1 != scene.mScene->mNumMeshes) {
     return;
   }
 
-  const aiMesh* shape = scene->mMeshes[0];
+  const aiMesh* shape = scene.mScene->mMeshes[0];
   buffer.mNumFaces = shape->mNumFaces;
   buffer.mVertices.reserve(shape->mNumVertices);
   buffer.mIndices.reserve(shape->mNumFaces*  3);
@@ -227,10 +225,10 @@ const std::string getTextureName (ModelLoader::TextureType type, const aiMateria
 
 template<>
 AnimatorAssimp* TModelLoader<ModelLoaderTraitsAssimp>::getAnimator(const Scene& scene) {
-  if (0 == scene.scene->mNumAnimations) {
+  if (0 == scene.mScene->mNumAnimations) {
     return nullptr;
   }
-  return new AnimatorAssimp(scene.scene);
+  return new AnimatorAssimp(scene.mScene);
 }
 
 template<>
@@ -241,13 +239,13 @@ std::vector<TModelLoader<ModelLoaderTraitsAssimp>::MeshCreationInfo>
   meshes.reserve(node->mNumMeshes);
 
   for (GLuint i = 0; i < node->mNumMeshes; ++i) {
-    const auto mesh = scene.scene->mMeshes[node->mMeshes[i]];
+    const auto mesh = scene.mScene->mMeshes[node->mMeshes[i]];
 
     if (nullptr == mesh) {
       continue;
     }
 
-    const auto material = scene.scene->mMaterials[mesh->mMaterialIndex];
+    const auto material = scene.mScene->mMaterials[mesh->mMaterialIndex];
 
     meshes.push_back(ModelLoader::MeshCreationInfo {
       mesh
@@ -272,7 +270,7 @@ std::vector<TModelLoader<ModelLoaderTraitsAssimp>::Node*>
 
 template<>
 TModelLoader<ModelLoaderTraitsAssimp>::Node* TModelLoader<ModelLoaderTraitsAssimp>::getRootNode(const Scene& scene) {
-  return scene.scene->mRootNode;
+  return scene.mScene->mRootNode;
 }
 
 template

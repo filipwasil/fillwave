@@ -46,7 +46,7 @@ TModelLoader<ModelLoaderTraitsTinyObjLoader>::~TModelLoader() {
 }
 
 ModelLoaderTraitsTinyObjLoader::Scene::Scene(const char* path) {
-  std::string err = tinyobj::LoadObj(shapes, materials, path);
+  std::string err = tinyobj::LoadObj(mShapes, mMaterials, path);
   if (!err.empty()) {
     fLogE(err);
   }
@@ -133,8 +133,8 @@ template<>
 std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo>
 TModelLoader<ModelLoaderTraitsTinyObjLoader>::getMeshes(const Node* /*node*/, const Scene& scene) {
   std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo> rvo;
-  rvo.reserve(scene.shapes.size());
-  for (auto& shape : scene.shapes) {
+  rvo.reserve(scene.mShapes.size());
+  for (auto& shape : scene.mShapes) {
     TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo a = {
       &shape
       , Material()

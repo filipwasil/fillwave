@@ -37,8 +37,8 @@ struct ModelLoaderTraitsTinyObjLoader {
 
   struct Scene {
     Scene(const char* path);
-    std::vector<ShapeType> shapes;
-    std::vector<MaterialType> materials;
+    std::vector<ShapeType> mShapes;
+    std::vector<MaterialType> mMaterials;
   };
 
   using TextureType = Nothing;
