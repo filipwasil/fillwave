@@ -36,7 +36,7 @@ struct ModelLoaderTraitsTinyObjLoader {
   using MaterialType = tinyobj::material_t;
 
   struct Scene {
-    Scene(const char* path);
+    Scene(const std::string& filename);
     std::vector<ShapeType> mShapes;
     std::vector<MaterialType> mMaterials;
   };

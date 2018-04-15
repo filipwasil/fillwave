@@ -35,11 +35,11 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-ModelLoaderTraitsAssimp::Scene::Scene(const char* path)
+ModelLoaderTraitsAssimp::Scene::Scene(const std::string& filename)
   : mImporter()
-  , mScene(mImporter.ReadFile(path, aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace)) {
+  , mScene(mImporter.ReadFile(filename, aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace)) {
   if (!mScene) {
-    fLogF("Model: ", path, " could not be read");
+    fLogF("Model: ", filename, " could not be read");
   }
 }
 
@@ -95,7 +95,7 @@ flc::IndexBuffer* TModelLoader<ModelLoaderTraitsAssimp>::getIndexBuffer(const Sh
   indices.resize(shape->mNumFaces * 3);
 
   #pragma omp parallel for schedule(guided) num_threads(2) if (shape->mNumFaces > 1000)
-    for (GLuint i = 0; i < shape->mNumFaces; i++) {
+    for (GLuint i = 0; i < shape->mNumFaces; ++i) {
       const GLuint idx = 3 * i;
       indices[idx] = shape->mFaces[i].mIndices[0];
       indices[idx + 1] = shape->mFaces[i].mIndices[1];

@@ -33,11 +33,13 @@ namespace flf {
 
 struct ModelLoaderTraitsAssimp {
   using Node = aiNode;
+
   struct Scene {
-    Scene (const char* path);
+    Scene (const std::string& filename);
     Assimp::Importer mImporter;
     const aiScene* mScene;
   };
+
   using ShapeType = aiMesh;
   using ShapeDataType = unsigned int;
   using MaterialType = aiMaterial;

@@ -26,6 +26,7 @@
 #include <fillwave/models/base/Material.h>
 
 #include <fillwave/loaders/modelloader/tinyobjloader/ModelLoaderTinyObjLoader.h>
+#include <fillwave/loaders/FileLoader.h>
 #include <tinyobjloader/tiny_obj_loader.h>
 
 #include <fillwave/Log.h>
@@ -35,8 +36,8 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-ModelLoaderTraitsTinyObjLoader::Scene::Scene(const char* path) {
-  std::string err = tinyobj::LoadObj(mShapes, mMaterials, path);
+ModelLoaderTraitsTinyObjLoader::Scene::Scene(const std::string& filename) {
+  std::string err = tinyobj::LoadObj(mShapes, mMaterials, filename.c_str());
   if (!err.empty()) {
     fLogE(err);
   }
@@ -105,7 +106,7 @@ TModelLoader<ModelLoaderTraitsTinyObjLoader>::getVertexBuffer(
 }
 
 template<>
-flc::IndexBuffer* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getIndexBuffer(const ShapeType *shape) {
+flc::IndexBuffer* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getIndexBuffer(const ShapeType* shape) {
   std::vector<GLuint> indices;
   indices.resize(shape->mesh.indices.size());
   for (size_t f = 0; f < shape->mesh.indices.size(); ++f) {
@@ -122,19 +123,33 @@ void TModelLoader<ModelLoaderTraitsTinyObjLoader>::setTransformation(const Node*
 template<>
 std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo>
 TModelLoader<ModelLoaderTraitsTinyObjLoader>::getMeshes(const Node* /*node*/, const Scene& scene) {
-  std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo> rvo;
-  rvo.reserve(scene.mShapes.size());
+  std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo> meshes;
+  meshes.reserve(scene.mShapes.size());
+
   for (auto& shape : scene.mShapes) {
-    TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo a = {
-      &shape
-      , Material()
-      , ""
-      , ""
-      , ""
-    };
-    rvo.push_back(a);
+    if (shape.mesh.material_ids.empty()) {
+      TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo mesh = {
+        &shape
+        , Material()
+        , ""
+        , ""
+        , ""
+      };
+      meshes.push_back(mesh);
+    } else {
+      const auto materialID = shape.mesh.material_ids[0];
+      TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo mesh = {
+        &shape
+        , getMaterial(scene.mMaterials[materialID])
+        , scene.mMaterials[materialID].diffuse_texname
+        , scene.mMaterials[materialID].bump_texname
+        , scene.mMaterials[materialID].specular_texname
+      };
+      meshes.push_back(mesh);
+    }
   }
-  return rvo;
+
+  return meshes;
 }
 
 template
