@@ -23,6 +23,7 @@
 
 #include <fillwave/loaders/textureloader/TextureConfigs.h>
 #include <fillwave/loaders/textureloader/TextureContent.h>
+#include <string>
 
 namespace flw {
 namespace flf {
