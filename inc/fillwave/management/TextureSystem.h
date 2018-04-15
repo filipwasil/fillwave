@@ -24,8 +24,8 @@
 #include <fillwave/core/texturing/Texture1D.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
 #include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
+#include <fillwave/loaders/modelloader/ModelLoaderTraits.h>
 #include <fillwave/loaders/TextureLoader.h>
-#include <fillwave/loaders/ModelLoaderTraits.h>
 #include <fillwave/management/base/TCache.h>
 
 namespace flw {
@@ -42,14 +42,17 @@ public:
   void checkExtensions();
 
   flc::Texture2D* get(
-    const std::string &texturePath, ECompression = ECompression::none, EFlip flip = EFlip::vertical);
+    const std::string& texturePath
+    , flc::ECompression = flc::ECompression::none
+    , flc::EFlip flip = flc::EFlip::vertical);
 
-  flc::Texture3D *get(const std::string &posX,
-      const std::string &negX,
-      const std::string &posY,
-      const std::string &negY,
-      const std::string &posZ,
-      const std::string &negZ);
+  flc::Texture3D *get(
+    const std::string &posX
+    , const std::string &negX
+    , const std::string &posY
+    , const std::string &negY
+    , const std::string &posZ
+    , const std::string &negZ);
 
   flc::Texture2DRenderable* getShadow2D(GLuint width, GLuint height);
   flc::Texture3DRenderable* getShadow3D(GLuint width, GLuint height);

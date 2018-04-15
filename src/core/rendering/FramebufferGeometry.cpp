@@ -23,7 +23,7 @@
                                                                                                                                                                                              #include <fillwave/Fillwave.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("FramebufferGeometry", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {

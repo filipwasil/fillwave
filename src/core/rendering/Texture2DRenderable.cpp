@@ -20,6 +20,7 @@
  */
 
 #include <fillwave/core/rendering/Texture2DRenderable.h>
+#include <fillwave/loaders/textureloader/TextureConfigs.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Texture2DRenderable", FERROR | FFATAL | FDEBUG)
@@ -71,10 +72,10 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
       mFramebuffer.attachTexture2D(GL_DEPTH_ATTACHMENT, target, getHandle());
 #ifdef FILLWAVE_GLES_3_0
     glDrawBuffers(1, &none);
-    glReadBuffer(none); //xxx this does not have to be here
+    glReadBuffer(none);
 #else
       glDrawBuffer(none);
-      glReadBuffer(none); //xxx this does not have to be here
+      glReadBuffer(none);
 #endif
       fLogC("Setting depth framebuffer failed");
       Framebuffer::bindScreenFramebuffer();

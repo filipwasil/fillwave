@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/ModelLoaderTraits.h>
+#include <fillwave/loaders/modelloader/ModelLoaderTraits.h>
 #include <fillwave/models/base/Material.h>
 
 namespace flw {
@@ -38,13 +38,8 @@ class Entity;
 struct Material;
 struct PhysicsMeshBuffer;
 
-template <class ModelLoaderTraits>
-class TModelLoader final {
- public:
-
-  TModelLoader();
-  ~TModelLoader();
-
+template <class Traits>
+struct TModelLoader final {
   using Node = typename ModelLoaderTraits::Node;
   using Scene = typename ModelLoaderTraits::Scene;
   using ShapeType = typename ModelLoaderTraits::ShapeType;

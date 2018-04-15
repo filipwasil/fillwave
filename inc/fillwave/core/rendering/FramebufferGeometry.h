@@ -24,10 +24,12 @@
 #include <fillwave/core/rendering/Framebuffer.h>
 #include <fillwave/core/texturing/Parameter.h>
 #include <fillwave/core/texturing/Texture2D.h>
-#include <fillwave/management/TextureSystem.h>
 
 namespace flw {
 class Engine;
+namespace flf {
+class TextureSystem;
+}
 namespace flc {
 
 /*! \class FramebufferGeometry
@@ -36,7 +38,7 @@ namespace flc {
 
 class FramebufferGeometry : public Framebuffer {
 public:
-  FramebufferGeometry(flf::TextureSystem &textures,
+  FramebufferGeometry(flf::TextureSystem& textures,
       GLuint width,
       GLuint height,
       GLuint colorBuffers);
@@ -72,5 +74,4 @@ private:
 };
 
 } /* flc */
-typedef std::shared_ptr<flc::FramebufferGeometry> puFramebufferGeometry;
 } /* flw */

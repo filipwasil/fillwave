@@ -19,14 +19,33 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/modelloader/TModelLoader.h>
+#include <fillwave/loaders/textureloader/TTextureLoader.h>
+#include <fillwave/loaders/textureloader/squish/TextureLoaderTraitsSquish.h>
+
+#include <fillwave/Log.h>
+
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
 
-template<>
-void TModelLoader<ModelLoaderTraitsDefault>::getPhysicsBuffer(const char* /*path*/, flf::PhysicsMeshBuffer&/*buf*/) {
-  // nothing
+template <>
+flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSquish>::load(
+  const std::string& /*filePath*/
+  , flc::EFlip /*flip*/
+  , GLenum /*format*/
+  , std::string /*rootPath*/
+  , flc::ECompression /*compression*/
+  , GLenum /*cubeTarget*/) {
+  return nullptr;
+}
+
+template <>
+flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSquish>::load(
+  GLint /*screenWidth*/
+  , GLint /*screenHeight*/
+  , GLenum /*format*/) {
+  return nullptr;
 }
 
 } /* flf */

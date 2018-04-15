@@ -25,6 +25,7 @@
 #include <fillwave/core/rendering/FramebufferGeometry.h>
 #include <fillwave/models/Mesh.h>
 #include <fillwave/Math.h>
+#include <fillwave/core/rendering/Texture2DRenderable.h>
 
 #if defined(FILLWAVE_GLES_3_0)
 #else
@@ -137,7 +138,7 @@ private:
 
   const GLuint mDeferredColorAttachments;
 
-  puFramebufferGeometry mGBuffer;
+  pu<flc::FramebufferGeometry> mGBuffer;
 
   std::vector<IRenderable*> mNodes; /* true -> animated, false -> not animated */
   std::vector<IRenderable*> mAnimatedNodes; /* true -> animated, false -> not animated */

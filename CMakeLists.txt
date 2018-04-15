@@ -58,6 +58,8 @@ aux_source_directory ("src/models/base" FILLWAVE_MODELS_BASE_SOURCES)
 
 aux_source_directory ("src/loaders/modelloader" FILLWAVE_MODELS_ANIMATIONS_SOURCES)
 
+aux_source_directory ("src/loaders/textureloader" FILLWAVE_TEXTURE_LOADER_BASE_SOURCES)
+
 aux_source_directory ("src/models/effects" FILLWAVE_MODELS_EFFECTS_SOURCES)
 aux_source_directory ("src/models/builders" FILLWAVE_MODELS_BUILDERS_SOURCES)
 
@@ -96,6 +98,9 @@ set (FILLWAVE_SOURCES
     ${FILLWAVE_HUD_SOURCES}
     ${FILLWAVE_MODEL_LOADER_SOURCES}
     ${FILLWAVE_MODEL_LOADER_TRAITS}
+    ${FILLWAVE_TEXTURE_LOADER_BASE_SOURCES}
+    ${FILLWAVE_TEXTURE_LOADER_SOURCES}
+    ${FILLWAVE_TEXTURE_LOADER_TRAITS}
     ${FILLWAVE_SHAPES_SOURCES}
     ${FILLWAVE_ENGINE_SOURCES}
     )

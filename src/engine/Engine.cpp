@@ -148,17 +148,17 @@ void Engine::initStartup() {
 
   fLogD("Post processing startup pass added");
 
-  mStartupTexture = mTextures->get("logo.png", flf::ECompression::none);
+  mStartupTexture = mTextures->get("logo.png", flc::ECompression::none);
   if (mStartupTexture) {
     return;
   }
 
-  mStartupTexture = mTextures->get("textures/logo.png", flf::ECompression::none);
+  mStartupTexture = mTextures->get("textures/logo.png", flc::ECompression::none);
   if (mStartupTexture) {
     return;
   }
 
-  mStartupTexture = mTextures->get("64_64_64.color", flf::ECompression::none);
+  mStartupTexture = mTextures->get("64_64_64.color", flc::ECompression::none);
   fLogE("Fillwave startup logo could not be executed");
 }
 
@@ -267,7 +267,7 @@ Program* Engine::storeProgram(const string& name, const vector<Shader*>& shaders
   return mPrograms.store(name, shaders, isSkipLinking);
 }
 
-Texture2D* Engine::storeTexture(const string& texturePath, flf::ECompression compression) {
+Texture2D* Engine::storeTexture(const string& texturePath, flc::ECompression compression) {
   return mTextures->get(texturePath, compression);
 }
 
@@ -317,7 +317,7 @@ ps<flf::Text> Engine::storeText(const string& content,
   if (!mTextures->get(fontName + ".png")) {
     mFontLoader.load(mFileLoader.getRootPath() + fontName);
   }
-  auto t = mTextures->get(fontName + ".png", flf::ECompression::none, flf::EFlip::vertical);
+  auto t = mTextures->get(fontName + ".png", flc::ECompression::none, flc::EFlip::vertical);
 
   Font* font = nullptr;
   for (auto &it : mFontManager) {

@@ -27,6 +27,7 @@
 #include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
 #include <fillwave/core/buffers/VertexBufferParticles.h>
 #include <fillwave/models/base/IReloadable.h>
+#include <fillwave/management/base/TCache.h>
 
 namespace flw {
 namespace flf {

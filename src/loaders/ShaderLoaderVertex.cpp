@@ -20,7 +20,7 @@
  */
 
 #include <fillwave/loaders/ShaderLoaderVertex.h>
-#include <fillwave/loaders/ModelLoaderTraits.h>
+#include <fillwave/loaders/modelloader/ModelLoaderTraits.h>
 #include <fillwave/common/Strings.h>
 #include <fillwave/loaders/ModelLoader.h>
 

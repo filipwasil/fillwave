@@ -23,6 +23,8 @@
 
 #include <fillwave/Config.h>
 
+#include <fillwave/management/TextureSystem.h>
+
 #include <fillwave/common/Aliases.h>
 
 #include <fillwave/space/Scene.h>
@@ -48,7 +50,6 @@
 #include <fillwave/management/CacheSampler.h>
 
 #include <fillwave/management/LightSystem.h>
-#include <fillwave/management/TextureSystem.h>
 
 #include <fillwave/core/buffers/PixelBuffer.h>
 #include <fillwave/core/pipeline/Fence.h>
@@ -116,12 +117,12 @@ class Engine {
   GLuint getFramesPassed();
   GLfloat getStartupAnimationTime() const;
 
-  template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath);
-  template <GLuint T> flc::Shader* storeShader(const std::string &shaderPath, const std::string &shaderSource);
+  template <GLuint T> flc::Shader* storeShader(const std::string& shaderPath);
+  template <GLuint T> flc::Shader* storeShader(const std::string& shaderPath, const std::string& shaderSource);
   flc::Program* storeProgram(const std::string &name, const flf::vec<flc::Shader *> &shaders, bool isSkipLinking = false);
 
   /* Store textures */
-  flc::Texture2D* storeTexture(const std::string &path, flf::ECompression com = flf::ECompression::none);
+  flc::Texture2D* storeTexture(const std::string &path, flc::ECompression com = flc::ECompression::none);
 
   flc::Texture2DRenderable* storeTextureRenderable();
 

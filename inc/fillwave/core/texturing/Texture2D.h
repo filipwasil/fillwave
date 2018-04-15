@@ -22,9 +22,12 @@
  */
 
 #include <fillwave/core/texturing/Texture.h>
+#include <fillwave/loaders/textureloader/TextureConfigs.h>
 
 namespace flw {
 namespace flc {
+
+struct TextureConfig;
 
 /*! \class Texture2D
  * \brief Single GLSL 2D Texture object.
@@ -32,7 +35,7 @@ namespace flc {
 
 class Texture2D : public Texture {
 public:
-  Texture2D(TextureConfig *file, ParameterList &parameters, GLuint howMany = 1);
+  Texture2D(TextureConfig* file, ParameterList &parameters, GLuint howMany = 1);
 
   virtual ~Texture2D() = default;
 
@@ -55,5 +58,4 @@ protected:
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::Texture2D> puTexture2D;
 } /* flw */

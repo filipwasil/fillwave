@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/TextureConfigs.h>
+#include <fillwave/loaders/textureloader/TextureConfigs.h>
 
 #include <cstdlib>
 

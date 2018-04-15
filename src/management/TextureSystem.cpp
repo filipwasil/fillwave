@@ -19,8 +19,9 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/Log.h>
 #include <fillwave/management/TextureSystem.h>
+
+#include <fillwave/Log.h>
 
 FLOGINIT_DEFAULT()
 
@@ -73,7 +74,7 @@ inline void TextureSystem::checkExtensions() {
 #endif
 }
 
-flc::Texture2D* TextureSystem::get(const std::string &texturePath, ECompression compression, EFlip flip) {
+flc::Texture2D* TextureSystem::get(const std::string &texturePath, flc::ECompression compression, flc::EFlip flip) {
   const std::string filePath = mRootPath + texturePath;
   if (texturePath.empty()) {
     return nullptr;
@@ -93,10 +94,10 @@ flc::Texture2D* TextureSystem::get(const std::string &texturePath, ECompression 
   return nullptr;
 }
 
-flc::Texture2DRenderableDynamic* TextureSystem::getDynamic(const std::string &fragmentShaderPath, flc::Program *program, glm::ivec2 screenSize) {
+flc::Texture2DRenderableDynamic* TextureSystem::getDynamic(const std::string& fragmentShaderPath, flc::Program* program, glm::ivec2 screenSize) {
   std::string filePath = mRootPath + fragmentShaderPath;
 
-  auto file = mLoader.loadEmpty(screenSize.x, screenSize.y);
+  auto file = mLoader.load(screenSize.x, screenSize.y);
 
   flc::ParameterList parameters = {
     flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
@@ -136,17 +137,17 @@ flc::Texture3D* TextureSystem::get(const std::string &posX,
   fLogD("Texture ", name, " will be added to manager");
 
   auto cfgPX =
-    mLoader.load(filePathPosX, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+    mLoader.load(filePathPosX, flc::EFlip::none, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_X);
   auto cfgNX =
-    mLoader.load(filePathNegX, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
+    mLoader.load(filePathNegX, flc::EFlip::none, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
   auto cfgPY =
-    mLoader.load(filePathPosY, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
+    mLoader.load(filePathPosY, flc::EFlip::none, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
   auto cfgNY =
-    mLoader.load(filePathNegY, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+    mLoader.load(filePathNegY, flc::EFlip::none, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
   auto cfgPZ =
-    mLoader.load(filePathPosZ, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
+    mLoader.load(filePathPosZ, flc::EFlip::none, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
   auto cfgNZ =
-    mLoader.load(filePathNegZ, EFlip::none, GL_RGBA, mRootPath, ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
+    mLoader.load(filePathNegZ, flc::EFlip::none, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 
   if (cfgPX && cfgNX && cfgPY && cfgNY && cfgPZ && cfgNZ) {
     fLogD("Texture ", name, " has been added to manager");

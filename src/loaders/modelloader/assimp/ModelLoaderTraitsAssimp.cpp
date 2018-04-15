@@ -35,16 +35,6 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-template<>
-TModelLoader<ModelLoaderTraitsAssimp>::TModelLoader() {
-  // nothing
-}
-
-template<>
-TModelLoader<ModelLoaderTraitsAssimp>::~TModelLoader() {
-  // nothing
-}
-
 ModelLoaderTraitsAssimp::Scene::Scene(const char* path)
   : mImporter()
   , mScene(mImporter.ReadFile(path, aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace)) {

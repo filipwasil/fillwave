@@ -72,7 +72,6 @@ install (DIRECTORY examples/linux/data/animations DESTINATION bin COMPONENT fill
 install (DIRECTORY examples/linux/data/fonts DESTINATION bin COMPONENT fillwave)
 install (DIRECTORY examples/linux/data/meshes DESTINATION bin COMPONENT fillwave)
 install (DIRECTORY examples/linux/data/textures DESTINATION bin COMPONENT fillwave)
-install (FILES ${FILLWAVE_TEXTURE_LOADER_HEADERS} DESTINATION include)
 install (FILES ${FILLWAVE_EXT_FONTGENERATOR_HEADERS} DESTINATION include)
 install (TARGETS fillwave DESTINATION bin COMPONENT fillwave)
 install (DIRECTORY inc/fillwave DESTINATION include COMPONENT fillwave)

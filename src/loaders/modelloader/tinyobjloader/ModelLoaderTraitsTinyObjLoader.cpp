@@ -35,16 +35,6 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-template<>
-TModelLoader<ModelLoaderTraitsTinyObjLoader>::TModelLoader() {
-  // nothing
-}
-
-template<>
-TModelLoader<ModelLoaderTraitsTinyObjLoader>::~TModelLoader() {
-  // nothing
-}
-
 ModelLoaderTraitsTinyObjLoader::Scene::Scene(const char* path) {
   std::string err = tinyobj::LoadObj(mShapes, mMaterials, path);
   if (!err.empty()) {

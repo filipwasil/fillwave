@@ -21,19 +21,11 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "fillwave/OpenGL.h"
+#include <fillwave/loaders/textureloader/TextureContent.h>
+#include <fillwave/OpenGL.h>
 
 namespace flw {
 namespace flc {
-
-/*! \enum EMemoryAllocation
- * \brief Stores the type of memory free method
- */
-enum class EMemoryAllocation {
-  cstyle
-  , standard
-  , none
-};
 
 /*! \class TextureConfig
 * \brief Stores the single texture data

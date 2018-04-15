@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,15 +21,36 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/modelloader/TModelLoader.h>
+#include <fillwave/Config.h>
+
+#if defined (FILLWAVE_TEXTURE_LOADER_GLI)
+
+#include <fillwave/loaders/textureloader/gli//TextureLoaderTraitsGLI.h>
 
 namespace flw {
 namespace flf {
-
-template<>
-void TModelLoader<ModelLoaderTraitsDefault>::getPhysicsBuffer(const char* /*path*/, flf::PhysicsMeshBuffer&/*buf*/) {
-  // nothing
-}
-
+  using TextureLoaderTraits = TextureLoaderTraitsGLI;
 } /* flf */
 } /* flw */
+
+#elif defined(FILLWAVE_TEXTURE_LOADER_SQUISH)
+
+#include <fillwave/loaders/textureloader/squish/TextureLoaderTraitsSquish.h>
+
+namespace flw {
+namespace flf {
+  using TextureLoaderTraits = TextureLoaderTraitsSquish;
+} /* flf */
+} /* flw */
+
+#else
+
+#include <fillwave/loaders/textureloader/stb/TextureLoaderTraitsSTB.h>
+
+namespace flw {
+namespace flf {
+  using TextureLoaderTraits = TextureLoaderTraitsSTB;
+} /* flf */
+} /* flw */
+
+#endif

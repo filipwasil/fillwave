@@ -21,9 +21,9 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/management/TextureSystem.h>
 #include <fillwave/space/base/Light.h>
 #include <fillwave/space/CameraPerspective.h>
+//#include <fillwave/management/TextureSystem.h>
 
 namespace flw {
 namespace flf {
