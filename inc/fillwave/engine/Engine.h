@@ -106,6 +106,7 @@ class Engine {
 
   /* Assets */
   void getPhysicalMeshBuffer(const std::string& path, flf::PhysicsMeshBuffer& buffer);
+  const std::string getGlobalPath(const std::string& localPath);
 
   /* Scene */
   void setCurrentScene(pu<flf::Scene> &&scene);
@@ -250,14 +251,12 @@ class Engine {
   glm::vec3 mBackgroundColor;
 
  public:
-  /* Events */
   void onEvent(const flf::Event& event) const;
   void onResizeScreen(GLuint width, GLuint height);
   void attachHandler(std::function<void(const flf::Event&)>&& h, flf::EEventType type);
   void detachHandlers();
 
  private:
-  /* Initiatization */
   void init();
   void initExtensions();
   void initContext();
@@ -269,7 +268,6 @@ class Engine {
   void initOcclusionTest();
   void initStartup();
 
-  /* Evaluation */
   void evaluateShadowMaps();
   void evaluateDebugger();
   void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);

@@ -445,6 +445,10 @@ void Engine::getPhysicalMeshBuffer(const string& shapePath, flf::PhysicsMeshBuff
   mModelLoader.getPhysicsBuffer((mFileLoader.getRootPath() + shapePath).c_str(), buffer);
 }
 
+const std::string Engine::getGlobalPath(const std::string& localPath) {
+  return mFileLoader.getRootPath() + localPath;
+}
+
 void Engine::addPostProcess(const string& fragmentShaderPath, GLfloat lifeTime) {
   Program* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
   PostProcessingPass pass(program,

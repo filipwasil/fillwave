@@ -33,7 +33,7 @@ using namespace std;
 
 FileLoader::FileLoader(const string &rootPath)
     : mRootPath(rootPath) {
-
+  // nothing
 }
 
 string FileLoader::getRootPath(string filePath) {

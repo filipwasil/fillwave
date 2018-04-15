@@ -65,7 +65,7 @@ std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::Node*> TModelLoader<Mo
 
 template<>
 TModelLoader<ModelLoaderTraitsTinyObjLoader>::Node* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getRootNode(const Scene&) {
-  return nullptr;
+  return static_cast<Node*>(nullptr);
 }
 
 template<>
