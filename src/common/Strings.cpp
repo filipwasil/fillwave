@@ -37,7 +37,7 @@ std::string getStructField(std::string structName, std::string fieldName, int in
   return structName + strIndex;
 }
 
-std::string getStructField(std::string structName, int index) {
+const std::string getStructField(const std::string& structName, int index) {
   std::string strIndex;
   std::stringstream out;
   out << index;
@@ -46,7 +46,7 @@ std::string getStructField(std::string structName, int index) {
   return structName + strIndex;
 }
 
-std::string getNotIndexableName(std::string structName, int index) {
+const std::string getNotIndexableName(const std::string& structName, int index) {
   std::string strIndex;
   std::stringstream out;
   out << index;
@@ -55,7 +55,7 @@ std::string getNotIndexableName(std::string structName, int index) {
   return structName + strIndex;
 }
 
-std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems) {
+std::vector<std::string> &split(const std::string& s, char delim, std::vector<std::string>& elems) {
   std::stringstream ss(s);
   std::string item;
   while (std::getline(ss, item, delim)) {
@@ -64,20 +64,20 @@ std::vector<std::string> &split(const std::string &s, char delim, std::vector<st
   return elems;
 }
 
-std::vector<std::string> split(const std::string &s, char delim) {
+std::vector<std::string> split(const std::string& s, char delim) {
   std::vector<std::string> elems;
   split(s, delim, elems);
   return elems;
 }
 
-std::string getFilePathOnly(const char *path) {
+std::string getFilePathOnly(const char* path) {
   if (std::string(path).find(FILLWAVE_OS_SEPRATOR) != std::string::npos) {
     return std::string(path).substr(0, std::string(path).find_last_of(FILLWAVE_OS_SEPRATOR));
   }
   return FILLWAVE_OS_CURRENTDIR;
 }
 
-std::string getFileNameOnly(const char *path) {
+std::string getFileNameOnly(const char* path) {
   if (std::string(path).find(FILLWAVE_OS_SEPRATOR) != std::string::npos) {
     return std::string(path).substr(std::string(path).find_last_of(FILLWAVE_OS_SEPRATOR) + 1, std::string(path).size());
   }

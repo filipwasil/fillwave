@@ -27,15 +27,15 @@
 
 namespace flw {
 
-std::vector<std::string> &split(const std::string &s, char delim, std::vector<std::string> &elems);
+std::vector<std::string>& split(const std::string& s, char delim, std::vector<std::string>& elems);
 
-std::vector<std::string> split(const std::string &s, char delim);
+std::vector<std::string> split(const std::string& s, char delim);
 
 std::string getStructField(std::string structName, std::string fieldName, int index);
 
-std::string getStructField(std::string structName, int index);
+const std::string getStructField(const std::string& structName, int index);
 
-std::string getNotIndexableName(std::string structName, int index);
+const std::string getNotIndexableName(const std::string& structName, int index);
 
 template <typename T>
 std::string to_string(T value) {
