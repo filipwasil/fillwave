@@ -231,5 +231,10 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsGLI>::load(
   return nullptr;
 }
 
+template <>
+const std::vector<flc::ECompression> TTextureLoader<TextureLoaderTraitsGLI>::getSupportedCompressionFormats() {
+  return { };
+}
+
 } /* flf */
 } /* flw */

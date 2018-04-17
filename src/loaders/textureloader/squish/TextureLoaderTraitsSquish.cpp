@@ -29,14 +29,43 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
+//int GetStorageRequirements( int width, int height, int flags );
+//void CompressImage( squish::u8 const* rgba, int width, int height, int pitch, void* blocks, int flags, float* metric = 0 );
+//void CompressImage( squish::u8 const* rgba, int width, int height, void* blocks, int flags, float* metric = 0 );
+//void DecompressImage( squish::u8* rgba, int width, int height, int pitch, void const* blocks, int flags );
+//void DecompressImage( squish::u8* rgba, int width, int height, void const* blocks, int flags );
+
+
 template <>
 flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSquish>::load(
   const std::string& /*filePath*/
   , flc::EFlip /*flip*/
   , GLenum /*format*/
   , std::string /*rootPath*/
-  , flc::ECompression /*compression*/
+  , flc::ECompression compression
   , GLenum /*cubeTarget*/) {
+  switch (compression) {
+    case flc::ECompression::s3tc_dxt1_rgb:
+      // kDxt1
+      break;
+    case flc::ECompression::s3tc_dxt1_rgba:
+      // kDxt1
+      break;
+    case flc::ECompression::s3tc_dxt3_rgba:
+      // kDxt3
+      break;
+    case flc::ECompression::s3tc_dxt5_rgba:
+      // kDxt5
+      break;
+    default:
+      // kColourClusterFit = ( 1 << 5 ) //! Use a slow but high quality colour compressor (the default).
+      // kColourRangeFit = ( 1 << 6 ) //! Use a fast but low quality colour compressor.
+      // kWeightColourByAlpha = ( 1 << 7 ) //! Weight the colour by alpha during cluster fit (disabled by default).
+      // kColourIterativeClusterFit = ( 1 << 8 ) //! Use a very slow but very high quality colour compressor.
+      // kSourceBGRA = ( 1 << 9 ) //! Source is BGRA rather than RGBA
+      break;
+
+  }
   return nullptr;
 }
 
@@ -46,6 +75,15 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSquish>::load(
   , GLint /*screenHeight*/
   , GLenum /*format*/) {
   return nullptr;
+}
+
+template <>
+const std::vector<flc::ECompression> TTextureLoader<TextureLoaderTraitsSquish>::getSupportedCompressionFormats() {
+  return {
+    flc::ECompression::s3tc_dxt1_rgba
+    , flc::ECompression::s3tc_dxt3_rgba
+    , flc::ECompression::s3tc_dxt5_rgba
+    , flc::ECompression::s3tc_dxt1_rgb};
 }
 
 } /* flf */

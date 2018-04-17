@@ -46,6 +46,8 @@ struct TTextureLoader {
     GLint screenWidth
     , GLint screenHeight
     , GLenum format = GL_RGBA);
+
+  const std::vector<flc::ECompression> getSupportedCompressionFormats();
 };
 
 } /* flw */

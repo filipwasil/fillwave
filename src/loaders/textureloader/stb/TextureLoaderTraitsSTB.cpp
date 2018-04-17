@@ -220,6 +220,11 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(GLint screenWid
   return TextureLoaderTraitsSTB().mGenerator.loadEmpty(screenWidth, screenHeight);
 }
 
+template <>
+const std::vector<flc::ECompression> TTextureLoader<TextureLoaderTraitsSTB>::getSupportedCompressionFormats() {
+  return { };
+}
+
 template
 class TTextureLoader<TextureLoaderTraitsSTB>;
 
