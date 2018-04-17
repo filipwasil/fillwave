@@ -24,6 +24,7 @@
 #include <fillwave/loaders/textureloader/TextureConfigs.h>
 #include <fillwave/loaders/textureloader/TextureContent.h>
 #include <string>
+#include <vector>
 
 namespace flw {
 namespace flf {
