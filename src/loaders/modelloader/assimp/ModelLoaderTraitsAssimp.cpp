@@ -187,7 +187,7 @@ flw::flc::VertexBufferBasic*
           vertices[VertexID].mBoneWeight[boneIdForEachVertex[VertexID]] = Weight;
           boneIdForEachVertex[VertexID]++;
         } else {
-          fLogF("Crater can handle maximum %d bone dependencies.", TModelLoader::COUNT_BONES_USED);
+          fLogF("Fillwave can handle maximum ", TModelLoader::COUNT_BONES_USED, " bone dependencies.");
         }
       }
     }

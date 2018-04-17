@@ -53,11 +53,16 @@ AnimatorAssimp::Channel::Channel(aiNodeAnim *assimpChannel) {
     );
   }
 
-  fLogD(" Added an animation channel \n name: %s \n keys S: %du keys R: %du keys P: %du",
-        mAffectedNodeName.c_str(),
-        mKeysScaling.size(),
-        mKeysRotation.size(),
-        mKeysTranslation.size());
+  fLogD(
+    "Added an animation channel name: "
+    , mAffectedNodeName
+    , " keys S: "
+    , mKeysScaling.size()
+    , " keys R: "
+    , mKeysRotation.size()
+    , " keys P:"
+    , mKeysTranslation.size()
+  );
 }
 
 } /* flf */
