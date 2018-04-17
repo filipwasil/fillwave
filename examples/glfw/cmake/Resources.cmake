@@ -1,5 +1,5 @@
 macro(copy_resources target)
-  set (RESOURCES_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../data")
+  set (RESOURCES_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../../data")
   #remember to clean the target directory
   add_custom_target (
       resources_${target}

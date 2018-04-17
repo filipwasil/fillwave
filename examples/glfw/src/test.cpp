@@ -32,16 +32,16 @@ void init() {
   /* Lights */
   engine->storeLightSpot(glm::vec3(1.0, 1.0, 3.0), glm::quat(), glm::vec4(1.0, 1.0, 1.0, 0.0), light.get());
 
-  auto model = std::make_unique<Model>(engine,
-        ProgramLoader(engine).getProgram(EProgram::basic),
-        "meshes/sphere.obj",
-        engine->storeTextureDynamic("shaders/water/water.frag"));
-  model->moveBy(glm::vec3(0.0, 0.0, -15.0));
+  auto model = std::make_unique<Model>(
+    engine
+    , ProgramLoader(engine).getProgram(EProgram::basic)
+    , "meshes/mountain.obj");
+  model->moveBy(glm::vec3(0.0, -3.0, -5.0));
   engine->getCurrentScene()->attach(std::move(model));
 
-  auto screenSize = engine->getScreenSize();
+//  auto screenSize = engine->getScreenSize();
 
-  auto textureFile = TextureLoader().loadEmpty(screenSize.x, screenSize.y);
+//  auto textureFile = TextureLoader().loadEmpty(screenSize.x, screenSize.y);
 
   flc::ParameterList parameters = {
     flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
@@ -52,5 +52,5 @@ void init() {
 
   //auto program = ProgramLoader(engine).getProgram(EProgram::basic);
 
-  flw::flc::Texture2DRenderable t(GL_COLOR_ATTACHMENT0, textureFile, parameters);
+//  flw::flc::Texture2DRenderable t(GL_COLOR_ATTACHMENT0, textureFile, parameters);
 }
