@@ -1,0 +1,13 @@
+set (SOURCEOBJECTS
+    ${SOURCE}
+    ${CMAKE_CURRENT_SOURCE_DIR}/items/BaseItem.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/TreeItemModel.cpp
+    PARENT_SCOPE
+    )
+set (HEADERSOBJECTS
+    ${HEADERS}
+    ${CMAKE_CURRENT_SOURCE_DIR}/IItem.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/TreeItemModel.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/items/BaseItem.h
+    PARENT_SCOPE
+    )

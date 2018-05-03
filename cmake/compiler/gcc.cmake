@@ -27,6 +27,11 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wunsafe-loop-optimizations")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wvector-operation-performance")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wzero-as-null-pointer-constant")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror")
+if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.0)
+  #Flags added beacuse of externals librabry, GLM and STB.
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=misleading-indentation")
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=shift-negative-value")
+endif()
 
 # STB library warnings
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion") #stb

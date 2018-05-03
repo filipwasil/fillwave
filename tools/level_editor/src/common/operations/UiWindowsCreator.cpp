@@ -1,6 +1,7 @@
 #include <QLabel>
 #include <QToolButton>
 #include "UiWindowsCreator.h"
+#include "objects/TreeItemModel.h"
 
 namespace common {
 UiWindowsCreator::UiWindowsCreator(QWidget* parent)
@@ -9,8 +10,7 @@ UiWindowsCreator::UiWindowsCreator(QWidget* parent)
 }
 
 UiWindowsCreator::~UiWindowsCreator() {
-  delete eventFilterMouse;
-  eventFilterMouse = nullptr;
+  // TODO: New memory magnamet for eventMouse
 }
 
 QVBoxLayout* UiWindowsCreator::createNodeLayout(QTreeView* treeView, QWidget* parent) {
@@ -24,8 +24,8 @@ QVBoxLayout* UiWindowsCreator::createNodeLayout(QTreeView* treeView, QWidget* pa
   hBox->addWidget(addNode);
   hBox->addWidget(deleteNode);
   treeView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  auto sceneModel = new QStandardItemModel(parent);
-  treeView->setModel(sceneModel);
+  objects::TreeItemModel* model = new objects::TreeItemModel("InspectorModel", nullptr);
+  treeView->setModel(model);
   auto vBox = new QVBoxLayout();
   vBox->addWidget(label);
   vBox->addLayout(hBox);
@@ -33,13 +33,11 @@ QVBoxLayout* UiWindowsCreator::createNodeLayout(QTreeView* treeView, QWidget* pa
   return vBox;
 }
 
-scene::callbacks::StandardMouseEventHandler* UiWindowsCreator::installEventFilterOnTreeView(
-    QTreeView* treeView,
-    QWidget* parent)
-{
-    auto eventFilterMouse = new scene::callbacks::StandardMouseEventHandler(treeView, parent);
-    treeView->viewport()->installEventFilter(eventFilterMouse);
-    return eventFilterMouse;
+scene::callbacks::StandardMouseEventHandler*
+UiWindowsCreator::installEventFilterOnTreeView(QTreeView* treeView, QWidget* parent) {
+  auto eventFilterMouse = new scene::callbacks::StandardMouseEventHandler(treeView, parent);
+  treeView->viewport()->installEventFilter(eventFilterMouse);
+  return eventFilterMouse;
 }
 
 QVBoxLayout* UiWindowsCreator::createInspectorViewLayout(QScrollArea* inspectorArea, QWidget* parent) {

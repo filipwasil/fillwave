@@ -56,7 +56,8 @@ void MainWidget::initMainGui() {
 
   auto propertiesLayout = new QVBoxLayout();
   mObjectPropertiesView = new QTreeView(this);
-  propertiesLayout->addLayout(createLayouts.createObjectPropertiesLayout(mObjectPropertiesView, objectPropertiesWindow));
+  propertiesLayout->addLayout(createLayouts.createObjectPropertiesLayout(mObjectPropertiesView,
+                                                                         objectPropertiesWindow));
   objectPropertiesWindow->setLayout(propertiesLayout);
   createDock("Node Area", nodeWindow, "Node", dockWindowsMenu, Qt::LeftDockWidgetArea);
   createDock("File Area", fileWindow, "Files", dockWindowsMenu, Qt::LeftDockWidgetArea);
@@ -65,10 +66,10 @@ void MainWidget::initMainGui() {
 }
 
 void MainWidget::createDock(QString dockName
-    , QWidget* widget
-    , QString actionName
-    , QMenu* subMenu
-    , Qt::DockWidgetArea dockArea) {
+                            , QWidget* widget
+                            , QString actionName
+                            , QMenu* subMenu
+                            , Qt::DockWidgetArea dockArea) {
   widgets::DockWidget* dock = new widgets::DockWidget(dockName, this);
   dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
   dock->setWidget(widget);
