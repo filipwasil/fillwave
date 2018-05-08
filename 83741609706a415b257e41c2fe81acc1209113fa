@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "05423f39_3bb671ea",
+        "filename": "cmake/compiler/gcc.cmake",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-05-08T20:18:13Z",
+      "side": 1,
+      "message": "add appropriate comment\n\n# GLM",
+      "revId": "83741609706a415b257e41c2fe81acc1209113fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
