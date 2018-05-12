@@ -36,7 +36,7 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-ModelLoaderTraitsTinyObjLoader::Scene::Scene(const std::string& filename) {
+ModelLoaderTraitsTinyObjLoader::SceneType::SceneType(const std::string& filename) {
   std::string err = tinyobj::LoadObj(mShapes, mMaterials, filename.c_str());
   if (!err.empty()) {
     fLogE(err);
@@ -49,18 +49,19 @@ void TModelLoader<ModelLoaderTraitsTinyObjLoader>::getPhysicsBuffer(const char*,
 }
 
 template<>
-std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::Node*> TModelLoader<ModelLoaderTraitsTinyObjLoader>::getChildren(const Node* /*node*/) {
-  std::vector<Node*> children;
+std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::NodeType*>
+  TModelLoader<ModelLoaderTraitsTinyObjLoader>::getChildren(const NodeType* /*node*/) {
+  std::vector<NodeType*> children;
   return children;
 }
 
 template<>
-TModelLoader<ModelLoaderTraitsTinyObjLoader>::Node* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getRootNode(const Scene&) {
-  return static_cast<Node*>(nullptr);
+TModelLoader<ModelLoaderTraitsTinyObjLoader>::NodeType* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getRootNode(const SceneType&) {
+  return static_cast<NodeType*>(nullptr);
 }
 
 template<>
-TModelLoader<ModelLoaderTraitsTinyObjLoader>::Animator* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getAnimator(const Scene&) {
+TModelLoader<ModelLoaderTraitsTinyObjLoader>::Animator* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getAnimator(const SceneType&) {
   return static_cast<Animator*>(nullptr);
 }
 
@@ -116,13 +117,13 @@ flc::IndexBuffer* TModelLoader<ModelLoaderTraitsTinyObjLoader>::getIndexBuffer(c
 }
 
 template<>
-void TModelLoader<ModelLoaderTraitsTinyObjLoader>::setTransformation(const Node* /*node*/, Entity* /*entity*/) {
+void TModelLoader<ModelLoaderTraitsTinyObjLoader>::setTransformation(const NodeType* /*node*/, Entity* /*entity*/) {
  // todo
 }
 
 template<>
 std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo>
-TModelLoader<ModelLoaderTraitsTinyObjLoader>::getMeshes(const Node* /*node*/, const Scene& scene) {
+TModelLoader<ModelLoaderTraitsTinyObjLoader>::getMeshes(const NodeType* /*node*/, const SceneType& scene) {
   std::vector<TModelLoader<ModelLoaderTraitsTinyObjLoader>::MeshCreationInfo> meshes;
   meshes.reserve(scene.mShapes.size());
 

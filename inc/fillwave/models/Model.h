@@ -113,17 +113,17 @@ public:
   void initShadowing(Engine *engine);
 
   /* Animation */
-  void initAnimations(const ModelLoader::Scene& scene);
+  void initAnimations(const ModelLoader::SceneType& scene);
   void evaluateAnimations();
   bool isAnimated() const override;
 
   void unloadNodes();
 
-  void loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene& scene, Entity* entity);
+  void loadNodes(const ModelLoader::NodeType* node, const ModelLoader::SceneType& scene, Entity* entity);
 
   void loadNodes(
-    const ModelLoader::Node* node
-    , const ModelLoader::Scene& scene
+    const ModelLoader::NodeType* node
+    , const ModelLoader::SceneType& scene
     , Entity* entity
     , flc::Texture2D* diffuse
     , flc::Texture2D* normal

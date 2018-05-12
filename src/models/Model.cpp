@@ -124,7 +124,7 @@ Model::~Model() {
 }
 
 void Model::reloadModel(const std::string& localPath) {
-  const auto scene = ModelLoader::Scene(mEngine->getGlobalPath(localPath));
+  const auto scene = ModelLoader::SceneType(mEngine->getGlobalPath(localPath));
   initAnimations(scene);
   initShadowing(mEngine);
   initUniformsCache();
@@ -138,14 +138,14 @@ void Model::reloadModel(
   , flc::Texture2D* specular
   , const Material& material) {
   unloadNodes();
-  const auto scene = ModelLoader::Scene(mEngine->getGlobalPath(localPath));
+  const auto scene = ModelLoader::SceneType(mEngine->getGlobalPath(localPath));
   initAnimations(scene);
   initShadowing(mEngine);
   initUniformsCache();
   loadNodes(ModelLoader::getRootNode(scene), scene, this, diff, norm, specular, material);
 }
 
-inline void Model::initAnimations(const ModelLoader::Scene& scene) {
+inline void Model::initAnimations(const ModelLoader::SceneType& scene) {
   mAnimator = std::unique_ptr<ModelLoader::Animator>(ModelLoader::getAnimator(scene));
   if (mAnimator) {
     fLogD("attached TimedBoneUpdateCallback to model");
@@ -163,7 +163,7 @@ inline void Model::unloadNodes() {
   mMeshes.clear();
 }
 
-inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::Scene& scene, Entity* entity) {
+inline void Model::loadNodes(const ModelLoader::NodeType* node, const ModelLoader::SceneType& scene, Entity* entity) {
 
   /* Set this node transformations */
   ModelLoader::setTransformation(node, entity);
@@ -192,8 +192,8 @@ inline void Model::loadNodes(const ModelLoader::Node* node, const ModelLoader::S
 }
 
 void Model::loadNodes (
-  const ModelLoader::Node* node
-  , const ModelLoader::Scene& scene
+  const ModelLoader::NodeType* node
+  , const ModelLoader::SceneType& scene
   , Entity* entity
   , flc::Texture2D* diffuseMap
   , flc::Texture2D* normalMap

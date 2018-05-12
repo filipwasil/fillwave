@@ -23,6 +23,8 @@
 
 #include <fillwave/loaders/modelloader/ModelLoaderTraits.h>
 #include <fillwave/models/base/Material.h>
+#include <fillwave/common/Nothing.h>
+#include <fillwave/loaders/modelloader/AnimatorDefault.h>
 
 namespace flw {
 
@@ -40,13 +42,54 @@ struct PhysicsMeshBuffer;
 
 template <class Traits>
 struct TModelLoader final {
-  using Node = typename ModelLoaderTraits::Node;
-  using Scene = typename ModelLoaderTraits::Scene;
-  using ShapeType = typename ModelLoaderTraits::ShapeType;
-  using MaterialType = typename ModelLoaderTraits::MaterialType;
-  using TextureType = typename ModelLoaderTraits::TextureType;
-  using String = typename ModelLoaderTraits::String;
-  using Animator = typename ModelLoaderTraits::Animator;
+  template <typename C>
+  static typename C::NodeType getNodeType(bool);
+  template <typename C>
+  static Nothing getNodeType(...);
+
+  using NodeType = decltype(getNodeType<Traits>(0));
+
+  template <typename C>
+  static typename C::SceneType getSceneType(bool);
+  template <typename C>
+  static Nothing getSceneType(...);
+
+  using SceneType = decltype(getSceneType<Traits>(0));
+
+  template <typename C>
+  static typename C::ShapeType getShapeType(bool);
+  template <typename C>
+  static Nothing getShapeType(...);
+
+  using ShapeType = decltype(getShapeType<Traits>(0));
+
+  template <typename C>
+  static typename C::MaterialType getMaterialType(bool);
+  template <typename C>
+  static Nothing getMaterialType(...);
+
+  using MaterialType = decltype(getMaterialType<Traits>(0));
+
+  template <typename C>
+  static typename C::TextureType getTextureType(bool);
+  template <typename C>
+  static Nothing getTextureType(...);
+
+  using TextureType = decltype(getTextureType<Traits>(0));
+
+  template <typename C>
+  static typename C::String getString(bool);
+  template <typename C>
+  static Nothing getString(...);
+
+  using String = decltype(getString<Traits>(0));
+
+  template <typename C>
+  static typename C::Animator getAnimator(bool);
+  template <typename C>
+  static AnimatorDefault getAnimator(...);
+
+  using Animator = decltype(getAnimator<Traits>(0));
 
   struct MeshCreationInfo {
     const ShapeType* shape;
@@ -56,20 +99,20 @@ struct TModelLoader final {
     const std::string specular;
   };
 
-  static constexpr int COUNT_BONES_DEFINED = ModelLoaderTraits::COUNT_BONES_DEFINED;
-  static constexpr int COUNT_BONES_USED = ModelLoaderTraits::COUNT_BONES_USED;
-  static constexpr int FLAG_ANIMATION_OFF = ModelLoaderTraits::FLAG_ANIMATION_OFF;
+  static constexpr int COUNT_BONES_DEFINED = Traits::COUNT_BONES_DEFINED;
+  static constexpr int COUNT_BONES_USED = Traits::COUNT_BONES_USED;
+  static constexpr int FLAG_ANIMATION_OFF = Traits::FLAG_ANIMATION_OFF;
 
   static void getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer);
   static const Material getMaterial(const MaterialType& material);
   static Material getTexturePath(TextureType type, const MaterialType& material);
   static ::flw::flc::IndexBuffer* getIndexBuffer(const ShapeType* shape);
   static ::flw::flc::VertexBufferBasic* getVertexBuffer(const ShapeType *shape, Animator *a);
-  static void setTransformation (const Node* node, Entity* entity);
-  static std::vector<MeshCreationInfo> getMeshes(const Node* node, const Scene& scene);
-  static std::vector<Node*> getChildren(const Node*);
-  static Node* getRootNode(const Scene&);
-  static Animator* getAnimator(const Scene&);
+  static void setTransformation (const NodeType* node, Entity* entity);
+  static std::vector<MeshCreationInfo> getMeshes(const NodeType* node, const SceneType& scene);
+  static std::vector<NodeType*> getChildren(const NodeType*);
+  static NodeType* getRootNode(const SceneType&);
+  static Animator* getAnimator(const SceneType&);
 };
 
 } /* flf */

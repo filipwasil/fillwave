@@ -35,7 +35,7 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-ModelLoaderTraitsAssimp::Scene::Scene(const std::string& filename)
+ModelLoaderTraitsAssimp::SceneType::SceneType(const std::string& filename)
   : mImporter()
   , mScene(mImporter.ReadFile(filename, aiProcess_Triangulate | aiProcess_SortByPType | aiProcess_CalcTangentSpace)) {
   if (!mScene) {
@@ -46,7 +46,7 @@ ModelLoaderTraitsAssimp::Scene::Scene(const std::string& filename)
 template<>
 void TModelLoader<ModelLoaderTraitsAssimp>::getPhysicsBuffer(const char* assetPath, flf::PhysicsMeshBuffer& buffer) {
 
-  Scene scene(assetPath);
+  SceneType scene(assetPath);
 
   if (nullptr == scene.mScene) {
     return;
@@ -196,7 +196,7 @@ flw::flc::VertexBufferBasic*
 }
 
 template<>
-void TModelLoader<ModelLoaderTraitsAssimp>::setTransformation(const Node* node, Entity* entity) {
+void TModelLoader<ModelLoaderTraitsAssimp>::setTransformation(const NodeType* node, Entity* entity) {
   aiVector3t<float> scale;
   aiQuaterniont<float> rot;
   aiVector3t<float> pos;
@@ -214,7 +214,7 @@ const std::string getTextureName (ModelLoader::TextureType type, const aiMateria
 }
 
 template<>
-AnimatorAssimp* TModelLoader<ModelLoaderTraitsAssimp>::getAnimator(const Scene& scene) {
+AnimatorAssimp* TModelLoader<ModelLoaderTraitsAssimp>::getAnimator(const SceneType& scene) {
   if (0 == scene.mScene->mNumAnimations) {
     return nullptr;
   }
@@ -223,7 +223,7 @@ AnimatorAssimp* TModelLoader<ModelLoaderTraitsAssimp>::getAnimator(const Scene& 
 
 template<>
 std::vector<TModelLoader<ModelLoaderTraitsAssimp>::MeshCreationInfo>
-  TModelLoader<ModelLoaderTraitsAssimp>::getMeshes(const Node* node, const Scene& scene) {
+  TModelLoader<ModelLoaderTraitsAssimp>::getMeshes(const NodeType* node, const SceneType& scene) {
 
   vec<MeshCreationInfo> meshes;
   meshes.reserve(node->mNumMeshes);
@@ -248,9 +248,9 @@ std::vector<TModelLoader<ModelLoaderTraitsAssimp>::MeshCreationInfo>
 }
 
 template<>
-std::vector<TModelLoader<ModelLoaderTraitsAssimp>::Node*>
-  TModelLoader<ModelLoaderTraitsAssimp>::getChildren(const Node* node) {
-  std::vector<Node*> children;
+std::vector<TModelLoader<ModelLoaderTraitsAssimp>::NodeType*>
+  TModelLoader<ModelLoaderTraitsAssimp>::getChildren(const NodeType* node) {
+  std::vector<NodeType*> children;
   children.reserve(node->mNumChildren);
   for (size_t i = 0; i < node->mNumChildren; ++i) {
     children.push_back(node->mChildren[i]);
@@ -259,7 +259,7 @@ std::vector<TModelLoader<ModelLoaderTraitsAssimp>::Node*>
 }
 
 template<>
-TModelLoader<ModelLoaderTraitsAssimp>::Node* TModelLoader<ModelLoaderTraitsAssimp>::getRootNode(const Scene& scene) {
+TModelLoader<ModelLoaderTraitsAssimp>::NodeType* TModelLoader<ModelLoaderTraitsAssimp>::getRootNode(const SceneType& scene) {
   return scene.mScene->mRootNode;
 }
 
