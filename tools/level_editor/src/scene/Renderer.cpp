@@ -19,7 +19,7 @@ Renderer::Renderer(int argc, char* argv[], QWidget* parent)
   this->makeCurrent();
   QMap<QString, QVariant> text;
   text["mText"] = "Hello World";
-  mScene = std::make_shared<scene::EmptyScene>(mArgc, mArgv, text);
+  mScene = std::make_shared<scene::EmptyScene>(mArgc, mArgv);
   mTime = Time::now();
   this->setFocusPolicy(Qt::StrongFocus);
   this->setMouseTracking(true);
@@ -45,9 +45,6 @@ void Renderer::onUpdate(int /*sliderNo*/, int /*value*/) const {
 }
 
 void Renderer::setNewScene(std::shared_ptr<scene::AScene> scen) {
-  /* this->removeEventFilter(mScene.get());
-   mScene = scen;
-   this->installEventFilter(mScene.get());*/
 }
 
 std::shared_ptr<scene::AScene> Renderer::getScen() {

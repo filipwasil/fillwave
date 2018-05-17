@@ -8,13 +8,8 @@ namespace scene {
 
 class EmptyScene : public AScene {
  Q_OBJECT
-  Q_PROPERTY(QMap sceneParameter
-               READ
-               getParameters
-               WRITE
-               setParameters)
  public:
-  EmptyScene(int argc, char** argv, QMap<QString, QVariant> varValues);
+  EmptyScene(int argc, char** argv);
 
   ~EmptyScene() override;
 

@@ -6,8 +6,8 @@ using namespace flw;
 using namespace flw::flf;
 
 namespace scene {
-EmptyScene::EmptyScene(int argc, char** argv, QMap<QString, QVariant> varValues)
-  : AScene(argc, argv, varValues) {
+EmptyScene::EmptyScene(int argc, char** argv)
+  : AScene(argc, argv) {
   init();
 }
 
@@ -48,14 +48,11 @@ void EmptyScene::init() {
                                                               "textures/skybox/defaultLevelEditor/skyBoxBlue.png",
                                                               "textures/skybox/defaultLevelEditor/skyBoxBlue.png")));
 
-  auto startTextVariant = mSceneParameters["mText"];
-  mText = mEngine->storeText(startTextVariant.toString().toStdString(), "FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
+  mText = mEngine->storeText("Hello World", "FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
 }
 
 void EmptyScene::perform() {
-  QVariant tmp = mSceneParameters["mText"];
-  std::string string = tmp.toString().toStdString();
-  mText->editString(string);
+  mText->editString("Hello");
 }
 
 }

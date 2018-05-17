@@ -12,10 +12,8 @@
 
 namespace scene {
 class AScene : public QObject {
-//TODO: Property System to remove
  public:
-  AScene(int argc, char* const* argv, QMap<QString, QVariant> parametersMap)
-    : mSceneParameters(parametersMap) {
+  AScene(int argc, char* const* argv) {
     if (argv != nullptr) {
       mEngine = std::make_shared<flw::EnginePC>(argc, argv);
     }
@@ -27,34 +25,12 @@ class AScene : public QObject {
 
   virtual void perform() = 0;
 
-  QMap<QString, QVariant> getParameters() {
-    return mSceneParameters;
-  };
-
-  virtual void setParameters(QMap<QString, QVariant> parameters) {
-    if (!mSceneParameters.contains(parameters.firstKey())) {
-      return;
-    }
-    mSceneParameters[parameters.firstKey()] = parameters.first();
-    perform();
-  };
-
   std::shared_ptr<flw::Engine> getEngine() {
     return mEngine;
   };
 
-  bool eventFilter(QObject* watched, QEvent* event) override {
-    if (!mEventsHandler.empty()) {
-      for (auto& mEvent : mEventsHandler) {
-        mEvent->handle(event);
-      }
-    }
-    return QObject::eventFilter(watched, event);
-  }
-
  protected:
   std::shared_ptr<flw::Engine> mEngine;
-  QMap<QString, QVariant> mSceneParameters;
   std::vector<std::unique_ptr<scene::callbacks::IEventHandler>> mEventsHandler;
 };
 }

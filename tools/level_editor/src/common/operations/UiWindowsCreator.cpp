@@ -9,10 +9,6 @@ UiWindowsCreator::UiWindowsCreator(QWidget* parent)
 
 }
 
-UiWindowsCreator::~UiWindowsCreator() {
-  // TODO: New memory magnamet for eventMouse
-}
-
 QVBoxLayout* UiWindowsCreator::createNodeLayout(QTreeView* treeView, QWidget* parent) {
   QLabel* label = new QLabel("Node", parent);
   label->setAlignment(Qt::AlignHCenter);

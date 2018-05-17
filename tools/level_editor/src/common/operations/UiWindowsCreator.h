@@ -14,7 +14,7 @@ class UiWindowsCreator : public QObject {
  public:
   explicit UiWindowsCreator(QWidget* parent = nullptr);
 
- ~UiWindowsCreator();
+ ~UiWindowsCreator() = default;
 
   QVBoxLayout* createNodeLayout(QTreeView* treeView, QWidget* parent);
 
@@ -26,8 +26,6 @@ class UiWindowsCreator : public QObject {
 
   QVBoxLayout* createObjectPropertiesLayout(QTreeView* propertiesTree, QWidget* parent);
 
- private:
-  scene::callbacks::StandardMouseEventHandler* eventFilterMouse;
 };
 
 }
