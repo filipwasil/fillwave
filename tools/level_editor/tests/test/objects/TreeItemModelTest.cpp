@@ -25,3 +25,14 @@ TEST_F(TreeItemModelFixture, defaultItemCreationWithDefaultName) {
   EXPECT_EQ(childNameData.isValid(), true);
   EXPECT_EQ(childNameData.toString(), "StandardObject");
 }
+
+TEST_F(TreeItemModelFixture, insertNewItemToModel) {
+  bool status = sut->insertToModel(mTestItem);
+  EXPECT_EQ(true, status);
+  QModelIndex invalidIndex;
+  auto childIndex = sut->index(0, 0, invalidIndex);
+  Q_ASSERT(childIndex.isValid());
+  QVariant childNameData = sut->data(childIndex, Qt::DisplayRole);
+  EXPECT_EQ(childNameData.isValid(), true);
+  EXPECT_EQ(childNameData.toString(), "TestObject");
+}

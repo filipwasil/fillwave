@@ -10,8 +10,10 @@ set (HEADERSCOMMON
     ${HEADERS}
     ${CMAKE_CURRENT_SOURCE_DIR}/MainWidget.h
     ${CMAKE_CURRENT_SOURCE_DIR}/InternalConsts.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/InternalTypes.h
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/UiWindowsCreator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/UiFilesWindowsCreator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/operations/ICreateObjectsView.h
     ${CMAKE_CURRENT_SOURCE_DIR}/widgets/DockWidget.h
     PARENT_SCOPE
     )

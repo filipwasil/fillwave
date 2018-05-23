@@ -6,6 +6,7 @@ namespace objects {
 TreeItemModel::TreeItemModel(const QString& name, QObject* parent)
   : QAbstractItemModel(parent) {
   mRootItem = new objects::BaseItem(nullptr, QString("Root"), 0);
+  mNewItemToInsert = nullptr;
 }
 
 TreeItemModel::~TreeItemModel() {
@@ -74,7 +75,8 @@ QModelIndex TreeItemModel::parent(const QModelIndex& index) const {
   IItem* parentItem = childItem->parent();
 
   if (parentItem == mRootItem) {
-    return QModelIndex();
+    return {
+    };
   }
 
   return createIndex(parentItem->row(), 0, parentItem);
@@ -106,10 +108,11 @@ bool TreeItemModel::insertRows(int row, int count, const QModelIndex& parent) {
   IItem* parentItem = parent.isValid() ? itemForIndex(parent) : mRootItem;
   beginInsertRows(parent, row, row + count - 1);
   for (int i = 0; i < count; ++i) {
-    IItem* item = new objects::BaseItem(parentItem, "StandardObject", 1);
+    IItem* item = mNewItemToInsert ? mNewItemToInsert : new objects::BaseItem(parentItem, "StandardObject", 1);
     parentItem->insertChild(row, item);
   }
   endInsertRows();
+  mNewItemToInsert = nullptr;
   return true;
 }
 
@@ -125,6 +128,11 @@ IItem* TreeItemModel::itemForIndex(const QModelIndex& index) const {
 
 IItem* TreeItemModel::getRootItem() const {
   return mRootItem;
+}
+
+bool TreeItemModel::insertToModel(IItem* item) {
+  mNewItemToInsert = item;
+  return insertRow(1);
 }
 
 }

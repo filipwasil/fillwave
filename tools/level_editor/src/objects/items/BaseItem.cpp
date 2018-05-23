@@ -14,12 +14,10 @@ BaseItem::~BaseItem() {
 }
 
 IItem* BaseItem::parent() {
-  myname = mName.toStdString();
   return mParent;
 }
 
 QString BaseItem::name() const {
-  auto name = mName.toStdString();
   return mName;
 }
 

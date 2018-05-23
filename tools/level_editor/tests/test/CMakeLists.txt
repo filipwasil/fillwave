@@ -1,17 +1,20 @@
 include_directories (${LEVEL_EDITOR_SOURCE_DIR}/src)
-include_directories (${LEVEL_EDITOR_SOURCE_DIR}/tests/mock/)
+include_directories (${LEVEL_EDITOR_SOURCE_DIR}/tests/mocks)
 ##############
 # Unit Tests
 ##############
 set (SOURCESRC
     ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/items/BaseItem.cpp
     ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/TreeItemModel.cpp
+    ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/factories/ItemFactory.cpp
+    ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/controllers/NodeController.cpp
     ${SOURCE}
     )
 
 add_executable (runUnitTestsLevelEditor
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/BaseItemTest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/TreeItemModelTest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/objects/NodeControllerTest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/MainTest.cpp
     ${SOURCESRC})
 

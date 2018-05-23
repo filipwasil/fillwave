@@ -11,7 +11,7 @@ class DockWidget : public QDockWidget {
   explicit DockWidget(const QString& title, QWidget* parent = Q_NULLPTR, Qt::WindowFlags flags = Qt::WindowFlags());
 
  protected:
-  void closeEvent(QCloseEvent* event);
+  void closeEvent(QCloseEvent* event) override;
 };
 }
 }

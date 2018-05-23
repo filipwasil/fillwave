@@ -49,7 +49,6 @@ class BaseItem : public IItem {
  protected:
   IItem* mParent;
   QString mName;
-  std::string myname;
   uint mId;
   QList<IItem*> mChildrens;
 };

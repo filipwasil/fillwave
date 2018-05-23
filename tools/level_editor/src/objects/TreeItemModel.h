@@ -29,10 +29,13 @@ class TreeItemModel : public QAbstractItemModel {
 
   IItem* getRootItem() const;
 
+  virtual bool insertToModel(IItem* item);
+
  private:
   bool insertRows(int row, int count, const QModelIndex& parent) override;
 
  private:
   IItem* mRootItem;
+  IItem* mNewItemToInsert;
 };
 }
