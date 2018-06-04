@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea4e15a8_9babf19a",
+        "filename": "tools/level_editor/src/common/operations/ICreateObjectsView.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-06-04T20:29:03Z",
+      "side": 1,
+      "message": "move this brace up",
+      "revId": "fd30fadd1c5a3839ad8327a9349b1171fd3d6e6c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
