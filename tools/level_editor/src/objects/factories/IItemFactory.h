@@ -1,6 +1,6 @@
 #pragma once
 
-#include <common/InternalTypes.h>
+#include "common/InternalTypes.h"
 #include "objects/items/BaseItem.h"
 
 namespace objects {

@@ -13,11 +13,14 @@
 #include <QTreeWidget>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <objects/controllers/NodeController.h>
 
 #include "common/operations/UiFilesWindowsCreator.h"
 #include "common/operations/UiWindowsCreator.h"
 #include "common/widgets/DockWidget.h"
 #include "scene/callbacks/StandardMouseEventHandler.h"
+#include "objects/TreeItemModel.h"
+#include "objects/controllers/NodeController.h"
 
 class Renderer;
 
@@ -58,6 +61,8 @@ class MainWidget : public QMainWindow {
   QScrollArea* mInspectorArea;
   QTreeView* mObjectPropertiesView;
   scene::callbacks::StandardMouseEventHandler* mNodeMouseHandler;
+  objects::TreeItemModel* mItemModel;
+  objects::NodeController* mNodeController;
 };
 
 }

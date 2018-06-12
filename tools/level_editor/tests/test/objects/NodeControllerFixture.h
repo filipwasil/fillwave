@@ -11,15 +11,14 @@ class NodeControllerFixture : public testing::Test {
  protected:
   virtual void SetUp() override {
     mTreeModelMock = new objects::TreeItemModelMock();
-    mView = new common::ICreateObjectsViewMock();
-    sut = new objects::NodeController(mTreeModelMock, mView);
+    sut = new objects::NodeController(mTreeModelMock);
   }
 
   virtual void TearDown() override {
     delete sut;
+    delete mTreeModelMock;
   }
 
   objects::NodeController* sut;
   objects::TreeItemModelMock* mTreeModelMock;
-  common::ICreateObjectsViewMock* mView;
 };

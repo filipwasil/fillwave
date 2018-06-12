@@ -1,11 +1,14 @@
 #pragma once
 
+#include <tuple>
 #include <QTreeView>
 #include <QStandardItemModel>
 #include <QTableView>
 #include <QScrollArea>
 #include "common/MainWidget.h"
 #include "scene/callbacks/StandardMouseEventHandler.h"
+#include "objects/TreeItemModel.h"
+#include "objects/controllers/NodeController.h"
 
 namespace common {
 
@@ -16,7 +19,7 @@ class UiWindowsCreator : public QObject {
 
  ~UiWindowsCreator() = default;
 
-  QVBoxLayout* createNodeLayout(QTreeView* treeView, QWidget* parent);
+  std::tuple<QVBoxLayout*, objects::TreeItemModel*, objects::NodeController*> createNodeLayout(QTreeView* treeView, QWidget* parent);
 
   scene::callbacks::StandardMouseEventHandler* installEventFilterOnTreeView(
       QTreeView* treeView,

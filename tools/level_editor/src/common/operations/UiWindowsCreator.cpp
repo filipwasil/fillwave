@@ -1,7 +1,6 @@
 #include <QLabel>
 #include <QToolButton>
 #include "UiWindowsCreator.h"
-#include "objects/TreeItemModel.h"
 
 namespace common {
 UiWindowsCreator::UiWindowsCreator(QWidget* parent)
@@ -9,24 +8,29 @@ UiWindowsCreator::UiWindowsCreator(QWidget* parent)
 
 }
 
-QVBoxLayout* UiWindowsCreator::createNodeLayout(QTreeView* treeView, QWidget* parent) {
+std::tuple<QVBoxLayout*, objects::TreeItemModel*, objects::NodeController*> UiWindowsCreator::createNodeLayout(QTreeView* treeView, QWidget*
+parent) {
+
+  objects::TreeItemModel* model = new objects::TreeItemModel("InspectorModel", nullptr);
+  auto* nodeController = new objects::NodeController(model);
+
   QLabel* label = new QLabel("Node", parent);
   label->setAlignment(Qt::AlignHCenter);
   auto addNode = new QToolButton(parent);
   addNode->setIcon(QIcon("icons/add.png"));
+  connect(addNode, &QToolButton::clicked, nodeController, &objects::NodeController::createNode);
   auto deleteNode = new QToolButton(parent);
   deleteNode->setIcon(QIcon("icons/delete.png"));
   auto hBox = new QHBoxLayout();
   hBox->addWidget(addNode);
   hBox->addWidget(deleteNode);
   treeView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-  objects::TreeItemModel* model = new objects::TreeItemModel("InspectorModel", nullptr);
   treeView->setModel(model);
   auto vBox = new QVBoxLayout();
   vBox->addWidget(label);
   vBox->addLayout(hBox);
   vBox->addWidget(treeView);
-  return vBox;
+  return std::make_tuple(vBox, model, nodeController);
 }
 
 scene::callbacks::StandardMouseEventHandler*
