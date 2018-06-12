@@ -27,6 +27,7 @@ MainWidget::MainWidget(int argc, char* argv[], QWidget* parent)
 }
 
 MainWidget::~MainWidget() {
+  delete mItemModel;
 }
 
 void MainWidget::initMainGui() {
@@ -41,7 +42,11 @@ void MainWidget::initMainGui() {
   auto nodeLayout = new QVBoxLayout();
   mNodeTreeView = new QTreeView(this);
   mNodeMouseHandler = createLayouts.installEventFilterOnTreeView(mNodeTreeView, this);
-  nodeLayout->addLayout(createLayouts.createNodeLayout(mNodeTreeView, nodeWindow));
+  QVBoxLayout* nodeTreeLayout;
+  auto nodeTuple = createLayouts.createNodeLayout(mNodeTreeView, nodeWindow);
+  nodeTreeLayout = std::get<0>(nodeTuple);
+  mItemModel = std::get<1>(nodeTuple);
+  nodeLayout->addLayout(nodeTreeLayout);
   nodeWindow->setLayout(nodeLayout);
 
   auto fileLayout = new QVBoxLayout();

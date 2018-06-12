@@ -10,16 +10,9 @@
 class NodeControllerFixture : public testing::Test {
  protected:
   virtual void SetUp() override {
-    mTreeModelMock = new objects::TreeItemModelMock();
-    mView = new common::ICreateObjectsViewMock();
-    sut = new objects::NodeController(mTreeModelMock, mView);
+    mTreeModelMock.reset(new objects::TreeItemModelMock());
+    sut.reset(new objects::NodeController(mTreeModelMock.get()));
   }
-
-  virtual void TearDown() override {
-    delete sut;
-  }
-
-  objects::NodeController* sut;
-  objects::TreeItemModelMock* mTreeModelMock;
-  common::ICreateObjectsViewMock* mView;
+  std::unique_ptr<objects::NodeController> sut;
+  std::unique_ptr<objects::TreeItemModelMock> mTreeModelMock;
 };
