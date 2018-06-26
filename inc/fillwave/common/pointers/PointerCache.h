@@ -29,31 +29,44 @@
 namespace flw {
 
 template <class TValueType>
-class PointerCache : public std::unique_ptr<TValueType, void(*)(TValueType*)> {
+class PointerCache {
  public:
 
   PointerCache()
-    : std::unique_ptr<TValueType, void(*)(TValueType*)> (nullptr, [](TValueType*){})
+    : mPtr(nullptr, [](TValueType*){})
     , mPtrStack() {
     // nothing
   }
 
   template <typename ...Args>
   PointerCache(Args&&... args)
-    : std::unique_ptr<TValueType, void(*)(TValueType*)> (create(), [](TValueType*){}) {
-    mPtrStack[0] = TValueType(std::forward<Args>(args)...);
+    : mPtr(create(), [](TValueType*){}) {
+    mPtrStack = TValueType(std::forward<Args>(args)...);
+  }
+
+  PointerCache(const PointerCache&) = delete;
+
+  PointerCache(PointerCache&&) = delete;
+
+  PointerCache& operator=(const PointerCache& ptr) = delete;
+
+  PointerCache& operator=(PointerCache&&) = default;
+
+  auto operator->() {
+    return mPtr.operator->();
   }
 
  private:
   TValueType* create() {
-    return mPtrStack.data();
+    return &mPtrStack;
   }
 
-  void destroy(TValueType*) {
-    // nothing
+  void reset() {
+    mPtr.reset();
   }
 
-  std::array<TValueType, 1> mPtrStack;
+  std::unique_ptr<TValueType, void(*)(TValueType*)> mPtr;
+  TValueType mPtrStack;
 };
 
 } /* flw */

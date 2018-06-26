@@ -53,11 +53,11 @@ TEST (PointerCache, definingStructPointer) {
 }
 
 TEST (PointerCache, definingStructPointerConstructionWithArguments) {
-  PointerCache<DualInt> sut(1, 2);
-  sut = PointerCache<DualInt>(3, 7);
-  EXPECT_NE (sut->a,1);
-  EXPECT_EQ (sut->a,3);
-  PointerCache<DualInt> sut2 = std::move(sut);
-  EXPECT_EQ (sut2->b,7);
+  PointerCache<DualInt> sut1(1, 2);
+  PointerCache<DualInt> sut2(3, 7);
+  EXPECT_EQ (sut1->a,1);
+  EXPECT_EQ (sut2->a,3);
+  sut2 = std::move(sut1);
+  EXPECT_EQ (sut2->b,2);
 }
 

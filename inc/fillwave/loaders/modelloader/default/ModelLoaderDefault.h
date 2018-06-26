@@ -27,15 +27,6 @@ namespace flw {
 namespace flf {
 
 struct ModelLoaderTraitsDefault {
-  using Node = Nothing;
-  using Scene = Nothing;
-  using ShapeType = Nothing;
-  using MaterialType = Nothing;
-  using TextureType = Nothing;
-  using String = Nothing;
-  using Animator = Nothing;
-  using Flags = Nothing;
-
   static constexpr int COUNT_BONES_DEFINED = 1;
   static constexpr int COUNT_BONES_USED = 1;
   static constexpr int FLAG_ANIMATION_OFF = -1;

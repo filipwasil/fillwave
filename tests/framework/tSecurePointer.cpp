@@ -10,7 +10,7 @@ struct Fool {
   }
 
   void fooConst() const {
-    std::cout << "\nValue: " << a <<  std::endl;
+    std::cout << "\nValueC: " << a <<  std::endl;
   }
 
   void foo() {
@@ -33,17 +33,16 @@ public:
   }
 };
 
-TEST(ppTests, security_tests_when_copy_enabled
-)
-{
+TEST(ppTests, security_tests_when_copy_enabled) {
+ User<Fool> sut;
+
   // Error field private
-//  User<Fool> sut;
-//  sut.get()->foo();
+//  sut.used->foo();
 
   // Error use of deleted function
-//  auto u = sut.get();
-//  u->foo();
-//  u->fooConst();
+  //auto u = sut.get();
+  //u->foo();
+  //u->fooConst();
 
   // Error use of deleted function
 //  auto&& u = sut.get();
