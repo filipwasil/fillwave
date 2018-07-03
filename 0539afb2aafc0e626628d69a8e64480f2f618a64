@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d492ecf_45dd45ed",
+        "filename": "tools/level_editor/src/common/InternalTypes.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "remove this capital letter",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "22d33965_b8712b51",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "Put most stuf in this function to initializer list,\nEnsure all members are initialized within this contructor",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3031aa54_123952c2",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "replace with unique pointers to not call delete",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "543556ec_28e2c4c4",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "Is it necessary to keep operatioon status as a member ? returning the value while keeping it as member feels reduntant.",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a0377c24_28cd854f",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "non initialized value (make compilation more restrictive ?)",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c22591ee_35b0bedf",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "QString text \u003d\n    QInputDialog::getText(\n      mMainWidget\n      , \"QInputDialog::getText()\"\n      , \"User name:\"\n      , QLineEdit::Normal\n      , \"\"\n      , \u0026ok);",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "08794477_67d21ebd",
+        "filename": "tools/level_editor/src/common/operations/UiWindowsCreator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "Inconsistency - Use auto* when returning a pointer to prevent \"non-pointer\" type deduction.\nAlso keep this in mind in other files.",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9eb0d217_87ab6107",
+        "filename": "tools/level_editor/src/objects/controllers/NodeController.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "maybe a comment in empty construction? something like\n// empty\n// nothing\n\nor something",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0640bbac_7fdb69e9",
+        "filename": "tools/level_editor/src/objects/controllers/NodeController.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "you do not need this local variable. Reduce its scopt to if statement only",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca8ed8f0_6b121f52",
+        "filename": "tools/level_editor/tests/test/objects/NodeControllerFixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 1,
+      "message": "unique pointers please",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}

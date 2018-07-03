@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2829d024_ad11e167",
+        "filename": "tools/level_editor/src/objects/controllers/NodeController.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1007612
+      },
+      "writtenOn": "2018-07-03T07:57:49Z",
+      "side": 0,
+      "message": "auto* for pointers",
+      "revId": "e70d6a72fbbff55768298913527b05acd6003721",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    }
+  ]
+}
