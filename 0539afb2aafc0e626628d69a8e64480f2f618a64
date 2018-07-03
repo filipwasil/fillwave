@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "34f5395e_318ec4a5",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T08:38:18Z",
+      "side": 1,
+      "message": "Yes, we are two buttons ok and cancel I need information about what was choose. In this point exec() is blocking this window.",
+      "parentUuid": "543556ec_28e2c4c4",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "a0377c24_28cd854f",
         "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
         "patchSetId": 1
@@ -81,6 +99,24 @@
       "writtenOn": "2018-07-03T07:57:49Z",
       "side": 1,
       "message": "non initialized value (make compilation more restrictive ?)",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bc38a9ac_3d085a72",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T08:38:18Z",
+      "side": 1,
+      "message": "Yes we can be more restrictive but in this context we are sending this variable to QInputDialog when he setting this.",
+      "parentUuid": "a0377c24_28cd854f",
       "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -104,6 +140,24 @@
     },
     {
       "key": {
+        "uuid": "63caa00c_ff633c6d",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T08:38:18Z",
+      "side": 1,
+      "message": "Clion auto-formater have done this :)",
+      "parentUuid": "c22591ee_35b0bedf",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "08794477_67d21ebd",
         "filename": "tools/level_editor/src/common/operations/UiWindowsCreator.cpp",
         "patchSetId": 1
@@ -115,6 +169,24 @@
       "writtenOn": "2018-07-03T07:57:49Z",
       "side": 1,
       "message": "Inconsistency - Use auto* when returning a pointer to prevent \"non-pointer\" type deduction.\nAlso keep this in mind in other files.",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "223f1806_decd1a1b",
+        "filename": "tools/level_editor/src/common/operations/UiWindowsCreator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T08:38:18Z",
+      "side": 1,
+      "message": "wierd clandg-tidy didnt\u0027t check this hm.",
+      "parentUuid": "08794477_67d21ebd",
       "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
@@ -166,6 +238,24 @@
       "writtenOn": "2018-07-03T07:57:49Z",
       "side": 1,
       "message": "unique pointers please",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "897bfca8_389f1926",
+        "filename": "tools/level_editor/tests/test/objects/NodeControllerFixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T08:38:18Z",
+      "side": 1,
+      "message": "I need think about that, like I mention before. In qt using smart pointer is over-engineering and sometimes can be bad. But in this context perhaps is ok. I need to check on stack.",
+      "parentUuid": "ca8ed8f0_6b121f52",
       "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
