@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "f576c2cf_12e06df1",
+        "filename": "tools/level_editor/src/common/InternalTypes.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d492ecf_45dd45ed",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "22d33965_b8712b51",
         "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
         "patchSetId": 1
@@ -33,6 +51,24 @@
       "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b63ea2d0_4b810b8d",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22d33965_b8712b51",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "1941bb15_8f588f8a",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b158005f_90d266d9",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "543556ec_28e2c4c4",
         "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
         "patchSetId": 1
@@ -103,6 +157,24 @@
       "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c7f3fee8_f4926554",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34f5395e_318ec4a5",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -141,6 +213,24 @@
     },
     {
       "key": {
+        "uuid": "ac3ad048_53c1befe",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc38a9ac_3d085a72",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c22591ee_35b0bedf",
         "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
         "patchSetId": 1
@@ -173,6 +263,24 @@
       "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3eb38c0e_50f15089",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63caa00c_ff633c6d",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -211,6 +319,24 @@
     },
     {
       "key": {
+        "uuid": "cc31ccfd_d6bb0cc6",
+        "filename": "tools/level_editor/src/common/operations/UiWindowsCreator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "223f1806_decd1a1b",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9eb0d217_87ab6107",
         "filename": "tools/level_editor/src/objects/controllers/NodeController.cpp",
         "patchSetId": 1
@@ -228,6 +354,24 @@
     },
     {
       "key": {
+        "uuid": "fd67a37e_46acf3ce",
+        "filename": "tools/level_editor/src/objects/controllers/NodeController.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9eb0d217_87ab6107",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "0640bbac_7fdb69e9",
         "filename": "tools/level_editor/src/objects/controllers/NodeController.cpp",
         "patchSetId": 1
@@ -242,6 +386,24 @@
       "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3febdcfa_2af22e7d",
+        "filename": "tools/level_editor/src/objects/controllers/NodeController.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0640bbac_7fdb69e9",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     },
     {
       "key": {
@@ -277,6 +439,24 @@
       "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "2df4d452_94006723",
+        "filename": "tools/level_editor/tests/test/objects/NodeControllerFixture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:51:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "897bfca8_389f1926",
+      "revId": "0539afb2aafc0e626628d69a8e64480f2f618a64",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
     }
   ]
 }
