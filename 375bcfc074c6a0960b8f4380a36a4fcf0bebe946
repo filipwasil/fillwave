@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c1a52c21_52ae64b8",
+        "filename": "tools/level_editor/src/common/operations/SelectItemType.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1008984
+      },
+      "writtenOn": "2018-07-03T18:57:02Z",
+      "side": 1,
+      "message": "with uniue_ptr for QDialog we have error compilations. We need this object as root, rest of object have parent-child relation.",
+      "revId": "375bcfc074c6a0960b8f4380a36a4fcf0bebe946",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735",
+      "unresolved": false
+    }
+  ]
+}
