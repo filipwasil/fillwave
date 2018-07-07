@@ -33,16 +33,6 @@ enum class EMemoryAllocation {
   , none
 };
 
-/*! \enum EFlip
- * \brief Flipping texture after creation
- */
-enum class EFlip {
-  none
-  , horizontal
-  , vertical
-  , horizontalVertical
-};
-
 /*! \enum ECompression
  * \brief Compression types corresponding to native OpenGL compreession
  */

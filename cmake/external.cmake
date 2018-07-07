@@ -47,6 +47,7 @@ elseif(FILLWAVE_TEXTURE_LOADER_SQUISH)
 else()
   set (FILLWAVE_TEXTURE_LOADER "")
   aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/textureloader/stb FILLWAVE_TEXTURE_LOADER_TRAITS)
+  add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/ext/nv_helpers_gl)
 endif()
 
 if (CMAKE_SIZEOF_VOID_P EQUAL 4)

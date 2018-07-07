@@ -37,7 +37,6 @@ struct TTextureLoader {
 
   flc::TextureConfig* load(
     const std::string& filePath
-    , flc::EFlip flip = flc::EFlip::none
     , GLenum format = GL_RGBA
     , std::string rootPath = ""
     , flc::ECompression compression = flc::ECompression::none

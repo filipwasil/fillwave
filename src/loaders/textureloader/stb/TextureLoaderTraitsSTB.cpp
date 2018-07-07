@@ -39,12 +39,12 @@ namespace flw {
 namespace flf {
 
 template <>
-flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(const std::string &filePath,
-    flc::EFlip flip,
-    GLenum format,
-    std::string rootPath,
-  flc::ECompression compression,
-    GLenum cubeTarget) {
+flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
+  const std::string &filePath
+  , GLenum format
+  , std::string rootPath
+  , flc::ECompression compression
+  , GLenum cubeTarget) {
 
   fLogD("Texture ", filePath.c_str(), " loading ...");
   const size_t posCheckboard = filePath.find(".checkboard");
@@ -96,13 +96,14 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(const std::stri
     return cfg;
   }
   if (posDDS != std::string::npos) {
-    fLogE("Compressed Texture ", filePath, " not supported yet");
+    fLogE("Compressed Texture ", filePath, " not supported by this loader");
     return nullptr;
   }
 
   GLint w, h, n;
   auto content = stbi_load(filePath.c_str(), &w, &h, &n, textureGenerator.getBytesPerPixel(format));
-  if (NULL == content) { //xxx NULL, not nullptr because the stb library uses NULL
+  // NULL, not nullptr because the stb library uses NULL
+  if (NULL == content) {
     FILE *f;
     auto errorNo = fopen_s(&f, filePath.c_str(), "rb");
     if (errorNo) {
@@ -142,76 +143,6 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(const std::stri
 
   cfg->mAllocation = flc::EMemoryAllocation::cstyle;
 
-  fLogD("Flipping Texture", filePath, " ...");
-  switch (flip) {
-    case flc::EFlip::vertical:
-#pragma omp parallel for schedule(guided) num_threads(2)
-      for (int row = 0; row < h / 2; ++row) {
-        for (int column = 0; column < w; ++column) {
-          const int pixelOffset1 = row * w * n + column * n;
-          const int pixelOffset2 = (h - row - 1) * w * n + column * n;
-          for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
-            const int exchangeIndex1 = pixelOffset1 + byteInPixel;
-            const int exchangeIndex2 = pixelOffset2 + byteInPixel;
-            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
-            cfg->mData[exchangeIndex2] ^= cfg->mData[exchangeIndex1];
-            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
-          }
-        }
-      }
-      break;
-
-    case flc::EFlip::horizontalVertical:
-#pragma omp parallel for schedule(guided) num_threads(2)
-      for (int row = 0; row < h; ++row) {
-        for (int column = 0; column < w / 2; ++column) {
-          const int pixelOffset1 = row * w * n + column * n;
-          const int pixelOffset2 = row * w * n + (w - column - 1) * n;
-          for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
-            const int exchangeIndex1 = pixelOffset1 + byteInPixel;
-            const int exchangeIndex2 = pixelOffset2 + byteInPixel;
-            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
-            cfg->mData[exchangeIndex2] ^= cfg->mData[exchangeIndex1];
-            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
-          }
-        }
-      }
-      break;
-
-    case flc::EFlip::horizontal:
-#pragma omp parallel for schedule(guided) num_threads(2)
-      for (int row = 0; row < h; ++row) {
-        for (int column = 0; column < w / 2; ++column) {
-          const int pixelOffset1 = row * w * n + column * n;
-          const int pixelOffset2 = row * w * n + (w - column - 1) * n;
-          for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
-            const int exchangeIndex1 = pixelOffset1 + byteInPixel;
-            const int exchangeIndex2 = pixelOffset2 + byteInPixel;
-            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
-            cfg->mData[exchangeIndex2] ^= cfg->mData[exchangeIndex1];
-            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
-          }
-        }
-      }
-#pragma omp parallel for schedule(guided) num_threads(2)
-      for (int row = 0; row < h / 2; ++row) {
-        for (int column = 0; column < w; ++column) {
-          const int pixelOffset1 = row * w * n + column * n;
-          const int pixelOffset2 = (h - row - 1) * w * n + column * n;
-          for (int byteInPixel = 0; byteInPixel < n; ++byteInPixel) {
-            const int exchangeIndex1 = pixelOffset1 + byteInPixel;
-            const int exchangeIndex2 = pixelOffset2 + byteInPixel;
-            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
-            cfg->mData[exchangeIndex2] ^= cfg->mData[exchangeIndex1];
-            cfg->mData[exchangeIndex1] ^= cfg->mData[exchangeIndex2];
-          }
-        }
-      }
-      break;
-
-    case flc::EFlip::none:
-      break;
-  }
   return cfg;
 }
 

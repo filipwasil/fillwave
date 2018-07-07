@@ -43,8 +43,7 @@ public:
 
   flc::Texture2D* get(
     const std::string& texturePath
-    , flc::ECompression = flc::ECompression::none
-    , flc::EFlip flip = flc::EFlip::vertical);
+    , flc::ECompression = flc::ECompression::none);
 
   flc::Texture3D *get(
     const std::string &posX
@@ -61,8 +60,8 @@ public:
   flc::Texture2D* getDeferredColorScreen(GLuint width, GLuint height, GLuint size = 1);
   flc::Texture2D* getDeferredDepth(GLuint width, GLuint height);
   flc::Texture2D* getDeferredStencilDepth(GLuint width, GLuint height);
-  flc::Texture2DRenderableDynamic *
-  getDynamic(const std::string &fragmentShaderPath, flc::Program *program, glm::ivec2 screenSize);
+  flc::Texture2DRenderableDynamic*
+  getDynamic(const std::string& fragmentShaderPath, flc::Program* program, glm::ivec2 screenSize);
 
   void reload();
 

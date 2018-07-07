@@ -35,9 +35,12 @@ void init() {
   auto model = std::make_unique<Model>(
     engine
     , ProgramLoader(engine).getProgram(EProgram::basicAnimated)
-    , "animations/beast/beast.dae");
+    , "animations/beast/beast.dae"
+    , engine->storeTexture("textures/beast/beast_dxt1.DDS"));
+  model->rotateByX(glm::radians(90.0f));
+  model->moveByZ(-1.0f);
+  model->setActiveAnimation(0);
   engine->getCurrentScene()->attach(std::move(model));
-
 //  auto screenSize = engine->getScreenSize();
 
 //  auto textureFile = TextureLoader().loadEmpty(screenSize.x, screenSize.y);
@@ -48,6 +51,8 @@ void init() {
     , flc::Parameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
     , flc::Parameter(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
   };
+
+  engine->storeText("Animation", "FreeSans", glm::vec2(-0.95f, 0.2f), 50.0f);
 
   //auto program = ProgramLoader(engine).getProgram(EProgram::basic);
 

@@ -317,7 +317,7 @@ ps<flf::Text> Engine::storeText(const string& content,
   if (!mTextures->get(fontName + ".png")) {
     mFontLoader.load(mFileLoader.getRootPath() + fontName);
   }
-  auto t = mTextures->get(fontName + ".png", flc::ECompression::none, flc::EFlip::vertical);
+  auto t = mTextures->get(fontName + ".png", flc::ECompression::none);
 
   Font* font = nullptr;
   for (auto &it : mFontManager) {

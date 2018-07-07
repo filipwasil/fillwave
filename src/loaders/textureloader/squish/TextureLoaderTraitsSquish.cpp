@@ -38,7 +38,7 @@ namespace flf {
 
 template <>
 flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSquish>::load(
-  const std::string& /*filePath*/
+  const std::string& filePath
   , flc::EFlip /*flip*/
   , GLenum /*format*/
   , std::string /*rootPath*/
@@ -66,6 +66,7 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSquish>::load(
       break;
 
   }
+  fLogE("Compressed Texture ", filePath, " not supported by this loader");
   return nullptr;
 }
 
@@ -74,6 +75,7 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSquish>::load(
   GLint /*screenWidth*/
   , GLint /*screenHeight*/
   , GLenum /*format*/) {
+  fLogE("Texture not supported by this loader");
   return nullptr;
 }
 

@@ -56,12 +56,11 @@ AnimatorAssimp::AnimatorAssimp(const aiScene* scene)
   }
 
   if (numBones > ModelLoader::COUNT_BONES_DEFINED) {
-    fLogF("We can handle maximum %d bones. The model contains %d bones.", ModelLoader::COUNT_BONES_DEFINED,
-          numBones);
+    fLogF("We can handle max ", ModelLoader::COUNT_BONES_DEFINED, " bones. The model contains ", numBones, " bones");
   }
 
   for (GLuint k = 0; k < scene->mNumAnimations; k++) {
-    fLogD("Animation %d creation", k);
+    fLogD("Animation ", k, " creation");
     mAnimations.push_back(std::make_unique<Animation>(scene->mAnimations[k]));
   }
 
