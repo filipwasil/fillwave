@@ -180,7 +180,7 @@
 #include <OpenGL/glext.h>
 #define GL_TEXTURE_RECTANGLE_NV GL_TEXTURE_RECTANGLE_EXT
 #else
-#include "GL/glew.h"
+#include <GL/glew.h>
 //#include <GL/gl.h>
 //#include <GL/glext.h>
 #endif

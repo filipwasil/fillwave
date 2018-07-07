@@ -7,3 +7,5 @@ else()
 endif ()
 
 add_library(nv_helpers_gl ${NV_HELPERS_LIBRARY_TYPE} nv_dds.cpp)
+
+include_directories(${FILLWAVE_EXT_GLEW_PATH})

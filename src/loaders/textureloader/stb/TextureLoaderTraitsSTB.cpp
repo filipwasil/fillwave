@@ -110,27 +110,16 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
     cfg->mHeader.mInternalFormat = image.get_format();
     cfg->mContent.mCompressionSize = 0;
 
-//    glCompressedTexImage2D(
-//      GL_TEXTURE_2D
-//      , 0
-//      , image.get_format()
-//      , image.get_width()
-//      , image.get_height()
-//      , 0
-//      , image.get_size()
-//      , image);
-
     const auto mipmapsCount = image.get_num_mipmaps();
     for (decltype(image.get_num_mipmaps()) i = 0; i < mipmapsCount; ++i) {
       nv_dds::CSurface mipmap = image.get_mipmap(i);
       cfg->mMipmaps.push_back({
-                                   mipmap.get_size(),
-                                   mipmap.get_height(),
-                                   mipmap.get_width(),
-                                   image.get_format(),
-                                   mipmap
-                                 }
-      );
+        mipmap.get_size()
+        , mipmap.get_height()
+        , mipmap.get_width()
+        , image.get_format()
+        , static_cast<GLubyte*>(mipmap)
+      });
     }
   }
 
