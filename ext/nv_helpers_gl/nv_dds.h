@@ -107,7 +107,7 @@ struct DDS_HEADER
   uint32_t dwReserved2[3];
 };
 
-typedef enum TextureType
+enum TextureType
 {
   TextureNone,
   TextureFlat,    // 1D, 2D, and rectangle textures

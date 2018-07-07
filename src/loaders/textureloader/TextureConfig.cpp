@@ -26,14 +26,70 @@
 namespace flw {
 namespace flc {
 
+TextureConfig::TextureConfig()
+  : mHeader()
+  , mContent()
+  , mAllocation(EMemoryAllocation::none)
+  , mData(make_pu_with_no_ownership<GLubyte>(nullptr))
+  , mMipmaps() {
+  // nothing
+}
+
+TextureConfig::Mipmap::Mipmap()
+  : mSize(0)
+  , mHeight(0)
+  , mWidth(0)
+  , mFormat(0)
+  , mData(make_pu_with_no_ownership<GLubyte>(nullptr)) {
+  // nothing
+}
+
+TextureConfig::Mipmap::Mipmap(unsigned int size, unsigned int height, unsigned int width, unsigned int format, GLubyte* data)
+  : mSize(size)
+  , mHeight(height)
+  , mWidth(width)
+  , mFormat(format)
+  , mData(make_pu_with_no_ownership<GLubyte>(data)) {
+  // nothing
+}
+
+TextureConfig::Content::Content(
+  GLint level
+  , GLint border
+  , GLboolean mipmaps
+  , GLboolean compression)
+  : mMipmapsLevel(level)
+  , mMipmaps(mipmaps)
+  , mCompression(compression)
+  , mBorder(border)
+  , mCompressionSize(0) {
+  // nothing
+}
+
+TextureConfig::Header::Header(
+  GLint internalFormat
+, GLint format
+, GLint type
+, GLsizei width
+, GLsizei height)
+    : mInternalFormat(internalFormat)
+    , mHeight(height)
+    , mWidth(width)
+    , mType(type)
+    , mFormat(format)
+    , mCubeTarget(0) {
+    // nothing
+  }
+
+
 TextureConfig::~TextureConfig() {
   switch (mAllocation) {
   case EMemoryAllocation::cstyle:
-    free(mData);
+    free(mData.get());
     break;
   case EMemoryAllocation::standard:
-    delete mData;
-    mData = nullptr;
+    delete mData.get();
+    mData = make_pu_with_no_ownership<GLubyte>(nullptr);
     break;
  case EMemoryAllocation::none:
     break;

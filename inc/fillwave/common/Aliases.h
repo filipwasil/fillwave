@@ -33,6 +33,9 @@ template <class T>
 using pu = std::unique_ptr<T>;
 
 template <class T>
+using pn = std::unique_ptr<T, void(*)(T*)>;
+
+template <class T>
 using ps = std::shared_ptr<T>;
 
 template <class T>
@@ -44,6 +47,11 @@ using pc = PointerCache<T>;
 template <typename T, typename... Args>
 pu<T> make_pu(Args&&... args) {
   return std::make_unique<T>(std::forward<Args>(args)...);
+}
+
+template <typename T>
+pn<T> make_pu_with_no_ownership(T* ptr) {
+  return pn<T>(ptr, [](T*){});
 }
 
 template <class T>

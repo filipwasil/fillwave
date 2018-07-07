@@ -23,6 +23,8 @@
 
 #include <fillwave/loaders/textureloader/TextureContent.h>
 #include <fillwave/OpenGL.h>
+#include <fillwave/common/Containers.h>
+#include <fillwave/common/Aliases.h>
 
 namespace flw {
 namespace flc {
@@ -35,34 +37,38 @@ struct TextureConfig final {
   * \brief Stores the single file header info.
   */
   struct Header {
-    Header(GLint internalFormat = GL_RGBA, GLint format = GL_RGBA, GLint type = GL_UNSIGNED_BYTE, GLsizei width = 0, GLsizei height = 0)
-      : mInternalFormat(internalFormat)
-      , mHeight(height)
-      , mWidth(width)
-      , mType(type)
-      , mFormat(format)
-      , mCubeTarget(0) {
-      // nothing
-    }
-    GLint mInternalFormat;
+    Header(
+      GLint internalFormat = GL_RGBA
+      , GLint format = GL_RGBA
+      , GLint type = GL_UNSIGNED_BYTE
+      , GLsizei width = 0
+      , GLsizei height = 0);
+    GLenum mInternalFormat;
     GLsizei mHeight;
     GLsizei mWidth;
     GLenum mType;
     GLenum mFormat;
     GLenum mCubeTarget;
   };
+
+  struct Mipmap {
+    Mipmap();
+    Mipmap(unsigned int size, unsigned int height, unsigned int width, unsigned int format, GLubyte* data);
+    unsigned int mSize;
+    unsigned int mHeight;
+    unsigned int mWidth;
+    unsigned int mFormat;
+    pn<GLubyte> mData;
+  };
   /*! \class Content
   * \brief Stores the single file info.
   */
   struct Content {
-    Content(GLint level = 0,  GLint border = 0, GLboolean mipmaps = GL_FALSE, GLboolean compression = GL_FALSE)
-      : mMipmapsLevel(level)
-      , mMipmaps(mipmaps)
-      , mCompression(compression)
-      , mBorder(border)
-      , mCompressionSize(0) {
-      // nothing
-    }
+    Content(
+      GLint level = 0
+      ,  GLint border = 0
+      , GLboolean mipmaps = GL_FALSE
+      , GLboolean compression = GL_FALSE);
     GLint mMipmapsLevel;
     GLboolean mMipmaps;
     GLboolean mCompression;
@@ -70,20 +76,15 @@ struct TextureConfig final {
     GLsizei mCompressionSize;
   };
 
-  TextureConfig()
-    : mHeader()
-    , mContent()
-    , mAllocation(EMemoryAllocation::none)
-    , mData(nullptr) {
-    // nothing
-  }
+  TextureConfig();
 
   ~TextureConfig();
 
   Header mHeader;
   Content mContent;
   EMemoryAllocation mAllocation;
-  GLubyte* mData;
+  pn<GLubyte> mData;
+  vecStack<Mipmap> mMipmaps;
 };
 
 } /* flc */

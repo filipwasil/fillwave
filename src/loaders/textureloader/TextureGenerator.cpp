@@ -91,7 +91,7 @@ flc::TextureConfig* TextureGenerator::loadVirtualFileCheckboard(
   cfg->mContent.mCompression = GL_FALSE;
   cfg->mContent.mBorder = 0;
 
-  cfg->mData = content;
+  cfg->mData = make_pu_with_no_ownership<GLubyte>(content);
 
   cfg->mAllocation = flc::EMemoryAllocation::standard;
 
@@ -128,7 +128,7 @@ flc::TextureConfig* TextureGenerator::loadVirtualFileColor(
   cfg->mContent.mCompression = GL_FALSE;
   cfg->mContent.mBorder = 0;
 
-  cfg->mData = content;
+  cfg->mData = make_pu_with_no_ownership<GLubyte>(content);
 
   cfg->mAllocation = flc::EMemoryAllocation::standard;
 

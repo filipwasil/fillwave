@@ -27,7 +27,6 @@
 #include <vector>
 
 namespace flw {
-namespace flf {
 
 template <class T>
 using vec = std::vector<T, std::allocator<T>>;
@@ -38,5 +37,4 @@ using vecStack = std::vector<T, AllocatorStack<T>>;
 template <class T>
 using vecHeap = std::vector<T, AllocatorHeap<T>>;
 
-} /* flf */
 } /* flw */

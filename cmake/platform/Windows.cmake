@@ -66,8 +66,10 @@ add_custom_target (
 # Linker
 # -----------------------------------------------
 
-add_dependencies (fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator ${FILLWAVE_GLEW_BUILD})
-target_link_libraries (fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator ${FILLWAVE_GLEW_BUILD})
+add_dependencies (
+    fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator nv_helpers_gl ${FILLWAVE_GLEW_BUILD})
+target_link_libraries (
+    fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator nv_helpers_gl ${FILLWAVE_GLEW_BUILD})
 
 # -----------------------------------------------
 # Installation

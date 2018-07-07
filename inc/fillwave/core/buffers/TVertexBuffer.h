@@ -215,7 +215,7 @@ protected:
   }
 
 private:
-  flf::vecStack<Attribute> mAttributes;
+  vecStack<Attribute> mAttributes;
 };
 
 } /* flc */

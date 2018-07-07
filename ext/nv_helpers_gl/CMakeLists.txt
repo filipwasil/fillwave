@@ -1,9 +1,9 @@
 CMAKE_MINIMUM_REQUIRED( VERSION 2.8.8 )
 
 if (WIN32)
-  SET (NV_HELPERS_LIBRARY_TYPE SHARED)
-else()
   SET (NV_HELPERS_LIBRARY_TYPE STATIC)
+else()
+  SET (NV_HELPERS_LIBRARY_TYPE SHARED)
 endif ()
 
-add_library(nv_dds ${NV_HELPERS_LIBRARY_TYPE} nv_dds.cpp)
+add_library(nv_helpers_gl ${NV_HELPERS_LIBRARY_TYPE} nv_dds.cpp)

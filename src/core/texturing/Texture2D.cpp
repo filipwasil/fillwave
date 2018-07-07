@@ -28,15 +28,15 @@ namespace flw {
 namespace flc {
 
 Texture2D::Texture2D(TextureConfig* cfg, ParameterList &parameters, GLuint howMany)
-    : Texture(GL_TEXTURE_2D, howMany)
-    , mCfg(pu<TextureConfig>(cfg))
-    , mParameters(parameters) {
+  : Texture(GL_TEXTURE_2D, howMany)
+  , mCfg(pu<TextureConfig>(cfg))
+  , mParameters(parameters) {
   reload();
 }
 
 void Texture2D::sendData(GLubyte* data) {
   if (data) {
-    mCfg->mData = data;
+    mCfg->mData = make_pu_with_no_ownership<GLubyte>(data);
   }
   if (mCfg->mContent.mCompression) {
     glCompressedTexImage2D(mTarget,
@@ -46,7 +46,7 @@ void Texture2D::sendData(GLubyte* data) {
                            mCfg->mHeader.mHeight,
                            mCfg->mContent.mBorder,
                            mCfg->mContent.mCompressionSize,
-                           (GLubyte *) mCfg->mData);
+                           mCfg->mData.get());
   } else {
     glTexImage2D(mTarget,
                  mCfg->mContent.mMipmapsLevel,
@@ -56,9 +56,23 @@ void Texture2D::sendData(GLubyte* data) {
                  mCfg->mContent.mBorder,
                  mCfg->mHeader.mFormat,
                  mCfg->mHeader.mType,
-                 (GLubyte *) mCfg->mData);
+                 mCfg->mData.get());
   }
   fLogC("send data");
+
+  size_t id = 1;
+  for (auto& mipmap : mCfg->mMipmaps) {
+    glCompressedTexImage2D(
+      GL_TEXTURE_2D
+      , id++
+      , mipmap.mFormat
+      , mipmap.mWidth
+      , mipmap.mHeight
+      , 0
+      , mipmap.mSize
+      , mipmap.mData.get());
+  }
+  fLogC("send mipmap data");
 }
 
 void Texture2D::generateMipMaps() {

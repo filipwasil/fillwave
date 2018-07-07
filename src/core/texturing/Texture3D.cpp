@@ -44,7 +44,7 @@ Texture3D::Texture3D(TextureConfig* right, TextureConfig* left, TextureConfig* c
 inline void Texture3D::sendData(TextureConfig* cfg, GLubyte* customData) {
 
   if (customData) {
-    cfg->mData = customData;
+    cfg->mData = make_pu_with_no_ownership<GLubyte>(customData);
   }
 
   fLogD("cfg->mHeader->mCubeTarget ", cfg->mHeader.mCubeTarget);
@@ -63,7 +63,7 @@ inline void Texture3D::sendData(TextureConfig* cfg, GLubyte* customData) {
                cfg->mContent.mBorder,
                cfg->mHeader.mFormat,
                cfg->mHeader.mType,
-               (GLubyte *) cfg->mData);
+               cfg->mData.get());
   fLogC("send data");
 }
 

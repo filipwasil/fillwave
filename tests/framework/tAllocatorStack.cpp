@@ -4,7 +4,6 @@
 #include <fillwave/common/allocators/AllocatorStack.h>
 
 using namespace flw;
-using namespace flw::flf;
 
 struct DualIntStruct {
   int a;

@@ -119,7 +119,7 @@ class Engine {
 
   template <GLuint T> flc::Shader* storeShader(const std::string& shaderPath);
   template <GLuint T> flc::Shader* storeShader(const std::string& shaderPath, const std::string& shaderSource);
-  flc::Program* storeProgram(const std::string &name, const flf::vec<flc::Shader *> &shaders, bool isSkipLinking = false);
+  flc::Program* storeProgram(const std::string &name, const vec<flc::Shader *> &shaders, bool isSkipLinking = false);
 
   /* Store textures */
   flc::Texture2D* storeTexture(const std::string &path, flc::ECompression com = flc::ECompression::none);
@@ -213,12 +213,12 @@ class Engine {
   flf::CacheShader mShaders;
   flf::CacheProgram mPrograms;
   flf::CacheSampler mSamplers;
-  flf::vec<ps<flf::Text>> mTextManager;
-  flf::vec<ps<Font>> mFontManager;
+  vec<ps<flf::Text>> mTextManager;
+  vec<ps<Font>> mFontManager;
   flf::CacheBuffer mBuffers;
   pu<flf::LightSystem> mLights;
   pu<flf::TextureSystem> mTextures;
-  flf::vec<flc::PostProcessingPass> mPostProcessingPasses;
+  vec<flc::PostProcessingPass> mPostProcessingPasses;
   flc::Program* mProgramTextureLookup;
 
   /* Fences and barriers */
@@ -230,7 +230,7 @@ class Engine {
   flc::VertexArray *mVAOOcclusion;
 
   /* Input handlers */
-  flf::vec<flf::EventHandler> mHandlers;
+  vec<flf::EventHandler> mHandlers;
 
   /* Extras */
   pu<flf::Debugger> mDebugger;
@@ -291,31 +291,31 @@ class Engine {
       , flf::TerrainConstructor* constructor
       , GLint density
       , GLfloat gap
-      , flf::vec<GLuint> &indices);
+      , vec<GLuint> &indices);
 
   flc::VertexBufferBasic*
     storeBufferInternal(
       flc::VertexArray *vao
-      , flf::vec<flc::VertexBasic> &data);
+      , vec<flc::VertexBasic> &data);
 
   flc::VertexBufferText*
     storeBufferInternal(
       flc::VertexArray *vao
-      , const flf::vec<GLfloat> &data
-      , const flf::vec<GLfloat> &coords);
+      , const vec<GLfloat> &data
+      , const vec<GLfloat> &coords);
 
   flc::VertexBufferParticlesGPU*
     storeBuffersInternal(
       flc::VertexArray *vao
       , size_t idx
-      , flf::vec<flc::VertexParticleGPU> &particles);
+      , vec<flc::VertexParticleGPU> &particles);
 
   flc::VertexBufferParticles*
     storeBufferInternal(
       flc::VertexArray *vao
-      , flf::vec<GLfloat> &vel
-      , flf::vec<GLfloat> &pos
-      , flf::vec<GLfloat> &tim);
+      , vec<GLfloat> &vel
+      , vec<GLfloat> &pos
+      , vec<GLfloat> &tim);
 
   flc::VertexBufferBasic* storeBufferInternal(
     flc::VertexArray* vao
@@ -323,10 +323,10 @@ class Engine {
     , ModelLoader::Animator* animator);
 
   flc::VertexBufferDebug* storeBufferInternal(flc::VertexArray *vao, GLfloat scale);
-  flc::VertexBufferFloat* storeBufferInternal(flc::VertexArray *vao, flf::vec<flc::VertexFloat> &data);
-  flc::VertexBufferPosition* storeBufferInternal(flc::VertexArray *vao, flf::vec<flc::VertexPosition> &data);
+  flc::VertexBufferFloat* storeBufferInternal(flc::VertexArray *vao, vec<flc::VertexFloat> &data);
+  flc::VertexBufferPosition* storeBufferInternal(flc::VertexArray *vao, vec<flc::VertexPosition> &data);
   flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const ModelLoader::ShapeType* shape);
-  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const flf::vec<GLuint> &data);
+  flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const vec<GLuint> &data);
   flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, GLuint elements);
 
  private:

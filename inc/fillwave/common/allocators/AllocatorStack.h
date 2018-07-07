@@ -26,7 +26,6 @@
 #include <array>
 
 namespace flw {
-namespace flf {
 
 /*
  * Limitations
@@ -114,5 +113,4 @@ bool operator != (AllocatorStack<TValueType> const&, AllocatorStack<TValueType> 
   return false;
 }
 
-} /* flf */
 } /* flw */

@@ -27,9 +27,11 @@
 #include <fillwave/common/Strings.h>
 #include <fillwave/common/Macros.h>
 
+#include <fillwave/Log.h>
+
 #include <iterator>
 
-#include <fillwave/Log.h>
+#include <nv_helpers_gl/nv_dds.h>
 
 FLOGINIT_DEFAULT()
 
@@ -43,7 +45,8 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
   const std::string &filePath
   , GLenum format
   , std::string rootPath
-  , flc::ECompression compression
+  // This loader detects the compression format automatically
+  , flc::ECompression /*compression*/
   , GLenum cubeTarget) {
 
   fLogD("Texture ", filePath.c_str(), " loading ...");
@@ -96,8 +99,39 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
     return cfg;
   }
   if (posDDS != std::string::npos) {
-    fLogE("Compressed Texture ", filePath, " not supported by this loader");
-    return nullptr;
+    nv_dds::CDDSImage image;
+    image.load(filePath.c_str());
+    if (!image.is_compressed()) {
+      fLogF("Texture ", filePath, " is compressed with not supported format");
+      return nullptr;
+    }
+    auto cfg = new flc::TextureConfig();
+    cfg->mContent.mCompression = GL_TRUE;
+    cfg->mHeader.mInternalFormat = image.get_format();
+    cfg->mContent.mCompressionSize = 0;
+
+//    glCompressedTexImage2D(
+//      GL_TEXTURE_2D
+//      , 0
+//      , image.get_format()
+//      , image.get_width()
+//      , image.get_height()
+//      , 0
+//      , image.get_size()
+//      , image);
+
+    const auto mipmapsCount = image.get_num_mipmaps();
+    for (decltype(image.get_num_mipmaps()) i = 0; i < mipmapsCount; ++i) {
+      nv_dds::CSurface mipmap = image.get_mipmap(i);
+      cfg->mMipmaps.push_back({
+                                   mipmap.get_size(),
+                                   mipmap.get_height(),
+                                   mipmap.get_width(),
+                                   image.get_format(),
+                                   mipmap
+                                 }
+      );
+    }
   }
 
   GLint w, h, n;
@@ -127,19 +161,12 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
 
   cfg->mHeader.mCubeTarget = cubeTarget;
 
-  if (compression == flc::ECompression::none) {
-    cfg->mContent.mCompression = GL_FALSE;
-    cfg->mHeader.mInternalFormat = format;
-  } else {
-    cfg->mContent.mCompression = GL_TRUE;
-    cfg->mHeader.mInternalFormat = textureGenerator.getCompression(compression);
-    cfg->mContent.mCompressionSize = 0;
-    fLogF("Texture compression feature not ready");
-  }
+  cfg->mContent.mCompression = GL_FALSE;
+  cfg->mHeader.mInternalFormat = format;
 
   cfg->mContent.mBorder = 0;
 
-  cfg->mData = content;
+  cfg->mData = make_pu_with_no_ownership<GLubyte>(content);
 
   cfg->mAllocation = flc::EMemoryAllocation::cstyle;
 

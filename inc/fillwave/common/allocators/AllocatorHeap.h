@@ -25,7 +25,6 @@
 #include <memory>
 
 namespace flw {
-namespace flf {
 
 /*
  * Limitations
@@ -111,5 +110,4 @@ bool operator != (AllocatorHeap<TValueType> const&, AllocatorHeap<TValueType> co
   return false;
 }
 
-} /* flf */
 } /* flw */

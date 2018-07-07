@@ -118,7 +118,7 @@ void Engine::initUniforms() {
 }
 
 void Engine::initOcclusionTest() {
-  flf::vec<flc::VertexPosition> vec = flf::BoxOcclusion().getVertices();
+  vec<flc::VertexPosition> vec = flf::BoxOcclusion().getVertices();
   mVAOOcclusion = new flc::VertexArray();
   mVBOOcclusion = mBuffers.mVerticesPosition.store(mVAOOcclusion, vec);
   mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
