@@ -60,7 +60,7 @@ class AllocatorHeap {
     mValues = new TValueType[mSizeElements];
   }
 
-  AllocatorHeap(AllocatorHeap const& allocator) = default;
+  AllocatorHeap(AllocatorHeap const& allocator) noexcept = default;
 
   template <class TAllocatorType>
   AllocatorHeap(AllocatorHeap<TAllocatorType> const& allocator) noexcept {

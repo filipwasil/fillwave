@@ -23,7 +23,7 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT("Uniform", FERROR | FFATAL | FINFO)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {

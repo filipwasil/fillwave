@@ -105,7 +105,6 @@ struct TModelLoader final {
 
   static void getPhysicsBuffer(const char*, PhysicsMeshBuffer& buffer);
   static const Material getMaterial(const MaterialType& material);
-  static Material getTexturePath(TextureType type, const MaterialType& material);
   static ::flw::flc::IndexBuffer* getIndexBuffer(const ShapeType* shape);
   static ::flw::flc::VertexBufferBasic* getVertexBuffer(const ShapeType *shape, Animator *a);
   static void setTransformation (const NodeType* node, Entity* entity);

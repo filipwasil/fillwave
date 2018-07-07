@@ -23,6 +23,7 @@
 
 #include <fillwave/OpenGL.h>
 #include <memory>
+#include <array>
 
 namespace flw {
 namespace flf {
@@ -65,8 +66,8 @@ class AllocatorStack {
   }
 
   template <class TAllocatorType>
-  AllocatorStack(AllocatorStack<TAllocatorType> const& allocator) noexcept {
-    *this = allocator;
+  AllocatorStack(const AllocatorStack<TAllocatorType> & allocator) noexcept {
+    // nothing
   }
 
   ~AllocatorStack() {
@@ -87,7 +88,7 @@ class AllocatorStack {
   }
 
   TValueType* allocate(size_t) {
-    return static_cast<TValueType*>(mValues);
+    return static_cast<TValueType*>(mValues.data());
   }
 
   void deallocate(TValueType*, size_t) {
@@ -100,7 +101,7 @@ class AllocatorStack {
 
   static constexpr size_t mSizeElements = mSizeBytes / sizeof(TValueType);
 
-  TValueType mValues [mSizeElements];
+  std::array<TValueType, mSizeElements> mValues;
 };
 
 template <class TValueType>

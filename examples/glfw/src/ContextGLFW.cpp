@@ -126,8 +126,10 @@ void ContextGLFW::render() {
   mWindow = nullptr;
 }
 
-void ContextGLFW::resizeCallback(GLFWwindow * /*window*/, int width, int height) {//xxx todo
-  mGraphics->onResizeScreen(width, height);
+void ContextGLFW::resizeCallback(GLFWwindow * /*window*/, int width, int height) {
+  if (mGraphics) {
+    mGraphics->onResizeScreen(width, height);
+  }
 }
 
 GLuint ContextGLFW::getScreenWidth() {

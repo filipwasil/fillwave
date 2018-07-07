@@ -34,9 +34,8 @@ void init() {
 
   auto model = std::make_unique<Model>(
     engine
-    , ProgramLoader(engine).getProgram(EProgram::basic)
-    , "meshes/mountain.obj");
-  model->moveBy(glm::vec3(0.0, -3.0, -5.0));
+    , ProgramLoader(engine).getProgram(EProgram::basicAnimated)
+    , "animations/beast/beast.dae");
   engine->getCurrentScene()->attach(std::move(model));
 
 //  auto screenSize = engine->getScreenSize();

@@ -54,10 +54,10 @@ Engine::Engine(const std::string& runtimeBinaryFilePath)
   , mModelLoader()
   , mShaders()
   , mFrameCounter(0)
-  , mTimeFactor(1.0)
+  , mTimeFactor(1.0f)
   , mStartupTime(0.0f)
   , mIsOQ(GL_TRUE)
-  , mBackgroundColor(0.1, 0.1, 0.1) {
+  , mBackgroundColor(0.1f, 0.1f, 0.1f) {
   initExtensions();
   initContext();
   initManagement();
@@ -249,18 +249,18 @@ void Engine::configTime(GLfloat timeFactor) {
 
 flf::LightSpot* Engine::storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
   return mLights->mLightsSpot.add(
-      mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
+    mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
 }
 
 flf::LightPoint* Engine::storeLightPoint(glm::vec3 pos, glm::vec4 col, flf::Moveable* observed) {
   return mLights->mLightsPoint.add(
-      mTextures->getShadow3D(mWindowWidth, mWindowHeight), pos, col, observed);
+    mTextures->getShadow3D(mWindowWidth, mWindowHeight), pos, col, observed);
 }
 
 flf::LightDirectional*
 Engine::storeLightDirectional(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
   return mLights->mLightsDirectional.add(
-      mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
+    mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
 }
 
 Program* Engine::storeProgram(const string& name, const vector<Shader*>& shaders, bool isSkipLinking) {
@@ -308,11 +308,11 @@ void Engine::detach(flf::Entity* entity) {
 }
 
 ps<flf::Text> Engine::storeText(const string& content,
-    const string& fontName,
-    glm::vec2 position,
-    GLfloat scale,
-    glm::vec4 color,
-    ETextEffect effect) {
+  const string& fontName,
+  glm::vec2 position,
+  GLfloat scale,
+  glm::vec4 color,
+  ETextEffect effect) {
   /* Check for the font texture  */
   if (!mTextures->get(fontName + ".png")) {
     mFontLoader.load(mFileLoader.getRootPath() + fontName);
@@ -453,8 +453,8 @@ void Engine::addPostProcess(const string& fragmentShaderPath, GLfloat lifeTime) 
   Program* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
   PostProcessingPass pass(program,
                           mTextures->getDynamic(fragmentShaderPath,
-                                                       program,
-                                                       glm::ivec2(mWindowWidth, mWindowHeight)),
+                                                program,
+                                                glm::ivec2(mWindowWidth, mWindowHeight)),
                           lifeTime);
   mPostProcessingPasses.push_back(pass);
   fLogD("Post processing pass added: %s", fragmentShaderPath.c_str());
@@ -498,7 +498,7 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
 #else
   buffer = (GLubyte* ) mPickingPixelBuffer->map(GL_READ_WRITE);
 #endif
- * sizeInBytes = mWindowWidth*  mWindowHeight*  bytesPerPixel;
+  * sizeInBytes = mWindowWidth*  mWindowHeight*  bytesPerPixel;
   buffer[*sizeInBytes] = '\0';
 }
 
@@ -520,10 +520,10 @@ void Engine::configDebugger(EDebuggerState state) {
 }
 
 VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
-    flf::TerrainConstructor* constructor,
-    GLint density,
-    GLfloat gap,
-    vector<GLuint> &indices) {
+  flf::TerrainConstructor* constructor,
+  GLint density,
+  GLfloat gap,
+  vector<GLuint> &indices) {
   return mBuffers.mVertices.store(vao, constructor, density, gap, indices);
 }
 
@@ -539,7 +539,7 @@ void Engine::removeBufferIndex(VertexArray* vao) {
   mBuffers.mIndices.erase(vao);
 }
 
-VertexBufferText* 
+VertexBufferText*
 Engine::storeBufferInternal(VertexArray* vao, const vector<GLfloat> &data, const vector<GLfloat> &textureCoords) {
   return mBuffers.mVerticesText.store(vao, data, textureCoords);
 }
@@ -548,7 +548,7 @@ IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, GLuint elements) {
   return mBuffers.mIndices.store(new IndexBuffer(elements, true), vao);
 }
 
-VertexBufferParticlesGPU* 
+VertexBufferParticlesGPU*
 Engine::storeBuffersInternal(VertexArray* vao, size_t idx, vector<VertexParticleGPU> &particles) {
   auto ptr = new vector<VertexBufferParticlesGPU* >();
   auto buffers = mBuffers.mVerticesParticlesGPU.store(ptr, vao);
@@ -561,9 +561,9 @@ Engine::storeBuffersInternal(VertexArray* vao, size_t idx, vector<VertexParticle
 }
 
 VertexBufferParticles* Engine::storeBufferInternal(VertexArray* vao,
-    vector<GLfloat> &velocities,
-    vector<GLfloat> &positions,
-    vector<GLfloat> &times) {
+  vector<GLfloat> &velocities,
+  vector<GLfloat> &positions,
+  vector<GLfloat> &times) {
   return mBuffers.mVerticesParticles.store(vao, velocities, positions, times);
 }
 
