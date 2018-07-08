@@ -180,8 +180,11 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
 }
 
 template <>
-flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(GLint screenWidth, GLint screenHeight, GLenum /*format*/) {
-  return TextureLoaderTraitsSTB().mGenerator.loadEmpty(screenWidth, screenHeight);
+flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
+  GLint screenWidth
+  , GLint screenHeight
+  , GLenum format) {
+  return TextureLoaderTraitsSTB().mGenerator.loadEmpty(screenWidth, screenHeight, format);
 }
 
 template <>

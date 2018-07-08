@@ -35,8 +35,7 @@ option (FILLWAVE_TESTS_COVERALLS "Generate coveralls data" OFF)
 
 option (FILLWAVE_MODEL_LOADER_ASSIMP "Use Assimp" ON)
 option (FILLWAVE_MODEL_LOADER_TINYOBJLOADER "Use Tiny obj loader" OFF)
-option (FILLWAVE_TEXTURE_LOADER_GLI "Use gli texture loader" OFF)
-option (FILLWAVE_TEXTURE_LOADER_SQUISH "Use squish texture loader" OFF)
+option (FILLWAVE_TEXTURE_LOADER_CUSTOM "Use custom texture loader" ON)
 
 # -----------------------------------------------
 # Build components Options

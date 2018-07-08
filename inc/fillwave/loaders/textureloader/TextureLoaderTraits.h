@@ -23,25 +23,9 @@
 
 #include <fillwave/Config.h>
 
-#if defined (FILLWAVE_TEXTURE_LOADER_GLI)
+#if defined (FILLWAVE_TEXTURE_LOADER_CUSTOM)
 
-#include <fillwave/loaders/textureloader/gli//TextureLoaderTraitsGLI.h>
-
-namespace flw {
-namespace flf {
-  using TextureLoaderTraits = TextureLoaderTraitsGLI;
-} /* flf */
-} /* flw */
-
-#elif defined(FILLWAVE_TEXTURE_LOADER_SQUISH)
-
-#include <fillwave/loaders/textureloader/squish/TextureLoaderTraitsSquish.h>
-
-namespace flw {
-namespace flf {
-  using TextureLoaderTraits = TextureLoaderTraitsSquish;
-} /* flf */
-} /* flw */
+#error "Co custom loader defines. Define your traits here"
 
 #else
 

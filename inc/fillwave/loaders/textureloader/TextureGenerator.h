@@ -31,9 +31,27 @@ namespace flf {
  * \brief Generates textures
  */
 struct TextureGenerator {
-  flc::TextureConfig* loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format = GL_RGBA);
-  flc::TextureConfig* loadVirtualFileCheckboard(GLuint width, GLuint height, GLubyte red, GLubyte green, GLubyte blue, GLenum format = GL_RGBA);
-  flc::TextureConfig* loadVirtualFileColor(GLuint width, GLuint height, GLubyte red, GLubyte green, GLubyte blue, GLenum format = GL_RGBA);
+  flc::TextureConfig* loadEmpty(
+    GLint screenWidth
+    , GLint screenHeight
+    , GLenum format = GL_RGBA);
+
+  flc::TextureConfig* loadVirtualFileCheckboard(
+    GLuint width
+    , GLuint height
+    , GLubyte red
+    , GLubyte green
+    , GLubyte blue
+    , GLenum format = GL_RGBA);
+
+  flc::TextureConfig* loadVirtualFileColor(
+    GLuint width
+    , GLuint height
+    , GLubyte red
+    , GLubyte green
+    , GLubyte blue
+    , GLenum format = GL_RGBA);
+
   GLint getBytesPerPixel(GLenum format);
 };
 

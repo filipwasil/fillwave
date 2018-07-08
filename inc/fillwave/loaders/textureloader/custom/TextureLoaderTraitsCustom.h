@@ -24,7 +24,7 @@
 namespace flw {
 namespace flf {
 
-struct TextureLoaderTraitsGLI {
+struct TextureLoaderCustom {
   // nothing
 };
 

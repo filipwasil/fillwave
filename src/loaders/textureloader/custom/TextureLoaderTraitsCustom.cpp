@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -8,7 +6,7 @@
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation files (the "Software"),
  * to deal in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sll copies of the Software,
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
  * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included
@@ -21,14 +19,40 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <squish/squish.h>
+#include <fillwave/loaders/textureloader/TTextureLoader.h>
+#include <fillwave/loaders/textureloader/squish/TextureLoaderTraitsCustom.h>
+
+#include <fillwave/Log.h>
+
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
 
-struct TextureLoaderTraitsSquish {
-  // nothing
-};
+template <>
+flc::TextureConfig* TTextureLoader<TextureLoaderCustom>::load(
+  const std::string& /*filePath*/
+  , GLenum /*format*/
+  , std::string /*rootPath*/
+  , GLenum /*cubeTarget*/)
+  fLogE("Implement your code here");
+  return nullptr;
+}
+
+template <>
+flc::TextureConfig* TTextureLoader<TextureLoaderCustom>::load(
+  GLint /*screenWidth*/
+  , GLint /*screenHeight*/
+  , GLenum /*format*/) {
+  fLogE("Implement your code here");
+  return nullptr;
+}
+
+template <>
+const std::vector<flc::ECompression> TTextureLoader<TextureLoaderCustom>::getSupportedCompressionFormats() {
+  fLogE("Implement your code here");
+  return {};
+}
 
 } /* flf */
 } /* flw */

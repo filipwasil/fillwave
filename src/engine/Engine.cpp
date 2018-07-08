@@ -372,29 +372,32 @@ void Engine::detach(ps<flf::Text> text) {
 }
 
 void Engine::detach(flf::LightSpot* light) {
-  auto new_end = remove_if(mLights->mLightsSpot.begin(),
-                           mLights->mLightsSpot.end(),
-                           [light](const pu<flf::LightSpot> &l) {
-                             return light == l.get();
-                           });
+  auto new_end = remove_if(
+    mLights->mLightsSpot.begin()
+    , mLights->mLightsSpot.end()
+    , [light](const pu<flf::LightSpot> &l) {
+      return light == l.get();
+    });
   mLights->mLightsSpot.erase(new_end, mLights->mLightsSpot.end());
 }
 
 void Engine::detach(flf::LightDirectional* light) {
-  auto new_end = remove_if(mLights->mLightsDirectional.begin(),
-                           mLights->mLightsDirectional.end(),
-                           [light](const pu<flf::LightDirectional> &l) {
-                             return light == l.get();
-                           });
+  auto new_end = remove_if(
+    mLights->mLightsDirectional.begin()
+    , mLights->mLightsDirectional.end()
+    , [light](const pu<flf::LightDirectional> &l) {
+      return light == l.get();
+    });
   mLights->mLightsDirectional.erase(new_end, mLights->mLightsDirectional.end());
 }
 
 void Engine::detach(flf::LightPoint* light) {
-  auto new_end = remove_if(mLights->mLightsPoint.begin(),
-                           mLights->mLightsPoint.end(),
-                           [light](const pu<flf::LightPoint> &l) {
-                             return light == l.get();
-                           });
+  auto new_end = remove_if(
+    mLights->mLightsPoint.begin()
+    , mLights->mLightsPoint.end()
+    , [light](const pu<flf::LightPoint> &l) {
+      return light == l.get();
+    });
   mLights->mLightsPoint.erase(new_end, mLights->mLightsPoint.end());
 }
 
@@ -411,9 +414,8 @@ GLfloat Engine::getScreenAspectRatio() const {
 }
 
 GLuint Engine::getFramesPassed() {
-  GLuint result = mFrameCounter;
   mFrameCounter = 0;
-  return result;
+  return mFrameCounter;
 }
 
 GLfloat Engine::getStartupAnimationTime() const {
@@ -450,12 +452,14 @@ const std::string Engine::getGlobalPath(const std::string& localPath) {
 }
 
 void Engine::addPostProcess(const string& fragmentShaderPath, GLfloat lifeTime) {
-  Program* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
-  PostProcessingPass pass(program,
-                          mTextures->getDynamic(fragmentShaderPath,
-                                                program,
-                                                glm::ivec2(mWindowWidth, mWindowHeight)),
-                          lifeTime);
+  auto* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
+    PostProcessingPass pass(
+      program
+      , mTextures->getDynamic(
+        fragmentShaderPath
+        , program
+        , glm::ivec2(mWindowWidth, mWindowHeight))
+      , lifeTime);
   mPostProcessingPasses.push_back(pass);
   fLogD("Post processing pass added: %s", fragmentShaderPath.c_str());
 }
@@ -519,11 +523,12 @@ void Engine::configDebugger(EDebuggerState state) {
   mDebugger->setState(state);
 }
 
-VertexBufferBasic* Engine::storeBufferInternal(VertexArray* vao,
-  flf::TerrainConstructor* constructor,
-  GLint density,
-  GLfloat gap,
-  vector<GLuint> &indices) {
+VertexBufferBasic* Engine::storeBufferInternal(
+  VertexArray* vao
+  , flf::TerrainConstructor* constructor
+  , GLint density
+  , GLfloat gap
+  , vector<GLuint> &indices) {
   return mBuffers.mVertices.store(vao, constructor, density, gap, indices);
 }
 
