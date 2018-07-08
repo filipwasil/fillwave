@@ -36,10 +36,10 @@ TextureSystem::TextureSystem(const std::string &rootPath)
 inline void TextureSystem::checkExtensions() {
 #ifdef FILLWAVE_GLES_3_0
 #else
-  int NumberOfExtensions;
-  glGetIntegerv(GL_NUM_EXTENSIONS, &NumberOfExtensions);
+  int numberOfExtensions = 0;
+  glGetIntegerv(GL_NUM_EXTENSIONS, &numberOfExtensions);
 
-  for (int i = 0; i < NumberOfExtensions; i++) {
+  for (int i = 0; i < numberOfExtensions; i++) {
     const GLubyte *ccc = glGetStringi(GL_EXTENSIONS, i);
     auto find_extension = [ccc](const char *name) -> bool {
       if (0 == (strcmp((const char *) ccc, name))) {
@@ -74,7 +74,7 @@ inline void TextureSystem::checkExtensions() {
 #endif
 }
 
-flc::Texture2D* TextureSystem::get(const std::string &texturePath, flc::ECompression compression) {
+flc::Texture2D* TextureSystem::get(const std::string &texturePath) {
   const std::string filePath = mRootPath + texturePath;
   if (texturePath.empty()) {
     return nullptr;
@@ -84,7 +84,7 @@ flc::Texture2D* TextureSystem::get(const std::string &texturePath, flc::ECompres
     return mTextures2D[filePath].get();
   }
 
-  if (flc::TextureConfig* file = mLoader.load(filePath, GL_RGBA, mRootPath, compression)) {
+  if (flc::TextureConfig* file = mLoader.load(filePath, GL_RGBA, mRootPath)) {
     fLogD("Texture ", filePath, " added to manager");
     flc::ParameterList parameters;
     return mTextures2D.store(filePath, file, parameters, 1);
@@ -137,17 +137,17 @@ flc::Texture3D* TextureSystem::get(const std::string &posX,
   fLogD("Texture ", name, " will be added to manager");
 
   auto cfgPX =
-    mLoader.load(filePathPosX, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_X);
+    mLoader.load(filePathPosX, GL_RGBA, mRootPath, GL_TEXTURE_CUBE_MAP_POSITIVE_X);
   auto cfgNX =
-    mLoader.load(filePathNegX, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
+    mLoader.load(filePathNegX, GL_RGBA, mRootPath, GL_TEXTURE_CUBE_MAP_NEGATIVE_X);
   auto cfgPY =
-    mLoader.load(filePathPosY, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
+    mLoader.load(filePathPosY, GL_RGBA, mRootPath, GL_TEXTURE_CUBE_MAP_POSITIVE_Y);
   auto cfgNY =
-    mLoader.load(filePathNegY, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
+    mLoader.load(filePathNegY, GL_RGBA, mRootPath, GL_TEXTURE_CUBE_MAP_NEGATIVE_Y);
   auto cfgPZ =
-    mLoader.load(filePathPosZ, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
+    mLoader.load(filePathPosZ, GL_RGBA, mRootPath, GL_TEXTURE_CUBE_MAP_POSITIVE_Z);
   auto cfgNZ =
-    mLoader.load(filePathNegZ, GL_RGBA, mRootPath, flc::ECompression::none, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
+    mLoader.load(filePathNegZ, GL_RGBA, mRootPath, GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
 
   if (cfgPX && cfgNX && cfgPY && cfgNY && cfgPZ && cfgNZ) {
     fLogD("Texture ", name, " has been added to manager");

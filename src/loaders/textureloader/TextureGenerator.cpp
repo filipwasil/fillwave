@@ -158,56 +158,5 @@ GLint TextureGenerator::getBytesPerPixel(GLenum format) {
   return bytes;
 }
 
-GLenum TextureGenerator::getCompression(flc::ECompression compression) {
-#ifdef FILLWAVE_GLES_3_0
-  (void)compression;
-#else
-  switch (compression) {
-    case flc::ECompression::none:
-      return GL_NONE;
-    case flc::ECompression::generic_r:
-      return GL_COMPRESSED_RED;
-    case flc::ECompression::generic_rg:
-      return GL_COMPRESSED_RG;
-    case flc::ECompression::generic_rgb:
-      return GL_COMPRESSED_RGB;
-    case flc::ECompression::generic_rgba:
-      return GL_COMPRESSED_RGBA;
-    case flc::ECompression::generic_srgb:
-      return GL_COMPRESSED_SRGB;
-    case flc::ECompression::generic_srgba:
-      return GL_COMPRESSED_SRGB_ALPHA;
-#if defined(__APPLE__)
-#else
-    case flc::ECompression::latc_luminance:
-      return GL_COMPRESSED_LUMINANCE_LATC1_EXT;
-    case flc::ECompression::latc_luminance_signed:
-      return GL_COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT;
-    case flc::ECompression::latc_luminance_alpha:
-      return GL_COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT;
-    case flc::ECompression::latc_luminance_alpha_signed:
-      return GL_COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_EXT;
-    case flc::ECompression::rgtc1_r:
-      return GL_COMPRESSED_RED_RGTC1_EXT;
-    case flc::ECompression::rgtc1_r_signed:
-      return GL_COMPRESSED_SIGNED_RED_RGTC1_EXT;
-    case flc::ECompression::rgtc1_rg:
-      return GL_COMPRESSED_RED_GREEN_RGTC2_EXT;
-    case flc::ECompression::rgtc1_rg_signed:
-      return GL_COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT;
-    case flc::ECompression::s3tc_dxt1_rgb:
-      return GL_COMPRESSED_RGB_S3TC_DXT1_EXT;
-    case flc::ECompression::s3tc_dxt1_rgba:
-      return GL_COMPRESSED_RGBA_S3TC_DXT1_EXT;
-    case flc::ECompression::s3tc_dxt3_rgba:
-      return GL_COMPRESSED_RGBA_S3TC_DXT3_EXT;
-    case flc::ECompression::s3tc_dxt5_rgba:
-      return GL_COMPRESSED_RGBA_S3TC_DXT5_EXT;
-#endif /* __APPLE__ */
-  }
-#endif /* FILLWAVE_GLES_3_0 */
-  return GL_NONE;
-}
-
 } /* flf */
 } /* flw */

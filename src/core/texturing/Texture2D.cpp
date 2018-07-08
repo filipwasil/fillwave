@@ -48,6 +48,7 @@ void Texture2D::sendData(GLubyte* data) {
                            mCfg->mContent.mBorder,
                            mCfg->mContent.mCompressionSize,
                            mCfg->mData.get());
+    fLogC("send compressed texture data");
   } else {
     glTexImage2D(mTarget,
                  mCfg->mContent.mMipmapsLevel,
@@ -58,8 +59,8 @@ void Texture2D::sendData(GLubyte* data) {
                  mCfg->mHeader.mFormat,
                  mCfg->mHeader.mType,
                  mCfg->mData.get());
+    fLogC("send uncompressed texture data");
   }
-  fLogC("send data");
 
   size_t id = 1;
   for (auto& mipmap : mCfg->mMipmaps) {

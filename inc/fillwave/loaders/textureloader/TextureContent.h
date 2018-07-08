@@ -33,31 +33,6 @@ enum class EMemoryAllocation {
   , none
 };
 
-/*! \enum ECompression
- * \brief Compression types corresponding to native OpenGL compreession
- */
-enum class ECompression {
-  none
-  , generic_r
-  , generic_rg
-  , generic_rgb
-  , generic_rgba
-  , generic_srgb
-  , generic_srgba
-  , latc_luminance
-  , latc_luminance_signed
-  , latc_luminance_alpha
-  , latc_luminance_alpha_signed
-  , rgtc1_r
-  , rgtc1_r_signed
-  , rgtc1_rg
-  , rgtc1_rg_signed
-  , s3tc_dxt1_rgb
-  , s3tc_dxt1_rgba
-  , s3tc_dxt3_rgba
-  , s3tc_dxt5_rgba
-};
-
 // generic formats
 
 //GL_COMPRESSED_RED,

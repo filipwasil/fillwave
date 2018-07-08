@@ -35,7 +35,6 @@ struct TextureGenerator {
   flc::TextureConfig* loadVirtualFileCheckboard(GLuint width, GLuint height, GLubyte red, GLubyte green, GLubyte blue, GLenum format = GL_RGBA);
   flc::TextureConfig* loadVirtualFileColor(GLuint width, GLuint height, GLubyte red, GLubyte green, GLubyte blue, GLenum format = GL_RGBA);
   GLint getBytesPerPixel(GLenum format);
-  GLenum getCompression(flc::ECompression compression);
 };
 
 } /* flw */

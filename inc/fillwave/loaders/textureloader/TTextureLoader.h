@@ -35,11 +35,10 @@ namespace flf {
 template<class Traits>
 struct TTextureLoader {
 
-  flc::TextureConfig* load(
+  flc::TextureConfig* load (
     const std::string& filePath
     , GLenum format = GL_RGBA
-    , std::string rootPath = ""
-    , flc::ECompression compression = flc::ECompression::none
+    , const std::string& rootPath = 0
     , GLenum cubeTarget = 0);
 
   flc::TextureConfig* load(
@@ -47,7 +46,7 @@ struct TTextureLoader {
     , GLint screenHeight
     , GLenum format = GL_RGBA);
 
-  const std::vector<flc::ECompression> getSupportedCompressionFormats();
+  const vecStack<GLenum> getSupportedCompressionFormats();
 };
 
 } /* flw */

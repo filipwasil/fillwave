@@ -122,7 +122,7 @@ class Engine {
   flc::Program* storeProgram(const std::string &name, const vec<flc::Shader *> &shaders, bool isSkipLinking = false);
 
   /* Store textures */
-  flc::Texture2D* storeTexture(const std::string &path, flc::ECompression com = flc::ECompression::none);
+  flc::Texture2D* storeTexture(const std::string &path);
 
   flc::Texture2DRenderable* storeTextureRenderable();
 

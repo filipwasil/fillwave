@@ -44,9 +44,7 @@ template <>
 flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
   const std::string &filePath
   , GLenum format
-  , std::string rootPath
-  // This loader detects the compression format automatically
-  , flc::ECompression /*compression*/
+  , const std::string& rootPath
   , GLenum cubeTarget) {
 
   fLogD("Texture ", filePath.c_str(), " loading ...");
@@ -100,6 +98,7 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
     return cfg;
   }
   if (posDDS1 != std::string::npos || posDDS2 != std::string::npos) {
+    fLogD("Comporessed texture ", filePath, " loading ...");
     nv_dds::CDDSImage image;
     image.load(filePath.c_str());
     if (!image.is_compressed()) {
@@ -142,7 +141,9 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
     return cfg;
   }
 
-  GLint w, h, n;
+  GLint w = 0;
+  GLint h = 0;
+  GLint n = 0;
   auto content = stbi_load(filePath.c_str(), &w, &h, &n, textureGenerator.getBytesPerPixel(format));
   // NULL, not nullptr because the stb library uses NULL
   if (NULL == content) {
@@ -184,8 +185,12 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(GLint screenWid
 }
 
 template <>
-const std::vector<flc::ECompression> TTextureLoader<TextureLoaderTraitsSTB>::getSupportedCompressionFormats() {
-  return { };
+const vecStack<GLenum> TTextureLoader<TextureLoaderTraitsSTB>::getSupportedCompressionFormats() {
+  return {
+    GL_COMPRESSED_RGBA_S3TC_DXT1_EXT
+    , GL_COMPRESSED_RGBA_S3TC_DXT3_EXT
+    , GL_COMPRESSED_RGBA_S3TC_DXT5_EXT
+  };
 }
 
 template
