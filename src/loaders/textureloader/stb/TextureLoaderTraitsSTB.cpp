@@ -27,6 +27,8 @@
 #include <fillwave/common/Strings.h>
 #include <fillwave/common/Macros.h>
 
+#include <fillwave/loaders/textureloader/TextureGenerator.h>
+
 #include <fillwave/Log.h>
 
 #include <iterator>
@@ -54,7 +56,7 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
   const size_t posDDS2 = filePath.find(".DDS");
   uint8_t r = 0, g = 0, b = 0;
 
-  auto textureGenerator = TextureLoaderTraitsSTB().mGenerator;
+  auto textureGenerator = TextureGenerator();
 
   if (filePath == rootPath) {
     fLogD("Empty texture ", filePath, " generation and loading ...");
@@ -184,7 +186,7 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
   GLint screenWidth
   , GLint screenHeight
   , GLenum format) {
-  return TextureLoaderTraitsSTB().mGenerator.loadEmpty(screenWidth, screenHeight, format);
+  return TextureGenerator().loadEmpty(screenWidth, screenHeight, format);
 }
 
 template <>

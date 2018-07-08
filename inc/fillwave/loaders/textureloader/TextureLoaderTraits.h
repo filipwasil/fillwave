@@ -25,7 +25,13 @@
 
 #if defined (FILLWAVE_TEXTURE_LOADER_CUSTOM)
 
-#error "Co custom loader defines. Define your traits here"
+#include <fillwave/loaders/textureloader/custom/TextureLoaderTraitsCustom.h>
+
+namespace flw {
+namespace flf {
+  using TextureLoaderTraits = TextureLoaderTraitsCustom;
+} /* flf */
+} /* flw */
 
 #else
 

@@ -20,7 +20,7 @@
  */
 
 #include <fillwave/loaders/textureloader/TTextureLoader.h>
-#include <fillwave/loaders/textureloader/squish/TextureLoaderTraitsCustom.h>
+#include <fillwave/loaders/textureloader/custom/TextureLoaderTraitsCustom.h>
 
 #include <fillwave/Log.h>
 
@@ -30,29 +30,32 @@ namespace flw {
 namespace flf {
 
 template <>
-flc::TextureConfig* TTextureLoader<TextureLoaderCustom>::load(
+flc::TextureConfig* TTextureLoader<TextureLoaderTraitsCustom>::load(
   const std::string& /*filePath*/
   , GLenum /*format*/
-  , std::string /*rootPath*/
-  , GLenum /*cubeTarget*/)
-  fLogE("Implement your code here");
-  return nullptr;
+  , const std::string& /*rootPath*/
+  , GLenum /*cubeTarget*/) {
+  fLogE("Example texture loader loade method called");
+  return TextureLoaderTraitsCustom().mGenerator.loadVirtualFileCheckboard(512, 512, 255, 0, 0);
 }
 
 template <>
-flc::TextureConfig* TTextureLoader<TextureLoaderCustom>::load(
-  GLint /*screenWidth*/
-  , GLint /*screenHeight*/
+flc::TextureConfig* TTextureLoader<TextureLoaderTraitsCustom>::load(
+  GLint screenWidth
+  , GLint screenHeight
   , GLenum /*format*/) {
-  fLogE("Implement your code here");
-  return nullptr;
+  fLogE("Example texture loader loade method called");
+  return TextureLoaderTraitsCustom().mGenerator.loadVirtualFileCheckboard(screenWidth, screenHeight, 0, 255, 0);
 }
 
 template <>
-const std::vector<flc::ECompression> TTextureLoader<TextureLoaderCustom>::getSupportedCompressionFormats() {
+const vecStack<GLenum> TTextureLoader<TextureLoaderTraitsCustom>::getSupportedCompressionFormats() {
   fLogE("Implement your code here");
   return {};
 }
+
+template
+class TTextureLoader<TextureLoaderTraitsCustom>;
 
 } /* flf */
 } /* flw */
