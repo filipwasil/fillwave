@@ -52,7 +52,8 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
   fLogD("Texture ", filePath.c_str(), " loading ...");
   const size_t posCheckboard = filePath.find(".checkboard");
   const size_t posColor = filePath.find(".color");
-  const size_t posDDS = filePath.find(".dds");
+  const size_t posDDS1 = filePath.find(".dds");
+  const size_t posDDS2 = filePath.find(".DDS");
   uint8_t r = 0, g = 0, b = 0;
 
   auto textureGenerator = TextureLoaderTraitsSTB().mGenerator;
@@ -98,19 +99,35 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
     cfg->mHeader.mCubeTarget = cubeTarget;
     return cfg;
   }
-  if (posDDS != std::string::npos) {
+  if (posDDS1 != std::string::npos || posDDS2 != std::string::npos) {
     nv_dds::CDDSImage image;
     image.load(filePath.c_str());
     if (!image.is_compressed()) {
       fLogF("Texture ", filePath, " is compressed with not supported format");
       return nullptr;
     }
-    auto cfg = new flc::TextureConfig();
+    auto* cfg = new flc::TextureConfig();
     cfg->mContent.mCompression = GL_TRUE;
     cfg->mHeader.mInternalFormat = image.get_format();
-    cfg->mContent.mCompressionSize = 0;
+    cfg->mContent.mCompressionSize = image.get_size();
+
+    cfg->mHeader.mFormat = 0;
+    cfg->mHeader.mWidth = image.get_width();
+    cfg->mHeader.mHeight = image.get_height();
+    cfg->mHeader.mType = 0;
+    cfg->mHeader.mCubeTarget = 0;
+    cfg->mHeader.mInternalFormat = image.get_format();
 
     const auto mipmapsCount = image.get_num_mipmaps();
+
+    cfg->mContent.mMipmaps = mipmapsCount != 0 ? GL_TRUE : GL_FALSE;
+    cfg->mContent.mMipmapsLevel = mipmapsCount;
+    cfg->mContent.mCompression = GL_TRUE;
+    cfg->mContent.mBorder = 0;
+
+    cfg->mData = make_pu_with_no_ownership<GLubyte>(image);
+    cfg->mAllocation = flc::EMemoryAllocation::none;
+
     for (decltype(image.get_num_mipmaps()) i = 0; i < mipmapsCount; ++i) {
       nv_dds::CSurface mipmap = image.get_mipmap(i);
       cfg->mMipmaps.push_back({
@@ -121,6 +138,8 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
         , static_cast<GLubyte*>(mipmap)
       });
     }
+
+    return cfg;
   }
 
   GLint w, h, n;
@@ -144,15 +163,12 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
   cfg->mHeader.mWidth = w;
   cfg->mHeader.mHeight = h;
   cfg->mHeader.mType = GL_UNSIGNED_BYTE;
+  cfg->mHeader.mCubeTarget = cubeTarget;
+  cfg->mHeader.mInternalFormat = format;
 
   cfg->mContent.mMipmaps = GL_TRUE;
   cfg->mContent.mMipmapsLevel = 0;
-
-  cfg->mHeader.mCubeTarget = cubeTarget;
-
   cfg->mContent.mCompression = GL_FALSE;
-  cfg->mHeader.mInternalFormat = format;
-
   cfg->mContent.mBorder = 0;
 
   cfg->mData = make_pu_with_no_ownership<GLubyte>(content);

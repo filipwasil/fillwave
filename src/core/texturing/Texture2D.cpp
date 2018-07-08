@@ -38,6 +38,7 @@ void Texture2D::sendData(GLubyte* data) {
   if (data) {
     mCfg->mData = make_pu_with_no_ownership<GLubyte>(data);
   }
+
   if (mCfg->mContent.mCompression) {
     glCompressedTexImage2D(mTarget,
                            mCfg->mContent.mMipmapsLevel,
