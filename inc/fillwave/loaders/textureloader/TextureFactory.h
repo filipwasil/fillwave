@@ -30,13 +30,13 @@ namespace flf {
 /*! \class TextureGenerator
  * \brief Generates textures
  */
-struct TextureGenerator {
-  flc::TextureConfig* loadEmpty(
+struct TextureFactory {
+  static flc::TextureConfig* loadEmpty(
     GLint screenWidth
     , GLint screenHeight
     , GLenum format = GL_RGBA);
 
-  flc::TextureConfig* loadVirtualFileCheckboard(
+  static flc::TextureConfig* loadVirtualFileCheckboard(
     GLuint width
     , GLuint height
     , GLubyte red
@@ -44,15 +44,13 @@ struct TextureGenerator {
     , GLubyte blue
     , GLenum format = GL_RGBA);
 
-  flc::TextureConfig* loadVirtualFileColor(
+  static flc::TextureConfig* loadVirtualFileColor(
     GLuint width
     , GLuint height
     , GLubyte red
     , GLubyte green
     , GLubyte blue
     , GLenum format = GL_RGBA);
-
-  GLint getBytesPerPixel(GLenum format);
 };
 
 } /* flw */

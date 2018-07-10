@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/textureloader/TextureGenerator.h>
+#include <fillwave/loaders/textureloader/TextureFactory.h>
 
 #include <fillwave/Log.h>
 
@@ -28,7 +28,7 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flf {
 
-flc::TextureConfig* TextureGenerator::loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format) {
+flc::TextureConfig* TextureFactory::loadEmpty(GLint screenWidth, GLint screenHeight, GLenum format) {
   auto cfg = new flc::TextureConfig();
 
   cfg->mHeader.mFormat = format;
@@ -49,7 +49,7 @@ flc::TextureConfig* TextureGenerator::loadEmpty(GLint screenWidth, GLint screenH
   return cfg;
 }
 
-flc::TextureConfig* TextureGenerator::loadVirtualFileCheckboard(
+flc::TextureConfig* TextureFactory::loadVirtualFileCheckboard(
   GLuint width
   , GLuint height
   , GLubyte red
@@ -57,7 +57,23 @@ flc::TextureConfig* TextureGenerator::loadVirtualFileCheckboard(
   , GLubyte blue
   , GLenum format) {
 
-  const GLint bytesPerPixel = getBytesPerPixel(format);
+  const GLint bytesPerPixel = [format](){
+    switch (format) {
+      case GL_RGBA:
+        return 4;
+      case GL_RGB:
+        return 3;
+      case GL_ALPHA:
+      case GL_RED:
+      case GL_GREEN:
+      case GL_BLUE:
+        return 1;
+      default:
+        fLogE("Not recognized texture format loading");
+        return 0;
+    }
+  } ();
+  //getBytesPerPixel(format);
   const GLint size = bytesPerPixel * width * height * sizeof(GLubyte);
   auto content = new GLubyte[size];
 
@@ -98,16 +114,33 @@ flc::TextureConfig* TextureGenerator::loadVirtualFileCheckboard(
   return cfg;
 }
 
-flc::TextureConfig* TextureGenerator::loadVirtualFileColor(
+flc::TextureConfig* TextureFactory::loadVirtualFileColor(
   GLuint width
   , GLuint height
   , GLubyte red
   , GLubyte green
   , GLubyte blue
   , GLenum format) {
-  const GLint bytesPerPixel = getBytesPerPixel(format);
+
+  const GLint bytesPerPixel = [format](){
+    switch (format) {
+      case GL_RGBA:
+        return 4;
+      case GL_RGB:
+        return 3;
+      case GL_ALPHA:
+      case GL_RED:
+      case GL_GREEN:
+      case GL_BLUE:
+        return 1;
+      default:
+        fLogE("Not recognized texture format loading");
+        return 0;
+    }
+  } ();
+
   const int size = bytesPerPixel * width * height * sizeof(GLubyte);
-  GLubyte *content = new GLubyte[size];
+  GLubyte* content = new GLubyte[size];
 
   for (int i = 0; i < size; i += bytesPerPixel) {
     content[i] = red;
@@ -130,32 +163,9 @@ flc::TextureConfig* TextureGenerator::loadVirtualFileColor(
 
   cfg->mData = make_pu_with_no_ownership<GLubyte>(content);
 
-  cfg->mAllocation = flc::EMemoryAllocation::standard;
+  cfg->mAllocation = flc::EMemoryAllocation::standardBrace;
 
   return cfg;
-}
-
-GLint TextureGenerator::getBytesPerPixel(GLenum format) {
-  GLint bytes;
-  switch (format) {
-    case GL_RGBA:
-      bytes = 4;
-      break;
-    case GL_RGB:
-      bytes = 3;
-      break;
-    case GL_ALPHA:
-    case GL_RED:
-    case GL_GREEN:
-    case GL_BLUE:
-      bytes = 1;
-      break;
-    default:
-      fLogE("Not recognized texture format loading");
-      bytes = 0;
-      break;
-  }
-  return bytes;
 }
 
 } /* flf */

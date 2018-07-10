@@ -27,7 +27,7 @@
 #include <fillwave/common/Strings.h>
 #include <fillwave/common/Macros.h>
 
-#include <fillwave/loaders/textureloader/TextureGenerator.h>
+#include <fillwave/loaders/textureloader/TextureFactory.h>
 
 #include <fillwave/Log.h>
 
@@ -44,27 +44,19 @@ namespace flf {
 
 template <>
 flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
-  const std::string &filePath
+  const std::string& filePath
   , GLenum format
   , const std::string& rootPath
   , GLenum cubeTarget) {
 
-  fLogD("Texture ", filePath.c_str(), " loading ...");
-  const size_t posCheckboard = filePath.find(".checkboard");
-  const size_t posColor = filePath.find(".color");
-  const size_t posDDS1 = filePath.find(".dds");
-  const size_t posDDS2 = filePath.find(".DDS");
-  uint8_t r = 0, g = 0, b = 0;
-
-  auto textureGenerator = TextureGenerator();
-
   if (filePath == rootPath) {
     fLogD("Empty texture ", filePath, " generation and loading ...");
-    auto cfg = textureGenerator.loadVirtualFileColor(512, 512, 0, 0, 0);
+    auto cfg = TextureFactory::loadVirtualFileColor(512, 512, 0, 0, 0);
     cfg->mHeader.mCubeTarget = cubeTarget;
     return cfg;
   }
 
+  const size_t posColor = filePath.find(".color");
   if (posColor != std::string::npos) {
     fLogD("Color texture ", filePath, " generation and loading ...");
     std::string sub = filePath.substr(rootPath.size(), posColor);
@@ -74,14 +66,17 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
       return nullptr;
     }
 
-    r = atoi(tokens[0].c_str());
-    g = atoi(tokens[1].c_str());
-    b = atoi(tokens[2].c_str());
-
-    auto cfg = textureGenerator.loadVirtualFileColor(512, 512, r, g, b);
+    auto cfg = TextureFactory::loadVirtualFileColor(
+      512
+      , 512
+      , atoi(tokens[0].c_str())
+      , atoi(tokens[1].c_str())
+      , atoi(tokens[2].c_str()));
     cfg->mHeader.mCubeTarget = cubeTarget;
     return cfg;
   }
+
+  const size_t posCheckboard = filePath.find(".checkboard");
   if (posCheckboard != std::string::npos) {
     fLogD("Checkboard texture ", filePath, " generation and loading ...");
     std::string sub = filePath.substr(rootPath.size(), posCheckboard);
@@ -91,15 +86,16 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
       return nullptr;
     }
 
-    r = atoi(tokens[0].c_str());
-    g = atoi(tokens[1].c_str());
-    b = atoi(tokens[2].c_str());
-
-    auto cfg = textureGenerator.loadVirtualFileCheckboard(512, 512, r, g, b);
+    auto cfg = TextureFactory::loadVirtualFileCheckboard(
+      512
+      , 512
+      , atoi(tokens[0].c_str())
+      , atoi(tokens[1].c_str())
+      , atoi(tokens[2].c_str()));
     cfg->mHeader.mCubeTarget = cubeTarget;
     return cfg;
   }
-  if (posDDS1 != std::string::npos || posDDS2 != std::string::npos) {
+  if (filePath.find(".DDS") != std::string::npos || filePath.find(".dds") != std::string::npos) {
     fLogD("Comporessed texture ", filePath, " loading ...");
     nv_dds::CDDSImage image;
     image.load(filePath.c_str());
@@ -116,27 +112,25 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
     cfg->mHeader.mWidth = image.get_width();
     cfg->mHeader.mHeight = image.get_height();
     cfg->mHeader.mType = 0;
-    cfg->mHeader.mCubeTarget = 0;
+    cfg->mHeader.mCubeTarget = cubeTarget;
     cfg->mHeader.mInternalFormat = image.get_format();
 
-    const auto mipmapsCount = image.get_num_mipmaps();
-
-    cfg->mContent.mMipmaps = mipmapsCount != 0 ? GL_TRUE : GL_FALSE;
-    cfg->mContent.mMipmapsLevel = mipmapsCount;
+    cfg->mContent.mMipmapsLevel = image.get_num_mipmaps();
+    cfg->mContent.mMipmaps = cfg->mContent.mMipmapsLevel != 0 ? GL_TRUE : GL_FALSE;
     cfg->mContent.mCompression = GL_TRUE;
     cfg->mContent.mBorder = 0;
 
     cfg->mData = make_pu_with_no_ownership<GLubyte>(image);
     cfg->mAllocation = flc::EMemoryAllocation::none;
 
-    for (decltype(image.get_num_mipmaps()) i = 0; i < mipmapsCount; ++i) {
+    for (GLint i = 0; i < cfg->mContent.mMipmapsLevel; ++i) {
       nv_dds::CSurface mipmap = image.get_mipmap(i);
       cfg->mMipmaps.push_back({
         mipmap.get_size()
         , mipmap.get_height()
         , mipmap.get_width()
         , image.get_format()
-        , static_cast<GLubyte*>(mipmap)
+        , mipmap
       });
     }
 
@@ -146,7 +140,22 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
   GLint w = 0;
   GLint h = 0;
   GLint n = 0;
-  auto content = stbi_load(filePath.c_str(), &w, &h, &n, textureGenerator.getBytesPerPixel(format));
+  auto content = stbi_load(filePath.c_str(), &w, &h, &n, [format](){
+    switch (format) {
+      case GL_RGBA:
+        return 4;
+      case GL_RGB:
+        return 3;
+      case GL_ALPHA:
+      case GL_RED:
+      case GL_GREEN:
+      case GL_BLUE:
+        return 1;
+      default:
+        fLogE("Not recognized texture format loading");
+        return 0;
+    }
+  } () );
   // NULL, not nullptr because the stb library uses NULL
   if (NULL == content) {
     FILE *f;
@@ -186,7 +195,7 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
   GLint screenWidth
   , GLint screenHeight
   , GLenum format) {
-  return TextureGenerator().loadEmpty(screenWidth, screenHeight, format);
+  return TextureFactory::loadEmpty(screenWidth, screenHeight, format);
 }
 
 template <>

@@ -93,7 +93,9 @@ TextureConfig::~TextureConfig() {
       break;
     case EMemoryAllocation::standard:
       delete mData.get();
-      mData = make_pu_with_no_ownership<GLubyte>(nullptr);
+      break;
+    case EMemoryAllocation::standardBrace:
+      delete [] mData.get();
       break;
     case EMemoryAllocation::none:
       break;
