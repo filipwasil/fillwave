@@ -36,7 +36,7 @@ class TreeItemModelMock : public TreeItemModel {
   MOCK_METHOD1(columnCount, int(
     const QModelIndex& index));
 
-  MOCK_METHOD1(insertToModel, bool(
-    IItem * item));
+  MOCK_METHOD2(insertToModel, bool(
+    IItem * item, const QModelIndex& parent));
 };
 }

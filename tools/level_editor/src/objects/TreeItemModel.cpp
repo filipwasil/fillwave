@@ -130,9 +130,10 @@ IItem* TreeItemModel::getRootItem() const {
   return mRootItem;
 }
 
-bool TreeItemModel::insertToModel(IItem* item) {
+bool TreeItemModel::insertToModel(IItem* item, const QModelIndex& parent) {
   mNewItemToInsert = item;
-  return insertRow(1);
+  insertRow(rowCount(parent), parent);
+  return true;
 }
 
 }

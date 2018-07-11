@@ -27,7 +27,8 @@ TEST_F(TreeItemModelFixture, defaultItemCreationWithDefaultName) {
 }
 
 TEST_F(TreeItemModelFixture, insertNewItemToModel) {
-  bool status = sut->insertToModel(mTestItem);
+  QModelIndex model;
+  bool status = sut->insertToModel(mTestItem, model);
   EXPECT_EQ(true, status);
   QModelIndex invalidIndex;
   auto childIndex = sut->index(0, 0, invalidIndex);

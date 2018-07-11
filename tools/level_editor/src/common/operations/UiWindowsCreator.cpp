@@ -12,7 +12,7 @@ std::tuple<QVBoxLayout*, objects::TreeItemModel*, objects::NodeController*> UiWi
 parent) {
 
   objects::TreeItemModel* model = new objects::TreeItemModel("InspectorModel", nullptr);
-  auto* nodeController = new objects::NodeController(model);
+  auto* nodeController = new objects::NodeController(model, treeView);
 
   QLabel* label = new QLabel("Node", parent);
   label->setAlignment(Qt::AlignHCenter);

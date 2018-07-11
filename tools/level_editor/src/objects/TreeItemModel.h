@@ -29,7 +29,7 @@ class TreeItemModel : public QAbstractItemModel {
 
   IItem* getRootItem() const;
 
-  virtual bool insertToModel(IItem* item);
+  virtual bool insertToModel(IItem* item, const QModelIndex& parent);
 
  private:
   bool insertRows(int row, int count, const QModelIndex& parent) override;

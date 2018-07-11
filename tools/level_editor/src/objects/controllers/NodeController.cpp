@@ -5,16 +5,17 @@
 
 
 namespace objects {
-NodeController::NodeController(TreeItemModel* objectsModel)
+NodeController::NodeController(TreeItemModel* objectsModel, QTreeView* nodeView)
   : QObject(nullptr)
-  , mObjectsModel(objectsModel) {
+  , mObjectsModel(objectsModel)
+  , mNodeTreeview(nodeView){
   //empty
 }
 
 bool NodeController::addNode(common::EItemType type, QString name) {
   ItemFactory factory;
   auto newItem = factory.create(common::EItemType::object, name, nullptr);
-  return mObjectsModel->insertToModel(newItem);
+  return mObjectsModel->insertToModel(newItem, mNodeTreeview->currentIndex());
 }
 
 void NodeController::createNode() {
