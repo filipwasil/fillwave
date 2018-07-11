@@ -1,5 +1,6 @@
 #include <example.h>
 #include <ContextGLFW.h>
+#include <fillwave/models/shapes/Sphere.h>
 
 using namespace flw;
 using namespace flw::flf;
@@ -32,6 +33,13 @@ void init() {
   /* Lights */
   engine->storeLightSpot(glm::vec3(1.0, 1.0, 3.0), glm::quat(), glm::vec4(1.0, 1.0, 1.0, 0.0), light.get());
 
+//  auto cube = std::make_unique<Model>(
+//    engine
+//    , ProgramLoader(engine).getProgram(EProgram::basic)
+//    , flw::flf::Sphere(0.1)
+//    , engine->storeTexture("255_255_0.checkboard"));
+  //engine->getCurrentScene()->attach(std::move(cube));
+
   auto model = std::make_unique<Model>(
     engine
     , ProgramLoader(engine).getProgram(EProgram::basicAnimated)
@@ -41,6 +49,8 @@ void init() {
   model->moveByZ(-1.0f);
   model->setActiveAnimation(0);
   engine->getCurrentScene()->attach(std::move(model));
+
+
 //  auto screenSize = engine->getScreenSize();
 
 //  auto textureFile = TextureLoader().loadEmpty(screenSize.x, screenSize.y);

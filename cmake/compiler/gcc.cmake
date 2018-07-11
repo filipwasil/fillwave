@@ -60,3 +60,7 @@ if (FILLWAVE_BUILD_PACK)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-logical-op")   # assimp built internally
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-format-nonliteral")# assimp built internally
 endif ()
+
+if (FILLWAVE_BENCHMARK_TESTS)
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-variable")   # Log mechanism
+endif()

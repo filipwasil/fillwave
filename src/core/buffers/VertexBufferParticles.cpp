@@ -54,7 +54,7 @@ VertexBufferParticles::VertexBufferParticles(const std::vector<GLfloat> &velocit
 }
 
 void VertexBufferParticles::log() const {
-  for (auto it : mDataVertices) {
+  for (auto& it : mDataVertices) {
     fLogE("Vertex written: ", it.velocity[0], " ", it.velocity[1], " ", it.velocity[2], " ", it.startTime);
   }
 }

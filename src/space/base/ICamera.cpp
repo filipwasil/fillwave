@@ -71,12 +71,7 @@ void ICamera::update() {
 }
 
 void ICamera::log() const {
-  auto d = [](GLfloat f) {
-    return static_cast<double>(f);
-  };
-  fLogI("Position: %f %f %f", d(mTranslation[0]), d(mTranslation[1]), d(mTranslation[2]));
-//	fLogI("Camera rotation: %f %f %f %f ", d(mRotation[0]), d(mRotation[1]),
-//			d(mRotation[2]), d(mRotation[4]));
+  fLogI("Position: ", mTranslation[0], "", mTranslation[1], "", mTranslation[2]);
 }
 
 glm::mat4 ICamera::getEye() {

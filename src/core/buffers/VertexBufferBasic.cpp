@@ -159,7 +159,7 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
 }
 
 void VertexBufferBasic::log() const {
-  for (auto it : mDataVertices) {
+  for (auto& it : mDataVertices) {
     fLogI("Vertex UV: ", it.mTextureUV[0], " ", it.mTextureUV[1]);
     fLogI("Vertex normal: ",it.mNormal[0], " ", it.mNormal[1], " ", it.mNormal[2]);
     fLogI("Vertex position: ",it.mPosition[0], " ", it.mPosition[1], " ", it.mPosition[2]);

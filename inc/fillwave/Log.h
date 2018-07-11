@@ -25,7 +25,7 @@
 #include <fillwave/PlatformSW.h>
 #include <string>
 
-#ifdef FILLWAVE_COMPILATION_RELEASE
+#if defined(FILLWAVE_COMPILATION_RELEASE) || defined(FILLWAVE_BENCHMARK_TESTS)
 
 #define FLOGINIT_DEFAULT()
 #define FLOGINIT_MASK(mask)
@@ -139,7 +139,7 @@ constexpr auto FLOG_END = "\033[0m";
 
 template<typename T>
 static void fLogWithStream(std::stringstream& s, const T& t) {
-  std::cout << s.str() << t << FLOG_END << std::endl;
+  std::cout << s.str() << t << FLOG_END << "/n";
 }
 template<typename T, typename... Args>
 static void fLogWithStream(std::stringstream& s, const T& t, Args... args) {

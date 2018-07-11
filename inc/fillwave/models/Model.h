@@ -40,11 +40,11 @@ class Model : public Programmable {
 public:
   Model(Engine* engine,
       flc::Program* program,
-      flf::Shape<flc::VertexBasic>& shape,
+      const flf::Shape<flc::VertexBasic>& shape,
       flc::Texture2D* diffuseMap,
-      flc::Texture2D* normalMap,
-      flc::Texture2D* specularMap,
-      const Material &material);
+      flc::Texture2D* normalMap = nullptr,
+      flc::Texture2D* specularMap = nullptr,
+      const Material &material = Material());
 
   Model(Engine *engine, flc::Program* program, const std::string& shapePath);
 

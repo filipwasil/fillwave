@@ -44,19 +44,19 @@ public:
     // nothing
   }
 
-  vec<TVertex> getVertices() {
+  vec<TVertex> getVertices() const {
     return mVertices;
   }
 
-  GLuint getVerticesSize() {
+  GLuint getVerticesSize() const {
     return mVertices.size();
   }
 
-  std::vector<GLuint> getIndices() {
+  std::vector<GLuint> getIndices() const {
     return mIndices;
   }
 
-  GLuint getIndicesSize() {
+  GLuint getIndicesSize() const {
     return mIndices.size();
   }
 

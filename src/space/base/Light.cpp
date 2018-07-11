@@ -70,10 +70,7 @@ glm::vec4 Light::getIntensity() {
 }
 
 void Light::log() {
-  auto d = [](GLfloat &f) {
-    return static_cast<double>(f);
-  };
-  fLogI("Light mIntensity: R:%f G:%f B:%f A:%f", d(mIntensity.x), d(mIntensity.y), d(mIntensity.z), d(mIntensity.w));
+  fLogI("Light mTranslation:", mTranslation.x, mTranslation.y, mTranslation.z);
 }
 
 void Light::onDeath(Observable *observable) {

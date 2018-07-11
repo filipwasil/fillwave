@@ -39,7 +39,7 @@ VertexBufferPosition::VertexBufferPosition(const std::vector<VertexPosition>& ve
 }
 
 void VertexBufferPosition::log() const {
-  for (auto it : mDataVertices) {
+  for (auto& it : mDataVertices) {
     fLogI("Vertex written: ", it.mPosition[0], " ", it.mPosition[1], " ", it.mPosition[2], " ", it.mPosition[3]);
   }
 }

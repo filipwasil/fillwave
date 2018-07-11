@@ -33,7 +33,7 @@ VertexBufferFloat::VertexBufferFloat(const std::vector<VertexFloat> &values, GLu
 }
 
 void VertexBufferFloat::log() const {
-  for (auto it : mDataVertices) {
+  for (auto& it : mDataVertices) {
     fLogI("Vertex written: ", it.mData);
   }
 }

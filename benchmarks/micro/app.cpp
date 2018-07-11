@@ -31,81 +31,41 @@
  *   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <fillwave/Framework.h>
-#include <fillwave/Fillwave.h>
-#include <GLFW/glfw3.h>
+
+#include "context.h"
+#include "bSkyboxScene.h"
 #include <benchmark/benchmark.h>
+#include <memory>
 
 using namespace flw;
 
 typedef std::pair<std::string, float> result;
 std::vector<result> mResults;
 
-int initContext() {
-
-  if (!glfwInit()) {
-    exit(EXIT_FAILURE);
-  }
-
-  GLfloat screenWidth = 800;
-  GLfloat screenHeight = 800;
-  GLFWwindow *window;
-  GLFWwindow *mWindowNew;
-  GLuint mCursorPositionX;
-  GLuint mCursorPositionY;
-
-  window = nullptr;
-  mWindowNew = nullptr;
-
-  mCursorPositionX = 1;
-  mCursorPositionY = 1;
-
-  const GLFWvidmode *mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-
-  screenWidth = mode->width;
-  screenHeight = mode->height;
-
-  window = glfwCreateWindow(screenWidth, screenHeight, "Fillwave", glfwGetPrimaryMonitor(), NULL);
-
-  glfwMakeContextCurrent(window);
-  glfwWindowHint(GLFW_RED_BITS, 8);
-  glfwWindowHint(GLFW_GREEN_BITS, 8);
-  glfwWindowHint(GLFW_BLUE_BITS, 8);
-  glfwWindowHint(GLFW_DEPTH_BITS, 16);
-
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-
-  if (!window) {
-    glfwTerminate();
-    exit(EXIT_FAILURE);
-  }
-}
-
-static void BM_EngineCreationDestroy(benchmark::State &state) {
+static void BM_EngineDrawEmptyFrame(benchmark::State &state) {
   initContext();
-  char a[] = "./benchmarks";
-  GLchar *const argv[] = {
-      a
-  };
+  auto* engine = new flw::Engine(".");
   while (state.KeepRunning()) {
-    delete (new flw::Engine(1, argv));
+    engine->draw(0.0f);
   }
+  delete engine;
 }
 
 // Register the function as a benchmark
-BENCHMARK(BM_EngineCreationDestroy);
+BENCHMARK(BM_EngineDrawEmptyFrame);
 
 // Define another benchmark
-static void BM_MoveableInTimeCreation(benchmark::State &state) {
+static void BM_EngineDrawSkyboxFrame(benchmark::State &state) {
+  initContext();
+  auto* engine = new flw::Engine(".");
+  engine->setCurrentScene(std::make_unique<SkyboxScene>(engine));
   while (state.KeepRunning()) {
-    flf::Moveable sut;
+    engine->draw(0.0f);
   }
+  delete engine;
 }
 
 // Register another function as a benchmark
-BENCHMARK(BM_MoveableInTimeCreation);
+BENCHMARK(BM_EngineDrawSkyboxFrame);
 
 BENCHMARK_MAIN()

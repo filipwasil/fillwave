@@ -36,15 +36,15 @@ namespace flw {
 namespace flf {
 
 Model::Model(Engine* engine,
-    flc::Program* program,
-    Shape<flc::VertexBasic>& shape,
-    flc::Texture2D* diffuseMap,
-    flc::Texture2D* normalMap,
-    flc::Texture2D* specularMap,
-    const Material& material)
-    : Programmable(program)
-    , mEngine(engine)
-    , mLights(engine->getLightSystem()) {
+  flc::Program* program,
+  const Shape<flc::VertexBasic>& shape,
+  flc::Texture2D* diffuseMap,
+  flc::Texture2D* normalMap,
+  flc::Texture2D* specularMap,
+  const Material& material)
+  : Programmable(program)
+  , mEngine(engine)
+  , mLights(engine->getLightSystem()) {
 
   initShadowing(engine);
 
@@ -287,14 +287,14 @@ pu<Mesh> Model::loadMesh(
   auto mesh = std::make_unique<Mesh>(
     engine, material, diffuseMap, normalMap, specularMap, mProgram, mProgramShadow, mProgramShadowColor, loader
       .getProgram(EProgram::occlusionOptimizedQuery),
-                                     loader.getProgram(EProgram::ambientOcclusionGeometry),
-                                     loader.getProgram(EProgram::ambientOcclusionColor),
-                                     engine->getLightSystem(),
-                                     vbo,
-                                     ibo,
-                                     mAnimator.get(),
-                                     GL_TRIANGLES,
-                                     vao);
+    loader.getProgram(EProgram::ambientOcclusionGeometry),
+    loader.getProgram(EProgram::ambientOcclusionColor),
+    engine->getLightSystem(),
+    vbo,
+    ibo,
+    mAnimator.get(),
+    GL_TRIANGLES,
+    vao);
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
   vbo->emptyCPU();
 #endif
@@ -324,7 +324,7 @@ void Model::drawDR(ICamera &camera) {
 }
 
 void Model::log() const {
-
+  // nothing
 }
 
 inline void Model::initShadowing(Engine* engine) {

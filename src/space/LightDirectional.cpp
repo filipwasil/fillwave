@@ -63,6 +63,8 @@ void LightDirectional::updateShadowCamera() {
 void LightDirectional::log() {
   const auto translation = mShadowCamera->getTranslation();
   const auto eyeMatrix = mShadowCamera->getEye();
+  (void)eyeMatrix;
+  (void)translation;
   fLogI("mShadowCamera->getTranslation(): ", translation.x, translation.y, translation.z);
   fLogI("mShadowCamera[0]: ", eyeMatrix[0].x, " ", eyeMatrix[0].y, " ", eyeMatrix[0].z, " ", eyeMatrix[0].w);
   fLogI("mShadowCamera[1]: ", eyeMatrix[1].x, " ", eyeMatrix[1].y, " ", eyeMatrix[1].z, " ", eyeMatrix[1].w);
