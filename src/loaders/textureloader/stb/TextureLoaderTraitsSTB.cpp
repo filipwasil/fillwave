@@ -140,6 +140,7 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
   GLint w = 0;
   GLint h = 0;
   GLint n = 0;
+  stbi_set_flip_vertically_on_load(cubeTarget == 0);
   auto content = stbi_load(filePath.c_str(), &w, &h, &n, [format](){
     switch (format) {
       case GL_RGBA:
@@ -156,6 +157,7 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
         return 0;
     }
   } () );
+  stbi_set_flip_vertically_on_load(0);
   // NULL, not nullptr because the stb library uses NULL
   if (NULL == content) {
     FILE *f;

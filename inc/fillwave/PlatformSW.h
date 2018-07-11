@@ -24,13 +24,13 @@
 #ifdef __linux__
 constexpr const char* FILLWAVE_OS_SEPRATOR = "/";
 constexpr const char* FILLWAVE_OS_CURRENTDIR = "./";
-constexpr const char* FILLWAVE_OS_TEXTURE_COORIDATE_COORD_Y_FACTOR = "-1.0";
+constexpr const char* FILLWAVE_OS_TEXTURE_SAMPLE_FACTOR = "vec2(1.0, 1.0)";
 #elif _WIN32
 constexpr const char* FILLWAVE_OS_SEPRATOR = "\\";
 constexpr const char* FILLWAVE_OS_CURRENTDIR = "./";
-constexpr const char* FILLWAVE_OS_TEXTURE_COORIDATE_COORD_Y_FACTOR = "1.0";
+constexpr const char* FILLWAVE_OS_TEXTURE_SAMPLE_FACTOR = "vec2(1.0, -1.0)";
 #elif __APPLE__
 constexpr const char* FILLWAVE_OS_SEPRATOR = "/";
 constexpr const char* FILLWAVE_OS_CURRENTDIR = "./";
-constexpr const char* FILLWAVE_OS_TEXTURE_COORIDATE_COORD_Y_FACTOR = "1.0";
+constexpr const char* FILLWAVE_OS_TEXTURE_SAMPLE_FACTOR = "vec2(1.0, -1.0)";
 #endif

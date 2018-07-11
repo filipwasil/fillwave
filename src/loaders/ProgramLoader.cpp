@@ -321,8 +321,7 @@ const std::string fsTextBold = gGLVersion + gGLFragmentPrecision + //xxx low pre
 
 const std::string vsText = gGLVersion + gGLVertexPrecision + gGLVSAttributesQuad + "out vec2 vTextureCoordinate;\n"
     "void main () {\n"
-    "  vTextureCoordinate = vec2(aTextureCoordinate.x," +
-    FILLWAVE_OS_TEXTURE_COORIDATE_COORD_Y_FACTOR + " * aTextureCoordinate.y);\n"
+    "  vTextureCoordinate = aTextureCoordinate * " + FILLWAVE_OS_TEXTURE_SAMPLE_FACTOR + ";\n"
     "  gl_Position = vec4 (aPosition, 0.0, 1.0);\n"
     "}\n"
     "\n";

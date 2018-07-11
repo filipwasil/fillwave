@@ -23,6 +23,7 @@
 #include <fillwave/loaders/modelloader/ModelLoaderTraits.h>
 #include <fillwave/common/Strings.h>
 #include <fillwave/loaders/ModelLoader.h>
+#include <fillwave/PlatformSW.h>
 
 namespace flw {
 namespace flf {
@@ -84,7 +85,7 @@ const std::string ShaderLoaderVertex::getSource() const {
       "   vVertexWorldSpace = uModelMatrix * aPosition;\n"
           "   vVertexNormal = (uModelMatrix * vec4(aNormal, 0.0)).xyz;\n"
           "   vVertexNormalTangent = (uModelMatrix * vec4(aNormalTangent, 0.0)).xyz;\n"
-          "   vTextureCoordinate = aTextureCoordinate;\n"
+          "   vTextureCoordinate = " + std::string(FILLWAVE_OS_TEXTURE_SAMPLE_FACTOR) + " * aTextureCoordinate;\n"
           "   vCameraPosition = uCameraPosition;\n"
           "   vColor = aColor;\n"
           "   gl_Position = uViewProjectionMatrix * vVertexWorldSpace;\n";
