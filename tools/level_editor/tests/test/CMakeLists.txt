@@ -9,6 +9,7 @@ set (SOURCESRC
     ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/factories/ItemFactory.cpp
     ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/controllers/NodeController.cpp
     ${LEVEL_EDITOR_SOURCE_DIR}/src/common/operations/SelectItemType.cpp
+    ${LEVEL_EDITOR_SOURCE_DIR}/src/common/UUID.cpp
     ${SOURCE}
     )
 

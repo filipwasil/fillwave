@@ -13,7 +13,7 @@ class IItem {
 
   virtual QString name() const = 0;
 
-  virtual uint getId() const = 0;
+  virtual QByteArray getId() const = 0;
 
   virtual void setName(const QString& name) = 0;
 
@@ -44,5 +44,7 @@ class IItem {
   virtual bool operator== ( const IItem* obj ) const = 0;
 
   virtual void insertChild(int row, IItem *item) = 0;
+
+  virtual void setId(QByteArray&& array) = 0;
 };
 }

@@ -6,7 +6,9 @@ namespace objects {
 
 class BaseItem : public IItem {
  public:
-  BaseItem(IItem* parent, QString name, uint id);
+  BaseItem(IItem* parent, QString name);
+
+  BaseItem(IItem* parent, QString name, QByteArray id);
 
   virtual ~BaseItem();
 
@@ -28,9 +30,11 @@ class BaseItem : public IItem {
 
   bool hasChildren() override;
 
-  uint getId() const override;
+  QByteArray getId() const override;
 
   int row() const override;
+
+  void setId(QByteArray&& array) override;
 
   void setParent(IItem* parent) override;
 
@@ -49,7 +53,7 @@ class BaseItem : public IItem {
  protected:
   IItem* mParent;
   QString mName;
-  uint mId;
+  QByteArray mId;
   QList<IItem*> mChildrens;
 };
 }

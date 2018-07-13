@@ -2,8 +2,13 @@
 #include "BaseItem.h"
 
 namespace objects {
+BaseItem::BaseItem(IItem* parent, QString name)
+  : mParent(parent)
+  , mName(name) {
 
-BaseItem::BaseItem(IItem* parent, QString name, uint id)
+}
+
+BaseItem::BaseItem(IItem* parent, QString name, QByteArray id)
   : mParent(parent)
   , mName(name)
   , mId(id) {
@@ -50,7 +55,7 @@ bool BaseItem::hasChildren() {
   return !mChildrens.empty();
 }
 
-uint BaseItem::getId() const {
+QByteArray BaseItem::getId() const {
   return mId;
 }
 
@@ -99,6 +104,10 @@ QVariant BaseItem::data(int column) const {
 void BaseItem::insertChild(int row, IItem* item) {
   item->setParent(this);
   mChildrens.insert(row, item);
+}
+
+void BaseItem::setId(QByteArray&& array) {
+  mId = array;
 }
 
 }
