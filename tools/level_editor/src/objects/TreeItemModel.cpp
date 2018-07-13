@@ -1,5 +1,6 @@
 #include "TreeItemModel.h"
 #include "QDebug"
+#include "common/UUID.h"
 
 namespace objects {
 
@@ -106,9 +107,12 @@ bool TreeItemModel::insertRows(int row, int count, const QModelIndex& parent) {
     mRootItem = new objects::BaseItem(nullptr, "Root", 0);
   }
   IItem* parentItem = parent.isValid() ? itemForIndex(parent) : mRootItem;
+  common::UUID idGen;
+  QByteArray id;
   beginInsertRows(parent, row, row + count - 1);
   for (int i = 0; i < count; ++i) {
-    IItem* item = mNewItemToInsert ? mNewItemToInsert : new objects::BaseItem(parentItem, "StandardObject", 1);
+    id = idGen.getId().toHex();
+    IItem* item = mNewItemToInsert ? mNewItemToInsert : new objects::BaseItem(parentItem, "StandardObject", id);
     parentItem->insertChild(row, item);
   }
   endInsertRows();

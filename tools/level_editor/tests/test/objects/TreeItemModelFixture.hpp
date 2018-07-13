@@ -7,7 +7,7 @@
 class TreeItemModelFixture : public testing::Test {
  protected:
   virtual void SetUp() override {
-    mTestItem = new objects::BaseItem(nullptr, "TestObject", 1);
+    mTestItem = new objects::BaseItem(nullptr, "TestObject");
     sut = new objects::TreeItemModel(QString("Test"));
   }
 
