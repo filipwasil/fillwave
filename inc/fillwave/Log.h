@@ -139,7 +139,7 @@ constexpr auto FLOG_END = "\033[0m";
 
 template<typename T>
 static void fLogWithStream(std::stringstream& s, const T& t) {
-  std::cout << s.str() << t << FLOG_END << "/n";
+  std::cout << s.str() << t << FLOG_END << "\n";
 }
 template<typename T, typename... Args>
 static void fLogWithStream(std::stringstream& s, const T& t, Args... args) {

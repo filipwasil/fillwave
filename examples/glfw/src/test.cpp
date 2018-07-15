@@ -33,12 +33,12 @@ void init() {
   /* Lights */
   engine->storeLightSpot(glm::vec3(1.0, 1.0, 3.0), glm::quat(), glm::vec4(1.0, 1.0, 1.0, 0.0), light.get());
 
-//  auto cube = std::make_unique<Model>(
-//    engine
-//    , ProgramLoader(engine).getProgram(EProgram::basic)
-//    , flw::flf::Sphere(0.1)
-//    , engine->storeTexture("255_255_0.checkboard"));
-  //engine->getCurrentScene()->attach(std::move(cube));
+  auto cube = std::make_unique<Model>(
+    engine
+    , ProgramLoader(engine).getProgram(EProgram::basic)
+    , flw::flf::Sphere(0.1)
+    , engine->storeTexture("255_255_0.checkboard"));
+  engine->getCurrentScene()->attach(std::move(cube));
 
   auto model = std::make_unique<Model>(
     engine

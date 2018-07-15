@@ -1114,7 +1114,7 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
     case EProgram::basicAnimated:
     case EProgram::basicAnimatedFR:
       p = mEngine->storeProgram("default_animated", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default.frag", ShaderLoaderFragment().getSource()),
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_default_animated.frag", ShaderLoaderFragment().getSource()),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_default_animated.vert", ShaderLoaderVertex(true).getSource())
       });
       initDefaultUniforms(p);
@@ -1371,18 +1371,19 @@ flc::Program* ProgramLoader::getHUDCustomFragmentShader(const std::string &shade
 }
 
 void ProgramLoader::initDefaultUniforms(flc::Program *program) {
-  GLint location[10];
+  std::array<GLint, 10> location {
+    glGetUniformLocation(program->getHandle(), "uLightAmbientIntensity")
+    , glGetUniformLocation(program->getHandle(), "uNumberOfPointLights")
+    , glGetUniformLocation(program->getHandle(), "uNumberOfSpotLights")
+    , glGetUniformLocation(program->getHandle(), "uFogEffect")
+    , glGetUniformLocation(program->getHandle(), "uPainterEffect")
+    , glGetUniformLocation(program->getHandle(), "uTextureOnlyEffect")
+    , glGetUniformLocation(program->getHandle(), "uBoostColorEffect")
+    , glGetUniformLocation(program->getHandle(), "uDiffuseTextureUnit")
+    , glGetUniformLocation(program->getHandle(), "uNormalTextureUnit")
+    , glGetUniformLocation(program->getHandle(), "uSpecularTextureUnit")
+  };
 
-  location[0] = glGetUniformLocation(program->getHandle(), "uLightAmbientIntensity");
-  location[1] = glGetUniformLocation(program->getHandle(), "uNumberOfPointLights");
-  location[2] = glGetUniformLocation(program->getHandle(), "uNumberOfSpotLights");
-  location[3] = glGetUniformLocation(program->getHandle(), "uFogEffect");
-  location[4] = glGetUniformLocation(program->getHandle(), "uPainterEffect");
-  location[5] = glGetUniformLocation(program->getHandle(), "uTextureOnlyEffect");
-  location[6] = glGetUniformLocation(program->getHandle(), "uBoostColorEffect");
-  location[7] = glGetUniformLocation(program->getHandle(), "uDiffuseTextureUnit");
-  location[8] = glGetUniformLocation(program->getHandle(), "uNormalTextureUnit");
-  location[9] = glGetUniformLocation(program->getHandle(), "uSpecularTextureUnit");
 
   program->use();
 
