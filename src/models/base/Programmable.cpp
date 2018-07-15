@@ -29,7 +29,8 @@ namespace flw {
 namespace flf {
 
 Programmable::Programmable(flc::Program* program)
-    : mProgram(program) {
+    : mProgram(program)
+    , mEffects() {
   // nothing
 }
 

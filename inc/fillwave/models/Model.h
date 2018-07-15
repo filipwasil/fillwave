@@ -25,7 +25,10 @@
 #include <fillwave/models/Mesh.h>
 
 #include <fillwave/loaders/modelloader/ModelLoaderTraits.h>
+#include <fillwave/loaders/ProgramLoader.h>
+
 #include <fillwave/common/pointers/PointerProtected.h>
+
 
 namespace flw {
 class Engine;
@@ -97,6 +100,7 @@ public:
 
  protected:
   Engine* mEngine;
+  ProgramLoader mProgramLoader;
   pu<ModelLoader::Animator> mAnimator;
 
   LightSystem& mLights;
@@ -110,7 +114,7 @@ public:
  private:
   /* Init */
   void initUniformsCache();
-  void initShadowing(Engine *engine);
+  void initShadowing();
 
   /* Animation */
   void initAnimations(const ModelLoader::SceneType& scene);

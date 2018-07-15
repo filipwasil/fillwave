@@ -37,9 +37,9 @@ public:
 
   ~Programmable() override;
 
-  Programmable& operator=(const Programmable &);
+  Programmable& operator=(const Programmable &) = delete;
 
-  Programmable(const Programmable &);
+  Programmable(const Programmable &) = delete;
 
   Programmable& operator=(Programmable &&);
 
@@ -57,7 +57,6 @@ public:
 
 protected:
   flc::Program* mProgram;
-
   std::vector<ps<IEffect>> mEffects;
 };
 

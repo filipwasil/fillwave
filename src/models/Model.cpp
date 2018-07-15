@@ -19,8 +19,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/loaders/ProgramLoader.h>
-
 #include <fillwave/models/Model.h>
 #include <fillwave/models/Hinge.h>
 
@@ -44,30 +42,31 @@ Model::Model(Engine* engine,
   const Material& material)
   : Programmable(program)
   , mEngine(engine)
-  , mLights(engine->getLightSystem()) {
-
-  initShadowing(engine);
-
-  ProgramLoader loader(engine);
+  , mProgramLoader(engine)
+  , mAnimator(nullptr)
+  , mLights(mEngine->getLightSystem()) {
 
   std::vector<flc::VertexBasic> vertices = shape.getVertices();
   std::vector<GLuint> indices = shape.getIndices();
 
+  initShadowing();
+  initUniformsCache();
+
   auto vao = new flc::VertexArray();
   attach(std::make_unique<Mesh>(
-    engine
+    mEngine
     , material
     , diffuseMap
     , normalMap
     , specularMap
-    , program
+    , mProgram
     , mProgramShadow
     , mProgramShadowColor
-    , loader.getProgram(EProgram::occlusionOptimizedQuery)
-    , loader.getProgram(EProgram::ambientOcclusionGeometry)
-    , loader.getProgram(EProgram::ambientOcclusionColor)
-    , engine->getLightSystem()
-    , engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices)
+    , mProgramLoader.getProgram(EProgram::occlusionOptimizedQuery)
+    , mProgramLoader.getProgram(EProgram::ambientOcclusionGeometry)
+    , mProgramLoader.getProgram(EProgram::ambientOcclusionColor)
+    , mEngine->getLightSystem()
+    , mEngine->storeBuffer<flc::VertexBufferBasic>(vao, vertices)
     , engine->storeBuffer<flc::IndexBuffer>(vao, indices)
     , mAnimator.get()
     , GL_TRIANGLES
@@ -81,6 +80,8 @@ Model::Model(
   , const std::string& shapePath)
   : Programmable(program)
   , mEngine(engine)
+  , mProgramLoader(engine)
+  , mAnimator(nullptr)
   , mLights(engine->getLightSystem()) {
   reloadModel(shapePath);
 }
@@ -93,6 +94,8 @@ Model::Model(Engine* engine
              , const std::string& specularMapPath)
   : Programmable(program)
   , mEngine(engine)
+  , mProgramLoader(engine)
+  , mAnimator(nullptr)
   , mLights(engine->getLightSystem()) {
 
   reloadModel(shapePath
@@ -110,6 +113,8 @@ Model::Model(Engine* engine
              , const Material& material)
   : Programmable(program)
   , mEngine(engine)
+  , mProgramLoader(engine)
+  , mAnimator(nullptr)
   , mLights(engine->getLightSystem()) {
 
   reloadModel(shapePath
@@ -126,7 +131,7 @@ Model::~Model() {
 void Model::reloadModel(const std::string& localPath) {
   const auto scene = ModelLoader::SceneType(mEngine->getGlobalPath(localPath));
   initAnimations(scene);
-  initShadowing(mEngine);
+  initShadowing();
   initUniformsCache();
   loadNodes(ModelLoader::getRootNode(scene), scene, this);
 }
@@ -140,7 +145,7 @@ void Model::reloadModel(
   unloadNodes();
   const auto scene = ModelLoader::SceneType(mEngine->getGlobalPath(localPath));
   initAnimations(scene);
-  initShadowing(mEngine);
+  initShadowing();
   initUniformsCache();
   loadNodes(ModelLoader::getRootNode(scene), scene, this, diff, norm, specular, material);
 }
@@ -279,24 +284,27 @@ pu<Mesh> Model::loadMesh(
   , flc::Texture2D* specularMap
   , Engine* engine) {
 
-  ProgramLoader loader(engine);
   auto vao = new flc::VertexArray();
-  auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
-//  engine->storeBuffer<flc::IndexBuffer>(vao, static_cast<GLuint>(shape.mesh.indices.size())), GL_TRIANGLES, vao);
-  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get());
   auto mesh = std::make_unique<Mesh>(
-    engine, material, diffuseMap, normalMap, specularMap, mProgram, mProgramShadow, mProgramShadowColor, loader
-      .getProgram(EProgram::occlusionOptimizedQuery),
-    loader.getProgram(EProgram::ambientOcclusionGeometry),
-    loader.getProgram(EProgram::ambientOcclusionColor),
-    engine->getLightSystem(),
-    vbo,
-    ibo,
-    mAnimator.get(),
-    GL_TRIANGLES,
-    vao);
+    engine
+    , material
+    , diffuseMap
+    , normalMap
+    , specularMap
+    , mProgram
+    , mProgramShadow
+    , mProgramShadowColor
+    , mProgramLoader.getProgram(EProgram::occlusionOptimizedQuery)
+    , mProgramLoader.getProgram(EProgram::ambientOcclusionGeometry)
+    , mProgramLoader.getProgram(EProgram::ambientOcclusionColor)
+    , mEngine->getLightSystem()
+    , engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get())
+    , engine->storeBuffer<flc::IndexBuffer>(vao, shape)
+    , mAnimator.get()
+    , GL_TRIANGLES
+    , vao);
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
-  vbo->emptyCPU();
+  #error "option not suppoerted"
 #endif
   return mesh;
 }
@@ -327,15 +335,10 @@ void Model::log() const {
   // nothing
 }
 
-inline void Model::initShadowing(Engine* engine) {
-  ProgramLoader loader(engine);
-  if (mAnimator) {
-    mProgramShadow = loader.getProgram(EProgram::shadowWithAnimation);
-    mProgramShadowColor = loader.getProgram(EProgram::shadowColorCodedWithAnimation);
-    return;
-  }
-  mProgramShadow = loader.getProgram(EProgram::shadow);
-  mProgramShadowColor = loader.getProgram(EProgram::shadowColorCoded);
+inline void Model::initShadowing() {
+  mProgramShadow = mProgramLoader.getProgram(mAnimator ? EProgram::shadowWithAnimation : EProgram::shadow);
+  mProgramShadowColor =
+    mProgramLoader.getProgram(mAnimator ? EProgram::shadowColorCodedWithAnimation : EProgram::shadowColorCoded);
 }
 
 void Model::updateRenderer(IRenderer &renderer) {

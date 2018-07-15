@@ -210,7 +210,7 @@ void Uniform::push(GLint location, glm::mat4 data) {
 
 void Uniform::push(GLint location, glm::mat4 *data, GLuint size) {
   if (location == FILLWAVE_UNIFORM_NOT_FOUND) {
-    fLogE("No int uniform under location ", location);
+    fLogE("No mat4 uniform under location ", location);
   } else {
     glUniformMatrix4fv(location, size, GL_FALSE, reinterpret_cast<GLfloat *>(data));
     fLogC("Uniform var mat4 push failed");
