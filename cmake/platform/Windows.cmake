@@ -33,7 +33,7 @@ set ( FILLWAVE_INCLUDE_DIRECTORIES
     ${FILLWAVE_EXT_GLM_INCLUDES}
     ${FILLWAVE_EXT_FREETYPE2_INCLUDES}
     ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}
-    ${FILLWAVE_EXT_GLEW_INCLUDES}
+    ${FILLWAVE_BACKEND_INCLUDES}
     ${FILLWAVE_TEXTURE_WRITER_INCLUDES}
     ${FILLWAVE_TEXTURE_LOADER_INCLUDES}
     ${FILLWAVE_PATH_SOURCE_PARTICLES}
@@ -57,8 +57,9 @@ endif()
 
 add_custom_target (
     copy_win
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/glew/Debug/${FILLWAVE_GLEW_BUILD}d.lib ${CMAKE_CURRENT_BINARY_DIR}/Debug/
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/glew/Debug/${FILLWAVE_GLEW_BUILD}d.dll ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/backend/Debug/libbackend.lib
+    ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/backend/Debug/libbackendd.dll ${CMAKE_CURRENT_BINARY_DIR}/Debug/
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/examples/data/ ${CMAKE_CURRENT_BINARY_DIR}/Debug/
 )
 
@@ -67,9 +68,9 @@ add_custom_target (
 # -----------------------------------------------
 
 add_dependencies (
-    fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator)
+    fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator backend)
 target_link_libraries (
-    fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator)
+    fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator backend)
 
 # -----------------------------------------------
 # Installation

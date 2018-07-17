@@ -62,19 +62,16 @@ endif ()
 # Linker
 # -----------------------------------------------
 
-if (FILLWAVE_COMPILATION_PC_GLES)
-else ()
-  if (FILLWAVE_BUILD_PACK)
-    add_dependencies (fillwave ${FILLWAVE_GLAD_BUILD})
-    target_link_libraries (fillwave ${FILLWAVE_GLAD_BUILD})
-    include_directories (${FILLWAVE_EXT_GLAD_INCLUDES})
-  else ()
-    target_link_libraries (fillwave glad)
-  endif ()
-endif ()
+include_directories (${FILLWAVE_BACKEND_INCLUDES})
 
+add_dependencies (fillwave backend)
 target_link_libraries (
-    fillwave ${FILLWAVE_MODEL_LOADER} ${FILLWAVE_TEXTURE_LOADER} fontgenerator freetype)
+    fillwave
+    ${FILLWAVE_MODEL_LOADER}
+    ${FILLWAVE_TEXTURE_LOADER}
+    fontgenerator
+    freetype
+    backend)
 
 # -----------------------------------------------
 # Test app

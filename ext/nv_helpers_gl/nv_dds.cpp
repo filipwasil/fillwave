@@ -180,7 +180,7 @@
 #include <OpenGL/glext.h>
 #define GL_TEXTURE_RECTANGLE_NV GL_TEXTURE_RECTANGLE_EXT
 #else
-#include <GL/glew.h>
+#include <glad/glad.h>
 //#include <GL/gl.h>
 //#include <GL/glext.h>
 #endif
@@ -744,9 +744,9 @@ bool CDDSImage::upload_texture2D(unsigned int imageIndex, GLenum target)
 
   assert(image.get_height() > 0);
   assert(image.get_width() > 0);
-  assert(target == GL_TEXTURE_2D || target == GL_TEXTURE_RECTANGLE_NV ||
-         (target >= GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB &&
-          target <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB));
+  assert(target == GL_TEXTURE_2D || target == GL_TEXTURE_RECTANGLE ||
+         (target >= GL_TEXTURE_CUBE_MAP_POSITIVE_X &&
+          target <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z));
 
   if (is_compressed())
   {
@@ -861,7 +861,7 @@ bool CDDSImage::upload_texture3D()
 
 bool CDDSImage::upload_textureRectangle()
 {
-  return upload_texture2D(0, GL_TEXTURE_RECTANGLE_NV);
+  return upload_texture2D(0, GL_TEXTURE_RECTANGLE);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -879,7 +879,7 @@ bool CDDSImage::upload_textureCubemap()
   for (unsigned int n = 0; n < 6; n++)
   {
     // specify cubemap face
-    target = GL_TEXTURE_CUBE_MAP_POSITIVE_X_ARB + n;
+    target = GL_TEXTURE_CUBE_MAP_POSITIVE_X + n;
     if (!upload_texture2D(n, target))
       return false;
   }

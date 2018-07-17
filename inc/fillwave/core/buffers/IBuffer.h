@@ -89,8 +89,8 @@ protected:
   GLuint mDataStoreType;
   GLuint mIndex;
   GLvoid *mData;
-  GLulong mSize;
-  GLulong mTotalElements;
+  GLsizeiptr mSize;
+  GLuint mTotalElements;
 
   void setElements(GLuint elements);
 

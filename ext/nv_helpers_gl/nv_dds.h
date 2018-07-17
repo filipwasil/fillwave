@@ -14,7 +14,7 @@
 #include <OpenGL/gl.h>
 #include <OpenGL/glext.h>
 #else
-#include "GL/glew.h"
+#include "glad/glad.h"
 //#include <GL/gl.h>
 //#include <GL/glext.h>
 #endif

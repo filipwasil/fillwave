@@ -6,8 +6,16 @@
 
   # Include the gtest library. gtest_SOURCE_DIR is available due to
   # 'project(gtest)' above.
-  include_directories (${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/inc)
-  include_directories (${gmock_SOURCE_DIR}/include ${gmock_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/inc)
+
+  include_directories (
+      ${gtest_SOURCE_DIR}/include
+      ${gmock_SOURCE_DIR}/include
+      ${gtest_SOURCE_DIR}
+      ${gmock_SOURCE_DIR}
+      ${CMAKE_CURRENT_SOURCE_DIR}/inc
+      ${gmock_SOURCE_DIR}
+      ${FILLWAVE_BACKEND_INCLUDES}
+  )
 
   ##############
   # Unit Tests

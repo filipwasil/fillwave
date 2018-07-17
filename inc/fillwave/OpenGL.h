@@ -24,14 +24,17 @@
 #include <fillwave/Config.h>
 
 #if defined(__APPLE__)
+
 #include <OpenGL/gl3.h>
 #elif defined(_WIN32) || defined(_WIN64)
-#include <GL/glew.h>
+
+#include <glad/glad.h>
+
 #else /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
 
 void glesInitExtensions();
 
-#if defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES)
+#if defined(__ANDROID__) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 
 #define FILLWAVE_GLES_3_0
 #define GLFW_INCLUDE_ES2
@@ -43,13 +46,12 @@ void glesInitExtensions();
 #define glClearDepth glClearDepthf
 #define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE
 #define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
-#define GLulong GLuint
 
-#else /* defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES) */
+#else /* defined(__ANDROID__) || defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
 
-#include <GL/glew.h>
+#include <glad/glad.h>
 
-#endif /* defined(__ANDROID__) || defined(FILLWAVE_COMPILATION_PC_GLES) */
+#endif /* defined(__ANDROID__) || defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
 
 #endif /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
 

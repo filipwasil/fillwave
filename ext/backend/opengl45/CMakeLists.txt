@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.1)
 
-add_library(backend ${CMAKE_CURRENT_SOURCE_DIR}/glad/src/glad.c)
+if (WIN32)
+  add_library(backend STATIC ${CMAKE_CURRENT_SOURCE_DIR}/glad/src/glad.c)
+else()
+  add_library(backend SHARED ${CMAKE_CURRENT_SOURCE_DIR}/glad/src/glad.c)
+endif ()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/glad/include)
 

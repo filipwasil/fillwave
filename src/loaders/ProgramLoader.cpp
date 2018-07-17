@@ -169,12 +169,12 @@ const std::string vsShadowColorCoded = gGLVersion + gGLVSAttributes + "uniform m
     "}\n";
 
 const std::string vsShadowColorCodedAnimated = gGLVersion + gGLVSAttributes + gGLBones +
-                                               "uniform mat4 uMVP;                              \n"
-                                                   "uniform mat4 uModelMatrix;                      \n"
-                                                   "out vec3 vWorldSpacePosition;                   \n"
+                                               "uniform mat4 uMVP;\n"
+                                                   "uniform mat4 uModelMatrix;\n"
+                                                   "out vec3 vWorldSpacePosition;\n"
+                                                   "\n"
                                                    "void main() {\n"
-                                                   "   mat4 transformation = " + gGLVSBonesTransformation +
-                                               "           ;\n"
+                                                   "   mat4 transformation = " + gGLVSBonesTransformation + ";\n"
                                                    "   gl_Position = uMVP * transformation * aPosition;\n"
                                                    "   vWorldSpacePosition = (uModelMatrix * transformation * aPosition).xyz;\n"
                                                    "}\n";
@@ -1144,7 +1144,7 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
     case EProgram::shadowColorCodedWithAnimation:
       p = mEngine->storeProgram("shadow_mapping_animated_color", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_shadowing.frag", fsShadowColorCoded),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing.vert", vsShadowColorCodedAnimated)
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing_color.vert", vsShadowColorCodedAnimated)
       });
       break;
 

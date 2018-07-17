@@ -74,28 +74,21 @@ Engine::Engine(const std::string& runtimeBinaryFilePath)
 }
 
 void Engine::initExtensions() {
-#ifdef GLEW_OK
-  GLenum GlewInitResult;
-  glewExperimental = GL_TRUE;
+  if (gladLoadGL()) {
+    fLogD("OpenGL Version: ", glGetString(GL_VERSION));
+  } else {
+    fLogF("Extenstions failed to init");
+  }
 
-  GlewInitResult = glewInit();
   if (GL_NO_ERROR != glGetError()) {
     fLogE("glewInit returned INVALID_ENUM ... It may happen");
   }
 
-  if (GLEW_OK != GlewInitResult) {
-    fLogE("GLEW init failed. Error: ", GlewInitResult);
-    exit(EXIT_FAILURE);
-  } else {
-    fLogD("OpenGL Version: ", glGetString(GL_VERSION));
-  }
   GLint maxPatchVertices = 0;
   glGetIntegerv(GL_MAX_PATCH_VERTICES, &maxPatchVertices);
   fLogD("Max supported patches for tesselation: ", maxPatchVertices);
   // suppress error if tesselation is not supported
   glGetError();
-
-#endif /* GLEW_OK */
 }
 
 void Engine::initManagement() {
@@ -171,11 +164,11 @@ void Engine::initExtras() {
   /* Debugger */
   mDebugger = std::make_unique<flf::Debugger>(this);
 
-#ifdef FILLWAVE_COMPILATION_PC_GLES
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
   /* Tesselation */
   glPatchParameteri(GL_PATCH_VERTICES, 3);
-#endif // FILLWAVE_COMPILATION_PC_GLES
+#endif // FILLWAVE_BACKEND_OPENGL_ES_30
 
   /* Suppress error if setting up patch fails */
   glGetError();

@@ -1,1 +1,1 @@
-http://glad.dav1d.de/#profile=compatibility&specification=gl&api=gl%3D4.5&api=gles1%3Dnone&api=gles2%3Dnone&api=glsc2%3Dnone&language=c&loader=on
+http://glad.dav1d.de/#profile=compatibility&api=gl%3D4.5&api=gles1%3Dnone&api=gles2%3Dnone&api=glsc2%3Dnone&extensions=GL_ARB_texture_compression&extensions=GL_ARB_texture_rg&extensions=GL_EXT_bgra&extensions=GL_EXT_texture3D&extensions=GL_EXT_texture_compression_latc&extensions=GL_EXT_texture_compression_rgtc&extensions=GL_EXT_texture_compression_s3tc&language=c&specification=gl&loader=on

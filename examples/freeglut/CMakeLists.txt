@@ -15,7 +15,7 @@ endif ()
 aux_source_directory (. SRC_FILES)
 add_executable (${PROJECT_NAME} ${SRC_FILES})
 
-if (FILLWAVE_COMPILATION_PC_GLES)
+if (FILLWAVE_BACKEND_OPENGL_ES_30)
   set (FILLWAVE_FREEGLUT freeglut-gles)
 else ()
   set (FILLWAVE_FREEGLUT freeglut)
