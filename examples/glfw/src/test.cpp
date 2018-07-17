@@ -35,11 +35,11 @@ void init() {
 //    , flw::flf::Sphere(0.1)
 //    , engine->storeTexture("255_255_0.checkboard"));
 
-  auto cube = std::make_unique<Model>(
-    engine
-    , ProgramLoader(engine).getProgram(EProgram::basicAnimated)
-    , "meshes/floor.obj"
-    , engine->storeTexture("textures/beast/beast_dxt1.DDS"));
+//  auto cube = std::make_unique<Model>(
+//    engine
+//    , ProgramLoader(engine).getProgram(EProgram::basic)
+//    , "meshes/floor.obj"
+//    , engine->storeTexture("textures/beast/beast_dxt1.DDS"));
 
   auto model = std::make_unique<Model>(
     engine
@@ -50,7 +50,7 @@ void init() {
   model->rotateByX(glm::radians(90.0f));
   model->moveByZ(-1.0f);
   model->setActiveAnimation(0);
-  engine->getCurrentScene()->attach(std::move(cube));
+//  engine->getCurrentScene()->attach(std::move(cube));
   engine->getCurrentScene()->attach(std::move(model));
 
 
