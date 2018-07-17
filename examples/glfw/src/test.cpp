@@ -26,28 +26,31 @@ void init() {
   auto light = std::make_unique<Entity>();
   light->moveTo(glm::vec3(0.0, 0.0, 3.0));
 
-  /* Texture */
-  //auto textureN = engine->storeTexture("255_255_255.color");
-  //auto textureS = engine->storeTexture("");
-
   /* Lights */
   engine->storeLightSpot(glm::vec3(1.0, 1.0, 3.0), glm::quat(), glm::vec4(1.0, 1.0, 1.0, 0.0), light.get());
 
+//  auto cube = std::make_unique<Model>(
+//    engine
+//    , ProgramLoader(engine).getProgram(EProgram::basic)
+//    , flw::flf::Sphere(0.1)
+//    , engine->storeTexture("255_255_0.checkboard"));
+
   auto cube = std::make_unique<Model>(
     engine
-    , ProgramLoader(engine).getProgram(EProgram::basic)
-    , flw::flf::Sphere(0.1)
-    , engine->storeTexture("255_255_0.checkboard"));
-  engine->getCurrentScene()->attach(std::move(cube));
+    , ProgramLoader(engine).getProgram(EProgram::basicAnimated)
+    , "meshes/floor.obj"
+    , engine->storeTexture("textures/beast/beast_dxt1.DDS"));
 
   auto model = std::make_unique<Model>(
     engine
     , ProgramLoader(engine).getProgram(EProgram::basicAnimated)
     , "animations/beast/beast.dae"
     , engine->storeTexture("textures/beast/beast_dxt1.DDS"));
+
   model->rotateByX(glm::radians(90.0f));
   model->moveByZ(-1.0f);
   model->setActiveAnimation(0);
+  engine->getCurrentScene()->attach(std::move(cube));
   engine->getCurrentScene()->attach(std::move(model));
 
 

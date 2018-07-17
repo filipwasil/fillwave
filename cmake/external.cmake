@@ -5,8 +5,6 @@ set (FILLWAVE_EXT_FREETYPE2_PATH ${FILLWAVE_EXT_INCLUDES}/freetype2)
 set (FILLWAVE_EXT_FONTGENERATOR_INCLUDES ${FILLWAVE_EXT_INCLUDES}/fontgenerator)
 set (FILLWAVE_EXT_FONTGENERATOR_PATH ${FILLWAVE_EXT_INCLUDES}/fontgenerator)
 set (FILLWAVE_EXT_FONTGENERATOR_HEADERS ${FILLWAVE_EXT_FONTGENERATOR_INCLUDES}/fontGenerator.h)
-set (FILLWAVE_EXT_GLEW_PATH ${FILLWAVE_EXT_INCLUDES}/glew)
-set (FILLWAVE_EXT_GLEW_INCLUDES ${FILLWAVE_EXT_INCLUDES}/glew/include)
 set (FILLWAVE_EXT_GLFW_PATH ${FILLWAVE_EXT_INCLUDES}/glfw)
 set (FILLWAVE_EXT_COTIRE_PATH ${FILLWAVE_EXT_INCLUDES}/cotire)
 set (FILLWAVE_EXAMPLE_EDITOR_PATH ${CMAKE_CURRENT_SOURCE_DIR}/examples/editor)
@@ -15,6 +13,10 @@ set (FILLWAVE_LEVEL_EDITOR_PATH ${CMAKE_CURRENT_SOURCE_DIR}/tools/level_editor)
 set (FILLWAVE_LOADER_PATH ${CMAKE_CURRENT_SOURCE_DIR}/src/loaders)
 set (FILLWAVE_EXAMPLES_DATA ${CMAKE_CURRENT_SOURCE_DIR}/examples/data)
 set (FILLWAVE_LEVEL_EDITOR_ICONS ${CMAKE_CURRENT_SOURCE_DIR}/tools/level_editor/icons)
+
+# -----------------------------------------------
+# Model loader
+# -----------------------------------------------
 
 if (FILLWAVE_MODEL_LOADER_ASSIMP)
   set (FILLWAVE_MODEL_LOADER assimp)
@@ -31,6 +33,29 @@ else ()
   aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/modelloader/default FILLWAVE_MODEL_LOADER_TRAITS)
 endif ()
 
+# -----------------------------------------------
+# Backend
+# -----------------------------------------------
+
+if (FILLWAVE_BACKEND_OPENGL_45)
+  set (FILLWAVE_BACKEND_PATH ${FILLWAVE_EXT_INCLUDES}/backend/opengl45)
+elseif(FILLWAVE_BACKEND_OPENGL_33)
+  set (FILLWAVE_BACKEND_PATH ${FILLWAVE_EXT_INCLUDES}/backend/opengl33)
+elseif(FILLWAVE_BACKEND_OPENGL_ES_32)
+  set (FILLWAVE_BACKEND_PATH ${FILLWAVE_EXT_INCLUDES}/backend/opengles32)
+elseif(FILLWAVE_BACKEND_OPENGL_ES_30)
+  set (FILLWAVE_BACKEND_PATH ${FILLWAVE_EXT_INCLUDES}/backend/opengles30)
+elseif(FILLWAVE_BACKEND_OPENGL_ES_20)
+  set (FILLWAVE_BACKEND_PATH ${FILLWAVE_EXT_INCLUDES}/backend/opengles20)
+endif ()
+add_subdirectory (${FILLWAVE_BACKEND_PATH})
+
+set (FILLWAVE_BACKEND_INCLUDES ${FILLWAVE_BACKEND_PATH}/glad/include)
+
+# -----------------------------------------------
+# Texture loader
+# -----------------------------------------------
+
 set (FILLWAVE_TEXTURE_WRITER_INCLUDES ${FILLWAVE_EXT_INCLUDES}/stb)
 
 if (FILLWAVE_TEXTURE_LOADER_CUSTOM)
@@ -43,11 +68,3 @@ else()
   aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/src/loaders/textureloader/stb FILLWAVE_TEXTURE_LOADER_TRAITS)
   add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/ext/nv_helpers_gl)
 endif()
-
-if (CMAKE_SIZEOF_VOID_P EQUAL 4)
-  set (FILLWAVE_GLEW_BUILD glew32)
-elseif (CMAKE_SIZEOF_VOID_P EQUAL 8)
-  set (FILLWAVE_GLEW_BUILD glew64)
-else ()
-  message (FATAL_ERROR "Data width could not be determined!")
-endif ()

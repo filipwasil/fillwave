@@ -10,16 +10,25 @@ option (FILLWAVE_BUILD_TGZ "Build tgz packages" OFF)
 option (FILLWAVE_BUILD_PACK "Do not build external packages when not needed (Linux builds)" OFF)
 
 # -----------------------------------------------
-# Platform options
+# Compilation options
 # -----------------------------------------------
 
 option (FILLWAVE_COMPILATION_STARTUP_ANIMATION "Run startup animation before any other action" OFF)
 option (FILLWAVE_COMPILATION_PC_GLES "Use GLES stub for PC" OFF)
-option (FILLWAVE_COMPILATION_OPENGL_4_5 "Support new devices with gl 4.5 support" OFF)
 option (FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS "Usable for mesa shader compiler" ON)
 option (FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE "Asset data are stored only in GPU" OFF)
 option (FILLWAVE_COMPILATION_SUPPRESS_WARNINGS "Suppress warnings during compilation" OFF)
 option (FILLWAVE_COMPILATION_RELEASE "Build type" OFF)
+
+# -----------------------------------------------
+# Backend options
+# -----------------------------------------------
+
+option (FILLWAVE_BACKEND_OPENGL_33 "Using OpenGL 3.3 core profile" OFF)
+option (FILLWAVE_BACKEND_OPENGL_45 "Using OpenGL 4.5 core profile" ON)
+option (FILLWAVE_BACKEND_OPENGL_ES_20 "Using OpenGL ES 2.0 core profile" OFF)
+option (FILLWAVE_BACKEND_OPENGL_ES_30 "Using OpenGL ES 3.0 core profile" OFF)
+option (FILLWAVE_BACKEND_OPENGL_ES_32 "Using OpenGL ES 3.2 core profile" OFF)
 
 # -----------------------------------------------
 # Tests related options
