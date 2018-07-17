@@ -16,7 +16,6 @@ set(BUILD_CPU_DEMOS OFF)
 # -----------------------------------------------
 
 add_subdirectory (${FILLWAVE_MODEL_LOADER_PATH})
-add_subdirectory (${FILLWAVE_EXT_GLEW_PATH})
 add_subdirectory (${FILLWAVE_EXT_FREETYPE2_PATH})
 add_subdirectory (${FILLWAVE_EXT_GLFW_PATH})
 add_subdirectory (${FILLWAVE_EXT_FONTGENERATOR_PATH})
@@ -56,9 +55,8 @@ endif()
 
 add_custom_target (
     copy_win
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/backend/Debug/libbackend.lib
-    ${CMAKE_CURRENT_BINARY_DIR}/Debug/
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/backend/Debug/libbackendd.dll ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/backend/${FILLWAVE_BACKEND}/Debug/libbackendd.lib ${CMAKE_CURRENT_BINARY_DIR}/Debug/
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/ext/backend/${FILLWAVE_BACKEND}/Debug/libbackendd.dll ${CMAKE_CURRENT_BINARY_DIR}/Debug/
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/examples/data/ ${CMAKE_CURRENT_BINARY_DIR}/Debug/
 )
 
