@@ -51,43 +51,43 @@ void CameraPerspective::updateProjection() {
                                        mProjectionAspectRatio,
                                        mProjectionNearPlane,
                                        mProjectionFarPlane);
-  mRefreshProjection = GL_FALSE;
+  mRefreshProjection = false;
 }
 
-GLfloat CameraPerspective::getProjectionFovy() {
+GLfloat CameraPerspective::getProjectionFovy() const {
   return mProjectionFovy;
 }
 
-GLfloat CameraPerspective::getProjectionAspectRatio() {
+GLfloat CameraPerspective::getProjectionAspectRatio() const {
   return mProjectionAspectRatio;
 }
 
-GLfloat CameraPerspective::getProjectionNearPlane() {
+GLfloat CameraPerspective::getProjectionNearPlane() const {
   return mProjectionNearPlane;
 }
 
-GLfloat CameraPerspective::getProjectionFarPlane() {
+GLfloat CameraPerspective::getProjectionFarPlane() const {
   return mProjectionFarPlane;
 }
 
 void CameraPerspective::setProjectionFovy(GLfloat fovy) {
   mProjectionFovy = fovy;
-  mRefreshProjection = GL_TRUE;
+  mRefreshProjection = true;
 }
 
 void CameraPerspective::setProjectionAspectRatio(GLfloat aspect) {
   mProjectionAspectRatio = aspect;
-  mRefreshProjection = GL_TRUE;
+  mRefreshProjection = true;
 }
 
 void CameraPerspective::setProjectionNearPlane(GLfloat nearPlane) {
   mProjectionNearPlane = nearPlane;
-  mRefreshProjection = GL_TRUE;
+  mRefreshProjection = true;
 }
 
 void CameraPerspective::setProjectionFarPlane(GLfloat farPlane) {
   mProjectionFarPlane = farPlane;
-  mRefreshProjection = GL_TRUE;
+  mRefreshProjection = true;
 }
 
 } /* flf */

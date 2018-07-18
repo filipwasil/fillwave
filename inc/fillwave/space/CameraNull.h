@@ -38,9 +38,9 @@ public:
 
   void updateProjection();
 
-  GLfloat getProjectionNearPlane();
+  GLfloat getProjectionNearPlane() const;
 
-  GLfloat getProjectionFarPlane();
+  GLfloat getProjectionFarPlane() const;
 };
 
 } /* flf */

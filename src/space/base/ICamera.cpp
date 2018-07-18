@@ -29,12 +29,20 @@ namespace flw {
 namespace flf {
 
 ICamera::ICamera(glm::vec3 position, glm::quat rotation)
-    : Moveable(position, rotation), mRefreshView(GL_TRUE), mRefreshProjection(GL_TRUE) {
+  : Moveable(position, rotation)
+  , mCameraMatrix(1.0)
+  , mProjectionMatrix(1.0)
+  , mRefreshView(true)
+  , mRefreshProjection(true) {
   updateView();
 }
 
 ICamera::ICamera()
-    : Moveable(glm::vec3(0.0, 0.0, 1.0)), mRefreshView(GL_TRUE), mRefreshProjection(GL_TRUE) {
+  : Moveable(glm::vec3(0.0, 0.0, 1.0))
+  , mCameraMatrix(1.0)
+  , mProjectionMatrix(1.0)
+  , mRefreshView(true)
+  , mRefreshProjection(true) {
   updateView();
 }
 
@@ -51,12 +59,14 @@ ICamera& ICamera::operator=(ICamera &&) = default;
 inline void ICamera::updateView() {
   updateMatrixCache();
 
-  mCameraMatrix = glm::lookAt(mTranslation,
-                              mTranslation + glm::vec3((glm::mat4_cast(mRotation) * glm::vec4(0.0, 0.0, -1.0, 1.0))),
-                              glm::vec3((glm::mat4_cast(mRotation) * glm::vec4(0.0, 1.0, 0.0, 1.0))));
+  mCameraMatrix = glm::lookAt(
+    mTranslation
+    , mTranslation + glm::vec3((glm::mat4_cast(mRotation) * glm::vec4(0.0, 0.0, -1.0, 1.0)))
+    , glm::vec3((glm::mat4_cast(mRotation) * glm::vec4(0.0, 1.0, 0.0, 1.0)))
+  );
 
-  mRefreshView = GL_FALSE;
-  mRefresh = GL_FALSE;
+  mRefreshView = false;
+  mRefresh = false;
 }
 
 void ICamera::update() {
@@ -74,15 +84,15 @@ void ICamera::log() const {
   fLogI("Position: ", mTranslation[0], "", mTranslation[1], "", mTranslation[2]);
 }
 
-glm::mat4 ICamera::getEye() {
+glm::mat4 ICamera::getEye() const {
   return mCameraMatrix;
 }
 
-glm::mat4 ICamera::getProjection() {
+glm::mat4 ICamera::getProjection() const {
   return mProjectionMatrix;
 }
 
-glm::mat4 ICamera::getViewProjection() {
+glm::mat4 ICamera::getViewProjection() const {
   return mProjectionMatrix * mCameraMatrix;
 }
 

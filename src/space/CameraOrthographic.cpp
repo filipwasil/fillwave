@@ -67,14 +67,14 @@ void CameraOrthographic::updateProjection() {
     , mCullingBox.mProjectionNear
     , mCullingBox.mProjectionFar);
 
-  mRefreshProjection = GL_FALSE;
+  mRefreshProjection = false;
 }
 
-GLfloat CameraOrthographic::getProjectionNearPlane() {
+GLfloat CameraOrthographic::getProjectionNearPlane() const {
   return mCullingBox.mProjectionNear;
 }
 
-GLfloat CameraOrthographic::getProjectionFarPlane() {
+GLfloat CameraOrthographic::getProjectionFarPlane() const {
   return mCullingBox.mProjectionFar;
 }
 

@@ -1136,7 +1136,7 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
 
     case EProgram::shadowWithAnimation:
       p = mEngine->storeProgram("shadow_mapping_animated", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty_animated.frag", fsEmpty),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing.vert", vsShadowAnimated)
       });
       break;

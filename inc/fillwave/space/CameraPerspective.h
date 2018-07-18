@@ -47,13 +47,13 @@ public:
       GLfloat nearPlane = 0.01f,
       GLfloat farPlane = 100.0f);
 
-  GLfloat getProjectionFovy();
+  GLfloat getProjectionFovy() const;
 
-  GLfloat getProjectionAspectRatio();
+  GLfloat getProjectionAspectRatio() const;
 
-  GLfloat getProjectionNearPlane() override;
+  GLfloat getProjectionNearPlane() const override;
 
-  GLfloat getProjectionFarPlane() override;
+  GLfloat getProjectionFarPlane() const override;
 
   void updateProjection() override;
 

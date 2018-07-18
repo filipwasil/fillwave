@@ -36,7 +36,7 @@ class ICamera : public Moveable {
 public:
   ICamera();
 
-  ICamera(glm::vec3, glm::quat rotation);
+  ICamera(glm::vec3 position, glm::quat rotation);
 
   ~ICamera() override;
 
@@ -53,17 +53,17 @@ public:
 
   void updateView();
 
-  glm::mat4 getEye();
+  glm::mat4 getEye() const;
 
-  glm::mat4 getProjection();
+  glm::mat4 getProjection() const;
 
-  glm::mat4 getViewProjection();
+  glm::mat4 getViewProjection() const;
 
   virtual void updateProjection() = 0;
 
-  virtual GLfloat getProjectionNearPlane() = 0;
+  virtual GLfloat getProjectionNearPlane() const = 0;
 
-  virtual GLfloat getProjectionFarPlane() = 0;
+  virtual GLfloat getProjectionFarPlane() const = 0;
 
   virtual void log() const;
 
@@ -71,8 +71,8 @@ protected:
   glm::mat4 mCameraMatrix;
   glm::mat4 mProjectionMatrix;
 
-  GLboolean mRefreshView;
-  GLboolean mRefreshProjection;
+  bool mRefreshView;
+  bool mRefreshProjection;
 };
 
 } /* flf */

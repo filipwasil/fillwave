@@ -64,9 +64,9 @@ public:
 
   void updateProjection() override;
 
-  GLfloat getProjectionNearPlane() override;
+  GLfloat getProjectionNearPlane() const override;
 
-  GLfloat getProjectionFarPlane() override;
+  GLfloat getProjectionFarPlane() const override;
 
 private:
   CullingBox mCullingBox;

@@ -25,21 +25,18 @@ namespace flw {
 namespace flf {
 
 CameraNull::CameraNull() {
-  mProjectionMatrix = glm::mat4(1.0);
-  mCameraMatrix = glm::mat4(1.0);
-  mRefreshProjection = GL_FALSE;
-  mRefreshView = GL_FALSE;
+  // nothing
 }
 
 void CameraNull::updateProjection() {
   //nothing to be done here
 }
 
-GLfloat CameraNull::getProjectionNearPlane() {
+GLfloat CameraNull::getProjectionNearPlane() const {
   return 0.0f;
 }
 
-GLfloat CameraNull::getProjectionFarPlane() {
+GLfloat CameraNull::getProjectionFarPlane() const {
   return 0.0f;
 }
 
