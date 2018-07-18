@@ -25,7 +25,7 @@ namespace flw {
 namespace flf {
 
 CameraOrthographic::CameraOrthographic()
-    : ICamera(glm::vec3(0.0f, 0.0f, 0.0f), glm::quat()) {
+  : ICamera(glm::vec3(0.0f, 0.0f, 0.0f), glm::quat()) {
 
   mCullingBox.mProjectionBottom = 10.0f;
   mCullingBox.mProjectionFar = 10.0f;
@@ -37,33 +37,35 @@ CameraOrthographic::CameraOrthographic()
   updateProjection();
 }
 
-CameraOrthographic::CameraOrthographic(glm::vec3 position,
-    glm::quat rotation,
-    GLfloat left,
-    GLfloat right,
-    GLfloat bottom,
-    GLfloat top,
-    GLfloat near,
-    GLfloat far)
-    : ICamera(position, rotation) {
+CameraOrthographic::CameraOrthographic(
+  glm::vec3 position
+  , glm::quat rotation
+  , GLfloat leftPlane
+  , GLfloat rightPlane
+  , GLfloat bottomPlane
+  , GLfloat topPlane
+  , GLfloat nearPlane
+  , GLfloat farPlane)
+  : ICamera(position, rotation) {
 
-  mCullingBox.mProjectionBottom = bottom;
-  mCullingBox.mProjectionFar = far;
-  mCullingBox.mProjectionLeft = left;
-  mCullingBox.mProjectionNear = near;
-  mCullingBox.mProjectionRight = right;
-  mCullingBox.mProjectionTop = top;
+  mCullingBox.mProjectionBottom = bottomPlane;
+  mCullingBox.mProjectionFar = farPlane;
+  mCullingBox.mProjectionLeft = leftPlane;
+  mCullingBox.mProjectionNear = nearPlane;
+  mCullingBox.mProjectionRight = rightPlane;
+  mCullingBox.mProjectionTop = topPlane;
 
   updateProjection();
 }
 
 void CameraOrthographic::updateProjection() {
-  mProjectionMatrix = glm::ortho(mCullingBox.mProjectionLeft,
-                                 mCullingBox.mProjectionRight,
-                                 mCullingBox.mProjectionBottom,
-                                 mCullingBox.mProjectionTop,
-                                 mCullingBox.mProjectionNear,
-                                 mCullingBox.mProjectionFar);
+  mProjectionMatrix = glm::ortho(
+    mCullingBox.mProjectionLeft
+    , mCullingBox.mProjectionRight
+    , mCullingBox.mProjectionBottom
+    , mCullingBox.mProjectionTop
+    , mCullingBox.mProjectionNear
+    , mCullingBox.mProjectionFar);
 
   mRefreshProjection = GL_FALSE;
 }
