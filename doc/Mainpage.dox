@@ -12,7 +12,6 @@ Fillwave C++14 OpenGL/OpenGLES graphics engine
 
 <ul>
 <li> <a href="http://www.glfw.org"> glfw</a> released under <a href="v"> zlib/libpng (a BSD-like) license</a></li>
-<li> <a href="https://github.com/omniavinco/glew-cmake"> glew </a> released under <a href="http://glew.sourceforge.net/glew.txt"> Modified BSD license</a>, the<a href="http://glew.sourceforge.net/mesa.txt"> Mesa 3-D License (MIT License)</a>  and the <a href="http://glew.sourceforge.net/khronos.txt"> the Khronos License (MIT License)</a></li>
 <li> <a href="http://assimp.sourceforge.net/"> assimp</a> released under <a href="http://assimp.sourceforge.net/main_license.html">  3-clause BSD license</a></li>
 <li> <a href="http://glm.g-truc.net"> glm</a> released under <a href="http://glm.g-truc.net/copying.txt"> MIT license</a> </li>
 <li> <a href="http://www.freetype.org"> freetype</a> released under <a href="http://git.savannah.gnu.org/cgit/freetype/freetype2.git/tree/docs/FTL.TXT"> FreeType License</a></li>

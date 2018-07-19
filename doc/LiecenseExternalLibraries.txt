@@ -1,26 +1,3 @@
-/*************************************************************************
- *
- * Fillwave C++14 graphics Engine
- *
- * Copyright (C) 2015 Fillwave developers
- *
- *  All Rights Reserved.
- *
- * This library is available free of charge for any commercial
- * or non-commercial use. However, You are obligated to put a clearly
- * visible information in Your license agreement that Your Software
- * uses Fillwave if so.
- *
- * If You are interested in extra support, extra features
- * or cooperation We look forward to hearing from You.
- *
- * fillwave@gmail.com
- *
- */
-
-* OpenGL
-http://www.opengl.org/
-
 * AssImp library
 Open Asset Import Library (assimp)
 

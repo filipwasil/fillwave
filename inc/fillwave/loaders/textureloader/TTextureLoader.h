@@ -29,9 +29,6 @@
 namespace flw {
 namespace flf {
 
-/*! \class Textureloader
- * \brief Loads textures
- */
 template<class Traits>
 struct TTextureLoader {
 

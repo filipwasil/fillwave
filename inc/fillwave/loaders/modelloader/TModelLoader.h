@@ -23,7 +23,7 @@
 
 #include <fillwave/loaders/modelloader/ModelLoaderTraits.h>
 #include <fillwave/models/base/Material.h>
-#include <fillwave/common/Nothing.h>
+#include <fillwave/common/Empty.h>
 #include <fillwave/loaders/modelloader/AnimatorDefault.h>
 
 namespace flw {
@@ -45,42 +45,42 @@ struct TModelLoader final {
   template <typename C>
   static typename C::NodeType getNodeType(bool);
   template <typename C>
-  static Nothing getNodeType(...);
+  static flw::Empty getNodeType(...);
 
   using NodeType = decltype(getNodeType<Traits>(0));
 
   template <typename C>
   static typename C::SceneType getSceneType(bool);
   template <typename C>
-  static Nothing getSceneType(...);
+  static flw::Empty getSceneType(...);
 
   using SceneType = decltype(getSceneType<Traits>(0));
 
   template <typename C>
   static typename C::ShapeType getShapeType(bool);
   template <typename C>
-  static Nothing getShapeType(...);
+  static flw::Empty getShapeType(...);
 
   using ShapeType = decltype(getShapeType<Traits>(0));
 
   template <typename C>
   static typename C::MaterialType getMaterialType(bool);
   template <typename C>
-  static Nothing getMaterialType(...);
+  static flw::Empty getMaterialType(...);
 
   using MaterialType = decltype(getMaterialType<Traits>(0));
 
   template <typename C>
   static typename C::TextureType getTextureType(bool);
   template <typename C>
-  static Nothing getTextureType(...);
+  static flw::Empty getTextureType(...);
 
   using TextureType = decltype(getTextureType<Traits>(0));
 
   template <typename C>
   static typename C::String getString(bool);
   template <typename C>
-  static Nothing getString(...);
+  static flw::Empty getString(...);
 
   using String = decltype(getString<Traits>(0));
 

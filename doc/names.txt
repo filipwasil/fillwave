@@ -1,5 +1,9 @@
+PO - Program Object
 OC - Occlusio Querry
 AO - Ambient Occlusion
-VAO - Vertex Buffer Object
-VBO - VertexBufferObject
-IBO - IndexBufferObject
+SSAO - Screen Space Ambient Occlusion
+VAO - Vertex Array Object
+VBO - Vertex Buffer Object
+IBO - Index Buffer Object
+UBO - Uniform Buffer Object
+PBO - Pixel Buffer Object

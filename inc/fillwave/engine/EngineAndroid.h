@@ -25,6 +25,12 @@
 
 struct ANativeActivity;
 
+namespace flw {
+
+/*! \class EngineAndroid
+ * \brief Android implementation specific
+ */
+
 class EngineAndroid {
  public:
 
@@ -32,3 +38,5 @@ class EngineAndroid {
 
   EngineAndroid(ANativeActivity* activity);
 };
+
+} /* flw */

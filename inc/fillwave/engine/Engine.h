@@ -73,7 +73,7 @@ class VertexBufferFloat;
 class VertexBufferPosition;
 }
 
-/*! \class EngineBase
+/*! \class Engine
  * \brief Fillwave engine core
  */
 

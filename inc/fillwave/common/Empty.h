@@ -21,6 +21,14 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-struct Nothing {
+namespace flw {
+
+/*! \class Empty
+ * \brief Empty class for various purposes
+ */
+
+struct Empty {
   // nothing
 };
+
+} /* flw */

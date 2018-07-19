@@ -2,6 +2,7 @@ src - source files
 inc - header files
 ext - external subprojects
 examples - Example projects
-scripts - Usable scripts
 cmake - cmake macros
-cmake/platform - cmake macros specific for each OS 
+benchmarks - google benchmark test bench
+tools - level editor for fillwave
+cmake/platform - cmake macros specific for each OS

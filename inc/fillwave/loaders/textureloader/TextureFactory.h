@@ -27,9 +27,10 @@
 namespace flw {
 namespace flf {
 
-/*! \class TextureGenerator
+/*! \class TextureFactory
  * \brief Generates textures
  */
+
 struct TextureFactory {
   static flc::TextureConfig* loadEmpty(
     GLint screenWidth

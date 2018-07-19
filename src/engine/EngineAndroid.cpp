@@ -24,6 +24,10 @@
 
 namespace flw {
 
+/*! \class EngineAndroid
+ * \brief Not used. Not implemented yet.
+ */
+
 EngineAndroid::EngineAndroid(const string& rootPath)
   : Engine(rootPath) {
   // nothing
