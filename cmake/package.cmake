@@ -8,11 +8,11 @@ set (CPACK_PACKAGE_VERSION_PATCH 0)
 set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "Fillwave graphics engine - library package")
 set (CPACK_DEBIAN_PACKAGE_MAINTAINER "Filip Wasil <fillwave@gmail.com>")
 set (CPACK_DEBIAN_PACKAGE_DEBUG ON)
-set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/doc/LICENSE.txt")
+set (CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
 set (CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/doc/Description.txt")
 set (CPACK_PACKAGE_DESCRIPTION "Fillwave is a free OpenGL 3.3+ graphics engine for Linux and OSX.")
 
-set (CPACK_PACKAGE_HOMEPAGE "filipwasil.bitbucket.org/fillwave")
+set (CPACK_PACKAGE_HOMEPAGE "https://filipwasil.bitbucket.io/fillwave")
 
 set (CPACK_NSIS_COMPRESSOR "/FINAL zlib")
 set (CPACK_NSIS_MODIFY_PATH ON)
