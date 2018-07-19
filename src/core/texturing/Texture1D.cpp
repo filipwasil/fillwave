@@ -21,8 +21,8 @@
 
 #include <fillwave/core/texturing/Texture1D.h>
 
-#ifdef FILLWAVE_GLES_3_0
-#else /* FILLWAVE_GLES_3_0 */
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
 namespace flw {
 namespace flc {
 
@@ -38,4 +38,4 @@ void Texture1D::log() {
 } /* flc */
 } /* flw */
 
-#endif /* FILLWAVE_GLES_3_0 */
+#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */

@@ -47,10 +47,12 @@ CameraPerspective::CameraPerspective(glm::vec3 position,
 }
 
 void CameraPerspective::updateProjection() {
-  mProjectionMatrix = glm::perspective(mProjectionFovy,
-                                       mProjectionAspectRatio,
-                                       mProjectionNearPlane,
-                                       mProjectionFarPlane);
+  mProjectionMatrix = glm::perspective(
+    mProjectionFovy
+    , mProjectionAspectRatio
+    , mProjectionNearPlane
+    , mProjectionFarPlane
+  );
   mRefreshProjection = false;
 }
 

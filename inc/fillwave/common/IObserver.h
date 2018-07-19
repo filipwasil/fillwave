@@ -43,7 +43,7 @@ public:
 
   IObserver& operator=(IObserver &&);
 
-  virtual void onDeath(Observable* observable) = 0;
+  virtual void onDestroy(Observable* observable) = 0;
 
   virtual void onChanged(Observable* observable) = 0;
 };

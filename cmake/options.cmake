@@ -13,7 +13,6 @@ option (FILLWAVE_BUILD_PACK "Do not build external packages when not needed (Lin
 # Compilation options
 # -----------------------------------------------
 
-option (FILLWAVE_COMPILATION_STARTUP_ANIMATION "Run startup animation before any other action" OFF)
 option (FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS "Usable for mesa shader compiler" ON)
 option (FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE "Asset data are stored only in GPU" OFF)
 option (FILLWAVE_COMPILATION_SUPPRESS_WARNINGS "Suppress warnings during compilation" OFF)

@@ -33,7 +33,7 @@ namespace flf {
 */
 
 class Observable {
-public:
+ public:
   Observable();
 
   virtual ~Observable();
@@ -50,9 +50,10 @@ public:
 
   void dropObserver(IObserver* observer);
 
+ protected:
   void notifyObservers();
 
-protected:
+ private:
   std::vector<IObserver*> mObservers;
 };
 

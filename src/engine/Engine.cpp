@@ -55,7 +55,6 @@ Engine::Engine(const std::string& runtimeBinaryFilePath)
   , mShaders()
   , mFrameCounter(0)
   , mTimeFactor(1.0f)
-  , mStartupTime(0.0f)
   , mIsOQ(GL_TRUE)
   , mBackgroundColor(0.1f, 0.1f, 0.1f) {
   initExtensions();
@@ -67,9 +66,6 @@ Engine::Engine(const std::string& runtimeBinaryFilePath)
   initOcclusionTest();
   initExtras();
 
-#ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
-  initStartup(engine);
-#endif
 //   mFence = puFence(new flc::Fence());
 }
 
@@ -120,39 +116,6 @@ void Engine::initOcclusionTest() {
   mVBOOcclusion->attributesSetForVAO();
   mVBOOcclusion->send();
   flc::VertexArray::unbindVAO();
-}
-
-void Engine::initStartup() {
-
-  auto program = mProgramLoader.getProgram(flf::EProgram::quadCustomFragmentShaderStartup);
-
-  program->use();
-  program->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
-  program->uniformPush("uScreenFactor", mWindowAspectRatio);
-  flc::Program::disusePrograms();
-
-  mPostProcessingPassStartup =
-    std::make_unique<flc::PostProcessingPass>(
-      program
-      , mTextures->getDynamic("fillwave_quad_startup.frag"
-        , program
-        , glm::ivec2(mWindowWidth, mWindowHeight)),
-      mStartupTimeLimit);
-
-  fLogD("Post processing startup pass added");
-
-  mStartupTexture = mTextures->get("logo.png");
-  if (mStartupTexture) {
-    return;
-  }
-
-  mStartupTexture = mTextures->get("textures/logo.png");
-  if (mStartupTexture) {
-    return;
-  }
-
-  mStartupTexture = mTextures->get("64_64_64.color");
-  fLogE("Fillwave startup logo could not be executed");
 }
 
 void Engine::initPickingBuffer() {
@@ -241,13 +204,11 @@ void Engine::configTime(GLfloat timeFactor) {
 }
 
 flf::LightSpot* Engine::storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
-  return mLights->mLightsSpot.add(
-    mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
+  return mLights->mLightsSpot.add(mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
 }
 
 flf::LightPoint* Engine::storeLightPoint(glm::vec3 pos, glm::vec4 col, flf::Moveable* observed) {
-  return mLights->mLightsPoint.add(
-    mTextures->getShadow3D(mWindowWidth, mWindowHeight), pos, col, observed);
+  return mLights->mLightsPoint.add(mTextures->getShadow3D(mWindowWidth, mWindowHeight), pos, col, observed);
 }
 
 flf::LightDirectional*
@@ -406,13 +367,9 @@ GLfloat Engine::getScreenAspectRatio() const {
   return mWindowAspectRatio;
 }
 
-GLuint Engine::getFramesPassed() {
+GLuint Engine::getAndResetRenderedFramesCount() {
   mFrameCounter = 0;
   return mFrameCounter;
-}
-
-GLfloat Engine::getStartupAnimationTime() const {
-  return mStartupTimeLimit;
 }
 
 void Engine::setCurrentScene(pu<flf::Scene> &&scene) {
@@ -459,12 +416,14 @@ void Engine::addPostProcess(const string& fragmentShaderPath, GLfloat lifeTime) 
 
 void Engine::configFPSCounter(string fontName, glm::vec2 position, GLfloat size) {
   if (fontName.size() > 1) {
-    mFPSText = storeText("", fontName, position, size);
-    //mTextFPSCallback.set(mFPSText);
+    mFPSText = storeText("FPS", fontName, position, size);
+    this->attachHandler(
+      [this](const flf::Event& event){
+        this->mFPSText->editString("FPS: " + to_string(1.0f / event.getData().mTime.timePassed));
+      }, flf::EEventType::time);
     return;
   }
   mFPSText.reset();
-  //detachCallback(mTextFPSCallback);
 }
 
 void Engine::configFileLogging(string fileName) {
@@ -490,7 +449,7 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
   mPickingPixelBuffer->bind();
   glReadPixels(0, 0, mWindowWidth, mWindowHeight, format, GL_UNSIGNED_BYTE, 0);
   fLogC("reading pixel buffer failed");
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
   buffer = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
   buffer = (GLubyte* ) mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -596,16 +555,7 @@ VertexBufferBasic* Engine::storeBufferInternal(
   return mBuffers.mVertices.store(ModelLoader::getVertexBuffer(shape, animator), vao);
 }
 
-void Engine::draw(GLfloat time) {
-#ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
-  /* Draw startup animation */
-  if (mStartupTime < mStartupTimeLimit) {
-    evaluateStartupAnimation(time);
-    mStartupTime += time;
-    return;
-  }
-#endif
-
+void Engine::draw() {
   if (mScene) {
     /* count this frame */
     mFrameCounter++;
@@ -614,37 +564,26 @@ void Engine::draw(GLfloat time) {
     glClearDepth(1.0f);
 
     /* Calculate dynamic textures */
-    mTextures->evaluateDynamicTextures(time);
+    mTextures->drawDynamicTextures();
 
     /* Lights evaluation */
     glDepthMask(GL_TRUE);
-    evaluateShadowMaps();
-    drawScene(time);
+    populateLights();
+    drawScene();
     drawFront();
   }
 }
 
 void Engine::drawFront() {
   drawHUD();
-  evaluateDebugger();
+  populateDebugger();
   mScene->drawCursor();
-  mScene->updateDependencies();
-  mScene->updateRenderer();
 }
 
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
 
-void Engine::drawLines(GLfloat time) {
-
-#ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
-  /* Draw startup animation */
-  if (mStartupTime < mStartupTimeLimit) {
-    evaluateStartupAnimation(time);
-    mStartupTime += time;
-    return;
-  }
-#endif
+void Engine::drawLines() {
 
   /* count this frame */
   mFrameCounter++;
@@ -653,29 +592,19 @@ void Engine::drawLines(GLfloat time) {
   glClearDepth(1.0f);
 
   /* Calculate dynamic textures */
-  mTextures->evaluateDynamicTextures(time);
+  mTextures->drawDynamicTextures();
 
   /* Lights evaluation */
   if (mScene) {
-    evaluateShadowMaps();
+    populateLights();
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    drawScene(time);
+    drawScene();
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     drawFront();
   }
 }
 
-void Engine::drawPoints(GLfloat time) {
-
-#ifdef FILLWAVE_COMPILATION_STARTUP_ANIMATION
-  /* Draw startup animation */
-  if (mStartupTime < mStartupTimeLimit) {
-    evaluateStartupAnimation(time);
-    mStartupTime += time;
-    return;
-  }
-#endif
-
+void Engine::drawPoints() {
   /* count this frame */
   mFrameCounter++;
 
@@ -683,13 +612,13 @@ void Engine::drawPoints(GLfloat time) {
   glClearDepth(1.0f);
 
   /* Calculate dynamic textures */
-  mTextures->evaluateDynamicTextures(time);
+  mTextures->drawDynamicTextures();
 
   /* Lights evaluation */
   if (mScene) {
-    evaluateShadowMaps();
+    populateLights();
     glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-    drawScene(time);
+    drawScene();
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     drawFront();
   }
@@ -728,70 +657,75 @@ void Engine::drawClear() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void Engine::drawScene(GLfloat time) {
-
-  evaluateTime(time);
-
-  if (mPostProcessingPasses.size()) {
-    auto _compare_function = [](flc::PostProcessingPass &pass) -> bool {
-      return pass.isFinished();
-    };
-    auto _begin = mPostProcessingPasses.begin();
-    auto _end = mPostProcessingPasses.end();
-
-    flc::Texture2DRenderableDynamic* textureNext;
-    flc::Texture2DRenderableDynamic* textureCurrent = (*_begin).getFrame();
-
-    flc::Program* programCurrent;
-
-    drawClear();
-    textureCurrent->bindForWriting();
-    drawSceneCore();
-
-    for (auto it = _begin; it != _end; it++) {
-
-      auto next = it + 1;
-
-      if (next != _end) {
-
-        textureNext = (*next).getFrame();
-        textureCurrent = (*it).getFrame();
-        programCurrent = (*it).getProgram();
-
-        textureNext->bindForWriting();
-
-        drawClear();
-
-        textureCurrent->draw(0.0f);
-
-        textureNext->draw(time);
-
-        textureNext->bindForReading();
-
-      } else {
-
-        flc::Framebuffer::bindScreenFramebuffer();
-
-        // render to current bound framebuffer using textureCurrent as a texture to post process
-        textureCurrent->draw(time);
-
-        textureCurrent = (*it).getFrame();
-        programCurrent = (*it).getProgram();
-
-        // render to current bound framebuffer using textureCurrent as a texture to post process
-        drawTexture(textureCurrent, programCurrent);
-      }
-
-      (*it).checkTime(time);
+void Engine::updatePostprocessing(GLfloat deltaTime) {
+  auto _end = mPostProcessingPasses.end();
+  for (auto it = mPostProcessingPasses.begin(); it != _end; ++it) {
+    auto next = it + 1;
+    if (next != _end) {
+      (*next).getFrame()->addTimeStep(deltaTime);
+    } else {
+      (*it).getFrame()->addTimeStep(deltaTime);
     }
-
-    auto it = remove_if(_begin, _end, _compare_function);
-
-    mPostProcessingPasses.erase(it, _end);
-
-  } else {
-    drawSceneCore();
+    (*it).checkTime(deltaTime);
   }
+}
+
+void Engine::drawScene() {
+  if (mPostProcessingPasses.empty()) {
+    drawSceneCore();
+    return;
+  }
+  auto _compare_function = [](flc::PostProcessingPass &pass) -> bool {
+    return pass.isFinished();
+  };
+  auto _begin = mPostProcessingPasses.begin();
+  auto _end = mPostProcessingPasses.end();
+
+  flc::Texture2DRenderableDynamic* textureNext = nullptr;
+  flc::Texture2DRenderableDynamic* textureCurrent = (*_begin).getFrame();
+
+  flc::Program* programCurrent = nullptr;
+
+  drawClear();
+  textureCurrent->bindForWriting();
+  drawSceneCore();
+
+  for (auto it = _begin; it != _end; ++it) {
+
+    auto next = it + 1;
+
+    if (next != _end) {
+
+      textureNext = (*next).getFrame();
+      textureCurrent = (*it).getFrame();
+      programCurrent = (*it).getProgram();
+
+      textureNext->bindForWriting();
+
+      drawClear();
+
+      textureCurrent->draw();
+
+      textureNext->bindForReading();
+
+    } else {
+
+      flc::Framebuffer::bindScreenFramebuffer();
+
+      // render to current bound framebuffer using textureCurrent as a texture to post process
+      textureCurrent->draw();
+
+      textureCurrent = (*it).getFrame();
+      programCurrent = (*it).getProgram();
+
+      // render to current bound framebuffer using textureCurrent as a texture to post process
+      drawTexture(textureCurrent, programCurrent);
+    }
+  }
+
+  auto it = remove_if(_begin, _end, _compare_function);
+
+  mPostProcessingPasses.erase(it, _end);
 }
 
 void Engine::drawSceneCore() {
@@ -799,6 +733,12 @@ void Engine::drawSceneCore() {
     drawOcclusionPass();
   }
   drawClear();
+  mScene->updateDependencies();
+  mScene->updateRenderer();
+  if(mLights->isLightsRefresh()) {
+    mScene->draw();
+    mLights->resetLightsRefresh();
+  }
   mScene->draw();
 }
 
@@ -818,34 +758,14 @@ void Engine::drawOcclusionPass() {
   flc::VertexArray::unbindVAO();
 }
 
-void Engine::evaluateStartupAnimation(GLfloat time) {
-
-  drawClear();
-
-  flc::Texture2DRenderableDynamic *t = mPostProcessingPassStartup->getFrame();
-
-  t->bindForWriting();
-
-  drawTexture(mStartupTexture);
-
-  flc::Framebuffer::bindScreenFramebuffer();
-
-  t->draw(time);
-
-  drawTexture(t, mPostProcessingPassStartup->getProgram());
-
-  mPostProcessingPassStartup->checkTime(time);
-}
-
-void Engine::evaluateShadowMaps() {
+void Engine::populateLights() {
+  mLights->updateLightEntities();
 
   glDepthMask(GL_TRUE);
 
-  mLights->updateLightEntities();
-
   GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
 
-  flc::Texture2DRenderable *light2DTexture;
+  flc::Texture2DRenderable* light2DTexture;
   for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
     light2DTexture = mLights->mLightsSpot[i]->getShadowTexture();
     light2DTexture->bindForWriting();
@@ -881,19 +801,7 @@ void Engine::evaluateShadowMaps() {
   flc::Framebuffer::bindScreenFramebuffer();
 }
 
-void Engine::evaluateTime(GLfloat timeExpiredInSeconds) {
-  if (mTimeFactor) {
-    flf::EventData data;
-    data.mTime = {
-      timeExpiredInSeconds
-    };
-
-    mScene->onEvent(flf::Event(flf::EEventType::time, data));
-    mScene->stepInTime(timeExpiredInSeconds);
-  }
-}
-
-void Engine::evaluateDebugger() {
+void Engine::populateDebugger() {
   GLint mCurentTextureUnit = 0;
   GLint id = 0;
   switch (mDebugger->getState()) {
@@ -968,11 +876,17 @@ void Engine::onResizeScreen(GLuint width, GLuint height) {
   }
 }
 
-void Engine::onEvent(const flf::Event& event) const {
+void Engine::onEvent(const flf::Event& event) {
   for (const auto& handler : mHandlers) {
     handler.handle(event);
   }
   mScene->onEvent(event);
+  auto timePassed = event.getData().mTime.timePassed;
+  if (event.getType() == flw::flf::EEventType::time) {
+    mScene->stepInTime(timePassed);
+    mTextures->populateDynamicTextures(timePassed);
+    updatePostprocessing(timePassed);
+  }
 }
 
 void Engine::attachHandler(std::function<void(const flf::Event&)>&& handler, flf::EEventType type) {
@@ -1008,7 +922,7 @@ void Engine::pick(GLuint x, GLuint y) {
   mPickingPixelBuffer->bind();
   glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   fLogC("glReadPixels failed");
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
   GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
   GLubyte *data = (GLubyte *) mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -1029,7 +943,7 @@ void Engine::captureFramebufferToFile(const std::string &name) {
   mPickingPixelBuffer->bind();
   glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   fLogC("reading pixel buffer failed");
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
   GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
   GLubyte *data = (GLubyte *) mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -1062,7 +976,7 @@ template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string& , const str
 
 template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string& , const string& );
 
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
 
 template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string& );

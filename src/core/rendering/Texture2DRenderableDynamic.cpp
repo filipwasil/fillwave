@@ -29,14 +29,17 @@ namespace flw {
 namespace flc {
 
 Texture2DRenderableDynamic::Texture2DRenderableDynamic(flc::TextureConfig* cfg, ParameterList& param, flc::Program* prog)
-    : Texture2DRenderable(GL_COLOR_ATTACHMENT0, cfg, param)
-    , mProgram(prog)
-    , mTimePassed(0.0f) {
+  : Texture2DRenderable(GL_COLOR_ATTACHMENT0, cfg, param)
+  , mProgram(prog)
+  , mTimePassed(0.0f) {
   initUniformsCache();
 }
 
-void Texture2DRenderableDynamic::draw(GLfloat timePassed) {
+void Texture2DRenderableDynamic::addTimeStep(GLfloat timePassed) {
   mTimePassed += timePassed;
+}
+
+void Texture2DRenderableDynamic::draw() {
   mProgram->use();
   bind(FILLWAVE_DIFFUSE_UNIT);
   flc::Uniform::push(mUniformLocationCacheTime, mTimePassed);

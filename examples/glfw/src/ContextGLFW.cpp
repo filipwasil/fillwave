@@ -116,7 +116,11 @@ void ContextGLFW::render() {
     timeSinceLastFrameInSec = now - mTimeExpired;
     mTimeExpired = now;
 
-    mGraphics->draw(timeSinceLastFrameInSec);
+    mEventData.mTime.timePassed = timeSinceLastFrameInSec;
+    flw::flf::Event event(flw::flf::EEventType::time, mEventData);
+    mGraphics->onEvent(event);
+
+    mGraphics->draw();
 //      mGraphics->drawLines(timeSinceLastFrameInSec);
 //      mGraphics->drawPoints(timeSinceLastFrameInSec);
 

@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
   glutInit(&argc, argv);
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
   glutInitContextVersion(3, 0); /* OpenGL ES 3.0 */
 #else
   glutInitContextVersion(3, 3); /* OpenGL 3.3 */

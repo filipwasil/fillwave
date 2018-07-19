@@ -126,8 +126,8 @@ protected:
   /* MMC - Model Matrix Cache */
   glm::mat4 mPhysicsMMC;
 
-  GLboolean mChildrenPropagateEvent;
-  GLboolean mParentRefresh;
+  bool mChildrenPropagateEvent;
+  bool mParentRefresh;
   vec<EventHandler> mEventHandlers;
 
   bool mPSC;

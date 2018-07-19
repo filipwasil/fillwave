@@ -27,7 +27,7 @@
 #include <fillwave/Math.h>
 #include <fillwave/core/rendering/Texture2DRenderable.h>
 
-#if defined(FILLWAVE_GLES_3_0)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
 
 namespace flw {
@@ -147,4 +147,4 @@ private:
 } /* flf */
 } /* flw */
 
-#endif /* defined(FILLWAVE_GLES_3_0) */
+#endif /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */

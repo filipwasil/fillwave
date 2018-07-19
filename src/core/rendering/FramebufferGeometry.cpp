@@ -78,7 +78,7 @@ void FramebufferGeometry::bindAttachments() {
 void FramebufferGeometry::setAttachments() {
   //startFrame
   bindForWriting();
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
   glDrawBuffers(1, &mSummaryBuffer);
 #else
   glDrawBuffer(mSummaryBuffer);
@@ -90,7 +90,7 @@ void FramebufferGeometry::setAttachments() {
 }
 
 void FramebufferGeometry::setAttachmentStencilDepth() {
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
   glDrawBuffers(1, GL_NONE);
 #else
   glDrawBuffer(GL_NONE);
@@ -104,7 +104,7 @@ void FramebufferGeometry::setAttachmentSummaryForReading() {
 }
 
 void FramebufferGeometry::setAttachmentSummaryForWriting() {
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
   glDrawBuffers(1, &mSummaryBuffer);
 #else
   glDrawBuffer(mSummaryBuffer);

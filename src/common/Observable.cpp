@@ -30,7 +30,7 @@ Observable::Observable() = default;
 
 Observable::~Observable() {
   for (auto &it : mObservers) {
-    it->onDeath(this);
+    it->onDestroy(this);
   }
 }
 

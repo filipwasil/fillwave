@@ -175,7 +175,7 @@ protected:
         case GL_FLOAT_MAT4:
           size = 16;
           break;
-//#ifdef FILLWAVE_GLES_3_0
+//#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 //#else
         case GL_UNSIGNED_INT_VEC3:
           size = 3;

@@ -59,6 +59,10 @@ public:
 
   ~Light() override;
 
+  Light(const Light&) = delete;
+
+  Light operator=(const Light&) = delete;
+
   void updateFromFollowed();
 
   void setAttenuation(LightAttenuationData &attenuation);
@@ -71,7 +75,7 @@ public:
 
   void log();
 
-  void onDeath(Observable* observable) override;
+  void onDestroy(Observable* observable) override;
 
   void onChanged(Observable* observable) override;
 

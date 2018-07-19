@@ -22,7 +22,7 @@
 #include <fillwave/space/base/Light.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Light", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
@@ -47,7 +47,7 @@ void Light::updateFromFollowed() {
   if (mObserved && mIsFollowedUpdated) {
     mTranslation = glm::vec3(mObserved->getParentMMC() * glm::vec4(mObserved->getTranslation(), 1.0));
     mRotation = glm::normalize(mObserved->getParentRotation() * mObserved->getRotation());
-    mRefresh = GL_TRUE;
+    mRefresh = true;
     mIsFollowedUpdated = false;
   }
 }
@@ -62,7 +62,7 @@ LightAttenuationData Light::getAttenuation() {
 
 void Light::setIntensity(glm::vec4 intensity) {
   mIntensity = intensity;
-  mRefresh = GL_TRUE;
+  mRefresh = true;
 }
 
 glm::vec4 Light::getIntensity() {
@@ -73,7 +73,7 @@ void Light::log() {
   fLogI("Light mTranslation:", mTranslation.x, mTranslation.y, mTranslation.z);
 }
 
-void Light::onDeath(Observable *observable) {
+void Light::onDestroy(Observable* observable) {
   if (mObserved == observable) {
     mObserved = nullptr;
   }

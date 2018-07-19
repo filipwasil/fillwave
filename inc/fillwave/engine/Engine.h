@@ -91,9 +91,9 @@ class Engine {
   void configTime(GLfloat timeFactor);
 
   /* Draw */
-  void draw(GLfloat time);
-  void drawLines(GLfloat time);
-  void drawPoints(GLfloat time);
+  void draw();
+  void drawLines();
+  void drawPoints();
   void drawTexture(flc::Texture* t, flc::Program* p);
   void drawTexture(flc::Texture* t);
 
@@ -114,8 +114,7 @@ class Engine {
   pp<flf::Scene> getCurrentScene() const;
 
   /* Time */
-  GLuint getFramesPassed();
-  GLfloat getStartupAnimationTime() const;
+  GLuint getAndResetRenderedFramesCount();
 
   template <GLuint T> flc::Shader* storeShader(const std::string& shaderPath);
   template <GLuint T> flc::Shader* storeShader(const std::string& shaderPath, const std::string& shaderSource);
@@ -237,13 +236,6 @@ class Engine {
   GLuint mFrameCounter;
   GLfloat mTimeFactor;
   ps<flf::Text> mFPSText;
-  //flf::FPSCallback mTextFPSCallback;
-
-  /* Startup */
-  GLfloat mStartupTime;
-  flc::Texture* mStartupTexture;
-  const GLfloat mStartupTimeLimit = 8.0f;
-  pu<flc::PostProcessingPass> mPostProcessingPassStartup;
 
   GLboolean mIsOQ;
 
@@ -252,7 +244,7 @@ class Engine {
   glm::vec3 mBackgroundColor;
 
  public:
-  void onEvent(const flf::Event& event) const;
+  void onEvent(const flf::Event& event);
   void onResizeScreen(GLuint width, GLuint height);
   void attachHandler(std::function<void(const flf::Event&)>&& h, flf::EEventType type);
   void detachHandlers();
@@ -267,13 +259,10 @@ class Engine {
   void initManagement();
   void initExtras();
   void initOcclusionTest();
-  void initStartup();
 
-  void evaluateShadowMaps();
-  void evaluateDebugger();
-  void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
-  void evaluateTime(GLfloat timeExpiredInSeconds);
-  void evaluateStartupAnimation(GLfloat time);
+  void populateLights();
+  void populateDebugger();
+  void populateDynamicTextures(GLfloat timeExpiredInSeconds);
 
   void drawFront();
   void drawOcclusionPass();
@@ -282,7 +271,8 @@ class Engine {
   void drawClear();
   void drawHUD();
   void drawSceneStartup();
-  void drawScene(GLfloat time);
+  void drawScene();
+  void updatePostprocessing(GLfloat time);
   void drawSceneCore();
 
   flc::VertexBufferBasic*

@@ -45,7 +45,7 @@ public:
   CacheDirectionalLights mLightsDirectional;
   CachePointLights mLightsPoint;
 
-  bool isLightsRefresh();
+  bool isLightsRefresh() const;
 
   void resetLightsRefresh();
 
@@ -73,11 +73,11 @@ public:
 private:
   std::vector<LighUniformData> mLightBufferData;
 
-  GLboolean isRefreshLightSpot();
+  bool isRefreshLightSpot() const;
 
-  GLboolean isRefreshLightDirectional();
+  bool isRefreshLightDirectional() const;
 
-  GLboolean isRefreshLightPoint();
+  bool isRefreshLightPoint() const;
 
   GLfloat computePointLightBoundingSphere(LightPoint *light);
 };

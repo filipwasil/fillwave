@@ -33,15 +33,15 @@ namespace flf {
 
 struct ShaderLoader {
 /* Headers */
-#if defined(FILLWAVE_GLES_3_0)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   const std::string mGLVersion = "#version 300 es\n";
-#else /* defined(FILLWAVE_GLES_3_0) */
+#else /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
 #if defined(FILLWAVE_BACKEND_OPENGL_45)
   const std::string mGLVersion = "#version 450 core\n";
 #else /* defined(FILLWAVE_BACKEND_OPENGL_45) */
   const std::string mGLVersion = "#version 330 core\n";
 #endif /* defined(FILLWAVE_BACKEND_OPENGL_45) */
-#endif /* defined(FILLWAVE_GLES_3_0) */
+#endif /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
   const std::string mGLFragmentPrecision = "precision lowp float;\n";
   const std::string mGLVertexPrecision = "precision mediump float;\n";
 

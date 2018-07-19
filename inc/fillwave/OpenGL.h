@@ -36,7 +36,7 @@ void glesInitExtensions();
 
 #if defined(__ANDROID__) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 
-#define FILLWAVE_GLES_3_0
+#define FILLWAVE_BACKEND_OPENGL_ES_30
 #define GLFW_INCLUDE_ES2
 #define GL_GLEXT_PROTOTYPES
 

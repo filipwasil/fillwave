@@ -125,7 +125,7 @@ public:
   flc::QueryIfAnySamplesPassed mOcclusionQuery;
 //   puFence mFence;
 
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
 //   flc::QueryTimeElapsed mTimeQuery;
   flc::ConditionalRender mConditionalRendering;

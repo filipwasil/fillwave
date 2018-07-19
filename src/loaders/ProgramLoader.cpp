@@ -33,15 +33,15 @@ namespace flf {
 constexpr GLuint FILLWAVE_RANDOM_VECTOR_SIZE = 64;
 
 /* Headers */
-#if defined(FILLWAVE_GLES_3_0)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 const std::string gGLVersion = "#version 300 es\n";
-#else /* defined(FILLWAVE_GLES_3_0) */
+#else /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
 #if defined(FILLWAVE_BACKEND_OPENGL_45)
 const std::string gGLVersion = "#version 450 core\n";
 #else /* defined(FILLWAVE_BACKEND_OPENGL_45) */
 const std::string gGLVersion = "#version 330 core\n";
 #endif /* defined(FILLWAVE_BACKEND_OPENGL_45) */
-#endif /* defined(FILLWAVE_GLES_3_0) */
+#endif /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
 
 const std::string gGLFragmentPrecision = "precision lowp float;\n";
 const std::string gGLVertexPrecision = "precision mediump float;\n";
@@ -1100,8 +1100,7 @@ const std::string fsStartup = gGLVersion + gGLFragmentPrecision + "#define MAX_I
 
 flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& filenamePrefixForShaders) {
   flc::Program* p = nullptr;
-  switch (program)
-  {
+  switch (program) {
     case EProgram::basic:
     case EProgram::basicFR:
       p = mEngine->storeProgram("default", {
@@ -1122,36 +1121,36 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
 
     case EProgram::shadow:
       p = mEngine->storeProgram("shadow_mapping", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing.vert", vsShadow)
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_shadow_mapping.frag", fsEmpty),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_shadow_mapping.vert", vsShadow)
       });
       break;
 
     case EProgram::shadowColorCoded:
       p = mEngine->storeProgram("shadow_mapping_color", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_shadowing_color.frag", fsShadowColorCoded),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing_color.vert", vsShadowColorCoded)
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_shadow_mapping_color.frag", fsShadowColorCoded),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_shadow_mapping_color.vert", vsShadowColorCoded)
       });
       break;
 
     case EProgram::shadowWithAnimation:
       p = mEngine->storeProgram("shadow_mapping_animated", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty_animated.frag", fsEmpty),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing.vert", vsShadowAnimated)
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_shadow_mapping_animated.frag", fsEmpty),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_shadow_mapping_animated.vert", vsShadowAnimated)
       });
       break;
 
     case EProgram::shadowColorCodedWithAnimation:
       p = mEngine->storeProgram("shadow_mapping_animated_color", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_shadowing.frag", fsShadowColorCoded),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_shadowing_color.vert", vsShadowColorCodedAnimated)
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_shadow_mapping_animated_color.frag", fsShadowColorCoded),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_shadow_mapping_animated_color.vert", vsShadowColorCodedAnimated)
       });
       break;
 
     case EProgram::debugger:
       p = mEngine->storeProgram("debugger", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ifillwave__debugger.frag", fsDebugger),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_debugger.vert", vsDebugger)
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_debugger.frag", fsDebugger),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_debugger.vert", vsDebugger)
       });
       break;
 
@@ -1180,34 +1179,34 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
 
     case EProgram::text:
       p = mEngine->storeProgram("text", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_text.frag", fsText),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_text.vert", vsText)
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_text.frag", fsText),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_text.vert", vsText)
       });
       break;
 
     case EProgram::textBold:
       p = mEngine->storeProgram("text_bold", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_internal_text_bold.frag", fsTextBold),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_internal_text.vert", vsText)
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_text_bold.frag", fsTextBold),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_text.vert", vsText)
       });
       break;
 
     case EProgram::particleGPUEmiter:
       p = mEngine->storeProgram("particles_gpu_emiter", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_empty.frag", fsEmpty),
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_gpu_emiter.frag", fsEmpty),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_particles_gpu_emiter.vert", vsGPUEmiter)
       }, GL_TRUE);
       break;
 
     case EProgram::particleGPU:
-      p = mEngine->storeProgram("particles_gpu_program", {
+      p = mEngine->storeProgram("particles_gpu", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_gpu.frag", fsParticlesGPU),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_particles_gpu.vert", vsParticlesGPU)
       });
       break;
 
     case EProgram::particleCPU:
-      p = mEngine->storeProgram("particles_cpu_program", {
+      p = mEngine->storeProgram("particles_cpu", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_particles_cpu.frag", fsParticlesCPU),
           mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_particles_cpu.vert", vsParticlesCPU)
       });
@@ -1315,28 +1314,28 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
     case EProgram::depthlessDR:
       p = mEngine->storeProgram("dr_depthless", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_depthless.frag", fsDRDepthless),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_directional.vert", vsDRShaderQuad)
       });
       break;
 
     case EProgram::directionalLightsDR:
       p = mEngine->storeProgram("dr_directional", {
           mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_directional.frag", fsDRLightDirectional),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_directional.vert", vsDRShaderQuad)
       });
       break;
 
     case EProgram::spotLightsDR:
-      p = mEngine->storeProgram("ds_spot", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_spot.frag", fsDRLightSpot),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_shader_quad.vert", vsDRShaderQuad)
+      p = mEngine->storeProgram("dr_spot", {
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_spot.frag", fsDRLightSpot),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_spot.vert", vsDRShaderQuad)
       });
       break;
 
     case EProgram::pointLightsDR:
-      p = mEngine->storeProgram("ds_point", {
-          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_ds_point.frag", fsDRLightPoint),
-          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_ds_point.vert", vsDRLightPoint)
+      p = mEngine->storeProgram("dr_point", {
+          mEngine->storeShader<GL_FRAGMENT_SHADER>("fillwave_dr_point.frag", fsDRLightPoint),
+          mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_dr_point.vert", vsDRLightPoint)
       });
       break;
   }

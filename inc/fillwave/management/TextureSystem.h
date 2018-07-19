@@ -64,7 +64,9 @@ public:
 
   void reload();
 
-  void evaluateDynamicTextures(GLfloat timeExpiredInSeconds);
+  void populateDynamicTextures(GLfloat timeExpiredInSeconds);
+
+  void drawDynamicTextures();
 
   void resizeTextures(GLuint width, GLuint height);
 
@@ -72,10 +74,10 @@ public:
 
 private:
 
-#ifdef FILLWAVE_GLES_3_0
-#else /* FILLWAVE_GLES_3_0 */
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
   TCache<MAX_CACHE_SIZE, flc::Texture1D, size_t, flc::ParameterList &> mTextures1D;
-#endif /* FILLWAVE_GLES_3_0 */
+#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */
   TCache<
     MAX_CACHE_SIZE
     , flc::Texture2D

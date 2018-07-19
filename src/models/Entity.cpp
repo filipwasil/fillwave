@@ -26,10 +26,10 @@ namespace flw {
 namespace flf {
 
 Entity::Entity()
-    : mChildrenPropagateEvent(GL_TRUE)
-    , mParentRefresh(GL_TRUE)
-    , mPSC(GL_TRUE)
-    , mPSR(GL_TRUE) {
+  : mChildrenPropagateEvent(true)
+  , mParentRefresh(true)
+  , mPSC(true)
+  , mPSR(true) {
   // nothing
 }
 
@@ -104,8 +104,8 @@ void Entity::onUnpicked() {
 void Entity::updateMatrixTree() {
   if (mRefresh) {
     updateMatrixCache();
-    mParentRefresh = GL_TRUE;
-    mRefresh = GL_FALSE;
+    mParentRefresh = true;
+    mRefresh = false;
   }
 
   if (mParentRefresh) {
@@ -114,7 +114,7 @@ void Entity::updateMatrixTree() {
       it->updateParentMatrix(mPhysicsMMC);
     }
     notifyObservers();
-    mParentRefresh = GL_FALSE;
+    mParentRefresh = false;
   }
 
   for (auto &it : mChildren) {
@@ -147,7 +147,7 @@ glm::mat4 Entity::getPhysicsMMC() {
 void Entity::updateParentMatrix(glm::mat4 &parent) {
   mParentMMC = parent;
   mPhysicsMMC = mParentMMC * mMMC;
-  mParentRefresh = GL_TRUE;
+  mParentRefresh = true;
   notifyObservers();
 }
 

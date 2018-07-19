@@ -1,32 +1,24 @@
-//============================================================================
-// Name        : example.h
-// Author      : Filip Wasil
-// Version     :
-// Copyright   : below
-// Description : Basic example
-//============================================================================
+#pragma once
 
-/*************************************************************************
+/*
+ * The MIT License (MIT)
  *
- * Filip Wasil CONFIDENTIAL
- * __________________
+ * Copyright (c) 2018 Filip Wasil and Fillwave community members
  *
- *  [2012] - [2014] Filip Wasil
- *  All Rights Reserved.
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * NOTICE:  All information contained herein is, and remains
- * the property of Filip Wasil. The intellectual and technical
- * concepts contained herein are proprietary to Filip Wasil
- * and his suppliers and may be covered by Polish and Foreign
- * Patents, patents in process, and are protected by trade secret
- * or copyright law. Dissemination of this information or reproduction
- * of this material is strictly forbidden unless prior written
- * permission is obtained from Filip Wasil.
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
  *
- * To use the code, you must contact the author directly and ask permission.
- *
- * fillwave@gmail.com
- *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 void init();

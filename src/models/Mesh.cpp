@@ -66,7 +66,7 @@ Mesh::Mesh(Engine* engine,
     , mLights(lights)
     , mAnimator(animator)
     , mOcclusionQuery()
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
     , mConditionalRendering(GL_QUERY_WAIT)
 #endif
@@ -82,7 +82,7 @@ Mesh::~Mesh() {
 }
 
 void Mesh::drawPBRP(ICamera &camera) {
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
   if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
@@ -99,7 +99,7 @@ void Mesh::drawPBRP(ICamera &camera) {
 }
 
 void Mesh::draw(ICamera &camera) {
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
   if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
@@ -121,7 +121,7 @@ void Mesh::draw(ICamera &camera) {
 }
 
 void Mesh::drawDR(ICamera &camera) {
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
   if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
@@ -152,7 +152,7 @@ inline void Mesh::coreDraw() {
 
   //todo issue with blinking scene
   //todo (OpenGL 3.3+)consider using conditional rendering this way:
-  //#ifdef FILLWAVE_GLES_3_0
+  //#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
   //#else
   //   mConditionalRendering.begin(mOcclusionQuery.getID());
   onDraw();

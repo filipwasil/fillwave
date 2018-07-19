@@ -26,7 +26,7 @@
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Log.h>
 
-#if defined(FILLWAVE_GLES_3_0)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
 
 FLOGINIT_DEFAULT()
@@ -444,4 +444,4 @@ inline void RendererDR::drawDebug() {
 } /* namespace flf */
 } /* namespace flw */
 
-#endif /* defined(FILLWAVE_GLES_3_0) */
+#endif /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */

@@ -132,7 +132,7 @@ Shader::DebugInfo Shader::getDebugInfo() const {
       return { "GL_FRAGMENT_SHADER", ".frag" };
     case GL_VERTEX_SHADER:
       return {"GL_VERTEX_SHADER", ".vert" };
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
     case GL_GEOMETRY_SHADER:
       return {"GL_GEOMETRY_SHADER", ".geom" };

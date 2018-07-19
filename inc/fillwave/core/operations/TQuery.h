@@ -61,7 +61,7 @@ public:
 using QueryIfAnySamplesPassed = TQuery<GL_ANY_SAMPLES_PASSED>;
 using QueryHowManyTransformFeedbackPrimitivesWritten = TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN>;
 
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
 
 using QueryHowManySamplesPassed = TQuery<GL_SAMPLES_PASSED>;

@@ -27,7 +27,12 @@
 namespace flw {
 namespace flf {
 
-const glm::mat4 FILLWAVE_UV_BIAS_MATRIX(0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0, 0.0, 0.5, 0.0, 0.5, 0.5, 0.5, 1.0);
+const glm::mat4 FILLWAVE_UV_BIAS_MATRIX {
+  0.5, 0.0, 0.0, 0.0
+  , 0.0, 0.5, 0.0, 0.0
+  , 0.0, 0.0, 0.5, 0.0
+  , 0.5, 0.5, 0.5, 1.0
+};
 
 LightSystem::LightSystem() {
   mLightBufferData.resize(MAX_LIGHTS);
@@ -39,8 +44,11 @@ void LightSystem::clear() {
   mLightsPoint.clear();
 }
 
-bool LightSystem::isLightsRefresh() {
-  return isMoveablesRefresh(mLightsSpot) || isMoveablesRefresh(mLightsDirectional) || isMoveablesRefresh (mLightsPoint);
+bool LightSystem::isLightsRefresh() const {
+  return
+    isMoveablesRefresh(mLightsSpot)
+    || isMoveablesRefresh(mLightsDirectional)
+    || isMoveablesRefresh(mLightsPoint);
 }
 
 void LightSystem::resetLightsRefresh() {
@@ -67,7 +75,6 @@ void LightSystem::updateLightEntities() {
 void LightSystem::pushLightUniforms(flc::Program* program) {
 
   /* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT */
-
   program->uniformPush("uNumberOfSpotLights", static_cast<GLint>(mLightsSpot.size() + mLightsDirectional.size()));
 
 #if defined(FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS) && defined(FILLWAVE_BACKEND_OPENGL_ES_30)
@@ -135,7 +142,6 @@ void LightSystem::pushLightUniforms(flc::Program* program) {
 
   if (isLightsRefresh()) {
     pushLightUniformBuffers(program);
-    resetLightsRefresh();
   }
 }
 
@@ -247,7 +253,6 @@ GLfloat LightSystem::computePointLightBoundingSphere(LightPoint *light) {
   const LightAttenuationData a = light->getAttenuation();
   const GLfloat diffuse = 1.0f;
   const GLfloat maxRGB = glm::max(glm::max(i.x, i.y), i.z);
-  //todo validate this equation
   return glm::sqrt(a.mLinear * a.mLinear - 4.0f * a.mExp * (a.mExp - 256.0f * maxRGB * diffuse) - a.mLinear) / 2 * a.mExp;
 }
 

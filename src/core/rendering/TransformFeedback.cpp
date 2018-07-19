@@ -45,7 +45,7 @@ void TransformFeedback::begin(GLenum primitiveMode) {
   if (primitiveMode != GL_POINTS
       && primitiveMode != GL_LINES
       && primitiveMode != GL_TRIANGLES
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
       && primitiveMode != GL_TRIANGLES_ADJACENCY
       && primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY

@@ -22,8 +22,8 @@
  */
 #include <fillwave/core/texturing/Texture.h>
 
-#ifdef FILLWAVE_GLES_3_0
-#else /* FILLWAVE_GLES_3_0 */
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
 namespace flw {
 namespace flc {
 
@@ -43,4 +43,4 @@ public:
 } /* flc */
 typedef std::unique_ptr<flc::Texture1D> puTexture1D;
 } /* flw */
-#endif /* FILLWAVE_GLES_3_0 */
+#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */

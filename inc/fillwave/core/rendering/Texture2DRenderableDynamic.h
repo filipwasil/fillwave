@@ -37,7 +37,9 @@ public:
 
   virtual ~Texture2DRenderableDynamic() = default;
 
-  void draw(GLfloat timePassed);
+  void addTimeStep(GLfloat timePassed);
+
+  void draw();
 
   void reload();
 

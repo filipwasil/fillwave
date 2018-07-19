@@ -46,7 +46,9 @@ namespace flf {
 class Moveable : public Observable {
 public:
   Moveable(
-    glm::vec3 translation = glm::vec3(0.0), glm::quat r = glm::quat(1.0, 0.0, 0.0, 0.0), unsigned int callbacks = 1);
+    glm::vec3 translation = glm::vec3(0.0)
+    , glm::quat rotation = glm::quat(1.0, 0.0, 0.0, 0.0)
+    , unsigned int callbacks = 1);
 
   ~Moveable() override;
 
@@ -186,7 +188,7 @@ protected:
 };
 
 template <class M>
-bool isMoveablesRefresh(std::vector<M> &moveables) { //xxx to be removed
+bool isMoveablesRefresh(const std::vector<M>& moveables) {
   for (auto &it : moveables) {
     if (it->isRefresh()) {
       return true;
@@ -196,15 +198,11 @@ bool isMoveablesRefresh(std::vector<M> &moveables) { //xxx to be removed
 }
 
 template <class M>
-void resetMoveablesRefresh(std::vector<M> &data) {
+void resetMoveablesRefresh(const std::vector<M>& data) {
   for (auto &it : data) {
     it->setRefresh(false);
   }
 }
-
-GLboolean isMoveablesRefresh(std::vector<std::shared_ptr<Moveable>> &moveables);
-
-void resetMoveablesRefresh(std::vector<std::shared_ptr<Moveable>> &data);
 
 } /* flf */
 } /* flw */

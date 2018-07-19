@@ -70,7 +70,7 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
       bind();
       bindForRendering();
       mFramebuffer.attachTexture2D(GL_DEPTH_ATTACHMENT, target, getHandle());
-#ifdef FILLWAVE_GLES_3_0
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
     glDrawBuffers(1, &none);
     glReadBuffer(none);
 #else
