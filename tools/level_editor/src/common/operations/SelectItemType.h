@@ -14,7 +14,7 @@ class SelectItemType : public QObject {
 
   SelectItemType();
 
-  virtual ~SelectItemType();
+  ~SelectItemType() override;
 
   EItemType getItemType() const;
 

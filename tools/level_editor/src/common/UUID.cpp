@@ -5,7 +5,7 @@ QByteArray UUID::getId() {
   return QUuid::createUuid().toByteArray();
 }
 
-bool UUID::comapreQByteArrays(const QByteArray* array1, const QByteArray* array2) {
+bool UUID::compareQByteArrays(const QByteArray* array1, const QByteArray* array2) {
   if (array1->size() != array2->size()) {
     return false;
   }

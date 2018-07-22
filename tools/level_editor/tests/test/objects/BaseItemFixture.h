@@ -5,7 +5,7 @@
 
 class BaseItemFixture : public testing::Test {
  protected:
-  virtual void SetUp() override {
+  void SetUp() override {
     sut = new objects::BaseItem(nullptr, QString("Test"), 0);
   }
 

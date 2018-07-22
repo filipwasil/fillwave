@@ -16,6 +16,8 @@ class BaseItem : public IItem {
 
   QString name() const override;
 
+  void init() override;
+
   void setName(const QString& name) override;
 
   QList<IItem*> childrens() override;
@@ -31,6 +33,8 @@ class BaseItem : public IItem {
   bool hasChildren() override;
 
   QByteArray getId() const override;
+
+  void setEngine(std::shared_ptr<flw::Engine> engine) override;
 
   int row() const override;
 
@@ -54,6 +58,7 @@ class BaseItem : public IItem {
   IItem* mParent;
   QString mName;
   QByteArray mId;
+  std::shared_ptr<flw::Engine> mEngine;
   QList<IItem*> mChildrens;
 };
 }

@@ -3,22 +3,18 @@ include_directories (${LEVEL_EDITOR_SOURCE_DIR}/tests/mocks)
 ##############
 # Unit Tests
 ##############
-set (SOURCESRC
-    ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/items/BaseItem.cpp
-    ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/TreeItemModel.cpp
-    ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/factories/ItemFactory.cpp
-    ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/controllers/NodeController.cpp
-    ${LEVEL_EDITOR_SOURCE_DIR}/src/common/operations/SelectItemType.cpp
-    ${LEVEL_EDITOR_SOURCE_DIR}/src/common/UUID.cpp
-    ${SOURCE}
-    )
+file(GLOB_RECURSE SOURCES_OBJECTS ${LEVEL_EDITOR_SOURCE_DIR}/src/objects/*.cpp)
+file(GLOB_RECURSE SOURCES_COMMON ${LEVEL_EDITOR_SOURCE_DIR}/src/common/*.cpp)
+file(GLOB_RECURSE SOURCES_SCENE ${LEVEL_EDITOR_SOURCE_DIR}/src/scene/*.cpp)
 
 add_executable (runUnitTestsLevelEditor
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/BaseItemTest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/TreeItemModelTest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/objects/NodeControllerTest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/MainTest.cpp
-    ${SOURCESRC})
+    ${SOURCES_OBJECTS}
+    ${SOURCES_COMMON}
+    ${SOURCES_SCENE})
 
 # Standard linking to gtest stuff.
 target_link_libraries (runUnitTestsLevelEditor gtest gtest_main gmock gmock_main pthread)

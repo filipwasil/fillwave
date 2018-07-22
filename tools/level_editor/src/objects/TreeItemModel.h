@@ -9,7 +9,7 @@ class TreeItemModel : public QAbstractItemModel {
  public:
   explicit TreeItemModel(const QString& name, QObject* parent = Q_NULLPTR);
 
-  virtual ~TreeItemModel();
+  ~TreeItemModel() override;
 
   QVariant data(const QModelIndex& index, int role) const override;
 

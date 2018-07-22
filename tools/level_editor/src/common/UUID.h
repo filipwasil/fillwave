@@ -6,8 +6,7 @@ namespace common {
 class UUID {
  public:
   QByteArray getId();
-  bool comapreQByteArrays(const QByteArray* array1, const QByteArray* array2);
+  bool compareQByteArrays(const QByteArray* array1, const QByteArray* array2);
 };
 
 }
-

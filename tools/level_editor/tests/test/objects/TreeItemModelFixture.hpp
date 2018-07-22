@@ -6,12 +6,12 @@
 
 class TreeItemModelFixture : public testing::Test {
  protected:
-  virtual void SetUp() override {
-    mTestItem = new objects::BaseItem(nullptr, "TestObject");
+  void SetUp() override {
+    mTestItem = new objects::BaseItem(nullptr, "TestObject", QByteArray());
     sut = new objects::TreeItemModel(QString("Test"));
   }
 
-  virtual void TearDown() override {
+  void TearDown() override {
 
     delete sut;
   }
