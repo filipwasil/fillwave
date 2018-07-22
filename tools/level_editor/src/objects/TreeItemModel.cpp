@@ -46,7 +46,8 @@ QVariant TreeItemModel::headerData(int section, Qt::Orientation orientation, int
 
 QModelIndex TreeItemModel::index(int row, int column, const QModelIndex& parent) const {
   if (!hasIndex(row, column, parent)) {
-    return QModelIndex();
+    return {
+    };
   }
 
   IItem* parentItem;

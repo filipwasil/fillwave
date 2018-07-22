@@ -6,6 +6,7 @@ set (SOURCECOMMON
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/UiFilesWindowsCreator.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/SelectItemType.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/widgets/DockWidget.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/widgets/AssetsDialogChooser.cpp
     PARENT_SCOPE
     )
 set (HEADERSCOMMON
@@ -19,5 +20,6 @@ set (HEADERSCOMMON
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/ICreateObjectsView.h
     ${CMAKE_CURRENT_SOURCE_DIR}/operations/SelectItemType.h
     ${CMAKE_CURRENT_SOURCE_DIR}/widgets/DockWidget.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/widgets/AssetsDialogChooser.h
     PARENT_SCOPE
     )

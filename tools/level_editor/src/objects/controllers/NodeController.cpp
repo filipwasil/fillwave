@@ -8,13 +8,13 @@ namespace objects {
 NodeController::NodeController(TreeItemModel* objectsModel, QTreeView* nodeView)
   : QObject(nullptr)
   , mObjectsModel(objectsModel)
-  , mNodeTreeview(nodeView){
+  , mNodeTreeview(nodeView) {
   //empty
 }
 
 bool NodeController::addNode(common::EItemType type, QString name) {
   ItemFactory factory;
-  auto newItem = factory.create(common::EItemType::object, name, nullptr);
+  auto newItem = factory.create(common::EItemType::object, name, nullptr, std::shared_ptr<Engine>());
   return mObjectsModel->insertToModel(newItem, mNodeTreeview->currentIndex());
 }
 

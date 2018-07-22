@@ -31,7 +31,6 @@ void Renderer::initializeGL() {
 
 void Renderer::paintGL() {
   auto currentTime = Time::now();
-
   flw::flf::EventData eventdata;
   eventdata.mTime.timePassed = std::chrono::duration<float>(currentTime - mTime).count();
   flw::flf::Event event(flw::flf::EEventType::time, eventdata);

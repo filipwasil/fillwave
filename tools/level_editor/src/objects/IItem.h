@@ -3,6 +3,11 @@
 #include <QList>
 #include <QString>
 #include <QVariant>
+#include <fillwave/Fillwave.h>
+#include "fillwave/models/Model.h"
+
+using namespace flw;
+using namespace flw::flf;
 
 namespace objects {
 class IItem {
@@ -46,5 +51,9 @@ class IItem {
   virtual void insertChild(int row, IItem *item) = 0;
 
   virtual void setId(QByteArray&& array) = 0;
+
+  virtual void init() = 0;
+
+  virtual void setEngine(std::shared_ptr<flw::Engine> engine) = 0;
 };
 }

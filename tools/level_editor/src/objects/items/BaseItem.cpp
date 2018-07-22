@@ -110,4 +110,12 @@ void BaseItem::setId(QByteArray&& array) {
   mId = array;
 }
 
+void BaseItem::init() {
+// empty
+}
+
+void BaseItem::setEngine(std::shared_ptr<flw::Engine> engine) {
+  mEngine = engine;
+}
+
 }
