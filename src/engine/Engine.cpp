@@ -126,15 +126,6 @@ void Engine::initPickingBuffer() {
 void Engine::initExtras() {
   /* Debugger */
   mDebugger = std::make_unique<flf::Debugger>(this);
-
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else
-  /* Tesselation */
-  glPatchParameteri(GL_PATCH_VERTICES, 3);
-#endif // FILLWAVE_BACKEND_OPENGL_ES_30
-
-  /* Suppress error if setting up patch fails */
-  glGetError();
 }
 
 void Engine::reload() {
