@@ -13,8 +13,7 @@ SelectItemType::SelectItemType()
   : mItemListModel(new QStandardItemModel(this))
   , mMainWidget(new QDialog(Q_NULLPTR)) {
   mItemListTreeView = new QTreeView(mMainWidget);
-  mItemTypes["QBasicItem"] = EItemType::object;
-  QStandardItem* item = new QStandardItem("QBasicItem");
+  QStandardItem* item = new QStandardItem(common::ItemTypeString[EItemType::threeDObject]);
   mItemListModel->setItem(0, 0, item);
 
   mItemListTreeView->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -61,7 +60,8 @@ void SelectItemType::selectedType(bool& operationStatus) {
     return;
   }
   QString type = mItemListModel->itemFromIndex(selectedIndexModel.first())->text();
-  mItemType = mItemTypes[type];
+
+  mItemType = common::ItemTypeString.key(type);
   bool ok = false;
   QString text =
     QInputDialog::getText(

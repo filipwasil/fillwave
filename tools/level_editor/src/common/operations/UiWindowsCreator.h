@@ -17,9 +17,10 @@ class UiWindowsCreator : public QObject {
  public:
   explicit UiWindowsCreator(QWidget* parent = nullptr);
 
- ~UiWindowsCreator() = default;
+ ~UiWindowsCreator() override = default;
 
-  std::tuple<QVBoxLayout*, objects::TreeItemModel*, objects::NodeController*> createNodeLayout(QTreeView* treeView, QWidget* parent);
+  std::tuple<QVBoxLayout*, objects::TreeItemModel*, objects::NodeController*>
+  createNodeLayout(QTreeView* treeView, QWidget* parent, std::shared_ptr<Engine> engine);
 
   scene::callbacks::StandardMouseEventHandler* installEventFilterOnTreeView(
       QTreeView* treeView,

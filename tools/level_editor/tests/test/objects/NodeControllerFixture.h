@@ -12,7 +12,7 @@ class NodeControllerFixture : public testing::Test {
   virtual void SetUp() override {
     mTreeModelMock.reset(new objects::TreeItemModelMock());
     mTreeView.reset(new QTreeView());
-    sut.reset(new objects::NodeController(mTreeModelMock.get(), mTreeView.get()));
+    sut.reset(new objects::NodeController(mTreeModelMock.get(), mTreeView.get(), std::shared_ptr<Engine>()));
   }
   std::unique_ptr<objects::NodeController> sut;
   std::unique_ptr<objects::TreeItemModelMock> mTreeModelMock;

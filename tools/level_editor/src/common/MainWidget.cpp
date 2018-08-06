@@ -5,8 +5,12 @@
 #include <QListWidget>
 #include "MainWidget.h"
 #include "scene/Renderer.h"
+#include "common/InternalTypes.h"
+
+QMap<common::EItemType, QString> common::ItemTypeString = {{common::EItemType::threeDObject, "ThreeDObject"}};
 
 namespace common {
+
 MainWidget::MainWidget(int argc, char* argv[], QWidget* parent)
   : QMainWindow(parent)
   , mCentralWidget(new QWidget(this))
@@ -43,7 +47,7 @@ void MainWidget::initMainGui() {
   mNodeTreeView = new QTreeView(this);
   mNodeMouseHandler = createLayouts.installEventFilterOnTreeView(mNodeTreeView, this);
   QVBoxLayout* nodeTreeLayout;
-  auto nodeTuple = createLayouts.createNodeLayout(mNodeTreeView, nodeWindow);
+  auto nodeTuple = createLayouts.createNodeLayout(mNodeTreeView, nodeWindow, mRenderer->getScen()->getEngine());
   nodeTreeLayout = std::get<0>(nodeTuple);
   mItemModel = std::get<1>(nodeTuple);
   nodeLayout->addLayout(nodeTreeLayout);

@@ -11,7 +11,7 @@ namespace objects {
 class NodeController : public QObject {
  Q_OBJECT
  public:
-  explicit NodeController(TreeItemModel* objectsModel, QTreeView* nodeView);
+  explicit NodeController(TreeItemModel* objectsModel, QTreeView* nodeView, std::shared_ptr<Engine> engine);
 
  public slots:
 
@@ -23,6 +23,7 @@ class NodeController : public QObject {
   objects::TreeItemModel* mObjectsModel;
   QTreeView* mNodeTreeview;
   common::ICreateObjectsView* mView;
+  std::shared_ptr<Engine> mEngine;
 };
 }
 

@@ -8,11 +8,11 @@ UiWindowsCreator::UiWindowsCreator(QWidget* parent)
 
 }
 
-std::tuple<QVBoxLayout*, objects::TreeItemModel*, objects::NodeController*> UiWindowsCreator::createNodeLayout(QTreeView* treeView, QWidget*
-parent) {
+std::tuple<QVBoxLayout*, objects::TreeItemModel*, objects::NodeController*>
+UiWindowsCreator::createNodeLayout(QTreeView* treeView, QWidget* parent, std::shared_ptr<Engine> engine) {
 
   objects::TreeItemModel* model = new objects::TreeItemModel("InspectorModel", nullptr);
-  auto* nodeController = new objects::NodeController(model, treeView);
+  auto* nodeController = new objects::NodeController(model, treeView, engine);
 
   QLabel* label = new QLabel("Node", parent);
   label->setAlignment(Qt::AlignHCenter);
