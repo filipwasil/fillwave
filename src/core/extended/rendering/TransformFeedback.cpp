@@ -19,22 +19,57 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/pipeline/Fence.h>
+#include <fillwave/core/extended/rendering/TransformFeedback.h>
+#include <fillwave/Log.h>
+
+FLOGINIT("TransformFeedback", FERROR | FFATAL)
 
 namespace flw {
 namespace flc {
 
-Fence::Fence(GLenum target)
-    : mHandle(glFenceSync(target, 0)) {
-  // nothing
+TransformFeedback::TransformFeedback(GLsizei howMany)
+    : GLObject(howMany)
+    , mTarget(GL_TRANSFORM_FEEDBACK) {
+  glGenTransformFeedbacks(mHowMany, mHandles);
 }
 
-Fence::~Fence() {
-  glDeleteSync(mHandle);
+TransformFeedback::~TransformFeedback() {
+  glDeleteTransformFeedbacks(mHowMany, mHandles);
 }
 
-void Fence::wait(unsigned long long timeoutSpecifier) const {
-  glWaitSync(mHandle, 0, timeoutSpecifier);
+void TransformFeedback::bind(GLuint id) const {
+  glBindTransformFeedback(mTarget, mHandles[id]);
+}
+
+void TransformFeedback::begin(GLenum primitiveMode) {
+  if (primitiveMode != GL_POINTS
+      && primitiveMode != GL_LINES
+      && primitiveMode != GL_TRIANGLES
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#else
+      && primitiveMode != GL_TRIANGLES_ADJACENCY
+      && primitiveMode != GL_TRIANGLE_STRIP_ADJACENCY
+      && primitiveMode != GL_LINES_ADJACENCY
+      && primitiveMode != GL_LINE_STRIP_ADJACENCY
+#endif
+      ) {
+    fLogE("not valid primitive type");
+    return;
+  }
+  glBeginTransformFeedback(primitiveMode);
+}
+
+
+void TransformFeedback::end() {
+  glEndTransformFeedback();
+}
+
+void TransformFeedback::pause() {
+  glPauseTransformFeedback();
+}
+
+void TransformFeedback::resume() {
+  glResumeTransformFeedback();
 }
 
 } /* flc */

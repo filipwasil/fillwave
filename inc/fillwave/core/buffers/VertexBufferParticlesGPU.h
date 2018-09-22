@@ -21,10 +21,13 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/TVertexBuffer.h>
+#include <fillwave/core/base/buffers/TVertexBuffer.h>
 
 namespace flw {
 namespace flc {
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
 
 /*! \struct VertexParticleGPU
  * \brief Stores the particle vertex data computed entirely on GPU.
@@ -51,6 +54,8 @@ public:
 
   void log() const override;
 };
+
+#endif // defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 
 } /* flc */
 } /* flw */

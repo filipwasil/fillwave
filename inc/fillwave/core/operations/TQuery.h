@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/GLObject.h>
+#include <fillwave/core/base/GLObject.h>
 
 namespace flw {
 namespace flc {
@@ -58,10 +58,14 @@ public:
   GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
 };
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+
+
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+
 using QueryIfAnySamplesPassed = TQuery<GL_ANY_SAMPLES_PASSED>;
 using QueryHowManyTransformFeedbackPrimitivesWritten = TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN>;
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
 
 using QueryHowManySamplesPassed = TQuery<GL_SAMPLES_PASSED>;

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -18,33 +20,27 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
+#include <fillwave/core/base/texturing/Texture.h>
 
-#include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
-
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
 namespace flw {
 namespace flc {
 
-Texture3DRenderableDynamic::Texture3DRenderableDynamic(
-    TextureConfig* pX
-    , TextureConfig* nX
-    , TextureConfig* pY
-    , TextureConfig* nY
-    , TextureConfig* pZ
-    , TextureConfig* nZ
-    , ParameterList& param
-    , Texture2DRenderable* tex
-    , Program* prog)
-    : Texture3DRenderable(pX, nX, pY, nY, pZ, nZ, tex, param)
-    , mProgram(prog)
-    , mTimePassed(0.0f) {
-  setAttachment(GL_COLOR_ATTACHMENT0);
-  assert("todo feature not ready");
-  (void) mProgram;
-  (void) mTarget;
-  (void) mTimePassed;
-}
+/*! \class Texture1D
+ * \brief Not used.
+ */
 
-Texture3DRenderableDynamic::~Texture3DRenderableDynamic() = default;
+class Texture1D : public Texture {
+public:
+  Texture1D(ParameterList &parameters);
+
+  virtual ~Texture1D() = default;
+
+  void log();
+};
 
 } /* flc */
+typedef std::unique_ptr<flc::Texture1D> puTexture1D;
 } /* flw */
+#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */

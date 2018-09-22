@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/VertexBufferPosition.h>
+#include <fillwave/core/base/buffers/VertexBufferPosition.h>
 
 #include <fillwave/Log.h>
 

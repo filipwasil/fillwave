@@ -26,7 +26,7 @@
 #include <fillwave/management/LightSystem.h>
 #include <fillwave/Log.h>
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
 
 FLOGINIT_DEFAULT()
@@ -35,26 +35,26 @@ namespace flw {
 namespace flf {
 
 RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
-    : mScreenSize(engine->getScreenSize())
-    , mLights(engine->getLightSystem())
-    , mTextures(engine->getTextureSystem())
-    , mProgramMain(loader.getProgram(EProgram::basicDR))
-    , mProgramMainAnimated(loader.getProgram(EProgram::basicAnimatedDR))
-    , mProgramDirectionalLight(loader.getProgram(EProgram::directionalLightsDR))
-    , mProgramSpotLight(loader.getProgram(EProgram::spotLightsDR))
-    , mProgramPointLight(loader.getProgram(EProgram::pointLightsDR))
-    , mProgramDepthless(loader.getProgram(EProgram::depthlessDR))
-    , mProgramAmbient(loader.getProgram(EProgram::ambientDR))
-    , mProgramAOGeometry(loader.getProgram(EProgram::ambientOcclusionGeometry))
-    , mProgramAOColor(loader.getProgram(EProgram::ambientOcclusionColor))
-    , mAOGeometryBuffer(engine->storeTextureRenderable())
-    , mAOColorBuffer(engine->storeTextureRenderable())
-    , mIsAO(GL_FALSE)
-    , mDeferredColorAttachments(5)
-    , mGBuffer(std::make_unique<flc::FramebufferGeometry>(mTextures,
-                                                          mScreenSize[0],
-                                                          mScreenSize[1],
-                                                          mDeferredColorAttachments)) {
+  : mScreenSize(engine->getScreenSize())
+  , mLights(engine->getLightSystem())
+  , mTextures(engine->getTextureSystem())
+  , mProgramMain(loader.getProgram(EProgram::basicDR))
+  , mProgramMainAnimated(loader.getProgram(EProgram::basicAnimatedDR))
+  , mProgramDirectionalLight(loader.getProgram(EProgram::directionalLightsDR))
+  , mProgramSpotLight(loader.getProgram(EProgram::spotLightsDR))
+  , mProgramPointLight(loader.getProgram(EProgram::pointLightsDR))
+  , mProgramDepthless(loader.getProgram(EProgram::depthlessDR))
+  , mProgramAmbient(loader.getProgram(EProgram::ambientDR))
+  , mProgramAOGeometry(loader.getProgram(EProgram::ambientOcclusionGeometry))
+  , mProgramAOColor(loader.getProgram(EProgram::ambientOcclusionColor))
+  , mAOGeometryBuffer(engine->storeTextureRenderable())
+  , mAOColorBuffer(engine->storeTextureRenderable())
+  , mIsAO(GL_FALSE)
+  , mDeferredColorAttachments(5)
+  , mGBuffer(std::make_unique<flc::FramebufferGeometry>(mTextures,
+                                                        mScreenSize[0],
+                                                        mScreenSize[1],
+                                                        mDeferredColorAttachments)) {
   //todo RendererDR not ready
   flf::Sphere sphere(3.0f, 10, 10); //xxx hardcoded values fix ! todo !
   auto vertices = sphere.getVertices();
@@ -105,8 +105,8 @@ void RendererDR::reset(GLuint width, GLuint height) {
   mFlagReload = true;
 
   mScreenSize = {
-      width,
-      height
+    width,
+    height
   };
 
   mGBuffer->resize(width, height);
@@ -275,8 +275,8 @@ inline void RendererDR::drawLightsPointPass(ICamera &camera, GLint &textureUnit)
 
     flc::Uniform::push(mULCCameraPositionPoint, camera.getTranslation());
     flc::Uniform::push(mULCMVPPoint,
-                        camera.getViewProjection() *
-                        glm::translate(glm::mat4(1.0), mLights.mLightsPoint[i]->getTranslation()));
+                       camera.getViewProjection() *
+                       glm::translate(glm::mat4(1.0), mLights.mLightsPoint[i]->getTranslation()));
 
     flc::Uniform::push(mULCIsAOPoint, mIsAO ? 1 : 0);
 //xxx      if runtime changing is not needed

@@ -21,7 +21,7 @@
 
 #include <fillwave/models/builders/BuilderEmiter.h>
 #include <fillwave/models/EmiterPointCPU.h>
-#include <fillwave/models/EmiterPointGPU.h>
+#include <fillwave/models/extended/EmiterPointGPU.h>
 #include <fillwave/Fillwave.h>
 
 namespace flw {

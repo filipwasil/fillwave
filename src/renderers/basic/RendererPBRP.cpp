@@ -19,19 +19,51 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
+#include <fillwave/renderers/RendererPBRP.h>
+#include <fillwave/core/base/pipeline/Program.h>
+#include <fillwave/models/Entity.h>
+#include <fillwave/models/Skybox.h>
 
 namespace flw {
-namespace flc {
+namespace flf {
 
-VertexBufferParticlesGPU::VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles)
-    : TVertexBuffer(particles, GL_DYNAMIC_COPY) {
-  // nothing
+void RendererPBRP::update(IRenderable *renderable) {
+  RenderItem item;
+  renderable->getRenderItem(item);
+  GLuint programId = item.mHandles[RenderItem::eRenderHandleProgram];
+  if (mRenderPasses.find(programId) != mRenderPasses.end()) {
+    mRenderPasses[programId].push_back(renderable);
+  } else {
+    std::vector<IRenderable *> vector;
+    vector.push_back(renderable);
+    mRenderPasses[programId] = vector;
+  }
 }
 
-void VertexBufferParticlesGPU::log() const {
-  // nothing
+void RendererPBRP::draw(ICamera &camera) {
+  if (mSkybox) {
+    mSkybox->draw(camera);
+  }
+  glClear(GL_DEPTH_BUFFER_BIT);
+  for (auto &program : mRenderPasses) {
+    flc::Program::useProgram(program.first);
+    for (auto &node : program.second) {
+      node->drawPBRP(camera);
+    }
+  }
 }
 
-} /* flc */
+void RendererPBRP::reset(GLuint /*width*/, GLuint /*height*/) {
+  mFlagReload = true;
+}
+
+void RendererPBRP::clear() {
+  mFlagReload = true;
+
+  size_t predictedSize = mRenderPasses.size() + 1;
+  mRenderPasses.clear();
+  mRenderPasses.reserve(predictedSize);
+}
+
+} /* flf */
 } /* flw */

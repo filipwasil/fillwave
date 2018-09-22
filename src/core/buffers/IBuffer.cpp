@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/IBuffer.h>
+#include <fillwave/core/base/buffers/IBuffer.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Buffer", FERROR | FFATAL)
@@ -51,8 +51,15 @@ void IBuffer::setSize(GLuint size) {
 }
 
 void IBuffer::setTarget(GLuint target) {
-  if (target == GL_ARRAY_BUFFER_BINDING || target == GL_ARRAY_BUFFER || target == GL_ELEMENT_ARRAY_BUFFER ||
-      target == GL_UNIFORM_BUFFER || target == GL_ELEMENT_ARRAY_BUFFER_BINDING || target == GL_PIXEL_PACK_BUFFER) {
+  if (target == GL_ARRAY_BUFFER_BINDING
+      || target == GL_ARRAY_BUFFER
+      || target == GL_ELEMENT_ARRAY_BUFFER
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+      || target == GL_UNIFORM_BUFFER
+      || target == GL_PIXEL_PACK_BUFFER
+#endif // defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+      || target == GL_ELEMENT_ARRAY_BUFFER_BINDING) {
     mTarget = target;
   } else {
     fLogE("Invalid target %d", mTarget);
@@ -60,9 +67,18 @@ void IBuffer::setTarget(GLuint target) {
 }
 
 void IBuffer::setDrawType(GLuint dataStoreType) {
-  if (dataStoreType == GL_STREAM_DRAW || dataStoreType == GL_STREAM_READ || dataStoreType == GL_STREAM_COPY ||
-      dataStoreType == GL_STATIC_DRAW || dataStoreType == GL_STATIC_READ || dataStoreType == GL_STATIC_COPY ||
-      dataStoreType == GL_DYNAMIC_DRAW || dataStoreType == GL_DYNAMIC_READ || dataStoreType == GL_DYNAMIC_COPY) {
+  if (dataStoreType == GL_STREAM_DRAW
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+      || dataStoreType == GL_STREAM_READ
+      || dataStoreType == GL_STREAM_COPY
+      || dataStoreType == GL_STATIC_READ
+      || dataStoreType == GL_STATIC_COPY
+      || dataStoreType == GL_DYNAMIC_READ
+      || dataStoreType == GL_DYNAMIC_COPY
+#endif // defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+      || dataStoreType == GL_STATIC_DRAW
+      || dataStoreType == GL_DYNAMIC_DRAW) {
     mDataStoreType = dataStoreType;
   } else {
     fLogE("Invalid data store type %d", mTarget);
@@ -89,19 +105,9 @@ GLvoid *IBuffer::getData() const {
   return mData;
 }
 
-void IBuffer::unmap() const {
-  glUnmapBuffer(mTarget);
-  fLogC("Could not unmap the buffer object");
-}
-
 void IBuffer::bind(GLuint id) const {
   glBindBuffer(mTarget, mHandles[id]);
   fLogC("Could not bind the buffer object");
-}
-
-void IBuffer::bindBase(GLuint id) const {
-  glBindBufferBase(mTarget, mIndex, mHandles[id]);
-  fLogC("Bind the uniform buffer object");
 }
 
 void IBuffer::unbind() {
@@ -114,6 +120,34 @@ void IBuffer::bind(GLuint externalTarget, GLuint id) const {
   fLogC("Could not bind the buffer object");
 }
 
+void IBuffer::send() {
+  if (!mLoaded) {
+    glBufferData(mTarget, mSize, mData, mDataStoreType);
+    mLoaded = GL_TRUE;
+    fLogC("Could not send the data");
+  }
+}
+
+void IBuffer::reload() {
+  glGenBuffers(mHowMany, mHandles);
+  fLogC("reload");
+}
+
+/* Feature not available in OpenGL ES  < 3.1 */
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+
+#else
+
+void IBuffer::unmap() const {
+  glUnmapBuffer(mTarget);
+  fLogC("Could not unmap the buffer object");
+}
+
+void IBuffer::bindBase(GLuint id) const {
+  glBindBufferBase(mTarget, mIndex, mHandles[id]);
+  fLogC("Bind the uniform buffer object");
+}
+
 void IBuffer::bindBase(GLuint externalTarget, GLuint id) const {
   glBindBufferBase(externalTarget, mIndex, mHandles[id]);
   fLogC("Bind the uniform buffer object");
@@ -122,14 +156,6 @@ void IBuffer::bindBase(GLuint externalTarget, GLuint id) const {
 void IBuffer::unbindBase(GLuint externalTarget) {
   glBindBufferBase(externalTarget, mIndex, 0);
   fLogC("Could not unbind the buffer object");
-}
-
-void IBuffer::send() {
-  if (!mLoaded) {
-    glBufferData(mTarget, mSize, mData, mDataStoreType);
-    mLoaded = GL_TRUE;
-    fLogC("Could not send the data");
-  }
 }
 
 GLvoid *IBuffer::mapRange(GLenum access, GLuint size) {
@@ -143,15 +169,6 @@ GLvoid *IBuffer::mapRange(GLenum access, GLuint size) {
   }
   return ptr;
 }
-
-void IBuffer::reload() {
-  glGenBuffers(mHowMany, mHandles);
-  fLogC("reload");
-}
-
-/* Feature not available in OpenGL ES  < 3.1 */
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else
 
 GLvoid* IBuffer::map(GLenum access) const {
   GLvoid *ptr = glMapBuffer(mTarget, access);

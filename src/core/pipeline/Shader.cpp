@@ -21,7 +21,7 @@
 
 #include "fillwave/loaders/FileLoader.h"
 
-#include <fillwave/core/pipeline/Shader.h>
+#include <fillwave/core/base/pipeline/Shader.h>
 
 #include <sstream>
 
@@ -132,7 +132,7 @@ Shader::DebugInfo Shader::getDebugInfo() const {
       return { "GL_FRAGMENT_SHADER", ".frag" };
     case GL_VERTEX_SHADER:
       return {"GL_VERTEX_SHADER", ".vert" };
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
     case GL_GEOMETRY_SHADER:
       return {"GL_GEOMETRY_SHADER", ".geom" };

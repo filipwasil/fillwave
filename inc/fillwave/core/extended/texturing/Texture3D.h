@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -18,60 +20,43 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
-#include <fillwave/core/texturing/Sampler.h>
-#include <fillwave/Log.h>
-
-FLOGINIT("Sampler", FERROR | FFATAL)
+#include <fillwave/core/base/texturing/Texture.h>
+#include <fillwave/loaders/textureloader/TextureConfigs.h>
 
 namespace flw {
 namespace flc {
 
-Sampler::Sampler(GLint textureUnit, GLuint howMany)
-    : GLObject(howMany)
-    , mTextureUnit(textureUnit) {
-  glGenSamplers(mHowMany, mHandles);
-  fLogC("ERROR: Could not generate sampler -> ID");
-}
+/*! \class Texture3D
+ * \brief Single GLSL 3D Texture object.
+ * It consists of six 2D images.
+ */
 
-Sampler::~Sampler() {
-  glDeleteSamplers(mHowMany, mHandles);
-}
+class Texture3D : public Texture {
+private:
+  void sendData(TextureConfig* file, GLubyte* customData = nullptr);
 
-void Sampler::bind(GLuint id) {
-  glBindSampler(mTextureUnit, mHandles[id]);
-  fLogC("Could not bind the Sampler");
-}
+public:
+  pu<TextureConfig> mRight; /* Positive X*/
+  pu<TextureConfig> mLeft; /* Negative X*/
+  pu<TextureConfig> mCeil; /* Positive Y*/
+  pu<TextureConfig> mFloor; /* Negative Y*/
+  pu<TextureConfig> mFront; /* Positive Z*/
+  pu<TextureConfig> mBack; /* Negative Z*/
 
-void Sampler::unbind(GLuint id) {
-  glBindSampler(0, mHandles[id]);
-  fLogC("Could not bind the VAO");
-}
+  Texture3D(TextureConfig* right, TextureConfig* left, TextureConfig* ceil, TextureConfig* floor, TextureConfig* front, TextureConfig* back, ParameterList& param);
 
-void Sampler::setParameters(ParameterList parameters) {
-  for (auto& it : parameters) {
-    setParameter(it.first, it.second);
-  }
-}
+  virtual ~Texture3D() = default;
 
-void Sampler::setParameter(GLenum parameter, GLenum value, GLuint id) {
-  glSamplerParameteri(mHandles[id], parameter, value);
-  fLogC("setParameter: ", parameter);
-}
+  void sendData();
 
-void Sampler::setParameter(Parameter parameter, GLuint id) {
-  glSamplerParameteri(mHandles[id], parameter.first, parameter.second);
-  fLogC("setParameter");
-}
+  void log();
 
-GLint Sampler::getTextureUnit() {
-  return mTextureUnit;
-}
+  static void unbindCubemapTexture(GLint textureUnit);
 
-void Sampler::reload() {
-  glGenSamplers(mHowMany, mHandles);
-  fLogC("reload");
-}
+  static void unbindCubemapTextures();
+
+  void sendData(GLubyte* xp, GLubyte* xn, GLubyte* yp, GLubyte* yn, GLubyte* zp, GLubyte* zn);
+};
 
 } /* flc */
 } /* flw */

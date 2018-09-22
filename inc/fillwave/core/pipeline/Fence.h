@@ -30,15 +30,17 @@ namespace flc {
 
 /*! \class Fence
  * \brief Sets a fence for a gpu to wait.
+ * \param target GL_SYNC_GPU_COMMANDS_COMPLETE
+ * \param timeoutSpecifier GL_TIMEOUT_IGNORED
  */
 
 class Fence {
 public:
-  Fence(GLenum target = GL_SYNC_GPU_COMMANDS_COMPLETE);
+  Fence(GLenum target);
 
   virtual ~Fence();
 
-  void wait(unsigned long long timeoutSpecifier = GL_TIMEOUT_IGNORED) const;
+  void wait(unsigned long long timeoutSpecifier) const;
 
 private:
   GLsync mHandle;

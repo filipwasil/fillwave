@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/VertexArray.h>
+#include <fillwave/core/base/buffers/VertexArray.h>
 
 #include <fillwave/Log.h>
 
@@ -27,6 +27,15 @@ FLOGINIT("VertexArray", FERROR | FFATAL)
 
 namespace flw {
 namespace flc {
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  #define glGenVertexArrays glGenVertexArraysOES
+  #define glDeleteVertexArrays glDeleteVertexArraysOES
+  #define glBindVertexArray glBindVertexArrayOES
+  #define glBindVertexArray glBindVertexArrayOES
+  #define glBindVertexArray glBindVertexArrayOES
+#else
+#endif
 
 VertexArray::VertexArray(GLuint howMany) : GLObject(howMany) {
   glGenVertexArrays(mHowMany, mHandles);

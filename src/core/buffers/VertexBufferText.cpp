@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/VertexBufferText.h>
+#include <fillwave/core/base/buffers/VertexBufferText.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("VertexBufferText", FERROR | FFATAL)

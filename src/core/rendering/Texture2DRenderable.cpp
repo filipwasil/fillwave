@@ -19,11 +19,16 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/rendering/Texture2DRenderable.h>
+#include <fillwave/core/base/rendering/Texture2DRenderable.h>
 #include <fillwave/loaders/textureloader/TextureConfigs.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Texture2DRenderable", FERROR | FFATAL | FDEBUG)
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#define glBlitFramebuffer glBlitFramebufferNV
+#else
+#endif
 
 namespace flw {
 namespace flc {
@@ -57,8 +62,9 @@ void Texture2DRenderable::bindForReading() {
 }
 
 void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
-  const GLenum none = GL_NONE;
   switch (attachment) {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
     case GL_DEPTH_STENCIL_ATTACHMENT:
       bind();
       bindForRendering();
@@ -66,16 +72,24 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
       fLogC("Setting depth framebuffer failed");
       Framebuffer::bindScreenFramebuffer();
       break;
+#endif
     case GL_DEPTH_ATTACHMENT:
       bind();
       bindForRendering();
       mFramebuffer.attachTexture2D(GL_DEPTH_ATTACHMENT, target, getHandle());
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-    glDrawBuffers(1, &none);
-    glReadBuffer(none);
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+      {
+      const GLenum none = GL_NONE;
+      glDrawBuffers(1, &none);
+      glReadBuffer(none);
+      }
 #else
+      {
+      const GLenum none = GL_NONE;
       glDrawBuffer(none);
       glReadBuffer(none);
+      }
 #endif
       fLogC("Setting depth framebuffer failed");
       Framebuffer::bindScreenFramebuffer();

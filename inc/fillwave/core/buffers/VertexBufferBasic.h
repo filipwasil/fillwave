@@ -23,7 +23,7 @@
 
 #include <fillwave/models/terrain/TerrainConstructor.h>
 
-#include <fillwave/core/buffers/TVertexBuffer.h>
+#include <fillwave/core/base/buffers/TVertexBuffer.h>
 
 #include <fillwave/loaders/ModelLoader.h>
 

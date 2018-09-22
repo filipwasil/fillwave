@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/IBuffer.h>
+#include <fillwave/core/base/buffers/IBuffer.h>
 
 namespace flw {
 namespace flc {
@@ -29,6 +29,9 @@ namespace flc {
 /*! \class PixelBuffer
  * \brief PixelBufferObject - PBO. Used to read pixels from FBO.
  */
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
 
 /*
  * When using a PBO as target for glReadPixels
@@ -49,6 +52,8 @@ public:
 
   void emptyGPU() override;
 };
+
+#endif
 
 } /* flc */
 } /* flw */

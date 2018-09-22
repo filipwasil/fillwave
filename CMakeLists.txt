@@ -53,6 +53,16 @@ aux_source_directory ("src/core/pipeline" FILLWAVE_CORE_PIPELINE_SOURCES)
 aux_source_directory ("src/core/texturing" FILLWAVE_CORE_TEXTURING_SOURCES)
 aux_source_directory ("src/core/operations" FILLWAVE_CORE_OPERATIONS_SOURCES)
 
+if (FILLWAVE_BACKEND_OPENGL_ES_20)
+else()
+  aux_source_directory ("src/core/extended" FILLWAVE_CORE_EXTENDED_SOURCES)
+  aux_source_directory ("src/core/extended/buffers" FILLWAVE_CORE_EXTENDED_BUFFERS_SOURCES)
+  aux_source_directory ("src/core/extended/rendering" FILLWAVE_CORE_EXTENDED_RENDERING_SOURCES)
+  aux_source_directory ("src/core/extended/pipeline" FILLWAVE_CORE_EXTENDED_PIPELINE_SOURCES)
+  aux_source_directory ("src/core/extended/texturing" FILLWAVE_CORE_EXTENDED_TEXTURING_SOURCES)
+  aux_source_directory ("src/core/extended/operations" FILLWAVE_CORE_EXTENDED_OPERATIONS_SOURCES)
+endif(FILLWAVE_BACKEND_OPENGL_ES_20)
+
 aux_source_directory ("src/models" FILLWAVE_MODELS_SOURCES)
 aux_source_directory ("src/models/base" FILLWAVE_MODELS_BASE_SOURCES)
 
@@ -70,7 +80,12 @@ aux_source_directory ("src/hud" FILLWAVE_HUD_SOURCES)
 aux_source_directory ("src/loaders" FILLWAVE_LOADERS_SOURCES)
 aux_source_directory ("src/management" FILLWAVE_MANAGEMENT_SOURCES)
 aux_source_directory ("src/common" FILLWAVE_COMMON_SOURCES)
-aux_source_directory ("src/renderers" FILLWAVE_RENDERERS_SOURCES)
+
+if (FILLWAVE_BACKEND_OPENGL_ES_20)
+else()
+  aux_source_directory ("src/renderers/extended" FILLWAVE_RENDERERS_EXTENDED_SOURCES)
+  aux_source_directory ("src/renderers/basic" FILLWAVE_RENDERERS_BASIC_SOURCES)
+endif()
 aux_source_directory ("src/models/shapes" FILLWAVE_SHAPES_SOURCES)
 
 set (FILLWAVE_ENGINE_SOURCES
@@ -84,6 +99,11 @@ set (FILLWAVE_SOURCES
     ${FILLWAVE_CORE_PIPELINE_SOURCES}
     ${FILLWAVE_CORE_TEXTURING_SOURCES}
     ${FILLWAVE_CORE_OPERATIONS_SOURCES}
+    ${FILLWAVE_CORE_EXTENDED_BUFFERS_SOURCES}
+    ${FILLWAVE_CORE_EXTENDED_RENDERING_SOURCES}
+    ${FILLWAVE_CORE_EXTENDED_PIPELINE_SOURCES}
+    ${FILLWAVE_CORE_EXTENDED_TEXTURING_SOURCES}
+    ${FILLWAVE_CORE_EXTENDED_OPERATIONS_SOURCES}
     ${FILLWAVE_MODELS_SOURCES}
     ${FILLWAVE_MODELS_BASE_SOURCES}
     ${FILLWAVE_MODELS_ANIMATIONS_SOURCES}
@@ -119,6 +139,7 @@ endif ()
 
 if (ANDROID)
   include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Android.cmake)
+
 endif ()
 
 if (APPLE)

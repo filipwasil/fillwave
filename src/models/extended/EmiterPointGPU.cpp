@@ -25,7 +25,7 @@
 
 #include <fillwave/Fillwave.h>
 
-#include <fillwave/core/texturing/NoiseTexture3DArray.h>
+#include <fillwave/core/extended/texturing/NoiseTexture3DArray.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("EmiterPointGPU", FERROR | FFATAL)

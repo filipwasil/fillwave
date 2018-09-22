@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,30 +21,22 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/PixelBuffer.h>
-#include <fillwave/Log.h>
+#include <fillwave/engine/Engine.h>
 
-FLOGINIT("PixelBuffer", FERROR | FFATAL)
+struct ANativeActivity;
 
 namespace flw {
-namespace flc {
 
-PixelBuffer::PixelBuffer(GLuint dataStoreType)
-    : IBuffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
-  mData = 0;
-}
+/*! \class EngineAndroid
+ * \brief Android implementation specific
+ */
 
-void PixelBuffer::setScreenSize(GLuint width, GLuint height, GLuint bytesPerPixel) {
-  mSize = bytesPerPixel * width * height;
-}
+class EngineAndroid {
+ public:
 
-void PixelBuffer::emptyCPU() {
-  fLogD("Not gpu data clear is possible with this buffer");
-}
+  EngineAndroid(const std::string& rootPath);
 
-void PixelBuffer::emptyGPU() {
-  fLogD("Not gpu data clear is possible with this buffer");
-}
+  EngineAndroid(ANativeActivity* activity);
+};
 
-} /* models */
 } /* flw */

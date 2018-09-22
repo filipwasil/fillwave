@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/operations/PostProcessingPass.h>
+#include <fillwave/core/base/operations/PostProcessingPass.h>
 
 namespace flw {
 namespace flc {

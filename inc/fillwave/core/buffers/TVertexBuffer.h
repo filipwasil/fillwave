@@ -20,8 +20,8 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-#include <fillwave/core/buffers/IBuffer.h>
-#include <fillwave/core/pipeline/Attribute.h>
+#include <fillwave/core/base/buffers/IBuffer.h>
+#include <fillwave/core/base/pipeline/Attribute.h>
 
 #include <fillwave/models/shapes/Shape.h>
 
@@ -175,8 +175,8 @@ protected:
         case GL_FLOAT_MAT4:
           size = 16;
           break;
-//#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-//#else
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#else
         case GL_UNSIGNED_INT_VEC3:
           size = 3;
           break;
@@ -186,7 +186,7 @@ protected:
         case GL_UNSIGNED_INT_VEC4:
           size = 4;
           break;
-//#endif
+#endif
         default:
           std::cout << "Not supported type of attribute" << std::endl;
           size = 0;

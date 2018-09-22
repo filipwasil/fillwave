@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/rendering/Framebuffer.h>
+#include <fillwave/core/base/rendering/Framebuffer.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Framebuffer", FERROR | FFATAL | FDEBUG)
@@ -40,6 +40,18 @@ void Framebuffer::bind(GLuint id) const {
   fLogC("glBindFramebuffer GL_FRAMEBUFFER");
 }
 
+void Framebuffer::attachTexture2D(GLenum attachment, GLenum target, GLuint textureHandle) {
+  glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, target, textureHandle, 0);
+  fLogC("Attach texture to framebuffer failed");
+}
+
+void Framebuffer::bindScreenFramebuffer() {
+  glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+
 void Framebuffer::bindForWriting(GLuint id) const {
   glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mHandles[id]);
   fLogC("glBindFramebuffer GL_DRAW_FRAMEBUFFER");
@@ -48,11 +60,6 @@ void Framebuffer::bindForWriting(GLuint id) const {
 void Framebuffer::bindForReading(GLuint id) const {
   glBindFramebuffer(GL_READ_FRAMEBUFFER, mHandles[id]);
   fLogC("glBindFramebuffer GL_READ_FRAMEBUFFER");
-}
-
-void Framebuffer::attachTexture2D(GLenum attachment, GLenum target, GLuint textureHandle) {
-  glFramebufferTexture2D(GL_FRAMEBUFFER, attachment, target, textureHandle, 0);
-  fLogC("Attach texture to framebuffer failed");
 }
 
 void Framebuffer::attachTexture2DDraw(GLenum attachment, GLenum target, GLuint textureHandle) {
@@ -68,10 +75,6 @@ void Framebuffer::setReadDepthAttachment() {
   glReadBuffer(GL_DEPTH_ATTACHMENT);
 }
 
-void Framebuffer::bindScreenFramebuffer() {
-  glBindFramebuffer(GL_FRAMEBUFFER, 0);
-}
-
 void Framebuffer::bindScreenFramebufferForReading() {
   glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
 }
@@ -79,6 +82,8 @@ void Framebuffer::bindScreenFramebufferForReading() {
 void Framebuffer::bindScreenFramebufferForWriting() {
   glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 }
+
+#endif
 
 void Framebuffer::reload() {
   glGenFramebuffers(mHowMany, mHandles);

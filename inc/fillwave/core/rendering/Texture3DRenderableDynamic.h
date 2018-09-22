@@ -21,8 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/rendering/Texture3DRenderable.h>
-#include <fillwave/core/pipeline/Program.h>
+#include <fillwave/core/extended/rendering/Texture3DRenderable.h>
+#include <fillwave/core/base/pipeline/Program.h>
 
 namespace flw {
 namespace flc {

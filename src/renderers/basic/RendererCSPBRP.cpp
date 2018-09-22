@@ -24,7 +24,7 @@
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
 
-#include <fillwave/core/texturing/Texture2D.h>
+#include <fillwave/core/base/texturing/Texture2D.h>
 
 #include <fillwave/management/LightSystem.h>
 

@@ -21,8 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/texturing/Texture2D.h>
-#include <fillwave/core/rendering/Framebuffer.h>
+#include <fillwave/core/base/texturing/Texture2D.h>
+#include <fillwave/core/base/rendering/Framebuffer.h>
 
 namespace flw {
 namespace flc {

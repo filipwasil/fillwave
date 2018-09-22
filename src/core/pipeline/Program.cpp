@@ -19,8 +19,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/pipeline/Program.h>
-#include <fillwave/core/pipeline/Attribute.h>
+#include <fillwave/core/base/pipeline/Program.h>
+#include <fillwave/core/base/pipeline/Attribute.h>
 
 #include <fillwave/Log.h>
 
@@ -235,6 +235,8 @@ GLint Program::getUniformLocation(const std::string& name) {
   return FILLWAVE_UNIFORM_NOT_FOUND;
 }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
 void Program::getUniformBlock(const std::string& name, GLuint bindingPoint) {
   GLint howMany = -1;
   GLint uniformBlockSize = 0;
@@ -257,6 +259,7 @@ void Program::getUniformBlock(const std::string& name, GLuint bindingPoint) {
     }
   }
 }
+#endif
 
 void Program::uniformBlockPush(const std::string& name, GLfloat *data) {
   for (auto &it : mUnifromBuffers) {

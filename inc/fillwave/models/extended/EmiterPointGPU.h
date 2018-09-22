@@ -21,9 +21,9 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
-#include <fillwave/core/pipeline/Fence.h>
 #include <fillwave/models/base/IEmiterPoint.h>
+#include <fillwave/core/extended/pipeline/Fence.h>
+#include <fillwave/core/extended/buffers/VertexBufferParticlesGPU.h>
 
 namespace flw {
 class Engine;
@@ -82,7 +82,7 @@ private:
   flc::Program *mProgramEmiter;
   pu<flc::Fence> mFence;
 
-  flc::VertexBufferParticlesGPU *mVBOGPU[mPingPongBuffers];
+  flc::VertexBufferParticlesGPU* mVBOGPU[mPingPongBuffers];
 
   GLint mULCTimeEmiter, mULCEmissionRateEmiter, mULCModelMatrixEmiter, mULCCameraPositionEmiter, mULCHowManyEmiter, mULCAccelerationEmiter, mULCStartVelocityEmiter, mULCStartPositionEmiter, mULCLifeTimeEmiter, mULCRobustnessVelocityEmiter, mULCRobustnessPositionEmiter, mULCNoiseSamplerEmiter;
 

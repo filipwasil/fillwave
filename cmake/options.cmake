@@ -23,10 +23,11 @@ option (FILLWAVE_COMPILATION_RELEASE "Build type" OFF)
 # -----------------------------------------------
 
 option (FILLWAVE_BACKEND_OPENGL_33 "Using OpenGL 3.3 core profile" OFF)
-option (FILLWAVE_BACKEND_OPENGL_45 "Using OpenGL 4.5 core profile" ON)
-option (FILLWAVE_BACKEND_OPENGL_ES_20 "Using OpenGL ES 2.0 core profile" OFF)
+option (FILLWAVE_BACKEND_OPENGL_45 "Using OpenGL 4.5 core profile" OFF)
+option (FILLWAVE_BACKEND_OPENGL_ES_20 "Using OpenGL ES 2.0 core profile" ON)
 option (FILLWAVE_BACKEND_OPENGL_ES_30 "Using OpenGL ES 3.0 core profile" OFF)
 option (FILLWAVE_BACKEND_OPENGL_ES_32 "Using OpenGL ES 3.2 core profile" OFF)
+option (FILLWAVE_BACKEND_OPENGL_ES_PC "Using OpenGL ES FOR PC" ON)
 
 # -----------------------------------------------
 # Tests related options

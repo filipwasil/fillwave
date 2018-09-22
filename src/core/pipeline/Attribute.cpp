@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/pipeline/Attribute.h>
+#include <fillwave/core/base/pipeline/Attribute.h>
 
 #include <fillwave/Log.h>
 
@@ -51,9 +51,12 @@ Attribute::Attribute(const std::string& name, GLuint index, GLint size, GLsizei 
 
   switch (mType) {
     case GL_UNSIGNED_INT:
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
     case GL_UNSIGNED_INT_VEC2:
     case GL_UNSIGNED_INT_VEC3:
     case GL_UNSIGNED_INT_VEC4:
+#endif
       mTypeSize = sizeof(GLuint);
       break;
     case GL_FLOAT:
