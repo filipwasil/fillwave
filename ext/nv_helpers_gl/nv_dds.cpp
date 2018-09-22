@@ -189,9 +189,14 @@
 #include <assert.h>
 #include "nv_dds.h"
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#define GL_RED GL_RED_EXT
+#define GL_RG8 GL_RG8_EXT
+#define GL_RGBA8 GL_RGBA8_OES
+#endif
+
 using namespace std;
 using namespace nv_dds;
-
 inline GLenum comps2internalfmt(int i)
 {
   switch(i)
@@ -397,6 +402,8 @@ bool CDDSImage::load(string filename, bool flipImage)
         return false;
     }
   }
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   else if (ddsh.ddspf.dwFlags == DDSF_RGBA && ddsh.ddspf.dwRGBBitCount == 32)
   {
 
@@ -416,6 +423,7 @@ bool CDDSImage::load(string filename, bool flipImage)
     m_components = 3;
     m_internal_format = comps2internalfmt(m_components);
   }
+#endif
   else if (ddsh.ddspf.dwRGBBitCount == 8)
   {
     m_format = GL_LUMINANCE;
@@ -668,6 +676,9 @@ void CDDSImage::clear()
 // uploads a compressed/uncompressed 1D texture
 bool CDDSImage::upload_texture1D()
 {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  return false;
+#else
   assert(m_valid);
   assert(!m_images.empty());
 
@@ -718,6 +729,7 @@ bool CDDSImage::upload_texture1D()
   }
 
   return true;
+#endif
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -744,9 +756,17 @@ bool CDDSImage::upload_texture2D(unsigned int imageIndex, GLenum target)
 
   assert(image.get_height() > 0);
   assert(image.get_width() > 0);
-  assert(target == GL_TEXTURE_2D || target == GL_TEXTURE_RECTANGLE ||
-         (target >= GL_TEXTURE_CUBE_MAP_POSITIVE_X &&
-          target <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z));
+
+  auto isTargetValid =
+    target == GL_TEXTURE_2D
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+    || target == GL_TEXTURE_RECTANGLE
+#endif
+    || (target >= GL_TEXTURE_CUBE_MAP_POSITIVE_X &&
+        target <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
+
+  assert(isTargetValid);
 
   if (is_compressed())
   {
@@ -798,6 +818,9 @@ bool CDDSImage::upload_texture2D(unsigned int imageIndex, GLenum target)
 // uploads a compressed/uncompressed 3D texture
 bool CDDSImage::upload_texture3D()
 {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  return false;
+#else
   assert(m_valid);
   assert(!m_images.empty());
   assert(m_type == Texture3D);
@@ -857,11 +880,16 @@ bool CDDSImage::upload_texture3D()
   }
 
   return true;
+#endif
 }
 
 bool CDDSImage::upload_textureRectangle()
 {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  return false;
+#else
   return upload_texture2D(0, GL_TEXTURE_RECTANGLE);
+#endif
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/texturing/Sampler.h>
+#include <fillwave/core/extended/texturing/Sampler.h>
 
 namespace flw {
 namespace flf {

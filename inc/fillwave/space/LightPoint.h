@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/rendering/Texture3DRenderable.h>
+#include <fillwave/core/extended/rendering/Texture3DRenderable.h>
 #include <fillwave/space/CameraPerspective.h>
 #include <fillwave/models/shapes/Sphere.h>
 #include <fillwave/space/base/Light.h>

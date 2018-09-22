@@ -19,6 +19,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <nv_helpers_gl/nv_dds.h>
+
 #include <fillwave/loaders/textureloader/TTextureLoader.h>
 #include <fillwave/loaders/textureloader/stb/TextureLoaderTraitsSTB.h>
 
@@ -33,9 +35,13 @@
 
 #include <iterator>
 
-#include <nv_helpers_gl/nv_dds.h>
-
 FLOGINIT_DEFAULT()
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#define GL_RED GL_RED_EXT
+#define GL_RG8 GL_RG8_EXT
+#define GL_RGBA8 GL_RGBA8_OES
+#endif
 
 using namespace std;
 
@@ -149,8 +155,8 @@ flc::TextureConfig* TTextureLoader<TextureLoaderTraitsSTB>::load(
         return 3;
       case GL_ALPHA:
       case GL_RED:
-      case GL_GREEN:
-      case GL_BLUE:
+//      case GL_GREEN:
+//      case GL_BLUE:
         return 1;
       default:
         fLogE("Not recognized texture format loading");

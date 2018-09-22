@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/base/GLObject.h>
+#include <fillwave/core/GLObject.h>
 
 #include <fillwave/Log.h>
 

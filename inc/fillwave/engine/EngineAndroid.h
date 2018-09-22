@@ -31,7 +31,7 @@ namespace flw {
  * \brief Android implementation specific
  */
 
-class EngineAndroid {
+class EngineAndroid : public Engine{
  public:
 
   EngineAndroid(const std::string& rootPath);

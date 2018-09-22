@@ -69,24 +69,6 @@ Engine::Engine(const std::string& runtimeBinaryFilePath)
 //   mFence = puFence(new flc::Fence());
 }
 
-void Engine::initExtensions() {
-  if (gladLoadGL()) {
-    fLogD("OpenGL Version: ", glGetString(GL_VERSION));
-  } else {
-    fLogF("Extenstions failed to init");
-  }
-
-  if (GL_NO_ERROR != glGetError()) {
-    fLogE("glewInit returned INVALID_ENUM ... It may happen");
-  }
-
-  GLint maxPatchVertices = 0;
-  glGetIntegerv(GL_MAX_PATCH_VERTICES, &maxPatchVertices);
-  fLogD("Max supported patches for tesselation: ", maxPatchVertices);
-  // suppress error if tesselation is not supported
-  glGetError();
-}
-
 void Engine::initManagement() {
   mTextures = std::make_unique<flf::TextureSystem>(mFileLoader.getRootPath());
   mLights = std::make_unique<flf::LightSystem>();
@@ -118,11 +100,6 @@ void Engine::initOcclusionTest() {
   flc::VertexArray::unbindVAO();
 }
 
-void Engine::initPickingBuffer() {
-  mPickingPixelBuffer = std::make_unique<flc::PixelBuffer>(GL_STREAM_READ);
-  reloadPickingBuffer();
-}
-
 void Engine::initExtras() {
   /* Debugger */
   mDebugger = std::make_unique<flf::Debugger>(this);
@@ -150,11 +127,32 @@ void Engine::reload() {
     it.second->reload();
   }
 
-  mPickingPixelBuffer->reload();
   reloadPickingBuffer();
 }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+
+void Engine::initPickingBuffer() {
+  mPickingPixelBuffer = std::make_unique<flc::PixelBuffer>(GL_STREAM_READ);
+  reloadPickingBuffer();
+}
+
+VertexBufferParticlesGPU*
+Engine::storeBuffersInternal(VertexArray* vao, size_t idx, vector<VertexParticleGPU> &particles) {
+  auto ptr = new vector<VertexBufferParticlesGPU* >();
+  auto buffers = mBuffers.mVerticesParticlesGPU.store(ptr, vao);
+  if (buffers->size() < idx) {
+    return (*buffers)[idx];
+  }
+  fLogD("There is no buffer for requested index. Creating a new one.");
+  buffers->push_back(new VertexBufferParticlesGPU(particles));
+  return buffers->back();
+}
+
 void Engine::reloadPickingBuffer() {
+  mPickingPixelBuffer->reload();
+
   mPickingRenderableTexture = mTextures->getColor2D(mWindowWidth, mWindowHeight);
 
   mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
@@ -165,6 +163,23 @@ void Engine::reloadPickingBuffer() {
   fLogC("glReadPixels");
   mPickingPixelBuffer->unbind();
 }
+
+void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLuint format, GLint bytesPerPixel) {
+  mPickingRenderableTexture->bindForRendering();
+  drawClear();
+  mScene->draw();
+  mPickingPixelBuffer->bind();
+  glReadPixels(0, 0, mWindowWidth, mWindowHeight, format, GL_UNSIGNED_BYTE, 0);
+  fLogC("reading pixel buffer failed");
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+  buffer = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
+#else
+  buffer = (GLubyte* ) mPickingPixelBuffer->map(GL_READ_WRITE);
+#endif
+  * sizeInBytes = mWindowWidth*  mWindowHeight*  bytesPerPixel;
+  buffer[*sizeInBytes] = '\0';
+}
+#endif
 
 void Engine::initContext(void) {
   glClearColor(mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z, 1.0f);
@@ -433,22 +448,6 @@ void Engine::log() {
   fLogI("OpenGL version supported %s\n", version);
 }
 
-void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLuint format, GLint bytesPerPixel) {
-  mPickingRenderableTexture->bindForRendering();
-  drawClear();
-  mScene->draw();
-  mPickingPixelBuffer->bind();
-  glReadPixels(0, 0, mWindowWidth, mWindowHeight, format, GL_UNSIGNED_BYTE, 0);
-  fLogC("reading pixel buffer failed");
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-  buffer = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
-#else
-  buffer = (GLubyte* ) mPickingPixelBuffer->map(GL_READ_WRITE);
-#endif
-  * sizeInBytes = mWindowWidth*  mWindowHeight*  bytesPerPixel;
-  buffer[*sizeInBytes] = '\0';
-}
-
 template <GLuint T>
 Shader* Engine::storeShader(const string& shaderPath) {
   string shaderSource = "";
@@ -494,18 +493,6 @@ Engine::storeBufferInternal(VertexArray* vao, const vector<GLfloat> &data, const
 
 IndexBuffer* Engine::storeBufferInternal(VertexArray* vao, GLuint elements) {
   return mBuffers.mIndices.store(new IndexBuffer(elements, true), vao);
-}
-
-VertexBufferParticlesGPU*
-Engine::storeBuffersInternal(VertexArray* vao, size_t idx, vector<VertexParticleGPU> &particles) {
-  auto ptr = new vector<VertexBufferParticlesGPU* >();
-  auto buffers = mBuffers.mVerticesParticlesGPU.store(ptr, vao);
-  if (buffers->size() < idx) {
-    return (*buffers)[idx];
-  }
-  fLogD("There is no buffer for requested index. Creating a new one.");
-  buffers->push_back(new VertexBufferParticlesGPU(particles));
-  return buffers->back();
 }
 
 VertexBufferParticles* Engine::storeBufferInternal(VertexArray* vao,
@@ -570,52 +557,6 @@ void Engine::drawFront() {
   populateDebugger();
   mScene->drawCursor();
 }
-
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else
-
-void Engine::drawLines() {
-
-  /* count this frame */
-  mFrameCounter++;
-
-  /* clear main framebuffer */
-  glClearDepth(1.0f);
-
-  /* Calculate dynamic textures */
-  mTextures->drawDynamicTextures();
-
-  /* Lights evaluation */
-  if (mScene) {
-    populateLights();
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    drawScene();
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    drawFront();
-  }
-}
-
-void Engine::drawPoints() {
-  /* count this frame */
-  mFrameCounter++;
-
-  /* clear main framebuffer */
-  glClearDepth(1.0f);
-
-  /* Calculate dynamic textures */
-  mTextures->drawDynamicTextures();
-
-  /* Lights evaluation */
-  if (mScene) {
-    populateLights();
-    glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-    drawScene();
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    drawFront();
-  }
-}
-
-#endif
 
 void Engine::drawHUD() {
   if (mScene) {
@@ -860,7 +801,11 @@ void Engine::onResizeScreen(GLuint width, GLuint height) {
   glViewport(0, 0, mWindowWidth, mWindowHeight);
 
   mTextures->resize(mWindowWidth, mWindowHeight);
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   mPickingPixelBuffer->setScreenSize(mWindowWidth, mWindowHeight, 4);
+#endif
 
   for (auto &it : mTextManager) { //todo optimization update only VBO
     it->editAspectRatio(this);
@@ -906,6 +851,9 @@ glm::ivec4 Engine::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
   return glm::ivec4(r, g, b, a);
 }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+
 void Engine::pick(GLuint x, GLuint y) {
   mPickingRenderableTexture->bindForRendering();
   drawClear();
@@ -913,7 +861,7 @@ void Engine::pick(GLuint x, GLuint y) {
   mPickingPixelBuffer->bind();
   glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   fLogC("glReadPixels failed");
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
   GLubyte *data = (GLubyte *) mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -934,7 +882,7 @@ void Engine::captureFramebufferToFile(const std::string &name) {
   mPickingPixelBuffer->bind();
   glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   fLogC("reading pixel buffer failed");
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
   GLubyte *data = (GLubyte *) mPickingPixelBuffer->map(GL_READ_WRITE);
@@ -958,28 +906,62 @@ void Engine::captureFramebufferToFile(const std::string &name) {
   flc::Framebuffer::bindScreenFramebuffer();
   mScene->draw();
 }
+#endif
 
 template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string& );
-
 template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string& );
-
 template Shader* Engine::storeShader<GL_VERTEX_SHADER>(const string& , const string& );
-
 template Shader* Engine::storeShader<GL_FRAGMENT_SHADER>(const string& , const string& );
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
 
+void Engine::drawLines() {
+
+  /* count this frame */
+  mFrameCounter++;
+
+  /* clear main framebuffer */
+  glClearDepth(1.0f);
+
+  /* Calculate dynamic textures */
+  mTextures->drawDynamicTextures();
+
+  /* Lights evaluation */
+  if (mScene) {
+    populateLights();
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    drawScene();
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    drawFront();
+  }
+}
+
+void Engine::drawPoints() {
+  /* count this frame */
+  mFrameCounter++;
+
+  /* clear main framebuffer */
+  glClearDepth(1.0f);
+
+  /* Calculate dynamic textures */
+  mTextures->drawDynamicTextures();
+
+  /* Lights evaluation */
+  if (mScene) {
+    populateLights();
+    glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+    drawScene();
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    drawFront();
+  }
+}
+
 template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string& );
-
 template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string& );
-
 template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string& );
-
 template Shader* Engine::storeShader<GL_TESS_CONTROL_SHADER>(const string& , const string& );
-
 template Shader* Engine::storeShader<GL_TESS_EVALUATION_SHADER>(const string& , const string& );
-
 template Shader* Engine::storeShader<GL_GEOMETRY_SHADER>(const string& , const string& );
 
 #endif

@@ -8,4 +8,4 @@ endif ()
 
 add_library(nv_helpers_gl ${NV_HELPERS_LIBRARY_TYPE} nv_dds.cpp)
 
-include_directories(${FILLWAVE_BACKEND_INCLUDES})
+include_directories(${FILLWAVE_BACKEND_INCLUDES} ${FILLWAVE_PATH_INCLUDE})

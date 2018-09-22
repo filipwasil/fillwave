@@ -20,7 +20,6 @@
  */
 
 #include <fillwave/management/TextureSystem.h>
-
 #include <fillwave/Log.h>
 
 FLOGINIT_DEFAULT()
@@ -29,12 +28,12 @@ namespace flw {
 namespace flf {
 
 TextureSystem::TextureSystem(const std::string &rootPath)
-    : mRootPath(rootPath) {
+  : mRootPath(rootPath) {
   checkExtensions();
 }
 
 inline void TextureSystem::checkExtensions() {
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
   int numberOfExtensions = 0;
   glGetIntegerv(GL_NUM_EXTENSIONS, &numberOfExtensions);
@@ -110,11 +109,11 @@ flc::Texture2DRenderableDynamic* TextureSystem::getDynamic(const std::string& fr
 }
 
 flc::Texture3D* TextureSystem::get(const std::string &posX,
-    const std::string &negX,
-    const std::string &posY,
-    const std::string &negY,
-    const std::string &posZ,
-    const std::string &negZ) {
+  const std::string &negX,
+  const std::string &posY,
+  const std::string &negY,
+  const std::string &posZ,
+  const std::string &negZ) {
 
   std::string filePathPosX = mRootPath + posX;
   std::string filePathNegX = mRootPath + negX;
@@ -203,7 +202,13 @@ flc::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint height
   cfg->mContent.mMipmaps = GL_FALSE;
   cfg->mContent.mCompression = GL_FALSE;
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  cfg->mHeader.mType = GL_UNSIGNED_INT;
+  flc::ParameterList parameters = {
+    flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    , flc::Parameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+  };
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   cfg->mHeader.mType = GL_UNSIGNED_INT;
   flc::ParameterList parameters = {
       flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_LINEAR)
@@ -226,6 +231,8 @@ flc::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint height
   return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, cfg, parameters);
 }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
 flc::Texture3DRenderable* TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*height*/) {
 
   flc::TextureConfig* file[6];
@@ -273,6 +280,7 @@ flc::Texture3DRenderable* TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*
   auto t = mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_DEPTH_ATTACHMENT, file2D, parameters2D);
   return mTextures3DRenderable.store(mTextures3DRenderable.size(), file[0], file[1], file[2], file[3], file[4], file[5], t, parameters3D);
 }
+#endif
 
 flc::Texture2DRenderable *TextureSystem::getColor2D(GLuint width, GLuint height) {
 
@@ -310,7 +318,7 @@ flc::Texture2D *TextureSystem::getDeferredColor(GLuint width, GLuint height, GLu
   };
 
   flc::TextureConfig::Header colorTextureHeader;
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   colorTextureHeader.mFormat = GL_RGBA;
   colorTextureHeader.mInternalFormat = GL_RGBA;
   colorTextureHeader.mType = GL_UNSIGNED_BYTE;
@@ -366,7 +374,7 @@ flc::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
   depthTextureHeader.mInternalFormat = GL_DEPTH_COMPONENT;
   depthTextureHeader.mWidth = width;
   depthTextureHeader.mHeight = height;
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   depthTextureHeader.mType = GL_UNSIGNED_INT;
 #else
   depthTextureHeader.mType = GL_FLOAT;
@@ -380,6 +388,8 @@ flc::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
   return mTextures2DDeferred.store(mTextures2DDeferred.size(), cfg, parameters, 1);
 }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
 flc::Texture2D *TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
 
   flc::ParameterList parameters;
@@ -397,6 +407,7 @@ flc::Texture2D *TextureSystem::getDeferredStencilDepth(GLuint width, GLuint heig
 
   return mTextures2DDeferred.store(mTextures2DDeferred.size(), cfg, parameters, 1);
 }
+#endif
 
 void TextureSystem::resize(GLuint width, GLuint height) {
   resize(mTextures2DDynamic, width, height);

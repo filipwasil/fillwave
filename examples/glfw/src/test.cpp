@@ -137,6 +137,17 @@ void init() {
   emiter3->moveBy(glm::vec3(8.0, -8.0, -15.0));
   engine->getCurrentScene()->attach(std::move(emiter3));
 
+  engine->getCurrentScene()->setSkybox(std::make_unique<Skybox>(
+    engine
+    , engine->storeTexture3D(
+      "textures/skybox/skybox/frozendusk/frozendusk_right.jpg"
+      , "textures/skybox/skybox/frozendusk/frozendusk_left.jpg"
+      , "textures/skybox/skybox/frozendusk/frozendusk_top.jpg"
+      , ""
+      , "textures/skybox/skybox/frozendusk/frozendusk_front.jpg"
+      , "textures/skybox/skybox/frozendusk/frozendusk_back.jpg")));
+
+
   engine->configFPSCounter("FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
   engine->storeText("Benchmark", "FreeSans", glm::vec2(-0.95f, -0.85f), 50.0f);
 }

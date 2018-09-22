@@ -51,8 +51,8 @@
 
 #include <fillwave/management/LightSystem.h>
 
-#include <fillwave/core/buffers/PixelBuffer.h>
-#include <fillwave/core/pipeline/Fence.h>
+#include <fillwave/core/extended/buffers/PixelBuffer.h>
+#include <fillwave/core/extended/pipeline/Fence.h>
 
 #include <fillwave/core/operations/PostProcessingPass.h>
 
@@ -206,7 +206,10 @@ class Engine {
 
   /* Picking */
   flc::Texture2DRenderable* mPickingRenderableTexture;
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   pu<flc::PixelBuffer> mPickingPixelBuffer;
+#endif
 
   /* Resources */
   flf::CacheShader mShaders;

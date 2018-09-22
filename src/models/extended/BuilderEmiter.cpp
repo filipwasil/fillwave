@@ -28,22 +28,22 @@ namespace flw {
 namespace flf {
 
 BuilderEmiter::BuilderEmiter(Engine *engine)
-    : mEngine(engine)
-    , mEmitingSourceRate(0.3f)
-    , mHowMany(1)
-    , mColor(glm::vec4(1.0))
-    , mAcceleration(glm::vec3(0.0))
-    , mStartVelocity(glm::vec3(0.0))
-    , mRobustnessVelocity(glm::vec3(0.0))
-    , mStartPosition(glm::vec3(0.0))
-    , mRobustnessPosition(glm::vec3(0.0))
-    , mStartSize(1.0f)
-    , mLifetime(1.0f)
-    , mTexture(engine->storeTexture("255_255_255.color"))
-    , mBlendingSource(GL_SRC_ALPHA)
-    , mBlendingDestination(GL_ONE_MINUS_SRC_ALPHA)
-    , mDepthTesting(GL_FALSE)
-    , mAlphaCutOff(0.0f) {
+  : mEngine(engine)
+  , mEmitingSourceRate(0.3f)
+  , mHowMany(1)
+  , mColor(glm::vec4(1.0))
+  , mAcceleration(glm::vec3(0.0))
+  , mStartVelocity(glm::vec3(0.0))
+  , mRobustnessVelocity(glm::vec3(0.0))
+  , mStartPosition(glm::vec3(0.0))
+  , mRobustnessPosition(glm::vec3(0.0))
+  , mStartSize(1.0f)
+  , mLifetime(1.0f)
+  , mTexture(engine->storeTexture("255_255_255.color"))
+  , mBlendingSource(GL_SRC_ALPHA)
+  , mBlendingDestination(GL_ONE_MINUS_SRC_ALPHA)
+  , mDepthTesting(GL_FALSE)
+  , mAlphaCutOff(0.0f) {
 }
 
 pu<IEmiterPoint> BuilderEmiter::buildEmiterGPU() {

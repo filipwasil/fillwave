@@ -21,4 +21,12 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <fillwave/Config.h>
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_PC)
+#include <fillwave/engine/EnginePCGLES.h>
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#include <fillwave/engine/EngineAndroid.h>
+#else
 #include <fillwave/engine/EnginePC.h>
+#endif

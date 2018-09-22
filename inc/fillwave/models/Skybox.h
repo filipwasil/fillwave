@@ -22,7 +22,7 @@
  */
 
 #include <fillwave/models/Entity.h>
-#include <fillwave/core/texturing/Texture3D.h>
+#include <fillwave/core/extended/texturing/Texture3D.h>
 #include <fillwave/core/buffers/IndexBuffer.h>
 #include <fillwave/core/buffers/VertexBufferPosition.h>
 #include <fillwave/models/base/IReloadable.h>

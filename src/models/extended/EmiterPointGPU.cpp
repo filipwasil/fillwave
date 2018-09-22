@@ -21,14 +21,14 @@
 
 #include <fillwave/loaders/ProgramLoader.h>
 
-#include <fillwave/models/EmiterPointGPU.h>
+#include <fillwave/models/extended/EmiterPointGPU.h>
+#include <fillwave/core/extended/texturing/NoiseTexture3DArray.h>
 
 #include <fillwave/Fillwave.h>
 
-#include <fillwave/core/extended/texturing/NoiseTexture3DArray.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("EmiterPointGPU", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {

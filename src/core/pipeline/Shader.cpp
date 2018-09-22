@@ -21,7 +21,7 @@
 
 #include "fillwave/loaders/FileLoader.h"
 
-#include <fillwave/core/base/pipeline/Shader.h>
+#include <fillwave/core/pipeline/Shader.h>
 
 #include <sstream>
 

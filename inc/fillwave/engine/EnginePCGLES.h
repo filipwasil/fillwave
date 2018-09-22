@@ -23,20 +23,18 @@
 
 #include <fillwave/engine/Engine.h>
 
-struct ANativeActivity;
-
 namespace flw {
 
-/*! \class EngineAndroid
- * \brief Android implementation specific
+/*! \class EnginePCGLES
+ * \brief PC GLES implementation specific
  */
 
-class EngineAndroid {
+class EnginePCGLES : public Engine {
  public:
 
-  EngineAndroid(const std::string& rootPath);
+  EnginePCGLES(GLint argc, GLchar* const argv[], void (* (*getAddressFunction)(const char*))());
 
-  EngineAndroid(ANativeActivity* activity);
+  ~EnginePCGLES() override;
 };
 
 } /* flw */

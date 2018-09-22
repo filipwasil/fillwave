@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/base/buffers/IBuffer.h>
+#include <fillwave/core/buffers/IBuffer.h>
 #include <fillwave/Log.h>
 
 FLOGINIT("Buffer", FERROR | FFATAL)

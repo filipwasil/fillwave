@@ -22,7 +22,7 @@
  */
 
 #include <fillwave/core/texturing/Texture2D.h>
-#include <fillwave/core/texturing/Sampler.h>
+#include <fillwave/core/extended/texturing/Sampler.h>
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/common/Finishable.h>
 #include <fillwave/models/Entity.h>

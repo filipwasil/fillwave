@@ -21,12 +21,13 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/VertexBufferBasic.h>
 #include <fillwave/models/terrain/Voxel.h>
 #include <fillwave/models/terrain/VoxelConstructor.h>
-#include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/models/base/IReloadable.h>
 #include <fillwave/models/Entity.h>
+
+#include <fillwave/core/buffers/VertexBufferBasic.h>
+#include <fillwave/core/texturing/Texture2D.h>
 
 namespace flw {
 namespace flf {

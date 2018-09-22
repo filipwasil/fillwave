@@ -24,8 +24,9 @@
 #include <fillwave/core/buffers/VertexBufferPosition.h>
 #include <fillwave/core/buffers/VertexBufferFloat.h>
 #include <fillwave/core/buffers/VertexBufferDebug.h>
-#include <fillwave/core/buffers/VertexBufferParticlesGPU.h>
+#include <fillwave/core/extended/buffers/VertexBufferParticlesGPU.h>
 #include <fillwave/core/buffers/VertexBufferParticles.h>
+
 #include <fillwave/models/base/IReloadable.h>
 #include <fillwave/management/base/TCache.h>
 
@@ -40,7 +41,10 @@ struct CacheBuffer {
   TCache<MAX_CACHE_SIZE, flc::VertexBufferBasic, flc::VertexArray *, flf::TerrainConstructor *, GLint, GLfloat, std::vector<GLuint> &> mVertices;
   TCache<MAX_CACHE_SIZE, flc::IndexBuffer, flc::VertexArray *, std::vector<GLuint> &> mIndices;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferText, flc::VertexArray *, const std::vector<GLfloat> &, const std::vector<GLfloat> &> mVerticesText;
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   TCache<MAX_CACHE_SIZE, std::vector<flc::VertexBufferParticlesGPU *>, flc::VertexArray *, std::vector<flc::VertexParticleGPU> &> mVerticesParticlesGPU;
+#endif
   TCache<MAX_CACHE_SIZE, flc::VertexBufferParticles, flc::VertexArray *, std::vector<GLfloat> &, std::vector<GLfloat> &, std::vector<GLfloat> &> mVerticesParticles;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferDebug, flc::VertexArray *, GLfloat> mVerticesDebugger;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferFloat, flc::VertexArray *, std::vector<flc::VertexFloat> &> mVerticesFloat;

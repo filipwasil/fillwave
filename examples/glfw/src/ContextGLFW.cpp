@@ -1,6 +1,4 @@
 /*
- * BackendGLFW.cpp
- *
  *  Created on: Jan 8, 2015
  *      Author: filip
  */
@@ -9,7 +7,9 @@
 
 #include <fillwave/Log.h>
 
-FLOGINIT("BackendGLFW", FERROR | FFATAL)
+#include <fillwave/Config.h>
+
+FLOGINIT_DEFAULT()
 
 flw::Engine *ContextGLFW::mGraphics;
 GLfloat ContextGLFW::mScreenWidth;
@@ -34,7 +34,11 @@ ContextGLFW::ContextGLFW(int argc, char *argv[]) {
 
   windowInit(mWindow);
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_PC)
+  ContextGLFW::mGraphics = new flw::EnginePCGLES(argc, argv, glfwGetProcAddress);
+#else
   ContextGLFW::mGraphics = new flw::EnginePC(argc, argv);
+#endif
 }
 
 void ContextGLFW::windowInit(GLFWwindow *&window) {
@@ -62,8 +66,19 @@ void ContextGLFW::windowInit(GLFWwindow *&window) {
   glfwWindowHint(GLFW_BLUE_BITS, 8);
   glfwWindowHint(GLFW_DEPTH_BITS, 16);
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+  glfwWindowHint(GLFW_OPENGL_ES_API, GLFW_OPENGL_CORE_PROFILE);
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+  glfwWindowHint(GLFW_OPENGL_ES_API, GLFW_OPENGL_CORE_PROFILE);
+#elif defined(FILLWAVE_BACKEND_OPENGL_45)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#endif
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 

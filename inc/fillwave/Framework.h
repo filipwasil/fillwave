@@ -51,5 +51,6 @@
 
 /* Particles */
 #include <fillwave/models/Impostor.h>
-#include <fillwave/models/EmiterPointGPU.h>
 #include <fillwave/models/EmiterPointCPU.h>
+
+#include <fillwave/models/extended/EmiterPointGPU.h>

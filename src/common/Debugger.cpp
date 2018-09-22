@@ -25,7 +25,7 @@
 
 #include <fillwave/loaders/ProgramLoader.h>
 
-#include <fillwave/core/rendering/FramebufferGeometry.h>
+#include <fillwave/core/extended/rendering/FramebufferGeometry.h>
 
 namespace flw {
 namespace flf {

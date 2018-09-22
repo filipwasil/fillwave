@@ -25,6 +25,12 @@
 
 FLOGINIT_DEFAULT()
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#define GL_RED GL_RED_EXT
+#define GL_RG8 GL_RG8_EXT
+#define GL_RGBA8 GL_RGBA8_OES
+#endif
+
 namespace flw {
 namespace flf {
 
@@ -65,8 +71,8 @@ flc::TextureConfig* TextureFactory::loadVirtualFileCheckboard(
         return 3;
       case GL_ALPHA:
       case GL_RED:
-      case GL_GREEN:
-      case GL_BLUE:
+//      case GL_GREEN:
+//      case GL_BLUE:
         return 1;
       default:
         fLogE("Not recognized texture format loading");
@@ -130,8 +136,8 @@ flc::TextureConfig* TextureFactory::loadVirtualFileColor(
         return 3;
       case GL_ALPHA:
       case GL_RED:
-      case GL_GREEN:
-      case GL_BLUE:
+//      case GL_GREEN:
+//      case GL_BLUE:
         return 1;
       default:
         fLogE("Not recognized texture format loading");

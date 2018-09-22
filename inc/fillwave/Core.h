@@ -22,7 +22,7 @@
  */
 
 /* Rendering */
-#include <fillwave/core/buffers/PixelBuffer.h>
+#include <fillwave/core/extended/buffers/PixelBuffer.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
 
 /* Buffers */

@@ -19,11 +19,11 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/base/rendering/Texture2DRenderable.h>
+#include <fillwave/core/rendering/Texture2DRenderable.h>
 #include <fillwave/loaders/textureloader/TextureConfigs.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Texture2DRenderable", FERROR | FFATAL | FDEBUG)
+FLOGINIT_DEFAULT()
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #define glBlitFramebuffer glBlitFramebufferNV

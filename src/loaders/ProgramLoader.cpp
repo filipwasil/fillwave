@@ -33,7 +33,9 @@ namespace flf {
 constexpr GLuint FILLWAVE_RANDOM_VECTOR_SIZE = 64;
 
 /* Headers */
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+const std::string gGLVersion = "#version 200 es\n";
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 const std::string gGLVersion = "#version 300 es\n";
 #else /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
 #if defined(FILLWAVE_BACKEND_OPENGL_45)

@@ -32,11 +32,8 @@
 
 #else /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
 
-void glesInitExtensions();
+#if defined(__ANDROID__)
 
-#if defined(__ANDROID__) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-
-#define FILLWAVE_BACKEND_OPENGL_ES_30
 #define GLFW_INCLUDE_ES2
 #define GL_GLEXT_PROTOTYPES
 
@@ -47,11 +44,23 @@ void glesInitExtensions();
 #define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE
 #define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
 
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+
+#include <glad/glad.h>
+
+#define glClearDepth glClearDepthf
+#define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE
+#define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
+
+void initExtensions(void (* (*getAddress)(const char*))());
+
 #else /* defined(__ANDROID__) || defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
 
 #include <glad/glad.h>
 
-#endif /* defined(__ANDROID__) || defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
+void initExtensions();
+
+#endif /* defined(__ANDROID__) */
 
 #endif /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
 

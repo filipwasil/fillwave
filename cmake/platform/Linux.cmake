@@ -32,9 +32,7 @@ endif ()
 # Targets
 # -----------------------------------------------
 
-set (FILLWAVE_PLATFORM_SPECIFIC_SOURCES ${FILLWAVE_SOURCES} ${FILLWAVE_PATH_SOURCE}/engine/EnginePC.cpp)
-
-add_library (fillwave SHARED ${FILLWAVE_PLATFORM_SPECIFIC_SOURCES})
+add_library (fillwave SHARED ${FILLWAVE_SOURCES})
 
 # -----------------------------------------------
 # Installation

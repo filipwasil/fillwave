@@ -21,9 +21,10 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/buffers/VertexBufferFloat.h>
-#include <fillwave/core/operations/TQuery.h>
 #include <fillwave/models/base/IEmiterPoint.h>
+
+#include <fillwave/core/buffers/VertexBufferFloat.h>
+#include <fillwave/core/extended/operations/TQuery.h>
 
 namespace flw {
 namespace flf {

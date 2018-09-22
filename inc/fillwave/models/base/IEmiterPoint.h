@@ -26,9 +26,10 @@
 #include <fillwave/core/buffers/VertexBufferParticles.h>
 #include <fillwave/core/pipeline/Program.h>
 #include <fillwave/core/texturing/Texture.h>
-#include <fillwave/core/rendering/TransformFeedback.h>
 #include <fillwave/core/pipeline/Blending.h>
+#include <fillwave/core/extended/rendering/TransformFeedback.h>
 #include <fillwave/models/base/IReloadable.h>
+
 
 namespace flw {
 class Engine;

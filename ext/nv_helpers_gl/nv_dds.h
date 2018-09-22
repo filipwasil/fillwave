@@ -1,3 +1,5 @@
+#include <fillwave/Config.h>
+
 #ifndef __NV_DDS_H__
 #define __NV_DDS_H__
 
@@ -334,10 +336,13 @@ class CDDSImage final
   std::deque<CTexture> m_images;
 
 #ifndef MACOS
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   static PFNGLTEXIMAGE3DEXTPROC glTexImage3D;
   static PFNGLCOMPRESSEDTEXIMAGE1DARBPROC glCompressedTexImage1DARB;
   static PFNGLCOMPRESSEDTEXIMAGE2DARBPROC glCompressedTexImage2DARB;
   static PFNGLCOMPRESSEDTEXIMAGE3DARBPROC glCompressedTexImage3DARB;
+#endif
 #endif
 };
 }

@@ -23,7 +23,7 @@
 #include <fillwave/models/base/IEmiterPoint.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Emiter", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
@@ -50,7 +50,7 @@ IEmiterPoint::IEmiterPoint(Engine *engine,
   mBlending.mSrc = blendingSource;
   mBlending.mDst = blendingDestination;
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   glEnable(GL_PROGRAM_POINT_SIZE);
   //todo glEnable(GL_POINT_SPRITE) always on since OpenGL 3.2 ... but not at all drivers ://////

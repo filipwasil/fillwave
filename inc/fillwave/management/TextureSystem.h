@@ -21,9 +21,9 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/texturing/Texture1D.h>
+#include <fillwave/core/extended/texturing/Texture1D.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
-#include <fillwave/core/rendering/Texture3DRenderableDynamic.h>
+#include <fillwave/core/extended/rendering/Texture3DRenderableDynamic.h>
 #include <fillwave/loaders/modelloader/ModelLoaderTraits.h>
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/management/base/TCache.h>
@@ -58,7 +58,10 @@ public:
   flc::Texture2D* getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
   flc::Texture2D* getDeferredColorScreen(GLuint width, GLuint height, GLuint size = 1);
   flc::Texture2D* getDeferredDepth(GLuint width, GLuint height);
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   flc::Texture2D* getDeferredStencilDepth(GLuint width, GLuint height);
+#endif
   flc::Texture2DRenderableDynamic*
     getDynamic(const std::string& fragmentShaderPath, flc::Program* program, glm::ivec2 screenSize);
 

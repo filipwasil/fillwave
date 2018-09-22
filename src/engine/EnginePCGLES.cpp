@@ -19,7 +19,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* flw  */
 #include <fillwave/Fillwave.h>
 
 using namespace flw::flc;
@@ -27,12 +26,12 @@ using namespace std;
 
 namespace flw {
 
-EnginePC::EnginePC(GLint /*argc*/, GLchar* const argv[])
+EnginePCGLES::EnginePCGLES(GLint /*argc*/, GLchar* const argv[], void (* (*/*getAddress*/)(const char*))())
   : Engine(argv[0]) {
   // nothing
 }
 
-EnginePC::~EnginePC() {
+EnginePCGLES::~EnginePCGLES() {
   // nothing
 }
 

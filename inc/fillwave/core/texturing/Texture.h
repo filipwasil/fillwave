@@ -23,8 +23,8 @@
 
 #include <fillwave/common/Aliases.h>
 
-#include <fillwave/core/base/GLObject.h>
-#include <fillwave/core/base/texturing/Parameter.h>
+#include <fillwave/core/GLObject.h>
+#include <fillwave/core/texturing/Parameter.h>
 
 #include <memory>
 

@@ -19,8 +19,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/base/pipeline/Program.h>
-#include <fillwave/core/base/pipeline/Attribute.h>
+#include <fillwave/core/pipeline/Program.h>
+#include <fillwave/core/pipeline/Attribute.h>
 
 #include <fillwave/Log.h>
 

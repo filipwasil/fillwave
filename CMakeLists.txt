@@ -81,15 +81,23 @@ aux_source_directory ("src/loaders" FILLWAVE_LOADERS_SOURCES)
 aux_source_directory ("src/management" FILLWAVE_MANAGEMENT_SOURCES)
 aux_source_directory ("src/common" FILLWAVE_COMMON_SOURCES)
 
-if (FILLWAVE_BACKEND_OPENGL_ES_20)
-else()
+aux_source_directory ("src/models/shapes" FILLWAVE_SHAPES_SOURCES)
+
+if (FILLWAVE_BACKEND_OPENGL_ES_PC)
   aux_source_directory ("src/renderers/extended" FILLWAVE_RENDERERS_EXTENDED_SOURCES)
   aux_source_directory ("src/renderers/basic" FILLWAVE_RENDERERS_BASIC_SOURCES)
 endif()
-aux_source_directory ("src/models/shapes" FILLWAVE_SHAPES_SOURCES)
 
 set (FILLWAVE_ENGINE_SOURCES
     ${FILLWAVE_PATH_SOURCE}/engine/Engine.cpp)
+
+if (FILLWAVE_BACKEND_OPENGL_ES_PC)
+  set (FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES ${FILLWAVE_PATH_SOURCE}/engine/EnginePCGLES.cpp)
+elseif(FILLWAVE_BACKEND_OPENGL_ES_20 OR FILLWAVE_BACKEND_OPENGL_ES_30)
+  set (FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES ${FILLWAVE_PATH_SOURCE}/engine/EngineAndroid.cpp)
+else()
+  set (FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES ${FILLWAVE_PATH_SOURCE}/engine/EnginePC.cpp)
+endif()
 
 set (FILLWAVE_SOURCES
     ${FILLWAVE_ROOT_SOURCES}
@@ -123,6 +131,7 @@ set (FILLWAVE_SOURCES
     ${FILLWAVE_TEXTURE_LOADER_TRAITS}
     ${FILLWAVE_SHAPES_SOURCES}
     ${FILLWAVE_ENGINE_SOURCES}
+    ${FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES}
     )
 
 # -----------------------------------------------

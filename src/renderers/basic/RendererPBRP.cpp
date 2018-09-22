@@ -20,7 +20,7 @@
  */
 
 #include <fillwave/renderers/RendererPBRP.h>
-#include <fillwave/core/base/pipeline/Program.h>
+#include <fillwave/core/pipeline/Program.h>
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/Skybox.h>
 

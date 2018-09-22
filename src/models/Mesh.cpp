@@ -65,9 +65,11 @@ Mesh::Mesh(Engine* engine,
     , mVBO(vbo)
     , mLights(lights)
     , mAnimator(animator)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
     , mOcclusionQuery()
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
+    , mOcclusionQuery()
     , mConditionalRendering(GL_QUERY_WAIT)
 #endif
 {
@@ -82,7 +84,7 @@ Mesh::~Mesh() {
 }
 
 void Mesh::drawPBRP(ICamera &camera) {
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
@@ -99,7 +101,7 @@ void Mesh::drawPBRP(ICamera &camera) {
 }
 
 void Mesh::draw(ICamera &camera) {
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
@@ -121,7 +123,7 @@ void Mesh::draw(ICamera &camera) {
 }
 
 void Mesh::drawDR(ICamera &camera) {
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   if (mAnimator || mOcclusionQuery.getResultAsync(1))
 #endif
@@ -203,22 +205,6 @@ void Mesh::drawPicking(ICamera &camera) {
   }
 }
 
-void Mesh::drawOcclusionBox(ICamera &camera) {
-
-  mProgramOQ->use();
-
-  flc::Uniform::push(mULCMVPOcclusion, camera.getViewProjection() * mPhysicsMMC * mOcclusionMatrix);
-
-  mOcclusionQuery.begin();
-
-  glDrawArrays(mRenderMode, 0, gOQVertices);
-
-  fLogC("drawOcclusionBox failed");
-
-  mOcclusionQuery.end();
-
-  flc::Program::disusePrograms();
-}
 
 void Mesh::drawDepth(ICamera &camera) {
   if (isPSC()) {
@@ -393,6 +379,25 @@ bool Mesh::getRenderItem(RenderItem &item) {
   item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, anim
   return true;
 }
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+void Mesh::drawOcclusionBox(ICamera &camera) {
+  mProgramOQ->use();
+
+  flc::Uniform::push(mULCMVPOcclusion, camera.getViewProjection() * mPhysicsMMC * mOcclusionMatrix);
+
+  mOcclusionQuery.begin();
+
+  glDrawArrays(mRenderMode, 0, gOQVertices);
+
+  fLogC("drawOcclusionBox failed");
+
+  mOcclusionQuery.end();
+
+  flc::Program::disusePrograms();
+}
+#endif
 
 } /* flf */
 } /* flw */

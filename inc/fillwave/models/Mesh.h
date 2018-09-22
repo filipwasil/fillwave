@@ -24,8 +24,10 @@
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/buffers/IndexBuffer.h>
 #include <fillwave/core/buffers/VertexBufferBasic.h>
-#include <fillwave/core/operations/ConditionalRender.h>
-#include <fillwave/core/operations/TQuery.h>
+
+#include <fillwave/core/extended/operations/ConditionalRender.h>
+#include <fillwave/core/extended/operations/TQuery.h>
+
 #include <fillwave/models/Entity.h>
 #include <fillwave/models/base/Material.h>
 #include <fillwave/core/pipeline/Fence.h>
@@ -122,10 +124,14 @@ public:
 
   /* Occlusion cut off */
   glm::mat4 mOcclusionMatrix;
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#else
   flc::QueryIfAnySamplesPassed mOcclusionQuery;
+#endif // defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 //   puFence mFence;
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
 //   flc::QueryTimeElapsed mTimeQuery;
   flc::ConditionalRender mConditionalRendering;

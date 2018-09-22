@@ -22,7 +22,7 @@
  */
 
 #include <fillwave/core/buffers/VertexArray.h>
-#include <fillwave/core/texturing/Sampler.h>
+#include <fillwave/core/extended/texturing/Sampler.h>
 
 namespace flw {
 class Engine;
