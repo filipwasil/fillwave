@@ -103,12 +103,15 @@ inline void Program::getUniforms() {
 
 }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
 void Program::getUniformBlock(const std::string& /*name*/, GLuint /*bindingPoint*/) {
 
 }
 
 void Program::uniformBlockPush(const std::string& /*name*/, GLfloat* /*data*/) {
 }
+#endif
 
 void Program::log(const std::string& /*fileName*/) const {
 

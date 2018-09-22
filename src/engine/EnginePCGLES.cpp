@@ -26,8 +26,8 @@ using namespace std;
 
 namespace flw {
 
-EnginePCGLES::EnginePCGLES(GLint /*argc*/, GLchar* const argv[], void (* (*/*getAddress*/)(const char*))())
-  : Engine(argv[0]) {
+EnginePCGLES::EnginePCGLES(GLint /*argc*/, GLchar* const argv[], void (* (*getAddress)(const char*))())
+  : Engine(argv[0], initExtensions(getAddress)) {
   // nothing
 }
 

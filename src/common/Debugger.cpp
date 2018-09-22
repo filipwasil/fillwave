@@ -41,8 +41,7 @@ Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
   const glm::vec2 size = mEngine->getScreenSize();
   const float sizeFactor = 1.0f / static_cast<float>(howManyDebugWindows);
   const float offsetY = 1.0f - sizeFactor * (size.x/size.y);
-  for (int i = 0; i < howManyDebugWindows; ++i)
-  {
+  for (int i = 0; i < howManyDebugWindows; ++i) {
     const float offsetX = static_cast<float>(i) * sizeFactor;
     DebugWindowInfo window = {
       { size.x * sizeFactor , size.y * sizeFactor }
@@ -64,37 +63,37 @@ Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
 Debugger::~Debugger() = default;
 
 void Debugger::setState(EDebuggerState state) {
-  if (state == EDebuggerState::toggleState) {
-    switch (mState) {
-      case EDebuggerState::lightsSpot:
-        mState = EDebuggerState::lightsSpotDepth;
-        break;
-      case EDebuggerState::lightsSpotDepth:
-        mState = EDebuggerState::lightsSpotColor;
-        break;
-      case EDebuggerState::lightsSpotColor:
-        mState = EDebuggerState::lightsPoint;
-        break;
-      case EDebuggerState::lightsPoint:
-        mState = EDebuggerState::lightsPointDepth;
-        break;
-      case EDebuggerState::lightsPointDepth:
-        mState = EDebuggerState::lightsPointColor;
-        break;
-      case EDebuggerState::lightsPointColor:
-        mState = EDebuggerState::pickingMap;
-        break;
-      case EDebuggerState::pickingMap:
-        mState = EDebuggerState::off;
-        break;
-      case EDebuggerState::off:
-        mState = EDebuggerState::lightsSpot;
-        break;
-      case EDebuggerState::toggleState:
-        break;
-    }
-  } else {
+  if (state != EDebuggerState::toggleState) {
     mState = state;
+    return;
+  }
+  switch (mState) {
+    case EDebuggerState::lightsSpot:
+      mState = EDebuggerState::lightsSpotDepth;
+      break;
+    case EDebuggerState::lightsSpotDepth:
+      mState = EDebuggerState::lightsSpotColor;
+      break;
+    case EDebuggerState::lightsSpotColor:
+      mState = EDebuggerState::lightsPoint;
+      break;
+    case EDebuggerState::lightsPoint:
+      mState = EDebuggerState::lightsPointDepth;
+      break;
+    case EDebuggerState::lightsPointDepth:
+      mState = EDebuggerState::lightsPointColor;
+      break;
+    case EDebuggerState::lightsPointColor:
+      mState = EDebuggerState::pickingMap;
+      break;
+    case EDebuggerState::pickingMap:
+      mState = EDebuggerState::off;
+      break;
+    case EDebuggerState::off:
+      mState = EDebuggerState::lightsSpot;
+      break;
+    case EDebuggerState::toggleState:
+      break;
   }
 }
 
@@ -205,7 +204,10 @@ inline void Debugger::initUniformsCache() {
 }
 
 inline void Debugger::initVAO() {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   mSampler->bind();
+#endif
   mVAO->bind();
 
   mVBO->bind();

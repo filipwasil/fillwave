@@ -231,8 +231,14 @@ void LightSystem::updateDeferredBufferPoint(GLuint lightID, flc::Program *progra
   program->uniformPush("uSpecularPower", 255.0f);
 }
 
+
 void LightSystem::pushLightUniformBuffers(flc::Program *program) {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  program->use();
+  // todo update uniforms
+#else
   program->uniformBlockPush(FILLWAVE_LIGHTS_BINDING_POINT_NAME, reinterpret_cast<GLfloat *>(mLightBufferData.data()));
+#endif
 }
 
 void LightSystem::bindShadowmaps() {

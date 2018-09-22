@@ -335,8 +335,10 @@ inline void Mesh::initBuffers() {
 }
 
 inline void Mesh::initVAO() {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   mSampler->bind();
-
+#endif
   mVAO->bind();
 
   mVBO->bind();
@@ -369,7 +371,11 @@ bool Mesh::getRenderItem(RenderItem &item) {
   item.mDataType = GL_UNSIGNED_INT;
   item.mFirst = 0;
   item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  item.mHandles[RenderItem::eRenderHandleSampler] = 0;
+#else
   item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+#endif
   item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
   item.mHandles[RenderItem::eRenderHandleDiffuse] = mDiffuseMap ? mDiffuseMap->getHandle() : 0;
   item.mHandles[RenderItem::eRenderHandleNormal] = mNormalMap ? mNormalMap->getHandle() : 0;
@@ -381,6 +387,9 @@ bool Mesh::getRenderItem(RenderItem &item) {
 }
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+void Mesh::drawOcclusionBox(ICamera &/*camera*/) {
+ // nothing
+}
 #else
 void Mesh::drawOcclusionBox(ICamera &camera) {
   mProgramOQ->use();

@@ -28,7 +28,7 @@ FLOGINIT_DEFAULT()
 
 namespace flw {
 
-Engine::Engine(const std::string&)
+Engine::Engine(const std::string&, bool isEveryExtensionSuccessfullyLoaded)
   : mFileLoader("")
   , mProgramLoader(this) {
   // nothing
@@ -36,7 +36,7 @@ Engine::Engine(const std::string&)
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_PC)
 EnginePCGLES::EnginePCGLES(GLint argc, GLchar *const argv[], void (* (*getAddress)(const char*))())
-  : Engine ("") {
+  : Engine ("", true) {
   // nothing
 }
 
@@ -47,7 +47,7 @@ EnginePCGLES::~EnginePCGLES() {
 
 #else
 EnginePC::EnginePC(GLint argc, GLchar *const argv[])
-  : Engine ("") {
+  : Engine ("", true) {
   // nothing
 }
 

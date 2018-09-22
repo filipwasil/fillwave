@@ -62,5 +62,4 @@ public:
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::Framebuffer> puFramebuffer;
 } /* flw */

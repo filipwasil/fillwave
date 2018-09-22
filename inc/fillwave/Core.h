@@ -22,8 +22,13 @@
  */
 
 /* Rendering */
-#include <fillwave/core/extended/buffers/PixelBuffer.h>
+
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
 
 /* Buffers */
 #include <fillwave/core/operations/PostProcessingPass.h>
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+#include <fillwave/core/extended/buffers/PixelBuffer.h>
+#endif

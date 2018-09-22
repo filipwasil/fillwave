@@ -28,7 +28,8 @@ using namespace std;
 namespace flw {
 
 EnginePC::EnginePC(GLint /*argc*/, GLchar* const argv[])
-  : Engine(argv[0]) {
+  : mIsAllExtensionsSuccessfullyLoaded(initExtensions())
+  , Engine(argv[0]) {
   // nothing
 }
 

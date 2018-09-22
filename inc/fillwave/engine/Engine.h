@@ -51,12 +51,16 @@
 
 #include <fillwave/management/LightSystem.h>
 
-#include <fillwave/core/extended/buffers/PixelBuffer.h>
-#include <fillwave/core/extended/pipeline/Fence.h>
 
 #include <fillwave/core/operations/PostProcessingPass.h>
 
 #include <fillwave/Debugger.h>
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+#include <fillwave/core/extended/buffers/PixelBuffer.h>
+#include <fillwave/core/extended/pipeline/Fence.h>
+#endif
 
 namespace flw {
 namespace flf {
@@ -79,7 +83,7 @@ class VertexBufferPosition;
 
 class Engine {
  public:
-  Engine(const std::string& runtimeBinaryFilePath);
+  Engine(const std::string& runtimeBinaryFilePath, bool isEveryExtensionSuccessfullyLoaded);
 
   virtual ~Engine();
 
@@ -127,14 +131,6 @@ class Engine {
 
   flc::Texture2DRenderableDynamic* storeTextureDynamic(const std::string &fragmentShaderPath);
 
-  flc::Texture3D* storeTexture3D(
-    const std::string &posX
-    , const std::string &negX
-    , const std::string &posY
-    , const std::string &negY
-    , const std::string &posZ
-    , const std::string &negZ);
-
   /* Store lights */
   flf::LightSpot* storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable *followed = nullptr);
   flf::LightPoint* storeLightPoint(glm::vec3 position, glm::vec4 color, flf::Moveable *followed = nullptr);
@@ -148,9 +144,6 @@ class Engine {
     , GLfloat scale = 1.0f
     , glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)
     , ETextEffect effect = ETextEffect::none);
-
-  /* Store sampler */
-  flc::Sampler* storeSO(GLint textureUnit);
 
   /* Store vertex array objects */
   flc::VertexArray* storeVAO(flf::IReloadable *user, flc::VertexArray *vao = nullptr);
@@ -168,7 +161,7 @@ class Engine {
   }
 
   /* Buffering */
-  void removeBuffer(flc::VertexArray* vao); //todo any idea of generic class ? template it ?
+  void removeBuffer(flc::VertexArray* vao);
   void removeBufferIndex(flc::VertexArray* vao);
   void removeBufferIndexParticles(flc::VertexArray* vao);
   void removeBufferBasic(flc::VertexArray* vao);
@@ -209,12 +202,14 @@ class Engine {
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
   pu<flc::PixelBuffer> mPickingPixelBuffer;
+  pu<flc::Fence> mFence;
+
+  flf::CacheSampler mSamplers;
 #endif
 
   /* Resources */
   flf::CacheShader mShaders;
   flf::CacheProgram mPrograms;
-  flf::CacheSampler mSamplers;
   vec<ps<flf::Text>> mTextManager;
   vec<ps<Font>> mFontManager;
   flf::CacheBuffer mBuffers;
@@ -222,9 +217,6 @@ class Engine {
   pu<flf::TextureSystem> mTextures;
   vec<flc::PostProcessingPass> mPostProcessingPasses;
   flc::Program* mProgramTextureLookup;
-
-  /* Fences and barriers */
-  pu<flc::Fence> mFence;
 
   /* OQ */
   flc::Program *mProgramOcclusionBox;
@@ -254,9 +246,25 @@ class Engine {
 
  private:
   void init();
-  void initExtensions();
   void initContext();
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+ public:
+   flc::Texture3D* storeTexture3D(
+    const std::string &posX
+    , const std::string &negX
+    , const std::string &posY
+    , const std::string &negY
+    , const std::string &posZ
+    , const std::string &negZ);
+
+  flc::Sampler* storeSO(GLint textureUnit);
+
+ private:
   void initPickingBuffer();
+#endif
+
   void initPipelines();
   void initUniforms();
   void initManagement();

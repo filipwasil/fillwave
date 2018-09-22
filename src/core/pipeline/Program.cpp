@@ -79,7 +79,11 @@ void Program::link() {
 
   use();
   getUniforms();
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   getUniformBlock(FILLWAVE_LIGHTS_BINDING_POINT_NAME, FILLWAVE_LIGHTS_BINDING_POINT);
+#endif
   disusePrograms();
 }
 
@@ -259,7 +263,6 @@ void Program::getUniformBlock(const std::string& name, GLuint bindingPoint) {
     }
   }
 }
-#endif
 
 void Program::uniformBlockPush(const std::string& name, GLfloat *data) {
   for (auto &it : mUnifromBuffers) {
@@ -270,6 +273,8 @@ void Program::uniformBlockPush(const std::string& name, GLfloat *data) {
   }
   fLogE("Uniform buffer ", name, " not found");
 }
+
+#endif
 
 void Program::log(const std::string& programName) const {
   GLint infologLength = 0;

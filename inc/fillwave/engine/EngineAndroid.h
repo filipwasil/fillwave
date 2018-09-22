@@ -37,6 +37,9 @@ class EngineAndroid : public Engine{
   EngineAndroid(const std::string& rootPath);
 
   EngineAndroid(ANativeActivity* activity);
+
+ private:
+  bool mIsAllExtensionsSuccessfullyLoaded;
 };
 
 } /* flw */

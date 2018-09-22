@@ -19,8 +19,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* Debug  */
-
 #include <fillwave/Config.h>
 
 #include <fillwave/engine/Engine.h>
@@ -45,7 +43,7 @@ using namespace std;
 
 namespace flw {
 
-Engine::Engine(const std::string& runtimeBinaryFilePath)
+Engine::Engine(const std::string& runtimeBinaryFilePath, bool /*isEveryExtensionSuccessfullyLoaded*/)
   : mWindowWidth(1)
   , mWindowHeight(1)
   , mWindowAspectRatio(mWindowHeight / mWindowWidth)
@@ -57,12 +55,15 @@ Engine::Engine(const std::string& runtimeBinaryFilePath)
   , mTimeFactor(1.0f)
   , mIsOQ(GL_TRUE)
   , mBackgroundColor(0.1f, 0.1f, 0.1f) {
-  initExtensions();
   initContext();
   initManagement();
   initPipelines();
   initUniforms();
+  // todo init feature pack 1
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   initPickingBuffer();
+#endif
   initOcclusionTest();
   initExtras();
 
@@ -119,20 +120,23 @@ void Engine::reload() {
 
   mTextures->reload();
 
-  for (auto &it : mSamplers) {
-    it.second->reload();
-  }
 
   for (auto &it : mBuffers.mVertexArrays) {
     it.second->reload();
   }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+  for (auto &it : mSamplers) {
+    it.second->reload();
+  }
+
   reloadPickingBuffer();
+#endif
 }
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
-
 void Engine::initPickingBuffer() {
   mPickingPixelBuffer = std::make_unique<flc::PixelBuffer>(GL_STREAM_READ);
   reloadPickingBuffer();
@@ -213,10 +217,6 @@ flf::LightSpot* Engine::storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 c
   return mLights->mLightsSpot.add(mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
 }
 
-flf::LightPoint* Engine::storeLightPoint(glm::vec3 pos, glm::vec4 col, flf::Moveable* observed) {
-  return mLights->mLightsPoint.add(mTextures->getShadow3D(mWindowWidth, mWindowHeight), pos, col, observed);
-}
-
 flf::LightDirectional*
 Engine::storeLightDirectional(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
   return mLights->mLightsDirectional.add(
@@ -241,6 +241,8 @@ Texture2DRenderableDynamic* Engine::storeTextureDynamic(const string& fragmentSh
   return mTextures->getDynamic(path, program, glm::ivec2(mWindowWidth, mWindowHeight));;
 }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
 Texture3D* Engine::storeTexture3D(
   const string& posX
   , const string& negX
@@ -250,10 +252,7 @@ Texture3D* Engine::storeTexture3D(
   , const string& negZ) {
   return mTextures->get(posX, negX, posY, negY, posZ, negZ);
 }
-
-Sampler* Engine::storeSO(GLint textureUnit) {
-  return mSamplers.store(textureUnit, textureUnit);
-}
+#endif
 
 VertexArray* Engine::storeVAO(flf::IReloadable* user, VertexArray* vao) {
   return vao ? mBuffers.mVertexArrays.store(vao, user) : mBuffers.mVertexArrays.store(user);
@@ -716,6 +715,8 @@ void Engine::populateLights() {
     mScene->drawDepth(*(mLights->mLightsDirectional[i]->getShadowCamera()));
   }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
     flf::LightPoint *lightPoint = mLights->mLightsPoint[i].get();
     flc::Texture3DRenderable *light3DTexture = lightPoint->getShadowTexture();
@@ -730,6 +731,7 @@ void Engine::populateLights() {
     }
     currentTextureUnit++;
   }
+#endif
   flc::Framebuffer::bindScreenFramebuffer();
 }
 
@@ -853,6 +855,13 @@ glm::ivec4 Engine::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
+Sampler* Engine::storeSO(GLint textureUnit) {
+  return mSamplers.store(textureUnit, textureUnit);
+}
+
+flf::LightPoint* Engine::storeLightPoint(glm::vec3 pos, glm::vec4 col, flf::Moveable* observed) {
+  return mLights->mLightsPoint.add(mTextures->getShadow3D(mWindowWidth, mWindowHeight), pos, col, observed);
+}
 
 void Engine::pick(GLuint x, GLuint y) {
   mPickingRenderableTexture->bindForRendering();

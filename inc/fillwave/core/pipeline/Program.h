@@ -79,11 +79,7 @@ public:
   /* Uniform blocks */
   GLint getUniformLocation(const std::string& name);
 
-  void getUniformBlock(const std::string& name, GLuint bindingPoint);
-
   GLuint getHandle() const;
-
-  void uniformBlockPush(const std::string& name, GLfloat* data);
 
   void reload();
 
@@ -93,7 +89,6 @@ private:
   const bool mDelayedLinking;
   GLuint mHandle;
   std::vector<Uniform> mUniforms;
-  std::vector<puUniformBuffer> mUnifromBuffers;
   std::vector<flc::Shader*> mShaders;
 
   inline void getUniforms();
@@ -105,6 +100,17 @@ private:
   inline void load();
 
   inline void unload();
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+  public:
+    void getUniformBlock(const std::string& name, GLuint bindingPoint);
+    void uniformBlockPush(const std::string& name, GLfloat* data);
+
+  private:
+    std::vector<puUniformBuffer> mUnifromBuffers;
+
+#endif
 };
 
 } /* flc */

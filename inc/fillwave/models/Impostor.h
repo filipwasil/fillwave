@@ -47,9 +47,13 @@ public:
   ~Impostor() override;
 
 protected:
-  flc::Program *mProgram;
-  flc::Texture *mTexture;
-  flc::Sampler *mSampler;
+  Engine* mEngine;
+  flc::Program* mProgram;
+  flc::Texture* mTexture;
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+  flc::Sampler* mSampler;
+#endif
   GLfloat mSize;
   Blending mBlending;
 

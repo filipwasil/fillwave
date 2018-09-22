@@ -36,8 +36,12 @@ Impostor::Impostor(Engine *engine,
     GLenum blendingSource,
     GLenum blendingDestination)
     : Finishable(lifetime)
+    , mEngine(engine)
     , mTexture(texture)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
     , mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT))
+#endif
     , mSize(size) {
   mBlending.mSrc = blendingSource;
   mBlending.mDst = blendingDestination;
@@ -64,7 +68,11 @@ bool Cursor::getRenderItem(RenderItem &item) {
   item.mDataType = GL_NONE;
   item.mFirst = 0;
   item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  item.mHandles[RenderItem::eRenderHandleSampler] = 0;
+#else
   item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+#endif
   item.mHandles[RenderItem::eRenderHandleVAO] = 0;
   item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
   item.mHandles[RenderItem::eRenderHandleNormal] = 0;

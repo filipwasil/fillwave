@@ -61,7 +61,12 @@ else()
   aux_source_directory ("src/core/extended/pipeline" FILLWAVE_CORE_EXTENDED_PIPELINE_SOURCES)
   aux_source_directory ("src/core/extended/texturing" FILLWAVE_CORE_EXTENDED_TEXTURING_SOURCES)
   aux_source_directory ("src/core/extended/operations" FILLWAVE_CORE_EXTENDED_OPERATIONS_SOURCES)
-endif(FILLWAVE_BACKEND_OPENGL_ES_20)
+
+  aux_source_directory ("src/renderers/extended" FILLWAVE_RENDERERS_EXTENDED_SOURCES)
+
+  aux_source_directory ("src/models/extended" FILLWAVE_MODELS_EXTENDED_SOURCES)
+
+endif()
 
 aux_source_directory ("src/models" FILLWAVE_MODELS_SOURCES)
 aux_source_directory ("src/models/base" FILLWAVE_MODELS_BASE_SOURCES)
@@ -83,10 +88,7 @@ aux_source_directory ("src/common" FILLWAVE_COMMON_SOURCES)
 
 aux_source_directory ("src/models/shapes" FILLWAVE_SHAPES_SOURCES)
 
-if (FILLWAVE_BACKEND_OPENGL_ES_PC)
-  aux_source_directory ("src/renderers/extended" FILLWAVE_RENDERERS_EXTENDED_SOURCES)
-  aux_source_directory ("src/renderers/basic" FILLWAVE_RENDERERS_BASIC_SOURCES)
-endif()
+aux_source_directory ("src/renderers" FILLWAVE_RENDERERS_SOURCES)
 
 set (FILLWAVE_ENGINE_SOURCES
     ${FILLWAVE_PATH_SOURCE}/engine/Engine.cpp)
@@ -117,12 +119,14 @@ set (FILLWAVE_SOURCES
     ${FILLWAVE_MODELS_ANIMATIONS_SOURCES}
     ${FILLWAVE_MODELS_EFFECTS_SOURCES}
     ${FILLWAVE_MODELS_BUILDERS_SOURCES}
+    ${FILLWAVE_MODELS_EXTENDED_SOURCES}
     ${FILLWAVE_SPACE_SOURCES}
     ${FILLWAVE_SPACE_BASE_SOURCES}
     ${FILLWAVE_LOADERS_SOURCES}
     ${FILLWAVE_MANAGEMENT_SOURCES}
     ${FILLWAVE_COMMON_SOURCES}
     ${FILLWAVE_RENDERERS_SOURCES}
+    ${FILLWAVE_RENDERERS_EXTENDED_SOURCES}
     ${FILLWAVE_HUD_SOURCES}
     ${FILLWAVE_MODEL_LOADER_SOURCES}
     ${FILLWAVE_MODEL_LOADER_TRAITS}

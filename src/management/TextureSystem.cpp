@@ -69,7 +69,6 @@ inline void TextureSystem::checkExtensions() {
     }
 #endif
   }
-
 #endif
 }
 
@@ -108,6 +107,8 @@ flc::Texture2DRenderableDynamic* TextureSystem::getDynamic(const std::string& fr
   return mTextures2DDynamic.store(fragmentShaderPath, file, parameters, program);
 }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
 flc::Texture3D* TextureSystem::get(const std::string &posX,
   const std::string &negX,
   const std::string &posY,
@@ -188,8 +189,9 @@ flc::Texture3D* TextureSystem::get(const std::string &posX,
   fLogE("Texture 3D ", name, " not added to manager");
   return nullptr;
 }
+#endif
 
-flc::Texture2DRenderable *TextureSystem::getShadow2D(GLuint width, GLuint height) {
+flc::Texture2DRenderable* TextureSystem::getShadow2D(GLuint width, GLuint height) {
   auto cfg = new flc::TextureConfig();
 
   cfg->mHeader.mFormat = GL_DEPTH_COMPONENT;
@@ -282,7 +284,7 @@ flc::Texture3DRenderable* TextureSystem::getShadow3D(GLuint /*width*/, GLuint /*
 }
 #endif
 
-flc::Texture2DRenderable *TextureSystem::getColor2D(GLuint width, GLuint height) {
+flc::Texture2DRenderable* TextureSystem::getColor2D(GLuint width, GLuint height) {
 
   auto cfg = new flc::TextureConfig();
   cfg->mHeader.mFormat = GL_RGBA;
@@ -310,7 +312,7 @@ flc::Texture2DRenderable *TextureSystem::getColor2D(GLuint width, GLuint height)
   return mTextures2DRenderable.store(mTextures2DRenderable.size(), GL_COLOR_ATTACHMENT0, cfg, parameters2D);
 }
 
-flc::Texture2D *TextureSystem::getDeferredColor(GLuint width, GLuint height, GLuint size) {
+flc::Texture2D* TextureSystem::getDeferredColor(GLuint width, GLuint height, GLuint size) {
 
   flc::ParameterList parameters2D = {
     flc::Parameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST)
@@ -365,7 +367,7 @@ flc::Texture2D* TextureSystem::getDeferredColorScreen(GLuint width, GLuint heigh
   return mTextures2DDeferred.store(mTextures2DDeferred.size(), cfg, parameters2D, size);
 }
 
-flc::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
+flc::Texture2D* TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
 
   flc::ParameterList parameters;
 
@@ -374,7 +376,7 @@ flc::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
   depthTextureHeader.mInternalFormat = GL_DEPTH_COMPONENT;
   depthTextureHeader.mWidth = width;
   depthTextureHeader.mHeight = height;
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   depthTextureHeader.mType = GL_UNSIGNED_INT;
 #else
   depthTextureHeader.mType = GL_FLOAT;
@@ -390,7 +392,7 @@ flc::Texture2D *TextureSystem::getDeferredDepth(GLuint width, GLuint height) {
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
-flc::Texture2D *TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
+flc::Texture2D* TextureSystem::getDeferredStencilDepth(GLuint width, GLuint height) {
 
   flc::ParameterList parameters;
 
@@ -429,17 +431,24 @@ void TextureSystem::populateDynamicTextures(GLfloat timeExpiredInSeconds) {
 }
 
 void TextureSystem::reload() {
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
-  reload(mTextures1D);
-#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */
   reload(mTextures2D);
   reload(mTextures2DDynamic);
   reload(mTextures2DRenderable);
+  reload(mTextures2DDeferred);
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   reload(mTextures3D);
   reload(mTextures3DRenderable);
   reload(mTextures3DDynamic);
-  reload(mTextures2DDeferred);
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
+  reload(mTextures1D);
+#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */
+
+#endif /* FILLWAVE_BACKEND_OPENGL_ES_20 */
+
 }
 
 } /* flf */

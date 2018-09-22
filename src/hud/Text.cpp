@@ -193,7 +193,10 @@ inline void Text::initUniformsCache() {
 }
 
 inline void Text::initVAO() {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   mSampler->bind();
+#endif
   mVAO->bind();
   mVBO->bind();
   mVBO->setLoaded(GL_FALSE);

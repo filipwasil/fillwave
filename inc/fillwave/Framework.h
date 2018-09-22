@@ -53,4 +53,7 @@
 #include <fillwave/models/Impostor.h>
 #include <fillwave/models/EmiterPointCPU.h>
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
 #include <fillwave/models/extended/EmiterPointGPU.h>
+#endif

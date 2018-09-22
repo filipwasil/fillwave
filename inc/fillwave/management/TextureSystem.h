@@ -44,6 +44,13 @@ public:
   flc::Texture2D* get(
     const std::string& texturePath);
 
+  flc::Texture2DRenderable* getShadow2D(GLuint width, GLuint height);
+  flc::Texture2DRenderable* getColor2D(GLuint width, GLuint height);
+  flc::Texture2D* getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
+  flc::Texture2D* getDeferredColorScreen(GLuint width, GLuint height, GLuint size = 1);
+  flc::Texture2D* getDeferredDepth(GLuint width, GLuint height);
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   flc::Texture3D* get(
     const std::string& posX
     , const std::string& negX
@@ -52,14 +59,7 @@ public:
     , const std::string& posZ
     , const std::string& negZ);
 
-  flc::Texture2DRenderable* getShadow2D(GLuint width, GLuint height);
   flc::Texture3DRenderable* getShadow3D(GLuint width, GLuint height);
-  flc::Texture2DRenderable* getColor2D(GLuint width, GLuint height);
-  flc::Texture2D* getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
-  flc::Texture2D* getDeferredColorScreen(GLuint width, GLuint height, GLuint size = 1);
-  flc::Texture2D* getDeferredDepth(GLuint width, GLuint height);
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-#else
   flc::Texture2D* getDeferredStencilDepth(GLuint width, GLuint height);
 #endif
   flc::Texture2DRenderableDynamic*
@@ -77,10 +77,6 @@ public:
 
 private:
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
-  TCache<MAX_CACHE_SIZE, flc::Texture1D, size_t, flc::ParameterList &> mTextures1D;
-#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */
   TCache<
     MAX_CACHE_SIZE
     , flc::Texture2D
@@ -103,6 +99,7 @@ private:
     , flc::TextureConfig*
     , flc::ParameterList &
     , flc::Program*> mTextures2DDynamic;
+
   TCache<
     MAX_CACHE_SIZE
     , flc::Texture2DRenderable
@@ -111,6 +108,8 @@ private:
     , flc::TextureConfig*
     , flc::ParameterList&> mTextures2DRenderable;
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   TCache<
     MAX_CACHE_SIZE
     , flc::Texture3D
@@ -148,6 +147,13 @@ private:
     , flc::TextureConfig*
     , flc::Texture2DRenderable*
     , flc::ParameterList&> mTextures3DRenderable;
+
+#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
+#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
+  TCache<MAX_CACHE_SIZE, flc::Texture1D, size_t, flc::ParameterList &> mTextures1D;
+#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */
+
+#endif /* FILLWAVE_BACKEND_OPENGL_ES_20 */
 
   std::vector<GLenum> mSupportedCompresssionTypes;
   const std::string mRootPath;

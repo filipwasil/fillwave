@@ -209,7 +209,10 @@ void EmiterPointCPU::initUniformsCache() {
 }
 
 void EmiterPointCPU::initVAO() {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   mSampler->bind();
+#endif
   mVAO->bind();
   mVBO->bind();
   mVBO->setLoaded(GL_FALSE);
@@ -231,7 +234,11 @@ bool EmiterPointCPU::getRenderItem(RenderItem &item) {
   item.mDataType = GL_UNSIGNED_INT;
   item.mFirst = 0;
   item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  item.mHandles[RenderItem::eRenderHandleSampler] = 0;
+#else
   item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+#endif
   item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
   item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
   item.mIndicesPointer = 0;

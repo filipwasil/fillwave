@@ -528,7 +528,10 @@ inline void VoxelChunk::initUniformsCache() {
 }
 
 inline void VoxelChunk::initVAO() {
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   mSampler->bind();
+#endif
   mVAO->bind();
 
   mVBO->bind();
@@ -551,7 +554,11 @@ bool VoxelChunk::getRenderItem(RenderItem &item) {
   item.mCount = mVBO->getElements();
   item.mFirst = 0;
   item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  item.mHandles[RenderItem::eRenderHandleSampler] = 0;
+#else
   item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+#endif
   item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
   item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
   item.mMode = GL_TRIANGLES;

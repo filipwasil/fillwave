@@ -52,13 +52,13 @@
 #define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE
 #define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
 
-void initExtensions(void (* (*getAddress)(const char*))());
+bool initExtensions(void (* (*getAddress)(const char*))());
 
 #else /* defined(__ANDROID__) || defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
 
 #include <glad/glad.h>
 
-void initExtensions();
+bool initExtensions();
 
 #endif /* defined(__ANDROID__) */
 

@@ -69,7 +69,7 @@ void ContextGLFW::windowInit(GLFWwindow *&window) {
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-  glfwWindowHint(GLFW_OPENGL_ES_API, GLFW_OPENGL_CORE_PROFILE);
+//  glfwWindowHint(GLFW_OPENGL_ES_API, GLFW_OPENGL_CORE_PROFILE);
 #elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);

@@ -31,6 +31,9 @@ class EnginePC : public Engine{
   EnginePC(GLint argc, GLchar *const argv[]);
 
   ~EnginePC() override;
+
+ private:
+  bool mIsAllExtensionsSuccessfullyLoaded;
 };
 
 } /* flw */

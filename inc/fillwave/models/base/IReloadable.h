@@ -52,7 +52,10 @@ public:
 
 protected:
   flc::VertexArray* mVAO;
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   flc::Sampler* mSampler;
+#endif
 };
 
 } /* flf */

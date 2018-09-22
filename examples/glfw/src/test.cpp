@@ -99,6 +99,8 @@ void init() {
   engine->getCurrentScene()->attach(std::move(emiter1));
 
   /* Emiter 2 GPU */
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
   auto emiter2 = std::make_unique<EmiterPointGPU>(engine,
                                                   0.3,
                                                   600.0,
@@ -116,6 +118,18 @@ void init() {
                                                   GL_FALSE);
   emiter2->moveBy(glm::vec3(0.0, -8.0, -15.0));
   engine->getCurrentScene()->attach(std::move(emiter2));
+
+    engine->getCurrentScene()->setSkybox(std::make_unique<Skybox>(
+    engine
+    , engine->storeTexture3D(
+      "textures/skybox/skybox/frozendusk/frozendusk_right.jpg"
+      , "textures/skybox/skybox/frozendusk/frozendusk_left.jpg"
+      , "textures/skybox/skybox/frozendusk/frozendusk_top.jpg"
+      , ""
+      , "textures/skybox/skybox/frozendusk/frozendusk_front.jpg"
+      , "textures/skybox/skybox/frozendusk/frozendusk_back.jpg")));
+
+#endif
 
   /* Emiter 3 CPU */
   auto emiter3 = std::make_unique<EmiterPointCPU>(engine,
@@ -136,17 +150,6 @@ void init() {
 
   emiter3->moveBy(glm::vec3(8.0, -8.0, -15.0));
   engine->getCurrentScene()->attach(std::move(emiter3));
-
-  engine->getCurrentScene()->setSkybox(std::make_unique<Skybox>(
-    engine
-    , engine->storeTexture3D(
-      "textures/skybox/skybox/frozendusk/frozendusk_right.jpg"
-      , "textures/skybox/skybox/frozendusk/frozendusk_left.jpg"
-      , "textures/skybox/skybox/frozendusk/frozendusk_top.jpg"
-      , ""
-      , "textures/skybox/skybox/frozendusk/frozendusk_front.jpg"
-      , "textures/skybox/skybox/frozendusk/frozendusk_back.jpg")));
-
 
   engine->configFPSCounter("FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
   engine->storeText("Benchmark", "FreeSans", glm::vec2(-0.95f, -0.85f), 50.0f);

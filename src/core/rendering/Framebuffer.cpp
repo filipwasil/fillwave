@@ -22,7 +22,14 @@
 #include <fillwave/core/rendering/Framebuffer.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Framebuffer", FERROR | FFATAL | FDEBUG)
+FLOGINIT_DEFAULT()
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#define GL_DRAW_FRAMEBUFFER GL_DRAW_FRAMEBUFFER_NV
+#define GL_READ_FRAMEBUFFER GL_READ_FRAMEBUFFER_NV
+#define glReadBuffer glReadBufferNV
+#else
+#endif
 
 namespace flw {
 namespace flc {
@@ -49,8 +56,13 @@ void Framebuffer::bindScreenFramebuffer() {
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-#else
+void Framebuffer::setReadColorAttachment(GLuint attachmentColor) {
+  glReadBuffer(GL_COLOR_ATTACHMENT0 + attachmentColor);
+}
+
+void Framebuffer::setReadDepthAttachment() {
+  glReadBuffer(GL_DEPTH_ATTACHMENT);
+}
 
 void Framebuffer::bindForWriting(GLuint id) const {
   glBindFramebuffer(GL_DRAW_FRAMEBUFFER, mHandles[id]);
@@ -67,14 +79,6 @@ void Framebuffer::attachTexture2DDraw(GLenum attachment, GLenum target, GLuint t
   fLogC("attachTexture2DDraw failed. attachment: ", attachment, ", target: ", target, ", handle: ", textureHandle);
 }
 
-void Framebuffer::setReadColorAttachment(GLuint attachmentColor) {
-  glReadBuffer(GL_COLOR_ATTACHMENT0 + attachmentColor);
-}
-
-void Framebuffer::setReadDepthAttachment() {
-  glReadBuffer(GL_DEPTH_ATTACHMENT);
-}
-
 void Framebuffer::bindScreenFramebufferForReading() {
   glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
 }
@@ -82,8 +86,6 @@ void Framebuffer::bindScreenFramebufferForReading() {
 void Framebuffer::bindScreenFramebufferForWriting() {
   glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
 }
-
-#endif
 
 void Framebuffer::reload() {
   glGenFramebuffers(mHowMany, mHandles);

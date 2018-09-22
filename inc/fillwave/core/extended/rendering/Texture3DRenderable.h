@@ -50,7 +50,7 @@ public:
   void log();
 
 protected:
-  flc::Texture2DRenderable *mShadowTexture;
+  flc::Texture2DRenderable* mShadowTexture;
 };
 
 } /* flc */
