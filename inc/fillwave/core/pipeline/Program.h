@@ -24,11 +24,7 @@
 #include <fillwave/core/pipeline/Uniform.h>
 #include <fillwave/core/pipeline/Shader.h>
 #include <fillwave/core/extended/pipeline/UniformBuffer.h>
-#include <memory>
-#include <iostream>
-#include <string>
-
-#define FILLWAVE_LIGHTS_BINDING_POINT_NAME "uSpotLightsUBO"
+#include <fillwave/common/Aliases.h>
 
 class Attribute;
 
@@ -40,6 +36,9 @@ namespace flc {
  */
 class Program final {
 public:
+
+  static constexpr const char* LIGHTS_BINDING_POINT_NAME = "uSpotLightsUBO";
+
   Program(const std::vector<flc::Shader *> &shaders, GLboolean skipLinking = GL_FALSE);
 
   ~Program();
@@ -108,11 +107,10 @@ private:
     void uniformBlockPush(const std::string& name, GLfloat* data);
 
   private:
-    std::vector<puUniformBuffer> mUnifromBuffers;
+    std::vector<pu<flc::UniformBuffer>> mUnifromBuffers;
 
 #endif
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::Program> puProgram;
 } /* flw */

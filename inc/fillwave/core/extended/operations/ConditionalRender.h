@@ -21,9 +21,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else
-
 #include <fillwave/OpenGL.h>
 
 namespace flw {
@@ -60,5 +57,3 @@ private:
 
 } /* flc */
 } /* flw */
-
-#endif

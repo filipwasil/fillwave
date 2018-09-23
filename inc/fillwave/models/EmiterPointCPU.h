@@ -24,7 +24,7 @@
 #include <fillwave/models/base/IEmiterPoint.h>
 
 #include <fillwave/core/buffers/VertexBufferFloat.h>
-#include <fillwave/core/extended/operations/TQuery.h>
+#include <fillwave/core/operations/TQuery.h>
 
 namespace flw {
 namespace flf {
@@ -37,22 +37,23 @@ namespace flf {
 
 class EmiterPointCPU : public IEmiterPoint {
 public:
-  EmiterPointCPU(Engine *engine,
-      GLfloat emitingSourceRate,
-      GLuint howMany,
-      glm::vec4 color,
-      glm::vec3 acceleration = glm::vec3(0.0),
-      glm::vec3 startVelocity = glm::vec3(0.0),
-      glm::vec3 robustnessVelocity = glm::vec3(0.0),
-      glm::vec3 startPosition = glm::vec3(0.0),
-      glm::vec3 robustnessPosition = glm::vec3(0.0),
-      GLfloat startSize = 1.0,
-      GLfloat lifetime = 6.0,
-      flc::Texture *texture = nullptr,
-      GLenum blendingSource = GL_SRC_ALPHA,
-      GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA,
-      GLboolean depthTesting = GL_TRUE,
-      GLfloat alphaCutOffLevel = 0.0f);
+  EmiterPointCPU(
+    Engine *engine
+    , GLfloat emitingSourceRate
+    , GLuint howMany
+    , glm::vec4 color
+    , glm::vec3 acceleration = glm::vec3(0.0)
+    , glm::vec3 startVelocity = glm::vec3(0.0)
+    , glm::vec3 robustnessVelocity = glm::vec3(0.0)
+    , glm::vec3 startPosition = glm::vec3(0.0)
+    , glm::vec3 robustnessPosition = glm::vec3(0.0)
+    , GLfloat startSize = 1.0
+    , GLfloat lifetime = 6.0
+    , flc::Texture *texture = nullptr
+    , GLenum blendingSource = GL_SRC_ALPHA
+    , GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA
+    , GLboolean depthTesting = GL_TRUE
+    , GLfloat alphaCutOffLevel = 0.0f);
 
   virtual ~EmiterPointCPU() override = default;
 
@@ -61,7 +62,6 @@ public:
 
   /* IDrawable */
   void draw(ICamera &camera) override;
-
   void drawPBRP(ICamera &camera) override;
 
   /* IRenderable */
@@ -87,15 +87,10 @@ private:
   GLint mULCTimeElapsed;
 
   void initBuffers() override;
-
   void initPipeline() override;
-
   void initUniformsCache() override;
-
   void initVAO() override;
-
   void initVBO() override;
-
   void coreDraw();
 };
 

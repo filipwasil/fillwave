@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/rendering/FramebufferGeometry.h>
+#include <fillwave/core/extended/rendering/FramebufferGeometry.h>
                                                                                                                                                                                              #include <fillwave/Fillwave.h>
 #include <fillwave/Log.h>
 

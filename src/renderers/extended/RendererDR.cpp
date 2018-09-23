@@ -438,7 +438,5 @@ inline void RendererDR::drawDebug() {
   flc::Framebuffer::bindScreenFramebuffer();
 }
 
-} /* namespace flf */
-} /* namespace flw */
-
-#endif /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
+} /* flf */
+} /* flw */

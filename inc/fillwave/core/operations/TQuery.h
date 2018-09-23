@@ -68,6 +68,8 @@ using QueryHowManyTransformFeedbackPrimitivesWritten = TQuery<GL_TRANSFORM_FEEDB
 
 #else
 
+using QueryIfAnySamplesPassed = TQuery<GL_ANY_SAMPLES_PASSED>;
+using QueryHowManyTransformFeedbackPrimitivesWritten = TQuery<GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN>;
 using QueryHowManySamplesPassed = TQuery<GL_SAMPLES_PASSED>;
 using QueryHowManyPrimitivesGeneratedByGeometryShader = TQuery<GL_PRIMITIVES_GENERATED>;
 using QueryTimeElapsed = TQuery<GL_TIME_ELAPSED>;

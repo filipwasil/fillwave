@@ -19,10 +19,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/texturing/Texture1D.h>
+#include <fillwave/core/extended/texturing/Texture1D.h>
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
 namespace flw {
 namespace flc {
 
@@ -37,5 +35,3 @@ void Texture1D::log() {
 
 } /* flc */
 } /* flw */
-
-#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */

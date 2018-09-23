@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/texturing/Texture3D.h>
+#include <fillwave/core/extended/texturing/Texture3D.h>
 #include <fillwave/Log.h>
 
 FLOGINIT_DEFAULT()

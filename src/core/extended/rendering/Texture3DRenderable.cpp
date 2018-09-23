@@ -19,10 +19,10 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/rendering/Texture3DRenderable.h>
+#include <fillwave/core/extended/rendering/Texture3DRenderable.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Texture3DRenderable", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {
@@ -87,8 +87,7 @@ void Texture3DRenderable::setAttachment(GLenum attachment) {
 void Texture3DRenderable::setAttachmentFace(GLenum face, GLenum attachment) {
   mShadowTexture->attachTexture2DDraw(attachment, face, getHandle());
   fLogC("Setting Face framebuffer failed");
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-#elif (FILLWAVE_BACKEND_OPENGL_ES_30)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   GLenum target = attachment;
   glDrawBuffers(1, &target);
 #else

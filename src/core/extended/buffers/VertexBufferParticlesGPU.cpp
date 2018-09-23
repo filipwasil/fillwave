@@ -24,8 +24,6 @@
 namespace flw {
 namespace flc {
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-#else
 VertexBufferParticlesGPU::VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles)
     : TVertexBuffer(particles, GL_DYNAMIC_COPY) {
   // nothing
@@ -34,7 +32,6 @@ VertexBufferParticlesGPU::VertexBufferParticlesGPU(const std::vector<VertexParti
 void VertexBufferParticlesGPU::log() const {
   // nothing
 }
-#endif // defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 
 } /* flc */
 } /* flw */

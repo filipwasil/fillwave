@@ -82,7 +82,7 @@ void Program::link() {
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
-  getUniformBlock(FILLWAVE_LIGHTS_BINDING_POINT_NAME, FILLWAVE_LIGHTS_BINDING_POINT);
+  getUniformBlock(LIGHTS_BINDING_POINT_NAME, FILLWAVE_LIGHTS_BINDING_POINT);
 #endif
   disusePrograms();
 }

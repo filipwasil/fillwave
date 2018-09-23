@@ -26,9 +26,6 @@
 namespace flw {
 namespace flc {
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-#else
-
 /*! \struct VertexParticleGPU
  * \brief Stores the particle vertex data computed entirely on GPU.
  */
@@ -54,8 +51,6 @@ public:
 
   void log() const override;
 };
-
-#endif // defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 
 } /* flc */
 } /* flw */

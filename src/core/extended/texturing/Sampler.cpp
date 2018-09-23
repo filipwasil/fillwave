@@ -22,7 +22,7 @@
 #include <fillwave/core/texturing/Sampler.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("Sampler", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {

@@ -57,5 +57,4 @@ private:
 };
 
 } /* flc */
-typedef std::shared_ptr<flc::UniformBuffer> puUniformBuffer;
 } /* flw */

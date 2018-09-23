@@ -23,9 +23,6 @@
 
 #include <fillwave/core/GLObject.h>
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else
-
 namespace flw {
 namespace flc {
 
@@ -50,5 +47,3 @@ private:
 
 } /* flc */
 } /* flw */
-
-#endif /* PROGRAMPIPELINE_H_ */

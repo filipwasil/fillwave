@@ -22,7 +22,7 @@
  */
 
 #include <fillwave/renderers/IRenderer.h>
-#include <fillwave/core/rendering/FramebufferGeometry.h>
+#include <fillwave/core/extended/rendering/FramebufferGeometry.h>
 #include <fillwave/models/Mesh.h>
 #include <fillwave/Math.h>
 #include <fillwave/core/rendering/Texture2DRenderable.h>

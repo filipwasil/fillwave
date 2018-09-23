@@ -237,7 +237,7 @@ void LightSystem::pushLightUniformBuffers(flc::Program *program) {
   program->use();
   // todo update uniforms
 #else
-  program->uniformBlockPush(FILLWAVE_LIGHTS_BINDING_POINT_NAME, reinterpret_cast<GLfloat *>(mLightBufferData.data()));
+  program->uniformBlockPush(flc::Program::LIGHTS_BINDING_POINT_NAME, reinterpret_cast<GLfloat *>(mLightBufferData.data()));
 #endif
 }
 

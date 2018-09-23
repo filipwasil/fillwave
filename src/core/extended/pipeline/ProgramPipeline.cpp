@@ -21,9 +21,6 @@
 
 #include <fillwave/core/pipeline/ProgramPipeline.h>
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else
-
 namespace flw {
 namespace flc {
 
@@ -47,5 +44,3 @@ void ProgramPipeline::use(GLuint programHandle, GLuint id) const {
 
 } /* flc */
 } /* flw  */
-
-#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */

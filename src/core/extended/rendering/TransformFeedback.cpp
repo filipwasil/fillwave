@@ -22,7 +22,7 @@
 #include <fillwave/core/extended/rendering/TransformFeedback.h>
 #include <fillwave/Log.h>
 
-FLOGINIT("TransformFeedback", FERROR | FFATAL)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {

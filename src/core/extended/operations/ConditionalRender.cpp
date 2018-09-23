@@ -21,9 +21,6 @@
 
 #include <fillwave/core/operations/ConditionalRender.h>
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-#else
-
 namespace flw {
 namespace flc {
 
@@ -44,5 +41,3 @@ void ConditionalRender::end() const {
 
 } /* flc */
 } /* flw */
-
-#endif
