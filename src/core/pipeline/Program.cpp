@@ -42,7 +42,7 @@ Program::~Program() {
 void Program::attach(flc::Shader* shader) {
   if (mHandle) {
     glAttachShader(mHandle, shader->getHandle());
-    fLogC("attach shader ", shader->getHandle(), "to program ", mHandle);
+    fLogC("attach shader ", shader->getHandle(), " to program ", mHandle);
   }
 }
 

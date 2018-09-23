@@ -55,10 +55,11 @@ IEmiterPoint::IEmiterPoint(Engine *engine,
   glEnable(GL_PROGRAM_POINT_SIZE);
   //todo glEnable(GL_POINT_SPRITE) always on since OpenGL 3.2 ... but not at all drivers ://////
   glEnable(GL_POINT_SPRITE);
-#endif
+
   if (glGetError() != GL_NO_ERROR) {
     fLogE("Legacy features may cause a GL_INVALID_ENUM on core profile. It may happen.");
   }
+#endif
 
   attachHandler([this] (const Event& event) {
     mCallbackTimePassed += event.getData().mTime.timePassed;

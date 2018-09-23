@@ -34,21 +34,26 @@ namespace flf {
 struct ShaderLoader {
 /* Headers */
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-  const std::string mGLVersion = "#version 200 es\n";
-#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   const std::string mGLVersion = "#version 300 es\n";
-#else /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
-#if defined(FILLWAVE_BACKEND_OPENGL_45)
-  const std::string mGLVersion = "#version 450 core\n";
-#else /* defined(FILLWAVE_BACKEND_OPENGL_45) */
-  const std::string mGLVersion = "#version 330 core\n";
-#endif /* defined(FILLWAVE_BACKEND_OPENGL_45) */
-#endif /* defined(FILLWAVE_BACKEND_OPENGL_ES_30) */
-  const std::string mGLFragmentPrecision = "precision lowp float;\n";
-  const std::string mGLVertexPrecision = "precision mediump float;\n";
-
   const std::string mGLVaryingIn = "in";
   const std::string mGLVaryingOut = "out";
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+  const std::string mGLVersion = "#version 300 es\n";
+  const std::string mGLVaryingIn = "in";
+  const std::string mGLVaryingOut = "out";
+#elif defined(FILLWAVE_BACKEND_OPENGL_45)
+  const std::string mGLVersion = "#version 450 core\n";
+  const std::string mGLVaryingIn = "in";
+  const std::string mGLVaryingOut = "out";
+#elif defined(FILLWAVE_BACKEND_OPENGL_33)
+  const std::string mGLVersion = "#version 330 core\n";
+  const std::string mGLVaryingIn = "in";
+  const std::string mGLVaryingOut = "out";
+#else
+  #error "OpenGL version not supported by this loader"
+#endif
+  const std::string mGLFragmentPrecision = "precision lowp float;\n";
+  const std::string mGLVertexPrecision = "precision mediump float;\n";
 };
 
 } /* flf */

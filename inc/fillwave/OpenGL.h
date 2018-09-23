@@ -49,8 +49,14 @@
 #include <glad/glad.h>
 
 #define glClearDepth glClearDepthf
+
+#ifndef GL_CLAMP_TO_BORDER
 #define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE
+#endif
+
+#ifndef GL_DEPTH_COMPONENT32
 #define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
+#endif
 
 bool initExtensions(void (* (*getAddress)(const char*))());
 

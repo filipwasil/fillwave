@@ -63,7 +63,11 @@ Model::Model(Engine* engine,
     , mProgramShadow
     , mProgramShadowColor
     , mProgramLoader.getProgram(EProgram::occlusionOptimizedQuery)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+    , nullptr
+#else
     , mProgramLoader.getProgram(EProgram::ambientOcclusionGeometry)
+#endif
     , mProgramLoader.getProgram(EProgram::ambientOcclusionColor)
     , mEngine->getLightSystem()
     , mEngine->storeBuffer<flc::VertexBufferBasic>(vao, vertices)
@@ -295,7 +299,11 @@ pu<Mesh> Model::loadMesh(
     , mProgramShadow
     , mProgramShadowColor
     , mProgramLoader.getProgram(EProgram::occlusionOptimizedQuery)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+    , nullptr
+#else
     , mProgramLoader.getProgram(EProgram::ambientOcclusionGeometry)
+#endif
     , mProgramLoader.getProgram(EProgram::ambientOcclusionColor)
     , mEngine->getLightSystem()
     , engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get())

@@ -26,6 +26,19 @@ ContextGLFW::ContextGLFW(int argc, char *argv[]) {
     exit(EXIT_FAILURE);
   }
 
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+  glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
+#elif defined(FILLWAVE_BACKEND_OPENGL_45)
+//  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+//  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+#endif
+
   mWindow = nullptr;
   mWindowNew = nullptr;
 
@@ -61,26 +74,19 @@ void ContextGLFW::windowInit(GLFWwindow *&window) {
   }
 
   glfwMakeContextCurrent(window);
+
+#if defined(FILLWAVE_BACKEND_OPENGL_45)
   glfwWindowHint(GLFW_RED_BITS, 8);
   glfwWindowHint(GLFW_GREEN_BITS, 8);
   glfwWindowHint(GLFW_BLUE_BITS, 8);
   glfwWindowHint(GLFW_DEPTH_BITS, 16);
-
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-//  glfwWindowHint(GLFW_OPENGL_ES_API, GLFW_OPENGL_CORE_PROFILE);
-#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-  glfwWindowHint(GLFW_OPENGL_ES_API, GLFW_OPENGL_CORE_PROFILE);
-#elif defined(FILLWAVE_BACKEND_OPENGL_45)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#endif
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+
+
 
   if (!window) {
     fLogE("Could not create a new rendering window.\n");

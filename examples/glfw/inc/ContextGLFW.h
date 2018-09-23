@@ -29,7 +29,6 @@
 #define GLFW_INCLUDE_ES3
 #elif defined(FILLWAVE_BACKEND_OPENGL_45)
 #endif
-
 #include <GLFW/glfw3.h>
 
 #include <fillwave/Framework.h>

@@ -58,23 +58,28 @@ MeshTerrain::MeshTerrain(Engine *engine,
 
   for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; ++x) {
     for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; ++z) {
-      auto ptr = std::make_unique<Mesh>(engine,
-                                          m,
-                                          engine->storeTexture(diffuseMapPath.c_str()),
-                                          engine->storeTexture(normalMapPath.c_str()),
-                                          engine->storeTexture(specularMapPath.c_str()),
-                                          program,
-                                          loader.getProgram(EProgram::shadow),
-                                          loader.getProgram(EProgram::shadowColorCoded),
-                                          loader.getProgram(EProgram::occlusionOptimizedQuery),
-                                          loader.getProgram(EProgram::ambientOcclusionGeometry),
-                                          loader.getProgram(EProgram::ambientOcclusionColor),
-                                          engine->getLightSystem(),
-                                          vbo,
-                                          ibo,
-                                          nullptr,
-                                          GL_TRIANGLES,
-                                          vao);
+      auto ptr = std::make_unique<Mesh>(
+        engine
+        , m
+        , engine->storeTexture(diffuseMapPath.c_str())
+        , engine->storeTexture(normalMapPath.c_str())
+        , engine->storeTexture(specularMapPath.c_str())
+        , program
+        , loader.getProgram(EProgram::shadow)
+        , loader.getProgram(EProgram::shadowColorCoded)
+        , loader.getProgram(EProgram::occlusionOptimizedQuery)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+        , nullptr
+#else
+        , loader.getProgram(EProgram::ambientOcclusionGeometry)
+#endif
+        , loader.getProgram(EProgram::ambientOcclusionColor)
+        , engine->getLightSystem()
+        , vbo
+        , ibo
+        , nullptr
+        , GL_TRIANGLES
+        , vao);
 
       ptr->moveTo(glm::vec3(density * gapSize * (GLfloat(x)), 0.0, density * gapSize * (GLfloat(z))));
 

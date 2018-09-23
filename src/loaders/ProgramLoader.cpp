@@ -39,13 +39,25 @@ constexpr GLuint FILLWAVE_RANDOM_VECTOR_SIZE = 64;
 /* Headers */
 const std::string gGLVersion =
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-  "";
+  "#version 300 es\n";
 #elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-"#version 300 es\n";
+  "#version 300 es\n";
 #elif defined(FILLWAVE_BACKEND_OPENGL_45)
   "#version 450 core\n";
 #elif defined(FILLWAVE_BACKEND_OPENGL_33)
   "#version 330 core\n";
+#else
+#endif
+
+const std::string gGLExtraExtensions =
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+  "#extension GL_EXT_gpu_shader4 : enable\n";
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+  "\n";
+#elif defined(FILLWAVE_BACKEND_OPENGL_45)
+  "\n";
+#elif defined(FILLWAVE_BACKEND_OPENGL_33)
+  "\n";
 #else
 #endif
 
@@ -614,7 +626,9 @@ const std::string vsParticlesCPU =
   "}\n";
 
 const std::string vsQuad =
-  gGLVersion + gGLVertexPrecision +
+  gGLVersion +
+  gGLExtraExtensions +
+  gGLVertexPrecision +
   gGLVaryingOut +
   " vec2 vPosition;\n"
   "void main() {\n"

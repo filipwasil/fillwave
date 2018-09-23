@@ -77,7 +77,8 @@ void LightSystem::pushLightUniforms(flc::Program* program) {
   /* KEEP THIS ORDER !!! SPOT -> DIRECTIONAL -> POINT */
   program->uniformPush("uNumberOfSpotLights", static_cast<GLint>(mLightsSpot.size() + mLightsDirectional.size()));
 
-#if defined(FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS) && defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#if defined(FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS) \
+  && (defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20))
   /* Mesa shader compiler optimizes out "uNumberOfPointLights" but it should not */
   /* This causes a false positive error indication here */
 #else
