@@ -29,7 +29,7 @@ namespace flw {
  */
 
 EngineAndroid::EngineAndroid(const string& rootPath)
-  : Engine(rootPath) {
+  : Engine(rootPath, false) {
   // nothing
 }
 
@@ -37,4 +37,4 @@ EngineAndroid::EngineAndroid(ANativeActivity* activity) {
   // nothing
 }
 
-/* flw  */
+} /* flw  */

@@ -219,9 +219,9 @@ class Engine {
   flc::Program* mProgramTextureLookup;
 
   /* OQ */
-  flc::Program *mProgramOcclusionBox;
-  flc::VertexBufferPosition *mVBOOcclusion;
-  flc::VertexArray *mVAOOcclusion;
+  flc::Program* mProgramOcclusionBox;
+  flc::VertexBufferPosition* mVBOOcclusion;
+  flc::VertexArray* mVAOOcclusion;
 
   /* Input handlers */
   vec<flf::EventHandler> mHandlers;

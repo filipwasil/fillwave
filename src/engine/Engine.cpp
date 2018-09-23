@@ -183,7 +183,7 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
   * sizeInBytes = mWindowWidth*  mWindowHeight*  bytesPerPixel;
   buffer[*sizeInBytes] = '\0';
 }
-#endif
+#endif /* defined(FILLWAVE_BACKEND_OPENGL_ES_20) */
 
 void Engine::initContext(void) {
   glClearColor(mBackgroundColor.x, mBackgroundColor.y, mBackgroundColor.z, 1.0f);
@@ -240,19 +240,6 @@ Texture2DRenderableDynamic* Engine::storeTextureDynamic(const string& fragmentSh
   Program* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
   return mTextures->getDynamic(path, program, glm::ivec2(mWindowWidth, mWindowHeight));;
 }
-
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-#else
-Texture3D* Engine::storeTexture3D(
-  const string& posX
-  , const string& negX
-  , const string& posY
-  , const string& negY
-  , const string& posZ
-  , const string& negZ) {
-  return mTextures->get(posX, negX, posY, negY, posZ, negZ);
-}
-#endif
 
 VertexArray* Engine::storeVAO(flf::IReloadable* user, VertexArray* vao) {
   return vao ? mBuffers.mVertexArrays.store(vao, user) : mBuffers.mVertexArrays.store(user);
@@ -855,6 +842,17 @@ glm::ivec4 Engine::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
+
+Texture3D* Engine::storeTexture3D(
+  const string& posX
+  , const string& negX
+  , const string& posY
+  , const string& negY
+  , const string& posZ
+  , const string& negZ) {
+  return mTextures->get(posX, negX, posY, negY, posZ, negZ);
+}
+
 Sampler* Engine::storeSO(GLint textureUnit) {
   return mSamplers.store(textureUnit, textureUnit);
 }

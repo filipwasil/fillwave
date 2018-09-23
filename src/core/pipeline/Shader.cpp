@@ -74,13 +74,13 @@ void Shader::compile() {
     }
     glDeleteShader(mHandle);
     mHandle = 0;
-    fLogF("Shader can not bee compiled");
     std::istringstream lines(mSource);
     std::string line;
     int i = 0;
     while (std::getline(lines, line)) {
       fLogE("[", i++, "] ", line.c_str());
     }
+    fLogF("Shader ", getDebugInfo().type, " can not bee compiled");
   }
 }
 
