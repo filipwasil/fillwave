@@ -31,7 +31,7 @@ namespace flc {
  * \brief One can render to this texture and use the rendered image as a 2D texture.
  */
 
-class Texture2DRenderable : public Texture2D {
+class Texture2DRenderable  {
 public:
   Texture2DRenderable(GLenum attachment, flc::TextureConfig *file, ParameterList &parameters);
 
@@ -59,7 +59,8 @@ public:
 
   void log();
 
-private:
+  Texture2D mTexture2D;
+ private:
   flc::Framebuffer mFramebuffer;
   GLenum mAttachment;
 };

@@ -36,39 +36,39 @@ Texture3DRenderable::Texture3DRenderable(
   , TextureConfig* nZ
   , Texture2DRenderable* tex
   , ParameterList& params)
-    : Texture3D(pX /*right*/ , nX /*left*/ , pY /*ceil*/ , nY /*floor*/ , pZ /*front*/ , nZ /*back*/ , params)
+    : mTexture3D(pX /*right*/ , nX /*left*/ , pY /*ceil*/ , nY /*floor*/ , pZ /*front*/ , nZ /*back*/ , params)
     , mShadowTexture(tex) {
   // nothing
 }
 
 void Texture3DRenderable::resize(GLint width, GLint heigth) {
-  mFront->mHeader.mWidth = width;
-  mFront->mHeader.mHeight = heigth;
-  mFront->mData = nullptr;
+  mTexture3D.mFront->mHeader.mWidth = width;
+  mTexture3D.mFront->mHeader.mHeight = heigth;
+  mTexture3D.mFront->mData = nullptr;
 
-  mBack->mHeader.mWidth = width;
-  mBack->mHeader.mHeight = heigth;
-  mBack->mData = nullptr;
+  mTexture3D.mBack->mHeader.mWidth = width;
+  mTexture3D.mBack->mHeader.mHeight = heigth;
+  mTexture3D.mBack->mData = nullptr;
 
-  mCeil->mHeader.mWidth = width;
-  mCeil->mHeader.mHeight = heigth;
-  mCeil->mData = nullptr;
+  mTexture3D.mCeil->mHeader.mWidth = width;
+  mTexture3D.mCeil->mHeader.mHeight = heigth;
+  mTexture3D.mCeil->mData = nullptr;
 
-  mFloor->mHeader.mWidth = width;
-  mFloor->mHeader.mHeight = heigth;
-  mFloor->mData = nullptr;
+  mTexture3D.mFloor->mHeader.mWidth = width;
+  mTexture3D.mFloor->mHeader.mHeight = heigth;
+  mTexture3D.mFloor->mData = nullptr;
 
-  mRight->mHeader.mWidth = width;
-  mRight->mHeader.mHeight = heigth;
-  mRight->mData = nullptr;
+  mTexture3D.mRight->mHeader.mWidth = width;
+  mTexture3D.mRight->mHeader.mHeight = heigth;
+  mTexture3D.mRight->mData = nullptr;
 
-  mLeft->mHeader.mWidth = width;
-  mLeft->mHeader.mHeight = heigth;
-  mLeft->mData = nullptr;
+  mTexture3D.mLeft->mHeader.mWidth = width;
+  mTexture3D.mLeft->mHeader.mHeight = heigth;
+  mTexture3D.mLeft->mData = nullptr;
 
-  bind();
-  sendData();
-  unbind();
+  mTexture3D.bind();
+  mTexture3D.sendData();
+  mTexture3D.unbind();
 }
 
 void Texture3DRenderable::bindForWriting() {
@@ -76,16 +76,16 @@ void Texture3DRenderable::bindForWriting() {
 }
 
 void Texture3DRenderable::setAttachment(GLenum attachment) {
-  bind();
+  mTexture3D.bind();
   mShadowTexture->bindForRendering();
   mShadowTexture->setAttachment(attachment);
   fLogC("Setting RGBA framebuffer failed");
-  unbind();
+  mTexture3D.unbind();
   Framebuffer::bindScreenFramebuffer();
 }
 
 void Texture3DRenderable::setAttachmentFace(GLenum face, GLenum attachment) {
-  mShadowTexture->attachTexture2DDraw(attachment, face, getHandle());
+  mShadowTexture->attachTexture2DDraw(attachment, face, mTexture3D.mTexture.getHandle());
   fLogC("Setting Face framebuffer failed");
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   GLenum target = attachment;

@@ -32,7 +32,7 @@ namespace flf {
 Impostor::Impostor(Engine *engine,
     GLfloat lifetime,
     GLfloat size,
-    flc::Texture *texture,
+    flc::Texture2D* texture,
     GLenum blendingSource,
     GLenum blendingDestination)
     : Finishable(lifetime)
@@ -74,7 +74,7 @@ bool Cursor::getRenderItem(RenderItem &item) {
   item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 #endif
   item.mHandles[RenderItem::eRenderHandleVAO] = 0;
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
   item.mHandles[RenderItem::eRenderHandleNormal] = 0;
   item.mHandles[RenderItem::eRenderHandleSpecular] = 0;
   item.mIndicesPointer = 0;

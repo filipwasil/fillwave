@@ -34,19 +34,19 @@ namespace flw {
 namespace flc {
 
 Texture2DRenderable::Texture2DRenderable(GLenum attachment, flc::TextureConfig* cfg, ParameterList& param)
-    : Texture2D(cfg, param)
-    , mFramebuffer()
-    , mAttachment(attachment) {
+  : mTexture2D(cfg, param)
+  , mFramebuffer()
+  , mAttachment(attachment) {
   setAttachment(attachment);
 }
 
 void Texture2DRenderable::resize(GLint width, GLint heigth) {
-  mCfg->mHeader.mWidth = width;
-  mCfg->mHeader.mHeight = heigth;
-  mCfg->mData = nullptr;
-  bind();
-  sendData();
-  unbind();
+  mTexture2D.mCfg->mHeader.mWidth = width;
+  mTexture2D.mCfg->mHeader.mHeight = heigth;
+  mTexture2D.mCfg->mData = nullptr;
+  mTexture2D.bind();
+  mTexture2D.sendData();
+  mTexture2D.unbind();
 }
 
 void Texture2DRenderable::bindForWriting() {
@@ -66,40 +66,40 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
     case GL_DEPTH_STENCIL_ATTACHMENT:
-      bind();
+      mTexture2D.bind();
       bindForRendering();
-      mFramebuffer.attachTexture2D(GL_DEPTH_STENCIL_ATTACHMENT, target, getHandle());
+      mFramebuffer.attachTexture2D(GL_DEPTH_STENCIL_ATTACHMENT, target, mTexture2D.mTexture.getHandle());
       fLogC("Setting depth framebuffer failed");
       Framebuffer::bindScreenFramebuffer();
       break;
 #endif
     case GL_DEPTH_ATTACHMENT:
-      bind();
+      mTexture2D.bind();
       bindForRendering();
-      mFramebuffer.attachTexture2D(GL_DEPTH_ATTACHMENT, target, getHandle());
+      mFramebuffer.attachTexture2D(GL_DEPTH_ATTACHMENT, target, mTexture2D.mTexture.getHandle());
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-      {
+    {
       const GLenum none = GL_NONE;
       glDrawBuffers(1, &none);
       glReadBuffer(none);
       }
 #else
       {
-      const GLenum none = GL_NONE;
-      glDrawBuffer(none);
-      glReadBuffer(none);
+        const GLenum none = GL_NONE;
+        glDrawBuffer(none);
+        glReadBuffer(none);
       }
 #endif
       fLogC("Setting depth framebuffer failed");
       Framebuffer::bindScreenFramebuffer();
       break;
     case GL_COLOR_ATTACHMENT0:
-      bind();
+      mTexture2D.bind();
       bindForRendering();
-      mFramebuffer.attachTexture2D(GL_COLOR_ATTACHMENT0, target, getHandle());
+      mFramebuffer.attachTexture2D(GL_COLOR_ATTACHMENT0, target, mTexture2D.mTexture.getHandle());
       fLogC("Setting RGBA framebuffer failed");
-      unbind();
+      mTexture2D.unbind();
       Framebuffer::bindScreenFramebuffer();
       break;
   }
@@ -120,23 +120,33 @@ void Texture2DRenderable::copyTo(Framebuffer *source) {
   /* .. and take color attachment color 0 ... */
   mFramebuffer.setReadColorAttachment(0);
   /* ... to finally copy it into main framebuffer */
-  glBlitFramebuffer(0, 0, mCfg->mHeader.mWidth, mCfg->mHeader.mHeight, 0, 0, mCfg->mHeader.mWidth, mCfg->mHeader.mHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+  glBlitFramebuffer(
+    0
+    , 0
+    , mTexture2D.mCfg->mHeader.mWidth
+    , mTexture2D.mCfg->mHeader.mHeight
+    , 0
+    , 0
+    , mTexture2D.mCfg->mHeader.mWidth
+    , mTexture2D.mCfg->mHeader.mHeight
+    , GL_COLOR_BUFFER_BIT, GL_LINEAR);
 }
 
 void Texture2DRenderable::copyFrom(Framebuffer *source) {
   mFramebuffer.bindForWriting();
   source->bindForReading();
   source->setReadColorAttachment(0);
-  glBlitFramebuffer(0,
-                    0,
-                    mCfg->mHeader.mWidth,
-                    mCfg->mHeader.mHeight,
-                    0,
-                    0,
-                    mCfg->mHeader.mWidth,
-                    mCfg->mHeader.mHeight,
-                    GL_COLOR_BUFFER_BIT,
-                    GL_LINEAR); /* ... to finally copy it into main framebuffer */
+  glBlitFramebuffer(
+    0
+    , 0
+    , mTexture2D.mCfg->mHeader.mWidth
+    , mTexture2D.mCfg->mHeader.mHeight
+    , 0
+    , 0
+    , mTexture2D.mCfg->mHeader.mWidth
+    , mTexture2D.mCfg->mHeader.mHeight
+    , GL_COLOR_BUFFER_BIT
+    , GL_LINEAR); /* ... to finally copy it into main framebuffer */
 }
 
 void Texture2DRenderable::log() {
@@ -144,7 +154,8 @@ void Texture2DRenderable::log() {
 }
 
 void Texture2DRenderable::reload() {
-  Texture2D::reload();
+  mTexture2D.mTexture.reload();
+  mTexture2D.reload();
   mFramebuffer.reload();
   setAttachment(mAttachment);
 }

@@ -63,9 +63,9 @@ private:
 
   std::vector<GLenum> mColorBuffers;
 
-  flc::Texture2D *mDeferredColors;
-  flc::Texture2D *mStencilDepth;
-  flc::Texture2D *mSummary;
+  flc::Texture2D* mDeferredColors;
+  flc::Texture2D* mStencilDepth;
+  flc::Texture2D* mSummary;
 
   const GLint mColorBufferSize;
   const GLint mSummaryBufferSize;

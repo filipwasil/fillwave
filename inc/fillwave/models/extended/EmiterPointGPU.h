@@ -48,7 +48,7 @@ public:
       glm::vec3 robustnessPosition,
       GLfloat startSize,
       GLfloat lifetime,
-      flc::Texture *texture,
+      flc::Texture2D* texture,
       GLenum blendingSource,
       GLenum blendingDestination,
       GLboolean depthTesting,

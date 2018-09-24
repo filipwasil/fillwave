@@ -55,7 +55,7 @@ public:
 
   BuilderEmiter &setLifetime(GLfloat lifetime);
 
-  BuilderEmiter &setTexture(flc::Texture *texture);
+  BuilderEmiter &setTexture(flc::Texture2D* texture);
 
   BuilderEmiter &setBlendingSource(GLenum sourceColor);
 
@@ -81,7 +81,7 @@ private:
   glm::vec3 mRobustnessPosition;
   GLfloat mStartSize;
   GLfloat mLifetime;
-  flc::Texture *mTexture;
+  flc::Texture2D* mTexture;
   GLenum mBlendingSource;
   GLenum mBlendingDestination;
   GLboolean mDepthTesting;

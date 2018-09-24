@@ -31,11 +31,11 @@ namespace flc {
  *
  */
 
-class ProgramPipeline {
+class ProgramPipeline final {
 public:
   ProgramPipeline(GLbitfield stage, GLsizei howMany = 1);
 
-  virtual ~ProgramPipeline();
+  ~ProgramPipeline();
 
   void bind(GLuint id = 0) const;
 

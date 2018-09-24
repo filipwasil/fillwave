@@ -31,11 +31,13 @@ namespace flc {
  * It consists of six 2D images.
  */
 
-class Texture3D : public Texture {
+class Texture3D final {
 private:
   void sendData(TextureConfig* file, GLubyte* customData = nullptr);
 
 public:
+  Texture mTexture;
+
   pu<TextureConfig> mRight; /* Positive X*/
   pu<TextureConfig> mLeft; /* Negative X*/
   pu<TextureConfig> mCeil; /* Positive Y*/
@@ -43,13 +45,34 @@ public:
   pu<TextureConfig> mFront; /* Positive Z*/
   pu<TextureConfig> mBack; /* Negative Z*/
 
-  Texture3D(TextureConfig* right, TextureConfig* left, TextureConfig* ceil, TextureConfig* floor, TextureConfig* front, TextureConfig* back, ParameterList& param);
+  ParameterList mParameters;
 
-  virtual ~Texture3D() = default;
+  Texture3D(
+    TextureConfig* right
+    , TextureConfig* left
+    , TextureConfig* ceil
+    , TextureConfig* floor
+    , TextureConfig* front
+    , TextureConfig* back
+    , ParameterList& param);
+
+  ~Texture3D() = default;
 
   void sendData();
 
+  void bind(GLuint idx = 0);
+
+  void bind(GLint textureUnit, GLuint idx = 0);
+
+  void unbind();
+
+  void setParameter(GLenum parameter, GLenum value);
+
+  void setParameters(ParameterList parameters);
+
   void log();
+
+  void reload();
 
   static void unbindCubemapTexture(GLint textureUnit);
 

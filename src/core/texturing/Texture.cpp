@@ -27,9 +27,8 @@ FLOGINIT_MASK(FERROR | FFATAL | FDEBUG)
 namespace flw {
 namespace flc {
 
-Texture::Texture(GLenum textureTarget, GLsizei howMany)
-  : mHowMany(howMany)
-  , mTarget(textureTarget) {
+Texture::Texture(GLsizei howMany)
+  : mHowMany(howMany) {
   reload();
 }
 
@@ -38,39 +37,8 @@ Texture::~Texture() {
   fLogC("Could not delete texture");
 }
 
-GLint Texture::getTarget() {
-  return mTarget;
-}
-
-void Texture::bind(GLuint id) {
-  glBindTexture(mTarget, mHandles[id]);
-  fLogC("bind (id) texture");
-}
-
-void Texture::bind(GLint textureUnit, GLuint id) {
-  glActiveTexture(GL_TEXTURE0 + textureUnit);
-  glBindTexture(mTarget, mHandles[id]);
-  fLogC("bind (texUnit, id) texture");
-}
-
-void Texture::unbind() {
-  glBindTexture(mTarget, 0);
-  fLogC("unbind texture");
-}
-
-void Texture::setParameter(GLenum parameter, GLenum value) {
-  glTexParameteri(mTarget, parameter, value);
-  fLogC("setParameter");
-}
-
-void Texture::setParameters(ParameterList parameters) {
-  for (auto it : parameters) {
-    setParameter(it.first, it.second);
-  }
-}
-
 void Texture::reload() {
-  fLogD("Reload");
+  glDeleteTextures(mHowMany, mHandles);
   glGenTextures(mHowMany, mHandles);
   fLogC("glGenTextures");
 }

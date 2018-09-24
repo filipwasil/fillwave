@@ -33,17 +33,27 @@ struct TextureConfig;
  * \brief Single GLSL 2D Texture object.
  */
 
-class Texture2D : public Texture {
+class Texture2D final {
 public:
   Texture2D(TextureConfig* file, ParameterList &parameters, GLuint howMany = 1);
 
-  virtual ~Texture2D() = default;
-
-  void generateMipMaps();
+  ~Texture2D() = default;
 
   void sendData(GLubyte* data = nullptr);
 
-  virtual void reload();
+  void reload();
+
+  void bind(GLuint idx = 0);
+
+  void bind(GLint textureUnit, GLuint idx = 0);
+
+  void unbind();
+
+  void generateMipMaps();
+
+  void setParameter(GLenum parameter, GLenum value);
+
+  void setParameters(ParameterList parameters);
 
   void log();
 
@@ -51,9 +61,8 @@ public:
 
   static void unbind2DTextures();
 
+  Texture mTexture;
   pu<TextureConfig> mCfg;
-
-protected:
   ParameterList mParameters;
 };
 

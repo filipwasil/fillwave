@@ -26,18 +26,23 @@
 namespace flw {
 namespace flf {
 
-EmiterPointStep::EmiterPointStep(Engine *engine,
-    GLint howMany,
-    GLenum blendingSource,
-    GLenum blendingDestination,
-    flc::Texture *texture)
-    : IEmiterPoint(engine,
-                   howMany,
-                   100, //size
-                   1, //lifetime
-                   texture,
-                   glm::vec4(1.0, 1.0, 1.0, 0.0), // color
-                   blendingSource, blendingDestination, GL_FALSE, 1.0) {
+EmiterPointStep::EmiterPointStep(
+  Engine *engine
+  , GLint howMany
+  , GLenum blendingSource
+  , GLenum blendingDestination
+  , flc::Texture2D* texture)
+    : IEmiterPoint(
+      engine
+  , howMany
+  , 100
+  , 1
+  , texture
+  , glm::vec4(1.0, 1.0, 1.0, 0.0)
+  , blendingSource
+  , blendingDestination
+  , GL_FALSE
+  , 1.0) {
   // nothing
 }
 

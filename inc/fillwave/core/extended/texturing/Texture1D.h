@@ -22,8 +22,6 @@
  */
 #include <fillwave/core/texturing/Texture.h>
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
 namespace flw {
 namespace flc {
 
@@ -31,16 +29,16 @@ namespace flc {
  * \brief Not used.
  */
 
-class Texture1D : public Texture {
+class Texture1D final {
 public:
   Texture1D(ParameterList &parameters);
 
-  virtual ~Texture1D() = default;
+  ~Texture1D() = default;
 
   void log();
+
+  Texture mTexture;
 };
 
 } /* flc */
-typedef std::unique_ptr<flc::Texture1D> puTexture1D;
 } /* flw */
-#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */

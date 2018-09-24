@@ -25,11 +25,9 @@
 #include <fillwave/core/buffers/IndexBuffer.h>
 #include <fillwave/core/buffers/VertexBufferParticles.h>
 #include <fillwave/core/pipeline/Program.h>
-#include <fillwave/core/texturing/Texture.h>
+#include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/pipeline/Blending.h>
-#include <fillwave/core/extended/rendering/TransformFeedback.h>
 #include <fillwave/models/base/IReloadable.h>
-
 
 namespace flw {
 class Engine;
@@ -45,7 +43,7 @@ public:
       GLuint howMany,
       GLfloat size,
       GLfloat lifetime,
-      flc::Texture *texture,
+      flc::Texture2D *texture,
       glm::vec4 color,
       GLenum blendingSource,
       GLenum blendingDestination,
@@ -66,7 +64,7 @@ public:
 protected:
   GLfloat mStartSize;
   GLfloat mLifetime;
-  flc::Texture *mTexture;
+  flc::Texture2D* mTexture;
   glm::vec4 mColor;
   GLuint mHowMany;
   GLboolean mDepthTesting;

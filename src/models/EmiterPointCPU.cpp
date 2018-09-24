@@ -42,7 +42,7 @@ EmiterPointCPU::EmiterPointCPU(Engine *engine,
   glm::vec3 robustnessPosition,
   GLfloat startSize,
   GLfloat lifetime,
-  flc::Texture *texture,
+  flc::Texture2D* texture,
   GLenum blendingSource,
   GLenum blendingDestination,
   GLboolean depthTesting,
@@ -240,7 +240,7 @@ bool EmiterPointCPU::getRenderItem(RenderItem &item) {
   item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 #endif
   item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
   item.mIndicesPointer = 0;
   item.mMode = GL_POINTS;
 

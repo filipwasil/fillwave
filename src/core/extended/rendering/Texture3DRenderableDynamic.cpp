@@ -25,26 +25,22 @@ namespace flw {
 namespace flc {
 
 Texture3DRenderableDynamic::Texture3DRenderableDynamic(
-    TextureConfig* pX
-    , TextureConfig* nX
-    , TextureConfig* pY
-    , TextureConfig* nY
-    , TextureConfig* pZ
-    , TextureConfig* nZ
-    , ParameterList& param
-    , Texture2DRenderable* tex
-    , Program* prog)
-    : Texture3DRenderable(pX, nX, pY, nY, pZ, nZ, tex, param)
-    , mProgram(prog)
-    , mTimePassed(0.0f) {
-  setAttachment(GL_COLOR_ATTACHMENT0);
+  TextureConfig* pX
+  , TextureConfig* nX
+  , TextureConfig* pY
+  , TextureConfig* nY
+  , TextureConfig* pZ
+  , TextureConfig* nZ
+  , ParameterList& param
+  , Texture2DRenderable* tex
+  , Program* prog)
+  : mTexture3DRenderable(pX, nX, pY, nY, pZ, nZ, tex, param)
+  , mProgram(prog)
+  , mTimePassed(0.0f) {
+  mTexture3DRenderable.setAttachment(GL_COLOR_ATTACHMENT0);
   assert("todo feature not ready");
-  (void) mProgram;
-  (void) mTarget;
-  (void) mTimePassed;
+  // nothing
 }
-
-Texture3DRenderableDynamic::~Texture3DRenderableDynamic() = default;
 
 } /* flc */
 } /* flw */

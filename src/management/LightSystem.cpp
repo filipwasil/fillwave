@@ -245,13 +245,13 @@ void LightSystem::pushLightUniformBuffers(flc::Program *program) {
 void LightSystem::bindShadowmaps() {
   GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
   for (size_t i = 0; i < mLightsSpot.size(); i++) {
-    mLightsSpot[i]->getShadowTexture()->bind(currentTextureUnit++);
+    mLightsSpot[i]->getShadowTexture()->mTexture2D.bind(currentTextureUnit++);
   }
   for (size_t i = 0; i < mLightsDirectional.size(); i++) {
-    mLightsDirectional[i]->getShadowTexture()->bind(currentTextureUnit++);
+    mLightsDirectional[i]->getShadowTexture()->mTexture2D.bind(currentTextureUnit++);
   }
   for (size_t i = 0; i < mLightsPoint.size(); i++) {
-    mLightsPoint[i]->getShadowTexture()->bind(currentTextureUnit++);
+    mLightsPoint[i]->getShadowTexture()->mTexture3D.bind(currentTextureUnit++);
   }
 }
 

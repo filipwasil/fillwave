@@ -31,11 +31,11 @@ namespace flc {
 /*! \class Sampler
  * \brief SamplerObject - SO.
  */
-class Sampler {
+class Sampler final {
 public:
   Sampler(GLint textureUnit, GLuint howMany = 1);
 
-  virtual ~Sampler();
+  ~Sampler();
 
   void bind(GLuint id = 0);
 

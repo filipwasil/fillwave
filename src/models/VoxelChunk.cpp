@@ -560,7 +560,7 @@ bool VoxelChunk::getRenderItem(RenderItem &item) {
   item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 #endif
   item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
   item.mMode = GL_TRIANGLES;
   item.mRenderStatus = 0xc0;
   return true;

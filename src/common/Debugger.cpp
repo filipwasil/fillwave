@@ -130,7 +130,7 @@ void Debugger::renderDepthOrthographic(GLint id) {
 
   auto cam = light->getShadowCamera();
 
-  light->getShadowTexture()->bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
+  light->getShadowTexture()->mTexture2D.bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
 
   glDisable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);
@@ -165,7 +165,7 @@ void Debugger::renderDepthPerspective(GLint id) {
 
   auto cam = *(light->getShadowCamera());
 
-  light->getShadowTexture()->bind(FILLWAVE_SHADOW_FIRST_UNIT + id);
+  light->getShadowTexture()->mTexture2D.bind(FILLWAVE_SHADOW_FIRST_UNIT + id);
 
   glDisable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);

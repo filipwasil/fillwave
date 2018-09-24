@@ -49,7 +49,7 @@ public:
     , glm::vec3 robustnessPosition = glm::vec3(0.0)
     , GLfloat startSize = 1.0
     , GLfloat lifetime = 6.0
-    , flc::Texture *texture = nullptr
+    , flc::Texture2D* texture = nullptr
     , GLenum blendingSource = GL_SRC_ALPHA
     , GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA
     , GLboolean depthTesting = GL_TRUE

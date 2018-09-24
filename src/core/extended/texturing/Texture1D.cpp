@@ -25,7 +25,7 @@ namespace flw {
 namespace flc {
 
 Texture1D::Texture1D(ParameterList &)
-    : Texture(GL_TEXTURE_1D, 1) {
+  : mTexture(1) {
   // nothing
 }
 

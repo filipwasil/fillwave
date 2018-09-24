@@ -27,7 +27,7 @@
 namespace flw {
 namespace flf {
 
-Cursor::Cursor(Engine *engine, flc::Texture *texture)
+Cursor::Cursor(Engine *engine, flc::Texture2D *texture)
     : Impostor(engine, FILLWAVE_ENDLESS, 0.06f, texture)
     , mScreenFactor(static_cast<GLfloat>(engine->getScreenSize()[0]) / static_cast<GLfloat>(engine->getScreenSize()[1])) {
 

@@ -30,11 +30,11 @@ namespace flc {
  * \brief Used for GPU side computations.
  */
 
-class TransformFeedback {
+class TransformFeedback final {
 public:
   TransformFeedback(GLsizei howMany = 1);
 
-  virtual ~TransformFeedback();
+  ~TransformFeedback();
 
   void bind(GLuint id = 0) const;
 

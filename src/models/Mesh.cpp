@@ -377,9 +377,9 @@ bool Mesh::getRenderItem(RenderItem &item) {
   item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 #endif
   item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mDiffuseMap ? mDiffuseMap->getHandle() : 0;
-  item.mHandles[RenderItem::eRenderHandleNormal] = mNormalMap ? mNormalMap->getHandle() : 0;
-  item.mHandles[RenderItem::eRenderHandleSpecular] = mSpecularMap ? mSpecularMap->getHandle() : 0;
+  item.mHandles[RenderItem::eRenderHandleDiffuse] = mDiffuseMap ? mDiffuseMap->mTexture.mHandles[0] : 0;
+  item.mHandles[RenderItem::eRenderHandleNormal] = mNormalMap ? mNormalMap->mTexture.mHandles[0] : 0;
+  item.mHandles[RenderItem::eRenderHandleSpecular] = mSpecularMap ? mSpecularMap->mTexture.mHandles[0] : 0;
   item.mIndicesPointer = 0;
   item.mMode = GL_TRIANGLES;
   item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, anim

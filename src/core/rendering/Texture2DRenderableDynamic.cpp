@@ -29,7 +29,7 @@ namespace flw {
 namespace flc {
 
 Texture2DRenderableDynamic::Texture2DRenderableDynamic(flc::TextureConfig* cfg, ParameterList& param, flc::Program* prog)
-  : Texture2DRenderable(GL_COLOR_ATTACHMENT0, cfg, param)
+  : mTexture2DRenderable(GL_COLOR_ATTACHMENT0, cfg, param)
   , mProgram(prog)
   , mTimePassed(0.0f) {
   initUniformsCache();
@@ -41,12 +41,12 @@ void Texture2DRenderableDynamic::addTimeStep(GLfloat timePassed) {
 
 void Texture2DRenderableDynamic::draw() {
   mProgram->use();
-  bind(FILLWAVE_DIFFUSE_UNIT);
+  mTexture2DRenderable.mTexture2D.bind(FILLWAVE_DIFFUSE_UNIT);
   flc::Uniform::push(mUniformLocationCacheTime, mTimePassed);
   glEnable(GL_BLEND);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   glDisable(GL_BLEND);
-  unbind();
+  mTexture2DRenderable.mTexture2D.unbind();
   flc::Program::disusePrograms();
 }
 
@@ -57,7 +57,7 @@ void Texture2DRenderableDynamic::initUniformsCache() {
 
 void Texture2DRenderableDynamic::reload() {
   fLogD("Reload");
-  Texture2DRenderable::reload();
+  mTexture2DRenderable.reload();
   initUniformsCache();
 }
 

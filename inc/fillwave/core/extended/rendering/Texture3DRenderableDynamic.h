@@ -31,7 +31,7 @@ namespace flc {
  * \brief Not used.
  */
 
-class Texture3DRenderableDynamic : public Texture3DRenderable {
+class Texture3DRenderableDynamic {
 public:
   Texture3DRenderableDynamic(
       TextureConfig* pX
@@ -44,7 +44,9 @@ public:
       , Texture2DRenderable* tex
       , Program* prog);
 
-  ~Texture3DRenderableDynamic() override;
+  ~Texture3DRenderableDynamic() = default;
+
+  Texture3DRenderable mTexture3DRenderable;
 
 private:
   Program* mProgram;

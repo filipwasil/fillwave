@@ -28,7 +28,7 @@ namespace flw {
 namespace flc {
 
 Texture2D::Texture2D(TextureConfig* cfg, ParameterList &parameters, GLuint howMany)
-  : Texture(GL_TEXTURE_2D, howMany)
+  : mTexture(howMany)
   , mCfg(pu<TextureConfig>(cfg))
   , mParameters(parameters) {
   reload();
@@ -40,7 +40,7 @@ void Texture2D::sendData(GLubyte* data) {
   }
 
   if (mCfg->mContent.mCompression) {
-    glCompressedTexImage2D(mTarget,
+    glCompressedTexImage2D(GL_TEXTURE_2D,
                            mCfg->mContent.mMipmapsLevel,
                            mCfg->mHeader.mInternalFormat,
                            mCfg->mHeader.mWidth,
@@ -50,7 +50,7 @@ void Texture2D::sendData(GLubyte* data) {
                            mCfg->mData.get());
     fLogC("send compressed texture data");
   } else {
-    glTexImage2D(mTarget,
+    glTexImage2D(GL_TEXTURE_2D,
                  mCfg->mContent.mMipmapsLevel,
                  mCfg->mHeader.mInternalFormat,
                  mCfg->mHeader.mWidth,
@@ -79,7 +79,7 @@ void Texture2D::sendData(GLubyte* data) {
 
 void Texture2D::generateMipMaps() {
   if (mCfg->mContent.mMipmaps) {
-    glGenerateMipmap(mTarget);
+    glGenerateMipmap(GL_TEXTURE_2D);
     fLogC("generateMipMaps");
   }
 }
@@ -95,8 +95,8 @@ void Texture2D::unbind2DTextures() {
 
 void Texture2D::reload() {
   fLogD("Reload");
-  Texture::reload();
-  for (GLsizei i = 0; i < mHowMany; i++) {
+  mTexture.reload();
+  for (GLsizei i = 0; i < mTexture.mHowMany; i++) {
     bind(i);
     setParameters(mParameters);
     sendData();
@@ -104,8 +104,35 @@ void Texture2D::reload() {
   }
 }
 
+void Texture2D::bind(GLuint id) {
+  glBindTexture(GL_TEXTURE_2D, mTexture.mHandles[id]);
+  fLogC("bind (id) texture");
+}
+
+void Texture2D::bind(GLint textureUnit, GLuint id) {
+  glActiveTexture(GL_TEXTURE0 + textureUnit);
+  glBindTexture(GL_TEXTURE_2D, mTexture.mHandles[id]);
+  fLogC("bind (texUnit, id) texture");
+}
+
+void Texture2D::unbind() {
+  glBindTexture(GL_TEXTURE_2D, 0);
+  fLogC("unbind texture");
+}
+
+void Texture2D::setParameter(GLenum parameter, GLenum value) {
+  glTexParameteri(GL_TEXTURE_2D, parameter, value);
+  fLogC("setParameter");
+}
+
+void Texture2D::setParameters(ParameterList parameters) {
+  for (auto it : parameters) {
+    setParameter(it.first, it.second);
+  }
+}
+
 void Texture2D::log() {
-  fLogD("mTarget: 0x%x", mTarget);
+  fLogD("mTarget: GL_TEXTURE_2D");
   fLogD("mCfg->mContent.mMipmapsLevel: %d", mCfg->mContent.mMipmapsLevel);
   fLogD("mCfg->mHeader.mInternalFormat: 0x%x", mCfg->mHeader.mInternalFormat);
   fLogD("mCfg->mHeader.mWidth: %d", mCfg->mHeader.mWidth);

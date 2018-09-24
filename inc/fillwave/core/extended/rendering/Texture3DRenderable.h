@@ -31,11 +31,19 @@ namespace flc {
  * \brief One can render to this texture and use the rendered 6 images as a 2D texture.
  */
 
-class Texture3DRenderable : public Texture3D {
+class Texture3DRenderable final {
 public:
-  Texture3DRenderable(TextureConfig* posX, TextureConfig* negX, TextureConfig* posY, TextureConfig* nY, TextureConfig* pZ, TextureConfig* nZ, Texture2DRenderable* text, ParameterList &param);
+  Texture3DRenderable(
+    TextureConfig* posX
+    , TextureConfig* negX
+    , TextureConfig* posY
+    , TextureConfig* nY
+    , TextureConfig* pZ
+    , TextureConfig* nZ
+    , Texture2DRenderable* text
+    , ParameterList &param);
 
-  virtual ~Texture3DRenderable() = default;
+  ~Texture3DRenderable() = default;
 
   void resize(GLint width, GLint height);
 
@@ -49,7 +57,9 @@ public:
 
   void log();
 
-protected:
+Texture3D mTexture3D;
+
+private:
   flc::Texture2DRenderable* mShadowTexture;
 };
 

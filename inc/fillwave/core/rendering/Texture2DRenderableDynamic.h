@@ -31,7 +31,7 @@ namespace flc {
  * \brief Dynamic texture will update its content during runtime according to specified fragment shader.
  */
 
-class Texture2DRenderableDynamic : public Texture2DRenderable {
+class Texture2DRenderableDynamic {
 public:
   Texture2DRenderableDynamic(flc::TextureConfig* file, ParameterList& parameters, flc::Program* program);
 
@@ -43,7 +43,9 @@ public:
 
   void reload();
 
-private:
+  Texture2DRenderable mTexture2DRenderable;
+
+ private:
   flc::Program* mProgram;
 
   GLfloat mTimePassed;

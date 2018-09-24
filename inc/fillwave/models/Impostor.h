@@ -40,7 +40,7 @@ public:
   Impostor(Engine *engine,
       GLfloat lifetime,
       GLfloat size,
-      flc::Texture *texture = nullptr,
+      flc::Texture2D* texture = nullptr,
       GLenum blendingSource = GL_SRC_ALPHA,
       GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
 
@@ -49,7 +49,7 @@ public:
 protected:
   Engine* mEngine;
   flc::Program* mProgram;
-  flc::Texture* mTexture;
+  flc::Texture2D* mTexture;
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
   flc::Sampler* mSampler;

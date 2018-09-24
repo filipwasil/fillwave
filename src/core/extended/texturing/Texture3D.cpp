@@ -27,16 +27,24 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flc {
 
-Texture3D::Texture3D(TextureConfig* right, TextureConfig* left, TextureConfig* ceil, TextureConfig* floor, TextureConfig* front, TextureConfig* back, ParameterList& param)
-    : Texture(GL_TEXTURE_CUBE_MAP)
-    , mRight(right)
-    , mLeft(left)
-    , mCeil(ceil)
-    , mFloor(floor)
-    , mFront(front)
-    , mBack(back) {
+Texture3D::Texture3D(
+  TextureConfig* right
+  , TextureConfig* left
+  , TextureConfig* ceil
+  , TextureConfig* floor
+  , TextureConfig* front
+  , TextureConfig* back
+  , ParameterList& param)
+  : mTexture(1)
+  , mRight(right)
+  , mLeft(left)
+  , mCeil(ceil)
+  , mFloor(floor)
+  , mFront(front)
+  , mBack(back)
+  , mParameters(param) {
   bind();
-  setParameters(param);
+  setParameters(mParameters);
   sendData();
   unbind();
 }
@@ -67,6 +75,33 @@ inline void Texture3D::sendData(TextureConfig* cfg, GLubyte* customData) {
   fLogC("send data");
 }
 
+void Texture3D::bind(GLuint id) {
+  glBindTexture(GL_TEXTURE_CUBE_MAP, mTexture.mHandles[id]);
+  fLogC("bind (id) texture");
+}
+
+void Texture3D::bind(GLint textureUnit, GLuint id) {
+  glActiveTexture(GL_TEXTURE0 + textureUnit);
+  glBindTexture(GL_TEXTURE_CUBE_MAP, mTexture.mHandles[id]);
+  fLogC("bind (texUnit, id) texture");
+}
+
+void Texture3D::unbind() {
+  glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+  fLogC("unbind texture");
+}
+
+void Texture3D::setParameter(GLenum parameter, GLenum value) {
+  glTexParameteri(GL_TEXTURE_CUBE_MAP, parameter, value);
+  fLogC("setParameter");
+}
+
+void Texture3D::setParameters(ParameterList parameters) {
+  for (auto it : parameters) {
+    setParameter(it.first, it.second);
+  }
+}
+
 void Texture3D::sendData() {
   sendData(mRight.get());
   sendData(mLeft.get());
@@ -83,6 +118,14 @@ void Texture3D::unbindCubemapTextures() {
 void Texture3D::unbindCubemapTexture(GLint textureUnit) {
   glActiveTexture(textureUnit);
   glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+}
+
+void Texture3D::reload() {
+  mTexture.reload();
+  bind();
+  setParameters(param);
+  sendData();
+  unbind();
 }
 
 void Texture3D::log() {

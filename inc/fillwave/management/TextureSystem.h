@@ -160,13 +160,6 @@ private:
   TextureLoader mLoader;
 
   template <class T>
-  inline void reload(T &textures) {
-    for (auto &it : textures) {
-      it.second->reload();
-    }
-  }
-
-  template <class T>
   inline void resize(T &textures, GLuint width, GLuint height) {
     for (auto &it : textures) {
       it.second->resize(width, height);

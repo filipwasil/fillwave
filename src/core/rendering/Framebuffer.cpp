@@ -88,6 +88,7 @@ void Framebuffer::bindScreenFramebufferForWriting() {
 }
 
 void Framebuffer::reload() {
+  glDeleteFramebuffers(mHowMany, mHandles);
   glGenFramebuffers(mHowMany, mHandles);
   fLogC("Reloading");
 }

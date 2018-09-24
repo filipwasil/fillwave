@@ -33,7 +33,7 @@ namespace flf {
 
 class Cursor : public Impostor {
 public:
-  Cursor(Engine *engine, flc::Texture *texture);
+  Cursor(Engine* engine, flc::Texture2D* texture);
 
   ~Cursor() override = default;
 

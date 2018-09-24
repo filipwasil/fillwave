@@ -23,6 +23,7 @@
 
 #include <fillwave/models/extended/EmiterPointGPU.h>
 #include <fillwave/core/extended/texturing/NoiseTexture3DArray.h>
+#include <fillwave/core/extended/rendering/TransformFeedback.h>
 
 #include <fillwave/Fillwave.h>
 
@@ -44,7 +45,7 @@ EmiterPointGPU::EmiterPointGPU(Engine *engine,
   glm::vec3 robustnessPosition,
   GLfloat startSize,
   GLfloat lifetime,
-  flc::Texture *texture,
+  flc::Texture2D *texture,
   GLenum blendingSource,
   GLenum blendingDestination,
   GLboolean depthTesting,
@@ -65,7 +66,9 @@ EmiterPointGPU::EmiterPointGPU(Engine *engine,
   , mAcceleration(acceleration)
   , mStartVelocity(startVelocity)
   , mRobustnessVelocity(robustnessVelocity)
-  , mStartPosition(startPosition), mRobustnessPosition(robustnessPosition), mTimeDeltaEmiter(0.0) {
+  , mStartPosition(startPosition)
+  , mRobustnessPosition(robustnessPosition)
+  , mTimeDeltaEmiter(0.0) {
 
   ProgramLoader loader(engine);
 
@@ -304,7 +307,7 @@ bool EmiterPointGPU::getRenderItem(RenderItem &item) {
   item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
   item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
   item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->getHandle();
+  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
   item.mIndicesPointer = 0;
   item.mMode = GL_POINTS;
 

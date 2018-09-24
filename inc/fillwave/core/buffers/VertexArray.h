@@ -30,11 +30,11 @@ namespace flc {
  * \brief VertexArrayObject - VAO
  */
 
-class VertexArray {
+class VertexArray final {
 public:
   VertexArray(GLuint howMany = 1);
 
-  virtual ~VertexArray();
+  ~VertexArray();
 
   void bind(GLuint id = 0);
 

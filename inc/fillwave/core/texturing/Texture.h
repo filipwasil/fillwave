@@ -37,36 +37,18 @@ namespace flw {
 namespace flc {
 
 //class
-class Texture {
+class Texture final {
 public:
-  Texture(GLenum textureTarget = GL_TEXTURE_2D, GLsizei howMany = 1);
+  Texture(GLsizei howMany = 1);
 
-  virtual ~Texture();
+  ~Texture();
 
-  virtual void bind(GLuint id = 0);
-
-  virtual void bind(GLint textureUnit, GLuint id = 0);
-
-  virtual void unbind();
-
-  void generateMipMaps();
-
-  void setParameter(GLenum parameter, GLenum value);
-
-  void setParameters(ParameterList paramers);
-
-  virtual GLint getTarget();
-
-  virtual void reload();
-
-  virtual void log() = 0;
+  void reload();
 
   GLuint getHandle(GLuint id = 0);
 
- protected:
   GLsizei mHowMany;
   GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
-  GLenum mTarget;
 };
 
 void bindTexture(GLuint target, GLuint handle);

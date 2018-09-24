@@ -38,7 +38,7 @@ public:
       GLint howMany,
       GLenum blendingSource,
       GLenum blendingDestination,
-      flc::Texture* texture);
+      flc::Texture2D* texture);
 
   ~EmiterPointStep() override;
 };

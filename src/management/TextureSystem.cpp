@@ -418,7 +418,7 @@ void TextureSystem::resize(GLuint width, GLuint height) {
 
 void TextureSystem::drawDynamicTextures() {
   for (auto &it : mTextures2DDynamic) {
-    it.second->bindForWriting();
+    it.second->mTexture2DRenderable.bindForWriting();
     it.second->draw();
   }
   flc::Framebuffer::bindScreenFramebuffer();
@@ -431,21 +431,40 @@ void TextureSystem::populateDynamicTextures(GLfloat timeExpiredInSeconds) {
 }
 
 void TextureSystem::reload() {
-  reload(mTextures2D);
-  reload(mTextures2DDynamic);
-  reload(mTextures2DRenderable);
-  reload(mTextures2DDeferred);
+  for (auto &it : mTextures2D) {
+    it.second->reload();
+  }
+
+  for (auto &it : mTextures2DDynamic) {
+    it.second->reload();
+  }
+
+  for (auto &it : mTextures2DRenderable) {
+    it.second->reload();
+  }
+
+  for (auto &it : mTextures2DDeferred) {
+    it.second->reload();
+  }
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
-  reload(mTextures3D);
-  reload(mTextures3DRenderable);
-  reload(mTextures3DDynamic);
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-#else /* FILLWAVE_BACKEND_OPENGL_ES_30 */
-  reload(mTextures1D);
-#endif /* FILLWAVE_BACKEND_OPENGL_ES_30 */
+  for (auto &it : mTextures3D) {
+    it.second->reload();
+  }
+
+  for (auto &it : mTextures3DRenderable) {
+    it.second->mTexture.reload();
+  }
+
+  for (auto &it : mTextures3DDynamic) {
+    it.second->mTexture.reload();
+  }
+
+  for (auto &it : mTextures1D) {
+    it.second->mTexture.reload();
+  }
 
 #endif /* FILLWAVE_BACKEND_OPENGL_ES_20 */
 
