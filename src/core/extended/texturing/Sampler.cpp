@@ -28,8 +28,8 @@ namespace flw {
 namespace flc {
 
 Sampler::Sampler(GLint textureUnit, GLuint howMany)
-    : GLObject(howMany)
-    , mTextureUnit(textureUnit) {
+  : mHowMany(howMany)
+  , mTextureUnit(textureUnit) {
   glGenSamplers(mHowMany, mHandles);
   fLogC("ERROR: Could not generate sampler -> ID");
 }
@@ -71,6 +71,10 @@ GLint Sampler::getTextureUnit() {
 void Sampler::reload() {
   glGenSamplers(mHowMany, mHandles);
   fLogC("reload");
+}
+
+GLuint Sampler::getHandle(GLuint id) {
+  return id < FILLWAVE_GLOBJECTS_MAX ? mHandles[id] : 0;
 }
 
 } /* flc */

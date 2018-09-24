@@ -21,7 +21,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/GLObject.h>
 #include <fillwave/core/texturing/Parameter.h>
 #include <memory>
 
@@ -31,7 +30,7 @@ namespace flc {
 /*! \class Sampler
  * \brief SamplerObject - SO.
  */
-class Sampler : public GLObject {
+class Sampler {
 public:
   Sampler(GLint textureUnit, GLuint howMany = 1);
 
@@ -51,7 +50,11 @@ public:
 
   GLint getTextureUnit();
 
-private:
+  GLuint getHandle(GLuint id = 0);
+
+ private:
+  GLsizei mHowMany;
+  GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
   GLint mTextureUnit;
 };
 

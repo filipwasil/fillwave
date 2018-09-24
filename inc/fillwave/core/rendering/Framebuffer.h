@@ -21,9 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/GLObject.h>
-
-#include <memory>
+#include <fillwave/OpenGL.h>
 
 namespace flw {
 namespace flc {
@@ -32,7 +30,7 @@ namespace flc {
  * \brief FramebufferObject - FO.
  */
 
-class Framebuffer : public GLObject {
+class Framebuffer {
 public:
   Framebuffer(GLuint howMany = 1);
 
@@ -59,6 +57,12 @@ public:
   static void bindScreenFramebufferForReading();
 
   static void bindScreenFramebufferForWriting();
+
+  GLuint getHandle(GLuint id = 0);
+
+ private:
+  GLsizei mHowMany;
+  GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
 };
 
 } /* flc */

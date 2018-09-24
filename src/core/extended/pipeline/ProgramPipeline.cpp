@@ -25,8 +25,8 @@ namespace flw {
 namespace flc {
 
 ProgramPipeline::ProgramPipeline(GLbitfield stage, GLsizei howMany)
-    : GLObject(howMany)
-    , mStage(stage) {
+  : mHowMany(howMany)
+  , mStage(stage) {
   glGenProgramPipelines(mHowMany, mHandles);
 }
 
@@ -40,6 +40,10 @@ void ProgramPipeline::bind(GLuint id) const {
 
 void ProgramPipeline::use(GLuint programHandle, GLuint id) const {
   glUseProgramStages(mHandles[id], mStage, programHandle);
+}
+
+GLuint ProgramPipeline::getHandle(GLuint id) {
+  return id < FILLWAVE_GLOBJECTS_MAX ? mHandles[id] : 0;
 }
 
 } /* flc */

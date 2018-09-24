@@ -30,9 +30,9 @@ namespace flw {
 namespace flc {
 
 IBuffer::IBuffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany)
-    : GLObject(howMany)
-    , mLoaded(GL_FALSE)
-    , mIndex(index) {
+  : mHowMany(howMany)
+  , mLoaded(GL_FALSE)
+  , mIndex(index) {
   setTarget(target);
   setDrawType(drawType);
   reload();
@@ -62,21 +62,21 @@ void IBuffer::setTarget(GLuint target) {
       || target == GL_ELEMENT_ARRAY_BUFFER_BINDING) {
     mTarget = target;
   } else {
-    fLogE("Invalid target %d", mTarget);
+    fLogE("Invalid target %d", target);
   }
 }
 
 void IBuffer::setDrawType(GLuint dataStoreType) {
   if (dataStoreType == GL_STREAM_DRAW
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-#else
+      #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+      #else
       || dataStoreType == GL_STREAM_READ
       || dataStoreType == GL_STREAM_COPY
       || dataStoreType == GL_STATIC_READ
       || dataStoreType == GL_STATIC_COPY
       || dataStoreType == GL_DYNAMIC_READ
       || dataStoreType == GL_DYNAMIC_COPY
-#endif // defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+      #endif // defined(FILLWAVE_BACKEND_OPENGL_ES_20)
       || dataStoreType == GL_STATIC_DRAW
       || dataStoreType == GL_DYNAMIC_DRAW) {
     mDataStoreType = dataStoreType;

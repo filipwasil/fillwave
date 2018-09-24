@@ -20,9 +20,8 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-#include <fillwave/core/GLObject.h>
 
-#include <memory>
+#include <fillwave/OpenGL.h>
 
 namespace flw {
 namespace flc {
@@ -31,7 +30,7 @@ namespace flc {
  * \brief Used for GPU side computations.
  */
 
-class TransformFeedback : public GLObject {
+class TransformFeedback {
 public:
   TransformFeedback(GLsizei howMany = 1);
 
@@ -47,10 +46,14 @@ public:
 
   static void resume();
 
-private:
+
+  GLuint getHandle(GLuint id = 0);
+
+ private:
+  GLsizei mHowMany;
+  GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
   GLuint mTarget;
 };
 
 } /* flc */
-typedef std::shared_ptr<flc::TransformFeedback> pTransformFeedback;
 } /* flw */

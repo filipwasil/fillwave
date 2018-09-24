@@ -23,7 +23,6 @@
 
 #include <fillwave/common/Aliases.h>
 
-#include <fillwave/core/GLObject.h>
 #include <fillwave/core/texturing/Parameter.h>
 
 #include <memory>
@@ -38,7 +37,7 @@ namespace flw {
 namespace flc {
 
 //class
-class Texture : public GLObject {
+class Texture {
 public:
   Texture(GLenum textureTarget = GL_TEXTURE_2D, GLsizei howMany = 1);
 
@@ -62,7 +61,11 @@ public:
 
   virtual void log() = 0;
 
-protected:
+  GLuint getHandle(GLuint id = 0);
+
+ protected:
+  GLsizei mHowMany;
+  GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
   GLenum mTarget;
 };
 

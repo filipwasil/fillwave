@@ -35,7 +35,7 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flc {
 
-VertexArray::VertexArray(GLuint howMany) : GLObject(howMany) {
+VertexArray::VertexArray(GLuint howMany) : mHowMany(howMany) {
   glGenVertexArrays(mHowMany, mHandles);
   fLogC("Could not generate the VAO");
 }
@@ -58,6 +58,10 @@ void VertexArray::unbindVAO() {
 void VertexArray::reload() {
   glGenVertexArrays(mHowMany, mHandles);
   fLogC("reload");
+}
+
+GLuint VertexArray::getHandle(GLuint id) {
+  return id < FILLWAVE_GLOBJECTS_MAX ? mHandles[id] : 0;
 }
 
 void bindVAO(GLuint handle) {

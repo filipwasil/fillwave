@@ -28,8 +28,8 @@ namespace flw {
 namespace flc {
 
 Texture::Texture(GLenum textureTarget, GLsizei howMany)
-    : GLObject(howMany)
-    , mTarget(textureTarget) {
+  : mHowMany(howMany)
+  , mTarget(textureTarget) {
   reload();
 }
 
@@ -73,6 +73,10 @@ void Texture::reload() {
   fLogD("Reload");
   glGenTextures(mHowMany, mHandles);
   fLogC("glGenTextures");
+}
+
+GLuint Texture::getHandle(GLuint id) {
+  return id < FILLWAVE_GLOBJECTS_MAX ? mHandles[id] : 0;
 }
 
 void bindTexture(GLuint target, GLuint handle) {

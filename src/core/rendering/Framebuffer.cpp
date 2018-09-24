@@ -34,7 +34,7 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flc {
 
-Framebuffer::Framebuffer(GLuint howMany) : GLObject(howMany) {
+Framebuffer::Framebuffer(GLuint howMany) : mHowMany(howMany) {
   reload();
 }
 

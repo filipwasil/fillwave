@@ -21,8 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/GLObject.h>
-#include <memory>
+#include <fillwave/OpenGL.h>
 
 namespace flw {
 namespace flc {
@@ -31,7 +30,7 @@ namespace flc {
  * \brief Base for all buffer types.
  */
 
-class IBuffer : public GLObject {
+class IBuffer {
 public:
   IBuffer(GLuint target, GLuint drawType = GL_STATIC_DRAW, GLuint index = 0, GLsizei howMany = 1);
 
@@ -74,16 +73,19 @@ public:
   /* Feature not available in OpenGL ES  < 3.1 */
 #ifdef FILLWAVE_BACKEND_OPENGL_ES_30
 #else
-
   GLvoid *map(GLenum access) const;
-
 #endif
 
   virtual void emptyCPU() = 0;
 
   virtual void emptyGPU() = 0;
 
-protected:
+  GLuint getHandle(GLuint id = 0);
+
+ protected:
+  GLsizei mHowMany;
+  GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
+
   bool mLoaded;
   GLuint mTarget;
   GLuint mDataStoreType;

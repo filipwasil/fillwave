@@ -28,8 +28,8 @@ namespace flw {
 namespace flc {
 
 TransformFeedback::TransformFeedback(GLsizei howMany)
-    : GLObject(howMany)
-    , mTarget(GL_TRANSFORM_FEEDBACK) {
+  : mHowMany(howMany)
+  , mTarget(GL_TRANSFORM_FEEDBACK) {
   glGenTransformFeedbacks(mHowMany, mHandles);
 }
 
@@ -52,7 +52,7 @@ void TransformFeedback::begin(GLenum primitiveMode) {
       && primitiveMode != GL_LINES_ADJACENCY
       && primitiveMode != GL_LINE_STRIP_ADJACENCY
 #endif
-      ) {
+    ) {
     fLogE("not valid primitive type");
     return;
   }
@@ -70,6 +70,10 @@ void TransformFeedback::pause() {
 
 void TransformFeedback::resume() {
   glResumeTransformFeedback();
+}
+
+GLuint TransformFeedback::getHandle(GLuint id) {
+  return id < FILLWAVE_GLOBJECTS_MAX ? mHandles[id] : 0;
 }
 
 } /* flc */

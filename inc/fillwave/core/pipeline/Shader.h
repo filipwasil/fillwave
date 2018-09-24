@@ -21,11 +21,10 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/GLObject.h>
+#include <fillwave/OpenGL.h>
 
 #include <vector>
 #include <string>
-#include <memory>
 
 namespace flw {
 namespace flc {
@@ -69,9 +68,7 @@ public:
 
 private:
   GLuint mHandle;
-
   GLuint mType;
-
   std::string mSource;
 };
 

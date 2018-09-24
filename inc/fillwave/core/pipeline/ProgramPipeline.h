@@ -21,10 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/GLObject.h>
-
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_30
-#else
+#include <fillwave/OpenGL.h>
 
 namespace flw {
 namespace flc {
@@ -34,7 +31,7 @@ namespace flc {
  *
  */
 
-class ProgramPipeline : public GLObject {
+class ProgramPipeline {
 public:
   ProgramPipeline(GLbitfield stage, GLsizei howMany = 1);
 
@@ -44,11 +41,13 @@ public:
 
   void use(GLuint programHandle, GLuint id = 0) const;
 
-private:
+  GLuint getHandle(GLuint id = 0);
+
+ private:
+  GLsizei mHowMany;
+  GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
   GLbitfield mStage;
 };
 
 } /* flc */
 } /* flw */
-
-#endif /* PROGRAMPIPELINE_H_ */
