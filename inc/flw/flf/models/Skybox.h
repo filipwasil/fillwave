@@ -39,7 +39,7 @@ class Skybox : public Entity, public IReloadable {
 public:
   Skybox(Engine *engine, flc::Texture3D *texture);
 
-  virtual ~Skybox() = default;
+  ~Skybox() = default;
 
   /* IDrawable */
   void draw(ICamera &camera);

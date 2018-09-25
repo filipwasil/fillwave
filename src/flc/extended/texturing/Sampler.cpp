@@ -69,6 +69,7 @@ GLint Sampler::getTextureUnit() {
 }
 
 void Sampler::reload() {
+  glDeleteSamplers(mHowMany, mHandles);
   glGenSamplers(mHowMany, mHandles);
   fLogC("reload");
 }

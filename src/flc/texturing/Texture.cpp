@@ -29,7 +29,7 @@ namespace flc {
 
 Texture::Texture(GLsizei howMany)
   : mHowMany(howMany) {
-  reload();
+  glGenTextures(mHowMany, mHandles);
 }
 
 Texture::~Texture() {

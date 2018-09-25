@@ -56,6 +56,7 @@ void VertexArray::unbindVAO() {
 }
 
 void VertexArray::reload() {
+  glDeleteVertexArrays(mHowMany, mHandles);
   glGenVertexArrays(mHowMany, mHandles);
   fLogC("reload");
 }

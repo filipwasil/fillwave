@@ -68,7 +68,7 @@ public:
       GLenum renderMode = GL_TRIANGLES,
       flc::VertexArray* vao = nullptr);
 
-  virtual ~Mesh() override;
+  ~Mesh() override;
 
   /* IDrawable */
   void draw(ICamera &camera) override;

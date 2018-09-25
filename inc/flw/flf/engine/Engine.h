@@ -202,21 +202,27 @@ class Engine {
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
   pu<flc::PixelBuffer> mPickingPixelBuffer;
-  pu<flc::Fence> mFence;
-
-  flf::CacheSampler mSamplers;
 #endif
 
   /* Resources */
   flf::CacheShader mShaders;
   flf::CacheProgram mPrograms;
-  vec<ps<flf::Text>> mTextManager;
-  vec<ps<Font>> mFontManager;
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+  flf::CacheSampler mSamplers;
+#endif
   flf::CacheBuffer mBuffers;
-  pu<flf::LightSystem> mLights;
   pu<flf::TextureSystem> mTextures;
+  pu<flf::LightSystem> mLights;
   vec<flc::PostProcessingPass> mPostProcessingPasses;
   flc::Program* mProgramTextureLookup;
+  vec<ps<flf::Text>> mTextManager;
+  vec<ps<Font>> mFontManager;
+
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#else
+  pu<flc::Fence> mFence;
+#endif
 
   /* OQ */
   flc::Program* mProgramOcclusionBox;

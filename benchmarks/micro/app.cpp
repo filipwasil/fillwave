@@ -35,6 +35,7 @@
 #include "context.h"
 #include "bSkyboxScene.h"
 #include <benchmark/benchmark.h>
+#include <flw/flf/engine/EnginePC.h>
 #include <memory>
 
 using namespace flw;
@@ -44,9 +45,10 @@ std::vector<result> mResults;
 
 static void BM_EngineDrawEmptyFrame(benchmark::State &state) {
   initContext();
-  auto* engine = new flw::Engine(".");
+  char* argv[] = { "." };
+  auto* engine = new flw::EnginePC(1, argv);
   while (state.KeepRunning()) {
-    engine->draw(0.0f);
+    engine->draw();
   }
   delete engine;
 }
@@ -57,10 +59,11 @@ BENCHMARK(BM_EngineDrawEmptyFrame);
 // Define another benchmark
 static void BM_EngineDrawSkyboxFrame(benchmark::State &state) {
   initContext();
-  auto* engine = new flw::Engine(".");
+  char* argv[] = { "./" };
+  auto* engine = new flw::EnginePC(1, argv);
   engine->setCurrentScene(std::make_unique<SkyboxScene>(engine));
   while (state.KeepRunning()) {
-    engine->draw(0.0f);
+    engine->draw();
   }
   delete engine;
 }

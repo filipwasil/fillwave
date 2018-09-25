@@ -37,7 +37,10 @@ namespace flc {
 Shader::Shader(GLuint shaderType, const std::string &shaderSource)
   : mType(shaderType)
   , mSource(shaderSource) {
-  reload();
+  mHandle = glCreateShader(mType);
+  fLogC("Shader creation failed");
+  loadSource();
+  compile();
 }
 
 Shader::~Shader() {
@@ -120,6 +123,7 @@ GLuint Shader::getHandle() const {
 }
 
 void Shader::reload() {
+  glDeleteShader(mHandle);
   mHandle = glCreateShader(mType);
   fLogC("Shader creation failed");
   loadSource();

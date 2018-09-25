@@ -35,7 +35,7 @@ namespace flw {
 namespace flc {
 
 Framebuffer::Framebuffer(GLuint howMany) : mHowMany(howMany) {
-  reload();
+  glGenFramebuffers(mHowMany, mHandles);
 }
 
 Framebuffer::~Framebuffer() {

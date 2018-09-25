@@ -61,7 +61,7 @@ option (FILLWAVE_BUILD_COTIRE "Build with cotire" OFF)
 # Benchmark options
 # -----------------------------------------------
 
-option (FILLWAVE_BENCHMARK_TESTS "Build binary to test performance" ON)
+option (FILLWAVE_BENCHMARK_TESTS "Build binary to test performance" OFF)
 
 # -----------------------------------------------
 # Additional Options

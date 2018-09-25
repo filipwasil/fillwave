@@ -24,7 +24,6 @@
 #include <flw/cmn/TextureConfigs.h>
 #include <flw/flf/loaders/textureloader/TextureContent.h>
 #include <string>
-#include <vector>
 
 namespace flw {
 namespace flf {
