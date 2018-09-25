@@ -35,8 +35,8 @@
 
 #include "../../../android/inc/CallbacksEGL/ColorPickingCallback.h"
 
-#include <fillwave/Fillwave.h>
-#include <fillwave/actions/callbacks/Callback.h>
+#include <flw/Fillwave.h>
+#include <flw/flf/actions/callbacks/Callback.h>
 
 namespace flw {
 namespace flf {

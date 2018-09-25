@@ -1,6 +1,6 @@
 #pragma once
 
-#include <fillwave/Fillwave.h>
+#include <flw/Fillwave.h>
 #include <QGLWidget>
 #include <chrono>
 #include <memory>

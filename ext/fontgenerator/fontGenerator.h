@@ -16,7 +16,7 @@
  * \brief Representation of freetype font.
  */
 
-#include <fillwave/OpenGL.h>
+#include <flw/OpenGL.h>
 #include <memory>
 
 namespace flw {

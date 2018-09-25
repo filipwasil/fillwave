@@ -1,10 +1,10 @@
-#include <fillwave/Fillwave.h>
-#include <fillwave/Framework.h>
+#include <flw/Fillwave.h>
+#include <flw/Framework.h>
 #include <GL/freeglut.h>
 #include <memory>
 #include "MountainConstructor.h"
 
-#include <fillwave/Log.h>
+#include <flw/Log.h>
 
 using namespace flw;
 using namespace flw::framework;

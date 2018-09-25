@@ -5,9 +5,9 @@
  *      Author: filip
  */
 
-#include <fillwave/Fillwave.h>
-#include <fillwave/extras/Log.h>
-#include <fillwave/models/shapes/Sphere.h>
+#include <flw/Fillwave.h>
+#include <flw/extras/Log.h>
+#include <flw/flf/models/shapes/Sphere.h>
 #include "../../android/inc/TerrainConstructors/PerlinConstructor.h"
 
 using namespace flw;

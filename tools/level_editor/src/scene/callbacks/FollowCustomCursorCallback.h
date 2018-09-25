@@ -1,7 +1,7 @@
 #pragma once
 
-#include <fillwave/Framework.h>
-#include <fillwave/Fillwave.h>
+#include <flw/Framework.h>
+#include <flw/Fillwave.h>
 
 namespace flw {
 class Engine;

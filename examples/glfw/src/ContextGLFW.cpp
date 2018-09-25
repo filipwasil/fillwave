@@ -5,9 +5,9 @@
 
 #include "ContextGLFW.h"
 
-#include <fillwave/Log.h>
+#include <flw/Log.h>
 
-#include <fillwave/Config.h>
+#include <flw/Config.h>
 
 FLOGINIT_DEFAULT()
 

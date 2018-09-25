@@ -44,99 +44,7 @@ include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/external.cmake)
 # Sources
 # -----------------------------------------------
 
-aux_source_directory (${FILLWAVE_PATH_SOURCE} FILLWAVE_ROOT_SOURCES)
-
-aux_source_directory ("src/core" FILLWAVE_CORE_SOURCES)
-aux_source_directory ("src/core/buffers" FILLWAVE_CORE_BUFFERS_SOURCES)
-aux_source_directory ("src/core/rendering" FILLWAVE_CORE_RENDERING_SOURCES)
-aux_source_directory ("src/core/pipeline" FILLWAVE_CORE_PIPELINE_SOURCES)
-aux_source_directory ("src/core/texturing" FILLWAVE_CORE_TEXTURING_SOURCES)
-aux_source_directory ("src/core/operations" FILLWAVE_CORE_OPERATIONS_SOURCES)
-
-if (FILLWAVE_BACKEND_OPENGL_ES_20)
-else()
-  aux_source_directory ("src/core/extended" FILLWAVE_CORE_EXTENDED_SOURCES)
-  aux_source_directory ("src/core/extended/buffers" FILLWAVE_CORE_EXTENDED_BUFFERS_SOURCES)
-  aux_source_directory ("src/core/extended/rendering" FILLWAVE_CORE_EXTENDED_RENDERING_SOURCES)
-  aux_source_directory ("src/core/extended/pipeline" FILLWAVE_CORE_EXTENDED_PIPELINE_SOURCES)
-  aux_source_directory ("src/core/extended/texturing" FILLWAVE_CORE_EXTENDED_TEXTURING_SOURCES)
-  aux_source_directory ("src/core/extended/operations" FILLWAVE_CORE_EXTENDED_OPERATIONS_SOURCES)
-
-  aux_source_directory ("src/renderers/extended" FILLWAVE_RENDERERS_EXTENDED_SOURCES)
-
-  aux_source_directory ("src/models/extended" FILLWAVE_MODELS_EXTENDED_SOURCES)
-
-endif()
-
-aux_source_directory ("src/models" FILLWAVE_MODELS_SOURCES)
-aux_source_directory ("src/models/base" FILLWAVE_MODELS_BASE_SOURCES)
-
-aux_source_directory ("src/loaders/modelloader" FILLWAVE_MODELS_ANIMATIONS_SOURCES)
-
-aux_source_directory ("src/loaders/textureloader" FILLWAVE_TEXTURE_LOADER_BASE_SOURCES)
-
-aux_source_directory ("src/models/effects" FILLWAVE_MODELS_EFFECTS_SOURCES)
-aux_source_directory ("src/models/builders" FILLWAVE_MODELS_BUILDERS_SOURCES)
-
-aux_source_directory ("src/space" FILLWAVE_SPACE_SOURCES)
-aux_source_directory ("src/space/base" FILLWAVE_SPACE_BASE_SOURCES)
-
-aux_source_directory ("src/hud" FILLWAVE_HUD_SOURCES)
-aux_source_directory ("src/loaders" FILLWAVE_LOADERS_SOURCES)
-aux_source_directory ("src/management" FILLWAVE_MANAGEMENT_SOURCES)
-aux_source_directory ("src/common" FILLWAVE_COMMON_SOURCES)
-
-aux_source_directory ("src/models/shapes" FILLWAVE_SHAPES_SOURCES)
-
-aux_source_directory ("src/renderers" FILLWAVE_RENDERERS_SOURCES)
-
-set (FILLWAVE_ENGINE_SOURCES
-    ${FILLWAVE_PATH_SOURCE}/engine/Engine.cpp)
-
-if (FILLWAVE_BACKEND_OPENGL_ES_PC)
-  set (FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES ${FILLWAVE_PATH_SOURCE}/engine/EnginePCGLES.cpp)
-elseif(FILLWAVE_BACKEND_OPENGL_ES_20 OR FILLWAVE_BACKEND_OPENGL_ES_30)
-  set (FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES ${FILLWAVE_PATH_SOURCE}/engine/EngineAndroid.cpp)
-else()
-  set (FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES ${FILLWAVE_PATH_SOURCE}/engine/EnginePC.cpp)
-endif()
-
-set (FILLWAVE_SOURCES
-    ${FILLWAVE_ROOT_SOURCES}
-    ${FILLWAVE_CORE_SOURCES}
-    ${FILLWAVE_CORE_BUFFERS_SOURCES}
-    ${FILLWAVE_CORE_RENDERING_SOURCES}
-    ${FILLWAVE_CORE_PIPELINE_SOURCES}
-    ${FILLWAVE_CORE_TEXTURING_SOURCES}
-    ${FILLWAVE_CORE_OPERATIONS_SOURCES}
-    ${FILLWAVE_CORE_EXTENDED_BUFFERS_SOURCES}
-    ${FILLWAVE_CORE_EXTENDED_RENDERING_SOURCES}
-    ${FILLWAVE_CORE_EXTENDED_PIPELINE_SOURCES}
-    ${FILLWAVE_CORE_EXTENDED_TEXTURING_SOURCES}
-    ${FILLWAVE_CORE_EXTENDED_OPERATIONS_SOURCES}
-    ${FILLWAVE_MODELS_SOURCES}
-    ${FILLWAVE_MODELS_BASE_SOURCES}
-    ${FILLWAVE_MODELS_ANIMATIONS_SOURCES}
-    ${FILLWAVE_MODELS_EFFECTS_SOURCES}
-    ${FILLWAVE_MODELS_BUILDERS_SOURCES}
-    ${FILLWAVE_MODELS_EXTENDED_SOURCES}
-    ${FILLWAVE_SPACE_SOURCES}
-    ${FILLWAVE_SPACE_BASE_SOURCES}
-    ${FILLWAVE_LOADERS_SOURCES}
-    ${FILLWAVE_MANAGEMENT_SOURCES}
-    ${FILLWAVE_COMMON_SOURCES}
-    ${FILLWAVE_RENDERERS_SOURCES}
-    ${FILLWAVE_RENDERERS_EXTENDED_SOURCES}
-    ${FILLWAVE_HUD_SOURCES}
-    ${FILLWAVE_MODEL_LOADER_SOURCES}
-    ${FILLWAVE_MODEL_LOADER_TRAITS}
-    ${FILLWAVE_TEXTURE_LOADER_BASE_SOURCES}
-    ${FILLWAVE_TEXTURE_LOADER_SOURCES}
-    ${FILLWAVE_TEXTURE_LOADER_TRAITS}
-    ${FILLWAVE_SHAPES_SOURCES}
-    ${FILLWAVE_ENGINE_SOURCES}
-    ${FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES}
-    )
+include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/sources.cmake)
 
 # -----------------------------------------------
 # Platform
@@ -204,6 +112,6 @@ endif ()
 
 configure_file (
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Config.h.in"
-    "${CMAKE_CURRENT_SOURCE_DIR}/inc/fillwave/Config.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/inc/flw/Config.h"
 )
 set (CMAKE_EXTRA_INCLUDE_FILES)

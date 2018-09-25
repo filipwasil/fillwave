@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/Fillwave.h>
+#include <flw/Fillwave.h>
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #define GLFW_INCLUDE_ES2
@@ -31,7 +31,7 @@
 #endif
 #include <GLFW/glfw3.h>
 
-#include <fillwave/Framework.h>
+#include <flw/Framework.h>
 
 namespace flw {
 class Engine;

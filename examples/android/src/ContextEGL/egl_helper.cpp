@@ -1,6 +1,6 @@
 #include "../../../android/inc/ContextEGL/egl_helper.h"
 
-#include <fillwave/Log.h>
+#include <flw/Log.h>
 
 FLOGINIT("EGL", FERROR | FFATAL)
 

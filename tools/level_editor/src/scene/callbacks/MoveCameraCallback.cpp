@@ -1,7 +1,7 @@
 #include "MoveCameraCallback.h"
 #include <QEvent>
-#include <fillwave/Fillwave.h>
-#include <fillwave/Framework.h>
+#include <flw/Fillwave.h>
+#include <flw/Framework.h>
 
 namespace flw {
 namespace flf {

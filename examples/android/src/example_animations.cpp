@@ -5,8 +5,8 @@
  *      Author: filip
  */
 
-#include <fillwave/Fillwave.h>
-#include <fillwave/Log.h>
+#include <flw/Fillwave.h>
+#include <flw/Log.h>
 
 using namespace flw;
 using namespace flw::framework;

@@ -7,7 +7,7 @@
 #include <QVariant>
 #include <QVector>
 #include <QObject>
-#include <fillwave/Fillwave.h>
+#include <flw/Fillwave.h>
 #include "scene/callbacks/IEventHandler.h"
 
 namespace scene {

@@ -30,7 +30,7 @@
 #ifndef MOUNTAINCONSTRUCTOR_H_
 #define MOUNTAINCONSTRUCTOR_H_
 
-#include <fillwave/models/terrain/VoxelConstructor.h>
+#include <flw/flf/models/terrain/VoxelConstructor.h>
 
 namespace flw {
 namespace flf {

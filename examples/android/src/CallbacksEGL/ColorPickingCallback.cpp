@@ -32,7 +32,7 @@
 
 #include "../../../android/inc/CallbacksEGL/ColorPickingCallback.h"
 
-#include <fillwave/Fillwave.h>
+#include <flw/Fillwave.h>
 
 FLOGINIT("ColorPickingCallback", FERROR | FFATAL)
 

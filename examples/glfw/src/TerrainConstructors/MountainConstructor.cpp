@@ -29,7 +29,7 @@
 
 #include <TerrainConstructors/MountainConstructor.h>
 
-#include <fillwave/Math.h>
+#include <flw/Math.h>
 
 namespace flw {
 namespace flf {

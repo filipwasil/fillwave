@@ -19,10 +19,10 @@
 #include <errno.h>
 #include <pthread.h>
 #include <android/sensor.h>
-#include <fillwave/Fillwave.h>
-#include <fillwave/Framework.h>
-#include <fillwave/Log.h>
-#include <fillwave/Profiler.h>
+#include <flw/Fillwave.h>
+#include <flw/Framework.h>
+#include <flw/Log.h>
+#include <flw/Profiler.h>
 
 #include <assert.h>
 

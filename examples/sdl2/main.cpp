@@ -4,7 +4,7 @@
 /* Ensure we are using opengl's core profile only */
 #define GL3_PROTOTYPES 1
 
-#include <fillwave/Fillwave.h>
+#include <flw/Fillwave.h>
 #include <memory>
 
 #include <SDL.h>

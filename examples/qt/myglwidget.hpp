@@ -30,7 +30,7 @@
 #ifndef MYGLWIDGET_HPP
 #define MYGLWIDGET_HPP
 
-#include <fillwave/Fillwave.h>
+#include <flw/Fillwave.h>
 #include <QGLWidget>
 #include <memory>
 

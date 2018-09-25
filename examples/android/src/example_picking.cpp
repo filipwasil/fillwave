@@ -5,8 +5,8 @@
  *      Author: filip
  */
 
-#include <fillwave/Fillwave.h>
-#include <fillwave/extras/Log.h>
+#include <flw/Fillwave.h>
+#include <flw/extras/Log.h>
 
 #include "../../android/inc/CallbacksEGL/ColorPickingCallback.h"
 #include "../../android/src/PickableModel.h"

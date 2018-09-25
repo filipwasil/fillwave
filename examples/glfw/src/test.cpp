@@ -1,7 +1,7 @@
 #include <example.h>
 #include <ContextGLFW.h>
-#include <fillwave/models/shapes/Sphere.h>
-#include <fillwave/models/terrain/TerrainConstructor.h>
+#include <flw/flf/models/shapes/Sphere.h>
+#include <flw/flf/models/terrain/TerrainConstructor.h>
 
 using namespace flw;
 using namespace flw::flf;

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <fillwave/Fillwave.h>
-#include <fillwave/models/EmiterPointCPU.h>
+#include <flw/Fillwave.h>
+#include <flw/flf/models/EmiterPointCPU.h>
 #include "scene/AScene.h"
 
 namespace scene {

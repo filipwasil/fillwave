@@ -30,7 +30,7 @@
 #ifndef PerlinConstructor_H_
 #define PerlinConstructor_H_
 
-#include <fillwave/models/terrain/VoxelConstructor.h>
+#include <flw/flf/models/terrain/VoxelConstructor.h>
 
 namespace flw {
 namespace flf {

@@ -1,8 +1,8 @@
 set(TESTS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 set (FILLWAVE_PRODUCTION_SOURCES
-    ${TESTS_DIR}/../src/common/Strings.cpp
-    ${TESTS_DIR}/../src/common/Observable.cpp
+    ${TESTS_DIR}/../src/flf/common/Strings.cpp
+    ${TESTS_DIR}/../src/flf/common/Observable.cpp
     )
 
 aux_source_directory (${TESTS_DIR}/framework TEST_FRAMEWORK_SOURCES)

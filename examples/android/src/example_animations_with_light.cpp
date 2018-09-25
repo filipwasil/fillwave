@@ -5,10 +5,10 @@
  *      Author: filip
  */
 
-#include <fillwave/Fillwave.h>
-#include <fillwave/Log.h>
-#include <fillwave/models/shapes/Quad.h>
-#include <fillwave/Framework.h>
+#include <flw/Fillwave.h>
+#include <flw/Log.h>
+#include <flw/flf/models/shapes/Quad.h>
+#include <flw/Framework.h>
 
 using namespace flw;
 using namespace flw::framework;

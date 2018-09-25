@@ -8,8 +8,8 @@
 #ifndef PICKABLEMODEL_H_
 #define PICKABLEMODEL_H_
 
-#include <fillwave/Fillwave.h>
-#include <fillwave/Framework.h>
+#include <flw/Fillwave.h>
+#include <flw/Framework.h>
 
 using namespace flw;
 using namespace flw::framework;

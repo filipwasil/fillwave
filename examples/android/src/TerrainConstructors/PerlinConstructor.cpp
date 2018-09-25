@@ -29,8 +29,8 @@
 
 #include "../../../android/inc/TerrainConstructors/PerlinConstructor.h"
 
-#include <fillwave/Math.h>
-#include <fillwave/Log.h>
+#include <flw/Math.h>
+#include <flw/Log.h>
 #include <glm/gtc/noise.hpp>
 
 FLOGINIT("PerlinConstructor", FERROR | FFATAL)

@@ -3,8 +3,8 @@
 #include <QList>
 #include <QString>
 #include <QVariant>
-#include <fillwave/Fillwave.h>
-#include "fillwave/models/Model.h"
+#include <flw/Fillwave.h>
+#include "flw/flf/models/Model.h"
 
 using namespace flw;
 using namespace flw::flf;

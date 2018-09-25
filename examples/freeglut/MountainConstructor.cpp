@@ -29,8 +29,8 @@
 
 #include "MountainConstructor.h"
 
-#include <fillwave/Math.h>
-#include <fillwave/Log.h>
+#include <flw/Math.h>
+#include <flw/Log.h>
 
 FLOGINIT("MountainConstructor", FERROR | FFATAL)
 

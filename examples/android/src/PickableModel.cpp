@@ -7,8 +7,8 @@
 
 #include "../../android/src/PickableModel.h"
 
-#include <fillwave/Log.h>
-#include <fillwave/models/effects/BoostColor.h>
+#include <flw/Log.h>
+#include <flw/flf/models/effects/BoostColor.h>
 
 FLOGINIT("name", FERROR | FFATAL)
 
