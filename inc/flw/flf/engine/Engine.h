@@ -216,8 +216,8 @@ class Engine {
   pu<flf::LightSystem> mLights;
   vec<flc::PostProcessingPass> mPostProcessingPasses;
   flc::Program* mProgramTextureLookup;
-  vec<ps<flf::Text>> mTextManager;
   vec<ps<Font>> mFontManager;
+  vec<ps<flf::Text>> mTextManager;
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else

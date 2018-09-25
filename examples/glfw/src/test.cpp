@@ -2,6 +2,7 @@
 #include <ContextGLFW.h>
 #include <flw/flf/models/shapes/Sphere.h>
 #include <flw/flf/models/terrain/TerrainConstructor.h>
+#include <memory>
 
 using namespace flw;
 using namespace flw::flf;
@@ -14,10 +15,12 @@ struct MountainConstructor : public TerrainConstructor {
 };
 
 int main(int argc, char* argv[]) {
-  ContextGLFW mContext(argc, argv);
+  auto context = std::make_unique<ContextGLFW>(argc, argv);
+  //ContextGLFW mContext(argc, argv);
   init();
   initCallbacks();
-  mContext.render();
+  context->render();
+  context.reset();
   exit(EXIT_SUCCESS);
 }
 

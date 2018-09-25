@@ -198,12 +198,7 @@ void Engine::initContext(void) {
 }
 
 Engine::~Engine() {
-  if (mScene) {
-    mScene.reset();
-  }
-  mTextManager.clear();
-  mFontManager.clear();
-  mPostProcessingPasses.clear();
+
 }
 
 void Engine::configBackgroundColor(glm::vec3 color) {

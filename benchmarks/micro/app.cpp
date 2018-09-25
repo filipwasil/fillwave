@@ -46,11 +46,10 @@ std::vector<result> mResults;
 static void BM_EngineDrawEmptyFrame(benchmark::State &state) {
   initContext();
   char* argv[] = { "." };
-  auto* engine = new flw::EnginePC(1, argv);
+  auto engine = std::make_unique<flw::EnginePC>(1, argv);
   while (state.KeepRunning()) {
     engine->draw();
   }
-  delete engine;
 }
 
 // Register the function as a benchmark
@@ -58,14 +57,13 @@ BENCHMARK(BM_EngineDrawEmptyFrame);
 
 // Define another benchmark
 static void BM_EngineDrawSkyboxFrame(benchmark::State &state) {
-  initContext();
-  char* argv[] = { "./" };
-  auto* engine = new flw::EnginePC(1, argv);
-  engine->setCurrentScene(std::make_unique<SkyboxScene>(engine));
-  while (state.KeepRunning()) {
-    engine->draw();
-  }
-  delete engine;
+//  initContext();
+//  char* argv[] = { "./" };
+//  auto engine = std::make_unique<flw::EnginePC>(1, argv);
+//  engine->setCurrentScene(std::make_unique<SkyboxScene>(engine.get()));
+//  while (state.KeepRunning()) {
+//    engine->draw();
+//  }
 }
 
 // Register another function as a benchmark
