@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/pipeline/Fence.h>
+#include <fillwave/core/extended/pipeline/Fence.h>
 
 namespace flw {
 namespace flc {

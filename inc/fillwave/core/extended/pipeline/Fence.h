@@ -23,8 +23,6 @@
 
 #include <fillwave/OpenGL.h>
 
-#include <memory>
-
 namespace flw {
 namespace flc {
 

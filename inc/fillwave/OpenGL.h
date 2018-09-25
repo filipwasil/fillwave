@@ -30,6 +30,8 @@
 
 #include <glad/glad.h>
 
+bool initExtensions();
+
 #else /* defined(__APPLE__) || defined(_WIN32) || defined(_WIN64) */
 
 #if defined(__ANDROID__)

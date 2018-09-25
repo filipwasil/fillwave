@@ -21,11 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/core/extended/operations/ConditionalRender.h>
-
 #include <fillwave/core/texturing/Texture2D.h>
 #include <fillwave/core/buffers/IndexBuffer.h>
-#include <fillwave/core/pipeline/Fence.h>
 
 #include <fillwave/core/operations/TQuery.h>
 #include <fillwave/core/buffers/VertexBufferBasic.h>
@@ -34,6 +31,9 @@
 #include <fillwave/models/base/IReloadable.h>
 
 #include <fillwave/renderers/IRenderer.h>
+
+#include <fillwave/core/extended/operations/ConditionalRender.h>
+#include <fillwave/core/extended/pipeline/Fence.h>
 
 namespace flw {
 class Engine;
