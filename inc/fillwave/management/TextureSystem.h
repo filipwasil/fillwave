@@ -23,7 +23,7 @@
 
 #include <fillwave/core/extended/texturing/Texture1D.h>
 #include <fillwave/core/rendering/Texture2DRenderableDynamic.h>
-#include <fillwave/core/extended/rendering/Texture3DRenderableDynamic.h>
+#include <fillwave/core/extended/rendering/Texture3DRenderable.h>
 #include <fillwave/loaders/modelloader/ModelLoaderTraits.h>
 #include <fillwave/loaders/TextureLoader.h>
 #include <fillwave/management/base/TCache.h>
@@ -37,12 +37,11 @@ namespace flf {
 
 class TextureSystem final {
 public:
-  TextureSystem(const std::string &rootPath);
+  TextureSystem(const std::string& rootPath);
 
   void checkExtensions();
 
-  flc::Texture2D* get(
-    const std::string& texturePath);
+  flc::Texture2D* get(const std::string& texturePath);
 
   flc::Texture2DRenderable* getShadow2D(GLuint width, GLuint height);
   flc::Texture2DRenderable* getColor2D(GLuint width, GLuint height);
@@ -123,20 +122,6 @@ private:
 
   TCache<
     MAX_CACHE_SIZE
-    , flc::Texture3DRenderableDynamic
-    , std::string
-    , flc::TextureConfig*
-    , flc::TextureConfig*
-    , flc::TextureConfig*
-    , flc::TextureConfig*
-    , flc::TextureConfig*
-    , flc::TextureConfig*
-    , flc::ParameterList&
-    , flc::Texture2DRenderable*
-    , flc::Program *> mTextures3DDynamic;
-
-  TCache<
-    MAX_CACHE_SIZE
     , flc::Texture3DRenderable
     , size_t
     , flc::TextureConfig*
@@ -158,13 +143,6 @@ private:
   std::vector<GLenum> mSupportedCompresssionTypes;
   const std::string mRootPath;
   TextureLoader mLoader;
-
-  template <class T>
-  inline void resize(T &textures, GLuint width, GLuint height) {
-    for (auto &it : textures) {
-      it.second->resize(width, height);
-    }
-  }
 };
 
 } /* flf */

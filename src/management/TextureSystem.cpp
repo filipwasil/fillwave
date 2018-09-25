@@ -41,12 +41,11 @@ inline void TextureSystem::checkExtensions() {
   for (int i = 0; i < numberOfExtensions; i++) {
     const GLubyte *ccc = glGetStringi(GL_EXTENSIONS, i);
     auto find_extension = [ccc](const char *name) -> bool {
-      if (0 == (strcmp((const char *) ccc, name))) {
-        fLogI(name, " compression supported");
-        return true;
-      } else {
+      if (0 != (strcmp((const char *) ccc, name))) {
         return false;
       }
+      fLogI(name, " compression supported");
+      return true;
     };
 
 #if defined(__APPLE__) || defined (__ANDROID__)
@@ -412,8 +411,13 @@ flc::Texture2D* TextureSystem::getDeferredStencilDepth(GLuint width, GLuint heig
 #endif
 
 void TextureSystem::resize(GLuint width, GLuint height) {
-  resize(mTextures2DDynamic, width, height);
-  resize(mTextures2DRenderable, width, height);
+  for (auto &it : mTextures2DDynamic) {
+    it.second->mTexture2DRenderable.resize(width, height);
+  }
+
+  for (auto &it : mTextures2DRenderable) {
+    it.second->resize(width, height);
+  }
 }
 
 void TextureSystem::drawDynamicTextures() {
@@ -455,11 +459,7 @@ void TextureSystem::reload() {
   }
 
   for (auto &it : mTextures3DRenderable) {
-    it.second->mTexture.reload();
-  }
-
-  for (auto &it : mTextures3DDynamic) {
-    it.second->mTexture.reload();
+    it.second->mTexture3D.mTexture.reload();
   }
 
   for (auto &it : mTextures1D) {

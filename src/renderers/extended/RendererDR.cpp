@@ -172,7 +172,7 @@ inline void RendererDR::drawAOPass(ICamera &camera) {
 
   mAOColorBuffer->bindForWriting();
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  mAOGeometryBuffer->bind(FILLWAVE_POSITION_ATTACHMENT);
+  mAOGeometryBuffer->mTexture2D.bind(FILLWAVE_POSITION_ATTACHMENT);
 
   mProgramAOColor->use();
   for (auto &node : mNodes) {
@@ -202,7 +202,7 @@ inline void RendererDR::drawColorPass(ICamera &camera) {
 
   GLint currentTextureUnit = FILLWAVE_SHADOW_FIRST_UNIT;
 
-  mAOColorBuffer->bind(FILLWAVE_AO_UNIT);
+  mAOColorBuffer->mTexture2D.bind(FILLWAVE_AO_UNIT);
 
   drawLightsSpotPass(camera, currentTextureUnit);
   drawLightsDirectionalPass(camera, currentTextureUnit);

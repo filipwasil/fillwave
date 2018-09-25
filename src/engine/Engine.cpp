@@ -553,7 +553,7 @@ void Engine::drawHUD() {
   }
 }
 
-void Engine::drawTexture(flc::Texture *t, flc::Program *p) {
+void Engine::drawTexture(flc::Texture2D *t, flc::Program *p) {
   p->use();
   t->bind(FILLWAVE_DIFFUSE_UNIT);
   p->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
@@ -562,7 +562,7 @@ void Engine::drawTexture(flc::Texture *t, flc::Program *p) {
   flc::Program::disusePrograms();
 }
 
-void Engine::drawTexture(flc::Texture *t) {
+void Engine::drawTexture(flc::Texture2D *t) {
   mProgramTextureLookup->use();
   mProgramTextureLookup->uniformPush("uPostProcessingSampler", FILLWAVE_DIFFUSE_UNIT);
   t->bind(FILLWAVE_DIFFUSE_UNIT);
@@ -605,7 +605,7 @@ void Engine::drawScene() {
   flc::Program* programCurrent = nullptr;
 
   drawClear();
-  textureCurrent->bindForWriting();
+  textureCurrent->mTexture2DRenderable.bindForWriting();
   drawSceneCore();
 
   for (auto it = _begin; it != _end; ++it) {
@@ -618,13 +618,13 @@ void Engine::drawScene() {
       textureCurrent = (*it).getFrame();
       programCurrent = (*it).getProgram();
 
-      textureNext->bindForWriting();
+      textureNext->mTexture2DRenderable.bindForWriting();
 
       drawClear();
 
       textureCurrent->draw();
 
-      textureNext->bindForReading();
+      textureNext->mTexture2DRenderable.bindForReading();
 
     } else {
 
@@ -637,7 +637,7 @@ void Engine::drawScene() {
       programCurrent = (*it).getProgram();
 
       // render to current bound framebuffer using textureCurrent as a texture to post process
-      drawTexture(textureCurrent, programCurrent);
+      drawTexture(&textureCurrent->mTexture2DRenderable.mTexture2D, programCurrent);
     }
   }
 
@@ -687,7 +687,7 @@ void Engine::populateLights() {
   for (size_t i = 0; i < mLights->mLightsSpot.size(); i++) {
     light2DTexture = mLights->mLightsSpot[i]->getShadowTexture();
     light2DTexture->bindForWriting();
-    light2DTexture->bind(currentTextureUnit++);
+    light2DTexture->mTexture2D.bind(currentTextureUnit++);
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_DEPTH_BUFFER_BIT);
     mScene->drawDepth(*(mLights->mLightsSpot[i]->getShadowCamera()));
@@ -696,7 +696,7 @@ void Engine::populateLights() {
   for (size_t i = 0; i < mLights->mLightsDirectional.size(); i++) {
     light2DTexture = mLights->mLightsDirectional[i]->getShadowTexture();
     light2DTexture->bindForWriting();
-    light2DTexture->bind(currentTextureUnit++);
+    light2DTexture->mTexture2D.bind(currentTextureUnit++);
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_DEPTH_BUFFER_BIT);
     mScene->drawDepth(*(mLights->mLightsDirectional[i]->getShadowCamera()));
@@ -706,10 +706,10 @@ void Engine::populateLights() {
 #else
   for (size_t i = 0; i < mLights->mLightsPoint.size(); i++) {
     flf::LightPoint *lightPoint = mLights->mLightsPoint[i].get();
-    flc::Texture3DRenderable *light3DTexture = lightPoint->getShadowTexture();
+    auto* light3DTexture = lightPoint->getShadowTexture();
     glm::vec3 lightPosition(lightPoint->getTranslation());
     light3DTexture->bindForWriting();
-    light3DTexture->bind(currentTextureUnit);
+    light3DTexture->mTexture3D.bind(currentTextureUnit);
     for (GLint j = GL_TEXTURE_CUBE_MAP_POSITIVE_X; j <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; j++) {
       light3DTexture->setAttachmentFace(j, GL_COLOR_ATTACHMENT0);
       glClearColor(0.0, 0.0, 0.0, 1.0);

@@ -123,7 +123,7 @@ void Texture3D::unbindCubemapTexture(GLint textureUnit) {
 void Texture3D::reload() {
   mTexture.reload();
   bind();
-  setParameters(param);
+  setParameters(mParameters);
   sendData();
   unbind();
 }

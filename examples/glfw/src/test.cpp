@@ -73,7 +73,7 @@ void init() {
     engine
     , programs.getProgram(EProgram::basic)
     , "meshes/sphere.obj"
-      , engine->storeTextureDynamic("shaders/water/water.frag"));
+    , &engine->storeTextureDynamic("shaders/water/water.frag")->mTexture2DRenderable.mTexture2D);
 
   sut5->scaleTo(0.01f);
   sut5->moveBy(glm::vec3(-0.7f, 0.0f, 0.0f));

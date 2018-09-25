@@ -98,8 +98,8 @@ class Engine {
   void draw();
   void drawLines();
   void drawPoints();
-  void drawTexture(flc::Texture* t, flc::Program* p);
-  void drawTexture(flc::Texture* t);
+  void drawTexture(flc::Texture2D* t, flc::Program* p);
+  void drawTexture(flc::Texture2D* t);
 
   /* Remove */
   void detach(ps<flf::Text> text);
