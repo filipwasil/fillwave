@@ -677,27 +677,29 @@ const std::string fsCursor =
   "}\n";
 
 const std::string vsCursor =
-  gGLVersion + gGLVertexPrecision +
+  gGLVersion + gGLExtraExtensions + gGLVertexPrecision +
   "uniform float uSize = 0.1;\n"
   "uniform float uScreenFactor = 1.0;\n"
-  "uniform vec2 uPosition = vec2(0.0,0.0);\n" =
+  "uniform vec2 uPosition = vec2(0.0,0.0);\n" +
   gGLVaryingOut +
   " vec2 vVertexOffset;\n"
   "void main() {\n"
+  "   vec2 vertexOffset = vec2(0.0, 0.0);\n"
   "   switch(gl_VertexID) {\n"
   "      case 0:\n"
-  "         vVertexOffset = vec2(-1.0, 1.0);\n"
+  "         vertexOffset = vec2(-1.0, 1.0);\n"
   "         break;\n"
   "      case 1:\n"
-  "         vVertexOffset = vec2(-1.0, -1.0);\n"
+  "         vertexOffset = vec2(-1.0, -1.0);\n"
   "         break;\n"
   "      case 2:\n"
-  "         vVertexOffset = vec2(1.0, 1.0);\n"
+  "         vertexOffset = vec2(1.0, 1.0);\n"
   "         break;\n"
   "      case 3:\n"
-  "         vVertexOffset = vec2(1.0, -1.0);\n"
+  "         vertexOffset = vec2(1.0, -1.0);\n"
   "      break;\n"
   "   }\n"
+  "   vVertexOffset = vertexOffset;\n"
   "   gl_Position = vec4(uPosition.x + uSize * vVertexOffset.x, uPosition.y + uSize * vVertexOffset.y * uScreenFactor, 0.0, 1.0);\n"
   "}\n";
 

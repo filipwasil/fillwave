@@ -1,17 +1,22 @@
 #include <example.h>
 #include <ContextGLFW.h>
 #include <fillwave/models/shapes/Sphere.h>
+#include <fillwave/models/terrain/TerrainConstructor.h>
 
 using namespace flw;
 using namespace flw::flf;
 using namespace flw::flc;
-using namespace flw::flc;
 
-//const GLint SPHERES = 5;
+struct MountainConstructor : public TerrainConstructor {
+  GLfloat calculateHeight(GLfloat x, GLfloat z) {
+    return glm::abs(glm::sin(glm::radians(360 * x)) * glm::sin(glm::radians(360 * z)));
+  }
+};
 
 int main(int argc, char* argv[]) {
   ContextGLFW mContext(argc, argv);
   init();
+  initCallbacks();
   mContext.render();
   exit(EXIT_SUCCESS);
 }
@@ -80,43 +85,45 @@ void init() {
   engine->getCurrentScene()->attach(std::move(sut5));
 
   /* Emiter 1 CPU */
-  auto emiter1 = std::make_unique<EmiterPointCPU>(engine,
-                                                  0.3,
-                                                  60000.0,
-                                                  glm::vec4(0.1, 0.1, 1.0, 1.0),
-                                                  glm::vec3(0.0, 0.0, 0.0),
-                                                  glm::vec3(0.0, 0.0, 0.0),
-                                                  glm::vec3(0.9, 0.9, 0.9),
-                                                  glm::vec3(0.0, 0.0, 0.0),
-                                                  glm::vec3(0.0, 0.0, 0.0),
-                                                  10.0,
-                                                  10.0,
-                                                  engine->storeTexture("textures/particle.png"),
-                                                  GL_SRC_ALPHA,
-                                                  GL_ONE,
-                                                  GL_FALSE);
-  emiter1->moveBy(glm::vec3(-8.0, -8.0, -15.0));
+  auto emiter1 = std::make_unique<EmiterPointCPU>(
+    engine
+    , 0.3
+    , 60000.0
+    , glm::vec4(0.1, 0.1, 1.0, 1.0)
+    , glm::vec3(0.0, 0.0, 0.0)
+    , glm::vec3(0.0, 0.0, 0.0)
+    , glm::vec3(0.9, 0.9, 0.9)
+    , glm::vec3(0.0, 0.0, 0.0)
+    , glm::vec3(0.0, 0.0, 0.0)
+    , 10.0
+    , 10.0
+    , engine->storeTexture("textures/particle.png")
+    , GL_SRC_ALPHA
+    , GL_ONE
+    , GL_FALSE);
+  emiter1->moveBy(glm::vec3(-8.0, -4.0, -15.0));
   engine->getCurrentScene()->attach(std::move(emiter1));
 
   /* Emiter 2 GPU */
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
-  auto emiter2 = std::make_unique<EmiterPointGPU>(engine,
-                                                  0.3,
-                                                  600.0,
-                                                  glm::vec4(1.0, 1.0, 1.0, 1.0),
-                                                  glm::vec3(0.0, 1.0, 0.0),
-                                                  glm::vec3(0.0, 0.0, 0.0),
-                                                  glm::vec3(0.9, 0.9, 0.9),
-                                                  glm::vec3(0.0, 0.0, 0.0),
-                                                  glm::vec3(0.6, 0.6, 0.6),
-                                                  1.0,
-                                                  1.0,
-                                                  engine->storeTexture("textures/particle.png"),
-                                                  GL_SRC_ALPHA,
-                                                  GL_ONE,
-                                                  GL_FALSE);
-  emiter2->moveBy(glm::vec3(0.0, -8.0, -15.0));
+  auto emiter2 = std::make_unique<EmiterPointGPU>(
+    engine
+    , 0.3
+    , 600.0
+    , glm::vec4(1.0, 1.0, 1.0, 1.0)
+    , glm::vec3(0.0, 1.0, 0.0)
+    , glm::vec3(0.0, 0.0, 0.0)
+    , glm::vec3(0.9, 0.9, 0.9)
+    , glm::vec3(0.0, 0.0, 0.0)
+    , glm::vec3(0.6, 0.6, 0.6)
+    , 1.0
+    , 1.0
+    , engine->storeTexture("textures/particle.png")
+    , GL_SRC_ALPHA
+    , GL_ONE
+    , GL_FALSE);
+  emiter2->moveBy(glm::vec3(0.0, -4.0, -15.0));
   engine->getCurrentScene()->attach(std::move(emiter2));
 
     engine->getCurrentScene()->setSkybox(std::make_unique<Skybox>(
@@ -132,25 +139,68 @@ void init() {
 #endif
 
   /* Emiter 3 CPU */
-  auto emiter3 = std::make_unique<EmiterPointCPU>(engine,
-                                                  0.3,
-                                                  60000.0,
-                                                  glm::vec4(1.0, 1.0, 0.0, 1.0),
-                                                  glm::vec3(0.0, 2.0, 0.0),
-                                                  glm::vec3(0.0, 0.0, 0.0),
-                                                  glm::vec3(0.9, 0.9, 0.9),
-                                                  glm::vec3(0.0, 0.0, 0.0),
-                                                  glm::vec3(0.0, 0.0, 0.0),
-                                                  10.0,
-                                                  10.0,
-                                                  engine->storeTexture("textures/particle.png"),
-                                                  GL_SRC_ALPHA,
-                                                  GL_ONE,
-                                                  GL_FALSE);
+  auto emiter3 = std::make_unique<EmiterPointCPU>(
+    engine
+    , 0.3
+    , 60000.0
+    , glm::vec4(1.0, 1.0, 0.0, 1.0)
+    , glm::vec3(0.0, 2.0, 0.0)
+    , glm::vec3(0.0, 0.0, 0.0)
+    , glm::vec3(0.9, 0.9, 0.9)
+    , glm::vec3(0.0, 0.0, 0.0)
+    , glm::vec3(0.0, 0.0, 0.0)
+    , 10.0
+    , 10.0
+    , engine->storeTexture("textures/particle.png")
+    , GL_SRC_ALPHA
+    , GL_ONE
+    , GL_FALSE);
 
-  emiter3->moveBy(glm::vec3(8.0, -8.0, -15.0));
+  engine->getCurrentScene()->setCursor(std::make_unique<Cursor>(
+    engine
+    , engine->storeTexture("textures/cursor/standard_blue.png")));
+
+  emiter3->moveBy(glm::vec3(8.0, -4.0, -15.0));
   engine->getCurrentScene()->attach(std::move(emiter3));
 
   engine->configFPSCounter("FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
   engine->storeText("Benchmark", "FreeSans", glm::vec2(-0.95f, -0.85f), 50.0f);
+
+  auto terrain = std::make_unique<MeshTerrain>(
+    engine
+    , programs.getProgram(EProgram::basic)
+    , new MountainConstructor()
+    , Material()
+    , "textures/test.png"
+    , "textures/testNormal.png"
+    , ""
+    , 20
+    , 16);
+  terrain->scaleTo(0.1);
+  terrain->moveToY(-2.0);
+  engine->getCurrentScene()->attach(std::move(terrain));
+}
+
+void initCallbacks() {
+  auto eng = ContextGLFW::mGraphics;
+  eng->attachHandler([eng](const Event& event) {
+    CursorPositionEventData e = event.getData();
+    auto xPosition = ( ( e.xPosition / eng->getScreenSize()[0]) * 2.0 - 1.0);
+    auto yPosition = (-( e.yPosition / eng->getScreenSize()[1]) * 2.0 + 1.0);
+    eng->getCurrentScene()->getCursor()->move(glm::vec2(xPosition, yPosition));
+  }, flw::flf::EEventType::cursorPosition);
+
+  eng->attachHandler([eng](const flw::flf::Event& event) {
+    flw::flf::KeyboardEventData e = event.getData();
+    if (GLFW_KEY_D == e.key && e.action == GLFW_RELEASE) {
+      eng->configDebugger(flw::EDebuggerState::toggleState);
+    }
+  }, flw::flf::EEventType::key);
+
+  eng->attachHandler([eng](const Event& event) {
+    MouseButtonEventData e = event.getData();
+    if (e.action == GLFW_RELEASE) {
+      eng->onPick(e.whereX, e.whereY);
+    }
+  }, flw::flf::EEventType::mouseButton);
 }

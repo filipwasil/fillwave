@@ -35,7 +35,7 @@ IBuffer::IBuffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany)
   , mIndex(index) {
   setTarget(target);
   setDrawType(drawType);
-  reload();
+  glGenBuffers(mHowMany, mHandles);
 }
 
 IBuffer::~IBuffer() {
@@ -129,6 +129,7 @@ void IBuffer::send() {
 }
 
 void IBuffer::reload() {
+  glDeleteBuffers(mHowMany, mHandles);
   glGenBuffers(mHowMany, mHandles);
   fLogC("reload");
 }

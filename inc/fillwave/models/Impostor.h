@@ -37,19 +37,21 @@ namespace flf {
 
 class Impostor : public Entity, public Finishable {
 public:
-  Impostor(Engine *engine,
-      GLfloat lifetime,
-      GLfloat size,
-      flc::Texture2D* texture = nullptr,
-      GLenum blendingSource = GL_SRC_ALPHA,
-      GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
+  Impostor(
+    Engine *engine
+    , GLfloat lifetime
+    , GLfloat size
+    , flc::Texture2D* texture = nullptr
+    , flc::Program* program = nullptr
+    , GLenum blendingSource = GL_SRC_ALPHA
+    , GLenum blendingDestination = GL_ONE_MINUS_SRC_ALPHA);
 
   ~Impostor() override;
 
 protected:
   Engine* mEngine;
-  flc::Program* mProgram;
   flc::Texture2D* mTexture;
+  flc::Program* mProgram;
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
   flc::Sampler* mSampler;

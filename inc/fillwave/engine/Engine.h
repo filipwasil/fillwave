@@ -241,6 +241,7 @@ class Engine {
  public:
   void onEvent(const flf::Event& event);
   void onResizeScreen(GLuint width, GLuint height);
+  void onPick(GLuint xScreenSpace, GLuint yScreenSpace);
   void attachHandler(std::function<void(const flf::Event&)>&& h, flf::EEventType type);
   void detachHandlers();
 
@@ -332,7 +333,6 @@ class Engine {
 
  private:
   /* Pick */
-  void pick(GLuint x, GLuint y);
   glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
   void reloadPickingBuffer();
 

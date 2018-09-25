@@ -23,6 +23,8 @@
 
 void init();
 
+void initCallbacks();
+
 void perform();
 
 void quit();

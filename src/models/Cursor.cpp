@@ -28,11 +28,8 @@ namespace flw {
 namespace flf {
 
 Cursor::Cursor(Engine *engine, flc::Texture2D *texture)
-    : Impostor(engine, FILLWAVE_ENDLESS, 0.06f, texture)
-    , mScreenFactor(static_cast<GLfloat>(engine->getScreenSize()[0]) / static_cast<GLfloat>(engine->getScreenSize()[1])) {
-
-  mProgram = ProgramLoader(engine).getProgram(EProgram::cursor);
-
+  : Impostor(engine, FILLWAVE_ENDLESS, 0.06f, texture, ProgramLoader(engine).getProgram(EProgram::cursor))
+  , mScreenFactor(static_cast<GLfloat>(engine->getScreenSize()[0]) / static_cast<GLfloat>(engine->getScreenSize()[1])) {
   initUniformsCache();
 }
 

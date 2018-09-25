@@ -166,6 +166,7 @@ void Engine::reloadPickingBuffer() {
   glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   fLogC("glReadPixels");
   mPickingPixelBuffer->unbind();
+  fLogC("Pixel buffer unbind");
 }
 
 void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLuint format, GLint bytesPerPixel) {
@@ -861,20 +862,21 @@ flf::LightPoint* Engine::storeLightPoint(glm::vec3 pos, glm::vec4 col, flf::Move
   return mLights->mLightsPoint.add(mTextures->getShadow3D(mWindowWidth, mWindowHeight), pos, col, observed);
 }
 
-void Engine::pick(GLuint x, GLuint y) {
+void Engine::onPick(GLuint xScreenSpace, GLuint yScreenSpace) {
   mPickingRenderableTexture->bindForRendering();
   drawClear();
   mScene->drawPicking();
   mPickingPixelBuffer->bind();
   glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   fLogC("glReadPixels failed");
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
   GLubyte *data = (GLubyte *) mPickingPixelBuffer->map(GL_READ_WRITE);
 #endif
 
-  glm::ivec4 colorRead = pickingBufferGetColor(data, x, y);
+  glm::ivec4 colorRead = pickingBufferGetColor(data, xScreenSpace, yScreenSpace);
   mPickingPixelBuffer->unmap();
   mPickingPixelBuffer->unbind();
   flc::Framebuffer::bindScreenFramebuffer();
@@ -889,7 +891,8 @@ void Engine::captureFramebufferToFile(const std::string &name) {
   mPickingPixelBuffer->bind();
   glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
   fLogC("reading pixel buffer failed");
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   GLubyte* data = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
 #else
   GLubyte *data = (GLubyte *) mPickingPixelBuffer->map(GL_READ_WRITE);
