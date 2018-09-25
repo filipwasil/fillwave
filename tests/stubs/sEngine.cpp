@@ -19,8 +19,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <fillwave/Log.h>
-#include <fillwave/Fillwave.h>
+#include <flw/Log.h>
+#include <flw/Fillwave.h>
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 

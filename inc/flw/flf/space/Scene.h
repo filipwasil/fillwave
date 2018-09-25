@@ -28,7 +28,7 @@
 #include <flw/flf/models/Terrain.h>
 #include <flw/flf/models/base/IDrawable.h>
 #include <flw/flf/renderers/RendererFR.h>
-#include <flw/flf/common/pointers/PointerProtected.h>
+#include <flw/cmn/pointers/PointerProtected.h>
 
 #include <unordered_map>
 

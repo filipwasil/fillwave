@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 #include <flw/flc/texturing/Texture.h>
-#include <flw/flf/loaders/textureloader/TextureConfigs.h>
+#include <flw/cmn/TextureConfigs.h>
 
 namespace flw {
 namespace flc {

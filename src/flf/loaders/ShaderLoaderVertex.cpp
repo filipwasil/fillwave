@@ -21,7 +21,7 @@
 
 #include <flw/flf/loaders/ShaderLoaderVertex.h>
 #include <flw/flf/loaders/modelloader/ModelLoaderTraits.h>
-#include <flw/flf/common/Strings.h>
+#include <flw/cmn/Strings.h>
 #include <flw/flf/loaders/ModelLoader.h>
 #include <flw/PlatformSW.h>
 

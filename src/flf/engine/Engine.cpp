@@ -25,8 +25,8 @@
 
 #include <flw/flf/actions/EventHandler.h>
 
-#include <flw/flf/common/Macros.h>
-#include <flw/flf/common/Strings.h>
+#include <flw/cmn/Macros.h>
+#include <flw/cmn/Strings.h>
 
 #include <flw/flf/loaders/FileLoader.h>
 

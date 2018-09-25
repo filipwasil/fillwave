@@ -26,8 +26,8 @@
 
 #include <flw/Texturing.h>
 
-#include <flw/flf/common/Strings.h>
-#include <flw/flf/common/Macros.h>
+#include <flw/cmn/Strings.h>
+#include <flw/cmn/Macros.h>
 
 #include <flw/flf/loaders/textureloader/TextureFactory.h>
 

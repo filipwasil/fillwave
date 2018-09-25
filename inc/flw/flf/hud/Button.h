@@ -22,7 +22,7 @@
  */
 
 #include <flw/flf/hud/base/Sprite.h>
-#include <flw/flf/common/IPickable.h>
+#include <flw/cmn/IPickable.h>
 
 namespace flw {
 class Engine;

@@ -35,7 +35,7 @@ aux_source_directory ("src/flf/space/base" FILLWAVE_SPACE_BASE_SOURCES)
 
 aux_source_directory ("src/flf/hud" FILLWAVE_HUD_SOURCES)
 aux_source_directory ("src/flf/management" FILLWAVE_MANAGEMENT_SOURCES)
-aux_source_directory ("src/flf/common" FILLWAVE_COMMON_SOURCES)
+aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/src/cmn FILLWAVE_COMMON_SOURCES)
 
 aux_source_directory ("src/flf/renderers" FILLWAVE_RENDERERS_SOURCES)
 

@@ -51,8 +51,6 @@ public:
 
   void reload();
 
-  void log();
-
  private:
   GLsizei mHowMany;
   GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];

@@ -1,7 +1,7 @@
 #include "../common.h"
 
-#include <fillwave/Fillwave.h>
-#include <fillwave/common/pointers/PointerCache.h>
+#include <flw/Fillwave.h>
+#include <flw/cmn/pointers/PointerCache.h>
 
 #include <iostream>
 

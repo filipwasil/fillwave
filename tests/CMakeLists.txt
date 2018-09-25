@@ -1,20 +1,24 @@
 set(TESTS_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 set (FILLWAVE_PRODUCTION_SOURCES
-    ${TESTS_DIR}/../src/flf/common/Strings.cpp
-    ${TESTS_DIR}/../src/flf/common/Observable.cpp
+    ${TESTS_DIR}/../src/cmn/Strings.cpp
+    ${TESTS_DIR}/../src/cmn/Observable.cpp
     )
 
 aux_source_directory (${TESTS_DIR}/framework TEST_FRAMEWORK_SOURCES)
 aux_source_directory (${TESTS_DIR}/stubs TEST_STUBS_SOURCES)
 aux_source_directory (${TESTS_DIR}/mocks TEST_MOCK_SOURCES)
+aux_source_directory (${TESTS_DIR}/mocks/flc TEST_MOCK_CORE_SOURCES)
+aux_source_directory (${TESTS_DIR}/mocks/flc/extended TEST_MOCK_CORE_EXTENDED_SOURCES)
 
 include_directories (${TESTS_DIR})
 
 set (FILLWAVE_MOCK_SOURCES
     ${TEST_FRAMEWORK_SOURCES}
     ${TEST_STUBS_SOURCES}
-    ${FILLWAVE_PRODUCTION_SOURCES}
+    ${FILLWAVE_COMMON_SOURCES}
+    ${TEST_MOCK_CORE_SOURCES}
+    ${TEST_MOCK_CORE_EXTENDED_SOURCES}
     )
 
 add_library (fillwave_stubs SHARED ${TEST_STUBS_SOURCES})

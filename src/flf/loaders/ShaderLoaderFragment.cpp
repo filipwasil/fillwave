@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flf/common/Strings.h>
+#include <flw/cmn/Strings.h>
 #include <flw/flf/loaders/ShaderLoaderFragment.h>
 
 namespace flw {

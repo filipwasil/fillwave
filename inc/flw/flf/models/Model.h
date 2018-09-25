@@ -27,7 +27,7 @@
 #include <flw/flf/loaders/modelloader/ModelLoaderTraits.h>
 #include <flw/flf/loaders/ProgramLoader.h>
 
-#include <flw/flf/common/pointers/PointerProtected.h>
+#include <flw/cmn/pointers/PointerProtected.h>
 
 
 namespace flw {

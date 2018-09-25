@@ -25,11 +25,11 @@
 
 #include <flw/flf/management/TextureSystem.h>
 
-#include <flw/flf/common/Aliases.h>
+#include <flw/cmn/Aliases.h>
 
 #include <flw/flf/space/Scene.h>
 
-#include <flw/flf/common/Macros.h>
+#include <flw/cmn/Macros.h>
 
 #include <flw/flf/actions/Event.h>
 

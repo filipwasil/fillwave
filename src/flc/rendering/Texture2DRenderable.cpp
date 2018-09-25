@@ -20,7 +20,7 @@
  */
 
 #include <flw/flc/rendering/Texture2DRenderable.h>
-#include <flw/flf/loaders/textureloader/TextureConfigs.h>
+#include <flw/cmn/TextureConfigs.h>
 #include <flw/Log.h>
 
 FLOGINIT_DEFAULT()

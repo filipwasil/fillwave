@@ -23,7 +23,7 @@
 #include <flw/flf/loaders/ShaderLoaderFragment.h>
 #include <flw/flf/loaders/ShaderLoaderVertex.h>
 #include <flw/Fillwave.h>
-#include <flw/flf/common/Strings.h>
+#include <flw/cmn/Strings.h>
 #include <flw/flf/management/LightSystem.h>
 #include <fstream>
 

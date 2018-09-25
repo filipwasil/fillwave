@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flf/common/Empty.h>
+#include <flw/cmn/Empty.h>
 
 namespace flw {
 namespace flf {

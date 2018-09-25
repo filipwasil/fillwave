@@ -23,7 +23,7 @@
 
 #include <flw/flf/loaders/modelloader/ModelLoaderTraits.h>
 #include <flw/flf/models/base/Material.h>
-#include <flw/flf/common/Empty.h>
+#include <flw/cmn/Empty.h>
 #include <flw/flf/loaders/modelloader/AnimatorDefault.h>
 
 namespace flw {

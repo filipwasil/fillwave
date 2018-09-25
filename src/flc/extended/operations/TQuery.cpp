@@ -93,17 +93,6 @@ void TQuery<TARGET>::reload() {
   fLogC("reload");
 }
 
-template <GLenum TARGET>
-void TQuery<TARGET>::log() {
-  for (GLsizei id = 0; id < mHowMany; ++id) {
-    if (glIsQuery(mHandles[id])) {
-      fLogI("Query ", mHandles[id], " exists");
-    } else {
-      fLogI("Query ", mHandles[id], " does not exist");
-    }
-  }
-}
-
 template
 class TQuery<GL_ANY_SAMPLES_PASSED>;
 

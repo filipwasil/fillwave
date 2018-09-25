@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flf/common/IPickable.h>
+#include <flw/cmn/IPickable.h>
 #include <flw/flf/space/base/ICamera.h>
 #include <flw/flf/models/base/IRenderable.h>
 #include <flw/flf/models/base/Moveable.h>

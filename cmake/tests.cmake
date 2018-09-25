@@ -28,7 +28,7 @@
   aux_source_directory (tests/framework TEST_FRAMEWORK_SOURCES)
   set(TEST_SOURCES_PRODUCTION
       ${FILLWAVE_PATH_SOURCE}/flf/models/base/Moveable.cpp
-      ${FILLWAVE_PATH_SOURCE}/flf/common/Easing.cpp)
+      ${FILLWAVE_PATH_SOURCE}/cmn/Easing.cpp)
 
 
   set (TEST_SOURCES

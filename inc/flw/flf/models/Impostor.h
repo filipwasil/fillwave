@@ -24,7 +24,7 @@
 #include <flw/flc/texturing/Texture2D.h>
 #include <flw/flc/extended/texturing/Sampler.h>
 #include <flw/flc/pipeline/Program.h>
-#include <flw/flf/common/Finishable.h>
+#include <flw/cmn/Finishable.h>
 #include <flw/flf/models/Entity.h>
 
 namespace flw {

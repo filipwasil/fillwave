@@ -1,7 +1,7 @@
 #include "../common.h"
 
-#include <fillwave/common/Aliases.h>
-#include <fillwave/common/allocators/AllocatorStack.h>
+#include <flw/cmn/Aliases.h>
+#include <flw/cmn/allocators/AllocatorStack.h>
 
 using namespace flw;
 

@@ -23,10 +23,10 @@
 
 #include <flw/flf/models/base/Moveable.h>
 
-#include <flw/flf/common/Observable.h>
-#include <flw/flf/common/Easing.h>
-#include <flw/flf/common/Containers.h>
-#include <flw/flf/common/Aliases.h>
+#include <flw/cmn/Observable.h>
+#include <flw/cmn/Easing.h>
+#include <flw/cmn/Containers.h>
+#include <flw/cmn/Aliases.h>
 
 #include <flw/OpenGL.h>
 #include <flw/Math.h>

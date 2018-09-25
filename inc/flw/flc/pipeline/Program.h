@@ -24,7 +24,7 @@
 #include <flw/flc/pipeline/Uniform.h>
 #include <flw/flc/pipeline/Shader.h>
 #include <flw/flc/extended/pipeline/UniformBuffer.h>
-#include <flw/flf/common/Aliases.h>
+#include <flw/cmn/Aliases.h>
 
 class Attribute;
 

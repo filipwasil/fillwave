@@ -20,7 +20,7 @@
  */
 
 #include <flw/Fillwave.h>
-#include <flw/flf/common/Strings.h>
+#include <flw/cmn/Strings.h>
 #include <flw/flf/management/LightSystem.h>
 
 

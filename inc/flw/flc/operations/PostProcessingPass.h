@@ -23,7 +23,7 @@
 
 #include <flw/flc/pipeline/Program.h>
 #include <flw/flc/rendering/Texture2DRenderableDynamic.h>
-#include <flw/flf/common/Finishable.h>
+#include <flw/cmn/Finishable.h>
 
 namespace flw {
 namespace flc {

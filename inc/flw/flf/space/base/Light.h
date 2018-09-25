@@ -23,7 +23,7 @@
 
 #include <flw/flc/rendering/Texture2DRenderable.h>
 #include <flw/flf/models/base/Moveable.h>
-#include <flw/flf/common/IObserver.h>
+#include <flw/cmn/IObserver.h>
 
 namespace flw {
 namespace flf {
