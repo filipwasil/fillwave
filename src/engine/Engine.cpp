@@ -46,7 +46,7 @@ namespace flw {
 Engine::Engine(const std::string& runtimeBinaryFilePath, bool /*isEveryExtensionSuccessfullyLoaded*/)
   : mWindowWidth(1)
   , mWindowHeight(1)
-  , mWindowAspectRatio(mWindowHeight / mWindowWidth)
+  , mWindowAspectRatio(static_cast<GLfloat>(mWindowHeight) / static_cast<GLfloat>(mWindowWidth))
   , mFileLoader(getFilePathOnly(runtimeBinaryFilePath.c_str()))
   , mProgramLoader(this)
   , mModelLoader()
