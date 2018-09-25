@@ -26,7 +26,7 @@
 namespace flw {
 namespace flf {
 
-constexpr size_t MAX_CACHE_SIZE = 5000;
+constexpr size_t MAX_CACHE_SIZE = 1000;
 
 /**
  * \brief Basic manager of composites
@@ -41,26 +41,68 @@ constexpr size_t MAX_CACHE_SIZE = 5000;
  */
 
 template <size_t M, class T, class K, typename ... P>
-struct TCache final : public std::unordered_map<K, std::unique_ptr<T>> {
+struct TCache final {
+ private:
+  std::unordered_map<K, std::unique_ptr<T>> mStored;
+
+ public:
   /**
    * \brief Add new allocated item to manager.
    */
   T *store(const K &key, P ... parameters) {
-    if ((*this).find(key) != (*this).end()) {
-      return (*this)[key].get();
+    if (mStored.find(key) != mStored.end()) {
+      return mStored[key].get();
     }
-    return (*this).size() >= M ? nullptr : ((*this)[key] = std::make_unique<T>(parameters...)).get();
+    return mStored.size() >= M ? nullptr : (mStored[key] = std::make_unique<T>(parameters...)).get();
   }
 
   /**
    * \brief Add already allocated item to manager.
    */
   T *store(T *item, const K &key) {
-    if ((*this).find(key) != (*this).end()) {
+    if (mStored.find(key) != mStored.end()) {
       delete item;
-      return (*this)[key].get();
+      return mStored[key].get();
     }
-    return (*this).size() >= M ? nullptr : ((*this)[key] = std::unique_ptr<T>(item)).get();
+    return mStored.size() >= M ? nullptr : (mStored[key] = std::unique_ptr<T>(item)).get();
+  }
+
+  /**
+   * \brief return nullptr when item not present
+   */
+  T* get(const K &key) {
+    if (mStored.find(key) != mStored.end()) {
+      return mStored[key].get();
+    }
+    return nullptr;
+  }
+
+  /**
+   * \brief begin
+   */
+  decltype(std::begin(mStored)) begin() {
+    return std::begin(mStored);
+  }
+
+  /**
+   * \brief end
+   */
+  decltype(std::end(mStored)) end() {
+    return std::end(mStored);
+  }
+
+  /**
+   * \brief erase
+   */
+  decltype(mStored.erase(K())) erase (const K& key) {
+    return mStored.erase(key);
+  }
+
+  /**
+   * \brief return current size
+   */
+  size_t size() {
+    return mStored.size();
   }
 };
 

@@ -77,8 +77,8 @@ flc::Texture2D* TextureSystem::get(const std::string &texturePath) {
     return nullptr;
   }
 
-  if (mTextures2D.find(filePath) != mTextures2D.end()) {
-    return mTextures2D[filePath].get();
+  if (nullptr != mTextures2D.get(filePath)) {
+    return mTextures2D.get(filePath);
   }
 
   if (flc::TextureConfig* file = mLoader.load(filePath, GL_RGBA, mRootPath)) {
