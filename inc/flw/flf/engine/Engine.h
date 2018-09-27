@@ -296,7 +296,7 @@ class Engine {
   flc::VertexBufferBasic*
     storeBufferInternal(
       flc::VertexArray* vao
-      , flf::TerrainConstructor* constructor
+      , std::function<float(float x, float y)> constructor
       , GLint density
       , GLfloat gap
       , vec<GLuint> &indices);

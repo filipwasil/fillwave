@@ -32,7 +32,7 @@ namespace flf {
 using namespace std;
 
 FileLoader::FileLoader(const string &rootPath)
-    : mRootPath(rootPath) {
+  : mRootPath(rootPath) {
   // nothing
 }
 

@@ -38,7 +38,7 @@ namespace flf {
  */
 struct CacheBuffer {
   TCache<MAX_CACHE_SIZE, flc::VertexArray, IReloadable *> mVertexArrays;
-  TCache<MAX_CACHE_SIZE, flc::VertexBufferBasic, flc::VertexArray *, flf::TerrainConstructor *, GLint, GLfloat, std::vector<GLuint> &> mVertices;
+  TCache<MAX_CACHE_SIZE, flc::VertexBufferBasic, flc::VertexArray *, std::function<float(float x, float y)>, GLint, GLfloat, std::vector<GLuint> &> mVertices;
   TCache<MAX_CACHE_SIZE, flc::IndexBuffer, flc::VertexArray *, std::vector<GLuint> &> mIndices;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferText, flc::VertexArray *, const std::vector<GLfloat> &, const std::vector<GLfloat> &> mVerticesText;
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)

@@ -28,12 +28,13 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flc {
 
-VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
-    GLint chunkDensity,
-    GLfloat gapSize,
-    const std::vector<GLuint> &indices,
-    GLuint dataStoreModification)
-    : TVertexBuffer<VertexBasic>(dataStoreModification) {
+VertexBufferBasic::VertexBufferBasic(
+  std::function<float(float x, float y)> constructor
+  , GLint chunkDensity
+  , GLfloat gapSize
+  , const std::vector<GLuint> &indices
+  , GLuint dataStoreModification)
+  : TVertexBuffer<VertexBasic>(dataStoreModification) {
 
   flc::VertexBasic vertex;
 
@@ -48,7 +49,7 @@ VertexBufferBasic::VertexBufferBasic(flf::TerrainConstructor *constructor,
       vertex.mPosition[3] = 1.0;
       vertex.mTextureUV[0] = x / chunkDensity;
       vertex.mTextureUV[1] = z / chunkDensity;
-      vertex.mPosition[1] = constructor->calculateHeight(vertex.mTextureUV[0], vertex.mTextureUV[1]);
+      vertex.mPosition[1] = constructor(vertex.mTextureUV[0], vertex.mTextureUV[1]);
       mDataVertices.push_back(vertex);
     }
   }

@@ -23,7 +23,6 @@
 
 #include <flw/flf/models/Mesh.h>
 #include <flw/flf/models/base/Programmable.h>
-#include <flw/flf/models/terrain/TerrainConstructor.h>
 
 namespace flw {
 class Engine;
@@ -37,17 +36,17 @@ class MeshTerrain : public Programmable {
 public:
   MeshTerrain(Engine *engine,
       flc::Program *program,
-      TerrainConstructor *constructor,
-      const Material &material,
-      const std::string &diffuseMapPath,
-      const std::string &normalMapPath,
-      const std::string &specularMapPath,
+      std::function<float(float x, float y)> constructor,
+      const Material& material,
+      const std::string& diffuseMapPath,
+      const std::string& normalMapPath,
+      const std::string& specularMapPath,
       GLuint radius,
       GLuint density = 8);
 
   MeshTerrain(Engine *engine,
       flc::Program *program,
-      TerrainConstructor *constructor,
+      std::function<float(float x, float y)> constructor,
       const Material &material,
       flc::Texture2D *diffuseMapPath,
       flc::Texture2D *normalMapPath,

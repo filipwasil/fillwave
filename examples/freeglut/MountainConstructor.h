@@ -47,7 +47,7 @@ public:
 
   GLboolean calculateActiveVoxel(GLfloat x, GLfloat z, GLfloat y);
 
-  GLfloat calculateHeight(GLfloat x, GLfloat z);
+  GLfloat calculateHeight(GLfloat x, GLfloat z) const;
 };
 
 } /* framework */

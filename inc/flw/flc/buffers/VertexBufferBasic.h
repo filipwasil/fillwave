@@ -21,8 +21,6 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flf/models/terrain/TerrainConstructor.h>
-
 #include <flw/flc/buffers/TVertexBuffer.h>
 
 #include <flw/flf/loaders/ModelLoader.h>
@@ -63,11 +61,13 @@ struct FaceBasic {
 class VertexBufferBasic : public TVertexBuffer<VertexBasic> {
 public:
 
-  VertexBufferBasic(flf::TerrainConstructor* constructor,
-      GLint chunkDensity,
-      GLfloat gapSize,
-      const std::vector<GLuint> &indices,
-      GLuint dataStoreModification = GL_STATIC_DRAW);
+  VertexBufferBasic(
+    std::function<float(float x, float y)> constructor
+    , GLint chunkDensity
+    , GLfloat gapSize
+    , const std::vector<GLuint> &indices
+    , GLuint dataStoreModification = GL_STATIC_DRAW);
+
 
   VertexBufferBasic(const std::vector<flc::VertexBasic> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW);
 

@@ -25,7 +25,6 @@
 #include <flw/flf/models/Entity.h>
 #include <flw/flf/models/Skybox.h>
 #include <flw/flf/models/Cursor.h>
-#include <flw/flf/models/Terrain.h>
 #include <flw/flf/models/base/IDrawable.h>
 #include <flw/flf/renderers/RendererFR.h>
 #include <flw/cmn/pointers/PointerProtected.h>

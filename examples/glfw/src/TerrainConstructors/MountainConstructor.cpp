@@ -53,7 +53,7 @@ GLboolean MountainConstructor::calculateActiveVoxel(GLfloat x, GLfloat z, GLfloa
   }
 }
 
-inline GLfloat MountainConstructor::calculateHeight(GLfloat x, GLfloat z) {
+inline GLfloat MountainConstructor::calculateHeight(GLfloat x, GLfloat z) const {
 //   fLogU("X: %f Z: %f Y: %f", x,z,glm::sin(glm::radians(360*x)) * glm::sin(glm::radians(360*z)));
   return glm::sin(glm::radians(360 * x)) * glm::sin(glm::radians(360 * z));
 }

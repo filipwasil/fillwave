@@ -447,9 +447,9 @@ void Engine::configDebugger(EDebuggerState state) {
   mDebugger->setState(state);
 }
 
-VertexBufferBasic* Engine::storeBufferInternal(
+VertexBufferBasic* Engine::storeBufferInternal (
   VertexArray* vao
-  , flf::TerrainConstructor* constructor
+  , std::function<float(float x, float y)> constructor
   , GLint density
   , GLfloat gap
   , vector<GLuint> &indices) {

@@ -31,7 +31,7 @@ namespace flf {
 // todo code duplication in constructors
 MeshTerrain::MeshTerrain(Engine *engine,
   flc::Program *program,
-  TerrainConstructor *constructor,
+  std::function<float(float x, float y)> constructor,
   const Material & /*material*/, //xxx to be used
   const std::string &diffuseMapPath,
   const std::string &normalMapPath,
@@ -91,7 +91,7 @@ MeshTerrain::MeshTerrain(Engine *engine,
 //xxx code duplication in constructors. fix
 MeshTerrain::MeshTerrain(Engine *engine,
     flc::Program *program,
-    TerrainConstructor *constructor,
+    std::function<float(float x, float y)> constructor,
     const Material& /*material*/, //xxx to be used
     flc::Texture2D* diffuseMap,
     flc::Texture2D* normalMap,

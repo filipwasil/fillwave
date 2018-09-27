@@ -1,18 +1,11 @@
 #include <example.h>
 #include <ContextGLFW.h>
 #include <flw/flf/models/shapes/Sphere.h>
-#include <flw/flf/models/terrain/TerrainConstructor.h>
 #include <memory>
 
 using namespace flw;
 using namespace flw::flf;
 using namespace flw::flc;
-
-struct MountainConstructor : public TerrainConstructor {
-  GLfloat calculateHeight(GLfloat x, GLfloat z) {
-    return glm::abs(glm::sin(glm::radians(360 * x)) * glm::sin(glm::radians(360 * z)));
-  }
-};
 
 int main(int argc, char* argv[]) {
   auto context = std::make_unique<ContextGLFW>(argc, argv);
@@ -172,7 +165,7 @@ void init() {
   auto terrain = std::make_unique<MeshTerrain>(
     engine
     , programs.getProgram(EProgram::basic)
-    , new MountainConstructor()
+    , [](float x, float z) { return glm::abs(glm::sin(glm::radians(360 * x)) * glm::sin(glm::radians(360 * z))); }
     , Material()
     , "textures/test.png"
     , "textures/testNormal.png"

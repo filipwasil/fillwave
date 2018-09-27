@@ -37,7 +37,6 @@
 #include <flw/flf/models/shapes/BoxOcclusion.h>
 #include <flw/flf/models/shapes/Box.h>
 #include <flw/flf/models/Skybox.h>
-#include <flw/flf/models/Terrain.h>
 #include <flw/flf/models/MeshTerrain.h>
 
 /* HUD */
