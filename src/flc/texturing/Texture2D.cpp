@@ -31,7 +31,13 @@ Texture2D::Texture2D(TextureConfig* cfg, ParameterList &parameters, GLuint howMa
   : mTexture(howMany)
   , mCfg(pu<TextureConfig>(cfg))
   , mParameters(parameters) {
-  reload();
+  glGenTextures(mTexture.mHowMany, mTexture.mHandles);
+  for (GLsizei i = 0; i < mTexture.mHowMany; i++) {
+    bind(i);
+    setParameters(mParameters);
+    sendData();
+    generateMipMaps();
+  }
 }
 
 void Texture2D::sendData(GLubyte* data) {

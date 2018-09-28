@@ -51,6 +51,7 @@
 
 #include <flw/flf/management/LightSystem.h>
 
+#include <flw/flf/models/MeshOcclusion.h>
 
 #include <flw/flc/operations/PostProcessingPass.h>
 
@@ -225,9 +226,7 @@ class Engine {
 #endif
 
   /* OQ */
-  flc::Program* mProgramOcclusionBox;
-  flc::VertexBufferPosition* mVBOOcclusion;
-  flc::VertexArray* mVAOOcclusion;
+  pu<flf::MeshOcclusion> mOcclusion;
 
   /* Input handlers */
   vec<flf::EventHandler> mHandlers;

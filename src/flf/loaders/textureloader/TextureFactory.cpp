@@ -115,7 +115,7 @@ flc::TextureConfig* TextureFactory::loadVirtualFileCheckboard(
 
   cfg->mData = make_pu_with_no_ownership<GLubyte>(content);
 
-  cfg->mAllocation = flc::EMemoryAllocation::standard;
+  cfg->mAllocation = flc::EMemoryAllocation::standardBrace;
 
   return cfg;
 }

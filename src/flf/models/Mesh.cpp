@@ -30,8 +30,6 @@ FLOGINIT("Mesh", FERROR | FFATAL | FINFO)
 namespace flw {
 namespace flf {
 
-const GLint gOQVertices = 36; //todo move it from here
-
 Mesh::Mesh(Engine* engine,
     const Material& material,
     flc::Texture2D* diffuseMap,
@@ -44,11 +42,12 @@ Mesh::Mesh(Engine* engine,
     flc::Program* programAmbientOcclusionGeometry,
     flc::Program* programAmbientOcclusionColor,
     LightSystem& lights,
+    flc::VertexArray* vao,
+    bool isVAOInitialized,
     flc::VertexBufferBasic* vbo,
     flc::IndexBuffer* ibo,
     ModelLoader::Animator* animator,
-    GLenum renderMode,
-    flc::VertexArray *vao)
+    GLenum renderMode)
     : IReloadable(engine, vao)
     , mMaterial(material)
     , mDiffuseMap(diffuseMap)
@@ -74,9 +73,13 @@ Mesh::Mesh(Engine* engine,
 #endif
 {
   initPipeline();
-  initVBO();
-  initVAO();
+  if (!isVAOInitialized) {
+    initVBO();
+    initVAO();
+  }
   initUniformsCache();
+
+  mOcclusionMatrix = glm::scale(glm::mat4(1.0f), mVBO->getOcclusionBoxSize());
 }
 
 Mesh::~Mesh() {
@@ -355,7 +358,6 @@ inline void Mesh::initVAO() {
 
 inline void Mesh::initVBO() {
   mVBO->initAttributes(mProgram->getHandle());
-  mOcclusionMatrix = glm::scale(glm::mat4(1.0f), mVBO->getOcclusionBoxSize());
 }
 
 void Mesh::log() const {
@@ -398,7 +400,7 @@ void Mesh::drawOcclusionBox(ICamera &camera) {
 
   mOcclusionQuery.begin();
 
-  glDrawArrays(mRenderMode, 0, gOQVertices);
+  glDrawArrays(mRenderMode, 0, VERTICES_CUBE_COUNT);
 
   fLogC("drawOcclusionBox failed");
 

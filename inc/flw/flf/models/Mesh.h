@@ -62,11 +62,12 @@ public:
       flc::Program* programAmbientOcclusionGeometry,
       flc::Program* programAmbientOcclusionColor,
       LightSystem &lights,
+      flc::VertexArray* vao,
+      bool isVAOInitialized,
       flc::VertexBufferBasic* vbo = nullptr,
       flc::IndexBuffer* ibo = nullptr,
       ModelLoader::Animator* animator = nullptr,
-      GLenum renderMode = GL_TRIANGLES,
-      flc::VertexArray* vao = nullptr);
+      GLenum renderMode = GL_TRIANGLES);
 
   ~Mesh() override;
 
@@ -157,6 +158,9 @@ private:
   void bindTextures();
 
   void coreDraw();
+
+ private:
+  const GLint VERTICES_CUBE_COUNT = 36;
 };
 
 } /* flf */

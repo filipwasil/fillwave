@@ -70,11 +70,12 @@ RendererDR::RendererDR(Engine *engine, ProgramLoader &loader)
                                                nullptr,
                                                nullptr,
                                                mLights,
+                                               vao,
+                                               false,
                                                engine->storeBuffer<flc::VertexBufferBasic>(vao, vertices),
                                                engine->storeBuffer<flc::IndexBuffer>(vao, indices),
                                                nullptr,
-                                               GL_TRIANGLES,
-                                               vao);
+                                               GL_TRIANGLES);
 
   initUniforms();
   initGeometryBuffer();

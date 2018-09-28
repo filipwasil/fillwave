@@ -50,7 +50,7 @@ public:
 
   void reload();
 
-protected:
+ protected:
   flc::VertexArray* mVAO;
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else

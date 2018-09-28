@@ -53,8 +53,16 @@ MeshTerrain::MeshTerrain(Engine *engine,
   auto vao = new flc::VertexArray();
   auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
   auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, indices);
+  vbo->initAttributes(program->getHandle());
+  vao->bind();
+  vbo->bind();
+  vbo->attributesSetForVAO();
+  vbo->send();
+  ibo->bind();
+  ibo->send();
+  flc::VertexArray::unbindVAO();
 
-  Material m;
+  Material m {};
 
   for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; ++x) {
     for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; ++z) {
@@ -75,11 +83,12 @@ MeshTerrain::MeshTerrain(Engine *engine,
 #endif
         , loader.getProgram(EProgram::ambientOcclusionColor)
         , engine->getLightSystem()
+        , vao
+        , true
         , vbo
         , ibo
         , nullptr
-        , GL_TRIANGLES
-        , vao);
+        , GL_TRIANGLES);
 
       ptr->moveTo(glm::vec3(density * gapSize * (GLfloat(x)), 0.0, density * gapSize * (GLfloat(z))));
 
@@ -113,26 +122,37 @@ MeshTerrain::MeshTerrain(Engine *engine,
   auto vao = new flc::VertexArray();
   auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, constructor, density, gapSize, indices);
   auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, indices);
+  vbo->initAttributes(mProgram->getHandle());
+  vao->bind();
+  vbo->bind();
+  vbo->attributesSetForVAO();
+  vbo->send();
+  ibo->bind();
+  ibo->send();
+  flc::VertexArray::unbindVAO();
 
+  Material m {};
   for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; ++x) {
     for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; ++z) {
-      pu<Mesh> ptr = std::make_unique<Mesh>(engine,
-                                          Material(),
-                                          diffuseMap,
-                                          normalMap,
-                                          specularMap,
-                                          program,
-                                          loader.getProgram(EProgram::shadow),
-                                          loader.getProgram(EProgram::shadowColorCoded),
-                                          loader.getProgram(EProgram::occlusionOptimizedQuery),
-                                          loader.getProgram(EProgram::ambientOcclusionGeometry),
-                                          loader.getProgram(EProgram::ambientOcclusionColor),
-                                          engine->getLightSystem(),
-                                          vbo,
-                                          ibo,
-                                          nullptr,
-                                          GL_TRIANGLES,
-                                          vao);
+      pu<Mesh> ptr = std::make_unique<Mesh>(
+        engine
+        , m
+        , diffuseMap
+        , normalMap
+        , specularMap
+        , program
+        , loader.getProgram(EProgram::shadow)
+        , loader.getProgram(EProgram::shadowColorCoded)
+        , loader.getProgram(EProgram::occlusionOptimizedQuery)
+        , loader.getProgram(EProgram::ambientOcclusionGeometry)
+        , loader.getProgram(EProgram::ambientOcclusionColor)
+        , engine->getLightSystem()
+        , vao
+        , true
+        , vbo
+        , ibo
+        , nullptr
+        , GL_TRIANGLES);
 
       ptr->moveTo(glm::vec3(density * gapSize * (GLfloat(x)), 0.0, density * gapSize * (GLfloat(z))));
       attach(std::move(ptr));

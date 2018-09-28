@@ -162,16 +162,17 @@ void init() {
   engine->configFPSCounter("FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
   engine->storeText("Benchmark", "FreeSans", glm::vec2(-0.95f, -0.85f), 50.0f);
 
+  Material m{};
   auto terrain = std::make_unique<MeshTerrain>(
     engine
     , programs.getProgram(EProgram::basic)
     , [](float x, float z) { return glm::abs(glm::sin(glm::radians(360 * x)) * glm::sin(glm::radians(360 * z))); }
-    , Material()
+    , m
     , "textures/test.png"
     , "textures/testNormal.png"
     , ""
-    , 20
-    , 16);
+    , 4
+    , 4);
   terrain->scaleTo(0.1);
   terrain->moveToY(-2.0);
   engine->getCurrentScene()->attach(std::move(terrain));

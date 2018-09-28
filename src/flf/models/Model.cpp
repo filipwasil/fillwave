@@ -52,7 +52,7 @@ Model::Model(Engine* engine,
   initShadowing();
   initUniformsCache();
 
-  auto vao = new flc::VertexArray();
+  auto* vao = new flc::VertexArray();
   attach(std::make_unique<Mesh>(
     mEngine
     , material
@@ -70,11 +70,12 @@ Model::Model(Engine* engine,
 #endif
     , mProgramLoader.getProgram(EProgram::ambientOcclusionColor)
     , mEngine->getLightSystem()
+    , vao
+    , false
     , mEngine->storeBuffer<flc::VertexBufferBasic>(vao, vertices)
     , engine->storeBuffer<flc::IndexBuffer>(vao, indices)
     , mAnimator.get()
-    , GL_TRIANGLES
-    , vao)
+    , GL_TRIANGLES)
   );
 }
 
@@ -306,11 +307,12 @@ pu<Mesh> Model::loadMesh(
 #endif
     , mProgramLoader.getProgram(EProgram::ambientOcclusionColor)
     , mEngine->getLightSystem()
+    , vao
+    , false
     , engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get())
     , engine->storeBuffer<flc::IndexBuffer>(vao, shape)
     , mAnimator.get()
-    , GL_TRIANGLES
-    , vao);
+    , GL_TRIANGLES);
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
   #error "option not suppoerted"
 #endif

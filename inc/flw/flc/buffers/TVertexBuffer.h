@@ -83,7 +83,6 @@ public:
     if (mAttributes.empty()) {
       getAttributes(programHandle);
     }
-    return;
   }
 
   void attributesSetForVAO() {

@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * The MIT License (MIT)
  *
@@ -19,35 +21,46 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/Fillwave.h>
-
 #include <flw/flf/models/base/IReloadable.h>
 
 namespace flw {
+
+namespace flc {
+class Program;
+class VertexBufferPosition;
+class VertexArray;
+}
+
+class Engine;
+
 namespace flf {
+class Scene;
 
-IReloadable::IReloadable(Engine* engine, flc::VertexArray* vao)
-  : mVAO(engine->storeVAO(this, vao))
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-  {
-#else
-  , mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)) {
-  mSampler->bind();
-  mSampler->setParameter(GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-  mSampler->setParameter(GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-  mSampler->setParameter(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-#endif
-}
+class MeshOcclusion : public IReloadable {
+ public:
+  MeshOcclusion(Engine* engine);
 
-IReloadable::~IReloadable() = default;
+  ~MeshOcclusion() override;
 
-void IReloadable::reload() {
-  initBuffers();
-  initPipeline();
-  initVBO();
-  initVAO();
-  initUniformsCache();
-}
+  void initBuffers() override;
+
+  void initPipeline() override;
+
+  void initUniformsCache() override;
+
+  void initVAO() override;
+
+  void initVBO() override;
+
+  void draw(Scene& scene);
+
+  void reload();
+
+ private:
+  Engine* mEngine;
+  flc::Program* mProgram;
+  flc::VertexBufferPosition* mVBO;
+};
 
 } /* flf */
 } /* flw */

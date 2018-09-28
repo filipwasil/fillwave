@@ -49,7 +49,7 @@ struct TCache final {
   /**
    * \brief Add new allocated item to manager.
    */
-  T *store(const K &key, P ... parameters) {
+  T *store(const K &key, const P&... parameters) {
     if (mStored.find(key) != mStored.end()) {
       return mStored[key].get();
     }

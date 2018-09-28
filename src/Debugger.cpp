@@ -19,13 +19,13 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/Fillwave.h>
-
 #include <flw/flf/management/LightSystem.h>
 
 #include <flw/flf/loaders/ProgramLoader.h>
 
 #include <flw/flc/extended/rendering/FramebufferGeometry.h>
+
+#include <flw/Fillwave.h>
 
 namespace flw {
 namespace flf {

@@ -37,7 +37,6 @@ namespace flf {
  * \brief Connects VAO pointer and VAO's user pointer in single class.
  */
 struct CacheBuffer {
-  TCache<MAX_CACHE_SIZE, flc::VertexArray, IReloadable *> mVertexArrays;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferBasic, flc::VertexArray *, std::function<float(float x, float y)>, GLint, GLfloat, std::vector<GLuint> &> mVertices;
   TCache<MAX_CACHE_SIZE, flc::IndexBuffer, flc::VertexArray *, std::vector<GLuint> &> mIndices;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferText, flc::VertexArray *, const std::vector<GLfloat> &, const std::vector<GLfloat> &> mVerticesText;
@@ -49,6 +48,7 @@ struct CacheBuffer {
   TCache<MAX_CACHE_SIZE, flc::VertexBufferDebug, flc::VertexArray *, GLfloat> mVerticesDebugger;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferFloat, flc::VertexArray *, std::vector<flc::VertexFloat> &> mVerticesFloat;
   TCache<MAX_CACHE_SIZE, flc::VertexBufferPosition, flc::VertexArray *, std::vector<flc::VertexPosition> &> mVerticesPosition;
+  TCache<MAX_CACHE_SIZE, flc::VertexArray, IReloadable *> mVertexArrays;
 };
 
 } /* flf */

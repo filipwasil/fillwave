@@ -76,9 +76,6 @@ void Engine::initManagement() {
 }
 
 void Engine::initPipelines() {
-  /* OT */
-  mProgramOcclusionBox = mProgramLoader.getProgram(flf::EProgram::occlusionOptimizedQuery);
-
   /* T */
   mProgramTextureLookup = mProgramLoader.getProgram(flf::EProgram::quad);
 }
@@ -90,15 +87,7 @@ void Engine::initUniforms() {
 }
 
 void Engine::initOcclusionTest() {
-  vec<flc::VertexPosition> vec = flf::BoxOcclusion().getVertices();
-  mVAOOcclusion = new flc::VertexArray();
-  mVBOOcclusion = mBuffers.mVerticesPosition.store(mVAOOcclusion, vec);
-  mVBOOcclusion->initAttributes(mProgramOcclusionBox->getHandle());
-  mVAOOcclusion->bind();
-  mVBOOcclusion->bind();
-  mVBOOcclusion->attributesSetForVAO();
-  mVBOOcclusion->send();
-  flc::VertexArray::unbindVAO();
+  mOcclusion = make_pu<flf::MeshOcclusion>(this);
 }
 
 void Engine::initExtras() {
@@ -198,7 +187,7 @@ void Engine::initContext(void) {
 }
 
 Engine::~Engine() {
-
+  // nothing
 }
 
 void Engine::configBackgroundColor(glm::vec3 color) {
@@ -233,7 +222,7 @@ Texture2DRenderable* Engine::storeTextureRenderable() {
 
 Texture2DRenderableDynamic* Engine::storeTextureDynamic(const string& fragmentShaderPath) {
   const string path = fragmentShaderPath;
-  Program* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
+  auto* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
   return mTextures->getDynamic(path, program, glm::ivec2(mWindowWidth, mWindowHeight));;
 }
 
@@ -373,12 +362,12 @@ pp<flf::Scene> Engine::getCurrentScene() const {
   return pp<flf::Scene>(mScene.get());
 }
 
-flf::LightSystem &Engine::getLightSystem() const {
-  return* mLights.get();
+flf::LightSystem& Engine::getLightSystem() const {
+  return *mLights.get();
 }
 
 flf::TextureSystem &Engine::getTextureSystem() const {
-  return* mTextures.get();
+  return *mTextures.get();
 }
 
 void Engine::getPhysicalMeshBuffer(const string& shapePath, flf::PhysicsMeshBuffer& buffer) {
@@ -391,13 +380,13 @@ const std::string Engine::getGlobalPath(const std::string& localPath) {
 
 void Engine::addPostProcess(const string& fragmentShaderPath, GLfloat lifeTime) {
   auto* program = mProgramLoader.getQuadCustomFragmentShader(fragmentShaderPath);
-    PostProcessingPass pass(
-      program
-      , mTextures->getDynamic(
-        fragmentShaderPath
-        , program
-        , glm::ivec2(mWindowWidth, mWindowHeight))
-      , lifeTime);
+  PostProcessingPass pass(
+    program
+    , mTextures->getDynamic(
+      fragmentShaderPath
+      , program
+      , glm::ivec2(mWindowWidth, mWindowHeight))
+    , lifeTime);
   mPostProcessingPasses.push_back(pass);
   fLogD("Post processing pass added: %s", fragmentShaderPath.c_str());
 }
@@ -657,19 +646,7 @@ void Engine::drawSceneCore() {
 }
 
 void Engine::drawOcclusionPass() {
-  mVAOOcclusion->bind();
-
-  glDisable(GL_CULL_FACE);
-  glDepthMask(GL_FALSE);
-  glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
-
-  mScene->drawOcclusion();
-
-  glEnable(GL_CULL_FACE);
-  glDepthMask(GL_TRUE);
-  glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-
-  flc::VertexArray::unbindVAO();
+  mOcclusion->draw(*mScene.get());
 }
 
 void Engine::populateLights() {
