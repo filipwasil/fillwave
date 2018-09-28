@@ -41,9 +41,10 @@ struct VertexText {
 
 class VertexBufferText : public TVertexBuffer<VertexText> {
 public:
-  VertexBufferText(const std::vector<GLfloat> &data,
-      const std::vector<GLfloat> &textureCoords,
-      GLuint dataStoreModification = GL_DYNAMIC_DRAW);
+  VertexBufferText(
+    const std::vector<GLfloat>& data
+    , const std::vector<GLfloat>& textureCoords
+    , GLuint dataStoreModification = GL_DYNAMIC_DRAW);
 
   ~VertexBufferText() override = default;
 

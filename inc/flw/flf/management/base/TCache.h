@@ -53,7 +53,11 @@ struct TCache final {
     if (mStored.find(key) != mStored.end()) {
       return mStored[key].get();
     }
-    return mStored.size() >= M ? nullptr : (mStored[key] = std::make_unique<T>(parameters...)).get();
+    if (mStored.size() >= M) {
+      return nullptr;
+    }
+    mStored[key] = std::make_unique<T>(parameters...);
+    return mStored[key].get();
   }
 
   /**
@@ -61,7 +65,9 @@ struct TCache final {
    */
   T *store(T *item, const K &key) {
     if (mStored.find(key) != mStored.end()) {
-      delete item;
+      if (nullptr != item) {
+        delete item;
+      }
       return mStored[key].get();
     }
     return mStored.size() >= M ? nullptr : (mStored[key] = std::unique_ptr<T>(item)).get();

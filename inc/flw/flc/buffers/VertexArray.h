@@ -46,7 +46,7 @@ public:
 
  private:
   GLsizei mHowMany;
-  GLuint mHandles[FILLWAVE_GLOBJECTS_MAX];
+  GLuint mHandles[2];
 };
 
 void bindVAO(GLuint handle);

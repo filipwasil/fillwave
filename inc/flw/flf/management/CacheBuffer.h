@@ -37,18 +37,57 @@ namespace flf {
  * \brief Connects VAO pointer and VAO's user pointer in single class.
  */
 struct CacheBuffer {
-  TCache<MAX_CACHE_SIZE, flc::VertexBufferBasic, flc::VertexArray *, std::function<float(float x, float y)>, GLint, GLfloat, std::vector<GLuint> &> mVertices;
-  TCache<MAX_CACHE_SIZE, flc::IndexBuffer, flc::VertexArray *, std::vector<GLuint> &> mIndices;
-  TCache<MAX_CACHE_SIZE, flc::VertexBufferText, flc::VertexArray *, const std::vector<GLfloat> &, const std::vector<GLfloat> &> mVerticesText;
+  TCache<MAX_CACHE_SIZE
+    , flc::VertexArray
+    , IReloadable *> mVertexArrays;
+
+  TCache<MAX_CACHE_SIZE
+    , flc::VertexBufferBasic
+    , flc::VertexArray*
+    , std::function<float(float x, float y)>
+    , GLint, GLfloat
+    , const std::vector<GLuint> &> mVertices;
+
+  TCache<MAX_CACHE_SIZE
+    , flc::IndexBuffer
+    , flc::VertexArray*
+    , const std::vector<GLuint> &> mIndices;
+
+  TCache<MAX_CACHE_SIZE
+    , flc::VertexBufferText
+    , flc::VertexArray*
+    , const std::vector<GLfloat>&
+    , const std::vector<GLfloat> &> mVerticesText;
+
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
-  TCache<MAX_CACHE_SIZE, std::vector<flc::VertexBufferParticlesGPU *>, flc::VertexArray *, std::vector<flc::VertexParticleGPU> &> mVerticesParticlesGPU;
+  TCache<MAX_CACHE_SIZE
+    , std::vector<pu<flc::VertexBufferParticlesGPU>>
+    , flc::VertexArray*
+    , const std::vector<flc::VertexParticleGPU> &> mVerticesParticlesGPU;
+
 #endif
-  TCache<MAX_CACHE_SIZE, flc::VertexBufferParticles, flc::VertexArray *, std::vector<GLfloat> &, std::vector<GLfloat> &, std::vector<GLfloat> &> mVerticesParticles;
-  TCache<MAX_CACHE_SIZE, flc::VertexBufferDebug, flc::VertexArray *, GLfloat> mVerticesDebugger;
-  TCache<MAX_CACHE_SIZE, flc::VertexBufferFloat, flc::VertexArray *, std::vector<flc::VertexFloat> &> mVerticesFloat;
-  TCache<MAX_CACHE_SIZE, flc::VertexBufferPosition, flc::VertexArray *, std::vector<flc::VertexPosition> &> mVerticesPosition;
-  TCache<MAX_CACHE_SIZE, flc::VertexArray, IReloadable *> mVertexArrays;
+  TCache<MAX_CACHE_SIZE
+    , flc::VertexBufferParticles
+    , flc::VertexArray*
+    , std::vector<GLfloat>&
+    , std::vector<GLfloat>&
+    , std::vector<GLfloat> &> mVerticesParticles;
+
+  TCache<MAX_CACHE_SIZE
+    , flc::VertexBufferDebug
+    , flc::VertexArray*
+    , GLfloat> mVerticesDebugger;
+
+  TCache<MAX_CACHE_SIZE
+    , flc::VertexBufferFloat
+    , flc::VertexArray*
+    , std::vector<flc::VertexFloat> &> mVerticesFloat;
+
+  TCache<MAX_CACHE_SIZE
+    , flc::VertexBufferPosition
+    , flc::VertexArray*
+    , std::vector<flc::VertexPosition> &> mVerticesPosition;
 };
 
 } /* flf */

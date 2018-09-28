@@ -29,7 +29,7 @@ namespace flw {
 namespace flf {
 
 MeshOcclusion::MeshOcclusion(Engine* engine)
-  : IReloadable (engine, engine->storeVAO(this))
+  : IReloadable (engine)
   , mEngine (engine)
   , mProgram (ProgramLoader(engine).getProgram(flf::EProgram::occlusionOptimizedQuery)) {
 }

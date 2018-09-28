@@ -65,11 +65,13 @@ public:
     std::function<float(float x, float y)> constructor
     , GLint chunkDensity
     , GLfloat gapSize
-    , const std::vector<GLuint> &indices
+    , const std::vector<GLuint>& indices
     , GLuint dataStoreModification = GL_STATIC_DRAW);
 
 
-  VertexBufferBasic(const std::vector<flc::VertexBasic> &vertices, GLuint dataStoreModification = GL_STATIC_DRAW);
+  VertexBufferBasic(
+    const std::vector<flc::VertexBasic> &vertices
+    , GLuint dataStoreModification = GL_STATIC_DRAW);
 
   ~VertexBufferBasic() override = default;
 

@@ -45,7 +45,7 @@ struct VertexParticleGPU {
 
 class VertexBufferParticlesGPU : public TVertexBuffer<VertexParticleGPU> {
 public:
-  VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles);
+  VertexBufferParticlesGPU(const std::vector<VertexParticleGPU>& particles);
 
   ~VertexBufferParticlesGPU() override = default;
 

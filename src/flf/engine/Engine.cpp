@@ -87,7 +87,7 @@ void Engine::initUniforms() {
 }
 
 void Engine::initOcclusionTest() {
-  mOcclusion = make_pu<flf::MeshOcclusion>(this);
+  mOcclusion = std::make_unique<flf::MeshOcclusion>(this);
 }
 
 void Engine::initExtras() {
@@ -133,14 +133,14 @@ void Engine::initPickingBuffer() {
 
 VertexBufferParticlesGPU*
 Engine::storeBuffersInternal(VertexArray* vao, size_t idx, vector<VertexParticleGPU> &particles) {
-  auto ptr = new vector<VertexBufferParticlesGPU* >();
+   auto ptr = new vector<pu<VertexBufferParticlesGPU>>();
   auto buffers = mBuffers.mVerticesParticlesGPU.store(ptr, vao);
   if (buffers->size() < idx) {
-    return (*buffers)[idx];
+    return (*buffers)[idx].get();
   }
   fLogD("There is no buffer for requested index. Creating a new one.");
-  buffers->push_back(new VertexBufferParticlesGPU(particles));
-  return buffers->back();
+  buffers->push_back(std::make_unique<VertexBufferParticlesGPU>(particles));
+  return buffers->back().get();
 }
 
 void Engine::reloadPickingBuffer() {

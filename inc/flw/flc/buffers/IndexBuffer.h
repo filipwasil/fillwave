@@ -36,7 +36,7 @@ class IndexBuffer : public IBuffer {
 public:
   IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModification = GL_STATIC_DRAW);
 
-  IndexBuffer(const std::vector<GLuint> &data, GLuint dataStoreModification = GL_STATIC_DRAW);
+  IndexBuffer(const std::vector<GLuint>& data, GLuint dataStoreModification = GL_STATIC_DRAW);
 
   ~IndexBuffer() override = default;
 

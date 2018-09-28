@@ -24,7 +24,7 @@
 namespace flw {
 namespace flc {
 
-VertexBufferParticlesGPU::VertexBufferParticlesGPU(const std::vector<VertexParticleGPU> &particles)
+VertexBufferParticlesGPU::VertexBufferParticlesGPU(const std::vector<VertexParticleGPU>& particles)
     : TVertexBuffer(particles, GL_DYNAMIC_COPY) {
   // nothing
 }
