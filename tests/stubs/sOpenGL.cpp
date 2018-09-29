@@ -22,3 +22,4 @@ PFNGLCOMPRESSEDTEXIMAGE2DPROC glad_glCompressedTexImage2D = [](GLenum target, GL
 PFNGLTEXIMAGE1DPROC glad_glTexImage1D = [](GLenum target, GLint level, GLint internalformat, GLsizei width, GLint border, GLenum format, GLenum type, const void *pixels){};
 PFNGLCOLORMASKPROC glad_glColorMask = [](GLboolean red, GLboolean green, GLboolean blue, GLboolean alpha){};
 PFNGLDEPTHMASKPROC glad_glDepthMask = [](GLboolean flag){};
+PFNGLBLENDEQUATIONPROC glad_glBlendEquation = [](GLenum mode){};
