@@ -32,7 +32,7 @@ namespace flf {
  * \brief Not used.
  */
 
-class EmiterPointStep : public IEmiterPoint {
+class EmiterPointStep : public IReloadable, public Entity, public IEmiterPoint {
 public:
   EmiterPointStep(Engine *engine,
       GLint howMany,

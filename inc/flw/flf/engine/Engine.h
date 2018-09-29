@@ -40,7 +40,7 @@
 
 #include <flw/flf/actions/EventHandler.h>
 
-#include <flw/flf/loaders/FileLoader.h>
+#include <flw/cmn/resources/FileLoader.h>
 #include <flw/flf/loaders/ModelLoader.h>
 #include <flw/flf/loaders/ProgramLoader.h>
 
@@ -237,7 +237,7 @@ class Engine {
   GLfloat mTimeFactor;
   ps<flf::Text> mFPSText;
 
-  GLboolean mIsOQ;
+  bool mIsOQ;
 
   pu<flf::Scene> mScene;
 

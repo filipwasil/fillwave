@@ -22,12 +22,10 @@
   ##############
   add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/tests)
 
-  aux_source_directory (tests/common TEST_COMMON_SOURCES)
-  aux_source_directory (tests/interface TEST_INTERFACE_SOURCES)
-  aux_source_directory (tests/core TEST_CORE_SOURCES)
   aux_source_directory (tests/framework TEST_FRAMEWORK_SOURCES)
+
   set(TEST_SOURCES_PRODUCTION
-      ${FILLWAVE_PATH_SOURCE}/flf/models/base/Moveable.cpp
+      ${FILLWAVE_PATH_SOURCE}/cmn/scene/Moveable.cpp
       ${FILLWAVE_PATH_SOURCE}/cmn/Easing.cpp)
 
 

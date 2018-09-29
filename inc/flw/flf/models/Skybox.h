@@ -24,7 +24,7 @@
 #include <flw/flf/models/Entity.h>
 #include <flw/flc/extended/texturing/Texture3D.h>
 #include <flw/flc/buffers/IndexBuffer.h>
-#include <flw/flc/buffers/VertexBufferPosition.h>
+#include <flw/flc/buffers/mVertexBufferPosition.h>
 #include <flw/flf/models/base/IReloadable.h>
 
 namespace flw {
@@ -41,12 +41,10 @@ public:
 
   ~Skybox() = default;
 
-  /* IDrawable */
-  void draw(ICamera &camera);
-  void drawDR(ICamera &camera);
-
   /* IRenderable */
   bool getRenderItem(flc::RenderItem &item);
+  void draw(ICamera &camera);
+  void drawDR(ICamera &camera);
 
 protected:
   flc::Program *mProgram;

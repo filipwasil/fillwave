@@ -38,9 +38,7 @@ IEmiterPoint::IEmiterPoint(Engine *engine,
     GLenum blendingDestination,
     GLboolean depthTesting,
     GLfloat alphaCutOff)
-    : IReloadable(engine)
-    , Entity()
-    , mStartSize(size)
+    : mStartSize(size)
     , mLifetime(lifetime)
     , mTexture(texture)
     , mColor(color)
@@ -49,22 +47,7 @@ IEmiterPoint::IEmiterPoint(Engine *engine,
     , mAlphaCutOff(alphaCutOff) {
   mBlending.mSrc = blendingSource;
   mBlending.mDst = blendingDestination;
-
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-#else
-  glEnable(GL_PROGRAM_POINT_SIZE);
-  //todo glEnable(GL_POINT_SPRITE) always on since OpenGL 3.2 ... but not at all drivers ://////
-  glEnable(GL_POINT_SPRITE);
-
-  if (glGetError() != GL_NO_ERROR) {
-    fLogE("Legacy features may cause a GL_INVALID_ENUM on core profile. It may happen.");
-  }
-#endif
-
-  attachHandler([this] (const Event& event) {
-    mCallbackTimePassed += event.getData().mTime.timePassed;
-    update(mCallbackTimePassed);
-  }, EEventType::time );
+  // nothing
 }
 
 void IEmiterPoint::setBlending(GLenum sourceFactor, GLenum destinationFactor) {
@@ -72,8 +55,8 @@ void IEmiterPoint::setBlending(GLenum sourceFactor, GLenum destinationFactor) {
   mBlending.mDst = destinationFactor;
 }
 
-void IEmiterPoint::updateRenderer(flc::IRenderer &renderer) {
-  renderer.update(this);
+void IEmiterPoint::drawParticles() {
+
 }
 
 } /* flf */

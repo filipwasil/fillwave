@@ -25,7 +25,7 @@
 #include <flw/flc/buffers/IndexBuffer.h>
 
 #include <flw/flc/operations/TQuery.h>
-#include <flw/flc/buffers/VertexBufferBasic.h>
+#include <flw/flc/buffers/mVertexBufferBasic.h>
 #include <flw/flf/models/Entity.h>
 #include <flw/cmn/Material.h>
 #include <flw/flf/models/base/IReloadable.h>

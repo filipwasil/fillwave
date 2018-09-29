@@ -20,7 +20,7 @@
  */
 
 #include <flw/PlatformSW.h>
-#include <flw/flf/loaders/FileLoader.h>
+#include <flw/cmn/resources/FileLoader.h>
 #include <flw/Log.h>
 #include <fstream>
 

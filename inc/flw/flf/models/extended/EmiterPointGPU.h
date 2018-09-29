@@ -35,7 +35,7 @@ namespace flf {
  * and acceleration defined by the user.
  */
 
-class EmiterPointGPU : public IEmiterPoint {
+class EmiterPointGPU : public IReloadable, public Entity, public IEmiterPoint {
 public:
   EmiterPointGPU(Engine *engine,
       GLfloat emitingSourceRate,
@@ -64,7 +64,10 @@ public:
   void drawPBRP(ICamera &camera) override;
   bool getRenderItem(flc::RenderItem &item) override;
 
-private:
+  /* IRenderable */
+  void updateRenderer(flc::IRenderer &renderer) override;
+
+ private:
   static const GLint mPingPongBuffers = 2;
   GLuint mSrcIndex;
   GLuint mNoiseTextureHandle;

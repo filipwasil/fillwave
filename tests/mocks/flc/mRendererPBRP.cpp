@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -21,40 +19,50 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/Config.h>
-#include <string>
+#include <flw/flc/renderers/mRendererPBRP.h>
+#include <flw/flc/pipeline/Program.h>
+#include <flw/flf/models/Entity.h>
+#include <flw/flf/models/Skybox.h>
 
 namespace flw {
-namespace flf {
+namespace flc {
 
-/*! \class ShaderLoader
- * \brief Loads shader sources.
- */
+void RendererPBRP::update(IRenderable *renderable) {
+  RenderItem item;
+  renderable->getRenderItem(item);
+  GLuint programId = item.mHandles[RenderItem::eRenderHandleProgram];
+  if (mRenderPasses.find(programId) != mRenderPasses.end()) {
+    mRenderPasses[programId].push_back(renderable);
+  } else {
+    std::vector<IRenderable *> vector;
+    vector.push_back(renderable);
+    mRenderPasses[programId] = vector;
+  }
+}
 
-struct ShaderLoader {
-/* Headers */
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-  const std::string mGLVersion = "#version 300 es\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-  const std::string mGLVersion = "#version 300 es\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#elif defined(FILLWAVE_BACKEND_OPENGL_45)
-  const std::string mGLVersion = "#version 450 core\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#elif defined(FILLWAVE_BACKEND_OPENGL_33)
-  const std::string mGLVersion = "#version 330 core\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#else
-  #error "OpenGL version not supported by this loader"
-#endif
-  const std::string mGLFragmentPrecision = "precision lowp float;\n";
-  const std::string mGLVertexPrecision = "precision mediump float;\n";
-};
+void RendererPBRP::draw(ICamera &camera) {
+  if (mSkybox) {
+    mSkybox->draw(camera);
+  }
+  for (auto &program : mRenderPasses) {
+    Program::useProgram(program.first);
+    for (auto &node : program.second) {
+      node->drawPBRP(camera);
+    }
+  }
+}
 
-} /* flf */
+void RendererPBRP::reset(GLuint /*width*/, GLuint /*height*/) {
+  mFlagReload = true;
+}
+
+void RendererPBRP::clear() {
+  mFlagReload = true;
+
+  size_t predictedSize = mRenderPasses.size() + 1;
+  mRenderPasses.clear();
+  mRenderPasses.reserve(predictedSize);
+}
+
+} /* flc */
 } /* flw */

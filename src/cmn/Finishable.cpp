@@ -25,10 +25,10 @@ namespace flw {
 namespace flf {
 
 Finishable::Finishable(float timeToFinish)
-    : mFinished(false)
-    , mTimeToFinish(timeToFinish)
-    , mTimePassed(0.0f)
-    , mPercentageDone(0.0f) {
+  : mFinished(false)
+  , mTimeToFinish(timeToFinish)
+  , mTimePassed(0.0f)
+  , mPercentageDone(0.0f) {
   // nothing
 }
 

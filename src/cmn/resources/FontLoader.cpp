@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -21,40 +19,26 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/Config.h>
-#include <string>
+#include <flw/cmn/Strings.h>
+#include <flw/cmn/resources/FontLoader.h>
 
 namespace flw {
 namespace flf {
 
-/*! \class ShaderLoader
- * \brief Loads shader sources.
- */
-
-struct ShaderLoader {
-/* Headers */
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-  const std::string mGLVersion = "#version 300 es\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-  const std::string mGLVersion = "#version 300 es\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#elif defined(FILLWAVE_BACKEND_OPENGL_45)
-  const std::string mGLVersion = "#version 450 core\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#elif defined(FILLWAVE_BACKEND_OPENGL_33)
-  const std::string mGLVersion = "#version 330 core\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#else
-  #error "OpenGL version not supported by this loader"
-#endif
-  const std::string mGLFragmentPrecision = "precision lowp float;\n";
-  const std::string mGLVertexPrecision = "precision mediump float;\n";
-};
+void FontLoader::load(std::string name) {
+  std::vector<std::string> splitted = split(name, '/');
+  if (splitted.size()) {
+    (*(splitted.end() - 1)).c_str();
+  }
+  std::string pngPath = name + ".png";
+  std::string metaPath = name + ".meta";
+  /* We can use any fo we like */
+  if (generateFontMetadata((name + ".ttf").c_str(), pngPath.c_str(), metaPath.c_str())) {
+    std::string ttfPath = "/usr/share/fonts/truetype/freefont/" + (*(splitted.end() - 1)) + ".ttf";
+    /* Well, if we do not have it, we look in /usr/share/fonts/truetype/freefont/*/
+    generateFontMetadata(ttfPath.c_str(), pngPath.c_str(), metaPath.c_str());
+  }
+}
 
 } /* flf */
 } /* flw */

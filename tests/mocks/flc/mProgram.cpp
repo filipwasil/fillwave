@@ -52,26 +52,7 @@ GLuint Program::getHandle() const {
 }
 
 void Program::link() {
-  GLint status = 0;
-  if (!status) {
-    GLint infoLogLength = 0;
 
-    if (infoLogLength) {
-      if (GLchar *pInfoLog = new GLchar[infoLogLength]) {
-        delete []pInfoLog;
-      }
-    }
-    mHandle = 0;
-  }
-
-  use();
-  getUniforms();
-
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-#else
-  getUniformBlock(LIGHTS_BINDING_POINT_NAME, FILLWAVE_LIGHTS_BINDING_POINT);
-#endif
-  disusePrograms();
 }
 
 void Program::disusePrograms() {
@@ -87,124 +68,54 @@ void Program::use() const {
 }
 
 void Program::uniformPush(const std::string& name, GLint data) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, GLint *data, GLint count) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data, count);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, GLfloat data) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, GLfloat *data, GLint count) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data, count);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, glm::mat3 data) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, glm::mat4 data) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, glm::mat4 *data, GLuint size) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data, size);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, glm::vec2 data) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, glm::vec3 data) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, glm::vec3 *data, GLuint size) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data, size);
-      return;
-    }
-  }
+
 }
 
 void Program::uniformPush(const std::string& name, glm::vec4 data) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      it.push(data);
-      return;
-    }
-  }
+
 }
 
 inline void Program::getUniforms() {
-  if (mUniforms.empty()) {
-    GLint howMany = -1;
-    for (GLint i = 0; i < howMany; ++i) {
-      GLint name_len = -1, num = -1;
-      GLenum type = GL_ZERO;
-      char name[100];
-      name[name_len] = 0;
-      GLint location = i + 1;
-      mUniforms.push_back(Uniform(name, type, num, location));
-    }
-  }
+
 }
 
 GLint Program::getUniformLocation(const std::string& name) {
-  for (auto &it : mUniforms) {
-    if (it.isName(name)) {
-      return it.getLocation();
-    }
-  }
   return FILLWAVE_UNIFORM_NOT_FOUND;
 }
 
@@ -215,12 +126,6 @@ void Program::getUniformBlock(const std::string& name, GLuint bindingPoint) {
 }
 
 void Program::uniformBlockPush(const std::string& name, GLfloat *data) {
-  for (auto &it : mUnifromBuffers) {
-    if (it->getName() == name) {
-      it->push(data);
-      return;
-    }
-  }
 }
 
 #endif
@@ -238,8 +143,7 @@ void Program::unload() {
 }
 
 void Program::reload() {
-  unload();
-  load();
+
 }
 
 } /* flc */

@@ -28,7 +28,7 @@
 #include <flw/cmn/Macros.h>
 #include <flw/cmn/Strings.h>
 
-#include <flw/flf/loaders/FileLoader.h>
+#include <flw/cmn/resources/FileLoader.h>
 
 #include <flw/flf/models/shapes/BoxOcclusion.h>
 
@@ -53,7 +53,7 @@ Engine::Engine(const std::string& runtimeBinaryFilePath, bool /*isEveryExtension
   , mShaders()
   , mFrameCounter(0)
   , mTimeFactor(1.0f)
-  , mIsOQ(GL_TRUE)
+  , mIsOQ(true)
   , mBackgroundColor(0.1f, 0.1f, 0.1f) {
   initContext();
   initManagement();

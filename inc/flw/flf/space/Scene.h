@@ -25,7 +25,7 @@
 #include <flw/flf/models/Entity.h>
 #include <flw/flf/models/Skybox.h>
 #include <flw/flf/models/Cursor.h>
-#include <flw/flc/renderers/RendererFR.h>
+#include <flw/flc/renderers/mRendererFR.h>
 #include <flw/cmn/pointers/PointerProtected.h>
 
 #include <unordered_map>

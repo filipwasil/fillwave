@@ -50,8 +50,9 @@ EmiterPointGPU::EmiterPointGPU(Engine *engine,
   GLenum blendingDestination,
   GLboolean depthTesting,
   GLfloat alphaCutOffLevel)
-  : IEmiterPoint(engine,
-                 howMany,
+  : IReloadable(engine)
+  , Entity()
+  , IEmiterPoint(howMany,
                  startSize,
                  lifetime,
                  texture,
@@ -111,6 +112,11 @@ EmiterPointGPU::EmiterPointGPU(Engine *engine,
   initVBO();
   initVAO();
   initUniformsCache();
+
+  attachHandler([this] (const Event& event) {
+    mCallbackTimePassed += event.getData().mTime.timePassed;
+    update(mCallbackTimePassed);
+  }, EEventType::time );
 }
 
 void EmiterPointGPU::drawFR(ICamera &camera) {
@@ -191,24 +197,11 @@ inline void EmiterPointGPU::coreDraw() {
   mVBOGPU[mSrcIndex]->bind();
   mVBOGPU[mSrcIndex]->attributesSetPointer();
 
-  if (!mDepthTesting) {
-    glDepthMask(GL_FALSE);
-  }
-
   if (mTexture) {
     mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
   }
 
-  glEnable(GL_BLEND);
-  glBlendFunc(mBlending.mSrc, mBlending.mDst);
-  glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid *>(0));
-  fLogC("Draw elements");
-
-  if (!mDepthTesting) {
-    glDepthMask(GL_TRUE);
-  }
-
-  glDisable(GL_BLEND);
+  drawParticles();
 
   flc::Texture2D::unbind2DTextures();
   flc::VertexArray::unbindVAO();
@@ -312,6 +305,10 @@ bool EmiterPointGPU::getRenderItem(flc::RenderItem &item) {
 
   item.mRenderStatus = 0xe4; // 11100100
   return true;
+}
+
+void EmiterPointGPU::updateRenderer(flc::IRenderer &renderer) {
+  renderer.update(this);
 }
 
 } /* flf */

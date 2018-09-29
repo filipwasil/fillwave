@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flc/renderers/RendererFR.h>
+#include <flw/flc/renderers/mRendererFR.h>
 #include <flw/flf/models/Entity.h>
 #include <flw/flf/models/Skybox.h>
 

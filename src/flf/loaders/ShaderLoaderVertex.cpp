@@ -35,22 +35,23 @@ ShaderLoaderVertex::ShaderLoaderVertex(bool animated)
 
 const std::string ShaderLoaderVertex::getSource() const {
 
-  std::string attributes = "layout(location = 0) " + mGLVaryingIn + " vec4 aPosition;                        \n"
-      "layout(location = 1) " + mGLVaryingIn + " vec4 aColor;                           \n"
-                               "layout(location = 2) " + mGLVaryingIn + " vec3 aNormal;                          \n"
-                               "layout(location = 3) " + mGLVaryingIn + " vec3 aNormalTangent;                   \n"
-                               "layout(location = 4) " + mGLVaryingIn + " vec2 aTextureCoordinate;               \n"
-                               "layout(location = 5) " + mGLVaryingIn + " ivec4 aBoneID;                         \n"
-                               "layout(location = 6) " + mGLVaryingIn + " vec4 aWeight;                          \n";
+  std::string attributes = "layout(location = 0) " + mShaderLoader.mGLVaryingIn + " vec4 aPosition;              \n"
+      "layout(location = 1) " +
+                           mShaderLoader.mGLVaryingIn + " vec4 aColor;                           \n"
+                               "layout(location = 2) " + mShaderLoader.mGLVaryingIn + " vec3 aNormal;                          \n"
+                               "layout(location = 3) " + mShaderLoader.mGLVaryingIn + " vec3 aNormalTangent;                   \n"
+                               "layout(location = 4) " + mShaderLoader.mGLVaryingIn + " vec2 aTextureCoordinate;               \n"
+                               "layout(location = 5) " + mShaderLoader.mGLVaryingIn + " ivec4 aBoneID;                         \n"
+                               "layout(location = 6) " + mShaderLoader.mGLVaryingIn + " vec4 aWeight;                          \n";
 
   std::string outputs =
 
-      "" + mGLVaryingOut + " vec4 vColor;\n"
-          "" + mGLVaryingOut + " vec2 vTextureCoordinate;\n"
-          "" + mGLVaryingOut + " vec3 vVertexNormal; // N\n"
-          "" + mGLVaryingOut + " vec3 vVertexNormalTangent;\n"
-          "" + mGLVaryingOut + " vec4 vVertexWorldSpace;\n"
-          "" + mGLVaryingOut + " vec3 vCameraPosition;\n\n";
+      "" + mShaderLoader.mGLVaryingOut + " vec4 vColor;\n"
+          "" + mShaderLoader.mGLVaryingOut + " vec2 vTextureCoordinate;\n"
+          "" + mShaderLoader.mGLVaryingOut + " vec3 vVertexNormal; // N\n"
+          "" + mShaderLoader.mGLVaryingOut + " vec3 vVertexNormalTangent;\n"
+          "" + mShaderLoader.mGLVaryingOut + " vec4 vVertexWorldSpace;\n"
+          "" + mShaderLoader.mGLVaryingOut + " vec3 vCameraPosition;\n\n";
 
   std::string uniforms =
 
@@ -110,7 +111,7 @@ const std::string ShaderLoaderVertex::getSource() const {
     main = mainStart + mainComputations + mainEnd;
   }
 
-  return mGLVersion + mGLVertexPrecision + attributes + outputs + uniforms + main;
+  return mShaderLoader.mGLVersion + mShaderLoader.mGLVertexPrecision + attributes + outputs + uniforms + main;
 }
 
 } /* flf */

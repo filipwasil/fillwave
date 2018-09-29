@@ -1438,7 +1438,7 @@ flc::Program* ProgramLoader::getProgram(EProgram program, const std::string& fil
         mEngine->storeShader<GL_VERTEX_SHADER>("fillwave_hud.vert", vsHUD)
       });
       p->use();
-      flc::Uniform::push(glGetUniformLocation(p->getHandle(), "uDiffuseTextureUnit"), FILLWAVE_DIFFUSE_UNIT);
+      p->uniformPush("uDiffuseTextureUnit", FILLWAVE_DIFFUSE_UNIT);
       break;
 
     case EProgram::text:

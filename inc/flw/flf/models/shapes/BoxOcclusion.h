@@ -22,7 +22,7 @@
  */
 
 #include <flw/flf/models/shapes/Quad.h>
-#include <flw/flc/buffers/VertexBufferPosition.h>
+#include <flw/flc/buffers/mVertexBufferPosition.h>
 
 namespace flw {
 namespace flf {

@@ -19,14 +19,14 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flc/buffers/VertexBufferBasic.h>
+#include <flw/flc/buffers/mVertexBufferBasic.h>
 #include <flw/flc/buffers/IndexBuffer.h>
 
 #include <flw/flf/models/shapes/PhysicsMeshBuffer.h>
 #include <flw/cmn/Material.h>
 
 #include <flw/flf/loaders/modelloader/tinyobjloader/ModelLoaderTinyObjLoader.h>
-#include <flw/flf/loaders/FileLoader.h>
+#include <flw/cmn/resources/FileLoader.h>
 #include <tinyobjloader/tiny_obj_loader.h>
 
 #include <flw/Log.h>

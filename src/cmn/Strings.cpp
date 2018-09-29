@@ -20,7 +20,7 @@
  */
 
 #include <flw/cmn/Strings.h>
-#include <flw/flf/loaders/FileLoader.h>
+#include <flw/cmn/resources/FileLoader.h>
 
 namespace flw {
 

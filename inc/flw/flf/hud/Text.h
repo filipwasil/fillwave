@@ -21,11 +21,11 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flc/buffers/VertexBufferText.h>
+#include <flw/flc/buffers/mVertexBufferText.h>
 #include <flw/flc/pipeline/Program.h>
 
 #include <flw/flf/hud/base/Sprite.h>
-#include <flw/flf/loaders/FontLoader.h>
+#include <flw/cmn/resources/FontLoader.h>
 #include <flw/flf/models/base/IReloadable.h>
 #include <map>
 

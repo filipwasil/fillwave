@@ -32,9 +32,10 @@ EmiterPointStep::EmiterPointStep(
   , GLenum blendingSource
   , GLenum blendingDestination
   , flc::Texture2D* texture)
-    : IEmiterPoint(
-      engine
-  , howMany
+  : IReloadable(engine)
+  , Entity()
+  , IEmiterPoint(
+  howMany
   , 100
   , 1
   , texture

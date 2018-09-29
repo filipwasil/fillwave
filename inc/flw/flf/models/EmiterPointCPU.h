@@ -23,7 +23,7 @@
 
 #include <flw/flf/models/base/IEmiterPoint.h>
 
-#include <flw/flc/buffers/VertexBufferFloat.h>
+#include <flw/flc/buffers/mVertexBufferFloat.h>
 #include <flw/flc/operations/TQuery.h>
 
 namespace flw {
@@ -37,7 +37,7 @@ namespace flf {
  * and acceleration defined by the user.
  */
 
-class EmiterPointCPU : public IEmiterPoint {
+class EmiterPointCPU : public IReloadable, public Entity, public IEmiterPoint {
 public:
   EmiterPointCPU(
     Engine *engine
@@ -57,7 +57,7 @@ public:
     , GLboolean depthTesting = GL_TRUE
     , GLfloat alphaCutOffLevel = 0.0f);
 
-  virtual ~EmiterPointCPU() override = default;
+  ~EmiterPointCPU() override = default;
 
   /* IEmiterPoint */
   void update(GLfloat timeElapsedSec) override;
@@ -67,7 +67,10 @@ public:
   void drawPBRP(ICamera& camera) override;
   bool getRenderItem(flc::RenderItem &item) override;
 
-private:
+  /* IRenderable */
+  void updateRenderer(flc::IRenderer &renderer) override;
+
+ private:
   glm::vec3 mAcceleration;
   glm::vec3 mStartVelocity;
   glm::vec3 mStartPosition;

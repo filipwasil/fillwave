@@ -21,11 +21,11 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flc/buffers/VertexBufferPosition.h>
-#include <flw/flc/buffers/VertexBufferFloat.h>
-#include <flw/flc/buffers/VertexBufferDebug.h>
+#include <flw/flc/buffers/mVertexBufferPosition.h>
+#include <flw/flc/buffers/mVertexBufferFloat.h>
+#include <flw/flc/buffers/mVertexBufferDebug.h>
 #include <flw/flc/extended/buffers/VertexBufferParticlesGPU.h>
-#include <flw/flc/buffers/VertexBufferParticles.h>
+#include <flw/flc/buffers/mVertexBufferParticles.h>
 
 #include <flw/flf/models/base/IReloadable.h>
 #include <flw/flf/management/base/TCache.h>

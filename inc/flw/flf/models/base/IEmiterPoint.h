@@ -23,7 +23,7 @@
 
 #include <flw/flf/models/Entity.h>
 #include <flw/flc/buffers/IndexBuffer.h>
-#include <flw/flc/buffers/VertexBufferParticles.h>
+#include <flw/flc/buffers/mVertexBufferParticles.h>
 #include <flw/flc/pipeline/Program.h>
 #include <flw/flc/texturing/Texture2D.h>
 #include <flw/cmn/Blending.h>
@@ -37,31 +37,28 @@ namespace flf {
  * \brief Drawable Entity which emits particles.
  */
 
-class IEmiterPoint : public IReloadable, public Entity {
-public:
-  IEmiterPoint(Engine *engine,
-      GLuint howMany,
-      GLfloat size,
-      GLfloat lifetime,
-      flc::Texture2D *texture,
-      glm::vec4 color,
-      GLenum blendingSource,
-      GLenum blendingDestination,
-      GLboolean depthTesting,
-      GLfloat alphaCutOff);
+class IEmiterPoint {
+ public:
+  IEmiterPoint(
+    GLuint howMany
+    , GLfloat size
+    , GLfloat lifetime
+    , flc::Texture2D* texture
+    , glm::vec4 color
+    , GLenum blendingSource
+    , GLenum blendingDestination
+    , GLboolean depthTesting
+    , GLfloat alphaCutOff);
 
-  ~IEmiterPoint() override = default;
+  virtual ~IEmiterPoint() = default;
 
   void setBlending(GLenum sourceFactor, GLenum destinationFactor);
 
   virtual void update(GLfloat timeElapsedSec) = 0;
 
-  void drawFR(ICamera &camera) override = 0;
+ protected:
+  void drawParticles();
 
-  /* IRenderable */
-  void updateRenderer(flc::IRenderer &renderer) override;
-
-protected:
   GLfloat mStartSize;
   GLfloat mLifetime;
   flc::Texture2D* mTexture;

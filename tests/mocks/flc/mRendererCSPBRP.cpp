@@ -19,62 +19,57 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flf/hud/base/Sprite.h>
+#include <flw/flc/renderers/mRendererCSPBRP.h>
+
+#include <flw/flf/models/Entity.h>
+#include <flw/flf/models/Skybox.h>
+
+#include <flw/flc/texturing/Texture2D.h>
+
+#include <flw/flf/management/LightSystem.h>
 
 #include <flw/Log.h>
 
 FLOGINIT_DEFAULT()
 
 namespace flw {
-namespace flf {
+namespace flc {
 
-/*! \class Sprite
- * \brief HUD base element.
- */
-
-Sprite::Sprite(flc::Texture2D *texture, flc::Program *program, glm::vec2 position, glm::vec2 scale)
-    : mTexture(texture)
-    , mProgram(program)
-    , mPosition(position)
-    , mScale(scale) {
-  mBlending = {
-      GL_SRC_ALPHA,
-      GL_ONE_MINUS_SRC_ALPHA,
-      GL_FUNC_ADD
-  };
+RendererCSPBRP::RendererCSPBRP(flf::LightSystem* lightManager) : mLights(lightManager) {
+  assert("Feature not ready");
 }
 
-Sprite::~Sprite() = default;
-
-void Sprite::onAttached(ITreeNode* /*node*/) {
-  // nothing
-}
-
-void Sprite::onDetached() {
-  // nothing
-}
-
-void Sprite::draw() {
-  if (nullptr == mTexture || NULL == mProgram) {
-    fLogF("tried to draw a non drawable");
+void RendererCSPBRP::update(IRenderable *renderable) {
+  RenderItem item;
+  renderable->getRenderItem(item);
+  GLuint programId = item.mHandles[RenderItem::eRenderHandleProgram];
+  std::vector<RenderItem> items(1, item);
+  if (mRenderPasses.find(programId) != mRenderPasses.end()) {
+    mRenderPasses[programId].push_back(items);
+  } else {
+    std::vector<std::vector<RenderItem>> container;
+    container.push_back(items);
+    mRenderPasses[programId] = container;
   }
-  mProgram->use();
-  mProgram->uniformPush("uPosition", mPosition);
-  mProgram->uniformPush("uScale", mScale);
-  coreDraw();
 }
 
-void Sprite::coreDraw() {
-  glDisable(GL_DEPTH_TEST);
-  glEnable(GL_BLEND);
-  glBlendFunc(mBlending.mSrc, mBlending.mSrc);
-  glBlendEquation(mBlending.mBlendEquation);
-  mTexture->bind(FILLWAVE_DIFFUSE_UNIT);
-  glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-  mTexture->unbind();
-  glEnable(GL_DEPTH_TEST);
-  glDisable(GL_BLEND);
+void RendererCSPBRP::draw(ICamera &camera) {
+  //todo RendererCSPBRP is not ready
+  if (mSkybox) {
+    mSkybox->draw(camera);
+  }
 }
 
+void RendererCSPBRP::reset(GLuint /*width*/, GLuint /*height*/) {
+  mFlagReload = true;
+}
+
+void RendererCSPBRP::clear() {
+  mFlagReload = true;
+  size_t predictedSize = mRenderPasses.size() + 1;
+  mRenderPasses.clear();
+  mRenderPasses.reserve(predictedSize);
+}
+
+} /* flc */
 } /* flf */
-} /* flw */

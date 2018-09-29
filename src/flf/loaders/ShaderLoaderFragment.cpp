@@ -32,12 +32,12 @@ ShaderLoaderFragment::ShaderLoaderFragment(GLuint renderTargets) : mRendertarget
 const std::string ShaderLoaderFragment::getSource() const {
 
   std::string inputs =
-    mGLVaryingIn + " vec4 vColor;\n" +
-    mGLVaryingIn + " vec2 vTextureCoordinate;\n" +
-    mGLVaryingIn + " vec3 vVertexNormal;\n" +
-    mGLVaryingIn + " vec3 vVertexNormalTangent;\n" +
-    mGLVaryingIn + " vec4 vVertexWorldSpace;\n" +
-    mGLVaryingIn + " vec3 vCameraPosition;\n\n";
+    mShaderLoader.mGLVaryingIn + " vec4 vColor;\n" +
+      mShaderLoader.mGLVaryingIn + " vec2 vTextureCoordinate;\n" +
+      mShaderLoader.mGLVaryingIn + " vec3 vVertexNormal;\n" +
+      mShaderLoader.mGLVaryingIn + " vec3 vVertexNormalTangent;\n" +
+      mShaderLoader.mGLVaryingIn + " vec4 vVertexWorldSpace;\n" +
+      mShaderLoader.mGLVaryingIn + " vec3 vCameraPosition;\n\n";
 
   std::string outputs = "";
   for (GLuint i = 0; i < mRendertargets; i++) {
@@ -517,7 +517,9 @@ const std::string ShaderLoaderFragment::getSource() const {
 
   end += "\n}\n";
 
-  return mGLVersion + mGLFragmentPrecision + inputs + outputs + lightsMaximum + lightStructDefinition + lightUniforms +
+  return mShaderLoader.mGLVersion
+         + mShaderLoader.mGLFragmentPrecision
+         + inputs + outputs + lightsMaximum + lightStructDefinition + lightUniforms +
          lightSamplerUniforms + effectsUniforms + textures + functions + main + end;
 }
 

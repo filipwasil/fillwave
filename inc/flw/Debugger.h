@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flc/buffers/VertexBufferDebug.h>
+#include <flw/flc/buffers/mVertexBufferDebug.h>
 #include <flw/flf/models/base/IReloadable.h>
 #include <flw/cmn/scene/ICamera.h>
 

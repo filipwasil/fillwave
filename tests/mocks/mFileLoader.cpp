@@ -2,7 +2,7 @@
 // Created by filip on 16.03.18.
 //
 
-#include <flw/flf/loaders/FileLoader.h>
+#include <flw/cmn/resources/FileLoader.h>
 
 using namespace std;
 

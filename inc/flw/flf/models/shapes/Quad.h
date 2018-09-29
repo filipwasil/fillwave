@@ -21,7 +21,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flc/buffers/VertexBufferBasic.h>
+#include <flw/flc/buffers/mVertexBufferBasic.h>
 #include <flw/flf/models/shapes/Shape.h>
 
 namespace flw {

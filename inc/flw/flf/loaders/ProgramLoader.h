@@ -24,7 +24,7 @@
 #include <flw/flc/pipeline/Program.h>
 #include <flw/flf/loaders/ProgramLoaderTypes.h>
 #include <flw/flf/loaders/ShaderLoader.h>
-#include <flw/flf/loaders/FileLoader.h>
+#include <flw/cmn/resources/FileLoader.h>
 
 namespace flw {
 class Engine;

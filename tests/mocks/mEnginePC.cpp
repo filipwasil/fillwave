@@ -1,5 +1,3 @@
-#pragma once
-
 /*
  * The MIT License (MIT)
  *
@@ -21,40 +19,49 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/Config.h>
-#include <string>
+#include <flw/Log.h>
+#include <flw/Fillwave.h>
+#include "gtest/gtest.h"
+#include "gmock/gmock.h"
+
+FLOGINIT_DEFAULT()
 
 namespace flw {
-namespace flf {
 
-/*! \class ShaderLoader
- * \brief Loads shader sources.
- */
+Engine::Engine(const std::string&, bool isEveryExtensionSuccessfullyLoaded)
+  : mFileLoader("")
+  , mProgramLoader(this) {
+  // nothing
+}
 
-struct ShaderLoader {
-/* Headers */
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-  const std::string mGLVersion = "#version 300 es\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-  const std::string mGLVersion = "#version 300 es\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#elif defined(FILLWAVE_BACKEND_OPENGL_45)
-  const std::string mGLVersion = "#version 450 core\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
-#elif defined(FILLWAVE_BACKEND_OPENGL_33)
-  const std::string mGLVersion = "#version 330 core\n";
-  const std::string mGLVaryingIn = "in";
-  const std::string mGLVaryingOut = "out";
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_PC)
+EnginePCGLES::EnginePCGLES(GLint argc, GLchar *const argv[], void (* (*getAddress)(const char*))())
+  : Engine ("", true) {
+  // nothing
+}
+
+EnginePCGLES::~EnginePCGLES() {
+  // nothing
+}
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+
 #else
-  #error "OpenGL version not supported by this loader"
-#endif
-  const std::string mGLFragmentPrecision = "precision lowp float;\n";
-  const std::string mGLVertexPrecision = "precision mediump float;\n";
-};
+EnginePC::EnginePC(GLint argc, GLchar *const argv[])
+  : Engine ("", true) {
+  // nothing
+}
 
-} /* flf */
+EnginePC::~EnginePC() {
+  // nothing
+}
+#endif
+
+Engine::~Engine() {
+  // nothing
+}
+
+flc::Texture2D* Engine::storeTexture(const std::string & /*texturePath*/) {
+  return nullptr;
+}
+
 } /* flw */

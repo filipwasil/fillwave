@@ -30,7 +30,7 @@ namespace flf {
  * \brief ShaderLoader to load vertex shader sources.
  */
 
-class ShaderLoaderVertex final : public ShaderLoader {
+class ShaderLoaderVertex final {
 public:
   ShaderLoaderVertex(bool animated = false);
 
@@ -38,6 +38,7 @@ public:
 
 private:
   bool mAnimated;
+  ShaderLoader mShaderLoader;
 };
 
 } /* flf */
