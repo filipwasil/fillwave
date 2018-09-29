@@ -1,6 +1,6 @@
 #include "../common.h"
 
-#include <flw/flf/models/base/Moveable.h>
+#include <flw/cmn/scene/Moveable.h>
 
 namespace flw {
 namespace flf {

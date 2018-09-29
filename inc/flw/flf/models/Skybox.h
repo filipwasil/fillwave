@@ -43,11 +43,10 @@ public:
 
   /* IDrawable */
   void draw(ICamera &camera);
-
   void drawDR(ICamera &camera);
 
   /* IRenderable */
-  bool getRenderItem(RenderItem &item);
+  bool getRenderItem(flc::RenderItem &item);
 
 protected:
   flc::Program *mProgram;

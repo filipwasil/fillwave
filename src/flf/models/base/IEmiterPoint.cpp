@@ -72,7 +72,7 @@ void IEmiterPoint::setBlending(GLenum sourceFactor, GLenum destinationFactor) {
   mBlending.mDst = destinationFactor;
 }
 
-void IEmiterPoint::updateRenderer(IRenderer &renderer) {
+void IEmiterPoint::updateRenderer(flc::IRenderer &renderer) {
   renderer.update(this);
 }
 

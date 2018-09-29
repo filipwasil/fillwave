@@ -24,7 +24,6 @@
 #include <algorithm>
 
 namespace flw {
-namespace flf {
 
 Observable::Observable() = default;
 
@@ -64,5 +63,4 @@ void Observable::notifyObservers() {
   }
 }
 
-} /* flf */
 } /* flw */

@@ -26,7 +26,7 @@
 #include <flw/flc/buffers/VertexBufferParticles.h>
 #include <flw/flc/pipeline/Program.h>
 #include <flw/flc/texturing/Texture2D.h>
-#include <flw/flc/pipeline/Blending.h>
+#include <flw/cmn/Blending.h>
 #include <flw/flf/models/base/IReloadable.h>
 
 namespace flw {
@@ -56,10 +56,10 @@ public:
 
   virtual void update(GLfloat timeElapsedSec) = 0;
 
-  void draw(ICamera &camera) override = 0;
+  void drawFR(ICamera &camera) override = 0;
 
   /* IRenderable */
-  void updateRenderer(IRenderer &renderer) override;
+  void updateRenderer(flc::IRenderer &renderer) override;
 
 protected:
   GLfloat mStartSize;

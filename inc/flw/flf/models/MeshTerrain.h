@@ -54,17 +54,16 @@ public:
       GLuint radius,
       GLuint density = 8);
 
-  ~MeshTerrain() override = default;
+  ~MeshTerrain() override;
 
   void initIBO(std::vector<GLuint> &indices, GLuint density);
 
   /* IDrawable */
-  void draw(ICamera &camera) override;
-
+  void drawFR(ICamera &camera) override;
   void drawPBRP(ICamera &camera) override;
 
   /* IRenderable */
-  void updateRenderer(IRenderer &renderer) override;
+  void updateRenderer(flc::IRenderer &renderer) override;
 
 private:
   LightSystem &mLights;

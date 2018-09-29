@@ -53,7 +53,7 @@ void Programmable::drawWithEffects(ICamera& camera) {
 
   /* Draw */
   for (auto &it : mChildren) {
-    it->draw(camera);
+    it->drawFR(camera);
   }
 
   /* Effects pre draw action */

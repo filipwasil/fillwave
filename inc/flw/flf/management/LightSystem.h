@@ -30,9 +30,9 @@ namespace flw {
 class Engine;
 namespace flf {
 
-using CacheSpotLights = TManager<LightSpot, MAX_LIGHTS, flc::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, flf::Moveable*>;
-using CacheDirectionalLights = TManager<LightDirectional, MAX_LIGHTS, flc::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, flf::Moveable*>;
-using CachePointLights = TManager<LightPoint, MAX_LIGHTS, flc::Texture3DRenderable*, glm::vec3, glm::vec4, flf::Moveable*>;
+using CacheSpotLights = TManager<LightSpot, MAX_LIGHTS, flc::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, Moveable*>;
+using CacheDirectionalLights = TManager<LightDirectional, MAX_LIGHTS, flc::Texture2DRenderable*, glm::vec3, glm::quat, glm::vec4, Moveable*>;
+using CachePointLights = TManager<LightPoint, MAX_LIGHTS, flc::Texture3DRenderable*, glm::vec3, glm::vec4, Moveable*>;
 
 /**
  * \brief Light system knows about all light related stuff.

@@ -26,7 +26,6 @@
 #include <algorithm>
 
 namespace flw {
-namespace flf {
 
 /*! \class Observable
 * \brief Implementation of Observable pattern.
@@ -57,5 +56,4 @@ class Observable {
   std::vector<IObserver*> mObservers;
 };
 
-} /* flf */
 } /* flw */

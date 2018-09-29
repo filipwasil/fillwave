@@ -22,7 +22,6 @@
 #include <flw/cmn/IObserver.h>
 
 namespace flw {
-namespace flf {
 
 IObserver::IObserver() = default;
 
@@ -36,5 +35,4 @@ IObserver& IObserver::operator=(IObserver &&) = default;
 
 IObserver::IObserver(IObserver &&) = default;
 
-} /* flf */
 } /* flw */

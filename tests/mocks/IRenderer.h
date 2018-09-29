@@ -2,10 +2,10 @@
 
 #include "../common.h"
 
-#include <flw/flf/renderers/IRenderer.h>
+#include <flw/flc/renderers/IRenderer.h>
 
 namespace flw {
-namespace flf {
+namespace flc {
 
 class MockIRenderer : public IRenderer {
 public:

@@ -39,7 +39,8 @@ Sprite::Sprite(flc::Texture2D *texture, flc::Program *program, glm::vec2 positio
     , mScale(scale) {
   mBlending = {
       GL_SRC_ALPHA,
-      GL_ONE_MINUS_SRC_ALPHA
+      GL_ONE_MINUS_SRC_ALPHA,
+      GL_FUNC_ADD
   };
 }
 

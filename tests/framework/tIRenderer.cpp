@@ -4,7 +4,7 @@
 #include "../mocks/IRenderable.h"
 
 using namespace flw;
-using namespace flw::flf;
+using namespace flw::flc;
 
 TEST (IRenderer, adding) {
   MockIRenderer renderer();

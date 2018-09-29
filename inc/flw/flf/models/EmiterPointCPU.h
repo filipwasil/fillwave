@@ -27,6 +27,8 @@
 #include <flw/flc/operations/TQuery.h>
 
 namespace flw {
+class ICamera;
+
 namespace flf {
 
 /*! \class EmiterPointCPU
@@ -60,12 +62,10 @@ public:
   /* IEmiterPoint */
   void update(GLfloat timeElapsedSec) override;
 
-  /* IDrawable */
-  void draw(ICamera &camera) override;
-  void drawPBRP(ICamera &camera) override;
-
   /* IRenderable */
-  bool getRenderItem(RenderItem &item) override;
+  void drawFR(ICamera& camera) override;
+  void drawPBRP(ICamera& camera) override;
+  bool getRenderItem(flc::RenderItem &item) override;
 
 private:
   glm::vec3 mAcceleration;

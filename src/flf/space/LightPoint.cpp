@@ -31,6 +31,7 @@ LightPoint::LightPoint(flc::Texture3DRenderable* tex, glm::vec3 pos, glm::vec4 i
     : Light(pos, intensity, observed)
     , mShadowTexture(tex)
     , mSphere(1.0f, 10, 10) {
+
   const glm::vec3 axisX(1.0f, 0.0f, 0.0f);
   const glm::vec3 axisY(0.0f, 1.0f, 0.0f);
   const glm::vec3 axisZ(0.0f, 0.0f, 1.0f);
@@ -60,6 +61,8 @@ LightPoint::LightPoint(flc::Texture3DRenderable* tex, glm::vec3 pos, glm::vec4 i
     , glm::radians(90.0f), 1.0f, 0.1f, 1000.0f);
 }
 
+LightPoint::~LightPoint() = default;
+
 flc::Texture3DRenderable* LightPoint::getShadowTexture() {
   return mShadowTexture;
 }
@@ -83,8 +86,6 @@ void LightPoint::updateShadowCamera() {
     }
   }
 }
-
-LightPoint::~LightPoint() = default;
 
 } /* flf */
 } /* flw */

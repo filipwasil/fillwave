@@ -19,10 +19,9 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flf/models/base/Moveable.h>
+#include <flw/cmn/scene/Moveable.h>
 
 namespace flw {
-namespace flf {
 
 Moveable::Moveable(glm::vec3 translation, glm::quat rotation, unsigned int callbacksCount)
     : mTranslation(translation)
@@ -54,17 +53,17 @@ void Moveable::moveTo(glm::vec3 coordinates) {
   mRefresh = true;
 }
 
-void Moveable::moveToX(GLfloat distance) {
+void Moveable::moveToX(float distance) {
   mTranslation.x = distance;
   mRefresh = true;
 }
 
-void Moveable::moveToY(GLfloat distance) {
+void Moveable::moveToY(float distance) {
   mTranslation.y = distance;
   mRefresh = true;
 }
 
-void Moveable::moveToZ(GLfloat distance) {
+void Moveable::moveToZ(float distance) {
   mTranslation.z = distance;
   mRefresh = true;
 }
@@ -74,17 +73,17 @@ void Moveable::moveBy(glm::vec3 coordinates) {
   mRefresh = true;
 }
 
-void Moveable::moveByX(GLfloat distance) {
+void Moveable::moveByX(float distance) {
   mTranslation.x += distance;
   mRefresh = true;
 }
 
-void Moveable::moveByY(GLfloat distance) {
+void Moveable::moveByY(float distance) {
   mTranslation.y += distance;
   mRefresh = true;
 }
 
-void Moveable::moveByZ(GLfloat distance) {
+void Moveable::moveByZ(float distance) {
   mTranslation.z += distance;
   mRefresh = true;
 }
@@ -98,7 +97,7 @@ glm::vec3 Moveable::getScale() {
   return mScale;
 }
 
-void Moveable::scaleTo(GLfloat scale) {
+void Moveable::scaleTo(float scale) {
   mScale = glm::vec3(scale, scale, scale);
   mRefresh = true;
 }
@@ -108,17 +107,17 @@ void Moveable::scaleTo(glm::vec3 scale) {
   mRefresh = true;
 }
 
-void Moveable::scaleToX(GLfloat scale) {
+void Moveable::scaleToX(float scale) {
   mScale = glm::vec3(scale, mScale.y, mScale.z);
   mRefresh = true;
 }
 
-void Moveable::scaleToY(GLfloat scale) {
+void Moveable::scaleToY(float scale) {
   mScale = glm::vec3(mScale.x, scale, mScale.z);
   mRefresh = true;
 }
 
-void Moveable::scaleToZ(GLfloat scale) {
+void Moveable::scaleToZ(float scale) {
   mScale = glm::vec3(mScale.x, mScale.y, scale);
   mRefresh = true;
 }
@@ -132,7 +131,7 @@ void Moveable::rotateTo(glm::quat rotation) {
   mRefresh = true;
 }
 
-void Moveable::rotateTo(const glm::vec3 &axis, GLfloat angle) {
+void Moveable::rotateTo(const glm::vec3 &axis, float angle) {
   glm::quat rotation = glm::angleAxis(angle, glm::normalize(axis));
   mRotation = rotation;
   mRefresh = true;
@@ -153,7 +152,7 @@ void Moveable::rotateByZ(float angle) {
   mRefresh = true;
 }
 
-void Moveable::rotateBy(const glm::vec3 &axis, GLfloat angle) {
+void Moveable::rotateBy(const glm::vec3 &axis, float angle) {
   glm::vec3 Axis (glm::mat4_cast(mRotation) * glm::vec4(glm::normalize(axis), 1.0));
 
   Axis = Axis * sinf(angle / 2.0f);
@@ -358,5 +357,4 @@ void Moveable::loop(int loops) {
   mCallbackLoops = loops;
 }
 
-} /* flf */
 } /* flw */

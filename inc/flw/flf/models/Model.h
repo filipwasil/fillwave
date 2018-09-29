@@ -81,7 +81,7 @@ public:
     , flc::Texture2D* specular
     , const Material& material = Material());
 
-  void draw(ICamera &camera) override;
+  void drawFR(ICamera &camera) override;
 
   void drawPBRP(ICamera &camera) override;
 
@@ -94,7 +94,8 @@ public:
 
   pp<Mesh> getMesh(size_t id);
 
-  void updateRenderer(IRenderer &renderer) override;
+  /* IRenderable */
+  void updateRenderer(flc::IRenderer &renderer) override;
 
   void log() const override;
 

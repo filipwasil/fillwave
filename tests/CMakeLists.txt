@@ -6,23 +6,21 @@ set (FILLWAVE_PRODUCTION_SOURCES
     )
 
 aux_source_directory (${TESTS_DIR}/framework TEST_FRAMEWORK_SOURCES)
-aux_source_directory (${TESTS_DIR}/stubs TEST_STUBS_SOURCES)
-aux_source_directory (${TESTS_DIR}/mocks TEST_MOCK_SOURCES)
-aux_source_directory (${TESTS_DIR}/mocks/flc TEST_MOCK_CORE_SOURCES)
-aux_source_directory (${TESTS_DIR}/mocks/flc/extended TEST_MOCK_CORE_EXTENDED_SOURCES)
+
+
 
 include_directories (${TESTS_DIR})
 
-set (FILLWAVE_MOCK_SOURCES
+set (FILLWAVE_TESTS_SOURCES
     ${TEST_FRAMEWORK_SOURCES}
-    ${TEST_STUBS_SOURCES}
+    ${FILLWAVE_STUBS_SOURCES}
     ${FILLWAVE_COMMON_SOURCES}
-    ${TEST_MOCK_CORE_SOURCES}
-    ${TEST_MOCK_CORE_EXTENDED_SOURCES}
+    ${FILLWAVE_MOCKS_CORE_SOURCES}
+    ${FILLWAVE_MOCKS_CORE_EXTENDED_SOURCES}
     )
 
-add_library (fillwave_stubs SHARED ${TEST_STUBS_SOURCES})
-add_library (fillwave_mock SHARED ${FILLWAVE_MOCK_SOURCES})
+add_library (fillwave_stubs SHARED ${FILLWAVE_STUBS_SOURCES})
+add_library (fillwave_mock SHARED ${FILLWAVE_TESTS_SOURCES})
 
 set_property (TARGET fillwave_stubs PROPERTY COMPILE_FLAGS "-w -Wno-undef")
 set_property (TARGET fillwave_mock PROPERTY COMPILE_FLAGS "-w -Wno-undef")

@@ -22,7 +22,7 @@
  */
 
 namespace flw {
-namespace flf {
+
 class Observable;
 
 /*! \class IObserver
@@ -47,5 +47,5 @@ public:
 
   virtual void onChanged(Observable* observable) = 0;
 };
-} /* flf */
+
 } /* flw */

@@ -23,7 +23,7 @@
 
 #include <flw/flc/buffers/VertexBufferDebug.h>
 #include <flw/flf/models/base/IReloadable.h>
-#include <flw/flf/space/base/ICamera.h>
+#include <flw/cmn/scene/ICamera.h>
 
 namespace flw {
 namespace flc {

@@ -45,7 +45,7 @@ bool Entity::isAnimated() const {
   return false;
 }
 
-void Entity::draw(ICamera & /*camera*/) {
+void Entity::drawFR(ICamera & /*camera*/) {
   // nothing
 }
 
@@ -187,13 +187,13 @@ void Entity::log() const {
   // nothing
 }
 
-void Entity::updateRenderer(IRenderer &renderer) {
+void Entity::updateRenderer(flc::IRenderer &renderer) {
   for (auto &it : mChildren) {
       it->updateRenderer(renderer);
   }
 }
 
-bool Entity::getRenderItem(RenderItem & /*item*/) {
+bool Entity::getRenderItem(flc::RenderItem & /*item*/) {
   return false;
 }
 

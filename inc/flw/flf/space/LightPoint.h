@@ -22,10 +22,9 @@
  */
 
 #include <flw/flc/extended/rendering/Texture3DRenderable.h>
-#include <flw/flf/space/CameraPerspective.h>
+#include <flw/cmn/scene/CameraPerspective.h>
+#include <flw/cmn/scene/Light.h>
 #include <flw/flf/models/shapes/Sphere.h>
-#include <flw/flf/space/base/Light.h>
-
 #include <map>
 
 namespace flw {

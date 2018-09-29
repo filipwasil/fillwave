@@ -41,6 +41,10 @@ IReloadable::IReloadable(Engine* engine, flc::VertexArray* vao)
 
 IReloadable::~IReloadable() = default;
 
+IReloadable::IReloadable(IReloadable&&) = default;
+
+IReloadable& IReloadable::operator=(IReloadable&&) = default;
+
 void IReloadable::reload() {
   initBuffers();
   initPipeline();

@@ -23,7 +23,7 @@
 #include <flw/flc/buffers/IndexBuffer.h>
 
 #include <flw/flf/models/shapes/PhysicsMeshBuffer.h>
-#include <flw/flf/models/base/Material.h>
+#include <flw/cmn/Material.h>
 
 #include <flw/flf/loaders/modelloader/assimp/ModelLoaderAssimp.h>
 

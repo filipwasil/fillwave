@@ -31,7 +31,7 @@ namespace flf {
 MeshOcclusion::MeshOcclusion(Engine* engine)
   : IReloadable (engine)
   , mEngine (engine)
-  , mProgram (ProgramLoader(engine).getProgram(flf::EProgram::occlusionOptimizedQuery)) {
+  , mProgram (ProgramLoader(engine).getProgram(EProgram::occlusionOptimizedQuery)) {
 }
 
 MeshOcclusion::~MeshOcclusion() {

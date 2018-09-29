@@ -23,7 +23,7 @@
 
 #include <flw/flc/texturing/Texture2D.h>
 #include <flw/flc/pipeline/Program.h>
-#include <flw/flc/pipeline/Blending.h>
+#include <flw/cmn/Blending.h>
 
 #include <flw/flf/models/base/ITreeNode.h>
 

@@ -59,13 +59,10 @@ public:
   /* IEmiterPoint */
   void update(GLfloat timeElapsedSec) override;
 
-  /* IDrawable */
-  void draw(ICamera &camera) override;
-
-  void drawPBRP(ICamera &camera) override;
-
   /* IRenderable */
-  bool getRenderItem(RenderItem &item) override;
+  void drawFR(ICamera &camera) override;
+  void drawPBRP(ICamera &camera) override;
+  bool getRenderItem(flc::RenderItem &item) override;
 
 private:
   static const GLint mPingPongBuffers = 2;

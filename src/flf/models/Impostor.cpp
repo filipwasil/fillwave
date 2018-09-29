@@ -65,21 +65,21 @@ void Impostor::coreDraw() {
   flc::Texture2D::unbind2DTextures();
 }
 
-bool Cursor::getRenderItem(RenderItem &item) {
+bool Cursor::getRenderItem(flc::RenderItem &item) {
   item.mBlend = mBlending;
   item.mCount = 4;
   item.mDataType = GL_NONE;
   item.mFirst = 0;
-  item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleProgram] = mProgram->getHandle();
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   item.mHandles[RenderItem::eRenderHandleSampler] = 0;
 #else
-  item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 #endif
-  item.mHandles[RenderItem::eRenderHandleVAO] = 0;
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
-  item.mHandles[RenderItem::eRenderHandleNormal] = 0;
-  item.mHandles[RenderItem::eRenderHandleSpecular] = 0;
+  item.mHandles[flc::RenderItem::eRenderHandleVAO] = 0;
+  item.mHandles[flc::RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
+  item.mHandles[flc::RenderItem::eRenderHandleNormal] = 0;
+  item.mHandles[flc::RenderItem::eRenderHandleSpecular] = 0;
   item.mIndicesPointer = 0;
   item.mMode = GL_TRIANGLE_STRIP;
   item.mStatus.bBlending = 1;

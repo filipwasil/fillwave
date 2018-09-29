@@ -47,7 +47,7 @@ private:
 
   void initUniformsCache();
 
-  bool getRenderItem(RenderItem &item) override;
+  bool getRenderItem(flc::RenderItem &item) override;
 };
 
 } /* flf */

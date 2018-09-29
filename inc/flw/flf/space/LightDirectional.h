@@ -21,9 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-//#include <flw/flf/management/TextureSystem.h>
-#include <flw/flf/space/CameraOrthographic.h>
-#include <flw/flf/space/base/Light.h>
+#include <flw/cmn/scene/CameraOrthographic.h>
+#include <flw/cmn/scene/Light.h>
 
 namespace flw {
 namespace flf {
@@ -31,7 +30,7 @@ namespace flf {
 /**
  * \brief Light UBO data.
  */
-struct LightDirectioData {
+struct LightDirectionalData {
   GLfloat position[4];
   GLfloat intensity[4];
   GLfloat mvp[16];

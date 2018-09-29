@@ -35,14 +35,12 @@ public:
   Hinge() = default;
   ~Hinge() override = default;
 
-  /* IDrawable */
-  void draw(ICamera &camera) override;
+  /* IRenderable */
+  void drawFR(ICamera &camera) override;
   void drawPBRP(ICamera &camera) override;
   void drawDR(ICamera &camera) override;
-
-  /* IRenderable */
-  void updateRenderer(IRenderer &renderer) override;
-  bool getRenderItem(RenderItem &item) override;
+  void updateRenderer(flc::IRenderer &renderer) override;
+  bool getRenderItem(flc::RenderItem &item) override;
 };
 
 } /* flf */

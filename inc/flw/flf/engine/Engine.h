@@ -133,9 +133,9 @@ class Engine {
   flc::Texture2DRenderableDynamic* storeTextureDynamic(const std::string &fragmentShaderPath);
 
   /* Store lights */
-  flf::LightSpot* storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable *followed = nullptr);
-  flf::LightPoint* storeLightPoint(glm::vec3 position, glm::vec4 color, flf::Moveable *followed = nullptr);
-  flf::LightDirectional* storeLightDirectional(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* m = nullptr);
+  flf::LightSpot* storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, Moveable *followed = nullptr);
+  flf::LightPoint* storeLightPoint(glm::vec3 position, glm::vec4 color, Moveable *followed = nullptr);
+  flf::LightDirectional* storeLightDirectional(glm::vec3 pos, glm::quat rot, glm::vec4 col, Moveable* m = nullptr);
 
   /* Store text */
   ps<flf::Text> storeText(

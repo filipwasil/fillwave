@@ -22,7 +22,6 @@
  */
 
 namespace flw {
-namespace flf {
 
 enum class EProgram {
   basic,
@@ -60,5 +59,4 @@ enum class EProgram {
   pointLightsDR,
 };
 
-} /* flf */
 } /* flw */

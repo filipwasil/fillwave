@@ -38,14 +38,17 @@ public:
 
   virtual ~IReloadable();
 
+  IReloadable(IReloadable&&);
+
+  IReloadable& operator=(IReloadable&&);
+
+  IReloadable(const IReloadable&) = delete;
+  IReloadable& operator=(const IReloadable&) = delete;
+
   virtual void initBuffers() = 0;
-
   virtual void initPipeline() = 0;
-
   virtual void initUniformsCache() = 0;
-
   virtual void initVAO() = 0;
-
   virtual void initVBO() = 0;
 
   void reload();

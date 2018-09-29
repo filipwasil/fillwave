@@ -27,7 +27,7 @@ FLOGINIT("Scene.cpp", FERROR | FFATAL | FUSER | FDEBUG)
 namespace flw {
 namespace flf {
 
-Scene::Scene(IRenderer* renderer)
+Scene::Scene(flc::IRenderer* renderer)
   : mRenderer(renderer)
   , mLastPicked(nullptr)
   , mCurrentPicableColor(0)
@@ -35,8 +35,8 @@ Scene::Scene(IRenderer* renderer)
   // nothing
 }
 
-void Scene::setRenderer(IRenderer* renderer) {
-  mRenderer = std::unique_ptr<IRenderer>(renderer);
+void Scene::setRenderer(flc::IRenderer* renderer) {
+  mRenderer = std::unique_ptr<flc::IRenderer>(renderer);
 }
 
 void Scene::setSkybox(pu<Skybox>&& skybox) {
@@ -192,11 +192,11 @@ void Scene::stepInTime(float timePassedInSeconds) {
 }
 
 void Scene::onShow() {
-
+  // nothing
 }
 
 void Scene::onHide() {
-
+  // nothing
 }
 
 } /* models */

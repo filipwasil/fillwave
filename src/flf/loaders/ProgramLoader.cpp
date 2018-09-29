@@ -1683,8 +1683,7 @@ void ProgramLoader::initDefaultUniforms(flc::Program *program) {
 
   flc::Program::disusePrograms();
 
-  /* Ignore errors*/
-  glGetError();
+  fLogC("Get uniform locations")
 }
 
 ProgramLoader::ProgramLoader(Engine *engine)

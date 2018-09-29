@@ -153,18 +153,18 @@ inline void Skybox::initVBO() {
   mVBO->initAttributes(mProgram->getHandle());
 }
 
-bool Skybox::getRenderItem(RenderItem &item) {
+bool Skybox::getRenderItem(flc::RenderItem &item) {
   item.mCount = mIBO ? mIBO->getElements() : mVBO->getElements();
   item.mDataType = GL_UNSIGNED_INT;
   item.mFirst = 0;
-  item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleProgram] = mProgram->getHandle();
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   item.mHandles[RenderItem::eRenderHandleSampler] = 0;
 #else
-  item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 #endif
-  item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0]; //xxx 3d texture handle
+  item.mHandles[flc::RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0]; //xxx 3d texture handle
   item.mIndicesPointer = 0;
   item.mMode = GL_TRIANGLES;
   item.mRenderStatus = mIBO ? 0xe0 : 0xa0; // vao, ibo, diff, norm, spec, blend, cont, anim

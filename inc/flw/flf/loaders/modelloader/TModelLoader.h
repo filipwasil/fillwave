@@ -22,11 +22,13 @@
  */
 
 #include <flw/flf/loaders/modelloader/ModelLoaderTraits.h>
-#include <flw/flf/models/base/Material.h>
+#include <flw/cmn/Material.h>
 #include <flw/cmn/Empty.h>
 #include <flw/flf/loaders/modelloader/AnimatorDefault.h>
 
 namespace flw {
+
+struct Material;
 
 namespace flc {
 class IndexBuffer;
@@ -37,7 +39,6 @@ namespace flf {
 
 class Animator;
 class Entity;
-struct Material;
 struct PhysicsMeshBuffer;
 
 template <class Traits>

@@ -27,10 +27,10 @@
 #include <flw/flc/operations/TQuery.h>
 #include <flw/flc/buffers/VertexBufferBasic.h>
 #include <flw/flf/models/Entity.h>
-#include <flw/flf/models/base/Material.h>
+#include <flw/cmn/Material.h>
 #include <flw/flf/models/base/IReloadable.h>
 
-#include <flw/flf/renderers/IRenderer.h>
+#include <flw/flc/renderers/IRenderer.h>
 
 #include <flw/flc/extended/operations/ConditionalRender.h>
 #include <flw/flc/extended/pipeline/Fence.h>
@@ -72,7 +72,7 @@ public:
   ~Mesh() override;
 
   /* IDrawable */
-  void draw(ICamera &camera) override;
+  void drawFR(ICamera &camera) override;
 
   void drawPBRP(ICamera &camera) override;
 
@@ -91,9 +91,8 @@ public:
   void drawOcclusionBox(ICamera &camera) override;
 
   /* IRenderable */
-  virtual void updateRenderer(IRenderer &renderer) override;
-
-  virtual bool getRenderItem(RenderItem &item) override;
+  void updateRenderer(flc::IRenderer &renderer) override;
+  bool getRenderItem(flc::RenderItem &item) override;
 
   void log() const override;
 

@@ -77,7 +77,7 @@ void Engine::initManagement() {
 
 void Engine::initPipelines() {
   /* T */
-  mProgramTextureLookup = mProgramLoader.getProgram(flf::EProgram::quad);
+  mProgramTextureLookup = mProgramLoader.getProgram(EProgram::quad);
 }
 
 void Engine::initUniforms() {
@@ -198,12 +198,12 @@ void Engine::configTime(GLfloat timeFactor) {
   mTimeFactor = timeFactor;
 }
 
-flf::LightSpot* Engine::storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
+flf::LightSpot* Engine::storeLightSpot(glm::vec3 pos, glm::quat rot, glm::vec4 col, Moveable* observed) {
   return mLights->mLightsSpot.add(mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
 }
 
 flf::LightDirectional*
-Engine::storeLightDirectional(glm::vec3 pos, glm::quat rot, glm::vec4 col, flf::Moveable* observed) {
+Engine::storeLightDirectional(glm::vec3 pos, glm::quat rot, glm::vec4 col, Moveable* observed) {
   return mLights->mLightsDirectional.add(
     mTextures->getShadow2D(mWindowWidth, mWindowHeight), pos, rot, col, observed);
 }
@@ -740,7 +740,7 @@ void Engine::populateDebugger() {
     case EDebuggerState::lightsPointColor:
       for (size_t j = 0; j < mLights->mLightsPoint.size(); j++) {
         for (int i = GL_TEXTURE_CUBE_MAP_POSITIVE_X; i <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z; i++) {
-          flf::CameraPerspective cameraPF = *(mLights->mLightsPoint[j]->getShadowCamera(i));
+          CameraPerspective cameraPF = *(mLights->mLightsPoint[j]->getShadowCamera(i));
           mDebugger->renderFromCamera(cameraPF, id++);
         }
       }
@@ -830,7 +830,7 @@ Sampler* Engine::storeSO(GLint textureUnit) {
   return mSamplers.store(textureUnit, textureUnit);
 }
 
-flf::LightPoint* Engine::storeLightPoint(glm::vec3 pos, glm::vec4 col, flf::Moveable* observed) {
+flf::LightPoint* Engine::storeLightPoint(glm::vec3 pos, glm::vec4 col, Moveable* observed) {
   return mLights->mLightsPoint.add(mTextures->getShadow3D(mWindowWidth, mWindowHeight), pos, col, observed);
 }
 

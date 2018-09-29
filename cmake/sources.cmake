@@ -1,43 +1,50 @@
 aux_source_directory (${FILLWAVE_PATH_SOURCE} FILLWAVE_ROOT_SOURCES)
 
-aux_source_directory ("src/flc" FILLWAVE_OPENGL_SOURCES)
-aux_source_directory ("src/flc/buffers" FILLWAVE_CORE_BUFFERS_SOURCES)
-aux_source_directory ("src/flc/rendering" FILLWAVE_CORE_RENDERING_SOURCES)
-aux_source_directory ("src/flc/pipeline" FILLWAVE_CORE_PIPELINE_SOURCES)
-aux_source_directory ("src/flc/texturing" FILLWAVE_CORE_TEXTURING_SOURCES)
-aux_source_directory ("src/flc/operations" FILLWAVE_CORE_OPERATIONS_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc" FILLWAVE_OPENGL_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/buffers" FILLWAVE_CORE_BUFFERS_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/rendering" FILLWAVE_CORE_RENDERING_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/pipeline" FILLWAVE_CORE_PIPELINE_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/texturing" FILLWAVE_CORE_TEXTURING_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/operations" FILLWAVE_CORE_OPERATIONS_SOURCES)
 
 if (FILLWAVE_BACKEND_OPENGL_ES_20)
 else()
-  aux_source_directory ("src/flc/extended" FILLWAVE_CORE_EXTENDED_SOURCES)
-  aux_source_directory ("src/flc/extended/buffers" FILLWAVE_CORE_EXTENDED_BUFFERS_SOURCES)
-  aux_source_directory ("src/flc/extended/rendering" FILLWAVE_CORE_EXTENDED_RENDERING_SOURCES)
-  aux_source_directory ("src/flc/extended/pipeline" FILLWAVE_CORE_EXTENDED_PIPELINE_SOURCES)
-  aux_source_directory ("src/flc/extended/texturing" FILLWAVE_CORE_EXTENDED_TEXTURING_SOURCES)
-  aux_source_directory ("src/flc/extended/operations" FILLWAVE_CORE_EXTENDED_OPERATIONS_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended" FILLWAVE_CORE_EXTENDED_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/buffers" FILLWAVE_CORE_EXTENDED_BUFFERS_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/rendering" FILLWAVE_CORE_EXTENDED_RENDERING_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/pipeline" FILLWAVE_CORE_EXTENDED_PIPELINE_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/texturing" FILLWAVE_CORE_EXTENDED_TEXTURING_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/operations" FILLWAVE_CORE_EXTENDED_OPERATIONS_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/renderers/extended" FILLWAVE_CORE_RENDERERS_EXTENDED_SOURCES)
 
-  aux_source_directory ("src/flf/renderers/extended" FILLWAVE_RENDERERS_EXTENDED_SOURCES)
-  aux_source_directory ("src/flf/models/extended" FILLWAVE_MODELS_EXTENDED_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/models/extended" FILLWAVE_MODELS_EXTENDED_SOURCES)
 endif()
 
-aux_source_directory ("src/flf/models" FILLWAVE_MODELS_SOURCES)
-aux_source_directory ("src/flf/models/base" FILLWAVE_MODELS_BASE_SOURCES)
-aux_source_directory ("src/flf/models/effects" FILLWAVE_MODELS_EFFECTS_SOURCES)
-aux_source_directory ("src/flf/models/builders" FILLWAVE_MODELS_BUILDERS_SOURCES)
-aux_source_directory ("src/flf/models/shapes" FILLWAVE_SHAPES_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/models" FILLWAVE_MODELS_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/models/base" FILLWAVE_MODELS_BASE_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/models/effects" FILLWAVE_MODELS_EFFECTS_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/models/builders" FILLWAVE_MODELS_BUILDERS_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/models/shapes" FILLWAVE_SHAPES_SOURCES)
 
-aux_source_directory ("src/flf/loaders/modelloader" FILLWAVE_MODELS_ANIMATIONS_SOURCES)
-aux_source_directory ("src/flf/loaders/textureloader" FILLWAVE_TEXTURE_LOADER_BASE_SOURCES)
-aux_source_directory ("src/flf/loaders" FILLWAVE_LOADERS_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/loaders/modelloader" FILLWAVE_MODELS_ANIMATIONS_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/loaders/textureloader" FILLWAVE_TEXTURE_LOADER_BASE_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/loaders" FILLWAVE_LOADERS_SOURCES)
 
-aux_source_directory ("src/flf/space" FILLWAVE_SPACE_SOURCES)
-aux_source_directory ("src/flf/space/base" FILLWAVE_SPACE_BASE_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/space" FILLWAVE_SPACE_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/space/base" FILLWAVE_SPACE_BASE_SOURCES)
 
-aux_source_directory ("src/flf/hud" FILLWAVE_HUD_SOURCES)
-aux_source_directory ("src/flf/management" FILLWAVE_MANAGEMENT_SOURCES)
-aux_source_directory (${CMAKE_CURRENT_SOURCE_DIR}/src/cmn FILLWAVE_COMMON_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/hud" FILLWAVE_HUD_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/management" FILLWAVE_MANAGEMENT_SOURCES)
 
-aux_source_directory ("src/flf/renderers" FILLWAVE_RENDERERS_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/cmn" FILLWAVE_COMMON_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/cmn/scene" FILLWAVE_COMMON_SCENE_SOURCES)
+
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/renderers" FILLWAVE_CORE_RENDERERS_SOURCES)
+
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/tests/mocks/flc" FILLWAVE_MOCKS_CORE_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/tests/mocks/flc/extended" FILLWAVE_MOCKS_CORE_EXTENDED_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/tests/stubs" FILLWAVE_STUBS_SOURCES)
+aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/tests/mocks" FILLWAVE_MOCKS_SOURCES)
 
 set (FILLWAVE_ENGINE_SOURCES
     ${FILLWAVE_PATH_SOURCE}/flf/engine/Engine.cpp)
@@ -50,6 +57,19 @@ else()
   set (FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES ${FILLWAVE_PATH_SOURCE}/flf/engine/EnginePC.cpp)
 endif()
 
+set (FILLWAVE_FRAMEWORK_SOURCES
+    ${FILLWAVE_MODELS_SOURCES}
+    ${FILLWAVE_MODELS_BASE_SOURCES}
+    ${FILLWAVE_MODELS_EFFECTS_SOURCES}
+    ${FILLWAVE_MODELS_BUILDERS_SOURCES}
+    ${FILLWAVE_SHAPES_SOURCES}
+    ${FILLWAVE_MODELS_ANIMATIONS_SOURCES}
+    ${FILLWAVE_TEXTURE_LOADER_BASE_SOURCES}
+    ${FILLWAVE_LOADERS_SOURCES}
+    ${FILLWAVE_SPACE_SOURCES}
+    ${FILLWAVE_SPACE_BASE_SOURCES}
+    )
+
 set (FILLWAVE_CORE_SOURCES
     ${FILLWAVE_OPENGL_SOURCES}
     ${FILLWAVE_CORE_BUFFERS_SOURCES}
@@ -57,37 +77,13 @@ set (FILLWAVE_CORE_SOURCES
     ${FILLWAVE_CORE_PIPELINE_SOURCES}
     ${FILLWAVE_CORE_TEXTURING_SOURCES}
     ${FILLWAVE_CORE_OPERATIONS_SOURCES}
+    ${FILLWAVE_CORE_RENDERERS_SOURCES}
     ${FILLWAVE_CORE_EXTENDED_BUFFERS_SOURCES}
     ${FILLWAVE_CORE_EXTENDED_RENDERING_SOURCES}
     ${FILLWAVE_CORE_EXTENDED_PIPELINE_SOURCES}
     ${FILLWAVE_CORE_EXTENDED_TEXTURING_SOURCES}
     ${FILLWAVE_CORE_EXTENDED_OPERATIONS_SOURCES}
-)
-
-set (FILLWAVE_FRAMEWORK_SOURCES
-    ${FILLWAVE_ROOT_SOURCES}
-    ${FILLWAVE_MODELS_SOURCES}
-    ${FILLWAVE_MODELS_BASE_SOURCES}
-    ${FILLWAVE_MODELS_ANIMATIONS_SOURCES}
-    ${FILLWAVE_MODELS_EFFECTS_SOURCES}
-    ${FILLWAVE_MODELS_BUILDERS_SOURCES}
-    ${FILLWAVE_MODELS_EXTENDED_SOURCES}
-    ${FILLWAVE_SPACE_SOURCES}
-    ${FILLWAVE_SPACE_BASE_SOURCES}
-    ${FILLWAVE_LOADERS_SOURCES}
-    ${FILLWAVE_MANAGEMENT_SOURCES}
-    ${FILLWAVE_COMMON_SOURCES}
-    ${FILLWAVE_RENDERERS_SOURCES}
-    ${FILLWAVE_RENDERERS_EXTENDED_SOURCES}
-    ${FILLWAVE_HUD_SOURCES}
-    ${FILLWAVE_MODEL_LOADER_SOURCES}
-    ${FILLWAVE_MODEL_LOADER_TRAITS}
-    ${FILLWAVE_TEXTURE_LOADER_BASE_SOURCES}
-    ${FILLWAVE_TEXTURE_LOADER_SOURCES}
-    ${FILLWAVE_TEXTURE_LOADER_TRAITS}
-    ${FILLWAVE_SHAPES_SOURCES}
-    ${FILLWAVE_ENGINE_SOURCES}
-    ${FILLWAVE_ENGINE_OS_SPECIFIC_SOURCES}
+    ${FILLWAVE_CORE_EXTENDED_RENDERERS_SOURCES}
 )
 
 set (FILLWAVE_SOURCES
@@ -114,8 +110,9 @@ set (FILLWAVE_SOURCES
     ${FILLWAVE_LOADERS_SOURCES}
     ${FILLWAVE_MANAGEMENT_SOURCES}
     ${FILLWAVE_COMMON_SOURCES}
-    ${FILLWAVE_RENDERERS_SOURCES}
-    ${FILLWAVE_RENDERERS_EXTENDED_SOURCES}
+    ${FILLWAVE_COMMON_SCENE_SOURCES}
+    ${FILLWAVE_CORE_RENDERERS_SOURCES}
+    ${FILLWAVE_CORE_RENDERERS_EXTENDED_SOURCES}
     ${FILLWAVE_HUD_SOURCES}
     ${FILLWAVE_MODEL_LOADER_SOURCES}
     ${FILLWAVE_MODEL_LOADER_TRAITS}

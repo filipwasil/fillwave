@@ -103,7 +103,7 @@ void Mesh::drawPBRP(ICamera &camera) {
   }
 }
 
-void Mesh::draw(ICamera &camera) {
+void Mesh::drawFR(ICamera &camera) {
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   if (mAnimator || mOcclusionQuery.getResultAsync(1))
@@ -364,24 +364,24 @@ void Mesh::log() const {
   mVBO->log();
 }
 
-void Mesh::updateRenderer(IRenderer &renderer) {
+void Mesh::updateRenderer(flc::IRenderer &renderer) {
   renderer.update(this);
 }
 
-bool Mesh::getRenderItem(RenderItem &item) {
+bool Mesh::getRenderItem(flc::RenderItem &item) {
   item.mCount = mIBO ? mIBO->getElements() : mVBO->getElements();
   item.mDataType = GL_UNSIGNED_INT;
   item.mFirst = 0;
-  item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleProgram] = mProgram->getHandle();
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   item.mHandles[RenderItem::eRenderHandleSampler] = 0;
 #else
-  item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 #endif
-  item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mDiffuseMap ? mDiffuseMap->mTexture.mHandles[0] : 0;
-  item.mHandles[RenderItem::eRenderHandleNormal] = mNormalMap ? mNormalMap->mTexture.mHandles[0] : 0;
-  item.mHandles[RenderItem::eRenderHandleSpecular] = mSpecularMap ? mSpecularMap->mTexture.mHandles[0] : 0;
+  item.mHandles[flc::RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleDiffuse] = mDiffuseMap ? mDiffuseMap->mTexture.mHandles[0] : 0;
+  item.mHandles[flc::RenderItem::eRenderHandleNormal] = mNormalMap ? mNormalMap->mTexture.mHandles[0] : 0;
+  item.mHandles[flc::RenderItem::eRenderHandleSpecular] = mSpecularMap ? mSpecularMap->mTexture.mHandles[0] : 0;
   item.mIndicesPointer = 0;
   item.mMode = GL_TRIANGLES;
   item.mRenderStatus = mIBO ? 0xf8 : 0xb8; // vao, ibo, diff, norm, spec, blend, cont, anim

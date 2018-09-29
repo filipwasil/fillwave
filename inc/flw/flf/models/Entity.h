@@ -22,9 +22,9 @@
  */
 
 #include <flw/cmn/IPickable.h>
-#include <flw/flf/space/base/ICamera.h>
-#include <flw/flf/models/base/IRenderable.h>
-#include <flw/flf/models/base/Moveable.h>
+#include <flw/cmn/scene/ICamera.h>
+#include <flw/flc/renderers/IRenderable.h>
+#include <flw/cmn/scene/Moveable.h>
 #include <flw/flf/models/base/TreePtr.h>
 
 namespace flw {
@@ -45,7 +45,7 @@ namespace flf {
  * \brief Base for all Scene nodes.
  */
 
-class Entity : public IRenderable, public IPickable, public Moveable, public TreePtr<Entity> {
+class Entity : public flc::IRenderable,  public IPickable, public Moveable, public TreePtr<Entity> {
 public:
   Entity();
 
@@ -93,28 +93,19 @@ public:
   virtual void onUnpicked() override;
 
   /* IDrawable */
-  virtual void draw(ICamera &camera) override;
-
-  virtual void drawPBRP(ICamera &camera) override;
-
-  virtual void drawDR(ICamera &camera) override;
-
-  virtual void drawDepth(ICamera &camera) override;
-
-  virtual void drawDepthColor(ICamera &camera, glm::vec3 &position) override;
-
-  virtual void drawAOG(ICamera &camera) override;
-
-  virtual void drawAOC(ICamera &camera) override;
-
-  virtual void drawOcclusionBox(ICamera &camera) override;
-
-  virtual void drawPicking(ICamera &camera) override;
+  void drawFR(ICamera &camera) override;
+  void drawPBRP(ICamera &camera) override;
+  void drawDR(ICamera &camera) override;
+  void drawDepth(ICamera &camera) override;
+  void drawDepthColor(ICamera &camera, glm::vec3 &position) override;
+  void drawAOG(ICamera &camera) override;
+  void drawAOC(ICamera &camera) override;
+  void drawOcclusionBox(ICamera &camera) override;
+  void drawPicking(ICamera &camera) override;
 
   /* IRenderable */
-  virtual void updateRenderer(IRenderer &renderer) override;
-
-  virtual bool getRenderItem(RenderItem &item) override;
+  void updateRenderer(flc::IRenderer &renderer) override;
+  bool getRenderItem(flc::RenderItem &item) override;
 
   /* Animations */
   virtual bool isAnimated() const;

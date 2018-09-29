@@ -19,6 +19,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <flw/cmn/scene/ICamera.h>
+
 #include <flw/flf/models/EmiterPointCPU.h>
 #include <flw/flf/loaders/ProgramLoader.h>
 
@@ -26,7 +28,7 @@
 
 #include <flw/Log.h>
 
-FLOGINIT("EmiterPointCPU", FERROR | FFATAL | FINFO)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
@@ -118,7 +120,7 @@ void EmiterPointCPU::update(GLfloat timeElapsedSec) {
   flc::Program::disusePrograms();
 }
 
-void EmiterPointCPU::draw(ICamera &camera) {
+void EmiterPointCPU::drawFR(ICamera &camera) {
   mCameraPosition = camera.getTranslation();
 
   mProgram->use();
@@ -228,19 +230,19 @@ void EmiterPointCPU::initVBO() {
   mVBO->initAttributes(mProgram->getHandle());
 }
 
-bool EmiterPointCPU::getRenderItem(RenderItem &item) {
+bool EmiterPointCPU::getRenderItem(flc::RenderItem &item) {
   item.mBlend = mBlending;
   item.mCount = mIBO->getElements();
   item.mDataType = GL_UNSIGNED_INT;
   item.mFirst = 0;
-  item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleProgram] = mProgram->getHandle();
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   item.mHandles[RenderItem::eRenderHandleSampler] = 0;
 #else
-  item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 #endif
-  item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
+  item.mHandles[flc::RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
   item.mIndicesPointer = 0;
   item.mMode = GL_POINTS;
 

@@ -21,9 +21,8 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flf/space/base/Light.h>
-#include <flw/flf/space/CameraPerspective.h>
-//#include <flw/flf/management/TextureSystem.h>
+#include <flw/cmn/scene/Light.h>
+#include <flw/cmn/scene/CameraPerspective.h>
 
 namespace flw {
 namespace flf {

@@ -25,8 +25,7 @@
 #include <flw/flf/models/Entity.h>
 #include <flw/flf/models/Skybox.h>
 #include <flw/flf/models/Cursor.h>
-#include <flw/flf/models/base/IDrawable.h>
-#include <flw/flf/renderers/RendererFR.h>
+#include <flw/flc/renderers/RendererFR.h>
 #include <flw/cmn/pointers/PointerProtected.h>
 
 #include <unordered_map>
@@ -40,7 +39,7 @@ namespace flf {
 
 class Scene : public TreePtr<Entity> {
 public:
-  Scene(IRenderer* renderer = new RendererFR());
+  Scene(flc::IRenderer* renderer = new flc::RendererFR());
 
   virtual ~Scene() = default;
 
@@ -48,7 +47,7 @@ public:
 
   void updateRenderer();
 
-  void setRenderer(IRenderer *renderer);
+  void setRenderer(flc::IRenderer *renderer);
 
   void resetRenderer(GLuint screenWidth, GLuint screenHeight);
 
@@ -100,11 +99,10 @@ public:
 
   /* Interface */
   virtual void onShow();
-
   virtual void onHide();
 
 protected:
-  pu<IRenderer> mRenderer;
+  pu<flc::IRenderer> mRenderer;
   pu<HUD> mHeadUpDisplay;
   pu<Cursor> mCursor;
   pu<ICamera> mCamera;

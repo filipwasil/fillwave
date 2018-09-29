@@ -160,6 +160,8 @@ MeshTerrain::MeshTerrain(Engine *engine,
   }
 }
 
+MeshTerrain::~MeshTerrain() = default;
+
 void MeshTerrain::initIBO(std::vector<GLuint> &indices, GLuint density) {
   int pointsWidth, pointsWidthNext, offset;
 
@@ -180,7 +182,7 @@ void MeshTerrain::initIBO(std::vector<GLuint> &indices, GLuint density) {
   }
 }
 
-void MeshTerrain::draw(ICamera &camera) {
+void MeshTerrain::drawFR(ICamera &camera) {
   distanceCheck(camera);
   drawWithEffects(camera);
 }
@@ -194,7 +196,7 @@ void MeshTerrain::drawPBRP(ICamera &camera) {
   }
 }
 
-void MeshTerrain::updateRenderer(IRenderer &renderer) {
+void MeshTerrain::updateRenderer(flc::IRenderer &renderer) {
   renderer.update(this);
 }
 

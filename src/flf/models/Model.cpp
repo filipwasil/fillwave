@@ -319,7 +319,7 @@ pu<Mesh> Model::loadMesh(
   return mesh;
 }
 
-void Model::draw(ICamera &camera) {
+void Model::drawFR(ICamera &camera) {
   evaluateAnimations();
   drawWithEffects(camera);
 }
@@ -351,7 +351,7 @@ inline void Model::initShadowing() {
     mProgramLoader.getProgram(mAnimator ? EProgram::shadowColorCodedWithAnimation : EProgram::shadowColorCoded);
 }
 
-void Model::updateRenderer(IRenderer &renderer) {
+void Model::updateRenderer(flc::IRenderer &renderer) {
   renderer.update(this);
 }
 

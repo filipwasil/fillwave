@@ -2,17 +2,17 @@
 
 #include "../common.h"
 
-#include <flw/flf/models/base/IRenderable.h>
-#include <flw/flf/models/base/RenderItem.h>
+#include <flw/flc/renderers/IRenderable.h>
+#include <flw/flc/renderers/RenderItem.h>
 
 using namespace flw;
-using namespace flw::flf;
+using namespace flw::flc;
 
 class MockIRenderable : public IRenderable {
 public:
   MOCK_METHOD1(getRenderItem, bool(RenderItem& item));
   MOCK_METHOD1(updateRenderer, void(ICamera& camera));
-  MOCK_METHOD1(draw, void(ICamera& camera));
+  MOCK_METHOD1(drawFR, void(ICamera& camera));
   MOCK_METHOD1(drawPBRP, void(ICamera& camera));
   MOCK_METHOD1(drawDR, void(ICamera& camera));
   MOCK_METHOD1(drawDepth, void(ICamera& camera));

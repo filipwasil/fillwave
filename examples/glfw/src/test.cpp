@@ -162,7 +162,7 @@ void init() {
   engine->configFPSCounter("FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
   engine->storeText("Benchmark", "FreeSans", glm::vec2(-0.95f, -0.85f), 50.0f);
 
-  Material m{};
+  flw::Material m{};
   auto terrain = std::make_unique<MeshTerrain>(
     engine
     , programs.getProgram(EProgram::basic)

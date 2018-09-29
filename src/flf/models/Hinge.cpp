@@ -24,9 +24,9 @@
 namespace flw {
 namespace flf {
 
-void Hinge::draw(ICamera &camera) {
+void Hinge::drawFR(ICamera &camera) {
   for (auto &it : mChildren) {
-    it->draw(camera);
+    it->drawFR(camera);
   }
 }
 
@@ -42,11 +42,11 @@ void Hinge::drawDR(ICamera &camera) {
   }
 }
 
-void Hinge::updateRenderer(IRenderer & /*renderer*/) {
+void Hinge::updateRenderer(flc::IRenderer & /*renderer*/) {
   // nothing
 }
 
-bool Hinge::getRenderItem(RenderItem & /*item*/) {
+bool Hinge::getRenderItem(flc::RenderItem & /*item*/) {
   /* Hinge meant not to be drawn */
   return false;
 }

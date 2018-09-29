@@ -113,7 +113,7 @@ EmiterPointGPU::EmiterPointGPU(Engine *engine,
   initUniformsCache();
 }
 
-void EmiterPointGPU::draw(ICamera &camera) {
+void EmiterPointGPU::drawFR(ICamera &camera) {
   /* Save camera position for optimization purposes. */
   mCameraPosition = camera.getTranslation();
 
@@ -179,9 +179,8 @@ void EmiterPointGPU::draw(ICamera &camera) {
   coreDraw();
 }
 
-void EmiterPointGPU::drawPBRP(ICamera &camera) {
+void EmiterPointGPU::drawPBRP(ICamera&/*camera*/) {
   /* for now PBRP is not supported for GPU particle emiter */
-  draw(camera);
 }
 
 inline void EmiterPointGPU::coreDraw() {
@@ -299,15 +298,15 @@ void EmiterPointGPU::initVBO() {
   }
 }
 
-bool EmiterPointGPU::getRenderItem(RenderItem &item) {
+bool EmiterPointGPU::getRenderItem(flc::RenderItem &item) {
   item.mBlend = mBlending;
   item.mCount = mIBO->getElements();
   item.mDataType = GL_UNSIGNED_INT;
   item.mFirst = 0;
-  item.mHandles[RenderItem::eRenderHandleProgram] = mProgram->getHandle();
-  item.mHandles[RenderItem::eRenderHandleSampler] = mSampler->getHandle();
-  item.mHandles[RenderItem::eRenderHandleVAO] = mVAO->getHandle();
-  item.mHandles[RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
+  item.mHandles[flc::RenderItem::eRenderHandleProgram] = mProgram->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleSampler] = mSampler->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleVAO] = mVAO->getHandle();
+  item.mHandles[flc::RenderItem::eRenderHandleDiffuse] = mTexture->mTexture.mHandles[0];
   item.mIndicesPointer = 0;
   item.mMode = GL_POINTS;
 
