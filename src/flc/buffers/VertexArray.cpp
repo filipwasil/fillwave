@@ -36,17 +36,17 @@ namespace flw {
 namespace flc {
 
 VertexArray::VertexArray(GLuint howMany) : mHowMany(howMany) {
-  glGenVertexArrays(mHowMany, mHandles);
+  glGenVertexArrays(1, &mHandles);
   fLogC("Could not generate the VAO");
 }
 
 VertexArray::~VertexArray() {
-  glDeleteVertexArrays(mHowMany, mHandles);
+  glDeleteVertexArrays(1, &mHandles);
   fLogC("Could not delete the VAO");
 }
 
-void VertexArray::bind(GLuint id) {
-  glBindVertexArray(mHandles[id]);
+void VertexArray::bind(GLuint /*id*/) {
+  glBindVertexArray(mHandles);
   fLogC("Could not bind the VAO");
 }
 
@@ -56,13 +56,13 @@ void VertexArray::unbindVAO() {
 }
 
 void VertexArray::reload() {
-  glDeleteVertexArrays(mHowMany, mHandles);
-  glGenVertexArrays(mHowMany, mHandles);
+  glDeleteVertexArrays(1, &mHandles);
+  glGenVertexArrays(1, &mHandles);
   fLogC("reload");
 }
 
 GLuint VertexArray::getHandle(GLuint id) {
-  return id < FILLWAVE_GLOBJECTS_MAX ? mHandles[id] : 0;
+  return id;
 }
 
 void bindVAO(GLuint handle) {

@@ -329,7 +329,7 @@ class Engine {
     , const ModelLoader::ShapeType* shape
     , ModelLoader::Animator* animator);
 
-  flc::VertexBufferDebug* storeBufferInternal(flc::VertexArray *vao, GLfloat scale);
+  flc::VertexBufferDebug* storeBufferInternal(flc::VertexArray *vao, float);
   flc::VertexBufferFloat* storeBufferInternal(flc::VertexArray *vao, vec<flc::VertexFloat> &data);
   flc::VertexBufferPosition* storeBufferInternal(flc::VertexArray *vao, vec<flc::VertexPosition> &data);
   flc::IndexBuffer* storeBufferInternal(flc::VertexArray *vao, const ModelLoader::ShapeType* shape);

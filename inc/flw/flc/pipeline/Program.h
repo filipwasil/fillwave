@@ -104,10 +104,10 @@ private:
 #else
   public:
     void getUniformBlock(const std::string& name, GLuint bindingPoint);
-    void uniformBlockPush(const std::string& name, GLfloat* data);
+    void uniformBlockPush(const std::string& name, GLfloat* data, size_t size = 0);
 
   private:
-    std::vector<pu<flc::UniformBuffer>> mUnifromBuffers;
+    std::vector<pu<flc::UniformBuffer>> mUniformBuffers;
 
 #endif
 };

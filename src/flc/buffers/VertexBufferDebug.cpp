@@ -24,36 +24,24 @@
 namespace flw {
 namespace flc {
 
-VertexBufferDebug::VertexBufferDebug(GLfloat) {
+VertexBufferDebug::VertexBufferDebug(float) {
 
   GLfloat debugWindow2DPositions[] = {
-      -1.0,
-      1.0,
-      -1.0,
-      -1.0,
-      1.0,
-      1.0,
-      1.0,
-      1.0,
-      -1.0,
-      -1.0,
-      1.0,
-      -1.0
+      -1.0, 1.0,
+      -1.0, -1.0,
+      1.0, 1.0,
+      1.0, 1.0,
+      -1.0, -1.0,
+      1.0, -1.0
   };
 
   GLfloat debugWindow2DUV[] = {
-      0.0,
-      1.0,
-      0.0,
-      0.0,
-      1.0,
-      1.0,
-      1.0,
-      1.0,
-      0.0,
-      0.0,
-      1.0,
-      0.0
+      0.0, 1.0,
+      0.0, 0.0,
+      1.0, 1.0,
+      1.0, 1.0,
+      0.0, 0.0,
+      1.0, 0.0
   };
 
   mDataVertices.reserve(6);

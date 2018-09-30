@@ -50,7 +50,10 @@ void UniformBuffer::bindRange(GLuint id) {
   return glBindBufferRange(mTarget, mBindingPoint, mHandles[id], 0, mSize);
 }
 
-void UniformBuffer::push(GLfloat *data) {
+void UniformBuffer::push(GLfloat *data, size_t size) {
+  if (0 != size) {
+    mSize = size;
+  }
   bind();
   mData = data;
   send();

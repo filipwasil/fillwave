@@ -28,9 +28,9 @@ IRenderable::IRenderable() = default;
 
 IRenderable::~IRenderable() = default;
 
-IRenderable& IRenderable::operator=(const IRenderable&) = default;
+IRenderable& IRenderable::operator=(IRenderable&&) = default;
 
-IRenderable::IRenderable(const IRenderable&) = default;
+IRenderable::IRenderable(IRenderable&&) = default;
 
 } /* flc */
 } /* flw */

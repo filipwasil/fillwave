@@ -39,9 +39,13 @@ public:
 
   virtual ~IRenderable();
 
-  IRenderable &operator=(const IRenderable&);
+  IRenderable &operator=(const IRenderable&) = delete;
 
-  IRenderable(const IRenderable&);
+  IRenderable(const IRenderable&) = delete;
+
+  IRenderable& operator=(IRenderable&&);
+
+  IRenderable(IRenderable&&);
 
   virtual void drawFR(ICamera &camera) = 0;
 

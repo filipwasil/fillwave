@@ -35,6 +35,8 @@ Scene::Scene(flc::IRenderer* renderer)
   // nothing
 }
 
+Scene::~Scene() = default;
+
 void Scene::setRenderer(flc::IRenderer* renderer) {
   mRenderer = std::unique_ptr<flc::IRenderer>(renderer);
 }
@@ -199,5 +201,5 @@ void Scene::onHide() {
   // nothing
 }
 
-} /* models */
+} /* flc */
 } /* flw */

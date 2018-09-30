@@ -64,3 +64,6 @@ endif ()
 if (FILLWAVE_BENCHMARK_TESTS)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-variable")   # Log mechanism
 endif()
+
+# Sanitizer. Use when needed.
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g-Wno-error=unsafe-loop-optimizations")

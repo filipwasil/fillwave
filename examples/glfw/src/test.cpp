@@ -9,11 +9,15 @@ using namespace flw::flc;
 
 int main(int argc, char* argv[]) {
   auto context = std::make_unique<ContextGLFW>(argc, argv);
-  //ContextGLFW mContext(argc, argv);
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_PC)
+  ContextGLFW::mGraphics = new flw::EnginePCGLES(argc, argv, glfwGetProcAddress);
+#else
+  ContextGLFW::mGraphics = new flw::EnginePC(argc, argv);
+#endif
   init();
   initCallbacks();
   context->render();
-  context.reset();
+  delete ContextGLFW::mGraphics;
   exit(EXIT_SUCCESS);
 }
 

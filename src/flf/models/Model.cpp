@@ -290,6 +290,9 @@ pu<Mesh> Model::loadMesh(
   , Engine* engine) {
 
   auto vao = new flc::VertexArray();
+  auto vbo = engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get());
+  auto ibo = engine->storeBuffer<flc::IndexBuffer>(vao, shape);
+
   auto mesh = std::make_unique<Mesh>(
     engine
     , material
@@ -309,8 +312,8 @@ pu<Mesh> Model::loadMesh(
     , mEngine->getLightSystem()
     , vao
     , false
-    , engine->storeBuffer<flc::VertexBufferBasic>(vao, shape, mAnimator.get())
-    , engine->storeBuffer<flc::IndexBuffer>(vao, shape)
+    , vbo
+    , ibo
     , mAnimator.get()
     , GL_TRIANGLES);
 #ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE

@@ -33,36 +33,72 @@
 
 #include <benchmark/benchmark.h>
 #include <flw/flf/models/Model.h>
+#include <flw/Fillwave.h>
 
 #include <memory>
 
+
 using namespace flw;
+
+struct Reloadable : public flf::IReloadable {
+  Reloadable(Engine* engine, flc::VertexArray* vao)
+    : flf::IReloadable(engine, engine->storeVAO(this, vao)) {
+
+  }
+  void initBuffers() override {};
+  void initPipeline() override {};
+  void initUniformsCache() override {};
+  void initVAO() override {};
+  void initVBO() override {};
+};
 
 typedef std::pair<std::string, float> result;
 std::vector<result> mResults;
 
-static void BM_ModelResourcesCaching(benchmark::State &state) {
-
-  Engine* engine = nullptr;
-  flc::Program* program = nullptr;
-  const flf::Shape<flc::VertexBasic>& shape {};
-  flc::Texture2D* diffuseMap = nullptr;
-  flc::Texture2D* normalMap = nullptr;
-  flc::Texture2D* specularMap = nullptr;
-  const Material material {};
-
-  flf::Model m(engine, program, shape, diffuseMap, normalMap, specularMap, material);
+static void BM_CachedIntegersByInstance(benchmark::State &state) {
+  flf::TCache <flw::flf::MAX_CACHE_SIZE, int, int> integers;
+  int i = 0;
+  while(state.KeepRunning()) {
+    integers.store(new int(i), i);
+    i+=1;
+  }
 }
 
-// Register the function as a benchmark
-BENCHMARK(BM_ModelResourcesCaching);
-
-// Define another benchmark
-static void BM_EngineDrawSkyboxFrame(benchmark::State &state) {
-
+static void BM_CachedLargeTupleByInstance(benchmark::State &state) {
+  flf::TCache <flw::flf::MAX_CACHE_SIZE
+    , std::tuple<float, int, std::pair<std::string, std::vector<char>>>
+    , int
+    , float, int, std::pair<std::string, std::vector<char>>>
+    tuples;
+  int i = 0;
+  while(state.KeepRunning()) {
+    tuples.store(new std::tuple<float, int, std::pair<std::string, std::vector<char>>>(1.0f, 1.0, {}), i);
+    i+=1;
+  }
 }
 
-// Register another function as a benchmark
-BENCHMARK(BM_EngineDrawSkyboxFrame);
+static void BM_CachedSamplersByInstance(benchmark::State &state) {
+  flf::CacheSampler samplers;
+  int i = 0;
+  while(state.KeepRunning()) {
+    samplers.store(new flc::Sampler(i), i);
+    i++;
+  }
+}
+
+static void BM_CachedVertexArraysByInstance(benchmark::State &state) {
+  Engine* engine = new Engine(".", true);
+  std::vector<Reloadable>  reloadables;
+
+  while(state.KeepRunning()) {
+    reloadables.emplace_back(engine, nullptr);
+    reloadables.back().initBuffers();
+  }
+}
+
+BENCHMARK(BM_CachedIntegersByInstance);
+BENCHMARK(BM_CachedLargeTupleByInstance);
+BENCHMARK(BM_CachedVertexArraysByInstance);
+BENCHMARK(BM_CachedSamplersByInstance);
 
 BENCHMARK_MAIN()

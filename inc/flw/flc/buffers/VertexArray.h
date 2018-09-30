@@ -46,7 +46,7 @@ public:
 
  private:
   GLsizei mHowMany;
-  GLuint mHandles[2];
+  GLuint mHandles;
 };
 
 void bindVAO(GLuint handle);

@@ -255,7 +255,7 @@ void Program::getUniformBlock(const std::string& name, GLuint bindingPoint) {
       fLogD("Uniform block name=", name, ", index=", GLuint(i), ", size=%d ", uniformBlockSize);
       GLuint blockIndex = glGetUniformBlockIndex(mHandle, nameFromProgram.data());
       glUniformBlockBinding(mHandle, blockIndex, bindingPoint);
-      mUnifromBuffers.push_back(std::make_unique<UniformBuffer>(std::string(name),
+      mUniformBuffers.push_back(std::make_unique<UniformBuffer>(std::string(name),
                                                                 blockIndex,
                                                                 uniformBlockSize,
                                                                 bindingPoint,
@@ -264,10 +264,10 @@ void Program::getUniformBlock(const std::string& name, GLuint bindingPoint) {
   }
 }
 
-void Program::uniformBlockPush(const std::string& name, GLfloat *data) {
-  for (auto &it : mUnifromBuffers) {
+void Program::uniformBlockPush(const std::string& name, GLfloat *data, size_t size) {
+  for (auto &it : mUniformBuffers) {
     if (it->getName() == name) {
-      it->push(data);
+      it->push(data, size);
       return;
     }
   }

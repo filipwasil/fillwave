@@ -39,7 +39,7 @@ class Skybox : public Entity, public IReloadable {
 public:
   Skybox(Engine *engine, flc::Texture3D *texture);
 
-  ~Skybox() = default;
+  ~Skybox() override;
 
   /* IRenderable */
   bool getRenderItem(flc::RenderItem &item);

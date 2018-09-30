@@ -473,7 +473,7 @@ VertexBufferParticles* Engine::storeBufferInternal(VertexArray* vao,
   return mBuffers.mVerticesParticles.store(vao, velocities, positions, times);
 }
 
-VertexBufferDebug* Engine::storeBufferInternal(VertexArray* vao, GLfloat scale) {
+VertexBufferDebug* Engine::storeBufferInternal(VertexArray* vao, float scale) {
   return mBuffers.mVerticesDebugger.store(vao, scale);
 }
 

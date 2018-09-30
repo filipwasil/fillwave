@@ -27,7 +27,7 @@ namespace flw {
 namespace flf {
 
 IReloadable::IReloadable(Engine* engine, flc::VertexArray* vao)
-  : mVAO(engine->storeVAO(this, vao))
+  : mVAO(vao ? vao : engine->storeVAO(this, vao))
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   {
 #else

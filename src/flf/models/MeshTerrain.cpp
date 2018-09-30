@@ -64,8 +64,10 @@ MeshTerrain::MeshTerrain(Engine *engine,
 
   Material m {};
 
+
   for (GLint x = -indexTerrainChunk; x <= indexTerrainChunk; ++x) {
     for (GLint z = -indexTerrainChunk; z <= indexTerrainChunk; ++z) {
+      const bool isFirstChunk = x == -indexTerrainChunk && z == -indexTerrainChunk;
       auto ptr = std::make_unique<Mesh>(
         engine
         , m
@@ -84,7 +86,7 @@ MeshTerrain::MeshTerrain(Engine *engine,
         , loader.getProgram(EProgram::ambientOcclusionColor)
         , engine->getLightSystem()
         , vao
-        , true
+        , !isFirstChunk
         , vbo
         , ibo
         , nullptr

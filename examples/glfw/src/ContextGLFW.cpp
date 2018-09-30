@@ -20,7 +20,7 @@ GLuint ContextGLFW::mCursorPositionX;
 GLuint ContextGLFW::mCursorPositionY;
 flw::flf::EventData ContextGLFW::mEventData;
 
-ContextGLFW::ContextGLFW(int argc, char *argv[]) {
+ContextGLFW::ContextGLFW(int /*argc*/, char */*argv*/[]) {
 
   if (!glfwInit()) {
     exit(EXIT_FAILURE);
@@ -44,12 +44,6 @@ ContextGLFW::ContextGLFW(int argc, char *argv[]) {
   mCursorPositionY = 1;
 
   windowInit(mWindow);
-
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_PC)
-  ContextGLFW::mGraphics = new flw::EnginePCGLES(argc, argv, glfwGetProcAddress);
-#else
-  ContextGLFW::mGraphics = new flw::EnginePC(argc, argv);
-#endif
 }
 
 void ContextGLFW::windowInit(GLFWwindow *&window) {
@@ -105,15 +99,6 @@ void ContextGLFW::windowDeinit(GLFWwindow *&window) {
 }
 
 ContextGLFW::~ContextGLFW() {
-  delete mGraphics;
-  glfwSetFramebufferSizeCallback(mWindow, NULL);
-  glfwSetKeyCallback(mWindow, NULL);
-  glfwSetScrollCallback(mWindow, NULL);
-  glfwSetMouseButtonCallback(mWindow, NULL);
-  glfwSetCharCallback(mWindow, NULL);
-  glfwSetCursorPosCallback(mWindow, NULL);
-  glfwSetCursorEnterCallback(mWindow, NULL);
-  glfwDestroyWindow(mWindow);
   glfwTerminate();
 }
 
@@ -166,6 +151,14 @@ GLuint ContextGLFW::getScreenHeight() {
 
 void ContextGLFW::keyboardCallback(GLFWwindow * /*window*/, int key, int scancode, int action, int mods) {
   if (key == GLFW_KEY_ESCAPE) {
+    glfwSetFramebufferSizeCallback(mWindow, NULL);
+    glfwSetKeyCallback(mWindow, NULL);
+    glfwSetScrollCallback(mWindow, NULL);
+    glfwSetMouseButtonCallback(mWindow, NULL);
+    glfwSetCharCallback(mWindow, NULL);
+    glfwSetCursorPosCallback(mWindow, NULL);
+    glfwSetCursorEnterCallback(mWindow, NULL);
+    glfwDestroyWindow(mWindow);
     windowDeinit(mWindow);
   }
 

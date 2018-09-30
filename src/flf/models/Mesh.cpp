@@ -48,7 +48,7 @@ Mesh::Mesh(Engine* engine,
     flc::IndexBuffer* ibo,
     ModelLoader::Animator* animator,
     GLenum renderMode)
-    : IReloadable(engine, vao)
+    : IReloadable(engine, isVAOInitialized ? vao : engine->storeVAO(this, vao))
     , mMaterial(material)
     , mDiffuseMap(diffuseMap)
     , mNormalMap(normalMap)

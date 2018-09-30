@@ -71,7 +71,7 @@ public:
   void updateDeferredBufferPoint(GLuint lightID, flc::Program *program, GLint currentShadowUnit);
 
 private:
-  std::vector<LighUniformData> mLightBufferData;
+  std::array<LighUniformData, MAX_LIGHTS> mLightBufferData;
 
   bool isRefreshLightSpot() const;
 

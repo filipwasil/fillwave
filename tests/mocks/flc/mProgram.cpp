@@ -125,7 +125,8 @@ void Program::getUniformBlock(const std::string& name, GLuint bindingPoint) {
 
 }
 
-void Program::uniformBlockPush(const std::string& name, GLfloat *data) {
+void Program::uniformBlockPush(const std::string& name, GLfloat *data, size_t size) {
+
 }
 
 #endif

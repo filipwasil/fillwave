@@ -42,7 +42,7 @@ struct VertexDebug {
 class VertexBufferDebug : public TVertexBuffer<VertexDebug> {
 
 public:
-  VertexBufferDebug(GLfloat scale = 1.0);
+  VertexBufferDebug(float scale);
 
   ~VertexBufferDebug() override = default;
 

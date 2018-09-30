@@ -70,7 +70,11 @@ struct TCache final {
       }
       return mStored[key].get();
     }
-    return mStored.size() >= M ? nullptr : (mStored[key] = std::unique_ptr<T>(item)).get();
+    if (mStored.size() >= M) {
+      return nullptr;
+    }
+    mStored[key] = std::unique_ptr<T>(item);
+    return mStored[key].get();
   }
 
   /**

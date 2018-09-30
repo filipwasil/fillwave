@@ -41,7 +41,7 @@ class Scene : public TreePtr<Entity> {
 public:
   Scene(flc::IRenderer* renderer = new flc::RendererFR());
 
-  virtual ~Scene() = default;
+  ~Scene() override;
 
   void updateDependencies();
 

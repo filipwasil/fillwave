@@ -32,7 +32,7 @@ EnginePC* getEngine() {
 #endif
 
 TEST (Engine, texture) {
-  auto engine = getEngine();
+  auto engine = std::unique_ptr<Engine>(getEngine());
   auto texture = engine->storeTexture("data/text.png");
   auto empty = nullptr;
   EXPECT_EQ (texture, empty);

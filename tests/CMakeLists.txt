@@ -7,6 +7,7 @@ set (FILLWAVE_PRODUCTION_SOURCES
     ${TESTS_DIR}/mocks/flc/mShader.cpp
     ${TESTS_DIR}/mocks/flc/mVertexArray.cpp
     ${TESTS_DIR}/mocks/flc/mTexture.cpp
+    ${TESTS_DIR}/mocks/flc/extended/mSampler.cpp
     )
 
 aux_source_directory (${TESTS_DIR}/framework TEST_FRAMEWORK_SOURCES)

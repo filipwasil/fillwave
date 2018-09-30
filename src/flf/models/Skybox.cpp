@@ -54,6 +54,8 @@ Skybox::Skybox(Engine *engine, flc::Texture3D *texture)
   initUniformsCache();
 }
 
+Skybox::~Skybox() = default;
+
 void Skybox::draw(ICamera &camera) {
   mProgram->use();
 
