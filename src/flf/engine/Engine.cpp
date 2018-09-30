@@ -51,6 +51,7 @@ Engine::Engine(const std::string& runtimeBinaryFilePath, bool /*isEveryExtension
   , mProgramLoader(this)
   , mModelLoader()
   , mShaders()
+  , mScene(nullptr)
   , mFrameCounter(0)
   , mTimeFactor(1.0f)
   , mIsOQ(true)

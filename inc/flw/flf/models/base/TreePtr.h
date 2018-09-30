@@ -45,7 +45,7 @@ public:
     // nothing
   }
 
-  virtual ~TreePtr() = default;
+  ~TreePtr() override = default;
 
   TreePtr &operator=(const TreePtr &) = delete;
 

@@ -102,11 +102,11 @@ public:
   virtual void onHide();
 
 protected:
-  pu<flc::IRenderer> mRenderer;
-  pu<HUD> mHeadUpDisplay;
-  pu<Cursor> mCursor;
-  pu<ICamera> mCamera;
   pu<Skybox> mSkybox;
+  pu<Cursor> mCursor;
+  pu<HUD> mHeadUpDisplay;
+  pu<flc::IRenderer> mRenderer;
+  pu<ICamera> mCamera;
 
   std::unordered_map<GLint, Entity* > mPickingTable;
   Entity* mLastPicked;

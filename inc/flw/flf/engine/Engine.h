@@ -231,6 +231,8 @@ class Engine {
   /* Input handlers */
   vec<flf::EventHandler> mHandlers;
 
+  pu<flf::Scene> mScene;
+
   /* Extras */
   pu<flf::Debugger> mDebugger;
   GLuint mFrameCounter;
@@ -238,8 +240,6 @@ class Engine {
   ps<flf::Text> mFPSText;
 
   bool mIsOQ;
-
-  pu<flf::Scene> mScene;
 
   glm::vec3 mBackgroundColor;
 

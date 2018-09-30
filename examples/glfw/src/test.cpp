@@ -9,23 +9,19 @@ using namespace flw::flc;
 
 int main(int argc, char* argv[]) {
   auto context = std::make_unique<ContextGLFW>(argc, argv);
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_PC)
-  ContextGLFW::mGraphics = new flw::EnginePCGLES(argc, argv, glfwGetProcAddress);
-#else
-  ContextGLFW::mGraphics = new flw::EnginePC(argc, argv);
-#endif
   init();
   initCallbacks();
   context->render();
-  delete ContextGLFW::mGraphics;
+  context.reset();
   exit(EXIT_SUCCESS);
 }
 
 void init() {
   auto engine = ContextGLFW::mGraphics;
 
-  engine->setCurrentScene(std::make_unique<Scene>());
-  engine->getCurrentScene()->setCamera(std::make_unique<CameraPerspective>());
+  auto scene = std::make_unique<Scene>();
+
+  scene->setCamera(std::make_unique<CameraPerspective>());
 
   auto programs = ProgramLoader(engine);
   /* light spot */
@@ -40,7 +36,7 @@ void init() {
     , flw::flf::Sphere(0.1)
     , engine->storeTexture("255_255_0.checkboard"));
   sut1->moveBy(glm::vec3(1.4f, 1.5f, -1.0f));
-  engine->getCurrentScene()->attach(std::move(sut1));
+  scene->attach(std::move(sut1));
 
   /* Model constructor 2 animated*/
   auto sut2 = std::make_unique<Model>(
@@ -51,7 +47,7 @@ void init() {
   sut2->rotateByX(glm::radians(90.0f));
   sut2->moveByZ(-1.0f);
   sut2->setActiveAnimation(0);
-  engine->getCurrentScene()->attach(std::move(sut2));
+  scene->attach(std::move(sut2));
 
   /* Model constructor 2 not animated */
   auto sut3 = std::make_unique<Model>(
@@ -61,7 +57,7 @@ void init() {
     , engine->storeTexture("255_0_0.checkboard"));
   sut3->scaleTo(0.01f);
   sut3->moveBy(glm::vec3(-0.7f, 0.7f, 0.0f));
-  engine->getCurrentScene()->attach(std::move(sut3));
+  scene->attach(std::move(sut3));
 
   /* Model constructor 3 */
   auto sut4 = std::make_unique<Model>(
@@ -71,7 +67,7 @@ void init() {
     , "125_125_255.checkboard");
   sut4->scaleTo(0.01f);
   sut4->moveBy(glm::vec3(0.0f, 0.7f, 0.0f));
-  engine->getCurrentScene()->attach(std::move(sut4));
+  scene->attach(std::move(sut4));
 
   /* Model constructor 3 dynamic texture */
   auto sut5 = std::make_unique<Model>(
@@ -82,7 +78,7 @@ void init() {
 
   sut5->scaleTo(0.01f);
   sut5->moveBy(glm::vec3(-0.7f, 0.0f, 0.0f));
-  engine->getCurrentScene()->attach(std::move(sut5));
+  scene->attach(std::move(sut5));
 
   /* Emiter 1 CPU */
   auto emiter1 = std::make_unique<EmiterPointCPU>(
@@ -102,7 +98,7 @@ void init() {
     , GL_ONE
     , GL_FALSE);
   emiter1->moveBy(glm::vec3(-8.0, -4.0, -15.0));
-  engine->getCurrentScene()->attach(std::move(emiter1));
+  scene->attach(std::move(emiter1));
 
   /* Emiter 2 GPU */
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
@@ -124,9 +120,9 @@ void init() {
     , GL_ONE
     , GL_FALSE);
   emiter2->moveBy(glm::vec3(0.0, -4.0, -15.0));
-  engine->getCurrentScene()->attach(std::move(emiter2));
+  scene->attach(std::move(emiter2));
 
-    engine->getCurrentScene()->setSkybox(std::make_unique<Skybox>(
+    scene->setSkybox(std::make_unique<Skybox>(
     engine
     , engine->storeTexture3D(
       "textures/skybox/skybox/frozendusk/frozendusk_right.jpg"
@@ -156,12 +152,12 @@ void init() {
     , GL_ONE
     , GL_FALSE);
 
-  engine->getCurrentScene()->setCursor(std::make_unique<Cursor>(
+  scene->setCursor(std::make_unique<Cursor>(
     engine
     , engine->storeTexture("textures/cursor/standard_blue.png")));
 
   emiter3->moveBy(glm::vec3(8.0, -4.0, -15.0));
-  engine->getCurrentScene()->attach(std::move(emiter3));
+  scene->attach(std::move(emiter3));
 
   engine->configFPSCounter("FreeSans", glm::vec2(-0.95f, 0.95f), 50.0f);
   engine->storeText("Benchmark", "FreeSans", glm::vec2(-0.95f, -0.85f), 50.0f);
@@ -179,7 +175,9 @@ void init() {
     , 4);
   terrain->scaleTo(0.1);
   terrain->moveToY(-2.0);
-  engine->getCurrentScene()->attach(std::move(terrain));
+  scene->attach(std::move(terrain));
+
+  engine->setCurrentScene(std::move(scene));
 }
 
 void initCallbacks() {

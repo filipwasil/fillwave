@@ -22,13 +22,17 @@
 #include <flw/flf/space/Scene.h>
 #include <flw/Log.h>
 
-FLOGINIT("Scene.cpp", FERROR | FFATAL | FUSER | FDEBUG)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flf {
 
 Scene::Scene(flc::IRenderer* renderer)
-  : mRenderer(renderer)
+  : mSkybox(nullptr)
+  , mCursor(nullptr)
+  , mHeadUpDisplay(nullptr)
+  , mRenderer(renderer)
+  , mCamera(nullptr)
   , mLastPicked(nullptr)
   , mCurrentPicableColor(0)
   , mAmbientGlobal(glm::vec3(1.0)) {

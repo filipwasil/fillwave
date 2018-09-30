@@ -35,7 +35,7 @@ namespace flf {
  * \brief Entity which moves with the camera clipping the view space with an image.
  */
 
-class Skybox : public Entity, public IReloadable {
+class Skybox : public IReloadable, public Entity {
 public:
   Skybox(Engine *engine, flc::Texture3D *texture);
 
@@ -57,13 +57,9 @@ private:
   GLint mULCCameraPosition, mULCModelMatrixPosition, mULCViewProjectionMatrix, mULCTextureUnit;
 
   void initBuffers();
-
   void initPipeline();
-
   void initUniformsCache();
-
   void initVAO();
-
   void initVBO();
 };
 

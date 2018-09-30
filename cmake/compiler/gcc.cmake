@@ -66,4 +66,5 @@ if (FILLWAVE_BENCHMARK_TESTS)
 endif()
 
 # Sanitizer. Use when needed.
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -fno-omit-frame-pointer -g-Wno-error=unsafe-loop-optimizations")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -O1 -g -Wno-error=unsafe-loop-optimizations")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer")

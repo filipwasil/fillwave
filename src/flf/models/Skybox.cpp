@@ -31,7 +31,9 @@ namespace flw {
 namespace flf {
 
 Skybox::Skybox(Engine *engine, flc::Texture3D *texture)
-    : IReloadable(engine), mTexture(texture) {
+  : IReloadable(engine)
+  , Entity()
+  , mTexture(texture) {
 
   ProgramLoader loader(engine);
 
