@@ -193,7 +193,7 @@ inline void Text::initUniformsCache() {
 }
 
 inline void Text::initVAO() {
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   mSampler->bind();
 #endif

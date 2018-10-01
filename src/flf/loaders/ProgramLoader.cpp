@@ -678,9 +678,9 @@ const std::string fsCursor =
 
 const std::string vsCursor =
   gGLVersion + gGLExtraExtensions + gGLVertexPrecision +
-  "uniform float uSize = 0.1;\n"
-  "uniform float uScreenFactor = 1.0;\n"
-  "uniform vec2 uPosition = vec2(0.0,0.0);\n" +
+  "uniform float uSize;\n"
+  "uniform float uScreenFactor;\n"
+  "uniform vec2 uPosition;\n" +
   gGLVaryingOut +
   " vec2 vVertexOffset;\n"
   "void main() {\n"
