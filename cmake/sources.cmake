@@ -10,6 +10,13 @@ aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/operations" FILLWAVE_
 if (FILLWAVE_BACKEND_OPENGL_ES_20)
 elseif (FILLWAVE_BACKEND_OPENGL_ES_30)
   aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/buffers" FILLWAVE_CORE_EXTENDED_BUFFERS_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended" FILLWAVE_CORE_EXTENDED_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/rendering" FILLWAVE_CORE_EXTENDED_RENDERING_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/pipeline" FILLWAVE_CORE_EXTENDED_PIPELINE_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/texturing" FILLWAVE_CORE_EXTENDED_TEXTURING_SOURCES)
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/operations" FILLWAVE_CORE_EXTENDED_OPERATIONS_SOURCES)
+
+  aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flf/models/extended" FILLWAVE_MODELS_EXTENDED_SOURCES)
 else()
   aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended" FILLWAVE_CORE_EXTENDED_SOURCES)
   aux_source_directory ("${CMAKE_CURRENT_SOURCE_DIR}/src/flc/extended/rendering" FILLWAVE_CORE_EXTENDED_RENDERING_SOURCES)

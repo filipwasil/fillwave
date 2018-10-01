@@ -141,23 +141,23 @@ void IBuffer::unmap() const {
   // nothing
 }
 
-void IBuffer::bindBase(GLuint id) const {
+void IBuffer::bindBase(GLuint /*id*/) const {
   // nothing
 }
 
-void IBuffer::bindBase(GLuint externalTarget, GLuint id) const {
+void IBuffer::bindBase(GLuint /*externalTarget*/, GLuint /*id*/) const {
   // nothing
 }
 
-void IBuffer::unbindBase(GLuint externalTarget) {
+void IBuffer::unbindBase(GLuint /*externalTarget*/) {
   // nothing
 }
 
-GLvoid *IBuffer::mapRange(GLenum access, GLuint size) {
+GLvoid *IBuffer::mapRange(GLenum /*access*/, GLuint /*size*/) {
   return nullptr;
 }
 
-GLvoid* IBuffer::map(GLenum access) const {
+GLvoid* IBuffer::map(GLenum /*access*/) const {
   return nullptr;
 }
 

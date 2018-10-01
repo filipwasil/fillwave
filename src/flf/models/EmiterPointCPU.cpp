@@ -205,7 +205,7 @@ void EmiterPointCPU::initUniformsCache() {
 }
 
 void EmiterPointCPU::initVAO() {
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   mSampler->bind();
 #endif
@@ -230,8 +230,8 @@ bool EmiterPointCPU::getRenderItem(flc::RenderItem &item) {
   item.mDataType = GL_UNSIGNED_INT;
   item.mFirst = 0;
   item.mHandles[flc::RenderItem::eRenderHandleProgram] = mProgram->getHandle();
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
-  item.mHandles[RenderItem::eRenderHandleSampler] = 0;
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+  item.mHandles[flc::RenderItem::eRenderHandleSampler] = 0;
 #else
   item.mHandles[flc::RenderItem::eRenderHandleSampler] = mSampler->getHandle();
 #endif

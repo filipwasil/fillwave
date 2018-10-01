@@ -28,7 +28,7 @@ namespace flf {
 
 IReloadable::IReloadable(Engine* engine, flc::VertexArray* vao)
   : mVAO(vao ? vao : engine->storeVAO(this, new flc::VertexArray()))
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   {
 #else
   , mSampler(engine->storeSO(FILLWAVE_DIFFUSE_UNIT)) {

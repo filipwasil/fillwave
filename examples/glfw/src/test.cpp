@@ -2,6 +2,7 @@
 #include <ContextGLFW.h>
 #include <flw/flf/models/shapes/Sphere.h>
 #include <memory>
+#include <GLFW/glfw3.h>
 
 using namespace flw;
 using namespace flw::flf;
