@@ -26,6 +26,7 @@
 #if defined(__APPLE__)
 
 #include <OpenGL/gl3.h>
+
 #elif defined(_WIN32) || defined(_WIN64)
 
 #include <glad/glad.h>
@@ -46,7 +47,13 @@ bool initExtensions();
 #define GL_CLAMP_TO_BORDER GL_CLAMP_TO_EDGE
 #define GL_DEPTH_COMPONENT32 GL_DEPTH_COMPONENT32F
 
-#elif defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+
+#include <glad/glad.h>
+
+bool initExtensions();
+
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 
 #include <glad/glad.h>
 

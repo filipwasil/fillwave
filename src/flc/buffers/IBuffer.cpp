@@ -154,11 +154,11 @@ void IBuffer::unbindBase(GLuint externalTarget) {
 }
 
 GLvoid *IBuffer::mapRange(GLenum access, GLuint size) {
-  // nothing
+  return nullptr;
 }
 
 GLvoid* IBuffer::map(GLenum access) const {
-  // nothing
+  return nullptr;
 }
 
 #else

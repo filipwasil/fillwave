@@ -126,7 +126,9 @@ public:
   /* Occlusion cut off */
   glm::mat4 mOcclusionMatrix;
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+  flc::QueryIfAnySamplesPassed mOcclusionQuery;
 #else
   flc::QueryIfAnySamplesPassed mOcclusionQuery;
 //   flc::QueryTimeElapsed mTimeQuery;

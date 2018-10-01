@@ -452,6 +452,7 @@ void TextureSystem::reload() {
   }
 
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
 
   for (auto &it : mTextures3D) {
