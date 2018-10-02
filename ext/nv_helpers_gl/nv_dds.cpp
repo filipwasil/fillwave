@@ -402,7 +402,7 @@ bool CDDSImage::load(string filename, bool flipImage)
         return false;
     }
   }
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   else if (ddsh.ddspf.dwFlags == DDSF_RGBA && ddsh.ddspf.dwRGBBitCount == 32)
   {
@@ -680,7 +680,7 @@ void CDDSImage::clear()
 // uploads a compressed/uncompressed 1D texture
 bool CDDSImage::upload_texture1D()
 {
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   return false;
 #else
   assert(m_valid);
@@ -763,7 +763,7 @@ bool CDDSImage::upload_texture2D(unsigned int imageIndex, GLenum target)
 
   auto isTargetValid =
     target == GL_TEXTURE_2D
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
     || target == GL_TEXTURE_RECTANGLE
 #endif
@@ -889,7 +889,7 @@ bool CDDSImage::upload_texture3D()
 
 bool CDDSImage::upload_textureRectangle()
 {
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   return false;
 #else
   return upload_texture2D(0, GL_TEXTURE_RECTANGLE);

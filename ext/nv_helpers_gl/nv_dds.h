@@ -336,7 +336,7 @@ class CDDSImage final
   std::deque<CTexture> m_images;
 
 #ifndef MACOS
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   static PFNGLTEXIMAGE3DEXTPROC glTexImage3D;
   static PFNGLCOMPRESSEDTEXIMAGE1DARBPROC glCompressedTexImage1DARB;

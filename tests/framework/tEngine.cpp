@@ -5,7 +5,7 @@
 using namespace flw;
 using namespace flw::flf;
 
-#ifdef FILLWAVE_BACKEND_OPENGL_ES_PC && defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 typedef void (*getProcAddr)(void);
 
 void getProcMock(void) {
@@ -19,11 +19,6 @@ getProcAddr glfwGetProcAddress(const char* procname) {
 EnginePCGLES* getEngine() {
   GLchar *const argv[] = {"0f0f "};
   return new EnginePCGLES(1, argv, glfwGetProcAddress);
-}
-#elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-Engine* getEngine() {
-  GLchar *const argv[] = {"0f0f "};
-  return new EnginePC(1, argv);
 }
 #elif defined(FILLWAVE_BACKEND_OPENGL_45)
 EnginePC* getEngine() {
