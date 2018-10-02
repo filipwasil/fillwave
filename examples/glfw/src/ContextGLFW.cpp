@@ -32,7 +32,7 @@ ContextGLFW::ContextGLFW(int argc, char *argv[]) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 #elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 #elif defined(FILLWAVE_BACKEND_OPENGL_45)
 #endif
@@ -101,7 +101,15 @@ void ContextGLFW::windowInit(GLFWwindow *&window) {
 }
 
 void ContextGLFW::windowDeinit(GLFWwindow *&window) {
+  glfwSetFramebufferSizeCallback(mWindow, NULL);
+  glfwSetKeyCallback(mWindow, NULL);
+  glfwSetScrollCallback(mWindow, NULL);
+  glfwSetMouseButtonCallback(mWindow, NULL);
+  glfwSetCharCallback(mWindow, NULL);
+  glfwSetCursorPosCallback(mWindow, NULL);
+  glfwSetCursorEnterCallback(mWindow, NULL);
   glfwSetWindowShouldClose(window, GL_TRUE);
+  glfwDestroyWindow(mWindow);
 }
 
 ContextGLFW::~ContextGLFW() {
@@ -157,24 +165,16 @@ GLuint ContextGLFW::getScreenHeight() {
 }
 
 void ContextGLFW::keyboardCallback(GLFWwindow * /*window*/, int key, int scancode, int action, int mods) {
-  if (key == GLFW_KEY_ESCAPE) {
-    glfwSetFramebufferSizeCallback(mWindow, NULL);
-    glfwSetKeyCallback(mWindow, NULL);
-    glfwSetScrollCallback(mWindow, NULL);
-    glfwSetMouseButtonCallback(mWindow, NULL);
-    glfwSetCharCallback(mWindow, NULL);
-    glfwSetCursorPosCallback(mWindow, NULL);
-    glfwSetCursorEnterCallback(mWindow, NULL);
-    glfwDestroyWindow(mWindow);
-    windowDeinit(mWindow);
-  }
-
   mEventData.mKey.action = action;
   mEventData.mKey.key = key;
   mEventData.mKey.mode = mods;
   mEventData.mKey.scanCode = scancode;
   flw::flf::Event event(flw::flf::EEventType::key, mEventData);
   mGraphics->onEvent(event);
+
+  if (key == GLFW_KEY_ESCAPE) {
+    windowDeinit(mWindow);
+  }
 }
 
 void ContextGLFW::mouseButtonCallback(GLFWwindow * /*window*/, int button, int action, int mods) {

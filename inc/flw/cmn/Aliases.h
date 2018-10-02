@@ -39,9 +39,6 @@ template <class T>
 using ps = std::shared_ptr<T>;
 
 template <class T>
-using pp = PointerProtected<T>;
-
-template <class T>
 using pc = PointerCache<T>;
 
 template <typename T, typename... Args>

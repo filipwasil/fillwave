@@ -761,16 +761,9 @@ bool CDDSImage::upload_texture2D(unsigned int imageIndex, GLenum target)
   assert(image.get_height() > 0);
   assert(image.get_width() > 0);
 
-  auto isTargetValid =
-    target == GL_TEXTURE_2D
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
-#else
-    || target == GL_TEXTURE_RECTANGLE
-#endif
-    || (target >= GL_TEXTURE_CUBE_MAP_POSITIVE_X &&
-        target <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z);
-
-  assert(isTargetValid);
+  assert(target == GL_TEXTURE_2D
+           || (target >= GL_TEXTURE_CUBE_MAP_POSITIVE_X &&
+           target <= GL_TEXTURE_CUBE_MAP_NEGATIVE_Z));
 
   if (is_compressed())
   {

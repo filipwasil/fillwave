@@ -4,10 +4,15 @@ set (FILLWAVE_PRODUCTION_SOURCES
     ${TESTS_DIR}/../src/cmn/Strings.cpp
     ${TESTS_DIR}/../src/cmn/Observable.cpp
     ${TESTS_DIR}/mocks/flc/mProgram.cpp
-    ${TESTS_DIR}/mocks/flc/mShader.cpp
+    ${TESTS_DIR}/mocks/flc/mIBuffer.cpp
+    ${TESTS_DIR}/mocks/flc/mFramebuffer.cpp
+    ${TESTS_DIR}/mocks/flc/mIndexBuffer.cpp
     ${TESTS_DIR}/mocks/flc/mVertexArray.cpp
-    ${TESTS_DIR}/mocks/flc/mTexture.cpp
     ${TESTS_DIR}/mocks/flc/extended/mSampler.cpp
+    ${TESTS_DIR}/mocks/flc/mTexture.cpp
+    ${TESTS_DIR}/mocks/flc/mTexture2DRenderable.cpp
+    ${TESTS_DIR}/mocks/flc/mShader.cpp
+    ${TESTS_DIR}/mocks/flc/mTexture2D.cpp
     )
 
 aux_source_directory (${TESTS_DIR}/framework TEST_FRAMEWORK_SOURCES)

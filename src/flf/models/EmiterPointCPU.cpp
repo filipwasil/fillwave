@@ -230,7 +230,7 @@ bool EmiterPointCPU::getRenderItem(flc::RenderItem &item) {
   item.mDataType = GL_UNSIGNED_INT;
   item.mFirst = 0;
   item.mHandles[flc::RenderItem::eRenderHandleProgram] = mProgram->getHandle();
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   item.mHandles[flc::RenderItem::eRenderHandleSampler] = 0;
 #else
   item.mHandles[flc::RenderItem::eRenderHandleSampler] = mSampler->getHandle();

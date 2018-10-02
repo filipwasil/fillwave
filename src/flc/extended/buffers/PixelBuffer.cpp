@@ -28,9 +28,11 @@ namespace flw {
 namespace flc {
 
 PixelBuffer::PixelBuffer(GLuint dataStoreType)
-    : IBuffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
+  : IBuffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
   mData = 0;
 }
+
+PixelBuffer::~PixelBuffer() = default;
 
 void PixelBuffer::setScreenSize(GLuint width, GLuint height, GLuint bytesPerPixel) {
   mSize = bytesPerPixel * width * height;

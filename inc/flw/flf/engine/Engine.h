@@ -116,7 +116,7 @@ class Engine {
 
   /* Scene */
   void setCurrentScene(pu<flf::Scene> &&scene);
-  pp<flf::Scene> getCurrentScene() const;
+  pn<flf::Scene> getCurrentScene() const;
 
   /* Time */
   GLuint getAndResetRenderedFramesCount();

@@ -61,8 +61,8 @@ void Scene::setAmbient(glm::vec3 ambient) {
   mAmbientGlobal = ambient;
 }
 
-pp<Cursor> Scene::getCursor() {
-  return pp<Cursor>(mCursor.get());
+pn<Cursor> Scene::getCursor() {
+  return make_pu_with_no_ownership<Cursor>(mCursor.get());
 }
 
 void Scene::updateDependencies() {
@@ -181,8 +181,8 @@ void Scene::setCamera(pu<ICamera> &&camera) {
   mCamera = std::move(camera);
 }
 
-pp<ICamera> Scene::getCamera() {
-  return pp<ICamera>(mCamera.get());
+pn<ICamera> Scene::getCamera() {
+  return make_pu_with_no_ownership<ICamera>(mCamera.get());
 }
 
 void Scene::onEvent(const Event& event) {

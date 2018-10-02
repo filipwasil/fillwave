@@ -21,20 +21,9 @@ private:
   int a;
 };
 
-template <class Used>
-class User {
-  Used used;
-public:
-  flw::pp<Used> get() {
-    auto fun = [&]() -> flw::pp<Used> {
-      return &used;
-    };
-    return fun();
-  }
-};
 
 TEST(ppTests, security_tests_when_copy_enabled) {
- User<Fool> sut;
+ //User<Fool> sut;
 
   // Error field private
 //  sut.used->foo();

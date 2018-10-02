@@ -37,28 +37,23 @@ Texture2DRenderable::Texture2DRenderable(GLenum attachment, flc::TextureConfig* 
   : mTexture2D(cfg, param)
   , mFramebuffer()
   , mAttachment(attachment) {
-  setAttachment(attachment);
+
 }
 
 void Texture2DRenderable::resize(GLint width, GLint heigth) {
-  mTexture2D.mCfg->mHeader.mWidth = width;
-  mTexture2D.mCfg->mHeader.mHeight = heigth;
-  mTexture2D.mCfg->mData = nullptr;
-  mTexture2D.bind();
-  mTexture2D.sendData();
-  mTexture2D.unbind();
+
 }
 
 void Texture2DRenderable::bindForWriting() {
-  mFramebuffer.bindForWriting();
+
 }
 
 void Texture2DRenderable::bindForRendering() {
-  mFramebuffer.bind();
+
 }
 
 void Texture2DRenderable::bindForReading() {
-  mFramebuffer.bindForReading();
+
 }
 
 void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
@@ -66,27 +61,18 @@ void Texture2DRenderable::setAttachment(GLenum attachment, GLenum target) {
 }
 
 void Texture2DRenderable::attachTexture2DDraw(GLenum attachment, GLenum target, GLuint textureHandle) {
-  mFramebuffer.attachTexture2DDraw(attachment, target, textureHandle);
+
 }
 
 void Texture2DRenderable::attachTexture2D(GLenum attachment, GLenum target, GLuint textureHandle) {
-  mFramebuffer.attachTexture2D(attachment, target, textureHandle);
+
 }
 
 void Texture2DRenderable::copyTo(Framebuffer *source) {
-  source->bindForWriting();
-  /* We will bind framebufferuffer for reading ...*/
-  mFramebuffer.bindForReading();
-  /* .. and take color attachment color 0 ... */
-  mFramebuffer.setReadColorAttachment(0);
-  /* ... to finally copy it into main framebuffer */
 
 }
 
 void Texture2DRenderable::copyFrom(Framebuffer *source) {
-  mFramebuffer.bindForWriting();
-  source->bindForReading();
-  source->setReadColorAttachment(0);
 
 }
 
@@ -95,10 +81,7 @@ void Texture2DRenderable::log() {
 }
 
 void Texture2DRenderable::reload() {
-  mTexture2D.mTexture.reload();
-  mTexture2D.reload();
-  mFramebuffer.reload();
-  setAttachment(mAttachment);
+
 }
 
 } /* flc */

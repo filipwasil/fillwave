@@ -115,7 +115,7 @@ void Engine::reload() {
     it.second->reload();
   }
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   for (auto &it : mSamplers) {
     it.second->reload();
@@ -359,8 +359,8 @@ void Engine::setCurrentScene(pu<flf::Scene> &&scene) {
   mScene->resetRenderer(getScreenSize().x, getScreenSize().y);
 }
 
-pp<flf::Scene> Engine::getCurrentScene() const {
-  return pp<flf::Scene>(mScene.get());
+pn<flf::Scene> Engine::getCurrentScene() const {
+  return make_pu_with_no_ownership<flf::Scene>(mScene.get());
 }
 
 flf::LightSystem& Engine::getLightSystem() const {

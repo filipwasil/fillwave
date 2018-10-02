@@ -232,12 +232,12 @@ void Model::loadNodes (
   }
 }
 
-pp<Mesh> Model::getMesh(size_t id) {
+pn<Mesh> Model::getMesh(size_t id) {
   if (id < mMeshes.size()) {
-    return pp<Mesh> (mMeshes.at(id));
+    return make_pu_with_no_ownership<Mesh> (mMeshes.at(id));
   }
   fLogF("Requested mesh does not exist. Id requested: ", static_cast<int>(id));
-  return pp<Mesh>(nullptr);
+  return make_pu_with_no_ownership<Mesh>(nullptr);
 }
 
 void Model::performAnimation(GLfloat timeElapsedInSeconds) {

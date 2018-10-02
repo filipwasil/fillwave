@@ -37,9 +37,7 @@ IBuffer::IBuffer(GLuint target, GLuint drawType, GLuint index, GLsizei howMany)
   setDrawType(drawType);
 }
 
-IBuffer::~IBuffer() {
-
-}
+IBuffer::~IBuffer() = default;
 
 void IBuffer::setElements(GLuint elements) {
   mTotalElements = elements;

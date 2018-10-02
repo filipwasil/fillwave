@@ -52,7 +52,7 @@ protected:
   Engine* mEngine;
   flc::Texture2D* mTexture;
   flc::Program* mProgram;
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   flc::Sampler* mSampler;
 #endif

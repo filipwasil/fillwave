@@ -92,7 +92,7 @@ public:
 
   void setActiveAnimation(GLint animationID);
 
-  pp<Mesh> getMesh(size_t id);
+  pn<Mesh> getMesh(size_t id);
 
   /* IRenderable */
   void updateRenderer(flc::IRenderer &renderer) override;
