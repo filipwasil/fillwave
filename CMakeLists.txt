@@ -51,11 +51,7 @@ include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/sources.cmake)
 # -----------------------------------------------
 
 if (UNIX AND NOT ANDROID AND NOT APPLE)
-  if (FILLWAVE_BUILD_DEV)
-    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/LinuxDev.cmake)
-  else ()
-    include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Linux.cmake)
-  endif ()
+  include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Linux.cmake)
 endif ()
 
 if (ANDROID)
@@ -73,14 +69,6 @@ endif ()
 
 if (WIN32)
   include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/platform/Windows.cmake)
-endif ()
-
-# -----------------------------------------------
-# Packaging
-# -----------------------------------------------
-
-if (NOT WIN32 AND NOT ANDROID)
-  include (${CMAKE_CURRENT_SOURCE_DIR}/cmake/package.cmake)
 endif ()
 
 # -----------------------------------------------

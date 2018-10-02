@@ -30,18 +30,13 @@ git submodule update
 cd scripts
 ```
 
-## Debian/Ubuntu/Fedora/RedHat
+## Debian/Ubuntu
 
 Linux builds requires packages installed:
 
 ```
-#Ubnuntu 14.04
-sudo apt-get install libglfw3 libglfw3-dev libassimp3 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev
-```
-
-```
 #Ubnuntu 16.04
-sudo apt-get install libglfw3 libglfw3-dev libassimp3v5 libassimp-dev libfreetype6 libfreetype6-dev libglm-dev libx11-dev libglm-dev cmake
+sudo apt-get install libglfw3-dev libassimp3v5 libassimp-dev libglm-dev cmake
 ```
 
 ```

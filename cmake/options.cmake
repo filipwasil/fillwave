@@ -1,15 +1,4 @@
 # -----------------------------------------------
-# Main Options
-# -----------------------------------------------
-
-option (FILLWAVE_BUILD_DEV "Build development package" OFF)
-option (FILLWAVE_BUILD_LIB "Build main fillwave package" ON)
-option (FILLWAVE_BUILD_DEB "Build deb packages" OFF)
-option (FILLWAVE_BUILD_RPM "Build rpm packages" OFF)
-option (FILLWAVE_BUILD_TGZ "Build tgz packages" OFF)
-option (FILLWAVE_BUILD_PACK "Do not build external packages when not needed (Linux builds)" OFF)
-
-# -----------------------------------------------
 # Compilation options
 # -----------------------------------------------
 
@@ -22,12 +11,9 @@ option (FILLWAVE_COMPILATION_RELEASE "Build type" OFF)
 # Backend options
 # -----------------------------------------------
 
-option (FILLWAVE_BACKEND_OPENGL_33 "Using OpenGL 3.3 core profile" OFF)
 option (FILLWAVE_BACKEND_OPENGL_45 "Using OpenGL 4.5 core profile" ON)
 option (FILLWAVE_BACKEND_OPENGL_ES_20 "Using OpenGL ES 2.0 core profile" OFF)
 option (FILLWAVE_BACKEND_OPENGL_ES_30 "Using OpenGL ES 3.0 core profile" OFF)
-option (FILLWAVE_BACKEND_OPENGL_ES_32 "Using OpenGL ES 3.2 core profile" OFF)
-option (FILLWAVE_BACKEND_OPENGL_ES_PC "Using OpenGL ES FOR PC" OFF)
 
 # -----------------------------------------------
 # Tests related options

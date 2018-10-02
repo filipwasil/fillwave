@@ -44,19 +44,20 @@
   basicstyle=\ttfamily,
   keywordstyle=\color{blue}\bfseries,
   showstringspaces=false,
-  morekeywords={puModel, pu<Entity>, puScene, puLightPoint, puLightSpot, puLightDirectional, pText, puCursor, puSkybox, GLfloat, GLint}
+  morekeywords={pu<Model>, pu<Entity>, pu<Scene>, pu<LightPoint>, pu<LightSpot>, pu<LightDirectional>, ppText, pu<Cursor>, pu<Skybox>, GLfloat, GLint}
 }
 
 \begin{document}
 
-\title{\textbf{Fillwave 8.0.1}
- - new OpenGL 3.3+ (OpenGL ES 3.0+) graphics engine for C++14 }
+\title{\textbf{Fillwave 10.0.0 - final}
+ - OpenGL40 / OpenGLES30 graphics engine for C++14 }
 \author{Filip Wasil}
 
 \maketitle
 
 \begin{abstract}
-Before you start please ensure your graphics card driver supports at least OpenGL 3.3 and GLSL 330 or OpenGL ES 3.0 and GLSL 300 ES. Also, your C++ compiler must support c++14 standard (Ex. g++\textgreater6.1 or clang++\textgreater3.3). PC Context examples provided are using GLFW3. Editor provided uses the qt5 QT5 and are editable according to your needs. Android context will be available soon using EGL (Java and native). Of course you can use any stub you like (Ex. freeglut, qt or other).
+Before you start please ensure your graphics card driver supports at least OpenGL 4.0 and OpenGL ES 3.0 and .Also, your
+C++ compiler must support c++14 standard (Ex. g++\textgreater6.1 or clang++\textgreater3.3). PC Context examples provided are using GLFW3. Editor provided uses the qt5 QT5 and are editable according to your needs. Android context will be available soon using EGL (Java and native). Of course you can use any stub you like (Ex. freeglut, qt or other).
 \end{abstract}
 
 \pagebreak
@@ -96,6 +97,7 @@ Probably you will ask how is Fillwave better than other, more extended engines o
 \begin{lstlisting}
    "flw::pu < >" - alias of std::unique_ptr
    "flw::ps < >" - alias of std::shared_ptr
+   "flw::pn < >" - std::unique_ptr with empty deleter
 \end{lstlisting}
 \subsection{Getting started}\label{sec:Getting started}
 \indent \indent The basic application skeleton looks like:
@@ -125,18 +127,21 @@ void Engine::onEvent(const flf::Event& event)
 
 \begin{lstlisting}
 
-void ContextGLFW1::keyboardCallback(GLFWwindow* window,
-                                   int key,
-                                   int scancode,
-                                   int action,
-                                   int mods) {
+void ContextGLFW1::keyboardCallback(
+  GLFWwindow* window
+  , int key
+  , int scancode
+  , int action
+  , int mods) {
+
    /* Create an event data and fill it */
    flw::flf::KeyboardEventData data {
-     action;
-     key;
-     mods;
-     scancode;
+     action
+     , key
+     , mods
+     , scancode
    };
+
    /* Create an event */
    flw::flf::KeyboardEvent event(data);
    
@@ -170,10 +175,12 @@ void ContextGLFW1::render() {
 
 \begin{lstlisting}
    void captureFramebufferToFile(const std::string& name);
-   void captureFramebufferToBuffer(GLubyte* buffer,
-                                   GLint* sizeInBytes,
-                                   GLuint format,
-                                   GLint bytesPerPixel);
+   void captureFramebufferToBuffer(
+     GLubyte* buffer
+     , GLint* sizeInBytes
+     , GLuint format
+     , GLint bytesPerPixel);
+
 \end{lstlisting}
 \indent \indent If not sure about the format you want you can just leave the default parameters. \textbf{captureFramebufferToBuffer} will use \textbf{GL\_RGBA} with 4 bytes per pixel. This format is also a default one for \textbf{captureFramebufferToFile}.
 
@@ -425,36 +432,38 @@ model->addEffect(f);
 \indent \indent Particles system entry in Fillwave is in fact two (but powerfull) classes: \textbf{EmiterPointCPU} and \textbf{EmiterPointGPU}. The \textbf{EmiterPointGPU} particle emiter is computed entirely on GPU and uses Texture3D noise as a seed to generate random positions and velocities. It is slower but gives better robustness factors. \textbf{EmiterPointCPU} emiter particles are precomputed on CPU. They are faster but the factors are less robust.
 
 \begin{lstlisting}
-EmiterPointCPU::EmiterPointCPU(Engine* engine,
-                                   GLfloat emitingSurfaceRadius,
-                                   GLfloat robustness,
-                                   GLint howMany,
-                                   glm::vec4 color,
-                                   glm::vec3 acceleration,
-                                   glm::vec3 velocity,
-                                   glm::vec3 distance,
-                                   flc::Texture* texture,
-                                   GLfloat lifetimeInSec,
-                                   GLfloat pointSize,
-                                   GLboolean dephTest,
-                                   GLfloat alphaCutOff)
+EmiterPointCPU::EmiterPointCPU(
+  Engine* engine
+  , GLfloat emitingSurfaceRadius
+  , GLfloat robustness
+  , GLint howMany
+  , glm::vec4 color
+  , glm::vec3 acceleration
+  , glm::vec3 velocity
+  , glm::vec3 distance
+  , flc::Texture* texture
+  , GLfloat lifetimeInSec
+  , GLfloat pointSize
+  , GLboolean dephTest
+  , GLfloat alphaCutOff)
                                    
-EmiterPointGPU::EmiterPointGPU(Engine* engine,
-              GLfloat emitingSourceRate,
-              GLuint howMany,
-              glm::vec4 color,
-              glm::vec3 acceleration,
-              glm::vec3 startVelocity,
-              glm::vec3 robustnessVelocity,
-              glm::vec3 startPosition,
-              glm::vec3 robustnessPosition,
-              GLfloat startSize,
-              GLfloat lifetime,
-	          flc::Texture* texture,
-	          GLenum blendingSource,
-	          GLenum blendingDestination,
-	          GLboolean dephTest,
-	          GLfloat alphaCutOff);
+EmiterPointGPU::EmiterPointGPU(
+  Engine* engine
+  , GLfloat emitingSourceRate
+  , GLuint howMany
+  , glm::vec4 color
+  , glm::vec3 acceleration
+  , glm::vec3 startVelocity
+  , glm::vec3 robustnessVelocity
+  , glm::vec3 startPosition
+  , glm::vec3 robustnessPosition
+  , GLfloat startSize
+  , GLfloat lifetime
+  , flc::Texture* texture
+  , GLenum blendingSource
+  , GLenum blendingDestination
+  , GLboolean dephTest
+  , GLfloat alphaCutOff);
 
 /* Change the blending function if needed */
 /* Default blending source is GL_SRC_ALPHA */
@@ -473,13 +482,16 @@ void setBlendingFunction (GLenum sourcePixel, GLenum destPixel);
 
 \begin{lstlisting}
 
-auto texture=flc::Texture3D*(new Texture3D("textures_right.png",
-                                              "textures_left.png",
-                                              "textures_ceil.png",
-                                              "textures_floor.png",
-                                              "textures_front.png",
-                                              "textures_back.png"));
+auto texture=flc::Texture3D*(
+  engine->storeTexture3D(
+    "textures_right.png"
+    , "textures_left.png"
+    , "textures_ceil.png"
+    , "textures_floor.png"
+    , "textures_front.png"
+    , "textures_back.png"));
 scene->setSkybox(make_unique<Skybox>(engine, texture));
+
 \end{lstlisting}
 
 \subsection{Terrain}\label{sec:Terrain}
@@ -490,11 +502,13 @@ scene->setSkybox(make_unique<Skybox>(engine, texture));
 auto fs = engine->storeShader<GL_FRAGMENT_SHADER>("default.frag");
 auto vs = engine->storeShader<GL_VERTEX_SHADER>("default.vert");
 auto program = buildProgram(fs + vs);
-auto terrain = buildTerrainVoxel(engine,
-                                  program,
-                                  "textures/test.png",
-                                  new MountainConstructor(),
-                                  5);
+auto terrain = make_pu<MeshTerrain>(
+  engine
+  , program
+  , "textures/test.png"
+  , [](float x, float y){return foo(x, y)}
+  , 5
+  , 6);
 sene->attach(std::move(terrain));
 \end{lstlisting}
 
@@ -530,7 +544,7 @@ auto text = engine->storeText( "Hello Fillwave",/* content */
 \indent \indent Difference between spot and directional lights is a projection type. Directional lights will have an ortographic projection. It is perfect for light sources which gives constant size shadowing (Sun for example).
 
 \subsubsection{Point light}\label{sec:Point light}
-\indent \indent Point lights emits the light in all directions. In current revision this kind of light does not generate any shadowing effect.
+\indent \indent Not supported.
 
 \subsection{Logging}\label{sec:Logging}
 \indent \indent All objects in Fillwave have a \textbf{log} function which prints most of the objects data to standard output. There are also predefined macros ready to use:
@@ -566,29 +580,34 @@ auto text = engine->storeText( "Hello Fillwave",/* content */
 \indent \indent \textbf Difference between the \textbf{hierarchy} and \textbf{private} is that hierarchy callback executes synchronously just before the draw when the scene is drawn. As opposite, the private one is called asynchronously when the particular event is introduced into the engine (Ex. Mouse button click, or Key press). Most commonly used \textbf{private callbacks} are \textbf{TimedCallback} classes:
 
 \begin{lstlisting}
-TimedCallback(GLfloat timeToFinish,
-	EasingFunction easing = eEasing::None);
-TimedScaleCallback(Moveable* entity,
-	glm::vec3 normalizedScaleVec,
-	GLfloat lifetime,
-	EasingFunction easing);
-TimedRotateCallback(Moveable* entity,
-	glm::vec3 axis,
-	GLfloat angle,
-	GLfloat lifeTime,
-	EasingFunction easing);
-TimedMoveCallback(Moveable* entity,
-	glm::vec3 endPosition,
-	GLfloat lifeTime,
-	EasingFunction easing);
+TimedCallback(GLfloat timeToFinish
+  , EasingFunction easing = eEasing::None);
+TimedScaleCallback(
+  Moveable* entity
+  , glm::vec3 normalizedScaleVec
+  , GLfloat lifetime
+  , std::function<float(float)> easing);
+
+TimedRotateCallback(
+  Moveable* entity
+  , glm::vec3 axis
+  , GLfloat angle
+  , GLfloat lifeTime
+  , std::function<float(float)> easing);
+	
+TimedMoveCallback(
+  Moveable* entity
+  , glm::vec3 endPosition
+  , GLfloat lifeTime
+  , std::function<float(float)> easing);
                   
-pu<Entity> entity = make_unique<Entity>();
+pu<Entity> entity = make_pu<Entity>();
 
 entity->registerHierarchyCallback(
 	make_unique<TimedMoveCallback>(
-		entity.get(),
-		glm::vec3(0.0f,0.0f,1.0f),
-		10.0f);
+		entity.get()
+		, glm::vec3(0.0f,0.0f,1.0f)
+		, 10.0f);
 \end{lstlisting}
 
 \indent \indent \textbf{TimedCallback} by itself stands only for a time delay. \textbf{TimedScaleCallback}, \textbf{TimedRotateCallback}, and \textbf{TimedMoveCallback} on the other hand can be used to modify the model scale/position/rotation in time with current easing described by std::function \textbf{EasingFunction}. Default easing for all of the callbacks is \textbf{LinearInterpolation}.

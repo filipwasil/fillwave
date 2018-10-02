@@ -7,7 +7,7 @@ cmake_policy (SET CMP0048 NEW)
 # -----------------------------------------------
 
 message ("Building binary package")
-project (libfillwave VERSION 8.1.0 LANGUAGES C CXX)
+project (libfillwave VERSION 10.0.0 LANGUAGES C CXX)
 
 # -----------------------------------------------
 # Includes
@@ -33,16 +33,6 @@ endif ()
 # -----------------------------------------------
 
 add_library (fillwave SHARED ${FILLWAVE_SOURCES})
-
-# -----------------------------------------------
-# Installation
-# -----------------------------------------------
-
-if (FILLWAVE_BUILD_RPM)
-  install (TARGETS fillwave DESTINATION lib64 COMPONENT fillwave)
-else (FILLWAVE_BUILD_RPM)
-  install (TARGETS fillwave DESTINATION lib COMPONENT fillwave)
-endif (FILLWAVE_BUILD_RPM)
 
 # -----------------------------------------------
 # Subprojects

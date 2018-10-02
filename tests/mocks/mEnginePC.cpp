@@ -34,7 +34,7 @@ Engine::Engine(const std::string&, bool isEveryExtensionSuccessfullyLoaded)
   // nothing
 }
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_PC) || defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 EnginePCGLES::EnginePCGLES(GLint argc, GLchar *const argv[], void (* (*getAddress)(const char*))())
   : Engine ("", true) {
   // nothing

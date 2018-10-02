@@ -5,8 +5,7 @@ Fillwave C++14 OpenGL/OpenGLES graphics engine
 
 <h2><b>Requirements</b></h2>
 
-- PC (Linux debian based / Windows) with OpenGL 3.3+ and GLSL 330+ support
-- Anroid NDK and JNI (work in progress)
+- PC (Linux debian based / Windows) with OpenGL40 and OpenGLES30 support
 
 <h3><b>Libraries used</b></h3>
 
