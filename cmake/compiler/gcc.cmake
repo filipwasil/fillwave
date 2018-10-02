@@ -34,11 +34,12 @@ if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.0)
 endif()
 
 # STB library warnings
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion") #stb
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-old-style-cast")   # stb, assimp
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-zero-as-null-pointer-constant")# stb assimp
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-cast-qual")# stb
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-declarations") # stb
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=sign-conversion") #stb
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=old-style-cast")   # stb, assimp
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=zero-as-null-pointer-constant")# stb assimp
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=cast-qual")# stb
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=missing-declarations") # stb
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=strict-overflow") # stb
 
 # OpenMP
 add_definitions ("-fopenmp")
@@ -63,6 +64,12 @@ endif ()
 
 if (FILLWAVE_BENCHMARK_TESTS)
   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-variable")   # Log mechanism
+endif()
+
+if (FILLWAVE_COMPILATION_RELEASE)
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=format-nonliteral")
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=unused-variable")
+  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=unsafe-loop-optimizations")
 endif()
 
 # Sanitizer. Use when needed.
