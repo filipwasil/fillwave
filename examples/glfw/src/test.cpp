@@ -102,7 +102,7 @@ void init() {
   scene->attach(std::move(emiter1));
 
   /* Emiter 2 GPU */
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_20) || defined(FILLWAVE_BACKEND_OPENGL_ES_30)
 #else
   auto emiter2 = std::make_unique<EmiterPointGPU>(
     engine

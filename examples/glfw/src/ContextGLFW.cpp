@@ -45,7 +45,7 @@ ContextGLFW::ContextGLFW(int argc, char *argv[]) {
 
   windowInit(mWindow);
 
-#if defined(FILLWAVE_BACKEND_OPENGL_ES_PC)
+#if defined(FILLWAVE_BACKEND_OPENGL_ES_PC) || defined(FILLWAVE_BACKEND_OPENGL_ES_30) || defined(FILLWAVE_BACKEND_OPENGL_ES_20)
   ContextGLFW::mGraphics = new flw::EnginePCGLES(argc, argv, glfwGetProcAddress);
 #else
   ContextGLFW::mGraphics = new flw::EnginePC(argc, argv);

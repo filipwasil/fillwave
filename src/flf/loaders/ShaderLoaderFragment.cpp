@@ -518,7 +518,7 @@ const std::string ShaderLoaderFragment::getSource() const {
   end += "\n}\n";
 
   return mShaderLoader.mGLVersion
-         + mShaderLoader.mGLFragmentPrecision
+         + mShaderLoader.mGLFragmentPrecision + "precision mediump sampler2DShadow;\n"
          + inputs + outputs + lightsMaximum + lightStructDefinition + lightUniforms +
          lightSamplerUniforms + effectsUniforms + textures + functions + main + end;
 }

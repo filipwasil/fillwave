@@ -22,7 +22,7 @@
 #include <flw/flf/space/Scene.h>
 #include <flw/Log.h>
 
-FLOGINIT_DEFAULT()
+FLOGINIT_MASK(FERROR | FFATAL | FUSER)
 
 namespace flw {
 namespace flf {
