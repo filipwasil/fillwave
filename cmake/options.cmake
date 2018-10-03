@@ -3,7 +3,6 @@
 # -----------------------------------------------
 
 option (FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS "Usable for mesa shader compiler" ON)
-option (FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE "Asset data are stored only in GPU" OFF)
 option (FILLWAVE_COMPILATION_SUPPRESS_WARNINGS "Suppress warnings during compilation" OFF)
 option (FILLWAVE_COMPILATION_RELEASE "Build type" OFF)
 
@@ -34,13 +33,8 @@ option (FILLWAVE_TEXTURE_LOADER_CUSTOM "Use custom texture loader" OFF)
 # Build components Options
 # -----------------------------------------------
 
-option (FILLWAVE_BUILD_ANDROID_TEST_NATIVE_APP "Build android native test app" OFF)
-option (FILLWAVE_BUILD_ANDROID_JNI_LIB "Build android jni library" OFF)
 option (FILLWAVE_BUILD_GLFW_EXAMPLES "Build glfw example" OFF)
-option (FILLWAVE_BUILD_FREEGLUT_EXAMPLES "Build linux example" OFF)
-option (FILLWAVE_BUILD_QT_EXAMPLES "Build qt example" OFF)
 option (FILLWAVE_BUILD_LEVEL_EDITOR "Build qt level game editor" OFF)
-option (FILLWAVE_BUILD_SDL2_EXAMPLES "Build sdl2 example" OFF)
 option (FILLWAVE_BUILD_COTIRE "Build with cotire" OFF)
 
 # -----------------------------------------------

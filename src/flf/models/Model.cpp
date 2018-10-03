@@ -316,9 +316,6 @@ pu<Mesh> Model::loadMesh(
     , ibo
     , mAnimator.get()
     , GL_TRIANGLES);
-#ifdef FILLWAVE_COMPILATION_OPTIMIZE_RAM_USAGE
-  #error "option not suppoerted"
-#endif
   return mesh;
 }
 

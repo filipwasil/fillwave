@@ -12,7 +12,6 @@ Can be used in any 3D games, apps and visualization tools or as a regular part o
 - MIT License
 - Using the greatest open source libraries (Ex. glm for math and assimp for assets)
 - OpenGL ES 3.0 and OpenGL 3.3+ support with programmable pipeline
-- todo Android and macOS
 
 - All models placed in examples/linux/data are various models which I found across internet.
   I was looking only for free ones in case of which the license permits for placing them here.
@@ -27,7 +26,6 @@ git clone https://github.com/filipwasil/fillwave.git
 cd fillwave
 git submodule init
 git submodule update
-cd scripts
 ```
 
 ## Debian/Ubuntu
@@ -35,55 +33,44 @@ cd scripts
 Linux builds requires packages installed:
 
 ```
-#Ubnuntu 16.04
+# Ubuntu 16.04
 sudo apt-get install libglfw3-dev libassimp3v5 libassimp-dev libglm-dev cmake
-```
 
-```
-#Fedora
+# Optional for GLES support
+sudo apt-get install libgles2-mesa-dev
+
+# Fedora
 With configured sudo:
-sudo dnf install glm-devel assimp assimp-devel glew glew-devel freetype-devel freetype rpm-build rpmdevtools
+sudo dnf install glm-devel assimp-devel glfw3-devel
 Without configured sudo:
 su
-dnf install glm-devel assimp assimp-devel glew glew-devel freetype-devel freetype rpm-build rpmdevtools
-
+dnf install glm-devel assimp assimp-devel libglfw3-dev
 ```
 
-
-Next run build script:
-
-```
-for ubuntu:
-./build_linux_deb.sh
-for fedora if you want build and install(you must have configured sudo):
-./build_linux_rpm.sh i
-for fedora if you want build rpm packges only(RPM packges are in fillwave_build):
-./build_linux_rpm.sh ni
-```
-
-## Windows
-
-```
-./build_windows_msvs.bat
-```
-
-Please also note that if you have sh.exe in your PATH, you should remove it for the compilation time. MinGW projects does not line sh.exe in PATH. Sorry.
-
-## Developers
-
-* [Workflow](https://github.com/filipwasil/fillwave/wiki/Workflow)
-* [Coding standards](https://github.com/filipwasil/fillwave/tree/master/doc/coding_standards)
-* [Review](https://review.gerrithub.io/#/admin/projects/filipwasil/fillwave)
+Cmake options available
+-
+|    Cmake options  |     Default      |
+| :-------------|:-------------:|
+| FILLWAVE_TESTS                          | ON |
+| FILLWAVE_MODEL_LOADER_ASSIMP            | ON |
+| FILLWAVE_COMPILATION_DRIVER_WORKAROUNDS | ON |
+| FILLWAVE_BACKEND_OPENGL_45              | ON |
+| FILLWAVE_COMPILATION_SUPPRESS_WARNINGS  | OFF |
+| FILLWAVE_COMPILATION_RELEASE            | OFF |
+| FILLWAVE_BACKEND_OPENGL_ES_20           | OFF |
+| FILLWAVE_BACKEND_OPENGL_ES_30           | OFF |
+| FILLWAVE_TEXTURE_LOADER_CUSTOM          | OFF |
+| FILLWAVE_BUILD_GLFW_EXAMPLES            | OFF |
+| FILLWAVE_BUILD_LEVEL_EDITOR             | OFF |
+| FILLWAVE_BUILD_COTIRE                   | OFF |
+| FILLWAVE_BENCHMARK_TESTS                | OFF |
+| FILLWAVE_DEBUG_OPENGL_APITRACE          | OFF |
 
 
 |    CI build    |    Result      |
 | :-------------: |:-------------:|
 | Linux      | ![](https://travis-ci.org/filipwasil/fillwave.svg?branch=master) |
 | Windows (msvs)    | [![Build status](https://ci.appveyor.com/api/projects/status/w5xqq2tntoo9td6k?svg=true)](https://ci.appveyor.com/project/filipwasil/fillwave) |
-
-# Coming soon
-- Native Android apps (JNI, or C++)
-- iOS/macOS builds
 
 # Special thanks to
 <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/clion.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/zube.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/travis.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/appveyor.png" width="32" height="32"> <img src="https://github.com/filipwasil/fillwave/blob/dev_master/ext/support/gerrit.png" width="32" height="32">

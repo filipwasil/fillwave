@@ -16,12 +16,6 @@
 [submodule "ext/gtest"]
 	path = ext/gtest
 	url = https://github.com/google/googletest.git
-[submodule "ext/glmock"]
-	path = ext/glmock
-	url = https://github.com/filipwasil/glmock.git
-[submodule "ext/coveralls-cmake"]
-	path = ext/coveralls-cmake
-	url = https://github.com/filipwasil/coveralls-cmake.git
 [submodule "ext/googlebenchmark"]
 	path = ext/googlebenchmark
 	url = https://github.com/google/benchmark.git
