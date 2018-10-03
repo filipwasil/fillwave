@@ -30,7 +30,7 @@ git submodule update
 
 ## Debian/Ubuntu
 
-Linux builds requires packages installed:
+#Linux builds
 
 ```
 # Ubuntu 16.04
@@ -47,7 +47,7 @@ su
 dnf install glm-devel assimp assimp-devel libglfw3-dev
 ```
 
-Cmake options available
+#Cmake options
 
 |    Cmake options  |     Default      |
 | :-------------|:-------------:|
@@ -67,7 +67,7 @@ Cmake options available
 | FILLWAVE_DEBUG_OPENGL_APITRACE          | OFF |
 
 
-CI status
+#CI
 
 |    CI build    |    Result      |
 | :-------------: |:-------------:|
