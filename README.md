@@ -30,7 +30,7 @@ git submodule update
 
 ## Debian/Ubuntu
 
-#Linux builds
+### Linux builds
 
 ```
 # Ubuntu 16.04
@@ -47,7 +47,7 @@ su
 dnf install glm-devel assimp assimp-devel libglfw3-dev
 ```
 
-#Cmake options
+### Cmake options
 
 |    Cmake options  |     Default      |
 | :-------------|:-------------:|
@@ -67,7 +67,7 @@ dnf install glm-devel assimp assimp-devel libglfw3-dev
 | FILLWAVE_DEBUG_OPENGL_APITRACE          | OFF |
 
 
-#CI
+### CI
 
 |    CI build    |    Result      |
 | :-------------: |:-------------:|
