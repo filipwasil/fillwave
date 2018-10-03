@@ -48,7 +48,7 @@ dnf install glm-devel assimp assimp-devel libglfw3-dev
 ```
 
 Cmake options available
--
+
 |    Cmake options  |     Default      |
 | :-------------|:-------------:|
 | FILLWAVE_TESTS                          | ON |
@@ -66,6 +66,8 @@ Cmake options available
 | FILLWAVE_BENCHMARK_TESTS                | OFF |
 | FILLWAVE_DEBUG_OPENGL_APITRACE          | OFF |
 
+
+CI status
 
 |    CI build    |    Result      |
 | :-------------: |:-------------:|
