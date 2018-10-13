@@ -26,10 +26,11 @@ namespace flw {
 namespace flf {
 
 Entity::Entity()
-  : mChildrenPropagateEvent(true)
-  , mParentRefresh(true)
-  , mPSC(true)
-  , mPSR(true) {
+  : mPhysicsMMC{1.0}
+  , mChildrenPropagateEvent{true}
+  , mParentRefresh{true}
+  , mPSC{true}
+  , mPSR{true} {
   // nothing
 }
 
