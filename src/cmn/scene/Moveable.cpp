@@ -24,13 +24,16 @@
 namespace flw {
 
 Moveable::Moveable(glm::vec3 translation, glm::quat rotation, unsigned int callbacksCount)
-    : mTranslation(translation)
-    , mRotation(rotation)
-    , mScale(1.0f)
-    , mRefresh(true)
-    , mCallbackTimePassed(0)
-    , mCurrentCallbackIdx(0)
-    , mCallbackLoops(1) {
+  : mTranslation{translation}
+  , mRotation{rotation}
+  , mScale{1.0f}
+  , mParentRotation{glm::quat(1.0, 0.0, 0.0, 0.0)}
+  , mMMC{1.0}
+  , mParentMMC{1.0}
+  , mRefresh{true}
+  , mCallbackTimePassed{0}
+  , mCurrentCallbackIdx{0}
+  , mCallbackLoops{1} {
   mTimeCallbacks.reserve(callbacksCount);
 }
 

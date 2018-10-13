@@ -29,8 +29,8 @@ namespace flw {
 
 ICamera::ICamera(glm::vec3 position, glm::quat rotation)
   : Moveable(position, rotation)
-  , mCameraMatrix(1.0)
-  , mProjectionMatrix(1.0)
+  , mCameraMatrix{1.0}
+  , mProjectionMatrix{1.0}
   , mRefreshView(true)
   , mRefreshProjection(true) {
   updateView();
