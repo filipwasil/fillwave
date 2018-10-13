@@ -95,11 +95,11 @@ class AllocatorStack {
 
  private:
 
-  static constexpr size_t mSizeBytes = 1 << 10;
+  static constexpr size_t mSizeBytes {1 << 10};
 
-  static constexpr size_t mSizeElements = mSizeBytes / sizeof(TValueType);
+  static constexpr size_t mSizeElements {mSizeBytes / sizeof(TValueType)};
 
-  std::array<TValueType, mSizeElements> mValues;
+  std::array<TValueType, mSizeElements> mValues {};
 };
 
 template <class TValueType>
