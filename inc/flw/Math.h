@@ -24,10 +24,8 @@
 #define GLM_FORCE_RADIANS
 
 #include <glm/glm.hpp>
-#define GLM_ENABLE_EXPERIMENTAL
-#include <glm/gtx/transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include <glm/gtx/rotate_vector.hpp>
 
 #ifndef M_PI
 #define M_PI           3.14159265358979323846
