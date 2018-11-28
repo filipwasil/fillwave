@@ -134,7 +134,7 @@ Model::~Model() {
 }
 
 void Model::reloadModel(const std::string& localPath) {
-  const auto scene = ModelLoader::SceneType(mEngine->getGlobalPath(localPath));
+  const ModelLoader::SceneType scene(mEngine->getGlobalPath(localPath));
   initAnimations(scene);
   initShadowing();
   initUniformsCache();
@@ -148,7 +148,7 @@ void Model::reloadModel(
   , flc::Texture2D* specular
   , const Material& material) {
   unloadNodes();
-  const auto scene = ModelLoader::SceneType(mEngine->getGlobalPath(localPath));
+  const ModelLoader::SceneType scene(mEngine->getGlobalPath(localPath));
   initAnimations(scene);
   initShadowing();
   initUniformsCache();
