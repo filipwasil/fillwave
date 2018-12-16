@@ -35,7 +35,7 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flc {
 
-VertexArray::VertexArray(GLuint howMany) : mHowMany(howMany) {
+VertexArray::VertexArray(GLsizei howMany) : mHowMany(howMany) {
   glGenVertexArrays(1, &mHandles);
   fLogC("Could not generate the VAO");
 }

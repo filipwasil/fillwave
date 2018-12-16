@@ -43,7 +43,7 @@ struct TextureConfig final {
       , GLint type = GL_UNSIGNED_BYTE
       , GLsizei width = 0
       , GLsizei height = 0);
-    GLenum mInternalFormat;
+    GLint mInternalFormat;
     GLsizei mHeight;
     GLsizei mWidth;
     GLenum mType;
@@ -54,10 +54,10 @@ struct TextureConfig final {
   struct Mipmap {
     Mipmap();
     Mipmap(unsigned int size, unsigned int height, unsigned int width, unsigned int format, GLubyte* data);
-    unsigned int mSize;
-    unsigned int mHeight;
-    unsigned int mWidth;
-    unsigned int mFormat;
+    GLsizei mSize;
+    GLsizei mHeight;
+    GLsizei mWidth;
+    GLenum mFormat;
     pn<GLubyte> mData;
   };
   /*! \class Content

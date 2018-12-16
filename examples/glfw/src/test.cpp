@@ -170,7 +170,7 @@ void init() {
     , [](float x, float z) { return glm::abs(glm::sin(glm::radians(360 * x)) * glm::sin(glm::radians(360 * z))); }
     , m
     , "textures/test.png"
-    , "textures/testNormal.png"
+    , "textures/test.png"
     , ""
     , 4
     , 4);

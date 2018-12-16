@@ -59,7 +59,7 @@ class Camera;
 
 class Debugger : public IReloadable {
 public:
-  Debugger(Engine* engine, GLsizei howManyDebugWindows = 6);
+  Debugger(Engine* engine, GLuint howManyDebugWindows = 6);
   ~Debugger() override;
 
   /* State */

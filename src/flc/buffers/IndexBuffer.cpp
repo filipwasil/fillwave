@@ -27,13 +27,13 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flc {
 
-IndexBuffer::IndexBuffer(GLuint elements, bool fill, GLuint dataStoreModification)
+IndexBuffer::IndexBuffer(GLsizei elements, bool fill, GLuint dataStoreModification)
     : IBuffer(GL_ELEMENT_ARRAY_BUFFER, dataStoreModification) {
   mTotalElements = elements;
   mDataIndices.reserve(mTotalElements);
-  mSize = mTotalElements * sizeof(GLuint);
+  mSize = static_cast<GLsizeiptr>(mTotalElements * sizeof(GLuint));
   if (fill) {
-    for (GLuint i = 0; i < elements; ++i) {
+    for (GLsizei i = 0; i < elements; ++i) {
       mDataIndices.push_back(i);
     }
     mData = mDataIndices.data();
@@ -52,7 +52,7 @@ IndexBuffer::IndexBuffer(const std::vector<GLuint> &data, GLuint dataStoreModifi
     : IBuffer(GL_ELEMENT_ARRAY_BUFFER, dataStoreModification) {
   mTotalElements = data.size();
   mDataIndices = data;
-  mSize = mTotalElements * sizeof(GLuint);
+  mSize = static_cast<GLsizeiptr>(mTotalElements * sizeof(GLuint));
   mData = mDataIndices.data();
 }
 

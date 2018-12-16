@@ -71,7 +71,7 @@ void IEmiterPoint::drawParticles() {
   glEnable(GL_BLEND);
   glBlendFunc(mBlending.mSrc, mBlending.mDst);
   glBlendEquation(mBlending.mBlendEquation);
-  glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid *>(0));
+  glDrawElements(GL_POINTS, mIBO->getElements(), GL_UNSIGNED_INT, nullptr);
   fLogC("Draw elements");
   glDisable(GL_BLEND);
   if (mDepthTesting) {

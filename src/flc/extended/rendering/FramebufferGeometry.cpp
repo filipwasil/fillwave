@@ -28,14 +28,15 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flc {
 
-FramebufferGeometry::FramebufferGeometry(flf::TextureSystem &textures,
-    GLuint width,
-    GLuint height,
-    GLuint colorBuffers)
-    : Framebuffer()
-    , mColorBufferSize(colorBuffers)
-    , mSummaryBufferSize(1)
-    , mSummaryBuffer(GL_COLOR_ATTACHMENT0 + colorBuffers) {
+FramebufferGeometry::FramebufferGeometry(
+  flf::TextureSystem &textures
+  , GLsizei width
+  , GLsizei height
+  , GLsizei colorBuffers)
+  : Framebuffer()
+  , mColorBufferSize(colorBuffers)
+  , mSummaryBufferSize(1)
+  , mSummaryBuffer(GL_COLOR_ATTACHMENT0 + colorBuffers) {
 
   mDeferredColors = textures.getDeferredColor(width, height, mColorBufferSize);
   mStencilDepth = textures.getDeferredStencilDepth(width, height);
@@ -44,8 +45,8 @@ FramebufferGeometry::FramebufferGeometry(flf::TextureSystem &textures,
   reload();
 }
 
-void FramebufferGeometry::resize(GLuint width, GLuint height) {
-  for (GLint i = 0; i < mColorBufferSize; ++i) {
+void FramebufferGeometry::resize(GLsizei width, GLsizei height) {
+  for (GLsizei i = 0; i < mColorBufferSize; ++i) {
     mDeferredColors->mCfg->mHeader.mWidth = width;
     mDeferredColors->mCfg->mHeader.mHeight = height;
     mDeferredColors->mCfg->mData = nullptr;
@@ -70,7 +71,7 @@ void FramebufferGeometry::resize(GLuint width, GLuint height) {
 }
 
 void FramebufferGeometry::bindAttachments() {
-  for (int attachment = 0; attachment < mColorBufferSize; attachment++) {
+  for (GLsizei attachment = 0; attachment < mColorBufferSize; attachment++) {
     mDeferredColors->bind(attachment, attachment);
   }
 }
@@ -116,7 +117,7 @@ void FramebufferGeometry::reload() {
 
   bindForWriting();
 
-  for (GLint i = 0; i < mColorBufferSize; ++i) {
+  for (GLsizei i = 0; i < mColorBufferSize; ++i) {
     mDeferredColors->bind(i, i);
     attachTexture2DDraw(GL_COLOR_ATTACHMENT0 + i, GL_TEXTURE_2D, mDeferredColors->mTexture.mHandles[i]);
   }
@@ -129,7 +130,7 @@ void FramebufferGeometry::reload() {
   mStencilDepth->bind();
   attachTexture2DDraw(GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, mStencilDepth->mTexture.mHandles[0]);
 
-  for (GLint i = 0; i < mColorBufferSize + 1; ++i) {
+  for (GLsizei i = 0; i < mColorBufferSize + 1; ++i) {
     mColorBuffers.push_back(GL_COLOR_ATTACHMENT0 + i);
   }
 

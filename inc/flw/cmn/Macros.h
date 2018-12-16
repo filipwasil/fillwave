@@ -25,6 +25,12 @@
 #include <memory>
 #include <vector>
 
+#ifdef __unix
+int fopen_s(FILE **f, const char *name, const char *mode);
+#else
+#include <stdio.h>
+#endif
+
 namespace flw {
 namespace flf {
 
@@ -65,9 +71,3 @@ std::unique_ptr<CONTAINER> make_unique_container(TCURRENT &&t, TNEXT &&... args)
 
 } /* flf */
 } /* flw */
-
-#ifdef __unix
-int fopen_s(FILE **f, const char *name, const char *mode);
-#else
-#include <stdio.h>
-#endif

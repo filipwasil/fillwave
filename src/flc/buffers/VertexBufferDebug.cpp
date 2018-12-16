@@ -56,7 +56,7 @@ VertexBufferDebug::VertexBufferDebug(float) {
   }
   mTotalElements = mDataVertices.size();
   mData = mDataVertices.data();
-  mSize = mTotalElements * sizeof(VertexDebug);
+  mSize = static_cast<GLsizeiptr>(mTotalElements * sizeof(VertexDebug));
 }
 
 void VertexBufferDebug::log() const {

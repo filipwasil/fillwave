@@ -32,7 +32,7 @@ VertexBufferBasic::VertexBufferBasic(
   std::function<float(float x, float y)> constructor
   , GLint chunkDensity
   , GLfloat gapSize
-  , const std::vector<GLuint> &indices
+  , const std::vector<GLuint>& indices
   , GLuint dataStoreModification)
   : TVertexBuffer<VertexBasic>(dataStoreModification) {
 
@@ -62,7 +62,8 @@ VertexBufferBasic::VertexBufferBasic(
     tangents.push_back(glm::vec3(0.0));
   }
 
-  int j, z;
+  unsigned int j = 0;
+  unsigned int z = 0;
 
   for (size_t i = 0; i < indices.size(); i += 3) {
 
@@ -116,7 +117,7 @@ VertexBufferBasic::VertexBufferBasic(
 
   mTotalElements = mDataVertices.size();
   mData = mDataVertices.data();
-  mSize = mTotalElements * sizeof(VertexBasic);
+  mSize = static_cast<GLsizeiptr>(mTotalElements * sizeof(VertexBasic));
 }
 
 VertexBufferBasic::VertexBufferBasic(const std::vector<flc::VertexBasic> &vertices, GLuint dataStoreModification)
@@ -128,7 +129,7 @@ glm::vec3 VertexBufferBasic::getOcclusionBoxSize() {
   glm::vec3 maximum(-10000.0, -10000.0, -10000.0);
   glm::vec3 minimum(10000.0, 10000.0, 10000.0);
 
-  for (GLuint i = 0; i < mTotalElements; ++i) {
+  for (GLsizei i = 0; i < mTotalElements; ++i) {
     if (mDataVertices[i].mPosition[0] > maximum.x) {
       maximum.x = mDataVertices[i].mPosition[0];
     }

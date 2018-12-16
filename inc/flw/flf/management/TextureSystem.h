@@ -43,11 +43,11 @@ public:
 
   flc::Texture2D* get(const std::string& texturePath);
 
-  flc::Texture2DRenderable* getShadow2D(GLuint width, GLuint height);
-  flc::Texture2DRenderable* getColor2D(GLuint width, GLuint height);
-  flc::Texture2D* getDeferredColor(GLuint width, GLuint height, GLuint size = 1);
-  flc::Texture2D* getDeferredColorScreen(GLuint width, GLuint height, GLuint size = 1);
-  flc::Texture2D* getDeferredDepth(GLuint width, GLuint height);
+  flc::Texture2DRenderable* getShadow2D(GLsizei width, GLsizei height);
+  flc::Texture2DRenderable* getColor2D(GLsizei width, GLsizei height);
+  flc::Texture2D* getDeferredColor(GLsizei width, GLsizei height, GLuint size = 1);
+  flc::Texture2D* getDeferredColorScreen(GLsizei width, GLsizei height, GLuint size = 1);
+  flc::Texture2D* getDeferredDepth(GLsizei width, GLsizei height);
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #else
   flc::Texture3D* get(
@@ -58,8 +58,8 @@ public:
     , const std::string& posZ
     , const std::string& negZ);
 
-  flc::Texture3DRenderable* getShadow3D(GLuint width, GLuint height);
-  flc::Texture2D* getDeferredStencilDepth(GLuint width, GLuint height);
+  flc::Texture3DRenderable* getShadow3D(GLsizei width, GLsizei height);
+  flc::Texture2D* getDeferredStencilDepth(GLsizei width, GLsizei height);
 #endif
   flc::Texture2DRenderableDynamic*
     getDynamic(const std::string& fragmentShaderPath, flc::Program* program, glm::ivec2 screenSize);
@@ -70,9 +70,9 @@ public:
 
   void drawDynamicTextures();
 
-  void resizeTextures(GLuint width, GLuint height);
+  void resizeTextures(GLsizei width, GLsizei height);
 
-  void resize(GLuint width, GLuint height);
+  void resize(GLsizei width, GLsizei height);
 
 private:
 

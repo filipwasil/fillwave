@@ -51,7 +51,7 @@ public:
 
   void generateMipMaps();
 
-  void setParameter(GLenum parameter, GLenum value);
+  void setParameter(GLenum parameter, GLint value);
 
   void setParameters(ParameterList parameters);
 

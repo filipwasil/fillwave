@@ -23,7 +23,7 @@
 
 #include <flw/flc/pipeline/Uniform.h>
 #include <flw/flc/pipeline/Shader.h>
-#include <flw/flc/extended/pipeline/UniformBuffer.h>
+#include <flw/flc/extended/buffers/UniformBuffer.h>
 #include <flw/cmn/Aliases.h>
 
 class Attribute;

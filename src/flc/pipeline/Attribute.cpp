@@ -36,7 +36,7 @@ Attribute::Attribute()
   , mNormalized(0)
   , mTypeSize(0)
   , mType(0)
-  , mPointer((GLvoid *) 0) {
+  , mPointer(nullptr) {
   // nothing
 }
 
@@ -47,7 +47,7 @@ Attribute::Attribute(const std::string& name, GLuint index, GLint size, GLsizei 
   , mSize(size)
   , mNormalized(normalized)
   , mType(type)
-  , mPointer((GLvoid *) 0) {
+  , mPointer(nullptr) {
 
   switch (mType) {
     case GL_UNSIGNED_INT:

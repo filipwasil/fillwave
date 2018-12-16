@@ -30,7 +30,7 @@
 namespace flw {
 namespace flf {
 
-Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
+Debugger::Debugger(Engine *engine, GLuint howManyDebugWindows)
   : IReloadable(engine)
   , mState(EDebuggerState::off)
   , mEngine(engine)
@@ -41,7 +41,7 @@ Debugger::Debugger(Engine *engine, GLsizei howManyDebugWindows)
   const glm::vec2 size = mEngine->getScreenSize();
   const float sizeFactor = 1.0f / static_cast<float>(howManyDebugWindows);
   const float offsetY = 1.0f - sizeFactor * (size.x/size.y);
-  for (int i = 0; i < howManyDebugWindows; ++i) {
+  for (GLuint i = 0; i < howManyDebugWindows; ++i) {
     const float offsetX = static_cast<float>(i) * sizeFactor;
     DebugWindowInfo window = {
       { size.x * sizeFactor , size.y * sizeFactor }
@@ -130,7 +130,7 @@ void Debugger::renderDepthOrthographic(GLint id) {
 
   auto cam = light->getShadowCamera();
 
-  light->getShadowTexture()->mTexture2D.bind(GLint(FILLWAVE_SHADOW_FIRST_UNIT + id));
+  light->getShadowTexture()->mTexture2D.bind(FILLWAVE_SHADOW_FIRST_UNIT + id, 0);
 
   glDisable(GL_DEPTH_TEST);
   glEnable(GL_BLEND);

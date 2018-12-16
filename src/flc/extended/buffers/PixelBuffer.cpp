@@ -29,7 +29,7 @@ namespace flc {
 
 PixelBuffer::PixelBuffer(GLuint dataStoreType)
   : IBuffer(GL_PIXEL_PACK_BUFFER, dataStoreType) {
-  mData = 0;
+  mData = nullptr;
 }
 
 PixelBuffer::~PixelBuffer() = default;

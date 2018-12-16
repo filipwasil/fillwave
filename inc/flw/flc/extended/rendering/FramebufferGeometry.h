@@ -39,9 +39,9 @@ namespace flc {
 class FramebufferGeometry : public Framebuffer {
 public:
   FramebufferGeometry(flf::TextureSystem& textures,
-      GLuint width,
-      GLuint height,
-      GLuint colorBuffers);
+      GLsizei width,
+      GLsizei height,
+      GLsizei colorBuffers);
 
   virtual ~FramebufferGeometry() = default;
 
@@ -55,7 +55,7 @@ public:
 
   void setAttachmentSummaryForWriting();
 
-  void resize(GLuint width, GLuint height);
+  void resize(GLsizei width, GLsizei height);
 
   void reload();
 
@@ -67,10 +67,10 @@ private:
   flc::Texture2D* mStencilDepth;
   flc::Texture2D* mSummary;
 
-  const GLint mColorBufferSize;
-  const GLint mSummaryBufferSize;
+  const GLsizei mColorBufferSize;
+  const GLsizei mSummaryBufferSize;
 
-  const GLenum mSummaryBuffer;
+  const GLsizei mSummaryBuffer;
 };
 
 } /* flc */

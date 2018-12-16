@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <flw/flc/pipeline/UniformBuffer.h>
+#include <flw/flc/extended/buffers/UniformBuffer.h>
 
 #include <flw/Log.h>
 
@@ -50,7 +50,7 @@ void UniformBuffer::bindRange(GLuint id) {
   return glBindBufferRange(mTarget, mBindingPoint, mHandles[id], 0, mSize);
 }
 
-void UniformBuffer::push(GLfloat *data, size_t size) {
+void UniformBuffer::push(GLfloat* data, GLsizeiptr size) {
   if (0 != size) {
     mSize = size;
   }
