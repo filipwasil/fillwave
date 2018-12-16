@@ -76,4 +76,4 @@ private:
 } /* flw */
 
 std::vector<flw::flc::Shader*>
-operator+(std::vector<flw::flc::Shader* > shaders, flw::flc::Shader* shader);
+operator+(std::vector<flw::flc::Shader* >& shaders, flw::flc::Shader* shader);

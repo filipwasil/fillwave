@@ -48,7 +48,7 @@ VertexBufferText::VertexBufferText(const std::vector<GLfloat>& positions
   }
   mTotalElements = mDataVertices.size();
   mData = mDataVertices.data();
-  mSize = mTotalElements * sizeof(VertexText);
+  mSize = static_cast<GLsizeiptr>(mTotalElements * sizeof(VertexText));
 }
 
 void VertexBufferText::log() const {

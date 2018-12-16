@@ -153,7 +153,7 @@ void Engine::reloadPickingBuffer() {
   mPickingPixelBuffer->bind();
   mPickingPixelBuffer->setLoaded(GL_FALSE);
   mPickingPixelBuffer->send();
-  glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
   fLogC("glReadPixels");
   mPickingPixelBuffer->unbind();
   fLogC("Pixel buffer unbind");
@@ -164,7 +164,7 @@ void Engine::captureFramebufferToBuffer(GLubyte* buffer, GLint* sizeInBytes, GLu
   drawClear();
   mScene->draw();
   mPickingPixelBuffer->bind();
-  glReadPixels(0, 0, mWindowWidth, mWindowHeight, format, GL_UNSIGNED_BYTE, 0);
+  glReadPixels(0, 0, mWindowWidth, mWindowHeight, format, GL_UNSIGNED_BYTE, nullptr);
   fLogC("reading pixel buffer failed");
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_30)
   buffer = (GLubyte*)mPickingPixelBuffer->mapRange(GL_MAP_READ_BIT);
@@ -796,7 +796,7 @@ void Engine::detachHandlers() {
   mHandlers.clear();
 }
 
-glm::ivec4 Engine::pickingBufferGetColor(GLubyte *data, GLuint x, GLuint y) {
+glm::ivec4 Engine::pickingBufferGetColor(GLubyte *data, GLsizei x, GLsizei y) {
   y = mWindowHeight - y;
   GLuint id = 0;
   GLuint r = 0;
@@ -840,7 +840,7 @@ void Engine::onPick(GLuint xScreenSpace, GLuint yScreenSpace) {
   drawClear();
   mScene->drawPicking();
   mPickingPixelBuffer->bind();
-  glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
   fLogC("glReadPixels failed");
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
@@ -862,7 +862,7 @@ void Engine::captureFramebufferToFile(const std::string &name) {
   drawClear();
   mScene->draw();
   mPickingPixelBuffer->bind();
-  glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+  glReadPixels(0, 0, mWindowWidth, mWindowHeight, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
   fLogC("reading pixel buffer failed");
 #if defined(FILLWAVE_BACKEND_OPENGL_ES_20)
 #elif defined(FILLWAVE_BACKEND_OPENGL_ES_30)
@@ -877,7 +877,7 @@ void Engine::captureFramebufferToFile(const std::string &name) {
     fLogE("Error when takin' screenshot");
     exit(1);
   }
-  for (GLuint i = 0; i < mWindowWidth * mWindowHeight; i++) {
+  for (GLsizei i = 0; i < mWindowWidth * mWindowHeight; i++) {
     fprintf(file, "%c", data[4 * i]);
     fprintf(file, "%c", data[4 * i + 1]);
     fprintf(file, "%c", data[4 * i + 2]);

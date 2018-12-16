@@ -42,7 +42,7 @@ IBuffer::~IBuffer() {
   glDeleteBuffers(mHowMany, mHandles);
 }
 
-void IBuffer::setElements(GLuint elements) {
+void IBuffer::setElements(GLsizei elements) {
   mTotalElements = elements;
 }
 
@@ -93,11 +93,11 @@ void IBuffer::setLoaded(bool loaded) {
   mLoaded = loaded;
 }
 
-GLuint IBuffer::getElements() const {
+GLsizei IBuffer::getElements() const {
   return mTotalElements;
 }
 
-GLuint IBuffer::getSize() const {
+GLsizeiptr IBuffer::getSize() const {
   return mSize;
 }
 

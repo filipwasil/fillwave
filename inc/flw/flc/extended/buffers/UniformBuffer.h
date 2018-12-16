@@ -45,7 +45,7 @@ public:
 
   void bindRange(GLuint id = 0);
 
-  void push(GLfloat *data, size_t size = 0);
+  void push(GLfloat *data, GLsizeiptr size = 0);
 
   void emptyCPU() override;
 

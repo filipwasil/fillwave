@@ -60,13 +60,13 @@ public:
     mDataVertices = vertices;
     mTotalElements = mDataVertices.size();
     mData = mDataVertices.data();
-    mSize = mTotalElements * sizeof(T);
+    mSize = static_cast<GLsizeiptr>(mTotalElements * sizeof(T));
   }
 
   TVertexBuffer(flf::Shape<T> &shape, GLuint dataStoreModification = GL_STATIC_DRAW)
       : IBuffer(GL_ARRAY_BUFFER, dataStoreModification) {
     mDataVertices = shape.getVertices();
-    mSize = mTotalElements * sizeof(T);
+    mSize = static_cast<GLsizeiptr>(mTotalElements * sizeof(T));
     mData = mDataVertices.data();
   }
 
@@ -143,7 +143,7 @@ protected:
       char name[200];
       glGetActiveAttrib(programHandle, GLuint(i), sizeof(name) - 1, &name_len, &num, &type, name);
       name[name_len] = 0;
-      GLuint location = glGetAttribLocation(programHandle, name);
+      GLint location = glGetAttribLocation(programHandle, name);
       GLuint size = 0;
       switch (type) {
         case GL_UNSIGNED_INT:

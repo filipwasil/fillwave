@@ -10,7 +10,12 @@ add_library(fontgenerator STATIC fontGenerator.cpp)
 target_link_libraries(fontgenerator freetype)
 
 if(WIN32)
-   INSTALL(TARGETS fontgenerator DESTINATION bin)
+   intall(TARGETS fontgenerator DESTINATION bin)
+else()
+   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion")
+   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-zero-as-null-pointer-constant")
+   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-missing-declarations")
+   set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-cast-qual")
 endif(WIN32)
 
 INSTALL(TARGETS fontgenerator DESTINATION lib)

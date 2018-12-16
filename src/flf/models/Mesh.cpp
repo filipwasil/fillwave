@@ -271,7 +271,7 @@ void Mesh::drawAOC(ICamera &camera) {
 void Mesh::onDraw() {
   if (mIBO) {
     /* Perform index drawing */
-    glDrawElements(mRenderMode, mIBO->getElements(), GL_UNSIGNED_INT, reinterpret_cast<GLvoid *>(0));
+    glDrawElements(mRenderMode, mIBO->getElements(), GL_UNSIGNED_INT, nullptr);
     fLogC("glDrawElements failed");
   } else {
     /* Perform array drawing */

@@ -13,7 +13,6 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wlogical-op")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wmissing-declarations")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wmissing-include-dirs")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wnoexcept")
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wold-style-cast")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wredundant-decls")
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wshadow")
@@ -34,7 +33,7 @@ if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 6.0)
 endif()
 
 # STB library warnings
-set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=sign-conversion") #stb
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-sign-conversion") #stb
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=old-style-cast")   # stb, assimp
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=zero-as-null-pointer-constant")# stb assimp
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-error=cast-qual")# stb

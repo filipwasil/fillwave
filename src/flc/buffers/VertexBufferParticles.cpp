@@ -50,7 +50,7 @@ VertexBufferParticles::VertexBufferParticles(const std::vector<GLfloat> &velocit
   }
   mTotalElements = mDataVertices.size();
   mData = mDataVertices.data();
-  mSize = mTotalElements * sizeof(VertexParticle);
+  mSize = static_cast<GLsizeiptr>(mTotalElements * sizeof(VertexParticle));
 }
 
 void VertexBufferParticles::log() const {

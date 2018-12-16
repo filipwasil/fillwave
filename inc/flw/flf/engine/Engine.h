@@ -188,8 +188,8 @@ class Engine {
   void reload();
 
   /* Screen */
-  GLuint mWindowWidth;
-  GLuint mWindowHeight;
+  GLsizei mWindowWidth;
+  GLsizei mWindowHeight;
   GLfloat mWindowAspectRatio;
 
   /* Loaders */
@@ -338,7 +338,7 @@ class Engine {
 
  private:
   /* Pick */
-  glm::ivec4 pickingBufferGetColor(GLubyte* data, GLuint x, GLuint y);
+  glm::ivec4 pickingBufferGetColor(GLubyte* data, GLsizei x, GLsizei y);
   void reloadPickingBuffer();
 
 };

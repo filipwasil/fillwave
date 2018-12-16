@@ -32,7 +32,7 @@ namespace flc {
 
 class VertexArray final {
 public:
-  VertexArray(GLuint howMany = 1);
+  VertexArray(GLsizei howMany = 1);
 
   ~VertexArray();
 

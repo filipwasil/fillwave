@@ -332,6 +332,7 @@ static unsigned char permTable[256] = {
     0x34,
 };
 
+void initNoiseTable();
 void initNoiseTable() {
   int i;
   float a;
@@ -397,6 +398,7 @@ static float glattice3D(int ix, int iy, int iz, float fx, float fy, float fz) {
 // f describes the input (x, y, z) position for which the noise value needs to be computed
 // noise3D returns the scalar noise value
 //
+float noise3D(float *f);
 float noise3D(float *f) {
   int ix, iy, iz;
   float fx0, fx1, fy0, fy1, fz0, fz1;
@@ -437,10 +439,11 @@ float noise3D(float *f) {
   return lerp(wz, vz0, vz1);;
 }
 
+GLuint Create3DNoiseTexture(int textureSize, float frequency);
 GLuint Create3DNoiseTexture(int textureSize, float frequency) {
   GLuint textureId;
-  GLfloat *texBuf = (GLfloat *) malloc(sizeof(GLfloat) * textureSize * textureSize * textureSize);
-  GLubyte *uploadBuf = (GLubyte *) malloc(sizeof(GLubyte) * textureSize * textureSize * textureSize);
+  GLfloat* texBuf = (GLfloat *) malloc(sizeof(GLfloat) * textureSize * textureSize * textureSize);
+  GLubyte* uploadBuf = (GLubyte *) malloc(sizeof(GLubyte) * textureSize * textureSize * textureSize);
   int x, y, z;
   int index = 0;
   float min = 1000;

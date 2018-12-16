@@ -61,7 +61,7 @@ const std::string gGLExtraExtensions =
 #else
 #endif
 
-const std::string getAttritubeLocationString(int location, const char* data) {
+static const std::string getAttritubeLocationString(int location, const char* data) {
   if (location > 7) {
     fLogF("We support only 8 attributes");
   }

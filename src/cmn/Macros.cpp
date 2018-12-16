@@ -19,7 +19,7 @@
  * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <iostream>
+#include <flw/cmn/Macros.h>
 
 #ifdef __unix
 int fopen_s(FILE **f, const char *name, const char *mode) {
@@ -31,5 +31,5 @@ int fopen_s(FILE **f, const char *name, const char *mode) {
   return ret;
 }
 #else
-  // nothing
+// nothing
 #endif

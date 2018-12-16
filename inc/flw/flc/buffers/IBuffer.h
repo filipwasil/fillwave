@@ -60,9 +60,9 @@ public:
 
   void setLoaded(bool loaded);
 
-  GLuint getElements() const;
+  GLsizei getElements() const;
 
-  GLuint getSize() const;
+  GLsizeiptr getSize() const;
 
   GLvoid *getData() const;
 
@@ -86,11 +86,11 @@ public:
   GLuint mTarget;
   GLuint mDataStoreType;
   GLuint mIndex;
-  GLvoid *mData;
+  GLvoid* mData;
   GLsizeiptr mSize;
-  GLuint mTotalElements;
+  GLsizei mTotalElements;
 
-  void setElements(GLuint elements);
+  void setElements(GLsizei elements);
 
   void setSize(GLuint size);
 };

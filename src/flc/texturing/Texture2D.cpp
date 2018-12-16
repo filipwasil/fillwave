@@ -22,7 +22,7 @@
 #include <flw/flc/texturing/Texture2D.h>
 #include <flw/Log.h>
 
-FLOGINIT_MASK(FERROR | FFATAL | FDEBUG)
+FLOGINIT_DEFAULT()
 
 namespace flw {
 namespace flc {
@@ -32,7 +32,7 @@ Texture2D::Texture2D(TextureConfig* cfg, ParameterList &parameters, GLuint howMa
   , mCfg(pu<TextureConfig>(cfg))
   , mParameters(parameters) {
   glGenTextures(mTexture.mHowMany, mTexture.mHandles);
-  for (GLsizei i = 0; i < mTexture.mHowMany; i++) {
+  for (GLsizei i = 0; i < mTexture.mHowMany; ++i) {
     bind(i);
     setParameters(mParameters);
     sendData();
@@ -48,7 +48,7 @@ void Texture2D::sendData(GLubyte* data) {
   if (mCfg->mContent.mCompression) {
     glCompressedTexImage2D(GL_TEXTURE_2D,
                            mCfg->mContent.mMipmapsLevel,
-                           mCfg->mHeader.mInternalFormat,
+                           static_cast<GLenum>(mCfg->mHeader.mInternalFormat),
                            mCfg->mHeader.mWidth,
                            mCfg->mHeader.mHeight,
                            mCfg->mContent.mBorder,
@@ -126,7 +126,7 @@ void Texture2D::unbind() {
   fLogC("unbind texture");
 }
 
-void Texture2D::setParameter(GLenum parameter, GLenum value) {
+void Texture2D::setParameter(GLenum parameter, GLint value) {
   glTexParameteri(GL_TEXTURE_2D, parameter, value);
   fLogC("setParameter");
 }

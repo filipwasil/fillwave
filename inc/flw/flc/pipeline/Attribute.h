@@ -70,7 +70,7 @@ private:
   GLboolean mNormalized;
   std::size_t mTypeSize;
   GLenum mType;
-  GLvoid *mPointer;
+  GLvoid* mPointer;
 };
 
 } /* flc */

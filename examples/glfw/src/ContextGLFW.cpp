@@ -64,9 +64,9 @@ void ContextGLFW::windowInit(GLFWwindow *&window) {
   auto monitors = glfwGetMonitors(&monitorsSize);
 
   if (monitorsSize > 1) {
-    window = glfwCreateWindow(mScreenWidth, mScreenHeight, "Fillwave", monitors[1], NULL);
+    window = glfwCreateWindow(mScreenWidth, mScreenHeight, "Fillwave", monitors[1], nullptr);
   } else if (monitorsSize == 1) {
-    window = glfwCreateWindow(mScreenWidth, mScreenHeight, "Fillwave", monitors[0], NULL);
+    window = glfwCreateWindow(mScreenWidth, mScreenHeight, "Fillwave", monitors[0], nullptr);
   } else {
     // no monitors to get
   }
@@ -101,13 +101,13 @@ void ContextGLFW::windowInit(GLFWwindow *&window) {
 }
 
 void ContextGLFW::windowDeinit(GLFWwindow *&window) {
-  glfwSetFramebufferSizeCallback(mWindow, NULL);
-  glfwSetKeyCallback(mWindow, NULL);
-  glfwSetScrollCallback(mWindow, NULL);
-  glfwSetMouseButtonCallback(mWindow, NULL);
-  glfwSetCharCallback(mWindow, NULL);
-  glfwSetCursorPosCallback(mWindow, NULL);
-  glfwSetCursorEnterCallback(mWindow, NULL);
+  glfwSetFramebufferSizeCallback(mWindow, nullptr);
+  glfwSetKeyCallback(mWindow, nullptr);
+  glfwSetScrollCallback(mWindow, nullptr);
+  glfwSetMouseButtonCallback(mWindow, nullptr);
+  glfwSetCharCallback(mWindow, nullptr);
+  glfwSetCursorPosCallback(mWindow, nullptr);
+  glfwSetCursorEnterCallback(mWindow, nullptr);
   glfwSetWindowShouldClose(window, GL_TRUE);
   glfwDestroyWindow(mWindow);
 }
