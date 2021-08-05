@@ -246,10 +246,10 @@ ps<flf::Text> Engine::storeText(const string& content,
   glm::vec4 color,
   ETextEffect effect) {
   /* Check for the font texture  */
-  if (!mTextures->get(fontName + ".png")) {
+  if (!mTextures->get("fonts/" + fontName + ".png")) {
     mFontLoader.load(mFileLoader.getRootPath() + fontName);
   }
-  auto t = mTextures->get(fontName + ".png");
+  auto t = mTextures->get("fonts/" + fontName + ".png");
 
   Font* font = nullptr;
   for (auto &it : mFontManager) {
@@ -259,9 +259,10 @@ ps<flf::Text> Engine::storeText(const string& content,
   }
 
   if (!font) {
-    ifstream myfile(mFileLoader.getRootPath(fontName + ".meta"));
+      ifstream myfile(mFileLoader.getRootPath("fonts/" + fontName + ".meta"));
     if (!myfile.is_open()) {
-      fLogE("No text added. Could not write to metadata file: %s", (fontName + ".meta").c_str());
+        const auto filepath = mFileLoader.getRootPath("fonts/" + fontName + ".meta");
+        fLogE("No text added. Could not write to metadata file: %s", filepath.c_str());
       return ps<flf::Text>();
     }
     string line;
