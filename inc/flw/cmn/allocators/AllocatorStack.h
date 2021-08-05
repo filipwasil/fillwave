@@ -59,8 +59,13 @@ class AllocatorStack {
     // nothing
   }
 
-  AllocatorStack(AllocatorStack const& allocator) noexcept {
+  constexpr AllocatorStack(AllocatorStack const& allocator) noexcept {
     *this = allocator;
+  }
+
+  constexpr AllocatorStack operator=(AllocatorStack const& allocator) noexcept {
+      this->mValues = allocator.mValues;
+      return *this;
   }
 
   template <class TAllocatorType>
@@ -73,11 +78,11 @@ class AllocatorStack {
   }
 
   template <class... Args>
-  void construct(TValueType* p, Args&& ... args) {
+  void construct(TValueType* p, Args&& ... args) noexcept {
     *p = TValueType(std::forward<Args...>(args...));
   }
 
-  void destroy(TValueType* ) {
+  void destroy(TValueType* ) noexcept {
     // nothing
   }
 

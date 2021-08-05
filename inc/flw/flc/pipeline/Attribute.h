@@ -32,7 +32,7 @@ namespace flc {
 
 class Attribute final {
 public:
-  Attribute();
+  Attribute() noexcept;
 
   Attribute(
     const std::string& name

@@ -28,7 +28,7 @@ FLOGINIT_DEFAULT()
 namespace flw {
 namespace flc {
 
-Attribute::Attribute()
+Attribute::Attribute() noexcept
   : mStride(0)
   , mName("")
   , mIndex(0)

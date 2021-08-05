@@ -74,7 +74,7 @@ class AllocatorHeap {
     *p = TValueType(std::forward<Args...>(args...));
   }
 
-  void destroy(TValueType* ) {
+  void destroy(TValueType* ) noexcept {
     // nothing
   }
 

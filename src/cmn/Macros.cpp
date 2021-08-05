@@ -20,6 +20,8 @@
  */
 
 #include <flw/cmn/Macros.h>
+#include <cstdio>
+#include <cerrno>
 
 #ifdef __unix
 int fopen_s(FILE **f, const char *name, const char *mode) {
